@@ -104,6 +104,7 @@ Click on the relevant links to easily navigate through the guide and access the 
 Shows a message explaining how to access the help page, as well as a list of available keywords.
 
 ![help message](images/helpMessage.png)
+
 Format: `help`
 
 ---------------------------
@@ -135,7 +136,7 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​`
+* `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202`
 
 Successful Output: `New person added: John; 
 Phone: 80101010; 
@@ -149,6 +150,23 @@ Tags:`
 
 ![result for 'add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202'](images/addUi.png)
 
+You can also add a client's contacts with a tag and a financial plan.
+
+Examples:
+* `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 t/80yo fp/Financial Plan C`
+
+Successful Output: `New person added: John; 
+Phone: 80101010; 
+Email: johndoe@gmail.com; 
+Address: Punggol Central Blk 444 #15-32 820123; 
+Next-of-kin Name: Brennan; 
+Next-of-kin Phone: 82020202; 
+Appointment: No Appointment made!; 
+Financial Plans: [Financial Plan C]; 
+Tags: [80yo]`
+
+Do note that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
+
 ------------------
 ### Listing all persons : `list`
 
@@ -156,16 +174,16 @@ Display a list of all the clients and their contact details
 
 Format: `list`
 
-Successful Output:`Listed all persons`
+Successful Output: `Listed all persons`
 
 ![result for 'list'](images/ListUi.png)
 
 --------------------------------
 ### Editing a person : `edit`
 
-Edit clients contact fields using an entry index followed by the updated details.
+Edit clients contact fields using an index followed by the updated details.
 
-Format: `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL_PLAN] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -180,10 +198,10 @@ Format: `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NE
 * A person's appointment cannot in edited in this manner. Refer to [Schedule](#scheduling-an-appointment--schedule).
 
 Acceptable Values:
-1. ENTRY_INDEX - Number (1 to current size of the contact book)
+1. INDEX - Number (1 to current size of the contact book)
 2. NAME - Alphabets, numbers and space characters only
 3. PHONE_NUMBER - Numbers only and at least 3 digits long
-4. EMAIL - Alphabets, numbers and symbols only in a valid email format
+4. EMAIL - Alphabets, numbers and symbols only
 5. ADDRESS - any value is possible
 6. NEXT_KIN - Alphabets, numbers and space characters only
 7. NEXT_KIN_PHONE - Numbers only and at least 3 digits long
@@ -205,6 +223,8 @@ Financial Plans: ;
 Tags:`
 
 ![result for 'edit 4 n/john doe a/23 woodlands ave 123'](images/editUi.png)
+
+Do note that it is possible to edit a client's contact such that the contact has multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
 
 ---------------
 ### Locating persons by name, financial plan, and/or tag : `find`
@@ -252,27 +272,34 @@ Successful Output:
 
 Deletes the client contact from the contact book by their index.
 
-Format: `delete ENTRY_INDEX`
+Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 
 Acceptable Values:
-1. ENTRY_INDEX - Number (1 to current size of the contact book).
+1. INDEX - Number (1 to current size of the contact book).
 
 Examples:
 * `list` followed by `delete 1` deletes the 1st person in the contact book.
 
 Successful Output:
-`Contact Deleted!
-Low Jun Yu is removed.`
+`Deleted Person: David; 
+Phone: 93234567; 
+Email: davidmiller@gmail.com; 
+Address: Bishan Blk 999 #08-15 569874; 
+Next-of-kin Name: Olivia; 
+Next-of-kin Phone: 56981234; 
+Appointment: Meeting, 15-12-2023 17:30; 
+Financial Plans: [Financial Plan A][Financial Plan B]; 
+Tags: `
 
 ----------
 ### Scheduling an Appointment : `schedule`
 
-Schedules an appointment for a client using an entry index followed by the appointment details. 
+Schedules an appointment for a client using an index followed by the appointment details. 
 
-Format: `schedule ENTRY_INDEX [ap/APPOINTMENT_NAME] [d/APPOINTMENT_DATE]`
+Format: `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE`
 
 - Schedules appointment with the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 - Both appointment name and date must be provided.
@@ -282,25 +309,25 @@ Format: `schedule ENTRY_INDEX [ap/APPOINTMENT_NAME] [d/APPOINTMENT_DATE]`
 Example: 
 - `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`
 
-Successful Output:`Appointment updated!`
+Successful Output: `Appointment updated!`
 
 ![result for`schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00'](images/scheduleUi.png)
 
 ----------
 ### Completing an Appointment : `complete`
 
-Completes an appointment with clients. User can input an entry index to complete an appointment with a specific client. User can also input a specific date to complete all appointments with the matching date. 
+Completes an appointment with clients. User can input an index to complete an appointment with a specific client. User can also input a specific date to complete all appointments with the matching date. 
 
-Format: `complete [ENTRY_INDEX] [d/APPOINTMENT_DATE]`
+Format: `complete [INDEX] [d/APPOINTMENT_DATE]`
 
 - Completes appointment with the person at the specified INDEX. The index refers to the index number shown in the displayed person list.
-- **Either an entry index or appointment date must be provided** for command to execute. 
+- **Either an index or appointment date must be provided** for command to execute. 
 
 Examples:
 - `complete 1`
 - `complete d/01-05-2023`
 
-Successful Output:`Appointment Completed!`
+Successful Output: `Appointment Completed!`
 
 ![result for 'complete 1'](images/completeUi.png)
 
@@ -318,7 +345,7 @@ Example:
 ![confirm clear window](images/confirmClear.png)
 
 ----------------------------
-### Sorting of data: `sort`
+### Sorting of data : `sort`
 
 Sorts all the entries with predefined sorting functionalities. After sorting the list, the ordering of the entries
 will be changed. As a result, performing delete operations that require indexing will reference the new ordering
@@ -329,13 +356,13 @@ that is currently displayed on the screen.
 * `name` : sorts list by lexicographical ordering of name (case-insensitive).
 * `appointment`: sorts list by appointment timing in order of the earliest appointment first.
 
-Format: `sort` + `keyword`
+Format: `sort KEYWORD`
 
 * Calling this command after a Find command will preserve the results filtered by the Find command.
 
 Example: `sort name` performs sorting by lexicographical ordering
 
-Successful Output:`4 persons listed!`
+Successful Output: `4 persons listed!`
 
 ![result for`sort name'](images/sortUi.png)
 
@@ -379,17 +406,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                                                                |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202`   |
-| **Clear**    | `clear`                                                                                                                                                                                                         |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                             |
-| **Edit**     | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                             |
-| **Find**     | `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g., `find n/James n/Jake`                                                                                                                               |
-| **Gather**   | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                    |
-| **Schedule** | `schedule ENTRY_INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE`<br> e.g. `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`                                                                      |
-| **Complete** | `complete [ENTRY_INDEX] [d/APPOINTMENT_DATE]` <br> e.g `complete 1` <br> e.g `complete 01-05-2023`                                                                                                              |                                                                                                                                                                         |
-| **List**     | `list`                                                                                                                                                                                                          |
-| **Help**     | `help`                                                                                                                                                                                                          |
-| **Sort**     | `sort SORTING_FUNCTION` <br> e.g., `sort appointment`                                                                                                                                                           |
+| Action       | Format, Examples                                                                                                                                                                                                        |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN]…​ [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202` |
+| **Clear**    | `clear`                                                                                                                                                                                                                 |
+| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
+| **Find**     | `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g., `find n/James n/Jake`                                                                                                                                       |
+| **Gather**   | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                            |
+| **Schedule** | `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE`<br> e.g. `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`                                                                              |
+| **Complete** | `complete [INDEX] [d/APPOINTMENT_DATE]` <br> e.g `complete 1` <br> e.g `complete 01-05-2023`                                                                                                                      |                                                                                                                                                                         |
+| **List**     | `list`                                                                                                                                                                                                                  |
+| **Help**     | `help`                                                                                                                                                                                                                  |
+| **Sort**     | `sort KEYWORD` <br> e.g., `sort appointment`                                                                                                                                                                   |
 
