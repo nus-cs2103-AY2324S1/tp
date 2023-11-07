@@ -17,6 +17,7 @@ public class PractiseCommandParser implements Parser<PractiseCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public PractiseCommand parse(String args) throws ParseException {
+        assert args != null : "Command is empty";
         try {
             Index index = ParserUtil.parseIndex(args);
             return new PractiseCommand(index);
