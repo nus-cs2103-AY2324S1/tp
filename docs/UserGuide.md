@@ -53,26 +53,26 @@ NetworkBook 1.3 includes several new features and improvements for ease of use.
 
 1. Make sure you have Java 11 installed on your computer.
     * You can check that it is installed by running the command `java --version` in the command prompt/terminal.
-2. Download the latest version of NetworkBook (`networkbook.jar`) from the top of the [NetworkBook GitHub releases page](https://github.com/AY2324S1-CS2103T-T08-2/tp/releases).
-3. Create a new folder on your computer (e.g. on your computer desktop). You can name this folder however you want.
-4. Move the `networkbook.jar` file into the folder you just created.
-5. Open NetworkBook:
+1. Download the latest version of NetworkBook (`networkbook.jar`) from the top of the [NetworkBook GitHub releases page](https://github.com/AY2324S1-CS2103T-T08-2/tp/releases).
+1. Create a new folder on your computer (e.g. on your computer desktop). You can name this folder however you want.
+1. Move the `networkbook.jar` file into the folder you just created.
+1. Open NetworkBook:
     * If you are using Windows:
         1. Double-click the `networkbook.jar` file to open it.
     * If you are using MacOS:
         1. Open Terminal.app.
-        2. Navigate to the folder you have created using the `cd` command:
+        1. Navigate to the folder you have created using the `cd` command:
             1. Type `cd`, then space, into the Terminal window.
-            2. Drag the folder icon from Finder into the Terminal window.
-            3. Press enter.
-        3. Type in `java -jar networkbook.jar`, then press enter to open the app.
+            1. Drag the folder icon from Finder into the Terminal window.
+            1. Press enter.
+        1. Type in `java -jar networkbook.jar`, then press enter to open the app.
     * If you are using Linux:
         1. Open your terminal emulator app.
-        2. Navigate to the folder you have created using `cd`.
-        3. Type in `java -jar networkbook.jar`, then press enter to open the app.
-6. You should now see the NetworkBook window on your screen. This is what NetworkBook looks like:
+        1. Navigate to the folder you have created using `cd`.
+        1. Type in `java -jar networkbook.jar`, then press enter to open the app.
+1. You should now see the NetworkBook window on your screen. This is what NetworkBook looks like:
     ![Annotated diagram of the NetworkBook window](./images/gui-annotated.png)
-7. You can now start using NetworkBook!
+1. You can now start using NetworkBook!
     * Learn more about the commands in the [features](#features) section.
 
 ## Features
@@ -190,7 +190,7 @@ Parameters:
 
 For **single-valued** fields, the `/index` prefix should not be used.
 
-For **multi-valued** fields, the `/index` prefix is optional and at most 1 index can be specified at a time. If not specified, the default index to edit is 1.
+For **multi-valued** fields, the `/index` prefix is optional and at most 1 index can be specified at a time. **If not specified, the default index to edit is 1.**
 
 <div markdown="block" class="alert alert-info">
 
@@ -242,7 +242,7 @@ Parameters:
 
 For **single-valued** fields, the `/index` prefix should not be used.
 
-For **multi-valued** fields, the `/index` prefix is optional and at most 1 index can be specified at a time. If not specified, the default index to delete is 1.
+For **multi-valued** fields, the `/index` prefix is optional and at most 1 index can be specified at a time. **If not specified, the default index to delete is 1.**
 
 <div markdown="block" class="alert alert-info">
 
@@ -514,9 +514,9 @@ You can click on a contact's email address to email them.
 **A:** If you are familiar with the command prompt, you can follow the steps below:
 
 1. Open command prompt on your computer
-2. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
-3. Type `java -jar networkbook.jar` and press enter
-4. NetworkBook should launch
+1. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
+1. Type `java -jar networkbook.jar` and press enter
+1. NetworkBook should launch
 
 If you have any further issues, please raise an issue on our [GitHub page](https://github.com/AY2324S1-CS2103T-T08-2/tp). We will attend to you as soon as we can.
 
