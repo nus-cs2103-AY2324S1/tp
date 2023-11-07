@@ -35,7 +35,7 @@ public class NetworkBook implements ReadOnlyNetworkBook {
     public NetworkBook() {
         persons = new UniqueList<>();
         filteredPersons = new FilteredList<>(persons.asUnmodifiableObservableList());
-        setFilterPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
         displayedPersons = new SortedList<>(filteredPersons,
                 new PersonSortComparator(PersonSortComparator.SortField.NAME,
                                         PersonSortComparator.SortOrder.ASCENDING));
