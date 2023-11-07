@@ -331,6 +331,8 @@ Format: `exit`
 HealthSync data are saved in the hard disk automatically after any command that changes the data is executed.
 There is no need to save manually.
 
+>:bulb: Only patient details inside patient list view are saved. The logger tab and command history used for `undo` are not saved after the application is closed. 
+
 ### Editing the Data File
 
 HealthSync data are saved automatically as a JSON file `[JAR file location]/data/healthsync.json`.
@@ -342,6 +344,8 @@ Advanced users are welcome to update data directly by editing that data file.
 >data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 
 ### Archiving Data Files `[coming in v5.0]`
+It allows you to efficiently store and organize patient records in HealthSync. With this feature, you can maintain a tidy and easily accessible archive of patient data, ensuring streamlined data management and quick retrieval when needed.
+
 
 
 ## [FAQ](#faq)
@@ -521,6 +525,7 @@ to 1pm.
    a zero when necessary. Example: `1200` for 12 noon, `0900` for 9am.
  * You may exclude minutes if you wish. Example: `15` will be interpreted as 3pm.
  * Date and the 2 Times needs to be separated by a comma or a space.
+ * Appointment with 2 Times being the same is valid (ie. 0-minute appointment). HealthSync will register the start time as it is, and register end time as unconfirmed. This is useful for when you are unsure of the end time of an appointment.
 
 Some examples of valid Appointment formats are listed here:
 ```
