@@ -11,6 +11,7 @@ import seedu.ccacommander.model.exceptions.UndoStateException;
 
 /**
  * A CcaCommander with versions implemented.
+ * Solution below adapted by https://github.com/se-edu/addressbook-level4/blob/master/src/main/java/seedu/address/model/VersionedAddressBook.java
  */
 public class VersionedCcaCommander extends CcaCommander {
     public static final String MESSAGE_FIRST_COMMIT = "Saved data is loaded.";
@@ -40,8 +41,8 @@ public class VersionedCcaCommander extends CcaCommander {
         requireNonNull(commitMessage);
 
         purgeRedundantVersions();
-        CcaCommanderVersion state = new CcaCommanderVersion(commitMessage, this);
-        updateVersion(state);
+        CcaCommanderVersion version = new CcaCommanderVersion(commitMessage, this);
+        updateVersion(version);
     }
 
     private void purgeRedundantVersions() {
