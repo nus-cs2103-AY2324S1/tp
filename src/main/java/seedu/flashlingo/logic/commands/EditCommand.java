@@ -1,16 +1,19 @@
 package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.flashlingo.logic.Messages.MESSAGE_DUPLICATE_FLASHCARD;
+import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.commons.util.ToStringBuilder;
-import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
+import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
 
@@ -48,7 +51,7 @@ public class EditCommand extends Command {
         List<FlashCard> lastShownList = model.getFilteredFlashCardList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         }
 
         FlashCard flashCardToEdit = lastShownList.get(index.getZeroBased());
@@ -60,7 +63,7 @@ public class EditCommand extends Command {
         }
 
         if ((changes.length > 0 && model.hasFlashCard(editedFlashCard)) || flashCardToEdit.equals(editedFlashCard)) {
-            throw new CommandException(Messages.MESSAGE_DUPLICATE_FLASHCARD);
+            throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD);
         }
         model.setFlashCard(flashCardToEdit, editedFlashCard);
         model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
@@ -87,7 +90,7 @@ public class EditCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("changes", changes)
+                .add("changes", Arrays.toString(changes))
                 .toString();
     }
 }

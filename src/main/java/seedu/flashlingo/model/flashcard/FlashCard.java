@@ -178,7 +178,7 @@ public class FlashCard {
     @Override
     public String toString() {
         String sb = originalWord + " | " + originalWord.getLanguage() + " | " + translatedWord + " | "
-                + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + currentLevel + "\n";
+                + translatedWord.getLanguage() + " | " + whenToReview.toString() + " | " + currentLevel + "\n";
         return sb;
     }
 
