@@ -8,6 +8,7 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.ProficiencyLevel;
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
+import seedu.flashlingo.model.flashcard.words.Word;
 
 /**
  * A utility class to help with building FlashCard objects.
@@ -32,8 +33,8 @@ public class FlashCardBuilder {
      * Creates a {@code FlashcardBuilder} with the default details.
      */
     public FlashCardBuilder() {
-        this.originalWord = new OriginalWord(ORIGINAL_WORD, "");
-        this.translatedWord = new TranslatedWord(TRANSLATED_WORD, "");
+        this.originalWord = new OriginalWord(ORIGINAL_WORD);
+        this.translatedWord = new TranslatedWord(TRANSLATED_WORD);
         this.whenToReview = WHEN_TO_REVIEW;
         this.level = new ProficiencyLevel(LEVEL);
     }
@@ -57,11 +58,21 @@ public class FlashCardBuilder {
         return this;
     }
 
+    public FlashCardBuilder withOriginalWord(Word word) {
+        this.originalWord = new OriginalWord(word.getWord(), word.getLanguage());
+        return this;
+    }
+
     /**
      * Sets the {@code TranslatedWord} of the {@code FlashCard} that we are building.
      */
     public FlashCardBuilder withTranslatedWord(String translatedWord, String language) {
-        this.translatedWord = new TranslatedWord(translatedWord, "");
+        this.translatedWord = new TranslatedWord(translatedWord, language);
+        return this;
+    }
+
+    public FlashCardBuilder withTranslatedWord(Word word) {
+        this.translatedWord = new TranslatedWord(word.getWord(), word.getLanguage());;
         return this;
     }
 

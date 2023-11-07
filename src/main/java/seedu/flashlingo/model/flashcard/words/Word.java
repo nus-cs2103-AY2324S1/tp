@@ -37,18 +37,6 @@ public abstract class Word {
         return test.matches(VALIDATION_REGEX);
     }
 
-    /**
-     * Evaluates whether this word is an original word
-     * @return True or False depending on whether this is an original word
-     */
-    abstract boolean isOriginalWord();
-
-    /**
-     * Evaluates whether this word is a translated word
-     * @return True or False depending on whether this is a translated word
-     */
-    abstract boolean isTranslatedWord();
-
     public abstract Word editWord(String newWord, String newLanguage);
 
     /**

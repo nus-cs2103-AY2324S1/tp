@@ -46,16 +46,16 @@ public class AddCommandParser implements Parser<AddCommand> {
             OriginalWord word;
             TranslatedWord translation;
             if (arePrefixesPresent(argMultimap, PREFIX_ORIGINAL_WORD_LANGUAGE)) {
-                word = ParserUtil.parseWord(originalWord,
+                word = new OriginalWord(originalWord,
                         argMultimap.getValue(PREFIX_ORIGINAL_WORD_LANGUAGE).get());
             } else {
-                word = ParserUtil.parseWord(originalWord, "");
+                word = new OriginalWord(originalWord);
             }
             if (arePrefixesPresent(argMultimap, PREFIX_TRANSLATED_WORD_LANGUAGE)) {
-                translation = ParserUtil.parseTranslation(translationWord,
+                translation = new TranslatedWord(translationWord,
                         argMultimap.getValue(PREFIX_TRANSLATED_WORD_LANGUAGE).get());
             } else {
-                translation = ParserUtil.parseTranslation(translationWord, "");
+                translation = new TranslatedWord(translationWord);
             }
             return new AddCommand(word, translation);
         } catch (IllegalArgumentException iae) {
