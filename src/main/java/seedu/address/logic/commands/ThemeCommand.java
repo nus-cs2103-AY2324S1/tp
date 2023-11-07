@@ -22,7 +22,7 @@ public class ThemeCommand extends Command {
 
     private Theme theme;
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a ThemeCommand to set the theme to the specified {@code Theme}
      */
     public ThemeCommand(Theme theme) {
         assert theme != null;
