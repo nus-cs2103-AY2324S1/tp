@@ -43,11 +43,15 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
    ![Ui](images/quickstartGUI.png)
 
 > :bulb: The main application consists of the:
-> 1. Side Menu
-> 2. Patient List View
-> 3. Logger Tab
-> 4. Output Box
-> 5. Command Box
+> 1. [Menu Sidebar](#menu-sidebar) `*`
+> 2. [Patient List View](#patient-list-view)
+> 3. [Logger Tab](#logger-tab)
+> 4. [Output Box](#output-box)
+> 5. [Command Box](#command-box)
+
+> :bulb: Click on the component in the list above to learn more about it.
+
+> :warning: **`*`**: The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
 
 5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -542,22 +546,26 @@ Command Line Interface. Refers to computer programs which require you to type to
 ### GUI
 Graphical User Interface. Refers to computer programs with a visual window you can interact with directly.
 
-### Patient List View
-The main part of HealthSync where the list of all your patients are displayed.
+### [Menu Sidebar](#menu-sidebar)
+The Menu Sidebar is the area on the left of the Patient List View. It contains buttons that allow you to perform actions on HealthSync. Currently, only the `User Guide` and `Exit` buttons are functional. The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
 
-### Output Box
-A small box right below the Patient List View where HealthSync will provide any feedback it has on the instructions
-it has performed.
+### [Patient List View](#patient-list-view)
+The main part of HealthSync where the list of all your patients are displayed. This is where you can view patient profiles in the form of cards, and perform actions on them. When actions are performed, the Patient List View will be updated to reflect the changes/results.
 
-### Command Box
-The area where you type your instructions for HealthSync to perform.
-
-### Logger Tab
+### [Logger Tab](#logger-tab)
 A 'sticky-note'-like area on the right of the Patient List View.
+
+### [Output Box](#output-box)
+A small box right below the Patient List View where HealthSync will provide any feedback it has on the instructions
+it has performed. This includes error messages, success messages, and other information like example commands.
+
+### [Command Box](#command-box)
+The area where you type your instructions for HealthSync to perform.<br>
+> :bulb: You can use the `Spacebar` to focus on the Command Box. This allows you to type your instructions without using the mouse to click on the Command Box.
 
 ### Command History Stack
 The group of instructions HealthSync remembers performing. This group allows HealthSync to undo the
-instructions and return your list to an older state.
+instructions and return your list to an older state. This stack will be cleared when you exit HealthSync.
 
 ### Java
 A piece of software that our program builds on. In order to use HealthSync, your computer must be running at least
