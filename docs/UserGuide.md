@@ -5,10 +5,9 @@
 ---
 # Class Manager 2023 User Guide
 
-Class Manager 2023 (CM 23) is a **desktop app for managing your students' contacts in the class,
+Class Manager 2023 (CM 23) is a **desktop app for Teaching Assistants (TAs) to manage their students' contacts in the class,
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a
-Graphical User Interface (GUI). If you can type fast, CM 23 can get your contact
-management tasks done faster than traditional GUI apps.
+Graphical User Interface (GUI). If you can type fast, CM 23 can get your class management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
