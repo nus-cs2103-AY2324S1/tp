@@ -258,12 +258,6 @@ Undoes the previous command that the user has entered, which has changed the dat
 
 Format: `undo`
 
-### Redoing a command: `redo`
-
-Redoes a command that the user has undone previously.
-
-Format: `redo`
-
 List of commands that can be undone:
 * `clear`
 * `createMember`
@@ -275,6 +269,12 @@ List of commands that can be undone:
 * `enrol`
 * `unenrol`
 * `editEnrolment`
+
+### Redoing a command: `redo`
+
+Redoes a command that the user has undone previously.
+
+Format: `redo`
 
 ### Help: `help`
 
