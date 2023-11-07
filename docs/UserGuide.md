@@ -2,10 +2,16 @@
 layout: page
 title: User Guide
 ---
-# What Is BandConnect++?
+## What Is BandConnect++?
 Unlock your musical potential with **_BandConnect++_** ! 
 
-**_BandConnect++_** is a powerful desktop app that helps independent music producers manage their musician contacts and create perfect bands with ease. Say goodbye to the tedious process of scrolling through your phone contacts and noting down every potential musician for your dream bands! With BandConnect++, you own the freedom to experiment with various hypothetical band makeups. You can quickly create a new band from scratch, add your musician contacts to the band, and check if their instruments and genres are a perfect match. 
+**_BandConnect++_** is a powerful desktop app that helps independent music producers manage their musician contacts and create perfect bands with ease. 
+
+Say goodbye to the tedious process of scrolling through your phone contacts and noting down every potential musician for your dream bands! With BandConnect++, you own the freedom to experiment with various hypothetical band makeups. You can 
+
+* create a new band from scratch
+* add/remove your musician contacts to/from the band
+* check if their instruments and genres are a perfect match. 
 
 What's more, **_BandConnect++_** has a convenient and intuitive [Command Line Interface (CLI)](#glossary) that allows you to perform all the tasks with just a few keystrokes. It may be a little daunting at first, but don't worry! We have prepared a comprehensive user guide to get you started and answer your confusion. Once you get the hang of it, your efficiency will be brought to a whole new level!
 
@@ -13,24 +19,26 @@ So, no more waiting! Let's start creating your first dream band now!
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Using the Guide
-This user guide walks you through the essential features of *BandConnect++*, familiarises you with the [CLI](#glossary) commands, and provides the best help we can if problem arises. We have made this guide beginner-friendly so that anyone who has used a software application before should have no trouble understanding it. Whether you are new to our application or a seasoned user, you can always find something useful in this guide. 
+## Using the Guide
+This user guide walks you through the essential features of *BandConnect++*, familiarises you with the [CLI](#glossary) commands, and provides the best help we can if problem arises. We have made this guide beginner-friendly so that anyone who has used a software application before should have no trouble understanding it!
 
-For first-time users, please go to the [Quick start](#quick-start) section to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
+Whether you are new to our application or a seasoned user, you can always find something useful in this guide. 
 
-For experienced users who have used _BandConnect++_ before, if you need help in remembering a particular command, please see [Command Summary](#command-summary). You can also refer to the [Features](#features) section for a more detailed explanation of each command.
+* For **first-time users**, please go to the [Quick start](#quick-start) section to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
+
+* For **experienced users** who have used _BandConnect++_ before, if you need help in remembering a particular command, please see [Command Summary](#command-summary). You can also refer to the [Features](#features) section for a more detailed explanation of each command.
 
 If you encounter any problems along your journey, please take a look at the [troubleshooting](#troubleshooting) section and also refer to our [FAQ](#frequently-asked-questions) for more information.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Table of Contents
+## Table of Contents
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Quick Start
+## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 
@@ -60,19 +68,20 @@ Please refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Features
+## Features
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-success">
 
-**:information_source: How to interpret each feature description:** <br>
+**:bulb: How to interpret each feature description:** <br>
 
 The description of each feature is divided into 7 parts:
-* **Feature Name** - The name of the feature.
-* **Feature Description** - A brief description of the feature.
+
+* **Name** - The name of the feature.
+* **Description** - A brief description of the feature.
 * **Scenario** - A scenario that illustrates when and why the feature is useful.
-* **Command Format** - The format of the command to use the feature, followed by some examples.
-* **Examples** - Examples of the command and their effects.
-* **Expected Outcomes** - The expected successful and failed outcomes of the command.
+* **Format** - The format of the command for the feature.
+* **Examples** - Examples of using the command and their effects.
+* **Outcomes** - The expected successful and failed outcomes.
 * **Things to Note** - Any additional information that the user should take note of when using the feature.
 
 </div>
@@ -88,16 +97,22 @@ add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]
 ```
 
 * The first word represents the command name, in this case, `add`.
+
 * The words in uppercase represent the parameters to be provided by the user, and their meanings are self-explanatory. For example, `n/NAME` means you need to provide a name for the contact.
+
 * The prefixes like `n/`, `p/`, `e/` are used to identify the parameters. So, when typing `add n/John Doe`, the application knows that `John Doe` is the name of the musician.
-* The parameters in square brackets like `[g/GENRE]` are optional, while the parameters without square brackets like `n/NAME` are compulsory. 
+
+* The parameters in square brackets like `[g/GENRE]` are optional, while the parameters without square brackets like `n/NAME` are compulsory.
+
 * The parameters in with `…​ ` like `[g/GENRE]…​ ` can be entered multiple times (including zero times). For example, `g/rock g/jazz` or `g/blues` or `` are all valid.
+
 * The order of the parameters does not affect the result. For example, `p/PHONE_NUMBER` can be entered before `n/NAME`, and the command still works the same.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, or `tags`) will be ignored.
 
 </div>
 
-## Get help: `help`
+### Get help: `help`
 Access a link to our user guide.
 
 **Format:** `help`
@@ -106,15 +121,15 @@ You will see a window like below, click `Copy URL`, paste the link in any web br
 
 ![images/help/helpWindow.png](images/help/helpWindow.png)
 
-## List all musicians and bands: `list`
+### List all musicians and bands: `list`
 View all musicians and bands in their separate panels.
 
 **Format:** `list`
 
 
-## Features for managing musicians
+### Features for managing musicians
 
-### Add musician: `add`
+#### Add musician: `add`
 
 Adds one musician to the contact book. 
 
@@ -145,7 +160,7 @@ If you input a musician which is already in your contact book (i.e. a musician w
 This musician already exists in your contact list
 ```
 
-### Delete musician: `delete`
+#### Delete musician: `delete`
 
 Deletes a musician from your contact list.
 From the current `My Musicians` panel, find the index of the musician to be deleted.
@@ -175,7 +190,7 @@ The musician index provided is invalid
 Please verify that the index is correct and try again.
 
 
-### Edit musician: `edit`
+#### Edit musician: `edit`
 
 Edits an existing musician in the contact book referenced by the index.
 
@@ -221,7 +236,7 @@ Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bes
     Please verify that the index is correct and try again.
 
 
-### Show all valid instruments and genres: `tags`
+#### Show all valid instruments and genres: `tags`
 
 View all valid instrument and genre tags for musicians and bands.
 
@@ -242,7 +257,7 @@ The `My Musicians` and `My Bands` panels will remain unchanged.
 
 ![tags.png](images%2Fmusician-features%2Ftags.png)
 
-### Find musicians: `find`
+#### Find musicians: `find`
 
 Finds all musicians whose names, tags, instruments, AND genres contain ANY of the given keywords.
 
@@ -281,8 +296,9 @@ For example, when the input command is `find g/rock i/guitar i/piano`
     ```
    
 
-## Features for managing bands
-### Create band: `addb`
+### Features for managing bands
+
+#### Create band: `addb`
 
 Creates a band with the specified band name and genres.
 
@@ -310,7 +326,7 @@ Should you try to add a band with empty genre tags, i.e., addb My Garage Band g/
 Genre tags names should be a valid genre name.
 For a list of valid genres, please use the command 'tags'
 ```
-### Add musician to band: `addm`
+#### Add musician to band: `addm`
 
 Adds a musician to a specified band.
 
@@ -356,7 +372,7 @@ when there is 1 band), you will see an error message below:
     ```
 
 
-### Remove musician from band: `removem`
+#### Remove musician from band: `removem`
 
 Removes a musician from a specified band. The musician must already exist in the band.
 
@@ -400,7 +416,7 @@ List the band members of a selected band. From `My Bands` panel, find the comple
 **Upon failure:**
 If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
 
-### Edit a band: `editb`
+#### Edit a band: `editb`
 
 Edit the name and genre of a selected band.
 From the current `My Bands` panel, find the index of the band to be edited.
@@ -437,7 +453,7 @@ Genre tags names should be a valid genre name.
 For a list of valid genres, please use the command 'tags'
 ```
 
-### Delete a band: `deleteb`
+#### Delete a band: `deleteb`
 
 Deletes a band from your contact list.
 From the current `My Bands` panel, find the index of the band to be deleted.
@@ -466,15 +482,15 @@ The band index provided is invalid
 Please verify that the index is correct and try again.
 
 
-## Clear data: `clear`
+### Clear data: `clear`
 
-## Exit app : `exit`
+### Exit app : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-## Save data
+### Save data
 
 BandConnect++ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
@@ -483,10 +499,10 @@ Congratulations! You are now ready to use **_BandConnect++_**!
 If you wish, please refer to the below section for a more succinct [command summary](#command-summary).
 
 --------------------------------------------------------------------------------------------------------------------
-# Command summary
+## Command summary
 
 
-| Action                                         | Format & Examples                                                                                                                                                |
+| Action                                         | Format, Examples                                                                                                                                                 |
 |------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add a Musician**                             | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`<br> e.g., `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock` |
 | **Edit a Musician**                            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`<br> e.g., `edit 2 e/pianistbetsy@edited.com i/violin t/available`        |
@@ -500,20 +516,22 @@ If you wish, please refer to the below section for a more succinct [command summ
 | **Remove a Musician from a Band**              | `removem b/BANDINDEX m/MUSICIANINDEX` <br> e.g., `removem b/1 m/1`                                                                                               |
 | **List All Members in a Band**                 | `findb BANDNAME` <br> e.g., `findb theory X`                                                                                                                     |
 | **List All Musicians and Bands**               | `list`                                                                                                                                                           |
+
 --------------------------------------------------------------------------------------------------------------------
 
-# Frequently Asked Questions
+## Frequently Asked Questions
 
 [to be added soon]
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Troubleshooting
+## Troubleshooting
 [a possible section to be added]
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Glossary
-| Term   | Definition                                                                                                                                                                                                                                                                     |
-|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| CLI    | Command Line Interface (CLI) is a text-based user interface that allows users to interact with a computer program by typing in commands through a keyboard. <br/> Since a mouse is not needed for CLI, it is often **a more efficient interaction method for fast typists.**   |
+## Glossary
+
+| Term   | Definition                                                                                                                                                                                                                                                                      |
+|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CLI    | Command Line Interface (CLI) is a text-based user interface that allows users to interact with a computer program by typing in commands through a keyboard. <br/> Since a mouse is not needed for CLI, it is often **a more efficient interaction method for fast typists.**    |
