@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the date's income in the lovebook.
+ * Represents the date's income in the LoveBook.
  */
 public class Income implements Comparable<Income> {
 
@@ -14,7 +14,7 @@ public class Income implements Comparable<Income> {
             + ", and it should not be blank";
 
     /*
-     * The first character of the lovebook must not be a whitespace,
+     * The first character of the LoveBook must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "^(0|[1-9]\\d{0,5}|1000000)$";

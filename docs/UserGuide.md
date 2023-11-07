@@ -298,6 +298,10 @@ Sets the user's preferences for the matching algorithm.
 <box type="info" seamless>
 
 * Note: At least one field to edit must be provided.
+* The user's preferences will be used in the [`bestMatch`](#get-a-recommended-date-bestmatch) command.
+
+* Gender is not taken into account here
+
 * The relevant fields are 
   * `age/AGE`
   * `height/HEIGHT`
