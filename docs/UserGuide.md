@@ -267,6 +267,7 @@ Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
 
 - We can search by name, course or free time, using the prefixes `n/`, `c/` or `d/ from/ to/` respectively.
 - The search is case-insensitive. e.g `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
+- Only full words will be matched e.g. `Alex` will not match `Alexis`, `cs1231` will not match `cs1231s`.
 - We can apply multiple search filters to narrow down the search results, through including multiple filters in 
 one command.
 - Teaching assistants matching all the search parameters will be returned.
@@ -274,7 +275,7 @@ one command.
 
 Examples:
 
-- `find n/Alex` returns all teaching assistants with names containing `alex` (e.g. `Alex`, `Alexis`).
+- `find n/Alex` returns all teaching assistants with names containing `alex` (e.g. `Alex`).
 - `find c/cs1231s` returns all teaching assistants that are teaching `cs1231s`.
 - `find d/1 from/10:00 to/12:00` returns all teaching assistants that are free on `Monday` from `10:00` to `12:00`.
 - `find n/Alex c/cs1231s` returns all teaching assistants with names containing `alex` and are teaching `cs1231s`.
