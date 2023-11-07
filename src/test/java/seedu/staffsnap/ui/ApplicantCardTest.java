@@ -2,11 +2,10 @@ package seedu.staffsnap.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HR;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.*;
 import static seedu.staffsnap.testutil.TypicalApplicants.BENSON;
-import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
 
+import javafx.scene.layout.VBox;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,9 +18,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import seedu.staffsnap.logic.commands.EditCommand;
-import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
-import seedu.staffsnap.testutil.EditApplicantDescriptorBuilder;
+import seedu.staffsnap.model.interview.Interview;
+
+import javax.swing.*;
+import java.util.List;
 
 /**
  * Tests the UI for the ApplicantCard.
@@ -90,46 +90,6 @@ public class ApplicantCardTest {
     }
 
     @Test
-    public void displayApplicantDetails_updateDetails_detailsUpdated() {
-        //ApplicantCard should show the updated details when an applicant's details is edited
-        EditApplicantDescriptor descriptor =
-                new EditApplicantDescriptorBuilder(BENSON).withName(VALID_NAME_AMY).build();
-        EditCommand edit = new EditCommand(INDEX_FIRST_APPLICANT,
-                new EditApplicantDescriptorBuilder(descriptor).build());
-
-        HBox idLabel = (HBox) stage.getScene().lookup("#details");
-        assertNotNull(idLabel);
-
-        HBox phone = (HBox) stage.getScene().lookup("#phone");
-        assertNotNull(phone);
-        HBox email = (HBox) stage.getScene().lookup("#email");
-        assertNotNull(email);
-        HBox position = (HBox) stage.getScene().lookup("#position");
-        assertNotNull(position);
-
-        Label name = (Label) idLabel.lookup("#name");
-        assertNotNull(name);
-        Label phoneNumber = (Label) phone.getChildren().get(1);
-        assertNotNull(phoneNumber);
-        Label emailAddress = (Label) email.getChildren().get(1);
-        assertNotNull(emailAddress);
-        Label positionApplied = (Label) position.getChildren().get(1);
-        assertNotNull(positionApplied);
-
-        assertNotNull(name);
-        assertNotNull(phoneNumber);
-        assertNotNull(emailAddress);
-        assertNotNull(positionApplied);
-
-
-    }
-
-    @Test
-    public void displayApplicantStatus_updateStatus_statusUpdated() {
-        //ApplicantCard should show the updated status when an applicant's status is edited
-    }
-
-    @Test
     public void displayApplicantStatus_newApplicant_applicantStatusDisplayed() {
         //ApplicantCard should display the status as UNDECIDED when a new applicant is added
         HBox idLabel = (HBox) stage.getScene().lookup("#details");
@@ -159,7 +119,6 @@ public class ApplicantCardTest {
         assertNotNull(ratingLabel);
         String correctScore = Double.toString(BENSON.getScore().getAverageScore());
         assertEquals(correctScore, ratingLabel.getText());
-
     }
 
     @Test
@@ -172,20 +131,31 @@ public class ApplicantCardTest {
         assertNotNull(ratingLabel);
         String correctScore = Double.toString(BENSON.getScore().getAverageScore());
         assertEquals(correctScore, ratingLabel.getText());
-
     }
 
     @Test
     public void displayApplicantInterviews_correctData() {
         //ApplicantCard should display the correct title and score for each interview
+        List<Interview> interviewList = BENSON.getInterviews();
+        HBox interviews = (HBox) stage.getScene().lookup("#interviews");
+
+        for (int i = 0; i < interviewList.size(); i++) {
+            Interview interviewToCheck = interviewList.get(i);
+            VBox interviewBox = (VBox) interviews.getChildren().get(i);
+
+            HBox interviewHeader = (HBox) interviewBox.getChildren().get(0);
+            Label interviewLabel  = (Label) interviewHeader.getChildren().get(0);
+
+            HBox interviewRating = (HBox) interviewBox.getChildren().get(1);
+            Label interviewRatingLabel = (Label) interviewRating.getChildren().get(0);
+
+            String correctHeader = BENSON.getInterviewIndexForApplicantCard(interviewToCheck) + ". "
+                    + interviewToCheck.getType();
+            String correctRating = interviewToCheck.getRating().toString();
+
+            assertEquals(correctHeader, interviewLabel.getText());
+            assertEquals(correctRating, interviewRatingLabel.getText());
+        }
 
     }
-
-    @Test
-    public void displayApplicantInterviews_editInterview_interviewEdited() {
-        //Applicant card should display the updated title/score if it is updated
-
-    }
-
-
 }
