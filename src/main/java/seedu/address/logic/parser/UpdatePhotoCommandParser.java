@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AVATAR;
 
 import java.util.Optional;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UpdatePhotoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -29,7 +30,7 @@ public class UpdatePhotoCommandParser implements Parser<UpdatePhotoCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdatePhotoCommand.MESSAGE_USAGE));
         }
 
-        return new UpdatePhotoCommand(Integer.parseInt(index), photoPath.get());
+        return new UpdatePhotoCommand(ParserUtil.parseIndex(index), photoPath.get());
     }
 }
 

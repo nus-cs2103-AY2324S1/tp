@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -41,19 +42,18 @@ public class UpdatePhotoCommand extends Command {
             + PREFIX_AVATAR + "D:/image/cute_cat.png";
 
     public static final String MESSAGE_SUCCESS = "Photo updated";
-
-    private final int zeroBasedIdx;
+    private final Index index;
     private String path;
 
     /**
      * Creates an UpdatePhotoCommand to replace the current photo
      * of a specific contact by the photo given by the path.
      *
-     * @param idx one-based index of the contact to update photo
+     * @param index Index of the contact to update photo
      * @param path String path to the photo to be used
      */
-    public UpdatePhotoCommand(int idx, String path) {
-        zeroBasedIdx = idx - 1;
+    public UpdatePhotoCommand(Index index, String path) {
+        this.index = index;
         this.path = path;
     }
 
@@ -62,11 +62,11 @@ public class UpdatePhotoCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (zeroBasedIdx < 0 || zeroBasedIdx >= model.getFilteredPersonList().size()) {
+        if (index.getZeroBased() < 0 || index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(zeroBasedIdx);
+        Person personToEdit = lastShownList.get(index.getZeroBased());
 
         try {
             Person editedPerson = copyPerson(personToEdit);
