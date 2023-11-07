@@ -3,6 +3,7 @@ layout: default.md
 title: "User Guide"
 pageNav: 3
 ---
+
 # LoveBook User Guide
 
 LoveBook, is a dating-focused application, revolving around providing users with a convenient
@@ -13,47 +14,29 @@ online dating journey.
 <!-- * Table of Contents -->
 <page-nav-print />
 
-[//]: # (- [Quick Start]&#40;#quick-start&#41;)
-
-[//]: # (- [Features]&#40;#features&#41;)
-
-[//]: # (    - [Creation of new date: `add`]&#40;#creation-of-new-date&#41;)
-
-[//]: # (    - [Getting a recommended date: `bestMatch`]&#40;#getting-a-best-match&#41;)
-
-[//]: # (    - [Blind Date Generator: `blindDate`]&#40;#blind-date-generator&#41;)
-
-[//]: # (    - [Clear all dates: `clear`]&#40;#clear-all-dates&#41;)
-
-[//]: # (    - [Deletion of dates: `delete`]&#40;#deletion-of-dates-delete&#41;)
-
-[//]: # (    - [Edit existing dates: `edit`]&#40;#edit-existing-date&#41;)
-
-[//]: # (    - [Exit the program: `exit`]&#40;#exit-the-program&#41;)
-
-[//]: # (    - [Filter by Metric: `filter`]&#40;#filter-by-metric-filter&#41;)
-
-[//]: # (    - [Find a date: `find`]&#40;#find-a-date&#41;)
-
-[//]: # (    - [Help: `help`]&#40;#help&#41;)
-
-[//]: # (    - [Listing current dates : `list`]&#40;#list-all-dates&#41;)
-
-[//]: # (    - [Setting the matching algorithm: `setP`]&#40;#setting-the-date-pref&#41;)
-
-[//]: # (    - [Show Date Preferences: `showP`]&#40;#show-date-preferences&#41;)
-
-[//]: # (    - [Sorting list of dates by Metric: `sort`]&#40;#sorting-date-list&#41;)
-
-[//]: # (    - [Star a date: `star`]&#40;#star-a-date&#41;)
-
-[//]: # (    - [Unstar a date: `unstar`]&#40;#unstar-a-date&#41;)
-
-[//]: # (- [FAQ]&#40;#faq&#41;)
-
-[//]: # (- [Command Summary]&#40;#command-summary&#41;)
-
-[//]: # (- [Glossary]&#40;#glossary&#41;)
+--------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+* [Quick Start](#quick-start)
+* [Features](#features)
+  * [Add a new Date: `add`](#add-a-new-date-add)
+  * [Get a recommended Date: `bestMatch`](#get-a-recommended-date-bestmatch)
+  * [Get a blind Date: `blindDate`](#get-a-blind-date-blinddate)
+  * [Clear all Dates: `clear`](#clear-all-dates-clear)
+  * [Delete a Date: `delete`](#delete-a-date-delete)
+  * [Edit a Date: `edit`](#edit-a-date-edit) 
+  * [Exit the Programme: `exit`](#exit-the-programme-exit)
+  * [Filter by Metric: `filter`](#filter-by-metric-filter)
+  * [Find a Date: `find`](#find-a-date-find)
+  * [Help: `help`](#help-help)
+  * [List all Dates: `list`](#list-all-dates-list)
+  * [Set Date Preference: `setP`](#set-date-preference-setp)
+  * [Show Date Preference: `showP`](#show-date-preference-showp)
+  * [Sort Dates by Metric with Order: `sort`](#sort-dates-by-metric-with-order-sort)
+  * [Star a Date: `star`](#star-a-date-star)
+  * [Unstar a Date: `unstar`](#unstar-a-date-unstar)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+* [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -82,30 +65,39 @@ online dating journey.
 
 ## **Features**
 
-**Notes about the command format:**<br>
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `edit INDEX METRIC/NEW_ARG`, `INDEX`, `NEW_ARG` and `METRIC` are parameters which can be used as
-  `edit 2 income/3000`.
+    `edit 2 income/3000`.
+
+* Items in square brackets are optional.<br>
+  e.g `age/AGE [horoscope/HOROSCOPE]` can be used as `age/22 horoscope/ARIES` or as `age/22`.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `name/NAME age/AGE`, `age/AGE name/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
   will be ignored.<br> e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
 
 <box type="info">
 
-* `name` can include letters, numbers and spaces. It must not be left blank.
-* `age` should be a positive integer between 18 and 150 (inclusive).
-* `gender` should be either M or F. It is case sensitive.
-* `horoscope` should be a valid zodiac sign. It is case insensitive.
-* `income` (per month) should be a positive integer in SGD.
-* `height` should be a positive integer in cm between 100cm and 250cm (inclusive).
+* `NAME` can include letters, numbers and spaces. It must not be left blank.
+* `AGE` should be a positive integer between 18 and 150 (inclusive).
+* `GENDER` should be either M or F. It is case sensitive.
+* `HOROSCOPE` should be a valid zodiac sign. It is case insensitive.
+* `INCOME` (per month) should be a positive integer in SGD.
+* `HEIGHT` should be a positive integer in cm between 100cm and 250cm (inclusive).
 
 </box>
 
-### [Creation of new date: `add`](#creation-of-new-date)
+### Add a new date: `add`
 
 Adds a date to the LoveBook.
 
@@ -117,66 +109,86 @@ Format: `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE i
 
 Example: `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000`
 
+![addCommandExample](images/user-commands/addCommandExample.png)
+
 Expected output: `New date added: Cleon; Age: 22; Gender: F; Height: 176; Income: 3000; Horoscope: TAURUS`
 
-Output if error: 
+Output if error:
+
 ```
 Invalid command format! 
 add: Adds a Date to the LoveBook. Parameters: name/NAME age/AGE gender/GENDER height/HEIGHT income/INCOME horoscope/HOROSCOPE
 Example: add name/John Doe age/21 gender/M height/123 income/3000 horoscope/Libra
 ```
 
-### [Getting a recommended Date: `bestMatch`](#getting-a-best-match)
+### Get a recommended Date: `bestMatch`
 
 Filters out the most compatible date based on the set preferences.
 
 Format: `bestMatch`
 
-Expected Output: `List the most compatible date`
+![bestMatchCommandExample-1](images/user-commands/bestMatchCommandExample1.png)
+
+![bestMatchCommandExample-2](images/user-commands/bestMatchCommandExample2.png)
+
+Expected Output: `Here's your best match!`
 
 Output if error: `Initialise list with dates before calling bestMatch`
 
-### [Blind Date Generator: `blindDate`](#blind-date-generator)
+### Get a blind Date: `blindDate`
 
 Outputs a blind date from the LoveBook.
 
 Format: `blindDate`
 
-Expected Output: `A random Date entry is printed`
+![blindDateCommandExample-1](images/user-commands/blindDateCommandExample1.png)
+
+![blindDateCommandExample-2](images/user-commands/blindDateCommandExample2.png)
+
+Expected Output: `Here's a blind date for you!`
 
 Output if error: `Initialise list with dates before calling blindDates`
 
-### [Clear all dates: `clear`](#clear-all-dates)
+### Clear all Dates: `clear`
 
 Clears all dates in the LoveBook.
 
 Format: `clear`
 
+![clearCommandExample-1](images/user-commands/clearCommandExample1.png)
+
+![clearCommandExample-2](images/user-commands/clearCommandExample2.png)
+
 Expected output: `LoveBook has been cleared!`
 
-### [List all dates: `list`](#list-all-dates)
+### List all Dates: `list`
 
 Shows a list of all dates in the LoveBook.
 
 Format: `list`
 
+![listCommandExample](images/user-commands/listCommandExample.png)
+
 Expected output: `Listed all Dates`
 
-### [Deletion of dates: `delete`](#deletion-of-dates-delete)
+### Delete a Date: `delete`
 
 Deletes the specified date from the LoveBook.
 
 Format: `delete INDEX`
 
-Parameter constraints:
-
-- The index must be a positive integer, and be within the range of the recorded dates.
+<box type="tip" seamless>
+    The index must be a positive integer, and be within the range of the recorded dates.
+    For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
+</box>
 
 Example: `delete 1`
 
-Expected output: `Deleted Date: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
+![deleteCommandExample](images/user-commands/deleteCommandExample.png)
 
-Output if error : 
+Expected output: `Deleted Date: Ben Brown; Age: 21; Gender: F; Height: 194; Income: 6000; Horoscope: GEMINI`
+
+Output if error :
 ```
 Invalid command format! 
 delete: Deletes the Date identified by the index number used in the displayed Date list.
@@ -184,35 +196,41 @@ Parameters: INDEX (must be a positive integer)
 Example: delete 1
 ```
 
-### [Edit existing dates: `edit`](#edit-existing-date)
+### Edit a Date: `edit`
 
 Edits a date in the specified index in the LoveBook.
 
-Format: `edit INDEX METRIC/NEW ARG`
+Format: `edit INDEX [name/NAME] [age/AGE] [gender/GENDER] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]`
+
+<box type="tip" seamless>
+    The index must be a positive integer, and be within the range of the recorded dates.
+    For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
+</box>
 
 Parameter constraints:
-
-- The index must be a positive integer, and be within the range of the recorded dates
 - Metric is limited to `gender, age, horoscope, name, height, income` only
 - New argument replaces the existing argument for that metric
 - User can edit up to n number of metrics in one command line, where n refers to the number of metrics available
 
-Example:
+Examples:
 
 - `edit 3 name/Cleon` (editing 1 metric)
 - `edit 3 name/Cleon horoscope/Cancer` (editing 2 metrics)
 - `edit 3 horoscope/Cancer name/Cleon` (sequence doesn't matter)
 
-Expected Output: `Edited Date: Cleon Tan; Age: 12; Gender: M; Height: 123; Income: 3000; Horoscope: CANCER`
+![editCommandExample](images/user-commands/editCommandExample.png)
+
+Expected Output: `Edited Date: Cleon; Age: 12; Gender: M; Height: 123; Income: 3000; Horoscope: CANCER`
 
 Output if error:
+
 ```
 edit: Edits the details of the Date identified by the index number used in the displayed Date list. Existing values will be overwritten by the input values.
 Parameters: INDEX (must be a positive integer) [name/NAME] [age/AGE] [gender/GENDER] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]
 Example: edit 1 age/24 gender/M height/180 income/3000 horoscope/SCORPIO 
 ```
 
-### [Exit the program: `exit`](#exit-the-program)
+### Exit the Programme: `exit`
 
 Exits the program.
 
@@ -220,7 +238,7 @@ Format: `exit`
 
 Expected output: `Exiting LoveBook...`
 
-### [Filter by Metric: `filter`](#filter-by-metric-filter)
+### Filter by Metric: `filter`
 
 Filters the dates in the LoveBook by a specific metric.
 
@@ -240,7 +258,7 @@ Expected Output: `Lists the dates with the metric specified`
 
 Output if error: `No dates found!`
 
-### [Find a date: `find`](#find-a-date)
+### Find a Date: `find`
 
 Finds a date in the LoveBook by a specific name(s)
 
@@ -260,21 +278,37 @@ Expected Output: `Lists the dates with the name(s) specified`
 
 Output if error: `0 dates listed!`
 
-### [Help: `help`](#help)
+### Help: `help`
 
 Shows a modal to bring user to the LoveBook User Guide.
 
 Format: `help`
 
+![helpCommandExample](images/user-commands/helpCommandExample.png)
+
 Expected output: `Opened help window.`
 
-### [Setting the matching algorithm: `setP`](#setting-the-date-pref)
+### Set Date Preference: `setP`
 
 Sets the user's preferences for the matching algorithm.
 
-Format: `setP age/AGE height/HEIGHT income/INCOME`
+<box type="info" seamless>
 
-Example: `setP age/22 height/180 income/2000`
+* Note: At least one field to edit must be provided.
+* The relevant fields are 
+  * `age/AGE`
+  * `height/HEIGHT`
+  * `income/INCOME`
+  * `horoscope/HOROSCOPE`
+
+</box>
+
+
+Format: `setP [age/AGE] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]`
+
+Example: `setP age/22 height/180 income/2000 horoscope/TAURUS`
+
+![setPCommandExample](images/user-commands/setPCommandExample.png)
 
 Expected output:
 ```
@@ -284,21 +318,19 @@ Updated Preferences: Age: 22; Height: 180; Income: 2000; Horoscope: TAURUS
 Output if error:
 ```
 At least one field to edit must be provided.
-Please try the following command format: setP: Sets Date Preference. Parameters: age/AGE height/HEIGHT income/INCOME horoscope/HOROSCOPE
-Example: setP age/21 height/23124 income/3000 horoscope/Scorpio
+Please try the following command format: setP: Sets Date Preference. Parameters: age/AGE height/HEIGHT income/INCOME horoscope/HOROSCOPE.
+Example: setP age/21 height/180 income/3000 horoscope/Scorpio
 ```
 
-### [Show Date Preferences: `showP`](#show-date-preferences)
+### Show Date Preference: `showP`
 
-Shows the User's Date Preferences.
+Shows the User's Date Preference. This can be edited using the [`setP`](#star-a-date-star) command. 
 
 Format: `showP`
 
-Example: `showP`
-
 Expected output: `Here are your preferences: Age: 22; Height: 180; Income: 2000; Horoscope: TAURUS`
 
-### [Sorting list of dates by Metric: `sort`](#sorting-date-list)
+### Sort Dates by Metric with Order: `sort`
 
 Sorts the dates in the LoveBook by a specific metric.
 
@@ -306,9 +338,20 @@ Format: `sort METRIC/ORDER`
 
 Parameter constraints:
 
-- Sort must be from list of metrics
-- Metric is limited to `age, horoscope, name, income, height` only
-- ORDER must take on either the value of 'increasing', or 'decreasing'
+<box type="info" seamless>
+
+**Caution:**
+
+* The relevant metrics are
+  * `name/ORDER`
+  * `age/ORDER`
+  * `height/ORDER`
+  * `income/ORDER`
+  * `horoscope/ORDER`
+
+* Order is limited to `increasing` or `decreasing` only
+
+</box>
 
 Example:
 
@@ -317,7 +360,8 @@ Example:
 
 Expected Output: `Lists the dates in the order specified`
 
-Output if error: 
+Output if error:
+
 ```
 Invalid command format! 
 sort: Sorts all dates in LoveBook alphabetically or numerically.
@@ -325,7 +369,7 @@ Parameters: name/ OR age  OR height/ OR income/ OR horoscope/ AND increasing OR 
 Example: sort name/increasing
 ```
 
-### [Star a date: `star`](#star-a-date)
+### Star a Date: `star`
 
 Stars a date in the LoveBook.
 
@@ -336,6 +380,7 @@ Example: `star 1`
 Expected output: `Starred Date: John Doe; Age: 21; Gender: F; Height: 245; Income: 3000; Horoscope: LIBRA`
 
 Output if error:
+
 ```
 Invalid command format!
 star: stars the Date identified by the index number used in the displayed Date list.
@@ -343,11 +388,13 @@ Parameters: INDEX (must be a positive integer)
 Example: star 1
 ```
 
-<box type="info">
+<box type="info" seamless>
+
 * If Date is already starred, it will display the output `Date has already been starred`
+
 </box>
 
-### [Unstar a date: `unstar`](#unstar-a-date)
+### Unstar a Date: `unstar`
 
 Unstars a date in the LoveBook.
 
@@ -360,8 +407,10 @@ Expected output: `Unstarred Date: John Doe; Age: 21; Gender: M; Height: 123; Inc
 Output if error:
 `The date index provided is invalid`
 
-<box type="info">
-    If Date is already unstarred, it will display the output `Date has already been unstarred`
+<box type="info" seamless>
+
+* If Date is already unstarred, it will display the output `Date has already been unstarred`
+
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -390,26 +439,30 @@ to manually edit the data file.
 
 ## **Command Summary**
 
-| Action                         | Format                                                                                | Examples                                                               |
-|--------------------------------|---------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Listing current dates          | `list`                                                                                | `list`                                                                 |
-| Deletion of dates              | `delete INDEX`                                                                        | `delete 2`                                                             |
-| Creation of new date           | `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME` | `add name/John age/25 gender/M height/175 horoscope/Aries income/5000` |
-| Edit existing dates            | `edit INDEX METRIC/NEW ARG`                                                           | `edit 3 name/Cleon`                                                    |
-| Blind Date Generator           | `blindDate`                                                                           | `blindDate`                                                            |
-| Find a date                    | `find NAME [MORE_NAMES]`                                                              | `find Cleon`                                                           |
-| Filter by Metric               | `filter METRIC/ARG`                                                                   | `filter name/Cleon`                                                    |
-| Sorting list of dates          | `sort METRIC/ORDER`                                                                   | `sort name/increasing`                                                 |
-| Getting a recommended date     | `bestMatch`                                                                           | `bestMatch`                                                            |
-| Setting the matching algorithm | `setP age/AGE height/HEIGHT income/INCOME horoscope/HOROSCOPE`                        | `setP age/22 height/180 income/2000 horoscope/TAURUS`                  |
-| Star a date                    | `star INDEX`                                                                          | `star 1`                                                               |
-| Unstar a date                  | `unstar INDEX`                                                                        | `unstar 1`                                                             |
-| Clear all dates                | `clear`                                                                               | `clear`                                                                |
-| Show Date Preferences          | `showP`                                                                               | `showP`                                                                |
-| Exit the program               | `exit`                                                                                | `exit`                                                                 |
+| Action                                                                   | Format                                                                                                    | Examples                                                               |
+|--------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| [Add a new Date](#add-a-new-date-add)                                    | `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME`                     | `add name/John age/25 gender/M height/175 horoscope/Aries income/5000` |
+| [Get a recommended Date](#get-a-recommended-date-bestmatch)              | `bestMatch`                                                                                               | `bestMatch`                                                            |
+| [Get a blind Date](#get-a-blind-date-blinddate)                          | `blindDate`                                                                                               | `blindDate`                                                            |
+| [Clear all Dates](#clear-all-dates-clear)                                | `clear`                                                                                                   | `clear`                                                                |
+| [Delete a Date](#delete-a-date-delete)                                   | `delete INDEX`                                                                                            | `delete 2`                                                             |
+| [Edit a Date](#edit-a-date-edit)                                         | `edit INDEX [name/NAME] [age/AGE] [gender/GENDER] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]`  |  `edit 3 name/Cleon`                                                   |
+| [Exit the Programme](#exit-the-programme-exit)                           | `exit`                                                                                                    | `exit`                                                                 |
+| [Filter by Metric](#filter-by-metric-filter)                             | `filter METRIC/ARG`                                                                                       | `filter name/Cleon`                                                    |
+| [Find a Date](#find-a-date-find)                                         | `find NAME [MORE_NAMES]`                                                                                  | `find Cleon`                                                           |
+| [Help](#help-help)                                                       | `help`                                                                                                    | `help`                                                                 |
+| [List all Dates](#list-all-dates-list)                                   | `list`                                                                                                    | `list`                                                                 |
+| [Set Date Preference](#set-date-preference-setp)                         | `setP [age/AGE] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]`                                    | `setP age/22 height/180 income/2000 horoscope/TAURUS`                  |
+| [Show Date Preference](#show-date-preference-showp)                      | `showP`                                                                                                   | `showP`                                                                |
+| [Sort Dates by Metric with Order](#sort-dates-by-metric-with-order-sort) | `sort METRIC/ORDER`                                                                                       | `sort name/increasing`                                                 |
+| [Star a Date](#star-a-date-star)                                         | `star INDEX`                                                                                              | `star 1`                                                               |
+| [Unstar a Date](#unstar-a-date-unstar)                                   | `unstar INDEX`                                                                                            | `unstar 1`                                                             |
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Glossary**
 
-### Mainstream OS: Windows, Linux, Unix, OS-X.
+* Date: The date that that User will key in to LoveBook.
+* Mainstream OS: Windows, Linux, Unix, OS-X.
+* GUI: Graphical User Interface
+* CLI: Command Line Interface
