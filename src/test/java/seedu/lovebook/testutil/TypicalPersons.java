@@ -39,7 +39,7 @@ public class TypicalPersons {
             .withGender("M").withIncome("3000").withHeight("123").withHoroscope("ARIES").withStar("false")
             .withAvatar("4").build();
     public static final Date DANIEL = new PersonBuilder().withName("Daniel Meier").withAge("25")
-            .withGender("M").withIncome("4000").withHeight("10").withHoroscope("LIBRA").withStar("false")
+            .withGender("M").withIncome("4000").withHeight("101").withHoroscope("LIBRA").withStar("false")
             .withAvatar("4").build();
     public static final Date ELLE = new PersonBuilder().withName("Elle Meyer").withAge("34")
             .withGender("F").withIncome("5000").withHeight("123").withHoroscope("GEMINI").withStar("false")

@@ -18,14 +18,13 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_FILTER_FORMAT = "Please only enter one metric to sort by! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The date index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d dates listed!";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d date(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String WELCOME_MESSAGE = "Hey there, fabulous single!" + "\n"
             + "Get ready to embark on an exciting journey with LoveBook to find your perfect match ❤︎₊ ⊹";
     public static final String MESSAGE_RANDOM_PERSON_SUCCESS = "Here's a blind date for you!";
     public static final String MESSAGE_NO_PERSONS = "There are no dates in your list!";
-
     public static final String MESSAGE_SORTED = "Sorted!";
 
     public static final String MESSAGE_INVALID_PREFIX = "Invalid prefix!";

@@ -50,7 +50,7 @@ public class DateCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(date.getName().fullName);
         aboutInfo.setText(date.getAge().value + " years old, with a height of " + date.getHeight().value + "cm, and "
-                + "a income of $" + date.getIncome().value + " per month.");
+                + "an income of $" + date.getIncome().value + " per month.");
         displayIcons();
     }
     private void displayIcons() {
