@@ -60,6 +60,7 @@ public class PersonProfile extends UiPart<Region> {
 
     // region FXML
     @FXML private VBox vbox;
+
     // endregion
 
     // region Enums
@@ -470,6 +471,16 @@ public class PersonProfile extends UiPart<Region> {
 
     public boolean isStillEditing() {
         return editingInProgress() || person == null;
+    }
+
+    /**
+     * Sets a Boolean that represents whether the profile page is in save confirmation dialog
+     * by mapping through each PersonProfileField and setting their inConfirmationDialog boolean values.
+     * @param isInConfirmationDialog is a boolean the tells whether the current window is is showing confirmation dialog
+     */
+    public void setIsInConfirmationDialog(boolean isInConfirmationDialog) {
+        uiElements.values().stream()
+                .forEach(field -> field.setIsInConfirmationDialog(isInConfirmationDialog));
     }
 
     // endregion

@@ -217,12 +217,14 @@ public class MainWindow extends UiPart<Stage> {
     void handleViewExit() {
         if (isSaved || commandBox.getInConfirmationDialog()) {
             commandBox.setInConfirmationDialog(false);
+            personProfile.setIsInConfirmationDialog(false);
             personListPanelPlaceholder.setVisible(true);
             personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
             personProfilePlaceholder.setVisible(false);
             sendFeedback("Exiting view as requested.");
         } else {
             commandBox.setInConfirmationDialog(true);
+            personProfile.setIsInConfirmationDialog(true);
         }
     }
     /*
@@ -243,6 +245,7 @@ public class MainWindow extends UiPart<Stage> {
     void handleCancelViewExit() {
         sendFeedback("Cancelled exit.");
         commandBox.setInConfirmationDialog(false);
+        personProfile.setIsInConfirmationDialog(false);
     }
 
     /**
