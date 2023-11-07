@@ -35,12 +35,7 @@ public class AddAltCommandParser implements Parser<AddAltCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAltCommand.MESSAGE_USAGE));
         }
 
-        try {
-            index = ParserUtil.parseIndex(preamble);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAltCommand.MESSAGE_USAGE));
-        }
-
+        index = ParserUtil.parseIndex(preamble);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LINKEDIN, PREFIX_SECONDARY_EMAIL,
                 PREFIX_TELEGRAM, PREFIX_BIRTHDAY);
         AddAltPersonDescriptor addAltPersonDescriptor = new AddAltPersonDescriptor();

@@ -113,7 +113,7 @@ public class UpdatePhotoCommandTest {
         } catch (ParseException e) {
             fail();
         } catch (CommandException e) {
-            assertEquals(e.getMessage(), "The person index provided is invalid");
+            assertEquals(e.getMessage(), "The person index provided is invalid.");
         }
     }
 

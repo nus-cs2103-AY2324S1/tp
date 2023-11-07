@@ -24,7 +24,7 @@ class OweCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         // Test with invalid index
         assertParseFailure(parser, "a 2.50",
-                ParserUtil.MESSAGE_INVALID_INDEX);
+                ParserUtil.MESSAGE_NOT_A_INDEX);
 
         // Test with invalid negative values
         assertParseFailure(parser, "1 -2.50", Balance.MESSAGE_CONSTRAINTS);
