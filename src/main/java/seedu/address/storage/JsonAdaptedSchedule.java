@@ -14,7 +14,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.StartTime;
@@ -26,6 +25,7 @@ import seedu.address.model.schedule.Status;
 class JsonAdaptedSchedule {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s field is missing!";
+    public static final String MISSING_TUTOR_MESSAGE_FORMAT = "Tutor not found!";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT);
 
     private final String name;
@@ -40,7 +40,7 @@ class JsonAdaptedSchedule {
      */
     @JsonCreator
     public JsonAdaptedSchedule(@JsonProperty("name") String name, @JsonProperty("startTime") String startTime,
-                               @JsonProperty("endTime") String endTime, @JsonProperty("status") String status) {
+        @JsonProperty("endTime") String endTime, @JsonProperty("status") String status) {
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -94,19 +94,28 @@ class JsonAdaptedSchedule {
         if (!Status.isValidStatus(status)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
-        return new Schedule(getTutorFromName(modelName, addressBook), modelStartTime, modelEndTime,
+
+        if (!Schedule.isValidSchedule(modelStartTime, modelEndTime)) {
+            throw new IllegalValueException(Schedule.MESSAGE_CONSTRAINTS);
+        }
+
+        final Person tutor = getTutorFromName(modelName, addressBook);
+
+        return new Schedule(tutor, modelStartTime, modelEndTime,
             Status.valueOf(status));
     }
 
+    //@@author saltedfishxx
     /**
      * Helper method to find the tutor object given the name stored in json file.
      *
-     * @throws PersonNotFoundException if no matching names were found in the tutors list.
+     * @throws IllegalValueException if no matching names were found in the tutors list.
      */
-    private Person getTutorFromName(Name name, ReadOnlyAddressBook addressBook) throws PersonNotFoundException {
+    private Person getTutorFromName(Name name, ReadOnlyAddressBook addressBook) throws IllegalValueException {
         ObservableList<Person> tutors = addressBook.getPersonList();
         return tutors.stream().filter(o -> name.equals(o.getName())).findFirst()
-            .orElseThrow(PersonNotFoundException::new);
+            .orElseThrow(() -> new IllegalValueException(MISSING_TUTOR_MESSAGE_FORMAT));
     }
+    //@@author
 
 }
