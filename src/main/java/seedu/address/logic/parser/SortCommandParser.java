@@ -11,14 +11,14 @@ import seedu.address.model.person.SortIn;
 
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input argument and creates a new SortCommand object
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
-     * Arguments include name, phone number, email, address, gender, sec level, mrt station and subject
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns an SortCommand object for execution.
+     * Argument is the sequence to be sort in
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {

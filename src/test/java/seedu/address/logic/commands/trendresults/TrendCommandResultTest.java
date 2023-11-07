@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.CommandResult;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.CommandResult;
 
 public class TrendCommandResultTest {
     @Test

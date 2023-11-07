@@ -198,7 +198,7 @@ The following activity diagram summarizes what happens when a user executes a `f
 
 #### Implementation
 
-The `sort` command allows the user to sort the list of students in alphabetical order to enhance efficiency in searching.
+The `sort` command allows the user to sort the list of students by name in alphabetical order to enhance efficiency in searching.
 
 When the user enters a sort command, the `AddressBookParser` parses the user's input and returns a `SortCommand`.
 
@@ -206,14 +206,14 @@ The predicate entered by the user can be modelled by the following class: `SortI
 
 The following sequence diagram shows how the `sort` command works. In this example, the user is executing the following command: `sort in/ASC`.
 
-<puml src="diagrams/SortSequenceDiagram.puml" alt="FilterSequenceDiagram" />
+<puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
 
 When the `SortCommandParser` parses the argument to the `SortCommand`, the argument is stored as an attribute of type SortIn in `SortCommand`.
 This predicate is then passed into the current model, using the `updateSortedPersonList()` method.
 
 The following activity diagram summarizes what happens when a user executes a `sort` command:
 
-<puml src="diagrams/FilterActivityDiagram.puml" alt="SortActivityDiagram" width="250" />
+<puml src="diagrams/SortActivityDiagram.puml" alt="SortActivityDiagram" width="250" />
 
 #### Design considerations:
 
@@ -229,7 +229,7 @@ The following activity diagram summarizes what happens when a user executes a `s
     * Pros:
         * Enable users to view the unsorted student list for every launch.
     * Cons:
-        * Users have to resort the student list for every launch. 
+        * Users have to resort the student list for every launch.
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
 
 ### Import feature
@@ -276,7 +276,7 @@ When the user enters a table command, the `AddressBookParser` parses the user's 
 
 Note that there is no specifically a TableCommandParser for `TableCommand` just like `ListCommand`, `ExitCommand` and `HelpCommand`. The `AddressBookParser` can parse and return a `TableCommand`directly.
 
-The parameters entered by user expected for a table command are either `g/`, `s/` and `l/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommamdResult. E.g. `GenderTableCommandResult` created for the case `table g/` is entered by user. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table. 
+The parameters entered by user expected for a table command are either `g/`, `s/` and `l/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommamdResult. E.g. `GenderTableCommandResult` created for the case `table g/` is entered by user. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table.
 
 The following sequence diagram shows how the `table` command works. In this example, the user is executing the following command: `table s/`
 
@@ -302,6 +302,44 @@ The following activity diagram summarizes what happens when a user executes a `t
 
 * We made the choice of Alternative 1 over Alternative 2 as we found that the table we intend to create so far is one dimensional table and there are only three possible categories, that are , `g/` for gender, `s/` for subject and `l/` for sec-level.
 _{more aspects and alternatives to be added}_
+
+### Export feature
+
+#### Implementation
+
+The `export` command allows the user to export a visual representation recently created, be it table or barchart.
+
+When the user enters an export command, the `AddressBookParser` parses the user's input and returns a `ExportCommand`.
+
+The predicate entered by the user can be modelled by the following class: `Visual`.
+
+The following sequence diagram shows how the `export` command works. In this example, the user is executing the following command: `sort in/ASC`.
+
+<puml src="diagrams/ExportSequenceDiagram.puml" alt="ExportSequenceDiagram" />
+
+When the `ExportCommandParser` parses the argument to the `ExportCommand`, the argument is stored as an attribute of type Visual in `ExportCommand`.
+This predicate is then passed into the current model, using the `export()` method.
+
+The following activity diagram summarizes what happens when a user executes a `export` command:
+
+<puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" width="250" />
+
+#### Design considerations:
+
+**Aspect: How the student list is sorted internally:**
+
+* **Alternative 1 (current choice):** Sort the student list in class `UniquePersonList` using method `sort`.
+    * Pros:
+        * Student list is sorted permanently, ensuring no repeated sorting needed in the next launch provided no new student is added or student's name is changed.
+        * Enhance efficiency of looking through the student list, ensure no repeated sorting needed when doing consecutive commands such as `filter`.
+    * Cons:
+        * Users would be unable to view the unsorted student list again.
+* Alternative 2: Sort the student list in class `ModelManager` using method `updateSortedPersonList`.
+    * Pros:
+        * Enable users to view the unsorted student list for every launch.
+    * Cons:
+        * Users have to resort the student list for every launch.
+* We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
 
 
 ### \[Proposed\] Undo/redo feature
