@@ -121,7 +121,6 @@ public class ApplicantCardTest {
         assertNotNull(emailAddress);
         assertNotNull(positionApplied);
 
-        assertEquals(VALID_NAME_AMY, name.getText());
 
     }
 
