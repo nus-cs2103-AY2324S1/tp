@@ -37,18 +37,6 @@ public abstract class Word {
         return test.matches(VALIDATION_REGEX);
     }
 
-    /**
-     * Evaluates whether this word is an original word
-     * @return True or False depending on whether this is an original word
-     */
-    abstract boolean isOriginalWord();
-
-    /**
-     * Evaluates whether this word is a translated word
-     * @return True or False depending on whether this is a translated word
-     */
-    abstract boolean isTranslatedWord();
-
     public abstract Word editWord(String newWord, String newLanguage);
 
     /**
@@ -83,25 +71,6 @@ public abstract class Word {
      */
     public boolean isSameLanguage(String language) {
         return this.language.equalsIgnoreCase(language);
-    }
-
-    /**
-     * Checks whether this word is equal to the passed object
-     * @param other Passed object to check equality against
-     * @return True or False depending on whether this and other are equal
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Word)) {
-            return false;
-        }
-        Word otherWord = (Word) other;
-        return otherWord.word.equals(this.word) && otherWord.language.equals(this.language);
     }
 
     /**

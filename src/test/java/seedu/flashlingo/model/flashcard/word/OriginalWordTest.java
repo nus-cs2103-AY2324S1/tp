@@ -56,16 +56,4 @@ class OriginalWordTest {
         OriginalWord ogWord = new OriginalWord("Hello", " eng ");
         assertEquals(ogWord.toString(), "Hello (eng)");
     }
-
-    @Test
-    void isOriginalWord() {
-        OriginalWord ogWord = new OriginalWord("Hello", " eng ");
-        assert(ogWord.isOriginalWord());
-    }
-
-    @Test
-    void isTranslatedWord() {
-        OriginalWord ogWord = new OriginalWord("Hello", " eng ");
-        assert(!ogWord.isTranslatedWord());
-    }
 }
