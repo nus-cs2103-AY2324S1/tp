@@ -154,11 +154,7 @@ public class AttendanceStorage {
      *
      * @return count of number of attendances
      */
-    public int[] getAttendanceReport(JoinDate joinDate, int numOfLeave) throws IllegalArgumentException {
-
-        if (numOfLeave < 0) {
-            throw new IllegalArgumentException("Number of leaves cannot be negative!");
-        }
+    public int[] getAttendanceReport(JoinDate joinDate, int numOfLeave) {
         int numOfDaysOnLeave = numOfLeave;
         int numOfDaysAbsent = getCount(AttendanceType.ABSENT, joinDate, numOfLeave);
         int numOfDaysLate = getCount(AttendanceType.LATE, joinDate, numOfLeave);
