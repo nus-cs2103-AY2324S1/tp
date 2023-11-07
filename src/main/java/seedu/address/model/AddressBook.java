@@ -76,7 +76,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// applicant-level operations
 
     /**
-     * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
+     * Returns true if an applicant with the same identity as {@code applicant} exists in the address book.
      */
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
@@ -84,7 +84,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a applicant to the address book.
+     * Returns true if an applicant that is equal to {@code applicant} exists in the address book
+     * as checked by the equals method.
+     * Uses a stricter notion of equality than hasApplicant.
+     */
+    public boolean hasExactApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return applicants.containsExact(applicant);
+    }
+
+    /**
+     * Adds an applicant to the address book.
      * The applicant must not already exist in the address book.
      */
     public void addApplicant(Applicant p) {
@@ -166,7 +176,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(applicant);
 
         for (Interview interview : getInterviewList()) {
-            if (interview.getInterviewApplicant().equals(applicant)) {
+            if (interview.getInterviewApplicant().isSameApplicant(applicant)) {
                 return interview;
             }
         }

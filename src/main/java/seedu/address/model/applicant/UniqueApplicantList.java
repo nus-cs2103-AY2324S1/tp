@@ -39,6 +39,15 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     }
 
     /**
+     * Returns true if the list contains an equal applicant as the given argument.
+     * Uses stricter notion equality than contains method.
+     */
+    public boolean containsExact(Applicant toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::equals);
+    }
+
+    /**
      * Adds a applicant to the list.
      * The applicant must not already exist in the list.
      */
