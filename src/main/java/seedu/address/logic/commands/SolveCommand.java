@@ -45,27 +45,14 @@ public class SolveCommand extends Command {
 
         List<Card> lastShownList = model.getFilteredCardList();
 
-        Index actualIndex;
-        if (targetIndex.equals(Index.RANDOM)) {
-            try {
-                actualIndex = model.getRandomIndex();
-            } catch (RandomIndexNotInitialisedException e) {
-                throw new CommandException(Messages.MESSAGE_RANDOM_INDEX_NOT_INITIALISED);
-            }
-        } else {
-            actualIndex = targetIndex;
-        }
+        Index actualIndex = resolveIndex(model, targetIndex);
 
-        if (actualIndex.getZeroBased() >= lastShownList.size()) {
+        if (isIndexInvalid(lastShownList, targetIndex)) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
 
         Card cardToSolve = lastShownList.get(actualIndex.getZeroBased());
-
-        cardToSolve.incrementSolveCount();
-        // sets to show the update on the Ui
-        model.setCard(cardToSolve, cardToSolve);
-        model.getGoal().solvedCard();
+        updateModel(model, cardToSolve);
 
         return new CommandResult(String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW,
                         Messages.formatSolve(cardToSolve, actualIndex)));
@@ -92,5 +79,23 @@ public class SolveCommand extends Command {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
                 .toString();
+    }
+
+    private Index resolveIndex(Model model, Index targetIndex) throws CommandException {
+        if (targetIndex.equals(Index.RANDOM)) {
+            try {
+                return model.getRandomIndex();
+            } catch (RandomIndexNotInitialisedException e) {
+                throw new CommandException(Messages.MESSAGE_RANDOM_INDEX_NOT_INITIALISED);
+            }
+        } else {
+            return targetIndex;
+        }
+    }
+
+    private void updateModel(Model model, Card card) {
+        card.incrementSolveCount();
+        model.setCard(card, card); // This is assuming setCard method does the necessary UI updates and model changes.
+        model.getGoal().solvedCard();
     }
 }

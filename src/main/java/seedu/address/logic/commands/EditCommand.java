@@ -69,7 +69,7 @@ public class EditCommand extends Command {
 
         List<Card> lastShownList = model.getFilteredCardList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (isIndexInvalid(lastShownList, index)) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
 
@@ -83,6 +83,8 @@ public class EditCommand extends Command {
         model.setCard(cardToEdit, editedCard);
         return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, Messages.format(editedCard)));
     }
+
+
 
     /**
      * Creates and returns a {@code Card} with the details of {@code cardToEdit}

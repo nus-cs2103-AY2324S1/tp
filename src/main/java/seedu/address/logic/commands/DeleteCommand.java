@@ -42,13 +42,12 @@ public class DeleteCommand extends Command {
 
         List<Card> lastShownList = model.getFilteredCardList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (isIndexInvalid(lastShownList, targetIndex)) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
 
         Card cardToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteCard(cardToDelete);
-        model.resetRandomIndex();
+        updateModel(model, cardToDelete);
 
         return new CommandResult(String.format(MESSAGE_DELETE_CARD_SUCCESS, Messages.format(cardToDelete)));
     }
@@ -74,5 +73,10 @@ public class DeleteCommand extends Command {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
                 .toString();
+    }
+
+    private void updateModel(Model model, Card cardToDelete) {
+        model.deleteCard(cardToDelete);
+        model.resetRandomIndex();
     }
 }
