@@ -1,7 +1,6 @@
 package seedu.address.model.person.predicates;
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -11,7 +10,7 @@ import seedu.address.model.person.Person;
 /**
  * Tests that at least one of a {@code Person}'s {@code FinancialPlan} matches any of the keywords given.
  */
-public class FinancialPlanContainsKeywordsPredicate implements Predicate<Person> {
+public class FinancialPlanContainsKeywordsPredicate implements PersonContainsKeywordsPredicate {
     private final List<String> keywords;
 
     public FinancialPlanContainsKeywordsPredicate(List<String> keywords) {
