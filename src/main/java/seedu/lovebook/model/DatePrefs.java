@@ -81,10 +81,10 @@ public class DatePrefs implements ReadOnlyDatePrefs {
         }
 
         DatePrefs otherPrefs = (DatePrefs) other;
-        return this.age == otherPrefs.age
-                && this.height == otherPrefs.height
-                && this.income == otherPrefs.income
-                && this.horoscope == otherPrefs.horoscope;
+        return this.age.equals(otherPrefs.age)
+                && this.height.equals(otherPrefs.height)
+                && this.income.equals(otherPrefs.income)
+                && this.horoscope.equals(otherPrefs.horoscope);
     }
 
     public Age getAge() {

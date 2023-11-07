@@ -8,14 +8,16 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
  */
 public class Income implements Comparable<Income> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Income can only take on positive integer values"
+    public static final String MESSAGE_CONSTRAINTS = "Income can only take on positive integer values "
+            + "less than or equal"
+            + " to a million"
             + ", and it should not be blank";
 
     /*
      * The first character of the lovebook must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
+    public static final String VALIDATION_REGEX = "^(0|[1-9]\\d{0,5}|1000000)$";
 
     public final String value;
 

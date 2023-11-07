@@ -7,10 +7,10 @@ title: "Shishir Bychapur's Project Portfolio Page"
 
 ### Project: LoveBook
 
-LoveBook, is a dating-focused love book application, revolving around providing users with a convenient and an
-enjoyable tool to enhance their dating experiences. Featuring user profile management, date organisation, compatibility
-ranking, and customizable filtering options, LoveBook enhances the efficiency and effectiveness of your online dating
-journey.
+LoveBook, is a dating-focused application, revolving around providing users with a convenient
+and enjoyable tool to enhance their dating experiences. Featuring user preferences management, date organization,
+customizable filtering options and best match algorithms, LoveBook enhances the efficiency and effectiveness of your
+online dating journey.
 
 Given below are my contributions to the project.
 
@@ -23,7 +23,6 @@ Given below are my contributions to the project.
   * What it does: Added gender field for each date's gender
   * Justification: Gender is an important factor as well in dating.
   * Highlights: Gender can either be male or female. Gender icon is displayed when dates are displayed.
-   
 
 * **New Feature**:
   * What it does: Added the ability to store preferences for the user.

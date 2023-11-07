@@ -1,5 +1,7 @@
 package seedu.lovebook.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -86,7 +88,8 @@ public class StarCommandTest {
         assertCommandFailure(starCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    @Test public void execute_dateIsAlreadyStarred_throwsCommandException() {
+    @Test
+    public void execute_dateIsAlreadyStarred_throwsCommandException() {
         StarCommand starCommand = new StarCommand(INDEX_FIRST_PERSON);
         try {
             starCommand.execute(model);
@@ -95,5 +98,35 @@ public class StarCommandTest {
         }
         assertThrows(CommandException.class, "Date has already been starred", ()
                 -> starCommand.execute(model));
+    }
+
+    @Test
+    public void equals() {
+        StarCommand starFirstCommand = new StarCommand(INDEX_FIRST_PERSON);
+        StarCommand starSecondCommand = new StarCommand(INDEX_SECOND_PERSON);
+
+        // same object -> returns true
+        assertTrue(starFirstCommand.equals(starFirstCommand));
+
+        // same values -> returns true
+        StarCommand starFirstCommandCopy = new StarCommand(INDEX_FIRST_PERSON);
+        assertTrue(starFirstCommand.equals(starFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(starFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(starFirstCommand.equals(null));
+
+        // different date -> returns false
+        assertFalse(starFirstCommand.equals(starSecondCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Index targetIndex = Index.fromOneBased(1);
+        StarCommand starCommand = new StarCommand(targetIndex);
+        String expected = StarCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, starCommand.toString());
     }
 }

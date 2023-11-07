@@ -22,6 +22,8 @@ import seedu.lovebook.logic.commands.ExitCommand;
 import seedu.lovebook.logic.commands.FindCommand;
 import seedu.lovebook.logic.commands.HelpCommand;
 import seedu.lovebook.logic.commands.ListCommand;
+import seedu.lovebook.logic.commands.StarCommand;
+import seedu.lovebook.logic.commands.UnstarCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
 import seedu.lovebook.model.date.Date;
 import seedu.lovebook.model.date.NameContainsKeywordsPredicate;
@@ -86,6 +88,19 @@ public class LoveBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+    @Test
+    public void parseCommand_star() throws Exception {
+        StarCommand command = (StarCommand) parser.parseCommand(
+                StarCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new StarCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_unstar() throws Exception {
+        UnstarCommand command = (UnstarCommand) parser.parseCommand(
+                UnstarCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnstarCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
