@@ -157,30 +157,45 @@ These are all the features in regard to a member in CMC.
 
 Adds a member to the list of members in CMC.
 
-- Use `addMember` or `addm` to use add a member
-- Use `addApplicant` or `adda` to use add an applicant
+- Use `addmember` or `addm` to use add a member
 
-#### Usage:
+#### Format:
 
-##### Adding member:
-
-`addMember /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
+`addmember /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
 `addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
-#### Acceptable values for parameters:
+<div markdown="span" class="alert alert-primary">
 
-- `name`: Only alphabetical characters, @, () are allowed
+:information_source: **Notes about input parameter:**
+
+- `memberName`: Only alphabetical characters, @, () are allowed
 - `phoneNumber`: Only numbers are allowed
 - `email`: Must follow the format of xyz@abc.wsd
 - `telegramHandle`: Only alphanumeric characters and underscore are allowed
 - `tag`: Only alphanumeric characters are allowed, tags are optional
 
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+:information_source: **Notes about duplicate members:**
+
+Duplicate members are not allowed to be added into the list of members.
+
+A member is considered a duplicate if the member's name, phone number, email **or** telegram handle matches that of an existing member.
+
+This means that only a member with a unique name, phone number, email and telegram handle can be added into the list of members.
+
+</div>
+
 #### Example of usage:
 
-`addm /name John Doe /phone 92345678 /email johndoe@xyz.com /tele @johndoe /tag WelfareHead`
+`addmember /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /tag Admin` or `addm /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /tag Admin`
 
-`adda /name John Doe /phone 92345678`
+This adds a new member named `Taylor Swift` with phone number `91691969`, email `taylorswift@era.tour`, telegram handle `tswift` and tag `Admin` to the list of members.
+
+<img src="../docs/images/addMember.png" alt="addMember.png"/>
 
 #### 4.1.2 Finding members: `findMember` or `findm`
 
@@ -308,7 +323,47 @@ Tasks:
 
 ### 4.2 Applicant Features
 
-#### 4.2.1 Adding an applicant: `addApplicant` or `adda`
+These are all the features in regard to an applicant in CMC.
+
+#### 4.2.1 Adding an applicant: `addapplicant` or `adda`
+
+Adds an applicant to the list of applicants in CMC.
+
+#### Format:
+
+`addapplicant /name {applicantName} /phone {phoneNumber}`
+
+`adda /name {applicantName} /phone {phoneNumber}`
+
+<div markdown="span" class="alert alert-primary">
+
+:information_source: **Notes about input parameter:**
+
+- `applicantName`: Only alphabetical characters, @, () are allowed
+
+- `phoneNumber`: Only numbers are allowed
+
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+:information_source: **Notes about duplicate applicants:**
+
+Duplicate applicants are not allowed to be added into the list of applicants.
+
+An applicant is considered a duplicate if the applicant's name **or** phone number matches that of an existing applicant.
+
+This means that only an applicant with a unique name and phone number can be added into the list of applicants.
+
+</div>
+
+#### Example of usage:
+
+- `addapplicant /name Lady Gaga /phone 99129969` or `adda /name Lady Gaga /phone 99129969`
+
+This adds a new applicant named `Lady Gaga` with phone number `99129969` to the list of applicants.
+
+<img src="../docs/images/addApplicant.png" alt="addApplicant.png"/>
 
 #### 4.2.2 Finding applicants: `findApplicant` or `finda`
 
