@@ -271,10 +271,17 @@ Adds an interview to the address book.
 
 Format: `add-i app/APPLICANT_ID jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME`
 
+| Parameter             | Representation                                            | Constraints                                                                                                                                             |
+|-----------------------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `APPLICANT_ID`        | The index of the applicant as shown in the applicant list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list |
+| `JOB_ROLE`            | The role the applicant is interviewing for                | Must contain only alphanumeric characters and spaces                                                                                                    |
+| `START_DATE_AND_TIME` | Starting time of the interview                            | Must be in one of the accepted formats stated below AND must be before the end time AND must be on the same day as the end time                         |
+| `END_DATE_AND_TIME`   | Ending time of the interview                              | Must be in one of the accepted formats stated below AND must be after the start time AND must be on the same day as the start time                      |
+
 :information_source: JOB_ROLE allows empty strings to be entered to handle situations where the applicant is applying
 to the company in general.
 
-* List of accepted date formats:
+List of accepted date formats:
   * DD/MM/YYYY and time:
     * `16 May 2024 1515`
     * `16 May 2024 3.15pm`
@@ -305,29 +312,22 @@ to the company in general.
     * `16/05 3.15pm`
     * `16/05 3pm`
 
-* Expected outputs:
-  * When the user enters the date properly: `added <interview description> at <time>`
-  * When the applicant index provided is invalid: `The applicant index provided is invalid`
-  * When the user does not input a valid date: `“Please specify a valid date!”`
-  * When the user inputs a valid date without a time: `"Please enter an interview time!"`
-  * When the user enters a valid date in the past: `Input date cannot be in the past!`
-  * When there is an interview clash: `“Oops! You have an <insert interview object> scheduled at <from date & by date>`
-  * When the user enters a valid date that has a year that is past the year 9999: `“Please specify a valid date!”`
-
 Example:
-* `add-i app/3 jr/software engineer start/11-12-2023 1400 end/11-12-2023 1500`
+* `add-i app/3 jr/software engineer start/12-12-2023 1400 end/12-12-2023 1500`
 
 [Back to the Table of Contents](#table-of-contents)
 
 ### Deleting an interview : `delete-i`
 
-Deletes the specified interview from the address book.
+Deletes the interview at the specified `INDEX` from the address book.
 
 Format: `delete-i INDEX`
 
-* Deletes the interview at the specified `INDEX`.
+| Parameter | Representation                                                   | Constraints                                                                                                                                             |
+|-----------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`   | The index of the target interview as shown in the interview list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list |
+
 * The `INDEX` refers to the index number shown in the displayed interview list.
-* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
 
 Examples:
 * `delete-i 1` deletes the 1st interview in the address book.
@@ -336,15 +336,50 @@ Examples:
 
 ### Editing an interview : `edit-i`
 
-Edit an existing interview in the address book.
+Edits an existing interview at the specified `INTERVIEW_INDEX`.
 
-Format: `edit-i INTERVIEW_INDEX [jr/JOB_TITLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME]`
+Format: `edit-i INTERVIEW_INDEX [jr/JOB_ROLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME]`
 
-* Edits the interview at the specified `INTERVIEW_INDEX`. The index refers to the index number shown in the displayed interview list.
-* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list
+| Parameter             | Representation                                            | Constraints                                                                                                                                             |
+|-----------------------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INTERVIEW_INDEX`     | The index of the interview as shown in the interview list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list |
+| `JOB_ROLE`            | The role the applicant is interviewing for                | Must contain only alphanumeric characters and spaces                                                                                                    |
+| `START_DATE_AND_TIME` | Starting time of the interview                            | Must be one of the accepted formats stated below AND must be before the end time AND must be on the same day as the end time                            |
+| `END_DATE_AND_TIME`   | Ending time of the interview                              | Must be one of the accepted formats stated below AND must be after the start time AND must be on the same day as the start time                         |
+
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* To edit the `RATING` field, please refer to the [rate command](#rating-an-interview--rate)
+* To edit the `RATING` field (re-rating an interview), please refer to the [rate command](#rating-an-interview--rate)
+* List of accepted date formats:
+    * DD/MM/YYYY and time:
+        * `16 May 2024 1515`
+        * `16 May 2024 3.15pm`
+        * `16 May 2024 3pm`
+        * `16-05-2024 1515`
+        * `16-05-2024 3.15pm`
+        * `16-05-2024 3pm`
+        * `16-05-24 1515`
+        * `16-05-24 3.15pm`
+        * `16-05-24 3pm`
+        * `16/05/2024 1515`
+        * `16/05/2024 3.15pm`
+        * `16/05/2024 3pm`
+        * `16/05/24 1515`
+        * `16/05/24 3.15pm`
+        * `16/05/24 3pm`
+    * MM, DD and time:
+        * `16 May 1515`
+        * `16 May 3.15pm`
+        * `16 May 3pm`
+        * `16 January 1515`
+        * `16 January 3.15pm`
+        * `16 January 3pm`
+        * `16/5 1515`
+        * `16/5 3.15pm`
+        * `16/5 3pm`
+        * `16/05 1515`
+        * `16/05 3.15pm`
+        * `16/05 3pm`
 
 Examples:
 *  `edit-i 1 jr/software-engineer` Edits the job title of the 1st interview to be `software-engineer`.
