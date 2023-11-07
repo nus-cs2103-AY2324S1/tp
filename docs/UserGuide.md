@@ -401,7 +401,7 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
+2. **Long names** for Financial Plans and Tags may not be fully visible.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
