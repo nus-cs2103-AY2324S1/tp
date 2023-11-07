@@ -75,7 +75,7 @@ NetworkBook 1.3 includes several new features and improvements for ease of use.
 
 #### Create new contact: `create /name [name] [options]`
 
-You can use the create command to create a new contact. When creating a contact, you must provide the name field, and it's optional to provide other fields which will be added to the new contact.
+You can use the `create` command to create a new contact. When creating a contact, you must provide the name field, and it's optional to provide other fields which will be added to the new contact.
 
 Format: `create /name [name] /phone [phone] /email [email] /link [link] /grad [semester of graduation] /course [course] /spec [specialisation] /priority [high/medium/low] /tag [tag]`
 
@@ -96,7 +96,7 @@ Example usage:
 
 #### Add details to contact: `add [index] /phone`
 
-You can add a contact detail to an existing contact. No new contact will be created.
+You can use the `add` command to add a contact detail to an existing contact. No new contact will be created.
 
 Format:
 
@@ -143,9 +143,9 @@ Example usage:
 
 ### <u>Category 2 - Edit contact details</u>
 
-#### Edit contact detail : `edit [index] [options]`
+#### Edit contact detail: `edit [index] [options]`
 
-You can edit contact details of existing contacts in your book.
+You can use the `edit` command to edit contact details of existing contacts in your book.
 
 Format:
 
@@ -217,7 +217,7 @@ Example usage:
 
 #### Delete some details: `delete [index of contact] [options]`
 
-You can also remove some information about a contact that you previously recorded.
+You can also use the `delete` command to remove some information about a contact that you previously recorded.
 
 Format:
 
@@ -274,7 +274,7 @@ You can use the `sort` command to sort your list of contacts.
 
 Format: `sort /by [field] /order [order]`
 
-Parameters
+Parameters:
 
 * `[field]` is the information to sort by.
 
@@ -309,18 +309,15 @@ for easy viewing.
 
 Format: `filter /by [field] /with [term] /taken true/false`
 
-Parameters
+Parameters:
 
-* `[field]` is the information to filter by
+* `[field]` is the information to filter by.
 
     List of options:
 
-    * `course` - Filter to contacts whose courses contain one
-    one of the terms
-    * `tag` - Filter to contacts whose tags contain one
-    of the terms
-    * `spec` - Filter to contacts whose specialisations contain one
-    of the terms
+    * `course` - Filter to contacts whose courses contain one one of the terms
+    * `tag` - Filter to contacts whose tags contain one of the terms
+    * `spec` - Filter to contacts whose specialisations contain one of the terms
     * `grad` - Filter to contacts who graduated in a specific year
 
 * `[term]` is the terms that will be filtered against. All contacts
@@ -379,7 +376,7 @@ Example usage:
 
 #### Open a contact's link: `open [index] /index [link index]`
 
-Open a contact's link. This creates a new tab in your default browser window, directed towards the webpage.
+You can use the `open` command to open a contact's link. This opens the webpage in your default web browser.
 
 Format: `open [index] /index [link index]`
 
@@ -399,7 +396,7 @@ Example usage:
 
 #### Send email to a contact's email address: `email [index] /index [email index]`
 
-Open the default mailbox application to compose an email. The target recipient is the contact's email at `email index`.
+You can use the `email` command to open the default mailbox application to compose an email to the contact's email at `email index`.
 
 Format: `email [index] /index [email index]`
 
@@ -421,7 +418,7 @@ Example usage:
 
 #### Auto-fill command preamble: `ctrl-F/N/G/U/R`
 
-When typing in the command box and the command box is empty, you can use the following shortcuts to auto-fill the first word of some commands:
+When typing in the command box, if the command box is empty, you can use the following keyboard shortcuts to auto-fill the first word of some commands:
 
 * `ctrl-F`: auto-fill with `find`
 * `ctrl-N`: auto-fill with `create`
@@ -433,7 +430,7 @@ When typing in the command box and the command box is empty, you can use the fol
 
 #### Navigate command history: `Up/Down arrow keys`
 
-When typing in the command box, you can use the arrow keys to fill the command box with a previous executed command.
+When typing in the command box, you can use the arrow keys to fill the command box with a previously executed command.
 
 * `Up arrow key`: navigate back to the previous command in the history, if any.
 * `Down arrow key`: navigate forth to the next command in the history, if any.
@@ -481,9 +478,11 @@ You can click on a contact's email address to email them.
 
 #### View help window: `help`
 
-You can use the help command to open a window containing a link to this user guide. You can press the "Copy URL" button to copy the link, and paste it into your web browser to view this user guide web page.
+You can use the `help` command to open a window containing a link to this user guide. You can press the "Copy URL" button to copy the link, and paste it into your web browser to view this user guide web page.
 
 Format: `help`
+
+Parameters: N/A
 
 Example usage:
 
@@ -494,9 +493,11 @@ Example usage:
 
 #### Exit NetworkBook: `exit`
 
-You can use the exit command to close the NetworkBook app.
+You can use the `exit` command to close the NetworkBook app.
 
 Format: `exit`
+
+Parameters: N/A
 
 Example usage:
 
@@ -513,6 +514,7 @@ Example usage:
 | [**edit**](#edit-contact-detail--edit-index-options)                               | Single-valued fields: <br/>`[/name]` <br/> `[/grad]` <br/>`[/priority]`<br/><br/> Multi-valued fields which support `[/index]`: <br/> `[/phone]` <br/> `[/email]` `[/link]` <br/> `[/course]` <br/> `[/spec]` <br/> `[/tag]`                 | Single-valued fields: <br/> `edit [index of contact] /field [new value]` <br/><br/> e.g., `edit 1 /name Nguyen` <br/> `edit 1 /grad AY2627-S1` <br/><br/> Multi-valued fields: <br/> `edit [index of contact] /field [new value] /index [index of old value]` <br/><br/> e.g., `edit 1 /email aaa@gmail.com /index 1` <br/> `edit 1 /course CS2109S /index 1`                                                                                                          | Edits information about a contact.                           |
 | [**delete**](#delete-a-contact-delete-index)                                       | N/A                                                                                                                                                                                                                                          | `delete [index]`<br/><br/> e.g., `delete 1`                                                                                                                                                                                                                                                                                                                                                                                                                            | Deletes a contact from NetworkBook.                          |
 | [**delete**](#delete-some-details-delete-index-of-contact-options)                 | Single-valued fields: <br/> `[/grad]` <br/>`[/priority]`<br/><br/> Multi-valued fields which support `[/index]`: <br/> `[/phone]` <br/>` [/email]` <br/> `[/link]` <br/> `[/course]` <br/> `[/spec]` <br/> `[/tag]`                          | Single-valued fields: <br/> `delete [index of contact] /field`<br/><br/> e.g. `delete 1 /priority`<br/><br/> Multi-valued fields: <br/> `delete [index of contact] /field` (default to index 1) <br/> `delete [index of contact] /field /index [index of entry to delete]` <br/><br/> e.g. `delete 2 /spec` <br/> `delete 3 /email /index 2`                                                                                                                           | Deletes some details of a contact.                           |
+| [**list**](#exit-networkbook-exit)                                                 | N/A                                                                                                                                                                                                                                          | `exit`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Exits NetworkBook.                                           |
 | [**find**](#find-a-contact-find-name)                                              | N/A                                                                                                                                                                                                                                          | `find [name]` <br/><br/> e.g., `find Ness`                                                                                                                                                                                                                                                                                                                                                                                                                             | Searches for contacts by name.                               |
 | [**sort**](#sort-contacts-list-sort-by-field-name-order-ascdesc)                   | `/by` <br/> `[/order]`                                                                                                                                                                                                                       | `sort /by [field] /order [order]`<br/><br/> e.g., `sort /by priority /order desc`                                                                                                                                                                                                                                                                                                                                                                                      | Sorts contacts by a field.                                   |
 | [**filter**](#filter-contacts-list-filter-by-field-with-term)                      | `/by` <br/> `/with` <br/> `[/taken]`                                                                                                                                                                                                         | `filter /by [field] /with [term]` <br/><br/> e.g. `filter /by course /with abc` <br/> `filter /by tag /with banker` <br/><br/> For course: <br/> `filter /by course /with [term] [/taken true/false]` <br/> e.g. `filter /by course /with abg /taken false`                                                                                                                                                                                                            | Filters contacts by a field.                                 |
@@ -542,7 +544,7 @@ If you have any further issues, please raise an issue on our [GitHub page](https
 ### Checking Java version
 
 **Q:** How can I check my Java version? <br/>
-**A:** Open command prompt (Windows) or terminal (MacOS or Linux) on your computer, and type `java -version` . If you do not have Java installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+**A:** Open command prompt (Windows) or terminal (MacOS or Linux) on your computer, and type `java -version`. If you do not have Java installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
 ### Loading data from another device
 
