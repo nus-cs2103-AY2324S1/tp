@@ -422,7 +422,7 @@ when editing the tags of the member/event:
 4. Delete specific tags from the current list of tags attached to the member/event
 
 ### Provide more specific index error messages to the user
-**Current Implementation**
+**Current Implementation:**
 * **Current Issue**: As of now, for commands that accept more than 1 index as a parameter, it is hard to tell which index is wrong
 based on the index error message shown to the user if one of the indexes provided is wrong. This can hamper the user's efficiency as the
 user cannot tell immediately which provided index is wrong.
