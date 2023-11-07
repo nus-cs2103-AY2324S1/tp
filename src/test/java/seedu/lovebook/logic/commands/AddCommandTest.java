@@ -239,6 +239,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateSortedPersonList(Comparator<Date> comparator) {
+            requireNonNull(comparator);
+        }
+        @Override
         public ReadOnlyLoveBook getLoveBook() {
             return new LoveBook();
         }

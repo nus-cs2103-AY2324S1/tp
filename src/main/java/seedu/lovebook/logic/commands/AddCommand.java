@@ -7,15 +7,14 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.lovebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.Comparator;
 
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.date.Date;
-
-import java.util.Comparator;
 
 /**
  * Adds a Date to the LoveBook.
@@ -62,7 +61,6 @@ public class AddCommand extends Command {
         }
 
         model.addDate(toAdd);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateSortedPersonList(Comparator.<Date>naturalOrder());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
