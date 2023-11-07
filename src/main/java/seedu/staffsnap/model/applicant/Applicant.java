@@ -18,6 +18,9 @@ public class Applicant implements Comparable<Applicant> {
 
     // Field to compare by, default to Name
     private static Descriptor descriptor = Descriptor.NAME;
+    // Order of comparision, default to ascending
+    private static Boolean isDescendingOrder = false;
+
 
     // Identity fields
     private final Name name;
@@ -42,12 +45,12 @@ public class Applicant implements Comparable<Applicant> {
         this.position = position;
         this.interviews.addAll(interviews);
         Collections.sort(this.interviews);
-        if (status == null) {
-            this.status = Status.UNDECIDED;
+        this.status = Objects.requireNonNullElse(status, Status.UNDECIDED);
+        if (score == null) {
+            this.score = new Score(0, 0, 0);
         } else {
-            this.status = status;
+            this.score = new Score(score);
         }
-        this.score = new Score(score);
     }
 
     public Name getName() {
@@ -112,13 +115,14 @@ public class Applicant implements Comparable<Applicant> {
                 && phone.equals(otherApplicant.phone)
                 && email.equals(otherApplicant.email)
                 && position.equals(otherApplicant.position)
-                && interviews.equals(otherApplicant.interviews);
+                && interviews.equals(otherApplicant.interviews)
+                && status.equals(otherApplicant.status);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, position, interviews);
+        return Objects.hash(name, phone, email, position, interviews, status);
     }
 
     @Override
@@ -152,6 +156,9 @@ public class Applicant implements Comparable<Applicant> {
      *      lexicographically greater than the Name argument.
      */
     public int compareByName(Applicant o) {
+        if (isDescendingOrder) {
+            return -this.name.compareTo(o.name);
+        }
         return this.name.compareTo(o.name);
     }
 
@@ -162,7 +169,62 @@ public class Applicant implements Comparable<Applicant> {
      *      lexicographically greater than the Phone argument.
      */
     public int compareByPhone(Applicant o) {
+        if (isDescendingOrder) {
+            return -this.phone.compareTo(o.phone);
+        }
         return this.phone.compareTo(o.phone);
+    }
+
+    /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Score is equal to this Score; a value less than 0 if this Score is
+     *      less than the Score argument; and a value greater than 0 if this Score is
+     *      greater than the Score argument.
+     */
+    public int compareByScore(Applicant o) {
+        if (isDescendingOrder) {
+            return -this.getScore().getAverageScore().compareTo(o.getScore().getAverageScore());
+        }
+        return this.getScore().getAverageScore().compareTo(o.getScore().getAverageScore());
+    }
+
+    /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Email is equal to this Email; a value less than 0 if this Email is
+     *      lexicographically less than the Email argument; and a value greater than 0 if this Email is
+     *      lexicographically greater than the Email argument.
+     */
+    public int compareByEmail(Applicant o) {
+        if (isDescendingOrder) {
+            return -this.email.compareTo(o.email);
+        }
+        return this.email.compareTo(o.email);
+    }
+
+    /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Status is equal to this Status; a value less than 0 if this Status is
+     *      less than the Status argument; and a value greater than 0 if this Status is
+     *      greater than the Status argument. Order is (Undecided, Offered, Rejected)
+     */
+    public int compareByStatus(Applicant o) {
+        if (isDescendingOrder) {
+            return -this.status.compareTo(o.status);
+        }
+        return this.status.compareTo(o.status);
+    }
+
+    /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Position is equal to this Position; a value less than 0 if this Position is
+     *      lexicographically less than the Position argument; and a value greater than 0 if this Position is
+     *      lexicographically greater than the Position argument.
+     */
+    public int compareByPosition(Applicant o) {
+        if (isDescendingOrder) {
+            return -this.position.compareTo(o.position);
+        }
+        return this.position.compareTo(o.position);
     }
 
     /**
@@ -178,6 +240,14 @@ public class Applicant implements Comparable<Applicant> {
             return compareByName(o);
         case PHONE:
             return compareByPhone(o);
+        case SCORE:
+            return compareByScore(o);
+        case EMAIL:
+            return compareByEmail(o);
+        case STATUS:
+            return compareByStatus(o);
+        case POSITION:
+            return compareByPosition(o);
         default:
             return 0;
         }
@@ -206,6 +276,7 @@ public class Applicant implements Comparable<Applicant> {
     public int getInterviewIndexForApplicantCard(Interview interview) {
         return interviews.indexOf(interview) + 1;
     }
+
     /**
      * Get the status of an Applicant.
      * @return Status of applicant
@@ -220,5 +291,13 @@ public class Applicant implements Comparable<Applicant> {
      */
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public static Boolean getIsDescendingOrder() {
+        return isDescendingOrder;
+    }
+
+    public static void setIsDescendingOrder(Boolean newIsDescendingOrder) {
+        isDescendingOrder = newIsDescendingOrder;
     }
 }

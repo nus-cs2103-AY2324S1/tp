@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 import seedu.staffsnap.commons.core.LogsCenter;
 import seedu.staffsnap.logic.commands.AddCommand;
 import seedu.staffsnap.logic.commands.AddInterviewCommand;
-import seedu.staffsnap.logic.commands.ClearCommand;
 import seedu.staffsnap.logic.commands.Command;
 import seedu.staffsnap.logic.commands.ConfirmationCommand;
 import seedu.staffsnap.logic.commands.DeleteCommand;
@@ -21,6 +20,7 @@ import seedu.staffsnap.logic.commands.ExitCommand;
 import seedu.staffsnap.logic.commands.FilterCommand;
 import seedu.staffsnap.logic.commands.FindCommand;
 import seedu.staffsnap.logic.commands.HelpCommand;
+import seedu.staffsnap.logic.commands.ImportCommand;
 import seedu.staffsnap.logic.commands.ListCommand;
 import seedu.staffsnap.logic.commands.SortCommand;
 import seedu.staffsnap.logic.commands.StatusCommand;
@@ -66,6 +66,9 @@ public class ApplicantBookParser {
 
         isConfirmed = isConfirmedNext;
         isConfirmedNext = false;
+        if (isConfirmed) {
+            return new ClearCommandParser().parse(commandWord.toLowerCase());
+        }
 
         switch (commandWord.toLowerCase()) {
 
@@ -78,13 +81,6 @@ public class ApplicantBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            if (isConfirmed) {
-                return new ClearCommand();
-            } else {
-                logger.finer("This user input caused a ParseException: " + userInput);
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-            }
         case ConfirmationCommand.COMMAND_WORD:
             isConfirmedNext = true;
             return new ConfirmationCommand();
@@ -119,6 +115,8 @@ public class ApplicantBookParser {
         case StatusCommand.COMMAND_WORD:
             return new StatusCommandParser().parse(arguments);
 
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

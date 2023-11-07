@@ -7,7 +7,7 @@ import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_BEHAVIORAL;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_AMY;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
 import static seedu.staffsnap.testutil.TypicalApplicants.AMY;
@@ -90,12 +90,103 @@ public class ApplicantTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different position -> returns false
-        editedAlice = new ApplicantBuilder(ALICE).withPosition(VALID_POSITION_BOB).build();
+        editedAlice = new ApplicantBuilder(ALICE).withPosition(VALID_POSITION_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different interviews -> returns false
         editedAlice = new ApplicantBuilder(ALICE).withInterviews(VALID_INTERVIEW_BEHAVIORAL).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void compareByName_ascending() {
+        Applicant.setIsDescendingOrder(false);
+        assertTrue(ALICE.compareByName(BOB) < 0);
+    }
+
+    @Test
+    public void compareByName_descending() {
+        Applicant.setIsDescendingOrder(true);
+        assertTrue(ALICE.compareByName(BOB) > 0);
+    }
+
+    @Test
+    public void compareByPhone_ascending() {
+        Applicant.setIsDescendingOrder(false);
+        Applicant applicant1 = new ApplicantBuilder(ALICE).withPhone("88888888").build();
+        Applicant applicant2 = new ApplicantBuilder(ALICE).withPhone("99999999").build();
+        assertTrue(applicant1.compareByPhone(applicant2) < 0);
+    }
+
+    @Test
+    public void compareByPhone_descending() {
+        Applicant.setIsDescendingOrder(true);
+        Applicant applicant1 = new ApplicantBuilder(ALICE).withPhone("88888888").build();
+        Applicant applicant2 = new ApplicantBuilder(ALICE).withPhone("99999999").build();
+        assertTrue(applicant1.compareByPhone(applicant2) > 0);
+    }
+
+    @Test
+    public void compareByScore_ascending() {
+        Applicant.setIsDescendingOrder(false);
+        Applicant applicant1 = new ApplicantBuilder(ALICE).withScore(new Score(10, 5, 2)).build();
+        Applicant applicant2 = new ApplicantBuilder(ALICE).withScore(new Score(20, 10, 2)).build();
+        assertTrue(applicant1.compareByScore(applicant2) < 0);
+    }
+
+    @Test
+    public void compareByScore_descending() {
+        Applicant.setIsDescendingOrder(true);
+        Applicant applicant1 = new ApplicantBuilder(ALICE).withScore(new Score(10, 5, 2)).build();
+        Applicant applicant2 = new ApplicantBuilder(ALICE).withScore(new Score(20, 10, 2)).build();
+        assertTrue(applicant1.compareByScore(applicant2) > 0);
+    }
+    @Test
+    public void compareByEmail_ascending() {
+        Applicant.setIsDescendingOrder(false);
+        Applicant applicant1 = new ApplicantBuilder(ALICE).withEmail("abc@example.com").build();
+        Applicant applicant2 = new ApplicantBuilder(ALICE).withEmail("bbc@example.com").build();
+        assertTrue(applicant1.compareByEmail(applicant2) < 0);
+    }
+
+    @Test
+    public void compareByEmail_descending() {
+        Applicant.setIsDescendingOrder(true);
+        Applicant applicant1 = new ApplicantBuilder(ALICE).withEmail("abc@example.com").build();
+        Applicant applicant2 = new ApplicantBuilder(ALICE).withEmail("bbc@example.com").build();
+        assertTrue(applicant1.compareByEmail(applicant2) > 0);
+    }
+
+    @Test
+    public void compareByStatus_ascending() {
+        Applicant.setIsDescendingOrder(false);
+        Applicant applicant1 = new ApplicantBuilder(ALICE).withStatus("UNDECIDED").build();
+        Applicant applicant2 = new ApplicantBuilder(ALICE).withStatus("OFFERED").build();
+        assertTrue(applicant1.compareByStatus(applicant2) < 0);
+    }
+
+    @Test
+    public void compareByStatus_descending() {
+        Applicant.setIsDescendingOrder(true);
+        Applicant applicant1 = new ApplicantBuilder(ALICE).withStatus("UNDECIDED").build();
+        Applicant applicant2 = new ApplicantBuilder(ALICE).withStatus("OFFERED").build();
+        assertTrue(applicant1.compareByStatus(applicant2) > 0);
+    }
+
+    @Test
+    public void compareByPosition_ascending() {
+        Applicant.setIsDescendingOrder(false);
+        Applicant applicant1 = new ApplicantBuilder(ALICE).withPosition("abc").build();
+        Applicant applicant2 = new ApplicantBuilder(ALICE).withPosition("bbc").build();
+        assertTrue(applicant1.compareByPosition(applicant2) < 0);
+    }
+
+    @Test
+    public void compareByPosition_descending() {
+        Applicant.setIsDescendingOrder(true);
+        Applicant applicant1 = new ApplicantBuilder(ALICE).withPosition("abc").build();
+        Applicant applicant2 = new ApplicantBuilder(ALICE).withPosition("bbc").build();
+        assertTrue(applicant1.compareByPosition(applicant2) > 0);
     }
 
     @Test

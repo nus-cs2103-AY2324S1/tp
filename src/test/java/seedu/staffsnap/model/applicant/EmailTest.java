@@ -44,6 +44,7 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peter@jack@example.com")); // '@' symbol in local part
         assertFalse(Email.isValidEmail("-peterjack@example.com")); // local part starts with a hyphen
         assertFalse(Email.isValidEmail("peterjack-@example.com")); // local part ends with a hyphen
+        assertFalse(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // exceed 30 characters
         // local part has two consecutive periods
         assertFalse(Email.isValidEmail("peter..jack@example.com"));
         assertFalse(Email.isValidEmail("peterjack@example@com")); // '@' symbol in domain name
@@ -63,8 +64,6 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("123@145")); // numeric local part and domain name
         // mixture of alphanumeric and special characters
         assertTrue(Email.isValidEmail("a1+be.d@example1.com"));
-        assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
-        assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
     }
 

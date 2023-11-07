@@ -14,8 +14,8 @@ public class Score {
     public static final String MESSAGE_CONSTRAINTS =
             "Score should have non-negative total score to 1dp, non-negative average score 1dp and non-negative"
                     + " number of ratings";
-    private double totalScore = 0.0;
-    private double averageScore = 0.0;
+    private Double totalScore = 0.0;
+    private Double averageScore = 0.0;
     private int numberOfRatings = 0;
     /**
      * Constructs a {@code Score}.
@@ -128,7 +128,7 @@ public class Score {
      *
      * @return averageScore The average score of the applicant.
      */
-    public double getAverageScore() {
+    public Double getAverageScore() {
         return averageScore;
     }
 
@@ -137,7 +137,7 @@ public class Score {
      *
      * @return totalScore The total score of the applicant.
      */
-    public double getTotalScore() {
+    public Double getTotalScore() {
         return totalScore;
     }
 

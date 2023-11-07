@@ -97,7 +97,7 @@ public class ModelManagerTest {
 
     @Test
     public void updateSortedApplicantList_setDescriptor_changesDescriptor() {
-        modelManager.updateSortedApplicantList(Descriptor.PHONE);
+        modelManager.updateSortedApplicantList(Descriptor.PHONE, false);
         assert(Applicant.getDescriptor() == Descriptor.PHONE);
     }
     @Test

@@ -97,7 +97,7 @@ public interface Model {
     /**
      * Updates the Descriptor for sorting Applicants.
      */
-    void updateSortedApplicantList(Descriptor descriptor);
+    void updateSortedApplicantList(Descriptor descriptor, Boolean descendingOrder);
 
     /**
      * Refreshes the applicant list and keeps the same predicate

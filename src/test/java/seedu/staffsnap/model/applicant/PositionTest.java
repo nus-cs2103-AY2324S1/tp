@@ -27,12 +27,12 @@ public class PositionTest {
         // invalid positions
         assertFalse(Position.isValidPosition("")); // empty string
         assertFalse(Position.isValidPosition(" ")); // spaces only
+        assertFalse(Position.isValidPosition(
+                "Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // more than 30 characters
 
         // valid positions
         assertTrue(Position.isValidPosition("Blk 456, Den Road, #01-355"));
         assertTrue(Position.isValidPosition("-")); // one character
-        assertTrue(Position.isValidPosition(
-                "Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long position
     }
 
     @Test

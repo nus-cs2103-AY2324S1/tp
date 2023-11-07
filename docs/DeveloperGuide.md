@@ -13,8 +13,8 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well }_
+Staff-Snap is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org), and it incorporates the following third-party libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://junit.org/junit5/), [OpenCSV](https://opencsv.sourceforge.net/project-info.html), [TestFX](https://testfx.github.io/TestFX/docs/javadoc/testfx-core/javadoc/org.testfx/module-summary.html).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
-  API `interface` mentioned in the previous point.
+  API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
 the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component
@@ -83,11 +83,11 @@ in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts
-e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`,
+e.g.`CommandBox`, `ResultDisplay`, `ApplicantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`,
 inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
 visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
 the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
@@ -98,12 +98,11 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Applicant` object residing in the `Model`.
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -121,11 +120,11 @@ PlantUML, the lifeline reaches the end of diagram.
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
+1. When `Logic` is called upon to execute a command, it is passed to an `ApplicantBookParser` object which in turn creates
    a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
    is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a applicant).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -134,183 +133,54 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
+* When called upon to parse a user command, the `ApplicantBookParser` class creates an `XYZCommandParser` (`XYZ` is a
   placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
+  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ApplicantBookParser` returns back as
   a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the applicant book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
+* stores the applicant book data i.e., all `Applicant` objects (which are contained in a `UniqueApplicantList` object).
+* stores the currently 'selected' `Applicant` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<Applicant>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`,
-which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of
-each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 
-* can save both applicant book data and user preference data in JSON format, and read them back into corresponding
-  objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+* can save both applicant book data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `ApplicantBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.staffsnap.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
-
-* `VersionedAddressBook#commit()`— Saves the current applicant book state in its history.
-* `VersionedAddressBook#undo()`— Restores the previous applicant book state from its history.
-* `VersionedAddressBook#redo()`— Restores a previously undone applicant book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
-and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
-initial applicant book state, and the `currentStatePointer` pointing to that single applicant book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the applicant book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the applicant book after the `delete 5` command
-executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted
-applicant book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also
-calls `Model#commitAddressBook()`, causing another modified applicant book state to be saved into
-the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the applicant book state
-will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous applicant book state, and restores the applicant book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no
-previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the
-case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the
-lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the applicant book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest applicant
-book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()`
-to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the applicant book, such
-as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all applicant book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire applicant book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 ### Add applicant feature
 
@@ -331,14 +201,10 @@ The edit applicant feature allows users to edit the details of an applicant.
 
 #### Steps to trigger
 1. The user launches the application.
-2. The user executes `edit 1 hp/87654321 p/front-end engineer` to edit the phone number and position of 
-the first applicant.
-3. The `EditCommandParser#parse()` checks whether the index of the applicant is valid and at least one prefix with
-the required values are provided.
-4. If the check is successful, the `EditCommand#execute()` checks if the identity of the applicant after the edit 
-is the same as the identity of another existing applicant. 
-5. If the identity is not the same, the `Model#setApplicant()` updates the details of the applicant while
-the `Model#updateFilteredApplicantList()` updates applicant list to display the updated applicant list.
+2. The user executes `edit 1 hp/87654321 p/front-end engineer` to edit the phone number and position of the first applicant.
+3. The `EditCommandParser#parse()` checks whether the index of the applicant is valid and at least one prefix with the required values are provided.
+4. If the check is successful, the `EditCommand#execute()` checks if the identity of the applicant after the edit is the same as the identity of another existing applicant. 
+5. If the identity is not the same, the `Model#setApplicant()` updates the details of the applicant while the `Model#updateFilteredApplicantList()` updates applicant list to display the updated applicant list.
 
 ### Help feature
 
@@ -370,19 +236,14 @@ the `Model#updateFilteredApplicantList()` updates applicant list to display the 
 #### Implementation
 
 1. This features requires the state of the parser to be known.
-2. The parser is modified to store the previous taken in command, in this case whether the previous command was a
-   successful clear command.
-3. If the previous command is not a clear command, it looks for the keyword clear. Otherwise, it looks for the keyword
-   yes.
-4. Hence, the user will first need to call clear, before calling yes to invoke the clear mechanism, ensuring safety of
-   data.
+2. The parser is modified to store the previous taken in command, in this case whether the previous command was a successful clear command.
+3. If the previous command is not a clear command, it looks for the keyword clear. Otherwise, it looks for the keyword yes.
+4. Hence, the user will first need to call clear, before calling yes to invoke the clear mechanism, ensuring safety of data.
 
 #### Notes
 
-1. If you would like to extend the code for more features that require state, please do change the case condition for
-   this feature.
-2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future
-   update.
+1. If you would like to extend the code for more features that require state, please do change the case condition for this feature.
+2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future update.
 3. The state of the parser, rather than the app is used to reduce the chances of accidental clears.
 
 ### Interview feature
@@ -396,37 +257,21 @@ implementation process.
 
 #### Implementation
 
-The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`.
-The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in 
-an interview (out of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and 
-`DeleteInterviewCommand`. These are implementation in a largely similar manner to the `Applicant` class. The main difference is in how 
-an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the 
-applicant index as well as the chosen interview index.
+The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`. The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in an interview (out of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and `DeleteInterviewCommand`. These are implementation in a largely similar manner to the `Applicant` class. The main difference is in how an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the applicant index as well as the chosen interview index.
 
 #### Design Considerations
 
-In deciding the data structure to house our Interview objects, we were torn between using a `PriorityQueue` and a `List`.
-A `PriorityQueue` would have been useful in sorting the interviews by rating, but it would have been difficult to implement
-the `EditInterviewCommand` and `DeleteInterviewCommand` as the `PriorityQueue` does not have a `get()` method. Also, if we wanted to
-extend a sorting function for interviews in the future, a `PriorityQueue` would make it more difficult for us to change the comparator
-for `Interview` objects. For the sake of extensibility of the codebase, we decided to use a `List` instead. This is because a `List` 
-provides us with greater abstraction and code flexibility in extending various functions for the `Interview` class. 
+In deciding the data structure to house our Interview objects, we were torn between using a `PriorityQueue` and a `List`. A `PriorityQueue` would have been useful in sorting the interviews by rating, but it would have been difficult to implement the `EditInterviewCommand` and `DeleteInterviewCommand` as the `PriorityQueue` does not have a `get()` method. Also, if we wanted to extend a sorting function for interviews in the future, a `PriorityQueue` would make it more difficult for us to change the comparator for `Interview` objects. For the sake of extensibility of the codebase, we decided to use a `List` instead. This is because a `List` provides us with greater abstraction and code flexibility in extending various functions for the `Interview` class. 
 
 ### Sort feature
 
 #### Implementation
 
-The sort feature is facilitated by `Descriptor`, an enumeration which describes the valid fields which can be used to
-sort an applicant.
+The sort feature is facilitated by `Descriptor`, an enumeration which describes the valid fields which can be used to sort an applicant.
 
-To enable sorting, `Applicant` implements `Comparable<Applicant>`, to allow for comparison between applicants.
-To allow for applicants to be sorted by different descriptors, `Applicant` is augmented to contain a static `Descriptor`
-field. This is used in `Applicant#compareTo()`, where a switch case checking the state of the `Descriptor` field will
-then compare the specified field of both applicants.
+To enable sorting, `Applicant` implements `Comparable<Applicant>`, to allow for comparison between applicants. To allow for applicants to be sorted by different descriptors, `Applicant` is augmented to contain a static `Descriptor` field. This is used in `Applicant#compareTo()`, where a switch case checking the state of the `Descriptor` field will then compare the specified field of both applicants.
 
-In order to enable comparison of each valid field, these fields will implement the `Comparable` interface. Currently
-valid
-fields for sorting are
+In order to enable comparison of each valid field, these fields will implement the `Comparable` interface. Currently valid fields for sorting are
 
 1. Name
 2. Phone
@@ -469,12 +314,9 @@ The following diagram summarises what happens when a user executes a Sort comman
 
 #### Implementation
 
-The filter feature works by updating the `Predicate` used in the `FilteredList<Applicant>` of `ModelManager`. Using
-the predicate, minimal changes to the implementation of StaffSnap is required.
+The filter feature works by updating the `Predicate` used in the `FilteredList<Applicant>` of `ModelManager`. Using the predicate, minimal changes to the implementation of StaffSnap is required.
 
-To create a single predicate that is able to search and filter for multiple fields, a `CustomFilterPredicate` class is
-created
-It currently contains the following fields and is able to filter for applicants which match all specified fields.
+To create a single predicate that is able to search and filter for multiple fields, a `CustomFilterPredicate` class is created. It currently contains the following fields and is able to filter for applicants which match all specified fields.
 
 1. Name
 2. Phone
@@ -485,8 +327,7 @@ It currently contains the following fields and is able to filter for applicants 
 7. Greater than score
 
 When `CustomFilterPredicate#test` is called, it will check if the specified fields are a substring of the same field of
-the applicant,
-returning true if all specified fields match, and false otherwise.
+the applicant, returning true if all specified fields match, and false otherwise.
 
 #### Steps to trigger
 
@@ -495,7 +336,7 @@ returning true if all specified fields match, and false otherwise.
    be filtered by
 
 Once step 2 is complete, the GUI will update and refresh the applicant list with only applicants which match all
-specified fields.
+specified fields. 
 The following diagram summarises what happens when a user executes a Filter command:
 
 <puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommandActivityDiagram" />
@@ -536,21 +377,14 @@ The following diagram summarises what happens when a user executes a Filter comm
 ### Find feature
 
 #### Purpose
-The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient 
-way of finding and tracking specific candidates.
+The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient way of finding and tracking specific candidates.
 
 #### Implementation
-After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`, the input is passed to
-the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords in the input 
-and creates a list of keywords.
+After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`, the input is passed to the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords in the input and creates a list of keywords.
 
-`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords.
-This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object.
-`LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by
-calling `ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
+`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords. This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object. `LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by calling `ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
 
-An instance of `CommandResult` is then created which contains the message and information that will be displayed to
-the user. The GUI then updates to show this information to the user.
+An instance of `CommandResult` is then created which contains the message and information that will be displayed to the user. The GUI then updates to show this information to the user.
 
 
 #### Steps to trigger
@@ -564,8 +398,8 @@ the user. The GUI then updates to show this information to the user.
 1. The search is case-insensitive, e.g. `find JOHN` will return both john and John. 
 2. The order of the keywords does not matter. e.g. `find Alice Tan` will match Tan Alice. 
 3. Only the applicant name is searched. 
-4. Any person whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
-   Persons matching at least one keyword will be returned (i.e. OR search). 
+4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
+   Applicants matching at least one keyword will be returned (i.e. OR search). 
    e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
 
 
@@ -594,8 +428,7 @@ the user. The GUI then updates to show this information to the user.
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: introduces organisation to applicant management, recruitment processes and
-streamlines hiring decisions
+**Value proposition**: introduces organisation to applicant management, recruitment processes and streamlines hiring decisions
 
 ### User stories
 
@@ -706,7 +539,7 @@ Guarantees: The applicants with name matching the search will be listed.
 
 **MSS**
 
-1. User inputs the command to to find an applicant by name.
+1. User inputs the command to find an applicant by name.
 2. Staff-Snap displays the list of all applicants that match the search.
 
    Use case ends.
@@ -888,6 +721,8 @@ Guarantees: A new interview will be added to the applicant.
   (e.g. a `.txt` file)
 * **Graphical User Interface (GUI)**: A type of user interface that allows users to interact with software through
   graphical icons and visual indicators.
+* **UI**:
+* 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -919,28 +754,18 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting an applicant
 
-1. Deleting a person while all persons are being shown
+1. Deleting an applicant while all applicants are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     1. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
        Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No applicant is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_

@@ -4,11 +4,11 @@ package seedu.staffsnap.model.applicant;
  * Enum for valid Descriptors
  */
 public enum Descriptor {
-    NAME, PHONE;
+    NAME, PHONE, SCORE, EMAIL, POSITION, STATUS;
 
     public static final String MESSAGE_CONSTRAINTS =
             "Descriptors should be one of the following:\n"
-            + "Name, Phone";
+            + "Name, Phone, Score, Email, Position, Status";
 
     /**
      * Finds the correct descriptor by the string given

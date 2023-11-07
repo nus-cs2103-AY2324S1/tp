@@ -2,7 +2,7 @@
   "baseUrl": "",
   "titlePrefix": "Staff-Snap",
   "titleSuffix": "",
-  "faviconPath": "images/SeEduLogo.png",
+  "faviconPath": "images/ss_logo.png",
   "style": {
     "codeTheme": "light"
   },
@@ -22,6 +22,7 @@
       "glob": ["**/index.md", "**/*.md"]
     }
   ],
+  "headingIndexingLevel": 4,
   "deploy": {
     "message": "Site Update."
   },

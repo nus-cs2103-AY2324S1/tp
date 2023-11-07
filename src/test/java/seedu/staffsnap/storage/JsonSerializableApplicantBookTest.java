@@ -29,7 +29,7 @@ public class JsonSerializableApplicantBookTest {
         JsonSerializableApplicantBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_APPLICANTS_FILE,
                 JsonSerializableApplicantBook.class).get();
         ApplicantBook applicantBookFromFile = dataFromFile.toModelType();
-        ApplicantBook typicalApplicantsApplicantBook = TypicalApplicants.getTypicalApplicantBook();
+        ApplicantBook typicalApplicantsApplicantBook = TypicalApplicants.getTypicalApplicantBookJsonTest();
         assertEquals(applicantBookFromFile, typicalApplicantsApplicantBook);
     }
 

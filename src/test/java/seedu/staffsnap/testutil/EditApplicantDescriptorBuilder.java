@@ -10,6 +10,8 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Score;
+import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 import seedu.staffsnap.model.interview.Rating;
 
@@ -38,6 +40,7 @@ public class EditApplicantDescriptorBuilder {
         descriptor.setEmail(applicant.getEmail());
         descriptor.setPosition(applicant.getPosition());
         descriptor.setInterviews(applicant.getInterviews());
+        descriptor.setScore(applicant.getScore());
     }
 
     /**
@@ -80,6 +83,22 @@ public class EditApplicantDescriptorBuilder {
         List<Interview> interviewList = Stream.of(interviews).map(interview ->
                 new Interview(interview, new Rating("-"))).collect(Collectors.toList());
         descriptor.setInterviews(interviewList);
+        return this;
+    }
+
+    /**
+     * Sets the {@code score} of the {@code EditApplicantDescriptor} that we are building.
+     */
+    public EditApplicantDescriptorBuilder withScore(Score score) {
+        descriptor.setScore(new Score(score));
+        return this;
+    }
+
+    /**
+     * Sets the {@code score} of the {@code EditApplicantDescriptor} that we are building.
+     */
+    public EditApplicantDescriptorBuilder withStatus(String status) {
+        descriptor.setStatus(Status.findByName(status));
         return this;
     }
 

@@ -7,9 +7,10 @@ import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
  * Represents a Applicant's position in the applicant book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPosition(String)}
  */
-public class Position {
+public class Position implements Comparable<Position> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Positions can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Positions can take any values, should not be blank "
+            + "and should not be more than 30 characters";
 
     /*
      * The first character of the position must not be a whitespace,
@@ -34,7 +35,7 @@ public class Position {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidPosition(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 30;
     }
 
     @Override
@@ -62,4 +63,8 @@ public class Position {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Position o) {
+        return this.value.compareTo(o.value);
+    }
 }
