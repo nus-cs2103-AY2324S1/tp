@@ -58,7 +58,6 @@ class AddLessonCommandTest {
 
     @Test
     public void clash_withItself_true() throws ParseException {
-
         Lesson lesson1 = new Lesson("Test name", "10:00", "12:00", "20", "Chemistry",
                 taskList);
         assertTrue(lesson1.isClashWith(lesson1));
