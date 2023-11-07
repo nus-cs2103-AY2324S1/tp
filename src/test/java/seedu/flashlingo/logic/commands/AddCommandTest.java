@@ -45,8 +45,8 @@ public class AddCommandTest {
                 validFlashCard.getTranslatedWord())
                 .execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validFlashCard.getOriginalWord(),
-                        validFlashCard.getTranslatedWord()),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validFlashCard.getOriginalWord().getWord(),
+                        validFlashCard.getTranslatedWord().getWord()),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validFlashCard), modelStub.flashCardsAdded);
     }
