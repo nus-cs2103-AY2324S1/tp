@@ -435,6 +435,19 @@ due to the presence of the special character `'` in the event name.
 We propose to allow the `createMember`, `editMember` , `createEvent` and `editEvent` commands to accept special 
 characters in the name field and not to be restricted to just alphanumeric characters.
 
+### Show a more specific error message for negative index in `editMember` and `editEvent`
+**Current Implementation:**
+* **Current Issue:** When the user inputs a negative index for the `editMember` or `editEvent` commands, the displayed error
+message is not specific enough and does not make it clear to the user that he/she has wrongly input a negative index.
+* **Example:** The user enters the command `editMember -1 n/Jane Smith` and the error message displayed is 
+"Invalid command format!... Parameters: INDEX (must be a positive integer)...". The current error message fails to 
+highlight to the user the root cause of the error, which is a negative member index.
+
+**Proposed Solution:**
+
+We propose to make `editMember` and `editEvent` commands display a more specific error message along the lines of "The 
+provided index is negative and should be a positive integer instead." when the user inputs a negative index. In order 
+to implement this, the relevant `CommandParser` classes have to recognise negative indexes and throw more specific exceptions.
 
 --------------------------------------------------------------------------------------------------------------------
 
