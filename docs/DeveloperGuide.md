@@ -1064,3 +1064,4 @@ status which should also be included in the `list-s` command for users to have a
 3. When `ListScheduleCommand:execute` runs, the command should accept another integer input from `m/` parameter that represents the `PENDING` status.
 4. Then `Model::updateFilteredScheduleList` will take in `StatusPredicate.java` to filter schedules based on `PENDING` status.
 5. To show that schedules are filtered to `PENDING` status only, we can also update `ScheduleCard.java` to include a component and change the UI's background according to the schedule's status, such green for `COMPLETED`, red for `MISSED` and grey for `PENDING`.
+
