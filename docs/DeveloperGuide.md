@@ -412,7 +412,7 @@ type both the old and new tags instead of just typing the new tag.
 add a new tag `early` to her. Upon entering the command `editMember 1 t/early`, the current implementation will override 
 all the initial tags and only the `early` tag will be displayed.
 
-**Proposed solution:**
+**Proposed Solution:**
 
 We propose to enhance the `editMember`/`editEvent` commands to give the user the flexibility to choose one of the following options
 when editing the tags of the member/event:
@@ -420,6 +420,25 @@ when editing the tags of the member/event:
 2. Add new tag to the list of old tags where the old tags will remain attached to the member/event with the addition of the new tags
 3. Edit current list of tags attached to the member/event
 4. Delete specific tags from the current list of tags attached to the member/event
+
+
+### Provide specific error messages for unknown prefixes
+**Current Implementation**
+* **Current Issue**: Many of the commands require the use of prefixes in the input, such as `n/`, `g/`, `p/`, etc.
+However, upon inputting an erroneous unknown prefix in the command input, the error message shown to the user is not accurate.
+The error message displayed will be based on the error message of the preceding prefix.
+* **Example**: The user inputs the command `createMember n/Jane Smith g/Female q/test` but the error message displayed
+will not highlight that the unknown `q/` prefix was typed in. The error message displayed to the user will be "Gender 
+should only be one of the following: Male, Female, or Others" which is based off the standard error message
+for gender prefixes, which happens to be the prefix preceding the `q/` prefix.
+
+**Proposed Solution:**
+
+We propose to display a more specific error message to the users if they input unknown prefixes. For example, if the user 
+provides the command, `createMember n/Jane Smith g/Female q/test`, an error message along the lines of "The 
+q/ prefix is not a correct prefix for this command." will be displayed. This will involve us improving the relevant 
+`CommandParser` classes to properly sieve out cases of unknown prefixes being entered and throwing more
+specific exceptions related to such issues.
 
 
 --------------------------------------------------------------------------------------------------------------------
