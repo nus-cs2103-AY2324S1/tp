@@ -13,11 +13,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.member.Member;
-import seedu.address.model.member.Telegram;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Member;
+import seedu.address.model.person.fields.Email;
+import seedu.address.model.person.fields.Name;
+import seedu.address.model.person.fields.Phone;
+import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,11 +41,33 @@ public class AddMemberCommandParser implements Parser<AddMemberCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM);
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+
+
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+
+        if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
         Telegram telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
+
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
 
         Member member = new Member(name, phone, email, telegram, tagList);
 

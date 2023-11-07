@@ -7,12 +7,15 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.member.Member;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Applicant;
+import seedu.address.model.person.Member;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,11 +25,16 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
     private final FilteredList<Member> filteredMembers;
+    private final FilteredList<Applicant> filteredApplicants;
+    private final FilteredList<Tag> filteredTags;
+    private final ObservableList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     *
+     * @param addressBook The addressBook to be used.
+     * @param userPrefs   The userPrefs to be used.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
@@ -35,10 +43,17 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
+        filteredApplicants = new FilteredList<>(this.addressBook.getApplicantList());
+        filteredTags = new FilteredList<>(this.addressBook.getTagList());
+
+        // Displayed tasks should be empty at first
+        filteredTasks = FXCollections.observableArrayList();
     }
 
+    /**
+     * Default constructor.
+     */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
@@ -91,48 +106,67 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
-    }
-
-    @Override
     public boolean hasMember(Member member) {
         requireNonNull(member);
         return addressBook.hasMember(member);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return addressBook.hasApplicant(applicant);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteMember(Member target) {
+        addressBook.removeMember(target);
+        addressBook.updateTags();
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void deleteApplicant(Applicant target) {
+        addressBook.removeApplicant(target);
+    }
 
-        addressBook.setPerson(target, editedPerson);
+    @Override
+    public void addMember(Member member) {
+        addressBook.addMember(member);
+        addressBook.updateTags();
+
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
+    }
+
+    @Override
+    public void addApplicant(Applicant applicant) {
+        addressBook.addApplicant(applicant);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setMember(Member target, Member editedMember) {
+        requireAllNonNull(target, editedMember);
+
+        addressBook.setMember(target, editedMember);
+        addressBook.updateTags();
+
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
+    }
+
+    @Override
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
+        requireAllNonNull(target, editedApplicant);
+
+        addressBook.setApplicant(target, editedApplicant);
+
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Member} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -140,22 +174,50 @@ public class ModelManager implements Model {
         return filteredMembers;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Applicant} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+    public ObservableList<Applicant> getFilteredApplicantList() {
+        return filteredApplicants;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Tag} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Tag> getFilteredTagList() {
+        return filteredTags;
     }
 
     @Override
-    public void updateFilteredMembersList(Predicate<Member> predicate) {
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void setTaskListForMember(Member member) {
+        this.filteredTasks.setAll(member.getTasks());
+    }
+
+    @Override
+    public void updateFilteredMemberList(Predicate<? super Member> predicate) {
         requireNonNull(predicate);
         filteredMembers.setPredicate(predicate);
     }
 
     @Override
-    public void addMember(Member member) {
-        addressBook.addMember(member);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void updateFilteredApplicantList(Predicate<? super Applicant> predicate) {
+        requireNonNull(predicate);
+        filteredApplicants.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTagList(Predicate<? super Tag> predicate) {
+        requireNonNull(predicate);
+        filteredTags.setPredicate(predicate);
     }
 
     @Override
@@ -171,8 +233,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredMembers.equals(otherModelManager.filteredMembers)
+            && filteredApplicants.equals(otherModelManager.filteredApplicants);
     }
 
 }
