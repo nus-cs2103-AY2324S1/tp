@@ -86,7 +86,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        String userInput = COMMAND_WORD + NAME_DESC_BOB  + PHONE_DESC_BOB + EMAIL_DESC_AMY;
+        String userInput = COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
@@ -98,19 +98,19 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // phone
-        String userInput = COMMAND_WORD + NAME_DESC_BOB  + PHONE_DESC_AMY;
+        String userInput = COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         EditCommand expectedCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = COMMAND_WORD + NAME_DESC_BOB  + EMAIL_DESC_AMY;
+        userInput = COMMAND_WORD + NAME_DESC_BOB + EMAIL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
-        userInput = COMMAND_WORD + NAME_DESC_BOB  + ADDRESS_DESC_AMY;
+        userInput = COMMAND_WORD + NAME_DESC_BOB + ADDRESS_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -149,7 +149,7 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_failure() {
 
         // valid followed by invalid
-        String userInput = COMMAND_WORD + NAME_DESC_BOB+ INVALID_PHONE_DESC + PHONE_DESC_BOB;
+        String userInput = COMMAND_WORD + NAME_DESC_BOB + INVALID_PHONE_DESC + PHONE_DESC_BOB;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
