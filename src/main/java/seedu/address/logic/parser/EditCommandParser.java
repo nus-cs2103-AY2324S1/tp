@@ -49,16 +49,20 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editRoomDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
+
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editRoomDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
+
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editRoomDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
+
         if (argMultimap.getValue(PREFIX_BOOKING_PERIOD).isPresent()) {
             editRoomDescriptor.setBookingPeriod(ParserUtil.parseBookingPeriod(argMultimap
                     .getValue(PREFIX_BOOKING_PERIOD).get()));
         }
+
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             editRoomDescriptor.setRemark(ParserUtil.parseRemark(argMultimap
                     .getValue(PREFIX_REMARK).get()));
