@@ -86,25 +86,6 @@ public abstract class Word {
     }
 
     /**
-     * Checks whether this word is equal to the passed object
-     * @param other Passed object to check equality against
-     * @return True or False depending on whether this and other are equal
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Word)) {
-            return false;
-        }
-        Word otherWord = (Word) other;
-        return otherWord.word.equals(this.word) && otherWord.language.equals(this.language);
-    }
-
-    /**
      * Evaluates and returns String representation of this Word
      * @return String representation of this Word
      */
