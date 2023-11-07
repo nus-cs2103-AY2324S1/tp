@@ -49,15 +49,15 @@ public class TypicalPersons {
             .withPhone("9482427").withEmail("lydia@example.com").withAddress("little tokyo").build();
 
     // TODO: Replace George ID with non-duplicate after EditCommand is implemented.
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withId("T7243948H")
+    public static final Person GEORGE = new PersonBuilder().withName("George Best").withId("G2767543H")
             .withAppointment("12-Dec-2023 12:00 15:00").withPhone("9482442").withEmail("anna@example.com")
             .withAddress("4th street").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").build();
+            .withNric("S3333333H").withEmail("stefan@example.com").withAddress("little india").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").build();
+            .withNric("T4444444I").withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
