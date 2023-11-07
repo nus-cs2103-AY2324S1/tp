@@ -45,7 +45,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setGender(student.getGender());
         descriptor.setSecLevel(student.getSecLevel());
         descriptor.setNearestMrtStation(student.getNearestMrtStation());
-        descriptor.setSubjects(student.getSubjects());
+        if (!student.getSubjects().isEmpty()) {
+            descriptor.setSubjects(student.getSubjects());
+        }
     }
 
     /**
