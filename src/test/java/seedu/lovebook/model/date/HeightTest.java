@@ -54,4 +54,21 @@ public class HeightTest {
         // different values -> returns false
         assertFalse(height.equals(new Height("30")));
     }
+
+    @Test
+    void compareTo() {
+        Height height = new Height("20");
+
+        // same values -> returns true
+        assertTrue(height.compareTo(new Height("20")) == 0);
+
+        // same object -> returns true
+        assertTrue(height.compareTo(height) == 0);
+
+        // different values -> returns false
+        assertTrue(height.compareTo(new Height("30")) < 0);
+
+        // different values -> returns false
+        assertTrue(height.compareTo(new Height("10")) > 0);
+    }
 }

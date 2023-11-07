@@ -11,6 +11,18 @@ class StarTest {
     void testToString() {
         Star star = new Star("true");
 
+        assertTrue(star.equals(new Star("true")));
+
+        // Same object -> returns true
+        assertTrue(star.equals(star));
+
+        // different types -> returns false
+        assertFalse(star.equals(new Star("false")));
+        assertFalse(star.equals(1));
+        assertFalse(star.equals(1.0f));
+
+        // null -> returns false
+        assertFalse(star.equals(null));
     }
 
     @Test
