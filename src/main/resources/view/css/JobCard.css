@@ -16,7 +16,7 @@
     -fx-padding: 2px 5px;
 }
 
-.to_be_submitted {
+.to_add_status {
     -fx-background-color: #F4D5EE;
     -fx-background-radius: 5px;
 }
