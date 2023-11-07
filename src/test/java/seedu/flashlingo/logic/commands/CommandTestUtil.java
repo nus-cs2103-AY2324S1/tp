@@ -2,8 +2,7 @@ package seedu.flashlingo.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
-import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
+import static seedu.flashlingo.logic.parser.CliSyntax.*;
 import static seedu.flashlingo.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -33,9 +32,12 @@ public class CommandTestUtil {
     public static final String WORD_DESC_BOB = " " + PREFIX_ORIGINAL_WORD + VALID_ORIGINAL_WORD_BOB;
     public static final String TRANSLATION_DESC_AMY = " " + PREFIX_TRANSLATED_WORD + VALID_TRANSLATION_AMY;
     public static final String TRANSLATION_DESC_BOB = " " + PREFIX_TRANSLATED_WORD + VALID_TRANSLATION_BOB;
+    public static final String WORD_LANGUAGE_DESC = " " + PREFIX_ORIGINAL_WORD_LANGUAGE
+            + VALID_ORIGINAL_WORD_LANGUAGE;
+    public static final String TRANSLATION_LANGUAGE_DESC = " " + PREFIX_TRANSLATED_WORD_LANGUAGE
+            + VALID_TRANSLATION_LANGUAGE;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
 
     /**

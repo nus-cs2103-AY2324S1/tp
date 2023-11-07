@@ -58,8 +58,8 @@ public class FlashCardBuilder {
         return this;
     }
 
-    public FlashCardBuilder withOriginalWord(Word word) {
-        this.originalWord = new OriginalWord(word.getWord(), word.getLanguage());
+    public FlashCardBuilder withOriginalWord(String word) {
+        this.originalWord = new OriginalWord(word);
         return this;
     }
 
@@ -71,8 +71,8 @@ public class FlashCardBuilder {
         return this;
     }
 
-    public FlashCardBuilder withTranslatedWord(Word word) {
-        this.translatedWord = new TranslatedWord(word.getWord(), word.getLanguage());;
+    public FlashCardBuilder withTranslatedWord(String translatedWord) {
+        this.translatedWord = new TranslatedWord(translatedWord);;
         return this;
     }
 

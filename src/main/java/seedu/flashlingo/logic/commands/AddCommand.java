@@ -87,7 +87,7 @@ public class AddCommand extends Command {
         }
 
         AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        return original.equals(otherAddCommand.original) && translated.equals(otherAddCommand.translated);
     }
 
     @Override
