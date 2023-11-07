@@ -29,6 +29,8 @@ public class ClassDetails {
     public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should an integer "
             + "between 1 and %s";
 
+    public static final String MESSAGE_INVALID_PARTICIPATION = "Participation should be "
+            + "either 'true' or 'false'.";
     public static final String MESSAGE_UNEQUAL_LENGTH = "The number of tutorial sessions and "
             + "attendance records should be equal.";
     public static final String MESSAGE_RECONFIGURE = " Please reconfigure Class Manager before "
