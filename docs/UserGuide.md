@@ -86,10 +86,20 @@ The **GUI** is split up into 4 main sections.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+### Class Number
+
+* Class Number refers to the tutorial class number of a particular course. 
+* Class Number is not case-sensitive, and it must begin with 1 to 3 alphabet letters, followed by 1 to 5 digits, and end with an optional single alphabetical character. Class Number must not be blank.
+* Here are some valid examples of Class Number:
+    - `G11`
+    - `T11A`
+    - `SG10`
+    - `ABC12345D`
+
 ### Student Number
 
-* Student Number refers to the unique matriculation number of a NUS student. It must begin with capital A, followed by any number of alphanumeric characters. It must not be blank.
-* Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive, other than the first capital A. e.g. If the Student Number is `A123V`, `A123v` also refers to the same student.
+* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the letter 'A' or 'a', followed by 1 or more digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
 
 ### Command navigation
 
@@ -104,20 +114,20 @@ The **GUI** is split up into 4 main sections.
 <box type="warning" seamless>
 
 **Caution:**
-Configuring Class Manager resets the class details (grades, attendance and class participation details) of all students. This **cannot** be undone. It is recommended to configure Class Manager before adding students.
+Configuring Class Manager resets the class details (grades, attendance and class participation details) of all students, as well as the past states of Class Manager. This **cannot** be undone using the `undo` command. It is recommended to configure Class Manager before adding students.
 </box>
 
 Before you begin using Class Manager, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, and allows Class Manager to automatically generate the correct number of class details fields for each student. <br><br>
-Class Manager can be configured _at any time_, but do take note of the warning above regarding **loss** of student data. If Class Manager is configured after adding students, each student will have the correct number of tutorials and assignments, but their class details data will be **reset**.
+Class Manager can be configured _at any time_, but do take note of the warning above regarding **loss** of student data and past Class Manager states. If you configure Class Manager after adding students, each student will have the correct number of tutorials and assignments. However, their class details data will be **reset** and there will be no previous states of Class Manager you can return to via the `undo` command.
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
-* `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` must be 0 or a positive integer.
+* `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` must be a positive integer between 1 and 40 inclusive.
 * Inputting the same `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` as the previous configuration will also **reset** the class details of all students.
 
 Examples:
 * `config #t/13 #a/1`
-* `config #a/4 #t/26`
+* `config #a/4 #t/39`
 
 ---
 
@@ -237,7 +247,8 @@ Format: `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_
 <box type="warning" seamless>
 
 **Caution:**
-_At least one_ of the optional fields must be provided. `lookup` alone is not allowed.
+_At least one_ of the optional fields must be provided. `lookup` alone is not allowed. <br>
+This command will not check for field validation. e.g. `lookup c/class 11` is allowed even though `class 11` is not a valid class number.
 </box>
 
 * The command is **case-insensitive**. e.g. `hans` will match `Hans`
@@ -273,7 +284,7 @@ Examples:
 
 ### Marking tutorial attendance for all students displayed as present : `present-all`
 
-Marking tutorial attendance for all students in current list displayed as present in Class Manager.
+Marking tutorial attendance for all students in the current list displayed as present in Class Manager.
 
 Format: `present-all tut/TUTORIAL_INDEX`
 
@@ -300,7 +311,7 @@ Examples:
 
 ### Marking tutorial attendance for all students displayed as absent : `absent-all`
 
-Marking tutorial attendance for all students in current list displayed as absent in the class manager.
+Marking tutorial attendance for all students in the current list displayed as absent in the class manager.
 
 Format: `absent-all tut/TUTORIAL_INDEX`
 
@@ -351,7 +362,7 @@ View the class details of a student that will be displayed on the right side of 
 
 Format: `view s/STUDENT_NUMBER`
 
-* The STUDENT_NUMBER must be valid e.g `T*`.
+* The STUDENT_NUMBER must be valid.
 * The STUDENT_NUMBER must belong to a student in Class Manager.
 
 Example:
@@ -368,7 +379,7 @@ Select a specific number of students from all students displayed in Class Manage
 
 Format: `random NUMBER_OF_STUDENTS`
 
-* The `NUMBER_OF_STUDENT` must be a valid positive integer, smaller than or equal to the number of current students displayed in the class manager.
+* The `NUMBER_OF_STUDENTS` must be a valid positive integer, smaller than or equal to the number of current students displayed in the class manager.
 
 Example:
 
@@ -555,7 +566,7 @@ Format: `theme`
 | [**Absent**](#marking-tutorial-attendance-for-a-student-as-absent-absent)                         | `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX` <br> e.g. `absent s/A0245234A tut/1`                                                                                   |
 | [**Present All**](#marking-tutorial-attendance-for-all-students-displayed-as-present-present-all) | `present-all tut/TUTORIAL_INDEX` <br> e.g. `present-all tut/1`                                                                                                      |
 | [**Absent All**](#marking-tutorial-attendance-for-all-students-displayed-as-absent-absent-all)    | `absent-all tut/TUTORIAL_INDEX` <br> e.g. `absent-all tut/1`                                                                                                        |
-| [**Random**](#selecting-students-randomly-random)                                                 | `random NUM_OF_STUDENTS` <br> e.g. `random 2`                                                                                                                       |
+| [**Random**](#selecting-students-randomly-random)                                                 | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2`                                                                                                                    |
 | [**Record Class Participation**](#record-class-participation-for-a-student-class-part)            | `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `class-part s/A0245234A tut/1 part/true`                                        |
 | [**Set Assignment Grade**](#setting-assignment-grade-for-a-student-grade)                         | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                                         |
 | [**Tag**](#tagging-a-student-tag)                                                                 | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                         |
@@ -566,7 +577,7 @@ Format: `theme`
 ## Glossary
 
 * **cd**: Change directory command in terminal/command line. cd takes the name of the folder you want to navigate to as an argument. The full command is cd `your-directory`.
-* **Student Number**: Matriculation number of NUS student. It must begin with capital A, followed by any number of alphanumeric characters. It must not be blank.
+* **Student Number**: Matriculation number of NUS student. In Class Manager, it must begin with the capital 'A', followed by 1 or more digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.
