@@ -76,10 +76,27 @@ public class ParserUtil {
     public static Deadline parseDeadline(String deadline) throws ParseException {
         requireNonNull(deadline);
         String trimmedDeadline = deadline.trim();
-        if (!Deadline.isValidDeadline(trimmedDeadline)) {
-            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+        String formattedDeadline = formatDeadline(trimmedDeadline);
+        if (!Deadline.isValidDeadline(formattedDeadline)) {
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS + formattedDeadline);
         }
-        return new Deadline(trimmedDeadline);
+        return new Deadline(formattedDeadline);
+    }
+
+    /**
+     * Format the input format of {@code Deadline} field to match the default LocalDateTime format.
+     *
+     * @param deadline String deadline to be formatted.
+     * @return The formatted deadline in String.
+     */
+    private static String formatDeadline(String deadline) {
+        String[] stringSplit = deadline.split(" ");
+        if (stringSplit.length >= 3) {
+            String month = stringSplit[0];
+            month = month.substring(0, 1).toUpperCase() + month.substring(1).toLowerCase();
+            stringSplit[0] = month;
+        }
+        return String.join(" ", stringSplit);
     }
 
     /**
