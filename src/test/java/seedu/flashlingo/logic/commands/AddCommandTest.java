@@ -5,25 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashlingo.logic.Messages.MESSAGE_SAME_WORD;
 import static seedu.flashlingo.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.flashlingo.commons.core.GuiSettings;
-import seedu.flashlingo.logic.commands.exceptions.CommandException;
-import seedu.flashlingo.model.Flashlingo;
-import seedu.flashlingo.model.ReadOnlyFlashlingo;
-import seedu.flashlingo.model.ReadOnlyUserPrefs;
-import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.words.OriginalWord;
-import seedu.flashlingo.model.flashcard.words.TranslatedWord;
-import seedu.flashlingo.model.Model;
-import seedu.flashlingo.testutil.FlashCardBuilder;
-
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
+import seedu.flashlingo.commons.core.GuiSettings;
+import seedu.flashlingo.logic.commands.exceptions.CommandException;
+import seedu.flashlingo.model.Flashlingo;
+import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.ReadOnlyFlashlingo;
+import seedu.flashlingo.model.ReadOnlyUserPrefs;
+import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
+import seedu.flashlingo.testutil.FlashCardBuilder;
 
 public class AddCommandTest {
 

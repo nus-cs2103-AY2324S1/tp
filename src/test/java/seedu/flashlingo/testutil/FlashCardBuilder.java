@@ -8,7 +8,6 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.ProficiencyLevel;
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
-import seedu.flashlingo.model.flashcard.words.Word;
 
 /**
  * A utility class to help with building FlashCard objects.
@@ -58,6 +57,9 @@ public class FlashCardBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code OriginalWord} of the {@code FlashCard} that we are building.
+     */
     public FlashCardBuilder withOriginalWord(String word) {
         this.originalWord = new OriginalWord(word);
         return this;
@@ -71,6 +73,9 @@ public class FlashCardBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code TranslatedWord} of the {@code FlashCard} that we are building.
+     */
     public FlashCardBuilder withTranslatedWord(String translatedWord) {
         this.translatedWord = new TranslatedWord(translatedWord);;
         return this;
