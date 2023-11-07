@@ -398,7 +398,7 @@ Examples:
 
 ### Generating a report : `report`
 
-Generates a report with details on leaves, overtime hours and remarks for an employee.
+Generates a report with details on leaves, overtime hours, overtime pay, and remarks for an employee.
 
 Format: `report EMPLOYEE_ID`
 
@@ -407,6 +407,9 @@ Format: `report EMPLOYEE_ID`
 * The report is downloaded in a `.txt` file, located in the `reports` folder in the location of `hour.jar`.
   * The `.txt` file follows the naming convention `DATE_NAME` where `DATE` is the date the report is created, 
     and `NAME` is the name of the corresponding employee.
+* The overtime pay is calculated based on the overtime hours and the salary of the employee.
+  * The [Singaporean Ministry of Manpower's prescribed formula](https://www.mom.gov.sg/employment-practices/hours-of-work-overtime-and-rest-days) ($1.5\times \frac{12 \times \text{Monthly Salary}}{52\times 44}$) is used to calculate overtime pay.
+
 
 Examples:
 * `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678.
