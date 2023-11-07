@@ -377,21 +377,26 @@ The following diagram summarises what happens when a user executes a Filter comm
 ### Find feature
 
 #### Purpose
-The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient way of finding and tracking specific candidates.
-
-#### Implementation
-After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`, the input is passed to the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords in the input and creates a list of keywords.
-
-`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords. This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object. `LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by calling `ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
-
-An instance of `CommandResult` is then created which contains the message and information that will be displayed to the user. The GUI then updates to show this information to the user.
-
+The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient way of 
+finding and tracking specific candidates.
 
 #### Steps to trigger
 1. User opens the app
 2. User keys in `find KEYWORD [MORE_KEYWORDS]`
 3. The GUI will update to show a list of applicants with name containing any of the keywords.
 
+#### Implementation
+After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`, 
+the input is passed to the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords 
+in the input and creates a list of keywords.
+
+`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords. 
+This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object. 
+`LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by calling 
+`ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
+
+An instance of `CommandResult` is then created which contains the message and information that will be displayed to the user. 
+The GUI then updates to show this information to the user.
 
 #### Notes
 
@@ -401,6 +406,36 @@ An instance of `CommandResult` is then created which contains the message and in
 4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
    Applicants matching at least one keyword will be returned (i.e. OR search). 
    e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
+
+### Design considerations
+
+#### Aspect: How to find applicants
+
+- Alternative 1: Find applicants by name using exact match search 
+(e.g. `find Eddy` will only result in applicants whose name is Eddy)
+  - Pros: Users can find applicants by their exact name, 
+  allowing for a more specific search
+  - Cons: Users would have to type in the entire name exactly in order to
+  get their desired result. This can result in higher user error and takes more time to type.
+  
+- Alternative 2 (current choice): Find applicants by name using partial match search (or "fuzzy" search)
+  - Pros: More inclusive, can find matches that are related but not exactly the same as `KEYWORD`.
+  More user-friendly as it accounts for variations or common misspellings. Allows for faster typing as users
+  do not need to type our the exact name.
+  - Cons: May return a larger number of results, some of which may not be relevant (false positives), 
+  potentially requiring additional filtering or sorting which can be inconvenient and time-consuming.
+
+#### Aspect: Command syntax 
+
+- Alternative 1: `find n/NAME` where `n/` represents the name to be searched
+  - Pros: Unambiguous that the term to be searched for is the name.
+  - Cons: As the current find function only supports searching by name, adding the additional `n/` is unnecessary.
+
+- Alternative 2 (current chocie): `find KEYWORDS [MORE_KEYWORDS]`
+  - Pros: Allows for faster typing and users do not need to input the unnecessary `n/` tag.
+  - Cons: Not immediately clear that the `find` command finds applications by name. 
+  This will have to be explained in the user guide.
+
 
 
    
