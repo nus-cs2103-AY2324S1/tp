@@ -271,10 +271,58 @@ The lifeline for `EditTutorCommandParser` should end at the destroy marker (X) b
 the lifeline reaches the end of diagram.
 </div>
 
-
 #### Design rationale
 The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
- 
+
+### Find tutor feature
+
+The "Find Tutor" feature allows users to search for tutors based on the tutor's name. 
+
+The following shows the activity diagram from when a user executes the find-t command:
+
+![Activity Diagram for find-t Command](images/FindTutorActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched.
+
+Step 2. The user executes `find-t John Doe` to search for tutors with the name "John Doe". The command is parsed in the 
+`AddressBookParser`.
+
+Step 3. `FindTutorCommandParser` is created, and constructs a `NameContainsKeywordsPredicate` which matches for any of 
+the search keywords. A `FindTutorCommand` object is then constructed with this predicate.
+
+Step 4. The `LogicManager` calls the `execute` in `FindTutorCommand` which sets the predicate of the filtered persons 
+list in `ModelManager` to be the predicate created earlier.
+
+Step 5. The filtered list of tutors is displayed to the user.
+
+The following sequence diagram shows how the above steps for find tutor operation works:
+
+![FindTutorSequenceDiagram](images/FindTutorSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `FindTutorCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design Rationale
+
+**Aspect: Search criteria**
+- **Alternative 1 (current choice):** Only allowing users to search for tutors based on their names.
+    - Pros: This design provides a straightforward and clear search functionality for users, aligning with the common 
+      understanding of searching for specific individuals by name.
+    - Pros: It simplifies the search process and reduces cognitive load for users, as they only need to provide the 
+      tutor's name.
+    - Cons: If a user has incomplete or incorrect information about the tutor's name, they may not be able to find the 
+      desired tutor.
+- **Alternative 2:** Specifying search criteria like tutor phone number or email.
+    - Pros: Users would have the ability to search for tutors based on a wider range of criteria, such as phone
+      number and email.
+    - Cons: Implementing advanced search criteria may lead to a more complex user interface and search mechanism, 
+      potentially requiring additional user training or guidance.
+
 ### Delete tutor feature
 
 The "Delete Tutor" feature allows users to delete an existing tutor in the address book given a tutor index.
@@ -459,6 +507,68 @@ the lifeline reaches the end of diagram.
     identified from the tutor list.
   * Cons: In the editing of schedule, a `Person` is needed to create a new `Schedule`. Thus, the tutor allocated to 
     the target schedule needs to be obtained and used to create a new `Schedule`.
+
+## Unmark schedule feature
+
+The "Unmark Schedule" feature allows users to unmark a schedule that was previously marked as completed or missed. 
+
+The following shows the activity diagram from when a user executes the unmark command:
+
+![UnmarkScheduleActivityDiagram](images/UnmarkScheduleActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched with at least 1 schedule marked as completed or missed.
+
+Step 2. The user executes `list-s` to view the list of schedules.
+
+Step 3. The user executes `unmark 1` command, which unmarks the schedule with index 1 shown in the list of schedules 
+displayed. The command is parsed in the `AddressBookParser`.
+
+Step 4. `UnmarkScheduleCommandParser` is initialized to parse the user input to create an `UnmarkScheduleCommand` with 
+the given Index representing the user's input.
+
+Step 5. The `UnmarkScheduleCommand#execute(Model)` will perform the following checks in this order to ensure that the 
+schedule can be safely unmarked in the Model:
+    - The `Index` is a valid integer.
+    - The `Index` is not out of bounds (within the range of the displayed schedule list's size).
+
+Step 6. The `execute` method then calls Model::getFilteredScheduleList and gets the specified `Schedule` using the 
+`Index` given.
+
+Step 7. Once the checks are successful, the method then creates an edited schedule from the original schedule with its
+status set to pending.
+
+Step 8. Tbe method then calls the `setSchedule` method in the `ModelManager` with the new edited schedule. This sets the 
+specified `Schedule` in the model to be that edited schedule with pending status.
+
+Step 9. Finally, the `UnmarkScheduleCommand` returns the `CommandResult`.
+
+The following sequence diagram shows how the above steps for unmark schedule operation works:
+
+![Sequence diagram for unmark command](images/UnmarkScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `UnmarkScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design Rationale
+
+**Aspect: Existence of unmark command**
+- **Alternative 1 (current choice):** Separate `unmark` command for unmarking schedules.
+    - Pros: This design is more intuitive for users, as it aligns with the common understanding of marking and 
+      unmarking tasks.
+    - Pros: Users only need to be aware of the completed and missed status, simplifying the command's usage.
+    - Cons: The user must use a distinct command to unmark schedules with a status set.
+- **Alternative 2:** Using a pending status with `mark` Command.
+    - Pros: Users only need to be familiar with the mark command, which can toggle between completed, missed, and 
+      pending statuses. This may lead to a more streamlined user experience.
+    - Cons: Introducing a third status option complicates the management of schedule statuses. Users and developers 
+      alike must account for an additional state, potentially increasing the system's complexity.
+    - Cons: The definition and usage of the "pending" status may vary among users, potentially leading to ambiguity in 
+      its interpretation.
 
 ### Delete Schedule Feature
 #### Implementation Details
@@ -1021,6 +1131,7 @@ In the calendar view, incorporating schedule colors to represent their respectiv
 intuitiveness.
 
 **Proposed implementation**
+
 In `CalendarCard.java`, the background color of the calendar card will be determined based on schedule status: green 
 for completed, red for missed, and yellow for pending (please note that these colors are not finalised).
 
@@ -1041,7 +1152,7 @@ characters of the name.
 
 For example: `find-t john` will now match: `john`, `JOHN123` and `johnetta`.
 
-**Proposed implementation**:
+**Proposed implementation**
 
 A new method `containsPartialWordIgnoreCase` can be added in `StringUtil` that will be used by
 `NameContainsKeywordsPredicate` and `TutorNameContainsKeywordsPredicate` to test for a match.

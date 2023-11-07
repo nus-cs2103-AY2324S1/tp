@@ -1,0 +1,24 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User runs unmark command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Parse user input;
+
+if () then ([input is valid])
+    :Construct UnmarkScheduleCommand object;
+    :Return back to LogicManager;
+    :LogicManager executes UnmarkScheduleCommand;
+    :Construct edited Schedule with status as pending;
+    :Replace schedule with edited schedule in ScheduleList;
+    :Update UI;
+else ([else])
+    :Display error message;
+endif
+stop
+@enduml
