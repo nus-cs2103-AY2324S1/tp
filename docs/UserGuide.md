@@ -80,7 +80,7 @@ Managing clients and a busy schedule have never been easier. With OutBook, all y
 
 6. Refer to the [Features](#features) below for details of each command. 
 
-Return to the [Table of Contents](#table-of-content)
+Return to the [Table of Contents](#table-of-contents)
 
 ---
 
@@ -95,7 +95,7 @@ Return to the [Table of Contents](#table-of-content)
 | Meetings List | Displays meetings that are scheduled                                                                                                                                                                                                                  |
 | Details List  | Displays all the fields of a contact and/or meeting in full detail, completed with labels. Use [viewc](#viewing-detailed-contact-information--viewc)/[viewm](#viewing-detailed-meeting-information--viewm) to specify the contact/meeting to display. |
 
-Return to the [Table of Contents](#table-of-content)
+Return to the [Table of Contents](#table-of-contents)
 
 ---
 
@@ -436,7 +436,7 @@ OutBook data are saved automatically as a JSON file `[JAR file location]/data/ou
 If your changes to the data file makes its format invalid, OutBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-Return to the [Table of Contents](#table-of-content)
+Return to the [Table of Contents](#table-of-contents)
 
 ---
 
@@ -464,7 +464,7 @@ Return to the [Table of Contents](#table-of-content)
 | **View meeting details**        | `viewm INDEX` <br> e.g., `viewm 4`                                                                                                                                                       |
 | **Exit**                        | `exit`                                                                                                                                                                                   |
 
-Return to the [Table of Contents](#table-of-content)
+Return to the [Table of Contents](#table-of-contents)
 
 ---
 
@@ -478,7 +478,7 @@ Return to the [Table of Contents](#table-of-content)
 2. Overwrite this empty data file with the file that contains the data of your previous OutBook home folder.
 3. Your transferred data should now be visible upon launching OutBook.
 
-Return to the [Table of Contents](#table-of-content)
+Return to the [Table of Contents](#table-of-contents)
 
 ---
 
@@ -486,6 +486,6 @@ Return to the [Table of Contents](#table-of-content)
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
-Return to the [Table of Contents](#table-of-content)
+Return to the [Table of Contents](#table-of-contents)
 
 ---
