@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import java.util.Objects;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;

@@ -102,4 +102,33 @@ public class SetDifficultyCommandTest {
 
         assertCommandFailure(setDifficultyCommand, model, Messages.MESSAGE_RANDOM_INDEX_NOT_INITIALISED);
     }
+
+    @Test
+    public void execute_withNoIndex_success() {
+        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(0), "easy");
+
+        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: EASY)";
+
+        Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
+        expectedModel.getDeck().getCardList().get(0).setDifficulty(Difficulty.EASY);
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith(Difficulty.EASY);
+        expectedModel.getDeck().sort();
+
+        assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_withLastIndex_success() {
+        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(4), "hard");
+
+        String expectedMessage = "Set Difficulty for Question 5 (Difficulty level: HARD)";
+
+        Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
+        expectedModel.getDeck().getCardList().get(4).setDifficulty(Difficulty.HARD);
+        expectedModel.getDeck().getCardList().get(4).setNewPracticeDateWith(Difficulty.HARD);
+        expectedModel.getDeck().sort();
+
+        assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
+    }
+
 }

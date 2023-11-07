@@ -3,14 +3,12 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 
-import java.util.Objects;
-import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SetDifficultyCommand;
-import seedu.address.logic.commands.SolveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -51,7 +49,8 @@ public class SetDifficultyCommandParser implements Parser<SetDifficultyCommand> 
             return new SetDifficultyCommand(index, difficulty);
         } catch (ParseException pe) {
             logger.log(Level.INFO, "Invalid index in found in input", pe);
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDifficultyCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SetDifficultyCommand.MESSAGE_USAGE), pe);
         }
 
 
@@ -65,7 +64,7 @@ public class SetDifficultyCommandParser implements Parser<SetDifficultyCommand> 
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    public static boolean isEmptyIndex(String input) {
+    private static boolean isEmptyIndex(String input) {
         // Trim leading and trailing spaces
         input = input.trim();
 
