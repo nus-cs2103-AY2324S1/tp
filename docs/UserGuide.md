@@ -338,7 +338,7 @@ Examples:
 - `complete 1`
 - `complete d/01-05-2023`
 
-Successful Output: `Appointments Completed!`
+Successful Output: `Appointment(s) Completed!`
 
 ![result for 'complete 1'](images/completeUi.png)
 

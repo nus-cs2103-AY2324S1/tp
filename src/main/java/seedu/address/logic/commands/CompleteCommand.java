@@ -30,7 +30,7 @@ public class CompleteCommand extends Command {
             + "Parameters: [INDEX(must be a positive integer)] "
             + "[" + PREFIX_APPOINTMENT_DATE + "Appointment Date] *At least one parameter specified\n"
             + "Example: " + COMMAND_WORD + " 1 ";
-    public static final String MESSAGE_COMPLETE_SUCCESS = "Appointments Completed!";
+    public static final String MESSAGE_COMPLETE_SUCCESS = "Appointment(s) Completed!";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Input Date should be in format of dd-MM-yyyy";
     public static final String MESSAGE_INVALID_DATE = "Please input a valid Date";
     public static final String MESSAGE_PERSON_NO_APPOINTMENT = "No Appointment Found:"
