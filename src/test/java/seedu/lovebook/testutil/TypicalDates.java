@@ -59,6 +59,10 @@ public class TypicalDates {
             .withGender("F").withIncome("9000").withHeight("145").withHoroscope("CAPRICORN").withStar("false")
             .withAvatar("4").build();
 
+    public static final Date MRPERFECT = new PersonBuilder().withName("Mr Perfect").withAge("21")
+            .withGender("M").withIncome("10000").withHeight("170").withHoroscope("ARIES").withStar("true")
+            .withAvatar("4").build();
+
     // Manually added - Date's details found in {@code CommandTestUtil}
     public static final Date AMY = new PersonBuilder().withName(VALID_NAME_AMY).withAge(VALID_AGE_AMY)
             .withGender(VALID_GENDER_AMY).withHeight(VALID_HEIGHT_AMY).withIncome(VALID_INCOME_AMY)
