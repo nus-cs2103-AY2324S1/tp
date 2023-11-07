@@ -38,7 +38,6 @@ public class GroupPersonCommandParser implements Parser<GroupPersonCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupPersonCommand.MESSAGE_USAGE));
         }
 		argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
-//		Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         String personName = argMultimap.getValue(PREFIX_NAME).get();
         String groupName = argMultimap.getValue(PREFIX_GROUPTAG).get();
 
