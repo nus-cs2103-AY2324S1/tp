@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.util.Arrays;
+import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -9,13 +12,10 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.trendresults.TrendCommandResult;
-
-import java.util.Arrays;
-import java.util.logging.Logger;
+import seedu.address.model.tag.EnrolDate;
 
 /**
  * Controller of a trend page.
@@ -24,8 +24,8 @@ public class TrendWindow extends UiPart<Stage> {
     public static final String FXML = "TrendWindow.fxml";
     private static final Logger logger = LogsCenter.getLogger(TrendWindow.class);
     private static final String[] months = new String[]{
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        EnrolDate.JAN, EnrolDate.FEB, EnrolDate.MAR, EnrolDate.APR, EnrolDate.MAY,
+        EnrolDate.JUN, EnrolDate.JUL, EnrolDate.AUG, EnrolDate.SEP, EnrolDate.OCT, EnrolDate.NOV, EnrolDate.DEC
     };
     private static final int NUMBER_OF_MONTHS = 12;
     private static final String X_AXIS_LABEL = "Month";

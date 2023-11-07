@@ -32,6 +32,7 @@ public class BarChartCommandTest {
         Command command6 = new BarChartCommand("d/Z", 2022);
 
         // same args -> return true
+        assertEquals(command1, command1);
         assertEquals(command1, command2);
         assertEquals(command4, command5);
 
@@ -64,5 +65,19 @@ public class BarChartCommandTest {
         assertTrue(command2.execute(model) instanceof SecLevelBarChartCommandResult);
         assertTrue(command3.execute(model) instanceof SubjectBarChartCommandResult);
         assertTrue(command4.execute(model) instanceof EnrolDateBarChartCommandResult);
+    }
+
+    @Test
+    public void toStringMethod() {
+        Command command1 = new BarChartCommand("g/");
+        Command command2 = new BarChartCommand("l/");
+        Command command3 = new BarChartCommand("s/");
+        Command command4 = new BarChartCommand("d/", 2023);
+
+        String expectedClass = BarChartCommand.class.getCanonicalName();
+        assertEquals(command1.toString(), expectedClass + "{category: =g/}");
+        assertEquals(command2.toString(), expectedClass + "{category: =l/}");
+        assertEquals(command3.toString(), expectedClass + "{category: =s/}");
+        assertEquals(command4.toString(), expectedClass + "{category: =d/2023}");
     }
 }

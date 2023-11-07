@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -34,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ArrayList<Window> windows = new ArrayList<>();
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -153,6 +156,7 @@ public class MainWindow extends UiPart<Stage> {
      * @param tableWindow a TableWindow instance.
      */
     public void handleTable(TableWindow tableWindow) {
+        windows.add(tableWindow.getRoot());
         if (!tableWindow.isShowing()) {
             tableWindow.show();
         } else {
@@ -165,6 +169,7 @@ public class MainWindow extends UiPart<Stage> {
      * @param barchartWindow a BarChartWindow instance.
      */
     public void handleBarChart(BarChartWindow barchartWindow) {
+        windows.add(barchartWindow.getRoot());
         if (!barchartWindow.isShowing()) {
             barchartWindow.show();
         } else {
@@ -177,6 +182,7 @@ public class MainWindow extends UiPart<Stage> {
      * @param trendWindow a TrendWindow instance.
      */
     public void handleTrend(TrendWindow trendWindow) {
+        windows.add(trendWindow.getRoot());
         if (!trendWindow.isShowing()) {
             trendWindow.show();
         } else {
@@ -197,6 +203,11 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        if (!windows.isEmpty()) {
+            for (Window window : windows) {
+                window.hide();
+            }
+        }
         primaryStage.hide();
     }
 
