@@ -11,19 +11,20 @@ UniMate is a desktop app for students to **manage contacts** and **manage schedu
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `UniMate.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `UniMate.jar` from [here](https://github.com/AY2324S1-CS2103-F13-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for UniMate.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar UniMate.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar UniMate.jar` command to run the application.<br><br>
+   A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data,
+which may differ from that of a fresh download.<br>
+   ![Ui](images/unimateScreenshot.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -39,8 +40,96 @@ UniMate is a desktop app for students to **manage contacts** and **manage schedu
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+# Features Overview
 
-## Features
+UniMate has 3 core features, [**Address Book**](#main-feature-1-address-book), [**Calendar System**](#main-feature-2-calendar-system)
+and [**Task Management System**](#main-feature-3-task-management-system). This section serves to
+provide you with an overview of what each component entails and the functionalities supporting them.
+
+![uniMateFeatureOverview](images/uniMateFeatures.png)
+
+The screenshot above shows a cropped view of UniMate's GUI. **ADDRESS BOOK** belongs to the [**Address Book** feature](#main-feature-1-address-book),
+**CALENDAR** belongs to the [**Calendar System** feature](#main-feature-2-calendar-system) and the **EVENT LIST/TASK LIST**
+portion is shared by both the [**Calendar System** feature](#main-feature-2-calendar-system) and [**Task Management System** feature](#main-feature-3-task-management-system).
+
+>To switch between the [Event List](#sub-feature-2-event-list) and [Task List](#main-feature-3-task-management-system),
+we have a [CLI-based command](#viewing-tasks-switchlist) for that.
+
+## Main feature 1: Address Book
+
+The address book serves to ease contact management. 
+
+Some major CLI-based functionalities to support this feature include:
+- [**Adding**](#adding-a-person-add), [**deleting**](#deleting-a-person--delete) and [**editing**](#editing-a-person--edit) operations to manipulate contacts in the address book
+- [**Finding**](#locating-persons-by-name-find) and [**filtering**](#filtering-persons-by-attribute-filter) operations to search for and isolate contacts of interest
+- [**Sorting**](#sort-persons--sort) operation to reorganise the view of the address book when needed 
+
+Other functionalities can be found in the [Address Book Management subsection found in the Features section](#address-book-management).
+
+Additionally, each contact in the address book has their own personal calendar, 
+which can be accessed simply by double-clicking with the left mouse button on the contact's card in the address book.
+This will create a pop-up displaying the contact's calendar as shown below. 
+
+![contactCalendar](images/contactCalendar.png)
+
+**Note:** There is currently no CLI-based command to access this feature, but is planned for a future release.
+
+## Main feature 2: Calendar System
+The calendar system seeks to improve the user's schedule planning experience, as well as simplify
+the synchronization of schedules among multiple people. 
+
+To achieve this, we have 2 supporting sub-features:
+1. [Calendar](#sub-feature-1-calendar)
+2. [Event List](#sub-feature-2-event-list)
+
+For the calendar system, we work solely with `events`, which differs from `tasks` used in the [task list feature](#main-feature-3-task-management-system).
+: `event` has a `description`, `start date and time` and `end date and time`
+: `task` only has a `description` and `end date and time`
+
+### Sub-feature 1: Calendar
+
+The calendar allow the user to plan their timetable and compare it against their contacts' schedules. 
+This will hopefully facilitate scheduling of meetings and events involving the user and their contacts.
+
+>By default, the calendar's GUI will only display the time period of <mark>8am to 6pm</mark>, but will automatically
+extend when events that cannot be fit within this time period are added.
+> 
+>Additionally, the GUI for this sub-feature currently only supports viewing of events <mark>within the current week</mark>.
+Upcoming updates will allow the user to navigate beyond this chronological restriction. In the meantime, users can
+consider using the [Event List](#sub-feature-2-event-list) to view events outside the current week.
+
+For the **user**'s calendar, some major CLI-based functionalities supporting this sub-feature includes:
+- [Adding](#adding-an-event-addevent), [deleting](#deleting-an-event-deleteevent) and [clearing](#deleting-multiple-events-clearevents) operations to manipulate the events in the user's calendar
+
+For the **contact**'s calendar, some major CLI-based functionalities supporting this sub-feature includes:
+- [Adding](#adding-an-event-to-a-contact), [deleting](#deleting-an-event-from-a-contact) and [editing](#edit-contact-calendar-event) operations to manipulate the events in the contact's calendar
+
+Other useful CLI-based functionalities not exclusive to the user/contact supporting this sub-feature includes:
+- Comparison operations to compare the user's calendar with their contacts' calendars either by [index](#1-comparison-by-index) or [tag](#2-comparison-by-tag)
+
+Other functionalities can be found in the [Calendar System subsection of the Features section](#calendar-system)
+
+### Sub-feature 2: Event List
+
+The event list displays all the events for the user/contact. It serves as an overview of the collective
+events that the user or their contact have.
+
+The event list shown on the main UniMate GUI is the user's event list. To view a specific contact's
+event list, we have a [CLI-based command](#viewing-another-persons-events-viewcontactevents) that will
+display the contact's event list in a popup window.
+
+## Main-feature 3: Task Management System
+
+The task list stores a collection of tasks that the user might have. The primary difference
+between event and task is that a task does not have a starting date and time.
+
+Some useful CLI-based functionalities supporting this feature includes:
+- [Adding](#adding-tasks-addtask) and [deleting](#deleting-tasks-deletetask) operations to manipulate the tasks present in the task list
+- [Sorting](#sorting-tasks-sorttask) operation to reorganise the view of the task list when needed
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Features
 
 <box type="info" seamless>
 
@@ -64,6 +153,7 @@ UniMate is a desktop app for students to **manage contacts** and **manage schedu
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+## General Features
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -71,6 +161,12 @@ Shows a message explaning how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 ## Address Book Management
 
@@ -89,11 +185,20 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+![addCommand](images/addCommand.png)
+
+In the example, after executing
+`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`, we see `John Doe`'s
+contact information stored in the address book as the 7th contact on the left-hand side of the GUI.
+
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the address book. This command is particularly useful to
+display all the contacts after using the `find` and `filter` commands.
 
 Format: `list`
+
+![listCommand](images/listCommand.png)
 
 ### Editing a person : `edit`
 
@@ -102,15 +207,20 @@ Edits an existing person in the address book.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* At least one of the optional fields must be provided
+* Existing values will be updated to the input values
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+    specifying any tags after it
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+![editCommand](images/editCommand.png)
+
+In this example, after executing `edit 1 p/12345678`, `Alex Yeoh` the person with index 1 has his
+phone number edited to `12345678`.
 
 ### Locating persons by name: `find`
 
@@ -120,9 +230,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the name is searched
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Persons matching at least one keyword will be returned (i.e. `OR` search)
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -130,22 +240,27 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating persons by tag: `filter`
+### Filtering persons by attribute: `filter`
 
-Finds persons whose fields contain any of the given keywords.
+Filters out persons whose fields contain any of the given keywords.
 
 Format: `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Filter is case-insensitive. e.g. `cs2103` will match `CS2103`
-* The order of the fields does not matter.
+* The order of the fields does not matter
 * All provided fields are searched
-* All tags containing the words will be matched e.g. `Ba` will return `Badminton` or `Basketball` or `Football` or `Backgammon`.
-* Only persons matching all specified fields will be returned (i.e. `and` search).
+* All tags containing the words will be matched e.g. `Ba` will return `Badminton` or `Basketball` or `Football` or `Backgammon`
+* Only persons matching all specified fields will be returned (i.e. `and` search)
 
 Examples:
 * `filter t/CS2103` - Displays all contacts with the CS2103 tag or tags containing ``CS2103`` e.g. CS2103T
 * `filter t/MA2116 t/CS1010S n/John e/@u.nus.edu` - Displays all contacts with the ``MA2116`` and ``CS1010S`` tags as well as
 with a name containing ``John`` and an email address with the domain ``u.nus.edu``
+
+![filterCommand](images/filterCommand.png)
+
+In this example, after executing `filter t/colleagues`, the address book list displays all contacts
+that have the `TAG` colleague.
 
 ### Deleting a person : `delete`
 
@@ -161,15 +276,34 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+![deleteCommand](images/deleteCommand.png)
+
+In this example, after executing `list`, followed by `delete 7`, `John Doe`, the person with index 7 
+is removed from the displayed address book
+
 ### Sort persons : `sort`
 
-* Sorts all persons by specified `comparator`.
-* The comparator refers to the attribute(s) provided for the basis to sort.
-* Sorting is done in ascending order by default. To sort by descending order, the keyword `reverse` can be used (see Examples below).
+Format: `sort /COMPARATOR`
+
+* Sorts all persons by specified `COMPARATOR`
+* Currently supported `COMPARATOR` include:
+    - `byname`
+    - `byemail`
+    - `byphone`
+    - `byaddress`
+* The comparator refers to the attribute(s) provided for the basis to sort
+* The sorting is done according to ASCII value
+* Sorting is done in ascending order by default. To sort by descending order, the keyword `reverse` can be used (see Examples below)
 
 Examples:
 * `sort /byname` sorts all contacts in UniMate address book by the full name of `Person`
 * `sort /byaddress /reverse` sorts all contacts in UniMate address book by the address of `Person`
+
+![sortCommand](images/sortCommand.png)
+
+In this example, after executing `sort /byphone`, the address book is now sorted according to the
+contact's phone numbers, in ascending numerical order.
+
 
 ### Clearing all entries : `clear`
 
@@ -177,29 +311,17 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
 ## Calendar System
-
-The Calendar System enables users to visually see the events that the 
-user has in store for the current week. Additionally, the user is also
-able to compare and isolate common pockets of free time with any of their contacts 
-to plan activities together.
-
-### Date Time Format
-
-When inputting a date and time into a command, the following format is used: 
-
-* `yyyy-MM-dd HH:mm` where
-    * `yyyy` represents the year,
-    * `MM` represents the month,
-    * `dd` represents the day,
-    * `HH` represents the hours and
-    * `mm` represents the minutes.
+> **Date Time Format**
+>
+>When inputting a date and time into a command, the following format is used: 
+>
+>* `yyyy-MM-dd HH:mm` where
+>    * `yyyy` represents the year,
+>    * `MM` represents the month,
+>    * `dd` represents the day,
+>    * `HH` represents the hours and
+>    * `mm` represents the minutes.
 
 ### Adding an event: `addEvent`
 
@@ -208,7 +330,9 @@ Adds an event to the user's calendar.
 Format: `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME`
 
 * Adds the event starting from `START_DATE_TIME` and ending at `END_DATE_TIME`
+* `DESCRIPTION` must be non-empty
 * `START_DATE_TIME` and `END_DATE_TIME` must be in `yyyy-MM-dd HH:mm` format
+* `START_DATE_TIME` must be before `END_DATE_TIME` for the command to be valid
 
 Example:
 * `addEvent Cry about deadlines d/12/12/2012 s/2200 e/2359`
@@ -273,29 +397,37 @@ Example:
 
 There are two ways for the user to compare calendars with their AddressBook Contacts. 
 Namely, the user can either isolate contacts of interest with their respective index,
-or compare calendars with a group of contacts using their tags.
+or compare calendars with a group of contacts using their tags. Therefore, the user can
+consider the following two commands and choose whichever suits their needs more.
 
 The resulting pop-up calendar will pop up with the time periods where all parties
 are not available greyed out. The pop-up has to be closed in order for the user to access
 the main application again.
 
-## 1. Comparison by index
+Note that the arguments for the commands are optional, hence `compareCalendars` and
+`compareGroupCalendars` are valid commands, but the resulting pop-up will just display the
+user's calendar.
 
-Format `compareCalendars INDEX1 INDEX2 ...`
+#### 1. Comparison by index
+
+Format `compareCalendars [INDEX]...`
 
 * Compare calendar with the contacts at the respective `INDEX`
 * `INDEX` must be a positive non-zero integer that is smaller than the size of the AddressBook
 * If the `INDEX` number provided is invalid, an error will be returned
+* If no `INDEX` is supplied, the resulting pop-up will just display the user's calendar
 
 Example:
 `compareCalendars 1 3 5`
 
-## 2. Comparison by tag
+#### 2. Comparison by tag
 
-Format `compareGroupCalendars TAG1 TAG2 ...`
+Format `compareGroupCalendars [TAG]...`
 
-* Compare calendar with the contacts with the specified `TAG`s
-* If all the `TAG`s provided are invalid, the resulting pop-up will just display the user's calendar
+* Compare calendar with the contacts with the specified `TAG`
+* If some of the `TAG` provided are invalid, the resulting pop-up will ignore the invalid `TAG`
+* If all the `TAG` provided are invalid, the resulting pop-up will just display the user's calendar
+* If no `TAG` is supplied, the resulting pop-up will just display the user's calendar
 
 Example:
 `compareGroupCalendars school friends`
