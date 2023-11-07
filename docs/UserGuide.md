@@ -488,10 +488,9 @@ Clears all data in the application.
 
 <div markdown="block" class="alert alert-warning">
 
-**:warning: Warning:** 
+**:warning: Destructive Command!**<br>
 
-This command is irreversible, and all data will be forever lost!
-Please use this command with caution.
+This command is irreversible, and all data will be lost. Please use this command with caution.
 
 </div>
 
