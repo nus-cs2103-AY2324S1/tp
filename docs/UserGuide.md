@@ -91,19 +91,22 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 ## Quick Start
 
 
-1. Ensure you have Java 11 or above installed on your computer. ![here](images/UG/QuickStart1.png)
-2. Simply go to your terminal and type `java -version`. ![here](images/UG/QUICKSTART2.png)
-3. Download the latest ProjectPRO.jar from ![here](images/UG/QuickStart3.png).
-- *Screenshot of the page and annotations where the file is downloaded from*
-4. Move the JAR file to a folder where you want to store your project details. For example, create a folder named ProjectPRO and place it on your desktop.
-5. For Mac Users:
-- *Separate guide for Mac users*
-6. For Windows Users:
-- *Separate guide for Windows users*
-7. Launch ProjectPRO.
-- For Mac users: Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar ProjectPRO.jar` command to run the application.
-- For Windows users: Double-click the ProjectPRO.jar file to launch the application.
-8. Start using ProjectPRO!
+1. Ensure you have Java 11 or above installed on your computer. 
+   - Simply go to your terminal and type `java -version`. ![here](images/UG/QuickStart1.png)
+
+2. Download the latest ProjectPRO.jar from [here](https://github.com/AY2324S1-CS2103T-T10-3/tp/releases).
+- ![here](images/UG/QUICKSTART2.png)
+
+3. Move the JAR file to a folder where you want to store your project details. For example, create a folder named ProjectPRO and place it on your desktop.
+   - For Mac Users:
+     - ![MACGUIDE](images/UG/QuickStart3.png)
+   - For Windows Users:
+   
+4. Launch ProjectPRO.
+   - For Mac users: Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar ProjectPRO.jar` command to run the application.
+   - For Windows users: Double-click the ProjectPRO.jar file to launch the application.
+
+5. Start using ProjectPRO!
 
 
 ## Glossary
@@ -115,11 +118,11 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 Written below are the definitions of the terminology used throughout the User Guide:
 
 
-| Term         | Definition                                             |
-| ------------ | ------------------------------------------------------ |
-| Parameter    | Parameter indicates the type of information required for a particular command. |
-| Command      | A special word used together with parameters to execute a particular action. E.g., `find`. |
-| GUI          | Graphical User Interface, the visual display of ProjectPRO. |
+| Term      | Definition                                                                                 |
+|-----------|--------------------------------------------------------------------------------------------|
+| Parameter | Parameter indicates the type of information required for a particular command.             |
+| Command   | A special word used together with parameters to execute a particular action. E.g., `find`. |
+| GUI       | Graphical User Interface, the visual display of ProjectPRO.                                |
 
 
 **Parameter Information**
@@ -128,14 +131,25 @@ Written below are the definitions of the terminology used throughout the User Gu
 Written below are some commonly used parameters, what they represent, and examples:
 
 
-| Parameter    | Description                                     | Constraints                                     | Valid Examples       | Invalid Examples           |
-| ------------ | ----------------------------------------------- | ----------------------------------------------- | --------------------  | --------------------------- |
-| `n/`         | Contact name of the student                    | Alphanumeric characters (a to z, A to Z, 0 to 9) | John Doe, David Li 2 | Kishen s/o Kasinathan, ナルト, அசிங்கமான |
-| `p/`         | Phone number of the student                    | Positive integer with 3 or more digits          | 999, 98765432, 18003569377 | 1-800-356-9377, 0, -1, 98431234.5 |
-| `e/`         | Email of the student                           | Email prefix: Alphanumeric characters (a to z, A to Z, 0 to 9), @, Email Domain | example@gmail.com, example@moe.edu.sg | example@!.com, example@moed.edu.s |
-| `g/`         | Name of the group                               | Alphanumeric characters (a to z, A to Z, 0 to 9) | CS2103T, Group 3    | Group 3!, 1 |
-| `r/`         | Group remark                                    | N/A                                           | Zoom link: CS2101.zoom, 123!@#$#@ | N/A |
-| `t/`         | Time interval of student/group                   | 2 timings,
+| Parameter | Description                      | Constraints                                                                                                                                             | Valid Examples                           | Invalid Examples                                |
+|-----------|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------|-------------------------------------------------|
+| `n/`      | Contact name of the student      | Alphanumeric characters (a to z, A to Z, 0 to 9)                                                                                                        | John Doe, David Li 2                     | Kishen s/o Kasinathan, ナルト, அசிங்கமான           |
+| `p/`      | Phone number of the student      | Positive integer with 3 or more digits                                                                                                                  | 999, 98765432, 18003569377               | 1-800-356-9377, 0, -1, 98431234.5               |
+| `e/`      | Email of the student             | Email prefix: Alphanumeric characters (a to z, A to Z, 0 to 9), @, Email Domain                                                                         | example@gmail.com, example@moe.edu.sg    | example@!.com, example@moed.edu.s               |
+| `g/`      | Name of the group                | Alphanumeric characters (a to z, A to Z, 0 to 9)                                                                                                        | CS2103T, Group 3                         | Group 3!, 1                                     |
+| `r/`      | Group remark                     | N/A                                                                                                                                                     | Zoom link: CS2101.zoom, 123!@#$#@        | N/A                                             |
+| `t/`      | Time interval of student / group | timings are written with the first 3 letters of the day and time in 24 hour format, with a `-` between the timings. Start time cannot be after end time | mon 1300 - mon 1400, sat 1000 - sun 1300 | monday 1300 - tuesday 1200, wed 1300 - wed 1000 |
+
+**Notes about command format**
+
+Written below are some extra information regarding our command formats:
+
+| Notes                       | Explanation                                      | Examples                                                                                                                                              |
+|-----------------------------|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Words in `UPPER_CASE`       | These are values written by you                  | `new g/GROUP_NAME` can be written as new `g/CS2103T`                                                                                                  |
+| Items in `SQUARE_BRACKETS`  | These are optional values that can be left empty | `add n/NAME p/PHONE e/EMAIL [g/GROUP_NAME]` can be used as `add n/John p/999 e/example@gmail.com` and `add n/John p/999 e/example@gmail.com g/CS2103` |
+| Items with `...` after them | These are values that can be used multiple times | `addtime n/NAME t/time...` can be used as `addtime n/John t/mon 1200 - mon 1300 t/tue 1400 - tue 1500`                                                |
+
 
 
 ## Commands to Manage Contacts
