@@ -504,13 +504,12 @@ edit 1 q/ How many bits can a <u>Half Adder</u> add up
 ![usage of bold syntax](./images/UserGuide/1.3_underline.png)
 
 ### Important Note:
-Do not stack MarkDown Syntax
+Do not stack MarkDown Syntaxes
 
 Example:
 `` edit 1 q/ *** ``
 
-This may lead to unexpected behavior of text in the display view.
-
+This may lead to unexpected behavior of text in the display view. In the case when unexpected MarkDown format is observed, edit the flashcard again with the without the MarkDown syntax/ with appropriate syntaxes.
 
 # Importing and Exporting Decks
 Users can share their own Decks with others or download their Decks to their own.
