@@ -364,28 +364,34 @@ Tran$act's data is saved in the hard disk automatically after any command that c
 Tran$act's GUI is simple and gives you access to all of its features with just one click.
 
 This should be what you see when you open Tran$act for the first time:
+
 ![Ui](images/Ui-Overview.png)
 
 The upper menu bar contains three tabs:
 
-1. File — This tab contains actions like exporting data and exiting the program.
-   1. Export
-      1. Staff List — Exports the staff list into a JSON file. Opens a window of your computer's File System. Once you have chosen the folder where you want the JSON file of your staff list to be exported to, press Enter and it will appear there.
-      2. Transaction List — Exports the transaction list into a CSV file. Opens a window of your computer's File system. Once you have chosen the folder where you want the CSV file of your transaction list to be exported to, press Enter and it will appear there.
+1. **File** — This tab contains actions like exporting data and exiting the program.
+   1. Export`
+      1. Staff List — Exports the staff list into a JSON file. Opens a window of your computer's File System. Once you have chosen the folder where you want the JSON file of your staff list to be exported to, press Enter and it will appear there as `transactions.csv`.
+      2. Transaction List — Exports the transaction list into a CSV file. Opens a window of your computer's File system. Once you have chosen the folder where you want the CSV file of your transaction list to be exported to, press Enter and it will appear there as `addressBook.json`.
    2. Exit — Exits the program.
-2. Tools — This tab contains actions for clearing the transaction list and staff list.
+2. **Tools** — This tab contains actions for clearing the transaction list and staff list.
    1. Clear Staff — Clears all existing staff in the staff list. Performs the same function as the `clearstaff` command.
    2. Clear Transactions — Clears all existing transactions. Performs the same function as the `cleartransaction` command.
-3. Help — This tab contains more information about Tran$act like, for example, this User Guide.
+3. **Help** — This tab contains more information about Tran$act like, for example, this User Guide.
    1. View User Guide — Opens your browser to show the user guide. Performs the same function as the `help` command. Can also be accessed by pressing F1 on the keyboard.
 
 The lower menu bar contains three tabs:
 
-1. Overview — This tab shows you a monthly summary of your finances based on the transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
-2. Transactions — This tab shows you the transactions you have entered in a row-by-row format.
+1. **Overview** — This tab shows you a monthly summary of your finances based on the transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
+2. **Transactions** — This tab shows you the transactions you have entered in a row-by-row format 
    ![Ui](images/Ui-Transactions.png)
-3. Staff List — This tab shows you the persons or parties you have entered in a list format.
+3. **Staff List** — This tab shows you the persons or parties you have entered in a list format.
    ![Ui](images/Ui-Staff.png)
+
+> ❗**Staff List Indexing** will not be in order after editing the list
+> 
+>  The indexing only serves as a placeholder to link transactions to the respective staff
+
 
 Below that is the output window. This is where any message Tran$act has will be provided to you. For example, this is where your success outputs or errors will be. You can clear it with `clear`.
 The input field below this with the grey text `Enter command here...` is where you can enter your commands.
