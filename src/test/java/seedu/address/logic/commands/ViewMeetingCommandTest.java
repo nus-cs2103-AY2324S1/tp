@@ -36,8 +36,8 @@ public class ViewMeetingCommandTest {
                 + "Location: Zoom call url\n"
                 + "Start: 20 November 2023, 1000\n"
                 + "End: 20 November 2023, 1200\n"
-                + "Attendees: [\n1: Daniel Meier \n2: Elle Meyer "
-                + "\n3: Fiona Kunz \n4: George Best]\n";
+                + "Attendees: \n1. Daniel Meier\n2. Elle Meyer"
+                + "\n3. Fiona Kunz\n4. George Best\n";
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -65,7 +65,7 @@ public class ViewMeetingCommandTest {
                 + "Location: Zoom call url\n"
                 + "Start: 20 September 2023, 1000\n"
                 + "End: 20 September 2023, 1200\n"
-                + "Attendees: []\n";
+                + "Attendees: \n";
 
         // Model displaying filtered list should not change
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
