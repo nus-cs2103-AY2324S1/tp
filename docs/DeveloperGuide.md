@@ -254,7 +254,26 @@ the lifeline reaches the end of diagram.
 </div>
 
 #### Design rationale
-The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
+**Aspect: Specifying which tutor to edit**
+- **Alternative 1 (current choice):** Using tutor index.
+    - Pros: Using the tutor index provides a clear and unambiguous way for users to specify which tutor they want to 
+      edit. The index corresponds directly to the position of the tutor in the displayed list, making it easy for users 
+      to identify the target tutor.
+    - Pros: The use of tutor indices eliminates the potential challenge of dealing with long or complex names. Users do
+      not need to type out the entire name, which can be especially beneficial if a tutor has a lengthy or complicated name.
+    - Pros: The use of index aligns with the existing command structure, which is based on numeric indices for 
+      identifying and interacting with specific entries in the address book.
+    - Cons: Users need to have knowledge of the specific index of the tutor they want to edit. This may require them to 
+      first execute a `list-t` command to view the current list of tutors and their corresponding indices.
+- **Alternative 2:** Using tutor name.
+    - Pros: Allowing users to edit a tutor by specifying their name provides a more natural and intuitive method, as 
+      users are likely more familiar with names than numeric indices.
+    - Cons: If a user provides an incorrect or misspelled name, the application would need to handle error cases and 
+      provide appropriate feedback to guide the user.
+    - Cons: Names can be long, complex, or have unusual spellings, which may make them more challenging to type 
+      accurately. This can lead to potential input errors or mismatches if the user misspells or mistypes the name.
+    - Cons: Names are case-sensitive. This means that users need to accurately input the name with the correct 
+      capitalization, which can add an extra layer of precision required from the user.
 
 ### Find tutor feature
 
