@@ -100,11 +100,6 @@ Given below are my contributions to the project.
 
 
 * **Community**:
-<<<<<<< HEAD
-  * Reviewed PR (With non-trivial comments)
-=======
-
-* **Mentoring / PR contribution:**
   * Reviewed PR
     * Removal of irrelevant test cases[#68](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/68)
     * Modification of error messages [#74](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/74)
