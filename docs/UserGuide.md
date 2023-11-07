@@ -327,8 +327,6 @@ Format: `delete-i INDEX`
 |-----------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `INDEX`   | The index of the target interview as shown in the interview list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list |
 
-* The `INDEX` refers to the index number shown in the displayed interview list.
-
 Examples:
 * `delete-i 1` deletes the 1st interview in the address book.
 
