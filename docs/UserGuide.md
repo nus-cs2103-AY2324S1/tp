@@ -421,7 +421,7 @@ Action | Format, Examples
   </tr>
   <tr>
     <td class="tg-0pky">REMARK</td>
-    <td class="tg-0pky">Can take any value, and should not be blank</td>
+    <td class="tg-0pky"><span style="font-weight:bold">Must not be blank </span>and can take in any values, except the following prefixes:<code>m/</code>, <code>e/</code>, <code>h/</code>, <code>r/</code></td>
   </tr>
   <tr>
     <td class="tg-0pky"><code>viewMember</code> / <code>viewEvent</code></td>
