@@ -421,6 +421,20 @@ when editing the tags of the member/event:
 3. Edit current list of tags attached to the member/event
 4. Delete specific tags from the current list of tags attached to the member/event
 
+### Provide more specific index error messages to the user
+**Current Implementation**
+* **Current Issue**: As of now, for commands that accept more than 1 index as a parameter, it is hard to tell which index is wrong
+based on the index error message shown to the user if one of the indexes provided is wrong. This can hamper the user's efficiency as the
+user cannot tell immediately which provided index is wrong.
+* **Example**: Commands such as `enrol` accept more than 1 index as a parameter. When the user accidentally enters an invalid index
+such as `enrol m/1 e/-1` where the event index is wrong, the error message displayed to the user is just "Index is not a non-zero unsigned integer."
+There is a lack of information shown to the user which specific index is wrong.
+
+**Proposed solution:**
+
+We propose to make the index error messages more specific and highlight to the user which index is wrong and why
+that index is wrong. For example, in the `enrol m/1 e/-1` input, we will show an error message to the user along 
+the lines of "The provided Event Index is not a non-zero unsigned integer."
 
 --------------------------------------------------------------------------------------------------------------------
 
