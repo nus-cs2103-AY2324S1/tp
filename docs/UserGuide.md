@@ -18,6 +18,7 @@ online dating journey.
 ## Table of Contents
 * [Quick Start](#quick-start)
 * [Features](#features)
+  * [Default Date Preference](#default-date-preference)
   * [Add a new Date: `add`](#add-a-new-date-add)
   * [Get a recommended Date: `bestMatch`](#get-a-recommended-date-bestmatch)
   * [Get a blind Date: `blindDate`](#get-a-blind-date-blinddate)
@@ -95,8 +96,23 @@ online dating journey.
 * `AGE` should be a positive integer between 18 and 150 (inclusive).
 * `GENDER` should be either M or F. It is case sensitive.
 * `HOROSCOPE` should be a valid zodiac sign. It is case insensitive.
-* `INCOME` (per month) should be a positive integer in SGD.
+* `INCOME` (per month) should be a positive integer (zero included) and less than or equal to 1000000 in SGD.
 * `HEIGHT` should be a positive integer in cm between 100cm and 250cm (inclusive).
+
+</box>
+
+### Default Date Preference
+
+<box type="info" seamless>
+
+* By default, Date Preference is set to:
+  * AGE: 21
+  * HEIGHT: 170
+  * INCOME: 10000
+  * HOROSCOPE: ARIES
+
+* If you wish to change your Date Preference, please use the [`setP`](#set-date-preference-setp) command.
+* The [`bestMatch`](#get-a-recommended-date-bestmatch) command will use the Date Preference set by the user.
 
 </box>
 
@@ -295,11 +311,12 @@ Expected output: `Opened help window.`
 
 Sets the user's preferences for the matching algorithm.
 
+[Default Date Preference: `AGE: 21; HEIGHT: 170; INCOME: 10000; HOROSCOPE: ARIES`](#default-date-preference)
+
 <box type="info" seamless>
 
 * Note: At least one field to edit must be provided.
 * The user's preferences will be used in the [`bestMatch`](#get-a-recommended-date-bestmatch) command.
-
 * Gender is not taken into account here
 
 * The relevant fields are 
@@ -332,6 +349,8 @@ Example: setP age/21 height/180 income/3000 horoscope/Scorpio
 ### Show Date Preference: `showP`
 
 Shows the User's Date Preference. This can be edited using the [`setP`](#star-a-date-star) command. 
+
+[Default Date Preference: `AGE: 21; HEIGHT: 170; INCOME: 10000; HOROSCOPE: ARIES`](#default-date-preference)
 
 Format: `showP`
 
