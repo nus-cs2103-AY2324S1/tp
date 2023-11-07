@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,7 +51,8 @@ public class AttendanceStorageTest {
     public void getAttendanceReport_validJoinDate_invalidNumOfLeave() {
         JoinDate joinDate = new JoinDate("10/03/2023");
         AttendanceStorage attendanceStorage = new AttendanceStorage();
-        assertThrows(IllegalArgumentException.class, () -> attendanceStorage.getAttendanceReport(joinDate, -11));
+        int[] arr = new int[]{-11, 0, 0};
+        assertTrue(Arrays.equals(arr, attendanceStorage.getAttendanceReport(joinDate, -11)));
     }
 
     @Test

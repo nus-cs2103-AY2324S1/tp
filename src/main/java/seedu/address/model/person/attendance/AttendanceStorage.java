@@ -160,7 +160,6 @@ public class AttendanceStorage {
         int numOfDaysLate = getCount(AttendanceType.LATE, joinDate, numOfLeave);
 
         return new int[]{numOfDaysOnLeave, numOfDaysAbsent, numOfDaysLate};
-
     }
 
     /**
