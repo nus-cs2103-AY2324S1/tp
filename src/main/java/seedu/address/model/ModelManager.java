@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -14,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,10 +27,14 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Applicant> filteredApplicants;
-    private FilteredList<Tag> filteredTags;
+    private final FilteredList<Tag> filteredTags;
+    private final ObservableList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     *
+     * @param addressBook The addressBook to be used.
+     * @param userPrefs   The userPrefs to be used.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
@@ -40,8 +46,14 @@ public class ModelManager implements Model {
         filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
         filteredApplicants = new FilteredList<>(this.addressBook.getApplicantList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
+
+        // Displayed tasks should be empty at first
+        filteredTasks = FXCollections.observableArrayList();
     }
 
+    /**
+     * Default constructor.
+     */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
@@ -181,6 +193,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void setTaskListForMember(Member member) {
+        this.filteredTasks.setAll(member.getTasks());
+    }
+
+    @Override
     public void updateFilteredMemberList(Predicate<? super Member> predicate) {
         requireNonNull(predicate);
         filteredMembers.setPredicate(predicate);
@@ -211,9 +233,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredMembers.equals(otherModelManager.filteredMembers)
-                && filteredApplicants.equals(otherModelManager.filteredApplicants);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredMembers.equals(otherModelManager.filteredMembers)
+            && filteredApplicants.equals(otherModelManager.filteredApplicants);
     }
 
 }

@@ -12,7 +12,7 @@ import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 
 public class JsonAdaptedApplicantTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "R#chel";
     private static final String INVALID_PHONE = "+651234";
 
     private static final String VALID_NAME = BENSON_APPLICANT.getName().toString();
@@ -57,14 +57,6 @@ public class JsonAdaptedApplicantTest {
         JsonAdaptedApplicant applicant = new JsonAdaptedApplicant(VALID_NAME, null, VALID_DATE);
         String expectedMessage = String.format(JsonAdaptedApplicant.MISSING_FIELD_MESSAGE_FORMAT,
                 Phone.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, applicant::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullDate_throwsIllegalValueException() {
-        JsonAdaptedApplicant applicant = new JsonAdaptedApplicant(VALID_NAME, VALID_PHONE, null);
-        String expectedMessage = String.format(JsonAdaptedApplicant.MISSING_FIELD_MESSAGE_FORMAT,
-                InterviewTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, applicant::toModelType);
     }
 

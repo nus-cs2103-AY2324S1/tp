@@ -18,7 +18,7 @@ import seedu.address.model.person.Member;
  */
 public class AddMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "addMember";
+    public static final String COMMAND_WORD = "addmember";
     public static final String COMMAND_ALIAS = "addm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the member list. "
@@ -42,6 +42,8 @@ public class AddMemberCommand extends Command {
 
     /**
      * Creates an AddMemberCommand to add the specified {@code Member}
+     *
+     * @param member The member to add.
      */
     public AddMemberCommand(Member member) {
         requireNonNull(member);

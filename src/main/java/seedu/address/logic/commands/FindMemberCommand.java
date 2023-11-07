@@ -14,7 +14,7 @@ import seedu.address.model.person.MemberContainsKeywordsPredicate;
  */
 public class FindMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "findMember";
+    public static final String COMMAND_WORD = "findmember";
     public static final String COMMAND_ALIAS = "findm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members whose information contain any of "
@@ -24,6 +24,11 @@ public class FindMemberCommand extends Command {
 
     private final MemberContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a FindMemberCommand to find the specified {@code Member}
+     *
+     * @param predicate The predicate to find the member.
+     */
     public FindMemberCommand(MemberContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }

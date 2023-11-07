@@ -109,7 +109,7 @@ public class UniquePersonListTest {
 
     @Test
     public void setMember_nullEditedMember_throwsNullPointerException() {
-        // TODO: implement this
+        assertThrows(NullPointerException.class, () -> uniqueMemberList.setPerson(ALAN_MEMBER, null));
     }
 
     @Test

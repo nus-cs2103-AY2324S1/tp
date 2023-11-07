@@ -8,20 +8,19 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMembers.ALAN_MEMBER;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ModelStub;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Member;
 import seedu.address.testutil.MemberBuilder;
 
-
 public class AddMemberCommandTest {
-
     @Test
     public void constructor_nullMember_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddMemberCommand(null));
@@ -36,33 +35,42 @@ public class AddMemberCommandTest {
 
         assertEquals(String.format(AddMemberCommand.MESSAGE_SUCCESS, Messages.format(validMember)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validMember), modelStub.memberAdded);
+        assertEquals(List.of(validMember), modelStub.memberAdded);
+    }
+
+    @Test
+    public void execute_duplicateMember_throwsCommandException() {
+        Member validMember = new MemberBuilder().build();
+        AddMemberCommand addMemberCommand = new AddMemberCommand(validMember);
+        ModelStub modelStub = new ModelStubWithMember(validMember);
+
+        assertThrows(CommandException.class, AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () ->
+                addMemberCommand.execute(modelStub)
+        );
     }
 
     @Test
     public void equals() {
-        Member alan = new MemberBuilder().withName("Alan").withEmail("alan@gmail.com").withPhone("81684544")
-                .withTelegram("@alanedabest").build();
-        Member bob = new MemberBuilder().withName("Bob").withEmail("bob@gmail.com").withPhone("90021929")
-                .withTelegram("@bobisdaworst").build();
-        AddMemberCommand addAlanCommand = new AddMemberCommand(alan);
+        Member alice = new MemberBuilder().withName("Alice").build();
+        Member bob = new MemberBuilder().withName("Bob").build();
+        AddMemberCommand addAliceCommand = new AddMemberCommand(alice);
         AddMemberCommand addBobCommand = new AddMemberCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAlanCommand.equals(addAlanCommand));
+        assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddMemberCommand addAliceCommandCopy = new AddMemberCommand(alan);
-        assertTrue(addAlanCommand.equals(addAliceCommandCopy));
+        AddMemberCommand addAliceCommandCopy = new AddMemberCommand(alice);
+        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAlanCommand.equals(1));
+        assertFalse(addAliceCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAlanCommand.equals(null));
+        assertFalse(addAliceCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAlanCommand.equals(addBobCommand));
+        assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
     @Test
@@ -71,6 +79,8 @@ public class AddMemberCommandTest {
         String expected = AddMemberCommand.class.getCanonicalName() + "{toAdd=" + ALAN_MEMBER + "}";
         assertEquals(expected, addMemberCommand.toString());
     }
+
+
 
     /**
      * A Model stub that contains a single Member.
@@ -90,8 +100,9 @@ public class AddMemberCommandTest {
         }
     }
 
-    private class ModelStubAcceptingMemberAdded extends ModelStub {
-        final ArrayList<Member> memberAdded = new ArrayList<>();
+    private static class ModelStubAcceptingMemberAdded extends ModelStub {
+
+        final List<Member> memberAdded = new ArrayList<>();
 
         @Override
         public boolean hasMember(Member member) {
@@ -110,5 +121,4 @@ public class AddMemberCommandTest {
             return new AddressBook();
         }
     }
-
 }

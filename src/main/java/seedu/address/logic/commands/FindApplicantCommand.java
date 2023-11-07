@@ -14,7 +14,7 @@ import seedu.address.model.person.ApplicantContainsKeywordsPredicate;
  */
 public class FindApplicantCommand extends Command {
 
-    public static final String COMMAND_WORD = "findApplicant";
+    public static final String COMMAND_WORD = "findapplicant";
     public static final String COMMAND_ALIAS = "finda";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all applicants whose information contain any of "
@@ -24,6 +24,11 @@ public class FindApplicantCommand extends Command {
 
     private final ApplicantContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a FindApplicantCommand to find the specified {@code Applicant}
+     *
+     * @param predicate The predicate to find the applicant.
+     */
     public FindApplicantCommand(ApplicantContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }

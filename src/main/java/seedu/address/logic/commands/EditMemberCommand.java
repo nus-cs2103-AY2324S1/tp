@@ -33,7 +33,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "editMember";
+    public static final String COMMAND_WORD = "editmember";
     public static final String COMMAND_ALIAS = "editm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
@@ -140,12 +140,17 @@ public class EditMemberCommand extends Command {
         private Telegram telegram;
         private Set<Tag> tags;
 
+        /**
+         * Default constructor.
+         */
         public EditMemberDescriptor() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param toCopy The {@code EditMemberDescriptor} to copy.
          */
         public EditMemberDescriptor(EditMemberDescriptor toCopy) {
             setName(toCopy.name);

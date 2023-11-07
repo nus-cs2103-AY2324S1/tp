@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.MemberBuilder;
 
 public class MemberTest {
@@ -102,7 +103,8 @@ public class MemberTest {
                 + ", phone=" + ALAN_MEMBER.getPhone()
                 + ", email=" + ALAN_MEMBER.getEmail()
                 + ", telegram=" + ALAN_MEMBER.getTelegram()
-                + ", tags=" + ALAN_MEMBER.getTags() + "}";
+                + ", tags=" + ALAN_MEMBER.getTags()
+                + ", tasks=" + ALAN_MEMBER.getTasks() + "}";
         assertEquals(expected, ALAN_MEMBER.toString());
     }
 
@@ -112,7 +114,8 @@ public class MemberTest {
                 + "Phone: " + ALAN_MEMBER.getPhone() + "\n"
                 + "Email: " + ALAN_MEMBER.getEmail() + "\n"
                 + "Telegram: " + ALAN_MEMBER.getTelegram() + "\n"
-                + "Tags: " + ALAN_MEMBER.getTags().stream().map(Tag::toString).collect(Collectors.joining(", "));
+                + "Tags: " + ALAN_MEMBER.getTags().stream().map(Tag::toString).collect(Collectors.joining(", ")) + "\n"
+                + "Tasks: " + ALAN_MEMBER.getTasks().stream().map(Task::toString).collect(Collectors.joining(", "));
         assertEquals(expected, ALAN_MEMBER.detailsToCopy());
     }
 }

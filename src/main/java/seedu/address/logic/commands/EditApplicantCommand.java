@@ -26,7 +26,7 @@ import seedu.address.model.person.fields.Phone;
  */
 public class EditApplicantCommand extends Command {
 
-    public static final String COMMAND_WORD = "editApplicant";
+    public static final String COMMAND_WORD = "editapplicant";
     public static final String COMMAND_ALIAS = "edita";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the applicant identified "
@@ -93,10 +93,7 @@ public class EditApplicantCommand extends Command {
         InterviewTime updatedInterviewTime = editApplicantDescriptor.getInterviewTime()
                 .orElse(applicantToEdit.getInterviewTime());
 
-        Applicant newApplicant = new Applicant(updatedName, updatedPhone);
-        newApplicant.addInterviewTime(updatedInterviewTime);
-
-        return newApplicant;
+        return new Applicant(updatedName, updatedPhone, updatedInterviewTime);
     }
 
     @Override
@@ -132,12 +129,17 @@ public class EditApplicantCommand extends Command {
         private Phone phone;
         private InterviewTime interviewTime;
 
+        /**
+         * Default constructor.
+         */
         public EditApplicantDescriptor() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param toCopy The {@code EditApplicantDescriptor} to copy.
          */
         public EditApplicantDescriptor(EditApplicantDescriptor toCopy) {
             setName(toCopy.name);

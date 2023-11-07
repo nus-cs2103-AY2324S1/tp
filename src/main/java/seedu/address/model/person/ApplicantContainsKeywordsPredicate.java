@@ -7,14 +7,17 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 
-
-
 /**
  * Tests that a {@code Applicant}'s {@code Field's} matches any of the keywords given.
  */
 public class ApplicantContainsKeywordsPredicate implements Predicate<Applicant> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a predicate that returns true if the applicant's name or phone number contains any of the keywords.
+     *
+     * @param keywords The keywords to check.
+     */
     public ApplicantContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
@@ -22,8 +25,8 @@ public class ApplicantContainsKeywordsPredicate implements Predicate<Applicant> 
     @Override
     public boolean test(Applicant applicant) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(applicant.getName().fullName, keyword)
-                        || StringUtil.containsWordIgnoreCase(applicant.getPhone().value, keyword));
+            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(applicant.getName().fullName, keyword)
+                || StringUtil.containsWordIgnoreCase(applicant.getPhone().value, keyword));
     }
 
     @Override
@@ -38,7 +41,7 @@ public class ApplicantContainsKeywordsPredicate implements Predicate<Applicant> 
         }
 
         ApplicantContainsKeywordsPredicate otherApplicantContainsKeywordsPredicate =
-                (ApplicantContainsKeywordsPredicate) other;
+            (ApplicantContainsKeywordsPredicate) other;
         return keywords.equals(otherApplicantContainsKeywordsPredicate.keywords);
     }
 

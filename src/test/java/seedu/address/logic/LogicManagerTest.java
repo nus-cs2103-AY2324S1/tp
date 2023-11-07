@@ -70,16 +70,14 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // TODO: tests not compiling not sure why
-        //        assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
-        //                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+        assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
+                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
-        // TODO: tests not compiling not sure why
-        //  assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
-        //         LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+        assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
+                LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
 
     @Test
@@ -180,17 +178,11 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        //        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-        //                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        //        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
 
         String addApplicantCommand = AddApplicantCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY;
         Applicant expectedApplicant = new ApplicantBuilder(AMY_APPLICANT).build();
 
         ModelManager expectedModel = new ModelManager();
-
-        //        expectedModel.addPerson(expectedPerson);
-        //        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
 
         expectedModel.addApplicant(expectedApplicant);
         assertCommandFailure(addApplicantCommand, CommandException.class, expectedMessage, expectedModel);

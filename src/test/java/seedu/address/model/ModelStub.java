@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -106,6 +107,16 @@ public class ModelStub implements Model {
     @Override
     public ObservableList<Tag> getFilteredTagList() {
         throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return null;
+    }
+
+    @Override
+    public void setTaskListForMember(Member member) {
+
     }
 
     @Override
