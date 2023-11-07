@@ -12,6 +12,7 @@ import java.util.List;
 public class VersionedClassManager extends ClassManager {
 
     private final List<ReadOnlyClassManager> classManagerStateList;
+    private final int stateListSize = 10;
     private int currentStatePointer;
 
     /**
@@ -21,7 +22,7 @@ public class VersionedClassManager extends ClassManager {
     public VersionedClassManager(ReadOnlyClassManager initialState) {
         super(initialState);
 
-        classManagerStateList = new ArrayList<>();
+        classManagerStateList = new ArrayList<>(stateListSize);
         classManagerStateList.add(new ClassManager(initialState));
         currentStatePointer = 0;
     }
@@ -32,8 +33,13 @@ public class VersionedClassManager extends ClassManager {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
+        if (classManagerStateList.size() == stateListSize) {
+            classManagerStateList.remove(0);
+        }
         classManagerStateList.add(new ClassManager(this));
-        currentStatePointer++;
+        if (currentStatePointer < stateListSize - 1) {
+            currentStatePointer++;
+        }
         resetData(classManagerStateList.get(currentStatePointer));
         indicateModified();
     }
