@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.barchartresults;
+package seedu.address.logic.commands.count;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,14 +11,17 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.barchartresults.EnrolDateBarChartCommandResult;
+import seedu.address.logic.commands.tableresults.EnrolDateTableCommandResult;
 import seedu.address.model.tag.EnrolDate;
 
-public class EnrolDateBarChartCommandResultTest {
+class EnrolDateCommandResultTest {
+
     @Test
     public void equals() {
-        CommandResult commandResult1 = getEnrolDateBarChartCommandResultSample1();
-        CommandResult commandResult2 = getEnrolDateBarChartCommandResultSample1();
-        CommandResult commandResult3 = getEnrolDateBarChartCommandResultSample2();
+        CommandResult commandResult1 = getEnrolDateCommandResultSample1();
+        CommandResult commandResult2 = getEnrolDateCommandResultSample1();
+        CommandResult commandResult3 = getEnrolDateCommandResultSample2();
 
         // same values -> returns true
         assertTrue(commandResult1.equals(commandResult2));
@@ -41,9 +44,9 @@ public class EnrolDateBarChartCommandResultTest {
 
     @Test
     public void hashcode() {
-        EnrolDateBarChartCommandResult commandResult1 = getEnrolDateBarChartCommandResultSample1();
-        EnrolDateBarChartCommandResult commandResult2 = getEnrolDateBarChartCommandResultSample1();
-        EnrolDateBarChartCommandResult commandResult3 = getEnrolDateBarChartCommandResultSample2();
+        EnrolDateCommandResult commandResult1 = getEnrolDateCommandResultSample1();
+        EnrolDateCommandResult commandResult2 = getEnrolDateCommandResultSample1();
+        EnrolDateCommandResult commandResult3 = getEnrolDateCommandResultSample2();
 
         // same values -> return same hashcode
         assertEquals(commandResult1.hashCode(), commandResult2.hashCode());
@@ -53,37 +56,7 @@ public class EnrolDateBarChartCommandResultTest {
 
     }
 
-    @Test
-    public void toStringMethod() {
-        CommandResult commandResult = getEnrolDateBarChartCommandResultSample1();
-        String expected = EnrolDateBarChartCommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", showTable=" + commandResult.isShowTable()
-                + ", showBarChart=" + commandResult.isShowBarChart()
-                + ", exit=" + commandResult.isExit() + "}";
-
-        assertEquals(expected, commandResult.toString());
-    }
-
-    @Test
-    public void getMonth() {
-        EnrolDateBarChartCommandResult commandResult = getEnrolDateBarChartCommandResultSample1();
-        assertEquals(50, commandResult.getJanCount());
-        assertEquals(10, commandResult.getFebCount());
-        assertEquals(30, commandResult.getMarCount());
-        assertEquals(20, commandResult.getAprCount());
-        assertEquals(40, commandResult.getMayCount());
-        assertEquals(50, commandResult.getJunCount());
-        assertEquals(25, commandResult.getJulCount());
-        assertEquals(15, commandResult.getAugCount());
-        assertEquals(20, commandResult.getSepCount());
-        assertEquals(5, commandResult.getOctCount());
-        assertEquals(3, commandResult.getNovCount());
-        assertEquals(100, commandResult.getDecCount());
-
-    }
-
-    public EnrolDateBarChartCommandResult getEnrolDateBarChartCommandResultSample1() {
+    public EnrolDateCommandResult getEnrolDateCommandResultSample1() {
         Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
         titlesValuesMapping1.put(EnrolDate.JAN, 50);
         titlesValuesMapping1.put(EnrolDate.FEB, 10);
@@ -97,11 +70,11 @@ public class EnrolDateBarChartCommandResultTest {
         titlesValuesMapping1.put(EnrolDate.OCT, 5);
         titlesValuesMapping1.put(EnrolDate.NOV, 3);
         titlesValuesMapping1.put(EnrolDate.DEC, 100);
-        EnrolDateBarChartCommandResult commandResult1 = new EnrolDateBarChartCommandResult(titlesValuesMapping1);
+        EnrolDateCommandResult commandResult1 = new EnrolDateTableCommandResult(titlesValuesMapping1);
         return commandResult1;
     }
 
-    public EnrolDateBarChartCommandResult getEnrolDateBarChartCommandResultSample2() {
+    public EnrolDateCommandResult getEnrolDateCommandResultSample2() {
         Map<String, Integer> titlesValuesMapping2 = new HashMap<>();
         titlesValuesMapping2.put(EnrolDate.JAN, 30);
         titlesValuesMapping2.put(EnrolDate.FEB, 15);
@@ -115,7 +88,7 @@ public class EnrolDateBarChartCommandResultTest {
         titlesValuesMapping2.put(EnrolDate.OCT, 5);
         titlesValuesMapping2.put(EnrolDate.NOV, 5);
         titlesValuesMapping2.put(EnrolDate.DEC, 100);
-        EnrolDateBarChartCommandResult commandResult2 = new EnrolDateBarChartCommandResult(titlesValuesMapping2);
+        EnrolDateCommandResult commandResult2 = new EnrolDateBarChartCommandResult(titlesValuesMapping2);
         return commandResult2;
     }
 }

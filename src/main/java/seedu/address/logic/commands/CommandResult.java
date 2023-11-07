@@ -101,6 +101,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("showTable", this.isShowTable())
                 .add("showBarChart", this.isShowBarChart())
+                .add("showTrend", this.isShowTrend())
                 .add("exit", exit)
                 .toString();
     }
