@@ -340,30 +340,30 @@ The proposed commandHistory mechanism is facilitated by `CommandHistory`. It con
 
 Given below is an example usage scenario and how the commandHistory behaves at each step.
 
-Step 1. The user launches the application for the first time and enters their first command. 
+Step 1. The user launches the application for the first time and enters their first command.
 The `CommandHistory` will save the command and the `currentCommandPointer` won't be pointing to any command.
 
 ![CommandHistoryState0](images/CommandHistoryState0.png)
 
-Step 2. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called and the previous command is displayed in the commandBox. 
+Step 2. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called and the previous command is displayed in the commandBox.
 When the previous command is entered into the commandBox, the new version of command will not be stored in `CommandHistory` after calling `CommandHistory#isLastCommandEqualCommand()`
 and it returns true.
 
 
 ![CommandHistoryState1](images/CommandHistoryState1.png)
 
-Step 3. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called 
+Step 3. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called
 and the previous command is displayed in the commandBox. When the previous command is edited and is entered into the commandBox, the newly edited version of command will be stored in `CommandHistory` after calling `CommandHistory#addCommand()`.
 
 ![CommandHistoryState3](images/CommandHistoryState2.png)
 
-Step 4. The user has pressed '↑' while selecting the commandBox until the first Command and `CommandHistory#getPreviousCommand()` 
+Step 4. The user has pressed '↑' while selecting the commandBox until the first Command and `CommandHistory#getPreviousCommand()`
 is called multiple times. The user then presses '↓' and `CommandHistory#getNextCommand()` is called and the command1 (the next command) will then be displayed in the commandBox.
 
 ![CommandHistoryState3](images/CommandHistoryState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentCommandPointer` is at 
-index 0, pointing to the initial first command, then there are no previous commands to restore. The program uses 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentCommandPointer` is at
+index 0, pointing to the initial first command, then there are no previous commands to restore. The program uses
 `CommandHistory#hasPreviousCommand()` to check if this is the case. If so, it will not change anything.
 
 </div>
@@ -371,7 +371,7 @@ index 0, pointing to the initial first command, then there are no previous comma
 
 The opposite occurs too when calling the next command  —  the program calls `CommandHistory#hasNextCommand()`, which shifts the `currentCommandPointer` once to the right, pointing to the previously entered command and displaying that command instead.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `commandHistoryPointer` is at index `commandHistoryList.size()`, pointing to nothing, and there are no undone CcaCommander states to restore. 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `commandHistoryPointer` is at index `commandHistoryList.size()`, pointing to nothing, and there are no undone CcaCommander states to restore.
 The program uses `CommandHistory#hasNextCommand()` to check if this is the case. If so, it will not call `CommandHistory#getNextCommand()`
 but will instead use `CommandHistory#isLastCommand()` to check if the `commandHistoryPointer` is at the last command and set the commandBox to be blank.
 
@@ -406,10 +406,10 @@ _{Explain here how the data archiving feature will be implemented}_
 **Current Implementation**:
 * **Current Issue**: Each member/event can have tags attached to it and these tags can be edited using the `editMember`/`editEvent`
 commands. However, upon adding a new tag to a member/event without typing all the old tags, it will override the initial tags attached to
-the member/event and only the new tag will be displayed. This brings inconvenience to the user as the user has to 
+the member/event and only the new tag will be displayed. This brings inconvenience to the user as the user has to
 type both the old and new tags instead of just typing the new tag.
-* **Example**: We have a member called Alice with a member index of 1, and she has an initial tag called `friend`. We want to 
-add a new tag `early` to her. Upon entering the command `editMember 1 t/early`, the current implementation will override 
+* **Example**: We have a member called Alice with a member index of 1, and she has an initial tag called `friend`. We want to
+add a new tag `early` to her. Upon entering the command `editMember 1 t/early`, the current implementation will override
 all the initial tags and only the `early` tag will be displayed.
 
 **Proposed solution:**
