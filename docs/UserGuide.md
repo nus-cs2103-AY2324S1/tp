@@ -306,6 +306,10 @@ Parameters:
     * `asc`/`ascending` - Sort in ascending order
     * `desc`/`descending` - Sort in descending order
 
+    <div markdown="span" class="alert alert-secondary">:information_source: **Note:**
+    If sorting by an optional field (e.g. graduation), all contacts without that field will be placed at the bottom of the sorted list regardless of sorting order.
+    </div>
+
 Example usage:
 
 * `sort /by grad /order desc`
