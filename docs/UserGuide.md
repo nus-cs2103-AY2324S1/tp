@@ -165,7 +165,9 @@ Appointment: No Appointment made!;
 Financial Plans: [Financial Plan C]; 
 Tags: [80yo]`
 
-Do note that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
+<div markdown="span" class="alert alert-primary">:information_source: 
+**Do note** that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
+</div>
 
 ------------------
 ### Listing all persons : `list`
@@ -224,7 +226,9 @@ Tags:`
 
 ![result for 'edit 4 n/john doe a/23 woodlands ave 123'](images/editUi.png)
 
-Do note that it is possible to edit a client's contact such that the contact has multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
+<div markdown="span" class="alert alert-primary">:information_source: 
+**Do note** that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
+</div>
 
 ---------------
 ### Locating persons by name, financial plan, and/or tag : `find`
@@ -299,11 +303,16 @@ Tags: `
 
 Schedules an appointment for a client using an index followed by the appointment details. 
 
-Format: `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE`
+Format: `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE_TIME`
 
 - Schedules appointment with the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-- Both appointment name and date must be provided.
-- If there is an existing appointment with the person when command is executed, you can replace it with a new appointment by clicking confirm when prompt is given.
+- **Both appointment name and date-time** must be provided.
+- Upon successful execution of the command, the scheduled appointment details will be updated in the **Contacts list**. The appointment details will also be updated in the **Appointments list**. 
+
+<div markdown="span" class="alert alert-primary">:information_source: 
+If there is an existing appointment with the person when command is executed, you can replace it with a new appointment by **clicking confirm** or **pressing the enter key** when prompt is given.
+</div>
+
   ![schedule prompt](images/schedulePrompt.png)
 
 Example: 
@@ -316,18 +325,23 @@ Successful Output: `Appointment updated!`
 ----------
 ### Completing an Appointment : `complete`
 
-Completes an appointment with clients. User can input an index to complete an appointment with a specific client. User can also input a specific date to complete all appointments with the matching date. 
+Completes an appointment either with the person at the specified `INDEX` or complete all appointments with matching `APPOINTMENT_DATE`. 
 
 Format: `complete [INDEX] [d/APPOINTMENT_DATE]`
 
-- Completes appointment with the person at the specified INDEX. The index refers to the index number shown in the displayed person list.
-- **Either an index or appointment date must be provided** for command to execute. 
+- **Either an index or appointment date must be provided** for command to execute.
+- If user inputs an `INDEX`, command will complete appointment with the person at the specified `INDEX`. The index refers to the index number shown in **Contacts list**.
+- If user inputs an `APPOINTMENT_DATE`, command will complete all appointments in address book that have a date matching the one input by user. This is to allow the user to clear all his/her appointments finished throughout the entire day quickly.
+
+<div markdown="span" class="alert alert-primary">:information_source: 
+**Note** that an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the year, month and day are the same. Time of the appointment does not matter in this command. 
+</div>
 
 Examples:
 - `complete 1`
 - `complete d/01-05-2023`
 
-Successful Output: `Appointment Completed!`
+Successful Output: `Appointments Completed!`
 
 ![result for 'complete 1'](images/completeUi.png)
 
@@ -406,17 +420,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                                                                        |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action       | Format, Examples                                                                                                                                                                                                                    |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN]…​ [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202` |
-| **Clear**    | `clear`                                                                                                                                                                                                                 |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
-| **Find**     | `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g., `find n/James n/Jake`                                                                                                                                       |
-| **Gather**   | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                            |
-| **Schedule** | `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE`<br> e.g. `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`                                                                              |
-| **Complete** | `complete [INDEX] [d/APPOINTMENT_DATE]` <br> e.g `complete 1` <br> e.g `complete 01-05-2023`                                                                                                                      |                                                                                                                                                                         |
-| **List**     | `list`                                                                                                                                                                                                                  |
-| **Help**     | `help`                                                                                                                                                                                                                  |
-| **Sort**     | `sort KEYWORD` <br> e.g., `sort appointment`                                                                                                                                                                   |
+| **Clear**    | `clear`                                                                                                                                                                                                                             |
+| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                 |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                 |
+| **Find**     | `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g., `find n/James n/Jake`                                                                                                                                                   |
+| **Gather**   | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                                        |
+| **Schedule** | `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE_TIME`<br> e.g. `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`                                                                                           |
+| **Complete** | `complete [INDEX] [d/APPOINTMENT_DATE]` <br> e.g `complete 1` <br> e.g `complete 01-05-2023`                                                                                                                                        |                                                                                                                                                                         |
+| **List**     | `list`                                                                                                                                                                                                                              |
+| **Help**     | `help`                                                                                                                                                                                                                              |
+| **Sort**     | `sort KEYWORD` <br> e.g., `sort appointment`                                                                                                                                                                                        |
 
