@@ -25,21 +25,23 @@ public class PersonTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameEntry() {
         // same object -> returns true
         assertTrue(ALICE.isSameEntry(ALICE));
 
         // null -> returns false
         assertFalse(ALICE.isSameEntry(null));
 
-        // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        // same name and phone, all other attributes different -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameEntry(editedAlice));
 
-        // different ID, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withId(new PersonId()).build();
-        assertFalse(ALICE.isSameEntry(editedAlice));
+        // same name all other attributes different -> returns false
+        Person differentAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.isSameEntry(differentAlice));
+
     }
 
     @Test
