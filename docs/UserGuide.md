@@ -17,7 +17,7 @@ title: User Guide
     7. [Command Format](#command-format)
 4. [Features](#features)
     1. [Command Summary](#command-summary)
-    2. [Asking for help: `help`](#asking-for-help--help)
+    2. [Asking for help: `help`](#asking-for-help-help)
     3. [Listing all applications: `list`](#listing-all-applications--list)
     4. [Adding an application: `add`](#adding-an-application--add)
     5. [Deleting an application: `delete`](#deleting-an-application--delete)
@@ -36,12 +36,10 @@ title: User Guide
 
 ## Introduction
 
-JobFindr is a **Contact Book app** for NUS fresh graduates who are looking for jobs.
+JobFindr is an **Application Book app** for NUS fresh graduates to manage their job applications.
 
-It simplifies _contact management_, provides _reminders_ and enhances _organisation_, helping users _stay competitive_
-in the job market.
-The project simulates an ongoing software project for a desktop application (called _JobFindr_) used for managing job
-applications.
+It simplifies _job application management_ , promotes _efficiency_, and enhances _organisation_,
+helping you keep track of all your past and upcoming applications.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -56,8 +54,7 @@ applications.
    ![Ui](images/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter
-   will
-   open the help window.<br>
+   will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all applications.
@@ -89,38 +86,41 @@ applications.
 |----------|--------|---------------------------------------------------------------------------------------------------------------------|-----------|---------------|
 | Company  | `c/`   | No restrictions                                                                                                     | No        | Alphabetical  |
 | Role     | `r/`   | Must only contain alphanumeric characters and spaces                                                                | No        | Alphabetical  |
-| Status   | `s/`   | Possible values in "[Valid statuses](#valid-statuses)"                                                              | No        | Alphabetical  |
+| Status   | `s/`   | Possible values in "[Valid statuses](#valid-statuses)"                                                              | Yes       | Alphabetical  |
 | Industry | `i/`   | Must start with an alphanumeric character                                                                           | Yes       | Alphabetical  |
 | Deadline | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 31 2030 1200) and cannot be earlier than the current date and time | Yes       | Chronological |
-| Type     | `t/`   | Possible values in "[Valid job types](#valid-job-types)"                                                            | Yes       | Alphabetical  |
+| Job Type | `t/`   | Possible values in "[Valid job types](#valid-job-types)"                                                            | Yes       | Alphabetical  |
 
-Applications with the same company and roles are considered duplicates. JobFindr does not allow the creation of
-duplicate jobs.
+* Applications with the same company _AND_ role are considered duplicate jobs.
+  JobFindr does not allow the creation of duplicate jobs.
+
+* Deadline refers to the application submission deadline.
 
 ### Valid statuses
 
 The following are valid statuses:
 
-| Status            | Remarks                                                                                 |
-|-------------------|-----------------------------------------------------------------------------------------|
-| `TO_BE_SUBMITTED` | An application that you plan to apply for. The default status if no status is specified |
-| `PENDING`         | An application that you have applied for but have yet to receive a result               |
-| `APPROVED`        | An application that you have received a job offer for                                   |
-| `REJECTED`        | An application that you have been rejected for                                          |
+| Status          | Remarks                                                                   |
+|-----------------|---------------------------------------------------------------------------|
+| `TO_ADD_STATUS` | The default status if not specified                                       |
+| `PENDING`       | An application that you have applied for but have yet to receive a result |
+| `APPROVED`      | An application that you have received a job offer for                     |
+| `REJECTED`      | An application that you have been rejected for                            |
 
 ### Valid job types
 
 The following are valid job types:
 
-| Job Type     | Remarks           |
-|--------------|-------------------|
-| `FULL_TIME`  | A full time job   |
-| `PART_TIME`  | A part time job   |
-| `INTERNSHIP` | An internship     |
-| `TEMPORARY`  | A temporary job   |
-| `CONTRACT`   | A contract job    |
-| `FREELANCE`  | A freelance job   |
-| `VOLUNTEER`  | A volunteered job |
+| Job Type          | Remarks                               |
+|-------------------|---------------------------------------|
+| `TO_ADD_JOB_TYPE` | The default job type if not specified |
+| `FULL_TIME`       | A full time job                       |
+| `PART_TIME`       | A part time job                       |
+| `INTERNSHIP`      | An internship                         |
+| `TEMPORARY`       | A temporary job                       |
+| `CONTRACT`        | A contract job                        |
+| `FREELANCE`       | A freelance job                       |
+| `VOLUNTEER`       | A volunteered job                     |
 
 ### Structure of an interview
 
@@ -129,6 +129,13 @@ The following are valid job types:
 | Type     | `t/`   | Possible values in "[Valid interview types](#valid-interview-types)"                                                | No        |
 | DateTime | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 31 2030 1200) and cannot be earlier than the current date and time | No        |
 | Address  | `a/`   | Must start with an alphanumeric character                                                                           | No        |
+
+* Interviews in the **same application** with the same type _AND_ datetime _AND_ address are considered duplicate interviews.
+JobFindr does not allow the creation of duplicate interviews.
+
+* DateTime of interview can be after Deadline of application.
+
+* Multiple interviews with the same DateTime can be added if they are not duplicate interviews.
 
 ### Valid interview types
 
@@ -164,6 +171,8 @@ The following are valid interview types:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be
   ignored.<br>
     * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* A _white space_ must be included directly before each [prefix](#prefix).
 
 * The same prefix cannot be used multiple times in the same command.
     * e.g. `add r/Cleaner c/Google c/Microsoft` is an invalid input.
@@ -214,6 +223,10 @@ Shows a list of all applications in the list in alphabetical order.
 
 **Format:** `list`
 
+**Successful command:**
+
+* List out all applications to companies in the list with index.
+
 **UI mockup:**
 ![ListCommand](images/user-guide/ListCommand.png)
 
@@ -255,7 +268,9 @@ Deletes the specified application from the list.
 
 **Examples:**
 
-* `list` followed by `delete 2`
+* `list`
+* followed by `delete 2`
+
   Deletes the 2nd application in the list.
 
 **UI mockup:**
@@ -299,21 +314,30 @@ Finds all applications whose fields match the keywords provided.
 **Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
 
 * At least one optional field must be provided.
+* If a [prefix](#prefix) is given, the search will only find applications containing the given keyword in the _specified_ field.
 * More than one `KEYWORDS` can be provided.
-* If `KEYWORDS` is provided, the command will find all applications that contains the keywords in any field.
-* An application will be listed only if all the keywords match. The keywords are case-insensitive.
+* `KEYWORDS` are case-insensitive.
+* If `KEYWORDS` is provided, the command will find all applications that contains the `KEYWORDS` in any field.
+* An application will be listed only if it contains _ALL_ the `KEYWORDS` provided.
 * Applications with partially matching keywords will not be listed.
-    * e.g. searching for the keyword "Goo" will not list applications with "Google".
+    * e.g. searching for the keyword "Goo" will not list applications containing "Google".
+* Characters not separated by white space is considered _ONE_ word.
+    * e.g. searching for the keyword "ADD" will not list applications containing "TO_ADD_DEADLINE".
 * Searches for deadline must be in the format `MMM DD YYYY HHMM`.
     * e.g. Dec 31 2030 1200 is a valid deadline.
 
 **Examples:**
 
 * `find c/Google`
+
   Finds all applications with "Google" in the company name.
+
 * `find Google r/Software Engineer`
+
   Finds all applications with "Software Engineer" in the role and "Google" in any field.
+
 * `find Google AI`
+
   Finds all applications with _both_ "Google" and "AI" in any fields.
 
 **UI mockup:**
@@ -335,9 +359,11 @@ Sorts the list based on the prefix provided.
 **Examples:**
 
 * `sort d/`
+
   Lists all applications, starting from the one with the earliest deadline.
 
 * `sort r/`
+
   Lists all applications sorted by role, in alphabetical order.
 
 **UI mockup:**
@@ -350,10 +376,22 @@ Adds an interview to the specified application from the list.
 
 **Format:** `interview add INDEX t/TYPE d/DATETIME a/ADDRESS`
 
+**Successful command:**
+
+* When an interview is successfully added, display “New interview added: (`TYPE`) interview; Date and Time: (`DATETIME`); Address: (`ADDRESS`)”.
+
+**Failed command:**
+
+* If any fields or prefixes are not included with the command, 
+display "Invalid command format!" and the correct format for interview add command.
+
+* If any fields have invalid input, display the possible valid inputs for that field.
+
 **Examples:**
 
-* `interview add 1 t/Technical d/Nov 12 2022 1200 a/Home`
-  Adds a technical interview at Nov 12 2022 1200 at Home to the first application in the list.
+* `interview add 1 t/Technical d/Nov 12 2024 1200 a/Home`
+
+  Adds a technical interview at Nov 12 2024 1200 at Home to the first application in the list.
 
 **UI mockup:**
 ![](images/user-guide/IntAddCommand.png)
@@ -370,6 +408,7 @@ Deletes an interview of the specified application from the list.
 **Examples:**
 
 * `interview delete 1 from/2`
+
   Deletes the 1st interview from the 2nd job application in the list.
 
 **UI mockup:**
@@ -388,8 +427,11 @@ Edits an interview of the specified application from the list.
 **Examples:**
 
 * `interview edit 2 from/4 t/GROUP`
+
   Edits the interview type for the 2nd interview from the 4th job application in the list.
+
 * `interview edit 4 from/8 a/NTU`
+
   Edits the address for the 4th interview from the 8th job application in the list.
 
 **UI mockup:**
@@ -421,5 +463,7 @@ the data of your previous AddressBook home folder.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
-1. Prefix - An affix that placed before the field to indicate the type of field
-   * Examples: c/ r/ s/ from/
+
+#### Prefix
+* An affix that placed before the field to indicate the type of field
+* Examples: c/ r/ s/ from/

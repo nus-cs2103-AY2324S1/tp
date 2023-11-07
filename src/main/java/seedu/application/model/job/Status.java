@@ -12,7 +12,7 @@ public class Status {
     public static final String MESSAGE_CONSTRAINTS =
             "Status is case-insensitive and should only be in the form: TO_BE_SUBMITTED, PENDING, APPROVED, REJECTED";
 
-    public static final String IN_PROGRESS = JobStatus.TO_BE_SUBMITTED.toString();
+    public static final String IN_PROGRESS = JobStatus.TO_ADD_STATUS.toString();
     public static final Status DEFAULT_STATUS = new Status(IN_PROGRESS);
 
     public final String status;
@@ -26,7 +26,7 @@ public class Status {
      *   REJECTED: The job application has been rejected.
      */
     public enum JobStatus {
-        TO_BE_SUBMITTED, PENDING, APPROVED, REJECTED
+        TO_ADD_STATUS, PENDING, APPROVED, REJECTED
     }
 
     /**
