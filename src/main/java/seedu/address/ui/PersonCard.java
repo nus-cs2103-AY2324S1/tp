@@ -54,7 +54,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
+        email.setText(person.getEmail().shortEmail());
         LocalDateTime time = person.getLastContactedTime();
         lastContactedTime.setText(time.isEqual(LocalDateTime.MIN)
                 ? "Not contacted yet"
@@ -62,6 +62,6 @@ public class PersonCard extends UiPart<Region> {
         status.setText(person.getStatus().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(new Label(tag.shortTagName())));
     }
 }
