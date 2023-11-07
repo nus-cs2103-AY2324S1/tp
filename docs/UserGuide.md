@@ -376,13 +376,12 @@ Example:
 ### Sorting of data : `sort`
 
 Sorts all the entries with predefined sorting functionalities. After sorting the list, the ordering of the entries
-will be changed. As a result, performing delete operations that require indexing will reference the new ordering
-that is currently displayed on the screen.
+will be changed. As a result, performing any operations that require indexing (such as delete, add or edit), will reference the new ordering that is currently displayed on the screen.
 
 **Here are the current predefined sorting functions that have been implemented**
 
 * `name` : sorts list by lexicographical ordering of name (case-insensitive).
-* `appointment`: sorts list by appointment timing in order of the earliest appointment first.
+* `appointment`: sorts list by appointment timing in order of the earliest appointment first. If no appointment is found, the remaining persons without an appointment will be displayed in an arbitrary order, based on the reordering of the previous sorting functions applied.
 
 Format: `sort KEYWORD`
 

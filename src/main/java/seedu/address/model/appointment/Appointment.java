@@ -140,7 +140,7 @@ public class Appointment extends ScheduleItem implements Comparable<ScheduleItem
     @Override
     public int compareTo(ScheduleItem scheduleItem) {
         if (scheduleItem instanceof NullAppointment) {
-            return 0;
+            return -1; //person with appointment should be smaller to be sorted up on the list
         } else {
             Appointment appointment = (Appointment) scheduleItem;
             return this.date.compareTo(appointment.date);
