@@ -8,7 +8,10 @@ import static seedu.address.testutil.TypicalTeams.getTypicalTeamBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+
 
 public class EditTeamNameCommandTest {
 
@@ -30,8 +33,8 @@ public class EditTeamNameCommandTest {
         String newTeamName = "Beta team";
         EditTeamNameCommand editTeamNameCommand = new EditTeamNameCommand(originalTeamName, newTeamName);
 
-        String expectedString = "seedu.address.logic.commands.EditTeamNameCommand{" +
-                "Original Team Name=TEAM1, New Team Name=Beta team}";
+        String expectedString = "seedu.address.logic.commands.EditTeamNameCommand{"
+                + "Original Team Name=TEAM1, New Team Name=Beta team}";
 
         assertEquals(expectedString, editTeamNameCommand.toString());
     }
