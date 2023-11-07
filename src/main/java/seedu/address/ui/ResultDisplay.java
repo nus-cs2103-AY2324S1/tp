@@ -31,6 +31,7 @@ public class ResultDisplay extends UiPart<Region> {
         requireNonNull(feedbackToUser);
         setTextWithMarkdown(resultDisplay, feedbackToUser);
     }
+
     private void setTextWithMarkdown(TextFlow textFlowControl, String content) {
         textFlowControl.getChildren().clear(); // clear existing children
 
@@ -38,6 +39,9 @@ public class ResultDisplay extends UiPart<Region> {
         boolean isBold = false;
         boolean isItalic = false;
         boolean isUnderlined = false;
+        boolean awaitingBoldContent = false;
+        boolean awaitingItalicContent = false;
+        boolean awaitingUnderlineContent = false;
 
         StringBuilder currentSegment = new StringBuilder();
 
@@ -45,38 +49,56 @@ public class ResultDisplay extends UiPart<Region> {
             char c = content.charAt(i);
 
             // Check for underline tags
-            if (i + 2 < content.length() && content.substring(i, i + 3).equals("<u>")) {
-                if (currentSegment.length() > 0) {
+            if (c == '<' && content.startsWith("<u>", i)) {
+                if (!awaitingUnderlineContent && currentSegment.length() == 0) {
+                    awaitingUnderlineContent = true;
+                } else {
                     addTextSegment(textFlowControl, currentSegment.toString(), isBold, isItalic, isUnderlined);
                     currentSegment.setLength(0);
+                    isUnderlined = !isUnderlined;
+                    awaitingUnderlineContent = false;
                 }
-                isUnderlined = true;
                 i += 2; // Skip over the <u> tag
-            } else if (i + 3 < content.length() && content.substring(i, i + 4).equals("</u>")) {
-                if (currentSegment.length() > 0) {
+            } else if (c == '<' && content.startsWith("</u>", i)) {
+                if (awaitingUnderlineContent) {
+                    awaitingUnderlineContent = false;
+                } else {
                     addTextSegment(textFlowControl, currentSegment.toString(), isBold, isItalic, isUnderlined);
                     currentSegment.setLength(0);
+                    isUnderlined = false;
                 }
-                isUnderlined = false;
                 i += 3; // Skip over the </u> tag
             } else if (c == '*') {
                 if (i < content.length() - 1 && content.charAt(i + 1) == '*') {
-                    // Double asterisks indicate bold
-                    if (currentSegment.length() > 0) {
+                    if (!awaitingBoldContent && currentSegment.length() == 0) {
+                        awaitingBoldContent = true;
+                    } else {
                         addTextSegment(textFlowControl, currentSegment.toString(), isBold, isItalic, isUnderlined);
-                        currentSegment.setLength(0); // Clear the current segment
+                        currentSegment.setLength(0);
+                        isBold = !isBold;
+                        awaitingBoldContent = false;
                     }
-                    isBold = !isBold;
                     i++; // Skip the next asterisk
                 } else {
-                    // Single asterisk indicates italic
-                    if (currentSegment.length() > 0) {
+                    if (!awaitingItalicContent && currentSegment.length() == 0) {
+                        awaitingItalicContent = true;
+                    } else {
                         addTextSegment(textFlowControl, currentSegment.toString(), isBold, isItalic, isUnderlined);
-                        currentSegment.setLength(0); // Clear the current segment
+                        currentSegment.setLength(0);
+                        isItalic = !isItalic;
+                        awaitingItalicContent = false;
                     }
-                    isItalic = !isItalic;
                 }
             } else {
+                if (awaitingBoldContent && isBold) {
+                    awaitingBoldContent = false;
+                }
+                if (awaitingItalicContent && isItalic) {
+                    awaitingItalicContent = false;
+                }
+                if (awaitingUnderlineContent && isUnderlined) {
+                    awaitingUnderlineContent = false;
+                }
                 currentSegment.append(c);
             }
         }
@@ -86,6 +108,7 @@ public class ResultDisplay extends UiPart<Region> {
             addTextSegment(textFlowControl, currentSegment.toString(), isBold, isItalic, isUnderlined);
         }
     }
+
 
     private void addTextSegment(TextFlow textFlowControl, String content,
                                 boolean isBold, boolean isItalic, boolean isUnderlined) {

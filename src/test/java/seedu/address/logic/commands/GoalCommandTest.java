@@ -36,5 +36,6 @@ public class GoalCommandTest {
         assertEquals(goalCommand, sameGoalCommand); // Same values
         assertEquals(goalCommand, new GoalCommand(5)); // Equal objects should have equal hash codes
         assertNotEquals(goalCommand, differentGoalCommand);
+        assertNotEquals(goalCommand, null);
     }
 }

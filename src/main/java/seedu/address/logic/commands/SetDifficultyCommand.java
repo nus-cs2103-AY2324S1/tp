@@ -32,7 +32,7 @@ public class SetDifficultyCommand extends Command {
     private final Index targetIndex;
 
     /** Difficulty of {@code Card} to set to */
-    private final Difficulty difficulty;
+    private final String difficulty;
 
     /**
      * Constructs a {@code PractiseCommand} with the specified {@code targetIndex} and {@code difficulty}.
@@ -42,7 +42,7 @@ public class SetDifficultyCommand extends Command {
      */
     public SetDifficultyCommand(Index targetIndex, String difficulty) {
         this.targetIndex = targetIndex;
-        this.difficulty = Difficulty.valueOf(difficulty.toUpperCase());
+        this.difficulty = difficulty;
     }
 
     @Override
@@ -66,18 +66,27 @@ public class SetDifficultyCommand extends Command {
         if (actualIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
+
         Card cardToSetDifficulty = lastShownList.get(actualIndex.getZeroBased());
 
-        switch (difficulty) {
-        case EASY: return updatePracticeDate(model,
-                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY, actualIndex);
-        case MEDIUM: return updatePracticeDate(model,
-                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM, actualIndex);
-        case HARD: return updatePracticeDate(model,
-                difficulty, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD, actualIndex);
-        default:
+        Difficulty difficultySet;
+        try {
+            difficultySet = Difficulty.valueOf(difficulty.toUpperCase());
+        } catch (IllegalArgumentException e) {
             throw new CommandException(difficulty + Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_INVALID);
         }
+        if (difficultySet.equals(Difficulty.EASY)) {
+            return updatePracticeDate(model,
+                    difficultySet, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY, actualIndex);
+        }
+
+        if (difficultySet.equals(Difficulty.MEDIUM)) {
+            return updatePracticeDate(model,
+                    difficultySet, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM, actualIndex);
+        }
+
+        return updatePracticeDate(model,
+                difficultySet, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD, actualIndex);
     }
 
     private CommandResult updatePracticeDate(Model model, Difficulty difficulty,
