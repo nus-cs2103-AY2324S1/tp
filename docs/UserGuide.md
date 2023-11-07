@@ -367,14 +367,6 @@ UI Prototype:
 ![img.png](images/LanguageTag.png)
 
 
-
-
-
-
-
-
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -385,6 +377,16 @@ UI Prototype:
 **Q**: How can I import my data to the app?<br>
 **A**: Save your words and translations in the format specified above in an Excel file. Move the file to the same folder with `flashlingo.jar`.
 Then, use the `load` command to import the data.
+
+**Q**: After I reviewed a flash card, I edited details of the card by the `edit` command. Will I see these changes immediately reflected in the review session?<br>
+**A**:
+* Unfortunately, no. The card is updated synchronously in the card list and the review session of Flashlingo. However, since the user has already reviewed the same card on the day, the card will not be included in the review session again.
+* To see the edits made, User can use the `list` or `find` command to locate the specific card in the card list. The changes will also be reflected in the next review session for that flash card.
+
+**Q**: If the displayed level of a flash card is "Word Mastered", what can I do if I want to review the card again?<br>
+**A**: 
+* Currently, there's no way for user to manually change the level of a flash card. Flashlingo is designed to automatically remove words that learners are familiar with from the review session.
+* However, if user must review the card, he/she can first use the `delete` command to delete the card and then use the `add` command to re-add the same card. The new card will be reset to level 1 and added in the review session.
 
 --------------------------------------------------------------------------------------------------------------------
 
