@@ -527,6 +527,7 @@ If you wish, please refer to the below section for a more succinct [command summ
 | **List All Members in a Band**                 | `findb BANDNAME` <br> e.g., `findb theory X`                                                                                                                     |
 | **List All Musicians and Bands**               | `list`                                                                                                                                                           |
 | **Clear All Data**                             | `clear`                                                                                                                                                          |
+| **Exit**                                       | `exit`                                                                                                                                                           |
 
 --------------------------------------------------------------------------------------------------------------------
 
