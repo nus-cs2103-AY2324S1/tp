@@ -499,6 +499,9 @@ Example:
 * `filter n/Ivan p/Testing Engineer s/u` filters applicant list to applicants whose name contains `ivan` applying for the role of `testing engineer` and has a status of `Undecided`.
 * `filter gts/7` filters applicant list to applicants whose score is strictly greater than 7.
 
+<box type="warning" header="**Caution**">
+    Score will be rounded to the nearest 1 decimal place if more than 1 decimal place is provided.
+</box>
 
 <br>
 
