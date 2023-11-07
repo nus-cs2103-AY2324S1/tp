@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a Person's join date in the address book.
@@ -12,7 +13,7 @@ import java.time.format.DateTimeParseException;
  */
 public class JoinDate {
     public static final String MESSAGE_CONSTRAINTS = "Join date should be in the form of DD/MM/YYYY. "
-        + "Eg. 12/02/2023 represents 12th Feb 2023";
+        + "Eg. 12/02/2023 represents 12th Feb 2023 and date must be valid!";
 
     public final String value;
 
@@ -32,7 +33,7 @@ public class JoinDate {
      */
     public static boolean isValidJoinDate(String test) {
         try {
-            DateTimeFormatter.ofPattern("d/M/yyyy").parse(test);
+            DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT).parse(test);
             return true;
         } catch (DateTimeParseException e) {
             return false;
