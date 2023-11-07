@@ -272,7 +272,7 @@ the lifeline reaches the end of diagram.
 </div>
 
 
-#### Design rationale:
+#### Design rationale
 The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
  
 ### Delete tutor feature
@@ -326,7 +326,7 @@ The lifeline for `DeleteTutorCommandParser` should end at the destroy marker (X)
 but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-#### Design rationale:
+#### Design rationale
 The `delete-t` command was designed this way to ensure consistency with the previous `delete` person command.
 
 ### Add Schedule Feature
@@ -372,7 +372,7 @@ The following sequence diagram shows how the operation works:
 
 </div>
 
-#### Design considerations:
+#### Design rationale
 
 **Aspect: Checking for clashing schedule:**
 
@@ -487,7 +487,7 @@ Given below is an example scenario on how the delete schedule command behaves:
 The following sequence diagram shows how the above steps for delete schedule operation works, taking `execute("delete-s 1")` API call as an example.
 
 ![Sequence diagram for delete-s command](images/DeleteScheduleSequenceDiagram.png)
-#### Design rationale:
+#### Design rationale
 The `delete-s` command was designed this way to ensure consistency with the previous delete person command.
 
 ### Change theme feature
@@ -1054,7 +1054,6 @@ In the calendar view, incorporating schedule colors to represent their respectiv
 intuitiveness.
 
 **Proposed implementation**
-
 In `CalendarCard.java`, the background color of the calendar card will be determined based on schedule status: green 
 for completed, red for missed, and yellow for pending (please note that these colors are not finalised).
 
@@ -1062,3 +1061,29 @@ To differentiate between rows in the calendar, an alternating shading of green, 
 
 Additionally, each calendar card will have a visible border to separate it from adjacent schedule cards on 
 the same row.
+
+### Allow partial name search for find command
+
+The `find-t` and `find-s` commands should allow users to search for tutors without having to input their full names.
+
+The current two `find` commands only allow searching for tutor when a full word in their names matches the user 
+input exactly. We plan to change search to match partial words instead of only a full word match.
+
+This would allow users to search for tutors without knowing the tutors' exact name. They can search using just a few
+characters of the name.
+
+For example: `find-t john` will now match: `john`, `JOHN123` and `johnetta`.
+
+**Proposed implementation**:
+
+A new method `containsPartialWordIgnoreCase` can be added in `StringUtil` that will be used by
+`NameContainsKeywordsPredicate` and `TutorNameContainsKeywordsPredicate` to test for a match.
+
+This method will call `String::contains` instead of `String::equals` to match partial words too.
+
+Depending on the command prefix, the parse method of the `findTutorCommandParser` or `findScheduleCommandParser` will 
+create the `find` command object with the updated predicate.
+
+This would then be used in the `execute` method of the `find` command object to get the filtered tutor 
+or schedule list with part of their names matching the user input.
+

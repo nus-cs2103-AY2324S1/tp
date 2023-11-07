@@ -24,6 +24,9 @@ public class JsonAdaptedScheduleTest {
     private static final String INVALID_STARTTIME = "15/02/2023 6pm";
     private static final String INVALID_ENDTIME = "14/02/2023 6pm";
     private static final String INVALID_STATUS = "status";
+    private static final String INVALID_STARTTIME2 = SCHEDULE_ALICE_FIRST_JAN.getEndTime().getTime().format(formatter);
+    private static final String INVALID_ENDTIME2 = SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime().format(formatter);
+    private static final String INVALID_TUTOR_NAME = "DoesNotExist";
 
     private static final String VALID_NAME = SCHEDULE_ALICE_FIRST_JAN.getTutor().getName().toString();
     private static final String VALID_STARTTIME = SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime().format(formatter);
@@ -94,6 +97,20 @@ public class JsonAdaptedScheduleTest {
     @Test
     public void toModelType_nullStatus_throwsIllegalValueException() {
         JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_NAME, VALID_STARTTIME, VALID_ENDTIME, null);
+        assertThrows(IllegalValueException.class, () -> schedule.toModelType(original));
+    }
+
+    @Test
+    public void toModelType_endTimeBeforeStartTime_throwsIllegalValueException() {
+        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_NAME, INVALID_STARTTIME2, INVALID_ENDTIME2,
+            VALID_STATUS);
+        assertThrows(IllegalValueException.class, () -> schedule.toModelType(original));
+    }
+
+    @Test
+    public void toModelType_tutorWithNameNotFound_throwsIllegalValueException() {
+        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(INVALID_TUTOR_NAME, VALID_STARTTIME, VALID_ENDTIME,
+            VALID_STATUS);
         assertThrows(IllegalValueException.class, () -> schedule.toModelType(original));
     }
 
