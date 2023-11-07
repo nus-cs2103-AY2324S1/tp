@@ -111,7 +111,7 @@ Acceptable values for each parameter:
 * `[a/ADDRESS]`: Address of the person
 * `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
 * `[r/REMARK]`: A remark about the person
-* `[g/GROUP]`: A group for the person to be categorised into
+* `[g/GROUP]`: A group for the person to be categorised into (no spaces)
 
 <div markdown="span" class="alert alert-secondary">
     :bulb: **Tip:**
