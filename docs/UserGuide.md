@@ -135,7 +135,7 @@ Expected output when the command fails
 
 Edits an existing person in the FumbleLog.
 
-Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​`
+Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​ [ug/GROUP]…​`
 
 * **At least one of the optional parameters must be provided.**
 * Existing values will be updated to the input values.
@@ -156,7 +156,8 @@ Acceptable values for each parameter:
 * `[a/ADDRESS]`: Address of the person
 * `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
 * `[r/REMARK]`: Remark about the person
-* `[g/GROUP]`: Text for the tag of the person
+* `[g/GROUP]`: Text for the group of the person
+* `[ug/GROUP]`: Text for the group of the person to be unassigned
 
 Expected output when a command succeeds:
 * Input: `edit_person 1 n/Alexa Yeoh`
