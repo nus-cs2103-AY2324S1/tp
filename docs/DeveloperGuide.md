@@ -734,6 +734,9 @@ or `phone` since two people are very unlikely to share those details.
 4. The current `name` and `next-of-kin name` fields currently do not accept symbols. We plan to make the fields accept
 symbols so that names like `Thaarshen s/o Thaarshen` and `O'Brien` are accepted. This will involve changing the
 validity checker for both fields.
+5. The current `gather` command do not allow gathering of all persons emails or by multiple fields at once. To allow the gathering of all the persons emails using `gather all`
+command, we plan create another `GatherEmailPrompt` class, with a method that will call the Person `getEmail()` method. To allow gathering emails by multiple fields, for example using the `fp/` and `t/` prefixes at once, we plan to use a similar approach 
+to find but return the person email instead.
 
 *{More to be added}*
 
