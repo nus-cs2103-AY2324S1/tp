@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javafx.scene.image.Image;
 
 /**
@@ -34,7 +35,9 @@ public class Avatar {
     public Avatar(String path) throws IOException {
         // Check that path points to valid image
         String contentType = Files.probeContentType(Paths.get(path));
-        if (!contentType.equals("image/png") && !contentType.equals("image/jpeg")) {
+        if (contentType == null) {
+            throw new FileNotFoundException();
+        } else if (!contentType.equals("image/png") && !contentType.equals("image/jpeg")) {
             throw new IOException("path does not refer to valid png or jpeg image!");
         }
 
