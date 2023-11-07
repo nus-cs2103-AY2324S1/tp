@@ -675,4 +675,10 @@ testers are expected to do more *exploratory* testing.
      not know the income of the date, he/she can leave it blank. Currently, this is not allowed. We are planning to
      allow this.
 
+2. Improve the income field to be more robust
+   - Currently the income field is unable to accept a range of values, which might not be inclusive of people who
+have careers with variable income.
+   - Additionally, right now the income field does not accept a value of 0. This is not inclusive towards students 
+who may not have any income. Hence, we plan to modify the field to accept a value of 0, on top of supporting a range 
+of values
 ------------------------------------------------------------

@@ -88,6 +88,9 @@ online dating journey.
   e.g. in `edit INDEX METRIC/NEW_ARG`, `INDEX`, `NEW_ARG` and `METRIC` are parameters which can be used as
   `edit 2 income/3000`.
 
+* For commands that accept a positive integer, the integer cannot be preceded with a leading zero.
+  For instance, `star 9` is valid, but `star 09` is invalid
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
   will be ignored.<br> e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -335,13 +338,17 @@ Example: `star 1`
 
 Expected output: `Starred Date: John Doe; Age: 21; Gender: F; Height: 245; Income: 3000; Horoscope: LIBRA`
 
-Output if error:
+Output if invalid command format:
 ```
 Invalid command format!
-star: stars the Date identified by the index number used in the displayed Date list.
+star: stars the date identified by the index number used in the displayed Date list.
 Parameters: INDEX (must be a positive integer)
 Example: star 1
 ```
+
+Output if index out of bounds:
+
+`The date index provided is invalid`
 
 <box type="info">
 * If Date is already starred, it will display the output `Date has already been starred`
@@ -357,7 +364,16 @@ Example: `unstar 1`
 
 Expected output: `Unstarred Date: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
-Output if error:
+Output if invalid command format:
+```
+Invalid command format!
+unstar: unstars the date identified by the index number used in the displayed Date list.
+Parameters: INDEX (must be a positive integer)
+Example: star 1
+```
+
+Output if index out of bounds:
+
 `The date index provided is invalid`
 
 <box type="info">
