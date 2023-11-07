@@ -100,23 +100,24 @@ Click on the relevant links to easily navigate through the guide and access the 
 --------------------------------------------------------------------------------------------------------------------
 # Argument Summary
 
-Below is a table summarising common arguments used in `add`, `edit`, `find`, `schedule` and etc. Refer to the table below to view the arguments' prefix, and their acceptable values.
+Below is a table summarising common arguments used in `add`, `edit`, `find`, `schedule` etc. Refer to the table below
+to view the arguments' prefix, and their acceptable values.
 
-| Prefix | Argument              | Acceptable Values                                      |
-|--------|-----------------------|--------------------------------------------------------|
-| -      | INDEX                 | Number (1 to current size of the contact book)         |
-| `n/`   | NAME                  | Alphabets, numbers, and space characters only          |
-| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                |
-| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid format |
-| `a/`   | ADDRESS               | Any value is possible                                  |
-| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only          |
-| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                |
-| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only          |
-| `t/`   | TAG                   | Alphabets and numbers only                             |
-| `ap/`  | APPOINTMENT_NAME      | Any value is possible                                  |
-| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                  |
-| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)      |
-| -      | KEYWORD               | `name` or `appointment`                                |
+| Prefix | Argument              | Acceptable Values                                            |
+|--------|-----------------------|--------------------------------------------------------------|
+| -      | INDEX                 | Number (1 to current size of the contact book)               |
+| `n/`   | NAME                  | Alphabets, numbers, and space characters only                |
+| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                      |
+| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format |
+| `a/`   | ADDRESS               | Any value is possible                                        |
+| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                |
+| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                      |
+| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only                |
+| `t/`   | TAG                   | Alphabets and numbers only                                   |
+| `ap/`  | APPOINTMENT_NAME      | Any value is possible                                        |
+| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                        |
+| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)            |
+| -      | KEYWORD               | `name` or `appointment`                                      |
 
 -----------------------
 ### Viewing help : `help`
@@ -144,8 +145,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PH
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of Financial Plans (including 0)
-A person can have any number of tags (including 0)
+A person can have any number of Financial Plans (including 0).
+A person can have any number of tags (including 0).
 </div>
 
 Examples:
@@ -204,10 +205,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Editing the name of a person to be the exact same name as another person currently in the contact book
-    (case-sensitive) will cause the command to fail.
-* When editing financial plans or tags, the existing financial plans or tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+(case-sensitive) will cause the command to fail.
+* When editing financial plans or tags, the existing financial plans or tags of the person will be removed i.e adding
+of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * You can remove all the person’s financial plans by typing `fp/` without
   specifying any tags after it.
 * A person's appointment cannot in edited in this manner. Refer to [Schedule](#scheduling-an-appointment--schedule).
@@ -243,12 +244,12 @@ Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 
 * At least one of the optional fields must be provided.
 * This command will ignore other prefixes. Using them anyway can cause undefined behaviour.
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* For names, only full words will be matched e.g. `Han` will not match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* For names, only full words will be matched e.g. `Han` will not match `Hans`.
 * Calling this command on a sorted list will retain the sorted quality of the list.
-* For financial plans and tags, any substring will be matched e.g. `Senior` will match `SuperSenior`
+* For financial plans and tags, any substring will be matched e.g. `Senior` will match `SuperSenior`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -264,7 +265,7 @@ Gathers all the emails of persons with a desired financial plan or tag.
 Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
 
 * Generates a list of emails separated by spaces, making it convenient for copying and pasting into the recipient input of an email application.
-* **Either Financial Plan or Tag** can be searched at once.
+* Either **Financial Plan or Tag** can be searched at once, but **not both**.
 * The search is case-insensitive. e.g `financial` will match `FINANCIAL` or `Financial`.
 * A person's email will be gathered if the prompt matches a substring of their financial plan or tag.
 
@@ -338,9 +339,11 @@ Completes an appointment either with the person at the specified `INDEX` or comp
 
 Format: `complete [INDEX] [d/APPOINTMENT_DATE]`
 
-- **Either an index or appointment date must be provided** for command to execute.
-- If user inputs an `INDEX`, command will complete appointment with the person at the specified `INDEX`. The index refers to the index number shown in **Contacts list**.
-- If user inputs an `APPOINTMENT_DATE`, command will complete all appointments in address book that have a date matching the one input by user. This is to allow the user to clear all his/her appointments finished throughout the entire day quickly.
+- Either an **index or appointment date** must be provided for command to execute, but **not both**.
+- If user inputs an `INDEX`, command will complete appointment with the person at the specified `INDEX`. The index refers to the index number shown in the **Contacts list**.
+- If user inputs an `APPOINTMENT_DATE`, the command will complete all appointments in address book that have a date
+matching the one input by user. This can allow the user to clear all his/her appointments finished throughout the
+entire day quickly.
 
 <div markdown="span" class="alert alert-primary">:information_source: 
 **Note** that an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the year, month and day are the same. Time of the appointment does not matter in this command. 
