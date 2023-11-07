@@ -422,29 +422,34 @@ Lists all the free time for the given `DATE`.
 
 Format: `list-freetime DATE`
 
+| Parameter | Representation                                                   | Constraints                                                                                                                                                                  |
+|-----------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DATE`    | The date which the user wants to view the list of free times for | The input date must have a **4-digit year**, and cannot be in the past. Must follow the format of the table of accepted date formats, shown [below](#accepted-date-formats). | 
+
 * Displays a list of all the blocks of free time the user has in
   the given day, within the 9am to 5pm window of that day
+
 * If there is no free time, there will be no blocks of 
 free time that will be displayed
   * This indicates that the entire day is not free
+
 * If there are no interviews on that day, the block of free time
 listed will be: `from: 09:00 to: 17:00`
   * This indicates that the entire day is free
+
 * If the `DATE` not valid at all, this error message will
 be shown:`Please specify a valid date!`
+
 * If the `DATE` is valid but in the past, this error message will
 be shown:`Input date cannot be in the past!`
-* If the prefix substring of the time string is a valid time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. Example: `list-freetime 12/12/2099 hello` or `list-freetime 12/12/2099:8216479863149`
-* If the prefix substring of the time string is a valid time string with day, month and year separated by '/', but invalid year, it will still be accepted. Example: `list-freetime 12/12/209938746913654` or `list-freetime 12/12/20343141364138216479863149` will be accepted, but the year will be set to the current year as defined by the system time
-* If the prefix substring of the time string is a valid time string with day, month and year separated by '-', but invalid year and/or month, adding additional parameters will cause the command to be not accepted. Example: `list-freetime 12-12-209938746913654` or `list-freetime 12-12-20343141364138216479863149`
 
-Examples:
-* `list-freetime 12/12/2099`
-* `list-freetime 12-12-2099`
-
-Accepted time formats (to replace `DATE` with):
-* `dd/mm/yyyy`
-* `dd-mm-yyyy`
+#### Accepted date formats
+| Format               | Example      | Constraints                                                                                                                                                                                                                                                                                                                                                                                                   |
+|----------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dd/mm/yyyy`         | `12/12/2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year. | 
+| `dd-mm-yyyy`         | `12-12-2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year. | 
+| `dd/mm`              | `12/12`      | - Adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The month and year must be **valid**.                                                                                                                                                                                                                                                                           |
+| `other time formats` | `12/01-2024` | - Will be accepted within reasonable bounds <br/><br/>- **Will lead to unexpected/unintended behaviour**.<br/><br/>- _Use with caution_                                                                                                                                                                                                                                                                       |
 
 [Back to the Table of Contents](#table-of-contents)
 
