@@ -16,6 +16,7 @@ learners, Flashlingo specializes in expanding vocabulary.
 The application leverages the scientifically-proven principle of the [**Forgetting Curve**](https://en.wikipedia.org/wiki/Forgetting_curve). 
 By incorporating the forgetting curve concept, Flashlingo schedules review sessions, ensuring words are revisited at 
 optimal intervals to enhance long-term memory retention. This method assists users in effectively retaining and expanding their vocabulary over time.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Application Features
@@ -27,8 +28,9 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
    - In each review session, words that require reviewing will be presented to users one by one. For each word, users can indicate whether
      - they have memorized the word  
      This will advance the word into the next `level`, meaning less frequent review for the word in the near future.
-     - they have forgotten the word 
+     - they have forgotten the word  
         This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -47,12 +49,10 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
     * For windows users, press `Windows + R` keys simultaneously, type `cmd` and press `Enter`.
     2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
        <br>
-       `$ cd Downloads`
+       ``cd Downloads```
 
-    3. Simply type in java -jar flashlingo.jar to get started!
-       <br>
-       `$ java -jar flashlingo.jar`
-       <br>
+    3. Simply type in `java -jar flashlingo.jar` to get started!
+
        A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
        ![Ui](images/MainUi.png)
 
