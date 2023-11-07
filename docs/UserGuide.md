@@ -154,7 +154,7 @@ _A flashcard with a question, answer, tag and hint field._
 
 2. Successful Output
 
-![result of add command](./images/UserGuide/1.3_add_clean.png)
+![result of add command](./images/UserGuide/1.3b_add.png)
 
 
 ### Deleting a Flashcard : `delete`
@@ -191,7 +191,7 @@ _Deleting the card in th deck with an index of 2._
 
 2. Successful Output
 
-![result of delete command](./images/UserGuide/1.3_del_clean.png)
+![result of delete command](./images/UserGuide/1.3b_del.png)
 
 ### View All Flashcards : `list`
 Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
@@ -227,7 +227,7 @@ Examples:
 ```
 
 #### Usage
-![usage of list command](./images/UserGuide/1.3_list.png)
+![usage of list command](./images/UserGuide/1.3b_list_ans.png)
 
 ### Editing a Specific Flashcard : `edit`
 Edits an existing Flashcard in the deck.
@@ -255,10 +255,10 @@ Examples:
 ```
 #### Usage:
 1. User Input
-   ![usage of edit command](./images/UserGuide/1.3_edit.png)
+   ![usage of edit command](./images/UserGuide/1.3b_edit.png)
 
 2. Successful Output
-   ![result of edit command](./images/UserGuide/1.3_edit_ans.png)
+   ![result of edit command](./images/UserGuide/1.3b_edit_ans.png)
 
    
 ### Practise Flashcards: `practise`
@@ -286,10 +286,10 @@ practise 10
 
 #### Usage:
 1. User Input
-   ![usage of practise command](./images/UserGuide/1.3_prac.png)
+   ![usage of practise command](./images/UserGuide/1.3b_practise.png)
 
 2. Successful Output
-   ![result of practise command](./images/UserGuide/1.3_prac_ans.png)
+   ![result of practise command](./images/UserGuide/1.3b_practise_ans.png)
 
 ### Hints for Flashcards: `hint`
 See the hint for a question at the given index
@@ -341,10 +341,10 @@ solve 10
 
 #### Usage:
 1. User Input
-   ![usage of solve command](./images/UserGuide/1.3_solve.png)
+   ![usage of solve command](./images/UserGuide/1.3b_solve.png)
 
 2. Successful Output
-   ![result of solve command](./images/UserGuide/1.3_solve_ans.png)
+   ![result of solve command](./images/UserGuide/1.3b_solve_ans.png)
 
 
 ### Setting Difficulty of Flashcards: `set`
@@ -379,10 +379,10 @@ set 10 d/ easy
 
 #### Usage:
 1. User Input
-   ![usage of set command](./images/UserGuide/1.3_set.png)
+   ![usage of set command](./images/UserGuide/1.3b_set.png)
 
 2. Successful Output
-   ![result of set command](./images/UserGuide/1.3_set_ans.png)
+   ![result of set command](./images/UserGuide/1.3b_set_ans.png)
 
 ### Randomly Practise Flashcards: `random`
 Practise a single Flashcard in the deck. This command chooses a random flashcard, 
@@ -435,7 +435,6 @@ Format: goal NUMBER
 goal 5
 ```
 
-
 ### Important Note:
 Do not stack MarkDown Syntax
 
@@ -444,6 +443,7 @@ Example:
 
 This may lead to unexpected behavior of text in the display view.
 
+>>>>>>> master
 ### Getting help: `help`
 Seek more details from a link provided leading to the User Guide.
 Users can also access this function by clicking on the **File** button located at the top
@@ -480,7 +480,7 @@ To bold a line of text, wrap text with `**`
 edit 1 q/ How many bits can a **Half Adder** add up
 ```
 #### Expected Result:
-![usage of bold syntax](./images/UserGuide/1.3_bold.png)
+![usage of bold syntax](./images/UserGuide/1.3b_bold.png)
 
 ### Italic
 To italicise a line of text, wrap text with `*`
@@ -490,7 +490,7 @@ To italicise a line of text, wrap text with `*`
 edit 1 q/ How many bits can a *Half Adder* add up
 ```
 #### Expected Result:
-![usage of bold syntax](./images/UserGuide/1.3_italic.png)
+![usage of bold syntax](./images/UserGuide/1.3b_italics.png)
 
 ### Underline
 To underline a line of text, insert `<u>` at the beginning of the text,
@@ -501,7 +501,7 @@ and end with `</u>` at the end of the underlined text.
 edit 1 q/ How many bits can a <u>Half Adder</u> add up
 ```
 #### Expected Result:
-![usage of bold syntax](./images/UserGuide/1.3_underline.png)
+![usage of bold syntax](./images/UserGuide/1.3b_underline.png)
 
 
 ### Important Note:
@@ -515,6 +515,17 @@ This may lead to unexpected behavior of text in the display view. In the case wh
 
 
 # Importing and Exporting Decks
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about Export and Import**<br>
+
+The import and export functions are meant to be used before and after revision respectively <br>
+
+They are not to be confused as commands input by user, but rather as a method to transfer and import data easily <br>
+
+</div>
+
 Users can share their own Decks with others or download their Decks to their own.
 Both import and export features reside in the **File** menu.
 
