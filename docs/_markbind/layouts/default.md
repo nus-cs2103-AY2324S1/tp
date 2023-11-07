@@ -29,6 +29,7 @@
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
+  * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
   * [Glossary]({{ baseUrl }}/UserGuide.html#glossary)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:

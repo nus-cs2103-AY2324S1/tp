@@ -4,8 +4,11 @@
   pageNav: 3
 ---
 <style>
-img
-{
+table {
+    width: 100%;
+}
+
+img {
     display:block;
     float:none;
     margin-left:auto;
@@ -55,6 +58,11 @@ img
     * [Exiting the program: `exit`](#exit)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
+* [Command Summary](#command-summary)
+  * [Commands for Applicant Management Features](#commands-for-applicant-management-features)
+  * [Commands for Interview Management Features](#commands-for-interview-management-features)
+  * [Commands for Applicant Processing Features](#commands-for-applicant-processing-features)
+  * [Commands for Miscellaneous Features](#commands-for-miscellaneous-features)
 * [FAQ](#faq)
 * [Glossary](#glossary)
 
@@ -545,6 +553,9 @@ Format: `help`
 
 <br>
 
+---
+<br>
+
 <a name="clear"></a>
 #### Clearing all applicant entries: `clear`
 
@@ -558,6 +569,9 @@ Format: `clear`
 
 <br>
 
+---
+<br>
+
 <a name="exit"></a>
 #### Exiting the program: `exit`
 
@@ -567,11 +581,17 @@ Format: `exit`
 
 <br>
 
+---
+<br>
+
 <a name="saving-the-data"></a>
 #### Saving the data
 
 Automatically saves the data to a local storage whenever there is a change to the applicant list. There is no need to save manually.
 
+<br>
+
+---
 <br>
 
 <a name="editing-the-data-file"></a>
@@ -588,6 +608,61 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 ---
 <br>
 
+<a name="command-summary"></a>
+## Command Summary
+
+<br>
+
+<a name="commands-for-applicant-management-features"></a>
+### Commands for Applicant Management Features
+
+| <div style="width:auto">Action</div> | Format                                                  |
+|--------------------------------------|---------------------------------------------------------|
+| Adding a new applicant               | `add n/NAME hp/PHONE e/EMAIL p/POSITION`                |
+| Editing an applicant                 | `edit INDEX [n/NAME] [hp/PHONE] [e/EMAIL] [p/POSITION]` |
+| Deleting an applicant                | `delete INDEX`                                          |
+| Listing all applicants               | `list`                                                  |
+| Editing an applicant status          | `status INDEX s/STATUS`                                 |
+
+<br>
+
+<a name="commands-for-interview-management-features"></a>
+### Commands for Interview Management Features
+
+| <div style="width:auto">Action</div>     | Format                                              |
+|------------------------------------------|-----------------------------------------------------|
+| Adding an interview to an applicant      | `addi INDEX t/TYPE [r/RATING]`                      |
+| Editing an interview of an applicant     | `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]` |
+| Deleting an interview from an applicant  | `deletei INDEX i/INTERVIEW_INDEX`                   |
+
+<br>
+
+<a name="commands-for-applicant-processing-features"></a>
+### Commands for Applicant Processing Features
+
+| <div style="width:auto">Action</div> | Format                                                                                 |
+|--------------------------------------|----------------------------------------------------------------------------------------|
+| Finding an applicant by name         | `find KEYWORD [MORE_KEYWORDS]`                                                         |
+| Sorting applicants by descriptors    | `sort d/DESCRIPTOR [dsc/]`                                                             |
+| Filtering applicants by fields       | `filter [n/NAME] [e/EMAIL] [p/POSITION] [hp/PHONE] [s/STATUS] [lts/SCORE] [gts/SCORE]` |
+| Importing from CSV                   | `import f/FILENAME`                                                                    |
+
+<br>
+
+<a name="commands-for-miscellaneous-features"></a>
+### Commands for Miscellaneous Features
+
+| <div style="width:auto">Action</div> | Format                  |
+|--------------------------------------|-------------------------|
+| Viewing help                         | `help`                  |
+| Clearing all applicant entries       | `clear`                 |
+| Exiting the program                  | `exit`                  |
+
+<br>
+
+---
+<br>
+
 <a name="faq"></a>
 ## FAQ
 
@@ -596,7 +671,7 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 - Method 1: Clear the current data using the [`clear`](#clearing-all-applicant-entries-clear) command and import your data using the [`import`](#importing-from-csv-import) command.
 - Method 2: Copy the data file `[JAR file location]/data/applicantBook.json` to the other computer.
 
-**Q**: Is my data secure? <br> 
+**Q**: Is my data secure? <br>
 **A**: Yes, your data is stored locally in your computer and is not accessible by anyone else.
 
 <br>
@@ -615,12 +690,11 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 | User Interface (UI)               | An User Interface is the visual display of the application where users can interact with the application.                                      |
 | Graphical User Interface (GUI)    | The GUI is the visual display of the application which users can interact with.                                                                |
 | Command Line Interface (CLI)      | The CLI is a text-based interface that allows users to type in commands to interact with the application.                                      |
-| Component                         | A component is part of the user interface.                                                                                                     |
+| Component                         | A component is a part of the user interface.                                                                                                   |
 | Alphanumeric                      | Text that is consisting of or using both letters and numerals.                                                                                 |
-| JAR                               | A JAR file is a Java Archive file. It is a package file format typically used to aggregate many Java class files and associated metadata.      |
+| JAR                               | A JAR file is a Java Archive file. It is the file format of Staff-Snap.                                                                        |
 | Java                              | Java is a general-purpose, class-based, object-oriented programming language designed for having lesser implementation dependencies.           |
 | Home folder                       | The main folder where you want to store all Staff-Snap related files.                                                                          |
-| Small medium enterprise (SME)     | A small medium enterprise is a business that maintains revenues, assets, or number of employees below a certain threshold.                     |
-| Comma-separated values (CSV)      | A CSV file is a comma-separated values file, which allows data to be saved in a tabular format.                                                |
-| Prefix                            | A prefix is a word, letter, or number placed before another.                                                                                   |
+| Small Medium Enterprise (SME)     | A SME is roughly defined as a small business that has more than 30 employees but less than 250 employees.                                      |
+| Comma-Separated Values (CSV)      | A CSV file is a text file format that uses commas to separate values. This allows data to be saved in a tabular format.                        |          
 | JavaScript Object Notation (JSON) | A data interchange file format used by Staff-Snap to store its applicant data.                                                                 |
