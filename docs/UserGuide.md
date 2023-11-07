@@ -80,7 +80,9 @@ Managing clients and a busy schedule have never been easier. With OutBook, all y
 
    - `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command. 
+
+Return to the [Table of Contents](#table-of-content)
 
 ---
 
@@ -94,6 +96,10 @@ OutBook displays all the information you have added in a clear and concise manne
 | Contacts List | Displays contact details                                                                              |
 | Meetings List | Displays meetings that are scheduled                                                                  |
 | Details List  | Displays all fields added to a specified contact and/or meeting in full detail, completed with labels |
+
+Return to the [Table of Contents](#table-of-content)
+
+---
 
 <div style="page-break-after: always;"></div>
 
@@ -167,7 +173,7 @@ You can put any number of tags (including 0) on a contact.
 
 ### Listing all persons : `listc`
 
-Shows a list of all contacts in OutBook. Contacts are sorted by `LAST_CONTACTED_TIME` by default.
+Shows an unfiltered list of all contacts in OutBook. Contacts are sorted by `LAST_CONTACTED_TIME` by default.
 
 Format: `listc`
 
@@ -254,7 +260,6 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-
 ## Meeting Commands
 
 ### Adding a meeting: `addm`
@@ -275,7 +280,7 @@ Examples:
 
 ### Listing all meetings : `listm`
 
-Shows a list of all meetings in OutBook. Meetings are sorted by `START` by default.
+Shows an unfiltered list of all meetings in OutBook. Meetings are sorted by `START` by default.
 
 Format: `listm`
 
@@ -432,6 +437,8 @@ OutBook data are saved automatically as a JSON file `[JAR file location]/data/ou
 If your changes to the data file makes its format invalid, OutBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
+Return to the [Table of Contents](#table-of-content)
+
 ---
 
 <div style="page-break-after: always;"></div>
@@ -458,6 +465,8 @@ If your changes to the data file makes its format invalid, OutBook will discard 
 | **View meeting details**        | `viewm INDEX` <br> e.g., `viewm 4`                                                                                                                                                       |
 | **Exit**                        | `exit`                                                                                                                                                                                   |
 
+Return to the [Table of Contents](#table-of-content)
+
 ---
 
 <div style="page-break-after: always;"></div>
@@ -470,10 +479,14 @@ If your changes to the data file makes its format invalid, OutBook will discard 
 2. Overwrite this empty data file with the file that contains the data of your previous OutBook home folder.
 3. Your transferred data should now be visible upon launching OutBook.
 
+Return to the [Table of Contents](#table-of-content)
+
 ---
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+Return to the [Table of Contents](#table-of-content)
 
 ---
