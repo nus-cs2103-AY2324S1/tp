@@ -167,6 +167,16 @@ Adds a member to the list of members in CMC.
 
 #### Acceptable values for parameters:
 
+<div markdown="span" class="alert alert-primary">
+:information_source: **Notes about duplicate members:**
+
+Duplicate members are not allowed to be added into the list of members.
+
+An member is considered a duplicate if the member's name, phone number, email **or** telegram handle matches that of an existing member.
+
+This means that only a member with a unique name, phone number, email and telegram handle can be added into the list of members.
+</div>
+
 - `memberName`: Only alphabetical characters, @, () are allowed
 - `phoneNumber`: Only numbers are allowed
 - `email`: Must follow the format of xyz@abc.wsd
@@ -318,6 +328,16 @@ Adds an applicant to the list of applicants in CMC.
 `adda /name {applicantName} /phone {phoneNumber}`
 
 #### Acceptable values for parameters:
+
+<div markdown="span" class="alert alert-primary">
+:information_source: **Notes about duplicate applicants:**
+
+Duplicate applicants are not allowed to be added into the list of applicants.
+
+An applicant is considered a duplicate if the applicant's name **or** phone number matches that of an existing applicant.
+
+This means that only an applicant with a unique name and phone number can be added into the list of applicants.
+</div>
 
 - `applicantName`: Only alphabetical characters, @, () are allowed
 - `phoneNumber`: Only numbers are allowed
