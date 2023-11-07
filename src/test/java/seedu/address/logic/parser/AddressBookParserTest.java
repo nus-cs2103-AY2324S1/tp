@@ -17,8 +17,10 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BenefitCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CurrentMonthCommand;
+import seedu.address.logic.commands.DeductCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
@@ -27,13 +29,17 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NextMonthCommand;
+import seedu.address.logic.commands.PayrollCommand;
 import seedu.address.logic.commands.PayslipCommand;
 import seedu.address.logic.commands.PreviousMonthCommand;
 import seedu.address.logic.commands.ReadCommand;
 import seedu.address.logic.commands.ViewLeaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Benefit;
+import seedu.address.model.person.Deduction;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Reason;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -102,6 +108,29 @@ public class AddressBookParserTest {
         ReadCommand command = (ReadCommand) parser.parseCommand(
             ReadCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " " + "/p");
         assertEquals(new ReadCommand(INDEX_FIRST_PERSON, "phone"), command);
+    }
+
+    @Test
+    public void parseCommand_deduct() throws Exception {
+        DeductCommand command = (DeductCommand) parser.parseCommand(
+            DeductCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " " + "/v 150.00 /r cpf");
+        assertEquals(new DeductCommand(INDEX_FIRST_PERSON,
+            new Deduction("150.00", Reason.EMPLOYEE_CPF_DEDUCTION)), command);
+    }
+
+    @Test
+    public void parseCommand_benefit() throws Exception {
+        BenefitCommand command = (BenefitCommand) parser.parseCommand(
+            BenefitCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " " + "/v 150.00 /r bonus");
+        assertEquals(new BenefitCommand(INDEX_FIRST_PERSON,
+            new Benefit("150.00", Reason.ANNUAL_BONUS)), command);
+    }
+
+    @Test
+    public void parseCommand_payroll() throws Exception {
+        PayrollCommand command = (PayrollCommand) parser.parseCommand(
+            PayrollCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new PayrollCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
