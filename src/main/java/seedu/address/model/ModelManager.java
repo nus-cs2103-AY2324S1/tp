@@ -29,9 +29,9 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final List<ReadOnlyModelManager> modelManagerStateList;
     private int currentStatePointer;
-    private AddressBook addressBook;
-    private UserPrefs userPrefs;
-    private FilteredList<Person> filteredPersons;
+    private final AddressBook addressBook;
+    private final UserPrefs userPrefs;
+    private final FilteredList<Person> filteredPersons;
     private Person selectedPerson;
     private final CommandStringStash commandStringStash;
     /**
@@ -39,7 +39,7 @@ public class ModelManager implements Model {
      * JSON Serialising library, it causes errors when put under there, and so the
      * theme preference cannot be saved from session to session.
      */
-    private ThemeProperty themeProperty;
+    private final ThemeProperty themeProperty;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -76,6 +76,8 @@ public class ModelManager implements Model {
         setAddressBook(toCopyFrom.addressBook);
         setUserPrefs(toCopyFrom.userPrefs);
         updateSelectedPerson(toCopyFrom.selectedPerson);
+        //Since Predicate is only set from addCommand, findCommand and listCommand, and they all only use
+        //Predicate<Person>, this typecast should be safe
         updateFilteredPersonList((Predicate<Person>) toCopyFrom.filteredPersons.getPredicate());
         setTheme(toCopyFrom.themeProperty.getValue());
     }
@@ -295,7 +297,7 @@ public class ModelManager implements Model {
         //making a copy of current filteredPersons
         UniquePersonList obListCopy = new UniquePersonList();
         obListCopy.setPersons(this.addressBook.getPersonList());
-        FilteredList<Person> filteredListCopy = new FilteredList<Person>(obListCopy.asUnmodifiableObservableList());
+        FilteredList<Person> filteredListCopy = new FilteredList<>(obListCopy.asUnmodifiableObservableList());
         filteredListCopy.setPredicate(this.filteredPersons.getPredicate());
 
         modelManagerStateList.add(new ReadOnlyModelManager(
