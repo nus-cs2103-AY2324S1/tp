@@ -86,7 +86,7 @@ Given below are my contributions to the project.
     * Added documentations and screenshots for the features `practise`. [#111](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/111)
     * Added documentations and screenshots for the features `solve`. [#111](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/111)
     * Added documentations and screenshots for the features `set`.[#111](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/111)
-    * Added documentations for MarkDown Syntax feature. ([#122](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/122), [#126](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/126/files),
+    * Added documentations for MarkDown Syntax feature. (Pull requests [#122](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/122), [#126](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/126/files),
     [#189](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/189))
     * Added screenshots with labels to describe the outcome of each MarkDown syntax [#126](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/126/files)
     * Added notes to warn users to not stack MarkDown syntaxes [#192](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/192/files)
@@ -100,20 +100,20 @@ Given below are my contributions to the project.
 
 
 * **Community**:
-
-
-* **Mentoring / PR contribution:**
-  * Reviewed PR
+  * Reviewed PR (With non-trivial comments)
     * Removal of irrelevant test cases[#68](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/68)
     * Modification of error messages [#74](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/74)
     * Adding NextPractiseDate to a Card and give advice to improve the feature further 
     [#93](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/93)
     * Filtering function based on tag and question [#93](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/93)
   * Wrote further test cases of code implemented by other team member
+  * Reported bugs and provide suggestions for other teams (Issues: [1](https://github.com/winson8222/ped/issues/1), 
+  [2](https://github.com/winson8222/ped/issues/2), [3](https://github.com/winson8222/ped/issues/3), 
+  [4](https://github.com/winson8222/ped/issues/4)))
   
 
 * **Tools**:
-  * Integrated a third party module FlexMark for display of MarkDown styles in the UI
+  * Integrated a third party module FlexMark for display of MarkDown styles in the UI [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
 
 
 
