@@ -496,6 +496,7 @@ edit 1 q/ How many bits can a <u>Half Adder</u> add up
 #### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3_underline.png)
 
+
 # Importing and Exporting Decks
 Users can share their own Decks with others or download their Decks to their own.
 Both import and export features reside in the **File** menu.
