@@ -12,12 +12,12 @@ import transact.ui.MainWindow.TabWindow;
 public class ClearStaffCommand extends Command {
 
     public static final String COMMAND_WORD = "clearstaff";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Staff list has been cleared!";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS, TabWindow.ADDRESSBOOK, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, TabWindow.ADDRESSBOOK, false, false);
     }
 }
