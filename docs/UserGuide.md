@@ -328,6 +328,19 @@ and type `tree` again when you want to hide the tree and go back to the main win
 
 
 ### Help
+#### What this command does:
+* Opens up a window which shows the link to this User Guide, which also comes with a button allowing copying the link;
+* Display a summary of all commands of LinkTree, specifying the parameters needed.
+
+#### Command format:
+* `help`
+* Or simply press F1
+
+#### Example usage:
+* `help` (and an example result is shown below)
+  ![HelpWindow](images/UG_images/HelpWindow.png)
+  ![HelpCommandResult](images/UG_images/HelpCommandResult.png)
+
 
 ### Reset the project
 
