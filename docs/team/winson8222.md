@@ -24,8 +24,7 @@ Given below are my contributions to the project.
 * **New Feature**: Practise ([#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71), [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92))
   * What it does: Allows user to look at the question of a specific card using its index.
   * Justification: It is the main practical function of a flashcard application for users to test his knowledge.
-  * Highlights: Practise allows users to access only the question of a flashcard, if command is entered without
-  index, the flashcard at the top of the list will be practised.
+  * Highlights: Practise allows users to access only the question of a flashcard, if command is entered without index, the flashcard at the top of the list will be practised.
   * Credits: Winson8222
 
 * **New Feature**: Solve ([#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92), [#95](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/95))
@@ -38,8 +37,7 @@ Given below are my contributions to the project.
   * What it does: Allows user to set a specific difficulty level for a question of a flashcard using its index.
   * Justification: It is the main practical function of a flashcard application for users to evaluate the question
   solving process and the application and schedule their next practise based on the difficulty input.
-  * Highlights: Users set a level of difficulty (easy, medium or hard) for a question using `set` command, the deck of card will then be
-  rearranged according to the new schedule.
+  * Highlights: Users set a level of difficulty (easy, medium or hard) for a question using `set` command, the deck of card will then be rearranged according to the new schedule.
   * Challenges: As it is difficult to chain the command I have to design a series of commands (practise, solve and set)
   such that the revision process is intuitive and at the same time not too difficult for the user to execute.
   Hence the revision process is separated into 3 different commands to facilitate this.
