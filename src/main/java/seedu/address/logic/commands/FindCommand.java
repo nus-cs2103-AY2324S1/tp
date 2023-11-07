@@ -45,7 +45,7 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers. \n"
             + MESSAGE_USAGE_GENERAL
             + PREFIX_AGE + "AGE "
-            + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY \n"
+            + "[" + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PATIENT_TAG + " "
             + PERSON_EXAMPLE

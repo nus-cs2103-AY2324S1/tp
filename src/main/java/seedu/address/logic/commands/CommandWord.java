@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import javax.swing.text.View;
+
 import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
@@ -19,7 +21,7 @@ public class CommandWord {
         DeleteCommand.COMMAND_WORD, DeleteShortcutCommand.COMMAND_WORD, EditCommand.COMMAND_WORD,
         ExitCommand.COMMAND_WORD, FindCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD,
         ListCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD,
-        ViewCommand.COMMAND_WORD
+        ThemeCommand.COMMAND_WORD, ViewCommand.COMMAND_WORD
     };
 
     public final String keyword;

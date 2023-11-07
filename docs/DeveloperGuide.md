@@ -426,6 +426,12 @@ ShortcutSettings implements the `Serializable` interface, thus is saved to `json
     * Pros: Will use less memory (No extra data structure created).
     * Cons: Difficult to manage duplicate shortcut mappings.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## **Planned Enhancements**
+
+1. DoConnek Pro currently does not check for duplicate persons. This means that people with duplicate parameters (`Name`, `Phone`, `Email` etc.) can be added. 
+We plan on implementing an `NRIC` field as a unique identifier to solve this issue. 
 
 --------------------------------------------------------------------------------------------------------------------
 

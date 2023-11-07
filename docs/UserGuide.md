@@ -234,6 +234,7 @@ Examples:
 Deletes the previously user-defined shortcuts.
 
 Format: `delsc sc/SHORTCUT...​`
+* `SHORTCUT` should match a previously user-defined shortcut.
 
 Examples:
 * `delsc sc/del sc/abc` will remove the previous mappings of `del` and `abc`.

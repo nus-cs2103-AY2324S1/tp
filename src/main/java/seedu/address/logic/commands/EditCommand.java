@@ -60,7 +60,7 @@ public class EditCommand extends Command {
             + ": Edit a patient in the address book. \n"
             + MESSAGE_USAGE_GENERAL
             + PREFIX_AGE + "AGE "
-            + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY \n"
+            + "[" + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PERSON_EXAMPLE
             + PREFIX_AGE + "30 "
