@@ -24,7 +24,7 @@ Given below are my contributions to the project.
 * **New Feature**: Practise ([#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71), [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92))
   * What it does: Allows user to look at the question of a specific card using its index.
   * Justification: It is the main practical function of a flashcard application for users to test his knowledge.
-  * Highlights: Practise allows users to access only the question of a flashcard, if command is entered without 
+  * Highlights: Practise allows users to access only the question of a flashcard, if command is entered without
   index, the flashcard at the top of the list will be practised.
   * Credits: Winson8222
 
@@ -38,9 +38,9 @@ Given below are my contributions to the project.
   * What it does: Allows user to set a specific difficulty level for a question of a flashcard using its index.
   * Justification: It is the main practical function of a flashcard application for users to evaluate the question
   solving process and the application and schedule their next practise based on the difficulty input.
-  * Highlights: Users set a level of difficulty (easy, medium or hard) for a question using `set` command, the deck of card will then be 
+  * Highlights: Users set a level of difficulty (easy, medium or hard) for a question using `set` command, the deck of card will then be
   rearranged according to the new schedule.
-  * Challenges: As it is difficult to chain the command I have to design a series of commands (practise, solve and set) 
+  * Challenges: As it is difficult to chain the command I have to design a series of commands (practise, solve and set)
   such that the revision process is intuitive and at the same time not too difficult for the user to execute.
   Hence the revision process is separated into 3 different commands to facilitate this.
   * Credits: Winson8222
@@ -52,10 +52,10 @@ Given below are my contributions to the project.
   * Highlights: Based on the syntax entered by the user, the corresponding styling will be reflected on
   the display card and the result view
   * Challenges: In addition to manually implement the 3 syntaxes for the DisplayCard by detecting the presence of
-  and applying the corresponding font styling, I also needed to utilise an external library FlexMark to be used for output 
+  and applying the corresponding font styling, I also needed to utilise an external library FlexMark to be used for output
   in ResultView as the original component does not support font styling. It was quite challenging to write code
   to detect the syntaxes, and the issue of incorrect format when stacking the syntaxes still need to be resolved. It was
-  also necessary for me to read externally about the behavior of FlexMark's Webview, so that the formatting and be 
+  also necessary for me to read externally about the behavior of FlexMark's Webview, so that the formatting and be
   displayed accordingly
   * Credits: Winson8222
 
@@ -100,28 +100,18 @@ Given below are my contributions to the project.
 
 
 * **Community**:
-<<<<<<< HEAD
   * Reviewed PR (With non-trivial comments)
-=======
-
 * **Mentoring / PR contribution:**
   * Reviewed PR
     * Removal of irrelevant test cases[#68](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/68)
     * Modification of error messages [#74](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/74)
-    * Adding NextPractiseDate to a Card and give advice to improve the feature further 
+    * Adding NextPractiseDate to a Card and give advice to improve the feature further
     [#93](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/93)
     * Filtering function based on tag and question [#93](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/93)
   * Wrote further test cases of code implemented by other team member
-  * Reported bugs and provide suggestions for other teams (Issues: [1](https://github.com/winson8222/ped/issues/1), 
-  [2](https://github.com/winson8222/ped/issues/2), [3](https://github.com/winson8222/ped/issues/3), 
+  * Reported bugs and provide suggestions for other teams (Issues: [1](https://github.com/winson8222/ped/issues/1),
+  [2](https://github.com/winson8222/ped/issues/2), [3](https://github.com/winson8222/ped/issues/3),
   [4](https://github.com/winson8222/ped/issues/4))
-
-  
 
 * **Tools**:
   * Integrated a third party module FlexMark for display of MarkDown styles in the UI [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
-
-
-
-
-
