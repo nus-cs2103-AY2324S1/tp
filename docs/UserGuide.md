@@ -342,3 +342,96 @@ Action | Format, Examples
 **Undo** | `undo`
 **Help** | `help`
 **Exit** | `exit`
+
+## List of acceptable values
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky"><span style="font-weight:bold">Command</span></th>
+    <th class="tg-fymr">Field</th>
+    <th class="tg-0pky"><span style="font-weight:bold">Acceptable values</span></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky" rowspan="6"><code>createMember</code> / <code>editMember</code></td>
+    <td class="tg-0pky">MEMBER_NAME</td>
+    <td class="tg-0pky">Only contain alphanumeric characters and spaces, and should not be blank</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">GENDER</td>
+    <td class="tg-0pky"><code>Male</code>, <code>Female</code>, <code>Others</code></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">PHONE_NUMBER</td>
+    <td class="tg-0pky">Only contain numbers, and <span style="font-weight:bold">at least 3 digits long</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">EMAIL</td>
+    <td class="tg-0pky">A string with an email extension (e.g. <code>@gmail.com</code>)</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">ADDRESS</td>
+    <td class="tg-0pky">Any non-blank values except the following prefixes: <code>n/</code>, <code>g/</code>, <code>p/</code>, <code>e/</code>, <code>a/</code>, <code>t/</code></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">TAG</td>
+    <td class="tg-0pky">Only contain alphanumeric characters with no spaces, but can be blank</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky" rowspan="4">createEvent / editEvent</td>
+    <td class="tg-0pky">EVENT_NAME</td>
+    <td class="tg-0pky">Only contain alphanumeric characters and spaces, and should not be blank</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">LOCATION</td>
+    <td class="tg-0pky"><span style="font-weight:bold">Must not be blank </span>and can take in any values, except the following prefixes:<code>e/</code>, <code>l/</code>, <code>d/</code>, <code>t/</code></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">DATE</td>
+    <td class="tg-0pky">Must be a <span style="font-weight:bold">valid date </span>in the format of <span style="font-weight:bold;font-style:italic">Y</span><span style="font-weight:bold">YYY-MM-DD</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">TAG</td>
+    <td class="tg-0pky">Alphanumeric with no spaces</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><code>deleteMember</code> / <code>deleteEvent</code></td>
+    <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
+    <td class="tg-0pky">Must be a<span style="font-weight:bold"> positive integer</span> that is within the range of the length of the <span style="font-weight:bold">currently displayed</span> member/event list</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky" rowspan="3"><code>enrol</code> / <code>editEnrolment</code></td>
+    <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
+    <td class="tg-0pky">Must be a <span style="font-weight:bold">positive integer</span> that is within the range of the length of the <span style="font-weight:bold">currently displayed</span> member/event list</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">NUMBER_OF_HOURS</td>
+    <td class="tg-0pky">Must be a<span style="font-weight:bold"> positive integer </span>and must be <span style="font-weight:bold">less than or equal to 2147483647</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">REMARK</td>
+    <td class="tg-0pky">Can take any value, and should not be blank</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><code>viewMember</code> / <code>viewEvent</code></td>
+    <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
+    <td class="tg-0pky">Must be a <span style="font-weight:bold">positive integer</span> that is within the range of the length of the <span style="font-weight:bold">currently displayed</span> member/event list</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><code>findMember</code> / <code>findEvent</code></td>
+    <td class="tg-0pky">KEYWORD</td>
+    <td class="tg-0pky">Must match minimally one of the words in the name of the event to be found, where capitalisation does not matter</td>
+  </tr>
+</tbody>
+</table>
