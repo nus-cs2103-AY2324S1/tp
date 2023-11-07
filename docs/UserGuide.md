@@ -248,7 +248,21 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-### <u>Category 3 - Find contacts</u>
+### <u>Category 3 - Find/view contacts</u>
+
+#### List all contacts: `list`
+
+You can use the `list` command to list all of your contacts. This resets any filtering or sorting previously applied to the list.
+
+Format: `list`
+
+Parameters: N/A
+
+Example usage:
+
+* `list`
+
+[Table of Contents](#table-of-contents)
 
 #### Find a contact: `find [name]`
 
@@ -270,7 +284,11 @@ Example usage:
 
 #### Sort contacts list: `sort /by [field name] /order [asc/desc]`
 
-You can use the `sort` command to sort your list of contacts.
+You can use the `sort` command to sort your list of contacts. If the list is currently filtered (using [`find`](#find-a-contact-find-name) or [`filter`](#filter-contacts-list-filter-by-field-with-term)), the filtered list will be sorted.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can undo a sort command using [`undo`](#undo-last-change-to-networkbook-undo). You can reset sorting and filtering at any time using [`list`](#list-all-contacts-list).
+</div>
 
 Format: `sort /by [field] /order [order]`
 
@@ -304,8 +322,12 @@ Example usage:
 #### Filter contacts list: `filter /by [field] /with [term]`
 
 You can use the `filter` command to filter your list of conatacts,
-temporarily removing contacts that don't contain certain keywords
-for easy viewing.
+temporarily hiding contacts that don't contain certain keywords
+for easy viewing. If the list is currently sorted (using [`sort`](#sort-contacts-list-sort-by-field-name-order-ascdesc)), the filtered list will be sorted.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can undo a filter command using [`undo`](#undo-last-change-to-networkbook-undo). You can reset sorting and filtering at any time using [`list`](#list-all-contacts-list).
+</div>
 
 Format: `filter /by [field] /with [term] /taken true/false`
 
@@ -514,7 +536,7 @@ Example usage:
 | [**edit**](#edit-contact-detail--edit-index-options)                               | Single-valued fields: <br/>`[/name]` <br/> `[/grad]` <br/>`[/priority]`<br/><br/> Multi-valued fields which support `[/index]`: <br/> `[/phone]` <br/> `[/email]` `[/link]` <br/> `[/course]` <br/> `[/spec]` <br/> `[/tag]`                 | Single-valued fields: <br/> `edit [index of contact] /field [new value]` <br/><br/> e.g., `edit 1 /name Nguyen` <br/> `edit 1 /grad AY2627-S1` <br/><br/> Multi-valued fields: <br/> `edit [index of contact] /field [new value] /index [index of old value]` <br/><br/> e.g., `edit 1 /email aaa@gmail.com /index 1` <br/> `edit 1 /course CS2109S /index 1`                                                                                                          | Edits information about a contact.                           |
 | [**delete**](#delete-a-contact-delete-index)                                       | N/A                                                                                                                                                                                                                                          | `delete [index]`<br/><br/> e.g., `delete 1`                                                                                                                                                                                                                                                                                                                                                                                                                            | Deletes a contact from NetworkBook.                          |
 | [**delete**](#delete-some-details-delete-index-of-contact-options)                 | Single-valued fields: <br/> `[/grad]` <br/>`[/priority]`<br/><br/> Multi-valued fields which support `[/index]`: <br/> `[/phone]` <br/>` [/email]` <br/> `[/link]` <br/> `[/course]` <br/> `[/spec]` <br/> `[/tag]`                          | Single-valued fields: <br/> `delete [index of contact] /field`<br/><br/> e.g. `delete 1 /priority`<br/><br/> Multi-valued fields: <br/> `delete [index of contact] /field` (default to index 1) <br/> `delete [index of contact] /field /index [index of entry to delete]` <br/><br/> e.g. `delete 2 /spec` <br/> `delete 3 /email /index 2`                                                                                                                           | Deletes some details of a contact.                           |
-| [**list**](#exit-networkbook-exit)                                                 | N/A                                                                                                                                                                                                                                          | `exit`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Exits NetworkBook.                                           |
+| [**list**](#list-all-contacts-list)                                                | N/A                                                                                                                                                                                                                                          | `list`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Lists all saved contacts.                                    |
 | [**find**](#find-a-contact-find-name)                                              | N/A                                                                                                                                                                                                                                          | `find [name]` <br/><br/> e.g., `find Ness`                                                                                                                                                                                                                                                                                                                                                                                                                             | Searches for contacts by name.                               |
 | [**sort**](#sort-contacts-list-sort-by-field-name-order-ascdesc)                   | `/by` <br/> `[/order]`                                                                                                                                                                                                                       | `sort /by [field] /order [order]`<br/><br/> e.g., `sort /by priority /order desc`                                                                                                                                                                                                                                                                                                                                                                                      | Sorts contacts by a field.                                   |
 | [**filter**](#filter-contacts-list-filter-by-field-with-term)                      | `/by` <br/> `/with` <br/> `[/taken]`                                                                                                                                                                                                         | `filter /by [field] /with [term]` <br/><br/> e.g. `filter /by course /with abc` <br/> `filter /by tag /with banker` <br/><br/> For course: <br/> `filter /by course /with [term] [/taken true/false]` <br/> e.g. `filter /by course /with abg /taken false`                                                                                                                                                                                                            | Filters contacts by a field.                                 |
