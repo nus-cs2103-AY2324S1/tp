@@ -10,41 +10,25 @@ Unlock your musical potential with **_BandConnect++_** !
 **_BandConnect++_** is developed by a driven team of musicians/programmers who strives to make life easier for musicians and music producers.  Discover your perfect musical match and create your next big hit now!
 
 --------------------------------------------------------------------------------------------------------------------
-## About this guide
+# About this guide
 Welcome to the *BandConnect++ User Guide*! This user guide walks you through everything about *BandConnect++*. Whether you are new to our app or a seasoned user, you can always find something useful in this guide. 
 
 For first-time users, please go to the [Quick start](#quick-start) section below to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
 
 For experienced users, if you need help in remembering a particular command, please see [Command Summary](#command-summary). For common troubleshooting, please see [Troubleshooting](#troubleshooting).
 
-## Table of Contents
-* [Glossary](#glossary)
-* [Quick start](#quick-start)
-* [Features](#features)
-  * [Command Format](#command-format)
-  * [Get help](#get-help--help)
-  * [List all](#list-all-musicians-and-bands--list)
-  * [Features for musicians](#features-for-managing-musicians)
-    * [Add musician](#add-musician--add)
-    * [Remove musician](#remove-musician--remove)
-    * [Edit musician](#edit-musician--edit)
-    * [Show all valid instruments and genres](#show-all-valid-instruments-and-genres--tags)
-    * [Find musicians](#find-musicians--find)
-  * [Features for bands](#features-for-managing-bands)
-    * [Create band](#create-band--addb)
-    * [Add musician to band](#add-musician-to-band--addm)
-    * [Remove musician from band](#remove-musician-from-band-removem)
-    * [List band members](#list-all-members-in-band--findb)
-    * [Delete band](#delete-a-band-deleteb)
-  * [Clear data](#clear-data--clear)
-  * [Exit app](#exit-app--exit)
-  * [Save data](#save-data)
-* [Command Summary](#command-summary)
-* [Troubleshooting](#troubleshooting)
+--------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+# Table of Contents
+* Table of Contents
+  {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Glossary
 To be added.
 CLI, GUI, Java
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Quick start
@@ -385,34 +369,6 @@ List the band members of a selected band. From `My Bands` panel, find the comple
 **Upon failure:**
 If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
 
-### Delete a band: `deleteb`
-
-Deletes a band from your contact list.
-From the current `My Bands` panel, find the index of the band to be deleted.
-
-**Format:** `deleteb INDEX`
-
-**Examples:**
-* `deleteb 1`
-
-**Upon success:**
-
-You will see a message indicating successful removal of the first band in the band panel like below:
-
-```
-Deleted Band: Ace; Genres: [jazz]
-```
-
-**Upon failure:**
-
-Should you input an index out of the range of the current `My Bands` list, you will see the error message below:
-
-```
-The band index provided is invalid
-```
-
-Please verify that the index is correct and try again.
-
 ### Edit a band: `editb`
 
 Edit the name and genre of a selected band.
@@ -449,6 +405,36 @@ Should you try to tag a band with invalid genre tags, i.e., editb 1 g/poP , you 
 Genre tags names should be a valid genre name.
 For a list of valid genres, please use the command 'tags'
 ```
+
+### Delete a band: `deleteb`
+
+Deletes a band from your contact list.
+From the current `My Bands` panel, find the index of the band to be deleted.
+
+**Format:** `deleteb INDEX`
+
+**Examples:**
+* `deleteb 1`
+
+**Upon success:**
+
+You will see a message indicating successful removal of the first band in the band panel like below:
+
+```
+Deleted Band: Ace; Genres: [jazz]
+```
+
+**Upon failure:**
+
+Should you input an index out of the range of the current `My Bands` list, you will see the error message below:
+
+```
+The band index provided is invalid
+```
+
+Please verify that the index is correct and try again.
+
+
 ## Clear data: `clear`
 
 ## Exit app : `exit`
@@ -466,25 +452,26 @@ Congratulations! You are now ready to use **_BandConnect++_**!
 If you wish, please refer to the below section for a more succinct [command summary](#command-summary).
 
 --------------------------------------------------------------------------------------------------------------------
-## Command summary
+# Command summary
 
 
-| Action             | Format, Examples                                                                                                      |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------|
-| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL i/INSTRUMENT`<br> e.g., `add n/John Doe p/98928479 e/johndpiano@xmail.com i/Piano` |
-| **Remove**         | `remove INDEX`<br> e.g., `remove 1`                                                                                   |
-| **Tag Instrument** | `tag instrument INDEX i/INSTRUMENT…​`<br> e.g.,`tag instrument 1 i/piano i/guitar`                                    |
-| **Tag Genre**      | `tag genre INDEX g/GENRE…​`<br> e.g., `tag genre 1 g/rock g/pop`                                                      |
-| **Find**           | `find n/NAME p/PHONE_NUMBER e/EMAIL i/INSTRUMENT` <br> e.g., `find n/John i/Piano`                                    |
-| **Add Band**       | `addb n/BANDNAME g/GENRE…​`<br> e.g., `addb n/Ace Jazz g/jazz`                                                        |
-| **Delete Band**    | `deleteb INDEX` <br> e.g., `deleteb 1`                                                                                |
-| **Find Band**      | `findb BANDNAME`                                                                                                      |
-| **Edit Band**      | `editb INDEX n/NEWNAME g/GENRE…​` <br> e.g., `editb n/Ace g/jazz`                                                     |
-
-
-
+| Action                                         | Format & Examples                                                                                                                                                |
+|------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add a Musician**                             | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`<br> e.g., `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock` |
+| **Edit a Musician**                            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`<br> e.g., `edit 2 e/pianistbetsy@edited.com i/violin t/available`        |
+| **Remove a Musician**                          | `delete INDEX`<br> e.g.,`delete 1`                                                                                                                               |
+| **Find Musicians**                             | `find [n/NAME]…​ [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​` <br> e.g., `find n/John i/Piano`                                                                        |
+| **Show All Valid Instruments and Genres Tags** | `tags`                                                                                                                                                           |
+| **Add a Band**                                 | `addb n/BANDNAME [g/GENRE]…​`<br> e.g., `addb n/Ace Jazz g/jazz g/blues`                                                                                         |
+| **Edit a Band**                                | `editb INDEX n/BANDNAME [g/GENRE]…​`<br> e.g., `editb 1 n/Ace Jazz g/jazz`                                                                                       |
+| **Delete a Band**                              | `deleteb INDEX` <br> e.g., `deleteb 1`                                                                                                                           |
+| **Add Musicians to a Band**                    | `addm b/BAND_INDEX m/MUSICIAN_INDEX…​` <br> e.g., `addm b/1 m/1 m/2`                                                                                             |
+| **Remove a Musician from a Band**              | `removem b/BANDINDEX m/MUSICIANINDEX` <br> e.g., `removem b/1 m/1`                                                                                               |
+| **List All Members in a Band**                 | `findb BANDNAME` <br> e.g., `findb theory X`                                                                                                                     |
+| **List All Musicians and Bands**               | `list`                                                                                                                                                           |
 --------------------------------------------------------------------------------------------------------------------
-## Troubleshooting
+
+# Troubleshooting
 
 [to be added soon]
 
