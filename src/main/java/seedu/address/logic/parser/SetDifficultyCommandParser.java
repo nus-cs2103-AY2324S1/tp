@@ -37,11 +37,7 @@ public class SetDifficultyCommandParser implements Parser<SetDifficultyCommand> 
             return new SetDifficultyCommand(Index.fromZeroBased(0), difficulty);
         }
 
-
-
-
         return new SetDifficultyCommand(index, difficulty);
-
     }
 
     /**

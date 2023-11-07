@@ -18,7 +18,14 @@ public class PractiseCommandParser implements Parser<PractiseCommand> {
      */
     public PractiseCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
+            Index index;
+
+            if (args.trim().isEmpty()) {
+                index = Index.fromZeroBased(0);
+            } else {
+                index = ParserUtil.parseIndex(args);
+            }
+
             return new PractiseCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(

@@ -75,6 +75,7 @@ public class SetDifficultyCommand extends Command {
         } catch (IllegalArgumentException e) {
             throw new CommandException(difficulty + Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_INVALID);
         }
+
         if (difficultySet.equals(Difficulty.EASY)) {
             return updatePracticeDate(model,
                     difficultySet, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY, actualIndex);
