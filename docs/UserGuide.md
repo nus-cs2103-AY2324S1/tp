@@ -320,8 +320,6 @@ Format: `course c/COURSE_CODE`
 
 Example: `course c/CS1231S` returns the course information and tutorial timings for CS1231S.
 
-If you are unsure about the course code, you can simply type `course` and a list of all courses will be shown.
-
 When the command succeeds:
 ```
 Course: CS2103T Software Engineering
