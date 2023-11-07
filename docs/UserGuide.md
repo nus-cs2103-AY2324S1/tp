@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Foster Family User Guide
+title: User Guide
 ---
 **Foster Family** is a desktop app built for the **foster managers of animal shelters** to help them perform **foster family management tasks**. 
 
@@ -11,7 +11,7 @@ Some tasks Foster Family can help you with:
 
 Foster Family is **optimised for use** via a Command Line Interface (CLI). This means you interact with it by typing commands in the command box. It also retains the benefits of a Graphical User Interface (GUI), allowing you to interact with the application through graphical components. If you can type fast, Foster Family can get things done faster than traditional GUI apps.
 
-This user guide contains all the commands available to you, along with step-by-step explanations and examples to help you master the use of Foster Family. If you are a new user, simply head over to [Quick Start](#quick-start) to begin your journey with us. For those who are already acquainted, you can refer to the [Table of Contents](#table-of-contents) below to navigate to the command of your interest.
+This user guide contains **all** the commands available to you, along with **step-by-step explanations** and **examples** to help you master the use of Foster Family. If you are a _new user_, simply head over to [Quick Start](#quick-start) to begin your journey with us. For those who are _already acquainted_, you can refer to the [Table of Contents](#table-of-contents) below to navigate to the command of your interest.
 
 ## Table of Contents
 * Table of Contents
@@ -22,7 +22,7 @@ This user guide contains all the commands available to you, along with step-by-s
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your computer. You can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-2. Download the latest `FosterFamily.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases/tag/v1.2.1).
+2. Download the latest `FosterFamily.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Foster Family.
 
@@ -479,58 +479,66 @@ Format: `sort`
 
 ### Viewing Statistics of Available Fosterers : `stats avail`
 
-Displays statistics about fosterers who are available to foster, and the animals they can foster. Percentages are calculated to 2 decimal places.
+Helps you calculate statistics about fosterers who are available to foster, and the animals they can foster. Percentages are calculated to 2 decimal places.
 
 Format: `stats avail`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
+All statistic commands are calculated based on the currently displayed list.<br>
+If you enter `find available` before `stats avail`, the resulting statistic will show that all listed fosterers are available. Hence,  please ensure that the current list of fosterers is the list you want statistics to be calculated from.<br>
+
+![Stats](images/screenshots/StatsAllAvail.png)
+
+</div>
 
 Examples:
 * `list` followed by `stats avail` 
   * calculates statistics of available fosterers, based on all fosterers in the address book.
+    ![Stats](images/screenshots/StatsAvail.png)
+
 * `find cat` followed by `stats avail` 
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
 
 
-<div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b><br/>
+<div markdown="block" class="alert alert-warning">
 
-*  All statistic commands are calculated based on the currently displayed list.<br/>
+**:exclamation: Caution:**<br>
 
-If you enter `find avail` before `stats avail`, the resulting statistic will show that 100% of listed fosterers are available. Hence, please ensure that the current list of fosterers is the desired list you want your statistics to be calculated from.<br/>
+Percentages may not add up to 100.00%.<br>
+Suppose there are 3 available fosterers: 1 can foster a dog, 1 can foster a cat and 1 unknown. The calculated percentages will add up to 99.99%, instead of 100.00%. It can be assumed that each group takes up 1/3 out of 100.00%.
 
-* Percentages may not add up to 100.00%.<br/> 
+![Stats](images/screenshots/StatsTotalPercent.png)
 
-For example, there are 3 available fosterers: 1 is able to foster a dog, 1 is able to foster a cat, and 1 is unknown. The calculated percentages will be all be 33.33%, adding up to 99.99%. It can be assumed that each group takes up 1/3 out of 100.00%.
 </div>
 
-![Stats](images/screenshots/StatsAvail.png)
-
-
 ### Viewing Statistics of Current Fosterers : `stats current`
-Displays statistics about fosterers who are currently fostering, and the type of animals they are fostering. Percentages are calculated to 2 decimal places.
+Helps you calculate statistics about fosterers who are currently fostering, and the type of animals they are fostering. Percentages are calculated to 2 decimal places.
 
 Format: `stats current`
 
 Examples:
 * `list` followed by `stats current` 
   * calculates statistics of current fosterers, based on all fosterers in the address book.
+  ![Stats](images/screenshots/StatsCurrent.png)
+
 * `find dog` followed by `stats current`
   * calculates statistics of current fosterers, based on fosterers who are either currently fostering a dog,  or are able to foster a dog.
 
-![Stats](images/screenshots/StatsCurrent.png)
-
-
 ### Viewing Housing Statistics : `stats housing`
-Displays statistics about fosterers who are living in a HDB, Condo or Landed.
-Percentages are calculated to 2 decimal places.
+Helps you calculate statistics about the various housing types of fosterers. Percentages are calculated to 2 decimal places.
 
 Format: `stats housing`
 
 Examples:
 * `list` followed by `stats housing`
   * calculates housing statistics based on all fosterers in the address book.
+    ![Stats](images/screenshots/StatsHousing.png)
+
 * `find available` followed by `stats housing` 
   * calculates housing statistics based on fosterers who are available.
-
-![Stats](images/screenshots/StatsHousing.png)
 
 ### Undoing the previous command : `undo`
 
