@@ -33,7 +33,7 @@ public class Income implements Comparable<Income> {
     }
 
     /**
-     * Returns true if a given string is a valid gender.
+     * Returns true if a given string is a valid income
      */
     public static boolean isValidIncome(String test) {
         return test.matches(VALIDATION_REGEX);
