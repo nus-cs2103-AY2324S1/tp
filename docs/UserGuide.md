@@ -43,7 +43,7 @@ Our guide uses **visual components** to highlight key information for your conve
     <div>
         <box theme="info" icon=":fa-solid-magnifying-glass:">
 
-**Example usages** of a feature will be contained in a **light blue box** with this **magnifying glass icon** :fa-solid-magnifying-glass:. These examples will show you how a feature works, and will include sample commands that you can try out yourself!
+This **light blue box** with the **magnifying glass icon** provides you with **command examples** that will show you how a feature works.
         </box>
     </div>
     <div style="font-size: 1.5em; display: flex; align-items: center;">
@@ -54,16 +54,14 @@ Our guide uses **visual components** to highlight key information for your conve
     <div>
         <br>
         <panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
-Large tables describing the **syntax or parameters** of **parameter-heavy commands**, or the **attributes of large models**, will be contained in a **collapsible grey panel** like this one with a **book icon** :fa-solid-book:.
+This **collapsible grey panel** with the **book icon** contains large tables that describes the **syntax or parameters** of **parameter-heavy commands**, or the **attributes of large models** such as our [Person model](DeveloperGuide.md#model-component).
 
 | Sample | Table |
 | ------ | ----- |
 | Sample | Table Data |
 | Sample 2 | Table Data 2 |
 
-These tables will provide a quick reference on the meanings and usage of each parameter in commands which support many such parameters, or the attributes of large and complex models, such as our [Person model](#person-model).
-
-PDF Users will always see these panels expanded, but users of the web version of this guide can click on the panel header to collapse (and then re-expand) the panel if the information is no longer necessary.
+Only for web users, you can click on the panel header to collapse the panel if the information is no longer necessary.
         </panel>
         <br>
     </div>
@@ -74,7 +72,7 @@ PDF Users will always see these panels expanded, but users of the web version of
     </div>
     <div>
         <box type="warning">
-**Warnings / Error Cases** for features will be shown in a **yellow box** with this **exclamation mark icon** :fa-solid-exclamation: . These clarify cases which are expected to display errors to users, or explain enhancements that will be implemented in future releases of CampusConnect.
+This **yellow box** with the **exclamation mark icon** clarify cases which are expected to display **errors** to you, or explain **enhancements** that will be implemented in future releases of CampusConnect.
 
 All planned enhancements will also be listed in the [Planned Enhancements / Known Issues](#planned-enhancements-known-issues) section near the end of the guide.
         </box>
@@ -87,7 +85,7 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
     </div>
     <div>
         <box theme="primary" icon=":fa-solid-lightbulb:">
-**Tips** which provide useful additional information about a feature will be contained in a **darker blue box** with this **lightbulb icon** :fa-solid-lightbulb:. These tips aren't required to get through basic functionality of our features, but will help you get the most out of CampusConnect!
+This **darker blue box** with the **lightbulb icon** provides you **extra useful information** that but will help you get the most out of CampusConnect!
         </box>
     </div>
 </div>
