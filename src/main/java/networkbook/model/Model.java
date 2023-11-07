@@ -83,6 +83,20 @@ public interface Model {
     void setItem(Person target, Person editedPerson);
 
     /**
+     * Returns a boolean that represents if NetworkBook has previous states stored to undo to.
+     *
+     * @return true if NetworkBook has a previous state stored that it can return to and false otherwise.
+    */
+    boolean canUndoNetworkBook();
+
+    /**
+     * Returns a boolean that represents boolean that reflects whether it is possible to redo the last
+     * undone change to the network book.
+     *
+     * @return true if NetworkBook has a change previously undone which can be reverted, false otherwise.
+     */
+    boolean canRedoNetworkBook();
+    /**
      * Undoes the last command that changed the contacts stored in NetworkBook.
      * @throws CommandException if NetworkBook has no previous states stored to undo to.
      */

@@ -118,23 +118,20 @@ public class ModelManager implements Model {
         versionedNetworkBook.setItem(target, editedPerson);
         versionedNetworkBook.commit();
     }
-    @Override
-    public void undoNetworkBook() throws CommandException {
-        if (versionedNetworkBook.canUndo()) {
-            versionedNetworkBook.undo();
-        } else {
-            throw new CommandException(UndoCommand.MESSAGE_UNDO_DISALLOWED);
-        }
+    public boolean canUndoNetworkBook() {
+        return versionedNetworkBook.canUndo();
+    }
+    public boolean canRedoNetworkBook() {
+        return versionedNetworkBook.canRedo();
     }
     @Override
-    public void redoNetworkBook() throws CommandException {
-        if (versionedNetworkBook.canRedo()) {
-            versionedNetworkBook.redo();
-        } else {
-            throw new CommandException(RedoCommand.MESSAGE_REDO_DISALLOWED);
-        }
+    public void undoNetworkBook() {
+        versionedNetworkBook.undo();
     }
-
+    @Override
+    public void redoNetworkBook() {
+        versionedNetworkBook.redo();
+    }
     @Override
     public boolean isValidLinkIndex(Index personIndex, Index linkIndex) {
         requireAllNonNull(personIndex, linkIndex);
