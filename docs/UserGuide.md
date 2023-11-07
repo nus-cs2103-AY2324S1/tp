@@ -22,7 +22,6 @@ img
 
 <a name="table-of-contents"></a>
 ## Table of Contents
-
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
 * [Using this Guide](#using-this-guide)
@@ -31,12 +30,12 @@ img
   * [Understanding the Applicant Card GUI](#understanding-the-applicant-card-gui)
 * [Features](#features)
   * [Applicant Management Features](#applicant-management-features)
-    * [Command Parameters](#command-parameters-1)
-    * [Adding a new applicant: `add`](#add)
-    * [Editing an applicant: `edit`](#edit)
-    * [Deleting an applicant: `delete`](#delete)
-    * [Listing all applicants: `list`](#list)
-    * [Editing an applicant status: `status`](#status)
+    * [Command Parameters](#command-parameters)
+    * [Adding a new applicant: `add`](#adding-a-new-applicant--add)
+    * [Editing an applicant: `edit`](#editing-an-applicant--edit)
+    * [Deleting an applicant: `delete`](#deleting-an-applicant--delete)
+    * [Listing all applicants: `list`](#listing-all-applicants--list)
+    * [Editing an applicant status: `status`](#editing-an-applicant-status--status)
   * [Interview Management Features](#interview-management-features)
     * [Command Parameters](#command-parameters-2)
     * [Adding an interview to an applicant: `addi`](#addi)
@@ -44,7 +43,7 @@ img
     * [Deleting an interview from an applicant: `deletei`](#deletei)
   * [Applicant Processing Features](#applicant-processing-features)
     * [Command Parameters](#command-parameters-3)
-    * [Finding an applicant by name: `find`](#find)
+    * [Finding an applicant by name: `find`](#finding-an-applicant-by-name--find)
     * [Sorting applicants by descriptors: `sort`](#sort)
     * [Filtering applicants by fields: `filter`](#filter)
     * [Importing from csv: `import`](#import)
@@ -228,7 +227,7 @@ This section introduces the full-suite of features in Staff-Snap. The features a
 | `PHONE`    | The applicant's phone number. <br/> <br/> It can only contain numbers, should be at least 3 digits long, and should not exceed 30 digits.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <ul><li>`91234726`</li><li>`1234567890123`</li></ul>             |
 | `EMAIL`    | The applicant's email. <br/> <br/> It should be of the format **local-part@domain**. <br/><br/> The **local-part** should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The **local-part** may not start or end with any special characters. <br/><br/> This is followed by a **'@'** and then a **domain name**. The **domain name** is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, and have each domain label consist of alphanumeric characters, separated only by hyphens, if any. <br/><br/> The entire email address should not exceed 30 characters. | <ul><li>`james@gmail.com`</li><li>`e9867626@u.nus.edu`</li></ul> |
 | `POSITION` | The position applied for by the applicant. <br/> <br/> It can take any value, should not be blank and should not exceed 30 characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | <ul><li>`Software Engineer`</li><li>`AI Architect 2`</li></ul>   |
-| `STATUS`   | The status of the applicant. <br/> <br/> It can only be `o` or `offered` for _OFFERED_, `r` or `rejected` for _REJECTED_, or `u` or `undecided` for _UNDECIDED_.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <ul><li>`o`</li><li>`u`</li><li>`rejected`</li></ul>             |
+| `STATUS`   | The status of the applicant. <br/> <br/> It can only be `o` or `offered` for _OFFERED_, `r` or `rejected` for _REJECTED_, or `u` or `undecided` for _UNDECIDED_. <br/> <br/> The default status for an applicant is "Undecided".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <ul><li>`o`</li><li>`u`</li><li>`rejected`</li></ul>             |
 | `INDEX`    | The index of the applicant in the displayed list. <br/> <br/> It must be a positive integer and not more than the total number of applicants.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | <ul><li>`2`</li></ul>                                            |
 
 
@@ -246,18 +245,28 @@ Adds a new applicant to the list.
 Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
 <box type="warning" header="**Caution**">
-    Duplicate applicants are not allowed. Two applicants are considered duplicates if they have the same phone number or email.
+    Duplicate applicants are not allowed. 
+    Two applicants are considered duplicates if they have the same phone number or email.
 </box>
 
 <box type="tip" header="**Note**">
-    As <code>NAME</code> can only contain alphanumeric characters and spaces, names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.  
+    As <code>NAME</code> can only contain alphanumeric characters and spaces, 
+    names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.  
+</box>
+
+<box type="tip" header="**Note**">
+    Note that the default status for new Applicants is "Undecided".
 </box>
 
 
 Example:
 * `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer`
-* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
+Adds a new applicant with name *John Doe*, phone number *912345671*, email *johndoe@gmail.com*, and position *Software Engineer*.
 
+<br/><br/>
+
+* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
+  Adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@yahoo.com*, and position *Project Manager*.
 <br>
 
 ---
@@ -452,11 +461,14 @@ Find applicants whose name contains a particular keyword.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+* The total length of the keywords should not be more than 55 characters long.
 * The search is case-insensitive, e.g. `JOHN` will return `john`.
 * The order of the keywords does not matter, e.g. `Alice Tan` will match `Tan Alice`.
 * Only the applicant name is searched.
-* Any applicant whose name contains the sequence of characters given as the keyword will be given as a result, e.g. `Ed` will match both `Edward` and `Ed`.
-* Applicants matching at least one keyword will be returned (i.e. OR search), e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
+* Any applicant whose name contains the sequence of characters given as the keyword will be given as a result, 
+e.g. `Ed` will match both `Edward` and `Ed`.
+* Applicants matching at least one keyword will be returned (i.e. OR search), 
+e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
 
 Example:
 
