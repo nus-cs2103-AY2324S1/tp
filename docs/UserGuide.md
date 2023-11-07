@@ -237,8 +237,9 @@ Adds a new applicant to the list.
 
 Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
+<a name="duplicate-applicants"></a>
 <box type="warning" header="**Caution**">
-    Duplicate applicants are not allowed. Two applicants are considered duplicates if they have the same phone number or email.
+    Duplicate applicants are not allowed. Two applicants are considered duplicates if they have the same phone number or the same email.
 </box>
 
 <box type="tip" header="**Note**">
@@ -511,12 +512,14 @@ Example:
 Imports applicants from a [CSV](#glossary) file.
 
 Format: `import f/FILENAME`
-* The CSV file must be placed in the home folder of Staff-Snap.
+* The CSV file must be placed in the [home folder](#glossary) of Staff-Snap.
 * The CSV file must have the following headers: `name`, `phone`, `email`, `position` in that order, as shown below.<br>
   
 <img src="images/user-guide/csv_header.png" alt="mac_os_warning">
 
 * The fields of the columns must satisfy the [parameter constraints](#command-parameters-1) for `NAME`, `PHONE`, `EMAIL`, and `POSITION` respectively.
+* The CSV file must not contain [duplicate applicants](#duplicate-applicants).
+* The CSV file must not contain applicants that are already in Staff-Snap.
 * A sample CSV file can be found [here](demo.csv).
 
 Example:
