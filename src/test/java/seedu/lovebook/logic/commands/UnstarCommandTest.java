@@ -1,5 +1,7 @@
 package seedu.lovebook.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -85,9 +87,40 @@ public class UnstarCommandTest {
         assertCommandFailure(unstarCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    @Test public void execute_dateIsAlreadyUnstarred_throwsCommandException() {
+    @Test
+    public void execute_dateIsAlreadyUnstarred_throwsCommandException() {
         UnstarCommand unstarCommand = new UnstarCommand(INDEX_FIRST_PERSON);
         assertThrows(CommandException.class, "Date has already been unstarred", ()
                 -> unstarCommand.execute(model));
+    }
+
+    @Test
+    public void equals() {
+        UnstarCommand unstarFirstCommand = new UnstarCommand(INDEX_FIRST_PERSON);
+        UnstarCommand unstarSecondCommand = new UnstarCommand(INDEX_SECOND_PERSON);
+
+        // same object -> returns true
+        assertTrue(unstarFirstCommand.equals(unstarFirstCommand));
+
+        // same values -> returns true
+        UnstarCommand unstarFirstCommandCopy = new UnstarCommand(INDEX_FIRST_PERSON);
+        assertTrue(unstarFirstCommand.equals(unstarFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(unstarFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(unstarFirstCommand.equals(null));
+
+        // different date -> returns false
+        assertFalse(unstarFirstCommand.equals(unstarSecondCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Index targetIndex = Index.fromOneBased(1);
+        UnstarCommand unstarCommand = new UnstarCommand(targetIndex);
+        String expected = UnstarCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, unstarCommand.toString());
     }
 }
