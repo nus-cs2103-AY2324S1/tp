@@ -22,7 +22,7 @@ Managing clients and a busy schedule have never been easier. With OutBook, all y
 # Table of Content
 
 - [Quick Start](#quick-start)
-- [Navigating OutBook]()
+- [Navigating OutBook](#navigating-outbook)
 - [Features](#features)
   - [Contact Commands](#contact-commands)
     - [Adding a contact: `addc`](#adding-a-contact--addc)
@@ -87,15 +87,15 @@ Return to the [Table of Contents](#table-of-content)
 ---
 
 # Navigating OutBook
-OutBook displays all the information you have added in a clear and concise manner using dedicated columns for contacts and meetings respectively.
+![User Interface for OutBook](images/UserInterface.png)
 
-| Name          | Function                                                                                              |
-|---------------|-------------------------------------------------------------------------------------------------------|
-| Command Box   | Enter your commands here                                                                              |
-| Status Box    | Displays the results after a command is executed                                                      |
-| Contacts List | Displays contact details                                                                              |
-| Meetings List | Displays meetings that are scheduled                                                                  |
-| Details List  | Displays all fields added to a specified contact and/or meeting in full detail, completed with labels |
+| Name          | Function                                                                                                                                                                                                                                              |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Command Box   | Enter your commands here                                                                                                                                                                                                                              |
+| Status Box    | Displays the results after a command is executed                                                                                                                                                                                                      |
+| Contacts List | Displays contact details                                                                                                                                                                                                                              |
+| Meetings List | Displays meetings that are scheduled                                                                                                                                                                                                                  |
+| Details List  | Displays all the fields of a contact and/or meeting in full detail, completed with labels. Use [viewc](#viewing-detailed-contact-information--viewc)/[viewm](#viewing-detailed-meeting-information--viewm) to specify the contact/meeting to display. |
 
 Return to the [Table of Contents](#table-of-content)
 
