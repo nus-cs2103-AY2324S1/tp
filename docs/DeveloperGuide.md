@@ -282,20 +282,28 @@ _{more aspects and alternatives to be added}_
 
 ### Expanded Find feature
 
-The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing FindCommand structure. 
-It extends `Predicate<Person>` and is composed of up to one of a `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate`
-and a `TagContainsKeywordsPredicate` each. Here's a partial class diagram of the `CombinedPredicate`.
-![CombinedPredicate](images/CombinedPredicate.png)
+The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure. 
+It extends the `find` command with the ability to search for multiple terms at once, implemented using an array
+of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `CombinedPredicate`.
+![CombinedPredicateClassDiagram](images/CombinedPredicateClassDiagram.png)
 
-The `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate` and
-`TagContainsKeywordsPredicate` check a Person if the respective field contains
-any of the keywords supplied to the predicate. Note that only the `NameContainsKeywordsPredicate` 
-checks for whole words, because it is rare to search for people by substrings, while `FinancialPlanContainsKeywordsPredicate`
-and `TagContainsKeywordsPredicate` allow matching for substrings because there are certain cases where it is logical to search for
-substrings e.g. `Plan A` and `Plan A Premium` are related, so they can show up in the same search.
+In the `FindCommandParser`, `CombinedPredicate` is initialised with a `NameContainsKeywordsPredicate`,
+`FinancialPlanContainsKeywordsPredicate` and `TagContainsKeywordsPredicate`. These predicates check a `Person` if the
+respective field contains any of the keywords supplied to the predicate.
 
-The Find command format also changes to resemble a format more similar to the `add` and `edit` commands, to allow for
-searching for keywords in multiple fields at the same time.
+Note that only `NameContainsKeywordsPredicate` checks for whole words, because it is rare to search for people by
+substrings e.g. `Marc` and `Marcus` should not show up in the same search. On the other hand,
+`FinancialPlanContainsKeywordsPredicate` and `TagContainsKeywordsPredicate` allow matching for
+substrings because there are certain cases where it is logical to search for substrings e.g. `Plan A` and
+`Plan A Premium` are related, so they can show up in the same search.
+
+The `find` command format also changes to resemble a format more similar to the `add` and `edit` commands, to allow for
+searching for keywords in multiple fields at the same time. We also allow the use of duplicate prefixes so that we
+can search for multiple terms belonging to the same field.
+
+For now, we only allow for searching for `Name`, `FinancialPlan` and `Tag` fields because they are the most commonly
+searched fields, but extending the feature to search in other fields is possible by creating the `Predicate` class and
+modifying the `FindCommandParser`.
 
 #### Design Considerations:
 
@@ -309,11 +317,15 @@ searching for keywords in multiple fields at the same time.
     * Cons: Less flexible, slightly more difficult to implement.
 
 **Aspect: How to implement `CombinedPredicate`**
-* **Alternative 1 (current choice):** Compose it with the 3 component predicates.
+* **Alternative 1 (current choice):** Use varargs and a common interface.
+    * Pros: More flexible in usage while still testable.
+    * Cons: More difficult to modify and the check for equality can be defeated with enough effort.
+
+* **Alternative 2:** Compose it with the 3 component predicates.
     * Pros: Easier to modify and test.
     * Cons: Less flexible when trying to combine multiple predicates (that may be of the same type).
 
-* **Alternative 2:** Use a `Predicate<Person>` and use the `or()` method to chain predicates.
+* **Alternative 3:** Use a `Predicate<Person>` and use the `or()` method to chain predicates.
     * Pros: More flexible in usage.
     * Cons: More difficult to modify and test.
 

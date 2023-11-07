@@ -254,7 +254,7 @@ public class ParserUtil {
      * @throws ParseException if the given string is invalid.
      */
     public static void validateName(String input) throws ParseException {
-        if (input.isEmpty() || !Name.isValidName(input)) {
+        if (!Name.isValidName(input)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, Name.MESSAGE_CONSTRAINTS));
         }
@@ -277,7 +277,7 @@ public class ParserUtil {
      * @throws ParseException if the given string is invalid.
      */
     public static void validateFinancialPlan(String input) throws ParseException {
-        if (input.isEmpty() || !FinancialPlan.isValidFinancialPlanName(input)) {
+        if (!FinancialPlan.isValidFinancialPlanName(input)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FinancialPlan.MESSAGE_CONSTRAINTS));
         }
@@ -301,7 +301,7 @@ public class ParserUtil {
      * @throws ParseException if the given string is invalid.
      */
     public static void validateTag(String input) throws ParseException {
-        if (input.isEmpty() || !Tag.isValidTagName(input)) {
+        if (!Tag.isValidTagName(input)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, Tag.MESSAGE_CONSTRAINTS));
         }
