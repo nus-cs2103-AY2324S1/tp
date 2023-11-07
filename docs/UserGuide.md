@@ -11,7 +11,7 @@ It is able to add, edit and delete any contacts and meetings you want. As well a
 
 <div style="page-break-after: always;"></div>
 
-# Table of Content
+# Table of Contents
 
 - Table of Contents
   {:toc}
@@ -219,6 +219,7 @@ Examples:
 
 Adds a meeting to OutBook.
 Meetings are sorted by start time given.
+Meetings are allowed to overlap and multiple meetings can be occuring at the same time.
 
 Format: `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​`
 
