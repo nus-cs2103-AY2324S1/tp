@@ -88,7 +88,7 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         phoneField.setText("Tel:");
-        addressField.setText("Room Number:");
+        addressField.setText("Address:");
         emailField.setText("Email:");
         linkedinField.setText("Linkedin:");
         birthdayField.setText("Birthday:");
