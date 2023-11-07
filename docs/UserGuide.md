@@ -444,6 +444,15 @@ Deletes an interview of the specified application from the list.
 
 * Deletes the interview at the specified `INTERVIEW_INDEX` of the application at the specified `JOB_INDEX`.
 
+**Successful command:**
+
+* When an interview is successfully deleted, display “Interview deleted: (`TYPE`) interview; Date and Time: (`DATETIME`); Address: (`ADDRESS`)”.
+
+**Failed command:**
+
+* If any fields or prefixes are not included with the command,
+  display "Invalid command format!" and the correct format for interview delete command.
+
 **Examples:**
 
 * `interview delete 1 from/2`
@@ -463,11 +472,20 @@ Edits an interview of the specified application from the list.
 * Edits the interview at the specified `INTERVIEW_INDEX` of the application at the specified `JOB_INDEX`.
 * At least one of the optional fields must be provided.
 
+**Successful command:**
+
+* When an interview is successfully edited, display “Interview successfully edited: (`TYPE`) interview; Date and Time: (`DATETIME`); Address: (`ADDRESS`)”.
+
+**Failed command:**
+
+* If any fields or prefixes are not included with the command,
+  display "Invalid command format!" and the correct format for interview edit command.
+
 **Examples:**
 
-* `interview edit 2 from/4 t/GROUP`
+* `interview edit 2 from/4 t/GROUP d/Jan 20 2025 1200`
 
-  Edits the interview type for the 2nd interview from the 4th job application in the list.
+  Edits the interview type and date time for the 2nd interview from the 4th job application in the list.
 
 * `interview edit 4 from/8 a/NTU`
 
