@@ -4,7 +4,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS1231S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_FIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_SIXTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -15,7 +14,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TO_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,9 +63,7 @@ public class TypicalPersons {
             .withCourses(VALID_COURSE_CS1231S, VALID_COURSE_CS2103T).withHour(VALID_HOUR_FIVE).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .withFreeTime(VALID_FROM_BOB, VALID_TO_BOB).withHour(VALID_HOUR_SIXTY).build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+            .withHour(VALID_HOUR_SIXTY).build();
 
     private TypicalPersons() {
     } // prevents instantiation

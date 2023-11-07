@@ -1,5 +1,7 @@
 @startuml
+hide circle
 skinparam classAttributeIconSize 0
+
 class FreeTime {
     + {static} FreeTime EMPTY_FREE_TIME
     + {static} String MESSAGE_CONSTRAINTS

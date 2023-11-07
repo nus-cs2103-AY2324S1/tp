@@ -6,13 +6,11 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMPTY_HOUR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_SIXTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TO_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -59,10 +57,6 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertNotEquals(DESC_AMY, editedAmy);
 
-        // different free time -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withFreeTime(VALID_FROM_BOB, VALID_TO_BOB).build();
-        assertNotEquals(DESC_AMY, editedAmy);
-
         // different hours -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHour(VALID_EMPTY_HOUR).build();
         assertNotEquals(DESC_AMY, editedAmy);
@@ -79,8 +73,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", telegram="
                 + editPersonDescriptor.getTelegram().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + ", free time="
-                + editPersonDescriptor.getFreeTime().orElse(null) + ", courses="
+                + editPersonDescriptor.getTags().orElse(null) + ", courses="
                 + editPersonDescriptor.getCourses().orElse(null) + ", work hour="
                 + editPersonDescriptor.getHour().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
