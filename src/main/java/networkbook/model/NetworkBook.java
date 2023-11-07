@@ -1,6 +1,7 @@
 package networkbook.model;
 
 import static java.util.Objects.requireNonNull;
+import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.IOException;
 import java.util.Comparator;
@@ -34,6 +35,7 @@ public class NetworkBook implements ReadOnlyNetworkBook {
     public NetworkBook() {
         persons = new UniqueList<>();
         filteredPersons = new FilteredList<>(persons.asUnmodifiableObservableList());
+        setFilterPredicate(PREDICATE_SHOW_ALL_PERSONS);
         displayedPersons = new SortedList<>(filteredPersons,
                 new PersonSortComparator(PersonSortComparator.SortField.NAME,
                                         PersonSortComparator.SortOrder.ASCENDING));
