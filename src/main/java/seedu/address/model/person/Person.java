@@ -95,7 +95,7 @@ public class Person {
         return attendanceStorage;
     }
 
-    public AttendanceType getAttendanceToday() {
+    private AttendanceType getAttendanceToday() {
         return this.attendanceStorage.getType(LocalDate.now());
     }
 
