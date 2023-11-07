@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB_LOWER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CANDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DANIEL;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -20,6 +21,7 @@ public class NameComparatorTest {
     private static Person p2 = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
     private static Person p3 = new PersonBuilder(ALICE).withName(VALID_NAME_CANDY).build();
     private static Person p4 = new PersonBuilder(BOB).withName(VALID_NAME_DANIEL).build();
+    private static Person p5 = new PersonBuilder(BOB).withName(VALID_NAME_BOB_LOWER).build();
 
     @Test
     public void constructor_initialization_test1() {
@@ -51,6 +53,12 @@ public class NameComparatorTest {
         assertTrue(nameComparison1 < 0);
         assertTrue(nameComparison2 < 0);
         assertTrue(nameComparison3 > 0);
+    }
+
+    @Test
+    public void execute_compareDifferentCaseSuccess() {
+        NameComparator nameComparator = new NameComparator(true, true, 1);
+        assertEquals(nameComparator.compare(p1, p5), 0);
     }
 }
 
