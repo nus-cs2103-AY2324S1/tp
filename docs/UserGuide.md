@@ -5,9 +5,11 @@ title: User Guide
 # What Is BandConnect++?
 Unlock your musical potential with **_BandConnect++_** ! 
 
-**_BandConnect++_** is a powerful desktop app that helps music producers manage their musician contacts and form bands with ease. It is created with a convenient and intuitive Command Line Interface (CLI) that speeds up your work routine.
+**_BandConnect++_** is a powerful desktop app that helps independent music producers manage their musician contacts and create perfect bands with ease. Say goodbye to the tedious process of scrolling through your phone contacts and noting down every potential musician for your dream bands! With BandConnect++, you own the freedom to experiment with various hypothetical band makeups. You can quickly create a new band from scratch, add your musician contacts to the band, and check if their instruments and genres are a perfect match. 
 
-**_BandConnect++_** is developed by a driven team of musicians/programmers who strives to make life easier for musicians and music producers.  Discover your perfect musical match and create your next big hit now!
+What's more, BandConnect++ has a convenient and intuitive [Command Line Interface (CLI)](#glossary) that allows you to perform all the tasks with just a few keystrokes. It may be a little daunting at first, but don't worry! We have prepared a comprehensive user guide to get you started and answer your confusion. Once you get the hang of it, your efficiency will be brought to a whole new level!
+
+So, no more waiting! Let's start creating your first dream band now!
 
 --------------------------------------------------------------------------------------------------------------------
 # Using the Guide
@@ -477,5 +479,6 @@ If you wish, please refer to the below section for a more succinct [command summ
 --------------------------------------------------------------------------------------------------------------------
 
 # Glossary
-To be added.
-CLI, GUI, Java
+| Term   | Definition                                                                                                                                                                                                                                                                     |
+|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CLI    | Command Line Interface (CLI) is a text-based user interface that allows users to interact with a computer program by typing in commands through a keyboard. <br/> Since a mouse is not needed for CLI, it is often **a more efficient interaction method for fast typists.**   |
