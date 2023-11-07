@@ -524,6 +524,12 @@ Shows a list of all the interviews in **InterviewHub** that are done onto the GU
 
 Format: `list-i-done`
 
+Before `list-i-done`:
+![beforelistidone](images/beforelistidone.png)
+
+After `list-i-done`:
+![afterlistidone](images/afterlistidone.png)
+
 [Back to the Table of Contents](#table-of-contents)
 
 ### Listing all incomplete interview : `list-i-not-done`
