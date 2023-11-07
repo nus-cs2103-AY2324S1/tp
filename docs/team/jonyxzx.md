@@ -43,8 +43,10 @@ Given below are my contributions to the project.
     * Added documentation for the features `find-i`, `sort-rate` and `rate`
   * Developer Guide:
     * Added the user stories.
+    * Added documentation for the features sort, rate, and find interview.
+    * Formatted the structure of the Developer Guide.
 
 * **Community**:
-  * [41](https://github.com/AY2324S1-CS2103T-T11-2/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me) team pull requests reviewed.
+  * 41 team pull requests reviewed.
   * Reported [10](https://github.com/Jonyxzx/ped/issues) bugs for other team during PE-D.
   * Helped in finding bugs in teammates' features.

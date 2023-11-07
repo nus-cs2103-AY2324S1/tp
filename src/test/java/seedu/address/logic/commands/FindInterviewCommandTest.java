@@ -18,8 +18,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.applicant.predicate.ApplicantContainsInterviewPredicate;
 import seedu.address.model.interview.JobContainsKeywordsPredicate;
 
+//@@author jonyxzx
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindInterviewCommand}.
  */
 public class FindInterviewCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -58,8 +59,6 @@ public class FindInterviewCommandTest {
         JobContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindInterviewCommand command = new FindInterviewCommand(predicate);
         expectedModel.updateFilteredInterviewList(predicate);
-        expectedModel.updateFilteredApplicantList(
-                new ApplicantContainsInterviewPredicate(expectedModel.getFilteredInterviewList()));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredInterviewList());
     }

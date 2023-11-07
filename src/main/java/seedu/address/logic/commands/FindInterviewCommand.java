@@ -8,6 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.applicant.predicate.ApplicantContainsInterviewPredicate;
 import seedu.address.model.interview.JobContainsKeywordsPredicate;
 
+//@@author jonyxzx
 /**
  * Finds and lists all interviews in address book which the job-role contains any of the argument keywords.
  * Keyword matching is case-insensitive.
@@ -32,7 +33,6 @@ public class FindInterviewCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredInterviewList(predicateJob);
-        model.updateFilteredApplicantList(new ApplicantContainsInterviewPredicate(model.getFilteredInterviewList()));
         return new CommandResult(
                 String.format(Messages.MESSAGE_INTERVIEWS_LISTED_OVERVIEW, model.getFilteredInterviewList().size()));
     }
