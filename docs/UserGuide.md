@@ -17,9 +17,7 @@ To help you simplify and streamline the process of organizing your contacts and 
 Managing clients and a busy schedule have never been easier. With OutBook, all you need is a keyboard and a few seconds to type in short commands!
 <div style="page-break-after: always;"></div>
 
----
-
-# Table of Content
+# Table of Contents
 
 - [Quick Start](#quick-start)
 - [Navigating OutBook](#navigating-outbook)
@@ -266,6 +264,7 @@ Examples:
 
 Adds a meeting to OutBook.
 Meetings are sorted by start time given.
+Meetings are allowed to overlap and multiple meetings can be occuring at the same time.
 
 Format: `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​`
 
