@@ -197,18 +197,18 @@ This **darker blue box** with the **lightbulb icon** provides you **extra useful
 
 Before you proceed to use the manage contact features of CampusConnect, take a quick read of the table below that provides a summary of the accepted formats for each respective parameters.
 
-<panel header=":fa-solid-book: **Command Parameter Table**" type="secondary" expanded no-close>
+<panel header=":fa-solid-book: **Contact Management Parameters**" type="secondary" expanded no-close>
 
-| Parameter                   | Format                                                                                                                                         | Example                        |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| `NAME`                      | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                                                   | John Doe                       |
-| `PHONE_NUMBER`              | Use `0-9` only and should be at least 3 digits long                     | 98765432                       |
-| `EMAIL` / `SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                                                         | johndoe@gmail.com              |
-| `ADDRESS`                   | Use any characters                                                                                                                             | John street, block 123, #01-01 |
-| `TAG`                       | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined tags that indicate your contact as an emergency contact | friend                         |
-| `TELEGRAM`                  | Start with the `@` symbol, no whitespace with a minimum length of 5 characters. Use `a-z`, `0-9` and `_` only                                  | @john_doe123                   |
-| `LINKEDIN`                  | Use `a-z`, `A-Z`, `0-9`, `_` and `-` only                                                                                                      | john-doe-b9a38128a             |
-| `BIRTHDAY`                  | Have the format of `DD/MM`                                                                                                                     | 31/10                          |
+| Parameter                       | Format                                                                                                                                          | Example                                    |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|
+| `n/NAME`                        | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                                                    | n/John Doe                                 |
+| `p/PHONE_NUMBER`                | Use `0-9` only and should be at least 3 digits long                                                                                             | p/98765432                                 |
+| `e/EMAIL`  `e2/SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                                                          | e/johndoe@gmail.com   e2/johndoe@gmail.com |
+| `a/ADDRESS`                     | Use any characters                                                                                                                              | a/John street, block 123, #01-01           |
+| `t/TAG`                         | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined tags that indicate your contact as an emergency contact  | t/friend                                   |
+| `tg/TELEGRAM`                   | Start with the `@` symbol, no whitespace with a minimum length of 5 characters. Use `a-z`, `0-9` and `_` only                                   | tg/@john_doe123                            |
+| `li/LINKEDIN`                   | Use `a-z`, `A-Z`, `0-9`, `_` and `-` only                                                                                                       | li/john-doe-b9a38128a                      |
+| `b/BIRTHDAY`                    | Have the format of `DD/MM`                                                                                                                      | b/31/10                                    |
 
 </panel>
 
@@ -279,7 +279,7 @@ If the details of your contacts have changed, CampusConnect enables you to edit 
 
 This feature involves the command: `edit`, which edits existing information saved to your contact.
 
-Format: `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
+Format: `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]... [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
 
 <box type="info" icon=":fa-solid-magnifying-glass:">
 
@@ -287,6 +287,7 @@ Below are some examples on how to use the command:
 
 * `edit 1 tg/@johndoe e2/johndoe@gmail.com`: Edits telegram to "@johndoe" and secondary email to "johndoe@gmail.com" for contact at index 1 of your contact list.   
 * `edit 2 n/Betsy e/betsy@example.com a/Newgate Heavan p/98765411 t/bestfriend`: Edits name to "Besty", email to "besty@example.com", address to "Newgate Heavan", phone to "98765411" and tag to "bestfriend" for contact at index 2 of your contact list.  
+* `edit 3 t/` Removes all existing tags for contact at index 3 of your contact list. <br> **Note: In this case, for the parameter `[t/TAG]`, you can only input once if you will like to remove all existing tags of your contact, e.g. `edit 3 t/ t/` will not work.**
 
 Refer to [properties of contact](#properties-of-contact) on the accepted formats for the respective parameters.
 
