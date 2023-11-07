@@ -14,22 +14,23 @@ Flashlingo is a **desktop app for learning words by flash cards, optimized for u
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `flashlingo.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-4/tp/releases).
+2. Download the latest `flashlingo.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-4/tp/releases) (Not finished yet).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Flashlingo.
+3. Copy the file to the folder you want to use as the _home folder_ for your Flashlingo.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.
    Below shows the steps to perform such a task
-    1. Open up the terminal. For mac users, open up `terminal` through the finder. For windows users, search `cmd` and run it.
-       <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">
-
-    3. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
-   <br>
+    1. Open up the terminal.
+    * For mac users, press `Command + Space` to open Spotlight search, type `Terminal`, and press `Enter`.
+      <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">
+    * For windows users, press `Windows + R` keys simultaneously, type `cmd` and press `Enter`.
+    2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
+       <br>
        `$ cd Downloads`
 
-    4. Simply type in java -jar flashlingo.jar to get started!
-   <br>
-         `$ java -jar flashlingo.jar`
+    3. Simply type in java -jar flashlingo.jar to get started!
+       <br>
+       `$ java -jar flashlingo.jar`
        <br>
        A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
        ![Ui](images/MainUi.png)
@@ -67,24 +68,7 @@ Flashlingo is a **desktop app for learning words by flash cards, optimized for u
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
 
-Opens a browser with the help page (User Guide).
-
-Format: `help`
-
-### Listing all flash cards : `list`
-
-Shows the list of flash cards with both the original word and the corresponding translation.
-
-Format: `list`
-
-Output:
-* `Listed all flash cards`
-  `1. ORIGINAL_WORD - TRANSLATION`
-  `2. ORIGINAL_WORD - TRANSLATION`
-  `3. ORIGINAL_WORD - TRANSLATION`
-  `...`
 
 
 ### Adding a flash card: `add`
@@ -175,6 +159,18 @@ Examples:
 * `find look` returns the flash card list and its translation that contains the keyword `look`
 * `find look, hello, goodbye` returns the flash card list that has all flash cards that contain `look`, `hello` and `goodbye`
 
+### Listing all flash cards : `list`
+
+Shows the list of flash cards with both the original word and the corresponding translation.
+
+Format: `list`
+
+Output:
+* `Listed all flash cards`
+  `1. ORIGINAL_WORD - TRANSLATION`
+  `2. ORIGINAL_WORD - TRANSLATION`
+  `3. ORIGINAL_WORD - TRANSLATION`
+  `...`
 
 ###  Starts review session : `start`
 
@@ -186,9 +182,9 @@ Output: `Review Session has been started.`
 
 **Note**
 * Users are not allowed to start a new review session if they are already in one. In this case,
-`Sorry, currently you are in a review session. Your command is not supported. Please end the review session first.` will be prompted.
+  `Sorry, currently you are in a review session. Your command is not supported. Please end the review session first.` will be prompted.
 * If there are no words to review, users will not be able to start review session. `You have no more words to review!`
-will be displayed.
+  will be displayed.
 
 
 ### Ending the current review session : `end`
@@ -201,15 +197,15 @@ Output: `Review Session has ended.`
 
 **Note**
 * Users are not allowed to end a review session if the session hasn't been started yet. The message of `You are not in a review session.`
-will be given.
+  will be given.
 
-### Flipping to the other side of the flashcard: `flip`
+### Revealing the other side of the flashcard: `reveal`
 
 To show the translation of the flash card in
 
-Format: `flip [<INDEX>]`
+Format: `reveal [<INDEX>]`
 
-Output : `Flashcard has been flipped!`
+Output : `Flashcard has been revealed!`
 
 Examples:![img.png](images/Reveal.png)
 
@@ -247,7 +243,7 @@ or
 if there's no word left in the review session.
 **Note**
 * `no` command will only take effect during review session. Otherwise, error message`You are not in a review session.`
-will be printed out.
+  will be printed out.
 * Pressing `no` button will have the same effect.
 
 ### Show learning statistics : `stats`
@@ -310,6 +306,13 @@ Output:
 |:--------------:|:---------------------------------:|
 | **dark theme** | ![img.png](images/DarkTheme.png)  |
 
+### Viewing help : `help`
+
+Opens a browser with the help page (User Guide).
+
+Format: `help`
+
+
 ### Exiting the program : `exit`
 
 Closes the GUI and terminates the Java program
@@ -368,3 +371,15 @@ Then, use the `load` command to import the data.
 | **Load**                | `load FILE_NAME`<br> e.g., `load SampleData.xlsx`                                                                          |
 | **Switch**              | `switch`                                                                                                                   |
 | **Exit**                | `exit`                                                                                                                     |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+| Term                                  | Definition                                                                                                                                                                                                                                                                                                                       |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CLI                                   | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system.                                                                                                                                                                                          |
+| GUI                                   | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                                                                   |
+| JSON (JavaScript Object Notation)     | JSON is a lightweight data format commonly used for representing structured data.                                                                                                                                                                                                                                                |
+| Level                                 | The level represents the proficiency with a specific flashcard.                                                                                                                                                                                                                                                                  |
+| Review Session                        | A review session is a designated phase within the system where words requiring review are presented individually. Users can confirm their understanding or signal a need for further review.                                                                                                                                     |
+| Forgetting Curve                      | The forgetting curve illustrates the decline in memory retention over time if information is not periodically reviewed or reinforced. It demonstrates a rapid loss of information shortly after learning, with the most significant decline in the initial hours or days. The rate of forgetting gradually decreases over time.  |
