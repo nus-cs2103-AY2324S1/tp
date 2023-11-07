@@ -91,37 +91,7 @@ public class Task extends ListEntryField {
         return this.description;
     }
 
-    /**
-     * Updates the Description of the Task.
-     *
-     * @param newDesc The new description of the task.
-     */
-    public void updateDesc(String newDesc) {
-        this.description = newDesc;
-    }
 
-
-    /**
-     * Marks the Task as Done.
-     */
-    public void markTask() {
-        this.isDone = true;
-    }
-
-    /**
-     * Marks the Task as Not Done.
-     */
-    public void unmarkTask() {
-        this.isDone = false;
-    }
-
-    /**
-     * Marks the Task as done or not done.
-     * @param isDone The completion status of task to mark/ unmark as.
-     */
-    public void isDoneTask(boolean isDone) {
-        this.isDone = isDone;
-    }
     /**
      * Returns true if both tasks have the same description.
      * This defines a weaker notion of equality between two tasks.
