@@ -112,24 +112,25 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 # Table of Contents
 1. [Quick Start](#quick-start)
 2. [Features](#features)
-   - [Manage Contacts](#manage-contacts)
+   - [Contact Management](#contact-management)
+     - [Properties of contact](#properties-of-contact)
      - [Add contact: `add`](#add-contact-add)
      - [Add alternative information to contact: `addalt`](#add-alternative-information-to-contact-addalt)
-     - [Edit contact information: `edit`](#edit-contact-information-edit)
-     - [Update contact's photo: `updatephoto`](#update-contact-s-photo-updatephoto)
+     - [Edit information of contact: `edit`](#edit-information-of-contact-edit)
+     - [Update photo of contact: `updatephoto`](#update-photo-of-contact-updatephoto)
      - [List all contacts: `list`](#list-all-contacts-list)
      - [Delete contact: `delete`](#delete-contact-delete)
    - [Notes](#notes)
-     - [Add a note to contact: `addnote`](#add-a-note-to-contact-addnote)
-     - [Remove a note from contact: `removenote`](#remove-a-note-from-contact-removenote)
-     - [View notes of a contact: `viewnotes`](#view-notes-of-a-contact-viewnotes)
+     - [Add note to contact: `addnote`](#add-note-to-contact-addnote)
+     - [Remove note from contact: `removenote`](#remove-note-from-contact-removenote)
+     - [View notes of contact: `viewnotes`](#view-notes-of-contact-viewnotes)
    - [Notifications](#notifications)
      - [Birthday notifications](#birthday-notifications)
    - [Payments](#payments)
      - [Money Amount Format](#money-amount-format)
-     - [Pay a contact money: `pay`](#pay-a-contact-money-pay)
-     - [Owe a contact money: `owe`](#owe-a-contact-money-owe)
-   - [Find Contacts](#find-contacts)
+     - [Pay money to contact: `pay`](#pay-money-to-contact-pay)
+     - [Owe money to contact: `owe`](#owe-money-to-contact-owe)
+   - [Contact Search](#contact-search)
      - [Basic Filtering](#basic-filtering)
      - [Advanced Filtering](#advanced-filtering)
 3. [FAQ](#faq)
@@ -192,7 +193,7 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-## Manage Contacts
+## Contact Management
 
 ### Properties of contact
 
@@ -274,7 +275,7 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 </box>
 
-###  Edit contact information: `edit`
+###  Edit information of contact: `edit`
 
 If the details of your contacts have changed, CampusConnect enables you to edit your contacts with the latest updated information so that you can still continue to keep in touch with them! Moreover, if you have made a mistake earlier while adding your contact information, CampusConnect empowers you to correct your mistakes through the `edit` command!
 
@@ -302,7 +303,7 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 </box>
 
-###  Update contact's photo: `updatephoto`
+###  Update photo of contact: `updatephoto`
 
 If you are afraid that you may forget who the saved contact is in CampusConnect, our application enables you to update the photo of your contact so that you can visually remember and recognize them!
 
@@ -398,7 +399,7 @@ The fields you enter should follow the following format:
 Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
 </box>
 
-### Add a note to contact: `addnote`
+### Add note to contact: `addnote`
 You can add notes to a person with the `addnote` command.
 
 Format: `addnote PERSON_INDEX NOTE_CONTENT`
@@ -412,7 +413,7 @@ Below are some examples on how to use the commands:
 </box>
 
 
-### Remove a note from contact: `removenote`
+### Remove note from contact: `removenote`
 You can remove notes from a person with the `removenote` command.
 
 Format: `removenote PERSON_INDEX NOTE_INDEX`
@@ -425,7 +426,7 @@ Below are some examples on how to use the commands:
 
 </box>
 
-### View notes of a contact: `viewnotes`
+### View notes of contact: `viewnotes`
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/notes/window_with_notes.png" alt="Window with Notes" style="height:400px; margin:10px;">
   <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
@@ -525,7 +526,7 @@ These convenience features are as follows:
 
 Now that you understand how to enter money when using our app, you can proceed to learn how to record payments in CampusConnect!
 
-### Pay a contact money: `pay`
+### Pay money to contact: `pay`
 
 Records a payment from you to a contact. The amount **the contact owes you** increases by that amount after this transaction.
 
@@ -551,7 +552,7 @@ At the end of both commands, **the contact owes you `$20.50`**.
 
 If you're looking to record a payment from a contact to you, read ahead on how you can use the [owe](#owe-a-contact-money-owe) command instead!
 
-### Owe a contact money: `owe`
+### Owe money to contact: `owe`
 
 Records a payment from a contact to you. The amount **you owe the contact** increases by that amount after this transaction.
 
@@ -580,7 +581,7 @@ At the end of both commands, **you owe the contact `$1.50`**.
 
 ---
 
-## Find Contacts
+## Contact Search
 
 Another feature of CampusConnect is the ability to search for contacts based on a variety of criteria. This is useful for quickly finding contacts whose details you may only partially remember, or for finding contacts who match a certain criteria.
 
