@@ -37,12 +37,11 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the employee's attendance identified by the index number used in the displayed employee list.\n"
             + "Parameters: INDEX (must be a positive integer) /at ATTENDANCE_TYPE\n"
-            + "Example: " + COMMAND_WORD + " 1 /at present";
+            + "Example: " + COMMAND_WORD + " 1 /at present\n"
+            + "OR\n"
+            + "Parameters: /n NAME /at ATTENDANCE_TYPE\n"
+            + "Example: " + COMMAND_WORD + "/n John /at late\n";
 
-    public static final String MESSAGE_USAGE_FOR_NAME = COMMAND_WORD
-            + ": Marks the employee's attendance identified by the name used in the displayed employee list.\n"
-            + "Parameters: /n NAME (must be present) /at ATTENDANCE_TYPE\n"
-            + "Example: " + COMMAND_WORD + " /n John /at absent";
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Employee: %2$s as %1$s";
 
     public static final String MESSAGE_PERSON_ON_LEAVE = "The employee that you are trying to mark is on leave today!";

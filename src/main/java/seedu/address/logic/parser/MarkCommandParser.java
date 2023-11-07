@@ -68,7 +68,7 @@ public class MarkCommandParser implements Parser<MarkCommand> {
 
                 } else {
                     throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE_FOR_NAME));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
                 }
 
             }

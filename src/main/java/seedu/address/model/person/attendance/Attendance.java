@@ -1,5 +1,7 @@
 package seedu.address.model.person.attendance;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -16,6 +18,8 @@ public class Attendance {
      * @param attendanceType the type of attendance.
      */
     public Attendance(LocalDate date, AttendanceType attendanceType) {
+        requireNonNull(date);
+        requireNonNull(attendanceType);
         this.date = date;
         this.attendanceType = attendanceType;
     }
