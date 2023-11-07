@@ -529,12 +529,13 @@ Step 3. The user executes `unmark 1` command, which unmarks the schedule with in
 displayed. The command is parsed in the `AddressBookParser`.
 
 Step 4. `UnmarkScheduleCommandParser` is initialized to parse the user input to create an `UnmarkScheduleCommand` with 
-the given Index representing the user's input.
+the given `Index` representing the user's input.
 
 Step 5. The `UnmarkScheduleCommand#execute(Model)` will perform the following checks in this order to ensure that the 
 schedule can be safely unmarked in the Model:
-    - The `Index` is a valid integer.
-    - The `Index` is not out of bounds (within the range of the displayed schedule list's size).
+
+- The `Index` is a valid integer.
+- The `Index` is not out of bounds (within the range of the displayed schedule list's size).
 
 Step 6. The `execute` method then calls Model::getFilteredScheduleList and gets the specified `Schedule` using the 
 `Index` given.
