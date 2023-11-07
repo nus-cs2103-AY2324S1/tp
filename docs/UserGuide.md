@@ -48,7 +48,7 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
 > 3. Command Box
 > 4. Logger Tab
 
->:bulb: Some outputs have to be scrolled to view.
+>:bulb: Longer outputs have to scrolled to be viewed.
 
 5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -576,7 +576,7 @@ JavaScript Object Notation. This is the file format used by HealthSync to save a
 | **List**       | `ls`     | `list`                                                                                                                                         |
 | **Add**        | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
 | **Edit**       | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                 |
-| **Delete**     | `d`      | `delete NAME [field]` *or* `delete id/IC_NUMBER [field] ...` <br> e.g., `delete n/Alex Yeoh m/Diabetes`                                                                                                           |
+| **Delete**     | `d`      | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field] ...` <br> e.g., `delete n/Alex Yeoh m/Diabetes`                                                                                                           |
 | **Clear**      | `c`      | `clear`                                                                                                                                        |
 | **Find**       | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/T0123436F`                                  |
 | **Log**        | `l`      | `log`                                                                                                                                          |

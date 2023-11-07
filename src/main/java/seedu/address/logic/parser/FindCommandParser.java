@@ -51,7 +51,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().trim().split("\\s+");
             List<String> nameKeywordsList = Arrays.asList(nameKeywords);
-            if (nameKeywordsList.get(0) == null || nameKeywordsList.get(0).equals("")) {
+            if (nameKeywordsList.get(0).equals("")) {
                 throw new ParseException(String.format(MESSAGE_INVALID_NAME, FindCommand.MESSAGE_USAGE));
             }
             findCommandPredicate.add(new NameContainsKeywordsPredicate(nameKeywordsList));
@@ -60,7 +60,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
             String[] nricKeywords = argMultimap.getValue(PREFIX_NRIC).get().trim().split("\\s+");
             List<String> nricKeywordsList = Arrays.asList(nricKeywords);
-            if (nricKeywordsList.get(0) == null || nricKeywordsList.get(0).equals("")) {
+            if (nricKeywordsList.get(0).equals("")) {
                 throw new ParseException(String.format(MESSAGE_INVALID_NRIC, FindCommand.MESSAGE_USAGE));
             }
             findCommandPredicate.add(new IdContainsKeywordsPredicate(nricKeywordsList));
