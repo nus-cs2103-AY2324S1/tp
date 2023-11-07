@@ -556,7 +556,7 @@ The list of schedules is sorted to be more organised and easier to navigate for 
 
 The schedules are sorted by implementing the `Comparable` interface and its required `compareTo()` method.
 
-#### Design rationale:
+#### Design rationale
 
 `Schedule`s are sorted by `StartTime` as start time is what tuition centre coordinators are most concerned with.
 
@@ -999,7 +999,7 @@ scheduleToEdit's start and end times are earlier than the current datetime.
 
 If this validation fails, a `CommandException` with a clear and descriptive error message should be thrown.
 
-### Schedule `datetime` input
+### Streamline `datetime` input
 In the current implementation, the users have to enter `yyyy-MM-ddTHH:mm` each time for both `StartTime` and `EndTime`.
 However, since a `Schedule` is not allowed to start and end on different days, the user is unnecessarily repeating the
 input `yyyy-MM-dd`. This resulted in a command format that is longer than necessary. We plan to streamline the command 
@@ -1010,7 +1010,18 @@ to make it shorter and more user-friendly.
 The current `st/` and `et/` prefixes will be updated to take in `HH:mm` only. Additionally, this would require a new 
 prefix `d/` which will parse user input in the `yyyy-MM-dd` format into a `Date`.
 
-For example, any command that uses the `st/` or `et/` prefix will now use `... d/yyyy-MM-dd st/HH:mm et/HH:mm` instead.
+For example, any command that uses the `st/` or `et/` prefix will now use `... d/yyyy-MM-dd st/HH:mm et/HH:m` instead.
+
+### Enhance flexibility of `datetime` inputs
+In the current implementation, users can only enter datetime in this `yyyy-MM-ddTHH:mm` format. This format can be
+restrictive as it requires leading zeroes and `-` as a separator. To enhance user experience, the input for datetime 
+related parameters should be able to handle most frequently used formats like `2023/1/1` and `10:00pm`.
+
+**Proposed implementation**
+
+The parser handling date and time should be updated to handle different date and time formats. This can be achieved by
+having a list of acceptable datetime formats and checking the users input against each one of them. If the user input
+does not match any of the acceptable formats, we should throw a `ParseException`.
 
 ### Switching back to list view from calendar view
 In the current system, when executing any commands, including actions like marking, unmarking, or deleting schedules 
