@@ -261,6 +261,7 @@ Format: `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
 
 * Add dates between `START_DATE` and `END_DATE` inclusive into the leaves taken by employee with id `EMPLOYEE_ID`.
 * `START_DATE` must not be after `END_DATE`.
+* If the current date falls within the leave period, the leave status of the employee will change from **"Present"** to **"On Leave"**.
 
 Examples:
 * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` adds the dates 26, 27, and 28 December 2023 to the leaves taken
@@ -282,6 +283,7 @@ Format: `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
 * `START_DATE` must not be after `END_DATE`.
 * If the employee does not have leaves taken that fall anytime during the period between `START_DATE`and `END_DATE`,
   the command will output an error and will not change anything.
+* If the current date is deleted, the leave status of the employee will change from **"On Leave"** to **"Present"**.
 
 Examples:
 * `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` deletes all leave dates
@@ -305,6 +307,8 @@ Format: `editleave id/EMPLOYEE_ID old/OLD_DATE new/NEW_DATE`
 
 * Edits leave on `OLD_DATE` to `NEW_DATE` of the specified employee with id `EMPLOYEE_ID`.
 * `OLD_DATE` must already exist and `NEW_DATE` must not already exist.
+* If `OLD_DATE` is the current date, the leave status of the employee will change from **"On Leave"** to **"Present"**.
+* Conversely, if `NEW_DATE` is the current date, the leave status of the employee will change from **"Present"** to **"On Leave"**.
 
 Examples:
 * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28` edits the leave on 26 December 2023 to 28 December 2023
