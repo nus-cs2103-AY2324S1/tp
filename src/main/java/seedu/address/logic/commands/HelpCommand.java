@@ -30,7 +30,7 @@ public class HelpCommand extends Command {
             + "  -> listt\n"
             + "  -> clear (CAUTION! using the clear command might result in unintended loss of data!)\n"
             + "  -> find + KEYWORD [MORE_KEYWORDS]\n";
-            //+ "  -> findteam + KEYWORD [MORE_KEYWORDS]\n";
+    //+ "  -> findteam + KEYWORD [MORE_KEYWORDS]\n";
 
     @Override
     public CommandResult execute(Model model) {
