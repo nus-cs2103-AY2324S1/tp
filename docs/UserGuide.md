@@ -60,7 +60,7 @@ quick reference to all the commands available in CMC.
 
 4. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   ![Ui](images/Ui_Window.png)
+   ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it.
    Here are some example commands you can try:
