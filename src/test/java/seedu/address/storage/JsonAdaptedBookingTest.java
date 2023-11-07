@@ -9,12 +9,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.booking.BookingPeriod;
+import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
 public class JsonAdaptedBookingTest {
-    private static final String INVALID_ROOM = "501";
+    private static final String INVALID_ROOM_WITH_3_DIGITS = "501";
+    private static final String INVALID_ROOM_WITH_4_DIGITS = "1501";
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
@@ -37,6 +39,22 @@ public class JsonAdaptedBookingTest {
         assertEquals(BENSON, person.toModelType());
     }
 
+    @Test
+    public void toModelType_invalidRoomWith3Digits_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(INVALID_ROOM_WITH_3_DIGITS, VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                        VALID_ADDRESS, VALID_REMARK);
+        String expectedMessage = Room.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+    @Test
+    public void toModelType_invalidRoomWith4Digits_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(INVALID_ROOM_WITH_4_DIGITS, VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                        VALID_ADDRESS, VALID_REMARK);
+        String expectedMessage = Room.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPerson person =
