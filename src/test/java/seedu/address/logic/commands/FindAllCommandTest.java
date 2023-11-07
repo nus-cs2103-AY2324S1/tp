@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_AND_EVENTS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_AND_EVENTS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_AND_EVENT_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.MEETING_ASSIGNMENT_SUBMISSION;
 import static seedu.address.testutil.TypicalEvents.MEETING_BIRTHDAY_PARTY;
@@ -86,7 +88,7 @@ public class FindAllCommandTest {
     @Test
     public void execute_oneKeyword_multipleItemsFound() {
         // Person name only
-        String expectedMessage = String.format(MESSAGE_PERSONS_AND_EVENTS_LISTED_OVERVIEW, 1, 2);
+        String expectedMessage = String.format(MESSAGE_PERSON_AND_EVENTS_LISTED_OVERVIEW, 1, 2);
         String userInput = "Alice";
         PersonNameOrGroupContainsKeywordsPredicate personPredicate = preparePersonPredicate(userInput);
         EventNameOrGroupContainsKeywordsPredicate eventPredicate = prepareEventPredicate(userInput);
@@ -143,12 +145,13 @@ public class FindAllCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
         assertEquals(Arrays.asList(MEETING_PROJECT_DISCUSSION, MEETING_PROJECT_PRESENTATION),
                 model.getFilteredEventList());
+
     }
 
     @Test
     public void execute_multipleKeywords_multipleItemsFound() {
         // Event and person name only
-        String expectedMessage = String.format(MESSAGE_PERSONS_AND_EVENTS_LISTED_OVERVIEW, 1, 2);
+        String expectedMessage = String.format(MESSAGE_PERSON_AND_EVENTS_LISTED_OVERVIEW, 1, 2);
         String userInput = "Daniel presentation";
         PersonNameOrGroupContainsKeywordsPredicate personPredicate = preparePersonPredicate(userInput);
         EventNameOrGroupContainsKeywordsPredicate eventPredicate = prepareEventPredicate(userInput);
@@ -177,7 +180,7 @@ public class FindAllCommandTest {
                 model.getFilteredEventList());
 
         // Event name and person group
-        expectedMessage = String.format(MESSAGE_PERSONS_AND_EVENTS_LISTED_OVERVIEW, 1, 2);
+        expectedMessage = String.format(MESSAGE_PERSON_AND_EVENTS_LISTED_OVERVIEW, 1, 2);
         userInput = "family Submission";
         personPredicate = preparePersonPredicate(userInput);
         eventPredicate = prepareEventPredicate(userInput);
@@ -192,7 +195,7 @@ public class FindAllCommandTest {
                 model.getFilteredEventList());
 
         // Event group and person name
-        expectedMessage = String.format(MESSAGE_PERSONS_AND_EVENTS_LISTED_OVERVIEW, 1, 1);
+        expectedMessage = String.format(MESSAGE_PERSON_AND_EVENT_LISTED_OVERVIEW, 1, 1);
         userInput = "classmates Fiona";
         personPredicate = preparePersonPredicate(userInput);
         eventPredicate = prepareEventPredicate(userInput);
