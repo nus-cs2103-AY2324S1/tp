@@ -3,8 +3,7 @@ layout: page
 title: Developer Guide
 ---
 
-- Table of Contents
-  {:toc}
+{% include toc.html %}
 
 ---
 
@@ -37,7 +36,6 @@ The **_Architecture Diagram_** given above explains the high-level design of the
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
-
 
 **`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/MainApp.java)) is in charge of the app launch and shut down.
 
@@ -121,7 +119,6 @@ How the parsing works:
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/model/Model.java)
-
 
 <img src="images/ModelClassDiagram.png" width="600" />
 
@@ -278,8 +275,10 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 - **Reasonably comfortable with CLI apps**: Users should have a basic understanding of using command-line applications.
 
 - **Required to produce financial reports**: Tran$act can automatically produce financial reports given the transactions that have been entered.
-- 
+-
+
 ## User Stories
+
 | Priority                 | As a …​                                           | I want to …​                                               | So that I can…​                                                        |
 | ------------------------ | ------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`                  | new user                                          | see usage instructions                                     | refer to instructions when I forget how to use the App                 |
@@ -289,89 +288,99 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 | `* *`                    | user                                              | hide private contact details                               | minimize chance of someone else seeing them by accident                |
 | `*`                      | user with many persons in the address book        | sort persons by name                                       | locate a person easily                                                 |
 | Transaction Recording    |
-| `* * *`                  | user                                  | add a new transaction                                      |                                                                        |
-| `* * *`                  | user                                  | remove a transaction                                       |                                                                        |
-| `* * *`                  | user                                  | view all transactions                                      |                                                                        |
-| `* *`                    | user                                  | edit transactions through the software                     |                                                                        |
-| `* *`                    | user                                  | edit transactions without opening the software             |                                                                        |
+| `* * *`                  | user                                              | add a new transaction                                      |                                                                        |
+| `* * *`                  | user                                              | remove a transaction                                       |                                                                        |
+| `* * *`                  | user                                              | view all transactions                                      |                                                                        |
+| `* *`                    | user                                              | edit transactions through the software                     |                                                                        |
+| `* *`                    | user                                              | edit transactions without opening the software             |                                                                        |
 | Financial Reporting      |
-| `*`                      | user who needs to analyze transactions | have a variety of financial reports                        |                                                                        |
-| `*`                      | user who needs to share data with others | generate reports downloadable in common formats (PDF, CSV) |                                                                        |
-| `*`                      | user                                  | restore from a backup                                      | undo large changes                                                     |
+| `*`                      | user who needs to analyze transactions            | have a variety of financial reports                        |                                                                        |
+| `*`                      | user who needs to share data with others          | generate reports downloadable in common formats (PDF, CSV) |                                                                        |
+| `*`                      | user                                              | restore from a backup                                      | undo large changes                                                     |
 | Data Security and Backup |
 | `*`                      | user who needs to keep sensitive data confidental | encrypt the data                                           | ensure the security and privacy of financial data                      |
-| `*`                      | user who does not have reliable hardware | have automated backups                                     | prevent unnessary data loss                                            |
-| `*`                      | user                                  | restore from a backup                                      | undo large changes                                                     |
+| `*`                      | user who does not have reliable hardware          | have automated backups                                     | prevent unnessary data loss                                            |
+| `*`                      | user                                              | restore from a backup                                      | undo large changes                                                     |
 
 ### Transaction Recording
 
 1. **Adding a Transaction**
-    - As an accountant, I want to add a new financial transaction quickly.
-    - I should be able to specify the amount, type (revenue or expense), date, and optionally, the associated person for the transaction.
+
+   - As an accountant, I want to add a new financial transaction quickly.
+   - I should be able to specify the amount, type (revenue or expense), date, and optionally, the associated person for the transaction.
 
 2. **Removing a Transaction**
-    - As an accountant, I want to delete a transaction when necessary.
-    - I should be able to remove a transaction from the records to correct mistakes or manage data.
+
+   - As an accountant, I want to delete a transaction when necessary.
+   - I should be able to remove a transaction from the records to correct mistakes or manage data.
 
 3. **Viewing All Transactions**
-    - As an accountant, I want to see a list of all recorded transactions for reference.
-    - This list will provide an overview of all financial activities in one place.
+
+   - As an accountant, I want to see a list of all recorded transactions for reference.
+   - This list will provide an overview of all financial activities in one place.
 
 4. **Editing a Transaction**
-    - As an accountant, I need the ability to edit transaction details.
-    - I should be able to make corrections or updates to transaction records as needed.
+
+   - As an accountant, I need the ability to edit transaction details.
+   - I should be able to make corrections or updates to transaction records as needed.
 
 5. **Restoring Deleted Transactions**
-    - As an accountant, I want a safety net for accidental deletions.
-    - I should be able to retrieve transactions I have mistakenly deleted from a "bin" or archive.
+
+   - As an accountant, I want a safety net for accidental deletions.
+   - I should be able to retrieve transactions I have mistakenly deleted from a "bin" or archive.
 
 6. **Fast Data Entry**
-    - As a fast typist, I want shortcuts and efficient data entry methods.
-    - This will enable me to record transactions, including income and expenses, quickly via the CLI.
+   - As a fast typist, I want shortcuts and efficient data entry methods.
+   - This will enable me to record transactions, including income and expenses, quickly via the CLI.
 
 ### Dashboard Overview
 
 1. **Dashboard Display**
-    - As an accountant, I want to see a clear and concise dashboard upon opening the app.
-    - The dashboard should display total income, total expenses, net profit for the selected period (usually monthly), and a breakdown of expenses by sector to improve cost efficiency.
+   - As an accountant, I want to see a clear and concise dashboard upon opening the app.
+   - The dashboard should display total income, total expenses, net profit for the selected period (usually monthly), and a breakdown of expenses by sector to improve cost efficiency.
 
 ### Financial Reporting
 
 1. **Access to Financial Reports**
-    - As an accountant who analyzes transactions, I need access to various financial reports.
-    - I should be able to generate income statements, balance sheets, and cash flow statements.
+
+   - As an accountant who analyzes transactions, I need access to various financial reports.
+   - I should be able to generate income statements, balance sheets, and cash flow statements.
 
 2. **Customizable Reports**
-    - As an accountant who shares data with stakeholders, I want to generate customizable reports.
-    - I should be able to create reports in common formats (PDF, CSV, Excel) to share with others.
+   - As an accountant who shares data with stakeholders, I want to generate customizable reports.
+   - I should be able to create reports in common formats (PDF, CSV, Excel) to share with others.
 
 ### Data Security and Backup
 
 1. **Data Security**
-    - As a user who values data privacy, I expect the app to secure financial data.
-    - The app should implement security measures, potentially including encryption, to protect sensitive information.
+
+   - As a user who values data privacy, I expect the app to secure financial data.
+   - The app should implement security measures, potentially including encryption, to protect sensitive information.
 
 2. **Automated Backups**
-    - As a user concerned about data loss, I want the option for automated backups.
-    - The app should allow me to set up automated backups to prevent data loss due to hardware issues.
+
+   - As a user concerned about data loss, I want the option for automated backups.
+   - The app should allow me to set up automated backups to prevent data loss due to hardware issues.
 
 3. **Undo and Restore**
-    - As a user prone to mistakes, I need the ability to undo actions or restore from backups.
-    - This feature will help me recover from errors or data corruption.
+   - As a user prone to mistakes, I need the ability to undo actions or restore from backups.
+   - This feature will help me recover from errors or data corruption.
 
 ### Address Book
 
 1. **Importing Staff List**
-    - As a user who needs efficiency, I want to import a staff list into the address book.
-    - This will help me quickly access contact information for employees and associates.
+
+   - As a user who needs efficiency, I want to import a staff list into the address book.
+   - This will help me quickly access contact information for employees and associates.
 
 2. **Adding and Editing People**
-    - As a user who manages relationships, I need to add, edit, and remove people from the address book.
-    - This allows me to keep the address book up to date and accurate.
+
+   - As a user who manages relationships, I need to add, edit, and remove people from the address book.
+   - This allows me to keep the address book up to date and accurate.
 
 3. **Viewing Address Book**
-    - As a user who relies on contact information, I want to view the entire address book.
-    - This provides easy access to contact details for individuals in the address book.
+   - As a user who relies on contact information, I want to view the entire address book.
+   - This provides easy access to contact details for individuals in the address book.
 
 ## Use Cases
 
@@ -382,11 +391,13 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant specifies the transaction details, including the amount, type (revenue or expense), date, and optionally, the associated person.
 2. The system validates the input data.
 3. The system records the transaction in the database.
 
 **Extensions:**
+
 - If the input data is invalid, the system displays an error message.
 
 ### Use Case 2: Removing a Transaction
@@ -396,6 +407,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant selects a transaction to remove from the records.
 2. The system confirms the removal with the accountant.
 3. The system removes the transaction from the database.
@@ -407,6 +419,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant selects the option to view all transactions.
 2. The system retrieves and displays a list of all recorded transactions.
 
@@ -417,14 +430,17 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant selects a transaction to edit.
 2. The system allows the accountant to modify the transaction details.
 3. The system saves the updated transaction in the database.
 
 **Extensions:**
+
 - If the input data is invalid, the system displays an error message.
 
 ### Use Case 5: Restoring Deleted Transactions
+
 **Value proposition**: Quickly add company inflow and outflow via the CLI. Easily keep track of company profits and expenses associated with staff and visualize them.
 
 **Actor:** Accountant
@@ -432,6 +448,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant selects the option to restore deleted transactions.
 2. The system presents a list of previously deleted transactions.
 3. The accountant selects a transaction to restore.
@@ -444,6 +461,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. Upon opening the app, the system displays a dashboard.
 2. The dashboard shows total income, total expenses, net profit for the selected period (usually monthly), and a breakdown of expenses by sector.
 
@@ -454,9 +472,9 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant selects the option to access financial reports.
 2. The system generates and displays financial reports, including income statements, balance sheets, and cash flow statements.
-
 
 ### Use Case 8: Customizable Reports
 
@@ -465,6 +483,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant selects the option to generate customizable reports.
 2. The system provides tools for the accountant to customize the report parameters.
 3. The system generates and displays the customized report in common formats (PDF, CSV, Excel).
@@ -476,9 +495,9 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant selects the option to delete all transactions.
 2. The system permanently deletes all recorded transactions from the database.
-
 
 ### Use Case 10: Adding a Staff Member to Address Book
 
@@ -487,6 +506,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant selects the option to add a new staff member to the address book.
 2. The system presents a form for entering staff member details, such as name, contact information, and role.
 3. The accountant enters the required information.
@@ -494,6 +514,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 5. The system adds the new staff member to the address book.
 
 **Extensions:**
+
 - If the input data is invalid or incomplete, the system displays an error message.
 - The system may provide an option to associate the new staff member with transactions during this process.
 
@@ -504,12 +525,14 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant selects a staff member from the address book to remove.
 2. The system confirms the removal with the accountant.
 3. The accountant confirms the action.
 4. The system removes the selected staff member from the address book.
 
 **Extensions:**
+
 - If the accountant cancels the operation at the confirmation step, no staff members are removed.
 
 ### Use Case 12: Editing Staff Member Information in Address Book
@@ -519,6 +542,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant selects a staff member from the address book to edit.
 2. The system presents a form populated with the staff member's existing information.
 3. The accountant modifies the staff member's details as needed.
@@ -526,6 +550,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 5. The system saves the updated staff member information in the address book.
 
 **Extensions:**
+
 - If the input data is invalid or incomplete, the system displays an error message.
 
 ### Use Case 13: Deleting All Address Book Contacts
@@ -535,20 +560,20 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
+
 1. The accountant selects the option to delete all address book contacts.
 2. The system permanently deletes all contacts from the address book.
-
 
 ## Non-functional Requirements (NFR)
 
 - Tran$act should support the storage of at least 1000 transactions per month to accommodate the needs of small businesses.
--  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
--  Should be able to hold up to 1000 transactions without a noticeable sluggishness in performance for typical usage.
--  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+- Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+- Should be able to hold up to 1000 transactions without a noticeable sluggishness in performance for typical usage.
+- A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary
 
-- **Accountant**: A professional who is responsible for managing a company/institution's financial records. 
+- **Accountant**: A professional who is responsible for managing a company/institution's financial records.
 - **Expense**: Costs incurred, including staff salaries and product costs.
 - **Mainstream OS**: Windows, Linux, Unix, OS-X.
 - **Revenue**: Money received, such as sales revenue.

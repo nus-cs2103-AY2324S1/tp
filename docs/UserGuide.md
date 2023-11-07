@@ -1,29 +1,26 @@
 ---
 layout: page
-title: User Guide
-toc: true
+title: Tran$act User Guide
 ---
 
-# Tran$act User Guide
-
 Welcome to **Tran$act**, your solution for effortless transaction recording and management.
-Tran$act is a desktop application designed to cater the needs of startup or small scale
+Tran$act is a desktop application designed to cater to the needs of startup or small scale
 retailers looking for a cheap and efficient way to record daily transactions.
 
 Here's an overview of our main features:
 
-- **Transaction Management** : Add, Edit and Delete Income and Expenses
+- **Transaction Management** : Add, Edit and Delete Revenue and Expenses
 - **Comprehensive Dashboard**: An instant snapshot of your monthly financial situation
-- **Data Integration**: Export/Import financial statements in CSV format
+- **Data Integration**: Export list of transactions in CSV format
 - **Staff List**: Add people to your staff list and link them to transactions
 
 In addition, Tran$act's **Command Line Interface (CLI)** functionality will allow you to unlock
-greater efficiency as you type faster, while still having the benefits of a Graphical User Interface (GUI)
+greater efficiency as you type faster, while still having the benefits of a Graphical User Interface (GUI).
 
 This user guide will walk you through how to get started with our app and dive into our features
-to help you streamline your accounting
+to help you streamline your accounting.
 
----
+{% include toc.html %}
 
 ## Quick start
 
@@ -38,7 +35,7 @@ to help you streamline your accounting
 
 > **❗If the above does not work, try this method:**
 >
-> Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press Enter to run the application.<br>
+> Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press Enter to run the application.
 
 5. The app contains some sample data. Type `view s` to switch to the _staff list_.
 
@@ -61,7 +58,7 @@ to help you streamline your accounting
 > In step 6, we added a new staff member Isaac, and the app automatically assigned them with an ID of 7, which you can
 > see in the staff list.
 
-8. Congratulations, you have successfully added a staff member and a transaction! Refer to the [Features](#features)
+8. Congratulations, you have successfully added a staff member and a transaction! Refer to the [Usage Section](#usage)
    below for the full details of each command. Enjoy transacting with Tran$act!
 
 ---
@@ -92,15 +89,39 @@ Need to find transactions meeting a specific criteria, and order them? Tran$act 
 
 **5. Dashboard Display**
 
-Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial information, including total income, total expenses, net profit for the selected period.
+Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial information, including total monthly revenue and expenses, as well as a net profit graph for available months.
 
-**6. Export of transactions in csv format**
+**6. Export transactions in CSV format**
 
-For those who need to share data with stakeholders, Tran$act allows you to generate CSV report.
+For those who need to share data with stakeholders, Tran$act allows you to generate a CSV report.
 
 **7. Staff List**
 
-Import staff lists for quick access to contact information. You can also add, edit, and remove people from the staff list as needed.
+You can add, edit, and remove people from the staff list as needed to be associated with transactions.
+
+---
+
+## Navigating the GUI
+
+Tran$act's GUI is simple and gives you access to all of its features with just one click.
+
+This should be what you see when you open Tran$act for the first time:
+![Ui](images/Ui-Overview.png)
+
+The upper menu bar contains two tabs:
+
+1. File — This tab contains actions like saving data and loading data.
+2. Help — This tab contains more information about Tran$act like, for example, this User Guide.
+
+The lower menu bar contains three tabs:
+
+1. Overview — This tab shows you a monthly summary of your finances based on the transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
+2. Transactions — This tab shows you the transactions you have entered in a row-by-row format.
+   ![Ui](images/Ui-Transactions.png)
+3. Staff List — This tab shows you the persons or parties you have entered in a list format.
+   ![Ui](images/Ui-Staff.png)
+
+The input field below this with the grey text `Enter command here...` is where you can enter your commands.
 
 ---
 
@@ -348,33 +369,11 @@ Format: `exit`
 
 Tran$act's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-## Navigating the GUI
-
-Tran$act's GUI is simple and gives you access to all of its features with just one click.
-
-This should be what you see when you open Tran$act for the first time:
-![Ui](images/Ui-Overview.png)
-
-The upper menu bar contains two tabs:
-
-1. File — This tab contains actions like saving data and loading data.
-2. Help — This tab contains more information about Tran$act like, for example, this User Guide.
-
-The lower menu bar contains three tabs:
-
-1. Overview — This tab shows you a monthly summary of your finances based on the transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
-2. Transactions — This tab shows you the transactions you have entered in a row-by-row format.
-   ![Ui](images/Ui-Transactions.png)
-3. Staff List — This tab shows you the persons or parties you have entered in a list format.
-   ![Ui](images/Ui-Staff.png)
-
-The input field below this with the grey text `Enter command here...` is where you can enter your commands.
-
 ## FAQ
 
 1. How to check my Java Version?
    - Open a Terminal/ Command Prompt and type java --version. If you do not have Java installed, you can check the instructions [here](https://nus-cs2103-ay2223s2.github.io/website/admin/programmingLanguages.html)
-2. Can I do further analysis with the transaction data
+2. Can I do further analysis with the transaction data?
    - The purpose of Tran$act is to keep accounting and analysis simple to improve efficiency. Nonetheless, you can export the data as a CSV file and use the data in third party apps such as excel and do further analysis if needed.
 3. How can I launch Tran$act if clicking on the JAR file does not work?
    - Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press Enter to run the application.
