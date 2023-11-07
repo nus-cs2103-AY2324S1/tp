@@ -66,7 +66,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `sort f/salary in/asc`: Sorts the employees by their salaries in ascending order.
 
-   * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 29 to 31 December 2023 inclusive for employee with id EID1234-5678.
+   * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 26 to 28 December 2023 inclusive for employee with id EID1234-5678.
 
    * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27`: Deletes all leave dates of an employee with id EID1234-5678 that fall on 27 December 2023.
    
@@ -78,9 +78,9 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    
    * `deleteremark id/EID1234-5678 r/good worker`: Deletes the remark `good worker` from the employee with id EID1234-5678.
    
-   * `overtime id/EID1234-5678 o/inc a/10`: Increases the overtime hours of employee with id EID1234-5678 to 10 hours.
+   * `overtime id/EID1234-5678 o/inc a/10`: Increases the overtime hours of employee with id EID1234-5678 by 10 hours.
    
-   * `report EID1234-5678`: Generates a report with details on leaves and overtime for employee with id EID1234-5678.
+   * `report EID1234-5678`: Generates a report with details of the employee with id EID1234-5678.
    
    * `reset f/overtime`: Resets the overtime hours field of all employees to the default value 0.
    
