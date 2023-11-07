@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.LeaveList;
 import seedu.address.testutil.EmployeeBuilder;
@@ -60,6 +61,14 @@ public class EditLeaveCommandTest {
         expectedModel.addEmployee(editedEmployee);
 
         assertCommandSuccess(editLeaveCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    void execute_invalidId_failure() {
+        LocalDate oldLeaveDate = BOB.getLeaveList().getLeave(0).leaveDate;
+        LocalDate newLeaveDate = LocalDate.of(2023, 12, 12);
+        EditLeaveCommand editLeaveCommand = new EditLeaveCommand(new Id("EID0000-0000"), oldLeaveDate, newLeaveDate);
+        assertCommandFailure(editLeaveCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
     @Test

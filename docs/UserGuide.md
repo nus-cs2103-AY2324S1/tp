@@ -68,9 +68,9 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 26 to 28 December 2023 inclusive for employee with id EID1234-5678.
 
-   * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27`: Deletes all leave dates of an employee with id EID1234-5678 that fall on 27 December 2023.
+   * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27`: Deletes leave date 27 December 2023 for employee with id EID1234-5678.
    
-   * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-29`: Edits the old leave date `2023-12-26` of an employee with id EID1234-5678 to new leave date `2023-12-29`.
+   * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-29`: Edits the old leave date on 26 December 2023 of employee with id EID1234-5678 to new leave date on 29 December 2023.
    
    * `listleave on/2023-12-28`: Lists all employees on leave on 28 December 2023.
    
