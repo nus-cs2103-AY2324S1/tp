@@ -67,61 +67,6 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Viewing course : `course`
-
-Views course information and tutorial timings.
-
-![view course](images/viewCourse.png)
-
-Format: `course c/COURSE_CODE`
-
-Example: `course c/CS1231S` returns the course information and tutorial timings for CS1231S.
-
-If you are unsure about the course code, you can simply type `course` and a list of all courses will be shown.
-
-When the command succeeds:
-```
-Course: CS2103T Software Engineering
-CS2103T Lecture 10:00-12:00
-CS2103T Tutorial 10:00-12:00
-CS2103T Laboratory 10:00-12:00
-```
-
-### Adding a default course : `teach`
-
-Adds a default course to the address book.
-
-![teach command](images/teachCourse.png)
-
-Format: `teach c/COURSE_CODE`
-- Updates the name of the window to the default course.
-- Filters the list of TAs teaching under the course automatically.
-- The default course is saved even after the user closes the application.
-
-Example: `teach c/CS2103T` sets the default course to the given course code.
-
-When the command succeeds:
-
-```CS2103T is successfully added as default course.```
-
-When the command fails:
-- Incorrect format (e.g., missing information): `Invalid command format!`
-- Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
-  and optionally end with an alphabet.`
-- Valid course code, but course not found: `Course not found.`
-
-### Reset the default course : `clearteach`
-
-Resets the default course in the address book.
-
-![clearteach command](images/clearTeach.png)
-
-Example: `clearteach`
-
-When the command succeeds:
-
-```Default course has been cleared!```
-
 ### Adding a Teaching Assistant: `add`
 
 Adds a new teaching assistant to TAManager.
@@ -132,7 +77,7 @@ Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [
 
 - `NAME` should be a string.
 - `PHONE` should be an 8-digit integer.
-- `EMAIL` should contain "@".
+- `EMAIL` should be a valid email address.
 - `TELEGRAM` should be between 5-32 characters and start with "@".
 - `FROM` should be a time in "HH:SS" format
 - `TO` should be a time in "HH:SS" format
@@ -176,11 +121,12 @@ Edits a teaching assistant in TAManager.
 
 ![edit TA](images/editTA.png)
 
-Format: `edit INDEX n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... [h/HOUR]`
 
+- At least one field to edit must be provided.
 - `NAME` should be a string.
 - `PHONE` should be an 8-digit integer.
-- `EMAIL` should contain "@".
+- `EMAIL` should be a valid email address.
 - `TELEGRAM` should be between 5-32 characters and start with "@".
 - `FROM` should be a time in "HH:SS" format
 - `TO` should be a time in "HH:SS" format
@@ -310,7 +256,6 @@ Listed all teaching assistants
 [list of TAs]
 ```
 
-<<<<<<< Updated upstream
 ### Updating Hours for All TAs in View: `hour`
 
 Updates the hour field to all TAs in the current list.
@@ -339,9 +284,6 @@ When the command fails:
 
 - Invalid command format (updated new hour is invalid, either below 0 or above 9999): `Invalid command format!`
 
-=======
->>>>>>> Stashed changes
-
 ### Edit free time for a teaching assistant: `editft`
 
 Edits the free time for a specified day for a TA with a specified index.
@@ -368,7 +310,60 @@ When the command fails:
 - Incorrect format (missing prefix or parameter, or `DAY` out of range, or invalid `FROM` or `TO` format): `Invalid command format!`
 - Index out of range: `The person index provided is invalid`
 
+### Viewing course : `course`
 
+Displays course information and tutorial timings.
+
+![view course](images/viewCourse.png)
+
+Format: `course c/COURSE_CODE`
+
+Example: `course c/CS1231S` returns the course information and tutorial timings for CS1231S.
+
+If you are unsure about the course code, you can simply type `course` and a list of all courses will be shown.
+
+When the command succeeds:
+```
+Course: CS2103T Software Engineering
+CS2103T Lecture 10:00-12:00
+CS2103T Tutorial 10:00-12:00
+CS2103T Laboratory 10:00-12:00
+```
+
+### Adding a default course : `teach`
+
+Adds a default course to the address book.
+
+![teach command](images/teachCourse.png)
+
+Format: `teach c/COURSE_CODE`
+- Updates the name of the window to the default course.
+- Filters the list of TAs teaching under the course automatically.
+- The default course is saved even after the user closes the application.
+
+Example: `teach c/CS2103T` sets the default course to the given course code.
+
+When the command succeeds:
+
+```CS2103T is successfully added as default course.```
+
+When the command fails:
+- Incorrect format (e.g., missing information): `Invalid command format!`
+- Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
+  and optionally end with an alphabet.`
+- Valid course code, but course not found: `Course not found.`
+
+### Reset the default course : `clearteach`
+
+Resets the default course in the address book.
+
+![clearteach command](images/clearTeach.png)
+
+Example: `clearteach`
+
+When the command succeeds:
+
+```Default course has been cleared!```
 
 ### Clearing all entries : `clear`
 
@@ -411,18 +406,14 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g., `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`
-**Clear** | `clear`
-**Course** | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`
-<<<<<<< Updated upstream
-**Hour** | `hour 6`
-=======
-**Hour** | `hour INTEGER`<br> e.g., `hour 2` 
->>>>>>> Stashed changes
-**List** | `list`
-**Help** | `help`
-**Teach** | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`
+| Action     | Format, Examples                                                                                                                                                                                                             |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g., `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10` |
+| **Clear**  | `clear`                                                                                                                                                                                                                      |
+| **Course** | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`                                                                                                                                                                         |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                          |
+| **Find**   | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                                   |
+| **Hour**   | `hour 6`                                                                                                                                                                                                                     |
+| **List**   | `list`                                                                                                                                                                                                                       |
+| **Help**   | `help`                                                                                                                                                                                                                       |
+| **Teach**  | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                                           |
