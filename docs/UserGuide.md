@@ -212,11 +212,13 @@ Valid cases:
   ![Add](images/screenshots/AddErrorMessage.png)
 
 <div markdown="span" class="alert alert-warning">
-  :exclamation: <b>Important:</b> <br/>
 
-Duplicate fosterers cannot be added; this is detected by the fosterer's name.<br/>
+**:exclamation: Important:**<br>
+
+Duplicate fosterers cannot be added; this is detected by the fosterer's name.<br>
 e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne  (multiple spaces)  tay"</code>.
 </div> 
+
 
 Examples:
 * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent`
@@ -310,7 +312,9 @@ Parameters:
 | `INDEX`     | - Index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
 
 <div markdown="span" class="alert alert-warning">
-  :exclamation: <b>Important:</b> <br/>
+
+**:exclamation: Important:**<br>
+
 Only specific commands are available in the profile page. 
 The list of available commands are <code>help</code>, <code>save</code>, and <code>exit</code>. 
 </div> 
@@ -380,7 +384,9 @@ Parameters:
 </div>
 
 <div markdown="span" class="alert alert-warning">
-  :exclamation: <b>Important:</b> <br/>
+
+**:exclamation: Important:**<br>
+
 If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the addressbook. 
 </div>
 
@@ -392,7 +398,10 @@ Examples:
 *  `find` or `list` followed by `edit 2` 
   * changes the view to the profile page of the 2nd fosterer in the address book since parameters are not provided.
 
-<div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b><br/>
+<div markdown="span" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
+
 Edit may cause information loss. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 </div>
@@ -406,9 +415,9 @@ Format: `edit INDEX`
 
 Parameters:
 
-| Parameter | About                                                                                                                                                                     | Example |
-|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
+| Parameter | About                                                                                                                                                                    | Example |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - Index must be a positive integer | `1`, `2`, `3` |
 
 
 <div markdown="block" class="alert alert-info">
@@ -426,7 +435,9 @@ Parameters:
  
 </div>
 
-<div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b><br/>
+<div markdown="span" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
 Edit may cause information loss. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 </div>
@@ -438,12 +449,15 @@ To learn more about profile page, please refer to the section [User Interface: T
 
 ### Deleting a fosterer : `delete`
 
-Deletes the fosterer at the index-th position of the currently displayed list.
+Deletes the index-th fosterer of the currently displayed list for you.
 
 Format: `delete INDEX [INDEX...]`
 
-<div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b><br/> 
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
 The index of a fosterer is not fixed. It is relative to the current list of fosterers you are handling.
+
 </div>
 
 Parameters:
@@ -453,8 +467,13 @@ Parameters:
 | `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
 
 <div markdown="span" class="alert alert-primary">
-  :bulb: <b>Tip:</b><br/>
-You can delete multiple fosterers at once. Each index just needs to be separated by a white space. Any duplicates and extra white spaces will be ignored.
+
+**bulb: Tip:**<br>
+You can delete multiple fosterers at once.<br> 
+
+* Each index just needs to be separated by a white space.<br> 
+
+* Any duplicates and extra white spaces will be ignored.
 </div>
 
 Examples:
@@ -464,10 +483,10 @@ Examples:
   * deletes the 1st fosterer in the result list.
 * `list` followed by `delete 1 3 7` 
   * deletes the 1st, 3rd and 7th fosterers in the address book.
+    ![Delete](images/screenshots/Delete.png)
+
 * `list` followed by `delete 3 3 3 3` 
   * deletes the 3rd fosterer in the address book.
-
-![Delete](images/screenshots/Delete.png)
 
 ### Sorting fosterers: `sort`
 
