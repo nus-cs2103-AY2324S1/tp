@@ -472,7 +472,7 @@ If you wish, please refer to the below section for a more succinct [command summ
 | Action             | Format, Examples                                                                                                      |
 |--------------------|-----------------------------------------------------------------------------------------------------------------------|
 | **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL i/INSTRUMENT`<br> e.g., `add n/John Doe p/98928479 e/johndpiano@xmail.com i/Piano` |
-| **Remove**         | `remove INDEX`<br> e.g., `remove 1`                                                                                   |
+| **Delete**         | `delete INDEX`<br> e.g., `remove 1`                                                                                   |
 | **Tag Instrument** | `tag instrument INDEX i/INSTRUMENT…​`<br> e.g.,`tag instrument 1 i/piano i/guitar`                                    |
 | **Tag Genre**      | `tag genre INDEX g/GENRE…​`<br> e.g., `tag genre 1 g/rock g/pop`                                                      |
 | **Find**           | `find n/NAME p/PHONE_NUMBER e/EMAIL i/INSTRUMENT` <br> e.g., `find n/John i/Piano`                                    |
