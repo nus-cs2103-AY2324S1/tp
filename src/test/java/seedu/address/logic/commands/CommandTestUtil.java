@@ -29,7 +29,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 public class CommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_NRIC_AMY = "T7243948H";
+    public static final String VALID_NRIC_AMY = "T4651323H";
     public static final String VALID_NRIC_BOB = "S5210654J";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
