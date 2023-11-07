@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import java.util.Objects;
+
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.GoalCommand;
@@ -16,6 +18,8 @@ public class GoalCommandParser implements Parser<GoalCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public GoalCommand parse(String args) throws ParseException {
+        assert args != null : "Command is empty";
+
         try {
             int index = ParserUtil.parseTarget(args);
             return new GoalCommand(index);

@@ -5,11 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -23,12 +19,14 @@ import seedu.address.model.tag.Tag;
  */
 public class ListCommandParser implements Parser<ListCommand> {
 
+
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
      * and returns an ListCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ListCommand parse(String args) throws ParseException {
+        assert args != null : "Command is empty";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_TAG);
 
         List<Predicate<Card>> predicates = new ArrayList<>(Collections.singleton(PREDICATE_SHOW_ALL_CARDS));
