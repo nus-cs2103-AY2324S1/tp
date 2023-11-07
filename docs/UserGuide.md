@@ -435,7 +435,15 @@ Format: goal NUMBER
 goal 5
 ```
 
+### Important Note:
+Do not stack MarkDown Syntax
 
+Example:
+`` edit 1 q/ *** ``
+
+This may lead to unexpected behavior of text in the display view.
+
+>>>>>>> master
 ### Getting help: `help`
 Seek more details from a link provided leading to the User Guide.
 Users can also access this function by clicking on the **File** button located at the top
@@ -494,6 +502,17 @@ edit 1 q/ How many bits can a <u>Half Adder</u> add up
 ```
 #### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3b_underline.png)
+
+
+### Important Note:
+Do not stack MarkDown Syntaxes
+
+Example:
+`` edit 1 q/ *** ``
+
+
+This may lead to unexpected behavior of text in the display view. In the case when unexpected MarkDown format is observed, edit the flashcard again with the without the MarkDown syntax/ with appropriate syntaxes.
+
 
 # Importing and Exporting Decks
 

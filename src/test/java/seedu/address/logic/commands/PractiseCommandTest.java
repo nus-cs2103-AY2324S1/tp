@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CARD;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Deck;
 import seedu.address.model.Model;
@@ -105,7 +106,7 @@ public class PractiseCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void execute_equals() {
         PractiseCommand practiseCommand = new PractiseCommand(INDEX_FIRST_CARD);
         PractiseCommand otherPractiseCommand = new PractiseCommand(INDEX_SECOND_CARD);
 
@@ -125,4 +126,18 @@ public class PractiseCommandTest {
         // different Card -> returns false
         assertFalse(practiseCommand.equals(otherPractiseCommand));
     }
+
+    @Test
+    public void execute_practiseToString() {
+        Index testIndex = Index.fromOneBased(1);
+        PractiseCommand modelCommand = new PractiseCommand(testIndex);
+        String expectedString = new ToStringBuilder(modelCommand)
+                .add("targetIndex", testIndex)
+                .toString();
+        String resultString = modelCommand.toString();
+
+        assertTrue(resultString.equals(expectedString));
+    }
+
+
 }
