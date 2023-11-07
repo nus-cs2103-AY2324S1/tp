@@ -59,8 +59,7 @@ public class CreateCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd))
-            + String.format(MESSAGE_SUCCESS_INDEX, model.getDisplayedPersonList().size()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override
