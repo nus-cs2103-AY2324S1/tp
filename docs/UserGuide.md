@@ -206,6 +206,12 @@ Shows a list of commands and how they can be used.
 
 **Format:** `help`
 
+***Successful Commands:***
+
+1. Launching the help window: `help`
+
+* This command opens up a separate window, displaying all the availble commands on JobFindr and their formats.
+
 ---
 
 ### Listing all applications : `list`
@@ -228,16 +234,26 @@ Adds a job application to the list.
 **Examples:**
 
 ***Successful Commands:***
+
 1. Adding a basic job application: `add c/Google r/Software Engineer`
+
 * This command adds a job application for the company "Google" with the role "Software Engineer."
 * Optional fields like deadline, status, industry, and job type are not provided, so they will use their default values.
-2. Adding a complete job application with all fields: `add c/Microsoft r/Project Manager d/Dec 31 2023 1400 i/Technology s/Pending t/FULL_TIME`
-* This command adds a job application for the company "Microsoft" with the role "Project Manager" and provides a deadline, industry, status, and job type.
+
+2. Adding a complete job application with all
+   fields: `add c/Microsoft r/Project Manager d/Dec 31 2023 1400 i/Technology s/Pending t/FULL_TIME`
+
+* This command adds a job application for the company "Microsoft" with the role "Project Manager" and provides a
+  deadline, industry, status, and job type.
 
 ***Failed Commands:***
+
 1. Missing required fields: `add r/Data Analyst`
+
 * This command is invalid because it doesn't provide the "c/COMPANY" field, which is required.
+
 2. Invalid Job Type: `add c/Apple r/Software Developer t/Part-Time`
+
 * This command is invalid because "t/Part-Time" is not a valid job type. It should be "t/PART_TIME."
 
 **UI mockup:**
@@ -261,6 +277,19 @@ Deletes the specified application from the list.
 **UI mockup:**
 ![](images/user-guide/DeleteCommand.png)
 
+***Successful Commands:***
+
+1. Deleting a job application: `delete 2`
+
+* This command deletes the job application at the 2nd index in the list.
+* This is provided that this job application indeed exists.
+
+***Failed Commands:***
+
+1. Invalid job index: `delete 5` when there is no job application at index 5.
+
+* This command is invalid because 5 is not a valid job index.
+
 ---
 
 ### Editing an application : `edit`
@@ -275,17 +304,27 @@ Edits an application in the list.
 **Examples:**
 
 ***Successful Commands:***
+
 1. Editing the role of a job application: `edit 1 r/Marketing Manager`
+
 * This command edits the role of the first job application to "Marketing Manager."
+
 2. Editing multiple fields of a job application: `edit 2 c/Amazon r/Product Manager d/Dec 15 2023 1000 s/APPROVED`
+
 * This command edits the company, role, deadline, and status of the second job application.
 
 ***Failed Commands:***
+
 1. Missing index: `edit c/Google r/Software Engineer`
+
 * This command is invalid because it doesn't specify the index of the job application to edit.
+
 2. Invalid field: `edit 3 q/Designer`
+
 * This command is invalid because "q/Designer" is not a valid field. It should be "r/Designer."
+
 3. Invalid Job Type: `edit 4 t/Part-Time`
+
 * This command is invalid because "t/Part-Time" is not a valid job type. It should be "t/PART_TIME."
 
 **UI mockup:**
@@ -421,5 +460,6 @@ the data of your previous AddressBook home folder.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
+
 1. Prefix - An affix that placed before the field to indicate the type of field
-   * Examples: c/ r/ s/ from/
+    * Examples: c/ r/ s/ from/
