@@ -67,9 +67,9 @@ public class UpdatePhotoCommandTest {
             UpdatePhotoCommand updatePhotoCommand = (UpdatePhotoCommand) command;
             updatePhotoCommand.execute(new ModelManager());
         } catch (ParseException e) {
-            fail();
+            assertEquals(e.getMessage(), "Index is not a non-zero unsigned integer.");
         } catch (CommandException e) {
-            assertEquals(e.getMessage(), "The person index provided is invalid");
+            fail();
         }
     }
 
@@ -89,9 +89,9 @@ public class UpdatePhotoCommandTest {
             addCommand.execute(temp);
             updatePhotoCommand.execute(temp);
         } catch (ParseException e) {
-            fail();
+            assertEquals(e.getMessage(), "Index is not a non-zero unsigned integer.");
         } catch (CommandException e) {
-            assertEquals(e.getMessage(), "The person index provided is invalid");
+            fail();
         }
     }
 

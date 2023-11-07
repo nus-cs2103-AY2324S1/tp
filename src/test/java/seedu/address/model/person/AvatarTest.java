@@ -1,11 +1,13 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
@@ -23,17 +25,12 @@ public class AvatarTest {
     @Test
     public void constructor_default() {
         Avatar avatar = new Avatar();
-        assertEquals(avatar.getPath(), DEFAULT_PATH);
+        assertEquals(avatar.getPath(), null);
     }
 
     @Test
-    public void constructor_invalidPath_exceptionThrown() {
-        try {
-            Avatar avatar = new Avatar("D");
-            fail();
-        } catch (FileNotFoundException e) {
-            assertTrue(true);
-        }
+    public void constructor_invalidPath_exceptionThrown() throws Exception {
+        assertThrows(FileNotFoundException.class, () -> new Avatar("D"));
     }
 
     @Test
@@ -41,8 +38,7 @@ public class AvatarTest {
         try {
             Avatar avatar = new Avatar(safePath);
             assertEquals(avatar.getPath(), safePath);
-
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             fail();
         }
     }
@@ -53,7 +49,7 @@ public class AvatarTest {
             Avatar avatar = new Avatar(safePath);
             ImageComparator ic = new ImageComparator();
             assertTrue(ic.areImagesEqual(avatar.getImage(), new Image(new FileInputStream(safePath))));
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             fail();
         }
     }
@@ -64,7 +60,7 @@ public class AvatarTest {
             Avatar avatar = new Avatar(safePath);
             Avatar avatar1 = new Avatar(safePath);
             assertEquals(avatar.hashCode(), avatar1.hashCode());
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             fail();
         }
     }
