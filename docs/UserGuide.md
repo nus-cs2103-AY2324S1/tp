@@ -66,7 +66,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `sort f/salary in/asc`: Sorts the employees by their salaries in ascending order.
 
-   * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 29 to 31 December 2023 inclusive for employee with id EID1234-5678.
+   * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 26 to 28 December 2023 inclusive for employee with id EID1234-5678.
 
    * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27`: Deletes all leave dates of an employee with id EID1234-5678 that fall on 27 December 2023.
    
