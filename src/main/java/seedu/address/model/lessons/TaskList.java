@@ -67,7 +67,6 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
     public int getTaskClashWith(Task toCheck) {
         requireNonNull(toCheck);
         int index = 0;
-        //return internalTaskList.stream().filter(toCheck::isSameTask).findFirst().get();
         for (int i = 0; i < internalTaskList.size(); i++) {
             if (internalTaskList.get(i).isSameTask(toCheck)) {
                 index = i;
