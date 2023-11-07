@@ -34,8 +34,8 @@ public class FilterCommand extends Command {
             + PREFIX_STATUS + " [STATUS], "
             + PREFIX_LESS_THAN_SCORE + " [SCORE], "
             + PREFIX_GREATER_THAN_SCORE + " [SCORE]";
-    public static final String MESSAGE_SCORE_PARSE_FAILURE = "Score in lts/ or gts/ has to be a number with up to 1 "
-            + "decimal place";
+    public static final String MESSAGE_SCORE_PARSE_FAILURE = "Score should be a number between 0.0 and 10.0 to"
+            + " 1 decimal place";
 
     private final CustomFilterPredicate predicate;
 
