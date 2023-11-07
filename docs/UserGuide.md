@@ -223,6 +223,10 @@ Shows a list of all applications in the list in alphabetical order.
 
 **Format:** `list`
 
+**Successful command:**
+
+* List out all applications to companies in the list with index.
+
 **UI mockup:**
 ![ListCommand](images/user-guide/ListCommand.png)
 
@@ -361,6 +365,17 @@ Sorts the list based on the prefix provided.
 Adds an interview to the specified application from the list.
 
 **Format:** `interview add INDEX t/TYPE d/DATETIME a/ADDRESS`
+
+**Successful command:**
+
+* When an interview is successfully added, display “New interview added: (`TYPE`) interview; Date and Time: (`DATETIME`); Address: (`ADDRESS`)”.
+
+**Failed command:**
+
+* If any fields or prefixes are not included with the command, 
+display "Invalid command format!" and the correct format for interview add command.
+
+* If any fields have invalid input, display the possible valid inputs for that field.
 
 **Examples:**
 
