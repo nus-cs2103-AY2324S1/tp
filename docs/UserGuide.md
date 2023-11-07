@@ -89,6 +89,8 @@ CS2103T Laboratory 10:00-12:00
 
 ### Adding a default course : `teach`
 
+Adds a default course to the address book.
+
 The default course is usually the course that you are currently teaching.
 
 This command will add a default course to the address book.
