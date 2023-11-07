@@ -34,27 +34,27 @@ public class OpenLinkCommandTest {
 
     private static final Model modelStubThrowingIoExceptionForOpeningLink = new Model() {
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public ReadOnlyUserPrefs getUserPrefs() {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public GuiSettings getGuiSettings() {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public void setGuiSettings(GuiSettings guiSettings) {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public Path getNetworkBookFilePath() {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public void setNetworkBookFilePath(Path networkBookFilePath) {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public ReadOnlyNetworkBook getNetworkBook() {
@@ -62,31 +62,39 @@ public class OpenLinkCommandTest {
         }
 
         public void setNetworkBook(ReadOnlyNetworkBook networkBook) {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public boolean hasPerson(Person person) {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public void deletePerson(Person target) {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public void addPerson(Person person) {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public void setItem(Person target, Person edited) {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
+        public boolean canUndoNetworkBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public boolean canRedoNetworkBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+        
         public void undoNetworkBook() {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public void redoNetworkBook() {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public boolean isValidLinkIndex(Index personIndex, Index linkIndex) {
@@ -98,11 +106,11 @@ public class OpenLinkCommandTest {
         }
 
         public boolean isValidEmailIndex(Index personIndex, Index emailIndex) {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public Email openEmail(Index personIndex, Index emailIndex) {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
 
         public ObservableList<Person> getDisplayedPersonList() {
@@ -111,7 +119,7 @@ public class OpenLinkCommandTest {
 
         @Override
         public void updateDisplayedPersonList(Predicate<Person> predicate, Comparator<Person> comparator) {
-            throw new UnsupportedOperationException();
+            throw new AssertionError("This method should not be called.");
         }
     };
 

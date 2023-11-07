@@ -8,7 +8,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import networkbook.commons.core.GuiSettings;
 import networkbook.commons.core.index.Index;
-import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Email;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
@@ -98,14 +97,12 @@ public interface Model {
     boolean canRedoNetworkBook();
     /**
      * Undoes the last command that changed the contacts stored in NetworkBook.
-     * @throws CommandException if NetworkBook has no previous states stored to undo to.
      */
-    void undoNetworkBook() throws CommandException;
+    void undoNetworkBook();
     /**
      * Redoes a previously undone command that changed the contacts stored in NetworkBook.
-     * @throws CommandException if NetworkBook has no subsequent states stored to redo to.
      */
-    void redoNetworkBook() throws CommandException;
+    void redoNetworkBook();
 
     /**
      * Checks if the indices for a link of a contact are valid.

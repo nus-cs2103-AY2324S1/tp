@@ -139,12 +139,21 @@ public class CreateCommandTest {
         public ReadOnlyNetworkBook getNetworkBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        public boolean canUndoNetworkBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public boolean canRedoNetworkBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
-        public void undoNetworkBook() throws CommandException {
+        public void undoNetworkBook() {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public void redoNetworkBook() throws CommandException {
+        public void redoNetworkBook() {
             throw new AssertionError("This method should not be called.");
         }
 
