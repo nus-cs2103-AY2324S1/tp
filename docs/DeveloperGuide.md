@@ -541,7 +541,7 @@ The lifeline for `UnmarkScheduleCommandParser` should end at the destroy marker 
 the lifeline reaches the end of diagram.
 </div>
 
-#### Design Rationale
+#### Design rationale
 
 **Aspect: Existence of unmark command**
 - **Alternative 1 (current choice):** Separate `unmark` command for unmarking schedules.
