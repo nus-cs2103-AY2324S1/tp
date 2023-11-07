@@ -4,10 +4,6 @@
   pageNav: 3
 ---
 <style>
-table {
-    width: 100%;
-}
-
 img {
     display:block;
     float:none;
