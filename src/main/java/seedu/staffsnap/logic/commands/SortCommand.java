@@ -16,7 +16,8 @@ import seedu.staffsnap.model.applicant.Descriptor;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the applicant list based on the descriptor provided.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the applicant list based on the descriptor "
+            + "provided.\n"
             + "Parameters: "
             + PREFIX_DESCRIPTOR + "DESCRIPTOR\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_DESCRIPTOR + "name";
