@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -42,6 +43,37 @@ public class SortCommandTest {
         SortCommand sortCommand = new SortCommand(validSortIn);
         String expected = SortCommand.class.getCanonicalName() + "{sortIn=" + sequence + "}";
         assertEquals(expected, sortCommand.toString());
+    }
+
+    @Test
+    public void equals_barObjectsAreEqual_returnsTrue() {
+        SortIn sortIn = new SortIn("ASC");
+        SortCommand command1 = new SortCommand(sortIn);
+        SortCommand command2 = new SortCommand(sortIn);
+        assertEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_barObjectsAreSame_returnsTrue() {
+        SortIn sortIn = new SortIn("ASC");
+        SortCommand command1 = new SortCommand(sortIn);
+        assertEquals(command1, command1);
+    }
+
+    @Test
+    public void equals_objectsAreNotEqual_returnsFalse() {
+        SortIn sortIn1 = new SortIn("ASC");
+        SortIn sortIn2 = new SortIn("DESC");
+        SortCommand command1 = new SortCommand(sortIn1);
+        SortCommand command2 = new SortCommand(sortIn2);
+        assertNotEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_objectComparedWithNull_returnsFalse() {
+        SortIn sortIn1 = new SortIn("ASC");
+        SortCommand command1 = new SortCommand(sortIn1);
+        assertNotEquals(command1, null);
     }
 
     /**
