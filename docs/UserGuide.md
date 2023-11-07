@@ -95,11 +95,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT 
   * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
 * Simply providing 1 enrol date without providing any corresponding subject(s) will result in an error.
 
-<box type="tip" seamless>
-
-**Tip:** If enrol dates are not specified, it will stick to the default (Today's date)
-</box>
-
 Examples:
 * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry s/Physics`
 * `add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Chinese`
