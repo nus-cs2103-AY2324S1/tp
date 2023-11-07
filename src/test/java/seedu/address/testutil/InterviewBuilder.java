@@ -7,6 +7,7 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.Rating;
 
+//@@author jonyxzx
 /**
  * A utility class to help with building Interview objects.
  */
