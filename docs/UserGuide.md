@@ -158,11 +158,8 @@ These are all the features in regard to a member in CMC.
 Adds a member to the list of members in CMC.
 
 - Use `addMember` or `addm` to use add a member
-- Use `addApplicant` or `adda` to use add an applicant
 
 #### Usage:
-
-##### Adding member:
 
 `addMember /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
@@ -170,7 +167,7 @@ Adds a member to the list of members in CMC.
 
 #### Acceptable values for parameters:
 
-- `name`: Only alphabetical characters, @, () are allowed
+- `memberName`: Only alphabetical characters, @, () are allowed
 - `phoneNumber`: Only numbers are allowed
 - `email`: Must follow the format of xyz@abc.wsd
 - `telegramHandle`: Only alphanumeric characters and underscore are allowed
@@ -179,8 +176,6 @@ Adds a member to the list of members in CMC.
 #### Example of usage:
 
 `addm /name John Doe /phone 92345678 /email johndoe@xyz.com /tele @johndoe /tag WelfareHead`
-
-`adda /name John Doe /phone 92345678`
 
 #### 4.1.2 Finding members: `findMember` or `findm`
 
@@ -308,7 +303,28 @@ Tasks:
 
 ### 4.2 Applicant Features
 
+These are all the features in regard to an applicant in CMC.
+
 #### 4.2.1 Adding an applicant: `addApplicant` or `adda`
+
+Adds an applicant to the list of applicants in CMC.
+
+- Use `addApplicant` or `adda` to use add an applicant
+
+#### Usage:
+
+`addApplicant /name {applicantName} /phone {phoneNumber}`
+
+`adda /name {applicantName} /phone {phoneNumber}`
+
+#### Acceptable values for parameters:
+
+- `applicantName`: Only alphabetical characters, @, () are allowed
+- `phoneNumber`: Only numbers are allowed
+
+#### Example of usage:
+
+`adda /name John Doe /phone 92345678`
 
 #### 4.2.2 Finding applicants: `findApplicant` or `finda`
 
