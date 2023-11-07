@@ -301,7 +301,7 @@ Step 3. The user executes two more commands `help` and `delete 1` in the respect
 
 ![Recall Step 3](images/RecallStep3.png)
 
-The following activity diagram summarises how the `CommandStringStash` is updated hen a user executes a command.
+The following activity diagram summarises how the `CommandStringStash` is updated when a user executes a command.
 
 ![Add Command String](images/AddCommandStringActivityDiagram.png)
 
@@ -319,7 +319,7 @@ To cycle forward in history, a similar sequence is followed, but `Logic#getPasse
 corresponding methods are called instead.
 
 Step 5. The user presses the up arrow again, and this time `Logic#getPrevCommandString` returns `help` which is displayed
-on the user's CLI, so they can execute `help` easily.
+on the user's CL. They can now easily execute `help`.
 
 ![Recall Step 5](images/RecallStep5.png)
 
@@ -327,9 +327,9 @@ The following activity diagram summarises what happens when a user presses the u
 
 ![Up Arrow Activity Diagram](images/UpArrowActivityDiagram.png)
 
-Step 6. The user realises they don't need help and actually want to delete the first specialist currently displayed.
+Step 6. Instead of entering `help` the user decides to delete the first specialist currently displayed.
 They press the down arrow on the keyboard to recall the `delete 1` command they just passed.
-This results in `Logic#getPrevCommandString` being called which returns `delete 1`.  The user's CLI text box is then set to display `delete 1`.
+This results in `Logic#getPassedCommandString` being called which returns `delete 1`.  The user's CLI text box is then set to display `delete 1`.
 
 ![Recall Step 6](images/RecallStep6.png)
 
@@ -462,36 +462,40 @@ The target users...
 
 Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Novel (unlikely to have) - `*`
 
-| Priority | As a …​                  | I want to …​                                                           | So that I can…​                                                       |
-|---------|--------------------------|------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| `* * *` | new user                 | see usage instructions                                                 | refer to instructions when I forget how to use the App                |
-| `* * *` | user                     | deal with patient and specialist records separately                    | easily do patient-specific or specialist-specific operations          |
-| `* * *` | user                     | add a new patient to the records                                       | keep track of details of new patients                                 |
-| `* * *` | user                     | delete individual patient details                                      | delete records of patients I no longer take care                      |
-| `* *`   | user                     | edit details of existing patients                                      | make sure the patients' details are up to date                        |
-| `* *`   | user                     | easily search for patient by name                                      | find relevant patient information quickly                             |
-| `* * *` | user                     | access a patient's medical history                                     | provide more informed care based on the patient's medical history     |
-| `* * *` | user                     | access a patient's contact number                                      | quickly get in contact with the patient                               |
-| `* * *` | user                     | access a patient's age                                                 | provide age-specific care and treatment to the patient                |
-| `* *`   | user                     | filter patient records by criteria such as medical condition and age   | simplify the process of finding specific patient information          |
-| `*`     | user                     | customise tags for my patients                                         | have control over the organisation of my patients                     |
-| `*`     | user                     | group delete patients by category or tag                               | save time when removing large amount of patient records               |
-| `* * *` | user                     | add a new specialist to the records                                    | keep track of details of new specialists patients can be referred to  |
-| `* *`   | user                     | edit details of existing specialists                                   | make sure the specialist details are up to date                       |
-| `* * *` | user                     | delete specialist details                                              | delete records of specialists I no longer work with                   |
-| `* * *` | user                     | access specialist details                                              | provide relevant details to the patient I am refering                 |
-| `* *`   | user                     | search for specialists by location                                     | refer patients to convenient specialists to minimise time             | 
-| `* *`   | user                     | search for specialists by their speciality                             | refer patients to the right experts                                   |
-| `*`     | user with poor eyesight  | customise font size and style of the App                               | easily read the information on the screen                             |
-| `*`     | user who is colour blind | customise colour schemes of the App                                    | meet my accessibility needs                                           |
-| `*`     | user who is a fast typer | perform all tasks will the CLI rather than the GUI                     | be more efficient in managing records                                 |
-| `* *`   | user who is impatient    | add new keyboard shortcuts to the App                                  | save time when performing frequently repeated tasks                   |
-| `*`     | lazy user                | import App data previously stored as a .CSV file directly into the App | save time on setting up the application                               |
-| `*`     | lazy user                | export App data                                                        | share the data easily when required                                   |
-| `* * *` | user                     | save the App data                                                      | retain data for future reference                                      |
-| `* * *` | user                     | load previously saved App data                                         | examine past records/information                                      |
-| `*`     | experienced user         | manipulate the save file directly                                      | make quick changes to data without having to open the application     |
-*{More to be added}*
+| Priority | As a …​                  | I want to …​                                        | So that I can…​                                                      |
+|---------|--------------------------|-----------------------------------------------------|----------------------------------------------------------------------|
+| `* * *` | new user                 | see usage instructions                              | refer to instructions when I forget how to use the App               |
+| `* * *` | user                     | deal with patient and specialist records separately | easily do patient-specific or specialist-specific operations         |
+| `* * *` | user                     | add a new patient to the records                    | keep track of details of new patients                                |
+| `* *`   | user                     | edit details of existing patients                   | make sure the patients' details are up to date                       |
+| `* * *` | user                     | delete individual patient details                   | delete records of patients I no longer take care                     |
+| `* *`   | user                     | easily filter patient records by any criteria       | find relevant patient information quickly                            |
+| `* * *` | user                     | access a patient's name                          | identify the patient                                              |
+| `* * *` | user                     | access a patient's medical history                  | provide more informed care based on the patient's medical history    |
+| `* * *` | user                     | access a patient's contact number                   | quickly get in contact with the patient                              |
+| `* * *` | user                     | access a patient's email                            | have an alternate means of contacting the patient                    |
+| `* * *` | user                     | access a patient's age                              | provide age-specific care and treatment to the patient               |
+| `*`     | user                     | customise tags for my patients                      | have control over the organisation of my patients                    |
+| `*`     | user                     | group delete patients                               | save time when removing large amount of patient records              |
+| `* * *` | user                     | add a new specialist to the records                 | keep track of details of new specialists patients can be referred to |
+| `* *`   | user                     | edit details of existing specialists                | make sure the specialist details are up to date                      |
+| `* * *` | user                     | delete specialist details                           | delete records of specialists I no longer work with                  |
+| `* *`   | user                     | easily filter specialist records by any criteria       | find relevant specialist information quickly                            |
+| `* * *` | user                     | access a specialist's name                          | identify the specialist                                              |
+| `* * *` | user                     | access a specialist's contact number                | quickly get in contact with the specialist                           |
+| `* * *` | user                     | access a specialist's email                         | have an alternate means of contacting the specialist                 |
+| `* * *` | user                     | access a specialist's specialty                     | refer patients to appropriate specialists                            |
+| `*`     | user                     | customise tags for my specialists                   | have control over the organisation of my specialists                 |
+| `* *`   | user                     | search for specialists by location                  | refer patients to convenient specialists to minimise time            | 
+| `* *`   | user                     | search for specialists by their speciality          | refer patients to the right experts                                  |
+| `*`     | user                     | customise colour schemes of the App                 | customise the look of my application                                 |
+| `*`     | user who is a fast typer | perform all tasks will the CLI rather than the GUI  | be more efficient in managing records                                |
+| `* *`   | impatient user           | add new keyboard shortcuts to the App               | save time when performing frequently repeated tasks                  |
+| `* *`   | impatient user           | recall recently executed commands                   | save time when performing frequently repeated tasks                  |
+| `* *`   | careless user            | undo and redo commands                              | correct mistakes I've made                                           |
+| `* * *` | user                     | save the App data                                   | retain data for future reference                                     |
+| `* * *` | user                     | load previously saved App data                      | examine past records/information                                     |
+| `*`     | experienced user         | manipulate the save file directly                   | make quick changes to data without having to open the application    |
 
 ### Use cases
 
@@ -732,3 +736,12 @@ Timestamp in the status bar is updated.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+# Appendix
+
+## Planned Enhancements
+
+1. Currently, the view panel can only be updated using the view command. 
+However, we are planning on implementing a feature that will allow users to update the view panel by simply clicking on a person in the list panel.
+This change is driven by our goal to enhance user experience: although our application primarily caters to CLI users, such  behaviour
+still seems intuitive and reasonable to expect.
