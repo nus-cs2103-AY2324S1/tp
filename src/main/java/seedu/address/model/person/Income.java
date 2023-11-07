@@ -5,17 +5,17 @@ package seedu.address.model.person;
  */
 public class Income {
 
-    public static final String MESSAGE_CONSTRAINTS = "Income should only contain numbers "
-            + "and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Income should only contain positive integers less than 2147483648 and it should not be blank";
 
-    public final Number value;
+    public final Integer value;
 
     /**
     * Constructs a {@code Income}.
     *
     * @param income A valid income.
     */
-    public Income(Number income) {
+    public Income(Integer income) {
         value = income;
     }
 
@@ -24,9 +24,10 @@ public class Income {
     */
     public static boolean isValidIncome(String test) {
         try {
-            Double.parseDouble(test);
-            return true;
+            int income = Integer.parseInt(test);
+            return income >= 0;
         } catch (NumberFormatException e) {
+            // If integer is too big, the exception will be thrown
             return false;
         }
     }

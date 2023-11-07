@@ -126,7 +126,7 @@ public class ParserUtil {
         if (!Lead.isValidLead(trimmedLead)) {
             throw new ParseException(Lead.MESSAGE_CONSTRAINTS);
         }
-        return new Lead(lead);
+        return Lead.of(lead);
     }
 
     /**
@@ -172,9 +172,9 @@ public class ParserUtil {
             throw new ParseException(Income.MESSAGE_CONSTRAINTS);
         }
 
-        Double incomeDouble = Double.parseDouble(trimmedIncome);
+        Integer incomeInteger = Integer.parseInt(trimmedIncome);
 
-        return new Income(incomeDouble);
+        return new Income(incomeInteger);
     }
 
     /**

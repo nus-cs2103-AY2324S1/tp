@@ -156,7 +156,7 @@ public class Person {
      * Returns true if the person is a hot lead.
      */
     public boolean isHotLead() {
-        return this.lead != null && this.lead.isHot();
+        return lead != null && this.lead.isHot();
     }
 
     /**

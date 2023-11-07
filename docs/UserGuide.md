@@ -114,8 +114,8 @@ create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [tg/TELEGRAM]
 
 **Example**
 ```text
-create n/Bernice Yu p/99272758 e/berniceyu@example.com
-a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues
+create n/Bernice Yu p/99272758 e/berniceyu@example.com 
+a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues 
 t/friends tg/@yuyubern pf/Graphic Designer i/60000
 ```
 
@@ -279,6 +279,17 @@ delete 1
 ```
 
 [↑ Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Miscellaneous Notes
+
+## `INCOME` Parameter
+
+Incomes must only consist of numerical inputs. Connectify does not yet support:
+- Decimal values `600.50`
+- Currencies `10000 USD`
+- Other non-numeric input e.g. `10,000`
 
 --------------------------------------------------------------------------------------------------------------------
 

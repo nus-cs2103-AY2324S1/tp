@@ -170,7 +170,7 @@ class JsonAdaptedPerson {
             if (!Lead.isValidLead(lead)) {
                 throw new IllegalValueException(String.format(Lead.MESSAGE_CONSTRAINTS));
             }
-            personBuilder = personBuilder.withLead(new Lead(lead));
+            personBuilder = personBuilder.withLead(Lead.of(lead));
         }
         if (telegram != null) {
             if (!TelegramHandle.isValidTelegramHandle(telegram)) {

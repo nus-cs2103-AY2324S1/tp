@@ -24,7 +24,7 @@ public class EditCommandMacroParserTest {
     public void parse_validCommandWord_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
-        descriptor.setLead(new Lead(LeadType.HOT));
+        descriptor.setLead(Lead.of(LeadType.HOT));
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         String userInput = "1 HOT";
 
@@ -34,7 +34,7 @@ public class EditCommandMacroParserTest {
     @Test
     public void parse_validCommandWordInvalidInput_failure() {
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
-        descriptor.setLead(new Lead(LeadType.HOT));
+        descriptor.setLead(Lead.of(LeadType.HOT));
         String userInput = "1 medium";
 
         assertParseFailure(goodCommandWordParser, userInput, Lead.MESSAGE_CONSTRAINTS);
