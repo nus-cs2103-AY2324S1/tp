@@ -606,6 +606,59 @@ The following sequence diagram shows how the above steps for delete schedule ope
 #### Design rationale
 The `delete-s` command was designed this way to ensure consistency with the previous delete person command.
 
+### Show calendar feature
+
+The "Show Calendar" feature allows users to view schedules based on a specific date. 
+
+The following shows the activity diagram from when a user executes the show command:
+
+![Activity Diagram for show Command](images/ShowCalendarActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched.
+
+Step 2. The user executes `show 2023-09-15` to view schedules for September 15, 2023. The command is parsed in the 
+`AddressBookParser`.
+
+Step 3. `ShowCalendarCommandParser` is created, which constructs a `Date` based on the user-provided date. 
+A `ShowCalendarCommand` object is then constructed with this date.
+
+Step 4. The `LogicManager` calls the execute method in `ShowCalendarCommand`, setting the predicate for the filtered 
+schedules list in `ModelManager` to be the predicate that shows all schedules and setting the predicate for the filtered
+calendar schedules list in `ModelManager` to only display schedules on the specified date.
+
+Step 5. The filtered list of schedules for the specified date is displayed to the user.
+
+The following sequence diagram shows how the above steps for the show calendar operation work:
+
+![ShowCalendarSequenceDiagram](images/ShowCalendarSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `ShowCalendarCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design Rationale
+
+**Aspect: Defining Which Tutor to Display for Show Calendar**
+- **Alternative 1 (current choice):** Show calendar for all tutors
+    - Pros: Provides a comprehensive view of schedules for all tutors, allowing users to see the entire schedule at a 
+      glance.
+    - Pros: Offers a unified view that may be suitable for administrators or users managing multiple tutors.
+    - Cons: May present a large amount of information, potentially leading to information overload for users with many 
+      tutors.
+    - Cons: Users may need to filter or navigate through a longer list of schedules to find the specific information 
+      they are interested in.
+- **Alternative 2:** Specify tutor to Show Calendar for.
+    - Pros: Offers a focused view of schedules for a particular tutor, allowing users to quickly access and manage the 
+      schedule for that specific individual.
+    - Pros: Reduces visual clutter and streamlines the user interface for users primarily interested in one tutor.
+    - Cons: May not be as suitable for administrators or users managing multiple tutors, as they may need to switch 
+      between tutors to view their respective schedules.
+    - Cons: Users may need to specify the tutor they want to view, requiring additional input.
+
 ### Change theme feature
 
 The "Change Theme" feature allows users to change the colour theme of the address book. Below, we provide an example 
