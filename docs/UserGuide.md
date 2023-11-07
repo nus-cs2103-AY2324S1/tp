@@ -48,11 +48,12 @@ This user guide contains **all** the commands available to you, along with **ste
 ## Useful Notations
 These are symbols we will be using to highlight certain information to you.
 
-| Symbol               | Meaning                                   |
-|----------------------|-------------------------------------------|
-| :information_source: | Information to take note of               |
-| :bulb:               | Tips to optimise the use of Foster Family |
-| :exclamation:        | Warning about the usage of commands       |
+| Symbol               | Meaning                                                                   |
+|----------------------|---------------------------------------------------------------------------|
+| :information_source: | General notes about command                                               |
+| :exclamation:        | Important notes about command                                             |
+| :warning:            | Warnings about command, action may lead to misinterpretation or data loss |
+| :bulb:               | Tips to optimise the use of Foster Family                                 |
 
 --------------------------------------------------------------------------------------------------------------------
 ## User Interface (UI)
@@ -211,11 +212,11 @@ Valid cases:
 * For invalid cases, error messages will be shown when the invalid command is entered. For example:
   ![Add](images/screenshots/AddErrorMessage.png)
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="span" class="alert alert-secondary">
 
 **:exclamation: Important:**<br>
 
-Duplicate fosterers cannot be added; this is detected by the fosterer's name.<br>
+Duplicate fosterers cannot be added. This is detected by the fosterer's name.<br>
 e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne  (multiple spaces)  tay"</code>.
 </div> 
 
@@ -311,7 +312,7 @@ Parameters:
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `INDEX`     | - Index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="span" class="alert alert-secondary">
 
 **:exclamation: Important:**<br>
 
@@ -341,7 +342,7 @@ Example:
 
 Saves changes in details of the fosterer made in the profile page.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="span" class="alert alert-secondary">
 
 **:exclamation: Important:**<br>
 
@@ -383,7 +384,7 @@ Parameters:
 
 </div>
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="span" class="alert alert-secondary">
 
 **:exclamation: Important:**<br>
 
@@ -400,7 +401,7 @@ Examples:
 
 <div markdown="span" class="alert alert-warning">
 
-**:exclamation: Caution:**<br>
+**:warning: Caution:**<br>
 
 Edit may cause information loss. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
@@ -437,7 +438,7 @@ Parameters:
 
 <div markdown="span" class="alert alert-warning">
 
-**:exclamation: Caution:**<br>
+**:warning: Caution:**<br>
 Edit may cause information loss. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 </div>
@@ -453,9 +454,9 @@ Deletes the index-th fosterer of the currently displayed list for you.
 
 Format: `delete INDEX [INDEX...]`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="span" class="alert alert-secondary">
 
-**:exclamation: Caution:**<br>
+**:exclamation: Important:**<br>
 The index of a fosterer is not fixed. It is relative to the current list of fosterers you are handling.
 
 </div>
@@ -522,9 +523,9 @@ Examples:
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
 
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="span" class="alert alert-warning">
 
-**:exclamation: Caution:**<br>
+**:warning: Caution:**<br>
 
 Percentages may not add up to 100.00%.<br>
 Suppose there are 3 available fosterers: 1 can foster a dog, 1 can foster a cat and 1 unknown. The calculated percentages will add up to 99.99%, instead of 100.00%. It can be assumed that each group takes up 1/3 out of 100.00%.
@@ -618,8 +619,12 @@ In the main window, Foster Family data is saved in the hard disk automatically a
 
 Foster Family data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b><br/>
-If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it. If the changes you make creates an invalid fosterer, the app may not start up. You will have to delete the corrupted data file to restart the app. 
+<div markdown="span" class="alert alert-warning">
+
+**:warning: Caution:**<br>
+* If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
+
+* If your changes create an [invalid fosterer](#adding-a-fosterer-through-the-main-window--add), the app will not start. You will have to delete the corrupted data file to restart the app. 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
