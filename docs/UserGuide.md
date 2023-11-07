@@ -318,7 +318,7 @@ Format: `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE_TIME`
 - Upon successful execution of the command, the scheduled appointment details will be updated in the **Contacts list**. The appointment details will also be updated in the **Appointments list**. 
 
 <div markdown="span" class="alert alert-primary">:information_source: 
-If there is an existing appointment with the person when command is executed, you can replace it with a new appointment by **clicking confirm** or **pressing the enter key** when prompt is given.
+If there is an existing appointment with the person when the command is executed, you can replace it with a new appointment by **clicking confirm** or **pressing the enter key** when the prompt is given.
 </div>
 
   ![schedule prompt](images/schedulePrompt.png)
