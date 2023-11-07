@@ -17,6 +17,8 @@ public class HintCommandParser implements Parser<HintCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public HintCommand parse(String args) throws ParseException {
+        assert args != null : "Command is empty";
+
         try {
             Index index = ParserUtil.parseIndex(args);
             return new HintCommand(index);

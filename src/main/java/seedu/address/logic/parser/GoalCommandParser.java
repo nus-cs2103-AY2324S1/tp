@@ -16,6 +16,8 @@ public class GoalCommandParser implements Parser<GoalCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public GoalCommand parse(String args) throws ParseException {
+        assert args != null : "Command is empty";
+
         try {
             int index = ParserUtil.parseTarget(args);
             return new GoalCommand(index);

@@ -1,8 +1,12 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalCards.getTypicalDeck;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CARD;
 
 import org.junit.jupiter.api.Test;
 
@@ -102,4 +106,55 @@ public class SetDifficultyCommandTest {
 
         assertCommandFailure(setDifficultyCommand, model, Messages.MESSAGE_RANDOM_INDEX_NOT_INITIALISED);
     }
+
+    @Test
+    public void execute_withNoIndex_success() {
+        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(0), "easy");
+
+        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: EASY)";
+
+        Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
+        expectedModel.getDeck().getCardList().get(0).setDifficulty(Difficulty.EASY);
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith(Difficulty.EASY);
+        expectedModel.getDeck().sort();
+
+        assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_withLastIndex_success() {
+        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(4), "hard");
+
+        String expectedMessage = "Set Difficulty for Question 5 (Difficulty level: HARD)";
+
+        Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
+        expectedModel.getDeck().getCardList().get(4).setDifficulty(Difficulty.HARD);
+        expectedModel.getDeck().getCardList().get(4).setNewPracticeDateWith(Difficulty.HARD);
+        expectedModel.getDeck().sort();
+
+        assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(INDEX_FIRST_CARD, "easy");
+        SetDifficultyCommand otherSetDifficultyCommand = new SetDifficultyCommand(INDEX_SECOND_CARD, "hard");
+
+        // same object -> returns true
+        assertTrue(setDifficultyCommand.equals(setDifficultyCommand));
+
+        // same values -> returns true
+        SetDifficultyCommand deleteFirstCommandCopy = new SetDifficultyCommand(INDEX_FIRST_CARD, "easy");
+        assertTrue(setDifficultyCommand.equals(deleteFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(setDifficultyCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(setDifficultyCommand.equals(null));
+
+        // different Card -> returns false
+        assertFalse(setDifficultyCommand.equals(otherSetDifficultyCommand));
+    }
+
 }

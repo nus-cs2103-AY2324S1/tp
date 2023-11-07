@@ -19,7 +19,8 @@ public class TypicalCards {
             .withNextPracticeDate(new PracticeDate(LocalDateTime.MIN)).build();
     public static final Card LOW = new CardBuilder().withQuestion("Low Priority?")
             .withAnswer("True")
-            .withNextPracticeDate(new PracticeDate(LocalDateTime.MAX)).build();
+            .withNextPracticeDate(new PracticeDate(LocalDateTime.of(2030, 11,
+                    3, 12, 45, 30))).build();
     private static final PracticeDate typicalDate =
             new PracticeDate(
                 LocalDateTime.of(2018, 11, 3, 12, 45, 30)
@@ -56,6 +57,6 @@ public class TypicalCards {
      * Returns a list of typical {@code Cards}.
      */
     public static List<Card> getTypicalCards() {
-        return new ArrayList<>(Arrays.asList(CS2100, CS1101S, CS1231S, HIGH, LOW));
+        return new ArrayList<>(Arrays.asList(CS2100, CS1101S, CS1231S, LOW, HIGH));
     }
 }
