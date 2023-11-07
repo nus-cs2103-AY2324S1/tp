@@ -462,9 +462,9 @@ Format: `list-i-today`
 
 * Lists all interviews that have a start date that falls on the 
 day on which the user executed the command
-  * For example, if the user executed this command on 12/12/2023, 
+  * For example, if the user executed this command on `12/12/2023`, 
 the app will display all the interviews that the user has scheduled
-on 12/12/2023
+on `12/12/2023`
 * If there are no interviews scheduled on the day on which the command
 was executed, the app will not display any interviews 
 * Upon successful execution of the command, this message will be 
