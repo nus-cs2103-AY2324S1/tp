@@ -54,6 +54,7 @@ public class SetDifficultyCommandParser implements Parser<SetDifficultyCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDifficultyCommand.MESSAGE_USAGE), pe);
         }
 
+
     }
 
     /**

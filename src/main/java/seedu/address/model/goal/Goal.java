@@ -32,7 +32,7 @@ public class Goal implements Observable {
     public Goal(Deck deck) {
         this.target = deck.getNumberOfCards();
         this.current = 0;
-        this.isMet = target >= current;
+        this.isMet = current >= target;
         updateGoalText();
     }
 
