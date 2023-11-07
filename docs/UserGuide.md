@@ -6,15 +6,17 @@ title: User Guide
 ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staff in the workplace, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ManaGease can get your contact management tasks done faster than traditional apps.
 
 ---
+## Table of Contents
 <!-- TOC -->
+  * [Table of Contents](#table-of-contents)
   * [Quick Start](#quick-start)
   * [Features](#features)
     * [Parameter formats](#parameter-formats)
     * [Viewing help: `help`](#viewing-help-help)
-    * [Adding a employee: `add`](#adding-a-employee-add)
-    * [Editing a employee: `edit`](#editing-a-employee-edit)
-    * [Deleting a employee: `delete`](#deleting-a-employee-delete)
-    * [Reading a employee's information: `read`](#reading-a-employees-information-read)
+    * [Adding an employee: `add`](#adding-an-employee-add)
+    * [Editing an employee: `edit`](#editing-an-employee-edit)
+    * [Deleting an employee: `delete`](#deleting-an-employee-delete)
+    * [Reading an employee's information: `read`](#reading-an-employees-information-read)
     * [Adding leave to an employee: `addleave`](#adding-leave-to-an-employee-addleave)
     * [Deleting leave from an employee: `deleteleave`](#deleting-leave-from-an-employee-deleteleave)
     * [View employee who is on leave: `viewleave`](#view-employee-who-is-on-leave-viewleave)
@@ -25,8 +27,8 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
     * [Adding a benefit to the payroll of an employee: `benefit`](#adding-a-benefit-to-the-payroll-of-an-employee-benefit)
     * [Calculating an employee's payroll: `payroll`](#calculating-an-employees-payroll-payroll)
     * [Generating payslips for an employee: `payslip`](#generating-payslips-for-an-employee-payslip)
-    * [Marking employee's attendance: `mark`](#marking-employees-attendance-mark)
-    * [View employee's attendance report: `attendance`](#view-employees-attendance-report-attendance)
+    * [Marking an employee's attendance: `mark`](#marking-an-employees-attendance-mark)
+    * [View an employee's attendance report: `attendance`](#view-an-employees-attendance-report-attendance)
     * [Listing all employees: `list`](#listing-all-employees-list)
     * [Clearing all entries: `clear`](#clearing-all-entries-clear)
     * [Locating employees by name: `find`](#locating-employees-by-name-find)
@@ -66,6 +68,7 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
    * `exit` : Exits the app.
 
 Refer to [Command Summary](#command-summary) below for a summary of all commands, and the [Features](#features) below for details of each command.
+* Go back to [Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -83,13 +86,10 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 * Commands, prefixes and most parameters are to be entered in lower case. You can only enter capitalized letters for parameters of `NAME`, `EMAIL` and `ADDRESS`.<br>
 
 * Items in square brackets are optional.<br>
-  e.g. `/n NAME [/t TAG]` can be used as `/n John Doe /t friend` or as `/n John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[/t TAG]…​` can be used as ` ` (i.e. 0 times), `/t friend`, `/t friend /t family` etc.
+  e.g. `/n NAME [/p PHONE]` can be used as `/n John Doe /p 98988989` or as `/n John Doe`.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `/n NAME /p PHONE_NUMBER`, `/p PHONE_NUMBER /n NAME` is also acceptable.
+  e.g. if the command specifies `/n NAME /p PHONE`, `/p PHONE /n NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -100,17 +100,23 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 ### Parameter formats
 * All parameters provided must be in the correct format.<br>
 
-| Prefix | Parameter      | Format                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example                     |
-|--------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
-| `/n`   | `NAME`         | non-empty and non-blank alphanumeric string                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `/n jibtaf`                 |
-  | `/p`   | `PHONE`        | string containing at least 3 integers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `/p 98988989`               |
-  | `/e`   | `EMAIL`        | local-part@domain<br/>1. The local-part should only contain alphanumeric characters and `+`, `_`, `.`, `-`. It may not start or end with any special characters.<br/>2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>    - end with a domain label at least 2 characters long<br/>    - have each domain label start and end with alphanumeric characters<br/>    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | `/e john_doe@u.nus.edu`     |
-  | `/a`   | `ADDRESS`      | non-empty and non-blank alphanumeric string                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `/a PGPR, Singapore 118420` |
-  | `/b`   | `BANK_ACCOUNT` | string containing 5 to 17 integers, inclusive                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `/b 1029384756`             |
-  | `/jd`  | `JOIN_DATE`    | date in the form of DD/MM/YYYY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `/jd 20/04/2018`            |
-  | `/s`   | `SALARY`       | numeric digits in 2 decimal places, without any sign for currencies                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `/s 2000.00`                |
-  | `/v`   | `VALUE`        | numeric digits in 2 decimal places, without any sign for currencies                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `/v 150.00`                 |
-  | `/l`   | `ANNUAL_LEAVE` | numeric digits                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `/l 25`                     |
+| Prefix  | Parameter         | Format                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example                     |
+|---------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
+| `/n`    | `NAME`            | non-empty and non-blank alphanumeric string                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `/n jibtaf`                 |
+| `/p`    | `PHONE`           | string containing at least 3 integers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `/p 98988989`               |
+| `/e`    | `EMAIL`           | local-part@domain<br/>1. The local-part should only contain alphanumeric characters and `+`, `_`, `.`, `-`. It may not start or end with any special characters.<br/>2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>    - end with a domain label at least 2 characters long<br/>    - have each domain label start and end with alphanumeric characters<br/>    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | `/e john_doe@u.nus.edu`     |
+| `/a`    | `ADDRESS`         | non-empty and non-blank alphanumeric string                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `/a PGPR, Singapore 118420` |
+| `/b`    | `BANK_ACCOUNT`    | string containing 5 to 17 integers, inclusive                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `/b 1029384756`             |
+| `/jd`   | `JOIN_DATE`       | date in the form of DD/MM/YYYY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `/jd 20/04/2018`            |
+| `/s`    | `SALARY`          | numeric digits in 2 decimal places, without any sign for currencies                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `/s 2000.00`                |
+| `/v`    | `VALUE`           | numeric digits in 2 decimal places, without any sign for currencies                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `/v 150.00`                 |
+| `/l`    | `ANNUAL_LEAVE`    | numeric digits                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `/l 25`                     |
+| `/from` | `FROM_DATE`       | date in the form of DD/MM/YYYY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `/from 20/04/2018`          |
+| `/to`   | `TO_DATE`         | date in the form of DD/MM/YYYY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `/to 20/04/2018`            |
+| `/on`   | `DATE`            | date in the form of DD/MM/YYYY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `/on 20/04/2018`            |
+| `/t`    | `MONTH_YEAR_DATE` | date in the form of DD/MM/YYYY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `/t 20/04/2018`             |
+| `/r`    | `REASON`          | case-insensitive words from the following list:<br/>1. cpf (means `EMPLOYEE_CPF_DEDUCTION`)<br/>2. absence (means `ABSENCE`)<br/>3. no pay (means `NO_PAY_LEAVE`)<br/>4. bonus (means `ANNUAL_BONUS`)<br/>5. transport (means `TRANSPORT_ALLOWANCE`)                                                                                                                                                                                                                                                                                                                   | `/r no pay`                 |
+| `/at`   | `ATTENDANCE_TYPE` | case-insensitive words from the following list:<br/>1. present (means `PRESENT`)<br/>2. late (means `LATE`)<br/>3. absent (means `ABSENT`)                                                                                                                                                                                                                                                                                                                                                                                                                             | `/at late`                  |
 
 ----------------------------------------------------------------------------------------------------------------------------
 
@@ -128,8 +134,10 @@ Output:
 * A new window will pop up with the link to the help page.
   ![result for help command](images/helpSuccess.png)
 
+* Go back to [Table of Contents](#table-of-contents)
 
-### Adding a employee: `add`
+
+### Adding an employee: `add`
 
 **What it does**
 
@@ -141,24 +149,24 @@ add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY
 ```
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A employee must have all parameters shown in the command format.
+An employee must have all parameters shown in the command format.
 </div>
 
 Example:
 * `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789
-  /jd 12/09/2023 /s 1000.00 /l 10`
+  /jd 12/09/2023 /s 1000.00 /l 10` adds an employee named `Jane Smith` with given information to ManaGease.
 
 Output:
 * ManaGease should display a confirmation message indicating that the employee has been successfully added to the database. (e.g. `Employee "Jane Smith" successfully added!`)
 * The employee's profile should be updated with the provided information.
-  ![result for adding employee](images/addSuccess.png)
+  <br>![result for adding employee](images/addSuccess.png)
 
 * If prefix used is not defined, an error message will appear.
+  <br>![failed result for adding employee](images/addFailed.png)
 
-![failed result for adding employee](images/addFailed.png)
+* Go back to [Table of Contents](#table-of-contents)
 
-
-### Editing a employee: `edit`
+### Editing an employee: `edit`
 
 **What it does**
 
@@ -171,22 +179,26 @@ Edits an existing employee in the address book.
 * Edits the employee at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the index.
+</div>
+
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 /n Betsy Crower ` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 /p 91234567 /e johndoe@example.com` edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 /n Betsy Crower ` edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
 
 Output:
 * ManaGease should display the information of the updated employee. 
   
 * The employee's profile should be updated with the provided information.
+  <br>![result for editing employee](images/editSuccess.png)
 
-![result for editing employee](images/editSuccess.png)
+* Go back to [Table of Contents](#table-of-contents)
 
-
-### Deleting a employee: `delete`
+### Deleting an employee: `delete`
 
 **What it does**
 
@@ -200,6 +212,10 @@ This feature allows users to delete an employee based on index or name.
 * Deletes the employee at the specified `INDEX` or with the name `NAME`.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the index.
+</div>
+
 * The `NAME` must be in the correct [format](#parameter-formats).
 
 Examples:
@@ -207,19 +223,20 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
 Output:
-* If there are multiple employees with the same name, we just list down the employees for them to view, return “Here is the list of the matching employees:”
-![result for deleting same-name employee](images/deleteSameName.png)
+* If there are multiple employees with the same name, we just list down the employees for them to view, return “Here is the list of the matching employees:”. Then you can decide which employee to delete from this list.
+  <br>![result for deleting same-name employee](images/deleteSameName.png)
   
 * Otherwise, ManaGease should display a confirmation message indicating that the employee information has been successfully deleted.
 * The employee's list should be updated by removing the employee.
-![result for deleting employee](images/deleteSuccess.png)
+  <br>![result for deleting employee](images/deleteSuccess.png)
 
+* Go back to [Table of Contents](#table-of-contents)
 
-### Reading a employee's information: `read`
+### Reading an employee's information: `read`
 
 **What it does**
 
-This feature allows users to view specific information about an employee.
+This feature allows users to view specific information **<ins>(except the name)</ins>** about an employee.
 
 **Command Format**
 
@@ -228,6 +245,10 @@ This feature allows users to view specific information about an employee.
 * Reads the employee's information specified by the `PREFIX` at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the index.
+</div>
+
 
 Examples:
 * `read 3 /e` reads the email of the third employee in the most recently displayed list.
@@ -243,7 +264,7 @@ Output:
   ![incorrect read command](images/incorrectReadCommand.png)
 * If the `PREFIX` provided is not valid, the app should display `The field to read provided is invalid`. Please refer to the [parameter formats](#parameter-formats) for a list of all supported fields.
 
-
+* Go back to [Table of Contents](#table-of-contents)
 
 ### Adding leave to an employee: `addleave`
 
@@ -255,10 +276,14 @@ This feature allows users to add leave(s) to an employee.
 
 `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`
 
-* Adds leave to the employee specified by the `INDEX`, can be a single day of leave or multiple days of leave.
+* Adds a single day of leave or multiple days of leave to the employee specified by the `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
-* The `DATE` must be in `dd/MM/yyyy` format.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the index.
+</div>
+
+* The `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
 * For adding in multiple days of leave, the second `DATE` must be after the first `DATE`.
 
 Examples:
@@ -282,6 +307,8 @@ Output:
 * Otherwise, if there are no errors, the app should display the following success message that the leave(s) has been added and display the number of leave left for the current year and the following year.
   <br>![result for successful addleave command](images/addLeaveSuccessMsg.png)
 
+* Go back to [Table of Contents](#table-of-contents)
+
 ### Deleting leave from an employee: `deleteleave`
 
 **What it does**
@@ -295,7 +322,11 @@ This feature allows users to delete leave(s) from an employee.
 * Deletes leave from the employee specified by the `INDEX`, can be a single day of leave or multiple days of leave.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
-* The `DATE` must be in `dd/MM/yyyy` format.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the index.
+</div>
+
+* The `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
 * For deleting multiple days of leave, the second `DATE` must be after the first `DATE`.
 
 Examples:
@@ -319,21 +350,21 @@ Output:
 * Otherwise, if there are no errors, the app should display the following success message that the leave(s) has been added and display the number of leave left for the current year and the following year.
   <br>![result for successful deleteleave command](images/deleteLeaveSuccessMsg.png)
 
-
+* Go back to [Table of Contents](#table-of-contents)
 
 ### View employee who is on leave: `viewleave`
 
 **What it does**
 
-This feature allows users to view employee who is on leave on a specific date.
+This feature allows users to view employees who are on leave on a specific date.
 
 **Command Format**
 
 `viewleave /on DATE`
 
-* Views employee who is on leave on a specific DATE, must be a single date.
-  
-* The `DATE` must be in `dd/MM/yyyy` format.
+* Views employees who are on leave on a specific DATE **(must be a single date)**.
+
+* The `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
 
 Examples:
 * `viewleave /on 01/01/2024` view employee who is on leave on 01/01/2024.
@@ -356,6 +387,8 @@ Output:
   
 <br>![result for correct viewleave command](images/view-leave-success.png)
 
+* Go back to [Table of Contents](#table-of-contents)
+
 ### View the calendar of upcoming month: `nm`
 
 **What it does**
@@ -365,6 +398,8 @@ This feature allows users to view the calendar of the upcoming month on the app.
 **Command Format**
 
 `nm`
+
+* Go back to [Table of Contents](#table-of-contents)
 
 ### View the calendar of previous month: `pm`
 
@@ -376,6 +411,8 @@ This feature allows users to view the calendar of the previous month on the app.
 
 `pm`
 
+* Go back to [Table of Contents](#table-of-contents)
+
 ### View the calendar of current month: `cm`
 
 **What it does**
@@ -385,6 +422,8 @@ This feature allows users to view the calendar of the current month on the app.
 **Command Format**
 
 `cm`
+
+* Go back to [Table of Contents](#table-of-contents)
 
 ### Adding a deduction to the payroll of an employee: `deduct`
 
@@ -399,6 +438,10 @@ This feature allows users to add a deduction to the payroll of an employee.
 * Adds a deduction with given `VALUE` and `REASON` to the employee specified by the `INDEX` or `NAME`.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the index.
+</div>
+
 * The `VALUE` must be a **positive number**, and **must be in the [format](#parameter-formats) of 2 decimal places**.
 * The `REASON` must be a **non-empty and non-blank string**. It must take one of the three values: `absence`, `cpf` or `no pay`, which stands for `Absence from work`, `Employee CPF deduction` and `No pay leave` respectively.
 * The `REASON` is **case-insensitive**.
@@ -417,9 +460,14 @@ Output:
   <br>![result for incorrect deduct command](images/incorrectDeductCommand.png)
 * If the `VALUE` provided is not in the correct format, the app should display the following message.
   <br>![result for incorrect deduct value format](images/incorrectDeductValueFormat.png)
-* If the `REASON` provided is not valid, the app should display the following message.
-  <br>![result for unknown deduction reason](images/unknownDeductionReason.png)
+* If the `REASON` field is missing, the app should display the following message.
+  <br>![result for missing reason](images/missingReason.png)
+* If the `REASON` provided is not supported (i.e. not one of the five reasons in the [parameter formats](#parameter-formats)), the app should display the following message.
+  <br>![result for unknown reason](images/unknownReason.png)
+* If the `REASON` provided is not a valid one for a deduction, the app should display the following message.
+  <br>![result for invalid deduction reason](images/unknownDeductionReason.png)
 
+* Go back to [Table of Contents](#table-of-contents)
 
 ### Adding a benefit to the payroll of an employee: `benefit`
 
@@ -434,6 +482,10 @@ This feature allows users to add a benefit to the payroll of an employee.
 * Adds a benefit with given `VALUE` and `REASON` to the employee specified by the `INDEX` or `NAME`.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the index.
+</div>
+
 * The `VALUE` must be a **positive number**, and **must be in the [format](#parameter-formats) of 2 decimal places**.
 * The `REASON` must be a **non-empty and non-blank string**. It must take one of the two values: `bonus` or `transport`, which stands for `Annual bonus` and `Transport allowance` respectively.
 * The `REASON` is **case-insensitive**.
@@ -452,9 +504,14 @@ Output:
   <br>![result for incorrect benefit command](images/incorrectBenefitCommand.png)
 * If the `VALUE` provided is not in the correct format, the app should display the following message.
   <br>![result for incorrect benefit value format](images/incorrectDeductValueFormat.png)
-* If the `REASON` provided is not valid, the app should display the following message.
-  <br>![result for unknown benefit reason](images/unknownBenefitReason.png)
+* If the `REASON` field is missing, the app should display the following message.
+  <br>![result for missing reason](images/missingReason.png)
+* If the `REASON` provided is not supported (i.e. not one of the five reasons in the [parameter formats](#parameter-formats)), the app should display the following message.
+  <br>![result for unknown reason](images/unknownReason.png)
+* If the `REASON` provided is not a valid one for a benefit, the app should display the following message.
+  <br>![result for invalid benefit reason](images/unknownBenefitReason.png)
 
+* Go back to [Table of Contents](#table-of-contents)
 
 ### Calculating an employee's payroll: `payroll`
 
@@ -466,9 +523,14 @@ This feature allows users to calculate the payroll of an employee.
 
 `payroll INDEX` or `payroll /n NAME`
 
-* Calculates the payroll of the employee specified by the `INDEX` or `NAME`.
-* The index refers to the index number shown in the displayed employee list.
-* The index **must be a positive integer**.
+* Calculates the payroll of the employee specified by the `INDEX` or `NAME`, where the payroll period is the current month.
+* The `INDEX` refers to the index number shown in the displayed employee list.
+* The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the index.
+</div>
+
+* The `NAME` must be in the correct [format](#parameter-formats).
 
 Examples:
 
@@ -479,12 +541,12 @@ Output:
 * ManaGease should display the payroll of the employee specified by the `INDEX` or `NAME`, if the input is valid.
   <br>![result for generating payslip](images/payrollSuccess.png)
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
-  <br>![result for incorrect index](images/incorrectPayrollIndex.png)
 * If there are more than one employee with the same name in the command, the app will display `x employees found! Refer to their indexes for payroll calculation` and will list down those employees for the user to view. The user should then use their index numbers to calculate the payroll.
   <br>![result for same name](images/payrollWithSameName.png)
-* If the command is incorrect, the app should display `Invalid command format!`.
+* If the command is incorrect, the app should display the following message.
   <br>![result for incorrect payroll command](images/incorrectPayrollCommand.png)
 
+* Go back to [Table of Contents](#table-of-contents)
 
 ### Generating payslips for an employee: `payslip`
 
@@ -494,19 +556,23 @@ This feature allows users to generate payslips for an employee.
 
 **Command Format**
 
-`payslip INDEX [/t DD/MM/YYYY]` or `payslip /n NAME [/t DD/MM/YYYY]`
+`payslip INDEX [/t DATE]` or `payslip /n NAME [/t DATE]`
 
-* Generates a payslip for the employee specified by the `INDEX` or `NAME`.
-* If the optional `/t DD/MM/YYYY` is provided, the payslip will be generated for the month specified by the date.
+* Generates a payslip based on the latest payroll for the employee specified by the `INDEX` or `NAME`.
+* If the optional `/t DATE` is provided, the payslip will be generated for the month specified by the date.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the index.
+</div>
+
 * The `NAME` must be in the correct [format](#parameter-formats).
-* The optional date must be in the correct [format](#parameter-formats).
+* The optional `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
 
 Examples:
 
-* `payslip 3` generates a payslip for the third employee in the most recently displayed list.
-* `payslip /n John Doe` generates a payslip for the employee named John Doe.
+* `payslip 3` generates a payslip based on the latest payroll for the third employee in the most recently displayed list.
+* `payslip /n John Doe` generates a payslip based on the latest payroll for the employee named John Doe.
 * `payslip 3 /t 01/01/2024` generates a payslip for the third employee in the most recently displayed list for the month of January 2024.
 
 Output:
@@ -522,7 +588,9 @@ Output:
 * If the date provided is not in the correct format, the app should display the following message.
   <br>![result for incorrect payslip date format](images/incorrectDateFormat.png)
 
-### Marking employee's attendance: `mark`
+* Go back to [Table of Contents](#table-of-contents)
+
+### Marking an employee's attendance: `mark`
 
 **What it does**
 
@@ -532,8 +600,15 @@ Marks the indicated employee as “Absent”, “Late”, or “Present”.
 
 `mark INDEX /at Attendance_Type` or `mark /n NAME /at Attendance_Type`
 
-* The attendance type can only be: `ABSENT`, `LATE`, or `PRESENT`.
-* It is not case-insensitive. e.g. you can either enter ABSENT or absent.
+* The `INDEX` refers to the index number shown in the displayed employee list.
+* The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the index.
+</div>
+
+* The `NAME` must be in the correct [format](#parameter-formats).
+* The `Attendance_Type` can only be: `ABSENT`, `LATE`, or `PRESENT`.
+* It is case-insensitive. e.g. you can either enter ABSENT or absent.
 
 Examples:
 
@@ -546,10 +621,12 @@ Output:
   <br>![result for incorrect command](images/incorrectMarkCommand.png)
 * If the ATTENDANCE_TYPE is not within the valid list, the app should display `Invalid attendance type, only Absent, Late and Present are allowed.`
   <br>![result for incorrect attendance type](images/incorrectAttendanceType.png)
-* If the command is successful, the app should display `Successfully marked NAME as ATTENDANCE TYPE`. The addressbook’s display of the employee’s attendance status should also be updated accordingly.
+* If the command is successful, the app should display the following message. The employee’s attendance status should also be updated accordingly.
   <br>![result for marking an employee to be absent](images/markSuccess.png)
 
-### View employee's attendance report: `attendance`
+* Go back to [Table of Contents](#table-of-contents)
+
+### View an employee's attendance report: `attendance`
 
 **What it does**
 
@@ -558,6 +635,14 @@ View employee’s attendance report.
 **Command Format**
 
 `attendance INDEX` or `attendance /n NAME`
+
+* The `INDEX` refers to the index number shown in the displayed employee list.
+* The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the index.
+</div>
+
+* The `NAME` must be in the correct [format](#parameter-formats).
 
 Examples:
 
@@ -571,6 +656,7 @@ Output:
 * If the command is successful, the app should display the attendance. The address book’s display of the employee’s attendance status should also be updated accordingly.
   <br>![result for attendance report](images/attendanceSuccess.png)
 
+* Go back to [Table of Contents](#table-of-contents)
 
 ### Listing all employees: `list`
 
@@ -587,6 +673,8 @@ Output:
 * ManaGease should display a list of all employees in the workplace.
   <br>![result for listing all employees](images/listSuccess.png)
 
+* Go back to [Table of Contents](#table-of-contents)
+
 ### Clearing all entries: `clear`
 
 **What it does**
@@ -596,6 +684,8 @@ Clears all entries from the address book.
 **Command format:**
 
 `clear`
+
+* Go back to [Table of Contents](#table-of-contents)
 
 ### Locating employees by name: `find`
 
@@ -618,6 +708,7 @@ Example:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   <br>![result for 'find alex david'](images/findAlexDavidResult.png)
 
+* Go back to [Table of Contents](#table-of-contents)
 
 ### Exiting the program: `exit`
 
@@ -628,6 +719,8 @@ Exits the program.
 **Command format:**
 
 `exit`
+
+* Go back to [Table of Contents](#table-of-contents)
 
 ### Saving the data
 
@@ -641,6 +734,7 @@ ManaGease data are saved automatically as a JSON file `[JAR file location]/data/
 If your changes to the data file makes its format invalid, ManaGease will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
+* Go back to [Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -648,23 +742,25 @@ If your changes to the data file makes its format invalid, ManaGease will discar
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ManaGease home folder.
 
+* Go back to [Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
+* Go back to [Table of Contents](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
 | Action                                                                 | Format and Examples                                                                                                                                                                                                          |
 |------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-employee-add)**                                      | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`<br /> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 12/09/2023 /s 1000.00 /l 10` |
+| **[Add](#adding-an-employee-add)**                                     | `add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE`<br /> e.g., `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 12/09/2023 /s 1000.00 /l 10` |
 | **[Clear](#clearing-all-entries-clear)**                               | `clear`                                                                                                                                                                                                                      |
-| **[Delete](#deleting-a-employee-delete)**                              | `delete INDEX`<br /> e.g., `delete 3`                                                                                                                                                                                        |
-| **[Edit](#editing-a-employee-edit)**                                   | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br /> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                             |
-| **[Read](#reading-a-employees-information-read)**                      | `read INDEX PREFIX`<br /> e.g., `read 3 /n`                                                                                                                                                                                  |
+| **[Delete](#deleting-an-employee-delete)**                             | `delete INDEX`<br /> e.g., `delete 3`                                                                                                                                                                                        |
+| **[Edit](#editing-an-employee-edit)**                                  | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br /> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                             |
+| **[Read](#reading-an-employees-information-read)**                     | `read INDEX PREFIX`<br /> e.g., `read 3 /n`                                                                                                                                                                                  |
 | **[List](#listing-all-employees-list)**                                | `list`                                                                                                                                                                                                                       |
 | **[Find](#locating-employees-by-name-find)**                           | `find KEYWORD [MORE_KEYWORDS]`<br /> e.g., `find alex`                                                                                                                                                                       |
 | **[Deduct](#adding-a-deduction-to-the-payroll-of-an-employee-deduct)** | `deduct INDEX /v VALUE /r REASON` or `deduct /n NAME /v VALUE /r REASON`<br /> e.g., `deduct 3 /v 200.00 /r cpf`                                                                                                             |
@@ -677,11 +773,12 @@ If your changes to the data file makes its format invalid, ManaGease will discar
 | **[View Previous Month](#view-the-calendar-of-previous-month-pm)**     | `pm`                                                                                                                                                                                                                         |
 | **[View Current Month](#view-the-calendar-of-current-month-cm)**       | `cm`                                                                                                                                                                                                                         |
 | **[View Next Month](#view-the-calendar-of-upcoming-month-nm)**         | `nm`                                                                                                                                                                                                                         |
-| **[Mark](#marking-employees-attendance-mark)**                         | `mark INDEX /at ATTENDANCE_TYPE` or `mark /n NAME /at ATTENDANCE_TYPE`<br /> e.g, `mark 3 /at present`                                                                                                                       |
-| **[Attendance](#view-employees-attendance-report-attendance)**         | `attendance INDEX` or `attendance /n NAME`<br /> e.g, `attendance 3`                                                                                                                                                         |
+| **[Mark](#marking-an-employees-attendance-mark)**                      | `mark INDEX /at ATTENDANCE_TYPE` or `mark /n NAME /at ATTENDANCE_TYPE`<br /> e.g, `mark 3 /at present`                                                                                                                       |
+| **[Attendance](#view-an-employees-attendance-report-attendance)**      | `attendance INDEX` or `attendance /n NAME`<br /> e.g, `attendance 3`                                                                                                                                                         |
 | **[Help](#viewing-help-help)**                                         | `help`                                                                                                                                                                                                                       |
 | **[Exit](#exiting-the-program-exit)**                                  | `exit`                                                                                                                                                                                                                       |
 
 
 * Go back to [Features](#features)
+* Go back to [Table of Contents](#table-of-contents)
   
