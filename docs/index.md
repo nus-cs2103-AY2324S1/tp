@@ -6,7 +6,7 @@
 # LoveBook
 
 [![CI Status](https://github.com/AY2324S1-CS2103T-F10-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-F10-2/tp/actions)
-[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-F10-2/tp/graph/badge.svg?token=V0VMEEZQIF)](https://codecov.io/gh/AY2324S1-CS2103T-F10-2/tp)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-F10-2/tp/graph/master/badge.svg?token=V0VMEEZQIF)](https://app.codecov.io/gh/AY2324S1-CS2103T-F10-2/tp/tree/master)
 
 ![Ui](images/Ui.png)
 

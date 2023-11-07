@@ -2,6 +2,7 @@ package seedu.lovebook.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
 import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
 
 import java.nio.file.Path;
@@ -11,7 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.lovebook.commons.core.GuiSettings;
+import seedu.lovebook.model.DatePrefs;
 import seedu.lovebook.model.LoveBook;
+import seedu.lovebook.model.ReadOnlyDatePrefs;
 import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.UserPrefs;
 
@@ -26,7 +29,8 @@ public class StorageManagerTest {
     public void setUp() {
         JsonLoveBookStorage loveBookStorage = new JsonLoveBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(loveBookStorage, userPrefsStorage);
+        JsonDatePrefsStorage datePrefsStorage = new JsonDatePrefsStorage(getTempFilePath("datePrefs"));
+        storageManager = new StorageManager(loveBookStorage, userPrefsStorage, datePrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -58,6 +62,24 @@ public class StorageManagerTest {
         storageManager.saveLoveBook(original);
         ReadOnlyLoveBook retrieved = storageManager.readLoveBook().get();
         assertEquals(original, new LoveBook(retrieved));
+    }
+
+    @Test
+    public void datePrefsReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonDatePrefsStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonDatePrefsStorageTest} class.
+         */
+        DatePrefs original = getTypicalDatePrefs();
+        storageManager.saveDatePrefs(original);
+        ReadOnlyDatePrefs retrieved = storageManager.readDatePrefs().get();
+        assertEquals(original, new DatePrefs(retrieved));
+    }
+
+    @Test
+    public void getDatePrefsFilePath() {
+        assertNotNull(storageManager.getDatePrefsFilePath());
     }
 
     @Test
