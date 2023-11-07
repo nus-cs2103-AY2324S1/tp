@@ -732,3 +732,10 @@ Timestamp in the status bar is updated.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+<br>
+
+2. Currently, when the `delete` command encounters invalid indexes, it generates an error and does not delete any patient or specialist records. 
+In contrast, the `delsc` command handles invalid shortcuts by recognizing and ignoring them, while successfully removing any arguments associated with valid shortcuts. 
+The inconsistency between these two delete functions has been identified, and we have plans to address it in the future. 
+Our upcoming improvement will entail modifying the `delete command` to acknowledge and ignore invalid indexes while effectively deleting records specified by valid indexes provided by the user.
