@@ -477,6 +477,33 @@ You can click on a contact's email address to email them.
 
 [Table of Contents](#table-of-contents)
 
+### <u>Category 8 - Miscellaneous</u>
+
+#### View help window: `help`
+
+You can use the help command to open a window containing a link to this user guide. You can press the "Copy URL" button to copy the link, and paste it into your web browser to view this user guide web page.
+
+Format: `help`
+
+Example usage:
+
+* `help`
+    ![screenshot of help window](images/help.png)
+
+[Table of Contents](#table-of-contents)
+
+#### Exit NetworkBook: `exit`
+
+You can use the exit command to close the NetworkBook app.
+
+Format: `exit`
+
+Example usage:
+
+* `exit`
+
+[Table of Contents](#table-of-contents)
+
 ## Command summary
 
 | Command    | Prefixes                                                                                                                                                                                                                       | Format and examples                                                                                                                                                                                                                                                                                                                                                                                                                               | What it does                                                 |
@@ -493,6 +520,8 @@ You can click on a contact's email address to email them.
 | [**redo**](#redo-last-undone-change-redo)                                          | N/A                                                                                                                                                                                                                            | `redo`                                                                                                                                                                                                                                                                                                                                                                                                                                            | Redoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
 | [**open**](#open-a-contacts-link-open-index-index-link-index)                      | `[/index]` | `open [index] /index [link index]` <br/> e.g., `open 1` <br/> e.g., `open 1 /index 2` | Open a contact's link in the default browser. |
 | [**email**](#send-email-to-a-contacts-email-address-email-index-index-email-index) | `[/index]` | `email [index] /index [email index]` <br/> e.g., `email 1` <br/> e.g., `email 1 /index 2` | Open default mailbox to compose a new email to a contact's email address. |
+| [**help**](#view-help-window-help)                                                 | N/A                                                                                                                                                                                                                            | `help` | Opens a window containing a link to this user guide. |
+| [**exit**](#exit-networkbook-exit)                                                 | N/A                                                                                                                                                                                                                            | `exit` | Exits NetworkBook. |
 
 [Table of Contents](#table-of-contents)
 
