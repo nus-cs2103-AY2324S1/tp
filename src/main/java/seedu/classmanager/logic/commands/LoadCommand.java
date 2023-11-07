@@ -26,7 +26,7 @@ public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Load student information from an existing JSON file in the data folder. "
-            + "The file becomes the new default save file. "
+            + "The file becomes the new default save file.\n"
             + "Parameters: " + PREFIX_FILE + "FILE_NAME\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_FILE + "export-v1";
     public static final String MESSAGE_LOAD_SUCCESS = "The file %1$s.json has successfully loaded!\n"

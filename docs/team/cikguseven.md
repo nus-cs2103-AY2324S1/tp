@@ -3,9 +3,9 @@ layout: default.md
 title: "Kieron's Project Portfolio Page"
 ---
 
-### Project: Class Manager 2023
+### Class Manager 2023
 
-Class Manager 2023 aims to provide fast access to CS2103T TAs who need help in maintaining student information across multiple classes. It also aims to help TAs compare and visualize students’ grades across classes.
+Class Manager 2023 aims to provide fast access to NUS TAs in maintaining and managing student information across multiple classes. It also helps TAs visualise students’ grades, attendance and class participation.
 
 Given below are my contributions to the project:
 
