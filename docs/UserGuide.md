@@ -140,29 +140,20 @@ Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [
 - `PHONE` should be an 8-digit integer.
 - `EMAIL` should contain "@".
 - `TELEGRAM` should be between 5-32 characters and start with "@".
-- `FROM` should be a time in "HH:SS" format
-- `TO` should be a time in "HH:SS" format
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
 - `HOUR` should be an integer
 
 Example:
-`add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx from/08:00 to/12:00 t/parttime c/CS2103T h/4` will add a new teaching assistant named Rayner Toh to TAManager.
+`add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx t/parttime c/CS2103T h/4` will add a new teaching assistant named Rayner Toh to TAManager.
 
 ![add TA](images/addTA.png)
-
 
 When the command succeeds:
 
 ```
 New teaching assistant added: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertjx; 
-Free Time: 
-Mon: 08:00-12:00
-Tue: 08:00-12:00
-Wed: 08:00-12:00
-Thu: 08:00-12:00
-Fri: 08:00-12:00
-Tags: [parttime]; 
+Free Time:  Tags: [parttime]; 
 Courses:
 Name: Software Engineering
 Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
@@ -183,14 +174,12 @@ and optionally end with an alphabet.`
 
 Edits a teaching assistant in TAManager.
 
-Format: `edit INDEX n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR`
+Format: `edit INDEX n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR`
 
 - `NAME` should be a string.
 - `PHONE` should be an 8-digit integer.
 - `EMAIL` should contain "@".
 - `TELEGRAM` should be between 5-32 characters and start with "@".
-- `FROM` should be a time in "HH:SS" format
-- `TO` should be a time in "HH:SS" format
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
 - `HOUR` should be an integer

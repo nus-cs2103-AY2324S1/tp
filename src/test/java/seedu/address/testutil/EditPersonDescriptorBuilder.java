@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.availability.FreeTime;
 import seedu.address.model.availability.TimeInterval;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.UniqueCourseList;
@@ -44,7 +43,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setTelegram(person.getTelegram());
-        descriptor.setFreeTime(person.getFreeTime());
         descriptor.setTags(person.getTags().size() == 0 ? null : person.getTags());
         descriptor.setCourses(person.getCourses().size() == 0 ? null : person.getCourses());
         descriptor.setHour(person.getHour());
@@ -94,18 +92,6 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code FreeTime} of the {@code Person} that we are building.
-     */
-    public EditPersonDescriptorBuilder withFreeTime(String from, String to) {
-        if (from == null || to == null) {
-            descriptor.setFreeTime(FreeTime.EMPTY_FREE_TIME);
-        } else {
-            descriptor.setFreeTime(new FreeTime(LocalTime.parse(from), LocalTime.parse(to)));
-        }
-        return this;
-    }
-
-    /**
      * Parses the {@code courses} into a {@code Set<Course>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
@@ -123,6 +109,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setHour(new Hour(hour));
         return this;
     }
+
     public EditPersonDescriptor build() {
         return descriptor;
     }
