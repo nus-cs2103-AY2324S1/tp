@@ -480,9 +480,9 @@ Mark the specified `INTERVIEW_INDEX` in the **InterviewHub** as done.
 
 Format: `mark INTERVIEW_INDEX`
 
-| Parameter         | Representation                                                   | Constraints                                                                                                                                             |
-|-------------------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list |
+| Parameter         | Representation                                                     | Constraints                                                                                                                                                                                                            |
+|-------------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INTERVIEW_INDEX` | - The index of the target interview as shown in the interview list | Must be a positive unsigned integer within the range 1 to n inclusive, where n is the number of interviews currently displayed in the interview list.<br/><br/>- Trailing zeros before a valid index will be accepted. |
 
 Examples:
 * `mark 1` marks the first interview shown on the list as done.
