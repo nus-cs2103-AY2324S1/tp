@@ -741,6 +741,7 @@ Timestamp in the status bar is updated.
 
 ## Planned Enhancements
 
-1. Currently, the view panel can only be updated through the `view` command. We plan to make it so that clicking
-on a person in the list panel also updates the view panel to the selected person. The reason is although our application is made for
-CLI users, expecting that clicking on a person updates the view panel seems to be an intuitive and reasonable expected behaviour.
+1. Currently, the view panel can only be updated using the view command. 
+However, we are planning on implementing a feature that will allow users to update the view panel by simply clicking on a person in the list panel.
+This change is driven by our goal to enhance user experience: although our application primarily caters to CLI users, such  behaviour
+still seems intuitive and reasonable to expect.
