@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.SortIn;
 
 /**
- * Sorts students in the address book.
+ * Sorts students in the address book by name.
  */
 public class SortCommand extends Command {
 
@@ -26,7 +26,7 @@ public class SortCommand extends Command {
 
 
     /**
-     * Creates an SortCommand to sort the students {@code SortIn}
+     * Creates a SortCommand to sort the students {@code SortIn}
      */
     public SortCommand(SortIn sortIn) {
         requireNonNull(sortIn);
