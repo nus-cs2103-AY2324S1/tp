@@ -331,7 +331,8 @@ _{more aspects and alternatives to be added}_
 ## Planned Enhancements
 
 ### Shorter Command Formats
-Currently, the default add command may be too long for an average typer to key in quickly. A future enhancement we are planning would be to allow the addition of a fosterer with just the basic details, such as their name, phone number, email, housing type and availability. Only when the fosterer is ready to foster, then other details such as animal name, animal type and address need to be filled in via the `edit` command.
+Currently, the default add command may be too long for an average typer to key in quickly. A future enhancement we are planning would be to allow the addition of a fosterer with just the basic details, such as their name, phone number, email, housing type and availability. The rest of the fields will be set to `nil` by default.
+Only when the fosterer is ready to foster, then other details such as animal name, animal type and address need to be filled in via the `edit` command.
 
 We are also planning to shorten some input parameters when adding or editing a fosterer:
 
@@ -342,10 +343,54 @@ We are also planning to shorten some input parameters when adding or editing a f
 | availability/nil          | avail/nil    |
 | animalType/               | type/        |
 
+With this, the command `add n/Jerry Tan p/98765412 e/jerry123@example.com housing/HDB avail/true` will be a valid add
+command. 
+
+### Reduce Coupling Between Availability and Animal Type
+Currently, the `animalType` field also contains information about the availability of a fosterer.<br>
+e.g. if the `animalType` field of a fosterer is `current.Dog`, it suggests that the fosterer is available, and is 
+fostering a dog. However, the user will still need to enter the `availability` field as `available`. <br>
+
+Building on the enhancement in [Shorter Command Formats](#shorter-command-formats), we will be revising the 
+`AVAILABILITY` and `ANIMAL_TYPE` parameters:
+
+| Param                  | About                                                             | Values                 | 
+|------------------------|-------------------------------------------------------------------|------------------------|
+| `AVAILABILITY`         | Indicates availability of fosterer                                | `false`, `true`, `nil` |     
+| `ABLE_ANIMAL_TYPE`     | Indicates the type of animals the fosterer can foster             | `dog`, `cat`, `nil`    |     
+| `CURRENT_ANIMAL_TYPE`  | Indicates the type of animals the fosterer is currently fostering | `dog`, `cat`, `nil`    |
+
+
+### Support More Animal Types
+
+Building on the enhancement in [Reduce Coupling Between Availability and Animal Type](#reduce-coupling-between-availability-and-animal-type), we can support more animal types by allowing the addition of animals other than cats and dogs under `ABLE_ANIMAL_TYPE` and `CURRENT_ANIMAL_TYPE`. Some examples include 
+`hamster` and `rabbit`. This will make our product available to more animal shelters.
+
+### Allow Fosterers To Foster More Than One Animal At A Time
+
+Currently, we only allow the assignment of one fosterer to one animal. To improve this, we can make the `ANIMAL_NAME`,
+`ABLE_ANIMAL_TYPE` and `CURRENT_ANIMAL_TYPE` fields to be maintained as lists instead. This will allow one fosterer to be associated with more than one animal.
+
 ### Case-sensitivity of Inputs
-Currently, the fields and parameters for housing, availability and animal type are case-sensitive. An enhancement to this would be to make these fields and their parameters case-insensitive to improve the user experience. Moreover, the aforementioned enhancements to shorten the command format will also be case-insensitive.
+Currently, the fields and parameters for housing, availability and animal type are case-sensitive. An enhancement to this would be to make these fields and their parameters case-insensitive to improve the user experience. Moreover, the aforementioned enhancements will also be case-insensitive.
+
+### Allow Symbols in Name
+Currently, names in Foster Family must be alphanumeric. However, this excludes certain legal names that have other 
+characters such as `/`. For example, we currently do not allow  `s/o` in a person's name as the `/` is used as a command
+delimiter. Hence, one possible improvement is to allow non-alphanumeric characters, and the user must 
+enclose the entire name in quotation marks. 
+
+e.g. `name/"Henry Tan"` and `name/"Nagaratnam s/o Suppiah"` are now valid name parameters.
+
+
+### Phone Number Input
+
+### Handle Invalid Fosterer - Corrupt Data File
+
+### Notes Feature as a Separate Command
 
 ### Specificity of Error Messages
+
 
 --------------------------------------------------------------------------------------------------------------------
 
