@@ -16,8 +16,9 @@ import seedu.address.model.lessons.TaskList;
  */
 public class TypicalLessons {
     private static TaskList taskList = new TaskList();
-    private static List<Task> fillerTasks = TypicalTasks.getTypicalTasks();
 
+
+    private static List<Task> fillerTasks = TypicalTasks.getTypicalTasks();
 
     private TypicalLessons() {} // prevents instantiation
 
@@ -39,11 +40,16 @@ public class TypicalLessons {
                     new Lesson("lesson 1", "14:30", "16:30", "2022/10/10", "MATHEMATICS", taskList),
                     new Lesson("lesson 2", "14:30", "16:30", "2022/10/20", "BIOLOGY", taskList),
                     new Lesson("lesson 3", "10:30", "12:30", "2022/11/20", "MATHEMATICS", taskList),
-                    new Lesson("some lesson", "11:30", "10:30", "2022/12/20", "BIOLOGY", taskList),
+                    new Lesson("some lesson", "10:30", "11:30", "2022/12/20", "BIOLOGY", taskList),
                     new Lesson("random name", "09:30", "10:30", "2022/11/21", "PHYSICS", taskList)
             ));
         } catch (ParseException e) {
             return new ArrayList<>();
         }
     }
+
+    public static Lesson getSample1() throws ParseException {
+        return new Lesson("SAMPLE 1", "10:00", "14:00", "2020/10/10", "MATHEMATICS", taskList);
+    }
+
 }
