@@ -95,7 +95,7 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
    - Simply go to your terminal and type `java -version`. ![here](images/UG/QuickStart1.png)
 
 2. Download the latest ProjectPRO.jar from [here](https://github.com/AY2324S1-CS2103T-T10-3/tp/releases).
-- ![here](images/UG/QUICKSTART2.png)
+   - ![here](images/UG/QUICKSTART2.png)
 
 3. Move the JAR file to a folder where you want to store your project details. For example, create a folder named ProjectPRO and place it on your desktop.
    - For Mac Users:
@@ -103,7 +103,10 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
    - For Windows Users:
    
 4. Launch ProjectPRO.
-   - For Mac users: Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar ProjectPRO.jar` command to run the application.
+   - For Mac users: 
+     1. Open a command terminal
+     2. type `cd Desktop` , followed by `cd ProjectPro`
+     3. type `java -jar ProjectPRO.jar` to run the application.
    - For Windows users: Double-click the ProjectPRO.jar file to launch the application.
 
 5. Start using ProjectPRO!
