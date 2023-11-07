@@ -207,7 +207,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
 Output:
-* If there are multiple employees with the same name, we just list down the employees for them to view, return “Here is the list of the matching employees:”
+* If there are multiple employees with the same name, all the matching employees would be displayed. Hence, ManaGease will return “Here is the list of the matching employees:”
 ![result for deleting same-name employee](images/deleteSameName.png)
   
 * Otherwise, ManaGease should display a confirmation message indicating that the employee information has been successfully deleted.
@@ -255,7 +255,9 @@ This feature allows users to add leave(s) to an employee.
 
 `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`
 
-* Adds leave to the employee specified by the `INDEX`, can be a single day of leave or multiple days of leave.
+* Adds leave to the employee specified by the `INDEX`. 
+* You have the flexibility to add leave for a single day or multiple consecutive days. 
+* You can add leave for the current year and the upcoming year, but you won't be able to add leave for past dates.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 * The `DATE` must be in `dd/MM/yyyy` format.
@@ -292,7 +294,8 @@ This feature allows users to delete leave(s) from an employee.
 
 `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`
 
-* Deletes leave from the employee specified by the `INDEX`, can be a single day of leave or multiple days of leave.
+* Deletes leave from the employee specified by the `INDEX`.
+* You have the flexibility to delete leave for a single day or multiple consecutive days.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 * The `DATE` must be in `dd/MM/yyyy` format.
