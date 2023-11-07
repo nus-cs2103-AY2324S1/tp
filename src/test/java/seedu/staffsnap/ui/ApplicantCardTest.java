@@ -2,12 +2,9 @@ package seedu.staffsnap.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.staffsnap.testutil.TypicalApplicants.BENSON;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HR;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_AMY;
+import static seedu.staffsnap.testutil.TypicalApplicants.BENSON;
 import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -24,8 +21,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.staffsnap.logic.commands.EditCommand;
 import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
-import seedu.staffsnap.model.interview.Interview;
-import seedu.staffsnap.model.interview.Rating;
 import seedu.staffsnap.testutil.EditApplicantDescriptorBuilder;
 
 /**
