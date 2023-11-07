@@ -2,7 +2,7 @@
 layout: page
 title: User Guide
 ---
-# BandConnect++ User Guide
+# What Is BandConnect++?
 Unlock your musical potential with **_BandConnect++_** ! 
 
 **_BandConnect++_** is a powerful desktop app that helps music producers manage their musician contacts and form bands with ease. It is created with a convenient and intuitive Command Line Interface (CLI) that speeds up your work routine.
@@ -10,7 +10,7 @@ Unlock your musical potential with **_BandConnect++_** !
 **_BandConnect++_** is developed by a driven team of musicians/programmers who strives to make life easier for musicians and music producers.  Discover your perfect musical match and create your next big hit now!
 
 --------------------------------------------------------------------------------------------------------------------
-# About this guide
+# Using the Guide
 Welcome to the *BandConnect++ User Guide*! This user guide walks you through everything about *BandConnect++*. Whether you are new to our app or a seasoned user, you can always find something useful in this guide. 
 
 For first-time users, please go to the [Quick start](#quick-start) section below to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
@@ -25,13 +25,7 @@ For experienced users, if you need help in remembering a particular command, ple
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Glossary
-To be added.
-CLI, GUI, Java
-
---------------------------------------------------------------------------------------------------------------------
-
-# Quick start
+# Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 
@@ -471,7 +465,17 @@ If you wish, please refer to the below section for a more succinct [command summ
 | **List All Musicians and Bands**               | `list`                                                                                                                                                           |
 --------------------------------------------------------------------------------------------------------------------
 
-# Troubleshooting
+# Frequently Asked Questions
 
 [to be added soon]
 
+--------------------------------------------------------------------------------------------------------------------
+
+# Troubleshooting
+[a possible section to be added]
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Glossary
+To be added.
+CLI, GUI, Java
