@@ -264,6 +264,18 @@ Redoes a command that the user has undone previously.
 
 Format: `redo`
 
+List of commands that can be undone:
+* `clear`
+* `createMember`
+* `deleteMember`
+* `editMember`
+* `createEvent`
+* `deleteEvent`
+* `editEvent`
+* `enrol`
+* `unenrol`
+* `editEnrolment`
+
 ### Help: `help`
 
 Displays a pop-out window that shows a link to this User Guide.
