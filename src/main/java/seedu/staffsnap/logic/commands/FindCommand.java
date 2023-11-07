@@ -22,12 +22,24 @@ public class FindCommand extends Command {
             + "Expected outcome: Returns a list of applicants whose name contains any of the words "
             + "\"alice\", \"bob\", or \"charlie\"";
 
+    public static final String MESSAGE_WRONG_FORMAT = "Keyword(s) must be alphanumerical!"
+            + "\nExample: LEE2, lee, Johnny Haw";
+
+    public static final String MESSAGE_TOO_LONG = "Please keep the keyword(s) to 55 or less characters!";
+
     private final NameContainsKeywordsPredicate predicate;
 
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes the find command.
+     * Find Command performs an OR search of the names of applicants.
+     * Any applicant whose name contains any of the keywords will be included in the resulting list.
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which contains the list of applicants whose name contains any of the keywords given.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

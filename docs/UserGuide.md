@@ -16,7 +16,6 @@ img
 <a name="staff-snap-user-guide"></a>
 # Staff-Snap User Guide
 
---- {.double}
 
 [//]: # (<!-- * Table of Contents -->)
 [//]: # (<page-nav-print />)
@@ -66,9 +65,14 @@ img
 
 Welcome to the **Staff-Snap** User Guide!
 
-**Staff-Snap** is a desktop app for Hiring Managers like you to manage the hiring and tracking of applicants, optimised for use via a [Command Line Interface (CLI)](#glossary). Used by hiring managers in companies around the globe, it is effective, easy-to-use and reliable, making the hiring process a much more enjoyable experience.
+**Staff-Snap** is a desktop app for Hiring Managers like you to manage the hiring and tracking of applicants, 
+optimised for use via a [Command Line Interface (CLI)](#glossary). Used by hiring managers in companies around the globe, 
+it is effective, easy-to-use and reliable, making the hiring process a much more enjoyable experience.
 
-The purpose of this guide is to get you familiar with the features of **Staff-Snap** - from the very basics, to the most advanced features the application has to offer. These features range from the simple task of adding an applicant to being able to calculate an applicant's score from their ratings in the interview stages. Every single feature is explained in this guide. You can check out the [Table of Contents](#table-of-contents) to navigate to a feature you might be interested in using.
+The purpose of this guide is to get you familiar with the features of **Staff-Snap** - from the very basics, 
+to the most advanced features the application has to offer. 
+These features range from the simple task of adding an applicant to being able to calculate an applicant's score from their ratings in the interview stages. 
+Every single feature is explained in this guide. You can check out the [Table of Contents](#table-of-contents) to navigate to a feature you might be interested in using.
 
 To begin using this guide, ensure you meet the [minimum system requirements](#minimum-system-requirements). Once this is done, go to the [quick start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features Staff-Snap has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
 
@@ -106,7 +110,11 @@ If you are unable to follow any of the steps below or get help, please email our
 5. Enter the `java -jar staffsnap.jar` command to run the application.
 6. You should see the [GUI](#glossary) displayed as shown below. Note how the application contains some sample data.<br>
 
-   ![Main Window view](images/user-guide/MainWindow.png)
+<br/>
+
+![Main Window view](images/user-guide/MainWindow.png)
+
+<br/>
 
 7. Type the [command](#glossary) in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window. Some example commands that you can try:
    * `add n/John Doe hp/81238123 p/Boss e/john@mail.com` : Adds an applicant named John Doe to the list. 
@@ -115,8 +123,8 @@ If you are unable to follow any of the steps below or get help, please email our
    * `clear` : Clears all applicants from the list.
    * `exit` : Exits the application.
 
-<br>
 
+<br>
 9. Refer to the [Features](#features) below for details of each command.
 
 <box type="tip" header="**For macOS users**" seamless>
@@ -426,7 +434,7 @@ Example:
 | Parameter    | Description​                                                                                                                           | Examples​                                                |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
 | `DESCRIPTOR` | The applicant descriptor to sort by.<br/> <br/> It should be either `name` or `phone` or `email` or `position` or `score` or `status`. | <ul><li>`name`</li><li>`score`</li></ul>                 |
-| `KEYWORD`    | The keyword to find in an applicant's name. <br/> <br/> It should be alphanumeric.                                                     | <ul><li>`Lee`</li><li>`Zhang Jordan`</li></ul>           |
+| `KEYWORD`    | The keyword to find in an applicant's name. <br/> <br/> It should be alphanumerical.                                                   | <ul><li>`Lee`</li><li>`Zhang Jordan`</li></ul>           |
 | `SCORE`      | The applicant's overall score. <br/> <br/> It should be a number between 0.0 and 10.0 inclusive, to 1 decimal place.                   | <ul><li>`0.0`</li><li>`8.3`</li></ul>                    |
 | `FILENAME`   | The file name of the csv file to import. <br/> <br/> It should end with the `.csv` suffix and should not be blank.                     | <ul><li>`demo.csv`</li><li>`applicantBook.csv`</li></ul> |
 
@@ -437,18 +445,21 @@ Example:
 <br>
 
 <a name="find"></a>
+
 #### Finding an applicant by name: `find`
 
-Find employees whose name contains a particular keyword.
+Find applicants whose name contains a particular keyword.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
+
 * The search is case-insensitive, e.g. `JOHN` will return `john`.
 * The order of the keywords does not matter, e.g. `Alice Tan` will match `Tan Alice`.
 * Only the applicant name is searched.
 * Any applicant whose name contains the sequence of characters given as the keyword will be given as a result, e.g. `Ed` will match both `Edward` and `Ed`.
-* Applicants matching at least one keyword will be returned (i.e. OR search), e.g. `Ben Bobby` will return `Ben Yang`, `Bobby Chin`.
+* Applicants matching at least one keyword will be returned (i.e. OR search), e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
 
 Example:
+
 * `find IVAN` finds any applicant whose name contains “ivan”.
 * `find IVAN CHEW` finds any applicant whose name contains “ivan” or contains “chew”.
 
