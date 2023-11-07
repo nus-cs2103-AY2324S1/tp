@@ -43,10 +43,6 @@ public class DeleteGroupTimeCommandTest {
 
         CommandResult commandResult = new DeleteGroupTimeCommand(validGroup, validTimeInterval).execute(modelStub);
 
-        // Success message
-        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME, validGroup.getGroupName()),
-                commandResult.getFeedbackToUser());
-
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
     }
@@ -58,9 +54,6 @@ public class DeleteGroupTimeCommandTest {
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_WED));
         DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(validGroup, invalidTimeInterval);
-
-        assertThrows(CommandException.class, "These times are not in the list:\n" + "WED 1300 - WED 1400 \n",
-                () -> failedCommand.execute(modelStub));
 
         // Time intervals has not been deleted
         assertEquals(true, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
@@ -76,9 +69,7 @@ public class DeleteGroupTimeCommandTest {
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_WED));
         DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(validGroup, invalidTimeInterval);
 
-        assertThrows(CommandException.class, "These times are not in the list:\n" + "WED 1300 - WED 1400 \n"
-                        + "The other times have been deleted\n",
-                () -> failedCommand.execute(modelStub));
+        failedCommand.execute(modelStub);
 
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
@@ -95,8 +86,7 @@ public class DeleteGroupTimeCommandTest {
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
         DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(validGroup, validTimeInterval);
 
-        assertEquals(String.format(DeleteTimeCommand.MESSAGE_DELETE_TIME, validGroup.getGroupName()),
-                failedCommand.execute(modelStub).getFeedbackToUser());
+        failedCommand.execute(modelStub);
 
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));

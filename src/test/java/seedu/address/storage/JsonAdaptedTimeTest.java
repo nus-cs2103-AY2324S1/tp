@@ -6,12 +6,10 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Time;
 import seedu.address.model.TimeInterval;
-import seedu.address.model.group.Group;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedTime.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalGroups.CS2100;
 
 public class JsonAdaptedTimeTest {
     @Test
