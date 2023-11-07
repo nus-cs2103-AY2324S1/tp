@@ -8,7 +8,12 @@ import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.application.logic.parser.exceptions.ParseException;
-import seedu.application.model.job.*;
+import seedu.application.model.job.Company;
+import seedu.application.model.job.Deadline;
+import seedu.application.model.job.Industry;
+import seedu.application.model.job.JobType;
+import seedu.application.model.job.Role;
+import seedu.application.model.job.Status;
 
 public class ParserUtilTest {
     private static final String INVALID_ROLE = "Softw@re Engineer";
@@ -20,6 +25,7 @@ public class ParserUtilTest {
     private static final String VALID_ROLE = "Software Engineer";
     private static final String VALID_COMPANY = "Google";
     private static final String VALID_DEADLINE = "Dec 31 2030 1200";
+    private static final String VALID_DEADLINE_UNFORMATTED = "dEc 31 2030 1200";
     private static final String VALID_STATUS = "Pending";
     private static final String VALID_JOBTYPE = "INTERNSHIP";
     private static final String VALID_INDUSTRY = "Finance";
@@ -33,7 +39,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                                                                      -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -102,6 +108,12 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseDeadline_validUnformattedValue_returnsFormattedDeadline() throws Exception {
+        Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE_UNFORMATTED));
+    }
+
+    @Test
     public void parseDeadline_validValueWithoutWhitespace_returnsDeadline() throws Exception {
         Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
         assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE));
@@ -113,6 +125,7 @@ public class ParserUtilTest {
         Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
         assertEquals(expectedDeadline, ParserUtil.parseDeadline(deadlineWithWhitespace));
     }
+
     @Test
     public void parseStatus_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseStatus((String) null));
