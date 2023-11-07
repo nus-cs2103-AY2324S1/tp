@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.lovebook.commons.exceptions.IllegalValueException;
 import seedu.lovebook.commons.util.JsonUtil;
 import seedu.lovebook.model.LoveBook;
-import seedu.lovebook.testutil.TypicalPersons;
+import seedu.lovebook.testutil.TypicalDates;
 
 public class JsonSerializableLoveBookTest {
 
@@ -25,7 +25,7 @@ public class JsonSerializableLoveBookTest {
         JsonSerializableLoveBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_DATES_FILE,
                 JsonSerializableLoveBook.class).get();
         LoveBook loveBookFromFile = dataFromFile.toModelType();
-        LoveBook typicalPersonsLoveBook = TypicalPersons.getTypicalLoveBook();
+        LoveBook typicalPersonsLoveBook = TypicalDates.getTypicalLoveBook();
         System.out.println(loveBookFromFile);
         System.out.println(typicalPersonsLoveBook);
         assertEquals(loveBookFromFile, typicalPersonsLoveBook);

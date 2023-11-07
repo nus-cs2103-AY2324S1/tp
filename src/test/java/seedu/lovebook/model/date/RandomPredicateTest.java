@@ -2,7 +2,7 @@ package seedu.lovebook.model.date;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.lovebook.testutil.TypicalPersons.ALICE;
+import static seedu.lovebook.testutil.TypicalDates.ALICE;
 
 import org.junit.jupiter.api.Test;
 

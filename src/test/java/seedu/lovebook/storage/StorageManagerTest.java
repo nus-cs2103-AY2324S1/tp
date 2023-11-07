@@ -3,7 +3,7 @@ package seedu.lovebook.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
-import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
+import static seedu.lovebook.testutil.TypicalDates.getTypicalLoveBook;
 
 import java.nio.file.Path;
 

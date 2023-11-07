@@ -27,7 +27,7 @@ import seedu.lovebook.model.date.Date;
 /**
  * A utility class containing a list of {@code Date} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalDates {
 
     public static final Date ALICE = new PersonBuilder().withName("Alice Pauline")
             .withIncome("1000").withHeight("126").withGender("F")
@@ -69,7 +69,7 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalDates() {} // prevents instantiation
 
     /**
      * Returns an {@code LoveBook} with all the typical dates.

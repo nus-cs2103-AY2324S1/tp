@@ -10,7 +10,7 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
-import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
+import static seedu.lovebook.testutil.TypicalDates.getTypicalLoveBook;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,5 @@
 {
-  "_comment": "LoveBook save file which contains the same Person values as in TypicalPersons#getTypicalLoveBook()",
+  "_comment": "LoveBook save file which contains the same Person values as in TypicalDates#getTypicalLoveBook()",
   "dates" : [ {
     "name" : "Alice Pauline",
     "age" : "31",

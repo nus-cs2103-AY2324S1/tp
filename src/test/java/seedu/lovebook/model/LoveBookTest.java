@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.lovebook.testutil.Assert.assertThrows;
-import static seedu.lovebook.testutil.TypicalPersons.ALICE;
-import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
+import static seedu.lovebook.testutil.TypicalDates.ALICE;
+import static seedu.lovebook.testutil.TypicalDates.getTypicalLoveBook;
 
 import java.util.Arrays;
 import java.util.Collection;

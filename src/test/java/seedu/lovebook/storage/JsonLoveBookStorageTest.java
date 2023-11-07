@@ -3,10 +3,10 @@ package seedu.lovebook.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.lovebook.testutil.Assert.assertThrows;
-import static seedu.lovebook.testutil.TypicalPersons.ALICE;
-import static seedu.lovebook.testutil.TypicalPersons.HOON;
-import static seedu.lovebook.testutil.TypicalPersons.IDA;
-import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
+import static seedu.lovebook.testutil.TypicalDates.ALICE;
+import static seedu.lovebook.testutil.TypicalDates.HOON;
+import static seedu.lovebook.testutil.TypicalDates.IDA;
+import static seedu.lovebook.testutil.TypicalDates.getTypicalLoveBook;
 
 import java.io.IOException;
 import java.nio.file.Path;

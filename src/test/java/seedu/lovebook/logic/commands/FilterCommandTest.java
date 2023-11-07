@@ -10,12 +10,12 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
-import static seedu.lovebook.testutil.TypicalPersons.ALICE;
-import static seedu.lovebook.testutil.TypicalPersons.BENSON;
-import static seedu.lovebook.testutil.TypicalPersons.ELLE;
-import static seedu.lovebook.testutil.TypicalPersons.FIONA;
-import static seedu.lovebook.testutil.TypicalPersons.GEORGE;
-import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
+import static seedu.lovebook.testutil.TypicalDates.ALICE;
+import static seedu.lovebook.testutil.TypicalDates.BENSON;
+import static seedu.lovebook.testutil.TypicalDates.ELLE;
+import static seedu.lovebook.testutil.TypicalDates.FIONA;
+import static seedu.lovebook.testutil.TypicalDates.GEORGE;
+import static seedu.lovebook.testutil.TypicalDates.getTypicalLoveBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;

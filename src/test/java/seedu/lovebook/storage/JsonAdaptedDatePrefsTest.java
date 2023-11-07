@@ -3,7 +3,7 @@ package seedu.lovebook.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.lovebook.storage.JsonAdaptedDate.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.lovebook.testutil.Assert.assertThrows;
-import static seedu.lovebook.testutil.TypicalPersons.BENSON;
+import static seedu.lovebook.testutil.TypicalDates.BENSON;
 
 import org.junit.jupiter.api.Test;
 

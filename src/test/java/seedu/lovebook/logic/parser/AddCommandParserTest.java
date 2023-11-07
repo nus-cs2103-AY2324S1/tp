@@ -34,8 +34,8 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.lovebook.testutil.TypicalPersons.AMY;
-import static seedu.lovebook.testutil.TypicalPersons.BOB;
+import static seedu.lovebook.testutil.TypicalDates.AMY;
+import static seedu.lovebook.testutil.TypicalDates.BOB;
 
 import org.junit.jupiter.api.Test;
 

@@ -9,8 +9,8 @@ import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_HOROSCOPE_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_INCOME_BOB;
 import static seedu.lovebook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.lovebook.testutil.TypicalPersons.ALICE;
-import static seedu.lovebook.testutil.TypicalPersons.BOB;
+import static seedu.lovebook.testutil.TypicalDates.ALICE;
+import static seedu.lovebook.testutil.TypicalDates.BOB;
 
 import org.junit.jupiter.api.Test;
 
