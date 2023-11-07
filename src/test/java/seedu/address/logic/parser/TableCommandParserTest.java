@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.TableCommand;
+
 public class TableCommandParserTest {
     private TableCommandParser parser = new TableCommandParser();
 
