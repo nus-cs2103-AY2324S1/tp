@@ -208,7 +208,9 @@ Adds an event to the user's calendar.
 Format: `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME`
 
 * Adds the event starting from `START_DATE_TIME` and ending at `END_DATE_TIME`
+* `DESCRIPTION` must be non-empty
 * `START_DATE_TIME` and `END_DATE_TIME` must be in `yyyy-MM-dd HH:mm` format
+* `START_DATE_TIME` must be before `END_DATE_TIME` for the command to be valid
 
 Example:
 * `addEvent Cry about deadlines d/12/12/2012 s/2200 e/2359`
@@ -273,29 +275,37 @@ Example:
 
 There are two ways for the user to compare calendars with their AddressBook Contacts. 
 Namely, the user can either isolate contacts of interest with their respective index,
-or compare calendars with a group of contacts using their tags.
+or compare calendars with a group of contacts using their tags. Therefore, the user can
+consider the following two commands and choose whichever suits their needs more.
 
 The resulting pop-up calendar will pop up with the time periods where all parties
 are not available greyed out. The pop-up has to be closed in order for the user to access
 the main application again.
 
-## 1. Comparison by index
+Note that the arguments for the commands are optional, hence `compareCalendars` and
+`compareGroupCalendars` are valid commands, but the resulting pop-up will just display the
+user's calendar.
 
-Format `compareCalendars INDEX1 INDEX2 ...`
+#### 1. Comparison by index
+
+Format `compareCalendars [INDEX]...`
 
 * Compare calendar with the contacts at the respective `INDEX`
 * `INDEX` must be a positive non-zero integer that is smaller than the size of the AddressBook
 * If the `INDEX` number provided is invalid, an error will be returned
+* If no `INDEX` is supplied, the resulting pop-up will just display the user's calendar
 
 Example:
 `compareCalendars 1 3 5`
 
-## 2. Comparison by tag
+#### 2. Comparison by tag
 
-Format `compareGroupCalendars TAG1 TAG2 ...`
+Format `compareGroupCalendars [TAG]...`
 
-* Compare calendar with the contacts with the specified `TAG`s
-* If all the `TAG`s provided are invalid, the resulting pop-up will just display the user's calendar
+* Compare calendar with the contacts with the specified `TAG`
+* If some of the `TAG` provided are invalid, the resulting pop-up will ignore the invalid `TAG`
+* If all the `TAG` provided are invalid, the resulting pop-up will just display the user's calendar
+* If no `TAG` is supplied, the resulting pop-up will just display the user's calendar
 
 Example:
 `compareGroupCalendars school friends`
