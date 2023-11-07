@@ -9,6 +9,7 @@ import java.util.Map;
  * Represents a hotel room that a client is staying in.
  */
 public class Room {
+    public static final String VALIDATION_REGEX = "\\d{1,3}";
     public static final String MESSAGE_CONSTRAINTS = "Room numbers are between 1 and 500 inclusive.";
     public static final int NUMBER_OF_NORMAL_ROOMS = 100;
     public static final int NUMBER_OF_STUDIO_ROOMS = 100;
@@ -87,12 +88,15 @@ public class Room {
     /**
      * Checks if the room number is valid, which means it should be between 1 and 500 inclusive.
      *
-     * @param number The room number to validate.
+     * @param test The room number to validate.
      * @return True if the room number is within the valid range, false otherwise.
      */
-    public static boolean isValidRoom(String number) {
-        int roomNumber = Integer.parseInt(number);
-        return roomNumber < 1 || roomNumber > 500;
+    public static boolean isValidRoom(String test) {
+        if (test.matches(VALIDATION_REGEX)) {
+            int roomNumber = Integer.parseInt(test);
+            return roomNumber >= 1 && roomNumber <= 500;
+        }
+        return false;
     }
 
     /**
@@ -120,7 +124,7 @@ public class Room {
      * @return the room number
      */
     public int getRoomNumber() {
-        return (int) this.value;
+        return this.value;
     }
 
     /**
