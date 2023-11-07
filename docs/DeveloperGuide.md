@@ -198,7 +198,7 @@ The following activity diagram summarizes what happens when a user executes a `f
 
 #### Implementation
 
-The `sort` command allows the user to sort the list of students in alphabetical order to enhance efficiency in searching.
+The `sort` command allows the user to sort the list of students by name in alphabetical order to enhance efficiency in searching.
 
 When the user enters a sort command, the `AddressBookParser` parses the user's input and returns a `SortCommand`.
 
