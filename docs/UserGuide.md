@@ -33,6 +33,7 @@ CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to man
 
 1. Refer to the [Features](#features) below for details of each command.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -43,6 +44,8 @@ CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to man
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `createMember n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+* Refer to the [List of acceptable values](#list-of-acceptable-values) below for details of each parameter.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -69,9 +72,6 @@ Creates a new member with accompanying personal details (name, gender, phone num
 
 Format: `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-* Acceptable values for `GENDER`: `Male`, `Female`, `Others`.
-* Acceptable values for `EMAIL`: A string with an email extension (e.g. `@gmail.com`).
-
 Examples:
 * `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader` creates a member `CHU WEI RONG` in CCACommander.
 
@@ -83,11 +83,10 @@ Format: `deleteMember MEMBER_INDEX`
 
 * Deletes the member at the specified `MEMBER_INDEX`.
 * The index refers to the index number shown in the **currently displayed** member list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
 
 Examples:
-* `deleteMember 1 ` deletes the 1st member in the member list.
-* `deleteMember 10 ` deletes the 10th member in the member list.
+* `deleteMember 1` deletes the 1st member in the member list.
+* `deleteMember 10` deletes the 10th member in the member list.
 
 ### Edit a Member: `editMember`
 Edits the member at the specified index with the specified fields.
@@ -95,10 +94,7 @@ Edits the member at the specified index with the specified fields.
 Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 * The index refers to the index number shown in the **currently displayed** member list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
 * At least one field to edit must be provided.
-* Acceptable values for `GENDER`: `Male`, `Female`, `Others`.
-* Acceptable values for `EMAIL`: A string with an email extension (e.g. `@gmail.com`).
 
 Examples:
 * `editMember 1 a/RH t/Musician` edits the address and the tag fields of the 1st member in the member list.
@@ -108,8 +104,6 @@ Examples:
 Creates a new event with accompanying details (name, location, date, tag).
 
 Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
-
-* Acceptable values for `DATE`: Dates in the format of `YYYY-MM-DD`.
 
 Examples:
 * `createEvent n/Party l/Raffles Hall d/2023-09-16` creates an event `Party` in CCACommander.
@@ -122,7 +116,6 @@ Format: `deleteEvent EVENT_INDEX`
 
 * Deletes the event at the specified `EVENT_INDEX`.
 * The index refers to the index number shown in the **currently displayed** event list.
-* The index **must be a positive integer** that is within the range of the length of the event list.
 
 Examples:
 * `deleteEvent 1` deletes the 1st event in the event list.
@@ -135,12 +128,7 @@ Edits the event at the specified index with the specified attributes.
 Format: `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
 
 * The index refers to the index number shown in the **currently displayed** event list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
 * At least one field to edit must be provided.
-* `EVENT_NAME` **must only contain** Alphanumeric Characters and spaces, and it should not be blank
-* `LOCATION` **must not** be blank and can take in any values.
-* `DATE` **must be a valid date** in the format of **YYYY-MM-DD**.
-* `TAG` **must only contain** Alphanumeric Characters with no space in between.
 
 Examples:
 * `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1` edits the 5th event in the event list to change the name to `Halloween
@@ -154,9 +142,6 @@ Enrols a member to an event.
 Format: `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
 * Enrols the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
-* The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the **currently displayed** member/event list.
-* The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
-* The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
 
 Examples:
 * `enrol m/1 e/5 h/3 r/did planning` enrols the 1st member in the member list to the 5th event in the event list, where the member had 3 hours of contributions to that event and has a remark stating that the member "did planning".
@@ -170,9 +155,6 @@ Format: `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
 
 * Unenrol the member at the specified `MEMBER_INDEX` from the event at the specified `EVENT_INDEX`.
 * The member at `MEMBER_INDEX` must be a part of the event at `EVENT_INDEX`.
-* The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the **currently displayed** member/event list.
-* The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
-
 
 Examples:
 * `unenrol m/1 e/5` unenrols the 1st member in the member list from the 5th event in the event list.
@@ -184,11 +166,6 @@ Edits the enrolment details of a specified member at a specified event with the 
 Format: `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
 * Edits the specified `MEMBER_INDEX`'s enrolment of the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
-* The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the **currently displayed** member/event list.
-* The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
-* At least one field to edit must be provided.
-* The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
-* `REMARK` can take any value, but should not be blank.
 
 Examples:
 * `editEnrolment m/1 e/1 h/0 r/Absent due to Covid` edits the enrolment of the 1st member in the member list for the 1st event of the event list to be `0` hours and have a remark `Absent due to Covid`.
@@ -207,7 +184,6 @@ Format: `viewMember MEMBER_INDEX`
 
 * Views the events of the member at the specified `MEMBER_INDEX`.
 * The index refers to the index number shown in the **currently displayed** member list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
 
 Examples:
 * `viewMember 1` displays events of the 1st member in the member list.
@@ -220,7 +196,6 @@ Lists all the members of a specified event index.
 Format: `viewEvent EVENT_INDEX`
 * Views the members of the event at the specified `EVENT_INDEX`.
 * The index refers to the index number shown in the **currently displayed** event list.
-* The index **must be a positive integer** that is within the range of the length of the event list.
 
 Examples:
 * `viewEvent 1` displays members of the 1st event in the event list.
@@ -233,7 +208,6 @@ Finds and lists member(s) whose name(s) contain the provided `KEYWORD`.
 Format: `findMember KEYWORD [MORE_KEYWORDS]`
 * Finds and lists member(s) whose name(s) contain the specified `KEYWORD`.
 * More than 1 `KEYWORD` can be provided to find more members.
-* The `KEYWORD` must match minimally one of the words in the name of the member to be found, where capitalisation does not matter.
 
 Examples:
 * `findMember alice` displays the member(s) whose name(s) contain 'alice'
@@ -246,7 +220,6 @@ Finds and lists event(s) which name(s) contain the provided `KEYWORD`.
 Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 * Finds and lists event(s) which name(s) contain the specified `KEYWORD`.
 * More than 1 `KEYWORD` can be provided to find more events.
-* The `KEYWORD` must match minimally one of the words in the name of the event to be found, where capitalisation does not matter.
 
 Examples:
 * `findEvent party` displays the event(s) which name(s) contain 'party'
@@ -386,10 +359,10 @@ Action | Format, Examples
   </tr>
   <tr>
     <td class="tg-0pky">TAG</td>
-    <td class="tg-0pky">Only contain alphanumeric characters with no spaces, but can be blank</td>
+    <td class="tg-0pky">Only contain alphanumeric characters with no spaces in between, but can be blank</td>
   </tr>
   <tr>
-    <td class="tg-0pky" rowspan="4">createEvent / editEvent</td>
+    <td class="tg-0pky" rowspan="4"><code>createEvent</code> / <code>editEvent</code></td>
     <td class="tg-0pky">EVENT_NAME</td>
     <td class="tg-0pky">Only contain alphanumeric characters and spaces, and should not be blank</td>
   </tr>
@@ -403,7 +376,7 @@ Action | Format, Examples
   </tr>
   <tr>
     <td class="tg-0pky">TAG</td>
-    <td class="tg-0pky">Alphanumeric with no spaces</td>
+    <td class="tg-0pky">Only contain alphanumeric characters with no spaces in between, but can be blank</td>
   </tr>
   <tr>
     <td class="tg-0pky"><code>deleteMember</code> / <code>deleteEvent</code></td>
