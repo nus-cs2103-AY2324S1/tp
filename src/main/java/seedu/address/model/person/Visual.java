@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Object for export.
+ * Object for the visual representation that user wants to export.
  */
 public class Visual {
     public static final String MESSAGE_CONSTRAINTS =
@@ -13,12 +13,12 @@ public class Visual {
     public final String visual;
 
     /**
-     * All valid sequences.
+     * All valid visual representations to be exported.
      */
     public enum ValidVisual { TABLE, BAR; }
 
     /**
-     * Constructs a {@code MrtStation}.
+     * Constructs a {@code Visual}.
      *
      * @param visual The visual representation type you want to export.
      */
