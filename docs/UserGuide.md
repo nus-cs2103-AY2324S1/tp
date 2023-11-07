@@ -115,7 +115,7 @@ For each interview, we see the following details:
 | Interview        |
 |------------------|
 | Applicant's Name |
-| Job Role         |
+| Job Title        |
 | Start Time       |
 | End Time         |
 | Rating           |
@@ -151,7 +151,7 @@ For each interview, we see the following details:
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+A pop up window containing the link as shown below will appear to lead you to **InterviewHub** User Guide.
 
 ![help message](images/helpMessage.png)
 
@@ -159,13 +159,13 @@ Format: `help`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits **InterviewHub**.
 
 Format: `exit`
 
 ### Clearing all applicants and interviews : `clear`
 
-Clears all applicants and interviews from the address book.
+Clears all applicants and interviews from **InterviewHub**.
 
 <div markdown="block" class="alert alert-warning">
 **:exclamation: Warning:** <br>
@@ -184,7 +184,7 @@ InterviewHub data are saved in the hard disk automatically after any command tha
 
 ### Adding an applicant : `add-a`
 
-Adds an applicant to the address book.
+Adds an applicant to **InterviewHub**.
 
 Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
 
@@ -195,7 +195,7 @@ Examples:
 
 ### Deleting an applicant : `delete-a`
 
-Deletes the specified applicant from the address book.
+Deletes the specified applicant from **InterviewHub**.
 
 Format: `delete-a INDEX`
 
@@ -210,7 +210,7 @@ Examples:
 
 ### Editing an applicant : `edit-a`
 
-Edits an existing applicant in the address book.
+Edits an existing applicant in **InterviewHub**.
 
 Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
@@ -246,7 +246,6 @@ Examples:
 
 Before find-a command:
 
-![]
 * `find-a n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find-a n/alex david'](images/findAlexDavidResult.png)
 * `find-a p/874 a/serangoon ang` returns `97438807`, `Serangoon Gardens`,
@@ -257,7 +256,7 @@ Before find-a command:
 
 ### Listing all applicants : `list-a`
 
-Shows a list of all applicants in the address book onto the GUI.
+Shows a list of all applicants in **InterviewHub** onto the GUI.
 
 Format: `list-a`
 
@@ -267,7 +266,7 @@ Format: `list-a`
 
 ### Adding an interview : `add-i`
 
-Adds an interview to the address book.
+Adds an interview to **InterviewHub**.
 
 Format: `add-i app/APPLICANT_ID jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME`
 
@@ -278,8 +277,10 @@ Format: `add-i app/APPLICANT_ID jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DA
 | `START_DATE_AND_TIME` | Starting time of the interview                            | Must be in one of the accepted formats stated below AND must be before the end time AND must be on the same day as the end time                         |
 | `END_DATE_AND_TIME`   | Ending time of the interview                              | Must be in one of the accepted formats stated below AND must be after the start time AND must be on the same day as the start time                      |
 
-:information_source: JOB_ROLE allows empty strings to be entered to handle situations where the applicant is applying
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:** JOB_ROLE allows empty strings to be entered to handle situations where the applicant is applying
 to the company in general.
+</div>
 
 List of accepted date formats:
   * DD/MM/YYYY and time:
@@ -319,16 +320,16 @@ Example:
 
 ### Deleting an interview : `delete-i`
 
-Deletes the interview at the specified `INDEX` from the address book.
+Deletes the interview at the specified `INTERVIEW_INDEX` from **InterviewHub**
 
-Format: `delete-i INDEX`
+Format: `delete-i INTERVIEW_INDEX`
 
-| Parameter | Representation                                                   | Constraints                                                                                                                                             |
-|-----------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`   | The index of the target interview as shown in the interview list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list |
+| Parameter         | Representation                                                   | Constraints                                                                                                                                             |
+|-------------------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list |
 
 Examples:
-* `delete-i 1` deletes the 1st interview in the address book.
+* `delete-i 1` deletes the 1st interview in **InterviewHub**.
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -391,15 +392,19 @@ Find interviews which jobs title contain any of the given keywords.
 
 Format: `find-i KEYWORD [MORE_KEYWORDS]`
 
+| Parameter         | Representation                             | Constraints                                                                                 |
+|-------------------|--------------------------------------------|---------------------------------------------------------------------------------------------|
+| `KEYWORD`         | The job title the interview is assigned of | Each keyword must not contain any spaces, otherwise it will be treated as multiple keywords |
+
 * The search is case-insensitive. e.g. `ANALYST` will match `analyst`
 * The order of the keywords does not matter. e.g. `Software Engineer` will match `Engineer Software`
 * Only the job title is searched.
 * Only full words will be matched e.g. `Analyst` will not match `Analysts`
-* Applicants matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Software Engineer` will return `Software-Developer`, `System-Engineer`
+* Interviews matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Software Engineer` will return interviews with the job title of `Software Developer` and `System Engineer`
 
 Examples:
-* `find-i software data` returns `Software-Engineer` and `Data-Analyst`.
+* `find-i software data` returns `Software Engineer` and `Data Analyst`.
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -413,7 +418,7 @@ Format: `list-i`
 
 ### Listing all free time for the given day : `list-freetime`
 
-Lists all the free time for the given day
+Lists all the free time for the given `DATE`.
 
 Format: `list-freetime DATE`
 
@@ -446,7 +451,7 @@ Accepted time formats (to replace `DATE` with):
 ### Listing all interviews for today : `list-i-today`
 
 Displays all the interviews that the user has on the day the 
-command is executed
+command is executed.
 
 Format: `list-i-today`
 
@@ -466,15 +471,13 @@ Example: `list-i-today`
 
 ### Marking an interview : `mark`
 
-Mark the specified interview in the address book.
+Mark the specified `INTERVIEW_INDEX` in the **InterviewHub** as done.
 
-Format: `mark INDEX`
+Format: `mark INTERVIEW_INDEX`
 
-* Marks the interview at the specified `INDEX` as done.
-* The `INDEX` refers to the index number shown in the displayed interview list.
-* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of
-valid integers is the number of interviews currently displayed in the interview
-list.
+| Parameter         | Representation                                                   | Constraints                                                                                                                                             |
+|-------------------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list |
 
 Examples:
 * `mark 1` marks the first interview shown on the list as done.
@@ -484,24 +487,35 @@ Examples:
 
 ### Rating an interview : `rate`
 
-Rate the specified interview in the address book.
+Rate the specified `INTERVIEW_INDEX` in the **InterviewHub** with the indicated `RATING`.
 
-Format: `rate INDEX RATING`
+Format: `rate INTERIVEW_INDEX RATING`
 
-* Rates the interview at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed interview list.
-* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list.
-* The `RATING` must be a non-negative unsigned one decimal place number between 0.0 to 5.0 inclusive.
+| Parameter         | Representation                                                   | Constraints                                                                                                                                             |
+|-------------------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list |
+| `RATING`          | The rating number to be assigned to the interview indicated      | Must be a positive unsigned one decimal place number between 0.0 to 5.0 inclusive                                                                       |
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note about the command usage.**<br>
+* The interview has to be marked done before it is can be rated.
+* The new rating will always replace the existing rating.
+</div>
 
 Examples:
 * `rate 1 3.0` rates the first interview with a rating of 3.0.
+
+Before rating the interview at `INTERVIEW_INDEX` 1:
+![beforerate](images/beforerate.png)
+
+After rating the interview at `INTERVIEW_INDEX` 1 with a `RATING` of 4.0:
+![afterrate](images/afterrate.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
 ### Listing all completed interview : `list-i-done`
 
-Shows a list of all interviews in the address book 
-that are done onto the GUI.
+Shows a list of all the interviews in **InterviewHub** that are done onto the GUI.
 
 Format: `list-i-done`
 
@@ -509,8 +523,7 @@ Format: `list-i-done`
 
 ### Listing all incomplete interview : `list-i-not-done`
 
-Show a list of all interviews in the address book that are 
-not done onto the GUI.
+Show a list of all the interviews in **InterviewHub** that are not done onto the GUI.
 
 Format:`list-i-not-done`
 
@@ -518,17 +531,31 @@ Format:`list-i-not-done`
 
 ### Sorting interviews by rating : `sort-rate`
 
-Sort the interview list by rating in descending order (highest to the lowest rating).
+Sort the shown interview list by rating in descending order (highest to the lowest rating).
 
 Format: `sort-rate`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+To sort the full unfiltered interview list, use the command `list-i` before using `sort-rate`.
+</div>
+
+Before `sort-rate`:
+![beforesort](images/beforesort.png)
+
+After `sort-rate`:
+![aftersort](images/aftersort.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
 ### Sorting interviews by start-time : `sort-time`
 
-Sort the interview list by interview start time
+Sort the shown interview list by interview start time
 in chronologically ascending order (interviews with earlier start times
 will be shown first)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+To sort the full unfiltered interview list, use the command `list-i` before using `sort-time`.
+</div>
 
 Format: `sort-time`
 
@@ -539,7 +566,7 @@ Format: `sort-time`
 
 InterviewHub data are saved automatically as a JSON file `[JAR file location]/data/interviewhub.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 If your changes to the data file makes its format invalid, InterviewHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
