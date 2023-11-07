@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.SortIn;
 
 /**
- * Sorts students in the address book by name.
+ * Sorts students in the address book by their name.
  */
 public class SortCommand extends Command {
 
