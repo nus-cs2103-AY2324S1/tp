@@ -421,10 +421,10 @@ when editing the tags of the member/event:
 3. Edit current list of tags attached to the member/event
 4. Delete specific tags from the current list of tags attached to the member/event
 
-### Allow users to create/edit event with name containing non-alphanumeric characters
+### Allow users to create and edit a member/event with name containing non-alphanumeric characters
 **Current Implementation**:
-* **Current Issue**: Event name only accepts alphanumeric characters and restricts the user from entering special characters
-into the event name, which should be allowed as event names can contain special characters.
+* **Current Issue**: Member/event name only accepts alphanumeric characters and restricts the user from entering special characters
+into the member/event name, which should be allowed as member/event names can contain special characters.
 * **Example**: The user wants to create a new event named "Raffles Hall's Musical Production" and the user enters 
 `createEvent n/Raffles Hall's Musical Production l/Raffles Hall d/2023-09-19` but the message "Names should only contain 
 alphanumeric characters and spaces, and it should not be blank" is shown to the user instead of accepting it as a valid event. This is
@@ -432,8 +432,8 @@ due to the presence of the special character `'` in the event name.
 
 **Proposed solution:**
 
-We propose to allow the `createEvent` and `editEvent` commands to accept special characters in the event name and not 
-to be restricted to just alphanumeric characters.
+We propose to allow the `createMember`, `editMember` , `createEvent` and `editEvent` commands to accept special 
+characters in the name field and not to be restricted to just alphanumeric characters.
 
 
 --------------------------------------------------------------------------------------------------------------------
