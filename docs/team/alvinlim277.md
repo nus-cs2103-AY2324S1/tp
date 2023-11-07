@@ -19,9 +19,9 @@ Designed to cater to Command Line Interface (CLI) enthusiasts while also featuri
   - Justification: this feature improves the user experience by allowing them to personalise the application to suit their needs, especially if they are used to other command keywords from other CLI interfaces they might be familiar with.
   - Highlights: this feature risked introducing unecessary dependencies so some consideration of alternatives had to be done to pick the most non-intrusive implementation.
 - **Enhancements implemented:**
-    - Did the initial separation of display for Patients and Specialists (Pull request [#62](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/62))
-    - Made location field specific to Specialists (Pull request [#73](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/73))
-    - Made Find Command work with substring search (Pull request [#88](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/88))
+    - Did the initial separation of display for `Patients` and `Specialists` (Pull request [#62](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/62))
+    - Made `location` field specific to `Specialists` (Pull request [#73](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/73))
+    - Made `find` command work with substring search (Pull request [#88](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/88))
 - **Contributions to Documentation:**
     - **User Guide:** 
       - Added documentation for the `addsc` and `delsc` commands.

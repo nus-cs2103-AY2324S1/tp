@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import javax.swing.text.View;
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;

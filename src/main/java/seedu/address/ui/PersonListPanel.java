@@ -32,6 +32,7 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
+        // Solution below adapted from AI tool output
         // Set the text initially to handle the case when personList is empty
         if (personList.isEmpty()) {
             personType.setText("No data found");
@@ -41,7 +42,7 @@ public class PersonListPanel extends UiPart<Region> {
             personType.setText("Specialists");
         }
 
-        // set the text fill color after JavaFX initialization to prevent race condition
+        // Set the text fill color after JavaFX initialization to prevent race condition
         Platform.runLater(() -> {
             if (personList.isEmpty()) {
                 personType.setTextFill(Color.GREY);
