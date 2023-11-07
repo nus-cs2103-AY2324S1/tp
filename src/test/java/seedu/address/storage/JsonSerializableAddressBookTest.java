@@ -60,7 +60,7 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_invalidScheduleFile_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_SCHEDULE_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalArgumentException.class, MESSAGE_CONSTRAINTS,
+        assertThrows(IllegalValueException.class, MESSAGE_CONSTRAINTS,
                 dataFromFile::toModelType);
     }
 
