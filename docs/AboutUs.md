@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Shah Saumya Snehal
 
-<img src="images/lordsaumya.png" width="200px">
+<img src="images/team-pics/lordsaumya.png" width="200px">
 
 [[github](https://github.com/LordSaumya)]
 [[portfolio](team/lordsaumya.md)]
@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Kok Fangyu Inez
 
-<img src="images/inezkok.png" width="200px">
+<img src="images/team-pics/inezkok.png" width="200px">
 
 [[github](http://github.com/inezkok)]
 [[portfolio](team/inezkok.md)]
@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lim Jin Yin
 
-<img src="images/miljyy.png" width="200px">
+<img src="images/team-pics/miljyy.png" width="200px">
 
 [[github](http://github.com/miljyy)]
 [[portfolio](team/miljyy.md)]
@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Kee Song Yang
 
-<img src="images/s0ngyang.png" width="200px">
+<img src="images/team-pics/s0ngyang.png" width="200px">
 
 [[github](http://github.com/s0ngyang)]
 [[portfolio](team/s0ngyang.md)]
@@ -51,7 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jason Ray
 
-<img src="images/jasonray168.png" width="200px">
+<img src="images/team-pics/jasonray168.png" width="200px">
 
 [[github](https://github.com/JasonRay168)]
 [[portfolio](team/jasonray168.md)]
