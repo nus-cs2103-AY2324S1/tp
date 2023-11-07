@@ -63,19 +63,19 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+![help message](images/helpMessage.png)
 
 ### Viewing course : `course`
 
 Views course information and tutorial timings.
 
-![view course](images/viewCourse.png)
-
 Format: `course c/COURSE_CODE`
 
-Example: `course c/CS1231S` returns the course information and tutorial timings for CS1231S.
+Example: `course c/CS2103T` returns the course information and tutorial timings for CS2103T.
+
+![view course](images/viewCourse.png)
 
 If you are unsure about the course code, you can simply type `course` and a list of all courses will be shown.
 
@@ -89,16 +89,20 @@ CS2103T Laboratory 10:00-12:00
 
 ### Adding a default course : `teach`
 
-Adds a default course to the address book.
+The default course is usually the course that you are currently teaching.
 
-![teach command](images/teachCourse.png)
+This command will add a default course to the address book.
 
 Format: `teach c/COURSE_CODE`
+
+Expected outcome:
 - Updates the name of the window to the default course.
 - Filters the list of TAs teaching under the course automatically.
 - The default course is saved even after the user closes the application.
 
-Example: `teach c/CS2103T` sets the default course to the given course code.
+Example: `teach c/CS2103T` sets the default course to the course CS2103T.
+
+![teach command](images/teachCourse.png)
 
 When the command succeeds:
 
@@ -114,9 +118,13 @@ When the command fails:
 
 Resets the default course in the address book.
 
-![clearteach command](images/clearTeach.png)
+This will revert the changes made by the `teach` command.
+
+If no default course is set, the command will execute successfully but nothing will happen.
 
 Example: `clearteach`
+
+![clearteach command](images/clearTeach.png)
 
 When the command succeeds:
 
@@ -125,8 +133,6 @@ When the command succeeds:
 ### Adding a Teaching Assistant: `add`
 
 Adds a new teaching assistant to TAManager.
-
-![add TA](images/addTA.png)
 
 Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR`
 
@@ -140,8 +146,11 @@ Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
 - `HOUR` should be an integer
 
-Examples:
-- `add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx from/08:00 to/12:00 t/parttime c/CS2103T h/4`
+Example:
+`add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx from/08:00 to/12:00 t/parttime c/CS2103T h/4` will add a new teaching assistant named Rayner Toh to TAManager.
+
+![add TA](images/addTA.png)
+
 
 When the command succeeds:
 
@@ -174,8 +183,6 @@ and optionally end with an alphabet.`
 
 Edits a teaching assistant in TAManager.
 
-![edit TA](images/editTA.png)
-
 Format: `edit INDEX n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR`
 
 - `NAME` should be a string.
@@ -188,8 +195,10 @@ Format: `edit INDEX n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TA
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
 - `HOUR` should be an integer
 
-Examples:
-- `edit INDEX tele/@raynertohjingxiang`
+Example: `edit INDEX tele/@raynertohjingxiang`
+
+![edit TA](images/editTA.png)
+
 
 When the command succeeds:
 
@@ -222,8 +231,6 @@ When the command fails:
 
 Removes the specified teaching assistant from TAManager.
 
-![remove TA](images/deleteTA.png)
-
 Format: `delete INDEX`
 
 - Deletes the teaching assistant at the specified `INDEX`.
@@ -234,6 +241,8 @@ Examples:
 
 - `list` followed by `delete 2` deletes the 2nd teaching assistant in the address book.
 - `find n/Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the `find` command.
+
+![remove TA](images/deleteTA.png)
 
 When the command succeeds:
 
@@ -263,8 +272,6 @@ When the command fails:
 
 Finds specified teaching assistants from the address book using search parameters.
 
-![find TA](images/findTA.png)
-
 Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
 
 - We can search by name, course or free time, using the prefixes `n/`, `c/` or `d/ from/ to/` respectively.
@@ -282,6 +289,8 @@ Examples:
 - `find n/Alex c/cs1231s` returns all teaching assistants with names containing `alex` and are teaching `cs1231s`.
 - `find c/cs2103t d/1 from/10:00 to/12:00` returns all teaching assistants that are teaching `cs2103t` and are free on `Monday` from `10:00` to `12:00`.
 
+![find TA](images/findTA.png)
+
 When the command succeeds:
 
 ```
@@ -297,11 +306,7 @@ When the command fails:
 
 Displays a list of all teaching assistants in the address book.
 
-![list TA](images/listTA.png)
-
 Format: `list`
-
-Example: `list`
 
 When the command succeeds:
 
@@ -310,12 +315,11 @@ Listed all teaching assistants
 [list of TAs]
 ```
 
-<<<<<<< Updated upstream
+![list TA](images/listTA.png)
+
 ### Updating Hours for All TAs in View: `hour`
 
 Updates the hour field to all TAs in the current list.
-
-![update Hour](images/addHours.png)
 
 Format: `hour HOUR`
 
@@ -329,6 +333,8 @@ Examples:
 - `hour 4` will add 4 hours to all TAs in the address book if you are at the default view of all TAs.
 - `find c/CS1231S` then `hour 4` will add 4 hours to all `CS1231S` TAs and other TAs will not be affected.
 
+![update Hour](images/addHours.png)
+
 When the command succeeds:
 
 ```
@@ -339,14 +345,9 @@ When the command fails:
 
 - Invalid command format (updated new hour is invalid, either below 0 or above 9999): `Invalid command format!`
 
-=======
->>>>>>> Stashed changes
-
 ### Edit free time for a teaching assistant: `editft`
 
 Edits the free time for a specified day for a TA with a specified index.
-
-![update Hour](images/editFreeTime.png)
 
 Format: `editft INDEX d/DAY from/FROM to/TO`
 
@@ -356,6 +357,8 @@ Format: `editft INDEX d/DAY from/FROM to/TO`
 Examples:
 
 - `editft 1 d/2 from/13:00 to/15:00` will update the free time of the TA with index 1 by setting his Tuesday free time to be 13:00 to 15:00.
+
+![update Hour](images/editFreeTime.png)
 
 When the command succeeds:
 
