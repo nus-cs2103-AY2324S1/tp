@@ -258,7 +258,7 @@ Undoes the previous command that the user has entered, which has changed the dat
 
 Format: `redo`
 
-### Undoing a command: `redo`
+### Redoing a command: `redo`
 
 Redoes a command that the user has undone previously.
 
