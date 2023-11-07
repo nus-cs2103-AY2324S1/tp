@@ -67,7 +67,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Set<Tag> tags = parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).orElse(null);
         editPersonDescriptor.setTags(tags);
-     
         Set<Course> courses = parseCoursesForEdit(argMultimap.getAllValues(PREFIX_COURSE)).orElse(null);
         editPersonDescriptor.setCourses(courses);
 
