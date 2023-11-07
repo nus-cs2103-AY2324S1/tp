@@ -43,8 +43,8 @@ public class JsonAdaptedDatePrefsTest {
 
     @Test
     public void toModelType_nullAge_throwsIllegalValueException() {
-        JsonAdaptedDatePrefs prefs = new JsonAdaptedDatePrefs( null, VALID_HEIGHT.toString(), VALID_INCOME.toString(),
-                VALID_HOROSCOPE.toString());
+        JsonAdaptedDatePrefs prefs = new JsonAdaptedDatePrefs(null, VALID_HEIGHT.toString(),
+                VALID_INCOME.toString(), VALID_HOROSCOPE.toString());
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, prefs::toModelType);
     }
