@@ -93,6 +93,4 @@ public class EditTeamNameCommand extends Command {
                 .add("New Team Name", newTeamName)
                 .toString();
     }
-
-
 }
