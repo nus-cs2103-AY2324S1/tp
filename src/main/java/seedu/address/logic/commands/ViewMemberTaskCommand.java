@@ -15,12 +15,12 @@ import seedu.address.model.person.Member;
  */
 public class ViewMemberTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "viewTask";
+    public static final String COMMAND_WORD = "viewtask";
     public static final String COMMAND_ALIAS = "viewt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views all tasks assigned to the specified member "
-        + "by the index number used in the displayed member list. \n"
-        + "Parameters: INDEX (must be a positive integer) ";
+            + "by the index number used in the displayed member list. \n"
+            + "Parameters: INDEX (must be a positive integer) ";
 
     public static final String MESSAGE_ADD_TODO_SUCCESS = "Task output for member %1$s";
 

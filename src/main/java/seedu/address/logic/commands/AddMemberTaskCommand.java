@@ -20,13 +20,13 @@ import seedu.address.model.task.Task;
  */
 public class AddMemberTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "addTask";
+    public static final String COMMAND_WORD = "addtask";
     public static final String COMMAND_ALIAS = "addt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the specified member "
-        + "by the index number used in the displayed member list. \n"
-        + "Parameters: INDEX (must be a positive integer) "
-        + PREFIX_TASK + " {taskName} ";
+            + "by the index number used in the displayed member list. \n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_TASK + " {taskName} ";
 
     public static final String MESSAGE_ADD_TODO_SUCCESS = "Task added to member %1$s";
 
@@ -78,7 +78,7 @@ public class AddMemberTaskCommand extends Command {
         }
 
         return new Member(member.getName(), member.getPhone(), member.getEmail(),
-            member.getTelegram(), member.getTags(), updatedTasks);
+                member.getTelegram(), member.getTags(), updatedTasks);
 
     }
 
@@ -115,8 +115,8 @@ public class AddMemberTaskCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                .add("tasks", tasks)
-                .toString();
+                    .add("tasks", tasks)
+                    .toString();
         }
     }
 }

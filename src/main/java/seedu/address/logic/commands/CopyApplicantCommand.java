@@ -19,7 +19,7 @@ import seedu.address.model.person.Applicant;
  */
 public class CopyApplicantCommand extends Command {
 
-    public static final String COMMAND_WORD = "copyApplicant";
+    public static final String COMMAND_WORD = "copyapplicant";
     public static final String COMMAND_ALIAS = "cpa";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

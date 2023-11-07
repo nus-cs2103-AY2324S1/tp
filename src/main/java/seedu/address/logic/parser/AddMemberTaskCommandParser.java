@@ -4,10 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddMemberTaskCommand;
@@ -25,8 +23,13 @@ public class AddMemberTaskCommandParser implements Parser<AddMemberTaskCommand> 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TASK);
 
-        Index index;
+        if (argMultimap.getValue(PREFIX_TASK).isEmpty() || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberTaskCommand.MESSAGE_USAGE));
+        }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK);
+
+        Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -34,29 +37,17 @@ public class AddMemberTaskCommandParser implements Parser<AddMemberTaskCommand> 
                     AddMemberTaskCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK);
+        Task task;
+        try {
+            task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddMemberTaskCommand.MESSAGE_USAGE), pe);
+        }
 
         AddMemberTaskDescriptor addMemberTaskDescriptor = new AddMemberTaskDescriptor();
-
-        if (argMultimap.getValue(PREFIX_TASK).isPresent()) {
-            parseTasksForEdit(argMultimap.getAllValues(PREFIX_TASK)).ifPresent(addMemberTaskDescriptor::setTasks);
-        }
+        addMemberTaskDescriptor.setTasks(new ArrayList<>(List.of(task)));
 
         return new AddMemberTaskCommand(index, addMemberTaskDescriptor);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
-     */
-    private Optional<List<Task>> parseTasksForEdit(Collection<String> tasks) throws ParseException {
-        assert tasks != null;
-
-        if (tasks.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> taskSet = tasks.size() == 1 && tasks.contains("") ? Collections.emptyList() : tasks;
-        return Optional.of(ParserUtil.parseTasks(taskSet));
     }
 }

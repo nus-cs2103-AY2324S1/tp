@@ -3,15 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewMemberTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.task.Task;
 
 /**
  * Parses input arguments and creates a new ViewMemberTaskCommand object
@@ -33,20 +27,5 @@ public class ViewMemberTaskCommandParser implements Parser<ViewMemberTaskCommand
         }
 
         return new ViewMemberTaskCommand(index);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
-     */
-    private Optional<List<Task>> parseTasksForEdit(Collection<String> tasks) throws ParseException {
-        assert tasks != null;
-
-        if (tasks.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> taskSet = tasks.size() == 1 && tasks.contains("") ? Collections.emptySet() : tasks;
-        return Optional.of(ParserUtil.parseTasks(taskSet));
     }
 }
