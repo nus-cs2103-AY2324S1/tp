@@ -4,9 +4,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -33,16 +33,16 @@ public class FindCommandParser implements Parser<FindCommand> {
      *                        format
      */
     public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
 
         if (ArgumentMultimap.isAnyPrefixPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_MEDICAL,
                 PREFIX_TAG)
-                || !ArgumentMultimap.isAnyPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_APPOINTMENT)) {
+                || !ArgumentMultimap.isAnyPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_APPOINTMENT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_APPOINTMENT);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ID, PREFIX_APPOINTMENT);
 
         CompositePredicate findCommandPredicate = new CompositePredicate();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -50,9 +50,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             findCommandPredicate.add(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         }
 
-        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-            String[] nricKeywords = argMultimap.getValue(PREFIX_NRIC).get().trim().split("\\s+");
-            findCommandPredicate.add(new IdContainsKeywordsPredicate(Arrays.asList(nricKeywords)));
+        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+            String[] idKeywords = argMultimap.getValue(PREFIX_ID).get().trim().split("\\s+");
+            findCommandPredicate.add(new IdContainsKeywordsPredicate(Arrays.asList(idKeywords)));
         }
 
         if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {

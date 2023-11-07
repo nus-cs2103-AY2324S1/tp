@@ -14,9 +14,9 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_NRIC = "Please provide a valid NRIC";
+    public static final String MESSAGE_INVALID_ID = "Please provide a valid ID";
     public static final String MESSAGE_INVALID_NAME = "Please provide a valid Name";
-    public static final String MESSAGE_INVALID_NRIC_AND_NAME = "Please provide either a valid NRIC or Name";
+    public static final String MESSAGE_INVALID_ID_AND_NAME = "Please provide either a valid ID or Name";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -46,8 +46,8 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append("\nName: ")
                 .append(person.getName())
-                .append("; NRIC: ")
-                .append(person.getNric())
+                .append("; ID: ")
+                .append(person.getId())
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")

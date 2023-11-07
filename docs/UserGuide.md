@@ -105,7 +105,7 @@ Adds a patient into HealthSync, with the given patient information.
 * All the compulsory fields must be provided.
 * Optional fields like appointment and medical history need not be provided.
 
-Format: `add n/NAME id/IC_NUMBER [field] ...`
+Format: `add n/NAME id/ID_NUMBER [field] ...`
 
 >:bulb: Use `a` as a shortcut for `add`
 
@@ -134,7 +134,7 @@ Edits an existing patient's details in HealthSync.
 
 >:bulb: Update multiple fields in a single `edit` command to save time
 
-Format: `edit n/NAME or id/IC_NUMBER [field] ...`
+Format: `edit n/NAME or id/ID_NUMBER [field] ...`
 
 >:bulb: Use `e` as a shortcut for `edit`
 
@@ -147,18 +147,18 @@ Expected outputs when the command succeeds:
 * `Edited patient: ...`
 
 Expected outputs when command fails:
-* `INVALID name and/or NRIC! ...`
+* `INVALID name and/or ID! ...`
 
 ### Deleting a Patient or Field: `delete`
 
 Deletes the specified patient or an optional fields of the patient from HealthSync.
 
-* Deletes the patient or an optional field of the patient with the specified `n/NAME or id/IC_NUMBER`.
+* Deletes the patient or an optional field of the patient with the specified `n/NAME or id/ID_NUMBER`.
 * The name or IC must be valid.
 * To delete a specified field only instead of the entire patient, we indicate the field after the identification.
 * If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
 
-Format: `delete n/NAME or id/IC_NUMBER [field]`
+Format: `delete n/NAME or id/ID_NUMBER [field]`
 
 >:bulb: Use the shortcut `d` for faster patient-deleting
 
@@ -176,7 +176,7 @@ Expected outputs when the command succeeds:
 * `Deleted Patient's field: ...`
 
 Expected output when the command fails:
-* `The given combination of Name and NRIC does not match any patient in the Patients list`.
+* `The given combination of Name and ID does not match any patient in the Patients list`.
 
 ### Delete All Patients: `clear`
 
@@ -188,7 +188,7 @@ Format: `clear`
 
 ![result for 'clear'](images/clearResult.jpg)
 
-### Locating Patients by Name or NRIC: `find`
+### Locating Patients by Name or ID: `find`
 
 Searches the patient list for all patients matching the name or IC Number and returns their related information.
 
@@ -199,7 +199,7 @@ Searches the patient list for all patients matching the name or IC Number and re
 * For the name, only patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
   
-Format: `find n/NAME or id/IC_NUMBER`
+Format: `find n/NAME or id/ID_NUMBER`
 
 >:bulb: Use the shortcut `f` for faster patient-finding
 
@@ -444,7 +444,7 @@ The 2 identifying fields of a patient are given below:
 | Tag   | Representative Value  | Example Usage  | General Form in Commands |
 |-------|-----------------------|----------------|--------------------------|
 | `n/`  | Name                  | `n/Alex`       | `n/NAME`                 |
-| `id/` | Identification Number | `id/S2345678A` | `id/IC_NUMBER`           |
+| `id/` | Identification Number | `id/S2345678A` | `id/ID_NUMBER`           |
 
 1 or more identifying fields must be specified in each command, unless stated otherwise.
 
@@ -465,11 +465,11 @@ Unless stated otherwise, these fields are optional.
 
 The standard unique identifier for your patient. Each patient should have a unique alphanumeric name assigned to them.
 
-#### NRIC
+#### ID
 
 The ID-based unique identifier for your patient. Each patient should have a unique alphanumeric ID assigned to them.
 
-There is no verification system in place for NRIC. This allows you to use your custom identifier for your patients, if
+There is no verification system in place for ID. This allows you to use your custom identifier for your patients, if
 you wish.
 
 #### Phone Number
@@ -568,11 +568,11 @@ JavaScript Object Notation. This is the file format used by HealthSync to save a
 |----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**       | `h`      | `help`                                                                                                                                         |
 | **List**       | `ls`     | `list`                                                                                                                                         |
-| **Add**        | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
-| **Edit**       | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                 |
+| **Add**        | `a`      | `add n/NAME id/ID_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
+| **Edit**       | `e`      | `edit n/NAME [field]` *or* `edit id/ID_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                 |
 | **Delete**     | `d`      | `delete n/NAME`                                                                                                                                |
 | **Clear**      | `c`      | `clear`                                                                                                                                        |
-| **Find**       | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/T0123436F`                                  |
+| **Find**       | `f`      | `find n/NAME [field]` *or* `find id/ID_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/T0123436F`                                  |
 | **Log**        | `l`      | `log`                                                                                                                                          |
 | **Append Log** | `al`     | `alog`                                                                                                                                         |
 | **Clear Log**  | `cl`     | `clog`                                                                                                                                         |

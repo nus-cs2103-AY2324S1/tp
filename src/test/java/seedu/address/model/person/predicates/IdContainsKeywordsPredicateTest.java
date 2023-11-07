@@ -3,7 +3,7 @@ package seedu.address.model.person.predicates;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,10 +15,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class IdContainsKeywordsPredicateTest {
-    private static final String QUERY_NRIC_1 = "T0123456I";
-    private static final String QUERY_NRIC_2 = "T2468101Z";
-    private static final List<String> FIRST_KEYWORD_LIST = Collections.singletonList(QUERY_NRIC_1);
-    private static final List<String> SECOND_KEYWORD_LIST = Arrays.asList(QUERY_NRIC_1, QUERY_NRIC_2);
+    private static final String QUERY_ID_1 = "T0123456I";
+    private static final String QUERY_ID_2 = "T2468101Z";
+    private static final List<String> FIRST_KEYWORD_LIST = Collections.singletonList(QUERY_ID_1);
+    private static final List<String> SECOND_KEYWORD_LIST = Arrays.asList(QUERY_ID_1, QUERY_ID_2);
 
     @Test
     public void equals() {
@@ -44,36 +44,36 @@ public class IdContainsKeywordsPredicateTest {
 
     @Test
     public void hashCodeTest() {
-        assertEquals(Objects.hash(PREFIX_NRIC, FIRST_KEYWORD_LIST),
+        assertEquals(Objects.hash(PREFIX_ID, FIRST_KEYWORD_LIST),
                 new IdContainsKeywordsPredicate(FIRST_KEYWORD_LIST).hashCode());
-        assertEquals(Objects.hash(PREFIX_NRIC, SECOND_KEYWORD_LIST),
+        assertEquals(Objects.hash(PREFIX_ID, SECOND_KEYWORD_LIST),
                 new IdContainsKeywordsPredicate(SECOND_KEYWORD_LIST).hashCode());
     }
 
     @Test
-    public void test_nricContainsKeywords_returnsTrue() {
+    public void test_idContainsKeywords_returnsTrue() {
         // Exact Match
         IdContainsKeywordsPredicate predicate = new IdContainsKeywordsPredicate(FIRST_KEYWORD_LIST);
-        assertTrue(predicate.test(new PersonBuilder().withNric(QUERY_NRIC_1).build()));
+        assertTrue(predicate.test(new PersonBuilder().withId(QUERY_ID_1).build()));
 
         // Lower-case keywords
-        predicate = new IdContainsKeywordsPredicate(Collections.singletonList(QUERY_NRIC_1.toLowerCase()));
-        assertTrue(predicate.test(new PersonBuilder().withNric(QUERY_NRIC_1).build()));
+        predicate = new IdContainsKeywordsPredicate(Collections.singletonList(QUERY_ID_1.toLowerCase()));
+        assertTrue(predicate.test(new PersonBuilder().withId(QUERY_ID_1).build()));
     }
 
     @Test
-    public void test_nricDoesNotContainKeywords_returnsFalse() {
+    public void test_idDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         IdContainsKeywordsPredicate predicate = new IdContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withNric(QUERY_NRIC_1).build()));
+        assertFalse(predicate.test(new PersonBuilder().withId(QUERY_ID_1).build()));
 
         // Non-matching keyword
         predicate = new IdContainsKeywordsPredicate(FIRST_KEYWORD_LIST);
-        assertFalse(predicate.test(new PersonBuilder().withName(QUERY_NRIC_2).build()));
+        assertFalse(predicate.test(new PersonBuilder().withName(QUERY_ID_2).build()));
 
-        // Keywords match phone, email and address, but does not match nric
+        // Keywords match phone, email and address, but does not match id
         predicate = new IdContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withNric(QUERY_NRIC_1).withPhone("12345")
+        assertFalse(predicate.test(new PersonBuilder().withId(QUERY_ID_1).withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 

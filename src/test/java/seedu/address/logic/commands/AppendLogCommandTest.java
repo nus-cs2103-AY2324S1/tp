@@ -288,12 +288,11 @@ public class AppendLogCommandTest {
 
         CommandResult commandResult = appendLogCommand.execute(model);
 
-        assertEquals(AppendLogCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+        assertEquals(AppendLogCommand.MESSAGE_DUPLICATE, commandResult.getFeedbackToUser());
 
-        assertEquals(model.getLogBook().getPersonList().size(), 3);
+        assertEquals(model.getLogBook().getPersonList().size(), 2);
         assertEquals(model.getLogBook().getPersonList().get(0), existingPerson1);
         assertEquals(model.getLogBook().getPersonList().get(1), existingPerson2);
-        assertEquals(model.getLogBook().getPersonList().get(2), personToAppend);
     }
 
     @Test

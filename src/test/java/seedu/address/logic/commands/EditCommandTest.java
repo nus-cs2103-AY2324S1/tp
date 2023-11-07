@@ -22,8 +22,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -49,7 +49,7 @@ public class EditCommandTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(new Name(person.getName().toString()),
-                new Nric(person.getNric().toString()), descriptor);
+                new Id(person.getId().toString()), descriptor);
 
         String expectedMessage =
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -85,7 +85,7 @@ public class EditCommandTest {
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditCommand editCommand = new EditCommand(new Name("Name"), null, editPersonDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{name=Name, nric=null" + ", editPersonDescriptor="
+        String expected = EditCommand.class.getCanonicalName() + "{name=Name, id=null" + ", editPersonDescriptor="
                 + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
@@ -152,7 +152,7 @@ public class EditCommandTest {
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        assertEquals(editedPerson.getNric(), personToEdit.getNric());
+        assertEquals(editedPerson.getId(), personToEdit.getId());
         assertEquals(editedPerson.getPhone(), personToEdit.getPhone());
         assertEquals(editedPerson.getAddress(), personToEdit.getAddress());
         assertEquals(editedPerson.getMedicalHistories(), personToEdit.getMedicalHistories());

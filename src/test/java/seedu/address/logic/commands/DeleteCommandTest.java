@@ -19,9 +19,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -35,7 +35,7 @@ public class DeleteCommandTest {
 
     private Name defaultName = new Name(PersonBuilder.DEFAULT_NAME);
 
-    private Nric defaultNric = new Nric(PersonBuilder.DEFAULT_NRIC);
+    private Id defaultId = new Id(PersonBuilder.DEFAULT_ID);
 
     private DeletePersonDescriptor defaultDescriptor = new DeletePersonDescriptor();
 
@@ -56,11 +56,11 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validNricUnfilteredList_success() {
-        Person personToDelete = new PersonBuilder().withNric("S1234567E").build();
+    public void execute_validIdUnfilteredList_success() {
+        Person personToDelete = new PersonBuilder().withId("S1234567E").build();
         model.addPerson(personToDelete);
-        Nric nric = personToDelete.getNric();
-        DeleteCommand deleteCommand = new DeleteCommand(nric, null, defaultDescriptor);
+        Id id = personToDelete.getId();
+        DeleteCommand deleteCommand = new DeleteCommand(id, null, defaultDescriptor);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -80,9 +80,9 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidNric_throwsCommandException() {
-        Nric invalidNric = new Nric("S000000X");
-        DeleteCommand command = new DeleteCommand(invalidNric, null, new DeletePersonDescriptor());
+    public void execute_invalidId_throwsCommandException() {
+        Id invalidId = new Id("S000000X");
+        DeleteCommand command = new DeleteCommand(invalidId, null, new DeletePersonDescriptor());
 
         assertThrows(CommandException.class, DeleteCommand.MESSAGE_PERSON_NOT_FOUND, () -> command.execute(model));
     }
@@ -94,7 +94,7 @@ public class DeleteCommandTest {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
         descriptor.setDeleteAppointment();
 
-        DeleteCommand command = new DeleteCommand(firstPerson.getNric(), null, descriptor);
+        DeleteCommand command = new DeleteCommand(firstPerson.getId(), null, descriptor);
         command.execute(model);
 
         Person editedPerson = model.getFilteredPersonList().get(0);
@@ -109,7 +109,7 @@ public class DeleteCommandTest {
         descriptor.setDeleteMedicalHistory();
         descriptor.setMedicalHistory(new HashSet<>());
 
-        DeleteCommand deleteCommand = new DeleteCommand(firstPerson.getNric(), null, descriptor);
+        DeleteCommand deleteCommand = new DeleteCommand(firstPerson.getId(), null, descriptor);
         deleteCommand.execute(model);
 
         Person editedPerson = model.getFilteredPersonList().get(0);
@@ -130,7 +130,7 @@ public class DeleteCommandTest {
         descriptor.setDeleteMedicalHistory();
         descriptor.setMedicalHistory(medicalHistories);
 
-        DeleteCommand deleteCommand = new DeleteCommand(secondPerson.getNric(), null, descriptor);
+        DeleteCommand deleteCommand = new DeleteCommand(secondPerson.getId(), null, descriptor);
         deleteCommand.execute(model);
 
         Person editedPerson = model.getFilteredPersonList().get(1);
@@ -181,7 +181,7 @@ public class DeleteCommandTest {
         descriptor.setDeleteMedicalHistory();
         descriptor.setMedicalHistory(medicalHistories);
 
-        DeleteCommand deleteCommand = new DeleteCommand(secondPerson.getNric(), null, descriptor);
+        DeleteCommand deleteCommand = new DeleteCommand(secondPerson.getId(), null, descriptor);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_INVALID_MEDICAL_HISTORY,
                 Messages.format(secondPerson));
@@ -227,14 +227,14 @@ public class DeleteCommandTest {
 
     @Test
     public void equalsDeleteCommand() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(defaultNric, null, defaultDescriptor);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(defaultId, null, defaultDescriptor);
         DeleteCommand deleteSecondCommand = new DeleteCommand(null, defaultName, defaultDescriptor);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(defaultNric, null, defaultDescriptor);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(defaultId, null, defaultDescriptor);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -276,8 +276,8 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        DeleteCommand deleteCommand = new DeleteCommand(defaultNric, defaultName, defaultDescriptor);
-        String expected = DeleteCommand.class.getCanonicalName() + "{nric=" + defaultNric + ", " + "name=" + defaultName
+        DeleteCommand deleteCommand = new DeleteCommand(defaultId, defaultName, defaultDescriptor);
+        String expected = DeleteCommand.class.getCanonicalName() + "{id=" + defaultId + ", " + "name=" + defaultName
                 + ", "
                 + "deletePersonDescriptor=" + defaultDescriptor + "}";
         assertEquals(expected, deleteCommand.toString());
@@ -306,7 +306,7 @@ public class DeleteCommandTest {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
         descriptor.setDeleteAppointment();
 
-        DeleteCommand deleteFieldsCommand = new DeleteCommand(firstPerson.getNric(), null, descriptor);
+        DeleteCommand deleteFieldsCommand = new DeleteCommand(firstPerson.getId(), null, descriptor);
         deleteFieldsCommand.execute(model);
 
         Person editedPerson = model.getFilteredPersonList().get(0);

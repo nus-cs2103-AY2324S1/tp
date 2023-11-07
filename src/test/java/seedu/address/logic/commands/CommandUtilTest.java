@@ -24,9 +24,9 @@ public class CommandUtilTest {
         Optional<Person> nameFetch = CommandUtil.findPersonByIdentifier(
                 TypicalPersons.ALICE.getName(), null, personList);
         Optional<Person> nricFetch = CommandUtil.findPersonByIdentifier(
-                null, TypicalPersons.ALICE.getNric(), personList);
+                null, TypicalPersons.ALICE.getId(), personList);
         Optional<Person> bothFetch = CommandUtil.findPersonByIdentifier(
-                TypicalPersons.ALICE.getName(), TypicalPersons.ALICE.getNric(), personList);
+                TypicalPersons.ALICE.getName(), TypicalPersons.ALICE.getId(), personList);
 
         assertTrue(nameFetch.isPresent());
         assertTrue(nricFetch.isPresent());
@@ -43,11 +43,11 @@ public class CommandUtilTest {
         personList.add(new PersonBuilder(TypicalPersons.ALICE).build());
         personList.add(new PersonBuilder(TypicalPersons.BENSON).build());
         Optional<Person> bothInList = CommandUtil.findPersonByIdentifier(
-                TypicalPersons.ALICE.getName(), TypicalPersons.BENSON.getNric(), personList);
+                TypicalPersons.ALICE.getName(), TypicalPersons.BENSON.getId(), personList);
         Optional<Person> nricInList = CommandUtil.findPersonByIdentifier(
-                TypicalPersons.CARL.getName(), TypicalPersons.BENSON.getNric(), personList);
+                TypicalPersons.CARL.getName(), TypicalPersons.BENSON.getId(), personList);
         Optional<Person> nameInList = CommandUtil.findPersonByIdentifier(
-                TypicalPersons.ALICE.getName(), TypicalPersons.CARL.getNric(), personList);
+                TypicalPersons.ALICE.getName(), TypicalPersons.CARL.getId(), personList);
 
         assertTrue(bothInList.isEmpty());
         assertTrue(nricInList.isEmpty());
@@ -60,11 +60,11 @@ public class CommandUtilTest {
         personList.add(new PersonBuilder(TypicalPersons.ALICE).build());
         personList.add(new PersonBuilder(TypicalPersons.BENSON).build());
         Optional<Person> fetchWithBoth = CommandUtil.findPersonByIdentifier(
-                TypicalPersons.CARL.getName(), TypicalPersons.CARL.getNric(), personList);
+                TypicalPersons.CARL.getName(), TypicalPersons.CARL.getId(), personList);
         Optional<Person> fetchWithName = CommandUtil.findPersonByIdentifier(
                 TypicalPersons.CARL.getName(), null, personList);
         Optional<Person> fetchWithNric = CommandUtil.findPersonByIdentifier(
-                null, TypicalPersons.CARL.getNric(), personList);
+                null, TypicalPersons.CARL.getId(), personList);
 
         assertTrue(fetchWithBoth.isEmpty());
         assertTrue(fetchWithName.isEmpty());
@@ -87,9 +87,9 @@ public class CommandUtilTest {
         Optional<Person> nameFetch = CommandUtil.findPersonByIdentifier(
                 TypicalPersons.ALICE.getName(), null, personList);
         Optional<Person> nricFetch = CommandUtil.findPersonByIdentifier(
-                null, TypicalPersons.ALICE.getNric(), personList);
+                null, TypicalPersons.ALICE.getId(), personList);
         Optional<Person> bothFetch = CommandUtil.findPersonByIdentifier(
-                TypicalPersons.ALICE.getName(), TypicalPersons.ALICE.getNric(), personList);
+                TypicalPersons.ALICE.getName(), TypicalPersons.ALICE.getId(), personList);
 
         assertEquals(Optional.empty(), nameFetch);
         assertEquals(Optional.empty(), nricFetch);
@@ -99,6 +99,6 @@ public class CommandUtilTest {
     @Test
     public void findPersonByIdentifier_nullList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> CommandUtil.findPersonByIdentifier(
-                TypicalPersons.ALICE.getName(), TypicalPersons.ALICE.getNric(), null));
+                TypicalPersons.ALICE.getName(), TypicalPersons.ALICE.getId(), null));
     }
 }

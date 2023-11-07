@@ -13,9 +13,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.enums.InputSource;
@@ -30,7 +30,7 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
-    private final String nric;
+    private final String id;
     private final String phone;
     private final String email;
     private final String address;
@@ -42,13 +42,13 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("nric") String nric,
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("id") String id,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address, @JsonProperty("appointment") String appointment,
                              @JsonProperty("medicalHistories") List<JsonAdaptedMedicalHistory> medicalHistories,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
-        this.nric = nric;
+        this.id = id;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -76,7 +76,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
-        this.nric = null;
+        this.id = null;
         this.appointment = null;
     }
 
@@ -85,8 +85,8 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        nric = source.getNric() != null
-            ? source.getNric().value
+        id = source.getId() != null
+            ? source.getId().value
             : null;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -150,13 +150,13 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (nric == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
         }
-        if (!Nric.isValidNric(nric)) {
-            throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
+        if (!Id.isValidId(id)) {
+            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
         }
-        final Nric modelNric = new Nric(nric);
+        final Id modelId = new Id(id);
 
         final Set<MedicalHistory> modelMedicalHistories = new HashSet<>(personMedicalHistory);
 
@@ -171,7 +171,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
         }
 
-        return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelAppointment,
+        return new Person(modelName, modelId, modelPhone, modelEmail, modelAddress, modelAppointment,
                 modelMedicalHistories, modelTags);
     }
 

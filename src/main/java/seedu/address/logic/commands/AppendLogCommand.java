@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-//import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LogBook;
 import seedu.address.model.Model;
@@ -23,6 +22,8 @@ public class AppendLogCommand extends UndoableCommand {
             + "Example 2: " + COMMAND_WORD_ALIAS;
 
     public static final String MESSAGE_SUCCESS = "The last filtered values have been added onto the logger tab.";
+
+    public static final String MESSAGE_DUPLICATE = "This result exists in the logger already.";
 
     public static final String MESSAGE_FAILURE = "Cannot log an empty list.";
 
@@ -51,7 +52,7 @@ public class AppendLogCommand extends UndoableCommand {
 
         for (Person person : model.getFoundPersonsList()) {
             if (model.getLogBook().hasPerson(person)) {
-                continue;
+                return new CommandResult(MESSAGE_DUPLICATE);
             }
             model.getLogBook().addPerson(person);
         }

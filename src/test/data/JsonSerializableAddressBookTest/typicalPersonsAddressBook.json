@@ -2,7 +2,7 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
-    "nric": "T7243948H",
+    "id": "T7243948H",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
@@ -11,7 +11,7 @@
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
-    "nric": "S1234567B",
+    "id": "S1234567B",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
@@ -20,7 +20,7 @@
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
-    "nric": "S8765432B",
+    "id": "S8765432B",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
@@ -29,7 +29,7 @@
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
-    "nric": "T1234567I",
+    "id": "T1234567I",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
@@ -38,7 +38,7 @@
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
-    "nric": "T1111111Z",
+    "id": "T1111111Z",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
@@ -47,7 +47,7 @@
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "nric": "M2222222Z",
+    "id": "M2222222Z",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
@@ -56,7 +56,7 @@
     "tags" : [ ]
   }, {
     "name" : "George Best",
-    "nric": "T7243948H",
+    "id": "T7243948H",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",

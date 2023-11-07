@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteCommand.DeletePersonDescriptor;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -32,7 +32,7 @@ public class DeleteCommandParserTest {
 
     private Name defaultName = new Name(PersonBuilder.DEFAULT_NAME);
 
-    private Nric defaultNric = new Nric(PersonBuilder.DEFAULT_NRIC);
+    private Id defaultId = new Id(PersonBuilder.DEFAULT_ID);
 
     @Test
     public void test_parse_validName() {
@@ -42,53 +42,53 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void test_parse_validNric() {
-        String userString = " id/" + PersonBuilder.DEFAULT_NRIC;
-        DeleteCommand deleteCommand = new DeleteCommand(defaultNric, null, defaultDescriptor);
+    public void test_parse_validId() {
+        String userString = " id/" + PersonBuilder.DEFAULT_ID;
+        DeleteCommand deleteCommand = new DeleteCommand(defaultId, null, defaultDescriptor);
         assertParseSuccess(parser, userString, deleteCommand);
     }
 
     @Test
     public void test_parse_descriptorAppointment() {
-        String userString = " id/" + PersonBuilder.DEFAULT_NRIC + " ap/";
+        String userString = " id/" + PersonBuilder.DEFAULT_ID + " ap/";
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
         descriptor.setDeleteAppointment();
-        DeleteCommand deleteCommand = new DeleteCommand(defaultNric, null, descriptor);
+        DeleteCommand deleteCommand = new DeleteCommand(defaultId, null, descriptor);
         assertParseSuccess(parser, userString, deleteCommand);
     }
 
     @Test
     public void test_parse_descriptorMedicalHistoryDeleteAll() {
-        String userString = " id/" + PersonBuilder.DEFAULT_NRIC + " m/";
+        String userString = " id/" + PersonBuilder.DEFAULT_ID + " m/";
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
         descriptor.setDeleteMedicalHistory();
         descriptor.setMedicalHistory(new HashSet<>());
-        DeleteCommand deleteCommand = new DeleteCommand(defaultNric, null, descriptor);
+        DeleteCommand deleteCommand = new DeleteCommand(defaultId, null, descriptor);
         assertParseSuccess(parser, userString, deleteCommand);
     }
 
     @Test
     public void test_parse_descriptorMedicalHistoryDeleteOne() {
-        String userString = " id/" + PersonBuilder.DEFAULT_NRIC + " m/tachycardia";
+        String userString = " id/" + PersonBuilder.DEFAULT_ID + " m/tachycardia";
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
         MedicalHistory medicalHistory = new MedicalHistory("tachycardia");
         HashSet<MedicalHistory> testSet = new HashSet<>();
         testSet.add(medicalHistory);
         descriptor.setDeleteMedicalHistory();
         descriptor.setMedicalHistory(testSet);
-        DeleteCommand deleteCommand = new DeleteCommand(defaultNric, null, descriptor);
+        DeleteCommand deleteCommand = new DeleteCommand(defaultId, null, descriptor);
         assertParseSuccess(parser, userString, deleteCommand);
     }
 
     @Test
     public void test_parse_descriptorInvalidField() {
-        String userString = "id/ " + PersonBuilder.DEFAULT_NRIC + " p/";
+        String userString = "id/ " + PersonBuilder.DEFAULT_ID + " p/";
         assertParseFailure(parser, userString,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void test_parse_missingNameAndNric() {
+    public void test_parse_missingNameAndId() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 

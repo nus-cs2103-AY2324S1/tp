@@ -16,11 +16,11 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICALHISTORY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -30,9 +30,9 @@ import static seedu.address.logic.commands.EditCommand.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -45,8 +45,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -63,7 +63,7 @@ public class EditCommandParserTest {
         // no field specified
         assertParseFailure(parser, PREFIX_NAME + VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
-        // no name or nric and no field specified
+        // no name or id and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
@@ -144,15 +144,15 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecifiedUsingID_success() {
         // phone
-        String userInput = COMMAND_WORD + " " + PREFIX_NRIC + VALID_NRIC + PHONE_DESC_AMY;
+        String userInput = COMMAND_WORD + " " + PREFIX_ID + VALID_ID + PHONE_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
-        EditCommand expectedCommand = new EditCommand(null, new Nric(VALID_NRIC), descriptor);
+        EditCommand expectedCommand = new EditCommand(null, new Id(VALID_ID), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = COMMAND_WORD + " " + PREFIX_NRIC + VALID_NRIC + EMAIL_DESC_AMY;
+        userInput = COMMAND_WORD + " " + PREFIX_ID + VALID_ID + EMAIL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(null, new Nric(VALID_NRIC), descriptor);
+        expectedCommand = new EditCommand(null, new Id(VALID_ID), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
     }
@@ -204,7 +204,7 @@ public class EditCommandParserTest {
     }
     @Test
     public void parse_invalidInput_throwsParseException() {
-        // Missing NAME or NRIC prefix
+        // Missing NAME or ID prefix
         String invalidInput = COMMAND_WORD + " " + INVALID_EMAIL_DESC;
         assertThrows(ParseException.class, () -> parser.parse(invalidInput));
     }
@@ -212,12 +212,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_validInput_returnsEditCommand() throws ParseException {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
-        // Valid input with NRIC
-        String validInputWithNric = COMMAND_WORD + " " + PREFIX_NRIC + VALID_NRIC_BOB + " "
+        // Valid input with ID
+        String validInputWithId = COMMAND_WORD + " " + PREFIX_ID + VALID_ID_BOB + " "
                 + PREFIX_PHONE + VALID_PHONE_BOB + " " + PREFIX_NAME + VALID_NAME_BOB;
-        EditCommand expectedCommandWithNric = new EditCommand(new Name(VALID_NAME_BOB),
-                new Nric(VALID_NRIC_BOB), descriptor);
-        assertEquals(parser.parse(validInputWithNric), expectedCommandWithNric);
+        EditCommand expectedCommandWithId = new EditCommand(new Name(VALID_NAME_BOB),
+                new Id(VALID_ID_BOB), descriptor);
+        assertEquals(parser.parse(validInputWithId), expectedCommandWithId);
 
         // Valid input with Name
         String validInputWithName = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_AMY + " "

@@ -22,8 +22,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -33,7 +33,7 @@ public class LogCommandTest {
 
     private Name defaultName = new Name(PersonBuilder.DEFAULT_NAME);
 
-    private Nric defaultNric = new Nric(PersonBuilder.DEFAULT_NRIC);
+    private Id defaultId = new Id(PersonBuilder.DEFAULT_ID);
 
     private final ObservableList<Person> foundPersonsList = FXCollections.observableArrayList();
     private final List<UndoableCommand> commandHistory = new ArrayList<>();

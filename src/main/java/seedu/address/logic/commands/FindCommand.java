@@ -18,8 +18,8 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "f";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
-            + ": Finds all Patients by name, NRIC or Appointment period, and displays them as a list.\n"
-            + "Name and NRIC should contain any of the specified keywords (case-insensitive) input.\n"
+            + ": Finds all Patients by name, ID or Appointment period, and displays them as a list.\n"
+            + "Name and ID should contain any of the specified keywords (case-insensitive) input.\n"
             + "Patients whose Appointment overlaps with the given period will be displayed in the list.\n"
             + "If multiple different search fields are specified, patients displayed will match all given fields.\n"
             + "Parameters: n/KEYWORD... OR id/KEYWORD... OR ap/APPOINTMENT [any additional unused conditions]...\n"

@@ -55,7 +55,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void nricparse_validArgs_returnsFindCommand() {
+    public void idparse_validArgs_returnsFindCommand() {
         CompositePredicate findCommandPredicate = new CompositePredicate();
         findCommandPredicate.add(new IdContainsKeywordsPredicate(Arrays.asList("T0100606Z", "T0206006Z")));
         // no leading and trailing whitespaces

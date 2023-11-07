@@ -16,9 +16,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -33,8 +33,8 @@ public class DeleteCommand extends UndoableCommand {
     public static final String COMMAND_WORD_ALIAS = "d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
-            + ": Delete the Patient identified by the full Name or NRIC of the patient.\n"
-            + "Parameters: n/NAME or id/NRIC\n"
+            + ": Delete the Patient identified by the full Name or ID of the patient.\n"
+            + "Parameters: n/NAME or id/ID\n"
             + "Fields that can be deleted: ap/APPOINTMENT m/MEDICAL_HISTORY \n"
             + "Example 1: " + COMMAND_WORD + " n/John Doe or " + COMMAND_WORD + " id/S1234567A " + "ap/ m/\n"
             + "Example 2: " + COMMAND_WORD_ALIAS + " n/Alex Yeoh or " + COMMAND_WORD_ALIAS + " id/T0123456F";
@@ -44,7 +44,7 @@ public class DeleteCommand extends UndoableCommand {
     public static final String MESSAGE_DELETE_PERSON_FIELD_SUCCESS = "Deleted Patient's field: %1$s";
 
     public static final String MESSAGE_PERSON_NOT_FOUND =
-            "The given combination of Name and NRIC does not match any patient in the Patient List.";
+            "The given combination of Name and ID does not match any patient in the Patient List.";
 
     public static final String MESSAGE_NO_APPOINTMENT_TO_DELETE = "Patient does not have an appointment to delete.";
 
@@ -68,18 +68,18 @@ public class DeleteCommand extends UndoableCommand {
      */
     private Person editedPerson;
     private final Name name;
-    private final Nric nric;
+    private final Id id;
     private final DeletePersonDescriptor deletePersonDescriptor;
 
     /**
-     * @param nric                   of the person in the filtered person list to
+     * @param id                   of the person in the filtered person list to
      *                               edit
      * @param name                   of the person in the filtered person list to
      *                               edit
      * @param deletePersonDescriptor details to delete the person with
      */
-    public DeleteCommand(Nric nric, Name name, DeletePersonDescriptor deletePersonDescriptor) {
-        this.nric = nric;
+    public DeleteCommand(Id id, Name name, DeletePersonDescriptor deletePersonDescriptor) {
+        this.id = id;
         this.name = name;
         this.deletePersonDescriptor = deletePersonDescriptor;
     }
@@ -89,7 +89,7 @@ public class DeleteCommand extends UndoableCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getUnfilteredPersonList();
 
-        Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, nric, lastShownList);
+        Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, id, lastShownList);
 
         if (personOptional.isEmpty()) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
@@ -142,7 +142,7 @@ public class DeleteCommand extends UndoableCommand {
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
 
-        return Objects.equals(nric, otherDeleteCommand.nric)
+        return Objects.equals(id, otherDeleteCommand.id)
                 && Objects.equals(name, otherDeleteCommand.name)
                 && Objects.equals(deletePersonDescriptor, otherDeleteCommand.deletePersonDescriptor);
     }
@@ -150,7 +150,7 @@ public class DeleteCommand extends UndoableCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("nric", nric)
+                .add("id", id)
                 .add("name", name)
                 .add("deletePersonDescriptor", deletePersonDescriptor)
                 .toString();
@@ -167,7 +167,7 @@ public class DeleteCommand extends UndoableCommand {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
-        Nric updatedNric = personToEdit.getNric();
+        Id updatedId = personToEdit.getId();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
@@ -206,7 +206,7 @@ public class DeleteCommand extends UndoableCommand {
             }
         }
 
-        return new Person(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress, updatedAppointment,
+        return new Person(updatedName, updatedId, updatedPhone, updatedEmail, updatedAddress, updatedAppointment,
                 updatedMedicalHistories, updatedTags);
     }
 
