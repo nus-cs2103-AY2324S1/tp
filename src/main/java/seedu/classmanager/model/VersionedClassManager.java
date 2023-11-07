@@ -45,11 +45,21 @@ public class VersionedClassManager extends ClassManager {
     /**
      * Removes all states other than the current state.
      */
-    public void reset(ReadOnlyClassManager newData) {
+    public void loadReset(ReadOnlyClassManager newData) {
         classManagerStateList.clear();
         classManagerStateList.add(newData);
         currentStatePointer = 0;
         resetData(classManagerStateList.get(currentStatePointer));
+    }
+
+    /**
+     * Removes all states other than the current state.
+     */
+    public void configReset() {
+        if (currentStatePointer > 0) {
+            classManagerStateList.subList(0, classManagerStateList.size() - 2).clear();
+        }
+        currentStatePointer = 0;
     }
 
     /**
