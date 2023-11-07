@@ -460,6 +460,107 @@ the lifeline reaches the end of diagram.
   * Cons: In the editing of schedule, a `Person` is needed to create a new `Schedule`. Thus, the tutor allocated to 
     the target schedule needs to be obtained and used to create a new `Schedule`.
 
+### List schedule feature
+
+The "List Schedule" feature allows users to list schedules in the address book. Below, we provide an example
+usage scenario and a detailed description of how the list schedule mechanism behaves at each step.
+
+![ListScheduleActivityDiagram](images/ListScheduleActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched with at least 1 schedule added.
+
+Step 2. The user executes `list-s` to view all added schedules.
+
+Step 3. The user can also choose to execute `list-s 1 m/0` where the index and `m/` status are optional parameters.
+
+Step 4. The `ListScheduleCommandParser` will be initialized to parse the user input, which it will check if `Index` and `Status`
+if they are `NULL` and valid, else it will throw a `ParseException`.
+
+Step 5. The `ListScheduleCommandParser` will then create a `ListScheduleCommand` with a `Index` and `Status` representing the user's input.
+
+Step 6. If `Index` is a valid integer, but it is not within the schedule list of indexes, `ListScheduleCommand::execute` will return `CommandException` 
+
+Step 7. `ListScheduleCommand::execute` then creates `TutorPredicate`, `StatusPredicate` or both predicates, depending on what parameters are present in the user input for `Index` and `Status` respectively.
+
+Step 8. `ListScheduleCommand::execute` then calls `ModelManager::getFilteredScheduleList` with the predicate as the argument.
+This method updates the list of `Schedule` in the model according to the predicate conditions and filters them.
+
+Step 9. Finally, the `ListScheduleCommand` object updates the schedule list to display the filtered schedule.
+
+The following sequence diagram shows how the above steps for list schedule operation works:
+
+![ListScheduleSequenceDiagram](images/ListScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `ListScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design rationale
+
+**Aspect: Filtering schedule by tutor name**
+* **Alternative 1:** Use an additional prefix to filter the list of schedules by tutor name.
+    * Pros: Provides users the flexibility to various filter options in 1 command.
+    * Cons: Too many prefixes and parameters for listing a schedule, which will make it too different from its `list-t` command counterpart in usage.
+* **Alternative 2 (current choice):** Have a separate command for finding schedule by tutor name.
+    * Pros: It is more intuitive to the user since there is already a similar command `find-t`.
+    * Cons: Requires separate commands for searching schedules by keywords in the tutor's name.
+
+
+### Find schedule feature
+
+The "Find Schedule" feature allows users to search for schedules based on the tutor's name.
+The following shows the activity diagram from when a user executes the `find-s` command:
+
+![FindScheduleActivityDiagram](images/FindScheduleActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched.
+
+Step 2. The user executes `find-s John Doe` to search for tutors with the name "John Doe". The command is parsed in the
+`AddressBookParser`.
+
+Step 3. `FindScheduleCommandParser` is created, and constructs a `NameContainsKeywordsPredicate` which matches for any of
+the search keywords. A `FindScheduleCommand` object is then constructed with this predicate.
+
+Step 4. The `LogicManager` calls the `execute` in `FindScheduleCommand` which sets the predicate of the filtered schedule
+list in `ModelManager` to be the predicate created earlier.
+
+Step 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
+`Logic`.
+
+Step 6. The filtered list of schedules is displayed to the user.
+
+The following sequence diagram shows how the above steps for find tutor operation works:
+
+![FindScheduleSequenceDiagram](images/FindScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `FindScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design Rationale
+
+**Aspect: Search criteria**
+- **Alternative 1 (current choice):** Only allowing users to search for schedules based on their names.
+    - Pros: This design provides a straightforward and clear search functionality for users, aligning with the common
+      understanding of searching for specific schedules by the assigned tutor's name.
+    - Pros: It simplifies the search process and reduces cognitive load for users, as they only need to provide the
+      tutor's name.
+    - Cons: If a user has incomplete or incorrect information about the tutor's name, they may not be able to find the
+      desired tutor.
+- **Alternative 2:** Specifying search criteria like start date time or end date time.
+    - Pros: Users would have the ability to search for schedules based on a wider range of criteria, such as start date time and end date time.
+    - Cons: Implementing advanced search criteria may lead to a more complex user interface and search mechanism,
+      potentially requiring additional user training or guidance.
+
+
 ### Delete Schedule Feature
 #### Implementation Details
 The delete schedule feature is facilitated by `DeleteScheduleCommand`, which extends from `Command` with the necessary implementation to delete a schedule by a given index.
