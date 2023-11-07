@@ -1,82 +1,69 @@
 ﻿<a name="br1"></a> 
 
-Austin's Project Portfolio Page
+## Austin's Project Portfolio Page
 
-Project: Staffsnap
+### Project: Staffsnap
 
-Staffsnap - An app for HR people.
+### Overview
+Staffsnap is an application for HR managers seeking to hire job candidates. By providing multiple useful features, it makes the tracking and hiring process much easier.
 
+### Summary of contributions
 Given below are my contributions to the project.
 
-● **New Feature**: (ﬁller content) Added the ability to undo/redo previous
+● **New Feature**: Confirmation command
 
-commands.
+○ What it does: This command will ask the user to confirm their choice before clearing the app's data.
 
-○ What it does: allows the user to undo all previous commands
+○ Justification: This feature prevents the HR person from accidentally deleting everything which will have drastic consequences.
 
-one at a time. Preceding undo commands can be reversed by
+○ Highlights: This enhancement was tricky to implement as it required the current state of the parser and the previous command inputed.
 
-using the redo command.
+○ Credits: Myself
 
-○ Justiﬁcation: This feature improves the product signiﬁcantly
+● **New Feature**: Duplicate handling
 
-because a user can make mistakes in commands and the app
+○ What it does: Duplicate interviews are handled by using a numerical identifier
 
-should provide a convenient way to rectify them.
+○ Justification: There might be multiple interviews of the same type like technical, hence having automatic handling makes things easier.
 
-○ Highlights: This enhancement affects existing commands and
+○ Highlights: This feature can be extended and reused to handle duplicates for other fields.
 
-commands to be added in future. It required an in-depth
+○ Credits: Myself
 
-analysis of design alternatives. The implementation too was
-
-challenging as it required changes to existing commands.
-
-○ Credits: *{mention here if you reused any code/ideas from*
-
-*elsewhere or if a third-party library is heavily used in the feature*
-
-*so that a reader can make a more accurate judgement of how*
-
-*much effort went into the feature}*
-
-● **New Feature**: Some text
-
-● **Code contributed**: [RepoSense](https://se-education.org/addressbook-level3/team/johndoe.html)[ ](https://se-education.org/addressbook-level3/team/johndoe.html)[link](https://se-education.org/addressbook-level3/team/johndoe.html)
+● **Code contributed**: [RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=austinhuang1203&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=AustinHuang1203&tabRepo=AY2324S1-CS2103T-W08-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 ● **Project management**:
 
-○ some text
+○ Released PRs every week and for every release.
+
+○ Completed all deliverables before deadline.
 
 ● **Enhancements to existing features**:
 
-○ Some text
+○ Rewrote the help command to provide more useful output to the user.
+
+○ Wrote various test cases for multiple classes to improve test coverage.
 
 ● **Documentation**:
 
 ○ User Guide:
 
-■ Added the userguides feature descriptions for
+■ Wrote the front part of the user guide including introduction, system requirements, etc.
 
-purge and ﬁlter
-
-■ Ported the userguide to github
+■ Wrote details on the features of adding interviews, confirmation/clear command and help command.
 
 ○ Developer Guide:
 
+■ Wrote details on the features of adding interviews, confirmation/clear command and help command.
 
 
-<a name="br2"></a> 
-
-■ Some text
 
 ● **Community**:
 
-○ Some text
+○ Reviewed and helped approve multiple PRs.
 
-● **Tools**:
+○ Fixed bugs that arose as a result of others code.
 
-○ Some text
+○ Helped to port the initial readme, userguide, etc. to github.
 
-● *{you can add/remove categories in the list above}*
 
