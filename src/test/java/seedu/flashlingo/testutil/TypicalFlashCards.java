@@ -90,8 +90,8 @@ public class TypicalFlashCards {
             .withTranslatedWord(CommandTestUtil.VALID_TRANSLATION_AMY, "")
             .build();
     public static final FlashCard BOB = new FlashCardBuilder().withOriginalWord(CommandTestUtil.VALID_ORIGINAL_WORD_BOB,
-                    "")
-            .withTranslatedWord(CommandTestUtil.VALID_TRANSLATION_BOB, "")
+                    CommandTestUtil.VALID_ORIGINAL_WORD_LANGUAGE)
+            .withTranslatedWord(CommandTestUtil.VALID_TRANSLATION_BOB, CommandTestUtil.VALID_TRANSLATION_LANGUAGE)
             .build();
     public static final String WORD_DESC_AMY = " " + PREFIX_ORIGINAL_WORD + CommandTestUtil.VALID_ORIGINAL_WORD_AMY;
     public static final String WORD_DESC_BOB = " " + PREFIX_ORIGINAL_WORD
