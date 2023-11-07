@@ -43,7 +43,7 @@ public class VersionedClassManager extends ClassManager {
     }
 
     /**
-     * Removes all states other than the current state.
+     * Resets class manager after a load command.
      */
     public void loadReset(ReadOnlyClassManager newData) {
         classManagerStateList.clear();
@@ -53,11 +53,16 @@ public class VersionedClassManager extends ClassManager {
     }
 
     /**
-     * Removes all states other than the current state.
+     * Removes all states other than the current state after a config command.
      */
     public void configReset() {
+        // Removes all states before the current state, if any
         if (currentStatePointer > 0) {
-            classManagerStateList.subList(0, classManagerStateList.size() - 2).clear();
+            classManagerStateList.subList(0, currentStatePointer).clear();
+        }
+        // Removes all states after the current state, if any
+        if (classManagerStateList.size() > 1) {
+            classManagerStateList.subList(1, classManagerStateList.size()).clear();
         }
         currentStatePointer = 0;
     }
