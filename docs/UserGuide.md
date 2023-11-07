@@ -48,9 +48,9 @@ applications.
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `jobfindr.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-3/tp/releases).
+2. Download the latest `JobFindr.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-3/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-4. Open a command terminal, `cd` into the folder you put the jar file in, and enter the command `java -jar jobfindr.jar`
+4. Open a command terminal, `cd` into the folder you put the jar file in, and enter the command `java -jar JobFindr.jar`
    to run the application.
 5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
@@ -93,6 +93,9 @@ applications.
 | Industry | `i/`   | Must start with an alphanumeric character                                                                           | Yes       | Alphabetical  |
 | Deadline | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 31 2030 1200) and cannot be earlier than the current date and time | Yes       | Chronological |
 | Type     | `t/`   | Possible values in "[Valid job types](#valid-job-types)"                                                            | Yes       | Alphabetical  |
+
+Applications with the same company and roles are considered duplicates. JobFindr does not allow the creation of
+duplicate jobs.
 
 ### Valid statuses
 
@@ -285,7 +288,8 @@ Finds all applications whose fields match the keywords provided.
 * An application will be listed only if all the keywords match. The keywords are case-insensitive.
 * Applications with partially matching keywords will not be listed.
     * e.g. searching for the keyword "Goo" will not list applications with "Google".
-* Searches for Deadline must be in the format `MMM DD YYYY HHMM` (e.g. Dec 31 2030 1200).
+* Searches for deadline must be in the format `MMM DD YYYY HHMM`.
+    * e.g. Dec 31 2030 1200 is a valid deadline.
 
 **Examples:**
 
@@ -308,6 +312,8 @@ Sorts the list based on the prefix provided.
 
 * A single valid `PREFIX` must be provided. Refer to "[Structure of a job application](#structure-of-a-job-application)"
   for the list of valid prefixes.
+* The sort order cannot be reversed.
+    * e.g. when sorting by company, companies cannot be listed from Z-A.
 * For optional fields, applications with empty fields will be listed first.
 
 **Examples:**

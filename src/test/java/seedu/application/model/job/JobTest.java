@@ -37,9 +37,10 @@ public class JobTest {
         editedChef = new JobBuilder(CHEF).withRole(VALID_ROLE_CLEANER).build();
         assertFalse(CHEF.isSameJob(editedChef));
 
-        // role differs in case, all other attributes same -> returns false
-        Job editedCleaner = new JobBuilder(CLEANER).withRole(VALID_ROLE_CLEANER.toLowerCase()).build();
-        assertFalse(CLEANER.isSameJob(editedCleaner));
+        // role and company differ in case, all other attributes same -> returns true
+        Job editedCleaner = new JobBuilder(CLEANER).withRole(VALID_ROLE_CLEANER.toLowerCase())
+                .withCompany(VALID_COMPANY_CLEANER.toLowerCase()).build();
+        assertTrue(CLEANER.isSameJob(editedCleaner));
 
         // role has trailing spaces, all other attributes same -> returns false
         String roleWithTrailingSpaces = VALID_ROLE_CLEANER + " ";

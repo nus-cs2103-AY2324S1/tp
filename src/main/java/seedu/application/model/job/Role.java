@@ -59,7 +59,7 @@ public class Role {
         }
 
         Role otherRole = (Role) other;
-        return description.equals(otherRole.description);
+        return description.equalsIgnoreCase(otherRole.description);
     }
 
     @Override
