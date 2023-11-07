@@ -88,7 +88,7 @@ The **GUI** is split up into 4 main sections.
 
 ### Class Number
 
-* Class Number refers to the tutorial class number of a particular course. 
+* Class Number refers to the tutorial class number of a particular course.
 * Class Number is not case-sensitive, and it must begin with 1 to 3 alphabet letters, followed by 1 to 5 digits, and end with an optional single alphabetical character. Class Number must not be blank.
 * Here are some valid examples of Class Number:
     - `G11`
@@ -223,7 +223,7 @@ Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
 * The `STUDENT_NUMBER` must be valid and exist.
 * The `COMMENT` must be a valid string.
-  * Take note that the `COMMENT` string must not include any prefix. 
+  * Take note that the `COMMENT` string must not include any prefix.
   * e.g. `comment s/A0249112A cm/This student is very hardworking. t/Hardworking` is not allowed.
   * This means comment such as "This student is very hardworking. t/Hardworking" is not allowed.
 * Comment can only be performed after the student is created.
@@ -255,7 +255,7 @@ This command will not check for field validation. e.g. `lookup c/class 11` is al
 * The order of the fields does **not** matter. e.g. `lookup n/li c/T11` will return the same result as `lookup c/T11 n/li`
 * Field with nothing will be ignored. e.g. `lookup n/ c/T11` will return the same result as `lookup c/T11`.
 * This command can take multiple words per field. e.g. `lookup c/T11 T12` will return all students in `T11` or `T12`.
-  * Complicated lookup can be done by combining multiple fields. e.g. `lookup n/alex david c/t11 t12` 
+  * Complicated lookup can be done by combining multiple fields. e.g. `lookup n/alex david c/t11 t12`
   will return all students with name `alex` or `david` **and** is in class `t11` or `t12`.
 
 Examples:
@@ -395,11 +395,11 @@ Format: `delete s/STUDENT_NUMBER`
 Example:
 * `delete s/A0249112A`
 
---- 
+---
 
 ### Undoing the previous command : `undo`
 
-Undo the previous command that changes Class Manager. Undo only works with commands that changes Class Manager, and does not work with commands such as `load` and `config`. Undo can be used multiple times to undo multiple commands, or until Class Manager reaches its initial state. 
+Undo the previous command that changes Class Manager. Undo only works with commands that changes Class Manager, and does not work with commands such as `load` and `config`. Undo can be used multiple times to undo multiple commands, or until Class Manager reaches its initial state.
 
 Format: `undo`
 
@@ -422,7 +422,7 @@ Displayed result if undo is successful: `Undo success!`
 
 Displayed result if there are no more commands to undo: `No more commands to undo!`
 
---- 
+---
 
 ### Redoing an undone command : `redo`
 

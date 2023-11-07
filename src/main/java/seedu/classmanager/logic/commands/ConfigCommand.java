@@ -78,7 +78,7 @@ public class ConfigCommand extends Command {
 
             // clears the view panel after resetting class details of students
             model.resetSelectedStudent();
-          
+
             // Reset the history of the model and prevent any undo commands
             model.configReset();
 
