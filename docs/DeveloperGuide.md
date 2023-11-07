@@ -298,7 +298,12 @@ substrings because there are certain cases where it is logical to search for sub
 `Plan A Premium` are related, so they can show up in the same search.
 
 The `find` command format also changes to resemble a format more similar to the `add` and `edit` commands, to allow for
-searching for keywords in multiple fields at the same time.
+searching for keywords in multiple fields at the same time. We also allow the use of duplicate prefixes so that we
+can search for multiple terms belonging to the same field.
+
+For now, we only allow for searching for `Name`, `FinancialPlan` and `Tag` fields because they are the most commonly
+searched fields, but extending the feature to search in other fields is possible by creating the `Predicate` class and
+modifying the `FindCommandParser`.
 
 #### Design Considerations:
 
