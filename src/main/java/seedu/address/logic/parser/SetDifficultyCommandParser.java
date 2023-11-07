@@ -24,19 +24,21 @@ public class SetDifficultyCommandParser implements Parser<SetDifficultyCommand> 
 
         Index index;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SetDifficultyCommand.MESSAGE_USAGE), pe);
-        }
-
         // Compulsory field: Difficulty
         if (!arePrefixesPresent(argMultimap, PREFIX_DIFFICULTY)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDifficultyCommand.MESSAGE_USAGE));
         }
 
         String difficulty = argMultimap.getValue(PREFIX_DIFFICULTY).get();
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            return new SetDifficultyCommand(Index.fromZeroBased(0), difficulty);
+        }
+
+
+
 
         return new SetDifficultyCommand(index, difficulty);
 
