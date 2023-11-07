@@ -62,18 +62,19 @@ Pull requests: [#235](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/235) [#2
 * **Documentation**:
   * User Guide:
     * Added documentation for the following features (pull request: [#57](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/57)):
-      * Add an email to a person
-      * Add a link to a person
-      * Edit details of a person
+      * Added an email to a person
+      * Added a link to a person
+      * Edited details of a person
     * Ensured consistency in the feature section. Pull request: [#182](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/182)
   * Developer Guide:
-    * Add user stories, use cases and non-functional requirements
+    * Added user stories, use cases and non-functional requirements
     for features related to accessibility. Pull request: [#24](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/24)
-    * Add a glossary to define relevant terms used in the Developer Guide.
-    * Add documentation on the implementation the edit feature.
-    This also includes the sequence diagrams on the edit command.
-    Pull request: [#138](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/138)
-    * Refine documentation on the model package. Pull request:
+    * Added a glossary to define relevant terms used in the Developer Guide.
+    * Added documentation on the implementation the edit feature.
+    This includes the sequence diagrams on the edit command and explanation on the implementation of the edit command.
+    This also includes the use cases related to edit command.
+    Pull request: [#138](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/138) and the one below
+    * Refined documentation on the model package. Pull request: [#238](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/238)
 
 * **Community**:
   * Conducted team weekly meetings.
@@ -94,6 +95,7 @@ Pull requests: [#235](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/235) [#2
     * Enhance course-related features: [#165](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/165)
   * Completed teammate's task when he could not finish in time.
     * Add functionalities related to specialisation and course attributes of a contact: [#95](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/95)
+  * Produce bug reports for PE-D: [#256](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/256) [#258](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/258) [#272](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/272) [#276](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/276) [#282](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/282)
 
 * **Tools**:
   * Set up team member's privileges in the repository.
