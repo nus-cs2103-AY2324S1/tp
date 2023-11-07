@@ -1,10 +1,7 @@
 package networkbook.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.Test;
 
-import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
 import networkbook.model.UserPrefs;
@@ -26,11 +23,7 @@ public class RedoCommandTest {
     public void execute_subsequentStatesStored_success() {
         Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
         model.addPerson(TypicalPersons.IDA);
-        try {
-            model.undoNetworkBook();
-        } catch (CommandException e) {
-            fail();
-        }
+        model.undoNetworkBook();
         Model expectedModel = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
         expectedModel.addPerson(TypicalPersons.IDA);
         CommandTestUtil.assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_SUCCESS, expectedModel);

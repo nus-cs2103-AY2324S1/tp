@@ -4,7 +4,6 @@ import static networkbook.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import networkbook.commons.core.GuiSettings;
-import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.NameContainsKeyTermsPredicate;
 import networkbook.model.person.NameContainsKeywordsPredicate;
 import networkbook.model.person.Person;
@@ -98,39 +96,53 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void undoNetworkBook_noPreviousState_throwsIllegalStateChangeException() {
+    public void canUndoNetworkBook_noPreviousState_returnsFalse() {
         ModelManager modelManager = new ModelManager();
-        assertThrows(CommandException.class, () -> modelManager.undoNetworkBook());
+        assertFalse(modelManager.canUndoNetworkBook());
+    }
+
+    @Test
+    public void canUndoNetworkBook_hasPreviousState_returnsTrue() {
+        ModelManager modelManager = new ModelManager();
+        modelManager.addPerson(TypicalPersons.ALICE);
+        assertTrue(modelManager.canUndoNetworkBook());
+        modelManager.deletePerson(TypicalPersons.ALICE);
+        assertTrue(modelManager.canUndoNetworkBook());
+    }
+
+    @Test
+    public void canRedoNetworkBook_noNextState_returnsFalse() {
+        ModelManager modelManager = new ModelManager();
+        assertFalse(modelManager.canRedoNetworkBook());
+    }
+
+    @Test
+    public void canRedoNetworkBook_hasNextState_returnsTrue() {
+        ModelManager modelManager = new ModelManager();
+        assertFalse(modelManager.canRedoNetworkBook());
+        modelManager.addPerson(TypicalPersons.ALICE);
+        modelManager.deletePerson(TypicalPersons.ALICE);
+        modelManager.undoNetworkBook();
+        modelManager.undoNetworkBook();
+        assertTrue(modelManager.canRedoNetworkBook());
+        modelManager.redoNetworkBook();
+        assertTrue(modelManager.canRedoNetworkBook());
     }
 
     @Test
     public void undoNetworkBook_hasPreviousState_success() {
         ModelManager modelManager = new ModelManager();
         modelManager.addPerson(TypicalPersons.ALICE);
-        try {
-            modelManager.undoNetworkBook();
-        } catch (CommandException e) {
-            fail();
-        }
+        modelManager.undoNetworkBook();
         assertEquals(0, modelManager.getNetworkBook().getPersonList().size());
-    }
-
-    @Test
-    public void redoNetworkBook_noNextState_throwsIllegalStateChangeException() {
-        ModelManager modelManager = new ModelManager();
-        assertThrows(CommandException.class, () -> modelManager.redoNetworkBook());
     }
 
     @Test
     public void redoNetworkBook_hasNextState_success() {
         ModelManager modelManager = new ModelManager();
         modelManager.addPerson(TypicalPersons.ALICE);
-        try {
-            modelManager.undoNetworkBook();
-            modelManager.redoNetworkBook();
-        } catch (CommandException e) {
-            fail();
-        }
+        modelManager.undoNetworkBook();
+        modelManager.redoNetworkBook();
         assertEquals(1, modelManager.getNetworkBook().getPersonList().size());
     }
 
