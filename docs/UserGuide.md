@@ -54,6 +54,7 @@ you can access contacts by roles and responsibilities instantly.
 * [Support](#support)
 * [Known issues](#known-issues)
 * [Command Summary](#command-summary)
+* [Future Enhancement](#future-enhancement)
 
 <page-nav-print />
 
@@ -207,6 +208,8 @@ Examples:
 ### List developers
 #### What this command does:
 * Show only the list of all developers in the project.
+* Note: Any additional words provided after the command will be ignored.
+  (e.g. entering `list help delete 1 HAHAHA-1234` is equivalent to entering `list`)
 
 #### Command format:
 * `list`
@@ -288,6 +291,8 @@ and type `list` again when you want to go back to the main window.
 ### List teams
 #### What this command does:
 * Show only the list of all existing teams in the project.
+* Note: Any additional words provided after the command will be ignored.
+  (e.g. entering `listt help delete 1 HAHAHA-1234` is equivalent to entering `listt`)
 
 #### Command format:
 * `listt`
@@ -309,7 +314,8 @@ and type `listt` again when you want to go back to the main window.
 ### Display tree
 #### What this command does:
 * Provides a tree visualisation of all the teams and members in the project.
-
+* Note: Any additional words provided after the command will be ignored.
+  (e.g. entering `tree list delete 1 HAHAHA-1234` is equivalent to entering `tree`)
 #### Command format: 
 * `tree`
 #### Example usage: 
@@ -328,6 +334,21 @@ and type `tree` again when you want to hide the tree and go back to the main win
 
 
 ### Help
+#### What this command does:
+* Opens up a window which shows the link to this User Guide, which also comes with a button allowing copying the link;
+* Display a summary of all commands of LinkTree, specifying the parameters needed.
+* Note: Any additional words provided after the command will be ignored.
+  (e.g. entering `help list delete 1 HAHAHA-1234` is equivalent to entering `help`)
+
+#### Command format:
+* `help`
+* Or simply press F1
+
+#### Example usage:
+* `help` (and an example result is shown below)
+  ![HelpWindow](images/UG_images/HelpWindow.png)
+  ![HelpCommandResult](images/UG_images/HelpCommandResult.png)
+
 
 ### Reset the project
 
@@ -368,3 +389,11 @@ Click [here](#table-of-contents) to go back to contents.
 - Details coming soon...
 
 Click [here](#table-of-contents) to go back to contents.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Future Enhancement
+- Currently, the find and finteam functions output "1 persons" and "1 teams" respectively, regardless of the number. The objective is to modify these functions to correctly handle singular and plural nouns. When the count is 1, the function should output "1 person" or "1 team," and for counts greater than 1, the function should output "N persons" or "N teams" appropriately.
+
+Click [here](#table-of-contents) to go back to contents.
+
