@@ -38,7 +38,7 @@ title: User Guide
 
 JobFindr is an **Application Book app** for NUS fresh graduates to manage their job applications.
 
-It simplifies _job application management_ , promotes _efficiency_, and enhances _organisation_, 
+It simplifies _job application management_ , promotes _efficiency_, and enhances _organisation_,
 helping you keep track of all your past and upcoming applications.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ helping you keep track of all your past and upcoming applications.
 | Deadline | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 31 2030 1200) and cannot be earlier than the current date and time | Yes       | Chronological |
 | Job Type | `t/`   | Possible values in "[Valid job types](#valid-job-types)"                                                            | Yes       | Alphabetical  |
 
-* Applications with the same company _AND_ role are considered duplicate jobs. 
+* Applications with the same company _AND_ role are considered duplicate jobs.
   JobFindr does not allow the creation of duplicate jobs.
 
 * Deadline refers to the application submission deadline.
@@ -237,7 +237,7 @@ Adds a job application to the list.
 **Examples:**
 
 * `add c/Microsoft r/Software Engineer d/Nov 12 2024 1200 i/Technology s/Pending`
-  
+
   Adds a company called Microsoft, with the role Software Engineer in the technology industry,
   deadline Nov 12 2024 1200 and status as pending.
 
@@ -260,7 +260,7 @@ Deletes the specified application from the list.
 
 **Examples:**
 
-* `list` 
+* `list`
 * followed by `delete 2`
 
   Deletes the 2nd application in the list.
@@ -304,7 +304,7 @@ Finds all applications whose fields match the keywords provided.
 * More than one `KEYWORDS` can be provided.
 * `KEYWORDS` are case-insensitive.
 * If `KEYWORDS` is provided, the command will find all applications that contains the `KEYWORDS` in any field.
-* An application will be listed only if it contains _ALL_ the `KEYWORDS` provided. 
+* An application will be listed only if it contains _ALL_ the `KEYWORDS` provided.
 * Applications with partially matching keywords will not be listed.
     * e.g. searching for the keyword "Goo" will not list applications containing "Google".
 * Characters not separated by white space is considered _ONE_ word.
@@ -439,6 +439,6 @@ the data of your previous AddressBook home folder.
 
 ## Glossary
 
-#### Prefix 
+#### Prefix
 * An affix that placed before the field to indicate the type of field
 * Examples: c/ r/ s/ from/
