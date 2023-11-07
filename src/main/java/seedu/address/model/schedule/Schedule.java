@@ -47,11 +47,17 @@ public class Schedule implements Comparable<Schedule> {
         this.status = status;
     }
 
-    private boolean isValidSchedule(StartTime startTime, EndTime endTime) {
+
+    //@@author dishenggg
+    /**
+     * Checks if the {@code StartTime} and {@code EndTime} make up a valid schedule.
+     */
+    public static boolean isValidSchedule(StartTime startTime, EndTime endTime) {
         boolean isStartTimeAfterEndTime = startTime.getTime().isBefore(endTime.getTime());
         boolean isSameDay = startTime.compareDays(endTime) == 0;
         return isStartTimeAfterEndTime && isSameDay;
     }
+    //@@author
 
     public Person getTutor() {
         return tutor;
