@@ -49,7 +49,6 @@ public class AddCommand extends Command {
         }
 
         model.addCard(toAdd);
-        // model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

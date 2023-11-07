@@ -18,5 +18,4 @@ public class ExportCommand extends Command {
         assert(model != null);
         return new CommandResult(SHOWING_EXPORT_MESSAGE);
     }
-
 }

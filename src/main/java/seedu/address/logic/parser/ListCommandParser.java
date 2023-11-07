@@ -51,15 +51,6 @@ public class ListCommandParser implements Parser<ListCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values
-     * in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    /**
      * Parses {@code <String> prefix} into a {@code Predicate<Card>} if {@code prefix} is non-empty.
      */
     private static Predicate<Card> parseQuestionPrefix(String prefix) {
@@ -78,5 +69,4 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         return (card -> new HashSet<>(card.getTags()).containsAll(tagSet));
     }
-
 }

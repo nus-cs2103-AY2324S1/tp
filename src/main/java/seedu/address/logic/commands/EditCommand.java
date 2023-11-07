@@ -81,7 +81,6 @@ public class EditCommand extends Command {
         }
 
         model.setCard(cardToEdit, editedCard);
-        // model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, Messages.format(editedCard)));
     }
 
@@ -160,6 +159,8 @@ public class EditCommand extends Command {
         /**
          * Returns true if at least one field is edited.
          */
+        //@@author weeweh-reused
+        //Edited from AB3
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(question, answer, tags, hint);
         }

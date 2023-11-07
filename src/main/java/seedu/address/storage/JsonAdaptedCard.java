@@ -140,7 +140,10 @@ class JsonAdaptedCard {
                 ? new PracticeDate(LocalDateTime.parse(lastPracticeDate))
                 : null;
 
+        // SolveCount
         final SolveCount modelsolveCount = new SolveCount(Integer.parseInt(solveCount));
+
+        // Hint
         final Hint modelHint = new Hint(hint);
 
         return new Card(modelQuestion, modelAnswer, modelDifficulty, modelCardTags,
