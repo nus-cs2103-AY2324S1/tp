@@ -52,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete-t 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -92,19 +92,19 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete-t 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete-t 1` Command](images/DeleteTutorSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteTutorCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteTutorCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteTutorCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -112,7 +112,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* All `XYZCommandParser` classes (e.g., `AddTutorCommandParser`, `DeleteTutorCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -295,7 +295,10 @@ the search keywords. A `FindTutorCommand` object is then constructed with this p
 Step 4. The `LogicManager` calls the `execute` in `FindTutorCommand` which sets the predicate of the filtered persons 
 list in `ModelManager` to be the predicate created earlier.
 
-Step 5. The filtered list of tutors is displayed to the user.
+Step 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from 
+`Logic`.
+
+Step 6. The filtered list of tutors is displayed to the user.
 
 The following sequence diagram shows how the above steps for find tutor operation works:
 
@@ -508,7 +511,7 @@ the lifeline reaches the end of diagram.
   * Cons: In the editing of schedule, a `Person` is needed to create a new `Schedule`. Thus, the tutor allocated to 
     the target schedule needs to be obtained and used to create a new `Schedule`.
 
-## Unmark schedule feature
+### Unmark schedule feature
 
 The "Unmark Schedule" feature allows users to unmark a schedule that was previously marked as completed or missed. 
 
@@ -542,7 +545,8 @@ status set to pending.
 Step 8. Tbe method then calls the `setSchedule` method in the `ModelManager` with the new edited schedule. This sets the 
 specified `Schedule` in the model to be that edited schedule with pending status.
 
-Step 9. Finally, the `UnmarkScheduleCommand` returns the `CommandResult`.
+Step 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
+`Logic`.
 
 The following sequence diagram shows how the above steps for unmark schedule operation works:
 
@@ -964,43 +968,42 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample tutors and schedules. The window size may 
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample tutors and schedules. The window size may 
       not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. Saving theme preferences
+3. Saving theme preferences
 
    1. Change the theme to another one. Close the window.
    
    2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent theme is retained. 
 
-### Deleting a person
+### Deleting a tutor
 
-1. Deleting a person while all persons are being shown
+Deleting a tutor while all tutor are being shown
 
-   1. Prerequisites: List all persons using the `list-t` command. Multiple persons in the list.
+   1. Prerequisites: List all tutors using the `list-t` command. Multiple tutors in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete-t 1`<br>
+      Expected: First tutor is deleted from the list. Details of the deleted tutor shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete-t 0`<br>
+      Expected: No tutor is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete tutor commands to try: `delete-t`, `delete-t abc`, `delete-t x` (where x is larger than the
+      tutor list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Editing a schedule
 
-1. Edits a schedule while all schedules are being shown
+Edits a schedule while all schedules are being shown
    1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
    
    2. Test case: `edit-s 1 st/2023-05-05T09:00 et/2023-05-05T11:00`<br>
