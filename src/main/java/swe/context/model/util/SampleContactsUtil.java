@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import swe.context.model.Contacts;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Contact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
@@ -19,27 +20,47 @@ import swe.context.model.tag.Tag;
  */
 public class SampleContactsUtil {
     private static Contact[] getSampleContactsArray() {
-        //TODO access these from a production data file. Help command text could reuse these valid data strings
-        // Ensure test JSONs are also updated
         return new Contact[] {
-            new Contact(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Contact(
+                new Name("Amy Bee"),
+                new Phone("87438807"),
+                new Email("e0705018@u.nus.edu"),
                 new Note("CS2103 tutorial mate."),
-                getTagSet("friends")),
-            new Contact(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Note("CS2103 tutorial mate."),
-                getTagSet("colleagues", "friends")),
-            new Contact(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Note("CS2103 tutorial mate."),
-                getTagSet("neighbours")),
-            new Contact(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Note("CS2103 tutorial mate."),
-                getTagSet("family")),
-            new Contact(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Note("CS2103 tutorial mate."),
-                getTagSet("classmates")),
-            new Contact(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Note("CS2103 tutorial mate."),
-                getTagSet("colleagues"))
+                getTagSet("NUS", "CS2103 course"),
+                getAlternateContactSet("Telegram: amy_bee")
+            ),
+            new Contact(
+                new Name("Ben Lee"),
+                new Phone("99272758"),
+                new Email("ben-lee@gmail.com"),
+                new Note("Dorm at 42 Wallaby Way."),
+                getTagSet("friend"),
+                getAlternateContactSet("HousePhone: 67280491", "Discord: ben.games")
+            ),
+            new Contact(
+                new Name("Charlotte Oliveiro"),
+                new Phone("83210283"),
+                new Email("coliveiro@comp.nus.edu.sg"),
+                new Note("CS2103 Prof."),
+                getTagSet("NUS", "CS2103 course", "prof"),
+                getAlternateContactSet()
+            ),
+            new Contact(
+                new Name("David Li"),
+                new Phone("91031282"),
+                new Email("e0789123@u.nus.edu"),
+                new Note(""),
+                getTagSet("NUS", "CS1101S", "CS1231S"),
+                getAlternateContactSet("Telegram: David99")
+            ),
+            new Contact(
+                new Name("Ethan Ibrahim"),
+                new Phone("92492021"),
+                new Email("ethan.ibrahim@my-mail.com"),
+                new Note("(teaching assistant)"),
+                getTagSet("NUS", "CS3241", "TA"),
+                getAlternateContactSet("X: ethaaan", "Telegram: ethaaan")
+            )
         };
     }
 
@@ -49,6 +70,12 @@ public class SampleContactsUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<AlternateContact> getAlternateContactSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(AlternateContact::new)
                 .collect(Collectors.toSet());
     }
 

@@ -52,7 +52,7 @@ public class Contacts implements ReadOnlyContacts {
         if (!(other instanceof Contacts)) {
             return false;
         }
-        Contacts otherContacts = (Contacts)other;
+        Contacts otherContacts = (Contacts) other;
 
         return this.uniqueList.equals(otherContacts.uniqueList);
     }

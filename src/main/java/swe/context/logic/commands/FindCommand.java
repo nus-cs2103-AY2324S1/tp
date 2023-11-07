@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import swe.context.commons.util.ToStringBuilder;
 import swe.context.logic.Messages;
 import swe.context.model.Model;
+import swe.context.model.contact.Contact;
 import swe.context.model.contact.NameContainsKeywordsPredicate;
 
 
@@ -16,11 +17,13 @@ import swe.context.model.contact.NameContainsKeywordsPredicate;
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds and lists all contacts whose names match any of the"
-            + " specified words in full. Case insensitive."
-            + "\nParameters: KEYWORD [MORE_KEYWORDS]..."
-            + "\nExample: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = String.format(
+        "%s: Finds contacts by name. Case insensitive. Requires full word match."
+                + "%nParameters: KEYWORD..."
+                + "%nExample: %s amy Ben CHARLOTTE",
+        FindCommand.COMMAND_WORD,
+        FindCommand.COMMAND_WORD
+    );
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -33,7 +36,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.setContactsFilter(predicate);
         return new CommandResult(
-                String.format(Messages.CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
+                Messages.contactsListedOverview(model.getFilteredContactList().size()));
     }
 
     @Override

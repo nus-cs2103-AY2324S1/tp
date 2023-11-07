@@ -33,8 +33,7 @@ public class DeleteCommandTest {
                 model.getFilteredContactList().get(TestData.IndexContact.FIRST_CONTACT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(List.of(TestData.IndexContact.FIRST_CONTACT));
 
-        String expectedMessage = String.format(Messages.DELETE_COMMAND_SUCCESS,
-                Contact.format(contactToDelete));
+        String expectedMessage = Messages.deleteCommandSuccess(Contact.format(contactToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getContacts(), new Settings());
         expectedModel.removeContact(contactToDelete);
@@ -47,7 +46,7 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredContactList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(List.of(outOfBoundIndex));
 
-        assertCommandFailure(deleteCommand, model, Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.INVALID_DELETE_INDEX);
     }
 
     @Test
@@ -57,8 +56,7 @@ public class DeleteCommandTest {
                 model.getFilteredContactList().get(TestData.IndexContact.FIRST_CONTACT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(List.of(TestData.IndexContact.FIRST_CONTACT));
 
-        String expectedMessage = String.format(Messages.DELETE_COMMAND_SUCCESS,
-                Contact.format(contactToDelete));
+        String expectedMessage = Messages.deleteCommandSuccess(Contact.format(contactToDelete));
 
         Model expectedModel = new ModelManager(model.getContacts(), new Settings());
         expectedModel.removeContact(contactToDelete);
@@ -72,12 +70,12 @@ public class DeleteCommandTest {
         showContactAtIndex(model, TestData.IndexContact.FIRST_CONTACT);
 
         Index outOfBoundIndex = TestData.IndexContact.SECOND_CONTACT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // Before removal, ensure the index is still in the bounds of contact list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getContacts().getUnmodifiableList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(List.of(outOfBoundIndex));
 
-        assertCommandFailure(deleteCommand, model, Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.INVALID_DELETE_INDEX);
     }
 
     @Test
@@ -132,7 +130,7 @@ public class DeleteCommandTest {
                 new DeleteCommand(List.of(TestData.IndexContact.FIRST_CONTACT,
                         TestData.IndexContact.SECOND_CONTACT));
 
-        String expectedMessage = String.format(Messages.DELETE_COMMAND_SUCCESS,
+        String expectedMessage = Messages.deleteCommandSuccess(
                 Contact.format(firstContactToDelete) + ",\n" + Contact.format(secondContactToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getContacts(), new Settings());
@@ -154,7 +152,7 @@ public class DeleteCommandTest {
                 List.of(TestData.IndexContact.SECOND_CONTACT, TestData.IndexContact.FIRST_CONTACT);
         DeleteCommand deleteCommand = new DeleteCommand(unorderedIndices);
 
-        String expectedMessage = String.format(Messages.DELETE_COMMAND_SUCCESS,
+        String expectedMessage = Messages.deleteCommandSuccess(
                 Contact.format(secondContactToDelete) + ",\n" + Contact.format(firstContactToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getContacts(), new Settings());
@@ -173,6 +171,6 @@ public class DeleteCommandTest {
         List<Index> indices = List.of(validIndex, outOfBoundIndex);
         DeleteCommand deleteCommand = new DeleteCommand(indices);
 
-        assertCommandFailure(deleteCommand, model, Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.INVALID_DELETE_INDEX);
     }
 }

@@ -13,18 +13,22 @@ import swe.context.logic.commands.exceptions.CommandException;
 import swe.context.model.Model;
 import swe.context.model.contact.Contact;
 
+
+
 /**
  * Deletes one or more {@link Contact}s based on their displayed indices in the UI list.
  * Duplicate indices are considered only once.
  */
 public class DeleteCommand extends Command {
-
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the contacts identified by the index number(s) used in the displayed contact list.\n"
-            + "Parameters: INDEX_1 INDEX_2 ... (must be 1 or more positive integers)\n"
-            + "Example: " + COMMAND_WORD + " 1 3 5";
+    public static final String MESSAGE_USAGE = String.format(
+        "%s: Deletes contact(s)."
+                + "%nParameters: INDEX..."
+                + "%nExample: %s 1 3 5",
+        DeleteCommand.COMMAND_WORD,
+        DeleteCommand.COMMAND_WORD
+    );
 
     private final List<Index> targetIndices;
 
@@ -35,15 +39,15 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Contact> lastShownList = model.getFilteredContactList();
+        List<Contact> currentContactList = model.getFilteredContactList();
         List<Contact> contactsToDelete = new ArrayList<>();
 
         // Collect contacts to delete
         for (Index index : targetIndices) {
-            if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+            if (index.getZeroBased() >= currentContactList.size()) {
+                throw new CommandException(Messages.INVALID_DELETE_INDEX);
             }
-            contactsToDelete.add(lastShownList.get(index.getZeroBased()));
+            contactsToDelete.add(currentContactList.get(index.getZeroBased()));
         }
 
         // Delete the contacts
@@ -56,7 +60,7 @@ public class DeleteCommand extends Command {
                 .map(Contact::format)
                 .collect(Collectors.joining(",\n"));
 
-        return new CommandResult(String.format(Messages.DELETE_COMMAND_SUCCESS, formattedContacts));
+        return new CommandResult(Messages.deleteCommandSuccess(formattedContacts));
     }
 
     @Override

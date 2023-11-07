@@ -13,6 +13,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import swe.context.logic.commands.AddCommand;
 import swe.context.logic.commands.CommandResult;
+import swe.context.logic.commands.HelpCommand;
 import swe.context.logic.commands.ListCommand;
 import swe.context.logic.commands.exceptions.CommandException;
 import swe.context.logic.parser.exceptions.ParseException;
@@ -49,31 +50,31 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, Messages.COMMAND_UNKNOWN);
+        assertParseException(invalidCommand, Messages.commandUnknown(HelpCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, Messages.INVALID_DELETE_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, Messages.LIST_COMMAND_SUCCESS, model);
+        assertCommandSuccess(listCommand, Messages.COMMAND_LIST_SUCCESS, model);
     }
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
-                Messages.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+        assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION,
+                Messages.fileOpsErrorFormat(DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
-        assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
-                Messages.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+        assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION,
+                Messages.fileOpsPermissionErrorFormat(DUMMY_AD_EXCEPTION.getMessage()));
     }
 
     @Test
@@ -161,7 +162,8 @@ public class LogicManagerTest {
         // Triggers the saveContacts method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + TestData.Valid.NAME_DESC_AMY + TestData.Valid.PHONE_DESC_AMY
                 + TestData.Valid.EMAIL_DESC_AMY + TestData.Valid.NOTE_DESC_AMY;
-        Contact expectedContact = new ContactBuilder(TestData.Valid.Contact.AMY).withTags().build();
+        Contact expectedContact =
+                new ContactBuilder(TestData.Valid.Contact.AMY).withTags().withAlternateContacts().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addContact(expectedContact);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

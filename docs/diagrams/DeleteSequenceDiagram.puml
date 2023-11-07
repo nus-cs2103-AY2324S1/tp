@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete 1 3 5")
 activate LogicManager
 
-LogicManager -> InputParser : parseCommand("delete 1")
+LogicManager -> InputParser : parseCommand("delete 1 3 5")
 activate InputParser
 
 create DeleteCommandParser
@@ -27,7 +27,7 @@ activate DeleteCommandParser
 DeleteCommandParser --> InputParser
 deactivate DeleteCommandParser
 
-InputParser -> DeleteCommandParser : parse("1")
+InputParser -> DeleteCommandParser : parse("1 3 5")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -39,9 +39,6 @@ deactivate DeleteCommand
 
 DeleteCommandParser --> InputParser : d
 deactivate DeleteCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> InputParser
-destroy DeleteCommandParser
 
 InputParser --> LogicManager : d
 deactivate InputParser
@@ -49,11 +46,17 @@ deactivate InputParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : getFilteredContactList()
 activate Model
-
-Model --> DeleteCommand
+Model --> DeleteCommand : currentContactList
 deactivate Model
+
+loop for each contact in contactsToDelete
+    DeleteCommand -> Model : removeContact(contact)
+    activate Model
+    Model --> DeleteCommand
+    deactivate Model
+end
 
 create CommandResult
 DeleteCommand -> CommandResult
@@ -67,4 +70,5 @@ deactivate DeleteCommand
 
 [<--LogicManager
 deactivate LogicManager
+deactivate CommandResult
 @enduml

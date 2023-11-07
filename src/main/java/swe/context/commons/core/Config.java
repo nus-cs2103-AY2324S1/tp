@@ -36,7 +36,7 @@ public class Config {
         if (!(other instanceof Config)) {
             return false;
         }
-        Config otherConfig = (Config)other;
+        Config otherConfig = (Config) other;
 
         return Objects.equals(this.settingsPath, otherConfig.settingsPath)
                 && Objects.equals(this.logLevel, otherConfig.logLevel);

@@ -9,19 +9,20 @@ package swe.context.model.contact;
  * {@link #isValid(String)}.
  */
 public class Email {
+    /*
+     * Requires a form similar to example_email@foo-domain.sg.
+     */
+    public static final String REGEX_VALID = "^[a-zA-Z\\d]+(?:[+_.-][a-zA-Z\\d]+)*"
+            + "@(?:[a-zA-Z\\d]+(?:-[a-zA-Z\\d]+)*\\.)+"
+            + "[a-zA-Z\\d]+(?:-[a-zA-Z\\d]+)*$";
+
     public final String value;
 
     /**
      * Returns whether the specified value is valid.
-     *
-     * Emails must roughly be of the form example_email@foo-domain.sg.
      */
     public static boolean isValid(String value) {
-        return value.matches(
-            "^[a-zA-Z\\d]+(?:[+_.-][a-zA-Z\\d]+)*"
-                    + "@(?:[a-zA-Z\\d]+(?:-[a-zA-Z\\d]+)*\\.)+"
-                    + "(?:[a-zA-Z\\d]+(?:-[a-zA-Z\\d]+)*){2,}$"
-        );
+        return value.matches(Email.REGEX_VALID);
     }
 
     /**
@@ -49,7 +50,7 @@ public class Email {
         if (!(other instanceof Email)) {
             return false;
         }
-        Email otherEmail = (Email)other;
+        Email otherEmail = (Email) other;
 
         return this.value.equals(otherEmail.value);
     }

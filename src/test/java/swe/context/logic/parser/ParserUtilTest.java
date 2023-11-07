@@ -2,7 +2,6 @@ package swe.context.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static swe.context.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static swe.context.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
@@ -13,12 +12,15 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import swe.context.logic.parser.exceptions.ParseException;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
 import swe.context.model.contact.Note;
 import swe.context.model.contact.Phone;
 import swe.context.model.tag.Tag;
 import swe.context.testutil.TestData;
+
+
 
 public class ParserUtilTest {
 
@@ -29,7 +31,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+        assertThrows(ParseException.class, ParserUtil.MESSAGE_INDEX_NOT_POSITIVE, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
@@ -189,5 +191,61 @@ public class ParserUtilTest {
         );
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseAlternate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAlternate(null));
+    }
+
+    @Test
+    public void parseAlternate_validValueWithoutUnderscore_returnsAlternateContact() throws Exception {
+        assertEquals(new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC),
+                ParserUtil.parseAlternate(TestData.Valid.AlternateContact.ALPHANUMERIC));
+    }
+
+    @Test
+    public void parseAlternate_validValueWithUnderscore_returnsAlternateContact() throws Exception {
+        assertEquals(new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE),
+                ParserUtil.parseAlternate(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE));
+    }
+
+    @Test
+    public void parseAlternates_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAlternates(null));
+    }
+
+    @Test
+    public void parseAlternates_collectionWithInvalidAlternateContacts_throwsParseException() {
+        assertThrows(
+                ParseException.class,
+                () -> {
+                    ParserUtil.parseTags(
+                            Arrays.asList(TestData.Valid.AlternateContact.ALPHANUMERIC,
+                                    TestData.Invalid.AlternateContact.MISSING_SYMBOL)
+                    );
+                }
+        );
+    }
+
+    @Test
+    public void parseAlternates_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseAlternates(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseAlternates_collectionWithValidAlternateContacts_returnsAlternateContactSet() throws Exception {
+        Set<AlternateContact> actualAlternateContactSet = ParserUtil.parseAlternates(
+                Arrays.asList(TestData.Valid.AlternateContact.ALPHANUMERIC,
+                        TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE)
+        );
+        Set<AlternateContact> expectedAlternateContactSet = new HashSet<AlternateContact>(
+                Arrays.asList(
+                        new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC),
+                        new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE)
+                )
+        );
+
+        assertEquals(expectedAlternateContactSet, actualAlternateContactSet);
     }
 }

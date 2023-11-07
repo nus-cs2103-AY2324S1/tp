@@ -19,11 +19,13 @@ import swe.context.logic.commands.DeleteCommand;
 import swe.context.logic.commands.EditCommand;
 import swe.context.logic.commands.EditCommand.EditContactDescriptor;
 import swe.context.logic.commands.ExitCommand;
+import swe.context.logic.commands.FilterCommand;
 import swe.context.logic.commands.FindCommand;
 import swe.context.logic.commands.HelpCommand;
 import swe.context.logic.commands.ListCommand;
 import swe.context.logic.parser.exceptions.ParseException;
 import swe.context.model.contact.Contact;
+import swe.context.model.contact.ContainsTagPredicate;
 import swe.context.model.contact.NameContainsKeywordsPredicate;
 import swe.context.testutil.CommandUtil;
 import swe.context.testutil.ContactBuilder;
@@ -85,6 +87,14 @@ public class InputParserTest {
     }
 
     @Test
+    public void parseCommand_filter() throws Exception {
+        String keyword = "foobar";
+        FilterCommand command = (FilterCommand) InputParser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + keyword);
+        assertEquals(new FilterCommand(new ContainsTagPredicate(keyword)), command);
+    }
+
+    @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) InputParser.parseCommand(
@@ -117,7 +127,7 @@ public class InputParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(
             ParseException.class,
-            Messages.COMMAND_UNKNOWN,
+            Messages.commandUnknown(HelpCommand.MESSAGE_USAGE),
             () -> InputParser.parseCommand("unknownCommand")
         );
     }

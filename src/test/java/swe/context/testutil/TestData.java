@@ -1,5 +1,6 @@
 package swe.context.testutil;
 
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -28,7 +29,7 @@ public final class TestData {
     public static final String DEFAULT_NOTE = "I forgot where this contact came from...";
 
     /**
-     * Holds (@link Index} objects that are used in the test cases.
+     * Holds {@link Index} objects that are used in the test cases.
      */
     public static final class IndexContact {
         public static final Index FIRST_CONTACT = Index.fromOneBased(1);
@@ -47,7 +48,7 @@ public final class TestData {
         public static final String EMAIL_AMY = "amy@example.com";
         public static final String EMAIL_BOB = "bob@example.com";
         public static final String NOTE_AMY = "";
-        public static final String NOTE_BOB = "CS2013 tutorial mate.";
+        public static final String NOTE_BOB = "CS2103 tutorial mate.";
         public static final String NAME_DESC_AMY = " " + PREFIX_NAME + NAME_AMY;
         public static final String NAME_DESC_BOB = " " + PREFIX_NAME + NAME_BOB;
         public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + PHONE_AMY;
@@ -58,7 +59,7 @@ public final class TestData {
         public static final String NOTE_DESC_BOB = " " + PREFIX_NOTE + NOTE_BOB;
 
         /**
-         * Holds tag-related data.
+         * Holds {@code Tag}-related data.
          */
         public static final class Tag {
             public static final String ALPHANUMERIC = "Friend1";
@@ -67,6 +68,17 @@ public final class TestData {
             public static final String FLAG = " " + PREFIX_TAG;
             public static final String FLAG_ALPHANUMERIC = Tag.FLAG + Tag.ALPHANUMERIC;
             public static final String FLAG_ALPHANUMERIC_SPACES = Tag.FLAG + Tag.ALPHANUMERIC_SPACES;
+        }
+
+        /**
+         * Holds {@code AlternateContact}-related data.
+         */
+        public static final class AlternateContact {
+            public static final String ALPHANUMERIC = "Test1: Example1";
+            public static final String ALPHANUMERIC_UNDERSCORE = "Test2: Example_2";
+            public static final String FLAG = " " + PREFIX_ALTERNATE;
+            public static final String FLAG_ALPHANUMERIC = FLAG + ALPHANUMERIC;
+            public static final String FLAG_ALPHANUMERIC_UNDERSCORE = FLAG + ALPHANUMERIC_UNDERSCORE;
         }
 
         /**
@@ -81,6 +93,7 @@ public final class TestData {
                             .withEmail("alice@example.com")
                             .withPhone("94351253")
                             .withTags("friends")
+                            .withAlternateContacts("Example: Alice")
                             .build();
             public static final swe.context.model.contact.Contact BENSON =
                     new ContactBuilder()
@@ -89,6 +102,7 @@ public final class TestData {
                             .withEmail("johnd@example.com")
                             .withPhone("98765432")
                             .withTags("owesMoney", "friends")
+                            .withAlternateContacts("Example: Benson", "Example: Benson.Meier")
                             .build();
 
             public static final swe.context.model.contact.Contact CARL =
@@ -105,6 +119,7 @@ public final class TestData {
                             .withPhone("87652533")
                             .withEmail("cornelia@example.com")
                             .withTags("friends")
+                            .withAlternateContacts("Example: Daniel")
                             .build();
             public static final swe.context.model.contact.Contact ELLE =
                     new ContactBuilder()
@@ -133,7 +148,8 @@ public final class TestData {
                             .withPhone(PHONE_AMY)
                             .withEmail(EMAIL_AMY)
                             .withNote(NOTE_AMY)
-                            .withTags(TestData.Valid.Tag.ALPHANUMERIC)
+                            .withTags(Tag.ALPHANUMERIC)
+                            .withAlternateContacts(AlternateContact.ALPHANUMERIC)
                             .build();
             public static final swe.context.model.contact.Contact BOB =
                     new ContactBuilder()
@@ -142,6 +158,8 @@ public final class TestData {
                             .withEmail(EMAIL_BOB)
                             .withNote(NOTE_BOB)
                             .withTags(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+                            .withAlternateContacts(
+                                    AlternateContact.ALPHANUMERIC, AlternateContact.ALPHANUMERIC_UNDERSCORE)
                             .build();
 
             /**
@@ -170,7 +188,8 @@ public final class TestData {
                             .withPhone(PHONE_AMY)
                             .withEmail(EMAIL_AMY)
                             .withNote(NOTE_AMY)
-                            .withTags(TestData.Valid.Tag.ALPHANUMERIC)
+                            .withTags(Tag.ALPHANUMERIC)
+                            .withAlternateContacts(AlternateContact.ALPHANUMERIC)
                             .build();
             public static final EditContactDescriptor BOB =
                     new EditContactDescriptorBuilder()
@@ -179,6 +198,8 @@ public final class TestData {
                             .withEmail(EMAIL_BOB)
                             .withNote(NOTE_BOB)
                             .withTags(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES)
+                            .withAlternateContacts(AlternateContact.ALPHANUMERIC,
+                                    AlternateContact.ALPHANUMERIC_UNDERSCORE)
                             .build();
         }
     }
@@ -187,21 +208,31 @@ public final class TestData {
      * Holds invalid test data.
      */
     public static final class Invalid {
-        public static final String NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-        public static final String PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-        public static final String EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
         public static final String NAME = "R@chel";
+        public static final String NAME_DESC = " " + PREFIX_NAME + "James&";
         public static final String PHONE = "+651234";
+        public static final String PHONE_DESC = " " + PREFIX_PHONE + "99 (need 3+ digits)";
         public static final String EMAIL = "example.com";
+        public static final String EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo";
 
         /**
-         * Holds tag-related data.
+         * Holds {@code Tag}-related data.
          */
         public static final class Tag {
             public static final String HASHTAG = "#WrongKindOfTag";
             public static final String UNDERSCORE_DASH = "kebab-snake_case";
 
             public static final String FLAG_HASHTAG = TestData.Valid.Tag.FLAG + Tag.HASHTAG;
+        }
+
+        /**
+         * Holds {@code AlternateContact}-related data.
+         */
+        public static final class AlternateContact {
+            public static final String MISSING_SYMBOL = "Example Name";
+            public static final String NO_WHITESPACE = "Example:Name";
+            public static final String WHITESPACE_IN_NAME = "Example: N ame";
+            public static final String FLAG_MISSING_SYMBOL = Valid.AlternateContact.FLAG + MISSING_SYMBOL;
         }
     }
 

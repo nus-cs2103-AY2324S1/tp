@@ -59,7 +59,7 @@ public class Settings implements ReadOnlySettings {
         if (!(other instanceof Settings)) {
             return false;
         }
-        Settings otherSettings = (Settings)other;
+        Settings otherSettings = (Settings) other;
 
         return this.contactsPath.equals(otherSettings.contactsPath)
                 && this.guiSettings.equals(otherSettings.guiSettings);

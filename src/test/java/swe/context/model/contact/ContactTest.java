@@ -75,7 +75,7 @@ public class ContactTest {
         editedAlice = new ContactBuilder(TestData.Valid.Contact.ALICE).withEmail(TestData.Valid.EMAIL_BOB).build();
         assertFalse(TestData.Valid.Contact.ALICE.equals(editedAlice));
 
-        // different address -> returns false
+        // different note -> returns false
         editedAlice = new ContactBuilder(TestData.Valid.Contact.ALICE).withNote(TestData.Valid.NOTE_BOB).build();
         assertFalse(TestData.Valid.Contact.ALICE.equals(editedAlice));
 
@@ -94,7 +94,8 @@ public class ContactTest {
                         + ", phone=" + TestData.Valid.Contact.ALICE.getPhone()
                         + ", email=" + TestData.Valid.Contact.ALICE.getEmail()
                         + ", note=" + TestData.Valid.Contact.ALICE.getNote()
-                        + ", tags=" + TestData.Valid.Contact.ALICE.getTags() + "}";
+                        + ", tags=" + TestData.Valid.Contact.ALICE.getTags()
+                        + ", alternate contacts=" + TestData.Valid.Contact.ALICE.getAlternates() + "}";
         assertEquals(expected, TestData.Valid.Contact.ALICE.toString());
     }
 }

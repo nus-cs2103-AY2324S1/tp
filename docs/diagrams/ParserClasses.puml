@@ -21,7 +21,6 @@ Class Prefix
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> InputParser
 
-
 InputParser .down.> XYZCommandParser: creates >
 
 XYZCommandParser ..> XYZCommand : creates >

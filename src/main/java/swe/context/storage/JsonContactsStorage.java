@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import swe.context.commons.core.LogsCenter;
 import swe.context.commons.exceptions.DataLoadingException;
 import swe.context.commons.exceptions.IllegalValueException;
-import swe.context.commons.util.FileUtil;
 import swe.context.commons.util.JsonUtil;
 import swe.context.commons.util.StringUtil;
 import swe.context.model.Contacts;
@@ -64,7 +63,6 @@ public class JsonContactsStorage implements ContactsStorage {
 
     @Override
     public void saveContacts(ReadOnlyContacts contacts) throws IOException {
-        FileUtil.createIfMissing(path);
         JsonUtil.saveJsonFile(new JsonContacts(contacts), this.path);
     }
 }

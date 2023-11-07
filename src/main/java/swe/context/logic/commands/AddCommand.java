@@ -1,6 +1,7 @@
 package swe.context.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -21,22 +22,28 @@ import swe.context.model.contact.Contact;
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
-    //TODO values like these could be in some kind of ProductionData, which
-    // could be used in tests alongside TestData.Valid
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_NOTE + "NOTE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_NOTE + "CS2103 Prof. "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owes money";
+    public static final String MESSAGE_USAGE = String.format(
+        "%s: Adds a contact."
+                + "%nParameters: %sNAME %sPHONE_NUMBER %sEMAIL"
+                + " [%sNOTE] [%sTAG]... [%sALTERNATE_CONTACT]..."
+                + "%nExample: %s %sJohn Doe %s98765432 %sjohn.doe@email.com"
+                + " %sLikes SE. %sNUS %sCS2103 course %sTelegram: JohnDoe",
+        AddCommand.COMMAND_WORD,
+        PREFIX_NAME,
+        PREFIX_PHONE,
+        PREFIX_EMAIL,
+        PREFIX_NOTE,
+        PREFIX_TAG,
+        PREFIX_ALTERNATE,
+        AddCommand.COMMAND_WORD,
+        PREFIX_NAME,
+        PREFIX_PHONE,
+        PREFIX_EMAIL,
+        PREFIX_NOTE,
+        PREFIX_TAG,
+        PREFIX_TAG,
+        PREFIX_ALTERNATE
+    );
 
     private final Contact toAdd;
     /**
@@ -54,7 +61,7 @@ public class AddCommand extends Command {
         }
 
         model.addContact(toAdd);
-        return new CommandResult(String.format(Messages.ADD_COMMAND_SUCCESS, Contact.format(toAdd)));
+        return new CommandResult(Messages.addCommandSuccess(Contact.format(toAdd)));
     }
 
     @Override

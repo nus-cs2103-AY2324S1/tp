@@ -28,7 +28,8 @@ public class AddCommandParserTest {
                     + TestData.Valid.PHONE_DESC_AMY
                     + TestData.Valid.EMAIL_DESC_AMY
                     + TestData.Valid.NOTE_DESC_AMY
-                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
+                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                    + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC,
             new AddCommand(TestData.Valid.Contact.AMY)
         );
 
@@ -40,7 +41,9 @@ public class AddCommandParserTest {
                     + TestData.Valid.EMAIL_DESC_BOB
                     + TestData.Valid.NOTE_DESC_BOB
                     + TestData.Valid.Tag.FLAG_ALPHANUMERIC_SPACES
-                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
+                    + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                    + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC_UNDERSCORE
+                    + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC,
             new AddCommand(TestData.Valid.Contact.BOB)
         );
     }
@@ -48,7 +51,8 @@ public class AddCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = TestData.Valid.NAME_DESC_BOB + TestData.Valid.PHONE_DESC_BOB
-                + TestData.Valid.EMAIL_DESC_BOB + TestData.Valid.NOTE_DESC_BOB + TestData.Valid.Tag.FLAG_ALPHANUMERIC;
+                + TestData.Valid.EMAIL_DESC_BOB + TestData.Valid.NOTE_DESC_BOB + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC;
 
         // multiple names
         assertParseFailure(parser, TestData.Valid.NAME_DESC_AMY + validExpectedPersonString,
@@ -62,7 +66,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, TestData.Valid.EMAIL_DESC_AMY + validExpectedPersonString,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
-        // multiple addresses
+        // multiple notes
         assertParseFailure(parser, TestData.Valid.NOTE_DESC_AMY + validExpectedPersonString,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
 
@@ -109,7 +113,8 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Contact expectedContact = new ContactBuilder(TestData.Valid.Contact.AMY).withTags().build();
+        Contact expectedContact =
+                new ContactBuilder(TestData.Valid.Contact.AMY).withTags().withAlternateContacts().build();
         assertParseSuccess(parser,
                 TestData.Valid.NAME_DESC_AMY
                         + TestData.Valid.PHONE_DESC_AMY
@@ -146,14 +151,6 @@ public class AddCommandParserTest {
                         + TestData.Valid.NOTE_DESC_BOB,
                 expectedMessage);
 
-        // missing address prefix
-        assertParseFailure(parser,
-                TestData.Valid.NAME_DESC_BOB
-                        + TestData.Valid.PHONE_DESC_BOB
-                        + TestData.Valid.EMAIL_DESC_BOB
-                        + TestData.Valid.NOTE_BOB,
-                expectedMessage);
-
         // all prefixes missing
         assertParseFailure(parser,
                 TestData.Valid.NAME_BOB
@@ -171,8 +168,9 @@ public class AddCommandParserTest {
                         + TestData.Valid.PHONE_DESC_BOB
                         + TestData.Valid.EMAIL_DESC_BOB
                         + TestData.Valid.NOTE_DESC_BOB
-                        + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
-                Messages.NAME_CONSTRAINTS);
+                        + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                        + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC,
+                Messages.NAME_INVALID);
 
         // invalid phone
         assertParseFailure(parser,
@@ -180,8 +178,10 @@ public class AddCommandParserTest {
                         + TestData.Invalid.PHONE_DESC
                         + TestData.Valid.EMAIL_DESC_BOB
                         + TestData.Valid.NOTE_DESC_BOB
-                        + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
-                Messages.PHONE_CONSTRAINTS);
+                        + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                        + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC,
+                Messages.PHONE_INVALID);
+
 
         // invalid email
         assertParseFailure(parser,
@@ -189,18 +189,30 @@ public class AddCommandParserTest {
                         + TestData.Valid.PHONE_DESC_BOB
                         + TestData.Invalid.EMAIL_DESC
                         + TestData.Valid.NOTE_DESC_BOB
-                        + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
+                        + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                        + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC,
                 Messages.EMAIL_INVALID);
 
         // invalid tag
-        assertParseFailure(
-            parser,
+        assertParseFailure(parser,
                 TestData.Valid.NAME_DESC_BOB
                     + TestData.Valid.PHONE_DESC_BOB
                     + TestData.Valid.EMAIL_DESC_BOB
                     + TestData.Valid.NOTE_DESC_BOB
-                    + TestData.Invalid.Tag.FLAG_HASHTAG,
+                    + TestData.Invalid.Tag.FLAG_HASHTAG
+                    + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC,
             Messages.tagInvalid(TestData.Invalid.Tag.HASHTAG)
+        );
+
+        // invalid alternate contact
+        assertParseFailure(parser,
+                TestData.Valid.NAME_DESC_BOB
+                        + TestData.Valid.PHONE_DESC_BOB
+                        + TestData.Valid.EMAIL_DESC_BOB
+                        + TestData.Valid.NOTE_DESC_BOB
+                        + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                        + TestData.Invalid.AlternateContact.FLAG_MISSING_SYMBOL,
+                Messages.alternateContactInvalid(TestData.Invalid.AlternateContact.MISSING_SYMBOL)
         );
 
         // two invalid values, only first invalid value reported
@@ -209,7 +221,7 @@ public class AddCommandParserTest {
                         + TestData.Invalid.PHONE_DESC
                         + TestData.Valid.EMAIL_DESC_BOB
                         + TestData.Valid.NOTE_DESC_BOB,
-                Messages.NAME_CONSTRAINTS);
+                Messages.NAME_INVALID);
 
         // non-empty preamble
         assertParseFailure(parser,
@@ -218,7 +230,8 @@ public class AddCommandParserTest {
                         + TestData.Valid.PHONE_DESC_BOB
                         + TestData.Valid.EMAIL_DESC_BOB
                         + TestData.Valid.NOTE_DESC_BOB
-                        + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
+                        + TestData.Valid.Tag.FLAG_ALPHANUMERIC
+                        + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC,
                 Messages.commandInvalidFormat(AddCommand.MESSAGE_USAGE));
     }
 }
