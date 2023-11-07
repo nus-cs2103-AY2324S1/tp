@@ -199,13 +199,13 @@ Output: `Review Session has ended.`
 * Users are not allowed to end a review session if the session hasn't been started yet. The message of `You are not in a review session.`
 will be given.
 
-### Flipping to the other side of the flashcard: `flip`
+### Revealing the other side of the flashcard: `reveal`
 
 To show the translation of the flash card in
 
-Format: `flip [<INDEX>]`
+Format: `reveal [<INDEX>]`
 
-Output : `Flashcard has been flipped!`
+Output : `Flashcard has been revealed!`
 
 Examples:![img.png](images/Reveal.png)
 
