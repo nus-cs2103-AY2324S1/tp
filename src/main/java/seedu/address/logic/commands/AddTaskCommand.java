@@ -13,8 +13,16 @@ import seedu.address.model.lessons.Task;
  */
 public class AddTaskCommand extends Command {
     public static final String COMMAND_WORD = "addtask";
-    private Task task;
-    private Index index;
+    public static final String MESSAGE_SUCCESS = "New task added to lesson with index %1$d: %2$s";
+    public static final String DUPLICATE_TASK = "Existing task with same task description with index %1$d!"
+            + getUsageInfo();
+    public static final String NO_INDEX = "No lesson with index %1$d!"
+            + getUsageInfo();
+    public static final String NO_LESSON_SHOWN = "Please use show lesson Index before"
+            + " adding task when no lesson is displayed!" + getUsageInfo();
+    public static final String TASK_ADDED_TO_CURRENT_LESSON = "New task added to current lesson: %1$s";
+    private final Task task;
+    private final Index index;
     /**
      * Creates an AddTaskCommand to add the specified {@code Task} to {@code Lesson}
      */
@@ -37,43 +45,76 @@ public class AddTaskCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (this.index == null) {
-            Lesson lesson = model.getCurrentlyDisplayedLesson();
-            if (lesson == null) {
-                throw new CommandException("Please use show lesson Index before"
-                        + " adding task when no lesson is displayed!" + getUsageInfo());
-            }
-            if (lesson.hasSameTask(task)) {
-                throw new CommandException("Existing task with same task description with index "
-                        + lesson.getTaskClashWith(task) + "!" + getUsageInfo());
-            }
-            Lesson editedLesson = lesson.clone();
-            editedLesson.addToTaskList(task);
-            model.setLesson(lesson, editedLesson);
-            model.resetAllShowFields();
-            model.showLesson(editedLesson);
-            return new CommandResult(String.format("New task added to current lesson: " + task.toString()));
+            return execute_withoutLessonIndex(model);
         }
         int lessonIndex = this.index.getZeroBased();
         try {
-            if (model.hasTaskClashWith(task, lessonIndex)) {
-                String taskIndex = model.getTaskClashWith(task, lessonIndex).toString();
-                throw new CommandException("Existing task with same task description with index "
-                        + taskIndex + "!" + getUsageInfo());
-            }
+            checkClash(model, lessonIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new CommandException("No lesson with index " + this.index.getOneBased() + "!!" + getUsageInfo());
+            throw new CommandException(String.format(NO_INDEX, this.index.getOneBased()) );
         }
         model.addTask(task, lessonIndex);
         model.resetAllShowFields();
         model.showLesson(model.getFilteredScheduleList().get(lessonIndex));
-        return new CommandResult(String.format("New task added to lesson with index "
-                + index.getOneBased() + ": " + task.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.index.getOneBased(), task.toString()));
+    }
+
+    /**
+     * Execute the add task to lesson process when lesson index is not specified.
+     * @param model Model used to deal with changes tasks in lessons
+     * @return CommandResult with add task successfully message
+     * @throws CommandException thrown when no index of lesson is specified or
+     *      when there is another task with same description in the task list of
+     *      the lesson.
+     */
+    private CommandResult execute_withoutLessonIndex(Model model) throws CommandException {
+        Lesson lesson = model.getCurrentlyDisplayedLesson();
+        if (lesson == null) {
+            throw new CommandException(NO_LESSON_SHOWN);
+        }
+        if (lesson.hasSameTask(task)) {
+            throw new CommandException(String.format(DUPLICATE_TASK, lesson.getTaskClashWith(task)));
+        }
+        Lesson editedLesson = lesson.clone();
+        editedLesson.addToTaskList(task);
+        model.setLesson(lesson, editedLesson);
+        model.resetAllShowFields();
+        model.showLesson(editedLesson);
+        return new CommandResult(String.format(TASK_ADDED_TO_CURRENT_LESSON, task.toString()));
+    }
+
+    /**
+     * Check whether there is any tasks with the same description in the lessons.
+     * @param model Model used to deal with changes tasks in lessons
+     * @param lessonIndex index of the lesson to add task to
+     * @throws CommandException thrown when a task with the same name is detected
+     */
+    private void checkClash(Model model, int lessonIndex) throws CommandException {
+        if (model.hasTaskClashWith(task, lessonIndex)) {
+            int taskIndex = model.getTaskClashWith(task, lessonIndex);
+            throw new CommandException(String.format(DUPLICATE_TASK, taskIndex));
+        }
     }
     private static String getUsageInfo() {
-        return "\n Usage: addTask/task + [lesson index] [description]. "
+        return "\nUsage: addTask/task + [lesson index] [description]. "
                 + "You could omit the lesson index when adding task to showing lesson."
                 + "\nExample1: " + COMMAND_WORD + " 1 do homework"
                 + "\nExample2 (a lesson is shown): " + COMMAND_WORD + " do homework"
                 + "Please note that there cannot be two tasks with the same description in any lesson.";
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddTaskCommand)) {
+            return false;
+        }
+
+        AddTaskCommand otherAddTaskCommand = (AddTaskCommand) other;
+        return task.equals(otherAddTaskCommand.task);
     }
 }

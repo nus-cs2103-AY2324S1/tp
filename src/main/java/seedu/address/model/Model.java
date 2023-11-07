@@ -211,11 +211,8 @@ public interface Model {
     }
     void addTask(Task task, int index);
     String deleteTask(Lesson target, int index);
-    // elaine: not having a updatedFilteredTaskList?
-    default void updateFilteredTaskList(Predicate<Task> predicate) {
-    }
     boolean hasTaskClashWith(Task task, int index);
-    Task getTaskClashWith(Task task, int index);
+    int getTaskClashWith(Task task, int index);
     Boolean hasPersonClashWith(Person person);
     Person getPersonClashWith(Person person);
     public Set<Person> getPersonsFulfill(Predicate<Person> predicate);

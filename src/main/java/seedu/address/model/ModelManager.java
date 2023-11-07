@@ -353,7 +353,7 @@ public class ModelManager implements Model {
         setLesson(target, editedLesson);
     }
     @Override
-    public Task getTaskClashWith(Task task, int index) {
+    public int getTaskClashWith(Task task, int index) {
         requireNonNull(task);
         requireNonNull(index);
         return filteredLessons.get(index).getTaskClashWith(task);

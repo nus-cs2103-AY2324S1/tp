@@ -220,7 +220,7 @@ public class Lesson extends ListEntry<Lesson> {
     public boolean hasSameTask(Task toAdd) {
         return this.taskList.contains(toAdd);
     }
-    public Task getTaskClashWith(Task toAdd) {
+    public int getTaskClashWith(Task toAdd) {
         return this.taskList.getTaskClashWith(toAdd);
     }
 
