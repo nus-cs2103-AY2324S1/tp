@@ -9,5 +9,5 @@
     <StackPane styleClass="pane-with-white-border">
         <Label text="Doctor" styleClass="label-list-header" style="-fx-font-weight: bold;"/>
     </StackPane>
-    <ListView fx:id="doctorListView" VBox.vgrow="ALWAYS" />
+    <ListView fx:id="doctorListView" VBox.vgrow="ALWAYS"/>
 </VBox>
