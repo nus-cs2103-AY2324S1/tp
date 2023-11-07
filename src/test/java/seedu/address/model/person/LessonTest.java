@@ -64,7 +64,7 @@ public class LessonTest {
 
         // hours that have more than 2dp should be truncated
         Lesson lessonTwo = new Lesson(new Day("Tue"), new Begin("1900"), new End("1920"));
-        double expectedDurationTwo = 0.33;
+        double expectedDurationTwo = 1.0 / 3;
         assertEquals(expectedDurationTwo, lessonTwo.calculateLessonDuration());
 
     }

@@ -98,8 +98,8 @@ public class Lesson {
         double hours = (double) minutes / 60; // Convert minutes to a fraction of hours
 
         // Truncate to 2 decimal places
-        DecimalFormat df = new DecimalFormat("#.##");
-        hours = Double.parseDouble(df.format(hours));
+        //DecimalFormat df = new DecimalFormat("#.##");
+        //hours = Double.parseDouble(df.format(hours));
 
         return hours;
     }
