@@ -479,7 +479,7 @@ If you wish, please refer to the below section for a more succinct [command summ
 | **Add Band**       | `addb n/BANDNAME g/GENRE…​`<br> e.g., `addb n/Ace Jazz g/jazz`                                                        |
 | **Delete Band**    | `deleteb INDEX` <br> e.g., `deleteb 1`                                                                                |
 | **Find Band**      | `findb BANDNAME`                                                                                                      |
-| **Edit Band**      | `editb INDEX n/NEWNAME g/GENRE…​` <br> e.g., `editb n/Ace g/jazz`                                                     |
+| **Edit Band**      | `editb INDEX n/NEWNAME g/GENRE…​` <br> e.g., `editb 1 n/Ace g/jazz`                                                   |
 
 
 
