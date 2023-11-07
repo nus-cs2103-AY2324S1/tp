@@ -42,7 +42,7 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        String orderFull = order.equals("asc") ? "ascending" : order.equals("desc") ? "descending" : "invalid";
+        String orderFull = order.equalsIgnoreCase("asc") ? "ascending" : order.equalsIgnoreCase("desc") ? "descending" : "invalid";
 
         requireNonNull(model);
 
