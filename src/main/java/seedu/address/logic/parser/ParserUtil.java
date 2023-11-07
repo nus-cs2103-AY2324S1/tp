@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -129,29 +128,6 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    /**
-     * Parses a collection of {@code String from} and {@code String to} into a {@code FreeTime}.
-     * This assumes that the TA has the same availability throughout the week.
-     */
-    public static FreeTime parseFreeTime(String from, String to) throws DateTimeParseException, ParseException {
-        try {
-            if (from == null || to == null) {
-                return FreeTime.EMPTY_FREE_TIME;
-            }
-            final ArrayList<TimeInterval> timeIntervals = new ArrayList<>();
-            for (int i = 0; i < FreeTime.NUM_DAYS; i++) {
-                TimeInterval timeInterval = parseTimeInterval(from, to);
-                timeIntervals.add(timeInterval);
-            }
-            if (!FreeTime.isValidFreeTime(timeIntervals)) {
-                throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
-            }
-            return new FreeTime(timeIntervals);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
-        }
     }
 
     /**
