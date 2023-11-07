@@ -9,12 +9,14 @@ import static transact.logic.parser.CliSyntax.PREFIX_PHONE;
 import static transact.logic.parser.CliSyntax.PREFIX_TAG;
 import static transact.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableMap;
 import transact.commons.util.CollectionUtil;
 import transact.commons.util.ToStringBuilder;
 import transact.logic.Messages;
@@ -26,6 +28,9 @@ import transact.model.person.Name;
 import transact.model.person.Person;
 import transact.model.person.Phone;
 import transact.model.tag.Tag;
+import transact.model.transaction.Transaction;
+import transact.model.transaction.info.Description;
+import transact.model.transaction.info.TransactionId;
 import transact.ui.MainWindow.TabWindow;
 
 /**
@@ -84,6 +89,19 @@ public class EditStaffCommand extends Command {
         model.setPerson(personToEdit.getPersonId(), editedPerson);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // This is to trigger a refresh for the affected rows only
+        ArrayList<Transaction> toBeRefreshed = new ArrayList<>();
+        ObservableMap<TransactionId, Transaction> transactionMap = model.getTransactionMap();
+        transactionMap.values().stream().filter(t -> t.getPersonId().equals(personToEdit.getPersonId().getValue()))
+                .forEach(toBeRefreshed::add);
+        toBeRefreshed.forEach(t -> {
+            Transaction toAdd = new Transaction(t.getTransactionId(), t.getTransactionType(), new Description("tmp"),
+                    t.getAmount(), t.getDate(), t.getPersonId());
+            model.setTransaction(t.getTransactionId(), toAdd);
+            model.setTransaction(t.getTransactionId(), t);
+        });
+
         return new CommandResult(
                 String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
                 TabWindow.ADDRESSBOOK);

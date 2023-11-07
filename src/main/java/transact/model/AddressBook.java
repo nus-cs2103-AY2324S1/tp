@@ -54,7 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                         Person entry = change.getValueAdded();
 
                         for (int i = 0; i < personList.size(); i++) {
-                            if (personList.get(i).getPersonId() == entry.getPersonId()) {
+                            if (personList.get(i).getPersonId().equals(entry.getPersonId())) {
                                 personList.set(i, entry);
                             }
                         }
