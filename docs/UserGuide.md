@@ -207,6 +207,8 @@ Examples:
 ### List developers
 #### What this command does:
 * Show only the list of all developers in the project.
+* Note: Any additional words provided after the command will be ignored.
+  (e.g. entering `list help delete 1 HAHAHA-1234` is equivalent to entering `list`)
 
 #### Command format:
 * `list`
@@ -288,6 +290,8 @@ and type `list` again when you want to go back to the main window.
 ### List teams
 #### What this command does:
 * Show only the list of all existing teams in the project.
+* Note: Any additional words provided after the command will be ignored.
+  (e.g. entering `listt help delete 1 HAHAHA-1234` is equivalent to entering `listt`)
 
 #### Command format:
 * `listt`
@@ -309,7 +313,8 @@ and type `listt` again when you want to go back to the main window.
 ### Display tree
 #### What this command does:
 * Provides a tree visualisation of all the teams and members in the project.
-
+* Note: Any additional words provided after the command will be ignored.
+  (e.g. entering `tree list delete 1 HAHAHA-1234` is equivalent to entering `tree`)
 #### Command format: 
 * `tree`
 #### Example usage: 
@@ -331,6 +336,8 @@ and type `tree` again when you want to hide the tree and go back to the main win
 #### What this command does:
 * Opens up a window which shows the link to this User Guide, which also comes with a button allowing copying the link;
 * Display a summary of all commands of LinkTree, specifying the parameters needed.
+* Note: Any additional words provided after the command will be ignored.
+  (e.g. entering `help list delete 1 HAHAHA-1234` is equivalent to entering `help`)
 
 #### Command format:
 * `help`
