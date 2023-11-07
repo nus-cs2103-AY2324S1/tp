@@ -136,7 +136,10 @@ Edits an existing patient's details in HealthSync.
 
 >:bulb: Update multiple fields in a single `edit` command to save time
 
-Format: `edit n/NAME or id/IC_NUMBER [field] ...`
+Formats:  
+ * `edit n/NAME [field] ...`
+ * `edit id/IC_NUMBER [field] ...`
+ * `edit n/NAME id/IC_NUMBER [field] ...`
 
 >:bulb: Use `e` as a shortcut for `edit`
 
@@ -161,7 +164,10 @@ Deletes the specified patient or an optional fields of the patient from HealthSy
 * You can only delete one patient at a time.
 * To delete a specified field only instead of the entire patient, we indicate the field after the identification.
 
-Format: `delete n/NAME or id/IC_NUMBER [field]`
+Formats:  
+ * `delete n/NAME [field] ...`
+ * `delete id/IC_NUMBER [field] ...`
+ * `delete n/NAME id/IC_NUMBER [field] ...`
 
 >:bulb: Use the shortcut `d` for faster patient-deleting
 
@@ -204,7 +210,10 @@ e.g `hans` will match `Hans`, `08-Jan-2023 12 13` will match `08-jan-2023 12 13`
 * For the name, only patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
   
-Format: `find n/NAME or id/IC_NUMBER`
+Formats: 
+ * `find n/NAME`
+ * `find id/IC_NUMBER`
+ * `find ap/APPOINTMENT`
 
 >:bulb: Use the shortcut `f` for faster patient-finding
 
@@ -575,10 +584,10 @@ JavaScript Object Notation. This is the file format used by HealthSync to save a
 | **Help**       | `h`      | `help`                                                                                                                                         |
 | **List**       | `ls`     | `list`                                                                                                                                         |
 | **Add**        | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
-| **Edit**       | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                 |
-| **Delete**     | `d`      | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field] ...` <br> e.g., `delete n/Alex Yeoh m/Diabetes`                                                                                                           |
+| **Edit**       | `e`      | `edit n/NAME [field] ...` <br>`edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                 |
+| **Delete**     | `d`      | `delete n/NAME [field] ...`<br> `delete id/IC_NUMBER [field] ...` <br> e.g., `delete n/Alex Yeoh m/Diabetes`                                                                                                           |
 | **Clear**      | `c`      | `clear`                                                                                                                                        |
-| **Find**       | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/T0123436F`                                  |
+| **Find**       | `f`      | `find n/NAME` <br> `find id/IC_NUMBER` <br> `find ap/APPOINTMENT` <br> e.g., `find n/James Jake` *or* `find id/T0123436F` *or* `find ap/08-aug-2023 0000 2359`                                  |
 | **Log**        | `l`      | `log`                                                                                                                                          |
 | **Append Log** | `al`     | `alog`                                                                                                                                         |
 | **Clear Log**  | `cl`     | `clog`                                                                                                                                         |
