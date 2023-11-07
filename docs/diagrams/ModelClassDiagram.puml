@@ -13,7 +13,7 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
+Class "{abstract}\nPerson" as Person
 Class Name
 
 Class I #FFFFFF
