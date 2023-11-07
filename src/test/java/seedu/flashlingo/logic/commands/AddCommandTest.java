@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashlingo.logic.Messages.MESSAGE_SAME_WORD;
 import static seedu.flashlingo.testutil.Assert.assertThrows;
 
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
 import seedu.flashlingo.commons.core.GuiSettings;
@@ -23,6 +22,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
+
+import javafx.collections.ObservableList;
 
 public class AddCommandTest {
 
