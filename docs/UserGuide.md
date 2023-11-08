@@ -548,7 +548,8 @@ Please do not use negative integers, non-integers and extremely large integers(i
 * The `NAME` must be in the correct [format](#parameter-formats).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Editing the basic salary component of an employee will only take effect from the next payroll calculation onwards,  and it will only apply to the calculation of latest payroll.
+Editing the basic salary component of an employee will only take effect from the next payroll period onwards,  and it will only apply to the calculation of next payroll onwards.
+E.g., If you edit the basic salary of an employee in January 2024, the basic salary will only be updated from the payroll period of February 2024 onwards.
 </div>
 
 Examples:
@@ -589,7 +590,8 @@ Please do not use negative integers, non-integers and extremely large integers(i
 * The optional `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Editing the basic salary component of an employee will only take effect from the next payslip generation onwards, and it will only apply to the generation of latest payslip.
+Editing the basic salary component of an employee will only take effect from the next payslip period onwards, and it will only apply to the generation of next payslip onwards.
+E.g., If you edit the basic salary of an employee in January 2024, the basic salary will only be updated from the payslip period of February 2024 onwards.
 </div>
 
 Examples:
