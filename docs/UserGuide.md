@@ -49,9 +49,8 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
 2. Download the latest `ManaGease.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-2/tp/releases)
 3. Copy the file to the folder you want to use as the **home folder** for your ManaGease. 
 4. Open a command terminal, `cd` into the folder you put the jar file in(i.e. `cd DIRECTORY_PATH`), and enter the `java -jar ManaGease.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   <img src="images/Ui.png" width="800"><br>
-   <img src="images/UiAnnotated.png" width="800"><br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+   <img src="images/UiAnnotated.png" width="800">
 5. Type the command in the command box and press Enter on your keyboard to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -166,7 +165,8 @@ Example:
 Output:
 * ManaGease should display a confirmation message indicating that the employee has been successfully added to the database. (e.g. `Employee "Jane Smith" successfully added!`)
 * The employee's profile should be updated with the provided information.
-  <br><img src="images/addSuccess.png" width="700" height="1000">
+  <br><img src="images/addSuccess.png">
+  <br><img src="images/addSuccess1.png">
 
 * If prefix used is not defined, an error message will appear.
   <br>![failed result for adding employee](images/addFailed.png)
@@ -238,7 +238,8 @@ Examples:
 
 Output:
 * If there are multiple employees with the same name, all the matching employees would be displayed. Hence, ManaGease will return “Here is the list of the matching employees:”
-  <br><img src="images/deleteSameName.png" width="500" height="800">
+  <br><img src="images/deleteSameName.png">
+  <br><img src="images/deleteSameName1.png">
 * Otherwise, ManaGease should display a confirmation message indicating that the employee information has been successfully deleted.
 * The employee's list should be updated by removing the employee.
   <br>![result for deleting employee](images/deleteSuccess.png)
@@ -583,10 +584,11 @@ Examples:
 
 Output:
 * ManaGease should display the payroll of the employee specified by the `INDEX` or `NAME`, if the input is valid.
-  <br><img src="images/payrollSuccess.png" width="600" height="700">
+  <br><img src="images/payrollSuccess.png">
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If there are more than one employee with the same name in the command, the app will display `x employees found! Refer to their indexes for payroll calculation` and will list down those employees for the user to view. The user should then use their index numbers to calculate the payroll.
-  <br><img src="images/payrollWithSameName.png" width="600" height="700">
+  <br><img src="images/payrollWithSameName.png">
+  <br><img src="images/payrollWithSameName1.png">
 * If the command is incorrect, the app should display the following message.
   <br>![result for incorrect payroll command](images/incorrectPayrollCommand.png)
 
@@ -732,7 +734,8 @@ Shows a list of all employees in the workplace.
 Output:
 
 * ManaGease should display a list of all employees in the workplace.
-  <br><img src="images/listSuccess.png" width="625" height="700">
+  <br><img src="images/listSuccess.png">
+  <br><img src="images/findAlexDavidResult2.png">
 
 * Go back to [Table of Contents](#table-of-contents)
 
@@ -757,7 +760,8 @@ Finds employees whose names contain any of the given keywords.
 
 Example:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  <br><img src="images/findAlexDavidResult.png" width="625" height="700">
+  <br><img src="images/findAlexDavidResult1.png">
+  <br><img src="images/findAlexDavidResult2.png">
 
 * Go back to [Table of Contents](#table-of-contents)
 
@@ -800,7 +804,6 @@ If your changes to the data file makes its format invalid, ManaGease will not ru
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 ## FAQ
