@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -95,7 +96,7 @@ class EditLessonCommandTest {
         expected.setName(Name.of("Test Name 123"));
         Lesson editDescriptor = Lesson.getDefaultLesson();
         editDescriptor.setName(Name.of("Test Name 123"));
-        EditLessonCommand editLessonCommand = new EditLessonCommand(null,editDescriptor);
+        EditLessonCommand editLessonCommand = new EditLessonCommand(null, editDescriptor);
         editLessonCommand.execute(model);
         assertEquals(expected, model.getFilteredScheduleList().get(0));
     }
@@ -109,7 +110,7 @@ class EditLessonCommandTest {
         expected.setStart(new Time("00:00"));
         Lesson editDescriptor = Lesson.getDefaultLesson();
         editDescriptor.setStart(new Time("00:00"));
-        EditLessonCommand editLessonCommand = new EditLessonCommand(null,editDescriptor);
+        EditLessonCommand editLessonCommand = new EditLessonCommand(null, editDescriptor);
         editLessonCommand.execute(model);
         assertEquals(expected, model.getFilteredScheduleList().get(0));
     }
@@ -123,7 +124,7 @@ class EditLessonCommandTest {
         expected.setEnd(new Time("23:59"));
         Lesson editDescriptor = Lesson.getDefaultLesson();
         editDescriptor.setEnd(new Time("23:59"));
-        EditLessonCommand editLessonCommand = new EditLessonCommand(null,editDescriptor);
+        EditLessonCommand editLessonCommand = new EditLessonCommand(null, editDescriptor);
         editLessonCommand.execute(model);
         assertEquals(expected, model.getFilteredScheduleList().get(0));
     }
@@ -138,7 +139,7 @@ class EditLessonCommandTest {
         expected.setSubject(Subject.of("Physics"));
         Lesson editDescriptor = Lesson.getDefaultLesson();
         editDescriptor.setSubject(Subject.of("Physics"));
-        EditLessonCommand editLessonCommand = new EditLessonCommand(null,editDescriptor);
+        EditLessonCommand editLessonCommand = new EditLessonCommand(null, editDescriptor);
         editLessonCommand.execute(model);
         assertEquals(expected, model.getFilteredScheduleList().get(0));
     }
@@ -153,7 +154,7 @@ class EditLessonCommandTest {
         expected.setDay(Day.of("1"));
         Lesson editDescriptor = Lesson.getDefaultLesson();
         editDescriptor.setDay(Day.of("1"));
-        EditLessonCommand editLessonCommand = new EditLessonCommand(null,editDescriptor);
+        EditLessonCommand editLessonCommand = new EditLessonCommand(null, editDescriptor);
         editLessonCommand.execute(model);
         assertEquals(expected, model.getLessonClashWith(expected));
     }
