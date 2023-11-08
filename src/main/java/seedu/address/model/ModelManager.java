@@ -217,7 +217,8 @@ public class ModelManager implements Model {
             Schedule newSchedule = new Schedule(
                 editedPerson,
                 schedule.getStartTime(),
-                schedule.getEndTime()
+                schedule.getEndTime(),
+                schedule.getStatus()
             );
             setSchedule(schedule, newSchedule);
         });
