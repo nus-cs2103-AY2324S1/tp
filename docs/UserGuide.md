@@ -310,10 +310,10 @@ hint 1
 hint 1
 "Hint for Question 1: 5 stages: IF, ID, EX, MEM, WB "
 
-solve 2
+hint 2
 "Hint for Question 2: No hint was provided."
 
-solve 10
+hint 10
 "The card index provided is invalid"
 ```
 
