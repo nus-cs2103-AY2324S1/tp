@@ -529,6 +529,7 @@ Format: `list-i-done`
 To see all interviews regardless of completion status, use the command `list-i`.
 </div>
 
+
 Before `list-i-done`:
 ![beforelistidone](images/beforelistidone.png)
 
@@ -547,6 +548,7 @@ Format:`list-i-not-done`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 To see all interviews regardless of completion status, use the command `list-i`.
 </div>
+
 
 Before `list-i-not-done`:
 ![beforelistinotdone](images/beforelistinotdone.png)
