@@ -31,8 +31,43 @@ to start keeping track of all your members and applicants!
 
 --------------------------------------------------------------------------------------------------------------------
 
-* Table of Contents
-{:toc}
+<!-- TOC -->
+  * [Table of Contents](#table-of-contents)
+  * [1. How to Use CMC's User Guide](#1-how-to-use-cmcs-user-guide)
+  * [2. Quick start](#2-quick-start)
+  * [3. Interface Walkthrough](#3-interface-walkthrough)
+  * [4. Features](#4-features)
+    * [4.1 Member Features](#41-member-features)
+      * [4.1.1 Adding a member: `addmember` or `addm`](#411-adding-a-member--addmember-or-addm)
+      * [4.1.2 Finding members: `findmember` or `findm`](#412-finding-members--findmember-or-findm)
+      * [4.1.3 Viewing members: `viewmembers` or `viewm`](#413-viewing-members--viewmembers-or-viewm)
+      * [4.1.4 Editing a member: `editmember` or `editm`](#414-editing-a-member--editmember-or-editm)
+      * [4.1.5 Deleting a member: `deletemember` or `delm`](#415-deleting-a-member--deletemember-or-delm)
+      * [4.1.6 Copying a member's details: `copymember` or `cpm`](#416-copying-a-members-details--copymember-or-cpm)
+      * [4.1.7 Allocating a task to a member: `addtask` or `addt`](#417-allocating-a-task-to-a-member--addtask-or-addt)
+      * [4.1.8 Viewing all tasks allocated to a member: `viewtask` or `viewt`](#418-viewing-all-tasks-allocated-to-a-member--viewtask-or-viewt)
+      * [4.1.9 Deleting a task allocated to a member: `deletetask` or `delt`](#419-deleting-a-task-allocated-to-a-member--deletetask-or-delt)
+    * [4.2 Applicant Features](#42-applicant-features)
+      * [4.2.1 Adding an applicant: `addapplicant` or `adda`](#421-adding-an-applicant--addapplicant-or-adda)
+      * [4.2.2 Finding applicants: `findapplicant` or `finda`](#422-finding-applicants--findapplicant-or-finda)
+      * [4.2.3 Viewing applicants: `viewapplicants` or `viewa`](#423-viewing-applicants--viewapplicants-or-viewa)
+      * [4.2.4 Editing an applicant: `editapplicant` or `edita`](#424-editing-an-applicant--editapplicant-or-edita)
+      * [4.2.5 Deleting an applicant: `deleteapplicant` or `dela`](#425-deleting-an-applicant--deleteapplicant-or-dela)
+      * [4.2.6 Copying an applicant's details: `copyapplicant` or `cpa`](#426-copying-an-applicants-details--copyapplicant-or-cpa)
+    * [4.3 General Features](#43-general-features)
+      * [4.3.1 Accessing the user guide: `help`](#431-accessing-the-user-guide--help)
+      * [4.3.2 Clearing the address book: `clear`](#432-clearing-the-address-book--clear)
+      * [4.3.3 Exiting the application: `exit`](#433-exiting-the-application--exit)
+    * [4.4 Field Constraints](#44-field-constraints)
+      * [4.4.1 `EMAIL` format](#441-email-format)
+      * [4.4.2 Examples of fields](#442-examples-of-fields)
+  * [5. Frequently Asked Questions (FAQs)](#5-frequently-asked-questions--faqs-)
+  * [6. Common Mistakes](#6-common-mistakes)
+  * [7. Command summary](#7-command-summary)
+    * [7.1 Member Command Summary](#71-member-command-summary)
+    * [7.2 Applicant Command Summary](#72-applicant-command-summary)
+    * [7.3 General Command Summary](#73-general-command-summary)
+<!-- TOC -->
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -461,8 +496,8 @@ Adds an applicant to the list of applicants.
 
 #### Example of usage:
 
-`addapplicant /name Lady Gaga /phone 99129969`<br/>
-`adda /name Lady Gaga /phone 99129969`
+`addapplicant /name Lady Gaga /phone 99129969`<br/><br/>
+`adda /name Lady Gaga /phone 99129969`<br/><br/>
 
 This adds a new applicant named `Lady Gaga` with phone number `99129969` to the list of applicants.
 
@@ -491,8 +526,8 @@ Find and generate a list of all existing applicants(s) whose information contain
 
 ##### Example of usage:
 
-`findapplicant Rui`<br/>
-`finda Rui`<br/>
+`findapplicant Rui`<br/><br/>
+`finda Rui`<br/><br/>
 This generates a list of all members whose details contain `Rui`.
 
 ![Find_Applicant](images/findApplicant.png)
@@ -517,7 +552,7 @@ with [`findapplicant`](#422-finding-applicants-findapplicant-or-finda).
 
 ##### Example of usage:
 
-`viewa`<br/>
+`viewa`<br/><br/>
 Generates a list of all existing applicant(s).
 
 ![View_Applicant](images/viewApplicants.png)
@@ -584,8 +619,8 @@ If the `APPLICANT_INDEX` is negative or 0, or the applicant does not exist in th
 
 ##### Example of usage:
 
-`deleteapplicant 3`<br/>
-`dela 3`<br/>
+`deleteapplicant 3`<br/><br/>
+`dela 3`<br/><br/>
 This deletes the applicant at `APPLICANT_INDEX` 1 in the list of applicants.
 
 ![Delete_Applicant](images/deleteApplicant.png)
@@ -607,8 +642,8 @@ based off the current **shown** list. If `APPLICANT_INDEX` is negative or 0, or 
 
 ##### Example of usage:
 
-`copyapplicant 1`<br/>
-`cpa 1`<br/>
+`copyapplicant 1`<br/><br/>
+`cpa 1`<br/><br/>
 This copies the details of the applicant at `APPLICANT_INDEX` 1 to the clipboard.
 
 ![Copy_Applicant](images/copyApplicant.jpg)
@@ -686,16 +721,15 @@ There will be no prompt to confirm this action.
 
 ## 5. Frequently Asked Questions (FAQs)
 
-Q: How do I see tasks of a different member?  
+Q: How do I see tasks of a different member?<br/>
 A: You have to use the `viewt` or `viewtask` method to view the tasks allocated to another member.  
 For example, if your window is currently on another member's task, use `viewt 3` to view the tasks of the member at
 `MEMBER_INDEX` 3. Click [here](#418-viewing-all-tasks-allocated-to-a-member--viewtask-or-viewt) for more details on the
-`viewtask` command.
+`viewtask` command. <br/><br/>
 
-Q: How do I transfer my data to another person or computer?  
+Q: How do I transfer my data to another person or computer?<br/>
 A: This application saves the data of your applicants and members in the ./data/addressbook.json file. You can send the
-file to the other
-person or computer, and overwrite the empty addressbook.json with the addressbook.json file of your choice.
+file to the other person or computer, and overwrite the empty addressbook.json with the addressbook.json file of your choice. <br/><br/>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
 
@@ -729,13 +763,13 @@ This is a quick summary of all the commands available in CMC.
 | **Delete Member**                    | `deleteMember MEMBER_INDEX` <br/> <br/> `delm MEMBER_INDEX`                                                                                                                                                                        | `deleteMember 1` <br/> <br/> `delm 1`                                                                                                                                            |
 | **Edit Member**                      | `editMember MEMBER_INDEX [/name NAME] [/phone PHONE_NUMBER] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...` <br/> <br/>`editm MEMBER_INDEX [/name NAME] [/phone PHONE] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...` | `editm 1 /name Alicia /phone 99126291`  <br/> <br/> `editm 1 /email aliciateng@gmail.com`                                                                                        |
 | **Find Member(s)**                   | `findMember KEYWORD...` <br/> <br/> `findm KEYWORD...`                                                                                                                                                                             | `findm Alicia` <br/> <br/> `findm John 92345678` <br/> <br/> `findMember Designer`                                                                                               |
-| **View Member(s)**                   | `viewMembers` <br/> <br/> `viewm`                                                                                                                                                                                                  | `viewMembers` <br/> <br/> `viewm`                                                                                                                                                |
+| **View Member(s)**                   | `viewMembers` <br/> <br/> `viewm`                                                                                                                                                                                                  |                                                                                                                                                                                  |
 | **Add Task to Member**               | `addTask MEMBER_INDEX /task TASK_DESCRIPTION` <br/> <br/> `addt MEMBER_INDEX /task TASK_DESCRIPTION`                                                                                                                               | `addTask 2 /task Design Poster` <br/> <br/> `addt 3 /task Meet Product Team`                                                                                                     |
 | **View Task(s) of Member**           | `viewTask MEMBER_INDEX` <br/> <br/> `viewt MEMBER_INDEX`                                                                                                                                                                           | `viewTask 2` <br/> <br/> `viewt 5`                                                                                                                                               |
 | **Delete Task from Member**          | `deleteTask MEMBER_INDEX /task TASK_INDEX` <br/> <br/> `delt MEMBER_INDEX /task TASK_INDEX`                                                                                                                                        | `deleteTask 2 /task 4` <br/> <br/> `delt 1 /task 10`                                                                                                                             |
 | **Copy Member Details to Clipboard** | `copymember MEMBER_INDEX` <br/> <br/> `cpm MEMBER_INDEX`                                                                                                                                                                           | `copymember 5` <br/> <br/> `cpm 5`                                                                                                                                               |
 
-## 7.2 Applicant Command Summary
+### 7.2 Applicant Command Summary
 
 | Action                               | Format                                                                                                                                                                                           | Example(s)                                                                                                                                                  |
 |--------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -743,10 +777,10 @@ This is a quick summary of all the commands available in CMC.
 | **Delete Applicant**                 | `deleteApplicant APPLICANT_INDEX` <br/> <br/> `dela APPLICANT_INDEX`                                                                                                                             | `deleteApplicant 3` <br/> <br/> `dela 1`                                                                                                                    |
 | **Edit Applicant**                   | `editApplicant APPLICANT_INDEX [/name NAME] [/phone PHONE_NUMBER] [/interview INTERVIEW_TIME` <br/> <br/>  `edita APPLICANT_INDEX [/name NAME] [/phone PHONE_NUMBER] [/interview INTERVIEW_TIME` | `editApplicant 1 /name John` <br/> <br/> `edita 1 /interview 07/01/2003 1500` <br/><br/> `edita 1 /name Aliciaa /phone 12345678 /interview 10/12/2023 1150` |
 | **Find Applicant(s)**                | `findApplicant KEYWORD...` <br/><br/> `finda KEYWORD...`                                                                                                                                         | `finda Alicia` <br/><br/> `finda John 92345678`                                                                                                             |
-| **View Applicant(s)**                | `viewApplicants` <br/><br/> `viewa`                                                                                                                                                              | `viewApplicants` <br/><br/> `viewa`                                                                                                                         |
+| **View Applicant(s)**                | `viewApplicants` <br/><br/> `viewa`                                                                                                                                                              |                                                                                                                                                             |
 | **Copy Member Details to Clipboard** | `copyapplicant APPLICANT_INDEX` <br/> <br/> `cpa APPLICANT_INDEX`                                                                                                                                | `copyapplicant 2` <br/> <br/> `cpa 7`                                                                                                                       |
 
-## 7.3 General Command Summary
+### 7.3 General Command Summary
 
 | Action                    | Format  |
 |---------------------------|---------|
