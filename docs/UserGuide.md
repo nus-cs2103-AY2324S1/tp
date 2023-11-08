@@ -29,37 +29,8 @@ to start keeping track of all your members and applicants!
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Table of Contents
-
-1. [How to Use CMC's User Guide](#1-how-to-use-cmcs-user-guide)
-2. [Quick Start](#2-quick-start)
-3. [Interface Walkthrough](#3-interface-walkthrough)
-4. [Features](#4-features)
-   - 4.1 [Members Features](#41-member-features)
-      - 4.1.1 [Adding a member](#411-adding-a-member-addmember-or-addm)
-      - 4.1.2 [Finding member(s)](#412-finding-members-findmember-or-findm)
-      - 4.1.3 [Viewing members](#413-viewing-members-viewmembers-or-viewm)
-      - 4.1.4 [Editing a member](#414-editing-a-member-editmember-or-editm)
-      - 4.1.5 [Deleting a member](#415-deleting-a-member-deletemember-or-delm)
-      - 4.1.6 [Copying a member's details](#416-copying-a-members-details-copymember-or-cpm)
-      - 4.1.7 [Allocating a task to a member](#417-allocating-a-task-to-a-member-addtask-or-addt)
-      - 4.1.8 [Viewing all tasks allocated to a member](#418-viewing-all-tasks-allocated-to-a-member-viewtask-or-viewt)
-      - 4.1.9 [Deleting a task allocated to a member](#419-deleting-a-task-allocated-to-a-member-deletetask-or-delt)
-   - 4.2 [Applicants Features](#42-applicant-features)
-       - 4.2.1 [Adding an applicant](#421-adding-an-applicant-addapplicant-or-adda)
-       - 4.2.2 [Finding applicant(s)](#422-finding-applicants-findapplicant-or-finda)
-       - 4.2.3 [Viewing applicants](#423-viewing-applicants-viewapplicants-or-viewa)
-       - 4.2.4 [Editing and/ or scheduling an interview with an applicant](#424-editing-an-applicant-editapplicant-or-edita)
-       - 4.2.5 [Deleting an applicant](#425-deleting-an-applicant-deleteapplicant-or-dela)
-       - 4.2.6 [Copying an applicant's details](#426-copying-an-applicants-details-copyapplicant-or-cpa)
-    - 4.3 [General Features](#43-general-features)
-       - 4.3.1 [Accessing the user guide](#431-accessing-the-user-guide-help)
-       - 4.3.2 [Exiting the application](#432-exiting-the-application-exit)
-    - 4.4 [Field Constraints](#44-field-constraints)
-       - 4.4.1 [Email format](#441-email-format)
-       - 4.4.2 [Examples of fields](#442-examples-of-fields)
-5. [FAQ](#5-faq)
-6. [Command Summary](#6-command-summary)
+* Table of Contents
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -195,14 +166,16 @@ Adds a member to the list of members.
 <div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
-  <br/>
+<br/>
+
 - `MEMBER_NAME`: Only alphabetical characters, spaces, @, (), /, are allowed. Should not be blank.
   <br/>
 - `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
   <br/>
 - `EMAIL`: See [email format](#441-email-format) for more details.
   <br/>
-- `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed. Minimum of 5 and maximum of 32 characters are allowed.
+- `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
+  Minimum of 5 and maximum of 32 characters are allowed.
   <br/>
 - `TAG`: Only alphanumeric characters are allowed. Minimum of 1 and maximum of 15 characters are allowed.
 
@@ -225,7 +198,8 @@ This means that only a member with a unique name, phone number, email and telegr
 
 `addmember /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /tag Admin`<br/>
 `addm /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /tag Admin`<br/>
-This adds a new member named `Taylor Swift` with phone number `91691969`, email `taylorswift@era.tour`, telegram handle `tswift` and tag `Admin` to the list of members.
+This adds a new member named `Taylor Swift` with phone number `91691969`, email `taylorswift@era.tour`, telegram
+handle `tswift` and tag `Admin` to the list of members.
 
 ![Add_Member](images/addMember.png)
 
@@ -294,16 +268,18 @@ and the new tag in the `tag` field of the command.
 
 :information_source: **Notes about input parameter:**
 <br/>
+
 - `INDEX`: Only positive integers are allowed.
-<br/>
+  <br/>
 - `MEMBER_NAME`: Only alphabetical characters, spaces, @, (), / are allowed. Should not be blank.
-<br/>
+  <br/>
 - `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
-<br/>
+  <br/>
 - `EMAIL`: See [email format](#441-email-format) for more details.
-<br/>
-- `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed. Minimum of 5 and maximum of 32 characters are allowed.
-<br/>
+  <br/>
+- `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
+  Minimum of 5 and maximum of 32 characters are allowed.
+  <br/>
 - `TAG`: Only alphanumeric characters are allowed. Minimum of 1 and maximum of 15 characters are allowed.
 
 </div>
@@ -314,7 +290,8 @@ and the new tag in the `tag` field of the command.
 <br/>
 Duplicate members are not allowed to be the list of members.
 <br/>
-This means that you cannot edit a member to have the same name, phone number, email **or** telegram handle as another existing member.
+This means that you cannot edit a member to have the same name, phone number, email **or** telegram handle as another
+existing member.
 
 </div>
 
@@ -322,8 +299,8 @@ This means that you cannot edit a member to have the same name, phone number, em
 
 `editmember 1 /name John Wick /email johnwick@the.movie /tele @johnwick`<br/>
 `editm 1 /name John Wick /email johnwick@the.movie /tele @johnwick`<br/>
-This edits the particulars of the first member in the list of members, changing his/her name to `John Wick`, email to `johnwick@the.movie`, and telegram handle to `@johnwick`.
-
+This edits the particulars of the first member in the list of members, changing his/her name to `John Wick`, email
+to `johnwick@the.movie`, and telegram handle to `@johnwick`.
 
 #### 4.1.5 Deleting a member: `deletemember` or `delm`
 
@@ -343,6 +320,7 @@ the `addmember` command. **Proceed with caution!**
 
 :information_source: **Notes about input parameter:**
 <br/>
+
 - `INDEX`: Only positive integers are allowed.
 
 </div>
@@ -442,7 +420,8 @@ Adds an applicant to the list of applicants.
 
 * Duplicate applicants are not allowed to be added into the list of applicants.
 
-* An applicant is considered a duplicate if the applicant's name **or** phone number matches that of an existing applicant.
+* An applicant is considered a duplicate if the applicant's name **or** phone number matches that of an existing
+  applicant.
 
 * This means that only an applicant with a unique name and phone number can be added into the list of applicants.
 
@@ -524,13 +503,15 @@ The applicant at the specified index will have his/her specified field(s) edited
 
 :information_source: **Notes about input parameter:**
 <br/>
+
 - `INDEX`: Only positive integers are allowed.
   <br/>
 - `APPLICANT_NAME`: Only alphabetical characters, spaces, @, (), / are allowed. Should not be blank.
   <br/>
 - `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
   <br/>
-- `INTERVIEW_TIME`: Only dates in the format of “DD/MM/YYYY HhMm” are allowed. To remove an interview time from an applicant, ‘cancel’ is also allowed.
+- `INTERVIEW_TIME`: Only dates in the format of “DD/MM/YYYY HhMm” are allowed. To remove an interview time from an
+  applicant, ‘cancel’ is also allowed.
 
 </div>
 
@@ -549,7 +530,8 @@ This means that you cannot edit an applicant to have the same name **or** phone 
 `editapplicant 1 /name John Wick /interview 01/01/2024 0100`<br/>
 `edita 1 /name John Wick /interview 01/01/2024 0100`<br/>
 This edits the name of the first applicant in the list of applicants, changing his/her name to `John Wick`.
-An interview date and time is also scheduled (or changed to if already scheduled) for the first applicant at `01/01/2024`, `0100` hrs.
+An interview date and time is also scheduled (or changed to if already scheduled) for the first applicant
+at `01/01/2024`, `0100` hrs.
 
 #### 4.2.5 Deleting an applicant: `deleteapplicant` or `dela`
 
@@ -635,10 +617,11 @@ There will be no prompt to confirm this action.
 #### 4.4.1 `EMAIL` format
 
 `EMAIL` field should be of the format **local-part@domain**.
-- local-part: 
+
+- local-part:
     - Only alphanumerical and special characters "+_.-" are allowed.
     - It cannot start or end with any special characters.
-- domain: 
+- domain:
     - Made up of 1 **or** 2 domain labels (separated by periods ".").
     - Each domain label can only contain alphanumerical characters and hyphens "-", if any.
     - Each domain label must start and end with an alphanumerical character.
@@ -655,6 +638,7 @@ There will be no prompt to confirm this action.
 | **TELEGRAM_HANDLE** | `@Win_Sheng` `@Jon4s` `@1234` `@abc_`                    | `Win_Sheng` `@123` `@Jon4s!` `@Rui Jia` <br/> `@this_is_32_characters_long_abcd`                          |
 | **TAG**             | `Friend` `Friend123`                                     | `Friend!@!` `16characterslong`                                                                            |
 | **INTERVIEW_TIME**  | `01/12/2023 1430` `15/05/2022 0915` `cancel`             | `2023-12-01 14:30` `01/12/23 1430` `01/Dec/2023 1430` `01/12/2023 3:30 PM` `15/05/2022` `Cancel` `CANCEL` |
+
 <div markdown="span" class="alert alert-primary">
 
 :information_source: Click [here](#4-features) to see all the features of CMC.
@@ -673,8 +657,10 @@ file to the other
 person or computer, and overwrite the empty addressbook.json with addressbook.json file of your choice.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
-If the addressbook.json file is invalid or has any formatting errors, the program might not start up. Please make sure that
-the addressbook.json file used is **correct and accurate.**
+
+If the addressbook.json file is invalid or has any formatting errors, the program might not start up. Please make sure
+that the addressbook.json file used is **correct and accurate.**
+
 </div>
 
 
