@@ -52,8 +52,6 @@ Once you are familiarised, feel free to use the `clear` command to delete all th
 - Some commands take in parameters.
 e.g. in `add n/NAME`, the `add` command takes in an `n/` parameter.
 
-- `INDEX` used in commands is always 1-based.
-
 - Words in `UPPER_CASE` are placeholders for values to be specified.<br />
 e.g. in `edit INDEX`, you should specify an `INDEX` such as `edit 1`.<br />
 e.g. in `add n/NAME`, you should specify a `NAME` such as `add n/John Doe`.
@@ -241,7 +239,9 @@ The displayed contact list is always automatically sorted in ascending alphabeti
 
 Your contacts get automatically saved to the file system after each successful command execution. There is no need to save manually.
 
-## Command Summary
+---
+
+## Command summary
 
 | Action            | Command Format                                                          | Example Usage                                                      |
 |-------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------|

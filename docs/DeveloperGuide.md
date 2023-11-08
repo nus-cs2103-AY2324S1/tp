@@ -450,5 +450,5 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ## **Appendix: Planned enhancements**
-1. Add a boolean field to deleteCommand class to indicate whether user has entered duplicate indicies in the command. Display an extra message to remind the user of it.
+1. Add a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command. If so, display an additional message to remind the user about the duplication. 
 //TODO this is for countering known feature flaws to help grading, after the feature freeze. We can only list `4 members x 2 = 8` enhancements here
