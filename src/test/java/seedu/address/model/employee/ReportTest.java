@@ -40,7 +40,7 @@ public class ReportTest {
                 + "Employee Name: " + report.employee.getName().fullName
                 + "\nOvertime Hours: " + report.overtimeHours
                 + "\nOvertime Pay: " + report.overtimePay
-                + "\nNumber of Leaves: " + report.numOfLeaves
+                + "\nNumber of Leaves Used: " + report.numOfLeaves
                 + "\nRemarks:\n" + report.remarkList;
         assertTrue(report.toString().equals(expectedString));
     }
