@@ -25,7 +25,7 @@ import seedu.address.model.person.Name;
  * Parses input arguments and creates a new AddMeetingCommand object
  * @author Yuheng
  */
-public class AddMeetingCommandParser implements Parser<AddEventCommand> {
+public class AddEventCommandParser implements Parser<AddEventCommand> {
     @Override
     public AddEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

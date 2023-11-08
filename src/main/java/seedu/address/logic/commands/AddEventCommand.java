@@ -20,7 +20,7 @@ import seedu.address.model.person.Name;
 
 
 /**
- * Adds a meeting.
+ * Adds an event.
  * @author Yuheng
  */
 public class AddEventCommand extends Command {
@@ -47,7 +47,7 @@ public class AddEventCommand extends Command {
     private final Meeting toAdd;
 
     /**
-     * Creates an AddMeetingCommand to add the specified {@code Meeting}
+     * Creates an AddEventCommand to add the specified {@code Meeting}
      */
     public AddEventCommand(Meeting meeting) {
         requireAllNonNull(meeting);
@@ -99,5 +99,15 @@ public class AddEventCommand extends Command {
         return builder.toString();
     }
 
-
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        } else if (!(other instanceof AddEventCommand)) {
+            return false;
+        } else {
+            AddEventCommand otherAddEventCommand = (AddEventCommand) other;
+            return this.toAdd.equals(otherAddEventCommand.toAdd);
+        }
+    }
 }

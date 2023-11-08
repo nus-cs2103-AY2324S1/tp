@@ -20,6 +20,7 @@ Class Name
 Class Phone
 Class Group
 Class Birthday
+Class Remark
 
 Class EventList
 Class "{abstract}\nEvent" as Event
@@ -55,6 +56,7 @@ Person --> "0..1" Email
 Person --> "0..1" Address
 Person --> "*" Group
 Person --> "0..1" Birthday
+Person --> "0..1" Remark
 Event --> "1" EventName
 Event --> "1..2" EventDate
 Event --> "1" EventType
