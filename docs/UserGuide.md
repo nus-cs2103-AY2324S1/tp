@@ -141,8 +141,9 @@ Expected outputs:
 Adds an employee to ManageHR’s entries.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER NAME]…`
-- Adds an employee with the above fields
-- All fields must be provided
+- Adds an employee with the above fields.
+- Name, Phone Number, Email, Address, Salary, Leave and Role fields must be provided.
+- Department and Manager fields are optional, and can contain more than one.
 
 Examples:
 * `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh`
