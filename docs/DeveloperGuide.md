@@ -231,7 +231,8 @@ Step 3. The user executes `edit-t 1 n/John Doe` to edit the first tutor's name i
 The command is parsed in AddressBookParser.
 
 Step 4. `EditTutorCommandParser` is created, and constructs an `EditPersonDescriptor` which describes the edited 
-`Person`. An `EditTutorCommand` object is then constructed with this `EditPersonDescriptor` and the specified tutor index.
+`Person` (omitted in sequence diagram below for brevity). An `EditTutorCommand` object is then constructed with this 
+`EditPersonDescriptor` and the specified tutor index.
 
 Step 5. The `EditTutorCommand` object gets the specified person from the current filtered person list using the 
 tutor index.
