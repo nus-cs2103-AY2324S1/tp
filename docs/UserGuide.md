@@ -79,7 +79,9 @@ Note that contacts are identified by their name in ConText, and contacts with ex
 Hence, you will not be able to add a new contact with the same name as an existing contact.
 
 For example, if you already have a contact with name `John Doe`, you will not be able to add another contact with the same name `John Doe`.
-However, you may add another contact with name `John doe`, or `Alex John Doe`. You may also first modify the name of the existing contact.
+For two names to be considered the same, they must be identical in every way, and that includes casing, as well as whitespace in the middle of the name, etc.
+Therefore, you may add another contact with name `John doe`, `John    Doe`, or `Alex John Doe`. 
+You may also first modify the name of the existing contact.
 
 Should you need to make changes to an existing contact, use the `edit` command as explained below.
 
