@@ -1101,15 +1101,15 @@ Given below are the planned enhancements. The _current behaviour_ specifies how 
 
 * More user-friendly info message for `add` command.
   * Current behaviour: Upon a successful `add` command, the info message is rather verbose. For example, with command `add 1 /phone 12345678`, (depending on your contact list) the info message might be: `Added information to this contact: Bernice Yu; Phones: [99272758, 12345678]; Emails: [berniceyu@example.com]; Links: [github.com/bernfish]; Graduation: AY2020/2021 Semester 1; Courses: [Computer Science]; Specialisations [Artificial Intelligence]; Tags: [colleagues][friends]; Priority: High`.
-  * Enhanced behaviour: The info message can be shortened to show only the information being added. For example, with command `add 1 /phone 12345678`, the info message can be: `Added phone "12345678" to the contact at index 1.`
+  * Enhanced behaviour: The info message can be shortened to show only the information being added. For example, with command `add 1 /phone 12345678`, the info message can be: `Added phone "12345678" to the contact at index 1 (name: Bernice Yu).`
 
 * More user-friendly info message for `edit` command.
   * Current behaviour: Upon a successful `edit` command, the info message is rather verbose. For example, with command `edit 1 /phone 12345 /index 2`, (depending on your contact list) the info message might be: `Edited Person: Nguyen; Phones: [12345678, 12345]; Emails: []; Links: []; Courses: []; Specialisations []; Tags: `.
-  * Enhanced behaviour: The info message can be shortened to show the information being changed. For example, with command `edit 1 /phone 12345 /index 2`, the info message can be: `Changed phone at index 2 of the phone list of the contact at index 1 from "87654321" to "12345".`
+  * Enhanced behaviour: The info message can be shortened to show the information being changed. For example, with command `edit 1 /phone 12345 /index 2`, the info message can be: `Changed phone at index 2 of the phone list of the contact at index 1 (name: Nguyen) from "87654321" to "12345".`
 
 * More user-friendly info message for `delete` command.
   * Current behaviour: Upon a successful `delete` command that delete a field from a contact, the info message is rather verbose. For example, with command `delete 1 /phone /index 2`, (depending on your contact list), the info message might be: `Deleted some information of person: Alex Yeoh; Phones: [12345, 1234567, +65 123]; Emails: [alexyeoh@example.com]; Links: [github.com]; Graduation: AY2016/2017 Semester 1; Courses: [Information Systems]; Specialisations []; Tags: [friends]; Priority: Low`.
-  * Enhanced behaviour: The info message can be shortened to show only information being deleted. For example, with command `delete 1 /phone /index 2`, the info message can be: `Deleted phone "12345678" at index 2 of the phone list of the contact at index 1.`
+  * Enhanced behaviour: The info message can be shortened to show only information being deleted. For example, with command `delete 1 /phone /index 2`, the info message can be: `Deleted phone "12345678" at index 2 of the phone list of the contact at index 1 (name: Alex Yeoh).`
 
 ### Model
 
