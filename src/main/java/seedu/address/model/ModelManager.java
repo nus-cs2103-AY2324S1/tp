@@ -204,6 +204,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void clearTaskList() {
+        this.filteredTasks.clear();
+    }
+
+    @Override
     public void updateFilteredMemberList(Predicate<? super Member> predicate) {
         requireNonNull(predicate);
         filteredMembers.setPredicate(predicate);
@@ -234,9 +239,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredMembers.equals(otherModelManager.filteredMembers)
-            && filteredApplicants.equals(otherModelManager.filteredApplicants);
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredMembers.equals(otherModelManager.filteredMembers)
+                && filteredApplicants.equals(otherModelManager.filteredApplicants);
     }
 
 }

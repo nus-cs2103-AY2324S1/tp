@@ -20,7 +20,7 @@ Here are some possible ways you can integrate CMC into your CCA:
 - You can schedule interview times with your applicants.
 - You can find members or applicants easily through the `find` commands.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-info">:bulb: **Tip:**
 
 If this is your first time using CMC, head over to [How to use CMC's User Guide](#1-how-to-use-cmcs-user-guide)
 to start keeping track of all your members and applicants!
@@ -78,7 +78,7 @@ quick reference to all the commands available in CMC.
       to [edit a member](#414-editing-a-member-editmember-or-editm) for more.
     - `exit`: Exits the application.
 
-        <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+        <div markdown="span" class="alert alert-info">:bulb: **Tip:**
         Follow each step in order to see how a normal workflow would feel like with CMC!
         </div>
 
@@ -225,7 +225,7 @@ This generates a list of all members whose details contain `Alicia`.
 
 ![Find_Member](images/findMember.png)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-info">:bulb: **Tip:**
 
 If you would like to go back to the whole list of members, use `viewmember`.
 You may check out the command [here](#413-viewing-members-viewmembers-or-view).
@@ -438,7 +438,7 @@ This adds a new applicant named `Lady Gaga` with phone number `99129969` to the 
 ![Add_Applicant](images/addApplicant.png)
 
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-info">:bulb: **Tip:**
 
 If you would like **schedule an interview** with a specific applicant, use `editapplicant`.
 You may check out the command [here](#424-editing-an-applicant-editapplicant-or-edita).
@@ -466,7 +466,7 @@ This generates a list of all members whose details contain `Rui`.
 
 ![Find_Applicant](images/findApplicant.png)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-info">:bulb: **Tip:**
 
 If you would like to go back to the whole list of applicants, use `viewapplicants`.
 You may check out the command [here](#423-viewing-applicants-viewapplicants-or-viewa).
@@ -598,7 +598,7 @@ Interview Time: Interview time has not been set
 #### 4.3.1 Accessing the user guide: `help`
 
 Opens a window with a link to the user guide.
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-info">:bulb: **Tip:**
 
 This window can also be opened from accessing the `Help` button.  
 Check out the [Interface Walkthrough](#3-interface-walkthrough) to locate where the button is.

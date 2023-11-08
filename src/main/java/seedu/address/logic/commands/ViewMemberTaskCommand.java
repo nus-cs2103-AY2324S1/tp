@@ -22,7 +22,7 @@ public class ViewMemberTaskCommand extends Command {
             + "by the index number used in the displayed member list. \n"
             + "Parameters: INDEX (must be a positive integer) ";
 
-    public static final String MESSAGE_ADD_TODO_SUCCESS = "Task output for member %1$s";
+    public static final String MESSAGE_ADD_TODO_SUCCESS = "Listed tasks for member %1$s.";
 
     private final Index index;
 
