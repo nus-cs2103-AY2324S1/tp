@@ -54,7 +54,8 @@ public class SampleDataUtil {
             new Department("logistics"),
             new Department("Production"),
             new Department("Sales"),
-            new Department("Not-confirmed")
+            new Department("Not-confirmed"),
+            new Department("SoC HR")
         };
     }
 
