@@ -165,8 +165,8 @@ Example:
 Output:
 * ManaGease should display a confirmation message indicating that the employee has been successfully added to the database.
 * The employee's profile should be updated with the provided information.
-  <br><img src="images/addSuccess1.png">
-  <br><img src="images/addSuccess2.png">
+  <br>![result for adding employee](images/addSuccess1.png)
+  <br>![result for adding employee person card](images/addSuccess2.png)
 
 * If prefix used is not defined, an error message will appear.
   <br>![failed result for adding employee](images/addFailed.png)
