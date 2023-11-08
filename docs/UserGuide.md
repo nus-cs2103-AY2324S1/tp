@@ -199,6 +199,9 @@ List all members and all events in the CCA in two separate columns.
 
 Format: `list`
 
+A GUI similar to the one below will be shown after entering the command.
+![list](images/list.png)
+
 ### View Events of Member : `viewMember`
 
 Lists all the events of a specified member index.
@@ -213,6 +216,10 @@ Examples:
 * `viewMember 1` displays events of the 1st member in the member list.
 * `viewMember 10` displays events of the 10th member in the member list.
 
+A GUI similar to the one below will be shown after entering the command if the member is enrolled in events.
+The hours and remarks for each event is reflected here.
+![viewMember](images/viewMember.png)
+
 ### View Members of Event : `viewEvent`
 
 Lists all the members of a specified event index.
@@ -225,6 +232,10 @@ Format: `viewEvent EVENT_INDEX`
 Examples:
 * `viewEvent 1` displays members of the 1st event in the event list.
 * `viewEvent 10` displays members of the 10th event in the event list.
+
+A GUI similar to the one below will be shown after entering the command if the event has members enrolled in it.
+The hours and remarks for each member is reflected here.
+![viewEvent](images/viewEvent.png)
 
 ### Find Member in member list : `findMember`
 
