@@ -149,7 +149,7 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
         TaskList taskList = new TaskList();
         for (JsonAdaptedTask taskString : tasks) {
             // parse the task
-            Task task = deserialize(Task.DEFAULT_TASK, Task::of, taskString.getTaskName());
+            Task task = deserialize(Task.DEFAULT_TASK, Task::ofDepreciated, taskString.getTaskName());
             taskList.add(task);
         }
         return taskList;

@@ -89,5 +89,8 @@ public class AddPersonCommand extends Command {
                 .add("toAdd", toAdd)
                 .toString();
     }
+    public Person getPerson() {
+        return toAdd;
+    }
 
 }

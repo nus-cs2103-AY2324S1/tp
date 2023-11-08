@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,14 +16,28 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ScheduleList;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
 import seedu.address.testutil.ModelStub;
 
 class AddTaskCommandTest {
+    @Test
+    public void execute_invalidIndex_noShownLesson() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                getTypicalScheduleList());
+        Task validTask = new Task("Valid task");
+        AddTaskCommand addTaskCommand = new AddTaskCommand(0, validTask);
+        assertThrows(CommandException.class, () -> addTaskCommand.execute(model));
+        AddTaskCommand addTaskCommand2 = new AddTaskCommand(null, validTask);
+        model.resetAllShowFields();
+        assertThrows(CommandException.class, () -> addTaskCommand2.execute(model));
+    }
 
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {

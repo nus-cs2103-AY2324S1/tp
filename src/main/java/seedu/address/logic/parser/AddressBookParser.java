@@ -128,9 +128,9 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case AddLessonCommand.COMMAND_WORD:
-            return new AddLessonCommandParser().parse(userInput);
+            return new AddLessonCommandParser().parse(arguments);
         case EditLessonCommand.COMMAND_WORD:
-            return new EditLessonCommandParser().parse(userInput);
+            return new EditLessonCommandParser().parse(arguments);
         case LinkCommand.STATEFUL_COMMAND_WORD:
             return new LinkCommandParser(model).parse(arguments);
         case LinkCommand.COMMAND_WORD:
@@ -139,7 +139,7 @@ public class AddressBookParser {
             if (!model.getState().equals(SCHEDULE)) {
                 throw new ParseException("Please add tasks in the schedule list.");
             }
-            return new AddTaskCommandParser().parse(userInput);
+            return new AddTaskCommandParser().parse(arguments);
         case "task":
             if (!model.getState().equals(SCHEDULE)) {
                 throw new ParseException("Please add tasks in the schedule list.");
@@ -149,7 +149,7 @@ public class AddressBookParser {
             if (!model.getState().equals(SCHEDULE)) {
                 throw new ParseException("Please delete tasks in the schedule list.");
             }
-            return new DeleteTaskCommandParser().parse(userInput);
+            return new DeleteTaskCommandParser().parse(arguments);
         case NavigateCommand.COMMAND_WORD:
             return new NavigateCommand();
         case "nav":

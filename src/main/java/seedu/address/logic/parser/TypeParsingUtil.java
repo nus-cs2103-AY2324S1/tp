@@ -80,14 +80,14 @@ public class TypeParsingUtil {
      */
     public static Integer parseIndex(String input, boolean isOptional) throws ParseException {
         Pattern p1 = Pattern.compile(STARTING_WITH_ONE_TO_FIVE_DIGITS);
-        Pattern p2 = Pattern.compile(RegularExpressionUtil.STARTING_WITH_DIGITS);
+        Pattern p2 = Pattern.compile(RegularExpressionUtil.STARTING_WITH_MORE_THAN_FIVE_DIGITS);
         Pattern p3 = Pattern.compile(RegularExpressionUtil.STARTING_WITH_NEGATIVE_NUMBER);
         Matcher m = p1.matcher(input);
-        if (m.find()) {
+        if (p2.matcher(input).find()) {
+            throw new InvalidInputException("Index input is too large, allowed range: 1-99999");
+        } else if (m.find()) {
             String found = m.group(0);
             return parseNum(found);
-        } else if (p2.matcher(input).find()) {
-            throw new InvalidInputException("Index input is too large, allowed range: 1-99999");
         } else if (p3.matcher(input).find()) {
             throw new InvalidInputException("Index cannot be negative");
         } else {

@@ -119,4 +119,10 @@ public class AddTaskCommand extends Command {
         AddTaskCommand otherAddTaskCommand = (AddTaskCommand) other;
         return task.equals(otherAddTaskCommand.task);
     }
+    public Integer getIndex() {
+        return index;
+    }
+    public Task getTask() {
+        return task;
+    }
 }
