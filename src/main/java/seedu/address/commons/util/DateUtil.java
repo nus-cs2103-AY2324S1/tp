@@ -16,7 +16,7 @@ public class DateUtil {
     /**
      * Formats date and time inputs as: yyyy/MM/dd hh:mm (eg. 2020/02/20 08:00).
      */
-    private static final DateTimeFormatter dateTimeFormat = new DateTimeFormatterBuilder()
+    private static final DateTimeFormatter FORMAT = new DateTimeFormatterBuilder()
             .appendPattern("yyyy/MM/dd HH:mm")
             .parseDefaulting(ChronoField.ERA, 1)
             .toFormatter()
@@ -31,7 +31,7 @@ public class DateUtil {
         requireNonNull(dateAndTime);
         String trimmedDateTime = dateAndTime.trim();
         LocalDateTime localDateTime;
-        localDateTime = LocalDateTime.parse(trimmedDateTime, dateTimeFormat);
+        localDateTime = LocalDateTime.parse(trimmedDateTime, FORMAT);
         return localDateTime;
     }
 
@@ -41,6 +41,6 @@ public class DateUtil {
      */
     public static String dateTimeToString(LocalDateTime dateAndTime) {
         requireNonNull(dateAndTime);
-        return dateAndTime.format(dateTimeFormat);
+        return dateAndTime.format(FORMAT);
     }
 }
