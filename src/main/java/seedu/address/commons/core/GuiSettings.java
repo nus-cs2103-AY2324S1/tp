@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -35,6 +37,15 @@ public class GuiSettings implements Serializable {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         windowCoordinates = new Point(xPosition, yPosition);
+    }
+
+    /**
+     * Initializes GuiSettings with the size of the screen. To be used when JavaFX is initialized.
+     */
+    public static GuiSettings fromScreenDimensions() {
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        return new GuiSettings(screenBounds.getWidth(), screenBounds.getHeight(),
+                0, 0);
     }
 
     public double getWindowWidth() {
