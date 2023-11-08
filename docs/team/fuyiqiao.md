@@ -29,8 +29,14 @@ Given below are my contributions to the project.
     * User Guide:
       * Edit general formatting 
       * Edit inconsistencies (PR [#95](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/95))
+      * Added details of merge command 
+      * Edit details for add and edit commands
     * Developer Guide:
-      * 
-* **Review / mentoring contributions**: to be added soon
-* **Contributions beyond the project team**: to be added soon
-
+      * Added implementation details for tallied attendance feature 
+      * Added implementation details for merge command 
+      * Added use cases
+      * Added future enhancements 
+* **Review / mentoring contributions**:
+  * Reviewed 11 Pull Requests 
+* **Contributions beyond the project team**:
+  * Reported bugs and suggestions for other teams during PE-D.
