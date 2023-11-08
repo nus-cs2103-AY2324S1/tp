@@ -10,22 +10,25 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 Given below are my contributions to the project.
 
-* **New Feature**:
-* **New Feature**:
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=trgao&breakdown=true)
 
+* **Enhancements implemented**:
+  * Implemented the UniqueAppointmentList to keep track of all appointments in the application
+  * Implemented the JsonAdaptedAppointment to store the appointment objects as JSON objects as well as convert JSON objects back into appointment objects
+  * Implemented the `today`, `upcoming`, and `triage` commands for appointments
+  * Implemented the dark/light mode in the application as well as the corresponding `mode` command
+
 * **Project management**:
+  * Set up the GitHub repo for the team
+  * Maintained the issue tracker
+  * Released the different versions of the product throughout the lifecycle of the product
 
-* **Enhancements to existing features**:
+* **Contributions to user guide**:
+  * Added the "Tutorial for new users" section
+  * Substantiated the "FAQ" and "Commands Summary" section
+  * Reformatted all the commands in the user guide to a user-friendly style
 
-* **Documentation**:
-    * User Guide:
-        * Added documentations for user guide
-    * Developer Guide:
-
-
-* **Community**:
-
-
-* **Tools**:
+* **Contributions to developer's guide**:
+  * Added the "Appendix: Planned Enhancements" section
+  * Added the UML diagrams and explanations for `upcoming` and `triage` commands
+  * Updated the UML diagrams in the "UI" and "Model" sections to include the Appointment class
