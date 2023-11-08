@@ -1,0 +1,90 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AttendanceCommandParser" as AttendanceCommandParser LOGIC_COLOR
+participant "a:AttendanceCommand" as AttendanceCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("attendance 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("attendance 1")
+activate AddressBookParser
+
+create AttendanceCommandParser
+AddressBookParser -> AttendanceCommandParser
+activate AttendanceCommandParser
+
+AttendanceCommandParser --> AddressBookParser
+deactivate AttendanceCommandParser
+
+AddressBookParser -> AttendanceCommandParser : parse("1")
+activate AttendanceCommandParser
+
+create AttendanceCommand
+AttendanceCommandParser -> AttendanceCommand
+activate AttendanceCommand
+
+AttendanceCommand --> AttendanceCommandParser : a
+deactivate AttendanceCommand
+
+AttendanceCommandParser --> AddressBookParser : a
+deactivate AttendanceCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AttendanceCommandParser -[hidden]-> AddressBookParser
+destroy AttendanceCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AttendanceCommand : execute()
+activate AttendanceCommand
+
+
+
+AttendanceCommand -> AttendanceCommand : reportByIndex()
+activate AttendanceCommand
+
+AttendanceCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> AttendanceCommand : fullList
+deactivate Model
+
+AttendanceCommand -> Person : getAttendanceStorage()
+activate Person
+
+Person --> AttendanceCommand
+deactivate Person
+
+AttendanceCommand -> AttendanceStorage : getAttendanceReport()
+activate AttendanceStorage
+
+AttendanceStorage --> AttendanceCommand : attendanceReport
+deactivate AttendanceStorage
+
+
+create CommandResult
+AttendanceCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AttendanceCommand
+deactivate CommandResult
+deactivate AttendanceCommand
+
+
+AttendanceCommand --> LogicManager : result
+deactivate AttendanceCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
