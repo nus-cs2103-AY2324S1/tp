@@ -48,6 +48,7 @@ public class DeleteMemberCommand extends Command {
 
         Member memberToDelete = lastShownList.get(memberIndex.getZeroBased());
         model.deleteMember(memberToDelete);
+        model.clearTaskList();
         return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS, Messages.format(memberToDelete)));
     }
 
