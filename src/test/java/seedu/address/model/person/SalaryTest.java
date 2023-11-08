@@ -80,14 +80,16 @@ class SalaryTest {
     public void addDeduction_nullDeductions_returnSingleElementArrayList() {
         salaryWithNoBenefitAndDeduction.addDeduction(new Deduction("100.00", Reason.NO_PAY_LEAVE));
         assertTrue(salaryWithNoBenefitAndDeduction.getDeductions().size() == 1);
-        assertTrue(salaryWithNoBenefitAndDeduction.getDeductions().get(0).equals(new Deduction("100.00", Reason.NO_PAY_LEAVE)));
+        assertTrue(salaryWithNoBenefitAndDeduction.getDeductions().get(0).equals(
+            new Deduction("100.00", Reason.NO_PAY_LEAVE)));
     }
 
     @Test
     public void addBenefit_nullDeductions_returnSingleElementArrayList() {
         salaryWithNoBenefitAndDeduction.addBenefit(new Benefit("100.00", Reason.ANNUAL_BONUS));
         assertTrue(salaryWithNoBenefitAndDeduction.getBenefits().size() == 1);
-        assertTrue(salaryWithNoBenefitAndDeduction.getBenefits().get(0).equals(new Benefit("100.00", Reason.ANNUAL_BONUS)));
+        assertTrue(salaryWithNoBenefitAndDeduction.getBenefits().get(0).equals(
+            new Benefit("100.00", Reason.ANNUAL_BONUS)));
     }
 
     @Test
