@@ -279,7 +279,7 @@ the lifeline reaches the end of diagram.
 
 The "Find Tutor" feature allows users to search for tutors based on the tutor's name. 
 
-The following shows the activity diagram from when a user executes the find-t command:
+The following shows the activity diagram from when a user executes the `find-t` command:
 
 ![Activity Diagram for find-t Command](images/FindTutorActivityDiagram.png)
 
@@ -516,7 +516,7 @@ the lifeline reaches the end of diagram.
 
 The "Unmark Schedule" feature allows users to unmark a schedule that was previously marked as completed or missed. 
 
-The following shows the activity diagram from when a user executes the unmark command:
+The following shows the activity diagram from when a user executes the `unmark` command:
 
 ![UnmarkScheduleActivityDiagram](images/UnmarkScheduleActivityDiagram.png)
 
@@ -538,13 +538,13 @@ schedule can be safely unmarked in the Model:
 - The `Index` is a valid integer.
 - The `Index` is not out of bounds (within the range of the displayed schedule list's size).
 
-Step 6. The `execute` method then calls Model::getFilteredScheduleList and gets the specified `Schedule` using the 
+Step 6. The `execute` method then calls `Model::getFilteredScheduleList` and gets the specified `Schedule` using the 
 `Index` given.
 
 Step 7. Once the checks are successful, the method then creates an edited schedule from the original schedule with its
 status set to pending.
 
-Step 8. Tbe method then calls the `setSchedule` method in the `ModelManager` with the new edited schedule. This sets the 
+Step 8. The method then calls the `setSchedule` method in the `ModelManager` with the new edited schedule. This sets the 
 specified `Schedule` in the model to be that edited schedule with pending status.
 
 Step 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
@@ -610,7 +610,7 @@ The `delete-s` command was designed this way to ensure consistency with the prev
 
 The "Show Calendar" feature allows users to view schedules based on a specific date. 
 
-The following shows the activity diagram from when a user executes the show command:
+The following shows the activity diagram from when a user executes the `show` command:
 
 ![Activity Diagram for show Command](images/ShowCalendarActivityDiagram.png)
 
@@ -642,7 +642,7 @@ the lifeline reaches the end of diagram.
 
 #### Design Rationale
 
-**Aspect: Defining Which Tutor to Display for Show Calendar**
+**Aspect: Defining which tutor to display for calendar**
 - **Alternative 1 (current choice):** Show calendar for all tutors
     - Pros: Provides a comprehensive view of schedules for all tutors, allowing users to see the entire schedule at a 
       glance.
@@ -651,7 +651,7 @@ the lifeline reaches the end of diagram.
       tutors.
     - Cons: Users may need to filter or navigate through a longer list of schedules to find the specific information 
       they are interested in.
-- **Alternative 2:** Specify tutor to Show Calendar for.
+- **Alternative 2:** Specify tutor to show calendar for.
     - Pros: Offers a focused view of schedules for a particular tutor, allowing users to quickly access and manage the 
       schedule for that specific individual.
     - Pros: Reduces visual clutter and streamlines the user interface for users primarily interested in one tutor.
@@ -1066,7 +1066,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a tutor
 
-Deleting a tutor while all tutor are being shown
+Deleting a tutor while all tutors are being shown
 
    1. Prerequisites: List all tutors using the `list-t` command. Multiple tutors in the list.
 
