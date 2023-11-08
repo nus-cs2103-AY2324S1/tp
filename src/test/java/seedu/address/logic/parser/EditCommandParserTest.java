@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.command.parse.exceptions.EditCommandParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -47,33 +47,33 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_emptyArgs_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(""));
+        assertThrows(EditCommandParseException.class, () -> parser.parse(""));
     }
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertThrows(ParseException.class, () -> parser.parse(VALID_NAME_AMY));
+        assertThrows(EditCommandParseException.class, () -> parser.parse(VALID_NAME_AMY));
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
-        assertThrows(ParseException.class, () -> parser.parse(""));
+        assertThrows(EditCommandParseException.class, () -> parser.parse(""));
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertThrows(ParseException.class, () -> parser.parse("-5"));
+        assertThrows(EditCommandParseException.class, () -> parser.parse("-5"));
 
         // zero index
-        assertThrows(ParseException.class, () -> parser.parse("0"));
+        assertThrows(EditCommandParseException.class, () -> parser.parse("0"));
 
         // invalid arguments being parsed as preamble
-        assertThrows(ParseException.class, () -> parser.parse("1 some random string"));
+        assertThrows(EditCommandParseException.class, () -> parser.parse("1 some random string"));
 
         // invalid prefix being parsed as preamble
-        assertThrows(ParseException.class, () -> parser.parse("1 i/ string"));
+        assertThrows(EditCommandParseException.class, () -> parser.parse("1 i/ string"));
     }
 
     @Test

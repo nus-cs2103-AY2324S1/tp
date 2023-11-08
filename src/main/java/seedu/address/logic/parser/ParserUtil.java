@@ -24,7 +24,7 @@ import seedu.address.model.person.Phone;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index should be a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_ROOM = "Room numbers are between 1 and 500 inclusive.";
 
     /**
