@@ -68,7 +68,6 @@ public class PersonSortComparator implements Comparator<Person> {
             return generateGradComparator(isAsc);
         case PRIORITY:
             return generatePriorityComparator(isAsc);
-        case NONE: // Fallthrough
         default:
             return EMPTY_COMPARATOR;
         }
@@ -175,8 +174,6 @@ public class PersonSortComparator implements Comparator<Person> {
             return SortField.GRAD;
         case "priority":
             return SortField.PRIORITY;
-        case "none":
-            return SortField.NONE;
         default:
             return SortField.INVALID;
         }
@@ -233,7 +230,6 @@ public class PersonSortComparator implements Comparator<Person> {
         NAME,
         GRAD,
         PRIORITY,
-        NONE,
         INVALID
     }
 

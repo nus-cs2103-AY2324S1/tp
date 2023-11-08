@@ -18,7 +18,6 @@ import networkbook.commons.core.LogsCenter;
 import networkbook.logic.Logic;
 import networkbook.logic.commands.CommandResult;
 import networkbook.logic.commands.FilterCommandResult;
-import networkbook.logic.commands.ListCommandResult;
 import networkbook.logic.commands.RedoCommand;
 import networkbook.logic.commands.SaveCommand;
 import networkbook.logic.commands.SortCommandResult;
@@ -273,11 +272,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult instanceof FilterCommandResult) {
                 FilterCommandResult filterCommandResult = (FilterCommandResult) commandResult;
                 handleFilter(filterCommandResult.getFilterField());
-            }
-
-            if (commandResult instanceof ListCommandResult) {
-                handleFilter("none");
-                handleSort(SortField.NONE, SortOrder.ASCENDING);
             }
 
             return commandResult;
