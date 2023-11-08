@@ -452,3 +452,11 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Planned enhancements**
 
 //TODO this is for countering known feature flaws to help grading, after the feature freeze. We can only list `4 members x 2 = 8` enhancements here
+
+* The current implementation of `Phone` allow users to include very long numbers that might not be a number that 
+actually exist some part of the world. We also intend to allow users to include the `+` prefix to allow users to indicate
+country codes as well. The invalid message `Phone numbers must start with at least 3 digits.` as a result will need to be
+updated to reflect on this change.
+* The current implementation of `AlternateContact` does not allow users to include whitespace in `TYPE` and `USERNAME` 
+and `USERNAME` only supports `._-` symbols. We intend to allow users to include whitespace as well as more `USERNAME`
+so that `AlternateContact` can be used more flexibly.

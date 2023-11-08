@@ -87,6 +87,12 @@ Should you need to make changes to an existing contact, use the `edit` command a
 `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
 <div markdown="span" class="alert alert-info">
+:information_source: **About phone number**
+Phone numbers must contain at least 3 digits. Alphabets and special characters are not accepted.
+For additional phone numbers, please make use of `ALTERNATE_CONTACT`
+</div>
+
+<div markdown="span" class="alert alert-info">
 :information_source: **About tags:**
 Duplicate tags are only counted once.
 </div>
@@ -94,12 +100,15 @@ Duplicate tags are only counted once.
 <div markdown="span" class="alert alert-info">
 :information_source: **About the alternate contact format:**
 The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon and the Username.
+Do note at this moment whitespace is not supported for `TYPE` and `USERNAME` and `USERNAME` supports only `._-`.
 </div>
 
 **Examples:**
 
-- `add n/John Doe p/98765432 e/john.doe@email.com`
+- `add n/John Doe p/98765432 e/john.doe@email.com` 
+(Adds a contact with the name `John Doe`, phone `98765432` and email `john.doe@email.com`)
 - `add n/John Doe p/98765432 e/john.doe@email.com o/Likes SE. t/NUS t/CS2103 course a/Telegram: JohnDoe`
+(Adds a contact with the name `John Doe`, phone `98765432`, email `john.doe@email.com`, note `Likes SE`, tags `NUS` and `CS2103 course` and alternate contact `Telegram: JohnDoe`)
 
 ### Editing a contact: `edit`
 
