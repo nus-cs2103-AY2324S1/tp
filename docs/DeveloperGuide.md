@@ -129,7 +129,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete NRIC")` API
 call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
@@ -617,6 +617,39 @@ otherwise)
     * 4a1. Medilink Contacts shows an error message.
 
       Use case resumes at step 2.
+
+* 4b. The edited fields include invalid inputs. 
+
+    * 4b1. Medilink Contacts shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC5 - Undo a command**
+
+**MSS**
+
+1. User requests to delete a specific person in the list.
+2. Medilink Contacts deletes the person.
+3. User realises mistake, requests to undo previous action.
+4. Medilink Contacts reverts to state before patient was deleted.
+
+   Use case ends.
+
+**Extensions**
+
+* 4a. User wants to redo the command.
+
+    * 4a1. User requests to redo last command.
+    * 4a2. MediLink Contacts reverts to state where patient was deleted.
+
+  Use case ends.
+
+* 4b. User wants to perform another undo when there are no further actions to be undone.
+
+    * 4b1. User requests to undo again.
+    * 4b2. Medilink Contacts shows an error message.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
