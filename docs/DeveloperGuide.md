@@ -805,7 +805,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing all free timing for the given day
 Command: `list-freetime`</br>
-More information on usage: [list-freetime command]()
+More information on usage: list-freetime command
 
 1. Listing the free time for a day using `DD/MM/YYYY` or `DD-MM-YYYY` format
    1. Prerequisites: The date string must be in the DD/MM/YYYY or DD-MM-YYYY format, and there should not be any interviews scheduled for the given date
@@ -830,7 +830,7 @@ More information on usage: [list-freetime command]()
 
 ### Listing all completed interview
 Command: `list-i-done`</br>
-More information on usage: [list-i-done command]()
+More information on usage: list-i-done command
 
 1. Listing completed interviews with exact command
     1. Test case: `list-i-done`</br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty 
@@ -839,7 +839,7 @@ More information on usage: [list-i-done command]()
    
 ### Listing all incomplete interview
 Command: `list-i-not-done`</br>
-More information on usage: [list-i-not-done command]()
+More information on usage: list-i-not-done command
 
 1. Listing completed interviews with exact command
     1. Test case: `list-i-not-done`</br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty
@@ -850,7 +850,7 @@ More information on usage: [list-i-not-done command]()
 
 ### Sorting the interview list by start-time
 Command: `sort-time`</br>
-More information on usage: [sort-time command]()
+More information on usage: sort-time command
 
 1. Listing completed interviews with exact command
    1. Test case: `sort-time`</br>Expected: The interview list will be sorted in chronological order of start times. If there are no interviews scheduled, the interviews box will be empty. In the case that the list is filtered in some way, the sort will only sort on the filtered interview list
