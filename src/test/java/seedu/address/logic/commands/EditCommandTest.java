@@ -24,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.person.Name;
 import seedu.address.testutil.BookingBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -71,17 +72,21 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditRoomDescriptor());
-        Booking editedBooking = model.getFilteredBookingList().get(INDEX_FIRST_PERSON.getZeroBased());
+    public void execute_noFieldSpecifiedUnfilteredList_failure() {
+        EditRoomDescriptor editRoomDescriptor = new EditRoomDescriptor();
+        editRoomDescriptor.setName(new Name("Alice Pauline"));
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BOOKING_SUCCESS,
-                Messages.format(editedBooking));
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, editRoomDescriptor);
+        Booking initialBooking = model.getFilteredBookingList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_NOT_EDITED, Messages.format(initialBooking));
 
         Model expectedModel = new ModelManager(new BookingsBook(model.getBookingsBook()), new UserPrefs());
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
+
+
 
     @Test
     public void execute_filteredList_success() {

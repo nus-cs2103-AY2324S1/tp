@@ -33,8 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_AMY = "amy@gmail.com";
+    public static final String VALID_EMAIL_BOB = "bob@gmail.com";
     public static final String VALID_BOOKING_PERIOD_AMY = "2023-01-01 08:00 to 2023-01-02 12:00";
     public static final String VALID_BOOKING_PERIOD_BOB = "2023-01-03 16:00 to 2023-01-04 23:59";
     public static final String VALID_REMARK_AMY = "Requested Extra Towels";

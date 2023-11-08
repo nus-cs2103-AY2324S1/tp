@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.BookingCard.closeAllPopups;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -155,17 +157,33 @@ public class MainWindow extends UiPart<Stage> {
 
     void show() {
         primaryStage.show();
+
+        // Add a setOnCloseRequest to handle the closing of the main stage
+        primaryStage.setOnCloseRequest(windowEvent -> {
+            // Close all associated pop-up stages
+            closeAllPopups();
+            // Close the help window if it's showing
+            if (helpWindow.isShowing()) {
+                helpWindow.hide();
+            }
+        });
     }
+
 
     /**
      * Closes the application.
      */
     @FXML
     private void handleExit() {
+        // Close all associated pop-up stages
+        closeAllPopups();
+
+        if (helpWindow.isShowing()) {
+            helpWindow.hide();
+        }
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 

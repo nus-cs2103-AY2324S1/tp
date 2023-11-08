@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -24,6 +27,7 @@ import seedu.address.model.booking.RoomTypeTag;
 public class BookingCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final List<Stage> popupStages = new ArrayList<>();
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -77,8 +81,42 @@ public class BookingCard extends UiPart<Region> {
         FlowPane.setMargin(tagLabel, new Insets(0, 0, 0, 50)); // Adjust the insets as needed
     }
 
+    /**
+     * Closes all pop-up stages opened within the application.
+     * Iterates through the list of pop-up stages and closes each one.
+     */
+    public static void closeAllPopups() {
+        for (Stage stage : popupStages) {
+            stage.close();
+        }
+    }
+
     @FXML
     private void handleCardClick(MouseEvent event) {
+        if (booking != null) {
+            Stage existingPopup = findExistingPopup(booking);
+            if (existingPopup != null) {
+                // If a pop-up for this booking is already open, bring it to the front
+                existingPopup.toFront();
+            } else {
+                // Create a new pop-up for the booking
+                createNewPopup();
+            }
+        }
+    }
+
+    private Stage findExistingPopup(Booking booking) {
+        // Check if a pop-up for the given booking already exists
+        for (Stage popupStage : popupStages) {
+            // Compare the booking information
+            if (popupStage.getTitle().equals("Room " + booking.getRoom().getRoomNumber())) {
+                return popupStage;
+            }
+        }
+        return null;
+    }
+
+    private void createNewPopup() {
         if (booking != null) {
             // Create a VBox to hold the icons and set its style
             VBox popupRoot = new VBox();
@@ -98,9 +136,11 @@ public class BookingCard extends UiPart<Region> {
             phoneIcon.setFitWidth(30);
 
             // Create Labels and set the actual data for Name, Email, and Phone
-            Label nameLabel = new Label(booking.getName().toString());
+            String displayedName = booking.getName().truncatedName();
+            Label nameLabel = new Label(displayedName);
             Label phoneLabel = new Label(booking.getPhone().toString());
-            Label emailLabel = new Label(booking.getEmail().toString());
+            String displayedEmail = booking.getEmail().truncatedEmail();
+            Label emailLabel = new Label(displayedEmail);
 
             // Apply bold style, increase font size, and increase letter-spacing to the labels
             nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-text-letter-spacing: 1.5;");
@@ -124,7 +164,8 @@ public class BookingCard extends UiPart<Region> {
             Scene scene = new Scene(popupRoot);
 
             Stage popupStage = new Stage();
-            popupStage.setTitle("Room " + roomNumber);
+            popupStage.setTitle("Room " + booking.getRoom().getRoomNumber());
+            popupStage.setResizable(false);
 
             // Set the room image as the icon
             popupStage.getIcons().add(new Image("images/Room.png"));
@@ -141,7 +182,16 @@ public class BookingCard extends UiPart<Region> {
             double titleWidth = titleText.getLayoutBounds().getWidth();
             popupStage.setMinWidth(titleWidth + 200); // Adjust the extra space as necessary
 
+            popupStage.setOnCloseRequest(windowEvent -> {
+                // Remove the closed stage from the list of pop-up stages
+                popupStages.remove(popupStage);
+            });
+
+            // Add the newly created pop-up stage to the list of stages
+            popupStages.add(popupStage);
+
             popupStage.show();
         }
     }
+
 }

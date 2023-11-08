@@ -53,6 +53,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Booking> lastShownList = model.getFilteredBookingList();
         List<Booking> deleteList = new ArrayList<>();
+        List<Integer> invalidIndices = new ArrayList<>(); // To keep track of invalid indices
 
         StringBuilder deletedBookings = new StringBuilder();
         boolean atLeastOneBookingDeleted = false;
@@ -63,6 +64,8 @@ public class DeleteCommand extends Command {
                 Booking bookingToDelete = lastShownList.get(zeroBasedIndex);
                 deleteList.add(bookingToDelete);
                 atLeastOneBookingDeleted = true;
+            } else {
+                invalidIndices.add(targetIndex.getOneBased()); // Record the invalid index
             }
         }
 
@@ -70,19 +73,28 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOKING_DISPLAYED_INDEX);
         }
 
-        model.addToDeletedBookings(deleteList); // Add the deleted bookings to the tracking list
+        model.addToDeletedBookings(deleteList);
 
         for (Booking deletedBooking : deleteList) {
             model.deleteBooking(deletedBooking);
             deletedBookings.append(Messages.format(deletedBooking)).append(", ");
         }
 
-        deletedBookings.setLength(deletedBookings.length() - 2); // Remove the trailing comma and space
+        deletedBookings.setLength(deletedBookings.length() - 2);
 
         model.updateFilteredBookingList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_BOOKING_SUCCESS, deletedBookings),
-                false, false, true);
+        String successMessage = String.format(MESSAGE_DELETE_BOOKING_SUCCESS, deletedBookings);
+
+        // If there are invalid indices, notify the user about them
+        if (!invalidIndices.isEmpty()) {
+            String invalidIndicesMsg = "Invalid index(es): " + invalidIndices.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", "));
+            successMessage += "\n" + invalidIndicesMsg;
+        }
+
+        return new CommandResult(successMessage, false, false, true);
     }
 
     /**

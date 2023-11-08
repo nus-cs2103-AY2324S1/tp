@@ -54,7 +54,7 @@ public class EditCommand extends Command {
     public static final List<String> EXAMPLES = List.of("date", "name",
             "phone", "email", "remark");
     public static final String MESSAGE_EDIT_BOOKING_SUCCESS = "Edited Booking: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "No changes made. At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_BOOKING = "This person already exists in the address book.";
     private final Index index;
     private final EditRoomDescriptor editRoomDescriptor;
@@ -112,6 +112,10 @@ public class EditCommand extends Command {
 
         if (!bookingToEdit.isOverlapBooking(editedBooking) && model.hasBooking(editedBooking)) {
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);
+        }
+
+        if (editedBooking.equals(bookingToEdit)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
         model.setBooking(bookingToEdit, editedBooking);
