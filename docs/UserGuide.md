@@ -195,7 +195,7 @@ Adds a member to the list of members in CMC.
 
 This adds a new member named `Taylor Swift` with phone number `91691969`, email `taylorswift@era.tour`, telegram handle `tswift` and tag `Admin` to the list of members.
 
-<img src="../docs/images/addMember.png" alt="addMember.png"/>
+![Add_Member](images/addMember.png)
 
 #### 4.1.2 Finding members: `findMember` or `findm`
 
@@ -363,7 +363,7 @@ Adds an applicant to the list of applicants in CMC.
 
 This adds a new applicant named `Lady Gaga` with phone number `99129969` to the list of applicants.
 
-<img src="../docs/images/addApplicant.png" alt="addApplicant.png"/>
+![Add_Applicant](images/addApplicant.png)
 
 #### 4.2.2 Finding applicants: `findApplicant` or `finda`
 
