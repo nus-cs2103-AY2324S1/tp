@@ -761,8 +761,8 @@ Finds employees whose names contain any of the given keywords.
 
 Example:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  <br><img src="images/findAlexDavidResult1.png">
-  <br><img src="images/findAlexDavidResult2.png">
+  <br><img src="images/findAlexDavidResult1.png" width="570">
+  <br><img src="images/findAlexDavidResult2.png" width="570" height="400">
 
 * Go back to [Table of Contents](#table-of-contents)
 
@@ -791,6 +791,8 @@ Exits the program.
 `exit`
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Saving the data
 
