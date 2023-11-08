@@ -88,16 +88,17 @@ The **GUI** is split up into 4 main sections.
 ## Class Number
 
 * Class Number refers to the tutorial class number of a particular course.
-* Class Number is not case-sensitive, and it must begin with 1 to 3 alphabet letters, followed by 1 to 5 digits, and end with an optional single alphabetical character. Class Number must not be blank.
+* Class Number is not case-sensitive, and it must begin with 1 to 3 consecutive alphabetical characters, followed by 1 to 5 consecutive digits. Optionally, it can end with 1 alphabetical character. Class Number must not be blank.
+* Class Number is stored verbatim based on your input, with case being preserved. 
 * Here are some valid examples of Class Number:
     - `G11`
     - `T11A`
     - `SG10`
-    - `ABC12345D`
+    - `abc12345d`
 
 ## Student Number
 
-* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the letter 'A' or 'a', followed by 1 or more digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the letter 'A' or 'a', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
 
 ## Command navigation
@@ -142,6 +143,7 @@ Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
 * `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` must be a positive integer between 1 and 40 inclusive.
 * Inputting the same `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` as the previous configuration will also **reset** the class details of all students.
+* `config` resets the state history of Class Manager, preventing you from using the `undo` command to reach a state before the `config` command was executed.
 
 Examples:
 * `config #t/13 #a/1`
@@ -186,6 +188,7 @@ Format: `load f/FILE_NAME`
 * File name is case-insensitive
 * File name must be valid and exist in the `/data` folder.
 * Number of tutorials and assignments in the loaded file must be the same as the current configuration of Class Manager. You can reconfigure Class Manager to match the number of tutorials and assignments in the loaded file using the `config` command.
+* `load` resets the state history of Class Manager, preventing you from using the `undo` command to reach a state before the `load` command was executed.
 
 Example:
 * `load f/sample` loads the sample.json file in the `/data` folder.
@@ -210,7 +213,7 @@ Example:
 
 ### Redo a command : `redo`
 
-Redo a previously undone command that modified the srare Class Manager. Redo only works with commands that can be undone. Class Manager only stores up to 10 modified states. Redo can be used multiple times to redo multiple undo commands, or until Class Manager reaches its most recent state after a maximum of 9 redos.
+Redo a previously undone command that modified the srare Class Manager. Redo only works with commands that can be undone. Class Manager only stores up to 10 modified states, which resets after a `load` or `config` command. Redo can be used multiple times to redo multiple undo commands, or until Class Manager reaches its most recent state after a maximum of 9 redos.
 
 Format: `redo`
 
@@ -237,7 +240,7 @@ Displayed result if there are no more commands to redo: `No more commands to red
 
 ### Undo a command : `undo`
 
-Undo the previous command that modified the state of Class Manager. Undo only works with commands that changes Class Manager, and does not work with commands such as `load` and `config`. Class Manager only stores up to 10 modified states. Undo can be used multiple times to undo multiple commands, or until Class Manager reaches its last stored state after a maximum of 9 undos.
+Undo the previous command that modified the state of Class Manager. Undo only works with commands that changes Class Manager, and does not work with commands such as `load` and `config`. Class Manager only stores up to 10 modified states, which resets after a `load` or `config` command. Undo can be used multiple times to undo multiple commands, or until Class Manager reaches its last stored state after a maximum of 9 undos.
 
 Format: `undo`
 
@@ -348,7 +351,7 @@ Example:
 
 ### Edit a student's details : `edit`
 
-Edits an existing student's details in Class Manager.
+Edits an existing student's details in Class Manager. One or more details can be edited at once.
 
 Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`
 
@@ -358,7 +361,8 @@ Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER]
 The student number entered __without__ the `s/` prefix will be the **old** student number.
 </box>
 
-* The `STUDENT_NUMBER` must be valid and exist.
+* `STUDENT_NUMBER` must be valid and exist.
+* `STUDENT_NUMBER` must be entered before the details to be modified.
 * Replace the student's existing student number with `NEW_STUDENT_NUMBER`.
 * `PHONE` must be a 3 to 20 digit positive integer.
 * At least one of the optional fields must be provided.
@@ -597,7 +601,7 @@ Example:
 # Glossary
 
 * **cd**: Change directory command in terminal/command line. cd takes the name of the folder you want to navigate to as an argument. The full command is cd `your-directory`.
-* **Student Number**: Matriculation number of NUS student. In Class Manager, it must begin with the capital 'A', followed by 1 or more digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* **Student Number**: Unique matriculation number of a NUS student. In Class Manager, it must begin with the letter 'A' or 'a', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.
