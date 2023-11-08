@@ -50,7 +50,7 @@ public class ContactCard extends UiPart<Region> {
         email.setText(contact.getEmail().value);
 
         String note = contact.getNote().value;
-        if (note != "") {
+        if (!note.equals("")) {
             this.note.setVisible(true);
             this.note.setManaged(true);
             this.note.setText(contact.getNote().value);
