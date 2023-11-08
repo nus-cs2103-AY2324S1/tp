@@ -444,12 +444,12 @@ be shown:`Please specify a valid date!`
 be shown:`Input date cannot be in the past!`
 
 #### Accepted date formats
-| Format               | Example      | Constraints                                                                                                                                                                                                                                                                                                                                                                                                   |
-|----------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `dd/mm/yyyy`         | `12/12/2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year. | 
-| `dd-mm-yyyy`         | `12-12-2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year. | 
-| `dd/mm`              | `12/12`      | - Adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The month and year must be **valid**.                                                                                                                                                                                                                                                                           |
-| `other time formats` | `12/01-2024` | - Will be accepted within reasonable bounds <br/><br/>- **Will lead to unexpected/unintended behaviour**.<br/><br/>- _Use with caution_                                                                                                                                                                                                                                                                       |
+| Format                                 | Example      | Constraints                                                                                                                                                                                                                                                                                                                                                                                                   |
+|----------------------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dd/mm/yyyy`                           | `12/12/2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year. | 
+| `dd-mm-yyyy`                           | `12-12-2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year. | 
+| `dd/mm`                                | `12/12`      | - Adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The month and year must be **valid**.                                                                                                                                                                                                                                                                           |
+| `other time formats (not recommended)` | `12/01-2024` | - Will be accepted within reasonable bounds <br/><br/>- **Will lead to unexpected/unintended behaviour**.<br/><br/>- _Use with caution_                                                                                                                                                                                                                                                                       |
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -524,6 +524,11 @@ Shows a list of all the interviews in **InterviewHub** that are done onto the GU
 
 Format: `list-i-done`
 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+To see all interviews regardless of completion status, use the command `list-i`.
+</div>
+
 Before `list-i-done`:
 ![beforelistidone](images/beforelistidone.png)
 
@@ -537,6 +542,11 @@ After `list-i-done`:
 Show a list of all the interviews in **InterviewHub** that are not done onto the GUI.
 
 Format:`list-i-not-done`
+
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+To see all interviews regardless of completion status, use the command `list-i`.
+</div>
 
 Before `list-i-not-done`:
 ![beforelistinotdone](images/beforelistinotdone.png)
