@@ -12,6 +12,7 @@ import transact.commons.exceptions.IllegalValueException;
 import transact.commons.util.JsonUtil;
 import transact.model.AddressBook;
 import transact.model.person.PersonId;
+import transact.testutil.PersonUtil;
 import transact.testutil.TypicalPersons;
 
 public class JsonSerializableAddressBookTest {
@@ -24,9 +25,7 @@ public class JsonSerializableAddressBookTest {
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
         AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
-        for (int i = 0; i < 7; i++) {
-            PersonId.freeUsedPersonIds(i);
-        }
+        PersonUtil.clearAddressBookPersonIdUniqueness(typicalPersonsAddressBook);
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
