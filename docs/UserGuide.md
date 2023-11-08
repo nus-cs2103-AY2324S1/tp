@@ -134,7 +134,7 @@ Examples:
 
 ### Adding tags : `add tag`
 
-Adds one or more tags to a contact.
+Adds one or more tags to a contact. Contact list will go back to showing all contacts upon successful addition.
 
 Format: `add tag -id CONTACT_ID -t TAGNAME...`
 
@@ -151,7 +151,7 @@ Examples:
 
 ### Deleting tags : `delete tag`
 
-Deletes one or more tags to a contact. 
+Deletes one or more tags to a contact. Contact list will go back to showing all contacts upon successful deletion.
 
 Format: `delete tag -id CONTACT_ID -t TAGNAME...`
 
