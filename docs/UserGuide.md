@@ -469,7 +469,7 @@ Examples:
 
 ---
 
-### Mark all displayed student as present : `present-all`
+### Mark all displayed students as present : `present-all`
 
 Mark the tutorial attendance for all students in the current list displayed as present in Class Manager.
 
@@ -562,10 +562,10 @@ Example:
 | [**Exit Class Manager**](#exit-class-manager-exit)               | `exit`                                           |
 | [**View command history**](#view-command-history-history)        | `history`                                        |
 | [**Load a save file**](#load-a-save-file-load)                   | `load f/FILE_NAME`<br> e.g. `load f/sample`      |
-| [**Randomly select students**](#randonly-select-students-random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2` |
+| [**Randomly select students**](#randomly-select-students-random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2` |
 | [**Redo a command**](#redo-a-command-redo)                       | `redo`                                           |
 | [**Undo a command**](#undo-a-command-undo)                       | `undo`                                           |
-| [**Toggle UI theme**](#toggle-UI-theme-theme)                    | `theme`                                          |
+| [**Toggle UI theme**](#toggle-ui-theme-theme)                    | `theme`                                          |
 
 ## Student list commands
 | Action                                                         | Format, Examples                                                                                                                                             |
@@ -575,7 +575,7 @@ Example:
 | [**Delete all students**](#delete-all-students-clear)          | `clear`                                                                                                                                                      |
 | [**Delete one student**](#delete-one-student-delete)           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                      |
 | [**Edit a student's details**](#edit-a-student-s-details-edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
-| [**List all students**](#list-all-student-list)                | `list`                                                                                                                                                       |
+| [**List all students**](#list-all-students-list)               | `list`                                                                                                                                                       |
 | [**Lookup students**](#lookup-students-lookup)                 | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
 | [**Tag a student**](#tag-a-student-tag)                        | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                  |
 
