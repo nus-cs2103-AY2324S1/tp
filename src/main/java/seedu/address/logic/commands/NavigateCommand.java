@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.BiDirectionalMap;
 import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Name;
@@ -17,13 +16,13 @@ public class NavigateCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         State s = model.getState();
-        // fix SWE principle violation later
-        BiDirectionalMap<Person, Lesson> map = model.getPersonLessonMap();
         switch (s) {
         case STUDENT:
             Person person = model.getCurrentlyDisplayedPerson();
-            assert person != null;
-            Name[] names = map.get(person);
+            if (person == null) {
+                throw new CommandException("No student is currently displayed");
+            }
+            Name[] names = model.getLinkedWith(person);
             if (names.length == 0) {
                 throw new CommandException("This student has no linked lessons");
             }
@@ -41,8 +40,10 @@ public class NavigateCommand extends Command {
 
         case SCHEDULE:
             Lesson lesson = model.getCurrentlyDisplayedLesson();
-            assert lesson != null;
-            Name[] names2 = map.getReversed(lesson);
+            if (lesson == null) {
+                throw new CommandException("No lesson is currently displayed");
+            }
+            Name[] names2 = model.getLinkedWith(lesson);
             if (names2.length == 0) {
                 throw new CommandException("This lesson has no linked students");
             }
