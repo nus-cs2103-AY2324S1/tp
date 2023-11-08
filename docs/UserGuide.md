@@ -361,9 +361,9 @@ Merges two students in the current address book.
 
 Format: `merge PRIMARY_INDEX SECONDARY_INDEX`
 
-* Information of the primary student is retained.
-* If any information fields of the primary student are empty, they are filled with information of the secondary student.
+* NAME, PHONE_NUMBER, EMAIL, and STUDENT_ID of the primary student is retained.
 * The merged student contains tags of both students.
+* The merged student contains attendance records of both students. In case of duplicated weeks, the attendance record of the primary student will be retained.
 
 Examples:
 * `merge 1 2` merges the information of the first two displayed students.
