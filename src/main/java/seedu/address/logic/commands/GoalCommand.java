@@ -21,6 +21,7 @@ public class GoalCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New goal set.";
 
+    // The number of flashcards the user targets to solve for this session
     public final int target;
 
     /**

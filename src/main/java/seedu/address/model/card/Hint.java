@@ -33,6 +33,8 @@ public class Hint {
     /**
      * Returns true if a given string is a valid hint.
      */
+    // @@author weeweh-reused
+    // Reused from AB3 to match regex
     public static boolean isValidHint(String test) {
         return test.matches(VALIDATION_REGEX);
     }

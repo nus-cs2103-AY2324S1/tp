@@ -79,5 +79,4 @@ public class RandomCommand extends Command {
         return new ToStringBuilder(this)
                 .toString();
     }
-
 }
