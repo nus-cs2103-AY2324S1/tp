@@ -18,7 +18,7 @@ public class DeleteTagCommand extends DeleteCommand {
     public static final String SECONDARY_COMMAND_WORD = "tag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + SECONDARY_COMMAND_WORD + ": Delete one or more tags from a contact.\n"
-            + "Usage:  delete tag -id CONTACT_ID -t TAGNAME";
+            + "Usage:  delete tag -id CONTACT_ID -t TAGNAME...";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Can not find the target contact with ID: ";
     public static final String MESSAGE_SUCCESS = "Successfully deleted tags: ";
 

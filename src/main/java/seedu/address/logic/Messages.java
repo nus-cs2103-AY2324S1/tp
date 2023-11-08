@@ -8,11 +8,13 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.AddNoteCommand;
 import seedu.address.logic.commands.AddPersonCommand;
+import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.DeleteNoteCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -88,19 +90,21 @@ public class Messages {
     public static String getHelpMessageForRecognizableCommand(String command) throws CommandException {
         switch (command) {
         case AddCommand.COMMAND_WORD:
-            return String.format("%s \n\n %s \n\n %s",
+            return String.format("%s \n\n %s \n\n %s \n\n %s",
                 AddEventCommand.MESSAGE_USAGE,
                 AddNoteCommand.MESSAGE_USAGE,
-                AddPersonCommand.MESSAGE_USAGE);
+                AddPersonCommand.MESSAGE_USAGE,
+                AddTagCommand.MESSAGE_USAGE);
 
         case EditCommand.COMMAND_WORD:
             return EditCommand.MESSAGE_USAGE;
 
         case DeleteCommand.COMMAND_WORD:
-            return String.format("%s \n\n %s \n\n %s",
+            return String.format("%s \n\n %s \n\n %s \n\n %s",
                 DeleteEventCommand.MESSAGE_USAGE,
                 DeleteNoteCommand.MESSAGE_USAGE,
-                DeletePersonCommand.MESSAGE_USAGE);
+                DeletePersonCommand.MESSAGE_USAGE,
+                DeleteTagCommand.MESSAGE_USAGE);
 
         case ClearCommand.COMMAND_WORD:
             return ClearCommand.MESSAGE_USAGE;
