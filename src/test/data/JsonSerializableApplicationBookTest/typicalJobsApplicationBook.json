@@ -4,7 +4,7 @@
     {
       "role": "Software Engineer",
       "company": "Google",
-      "status": "TO_BE_SUBMITTED",
+      "status": "TO_ADD_STATUS",
       "deadline": "TO_ADD_DEADLINE",
       "jobType": "TO_ADD_JOB_TYPE",
       "industry": "TO_ADD_INDUSTRY"
@@ -12,7 +12,7 @@
     {
       "role": "Teacher",
       "company": "NUS",
-      "status": "TO_BE_SUBMITTED",
+      "status": "TO_ADD_STATUS",
       "deadline": "TO_ADD_DEADLINE",
       "jobType": "TO_ADD_JOB_TYPE",
       "industry": "TO_ADD_INDUSTRY"
@@ -20,7 +20,7 @@
     {
       "role": "Waiter",
       "company": "McDonalds",
-      "status": "TO_BE_SUBMITTED",
+      "status": "TO_ADD_STATUS",
       "deadline": "TO_ADD_DEADLINE",
       "jobType": "TO_ADD_JOB_TYPE",
       "industry": "TO_ADD_INDUSTRY"
@@ -28,7 +28,7 @@
     {
       "role": "Pilot",
       "company": "Singapore Airlines",
-      "status": "TO_BE_SUBMITTED",
+      "status": "TO_ADD_STATUS",
       "deadline": "TO_ADD_DEADLINE",
       "jobType": "TO_ADD_JOB_TYPE",
       "industry": "TO_ADD_INDUSTRY"
@@ -36,7 +36,7 @@
     {
       "role": "Police Officer",
       "company": "SPF",
-      "status": "TO_BE_SUBMITTED",
+      "status": "TO_ADD_STATUS",
       "deadline": "TO_ADD_DEADLINE",
       "jobType": "TO_ADD_JOB_TYPE",
       "industry": "TO_ADD_INDUSTRY"
@@ -44,7 +44,7 @@
     {
       "role": "Fruit Seller",
       "company": "ABC Fruits",
-      "status": "TO_BE_SUBMITTED",
+      "status": "TO_ADD_STATUS",
       "deadline": "TO_ADD_DEADLINE",
       "jobType": "TO_ADD_JOB_TYPE",
       "industry": "TO_ADD_INDUSTRY"
@@ -52,7 +52,7 @@
     {
       "role": "Grass Cutter",
       "company": "XYZ Gardening",
-      "status": "TO_BE_SUBMITTED",
+      "status": "TO_ADD_STATUS",
       "deadline": "TO_ADD_DEADLINE",
       "jobType": "TO_ADD_JOB_TYPE",
       "industry": "TO_ADD_INDUSTRY"
