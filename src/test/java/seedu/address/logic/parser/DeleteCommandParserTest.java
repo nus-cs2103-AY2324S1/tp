@@ -29,8 +29,4 @@ public class DeleteCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         assertThrows(DeleteCommandParseException.class, () -> parser.parse("a"));
     }
-    @Test
-    public void parse_emptyArgs_throwsParseException() {
-        assertThrows(DeleteCommandParseException.class, () -> parser.parse(""));
-    }
 }

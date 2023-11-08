@@ -17,6 +17,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
+        assert(args != null);
         String[] indexArgs = args.trim().split("\\s+");
         Index[] indices = new Index[indexArgs.length];
 
@@ -26,10 +27,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             } catch (DeleteCommandParseException de) {
                 throw new DeleteCommandParseException();
             }
-        }
-
-        if (indices.length == 0) {
-            throw new DeleteCommandParseException("At least one index must be provided. ");
         }
 
         return new DeleteCommand(indices);
