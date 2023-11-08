@@ -681,4 +681,11 @@ have careers with variable income.
    - Additionally, right now the income field does not accept a value of 0. This is not inclusive towards students 
 who may not have any income. Hence, we plan to modify the field to accept a value of 0, on top of supporting a range 
 of values
+
+2. Improve issues regarding sorting stability
+   - Currently you are able to sort the dates by a specific field. However, if we sort by income for instance, and two
+dates have the same value, then when one of those two dates are modified by operations such as star or edit, the order 
+of the two of them can change. The dates are still sorted in order, just that the stability is disrupted. We intend
+to improve upon our star and edit commands such that they do not disrupt the stability in the future.
+
 ------------------------------------------------------------

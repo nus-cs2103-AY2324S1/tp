@@ -95,7 +95,7 @@ online dating journey.
 * `AGE` should be a positive integer between 18 and 150 (inclusive).
 * `GENDER` should be either M or F. It is case sensitive.
 * `HOROSCOPE` should be a valid zodiac sign. It is case insensitive.
-* `INCOME` (per month) should be a positive integer in SGD.
+* `INCOME` (per month) should be a positive integer in SGD less than or equal to a million.
 * `HEIGHT` should be a positive integer in cm between 100cm and 250cm (inclusive).
 
 </box>
