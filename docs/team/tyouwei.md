@@ -11,8 +11,11 @@ Given below are my contributions to the project.
 
 To be added
 
-* New Feature: To be added
-
+* New Feature:
+  * Implement Status feature in the InternApplication
+  * SelectView Panel
+  * Display data encapsulated in InternApplication onto SelectView
+  * Display InternApplication details by selecting or clicking the card in the InternApplicationListPanel
 
 * Code contributed: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=tyouwei&breakdown=true)
 
@@ -20,13 +23,15 @@ To be added
   * To be added
 
 * Enhancements to existing features:
-  * To be added
+  * Enhanced notes feature implemented by Aprup to allow for multiple notes rather than single notes
+  * Various bug fixes and improve code quality 
 
 * Documentation:
   * User Guide:
-    * To be added
+    * Delete section
   * Developer Guide:
-    * To be added
+    * Multiple Notes implementation section
+    * SelectView UI Implementation section
 
 * Community:
   * PRs reviewed (with non-trivial review comments): To be added
