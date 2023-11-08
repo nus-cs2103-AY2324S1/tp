@@ -332,7 +332,7 @@ Example:
 
 Clears all events within a specified time range.
 
-Format: `clearEvents ts/START_DATE_TIME te/END_DATE_TIME c/CONFIRMATION`
+Format: `clearEvents ts/START_DATE_TIME te/END_DATE_TIME [c/CONFIRMATION]`
 
 * Deletes all events from the specified start date and time to the specified end date and time.
 * An event is considered to be within the time range if overlaps with the time range for any period of time.
