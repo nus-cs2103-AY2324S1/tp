@@ -314,9 +314,23 @@ and type `listt` again when you want to go back to the main window.
 ### Display tree
 #### What this command does:
 * Provides a tree visualisation of all the teams and members in the project.
-* Note: Any additional words provided after the command will be ignored.
+* Note: 
+  - Any additional words provided after the command will be ignored.
   (e.g. entering `tree list delete 1 HAHAHA-1234` is equivalent to entering `tree`)
-#### Command format: 
+  - The project name **cannot be edited** because our application is designed to hold
+the contact information of all the developers in **one** software engineering project,
+the naming of this project is not important since there is only one project, and
+we do not need names to differentiate between different projects.
+  - The content in the tree **will not be updated in real time** because that requires
+too much computer resources. Instead, the tree is **updated every time you show it**.
+So, when you have some changes to the data, you should **hide the tree first if it is
+shown**, and call command `tree` again to show the tree. Then your changes will be 
+reflected in the new tree. With that being said, if you enter command `tree` to
+show LinkTree and make some changes to the data, your changes will not be reflected
+in the current tree. You should hide the tree first and then call `tree` again to
+obtain a new tree which will reflect the changes you made.
+
+### Command format: 
 * `tree`
 #### Example usage: 
 * `tree` (and an example result is shown below)
