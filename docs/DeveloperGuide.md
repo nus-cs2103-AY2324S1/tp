@@ -366,7 +366,7 @@ is instantiated by their corresponding arguments and are mapped to their prefixe
 
 ![FindPredicateMapExample](images/FindPredicateMapExample.png)
 
-The predicates are combined into a single `Predicate<Person>` in `FindCommand::execute` and applied to each `Person` in the 
+The predicates are combined into a single `Predicate<Person>` in `FindCommand#execute` and applied to each `Person` in the 
 `FilteredPersonList` of the `Model`.
 
 To find a specialist, a similar parse and execution flow is conducted. 
@@ -745,3 +745,9 @@ Timestamp in the status bar is updated.
 However, we are planning on implementing a feature that will allow users to update the view panel by simply clicking on a person in the list panel.
 This change is driven by our goal to enhance user experience: although our application primarily caters to CLI users, such  behaviour
 still seems intuitive and reasonable to expect.
+
+
+2. Currently, when the `delete` command encounters invalid indexes, it generates an error and does not delete any patient or specialist records.
+   In contrast, the `delsc` command handles invalid shortcuts by recognizing and ignoring them, while continuing to remove any valid shortcuts in the command.
+   The inconsistency between these two delete functions has been identified, and we have plans to address it in the future.
+   Our upcoming improvement will entail modifying the `delete` command to acknowledge and ignore invalid indexes while effectively deleting records specified by valid indexes provided by the user.

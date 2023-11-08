@@ -44,9 +44,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     private static final String MESSAGE_USAGE_GENERAL = "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TAG + "TAG]... ";
 
     private static final String PERSON_EXAMPLE =
@@ -57,10 +57,10 @@ public class EditCommand extends Command {
                     + PREFIX_TAG + "owesMoney ";
 
     public static final String MESSAGE_USAGE_PATIENT = COMMAND_WORD + " "
-            + ": Edit a patient in the address book. \n"
+            + ": Edit a patient in the address book.\n"
             + MESSAGE_USAGE_GENERAL
-            + PREFIX_AGE + "AGE "
-            + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY \n"
+            + "[" + PREFIX_AGE + "AGE] "
+            + "[" + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PERSON_EXAMPLE
             + PREFIX_AGE + "30 "
@@ -69,8 +69,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE_SPECIALIST = COMMAND_WORD + " "
             + ": Edit a specialist in the address book. \n"
             + MESSAGE_USAGE_GENERAL
-            + PREFIX_LOCATION + "LOCATION "
-            + PREFIX_SPECIALTY + "SPECIALTY \n"
+            + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_SPECIALTY + "SPECIALTY] \n"
             + "Example: " + COMMAND_WORD + " "
             + PERSON_EXAMPLE
             + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
