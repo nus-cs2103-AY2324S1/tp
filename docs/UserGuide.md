@@ -27,11 +27,12 @@ ProjectPRO is a desktop application designed to help university students organiz
 ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserving the advantages of maintaining an attractive user interface. ProjectPRO utilizes simple and easy-to-remember commands to execute different tasks, enhancing our user's experience. For instance, adding a contact is executed with a simple `add` command, as listed in our Features Section. Unlock more time in your day, store your information the smart way.
 
 
-**New here?** View our instructions for first-time users [here](link to first-time user).
+**New here?** View our instructions for first-time users [here](#first-time-user).
 
 
-**Used ProjectPRO before?** Click [here](link to experienced user) to recall what features we have!
+**Used ProjectPRO before?** Click [here](#experienced-user) to recall what features we have!
 
+## Table of Contents
 
 1. [Introductions](#introductions)
 2. [Table of Contents](#table-of-contents)
@@ -43,27 +44,27 @@ ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserv
 - [Adding a Contact `add`](#adding-a-contact-add)
 - [Deleting a Contact `delete`](#deleting-a-contact-delete)
 - [Finding a Contact `find`](#finding-a-contact-find)
-- [Listing a Contact `list`](#listing-a-contact-list)
-8. [Commands to Manage Group](#commands-to-manage-group)
+- [Listing all Contacts `list`](#listing-contacts-list)
+8. [Commands to Manage Groups](#commands-to-manage-groups)
 - [Adding a Group `new`](#adding-a-group-new)
 - [Deleting a Group `delete`](#deleting-a-group-delete)
 - [Adding remarks to a Group `remark`](#adding-remarks-to-a-group-remark)
 - [Finding a Group `find`](#finding-a-group-find)
-- [Listing a Group `list`](#listing-a-group-list)
+- [Listing a Group `list`](#listing-a-group-listgroup)
 - [Grouping a Person `group`](#grouping-a-person-group)
 - [Ungrouping a Person `ungroup`](#ungrouping-a-person-ungroup)
 9. [Commands to Manage Time](#commands-to-manage-time)
 - [Adding Time to a Contact `addtime`](#adding-time-to-a-contact-addtime)
 - [Removing Time from a Contact `deletetime`](#removing-time-from-a-contact-deletetime)
 - [Listing Time from a Contact `listtime`](#listing-time-from-a-contact-listtime)
-- [Add Meeting to Group `addmeeting`](#add-meeting-to-group-addmeeting)
+- [Add Meeting to Group `addmeeting`](#add-meeting-to-a-group-addmeeting)
 - [Remove Meeting Time from a Group `deletetime`](#remove-meeting-time-from-a-group-deletetime)
 - [Listing Meeting Time from a Group `listtime`](#listing-meeting-time-from-a-group-listtime)
 - [Finding Free Time of a Group `findfreetime`](#finding-free-time-of-a-group-findfreetime)
 10. [General Commands](#general-commands)
-- [Viewing Help `help`](#viewing-help-help)
-- [Clearing All Data `clear`](#clearing-all-data-clear)
-- [Exit ProjectPRO `exit`](#exit-projectpro-exit)
+- [Viewing Help `help`](#viewing-help--help)
+- [Clearing All Data `clear`](#clearing-all-data--clear)
+- [Exit ProjectPRO `exit`](#exit-projectpro--exit)
 
 
 
@@ -74,19 +75,19 @@ ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserv
 This guide explains how you can use ProjectPRO to add contacts and manage your groups of contacts effectively by using our commands.
 
 
-**First Time User**
+#### First Time User
 
 
-We are happy to have you on board as a first-time user of ProjectPRO! To get started, visit our [Quick Start](quick-start-link) to set up ProjectPRO. Once it's done, you can dive into the Features section to explore the full range of commands and learn more about what ProjectPRO has to offer. Refer to **Image 1** to get acquainted with our user interface.
+We are happy to have you on board as a first-time user of ProjectPRO! To get started, visit our [Quick Start](#quick-start) to set up ProjectPRO. Once it's done, you can dive into the Features section to explore the full range of commands and learn more about what ProjectPRO has to offer. Refer to **Image 1** to get acquainted with our user interface.
 
 
 ![Image 1: ProjectPRO's user interface](images/UG/Overview_of_GUI.png)
 
 
-**Experienced User**
+#### Experienced User
 
 
-Welcome back to ProjectPRO. Simply head over to our Features section to gain insights into our commands. If you are looking for a quick reference, click [here](experienced-user-link) for our commands' summary table.
+Welcome back to ProjectPRO. Simply head over to our Features section to gain insights into our commands. If you are looking for a quick reference, click [here](#table-of-contents) for our commands' summary table.
 
 
 ## Quick Start
@@ -139,6 +140,8 @@ Written below are some commonly used parameters, what they represent, and exampl
 | `t/`         | Time interval of student/group                   | 2 timings,
 
 
+## Features
+
 ## Commands to Manage Contacts
 
 
@@ -150,10 +153,10 @@ You can create a contact in your contact list.
 
 
 **Acceptable values:**
-- `NAME` must be alphanumeric and must not exist in the contact list.
+- `NAME` must be alphanumeric, cannot be blank and must not exist in the contact list.
 - `PHONE` must be a positive integer with at least 3 digits and must not exist in the contact list.
-- `EMAIL` must be alphanumeric with a @ domain and must not exist in the contact list.
-- `GROUP_NAME` must be alphanumeric and must exist in the contacts list. This is an optional parameter.
+- `EMAIL` must be alphanumeric with a @ domain, end with a domain label at least 2 characters long and must not exist in the contact list.
+- `GROUP_NAME` must be alphanumeric. This is an optional parameter.
 
 
 **Example(s):**
@@ -164,7 +167,7 @@ You can create a contact in your contact list.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix):
+- Incorrect format (e.g., no prefix, duplicate prefixes):
 
 
 - The person you are trying to add already exists in your contact list: `This person already exists in your contact list`.
@@ -178,39 +181,39 @@ You can delete a person from the contact list.
 
 
 **Acceptable values:**
-- `NAME` must be alphanumeric.
+- `NAME` must be alphanumeric and cannot be blank.
 
 
 **Example(s):**
 - `delete n/Nicholas Lee`
-  Deletes Nicholas Lee from the address book.
+  This deletes Nicholas Lee from the address book.
 
 
 **Potential error(s):**
-- Invalid format (e.g., no prefix):
+- Invalid format (e.g., no prefix, duplicate prefixes):
 
 
 - The contact you are trying to delete does not exist in your contact list: `Please provide the person's full name as in the existing contact list`.
 
 
-### Finding contacts `find`
-You can find all the persons from the contact list with the matching keyword.
+### Finding a contact `find`
+You can find all the persons from the contact list with the matching keywords.
 
 
 **Format:** `find n/KEYWORDS_IN_NAME`
 
 
 **Acceptable values:**
-- `KEYWORDS_IN_NAME` must be alphanumeric, and it is not case sensitive.
+- `KEYWORDS_IN_NAME` must be alphanumeric and cannot be blank, and it is not case sensitive.
 
 
 **Example(s):**
 - `find n/alice alex john`
-  Returns all the contacts with names of Alice, Alex, and John.
+  This returns all the contacts with names of Alice, Alex, and John.
 
 
 **Potential error(s):**
-- Invalid format (e.g., no prefix):
+- Invalid format (e.g., no prefix, duplicate prefixes):
 
 
 
@@ -228,7 +231,7 @@ No additional parameters.
 
 **Example(s):**
 - `List`
-  Lists all the people in the group.
+  This lists all the people in the group.
 
 
 **Potential error(s):**
@@ -251,12 +254,11 @@ You can create a group in your contact list.
 
 
 **Example(s):**
-- `new g/CS2103T tp` creates a new group named "CS2103T tp".
+- `new g/CS2103T tp` This creates a new group named "CS2103T tp".
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix):
-
+- Invalid command format (e.g., no prefix, duplicate prefixes):
 
 - The group you are trying to add already exists in your contact list: `This group already exists in the contact list`.
 
@@ -279,7 +281,7 @@ You can delete a group in your contact list.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix):
+- Incorrect format (e.g., no prefix, duplicate prefixes):
 
 
 - The group you are trying to delete does not exist in your contact list:
@@ -304,7 +306,7 @@ You can add remarks to a group in your contact list.
 
 
 **Potential errors(s):**
-- Incorrect format (e.g. no prefix):
+- Incorrect format (e.g. no prefix, duplicate prefixes):
 - The group you entered does not exist in your contact list:
 
 
@@ -326,7 +328,7 @@ You can find a group in your contact list. This allows you to view the group's m
 
 
 **Potential error(s):**
-- Incorrect format (e.g. no prefix):
+- Incorrect format (e.g. no prefix, duplicate prefixes):
 
 
 - The group you are trying to find does not exist in your contact list:
@@ -375,7 +377,7 @@ You can add an existing contact to an existing group.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix):
+- Incorrect format (e.g., no prefix, duplicate prefixes):
 
 
 - The contact you are trying to add is already a member of the group: `NAME is already in this group: GROUP_NAME`.
@@ -402,7 +404,7 @@ You can remove a person from a group.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix):
+- Incorrect format (e.g., no prefix, duplicate prefixes):
 
 
 - The contact you are trying to remove is not a member of the group: `Bernice Yu is not in this group: CS2103T`.
@@ -422,14 +424,15 @@ You can add time slots when your contacts are available.
 
 
 **Acceptable values:**
-- `NAME` must be alphanumeric.
+- `NAME` must be alphanumeric and cannot be blank.
 - `FREE_TIME` must be a time slot within a weekly schedule.
+- `FREE_TIME` must not be a time slot already added to the contact.
 
 
 **Example(s):**
 - `addtime n/Alex Yeoh  t/mon 1400 - mon 1600`
-
 This adds a time slot when Alex Yeoh is available to your contact list.
+
 Insert Image
 Free time added to: Alex Yeoh
 
@@ -450,15 +453,16 @@ You can remove available time slots of your contacts.
 
 
 **Acceptable values:**
-- `NAME` must be alphanumeric.
+- `NAME` must be alphanumeric and cannot be blank.
 - `FREE_TIME` must be a time slot within a weekly schedule.
-- `FREE_TIME` must be a time slot that has been added to the contact.
+- `FREE_TIME` must be a time slot already added to the contact.
 
 
 **Example(s):**
 - `deletetime n/Alex Yeoh  t/mon 1400 - mon 1600`
   This removes a time slot when Alex Yeoh is available from your contact list.
-  Insert Image
+  
+Insert Image
   Deleted Time From: Alex Yeoh
 
 
@@ -477,13 +481,14 @@ You list all available time slots of your contacts.
 
 
 **Acceptable values:**
-- `NAME` must be alphanumeric.
+- `NAME` must be alphanumeric and cannot be blank.
 
 
 **Example(s):**
 - `listtime n/Alex Yeoh`
   This lists all time slots when Alex Yeoh is available from your contact list.
-  Insert Image
+  
+Insert Image
   Listed times of Person: Alex Yeoh
   MON 1400 - MON 1600
 
@@ -503,15 +508,17 @@ You can add a meeting time slot for your group.
 
 
 **Acceptable values:**
-- `GROUP_NAME` must be alphanumeric.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
 - `MEETING_TIME` must be a time slot within a weekly schedule.
+- `MEETING_TIME` must not be a time slot already added to the group.
 
 
 **Example(s):**
 - `addmeeting g/CS2100  t/mon 1400 - mon 1600`
   This adds a meeting for your group CS2100.
+
   Insert Image
-  Free time added to: 2100
+  Free time added to: CS2100
 
 
 **Potential error(s):**
@@ -520,7 +527,7 @@ You can add a meeting time slot for your group.
 
 
 ### Remove Meeting Time from a Group `deletetime`
-You remove meeting time for your groups.
+You can remove meeting times from your groups.
 
 
 **Format:** `deletetime g/GROUP_NAME t/MEETING_TIME`
@@ -530,17 +537,16 @@ You remove meeting time for your groups.
 
 
 **Acceptable values:**
-- `GROUP_NAME` must be alphanumeric.
-
-
-- Group must contain `MEETING_TIME`.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
 - `MEETING_TIME` must be a time slot within a weekly schedule.
+- `MEETING_TIME` must be a time slot already added to the group.
 
 
 **Example(s):**
 - `deletetime g/CS2100  t/mon 1400 - mon 1600`
   This removes a time slot when Alex Yeoh is available from your contact list.
-  Insert Image
+  
+Insert Image
   Deleted Time From: Alex Yeoh
 
 
@@ -559,13 +565,14 @@ You list meeting time for your groups.
 
 
 **Acceptable values:**
-- `GROUP_NAME` must be alphanumeric.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
 
 
 **Example(s):**
 - `listtime g/CS2100`
   This lists all meeting times of the CS2100 group.
-  Insert Image
+  
+Insert Image
   Listed Time From: CS2100
 
 
@@ -583,14 +590,15 @@ You can find a meeting time slot for your group where everyone is available.
 
 
 **Acceptable values:**
-- `GROUP_NAME` must be alphanumeric.
+- `GROUP_NAME` must be alphanumeric and cannot be blank.
 - `DURATION` must be an integer representing the meeting duration in minutes.
 
 
 **Example(s):**
 - `findfreetime g/CS2100 d/60`
   This finds a common meeting time of 60 minutes for your CS2100 group.
-  Insert Image
+  
+Insert Image
 
 
 **Potential error(s):**
@@ -609,7 +617,7 @@ You can view the link to our UserGuide.
 
 
 **Acceptable values:**
-No additional parameters.
+- No additional parameters.
 
 
 **Example(s):**
@@ -628,7 +636,7 @@ Clears all entries from the contact list.
 
 
 **Acceptable values:**
-No additional parameters.
+- No additional parameters.
 
 
 **Example(s):**
@@ -647,7 +655,7 @@ You can exit ProjectPRO.
 
 
 **Acceptable values:**
-No additional parameters.
+- No additional parameters.
 
 
 **Example(s):**
@@ -656,4 +664,3 @@ No additional parameters.
 
 **Potential error(s):**
 - Extra inputs detected.
-

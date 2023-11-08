@@ -349,7 +349,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 _{Explain here how the data archiving feature will be implemented}_
 
 
-### Add Command Feature
+### Adding a Person 
 
 The add feature is facilitate by a number of classes such as `Person` and `Model` 
 
@@ -380,11 +380,11 @@ Note: No duplication is allowed in addressbook for most of Person’s attribute 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Create Group
+### Adding a Group
 
 #### Proposed Implementation
 
-The Create Group mechanism is facilitated by `Group`. It is stored internally as a `Group`. This operation is exposed in the `Model` interface as `Model#addGroup()`.
+The Add Group mechanism is facilitated by `Group`. It is stored internally as a `Group`. This operation is exposed in the `Model` interface as `Model#addGroup()`.
 
 Given below is an example usage scenario and how the group creation mechanism behaves at each step.
 
@@ -392,7 +392,11 @@ Given below is an example usage scenario and how the group creation mechanism be
 
 **Step 2:** The user executes `new g/GROUPNAME` to create a new group with the name GROUPNAME. `CreateGroupCommandParser` parses the GROUPNAME, ensuring the input is valid, and creates a `CreateGroupCommand`, which calls `Model#addGroup()`. The model retrieves the existing groupList from the addressBook and adds this new group to the groupList.
 
-The following sequence diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarizes what happens when a user executes a new command:
+<puml src="diagrams/CreateGroupActivityDiagram.puml" alt="CreateGroupActivityDiagram"/>
+
+Below is a sequence diagram that summarizes how a user creates a new group:
+<puml src="diagrams/CreateGroupSequenceDiagram.puml" alt="CreateGroupSequenceDiagram"/>
 
 #### Design Considerations
 
@@ -407,7 +411,7 @@ The following sequence diagram summarizes what happens when a user executes a ne
     * Cons: Users may get confused as to what each group is meant for
 
 
-### [Proposed] Delete Time Feature
+### Delete Time Feature
 
 #### Proposed Implementation
 
@@ -425,9 +429,13 @@ Step 3. The function will be called in the person's `timeInterval` list. The app
 
 Similarly, the group command does the same, except for the `Group` class.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following sequence diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/DeletePersonTimeDiagram.puml" alt="DeletePersonTimeDiagram"/>
+
+Below is an activity diagram that illustrates the control flow for Delete Person Time feature.
+
+<puml src="diagrams/DeletePersonTimeActivityDiagram.puml" alt="DeletePersonTimeActivityDiagram"/>
 
 #### Design Considerations
 
