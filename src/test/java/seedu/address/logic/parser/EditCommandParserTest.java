@@ -46,6 +46,10 @@ public class EditCommandParserTest {
     private EditCommandParser parser = new EditCommandParser();
 
     @Test
+    public void parse_emptyArgs_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(""));
+    }
+    @Test
     public void parse_missingParts_failure() {
         // no index specified
         assertThrows(ParseException.class, () -> parser.parse(VALID_NAME_AMY));
