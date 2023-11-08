@@ -27,6 +27,10 @@ public class LocationTest {
         // invalid addresses
         assertFalse(Location.isValidLocation("")); // empty string
         assertFalse(Location.isValidLocation(" ")); // spaces only
+        assertFalse(Email.isValidEmail("thistextistoolooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
+                + "ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
+                + "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
+                + "oooooooong")); // longer than 255 character
 
         // valid addresses
         assertTrue(Location.isValidLocation("Blk 456, Den Road, #01-355"));
