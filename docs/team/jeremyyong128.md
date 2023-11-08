@@ -55,10 +55,14 @@ My code contributions can be found here: [Reposense Report](https://nus-cs2103-a
 * **Documentation**:
   * Contributed extensively to both the User Guide (UG) and Developer Guide (DG).
 * **Bug Fixes**:
-  * Fixed bugs reported during PE dry run. (PR [#171](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/171/))
+  * Fixed bugs reported during PE dry run. (PR [#171](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/171))
+* **Community**:
+    * PRs reviewed (with non-trivial review comments): PR [#180](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/180)
 
 ## Contributions to the User Guide
-*Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.*
+*Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting
+end-users.*
 
 ## Contributions to the Developer Guide
-*Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.*
+*Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical
+documentation and the technical depth of my contributions to the project.*
