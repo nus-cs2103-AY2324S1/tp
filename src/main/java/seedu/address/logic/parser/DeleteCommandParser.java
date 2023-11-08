@@ -22,14 +22,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         for (int i = 0; i < indexArgs.length; i++) {
             try {
-                indices[i] = ParserUtil.parseIndex(indexArgs[i]);
+                indices[i] = ParserUtil.parseDeleteIndex(indexArgs[i]);
             } catch (DeleteCommandParseException de) {
-                throw new DeleteCommandParseException(de);
+                throw new DeleteCommandParseException();
             }
         }
 
         if (indices.length == 0) {
-            throw new DeleteCommandParseException();
+            throw new DeleteCommandParseException("At least one index must be provided. ");
         }
 
         return new DeleteCommand(indices);

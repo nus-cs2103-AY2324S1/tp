@@ -32,9 +32,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseEditIndex(argMultimap.getPreamble());
         } catch (EditCommandParseException ee) {
-            throw new EditCommandParseException(ee);
+            throw new EditCommandParseException();
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROOM, PREFIX_NAME, PREFIX_PHONE,
@@ -69,7 +69,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (!editRoomDescriptor.isAnyFieldEdited()) {
-            throw new EditCommandParseException();
+            throw new EditCommandParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditCommand(index, editRoomDescriptor);
