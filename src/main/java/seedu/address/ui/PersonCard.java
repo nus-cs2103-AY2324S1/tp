@@ -77,7 +77,6 @@ public class PersonCard extends UiPart<Region> {
                 tagCategories.add(tag.tagCategory);
             }
         }
-        System.out.println("tagCategories: " + tagCategories);
 
         for (Tag tag : tagsSet) {
             Label label = new Label(tag.tagName);
