@@ -24,7 +24,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.booking.Booking;
-import seedu.address.model.booking.Room;
 import seedu.address.model.person.Name;
 import seedu.address.testutil.BookingBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
