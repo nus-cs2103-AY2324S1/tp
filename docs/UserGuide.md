@@ -25,6 +25,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
   * [Listing events: `list events`](#listing-events--list-events)
   * [Adding an event: `add event`](#adding-events--add-event)
   * [Deleting an event: `delete event`](#deleting-an-event--delete-event)
+  * [Clearing data: `clear`](#clearing-all-data--clear)
   * [Exit: `exit`](#exiting-the-program--exit)
   * [Other Features: _coming soon..._](#other-features)
 * [FAQ](#faq)
@@ -41,8 +42,8 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 3. Copy the file to the folder you want to use as the _home folder_ for your KeepInTouch app.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar keepintouch.jar` command to run the application.
-[//]: # (   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.)
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar keepintouch.jar` command to run the application. (   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.)
+![GUI example](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
@@ -67,25 +68,33 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 * Items with `…`​ after them can be used multiple times.<br>
   e.g. `[-t TAGNAME...]` can be used as `-t Frontend`, `-t Frontend -t Java` etc.
 
+* `TAGNAME` is case sensitive. For example, a contact can have tags `Frontend` and `frontend` at the same time.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n NAME -t NOTE_TITLE`, `-t NOTE_TITLE -n NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list contact`, and `exit`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `list contact` and `exit`, etc.) will be ignored.<br>
+  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
 ### Viewing help : `help`
 
-Shows a list of commands with the functionalities.
+Shows a list of commands and functionalities.
 
-Format: `help`
+Format: `help [COMMAND_WORD]`
+
+* Add `COMMAND_WORD` after `help` to view the specific functionalities of the command.
+* `COMMAND_WORD` includes: `add`, `delete`, `clear`, `find`, `list`.
+
+Examples:
+* `help add`
 
 ### Listing contacts : `list contact`
 
 Shows a list of all contacts in the contact list if tags not specified. 
-Otherwise, shows a list of contacts which contains one of the specified tags. 
+Otherwise, shows a list of contacts which contains any one of the specified tags. 
 
 Format: `list contact [-t TAGNAME...]`
 
@@ -116,7 +125,7 @@ Examples:
 
 ### Finding a contact : `find`
 
-Finds a contact by their name by matching keywords with the contact's name. Keywords are **case sensitive**.
+Finds a contact by their name by matching keywords with the contact's name. Keywords are **case insensitive**.
 
 Format: `find KEYWORD [OTHER_KEYWORDS...]`
 
@@ -147,7 +156,7 @@ Deletes one or more tags to a contact.
 Format: `delete tag -id CONTACT_ID -t TAGNAME...`
 
 * Deletes one or more tags to a contact, regardless if the tag exists in the contact or not.
-* Duplicates are accepted but only unique tags will be added.
+* Duplicates are accepted.
 
 Requirements:
 * `TAGNAME` must be alphanumeric, with no spaces.
@@ -227,6 +236,12 @@ Format: `delete event -id CONTACT_ID -eid EVENT_ID`
 Examples:
 * `delete event -id 1 -eid 2` deletes the second event from the first contact in the contact list.
 
+### Clearing all data : `clear`
+
+Clears all KeepInTouch entries.
+
+Format: `clear`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -275,4 +290,5 @@ Action             | Format, Examples
 **List Events**    | `list events [-descending] [-st filter_start_time] [-et filter_end_time]`<br> e.g., `list events -descending -st 2023-11-01 -et 2023-11-02`
 **Add Event**      | `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]` <br> e.g., `add event -id 1 -en Meeting with professor -st 12:00 -et 13:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
 **Delete Event**   | `delete event -id CONTACT_ID -eid EVENT_ID`<br> e.g., `delete event -id 1 -eid 1`
-**Help**           | `help`
+**Clear Data**   | `clear`
+**Help**           | `help [COMMAND_WORD]` <br> e.g., `help add`
