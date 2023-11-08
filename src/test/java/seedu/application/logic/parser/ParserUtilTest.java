@@ -14,6 +14,9 @@ import seedu.application.model.job.Industry;
 import seedu.application.model.job.JobType;
 import seedu.application.model.job.Role;
 import seedu.application.model.job.Status;
+import seedu.application.model.job.interview.InterviewAddress;
+import seedu.application.model.job.interview.InterviewDateTime;
+import seedu.application.model.job.interview.InterviewType;
 
 public class ParserUtilTest {
     private static final String INVALID_ROLE = "Softw@re Engineer";
@@ -22,6 +25,8 @@ public class ParserUtilTest {
     private static final String INVALID_STATUS = "Submitted";
     private static final String INVALID_JOBTYPE = "Intern";
     private static final String INVALID_INDUSTRY = "$Finance";
+    private static final String INVALID_INTERVIEW_TYPE = "Tech";
+    private static final String INVALID_INTERVIEW_ADDRESS = "a/@ffi$e";
     private static final String VALID_ROLE = "Software Engineer";
     private static final String VALID_COMPANY = "Google";
     private static final String VALID_DEADLINE = "Dec 31 2030 1200";
@@ -29,6 +34,8 @@ public class ParserUtilTest {
     private static final String VALID_STATUS = "Pending";
     private static final String VALID_JOBTYPE = "INTERNSHIP";
     private static final String VALID_INDUSTRY = "Finance";
+    private static final String VALID_INTERVIEW_TYPE = "TECHNICAL";
+    private static final String VALID_INTERVIEW_ADDRESS = "Office";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -108,12 +115,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDeadline_validUnformattedValue_returnsFormattedDeadline() throws Exception {
-        Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
-        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE_UNFORMATTED));
-    }
-
-    @Test
     public void parseDeadline_validValueWithoutWhitespace_returnsDeadline() throws Exception {
         Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
         assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE));
@@ -124,6 +125,18 @@ public class ParserUtilTest {
         String deadlineWithWhitespace = WHITESPACE + VALID_DEADLINE + WHITESPACE;
         Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
         assertEquals(expectedDeadline, ParserUtil.parseDeadline(deadlineWithWhitespace));
+    }
+
+    @Test
+    public void parseDeadline_validValueConversionRequired_returnsDeadlineWithConvertedTime() throws Exception {
+        Deadline expectedDeadline = new Deadline("Dec 31 2023 0000");
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline("Dec 31 2023 2400"));
+    }
+
+    @Test
+    public void parseDeadline_validUnformattedValue_returnsFormattedDeadline() throws Exception {
+        Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE_UNFORMATTED));
     }
 
     @Test
@@ -193,5 +206,82 @@ public class ParserUtilTest {
         String industryWithWhitespace = WHITESPACE + VALID_INDUSTRY + WHITESPACE;
         Industry expectedIndustry = new Industry(VALID_INDUSTRY);
         assertEquals(expectedIndustry, ParserUtil.parseIndustry(industryWithWhitespace));
+    }
+
+    @Test
+    public void parseInterviewType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInterviewType((String) null));
+    }
+
+    @Test
+    public void parseInterviewType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInterviewType(INVALID_INTERVIEW_TYPE));
+    }
+
+    @Test
+    public void parseInterviewType_validValueWithoutWhitespace_returnsJobType() throws Exception {
+        InterviewType expectedInterviewType = new InterviewType(VALID_INTERVIEW_TYPE);
+        assertEquals(expectedInterviewType, ParserUtil.parseInterviewType(VALID_INTERVIEW_TYPE));
+    }
+
+    @Test
+    public void parseInterviewType_validValueWithWhitespace_returnsTrimmedInterviewType() throws Exception {
+        String interviewTypeWithWhitespace = WHITESPACE + VALID_INTERVIEW_TYPE + WHITESPACE;
+        InterviewType expectedInterviewType = new InterviewType(VALID_INTERVIEW_TYPE);
+        assertEquals(expectedInterviewType, ParserUtil.parseInterviewType(interviewTypeWithWhitespace));
+    }
+
+    @Test
+    public void parseInterviewDateTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInterviewDateTime((String) null));
+    }
+
+    @Test
+    public void parseInterviewDateTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInterviewDateTime(INVALID_DEADLINE));
+    }
+
+    @Test
+    public void parseInterviewDateTime_validValueWithoutWhitespace_returnsDeadline() throws Exception {
+        InterviewDateTime expectedInterviewDateTime = new InterviewDateTime(VALID_DEADLINE);
+        assertEquals(expectedInterviewDateTime, ParserUtil.parseInterviewDateTime(VALID_DEADLINE));
+    }
+
+    @Test
+    public void parseInterviewDateTime_validValueWithWhitespace_returnsTrimmedDeadline() throws Exception {
+        String interviewDateTimeWithWhitespace = WHITESPACE + VALID_DEADLINE + WHITESPACE;
+        InterviewDateTime expectedInterviewDateTime = new InterviewDateTime(VALID_DEADLINE);
+        assertEquals(expectedInterviewDateTime,
+            ParserUtil.parseInterviewDateTime(interviewDateTimeWithWhitespace));
+    }
+
+    @Test
+    public void parseInterviewDateTime_validValueConversionRequired_returnsDeadlineConvertedTime() throws Exception {
+        InterviewDateTime expectedInterviewDateTime = new InterviewDateTime("Dec 31 2023 0000");
+        assertEquals(expectedInterviewDateTime, ParserUtil.parseInterviewDateTime("Dec 31 2023 2400"));
+    }
+
+    @Test
+    public void parseInterviewDateTime_validUnformattedValue_returnsFormattedDeadline() throws Exception {
+        InterviewDateTime expectedInterviewDateTime = new InterviewDateTime(VALID_DEADLINE);
+        assertEquals(expectedInterviewDateTime, ParserUtil.parseInterviewDateTime(VALID_DEADLINE_UNFORMATTED));
+    }
+
+    @Test
+    public void parseInterviewAddress_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInterviewAddress((String) null));
+    }
+
+    @Test
+    public void parseInterviewAddress_validValueWithoutWhitespace_returnsRole() throws Exception {
+        InterviewAddress expectedAddress = new InterviewAddress(VALID_INTERVIEW_ADDRESS);
+        assertEquals(expectedAddress, ParserUtil.parseInterviewAddress(VALID_INTERVIEW_ADDRESS));
+    }
+
+    @Test
+    public void parseInterviewAddress_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String interviewAddressWithWhitespace = WHITESPACE + VALID_INTERVIEW_ADDRESS + WHITESPACE;
+        InterviewAddress expectedAddress = new InterviewAddress(VALID_INTERVIEW_ADDRESS);
+        assertEquals(expectedAddress, ParserUtil.parseInterviewAddress(interviewAddressWithWhitespace));
     }
 }
