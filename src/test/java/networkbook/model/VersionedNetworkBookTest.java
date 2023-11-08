@@ -7,9 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.model.person.NameContainsKeyTermsPredicate;
 import networkbook.testutil.TypicalPersons;
 
 public class VersionedNetworkBookTest {
@@ -54,7 +56,7 @@ public class VersionedNetworkBookTest {
     }
 
     @Test
-    public void undo() {
+    public void undo_changeData() {
         VersionedNetworkBook versionedNetworkBook = new VersionedNetworkBook();
         versionedNetworkBook.addPerson(TypicalPersons.ALICE);
         versionedNetworkBook.commit();
@@ -71,7 +73,29 @@ public class VersionedNetworkBookTest {
     }
 
     @Test
-    public void redo() {
+    public void undo_changeDisplay() {
+        VersionedNetworkBook versionedNetworkBook = new VersionedNetworkBook();
+        versionedNetworkBook.addPerson(TypicalPersons.ALICE);
+        versionedNetworkBook.addPerson(TypicalPersons.BENSON);
+        versionedNetworkBook.commit();
+        NameContainsKeyTermsPredicate predicate = new NameContainsKeyTermsPredicate(List.of("Alice"));
+        versionedNetworkBook.setFilterPredicate(predicate);
+        versionedNetworkBook.commit();
+        NetworkBook expected = new NetworkBook();
+        expected.addPerson(TypicalPersons.ALICE);
+        assertEquals(expected.getDisplayedPersonList(), versionedNetworkBook.getDisplayedPersonList());
+        versionedNetworkBook.undo();
+        assertEquals(1, versionedNetworkBook.getCurrentStatePointer());
+        expected.addPerson(TypicalPersons.BENSON);
+        assertEquals(expected.getDisplayedPersonList(), versionedNetworkBook.getDisplayedPersonList());
+        versionedNetworkBook.undo();
+        expected.removePerson(TypicalPersons.ALICE);
+        expected.removePerson(TypicalPersons.BENSON);
+        assertEquals(expected.getDisplayedPersonList(), versionedNetworkBook.getDisplayedPersonList());
+    }
+
+    @Test
+    public void redo_changeData() {
         VersionedNetworkBook versionedNetworkBook = new VersionedNetworkBook();
         versionedNetworkBook.addPerson(TypicalPersons.ALICE);
         versionedNetworkBook.commit();
@@ -89,6 +113,26 @@ public class VersionedNetworkBookTest {
         expected.addPerson(TypicalPersons.BENSON);
         assertEquals(2, versionedNetworkBook.getCurrentStatePointer());
         assertEquals(expected.getPersonList(), versionedNetworkBook.getPersonList());
+    }
+
+    @Test
+    public void redo_changeDisplay() {
+        VersionedNetworkBook versionedNetworkBook = new VersionedNetworkBook();
+        versionedNetworkBook.addPerson(TypicalPersons.ALICE);
+        versionedNetworkBook.addPerson(TypicalPersons.BENSON);
+        versionedNetworkBook.commit();
+        NameContainsKeyTermsPredicate predicate = new NameContainsKeyTermsPredicate(List.of("Alice"));
+        versionedNetworkBook.setFilterPredicate(predicate);
+        versionedNetworkBook.commit();
+        NetworkBook expected = new NetworkBook();
+        expected.addPerson(TypicalPersons.ALICE);
+        assertEquals(expected.getDisplayedPersonList(), versionedNetworkBook.getDisplayedPersonList());
+        versionedNetworkBook.undo();
+        expected.addPerson(TypicalPersons.BENSON);
+        assertEquals(expected.getDisplayedPersonList(), versionedNetworkBook.getDisplayedPersonList());
+        versionedNetworkBook.redo();
+        expected.removePerson(TypicalPersons.BENSON);
+        assertEquals(expected.getDisplayedPersonList(), versionedNetworkBook.getDisplayedPersonList());
     }
 
     @Test
