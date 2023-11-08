@@ -430,7 +430,7 @@ ShortcutSettings implements the `Serializable` interface, thus is saved to `json
 
 ## **Planned Enhancements**
 
-1. DoConnek Pro currently checks for duplicate persons by name. This means that people with the same names cannot be added even if they have different parameters ( like `Phone` or `Email`). 
+1. DoConnek Pro currently checks for duplicate persons by name. This means that people with the same names cannot be added even if they have different parameters (like `Phone` or `Email`). 
 We plan on implementing an `NRIC` field for patients and an `MCR` field for specialists as unique identifiers to solve this issue. 
 
 --------------------------------------------------------------------------------------------------------------------
