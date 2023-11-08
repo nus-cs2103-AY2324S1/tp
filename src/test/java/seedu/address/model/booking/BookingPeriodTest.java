@@ -159,4 +159,48 @@ public class BookingPeriodTest {
         assertFalse(bookingPeriodOne.equals(bookingPeriodDiff) || bookingPeriodDiff.equals(bookingPeriodOne));
         assertFalse(bookingPeriodOne.hashCode() == bookingPeriodDiff.hashCode());
     }
+
+    @Test
+    public void testInvalidDateFormat() {
+        assertFalse(BookingPeriod.datePartIsValid("2022-01")); // Missing day part
+        assertFalse(BookingPeriod.datePartIsValid("2022-01-01-01")); // Extra parts
+        assertFalse(BookingPeriod.datePartIsValid("2022/01/01")); // Invalid delimiter
+        assertFalse(BookingPeriod.datePartIsValid("2022-January-01")); // Incorrect format
+    }
+
+    @Test
+    public void testInvalidDateValues() {
+        assertFalse(BookingPeriod.datePartIsValid("2022-00-01")); // Invalid month
+        assertFalse(BookingPeriod.datePartIsValid("2022-13-01")); // Invalid month
+        assertFalse(BookingPeriod.datePartIsValid("2022-01-00")); // Invalid day
+        assertFalse(BookingPeriod.datePartIsValid("2022-01-32")); // Invalid day
+    }
+
+    @Test
+    public void testFebruaryDays() {
+        assertFalse(BookingPeriod.datePartIsValid("2021-02-29")); // Not a leap year
+        assertTrue(BookingPeriod.datePartIsValid("2020-02-29")); // Leap year
+        assertTrue(BookingPeriod.datePartIsValid("2024-02-29")); // Leap year
+    }
+
+    @Test
+    public void test30DaysMonths() {
+        assertTrue(BookingPeriod.datePartIsValid("2022-04-30"));
+        assertFalse(BookingPeriod.datePartIsValid("2022-04-31"));
+    }
+
+    @Test
+    public void test31DaysMonths() {
+        assertTrue(BookingPeriod.datePartIsValid("2022-01-31"));
+        assertFalse(BookingPeriod.datePartIsValid("2022-06-31"));
+    }
+
+    @Test
+    public void testSetPeriod() {
+        assertThrows(IllegalArgumentException.class, () -> new BookingPeriod("2019-10-18 12:00 to 2020-10-18 12:00")
+                .setPeriod("apple to 2022-11-10 12:00"));
+
+        assertThrows(IllegalArgumentException.class, () -> new BookingPeriod("2019-10-18 12:00 to 2020-10-18 12:00")
+                .setPeriod("2022-11-10 12:00 to 2019-10-18 12:00"));
+    }
 }
