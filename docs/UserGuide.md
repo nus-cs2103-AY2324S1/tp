@@ -10,7 +10,7 @@ solution to manage your student details, including attendance records and assign
 
 ### Table of Contents
 
-- [Quick start](#Quick-start)
+- [Quick start](#quick-start)
 - [Features](#features)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
@@ -35,7 +35,7 @@ solution to manage your student details, including attendance records and assign
 
    * `list students` : Lists all contacts.
 
-   * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G10` : Adds a contact named `Fu Yiqiao` to TAvigator.
+   * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567M t/G10` : Adds a contact named `Fu Yiqiao` to TAvigator.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
