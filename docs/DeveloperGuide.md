@@ -410,7 +410,7 @@ command.
 
 ### Reduce Coupling Between Availability and Animal Type
 Currently, the `animalType` field also contains information about the availability of a fosterer.<br>
-e.g. if the `animalType` field of a fosterer is `current.Dog`, it suggests that the fosterer is available, and is 
+e.g. if the `animalType` field of a fosterer is `able.Dog`, it suggests that the fosterer is available, and is 
 fostering a dog. However, the user will still need to enter the `availability` field as `available`. <br>
 
 Building on the enhancement in [Shorter Command Formats](#shorter-command-formats), we will be revising the 
@@ -439,8 +439,7 @@ Currently, the fields and parameters for housing, availability and animal type a
 ### Allow Symbols in Name
 Currently, names in Foster Family must be alphanumeric. However, this excludes certain legal names that have other 
 characters such as `/`. For example, we currently do not allow  `s/o` in a person's name as the `/` is used as a command
-delimiter. Hence, one possible improvement is to allow non-alphanumeric characters, and the user must 
-enclose the entire name in quotation marks. 
+delimiter. Hence, one possible improvement is to enforce that the name inputted by the user must be enclosed in quotation marks for parsing, and to allow symbols such as `/`, `'`, `-` etc. using regex. Additionally, we will disallow the use of numeric values in names, to prevent the case where a number is inputted as a name.
 
 e.g. `name/"Henry Tan"` and `name/"Nagaratnam s/o Suppiah"` are now valid name parameters.
 
@@ -763,7 +762,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all fosterers are being shown
 
-   1. Prerequisites: List all persons using the `list` or `find` command. At least 6 fosterers in the list.
+   1. Prerequisites: List all persons using the `list` or `find` command. At least 3 fosterers in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First fosterer is deleted from the list. Details of the deleted fosterer shown in the status message.
