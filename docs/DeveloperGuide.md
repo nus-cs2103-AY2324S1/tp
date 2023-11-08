@@ -52,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete-t 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -92,27 +92,27 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete-t 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete-t 1` Command](images/DeleteTutorSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteTutorCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteTutorCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteTutorCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddTutorCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddTutorCommandParser`, `DeleteTutorCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -215,30 +215,13 @@ The `add-t` command was designed this way to ensure consistency with the previou
 
 ### Edit tutor feature 
 
- The “Edit Tutor” feature allows users to edit an existing tutor in the address book given a tutor index. 
+The “Edit Tutor” feature allows users to edit an existing tutor in the address book given a tutor index. 
 
- Below, we provide an example usage scenario and a detailed description of how the edit tutor mechanism behaves at 
- each step.
+The following shows the activity diagram from when a user executes the `edit-t` command:
 
- ![Activity Diagram for edit-t Command](images/EditTutorActivityDiagram.png)
-
- <div markdown="block" class="alert alert-info">
-
-**:information_source: Limitations**<br>
-* Input format must adhere to the follow limitations:
-    * `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
-    * `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
-    * `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
-    * `EMAIL`: Of the format local-part@domain
-* Tutor to be edited must not already exist in the addressbook (excluding the current specified one).
-* TUTOR_INDEX parameter is compulsory and at least one edited field must be provided.
-
-</div>
+![Activity Diagram for edit-t Command](images/EditTutorActivityDiagram.png)
 
 #### Implementation
-
-The bulk of the implementation details is identical to that of other commands.
-As such only details specific to `edit-t` will be discussed.
 
 Step 1. The user has the application launched with at least 1 tutor added.
 
@@ -247,21 +230,21 @@ Step 2. The user executes `list-t` to view all added tutors.
 Step 3. The user executes `edit-t 1 n/John Doe` to edit the first tutor's name in the list of tutors displayed. 
 The command is parsed in AddressBookParser.
 
-Step 4. EditTutorCommandParser is created, and constructs an `EditPersonDescriptor` which describes the edited 
-`Person`. An EditTutorCommand object is then constructed with this `EditPersonDescriptor` and the specified tutor index.
+Step 4. `EditTutorCommandParser` is created, and constructs an `EditPersonDescriptor` which describes the edited 
+`Person` (omitted in sequence diagram below for brevity). An `EditTutorCommand` object is then constructed with this 
+`EditPersonDescriptor` and the specified tutor index.
 
-Step 5. The EditTutorCommand object gets the specified person from the current filtered person list using the 
+Step 5. The `EditTutorCommand` object gets the specified person from the current filtered person list using the 
 tutor index.
 
-Step 6. EditTutorCommand object then creates an edited person from the specified person and the editPersonDescriptor.
+Step 6. `EditTutorCommand` object then creates an edited person from the specified person and the editPersonDescriptor.
 
-Step 7. EditTutorCommand object then calls the setPerson method in the ModelManager with the new edited person. This 
-method sets the specified `Person` in the model to be that edited person.
+Step 7. `EditTutorCommand` object then calls the `setPerson` method in the `ModelManager` with the new edited person. 
+This method sets the specified `Person` in the model to be that edited person.
 
-Step 8. Finally, the EditTutorCommand object updates the person list to display the edited person.
+Step 8. Finally, the `EditTutorCommand` object updates the person list to display the edited person.
 
-The following sequence diagram shows how the above steps for edit tutor operation works, taking 
-`execute("edit-t 1 n/New Name")` API call as an example.
+The following sequence diagram shows how the above steps for edit tutor operation works:
 
 ![Interactions Inside the Logic Component for the `edit-t 1 n/New Name` Command](images/EditTutorSequenceDiagram.png)
 
@@ -271,10 +254,80 @@ The lifeline for `EditTutorCommandParser` should end at the destroy marker (X) b
 the lifeline reaches the end of diagram.
 </div>
 
+#### Design rationale
+**Aspect: Specifying which tutor to edit**
+- **Alternative 1 (current choice):** Using tutor index.
+    - Pros: Using the tutor index provides a clear and unambiguous way for users to specify which tutor they want to 
+      edit. The index corresponds directly to the position of the tutor in the displayed list, making it easy for users 
+      to identify the target tutor.
+    - Pros: The use of tutor indices eliminates the potential challenge of dealing with long or complex names. Users do
+      not need to type out the entire name, which can be especially beneficial if a tutor has a lengthy or complicated name.
+    - Pros: The use of index aligns with the existing command structure, which is based on numeric indices for 
+      identifying and interacting with specific entries in the address book.
+    - Cons: Users need to have knowledge of the specific index of the tutor they want to edit. This may require them to 
+      first execute a `list-t` command to view the current list of tutors and their corresponding indices.
+- **Alternative 2:** Using tutor name.
+    - Pros: Allowing users to edit a tutor by specifying their name provides a more natural and intuitive method, as 
+      users are likely more familiar with names than numeric indices.
+    - Cons: If a user provides an incorrect or misspelled name, the application would need to handle error cases and 
+      provide appropriate feedback to guide the user.
+    - Cons: Names can be long, complex, or have unusual spellings, which may make them more challenging to type 
+      accurately. This can lead to potential input errors or mismatches if the user misspells or mistypes the name.
+    - Cons: Names are case-sensitive. This means that users need to accurately input the name with the correct 
+      capitalization, which can add an extra layer of precision required from the user.
+
+### Find tutor feature
+
+The "Find Tutor" feature allows users to search for tutors based on the tutor's name. 
+
+The following shows the activity diagram from when a user executes the `find-t` command:
+
+![Activity Diagram for find-t Command](images/FindTutorActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched.
+
+Step 2. The user executes `find-t John Doe` to search for tutors with the name "John Doe". The command is parsed in the 
+`AddressBookParser`.
+
+Step 3. `FindTutorCommandParser` is created, and constructs a `NameContainsKeywordsPredicate` which matches for any of 
+the search keywords. A `FindTutorCommand` object is then constructed with this predicate.
+
+Step 4. The `LogicManager` calls the `execute` in `FindTutorCommand` which sets the predicate of the filtered persons 
+list in `ModelManager` to be the predicate created earlier.
+
+Step 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from 
+`Logic`.
+
+Step 6. The filtered list of tutors is displayed to the user.
+
+The following sequence diagram shows how the above steps for find tutor operation works:
+
+![FindTutorSequenceDiagram](images/FindTutorSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `FindTutorCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
 
 #### Design rationale
-The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
- 
+
+**Aspect: Search criteria**
+- **Alternative 1 (current choice):** Only allowing users to search for tutors based on their names.
+    - Pros: This design provides a straightforward and clear search functionality for users, aligning with the common 
+      understanding of searching for specific individuals by name.
+    - Pros: It simplifies the search process and reduces cognitive load for users, as they only need to provide the 
+      tutor's name.
+    - Cons: If a user has incomplete or incorrect information about the tutor's name, they may not be able to find the 
+      desired tutor.
+- **Alternative 2:** Specifying search criteria like tutor phone number or email.
+    - Pros: Users would have the ability to search for tutors based on a wider range of criteria, such as phone
+      number and email.
+    - Cons: Implementing advanced search criteria may lead to a more complex user interface and search mechanism, 
+      potentially requiring additional user training or guidance.
+
 ### Delete tutor feature
 
 The "Delete Tutor" feature allows users to delete an existing tutor in the address book given a tutor index.
@@ -460,6 +513,70 @@ the lifeline reaches the end of diagram.
   * Cons: In the editing of schedule, a `Person` is needed to create a new `Schedule`. Thus, the tutor allocated to 
     the target schedule needs to be obtained and used to create a new `Schedule`.
 
+### Unmark schedule feature
+
+The "Unmark Schedule" feature allows users to unmark a schedule that was previously marked as completed or missed. 
+
+The following shows the activity diagram from when a user executes the `unmark` command:
+
+![UnmarkScheduleActivityDiagram](images/UnmarkScheduleActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched with at least 1 schedule marked as completed or missed.
+
+Step 2. The user executes `list-s` to view the list of schedules.
+
+Step 3. The user executes `unmark 1` command, which unmarks the schedule with index 1 shown in the list of schedules 
+displayed. The command is parsed in the `AddressBookParser`.
+
+Step 4. `UnmarkScheduleCommandParser` is initialized to parse the user input to create an `UnmarkScheduleCommand` with 
+the given `Index` representing the user's input.
+
+Step 5. The `UnmarkScheduleCommand#execute(Model)` will perform the following checks in this order to ensure that the 
+schedule can be safely unmarked in the Model:
+
+- The `Index` is a valid integer.
+- The `Index` is not out of bounds (within the range of the displayed schedule list's size).
+
+Step 6. The `execute` method then calls `Model::getFilteredScheduleList` and gets the specified `Schedule` using the 
+`Index` given.
+
+Step 7. Once the checks are successful, the method then creates an edited schedule from the original schedule with its
+status set to pending.
+
+Step 8. The method then calls the `setSchedule` method in the `ModelManager` with the new edited schedule. This sets the 
+specified `Schedule` in the model to be that edited schedule with pending status.
+
+Step 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
+`Logic`.
+
+The following sequence diagram shows how the above steps for unmark schedule operation works:
+
+![Sequence diagram for unmark command](images/UnmarkScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `UnmarkScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design rationale
+
+**Aspect: Existence of unmark command**
+- **Alternative 1 (current choice):** Separate `unmark` command for unmarking schedules.
+    - Pros: This design is more intuitive for users, as it aligns with the common understanding of marking and 
+      unmarking tasks.
+    - Pros: Users only need to be aware of the completed and missed status, simplifying the command's usage.
+    - Cons: The user must use a distinct command to unmark schedules with a status set.
+- **Alternative 2:** Using a pending status with `mark` Command.
+    - Pros: Users only need to be familiar with the mark command, which can toggle between completed, missed, and 
+      pending statuses. This may lead to a more streamlined user experience.
+    - Cons: Introducing a third status option complicates the management of schedule statuses. Users and developers 
+      alike must account for an additional state, potentially increasing the system's complexity.
+    - Cons: The definition and usage of the "pending" status may vary among users, potentially leading to ambiguity in 
+      its interpretation.
+
 ### Delete Schedule Feature
 #### Implementation Details
 The delete schedule feature is facilitated by `DeleteScheduleCommand`, which extends from `Command` with the necessary implementation to delete a schedule by a given index.
@@ -489,6 +606,59 @@ The following sequence diagram shows how the above steps for delete schedule ope
 ![Sequence diagram for delete-s command](images/DeleteScheduleSequenceDiagram.png)
 #### Design rationale
 The `delete-s` command was designed this way to ensure consistency with the previous delete person command.
+
+### Show calendar feature
+
+The "Show Calendar" feature allows users to view schedules based on a specific date. 
+
+The following shows the activity diagram from when a user executes the `show` command:
+
+![Activity Diagram for show Command](images/ShowCalendarActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched.
+
+Step 2. The user executes `show 2023-09-15` to view schedules for September 15, 2023. The command is parsed in the 
+`AddressBookParser`.
+
+Step 3. `ShowCalendarCommandParser` is created, which constructs a `Date` based on the user-provided date. 
+A `ShowCalendarCommand` object is then constructed with this date.
+
+Step 4. The `LogicManager` calls the execute method in `ShowCalendarCommand`, setting the predicate for the filtered 
+schedules list in `ModelManager` to be the predicate that shows all schedules and setting the predicate for the filtered
+calendar schedules list in `ModelManager` to only display schedules on the specified date.
+
+Step 5. The filtered list of schedules for the specified date is displayed to the user.
+
+The following sequence diagram shows how the above steps for the show calendar operation work:
+
+![ShowCalendarSequenceDiagram](images/ShowCalendarSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `ShowCalendarCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design rationale
+
+**Aspect: Defining which tutor to display for calendar**
+- **Alternative 1 (current choice):** Show calendar for all tutors
+    - Pros: Provides a comprehensive view of schedules for all tutors, allowing users to see the entire schedule at a 
+      glance.
+    - Pros: Offers a unified view that may be suitable for administrators or users managing multiple tutors.
+    - Cons: May present a large amount of information, potentially leading to information overload for users with many 
+      tutors.
+    - Cons: Users may need to filter or navigate through a longer list of schedules to find the specific information 
+      they are interested in.
+- **Alternative 2:** Specify tutor to show calendar for.
+    - Pros: Offers a focused view of schedules for a particular tutor, allowing users to quickly access and manage the 
+      schedule for that specific individual.
+    - Pros: Reduces visual clutter and streamlines the user interface for users primarily interested in one tutor.
+    - Cons: May not be as suitable for administrators or users managing multiple tutors, as they may need to switch 
+      between tutors to view their respective schedules.
+    - Cons: Users may need to specify the tutor they want to view, requiring additional input.
 
 ### Change theme feature
 
@@ -813,6 +983,30 @@ otherwise.
 
       Use case resumes at step 2.
 
+#### **Use case: Unmark a schedule**
+{:.no_toc}
+
+**MSS**
+
+1.  User requests to list schedules
+2.  TutorConnect shows a list of schedules
+3.  User requests to unmark a specific schedule in the list
+4.  TutorConnect unmarks the schedule
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorConnect shows an error message.
+
+      Use case resumes at step 2.
+
 
 #### **Use case: View schedules by tutor**
 {:.no_toc}
@@ -875,43 +1069,42 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample tutors and schedules. The window size may 
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample tutors and schedules. The window size may 
       not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. Saving theme preferences
+3. Saving theme preferences
 
    1. Change the theme to another one. Close the window.
    
    2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent theme is retained. 
 
-### Deleting a person
+### Deleting a tutor
 
-1. Deleting a person while all persons are being shown
+Deleting a tutor while all tutors are being shown
 
-   1. Prerequisites: List all persons using the `list-t` command. Multiple persons in the list.
+   1. Prerequisites: List all tutors using the `list-t` command. Multiple tutors in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete-t 1`<br>
+      Expected: First tutor is deleted from the list. Details of the deleted tutor shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete-t 0`<br>
+      Expected: No tutor is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete tutor commands to try: `delete-t`, `delete-t abc`, `delete-t x` (where x is larger than the
+      tutor list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Editing a schedule
 
-1. Edits a schedule while all schedules are being shown
+Edits a schedule while all schedules are being shown
    1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
    
    2. Test case: `edit-s 1 st/2023-05-05T09:00 et/2023-05-05T11:00`<br>
@@ -1065,6 +1258,7 @@ In the calendar view, incorporating schedule colors to represent their respectiv
 intuitiveness.
 
 **Proposed implementation**
+
 In `CalendarCard.java`, the background color of the calendar card will be determined based on schedule status: green 
 for completed, red for missed, and yellow for pending (please note that these colors are not finalised).
 
@@ -1085,7 +1279,7 @@ characters of the name.
 
 For example: `find-t john` will now match: `john`, `JOHN123` and `johnetta`.
 
-**Proposed implementation**:
+**Proposed implementation**
 
 A new method `containsPartialWordIgnoreCase` can be added in `StringUtil` that will be used by
 `NameContainsKeywordsPredicate` and `TutorNameContainsKeywordsPredicate` to test for a match.
