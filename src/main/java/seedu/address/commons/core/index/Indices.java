@@ -7,7 +7,7 @@ import java.util.TreeSet;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents zero or more sorted, unique Index objects.
+ * Represents one or more sorted, unique Index objects.
  * <p>
  * All Index objects in Indices have to be either zero-based or one-based. Similar to {@code Index},
  * it should be used right from the start when parsing new user input that allows for more than
