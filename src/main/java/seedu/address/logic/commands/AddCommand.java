@@ -51,7 +51,6 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PATIENT_TAG + " "
             + PERSON_EXAMPLE
-            + PREFIX_TAG + "owesMoney "
             + PREFIX_AGE + "30 "
             + PREFIX_MEDICALHISTORY + "Osteoporosis";
 
