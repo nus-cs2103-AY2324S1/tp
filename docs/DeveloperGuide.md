@@ -146,21 +146,21 @@ How the parsing works:
 **API
 ** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="488" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
+* stores the address book data i.e., objects that extend from the abstract `Person` class (which are contained in a generic `UniquePersonList` object) and an `ObservableList` of `Tag`.
+* stores the currently 'selected' `Member` and `Applicant` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<? extends Person>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<img src="images/ModelPersonClassDiagram.png" width="530" />
+<img src="images/ModelPersonClassDiagram.png" width="342" />
 
 The `Member` and `Applicant` classes both extend from the abstract `Person` class, and each of these classes have the
 associated fields specific to them.
@@ -193,6 +193,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add `Member`/`Applicant` feature
 
+
 The `addMember` and `addApplicant` command is used to add a member or an applicant to the address book.
 The commands are implemented in the `AddMemberCommand` and `AddApplicantCommand` class, which extends the `Command`
 class.
@@ -201,6 +202,12 @@ The add mechanism is facilitated by `LogicManager` which parses the command inpu
 appropriate
 command to execute. The execute function checks whether the `member`/`applicant` is present in the `AddressBook`.
 The `member`/`applicant` is added into the `AddressBook` if it is not present. Otherwise, an error message is returned.
+
+<img src="images/AddApplicantActivityDiagram.png">
+
+The diagram above describes the behaviour of adding an applicant to the `AddressBook`. When the user enters the command,
+the command is parsed to determine whether it is a valid command. If it is valid, the `Applicant` is added into the 
+`AddressBook` and a success message is shown, else, an error message is shown.
 
 ### Delete an applicant
 
