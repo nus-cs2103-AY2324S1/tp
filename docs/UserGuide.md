@@ -51,15 +51,19 @@ If you encounter any problems along your journey, please take a look at the [tro
 
 
 4. From the home folder, open "Terminal" on MacOS or "Command Prompt" in Windows, and type `java -jar BandConnect++.jar` to run the application. A GUI similar to the below should appear in a few seconds.
-   ![to be updated with components labelled](images/tobeupdated.png)
-Note how the app contains some sample data.
+   ![LabelledUI.png](images/quickstart/LabelledUI.png)
+   Musician
+   ![LabelledMusician.png](images/quickstart/LabelledMusician.png)
+   Band
+   ![LabelledBand.png](images/quickstart/LabelledBand.png)
+   Note how the app contains some sample data.
 Type the command in the command box and press Enter to execute it. 
 
 
 5. Some example commands you can try:
    * `help` : Open the help window.
    * `list` : Lists all contacts. 
-   * `add n/John Doe p/98765432 e/johnd@example.com i/bass g/rock`: Adds rock bassist John Doe.
+   * `add n/Alice Lovelace p/98757287 e/johnd@example.com i/bass g/rock`: Adds rock bassist Alice Lovelace.
    * `delete 3` : Deletes the 3rd musician shown in the current list.
    * `clear` : Deletes all contacts. 
    * `exit` : Exits the app.
@@ -398,6 +402,7 @@ In addition, if the musician does not exist in the band, you will see an error m
 [insert image]
 Please verify that the index of the musician is correct or input a different musician, and try again.
 
+
 ### Find band: `findb`
 Finds the band with the given input name. Lists the band members of the selected band. From `My Bands` panel, find the complete band name of the band.
 
@@ -531,7 +536,7 @@ If you wish, please refer to the below section for a more succinct [command summ
 | **Delete a Band**                              | `deleteb INDEX` <br> e.g., `deleteb 1`                                                                                                                           |
 | **Add Musicians to a Band**                    | `addm b/BAND_INDEX m/MUSICIAN_INDEX…​` <br> e.g., `addm b/1 m/1 m/2`                                                                                             |
 | **Remove a Musician from a Band**              | `removem b/BANDINDEX m/MUSICIANINDEX` <br> e.g., `removem b/1 m/1`                                                                                               |
-| **List All Members in a Band**                 | `findb BANDNAME` <br> e.g., `findb theory X`                                                                                                                     |
+| **Find a Band**                                | `findb BANDNAME` <br> e.g., `findb theory X`                                                                                                                     |
 | **List All Musicians and Bands**               | `list`                                                                                                                                                           |
 | **Clear All Data**                             | `clear`                                                                                                                                                          |
 | **Exit**                                       | `exit`                                                                                                                                                           |

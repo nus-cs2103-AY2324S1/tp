@@ -53,7 +53,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/uml/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -70,7 +70,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+![Structure of the UI Component](images/uml/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -93,7 +93,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/uml/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -116,7 +116,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/uml/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
@@ -128,7 +128,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/uml/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
@@ -137,7 +137,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/uml/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -153,6 +153,46 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add Musician Feature
+The user can add a new musician to the storage through the `add` Command.
+
+Command: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​`
+
+#### Behaviour
+* **Success Scenario:**
+    1. A success message is returned.
+    2. The musician panel immediately reflects the updated musician list with the new musician just added. The band panel shows all bands.
+
+* **Failed Scenario (when musician already exists in storage):**
+    1. An error message is returned.
+    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+
+#### Implementation
+Within the `execute()` method of the command, a check is done to ensure that the model does not currently contain any musician with the same name, phone, or email. This is achieved through the use of `Model::hasMusician` and `Model::hasDuplicateInfo` method.
+
+### Edit Musician Feature
+The user can edit all fields about an existing musician through the `edit` command, referenced by current index in the musician list.
+
+
+Command: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​`
+
+#### Behaviour
+* **Success Scenario:**
+    1. A success message is returned.
+    2. The musician panel immediately reflects the updated musician list with the edited musician. The band panel shows all bands.
+
+* **Failed Scenario:**
+    1. An error message is returned.
+    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+* **Failing condition:** When edited information leads to duplicate name, phone or email with another musician already exists in storage.
+
+#### Implementation
+Within the `execute()` method of the command, a check is done to ensure that the model does not currently contain any musician with the same name, phone, or email with the edited musician information. This is achieved through the use of `Model::isSameMusician` and `Model::hasDuplicateInfo` method.
+
+#### Design Considerations
+It is important to maintain the unique constraint of name, phone, and email of musicians at all times. Hence, `Model::isSameMusician` is called to check that no musicians have the same name as the edited musician, and `Model::hasDuplicateInfo` is called to check the uniqueness of phone and email of the edited musician.
+
 
 ### Tagging Musician with Instruments and Genres Feature
 
@@ -239,6 +279,25 @@ Command: `addb n/BANDNAME`
 #### Implementation
 Within the execute method of the command, a check is done to ensure that the model does not currently contain the band
 to be added. This is achieved through the use of `Model#hasBand(Band)` method.
+
+### List Band Members Feature
+The user can list all band members in a specified band through the `findb` Command.
+
+Command: `findb BANDNAME`
+
+#### Behaviour
+* **Success Scenario:**
+    1. A success message is returned.
+    2. In the musician panel, it shows musicians in the specified band. In the band panel, it shows the specified band.
+
+* **Failed Scenario (when band name is incorrect or incomplete):**
+    1. An error message is returned.
+    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+
+#### Implementation
+Within the `execute` method of the command, `UniqueBandList` loops through all bands and find the band with specified name, and retrieve musician information from the band.
+
+
 
 ### Add Musician To Band Feature
 
