@@ -168,10 +168,11 @@ public class ParserUtil {
     public static InterviewDateTime parseInterviewDateTime(String interviewDateTime) throws ParseException {
         requireNonNull(interviewDateTime);
         String trimmedInterviewDateTime = interviewDateTime.trim();
-        if (!InterviewDateTime.isValidInterviewDateTime(trimmedInterviewDateTime)) {
+        String formattedDateTime = formatDeadline(trimmedInterviewDateTime);
+        if (!InterviewDateTime.isValidInterviewDateTime(formattedDateTime)) {
             throw new ParseException(InterviewDateTime.MESSAGE_CONSTRAINTS);
         }
-        return new InterviewDateTime(trimmedInterviewDateTime);
+        return new InterviewDateTime(formattedDateTime);
     }
 
     /**
