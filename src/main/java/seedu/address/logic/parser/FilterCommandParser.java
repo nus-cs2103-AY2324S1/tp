@@ -82,24 +82,17 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 if (subjects != null) {
                     predicate.addPredicate(lesson -> subjects.contains(lesson.getSubject()));
                 }
-                int numberNotNull = 0;
                 Day before = parseField("before", userInput, Day::of);
                 if (before != null) {
-                    numberNotNull++;
                     predicate.addPredicate(lesson -> lesson.getDay().compareTo(before) < 0);
                 }
                 Day on = parseField("on", userInput, Day::of);
                 if (on != null) {
-                    numberNotNull++;
                     predicate.addPredicate(lesson -> lesson.getDay().equals(on));
                 }
                 Day after = parseField("after", userInput, Day::of);
                 if (after != null) {
-                    numberNotNull++;
                     predicate.addPredicate(lesson -> lesson.getDay().compareTo(after) > 0);
-                }
-                if (numberNotNull > 1) {
-                    throw new ParseException("You can only use one of -before, -on, -after!");
                 }
                 Remark remark = parseField("remark", userInput, Remark::of);
                 if (remark != null) {

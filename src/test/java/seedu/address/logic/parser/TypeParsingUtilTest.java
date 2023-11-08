@@ -47,8 +47,8 @@ class TypeParsingUtilTest {
     @Test
     void parseIndex_valid_isOptionalIndex() throws ParseException {
         assertEquals(TypeParsingUtil.parseIndex("1", false), 1);
-        assertEquals(TypeParsingUtil.parseIndex("99999", true), 1);
-        assertEquals(TypeParsingUtil.parseIndex("99999 some text -flag flag", false), 1);
+        assertEquals(TypeParsingUtil.parseIndex("99999", true), 99999);
+        assertEquals(TypeParsingUtil.parseIndex("99999 some text -flag flag", false), 99999);
         assertNull(TypeParsingUtil.parseIndex("some text -flag flag", true));
     }
     //todo make it clear that description cannot start with number in this case.
