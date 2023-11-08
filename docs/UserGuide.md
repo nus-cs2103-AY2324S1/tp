@@ -41,6 +41,7 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
 <!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -100,6 +101,8 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Parameter formats
 * All parameters provided must be in the correct format.<br>
 
@@ -122,6 +125,7 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 | `/at`   | `ATTENDANCE_TYPE` | case-insensitive words from the following list:<br/>1. present (means `PRESENT`)<br/>2. late (means `LATE`)<br/>3. absent (means `ABSENT`)                                                                                                                                                                                                                                                                                                                                                                                                                             | `/at late`                  |
 
 ----------------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
 **What it does:**
@@ -139,6 +143,7 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Adding an employee: `add`
 
@@ -172,6 +177,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing an employee: `edit`
 
 **What it does**
@@ -203,6 +210,8 @@ Output:
   <br>![result for editing employee](images/editSuccess.png)
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an employee: `delete`
 
@@ -237,6 +246,8 @@ Examples:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Reading an employee's information: `read`
 
 **What it does**
@@ -270,6 +281,8 @@ Output:
 * If the `PREFIX` provided is not valid, the app should display `The field to read provided is invalid`. Please refer to the [parameter formats](#parameter-formats) for a list of all supported fields.
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding leave to an employee: `addleave`
 
@@ -321,6 +334,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting leave from an employee: `deleteleave`
 
 **What it does**
@@ -365,6 +380,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### View employee who is on leave: `viewleave`
 
 **What it does**
@@ -402,6 +419,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### View the calendar of upcoming month: `nm`
 
 **What it does**
@@ -437,6 +456,8 @@ This feature allows users to view the calendar of the current month on the app.
 `cm`
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a deduction to the payroll of an employee: `deduct`
 
@@ -483,6 +504,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a benefit to the payroll of an employee: `benefit`
 
 **What it does**
@@ -528,6 +551,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Calculating an employee's payroll: `payroll`
 
 **What it does**
@@ -567,6 +592,8 @@ Output:
   <br>![result for incorrect payroll command](images/incorrectPayrollCommand.png)
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Generating payslips for an employee: `payslip`
 
@@ -619,6 +646,8 @@ Please close any payslip PDF file before generating another payslip. Otherwise, 
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Marking an employee's attendance: `mark`
 
 **What it does**
@@ -655,6 +684,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### View an employee's attendance report: `attendance`
 
 **What it does**
@@ -687,6 +718,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all employees: `list`
 
 **What it does**
@@ -704,6 +737,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries: `clear`
 
 **What it does**
@@ -715,6 +750,8 @@ Clears all entries from the address book.
 `clear`
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Locating employees by name: `find`
 
@@ -739,6 +776,8 @@ Example:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting the program: `exit`
 
 **What it does**
@@ -750,6 +789,8 @@ Exits the program.
 `exit`
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Saving the data
 
@@ -765,6 +806,8 @@ If your changes to the data file makes its format invalid, ManaGease will not ru
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -777,6 +820,8 @@ If your changes to the data file makes its format invalid, ManaGease will not ru
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
