@@ -42,7 +42,7 @@ In this user guide, you will learn the basics of our application and how you can
 
    * `add_person n/John Doe` : Adds a person named `John Doe` to the FumbleLog persons list.
 
-   * `delete 3` : Deletes the 3rd person shown in the current persons list.
+   * `delete_person 3` : Deletes the 3rd person shown in the current persons list.
 
    * `exit` : Exits FumbleLog application.
 
@@ -81,6 +81,8 @@ In this user guide, you will learn the basics of our application and how you can
 
 Shows a message explaining how to access the user guide for help.
 
+- No response should be expected after clicking the help button.
+
 Format: `help`
 ![Helptab](images/Helptab.png)
 
@@ -94,6 +96,8 @@ Adds a person to the FumbleLog.
 
 Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​`
 
+- Persons with the exact same name as another person cannot be added. 
+
 <div markdown="span" class="alert alert-primary">
     :bulb: **Tip:**
     A person can have any number of groups (including 0)
@@ -105,9 +109,9 @@ Examples:
 * `add_person n/Jonathan`
 
 Acceptable values for each parameter:
-* `n/NAME`: Name of the person (Compulsory)
+* `n/NAME`: An person's name in alphanumeric format. A person's name cannot be numbers.
 * `[p/PHONE_NUMBER]`: A valid phone number
-* `[e/EMAIL]`: A valid email address
+* `[e/EMAIL]`: A valid email address as stated in FumbleLog
 * `[a/ADDRESS]`: Address of the person
 * `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
 * `[r/REMARK]`: A remark about the person
@@ -152,7 +156,7 @@ Acceptable values for each parameter:
 * `PERSON_INDEX`: A positive integer
 * `[n/NAME]`: Name of the person
 * `[p/PHONE]`: A valid phone number
-* `[e/EMAIL]`: A valid email address
+* `[e/EMAIL]`: A valid email address as stated in FumbleLog
 * `[a/ADDRESS]`: Address of the person
 * `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
 * `[r/REMARK]`: Remark about the person
@@ -195,7 +199,7 @@ Expected output when a command succeeds:
 ![DeletePerson](images/DeletePerson.png)
 
 Expected output when the command fails:
-* `Invalid command format! delete_person: Deletes the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer)Example: delete 1`
+* `Invalid command format! delete_person: Deletes the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer)Example: delete_person 1`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -205,9 +209,10 @@ Find persons whose names or groups contain any of the given keywords.
 
 Format: `find_person KEYWORD [MORE_KEYWORDS]`
 
+* **Only full words will be matched** e.g. `Han` will not match `Hans`
+  * FumbleLog will return an empty person list when there are no keyword matches.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * `find_person` searches the name of the `Person` and `Group` that they are assigned 
@@ -219,7 +224,7 @@ Examples:
 <br>
 
 
-  ![result for 'find alex david'](images/findFriendsResult.png)
+  ![result for 'find_person alex david'](images/findFriendsResult.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -363,8 +368,9 @@ Find events whose names or groups contain any of the given keywords.
 
 Format: `find_event KEYWORD [MORE_KEYWORDS]`
 
+* **Only full words will be matched** e.g. `meeting` will not match `meetings`
+  * FumbleLog will return an empty event list when there are no keyword matches.
 * The search is case-insensitive. e.g `meeting` will match `Meeting`
-* Only full words will be matched e.g. `Han` will not match `Hans`
 * Events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Meetings TP` will return `Meetings`, `TP deadline`
 * `find_event` searches the name of the `Event`, `Group` and `Person` that they are assigned
@@ -427,15 +433,16 @@ Find persons and events whose names or groups contain any of the given keywords.
 
 Format: `find_all KEYWORD [MORE_KEYWORDS]`
 
+* **Only full words will be matched** e.g. `Han` will not match `Hans`
+  * FumbleLog will return an empty person/event list when there are no keyword matches.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons and events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find_all John` returns `john` and `John Doe` in the persons list and `John's birthday` in the events list.
-* `find_all friends` returns `Alex Yeoh` as he belongs to the `friends` group in the persons list 
+* `find_all friends` returns `Alex Yeoh` as he belongs to the `friends` group in the persons list. 
 and `CS2103T meeting` as it contains the `friends` group in the events list.
 
 [Scroll back to Table of Contents](#table-of-contents)
@@ -510,13 +517,13 @@ _Details coming soon ..._
 
 ### Commands for Persons
 
-| Action            | Format, Examples                                                                                                                                                                                             |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Person**    | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​` <br> e.g., `add_person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
-| **Edit Person**   | `edit_person PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [g/GROUP]…​`<br> e.g.,`edit_person 2 n/James Lee e/jameslee@example.com`                                                |
-| **Delete Person** | `delete_person PERSON_INDEX`<br> e.g., `delete_person 3`                                                                                                                                                     |
-| **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_person James Jake`                                                                                                                                     |
-| **List Persons**  | `list_persons`                                                                                                                                                                                               |
+| Action            | Format, Examples                                                                                                                                                                                                    |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Person**    | `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​` <br> e.g., `add_person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
+| **Edit Person**   | `edit_person PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [g/GROUP]…​`<br> e.g.,`edit_person 2 n/James Lee e/jameslee@example.com`                                                       |
+| **Delete Person** | `delete_person PERSON_INDEX`<br> e.g., `delete_person 3`                                                                                                                                                            |
+| **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_person James Jake`                                                                                                                                            |
+| **List Persons**  | `list_persons`                                                                                                                                                                                                      |
 
 
 ### Commands for Events
