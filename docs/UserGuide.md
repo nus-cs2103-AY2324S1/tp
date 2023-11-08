@@ -270,6 +270,8 @@ Format: `listT`
 **Example:**
 * `listT` Shows a list of all tags.
 
+![ListT](images/listT.png)
+
 ### Editing a person : `edit`
 
 Edits an existing person in JABPro
@@ -521,7 +523,7 @@ Understanding how to use these summary statistics meaningfully:
   * `percentile` as where this candidate stands among all other candidates (treat it like a ranking system, the higher the percentile, the better the candidate is performing) 
   * `percentile` 100.0 would represent the best performing candidate for that tag and `percentile` 0.0 would represent the worst performing candidate for that tag
 
-** Advanced users **
+**Advanced users**
 * Understand that `percentile` has limited functionality in certain context. Suppose you have 6 candidates with the scores `{80, 90, 100, 100, 100, 100}`
   * Median would be 90 in this case and percentile would be 50.0 for the candidate with a score of 90, however the upper half of the candidates are all 100.0 percentile
   * This comes as a consequence of the implementation where given you have the same score, you should have the same percentile / ranking
