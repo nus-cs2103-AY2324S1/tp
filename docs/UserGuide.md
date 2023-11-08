@@ -236,6 +236,7 @@ Valid cases:
 
 You cannot add duplicate fosterers. This is detected using the fosterer's name.<br>
 e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne  (multiple spaces)  tay"</code>.
+
 </div> 
 
 
@@ -337,6 +338,7 @@ Parameters:
 
 Only specific commands are available to you in the profile page. 
 The list of available commands are <code>help</code>, <code>save</code>, and <code>exit</code>. 
+
 </div> 
 
 Examples:
@@ -407,7 +409,8 @@ Parameters:
 
 **:exclamation: Important:**<br>
 
-If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the addressbook. 
+If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the address book. 
+
 </div>
 
 Examples:
@@ -424,6 +427,7 @@ Examples:
 
 Edit may cause information loss. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
+
 </div>
 
 
@@ -459,8 +463,10 @@ profile page.
 <div markdown="span" class="alert alert-warning">
 
 **:warning: Caution:**<br>
+
 Edit may cause information loss. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
+
 </div>
 <br/>
 
@@ -477,6 +483,7 @@ Format: `delete INDEX [INDEX...]`
 <div markdown="span" class="alert alert-secondary">
 
 **:exclamation: Important:**<br>
+
 The index of a fosterer is not fixed. It is relative to the current list of fosterers you are handling.
 
 </div>
@@ -489,12 +496,14 @@ Parameters:
 
 <div markdown="span" class="alert alert-primary">
 
-**bulb: Tip:**<br>
+**:bulb: Tip:**<br>
+
 You can delete multiple fosterers at once.<br> 
 
 * Each index needs to be separated by a white space.<br> 
 
 * Any duplicates and extra white spaces will be ignored.
+
 </div>
 
 Examples:
@@ -644,9 +653,11 @@ edits using our user-friendly interface instead.
 <div markdown="span" class="alert alert-warning">
 
 **:warning: Caution:**<br>
+
 * If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
 
-* If your changes create an [invalid fosterer](#adding-a-fosterer-through-the-main-window--add), the app will not start. You will have to rectify the error in order to restart the app. 
+* If your changes create an [invalid fosterer](#adding-a-fosterer-through-the-main-window--add), the app will not start. You will have to rectify the error in order to restart the app.
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
