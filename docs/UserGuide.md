@@ -86,23 +86,34 @@ Welcome to TutorConnect! We are excited to get you started with a more efficient
     2. Type `java -version` and press Enter.
     3. If it says a version other than 11 or `command not found`, please install Java 11 by following this [guide](https://www.java.com/en/download/help/download_options.html).
 
-2. Download the latest jar file (tutorconnect.jar) from our [Github Releases](https://github.com/AY2324S1-CS2103T-T17-3/tp/releases).
+2. Download the latest jar file (`TutorConnect.jar`) from our [Github Releases](https://github.com/AY2324S1-CS2103T-T17-3/tp/releases).
 
 3. Move the jar file into a new folder called “TutorConnect”.
 
 4. Double-click the jar file to launch the application.
 
-   <div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
-   **:information_source: Mac Users**<br>
+**:information_source: Mac Users**<br>
 
-   If you are a Mac user, you may encounter a warning that says
-   the jar file cannot be opened because it is from an unidentified developer. To continue:
+If you are a Mac user, you may encounter a warning that says
+the jar file cannot be opened because it is from an unidentified developer. To continue:
 
-    1. Right-click on the jar file and select `Open With > JavaLauncher (default)`
-    2. Press Open when prompted
+1. Right-click on the jar file and select `Open With > JavaLauncher (default)`
+2. Press Open when prompted
+</div>
 
-   </div>
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Unable to Open jar file**<br>
+
+Should the file fail to launch on click:
+
+1. Open a command terminal (using [Windows](https://www.lifewire.com/open-command-prompt-in-a-folder-5185505) or [Mac](https://support.apple.com/en-sg/guide/terminal/trmlb20c7888/mac#:~:text=On%20your%20Mac%2C%20open%20a,window%3A%20Choose%20Open%20in%20Terminal.)) on the folder where `TutorConnect.jar` is. 
+2. Type the following command in the terminal: `java -jar TutorConnect.jar` and hit enter.
+3. The command should run and launch the application.
+</div>
+
 
 ### Navigating the Interface
 
@@ -260,7 +271,7 @@ Here is a list of the error messages you may encounter, when the command is ente
 | `Invalid command format!`                                                                  | One or more of the tags `n/`, `p/`, `e/` is missing.                      |
 | `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                             |
 | `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.                     |
-| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was <br/>either invalid or blank[<sup>1</sup>](#note1). |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was <br/>either invalid or blank[<sup>2</sup>](#note2). |
 | `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                                |
 | `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                                |
 | `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                                |
@@ -313,7 +324,7 @@ Here is a list of the error messages you may encounter, when the command is ente
 | `The person index provided is invalid`                                                     | TUTOR_INDEX entered is not in the range of number of tutors.         |
 | `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                        |
 | `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.                |
-| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank[<sup>1</sup>](#note1). |
+| `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank[<sup>2</sup>](#note2). |
 | `Multiple values specified for the following single-valued field(s): n/`                   | More than 1 `n/` was given in the command.                           |
 | `Multiple values specified for the following single-valued field(s): p/`                   | More than 1 `p/` was given in the command.                           |
 | `Multiple values specified for the following single-valued field(s): e/`                   | More than 1 `e/` was given in the command.                           |
@@ -397,16 +408,7 @@ This command is relatively straight forward to use and has only 1 possible error
 |---------------------------|---------------------------------|
 | `Invalid command format!` | No search keyword was provided. |
 
-<div markdown="block" id="search-behaviour" class="alert alert-info">
-
-**:information_source: Search behaviour**<br>
-
-* The search is case-insensitive. e.g. `hans` will match for `Hans` too!
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched. e.g. `Han` will not match `Hans`
-* Tutors matching at least one keyword will be matched. e.g. `Hans Bo` will match both `Hans Gruber` and `Bo Yang`
-
-</div>
+Learn more about the [search behaviour<sup>1</sup>](#note1) and supercharge your search now!
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -497,8 +499,8 @@ Here is a list of the error messages you may encounter, when the command is ente
 | Error Message                                                                                                      | Reason                                                                                       |
 |--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
 | `Invalid command format!`                                                                                          | Invalid `TUTOR_INDEX` or some of the tags `st/`, `et/` is missing.                           |
-| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format[<sup>2</sup>](#note2).          |
-| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format[<sup>2</sup>](#note2).            |
+| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format[<sup>3</sup>](#note3).          |
+| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format[<sup>3</sup>](#note3).            |
 | `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command.                                                  |
 | `Multiple values specified for the following single-valued field(s): et/`                                          | More than 1 `et/` was given in the command.                                                  |
 | `This schedule already exists in the address book`                                                                 | There is a schedule for the same tutor with the same start and end time in the address book. |
@@ -551,8 +553,8 @@ Here is a list of the error messages you may encounter, when the command is ente
 |--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
 | `Invalid command format!`                                                                                          | Invalid or missing SCHEDULE_INDEX.                                                           |
 | `The schedule index provided is invalid`                                                                           | SCHEDULE_INDEX entered is not in the range of number of schedules.                           |
-| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format[<sup>2</sup>](#note2).            |
-| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format[<sup>2</sup>](#note2).          |
+| `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format[<sup>3</sup>](#note3).            |
+| `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format[<sup>3</sup>](#note3).          |
 | `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command.                                                  |
 | `Multiple values specified for the following single-valued field(s): et/`                                          | More than 1 `et/` was given in the command.                                                  |
 | `This schedule already exists in the address book`                                                                 | There is a schedule for the same tutor with the same start and end time in the address book. |
@@ -567,7 +569,7 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Listing all schedules: `list-s`
 
-Displays a list of all schedules in TutorConnect. List can be filtered by tutors using the index number provided in the tutor list, or filter by `COMPLETED` or `MISSING` status.
+Displays a list of all schedules in TutorConnect. List can be filtered by tutors using the `TUTOR_INDEX` provided in the tutor list, or by `COMPLETED` or `MISSED` status.
 
 ##### :star: First time users
 {:.no_toc}
@@ -581,7 +583,6 @@ The list schedule function is here for that!
 **Follow these steps**
 
 1. On the left panel that shows the list of tutors, check the `TUTOR_INDEX` of Irfan Ibrahim, in this case, his number is 2.
-![list schedule](images/list-schedules/list-s.png)
 2. Type in `list-s 2 m/1` where `m/1` represents schedules marked as `COMPLETED` and press enter.
 3. If you wish to view the schedules that are marked as `MISSED` only, you can also enter `list-s m/0` where `m/0` represents schedules marked as `MISSED` and press enter.
 
@@ -596,16 +597,16 @@ For step 3, the schedule list has been updated to show schedules that are marked
 
 ![list schedule missed](images/list-schedules/list-s-missed.png)
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-success">
 
 **:bulb: Tip**<br>
 
 `list-s` command is equipped with flexible options to view a list of schedules that covers the following scenarios:
 - `list-s` : To show all schedules.
-- `list-s 1` : To show schedules by tutor that associates with `tutor_index`1.
-- `list-s m/0` : To show schedules marked as `MISSING`.
+- `list-s 1` : To show schedules by tutor that associates with `TUTOR_INDEX` 1.
+- `list-s m/0` : To show schedules marked as `MISSED`.
 - `list-s m/1` : To show schedules marked as `COMPLETED`.
-- `list-s 1 m/0` : To show schedules by `tutor_index` 1 marked as `MISSING`.
+- `list-s 1 m/0` : To show schedules by `TUTOR_INDEX` 1 marked as `MISSED`.
 
 </div>
 
@@ -672,7 +673,7 @@ Tada! The schedule list has now been updated to show schedules from tutor that c
 
 ![find schedule command](images/find-schedules/find-s-syntax.png)
 
-Learn more about the [search behaviour](#search-behaviour) and supercharge your search now!
+Learn more about the [search behaviour<sup>1</sup>](#note1) and supercharge your search now!
 
 **Errors you might encounter**
 
@@ -858,6 +859,21 @@ Woah look at that! The schedules are now being displayed in a calendar form.
 
 ![show calendar](images/showCalendar.png)
 
+<div markdown="block" class="alert alert-success">
+
+**:bulb: Worried about having too many schedules to view?**<br>
+* The calendar can show schedules for selected tutors only!
+1. Simply use [`find-t`](#locating-tutors-by-name-find-t) to select the tutors first (e.g. `find-t John` to select all
+  tutors with the name John).
+2. Now, just use the [`show`](#viewing-calendar-show) command to view their schedules in calendar view on a given date. 
+   It's that simple!
+
+**Note**:
+* Use [`list-t`](#listing-all-tutors-list-t) before [`show`](#viewing-calendar-show) to view the schedules for all 
+  tutors again.
+
+</div>
+
 ##### :star::star::star: Experienced users
 {:.no_toc}
 
@@ -1005,6 +1021,25 @@ The help window can also be accessed by the button above the command box!
 
 [Back To Top](#table-of-contents)
 
+
+#### Exiting the program: `exit`
+
+Exits TutorConnect.
+
+**Scenario**
+
+Are you done using TutorConnect and want to stop the program?
+
+**Follow these steps**
+
+Just type the `exit` command and enter.
+
+**What you can expect to see**
+
+TutorConnect closes and the program stops, going into deep slumber, disappearing from your screen...zzz
+
+[Back To Top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Frequently Asked Questions
@@ -1077,17 +1112,29 @@ Here are some inputs you might come across in the User Guide:
 |---------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------|
 | `n/NAME`            | Refers to the name of the tutor.                  | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
 | `p/PHONE NUMBER`    | Refers to the phone number of the tutor.          | Only contain numbers, and should be at least 3 <br/>digits long.                             |
-| `e/EMAIL`           | Refers to the email address of the tutor.         | Of the format local-part@domain[<sup>1</sup>](#note1).                                       |
-| `st/START_TIME`     | Refers to the start time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>2</sup>](#note2) format is accepted.                |
-| `et/END_TIME`       | Refers to the end time of the schedule.           | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>2</sup>](#note2) format is accepted.                |
+| `e/EMAIL`           | Refers to the email address of the tutor.         | Of the format local-part@domain[<sup>2</sup>](#note2).                                       |
+| `st/START_TIME`     | Refers to the start time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>3</sup>](#note3) format is accepted.                |
+| `et/END_TIME`       | Refers to the end time of the schedule.           | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>3</sup>](#note3) format is accepted.                |
 | `m/SCHEDULE STATUS` | Refers to the status of schedule in the list.     | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
 | `TUTOR_INDEX`       | Refers to the position of tutor in the list.      | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
 | `SCHEDULE_INDEX`    | Refers to the position of schedule in the list.   | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
 | `DATE`              | Refers to the date to view schedules for.         | Only date in `yyyy-MM-dd` format is accepted.                                                |
 | `NEW_THEME`         | Refers to the name of the new theme to switch to. | Only `dark`, `light` and `blue` themes are supported.                                        |
 
-**<sup id="note1">1</sup> Email Format**
 
+**<sup id="note1">1</sup> `KEYWORD` Search Format and Behaviour**
+
+Commands reference: [find-t](#locating-tutors-by-name-find-t), [find-s](#locating-schedules-by-name-find-s)
+* The `KEYWORD` search has no restriction on characters entered e.g. `h@ns` is a valid input, but will only return entries matching to `h@ns`.
+* The `KEYWORD` search is case-insensitive. e.g. `hans` will match for `Hans` too!
+* The order of the `KEYWORD` does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Only full words will be matched. e.g. `Han` will not match `Hans`.
+* Tutors matching at least one `KEYWORD` will be matched. e.g. `Hans Bo` will match both `Hans Gruber` and `Bo Yang`.
+* The `KEYWORD` entered will match ANY part of the tutor's name, while `KEYWORD` that do not match a tutor's name are ignored. e.g. `Hans Bl@bl@$lah` will match `Hans Gruber` and `Hans Yang`.
+
+**<sup id="note2">2</sup> Email Format**
+
+Commands reference: [add-t](#adding-a-tutor-add-t), [edit-t](#editing-a-tutor-edit-t)
 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 
@@ -1096,7 +1143,10 @@ The domain name must:
 * have each domain label start and end with alphanumeric characters
 * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
-**<sup id="note2">2</sup> `yyyy-MM-ddTHH:mm`**
+
+**<sup id="note3">3</sup> `yyyy-MM-ddTHH:mm` Format**
+
+Commands reference: [add-s](#adding-a-schedule-add-s), [edit-s](#editing-a-schedule-edit-s)
 * `yyyy` represents the **year** (e.g., 2023).
 * `MM` represents the **month** with a leading zero (e.g., 09 for September, 10 for October).
 * `dd` represents the **day** of the month with a leading zero (e.g., 03, 15).
@@ -1128,5 +1178,6 @@ The domain name must:
 | **View Calendar**   | `show DATE` <br> e.g., `show 2023-09-15`                                                                   |
 | **Change Theme**    | `theme NEW_THEME` <br> e.g., `theme dark`                                                                  |
 | **Clear**           | `clear`                                                                                                    |
+| **Exit**            | `exit`                                                                                                     |
 
 [Back To Top](#table-of-contents)
