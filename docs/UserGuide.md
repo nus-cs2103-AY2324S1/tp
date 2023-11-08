@@ -409,7 +409,7 @@ Example usage:
 
 #### Redo last undone change: `redo`
 
-You can use the `redo` command to redo the last change to the list of contacts stored in NetworkBook and/or the list of contacts displayed by NetworkBook. This command only works if there are preceding undo commands that can be reversed.
+You can use the `redo` command to redo the last change to the list of contacts stored in NetworkBook and/or the list of contacts displayed by NetworkBook. This command only works if there are preceding undo commands executed in NetworkBook that can be reversed.
 
 Format: `redo`
 
