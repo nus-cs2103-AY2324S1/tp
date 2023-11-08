@@ -32,8 +32,8 @@ public class FindPersonCommand extends Command {
         model.updateFilteredPersonList(predicate);
         int listSize = model.getFilteredPersonList().size();
         return new CommandResult(
-                String.format(listSize == 1 ? Messages.MESSAGE_PERSON_LISTED_OVERVIEW :
-                        Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, listSize));
+                String.format(listSize == 1 ? Messages.MESSAGE_PERSON_LISTED_OVERVIEW
+                        : Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, listSize));
     }
 
     @Override
