@@ -5,7 +5,7 @@ title: OutBook User Guide
 # OutBook
 
 ## About OutBook
-OutBook is an app that allows freelance insurance agents to manage their numerous contacts and meeting schedule. It is optimised for Command Line Interface (CLI) and aims to significantly reduce the time needed for organizational tasks.
+OutBook is a desktop app that allows freelance insurance agents to manage their numerous contacts and meeting schedule. It is optimised for Command Line Interface (CLI) and aims to significantly reduce the time needed for organizational tasks.
 
 This guide aims to help you explore its features and learn how to use them.
 
