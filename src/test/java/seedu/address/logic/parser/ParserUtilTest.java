@@ -349,12 +349,12 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, EventTime.MESSAGE_NON_EMPTY, () -> ParserUtil.parseEventTime(""));
         String dateNow = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         assertThrows(ParseException.class,
-                EventTime.MESSAGE_INVALID_DATETIME_FORMAT + "Text '" + dateNow
-                        + " 1' could not be parsed at index 11", () ->
+                EventTime.MESSAGE_INVALID_DATETIME_FORMAT
+                        + "Text '1' could not be parsed at index 0", () ->
                         ParserUtil.parseEventTime("1"));
         assertThrows(ParseException.class,
-                EventTime.MESSAGE_INVALID_DATETIME_FORMAT + "Text '" + dateNow
-                        + " 1,2,3,4' could not be parsed at index 11", () ->
+                EventTime.MESSAGE_INVALID_DATETIME_FORMAT
+                        + "Text '1,2,3,4' could not be parsed at index 0", () ->
                         ParserUtil.parseEventTime("1,2,3,4"));
     }
 
