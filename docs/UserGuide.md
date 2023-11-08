@@ -681,7 +681,7 @@ Output:
 * If the ATTENDANCE_TYPE is not within the valid list, the app should display `Invalid attendance type, only Absent, Late and Present are allowed.`
   <br>![result for incorrect attendance type](images/incorrectAttendanceType.png)
 * If the command is successful, the app should display the following message. The employee’s attendance status should also be updated accordingly.
-  <br>![result for marking an employee to be absent](images/markSuccess.png)
+  <br>![result for marking an employee to be absent](images/markSuccessMessage.png)
   <br>![person card](images/markSuccess1.png)
 
 * Go back to [Table of Contents](#table-of-contents)
