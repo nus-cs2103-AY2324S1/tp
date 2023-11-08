@@ -547,6 +547,10 @@ Please do not use negative integers, non-integers and extremely large integers(i
 
 * The `NAME` must be in the correct [format](#parameter-formats).
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Editing the basic salary component of an employee will only take effect from the next payroll calculation onwards,  and it will only apply to the calculation of latest payroll.
+</div>
+
 Examples:
 
 * `payroll 3` calculates the payroll of the third employee in the most recently displayed list.
@@ -583,6 +587,10 @@ Please do not use negative integers, non-integers and extremely large integers(i
 
 * The `NAME` must be in the correct [format](#parameter-formats).
 * The optional `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Editing the basic salary component of an employee will only take effect from the next payslip generation onwards, and it will only apply to the generation of latest payslip.
+</div>
 
 Examples:
 
