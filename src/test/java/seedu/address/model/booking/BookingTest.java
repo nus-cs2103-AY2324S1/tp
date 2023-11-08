@@ -8,11 +8,20 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_PERIOD_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.booking.exceptions.BookingPeriodNotFoundException;
+import seedu.address.model.booking.exceptions.RoomNotFoundException;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.exceptions.EmailNotFoundException;
+import seedu.address.model.person.exceptions.NameNotFoundException;
+import seedu.address.model.person.exceptions.PhoneNotFoundException;
 import seedu.address.testutil.BookingBuilder;
 
 public class BookingTest {
@@ -79,5 +88,65 @@ public class BookingTest {
 
         // Check that their hash codes are not equal
         assertNotEquals(booking1.hashCode(), booking2.hashCode());
+    }
+
+    @Test
+    public void testRoomNotFoundException() {
+        Room room = null;
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00"); // Create BookingPeriod object
+        Name name = new Name("John Doe"); // Create Name object
+        Phone phone = new Phone("1234567890"); // Create Phone object
+        Email email = new Email("john@gmail.com"); // Create Email object
+        Remark remark = new Remark("Test remark"); // Create Remark object
+
+        assertThrows(RoomNotFoundException.class, () -> new Booking(room, bookingPeriod, name, phone, email, remark));
+    }
+
+    @Test
+    public void testBookingPeriodNotFoundException() {
+        Room room = new Room("101"); // Create Room object
+        BookingPeriod bookingPeriod = null;
+        Name name = new Name("John Doe"); // Create Name object
+        Phone phone = new Phone("1234567890"); // Create Phone object
+        Email email = new Email("john@gmail.com"); // Create Email object
+        Remark remark = new Remark("Test remark"); // Create Remark object
+
+        assertThrows(BookingPeriodNotFoundException.class, () -> new Booking(room, bookingPeriod, name, phone, email, remark));
+    }
+
+    @Test
+    public void testNameNotFoundException() {
+        Room room = new Room("101"); // Create Room object
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00"); // Create BookingPeriod object
+        Name name = null;
+        Phone phone = new Phone("1234567890"); // Create Phone object
+        Email email = new Email("john@gmail.com"); // Create Email object
+        Remark remark = new Remark("Test remark"); // Create Remark object
+
+        assertThrows(NameNotFoundException.class, () -> new Booking(room, bookingPeriod, name, phone, email, remark));
+    }
+
+    @Test
+    public void testEmailNotFoundException() {
+        Room room = new Room("101"); // Create Room object
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00"); // Create BookingPeriod object
+        Name name = new Name("John Doe"); // Create Name object
+        Phone phone = new Phone("1234567890"); // Create Phone object
+        Email email = null;
+        Remark remark = new Remark("Test remark"); // Create Remark object
+
+        assertThrows(EmailNotFoundException.class, () -> new Booking(room, bookingPeriod, name, phone, email, remark));
+    }
+
+    @Test
+    public void testPhoneNotFoundException() {
+        Room room = new Room("101"); // Create Room object
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00"); // Create BookingPeriod object
+        Name name = new Name("John Doe"); // Create Name object
+        Phone phone = null;
+        Email email = new Email("john@gmail.com"); // Create Email object
+        Remark remark = new Remark("Test remark"); // Create Remark object
+
+        assertThrows(PhoneNotFoundException.class, () -> new Booking(room, bookingPeriod, name, phone, email, remark));
     }
 }
