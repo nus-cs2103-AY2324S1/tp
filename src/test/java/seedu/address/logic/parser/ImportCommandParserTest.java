@@ -46,16 +46,16 @@ class ImportCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             "Header Error!\n" + ImportCommand.MESSAGE_USAGE);
 
-        String fileName1 = relativePath + "/" + "student_data_test_fail_wrong_column.csv";
+        String fileName1 = relativePath + "\\" + "student_data_test_fail_wrong_column.csv";
         assertParseFailure(parser, fileName1, expectedMessage);
 
-        String fileName2 = relativePath + "/" + "student_data_test_fail_missing_attributes.csv";
+        String fileName2 = relativePath + "\\" + "student_data_test_fail_missing_attributes.csv";
         assertParseFailure(parser, fileName2, expectedMessage);
 
-        String fileName3 = relativePath + "/" + "student_data_test_fail_empty.csv";
+        String fileName3 = relativePath + "\\" + "student_data_test_fail_empty.csv";
         assertParseFailure(parser, fileName3, expectedMessage);
 
-        String fileName4 = relativePath + "/" + "student_data_test_fail_wrong_extra_attributes.csv";
+        String fileName4 = relativePath + "\\" + "student_data_test_fail_wrong_extra_attributes.csv";
         assertParseFailure(parser, fileName4, expectedMessage);
     }
 

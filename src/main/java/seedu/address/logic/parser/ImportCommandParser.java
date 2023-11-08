@@ -64,6 +64,10 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             String[] expectedHeaders = {MESSAGE_NAME, MESSAGE_PHONE, MESSAGE_EMAIL, MESSAGE_ADDRESS, MESSAGE_GENDER,
                 MESSAGE_SEC_LEVEL, MESSAGE_MRT_STATION, MESSAGE_SUBJECT, MESSAGE_ENROL_DATE};
 
+            if (header == null) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    "Header Error!\n" + ImportCommand.MESSAGE_USAGE));
+            }
             String[] actualHeaders = header.split(",");
 
             for (int i = 0; i < expectedHeaders.length; i++) {
