@@ -394,7 +394,7 @@ This operation is exposed in the abstract `Command` class as an abstract method.
 
 Given below is an example usage scenario and how the add schedule command behaves.
 
-The user executes `add-s 1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00` command. The `AddScheduleCommandParser` will be initialized to parse the user input to create a `AddScheduleCommand` with a `Index`, `StartTime` and `EndTime` representing the user's input.
+The user executes `add-s 1 st/2023-09-15T09:00 et/2023-09-15T11:00` command. The `AddScheduleCommandParser` will be initialized to parse the user input to create a `AddScheduleCommand` with a `Index`, `StartTime` and `EndTime` representing the user's input.
 
 The `AddScheduleCommand#exceute(Model)` will perform the following checks in this order to ensure that the `Schedule` can be added to the `Model`:
 1. The `Index` is valid.
