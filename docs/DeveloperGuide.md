@@ -715,13 +715,11 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing data files
 
    1. Delete the data file `data/classmanager.json`<br>
-      Expected: The app will create a new data file when it is next closed.
+      Expected: The app will be populated with sample students. The app will create a new data file when it is next closed. 
 
 2. Dealing with corrupted data files
-   1. Edit the data file `data/classmanager.json` <br> 
-      Expected: The app will show an error message and exit when it is next launched.
-
-1. _{ more test cases …​ }_
+   1. Edit the data file `data/classmanager.json`, Change a student's field to be invalid. <br> 
+      Expected: The app will launch with an empty address book. The app will create a new data file when it is next closed.
 
 
 ### Adding a student
