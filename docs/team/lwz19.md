@@ -40,7 +40,7 @@ Given below are my contributions to the project.
     * Added some FAQ.
     <br><br>
   * Developer Guide:
-    * Edited the implementation details of the `ClassDetails` class.
+    * Edited the implementation details in `Class Details` and `Modify Class Details` features.
     * Added use cases.
     * Added more manual testing.
     * Added some NFRs.
