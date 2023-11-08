@@ -74,6 +74,16 @@ public class Policy {
     }
 
     /**
+     * Compares the policy's issue date and expiry date
+     * Returns more than 1 if the expiry date is after issue date
+     * Returns less than 1 otherwise
+     * @return int
+     */
+    public int compareDates() {
+        return this.getPolicyExpiryDate().compareTo(this.getPolicyIssueDate());
+    }
+
+    /**
      * Return a string representation of the Policy that will be displayed on the Person's Card or the successful
      * command box.
      *

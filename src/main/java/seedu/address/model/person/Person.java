@@ -92,7 +92,7 @@ public class Person {
      * @return int
      */
     public int comparePolicyDates() {
-        return this.policy.getPolicyExpiryDate().compareTo(this.policy.getPolicyIssueDate());
+        return this.policy.compareDates();
     }
 
     public Remark getRemark() {
