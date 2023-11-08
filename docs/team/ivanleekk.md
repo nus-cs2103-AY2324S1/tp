@@ -79,6 +79,6 @@ Given below are my contributions to the project.
 
 * **Community**:
     * PRs reviewed (with non-trivial review
-      comments): [\#108](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/108), [\#129](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/129)
+      comments): [\#108](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/108), [\#129](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/129), [\#210](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/210)
     * Reformatted User Guide from Google Docs for planned features to use
       GFMD instead [#32](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/32)
