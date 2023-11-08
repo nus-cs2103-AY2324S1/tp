@@ -701,26 +701,26 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a student from the current students list.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
-      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the status message.
+      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the result display box.
 
 2. Deleting a student that is not in the current students list.
 
    1. Test case: `delete s/vnqvq1924`<br>
-      Expected: No student is deleted. Student Number error details shown in the status message.
+      Expected: No student is deleted. Student Number error details shown in the result display box.
 
 
 3. Deleting a student with an invalid student number.
 
    1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
-      Expected: No student is deleted. Command format error details shown in the status message.
+      Expected: No student is deleted. Command format error details shown in the result display box.
    2. Test case: `delete`<br>
-      Expected: No student is deleted. Command format error details shown in the status message.
+      Expected: No student is deleted. Command format error details shown in the result display box.
 
 
 ### Loading data files
 ###### Setup
 - Move the JAR file to a fresh directory. 
-- Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preference.json`)<br>
+- Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
 - Copy the sample data file `classmanager.json`. And paste 2 copies of it in the same directory as the `classmanager.json`. Rename the copies to `t1.json` and `t2.json`.
 - Do not delete the data file `classmanager.json` as it will be used as the starting default file.
 
@@ -733,12 +733,12 @@ testers are expected to do more *exploratory* testing.
 2. Loading a corrupted data file
    - Open and edit `t2.json` with a text editor. Add some random text to the file or delete some text from the file.
    - Enter: `load f/t2`<br>
-        Expected: The data in `t2.json` is not loaded into the app. The status bar on the bottom left is unchanged. 
-        An error message is displayed.
+        Expected: The data in `t2.json` is not loaded into the app. The address bar on the bottom left is unchanged.
+        File error details shown in the result display box.
     <br><br> 
 3. Loading a missing data file
    - Enter: `load f/t3`<br>
-       Expected: The status bar on the bottom left is unchanged. An error message is displayed.
+       Expected: The status bar on the bottom left is unchanged. File error details shown in the result display box.
 
 ### Undo/redo
 
@@ -756,33 +756,60 @@ testers are expected to do more *exploratory* testing.
     2.  Test case: `add` -> `add` -> `undo` -> `undo` -> `redo` (Add 2 students, and then 2 undo with 1 redo)<br>
         Expected: The first `add` command is redone. The first student is added back to the list of students.
 
-### Saving data
 
+### Launch with erroneous data files
+###### Setup
+- Move the JAR file to a fresh directory.
+- Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
+- Copy the sample data file `classmanager.json`. And paste 2 copies of it in the same directory as the `classmanager.json`. Rename the copies to `corrupt.json` and `wrong.json`.
+
+###### Test cases
 1. Dealing with missing data files
-
-   1. Delete the data file `data/classmanager.json`<br>
-      Expected: The app will be populated with sample students. The app will create a new data file when it is next closed. 
-
+    - Edit the `preferences.json` to have the entry: 
+    ```
+    "classManagerFilePath" : "data\\missing.json"
+    ```
+   (Ensure that there is **no** file named `missing.json`)
+   - Launch the app<br>
+      Expected: The app will be populated with sample students. The app will create a new data file when it is next closed.
+      <br><br>
 2. Dealing with corrupted data files
-   1. Edit the data file `data/classmanager.json`, Change a student's field to be invalid. <br> 
-      Expected: The app will launch with an empty address book. The app will create a new data file when it is next closed.
-
+    - Edit the data file `corrupt.json`, by randomly add or delete lines of data. <br>
+    - Edit the `preferences.json` to have the entry:
+    ```
+    "classManagerFilePath" : "data\\corrupt.json"
+    ```
+    - Launch the app<br>
+      Expected: The app will launch with an empty student list. The app will create a new data file when it is next closed.
+      <br><br>
+3. Dealing with valid data file but with the wrong configuration
+    - Edit the data file `wrong.json`. (Do not change anything) <br>
+    - Edit the `preferences.json` to have the entries:
+    ```
+    "classManagerFilePath" : "data\\wrong.json",
+    "tutorialCount" : 1,
+    "assignmentCount" : 1,
+    ```
+   (Ensure that the `tutorialCount` and `assignmentCount` are **changed**)
+    - Launch the app<br>
+      Expected: The app will launch with an empty student list. The app will create a new data file when it is next closed.
+      <br><br>
 
 ### Adding a student
 
 1. Adding a new student to the current students list.
 
    1. Test case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`<br>
-      Expected: The student with NAME, STUDENT_NUMBER and EMAIL is added to the list. Details of the added student shown in the status message. Timestamp in the status bar is updated.
-
+      Expected: The student with NAME, STUDENT_NUMBER and EMAIL is added to the list. Details of the added student shown in the result display box.
+      <br><br>
 2. Adding an already existing student to the current students list.
 
    1. Test case: Student Number that is already present in the list <br>
-      Expected: No student is added. Error details shown in the status message. Status bar remains the same.
-
+      Expected: No student is added. Error details shown in the result display box.
+      <br><br>
 3. Adding a student without some required fields <br>
    1. Test Case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`, `add n/NAME s/PHONE e/EMAIL`<br>
-      Expected: No student is added. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is added. Error details shown in the result display box.
 
 ### Editing a student
 
@@ -790,40 +817,40 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new NAME. 
-   2. Test case: `edit STUDENT_NUMBER s/STUDENT_NUMBER`<br>
-      Expected: The student with STUDENT_NUMBER is edited to have the new STUDENT_NUMBER. 
-
+   2. Test case: `edit STUDENT_NUMBER s/NEW_STUDENT_NUMBER`<br>
+      Expected: The student with STUDENT_NUMBER is edited to have the NEW_STUDENT_NUMBER.
+      <br><br>
 2. Editing a student's details where the student is not in the list (Invalid Student Number). 
 
    1. Test case: Edit command with Student Number that is not present in the list <br>
-      Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is edited. Error details shown in the result display box.
 
 ### Adding a comment to a student
 
 1. Adding a comment to a student in the current students list.
 
-   1. Test case: `comment STUDENT_NUMBER c/COMMENT`<br>
-      Expected: The student with STUDENT_NUMBER is edited to have the new COMMENT. 
-   
+   1. Test case: `comment s/STUDENT_NUMBER cm/COMMENT`<br>
+      Expected: The student with STUDENT_NUMBER is edited to have the new COMMENT.
+      <br><br>   
 2. Adding a comment to a student where the student is not in the list (Invalid Student Number). 
 
    1. Test case: Comment command with Student Number that is not present in the list <br>
-      Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
-
+      Expected: No student is edited. Error details shown in the result display box.
+      <br><br>
 3. Adding a comment to a student where the new comment is empty.
 
-   1. Test case: `comment STUDENT_NUMBER c/`<br>
+   1. Test case: `comment s/STUDENT_NUMBER cm/`<br>
       Expected: Student is edited to have an empty comment. 
 
 ### Tagging a student
 
 1. Tagging an existing student in the current students list.
 
-   1. Test case: `tag STUDENT_NUMBER t/TAG`<br>
+   1. Test case: `tag s/STUDENT_NUMBER t/TAG`<br>
       Expected: The student with STUDENT_NUMBER is tagged with the new TAG.
-
+      <br><br>
 2. Adding a new student with tags.
 
    1. Test case: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]...`<br>
-      Expected: The student with NAME, STUDENT_NUMBER, EMAIL and TAG is added to the list. Details of the added student shown in the status message. Timestamp in the status bar is updated.
+      Expected: The student with NAME, STUDENT_NUMBER, EMAIL and TAG is added to the list. Details of the added student shown in the result display box.
 
