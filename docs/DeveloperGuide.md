@@ -30,7 +30,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of TAvigator.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -164,6 +164,7 @@ Both list commands are parsed with `ListCommandParser`. If parsed successfully, 
 a `ListStudentsCommand` or `ListAttendanceCommand`.
 
 The following is a class diagram depicting `ListCommand`, `ListStudentsCommand` and `ListAttendanceCommand`:
+
 ![ListCommandClassDiagram](images/ListCommandClassDiagram.png)
 
 Shown below is the sequence diagram of `ListStudentsCommand` when `list students` is entered by the User:
@@ -264,6 +265,14 @@ The view feature allows the user to view the detailed attendance records of the 
 feature is implemented using the `ViewCommand` class. It is parsed by the `ViewCommandParser` class. If parsed
 successfully, it returns a `ViewCommand` object.
 
+The following sequence diagram shows how the ViewCommand function works:
+
+![ViewSeqDiagram](images/ViewSeqDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a ViewCommand:
+
+![ViewActivityDiagram](images/ViewActivityDiagram.png)
+
 #### Design considerations
 
 The feature is implemented this way in order to access each individual's attendance records in a quick and efficient
@@ -286,6 +295,42 @@ short and quick, especially when the user may have to view multiple attendance r
   **Evaluation**:
 
   The current implementation, despite having to add new classes, is the optimal way to go about implementing this feature as we believe that having a user-friendly UI is a priority.
+
+### Finding a person `find`
+
+#### Implementation
+
+This `find` feature allows the user to search for students in TAvigator courses either by the student's name or ID. The user also need not enter the student's full name and can simply enter prefixes. This feature is implemented using the `FindCommand` class and parsed by the `FindCommandParser` class. If parsed successfully, it return a `FindCommand` object.
+
+The following sequence diagram shows how the FindCommand function works:
+
+![FindSeqDiagram](images/FindSeqDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a ViewCommand:
+
+![FindActivityDiagram](images/FindActivityDiagram.png)
+
+#### Design considerations
+
+The feature is implemented this way so that the user is able to access a particular student's contact quickly and conveniently without having to scroll through the entire course list. By allowing the user to search by prefixes or student IDs, there is a lot more freedom in terms of how the user wants to access the student's contact.
+
+#### Alternative implementations considered but not adopted:
+
+- Only allowing the user to find contacts by name
+
+  > Instead of having the user to enter the prefix everytime they want to find a contact, the process can be sped up by narrowing the functionality of this command to only find by name.
+
+  **Pros:**
+    - Implementation would be quite straightforward and simple as the default `find` feature would suffice for the feature specifications.
+    - The user need not enter the prefix everytime they want to use `find`, reducing the time taken to search for contacts.
+
+  **Cons:**
+    - The freedom of the user is limited greatly, considering that finding by student ID in a university is also rather common. By constraining them to a single search method, the user may end up spending more time finding students with longer names.
+
+  **Evaluation**:
+
+  The current implementation is the optimal way to go about implementing this feature as we believe that the value added by the feature triumphs the effort needed for implementation.
+
 
 ### \[Proposed\] Multiple Address Books for each Course
 
@@ -742,4 +787,9 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
+Given below are some of the possible enhancements that could be added in future iterations:
+1. Currently, student names cannot contain any special characters like `,` or `-` that might exist in some names. We plan to allow specific special characters for student names in future developments.
+2. The current error message for a failed `mark` command may be too general. We plan to add details to the error message that explains the reason of failure especially when reason of absence is not provided for students who are marked as absent: `Reason of absence (r/) is mandatory for students who are marked as absent`.
+3. The messages for `course` commands could be more specific. We plan to replace mentions of `address book` with `courses` to better fit the context of TAvigator and reduce confusion for users.
+4. Validation checks could be added for course names to ensure valid course names when adding or editing courses. A valid format would include two to three initial alphabetical letters, followed by four numbers and one optional alphabetical letter at the end. A valid example would be `CS2103T`.
 5. We plan to implement importing student records from a csv file in future, which may create duplicated records. This would be where our merge command comes into play, merging duplicated records so that no information is lost.
