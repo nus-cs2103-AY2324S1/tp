@@ -253,6 +253,9 @@ Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAM
 - All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023.
 - All time are to be in the format `HHmm`. i.e. 1400 for 2pm.
 - If the given `START_TIME` and `END_TIME` are not given, the default values are `0000` and `2359` respectively.
+- Note that if a person appears under multiple groups, e.g `Alvin` is in groups `classmates` and `friends`, the name `Alvin` will appear under both groups when displayed in the events list. This is an intended behavior for you to see everyone in the groups that are assigned to the event. This is illustrated as follows.
+
+![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 
 Example: 
 * `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
@@ -291,6 +294,9 @@ Format: `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/E
 * All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023
 * All time are to be in the format `HHmm`. i.e. 1400 for 2pm.
 * The given `DATE`, `START_TIME` and `END_TIME` cannot be a time in the past.
+* Note that if a person appears under multiple groups, e.g `Alvin` is in groups `classmates` and `friends`, the name `Alvin` will appear under both groups when displayed in the events list. This is an intended behavior for you to see everyone in the groups that are assigned to the event. This is illustrated as follows.
+
+![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 
 Examples:
 * `edit_event 1 m/FumbleLog meeting d/2023-10-05 s/1500 e/1700`
