@@ -18,6 +18,8 @@ public class Messages {
     public static final String MESSAGE_PREAMBLE_DETECTED = "Error: Preamble Detected";
     public static final String MESSAGE_USED_POLICY_NUMBER = "Error: The policy number is already in use";
 
+    public static final String MESSAGE_DATES_NOT_COMPATIBLE  = "Error: The Policy Issue Date falls after Policy Expiry Date";
+
     public static final String MESSAGE_INCOMPLETE_POLICY_EDIT = "Error: "
             + "You must provide edits for all policy parameters";
     public static final String MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND =

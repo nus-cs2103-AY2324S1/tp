@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND;
 import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND;
 import static seedu.address.logic.Messages.MESSAGE_PREAMBLE_DETECTED;
+import static seedu.address.logic.Messages.MESSAGE_DATES_NOT_COMPATIBLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -125,6 +126,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             policyNumber = ParserUtil.parsePolicyNumber(argMultimap.getValue(PREFIX_POLICY_NUMBER).get());
             policyIssueDate = ParserUtil.parsePolicyIssueDate(argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).get());
             policyExpiryDate = ParserUtil.parsePolicyExpiryDate(argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).get());
+        }
+
+        if (policyIssueDate.compareTo(policyExpiryDate) > 0) {
+            throw new ParseException(MESSAGE_DATES_NOT_COMPATIBLE);
         }
 
         Policy policy = new Policy(company, policyNumber, policyIssueDate, policyExpiryDate);

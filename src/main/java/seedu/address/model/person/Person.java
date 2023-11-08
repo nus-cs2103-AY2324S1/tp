@@ -86,6 +86,15 @@ public class Person {
         return policy;
     }
 
+    /**
+     * Compares the policy issue date to the policy expiration date to see which comes first.
+     * Returns more than 0 if expiry date is later and less than 0 otherwise
+     * @return int
+     */
+    public int comparePolicyDates() {
+        return this.policy.getPolicyExpiryDate().compareTo(this.policy.getPolicyIssueDate());
+    }
+
     public Remark getRemark() {
         return remark;
     }

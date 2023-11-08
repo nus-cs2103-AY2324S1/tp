@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_DATES_NOT_COMPATIBLE;
 import static seedu.address.logic.Messages.MESSAGE_USED_POLICY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
@@ -27,6 +28,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -111,6 +113,10 @@ public class EditCommand extends Command {
 
         if (!editedPerson.comparePolicyNumber(personToEdit) && model.hasSamePolicyNumber(editedPerson)) {
             throw new CommandException(MESSAGE_USED_POLICY_NUMBER);
+        }
+
+        if (editedPerson.comparePolicyDates() < 0) {
+            throw new CommandException(MESSAGE_DATES_NOT_COMPATIBLE);
         }
 
         model.setPerson(personToEdit, editedPerson);
