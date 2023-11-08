@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_NO_CHANGE;
 import static seedu.address.logic.commands.EditCommand.createEditedPerson;
@@ -46,7 +45,7 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(person);
 
-        Person editedPerson = personInList.withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Person editedPerson = personInList.withPhone(VALID_PHONE_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(new Name(person.getName().toString()),
@@ -66,11 +65,10 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(0);
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Person editedPerson = personInList.withPhone(VALID_PHONE_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(new Name(lastPerson.getName().toString()), null, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
@@ -123,7 +121,7 @@ public class EditCommandTest {
     @Test
     public void equals_sameObject_returnsTrue() {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(new Name(VALID_NAME_AMY), null, descriptor);
 
         assertTrue(editCommand.equals(editCommand));
@@ -157,7 +155,6 @@ public class EditCommandTest {
         assertEquals(editedPerson.getPhone(), personToEdit.getPhone());
         assertEquals(editedPerson.getAddress(), personToEdit.getAddress());
         assertEquals(editedPerson.getMedicalHistories(), personToEdit.getMedicalHistories());
-        assertEquals(editedPerson.getTags(), personToEdit.getTags());
     }
 
     @Test

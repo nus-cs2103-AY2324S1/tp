@@ -60,8 +60,6 @@ public class Messages {
                 .append("; Medical Histories: ");
 
         person.getMedicalHistories().forEach(builder::append);
-        builder.append("; Tags: ");
-        person.getTags().forEach(builder::append);
         return builder.toString();
     }
 }

@@ -7,8 +7,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "appointment": "12-Dec-2023, 12:00, 15:00",
-    "medicalHistories": [ "tachycardia" ],
-    "tags" : [ "friends" ]
+    "medicalHistories": [ "tachycardia" ]
   }, {
     "name" : "Benson Meier",
     "id": "S1234567B",
@@ -16,8 +15,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "appointment": "12-Dec-2023, 12:00, 15:00",
-    "medicalHistories": [ "diabetes", "high-risk" ],
-    "tags" : [ "owesMoney", "friends" ]
+    "medicalHistories": [ "diabetes", "high-risk" ]
   }, {
     "name" : "Carl Kurz",
     "id": "S8765432B",
@@ -25,8 +23,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "appointment": "01-Jan-2023, 10:00, 12:00",
-    "medicalHistories": [ "O= Blood Type" ],
-    "tags" : [ ]
+    "medicalHistories": [ "O= Blood Type" ]
   }, {
     "name" : "Daniel Meier",
     "id": "T1234567I",
@@ -34,8 +31,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "appointment": "01-Jan-2023, 10:00, 12:00",
-    "medicalHistories": [ ],
-    "tags" : [ "friends" ]
+    "medicalHistories": [ ]
   }, {
     "name" : "Elle Meyer",
     "id": "T1111111Z",
@@ -43,8 +39,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "appointment": "10-Jan-2023, 10:00, 12:00",
-    "medicalHistories": [ ],
-    "tags" : [ ]
+    "medicalHistories": [ ]
   }, {
     "name" : "Fiona Kunz",
     "id": "M2222222Z",
@@ -52,8 +47,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "appointment": "10-Jan-2023, 10:00, 12:00",
-    "medicalHistories": [ ],
-    "tags" : [ ]
+    "medicalHistories": [ ]
   }, {
     "name" : "George Best",
     "id": "G2767543H",
@@ -61,7 +55,6 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "appointment": "12-Dec-2023, 12:00, 15:00",
-    "medicalHistories": [ ],
-    "tags" : [ ]
+    "medicalHistories": [ ]
   } ]
 }
