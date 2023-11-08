@@ -47,6 +47,8 @@ public class SummaryStatisticTest {
         SummaryStatistic summaryStatistic = new SummaryStatistic(model.getFilteredPersonList());
         int expectedMedian = prepareMedianScore();
         int actualMedian = summaryStatistic.calculateMedian(generateSortedStream());
+        System.out.println(expectedMedian);
+        System.out.println(actualMedian);
         assertTrue(expectedMedian == actualMedian);
     }
 
@@ -177,7 +179,13 @@ public class SummaryStatisticTest {
         for (int i = 0; i < totalPersons; i++) {
             scores[i] = model.getFilteredPersonList().get(i).getScoreForTag(VALID_SCORE_TAG).value;
         }
-        return scores[totalPersons / 2];
+
+        Arrays.sort(scores);
+        if (totalPersons % 2 == 0) {
+            return (scores[totalPersons / 2 - 1] + scores[totalPersons / 2]) / 2;
+        } else {
+            return scores[totalPersons / 2];
+        }
     }
 
     /**
