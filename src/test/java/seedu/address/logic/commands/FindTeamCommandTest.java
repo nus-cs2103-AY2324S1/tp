@@ -52,7 +52,7 @@ public class FindTeamCommandTest {
 
     @Test
     public void execute_zeroKeywords_noTeamFound() {
-        String expectedMessage = "0 teams listed!";
+        String expectedMessage = "0 team listed!";
         TeamContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindTeamCommand command = new FindTeamCommand(predicate);
         expectedModel.updateFilteredTeamList(predicate);
@@ -62,6 +62,17 @@ public class FindTeamCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredTeamList());
     }
 
+    @Test
+    public void execute_multipleKeywords_oneTeamsFound() {
+        String expectedMessage = "1 team listed!";
+        TeamContainsKeywordsPredicate predicate = preparePredicate("TEAM1");
+        FindTeamCommand command = new FindTeamCommand(predicate);
+        expectedModel.updateFilteredTeamList(predicate);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                false, false, false, false, false, false, true);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        assertEquals(Arrays.asList(TEAM1), model.getFilteredTeamList());
+    }
     @Test
     public void execute_multipleKeywords_multipleTeamsFound() {
         String expectedMessage = "2 teams listed!";

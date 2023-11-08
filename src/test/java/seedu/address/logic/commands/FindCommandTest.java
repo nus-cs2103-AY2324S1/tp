@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTeams.getTypicalTeamBook;
 
@@ -56,7 +57,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = "0 persons listed!";
+        String expectedMessage = "0 person listed!";
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -66,6 +67,17 @@ public class FindCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
+    @Test
+    public void execute_zeroKeywords_onePersonFound() {
+        String expectedMessage = "1 person listed!";
+        NameContainsKeywordsPredicate predicate = preparePredicate("ALICE");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                false, false, false, false, false, true, false);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
+    }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
