@@ -12,7 +12,7 @@ import seedu.lovebook.model.DatePrefs;
 
 public class ScoreTest {
     @Test
-    public void correctScore() {
+    public void testCorrectScore() {
         // Default: age 21; height 170; income 10000; horoscope ARIES;
         DatePrefs prefs = new DatePrefs();
 
