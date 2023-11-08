@@ -47,7 +47,7 @@ public class AddressBookParser {
      * Used for initial separation of command word, person type and args. Complex commands require a person type tag.
      */
     private static final Pattern COMPLEX_COMMAND_FORMAT = Pattern.compile(
-            "(?<commandWord>\\S+)\\s(?<personType>-\\S+)(?<arguments>.*)");
+            "(?<commandWord>\\S+)\\s(?<personType>-(pa|sp))(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     private final Model model;
@@ -115,10 +115,32 @@ public class AddressBookParser {
                 }
                 break;
 
+            case DeleteCommand.COMMAND_WORD:
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+
+            case UndoCommand.COMMAND_WORD:
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
+
+            case RedoCommand.COMMAND_WORD:
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
+
+            case AddShortcutCommand.COMMAND_WORD:
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShortcutCommand.MESSAGE_USAGE));
+
+            case DeleteShortcutCommand.COMMAND_WORD:
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteShortcutCommand.MESSAGE_USAGE));
+
+            case ViewCommand.COMMAND_WORD:
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+
+            case ThemeCommand.COMMAND_WORD:
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
+
             default:
                 logger.finer("This user input caused a ParseException: " + userInput);
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-
             }
         } else if (matcherBasic.matches()) {
             final String commandWord = model.getShortcut(matcherBasic.group("commandWord"));

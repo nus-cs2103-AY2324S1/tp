@@ -26,7 +26,7 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 
    * `list -pa` : Lists all patients.
 
-   * `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis` : Adds a patient named `John` to the list.
+   * `add -pa n/John e/johnmctavish@gmail.com p/12345678 a/35 m/Osteoporosis m/Rheumatoid arthritis` : Adds a patient named `John` to the list.
 
    * `delete 3` : Deletes the 3rd person shown in the current list.
 
@@ -56,7 +56,7 @@ would like the command to operate on.
 * Items with `…`​ after them can be used multiple times but must include at least one entry.<br>
   e.g. `INDEX…​` can be used as `1` , `1 2 3`, `4 5 6 7 8`, but _**not**_ ` ` (i.e. 0 times).
 
-* Items with both square brackets and `…`​ can be used multiple times, including zero times as they are optional. <br>
+* Items with both square brackets and `…`​ can be used multiple times, including zero times as they are optional.<br>
   e.g. `[m/MEDICAL_HISTORY]…​` can be used as ` ` (i.e. 0 times), `m/Osteoporosis`, `m/Osteoporosis m/Asthma` etc.
 
 * Parameters can be in any order.<br>
@@ -64,6 +64,9 @@ would like the command to operate on.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Commands with parameters that require prefixes do not accept forward slash `/` as arguments.<br>
+  e.g. adding a specialist with the name `Nagaratnam s/o Suppiah`:<br>`add -sp n/Nagaratnam s/o Suppiah e/example@gmail.com p/12345678 s/Surgery l/Raffles` will result in an error.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -81,12 +84,12 @@ Format: `help`
 
 Adds a patient or specialist to the address book.
 
-Format (for patients): `add -pa n/NAME e/EMAIL p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...​`<br>
+Format (for patients): `add -pa n/NAME e/EMAIL p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...​ [t/TAG]...​`<br>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A patient can have any number of medical histories and tags (including 0)
 </div>
 
-Format (for specialists): `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION`
+Format (for specialists): `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION [t/TAG]...​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A specialist can have any number of tags (including 0)
@@ -96,8 +99,8 @@ A specialist can have any number of tags (including 0)
 * Phone number can only contain up to 15 numbers;
 
 Examples:
-* `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
-* `add -sp n/Jane p/73331515 s/Dermatologist l/Ang Mo Kio`
+* `add -pa n/John e/johnmctavish@gmail.com p/12345678 a/35 m/Osteoporosis m/Rheumatoid arthritis t/friend`
+* `add -sp n/Jane e/janepeter@gmail.com p/73331515 s/Dermatologist l/Ang Mo Kio`
 
 ### Listing patient or specialist records: `list`
 
@@ -149,6 +152,18 @@ If for any reason there is no data to show, for example:
 The list header will show `No data found` instead.
 
 </div>
+
+### Viewing a patient or specialist record in more detail `view`
+
+Displays the detailed contents of a patient or specialist on the view panel.
+
+Format: `view INDEX`
+
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​ with a maximum value of the list size.
+
+Example:
+* `list -pa` followed by `view 2` displays the detailed contents of the 2nd listed patient on the view panel.
 
 ### Editing a pre-existing patient or specialist record: `edit`
 
@@ -204,8 +219,6 @@ Format: `undo`
 Redo the previous 'undo', stackable. (Able to keep redoing-ing till there are no undo left to be redone)
 
 Format: `redo`
-
-
 
 ### Adding a custom shortcut : `addsc`
 
@@ -300,19 +313,19 @@ If your changes to the data file makes its format invalid, DoConnek Pro will dis
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**Add (patient)** | `add -pa n/NAME e/EMAIL p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...` <br> e.g., `add -pa n/John e/johnjohn@example.com p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
-**Add (specialist)** | `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION` <br> e.g., `add -sp n/Jane e/janejane@example.com p/73331515 s/Dermatologist l/Ang Mo Kio`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find -PERSON_TYPE PREFIX/KEYWORD [MORE_PREFIX/KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
-**Edit** | `edit PREFIX/KEYWORD [MORE_PREFIX/KEYWORDS]` <br> e.g. `edit n/Jonathan Wick p/09883100`
-**List** | `list -pa`
-**Undo** | `undo`
-**Redo** | `redo`
-**Add shortcut** | `addsc sc/SHORTCUT kw/KEYWORD` <br> e.g., `addsc sc/del kw/delete`
-**Delete shortcut** | `delsc sc/SHORTCUT [sc/SHORTCUT]...` <br> e.g., `delsc sc/del sc/li`
-**Change Theme** | `theme TYPE` <br> e.g., `theme dark`
-**Clear** | `clear`
-**Exit** | `exit`
+| Action               | Format, Examples                                                                                                                                                                               |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**             | `help`                                                                                                                                                                                         |
+| **Add (patient)**    | `add -pa n/NAME e/EMAIL p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...​ [t/TAG]...​` <br> e.g., `add -pa n/John e/johnmctavish@example.com p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis` |
+| **Add (specialist)** | `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION [t/TAG]...​` <br> e.g., `add -sp n/Jane e/janepeter@example.com p/73331515 s/Dermatologist l/Ang Mo Kio`                    |
+| **Delete**           | `delete INDEX...​`<br> e.g., `delete 3`                                                                                                                                                        |
+| **Find**             | `find -PERSON_TYPE PREFIX/KEYWORD [MORE_PREFIX/KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`                                                                                         |
+| **Edit**             | `edit PREFIX/KEYWORD [MORE_PREFIX/KEYWORDS]` <br> e.g. `edit n/Jonathan Wick p/09883100`                                                                                                       |
+| **List**             | `list -PERSON_TYPE` <br> e.g. `list -pa`                                                                                                                                                       |
+| **Undo**             | `undo`                                                                                                                                                                                         |
+| **Redo**             | `redo`                                                                                                                                                                                         |
+| **Add shortcut**     | `addsc sc/SHORTCUT kw/KEYWORD` <br> e.g., `addsc sc/del kw/delete`                                                                                                                             |
+| **Delete shortcut**  | `delsc sc/SHORTCUT [sc/SHORTCUT]...` <br> e.g., `delsc sc/del sc/li`                                                                                                                           |
+| **Change Theme**     | `theme TYPE` <br> e.g., `theme dark`                                                                                                                                                           |
+| **Clear**            | `clear`                                                                                                                                                                                        |
+| **Exit**             | `exit`                                                                                                                                                                                         |

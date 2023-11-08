@@ -22,7 +22,7 @@ public class ThemeCommand extends Command {
 
     private Theme theme;
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a ThemeCommand to set the theme to the specified {@code Theme}
      */
     public ThemeCommand(Theme theme) {
         assert theme != null;
@@ -30,7 +30,7 @@ public class ThemeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.setTheme(theme);
         return new CommandResult(String.format(MESSAGE_SUCCESS, theme.toString()));
