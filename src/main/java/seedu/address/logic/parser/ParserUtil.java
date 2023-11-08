@@ -203,7 +203,7 @@ public class ParserUtil {
         if (!Outcome.isValidOutcome(trimmedOutcome)) {
             throw new ParseException(Outcome.MESSAGE_CONSTRAINTS);
         }
-        return Outcome.valueOf(trimmedOutcome);
+        return Outcome.valueOf(trimmedOutcome.toUpperCase());
     }
 
     /**

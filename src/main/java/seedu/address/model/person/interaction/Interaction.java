@@ -26,7 +26,7 @@ public class Interaction {
         * Returns true if a given string is a valid outcome.
         */
         public static boolean isValidOutcome(String test) {
-            return test.matches("CLOSED|INTERESTED|NOT_INTERESTED|FOLLOWUP_REQUIRED|UNKNOWN");
+            return test.toUpperCase().matches("CLOSED|INTERESTED|NOT_INTERESTED|FOLLOWUP_REQUIRED|UNKNOWN");
         }
     }
 
