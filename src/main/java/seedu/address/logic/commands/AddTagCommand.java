@@ -20,7 +20,7 @@ public class AddTagCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + SECONDARY_COMMAND_WORD
             + ": Adds tags to a contact from the contact list.\n"
-            + "Usage:  add tag -id CONTACT_ID -t TAGNAME";
+            + "Usage:  add tag -id CONTACT_ID -t TAGNAME...";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Can not find the target contact with ID: ";
 
     private final Set<Tag> toAdd;
