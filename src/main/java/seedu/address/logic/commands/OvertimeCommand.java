@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OPERATION;
@@ -67,7 +68,7 @@ public class OvertimeCommand extends Command {
                         Messages.formatOvertimeHours(updatedEmployee), changeInOvertimeHours));
             }
         }
-        throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+        throw new CommandException(MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
     private Employee updateEmployeeOvertime(Employee employeeToEdit) throws CommandException {

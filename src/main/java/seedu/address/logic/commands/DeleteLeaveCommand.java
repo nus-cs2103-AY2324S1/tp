@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
@@ -78,7 +78,7 @@ public class DeleteLeaveCommand extends Command {
                 return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLeaves(employeeWithLeave)));
             }
         }
-        throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        throw new CommandException(MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
     private ArrayList<Leave> getDatesBetween(LocalDate startDate, LocalDate endDate) {

@@ -15,18 +15,18 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the list of employees from the last listing by the specified field "
-            + "(name / salary / overtime / leaves)"
+            + "(name / salary / overtime / leaves) "
             + "in the specified order (asc / desc).\n"
             + "Parameters: "
             + PREFIX_FIELD + "FIELD "
             + PREFIX_ORDER + "ORDER\n"
             + "Example: " + COMMAND_WORD + " f/salary in/asc";
 
-    public static final String MESSAGE_SUCCESS = "Successfully sorted employees by %1$s. ";
+    public static final String MESSAGE_SUCCESS = "Successfully sorted employees by %1$s in %2$s order. ";
     public static final String MESSAGE_NO_FIELD = "There needs to be an field to sort the list by. ";
     public static final String MESSAGE_WRONG_FIELD = "Field %1$s cannot be used to sort the list. ";
     public static final String MESSAGE_NO_ORDER = "There needs to be an order of sorting the list. ";
-    public static final String MESSAGE_WRONG_ORDER = "Only orders ascending and descending is accepted.";
+    public static final String MESSAGE_WRONG_ORDER = "Only order parameters asc and desc is accepted.";
 
 
     private final String field;
@@ -42,6 +42,10 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        String orderFull = order.equalsIgnoreCase("asc") ? "ascending"
+                : order.equalsIgnoreCase("desc") ? "descending"
+                : "invalid";
+
         requireNonNull(model);
 
         switch (field.toLowerCase()) {
@@ -63,7 +67,7 @@ public class SortCommand extends Command {
             throw new CommandException(String.format(MESSAGE_WRONG_FIELD, field));
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, field));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, field, orderFull));
     }
 
     /**

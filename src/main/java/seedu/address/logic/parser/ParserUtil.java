@@ -163,7 +163,8 @@ public class ParserUtil {
         if (!Salary.isValidSalary(trimmedSalary)) {
             throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
         }
-        return new Salary(trimmedSalary);
+        String parsedSalary = String.valueOf(Integer.parseInt(trimmedSalary));
+        return new Salary(parsedSalary);
     }
 
     /**

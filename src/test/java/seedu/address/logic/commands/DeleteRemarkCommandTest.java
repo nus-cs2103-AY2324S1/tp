@@ -26,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Id;
 import seedu.address.model.remark.Remark;
 import seedu.address.model.remark.RemarkList;
 import seedu.address.testutil.EmployeeBuilder;
@@ -68,6 +69,13 @@ public class DeleteRemarkCommandTest {
         model.addEmployee(BOB);
 
         assertCommandFailure(deleteRemarkCommand, model, DeleteRemarkCommand.MESSAGE_NONEXISTENT_REMARK);
+    }
+
+    @Test
+    void execute_invalidId_failure() {
+        Remark remark = BOB.getRemarkList().getRemark(0);
+        AddRemarkCommand addRemarkCommand = new AddRemarkCommand(new Id("EID0000-0000"), remark);
+        assertCommandFailure(addRemarkCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
 
     @Test

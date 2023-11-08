@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.LeaveList;
 import seedu.address.testutil.EmployeeBuilder;
@@ -28,6 +29,13 @@ import seedu.address.testutil.EmployeeBuilder;
 class DeleteLeaveCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    void execute_invalidId_failure() {
+        LocalDate leaveDate = BOB.getLeaveList().getLeave(0).leaveDate;
+        DeleteLeaveCommand deleteLeaveCommand = new DeleteLeaveCommand(new Id("EID0000-0000"), leaveDate, leaveDate);
+        assertCommandFailure(deleteLeaveCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
+    }
 
     @Test
     void execute_leavesExist_success() {
