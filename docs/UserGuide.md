@@ -253,7 +253,8 @@ Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]…
 **:exclamation: Warning:** Kindly take note the following!
 * `mark` command is case-sensitive!
 * `mark` command currently does not support marking of students with same `STUDENT_NAME`! Please work around this by marking with `STUDENT_ID` instead!
-* `mark` command currently only supports **EITHER** `STUDENT_NAME` **OR** `STUDENT_ID` only but not both!
+* `mark` command currently only supports **EITHER** `STUDENT_NAME` **OR** `STUDENT_ID` only and not both!
+    * For example, `mark n/Zong Jin, Fu Yiqiao id/A0123456E, A0123457E a/1 w/1` is invalid!
 </div>
 
 * Marks the attendance of one or more student corresponding to the `STUDENT_NAME` or `STUDENT_ID`.
