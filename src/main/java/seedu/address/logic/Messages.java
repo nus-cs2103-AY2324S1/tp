@@ -15,7 +15,6 @@ import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.DeleteNoteCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventCommand;
@@ -95,9 +94,6 @@ public class Messages {
                 AddNoteCommand.MESSAGE_USAGE,
                 AddPersonCommand.MESSAGE_USAGE,
                 AddTagCommand.MESSAGE_USAGE);
-
-        case EditCommand.COMMAND_WORD:
-            return EditCommand.MESSAGE_USAGE;
 
         case DeleteCommand.COMMAND_WORD:
             return String.format("%s \n\n %s \n\n %s \n\n %s",
