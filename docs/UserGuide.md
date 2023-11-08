@@ -422,9 +422,9 @@ Lists all the free time for the given `DATE`.
 
 Format: `list-freetime DATE`
 
-| Parameter | Representation                                                   | Constraints                                                                                                                                                                  |
-|-----------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DATE`    | The date which the user wants to view the list of free times for | The input date must have a **4-digit year**, and cannot be in the past. Must follow the format of the table of accepted date formats, shown [below](#accepted-date-formats). | 
+| Parameter | Representation                                                   | Constraints                                                                                                                                                                 |
+|-----------|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DATE`    | The date which the user wants to view the list of free times for | The input date must have a **4-digit year**, and cannot be in the past. Must follow the format of the table of accepted date formats, shown [below](#accepted-date-formats) | 
 
 * Displays a list of all the blocks of free time the user has in
   the given day, within the 9am to 5pm window of that day
@@ -444,12 +444,12 @@ be shown:`Please specify a valid date!`
 be shown:`Input date cannot be in the past!`
 
 #### Accepted date formats
-| Format                                 | Example      | Constraints                                                                                                                                                                                                                                                                                                                                                                                                   |
-|----------------------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `dd/mm/yyyy`                           | `12/12/2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year. | 
-| `dd-mm-yyyy`                           | `12-12-2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year. | 
-| `dd/mm`                                | `12/12`      | - Adding additional parameters separated by a non-number string will be accepted. <br/><br/>- The month and year must be **valid**.                                                                                                                                                                                                                                                                           |
-| `other time formats (not recommended)` | `12/01-2024` | - Will be accepted within reasonable bounds <br/><br/>- **Will lead to unexpected/unintended behaviour**.<br/><br/>- _Use with caution_                                                                                                                                                                                                                                                                       |
+| Format                                 | Example      | Constraints                                                                                                                                                                                                                                                                                                                                                                                               |
+|----------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dd/mm/yyyy`                           | `12/12/2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year | 
+| `dd-mm-yyyy`                           | `12-12-2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year | 
+| `dd/mm`                                | `12/12`      | - Adding additional parameters separated by a non-number string will be accepted <br/><br/>- The month and year must be **valid**                                                                                                                                                                                                                                                                         |
+| `other time formats (not recommended)` | `12/01-2024` | - Will be accepted within reasonable bounds <br/><br/>- **Will lead to unexpected/unintended behaviour**<br/><br/>- _Use with caution_                                                                                                                                                                                                                                                                    |
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -568,11 +568,11 @@ Format: `sort-rate`
 To sort the full unfiltered interview list, use the command `list-i` before using `sort-rate`.
 </div>
 
-Before `sort-rate`:
-![beforesort](images/beforesort.png)
+Before `sort-time`:
+![beforesort](images/beforesorttime.png)
 
-After `sort-rate`:
-![aftersort](images/aftersort.png)
+After `sort-time`:
+![aftersort](images/aftersorttime.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -580,13 +580,19 @@ After `sort-rate`:
 
 Sort the shown interview list by interview start time
 in chronologically ascending order (interviews with earlier start times
-will be shown first)
+will be shown first).
+
+Format: `sort-time`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 To sort the full unfiltered interview list, use the command `list-i` before using `sort-time`.
 </div>
 
-Format: `sort-time`
+Before `sort-rate`:
+![beforesort](images/beforesort.png)
+
+After `sort-rate`:
+![aftersort](images/aftersort.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
