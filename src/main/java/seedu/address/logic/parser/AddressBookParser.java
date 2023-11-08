@@ -47,7 +47,7 @@ public class AddressBookParser {
      * Used for initial separation of command word, person type and args. Complex commands require a person type tag.
      */
     private static final Pattern COMPLEX_COMMAND_FORMAT = Pattern.compile(
-            "(?<commandWord>\\S+)\\s(?<personType>-\\S+)(?<arguments>.*)");
+            "(?<commandWord>\\S+)\\s(?<personType>-(pa|sp))(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     private final Model model;
