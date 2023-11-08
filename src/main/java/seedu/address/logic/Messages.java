@@ -26,7 +26,10 @@ public class Messages {
 
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
 
+    public static final String MESSAGE_PERSON_LISTED_OVERVIEW = "%1$d person listed!";
+
     public static final String MESSAGE_TEAMS_LISTED_OVERVIEW = "%1$d teams listed!";
+    public static final String MESSAGE_TEAM_LISTED_OVERVIEW = "%1$d team listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
