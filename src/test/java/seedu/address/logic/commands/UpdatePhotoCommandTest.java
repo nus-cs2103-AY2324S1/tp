@@ -135,7 +135,7 @@ public class UpdatePhotoCommandTest {
         } catch (ParseException e) {
             fail();
         } catch (CommandException e) {
-            assertEquals(e.getMessage(), "Invalid file path provided");
+            assertEquals("Error while reading image: images/defaul_photo.png", e.getMessage());
         }
     }
 
@@ -154,7 +154,7 @@ public class UpdatePhotoCommandTest {
             ModelManager temp = new ModelManager();
             addCommand.execute(temp);
             updatePhotoCommand.execute(temp);
-            assertEquals(temp.getFilteredPersonList().get(0).getAvatar().getPath(), safePath);
+            assertEquals("data/test_photo.png", temp.getFilteredPersonList().get(0).getAvatar().getPath());
         } catch (ParseException | CommandException e) {
             fail();
         }

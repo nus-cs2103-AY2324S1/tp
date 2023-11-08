@@ -32,6 +32,11 @@ public interface Model {
     GuiSettings getGuiSettings();
 
     /**
+     * Returns the path of the data directory.
+     */
+    public Path getDataDirectoryPath();
+
+    /**
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);

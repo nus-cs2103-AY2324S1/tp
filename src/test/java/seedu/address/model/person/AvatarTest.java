@@ -25,7 +25,7 @@ public class AvatarTest {
     @Test
     public void constructor_default() {
         Avatar avatar = new Avatar();
-        assertEquals(avatar.getPath(), null);
+        assertEquals(avatar.getPath(), "");
     }
 
     @Test

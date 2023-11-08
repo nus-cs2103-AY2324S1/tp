@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.io.IOException;
 import java.time.MonthDay;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -45,7 +44,7 @@ class JsonAdaptedPerson {
     private final Optional<String> telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final Optional<Integer> id;
-    private Avatar avatar = new Avatar();
+    private final JsonAdaptedAvatar avatar;
     private final Integer balance;
 
     private final List<JsonAdaptedNote> notes = new ArrayList<>();
@@ -62,7 +61,8 @@ class JsonAdaptedPerson {
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("id") Optional<Integer> id,
             @JsonProperty("notes") List<JsonAdaptedNote> notes,
-            @JsonProperty("balance") Integer balance
+            @JsonProperty("balance") Integer balance,
+            @JsonProperty("avatar") JsonAdaptedAvatar avatar
     ) {
         this.name = name;
         this.phone = phone;
@@ -80,6 +80,7 @@ class JsonAdaptedPerson {
             this.notes.addAll(notes);
         }
         this.balance = balance;
+        this.avatar = avatar;
     }
 
     /**
@@ -98,9 +99,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         id = source.getId().map(x -> x.intValue());
-
-        avatar = source.getAvatar();
-
+        avatar = new JsonAdaptedAvatar(source.getAvatar());
         notes.addAll(source.getNotes().stream()
             .map(JsonAdaptedNote::new)
             .collect(Collectors.toList()));
@@ -176,18 +175,7 @@ class JsonAdaptedPerson {
 
         final Optional<Integer> modelID = id.map(x -> x.intValue());
 
-        Avatar modelAvatar;
-        try {
-            String path = avatar.getPath();
-            // Default avatar
-            if (path == null) {
-                modelAvatar = new Avatar();
-            } else {
-                modelAvatar = new Avatar(avatar.getPath());
-            }
-        } catch (IOException e) {
-            throw new IllegalValueException(String.format("Error loading person with avatar: %s", e.getMessage()));
-        }
+        final Avatar modelAvatar = avatar.toModelType();
 
         final ObservableList<Note> modelNotes = FXCollections.observableArrayList(personNotes);
 

@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,8 +16,9 @@ import javafx.scene.image.Image;
  * Represents displayed photo of a contact in the address book.
  */
 public class Avatar {
+    private static final int MAX_SIZE_BYTES = 5242880;
     private static final String DEFAULT_PATH = "/images/default_photo.png";
-    private String path = null;
+    private String path = "";
     @JsonIgnore
     private Image image;
 
@@ -27,12 +30,35 @@ public class Avatar {
     }
 
     /**
-     * Initializes an avatar based on a string path given.
-     *
-     * @param path Path to the photo to be used.
-     * @throws FileNotFoundException if the path given is not valid.
+     * Constructor for avatar that does not copy image.
+     * @param path Path of avatar image on filesystem.
+     * @throws IOException if error is encountered while reading image.
      */
     public Avatar(String path) throws IOException {
+        verifyImage(path);
+        this.path = path;
+        this.image = new Image(new FileInputStream(this.path));
+    }
+
+    /**
+     * Constructor for avatar that copies image to data directory.
+     * @param path Path of avatar image on filesystem.
+     * @param dataDirectory Data directory for application.
+     * @throws IOException if error is encountered while reading and copying image.
+     */
+    public Avatar(String path, Path dataDirectory) throws IOException {
+        verifyImage(path);
+        this.path = copyImage(path, dataDirectory);
+        this.image = new Image(new FileInputStream(this.path));;
+    }
+
+    private String copyImage(String path, Path dataDirectory) throws IOException {
+        Path imagePath = Path.of(path);
+        Path outputPath = dataDirectory.resolve(imagePath.getFileName());
+        return Files.copy(imagePath, outputPath, StandardCopyOption.REPLACE_EXISTING).toString();
+    }
+
+    private void verifyImage(String path) throws IOException {
         // Check that path points to valid image
         String contentType = Files.probeContentType(Paths.get(path));
         if (contentType == null) {
@@ -41,9 +67,10 @@ public class Avatar {
             throw new IOException("path does not refer to valid png or jpeg image!");
         }
 
-        Image image = new Image(new FileInputStream(path));
-        this.path = path;
-        this.image = image;
+        // Check image size
+        if (Files.size(Paths.get(path)) > MAX_SIZE_BYTES) {
+            throw new IOException("image cannot be larger than 5mb");
+        }
     }
 
     /**

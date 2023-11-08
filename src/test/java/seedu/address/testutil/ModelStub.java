@@ -37,6 +37,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public Path getDataDirectoryPath() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         throw new AssertionError("This method should not be called.");
     }
