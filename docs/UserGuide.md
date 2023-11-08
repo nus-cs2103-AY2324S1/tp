@@ -3,6 +3,12 @@ layout: page
 title: User Guide
 ---
 
+<style>
+tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+</style>
+
 ## Product Overview
 
 **Land the dream internship or job opportunity you've always wanted by networking more effectively using _NetworkBook!_**
@@ -71,20 +77,62 @@ NetworkBook 1.3 includes several new features and improvements for ease of use.
 
 ## Features
 
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Fields of a contact**
+
+In NetworkBook, details of a contact are categorised into different **fields**. Each field has a corresponding **prefix** in the command format. 
+
+Some fields are **single-valued fields**, meaning that each contact has **only 1 value** for each of these fields.
+
+| Single-valued fields | Prefix    | Format                                                       |
+| -------------------- | --------- | ------------------------------------------------------------ |
+| name                 | /name     | Any non-empty value                                          |
+| priority level       | /priority | Either `high`, `medium` or `low`, or the initial alphabet    |
+| graduation semester  | /grad     | `AYxxxx-Sy`<br>`xxxx` is the 4-digit representation of the 2 calendar years, in the academic year e.g. `2223` for Academic Year 20`22`/20`23` <br>Academic year must be between AY1970/1971 to AY2069/2070 (inclusive) <br>`y` is either `1` for Semester 1, or `2` for Semester 2 |
+
+Other fields are **multi-valued fields**. Each contact has a **list** of different values for each of these fields.
+
+| Multi-valued fields | Prefix  | Format                                                       |
+| ------------------- | ------- | ------------------------------------------------------------ |
+| phone numbers       | /phone  | Valid phone number containing numbers and optional country code (1-3 numbers with `+` in front) if applicable<br>At least 3 digits long (excluding country code) |
+| email addresses     | /email  | Valid email with `@` (at sign) and `.` (period) present after `@` |
+| social links        | /link   | Valid URL link                                               |
+| courses             | /course | `course name [/start date] [/end date]` <br>`/start` and `/end` indicate when the contact started and finished taking the course respectively <br>A course can have no dates, a start date, or a start and end date |
+| specialisations     | /spec   | Any non-empty value                                          |
+| tags                | /tag    | Any non-empty value                                          |
+
+In NetworkBook, you can manage contact information by changing the fields assigned to them. Following are the commands you can use to manage fields of a contact:
+
+| Command                                                          | How does it manage the fields                                  |
+|------------------------------------------------------------------|----------------------------------------------------------------|
+| [create](#create-new-contact-create-name-name-optional-fields)   | optionally initialise certain fields when creating new contact |
+| [add](#add-details-to-contact-add-index-fields)                  | add more details to a field of a contact                       |
+| [edit](#edit-contact-detail-edit-index-field-options)            | update some details about a field of a contact                 |
+| [delete](#delete-some-details-delete-index-field-prefix-options) | delete some details from a field of a contact                  |
+
+</div>
+
 ### <u>Category 1 - Add contact information</u>
 
-#### Create new contact: `create /name [name] [options]`
+#### Create new contact: `create /name [name] [optional fields]`
 
 You can use the `create` command to create a new contact. When creating a contact, you must provide the name field, and it's optional to provide other fields which will be added to the new contact.
 
-Format: `create /name [name] /phone [phone] /email [email] /link [link] /grad [semester of graduation] /course [course] /spec [specialisation] /priority [high/medium/low] /tag [tag]`
+Format: `create /name [name] [optional field prefix] [optional field value] ...`
 
 Parameters:
 
 * `[name]`  is the name of the contact you wish to add.
-* `[options]` are the non-mandatory fields you can associate with the contact at the point of creation. The fields can also be added using the add command.
+* `[optional fields]` are the non-mandatory fields you can associate with the contact at the point of creation. The fields can also be added using the add command.
 
-When adding a contact, if there is already another contact with the same name, you would be informed that another contact with the same name already exists (not case sensitive)
+<div markdown="block" class="alert alert-info">
+
+:information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
+
+</div>
+
+When creating a contact, if there is already another contact with the same name, you would be informed that another contact with the same name already exists (not case sensitive)
 
 Example usage:
 
@@ -94,104 +142,73 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-#### Add details to contact: `add [index] /phone`
+#### Add details to contact: `add [index] [fields]`
 
 You can use the `add` command to add a contact detail to an existing contact. No new contact will be created.
 
-Format:
-
-* Add phone: `add [index] /phone [phone]`
-* Add email: `add [index] /email [email]`
-* Add link: `add [index] /link [link]`
-* Add graduation time: `add [index] /grad [semester of graduation]`
-* Add course: `add [index] /course [course]`
-* Add specialisation: `add [index] /spec [specialisation]`
-* Assign priority: `add [index] /priority [priority level]`
-* Add tag: `add [index] /tag [tag name]`
+Format: `add [index] [field prefix] [field value] ...`
 
 Parameters:
 
 * `[index]` is the index of the contact in the list.
-* `[phone]` is a valid phone number:
-    * Should only contain numbers and optional country code (1-3 numbers with `+` in front) if applicable.
-    * Should be at least 3 digits long (excluding country code).
-* `[email]` is a valid email (`@` (at sign) must be present, and `.` (period) must be present after `@` (at sign)).
-* `[link]` is a valid URL linking to a contact’s social media page.
-* `[grad]` is a valid graduation date, in the format `AYxxxx-Sy`.
-    * `xxxx` is the 4-digit representation of the 2 calendar years, in the academic year e.g. `2223` for Academic Year 20`22`/20`23`. Academic year must be between AY1970/1971 to AY2069/2070 (inclusive).
-    * `y` is either `1` for Semester 1, or `2` for Semester 2.
-* `[course]` is a course that the contact is taking/has taken.
-    * `[course]` consists of `course name [/start date] [/end date]`, where `/start` and `/end` indicate when the contact started and finished taking the course respectively. A course can have no dates, a start date, or a start and end date.
-* `[spec]` is the specialisation that contact is taking/has taken.
-* `[priority level]` either **high**, **medium** or **low**, or the initial alphabet to represent the respective priority level.
-* `[tag name]` is the name of the tag to associate the contact with.
+* `[field prefix]` specifies the corresponding field to add.
+* `[field value]` is the value to add to the field specified by the preceding prefix.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
+
+</div>
 
 Example usage:
 
 * `add 1 /phone 91234567`
     ![add phone](images/add-remark/add-phone.png)
-* `add 3 /email nknguyentdn@gmail.com`
-* `add 1 /link https://nknguyenhc.github.io/`
-* `add 3 /grad AY2223-S1`
-* `add 2 /course CS1101S`
-* `add 3 /spec Robotics & AI`
-* `add 1 /priority high`
-* `add 1 /tag data analyst`
+* `add 2 /grad AY2223-S1`
+* `add 3 /link https://nknguyenhc.github.io /email nknguyentdn@gmail.com `
+* `add 1 /priority high /tag data analyst /course CS1101S /spec Robotics & AI`  
 
 [Table of Contents](#table-of-contents)
 
 ### <u>Category 2 - Edit contact details</u>
 
-#### Edit contact detail: `edit [index] [options]`
-
+#### Edit contact detail: `edit [index] [field] [options]`
 You can use the `edit` command to edit contact details of existing contacts in your book.
 
 Format:
 
-* Edit name: `edit [index of contact] /name [name]`
-* Edit phone: `edit [index of contact] /phone [phone] /index [index of phone]`
-* Edit email: `edit [index of contact] /email [email] /index [index of email]`
-* Edit link: `edit [index of contact] /link [link] /index [index of link]`
-* Edit graduation: `edit [index of contact] /grad [semester of graduation]`
-* Edit course: `edit [index of contact] /course [course] /index [index of course]`
-* Edit specialisation: `edit [index of contact] /spec [specialisation] /index [index of specialisation]`
-* Edit priority: `edit [index of contact] /priority [priority level]`
-* Edit tag: `edit [index of contact] /tag [tag name]`
+* Edit **single-valued** field: `edit [index of contact] [field prefix] [field value]`
+* Edit an entry of a **multi-valued** field: `edit [index of contact] [field prefix] [field value] /index [index of entry]`
 
 Parameters:
 
 * `[index of contact]` is the index of the contact in the list.
-* `[phone]` is a valid phone number:
-    * Should only contain numbers and optional country code (1-3 numbers with `+` in front) if applicable.
-    * Should be at least 3 digits long (excluding country code).
-* `[index of phone]` is the index of the phone number in the phone list of the contact.
-* `[email]` is a valid email (`@` (at sign) must be present, and `.` (period) must be present after `@` (at sign)).
-* `[index of email]` is the index of the email in the email list of the contact.
-* `[link]` is a valid URL linking to a contact’s social media page.
-* `[index of link]` is the index of the link in the link list of the contact.
-* `[grad]` is a valid graduation date, in the format `AYxxxx-Sy`.
-    * `xxxx` is the 4-digit representation of the 2 calendar years, in the academic year e.g. `2223` for Academic Year 20`22`/20`23`. Academic year must be between AY1970/1971 to AY2069/2070 (inclusive).
-    * `y` is either `1` for Semester 1, or `2` for Semester 2.
-* `[course]` is a course that the contact is taking/has taken.
-* `[index of course]` is the index of the course in the course list of the contact.
-* `[spec]` is the specialisation that contact is taking/has taken.
-* `[index of specialisation]` is the index of the specialisation in the specialisation list of the contact.
-* `[priority level]` either **high**, **medium** or **low**, or the initial alphabet to represent the respective priority level.
-* `[tag name]` is the name of the tag to associate the contact with.
-* `[index of tag]` is the index of the tag in the tag list of the contact.
+* `[field prefix]` specifies the field of information to edit.
+* `[field value]` is the new value to replace the original value with.
+* `[index of entry]` for a multi-valued field is the index of the element in the list representing that field.
+
+For **single-valued** fields, the `/index` prefix should not be used.
+
+For **multi-valued** fields, the `/index` prefix is optional and at most 1 index can be specified at a time.
+
+<div markdown="span" class="alert alert-secondary">
+:information_source: **Note:**
+If index of a multi-valued field is not specified, it will **default to 1**.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
+
+</div>
 
 Example usage:
 
 * `edit 3 /priority low`
     ![update success](images/edit/edit.png)
-* `edit 1 /name nkn`
 * `edit 2 /phone 10938472 /index 1`
-* `edit 3 /email nkn@gmail.com /index 3`
-* `edit 1 /link https://nknguyenhc.github.io/ /index 1`
-* `edit 3 /grad AY2324-S1`
-* `edit 2 /course CS2101 /index 2`
-* `edit 1 /spec algorithms /index 3`
-* `edit 1 /tag working in Meta /index 2`
+* `edit 3 /email nkn@gmail.com`
 
 [Table of Contents](#table-of-contents)
 
@@ -213,38 +230,42 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-#### Delete some details: `delete [index of contact] [options]`
+#### Delete some details: `delete [index] [field prefix] [options]`
 
 You can also use the `delete` command to remove some information about a contact that you previously recorded.
 
 Format:
 
-* Delete phone: `delete [index of contact] /phone /index [index of phone]`
-* Delete email: `delete [index of contact] /email /index [index of email]`
-* Delete link: `delete [index of contact] /link /index [index of link]`
-* Delete graduation semester: `delete [index of contact] /grad`
-* Delete course: `delete [index of contact] /course /index [index of course]`
-* Delete specialisation: `delete [index of contact] /spec /index [index of specialisation]`
-* Delete priority: `delete [index of contact] /priority`
-* Delete tag: `delete [index of contact] /tag /index [index of tag]`
+* Delete **single-valued** field: `delete [index of contact] [field prefix]`
+* Delete an entry of a **multi-valued** field: `delete [index of contact] [field prefix] /index [index of entry]`
 
 Parameters:
 
-* `[index of contact]` is the index of the contact in the list
-* `/field` is the field of information to delete
-* `[index of field]` for a multi-valued field is the index of the entry in the contact's list of values
+* `[index of contact]` is the index of the contact in the list.
+* `[field prefix]` specifies the field of information to delete.
+* `[index of entry]` for a multi-valued field is the index of the element in the list representing that field.
 
-When you delete a single-valued field, the `/index` prefix should not be used.
+For **single-valued** fields, the `/index` prefix should not be used.
 
-When you delete a multi-value field, the `/index` prefix is optional and at most 1 index can be specified at a time.
+For **multi-valued** fields, the `/index` prefix is optional and at most 1 index can be specified at a time.
 
-<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
-If index of a multi-value field is not specified, it will default to 1.
+<div markdown="span" class="alert alert-secondary">
+:information_source: **Note:**
+If index of a multi-valued field is not specified, it will **default to 1**.
+
+</div>
+
+
+<div markdown="block" class="alert alert-info">
+
+
+:information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
+
 </div>
 
 Example usage:
 
-* `delete 1 /email /index 2`
+* `delete 1 /link /index 2`
 * `delete 5 /spec`
 * `delete 10 /priority`
 
@@ -373,7 +394,7 @@ Parameters:
 in the filtered contact list must have part of the `[term]` in the `[field]`
 specified above.
 * `[taken]` (optional). Only for filtering by `course`, this parameter additionally filters
-out contacts who have finished the course.
+  out contacts who have finished the course.
 
     List of options:
 
@@ -432,7 +453,13 @@ Format: `open [index] /index [link index]`
 Parameters:
 
 * `[index]` is the index of the contact in the list.
-* `[link index]` is the index of the link within the contact's link list. Note that this field is optional. When omitted, the link index is defaulted to 1.
+* `[link index]` is the index of the link within the contact's link list.
+
+<div markdown="span" class="alert alert-secondary">
+:information_source: **Note:**
+It is optional to provide the link index. If not specified, it will **default to 1**.
+
+</div>
 
 Example usage:
 
@@ -452,7 +479,13 @@ Format: `email [index] /index [email index]`
 Parameters:
 
 * `[index]` is the index of the contact in the list.
-* `[email index]` is the index of the email address within the contact's email list. Note that this field is optional. When omitted, the email index is defaulted to 1.
+* `[email index]` is the index of the email address within the contact's email list.
+
+<div markdown="span" class="alert alert-secondary">
+:information_source: **Note:**
+It is optional to provide the email index. If not specified, it will **default to 1**.
+
+</div>
 
 Example usage:
 
@@ -528,8 +561,6 @@ You can click on a contact's email address to email them.
 
 You can use the `help` command to open a help window containing a link to this user guide. You can press the "Copy URL" button to copy the link, and paste it into your web browser to view this user guide web page.
 
-If the help window is already open, it will be brought to the front.
-
 Format: `help`
 
 Parameters: N/A
@@ -574,25 +605,25 @@ Example usage:
 
 ## Command summary
 
-| Command                                                                            | Prefixes                                                                                                                                                                                                                                     | Format and examples                                                                                                                                                                                                                                                                                                                                                                                                                                                    | What it does                                                 |
-|------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ------------------------------------------------------------ |
-| [**create**](#create-new-contact-create-name-name-options)                         | `/name` <br/> `[/phone]` <br/> `[/email] `<br/> `[/link]` <br/>  `[/course]` <br/> `[/spec]` <br/>`[/grad]` <br/> `[/priority]` <br/> `[/tag]`                                                                                               | `create /name [name] [/optional fields]` <br/><br/> e.g., `create /name Oreki` <br/> `create /name Ness /phone +6598765432 /grad AY2526-S2`                                                                                                                                                                                                                                                                                                                            | Creates a new contact in NetworkBook. <br/><br/> If optional fields are provided, their values will be added to the contact. |
-| [**add**](#add-details-to-contact-add-index-phone)                                 | `[/phone]` <br/>`[/email]` <br/> `[/link]` <br/> `[/course]` <br/> `[/spec]` <br/> `[/grad]` <br/>`[/priority]` <br/> `[/tag]`                                                                                                               | `add [index] /phone [phone]` <br/> `add [index] /email [email]`<br/>`add [index] /link [link]`<br/> `add [index] /course [course]` <br/> `add [index] /spec [specialisation]` <br/> `add [index] /grad [semester of graduation]` <br/> `add [index] /priority [priority]` <br/> `add [index] /tag [tag]` <br/><br/> e.g., `add 2 /email test@example.com` <br/> `add 1 /link https://nknguyenhc.github.io/` <br/> `add 1 /grad AY2223-S1` <br/> `add 1 /priority high` | Adds information to a contact.                               |
-| [**edit**](#edit-contact-detail-edit-index-options)                                | Single-valued fields: <br/>`[/name]` <br/> `[/grad]` <br/>`[/priority]`<br/><br/> Multi-valued fields which support `[/index]`: <br/> `[/phone]` <br/> `[/email]` `[/link]` <br/> `[/course]` <br/> `[/spec]` <br/> `[/tag]`                 | Single-valued fields: <br/> `edit [index of contact] /field [new value]` <br/><br/> e.g., `edit 1 /name Nguyen` <br/> `edit 1 /grad AY2627-S1` <br/><br/> Multi-valued fields: <br/> `edit [index of contact] /field [new value] /index [index of old value]` <br/><br/> e.g., `edit 1 /email aaa@gmail.com /index 1` <br/> `edit 1 /course CS2109S /index 1`                                                                                                          | Edits information about a contact.                           |
-| [**clear**](#delete-all-contacts-clear)                                            | N/A                                                                                                                                                                                                                                          | `clear`                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Deletes all contacts from NetworkBook.                       |
-| [**delete**](#delete-a-contact-delete-index)                                       | N/A                                                                                                                                                                                                                                          | `delete [index]`<br/><br/> e.g., `delete 1`                                                                                                                                                                                                                                                                                                                                                                                                                            | Deletes a contact from NetworkBook.                          |
-| [**delete**](#delete-some-details-delete-index-of-contact-options)                 | Single-valued fields: <br/> `[/grad]` <br/>`[/priority]`<br/><br/> Multi-valued fields which support `[/index]`: <br/> `[/phone]` <br/>` [/email]` <br/> `[/link]` <br/> `[/course]` <br/> `[/spec]` <br/> `[/tag]`                          | Single-valued fields: <br/> `delete [index of contact] /field`<br/><br/> e.g. `delete 1 /priority`<br/><br/> Multi-valued fields: <br/> `delete [index of contact] /field` (default to index 1) <br/> `delete [index of contact] /field /index [index of entry to delete]` <br/><br/> e.g. `delete 2 /spec` <br/> `delete 3 /email /index 2`                                                                                                                           | Deletes some details of a contact.                           |
-| [**list**](#list-all-contacts-list)                                                | N/A                                                                                                                                                                                                                                          | `list`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Lists all saved contacts.                                    |
-| [**find**](#find-a-contact-find-name)                                              | N/A                                                                                                                                                                                                                                          | `find [name]` <br/><br/> e.g., `find Ness`                                                                                                                                                                                                                                                                                                                                                                                                                             | Searches for contacts by name.                               |
-| [**sort**](#sort-contacts-list-sort-by-field-name-order-ascdesc)                   | `/by` <br/> `[/order]`                                                                                                                                                                                                                       | `sort /by [field] /order [order]`<br/><br/> e.g., `sort /by priority /order desc`                                                                                                                                                                                                                                                                                                                                                                                      | Sorts contacts by a field.                                   |
-| [**filter**](#filter-contacts-list-filter-by-field-with-term)                      | `/by` <br/> `/with` <br/> `[/taken]`                                                                                                                                                                                                         | `filter /by [field] /with [term]` <br/><br/> e.g. `filter /by course /with abc` <br/> `filter /by tag /with banker` <br/><br/> For course: <br/> `filter /by course /with [term] [/taken true/false]` <br/> e.g. `filter /by course /with abg /taken false`                                                                                                                                                                                                            | Filters contacts by a field.                                 |
-| [**undo**](#undo-last-change-to-networkbook-undo)                                  | N/A                                                                                                                                                                                                                                          | `undo`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Undoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
-| [**redo**](#redo-last-undone-change-redo)                                          | N/A                                                                                                                                                                                                                                          | `redo`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Redoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
-| [**open**](#open-a-contacts-link-open-index-index-link-index)                      | `[/index]`                                                                                                                                                                                                                                   | `open [index] /index [link index]` <br/> e.g., `open 1` <br/> e.g., `open 1 /index 2`                                                                                                                                                                                                                                                                                                                                                                                  | Opens a contact's link in the default browser.               |
-| [**email**](#send-email-to-a-contacts-email-address-email-index-index-email-index) | `[/index]`                                                                                                                                                                                                                                   | `email [index] /index [email index]` <br/> e.g., `email 1` <br/> e.g., `email 1 /index 2`                                                                                                                                                                                                                                                                                                                                                                              | Opens default mailbox to compose a new email to a contact's email address. |
-| [**help**](#view-help-window-help)                                                 | N/A                                                                                                                                                                                                                                          | `help`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Opens a window containing a link to this user guide.         |
-| [**save**](#manually-save-to-data-file-save)                                       | N/A                                                                                                                                                                                                                                          | `save`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Manually saves contacts to data file.                        |
-| [**exit**](#exit-networkbook-exit)                                                 | N/A                                                                                                                                                                                                                                          | `exit`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Exits NetworkBook.                                           |
+| Command                                                      | Prefixes                                                     | Format and examples                                          | What it does                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [**create**](#create-new-contact-create-name-name-optional-fields) | `/name` <br/>`[/phone]` <br/>`[/email] `<br/>`[/link]` <br/>`[/course]` <br/>`[/spec]` <br/>`[/grad]` <br/>`[/priority]` <br/>`[/tag]` | `create /name [name] [optional fields]` <br/><br/> e.g., `create /name Oreki` <br/> `create /name Ness /phone +6598765432 /grad AY2526-S2` | Creates a new contact in NetworkBook. <br/><br/>If optional fields are provided, their values will be added to the contact. |
+| [**add**](#add-details-to-contact-add-index-fields)          | `[/phone]` <br/>`[/email]` <br/>`[/link]` <br/>`[/course]` <br/>`[/spec]` <br/>`[/grad]` <br/>`[/priority]` <br/>`[/tag]` | `add [index] [field prefix] [field value] ...`  <br/><br/>e.g., `add 2 /email test@eg.com` <br/>`add 1 /link https://nknguyenhc.github.io/` <br/>`add 1 /priority high /grad AY2223-S1` | Adds information to a contact.                               |
+| [**edit**](#edit-contact-detail-edit-index-field-options)    | Single-valued fields: <br/>`[/name]` <br/>`[/grad]` <br/>`[/priority]`<br/><br/>Multi-valued fields: <br/>`[/phone]` <br/>`[/email]` `[/link]` <br/>`[/course]` <br/>`[/spec]` <br/>`[/tag]` | Single-valued fields: <br/>`edit [index of contact] [field prefix] [field value]` <br/><br/>e.g., `edit 1 /name Nguyen` <br/> `edit 1 /grad AY2627-S1` <br/><br/>Multi-valued fields: <br/>`edit [index of contact] [field prefix] [field value]` (default to index 1) <br/><br/>e.g., `edit 1 /email aaa@gmail.com` <br/>`edit 1 /course CS2109S /index 1` | Edits information about a contact.                           |
+| [**clear**](#delete-all-contacts-clear)                      | N/A                                                          | `clear`                                                      | Deletes all contacts from NetworkBook.                       |
+| [**delete**](#delete-a-contact-delete-index)                 | N/A                                                          | `delete [index]`<br/><br/> e.g., `delete 1`                  | Deletes a contact from NetworkBook.                          |
+| [**delete**](#delete-some-details-delete-index-field-prefix-options) | Single-valued fields: <br/>`[/grad]` <br/>`[/priority]`<br/><br/>Multi-valued fields: <br/>`[/phone]` <br/>` [/email]` <br/>`[/link]` <br/>`[/course]` <br/>`[/spec]` <br/>`[/tag]` | Single-valued fields: <br/>`delete [index of contact] [field prefix]`<br/><br/> e.g. `delete 1 /priority`<br/><br/>Multi-valued fields: <br/>`delete [index of contact] [field prefix]` (default to index 1) <br/>`delete [index of contact] [field prefix] /index [index of entry]` <br/><br/> e.g. `delete 2 /spec` <br/> `delete 3 /email /index 2` | Deletes some details of a contact.                           |
+| [**list**](#list-all-contacts-list)                          | N/A                                                          | `list`                                                       | Lists all saved contacts.                                    |
+| [**find**](#find-a-contact-find-name)                        | N/A                                                          | `find [name]` <br/><br/> e.g., `find Ness`                   | Searches for contacts by name.                               |
+| [**sort**](#sort-contacts-list-sort-by-field-name-order-ascdesc) | `/by` <br/> `[/order]`                                       | `sort /by [field] /order [order]`<br/><br/> e.g., `sort /by priority /order desc` | Sorts contacts by a field.                                   |
+| [**filter**](#filter-contacts-list-filter-by-field-with-term) | `/by` <br/> `/with` <br/> `[/taken]`                         | `filter /by [field] /with [term]` <br/><br/> e.g. `filter /by course /with abc` <br/> `filter /by tag /with banker` <br/><br/> For course: <br/> `filter /by course /with [term] [/taken true/false]` <br/> e.g. `filter /by course /with abg /taken false` | Filters contacts by a field.                                 |
+| [**undo**](#undo-last-change-to-networkbook-undo)            | N/A                                                          | `undo`                                                       | Undoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
+| [**redo**](#redo-last-undone-change-redo)                    | N/A                                                          | `redo`                                                       | Redoes the last change to the NetworkBook's full list of contacts and/or list of displayed contacts. |
+| [**open**](#open-a-contacts-link-open-index-index-link-index) | `[/index]`                                                   | `open [index]` (default to index 1) <br/>`open [index] /index [link index]` <br/> e.g., `open 1` <br/> e.g., `open 1 /index 2` | Opens a contact's link in the default browser.               |
+| [**email**](#send-email-to-a-contacts-email-address-email-index-index-email-index) | `[/index]`                                                   | `email [index]` (default to index 1) <br/>`email [index] /index [email index]` <br/> e.g., `email 1` <br/> e.g., `email 1 /index 2` | Opens default mailbox to compose a new email to a contact's email address. |
+| [**help**](#view-help-window-help)                           | N/A                                                          | `help`                                                       | Opens a window containing a link to this user guide.         |
+| [**save**](#manually-save-to-data-file-save)                 | N/A                                                          | `save`                                                       | Manually saves contacts to data file.                        |
+| [**exit**](#exit-networkbook-exit)                           | N/A                                                          | `exit`                                                       | Exits NetworkBook.                                           |
 
 [Table of Contents](#table-of-contents)
 
