@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.commons.util.DateTimeUtil.format;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
 
 import java.util.Set;
 
@@ -34,8 +34,8 @@ public class MeetingUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_TITLE + meeting.getTitle().meetingTitle + " ");
         sb.append(PREFIX_LOCATION + meeting.getLocation().location + " ");
-        sb.append(PREFIX_START + meeting.getStart().format(FORMAT) + " ");
-        sb.append(PREFIX_END + meeting.getEnd().format(FORMAT) + " ");
+        sb.append(PREFIX_START + format(meeting.getStart()) + " ");
+        sb.append(PREFIX_END + format(meeting.getEnd()) + " ");
         meeting.getAttendees().stream().forEach(
                 s -> sb.append(PREFIX_NAME + s.getAttendeeName() + " ")
         );
@@ -53,8 +53,8 @@ public class MeetingUtil {
         descriptor.getTitle().ifPresent(title -> sb.append(PREFIX_TITLE).append(title.meetingTitle).append(" "));
         descriptor.getLocation().ifPresent(location -> sb.append(PREFIX_LOCATION).append(location.location)
                 .append(" "));
-        descriptor.getStart().ifPresent(start -> sb.append(PREFIX_START).append(start.format(FORMAT)).append(" "));
-        descriptor.getEnd().ifPresent(end -> sb.append(PREFIX_END).append(end.format(FORMAT)).append(" "));
+        descriptor.getStart().ifPresent(start -> sb.append(PREFIX_START).append(format(start)).append(" "));
+        descriptor.getEnd().ifPresent(end -> sb.append(PREFIX_END).append(format(end)).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

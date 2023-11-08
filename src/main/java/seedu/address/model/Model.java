@@ -19,6 +19,11 @@ public interface Model {
     Predicate<Meeting> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
 
     /**
+     * Creates a copy of the model.
+     */
+    Model copy();
+
+    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);

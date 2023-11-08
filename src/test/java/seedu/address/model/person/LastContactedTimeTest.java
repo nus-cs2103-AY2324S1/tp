@@ -1,17 +1,21 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.DateTimeUtil.verbose;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.DateTimeUtil;
+
 public class LastContactedTimeTest {
 
-    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy HHmm");
+    private LocalDateTime lastContactedTime = DateTimeUtil.parse("02.10.2023 1000");
+    private LastContactedTime lastContactedTimeObject = new LastContactedTime(lastContactedTime);
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -24,26 +28,33 @@ public class LastContactedTimeTest {
         assertTrue(LastContactedTime.isValidLastContactedTime(LocalDateTime.MIN));
 
         // valid
-        assertTrue(LastContactedTime.isValidLastContactedTime(LocalDateTime.parse("02.10.2023 1000", FORMAT)));
+        assertTrue(LastContactedTime.isValidLastContactedTime(lastContactedTime));
     }
 
     @Test
     public void equals() {
-        LastContactedTime lastContactedTime = new LastContactedTime(LocalDateTime.parse("02.10.2023 1000", FORMAT));
-
         // same values -> returns true
-        assertTrue(lastContactedTime.equals(new LastContactedTime(LocalDateTime.parse("02.10.2023 1000", FORMAT))));
+        assertTrue(lastContactedTimeObject.equals(new LastContactedTime(lastContactedTime)));
 
         // same object -> returns true
-        assertTrue(lastContactedTime.equals(lastContactedTime));
+        assertTrue(lastContactedTimeObject.equals(lastContactedTimeObject));
 
         // null -> returns false
-        assertFalse(lastContactedTime.equals(null));
+        assertFalse(lastContactedTimeObject.equals(null));
 
         // different types -> returns false
-        assertFalse(lastContactedTime.equals(5.0f));
+        assertFalse(lastContactedTimeObject.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(lastContactedTime.equals(new LastContactedTime(LocalDateTime.parse("02.10.2023 1200", FORMAT))));
+        assertFalse(lastContactedTimeObject.equals(new LastContactedTime(lastContactedTime.minusHours(1))));
+    }
+
+    @Test
+    public void getDisplay() {
+        // non default value
+        assertEquals(lastContactedTimeObject.getDisplay(), verbose(lastContactedTime));
+
+        // default value
+        assertEquals(new LastContactedTime(LocalDateTime.MIN).getDisplay(), "NA");
     }
 }

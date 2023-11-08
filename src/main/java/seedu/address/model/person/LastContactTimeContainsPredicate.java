@@ -1,6 +1,6 @@
 package seedu.address.model.person;
 
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
+import static seedu.address.commons.util.DateTimeUtil.format;
 
 import java.time.LocalDateTime;
 import java.util.function.Predicate;
@@ -19,7 +19,7 @@ public class LastContactTimeContainsPredicate implements Predicate<Person> {
      */
     public LastContactTimeContainsPredicate(LocalDateTime time) {
         this.time = time;
-        this.time.format(FORMAT);
+        format(this.time);
         LastContactedTime.isValidLastContactedTime(time);
     }
 

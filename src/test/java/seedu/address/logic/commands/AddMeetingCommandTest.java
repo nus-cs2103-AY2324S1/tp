@@ -93,6 +93,11 @@ public class AddMeetingCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public Model copy() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
