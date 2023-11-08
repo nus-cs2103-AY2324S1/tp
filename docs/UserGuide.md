@@ -238,7 +238,11 @@ Parameters:
 
 When you delete a single-valued field, the `/index` prefix should not be used.
 
-When you delete a multi-value field, the `/index` prefix is optional and at most 1 index can be specified at a time. If not specified, the default index to delete is 1.
+When you delete a multi-value field, the `/index` prefix is optional and at most 1 index can be specified at a time.
+
+<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
+If index of a multi-value field is not specified, it will default to 1.
+</div>
 
 Example usage:
 
