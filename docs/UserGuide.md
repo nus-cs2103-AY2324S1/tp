@@ -29,7 +29,7 @@ you can access contacts by roles and responsibilities instantly.
   * [Understanding the GUI](#understanding-the-gui)
   * [Tutorial on using our Commands](#tutorial-on-using-our-commands)
 * [Features](#features)
-  * [Welcome to Linktree](#welcome-command)
+  * [Welcome to Linktree](#welcome-to-linktree)
   * [Managing developers](#managing-developers)
     * [Add developer](#add-developer)
     * [Remove developer](#remove-developer)
@@ -124,7 +124,7 @@ Click [here](#table-of-contents) to go back to contents.
 
 ## Features
 
-### Welcome Command
+### Welcome to LinkTree
 
 #### What this command does:
 * The "Hi" command displays a welcome message along with the current date and time.
