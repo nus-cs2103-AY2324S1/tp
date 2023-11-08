@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.util.Arrays;
 
+import seedu.address.logic.parser.exceptions.JsonInjectionParseException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -28,7 +29,7 @@ public class JsonInjectionParser {
      */
     public void parse(String args) throws ParseException {
         if (Arrays.stream(wordsToSanitise).anyMatch(args::contains)) {
-            throw new ParseException("Please do not input JSON like content");
+            throw new JsonInjectionParseException();
         }
     }
 }
