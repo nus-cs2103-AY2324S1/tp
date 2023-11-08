@@ -277,25 +277,15 @@ The `edit-t` command was designed this way to ensure consistency with the previo
  
 ### Delete tutor feature
 
-The "Delete Tutor" feature allows users to delete an existing tutor in the address book given a tutor index.
-
+The "Delete Tutor" feature allows users to delete an existing tutor in the address book given a tutor index. 
 Below, we provide an example usage scenario and a detailed description of how the delete tutor mechanism behaves at
-each step. The following shows the activity diagram when a user executes the `delete-t` command:
+each step. 
+
+The following shows the activity diagram when a user executes the `delete-t` command:
 
 ![Activity diagram for delete-t command](images/DeleteTutorActivityDiagram.png)
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Limitations**<br>
-* Input format must adhere to the follow limitations:
-    * `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
-* TUTOR_INDEX parameter is compulsory.
-</div>
-
 #### Implementation
-
-The bulk of the implementation details is identical to that of other commands.
-As such only details specific to `delete-t` will be discussed.
 
 Step 1. The user has the application launched with at least 1 tutor added.
 
@@ -304,19 +294,18 @@ Step 2. The user executes `list-t` to view all added tutors.
 Step 3. The user executes `delete-t 1` to delete the tutor with Tutor index 1 in the list of tutors displayed.
 The command is parsed in the AddressBookParser.
 
-Step 4. DeleteTutorCommandParser is created and gets the index of the tutor to be deleted.
-A DeleteTutorCommand object is then constructed with the specified tutor index.
+Step 4. `DeleteTutorCommandParser` is created and gets the index of the tutor to be deleted.
+A `DeleteTutorCommand` object is then constructed with the specified tutor index.
 
-Step 5. The DeleteTutorCommand object gets the specified person from the current filtered person list using the tutor
+Step 5. The `DeleteTutorCommand` object gets the specified person from the current filtered person list using the tutor
 index.
 
-Step 6. The DeleteTutorCommand object then calls the deletePerson method in the ModelManager with the specified person 
-to delete. This method deletes the specified `Person` in the model.
+Step 6. The `DeleteTutorCommand` object then calls the deletePerson method in the ModelManager with the specified 
+person to delete. This method deletes the specified `Person` in the model.
 
-Step 7. Finally, the DeleteTutorCommand object returns the `CommandResult`.
+Step 7. Finally, the `DeleteTutorCommand` object returns the `CommandResult`.
 
-The following sequence diagram shows how the above steps for delete tutor operation works, taking
-`execute("delete-t 1")` API call as an example.
+The following sequence diagram shows how the above steps for delete tutor operation works:
 
 ![Interactions inside the Logic Component for the `delete-t 1` Command](images/DeleteTutorSequenceDiagram.png)
 
@@ -328,6 +317,28 @@ but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 #### Design rationale
 The `delete-t` command was designed this way to ensure consistency with the previous `delete` person command.
+
+**Aspect: Specifying which tutor to delete**
+- **Alternative 1 (current choice):** Using tutor index.
+  - Pros: Using the tutor index provides a clear and unambiguous way for users to specify which tutor they want to 
+    delete. The index corresponds directly to the position of the tutor in the displayed list, making it easy for 
+    tutors to identify the target tutor.
+  - Pros: The use of tutor indices eliminates the potential challenge of dealing with long or complex names. Users do
+    not need to type out the entire name, which can be especially beneficial if a tutor 
+    has a lengthy or complicated name.
+  - Pros: The use of index aligns with the existing command structure, which is based on numeric indices for
+    identifying and interacting with specific entries in the address book.
+  - Cons: Users need to have knowledge of the specific index of the tutor they want to edit. This may require them to
+    first execute a `list-t` command to view the current list of tutors and their corresponding indices.
+- **Alternative 2:** Using tutor name.
+  - Pros: Allowing users to delete a tutor by specifying their name provides a more natural and intuitive method, as
+    users are likely more familiar with names than numeric indices.
+  - Cons: If a user provides an incorrect or misspelled name, the application would need to handle error cases and
+    provide appropriate feedback to guide the user.
+  - Cons: Names can be long, complex, or have unusual spellings, which may make them more challenging to type
+    accurately. This can lead to potential input errors or mismatches if the user misspells or mistypes the name.
+  - Cons: Names are case-sensitive. This means that users need to accurately input the name with the correct
+    capitalization, which can add an extra layer of precision required from the user.
 
 ### Add Schedule Feature
 
