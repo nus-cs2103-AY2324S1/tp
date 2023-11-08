@@ -28,10 +28,15 @@ public class MedicalHistoryTest {
         assertFalse(MedicalHistory.isValidMedicalHistory("")); // empty string
         assertFalse(MedicalHistory.isValidMedicalHistory(" ")); // spaces only
 
+
         // valid medical history
         assertTrue(MedicalHistory.isValidMedicalHistory("Diabetes"));
-        assertTrue(MedicalHistory.isValidMedicalHistory("-")); // one character
-        assertTrue(MedicalHistory.isValidMedicalHistory("hypertension")); // long address
+        assertTrue(MedicalHistory.isValidMedicalHistory("-")); // one character symbol to represent nil
+        assertFalse(MedicalHistory.isValidMedicalHistory("covid-19")); // Mix of alphabets and numbers and symbols
+        assertFalse(MedicalHistory.isValidMedicalHistory("121")); // Custom Indexed Medical History
+        assertTrue(MedicalHistory.isValidMedicalHistory("Pneumonoultramicroscopicsilicovolcanoconiosis")); // long medical history
+        assertTrue(MedicalHistory.isValidMedicalHistory("Diabetes Type 2")); // with spaces
+        assertTrue(MedicalHistory.isValidMedicalHistory("Diabetes Type 2 and High Blood Pressure")); // long medical history with spaces
     }
 
     @Test

@@ -21,17 +21,19 @@ public class NricTest {
 
     @Test
     public void isValidNric() {
-        // null nric
+        // null id
         assertThrows(NullPointerException.class, () -> Nric.isValidNric(null));
 
-        // invalid nric
+        // invalid id
         assertFalse(Nric.isValidNric("")); // empty string
         assertFalse(Nric.isValidNric(" ")); // spaces only
 
-        // valid nric
+        // valid id
         assertTrue(Nric.isValidNric("S1234567E"));
         assertTrue(Nric.isValidNric("-")); // one character
-        assertTrue(Nric.isValidNric("t0987654f")); // long address
+        assertTrue(Nric.isValidNric("t0987654f")); // long id
+        assertTrue(Nric.isValidNric("S123")); // custom ID 1
+        assertTrue(Nric.isValidNric("S2-1213")); // custom ID 2
     }
 
     @Test
