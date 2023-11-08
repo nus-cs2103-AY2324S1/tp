@@ -43,7 +43,7 @@ Given below are my contributions to the project.
   * General code enhancements in terms of refactoring and product morphing.
   * Maintained issue tracker by labelling tasks appropriately and ensuring that it is up to date.
   * Did release management for `v1.1` to `v1.3`.
-  * Update `index.md` to fit team product. (Pull request [#101](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/101))
+  * Updated `index.md` to fit team product. (Pull request [#101](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/101))
 * **Review / mentoring contributions**: 
   * Reviewed 11 pull requests (with non-trivial review comments): [#91](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/91), [#98](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/98)
 * **Contributions beyond the project team**: 
