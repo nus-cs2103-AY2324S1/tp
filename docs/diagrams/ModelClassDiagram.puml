@@ -11,10 +11,13 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
-
-Class UniquePersonList
+Class "UniquePersonList<Member>" as UniqueMemberList
+Class "UniquePersonList<Applicant>" as UniqueApplicantList
+Class "ObservableList<Tag>" as UniqueTagList
 Class "{abstract}\nPerson" as Person
-Class Name
+Class Member
+Class Applicant
+Class Tag
 
 Class I #FFFFFF
 }
@@ -31,12 +34,13 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
+AddressBook --> "1" UniqueMemberList
+AddressBook --> "1" UniqueApplicantList
+AddressBook --> "1" UniqueTagList
+UniqueMemberList --> "~*  " Member
+UniqueApplicantList --> "~*" Applicant
+UniqueTagList --> "~* " Tag
+Member -down-|> Person
+Applicant -down-|> Person
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
-
-ModelManager --> "~* filtered" Person
 @enduml
