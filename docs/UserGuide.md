@@ -124,7 +124,7 @@ Indices must be a positive integer to be valid (1, 2, 3 etc.), and must exist in
 </div>
 
 <div markdown="span" class="alert alert-info">
-:information_source: **About tags/the alternate contact format:**
+:information_source: **About phone/tags/the alternate contact format:**
 Please refer to the [above](#adding-a-contact-add).
 </div>
 
