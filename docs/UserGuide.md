@@ -311,7 +311,7 @@ Format: `add-i app/APPLICANT_ID jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DA
 | `END_DATE_AND_TIME`   | Ending time of the interview                                | Must be in one of the accepted formats stated below AND must be after the start time AND must be on the same day as the start time                      |
 
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** JOB_ROLE allows empty strings to be entered to handle situations where the applicant is applying
+:bulb: **Tip:** `JOB_ROLE` allows empty strings to be entered to handle situations where the applicant is applying
 to the company in general.
 </div>
 
@@ -555,11 +555,11 @@ Format: `sort-rate`
 To sort the full unfiltered interview list, use the command `list-i` before using `sort-rate`.
 </div>
 
-Before `sort-time`:
-![beforesort](images/beforesorttime.png)
+Before `sort-rate`:
+![beforesort](images/beforesort.png)
 
-After `sort-time`:
-![aftersort](images/aftersorttime.png)
+After `sort-rate`:
+![aftersort](images/aftersort.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -575,11 +575,11 @@ Format: `sort-time`
 To sort the full unfiltered interview list, use the command `list-i` before using `sort-time`.
 </div>
 
-Before `sort-rate`:
-![beforesort](images/beforesort.png)
+Before `sort-time`:
+![beforesort](images/beforesorttime.png)
 
-After `sort-rate`:
-![aftersort](images/aftersort.png)
+After `sort-time`:
+![aftersort](images/aftersorttime.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
