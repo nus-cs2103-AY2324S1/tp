@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -12,6 +11,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.command.parse.exceptions.AddCommandParseException;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingPeriod;
 import seedu.address.model.booking.Remark;
@@ -47,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_ROOM, PREFIX_BOOKING_PERIOD, PREFIX_NAME,
                 PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new AddCommandParseException();
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROOM, PREFIX_BOOKING_PERIOD, PREFIX_NAME, PREFIX_PHONE,
@@ -59,7 +59,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         BookingPeriod bookingPeriod = ParserUtil.parseBookingPeriod(argMultimap.getValue(PREFIX_BOOKING_PERIOD).get());
         Remark remark;
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-            remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+            String remarkInput = argMultimap.getValue(PREFIX_REMARK).get();
+            if (remarkInput.trim().isEmpty()) {
+                remark = new Remark("N/A");
+            } else {
+                remark = ParserUtil.parseRemark(remarkInput);
+            }
         } else {
             remark = new Remark("N/A");
         }

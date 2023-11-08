@@ -15,14 +15,4 @@ public class ParseException extends IllegalValueException {
     public ParseException(String message) {
         super(message);
     }
-
-    /**
-     * Constructs a ParseException with a specified error message and the cause of the error.
-     *
-     * @param message The error message that describes the parse error.
-     * @param cause   The cause of the parse error.
-     */
-    public ParseException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

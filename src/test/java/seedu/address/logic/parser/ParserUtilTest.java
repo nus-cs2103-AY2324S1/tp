@@ -14,6 +14,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.command.parse.exceptions.DeleteCommandParseException;
+import seedu.address.logic.parser.exceptions.command.parse.exceptions.EditCommandParseException;
 import seedu.address.model.booking.BookingPeriod;
 import seedu.address.model.booking.RoomTypeTag;
 import seedu.address.model.person.Email;
@@ -37,23 +39,42 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
-    public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+    public void parseEditIndex_invalidInput_throwsParseException() {
+        assertThrows(EditCommandParseException.class, () -> ParserUtil.parseEditIndex("10 a"));
     }
 
     @Test
-    public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    public void parseEditIndex_outOfRangeInput_throwsParseException() {
+        assertThrows(EditCommandParseException.class, MESSAGE_INVALID_INDEX, ()
+            -> ParserUtil.parseEditIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
-    public void parseIndex_validInput_success() throws Exception {
+    public void parseEditIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseEditIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseEditIndex("  1  "));
+    }
+    @Test
+    public void parseDeleteIndex_invalidInput_throwsParseException() {
+        assertThrows(DeleteCommandParseException.class, () -> ParserUtil.parseDeleteIndex("10 a"));
+    }
+
+    @Test
+    public void parseDeleteIndex_outOfRangeInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+                -> ParserUtil.parseDeleteIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseDeleteIndex_validInput_success() throws Exception {
+        // No whitespaces
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseDeleteIndex("1"));
+
+        // Leading and trailing whitespaces
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseDeleteIndex("  1  "));
     }
 
     @Test
