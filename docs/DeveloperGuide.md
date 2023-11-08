@@ -40,25 +40,21 @@ title: Developer Guide
    8. [Interview and Interview Commands](#interview-and-interview-commands)
       1. [Implementation](#implementation)
       2. [Design Considerations](#design-considerations)
-
-5. [Appendix: Requirements](#appendix-requirements)
+5. [Appendix A: Requirements](#appendix-a-requirements)
    1. [Product scope](#product-scope)
    2. [User stories](#user-stories)
    3. [Use cases](#use-cases)
    4. [Non-Functional Requirements](#non-functional-requirements)
    5. [Glossary](#glossary)
-6. [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
-7. [Appendix: Effort](#appendix-effort)
-8. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
-
+6. [Appendix B: Instructions for Manual Testing](#appendix-b-instructions-for-manual-testing)
+7. [Appendix C: Effort](#appendix-c-effort)
+8. [Appendix D: Planned Enhancements](#appendix-d-planned-enhancements)
 ---
 ## Acknowledgements
-
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries – include links to the original source as well}
 
 ---
 ## Setting Up
-
 Refer to the guide [Setting up and getting started].
 
 ---
