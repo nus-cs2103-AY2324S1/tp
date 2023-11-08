@@ -5,31 +5,10 @@ title: User Guide
 
 TuitionConnect is a **desktop app for simplifying the process of administration and finance management for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise tracking tutee-specific details, teaching-schedule management, and finance management. 
 
-<!-- TOC -->
-  * [Quick start](#quick-start)
-  * [Input Formats](#input-formats)
-    * [Command Format](#command-format)
-  * [Features](#features)
-    * [Viewing help : `help`](#viewing-help--help)
-    * [Adding a person : `add`](#adding-a-person--add)
-    * [View the list : `list`](#view-the-list--list)
-    * [View the list of tutees specified by day : `list [DAY]`](#view-the-list-of-tutees-specified-by-day--list-day)
-    * [Finding a tutee : `find`](#finding-a-tutee--find)
-    * [Editing a tutee : `edit`](#editing-a-tutee--edit)
-    * [Deleting a person : `delete`](#deleting-a-person--delete)
-    * [Marking a person as paid : `paid`](#marking-a-person-as-paid--paid)
-    * [Marking a person as unpaid : `unpaid`](#marking-a-person-as-unpaid--unpaid)
-    * [Show all the unpaid persons : `list unpaid`](#show-all-the-unpaid-persons--list-unpaid)
-    * [Mark all persons as unpaid : `unpaidAll`](#mark-all-persons-as-unpaid--unpaidall)
-    * [Finding Free Time : `freeTime`](#finding-free-time--freetime)
-    * [Undo previous command : `undo`](#undo-previous-command--undo)
-    * [Redo previous command : `redo`](#redo-previous-command--redo)
-    * [Calculating Monthly Revenue: `rev`](#calculating-monthly-revenue-rev)
-    * [Exiting the program : `exit`](#exiting-the-program--exit)
-  * [FAQ](#faq)
-  * [Known issues](#known-issues)
-  * [Command summary](#command-summary)
-<!-- TOC -->
+## Table of Contents
+
+* Table of Contents
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -219,9 +198,9 @@ To edit name and address of your tutee:
 *  `edit n/Betsy Crower a/Betsy street, block 110, #03-02`
 
 
-### Deleting a person : `delete`
+### Deleting a person: `delete`
 
-**Description** Deletes the specific tutee from the list.
+**Description**: Deletes the specific tutee from the list.
 
 **Format**: `delete INDEX`
 
@@ -236,10 +215,20 @@ To edit name and address of your tutee:
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the list.
 
+### Clearing all entries : `clear`
+
+**Description**: Clears all entries from the tutee list.
+
+**Format**: `clear`
+
+![ClearCommand.png](images/ClearCommand.png)
+
+* Example image above shows the result of command `clear
+
 
 ### Marking a person as paid : `paid`
 
-**Description** Mark the specific tutee as paid in the list.
+**Description**: Mark the specific tutee as paid in the list.
 
 **Format**: `paid INDEX`
 
@@ -256,7 +245,7 @@ Examples:
 
 ### Marking a person as unpaid : `unpaid`
 
-**Description** Mark the specific tutee as not paid in the list.
+**Description**: Mark the specific tutee as not paid in the list.
 
 **Format**: `unpaid INDEX`
 
@@ -274,11 +263,11 @@ Examples:
 
 ### Show all the unpaid persons : `list unpaid`
 
-**Description** : Shows all the unpaid tutees in your list.
+**Description**: Shows all the unpaid tutees in your list.
 
 Format: `list unpaid`
 
-### Mark all persons as unpaid : `unpaidAll`
+### Mark all persons as unpaid: `unpaidAll`
 
 **Description** : Mark all tutees in your list as not paid.
 
@@ -326,8 +315,6 @@ Format: `unpaidAll`
 
 **Expected Output when the command fails**: Nothing to redo!
 
-**Format**: `freeTime d/DAY dur/DURATION b/BEGIN end/END`
-
 
 ### Calculating Monthly Revenue: `rev`
 
@@ -371,6 +358,7 @@ To be added soon
 | **help**        | `help`                                                                                                                                                                                             |
 | **add**         | `add n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECT d/DAY b/BEGIN e/END pr/PAYRATE` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600 pr/20` |
 | **delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                |
+| **clear**       | `clear`                                                                                                                                                                                            |
 | **edit**        | `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END pr/PAYRATE`<br> e.g.,`edit p/91234567 d/Sun`                                                                            |
 | **list**        | `list`                                                                                                                                                                                             |
 | **find**        | `find n/NAME sb/SUBJECT` <br> e.g., `find n/Alex sb/Math`, `find n/Alex`, `find sb/Maths`                                                                                                          |
