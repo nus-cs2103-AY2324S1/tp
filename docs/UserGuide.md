@@ -131,7 +131,7 @@ Adds a new teaching assistant to TAManager.
 Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR`
 
 - `NAME` should be a string.
-- `PHONE` should be an 8-digit integer.
+- `PHONE` should be an 3-10 digits integer.
 - `EMAIL` should contain "@".
 - `TELEGRAM` should be between 5-32 characters and start with "@".
 - `FROM` should be a time in "HH:SS" format
@@ -179,7 +179,7 @@ Edits a teaching assistant in TAManager.
 Format: `edit INDEX n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR`
 
 - `NAME` should be a string.
-- `PHONE` should be an 8-digit integer.
+- `PHONE` should be a 3-10 digits integer.
 - `EMAIL` should contain "@".
 - `TELEGRAM` should be between 5-32 characters and start with "@".
 - `FROM` should be a time in "HH:SS" format
@@ -339,9 +339,6 @@ When the command fails:
 
 - Invalid command format (updated new hour is invalid, either below 0 or above 9999): `Invalid command format!`
 
-=======
->>>>>>> Stashed changes
-
 ### Edit free time for a teaching assistant: `editft`
 
 Edits the free time for a specified day for a TA with a specified index.
@@ -367,8 +364,6 @@ When the command fails:
 
 - Incorrect format (missing prefix or parameter, or `DAY` out of range, or invalid `FROM` or `TO` format): `Invalid command format!`
 - Index out of range: `The person index provided is invalid`
-
-
 
 ### Clearing all entries : `clear`
 
@@ -418,11 +413,7 @@ Action | Format, Examples
 **Course** | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`
-<<<<<<< Updated upstream
-**Hour** | `hour 6`
-=======
-**Hour** | `hour INTEGER`<br> e.g., `hour 2` 
->>>>>>> Stashed changes
+**Hour** | `hour INTEGER`<br> e.g., `hour 2`
 **List** | `list`
 **Help** | `help`
 **Teach** | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`
