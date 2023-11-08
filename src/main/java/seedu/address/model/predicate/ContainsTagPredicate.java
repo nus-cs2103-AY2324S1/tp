@@ -22,7 +22,7 @@ public class ContainsTagPredicate extends SerializablePredicate {
      */
     public ContainsTagPredicate(Optional<Tag> tag) {
         super(person -> person.getTags().stream().anyMatch(
-                personTag -> StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.get().getTagName())));
+                personTag -> personTag.equals(tag.get())));
         this.tag = tag;
     }
 
