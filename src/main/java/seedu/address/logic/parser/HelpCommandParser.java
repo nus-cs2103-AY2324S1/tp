@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -28,9 +27,6 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         switch (trimmedArgs) {
 
         case AddCommand.COMMAND_WORD:
-            return new HelpCommand(true, trimmedArgs);
-
-        case EditCommand.COMMAND_WORD:
             return new HelpCommand(true, trimmedArgs);
 
         case DeleteCommand.COMMAND_WORD:

@@ -20,7 +20,6 @@ public class HelpCommandParserTest {
         assertParseSuccess(parser, "add", new HelpCommand(true, "add"));
         assertParseSuccess(parser, "delete", new HelpCommand(true, "delete"));
         assertParseSuccess(parser, "clear      ", new HelpCommand(true, "clear"));
-        assertParseSuccess(parser, "    edit   \n", new HelpCommand(true, "edit"));
         assertParseSuccess(parser, "find\t\t\t", new HelpCommand(true, "find"));
         assertParseSuccess(parser, "list", new HelpCommand(true, "list"));
     }
