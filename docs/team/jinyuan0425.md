@@ -34,6 +34,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * Which documentation were written by me for which guide (include PR number)
   * User Guide:
+    * Updated glossary with keywords used [\#119](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/119)
     * Updated formatting in UG for add and delete features [\#119](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/119)
   * Developer Guide:
     * Added use cases for the functions to be implemented in v1.2 [\#42](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/42)
