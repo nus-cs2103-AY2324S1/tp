@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_UNPAID_PERSONS;
 
 import java.util.List;
 
@@ -31,7 +30,6 @@ public class UnPaidAllCommand extends Command {
             model.markPersonUnPaid(person);
         }
 
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_UNPAID_PERSONS);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
 
