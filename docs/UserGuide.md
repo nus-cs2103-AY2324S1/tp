@@ -92,7 +92,7 @@ Here is an overview of all the [Commands]() available. <br>
 
 Here is a quick overview of the user interface to get you oriented with where things are.
 
-![gui_overview](./images/UserGuide/1.3_gui_overview.png)
+![gui_overview](./images/UserGuide/1.3b_ui_overview.png)
 
 * Command Line Box - lesSON is optimised for typing commands. Type your commands in the command box
 to create and change flashcards!
@@ -105,9 +105,9 @@ instance in the event of a wrongfully formatted command.
 This tutorial explains how to add, edit, tag, and practise your flashcards. Feel free to follow along with lesSON open!
 For advanced users, feel free to look at the [feature list](#feature-list) instead.
 
-1. Firstly, let's add a card. type: <br>`add q/ what does + mean in boolean algebra? a/ it means OR.`
-2. Next, let's capitalise our previous input! Assuming the card is at index `1`, input: <br>`edit 1 q/ What does + mean in boolean
-algebra? a/ It means OR.`
+1. Firstly, let's add a card. type: <br>`add q/what does + mean in boolean algebra? a/it means OR.`
+2. Next, let's capitalise our previous input! Assuming the card is at index `1`, input: <br>`edit 1 q/What does + mean in boolean
+algebra? a/It means OR.`
 3. Next, let's tag it under the module CS1231S by inputting: <br>`edit 1 t/CS1231S`
 4. Feel free to add a few more cards by following steps 1 to 3!
 5. Next, to practise the first card, do: <br> `practise`
@@ -151,23 +151,27 @@ _A flashcard with a question, answer, tag and hint field._
 `add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB`
 
 #### To Note:
-1. No Empty Input after `q/`, `a/`, `t/` and `h/`.
+1. No empty input or input with only whitespace after `q/`, `a/`, `t/` and `h/`.
 2. `t/` and `h/` is optional and not necessary.
-3. Tagging is not supported in v1.2 and earlier.
-4. Hint is not supported before v1.3.
+3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
+4. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
+5. Tagging is not supported in v1.2 and earlier.
+6. Hint is not supported before v1.3.
 
 #### Expected outputs:
 
 1. Given a correct input, a success message will be shown containing the user's input.
    1. `“New Card added: Question: (question); Answer: (answer)“`
 2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
-   1. `Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank`
+   1. ```
+      Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank
+      ```
    2. ```
        Invalid command format!
        add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
       ```
 #### Usage
-1. User Input: `add q/ opcode for R format instructions a/ 000000 t/ CS2100 t/ MIPS`
+1. User Input: `add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS`
 
 2. Successful Output
 
@@ -213,29 +217,31 @@ _Deleting the card in th deck with an index of 2._
 ### View All Flashcards : `list`
 Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
 
-Format: `list (q/t)/ (prefix question starts with/ tag)`
+Format: `list (q/t)/(prefix question starts with/ tag)`
+
 Note : Listing questions for markdown syntax should include their relevant markdown notation
 Examples:
 ```
 1. list
    (list shows the full list of flashcards)
 
-2. list q/ What
+2. list q/what
    (list shows all flashcards with questions starting with 'What')
 
-3. list t/ CS2100
+3. list t/CS2100
    (list shows all flashcards with the CS2100 Tag)
 
-4. list t/ CS2100 t/ MIPS
+4. list t/CS2100 t/MIPS
    (list shows all flashcards with both MIPS and CS2100 Tag)
 
-5. list q/ what t/ CS2100
+5. list q/what t/CS2100
    (list shows all flashcards with questions starting with 'What' and has the CS2100 Tag)
 ```
 
-#### Acceptable values for each parameters:
+#### To note:
 1. No Empty Input after q/ and t/.
 2. q/ and t/ is optional.
+3. Inputs are case-sensitive (cards/tags with the same input but different case will be recognised as different cards/tags)
 
 #### Expected output:
 ```
@@ -249,22 +255,31 @@ Examples:
 ### Editing a Specific Flashcard : `edit`
 Edits an existing Flashcard in the deck.
 
-Format: `edit INDEX (q/a/t/h)/ (question/answer/tag/hint)`
+Format: `edit INDEX (q/a/t/h)/(question/answer/tag/hint)`
 
 Examples:
 ```
-1. edit 1 q/ What is the colour of the sun?
+1. edit 1 q/What is the colour of the sun?
    (changes the question at index 1 to “What is the colour of the sun?”)
 
-2. edit 1 a/ Red
+2. edit 1 a/Red
    (changes the answer at index 1 to “Red”)
 
-3. edit 1 t/ Weather t/ Geogaphy
+3. edit 1 t/Weather t/Geogaphy
    (changes the tag at index 1 to “Weather” and "Geography")
 
-4. edit 1 h/ Apple
+4. edit 1 h/Apple
    (changes the hint at index 1 to “Apple")
 ```
+
+#### To Note:
+1. No empty input or input with only whitespace after `q/`, `a/`, 
+2. Empty input after `t/` and `h/` will remove existing tags or hint respectively.
+3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
+4. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
+5. Tagging is not supported in v1.2 and earlier.
+6. Hint is not supported before v1.3.
+
 #### Expected output:
 ```
 “Successfully edited flashcard” message will be returned to the user via the CLI
@@ -322,10 +337,10 @@ hint 1
 hint 1
 "Hint for Question 1: 5 stages: IF, ID, EX, MEM, WB "
 
-solve 2
+hint 2
 "Hint for Question 2: No hint was provided."
 
-solve 10
+hint 10
 "The card index provided is invalid"
 ```
 
@@ -387,10 +402,10 @@ set 1
 
 #### Expected outputs:
 ```
-set 1 d/ easy
+set 1 d/easy
 "Set Difficulty for Question 1 (Diffculty Level: easy)
 
-set 10 d/ easy
+set 10 d/easy
 "The card index provided is invalid"
 ```
 
@@ -496,7 +511,7 @@ To bold a line of text, wrap text with `**`
 
 ##### Example:
 ```
-edit 1 q/ How many bits can a **Half Adder** add up
+edit 1 q/How many bits can a **Half Adder** add up
 ```
 ##### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3b_bold.png)
@@ -506,7 +521,7 @@ To italicise a line of text, wrap text with `*`
 
 ##### Example:
 ```
-edit 1 q/ How many bits can a *Half Adder* add up
+edit 1 q/How many bits can a *Half Adder* add up
 ```
 ##### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3b_italics.png)
@@ -517,7 +532,7 @@ and end with `</u>` at the end of the underlined text.
 
 ##### Example:
 ```
-edit 1 q/ How many bits can a <u>Half Adder</u> add up
+edit 1 q/How many bits can a <u>Half Adder</u> add up
 ```
 ##### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3b_underline.png)
