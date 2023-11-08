@@ -739,3 +739,7 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Planned Enhancements**
+
+5. We plan to implement importing student records from a csv file in future, which may create duplicated records. This would be where our merge command comes into play, merging duplicated records so that no information is lost.
