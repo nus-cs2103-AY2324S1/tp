@@ -216,23 +216,27 @@ The add feature ensures that user input is correctly parsed and validated, and i
 
 ### Delete feature
 
-The delete mechanism allows users to delete fosterers in the address book. This feature is facilitated by the `DeleteCommand`, `DeleteCommandParser` and `Indices` classes, to handle user input and delete the correct fosterers.  Specifically, the feature is implemented through the following components and operations:
+The delete mechanism allows users to delete fosterers in the address book. This feature is facilitated by the `DeleteCommand`, `DeleteCommandParser` and `Indices` classes, to handle user input and delete the correct fosterers.  This feature is implemented using the following components and operations:
 
 * `DeleteCommand` — The core component responsible for executing the deletion of fosterers in the address book.
-* `Indices` — Represents the indices that the user inputs, each index corresponding to a fosterer in the last seen list of fosterers. 
+* `Indices` — Represents the indices that the user inputs, each index corresponding to a fosterer in the last seen list of fosterers. This class encapsulates one or more `Index` objects. 
 * `ParserUtil` and `DeleteCommandParser` — Contains the parsing methods for string input of the user. They ensure that the indices are valid by meeting specific requirements. 
 
-Given below is an example usage scenario and how the delete mechanism behaves at each step.
+Given below is an example usage scenario and how the delete mechanism behaves at each step. The sequence diagram for deleting multiple fosterers is similar to the example in [Logic](#logic-component).
+
+![Interactions Inside the Logic Component for the `delete 1 2 3` Command](images/DeleteMultipleSequenceDiagram.png)
 
 Step 1. The user enters the delete command with at least one index. The `DeleteCommandParser` is invoked to parse the user's input. 
 
-Step 2. `DeleteCommandParser` will then invoke the `ParserUtil` to check for the validity of the indices. If indices are invalid, the system will generate an error message. The error message will be displayed to the user, providing clear feedback about the issue and the specific constraints that are not met.
+Step 2. `DeleteCommandParser` will then invoke the `ParserUtil` to check for the validity of indices. If indices are invalid, the system will generate an error message. The error message will be displayed to the user, providing feedback about the issue and the specific constraints that are not met.
 
 Step 3. If indices are valid, the `DeleteCommand` will then execute the deletion by obtaining the fosterers from last seen list, and then deleting them from the address book. This is done in the `execute`  method of `DeleteCommand`.
 
 Step 4. A success message is displayed to the user to confirm that the fosterers have been deleted from the address book.
 
-This delete feature allows the user to delete multiple fosterers at once, by ensuring that the user input indices are correctly parsed and validated. 
+Therefore, by ensuring that the user input indices are correctly parsed and validated, this delete feature allows the user to delete multiple fosterers at once.
+
+
 
 #### Design considerations:
 
