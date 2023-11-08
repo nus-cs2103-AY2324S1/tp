@@ -134,7 +134,7 @@ _A flashcard with a question, answer, tag and hint field._
 `add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB`
 
 #### To Note:
-1. No Empty Input after `q/`, `a/`, `t/` and `h/`.
+1. No empty input or input with only whitespace after `q/`, `a/`, `t/` and `h/`.
 2. `t/` and `h/` is optional and not necessary.
 3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
 4. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
@@ -254,6 +254,15 @@ Examples:
 4. edit 1 h/Apple
    (changes the hint at index 1 to “Apple")
 ```
+
+#### To Note:
+1. No empty input or input with only whitespace after `q/`, `a/`, 
+2. Empty input after `t/` and `h/` will remove existing tags or hint respectively.
+3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
+4. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
+5. Tagging is not supported in v1.2 and earlier.
+6. Hint is not supported before v1.3.
+
 #### Expected output:
 ```
 “Successfully edited flashcard” message will be returned to the user via the CLI
