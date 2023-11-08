@@ -205,22 +205,22 @@ The following activity diagram shows how the `MarkAttendanceCommand` works:
 - Using a separate command for updating attendance
 
     > Instead of having the command handle both marking and updating attendance, we could have a seperate command, say `UpdateAttendanceCommand`, to handle updates.
-    
-    **Pros:** 
+
+    **Pros:**
     - Easier to understand and maintain: Developers can quickly grasp the purpose of each command.
-        
+
     **Cons:**
     - Increased complexity: Introducing more commands can make the system more complex and harder for users to remember.
     - Redundancy: Both commands would have overlapping code, leading to potential redundancy.
-    
+
     **Evaluation:**
-    
+
     The current implementation is preferred as it is simpler and more straightforward. It reduces the need for users to remember additional commands, while resolving potential user mistakes behind the scene, providing convenience and a better user experience. The additional complexity introduced by having a separate command for updating attendance is not justified.
 
 
 - Not checking for same week's attendance
 
-  > Instead of checking if the attendance for the same week, we could simply add a new attendance record every time the command is invoked. 
+  > Instead of checking if the attendance for the same week, we could simply add a new attendance record every time the command is invoked.
 
   **Pros:**
     - Simplicity: Implementation would be straightforward without the need for additional checks.
@@ -231,7 +231,7 @@ The following activity diagram shows how the `MarkAttendanceCommand` works:
     - Inefficiency: Consumes more memory and might make querying slower if there are many redundant records.
 
   **Evaluation:**
-    
+
   The current implementation is preferred as the pros simply do not outweigh the cons. The potential scenario that multiple attendance records within the same week being potentially useful is not justified as it is virtually unlikely to happen. The current implementation is much better preferred as the check prevents potential user mistakes behind the scene, providing convenience and a better user experience.
 
 ### View Tallied Attendance feature
@@ -242,7 +242,7 @@ The tallied attendance feature is implemented as a method in the Person class, w
 
 #### Design considerations:
 
-This feature is implemented this way, where it is displayed to the user without any additional commands, so that the user can quickly view a summary of the student's attendance records at a glance. 
+This feature is implemented this way, where it is displayed to the user without any additional commands, so that the user can quickly view a summary of the student's attendance records at a glance.
 
 #### Alternative implementations considered but not adopted:
 
@@ -256,12 +256,12 @@ Another possible way to implement this feature would be to abstract the attendan
 
 - Redundancy: At the current stage, abstracting it into a separate class will greatly increase code complexity without bringing much convenience.
 
-### View Detailed Attendance Records feature 
+### View Detailed Attendance Records feature
 
 #### Implementation
 
-The view feature allows the user to view the detailed attendance records of the students in the contact list. This 
-feature is implemented using the `ViewCommand` class. It is parsed by the `ViewCommandParser` class. If parsed 
+The view feature allows the user to view the detailed attendance records of the students in the contact list. This
+feature is implemented using the `ViewCommand` class. It is parsed by the `ViewCommandParser` class. If parsed
 successfully, it returns a `ViewCommand` object.
 
 #### Design considerations
@@ -272,7 +272,7 @@ short and quick, especially when the user may have to view multiple attendance r
 
 #### Alternative implementations considered but not adopted:
 
-- Integrate the attendance records to be part of the UI 
+- Integrate the attendance records to be part of the UI
 
   > Instead of having the user to enter a command to view indiviudal attendance records, we could have the attendance records being shown constantly on the UI for every single contact
 
@@ -291,7 +291,7 @@ short and quick, especially when the user may have to view multiple attendance r
 
 #### Proposed Implementation
 
-In the `ModelManager` class, instead of storing an `AddressBook`, we instead store a `AddressBookManager`. 
+In the `ModelManager` class, instead of storing an `AddressBook`, we instead store a `AddressBookManager`.
 
 The `AddressBookManager` has a few responsibilities:
 - Adding or deleting `AddressBook`
@@ -572,7 +572,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1c. The given week is invalid 
+* 1c. The given week is invalid
     * 1c1. TAvigator shows an error message.
 
       Use case ends.

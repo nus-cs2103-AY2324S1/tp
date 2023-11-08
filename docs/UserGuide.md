@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-TAvigator is a **desktop app** targeted towards Teaching Assistants **for managing contacts, optimized for use via a 
-Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type 
+TAvigator is a **desktop app** targeted towards Teaching Assistants **for managing contacts, optimized for use via a
+Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type
 fast, TAvigator can get your contact management tasks done faster than traditional GUI apps. We offer a one-stop
 solution to manage your student details, including attendance records and assignment details.
 
@@ -355,7 +355,7 @@ Examples:
 
 #### 3.2.9 Merging two students : `merge`
 
-Merges two students in the current address book. 
+Merges two students in the current address book.
 
 ![merge](images/mergeCommand.png)
 
@@ -414,7 +414,7 @@ _Details coming soon ..._
 
 ## 4. Planned Enhancements
 
-### `[Coming in v2.0]` Marking attendance of student: `mark` 
+### `[Coming in v2.0]` Marking attendance of student: `mark`
 
 * Support marking of students with same `STUDENT_NAME`!
 * Support marking of students with both `STUDENT_NAME` and `STUDENT_ID`!
@@ -445,8 +445,8 @@ _Details coming soon ..._
 | **Delete** | `delete all [tg/TUTORIAL_GROUP_ID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                                                   |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                                                                       |
 | **Exit**   | `exit`                                                                                                                                                                                                         |
-| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… / id/STUDENT_ID [STUDENT_ID]…` <br/> e.g., `find n/Anthony Yiqiao`                                                                                                        |                                                                                                   
-| **List**   | `list attendance w/WEEK_NUMBER [tg/TUTORIAL_GROUP_ID]`<br/> e.g., `list students`                                                                                                                              |                                                          
+| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… / id/STUDENT_ID [STUDENT_ID]…` <br/> e.g., `find n/Anthony Yiqiao`                                                                                                        |
+| **List**   | `list attendance w/WEEK_NUMBER [tg/TUTORIAL_GROUP_ID]`<br/> e.g., `list students`                                                                                                                              |
 | **Help**   | `help`                                                                                                                                                                                                         |
 | **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… / id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER [r/REASON_OF_ABSENCE]` <br/> e.g., `mark n/Zong Jin, Fu Yiqiao a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
 | **Merge**  | `merge [PRIMARY_INDEX] [SECONDARY_INDEX]` <br/> e.g., `merge 1 2`                                                                                                                                              |
