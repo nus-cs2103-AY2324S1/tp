@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -43,7 +41,7 @@ class ImportCommandTest {
     @Test
     public void execute_nullModel_throwsNullPointerException() {
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
-        String fileName1 = relativePath + "\\" + "test_data_successful.csv";
+        String fileName1 = relativePath + "\\" + "student_data_test_success.csv";
         List<Student> expectedList1 = new ArrayList<>();
         expectedList1.add(AMY);
         expectedList1.add(BOB);
@@ -59,15 +57,8 @@ class ImportCommandTest {
 
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
-        String fileName1 = relativePath + "\\" + "test_data_successful.csv";
+        String fileName1 = relativePath + "\\" + "student_data_test_success.csv";
         CommandResult commandResult = new ImportCommand(expectedList, fileName1).execute(modelStub);
-        assertEquals(String.format(expectedList.size() + ImportCommand.MESSAGE_SUCCESS),
-                commandResult.getFeedbackToUser());
-
-        modelStub = new ModelStubAcceptingPersonAdded();
-        relativePath = Paths.get("src", "test", "data", "ImportDataTest");
-        String fileName2 = relativePath + "\\" + "test_data_successful_with_enrol_dates.csv";
-        commandResult = new ImportCommand(expectedList, fileName2).execute(modelStub);
         assertEquals(String.format(expectedList.size() + ImportCommand.MESSAGE_SUCCESS),
                 commandResult.getFeedbackToUser());
     }
@@ -75,7 +66,7 @@ class ImportCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
-        String fileName1 = relativePath + "\\" + "test_data_duplicates_name.csv";
+        String fileName1 = relativePath + "\\" + "student_data_test_duplicates_name.csv";
         List<Student> expectedList1 = new ArrayList<>();
         expectedList1.add(AMY);
         expectedList1.add(BOB);
@@ -93,16 +84,15 @@ class ImportCommandTest {
     @Test
     public void equals() {
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
-        String fileName1 = relativePath + "\\" + "test_data_successful.csv";
+        String fileName1 = relativePath + "\\" + "student_data_test_success.csv";
         List<Student> expectedList1 = new ArrayList<>();
         expectedList1.add(AMY);
         expectedList1.add(BOB);
         ImportCommand importCommand1 = new ImportCommand(expectedList1, fileName1);
 
-        String fileName2 = relativePath + "\\" + "test_data_no_subjects.csv";
+        String fileName2 = relativePath + "\\" + "student_data_test_success2.csv";
         List<Student> expectedList2 = new ArrayList<>();
-        expectedList2.add(HOON);
-        expectedList2.add(IDA);
+        expectedList2.add(AMY);
         ImportCommand importCommand2 = new ImportCommand(expectedList2, fileName2);
 
         // same object -> returns true
@@ -125,7 +115,7 @@ class ImportCommandTest {
     @Test
     public void toStringMethod() {
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
-        String fileName = relativePath + "\\" + "test_data_successful.csv";
+        String fileName = relativePath + "\\" + "student_data_test_success.csv";
         ImportCommand importCommand = new ImportCommand(new ArrayList<>(), fileName);
         String expected = ImportCommand.class.getCanonicalName() + "{Import from =" + fileName + "}";
         assertEquals(expected, importCommand.toString());

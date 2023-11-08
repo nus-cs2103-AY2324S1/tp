@@ -15,11 +15,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import seedu.address.logic.commands.ImportCommand;
@@ -63,16 +66,32 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
             String[] actualHeaders = header.split(",");
 
-            if (!(actualHeaders.length == expectedHeaders.length
-                    || actualHeaders.length == expectedHeaders.length - 1
-                    || actualHeaders.length == expectedHeaders.length - 2)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+            for (int i = 0; i < expectedHeaders.length; i++) {
+                if (actualHeaders.length == 0
+                    || !actualHeaders[i].trim().toLowerCase().equals(expectedHeaders[i].toLowerCase())) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        "Header Error!\n" + ImportCommand.MESSAGE_USAGE));
+                }
+            }
+
+            if (actualHeaders.length > expectedHeaders.length) {
+                int count = 7;
+                for (int i = 9; i < actualHeaders.length; i++) {
+                    if (!actualHeaders[i].trim().toLowerCase().equals(expectedHeaders[count].toLowerCase())) {
+                        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                "Header Error!\n" + ImportCommand.MESSAGE_USAGE));
+                    }
+                    count = 7 + i % 2;
+                }
             }
 
             String line = reader.readLine();
             while (line != null) {
                 String[] attributes = line.split(",");
                 Student student = parseStudentFromCsv(attributes);
+                if (student == null) {
+                    break;
+                }
                 students.add(student);
                 line = reader.readLine();
             }
@@ -84,6 +103,9 @@ public class ImportCommandParser implements Parser<ImportCommand> {
     }
 
     private Student parseStudentFromCsv(String[] attributes) throws ParseException {
+        if (attributes.length == 0) {
+            return null;
+        }
         Name name = ParserUtil.parseName(attributes[0]);
         Phone phone = ParserUtil.parsePhone(attributes[1]);
         Email email = ParserUtil.parseEmail(attributes[2]);
@@ -105,17 +127,23 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         count++;
         List<String> remaining = new ArrayList<>(Arrays.asList(attributes).subList(count, attributes.length));
         Iterator<String> remainingIterator = remaining.iterator();
-        int subjectCount = 0;
+        List<String> subjects = new ArrayList<>();
+        List<String> dates = new ArrayList<>();
         while (remainingIterator.hasNext()) {
             String next = remainingIterator.next();
-            if (Subject.isValidSubjectName(next)) {
-                subjectCount++;
+            if (Subject.isValidSubjectName(next.trim())) {
+                subjects.add(next);
+                count++;
+            } else if (EnrolDate.isValidDate(next.trim())) {
+                dates.add(next);
+                count++;
+            } else if (next.isEmpty() && subjects.size() > 0) {
+                dates.add(YearMonth.now().format(DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH)));
             } else {
                 break;
             }
         }
-        List<String> subjects = remaining.subList(0, subjectCount);
-        List<String> dates = remaining.subList(subjectCount, remaining.size());
+
         Collection<EnrolDate> parsedDates = ParserUtil.parseDates(dates);
         Set<Subject> parsedSubjects = ParserUtil.parseTags(subjects, parsedDates);
 
