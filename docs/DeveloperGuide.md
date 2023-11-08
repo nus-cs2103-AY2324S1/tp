@@ -289,34 +289,51 @@ Aspect: How find command matches the arguments for name
 
 #### Implementation
 This feature is implemented though the `TimeParser` class. This class contains several public static methods related to manipulating time:
-- `TimeParser#parseDate(String date)`  —  Takes in a time String as input, and returns a LocalDateTime which contains the information of the String
-  - Accepted time formats examples:
-    - Day and time:
-      - Format: `<day\> <time\>`
-      - Examples:
-        - `Tuesday 1630`
-        - `Tuesday 4.30PM`
-        - `Tuesday 4pm`
-        - `Tuesd 4pm`
-    - Year, month, day, time of day:
-      - Format: `<year, month, day\> <time\>`
-      - Examples:
-        - `21/12/2024 5pm`
-        - `21-12-2024 5pm`
-        - `21-12-2024 1730`
-        - `21-12-2024 1730pm`
-        - `nov 12 1.30pm 2023`(WIP: AM/PM not parsing properly)
-        - `2023-12-12 1647`
-    - The sequence diagram shown below shows how the API is called by other classes:
+- `TimeParser#parseDate(String date, boolean dateOnly)`  —  Takes in a time String as input, and returns a `Time` instance, which is a wrapper class for a LocalDateTime object which will store the time information (i.e. day, month, year, hour, minute) as well as providing utility methods for manipulating Time.
+  
+  - The `dateOnly` parameter is a flag to indicate how to parse the given `date`. If `dateOnly` is set to false, then the TimeParser will parse valid dates that are in the list of accepted date (without time) formats. Otherwise, if `dateOnly` is set to true, then the TimeParser will parse valid dates that are in the list of accepted date (with time) formats.
+  - Accepted time formats:
+      * DD/MM/YYYY and time:
+          * `16 May 2024 1515`
+          * `16 May 2024 3.15pm`
+          * `16 May 2024 3pm`
+          * `16-05-2024 1515`
+          * `16-05-2024 3.15pm`
+          * `16-05-2024 3pm`
+          * `16-05-24 1515`
+          * `16-05-24 3.15pm`
+          * `16-05-24 3pm`
+          * `16/05/2024 1515`
+          * `16/05/2024 3.15pm`
+          * `16/05/2024 3pm`
+          * `16/05/24 1515`
+          * `16/05/24 3.15pm`
+          * `16/05/24 3pm`
+      * MM, DD and time:
+          * `16 May 1515`
+          * `16 May 3.15pm`
+          * `16 May 3pm`
+          * `16 January 1515`
+          * `16 January 3.15pm`
+          * `16 January 3pm`
+          * `16/5 1515`
+          * `16/5 3.15pm`
+          * `16/5 3pm`
+          * `16/05 1515`
+          * `16/05 3.15pm`
+          * `16/05 3pm`
+    - Accepted date formats
+      * DD/MM/YYYY:
+        * `16-05-2024`
+        * `16/05/2024`
+      * DD/MM:
+        * `16/05`
+        * `16 May`
+          * _Must be a prefix of a valid month of at least 3 characters_
 
-      ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
+  - The sequence diagram shown below shows how the API is called by other classes:
 
-
-- `TimeParser#listInterviewClashes(String potentialInterview, UniqueInterviewList interviews)`  — Takes in an interview time in the String format, and checks the given list of interviews that the user has, and lists all clashing interviews.
-- `TimeParser#findFreeTime(String day)`  —  Takes in a given day, and if valid, lists out all the free time in that day (i.e. not filled with any interview)
-- `TimeParser#findFreeTimeWithinRange(String day, String from, String to)`  —  Takes in a given day, and if valid, lists out all the free time in that day (i.e. not filled with any interview), within the specified window, only if all time Strings are properly formatted
-- `TimeParser#sortInterviewsByTimeAscending(UniqueInterviewList interviews)`  —  Takes in a list of interviews, and sorts them in ascending chronological order
-- `TimeParser#listTodayInterviews(String day, UniqueInterviewList interviews)`  —  Takes in a given day, and if valid, lists out all the interviews that fall within that day
+    ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
 
 #### How is the command executed
 
@@ -340,60 +357,38 @@ This feature is implemented though the `TimeParser` class. This class contains s
         * High risk; not guaranteed to be better after overhaul
         * Developer is not familiar with other time libraries
 
-**Aspect: How `TimeParser#listInterviewClashes(String potentialInterview, UniqueInterviewList interviews)` works:**
-* **Alternative 1 (current planned implementation):** Loop over the entire day by hour, and list out any interview that might clash
-    * Pros:
-        * Very simple to implement
-        * Less prone to bugs
-    * Cons:
-        * Speaking from an algorithmic standpoint, takes linear (i.e. O(n) time), which might hinder performance for days with many interviews
-        * Receives a UniqueInterviewList from other classes, which will increase coupling in the codebase
-
-* **Alternative 2 (alternate choice):** search for possible clashes only within the window added
-    * Pros:
-      * Faster than alternative one in that only a small range of interviews are added
-
-**Aspect: How `TimeParser#findFreeTime(String day)` works:**
-* **Alternative 1 (current planned implementation):** Loops over the 24 hours of the given day, and if there is any interview within that hour, the day will be marked as not free
-  * Pros:
-    * Easy to implement
-  * Cons:
-    * Hours which have interviews are not included as free time, even though there is a portion of those hours which are free (e.g. if the user has an interview scheduled from 4.30pm on that day, the user has free time from 4pm to 4.30pm)
-* **Alternative 2 (alternate implementation):** Filters all the interviews on that day, and marks all pockets of time that are not taken by interviews as free time
-  * Pros:
-    * More accurate depiction of the free time on that day
-  * Cons:
-    * More complicated than alternative 1
-    * Potentially might perform worse than alternative 1, especially if the user has a lot of interviews that do not fall on the given day (i.e. need to look through the entire list)
-
-**Aspect: How `TimeParser#findFreeTimeWithinRange(String day, String from, String to)` works:**
-* **Alternative 1 (current planned implementation):** Loop over the entire day by hour, within the given range, and list out any free time that the user has, by hour
-    * Pros:
-      * Simple to implement; simply need to loop over the hours within the range
-    * Cons:
-      * Hours which have interviews are not included as free time, even though there is a portion of those hours which are free (e.g. if the user has an interview scheduled from 4.30pm on that day, the user has free time from 4pm to 4.30pm)
-
-**Aspect: How `TimeParser#sortInterviewsByTimeAscending(UniqueInterviewList interviews)` works:**
-* **Alternative 1 (current planned implementation):** Takes in the UniqueInterviewList, and uses the Java LocalDateTime comparator, and sorts the list in ascending order
-    * Pros:
-      * Easy to implement; Built-in Java library handles the sorting for us
-    * Cons:
-      * Might increase coupling in the codebase since an object from another object is passed into the API and modified
-
-**Aspect: How `TimeParser#listTodayInterviews(String day, UniqueInterviewList interviews)` works:**
-* **Alternative 1 (current planned implementation):** Takes in the UniqueInterviewList, and filters out the interviews for the given day
-    * Pros:
-      * Easy to implement
-    * Cons:
-      * Might increase coupling in the codebase since an object from another object is passed into the API and modified
-
-### List all free timing for today feature
-
+### List all free timing for a given day feature
 #### Implementation
+The list free times for a given day feature allows the user to list all the blocks of time that are not taken by a scheduled interview. This command is in the format `list-freetime DATE` where `DATE` is a valid date string.
 
+
+The `list-freetime DATE` command is facilitated by the `ListFreeTimeCommand`, `ListFreeTimeCommandParser`, along with the other internal classes omitted for brevity.
 #### How is the command executed
-
+1. The user inputs the `list-freetime DATE`
+2. The `LogicManager` receives the command string and forwards it to the `AddressBookParser`.
+3. The `AddressBookParser` checks the type of command and constructs `ListFreeTimeCommandParser` to parse the keyword(s).
+4. The `execute` method of the `ListFreeTimeCommandParser` is called, which will call the `parseDate` method of the `TimeParser` API class.
+5. `parseDate` will take in the date string as argument. If valid, it will return a `Time` instance containing a LocalDateTime containing the date information.
+6. The `ListFreeTimeCommandParser` constructs `ListFreeTimeCommand` with the Time instance (created by `parseDate` earlier) passed into its constructor.
+7. The `LogicManager` executes the `ListFreeTimeCommand` which calls the `Model#listPocketsOfTimeOnGivenDay(Time givenDay)` method.
+8. The `ListFreeTimeCommand` will then use an internal method, formatFreeTime(List<Pair<Time, Time>> freeTimes), to parse the list of free times into a string.
+9. The `ListFreeTimeCommand` construct `CommandResult` containing the free times on the given day, and returns it to `LogicManager`.
+10. The GUI will be updated automatically by when the list changes.
 #### Design consideration
+Aspect: How the command finds free times:
+* **Alternative 1 (current choice):** implement a method in the `ModelManager` class
+    * Pros:
+        * Can access all the interviews that the user has scheduled that is within the `AddressBook` object instance, which maintains the information hiding principle
+    * Cons:
+        * The command will cause the control to be passed to `ModelManager` first, then to `AddressBook` where the logic for looking for free times happens. This results in an additional layer of abstraction, which increases the complexity of the command slightly
+
+* **Alternative 2:** Use the getter methods of the `AddressBook` class
+    * Pros:
+        * One less layer of abstraction, reducing complexity
+        * Easier to implement
+    * Cons:
+        * The `ListFreeTimeCommand` will have to call the `getAddressBook` method of the `ModelManager` object instance, and then use the getter method of the `AddressBook` object instance. Violates the _Law of Demeter_ principle since the methods of a stranger (i.e. `AddressBook`) is being called, which `ListFreeTimeCommand` is not closely related to
+        * Increases coupling since `ListFreeTimeCommand` now has a dependency with `AddressBook`
 
 ### List all interviews for today feature
 
