@@ -248,7 +248,7 @@ Example usage:
 
 #### List all contacts: `list`
 
-You can use the `list` command to list all of your contacts. This resets any filtering or sorting previously applied to the list.
+You can use the `list` command to list all of your contacts. This resets any filtering previously applied to the list.
 
 Format: `list`
 
@@ -262,7 +262,7 @@ Example usage:
 
 #### Find a contact: `find [name]`
 
-You can use the `find` command to search for contacts by their name if you wish to quickly reference a particular contact’s details.
+You can use the `find` command to search for contacts by their name if you wish to quickly reference a particular contact's details.
 
 Format: `find [name]`
 
@@ -282,8 +282,8 @@ Example usage:
 
 You can use the `sort` command to sort your list of contacts. If the list is currently filtered (using [`find`](#find-a-contact-find-name) or [`filter`](#filter-contacts-list-filter-by-field-with-term)), the filtered list will be sorted.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can undo a sort command using [`undo`](#undo-last-change-to-networkbook-undo). You can reset sorting and filtering at any time using [`list`](#list-all-contacts-list).
+<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
+When you first open NetworkBook, the list starts off sorted by **name** in **ascending** order.
 </div>
 
 Format: `sort /by [field] /order [order]`
@@ -297,7 +297,6 @@ Parameters:
     * `name` - Sort alphabetically by contact name
     * `grad` - Sort chronologically by graduation year
     * `priority` - Sort by priority
-    * `none` - Return to default sorting
 
 * `[order]` (optional) is the order to sort in. If not specified, defaults to ascending.
 
@@ -306,9 +305,9 @@ Parameters:
     * `asc`/`ascending` - Sort in ascending order
     * `desc`/`descending` - Sort in descending order
 
-    <div markdown="span" class="alert alert-secondary">:information_source: **Note:**
-    If sorting by an optional field (e.g. graduation), all contacts without that field will be placed at the bottom of the sorted list regardless of sorting order.
-    </div>
+<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
+If sorting by an optional field (e.g. graduation), all contacts without that field will be placed at the bottom of the sorted list regardless of sorting order.
+</div>
 
 Example usage:
 
@@ -326,7 +325,7 @@ temporarily hiding contacts that don't contain certain keywords
 for easy viewing. If the list is currently sorted (using [`sort`](#sort-contacts-list-sort-by-field-name-order-ascdesc)), the filtered list will be sorted.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can undo a filter command using [`undo`](#undo-last-change-to-networkbook-undo). You can reset sorting and filtering at any time using [`list`](#list-all-contacts-list).
+You can undo a filter command using [`undo`](#undo-last-change-to-networkbook-undo). You can reset filtering at any time using [`list`](#list-all-contacts-list).
 </div>
 
 Format: `filter /by [field] /with [term] /taken true/false`
