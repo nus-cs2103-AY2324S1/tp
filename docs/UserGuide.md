@@ -682,6 +682,7 @@ Output:
   <br>![result for incorrect attendance type](images/incorrectAttendanceType.png)
 * If the command is successful, the app should display the following message. The employee’s attendance status should also be updated accordingly.
   <br>![result for marking an employee to be absent](images/markSuccess.png)
+  <br>![person card](images/markSuccess1.png)
 
 * Go back to [Table of Contents](#table-of-contents)
 
