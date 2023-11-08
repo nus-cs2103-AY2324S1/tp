@@ -27,6 +27,8 @@ class SalaryTest {
         )
     );
 
+    private final Salary salaryWithNoBenefitAndDeduction = new Salary("1500.00", null, null);
+
     private final Salary salaryWithBenefit = new Salary("1500.00", null, benefits);
     private final Salary salaryWithDeduction = new Salary("1500.00", deductions, null);
     private final Salary salaryWithBenefitAndDeduction = new Salary("1500.00", deductions, benefits);
@@ -65,6 +67,32 @@ class SalaryTest {
     }
 
     @Test
+    public void getDeductionsString_nullDeductions_returnNil() {
+        assertTrue(salaryWithNoBenefitAndDeduction.getDeductionsString().equals("NIL"));
+    }
+
+    @Test
+    public void getBenefitsString_nullBenefits_returnNil() {
+        assertTrue(salaryWithNoBenefitAndDeduction.getBenefitsString().equals("NIL"));
+    }
+
+    @Test
+    public void addDeduction_nullDeductions_returnSingleElementArrayList() {
+        salaryWithNoBenefitAndDeduction.addDeduction(new Deduction("100.00", Reason.NO_PAY_LEAVE));
+        assertTrue(salaryWithNoBenefitAndDeduction.getDeductions().size() == 1);
+        assertTrue(salaryWithNoBenefitAndDeduction.getDeductions().get(0).equals(
+            new Deduction("100.00", Reason.NO_PAY_LEAVE)));
+    }
+
+    @Test
+    public void addBenefit_nullDeductions_returnSingleElementArrayList() {
+        salaryWithNoBenefitAndDeduction.addBenefit(new Benefit("100.00", Reason.ANNUAL_BONUS));
+        assertTrue(salaryWithNoBenefitAndDeduction.getBenefits().size() == 1);
+        assertTrue(salaryWithNoBenefitAndDeduction.getBenefits().get(0).equals(
+            new Benefit("100.00", Reason.ANNUAL_BONUS)));
+    }
+
+    @Test
     public void getTotalDeductions() {
         // null deductions
         assertTrue(salary.getTotalDeductions() == 0.0);
@@ -84,6 +112,54 @@ class SalaryTest {
         // with benefits
         assertTrue(salaryWithBenefit.getTotalBenefits() == 5500.0);
         assertTrue(salaryWithBenefitAndDeduction.getTotalBenefits() == 5500.0);
+    }
+
+    @Test
+    public void getTotalAllowancesExceptBonuses() {
+        assertTrue(salaryWithBenefit.getTotalAllowancesExceptBonuses() == 500.0);
+        assertTrue(salaryWithBenefitAndDeduction.getTotalAllowancesExceptBonuses() == 500.0);
+        assertTrue(salaryWithDeduction.getTotalAllowancesExceptBonuses() == 0.0);
+        assertTrue(salaryWithNoBenefitAndDeduction.getTotalAllowancesExceptBonuses() == 0.0);
+    }
+
+    @Test
+    public void getTransportAllowances() {
+        assertTrue(salaryWithBenefit.getTransportAllowances() == 500.0);
+        assertTrue(salaryWithBenefitAndDeduction.getTransportAllowances() == 500.0);
+        assertTrue(salaryWithDeduction.getTransportAllowances() == 0.0);
+        assertTrue(salaryWithNoBenefitAndDeduction.getTransportAllowances() == 0.0);
+    }
+
+    @Test
+    public void getAnnualBonuses() {
+        assertTrue(salaryWithBenefit.getAnnualBonuses() == 5000.0);
+        assertTrue(salaryWithBenefitAndDeduction.getAnnualBonuses() == 5000.0);
+        assertTrue(salaryWithDeduction.getAnnualBonuses() == 0.0);
+        assertTrue(salaryWithNoBenefitAndDeduction.getAnnualBonuses() == 0.0);
+    }
+
+    @Test
+    public void getNoPayLeaves() {
+        assertTrue(salaryWithBenefit.getNoPayLeaves() == 0.0);
+        assertTrue(salaryWithBenefitAndDeduction.getNoPayLeaves() == 100.0);
+        assertTrue(salaryWithDeduction.getNoPayLeaves() == 100.0);
+        assertTrue(salaryWithNoBenefitAndDeduction.getNoPayLeaves() == 0.0);
+    }
+
+    @Test
+    public void getAbsences() {
+        assertTrue(salaryWithBenefit.getAbsences() == 0.0);
+        assertTrue(salaryWithBenefitAndDeduction.getAbsences() == 120.0);
+        assertTrue(salaryWithDeduction.getAbsences() == 120.0);
+        assertTrue(salaryWithNoBenefitAndDeduction.getAbsences() == 0.0);
+    }
+
+    @Test
+    public void getEmployeeCpfDeductions() {
+        assertTrue(salaryWithBenefit.getEmployeeCpfDeductions() == 0.0);
+        assertTrue(salaryWithBenefitAndDeduction.getEmployeeCpfDeductions() == 0.0);
+        assertTrue(salaryWithDeduction.getEmployeeCpfDeductions() == 0.0);
+        assertTrue(salaryWithNoBenefitAndDeduction.getEmployeeCpfDeductions() == 0.0);
     }
 
     @Test
