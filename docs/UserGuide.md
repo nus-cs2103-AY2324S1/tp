@@ -29,7 +29,7 @@ you can access contacts by roles and responsibilities instantly.
   * [Understanding the GUI](#understanding-the-gui)
   * [Tutorial on using our Commands](#tutorial-on-using-our-commands)
 * [Features](#features)
-  * [Welcome to Linktree](#welcome-to-linktree)
+  * [Welcome to Linktree](#welcome-command)
   * [Managing developers](#managing-developers)
     * [Add developer](#add-developer)
     * [Remove developer](#remove-developer)
