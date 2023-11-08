@@ -345,7 +345,7 @@ Examples:
 * `list` followed by `view 2`
   * views the profile of the 2nd fosterer in the address book.
 
-To learn more about profile page, please refer to the section [User Interface: the Profile View](#the-profile-view). 
+To learn more about profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
 
 #### Editing a fosterer’s details in profile page:
 
@@ -556,7 +556,9 @@ Examples:
 **:warning: Caution:**<br>
 
 Percentages may not add up to 100.00%.<br>
-Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat and 1 unknown. The calculated percentages will add up to 99.99%, instead of 100.00%. It can be assumed that each group takes up 1/3 out of 100.00%.
+Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat and 1 unknown.<br>
+* The calculated percentages will add up to 99.99%, instead of 100.00%.<br> 
+* It can be assumed that each group takes up 1/3 out of 100.00%.
 
 ![Stats](images/screenshots/StatsTotalPercent.png)
 
