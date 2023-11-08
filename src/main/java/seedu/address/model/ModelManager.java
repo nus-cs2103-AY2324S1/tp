@@ -96,12 +96,24 @@ public class ModelManager implements Model {
 
     //=========== Person functions ===========================================================================
 
+    /**
+     * Adds the specified person to the address book.
+     *
+     * @param person Person to be added.
+     */
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    /**
+     * Deletes the specified person from the address book.
+     *
+     * @param personName String representing name of person to be deleted.
+     * @return The deleted Person.
+     * @throws CommandException if the person cannot be deleted.
+     */
     @Override
     public Person deletePerson(String personName) throws CommandException {
         Person person = addressBook.getPerson(personName);
@@ -109,12 +121,24 @@ public class ModelManager implements Model {
         return person;
     }
 
+    /**
+     * Returns whether the person is in the address book.
+     *
+     * @param person Person to be checked.
+     * @return Whether the address book contains the person.
+     */
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
     }
 
+    /**
+     * Returns whether the person is in the address book.
+     *
+     * @param personName String representing person name.
+     * @return Whether the address book contains the specified person.
+     */
     @Override
     public boolean hasPerson(Name personName) {
         requireNonNull(personName);
@@ -122,11 +146,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Assign person to group
+     * Assigns person to group.
      *
-     * @param person person to be grouped
-     * @param group  group in consideration
-     * @throws CommandException if person has already been assigned to group
+     * @param person Person to be grouped.
+     * @param group  Group in consideration.
+     * @throws CommandException if person has already been assigned to group.
      */
     private void assignGroup(Person person, Group group) throws CommandException {
         group.addPerson(person);
@@ -134,17 +158,25 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Unassign person to group
+     * Unassigns person to group.
      *
-     * @param person person to be grouped
-     * @param group  group in consideration
-     * @throws CommandException if person has already been assigned to group
+     * @param person Person to be grouped.
+     * @param group  Group in consideration.
+     * @throws CommandException if person has already been assigned to group.
      */
     private void unassignGroup(Person person, Group group) throws CommandException {
         group.removePerson(person);
         person.removeGroup(group);
     }
 
+    /**
+     * Adds person into group.
+     *
+     * @param personName String representing person name.
+     * @param groupName  String representing group name.
+     * @return Pair containing the Person and the Group.
+     * @throws CommandException if the person cannot be added to the group.
+     */
     @Override
     public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException {
         // both throw exception if not exists exact match
@@ -156,6 +188,14 @@ public class ModelManager implements Model {
         return output;
     }
 
+    /**
+     * Removes person from group.
+     *
+     * @param personName String representing person name.
+     * @param groupName  String representing group name.
+     * @return Pair containing the Person and the Group.
+     * @throws CommandException if the person cannot be removed from the group.
+     */
     @Override
     public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
         Person person = addressBook.getPerson(personName);
@@ -166,6 +206,14 @@ public class ModelManager implements Model {
         return output;
     }
 
+    /**
+     * Adds time intervals to a person.
+     *
+     * @param toAddPerson String representing name of person.
+     * @param toAddTime ArrayList containing all Time Intervals.
+     * @return String showing added times and clashes (if any).
+     * @throws CommandException
+     */
     @Override
     public String addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAddPerson);
@@ -181,6 +229,7 @@ public class ModelManager implements Model {
 
     /**
      * Deletes free time from person
+     *
      * @param personName Person to delete time from
      * @param toDeleteTime Time to be deleted
      * @throws CommandException if time does not exist
