@@ -15,7 +15,7 @@ import seedu.address.model.person.Subject;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Lesson extends ListEntry<Lesson> {
-    public static final Lesson DEFAULT_LESSON = new Lesson();
+    private static final Lesson DEFAULT_LESSON = new Lesson();
     private Time start;
     private Time end;
     private Name name;

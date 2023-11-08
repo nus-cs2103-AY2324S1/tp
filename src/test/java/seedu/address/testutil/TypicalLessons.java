@@ -28,7 +28,7 @@ public class TypicalLessons {
     public static ScheduleList getTypicalScheduleList() {
         ScheduleList sc = new ScheduleList();
         for (Lesson lesson : getTypicalLessons()) {
-            sc.addLesson(lesson);
+            sc.addLesson(lesson.clone());
         }
         return sc;
     }

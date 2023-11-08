@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person extends ListEntry<Person> {
-    public static final Person DEFAULT_PERSON = new Person(Name.DEFAULT_NAME);
+    private static final Person DEFAULT_PERSON = new Person(Name.DEFAULT_NAME);
     private Phone phone = Phone.DEFAULT_PHONE;
     private Email email = Email.DEFAULT_EMAIL;
 
