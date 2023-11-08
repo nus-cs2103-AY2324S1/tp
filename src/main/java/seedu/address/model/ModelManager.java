@@ -207,12 +207,12 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Adds time intervals to a person.
+     * Adds free time to a person.
      *
      * @param toAddPerson String representing name of person.
      * @param toAddTime ArrayList containing all Time Intervals.
      * @return String showing added times and clashes (if any).
-     * @throws CommandException
+     * @throws CommandException if the times cannot be added.
      */
     @Override
     public String addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException {
@@ -228,11 +228,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Deletes free time from person
+     * Deletes free time from person.
      *
-     * @param personName Person to delete time from
-     * @param toDeleteTime Time to be deleted
-     * @throws CommandException if time does not exist
+     * @param personName Person to delete time from.
+     * @param toDeleteTime Time to be deleted.
+     * @throws CommandException if time does not exist.
      */
     @Override
     public String deleteTimeFromPerson(Name personName,
@@ -258,7 +258,8 @@ public class ModelManager implements Model {
 
     /**
      * Adds a group to the address book.
-     * The group must not already exist in the address book.
+     *
+     * @param group Group to be added.
      */
     public void addGroup(Group group) {
         addressBook.addGroup(group);
@@ -287,6 +288,14 @@ public class ModelManager implements Model {
         return addressBook.getGroup(groupName);
     }
 
+    /**
+     * Adds meeting time to a group.
+     *
+     * @param toAdd The group to be modified.
+     * @param toAddTime ArrayList of Time Intervals to be added.
+     * @return String showing added meeting times and clashes (if any).
+     * @throws CommandException if the times cannot be added.
+     */
     public String addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAdd);
         Group groupToAdd = addressBook.getGroup(toAdd.getGroupName());
@@ -300,10 +309,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Deletes meeting time from group
-     * @param group Group to delete time from
-     * @param toDeleteTime Time to be deleted
-     * @throws CommandException if time does not exist
+     * Deletes meeting time from group.
+     *
+     * @param group Group to delete time from.
+     * @param toDeleteTime Time to be deleted.
+     * @throws CommandException if time does not exist.
      */
     @Override
     public String deleteTimeFromGroup(Group group,
@@ -320,16 +330,24 @@ public class ModelManager implements Model {
         }
     }
 
-    public Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException {
-        Group group = addressBook.getGroup(groupName);
-        group.setGroupRemark(groupRemark);
-        return group;
-    }
-
     public TimeIntervalList getTimeFromGroup(Group group) throws CommandException {
         requireNonNull(group);
         Group toAdd = addressBook.getGroup(group.getGroupName());
         return toAdd.getTime();
+    }
+
+    /**
+     * Adds remarks to a group.
+     *
+     * @param groupName Group to be modified.
+     * @param groupRemark Remark to be added.
+     * @return The modified group.
+     * @throws CommandException if the remark cannot be added.
+     */
+    public Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException {
+        Group group = addressBook.getGroup(groupName);
+        group.setGroupRemark(groupRemark);
+        return group;
     }
 
 
