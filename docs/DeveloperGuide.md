@@ -754,13 +754,13 @@ Repeat the contact test cases with meeting commands
 1. Dealing with missing/corrupted data files
 
    1. If you have added, edited or deleted anything, there should be a new folder that appears in the folder that you placed OutBook.jar in.
-   2. Open file and open the `outbook.json` file. In the persons section, delete any line that has name, phone, email, etc... <br>
+   2. Open file and open the `outbook.json` file. In the persons section, delete any line that has name, phone, email, etc...
    3. Run the program again with `java -jar OutBook.jar` <br>
    Expected: You will open up to a blank OutBook. At this point if you were to add, edit or delete anything, the data you had previously will be deleted and saved over with the new data you just added, losing all you data.
 
 2. Recovering from missing/corrupted data files
 
-   1. After completed the test above, add back the field that was deleted in step 2. If you do not know what was deleted, place a placeholder for that specific field. 
-      1. All persons will have a name, phone, email, lastContactedTime, status, remark and tags. 
+   1. After completed the test above, add back the field that was deleted in step 2. If you do not know what was deleted, place a placeholder for that specific field.
+      1. All persons will have a name, phone, email, lastContactedTime, status, remark and tags.
       2. Meetings have a similar structure with title, location, start, end, attendees, tags, status.
    2. Run the program again, and you will see the rest of the data with the placeholder that you put.
