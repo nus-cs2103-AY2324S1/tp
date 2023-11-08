@@ -393,6 +393,8 @@ Format `deleteContactEvent INDEX ts/DATE_TIME`
 Example:
 * `deleteContactEvent 1 ts/2024-01-01 09:00`
 
+
+
 ### Comparing calendars with AddressBook Contacts
 
 There are two ways for the user to compare calendars with their AddressBook Contacts. 
@@ -446,20 +448,6 @@ current week.
 
 Format: `viewWeek DATE`
 
-### Viewing another person's events: `viewContactEvents`
-
-Creates a pop-up that displays a list of all events of a calendar belonging to a person in the Addressbook.
-
-Format: `viewContactEvents INDEX`
-
-* Deletes an event at the specified date and time.
-* An event is considered to be at that date and time if the date time lies between the start time (inclusive) and the
-end time (exclusive).
-* If there is no event during `DATE_TIME_DURING_EVENT`, an error will be thrown.
-
-Example:
-`deleteEvent 2023-11-01 12:00`
-
 ### Deleting multiple events: `clearEvents`
 
 Clears all events within a specified time range.
@@ -475,7 +463,7 @@ same command is then shown with the confirmation included that can be copied and
 
 ### Viewing all events
 
-Events can be viewed from the calendar that appears on the right.
+Events in the current week can be viewed from the calendar that appears on the right.
 
 Additionally, a list of all events are displayed by default at the bottom. This list at the bottom can be switched to a
 task list with the `switchList` command. More information can be found under `Viewing all Tasks`.
