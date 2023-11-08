@@ -13,7 +13,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 
@@ -46,7 +45,6 @@ public class AddPersonCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "Person with this name already exists in the address book";
 
     private final Person toAdd;
-    private Lesson lesson = null;
 
     /**
      * Creates an AddCommand to add the specified {@code Person} and set lesson to be null
@@ -54,14 +52,6 @@ public class AddPersonCommand extends Command {
     public AddPersonCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
-    }
-    /**
-     * Creates an AddCommand to add the specified {@code Person} and {@code Lesson}
-     */
-    public AddPersonCommand(Person person, Lesson lesson) {
-        requireNonNull(person);
-        toAdd = person;
-        this.lesson = lesson;
     }
 
     @Override
@@ -100,11 +90,4 @@ public class AddPersonCommand extends Command {
                 .toString();
     }
 
-    public Lesson getLesson() {
-        return lesson;
-    }
-
-    public Person getPerson() {
-        return toAdd;
-    }
 }

@@ -292,24 +292,24 @@ public class ModelManager implements Model {
 
     @Override
     public void showPerson(Person person) {
+        currentShowingPerson = person;
         if (ui != null) {
-            currentShowingPerson = person;
             ui.showPersonDetails(person);
         }
     }
 
     @Override
     public void showLesson(Lesson lesson) {
+        currentShowingLesson = lesson;
         if (ui != null) {
-            currentShowingLesson = lesson;
             ui.showLessonDetails(lesson);
         }
     }
 
     @Override
     public void showTask(Task task) {
+        currentShowingTask = task;
         if (ui != null) {
-            currentShowingTask = task;
             ui.showTaskDetails(task);
         }
     }

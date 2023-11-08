@@ -223,4 +223,11 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
         });
         return cloned;
     }
+
+    /**
+     * Returns the size of the tasklist.
+     */
+    public int size() {
+        return internalTaskList.size();
+    }
 }
