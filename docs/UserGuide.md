@@ -92,9 +92,9 @@ instance in the event of a wrongfully formatted command.
 This tutorial explains how to add, edit, tag, and practise your flashcards. Feel free to follow along with lesSON open!
 For advanced users, feel free to look at the [feature list](#feature-list) instead.
 
-1. Firstly, let's add a card. type: <br>`add q/ what does + mean in boolean algebra? a/ it means OR.`
-2. Next, let's capitalise our previous input! Assuming the card is at index `1`, input: <br>`edit 1 q/ What does + mean in boolean
-algebra? a/ It means OR.`
+1. Firstly, let's add a card. type: <br>`add q/what does + mean in boolean algebra? a/it means OR.`
+2. Next, let's capitalise our previous input! Assuming the card is at index `1`, input: <br>`edit 1 q/What does + mean in boolean
+algebra? a/It means OR.`
 3. Next, let's tag it under the module CS1231S by inputting: <br>`edit 1 t/CS1231S`
 4. Feel free to add a few more cards by following steps 1 to 3!
 5. Next, to practise the first card, do: <br> `practise`
@@ -150,7 +150,7 @@ _A flashcard with a question, answer, tag and hint field._
        add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
       ```
 #### Usage
-1. User Input: `add q/ opcode for R format instructions a/ 000000 t/ CS2100 t/ MIPS`
+1. User Input: `add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS`
 
 2. Successful Output
 
@@ -196,23 +196,23 @@ _Deleting the card in th deck with an index of 2._
 ### View All Flashcards : `list`
 Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
 
-Format: `list (q/t)/ (prefix question starts with/ tag)`
+Format: `list (q/t)/(prefix question starts with/ tag)`
 Note : Listing questions for markdown syntax should include their relevant markdown notation
 Examples:
 ```
 1. list
    (list shows the full list of flashcards)
 
-2. list q/ What
+2. list q/what
    (list shows all flashcards with questions starting with 'What')
 
-3. list t/ CS2100
+3. list t/CS2100
    (list shows all flashcards with the CS2100 Tag)
 
-4. list t/ CS2100 t/ MIPS
+4. list t/CS2100 t/MIPS
    (list shows all flashcards with both MIPS and CS2100 Tag)
 
-5. list q/ what t/ CS2100
+5. list q/what t/CS2100
    (list shows all flashcards with questions starting with 'What' and has the CS2100 Tag)
 ```
 
@@ -232,20 +232,20 @@ Examples:
 ### Editing a Specific Flashcard : `edit`
 Edits an existing Flashcard in the deck.
 
-Format: `edit INDEX (q/a/t/h)/ (question/answer/tag/hint)`
+Format: `edit INDEX (q/a/t/h)/(question/answer/tag/hint)`
 
 Examples:
 ```
-1. edit 1 q/ What is the colour of the sun?
+1. edit 1 q/What is the colour of the sun?
    (changes the question at index 1 to “What is the colour of the sun?”)
 
-2. edit 1 a/ Red
+2. edit 1 a/Red
    (changes the answer at index 1 to “Red”)
 
-3. edit 1 t/ Weather t/ Geogaphy
+3. edit 1 t/Weather t/Geogaphy
    (changes the tag at index 1 to “Weather” and "Geography")
 
-4. edit 1 h/ Apple
+4. edit 1 h/Apple
    (changes the hint at index 1 to “Apple")
 ```
 #### Expected output:
@@ -370,10 +370,10 @@ set 1
 
 #### Expected outputs:
 ```
-set 1 d/ easy
+set 1 d/easy
 "Set Difficulty for Question 1 (Diffculty Level: easy)
 
-set 10 d/ easy
+set 10 d/easy
 "The card index provided is invalid"
 ```
 
@@ -477,7 +477,7 @@ To bold a line of text, wrap text with `**`
 
 #### Example:
 ```
-edit 1 q/ How many bits can a **Half Adder** add up
+edit 1 q/How many bits can a **Half Adder** add up
 ```
 #### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3b_bold.png)
@@ -487,7 +487,7 @@ To italicise a line of text, wrap text with `*`
 
 #### Example:
 ```
-edit 1 q/ How many bits can a *Half Adder* add up
+edit 1 q/How many bits can a *Half Adder* add up
 ```
 #### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3b_italics.png)
@@ -498,7 +498,7 @@ and end with `</u>` at the end of the underlined text.
 
 #### Example:
 ```
-edit 1 q/ How many bits can a <u>Half Adder</u> add up
+edit 1 q/How many bits can a <u>Half Adder</u> add up
 ```
 #### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3b_underline.png)
