@@ -49,7 +49,7 @@ public class Messages {
                 .append(booking.getEmail())
                 .append("; Remark: ")
                 .append(booking.getRemark())
-                .append("; Tags: ");
+                .append("; Room Type: ");
         RoomTypeTag tag = booking.getTags();
         builder.append(tag.roomTypeTagName);
         return builder.toString();

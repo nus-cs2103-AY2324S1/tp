@@ -59,7 +59,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         BookingPeriod bookingPeriod = ParserUtil.parseBookingPeriod(argMultimap.getValue(PREFIX_BOOKING_PERIOD).get());
         Remark remark;
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-            remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+            String remarkInput = argMultimap.getValue(PREFIX_REMARK).get();
+            if(remarkInput.trim().isEmpty()) {
+                remark = new Remark("N/A");
+            } else {
+                remark = ParserUtil.parseRemark(remarkInput);
+            }
         } else {
             remark = new Remark("N/A");
         }
