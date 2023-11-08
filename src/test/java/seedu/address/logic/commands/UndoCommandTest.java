@@ -3,12 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.assertUndoCommandSuccess;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -44,7 +40,7 @@ public class UndoCommandTest {
         UndoCommand undoCommand = new UndoCommand();
         String expectedMessage = UndoCommand.MESSAGE_SUCCESS;
 
-        assertUndoCommandSuccess(undoCommand, model, expectedMessage, modelUndo);
+        assertCommandSuccess(undoCommand, model, expectedMessage, modelUndo);
     }
 
     @Test

@@ -132,8 +132,8 @@ public class DeleteCommandTest {
 
         // Update the expected message to match the actual output from DeleteCommand
         String expectedMessage = "Deleted Booking(s): Room number: 1; Booking Period: 2023-01-01 08:00 to 2023-01-02 "
-                + "12:00; Name: Alice Pauline; Phone: 94351253; Email: alice@gmail.com; Remark: N/A; Tags: NORMAL\n"
-                + "Invalid index(es): 100";
+                + "12:00; Name: Alice Pauline; Phone: 94351253; Email: alice@gmail.com; Remark: N/A; "
+                + "Room Type: NORMAL\nInvalid index(es): 100";
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }

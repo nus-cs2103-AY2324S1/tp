@@ -93,7 +93,7 @@ public class BookingTest {
     @Test
     public void testRoomNotFoundException() {
         Room room = null;
-        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00"); // Create BookingPeriod object
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00");
         Name name = new Name("John Doe"); // Create Name object
         Phone phone = new Phone("1234567890"); // Create Phone object
         Email email = new Email("john@gmail.com"); // Create Email object
@@ -111,13 +111,14 @@ public class BookingTest {
         Email email = new Email("john@gmail.com"); // Create Email object
         Remark remark = new Remark("Test remark"); // Create Remark object
 
-        assertThrows(BookingPeriodNotFoundException.class, () -> new Booking(room, bookingPeriod, name, phone, email, remark));
+        assertThrows(BookingPeriodNotFoundException.class, () ->
+                new Booking(room, bookingPeriod, name, phone, email, remark));
     }
 
     @Test
     public void testNameNotFoundException() {
         Room room = new Room("101"); // Create Room object
-        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00"); // Create BookingPeriod object
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00");
         Name name = null;
         Phone phone = new Phone("1234567890"); // Create Phone object
         Email email = new Email("john@gmail.com"); // Create Email object
@@ -129,7 +130,7 @@ public class BookingTest {
     @Test
     public void testEmailNotFoundException() {
         Room room = new Room("101"); // Create Room object
-        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00"); // Create BookingPeriod object
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00");
         Name name = new Name("John Doe"); // Create Name object
         Phone phone = new Phone("1234567890"); // Create Phone object
         Email email = null;
@@ -141,7 +142,7 @@ public class BookingTest {
     @Test
     public void testPhoneNotFoundException() {
         Room room = new Room("101"); // Create Room object
-        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00"); // Create BookingPeriod object
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-10-11 12:00 to 2023-11-11 13:00");
         Name name = new Name("John Doe"); // Create Name object
         Phone phone = null;
         Email email = new Email("john@gmail.com"); // Create Email object

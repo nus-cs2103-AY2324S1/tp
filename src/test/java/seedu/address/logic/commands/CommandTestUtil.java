@@ -109,18 +109,6 @@ public class CommandTestUtil {
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
-    public static void assertUndoCommandSuccess(Command command, Model actualModel, String expectedMessage, Model expectedModel) {
-        try {
-            CommandResult result = command.execute(actualModel);
-            assertEquals(expectedMessage, result.getFeedbackToUser());
-            assertEquals(expectedModel.getBookingsBook(), actualModel.getBookingsBook());
-            // Add more assertEquals for other fields if necessary
-
-        } catch (CommandException ce) {
-            throw new AssertionError("Execution of command should not fail.", ce);
-        }
-    }
-
     /**
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
