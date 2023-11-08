@@ -8,10 +8,10 @@
     "tags": [ "friends" ],
     "attendances" : [ ]
   }, {
-    "name": "Alice Pauline",
+    "name": "Bob Ross",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "id": "A1234567P",
+    "id": "A1234567O",
     "address": "4th street",
     "attendances" : [ ]
   } ]

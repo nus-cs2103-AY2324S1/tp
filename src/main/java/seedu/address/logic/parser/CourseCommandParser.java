@@ -11,13 +11,13 @@ import seedu.address.logic.parser.ParserUtil.CourseOperation;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FilterCommand object
+ * Parses input arguments and creates a new CourseCommand object
  */
 public class CourseCommandParser implements Parser<CourseCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FilterCommand
-     * and returns an FilterCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the CourseCommand
+     * and returns an CourseCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public CourseCommand parse(String args) throws ParseException {
@@ -32,7 +32,7 @@ public class CourseCommandParser implements Parser<CourseCommand> {
         }
 
         try {
-            operation = ParserUtil.parseFilterOperation(argMultimap.getPreamble());
+            operation = ParserUtil.parseCourseOperation(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE), pe);
         }

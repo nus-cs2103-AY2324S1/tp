@@ -30,7 +30,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of TAvigator.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -164,6 +164,7 @@ Both list commands are parsed with `ListCommandParser`. If parsed successfully, 
 a `ListStudentsCommand` or `ListAttendanceCommand`.
 
 The following is a class diagram depicting `ListCommand`, `ListStudentsCommand` and `ListAttendanceCommand`:
+
 ![ListCommandClassDiagram](images/ListCommandClassDiagram.png)
 
 Shown below is the sequence diagram of `ListStudentsCommand` when `list students` is entered by the User:
@@ -205,22 +206,22 @@ The following activity diagram shows how the `MarkAttendanceCommand` works:
 - Using a separate command for updating attendance
 
     > Instead of having the command handle both marking and updating attendance, we could have a seperate command, say `UpdateAttendanceCommand`, to handle updates.
-    
-    **Pros:** 
+
+    **Pros:**
     - Easier to understand and maintain: Developers can quickly grasp the purpose of each command.
-        
+
     **Cons:**
     - Increased complexity: Introducing more commands can make the system more complex and harder for users to remember.
     - Redundancy: Both commands would have overlapping code, leading to potential redundancy.
-    
+
     **Evaluation:**
-    
+
     The current implementation is preferred as it is simpler and more straightforward. It reduces the need for users to remember additional commands, while resolving potential user mistakes behind the scene, providing convenience and a better user experience. The additional complexity introduced by having a separate command for updating attendance is not justified.
 
 
 - Not checking for same week's attendance
 
-  > Instead of checking if the attendance for the same week, we could simply add a new attendance record every time the command is invoked. 
+  > Instead of checking if the attendance for the same week, we could simply add a new attendance record every time the command is invoked.
 
   **Pros:**
     - Simplicity: Implementation would be straightforward without the need for additional checks.
@@ -231,7 +232,7 @@ The following activity diagram shows how the `MarkAttendanceCommand` works:
     - Inefficiency: Consumes more memory and might make querying slower if there are many redundant records.
 
   **Evaluation:**
-    
+
   The current implementation is preferred as the pros simply do not outweigh the cons. The potential scenario that multiple attendance records within the same week being potentially useful is not justified as it is virtually unlikely to happen. The current implementation is much better preferred as the check prevents potential user mistakes behind the scene, providing convenience and a better user experience.
 
 ### View Tallied Attendance feature
@@ -242,7 +243,7 @@ The tallied attendance feature is implemented as a method in the Person class, w
 
 #### Design considerations:
 
-This feature is implemented this way, where it is displayed to the user without any additional commands, so that the user can quickly view a summary of the student's attendance records at a glance. 
+This feature is implemented this way, where it is displayed to the user without any additional commands, so that the user can quickly view a summary of the student's attendance records at a glance.
 
 #### Alternative implementations considered but not adopted:
 
@@ -256,13 +257,21 @@ Another possible way to implement this feature would be to abstract the attendan
 
 - Redundancy: At the current stage, abstracting it into a separate class will greatly increase code complexity without bringing much convenience.
 
-### View Detailed Attendance Records feature 
+### View Detailed Attendance Records feature
 
 #### Implementation
 
-The view feature allows the user to view the detailed attendance records of the students in the contact list. This 
-feature is implemented using the `ViewCommand` class. It is parsed by the `ViewCommandParser` class. If parsed 
+The view feature allows the user to view the detailed attendance records of the students in the contact list. This
+feature is implemented using the `ViewCommand` class. It is parsed by the `ViewCommandParser` class. If parsed
 successfully, it returns a `ViewCommand` object.
+
+The following sequence diagram shows how the ViewCommand function works:
+
+![ViewSeqDiagram](images/ViewSeqDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a ViewCommand:
+
+![ViewActivityDiagram](images/ViewActivityDiagram.png)
 
 #### Design considerations
 
@@ -272,7 +281,7 @@ short and quick, especially when the user may have to view multiple attendance r
 
 #### Alternative implementations considered but not adopted:
 
-- Integrate the attendance records to be part of the UI 
+- Integrate the attendance records to be part of the UI
 
   > Instead of having the user to enter a command to view indiviudal attendance records, we could have the attendance records being shown constantly on the UI for every single contact
 
@@ -287,11 +296,47 @@ short and quick, especially when the user may have to view multiple attendance r
 
   The current implementation, despite having to add new classes, is the optimal way to go about implementing this feature as we believe that having a user-friendly UI is a priority.
 
+### Finding a person `find`
+
+#### Implementation
+
+This `find` feature allows the user to search for students in TAvigator courses either by the student's name or ID. The user also need not enter the student's full name and can simply enter prefixes. This feature is implemented using the `FindCommand` class and parsed by the `FindCommandParser` class. If parsed successfully, it return a `FindCommand` object.
+
+The following sequence diagram shows how the FindCommand function works:
+
+![FindSeqDiagram](images/FindSeqDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a ViewCommand:
+
+![FindActivityDiagram](images/FindActivityDiagram.png)
+
+#### Design considerations
+
+The feature is implemented this way so that the user is able to access a particular student's contact quickly and conveniently without having to scroll through the entire course list. By allowing the user to search by prefixes or student IDs, there is a lot more freedom in terms of how the user wants to access the student's contact.
+
+#### Alternative implementations considered but not adopted:
+
+- Only allowing the user to find contacts by name
+
+  > Instead of having the user to enter the prefix everytime they want to find a contact, the process can be sped up by narrowing the functionality of this command to only find by name.
+
+  **Pros:**
+    - Implementation would be quite straightforward and simple as the default `find` feature would suffice for the feature specifications.
+    - The user need not enter the prefix everytime they want to use `find`, reducing the time taken to search for contacts.
+
+  **Cons:**
+    - The freedom of the user is limited greatly, considering that finding by student ID in a university is also rather common. By constraining them to a single search method, the user may end up spending more time finding students with longer names.
+
+  **Evaluation**:
+
+  The current implementation is the optimal way to go about implementing this feature as we believe that the value added by the feature triumphs the effort needed for implementation.
+
+
 ### \[Proposed\] Multiple Address Books for each Course
 
 #### Proposed Implementation
 
-In the `ModelManager` class, instead of storing an `AddressBook`, we instead store a `AddressBookManager`. 
+In the `ModelManager` class, instead of storing an `AddressBook`, we instead store a `AddressBookManager`.
 
 The `AddressBookManager` has a few responsibilities:
 - Adding or deleting `AddressBook`
@@ -572,7 +617,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1c. The given week is invalid 
+* 1c. The given week is invalid
     * 1c1. TAvigator shows an error message.
 
       Use case ends.
@@ -739,3 +784,11 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Planned Enhancements**
+
+Given below are some of the possible enhancements that could be added in future iterations:
+1. Currently, student names cannot contain any special characters like `,` or `-` that might exist in some names. We plan to allow specific special characters for student names in future developments.
+2. The current error message for a failed `mark` command may be too general. We plan to add details to the error message that explains the reason of failure especially when reason of absence is not provided for students who are marked as absent: `Reason of absence (r/) is mandatory for students who are marked as absent`.
+3. The messages for `course` commands could be more specific. We plan to replace mentions of `address book` with `courses` to better fit the context of TAvigator and reduce confusion for users.
+4. Validation checks could be added for course names to ensure valid course names when adding or editing courses. A valid format would include two to three initial alphabetical letters, followed by four numbers and one optional alphabetical letter at the end. A valid example would be `CS2103T`.
