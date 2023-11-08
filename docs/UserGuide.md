@@ -205,6 +205,7 @@ Name, phone number, email, tag, instrument, genre about the musician can all be 
 **Things to Note**
 * At least one of the optional field to edit must be provided.
 * The `INDEX` refer to the index number shown in the currently displayed `My Musicians` list. The index **must be a positive integer** 1, 2, 3, …​
+* If you would like to edit a musician not currently shown, please use the 'list' command first before editing.
 * When editing tags/instruments/genres, the existing tags/instruments/genres of the musician will be removed i.e adding of tags/instruments/genres is not cumulative.
 * You can remove all tags/instruments/genres of the musician by inputting an empty tag/instrument/genre field, e.g. `edit 1 t/ i/ g/`.
 * You can only edit the instruments and genres of the musician using the ones included in a pre-defined list. Refer to the [tags](#show-all-valid-instruments-and-genres--tags) command for more information.
@@ -397,8 +398,9 @@ In addition, if the musician does not exist in the band, you will see an error m
 [insert image]
 Please verify that the index of the musician is correct or input a different musician, and try again.
 
-### Find a band: `findb`
-Find a band and list all the band members of a selected band. From `My Bands` panel, find the complete band name of the band.
+
+### Find band: `findb`
+Finds the band with the given input name. Lists the band members of the selected band. From `My Bands` panel, find the complete band name of the band.
 
 [warning box]Run `list` before running this command!
 
@@ -443,6 +445,12 @@ Should you input an index out of the range of the current `My Bands` list, you w
 
 ```
 The band index provided is invalid
+```
+
+Should you attempt to change the name of the band to an existing band name stored by the program, you will see the error message below:
+
+```
+This band already exists in the addressbook.
 ```
 
 Please verify that the index is correct and try again.
