@@ -285,7 +285,7 @@ Aspect: How find command matches the arguments for name
         * Too many applicants might show up in a single find command which defeats
           the purpose of the find command
 
-### Time feature
+### Time features
 
 #### Implementation
 This feature is implemented though the `TimeParser` class. This class contains several public static methods related to manipulating time:
@@ -336,22 +336,38 @@ This feature is implemented though the `TimeParser` class. This class contains s
     ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
 
 #### How is the command executed
-
+1. The caller passes in the `date` string, which contains the date information. The caller also passes in the boolean flag `dateOnly`, which will indicate whether the string should be parsed into a `Time` instance containing date and time, or strictly date only.
+2. If the parsing was successful, a `Time` instance containing the Time info will be returned.
 #### Design considerations
 
-**Aspect: How `TimeParser#parseDate(String date)` works:**
+**Aspect: How `TimeParser#parseDate(String date, boolean dateOnly)` works:**
 
-* **Alternative 1 (current choice):** Have a hardcoded list of time formats that our team deems to be acceptable.
+* **Alternative 1 (current choice):** Have two hardcoded list of acceptable time formats. One with date and time, the other for time
     * Pros:
       * Easy to implement.
+      * Avoids code duplication
     * Cons:
       * May have performance issues in terms of time (i.e. might have to loop through the whole list to find a suitable format)
       * Huge number of time formats available, hence there is a need to update the list of acceptable time formats in future iterations
       * Many errors possible due to the many time fields that the user could format wrongly, which makes implementation difficult
+      * Using the same method to parse strings with date & time and strings with date only might be prone to bugs
 
-* **Alternative 2 (alternate choice):** Use other time libraries
+
+* **Alternative 2 :** Have two hardcoded list of acceptable time formats. One with date and time, the other for time, but parse the two types of time string (i.e. strings with date & time, and strings with date only separately)
+    * Pros:
+        * Easy to implement.
+        * Less prone to bugs since there are now separate methods for parsing the two types of strings
+    * Cons:
+        * Causes code duplication since the algorithm is virtually the same for both `parseDate` methods 
+        * Not an optimal implementation (i.e. might have to loop through the whole list to find a suitable format)
+        * Huge number of time formats available, hence there is a need to update the list of acceptable time formats in future iterations if needed
+        * Many errors possible due to the many time fields that the user could format wrongly, which makes implementation difficult
+
+
+* **Alternative 3 (alternate choice):** Use other time libraries
     * Pros:
         * Might be a better alternative to alternative 1
+        * Error checking already implemented
     * Cons:
         * Will have to overhaul the entire TimeParser class, which might be impractical
         * High risk; not guaranteed to be better after overhaul
