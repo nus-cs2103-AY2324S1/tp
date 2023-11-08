@@ -31,6 +31,12 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
      - they have forgotten the word  
         This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
 
+**:information_source: Notes about the command format:**<br>
+
+* The higher the `Level` is, the higher the proficiency of the user with the word is. The maximum level is 5, and it will be displayed as `word mastered`.
+
+* Words which are indicated as `word mastered` will not appear in review session.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
