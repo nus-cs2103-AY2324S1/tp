@@ -335,7 +335,6 @@ This feature is implemented though the `TimeParser` class. This class contains s
 
     ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
 
-- `TimeParser#sortInterviewsByTimeAscending(UniqueInterviewList interviews)`  —  Takes in a list of interviews, and sorts them in ascending chronological order
 - `TimeParser#listTodayInterviews(String day, UniqueInterviewList interviews)`  —  Takes in a given day, and if valid, lists out all the interviews that fall within that day
 
 #### How is the command executed
