@@ -1,6 +1,5 @@
 package seedu.address.model.booking;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.model.booking.exceptions.RemarkNotFoundException;
