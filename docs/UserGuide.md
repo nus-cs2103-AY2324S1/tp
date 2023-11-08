@@ -273,12 +273,12 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd employee in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
-Succeed:
-* You’ll see a reply "<Employee name> successfully deleted."
+| Outcome                          | Output                                                    |
+|----------------------------------|-----------------------------------------------------------|
+| **Success**                      | Deleted Employee: \<Employee name>; \<Additional Details> |
+| **Failure, incomplete command**  | Invalid command format!                                   | 
+| **Failure, invalid index**       | The employee index provided is invalid.                   | 
 
-Fail:
-* If the employee to be deleted does not exist, a warning will be displayed.
-“The employee you’re trying to delete does not exist.”
 
 Constraints:
 * [Manager-subordinate relationship](#deleting-an-existing-employee-with-manager-subordinate-relationships)
