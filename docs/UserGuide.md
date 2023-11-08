@@ -150,16 +150,16 @@ Examples:
 
 Acceptable values for each parameter:
 
-| Parameters | Accepted input                                               |
-| --- |--------------------------------------------------------------|
-| `NAME` | Alphabets                                                    |
-| `PHONE_NUMBER` | 8 digits                                                     |
-| `EMAIL` | Email with the pattern x@x.com where ‘x’ are alphanumerics   |
-| `ADDRESS` | Alphanumerics and ascii characters i.e. #, -                 |
-| `SALARY` | Numerals                                                     |
-| `LEAVE` | Numerals                                                     |
-| `ROLE` | `manager` or `subordinate` (Case-insensitive)                |
-| `DEPARTMENT` | Alphabets and ascii characters i.e. &, -                     |
+| Parameters     | Accepted input                                             |
+|----------------|------------------------------------------------------------|
+| `NAME`         | Alphabets                                                  |
+| `PHONE_NUMBER` | At least 3 digits                                          |
+| `EMAIL`        | Email with the pattern x@x.com where ‘x’ are alphanumerics |
+| `ADDRESS`      | Alphanumerics and ascii characters i.e. #, -               |
+| `SALARY`       | Numerals                                                   |
+| `LEAVE`        | Numerals                                                   |
+| `ROLE`         | `manager` or `subordinate` (Case-insensitive)              |
+| `DEPARTMENT`   | Optional. Alphabets and ascii characters i.e. &, -         |
 
 Expected outputs:
 
