@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Patient;
 
 /**
@@ -42,8 +41,6 @@ public class PatientCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane appointments;
-    @FXML
     private Label remark;
     @FXML
     private Label gender;
@@ -73,15 +70,6 @@ public class PatientCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getAppointments().stream()
-                .sorted(Comparator.comparing(Appointment::getAppointmentTime))
-                .forEach(appointment -> {
-                    Label appointmentLabel = new Label("Appointment with Doctor: " + appointment.getDoctor() + " at "
-                            + appointment.getAppointmentTime().toString());
-                    appointmentLabel.setWrapText(true); // Enable text wrapping
-                    appointmentLabel.setPrefWidth(250); // Set the maximum width for text wrapping (adjust as needed)
-                    appointments.getChildren().add(appointmentLabel);
-                });
         condition.setText("Condition: " + person.getCondition().value);
         bloodType.setText("Blood Type: " + person.getBloodType().value);
         emergencyContact.setText("Emergency Contact: " + person.getEmergencyContact().value);

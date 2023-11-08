@@ -40,9 +40,8 @@ public class AddDoctorCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_GENDER + "M "
-            + PREFIX_NRIC + "S1234567Z"
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_NRIC + "S1234567Z "
+            + PREFIX_TAG + "SURGEON";
 
     public static final String MESSAGE_SUCCESS = "New doctor added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

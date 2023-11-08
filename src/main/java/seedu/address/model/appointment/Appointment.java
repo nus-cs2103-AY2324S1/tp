@@ -15,7 +15,6 @@ public class Appointment {
     private Ic doctorIc;
     private Ic patientIc;
     private AppointmentTime appointmentTime;
-    private String status = "Scheduled";
 
     /**
      * Constructs a new appointment with the specified doctor, patient, and appointment time.
@@ -49,7 +48,6 @@ public class Appointment {
         this.doctorIc = doctorIc;
         this.patientIc = patientIc;
         this.appointmentTime = appointmentTime;
-        this.status = status;
     }
 
     public AppointmentTime getAppointmentTime() {
@@ -64,12 +62,7 @@ public class Appointment {
         return patientIc;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
     public void setAppointmentTime(AppointmentTime appointmentTime) {
-        this.appointmentTime = appointmentTime;
     }
 
     public void changeDoctor(Ic newDoctorIc) {
@@ -78,10 +71,6 @@ public class Appointment {
 
     public void changePatient(Ic newPatientIc) {
         this.patientIc = newPatientIc;
-    }
-
-    public void changeStatus(String newStatus) {
-        this.status = newStatus;
     }
 
     @Override
@@ -98,13 +87,12 @@ public class Appointment {
         Appointment otherAppointment = (Appointment) other;
         return this.doctorIc.equals(otherAppointment.doctorIc)
                 && this.patientIc.equals(otherAppointment.patientIc)
-                && this.appointmentTime.equals(otherAppointment.appointmentTime)
-                && this.status.equals(otherAppointment.status);
+                && this.appointmentTime.equals(otherAppointment.appointmentTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(doctorIc, patientIc, appointmentTime, status);
+        return Objects.hash(doctorIc, patientIc, appointmentTime);
     }
 
     @Override
