@@ -190,8 +190,37 @@ Then, when the user inputs an instrument in the command, the `Instrument::isVali
   * Cons: The user can store invalid instruments and genres (due to typos) for a musician. This way, the user will encounter difficulties when finding musicians by instruments or genres.
 
 
-### Filtering Musicians by Name and Tags Feature
-To be Added.
+### Find Musician Feature
+
+The find musician feature allows the user to search for musicians by their name, general tags, instruments, and genres. The following activity diagram illustrates the logic flow of the feature.
+
+![FindMusicianActivityDiagram.png](images%2FFindMusicianActivityDiagram.png)
+
+As shown by the diagram, the find feature finds musicians who satisfy the matching criteria (matching at least one keyword) for _all_ specified categories. For example, if the user inputs `find n/John i/piano i/guitar g/jazz`, the find feature will return all musicians whose name contains `John` **and** plays the instrument `guitar` **or** `piano` **and** specialises in the genre `jazz`.
+
+#### Implementation
+
+The following sequence diagram explains in detail how the find feature works with an example scenario.
+
+![FindMusicianSequenceDiagram.png](images%2FFindMusicianSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Meanings of the abbreviations used in the diagram:**
+
+* `NCKP`: `NameContainsKeywordsPredicate`
+* `IMP`: `InstrumentMatchesPredicate`
+* `GMP`: `GenreMatchesPredicate`
+
+Abbreviations are used to reduce the clutter in the diagram.
+
+</div>
+
+Step 1. A `FindCommandParser` parses the command and creates a predicate for each category (`NCKP`, `IMP`, `GMP`) based on the keywords specified by the user. Since the user specifies nothing for the `tag` category, the `TagMatchesKeywordPredicate` is not created.
+
+Step 2. Then, the `FindCommndParser` creates a `FindCommand` object with the set of predicates created in the previous step.
+
+Step 3. When the `FindCommand` object is executed, it combines all the predicates into a single `combinedPrediacte`. This predicate is then used to filter the musician list using the `Model::updateFilteredMusicianList(Predicate)` method.
 
 ### Add Band Feature 
 The user can add a new Band entity to the storage through the `addb` Command.
