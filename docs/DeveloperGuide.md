@@ -346,7 +346,7 @@ The user executes `add-s 1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00` command.
 The `AddScheduleCommand#exceute(Model)` will perform the following checks in this order to ensure that the `Schedule` can be added to the `Model`:
 1. The `Index` is valid.
 2. A valid schedule can be created with the given `Index`, `StartTime` and `EndTime`.
-    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered valid if its start time is before its end time. This is enforced by the constructor of the `Schedule` class, it throws an `IllegalArgumentException` if it is not valid.
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered valid if its start time is before its end time and both start time and end time falls on the same day. This is enforced by the constructor of the `Schedule` class, it throws an `IllegalArgumentException` if it is not valid.
 
     </div>
 3. Executing this command would not result in a duplicate schedule in the `Model`.
@@ -395,7 +395,7 @@ The following sequence diagram shows how the operation works:
 
 * **Alternative 2:** Perform the check in `AddScheduleCommand`.
     * Pros: Allows for flexibility in the constraints.
-    * Cons: Have to repeatedly write logic perform this check everywhere a new `Schedule` is being created.
+    * Cons: Have to repeatedly write logic to perform these checks every time a new `Schedule` needs to be created in another class.
 
 ### Edit schedule feature
 
@@ -547,6 +547,27 @@ the lifeline reaches the end of diagram.
   - Pros: The filepath does not need to pass through `ThemeCommand` and `CommandResult`. It is allocated and access 
     from `MainWindow` directly. Thus, `CommandResult` does not need another constructor and getter method.
   - Cons: `MainWindow` has to parse arguments.
+
+### Sorting of schedules
+
+The list of schedules is sorted to be more organised and easier to navigate for users.
+
+#### Implementation Details
+
+The schedules are sorted by implementing the `Comparable` interface and its required `compareTo()` method.
+
+#### Design rationale
+
+`Schedule`s are sorted by `StartTime` as start time is what tuition centre coordinators are most concerned with.
+
+The schedules are divided into 2 parts: future and past, this organizes the schedules in a way that simplifies 
+navigation for the users. This allows them to quickly differentiate between upcoming and past schedules.
+
+The upcoming schedules are sorted in ascending order so that the most immediate schedules, which are the ones
+that are most relevant to the user at that point in time, is at the very top. 
+
+Past schedules are sorted in descending order, this keeps the more recent schedules readily accessible, while the older, 
+less relevant schedules are at the bottom of the list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -978,11 +999,29 @@ scheduleToEdit's start and end times are earlier than the current datetime.
 
 If this validation fails, a `CommandException` with a clear and descriptive error message should be thrown.
 
-### Schedule `datetime` input
+### Streamline `datetime` input
+In the current implementation, the users have to enter `yyyy-MM-ddTHH:mm` each time for both `StartTime` and `EndTime`.
+However, since a `Schedule` is not allowed to start and end on different days, the user is unnecessarily repeating the
+input `yyyy-MM-dd`. This resulted in a command format that is longer than necessary. We plan to streamline the command 
+to make it shorter and more user-friendly.
 
 **Proposed implementation**
 
-More details...
+The current `st/` and `et/` prefixes will be updated to take in `HH:mm` only. Additionally, this would require a new 
+prefix `d/` which will parse user input in the `yyyy-MM-dd` format into a `Date`.
+
+For example, any command that uses the `st/` or `et/` prefix will now use `... d/yyyy-MM-dd st/HH:mm et/HH:m` instead.
+
+### Enhance flexibility of `datetime` inputs
+In the current implementation, users can only enter datetime in this `yyyy-MM-ddTHH:mm` format. This format can be
+restrictive as it requires leading zeroes and `-` as a separator. To enhance user experience, the input for datetime 
+related parameters should be able to handle most frequently used formats like `2023/1/1` and `10:00pm`.
+
+**Proposed implementation**
+
+The parser handling date and time should be updated to handle different date and time formats. This can be achieved by
+having a list of acceptable datetime formats and checking the users input against each one of them. If the user input
+does not match any of the acceptable formats, we should throw a `ParseException`.
 
 ### Switching back to list view from calendar view
 In the current system, when executing any commands, including actions like marking, unmarking, or deleting schedules 
@@ -1011,10 +1050,15 @@ do nothing otherwise. The only exception is if the `commandResult` FeedbackToUse
 `ShowCalendarCommand.MESSAGE_SUCCESS` in which case it will call `showCalendar`.
 
 ### Schedules at the same time being arranged alphabetically
+In the [current implementation](#sorting-of-schedules), the schedules are being sorted by `StartTime` only.
+
+This resulted in a situation where if you had many schedules starting at the same time, it would be very difficult to 
+find and locate a particular schedule.
 
 **Proposed implementation**
 
-More details...
+The schedules would be sorted first by `StartTime`, then by `EndTime`, and finally alphabetically by the tutor's name.
+This would make the schedule list more organised, making it easier to use and navigate for the user.
 
 ### UI for calendar to use colours to reflect status of schedules
 In the calendar view, incorporating schedule colors to represent their respective statuses can enhance user 
