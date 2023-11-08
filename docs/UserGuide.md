@@ -91,7 +91,8 @@ Creates a tag and categorises it to the specified category.
 You can customize these categories as per your needs and tags will be 
 color coded by the different categories. 
 
-The only restriction is that you can only define up to 5 different categories (excluding the *assessment* category for score-related tags).
+The only restriction is that you can only define up to 6 different categories (including the *assessment* category for score-related tags. Hence if you have
+defined a tag category *assessment* for score-related tags, you will only be able to define 5 other categories).
 
 Format: `create t/CATEGORY TAGNAME…​`
 
@@ -104,8 +105,11 @@ Format: `create t/CATEGORY TAGNAME…​`
 * Use this command for frequently used tags for better efficiency in tagging candidates!
 </box>
 
-**Note:** The tags created using this command can be used to tag candidates using the `add` or `edit` command. Tagging
+**Note:**
+* The tags created using this command can be used to tag candidates using the `add` or `edit` command. Tagging
 candidates without previously categorising the tags would still work but the tags would be *uncategorised*.
+* `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further.
+This feature will be supported in future iterations of JABPro through the `edit tags` command.
 
 Examples:
 * `create t/role developer`
@@ -244,15 +248,15 @@ Format:
 `list so/ATTRIBUTE`
 
 * `so/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
-* As of v1.2, the attributes that are supported are `name` and `email`.
+* The attributes that are supported are `name` and `email`.
 * Attribute is case-insensitive: `list so/NAME` and `list so/name` return the same result.
 * The result will be sorted in **ascending** order.
-* Note: as of v1.2, the sorting algorithm is case-sensitive, which means it will treat uppercase and 
+* The sorting algorithm is case-sensitive, which means it will treat uppercase and 
 lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
 Examples:
 * `list` Shows a list of all persons.
-* `list s/name` Shows a list of all persons, sorted by name in ascending order.
+* `list so/name` Shows a list of all persons, sorted by name in ascending order.
 
 ### Listing all tags: `listT`
 
@@ -265,6 +269,8 @@ Format: `listT`
 
 **Example:**
 * `listT` Shows a list of all tags.
+
+![ListT](images/listT.png)
 
 ### Editing a person : `edit`
 
@@ -343,7 +349,6 @@ Examples:
 An example of the `filter` command in action:
 ![Filter](images/filter.png)
 
-
 A more complete example guide on how to use filter effectively from when you first start JABPro:  
 1. `create t/assessment interview` creates a tag `interview` under the `assessment` category.
 ** Take note, only edit if the index exists, adapt this guide accordingly **
@@ -380,7 +385,7 @@ Format: `search n/KEYWORD [MORE KEYWORDS]`
 
 Examples:
 * `search n/John` returns `john` and `John Doe`
-* `search n/david` returns `Alex Yeoh`, `David Li`<br>
+* `search n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
 #### Search job applicants by status
 
@@ -412,10 +417,12 @@ Example:
   e.g. `search n/Alex n/Adam st/rejected` is not allowed.
 
 Example:
-* `search n/Alex Bernice st/interviewed rejected t/analyst` will output applicants whose:
+* `search n/Alex Bernice st/interviewed rejected t/intern` will output applicants whose:
     * names contain either Alex `or` Bernice
     * `and` status is either interviewed `or` rejected.
-    * `and` has a tag `analyst`
+    * `and` has a tag `intern`
+
+![Search](images/search-3.png)
 
 ### Deleting a person : `delete`
 
@@ -516,7 +523,7 @@ Understanding how to use these summary statistics meaningfully:
   * `percentile` as where this candidate stands among all other candidates (treat it like a ranking system, the higher the percentile, the better the candidate is performing) 
   * `percentile` 100.0 would represent the best performing candidate for that tag and `percentile` 0.0 would represent the worst performing candidate for that tag
 
-** Advanced users **
+**Advanced users**
 * Understand that `percentile` has limited functionality in certain context. Suppose you have 6 candidates with the scores `{80, 90, 100, 100, 100, 100}`
   * Median would be 90 in this case and percentile would be 50.0 for the candidate with a score of 90, however the upper half of the candidates are all 100.0 percentile
   * This comes as a consequence of the implementation where given you have the same score, you should have the same percentile / ranking
@@ -545,6 +552,31 @@ If your changes to the data file makes its format invalid, JABPro will discard a
 </box>
 
 _Details coming soon ..._
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Planned Enhancements
+
+### Deleting tags : `delete tag`
+
+While certainly useful, JABPro currently does not have feature to delete existing tags. However, this feature will be implemented
+in future iterations.
+
+<box type="tip" seamless>
+
+**Tip:**
+* If you are an advanced user, you are welcome to delete your tags manually by editing the json file! 
+</box>
+
+### Editing tags : `edit tag`
+
+JABPro currently does not support editing tags i.e. editing tag name or category. This feature will be implemented in future iterations.
+
+**Tip:**
+* If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
+  </box>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
