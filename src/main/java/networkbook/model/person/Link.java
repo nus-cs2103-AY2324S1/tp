@@ -28,11 +28,16 @@ public class Link implements Identifiable<Link> {
     //          /valid-characters-for-directory-part-of-a-url-for-short-links
     private static final String PATH_REGEX = "(/[a-zA-Z0-9_\\-.~!$&'()*+,;=:@]*)*"; // Valid URI path
 
-    // regex reused from https://stackoverflow.com/questions/23959352/validate-url-query-string-with-regex
-    private static final String QUERY_REGEX = "\\?([\\w-]+(=[\\w-]*)?(&[\\w-]+(=[\\w-]*)?)*)?";
+    // regex adapted from https://stackoverflow.com/questions/23959352/validate-url-query-string-with-regex
+    private static final String QUERY_ALLOWED_CHARS = "[\\w-_.~+%]";
+    private static final String QUERY_REGEX = "\\?(" + QUERY_ALLOWED_CHARS
+            + "+(=" + QUERY_ALLOWED_CHARS + "*)?(&" + QUERY_ALLOWED_CHARS
+            + "+(=" + QUERY_ALLOWED_CHARS + "*)?)*)?";
 
-    public static final String VALIDATION_REGEX = DOMAIN_NAME_REGEX
-            + "(" + PATH_REGEX + ")?" + "(" + QUERY_REGEX + ")?$";
+    private static final String HASH_REGEX = "#.*";
+
+    private static final String VALIDATION_REGEX = DOMAIN_NAME_REGEX
+            + "(" + PATH_REGEX + ")?" + "(" + QUERY_REGEX + ")?" + "(" + HASH_REGEX + ")?$";
 
     private final String value;
 

@@ -22,10 +22,10 @@ public class LinkTest {
 
     @Test
     public void isValidLink() {
-        // null email
+        // null link
         assertThrows(NullPointerException.class, () -> Link.isValidLink(null));
 
-        // blank email
+        // blank link
         assertFalse(Link.isValidLink("")); // empty string
         assertFalse(Link.isValidLink(" ")); // spaces only
 
@@ -37,6 +37,10 @@ public class LinkTest {
         // invalid parts
         assertFalse(Link.isValidLink("peterjack@-.com")); // invalid domain name
         assertFalse(Link.isValidLink("exam_ple.com")); // underscore in domain name
+
+        // hash
+        assertFalse(Link.isValidLink("google#test.com")); // incomplete domain label, hash appears too early
+        assertFalse(Link.isValidLink("google.com/search?q=test#\n")); // should not have any new line char
 
         // valid link
         assertTrue(Link.isValidLink("pythonanywhere.com/user/test"));
@@ -52,6 +56,10 @@ public class LinkTest {
         assertTrue(Link.isValidLink("https://www.google.com/?q=haha"));
         assertTrue(Link.isValidLink("https://www.google.com?q=haha"));
         assertTrue(Link.isValidLink("https://www.google.com/ncr?q=haha"));
+        assertTrue(Link.isValidLink("google.com/test#test")); // accommodate for hash
+        assertTrue(Link.isValidLink("google.com/test?#test")); // fine to have empty query params
+        assertTrue(Link.isValidLink("google.com#test")); // empty query params and pathname
+        assertTrue(Link.isValidLink("google.com#~!@#$%^&*()?/<>,.")); // any char except \n after # is fine
     }
 
     @Test
