@@ -490,8 +490,8 @@ When typing in the command box, you can use the arrow keys to fill the command b
 
 When not typing in the command box, you can use the following shortcuts to quickly execute an `undo` or `redo` command.
 
-* `ctrl-Z`: undo last change to NetworkBook
-* `ctrl-Y`: redo last change undone
+* `ctrl-Z`: undo last change to NetworkBook (equivalent to [`undo` command](#undo-last-change-to-networkbook-undo))
+* `ctrl-Y`: redo last change undone (equivalent to [`redo` command](#redo-last-undone-change-redo))
 
 Note that this only works when the command box is not active. If you are typing in the command box, these shortcuts will be used to undo or redo changes made to the command text.
 
@@ -499,9 +499,8 @@ Note that this only works when the command box is not active. If you are typing 
 
 #### Other useful shortcuts: `ctrl-S/W`
 
-You can use `ctrl-S` to save the contact details in the data file. Although data is automatically saved in most scenarios, you can use this command to ensure successful data saving, when NetworkBook's permission to the data file is possibly compromised.
-
-You can also use `ctrl-W` to quickly exit the program.
+* `ctrl-S`: manually save to data file (equivalent to [`save` command](#))
+* `ctrl-W`: exit NetworkBook (equivalent to [`exit` command](#exit-networkbook-exit))
 
 [Table of Contents](#table-of-contents)
 
