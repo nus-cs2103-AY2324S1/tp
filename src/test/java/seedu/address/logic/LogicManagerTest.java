@@ -95,6 +95,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getFullTaskList_modifyList_throwsIndexOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> logic.getFullTaskList().remove(0));
+    }
+
+    @Test
     public void getDisplayedFieldsList_modifyList_throwsUnsupportedOperationException() {
         String[] fieldsNames = logic.getDisplayedFieldsList();
         assertEquals(0, fieldsNames.length);

@@ -19,6 +19,8 @@ public class ClearCommandTest {
         assertNull(expectedModel.getCurrentlyDisplayedPerson());
         assertNull(model.getCurrentlyDisplayedLesson());
         assertNull(expectedModel.getCurrentlyDisplayedLesson());
+        assertNull(model.getCurrentlyDisplayedTask());
+        assertNull(expectedModel.getCurrentlyDisplayedTask());
     }
 
 }

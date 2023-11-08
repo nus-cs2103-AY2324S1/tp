@@ -20,6 +20,11 @@ public class ListCommandParserTest {
     }
 
     @Test
+    public void parse_validArgs_fullTaskList() {
+        assertParseSuccess(parser, "tasks", new ListCommand(State.TASK));
+    }
+
+    @Test
     public void parse_validArgs_noArgs() {
         assertParseSuccess(parser, "", new ListCommand(State.SCHEDULE));
     }

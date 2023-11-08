@@ -1,7 +1,5 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.lessons.Lesson;
@@ -20,27 +18,6 @@ public class FullTaskList implements ReadOnlyFullTaskList {
     public FullTaskList() {
     }
 
-    /**
-     * Creates a FullTaskList using the taskList in the {@code toBeCopied}
-     */
-    public FullTaskList(ReadOnlyFullTaskList toBeCopied) {
-        this();
-        resetData(toBeCopied);
-    }
-
-
-    /**
-     * Resets the existing data of this {@code FullTaskList} with {@code newData}.
-     */
-    public void resetData(ReadOnlyFullTaskList newData) {
-        requireNonNull(newData);
-
-        copyFullTaskList(newData.getFullTaskList());
-    }
-
-    public void copyFullTaskList(ObservableList<Task> fullTaskList) {
-        this.fullTaskList = fullTaskList;
-    }
 
     public void setFullTaskList(ReadOnlySchedule scheduleList) {
         this.lessonList = scheduleList.getLessonList();

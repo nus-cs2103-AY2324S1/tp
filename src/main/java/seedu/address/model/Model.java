@@ -197,9 +197,6 @@ public interface Model {
         return null;
     }
 
-    /** Returns the full task list object */
-    ReadOnlyFullTaskList getFullTaskListObject();
-
     /** Returns a view of the full task list */
     ObservableList<Task> getFullTaskList();
 

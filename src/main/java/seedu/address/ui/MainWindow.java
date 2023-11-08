@@ -339,6 +339,10 @@ public class MainWindow extends UiPart<Stage> {
      * @param task The task to show the details of.
      */
     public void handleShowTask(Task task) {
+        if (task == null) {
+            taskDetailListPanel.setVisible(false);
+            return;
+        }
         taskDetailListPanel.setVisible(true);
         taskDetailPanel.setTaskDetails(task);
     }

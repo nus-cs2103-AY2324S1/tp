@@ -1,0 +1,35 @@
+{
+  "lessons" : [ {
+    "name" : "test",
+    "start" : "10:00 AM",
+    "end" : "9:00 AM",
+    "day" : "26-02-2023",
+    "subject" : "To be added",
+    "taskList" : [ ],
+    "remark" : "To be added"
+  }, {
+    "name" : "lesson1",
+    "start" : "12:30 PM",
+    "end" : "2:30 PM",
+    "day" : "20-11-2023",
+    "subject" : "MATHEMATICS",
+    "taskList" : [ "-Revise CS2103T Materials", "-Watch CS2103T Lecture", "-Prepare CS2103T Slides", "-test" ],
+    "remark" : "To be added"
+  }, {
+    "name" : "lesson2",
+    "start" : "1:30 PM",
+    "end" : "3:30 PM",
+    "day" : "21-11-2023",
+    "subject" : "PHYSICS",
+    "taskList" : [ "-Revise CS2103T Materials", "-Watch CS2103T Lecture", "-Prepare CS2103T Slides", "-test" ],
+    "remark" : "To be added"
+  }, {
+    "name" : "lesson3",
+    "start" : "2:30 PM",
+    "end" : "4:30 PM",
+    "day" : "22-11-2023",
+    "subject" : "BIOLOGY",
+    "taskList" : [ "-Revise CS2103T Materials", "-Watch CS2103T Lecture", "-Prepare CS2103T Slides" ],
+    "remark" : "To be added"
+  }]
+}

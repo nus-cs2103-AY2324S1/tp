@@ -21,6 +21,8 @@ public class ClearCommand extends Command {
         model.setScheduleList(new ScheduleList());
         model.showPerson(null);
         model.showLesson(null);
+        model.showTask(null);
+        model.updateFullTaskList();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
