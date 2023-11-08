@@ -273,13 +273,7 @@ Expected output when the command succeeds:
 ![EventAdd](images/Eventadd.png)
 
 
-Expected output when the command fails:
-* `Invalid command format!
-  add_event: Adds an event to the address book.
-  Parameters: m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/NAME]... [g/GROUP]...
-  Example: add_event m/FumbleLog Meeting d/2020-10-30 s/1000 e/1200 n/Ken n/Yuheng g/Team2 `
-* * `You cannot enter a time that is before the current time!` - When the given `DATE`, `START_TIME` and `END_TIME` is before the current time.
-* `You cannot enter an end time that is before the start time!` - When the given `START_TIME` is after the given `END_TIME`.
+If any of the inputs provided are invalid/do not follow the necessary format, an error message will be displayed.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
