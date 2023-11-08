@@ -499,7 +499,7 @@ Note that this only works when the command box is not active. If you are typing 
 
 #### Other useful shortcuts: `ctrl-S/W`
 
-* `ctrl-S`: manually save to data file (equivalent to [`save` command](#))
+* `ctrl-S`: manually save to data file (equivalent to [`save` command](#manually-save-to-data-file-save))
 * `ctrl-W`: exit NetworkBook (equivalent to [`exit` command](#exit-networkbook-exit))
 
 [Table of Contents](#table-of-contents)
@@ -540,6 +540,22 @@ Example usage:
     ![screenshot of help window](images/help.png)
 
 [Table of Contents](#table-of-contents)
+
+#### Manually save to data file: `save`
+
+You can use the `save` command to manually save your contacts to the data file.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+NetworkBook automatically saves your data in most cases. You can use this command to ensure successful data saving when NetworkBook's permission to the data file is possibly compromised.
+</div>
+
+Format: `save`
+
+Parameters: N/A
+
+Example usage:
+
+* `save`
 
 #### Exit NetworkBook: `exit`
 
