@@ -336,7 +336,6 @@ This feature is implemented though the `TimeParser` class. This class contains s
     ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
 
     
-- `TimeParser#listInterviewClashes(String potentialInterview, UniqueInterviewList interviews)`  — Takes in an interview time in the String format, and checks the given list of interviews that the user has, and lists all clashing interviews.
 - `TimeParser#findFreeTime(String day)`  —  Takes in a given day, and if valid, lists out all the free time in that day (i.e. not filled with any interview)
 - `TimeParser#findFreeTimeWithinRange(String day, String from, String to)`  —  Takes in a given day, and if valid, lists out all the free time in that day (i.e. not filled with any interview), within the specified window, only if all time Strings are properly formatted
 - `TimeParser#sortInterviewsByTimeAscending(UniqueInterviewList interviews)`  —  Takes in a list of interviews, and sorts them in ascending chronological order
