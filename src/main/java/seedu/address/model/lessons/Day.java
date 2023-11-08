@@ -1,6 +1,8 @@
 package seedu.address.model.lessons;
 
-import static seedu.address.logic.parser.RegularExpressionUtil.*;
+import static seedu.address.logic.parser.RegularExpressionUtil.FOUR_DIGITS;
+import static seedu.address.logic.parser.RegularExpressionUtil.ONE_TO_TWO_DIGITS;
+import static seedu.address.logic.parser.RegularExpressionUtil.TWO_DIGITS;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

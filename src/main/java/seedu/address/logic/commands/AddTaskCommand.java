@@ -51,7 +51,7 @@ public class AddTaskCommand extends Command {
         try {
             checkClash(model, lessonIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new CommandException(String.format(NO_INDEX, this.index.getOneBased()) );
+            throw new CommandException(String.format(NO_INDEX, this.index.getOneBased()));
         }
         model.addTask(task, lessonIndex);
         model.resetAllShowFields();

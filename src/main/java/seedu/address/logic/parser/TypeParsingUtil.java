@@ -1,11 +1,6 @@
 package seedu.address.logic.parser;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,12 +9,6 @@ import seedu.address.logic.parser.exceptions.InvalidInputException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.exceptions.RepeatedFlagException;
 import seedu.address.model.ListEntryField;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.Of;
 
 // I am considering probably make sense to write specific parser inside each class.

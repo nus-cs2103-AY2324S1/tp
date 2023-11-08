@@ -66,7 +66,7 @@ public class Time extends ListEntryField {
      * @throws ParseException if the input is not a valid time
      */
     private static LocalTime parseTime(String input) throws ParseException {
-        String hourMinPattern = format("%s:%s",ONE_TO_TWO_DIGITS, TWO_DIGITS);
+        String hourMinPattern = format("%s:%s", ONE_TO_TWO_DIGITS, TWO_DIGITS);
         Pattern p = Pattern.compile(hourMinPattern);
         Matcher m = p.matcher(input);
         if (m.matches()) {
