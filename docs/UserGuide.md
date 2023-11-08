@@ -98,7 +98,7 @@ The **GUI** is split up into 4 main sections.
 
 ## Student Number
 
-* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the capital 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
 
 ## Command navigation
@@ -623,7 +623,7 @@ as the current configuration of Class Manager 2023. You can reconfigure Class Ma
 # Glossary
 
 * **cd**: Change directory command in terminal/command line. cd takes the name of the folder you want to navigate to as an argument. The full command is cd `your-directory`.
-* **Student Number**: Unique matriculation number of a NUS student. In Class Manager, it must begin with the capital 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* **Student Number**: Unique matriculation number of a NUS student. In Class Manager, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.
