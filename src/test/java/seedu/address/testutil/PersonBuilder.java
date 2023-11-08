@@ -6,9 +6,9 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.enums.InputSource;
@@ -21,14 +21,14 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_NRIC = "T4651323H";
+    public static final String DEFAULT_ID = "T4651323H";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_APPOINTMENT = "10-Jan-2023 10:00 12:00";
 
     private Name name;
-    private Nric nric;
+    private Id id;
     private Phone phone;
     private Email email;
     private Address address;
@@ -46,7 +46,7 @@ public class PersonBuilder {
                     "Encountered an error with Appointment for PersonBuilder.", e);
         }
         name = new Name(DEFAULT_NAME);
-        nric = new Nric(DEFAULT_NRIC);
+        id = new Id(DEFAULT_ID);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -58,7 +58,7 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        nric = personToCopy.getNric();
+        id = personToCopy.getId();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
@@ -75,10 +75,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Nric} of the {@code Person} that we are building.
+     * Sets the {@code Id} of the {@code Person} that we are building.
      */
-    public PersonBuilder withNric(String nric) {
-        this.nric = new Nric(nric);
+    public PersonBuilder withId(String id) {
+        this.id = new Id(id);
         return this;
     }
 
@@ -131,8 +131,9 @@ public class PersonBuilder {
      * @return the person.
      */
     public Person build() {
-        return new Person(name, nric, phone, email, address,
+        return new Person(name, id, phone, email, address,
                 appointment, medicalHistories);
+
     }
 
     /**

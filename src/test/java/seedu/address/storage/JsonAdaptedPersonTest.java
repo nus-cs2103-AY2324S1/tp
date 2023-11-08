@@ -14,13 +14,13 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_NRIC = " ";
+    private static final String INVALID_ID = " ";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
@@ -29,7 +29,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_MEDICALHISTORIES = "# ";
 
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_NRIC = "T0123456E";
+    private static final String VALID_ID = "T0123456E";
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
@@ -48,8 +48,9 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_nullAppointment_returnsPerson() throws IllegalValueException {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_NRIC, VALID_PHONE, VALID_EMAIL,
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_ID, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, null, VALID_MEDICALHISTORIES);
+
         person.toModelType();
     }
 
@@ -114,26 +115,28 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidNric_throwsIllegalValueException() {
+    public void toModelType_invalidId_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, INVALID_NRIC, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                new JsonAdaptedPerson(VALID_NAME, INVALID_ID, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_APPOINTMENT, VALID_MEDICALHISTORIES);
-        String expectedMessage = Nric.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Id.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
-    public void toModelType_nullNric_throwsIllegalValueException() {
+    public void toModelType_nullId_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, null, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_APPOINTMENT, VALID_MEDICALHISTORIES);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName());
+
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
     @Test
     public void toModelType_invalidAppointmentFormat_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_NRIC, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                new JsonAdaptedPerson(VALID_NAME, VALID_ID, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         INVALID_APPOINTMENT_FORMAT, VALID_MEDICALHISTORIES);
+
         String expectedMessage = Appointment.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -141,8 +144,9 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidAppointmentValues_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_NRIC, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                new JsonAdaptedPerson(VALID_NAME, VALID_ID, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         INVALID_APPOINTMENT_VALUES, VALID_MEDICALHISTORIES);
+
         String expectedMessage = Appointment.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

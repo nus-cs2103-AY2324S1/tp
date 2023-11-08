@@ -18,7 +18,7 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Nric nric;
+    private final Id id;
     private final Phone phone;
     private final Email email;
 
@@ -31,11 +31,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Nric nric, Phone phone, Email email, Address address, Appointment appointment,
+
+    public Person(Name name, Id id, Phone phone, Email email, Address address, Appointment appointment,
                   Set<MedicalHistory> medicalHistories) {
-        requireAllNonNull(name, nric, phone, email, address, medicalHistories);
+        requireAllNonNull(name, id, phone, email, address, medicalHistories);
         this.name = name;
-        this.nric = nric;
+        this.id = id;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -48,8 +49,8 @@ public class Person {
         return name;
     }
 
-    public Nric getNric() {
-        return nric;
+    public Id getId() {
+        return id;
     }
 
     public Phone getPhone() {
@@ -87,7 +88,7 @@ public class Person {
 
         return otherPerson != null
                 && (otherPerson.getName().equals(getName())
-                || otherPerson.getNric().equals(getNric()));
+                || otherPerson.getId().equals(getId()));
     }
 
     /**
@@ -108,7 +109,7 @@ public class Person {
         Person otherPerson = (Person) other;
 
         return name.equals(otherPerson.name)
-                && nric.equals(otherPerson.nric)
+                && id.equals(otherPerson.id)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -119,14 +120,15 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, nric, phone, email, address, appointment, medicalHistories);
+        return Objects.hash(name, id, phone, email, address, appointment, medicalHistories);
+
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("nric", nric)
+                .add("id", id)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
