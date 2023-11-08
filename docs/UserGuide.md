@@ -4,8 +4,7 @@
   pageNav: 3
 ---
 <style>
-img
-{
+img {
     display:block;
     float:none;
     margin-left:auto;
@@ -24,6 +23,7 @@ img
 ## Table of Contents
 
 * [Introduction](#introduction)
+* [Minimum System Requirements](#minimum-system-requirements)
 * [Quick Start](#quick-start)
 * [Using this Guide](#using-this-guide)
   * [Understanding the Notations](#understanding-the-notations)
@@ -54,6 +54,11 @@ img
     * [Exiting the program: `exit`](#exit)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
+* [Command Summary](#command-summary)
+  * [Commands for Applicant Management Features](#commands-for-applicant-management-features)
+  * [Commands for Interview Management Features](#commands-for-interview-management-features)
+  * [Commands for Applicant Processing Features](#commands-for-applicant-processing-features)
+  * [Commands for Miscellaneous Features](#commands-for-miscellaneous-features)
 * [FAQ](#faq)
 * [Glossary](#glossary)
 
@@ -74,7 +79,7 @@ to the most advanced features the application has to offer.
 These features range from the simple task of adding an applicant to being able to calculate an applicant's score from their ratings in the interview stages. 
 Every single feature is explained in this guide. You can check out the [Table of Contents](#table-of-contents) to navigate to a feature you might be interested in using.
 
-To begin using this guide, ensure you meet the [minimum system requirements](#minimum-system-requirements). Once this is done, go to the [quick start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features Staff-Snap has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
+To begin using this guide, ensure you meet the [Minimum System Requirements](#minimum-system-requirements). Once this is done, go to the [Quick Start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features Staff-Snap has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
 
 <br>
 
@@ -83,17 +88,9 @@ To begin using this guide, ensure you meet the [minimum system requirements](#mi
 
 ## Minimum System Requirements
 1. A Computer running Windows/MacOS/Linux.
-2. Java 11 or higher
+2. [Java](#glossary) 11 or higher
    1. If you do not have Java 11, follow [this](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) installation guide.
 
-
-<br>
-
----
-<br>
-
-## Need help?
-If you are unable to follow any of the steps below or get help, please email our CEO at staffsnap@gmail.com or call our 24/7 technical helpline 69696969 for assistance. (For educational purposes, not real contact details.)
 
 <br>
 
@@ -245,8 +242,9 @@ Adds a new applicant to the list.
 
 Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
+<a name="duplicate-applicants"></a>
 <box type="warning" header="**Caution**">
-    Duplicate applicants are not allowed. Two applicants are considered duplicates if they have the same phone number or email.
+    Duplicate applicants are not allowed. Two applicants are considered duplicates if they have the same phone number or the same email.
 </box>
 
 <box type="tip" header="**Note**">
@@ -525,12 +523,14 @@ Example:
 Imports applicants from a [CSV](#glossary) file.
 
 Format: `import f/FILENAME`
-* The CSV file must be placed in the home folder of Staff-Snap.
+* The CSV file must be placed in the [home folder](#glossary) of Staff-Snap.
 * The CSV file must have the following headers: `name`, `phone`, `email`, `position` in that order, as shown below.<br>
   
 <img src="images/user-guide/csv_header.png" alt="mac_os_warning">
 
 * The fields of the columns must satisfy the [parameter constraints](#command-parameters-1) for `NAME`, `PHONE`, `EMAIL`, and `POSITION` respectively.
+* The CSV file must not contain [duplicate applicants](#duplicate-applicants).
+* The CSV file must not contain applicants that are already in Staff-Snap.
 * A sample CSV file can be found [here](demo.csv).
 
 Example:
@@ -556,6 +556,9 @@ Format: `help`
 
 <br>
 
+---
+<br>
+
 <a name="clear"></a>
 #### Clearing all applicant entries: `clear`
 
@@ -569,6 +572,9 @@ Format: `clear`
 
 <br>
 
+---
+<br>
+
 <a name="exit"></a>
 #### Exiting the program: `exit`
 
@@ -578,11 +584,17 @@ Format: `exit`
 
 <br>
 
+---
+<br>
+
 <a name="saving-the-data"></a>
 #### Saving the data
 
 Automatically saves the data to a local storage whenever there is a change to the applicant list. There is no need to save manually.
 
+<br>
+
+---
 <br>
 
 <a name="editing-the-data-file"></a>
@@ -599,6 +611,61 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 ---
 <br>
 
+<a name="command-summary"></a>
+## Command Summary
+
+<br>
+
+<a name="commands-for-applicant-management-features"></a>
+### Commands for Applicant Management Features
+
+| <div style="width:auto">Action</div> | Format                                                  |
+|--------------------------------------|---------------------------------------------------------|
+| Adding a new applicant               | `add n/NAME hp/PHONE e/EMAIL p/POSITION`                |
+| Editing an applicant                 | `edit INDEX [n/NAME] [hp/PHONE] [e/EMAIL] [p/POSITION]` |
+| Deleting an applicant                | `delete INDEX`                                          |
+| Listing all applicants               | `list`                                                  |
+| Editing an applicant status          | `status INDEX s/STATUS`                                 |
+
+<br>
+
+<a name="commands-for-interview-management-features"></a>
+### Commands for Interview Management Features
+
+| <div style="width:auto">Action</div>     | Format                                              |
+|------------------------------------------|-----------------------------------------------------|
+| Adding an interview to an applicant      | `addi INDEX t/TYPE [r/RATING]`                      |
+| Editing an interview of an applicant     | `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]` |
+| Deleting an interview from an applicant  | `deletei INDEX i/INTERVIEW_INDEX`                   |
+
+<br>
+
+<a name="commands-for-applicant-processing-features"></a>
+### Commands for Applicant Processing Features
+
+| <div style="width:auto">Action</div> | Format                                                                                 |
+|--------------------------------------|----------------------------------------------------------------------------------------|
+| Finding an applicant by name         | `find KEYWORD [MORE_KEYWORDS]`                                                         |
+| Sorting applicants by descriptors    | `sort d/DESCRIPTOR [dsc/]`                                                             |
+| Filtering applicants by fields       | `filter [n/NAME] [e/EMAIL] [p/POSITION] [hp/PHONE] [s/STATUS] [lts/SCORE] [gts/SCORE]` |
+| Importing from CSV                   | `import f/FILENAME`                                                                    |
+
+<br>
+
+<a name="commands-for-miscellaneous-features"></a>
+### Commands for Miscellaneous Features
+
+| <div style="width:auto">Action</div> | Format                  |
+|--------------------------------------|-------------------------|
+| Viewing help                         | `help`                  |
+| Clearing all applicant entries       | `clear`                 |
+| Exiting the program                  | `exit`                  |
+
+<br>
+
+---
+<br>
+
 <a name="faq"></a>
 ## FAQ
 
@@ -607,7 +674,7 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 - Method 1: Clear the current data using the [`clear`](#clearing-all-applicant-entries-clear) command and import your data using the [`import`](#importing-from-csv-import) command.
 - Method 2: Copy the data file `[JAR file location]/data/applicantBook.json` to the other computer.
 
-**Q**: Is my data secure? <br> 
+**Q**: Is my data secure? <br>
 **A**: Yes, your data is stored locally in your computer and is not accessible by anyone else.
 
 **Q**: Why is the first applicant from my CSV file not being imported? <br>
