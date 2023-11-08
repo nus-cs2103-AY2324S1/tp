@@ -10,7 +10,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SetDifficultyCommand;
 
 
-
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
  * outside of the PractiseCommand code. For example, inputs "1" and "1 abc" take the
@@ -24,7 +23,7 @@ public class SetDifficultyCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsSetDifficultyCommand() {
-        assertParseSuccess(parser, "1, d/ easy", new SetDifficultyCommand(Index.fromZeroBased(0), "easy"));
+        assertParseSuccess(parser, "1 d/ easy", new SetDifficultyCommand(Index.fromZeroBased(0), "easy"));
     }
 
     @Test
@@ -40,7 +39,8 @@ public class SetDifficultyCommandParserTest {
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
-        assertParseSuccess(parser, "-1 d/ easy", new SetDifficultyCommand(Index.fromZeroBased(0), "easy"));
+        assertParseFailure(parser, "-1 d/ easy", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SetDifficultyCommand.MESSAGE_USAGE));
     }
 
 

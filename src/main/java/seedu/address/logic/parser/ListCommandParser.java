@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,12 +22,14 @@ import seedu.address.model.tag.Tag;
  */
 public class ListCommandParser implements Parser<ListCommand> {
 
+
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
      * and returns an ListCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ListCommand parse(String args) throws ParseException {
+        assert args != null : "Command is empty";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_TAG);
 
         List<Predicate<Card>> predicates = new ArrayList<>(Collections.singleton(PREDICATE_SHOW_ALL_CARDS));
@@ -51,15 +52,6 @@ public class ListCommandParser implements Parser<ListCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values
-     * in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    /**
      * Parses {@code <String> prefix} into a {@code Predicate<Card>} if {@code prefix} is non-empty.
      */
     private static Predicate<Card> parseQuestionPrefix(String prefix) {
@@ -78,5 +70,4 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         return (card -> new HashSet<>(card.getTags()).containsAll(tagSet));
     }
-
 }

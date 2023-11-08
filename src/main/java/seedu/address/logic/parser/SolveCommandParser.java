@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SolveCommand;
@@ -18,10 +17,15 @@ public class SolveCommandParser implements Parser<SolveCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SolveCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DIFFICULTY);
-
         try {
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            Index index;
+
+            if (args.trim().isEmpty()) {
+                index = Index.fromZeroBased(0);
+            } else {
+                index = ParserUtil.parseIndex(args);
+            }
+
             return new SolveCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SolveCommand.MESSAGE_USAGE), pe);

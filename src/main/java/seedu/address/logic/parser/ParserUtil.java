@@ -101,6 +101,8 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code hint} is invalid.
      */
+    //@@author weeweh-reused
+    //Reused from parseIndex
     public static Hint parseHint(String hint) throws ParseException {
         requireNonNull(hint);
 

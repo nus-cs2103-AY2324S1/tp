@@ -135,7 +135,7 @@ _A flashcard with a question, answer, tag and hint field._
 
 #### To Note:
 1. No Empty Input after `q/`, `a/`, `t/` and `h/`.
-2. `t/` and `h/` is optional and not necessary. 
+2. `t/` and `h/` is optional and not necessary.
 3. Tagging is not supported in v1.2 and earlier.
 4. Hint is not supported before v1.3.
 
@@ -260,7 +260,7 @@ Examples:
 2. Successful Output
    ![result of edit command](./images/UserGuide/1.3b_edit_ans.png)
 
-   
+
 ### Practise Flashcards: `practise`
 Practise a single Flashcard in the deck
 
@@ -385,7 +385,7 @@ set 10 d/ easy
    ![result of set command](./images/UserGuide/1.3b_set_ans.png)
 
 ### Randomly Practise Flashcards: `random`
-Practise a single Flashcard in the deck. This command chooses a random flashcard, 
+Practise a single Flashcard in the deck. This command chooses a random flashcard,
 as opposed to `practise` command which chooses the first (highest priority) flashcard.
 Use `r` index with `solve` and `set` for this random card.
 
@@ -459,7 +459,7 @@ help
 #### Expected outputs:
 ```
 help
-(A window with the URL leading to the User Guide will pop out. 
+(A window with the URL leading to the User Guide will pop out.
 Users can copy the URL by simply clicking on the 'Copy URL' button.)
 ```
 --------------------------------------------------------------------------------------------------------------------

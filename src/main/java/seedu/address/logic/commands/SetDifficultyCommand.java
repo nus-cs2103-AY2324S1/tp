@@ -41,6 +41,9 @@ public class SetDifficultyCommand extends Command {
      * @param difficulty The difficulty level for the Card.
      */
     public SetDifficultyCommand(Index targetIndex, String difficulty) {
+        assert targetIndex != null : "Index cannot be null";
+        assert difficulty != null && !difficulty.trim().isEmpty() : "Difficulty cannot be null or empty";
+
         this.targetIndex = targetIndex;
         this.difficulty = difficulty;
     }
@@ -51,42 +54,15 @@ public class SetDifficultyCommand extends Command {
 
         List<Card> lastShownList = model.getFilteredCardList();
 
-        Index actualIndex;
+        Index actualIndex = getActualIndex(model, targetIndex);
 
-        if (targetIndex.equals(Index.RANDOM)) {
-            try {
-                actualIndex = model.getRandomIndex();
-            } catch (RandomIndexNotInitialisedException e) {
-                throw new CommandException(Messages.MESSAGE_RANDOM_INDEX_NOT_INITIALISED);
-            }
-        } else {
-            actualIndex = targetIndex;
-        }
-
-        if (actualIndex.getZeroBased() >= lastShownList.size()) {
+        if (isIndexInvalid(lastShownList, targetIndex)) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
 
         Card cardToSetDifficulty = lastShownList.get(actualIndex.getZeroBased());
-
-        Difficulty difficultySet;
-        try {
-            difficultySet = Difficulty.valueOf(difficulty.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new CommandException(difficulty + Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_INVALID);
-        }
-        if (difficultySet.equals(Difficulty.EASY)) {
-            return updatePracticeDate(model,
-                    difficultySet, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY, actualIndex);
-        }
-
-        if (difficultySet.equals(Difficulty.MEDIUM)) {
-            return updatePracticeDate(model,
-                    difficultySet, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM, actualIndex);
-        }
-
-        return updatePracticeDate(model,
-                difficultySet, cardToSetDifficulty, Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD, actualIndex);
+        Difficulty difficultySet = getDifficultyFromString(difficulty);
+        return updateCardBasedOnDifficulty(model, cardToSetDifficulty, difficultySet, actualIndex);
     }
 
     private CommandResult updatePracticeDate(Model model, Difficulty difficulty,
@@ -124,4 +100,44 @@ public class SetDifficultyCommand extends Command {
                 .add("targetIndex", targetIndex)
                 .toString();
     }
+
+    private Difficulty getDifficultyFromString(String difficultyString) throws CommandException {
+        try {
+            return Difficulty.valueOf(difficultyString.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(difficultyString + Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_INVALID);
+        }
+    }
+
+    private CommandResult updateCardBasedOnDifficulty(Model model, Card card,
+                                                      Difficulty difficulty, Index index) throws CommandException {
+        String message;
+        switch (difficulty) {
+        case EASY:
+            message = Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY;
+            break;
+        case MEDIUM:
+            message = Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM;
+            break;
+        case HARD:
+            message = Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD;
+            break;
+        default:
+            throw new CommandException("Invalid difficulty level: " + this.difficulty);
+        }
+        return updatePracticeDate(model, difficulty, card, message, index);
+    }
+
+    private Index getActualIndex(Model model, Index targetIndex) throws CommandException {
+        if (targetIndex.equals(Index.RANDOM)) {
+            try {
+                return model.getRandomIndex();
+            } catch (RandomIndexNotInitialisedException e) {
+                throw new CommandException(Messages.MESSAGE_RANDOM_INDEX_NOT_INITIALISED);
+            }
+        } else {
+            return targetIndex;
+        }
+    }
+
 }
