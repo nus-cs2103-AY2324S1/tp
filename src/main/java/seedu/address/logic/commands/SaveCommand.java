@@ -41,11 +41,8 @@ public class SaveCommand extends Command {
      * Represents a SaveCommand constructor used when adding a fosterer from PersonProfile.
      * @param newFosterer is the new fosterer to be added in the program.
      */
-    public SaveCommand(Person newFosterer) throws CommandException {
+    public SaveCommand(Person newFosterer) {
         super();
-        if (newFosterer == null) {
-            throw new CommandException(MESSAGE_DETAILS_NOT_FILLED);
-        }
         this.newFosterer = newFosterer;
         this.index = null;
     }
@@ -55,8 +52,15 @@ public class SaveCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+
         // While on add ProfilePage.
         if (index == null) {
+            // If the details are not all filled, throw an exception
+            if (newFosterer == null) {
+                throw new CommandException(MESSAGE_DETAILS_NOT_FILLED);
+            }
+
+            // If the model already has the newly adding fosterer, throw an exception
             if (model.hasPerson(newFosterer)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
@@ -71,17 +75,15 @@ public class SaveCommand extends Command {
                     );
         }
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = newFosterer;
 
+        // Edits a name but the person with the name already exists, then throw an exception
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        // None of the details have changed, then throw an exception
         if (personToEdit.equals(editedPerson)) {
             throw new CommandException(MESSAGE_FOSTERER_NOT_EDITED);
         }
