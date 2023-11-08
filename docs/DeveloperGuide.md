@@ -489,7 +489,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to delete a specific student in the list with the student's student number
+1.  User requests to delete a specific student with the student's student number
 2.  Class Manager deletes the student
 
     Use case ends.
@@ -502,7 +502,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 1b. The given student number does not exist in the list.
+* 1b. The given student number does not exist in Class Manager.
 
     * 1b1. Class Manager shows an error message.
 
@@ -552,7 +552,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The JSON file cannot be found
+* 3a. The JSON file cannot be found.
+
   * 3a1. Class Manager shows an error message.
 
     Use case resumes at step 2.
