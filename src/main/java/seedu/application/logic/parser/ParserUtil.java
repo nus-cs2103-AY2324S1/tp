@@ -95,8 +95,18 @@ public class ParserUtil {
             String month = stringSplit[0];
             month = month.substring(0, 1).toUpperCase() + month.substring(1).toLowerCase();
             stringSplit[0] = month;
+            String time = stringSplit[3];
+            String formattedTime = formatTime(time);
+            stringSplit[3] = formattedTime;
         }
         return String.join(" ", stringSplit);
+    }
+
+    private static String formatTime(String time) {
+        if (time.equals("2400")) {
+            return "0000";
+        }
+        return time;
     }
 
     /**
