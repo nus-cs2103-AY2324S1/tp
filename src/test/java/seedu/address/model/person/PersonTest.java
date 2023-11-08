@@ -99,8 +99,10 @@ public class PersonTest {
 
     @Test
     public void getMonthlyRevenueMethod() {
-        Person alice = new PersonBuilder(ALICE).withDay("Mon").withBegin("1000").withEnd("1004").withPayRate("1.52").build();
-        Person bob = new PersonBuilder(BOB).withDay("Mon").withBegin("1000").withEnd("1004").withPayRate("1.52").build();
+        Person alice = new PersonBuilder(ALICE).withDay("Mon").withBegin("1000").withEnd("1004")
+                .withPayRate("1.52").build();
+        Person bob = new PersonBuilder(BOB).withDay("Mon").withBegin("1000").withEnd("1004")
+                .withPayRate("1.52").build();
 
         // persons with same lesson and payrate should return same monthly revenue
         assertEquals(alice.getMonthlyRevenue(), bob.getMonthlyRevenue());

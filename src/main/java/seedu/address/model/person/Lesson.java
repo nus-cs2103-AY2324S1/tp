@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import java.text.DecimalFormat;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -84,7 +83,7 @@ public class Lesson {
                 temp = temp.plusDays(1);
             }
         }
-        assert count > 0: "number of days should be more than 0";
+        assert count > 0 : "number of days should be more than 0";
         return count;
     }
 
@@ -97,7 +96,7 @@ public class Lesson {
         Duration duration = Duration.between(begin, end);
         long minutes = duration.toMinutes();
         double hours = (double) minutes / 60; // Convert minutes to a fraction of hours
-        assert hours > 0.0 :"hours should be positive";
+        assert hours > 0.0 : "hours should be positive";
 
         return hours;
     }
@@ -110,7 +109,7 @@ public class Lesson {
     public double getMonthlyHours() {
         double hours = calculateLessonDuration() * getNumOfDaysInMonth(LocalDate.now()
                 .getYear(), LocalDate.now().getMonthValue());
-        assert hours > 0.0 :"hours should be positive";
+        assert hours > 0.0 : "hours should be positive";
         return hours;
     }
 
