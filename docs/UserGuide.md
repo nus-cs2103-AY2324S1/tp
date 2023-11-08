@@ -2,19 +2,51 @@
 layout: page
 title: OutBook User Guide
 ---
+# OutBook
 
+## About OutBook
 OutBook is an app that allows freelance insurance agents to manage their numerous contacts and meeting schedule. It is optimised for Command Line Interface (CLI) and aims to significantly reduce the time needed for organizational tasks.
 
-This guide is to help you explore and learn about what are its features and how to use them.
-Outbook has 2 lists which are used to track contacts and meetings respectively. These list can be filtered to show the specific data you need.
-It is able to add, edit and delete any contacts and meetings you want. As well as add custom remarks and tags for your specific needs.
+This guide aims to help you explore its features and learn how to use them.
 
+## Key Features
+To help you simplify and streamline the process of organizing your contacts and meeting schedule, our application provides these easy-to-use and efficient features:
+1. **Client Information Management**: Easily store, access and modify client details such as contact number, email and last contacted time. Add status, custom tags and remarks to organize your clients according to your preference.
+2. **Meeting Schedule and Information Management**: Keep track of where and when your meetings are, and who you are meeting, to ensure you never miss an important appointment.
+
+Managing clients and a busy schedule have never been easier. With OutBook, all you need is a keyboard and a few seconds to type in short commands!
 <div style="page-break-after: always;"></div>
 
-# Table of Content
+# Table of Contents
 
-- Table of Contents
-  {:toc}
+- [Quick Start](#quick-start)
+- [Navigating OutBook](#navigating-outbook)
+- [Features](#features)
+  - [Contact Commands](#contact-commands)
+    - [Adding a contact: `addc`](#adding-a-contact--addc)
+    - [Listing all persons: `listc`](#listing-all-persons--listc)
+    - [Deleting a person: `deletec`](#deleting-a-person--deletec)
+    - [Editing a contact: `editc`](#editing-a-contact--editc)
+    - [Viewing detailed contact information: `viewc`](#viewing-detailed-contact-information--viewc)
+    - [Finding persons using contact fields: `findc`](#search-for-persons-using-contact-fields--findc)
+  - [Meeting Commands](#meeting-commands)
+    - [Adding a meeting: `addm`](#adding-a-meeting--addm)
+    - [Listing all meetings: `listm`](#listing-all-meetings--listm)
+    - [Deleting a meeting: `deletem`](#deleting-a-meeting--deletem)
+    - [Editing a meeting: `editm`](#editing-a-meeting--editm)
+    - [Viewing detailed meeting information: `viewm`](#viewing-detailed-meeting-information--viewm)
+    - [Finding meetings using meeting fields: `findm`](#search-for-meetings-using-meeting-fields--findm)
+    - [Adding contact to meeting: `addmc`](#add-contact-to-meeting--addmc)
+    - [Removing contact from meeting: `rmmc`](#remove-contact-from-meeting--rmmc)
+    - [Marking a meeting as complete : `mark`](#marking-a-meeting-as-complete--mark)
+  - [Miscellaneous Commands](#miscellaneous-commands)
+    - [Clearing all entries: `clear`](#clearing-all-entries--clear)
+    - [Exiting the program: `exit`](#exiting-the-program--exit)
+  - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+- [Command Summary](#command-summary)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
 
 ---
 
@@ -31,8 +63,7 @@ It is able to add, edit and delete any contacts and meetings you want. As well a
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar OutBook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
-   <br/><br/><br/><br/><br/><br/><br/><br/>
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `listc` : Lists all contacts.
@@ -47,7 +78,24 @@ It is able to add, edit and delete any contacts and meetings you want. As well a
 
    - `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command. 
+
+Return to the [Table of Contents](#table-of-contents)
+
+---
+
+# Navigating OutBook
+![User Interface for OutBook](images/UserInterface.png)
+
+| Name          | Function                                                                                                                                                                                                                                              |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Command Box   | Enter your commands here                                                                                                                                                                                                                              |
+| Status Box    | Displays the results after a command is executed                                                                                                                                                                                                      |
+| Contacts List | Displays contact details                                                                                                                                                                                                                              |
+| Meetings List | Displays meetings that are scheduled                                                                                                                                                                                                                  |
+| Details List  | Displays all the fields of a contact and/or meeting in full detail, completed with labels. Use [viewc](#viewing-detailed-contact-information--viewc)/[viewm](#viewing-detailed-meeting-information--viewm) to specify the contact/meeting to display. |
+
+Return to the [Table of Contents](#table-of-contents)
 
 ---
 
@@ -87,7 +135,7 @@ Format: `help`
 
 <div style="page-break-after: always;"></div>
 
-## Contact commands
+## Contact Commands
 
 ### Adding a contact: `addc`
 
@@ -123,7 +171,7 @@ You can put any number of tags (including 0) on a contact.
 
 ### Listing all persons : `listc`
 
-Shows a list of all contacts in OutBook. Contacts are sorted by `LAST_CONTACTED_TIME` by default.
+Shows an unfiltered list of all contacts in OutBook. Contacts are sorted by `LAST_CONTACTED_TIME` by default.
 
 Format: `listc`
 
@@ -182,10 +230,8 @@ Format: `viewc INDEX`
 Examples:
 - `viewc 2` Displays detailed information related to the 2nd contact on the list.
 
-<br/><br/><br/><br/>
 
-
-### Search for persons using contact fields: `findc`
+### Finding persons using contact fields: `findc`
 Find persons whose contact details match the keywords specified for at least 1 of these fields: `NAME`, `PHONE_NUMBER`, `EMAIL`, `STATUS`, `TAG`.
 
 Format: `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [lc/DATETIME] [s/KEYWORDS] [t/KEYWORDS]`
@@ -212,13 +258,13 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-
-## Meeting commands
+## Meeting Commands
 
 ### Adding a meeting: `addm`
 
 Adds a meeting to OutBook.
 Meetings are sorted by start time given.
+Meetings are allowed to overlap and multiple meetings can be occuring at the same time.
 
 Format: `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​`
 
@@ -233,7 +279,7 @@ Examples:
 
 ### Listing all meetings : `listm`
 
-Shows a list of all meetings in OutBook. Meetings are sorted by `START` by default.
+Shows an unfiltered list of all meetings in OutBook. Meetings are sorted by `START` by default.
 
 Format: `listm`
 
@@ -292,7 +338,7 @@ Examples:
 <div style="page-break-after: always;"></div>
 
 
-### Search for Meetings using meeting fields: `findm`
+### Finding meetings using meeting fields: `findm`
 
 Find meetings with details matching the keywords you specified for at least 1 of these fields: `TITLE`, `LOCATION`, `ATTENDEE_NAME`, `TAG`; and falls within the `START` and `END` time you give.
 
@@ -364,6 +410,8 @@ Format: `mark INDEX`
 Examples:
 - `listm` followed by `mark 2` marks the 2nd meeting in the results of the `listm` command.
 
+## Miscellaneous Commands
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the displayed list in OutBook.
@@ -388,20 +436,7 @@ OutBook data are saved automatically as a JSON file `[JAR file location]/data/ou
 If your changes to the data file makes its format invalid, OutBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
----
-
-<div style="page-break-after: always;"></div>
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous OutBook home folder.
-
----
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+Return to the [Table of Contents](#table-of-contents)
 
 ---
 
@@ -409,22 +444,48 @@ If your changes to the data file makes its format invalid, OutBook will discard 
 
 ## Command summary
 
-| Action                          | Format, Examples                                                                                                                                                                       |
-|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add contact**                 | `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [r/REMARK] [t/TAG]…​` <br> e.g., `addc n/James Ho p/22224444 e/jamesho@example.com lc/09.09.2023 0000 t/friend t/colleague` |
-| **Add contact to meeting**      | `addmc MEETING_INDEX CONTACT_INDEX` <br> e.g., `addmc 2 1`                                                                                                                             |
-| **Add meeting**                 | `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​` <br> e.g., `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`                                                            |
-| **Clear**                       | `clear`                                                                                                                                                                                |
-| **Delete contact**              | `deletec INDEX` <br> e.g., `deletec 3`                                                                                                                                                 |
-| **Delete meeting**              | `deletem INDEX` <br> e.g., `deletem 3`                                                                                                                                                 |
-| **Edit contact**                | `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [lc/LAST_CONTACTED_TIME] [r/REMARK] [t/TAG]…​`<br> e.g.,`editc 2 n/James Lee e/jameslee@example.com`                                  |
-| **Edit meeting**                | `editm INDEX [m/TITLE] [a/LOCATION] [s/START] [e/END] [t/TAG]…​`<br> e.g.,`editm 1 a/Hawker Centre s/15.09.2023 1500`                                                                  |
-| **Find contact**                | `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [lc/LAST_CONTACTED_TIME] [s/KEYWORDS] [t/KEYWORDS]` <br> e.g., `findc n/James Jake s/active claimant`                                    |
-| **Find meeting**                | `findm [m/KEYWORDS] [a/KEYWORDS] [t/KEYWORDS] [n/ATTENDEE_NAME] [s/START e/END]` <br> e.g., `findm m/Zoom Meet s/09.09.2023 0000 e/09.10.2023 0000`                                    |
-| **Help**                        | `help`                                                                                                                                                                                 |
-| **List contacts**               | `listc`                                                                                                                                                                                |
-| **List meetings**               | `listm`                                                                                                                                                                                |
-| **Remove contact from meeting** | `rmmc MEETING_INDEX ATTENDEE_INDEX` <br> e.g., `rmmc 2 2`                                                                                                                              |
-| **View contact details**        | `viewc INDEX` <br> e.g., `viewc 4`                                                                                                                                                     |
-| **View meeting details**        | `viewm INDEX` <br> e.g., `viewm 4`                                                                                                                                                     |
-| **Exit**                        | `exit`                                                                                                                                                                                 |
+| Action                          | Format, Examples                                                                                                                                                                         |
+|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add contact**                 | `addc n/NAME p/PHONE_NUMBER e/EMAIL [lc/LAST_CONTACTED_TIME] [r/REMARK] [t/TAG]…​` <br> e.g., `addc n/James Ho p/22224444 e/jamesho@example.com lc/09.09.2023 0000 t/friend t/colleague` |
+| **Add contact to meeting**      | `addmc MEETING_INDEX CONTACT_INDEX` <br> e.g., `addmc 2 1`                                                                                                                               |
+| **Add meeting**                 | `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​` <br> e.g., `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`                                                              |
+| **Clear**                       | `clear`                                                                                                                                                                                  |
+| **Delete contact**              | `deletec INDEX` <br> e.g., `deletec 3`                                                                                                                                                   |
+| **Delete meeting**              | `deletem INDEX` <br> e.g., `deletem 3`                                                                                                                                                   |
+| **Edit contact**                | `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [lc/LAST_CONTACTED_TIME] [r/REMARK] [t/TAG]…​`<br> e.g.,`editc 2 n/James Lee e/jameslee@example.com`                                    |
+| **Edit meeting**                | `editm INDEX [m/TITLE] [a/LOCATION] [s/START] [e/END] [t/TAG]…​`<br> e.g.,`editm 1 a/Hawker Centre s/15.09.2023 1500`                                                                    |
+| **Find contact**                | `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [lc/LAST_CONTACTED_TIME] [s/KEYWORDS] [t/KEYWORDS]` <br> e.g., `findc n/James Jake s/active claimant`                                      |
+| **Find meeting**                | `findm [m/KEYWORDS] [a/KEYWORDS] [t/KEYWORDS] [n/ATTENDEE_NAME] [s/START e/END]` <br> e.g., `findm m/Zoom Meet s/09.09.2023 0000 e/09.10.2023 0000`                                      |
+| **Help**                        | `help`                                                                                                                                                                                   |
+| **List contacts**               | `listc`                                                                                                                                                                                  |
+| **List meetings**               | `listm`                                                                                                                                                                                  |
+| **Remove contact from meeting** | `rmmc MEETING_INDEX ATTENDEE_INDEX` <br> e.g., `rmmc 2 2`                                                                                                                                |
+| **View contact details**        | `viewc INDEX` <br> e.g., `viewc 4`                                                                                                                                                       |
+| **View meeting details**        | `viewm INDEX` <br> e.g., `viewm 4`                                                                                                                                                       |
+| **Exit**                        | `exit`                                                                                                                                                                                   |
+
+Return to the [Table of Contents](#table-of-contents)
+
+---
+
+<div style="page-break-after: always;"></div>
+
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Follow these steps:
+1. Install the app in the other computer. An empty data file will be created in the same folder that the app is in. 
+2. Overwrite this empty data file with the file that contains the data of your previous OutBook home folder.
+3. Your transferred data should now be visible upon launching OutBook.
+
+Return to the [Table of Contents](#table-of-contents)
+
+---
+
+## Known issues
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+Return to the [Table of Contents](#table-of-contents)
+
+---
