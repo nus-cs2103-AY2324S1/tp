@@ -130,15 +130,14 @@ public class Person {
      */
     public void mergeAttendanceRecords(List<Attendance> thisAttendanceRecords, List<Attendance> otherAttendanceRecords,
                                        Person newPerson) {
-        HashMap<Integer, Attendance> weekAttendanceHashMap = new HashMap<>();
+        HashSet<Integer> attendanceWeeks = new HashSet<>();
         for (Attendance a : thisAttendanceRecords) {
-            weekAttendanceHashMap.put(a.getWeek().getWeekNumber(), a);
-            newPerson.addAttendance(a);
+            attendanceWeeks.add(a.getWeek().getWeekNumber());
         }
-        for (Attendance a : otherAttendanceRecords) {
-            if (!weekAttendanceHashMap.containsKey(a.getWeek().getWeekNumber())) {
-                weekAttendanceHashMap.put(a.getWeek().getWeekNumber(), a);
-                newPerson.addAttendance(a);
+        for (Attendance b : otherAttendanceRecords) {
+            if (!attendanceWeeks.contains(b.getWeek().getWeekNumber())) {
+                attendanceWeeks.add(b.getWeek().getWeekNumber());
+                newPerson.addAttendance(b);
             }
         }
     }
