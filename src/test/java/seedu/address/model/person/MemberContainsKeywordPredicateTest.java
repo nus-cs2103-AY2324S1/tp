@@ -69,6 +69,10 @@ public class MemberContainsKeywordPredicateTest {
         // Non-matching keyword
         predicate = new MemberContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
+
+        // Multiple non-matching keyword
+        predicate = new MemberContainsKeywordsPredicate(Arrays.asList("Carol", "Seven"));
+        assertFalse(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
     }
 
     @Test

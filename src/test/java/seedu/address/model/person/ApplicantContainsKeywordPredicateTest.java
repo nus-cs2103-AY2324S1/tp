@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -58,6 +59,10 @@ public class ApplicantContainsKeywordPredicateTest {
         // Mixed-case keywords
         predicate = new ApplicantContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new ApplicantBuilder().withName("Alice Bob").build()));
+
+        // Keyword is phone number
+        predicate = new ApplicantContainsKeywordsPredicate((Arrays.asList("91239123")));
+        assertTrue(predicate.test(new ApplicantBuilder().withPhone("91239123").build()));
     }
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
@@ -67,6 +72,10 @@ public class ApplicantContainsKeywordPredicateTest {
 
         // Non-matching keyword
         predicate = new ApplicantContainsKeywordsPredicate(Arrays.asList("Carol"));
+        assertFalse(predicate.test(new ApplicantBuilder().withName("Alice Bob").build()));
+
+        // multiple keywords
+        predicate = new ApplicantContainsKeywordsPredicate(Arrays.asList("December", "Alicia"));
         assertFalse(predicate.test(new ApplicantBuilder().withName("Alice Bob").build()));
     }
     @Test

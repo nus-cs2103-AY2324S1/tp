@@ -26,7 +26,8 @@ public class ApplicantContainsKeywordsPredicate implements Predicate<Applicant> 
     public boolean test(Applicant applicant) {
         return keywords.stream()
             .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(applicant.getName().fullName, keyword)
-                || StringUtil.containsWordIgnoreCase(applicant.getPhone().value, keyword));
+                || StringUtil.containsWordIgnoreCase(applicant.getPhone().value, keyword)
+                || StringUtil.containsWordIgnoreCase((applicant.getInterviewTime()).toString(), keyword));
     }
 
     @Override
