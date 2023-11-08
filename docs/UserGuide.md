@@ -116,7 +116,7 @@ Examples:
 * `create t/dept software t/dept marketing`
 
 An example of the `create` command in action:
-[Create](images/create.png)
+![Create](images/create.png)
 
 ### Adding a person: `add`
 
@@ -162,9 +162,9 @@ Examples:
 *  `remark 1 r/` Empties the remark of the 1st person.
 
 An example of the `remark` command in action:
-[Remark](images/remark.png)
+![Remark](images/remark.png)
 An example of the `remark` command in action with the **REMARK** keyword:
-[Enhanced Remark](images/enhancedremark.png)
+![Enhanced Remark](images/enhancedremark.png)
 
 ### Viewing a person's details: `view`
 
@@ -181,7 +181,7 @@ Examples:
 * `view 1` Shows the complete details of the 1st person on the list.
 
 An example of the `view` command in action:
-[View](images/view.png)
+![View](images/view.png)
 
 <box type="tip" seamless>
 
@@ -318,8 +318,7 @@ Examples:
 * `filter t/Interview met/median` filters and displays job applicants whose score tied to `interview` tag is greater than or equal to the median score for `interview` tag.
 
 An example of the `filter` command in action:
-[Filter](images/filter.png)
-
+![Filter](images/filter.png)
 
 A more complete example guide on how to use filter effectively from the default address book:  
 1. `create t/assessment interview` creates a tag `interview` under the `assessment` category.
@@ -389,10 +388,12 @@ Example:
   e.g. `search n/Alex n/Adam st/rejected` is not allowed.
 
 Example:
-* `search n/Alex Bernice st/interviewed rejected t/analyst` will output applicants whose:
+* `search n/Alex Bernice st/interviewed rejected t/intern` will output applicants whose:
     * names contain either Alex `or` Bernice
     * `and` status is either interviewed `or` rejected.
-    * `and` has a tag `analyst`
+    * `and` has a tag `intern`
+
+![Search](images/search-3.png)
 
 ### Deleting a person : `delete`
 
