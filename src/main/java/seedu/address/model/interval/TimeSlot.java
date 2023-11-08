@@ -65,7 +65,7 @@ public class TimeSlot {
         for (TimeSlot timeslot : timeslots) {
             if (timeslot.start.after(interval.getIntervalEnd().getTime())) {
                 availableTime.add(new TimeSlot(lastEnd, interval.getIntervalEnd().getTime()));
-            } else if (timeslot.start.after(lastEnd)){
+            } else if (timeslot.start.after(lastEnd)) {
                 availableTime.add(new TimeSlot(lastEnd, timeslot.start));
             }
             if (lastEnd.before(timeslot.end)) {
