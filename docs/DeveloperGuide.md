@@ -24,7 +24,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` & `.uxf` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides (for `.puml`)](https://se-education.org/guides/tutorials/plantUml.html) or [_UMLet_ (for `.uxf`)](https://www.umlet.com) to learn how to create and edit diagrams.
 
 </div>
 
@@ -119,9 +119,10 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/Person&MeetingClassDiagram.png" width="450" />
 
 The `Model` component,
 
@@ -129,16 +130,11 @@ The `Model` component,
 - stores the currently 'selected' `Person` and `Meeting` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` and `ObservableList<Meeting>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
+- The Tag is a factory class that keeps its own HashMap of the Tags it has created before, thus it ensures that every Tag is unique and can be referenced by all Person and Meetings.
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -628,6 +624,8 @@ testers are expected to do more *exploratory* testing.
    1. Download the jar file and copy into an empty folder
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+      1. If this fails, open command prompt and navigate to the empty folder you just created.
+      2. use command `java -jar OutBook.jar` to see if it runs. If it runs continue as per normal.
 
 2. Saving window preferences
 
@@ -636,29 +634,133 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+3. Exiting
+    1. input command `exit`. <br> Expected: OutBook closes and shutdown.
+
+### Adding a person
+
+1. Adding a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `listc` command. Multiple persons in the list.
+
+    2. Test case: `addc n/John Doe p/12345678 e/JohnDoe@gmail.com`<br>
+       Expected: Contact John Doe is created wth phone number 12345678 and email JohnDoe@gmail.com. The contact should be the first in the list as it does not have a last contacted date. Details of the added contact shown in the status message.
+
+    3. Test case: `addc n/John Not Doe p/87654321 e/JohnNotDoe@gmail.com lc/10.10.2023 1000 s/Active t/tagOne` <br> Expected: Contact John Not Doe is created wth phone number 87654321, email JohnNotDoe@gmail.com, last contacted at 10.10.2023 1000, status as Active and is tagged with tagOne. Details of the added contact shown in the status message.
+
+    4. If you were to repeat any of the test cases above, you will encounter a duplicate error
+
+    5. Test case: `addc n/John Doe`<br>
+       Expected: No person is added. Error details shown in the status message.
+
+    6. Test case: `addc p/12345678` <br> Expected: Similar to previous.
+
+    7. Test case: `addc e/JohnDoe@gmail.com` <br> Expected: Similar to previous.
+
+    8. Other incorrect delete commands to try: `addc`, `addc 1` and any `addc` command that does not have `n/NAME`, `p/PHONE_NUMBER` & `e/EMAIL` <br>
+       Expected: Similar to previous.
+
+2. Adding a person while not all persons are being shown.
+    1. Prerequisites: Filter the contact list by using the `findc` command. If you are using the default data given, input `findc n/Yu`. <br> Expected: Only Bernice Yu is shown in the contact list.
+
+    2. Repeat Test case from `Adding a person 1.2`. <br>
+       Expected: similar to 1.2.
+
+    3. Adding a contact automatically list all contact after it is done.
+
+### Editing a person
+
+1. Editing a person
+
+    1. Test case: `editc 1 n/John Doe p/12345678 e/JohnDoe@gmail.com`<br>
+       Expected: The first person in the contact list is has its details replaced with the given arguments. Details of the added contact shown in the status message.
+
+    2. If you were to edit a contact so that it has the same name or phone number or email to any other contact, you will encounter a duplicate error
+
+    3. Other incorrect delete commands to try: `editc` and `editc 1`, you will receive a required index error and a required field error.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `listc` command. Multiple persons in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+2. Deleting a person while not all persons are being shown.
+    1. Prerequisites: Filter the contact list by using the `findc` command. If you are using the default data given, input `findc n/Yu`. <br> Expected: Only Bernice Yu is shown in the contact list.
+
+    2. Test case: `delete 1`<br>
+       Expected: Bernice Yu is deleted from the list. Nothing should be shown in the list. Details of the deleted contact shown in the status message.
+
+    3. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message.
+
+    4. Other incorrect delete commands to try: `delete`, `deletec` `delete x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### View Contact
+
+1. View contact without list changing
+    1. use `viewc 1` to view the first contact <br>
+       Expected: the first contact will have its details shown on the details panel.
+2. View contact with list changing
+    1. Do the same test as before
+    2. Edit the first contact to have a later last contacted date than the second contact. <br>
+       Expected: The second contact will now take first place in the list and the details panel will change to show the new first place contact.
+
+### Meeting Tests
+
+Repeat the contact test cases with meeting commands
+1. Add Meeting commands
+    - `adddm m/Test Meeting 1 a/Test Location 1 s/02.10.2023 1000 e/02.10.2023 1200`
+2. Find Meeting commands
+    - `findm m/Meeting`
+3. Edit Meeting commands
+    - `editm m/Changed Meeting Name`
+4. Delete Meeting commands
+    - `deletem 1`
+5. View Meeting commands
+    - `viewm 1`
+
+### Meeting Attendees
+
+1. Add Meeting Attendee
+    1. Use `addmc 1 2` <br>
+       Expected: The second person in the current person list will be added to the first meeting in the current meeting list.
+    2. Instead of using 1 or 2, use indexes that are more than the amount of meetings or persons. <br>
+       Expected: An error will be shown which indicated the index which is out of bounds.
+    3. Repeat 1 and 2 with filtered lists using `findc` and `findm`
+2. Remove Meeting Attendee
+    1. Prerequisite: There must be an attendee in the meeting you are looking at. To look at the attendees for a meeting, use `viewm` on the meeting. In this case we will look at the first meeting.
+    2. The attendees will be listed with an index in the meeting. Use `rmmc 1 1`. <br>
+       Expected: The meeting will have its first attendee removed.
+
+### Mark Meetings
+
+1. Mark a Meeting as completed
+    1. Use `mark 1` to mark the first meeting as completed <br>
+       Expected: Meeting will be shown as completed and the attendees that are in the meeting will have their last contacted updated to the end time of the meeting.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. If you have added, edited or deleted anything, there should be a new folder that appears in the folder that you placed OutBook.jar in.
+   2. Open file and open the `outbook.json` file. In the persons section, delete any line that has name, phone, email, etc... <br>
+   3. Run the program again with `java -jar OutBook.jar` <br>
+   Expected: You will open up to a blank OutBook. At this point if you were to add, edit or delete anything, the data you had previously will be deleted and saved over with the new data you just added, losing all you data.
 
-2. _{ more test cases …​ }_
+2. Recovering from missing/corrupted data files
+
+   1. After completed the test above, add back the field that was deleted in step 2. If you do not know what was deleted, place a placeholder for that specific field. 
+      1. All persons will have a name, phone, email, lastContactedTime, status, remark and tags. 
+      2. Meetings have a similar structure with title, location, start, end, attendees, tags, status.
+   2. Run the program again, and you will see the rest of the data with the placeholder that you put.
