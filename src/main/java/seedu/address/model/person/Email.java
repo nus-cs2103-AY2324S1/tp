@@ -51,6 +51,16 @@ public class Email {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns a truncated Email if it is more than 30 characters long.
+     */
+    public String shortEmail() {
+        if (this.value.length() > 30) {
+            return this.value.substring(0, 30) + "...";
+        }
+        return this.value;
+    }
+
     @Override
     public String toString() {
         return value;

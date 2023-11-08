@@ -20,14 +20,9 @@
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
       <HBox alignment="CENTER_LEFT" spacing="5">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
+        <Label fx:id="id" styleClass="cell_big_label" />
         <Label fx:id="title" styleClass="cell_big_label" text="\$first" wrapText="true" />
-        <Region HBox.hgrow="ALWAYS"/>
+        <Region HBox.hgrow="ALWAYS" />
         <Label fx:id="status" styleClass="cell_status_label" />
       </HBox>
       <FlowPane fx:id="tags" />
@@ -43,7 +38,7 @@
         <Label fx:id="secondSpacer" styleClass="cell_small_label" text="\$spacer" />
         <Label fx:id="end" styleClass="cell_small_label" text="\$end" />
       </HBox>
-      <Label fx:id="l" styleClass="cell_small_label" text="\$l" />
+      <Label fx:id="l" styleClass="cell_small_label" text="\$l" wrapText="true" />
     </VBox>
     <rowConstraints>
       <RowConstraints />

@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -38,8 +39,14 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-
     private static final String WHITESPACE = " \t\r\n";
+    private static final String VALID_TIME = "02.10.2023 1000";
+    private static final String INVALID_TIME_1 = "02.10.2023  1000";
+    private static final String INVALID_TIME_2 = "02.10.29999 1000";
+    private static final String INVALID_TIME_3 = "02.10.2023 10000";
+    private static final String INVALID_TIME_4 = "02.15.2023 1000";
+    private static final String INVALID_TIME_5 = "78.10.2023 1000";
+    private static final String INVALID_TIME_6 = "02.10.2023 5555";
 
     @Test
     public void verifyNoArgs_argsPresent_throwsParseException() {
@@ -234,4 +241,51 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+    }
+
+    @Test
+    public void parseTime_invalidValue0_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactTime("29.02.2023 1000"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMeetingTime("29.02.2023 1000"));
+    }
+
+    @Test
+    public void parseTime_invalidValue1_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactTime("30.02.2023 1000"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMeetingTime("30.02.2023 1000"));
+    }
+
+    @Test
+    public void parseTime_invalidValue2_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactTime("31.02.2023 1000"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMeetingTime("31.02.2023 1000"));
+    }
+
+    @Test
+    public void parseTime_invalidValue3_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactTime("31.04.2023 1000"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMeetingTime("31.04.2023 1000"));
+    }
+
+    @Test
+    public void parseTime_invalidValue4_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactTime(INVALID_TIME_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMeetingTime(INVALID_TIME_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactTime(INVALID_TIME_3));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMeetingTime(INVALID_TIME_4));
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactTime(INVALID_TIME_5));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMeetingTime(INVALID_TIME_6));
+    }
+
+    @Test
+    public void parseTime_validValueWithoutWhitespace_returnsName() throws Exception {
+        LocalDateTime expectedTime = LocalDateTime.of(2023, 10, 2, 10, 00);
+        assertEquals(expectedTime, ParserUtil.parseContactTime(VALID_TIME));
+        assertEquals(expectedTime, ParserUtil.parseMeetingTime(VALID_TIME));
+    }
+
 }
