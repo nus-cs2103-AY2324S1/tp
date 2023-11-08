@@ -250,6 +250,28 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
+#### Delete all contacts: `clear`
+
+You can remove all contacts from your NetworkBook using the `clear` command.
+
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**
+This command deletes **all** of your contacts. Only do this if you are sure.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can undo a clear command using [`undo`](#undo-last-change-to-networkbook-undo).
+</div>
+
+Format: `clear`
+
+Parameters: N/A
+
+Example usage:
+
+* `clear`
+
+[Table of Contents](#table-of-contents)
+
 ### <u>Category 3 - Find/view contacts</u>
 
 #### List all contacts: `list`
