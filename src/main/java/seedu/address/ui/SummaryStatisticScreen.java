@@ -49,6 +49,8 @@ public class SummaryStatisticScreen extends UiPart<Region> {
      * @return statistic data
      */
     public ObservableList<StatisticData> fillStatisticDataForPerson(ObservableList<StatisticData> statisticData) {
+
+
         List<Tag> tags = person.getScoreList().getTagsWithScore();
 
         for (Tag tag : tags) {
