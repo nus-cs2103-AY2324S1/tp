@@ -6,14 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -35,8 +32,8 @@ public class ShowCommandTest {
     @Test
     public void execute_validIndexUnfilteredStudentList_success() {
         model.setState(State.STUDENT);
-        Person personToShow = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ShowCommand showCommand = new ShowCommand(INDEX_FIRST_PERSON);
+        Person personToShow = model.getFilteredPersonList().get(0);
+        ShowCommand showCommand = new ShowCommand(1);
         String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_PERSON_SUCCESS,
                 Messages.format(personToShow));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
@@ -49,8 +46,8 @@ public class ShowCommandTest {
     @Test
     public void execute_validIndexUnfilteredLessonList_success() {
         model.setState(State.SCHEDULE);
-        Lesson lessonToShow = model.getFilteredScheduleList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ShowCommand showCommand = new ShowCommand(INDEX_FIRST_PERSON);
+        Lesson lessonToShow = model.getFilteredScheduleList().get(0);
+        ShowCommand showCommand = new ShowCommand(1);
         String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_LESSON_SUCCESS,
                 Messages.formatLesson(lessonToShow));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
@@ -63,8 +60,8 @@ public class ShowCommandTest {
     @Test
     public void execute_validIndexFullTaskListList_success() {
         model.setState(State.TASK);
-        Task taskToShow = model.getFullTaskList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ShowCommand showCommand = new ShowCommand(INDEX_FIRST_PERSON);
+        Task taskToShow = model.getFullTaskList().get(0);
+        ShowCommand showCommand = new ShowCommand(1);
         String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_TASK_SUCCESS,
                 Messages.formatTask(taskToShow));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
@@ -78,7 +75,7 @@ public class ShowCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredPersonList_throwsCommandException() {
         model.setState(State.STUDENT);
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        int outOfBoundIndex = model.getFilteredPersonList().size() + 1;
         ShowCommand showCommand = new ShowCommand(outOfBoundIndex);
 
         assertCommandFailure(showCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -87,7 +84,7 @@ public class ShowCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredLessonList_throwsCommandException() {
         model.setState(State.SCHEDULE);
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredScheduleList().size() + 1);
+        int outOfBoundIndex =model.getFilteredScheduleList().size() + 1;
         ShowCommand showCommand = new ShowCommand(outOfBoundIndex);
 
         assertCommandFailure(showCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
@@ -96,7 +93,7 @@ public class ShowCommandTest {
     @Test
     public void execute_invalidIndexFullTaskList_throwsCommandException() {
         model.setState(State.TASK);
-        Index outOfBoundIndex = Index.fromOneBased(model.getFullTaskList().size() + 1);
+        int outOfBoundIndex = model.getFullTaskList().size() + 1;
         ShowCommand showCommand = new ShowCommand(outOfBoundIndex);
 
         assertCommandFailure(showCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -105,21 +102,20 @@ public class ShowCommandTest {
     @Test
     public void execute_invalidState_throwsCommandException() {
         model.setState(State.NONE);
-        ShowCommand showCommand = new ShowCommand(INDEX_FIRST_PERSON);
+        ShowCommand showCommand = new ShowCommand(1);
 
         assertCommandFailure(showCommand, model, Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
     public void equals() {
-        ShowCommand showFirstCommand = new ShowCommand(INDEX_FIRST_PERSON);
-        ShowCommand showSecondCommand = new ShowCommand(INDEX_SECOND_PERSON);
-
+        ShowCommand showFirstCommand = new ShowCommand(1);
+        ShowCommand showSecondCommand = new ShowCommand(2);
         // same object -> returns true
         assertTrue(showFirstCommand.equals(showFirstCommand));
 
         // same values -> returns true
-        ShowCommand deleteFirstCommandCopy = new ShowCommand(INDEX_FIRST_PERSON);
+        ShowCommand deleteFirstCommandCopy = new ShowCommand(1);
         assertTrue(showFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -134,9 +130,8 @@ public class ShowCommandTest {
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        ShowCommand showCommand = new ShowCommand(targetIndex);
-        String expected = ShowCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        ShowCommand showCommand = new ShowCommand(1);
+        String expected = ShowCommand.class.getCanonicalName() + "{targetIndex=" + "1" + "}";
         assertEquals(expected, showCommand.toString());
     }
 }

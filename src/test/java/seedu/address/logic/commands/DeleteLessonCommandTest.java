@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -20,14 +18,14 @@ class DeleteLessonCommandTest {
 
     @Test
     public void equals() {
-        DeleteLessonCommand deleteFirstCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON);
-        DeleteLessonCommand deleteSecondCommand = new DeleteLessonCommand(INDEX_SECOND_LESSON);
+        DeleteLessonCommand deleteFirstCommand = new DeleteLessonCommand(1);
+        DeleteLessonCommand deleteSecondCommand = new DeleteLessonCommand(2);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteLessonCommand deleteFirstCommandCopy = new DeleteLessonCommand(INDEX_FIRST_LESSON);
+        DeleteLessonCommand deleteFirstCommandCopy = new DeleteLessonCommand(1);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
