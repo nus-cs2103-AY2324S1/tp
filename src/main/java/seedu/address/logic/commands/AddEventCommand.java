@@ -66,7 +66,6 @@ public class AddEventCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON,
                     listInvalidNames(invalidNames)));
         }
-        model.addEvent(this.toAdd); //else, all the names exist
 
         Set<Group> invalidGroups = model.findInvalidGroups(this.toAdd.getGroups());
 
@@ -74,6 +73,8 @@ public class AddEventCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_GROUP,
                     listInvalidGroups(invalidGroups)));
         }
+
+        model.addEvent(this.toAdd); //else, all the names and groups exist
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatEvent(toAdd)));
     }
