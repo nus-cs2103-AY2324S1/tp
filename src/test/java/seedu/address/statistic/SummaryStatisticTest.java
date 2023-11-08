@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.AddressBook;
 import seedu.address.model.EventBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -31,13 +32,15 @@ public class SummaryStatisticTest {
 
     private Model model = new ModelManager(getTypicalAddressBookWithTagScores(), new EventBook(), new UserPrefs());
 
+    private Model emptyModel = new ModelManager(new AddressBook(), new EventBook(), new UserPrefs());
+
 
     // Check if the mean is calculated correctly
     @Test
     public void execute_calculateMean_success() {
         SummaryStatistic summaryStatistic = new SummaryStatistic(model.getFilteredPersonList());
         int expectedMean = prepareAverageScore();
-        int actualMean = summaryStatistic.calculateMean(generateSortedStream());
+        int actualMean = summaryStatistic.calculateMean(generateSortedStream(model));
         assertTrue(expectedMean == actualMean);
     }
 
@@ -46,7 +49,7 @@ public class SummaryStatisticTest {
     public void execute_calculateMedian_success() {
         SummaryStatistic summaryStatistic = new SummaryStatistic(model.getFilteredPersonList());
         int expectedMedian = prepareMedianScore();
-        int actualMedian = summaryStatistic.calculateMedian(generateSortedStream());
+        int actualMedian = summaryStatistic.calculateMedian(generateSortedStream(model));
         System.out.println(expectedMedian);
         System.out.println(actualMedian);
         assertTrue(expectedMedian == actualMedian);
@@ -146,11 +149,80 @@ public class SummaryStatisticTest {
     }
 
     @Test
+    public void execute_filteredPersonsWithTag_success() {
+        SummaryStatistic summaryStatistic = new SummaryStatistic(model.getFilteredPersonList());
+        // The model contains everyone who contains an "Interview" Tag
+        int expectedNumOfPeople = model.getFilteredPersonList().size();
+        int actualNumOfPeople = summaryStatistic.getNumOfPeopleAssociatedWithTag(VALID_SCORE_TAG);
+
+        assertTrue(expectedNumOfPeople == actualNumOfPeople);
+    }
+
+    @Test
     public void execute_filteredPersonsWithScoreTag_success() {
         SummaryStatistic summaryStatistic = new SummaryStatistic(model.getFilteredPersonList());
 
         Stream<Person> personWithValidScoreTags = summaryStatistic.filteredPersonsWithScoreTag(VALID_SCORE_TAG);
         assertTrue(personWithValidScoreTags.count() == model.getFilteredPersonList().size());
+    }
+
+    // Check for all statistic being 0 for empty list of people
+    @Test
+    public void execute_emptyList_success() {
+        SummaryStatistic summaryStatistic = new SummaryStatistic(emptyModel.getFilteredPersonList());
+        int expectedMean = 0;
+        int actualMean = summaryStatistic.calculateMean(generateSortedStream(emptyModel));
+        assertTrue(expectedMean == actualMean);
+
+        int expectedMedian = 0;
+        int actualMedian = summaryStatistic.calculateMedian(generateSortedStream(emptyModel));
+        System.out.println(actualMedian);
+        assertTrue(expectedMedian == actualMedian);
+
+        int expectedMax = 0;
+        int actualMax = summaryStatistic.generateMaxScoreValueWithTag(VALID_SCORE_TAG);
+        assertTrue(expectedMax == actualMax);
+
+        int expectedMin = 0;
+        int actualMin = summaryStatistic.generateMinScoreValueWithTag(VALID_SCORE_TAG);
+        assertTrue(expectedMin == actualMin);
+
+        double expectedPercentile = 0;
+        double actualPercentile = summaryStatistic.generatePercentileWithTag(VALID_PERSON_WITH_SCORE, VALID_SCORE_TAG);
+        assertTrue(expectedPercentile == actualPercentile);
+
+        List<Person> filteredList = summaryStatistic.filteredPersonList(
+                VALID_SCORE_TAG, StatisticMetric.SCORE, 0);
+        assertTrue(filteredList.size() == 0);
+
+
+    }
+
+    // 1 person in list of people
+    @Test
+    public void execute_onePerson_success() {
+        emptyModel.addPerson(VALID_PERSON_WITH_SCORE);
+        SummaryStatistic summaryStatistic = new SummaryStatistic(emptyModel.getFilteredPersonList());
+        int expectedMean = VALID_PERSON_WITH_SCORE.getScoreForTag(VALID_SCORE_TAG).value;
+        int actualMean = summaryStatistic.calculateMean(generateSortedStream(emptyModel));
+        assertTrue(expectedMean == actualMean);
+
+        int expectedMedian = VALID_PERSON_WITH_SCORE.getScoreForTag(VALID_SCORE_TAG).value;
+        int actualMedian = summaryStatistic.calculateMedian(generateSortedStream(emptyModel));
+        assertTrue(expectedMedian == actualMedian);
+
+        int expectedMax = VALID_PERSON_WITH_SCORE.getScoreForTag(VALID_SCORE_TAG).value;
+        int actualMax = summaryStatistic.generateMaxScoreValueWithTag(VALID_SCORE_TAG);
+        assertTrue(expectedMax == actualMax);
+
+        int expectedMin = VALID_PERSON_WITH_SCORE.getScoreForTag(VALID_SCORE_TAG).value;
+        int actualMin = summaryStatistic.generateMinScoreValueWithTag(VALID_SCORE_TAG);
+        assertTrue(expectedMin == actualMin);
+
+        double expectedPercentile = 100;
+        double actualPercentile = summaryStatistic.generatePercentileWithTag(VALID_PERSON_WITH_SCORE, VALID_SCORE_TAG);
+        assertTrue(expectedPercentile == actualPercentile);
+
     }
 
 
@@ -316,8 +388,8 @@ public class SummaryStatisticTest {
      * Helper method to generate a sorted stream of scores
      * @return sorted stream of scores
      */
-    private Stream<Integer> generateSortedStream() {
-        ObservableList<Person> personList = model.getFilteredPersonList();
+    private Stream<Integer> generateSortedStream(Model modelUsed) {
+        ObservableList<Person> personList = modelUsed.getFilteredPersonList();
         Stream<Person> filteredStream = personList.stream().filter(person -> person.getTags().contains(VALID_SCORE_TAG)
                 && person.getScoreList().hasTag(VALID_SCORE_TAG));
         Stream<ScoreList> scoreListStream = filteredStream.map(person -> person.getScoreList());

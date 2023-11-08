@@ -22,7 +22,6 @@ import seedu.address.model.tag.Tag;
 public class SummaryStatistic implements ReadOnlySummaryStatistic {
     private static final Logger logger = LogsCenter.getLogger(SummaryStatistic.class);
     private ObservableList<Person> personData;
-    private List<Person> personList;
 
     /**
      * Initializes a SummaryStatistic with the observable list of given person data.
@@ -31,7 +30,6 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
     public SummaryStatistic(ObservableList<Person> persons) {
         requireAllNonNull(persons);
         personData = persons;
-        personList = personData.stream().collect(Collectors.toList());
     }
 
     /**
@@ -42,13 +40,6 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
         personData = persons;
     }
 
-    /**
-     * Returns the number of people in the address book.
-     * @return number of people in the address book.
-     */
-    public int getNumOfPeople() {
-        return personList.size();
-    }
 
     /**
      * Returns the number of people in the address book associated with that tag.
