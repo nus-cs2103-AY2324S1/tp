@@ -50,9 +50,7 @@ public class Deadline {
         }
         try {
             LocalDateTime dateTime = LocalDateTime.parse(test, DATE_TIME_FORMATTER);
-            LocalDateTime current = LocalDateTime.now();
-            return dateTime.format(DATE_TIME_FORMATTER).equals(test)
-                && dateTime.isAfter(current);
+            return dateTime.format(DATE_TIME_FORMATTER).equals(test);
         } catch (Exception e) {
             return false;
         }

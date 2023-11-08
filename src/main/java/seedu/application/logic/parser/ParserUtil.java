@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.StringUtil;
-import seedu.application.logic.commands.InterviewCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
 import seedu.application.model.job.Company;
 import seedu.application.model.job.Deadline;
@@ -76,10 +75,37 @@ public class ParserUtil {
     public static Deadline parseDeadline(String deadline) throws ParseException {
         requireNonNull(deadline);
         String trimmedDeadline = deadline.trim();
-        if (!Deadline.isValidDeadline(trimmedDeadline)) {
-            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+        String formattedDeadline = formatDeadline(trimmedDeadline);
+        if (!Deadline.isValidDeadline(formattedDeadline)) {
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS + formattedDeadline);
         }
-        return new Deadline(trimmedDeadline);
+        return new Deadline(formattedDeadline);
+    }
+
+    /**
+     * Format the input format of {@code Deadline} field to match the default LocalDateTime format.
+     *
+     * @param deadline String deadline to be formatted.
+     * @return The formatted deadline in String.
+     */
+    private static String formatDeadline(String deadline) {
+        String[] stringSplit = deadline.split(" ");
+        if (stringSplit.length >= 3) {
+            String month = stringSplit[0];
+            month = month.substring(0, 1).toUpperCase() + month.substring(1).toLowerCase();
+            stringSplit[0] = month;
+            String time = stringSplit[3];
+            String formattedTime = formatTime(time);
+            stringSplit[3] = formattedTime;
+        }
+        return String.join(" ", stringSplit);
+    }
+
+    private static String formatTime(String time) {
+        if (time.equals("2400")) {
+            return "0000";
+        }
+        return time;
     }
 
     /**
@@ -151,10 +177,11 @@ public class ParserUtil {
     public static InterviewDateTime parseInterviewDateTime(String interviewDateTime) throws ParseException {
         requireNonNull(interviewDateTime);
         String trimmedInterviewDateTime = interviewDateTime.trim();
-        if (!InterviewDateTime.isValidInterviewDateTime(trimmedInterviewDateTime)) {
+        String formattedDateTime = formatDeadline(trimmedInterviewDateTime);
+        if (!InterviewDateTime.isValidInterviewDateTime(formattedDateTime)) {
             throw new ParseException(InterviewDateTime.MESSAGE_CONSTRAINTS);
         }
-        return new InterviewDateTime(trimmedInterviewDateTime);
+        return new InterviewDateTime(formattedDateTime);
     }
 
     /**
@@ -170,35 +197,5 @@ public class ParserUtil {
             throw new ParseException(InterviewAddress.MESSAGE_CONSTRAINTS);
         }
         return new InterviewAddress(trimmedInterviewAddress);
-    }
-
-    /**
-     * Parses a {@code String interviewPreamble} into an array of strings.
-     * Leading and trailing whitespaces will be trimmed, and the string will be split by spaces.
-     *
-     * @throws ParseException if the given {@code interviewPreamble} is invalid or cannot be parsed.
-     */
-    public static String[] parseInterviewPreamble(String interviewPreamble) throws ParseException {
-        requireNonNull(interviewPreamble);
-        String[] trimmedInterviewPreamble = interviewPreamble.trim().split(" ");
-        if (trimmedInterviewPreamble.length != 2) {
-            throw new ParseException(InterviewCommand.MESSAGE_CONSTRAINTS);
-        }
-        return trimmedInterviewPreamble;
-    }
-
-    /**
-     * Parses a {@code String subCommandWord} into a String.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code subCommandWord} is not a valid sub-command.
-     */
-    public static String parseSubCommandWord(String subCommandWord) throws ParseException {
-        requireNonNull(subCommandWord);
-        String trimmedSubCommandWord = subCommandWord.trim();
-        if (!InterviewCommand.isValidSubCommandWord(trimmedSubCommandWord)) {
-            throw new ParseException(InterviewCommand.MESSAGE_CONSTRAINTS);
-        }
-        return trimmedSubCommandWord;
     }
 }

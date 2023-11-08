@@ -33,7 +33,7 @@ public class StatusTest {
         assertFalse(Status.isValidStatus("peter")); // does not match anything in enum JobStatus
 
         // valid status
-        assertTrue(Status.isValidStatus("to_be_submitted")); // all lowercase
+        assertTrue(Status.isValidStatus("to_add_status")); // all lowercase
         assertTrue(Status.isValidStatus("Pending")); // first letter capitalised
         assertTrue(Status.isValidStatus("appROVed")); // some lower case, some upper case
         assertTrue(Status.isValidStatus("REJECTED")); // all uppercase
@@ -41,11 +41,11 @@ public class StatusTest {
 
     @Test
     public void testEqualsAndHashcode() {
-        Status status = new Status("TO_BE_SUBMITTED");
+        Status status = new Status("Approved");
 
         // same values -> returns true
-        assertTrue(status.equals(new Status("TO_BE_SUBMITTED")));
-        assertEquals(status.hashCode(), new Status("TO_BE_SUBMITTED").hashCode());
+        assertTrue(status.equals(new Status("Approved")));
+        assertEquals(status.hashCode(), new Status("Approved").hashCode());
 
         // same object -> returns true
         assertTrue(status.equals(status));
