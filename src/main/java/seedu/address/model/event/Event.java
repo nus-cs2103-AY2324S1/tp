@@ -84,11 +84,8 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-
-        return person.equals(otherEvent.person)
-                && description.equals(otherEvent.description)
-                && startTime.equals(otherEvent.startTime)
-                && endTime.equals(otherEvent.endTime);
+        return person.isSamePerson(otherEvent.person)
+                && description.equals(otherEvent.description);
     }
 
     @Override
