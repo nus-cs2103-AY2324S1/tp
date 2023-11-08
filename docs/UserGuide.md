@@ -167,6 +167,10 @@ Format: `list [DAY]`
 **Expected Output when the command succeeds:** X tutees listed!
 
 **Expected Output when the command fails:**
+* **Invalid Input for prefix n/**:
+Names should only contain alphanumeric characters and spaces,
+  and it should not be blank
+* **Invalid Input for prefix sb/**: Subject can take any values, and it should not be blank.
 * **Invalid Prefix other than n/ and sb/**:
 
   Invalid command format!
