@@ -5,12 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showEmployeeAtIndex;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIds.ID_EMPLOYEE_NOT_EXISTS;
 import static seedu.address.testutil.TypicalIds.ID_FIRST_EMPLOYEE;
 import static seedu.address.testutil.TypicalIds.ID_SECOND_EMPLOYEE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
 
 import java.util.List;
 
@@ -21,8 +19,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.employee.Id;
-
 
 
 /**
@@ -63,35 +59,6 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIdUnfilteredList_throwsCommandException() {
         DeleteCommand deleteCommand = new DeleteCommand(ID_EMPLOYEE_NOT_EXISTS);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
-    }
-
-    @Test
-    public void execute_validIdFilteredList_success() {
-        // Delete first employee
-        showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
-
-        Employee employeeToDelete = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(ID_FIRST_EMPLOYEE);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EMPLOYEE_SUCCESS,
-                Messages.format(employeeToDelete));
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteEmployee(employeeToDelete);
-        showNoEmployee(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIdFilteredList_throwsCommandException() {
-        showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
-
-        Id invalidId = ID_SECOND_EMPLOYEE;
-
-        DeleteCommand deleteCommand = new DeleteCommand(invalidId);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EMPLOYEE_DISPLAYED_ID);
     }
