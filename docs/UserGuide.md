@@ -1,22 +1,12 @@
 ---
-layout: page
+layout: default
 title: User Guide
+pageNav: 3
 ---
-# Welcome to lesSON
+# User Guide for lesSON
 
-***Revolutionise your studying experience with lesSON!***
-
-lesSON is a **desktop application** aimed to help NUS Computer Science undergraduates make flashcards to aid with
-their memory work for school content.<br>
-Here are some benefits of adopting lesSON in your studying experience:
-- Create and Edit flashcards about key concepts taught in your courses
-- Take advantage of inbuilt **Spaced Repetition** to improve memory retention
-- Tag your flashcards based on their courses or topics to stay organised
-- Customise your flashcards using our markdown feature
-
---------------------------------------------------------------------------------------------------------------------
-
-# Table of Contents
+## Table of Contents
+1. [Introduction]()
 1. [Installation](#installation)
 2. [Quick start](#quick-start)
 3. [Glossary](#glossary)
@@ -42,28 +32,36 @@ Here are some benefits of adopting lesSON in your studying experience:
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Installation
+## Introduction
 
-1. Make sure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer.
-2. Download the latest jar file from [here](https://github.com/AY2324S1-CS2103T-W17-4/tp/releases/tag/v1.3(trial)).
-3. Move the jar file installed to a working folder you would store all of your flashcards
-4. Launch lesson by doing the following:
-   1. In the terminal or command prompt, use the `cd` command to navigate to the working folder.
-   [Not sure how to use cd?](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
-   2. Run lesSON using `java -jar lesSON.jar`
+#### ***Revolutionise your studying experience with lesSON!***
+
+Welcome to the user guide for lesSON, your ultimate companion in mastering the Computer Science
+curriculum at the National University of Singapore (NUS). This guide is designed to provide you with a
+comprehensive understanding of the app and how to leverage its powerful features for your academic success.
+
+##### What is lesSON?
+
+lesSON is not just another study app; it's a game-changer in the world of education.
+Tailored specifically for NUS Computer Science students, this application revolutionizes the
+way you learn and revise. Say goodbye to time-consuming note-taking, and say hello to a more efficient,
+effective, and enjoyable study experience, where flashcard creation is made incredibly easy.
+
+To maximise your study experience, here are some features we believe you'll love:
+1. **Enhanced Memory Retention:** Thanks to lesSON's inbuilt spaced repetition system, you can supercharge your memory and recall. The app optimizes when you should review your flashcards, ensuring you remember and grasp complex concepts with ease.
+2. **Intuitive Card Categorization:** lesSON helps you categorize your flashcards based on subject. This feature makes it a breeze to organize and access specific topics, keeping your study sessions focused and productive.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Quick Start
+## How to use this guide?
 
-1. To understand the terms we use in this guide better, check out [our glossary](#glossary).
-2. Better understand the GUI using [this guide](#user-interface-overview).
-3. For new users, we recommend reading [this tutorial](#tutorial).
-4. For advanced users, view all feature details in the [feature list](#feature-list).
+If you are a beginner, consider checking out our [Quick Start]() tutorial for new users. <br>
+If you are already familiar with lesSON, do explore all of our [features](). <br> 
+Here is an overview of all the [Commands]() available. <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Glossary
+## Glossary
 
 `Deck` - A scrollable list of flashcards on the GUI.
 
@@ -73,7 +71,24 @@ Here are some benefits of adopting lesSON in your studying experience:
 
 --------------------------------------------------------------------------------------------------------------------
 
-# User Interface Overview
+## Quick Start
+
+### Installation
+
+1. Make sure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer.
+2. Download the latest jar file from [here](https://github.com/AY2324S1-CS2103T-W17-4/tp/releases/tag/v1.3(trial)).
+3. Move the jar file installed to a working folder you would store all of your flashcards
+4. Launch lesson by doing the following:
+   1. In the terminal or command prompt, use the `cd` command to navigate to the working folder.
+   [Not sure how to use cd?](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
+   2. Run lesSON using `java -jar lesSON.jar`
+
+1. To understand the terms we use in this guide better, check out [our glossary](#glossary).
+2. Better understand the GUI using [this guide](#user-interface-overview).
+3. For new users, we recommend reading [this tutorial](#tutorial).
+4. For advanced users, view all feature details in the [feature list](#feature-list).
+
+### User Interface Overview
 
 Here is a quick overview of the user interface to get you oriented with where things are.
 
@@ -85,9 +100,7 @@ to create and change flashcards!
 instance in the event of a wrongfully formatted command.
 * Deck List - shows the list of flashcards
 
---------------------------------------------------------------------------------------------------------------------
-
-# Tutorial
+### Tutorial
 
 This tutorial explains how to add, edit, tag, and practise your flashcards. Feel free to follow along with lesSON open!
 For advanced users, feel free to look at the [feature list](#feature-list) instead.
@@ -110,7 +123,11 @@ indexes, as in this tutorial, to always operate on the most difficult card.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Feature list
+## CLI Notes
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Feature list
 
 ### Adding a Flashcard `add`
 
@@ -462,45 +479,47 @@ help
 (A window with the URL leading to the User Guide will pop out.
 Users can copy the URL by simply clicking on the 'Copy URL' button.)
 ```
---------------------------------------------------------------------------------------------------------------------
-# Additional Features
 
-## MarkDown Syntax
+--------------------------------------------------------------------------------------------------------------------
+
+## Additional Features
+
+### MarkDown Syntax
 
 For user who wish to incorporate styling in lesSON, there are 3 font styles currently supported:
 1. Bold
 2. Italic
 3. Underline
 
-### Bold
+#### Bold
 To bold a line of text, wrap text with `**`
 
-#### Example:
+##### Example:
 ```
 edit 1 q/ How many bits can a **Half Adder** add up
 ```
-#### Expected Result:
+##### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3b_bold.png)
 
-### Italic
+#### Italic
 To italicise a line of text, wrap text with `*`
 
-#### Example:
+##### Example:
 ```
 edit 1 q/ How many bits can a *Half Adder* add up
 ```
-#### Expected Result:
+##### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3b_italics.png)
 
-### Underline
+#### Underline
 To underline a line of text, insert `<u>` at the beginning of the text,
 and end with `</u>` at the end of the underlined text.
 
-#### Example:
+##### Example:
 ```
 edit 1 q/ How many bits can a <u>Half Adder</u> add up
 ```
-#### Expected Result:
+##### Expected Result:
 ![usage of bold syntax](./images/UserGuide/1.3b_underline.png)
 
 
@@ -510,11 +529,9 @@ Do not stack MarkDown Syntaxes
 Example:
 `` edit 1 q/ *** ``
 
-
 This may lead to unexpected behavior of text in the display view. In the case when unexpected MarkDown format is observed, edit the flashcard again with the without the MarkDown syntax/ with appropriate syntaxes.
 
-
-# Importing and Exporting Decks
+## Importing and Exporting Decks
 
 <div markdown="block" class="alert alert-info">
 
@@ -529,12 +546,12 @@ They are not to be confused as commands input by user, but rather as a method to
 Users can share their own Decks with others or download their Decks to their own.
 Both import and export features reside in the **File** menu.
 
-## Export
+### Export
 Users can share their own Deck by clicking on the `Export` button. Their own Deck
 will be displayed as a JSON file which can be easily copied either through the `Copy Data`
 button provided or other means.
 
-## Import
+### Import
 Users can enjoy the Decks of others by clicking on the `Import` button. A text field
 is displayed for users to paste in the JSON file containing the decks of others. The
 app will close upon clicking the `Import Data` button. Users will have to rerun the app
@@ -542,8 +559,28 @@ to see their new decks.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Frequently Asked Questions
+## Cautions
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Summary of Commands
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Frequently Asked Questions
 
 ### I can't run lesSON! What should I do?
 Please check that you have correctly installed lesSON by following the instructions [here](#installation). For further
 queries, feel free to contact us!
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Known Issues
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Contact Us
+
+--------------------------------------------------------------------------------------------------------------------
+
+# End of User Guide
