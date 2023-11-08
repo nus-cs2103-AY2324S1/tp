@@ -23,8 +23,6 @@ public class AppendLogCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "The last filtered values have been added onto the logger tab.";
 
-    public static final String MESSAGE_DUPLICATE = "This result exists in the logger already.";
-
     public static final String MESSAGE_FAILURE = "Cannot log an empty list.";
 
     public static final String MESSAGE_UNDO_ALOG_SUCCESS = "Undoing the appending to log.";
