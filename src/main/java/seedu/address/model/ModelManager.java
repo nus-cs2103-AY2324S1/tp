@@ -289,7 +289,7 @@ public class ModelManager implements Model {
     public void linkUi(Ui ui) {
         this.ui = ui;
     }
-
+    // could be more robust
     @Override
     public void showPerson(Person person) {
         currentShowingPerson = person;
