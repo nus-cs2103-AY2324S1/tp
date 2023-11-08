@@ -27,8 +27,10 @@ Given below are my contributions to the project.
         * **[#300](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/300)**: Updated quick start to include possible error scenarios.
         * **[#298](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/298)**: Updated footnotes for navigability.
     * <u>Developer Guide</u>:
-        * Added implementation details of feature to delete schedule.
-        * Added planned enhancements for filter schedules by pending status.
+        * **[#318](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/318)**: Added implementation details of feature to list schedules.
+        * **[#318](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/318)**: Added implementation details of feature to find schedules.
+        * **[#162](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/162)**: Added implementation details of feature to delete schedule.
+        * **[#315](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/315)**: Added planned enhancements for filter schedules by pending status.
 
 * **Contribution to team-based tasks**:
     * Contributed initial idea on evolving AB3 to a [tutor and schedule management system](https://docs.google.com/document/d/1REGMsfhQjjAkhuf3YNzOJHRS0HQOd5Qh_4Buaj-H2uA/edit?usp=sharing) for Tutor Coordinators.
@@ -36,7 +38,10 @@ Given below are my contributions to the project.
     * Implement schedule structure: Contributed in creating `Schedule` object from team discussions.
 
 * **Review/ mentoring contributions**:
-    * Review PRs: 
+    * Review PRs: [#312](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/312), [#310](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/310), [#303](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/303), [#302](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/302),
+      [#291](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/291), [#211](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/211), [#180](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/180), [#177](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/177), [#166](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/166),
+      [#114](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/114), [#72](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/72), [#71](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/71), [#51](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/51),
+      [#35](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/35)
 
 * **Contributions beyond the project team**:
     * Clarifying types of test case scenarios that may be deemed as a bug ([#325](https://github.com/nus-cs2103-AY2324S1/forum/issues/325)).
