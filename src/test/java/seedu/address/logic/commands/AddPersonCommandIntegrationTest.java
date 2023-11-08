@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -33,7 +34,7 @@ public class AddPersonCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalScheduleList());
         expectedModel.addPerson(validPerson);
-
+        expectedModel.setState(State.STUDENT);
         assertCommandSuccess(new AddPersonCommand(validPerson), model,
                 String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 expectedModel);
