@@ -12,6 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.Rating;
 
+//@@author jonxzx
 /**
  * Rate the interview with the given rating.
  */

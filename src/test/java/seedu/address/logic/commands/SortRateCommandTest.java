@@ -10,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
+//@@author jonyxzx
 public class SortRateCommandTest {
     private Model model;
     private Model expectedModel;

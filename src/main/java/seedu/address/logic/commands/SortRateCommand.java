@@ -7,6 +7,7 @@ import java.util.Comparator;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
 
+//@@author jonyxzx
 /**
  * Rate all interviews in descending order in the address book to the user.
  */

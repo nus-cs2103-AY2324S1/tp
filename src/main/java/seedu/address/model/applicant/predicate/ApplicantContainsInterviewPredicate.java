@@ -7,6 +7,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 
+//@@author jonyxzx
 /**
  * Tests that an {@code Applicant} matches any of the interviews' applicant given.
  */

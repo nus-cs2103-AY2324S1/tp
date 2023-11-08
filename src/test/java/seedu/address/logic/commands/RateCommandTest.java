@@ -20,6 +20,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.Rating;
 
+//@@author jonyxzx
 public class RateCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Rating testRating = new Rating("2.0");

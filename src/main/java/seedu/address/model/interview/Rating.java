@@ -3,6 +3,7 @@ package seedu.address.model.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author jonyxzx
 /**
  * Represents an Interview's rating in the address book.
  */
