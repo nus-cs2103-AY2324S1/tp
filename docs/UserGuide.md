@@ -386,7 +386,7 @@ Finds tutors whose names contain any of the given keywords.
 You would like to contact tutor **John Doe**, but you can't remember his phone number. You try to look for him in the 
 list of tutors but the list has gotten far too long, and you can't find him.
 
-If this has happened to you before, Fret not! The find tutor command is here to save the day.
+If this has happened to you before, fret not! The find tutor command is here to save the day.
 
 **Follow these steps**
 
@@ -760,7 +760,7 @@ Removes the status of a schedule.
 Oops! You have accidentally marked the wrong schedule to be COMPLETED.\
 The class for that schedule has yet to occur so its status should be left empty.
 
-Don't worry, as you can do just that with the `unmark` command.
+Don't worry, as you can do just that with the unmark command.
 
 **Follow these steps**
 
