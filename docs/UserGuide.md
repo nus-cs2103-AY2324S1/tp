@@ -295,7 +295,7 @@ Edits an existing tutor found in TutorConnect.
 
 **Scenario**
 
-Imagine that tutor John Doe has changed his phone number to **87654321**.
+Imagine that tutor John Doe has changed his phone number to **87654321**.\
 As a tuition centre coordinator, you want to have the most up-to-date information on your tutors.  
 
 Let's use the edit tutor command to update his phone number!
@@ -757,7 +757,7 @@ Removes the status of a schedule.
 
 **Scenario**
 
-You have accidentally marked the wrong schedule to be COMPLETED.
+Oops! You have accidentally marked the wrong schedule to be COMPLETED.\
 The class for that schedule has yet to occur so its status should be left empty.
 
 Don't worry, as you can do just that with the `unmark` command.
