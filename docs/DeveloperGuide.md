@@ -1150,7 +1150,7 @@ Given below are the planned enhancements. The _current behaviour_ specifies how 
 
 * Better help window pop-up behaviour.
   * Current behaviour: When the help window is already opened and minimised, and the `help` command is called, the help window does not open again.
-  * Enhanced behaviour: The help window should still pop up when the `help` command is called.
+  * Enhanced behaviour: The help window should still pop up when the `help` command is called. (Note: this might already be the behaviour on Mac OS)
 
 --------------------------------------------------------------------------------------------------------------------
 
