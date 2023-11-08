@@ -247,7 +247,7 @@ Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
 **:information_source: Tutor's name**<br>
 
 * Tutor's name can only include letters and numbers.
-* Tutor's name is case-sensitive. E.g., `John` and `john` is different!
+* Tutor's name is case-sensitive. E.g., `John` and `john` are considered different names!
 
 </div>
 
