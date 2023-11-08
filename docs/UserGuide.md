@@ -581,6 +581,10 @@ JABPro currently does not support editing tags i.e. editing tag name or category
 * If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
   </box>
 
+### Exporting events : `export`
+
+JABPro currently does not support exporting Events. This feature will be implemented in future iterations.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
