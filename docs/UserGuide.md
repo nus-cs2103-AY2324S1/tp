@@ -232,7 +232,7 @@ Format: `find n/STUDENT_NAME [STUDENT_NAME]… | id/STUDENT_ID [STUDENT_ID]…`
 * `STUDENT_ID` should be a string made up of alphabetical characters and numbers, with no special characters or space.
 
 Examples:
-*  `find n/Anthony Yiqiao` Finds all contacts with the name "Anthony" and "Yiqiao".
+*  `find n/Anthony Yiqiao` Finds all contacts with the name "Anthony" and/or "Yiqiao".
 *  `find id/A0123456H` Finds all contacts with the student ID "A0123456H".
 
 ### Listing students : `list students`
