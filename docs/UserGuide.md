@@ -143,7 +143,40 @@ For each interview, we see the following details:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list-i`, `list-a`, `list-i-done`, `list-i-not-done`,
 `list-today`, `sort-rate`, `sort-time`, `exit`, and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* List of accepted date formats:
+  * DD/MM/YYYY and time:
+    * `16 May 2024 1515`
+    * `16 May 2024 3.15pm`
+    * `16 May 2024 3pm`
+    * `16-05-2024 1515`
+    * `16-05-2024 3.15pm`
+    * `16-05-2024 3pm`
+    * `16-05-24 1515`
+    * `16-05-24 3.15pm`
+    * `16-05-24 3pm`
+    * `16/05/2024 1515`
+    * `16/05/2024 3.15pm`
+    * `16/05/2024 3pm`
+    * `16/05/24 1515`
+    * `16/05/24 3.15pm`
+    * `16/05/24 3pm`
+  * MM, DD and time:
+    * `16 May 1515`
+    * `16 May 3.15pm`
+    * `16 May 3pm`
+    * `16 January 1515`
+    * `16 January 3.15pm`
+    * `16 January 3pm`
+    * `16/5 1515`
+    * `16/5 3.15pm`
+    * `16/5 3pm`
+    * `16/05 1515`
+    * `16/05 3.15pm`
+    * `16/05 3pm`
 </div>
+
+
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -270,48 +303,25 @@ Adds an interview to **InterviewHub**.
 
 Format: `add-i app/APPLICANT_ID jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME`
 
-| Parameter             | Representation                                            | Constraints                                                                                                                                             |
-|-----------------------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `APPLICANT_ID`        | The index of the applicant as shown in the applicant list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list |
-| `JOB_ROLE`            | The role the applicant is interviewing for                | Must contain only alphanumeric characters and spaces                                                                                                    |
-| `START_DATE_AND_TIME` | Starting time of the interview                            | Must be in one of the accepted formats stated below AND must be before the end time AND must be on the same day as the end time                         |
-| `END_DATE_AND_TIME`   | Ending time of the interview                              | Must be in one of the accepted formats stated below AND must be after the start time AND must be on the same day as the start time                      |
+| Parameter             | Representation                                              | Constraints                                                                                                                                             |
+|-----------------------|-------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `APPLICANT_ID`        | The index of the applicant as shown in the applicant list   | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list |
+| `JOB_ROLE`            | The role/title of the job the applicant is interviewing for | Must contain only alphanumeric characters, spaces or commonly used special symbols (E.g. @ - # &)                                                       |
+| `START_DATE_AND_TIME` | Starting time of the interview                              | Must be in one of the accepted formats stated below AND must be before the end time AND must be on the same day as the end time                         |
+| `END_DATE_AND_TIME`   | Ending time of the interview                                | Must be in one of the accepted formats stated below AND must be after the start time AND must be on the same day as the start time                      |
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** JOB_ROLE allows empty strings to be entered to handle situations where the applicant is applying
 to the company in general.
 </div>
 
-List of accepted date formats:
-  * DD/MM/YYYY and time:
-    * `16 May 2024 1515`
-    * `16 May 2024 3.15pm`
-    * `16 May 2024 3pm`
-    * `16-05-2024 1515`
-    * `16-05-2024 3.15pm`
-    * `16-05-2024 3pm`
-    * `16-05-24 1515`
-    * `16-05-24 3.15pm`
-    * `16-05-24 3pm`
-    * `16/05/2024 1515`
-    * `16/05/2024 3.15pm`
-    * `16/05/2024 3pm`
-    * `16/05/24 1515`
-    * `16/05/24 3.15pm`
-    * `16/05/24 3pm`
-  * MM, DD and time:
-    * `16 May 1515`
-    * `16 May 3.15pm`
-    * `16 May 3pm`
-    * `16 January 1515`
-    * `16 January 3.15pm`
-    * `16 January 3pm`
-    * `16/5 1515`
-    * `16/5 3.15pm`
-    * `16/5 3pm`
-    * `16/05 1515`
-    * `16/05 3.15pm`
-    * `16/05 3pm`
+Examples of accepted date formats (full list [here](#features)):
+* DD/MM/YYYY and time:
+  * `16 May 2024 1515`
+  * `16 May 2024 3.15pm`
+* MM, DD and time:
+  * `16 May 1515`
+  * `16 May 3.15pm`
 
 Example:
 * `add-i app/3 jr/software engineer start/12-12-2023 1400 end/12-12-2023 1500`
@@ -342,43 +352,20 @@ Format: `edit-i INTERVIEW_INDEX [jr/JOB_ROLE] [start/START_DATE_AND_TIME] [end/E
 | Parameter             | Representation                                            | Constraints                                                                                                                                             |
 |-----------------------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `INTERVIEW_INDEX`     | The index of the interview as shown in the interview list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list |
-| `JOB_ROLE`            | The role the applicant is interviewing for                | Must contain only alphanumeric characters and spaces                                                                                                    |
+| `JOB_ROLE`            | The role the applicant is interviewing for                | Must contain only alphanumeric characters, spaces or commonly used special symbols (E.g. @ - # &)                                                       |
 | `START_DATE_AND_TIME` | Starting time of the interview                            | Must be one of the accepted formats stated below AND must be before the end time AND must be on the same day as the end time                            |
 | `END_DATE_AND_TIME`   | Ending time of the interview                              | Must be one of the accepted formats stated below AND must be after the start time AND must be on the same day as the start time                         |
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * To edit the `RATING` field (re-rating an interview), please refer to the [rate command](#rating-an-interview--rate)
-* List of accepted date formats:
-    * DD/MM/YYYY and time:
-        * `16 May 2024 1515`
-        * `16 May 2024 3.15pm`
-        * `16 May 2024 3pm`
-        * `16-05-2024 1515`
-        * `16-05-2024 3.15pm`
-        * `16-05-2024 3pm`
-        * `16-05-24 1515`
-        * `16-05-24 3.15pm`
-        * `16-05-24 3pm`
-        * `16/05/2024 1515`
-        * `16/05/2024 3.15pm`
-        * `16/05/2024 3pm`
-        * `16/05/24 1515`
-        * `16/05/24 3.15pm`
-        * `16/05/24 3pm`
-    * MM, DD and time:
-        * `16 May 1515`
-        * `16 May 3.15pm`
-        * `16 May 3pm`
-        * `16 January 1515`
-        * `16 January 3.15pm`
-        * `16 January 3pm`
-        * `16/5 1515`
-        * `16/5 3.15pm`
-        * `16/5 3pm`
-        * `16/05 1515`
-        * `16/05 3.15pm`
-        * `16/05 3pm`
+* Examples of accepted date formats (full list [here](#features)):
+* DD/MM/YYYY and time:
+  * `16 May 2024 1515`
+  * `16 May 2024 3.15pm`
+* MM, DD and time:
+  * `16 May 1515`
+  * `16 May 3.15pm`
 
 Examples:
 *  `edit-i 1 jr/software-engineer` Edits the job title of the 1st interview to be `software-engineer`.
