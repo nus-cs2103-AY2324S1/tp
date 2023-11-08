@@ -16,6 +16,7 @@ public class AppointmentTime implements Comparable<AppointmentTime> {
     public static final String MESSAGE_CONSTRAINTS =
             "1. AppointmentTime start must be before AppointmentTime end.\n"
             + "2. AppointmentTime must also not overlap with an existing Appointment's time.\n"
+            + "3. Ensure that the start and end date time are valid dates.\n"
             + "* Note: Date indicated must be YYYY/MM/DD"
             + "(i.e. 2th Jan 2020 must be input as 02/01/2021 instead of 2020-01-01).\n"
             + "* Note: Time indicated must be XX:XX (i.e. 9AM must be input as 09:00 instead of 9:00).\n"
