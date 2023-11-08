@@ -46,4 +46,10 @@ public class DeleteTaskCommand extends Command {
         model.showLesson(model.getLessonClashWith(currentlyShownLesson));
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteTaskCommand // instanceof handles nulls
+                && taskIndex == (((DeleteTaskCommand) other).taskIndex)); // state check
+    }
 }

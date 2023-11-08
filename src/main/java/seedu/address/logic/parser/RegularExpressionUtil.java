@@ -11,4 +11,5 @@ public class RegularExpressionUtil {
     public static final String ONE_TO_TWO_DIGITS = "\\s*([0-9]{1,2})\\s*";
     public static final String FOUR_DIGITS = "\\s*([0-9]{4})\\s*";
     public static final String STARTING_WITH_NEGATIVE_NUMBER = "^-(\\d+)\\s*";
+    public static final String ABUSING_INDEX_WITH_DECIMAL_OR_DIVISION = "^\\d+\\.\\s*\\d+\\s*|\\d+\\/\\s*\\d+\\s*";
 }
