@@ -29,6 +29,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.state.State;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonScheduleListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -197,6 +198,7 @@ public class LogicManagerTest {
             expectedPerson.setAddress(new Address("Block 312, Amy Street 1"));
             expectedPerson.setSubjectsIfNotDefault(Set.of(new Subject("Mathematics")));
             ModelManager expectedModel = new ModelManager();
+            expectedModel.setState(State.STUDENT);
             expectedModel.addPerson(expectedPerson);
             assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
         } catch (ParseException e1) {

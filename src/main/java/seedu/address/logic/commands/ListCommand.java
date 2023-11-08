@@ -23,9 +23,9 @@ public class ListCommand extends Command {
             + "specified list displays the schedule list. When specifying STUDENTS list,"
             + "optional parameters can be used to specify what student details to display\n"
             + "Parameters: [LIST] [KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " SCHEDULE\n"
-            + "Example: " + COMMAND_WORD + " STUDENTS phone email\n"
-            + "Example: " + COMMAND_WORD + " TASKS";
+            + "Example: " + COMMAND_WORD + " schedule\n"
+            + "Example: " + COMMAND_WORD + " students phone email\n"
+            + "Example: " + COMMAND_WORD + " tasks";
     private final State state;
     private final String[] displayParams;
 

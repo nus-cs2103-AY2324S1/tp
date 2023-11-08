@@ -146,6 +146,7 @@ The `Model` component,
 * stores the schedule data i.e., all `lesson` objects (which are contained in a `Schedule` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores the task data of all the lessons i.e., all `task` objects (which are contained in the `TaskList` objects of each `Lesson` object).
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 * links to the UI component to display the Show Details Panel in the UI (to reduce code complexity).
 * stores a `State` object that represents the current state of the app. Currently, the only 3 possible states are `STUDENT`, `SCHEDULE` and `NONE`.
@@ -243,6 +244,26 @@ The following sequence diagram shows how the show operation works for showing a 
 * **Alternative 2:** Pass the Ui call from the Show Command around the currently linked files.
     * Pros: No additional coupling created.
     * Cons: Many files will have to be changed and will increase the complexity of the code.
+
+### Task List Feature
+
+#### Implementation
+
+The task list functionality is facilitated by multiple related classes. The `TaskList` can contain any number of `Task` objects. The `TaskList` is implemented as a component of each Lesson so that each lesson will have its own individual Task List.
+
+The `FullTaskList` class is implemented as a list to view all the collective tasks of all the lessons. It uses a similar structure to ScheduleList to display the list.
+
+#### Design considerations:
+
+**Aspect: How the Task List structure should be implemented:**
+
+* **Alternative 1 (current choice):** Each individual Lesson will contain a Task List.
+    * Pros: Easy to implement.
+    * Cons: May be hard to increase navigability from students to lessons and tasks.
+
+* **Alternative 2:** Create a central Task List and filter the tasks for each lesson.
+    * Pros: May be easier to increase navigability.
+    * Cons: May increase code complexity due to filtering the respective tasks.
 
 
 ### \[Proposed\] Undo/redo feature

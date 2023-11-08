@@ -12,7 +12,7 @@ import seedu.address.model.ScheduleList;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book and schedule has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Student, schedule and task list has been cleared!";
 
     @Override
     public CommandResult execute(Model model) {

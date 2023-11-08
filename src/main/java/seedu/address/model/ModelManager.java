@@ -329,7 +329,9 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredLessons.equals(otherModelManager.filteredLessons);
+                && filteredLessons.equals(otherModelManager.filteredLessons)
+                && scheduleList.equals(otherModelManager.scheduleList)
+                && state.equals(otherModelManager.state);
     }
     //=========== Modify tasks in Lesson  =============================================================
 

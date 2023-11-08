@@ -14,7 +14,7 @@ public class DeleteTaskCommand extends Command {
     public static final String COMMAND_WORD = "deletetask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task identified by the task index from the currently displayed lesson .\n"
+            + ": Deletes the task identified by the task index from the currently displayed lesson.\n"
             + "Parameters: task index (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
