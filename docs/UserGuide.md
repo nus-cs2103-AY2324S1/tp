@@ -145,7 +145,7 @@ Click on any of these below to jump to the respective sections of the guide!
 ![start](images/tutorial/start.png)
 
 When you first launch TutorConnect, you will notice that it comes preloaded with sample data for you to experiment with.
-You may use the sample data to familiarise yourself with the various [features](#features) that TutorConnect provide.
+You may use the sample data to familiarise yourself with the various [features](#features) that TutorConnect provides.
 
 Alternatively, if you're ready to start with your own data, you can easily remove all the sample entries:
 1. Simply type into the Command Box: `clear`
