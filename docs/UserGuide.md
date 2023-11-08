@@ -1076,7 +1076,13 @@ TutorConnect is always looking to improve. Currently, there are a few known issu
 development team is working round the clock to solve. Don't worry, every version of TutorConnect released for you to 
 use is sure to solve your scheduling needs.
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only 
+   the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by 
+   the application before running the application again.
+2. **For Window users with the Windows 11 operating system or older versions**, if you try double-clicking the jar file 
+   to launch the TutorConnect application, it will throw a Java Exception that prevents the jar file from opening. The 
+   remedy is to open a command terminal on the folder where `TutorConnect.jar` is and type the following command:
+   `java -jar TutorConnect.jar` before hitting enter. The command should run and launch the application.
 
 [Back To Top](#table-of-contents)
 
