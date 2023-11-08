@@ -75,6 +75,7 @@ Pull requests: [#235](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/235) [#2
     This also includes the use cases related to edit command.
     Pull request: [#138](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/138) and the one below
     * Refined documentation on the model package. Pull request: [#238](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/238)
+    * Update planned enhancements. Pull request: [#248](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/248)
 
 * **Community**:
   * Conducted team weekly meetings.
