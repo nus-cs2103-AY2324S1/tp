@@ -14,8 +14,8 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class GuiSettings implements Serializable {
 
-    private static final double DEFAULT_HEIGHT = 500;
-    private static final double DEFAULT_WIDTH = 500;
+    private static final double DEFAULT_HEIGHT = 600;
+    private static final double DEFAULT_WIDTH = 740;
 
     private final double windowWidth;
     private final double windowHeight;
@@ -25,9 +25,8 @@ public class GuiSettings implements Serializable {
      * Constructs a {@code GuiSettings} with the default height, width and position.
      */
     public GuiSettings() {
-        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        windowWidth = screenBounds.getWidth() * 0.8;
-        windowHeight = screenBounds.getHeight() * 0.8;
+        windowWidth = DEFAULT_WIDTH;
+        windowHeight = DEFAULT_HEIGHT;
         windowCoordinates = null; // null represent no coordinates
     }
 
@@ -38,6 +37,15 @@ public class GuiSettings implements Serializable {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         windowCoordinates = new Point(xPosition, yPosition);
+    }
+
+    /**
+     * Initializes GuiSettings with the size of the screen. To be used when JavaFX is initialized.
+     */
+    public static GuiSettings fromScreenDimensions() {
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        return new GuiSettings(screenBounds.getWidth(), screenBounds.getHeight(),
+                0, 0);
     }
 
     public double getWindowWidth() {
