@@ -57,10 +57,10 @@ public class TaskTest {
         Task editedTask2 = new Task(TASK_2.getDescription().toLowerCase());
         assertFalse(TASK_2.isSameTask(editedTask2));
 
-        // desc has trailing spaces -> returns false
+        // desc has trailing spaces -> returns true as description is trimmed
         String descWithTrailingSpaces = TASK_2.getDescription() + " ";
         editedTask2 = new Task(descWithTrailingSpaces);
-        assertFalse(TASK_2.isSameTask(editedTask2));
+        assertTrue(TASK_2.isSameTask(editedTask2));
     }
 
     @Test
