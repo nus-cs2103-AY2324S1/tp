@@ -224,7 +224,7 @@ Format: `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GRO
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
 * `PHONE_NUMBER` should be a string made up of numbers
 * `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space.
+* `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
 
 Examples:
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234568E`
