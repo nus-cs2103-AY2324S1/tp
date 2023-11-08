@@ -116,7 +116,12 @@ public class ModelStub implements Model {
 
     @Override
     public void setTaskListForMember(Member member) {
+        throw new AssertionError("This method should not be called.");
+    }
 
+    @Override
+    public void clearTaskList() {
+        throw new AssertionError("This method should not be called.");
     }
 
     @Override
