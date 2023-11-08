@@ -30,7 +30,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of TAvigator.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -164,6 +164,7 @@ Both list commands are parsed with `ListCommandParser`. If parsed successfully, 
 a `ListStudentsCommand` or `ListAttendanceCommand`.
 
 The following is a class diagram depicting `ListCommand`, `ListStudentsCommand` and `ListAttendanceCommand`:
+
 ![ListCommandClassDiagram](images/ListCommandClassDiagram.png)
 
 Shown below is the sequence diagram of `ListStudentsCommand` when `list students` is entered by the User:
@@ -263,6 +264,14 @@ Another possible way to implement this feature would be to abstract the attendan
 The view feature allows the user to view the detailed attendance records of the students in the contact list. This
 feature is implemented using the `ViewCommand` class. It is parsed by the `ViewCommandParser` class. If parsed
 successfully, it returns a `ViewCommand` object.
+
+The following sequence diagram shows how the ViewCommand function works:
+
+![ViewSeqDiagram](images/ViewSeqDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a ViewCommand:
+
+![ViewActivityDiagram](images/ViewActivityDiagram.png)
 
 #### Design considerations
 

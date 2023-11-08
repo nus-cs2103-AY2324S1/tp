@@ -87,7 +87,7 @@ public class AddressBookParser {
         case CourseCommand.COMMAND_WORD:
             return new CourseCommandParser().parse(arguments);
 
-        case ViewCommand.COMMAND_WORD:
+            case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
         case MergeCommand.COMMAND_WORD:
