@@ -285,7 +285,7 @@ Aspect: How find command matches the arguments for name
         * Too many applicants might show up in a single find command which defeats
           the purpose of the find command
 
-### Time features
+### parseDate API
 
 #### Implementation
 This feature is implemented though the `TimeParser` class. This class contains several public static methods related to manipulating time:
@@ -804,6 +804,23 @@ testers are expected to do more *exploratory* testing.
 ### Listing all interviews
 
 ### Listing all free timing for the given day
+Command: `list-freetime`</br>
+More information on usage: list-freetime command
+
+1. Listing the free time for a day using `DD/MM/YYYY` or `DD-MM-YYYY` format
+   1. Prerequisites: The date string must be in the DD/MM/YYYY or DD-MM-YYYY format, and there should not be any interviews scheduled for the given date
+   2. Test case: `list-freetime 12/12/2099`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
+   3. Test case: `list-freetime 12-12-2099`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
+   4. Success message shown in command box for both cases:</br> `Free times on 12/12/2099:`</br>`from: 09:00 to: 17:00`
+2. Listing the free time for a day using `DD/MM` or `DD MMM` format, where 
+   1. Prerequisites: The date string must be in the DD/MM or DD MMM format, and there should not be any interviews scheduled for the given date
+   2. Test case: `list-freetime 12/12`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
+   3. Test case: `list-freetime 12 Dec`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
+   4. Success message shown in command box for both cases:</br> `Free times on 12/12/2023:`</br>`from: 09:00 to: 17:00`
+3. Listing the free time for a date in the past
+   1. Prerequisite: The date string must follow one of the accepted date formats
+   2. Test case: `list-freetime 12-12-1970`</br>Expected: Command does not execute.
+   3. Error message shown in command box:</br>`Input date cannot be in the past!`
 
 ### Listing all interviews for today
 
@@ -812,11 +829,32 @@ testers are expected to do more *exploratory* testing.
 ### Rating an interview
 
 ### Listing all completed interview
+Command: `list-i-done`</br>
+More information on usage: list-i-done command
 
+1. Listing completed interviews with exact command
+    1. Test case: `list-i-done`</br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty 
+2. Listing completed interviews with the command along with nonsensical parameters appended to the end
+   1. Test case: `list-i-done I am a cat`</br>Expected: Same expected result as test case 1
+   
 ### Listing all incomplete interview
+Command: `list-i-not-done`</br>
+More information on usage: list-i-not-done command
 
+1. Listing completed interviews with exact command
+    1. Test case: `list-i-not-done`</br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty
+2. Listing completed interviews with the command along with nonsensical parameters appended to the end
+    1. Test case: `list-i-not-done I am a cat`</br>Expected: Same expected result as test case 1
+   
 ### Sorting the interview list by rating
 
 ### Sorting the interview list by start-time
+Command: `sort-time`</br>
+More information on usage: sort-time command
 
+1. Listing completed interviews with exact command
+   1. Test case: `sort-time`</br>Expected: The interview list will be sorted in chronological order of start times. If there are no interviews scheduled, the interviews box will be empty. In the case that the list is filtered in some way, the sort will only sort on the filtered interview list
+2. Listing completed interviews with the command along with nonsensical parameters appended to the end
+    1. Test case: `sort-time I am a cat`</br>Expected: Same expected result as test case 1
+   
 [Back to the Table of Contents](#table-of-contents)
