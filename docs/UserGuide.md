@@ -116,13 +116,13 @@ An example is shown below.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/G01` or as `n/John Doe`.
+  e.g `n/NAME [t/TUTORIAL_GROUP_ID]` can be used as `n/John Doe t/G01` or as `n/John Doe`.
 
 * Items with `|` indicate that the command accepts either parameters.<br>
   e.g `mark n/STUDENTNAME | id/STUDENTID` takes in `STUDENTNAME` or `STUDENTID` as its first argument.
 
 * Items with `…​` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as many times as desired (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TUTORIAL_GROUP_ID]…​` can be used as many times as desired (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -232,17 +232,17 @@ Edits the contact details.
 
 ![edit contact](images/editContact.png)
 
-Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP]...`
+Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`
 
 * Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+* When editing tutorial groups, the existing tutorial groups of the person will be removed i.e adding of tutorial groups is not cumulative.
+* You can remove all the person’s tutorial groups by typing t/ without specifying any tutorial groups after it.
 
 Examples:
 *  `edit 1 n/Tan Liyan` Edits the name of the first person to be Tan Liyan.
-*  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tutorial group tags from contact.
+*  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tutorial groups from contact.
 
 #### 3.2.3 Marking attendance of student: `mark`
 
@@ -359,7 +359,7 @@ Format: `merge PRIMARY_INDEX SECONDARY_INDEX`
 
 * Information of the primary student is retained.
 * If any information fields of the primary student are empty, they are filled with information of the secondary student.
-* The merged student contains tags of both students.
+* The merged student contains tutorial groups of both students.
 
 Examples:
 * `merge 1 2` merges the information of the first two displayed students.

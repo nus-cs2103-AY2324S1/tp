@@ -197,7 +197,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("id", id)
-                .add("tags", tags)
+                .add("tutorial groups", tags)
                 .toString();
     }
 
