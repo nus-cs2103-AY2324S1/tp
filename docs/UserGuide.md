@@ -512,6 +512,15 @@ patient can have more than 1 medical history.
 Individually, medical histories do not have a strict format to adhere to. However, every medical
 history a patient has should be unique from one another.
 
+Medical Conditions are restricted to 50 alphanumeric characters, and may also contain these symbols: `+``_``.``-`.
+
+Some examples of valid Medical History formats are listed here:
+```
+Hypertension
+Covid-19
+Pneumonoultramicroscopicsilicovolcanoconiosis
+```
+
 #### Appointment
 
 The appointment slot assigned to your patients. A patient may have no appointment assigned to them.
