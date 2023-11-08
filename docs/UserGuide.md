@@ -191,8 +191,9 @@ When you enter the command (Hi):
 #### What this command does:
 * Finds persons whose names contain any of the given keywords.
 
-Format: find KEYWORD 
+Format: 
 
+ - Command: `find [KEYWORD]`
  - The search is case-insensitive. e.g hans will match Hans
  - The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
  - Only the name is searched.
