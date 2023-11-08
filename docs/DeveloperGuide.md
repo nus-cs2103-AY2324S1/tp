@@ -292,7 +292,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
 - `TimeParser#parseDate(String date, boolean dateOnly)`  —  Takes in a time String as input, and returns a `Time` instance, which is a wrapper class for a LocalDateTime object which will store the time information (i.e. day, month, year, hour, minute) as well as providing utility methods for manipulating Time.
   
   - The `dateOnly` parameter is a flag to indicate how to parse the given `date`. If `dateOnly` is set to false, then the TimeParser will parse valid dates that are in the list of accepted date (without time) formats. Otherwise, if `dateOnly` is set to true, then the TimeParser will parse valid dates that are in the list of accepted date (with time) formats.
-  - Accepted date (with time) format examples:
+  - Accepted time formats:
       * DD/MM/YYYY and time:
           * `16 May 2024 1515`
           * `16 May 2024 3.15pm`
@@ -322,7 +322,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
           * `16/05 1515`
           * `16/05 3.15pm`
           * `16/05 3pm`
-    - Accepted date (with time) format examples:
+    - Accepted date formats
       * DD/MM/YYYY:
         * `16-05-2024`
         * `16/05/2024`
@@ -357,13 +357,38 @@ This feature is implemented though the `TimeParser` class. This class contains s
         * High risk; not guaranteed to be better after overhaul
         * Developer is not familiar with other time libraries
 
-### List all free timing for today feature
-
+### List all free timing for a given day feature
 #### Implementation
+The list free times for a given day feature allows the user to list all the blocks of time that are not taken by a scheduled interview. This command is in the format `list-freetime DATE` where `DATE` is a valid date string.
 
+
+The `list-freetime DATE` command is facilitated by the `ListFreeTimeCommand`, `ListFreeTimeCommandParser`, along with the other internal classes omitted for brevity.
 #### How is the command executed
-
+1. The user inputs the `list-freetime DATE`
+2. The `LogicManager` receives the command string and forwards it to the `AddressBookParser`.
+3. The `AddressBookParser` checks the type of command and constructs `ListFreeTimeCommandParser` to parse the keyword(s).
+4. The `execute` method of the `ListFreeTimeCommandParser` is called, which will call the `parseDate` method of the `TimeParser` API class.
+5. `parseDate` will take in the date string as argument. If valid, it will return a `Time` instance containing a LocalDateTime containing the date information.
+6. The `ListFreeTimeCommandParser` constructs `ListFreeTimeCommand` with the Time instance (created by `parseDate` earlier) passed into its constructor.
+7. The `LogicManager` executes the `ListFreeTimeCommand` which calls the `Model#listPocketsOfTimeOnGivenDay(Time givenDay)` method.
+8. The `ListFreeTimeCommand` will then use an internal method, formatFreeTime(List<Pair<Time, Time>> freeTimes), to parse the list of free times into a string.
+9. The `ListFreeTimeCommand` construct `CommandResult` containing the free times on the given day, and returns it to `LogicManager`.
+10. The GUI will be updated automatically by when the list changes.
 #### Design consideration
+Aspect: How the command finds free times:
+* **Alternative 1 (current choice):** implement a method in the `ModelManager` class
+    * Pros:
+        * Can access all the interviews that the user has scheduled that is within the `AddressBook` object instance, which maintains the information hiding principle
+    * Cons:
+        * The command will cause the control to be passed to `ModelManager` first, then to `AddressBook` where the logic for looking for free times happens. This results in an additional layer of abstraction, which increases the complexity of the command slightly
+
+* **Alternative 2:** Use the getter methods of the `AddressBook` class
+    * Pros:
+        * One less layer of abstraction, reducing complexity
+        * Easier to implement
+    * Cons:
+        * The `ListFreeTimeCommand` will have to call the `getAddressBook` method of the `ModelManager` object instance, and then use the getter method of the `AddressBook` object instance. Violates the _Law of Demeter_ principle since the methods of a stranger (i.e. `AddressBook`) is being called, which `ListFreeTimeCommand` is not closely related to
+        * Increases coupling since `ListFreeTimeCommand` now has a dependency with `AddressBook`
 
 ### List all interviews for today feature
 
