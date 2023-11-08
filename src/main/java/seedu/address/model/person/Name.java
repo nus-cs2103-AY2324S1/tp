@@ -34,7 +34,7 @@ public class Name extends ListEntryField {
         if (!Name.isValidName(name)) {
             throw new ParseException(MESSAGE_CONSTRAINTS);
         }
-        fullName = name;
+        fullName = name.trim();
     }
 
     private Name() {

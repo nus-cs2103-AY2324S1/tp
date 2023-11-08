@@ -45,7 +45,7 @@ public class Email extends ListEntryField {
         if (!Email.isValidEmail(email)) {
             throw new ParseException(MESSAGE_CONSTRAINTS);
         }
-        value = email;
+        value = email.trim();
     }
 
     Email() {

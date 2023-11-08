@@ -50,4 +50,10 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
     public String getUsageInfo() {
         return EditLessonCommandParser.getUsageInfo();
     }
+    public Lesson getEditDescriptor() {
+        return editDescriptor;
+    }
+    public Integer getIndex() {
+        return index;
+    }
 }

@@ -48,6 +48,13 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
     public String getUsageInfo() {
         return EditPersonCommandParser.getUsageInfo();
     }
+
+    public Person getEditDescriptor() {
+        return editDescriptor;
+    }
+    public Integer getIndex() {
+        return index;
+    }
 }
 
 
