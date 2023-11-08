@@ -641,15 +641,15 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 | **Delete interview**             | `delete-i INTERVIEW_INDEX`<br> e.g., `delete-i 3`                                                                                                        |
 | **Edit interview**               | `edit-i INTERVIEW_INDEX [app/APPLICANT_INDEX] [jr/JOB_TITLE] [time/INTERVIEW_DATETIME]`<br> e.g.,`edit-i 2 jr/software-engineer`                         |
 | **Find interview by job**        | `find-i KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-i software-engineer`                                                                                    |
-| **List interview**               | `list-i`                                                                                                                                                 |
-| **List free time**               | `list-freetime INTERVIEW_DATETIME` <br> e.g, `list-freetime 12-12-2024`                                                                                  |
-| **List interview for today**     | `list-i-today`                                                                                                                                           |
+| **List interview**               | `list-i` <br/> e.g. `list-i`                                                                                                                             |
+| **List free time**               | `list-freetime INTERVIEW_DATETIME` <br> e.g, `list-freetime 12-12-2023`, `list-freetime 12/12/2023`, `list-freetime 12/12`, `list-freetime 12 Dec`       |
+| **List interview for today**     | `list-i-today` <br/> e.g. `list-i-today`                                                                                                                 |
 | **Mark interview as done**       | `mark INTERVIEW_INDEX` <br> e.g., `mark 3`                                                                                                               |
 | **Rate interview**               | `rate INTERVIEW_INDEX RATING` <br> e.g., `rate 1 3.0`                                                                                                    |
-| **List completed interview**     | `list-i-done`                                                                                                                                            |
-| **List incomplete interview**    | `list-i-not-done`                                                                                                                                        |
-| **Sort interview by rating**     | `sort-rate`                                                                                                                                              |
-| **Sort interview by start time** | `sort-time`                                                                                                                                              |
+| **List completed interview**     | `list-i-done` <br/> e.g. `list-i-done`                                                                                                                   |
+| **List incomplete interview**    | `list-i-not-done` <br/> e.g. `list-i-not-done`                                                                                                           |
+| **Sort interview by rating**     | `sort-rate` <br/> e.g. `sort-rate`                                                                                                                       |
+| **Sort interview by start time** | `sort-time` <br/> e.g. `sort-time`                                                                                                                       |
 
 [Back to the Table of Contents](#table-of-contents)
 
