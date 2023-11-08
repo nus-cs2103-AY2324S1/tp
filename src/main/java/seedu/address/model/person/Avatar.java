@@ -53,6 +53,7 @@ public class Avatar {
     }
 
     private String copyImage(String path, Path dataDirectory) throws IOException {
+        Files.createDirectories(dataDirectory);
         Path imagePath = Path.of(path);
         Path outputPath = dataDirectory.resolve(imagePath.getFileName());
         return Files.copy(imagePath, outputPath, StandardCopyOption.REPLACE_EXISTING).toString();
