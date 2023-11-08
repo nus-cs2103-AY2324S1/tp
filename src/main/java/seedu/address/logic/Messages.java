@@ -31,6 +31,7 @@ public class Messages {
     /** Message for events */
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
     public static final String MESSAGE_INVALID_PERSON = "The person(s) provided(%s) do not exist!";
+    public static final String MESSAGE_INVALID_BIRTHDAY = "The person's birthday(%s) is invalid!";
     public static final String MESSAGE_INVALID_UNASSIGN_PERSON =
             "The person(s) provided(%s) have not been assigned to the event!";
     public static final String MESSAGE_INVALID_GROUP = "The group(s) provided(%s) do not exist!";

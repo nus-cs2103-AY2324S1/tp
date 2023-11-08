@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -127,6 +128,12 @@ public class EditPersonCommand extends Command {
         Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
 
         Set<Group> updatedGroups = new HashSet<>();
+
+        LocalDate bd = updatedBirthday.getValue();
+        if (bd != null && bd.isAfter(LocalDate.now())) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_BIRTHDAY,
+                    updatedBirthday.getStringValue()));
+        }
 
         if (editPersonDescriptor.getGroups().isPresent()) {
             updatedGroups.addAll(personToEdit.getGroups());
