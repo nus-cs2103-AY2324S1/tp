@@ -151,7 +151,7 @@ Format: `list [DAY]`
 
 **Description** : Find tutees in the current list.
 
-**Format**: `find n/NAME sb/SUBJECT`
+**Format**: `find n/[NAME] sb/[SUBJECT]`
 
 **Expected input:**
 
