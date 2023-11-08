@@ -88,5 +88,14 @@ class RegularExpressionUtilTest {
         assertFalse(match(RegularExpressionUtil.STARTING_WITH_NEGATIVE_NUMBER, "123a"));
         assertFalse(match(RegularExpressionUtil.STARTING_WITH_NEGATIVE_NUMBER, "1-23"));
     }
+    @Test
+    public void test_decimalIndex_divisionIndex() {
+        assertFalse(match(RegularExpressionUtil.ABUSING_INDEX_WITH_DECIMAL_OR_DIVISION, ""));
+        assertTrue(match(RegularExpressionUtil.ABUSING_INDEX_WITH_DECIMAL_OR_DIVISION, "1.2"));
+        assertTrue(match(RegularExpressionUtil.ABUSING_INDEX_WITH_DECIMAL_OR_DIVISION, "1/2"));
+        assertFalse(match(RegularExpressionUtil.ABUSING_INDEX_WITH_DECIMAL_OR_DIVISION, "1"));
+        assertTrue(match(RegularExpressionUtil.ABUSING_INDEX_WITH_DECIMAL_OR_DIVISION, "1/ 2"));
+        assertTrue(match(RegularExpressionUtil.ABUSING_INDEX_WITH_DECIMAL_OR_DIVISION, "1. 2"));
+    }
 }
 
