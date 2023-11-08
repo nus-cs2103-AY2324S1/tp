@@ -285,7 +285,7 @@ Aspect: How find command matches the arguments for name
         * Too many applicants might show up in a single find command which defeats
           the purpose of the find command
 
-### Time feature
+### parseDate API
 
 #### Implementation
 This feature is implemented though the `TimeParser` class. This class contains several public static methods related to manipulating time:
