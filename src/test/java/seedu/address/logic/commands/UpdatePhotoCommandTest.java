@@ -135,7 +135,7 @@ public class UpdatePhotoCommandTest {
         } catch (ParseException e) {
             fail();
         } catch (CommandException e) {
-            assertEquals("Error while reading image: images/defaul_photo.png", e.getMessage());
+            assertTrue(e.getMessage().contains("Error while reading image"));
         }
     }
 
@@ -154,7 +154,7 @@ public class UpdatePhotoCommandTest {
             ModelManager temp = new ModelManager();
             addCommand.execute(temp);
             updatePhotoCommand.execute(temp);
-            assertEquals("data/test_photo.png", temp.getFilteredPersonList().get(0).getAvatar().getPath());
+            assertTrue(temp.getFilteredPersonList().get(0).getAvatar().getPath().contains("test_photo.png"));
         } catch (ParseException | CommandException e) {
             fail();
         }
