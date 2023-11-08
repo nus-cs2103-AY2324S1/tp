@@ -58,7 +58,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Employee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "The field you are trying to edit is the same as the existing one.";
+    public static final String MESSAGE_UNCHANGED_FIELD =
+        "The field you are trying to edit is the same as the existing one.";
     public static final String MESSAGE_EDIT_LEAVE_ERROR = "The total number of days of leave you are trying to"
             + " change to cannot be lesser than the number of days of leave "
             + "that has already been added to the employee.";
@@ -92,7 +93,7 @@ public class EditCommand extends Command {
         Person editedEmployee = createEditedEmployee(employeeToEdit, editEmployeeDescriptor);
 
         if (employeeToEdit.isSamePerson(editedEmployee) && model.hasPerson(editedEmployee)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_UNCHANGED_FIELD);
         }
 
         if (employeeToEdit.getAnnualLeave().numOfLeaveUsedForCurrYear()
