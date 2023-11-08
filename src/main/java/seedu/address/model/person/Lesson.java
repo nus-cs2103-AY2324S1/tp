@@ -84,6 +84,7 @@ public class Lesson {
                 temp = temp.plusDays(1);
             }
         }
+        assert count > 0: "number of days should be more than 0";
         return count;
     }
 
@@ -96,17 +97,21 @@ public class Lesson {
         Duration duration = Duration.between(begin, end);
         long minutes = duration.toMinutes();
         double hours = (double) minutes / 60; // Convert minutes to a fraction of hours
-
-        // Truncate to 2 decimal places
-        //DecimalFormat df = new DecimalFormat("#.##");
-        //hours = Double.parseDouble(df.format(hours));
+        assert hours > 0.0 :"hours should be positive";
 
         return hours;
     }
 
+    /**
+     * Calculates the monthly lesson duration in hours.
+     *
+     * @return monthly duration in terms of hours.
+     */
     public double getMonthlyHours() {
-        return calculateLessonDuration() * getNumOfDaysInMonth(LocalDate.now()
+        double hours = calculateLessonDuration() * getNumOfDaysInMonth(LocalDate.now()
                 .getYear(), LocalDate.now().getMonthValue());
+        assert hours > 0.0 :"hours should be positive";
+        return hours;
     }
 
 
