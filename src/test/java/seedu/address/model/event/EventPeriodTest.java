@@ -18,6 +18,7 @@ import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.event.exceptions.InvalidEventPeriodException;
 import seedu.address.testutil.EventPeriodBuilder;
 
 public class EventPeriodTest {
@@ -56,15 +57,20 @@ public class EventPeriodTest {
     public void isValidPeriodTest() {
         assertTrue(isValidPeriod(VALID_START_DATE_EARLIER, VALID_END_DATE_EARLIER));
 
-        assertFalse(isValidPeriod(VALID_END_DATE_EARLIER, VALID_START_DATE_EARLIER));
+        assertThrows(InvalidEventPeriodException.class,
+                () -> isValidPeriod(VALID_END_DATE_EARLIER, VALID_START_DATE_EARLIER));
 
-        assertFalse(isValidPeriod(VALID_START_DATE_EARLIER, VALID_START_DATE_EARLIER));
+        assertThrows(InvalidEventPeriodException.class,
+                () -> isValidPeriod(VALID_START_DATE_EARLIER, VALID_START_DATE_EARLIER));
 
-        assertFalse(isValidPeriod(INVALID_DATE, VALID_END_DATE_EARLIER));
+        assertThrows(DateTimeParseException.class,
+                () -> isValidPeriod(INVALID_DATE, VALID_END_DATE_EARLIER));
 
-        assertFalse(isValidPeriod(VALID_START_DATE_EARLIER, INVALID_DATE));
+        assertThrows(DateTimeParseException.class,
+                () -> isValidPeriod(VALID_START_DATE_EARLIER, INVALID_DATE));
 
-        assertFalse(isValidPeriod(INVALID_DATE, INVALID_DATE));
+        assertThrows(DateTimeParseException.class,
+                () -> isValidPeriod(INVALID_DATE, INVALID_DATE));
     }
 
     @Test

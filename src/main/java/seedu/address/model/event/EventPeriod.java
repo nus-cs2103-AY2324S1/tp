@@ -91,7 +91,7 @@ public class EventPeriod implements Comparable<EventPeriod> {
         endDateTime = LocalDateTime.parse(endString, DATE_TIME_STRING_FORMATTER);
 
         if (!startDateTime.isBefore(endDateTime)) {
-            throw new InvalidEventPeriodException();
+            throw new InvalidEventPeriodException(PERIOD_INVALID);
         }
         return true;
     }
