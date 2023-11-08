@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.policy.Company;
 
 /**
  * Tests that a {@code Person}'s {@code Company} matches any of the keywords given.
@@ -12,9 +13,9 @@ public class CompanyContainsKeywordsPredicate extends FieldPredicates {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword ->
-                        StringUtil.containsWordIgnoreCase(person.getPolicy().getCompany().value, keyword));
+        return !person.getPolicy().getCompany().toString().equals(Company.DEFAULT_VALUE)
+                && keywords.stream().anyMatch(
+                        keyword -> StringUtil.containsWordIgnoreCase(person.getPolicy().getCompany().value, keyword));
     }
 
     @Override

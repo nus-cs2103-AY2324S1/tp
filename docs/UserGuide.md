@@ -170,7 +170,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/A
 
 Finds client(s) whose fields matches any of the given fields.
 
-Format: `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG]
+Format: `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG]...
 [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
 
 * The search is case-insensitive e.g. `hans` will match `Hans`
@@ -292,7 +292,7 @@ Examples:
 * `remark 1` or `remark 1 r/` will remove the comment that is attached to client that is at index `1`
 
 Acceptable values for each parameter:
-* `INDEX` : It must be a **must be a positive integer** 1, 2, 3, …​
+* `INDEX` : It **must be a positive integer** 1, 2, 3, …​
 * `REMARK` : Any characters
 
 Expected output upon success:<br>

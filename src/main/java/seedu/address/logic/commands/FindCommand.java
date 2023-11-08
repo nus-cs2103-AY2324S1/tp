@@ -32,7 +32,7 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified fields (case-insensitive for values) and displays them as a list with index numbers.\n"
-            + "Parameters: [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL]"
+            + "Parameters: [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG]"
             + "[c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]\n"
             + "At least one parameter must be present.\n"
             + "Example: " + COMMAND_WORD + " n/Alice Rodriguez";
