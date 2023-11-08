@@ -112,7 +112,9 @@ Format:
 Parameters:
 
 * `[index]` is the index of the contact in the list.
-* `[phone]` is a valid phone number (should be all numeric characters, with an optional `+` for country code).
+* `[phone]` is a valid phone number:
+    * Should only contain numbers and optional country code (1-3 numbers with `+` in front) if applicable.
+    * Should be at least 3 digits long (excluding country code).
 * `[email]` is a valid email (`@` (at sign) must be present, and `.` (period) must be present after `@` (at sign)).
 * `[link]` is a valid URL linking to a contact’s social media page.
 * `[grad]` is a valid graduation date, in the format `AYxxxx-Sy`.
@@ -159,7 +161,9 @@ Format:
 Parameters:
 
 * `[index of contact]` is the index of the contact in the list.
-* `[phone]` is a valid phone number (should be all numeric characters, with an optional `+` for country code).
+* `[phone]` is a valid phone number:
+    * Should only contain numbers and optional country code (1-3 numbers with `+` in front) if applicable.
+    * Should be at least 3 digits long (excluding country code).
 * `[index of phone]` is the index of the phone number in the phone list of the contact.
 * `[email]` is a valid email (`@` (at sign) must be present, and `.` (period) must be present after `@` (at sign)).
 * `[index of email]` is the index of the email in the email list of the contact.
