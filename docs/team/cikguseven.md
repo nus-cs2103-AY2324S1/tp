@@ -11,7 +11,7 @@ Given below are my contributions to the project:
 
 * **Code contributed**: [Individual Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=cikguseven&breakdown=true)
 
-* **Enhancements implemented**: 
+* **Enhancements implemented**:
   * New feature: `load` command (PR: [#57](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/57))
     * What it does: Allows users to load their saved data file and set it as the new default save file.
     * Justification: This feature allows users to save and continue editing their data from where they left off. This is especially useful for TAs who teach multiple modules as each file is configured to store tutorial and assignment information for a specific module.

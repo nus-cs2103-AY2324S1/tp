@@ -82,6 +82,9 @@ public class EditCommand extends Command {
         }
 
         model.setStudent(studentToEdit, editedStudent);
+        if (model.isSelectedStudent(studentToEdit)) {
+            model.setSelectedStudent(editedStudent);
+        }
         model.commitClassManager();
 
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
