@@ -138,13 +138,12 @@ Format: `Hi`
 
 #### Guidelines:
 
-- Make sure to capitalize the first letter of the command (e.g., `Hi` not `hi` or `HI`).
+- Please ensure that the first letter of the command is uppercase. For instance, use `Hi` instead of `hi` or `HI`.
 - The command does not take any additional arguments or keywords.
-- The displayed time is in the 24-hour format.
 
 #### Examples:
 
-When you enter the command:
+When you enter the command (Hi):
 
   ![Welcome](images/UG_images/Hi.png)
 
@@ -273,8 +272,9 @@ and type `list` again when you want to go back to the main window.
 ### What this command does:
 - Finds teams whose names contain any of the given keywords.
 
-**Format:** `findteam KEYWORD`
+**Format:** 
 
+- Command: `findteam KEYWORD`
 - The search is case-insensitive. e.g., "team" will match "Team Alpha."
 - The order of the keywords does not matter. e.g., "Alpha Bravo" will match "Bravo Alpha Team."
 - Only the team name is searched.
