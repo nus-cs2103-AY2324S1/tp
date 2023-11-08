@@ -44,8 +44,7 @@ public class CreateCommandTest {
 
         CommandResult commandResult = new CreateCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(CreateCommand.MESSAGE_SUCCESS, Messages.format(validPerson))
-                        + "\nAt index 1",
+        assertEquals(String.format(CreateCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -139,12 +138,21 @@ public class CreateCommandTest {
         public ReadOnlyNetworkBook getNetworkBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        public boolean canUndoNetworkBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public boolean canRedoNetworkBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
-        public void undoNetworkBook() throws CommandException {
+        public void undoNetworkBook() {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public void redoNetworkBook() throws CommandException {
+        public void redoNetworkBook() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -19,7 +19,11 @@ public class RedoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert model != null : "Model should not be null";
-        model.redoNetworkBook();
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (!model.canRedoNetworkBook()) {
+            throw new CommandException(MESSAGE_REDO_DISALLOWED);
+        } else {
+            model.redoNetworkBook();
+            return new CommandResult(MESSAGE_SUCCESS);
+        }
     }
 }
