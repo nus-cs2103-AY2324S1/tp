@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.command.parse.exceptions.DeleteCommandParseException;
+import seedu.address.logic.parser.exceptions.command.parse.exceptions.EditCommandParseException;
 import seedu.address.model.booking.BookingPeriod;
 import seedu.address.model.booking.Remark;
 import seedu.address.model.booking.Room;
@@ -28,12 +30,25 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws DeleteCommandParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
+    public static Index parseDeleteIndex(String oneBasedIndex) throws DeleteCommandParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new DeleteCommandParseException();
+        }
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws EditCommandParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parseEditIndex(String oneBasedIndex) throws EditCommandParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new EditCommandParseException();
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }

@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -24,15 +22,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         for (int i = 0; i < indexArgs.length; i++) {
             try {
-                indices[i] = ParserUtil.parseIndex(indexArgs[i]);
-            } catch (ParseException pe) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                indices[i] = ParserUtil.parseDeleteIndex(indexArgs[i]);
+            } catch (DeleteCommandParseException de) {
+                throw new DeleteCommandParseException();
             }
         }
 
         if (indices.length == 0) {
-            throw new DeleteCommandParseException();
+            throw new DeleteCommandParseException("At least one index must be provided. ");
         }
 
         return new DeleteCommand(indices);
