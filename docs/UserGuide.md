@@ -30,8 +30,8 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
     * [Marking an employee's attendance: `mark`](#marking-an-employees-attendance-mark)
     * [View an employee's attendance report: `attendance`](#view-an-employees-attendance-report-attendance)
     * [Listing all employees: `list`](#listing-all-employees-list)
-    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
     * [Locating employees by name: `find`](#locating-employees-by-name-find)
+    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
     * [Exiting the program: `exit`](#exiting-the-program-exit)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
@@ -41,6 +41,7 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
 <!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -48,11 +49,8 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
 2. Download the latest `ManaGease.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-2/tp/releases)
 3. Copy the file to the folder you want to use as the **home folder** for your ManaGease. 
 4. Open a command terminal, `cd` into the folder you put the jar file in(i.e. `cd DIRECTORY_PATH`), and enter the `java -jar ManaGease.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)<br>
-![UiAnnotated](images/UiAnnotated.png)
-
-
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+   <img src="images/UiAnnotated.png" width="800">
 5. Type the command in the command box and press Enter on your keyboard to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -74,6 +72,7 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 * Go back to [Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -100,6 +99,8 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Parameter formats
 * All parameters provided must be in the correct format.<br>
 
@@ -121,7 +122,7 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 | `/r`    | `REASON`          | case-insensitive words from the following list:<br/>1. cpf (means `EMPLOYEE_CPF_DEDUCTION`)<br/>2. absence (means `ABSENCE`)<br/>3. no pay (means `NO_PAY_LEAVE`)<br/>4. bonus (means `ANNUAL_BONUS`)<br/>5. transport (means `TRANSPORT_ALLOWANCE`)                                                                                                                                                                                                                                                                                                                   | `/r no pay`                 |
 | `/at`   | `ATTENDANCE_TYPE` | case-insensitive words from the following list:<br/>1. present (means `PRESENT`)<br/>2. late (means `LATE`)<br/>3. absent (means `ABSENT`)                                                                                                                                                                                                                                                                                                                                                                                                                             | `/at late`                  |
 
-----------------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
 **What it does:**
@@ -139,6 +140,7 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Adding an employee: `add`
 
@@ -148,7 +150,8 @@ This feature allows users to add a new employee to the ManaGease app, creating a
 
 **Command format:**
 ```
-add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE
+add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE 
+    /s SALARY /l ANNUAL_LEAVE
 ```
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -160,9 +163,10 @@ Example:
   /jd 12/09/2023 /s 1000.00 /l 10` adds an employee named `Jane Smith` with given information to ManaGease.
 
 Output:
-* ManaGease should display a confirmation message indicating that the employee has been successfully added to the database. (e.g. `Employee "Jane Smith" successfully added!`)
+* ManaGease should display a confirmation message indicating that the employee has been successfully added to the database.
 * The employee's profile should be updated with the provided information.
-  <br>![result for adding employee](images/addSuccess.png)
+  <br>![result for adding employee](images/addSuccess1.png)
+  <br>![result for adding employee person card](images/addSuccess2.png)
 
 * If prefix used is not defined, an error message will appear.
   <br>![failed result for adding employee](images/addFailed.png)
@@ -171,6 +175,8 @@ Output:
   <br>![failed result for adding duplicate employee](images/addFailedDuplicate.png)
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing an employee: `edit`
 
@@ -204,6 +210,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting an employee: `delete`
 
 **What it does**
@@ -229,14 +237,16 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
 Output:
-* If there are multiple employees with the same name, we just list down the employees for them to view, return “Here is the list of the matching employees:”. Then you can decide which employee to delete from this list.
-  <br>![result for deleting same-name employee](images/deleteSameName.png)
-  
+* If there are multiple employees with the same name, all the matching employees would be displayed. Hence, ManaGease will return “Here is the list of the matching employees:”
+  <br><img src="images/deleteSameName.png">
+  <br><img src="images/deleteSameName1.png">
 * Otherwise, ManaGease should display a confirmation message indicating that the employee information has been successfully deleted.
 * The employee's list should be updated by removing the employee.
   <br>![result for deleting employee](images/deleteSuccess.png)
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Reading an employee's information: `read`
 
@@ -272,6 +282,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding leave to an employee: `addleave`
 
 **What it does**
@@ -282,7 +294,10 @@ This feature allows users to add leave(s) to an employee.
 
 `addleave INDEX /on DATE` or `addleave INDEX /from DATE /to DATE`
 
-* Adds a single day of leave or multiple days of leave to the employee specified by the `INDEX`.
+
+* Adds leave to the employee specified by the `INDEX`. 
+* You have the flexibility to add leave for a single day or multiple consecutive days. 
+* You can add leave for the current year and the upcoming year, but you won't be able to add leave for past dates.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -319,6 +334,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting leave from an employee: `deleteleave`
 
 **What it does**
@@ -329,7 +346,8 @@ This feature allows users to delete leave(s) from an employee.
 
 `deleteleave INDEX /on DATE` or `deleteleave INDEX /from DATE /to DATE`
 
-* Deletes leave from the employee specified by the `INDEX`, can be a single day of leave or multiple days of leave.
+* Deletes leave from the employee specified by the `INDEX`.
+* You have the flexibility to delete leave for a single day or multiple consecutive days.
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list**.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -361,6 +379,8 @@ Output:
   <br>![result for successful deleteleave command](images/deleteLeaveSuccessMsg.png)
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### View employee who is on leave: `viewleave`
 
@@ -399,6 +419,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### View the calendar of upcoming month: `nm`
 
 **What it does**
@@ -435,6 +457,8 @@ This feature allows users to view the calendar of the current month on the app.
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a deduction to the payroll of an employee: `deduct`
 
 **What it does**
@@ -470,6 +494,7 @@ Output:
   <br>![result for incorrect deduct command](images/incorrectDeductCommand.png)
 * If the `VALUE` provided is not in the correct format, the app should display the following message.
   <br>![result for incorrect deduct value format](images/incorrectDeductValueFormat.png)
+  Here it says that `Payment should only contain unmerical digits.`. This is because the `VALUE` field refers to the amount of money to be deducted from the employee's salary, which is a `Payment`. This also applies to the `VALUE` field in the [`benefit`](#adding-a-benefit-to-the-payroll-of-an-employee-benefit) command and the `SALARY` field in the [`add`](#adding-an-employee-add) and [`edit`](#editing-an-employee-edit) command.
 * If the `REASON` field is missing, the app should display the following message.
   <br>![result for missing reason](images/missingReason.png)
 * If the `REASON` provided is not supported (i.e. not one of the five reasons in the [parameter formats](#parameter-formats)), the app should display the following message.
@@ -478,6 +503,8 @@ Output:
   <br>![result for invalid deduction reason](images/unknownDeductionReason.png)
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a benefit to the payroll of an employee: `benefit`
 
@@ -514,6 +541,7 @@ Output:
   <br>![result for incorrect benefit command](images/incorrectBenefitCommand.png)
 * If the `VALUE` provided is not in the correct format, the app should display the following message.
   <br>![result for incorrect benefit value format](images/incorrectDeductValueFormat.png)
+  Here it says that `Payment should only contain unmerical digits.`. This is because the `VALUE` field refers to the amount of money to be added to the employee's salary, which is a `Payment`. This also applies to the `VALUE` field in the [`deduct`](#adding-a-deduction-to-the-payroll-of-an-employee-deduct) command and the `SALARY` field in the [`add`](#adding-an-employee-add) and [`edit`](#editing-an-employee-edit) command.
 * If the `REASON` field is missing, the app should display the following message.
   <br>![result for missing reason](images/missingReason.png)
 * If the `REASON` provided is not supported (i.e. not one of the five reasons in the [parameter formats](#parameter-formats)), the app should display the following message.
@@ -522,6 +550,8 @@ Output:
   <br>![result for invalid benefit reason](images/unknownBenefitReason.png)
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Calculating an employee's payroll: `payroll`
 
@@ -542,6 +572,11 @@ Please do not use negative integers, non-integers and extremely large integers(i
 
 * The `NAME` must be in the correct [format](#parameter-formats).
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Editing the basic salary component of an employee will only take effect from the next payroll period onwards,  and it will only apply to the calculation of next payroll onwards.
+E.g., If you edit the basic salary of an employee in January 2024, the basic salary will only be updated from the payroll period of February 2024 onwards.
+</div>
+
 Examples:
 
 * `payroll 3` calculates the payroll of the third employee in the most recently displayed list.
@@ -549,14 +584,17 @@ Examples:
 
 Output:
 * ManaGease should display the payroll of the employee specified by the `INDEX` or `NAME`, if the input is valid.
-  <br>![result for generating payslip](images/payrollSuccess.png)
+  <br><img src="images/payrollSuccess.png">
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If there are more than one employee with the same name in the command, the app will display `x employees found! Refer to their indexes for payroll calculation` and will list down those employees for the user to view. The user should then use their index numbers to calculate the payroll.
-  <br>![result for same name](images/payrollWithSameName.png)
+  <br><img src="images/payrollWithSameName.png">
+  <br><img src="images/payrollWithSameName1.png">
 * If the command is incorrect, the app should display the following message.
   <br>![result for incorrect payroll command](images/incorrectPayrollCommand.png)
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Generating payslips for an employee: `payslip`
 
@@ -579,6 +617,11 @@ Please do not use negative integers, non-integers and extremely large integers(i
 * The `NAME` must be in the correct [format](#parameter-formats).
 * The optional `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Editing the basic salary component of an employee will only take effect from the next payslip period onwards, and it will only apply to the generation of next payslip onwards.
+E.g., If you edit the basic salary of an employee in January 2024, the basic salary will only be updated from the payslip period of February 2024 onwards.
+</div>
+
 Examples:
 
 * `payslip 3` generates a payslip based on the latest payroll for the third employee in the most recently displayed list.
@@ -592,6 +635,10 @@ Output:
 * A payslip report in PDF format will be generated in the `payslips` folder in the ManaGease home directory.
   <br>![location of payslip](images/payslipLocation.png)
   <br>![payslip content](images/payslipContent.png)
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please close any payslip PDF file before generating another payslip. Otherwise, the payslip PDF file will not be generated successfully.
+</div>
+
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If the command is incorrect, the app should display the following message.
   <br>![result for incorrect payslip command](images/incorrectPayslipCommand.png)
@@ -599,6 +646,8 @@ Output:
   <br>![result for incorrect payslip date format](images/incorrectDateFormat.png)
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Marking an employee's attendance: `mark`
 
@@ -632,9 +681,12 @@ Output:
 * If the ATTENDANCE_TYPE is not within the valid list, the app should display `Invalid attendance type, only Absent, Late and Present are allowed.`
   <br>![result for incorrect attendance type](images/incorrectAttendanceType.png)
 * If the command is successful, the app should display the following message. The employee’s attendance status should also be updated accordingly.
-  <br>![result for marking an employee to be absent](images/markSuccess.png)
+  <br>![result for marking an employee to be absent](images/markSuccessMessage.png)
+  <br>![person card](images/markSuccess1.png)
 
 * Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### View an employee's attendance report: `attendance`
 
@@ -668,6 +720,8 @@ Output:
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all employees: `list`
 
 **What it does**
@@ -681,21 +735,12 @@ Shows a list of all employees in the workplace.
 Output:
 
 * ManaGease should display a list of all employees in the workplace.
-  <br>![result for listing all employees](images/listSuccess.png)
+  <br><img src="images/listSuccess.png">
+  <br><img src="images/findAlexDavidResult2.png">
 
 * Go back to [Table of Contents](#table-of-contents)
 
-### Clearing all entries: `clear`
-
-**What it does**
-
-Clears all entries from the address book.
-
-**Command format:**
-
-`clear`
-
-* Go back to [Table of Contents](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 ### Locating employees by name: `find`
 
@@ -716,7 +761,22 @@ Finds employees whose names contain any of the given keywords.
 
 Example:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  <br>![result for 'find alex david'](images/findAlexDavidResult.png)
+  <br><img src="images/findAlexDavidResult1.png" width="570">
+  <br><img src="images/findAlexDavidResult2.png" width="570" height="400">
+
+* Go back to [Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
+### Clearing all entries: `clear`
+
+**What it does**
+
+Clears all entries from the address book.
+
+**Command format:**
+
+`clear`
 
 * Go back to [Table of Contents](#table-of-contents)
 
@@ -732,19 +792,22 @@ Exits the program.
 
 * Go back to [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Saving the data
 
 Employee data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-ManaGease data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ManaGease data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. You are discouraged from editing the data file to make sure ManaGease works well to help you with your business.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ManaGease will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, ManaGease will not run. Hence, it is recommended not to edit the data file directly, and you can edit the data through our useful commands.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -758,6 +821,8 @@ If your changes to the data file makes its format invalid, ManaGease will discar
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 

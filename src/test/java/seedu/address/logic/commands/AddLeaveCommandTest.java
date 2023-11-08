@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -18,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -87,4 +89,86 @@ public class AddLeaveCommandTest {
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), editedEmployee2);
         assertCommandSuccess(addLeaveCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_invalidStartAndEndDatesForAddingMultipleLeave_addLeaveFailure() throws Exception {
+        LocalDate currentDate = LocalDate.now();
+        AddLeaveCommand addLeaveCommand1 =
+                new AddLeaveCommand(INDEX_FIRST_PERSON, currentDate.plusDays(1), currentDate);
+        AddLeaveCommand addLeaveCommand2 =
+                new AddLeaveCommand(INDEX_FIRST_PERSON, currentDate.plusDays(2), currentDate);
+
+        assertCommandFailure(addLeaveCommand1, model, AnnualLeave.MESSAGE_INVALID_LEAVE);
+        assertCommandFailure(addLeaveCommand2, model, AnnualLeave.MESSAGE_INVALID_LEAVE);
+    }
+
+    @Test
+    public void execute_invalidStartDateForLeave_addLeaveFailure() throws Exception {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        LocalDate currentDate = LocalDate.now();
+        AddLeaveCommand addLeaveCommand1 =
+                new AddLeaveCommand(targetIndex, currentDate.plusDays(-1), null);
+        AddLeaveCommand addLeaveCommand2 =
+                new AddLeaveCommand(targetIndex, currentDate.plusDays(-2), null);
+
+        assertCommandFailure(addLeaveCommand1, model, AnnualLeave.MESSAGE_ADD_EXPIRED_LEAVE);
+        assertCommandFailure(addLeaveCommand2, model, AnnualLeave.MESSAGE_ADD_EXPIRED_LEAVE);
+    }
+
+    @Test
+    public void execute_invalidDatesForAddingMultipleLeave_addLeaveFailure() throws Exception {
+        Person editedEmployee = new PersonBuilder().build();
+        LocalDate currentDate = LocalDate.now();
+        editedEmployee.getAnnualLeave().addLeave(currentDate, currentDate.plusDays(1));
+        model.setPerson(model.getFilteredPersonList().get(0), editedEmployee);
+        AddLeaveCommand addLeaveCommand1 =
+                new AddLeaveCommand(INDEX_FIRST_PERSON, currentDate.plusDays(1), currentDate.plusDays(2));
+        AddLeaveCommand addLeaveCommand2 =
+                new AddLeaveCommand(INDEX_FIRST_PERSON, currentDate.plusDays(1), currentDate.plusDays(3));
+
+        assertCommandFailure(addLeaveCommand1, model, AnnualLeave.MESSAGE_ADD_DUPLICATE_LEAVE);
+        assertCommandFailure(addLeaveCommand2, model, AnnualLeave.MESSAGE_ADD_DUPLICATE_LEAVE);
+    }
+
+    @Test
+    public void execute_addTooManyDatesForAddingMultipleLeave_addLeaveFailure() throws Exception {
+        Person editedEmployee = new PersonBuilder().build();
+        LocalDate currentDate = LocalDate.now();
+        model.setPerson(model.getFilteredPersonList().get(0), editedEmployee);
+        AddLeaveCommand addLeaveCommand1 =
+                new AddLeaveCommand(INDEX_FIRST_PERSON, currentDate.plusDays(1), currentDate.plusDays(20));
+        AddLeaveCommand addLeaveCommand2 =
+                new AddLeaveCommand(INDEX_FIRST_PERSON, currentDate.plusDays(1), currentDate.plusDays(30));
+
+        assertCommandFailure(addLeaveCommand1, model, AnnualLeave.MESSAGE_LEAVE_CONSTRAINTS);
+        assertCommandFailure(addLeaveCommand2, model, AnnualLeave.MESSAGE_LEAVE_CONSTRAINTS);
+    }
+
+    @Test
+    public void execute_equals_failure() throws Exception {
+        LocalDate currentDate = LocalDate.now();
+        AddLeaveCommand addLeaveCommand1 =
+                new AddLeaveCommand(INDEX_FIRST_PERSON, currentDate.plusDays(1), currentDate.plusDays(2));
+        AddLeaveCommand addLeaveCommand2 =
+                new AddLeaveCommand(INDEX_FIRST_PERSON, currentDate.plusDays(1), currentDate.plusDays(2));
+        AddLeaveCommand addLeaveCommand3 =
+                new AddLeaveCommand(INDEX_FIRST_PERSON, currentDate.plusDays(1), null);
+        AddLeaveCommand addLeaveCommand4 =
+                new AddLeaveCommand(INDEX_FIRST_PERSON, currentDate.plusDays(1), null);
+        assertTrue(addLeaveCommand1.equals(addLeaveCommand1));
+        assertTrue(!addLeaveCommand2.equals(null));
+        assertTrue(addLeaveCommand1.equals(addLeaveCommand2));
+        assertTrue(addLeaveCommand3.equals(addLeaveCommand4));
+    }
+
+    @Test
+    public void toStringMethod() {
+        LocalDate currentDate = LocalDate.now();
+        AddLeaveCommand addLeaveCommand =
+                new AddLeaveCommand(INDEX_FIRST_PERSON, currentDate.plusDays(1), currentDate.plusDays(2));
+        String expected = AddLeaveCommand.class.getCanonicalName() + "{toAddLeave="
+                + INDEX_FIRST_PERSON + "}";
+        assertEquals(expected, addLeaveCommand.toString());
+    }
+
 }

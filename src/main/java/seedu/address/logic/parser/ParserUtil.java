@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import seedu.address.commons.core.index.Index;
@@ -187,8 +188,8 @@ public class ParserUtil {
      * @throws DateTimeParseException if the format of String is wrong
      */
     public static LocalDate stringToDate(String date) throws DateTimeParseException {
-        String dateFormat = "dd/MM/yyyy";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+        String dateFormat = "dd/MM/uuuu";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat).withResolverStyle(ResolverStyle.STRICT);
         return LocalDate.parse(date, formatter);
     }
 

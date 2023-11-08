@@ -138,7 +138,7 @@ public class AttendanceCommand extends Command {
         }
         model.updateFilteredPersonList(this.name);
         return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW_ATTENDANCE_REPORT,
-                model.getFilteredPersonList().size()), indexes);
+                model.getFilteredPersonList().size()));
     }
 
     /**
