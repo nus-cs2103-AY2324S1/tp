@@ -197,9 +197,7 @@ Example usage:
 
 #### Delete a contact: `delete [index]`
 
-You can remove a contact from your NetworkBook using the `delete` command, 
-
-so that your book only contains contact details of those relevant.
+You can remove a contact from your NetworkBook using the `delete` command, so that your book only contains contact details of those relevant.
 
 Format: `delete [index]`
 
