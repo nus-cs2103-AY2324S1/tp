@@ -43,12 +43,6 @@ public class MetricContainsKeywordPredicate implements Predicate<Date> {
         if (metric.equals(PREFIX_HEIGHT)) {
             return StringUtil.containsWordIgnoreCase(date.getHeight().value, keyword);
         }
-        if (metric.equals(PREFIX_INCOME)) {
-            return StringUtil.containsWordIgnoreCase(date.getIncome().value, keyword);
-        }
-        if (metric.equals(PREFIX_HOROSCOPE)) {
-            return StringUtil.containsWordIgnoreCase(date.getHoroscope().value, keyword);
-        }
         return false;
     }
 

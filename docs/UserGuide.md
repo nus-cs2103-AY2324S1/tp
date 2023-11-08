@@ -249,7 +249,8 @@ Format: `filter METRIC/ARG`
 
 * Parameter constraints:
 * Filter must be from list of metrics
-* Metric is limited to `gender, age, horoscope, name, income, height` only
+* Metric is limited to `gender, age, name, height` only
+* Arg can only be one keyword
 
 Example:
 

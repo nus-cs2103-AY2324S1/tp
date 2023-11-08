@@ -24,6 +24,7 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all Dates whose specified metric contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: METRIC/ KEYWORD \n"
+            + "Parameter constraints: Metric limited to gender, name, age, height only\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " Bob (i.e. find Dates whose name equals Bob)";
     private final ArrayList<MetricContainsKeywordPredicate> predicateList;
 

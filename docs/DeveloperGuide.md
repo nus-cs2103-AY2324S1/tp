@@ -632,7 +632,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Filtering Dates
 
-1. Filtering Dates by metric (e.g. name, age, height, income, horoscope)
+1. Filtering Dates by metric (e.g. name, age, height)
     * Type the following filter command into the text field.<br>
       `filter age/John`
     * Press enter.
@@ -681,4 +681,13 @@ have careers with variable income.
    - Additionally, right now the income field does not accept a value of 0. This is not inclusive towards students 
 who may not have any income. Hence, we plan to modify the field to accept a value of 0, on top of supporting a range 
 of values
-------------------------------------------------------------
+
+3. Improve the filter feature to be more robust. Some examples include:
+   - Currently, the filter feature only allows the user to filter by metrics limited to name, age, gender and height. We
+     are planning to allow the user to filter by other metrics such as horoscope and income.
+   - Currently, the filter feature only allows the user to filter by a single keyword for a single metric. We are planning to allow the user
+     to filter by multiple keywords.
+
+4. Improve the error message to be more comprehensive
+   - Currently, the error message for user that key in multiple invalid keywords only spots the first invalid keyword. We
+     are planning to allow the user to know all the invalid keywords that he/she has keyed in.
