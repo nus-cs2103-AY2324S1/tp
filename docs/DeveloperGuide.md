@@ -444,8 +444,10 @@ This feature is implemented though the `TimeParser` class. This class contains s
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage applicants and schedule interviews faster than a typical mouse/GUI driven contact and calendar app
-
+**Value proposition**: 
+* Manage applicants and schedule interviews faster than a typical mouse/GUI driven contact and calendar app.
+* Easy viewing for top candidates.
+* Easy viewing for scheduling interviews.
 
 ### User stories
 
@@ -455,12 +457,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|-------------------------------------------------------|------------------------------------------|---------------------------------------------------------------------------|
 | `* * *`  | New user of the app                                   | see usage instructions                   | refer to instructions when I first started to use the App                 |
 | `* * *`  | Engineering Manager ready for job applicant           | add a new applicant                      | save their contact details into the App                                   |
-| `* * *`  | Engineering Manager opening a job role                | add a new job role                       | keep track of the job role available for application                      |
 | `* * *`  | Engineering Manager ready to start an interview       | add a new interview slot                 | save the interview information into the App                               |
 | `* * *`  | Engineering Manager ready for next round of interview | delete an applicant                      | remove their contact details that I no longer need                        |
 | `* * *`  | Engineering Manager that finished an interview        | delete an interview                      | remove the interview that has already been completed                      |
 | `* * *`  | Busy Engineering Manager                              | find an applicant by name                | locate details of applicants without having to go through the entire list |
-| `* * *`  | Busy Engineering Manager                              | find a job role by name                  | easily locate the job role which are still available                      |
+| `* * *`  | Busy Engineering Manager                              | find an interview by job title           | easily locate the interviews which have been scheduled                    |
+| `* * *`  | Engineering Manager with many applicants              | rate an interview                        | record the performance of the applicant for that interview                |
+| `* *`    | Busy Engineering Manager                              | find empty slots of time                 | easily schedule an interview on the available timings                     |
 | `* *`    | Busy Engineering Manager                              | set reminder of interview                | stay organised and track upcoming interview                               |
 | `* *`    | Engineering Manager with sensitive information        | hide private contact details             | protect the privacy of the applicants information in the App              |
 | `* *`    | Engineering Manager with many applicants              | sort the applicants by skill             | prioritise and focus on the most promising candidates                     |
@@ -665,19 +668,22 @@ that are different from the MSS.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancement**
-The current error message when adding an interview where the start and/or end date string is a valid date but is missing time is too general.
+
+1. The current error message when adding an interview where the start and/or end date string is a valid date but is missing time is too general.
 We plan to make the error message also mention why the command is not accepted and the reason for the failure:
 Please enter an interview time!
 
-The current implementation of mark-i allows the user to mark interviews before the interview has been completed,
+2. The current implementation of mark-i allows the user to mark interviews before the interview has been completed,
 based on the end time of the interview. We plan to not allow the user to mark interviews that have not passed.
 So, interviews whose end time is after the current time cannot be marked as done.
 
-The current implementation of the find-i and find-a commands does not display a constant status of whether the find
+3. The current implementation of the find-i and find-a commands does not display a constant status of whether the find
 filter is being applied to the current list. E.g. When you perform a find-i command followed by some other command that
 changes the interview list, you have no way to tell if the previous "find-i" filter is still being applied.
 We plan to update the UI to display a constant status of what filter is currently being applied to the applicant and
 interview list.
+
+4. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -705,8 +711,6 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
-
 ### Deleting an applicant
 
 1. Deleting an applicant while all applicants are being shown
@@ -722,7 +726,6 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -730,4 +733,3 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-2. _{ more test cases …​ }_
