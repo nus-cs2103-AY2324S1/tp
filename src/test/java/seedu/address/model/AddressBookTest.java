@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PatientBuilder;
@@ -31,14 +32,19 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+    public void resetData_nullData_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.resetData(null, new ShortcutSettings()));
+    }
+
+    @Test
+    public void resetData_nullShortcutSettings_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.resetData(new AddressBook(), null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
+        addressBook.resetData(newData, new ShortcutSettings());
         assertEquals(newData, addressBook);
     }
 
@@ -50,7 +56,7 @@ public class AddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData, new ShortcutSettings()));
     }
 
     @Test
@@ -101,6 +107,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ShortcutSettings getShortcutSettings() {
+            return new ShortcutSettings();
         }
     }
 

@@ -75,7 +75,7 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
                 .ifPresent(editPatientDescriptor::setMedicalHistory);
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED + "\n" + EditCommand.MESSAGE_USAGE_PATIENT);
         }
         return new EditCommand(editPatientDescriptor);
     }
@@ -110,7 +110,7 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
         }
 
         if (!editSpecialistDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED + "\n" + EditCommand.MESSAGE_USAGE_SPECIALIST);
         }
         return new EditCommand(editSpecialistDescriptor);
     }

@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
@@ -41,8 +42,6 @@ import seedu.address.testutil.SpecialistBuilder;
  */
 public class EditCommandTest {
 
-    private CommandHistory commandHistory = new CommandHistory();
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -52,11 +51,13 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient));
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook(), new ShortcutSettings()),
+                new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPatient);
         expectedModel.commitAddressBook();
         expectedModel.updateSelectedPerson(editedPatient);
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -76,13 +77,14 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook(), model.getShortcutSettings()),
+                new UserPrefs());
         expectedModel.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
         expectedModel.setPerson(lastPerson, editedPerson);
         expectedModel.commitAddressBook();
         expectedModel.updateSelectedPerson(editedPerson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -94,13 +96,14 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook(), model.getShortcutSettings()),
+                new UserPrefs());
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.commitAddressBook();
         expectedModel.updateSelectedPerson(editedPerson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -116,9 +119,8 @@ public class EditCommandTest {
         model.updateSelectedPerson(secondPerson);
 
         EditCommand editCommand = new EditCommand(descriptor);
-        CommandHistory commandHistory = new CommandHistory();
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON, commandHistory);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -129,7 +131,7 @@ public class EditCommandTest {
         // edit person in filtered list into a duplicate in address book
         Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(new EditPatientDescriptorBuilder((Patient) personInList).build());
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON, commandHistory);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
