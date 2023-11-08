@@ -699,13 +699,13 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a student from the current students added in the class manager.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
-      Expected: The student with STUDENT_NUMBER is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: STUDENT_NUMBER is a valid Student Number that exists in the class manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the status message.
 
    1. Test case: `delete s/vnqvq1924`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. Student Number error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
-      Expected: Similar to previous.
+   1. Test case: `delete`<br>
+      Expected: No student is deleted. Command format error details shown in the status message.
 
 ### Saving data
 
