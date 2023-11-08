@@ -21,10 +21,13 @@ img
 [//]: # (<page-nav-print />)
 
 <a name="table-of-contents"></a>
+<nav>
+
 ## Table of Contents
 
 
 * [Introduction](#introduction)
+* [Minimum System Requirements](#minimum-system-requirements)
 * [Quick Start](#quick-start)
 * [Using this Guide](#using-this-guide)
   * [Understanding the Notations](#understanding-the-notations)
@@ -32,31 +35,37 @@ img
   * [Understanding the Applicant Card GUI](#understanding-the-applicant-card-gui)
 * [Features](#features)
   * [Applicant Management Features](#applicant-management-features)
-    * [Command Parameters](#command-parameters)
-    * [Adding a new applicant: `add`](#adding-a-new-applicant--add)
-    * [Editing an applicant: `edit`](#editing-an-applicant--edit)
-    * [Deleting an applicant: `delete`](#deleting-an-applicant--delete)
-    * [Listing all applicants: `list`](#listing-all-applicants--list)
-    * [Editing an applicant status: `status`](#editing-an-applicant-status--status)
+    * [Command Parameters](#command-parameters-1)
+    * [Adding a new applicant: `add`](#add)
+    * [Editing an applicant: `edit`](#edit)
+    * [Deleting an applicant: `delete`](#delete)
+    * [Listing all applicants: `list`](#list)
+    * [Editing an applicant status: `status`](#status)
   * [Interview Management Features](#interview-management-features)
     * [Command Parameters](#command-parameters-2)
-    * [Adding an interview to an applicant: `addi`](#adding-an-interview-to-an-applicant--addi)
-    * [Editing an interview of an applicant: `editi`](#editing-an-interview-of-an-applicant--editi)
-    * [Deleting an interview from an applicant: `deletei`](#deleting-an-interview-from-an-applicant--deletei)
+    * [Adding an interview to an applicant: `addi`](#addi)
+    * [Editing an interview of an applicant: `editi`](#editi)
+    * [Deleting an interview from an applicant: `deletei`](#deletei)
   * [Applicant Processing Features](#applicant-processing-features)
     * [Command Parameters](#command-parameters-3)
-    * [Finding an applicant by name: `find`](#finding-an-applicant-by-name--find)
-    * [Sorting applicants by descriptors: `sort`](#sorting-applicants-by-descriptors--sort)
-    * [Filtering applicants by fields: `filter`](#filtering-applicants-by-fields--filter)
-    * [Importing from csv: `import`](#importing-from-csv--import)
+    * [Finding an applicant by name: `find`](#find)
+    * [Sorting applicants by descriptors: `sort`](#sort)
+    * [Filtering applicants by fields: `filter`](#filter)
+    * [Importing from csv: `import`](#import)
   * [Miscellaneous Features](#miscellaneous-features)
-    * [Viewing help: `help`](#viewing-help--help)
-    * [Clearing all applicant entries: `clear`](#clearing-all-applicant-entries--clear)
-    * [Exiting the program: `exit`](#exiting-the-program--exit)
+    * [Viewing help: `help`](#help)
+    * [Clearing all applicant entries: `clear`](#clear)
+    * [Exiting the program: `exit`](#exit)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
+* [Command Summary](#command-summary)
+  * [Commands for Applicant Management Features](#commands-for-applicant-management-features)
+  * [Commands for Interview Management Features](#commands-for-interview-management-features)
+  * [Commands for Applicant Processing Features](#commands-for-applicant-processing-features)
+  * [Commands for Miscellaneous Features](#commands-for-miscellaneous-features)
 * [FAQ](#faq)
 * [Glossary](#glossary)
+
 
 ---
 <br>
@@ -253,7 +262,8 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
 <box type="tip" header="**Note**">
     As <code>NAME</code> can only contain alphanumeric characters and spaces, 
-    names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.  
+    names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app. 
+    This is similar for other commands requiring a string input. Only alphanumeric strings are allows in the app.
 </box>
 
 <box type="tip" header="**Note**">
@@ -263,7 +273,7 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
 Example:
 * `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer`
-Adds a new applicant with name *John Doe*, phone number *912345671*, email *johndoe@gmail.com*, and position *Software Engineer*.
+Adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@gmail.com*, and position *Software Engineer*.
 
 <br/><br/>
 
@@ -605,15 +615,15 @@ Automatically saves the data to a local storage whenever there is a change to th
 #### Editing the data file
 
 <box type="warning" header="**Caution**">
-    Please make a backup copy before you attempt to edit the data file. If the format of the edited data file is invalid, Staff-Snap will override the existing data file with an empty data file in the next run. 
+    Please make a backup copy before you attempt to edit the data file. If the format of the edited data file is invalid, 
+Staff-Snap will override the existing data file with an empty data file in the next run.
 </box>
 
 Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[JAR file location]/data/applicantBook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<br>
+<br><br/>
 
 ---
-<br>
 
 <a name="faq"></a>
 ## FAQ
@@ -626,10 +636,9 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 **Q**: Is my data secure? <br> 
 **A**: Yes, your data is stored locally in your computer and is not accessible by anyone else.
 
-<br>
+<br><br/>
 
 ---
-<br>
 
 <a name="glossary"></a>
 ## Glossary
