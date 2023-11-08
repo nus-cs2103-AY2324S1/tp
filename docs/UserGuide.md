@@ -36,7 +36,7 @@ Graphical User Interface (GUI). If you can type fast, CM 23 can get your class m
 
    * `exit` : Exits the app.
 
-6. To begin using Class Manager, configure Class Manager with your module information using the `config` command. For example: 
+6. To begin using Class Manager, configure Class Manager with your module information using the `config` command. For example:
    * `config #t/10 #a/1` configures Class Manager to have 10 tutorials and 1 assignment.
 
 7. That's it! You can now explore Class Manager! Refer to the [Commands](#commands) below for details of each command. <br>
@@ -87,7 +87,7 @@ The **GUI** is split up into 4 main sections.
 
 ### Class Number
 
-* Class Number refers to the tutorial class number of a particular course. 
+* Class Number refers to the tutorial class number of a particular course.
 * Class Number is not case-sensitive, and it must begin with 1 to 3 alphabet letters, followed by 1 to 5 digits, and end with an optional single alphabetical character. Class Number must not be blank.
 * Here are some valid examples of Class Number:
     - `G11`
@@ -227,6 +227,7 @@ Here is the list of commands that can be redone after they are undone (same list
 * `present-all`
 * `absent-all`
 * `tag`
+* `view`
 
 Displayed result if redo is successful: `Redo success!`
 
@@ -253,6 +254,7 @@ Here is the list of commands that can be undone/redone:
 * `present-all`
 * `absent-all`
 * `tag`
+* `view`
 
 Displayed result if undo is successful: `Undo success!`
 
@@ -271,8 +273,6 @@ Format: `theme`
 
 ##### Light theme
 <img alt="theme_light" src="images/theme-light.png" width="700" >
-
----
 
 ### Student list commands
 
@@ -342,7 +342,7 @@ Format: `delete s/STUDENT_NUMBER`
 Example:
 * `delete s/A0249112A`
 
---- 
+---
 
 #### Edit a student's details : `edit`
 

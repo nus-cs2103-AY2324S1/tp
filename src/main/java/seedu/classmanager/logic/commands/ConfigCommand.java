@@ -78,10 +78,9 @@ public class ConfigCommand extends Command {
         // Reset the history of the model and prevent any undo commands
         model.configReset();
 
-        // This will display the class details of the first student after the configuration is done
-        if (!allStudentList.isEmpty()) {
-            model.setSelectedStudent(allStudentList.get(0));
-        }
+        // clears the view panel after resetting class details of students
+        model.resetSelectedStudent();
+
         return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
     }
 
