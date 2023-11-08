@@ -344,7 +344,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
 
 * **Alternative 1 (current choice):** Have two hardcoded list of acceptable time formats. One with date and time, the other for time
     * Pros:
-      * Easy to implement.
+      * Easy to implement
       * Avoids code duplication
     * Cons:
       * May have performance issues in terms of time (i.e. might have to loop through the whole list to find a suitable format)
@@ -355,7 +355,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
 
 * **Alternative 2 :** Have two hardcoded list of acceptable time formats. One with date and time, the other for time, but parse the two types of time string (i.e. strings with date & time, and strings with date only separately)
     * Pros:
-        * Easy to implement.
+        * Easy to implement
         * Less prone to bugs since there are now separate methods for parsing the two types of strings
     * Cons:
         * Causes code duplication since the algorithm is virtually the same for both `parseDate` methods 
