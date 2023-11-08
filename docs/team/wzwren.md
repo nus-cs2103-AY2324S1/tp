@@ -5,30 +5,44 @@
 
 ### Project: HealthSync
 
-HealthSync is an application designed to streamline the workflow of healthcare center frontdesk staff by allowing them to efficiently register and access patient information within 2-3 minutes. It offers a user-friendly platform that enhances patient management, appointment scheduling, and health record retrieval, ultimately improving care delivery and saving valuable time for healthcare professionals.
+HealthSync is an application designed to streamline the workflow of healthcare center frontdesk staff
+by allowing them to efficiently register and access patient information within 2-3 minutes.
+It offers a user-friendly platform that enhances patient management, appointment scheduling,
+and health record retrieval, ultimately improving care delivery and saving valuable time for healthcare professionals.
 
 Given below are my contributions to the project.
 
-* **New Feature**: `to be added soon`
+* **New Feature**:
+  * `Appointment` field implementation, including the parsing and handling logic of
+    temporal data.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T14-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=WZWren&tabRepo=AY2324S1-CS2103T-T14-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Enhancements to existing features**:
-    * `to be added soon`
+  * Enhanced `add` feature to allow for addition of new fields added by the team.
+  * Expanded `find` feature to allow for search by name, IC and Appointment.
+  * Expanded `find` feature to compose multiple search fields through the use of
+    the `Predicate` functional interface class.
 
 * **Documentation for UG**:
-    * `to be added soon`
+    * Added Glossary Section for UG.
+    * Hyperlinked relevant sections in UG to the Glossary.
 
 * **Documentation for DG**:
-    * `to be added soon`
-
-* **Community**:
-    * `to be added soon`
+    * Added implementation details for `Appointment`, `Predicate` and `Find` features.
 
 * **Project management**:
-    * `to be added soon`
+  * Performed troubleshooting in workflow for projects. Examples include:
+    * [Troubleshooting CodeCov](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/72)
+    * [Troubleshooting jackson json library with @WeeeHung](https://github.com/nus-cs2103-AY2324S1/forum/issues/253)
+  * Performed significant in-depth code review on PRs of my peers. Example PRs include:
+    * [Edit Command Enhancement by @kanna-1](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/77)
+    * [Delete Command Initial Enhancement by @nubnubyas](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/75)
+    * [Delete Command Refactoring by @nubnubyas](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/129)
+    * [Log Command Implementation by @hyc17003](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/117)
 
-* **Tools**:
-    * `to be added soon`
-
-* _{you can add/remove categories in the list above}_
+* **Community**:
+    * Occasionally helped other members of the course in responding in the forum.
+      Examples include:
+      * [JavaFX Config Errors by @JasonRay168](https://github.com/nus-cs2103-AY2324S1/forum/issues/122)
+      * [Relative Path Issues by @zacwong2151](https://github.com/nus-cs2103-AY2324S1/forum/issues/153)
