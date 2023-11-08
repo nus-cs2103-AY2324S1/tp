@@ -51,7 +51,7 @@ Our guide is made for FumbleLog users of all experiences! Refer to the table bel
 
    * `add_person n/John Doe` : Adds a person named `John Doe` to the FumbleLog persons list.
 
-   * `delete 3` : Deletes the 3rd person shown in the current persons list.
+   * `delete_person 3` : Deletes the 3rd person shown in the current persons list.
 
    * `exit` : Exits FumbleLog application.
 
@@ -124,6 +124,8 @@ your contacts and events better.
 
 Shows a message explaining how to access the user guide for help.
 
+- No response should be expected after clicking the help button.
+
 Format: `help`
 ![Helptab](images/Helptab.png)
 
@@ -154,6 +156,8 @@ Adds a person to the FumbleLog.
 
 Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​`
 
+- Persons with the exact same name as another person cannot be added. 
+
 <div markdown="span" class="alert alert-primary">
     :bulb: **Tip:**
     A person can have any number of groups (including 0)
@@ -165,9 +169,9 @@ Examples:
 * `add_person n/Jonathan`
 
 Acceptable values for each parameter:
-* `n/NAME`: Name of the person (Compulsory)
+* `n/NAME`: An person's name in alphanumeric format. A person's name cannot be numbers.
 * `[p/PHONE_NUMBER]`: A valid phone number
-* `[e/EMAIL]`: A valid email address
+* `[e/EMAIL]`: A valid email address as stated in FumbleLog. Refer to the [FAQ](#faq) section for more details.
 * `[a/ADDRESS]`: Address of the person
 * `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
 * `[r/REMARK]`: A remark about the person
@@ -179,14 +183,10 @@ Acceptable values for each parameter:
 </div>
 
 Expected output when a command succeeds:
-* Input: `add_person n/james p/999 e/example@gmail.com a/1 Computing Drive b/2001-09-20`
-* Output: `New person added: james; Phone: 999; Email: example@gmail.com; Address: 1 Computing Drive; Birthday: Sep 20 2001  `
+
+Input: `add_person n/james p/999 e/example@gmail.com a/1 Computing Drive b/2001-09-20`
 
 ![Addperson](images/Addperson.png)
-
-
-Expected output when the command fails
-* `Invalid command format! add_person: Adds a person to the FumbleLog. Parameters: n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -212,7 +212,7 @@ Acceptable values for each parameter:
 * `PERSON_INDEX`: A positive integer
 * `[n/NAME]`: Name of the person
 * `[p/PHONE]`: A valid phone number
-* `[e/EMAIL]`: A valid email address
+* `[e/EMAIL]`: A valid email address as stated in FumbleLog. Refer to the [FAQ](#faq) section for more details.
 * `[a/ADDRESS]`: Address of the person
 * `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
 * `[r/REMARK]`: Remark about the person
@@ -220,14 +220,10 @@ Acceptable values for each parameter:
 * `[ug/GROUP]`: Text for the group of the person to be unassigned
 
 Expected output when a command succeeds:
-* Input: `edit_person 1 n/Alexa Yeoh`
-* Output: `Edited Person: Alexa Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; groups: [friends]`
+
+Input: `edit_person 1 n/Alexa Yeoh`
 
 ![Editperson](images/Editperson.png)
-
-
-Expected output when the command fails:
-* `Invalid command format! edit_person: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values. Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -250,13 +246,10 @@ Acceptable values for each parameter:
 * `PERSON_INDEX`: A positive integer
 
 Expected output when a command succeeds:
-* Input: `delete_person 1`
-* Output: `Deleted Person: Roy Balakrishnan; Phone: 92624417; Email: royb@example.com; Address: Blk 45 Aljunied Street 85, #11-31; groups: [colleagues]`
+
+Input: `delete_person 1`
 
 ![DeletePerson](images/DeletePerson.png)
-
-Expected output when the command fails:
-* `Invalid command format! delete_person: Deletes the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer)Example: delete 1`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -266,9 +259,10 @@ Find persons whose names or groups contain any of the given keywords.
 
 Format: `find_person KEYWORD [MORE_KEYWORDS]`
 
+* **Only full words will be matched** e.g. `Han` will not match `Hans`
+  * FumbleLog will return an empty person list when there are no keyword matches.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * `find_person` searches the name of the `Person` and `Group` that they are assigned 
@@ -279,8 +273,11 @@ Examples:
 * `find_person friends` returns `Alex Yeoh` as he belongs to the `friends` group.
 <br>
 
+Expected output when the command succeeds:
 
-  ![result for 'find alex david'](images/findFriendsResult.png)
+Input: `find_person Alexa`
+
+![result for 'find_person alex david'](images/findFriendsResult.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -288,12 +285,9 @@ Examples:
 
 Displays all persons stored in FumbleLog.
 
-Format: `list_persons`
+- You should see a list of all persons under the Persons column.
 
-Expected output when a command succeeds:
-* Input: `list_persons`
-* Output: `Listed all persons`
-* You should see a list of all persons under the Persons column.
+Format: `list_persons`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -347,19 +341,10 @@ Acceptable values for each parameter:
 * `[g/GROUP]`: Name of the group to be assigned.
 
 Expected output when the command succeeds:
-* Input: `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
-* Output: `New event added: FumbleLog meeting; Date: 05 Oct 2023; Start Time: 15:00; End Time: 17:00; Persons involved: Ken; Groups involved: [CS2103T], [CS2101];`
+
+Input: `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
 
 ![EventAdd](images/Eventadd.png)
-
-
-Expected output when the command fails:
-* `Invalid command format!
-  add_event: Adds an event to the address book.
-  Parameters: m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/NAME]... [g/GROUP]...
-  Example: add_event m/FumbleLog Meeting d/2020-10-30 s/1000 e/1200 n/Ken n/Yuheng g/Team2 `
-* * `You cannot enter a time that is before the current time!` - When the given `DATE`, `START_TIME` and `END_TIME` is before the current time.
-* `You cannot enter an end time that is before the start time!` - When the given `START_TIME` is after the given `END_TIME`.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -394,20 +379,11 @@ Acceptable values for each parameter:
 * `[g/GROUP]`: Name of the group(s) to be assigned.
 * `[ug/GROUP]`: Name of the group(s) to be unassigned.
 
-Expected output when the command succeeds:
-* Input: `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
-* Output: `Edited event: tP week 3 meeting; Date: 05 Oct 2023; Start Time: 15:00; End Time: 17:00; `
+Expected output when the command succeeds: 
+
+Input: `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
 
 ![Eventedit](images/Eventedit.png)
-
-Expected output when the command fails:
-* `Invalid command format!
-  edit_event: Edits the details of the event identified by the index number used in the displayed event list.
-  Existing values will be overwritten by the input values, except for the list of assigned persons and the list of assigned groups
-  Parameters: INDEX (must be a positive integer) [m/EVENT_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/NAME]... [u/NAME]... [g/GROUP]... [ug/GROUP]...
-  Example: edit_event 1 m/FumbleLog Meeting d/2023-10-13 n/Ken g/Team2 `
-* `You cannot enter a time that is before the current time!` - When the given `DATE`, `START_TIME` and `END_TIME` is before the current time.
-* `You cannot enter an end time that is before the start time!` - When the given `START_TIME` is after the given `END_TIME`.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -429,12 +405,6 @@ Expected output when the command succeeds:
 * Input: `delete_event 1`
 * Output: `Deleted Event: tP week 3 meeting; Date: 05 Oct 2023; Start Time: 15:00; End Time: 17:00; Groups involved: [Team1];`
 
-Expected output when the command fails:
-* `Invalid command format!
-  delete_event: Deletes the event identified by the index number used in the displayed event list.
-  Parameters: INDEX (must be a positive integer)
-  Example: delete_event 1`
-
 [Scroll back to Table of Contents](#table-of-contents)
 
 ### Locating events by name, group or person: `find_event`
@@ -443,8 +413,9 @@ Find events whose names or groups contain any of the given keywords.
 
 Format: `find_event KEYWORD [MORE_KEYWORDS]`
 
+* **Only full words will be matched** e.g. `meeting` will not match `meetings`
+  * FumbleLog will return an empty event list when there are no keyword matches.
 * The search is case-insensitive. e.g `meeting` will match `Meeting`
-* Only full words will be matched e.g. `Han` will not match `Hans`
 * Events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Meetings TP` will return `Meetings`, `TP deadline`
 * `find_event` searches the name of the `Event`, `Group` and `Person` that they are assigned
@@ -459,14 +430,12 @@ Examples:
 
 ### Listing all events: `list_events`
 
-Displays all events stored in FumbleLog
+Displays all events stored in FumbleLog.
+
+- Events are sorted by date and time, with the earliest event at the top of the list.
+- You should see a list of all events under the Events column.
 
 Format: `list_events`
-
-Expected output when a command succeeds:
-* Input: `list_events`
-* Output: `Listed all events`
-* You should see a list of all events under the Events column.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -487,17 +456,11 @@ Examples:
 * `remind` shows all events and birthdays happening in the next 7 days.
 * `remind 3` shows all events and birthdays happening in the next 3 days.
 
-Expected output when the command succeeds:
-* Input: `remind`
-* Output: `Showing all birthdays and events happening in the next 7 days: `
+Expected output when command succeeds: 
+
+Input: `remind`
 
 ![Remind](images/Remind.png)
-
-Expected output when the command fails:
-* `Invalid command format!
-  remind: Reminds the user of the upcoming birthdays and events in the next n number of days. If no index is given, the default number of days is 7.
-  Parameters: INDEX (must be a positive integer)`
-  Example: `remind 1`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -507,15 +470,16 @@ Find persons and events whose names or groups contain any of the given keywords.
 
 Format: `find_all KEYWORD [MORE_KEYWORDS]`
 
+* **Only full words will be matched** e.g. `Han` will not match `Hans`
+  * FumbleLog will return an empty person/event list when there are no keyword matches.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons and events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find_all John` returns `john` and `John Doe` in the persons list and `John's birthday` in the events list.
-* `find_all friends` returns `Alex Yeoh` as he belongs to the `friends` group in the persons list 
+* `find_all friends` returns `Alex Yeoh` as he belongs to the `friends` group in the persons list. 
 and `CS2103T meeting` as it contains the `friends` group in the events list.
 
 [Scroll back to Table of Contents](#table-of-contents)
@@ -524,12 +488,9 @@ and `CS2103T meeting` as it contains the `friends` group in the events list.
 
 Displays all persons and events stored in FumbleLog
 
-Format: `list_all`
+- You should see a list of all persons and events under the persons and events column. 
 
-Expected output when a command succeeds:
-* Input: `list_all`
-* Output: `Listed all persons and events`
-* You should see a list of all persons and events under the persons and events column.
+Format: `list_all`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -574,6 +535,19 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FumbleLog home folder.
 
+**Q**: How do I access the data file?<br>
+**A**: The data file is located at `[JAR file location]/data/addressbook.json`. You can edit it using any text editor.
+
+**Q**: What are the constraints for email addresses?<br>
+**A**: Emails should be of the format `local-part@domain` and adhere to the following constraints:
+  1. The local-part should only contain alphanumeric characters and these special characters (like '+' and '_'). 
+The local-part may not start or end with any special characters.
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. 
+The domain name must:
+     + end with a domain label at least 2 characters long
+     + have each domain label start and end with alphanumeric characters
+     + have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -590,13 +564,13 @@ _Details coming soon ..._
 
 ### Commands for Persons
 
-| Action            | Format, Examples                                                                                                                                                                                             |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Person**    | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​` <br> e.g., `add_person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
-| **Edit Person**   | `edit_person PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [g/GROUP]…​`<br> e.g.,`edit_person 2 n/James Lee e/jameslee@example.com`                                                |
-| **Delete Person** | `delete_person PERSON_INDEX`<br> e.g., `delete_person 3`                                                                                                                                                     |
-| **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_person James Jake`                                                                                                                                     |
-| **List Persons**  | `list_persons`                                                                                                                                                                                               |
+| Action            | Format, Examples                                                                                                                                                                                                    |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Person**    | `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​` <br> e.g., `add_person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
+| **Edit Person**   | `edit_person PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [g/GROUP]…​`<br> e.g.,`edit_person 2 n/James Lee e/jameslee@example.com`                                                       |
+| **Delete Person** | `delete_person PERSON_INDEX`<br> e.g., `delete_person 3`                                                                                                                                                            |
+| **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_person James Jake`                                                                                                                                            |
+| **List Persons**  | `list_persons`                                                                                                                                                                                                      |
 
 
 ### Commands for Events
