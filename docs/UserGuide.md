@@ -412,7 +412,9 @@ Format: `report EMPLOYEE_ID`
   * The `.txt` file follows the naming convention `DATE_NAME` where `DATE` is the date the report is created, 
     and `NAME` is the name of the corresponding employee.
 * The overtime pay is calculated based on the overtime hours and the salary of the employee.
-  * The [Singaporean Ministry of Manpower's prescribed formula](https://www.mom.gov.sg/employment-practices/hours-of-work-overtime-and-rest-days) ($1.5\times \frac{12 \times \text{Monthly Salary}}{52\times 44}$) is used to calculate overtime pay.
+  * The following [Singaporean Ministry of Manpower's prescribed formula](https://www.mom.gov.sg/employment-practices/hours-of-work-overtime-and-rest-days) is used to calculate overtime pay.
+
+      ![overtime pay formula](https://latex.codecogs.com/png.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%201.5%5Ctimes%20%5Cfrac%7B12%20%5Ctimes%20%5Ctext%7BMonthly%20Salary%7D%7D%7B52%5Ctimes%2044%7D)
 
 
 Examples:
