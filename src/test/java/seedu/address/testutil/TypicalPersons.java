@@ -46,27 +46,27 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com").withAddress("10th street")
             .withGender("M").withSecLevel("1").withNearestMrtStation("Tiong Bahru")
             .withSubjects("English").build();
-    public static final Student ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Student ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822243")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withGender("F").withSecLevel("3")
             .withNearestMrtStation("Bugis")
             .withSubjects("Physics", "Biology").build();
-    public static final Student FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Student FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824278")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withGender("F").withSecLevel("2")
             .withNearestMrtStation("Novena")
             .withSubjects("Biology").build();
-    public static final Student GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+    public static final Student GEORGE = new PersonBuilder().withName("George Best").withPhone("94824423")
             .withEmail("anna@example.com").withAddress("4th street")
             .withGender("M").withSecLevel("2")
             .withNearestMrtStation("Newton").build();
 
     // Manually added
-    public static final Student HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Student HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824241")
             .withEmail("stefan@example.com").withAddress("little india")
             .withGender("M").withSecLevel("3")
             .withNearestMrtStation("Tanjong Pagar").build();
-    public static final Student IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Student IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84821312")
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withGender("F").withSecLevel("1")
             .withNearestMrtStation("Choa Chu Kang").build();

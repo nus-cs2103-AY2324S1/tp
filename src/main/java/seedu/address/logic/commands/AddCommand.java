@@ -44,8 +44,8 @@ public class AddCommand extends Command {
             + PREFIX_SEC_LEVEL + "3 "
             + PREFIX_NEAREST_MRT_STATION + "Buona Vista "
             + PREFIX_SUBJECT + "Physics "
-            + PREFIX_SUBJECT + "Mathematics"
-            + PREFIX_ENROL_DATE + "Jun 2022"
+            + PREFIX_SUBJECT + "Chinese "
+            + PREFIX_ENROL_DATE + "Jun 2022 "
             + PREFIX_ENROL_DATE + "Jan 2023";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";

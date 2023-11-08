@@ -95,14 +95,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT 
   * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
 * Simply providing 1 enrol date without providing any corresponding subject(s) will result in an error.
 
-<box type="tip" seamless>
-
-**Tip:** A student must have at least 1 tag (subject)
-</box>
-
 Examples:
 * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry s/Physics`
-* `add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Mathematics`
+* `add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Chinese`
   <br>
   ![result for 'add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Mathematics'](images/ug_images/addedResult.png)
 
@@ -241,7 +236,7 @@ Format: `exit`
 ### Showing statistical table
 Showing a table either categorized by gender, sec level or subject.
 
-Format: `table {prefix}`
+Format: `table PREFIX`
 
 * FIELD_VALUE is not needed.
 * prefix is case-sensitive.
@@ -257,7 +252,7 @@ Examples:
 ### Showing bar chart
 Showing a bar chart either categorized by gender, sec level or subject.
 
-Format: `bar {prefix}`
+Format: `bar PREFIX`
 
 * FIELD_VALUE is not needed.
 * prefix is case-sensitive.
@@ -278,7 +273,7 @@ Below is the chart generated after entering `bar l/`.
 ### Showing line chart
 Showing a line chart describing number of students enrolled in each month in a specific year.
 
-Format: `trend y/{year}`
+Format: `trend y/YEAR`
 * {year} is a 4 digit number representing year
 * {} is not required
 
@@ -293,7 +288,7 @@ Below is the chart generated after typing `trend y/2023`
 
 Export the statistical table or bar chart into PNG format.
 
-Format: `export v/[VISUAL]`
+Format: `export v/VISUAL`
 
 * `VISUAL` should be `TABLE` or `BAR`, non-case-sensitive.
 * `TABLE` indicates exporting the table created, while `BAR` indicates exporting the bar chart created.
