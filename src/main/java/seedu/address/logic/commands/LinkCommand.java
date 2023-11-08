@@ -56,4 +56,10 @@ public class LinkCommand extends Command {
             return new CommandResult("Linked " + person.getName() + " to " + lesson.getName());
         }
     }
+    public Name getLessonName() {
+        return lessonName;
+    }
+    public Name getStudentName() {
+        return studentName;
+    }
 }

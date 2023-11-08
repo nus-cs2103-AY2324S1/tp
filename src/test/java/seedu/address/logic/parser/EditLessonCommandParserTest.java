@@ -1,15 +1,11 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.DeleteLessonCommand;
-import seedu.address.logic.commands.EditLessonCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Day;
 import seedu.address.model.lessons.Lesson;
@@ -21,8 +17,8 @@ class EditLessonCommandParserTest {
     private EditLessonCommandParser p = new EditLessonCommandParser();
     @Test
     void test_startAfterEnd() {
-        Assertions.assertThrows(ParseException.class, () -> p.parse("1 -name name -start 14:01 -end 14:00"));
-        Assertions.assertThrows(ParseException.class, () -> p.parse(" -name name -start 14:01 -end 14:00"));
+        assertThrows(ParseException.class, () -> p.parse("1 -name name -start 14:01 -end 14:00"));
+        assertThrows(ParseException.class, () -> p.parse(" -name name -start 14:01 -end 14:00"));
     }
     @Test
     void test_parseName() throws ParseException {
@@ -65,8 +61,8 @@ class EditLessonCommandParserTest {
         assertNull(p.parse("-subject physics").getIndex());
         assertEquals(expected, p.parse("1 -subject physics").getEditDescriptor());
         assertEquals(1, p.parse("1 -subject physics").getIndex());
-        Assertions.assertThrows(ParseException.class, () -> p.parse("-name name -subject physics, chemistry"));
-        Assertions.assertThrows(ParseException.class, () -> p.parse("-name name -subject social studies"));
+        assertThrows(ParseException.class, () -> p.parse("-name name -subject physics, chemistry"));
+        assertThrows(ParseException.class, () -> p.parse("-name name -subject social studies"));
     }
     @Test
     void test_parseDay() throws ParseException {
@@ -77,9 +73,9 @@ class EditLessonCommandParserTest {
         assertNull(p.parse("-name name -day 1").getIndex());
         assertEquals(expected, p.parse("1 -name name -day 1").getEditDescriptor());
         assertEquals(1, p.parse("1 -name name -day 1").getIndex());
-        Assertions.assertThrows(ParseException.class, () -> p.parse("-name name -day monday"));
-        Assertions.assertThrows(ParseException.class, () -> p.parse("-name name -day -1"));
-        Assertions.assertThrows(ParseException.class, () -> p.parse("-name name -day 23/2/29"));
+        assertThrows(ParseException.class, () -> p.parse("-name name -day monday"));
+        assertThrows(ParseException.class, () -> p.parse("-name name -day -1"));
+        assertThrows(ParseException.class, () -> p.parse("-name name -day 23/2/29"));
     }
 
     @Test
