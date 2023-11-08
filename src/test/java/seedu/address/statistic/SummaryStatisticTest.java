@@ -1,18 +1,15 @@
 package seedu.address.statistic;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalPersons.ALPHA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithTagScores;
-
-import com.sun.javafx.font.Metrics;
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.model.EventBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -29,9 +26,8 @@ import seedu.address.testutil.TypicalPersons;
 public class SummaryStatisticTest {
     private static final Tag VALID_SCORE_TAG = new Tag("Interview", "assessment");
 
-    private static final Person VALID_LOWEST_SCORE_PERSON = ALPHA;
+    private static final Person VALID_LOWEST_SCORE_PERSON = TypicalPersons.ALPHA;
     private static final Person VALID_PERSON_WITH_SCORE = TypicalPersons.BETA;
-    private static final Person VALID_HIGHEST_SCORE_PERSON = TypicalPersons.HOTEL;
 
     private Model model = new ModelManager(getTypicalAddressBookWithTagScores(), new EventBook(), new UserPrefs());
 
@@ -81,7 +77,7 @@ public class SummaryStatisticTest {
         assertTrue(expectedMax == actualMax);
     }
 
-   // Check if we are able to generate Min value with tag
+    // Check if we are able to generate Min value with tag
     @Test
     public void execute_generateMinValueWithTag_success() {
         SummaryStatistic summaryStatistic = new SummaryStatistic(model.getFilteredPersonList());
@@ -109,10 +105,10 @@ public class SummaryStatisticTest {
 
         // Filtering a score above the lowest scorer, take note that BETA, the next lowest scorer, has a score of 60
         List<Person> filteredList = summaryStatistic.filteredPersonList(
-                VALID_SCORE_TAG, StatisticMetric.SCORE, lowestScore + 1 );
+                VALID_SCORE_TAG, StatisticMetric.SCORE, lowestScore + 1);
 
 
-         // Checking if the filtered list has one less person than the original list
+        // Checking if the filtered list has one less person than the original list
         assertTrue(filteredList.size() == model.getFilteredPersonList().size() - 1);
         assertTrue(!filteredList.contains(VALID_LOWEST_SCORE_PERSON));
 
@@ -224,6 +220,10 @@ public class SummaryStatisticTest {
         return count;
     }
 
+    /**
+     * Helper method to count the number of persons with score equal to 100.0 percentile
+     * @return count of persons with score equal to 100.0 percentile
+     */
     private int countOfHundredPercentile() {
         int totalPersons = model.getFilteredPersonList().size();
         int count = 0;

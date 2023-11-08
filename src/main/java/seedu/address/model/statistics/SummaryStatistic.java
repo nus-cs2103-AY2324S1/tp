@@ -261,6 +261,11 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
         }
     }
 
+    /**
+     * Returns the stream of people in JABPro associated with that tag and has a value greater than
+     * @param tag tag to be associated with
+     * @return stream of people in JABPro associated with that tag and has a value greater than
+     */
     public Stream<Person> filteredPersonsWithScoreTag(Tag tag) {
         Stream<Person> filteredStream = personData.stream().filter(person -> person.getTags().contains(tag)
                 && person.getScoreList().hasTag(tag));
