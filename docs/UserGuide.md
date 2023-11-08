@@ -398,6 +398,7 @@ In addition, if the musician does not exist in the band, you will see an error m
 [insert image]
 Please verify that the index of the musician is correct or input a different musician, and try again.
 
+
 ### Find band: `findb`
 Finds the band with the given input name. Lists the band members of the selected band. From `My Bands` panel, find the complete band name of the band.
 
@@ -531,7 +532,7 @@ If you wish, please refer to the below section for a more succinct [command summ
 | **Delete a Band**                              | `deleteb INDEX` <br> e.g., `deleteb 1`                                                                                                                           |
 | **Add Musicians to a Band**                    | `addm b/BAND_INDEX m/MUSICIAN_INDEX…​` <br> e.g., `addm b/1 m/1 m/2`                                                                                             |
 | **Remove a Musician from a Band**              | `removem b/BANDINDEX m/MUSICIANINDEX` <br> e.g., `removem b/1 m/1`                                                                                               |
-| **List All Members in a Band**                 | `findb BANDNAME` <br> e.g., `findb theory X`                                                                                                                     |
+| **Find a Band**                                | `findb BANDNAME` <br> e.g., `findb theory X`                                                                                                                     |
 | **List All Musicians and Bands**               | `list`                                                                                                                                                           |
 | **Clear All Data**                             | `clear`                                                                                                                                                          |
 | **Exit**                                       | `exit`                                                                                                                                                           |
