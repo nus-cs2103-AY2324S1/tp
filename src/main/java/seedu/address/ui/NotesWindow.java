@@ -1,11 +1,12 @@
 package seedu.address.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -23,7 +24,7 @@ public class NotesWindow extends UiPart<Stage> {
     private static final String FXML = "NotesWindow.fxml";
 
     @FXML
-    private ListView<String> notesListView;
+    private ListView<Note> notesListView;
 
     private final Person person;
 
@@ -67,16 +68,29 @@ public class NotesWindow extends UiPart<Stage> {
         getRoot().hide();
     }
 
-    public void focus() {
-        getRoot().requestFocus();
-    }
-
-    private void populateListView(List<Note> notes) {
-        ObservableList<String> notesObservableList = FXCollections.observableArrayList();
-        for (Note note : notes) {
-            notesObservableList.add(note.toString());
-        }
+    private void populateListView(ObservableList<Note> notes) {
+        ObservableList<Note> notesObservableList = FXCollections.observableArrayList(notes);
         notesListView.setItems(notesObservableList);
+        notesListView.setCellFactory(listView -> new ListCell<Note>() {
+            @Override
+            protected void updateItem(Note note, boolean empty) {
+                super.updateItem(note, empty);
+                if (empty || note == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    Label label = new Label((getIndex() + 1) + ". " + note.toString());
+                    label.setWrapText(true);
+                    label.prefWidthProperty().bind(listView.widthProperty().subtract(40));
+                    setGraphic(label);
+                }
+            }
+        });
+
+        // make sure the width is always correct even after resizing the window
+        notesListView.widthProperty().addListener((observable) -> {
+            notesListView.refresh();
+        });
     }
 
     @FXML
@@ -85,7 +99,7 @@ public class NotesWindow extends UiPart<Stage> {
         stage.close();
     }
 
-    public ListView<String> getNotesListView() {
+    public ListView<Note> getNotesListView() {
         return notesListView;
     }
 }
