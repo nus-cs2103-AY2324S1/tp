@@ -275,7 +275,7 @@ one command.
 
 Examples:
 
-- `find n/Alex` returns all teaching assistants with names containing `alex` (e.g. `Alex`).
+- `find n/Alex` returns all teaching assistants with names containing `alex` (e.g. `Alex Yeoh`).
 - `find c/cs1231s` returns all teaching assistants that are teaching `cs1231s`.
 - `find d/1 from/10:00 to/12:00` returns all teaching assistants that are free on `Monday` from `10:00` to `12:00`.
 - `find n/Alex c/cs1231s` returns all teaching assistants with names containing `alex` and are teaching `cs1231s`.
