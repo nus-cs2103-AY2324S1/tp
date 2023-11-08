@@ -9,6 +9,7 @@ import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 
+//todo improve code coverage and delete dead code
 /**
  * Container for user visible messages.
  */
