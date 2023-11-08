@@ -65,6 +65,7 @@ public interface Model {
      * Returns true if a member with the same identity as {@code member} exists in the address book.
      *
      * @param member The member to check.
+     * @return True if the member exists, false otherwise.
      */
     boolean hasMember(Member member);
 
@@ -72,6 +73,7 @@ public interface Model {
      * Returns true if an applicant with the same identity as {@code applicant} exists in the address book.
      *
      * @param applicant The applicant to check.
+     * @return True if the applicant exists, false otherwise.
      */
     boolean hasApplicant(Applicant applicant);
 
@@ -136,9 +138,20 @@ public interface Model {
      */
     ObservableList<Tag> getFilteredTagList();
 
+    /**
+     * Returns an unmodifiable view of the filtered task list
+     */
     ObservableList<Task> getFilteredTaskList();
 
+    /**
+     * Sets the task list for the member.
+     */
     void setTaskListForMember(Member member);
+
+    /**
+     * Clears the task list.
+     */
+    void clearTaskList();
 
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
