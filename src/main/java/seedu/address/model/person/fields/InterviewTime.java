@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 public class InterviewTime {
 
+    public static final String TYPE = "Interview Time";
     public static final String MESSAGE_CONSTRAINTS =
         "Interview time should be in the format of DD/MM/YYYY HHmm. To cancel the interview, enter "
             + "'cancel' (case sensitive)";
