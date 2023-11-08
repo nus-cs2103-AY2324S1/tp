@@ -7,16 +7,16 @@ import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.WordOverduePredicate;
 
 /**
- * Finds and lists all flashcards in flashlingo who is overdue.
+ * Finds and lists all flash cards in flashlingo who is overdue.
  */
 public class ReviewCommand extends Command {
 
     public static final String COMMAND_WORD = "review";
 
-    public static final String MESSAGE_SUCCESS = "Listed all flashcards you need to review";
+    public static final String MESSAGE_SUCCESS = "Listed all flash cards you need to review";
 
     /**
-     * The predicate used to filter the flashcard which is overdue.
+     * The predicate used to filter the flash card which is overdue.
      */
     private final WordOverduePredicate predicate;
 

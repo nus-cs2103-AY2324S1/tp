@@ -190,11 +190,6 @@ public class ModelManager implements Model {
         return numOfFlashCardsRemembered;
     }
     @Override
-    public void setReviewWord(Predicate<FlashCard> predicate, FlashCard flashCard) {
-        filteredFlashCards.setPredicate(predicate);
-        addFlashCard(flashCard);
-    }
-    @Override
     public void startSession() throws CommandException {
         SessionManager.getInstance().setSession(true);
         updateFilteredFlashCardList(new WordOverduePredicate());

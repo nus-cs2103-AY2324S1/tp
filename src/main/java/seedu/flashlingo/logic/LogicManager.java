@@ -95,9 +95,4 @@ public class LogicManager implements Logic {
     public String getTheme() {
         return model.getTheme();
     }
-
-    @Override
-    public void setTheme(String theme) {
-        model.setTheme(theme);
-    }
 }

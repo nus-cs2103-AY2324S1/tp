@@ -16,21 +16,13 @@ public class TranslatedWord extends Word {
     public TranslatedWord(String word, String language) {
         super(word, language);
     }
+
     /**
-     * Evaluates whether this word is an original word
-     * @return True or False depending on whether this is an original word
+     * Constructs a new Translated Word
+     * @param word String to be encapsulated by this Translated Word
      */
-    @Override
-    public boolean isOriginalWord() {
-        return false;
-    }
-    /**
-     * Evaluates whether this word is a translated word
-     * @return True or False depending on whether this is a translated word
-     */
-    @Override
-    public boolean isTranslatedWord() {
-        return true;
+    public TranslatedWord(String word) {
+        super(word, "");
     }
 
     /**

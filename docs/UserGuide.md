@@ -3,10 +3,33 @@ layout: page
 title: User Guide
 ---
 
-Flashlingo is a **desktop app for learning words by flash cards, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Flashlingo is designed with beginner language learners in mind, specialising in helping them expand their vocabulary.
-
 * Table of Contents
-  {:toc}
+{:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Introduction
+Flashlingo is a versatile desktop application centered around learning words through flashcards. It is optimized for use via a Command Line Interface (CLI), 
+while also providing the advantages of a Graphical User Interface (GUI). Tailored with a focus on beginner language 
+learners, Flashlingo specializes in expanding vocabulary.
+
+The application leverages the scientifically-proven principle of the [**Forgetting Curve**](https://en.wikipedia.org/wiki/Forgetting_curve). 
+By incorporating the forgetting curve concept, Flashlingo schedules review sessions, ensuring words are revisited at 
+optimal intervals to enhance long-term memory retention. This method assists users in effectively retaining and expanding their vocabulary over time.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Application Features
+Flashlingo predominantly consists of two main features: **Managing flash cards** and **Reviewing flash cards**
+- **Managing flash cards**
+  - Users are given the ability to add, delete and edit flash cards. And each flashcard is assigned with a `level`, which
+  indicates the proficiency of the user with the word. The level of the flashcard will be updated after each review session.
+* **Reviewing flash cards**
+   - In each review session, words that require reviewing will be presented to users one by one. For each word, users can indicate whether
+     - they have memorized the word  
+     This will advance the word into the next `level`, meaning less frequent review for the word in the near future.
+     - they have forgotten the word  
+        This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -20,18 +43,15 @@ Flashlingo is a **desktop app for learning words by flash cards, optimized for u
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.
    Below shows the steps to perform such a task
-    1. Open up the terminal. 
+    1. Open up the terminal.
     * For mac users, press `Command + Space` to open Spotlight search, type `Terminal`, and press `Enter`.
-       <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">
+      <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">
     * For windows users, press `Windows + R` keys simultaneously, type `cmd` and press `Enter`.
     2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
-   <br>
-       `$ cd Downloads`
-
-    3. Simply type in java -jar flashlingo.jar to get started!
-   <br>
-         `$ java -jar flashlingo.jar`
        <br>
+       ``cd Downloads```
+    3. Simply type in `java -jar flashlingo.jar` to get started!
+
        A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
        ![Ui](images/MainUi.png)
 
@@ -182,9 +202,9 @@ Output: `Review Session has been started.`
 
 **Note**
 * Users are not allowed to start a new review session if they are already in one. In this case,
-`Sorry, currently you are in a review session. Your command is not supported. Please end the review session first.` will be prompted.
+  `Sorry, currently you are in a review session. Your command is not supported. Please end the review session first.` will be prompted.
 * If there are no words to review, users will not be able to start review session. `You have no more words to review!`
-will be displayed.
+  will be displayed.
 
 
 ### Ending the current review session : `end`
@@ -197,7 +217,7 @@ Output: `Review Session has ended.`
 
 **Note**
 * Users are not allowed to end a review session if the session hasn't been started yet. The message of `You are not in a review session.`
-will be given.
+  will be given.
 
 ### Revealing the other side of the flashcard: `reveal`
 
@@ -243,7 +263,7 @@ or
 if there's no word left in the review session.
 **Note**
 * `no` command will only take effect during review session. Otherwise, error message`You are not in a review session.`
-will be printed out.
+  will be printed out.
 * Pressing `no` button will have the same effect.
 
 ### Show learning statistics : `stats`
@@ -333,9 +353,18 @@ Flashlingo data are saved automatically as a JSON file `[JAR file location]/data
 If your changes to the data file makes its format invalid, Flashlingo will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+--------------------------------------------------------------------------------------------------------------------
 
-_Details coming soon ..._
+## Planned Enhancement
+
+### Adding language tags in UI
+
+The UI will display translation language tag of the flash cards to users. This will allow users to distinguish different languages of the translations and help them
+recall the translation and verify the correctness of the translation by further entering the `reveal` command.
+
+UI Prototype:
+![img.png](images/LanguageTag.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -348,6 +377,16 @@ _Details coming soon ..._
 **A**: Save your words and translations in the format specified above in an Excel file. Move the file to the same folder with `flashlingo.jar`.
 Then, use the `load` command to import the data.
 
+**Q**: After I reviewed a flash card, I edited details of the card by the `edit` command. Will I see these changes immediately reflected in the review session?<br>
+**A**:
+* Unfortunately, no. The card is updated synchronously in the card list and the review session of Flashlingo. However, since the user has already reviewed the same card on the day, the card will not be included in the review session again.
+* To see the edits made, User can use the `list` or `find` command to locate the specific card in the card list. The changes will also be reflected in the next review session for that flash card.
+
+**Q**: If the displayed level of a flash card is "Word Mastered", what can I do if I want to review the card again?<br>
+**A**: 
+* Currently, there's no way for user to manually change the level of a flash card. Flashlingo is designed to automatically remove words that learners are familiar with from the review session.
+* However, if user must review the card, he/she can first use the `delete` command to delete the card and then use the `add` command to re-add the same card. The new card will be reset to level 1 and added in the review session.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -357,7 +396,7 @@ Then, use the `load` command to import the data.
 | **Help**                | `help`                                                                                                                     |
 | **List**                | `list`                                                                                                                     |
 | **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`         |
-| **Delete**              | `delete <Index>`<br> e.g., `del 1`                                                                                         |
+| **Delete**              | `delete <Index>`<br> e.g., `delete 1`                                                                                      |
 | **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` |
 | **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        |
 | **Start**               | `start`                                                                                                                    |
