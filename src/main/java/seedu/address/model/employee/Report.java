@@ -55,7 +55,7 @@ public class Report {
                 .append(overtimeHours)
                 .append("\nOvertime Pay: ")
                 .append(overtimePay)
-                .append("\nNumber of Leaves: ")
+                .append("\nNumber of Leaves Used: ")
                 .append(numOfLeaves)
                 .append("\nRemarks:\n")
                 .append(remarkList);
