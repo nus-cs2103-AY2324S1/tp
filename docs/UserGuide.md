@@ -13,6 +13,23 @@ solution to manage your student details, including attendance records and assign
 - [1. About this User Guide](#1-about-this-user-guide)
 - [2. Quick start](#2-Quick-start)
 - [3. Features](#3-features)
+  - [3.1 Basic Course Management](#31-basic-course-management)
+    - [Creating an addressbook: `course create`](#311-creating-an-addressbook-course-create)
+    - [Deleting an addressbook: `course delete`](#312-deleting-an-addressbook-course-delete)
+    - [Switching an addressbook: `course switch`](#313-switching-an-addressbook-course-switch)
+    - [Editing an addressbook: `course edit`](#314-editing-an-addressbook-course-edit)
+  - [3.2 Basic Student Management](#32-basic-student-management)
+    - [Adding a new contact: `add`](#321-adding-a-new-contact-add)
+    - [Editing a contact : `edit`](#322-editing-a-contact--edit)
+    - [Marking attendance of student: `mark`](#323-marking-attendance-of-student-mark)
+    - [Viewing summary of attendance : `list attendance`](#324-viewing-summary-of-attendance--list-attendance)
+    - [Searching for student's contact via keyword : `find`](#325-searching-for-students-contact-via-keyword--find)
+    - [Listing students : `list students`](#326-listing-students--list-students)
+    - [Deleting a student : `delete`](#327-deleting-a-student--delete)
+    - [Deleting multiple students : `delete all`](#328-deleting-multiple-students--delete-all)
+    - [Merging two students : `merge`](#329-merging-two-students--merge)
+    - [Viewing detailed attendance records : `view`](#3210-viewing-detailed-attendance-records--view)
+    - [Clearing all entries : `clear`](#3211-clearing-all-entries--clear)
 - [4. Planned Enhancements](#4-planned-enhancements)
 - [5. FAQ](#5-faq)
 - [6. Known issues](#6-known-issues)
@@ -124,7 +141,9 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Creating an addressbook: `course create`
+### 3.1 Basic Course Management
+
+#### 3.1.1 Creating an addressbook: `course create`
 
 ![course create](images/courseCreate.png)
 
@@ -140,7 +159,7 @@ Format: `course create course/COURSE_CODE`
 Example:
 * `course create course/CS2103T` creates a new addressbook with course code CS2103T.
 
-### Deleting an addressbook: `course delete`
+#### 3.1.2 Deleting an addressbook: `course delete`
 
 ![course delete](images/courseDelete.png)
 
@@ -156,7 +175,7 @@ Format: `course delete course/COURSE_CODE`
 Example:
 * `course delete course/CS2103T` deletes the addressbook with course code CS2103T.
 
-### Switching an addressbook: `course switch`
+#### 3.1.3 Switching an addressbook: `course switch`
 
 ![course switch](images/courseSwitch.png)
 
@@ -172,7 +191,7 @@ Format: `course switch course/COURSE_CODE`
 Example:
 * `course switch course/CS2103T` switches to the addressbook with course code CS2103T.
 
-### Editing an addressbook: `course edit`
+#### 3.1.4 Editing an addressbook: `course edit`
 
 ![course edit](images/courseEdit.png)
 
@@ -188,7 +207,9 @@ Format: `course edit course/COURSE_CODE`
 Example:
 * `course edit course/CS2103T` changes the active addressbook's course code to CS2103T.
 
-### Adding a new contact: `add`
+### 3.2 Basic Student Management
+
+#### 3.2.1 Adding a new contact: `add`
 
 Creates a new contact in the course with the specified name and details.
 
@@ -205,7 +226,7 @@ Examples:
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E`
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G2`
 
-### Editing a contact : `edit`
+#### 3.2.2 Editing a contact : `edit`
 
 Edits the contact details.
 
@@ -223,7 +244,7 @@ Examples:
 *  `edit 1 n/Tan Liyan` Edits the name of the first person to be Tan Liyan.
 *  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tutorial group tags from contact.
 
-### Marking attendance of student: `mark`
+#### 3.2.3 Marking attendance of student: `mark`
 
 Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER
 [r/REASON_OF_ABSENCE]`
@@ -253,7 +274,7 @@ Examples:
 * `mark id/A0123456E, A0123457E a/1 w/1` Marks students with student IDs, A0123456E and A0123457E, as present for the tutorial in Week 1.
 * `mark id/A0123456E a/0 w/1 r/no valid reason` Marks student with student ID, A0123456E, as absent for the tutorial in Week 1 with no valid reason.
 
-### Viewing summary of attendance : `list attendance`
+#### 3.2.4 Viewing summary of attendance : `list attendance`
 
 Shows a summary of attendance records including list of absentees.
 
@@ -270,7 +291,7 @@ Examples:
 * `list attendance w/1` Shows a list of absentees and a summary of attendance records of all students in the course for Week 1.
 * `list attendance w/3 tg/G01` Shows a list of absentees and a summary of attendance records of the students in the tutorial group G01 in the course for Week 3.
 
-### Searching for student's contact via keyword : `find`
+#### 3.2.5 Searching for student's contact via keyword : `find`
 
 Finds a student's or multiple students' contact either via their name or student ID.
 
@@ -285,7 +306,7 @@ Examples:
 *  `find n/Anthony Yiqiao` Finds all contacts with the name "Anthony" and "Yiqiao".
 *  `find id/A0123456H` Finds all contacts with the student ID "A0123456H".
 
-### Listing students : `list students`
+#### 3.2.6 Listing students : `list students`
 
 Shows a list of students in the course.
 
@@ -295,7 +316,7 @@ Format: `list students`
 *  Shows a list of all students in the course.
 
 
-### Deleting a student : `delete`
+#### 3.2.7 Deleting a student : `delete`
 
 Deletes the specified person from TAvigator.
 
@@ -311,7 +332,7 @@ Examples:
 * `list students` followed by `delete 2` deletes the 2nd person in TAvigator.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Deleting multiple students : `delete all`
+#### 3.2.8 Deleting multiple students : `delete all`
 
 Deletes all students from the course or all students from the specified tutorial group in the course.
 
@@ -328,7 +349,7 @@ Examples:
 * `delete all` deletes all students from the course.
 * `delete all tg/G02` deletes all students from tutorial group G02 in the course.
 
-### Merging two students : `merge`
+#### 3.2.9 Merging two students : `merge`
 
 Merges two students in the current address book. 
 
@@ -343,7 +364,7 @@ Format: `merge PRIMARY_INDEX SECONDARY_INDEX`
 Examples:
 * `merge 1 2` merges the information of the first two displayed students.
 
-### Viewing detailed attendance records : `view`
+#### 3.2.10 Viewing detailed attendance records : `view`
 
 Displays the detailed attendance record of the specified student.
 
@@ -357,7 +378,7 @@ Format: `view INDEX`
 Examples:
 * `view 1` views the attendance record for the student with index 1.
 
-### Clearing all entries : `clear`
+#### 3.2.11 Clearing all entries : `clear`
 
 Clears all entries from the current address book.
 
