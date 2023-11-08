@@ -1,11 +1,17 @@
 package seedu.address.model.lessons;
 
-import static seedu.address.logic.parser.TypeParsingUtil.parseTime;
+import static java.lang.String.format;
+import static seedu.address.logic.parser.RegularExpressionUtil.ONE_TO_TWO_DIGITS;
+import static seedu.address.logic.parser.RegularExpressionUtil.TWO_DIGITS;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import seedu.address.logic.parser.TypeParsingUtil;
+import seedu.address.logic.parser.exceptions.InvalidInputException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntryField;
 
@@ -51,6 +57,27 @@ public class Time extends ListEntryField {
             return true;
         } catch (ParseException e) {
             return false;
+        }
+    }
+    /**
+     * Parses the time from the input string, which can be in the following formats: hh:mm
+     * @param input the input string where the time is to be parsed from
+     * @return the time parsed
+     * @throws ParseException if the input is not a valid time
+     */
+    private static LocalTime parseTime(String input) throws ParseException {
+        String hourMinPattern = format("%s:%s",ONE_TO_TWO_DIGITS, TWO_DIGITS);
+        Pattern p = Pattern.compile(hourMinPattern);
+        Matcher m = p.matcher(input);
+        if (m.matches()) {
+            int hour = TypeParsingUtil.parseNum(m.group(1));
+            int min = TypeParsingUtil.parseNum(m.group(2));
+            if (hour > 23 || min > 59) {
+                throw new InvalidInputException(input + " is not a valid time");
+            }
+            return LocalTime.of(hour, min);
+        } else {
+            throw new InvalidInputException(input + " is not a valid time");
         }
     }
     public LocalTime getTime() {

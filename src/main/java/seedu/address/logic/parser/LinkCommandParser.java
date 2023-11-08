@@ -40,7 +40,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             }
             try {
                 studentName = model.getCurrentlyDisplayedPerson().getName();
-                lessonName = ParserUtil.parseName(arguments);
+                lessonName = Name.of(arguments);
                 return new LinkCommand(lessonName, studentName);
             } catch (ParseException e) {
                 throw new ParseException(e.getMessage() + "\n" + getStatefulUsageInfoPerson());
@@ -50,7 +50,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
                 throw new ParseException("No lesson is shown" + "\n" + getStatefulUsageInfoLesson());
             }
             try {
-                studentName = ParserUtil.parseName(arguments);
+                studentName = Name.of(arguments);
                 lessonName = model.getCurrentlyDisplayedLesson().getName();
                 return new LinkCommand(lessonName, studentName);
             } catch (ParseException e) {
