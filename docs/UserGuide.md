@@ -10,13 +10,13 @@ solution to manage your student details, including attendance records and assign
 
 ### Table of Contents
 
-- [1. About this User Guide](#about-this-user-guide)
-- [2. Quick start](#Quick-start)
-- [3. Features](#features)
-- [4. Planned Enhancements](#planned-enhancements)
-- [5. FAQ](#faq)
-- [6. Known issues](#known-issues)
-- [7. Command summary](#command-summary)
+- [1. About this User Guide](#1-about-this-user-guide)
+- [2. Quick start](#2-Quick-start)
+- [3. Features](#3-features)
+- [4. Planned Enhancements](#4-planned-enhancements)
+- [5. FAQ](#5-faq)
+- [6. Known issues](#6-known-issues)
+- [7. Command summary](#7-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 ## 1. About this User Guide
@@ -44,7 +44,7 @@ This guide aims to
 </div>
 
 
-## Quick start
+## 2. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -89,7 +89,7 @@ An example is shown below.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 3. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -387,7 +387,7 @@ If your changes to the data file makes its format invalid, TAvigator will discar
 
 _Details coming soon ..._
 
-## Planned Enhancements
+## 4. Planned Enhancements
 
 ### `[Coming in v2.0]` Marking attendance of student: `mark` 
 
@@ -397,20 +397,20 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAvigator home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## 6. Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 7. Command summary
 
 | Action     | Format, Examples                                                                                                                                                                                               |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
