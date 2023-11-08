@@ -213,7 +213,7 @@ Example:
 
 ### Redo a command : `redo`
 
-Redo a previously undone command that modified the srare Class Manager. Redo only works with commands that can be undone. Class Manager only stores up to 10 modified states, which resets after a `load` or `config` command. Redo can be used multiple times to redo multiple undo commands, or until Class Manager reaches its most recent state after a maximum of 9 redos.
+Redo a previously undone command that modified the state of Class Manager. Redo only works with commands that can be undone. Class Manager only stores up to 10 modified states, which resets after a `load` or `config` command. Redo can be used multiple times to redo multiple undo commands, or until Class Manager reaches its most recent state after a maximum of 9 redos.
 
 Format: `redo`
 
