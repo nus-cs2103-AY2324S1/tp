@@ -16,12 +16,15 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private final boolean listEvent;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean exit, boolean listEvent) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.exit = exit;
+        this.listEvent = listEvent;
     }
 
     /**
@@ -29,7 +32,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false);
+        this(feedbackToUser, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -38,6 +41,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isListEvent() {
+        return listEvent;
     }
 
     @Override
@@ -53,7 +60,8 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && listEvent == otherCommandResult.listEvent;
     }
 
     @Override
@@ -66,6 +74,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("exit", exit)
+                .add("listEvent", listEvent)
                 .toString();
     }
 

@@ -51,7 +51,7 @@ public class Note {
      * @return The information in string.
      */
     public String getUiText() {
-        String result = this.getTitle() + " (content: " + this.getContent() + ")";
+        String result = this.getTitle() + "\n" + this.getContent();
         return result;
     }
 

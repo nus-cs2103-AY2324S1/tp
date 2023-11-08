@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventID;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteID;
 import seedu.address.model.tag.Tag;
@@ -76,6 +77,16 @@ public class Person {
     }
 
     /**
+     * Checks whether the person contains a certain tag.
+     *
+     * @param tag the tag to be checked.
+     * @return A boolean representing contains or doesn't contain the tag.
+     */
+    public boolean containsTag(Tag tag) {
+        return tags.contains(tag);
+    }
+
+    /**
      * Returns an immutable notes, which throws
      * {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -95,6 +106,7 @@ public class Person {
 
     /**
      * Adds a note to this person
+     *
      * @param note The note to be added.
      */
     public void addNote(Note note) {
@@ -102,10 +114,29 @@ public class Person {
     }
 
     /**
-     * Remove a note by its user-friendly id
+     * Adds a set of {@code Tag} to this person
+     *
+     * @param tags The tags to be added.
+     */
+    public void addTags(Set<Tag> tags) {
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Removes a set of {@code Tag} from this person
+     *
+     * @param tags The tags to be removed.
+     */
+    public void removeTags(Set<Tag> tags) {
+        tags.forEach(tag -> this.tags.remove(tag));
+    }
+
+    /**
+     * Removes a note by its user-friendly id
+     *
      * @param id The id of the note you want to remove
      * @return The note object that is just deleted if the operation is successful
-     *      or {@code null} if the note with this name does not exist
+     *         or {@code null} if the note with this name does not exist
      */
     public Note removeNoteByUserFriendlyId(NoteID id) {
         return this.removeNoteByIndex(id.getId() - 1);
@@ -120,6 +151,7 @@ public class Person {
 
     /**
      * Adds an event to this person.
+     *
      * @param event The event to be added.
      */
     public void addEvent(Event event) {
@@ -127,10 +159,11 @@ public class Person {
     }
 
     /**
-     * Remove an event by its user-friendly id
+     * Removes an event by its user-friendly id
+     *
      * @param id The id of the event you want to remove
      * @return The event object that is just deleted if the operation is successful
-     *     or {@code null} if the event with this name does not exist
+     *         or {@code null} if the event with this name does not exist
      */
     public Event removeEventByUserFriendlyId(EventID id) {
         return this.removeEventByIndex(id.getId() - 1);
@@ -138,22 +171,29 @@ public class Person {
 
     private Event removeEventByIndex(int index) {
         if (index < 0 || index >= this.events.size()) {
-            return null;
+            throw new EventNotFoundException();
         }
         return this.events.remove(index);
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same identity and data fields.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        // instanceof handles nulls
+        if (!(otherPerson instanceof Person)) {
+            return false;
+        }
+
+        return name.equals(otherPerson.name)
+                && phone.equals(otherPerson.phone)
+                && email.equals(otherPerson.email)
+                && address.equals(otherPerson.address)
+                && tags.equals(otherPerson.tags);
     }
 
     /**

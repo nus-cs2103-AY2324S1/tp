@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.stage.Stage?>
+
+<fx:root resizable="true" title="Event List" type="javafx.stage.Stage"
+    xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@EventWindow.css" />
+            </stylesheets>
+
+            <HBox alignment="CENTER" fx:id="eventListContainer">
+                <children>
+                    <TableView fx:id="table">
+                        <columns>
+                            <TableColumn fx:id="indexCol" text="ID"/>
+                            <TableColumn fx:id="nameCol" text="Name"/>
+                            <TableColumn fx:id="startCol" text="Start Time"/>
+                            <TableColumn fx:id="endCol" text="End Time"/>
+                            <TableColumn fx:id="locCol" text="Location"/>
+                            <TableColumn fx:id="infoCol" text="Info"/>
+                        </columns>
+                    </TableView>
+                </children>
+                <opaqueInsets>
+                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                </opaqueInsets>
+                <padding>
+                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                </padding>
+            </HBox>
+        </Scene>
+    </scene>
+</fx:root>

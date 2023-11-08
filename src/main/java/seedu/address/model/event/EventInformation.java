@@ -42,4 +42,19 @@ public class EventInformation {
     public static boolean isValidEventInformation(String str) {
         return !str.isEmpty();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EventInformation)) {
+            return false;
+        }
+
+        EventInformation otherInformation = (EventInformation) other;
+        return information.equals(otherInformation.information);
+    }
 }

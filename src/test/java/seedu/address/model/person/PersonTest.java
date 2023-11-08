@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TagBuilder;
 
 public class PersonTest {
 
@@ -26,16 +27,20 @@ public class PersonTest {
 
     @Test
     public void isSamePerson() {
+        // same values -> returns true
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertTrue(ALICE.equals(aliceCopy));
+
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));
 
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
+        // same name, all other attributes different -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
@@ -49,6 +54,25 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+
+        // different person -> returns false
+        assertFalse(ALICE.equals(BOB));
+
+        // different phone -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different email -> returns false
+        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different address -> returns false
+        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different tags -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -88,6 +112,19 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void addTag_validSet_success() {
+        ALICE.addTags(new TagBuilder().inSet());
+        assertTrue(ALICE.getTags().contains(new TagBuilder().build()));
+    }
+
+    @Test
+    public void deleteTag_validSet_success() {
+        ALICE.addTags(new TagBuilder().inSet());
+        ALICE.removeTags(new TagBuilder().inSet());
+        assertFalse(ALICE.getTags().contains(new TagBuilder().build()));
     }
 
     @Test

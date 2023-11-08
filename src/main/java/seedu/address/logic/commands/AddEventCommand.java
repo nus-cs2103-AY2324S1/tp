@@ -15,6 +15,7 @@ public class AddEventCommand extends AddCommand {
 
     public static final String SECONDARY_COMMAND_WORD = "event";
     public static final String MESSAGE_SUCCESS = "New event added: ";
+    public static final String MESSAGE_ERROR = "Error: ";
     public static final String MESSAGE_CONTACT_NOT_FOUND = "Can not find the target contact with ID: ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + SECONDARY_COMMAND_WORD
@@ -41,7 +42,11 @@ public class AddEventCommand extends AddCommand {
         if (person == null) {
             throw new CommandException(MESSAGE_CONTACT_NOT_FOUND + this.contactId.getId());
         }
-        person.addEvent(this.toAdd);
+        try {
+            model.addEvent(this.toAdd, person);
+        } catch (Exception e) {
+            return new CommandResult(MESSAGE_ERROR + e.getMessage());
+        }
 
         return new CommandResult(MESSAGE_SUCCESS + toAdd.getName());
     }

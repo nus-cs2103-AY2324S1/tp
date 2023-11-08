@@ -1,5 +1,9 @@
 package seedu.address.model.event;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.time.LocalDateTime;
+
 /**
  * The class for holding an Event
  */
@@ -21,6 +25,7 @@ public class Event {
      * @param information The information of the event
      */
     public Event(EventName name, EventTime start, EventTime end, EventLocation location, EventInformation information) {
+        requireAllNonNull(name, start);
         this.name = name;
         this.start = start;
         this.end = end;
@@ -57,7 +62,6 @@ public class Event {
      * @return The start time in string
      */
     public String getStartString() {
-        // Temporary, can use Util class instead
         return this.start.toString();
     }
 
@@ -67,6 +71,22 @@ public class Event {
      */
     public String getEndString() {
         return this.end.toString();
+    }
+
+    /**
+     * Get the start time of the event, represented in {@code LocalDateTime}
+     * @return The start time in {@code LocalDateTime}
+     */
+    public LocalDateTime getStartTime() {
+        return this.start.getTime();
+    }
+
+    /**
+     * Get the end time of the event, represented in {@code LocalDateTime}
+     * @return The end time in {@code LocalDateTime}
+     */
+    public LocalDateTime getEndTime() {
+        return this.end.getTime();
     }
 
     /**
@@ -90,17 +110,35 @@ public class Event {
      * @return The information in string
      */
     public String getUiText() {
-        String result = this.getName() + " ( Starts at: " + this.start;
-        if (!this.end.toString().isEmpty()) {
-            result += ", Ends at: " + this.end;
+        String result = this.getName() + "\nStarts at: " + this.start;
+        if (!this.end.equals(this.start)) {
+            result += "\nEnds at: " + this.end;
         }
         if (!this.location.toString().isEmpty()) {
-            result += ", Location: " + this.location;
+            result += "\nLocation: " + this.location;
         }
         if (!this.information.toString().isEmpty()) {
-            result += ", Information: " + this.information;
+            result += "\nInformation: " + this.information;
         }
-        result += " )";
         return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherPerson = (Event) other;
+        return name.equals(otherPerson.name)
+                && start.equals(otherPerson.start)
+                && end.equals(otherPerson.end)
+                && location.equals(otherPerson.location)
+                && information.equals(otherPerson.information);
     }
 }

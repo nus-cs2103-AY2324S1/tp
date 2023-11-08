@@ -8,7 +8,6 @@ import org.junit.jupiter.api.function.ThrowingSupplier;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ListEventCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ListCommandParserTest {
@@ -17,13 +16,13 @@ public class ListCommandParserTest {
 
 
     @Test
-    public void execute_correctCommand_success() throws CommandException {
+    public void execute_correctCommand_success() {
         assertParseSuccessWithCommand(() -> parser.parse(" "
                 + ListEventCommand.SECONDARY_COMMAND_WORD), ListEventCommand.class.getName());
     }
 
     @Test
-    public void execute_commandNotFound_fails() throws CommandException {
+    public void execute_commandNotFound_fails() {
         assertParseFailedWithError(() -> parser.parse(" "
                 + " unknown_command 1 2 3"), MESSAGE_UNKNOWN_COMMAND);
     }

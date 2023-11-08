@@ -6,6 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventID;
+import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.note.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -17,6 +20,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueEventList allEvents;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        allEvents = new UniqueEventList();
     }
 
     public AddressBook() {}
@@ -50,12 +55,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate persons.
+     */
+    public void setEvents(List<Event> events) {
+        this.allEvents.setEvents(events);
+    }
+
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setEvents(newData.getEventList());
     }
 
     //// person-level operations
@@ -74,6 +89,26 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+        p.getEvents().forEach(this.allEvents::add);
+    }
+
+    /**
+     * Adds an event to the address book with the specified person as owner.
+     * The event must not already exists in the address book.
+     */
+    public void addEvent(Event toAdd, Person owner) {
+        allEvents.add(toAdd);
+        owner.addEvent(toAdd);
+    }
+
+    /**
+     * Removes an event to the address book for the specified person and the global event list.
+     * The event must exist in the address book.
+     */
+    public Event removeEventByID(EventID id, Person owner) {
+        Event event = owner.removeEventByUserFriendlyId(id);
+        allEvents.remove(event);
+        return event;
     }
 
     /**
@@ -92,6 +127,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        key.getEvents().forEach(this.allEvents::remove);
         persons.remove(key);
     }
 
@@ -139,6 +175,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Event> getEventList() {
+        return this.allEvents.asUnmodifiableObservableList();
     }
 
     @Override

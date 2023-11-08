@@ -6,6 +6,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.List;
+
+import seedu.address.model.event.Event;
 
 /**
  * Helper functions for handling strings.
@@ -64,5 +67,19 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Convert the event list to a human-readable string
+     *
+     * @param eventList The event list
+     * @return The filtered event list as string
+     */
+    public static String eventListToString(List<? extends Event> eventList) {
+        StringBuilder str = new StringBuilder();
+        eventList.forEach(
+                evt -> str.append(evt.getUiText()).append("\n")
+        );
+        return str.toString();
     }
 }

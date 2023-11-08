@@ -45,4 +45,19 @@ public class EventLocation {
     public static boolean isValidEventLocation(String str) {
         return !str.isEmpty();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EventLocation)) {
+            return false;
+        }
+
+        EventLocation otherLocation = (EventLocation) other;
+        return location.equals(otherLocation.location);
+    }
 }

@@ -4,14 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventID;
 import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Person;
 
@@ -24,6 +29,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +42,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
     }
 
     public ModelManager() {
@@ -131,8 +138,25 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
+    public List<Event> getSortedFilteredEventList(Comparator<? super Event> comparator) {
+        requireNonNull(comparator);
+        return filteredEvents.stream().sorted(comparator).collect(Collectors.toUnmodifiableList());
+    }
+
+    @Override
     public Person findPersonByIndex(int index) {
-        List<Person> personList = this.addressBook.getPersonList();
+        List<Person> personList = getFilteredPersonList();
         if (index < 0 || index >= personList.size()) {
             return null;
         }
@@ -159,6 +183,21 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public void addEvent(Event toAdd, Person owner) {
+        this.addressBook.addEvent(toAdd, owner);
+    }
+
+    @Override
+    public Event removeEventByID(EventID eventID, Person owner) {
+        return this.addressBook.removeEventByID(eventID, owner);
+    }
+
+    @Override
+    public String filteredEventListToString() {
+        return StringUtil.eventListToString(this.filteredEvents);
     }
 
 }

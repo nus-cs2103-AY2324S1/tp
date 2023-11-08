@@ -16,10 +16,13 @@ import seedu.address.model.event.EventID;
 import seedu.address.model.person.ContactID;
 
 public class DeleteEventCommandTest {
-    private static final Event VALID_EVENT_0 = new Event("Have a meeting", "02:00", "04:00",
-            "COM1", "Discuss project");
-    private static final Event VALID_EVENT_1 = new Event("Have a meeting again", "05:00", "07:00",
-            "COM1", "Discuss project again");
+    private static final Event VALID_EVENT_0 = new Event("Career Fair",
+            "12:00", "14:00",
+            "COM1 Level2", "Go to booth #01-01 first");
+
+    private static final Event VALID_EVENT_1 = new Event("Career Fair (Second Day)",
+            "2023-11-02 12:00", "2023-11-02 14:00",
+            "COM1 Level2", "Go to booth #02-01 first");
 
     private Model model;
 
@@ -29,16 +32,16 @@ public class DeleteEventCommandTest {
     }
 
     @Test
-    public void execute_correctCommand_success() throws CommandException {
+    public void execute_correctCommand_success() {
         ContactID contactId = ContactID.fromInt(1);
         EventID eventID = EventID.fromInt(1);
-        model.findPersonByUserFriendlyId(contactId).addEvent(VALID_EVENT_0);
+        model.addEvent(VALID_EVENT_0, model.findPersonByUserFriendlyId(contactId));
         assertCommandSuccessWithFeedback(() -> new DeleteEventCommand(contactId, eventID)
                 .execute(model), DeleteEventCommand.MESSAGE_SUCCESS + eventID + ". " + VALID_EVENT_0.getName());
     }
 
     @Test
-    public void execute_contactNotFound_fails() throws CommandException {
+    public void execute_contactNotFound_fails() {
         ContactID contactId = ContactID.fromInt(999);
         EventID eventId = EventID.fromInt(1);
         assertCommandFailWithFeedback(() -> new DeleteEventCommand(contactId, eventId)
@@ -46,21 +49,23 @@ public class DeleteEventCommandTest {
     }
 
     @Test
-    public void execute_eventNotFound_fails() throws CommandException {
+    public void execute_eventNotFound_fails() {
         ContactID contactId = ContactID.fromInt(1);
         EventID invalidEventId = EventID.fromInt(99999);
-        model.findPersonByUserFriendlyId(contactId).addEvent(VALID_EVENT_0);
+        model.addEvent(VALID_EVENT_1, model.findPersonByUserFriendlyId(contactId));
         assertCommandFailWithFeedback(() -> new DeleteEventCommand(contactId, invalidEventId)
                 .execute(model), DeleteEventCommand.MESSAGE_EVENT_NOT_FOUND + invalidEventId);
     }
 
 
     private void assertCommandSuccessWithFeedback(ThrowingSupplier<CommandResult> function, String result) {
+        CommandResult actualResult = null;
         try {
-            assertEquals(function.get(), new CommandResult(result));
+            actualResult = function.get();
         } catch (Throwable e) {
-            throw new AssertionError("Execution of command should not fail.", e);
+            throw new AssertionError("Execution of command should not fail, but caught: " + e);
         }
+        assertEquals(new CommandResult(result), actualResult);
     }
 
     private void assertCommandFailWithFeedback(ThrowingSupplier<CommandResult> function, String errResult) {
@@ -68,7 +73,7 @@ public class DeleteEventCommandTest {
             function.get();
         } catch (Throwable e) {
             if (!(e instanceof CommandException)) {
-                throw new AssertionError("Execution of command failed but not due to CommandException.");
+                throw new AssertionError("Execution of command failed but not due to CommandException. " + e);
             }
             assertEquals(e.getMessage(), errResult);
             return;

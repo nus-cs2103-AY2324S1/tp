@@ -27,10 +27,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_NOTE_TITLE = new Prefix("-tit");
     public static final Prefix PREFIX_NOTE_CONTENT = new Prefix("-con");
     public static final Prefix PREFIX_EVENT_NAME = new Prefix("-en");
-    public static final Prefix PREFIX_EVENT_START_TIME = new Prefix("-st");
-    public static final Prefix PREFIX_EVENT_END_TIME = new Prefix("-et");
+    public static final Prefix PREFIX_START_TIME = new Prefix("-st");
+    public static final Prefix PREFIX_END_TIME = new Prefix("-et");
     public static final Prefix PREFIX_EVENT_LOCATION = new Prefix("-loc");
     public static final Prefix PREFIX_EVENT_INFORMATION = new Prefix("-info");
+    public static final Prefix PREFIX_SORT_DESCENDING = new Prefix("-descending");
 
     public static final ArrayList<String> COMMAND_LIST = new ArrayList<String>(Arrays.asList(
         AddCommand.COMMAND_WORD,

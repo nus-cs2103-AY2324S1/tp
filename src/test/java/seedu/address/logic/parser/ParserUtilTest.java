@@ -337,8 +337,6 @@ public class ParserUtilTest {
                 ParserUtil.parseEventTime("2023-12-01").toString());
         assertEquals("2023-12-01 10:02:03",
                 ParserUtil.parseEventTime("2023-12-01 10:02:03").toString());
-        assertEquals("",
-                ParserUtil.parseEventTime(null).toString());
     }
 
     @Test

@@ -17,7 +17,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventCommand;
-import seedu.address.logic.commands.ListNoteCommand;
 import seedu.address.logic.commands.ListPersonCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
@@ -32,6 +31,7 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_START_TIME_AFTER_END_TIME = "Start time %s is after the end time %s!\n";
     public static final String MESSAGE_INVALID_INTEGER_ARGUMENT =
             "The provided argument is not a valid integer! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
@@ -109,10 +109,9 @@ public class Messages {
             return FindCommand.MESSAGE_USAGE;
 
         case ListCommand.COMMAND_WORD:
-            return String.format("%s \n\n %s \n\n %s",
-                ListEventCommand.MESSAGE_USAGE,
-                ListNoteCommand.MESSAGE_USAGE,
-                ListPersonCommand.MESSAGE_USAGE);
+            return String.format("%s \n\n %s",
+                ListPersonCommand.MESSAGE_USAGE,
+                ListEventCommand.MESSAGE_USAGE);
 
         default:
             throw new CommandException("Unexpected input");

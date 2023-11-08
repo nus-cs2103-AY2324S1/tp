@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
@@ -65,9 +66,22 @@ public class TypicalPersons {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+            ab.addPerson(copyTypicalPerson(person));
         }
         return ab;
+    }
+
+    // Use this function to make sure that for every test cases, we use complete new Person instances
+    // This can prevent unintentionally sharing and reusing of the typical person instances between different test cases
+    private static Person copyTypicalPerson(Person typicalPerson) {
+        List<String> tagList = typicalPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList());
+        return new PersonBuilder()
+                .withName(typicalPerson.getName().toString())
+                .withEmail(typicalPerson.getEmail().toString())
+                .withAddress(typicalPerson.getAddress().toString())
+                .withPhone(typicalPerson.getPhone().toString())
+                .withTags(tagList.toArray(new String[tagList.size()]))
+                .build();
     }
 
     public static List<Person> getTypicalPersons() {
