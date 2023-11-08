@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -234,9 +235,9 @@ public class AppendLogCommandTest {
         @Override
         public ObservableList<Person> getFoundPersonsList() {
             List<Person> persons = new ArrayList<>();
+            persons.add(new PersonBuilder(ALICE).build());
             persons.add(new PersonBuilder(BENSON).build());
             persons.add(new PersonBuilder(CARL).build());
-            persons.add(new PersonBuilder(ALICE).build());
             return FXCollections.observableArrayList(persons);
         }
     }
@@ -277,25 +278,54 @@ public class AppendLogCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonsFound_appendSkipsDuplicate() throws Exception {
+    public void execute_duplicatePersonFound_appendSkipsDuplicate() throws Exception {
 
         ModelStubAppendingPersonsFound model = new ModelStubAppendingPersonsFound();
+
         Person existingPerson1 = new PersonBuilder(ALICE).build();
-        Person existingPerson2 = new PersonBuilder(BENSON).build();
-        Person personToAppend = new PersonBuilder(CARL).build();
 
         model.addPerson(existingPerson1);
-        model.addPerson(existingPerson2);
 
         AppendLogCommand appendLogCommand = new AppendLogCommand();
 
         CommandResult commandResult = appendLogCommand.execute(model);
 
-        assertEquals(AppendLogCommand.MESSAGE_DUPLICATE, commandResult.getFeedbackToUser());
+        assertEquals("Person(s) already in list: Alice Pauline, ID: T7243948H. "
+                + "They were not appended to the log.", commandResult.getFeedbackToUser());
 
-        assertEquals(2, model.getLogBook().getPersonList().size());
+        System.out.println(commandResult.getFeedbackToUser());
+
+        assertEquals(3, model.getLogBook().getPersonList().size());
+        assertEquals(existingPerson1, model.getLogBook().getPersonList().get(0));
+        assertNotEquals(existingPerson1, model.getLogBook().getPersonList().get(1));
+    }
+
+    @Test
+    public void execute_duplicatePersonsFound_appendSkipsDuplicates() throws Exception {
+
+        ModelStubAppendingPersonsFound model = new ModelStubAppendingPersonsFound();
+
+        Person existingPerson1 = new PersonBuilder(ALICE).build();
+        Person existingPerson2 = new PersonBuilder(BENSON).build();
+        Person existingPerson3 = new PersonBuilder(CARL).build();
+
+        model.addPerson(existingPerson1);
+        model.addPerson(existingPerson2);
+        model.addPerson(existingPerson3);
+
+        AppendLogCommand appendLogCommand = new AppendLogCommand();
+
+        CommandResult commandResult = appendLogCommand.execute(model);
+
+        assertEquals("Person(s) already in list: Alice Pauline, ID: T7243948H. Benson Meier, ID: S1234567B. "
+                + "Carl Kurz, ID: S8765432B. They were not appended to the log.", commandResult.getFeedbackToUser());
+
+        System.out.println(commandResult.getFeedbackToUser());
+
+        assertEquals(3, model.getLogBook().getPersonList().size());
         assertEquals(existingPerson1, model.getLogBook().getPersonList().get(0));
         assertEquals(existingPerson2, model.getLogBook().getPersonList().get(1));
+        assertEquals(existingPerson3, model.getLogBook().getPersonList().get(2));
     }
 
     @Test
