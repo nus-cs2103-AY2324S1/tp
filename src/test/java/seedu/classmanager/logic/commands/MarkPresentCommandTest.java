@@ -15,6 +15,7 @@ import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.Messages;
 import seedu.classmanager.logic.commands.exceptions.CommandException;
+import seedu.classmanager.model.ClassManager;
 import seedu.classmanager.model.Model;
 import seedu.classmanager.model.ModelManager;
 import seedu.classmanager.model.UserPrefs;
@@ -49,6 +50,18 @@ public class MarkPresentCommandTest {
 
         assertCommandSuccess(markPresentCommand, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(expectedModel.getSelectedStudent().get(0), model.getSelectedStudent().get(0));
+
+        // if the student is not the selected student to view
+        ModelManager otherModel = new ModelManager(new ClassManager(model.getClassManager()), new UserPrefs());
+        otherModel.resetSelectedStudent();
+
+        ModelManager expectedOtherModel = new ModelManager(new ClassManager(model.getClassManager()),
+            new UserPrefs());
+        expectedOtherModel.setStudent(studentToMark, markedStudent);
+        expectedOtherModel.commitClassManager();
+
+        assertCommandSuccess(markPresentCommand, otherModel, expectedMessage, expectedOtherModel, commandHistory);
+        assertTrue(otherModel.getSelectedStudent().isEmpty());
     }
 
     @Test

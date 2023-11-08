@@ -15,6 +15,7 @@ import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.Messages;
 import seedu.classmanager.logic.commands.exceptions.CommandException;
+import seedu.classmanager.model.ClassManager;
 import seedu.classmanager.model.Model;
 import seedu.classmanager.model.ModelManager;
 import seedu.classmanager.model.UserPrefs;
@@ -32,6 +33,7 @@ public class MarkAbsentCommandTest {
 
     @Test
     public void execute_validStudentNumber_success() throws CommandException {
+        // if the student is the selected student to view
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         Index i = Index.fromOneBased(ClassDetails.getTutorialCount());
         model.setSelectedStudent(studentToMark);
@@ -49,6 +51,18 @@ public class MarkAbsentCommandTest {
 
         assertCommandSuccess(markAbsentCommand, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(expectedModel.getSelectedStudent().get(0), model.getSelectedStudent().get(0));
+
+        // if the student is not the selected student to view
+        ModelManager otherModel = new ModelManager(new ClassManager(model.getClassManager()), new UserPrefs());
+        otherModel.resetSelectedStudent();
+
+        ModelManager expectedOtherModel = new ModelManager(new ClassManager(model.getClassManager()),
+            new UserPrefs());
+        expectedOtherModel.setStudent(studentToMark, markedStudent);
+        expectedOtherModel.commitClassManager();
+
+        assertCommandSuccess(markAbsentCommand, otherModel, expectedMessage, expectedOtherModel, commandHistory);
+        assertTrue(otherModel.getSelectedStudent().isEmpty());
     }
 
     @Test

@@ -56,7 +56,7 @@ public class MarkAbsentCommand extends Command {
 
         markedStudent.markAbsent(this.index);
         model.setStudent(studentToMark, markedStudent);
-        if (model.isSelectedStudent(markedStudent)) {
+        if (model.isSelectedStudent(studentToMark)) {
             model.setSelectedStudent(markedStudent);
         }
         model.commitClassManager();
