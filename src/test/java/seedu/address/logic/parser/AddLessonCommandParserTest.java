@@ -1,28 +1,84 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lessons.Day;
+import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Time;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Subject;
 
 
 class AddLessonCommandParserTest {
+    private AddLessonCommandParser p = new AddLessonCommandParser();
     @Test
-    void testParse() {
-        AddLessonCommandParser p = new AddLessonCommandParser();
-        try {
-            AddLessonCommand c = p.parse("addLesson -name yiwen -start 14:30 -end 17:30 -day 2023/12/30");
-            assertNotNull(c);
-            c = p.parse("addLesson -name yiwen -start 14:30 -end 17:30 -day 2023/12/30 -subject english");
-            assertNotNull(c);
-            String invalid = "addLesson -name yiwen -start 18:30 -end 17:30 -day 2023/2/29";
-            assertThrows(ParseException.class, () -> p.parse(invalid));
-        } catch (Exception e) {
-            fail();
-        }
+    void test_parseWithoutName_startAfterEnd() {
+        assertThrows(ParseException.class, () -> p.parse(" -start 14:00 -end 15:00"));
+        assertThrows(ParseException.class, () -> p.parse(" -name name -start 14:01 -end 14:00"));
+    }
+    @Test
+    void test_parseName_missingName() throws ParseException {
+        Lesson expected = Lesson.getDefaultLesson();
+        expected.setNameIfNotDefault(Name.of("name"));
+        assertEquals(expected, p.parse(" -name name").getLesson());
+        assertThrows(ParseException.class, () -> p.parse(" -name"));
+        assertThrows(ParseException.class, () -> p.parse(" -start 14:00"));
+        assertThrows(ParseException.class, () -> p.parse(""));
+    }
+    @Test
+    void test_parseStart_parseEnd() throws ParseException {
+        Lesson expected = Lesson.getDefaultLesson();
+        expected.setName(Name.of("name"));
+        expected.updateStartAndEnd(Time.of("14:00"), Time.of("15:00"));
+        assertEquals(expected, p.parse("-name name -start 14:00 -end 15:00").getLesson());
+        expected = Lesson.getDefaultLesson();
+        expected.setName(Name.of("name"));
+        expected.setEnd(Time.of("15:00"));
+        assertEquals(expected, p.parse("-name name -end 15:00").getLesson());
+        expected = Lesson.getDefaultLesson();
+        expected.setName(Name.of("name"));
+        expected.setStart(Time.of("14:00"));
+        assertEquals(expected, p.parse("-name name -start 14:00").getLesson());
+        assertThrows(ParseException.class, () -> p.parse("-name name -start 16:00 -end 15:00 -start 14:00"));
+    }
+    @Test
+    void test_parseSubject() throws ParseException {
+        Lesson expected = Lesson.getDefaultLesson();
+        expected.setName(Name.of("name"));
+        expected.setSubject(Subject.of("physics"));
+        assertEquals(expected, p.parse("-name name -subject physics").getLesson());
+        assertThrows(ParseException.class, () -> p.parse("-name name -subject physics, chemistry"));
+        assertThrows(ParseException.class, () -> p.parse("-name name -subject social studies"));
+    }
+    @Test
+    void test_parseDay() throws ParseException {
+        Lesson expected = Lesson.getDefaultLesson();
+        expected.setName(Name.of("name"));
+        expected.setDay(Day.of("1"));
+        assertEquals(expected, p.parse("-name name -day 1").getLesson());
+        assertThrows(ParseException.class, () -> p.parse("-name name -day monday"));
+        assertThrows(ParseException.class, () -> p.parse("-name name -day -1"));
+        assertThrows(ParseException.class, () -> p.parse("-name name -day 23/2/29"));
+    }
+
+    @Test
+    void test_combine() throws ParseException {
+        Lesson expected = Lesson.getDefaultLesson();
+        expected.setName(Name.of("name"));
+        expected.setSubject(Subject.of("physics"));
+        expected.setDay(Day.of("1"));
+        expected.updateStartAndEnd(Time.of("14:00"), Time.of("15:00"));
+        assertEquals(expected, p.parse("-name name -subject physics -day 1"
+                + " -start 14:00 -end 15:00").getLesson());
+    }
+    @Test
+    void test_duplicateFlag_unrecognisedFlags() throws ParseException {
+        assertThrows(ParseException.class, () -> p.parse("-name name -name name"));
+        assertThrows(ParseException.class, () -> p.parse(""));
+        p.parse("this is alright -name name -subject physics -day 1 -start 14:00 -end 15:00 -flag flag");
     }
 }

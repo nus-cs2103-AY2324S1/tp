@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.TypeParsingUtil.getValueImmediatelyAfterCommandName;
+import static seedu.address.logic.parser.TypeParsingUtil.parseIndex;
 
 import seedu.address.logic.commands.EditLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -18,23 +18,14 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditLessonCommand parse(String args) throws ParseException {
-        String indexStr = getValueImmediatelyAfterCommandName(EditLessonCommand.COMMAND_WORD, "index", args, true);
+        Integer index = parseIndex(args, true);
         Lesson lesson;
         try {
             lesson = AddLessonCommandParser.parseLesson(args, true);
         } catch (ParseException e) {
             throw new ParseException("Invalid lesson format. " + e.getMessage() + getUsageInfo());
         }
-        if (indexStr != null) {
-            try {
-                int index = TypeParsingUtil.parseNum(indexStr);
-                return new EditLessonCommand(index, lesson);
-            } catch (ParseException e) {
-                throw new ParseException("Invalid index input: " + indexStr + ". Please input a valid number.");
-            }
-        } else {
-            return new EditLessonCommand(lesson);
-        }
+        return new EditLessonCommand(index, lesson);
     }
 
     public static String getUsageInfo() {

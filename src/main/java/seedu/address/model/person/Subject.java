@@ -49,10 +49,10 @@ public class Subject extends ListEntryField {
      */
     public Subject(String subject) {
         requireNonNull(subject);
-        checkArgument(isValidSubject(subject.toUpperCase()), MESSAGE_CONSTRAINTS);
-        if (isValidSubject(subject.toUpperCase())) {
-            subjectName = Subjects.valueOf(subject.toUpperCase());
-            colour = subjectToColourMap.get(subject.toUpperCase());
+        checkArgument(isValidSubject(subject.toUpperCase().trim()), MESSAGE_CONSTRAINTS);
+        if (isValidSubject(subject.toUpperCase().trim())) {
+            subjectName = Subjects.valueOf(subject.toUpperCase().trim());
+            colour = subjectToColourMap.get(subject.toUpperCase().trim());
         } else {
             subjectName = Subjects.NONE;
         }

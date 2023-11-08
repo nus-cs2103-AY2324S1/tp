@@ -38,7 +38,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
     /**
      * Pass in index to indicate which entry to edit
      */
-    public AbstractEditCommand(int index, T editDescriptor) {
+    public AbstractEditCommand(Integer index, T editDescriptor) {
         requireNonNull(editDescriptor);
         this.index = index;
         this.editDescriptor = editDescriptor;
@@ -126,10 +126,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
      */
     private void editFields() throws CommandException {
         edited.setNameIfNotDefault(editDescriptor.getName());
-        edited.setRemarkIfNotDefault(editDescriptor.getRemark());
-        edited.setTagsIfNotDefault(editDescriptor.getTags());
         setNonDefaultFields();
-        //incrementNonDefaultFields(edited, incrementDescriptor);
     }
     protected void validateEditedAndWriteBack() throws CommandException {
         if (edited.equals(original)) {

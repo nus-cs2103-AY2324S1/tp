@@ -57,10 +57,10 @@ public class TaskTest {
         Task editedTask2 = new Task(TASK_2.getDescription().toLowerCase());
         assertFalse(TASK_2.isSameTask(editedTask2));
 
-        // desc has trailing spaces -> returns false
+        // desc has trailing spaces -> returns true as description is trimmed
         String descWithTrailingSpaces = TASK_2.getDescription() + " ";
         editedTask2 = new Task(descWithTrailingSpaces);
-        assertFalse(TASK_2.isSameTask(editedTask2));
+        assertTrue(TASK_2.isSameTask(editedTask2));
     }
 
     @Test
@@ -100,13 +100,13 @@ public class TaskTest {
         Task doneTask = new Task("Sample", true);
         String doneTaskString = "+Sample";
 
-        Task parsedDoneTask = Task.of(doneTaskString);
+        Task parsedDoneTask = Task.ofDepreciated(doneTaskString);
         assertEquals(doneTask, parsedDoneTask);
     }
 
     @Test
     public void of_task_throwsParseError() {
         String failedTaskString = "Sample";
-        assertThrows(IllegalArgumentException.class, () -> Task.of(failedTaskString));
+        assertThrows(IllegalArgumentException.class, () -> Task.ofDepreciated(failedTaskString));
     }
 }

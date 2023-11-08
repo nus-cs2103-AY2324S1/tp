@@ -15,7 +15,7 @@ import seedu.address.model.person.Subject;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Lesson extends ListEntry<Lesson> {
-    public static final Lesson DEFAULT_LESSON = new Lesson();
+    private static final Lesson DEFAULT_LESSON = new Lesson();
     private Time start;
     private Time end;
     private Name name;
@@ -263,7 +263,6 @@ public class Lesson extends ListEntry<Lesson> {
                 && subject.equals(otherLesson.subject)
                 && name.equals(otherLesson.name)
                 && day.equals(otherLesson.day)
-                && remark.equals(otherLesson.remark)
                 && taskList.equals(otherLesson.taskList);
     }
     @Override
@@ -328,7 +327,6 @@ public class Lesson extends ListEntry<Lesson> {
         cloned.setSubjectIfNotDefault(this.subject);
         cloned.setNameIfNotDefault(this.name);
         cloned.setDayIfNotDefault(this.day);
-        cloned.setRemarkIfNotDefault(this.remark);
         cloned.taskList = taskList.clone();
         return cloned;
     }

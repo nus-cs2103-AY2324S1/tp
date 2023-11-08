@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,9 +29,9 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_SHOW_LESSON_SUCCESS = "Showing Lesson: %1$s";
     public static final String MESSAGE_SHOW_TASK_SUCCESS = "Showing Task: %1$s";
 
-    private final Index targetIndex;
+    private final int targetIndex;
 
-    public ShowCommand(Index targetIndex) {
+    public ShowCommand(int targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -46,27 +45,27 @@ public class ShowCommand extends Command {
         // Handle different cases of show command based on app state
         switch (model.getState()) {
         case STUDENT:
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            if (targetIndex - 1 >= lastShownList.size() || targetIndex < 1) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             // Show student details
-            Person personToShow = lastShownList.get(targetIndex.getZeroBased());
+            Person personToShow = lastShownList.get(targetIndex - 1);
             model.showPerson(personToShow);
             return new CommandResult(String.format(MESSAGE_SHOW_PERSON_SUCCESS, Messages.format(personToShow)));
         case SCHEDULE:
-            if (targetIndex.getZeroBased() >= lastShownSchedule.size()) {
+            if (targetIndex - 1 >= lastShownSchedule.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
             }
             // Show lesson details
-            Lesson lessonToShow = lastShownSchedule.get(targetIndex.getZeroBased());
+            Lesson lessonToShow = lastShownSchedule.get(targetIndex - 1);
             model.showLesson(lessonToShow);
             return new CommandResult(String.format(MESSAGE_SHOW_LESSON_SUCCESS, Messages.formatLesson(lessonToShow)));
         case TASK:
-            if (targetIndex.getZeroBased() >= fullTaskList.size()) {
+            if (targetIndex - 1 >= fullTaskList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
             // Show lesson details
-            Task taskToShow = fullTaskList.get(targetIndex.getZeroBased());
+            Task taskToShow = fullTaskList.get(targetIndex - 1);
             model.showTask(taskToShow);
             return new CommandResult(String.format(MESSAGE_SHOW_TASK_SUCCESS, Messages.formatTask(taskToShow)));
 
@@ -87,7 +86,7 @@ public class ShowCommand extends Command {
         }
 
         ShowCommand otherShowCommand = (ShowCommand) other;
-        return targetIndex.equals(otherShowCommand.targetIndex);
+        return targetIndex == otherShowCommand.targetIndex;
     }
 
     @Override

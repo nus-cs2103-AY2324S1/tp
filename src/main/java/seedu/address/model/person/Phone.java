@@ -28,7 +28,7 @@ public class Phone extends ListEntryField {
         if (!Phone.isValidPhone(phone)) {
             throw new ParseException(MESSAGE_CONSTRAINTS);
         }
-        value = phone;
+        value = phone.trim();
     }
 
     Phone() {

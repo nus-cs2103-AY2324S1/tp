@@ -1,21 +1,18 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Tags;
-import seedu.address.model.tag.Tag;
 
+//todo add on test
+//todo, check the name of variable and test are good.
 class TypeParsingUtilTest {
     @Test
     void parseFlagTest() {
@@ -29,129 +26,51 @@ class TypeParsingUtilTest {
         }
     }
     @Test
-    void parseDateTest() {
-        String testString = "addLesson -name yiwen -start 14:30 -end 17:30 -day 2023/12/30";
-        try {
-            assertEquals(TypeParsingUtil.parseDate("day", testString).toString(), "2023-12-30");
-            assertEquals(TypeParsingUtil.parseDate("day", "-day 12/30"),
-                    LocalDate.now().withMonth(12).withDayOfMonth(30));
-            assertEquals(TypeParsingUtil.parseDate("day", "-day 30"),
-                    LocalDate.now().withDayOfMonth(30));
-            assertEquals(TypeParsingUtil.parseDate("day", "-day 3"),
-                    LocalDate.now().withDayOfMonth(3));
-            assertEquals(TypeParsingUtil.parseDate("day", "-day 24/2/23"),
-                    LocalDate.now().withYear(2024).withMonth(2).withDayOfMonth(23));
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseDate("day", "-day 30/12"));
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseDate("day", "-day 33"));
-            //this line should not throw exception as day flag is not in string and is optional
-            TypeParsingUtil.parseDate("day", "day 30/13/2023", true);
-        } catch (ParseException e) {
-            fail(e.getMessage());
-        }
+    void parseNum_invalidNum_outOfBound() throws ParseException {
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseNum("hello"));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseNum("123 hello"));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseNum("123 123"));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseNum("123", 121, 122));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseNum("123", 124, 125));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseNum("123", 124, 122));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseNum("-1", 0, 1));
     }
 
     @Test
-    void parseTimeTest() {
-        String testString = "addLesson -name yiwen -start 14:30 -end 17:30 -day 2023/12/30";
-        try {
-            assertEquals(TypeParsingUtil.parseTime("start", testString).toString(), "14:30");
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseTime("start", "-start 14:60"));
-            TypeParsingUtil.parseTime("start", "start 14:60", true);
-        } catch (ParseException e) {
-            fail(e.getMessage());
-        }
+    void parseNum_validNum() throws ParseException {
+        assertEquals(TypeParsingUtil.parseNum("123"), 123);
+        assertEquals(TypeParsingUtil.parseNum("123", 123, 123), 123);
+        assertEquals(TypeParsingUtil.parseNum("0", -1, 1), 0);
+        assertEquals(TypeParsingUtil.parseNum("-1"), -1);
     }
 
     @Test
-    void parseDayOfWeekTest() {
-        String testString = "addLesson -name yiwen -start 14:30 -end 17:30 -day 2023/12/30 -dayOfWeek MONDAY";
-        try {
-            assertEquals(TypeParsingUtil.parseDayOfWeek("dayOfWeek", testString).toString(), "MONDAY");
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseDayOfWeek("dayOfWeek", "-dayOfWeek 14:60"));
-            TypeParsingUtil.parseDayOfWeek("dayOfWeek", "dayOfWeek 14:60", true);
-        } catch (ParseException e) {
-            fail(e.getMessage());
-        }
+    void parseIndex_valid_isOptionalIndex() throws ParseException {
+        assertEquals(TypeParsingUtil.parseIndex("1", false), 1);
+        assertEquals(TypeParsingUtil.parseIndex("99999", true), 99999);
+        assertEquals(TypeParsingUtil.parseIndex("99999 some text -flag flag", false), 99999);
+        assertNull(TypeParsingUtil.parseIndex("some text -flag flag", true));
+    }
+    //todo make it clear that description cannot start with number in this case.
+    @Test
+    void parseIndex_invalid_outOfBound() throws ParseException {
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseIndex("-1", true));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseIndex("-1 some text -flag flag", true));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseIndex("0 some text -flag flag", false));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseIndex("100000 some text -flag flag", true));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseIndex("1/2 some text -flag flag", false));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseIndex("1.2 some text -flag flag", true));
+    }
+    @Test
+    void parseField() throws ParseException {
+        assertEquals(TypeParsingUtil.parseField("name", "-name name", Name::of), Name.of("name"));
+        assertNull(TypeParsingUtil.parseField("name", "", Name::of, true));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseField("name", "", Name::of, false));
+
+        assertEquals(TypeParsingUtil.parseField("tag", "-tag tag1,tag2", Tags::of), Tags.of("tag1,tag2"));
+        assertNull(TypeParsingUtil.parseField("tag", "", Tags::of, true));
+        assertThrows(ParseException.class, () -> TypeParsingUtil.parseField("tag", "", Tags::of, false));
     }
 
-    @Test
-    void parseSubjectTest() {
-        String testString = "addLesson -name yiwen -start 14:30 -end 17:30 -day 2023/12/30 -subject english";
-        try {
-            assertEquals(TypeParsingUtil.parseSubject("subject", testString).toString(), "ENGLISH");
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseSubject("subject", "-subject cs2103"));
-            TypeParsingUtil.parseSubject("subject", "subject 14:60", true);
-        } catch (ParseException e) {
-            fail(e.getMessage());
-        }
-    }
 
-    @Test
-    void parseStrTest() {
-        String testString = "addLesson -name yiwen -start 14:30 -end 17:30 -day 2023/12/30";
-        try {
-            assertEquals(TypeParsingUtil.parseStr("name", testString), "yiwen");
-            TypeParsingUtil.parseStr("name", "name 14:60", true);
-        } catch (ParseException e) {
-            fail(e.getMessage());
-        }
-    }
-
-    @Test
-    void parseNumTest() {
-        try {
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseNum("num", "hello"));
-            assertEquals(TypeParsingUtil.parseNum("num", "-num 123"), 123);
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseNum("num", "-num 123", 0, 100));
-            TypeParsingUtil.parseNum("num", "num text", true);
-        } catch (ParseException e) {
-            fail(e.getMessage());
-        }
-    }
-
-    @Test
-    void getValueImmediatelyAfterCommandNameTest() {
-        try {
-            String result = TypeParsingUtil.getValueImmediatelyAfterCommandName("edit", "index", "edit 1 yiwen");
-            assertEquals(result, "1");
-        } catch (ParseException e) {
-            fail(e.getMessage());
-        }
-    }
-
-    @Test
-    void parseAddressTest() {
-        try {
-            Address a = TypeParsingUtil.parseAddress("address", "-address 123, Clementi Ave 3, #12,34");
-            assertEquals(a, new Address("123, Clementi Ave 3, #12,34"));
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseAddress("address", " address"));
-        } catch (ParseException e) {
-            fail(e.getMessage());
-        }
-    }
-
-    @Test
-    void parseNameTest() {
-        try {
-            assertEquals(TypeParsingUtil.parseName("name", "-name yiwen"),
-                    new Name("yiwen"));
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseEmail(" name"));
-        } catch (ParseException e) {
-            fail(e.getMessage());
-        }
-    }
-
-    @Test
-    void parseTagTest() {
-        try {
-            Set<Tag> tags = new HashSet<>();
-            tags.add(new Tag("friends"));
-            assertEquals(TypeParsingUtil.parseTags("tag", "-tag friends"), tags);
-            assertEquals(TypeParsingUtil.parseField("tag", "-tag friends, friends2", Tags::of, true),
-                    Tags.of("friends, friends2"));
-            assertThrows(ParseException.class, () -> TypeParsingUtil.parseTags("tag", "-tag friends, friends"));
-        } catch (ParseException e) {
-            fail(e.getMessage());
-        }
-    }
 }

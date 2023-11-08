@@ -38,4 +38,7 @@ public class AddLessonCommand extends Command {
         model.showLesson(lesson);
         return new CommandResult(String.format("New lesson added: " + lesson.toString()), State.SCHEDULE);
     }
+    public Lesson getLesson() {
+        return lesson;
+    }
 }

@@ -20,7 +20,7 @@ public class Remark extends ListEntryField {
      */
     public Remark(String remark) {
         requireNonNull(remark);
-        value = remark;
+        value = remark.trim();
     }
     public static Boolean isValid(String input) {
         return true;

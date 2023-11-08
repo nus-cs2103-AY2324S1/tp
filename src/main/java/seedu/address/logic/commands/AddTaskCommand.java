@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
@@ -22,12 +21,11 @@ public class AddTaskCommand extends Command {
             + " adding task when no lesson is displayed!" + getUsageInfo();
     public static final String TASK_ADDED_TO_CURRENT_LESSON = "New task added to current lesson: %1$s";
     private final Task task;
-    private final Index index;
+    private final Integer index;
     /**
      * Creates an AddTaskCommand to add the specified {@code Task} to {@code Lesson}
      */
-    public AddTaskCommand(Index index, Task task) {
-        requireNonNull(index);
+    public AddTaskCommand(Integer index, Task task) {
         requireNonNull(task);
         this.task = task;
         this.index = index;
@@ -47,16 +45,20 @@ public class AddTaskCommand extends Command {
         if (this.index == null) {
             return execute_withoutLessonIndex(model);
         }
-        int lessonIndex = this.index.getZeroBased();
+        int size = model.getFilteredScheduleList().size();
+        if (this.index < 1 || this.index > size) {
+            throw new CommandException(String.format(NO_INDEX, this.index));
+        }
+        int lessonIndex = this.index - 1;
         try {
             checkClash(model, lessonIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new CommandException(String.format(NO_INDEX, this.index.getOneBased()));
+            throw new CommandException(String.format(NO_INDEX, this.index));
         }
         model.addTask(task, lessonIndex);
         model.resetAllShowFields();
         model.showLesson(model.getFilteredScheduleList().get(lessonIndex));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.index.getOneBased(), task.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.index, task.toString()));
     }
 
     /**
@@ -116,5 +118,11 @@ public class AddTaskCommand extends Command {
 
         AddTaskCommand otherAddTaskCommand = (AddTaskCommand) other;
         return task.equals(otherAddTaskCommand.task);
+    }
+    public Integer getIndex() {
+        return index;
+    }
+    public Task getTask() {
+        return task;
     }
 }

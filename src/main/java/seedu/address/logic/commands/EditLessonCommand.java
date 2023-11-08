@@ -10,16 +10,8 @@ import seedu.address.model.lessons.Lesson;
  */
 public class EditLessonCommand extends AbstractEditCommand<Lesson> {
     public static final String COMMAND_WORD = "editlesson";
-    public EditLessonCommand(int index, Lesson editDescriptor) {
+    public EditLessonCommand(Integer index, Lesson editDescriptor) {
         super(index, editDescriptor);
-    }
-
-    public EditLessonCommand(Lesson editDescriptor) {
-        super(editDescriptor);
-    }
-
-    public EditLessonCommand(Lesson editDescriptor, Lesson originalLesson) {
-        super(editDescriptor, originalLesson);
     }
 
     @Override
@@ -57,5 +49,11 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
     @Override
     public String getUsageInfo() {
         return EditLessonCommandParser.getUsageInfo();
+    }
+    public Lesson getEditDescriptor() {
+        return editDescriptor;
+    }
+    public Integer getIndex() {
+        return index;
     }
 }

@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +21,8 @@ public class ShowCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsShowCommand() {
-        ShowCommand c = new ShowCommand(INDEX_FIRST_PERSON);
-        assertParseSuccess(parser, "1", new ShowCommand(INDEX_FIRST_PERSON));
+        ShowCommand c = new ShowCommand(1);
+        assertParseSuccess(parser, "1", new ShowCommand(1));
     }
 
     @Test

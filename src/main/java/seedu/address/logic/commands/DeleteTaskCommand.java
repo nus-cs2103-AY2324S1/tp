@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
@@ -28,10 +26,6 @@ public class DeleteTaskCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
-    public DeleteTaskCommand(Index targetIndex) {
-        this.taskIndex = targetIndex.getZeroBased();
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -41,37 +35,21 @@ public class DeleteTaskCommand extends Command {
             throw new CommandException("Please use show lessonIndex before deleting task!");
         }
         String taskToDelete = "";
-        if (taskIndex < 0) {
+        if (taskIndex < 1) {
             throw new CommandException("Task index do not belong to any tasks!");
         }
         try {
-            taskToDelete = model.deleteTask(currentlyShownLesson, taskIndex);
+            taskToDelete = model.deleteTask(currentlyShownLesson, taskIndex - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException("Task index do not belong to any tasks!");
         }
         model.showLesson(model.getLessonClashWith(currentlyShownLesson));
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
-
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof DeleteTaskCommand)) {
-            return false;
-        }
-
-        DeleteTaskCommand otherDeletePersonCommand = (DeleteTaskCommand) other;
-        return taskIndex == otherDeletePersonCommand.taskIndex;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("taskIndex", taskIndex)
-                .toString();
+        return other == this // short circuit if same object
+                || (other instanceof DeleteTaskCommand // instanceof handles nulls
+                && taskIndex == (((DeleteTaskCommand) other).taskIndex)); // state check
     }
 }

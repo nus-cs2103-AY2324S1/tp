@@ -14,7 +14,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.Subjects;
+import seedu.address.model.person.Tags;
 import seedu.address.model.tag.Tag;
 
 
@@ -23,38 +26,45 @@ public class AddPersonCommandParserTest {
     private AddPersonCommandParser p = new AddPersonCommandParser();
 
     @Test
-    void happyCases() {
-        try {
-            Name name = new Name("Yiwen");
-            Phone phone = new Phone("12345678");
-            Email email = new Email("owenfree126@hotmail.com");
-            Address address = new Address("Blk 123, Clementi Ave 3, #12-34");
-            Tag tag = new Tag("friends");
-            Subject subject = new Subject("English");
-            p.parse("add -name Yiwen");
-            p.parse("add -name Yiwen -phone 12345678");
-            p.parse("add -name Yiwen -email owenfree126@hotmail.com");
-            p.parse("add -name Yiwen -address Blk 123, Clementi Ave 3, #12-34");
-            p.parse("add -name Yiwen -tag friends");
-            p.parse("add -name Yiwen -subject English");
-            p.parse("add -name Yiwen -phone 12345678 -email owenfree126@hotmail.com"
-                    + " -address Blk 123, Clementi Ave 3, #12-34 -tag friends -subject English");
-        } catch (ParseException e) {
-            fail();
-        }
+    void test_parseName_parseWithoutName() throws ParseException {
+        Person person = Person.getDefaultPerson();
+        person.setNameIfNotDefault(Name.of("name"));
+        assertEquals(person, p.parse(" -name name").getPerson());
+        assertThrows(ParseException.class, () -> p.parse(" -name"));
+        assertThrows(ParseException.class, () -> p.parse(" -phone 12345678"));
     }
 
     @Test
-    void invalidCases() {
-        assertThrows(ParseException.class, () -> p.parse("add -name"));
-        assertThrows(ParseException.class, () -> p.parse("add -name 1 -phone abc"));
-        assertThrows(ParseException.class, () -> p.parse("add -name 2 -email 123"));
-        assertThrows(ParseException.class, () -> p.parse("add -name 4 -subject singapore"));
-        assertThrows(ParseException.class, () -> p.parse("add -tag missing name"));
+    void test_parsePhone_parseEmail() throws ParseException {
+        Person person = Person.getDefaultPerson();
+        person.setName(Name.of("name"));
+        person.setPhoneIfNotDefault(Phone.of("12345678"));
+        assertEquals(person, p.parse("-name name -phone 12345678").getPerson());
+        person.setEmailIfNotDefault(Email.of("fake@domain.com"));
+        assertEquals(person, p.parse("-name name -phone 12345678 -email fake@domain.com").getPerson());
     }
 
     @Test
-    void correctPerson() {
+    void test_parseRemark_parseAddress() throws ParseException {
+        Person person = Person.getDefaultPerson();
+        person.setName(Name.of("name"));
+        person.setRemarkIfNotDefault(Remark.of("remark"));
+        assertEquals(person, p.parse("-name name -remark remark").getPerson());
+        person.setAddressIfNotDefault(Address.of("address 3/4-1"));
+        assertEquals(person, p.parse("-name name -remark remark -address address 3/4-1 ").getPerson());
+    }
+    @Test
+    void test_parseTags_parseSubjects() throws ParseException {
+        Person person = Person.getDefaultPerson();
+        person.setName(Name.of("name"));
+        person.setTags(Tags.of("tag1,tag2"));
+        assertEquals(person, p.parse("-name name -tag tag1,tag2").getPerson());
+        person.setSubjects(Subjects.of("physics, chemistry"));
+        assertEquals(person, p.parse("-name name -tag tag1,tag2 -subject physics, chemistry").getPerson());
+    }
+
+    @Test
+    void parse_combine() {
         try {
             Person actualPerson = AddPersonCommandParser.parsePerson("add -name Yiwen"
                     + " -phone 12345678 -email email@u.com -address Blk 123, Clementi Ave 3, #12,34 "
@@ -70,20 +80,12 @@ public class AddPersonCommandParserTest {
             fail();
         }
     }
-    /*
+    //todo, in us, make clear of the behaviour of duplicate flags
     @Test
-    void correctLesson() {
-        try {
-            Lesson actualLesson = p.parse("add -name Yiwen "
-                    + "-lesson -subject English -start 12:00 -end 13:00 -day 20/12/23").getLesson();
-            Lesson expectedLesson = new Lesson(LocalDateTime.of(2020, 12, 23, 12, 0),
-                    LocalDateTime.of(2020, 12, 23, 13, 0),
-                    new Subject("English"), new TaskList(),
-                    new Name("Yiwen"));
-            assertEquals(expectedLesson, actualLesson);
-        } catch (ParseException e) {
-            fail();
-        }
+    void test_duplicateFlag_unrecognisedFlags() throws ParseException {
+        assertThrows(ParseException.class, () -> p.parse("-name name -name name"));
+        assertThrows(ParseException.class, () -> p.parse(""));
+        p.parse("this is alright -name name -subject physics -day 1 -start 14:00 -end 15:00 -flag flag");
     }
-    */
+
 }

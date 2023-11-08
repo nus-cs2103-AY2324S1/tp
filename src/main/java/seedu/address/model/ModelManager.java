@@ -289,27 +289,27 @@ public class ModelManager implements Model {
     public void linkUi(Ui ui) {
         this.ui = ui;
     }
-
+    // could be more robust
     @Override
     public void showPerson(Person person) {
+        currentShowingPerson = person;
         if (ui != null) {
-            currentShowingPerson = person;
             ui.showPersonDetails(person);
         }
     }
 
     @Override
     public void showLesson(Lesson lesson) {
+        currentShowingLesson = lesson;
         if (ui != null) {
-            currentShowingLesson = lesson;
             ui.showLessonDetails(lesson);
         }
     }
 
     @Override
     public void showTask(Task task) {
+        currentShowingTask = task;
         if (ui != null) {
-            currentShowingTask = task;
             ui.showTaskDetails(task);
         }
     }
@@ -410,6 +410,12 @@ public class ModelManager implements Model {
     }
     public void unLinkWith(Person person, Lesson lesson) {
         personToLessonMap.removeMapping(person, lesson);
+    }
+    public Name[] getLinkedWith(Person person) {
+        return personToLessonMap.get(person);
+    }
+    public Name[] getLinkedWith(Lesson lesson) {
+        return personToLessonMap.getReversed(lesson);
     }
     public String getLinkedPersonNameStr(Lesson lesson) {
         return Arrays.stream(personToLessonMap.getReversed(lesson)).map(Name::toString)

@@ -40,7 +40,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             }
             try {
                 studentName = model.getCurrentlyDisplayedPerson().getName();
-                lessonName = ParserUtil.parseName(arguments);
+                lessonName = Name.of(arguments);
                 return new LinkCommand(lessonName, studentName);
             } catch (ParseException e) {
                 throw new ParseException(e.getMessage() + "\n" + getStatefulUsageInfoPerson());
@@ -50,7 +50,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
                 throw new ParseException("No lesson is shown" + "\n" + getStatefulUsageInfoLesson());
             }
             try {
-                studentName = ParserUtil.parseName(arguments);
+                studentName = Name.of(arguments);
                 lessonName = model.getCurrentlyDisplayedLesson().getName();
                 return new LinkCommand(lessonName, studentName);
             } catch (ParseException e) {
@@ -78,17 +78,18 @@ public class LinkCommandParser implements Parser<LinkCommand> {
                 + "\nExample: " + LinkCommand.COMMAND_WORD + " "
                 + "-student Alice Pauline -lesson CS2103T lab1";
     }
+    //todo make it cleat that commands are case insensitive
     public String getStatefulUsageInfoLesson() {
         return "LinkTo command usage: linkTo "
                 + "[STUDENT_NAME]"
-                + "\nExample: linkto "
+                + "\nExample: linkTo "
                 + "Alice Pauline"
                 + "\nNote: This command is only available when a lesson is shown";
     }
     public String getStatefulUsageInfoPerson() {
         return "LinkTo command usage: linkTo "
                 + "[LESSON_NAME]"
-                + "\nExample: linkto "
+                + "\nExample: linkTo "
                 + "CS2103T lab1"
                 + "\nNote: This command is only available when a student is shown";
     }

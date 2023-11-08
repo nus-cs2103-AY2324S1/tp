@@ -22,12 +22,6 @@ public class Task extends ListEntryField {
             + "or \"-\" at the beginning of the string,";
     public static final Task DEFAULT_TASK = new Task("Sample Task");
 
-    /*
-     * The first character of the task description must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
-
     /**
      * The description of the Task.
      */
@@ -48,7 +42,7 @@ public class Task extends ListEntryField {
         if (!isValidTask(description)) {
             throw new IllegalArgumentException();
         }
-        this.description = description;
+        this.description = description.trim();
         this.isDone = false;
     }
 
@@ -60,6 +54,7 @@ public class Task extends ListEntryField {
      */
     public Task(String description, boolean isDone) {
         requireAllNonNull(description, isDone);
+        description = description.trim();
         if (!isValidTask(description)) {
             throw new IllegalArgumentException();
         }
@@ -79,7 +74,7 @@ public class Task extends ListEntryField {
      * Returns true if a given string is a valid task.
      */
     public static boolean isValidTask(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !test.trim().isEmpty();
     }
 
     /**
@@ -120,7 +115,7 @@ public class Task extends ListEntryField {
      * @return Task
      * @throws ParseException if the string doesn't contain a + or - at the start.
      */
-    public static Task of(String task) throws ParseException {
+    public static Task ofDepreciated(String task) throws ParseException {
         // parse the task
         checkArgument(isValidEncodedTask(task));
         String description = task.substring(1);
@@ -132,6 +127,9 @@ public class Task extends ListEntryField {
         } else {
             throw new ParseException(DECODED_CONSTRAINTS);
         }
+    }
+    public static Task of(String task) throws ParseException {
+        return new Task(task);
     }
 
     /**
