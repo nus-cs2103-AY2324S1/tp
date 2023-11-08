@@ -16,10 +16,11 @@ public class AppointmentTime implements Comparable<AppointmentTime> {
     public static final String MESSAGE_CONSTRAINTS =
             "1. AppointmentTime start must be before AppointmentTime end.\n"
             + "2. AppointmentTime must also not overlap with an existing Appointment's time.\n"
+            + "3. Ensure that the AppointmentTime start and AppointmentTime end are valid date times.\n"
             + "* Note: Date indicated must be YYYY/MM/DD"
-            + "(i.e. 2th Jan 2020 must be input as 02/01/2021 instead of 2020-01-01).\n"
+            + "(i.e. 2th Jan 2020 must be input as 2021/01/02 instead of 2020-01-01).\n"
             + "* Note: Time indicated must be XX:XX (i.e. 9AM must be input as 09:00 instead of 9:00).\n"
-            + "Eg: start=13/10/2023 09:00 end=13/10/2023 12:00";
+            + "E.g.: start=2023/10/13 09:00 end=2023/10/13 12:00";
 
     // Data fields
     private final LocalDateTime start;

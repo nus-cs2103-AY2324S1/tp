@@ -4,17 +4,29 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.chrono.IsoChronology;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoField;
 
 /**
  * Represents a Person's birthdate in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidBirthdate(String)}
  */
 public class Birthdate implements Comparable<Birthdate> {
-    public static final String MESSAGE_CONSTRAINTS = "Birthdates should be of the form YYYY/MM/DD";
+    public static final String MESSAGE_CONSTRAINTS = "Birthdates should be of the form YYYY/MM/DD.\n"
+            + "* Note: Date indicated must be YYYY/MM/DD"
+            + "(i.e. 2th Jan 2020 must be input as 2021/01/02 instead of 2020-01-01).\n"
+            + "E.g. birthdate=2023/10/20";
 
-    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    private static final DateTimeFormatter FORMAT = new DateTimeFormatterBuilder()
+            .appendPattern("yyyy/MM/dd")
+            .parseDefaulting(ChronoField.ERA, 1)
+            .toFormatter()
+            .withChronology(IsoChronology.INSTANCE)
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public final String value;
     public final LocalDate birthdate;

@@ -1,10 +1,10 @@
 package seedu.address.storage;
 
 import static seedu.address.commons.util.DateUtil.dateTimeToString;
+import static seedu.address.commons.util.DateUtil.parseDateTime;
 import static seedu.address.logic.Messages.MESSAGE_PATIENT_DOES_NOT_EXIST;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.stream.Collectors;
 
@@ -86,8 +86,8 @@ class JsonAdaptedAppointment {
         LocalDateTime startDateTime;
         LocalDateTime endDateTime;
         try {
-            startDateTime = LocalDateTime.parse(start, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-            endDateTime = LocalDateTime.parse(end, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+            startDateTime = parseDateTime(start);
+            endDateTime = parseDateTime(end);
         } catch (DateTimeParseException e) {
             throw new IllegalValueException(AppointmentTime.MESSAGE_CONSTRAINTS);
         }

@@ -73,11 +73,13 @@ public class RescheduleCommand extends Command {
 
         // Clash in appointment slot
         if (!AppointmentTime.isValidTimeSlot(lastShownList, rescheduledAppointment)) {
+            model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
             throw new CommandException(Messages.MESSAGE_DUPLICATE_TIMESLOT);
         }
 
         // Appointment already exists
         if (model.hasAppointment(rescheduledAppointment)) {
+            model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
             throw new CommandException(Messages.MESSAGE_DUPLICATE_APPOINTMENT);
         }
 
