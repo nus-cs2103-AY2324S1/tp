@@ -36,7 +36,7 @@ For **Beginner Users**, we're thrilled to have you onboard! Get started with a [
 For **Experienced Users**, thank you for choosing TutorConnect! You may refer to the [Command Summary](#command-summary) here.
 
 ### Navigating the User Guide
-TutorConnect's User Guide is made with you mind. It is designed to be user-friendly and easy to navigate. Here are a 
+TutorConnect's User Guide is made with you in mind. It is designed to be user-friendly and easy to navigate. Here are a 
 few tips for smooth navigation:
 * Hyperlinks: Throughout this guide, you'll find [hyperlinks](#usage-of-the-user-guide) that can take you to related sections or external 
   resources. Click on these links to access additional information or jump to different parts of the guide.
@@ -144,7 +144,14 @@ Click on any of these below to jump to the respective sections of the guide!
 ### Start
 ![start](images/tutorial/start.png)
 
-When you first launch TutorConnect, you will be greeted with an empty screen with no tutors. It's time to start adding your tutors to TutorConnect.
+When you first launch TutorConnect, you will notice that it comes preloaded with sample data for you to experiment with.
+You may use the sample data to familiarise yourself with the various [features](#features) that TutorConnect provides.
+
+Alternatively, if you're ready to start with your own data, you can easily remove all the sample entries:
+1. Simply type into the Command Box: `clear`
+2. Hit enter
+
+Now it's time to start adding your tutors to TutorConnect!
 
 ### Adding your first tutor
 
@@ -235,6 +242,15 @@ Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
 
 ![add tutor command](images/addTutorCommandSyntax.png)
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Tutor's name**<br>
+
+* Tutor's name can only include letters and numbers.
+* Tutor's name is case-sensitive. E.g., `John` and `john` are considered different names!
+
+</div>
+
 **Errors you might encounter**
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
@@ -276,7 +292,7 @@ Let's use the edit tutor command to update his phone number!
 
 **What you can expect to see**
 
-Viola! His phone number has now been updated to **87654321**.
+Voila! His phone number has now been updated to **87654321**.
 
 ![edit tutor](images/editTutor.png)
 
