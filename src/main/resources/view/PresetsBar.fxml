@@ -6,12 +6,12 @@
 
 <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="591.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <items>
-    <Button mnemonicParsing="false" onAction="#handleClear" text="Clear" />
-    <Button mnemonicParsing="false" onAction="#handleAddD" text="Add" />
-    <Button mnemonicParsing="false" onAction="#handleEditD" text="Edit" />
-    <Button mnemonicParsing="false" onAction="#handleDeleteD" text="Delete" />
-    <Button mnemonicParsing="false" onAction="#handleSetPref" text="Set Preferences" />
-    <Button mnemonicParsing="false" onAction="#handleShowPref" text="Show Preferences" />
+      <Button fx:id="clearButton" mnemonicParsing="false" onAction="#handleClear" text="Clear" />
+      <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAddD" text="Add" />
+      <Button fx:id="editButton" mnemonicParsing="false" onAction="#handleEditD" text="Edit" />
+      <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#handleDeleteD" text="Delete" />
+      <Button fx:id="setPrefButton" mnemonicParsing="false" onAction="#handleSetPref" text="Set Preferences" />
+      <Button fx:id="showPrefButton" mnemonicParsing="false" onAction="#handleShowPref" text="Show Preferences" />
   </items>
    <cursor>
       <Cursor fx:constant="CLOSED_HAND" />
