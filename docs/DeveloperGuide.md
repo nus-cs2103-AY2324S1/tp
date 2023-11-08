@@ -589,7 +589,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
-**Use case: Randomly select a list of students**
+**Use case: Randomly select a specific number of students**
 
 **MSS**
 
@@ -601,21 +601,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. There are no students on the list.
+* 1a. The number of students to be selected is more than the number of students in the list.
 
     * 1a1. Class Manager shows an error message.
 
       Use case ends.
 
-* 1b. The number of students to be selected is more than the number of students in the list.
+* 1b. The number of students to be selected is less than 1.
 
     * 1b1. Class Manager shows an error message.
-
-      Use case ends.
-
-* 1c. The number of students to be selected is less than 1.
-
-    * 1c1. Class Manager shows an error message.
 
       Use case ends.
 
