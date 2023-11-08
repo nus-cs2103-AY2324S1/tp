@@ -12,7 +12,6 @@ import static seedu.classmanager.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.classmanager.commons.core.index.Index;
-import seedu.classmanager.commons.exceptions.IllegalValueException;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.Messages;
 import seedu.classmanager.logic.commands.exceptions.CommandException;
