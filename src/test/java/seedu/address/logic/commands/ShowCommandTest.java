@@ -41,6 +41,7 @@ public class ShowCommandTest {
                 Messages.format(personToShow));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
                 model.getScheduleList());
+        expectedModel.setState(State.STUDENT);
         expectedModel.showPerson(personToShow);
 
         assertCommandSuccess(showCommand, model, expectedMessage, expectedModel);
@@ -70,7 +71,7 @@ public class ShowCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
                 model.getScheduleList());
         expectedModel.showTask(taskToShow);
-
+        expectedModel.setState(State.TASK);
         assertCommandSuccess(showCommand, model, expectedMessage, expectedModel);
     }
 
