@@ -833,15 +833,61 @@ otherwise.
 
 * 3a. The given index is invalid.
 
-    * 3a1. TutorConnect shows an error message.
+  * 3a1. TutorConnect shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 * 3b. The schedule information parameters is invalid.
 
-    * 3b1. TutorConnect shows an error message.
+  * 3b1. TutorConnect shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
+
+
+#### **Use case: List schedules**
+{:.no_toc}
+
+**MSS**
+
+1.  User requests to list schedules by tutor and/or schedule status
+2.  TutorConnect shows a list of schedules
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2b. The given index is invalid.
+
+  * 2b1. TutorConnect shows an error message.
+
+    Use case resumes at step 1.
+
+* 2c. The schedule status parameters is invalid.
+
+  * 2c1. TutorConnect shows an error message.
+
+    Use case resumes at step 1.
+
+
+#### **Use case: Find schedules**
+{:.no_toc}
+
+**MSS**
+
+1.  User requests to find schedules by typing in keywords
+2.  TutorConnect shows a list of schedules filtered by keyword entered
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
 
 
 #### **Use case: Delete a schedule**
