@@ -21,7 +21,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -171,7 +170,6 @@ public class DeleteCommand extends UndoableCommand {
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
-        Set<Tag> updatedTags = personToEdit.getTags();
         Set<MedicalHistory> updatedMedicalHistories = personToEdit.getMedicalHistories();
         Appointment updatedAppointment = personToEdit.getAppointment().isPresent() ? personToEdit.getAppointment().get()
                 : null;
@@ -207,7 +205,7 @@ public class DeleteCommand extends UndoableCommand {
         }
 
         return new Person(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress, updatedAppointment,
-                updatedMedicalHistories, updatedTags);
+                updatedMedicalHistories);
     }
 
     /**
