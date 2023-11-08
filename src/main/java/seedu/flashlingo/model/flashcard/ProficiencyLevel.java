@@ -1,3 +1,5 @@
+//@@author itsNatTan
+
 package seedu.flashlingo.model.flashcard;
 
 /**
