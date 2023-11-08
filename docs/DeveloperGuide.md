@@ -272,7 +272,7 @@ the lifeline reaches the end of diagram.
 </div>
 
 
-#### Design rationale:
+#### Design rationale
 The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
  
 ### Delete tutor feature
@@ -326,7 +326,7 @@ The lifeline for `DeleteTutorCommandParser` should end at the destroy marker (X)
 but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-#### Design rationale:
+#### Design rationale
 The `delete-t` command was designed this way to ensure consistency with the previous `delete` person command.
 
 ### Add Schedule Feature
@@ -346,7 +346,7 @@ The user executes `add-s 1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00` command.
 The `AddScheduleCommand#exceute(Model)` will perform the following checks in this order to ensure that the `Schedule` can be added to the `Model`:
 1. The `Index` is valid.
 2. A valid schedule can be created with the given `Index`, `StartTime` and `EndTime`.
-    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered valid if its start time is before its end time. This is enforced by the constructor of the `Schedule` class, it throws an `IllegalArgumentException` if it is not valid.
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered valid if its start time is before its end time and both start time and end time falls on the same day. This is enforced by the constructor of the `Schedule` class, it throws an `IllegalArgumentException` if it is not valid.
 
     </div>
 3. Executing this command would not result in a duplicate schedule in the `Model`.
@@ -372,7 +372,7 @@ The following sequence diagram shows how the operation works:
 
 </div>
 
-#### Design considerations:
+#### Design rationale
 
 **Aspect: Checking for clashing schedule:**
 
@@ -395,7 +395,7 @@ The following sequence diagram shows how the operation works:
 
 * **Alternative 2:** Perform the check in `AddScheduleCommand`.
     * Pros: Allows for flexibility in the constraints.
-    * Cons: Have to repeatedly write logic perform this check everywhere a new `Schedule` is being created.
+    * Cons: Have to repeatedly write logic to perform these checks every time a new `Schedule` needs to be created in another class.
 
 ### Edit schedule feature
 
@@ -487,7 +487,7 @@ Given below is an example scenario on how the delete schedule command behaves:
 The following sequence diagram shows how the above steps for delete schedule operation works, taking `execute("delete-s 1")` API call as an example.
 
 ![Sequence diagram for delete-s command](images/DeleteScheduleSequenceDiagram.png)
-#### Design rationale:
+#### Design rationale
 The `delete-s` command was designed this way to ensure consistency with the previous delete person command.
 
 ### Change theme feature
@@ -547,6 +547,27 @@ the lifeline reaches the end of diagram.
   - Pros: The filepath does not need to pass through `ThemeCommand` and `CommandResult`. It is allocated and access 
     from `MainWindow` directly. Thus, `CommandResult` does not need another constructor and getter method.
   - Cons: `MainWindow` has to parse arguments.
+
+### Sorting of schedules
+
+The list of schedules is sorted to be more organised and easier to navigate for users.
+
+#### Implementation Details
+
+The schedules are sorted by implementing the `Comparable` interface and its required `compareTo()` method.
+
+#### Design rationale
+
+`Schedule`s are sorted by `StartTime` as start time is what tuition centre coordinators are most concerned with.
+
+The schedules are divided into 2 parts: future and past, this organizes the schedules in a way that simplifies 
+navigation for the users. This allows them to quickly differentiate between upcoming and past schedules.
+
+The upcoming schedules are sorted in ascending order so that the most immediate schedules, which are the ones
+that are most relevant to the user at that point in time, is at the very top. 
+
+Past schedules are sorted in descending order, this keeps the more recent schedules readily accessible, while the older, 
+less relevant schedules are at the bottom of the list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -918,7 +939,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## **Appendix: Planned Enhancements** 
+## **Appendix: Planned enhancements** 
 
 Given below are the planned enhancements for future iterations of the app.
 
@@ -969,36 +990,111 @@ This method sets the specified `Schedule` in the model to be that edited schedul
 Step 8. Finally, the EditScheduleCommand object updates the schedule list to display the edited schedule.
 
 ### Disallowing future schedules to be marked
+The `mark` function should prohibit setting a schedule status if either the start or end time is in the future.
 
 **Proposed implementation**
-More details...
 
-### Schedule `datetime` input
+An extra validation should be included in the `execute` method within the `MarkScheduleCommand` to ensure that both the 
+scheduleToEdit's start and end times are earlier than the current datetime.
+
+If this validation fails, a `CommandException` with a clear and descriptive error message should be thrown.
+
+### Streamline `datetime` input
+In the current implementation, the users have to enter `yyyy-MM-ddTHH:mm` each time for both `StartTime` and `EndTime`.
+However, since a `Schedule` is not allowed to start and end on different days, the user is unnecessarily repeating the
+input `yyyy-MM-dd`. This resulted in a command format that is longer than necessary. We plan to streamline the command 
+to make it shorter and more user-friendly.
 
 **Proposed implementation**
-More details...
+
+The current `st/` and `et/` prefixes will be updated to take in `HH:mm` only. Additionally, this would require a new 
+prefix `d/` which will parse user input in the `yyyy-MM-dd` format into a `Date`.
+
+For example, any command that uses the `st/` or `et/` prefix will now use `... d/yyyy-MM-dd st/HH:mm et/HH:m` instead.
+
+### Enhance flexibility of `datetime` inputs
+In the current implementation, users can only enter datetime in this `yyyy-MM-ddTHH:mm` format. This format can be
+restrictive as it requires leading zeroes and `-` as a separator. To enhance user experience, the input for datetime 
+related parameters should be able to handle most frequently used formats like `2023/1/1` and `10:00pm`.
+
+**Proposed implementation**
+
+The parser handling date and time should be updated to handle different date and time formats. This can be achieved by
+having a list of acceptable datetime formats and checking the users input against each one of them. If the user input
+does not match any of the acceptable formats, we should throw a `ParseException`.
 
 ### Switching back to list view from calendar view
+In the current system, when executing any commands, including actions like marking, unmarking, or deleting schedules 
+while in the calendar view, the GUI switches back to the main view displaying the list of tutors and schedules. This 
+behavior can be disruptive and frustrating for the user.
+
+To enhance user experience, we propose implementing a more persistent calendar view. This would allow the user to 
+perform certain actions on schedules without being returned to the list view.
+
+Only certain actions, such as adding or editing schedules, should return the user to the main list view. This is
+because these actions necessitate the clearing of any applied filter predicate including the one that was used to
+display schedules only for the specified date.
+
+Conversely, other actions should keep the user within the calendar view.
 
 **Proposed implementation**
-More details...
 
-### Long fields being truncated
+A new boolean attribute `exitCalendar` will be added to `CommandResult`, which indicates whether the command executed
+should exit the calendar view (if active).
 
-**Proposed implementation**
-More details...
+The `execute` methods for commands like `AddScheduleCommand` and `EditScheduleCommand` will return a `CommandResult` 
+object with this new attribute set to `true` while all other commands will have the value `false`.
+
+In the `handleListDisplay` method in `MainWindow`, it will call `showLists` only if this attribute is `true` and 
+do nothing otherwise. The only exception is if the `commandResult` FeedbackToUser is a 
+`ShowCalendarCommand.MESSAGE_SUCCESS` in which case it will call `showCalendar`.
 
 ### Schedules at the same time being arranged alphabetically
+In the [current implementation](#sorting-of-schedules), the schedules are being sorted by `StartTime` only.
+
+This resulted in a situation where if you had many schedules starting at the same time, it would be very difficult to 
+find and locate a particular schedule.
 
 **Proposed implementation**
-More details...
 
-### Having a single `list` command for both lists
-
-**Proposed implementation**
-More details...
+The schedules would be sorted first by `StartTime`, then by `EndTime`, and finally alphabetically by the tutor's name.
+This would make the schedule list more organised, making it easier to use and navigate for the user.
 
 ### UI for calendar to use colours to reflect status of schedules
+In the calendar view, incorporating schedule colors to represent their respective statuses can enhance user 
+intuitiveness.
 
 **Proposed implementation**
-More details...
+In `CalendarCard.java`, the background color of the calendar card will be determined based on schedule status: green 
+for completed, red for missed, and yellow for pending (please note that these colors are not finalised).
+
+To differentiate between rows in the calendar, an alternating shading of green, red, and yellow will be applied.
+
+Additionally, each calendar card will have a visible border to separate it from adjacent schedule cards on 
+the same row.
+
+### Allow partial name search for find command
+
+The `find-t` and `find-s` commands should allow users to search for tutors without having to input their full names.
+
+The current two `find` commands only allow searching for tutor when a full word in their names matches the user 
+input exactly. We plan to change search to match partial words instead of only a full word match.
+
+This would allow users to search for tutors without knowing the tutors' exact name. They can search using just a few
+characters of the name.
+
+For example: `find-t john` will now match: `john`, `JOHN123` and `johnetta`.
+
+**Proposed implementation**:
+
+A new method `containsPartialWordIgnoreCase` can be added in `StringUtil` that will be used by
+`NameContainsKeywordsPredicate` and `TutorNameContainsKeywordsPredicate` to test for a match.
+
+This method will call `String::contains` instead of `String::equals` to match partial words too.
+
+Depending on the command prefix, the parse method of the `findTutorCommandParser` or `findScheduleCommandParser` will 
+create the `find` command object with the updated predicate.
+
+This would then be used in the `execute` method of the `find` command object to get the filtered tutor 
+or schedule list with part of their names matching the user input.
+
