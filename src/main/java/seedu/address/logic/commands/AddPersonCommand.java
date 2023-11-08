@@ -22,14 +22,18 @@ public class AddPersonCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + SECONDARY_COMMAND_WORD
-            + ": Adds a contact to the contact list. "
-            + "Parameters: "
+            + ": Adds a contact to the contact list. " + "\n"
+            + "Usage: "
+            + COMMAND_WORD + " "
+            + SECONDARY_COMMAND_WORD + " "
             + PREFIX_NAME + " NAME "
             + PREFIX_PHONE + " PHONE "
             + PREFIX_EMAIL + " EMAIL "
             + PREFIX_ADDRESS + " ADDRESS "
-            + PREFIX_TAG + " TAGNAME" + "\n"
-            + "Example: " + COMMAND_WORD + " " + SECONDARY_COMMAND_WORD
+            + "[" + PREFIX_TAG + " TAGNAME...]" + "\n"
+            + "Example: " 
+            + COMMAND_WORD + " " 
+            + SECONDARY_COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
             + PREFIX_PHONE + " 98765432 "
             + PREFIX_EMAIL + " johnd@example.com "
