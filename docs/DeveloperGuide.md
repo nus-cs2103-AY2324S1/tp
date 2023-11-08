@@ -739,3 +739,7 @@ in any casing.
 6. Currently, gender can only be `MALE` or `FEMALE`, and the input has to match the words exactly, meaning that the input has to
 be uppercase. However, in order to optimise for fast typists, we plan to treat the gender attribute as case-insensitive, so that
 any input that is either `male` or `female` will be accepted without worrying about the casing.
+
+7. Currently, a patient's birthdate can be set after the current date that the command is executed on. For example, `2023/10/20`
+can be added as a patient's birthdate even though the current date might be `2023/08/08`. We plan to add a validation for birthdates
+such that birthdates after the current date will not be considered a valid birthdate.
