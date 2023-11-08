@@ -94,7 +94,7 @@ Welcome to TutorConnect! We are excited to get you started with a more efficient
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Mac Users**<br>
+**:information_source: Mac users**<br>
 
 If you are a Mac user, you may encounter a warning that says
 the jar file cannot be opened because it is from an unidentified developer. To continue:
@@ -105,9 +105,9 @@ the jar file cannot be opened because it is from an unidentified developer. To c
 
 <div markdown="block" class="alert alert-warning">
 
-**:warning: Unable to Open jar file**<br>
+**:warning: Unable to open jar file**<br>
 
-Should the file fail to launch on click:
+If the jar file cannot launch on double-click:
 
 1. Open a command terminal (using [Windows](https://www.lifewire.com/open-command-prompt-in-a-folder-5185505) or [Mac](https://support.apple.com/en-sg/guide/terminal/trmlb20c7888/mac#:~:text=On%20your%20Mac%2C%20open%20a,window%3A%20Choose%20Open%20in%20Terminal.)) on the folder where `TutorConnect.jar` is. 
 2. Type the following command in the terminal: `java -jar TutorConnect.jar` and hit enter.
@@ -125,7 +125,7 @@ Below is a quick overview of the various components of our interface.
 | Component        | Description                                                                                | 
 |------------------|--------------------------------------------------------------------------------------------|
 | Command Box      | You will enter your [commands](#glossary) along with its input here.                       |
-| Menu Bar         | Contains dropdown menu options for the application.                                        |
+| Menu Bar         | Contains relevant buttons for the application.                                             |
 | Result Display   | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
 | Tutor Details    | Contains information related to the tutor like name, phone number etc.                     |
 | Schedule Details | Contains information related to the schedule like assigned tutor, start time etc.          |
@@ -158,20 +158,21 @@ Click on any of these below to jump to the respective sections of the guide!
 When you first launch TutorConnect, you will notice that it comes preloaded with sample data for you to experiment with.
 You may use the sample data to familiarise yourself with the various [features](#features) that TutorConnect provides.
 
-Alternatively, if you're ready to start with your own data, you can easily remove all the sample entries:
-1. Simply type into the Command Box: `clear`
+Once you're ready to start using TutorConnect for your tuition centre, you can easily remove all the sample data:
+1. Type `clear` into the command box
 2. Hit enter
 
-Now it's time to start adding your tutors to TutorConnect!
+Yay! Now it's time to get started with TutorConnect!
 
 ### Adding your first tutor
 
 ![add-t](images/tutorial/add-t.png)
 
-Let's say you have a tutor named **John Doe**, he has provided you with his phone number: **9123 4567** and his email address: **johndoe@example.com**.
+Let's say you have a tutor named **John Doe**. He has provided you with his phone number: **9123 4567** and his 
+email address: **johndoe@example.com**.
 
 Here is how you would use the [**add-t**](#adding-a-tutor-add-t) command to add John Doe to TutorConnect:
-1. Simply type into the Command Box: `add-t n/John Doe p/91234567 e/johnd@example.com`
+1. Simply type `add-t n/John Doe p/91234567 e/johnd@example.com` into the command box
 2. Hit enter
 3. Voila! John Doe is now in TutorConnect
 
@@ -188,7 +189,7 @@ Let's assign the class to **John Doe**.
 Here is how to use the [**add-s**](#adding-a-schedule-add-s) command to assign the schedule to John Doe:
 1. Get the **TUTOR_INDEX** of the tutor you wish to assign the schedule to
    ![tutor-index](images/tutorial/tutor-index.png)
-2. Simply type into the Command Box: `add-s 1 st/2023-10-01T09:00 et/2023-10-01T11:00`
+2. Simply type `add-s 1 st/2023-10-01T09:00 et/2023-10-01T11:00` into the command box
 3. Hit enter
 4. Tada! John Doe now has a schedule on **1 October 2023** from **9AM to 11AM**
 
@@ -201,11 +202,14 @@ Now that class is over, it is time to mark the schedule as completed!
 Here is how to use the [**mark**](#marking-a-schedule-mark) command to mark the schedule as completed:
 1. Get the **SCHEDULE_INDEX** of the schedule you wish to mark as completed
    ![schedule-index](images/tutorial/schedule-index.png)
-2. Simply type into the Command Box: `mark 1 m/1`
+2. Simply type `mark 1 m/1` into the command box
 3. Hit enter
 4. Tada! The schedule is now marked as completed
 
-**Congratulations!** You have successfully added your first tutor and schedule, and also completed a schedule in TutorConnect. We hope that this tutorial has helped guide you through the basic features of TutorConnect. Please refer to the [**Features Section**](#features) to see what else TutorConnect can do. Alternatively visit the [**FAQ**](#faq) to view the frequently asked questions.
+**Congratulations!** You have successfully added your first tutor and schedule, and also marked a schedule as 
+completed in TutorConnect. We hope that this tutorial has helped guide you through the basic features of 
+TutorConnect. Please refer to the [**Features Section**](#features) to see what else TutorConnect can do. 
+Alternatively, visit the [**FAQ Section**](#faq) to view some frequently asked questions.
 
 [Back To Top](#table-of-contents)
 
@@ -257,6 +261,7 @@ Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
 
 **:information_source: Tutor's name**<br>
 
+Take note of the following constraints regarding tutor's names!
 * Tutor's name can only include letters and numbers.
 * Tutor's name is case-sensitive. E.g., `John` and `john` are considered different names!
 
@@ -371,7 +376,7 @@ Anything you type after `list-t` will be ignored.
 
 #### Locating tutors by name: `find-t`
 
-Find tutors whose names contain any of the given keywords.
+Finds tutors whose names contain any of the given keywords.
 
 ##### :star: First time users
 {:.no_toc}
@@ -381,7 +386,7 @@ Find tutors whose names contain any of the given keywords.
 You would like to contact tutor **John Doe**, but you can't remember his phone number. You try to look for him in the 
 list of tutors but the list has gotten far too long, and you can't find him.
 
-Fret not! The find tutor command is here to save the day.
+If this has happened to you before, fret not! The find tutor command is here to save the day.
 
 **Follow these steps**
 
@@ -474,7 +479,7 @@ Adds a schedule to a specified tutor.
 
 You have a new upcoming class on **1 December 2023** from **9AM to 11AM**. 
 
-Let's schedule this class to the tutor **Bernice Yu**.
+Let's assign this class to the tutor **Bernice Yu**.
 
 **Follow these steps**
 
@@ -569,7 +574,7 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Listing all schedules: `list-s`
 
-Displays a list of all schedules in TutorConnect. List can be filtered by tutors using the `TUTOR_INDEX` provided in the tutor list, or by `COMPLETED` or `MISSED` status.
+Displays a list of all schedules in TutorConnect. List can be filtered by tutors assigned or status.
 
 ##### :star: First time users
 {:.no_toc}
@@ -578,35 +583,31 @@ Displays a list of all schedules in TutorConnect. List can be filtered by tutors
 
 You wish to view schedules assigned to tutor **Irfan Ibrahim** that have been marked as `COMPLETED`.
 
-The list schedule function is here for that!
+Use the list schedule function!
 
 **Follow these steps**
 
-1. On the left panel that shows the list of tutors, check the `TUTOR_INDEX` of Irfan Ibrahim, in this case, his number is 2.
-2. Type in `list-s 2 m/1` where `m/1` represents schedules marked as `COMPLETED` and press enter.
-3. If you wish to view the schedules that are marked as `MISSED` only, you can also enter `list-s m/0` where `m/0` represents schedules marked as `MISSED` and press enter.
+1. On the left panel that shows the list of tutors, check the `TUTOR_INDEX` of Irfan Ibrahim. Here, the index is 2.
+2. Type in `list-s 2 m/1` and press enter.
 
 **What you can expect to see**
 
-Tada! For step 2, the schedule list has now been updated to show schedules from tutor Irfan Ibrahim that are marked as `COMPLETED`.
+Tada! For step 2, the schedule list has now been updated to show schedules assigned to tutor Irfan Ibrahim that are 
+marked as `COMPLETED`.
 
 ![list schedule tutor completed](images/list-schedules/list-s-tutor-completed.png)
-
-
-For step 3, the schedule list has been updated to show schedules that are marked as `MISSED`.
-
-![list schedule missed](images/list-schedules/list-s-missed.png)
 
 <div markdown="block" class="alert alert-success">
 
 **:bulb: Tip**<br>
 
-`list-s` command is equipped with flexible options to view a list of schedules that covers the following scenarios:
+Good news! `list-s` command is equipped with various options to view a list of schedules that covers the following 
+scenarios:
 - `list-s` : To show all schedules.
-- `list-s 1` : To show schedules by tutor that associates with `TUTOR_INDEX` 1.
-- `list-s m/0` : To show schedules marked as `MISSED`.
-- `list-s m/1` : To show schedules marked as `COMPLETED`.
-- `list-s 1 m/0` : To show schedules by `TUTOR_INDEX` 1 marked as `MISSED`.
+- `list-s TUTOR_INDEX` : To show schedules assigned to the tutor with index `TUTOR_INDEX`.
+- `list-s m/0` : To show all schedules marked as `MISSED`.
+- `list-s m/1` : To show all schedules marked as `COMPLETED`.
+- `list-s TUTOR_INDEX m/0` : To show schedules assigned to the tutor with index `TUTOR_INDEX` marked as `MISSED`.
 
 </div>
 
@@ -617,11 +618,12 @@ For step 3, the schedule list has been updated to show schedules that are marked
 
 ![list schedule command](images/list-schedules/list-s-syntax.png)
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-info">
 
-**:warning: Warning**<br>
+**:warning: Optional inputs**<br>
 
-`TUTOR_INDEX` and `m/` are optional fields to add as per type of usage. However an error will still occur if invalid values are passed into these fields.
+`TUTOR_INDEX` and `m/` are optional fields. You don't need to include them. If you do, make sure that the 
+input is valid!
 
 </div>
 
@@ -633,9 +635,8 @@ Here is a list of the error messages you may encounter, when the command is ente
 |--------------------------------------------------------------------------|----------------------------------------------------------------|
 | `Invalid command format!`                                                | `TUTOR_INDEX` is not a valid number.                           |
 | `The person index provided is invalid`                                   | `TUTOR_INDEX` entered is not in the range of number of tutors. |
-| `Status has to be either MISSED (m/0) or COMPLETED (m/1)`                | Invalid value of `/m` was entered.                             |
+| `Status has to be either MISSED (m/0) or COMPLETED (m/1)`                | Schedule status entered is not 0 or 1.                         |
 | `Multiple values specified for the following single-valued field(s): m/` | More than 1 `m/` was given in the command.                     |
-
 
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
@@ -644,14 +645,14 @@ You can also refer to [input information](#input-examples) for details about val
 
 #### Locating schedules by name: `find-s`
 
-Find schedules whose tutor's names contain any of the given keywords.
+Finds schedules assigned to tutors whose names contain any of the given keywords.
 
 ##### :star: First time users
 {:.no_toc}
 
 **Scenario**
 
-You wish to view the list of schedules from a tutor named **Bernice**. But unfortunately, you forgot what's her last name.
+You wish to view the list of schedules from a tutor named **Bernice**. Unfortunately, you forgot what her last name is.
 
 The find schedule function is here for that!
 
@@ -661,7 +662,7 @@ The find schedule function is here for that!
 
 **What you can expect to see**
 
-Tada! The schedule list has now been updated to show schedules from tutor that contains the name "Bernice".
+Tada! The schedule list has now been updated to show schedules assign to tutors whose names contain the word "Bernice".
 
 ![find schedule tutor](images/find-schedules/find-s.png)
 
@@ -700,7 +701,7 @@ Sets the status of a schedule in TutorConnect.
 
 A class has ended and hence the schedule representing that class should be now marked as COMPLETED.
 
-Fret not as you can do just that with the mark command.
+Fret not, as you can do just that with the mark command.
 
 **Follow these steps**
 
@@ -725,9 +726,9 @@ Yay! The schedule has been marked as COMPLETED.
 
 **:information_source: Schedule status**<br>
 
-* There are only two types of Schedule status: MISSED or COMPLETED.
-* To set the status of the specified schedule to MISSED, input `m/0` as 0 indicates the MISSED status.
-* To set the status of the specified schedule to COMPLETED, input `m/1` as 1 indicates the COMPLETED status.
+* There are only two types of schedule status: MISSED or COMPLETED.
+* To set the status of the specified schedule to MISSED, use `m/0` as 0 indicates the MISSED status.
+* To set the status of the specified schedule to COMPLETED, use `m/1` as 1 indicates the COMPLETED status.
 * Any inputs other than 0 or 1 will result in an invalid status message displayed.
 
 </div>
@@ -736,11 +737,12 @@ Yay! The schedule has been marked as COMPLETED.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                                             | Reason                                                             |
-|-----------------------------------------------------------|--------------------------------------------------------------------|
-| `Invalid command format!`                                 | Invalid or missing SCHEDULE_INDEX or missing schedule status.      |
-| `The schedule index provided is invalid`                  | SCHEDULE_INDEX entered is not in the range of number of schedules. |
-| `Status has to be either MISSED (m/0) or COMPLETED (m/1)` | Schedule status entered is not 0 or 1.                             |
+| Error Message                                                            | Reason                                                             |
+|--------------------------------------------------------------------------|--------------------------------------------------------------------|
+| `Invalid command format!`                                                | Invalid or missing SCHEDULE_INDEX or missing schedule status.      |
+| `The schedule index provided is invalid`                                 | SCHEDULE_INDEX entered is not in the range of number of schedules. |
+| `Status has to be either MISSED (m/0) or COMPLETED (m/1)`                | Schedule status entered is not 0 or 1.                             |
+| `Multiple values specified for the following single-valued field(s): m/` | More than 1 `m/` was given in the command.                         |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -755,10 +757,10 @@ Removes the status of a schedule.
 
 **Scenario**
 
-You have accidentally marked the wrong schedule to be COMPLETED.\
+Oops! You have accidentally marked the wrong schedule to be COMPLETED.\
 The class for that schedule has yet to occur so its status should be left empty.
 
-Don't worry as you can do just that with the unmark command.
+Don't worry, as you can do just that with the unmark command.
 
 **Follow these steps**
 
@@ -827,10 +829,10 @@ Well done! You have deleted the schedule assigned to **Bernice Yu**.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                            | Reason                                                       |
-|------------------------------------------|--------------------------------------------------------------|
-| `Invalid command format!`                | Invalid or missing `SCHEDULE_INDEX`.                           |
-| `The schedule index provided is invalid` | `SCHEDULE_INDEX` entered is not in the range of number of tutors. |
+| Error Message                            | Reason                                                          |
+|------------------------------------------|-----------------------------------------------------------------|
+| `Invalid command format!`                | Invalid or missing SCHEDULE_INDEX.                              |
+| `The schedule index provided is invalid` | SCHEDULE_INDEX entered is not in the range of number of tutors. |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -863,7 +865,7 @@ Woah look at that! The schedules are now being displayed in a calendar form.
 
 **:bulb: Worried about having too many schedules to view?**<br>
 * The calendar can show schedules for selected tutors only!
-1. Simply use [`find-t`](#locating-tutors-by-name-find-t) to select the tutors first (e.g. `find-t John` to select all
+1. Simply use [`find-t`](#locating-tutors-by-name-find-t) to show the tutors first (e.g. `find-t John` to show all
   tutors with the name John).
 2. Now, just use the [`show`](#viewing-calendar-show) command to view their schedules in calendar view on a given date. 
    It's that simple!
@@ -891,7 +893,7 @@ This command might seem complicated, but it is easy to use with only 1 possible 
 
 <div markdown="block" class="alert alert-warning">
 
-**:warning: Calendar Limitations**<br>
+**:warning: Calendar limitations**<br>
 * Schedules with very short duration will be truncated (only the schedule's index will be displayed).
 * Using any other commands will hide the calendar view. Use the `show` command to view calendar again. 
 
@@ -990,13 +992,13 @@ As an experienced user, you should be aware of the dangers of the `clear` comman
 
 [Back To Top](#table-of-contents)
 
-#### Help: `help`
+#### Opening the help window: `help`
 
 Opens a window with instructions for getting help.
 
 **Scenario**
 
-Unsure on how to use a command or encounter an unknown error?
+Unsure on how to use a command? Encountered an unknown error?
 
 Get help from within the app by using the help command!
 
@@ -1007,7 +1009,7 @@ Type in `help` and press enter.
 **What you can expect to see**
 
 Is that a bird? Is that a plane?
-Nope it's the help window!
+Nope, it's the help window!
 
 ![help window](images/helpWindow.png)
 
@@ -1015,7 +1017,7 @@ Nope it's the help window!
 
 **:bulb: Tip**<br>
 
-The help window can also be accessed by the button above the command box!
+The help window can also be accessed by the button in the menu bar (above the command box)!
 
 </div>
 
@@ -1028,7 +1030,7 @@ Exits TutorConnect.
 
 **Scenario**
 
-Are you done using TutorConnect and want to stop the program?
+Done using TutorConnect? Quit the app!
 
 **Follow these steps**
 
@@ -1085,12 +1087,11 @@ use is sure to solve your scheduling needs.
 ### Definitions
 Here are some descriptions of the words you might come across in the User Guide:
 
-| Term                       | Definition                                                                                                                                                                                                                                                 |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Command                    | A command is an instruction given to the application to perform a specific action. For example, `list-t` is a command to list all tutors in the address book.                                                                                              |
-| GUI                        | GUI is a user interface that allows users to interact with the application using graphical elements like text fields, buttons, and menus.                                                                                                                  |
-| <span id="cli">CLI</span>  | CLI is a text-based user interface that allows users to interact with the application by typing commands.                                                                                                                                                  |
-
+| Term                       | Definition                                                                                                                                                     |
+|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="cli">CLI</span>  | CLI is a text-based user interface that allows users to interact with the application by typing commands.                                                      |
+| GUI                        | GUI is a user interface that allows users to interact with the application using graphical elements like text fields, buttons, and menus.                      |
+| Command                    | A command is an instruction given to the application to perform a specific action. For example, `list-t` is a command to list all tutors in the address book.  |
 
 ### Input Examples
 
@@ -1178,6 +1179,7 @@ Commands reference: [add-s](#adding-a-schedule-add-s), [edit-s](#editing-a-sched
 | **View Calendar**   | `show DATE` <br> e.g., `show 2023-09-15`                                                                   |
 | **Change Theme**    | `theme NEW_THEME` <br> e.g., `theme dark`                                                                  |
 | **Clear**           | `clear`                                                                                                    |
+| **Help**            | `help`                                                                                                     |
 | **Exit**            | `exit`                                                                                                     |
 
 [Back To Top](#table-of-contents)
