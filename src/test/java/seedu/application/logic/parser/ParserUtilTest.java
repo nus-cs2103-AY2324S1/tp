@@ -251,11 +251,12 @@ public class ParserUtilTest {
     public void parseInterviewDateTime_validValueWithWhitespace_returnsTrimmedDeadline() throws Exception {
         String interviewDateTimeWithWhitespace = WHITESPACE + VALID_DEADLINE + WHITESPACE;
         InterviewDateTime expectedInterviewDateTime = new InterviewDateTime(VALID_DEADLINE);
-        assertEquals(expectedInterviewDateTime, ParserUtil.parseInterviewDateTime(interviewDateTimeWithWhitespace));
+        assertEquals(expectedInterviewDateTime,
+            ParserUtil.parseInterviewDateTime(interviewDateTimeWithWhitespace));
     }
 
     @Test
-    public void parseInterviewDateTime_validValueConversionRequired_returnsDeadlineWithConvertedTime() throws Exception {
+    public void parseInterviewDateTime_validValueConversionRequired_returnsDeadlineConvertedTime() throws Exception {
         InterviewDateTime expectedInterviewDateTime = new InterviewDateTime("Dec 31 2023 0000");
         assertEquals(expectedInterviewDateTime, ParserUtil.parseInterviewDateTime("Dec 31 2023 2400"));
     }
