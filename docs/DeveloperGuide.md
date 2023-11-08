@@ -450,6 +450,21 @@ We propose to make the index error messages more specific and highlight to the u
 that index is wrong. For example, in the `enrol m/1 e/-1` input, we will show an error message to the user along 
 the lines of "The provided Event Index is not a non-zero unsigned integer."
 
+### Improve find criteria
+**Current Implementation:**
+* **Current Issue:** As of now, `findMember` and `findEvent` commands will only match the respective `Member` and `Event` if
+the name of the `Member` or `Event` contains a word that matches exactly the entire given find keyword. This means that the user will
+have to remember the entire name of the `Member` or `Event` to find it, reducing the effectiveness of `findMember` and `findEvent`.
+* **Example:** `findMember alex` will list `Member` with name "Alex Yeoh", but `findMember ale` will result in no `Member` being
+listed.
+
+**Proposed solution:**
+
+We propose that the find criteria will be improved such that it will find any `Event` or `Name` which contains the given keyword string,
+i.e. `Member` and `Event` name will not have to contain a word that matches exactly with the given find keyword. For example,
+the command `findMember a` will now match `Members` with name "Alex", "Alice", etc. In addition, if the user remembers that
+an `Event` name consists of 2 words, they can do `findEvent ‎`, which would list all `Events` which have a blank space in
+their name.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
