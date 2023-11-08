@@ -16,10 +16,16 @@ public class KeyboardShortcutUtilTest {
     private static final KeyCharacterCombination combiF = new KeyCharacterCombination("F");
     private static final KeyCharacterCombination combiShortcutF = new KeyCharacterCombination("F",
             KeyCombination.SHORTCUT_DOWN);
+    private static final KeyCharacterCombination combiShortcutAnyF = new KeyCharacterCombination("F",
+            KeyCombination.SHORTCUT_ANY);
     private static final KeyCharacterCombination combiShiftF = new KeyCharacterCombination("F",
             KeyCombination.SHIFT_DOWN);
+    private static final KeyCharacterCombination combiShiftAnyF = new KeyCharacterCombination("F",
+            KeyCombination.SHIFT_ANY);
     private static final KeyCharacterCombination combiAltF = new KeyCharacterCombination("F",
             KeyCombination.ALT_DOWN);
+    private static final KeyCharacterCombination combiAltAnyF = new KeyCharacterCombination("F",
+            KeyCombination.ALT_ANY);
 
     private static final KeyEvent eventF = new KeyEvent(KeyEvent.KEY_PRESSED,
             "f", "f", KeyCode.F, false, false, false, false);
@@ -42,6 +48,13 @@ public class KeyboardShortcutUtilTest {
         assertTrue(KeyboardShortcutUtil.shortcutMatchEvent(combiShortcutF, eventShortcutF));
         assertTrue(KeyboardShortcutUtil.shortcutMatchEvent(combiShiftF, eventShiftF));
         assertTrue(KeyboardShortcutUtil.shortcutMatchEvent(combiAltF, eventAltF));
+
+        assertTrue(KeyboardShortcutUtil.shortcutMatchEvent(combiShortcutAnyF, eventF));
+        assertTrue(KeyboardShortcutUtil.shortcutMatchEvent(combiShortcutAnyF, eventShortcutF));
+        assertTrue(KeyboardShortcutUtil.shortcutMatchEvent(combiShiftAnyF, eventF));
+        assertTrue(KeyboardShortcutUtil.shortcutMatchEvent(combiShiftAnyF, eventShiftF));
+        assertTrue(KeyboardShortcutUtil.shortcutMatchEvent(combiAltAnyF, eventF));
+        assertTrue(KeyboardShortcutUtil.shortcutMatchEvent(combiAltAnyF, eventAltF));
     }
 
     @Test
@@ -55,10 +68,25 @@ public class KeyboardShortcutUtilTest {
         assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiF, eventShortcutF));
         assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiF, eventShiftF));
         assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiF, eventAltF));
+
+        assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiShiftF, eventShortcutF));
+        assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiAltF, eventShortcutF));
+        assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiShiftAnyF, eventShortcutF));
+        assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiAltAnyF, eventShortcutF));
+
         assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiShortcutF, eventShiftF));
         assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiAltF, eventShiftF));
+        assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiShortcutAnyF, eventShiftF));
+        assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiAltAnyF, eventShiftF));
+
         assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiShortcutF, eventAltF));
+        assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiShiftF, eventAltF));
+        assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiShortcutAnyF, eventAltF));
+        assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiShiftAnyF, eventAltF));
+
         assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiShiftF, eventShiftAltF));
+        assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiShiftAnyF, eventShiftAltF));
         assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiAltF, eventShiftAltF));
+        assertFalse(KeyboardShortcutUtil.shortcutMatchEvent(combiAltAnyF, eventShiftAltF));
     }
 }
