@@ -367,8 +367,8 @@ Saves changes in details of the fosterer made in the profile page.
 
 **:exclamation: Important:**<br>
 
-* This command is only available while in fosterer profile page.
-* This command works only in a profile page, which appears after executing a view command.
+* This command is only available while in fosterer profile page.<br>
+* This command works only in a profile page, which appears after executing a view command.<br>
 
 </div>
 
@@ -500,8 +500,7 @@ Parameters:
 
 You can delete multiple fosterers at once.<br> 
 
-* Each index needs to be separated by a white space.<br> 
-
+* Each index needs to be separated by a white space.<br>
 * Any duplicates and extra white spaces will be ignored.
 
 </div>
@@ -655,7 +654,6 @@ edits using our user-friendly interface instead.
 **:warning: Caution:**<br>
 
 * If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
-
 * If your changes create an [invalid fosterer](#adding-a-fosterer-through-the-main-window--add), the app will not start. You will have to rectify the error in order to restart the app.
 
 </div>
