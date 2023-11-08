@@ -811,13 +811,16 @@ More information on usage: [list-freetime command]()
    1. Prerequisites: The date string must be in the DD/MM/YYYY or DD-MM-YYYY format, and there should not be any interviews scheduled for the given date
    2. Test case: `list-freetime 12/12/2099`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
    3. Test case: `list-freetime 12-12-2099`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
+   4. Success message shown in command box for both cases:</br> `Free times on 12/12/2099:`</br>`from: 09:00 to: 17:00`
 2. Listing the free time for a day using `DD/MM` or `DD MMM` format, where 
    1. Prerequisites: The date string must be in the DD/MM or DD MMM format, and there should not be any interviews scheduled for the given date
    2. Test case: `list-freetime 12/12`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
    3. Test case: `list-freetime 12 Dec`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
+   4. Success message shown in command box for both cases:</br> `Free times on 12/12/2023:`</br>`from: 09:00 to: 17:00`
 3. Listing the free time for a date in the past
    1. Prerequisite: The date string must follow one of the accepted date formats
-   2. Test case: `list-freetime 12-12-1970`</br>Expected: Command does not execute. Error details shown in error message
+   2. Test case: `list-freetime 12-12-1970`</br>Expected: Command does not execute.
+   3. Error message shown in command box:</br>`Input date cannot be in the past!`
 
 ### Listing all interviews for today
 
