@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
@@ -42,29 +40,16 @@ public class PersonListPanel extends UiPart<Region> {
             personType.setText("Specialists");
         }
 
-        // Set the text fill color after JavaFX initialization to prevent race condition
-        Platform.runLater(() -> {
-            if (personList.isEmpty()) {
-                personType.setTextFill(Color.GREY);
-            } else if (personList.get(0) instanceof Patient) {
-                personType.setTextFill(Color.AQUA);
-            } else {
-                personType.setTextFill(Color.GREENYELLOW);
-            }
-        });
         personList.addListener(
                 new ListChangeListener<Person>() {
                     @Override
                     public void onChanged(Change<? extends Person> c) {
                         if (personList.isEmpty()) {
                             personType.setText("No data found");
-                            personType.setTextFill(Color.GREY);
                         } else if (personList.get(0) instanceof Patient) {
                             personType.setText("Patients");
-                            personType.setTextFill(Color.AQUA);
                         } else {
                             personType.setText("Specialists");
-                            personType.setTextFill(Color.GREENYELLOW);
                         }
                     }
                 }

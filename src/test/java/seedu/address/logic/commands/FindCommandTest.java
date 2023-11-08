@@ -49,7 +49,6 @@ public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    //TODO: Change equals method, remember to do the tags.
     @Test
     public void findCommandEquals() {
         FindPredicateMap findPredicateMap1 = setupPatientFindPredicateMap();
