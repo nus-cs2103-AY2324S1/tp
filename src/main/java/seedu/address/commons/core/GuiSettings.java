@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import seedu.address.commons.util.ToStringBuilder;
 
@@ -13,8 +14,8 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class GuiSettings implements Serializable {
 
-    private static final double DEFAULT_HEIGHT = Screen.getPrimary().getVisualBounds().getHeight();
-    private static final double DEFAULT_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();
+    private static final double DEFAULT_HEIGHT = 500;
+    private static final double DEFAULT_WIDTH = 500;
 
     private final double windowWidth;
     private final double windowHeight;
@@ -24,8 +25,9 @@ public class GuiSettings implements Serializable {
      * Constructs a {@code GuiSettings} with the default height, width and position.
      */
     public GuiSettings() {
-        windowWidth = DEFAULT_WIDTH;
-        windowHeight = DEFAULT_HEIGHT;
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        windowWidth = screenBounds.getWidth() * 0.8;
+        windowHeight = screenBounds.getHeight() * 0.8;
         windowCoordinates = null; // null represent no coordinates
     }
 
