@@ -343,7 +343,7 @@ This feature builds upon the current design of Student and ClassDetails.
 
 #### Design considerations:
 
-The feature should be implemented upon the current design of Student and ClassDetails. Alternative designs may exist, such as treating the attendance and participation as association classes. 
+The feature should be implemented upon the current design of Student and ClassDetails. Alternative designs may exist, such as treating the attendance and participation as association classes.
 
 ### Config feature
 
@@ -612,7 +612,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. ClassManager shows an error message.
 
       Use case ends.
-  
+
 * 1c. The number of students to be selected is less than 1.
 
     * 1c1. ClassManager shows an error message.
@@ -638,7 +638,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. ClassManager shows an error message.
 
       Use case ends.
-  
+
 * 1b. The modifying request is invalid.
 
     * 1b1. ClassManager shows an error message.
