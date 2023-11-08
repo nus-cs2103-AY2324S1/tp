@@ -22,6 +22,8 @@ class SortCommandTest {
 
     private static final String ASCENDING_ORDER = "asc";
     private static final String DESCENDING_ORDER = "desc";
+    private static final String ASCENDING_ORDER_FULL = "ascending";
+    private static final String DESCENDING_ORDER_FULL = "descending";
     private static final String INVALID_ORDER = "invalid order";
     private static final String NO_ORDER = "";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -30,7 +32,7 @@ class SortCommandTest {
     void execute_sortListSalaryAscending_success() {
         SortCommand sortCommand = new SortCommand(SALARY_FIELD, ASCENDING_ORDER);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SALARY_FIELD);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SALARY_FIELD, ASCENDING_ORDER_FULL);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateSortedEmployeeListAscending(SALARY_FIELD);
@@ -42,7 +44,7 @@ class SortCommandTest {
     void execute_sortListNameAscending_success() {
         SortCommand sortCommand = new SortCommand(NAME_FIELD, ASCENDING_ORDER);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, NAME_FIELD);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, NAME_FIELD, ASCENDING_ORDER_FULL);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateSortedEmployeeListAscending(NAME_FIELD);
@@ -54,7 +56,7 @@ class SortCommandTest {
     void execute_sortListOvertimeAscending_success() {
         SortCommand sortCommand = new SortCommand(OVERTIME_FIELD, ASCENDING_ORDER);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, OVERTIME_FIELD);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, OVERTIME_FIELD, ASCENDING_ORDER_FULL);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateSortedEmployeeListAscending(OVERTIME_FIELD);
@@ -66,7 +68,7 @@ class SortCommandTest {
     void execute_sortListLeavesAscending_success() {
         SortCommand sortCommand = new SortCommand(LEAVES_FIELD, ASCENDING_ORDER);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, LEAVES_FIELD);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, LEAVES_FIELD, ASCENDING_ORDER_FULL);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateSortedEmployeeListAscending(LEAVES_FIELD);
@@ -78,7 +80,7 @@ class SortCommandTest {
     void execute_sortListSalaryDescending_success() {
         SortCommand sortCommand = new SortCommand(SALARY_FIELD, DESCENDING_ORDER);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SALARY_FIELD);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SALARY_FIELD, DESCENDING_ORDER_FULL);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateSortedEmployeeListDescending(SALARY_FIELD);
@@ -90,7 +92,7 @@ class SortCommandTest {
     void execute_sortListNameDescending_success() {
         SortCommand sortCommand = new SortCommand(NAME_FIELD, DESCENDING_ORDER);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, NAME_FIELD);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, NAME_FIELD, DESCENDING_ORDER_FULL);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateSortedEmployeeListDescending(NAME_FIELD);
@@ -102,7 +104,7 @@ class SortCommandTest {
     void execute_sortListOvertimeDescending_success() {
         SortCommand sortCommand = new SortCommand(OVERTIME_FIELD, DESCENDING_ORDER);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, OVERTIME_FIELD);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, OVERTIME_FIELD, DESCENDING_ORDER_FULL);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateSortedEmployeeListDescending(OVERTIME_FIELD);
@@ -114,7 +116,7 @@ class SortCommandTest {
     void execute_sortListLeavesDescending_success() {
         SortCommand sortCommand = new SortCommand(LEAVES_FIELD, DESCENDING_ORDER);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, LEAVES_FIELD);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, LEAVES_FIELD, DESCENDING_ORDER_FULL);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateSortedEmployeeListDescending(LEAVES_FIELD);
