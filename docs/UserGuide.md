@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-TAvigator is a **desktop app** targeted towards Teaching Assistants **for managing contacts, optimized for use via a 
-Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type 
+TAvigator is a **desktop app** targeted towards Teaching Assistants **for managing contacts, optimized for use via a
+Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type
 fast, TAvigator can get your contact management tasks done faster than traditional GUI apps. We offer a one-stop
 solution to manage your student details, including attendance records and assignment details.
 
