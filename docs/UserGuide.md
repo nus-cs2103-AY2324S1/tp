@@ -18,15 +18,15 @@ Table of Contents
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `ManageHR.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `ManageHR.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your app.
+3. Copy the file to the folder you want to use as the _home folder_ for your app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ManageHR.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ManageHR.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all employees.
@@ -39,7 +39,7 @@ Table of Contents
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -79,9 +79,9 @@ supervisors and subordinates.
 
 1. Only employees with `manager` role can be in charge of other employees.
 2. Each employee must either be `manager` and `subordinate` but not both.
-2. Both employees that are either `manager` or `subordinate` can have multiple `manager` in charge of them.
-3. An employee could have no designated "manager" responsible for overseeing them.
-4. A `manager` employee could not edit their `role` and `name` attribute when he or she is in charge of any subordinates.
+3. Both employees that are either `manager` or `subordinate` can have multiple `manager` in charge of them.
+4. An employee could have no designated "manager" responsible for overseeing them.
+5. A `manager` employee could not edit their `role` and `name` attribute when he or she is in charge of any subordinates.
 
 ### Usage Instructions
 
@@ -104,7 +104,7 @@ When editing an existing employee in ManageHR, you can also establish or modify 
     - The `MANAGER NAME` stated must correspond with an existing employee with the same name and is also a `manager`.
 
 #### Deleting an Existing Employee with Manager-Subordinate Relationships
-hen deleting an existing employee from ManageHR, you will need to account for the manager-subordinate relationships. Follow these steps:
+When deleting an existing employee from ManageHR, you will need to account for the manager-subordinate relationships. Follow these steps:
 1. The employee to be deleted must not be in charge of any employees.
     - If the employee to be deleted has employees under him, all the employees under said employee must be reassigned.
 
@@ -177,21 +177,11 @@ Description: Lists all employees currently stored
 
 Format: `list`
 
-Acceptable values for each parameter:
-
-| Parameters  | Accepted input |
-|-------------|----------------|
-| nil         | -              |
-
-Succeed:
-
-* Outcome: If the command is successful, it lists all employees and
-  displays a message "Listed all employees" along with a table of employee data as shown below.
+| Outcome     | Output                                                                                                                |
+|-------------|-----------------------------------------------------------------------------------------------------------------------|
+| **Success** | Lists all employees and displays a message "Listed all employees" along with a table of employee data as shown below. |
 
 ![Display from list Command](images/listDisplay.png)
-
-Fail:
-* Outcome: If the command format is incorrect, it displays a warning message "Unknown command."
 
 ### Editing an employee : `edit`
 
