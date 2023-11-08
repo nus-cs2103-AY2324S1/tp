@@ -30,8 +30,8 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
     * [Marking an employee's attendance: `mark`](#marking-an-employees-attendance-mark)
     * [View an employee's attendance report: `attendance`](#view-an-employees-attendance-report-attendance)
     * [Listing all employees: `list`](#listing-all-employees-list)
-    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
     * [Locating employees by name: `find`](#locating-employees-by-name-find)
+    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
     * [Exiting the program: `exit`](#exiting-the-program-exit)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
@@ -50,10 +50,8 @@ ManaGease is a **desktop app for <ins>HR managers</ins> to manage full time staf
 3. Copy the file to the folder you want to use as the **home folder** for your ManaGease. 
 4. Open a command terminal, `cd` into the folder you put the jar file in(i.e. `cd DIRECTORY_PATH`), and enter the `java -jar ManaGease.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)<br>
-![UiAnnotated](images/UiAnnotated.png)
-
-
+   <img src="images/Ui.png" width="800"><br>
+   <img src="images/UiAnnotated.png" width="800"><br>
 5. Type the command in the command box and press Enter on your keyboard to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -75,6 +73,7 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 * Go back to [Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -124,7 +123,6 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 | `/r`    | `REASON`          | case-insensitive words from the following list:<br/>1. cpf (means `EMPLOYEE_CPF_DEDUCTION`)<br/>2. absence (means `ABSENCE`)<br/>3. no pay (means `NO_PAY_LEAVE`)<br/>4. bonus (means `ANNUAL_BONUS`)<br/>5. transport (means `TRANSPORT_ALLOWANCE`)                                                                                                                                                                                                                                                                                                                   | `/r no pay`                 |
 | `/at`   | `ATTENDANCE_TYPE` | case-insensitive words from the following list:<br/>1. present (means `PRESENT`)<br/>2. late (means `LATE`)<br/>3. absent (means `ABSENT`)                                                                                                                                                                                                                                                                                                                                                                                                                             | `/at late`                  |
 
-----------------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
@@ -153,7 +151,8 @@ This feature allows users to add a new employee to the ManaGease app, creating a
 
 **Command format:**
 ```
-add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /l ANNUAL_LEAVE
+add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE 
+    /s SALARY /l ANNUAL_LEAVE
 ```
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -167,7 +166,7 @@ Example:
 Output:
 * ManaGease should display a confirmation message indicating that the employee has been successfully added to the database. (e.g. `Employee "Jane Smith" successfully added!`)
 * The employee's profile should be updated with the provided information.
-  <br>![result for adding employee](images/addSuccess.png)
+  <br><img src="images/addSuccess.png" width="700" height="1000">
 
 * If prefix used is not defined, an error message will appear.
   <br>![failed result for adding employee](images/addFailed.png)
@@ -237,9 +236,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd employee in the employee directory.
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
-
+Output:
 * If there are multiple employees with the same name, all the matching employees would be displayed. Hence, ManaGease will return “Here is the list of the matching employees:”
-![result for deleting same-name employee](images/deleteSameName.png)
+  <br><img src="images/deleteSameName.png" width="500" height="800">
 * Otherwise, ManaGease should display a confirmation message indicating that the employee information has been successfully deleted.
 * The employee's list should be updated by removing the employee.
   <br>![result for deleting employee](images/deleteSuccess.png)
@@ -584,10 +583,10 @@ Examples:
 
 Output:
 * ManaGease should display the payroll of the employee specified by the `INDEX` or `NAME`, if the input is valid.
-  <br>![result for generating payslip](images/payrollSuccess.png)
+  <br><img src="images/payrollSuccess.png" width="600" height="700">
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If there are more than one employee with the same name in the command, the app will display `x employees found! Refer to their indexes for payroll calculation` and will list down those employees for the user to view. The user should then use their index numbers to calculate the payroll.
-  <br>![result for same name](images/payrollWithSameName.png)
+  <br><img src="images/payrollWithSameName.png" width="600" height="700">
 * If the command is incorrect, the app should display the following message.
   <br>![result for incorrect payroll command](images/incorrectPayrollCommand.png)
 
@@ -733,21 +732,7 @@ Shows a list of all employees in the workplace.
 Output:
 
 * ManaGease should display a list of all employees in the workplace.
-  <br>![result for listing all employees](images/listSuccess.png)
-
-* Go back to [Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
-
-### Clearing all entries: `clear`
-
-**What it does**
-
-Clears all entries from the address book.
-
-**Command format:**
-
-`clear`
+  <br><img src="images/listSuccess.png" width="625" height="700">
 
 * Go back to [Table of Contents](#table-of-contents)
 
@@ -772,11 +757,23 @@ Finds employees whose names contain any of the given keywords.
 
 Example:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  <br>![result for 'find alex david'](images/findAlexDavidResult.png)
+  <br><img src="images/findAlexDavidResult.png" width="625" height="700">
 
 * Go back to [Table of Contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
+
+### Clearing all entries: `clear`
+
+**What it does**
+
+Clears all entries from the address book.
+
+**Command format:**
+
+`clear`
+
+* Go back to [Table of Contents](#table-of-contents)
 
 ### Exiting the program: `exit`
 
@@ -789,8 +786,6 @@ Exits the program.
 `exit`
 
 * Go back to [Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Saving the data
 
