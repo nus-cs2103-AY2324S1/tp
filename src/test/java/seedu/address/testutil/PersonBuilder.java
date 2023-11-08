@@ -11,6 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Score;
 import seedu.address.model.person.ScoreList;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
@@ -133,6 +134,18 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Status} of the {@code Person} that we are building.
+     * @param score the score to be set
+     * @return PersonBuilder
+     */
+    public PersonBuilder withInterviewScore(int score) {
+        ScoreList newScoreList = new ScoreList();
+        newScoreList.updateScoreList(new Tag("Interview", "assessment"), new Score(score));
+        this.scoreList = newScoreList;
+        return this;
+    }
+
+    /**
      * Sets the {@code LinkedIn} of the {@code Person} that we are building.
      * @param username
      * @return PersonBuilder
@@ -169,6 +182,8 @@ public class PersonBuilder {
      */
     public Person build() {
         Person createdPerson = new Person(name, phone, email, address, remark, tags);
+        createdPerson.setStatus(status);
+        createdPerson.setScoreList(scoreList);
         return createdPerson;
     }
 

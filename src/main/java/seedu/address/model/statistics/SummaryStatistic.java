@@ -230,9 +230,10 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
         case SCORE:
             Stream<Integer> scoreValueStream = getSortedScoreValueStream(tag);
             Stream<Person> filteredPersonStream = scoreValueStream.filter(scoreValue -> scoreValue >= value)
-                    .map(scoreValue -> filteredPersonsWithScoreTag(tag)
-                    .filter(person -> person.getScoreForTag(tag).value >= scoreValue))
-                    .flatMap(personStream -> personStream);
+                    .flatMap(scoreValue -> personData.stream()
+                    .filter(person -> person.getTags().contains(tag)
+                            && person.getScoreList().hasTag(tag))
+                    .filter(person -> person.getScoreForTag(tag).value >= scoreValue)).distinct();
             List<Person> filteredPersonList = filteredPersonStream.collect(Collectors.toList());
             return filteredPersonList;
         case MEAN:
