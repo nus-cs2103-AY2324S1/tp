@@ -344,7 +344,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
 
 * **Alternative 1 (current choice):** Have two hardcoded list of acceptable time formats. One with date and time, the other for time
     * Pros:
-      * Easy to implement.
+      * Easy to implement
       * Avoids code duplication
     * Cons:
       * May have performance issues in terms of time (i.e. might have to loop through the whole list to find a suitable format)
@@ -355,7 +355,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
 
 * **Alternative 2 :** Have two hardcoded list of acceptable time formats. One with date and time, the other for time, but parse the two types of time string (i.e. strings with date & time, and strings with date only separately)
     * Pros:
-        * Easy to implement.
+        * Easy to implement
         * Less prone to bugs since there are now separate methods for parsing the two types of strings
     * Cons:
         * Causes code duplication since the algorithm is virtually the same for both `parseDate` methods 
@@ -414,6 +414,27 @@ Aspect: How the command finds free times:
 
 #### Design consideration
 
+### List interviews done/not done feature
+
+#### Implementation
+The list interviews done/not done feature allows the user to see all the interviews that are done or not done in a single command. The command format is `list-i-done` to show all the interviews that are done, and `list-i-not-done` to show all interviews that are not done.
+#### How is the command executed
+1. The user inputs `list-i-done` or `list-i-not-done` 
+2. The `LogicManager` receives the command string and forwards it to the `AddressBookParser`.
+3. The `AddressBookParser` checks the type of command and returns a `ListInterviewsDoneCommand` instance or `ListInterviewsNotDoneCommand` instance
+4. The `LogicManager` executes the `ListInterviewsDoneCommand` or `ListInterviewsNotDoneCommand`
+5. The `execute` method of `ListInterviewsDoneCommand` or `ListInterviewsNotDoneCommand` will call `Model#updateFilteredInterviewList(Predicate<Interview> predicate)`, where an `InterviewIsDonePredicate` or `InterviewNotDonePredicate` is passed as the argument
+6. `Model#updateFilteredInterviewList` will be called with the given predicate, thus updating the internal `FilteredList` of interviews to show only those that are done, or those that are not done. The `CommandResult` containing the success message will be returned to `LogicManager`.
+7. The GUI will be updated automatically by when the list changes.
+#### Design consideration
+Aspect: How the command is implemented
+* **Alternative 1 (current choice):** Use the existing open-closed principle of AB3 to add these new commands
+    * Pros:
+        * Reduces this to a problem that AB3 has already solved
+        * Maintains consistency with the AB3 format
+        * Consequently, it is easy to implement
+    * Cons:
+        * More command classes have to be added, which can increase coupling
 ### Rate interview feature
 
 #### Implementation
@@ -425,10 +446,26 @@ Aspect: How the command finds free times:
 ### Sort interview feature
 
 #### Implementation
+The sort interview feature allows the user to sort all the interviews that have scheduled via the commands `sort SORT_PARAMETER`, where `SORT_PARAMETER` can either be `rate` or `time`.
 
+The `sort` command is facilitated by the `SortRateCommand` and the `SortTimeCommand`. It enables the user to sort all the scheduled interviews by rating or timing. For rating, the interviews will be sorted in descending order of rating. For interview times, the interviews will be sorted in ascending chronological order of start time. 
 #### How is the command executed
-
+1. The user inputs the `sort-rate` or `sort-time` command
+2. The `LogicManager` receives the `sort-rate` or `sort-time` command string and forwards it to the `AddressBookParser`.
+3. The `AddressBookParser` checks the type of command and returns either `SortRateCommand` or `SortTimeCommand`.
+4. The `LogicManager` executes the `SortRateCommand` or `SortTimeCommand` which calls the `Model#sortInterviewList(Comparator<Interview> comparator)` method.
+5. The `SortRateCommand` or `SortTimeCommand` has their own `Comparator` object instance. Their respective comparators will be passed into the `Model#sortInterviewList(Comparator<Interview> comparator)`
+6. `Model#sortInterviewList(Comparator<Interview> comparator)` will then call the `AddressBook#sortInterview(Comparator<Interview> comparator)`, passing in the given comparator as argument. 
+7. `Model#sortInterviewList(Comparator<Interview> comparator)` will call the `UniqueInterviewList#sort(Comparator<Interview> comparator)`, which will call the built-in `FXCollections#sort(Comparator<T> comparator)` method, which will then sort the internal list of interviews by either rating or timing. Note that `FXCollections#sort(Comparator<T> comparator)` is used since the list of interviews is implemented as an `ObservableList`
+8. The GUI will be updated automatically by when the list changes.
 #### Design consideration
+Aspect: How the sort command works
+* **Alternative 1 (current choice):** Implement the sort method in the `ModelManager`, `AddressBook`, and the `UniqueInterviewList` class
+    * Pros:
+        * Does not violate the _Law of Demeter_ principle, since the sort is called through `Model` in the `SortRateCommand` or `SortTimeCommand`, where the `Model` instance is passed as a parameter to the respective `execute` commands
+        * Does not violate the _information hiding_ principle. This is because the internal list of interviews is never accessed nor modified directly by the `execute` command of the respective command objects
+    * Cons:
+        * The command will cause the control to be passed to `ModelManager` first, then to `AddressBook` and then finally to `UniqueInterviewList` where only in `UniqueInterviewList` is the internal list sorted. This results in an additional layer of abstraction, which increases the complexity of the command slightly
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -455,10 +492,8 @@ Aspect: How the command finds free times:
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
-* Manage applicants and schedule interviews faster than a typical mouse/GUI driven contact and calendar app.
-* Easy viewing for top candidates.
-* Easy viewing for scheduling interviews.
+**Value proposition**: manage applicants and schedule interviews faster than a typical mouse/GUI driven contact and calendar app
+
 
 ### User stories
 
@@ -468,13 +503,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|-------------------------------------------------------|------------------------------------------|---------------------------------------------------------------------------|
 | `* * *`  | New user of the app                                   | see usage instructions                   | refer to instructions when I first started to use the App                 |
 | `* * *`  | Engineering Manager ready for job applicant           | add a new applicant                      | save their contact details into the App                                   |
+| `* * *`  | Engineering Manager opening a job role                | add a new job role                       | keep track of the job role available for application                      |
 | `* * *`  | Engineering Manager ready to start an interview       | add a new interview slot                 | save the interview information into the App                               |
 | `* * *`  | Engineering Manager ready for next round of interview | delete an applicant                      | remove their contact details that I no longer need                        |
 | `* * *`  | Engineering Manager that finished an interview        | delete an interview                      | remove the interview that has already been completed                      |
 | `* * *`  | Busy Engineering Manager                              | find an applicant by name                | locate details of applicants without having to go through the entire list |
-| `* * *`  | Busy Engineering Manager                              | find an interview by job title           | easily locate the interviews which have been scheduled                    |
-| `* * *`  | Engineering Manager with many applicants              | rate an interview                        | record the performance of the applicant for that interview                |
-| `* *`    | Busy Engineering Manager                              | find empty slots of time                 | easily schedule an interview on the available timings                     |
+| `* * *`  | Busy Engineering Manager                              | find a job role by name                  | easily locate the job role which are still available                      |
 | `* *`    | Busy Engineering Manager                              | set reminder of interview                | stay organised and track upcoming interview                               |
 | `* *`    | Engineering Manager with sensitive information        | hide private contact details             | protect the privacy of the applicants information in the App              |
 | `* *`    | Engineering Manager with many applicants              | sort the applicants by skill             | prioritise and focus on the most promising candidates                     |
@@ -679,22 +713,19 @@ that are different from the MSS.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancement**
-
-1. The current error message when adding an interview where the start and/or end date string is a valid date but is missing time is too general.
+The current error message when adding an interview where the start and/or end date string is a valid date but is missing time is too general.
 We plan to make the error message also mention why the command is not accepted and the reason for the failure:
 Please enter an interview time!
 
-2. The current implementation of mark-i allows the user to mark interviews before the interview has been completed,
+The current implementation of mark-i allows the user to mark interviews before the interview has been completed,
 based on the end time of the interview. We plan to not allow the user to mark interviews that have not passed.
 So, interviews whose end time is after the current time cannot be marked as done.
 
-3. The current implementation of the find-i and find-a commands does not display a constant status of whether the find
+The current implementation of the find-i and find-a commands does not display a constant status of whether the find
 filter is being applied to the current list. E.g. When you perform a find-i command followed by some other command that
 changes the interview list, you have no way to tell if the previous "find-i" filter is still being applied.
 We plan to update the UI to display a constant status of what filter is currently being applied to the applicant and
 interview list.
-
-4. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -722,25 +753,70 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+3. _{ more test cases …​ }_
+
+### Viewing help
+
+### Clearing all the data
+
+### Exiting the program
+
+### Saving the data
+1. Dealing with missing/corrupted data files
+
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+
+2. _{ more test cases …​ }_
+
+### Adding an applicant
+
 ### Deleting an applicant
 
 1. Deleting an applicant while all applicants are being shown
 
-   1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   3. Test case: `delete 0`<br>
-      Expected: No applicant is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `delete 0`<br>
+       Expected: No applicant is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
+2. _{ more test cases …​ }_
 
-### Saving data
+### Editing an applicant
 
-1. Dealing with missing/corrupted data files
+### Finding applicants from the list
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Listing all applicants
 
+### Adding an interview
+
+### Deleting an interview
+
+### Editing an interview
+
+### Finding interviews from the list
+
+### Listing all interviews
+
+### Listing all free timing for the given day
+
+### Listing all interviews for today
+
+### Marking an interview as done
+
+### Rating an interview
+
+### Listing all completed interview
+
+### Listing all incomplete interview
+
+### Sorting the interview list by rating
+
+### Sorting the interview list by start-time
+
+[Back to the Table of Contents](#table-of-contents)
