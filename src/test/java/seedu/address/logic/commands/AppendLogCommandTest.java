@@ -293,7 +293,6 @@ public class AppendLogCommandTest {
         assertEquals("Person(s) already in list: Alice Pauline, ID: T7243948H. "
                 + "They were not appended to the log.", commandResult.getFeedbackToUser());
 
-        System.out.println(commandResult.getFeedbackToUser());
 
         assertEquals(3, model.getLogBook().getPersonList().size());
         assertEquals(existingPerson1, model.getLogBook().getPersonList().get(0));
@@ -320,7 +319,6 @@ public class AppendLogCommandTest {
         assertEquals("Person(s) already in list: Alice Pauline, ID: T7243948H. Benson Meier, ID: S1234567B. "
                 + "Carl Kurz, ID: S8765432B. They were not appended to the log.", commandResult.getFeedbackToUser());
 
-        System.out.println(commandResult.getFeedbackToUser());
 
         assertEquals(3, model.getLogBook().getPersonList().size());
         assertEquals(existingPerson1, model.getLogBook().getPersonList().get(0));
