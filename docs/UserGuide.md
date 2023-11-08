@@ -550,7 +550,7 @@ Graphical User Interface. Refers to computer programs with a visual window you c
 The Menu Sidebar is the area on the left of the Patient List View. It contains buttons that allow you to perform actions on HealthSync. Currently, only the `User Guide` and `Exit` buttons are functional. The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
 
 ### [Patient List View](#patient-list-view)
-The main part of HealthSync where the list of all your patients are displayed. This is where you can view patient profiles in the form of cards, and perform actions on them. When actions are performed, the Patient List View will be updated to reflect the changes/results.
+The main part of HealthSync where the list of all your patients are displayed. This is where you can view patient profiles in list form, and perform actions on them. When actions are performed, the Patient List View will be updated to reflect the changes/results.
 
 ### [Logger Tab](#logger-tab)
 A 'sticky-note'-like area on the right of the Patient List View.
