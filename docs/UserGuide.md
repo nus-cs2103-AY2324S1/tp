@@ -14,7 +14,7 @@ Graphical User Interface (GUI). If you can type fast, CM 23 can get your class m
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -44,7 +44,7 @@ Graphical User Interface (GUI). If you can type fast, CM 23 can get your class m
 
 --------------------------------------------------------------------------------------------------------------------
 
-## GUI Overview
+# GUI Overview
 
 <img alt="Gui" src="images/Ui.png" width="600"> </br>
 
@@ -57,7 +57,7 @@ The **GUI** is split up into 4 main sections.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <box type="info" seamless>
 
@@ -85,7 +85,7 @@ The **GUI** is split up into 4 main sections.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Class Number
+## Class Number
 
 * Class Number refers to the tutorial class number of a particular course.
 * Class Number is not case-sensitive, and it must begin with 1 to 3 alphabet letters, followed by 1 to 5 digits, and end with an optional single alphabetical character. Class Number must not be blank.
@@ -95,20 +95,20 @@ The **GUI** is split up into 4 main sections.
     - `SG10`
     - `ABC12345D`
 
-### Student Number
+## Student Number
 
 * Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the letter 'A' or 'a', followed by 1 or more digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
 
-### Command navigation
+## Command navigation
 
 * Class Manager allows you to navigate to previously entered commands using the arrow keys. Navigate to earlier commands using the **up arrow** key, and later commands using the **down arrow** key.
 
-### Saving your data
+## Saving your data
 
 Class Manager data is saved on your computer automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+## Editing the data file
 
 Class Manager data is saved as a JSON file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below.
 
@@ -123,11 +123,11 @@ If your changes to the data file make its format invalid, Class Manager 2023 wil
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Commands
+# Commands
 
-### Essential commands
+## Essential commands
 
-#### Configure Class Manager : `config`
+### Configure Class Manager : `config`
 
 <box type="warning" seamless>
 
@@ -149,7 +149,7 @@ Examples:
 
 ---
 
-#### Open help window : `help`
+### Open help window : `help`
 
 Opens the help window that shows a summary of all commands and its parameters, with a `Copy URL` button that provides access to this help page.
 
@@ -159,9 +159,9 @@ Format: `help`
 
 ---
 
-### Miscellaneous commands
+## Miscellaneous commands
 
-#### Exit Class Manager : `exit`
+### Exit Class Manager : `exit`
 
 Exits the application.
 
@@ -169,7 +169,7 @@ Format: `exit`
 
 ---
 
-#### View command history : `history`
+### View command history : `history`
 
 Shows a list of all previously entered inputs in the result display box, with the most recent inputs at the top of the list.
 
@@ -177,7 +177,7 @@ Format: `history`
 
 ---
 
-#### Load a save file : `load`
+### Load a save file : `load`
 
 Load student information from an existing JSON file. Copy the JSON file to be loaded into the `/data` folder. The data in the JSON file will be loaded into the app via the `load` command. This file also becomes the new default save file. You can refer to [this section](#editing-the-data-file) for more information on the valid format of the data file.
 
@@ -194,7 +194,7 @@ Example:
 
 ---
 
-#### Randomly select students : `random`
+### Randomly select students : `random`
 
 Randomly select a specific number of students from all students displayed in Class Manager.
 
@@ -208,7 +208,7 @@ Example:
 
 ---
 
-#### Redo a command : `redo`
+### Redo a command : `redo`
 
 Redo a previously undone command that modified the srare Class Manager. Redo only works with commands that can be undone. Class Manager only stores up to 10 modified states. Redo can be used multiple times to redo multiple undo commands, or until Class Manager reaches its most recent state after a maximum of 9 redos.
 
@@ -235,7 +235,7 @@ Displayed result if there are no more commands to redo: `No more commands to red
 
 ---
 
-#### Undo a command : `undo`
+### Undo a command : `undo`
 
 Undo the previous command that modified the state of Class Manager. Undo only works with commands that changes Class Manager, and does not work with commands such as `load` and `config`. Class Manager only stores up to 10 modified states. Undo can be used multiple times to undo multiple commands, or until Class Manager reaches its last stored state after a maximum of 9 undos.
 
@@ -268,15 +268,17 @@ Toggles between light and dark color themes.
 
 Format: `theme`
 
-##### Dark theme
+#### Dark theme
 <img alt="theme_dark" src="images/theme-dark.png" width="700" > <br><br>
 
-##### Light theme
+#### Light theme
 <img alt="theme_light" src="images/theme-light.png" width="700" >
 
-### Student list commands
+---
 
-#### Add a student : `add`
+## Student list commands
+
+### Add a student : `add`
 
 Adds a student to Class Manager.
 
@@ -300,7 +302,7 @@ Examples:
 
 ---
 
-#### Comment on a student : `comment`
+### Comment on a student : `comment`
 
 Adds or replaces a comment of an existing student in Class Manager.
 
@@ -323,7 +325,7 @@ Examples:
 
 ---
 
-#### Delete all students : `clear`
+### Delete all students : `clear`
 
 Clears all existing students from Class Manager. This command will not delete the data file. Use the `undo` command to undo this command.
 
@@ -331,7 +333,7 @@ Format: `clear`
 
 ---
 
-#### Delete one student : `delete`
+### Delete one student : `delete`
 
 Deletes an existing student in Class Manager by specifying the student number of the student to be deleted.
 
@@ -344,7 +346,7 @@ Example:
 
 ---
 
-#### Edit a student's details : `edit`
+### Edit a student's details : `edit`
 
 Edits an existing student's details in Class Manager.
 
@@ -377,7 +379,7 @@ Format: `list`
 
 ---
 
-#### Lookup students : `lookup`
+### Lookup students : `lookup`
 
 Search and display students satisfying all given fields (Only one keyword needs to match per field).
 
@@ -407,7 +409,7 @@ Examples:
 
 ---
 
-#### Tag a student : `tag`
+### Tag a student : `tag`
 
 Tags the existing student in Class Manager.
 
@@ -425,10 +427,10 @@ Examples:
 
 ---
 
-### Class details commands
+## Class details commands
 
 
-#### Mark a student as absent : `absent`
+### Mark a student as absent : `absent`
 
 Mark the tutorial attendance for an existing student as absent in Class Manager.
 
@@ -442,7 +444,7 @@ Examples:
 
 ---
 
-#### Mark a student as present : `present`
+### Mark a student as present : `present`
 
 Mark the tutorial attendance for an existing student as present in Class Manager.
 
@@ -456,7 +458,7 @@ Examples:
 
 ---
 
-#### Mark all displayed students as absent : `absent-all`
+### Mark all displayed students as absent : `absent-all`
 
 Mark the tutorial attendance for all students in the current list displayed as absent in the class manager.
 
@@ -469,7 +471,7 @@ Examples:
 
 ---
 
-#### Mark all displayed student as present : `present-all`
+### Mark all displayed students as present : `present-all`
 
 Mark the tutorial attendance for all students in the current list displayed as present in Class Manager.
 
@@ -482,7 +484,7 @@ Examples:
 
 ---
 
-#### Record class participation for a student : `class-part`
+### Record class participation for a student : `class-part`
 
 Record the class participation for an existing student in Class Manager.
 
@@ -501,7 +503,7 @@ Examples:
 
 ---
 
-#### Set assignment grade for a student : `grade`
+### Set assignment grade for a student : `grade`
 
 Setting an assignment grade for an existing student in Class Manager.
 
@@ -516,7 +518,7 @@ Examples:
 
 ---
 
-#### View a student's class details : `view`
+### View a student's class details : `view`
 
 View the class details of a student that will be displayed on the right side of the application.
 
@@ -535,39 +537,39 @@ Example:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Class Manager 2023 home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+# Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+# Command summary
 
-### Essential commands
+## Essential commands
 | Action                                                         | Format, Examples                                                            |
 |----------------------------------------------------------------|-----------------------------------------------------------------------------|
 | [**Configure Class Manager**](#configure-class-manager-config) | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/10 #a/3` |
 | [**Open help window**](#open-help-window-help)                 | `help`                                                                      |
 
-### Miscellaneous commands
+## Miscellaneous commands
 | Action                                                           | Format, Examples                                 |
 |------------------------------------------------------------------|--------------------------------------------------|
 | [**Exit Class Manager**](#exit-class-manager-exit)               | `exit`                                           |
 | [**View command history**](#view-command-history-history)        | `history`                                        |
 | [**Load a save file**](#load-a-save-file-load)                   | `load f/FILE_NAME`<br> e.g. `load f/sample`      |
-| [**Randomly select students**](#randonly-select-students-random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2` |
+| [**Randomly select students**](#randomly-select-students-random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2` |
 | [**Redo a command**](#redo-a-command-redo)                       | `redo`                                           |
 | [**Undo a command**](#undo-a-command-undo)                       | `undo`                                           |
-| [**Toggle UI theme**](#toggle-UI-theme-theme)                    | `theme`                                          |
+| [**Toggle UI theme**](#toggle-ui-theme-theme)                    | `theme`                                          |
 
-### Student list commands
+## Student list commands
 | Action                                                         | Format, Examples                                                                                                                                             |
 |----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add a student**](#add-a-student-add)                        | `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend` |
@@ -575,11 +577,11 @@ Example:
 | [**Delete all students**](#delete-all-students-clear)          | `clear`                                                                                                                                                      |
 | [**Delete one student**](#delete-one-student-delete)           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                      |
 | [**Edit a student's details**](#edit-a-student-s-details-edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
-| [**List all students**](#list-all-student-list)                | `list`                                                                                                                                                       |
+| [**List all students**](#list-all-students-list)               | `list`                                                                                                                                                       |
 | [**Lookup students**](#lookup-students-lookup)                 | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
 | [**Tag a student**](#tag-a-student-tag)                        | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                  |
 
-### Class details commands
+## Class details commands
 | Action                                                                                               | Format, Examples                                                                                                         |
 |------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
@@ -592,7 +594,7 @@ Example:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+# Glossary
 
 * **cd**: Change directory command in terminal/command line. cd takes the name of the folder you want to navigate to as an argument. The full command is cd `your-directory`.
 * **Student Number**: Matriculation number of NUS student. In Class Manager, it must begin with the capital 'A', followed by 1 or more digits, and end with a single alphabetical character. Student Number must not be blank as well.
