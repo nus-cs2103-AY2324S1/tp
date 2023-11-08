@@ -294,6 +294,24 @@ in which the `VersionedNetworkBook` only creates a shallow copy of the current l
 and hence any mutation of the `Person` object might introduce bugs.
 
 
+### Open link/email
+
+The implementation of the opening link/email command follows the convention of normal command, where `OpenEmailCommandParser`/`OpenLinkCommandParser` is responsible for parsing the user input string into an executable command. Below illustrates the process for open link command. The process of opening email is similar, where the reader can simply replace `link` with `email` to get the process for opening email.
+
+![open link diagram](images/open/OpenDiagram.png)
+
+`OpenLinkCommandParser` first obtains the values corresponding to the preamble and the flag `/index`, and return an object of class `OpenLinkCommand`.
+* If there are multiple `/index` tags, `OpenLinkCommandParser` throws a `ParseException`.
+* If there is no `/index` tag, the link index takes the default value of `1`.
+
+`OpenLinkCommand` then executes on the `Model` to open the link at `personIndex` (index of contact) and `linkIndex` (index of contact). The `Model` calls on the `NetworkBook`, which then calls on the `Person` at the correct index to open the link at `linkIndex`.
+
+The `Person` opens the link by first detects which OS the application is running on.
+* On Windows, the `Person` executes `Desktop::browse(URI)`, where [`Desktop`](https://docs.oracle.com/javase/8/docs/api/java/awt/Desktop.html) and [`URI`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/net/URI.html) are java classes from default packages.
+* On Mac OS, the `Person` executes the `open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class, which is a built-in class in java language. The `open` command in the terminal opens the computer's default browser if the `URI` supplied is correctly formatted to be a web link.
+* On Ubuntu, the `Person` executes the `xdg-open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class.
+
+
 ### \[Proposed\] Undo/redo feature
     
 #### Proposed Implementation
