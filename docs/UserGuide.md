@@ -79,7 +79,7 @@ Refer to the [Features](#features) below for details of each command.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -91,7 +91,8 @@ Creates a tag and categorises it to the specified category.
 You can customize these categories as per your needs and tags will be 
 color coded by the different categories. 
 
-The only restriction is that you can only define up to 5 different categories (excluding the *assessment* category for score-related tags).
+The only restriction is that you can only define up to 6 different categories (including the *assessment* category for score-related tags. Hence if you have
+defined a tag category *assessment* for score-related tags, you will only be able to define 5 other categories).
 
 Format: `create t/CATEGORY TAGNAME…​`
 
@@ -104,21 +105,38 @@ Format: `create t/CATEGORY TAGNAME…​`
 * Use this command for frequently used tags for better efficiency in tagging candidates!
 </box>
 
-**Note:** The tags created using this command can be used to tag candidates using the `add` or `edit` command. Tagging
+**Note:**
+* The tags created using this command can be used to tag candidates using the `add` or `edit` command. Tagging
 candidates without previously categorising the tags would still work but the tags would be *uncategorised*.
+* `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further.
+This feature will be supported in future iterations of JABPro through the `edit tags` command.
 
 Examples:
 * `create t/role developer`
 * `create t/dept software t/dept marketing`
 
 An example of the `create` command in action:
-[Create](images/create.png)
+![Create](images/create.png)
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to JABPro.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]…​`
+
+**Notes regarding the design of the `add` command:**
+* The uniqueness of the person is determined by the name only. This means that you cannot have 2 persons with the same name in the application book.
+* All other fields other than name can be identical between different people in JABPro.
+* `n/NAME` - `Name` must be alphanumeric (Letters and numbers, no symbols allowed such as `/`, `,` ...)
+* `p/PHONE_NUMBER` - `PHONE_NUMBER` must contain numbers only and should be at-least 3 digits long
+* `e/EMAIL` - `EMAIL` must be the standard email address format (There must be an email-prefix followed by  `@` symbol and email domain)
+* `a/ADDRESS` - `ADDRESS` can be any value, including special characters such as `#`, `,` ...
+* `n/NAME`, `p/PHONE_NUMBER`, `e/EMAIL`, `a/ADDRESS` are mandatory fields.  
+They cannot be blank and must follow the convention as mentioned above.
+* `t/[CATEGORY] TAGNAME` - `TAGNAME` must be alphanumeric with no spaces. Any details after the space will be ignored.
+* The `t/[CATEGORY] TAGNAME` field is optional. You can add as many tags as you want, including 0 tags.
+* Persons added using the `add` command will be added to the end of the list.
+
 
 **Notes on adding tags:**
 * If you would like to tag a user with a tag that has not been categorised yet using the `create` command,
@@ -127,6 +145,7 @@ you can specify the category that you would like it to be categorised to in the 
 the tag would still be saved but it would be "uncategorised" by default.
 * If you have multiple tags in different categories with the same name, you must specify the category when you want to 
 add one of these tags to the candidate you are adding.
+
 
 <box type="tip" seamless>
 
@@ -141,9 +160,13 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/uncategorisedtag`
 
+Negative Examples:
+* `add n/Alex Yoh p/82384839 e/alexyeo@gmail.com a/Gardens by bay` (Name already exists in JABPro)
+
+
 ### Adding a remark to a person: `remark`
 
-Edits a remark to an existing person to the address book.
+Edits a remark of an existing person in JABPro.
 
 Format: `remark INDEX r/REMARK`
 
@@ -151,16 +174,18 @@ Format: `remark INDEX r/REMARK`
 * The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark.
 * You can empty out a remark by inputting an empty string.
 * You can get the remark previously inputted by using the **REMARK** keyword. It will be replaced with the previous remark. The keyword **REMARK** is case-sensitive. This means that `remark 1 r/**remark**` will just replace the remark with the word `**remark**`.
+* `r/` is optional, however omitting it will clear the remark of the person at that `INDEX`.
 
 Examples:
 *  `remark 1 r/Great attitude, hardworking` Edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`.
 *  `remark 1 r/**REMARK** furthermore he is great at teamwork` Edits the remark of the 1st person to have a remark `Great attitude, hardworking furthermore he is great at teamwork`.
 *  `remark 1 r/` Empties the remark of the 1st person.
+*  `remark 1` Empties the mark of the 1st person.
 
 An example of the `remark` command in action:
-[Remark](images/remark.png)
+![Remark](images/remark.png)
 An example of the `remark` command in action with the **REMARK** keyword:
-[Enhanced Remark](images/enhancedremark.png)
+![Enhanced Remark](images/enhancedremark.png)
 
 ### Viewing a person's details: `view`
 
@@ -177,7 +202,7 @@ Examples:
 * `view 1` Shows the complete details of the 1st person on the list.
 
 An example of the `view` command in action:
-[View](images/view.png)
+![View](images/view.png)
 
 <box type="tip" seamless>
 
@@ -216,26 +241,26 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in JABPro
 
 Format: 
 `list` or
 `list so/ATTRIBUTE`
 
 * `so/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
-* As of v1.2, the attributes that are supported are `name` and `email`.
+* The attributes that are supported are `name` and `email`.
 * Attribute is case-insensitive: `list so/NAME` and `list so/name` return the same result.
 * The result will be sorted in **ascending** order.
-* Note: as of v1.2, the sorting algorithm is case-sensitive, which means it will treat uppercase and 
+* The sorting algorithm is case-sensitive, which means it will treat uppercase and 
 lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
 Examples:
 * `list` Shows a list of all persons.
-* `list s/name` Shows a list of all persons, sorted by name in ascending order.
+* `list so/name` Shows a list of all persons, sorted by name in ascending order.
 
 ### Listing all tags: `listT`
 
-Shows a list of all tags in the address book.
+Shows a list of all tags in JABPro
 
 Format: `listT`
 
@@ -245,9 +270,11 @@ Format: `listT`
 **Example:**
 * `listT` Shows a list of all tags.
 
+![ListT](images/listT.png)
+
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in JABPro
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/[CATEGORY] TAGNAME]…​`
 
@@ -259,10 +286,14 @@ Notes on editing the tags of the specified person:
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+
+Notes on editing the score of the specified person:
 * The `sc/TAG SCORE` field is only applicable for the `edit` command, and not for the `add` command.
 * The `sc/TAG SCORE` field can only be used if the `t/TAG` field is used before it or the `TAG` already exist
 * The `SCORE` in `sc/TAG SCORE` is non-negative, that is `SCORE` must be more than or equal to 0 
 * To clear a tag's score, just re-tag it with the same tag name, but without using the `sc/TAG SCORE` field
+
+Notes on rules for `edit` command involving tags with categories:
 * Consequently, similar rules for `add` apply to the `edit` command involving tags:
   * If you would like to tag a user with a tag that has not been categorised yet using the `create` command, 
     you can specify the category that you would like it to be categorised to in the `edit` command. e.g. `edit 1 t/role swe`
@@ -280,7 +311,7 @@ Examples:
 * `edit 1 t/swe`
 
 An example of the `edit` command in action for editing `tag` and `score`:
-[Edit](images/editscore.png)
+![Edit](images/editscore.png)
 
 <box type="tip" seamless>
 
@@ -298,6 +329,8 @@ Filters and display job applicants using statistical metrics and values.
 Format: 
 `filter t/TAGNAME met/METRIC val/VALUE` or `filter t/TAGNAME met/METRIC`
 
+* Filter works only on the current list of job applicants displayed. It is highly recommended that you enter `list` before using `filter` to ensure that you are filtering the correct list of job applicants.
+* It is strongly recommended that you use `filter` after you have tagged most of the job applicants with a tag that has a score. Read more about this in the [Summary Statistics](#summary-statistics) section.
 * Filters and displays job applicants whose **value** is **greater than or equal** to the specified value for the specified statistic metric.
 * The `TAGNAME` must be a name of a tag that has been created using the `create` command with the `assessment` category.
 * The `METRIC` must be a name of a metric that is either `score`, `percentile`, `mean`, `median`.
@@ -314,10 +347,9 @@ Examples:
 * `filter t/Interview met/median` filters and displays job applicants whose score tied to `interview` tag is greater than or equal to the median score for `interview` tag.
 
 An example of the `filter` command in action:
-[Filter](images/filter.png)
+![Filter](images/filter.png)
 
-
-A more complete example guide on how to use filter effectively from the default address book:  
+A more complete example guide on how to use filter effectively from when you first start JABPro:  
 1. `create t/assessment interview` creates a tag `interview` under the `assessment` category.
 ** Take note, only edit if the index exists, adapt this guide accordingly **
 2. `edit 1 t/interview sc/interview 80` edits the tag of the 1st person to have a tag `interview` with a score of 80.
@@ -353,7 +385,7 @@ Format: `search n/KEYWORD [MORE KEYWORDS]`
 
 Examples:
 * `search n/John` returns `john` and `John Doe`
-* `search n/david` returns `Alex Yeoh`, `David Li`<br>
+* `search n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
 #### Search job applicants by status
 
@@ -385,10 +417,12 @@ Example:
   e.g. `search n/Alex n/Adam st/rejected` is not allowed.
 
 Example:
-* `search n/Alex Bernice st/interviewed rejected t/analyst` will output applicants whose:
+* `search n/Alex Bernice st/interviewed rejected t/intern` will output applicants whose:
     * names contain either Alex `or` Bernice
     * `and` status is either interviewed `or` rejected.
-    * `and` has a tag `analyst`
+    * `and` has a tag `intern`
+
+![Search](images/search-3.png)
 
 ### Deleting a person : `delete`
 
@@ -476,19 +510,20 @@ Summary Statistics is a table generated by JABPro that displays the following in
 * The **percentile** of the candidate for that tag
 
 Understanding how to use these summary statistics meaningfully:
-* You should ensure that you have sufficient candidates with a score for the tag you are interested in, before using the summary statistics to make comparisons.  
+* You should ensure that you have **sufficient candidates** with a score for the tag you are interested in, before using the summary statistics to make comparisons.  
   * This is due to the fact that these summary statistics rely on concepts such as mean, median and percentile, which are statistical concepts that require a sufficient sample size to be meaningful.
   * For example, if you have only assigned 5 out of 100 candidates, the summary statistics will not be representative of the actual mean, median and percentile for that tag.
   * In this case, you should assign more candidates with a score for that tag, before using the summary statistics to make comparisons.
+  * If you have n number candidates of the same score, their percentile will all be 0.0. This is because they are both the best and the worst performing candidate for that tag. Thus, a placeholder value of 0.0 is used to represent this.
   * If you have assigned a sufficient number of candidates with a score for that tag, you can use the summary statistics to make comparisons. For example, you want to check if a candidate's score for a tag is more than or equal to half of all the candidates who have a score for that tag, you can use the median to make this comparison.
-  * A sufficient number could be deemed as any number that is more than 30, but this is not a hard and fast rule. You should use your own discretion to determine if the number of candidates with a score for that tag is sufficient.
+  * A **sufficient number** could be deemed as **any number that is more than 20**, but this is not a hard and fast rule. You should use your own discretion to determine if the number of candidates with a score for that tag is sufficient.
 
 * Use mostly `median` and `percentile` to make your judgements
   * `median` to find candidates who are the better performing half
   * `percentile` as where this candidate stands among all other candidates (treat it like a ranking system, the higher the percentile, the better the candidate is performing) 
   * `percentile` 100.0 would represent the best performing candidate for that tag and `percentile` 0.0 would represent the worst performing candidate for that tag
 
-** Advanced users **
+**Advanced users**
 * Understand that `percentile` has limited functionality in certain context. Suppose you have 6 candidates with the scores `{80, 90, 100, 100, 100, 100}`
   * Median would be 90 in this case and percentile would be 50.0 for the candidate with a score of 90, however the upper half of the candidates are all 100.0 percentile
   * This comes as a consequence of the implementation where given you have the same score, you should have the same percentile / ranking
@@ -504,26 +539,51 @@ In-depth explanation of the statistics:
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+JABPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+JABPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, JABPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 _Details coming soon ..._
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Planned Enhancements
+
+### Deleting tags : `delete tag`
+
+While certainly useful, JABPro currently does not have feature to delete existing tags. However, this feature will be implemented
+in future iterations.
+
+<box type="tip" seamless>
+
+**Tip:**
+* If you are an advanced user, you are welcome to delete your tags manually by editing the json file! 
+</box>
+
+### Editing tags : `edit tag`
+
+JABPro currently does not support editing tags i.e. editing tag name or category. This feature will be implemented in future iterations.
+
+**Tip:**
+* If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
+  </box>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JABPro home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -548,7 +608,8 @@ _Details coming soon ..._
  **Delete**               | `delete INDEX` or `delete (t/TAG [MORE TAGS] st/STATUS)` <br> e.g., `delete 3`, `delete t/intern st/rejected`                                                                                                                           
  **Set**                  | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`                                                                                                               
  **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/[CATEGORY] TAGNAME]... [sc/TAGNAME SCORE]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t\MarketingInterview sc\MarketingInterview 50`                                   
- **Search**               | `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAGS [MORE TAGS])` <br> e.g., `search n/alex`
+ **Search**               | `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAGS [MORE TAGS])` <br> e.g., `search n/alex` 
+ **Filter**               | `filter t/TAGNAME met/METRIC val/VALUE` <br> e.g., `filter t/interview met/score val/80`
  **List**                 | `list so/ATTRIBUTE` <br> e.g. `list so/name`
  **ListT**                | `listT`
  **Export**               | `export`                                                                                                                                                       
