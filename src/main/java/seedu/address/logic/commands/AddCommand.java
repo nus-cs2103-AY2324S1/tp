@@ -42,7 +42,7 @@ public class AddCommand extends Command {
             + PREFIX_DEPARTMENT + "Management";
 
     public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "This employee already exists in the employee book";
 
     private final Employee toAdd;
 
