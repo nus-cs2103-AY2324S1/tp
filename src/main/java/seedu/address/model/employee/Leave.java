@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidLeave(String)}
  */
 public class Leave {
-    public static final String MESSAGE_CONSTRAINTS = "Leave should be in whole numbers";
+    public static final String MESSAGE_CONSTRAINTS = "Leave should be a positive integer.";
     public static final String VALIDATION_REGEX = "\\d+";
     public final String value;
 
