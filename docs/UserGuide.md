@@ -224,7 +224,7 @@ Examples:
 
 Edits an existing applicant in **InterviewHub**.
 
-Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 * Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
 * The `INDEX` **must be a positive unsigned integer** e.g. 1, 2, 3, …​ 
