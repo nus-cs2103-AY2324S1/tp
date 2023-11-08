@@ -481,7 +481,13 @@ Format: `clear`
 
 ### Exporting all entries : `export`
 
-Exports the entries into a .csv file
+Exports the entries into a .csv file located in the current directory as (/data/export.csv)
+
+* Note: Export currently does not support Events.
+
+*  Usage Note: JABPro must have write permissions, this means that if the .csv file is open,
+exporting again will not be possible.
+
 
 Format: `export`
 
