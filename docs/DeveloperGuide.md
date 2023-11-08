@@ -289,24 +289,37 @@ Aspect: How find command matches the arguments for name
 
 #### Implementation
 This feature is implemented though the `TimeParser` class. This class contains several public static methods related to manipulating time:
-- `TimeParser#parseDate(String date)`  —  Takes in a time String as input, and returns a LocalDateTime which contains the information of the String
+- `TimeParser#parseDate(String date)`  —  Takes in a time String as input, and returns a `Time` instance, which is a wrapper class for a LocalDateTime object which will store the time information (i.e. day, month, year, hour, minute) as well as providing utility methods for manipulating Time.
   - Accepted time formats examples:
-    - Day and time:
-      - Format: `<day\> <time\>`
-      - Examples:
-        - `Tuesday 1630`
-        - `Tuesday 4.30PM`
-        - `Tuesday 4pm`
-        - `Tuesd 4pm`
-    - Year, month, day, time of day:
-      - Format: `<year, month, day\> <time\>`
-      - Examples:
-        - `21/12/2024 5pm`
-        - `21-12-2024 5pm`
-        - `21-12-2024 1730`
-        - `21-12-2024 1730pm`
-        - `nov 12 1.30pm 2023`(WIP: AM/PM not parsing properly)
-        - `2023-12-12 1647`
+      * DD/MM/YYYY and time:
+          * `16 May 2024 1515`
+          * `16 May 2024 3.15pm`
+          * `16 May 2024 3pm`
+          * `16-05-2024 1515`
+          * `16-05-2024 3.15pm`
+          * `16-05-2024 3pm`
+          * `16-05-24 1515`
+          * `16-05-24 3.15pm`
+          * `16-05-24 3pm`
+          * `16/05/2024 1515`
+          * `16/05/2024 3.15pm`
+          * `16/05/2024 3pm`
+          * `16/05/24 1515`
+          * `16/05/24 3.15pm`
+          * `16/05/24 3pm`
+      * MM, DD and time:
+          * `16 May 1515`
+          * `16 May 3.15pm`
+          * `16 May 3pm`
+          * `16 January 1515`
+          * `16 January 3.15pm`
+          * `16 January 3pm`
+          * `16/5 1515`
+          * `16/5 3.15pm`
+          * `16/5 3pm`
+          * `16/05 1515`
+          * `16/05 3.15pm`
+          * `16/05 3pm`
     - The sequence diagram shown below shows how the API is called by other classes:
 
       ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
