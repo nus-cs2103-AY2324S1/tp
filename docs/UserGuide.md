@@ -3,15 +3,15 @@ layout: default
 title: User Guide
 pageNav: 3
 ---
+
 # User Guide for lesSON
 
 ## Table of Contents
-1. [Introduction]()
-1. [Installation](#installation)
-2. [Quick start](#quick-start)
+1. [Introduction](#introduction)
+2. [How to use the guide](#how-to-use-this-guide)
 3. [Glossary](#glossary)
-4. [User Interface Overview](#user-interface-overview)
-5. [Tutorial](#tutorial)
+4. [Quick start](#quick-start)
+5. [CLI Notes](#cli-notes)
 6. [Feature list](#feature-list)
    - [Adding a FlashCard](#adding-a-flashcard-add)
    - [Deleting a Flashcard](#deleting-a-flashcard--delete)
@@ -28,7 +28,10 @@ pageNav: 3
 7. [Additional Features](#additional-features)
    - [Markdown Syntax](#markdown-syntax)
    - [Importing and Exporting Decks](#importing-and-exporting-decks)
-8. [FAQ](#frequently-asked-questions)
+8. [Cautions](#cautions)
+9. [FAQ](#frequently-asked-questions)
+10. [Known Issues](#known-issues)
+11. [Contact Us](#contact-us)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -48,8 +51,20 @@ way you learn and revise. Say goodbye to time-consuming note-taking, and say hel
 effective, and enjoyable study experience, where flashcard creation is made incredibly easy.
 
 To maximise your study experience, here are some features we believe you'll love:
-1. **Enhanced Memory Retention:** Thanks to lesSON's inbuilt spaced repetition system, you can supercharge your memory and recall. The app optimizes when you should review your flashcards, ensuring you remember and grasp complex concepts with ease.
-2. **Intuitive Card Categorization:** lesSON helps you categorize your flashcards based on subject. This feature makes it a breeze to organize and access specific topics, keeping your study sessions focused and productive.
+1. **Enhanced Memory Retention:** Thanks to lesSON's inbuilt spaced repetition system, you can supercharge
+your memory and recall. The app optimizes when you should review your flashcards, ensuring you remember and grasp
+complex concepts with ease.
+2. **Intuitive Card Categorization:** lesSON helps you categorize your flashcards based on subject. This feature
+makes it a breeze to organize and access specific topics, keeping your study sessions focused and productive.
+
+##### Prerequisites
+
+Before you get started with lesSON, here's what we recommend you need to make full use of the app:
+
+1. **Comfortable with English**: Since lesSON is an English-based app, a basic understanding of the language will
+ensure a smooth and enjoyable experience.
+2. **Typing Proficiency**: lesSON primarily uses a Command Line Interface (CLI) alongside a Graphic User Interface (GUI).
+Being comfortable and efficient at typing will help you make the most of the app and enhance your user experience.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -58,6 +73,29 @@ To maximise your study experience, here are some features we believe you'll love
 If you are a beginner, consider checking out our [Quick Start]() tutorial for new users. <br>
 If you are already familiar with lesSON, do explore all of our [features](). <br> 
 Here is an overview of all the [Commands]() available. <br>
+
+Throughout the user guide, you will see these colored blocks of code that contain important information.
+
+<div markdown="block" class="alert alert-success">
+    💡 Green blocks contain tips to enhance your experience using Flagship.
+</div>
+
+<div markdown="block" class="alert alert-info">
+    ℹ️ Blue blocks contain useful information to address doubts you might have.
+</div>
+
+<div markdown="span" class="alert alert-danger">
+    ⚠️ Red blocks contain warnings that you must heed so that Flagship works as intended.
+</div>
+
+<span style="color: red;">This is red text</span>
+
+<span style="position: relative; display: inline-block; cursor: pointer;">
+  Hover over me
+  <span style="position: absolute; visibility: hidden; width: 120px; background-color: #333; color: #fff; text-align: center; border-radius: 5px; padding: 5px; bottom: 125%; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 0.2s;">
+    This is the tooltip text.
+  </span>
+</span>
 
 --------------------------------------------------------------------------------------------------------------------
 
