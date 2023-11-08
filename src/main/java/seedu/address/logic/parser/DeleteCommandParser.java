@@ -5,11 +5,10 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,9 +16,9 @@ import java.util.Set;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteCommand.DeletePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -36,32 +35,32 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC,
-                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL);
 
-        if (ArgumentMultimap.isAnyPrefixPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG)
-                || !ArgumentMultimap.isAnyPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_APPOINTMENT,
+        if (ArgumentMultimap.isAnyPrefixPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS)
+                || !ArgumentMultimap.isAnyPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_APPOINTMENT,
                         PREFIX_MEDICAL)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_APPOINTMENT);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ID, PREFIX_APPOINTMENT);
 
         boolean hasNamePrefix = argMultimap.getValue(PREFIX_NAME).isPresent();
-        boolean hasNricPrefix = argMultimap.getValue(PREFIX_NRIC).isPresent();
+        boolean hasIdPrefix = argMultimap.getValue(PREFIX_ID).isPresent();
 
-        if (!hasNamePrefix && !hasNricPrefix) {
+        if (!hasNamePrefix && !hasIdPrefix) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
         Name name = null;
-        Nric nric = null;
+        Id id = null;
 
         if (hasNamePrefix) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         }
-        if (hasNricPrefix) {
-            nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        if (hasIdPrefix) {
+            id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
         }
 
         DeletePersonDescriptor deletePersonDescriptor = new DeletePersonDescriptor();
@@ -81,6 +80,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             deletePersonDescriptor.setDeleteAppointment();
         }
 
-        return new DeleteCommand(nric, name, deletePersonDescriptor);
+        return new DeleteCommand(id, name, deletePersonDescriptor);
     }
 }
