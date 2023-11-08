@@ -28,7 +28,7 @@ public class EditPersonCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
             getTypicalScheduleList());
     @Test
-    void testEditName() throws ParseException, CommandException {
+    void test_name() throws ParseException, CommandException {
         Person person = model.getFilteredPersonList().get(0);
         Person expected = person.clone();
         expected.setName(new Name("Test Name 123"));
@@ -46,7 +46,7 @@ public class EditPersonCommandTest {
     }
 
     @Test
-    void testEditPhone() throws ParseException, CommandException {
+    void test_phone() throws ParseException, CommandException {
         Person person = model.getFilteredPersonList().get(0);
         Person expected = person.clone();
         expected.setPhone(Phone.of("12345678"));
@@ -64,7 +64,7 @@ public class EditPersonCommandTest {
     }
 
     @Test
-    void testEditAddress() throws ParseException, CommandException {
+    void test_address() throws ParseException, CommandException {
         Person person = model.getFilteredPersonList().get(0);
         Person expected = person.clone();
         expected.setAddress(Address.of("Test Address 12-3"));
@@ -82,7 +82,7 @@ public class EditPersonCommandTest {
     }
 
     @Test
-    void testEditEmail() throws ParseException, CommandException {
+    void test_email() throws ParseException, CommandException {
         Person person = model.getFilteredPersonList().get(0);
         Person expected = person.clone();
         expected.setEmail(Email.of("fake123@domain.com"));
@@ -100,7 +100,7 @@ public class EditPersonCommandTest {
     }
 
     @Test
-    void testEditRemark() throws ParseException, CommandException {
+    void test_remark() throws ParseException, CommandException {
         Person person = model.getFilteredPersonList().get(0);
         Person expected = person.clone();
         expected.setRemark(Remark.of("Test Remark 123"));
@@ -118,7 +118,7 @@ public class EditPersonCommandTest {
     }
 
     @Test
-    void testEditTags() throws ParseException, CommandException {
+    void test_tags() throws ParseException, CommandException {
         Person person = model.getFilteredPersonList().get(0);
         Person expected = person.clone();
         expected.setTags(Tags.of("123, 456, 789"));
@@ -135,7 +135,7 @@ public class EditPersonCommandTest {
         assertFalse(model.getPersonsFulfill(p -> p.equals(expected)).isEmpty());
     }
     @Test
-    void testEditSubjects() throws ParseException, CommandException {
+    void test_subjects() throws ParseException, CommandException {
         Person person = model.getFilteredPersonList().get(0);
         Person expected = person.clone();
         expected.setSubjects(Subjects.of("Physics, English"));
@@ -153,7 +153,7 @@ public class EditPersonCommandTest {
     }
 
     @Test
-    void testCombine() throws ParseException, CommandException {
+    void test_combine() throws ParseException, CommandException {
         Person person = model.getFilteredPersonList().get(0);
         Person expected = person.clone();
         expected.setSubjects(Subjects.of("Physics, English"));
@@ -179,7 +179,7 @@ public class EditPersonCommandTest {
     }
 
     @Test
-    void noNameCollisionAndNoDetectableModificationTest() {
+    void test_nameCollision_noModification() {
         try {
             Person person = Person.getDefaultPerson();
             person.setName(new Name("test name 1 no collision"));

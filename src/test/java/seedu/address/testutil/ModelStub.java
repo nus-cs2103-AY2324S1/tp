@@ -18,6 +18,7 @@ import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.ui.Ui;
@@ -384,6 +385,16 @@ public class ModelStub implements Model {
 
     public String getLinkedLessonNameStr(Person person) {
         return null;
+    }
+
+    @Override
+    public Name[] getLinkedWith(Person person) {
+        return new Name[0];
+    }
+
+    @Override
+    public Name[] getLinkedWith(Lesson lesson) {
+        return new Name[0];
     }
 
     @Override

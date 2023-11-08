@@ -17,7 +17,7 @@ class DeleteTaskCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
             getTypicalScheduleList());
     @Test
-    public void testShownLesson() throws CommandException {
+    public void test_withShownLesson_withoutShownLesson() throws CommandException {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(1);
         model.resetAllShowFields();
         assertThrows(CommandException.class, () -> deleteTaskCommand.execute(model));
@@ -27,7 +27,7 @@ class DeleteTaskCommandTest {
     }
 
     @Test
-    public void testValidIndex() throws CommandException {
+    public void test_valid_index() throws CommandException {
         model.showLesson(model.getFilteredScheduleList().get(0));
         int size = model.getFilteredScheduleList().get(0).getTaskList().size();
         for (int i = size; i > 0; i--) {

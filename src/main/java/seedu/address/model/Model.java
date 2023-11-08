@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.ui.Ui;
@@ -221,4 +222,6 @@ public interface Model {
     void unLinkWith(Person person, Lesson lesson);
     String getLinkedPersonNameStr(Lesson lesson);
     String getLinkedLessonNameStr(Person person);
+    Name[] getLinkedWith(Person person);
+    Name[] getLinkedWith(Lesson lesson);
 }

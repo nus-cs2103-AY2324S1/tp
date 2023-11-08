@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.Arrays;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -37,21 +38,20 @@ public class LinkCommand extends Command {
         Set<Lesson> lessonSet = model.getLessonsFulfill(lesson -> lesson.getName().equals(lessonName));
         if (personSet.isEmpty()) {
             throw new CommandException("No such student with name " + studentName.toString() + " found");
-        } else if (personSet.size() > 1) {
-            throw new CommandException("Multiple students with the same name");
-        } else if (lessonSet.isEmpty()) {
+        }  else if (lessonSet.isEmpty()) {
             throw new CommandException("No such lesson");
-        } else if (lessonSet.size() > 1) {
-            throw new CommandException("Multiple lessons with the same name");
         } else {
             Person person = personSet.iterator().next();
             Lesson lesson = lessonSet.iterator().next();
+            if(Set.of(model.getLinkedWith(person)).contains(lessonName)) {
+                throw new CommandException("The student is already linked to this lesson");
+            }
             model.linkWith(person, lesson);
             // parser make sure the state is either STUDENT or SCHEDULE
             State state = model.getState();
-            if (state == State.STUDENT && model.getCurrentlyDisplayedPerson().equals(person)) {
+            if (state == State.STUDENT && person.equals(model.getCurrentlyDisplayedPerson())) {
                 model.showPerson(person);
-            } else if (state == State.SCHEDULE && model.getCurrentlyDisplayedLesson().equals(lesson)) {
+            } else if (state == State.SCHEDULE && lesson.equals(model.getCurrentlyDisplayedLesson())) {
                 model.showLesson(lesson);
             }
             return new CommandResult("Linked " + person.getName() + " to " + lesson.getName());

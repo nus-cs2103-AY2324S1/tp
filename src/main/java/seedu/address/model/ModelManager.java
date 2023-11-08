@@ -409,6 +409,12 @@ public class ModelManager implements Model {
     public void unLinkWith(Person person, Lesson lesson) {
         personToLessonMap.removeMapping(person, lesson);
     }
+    public Name[] getLinkedWith(Person person) {
+        return personToLessonMap.get(person);
+    }
+    public Name[] getLinkedWith(Lesson lesson) {
+        return personToLessonMap.getReversed(lesson);
+    }
     public String getLinkedPersonNameStr(Lesson lesson) {
         return Arrays.stream(personToLessonMap.getReversed(lesson)).map(Name::toString)
                 .reduce((a, b) -> a + ", " + b).orElse("Not linked to any Students yet");

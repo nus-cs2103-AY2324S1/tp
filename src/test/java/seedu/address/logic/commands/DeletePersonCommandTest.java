@@ -72,13 +72,4 @@ public class DeletePersonCommandTest {
         String expected = DeletePersonCommand.class.getCanonicalName() + "{targetIndex=1}";
         assertEquals(expected, deletePersonCommand.toString());
     }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
-    }
 }

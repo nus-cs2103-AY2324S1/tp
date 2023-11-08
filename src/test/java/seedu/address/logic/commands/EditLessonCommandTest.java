@@ -21,7 +21,7 @@ import seedu.address.model.person.Subject;
 
 class EditLessonCommandTest {
     @Test
-    public void testEditValidName() throws ParseException, CommandException {
+    public void test_name() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
@@ -34,7 +34,7 @@ class EditLessonCommandTest {
         assertEquals(expected, model.getFilteredScheduleList().get(0));
     }
     @Test
-    public void testEditValidStart() throws ParseException, CommandException {
+    public void test_start() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
@@ -47,7 +47,7 @@ class EditLessonCommandTest {
         assertEquals(expected, model.getFilteredScheduleList().get(0));
     }
     @Test
-    public void testEditValidEnd() throws ParseException, CommandException {
+    public void test_end() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
@@ -60,7 +60,7 @@ class EditLessonCommandTest {
         assertEquals(expected, model.getFilteredScheduleList().get(0));
     }
     @Test
-    public void testEditValidSubject() throws ParseException, CommandException {
+    public void test_subject() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
@@ -73,7 +73,7 @@ class EditLessonCommandTest {
         assertEquals(expected, model.getFilteredScheduleList().get(0));
     }
     @Test
-    public void testEditValidDay() throws ParseException, CommandException {
+    public void test_day() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
@@ -87,7 +87,7 @@ class EditLessonCommandTest {
     }
 
     @Test
-    public void testEditValidNameNoIndex() throws ParseException, CommandException {
+    public void test_nameNoIndex() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
@@ -101,7 +101,7 @@ class EditLessonCommandTest {
         assertEquals(expected, model.getFilteredScheduleList().get(0));
     }
     @Test
-    public void testEditValidStartNoIndex() throws ParseException, CommandException {
+    public void test_startNoIndex() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
@@ -115,7 +115,7 @@ class EditLessonCommandTest {
         assertEquals(expected, model.getFilteredScheduleList().get(0));
     }
     @Test
-    public void testEditValidEndNoIndex() throws ParseException, CommandException {
+    public void test_endNoIndex() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
@@ -130,7 +130,7 @@ class EditLessonCommandTest {
     }
 
     @Test
-    public void testEditValidSubjectNoIndex() throws ParseException, CommandException {
+    public void test_subjectNoIndex() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
@@ -145,7 +145,7 @@ class EditLessonCommandTest {
     }
 
     @Test
-    public void testEditValidDayNoIndex() throws ParseException, CommandException {
+    public void test_dayNoIndex() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
@@ -160,7 +160,7 @@ class EditLessonCommandTest {
     }
 
     @Test
-    public void testClashingName() throws ParseException, CommandException {
+    public void test_clashingName() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson1 = model.getFilteredScheduleList().get(0);
@@ -174,7 +174,7 @@ class EditLessonCommandTest {
     }
 
     @Test
-    public void testClashingTime() throws ParseException, CommandException {
+    public void test_clashingTime() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson1 = model.getFilteredScheduleList().get(0);
@@ -190,7 +190,7 @@ class EditLessonCommandTest {
     }
 
     @Test
-    public void inValidTime() throws ParseException, CommandException {
+    public void test_startAfterEnd() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson1 = model.getFilteredScheduleList().get(0);
@@ -207,7 +207,7 @@ class EditLessonCommandTest {
         assertThrows(CommandException.class, () -> editLessonCommand2.execute(model));
     }
     @Test
-    public void combineTest() throws ParseException, CommandException {
+    public void test_combine() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson1 = model.getFilteredScheduleList().get(0);
@@ -230,7 +230,7 @@ class EditLessonCommandTest {
         assertEquals(expected, model.getLessonClashWith(expected));
     }
     @Test
-    public void noEditTest() throws ParseException, CommandException {
+    public void test_noEdit() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
