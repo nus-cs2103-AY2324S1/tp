@@ -40,9 +40,9 @@ Given below are my contributions to the project:
   * Updated the project logs.
 * **Review/mentoring**:
   * Reviewed PRs
-    * [#56](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/56)
-    * [#78](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/78)
-    * [#99](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/99)
+    * [#56](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/56#discussion_r1359157372)
+    * [#78](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/78#discussion_r1363703267)
+    * [#99](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/99#discussion_r1371868108)
 * **Beyond the project team**:
   * Forum discussions
     * [#1](https://github.com/nus-cs2103-AY2324S1/forum/issues/54)
