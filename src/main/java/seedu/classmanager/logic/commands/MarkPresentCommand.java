@@ -56,7 +56,7 @@ public class MarkPresentCommand extends Command {
 
         markedStudent.markPresent(this.index);
         model.setStudent(studentToMark, markedStudent);
-        if (model.isSelectedStudent(studentToMark)) {
+        if (model.isSelectedStudent(markedStudent)) {
             model.setSelectedStudent(markedStudent);
         }
         model.commitClassManager();
