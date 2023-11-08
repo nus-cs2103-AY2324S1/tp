@@ -6,7 +6,6 @@ import java.util.Arrays;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 
@@ -35,7 +34,6 @@ public class CliSyntax {
 
     public static final ArrayList<String> COMMAND_LIST = new ArrayList<String>(Arrays.asList(
         AddCommand.COMMAND_WORD,
-        EditCommand.COMMAND_WORD,
         DeleteCommand.COMMAND_WORD,
         ClearCommand.COMMAND_WORD,
         FindCommand.COMMAND_WORD,
