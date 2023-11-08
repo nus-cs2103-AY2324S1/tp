@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -214,5 +215,20 @@ public class ParserUtilTest {
     @Test
     public void parseScore_negativeValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseScore("-1"));
+    }
+
+    @Test
+    public void parseTagScore_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTagScore(null));
+    }
+
+    @Test
+    public void parseTagScore_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagScore("a"));
+    }
+
+    @Test
+    public void parseTagScore_invalidValueTwoTabs_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagScore("Interview 100 awadaw"));
     }
 }
