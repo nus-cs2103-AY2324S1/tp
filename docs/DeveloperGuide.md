@@ -289,8 +289,10 @@ Aspect: How find command matches the arguments for name
 
 #### Implementation
 This feature is implemented though the `TimeParser` class. This class contains several public static methods related to manipulating time:
-- `TimeParser#parseDate(String date)`  —  Takes in a time String as input, and returns a `Time` instance, which is a wrapper class for a LocalDateTime object which will store the time information (i.e. day, month, year, hour, minute) as well as providing utility methods for manipulating Time.
-  - Accepted time formats examples:
+- `TimeParser#parseDate(String date, boolean dateOnly)`  —  Takes in a time String as input, and returns a `Time` instance, which is a wrapper class for a LocalDateTime object which will store the time information (i.e. day, month, year, hour, minute) as well as providing utility methods for manipulating Time.
+  
+  - The `dateOnly` parameter is a flag to indicate how to parse the given `date`. If `dateOnly` is set to false, then the TimeParser will parse valid dates that are in the list of accepted date (without time) formats. Otherwise, if `dateOnly` is set to true, then the TimeParser will parse valid dates that are in the list of accepted date (with time) formats.
+  - Accepted date (with time) format examples:
       * DD/MM/YYYY and time:
           * `16 May 2024 1515`
           * `16 May 2024 3.15pm`
@@ -320,11 +322,20 @@ This feature is implemented though the `TimeParser` class. This class contains s
           * `16/05 1515`
           * `16/05 3.15pm`
           * `16/05 3pm`
-    - The sequence diagram shown below shows how the API is called by other classes:
+    - Accepted date (with time) format examples:
+      * DD/MM/YYYY:
+        * `16-05-2024`
+        * `16/05/2024`
+      * DD/MM:
+        * `16/05`
+        * `16 May`
+          * _Must be a prefix of a valid month of at least 3 characters_
 
-      ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
+  - The sequence diagram shown below shows how the API is called by other classes:
 
+    ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
 
+    
 - `TimeParser#listInterviewClashes(String potentialInterview, UniqueInterviewList interviews)`  — Takes in an interview time in the String format, and checks the given list of interviews that the user has, and lists all clashing interviews.
 - `TimeParser#findFreeTime(String day)`  —  Takes in a given day, and if valid, lists out all the free time in that day (i.e. not filled with any interview)
 - `TimeParser#findFreeTimeWithinRange(String day, String from, String to)`  —  Takes in a given day, and if valid, lists out all the free time in that day (i.e. not filled with any interview), within the specified window, only if all time Strings are properly formatted
