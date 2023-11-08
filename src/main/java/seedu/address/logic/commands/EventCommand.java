@@ -20,6 +20,9 @@ public class EventCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2 d/Interview Round 1 bt/2023-10-22 09:00 et/2023-10-22 10:00";
 
     public static final String MESSAGE_SUCCESS = "Event added: %1$s";
+
+    public static final String MESSAGE_DUPLICATE_EVENT = "An event with the same description, for the same person, already exists!";
+
     private final Event event;
 
     public EventCommand(Event event) {
@@ -30,11 +33,16 @@ public class EventCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         Index targetIndex = event.getIndex();
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
         Person person = lastShownList.get(targetIndex.getZeroBased());
         Event event1 = new Event(person, event.getDescription(), event.getStart_time(), event.getEnd_time());
+        if (model.hasEvent(event1)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
         model.addEvent(event1);
         return new CommandResult(String.format(MESSAGE_SUCCESS, event1),
                 false, false, false, false, false);
