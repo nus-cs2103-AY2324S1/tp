@@ -57,20 +57,20 @@ public class EventPeriodTest {
     public void isValidPeriodTest() {
         assertTrue(isValidPeriod(VALID_START_DATE_EARLIER, VALID_END_DATE_EARLIER));
 
-        assertThrows(InvalidEventPeriodException.class,
-                () -> isValidPeriod(VALID_END_DATE_EARLIER, VALID_START_DATE_EARLIER));
+        assertThrows(InvalidEventPeriodException.class, () ->
+                isValidPeriod(VALID_END_DATE_EARLIER, VALID_START_DATE_EARLIER));
 
-        assertThrows(InvalidEventPeriodException.class,
-                () -> isValidPeriod(VALID_START_DATE_EARLIER, VALID_START_DATE_EARLIER));
+        assertThrows(InvalidEventPeriodException.class, () ->
+                isValidPeriod(VALID_START_DATE_EARLIER, VALID_START_DATE_EARLIER));
 
-        assertThrows(DateTimeParseException.class,
-                () -> isValidPeriod(INVALID_DATE, VALID_END_DATE_EARLIER));
+        assertThrows(DateTimeParseException.class, () ->
+                isValidPeriod(INVALID_DATE, VALID_END_DATE_EARLIER));
 
-        assertThrows(DateTimeParseException.class,
-                () -> isValidPeriod(VALID_START_DATE_EARLIER, INVALID_DATE));
+        assertThrows(DateTimeParseException.class, () ->
+                isValidPeriod(VALID_START_DATE_EARLIER, INVALID_DATE));
 
-        assertThrows(DateTimeParseException.class,
-                () -> isValidPeriod(INVALID_DATE, INVALID_DATE));
+        assertThrows(DateTimeParseException.class, () ->
+                isValidPeriod(INVALID_DATE, INVALID_DATE));
     }
 
     @Test
