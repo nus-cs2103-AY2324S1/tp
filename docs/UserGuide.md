@@ -192,7 +192,7 @@ Adds a member to the list of members.
 `addmember /name MEMBER_NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`<br/>
 `addm /name MEMBER_NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
   <br/>
@@ -206,12 +206,12 @@ Adds a member to the list of members.
   <br/>
 - `TAG`: Only alphanumeric characters are allowed. Minimum of 1 and maximum of 15 characters are allowed.
 
-
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about duplicate members:**
+
 <br/>
 Duplicate members are not allowed to be added into the list of members.
 <br/>
@@ -227,7 +227,7 @@ This means that only a member with a unique name, phone number, email and telegr
 `addm /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /tag Admin`<br/>
 This adds a new member named `Taylor Swift` with phone number `91691969`, email `taylorswift@era.tour`, telegram handle `tswift` and tag `Admin` to the list of members.
 
-<img src="../docs/images/addMember.png" alt="addMember.png"/>
+![Add_Member](images/addMember.png)
 
 #### 4.1.2 Finding members: `findmember` or `findm`
 
@@ -427,7 +427,7 @@ Adds an applicant to the list of applicants.
 `addapplicant /name APPLICANT_NAME /phone PHONE_NUMBER`<br/>
 `adda /name APPLICANT_NAME /phone PHONE_NUMBER`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
 
@@ -436,15 +436,15 @@ Adds an applicant to the list of applicants.
 
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about duplicate applicants:**
 
-Duplicate applicants are not allowed to be added into the list of applicants.
+* Duplicate applicants are not allowed to be added into the list of applicants.
 
-An applicant is considered a duplicate if the applicant's name **or** phone number matches that of an existing applicant.
+* An applicant is considered a duplicate if the applicant's name **or** phone number matches that of an existing applicant.
 
-This means that only an applicant with a unique name and phone number can be added into the list of applicants.
+* This means that only an applicant with a unique name and phone number can be added into the list of applicants.
 
 </div>
 
@@ -455,7 +455,7 @@ This means that only an applicant with a unique name and phone number can be add
 
 This adds a new applicant named `Lady Gaga` with phone number `99129969` to the list of applicants.
 
-<img src="../docs/images/addApplicant.png" alt="addApplicant.png"/>
+![Add_Applicant](images/addApplicant.png)
 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
