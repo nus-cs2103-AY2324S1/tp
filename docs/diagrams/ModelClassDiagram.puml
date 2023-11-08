@@ -12,13 +12,19 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
+Class UniqueMusicianList
+Class Musician
+Class Instrument
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class "Genre" as g1
+
+Class UniqueBandList
+Class Band
+Class "Name" as bandname
+Class "Genre" as g2
 
 Class I #FFFFFF
 }
@@ -35,20 +41,32 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueMusicianList
+UniqueMusicianList --> "~* all" Musician
+Musician *--> Name
+Musician *--> Phone
+Musician *--> Email
+Musician *--> "*" Instrument
+Musician *--> "*" Tag
+Musician *--> "*" g1
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+AddressBook *--> "1" UniqueBandList
+UniqueBandList --> "~* all" Band
+Band *--> bandname
+Band *--> "*" g2
+
+Musician -[hidden]up--> I
+Band -[hidden]up--> I
+UniqueMusicianList -[hidden]right-> I
+UniqueBandList -[hidden]right-> I
+
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Email
+Email -[hidden]right-> Tag
+Tag -[hidden]right-> Instrument
+Instrument -[hidden]right-> g1
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Musician
+ModelManager --> "~* filtered" Band
 @enduml
