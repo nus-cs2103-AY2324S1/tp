@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+
+skinparam ArrowFontStyle plain
+
+mainframe **sd** get availability statistics
+
+participant "a:StatsAvailCommand" as StatsAvailCommand LOGIC_COLOR
+
+StatsAvailCommand -> StatsAvailCommand : getAvailableFosterers(list)
+activate StatsAvailCommand
+StatsAvailCommand --> StatsAvailCommand : availableFosterers
+deactivate StatsAvailCommand
+
+StatsAvailCommand -> StatsAvailCommand : getAbleDogCount(availableFosterers)
+activate StatsAvailCommand
+StatsAvailCommand --> StatsAvailCommand : ableDogCount
+deactivate StatsAvailCommand
+
+StatsAvailCommand -> StatsAvailCommand : getAbleCatCount(availableFosterers)
+activate StatsAvailCommand
+StatsAvailCommand --> StatsAvailCommand : ableCatCount
+deactivate StatsAvailCommand
+
+StatsAvailCommand -> StatsAvailCommand : calculatePercentage(availableCount, total)
+activate StatsAvailCommand
+StatsAvailCommand --> StatsAvailCommand
+deactivate StatsAvailCommand
+
+StatsAvailCommand -> StatsAvailCommand : calculatePercentage(ableDogCount, availableCount)
+activate StatsAvailCommand
+StatsAvailCommand --> StatsAvailCommand
+deactivate StatsAvailCommand
+
+StatsAvailCommand -> StatsAvailCommand : calculatePercentage(ableCatCount, availableCount)
+activate StatsAvailCommand
+StatsAvailCommand --> StatsAvailCommand
+deactivate StatsAvailCommand
+|||
+
+@enduml
