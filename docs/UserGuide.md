@@ -217,6 +217,10 @@ Creates a new contact in the course with the specified name and details.
 
 Format: `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP_ID]…`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note that STUDENT_ID should be unique for all students**<br>
+
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
 * `PHONE_NUMBER` should be a string made up of numbers
 * `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space.
