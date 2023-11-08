@@ -761,7 +761,7 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 If the implementation effort required to create AB3 from scratch is 10, we estimate that the effort we spent to create
-Tutorium is ??.
+Tutorium is 11.
 
 ### Difficulty level
 Over the course of this project, each of us had to make design decisions when implementing the features we were 
