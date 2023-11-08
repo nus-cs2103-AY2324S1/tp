@@ -135,13 +135,13 @@ public class EditCommandParserTest {
 
         String userInput = COMMAND_WORD + ID_DESC_AMY + PHONE_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
-        EditCommand expectedCommand = new EditCommand(null, new Nric(VALID_ID_AMY), descriptor);
+        EditCommand expectedCommand = new EditCommand(null, new Id(VALID_ID_AMY), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = COMMAND_WORD + ID_DESC_AMY + EMAIL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(null, new Nric(VALID_ID_AMY), descriptor);
+        expectedCommand = new EditCommand(null, new Id(VALID_ID_AMY), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
     }
