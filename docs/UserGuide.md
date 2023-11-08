@@ -32,7 +32,14 @@ to start keeping track of all your members and applicants!
 --------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
-{:toc}
+  {:toc}
+
+<style>
+.no-toc {
+  display: none;
+}
+</style>
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -164,7 +171,7 @@ These are all the features in regard to a **member** in CMC.
 
 Adds a member to the list of members.
 
-#### Format:
+#### Format:{.no-toc}
 
 `addmember /name MEMBER_NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`<br/>
 `addm /name MEMBER_NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`
@@ -196,7 +203,7 @@ Otherwise, the system will reject this as a duplicate member.
 
 </div>
 
-#### Example of usage:
+#### Example of usage:{.no-toc}
 
 `addmember /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /tag Admin`<br/><br/>
 `addm /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /tag Admin`<br/><br/>
@@ -210,7 +217,7 @@ handle `tswift` and tag `Admin` to the list of members.
 
 Find and generate a list of all existing member(s) whose information contain any of the specified keyword(s).
 
-##### Format:
+##### Format:{.no-toc}
 
 `findmember KEYWORD...`<br/>
 `findm KEYWORD...`
@@ -219,7 +226,7 @@ Find and generate a list of all existing member(s) whose information contain any
 :information_source: **Notes about the command format:** `KEYWORD`s have to be separated by a space.
 </div>
 
-##### Example of usage:
+##### Example of usage:{.no-toc}
 
 `findmember SWE Product`<br/><br/> 
 `findm SWE Product`<br/><br/>
