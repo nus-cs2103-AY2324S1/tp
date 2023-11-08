@@ -32,8 +32,8 @@ deactivate AddressBookParser
 LogicManager -> ListTutorCommand : execute()
 activate ListTutorCommand
 
-ListTutorCommand -> Model ++ : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
-return
+ListTutorCommand -> Model ++ : updateFilteredPersonList()
+deactivate Model
 
 deactivate Model
 

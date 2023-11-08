@@ -558,6 +558,93 @@ the lifeline reaches the end of diagram.
   * Cons: In the editing of schedule, a `Person` is needed to create a new `Schedule`. Thus, the tutor allocated to 
     the target schedule needs to be obtained and used to create a new `Schedule`.
 
+### Mark schedule feature
+
+The "Mark Schedule" feature allows users to mark a specified schedule as missed or completed.
+Below, we provide an example usage scenario and a detailed description of how the mark schedule mechanism behaves at
+each step.
+
+The following shows the activity diagram when a user executes the `mark` command:
+
+![MarkScheduleActivityDiagram](images/MarkScheduleActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched with at least 1 schedule added.
+
+Step 2. The user executes the `list-s` to view the list of schedules.
+
+Step 3. The user executes the `mark 1 m/1` command, which marks the schedule with index 1 shown in the list of 
+schedules displayed as completed. The command is parsed in the `AddressBookParser`.
+
+Step 4. `MarkScheduleCommandParser` is initialized to parse the user input to create a `MarkScheduleCommand` with
+the given `Index` and `Status` representing the user's input.
+
+Step 5. The `MarkScheduleCommand#execute(Model)` will perform the following checks in this order to ensure that the
+schedule can be safely marked as completed in the Model:
+
+- The `Index` is a valid integer.
+- The `Index` is not out of bounds (within the range of displayed schedule list's size).
+- The `Status` is a valid Status (either 0 for missed or 1 for completed).
+
+Step 6. The `execute` method then calls `Model::getFilteredScheduleList` and gets the specified `Schedule` using the
+`Index` given.
+
+Step 7. Once the checks are successful, the method then creates an edited schedule from the original schedule with its
+status set to completed.
+
+Step 8. The method then calls the `setSchedule` method in the `ModelManager` with the new edited schedule. This sets the
+specified `Schedule` in the model to be that edited schedule with completed status.
+
+Step 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
+`Logic`.
+
+The following sequence diagram shows how the above steps for mark schedule operation works:
+
+![Sequence diagram for mark command](images/MarkScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `MarkScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design rationale
+
+**Aspect: Usage of the `pending` status**
+- **Alternative 1 (current choice):** Users unable to mark a schedule as `pending`.
+  - Pros: This design is more intuitive for users, as it aligns with the common understanding of marking and
+    unmarking tasks.
+  - Pros: Users only need to be aware of the completed and missed status, simplifying the command's usage.
+  - Cons: The user must use a distinct command to unmark schedules with a status set.
+- **Alternative 2:** Users able to mark a schedule as `pending`.
+  - Pros: Users only need to be familiar with the mark command, which can toggle between completed, missed, and
+    pending statuses. This may lead to a more streamlined user experience.
+  - Cons: Introducing a third status option complicates the management of schedule statuses. Users and developers
+    alike must account for an additional state, potentially increasing the system's complexity.
+  - Cons: The definition and usage of the "pending" status may vary among users, potentially leading to ambiguity in
+    its interpretation.
+
+**Aspect: Format of schedule status**
+- **Alternative 1 (current choice):** Users input integers 0 or 1 to mark a schedule as `missed` or `completed`.
+  - Pros: Using integers provides a clear and unambiguous way for users to specify which status they want to
+    mark for the specified schedule. The index corresponds directly to the schedule status of `missed`, or `completed`,
+    making it easy to identify the correct schedule status.
+  - Pros: The use of indices eliminates the potential challenge of dealing with case-sensitive words. Users do
+    not need to type out the exact status word by word, which can be especially beneficial if a user is not a very
+    good at typing.
+  - Pros: The use of indices aligns with the existing command structure, which is based on numeric indices for
+    identifying and interacting with specific entries in the address book.
+  - Cons: Users need to have knowledge of the specific integer representing the schedule status they want to mark. 
+- **Alternative 2:** Users input the exact schedule status `missed` or `completed` in words.
+  - Pros: Allowing users to mark a schedule by specifying their schedule status provides a more natural and intuitive 
+    method, as users are likely more familiar with status than numeric indices.
+  - Cons: If a user provides an incorrect or misspelled status, the application would need to handle error cases and
+    provide appropriate feedback to guide the user.
+  - Cons: Typing out schedule status in words are case-sensitive. This means that users need to accurately input the 
+    schedule status with the correct capitalization, which can add an extra layer of precision required from the user.
+
+
 ### Unmark schedule feature
 
 The "Unmark Schedule" feature allows users to unmark a schedule that was previously marked as completed or missed. 
