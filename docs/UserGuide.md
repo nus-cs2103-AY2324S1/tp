@@ -2,13 +2,40 @@
 layout: page
 title: User Guide
 ---
+# TuitionConnect User Guide
 
 TuitionConnect is a **desktop app for simplifying the process of administration and finance management for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise tracking tutee-specific details, teaching-schedule management, and finance management. 
 
 ## Table of Contents
 
-* Table of Contents
-  {:toc}
+<!-- TOC -->
+* [TuitionConnect User Guide](#tuitionconnect-user-guide)
+  * [Table of Contents](#table-of-contents)
+  * [Quick start](#quick-start)
+  * [Input Formats](#input-formats)
+    * [Command Format](#command-format)
+  * [Features](#features)
+    * [Viewing help : `help`](#viewing-help--help)
+    * [Adding a person : `add`](#adding-a-person--add)
+    * [View the list : `list`](#view-the-list--list)
+    * [View the list of tutees specified by day : `list [DAY]`](#view-the-list-of-tutees-specified-by-day--list-day)
+    * [Finding a tutee : `find`](#finding-a-tutee--find)
+    * [Editing a tutee : `edit`](#editing-a-tutee--edit)
+    * [Deleting a person: `delete`](#deleting-a-person-delete)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Marking a person as paid : `paid`](#marking-a-person-as-paid--paid)
+    * [Marking a person as unpaid : `unpaid`](#marking-a-person-as-unpaid--unpaid)
+    * [Show all the unpaid persons : `list unpaid`](#show-all-the-unpaid-persons--list-unpaid)
+    * [Mark all persons as unpaid: `unpaidAll`](#mark-all-persons-as-unpaid-unpaidall)
+    * [Finding Free Time : `freeTime`](#finding-free-time--freetime)
+    * [Undo previous command : `undo`](#undo-previous-command--undo)
+    * [Redo previous command : `redo`](#redo-previous-command--redo)
+    * [Calculating Monthly Revenue: `rev`](#calculating-monthly-revenue-rev)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+  * [FAQ](#faq)
+  * [Known issues](#known-issues)
+  * [Command summary](#command-summary)
+<!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
 
