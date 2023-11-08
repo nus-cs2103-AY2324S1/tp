@@ -68,10 +68,10 @@ public class EmailTest {
 
     @Test
     public void equals() {
-        Email email = new Email("valid@email");
+        Email email = new Email("valid@email.com");
 
         // same values -> returns true
-        assertTrue(email.equals(new Email("valid@email")));
+        assertTrue(email.equals(new Email("valid@email.com")));
 
         // same object -> returns true
         assertTrue(email.equals(email));
@@ -83,18 +83,18 @@ public class EmailTest {
         assertFalse(email.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(email.equals(new Email("other.valid@email")));
+        assertFalse(email.equals(new Email("other.valid@email.com")));
     }
 
     @Test
     public void hashcode() {
-        Email email = new Email("valid@email");
+        Email email = new Email("valid@email.com");
 
         //same values -> returns same hashcode
-        assertEquals(email.hashCode(), new Email("valid@email").hashCode());
+        assertEquals(email.hashCode(), new Email("valid@email.com").hashCode());
 
         //different values -> returns different hashcode
-        assertNotEquals(email.hashCode(), new Email("invalid@email").hashCode());
+        assertNotEquals(email.hashCode(), new Email("invalid@email.com").hashCode());
 
     }
 
