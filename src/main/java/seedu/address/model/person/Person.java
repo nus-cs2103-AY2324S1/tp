@@ -93,6 +93,29 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have the same email, name or phone.
+     */
+    public boolean isDuplicate(Person otherPerson) {
+        if (otherPerson == null) {
+            return false;
+        }
+
+        if (otherPerson.getName().equals(getName())) {
+            return true;
+        }
+
+        if (otherPerson.getPhone().equals(getPhone())) {
+            return true;
+        }
+
+        if (otherPerson.getEmail().equals(getEmail())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

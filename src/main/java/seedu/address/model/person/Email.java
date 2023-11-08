@@ -12,7 +12,8 @@ public class Email {
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format [LOCAL-PART]@[SERVER].[DOMAIN], "
             + "e.g. example@mail.com";
 
-    public static final String VALIDATION_REGEX = "^(?![\\._-])(?!.*\\.\\.)[\\w-_+\\.]*(?!_)\\w@((?![\\.-])(?!.*[\\._-]$)[A-Za-z0-9-]*(?!_)\\w\\.)+[A-Za-z0-9]{2,4}$";
+    public static final String VALIDATION_REGEX = "^(?![\\._-])(?!.*\\.\\.)[\\w-_+\\.]*(?!_)\\w@"
+            + "((?![\\.-])(?!.*[\\._-]$)[A-Za-z0-9-]*(?!_)\\w\\.)+[A-Za-z0-9]{2,4}$";
 
     public final String value;
 
@@ -51,7 +52,7 @@ public class Email {
         }
 
         Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        return value.toLowerCase().equals(otherEmail.value.toLowerCase());
     }
 
     @Override
