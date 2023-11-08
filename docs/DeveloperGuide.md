@@ -336,22 +336,38 @@ This feature is implemented though the `TimeParser` class. This class contains s
     ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
 
 #### How is the command executed
-
+1. The caller passes in the `date` string, which contains the date information. The caller also passes in the boolean flag `dateOnly`, which will indicate whether the string should be parsed into a `Time` instance containing date and time, or strictly date only.
+2. If the parsing was successful, a `Time` instance containing the Time info will be returned.
 #### Design considerations
 
-**Aspect: How `TimeParser#parseDate(String date)` works:**
+**Aspect: How `TimeParser#parseDate(String date, boolean dateOnly)` works:**
 
-* **Alternative 1 (current choice):** Have a hardcoded list of time formats that our team deems to be acceptable.
+* **Alternative 1 (current choice):** Have two hardcoded list of acceptable time formats. One with date and time, the other for time
     * Pros:
-      * Easy to implement.
+      * Easy to implement
+      * Avoids code duplication
     * Cons:
       * May have performance issues in terms of time (i.e. might have to loop through the whole list to find a suitable format)
       * Huge number of time formats available, hence there is a need to update the list of acceptable time formats in future iterations
       * Many errors possible due to the many time fields that the user could format wrongly, which makes implementation difficult
+      * Using the same method to parse strings with date & time and strings with date only might be prone to bugs
 
-* **Alternative 2 (alternate choice):** Use other time libraries
+
+* **Alternative 2 :** Have two hardcoded list of acceptable time formats. One with date and time, the other for time, but parse the two types of time string (i.e. strings with date & time, and strings with date only separately)
+    * Pros:
+        * Easy to implement
+        * Less prone to bugs since there are now separate methods for parsing the two types of strings
+    * Cons:
+        * Causes code duplication since the algorithm is virtually the same for both `parseDate` methods 
+        * Not an optimal implementation (i.e. might have to loop through the whole list to find a suitable format)
+        * Huge number of time formats available, hence there is a need to update the list of acceptable time formats in future iterations if needed
+        * Many errors possible due to the many time fields that the user could format wrongly, which makes implementation difficult
+
+
+* **Alternative 3 (alternate choice):** Use other time libraries
     * Pros:
         * Might be a better alternative to alternative 1
+        * Error checking already implemented
     * Cons:
         * Will have to overhaul the entire TimeParser class, which might be impractical
         * High risk; not guaranteed to be better after overhaul
@@ -398,6 +414,27 @@ Aspect: How the command finds free times:
 
 #### Design consideration
 
+### List interviews done/not done feature
+
+#### Implementation
+The list interviews done/not done feature allows the user to see all the interviews that are done or not done in a single command. The command format is `list-i-done` to show all the interviews that are done, and `list-i-not-done` to show all interviews that are not done.
+#### How is the command executed
+1. The user inputs `list-i-done` or `list-i-not-done` 
+2. The `LogicManager` receives the command string and forwards it to the `AddressBookParser`.
+3. The `AddressBookParser` checks the type of command and returns a `ListInterviewsDoneCommand` instance or `ListInterviewsNotDoneCommand` instance
+4. The `LogicManager` executes the `ListInterviewsDoneCommand` or `ListInterviewsNotDoneCommand`
+5. The `execute` method of `ListInterviewsDoneCommand` or `ListInterviewsNotDoneCommand` will call `Model#updateFilteredInterviewList(Predicate<Interview> predicate)`, where an `InterviewIsDonePredicate` or `InterviewNotDonePredicate` is passed as the argument
+6. `Model#updateFilteredInterviewList` will be called with the given predicate, thus updating the internal `FilteredList` of interviews to show only those that are done, or those that are not done. The `CommandResult` containing the success message will be returned to `LogicManager`.
+7. The GUI will be updated automatically by when the list changes.
+#### Design consideration
+Aspect: How the command is implemented
+* **Alternative 1 (current choice):** Use the existing open-closed principle of AB3 to add these new commands
+    * Pros:
+        * Reduces this to a problem that AB3 has already solved
+        * Maintains consistency with the AB3 format
+        * Consequently, it is easy to implement
+    * Cons:
+        * More command classes have to be added, which can increase coupling
 ### Rate interview feature
 
 #### Implementation
@@ -409,10 +446,26 @@ Aspect: How the command finds free times:
 ### Sort interview feature
 
 #### Implementation
+The sort interview feature allows the user to sort all the interviews that have scheduled via the commands `sort SORT_PARAMETER`, where `SORT_PARAMETER` can either be `rate` or `time`.
 
+The `sort` command is facilitated by the `SortRateCommand` and the `SortTimeCommand`. It enables the user to sort all the scheduled interviews by rating or timing. For rating, the interviews will be sorted in descending order of rating. For interview times, the interviews will be sorted in ascending chronological order of start time. 
 #### How is the command executed
-
+1. The user inputs the `sort-rate` or `sort-time` command
+2. The `LogicManager` receives the `sort-rate` or `sort-time` command string and forwards it to the `AddressBookParser`.
+3. The `AddressBookParser` checks the type of command and returns either `SortRateCommand` or `SortTimeCommand`.
+4. The `LogicManager` executes the `SortRateCommand` or `SortTimeCommand` which calls the `Model#sortInterviewList(Comparator<Interview> comparator)` method.
+5. The `SortRateCommand` or `SortTimeCommand` has their own `Comparator` object instance. Their respective comparators will be passed into the `Model#sortInterviewList(Comparator<Interview> comparator)`
+6. `Model#sortInterviewList(Comparator<Interview> comparator)` will then call the `AddressBook#sortInterview(Comparator<Interview> comparator)`, passing in the given comparator as argument. 
+7. `Model#sortInterviewList(Comparator<Interview> comparator)` will call the `UniqueInterviewList#sort(Comparator<Interview> comparator)`, which will call the built-in `FXCollections#sort(Comparator<T> comparator)` method, which will then sort the internal list of interviews by either rating or timing. Note that `FXCollections#sort(Comparator<T> comparator)` is used since the list of interviews is implemented as an `ObservableList`
+8. The GUI will be updated automatically by when the list changes.
 #### Design consideration
+Aspect: How the sort command works
+* **Alternative 1 (current choice):** Implement the sort method in the `ModelManager`, `AddressBook`, and the `UniqueInterviewList` class
+    * Pros:
+        * Does not violate the _Law of Demeter_ principle, since the sort is called through `Model` in the `SortRateCommand` or `SortTimeCommand`, where the `Model` instance is passed as a parameter to the respective `execute` commands
+        * Does not violate the _information hiding_ principle. This is because the internal list of interviews is never accessed nor modified directly by the `execute` command of the respective command objects
+    * Cons:
+        * The command will cause the control to be passed to `ModelManager` first, then to `AddressBook` and then finally to `UniqueInterviewList` where only in `UniqueInterviewList` is the internal list sorted. This results in an additional layer of abstraction, which increases the complexity of the command slightly
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -702,27 +755,68 @@ testers are expected to do more *exploratory* testing.
 
 3. _{ more test cases …​ }_
 
+### Viewing help
+
+### Clearing all the data
+
+### Exiting the program
+
+### Saving the data
+1. Dealing with missing/corrupted data files
+
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+
+2. _{ more test cases …​ }_
+
+### Adding an applicant
+
 ### Deleting an applicant
 
 1. Deleting an applicant while all applicants are being shown
 
-   1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   3. Test case: `delete 0`<br>
-      Expected: No applicant is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `delete 0`<br>
+       Expected: No applicant is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
+
+### Editing an applicant
+
+### Finding applicants from the list
+
+### Listing all applicants
+
+### Adding an interview
+
+### Deleting an interview
+
+### Editing an interview
+
+### Finding interviews from the list
+
+### Listing all interviews
+
+### Listing all free timing for the given day
+
+### Listing all interviews for today
+
+### Marking an interview as done
+
+### Rating an interview
+
+### Listing all completed interview
+
+### Listing all incomplete interview
+
+### Sorting the interview list by rating
+
+### Sorting the interview list by start-time
+
+[Back to the Table of Contents](#table-of-contents)
