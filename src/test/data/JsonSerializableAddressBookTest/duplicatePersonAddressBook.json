@@ -4,7 +4,7 @@
     "bookingPeriod" : "2023-01-01 08:00 to 2023-01-01 12:00",
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "alice@example.com",
+    "email": "alice@gmail.com",
     "remark": "",
     "tags": [ "friends" ]
   }, {
@@ -12,7 +12,7 @@
     "bookingPeriod" : "2023-01-01 08:00 to 2023-01-01 12:00",
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "pauline@example.com",
+    "email": "pauline@gmail.com",
     "remark": ""
   } ]
 }

@@ -25,43 +25,43 @@ public class TypicalPersons {
     public static final Booking ALICE = new BookingBuilder().withRoom("1")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Alice Pauline")
-            .withEmail("alice@example.com")
+            .withEmail("alice@gmail.com")
             .withPhone("94351253").build();
     public static final Booking BENSON = new BookingBuilder().withRoom("2")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Benson Meier")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@gmail.com").withPhone("98765432")
             .withRemark("Overran Hotel Supplies").build();
     public static final Booking CARL = new BookingBuilder().withRoom("3")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").build();
+            .withEmail("heinz@gmail.com").build();
     public static final Booking DANIEL = new BookingBuilder().withRoom("4")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Daniel Meier")
-            .withPhone("87652533").withEmail("cornelia@example.com").build();
+            .withPhone("87652533").withEmail("cornelia@gmail.com").build();
     public static final Booking ELLE = new BookingBuilder().withRoom("5")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").build();
+            .withEmail("werner@gmail.com").build();
     public static final Booking FIONA = new BookingBuilder().withRoom("6")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").build();
+            .withEmail("lydia@gmail.com").build();
     public static final Booking GEORGE = new BookingBuilder().withRoom("7")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").build();
+            .withEmail("anna@gmail.com").build();
 
     // Manually added
     public static final Booking HOON = new BookingBuilder().withRoom("8")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").build();
+            .withEmail("stefan@gmail.com").build();
     public static final Booking IDA = new BookingBuilder().withRoom("9")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").build();
+            .withEmail("hans@gmail.com").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Booking AMY = new BookingBuilder().withRoom(VALID_ROOM_AMY)
