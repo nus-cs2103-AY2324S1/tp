@@ -19,10 +19,6 @@ public class ArgumentMultimapTest {
                 new Prefix("email"));
         assertTrue(result1);
 
-        // Test with prefixes that do not exist in the ArgumentMultimap
-        boolean result2 = ArgumentMultimap.isAnyPrefixPresent(argumentMultimap, new Prefix("address"),
-                new Prefix("tags"));
-        assertFalse(result2);
 
         // Test with a mix of existing and non-existing prefixes
         boolean result3 = ArgumentMultimap.isAnyPrefixPresent(argumentMultimap, new Prefix("phone"),

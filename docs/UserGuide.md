@@ -43,10 +43,13 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
    ![Ui](images/Ui_v1.3.1.jpg)
 
 > :bulb: The main application consists of the:
-> 1. Patient List View
-> 2. Output Box
-> 3. Command Box
-> 4. Logger Tab
+> 1. Menu Sidebar `*`
+> 2. Patient List View
+> 3. Output Box
+> 4. Command Box
+> 5. Logger Tab
+>
+> :warning: **`*`**: The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
 
 >:bulb: Longer outputs have to scrolled to be viewed.
 
@@ -107,7 +110,7 @@ Adds a patient into HealthSync, with the given patient information.
 * All the compulsory fields must be provided.
 * Optional fields like appointment and medical history need not be provided.
 
-Format: `add n/NAME id/IC_NUMBER [field] ...`
+Format: `add n/NAME id/ID_NUMBER [field] ...`
 
 >:bulb: Use `a` as a shortcut for `add`
 
@@ -138,8 +141,8 @@ Edits an existing patient's details in HealthSync.
 
 Formats:  
  * `edit n/NAME [field] ...`
- * `edit id/IC_NUMBER [field] ...`
- * `edit n/NAME id/IC_NUMBER [field] ...`
+ * `edit id/ID_NUMBER [field] ...`
+ * `edit n/NAME id/ID_NUMBER [field] ...`
 
 >:bulb: Use `e` as a shortcut for `edit`
 
@@ -152,22 +155,22 @@ Expected outputs when the command succeeds:
 * `Edited patient: ...`
 
 Expected outputs when command fails:
-* `INVALID name and/or NRIC! ...`
+* `INVALID name and/or ID! ...`
 
 ### Deleting a Patient or Field: `delete`
 
 Deletes the specified patient or an optional fields of the patient from HealthSync.
 
-* Deletes the patient or an optional field of the patient with the specified `n/NAME or id/IC_NUMBER`.
-* You can choose to delete using only name or IC.
-* If both name and IC are used, both must be valid and belong to the same person.
+* Deletes the patient or an optional field of the patient with the specified `n/NAME or id/ID_NUMBER`.
+* You can choose to delete using only name or ID.
+* If both name and ID are used, both must be valid and belong to the same person.
 * You can only delete one patient at a time.
 * To delete a specified field only instead of the entire patient, we indicate the field after the identification.
 
 Formats:  
  * `delete n/NAME [field] ...`
- * `delete id/IC_NUMBER [field] ...`
- * `delete n/NAME id/IC_NUMBER [field] ...`
+ * `delete id/ID_NUMBER [field] ...`
+ * `delete n/NAME id/ID_NUMBER [field] ...`
 
 >:bulb: Use the shortcut `d` for faster patient-deleting
 
@@ -186,7 +189,7 @@ Expected outputs when the command succeeds:
 * `Deleted Patient's field: ...`
 
 Expected output when the command fails:
-* `The given combination of Name and NRIC does not match any patient in the Patients list`.
+* `The given combination of Name and ID does not match any patient in the Patients list`.
 
 ### Delete All Patients: `clear`
 
@@ -198,7 +201,7 @@ Format: `clear`
 
 ![result for 'clear'](images/clearResult.jpg)
 
-### Locating Patients by Name, NRIC or Appointment: `find`
+### Locating Patients by Name, ID or Appointment: `find`
 
 Searches the patient list for all patients matching the name, IC Number or Appointment and returns their related information.
 
@@ -212,7 +215,7 @@ e.g `hans` will match `Hans`, `08-Jan-2023 12 13` will match `08-jan-2023 12 13`
   
 Formats: 
  * `find n/NAME`
- * `find id/IC_NUMBER`
+ * `find id/ID_NUMBER`
  * `find ap/APPOINTMENT`
 
 >:bulb: Use the shortcut `f` for faster patient-finding
@@ -374,7 +377,7 @@ It streamlines tasks and provides a more efficient way to manage patient details
 by different users.
 
 **Q**: How do I import patient data from external sources into HealthSync?<br>
-**A**: Datafile storing current patient data will be stored in `data/addressbook.json` by default under the same folder.
+**A**: The data file that is storing current patient data will be stored in `data/addressbook.json` by default under the same folder.
 You may import patient data and store into that file. However, do adhere to the data format present in the current file.
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -459,7 +462,7 @@ The 2 identifying fields of a patient are given below:
 | Tag   | Representative Value  | Example Usage  | General Form in Commands |
 |-------|-----------------------|----------------|--------------------------|
 | `n/`  | Name                  | `n/Alex`       | `n/NAME`                 |
-| `id/` | Identification Number | `id/S2345678A` | `id/IC_NUMBER`           |
+| `id/` | Identification Number | `id/S2345678A` | `id/ID_NUMBER`           |
 
 1 or more identifying fields must be specified in each command, unless stated otherwise.
 
@@ -480,11 +483,11 @@ Unless stated otherwise, these fields are optional.
 
 The standard unique identifier for your patient. Each patient should have a unique alphanumeric name assigned to them.
 
-#### NRIC
+#### ID
 
 The ID-based unique identifier for your patient. Each patient should have a unique alphanumeric ID assigned to them.
 
-There is no verification system in place for NRIC. This allows you to use your custom identifier for your patients, if
+There is no verification system in place for ID. This allows you to use your custom identifier for your patients, if
 you wish.
 
 #### Phone Number
@@ -583,11 +586,11 @@ JavaScript Object Notation. This is the file format used by HealthSync to save a
 |----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**       | `h`      | `help`                                                                                                                                         |
 | **List**       | `ls`     | `list`                                                                                                                                         |
-| **Add**        | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
-| **Edit**       | `e`      | `edit n/NAME [field] ...` <br>`edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                 |
-| **Delete**     | `d`      | `delete n/NAME [field] ...`<br> `delete id/IC_NUMBER [field] ...` <br> e.g., `delete n/Alex Yeoh m/Diabetes`                                                                                                           |
+| **Add**        | `a`      | `add n/NAME id/ID_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
+| **Edit**       | `e`      | `edit n/NAME [field] ...` <br>`edit id/ID_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                 |
+| **Delete**     | `d`      | `delete n/NAME [field] ...`<br> `delete id/ID_NUMBER [field] ...` <br> e.g., `delete n/Alex Yeoh m/Diabetes`                                                                                                           |
 | **Clear**      | `c`      | `clear`                                                                                                                                        |
-| **Find**       | `f`      | `find n/NAME` <br> `find id/IC_NUMBER` <br> `find ap/APPOINTMENT` <br> e.g., `find n/James Jake` *or* `find id/T0123436F` *or* `find ap/08-aug-2023 0000 2359`                                  |
+| **Find**       | `f`      | `find n/NAME` <br> `find id/ID_NUMBER` <br> `find ap/APPOINTMENT` <br> e.g., `find n/James Jake` *or* `find id/T0123436F` *or* `find ap/08-aug-2023 0000 2359`                                  |
 | **Log**        | `l`      | `log`                                                                                                                                          |
 | **Append Log** | `al`     | `alog`                                                                                                                                         |
 | **Clear Log**  | `cl`     | `clog`                                                                                                                                         |
