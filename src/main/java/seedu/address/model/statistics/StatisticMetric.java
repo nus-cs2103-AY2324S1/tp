@@ -1,5 +1,7 @@
 package seedu.address.model.statistics;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents the different metrics that can be used to calculate the statistics.
  */

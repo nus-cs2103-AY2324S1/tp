@@ -227,9 +227,9 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
     /**
      * Returns the list of people in the address book associated with that tag and has a value greater than
      * or equal to the metric and value provided by the user.
-     * @param tag
-     * @param metric
-     * @param value
+     * @param tag tag to be associated with
+     * @param metric metric to be compared with
+     * @param value value to be compared with
      * @return
      */
     public List<Person> filteredPersonList(Tag tag, StatisticMetric metric, int value) {
@@ -241,11 +241,10 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
             Stream<Score> scoreStream = scoreListStream.map(scoreList -> scoreList.getScore(tag));
             Stream<Integer> scoreValueStream = scoreStream.map(score -> score.value);
             Stream<Person> filteredPersonStream = scoreValueStream.filter(scoreValue -> scoreValue >= value)
-                    .map(scoreValue -> personData.stream()
+                    .flatMap(scoreValue -> personData.stream()
                     .filter(person -> person.getTags().contains(tag)
                             && person.getScoreList().hasTag(tag))
-                    .filter(person -> person.getScoreForTag(tag).value >= scoreValue))
-                    .flatMap(personStream -> personStream);
+                    .filter(person -> person.getScoreForTag(tag).value >= scoreValue)).distinct();
             List<Person> filteredPersonList = filteredPersonStream.collect(Collectors.toList());
             return filteredPersonList;
         case MEAN:
