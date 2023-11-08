@@ -1,5 +1,6 @@
 package seedu.address.statistic;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALPHA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithTagScores;
@@ -144,8 +145,14 @@ public class SummaryStatisticTest {
         List<Person> filteredList7 = summaryStatistic.filteredPersonList(
                 VALID_SCORE_TAG, StatisticMetric.PERCENTILE, 50);
         assertTrue(filteredList7.size() == countOfMoreThanEqualToMedian());
+    }
 
+    @Test
+    public void execute_filteredPersonsWithScoreTag_success() {
+        SummaryStatistic summaryStatistic = new SummaryStatistic(model.getFilteredPersonList());
 
+        Stream<Person> personWithValidScoreTags = summaryStatistic.filteredPersonsWithScoreTag(VALID_SCORE_TAG);
+        assertTrue(personWithValidScoreTags.count() == model.getFilteredPersonList().size());
     }
 
 
