@@ -77,7 +77,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Booking createEditedBooking(Booking bookingToEdit, EditRoomDescriptor editRoomDescriptor) throws CommandException {
+    private static Booking createEditedBooking(Booking bookingToEdit, EditRoomDescriptor editRoomDescriptor)
+            throws CommandException {
         assert bookingToEdit != null;
         Room updatedRoom = editRoomDescriptor.getRoom().orElse(bookingToEdit.getRoom());
         Name updatedName = editRoomDescriptor.getName().orElse(bookingToEdit.getName());

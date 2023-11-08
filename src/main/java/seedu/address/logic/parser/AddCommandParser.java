@@ -60,7 +60,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Remark remark;
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             String remarkInput = argMultimap.getValue(PREFIX_REMARK).get();
-            if(remarkInput.trim().isEmpty()) {
+            if (remarkInput.trim().isEmpty()) {
                 remark = new Remark("N/A");
             } else {
                 remark = ParserUtil.parseRemark(remarkInput);
