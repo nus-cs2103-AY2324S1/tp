@@ -331,7 +331,6 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredLessons.equals(otherModelManager.filteredLessons)
                 && scheduleList.equals(otherModelManager.scheduleList)
-//                && fullTaskList.equals(otherModelManager.fullTaskList);
                 && state.equals(otherModelManager.state);
     }
     //=========== Modify tasks in Lesson  =============================================================

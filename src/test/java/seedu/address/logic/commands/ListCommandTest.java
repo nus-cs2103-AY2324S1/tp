@@ -88,7 +88,8 @@ public class ListCommandTest {
     public void execute_listInitialToStudentParams() {
         expectedModel.setState(State.STUDENT);
         String expectedMessage = ListCommand.MESSAGE_SUCCESS + " " + expectedModel.getState();
-        assertCommandSuccess(new ListCommand(State.STUDENT, new String[]{"email", "phone"}), model, expectedMessage, expectedModel);
+        assertCommandSuccess(new ListCommand(State.STUDENT, new String[]{"email", "phone"}),
+                model, expectedMessage, expectedModel);
     }
 
     // Test list command from intermediate state to another state with display field parameters
@@ -97,7 +98,8 @@ public class ListCommandTest {
         model.setState(State.TASK);
         expectedModel.setState(State.STUDENT);
         String expectedMessage = ListCommand.MESSAGE_SUCCESS + " " + expectedModel.getState();
-        assertCommandSuccess(new ListCommand(State.STUDENT, new String[]{"email", "phone"}), model, expectedMessage, expectedModel);
+        assertCommandSuccess(new ListCommand(State.STUDENT, new String[]{"email", "phone"}),
+                model, expectedMessage, expectedModel);
     }
 
     @Test
