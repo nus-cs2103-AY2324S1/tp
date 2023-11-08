@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-- The features `undo`, `redo` and `history` (including the code) was reused with some changes from AB-4.
+- The features `undo`, `redo` and `history` (including the code) was reused with some changes from AddressBook-Level4.
 
 --------------------------------------------------------------------------------------------------------------------
 
