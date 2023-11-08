@@ -95,8 +95,6 @@ TuitionConnect is a **desktop app for simplifying the process of administration 
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-
 ### Viewing help : `help`
 
 Shows a message that helps redirects you to the user guide.
@@ -359,7 +357,6 @@ Format: `exit`
 
 * The application window closes automatically after you type the command `exit`
 
-</div>
 
 </div>
 </details>
@@ -374,7 +371,7 @@ Format: `exit`
 
 ## Known issues
 
-To be added soon
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
