@@ -4,9 +4,8 @@
  'comprehensive list of skinparams.
  '/
 
-
-!define TAG_COLOR #BA8016
-!define TAG_COLOR_T1 #583900
+!define TAG_COLOR #9D0012
+!define TAG_COLOR_T1 #F97181
 
 skinparam Package {
     BackgroundColor #FFFFFF
@@ -16,6 +15,7 @@ skinparam Package {
 
 skinparam Class {
     FontColor #FFFFFF
+    AttributeFontColor #FFFFFF
     BorderThickness 1
     BorderColor #FFFFFF
     StereotypeFontColor #FFFFFF
