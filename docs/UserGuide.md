@@ -144,7 +144,9 @@ _A flashcard with a question, answer, tag and hint field._
 1. Given a correct input, a success message will be shown containing the user's input.
    1. `“New Card added: Question: (question); Answer: (answer)“`
 2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
-   1. `Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank`
+   1. ```
+      Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank
+      ```
    2. ```
        Invalid command format!
        add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
