@@ -53,7 +53,7 @@ Table of Contents
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [d/Department]` can be used as `n/John Doe d/Investment` or as `n/John Doe`.
+  e.g. `n/NAME [d/Department]` can be used as `n/John Doe d/Investment` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[d/DEPARTMENTS]…​` can be used as ` ` (i.e. 0 times), `d/Investment`, `d/Sales d/Logistic` etc.
@@ -122,9 +122,9 @@ Example:
 
 Acceptable values for each parameter:
 
-| Paramters | Accepted input                                           |
-|-----------|----------------------------------------------------------|
-| command   | A command word present in ManageHR. Alternatively empty. |
+| Parameters | Accepted input                                           |
+|------------|----------------------------------------------------------|
+| command    | A command word present in ManageHR. Alternatively empty. |
 
 Expected outputs:
 
@@ -205,7 +205,7 @@ Finds people whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -223,7 +223,7 @@ Filters employees by prefix parameters.
 
 Format: `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]`
 
-* The filter is case-sensetive. eg. `R&D` will not match `r&d`
+* The filter is case-sensitive. e.g. `R&D` will not match `r&d`
 * At least one of the optional fields must be provided.
 
 Examples:
@@ -273,7 +273,7 @@ Fail:
 Constraints:
 * [Manager-subordinate relationship](#deleting-an-existing-employee-with-manager-subordinate-relationships)
 
-### Fitering Employees : `filter`
+### Filtering Employees : `filter`
 Filters current employee list by constraints given. Displays all filtered employees at-a-glance.
 
 ### Exiting the program : `exit`
