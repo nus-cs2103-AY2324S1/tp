@@ -133,7 +133,7 @@ public class Person implements Entry {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name and phone number.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameEntry(Entry otherEntry) {
@@ -146,7 +146,8 @@ public class Person implements Entry {
         }
 
         Person otherPerson = (Person) otherEntry;
-        return otherPerson.getPersonId().equals(personId);
+        return (name.equals(otherPerson.name)
+                && phone.equals(otherPerson.phone));
     }
 
     /**
