@@ -42,7 +42,7 @@ public class Messages {
             "%1$d employees found! Refer to their indexes for payslip generation";
 
     public static final String MESSAGE_NO_EMPLOYEE_ON_LEAVE =
-            "There are no employee on leave on %1$s";
+            "There are no employees on leave on %1$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
