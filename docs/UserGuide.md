@@ -249,7 +249,6 @@ Examples:
 Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER
 [r/REASON_OF_ABSENCE]`
 
-**Warning Box**
 <div markdown="block" class="alert alert-danger">
 **:exclamation: Warning:** Kindly take note the following!
 * `mark` command is case-sensitive!
