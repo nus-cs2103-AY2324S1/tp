@@ -328,6 +328,8 @@ Below are some examples on how to use the command:
 <box type="warning">
 
 * You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`. 
+* Filetype of the photo must be either jpg or png
+* Photos must not be larger than 5MB
 
 </box>
 
