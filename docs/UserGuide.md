@@ -68,7 +68,7 @@ will be the least of your worries.
   In this case, "Leah" is substituted for `NAME`.
 
 * Items in square brackets are optional.<br>
-  e.g `list [KEYWORDs]` can be used as `list` or as `list STUDENTS`.
+  e.g. `list [LIST] [KEYWORDS]` can be used as `list` or as `list students email`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-name NAME -phone PHONE_NUMBER`, `-phone PHONE_NUMBER -name NAME` is also acceptable.
@@ -77,6 +77,8 @@ will be the least of your worries.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+</box>
 
 
 ### Viewing help : `help`
@@ -91,8 +93,13 @@ Format: `help`
 ### Listing upcoming lessons / tasks / students : `list`
 
 The list command has different behaviours depending on the keywords given.
-Lists all the students, lessons and tasks saved in the application, with optional specified information through space-separated keywords.
-The list names are case-insensitive: eg. `STUDENTS`, `students`, `stuDEnts` are all valid.
+Lists all the students, lessons and tasks saved in the application, with students list having optional specified information through space-separated keywords.
+
+Format: `list [LIST] [KEYWORDS]`
+* Shows the list and associated detail panel for the specified `[LIST]`.
+* `[LIST]` is case-insensitive: e.g. `STUDENTS`, `students`, `stuDEnts` are all valid.
+* The `[KEYWORDS]` is for which specifying student details to display, and is only valid for students list.
+* Keyword specifiers for students list is **case-sensitive**: `subjects` is valid, but `SUBJECTS` or `SubJEcts` are not.
 
 To show the `SCHEDULE` list:
 * Format: `list schedule`
@@ -101,36 +108,36 @@ To show the `SCHEDULE` list:
 
 To show the `TASKS` list:
 * Format: `list tasks`
-    * displays all the tasks with their `DESCRIPTION`.
+    * displays all the tasks with their description.
 
 To show the `STUDENTS` list:
-* Format: `list students [KEYWORDs]`
-    * displays all the students with their `NAME` in alphabetical order.
-    * The `[KEYWORDs]` allows for a list of valid space-separated information of the student to be displayed.
+* Format: `list students [KEYWORDS]`
+    * displays all the students with their name in alphabetical order.
+    * The `[KEYWORDS]` allows for an optional list of valid (case-sensitive) space-separated information of the student to be displayed.
 
 Acceptable values for the keywords:
-* `PHONE`
-* `EMAIL`
-* `ADDRESS`
-* `TAGS`
-* `SUBJECTS`
-* `REMARK`
-* `NONE` (resets to only showing student names)
-* `ALL` (shows all student detail fields)
+* `phone`
+* `email`
+* `address`
+* `tags`
+* `subjects`
+* `remark`
+* `none` (resets to only showing student names)
+* `all` (shows all student detail fields)
 
 Examples:
-* `list` and `list schedule` displays the `SCHEDULE` list with all the lessons with their `NAME` in time order.
-* `list students` displays all the students with their `NAME` (including previously specified fields).
-* `list students subjects` displays all the students with their `NAME` and a list of subjects for each student.
-* `list students subjects email` displays all the students with their `NAME`, a list of subjects for each student and their email.
-* `list tasks` displays all the tasks with their `DESCRIPTION`.
+* `list` and `list schedule` displays the `SCHEDULE` list with all the lessons with their names in time order.
+* `list students` displays all the students with their names (including previously specified fields).
+* `list students subjects` displays all the students with their names and a list of subjects for each student.
+* `list students subjects email` displays all the students with their names, a list of subjects for each student and their email.
+* `list tasks` displays all the tasks with their description.
 
 
 Success Output:
 * For the command `list` or `list schedule`:
   `Showing list SCHEDULE`
   ![Success for list SCHEDULE](images/list/list_schedule_positive.png)
-* For the command `list students` (including extra keywords):
+* For the command `list students` (with no additional student details):
   `Showing list STUDENT`
   ![Success for list STUDENTS](images/list/list_student_positive.png)
 * For the command `list tasks`
@@ -147,9 +154,9 @@ Failure Output:
 ```Invalid command format!
   list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list, optional parameters can be used to specify what student details to display.
   Parameters: [LIST] [KEYWORDS]...
-  Example: list SCHEDULE
-  Example: list STUDENTS phone email
-  Example: list TASKS
+  Example: list schedule
+  Example: list students phone email
+  Example: list tasks
 ```
 
 ### Showing a lesson's/task's/student's details : `show`
@@ -260,7 +267,7 @@ Examples:
 
 Adds a lesson to the schedule list in application.
 
-Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD or YY/MM/DD or MM/DD or DD] [-subject SUBJECT]` <br>e
+Format: `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD or YY/MM/DD or MM/DD or DD] [-subject SUBJECT]` <br>
 Note: If no year and month is specified, the year and month is assumed to be current year and month respectively.
 <box type="tip" seamless>
 
@@ -427,7 +434,7 @@ Task index do not belong to any tasks!
 ```
 ```
 Invalid command format! 
-deleteTask: Deletes the task identified by the task index from the currently displayed lesson .
+deleteTask: Deletes the task identified by the task index from the currently displayed lesson.
 Parameters: task index (must be a positive integer)
 Example: deleteTask 1
 ```
@@ -438,29 +445,25 @@ Please use show lessonIndex before deleting task!
 
 ### Locating students/lessons by name: `find`
 
-The find command has different behaviours depending on the current list:
+The find command generally finds items by its name, but has different behaviours depending on the current list:
 
-1. In `SCHEDULE` list:
-    - Finds lessons whose names are made up of the given search string.
-2. In `STUDENTS` list:
-    - Finds students whose names are made up of the given search string.
+Format: `find SEARCH_STRING`
+
+1. In `SCHEDULE` list: 
+    * Finds lesson(s) whose names contain the given search string.
+    * The search is case-insensitive. e.g. `lesson` will match `Lesson`.
+    * Lesson(s) with names containing the search string will be returned.
+      e.g. Both `Lesson Chem` and `sson Che` will return `Lesson Chemistry`, `Bishan Lesson Chem`.
+
+2. In `STUDENTS` list: 
+    * Finds student(s) whose names contain the given search string.
+    * The search is case-insensitive. e.g `hans` will match `Hans`.
+    * Student(s) with names containing the search string will be returned.
+      e.g. `Hans` will return `Hanso Gruber`, `Lee Hansel`.
+
 3. In `TASKS` list:
-    - Find tasks by name/description is disabled. 
-    - Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see task list of the lesson.
-
-Format: `find KEYWORD`
-
-1. In `SCHEDULE` list:
-    * The search is case-insensitive. e.g `lesson` will match `Lesson`
-    * Only the name is searched.
-    * Lessons matching part of the search string will be returned.
-      e.g. Both `Lesson Chem` and `sson Che` will return `Lesson Chemistry`, `Bishan Lesson Chem`
-
-2. In `STUDENTS` list:
-    * The search is case-insensitive. e.g `hans` will match `Hans`
-    * Only the name is searched.
-    * Persons matching part of the search string will be returned.
-      e.g. `Hans` will return `Hanso Gruber`, `Lee Hansel`
+   * Find tasks by name/description is disabled. 
+   * Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see task list of the lesson.
 
 Success Output:
 * In `SCHEDULE` list:
@@ -471,7 +474,7 @@ Success Output:
 ```
 3 persons listed!
 ```
-These are also counted as success outputs, since they can be a result of finding a valid search string:
+These are also counted as success outputs, since they can be a result of finding a valid search string (with no results):
 * In `SCHEDULE` list:
 ```
 0 lessons listed!
@@ -489,11 +492,33 @@ Parameter: SEARCH_STRING
 Example: find alex yeoh
 ```
 
+### Command history
+
+The command history feature allows you to retrieve previously typed commands into the command text box.
+Cycle through the command history using the up and down arrows.
+Use the up arrow to go back to previous commands, and down arrow to go to next commands.
+
+Example: 
+
+`list students`, `list schedule`, `list tasks` were entered in this order.
+1. Pressing up arrow will go back in the command history and retrieve: `list tasks`. 
+2. Pressing up arrow will go further back in the command history and retrieve: `list schedule`. 
+3. Pressing down arrow will go forward in the command history and retrieve: `list tasks`.
+
+
+Pressing up or down beyond the command history will not change the command text box.
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+### Clearing data : `clear`
+
+Clears the program data.
+
+Format: `clear`
 
 
 ### Saving the data
@@ -534,7 +559,7 @@ Note: Add, Edit & Delete commands are dependent on the list type [`SCHEDULE`, `T
 Action     | Format, Examples                                                                                                                                                                                | List, Remarks 
 -----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------
 **Help**   | `help`                                                                                                                                                                                          |
-**List**   | `list`, `list schedule`, `list students [KEYWORDs]`, `list tasks`                                                                                                                               | NA
+**List**   | `list`, `list schedule`, `list students [KEYWORDS]`, `list tasks`                                                                                                                               | NA
 **Show**   | `show INDEX`                                                                                                                                                                                    | `SCHEDULE`, `STUDENTS`, `TASKS`
 **Add Person**    | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`                                                                                  | ANY LIST
 **Edit Person**   | `editPerson INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG,…​] [-subject SUBJECT,…​`]<br> e.g.,`editPerson 2 -name James Lee -email jameslee@example.com` |  ANY LIST
@@ -544,4 +569,5 @@ Action     | Format, Examples                                                   
 **Add Task**    | `addTask LESSON_INDEX DESCRIPTION`                                                                                                                                                              | `SCHEDULE`
 **Delete Task** | `deleteTask TASK_INDEX`<br> e.g., `delete 3`                                                                                                                                                    | `SCHEDULE`, <br> `show LESSON_INDEX` has to be used prior to `deleteTask` command                                                                                                                                                    | `SCHEDULE`, `STUDENTS`
 **Find**   | `find KEYWORD`                                                                                                                                                                                  | `SCHEDULE`, `STUDENTS`                                                                                                                                                                                  | NA
+**Clear**   | `clear`                                                                                                                                                                                         | NA
 **Exit**   | `exit`                                                                                                                                                                                          | NA
