@@ -3,9 +3,9 @@
   title: "Nicholas Tng's Project Portfolio Page"
 ---
 
-### Project: AddressBook Level 3
+### Project: ProjectPRO
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+ProjectPRO is a desktop application designed to help university students organize their projects. ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserving the advantages of maintaining an attractive user interface. Utilizing simple and easy-to-remember commands to execute different tasks, it helps users streamline their project management.
 
 Given below are my contributions to the project.
 
@@ -27,7 +27,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/#/widget/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&chartGroupIndex=36&chartIndex=3)
 
 * **Project management**:
-  * Managed releases `v1.3.0` - `v1.3.3` (3 releases) on GitHub
+  * Managed releases `v1.3.0` - `v1.3.3` (4 releases) on GitHub
 
 * **Enhancements to existing features**:
   * Updated the GUI color scheme (Pull requests [\#82](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/82), [\#83](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/83), [\#85](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/85))
