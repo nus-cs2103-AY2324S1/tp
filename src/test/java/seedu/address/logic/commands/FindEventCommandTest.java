@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_EVENTS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_EVENT_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.MEETING_ASSIGNMENT_SUBMISSION;
 import static seedu.address.testutil.TypicalEvents.MEETING_BIRTHDAY_PARTY;
@@ -187,7 +188,7 @@ public class FindEventCommandTest {
     @Test
     public void execute_multipleKeywords_oneEventFound() {
         // Event name only
-        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_EVENT_LISTED_OVERVIEW, 1);
         EventNameOrGroupContainsKeywordsPredicate predicate = preparePredicate("birthday party");
         FindEventCommand command = new FindEventCommand(predicate);
         predicate.setPersonList(expectedModel.getFullPersonList());
@@ -197,7 +198,7 @@ public class FindEventCommandTest {
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY), model.getFilteredEventList());
 
         // Person name only
-        expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        expectedMessage = String.format(MESSAGE_EVENT_LISTED_OVERVIEW, 1);
         predicate = preparePredicate("Bob Daniel");
         command = new FindEventCommand(predicate);
         predicate.setPersonList(expectedModel.getFullPersonList());
@@ -208,7 +209,7 @@ public class FindEventCommandTest {
                 model.getFilteredEventList());
 
         // Group name only
-        expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        expectedMessage = String.format(MESSAGE_EVENT_LISTED_OVERVIEW, 1);
         predicate = preparePredicate("friends family");
         command = new FindEventCommand(predicate);
         predicate.setPersonList(expectedModel.getFullPersonList());
@@ -219,7 +220,7 @@ public class FindEventCommandTest {
                 model.getFilteredEventList());
 
         // Event and person name
-        expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        expectedMessage = String.format(MESSAGE_EVENT_LISTED_OVERVIEW, 1);
         predicate = preparePredicate("Bob Party");
         command = new FindEventCommand(predicate);
         predicate.setPersonList(expectedModel.getFullPersonList());
@@ -230,7 +231,7 @@ public class FindEventCommandTest {
                 model.getFilteredEventList());
 
         // Person and group name
-        expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        expectedMessage = String.format(MESSAGE_EVENT_LISTED_OVERVIEW, 1);
         predicate = preparePredicate("family Bob");
         command = new FindEventCommand(predicate);
         predicate.setPersonList(expectedModel.getFullPersonList());
@@ -240,7 +241,7 @@ public class FindEventCommandTest {
         assertEquals(Arrays.asList(MEETING_BIRTHDAY_PARTY), model.getFilteredEventList());
 
         // Event and group name
-        expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        expectedMessage = String.format(MESSAGE_EVENT_LISTED_OVERVIEW, 1);
         predicate = preparePredicate("Party friends");
         command = new FindEventCommand(predicate);
         predicate.setPersonList(expectedModel.getFullPersonList());
@@ -251,7 +252,7 @@ public class FindEventCommandTest {
                 model.getFilteredEventList());
 
         // Event, person and group name (problem)
-        expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        expectedMessage = String.format(MESSAGE_EVENT_LISTED_OVERVIEW, 1);
         predicate = preparePredicate("Bob Party friends");
         command = new FindEventCommand(predicate);
         predicate.setPersonList(expectedModel.getFullPersonList());

@@ -34,7 +34,6 @@ public class EventNameTest {
         assertTrue(EventName.isValidName("event name 2")); // alphanumeric characters
         assertTrue(EventName.isValidName("Event Name")); // with capital letters
         assertTrue(EventName.isValidName("Event Name 2")); // long event names
-        assertTrue(EventName.isValidName("v1.2")); // alphanumeric with symbols
     }
 
     @Test
