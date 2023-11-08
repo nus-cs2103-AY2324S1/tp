@@ -692,25 +692,94 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a student
 
-1. Deleting a student from the current students added in the class manager.
+1. Deleting a student from the current students list.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
+2. Deleting a student that is not in the current students list.
+
    1. Test case: `delete s/vnqvq1924`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+
+3. Deleting a student with an invalid student number.
 
    1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
       Expected: Similar to previous.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Delete the data file `data/classmanager.json`<br>
+      Expected: The app will create a new data file when it is next closed.
+
+2. Dealing with corrupted data files
+   1. Edit the data file `data/classmanager.json` <br> 
+      Expected: The app will show an error message and exit when it is next launched.
 
 1. _{ more test cases …​ }_
+
+
+### Adding a student
+
+1. Adding a new student to the current students list.
+
+   1. Test case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`<br>
+      Expected: The student with NAME, STUDENT_NUMBER and EMAIL is added to the list. Details of the added student shown in the status message. Timestamp in the status bar is updated.
+
+2. Adding an already existing student to the current students list.
+
+   1. Test case: Student Number that is already present in the list <br>
+      Expected: No student is added. Error details shown in the status message. Status bar remains the same.
+
+3. Adding a student without some required fields <br>
+   1. Test Case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`, `add n/NAME s/PHONE e/EMAIL`<br>
+      Expected: No student is added. Error details shown in the status message. Status bar remains the same.
+
+### Editing a student
+
+1. Editing a student's details in the current students list.
+
+   1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
+      Expected: The student with STUDENT_NUMBER is edited to have the new NAME. 
+   2. Test case: `edit STUDENT_NUMBER s/STUDENT_NUMBER`<br>
+      Expected: The student with STUDENT_NUMBER is edited to have the new STUDENT_NUMBER. 
+
+2. Editing a student's details where the student is not in the list (Invalid Student Number). 
+
+   1. Test case: Edit command with Student Number that is not present in the list <br>
+      Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+### Adding a comment to a student
+
+1. Adding a comment to a student in the current students list.
+
+   1. Test case: `comment STUDENT_NUMBER c/COMMENT`<br>
+      Expected: The student with STUDENT_NUMBER is edited to have the new COMMENT. 
+   
+2. Adding a comment to a student where the student is not in the list (Invalid Student Number). 
+
+   1. Test case: Comment command with Student Number that is not present in the list <br>
+      Expected: No student is edited. Error details shown in the status message. Status bar remains the same.
+
+3. Adding a comment to a student where the new comment is empty.
+
+   1. Test case: `comment STUDENT_NUMBER c/`<br>
+      Expected: Student is edited to have an empty comment. 
+
+### Tagging a student
+
+1. Tagging an existing student in the current students list.
+
+   1. Test case: `tag STUDENT_NUMBER t/TAG`<br>
+      Expected: The student with STUDENT_NUMBER is tagged with the new TAG.
+
+2. Adding a new student with tags.
+
+   1. Test case: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]...`<br>
+      Expected: The student with NAME, STUDENT_NUMBER, EMAIL and TAG is added to the list. Details of the added student shown in the status message. Timestamp in the status bar is updated.
+
