@@ -410,7 +410,7 @@ Format: `report EMPLOYEE_ID`
 * The overtime pay is calculated based on the overtime hours and the salary of the employee.
   * The following [Singaporean Ministry of Manpower's prescribed formula](https://www.mom.gov.sg/employment-practices/hours-of-work-overtime-and-rest-days) is used to calculate overtime pay.
 
-      ![overtime pay formula](https://latex.codecogs.com/png.latex?%5Cdpi%7B150%7D%20%5Cfn_phv%201.5%5Ctimes%20%5Cfrac%7B12%20%5Ctimes%20%5Ctext%7BMonthly%20Salary%7D%7D%7B52%5Ctimes%2044%7D)
+      ![overtime pay formula](https://latex.codecogs.com/png.latex?1.5\times%20\frac{12%20\times%20\text{Monthly%20Salary}}{52\times%2044}\times{\text{number%20of%20overtime%20hours}})
 
 
 Examples:
