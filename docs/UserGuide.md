@@ -277,6 +277,8 @@ email at _johnd@example.com_ and address at _311, Clementi Ave 2, #02-25_, who i
 
 - A patient's email must be a _valid email address_, i.e. of the form `name@domain.com`.
 
+- A patient's illness can only consist of _letters and numbers_.
+
 - You do not have to enter the illness when adding a patient.
 
 <div markdown="span" class="alert alert-info">
@@ -288,7 +290,7 @@ You can enter more than one illness for a patient, e.g. `illnesses=fever, flu` w
 ### Updating a patient's details: `edit`
 
 This command updates a patient's personal information and contact details. It will update the details of the patient at
-the specified `INDEX` shown in the patients records. You must edit *at least one* detail when using the command.
+the specified `INDEX` currently shown in the patients records. You must edit *at least one* detail when using the command.
 
 :clipboard: **Format**: `edit INDEX [name=NAME] [gender=GENDER] [birthdate=BIRTHDATE] [phone=PHONE] [email=EMAIL] [address=ADDRESS]`
 
@@ -299,16 +301,26 @@ the patient's birthdate to _2001/12/14_ and phone number to _93842738_.
 
 :pencil2: **Notes:**
 
-- You must follow the same format as the [add patient command](#adding-a-new-patient-add) for the various details of the patient.
-
 - The index provided must be a _positive integer_ and a _valid index_.
 
 - You must edit _at least one_ detail when using the command.
 
+- A patient's name can only consist of _letters and numbers_.
+
+- A patient's gender can only be `MALE` or `FEMALE`.
+
+- A patient's birthdate must be in the format `yyyy/MM/dd`, e.g. `2001/04/28` for a birthdate on 28 April 2001.
+
+- A patient's phone must be a _valid phone number_, i.e. only contains numbers.
+
+- A patient's email must be a _valid email address_, i.e. of the form `name@domain.com`.
+
+- You do not have to enter the illness when adding a patient.
+
 ### Diagnosing a patient: `diagnose`
 
 This command adds one or more illnesses to a patient's current illnesses. It will update the details of the patient at
-the specified `INDEX` shown in the patients records.
+the specified `INDEX` currently shown in the patients records.
 
 :clipboard: **Format**: `diagnose INDEX illnesses=ILLNESS`
 
@@ -317,6 +329,8 @@ the specified `INDEX` shown in the patients records.
 :pencil2: **Notes:**
 
 - The index provided must be a _positive integer_ and a _valid index_.
+
+- A patient's illness can only consist of _letters and numbers_.
 
 This example command will update the patient with index 1 in the patient records (i.e. the first patient) and will add
 _fever_ to the patient's illnesses.
@@ -328,7 +342,7 @@ You can enter more than one illness for a patient, e.g. `illnesses=fever, flu` w
 ### Undiagnosing a patient: `undiagnose`
 
 This command removes one or more illnesses to a patient's current illnesses. It will update the details of the patient at
-the specified `INDEX` shown in the patients records.
+the specified `INDEX` currently shown in the patients records.
 
 :clipboard: **Format**: `undiagnose INDEX illnesses=ILLNESS`
 
@@ -337,6 +351,8 @@ the specified `INDEX` shown in the patients records.
 :pencil2: **Notes:**
 
 - The index provided must be a _positive integer_ and a _valid index_.
+
+- A patient's illness can only consist of _letters and numbers_.
 
 This example command will update the patient with index 1 in the patient records (i.e. the first patient) and will remove
 _fever_ from the patient's illnesses.
@@ -348,7 +364,7 @@ You can enter more than one illness for a patient, e.g. `illnesses=fever, flu` w
 ### Removing a patient: `delete`
 
 This commands removes the specified patient from the patient list. It will remove the patient at
-the specified `INDEX` shown in the patients records.
+the specified `INDEX` currently shown in the patients records.
 
 :clipboard: **Format**: `delete INDEX`
 
@@ -444,7 +460,7 @@ from _12pm_ to _1pm_ for his _follow-up appointment on his chest X-Ray_.
 
 :pencil2: **Notes:**
 
-- The patient provided for an appointment must be the _full name_ of a patient that is already in the patient records.
+- The patient provided for an appointment must exactly match the _full name_ of a patient that is already in the patient records. 
 
 - An appointment start and end must be in the format `yyyy/MM/dd HH:mm`, e.g. `2023/04/28 19:00` for 28 April 2023, at 7pm.
 
@@ -457,7 +473,7 @@ from _12pm_ to _1pm_ for his _follow-up appointment on his chest X-Ray_.
 ### Rescheduling an appointment: `reschedule`
 
 This command reschedules an existing appointment to another timeslot. It will reschedule the appointment at the specified
-`INDEX` shown in the appointments list.
+`INDEX` currently shown in the appointments list.
 
 :clipboard: **Format**: `reschedule INDEX start=START end=END`
 
@@ -468,16 +484,24 @@ _2 May 2023_, from _9am_ to _11am_.
 
 :pencil2: **Notes:**
 
-- You must follow the same format as the [schedule appointment command](#scheduling-a-new-appointment-schedule) for the various details of the appointment.
-
 - The index provided must be a _positive integer_ and a _valid index_.
 
 - You must specify _both start and end_ when using the command.
 
+- The patient provided for an appointment must exactly match the _full name_ of a patient that is already in the patient records.
+
+- An appointment start and end must be in the format `yyyy/MM/dd HH:mm`, e.g. `2023/04/28 19:00` for 28 April 2023, at 7pm.
+
+- An appointment start date time should occur _before_ end date time of the same appointment.
+
+- An appointment description can only consist of _letters and numbers_.
+
+- An appointment priority can only be `high`, `medium`, or `low`.
+
 ### Triaging an appointment: `triage`
 
 This command changes the priority of an existing appointment. It will change the appointment at the specified
-`INDEX` shown in the appointments list.
+`INDEX` currently shown in the appointments list.
 
 :clipboard: **Format**: `triage INDEX priority=PRIORITY`
 
@@ -494,7 +518,7 @@ This example command will change the priority of the appointment with index 1 in
 ### Cancelling an appointment: `cancel`
 
 This command cancels an existing appointment. It will cancel the appointment at the specified
-`INDEX` shown in the appointments list.
+`INDEX` currently shown in the appointments list.
 
 :clipboard: **Format**: `cancel INDEX`
 
@@ -578,11 +602,19 @@ This command undoes a previous command.
 
 :clipboard: **Format**: `undo`
 
+:pencil2: **Notes:**
+
+- The `mode` command cannot be undone using this command, as you can simply type mode again to toggle the dark/light mode.
+
 ### Redoing a previous command: `redo`
 
 This command redoes a previous command that you undid.
 
 :clipboard: **Format**: `redo`
+
+:pencil2: **Notes:**
+
+- The `mode` command cannot be redone using this command, as you can simply type mode again to toggle the dark/light mode.
 
 ### Clearing all records: `clear`
 
