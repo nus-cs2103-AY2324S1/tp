@@ -546,7 +546,8 @@ Example usage:
 You can use the `save` command to manually save your contacts to the data file.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-NetworkBook automatically saves your data in most cases. You can use this command to ensure successful data saving when NetworkBook's permission to the data file is possibly compromised.
+**You do not need to manually save in most cases** -- NetworkBook automatically saves your data, as long as it has permission to write to the data file.
+You may need to manually save if NetworkBook's permission to write to the data file is compromised.
 </div>
 
 Format: `save`
