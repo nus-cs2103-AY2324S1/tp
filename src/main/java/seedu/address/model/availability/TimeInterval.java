@@ -45,6 +45,9 @@ public class TimeInterval {
      * @return True if this time interval is in between the given time interval.
      */
     public boolean isInBetween(TimeInterval intervalToCheckAgainst) {
+        if (intervalToCheckAgainst == null) {
+            return false;
+        }
         return (this.from.isBefore(intervalToCheckAgainst.from) || this.from.equals(intervalToCheckAgainst.from))
                 && (this.to.isAfter(intervalToCheckAgainst.to) || this.to.equals(intervalToCheckAgainst.to));
     }

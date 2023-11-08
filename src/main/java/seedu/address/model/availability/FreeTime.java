@@ -87,8 +87,12 @@ public class FreeTime {
         StringBuilder str = new StringBuilder("\n");
 
         for (int i = 0; i < NUM_DAYS; i++) {
+            TimeInterval dayInterval = this.intervals.get(i);
+            if (dayInterval == null) {
+                continue;
+            }
             String day = DayOfWeek.of(i + 1).getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
-            str.append(String.format("%s: %s\n", day, this.intervals.get(i)));
+            str.append(String.format("%s: %s\n", day, dayInterval));
         }
         return str.toString();
     }
@@ -129,7 +133,7 @@ public class FreeTime {
     /**
      * Updates the availability for a specific day of the week with a new time interval.
      *
-     * @param dayOfWeek The day of the week to update availability for (1 for Sunday, 2 for Monday, etc.).
+     * @param dayOfWeek       The day of the week to update availability for (1 for Sunday, 2 for Monday, etc.).
      * @param updatedInterval The new time interval to set for the specified day.
      * @return A new FreeTime object with the updated availability for the specified day.
      */

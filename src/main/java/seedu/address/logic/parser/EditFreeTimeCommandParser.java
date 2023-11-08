@@ -45,7 +45,7 @@ public class EditFreeTimeCommandParser implements Parser<EditFreeTimeCommand> {
                     argMultimap.getValue(PREFIX_TO).get());
             editPersonDescriptor.setTimeInterval(updatedTimeInterval);
 
-            if (!editPersonDescriptor.isAnyFieldEdited()) {
+            if (editPersonDescriptor.isNoFieldEdited()) {
                 throw new ParseException(EditFreeTimeCommand.MESSAGE_NOT_EDITED);
             }
             return new EditFreeTimeCommand(index, dayOfWeek, editPersonDescriptor);

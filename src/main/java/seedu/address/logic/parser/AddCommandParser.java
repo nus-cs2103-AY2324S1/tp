@@ -63,11 +63,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Telegram telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        FreeTime freeTime = ParserUtil.parseFreeTime(argMultimap.getValue(PREFIX_FROM).orElseGet(() -> null),
-                argMultimap.getValue((PREFIX_TO)).orElseGet(() -> null));
         Set<Course> courseList = ParserUtil.parseCourses(argMultimap.getAllValues(PREFIX_COURSE));
         Hour hour = ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).orElseGet(() -> Hour.EMPTY_HOUR));
-        Person person = new Person(name, phone, email, telegram, tagList, freeTime, courseList, hour);
+        Person person = new Person(name, phone, email, telegram, tagList, FreeTime.EMPTY_FREE_TIME, courseList, hour);
 
         return new AddCommand(person);
     }
