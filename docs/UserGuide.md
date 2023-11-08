@@ -169,11 +169,11 @@ Adds a member to the list of members in CMC.
 
 :information_source: **Notes about input parameter:**
 
-- `memberName`: Only alphabetical characters, @, () are allowed
-- `phoneNumber`: Only numbers are allowed
-- `email`: Must follow the format of xyz@abc.wsd
-- `telegramHandle`: Only alphanumeric characters and underscore are allowed
-- `tag`: Only alphanumeric characters are allowed, tags are optional
+* `memberName`: Only alphabetical characters, @, () are allowed
+* `phoneNumber`: Only numbers are allowed
+* `email`: Must follow the format of xyz@abc.wsd
+* `telegramHandle`: Only alphanumeric characters and underscore are allowed
+* `tag`: Only alphanumeric characters are allowed, tags are optional
 
 </div>
 
@@ -181,11 +181,11 @@ Adds a member to the list of members in CMC.
 
 :information_source: **Notes about duplicate members:**
 
-Duplicate members are not allowed to be added into the list of members.
+* Duplicate members are not allowed to be added into the list of members.
 
-A member is considered a duplicate if the member's name, phone number, email **or** telegram handle matches that of an existing member.
+* A member is considered a duplicate if the member's name, phone number, email **or** telegram handle matches that of an existing member.
 
-This means that only a member with a unique name, phone number, email and telegram handle can be added into the list of members.
+* This means that only a member with a unique name, phone number, email and telegram handle can be added into the list of members.
 
 </div>
 
@@ -339,9 +339,9 @@ Adds an applicant to the list of applicants in CMC.
 
 :information_source: **Notes about input parameter:**
 
-- `applicantName`: Only alphabetical characters, @, () are allowed
+* `applicantName`: Only alphabetical characters, @, () are allowed
 
-- `phoneNumber`: Only numbers are allowed
+* `phoneNumber`: Only numbers are allowed
 
 </div>
 
@@ -349,11 +349,11 @@ Adds an applicant to the list of applicants in CMC.
 
 :information_source: **Notes about duplicate applicants:**
 
-Duplicate applicants are not allowed to be added into the list of applicants.
+* Duplicate applicants are not allowed to be added into the list of applicants.
 
-An applicant is considered a duplicate if the applicant's name **or** phone number matches that of an existing applicant.
+* An applicant is considered a duplicate if the applicant's name **or** phone number matches that of an existing applicant.
 
-This means that only an applicant with a unique name and phone number can be added into the list of applicants.
+* This means that only an applicant with a unique name and phone number can be added into the list of applicants.
 
 </div>
 
