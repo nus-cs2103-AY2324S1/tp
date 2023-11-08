@@ -82,6 +82,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setNearestMrtStation(ParserUtil.parseMrtStation(
                     argMultimap.getValue(PREFIX_NEAREST_MRT_STATION).get()));
         }
+
         Collection<EnrolDate> dates = ParserUtil.parseDates(argMultimap.getAllValues(PREFIX_ENROL_DATE));
         Collection<String> tags = argMultimap.getAllValues(PREFIX_SUBJECT);
         parseTagsForEdit(tags, dates).ifPresent(editPersonDescriptor::setSubjects);
@@ -102,16 +103,10 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     private Optional<Set<Subject>> parseTagsForEdit(Collection<String> tags,
                                                     Collection<EnrolDate> dates) throws ParseException {
-        assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-
+        requireNonNull(tags);
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-
-        return dates.isEmpty() ? Optional.of(ParserUtil.parseTags(tagSet))
-                : Optional.of(ParserUtil.parseTags(tagSet, dates));
+        Set<Subject> subjects = dates.isEmpty() ? ParserUtil.parseTags(tagSet) : ParserUtil.parseTags(tagSet, dates);
+        return subjects.isEmpty() ? Optional.empty() : Optional.of(subjects);
     }
 
 }

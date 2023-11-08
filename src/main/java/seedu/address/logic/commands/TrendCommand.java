@@ -31,7 +31,9 @@ public class TrendCommand extends Command {
      * @param args The year such that the data during this year is to be analyzed.
      */
     public TrendCommand(String args) {
-        this.year = Integer.parseInt(args.trim());
+        String trimmed = args.trim();
+
+        this.year = Integer.parseInt(trimmed);
     }
 
     @Override

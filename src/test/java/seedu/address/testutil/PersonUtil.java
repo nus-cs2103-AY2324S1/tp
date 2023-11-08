@@ -62,9 +62,7 @@ public class PersonUtil {
                 sb.append(PREFIX_NEAREST_MRT_STATION).append(mrtStation.mrtStationName).append(" "));
         if (descriptor.getSubjects().isPresent()) {
             Set<Subject> subjects = descriptor.getSubjects().get();
-            if (subjects.isEmpty()) {
-                sb.append(PREFIX_SUBJECT);
-            } else {
+            if (!subjects.isEmpty()) {
                 subjects.forEach(s -> sb.append(PREFIX_SUBJECT).append(s.getSubjectName()).append(" "));
             }
         }

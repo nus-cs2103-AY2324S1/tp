@@ -21,9 +21,11 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.TableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordPredicate;
+import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.StudentPredicateList;
 import seedu.address.model.person.StudentTakesSubjectPredicate;
@@ -96,6 +98,14 @@ public class AddressBookParserTest {
         assertEquals(new BarChartCommand("s/"), command3);
     }
 
+    @Test
+    public void parseCommand_sort() throws Exception {
+        String sequence = "ASC";
+        SortIn sortIn = new SortIn(sequence);
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " in/" + sequence);
+        assertEquals(new SortCommand(sortIn), command);
+    }
     @Test
     public void parseCommand_export() throws Exception {
         String visualType = "Bar";

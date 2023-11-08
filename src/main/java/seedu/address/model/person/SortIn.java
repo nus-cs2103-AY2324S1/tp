@@ -18,7 +18,7 @@ public class SortIn {
     public enum ValidSequence { ASC, DESC; }
 
     /**
-     * Constructs a {@code MrtStation}.
+     * Constructs a {@code SortIn}.
      *
      * @param sortIn A valid attribute to sort in.
      */
