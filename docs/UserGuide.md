@@ -165,7 +165,7 @@ Adds a member to the list of members in CMC.
 
 `addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
 
@@ -177,7 +177,7 @@ Adds a member to the list of members in CMC.
 
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about duplicate members:**
 
@@ -335,7 +335,7 @@ Adds an applicant to the list of applicants in CMC.
 
 `adda /name {applicantName} /phone {phoneNumber}`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
 
@@ -345,7 +345,7 @@ Adds an applicant to the list of applicants in CMC.
 
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about duplicate applicants:**
 
