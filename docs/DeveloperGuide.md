@@ -717,18 +717,25 @@ testers are expected to do more *exploratory* testing.
 
 1. The current success message after executing an undo or redo command is `Undo Successful.` or `Redo Successful.`, but
 this is too general and does not provide any useful information. We plan to add the exact command that was undone or redone
-to the success message so that the user knows exactly what command was undone or redone. 
+to the success message so that the user knows exactly what command was undone or redone.
 
-2. Currently, patients with the same name but with different casing, i.e. same letters but different in uppercase/lowercase,
+2. Currently, after scheduling an appointment for a patient, the user is not able to change the description of the appointment.
+We plan to change the triage command so that it will allow the user to change the appointment description.
+
+3. Currently, patients with the same name but with different casing, i.e. same letters but different in uppercase/lowercase,
 can be added to the patient records. However, that can be very confusing for users, especially if they had accidentally added
 a duplicate patient into the records but with a different casing for the patient name. We plan to make the checking for any
 duplicates in patient names case-insensitive so that this will no longer be an issue.
 
-3. Similar to Point 2, currently, illnesses with the same name but with different casing, i.e. same letters but different in uppercase/lowercase,
+4. Similar to Point 2, currently, illnesses with the same name but with different casing, i.e. same letters but different in uppercase/lowercase,
 can be added to the same patient. However, that can be very confusing for users, especially if they had accidentally added
 a duplicate illness to the same patient but with a different casing for the illness name. We plan to make the checking for any
 duplicates in illness names case-insensitive so that this will no longer be an issue.
 
-4. Currently, gender can only be `MALE` or `FEMALE`, and the input has to match the words exactly, meaning that the input has to
+5. Similar to Point 2, currently to schedule an appointment for a patient, the full name of the patient including the correct casing
+must be provided to the `schedule` command. We plan to change the `schedule`command such that it will accept the full name of a patient
+in any casing.
+
+6. Currently, gender can only be `MALE` or `FEMALE`, and the input has to match the words exactly, meaning that the input has to
 be uppercase. However, in order to optimise for fast typists, we plan to treat the gender attribute as case-insensitive, so that
 any input that is either `male` or `female` will be accepted without worrying about the casing.
