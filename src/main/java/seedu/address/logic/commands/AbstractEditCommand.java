@@ -126,10 +126,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
      */
     private void editFields() throws CommandException {
         edited.setNameIfNotDefault(editDescriptor.getName());
-        edited.setRemarkIfNotDefault(editDescriptor.getRemark());
-        edited.setTagsIfNotDefault(editDescriptor.getTags());
         setNonDefaultFields();
-        //incrementNonDefaultFields(edited, incrementDescriptor);
     }
     protected void validateEditedAndWriteBack() throws CommandException {
         if (edited.equals(original)) {

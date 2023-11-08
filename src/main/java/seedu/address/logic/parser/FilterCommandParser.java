@@ -94,10 +94,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 if (after != null) {
                     predicate.addPredicate(lesson -> lesson.getDay().compareTo(after) > 0);
                 }
-                Remark remark = parseField("remark", userInput, Remark::of);
-                if (remark != null) {
-                    predicate.addPredicate(lesson -> lesson.getRemark().contains(remark));
-                }
                 if (predicate.isEmpty()) {
                     throw new ParseException("You must specify at least one field to filter!");
                 }

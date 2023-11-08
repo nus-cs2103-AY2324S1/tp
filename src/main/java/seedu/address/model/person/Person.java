@@ -20,6 +20,9 @@ public class Person extends ListEntry<Person> {
 
     // Data fields
     private Address address = Address.DEFAULT_ADDRESS;
+    private Remark remark = Remark.DEFAULT_REMARK;
+    private Tags tags = new Tags();
+
     private Subjects subjects = new Subjects();
 
 
@@ -198,4 +201,42 @@ public class Person extends ListEntry<Person> {
         return name.compareTo(p.name);
     }
 
+
+    public Tags getTags() {
+        return tags;
+    }
+
+    public void setTags(Tags tags) {
+        requireAllNonNull(tags);
+        this.tags = tags;
+    }
+    public void setTagsIfNotDefault(Set<Tag> tags) {
+        if (tags != null) {
+            setTagsIfNotDefault(new Tags(tags));
+        }
+    }
+
+    public void setTagsIfNotDefault(Tags tags) {
+        if (tags != null && !tags.equals(new Tags())) {
+            setTags(tags);
+        }
+    }
+
+    public Remark getRemark() {
+        return remark;
+    }
+
+    public void setRemark(Remark remark) {
+        requireAllNonNull(remark);
+        this.remark = remark;
+    }
+
+    public void setRemarkIfNotDefault(Remark remark) {
+        if (remark != null && !remark.equals(Remark.DEFAULT_REMARK)) {
+            setRemark(remark);
+        }
+    }
+    public Set<Tag> getTagsSet() {
+        return tags.getTagSetClone();
+    }
 }

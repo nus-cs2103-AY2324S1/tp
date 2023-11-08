@@ -16,7 +16,6 @@ import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.TaskList;
 import seedu.address.model.lessons.Time;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.Subject;
 
 
@@ -29,7 +28,6 @@ public class JsonAdaptedLesson {
     private final String day;
     private final String subject;
     private final String name;
-    private final String remark;
     private final List<JsonAdaptedTask> taskList = new ArrayList<>();
 
     /**
@@ -48,7 +46,6 @@ public class JsonAdaptedLesson {
         this.end = end;
         this.day = day;
         this.subject = subject;
-        this.remark = remark;
         if (taskList != null) {
             this.taskList.addAll(taskList);
         }
@@ -63,7 +60,6 @@ public class JsonAdaptedLesson {
         end = serialize(source.getEnd());
         day = serialize(source.getDay());
         subject = serialize(source.getSubject());
-        remark = serialize(source.getRemark());
         taskList.addAll(source.getTaskListClone().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
     /**
@@ -78,7 +74,6 @@ public class JsonAdaptedLesson {
             Time end = deserialize(Time.DEFAULT_TIME, Time::deserialize, this.end);
             Day day = deserialize(Day.DEFAULT_DAY, Day::deserialize, this.day);
             Subject subject = deserialize(Subject.DEFAULT_SUBJECT, Subject::of, this.subject);
-            Remark remark = deserialize(Remark.DEFAULT_REMARK, Remark::of, this.remark);
             TaskList taskList = TaskList.of(this.taskList);
 
             return new Lesson(name, start, end, day, subject, taskList);

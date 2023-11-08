@@ -32,6 +32,8 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
         edited.setEmailIfNotDefault(editDescriptor.getEmail());
         edited.setAddressIfNotDefault(editDescriptor.getAddress());
         edited.setSubjectsIfNotDefault(editDescriptor.getSubjects());
+        edited.setRemarkIfNotDefault(editDescriptor.getRemark());
+        edited.setTagsIfNotDefault(editDescriptor.getTags());
     }
 
     @Override
