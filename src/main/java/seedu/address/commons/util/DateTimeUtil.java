@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Utilities about date and time
@@ -19,8 +20,13 @@ public class DateTimeUtil {
      */
     public static LocalDateTime parseString(String str) throws DateTimeParseException {
         requireNonNull(str);
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm[:ss]");
+        
+        DateTimeFormatter formatter1 = DateTimeFormatter
+                .ofPattern("uuuu-MM-dd HH:mm[:ss]")
+                .withResolverStyle(ResolverStyle.STRICT);
+
         LocalDateTime result = null;
+
         try {
             result = LocalDateTime.parse(str, formatter1);
         } catch (DateTimeParseException e2) {
