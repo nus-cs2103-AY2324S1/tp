@@ -1,0 +1,97 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CompleteCommandParser" as CompleteCommandParser LOGIC_COLOR
+participant ":CompleteCommandDescriptor" as CompleteCommandDescriptor LOGIC_COLOR
+participant "c:CompleteCommand" as CompleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("complete d/01-01-2023")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("complete d/01-01-2023")")
+activate AddressBookParser
+
+create CompleteCommandParser
+AddressBookParser -> CompleteCommandParser
+activate CompleteCommandParser
+
+CompleteCommandParser --> AddressBookParser
+deactivate CompleteCommandParser
+
+AddressBookParser -> CompleteCommandParser : parse("d/01-01-2023")
+activate CompleteCommandParser
+
+create CompleteCommandDescriptor
+CompleteCommandParser -> CompleteCommandDescriptor
+activate CompleteCommandDescriptor
+
+CompleteCommandDescriptor --> CompleteCommandParser
+deactivate CompleteCommandDescriptor
+
+CompleteCommandParser -> CompleteCommandDescriptor
+activate CompleteCommandDescriptor
+CompleteCommandDescriptor -> CompleteCommandDescriptor : sets Date to LocalDate parsed by parser
+activate CompleteCommandDescriptor
+CompleteCommandDescriptor --> CompleteCommandDescriptor :
+deactivate CompleteCommandDescriptor
+CompleteCommandDescriptor --> CompleteCommandParser
+deactivate
+
+
+create CompleteCommand
+CompleteCommandParser -> CompleteCommand
+activate CompleteCommand
+
+CompleteCommand --> CompleteCommandParser : c
+deactivate CompleteCommand
+
+CompleteCommandParser --> AddressBookParser : c
+deactivate CompleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CompleteCommandParser -[hidden]-> AddressBookParser
+destroy CompleteCommandParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> CompleteCommand : execute()
+activate CompleteCommand
+
+CompleteCommand -> CompleteCommandDescriptor : getDate()
+activate CompleteCommandDescriptor
+CompleteCommandDescriptor --> CompleteCommand
+deactivate CompleteCommandDescriptor
+
+CompleteCommand -> Model : clear appointments by date
+activate Model
+
+Model --> CompleteCommand
+deactivate Model
+
+create CommandResult
+CompleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CompleteCommand
+deactivate CommandResult
+
+CompleteCommand --> LogicManager : result
+deactivate CompleteCommand
+
+CompleteCommand -[hidden]-> CompleteCommandParser
+destroy CompleteCommand
+destroy CompleteCommandParser
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

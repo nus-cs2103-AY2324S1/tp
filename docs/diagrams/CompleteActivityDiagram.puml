@@ -1,0 +1,40 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters a complete command;
+
+:CompleteCommandParser parses the user input and checks validity;
+
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+switch ()
+case([the complete command is valid])
+    : Creates a CompleteCommand which is executed by LogicManager;
+    switch ()
+          case ([index input by user])
+            : Checks for appointment of given person in FilterPersonList;
+            switch ()
+            case([if have appointment])
+            : Clears appointment for the Person;
+            case([if no appointment])
+            : Throws an error;
+            endswitch
+          case ([date input by user])
+            : Checks for persons in FilterPersonList who appointment date matches input;
+            switch()
+            case([have at least one appointment with date matching input in list])
+            : Clears all appointments with matching dates;
+            case([no appointment date matches input])
+            : Throws an error;
+            endswitch
+        endswitch
+case([else])
+    : Throws an error;
+endswitch
+stop
+@enduml
+
