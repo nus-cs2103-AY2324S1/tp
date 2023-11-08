@@ -497,7 +497,7 @@ This generates a list of all members whose details contain `Rui`.
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 
 If you would like to go back to the whole list of applicants, use `viewapplicants`.
-You may check out the command [here](#423-viewing-applicants-viewapplicants-or-viewa).
+You may check out the command [here](#423-viewing-applicants--viewapplicants-or-viewa).
 
 </div>
 
@@ -505,7 +505,7 @@ You may check out the command [here](#423-viewing-applicants-viewapplicants-or-v
 
 Generates a list of all existing applicant(s). An example of where you might want to use this command is if
 you want to go back to viewing all members after a search.
-with [`findapplicant`](#422-finding-applicants-findapplicant-or-finda).
+with [`findapplicant`](#422-finding-applicants--findapplicant-or-finda).
 
 ##### Format:
 
