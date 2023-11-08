@@ -195,9 +195,9 @@ The following activity diagram summarizes what happens when a user executes a ta
   * Pros: Easy to implement.
   * Cons: Users have to always replace the tag even if they want to keep it.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
 The undo/redo feature works similarly to the one implemented in AddressBook-Level 4, but with support for more commands. The undo/redo mechanism is facilitated by `VersionedClassManager`. It extends `ClassManager` with an undo/redo history, stored internally as an `classManagerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -297,7 +297,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 1 (current choice):** Not supporting undo/redo for `load` and `config`
   * Pros: Ensures that Class Manager will not run into issues when undoing `load` for missing saved files. Enforces the immutability of tutorial and assignment count after `config` has been entered.
   * Cons: Unable to change tutorial and assignment count after `config` has been entered.
-* **Alternative 2:**Supporting undo/redo for all commands.
+* **Alternative 2:** Supporting undo/redo for all commands.
   * Pros: Ensures that app is consistent with undo/redo and users will not be unsure if a certain command can be undone.
   * Cons: Can be confusing for the user to use undo/redo with `load`.
 
@@ -322,28 +322,6 @@ The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `Loa
 3. The `LoadCommandParser` then calls ArgumentTokenizer#tokenize(String argString, Prefix... prefixes) to extract the file name. If there are duplicate prefixes, a ParseException would be thrown.
 4. The file name is then check to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
 5. The `LoadCommandParser` then creates the `LoadCommand` based on the processed input.
-
-### Present feature
-
-#### About this feature
-
-The present feature allows users to mark a specific student to be present in a specific tutorial in the app.
-
-This feature builds upon the current design of Student and ClassDetails.
-
-#### How it is implemented
-
-<puml src="diagrams/MarkPresentSequenceDiagram.puml" alt="MarkPresentSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The diagram above only shows part of the interactions within the model component. The interactions within the logic component are similar to other commands.
-
-</box>
-
-#### Design considerations:
-
-The feature should be implemented upon the current design of Student and ClassDetails. Alternative designs may exist, such as treating the attendance and participation as association classes.
 
 ### Config feature
 
@@ -413,6 +391,30 @@ or assignment grade.
   * Pros: Will use less memory.
   * Cons: Will need to implement different functions for each type of class details. Implementation will be more
   complicated. SLAP principle might not be able to be adhered to.
+
+### Modify Class Details features
+
+#### About the features
+
+Modify Class Details features includes command such as `present`, `absent`, `class-part` and `grade`.
+These features allow users to modify a specific student's class information in a specific tutorial.
+
+This feature builds upon the current design of Student and ClassDetails.
+
+#### How it is implemented
+We show an example of the execution of the `present` command below.
+<puml src="diagrams/MarkPresentSequenceDiagram.puml" alt="MarkPresentSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The diagram above only shows part of the interactions within the model component. The interactions within the logic component are similar to other commands.
+
+</box>
+
+#### Design considerations:
+
+The feature should be implemented upon the current design of Student and ClassDetails. Alternative designs may exist, such as treating the attendance and participation as association classes.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -655,14 +657,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The Application should be secure (with password) as sensitive information is stored.
 5.  The Application needs to have proper documentation and user guide so that users can understand how to use the application.
+6.  The Application should allow users to create and customize their profiles, including preferences for shortcuts, views, and layouts, to enhance the user experience.
+7.  The Application should be able to handle multiple windows at the same time.
+8.  The Application should comply with the specific policies and regulations of the university regarding data storage, security, and access control.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Student Number**: Matriculation number of NUS student. It must begin with capital A, followed by any number of alphanumeric characters. It must not be blank.
+* **Student Number**: Matriculation number of NUS student. It must begin with letter A, followed by any number of alphanumeric characters. It must not be blank.
 * **Email**: Any valid email address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.
+* **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
+* **JAR**: Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
+* **Class details / Class information**: The grades, attendance and class participation details of a student in Class Manager.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -683,7 +691,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file<br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -692,7 +701,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a student
 
@@ -706,6 +714,46 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
       Expected: Similar to previous.
+
+
+### Loading data files
+###### Setup
+- Move the JAR file to a fresh directory. 
+- Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preference.json`)<br>
+- Copy the sample data file `classmanager.json`. And paste 2 copies of it in the same directory as the `classmanager.json`. Rename the copies to `t1.json` and `t2.json`.
+- Do not delete the data file `classmanager.json` as it will be used as the starting default file.
+
+###### Test cases
+1. Loading a valid data file
+   - Enter: `load f/t1`<br>
+        Expected: The data in `t1.json` is loaded into the app. The status bar on the bottom left changed to the new file path. 
+        The list of students shown in the GUI is the same as the one in `classmanager.json`.
+   <br><br>
+2. Loading a corrupted data file
+   - Open and edit `t2.json` with a text editor. Add some random text to the file or delete some text from the file.
+   - Enter: `load f/t2`<br>
+        Expected: The data in `t2.json` is not loaded into the app. The status bar on the bottom left is unchanged. 
+        An error message is displayed.
+    <br><br> 
+3. Loading a missing data file
+   - Enter: `load f/t3`<br>
+       Expected: The status bar on the bottom left is unchanged. An error message is displayed.
+
+### Undo/redo
+
+1. Undoing a command
+    1. Test case: `clear` -> `undo`<br>
+        Expected: The `clear` command is undone. The list of students shown in the GUI is the same as the one before the `clear` command.
+    
+    2. Test case: `add` -> `undo`<br>
+        Expected: The `add` command is undone. The newly added student is removed from the list of students.
+
+2. Redoing a command
+    1. Test case: `clear` -> `undo` -> `redo`<br>
+        Expected: The `clear` command is redone. The list of students shown in the GUI is empty.
+   
+    2.  Test case: `add` -> `add` -> `undo` -> `undo` -> `redo` (Add 2 students, and then 2 undo with 1 redo)<br>
+        Expected: The first `add` command is redone. The first student is added back to the list of students.
 
 ### Saving data
 
