@@ -414,6 +414,27 @@ Aspect: How the command finds free times:
 
 #### Design consideration
 
+### List interviews done/not done feature
+
+#### Implementation
+The list interviews done/not done feature allows the user to see all the interviews that are done or not done in a single command. The command format is `list-i-done` to show all the interviews that are done, and `list-i-not-done` to show all interviews that are not done.
+#### How is the command executed
+1. The user inputs `list-i-done` or `list-i-not-done` 
+2. The `LogicManager` receives the command string and forwards it to the `AddressBookParser`.
+3. The `AddressBookParser` checks the type of command and returns a `ListInterviewsDoneCommand` instance or `ListInterviewsNotDoneCommand` instance
+4. The `LogicManager` executes the `ListInterviewsDoneCommand` or `ListInterviewsNotDoneCommand`
+5. The `execute` method of `ListInterviewsDoneCommand` or `ListInterviewsNotDoneCommand` will call `Model#updateFilteredInterviewList(Predicate<Interview> predicate)`, where an `InterviewIsDonePredicate` or `InterviewNotDonePredicate` is passed as the argument
+6. `Model#updateFilteredInterviewList` will be called with the given predicate, thus updating the internal `FilteredList` of interviews to show only those that are done, or those that are not done. The `CommandResult` containing the success message will be returned to `LogicManager`.
+7. The GUI will be updated automatically by when the list changes.
+#### Design consideration
+Aspect: How the command is implemented
+* **Alternative 1 (current choice):** Use the existing open-closed principle of AB3 to add these new commands
+    * Pros:
+        * Reduces this to a problem that AB3 has already solved
+        * Maintains consistency with the AB3 format
+        * Consequently, it is easy to implement
+    * Cons:
+        * More command classes have to be added, which can increase coupling
 ### Rate interview feature
 
 #### Implementation
