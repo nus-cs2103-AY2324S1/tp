@@ -14,10 +14,4 @@ public class DeleteCommandParseException extends ParseException {
     public DeleteCommandParseException() {
         super(MESSAGE_INVALID_INDEX);
     }
-    /**
-     * Creates a new ParseException with the specified invalid command format message.
-     */
-    public DeleteCommandParseException(String message) {
-        super(message);
-    }
 }
