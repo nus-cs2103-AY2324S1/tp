@@ -331,6 +331,38 @@ The feature is implemented this way so that the user is able to access a particu
 
   The current implementation is the optimal way to go about implementing this feature as we believe that the value added by the feature triumphs the effort needed for implementation.
 
+### Merging two students `merge`
+
+#### Implementation
+
+This `merge` feature allows the user to merge two students. The merged student will possess the NAME, EMAIL, PHONE NUMBER, and TUTORIAL GROUP ID of the primary student. The merged student will also have the tags of both students, as well as their merged attendance records.
+
+The following sequence diagram shows how the MergeCommand function works:
+
+![MergeSeqDiagram](images/MergeSeqDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a MergeCommand:
+
+![MergeActivityDiagram](images/MergeActivityDiagram.png)
+
+#### Design considerations
+
+The feature is implemented this way so that the user is able to quickly merge any duplicated students, without having to manually edit the student and add the tags and attendance records from one student to another.
+
+#### Alternative implementations considered but not adopted:
+
+- Editing the primary student instead of creating a new student.
+
+  **Pros:**
+    - Greater efficiency since there is less overhead in creating a new Person.
+
+  **Cons:**
+    - This implementation would mean that we have to increase the mutability of the Person class, which is undesirable.
+
+  **Evaluation**:
+
+  The current implementation is the optimal way to go about implementing this feature as we believe that there is greater value in preserving the immutability of the Person class.
+
 
 ### \[Proposed\] Multiple Address Books for each Course
 
@@ -792,3 +824,4 @@ Given below are some of the possible enhancements that could be added in future 
 2. The current error message for a failed `mark` command may be too general. We plan to add details to the error message that explains the reason of failure especially when reason of absence is not provided for students who are marked as absent: `Reason of absence (r/) is mandatory for students who are marked as absent`.
 3. The messages for `course` commands could be more specific. We plan to replace mentions of `address book` with `courses` to better fit the context of TAvigator and reduce confusion for users.
 4. Validation checks could be added for course names to ensure valid course names when adding or editing courses. A valid format would include two to three initial alphabetical letters, followed by four numbers and one optional alphabetical letter at the end. A valid example would be `CS2103T`.
+5. We plan to implement importing student records from a csv file in future, which may create duplicated records. This would be where our merge command comes into play, merging duplicated records so that no information is lost.
