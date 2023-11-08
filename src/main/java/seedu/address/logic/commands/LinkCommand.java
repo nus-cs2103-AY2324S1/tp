@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import java.util.Arrays;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -38,12 +37,12 @@ public class LinkCommand extends Command {
         Set<Lesson> lessonSet = model.getLessonsFulfill(lesson -> lesson.getName().equals(lessonName));
         if (personSet.isEmpty()) {
             throw new CommandException("No such student with name " + studentName.toString() + " found");
-        }  else if (lessonSet.isEmpty()) {
+        } else if (lessonSet.isEmpty()) {
             throw new CommandException("No such lesson");
         } else {
             Person person = personSet.iterator().next();
             Lesson lesson = lessonSet.iterator().next();
-            if(Set.of(model.getLinkedWith(person)).contains(lessonName)) {
+            if (Set.of(model.getLinkedWith(person)).contains(lessonName)) {
                 throw new CommandException("The student is already linked to this lesson");
             }
             model.linkWith(person, lesson);
