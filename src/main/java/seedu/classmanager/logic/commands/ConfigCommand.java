@@ -75,6 +75,8 @@ public class ConfigCommand extends Command {
             model.setStudent(student, editedStudent);
         }
 
+        model.commitClassManager();
+
         // Reset the history of the model and prevent any undo commands
         model.configReset();
 
