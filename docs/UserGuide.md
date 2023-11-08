@@ -561,8 +561,6 @@ You can click on a contact's email address to email them.
 
 You can use the `help` command to open a help window containing a link to this user guide. You can press the "Copy URL" button to copy the link, and paste it into your web browser to view this user guide web page.
 
-If the help window is already open, it will be brought to the front.
-
 Format: `help`
 
 Parameters: N/A
