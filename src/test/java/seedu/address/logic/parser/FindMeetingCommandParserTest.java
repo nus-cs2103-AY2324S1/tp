@@ -90,6 +90,10 @@ public class FindMeetingCommandParserTest {
 
         // wrong end format
         assertParseFailure(parser, " e/2", MeetingTime.MESSAGE_CONSTRAINTS + "\n" + FindMeetingCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, " s/20.09.2023 1200",
+                "Please input both start and end times" + "\n" + FindMeetingCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, " e/20.09.2023 1000",
+                "Please input both start and end times" + "\n" + FindMeetingCommand.MESSAGE_USAGE);
     }
 
     /**

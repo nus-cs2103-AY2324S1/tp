@@ -35,6 +35,16 @@ public class Location {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns a truncated Email if it is more than 40 characters long.
+     */
+    public String shortLocation() {
+        if (this.location.length() > 40) {
+            return this.location.substring(0, 40) + "...";
+        }
+        return this.location;
+    }
+
     @Override
     public String toString() {
         return location;

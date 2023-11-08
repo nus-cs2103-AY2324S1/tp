@@ -15,7 +15,6 @@ import seedu.address.model.person.Person;
  */
 public class InfoDisplayPanel extends UiPart<Region> {
     private static final String FXML = "InfoDisplayPanel.fxml";
-
     @FXML
     private Label personDisplay;
     @FXML

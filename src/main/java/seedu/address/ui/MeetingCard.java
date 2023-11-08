@@ -54,14 +54,14 @@ public class MeetingCard extends UiPart<Region> {
         this.meeting = meeting;
         id.setText(displayedIndex + ". ");
         title.setText(meeting.getTitle().meetingTitle);
-        l.setText(meeting.getLocation().location);
+        l.setText(meeting.getLocation().shortLocation());
         LocalDateTime startTime = meeting.getStart();
         LocalDateTime endTime = meeting.getEnd();
         start.setText("Start: " + verbose(startTime));
         end.setText("End: " + verbose(endTime));
         meeting.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(new Label(tag.shortTagName())));
         if (meeting.getStatus().isComplete) {
             status.setText("COMPLETE");
         } else {

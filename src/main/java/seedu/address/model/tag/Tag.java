@@ -56,6 +56,16 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns a truncated Tag if it is more than 20 characters long.
+     */
+    public String shortTagName() {
+        if (this.tagName.length() >= 20) {
+            return this.tagName.substring(0, 20) + "...";
+        }
+        return this.tagName;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

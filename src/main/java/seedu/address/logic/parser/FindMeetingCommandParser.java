@@ -50,6 +50,11 @@ public class FindMeetingCommandParser implements Parser<FindMeetingCommand> {
             LocalDateTime start = LocalDateTime.MIN;
             LocalDateTime end = LocalDateTime.MAX;
 
+            if (argMultimap.getValue(PREFIX_START).isPresent() && argMultimap.getValue(PREFIX_END).isEmpty()
+                    || argMultimap.getValue(PREFIX_START).isEmpty() && argMultimap.getValue(PREFIX_END).isPresent()) {
+                throw new ParseException("Please input both start and end times");
+            }
+
             if (argMultimap.getValue(PREFIX_START).isPresent() && argMultimap.getValue(PREFIX_END).isPresent()) {
                 start = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_START).get());
                 end = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_END).get());
