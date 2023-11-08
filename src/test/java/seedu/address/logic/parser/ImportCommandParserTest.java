@@ -24,14 +24,14 @@ class ImportCommandParserTest {
         // Create a relative path to the ImportDataTest directory
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
 
-        String fileName1 = relativePath + "\\" + "student_data_test_success.csv";
+        String fileName1 = relativePath + "/" + "student_data_test_success.csv";
         List<Student> expectedList1 = new ArrayList<>();
         expectedList1.add(AMY);
         expectedList1.add(BOB);
 
         assertParseSuccess(parser, fileName1, new ImportCommand(expectedList1, fileName1));
 
-        String fileName2 = relativePath + "\\" + "student_data_test_success_enrol_date.csv";
+        String fileName2 = relativePath + "/" + "student_data_test_success_enrol_date.csv";
         List<Student> expectedList2 = new ArrayList<>();
         expectedList2.add(AMY);
         expectedList2.add(BOB);
@@ -46,16 +46,16 @@ class ImportCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             "Header Error!\n" + ImportCommand.MESSAGE_USAGE);
 
-        String fileName1 = relativePath + "\\" + "student_data_test_fail_wrong_column.csv";
+        String fileName1 = relativePath + "/" + "student_data_test_fail_wrong_column.csv";
         assertParseFailure(parser, fileName1, expectedMessage);
 
-        String fileName2 = relativePath + "\\" + "student_data_test_fail_missing_attributes.csv";
+        String fileName2 = relativePath + "/" + "student_data_test_fail_missing_attributes.csv";
         assertParseFailure(parser, fileName2, expectedMessage);
 
-        String fileName3 = relativePath + "\\" + "student_data_test_fail_empty.csv";
+        String fileName3 = relativePath + "/" + "student_data_test_fail_empty.csv";
         assertParseFailure(parser, fileName3, expectedMessage);
 
-        String fileName4 = relativePath + "\\" + "student_data_test_fail_wrong_extra_attributes.csv";
+        String fileName4 = relativePath + "/" + "student_data_test_fail_wrong_extra_attributes.csv";
         assertParseFailure(parser, fileName4, expectedMessage);
     }
 
