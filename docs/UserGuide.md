@@ -31,43 +31,8 @@ to start keeping track of all your members and applicants!
 
 --------------------------------------------------------------------------------------------------------------------
 
-<!-- TOC -->
-  * [Table of Contents](#table-of-contents)
-  * [1. How to Use CMC's User Guide](#1-how-to-use-cmcs-user-guide)
-  * [2. Quick start](#2-quick-start)
-  * [3. Interface Walkthrough](#3-interface-walkthrough)
-  * [4. Features](#4-features)
-    * [4.1 Member Features](#41-member-features)
-      * [4.1.1 Adding a member: `addmember` or `addm`](#411-adding-a-member--addmember-or-addm)
-      * [4.1.2 Finding members: `findmember` or `findm`](#412-finding-members--findmember-or-findm)
-      * [4.1.3 Viewing members: `viewmembers` or `viewm`](#413-viewing-members--viewmembers-or-viewm)
-      * [4.1.4 Editing a member: `editmember` or `editm`](#414-editing-a-member--editmember-or-editm)
-      * [4.1.5 Deleting a member: `deletemember` or `delm`](#415-deleting-a-member--deletemember-or-delm)
-      * [4.1.6 Copying a member's details: `copymember` or `cpm`](#416-copying-a-members-details--copymember-or-cpm)
-      * [4.1.7 Allocating a task to a member: `addtask` or `addt`](#417-allocating-a-task-to-a-member--addtask-or-addt)
-      * [4.1.8 Viewing all tasks allocated to a member: `viewtask` or `viewt`](#418-viewing-all-tasks-allocated-to-a-member--viewtask-or-viewt)
-      * [4.1.9 Deleting a task allocated to a member: `deletetask` or `delt`](#419-deleting-a-task-allocated-to-a-member--deletetask-or-delt)
-    * [4.2 Applicant Features](#42-applicant-features)
-      * [4.2.1 Adding an applicant: `addapplicant` or `adda`](#421-adding-an-applicant--addapplicant-or-adda)
-      * [4.2.2 Finding applicants: `findapplicant` or `finda`](#422-finding-applicants--findapplicant-or-finda)
-      * [4.2.3 Viewing applicants: `viewapplicants` or `viewa`](#423-viewing-applicants--viewapplicants-or-viewa)
-      * [4.2.4 Editing an applicant: `editapplicant` or `edita`](#424-editing-an-applicant--editapplicant-or-edita)
-      * [4.2.5 Deleting an applicant: `deleteapplicant` or `dela`](#425-deleting-an-applicant--deleteapplicant-or-dela)
-      * [4.2.6 Copying an applicant's details: `copyapplicant` or `cpa`](#426-copying-an-applicants-details--copyapplicant-or-cpa)
-    * [4.3 General Features](#43-general-features)
-      * [4.3.1 Accessing the user guide: `help`](#431-accessing-the-user-guide--help)
-      * [4.3.2 Clearing the address book: `clear`](#432-clearing-the-address-book--clear)
-      * [4.3.3 Exiting the application: `exit`](#433-exiting-the-application--exit)
-    * [4.4 Field Constraints](#44-field-constraints)
-      * [4.4.1 `EMAIL` format](#441-email-format)
-      * [4.4.2 Examples of fields](#442-examples-of-fields)
-  * [5. Frequently Asked Questions (FAQs)](#5-frequently-asked-questions--faqs-)
-  * [6. Common Mistakes](#6-common-mistakes)
-  * [7. Command summary](#7-command-summary)
-    * [7.1 Member Command Summary](#71-member-command-summary)
-    * [7.2 Applicant Command Summary](#72-applicant-command-summary)
-    * [7.3 General Command Summary](#73-general-command-summary)
-<!-- TOC -->
+* Table of Contents
+{:toc}
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -411,11 +376,12 @@ Adds a task to the top of the task list of a specified member.
 
 * `MEMBER_INDEX`: Only positive integers that are within the member list are accepted.
 * `TASK_INDEX` : Only positive integers that are within the task list are accepted.
+
 </div>
 
 #### Example of usage:
-`addtask 2 /task Implement solve feature` </br></br>
-`addt 2 /task Implement solve feature` </br></br>
+`addtask 2 /task Implement solve feature` <br/><br/>
+`addt 2 /task Implement solve feature` <br/><br/>
 
 This adds a task with the description `Resolve issue #15` to the top of task list of the member at `MEMBER_INDEX` 2.
 ![add_task](images/addTask.png)
@@ -481,16 +447,12 @@ Adds an applicant to the list of applicants.
 
 </div>
 
-<div markdown="block" class="alert alert-primary">
+<div markdown="span" class="alert alert-warning">
 
-:information_source: **Notes about duplicate applicants:**
-
-* Duplicate applicants are not allowed to be added into the list of applicants.
-
-* An applicant is considered a duplicate if the applicant's name **or** phone number matches that of an existing
-  applicant.
-
-* This means that only an applicant with a unique name and phone number can be added into the list of applicants.
+:exclamation: **CAUTION:**
+<br/>
+For a new applicant to be created, the `APPLICANT_NAME` and `PHONE_NUMBER` have to **both** be unique.
+Otherwise, the system will reject this as a duplicate applicant.
 
 </div>
 
@@ -521,7 +483,7 @@ Find and generate a list of all existing applicants(s) whose information contain
 `finda KEYWORD...`
 
 <div markdown="span" class="alert alert-primary">
-:information_source: **Notes about the input parameter:** KEYWORDs have to be separated by a space.
+:information_source: **Notes about the input parameter:** `KEYWORD`s have to be separated by a space.
 </div>
 
 ##### Example of usage:
@@ -535,7 +497,7 @@ This generates a list of all members whose details contain `Rui`.
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 
 If you would like to go back to the whole list of applicants, use `viewapplicants`.
-You may check out the command [here](#423-viewing-applicants-viewapplicants-or-viewa).
+You may check out the command [here](#423-viewing-applicants--viewapplicants-or-viewa).
 
 </div>
 
@@ -543,7 +505,7 @@ You may check out the command [here](#423-viewing-applicants-viewapplicants-or-v
 
 Generates a list of all existing applicant(s). An example of where you might want to use this command is if
 you want to go back to viewing all members after a search.
-with [`findapplicant`](#422-finding-applicants-findapplicant-or-finda).
+with [`findapplicant`](#422-finding-applicants--findapplicant-or-finda).
 
 ##### Format:
 
