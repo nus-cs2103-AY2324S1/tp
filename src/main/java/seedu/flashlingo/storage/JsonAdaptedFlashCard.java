@@ -24,7 +24,6 @@ public class JsonAdaptedFlashCard {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Flash card's %s field is missing!";
     public static final String INVALID_DATE_FORMAT_MESSAGE = "Invalid date format.";
     public static final String DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ssX";
-
     private final String originalWord;
     private final String originalWordLanguage;
     private final String translatedWord;

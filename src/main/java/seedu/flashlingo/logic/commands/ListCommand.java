@@ -6,13 +6,13 @@ import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import seedu.flashlingo.model.Model;
 
 /**
- * Lists all flashcards in Flashlingo to the user.
+ * Lists all flash cards in Flashlingo to the user.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all flashcards";
+    public static final String MESSAGE_SUCCESS = "Listed all flash cards";
 
 
     @Override
