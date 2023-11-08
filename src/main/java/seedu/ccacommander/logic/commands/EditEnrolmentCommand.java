@@ -6,10 +6,13 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_ENROLMENTS;
+import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_EVENTS;
+import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.commons.util.CollectionUtil;
@@ -97,6 +100,24 @@ public class EditEnrolmentCommand extends Command {
 
         Enrolment enrolmentToEdit = enrolmentToEditList.get(0);
         Enrolment editedEnrolment = createEditedEnrolment(enrolmentToEdit, editEnrolmentDescriptor);
+
+        targetMember.setHours(Optional.of(editedEnrolment.getHours()));
+        targetMember.setRemark(Optional.of(editedEnrolment.getRemark()));
+
+        targetEvent.setHours(Optional.of(editedEnrolment.getHours()));
+        targetEvent.setRemark(Optional.of(editedEnrolment.getRemark()));
+
+        Predicate<Member> lastMemberPredicate = model.getLastFilteredMemberPredicate();
+        Predicate<Event> lastEventPredicate = model.getLastFilteredEventPredicate();
+
+        // Updating to lastPredicate alone cannot refresh the member/EVENT card
+        // We need to revert back to original list and then update again the last predicate
+
+        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+        model.updateFilteredMemberList(lastMemberPredicate);
+
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        model.updateFilteredEventList(lastEventPredicate);
 
         model.setEnrolment(enrolmentToEdit, editedEnrolment);
         model.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);

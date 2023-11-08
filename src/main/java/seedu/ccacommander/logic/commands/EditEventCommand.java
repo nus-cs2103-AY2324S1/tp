@@ -93,8 +93,8 @@ public class EditEventCommand extends Command {
         }
 
         model.setEvent(eventToEdit, editedEvent);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
 
         model.commit(String.format(MESSAGE_COMMIT, editedEvent.getName()));
 
