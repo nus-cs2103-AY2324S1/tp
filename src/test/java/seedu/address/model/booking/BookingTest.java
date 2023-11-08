@@ -124,7 +124,8 @@ public class BookingTest {
         Email email = new Email("john@gmail.com"); // Create Email object
         Remark remark = new Remark("Test remark"); // Create Remark object
 
-        assertThrows(NameNotFoundException.class, () -> new Booking(room, bookingPeriod, name, phone, email, remark));
+        assertThrows(NameNotFoundException.class, () ->
+                new Booking(room, bookingPeriod, name, phone, email, remark));
     }
 
     @Test
@@ -136,7 +137,8 @@ public class BookingTest {
         Email email = null;
         Remark remark = new Remark("Test remark"); // Create Remark object
 
-        assertThrows(EmailNotFoundException.class, () -> new Booking(room, bookingPeriod, name, phone, email, remark));
+        assertThrows(EmailNotFoundException.class, () ->
+                new Booking(room, bookingPeriod, name, phone, email, remark));
     }
 
     @Test
@@ -148,6 +150,7 @@ public class BookingTest {
         Email email = new Email("john@gmail.com"); // Create Email object
         Remark remark = new Remark("Test remark"); // Create Remark object
 
-        assertThrows(PhoneNotFoundException.class, () -> new Booking(room, bookingPeriod, name, phone, email, remark));
+        assertThrows(PhoneNotFoundException.class, () ->
+                new Booking(room, bookingPeriod, name, phone, email, remark));
     }
 }
