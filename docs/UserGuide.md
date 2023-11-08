@@ -45,7 +45,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
     * `exit` : Exits CheckMate and closes the application.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Commands](#commands) below for details of each command.
 
 </div>
 </details>
