@@ -37,19 +37,34 @@ Given below are my contributions to the project.
           [#221](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/221),
         * Added details of unmark schedule feature [#153](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/153), 
           [#221](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/221).
-        * Added details of calendar view feature [#221](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/221).
+        * Added details of show calendar feature [#221](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/221).
         * Added Navigating the User Guide section [#154](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/154), 
           [#221](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/221).
         * Added more questions in the FAQs section [#154](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/154).
     * Developer Guide:
         * Updated Requirements section in Appendix [#35](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/35).
-        * Updated Design section [#207](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/207).
+        * Updated Design section [#207](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/207),
+          [#312](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/312).
         * Added implementation details of edit tutor feature [#139](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/139).
+        * Added implementation details of find tutor feature [#312](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/312).
+        * Added implementation details of unmark schedule feature [#312](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/312).
+        * Added implementation details of show calendar feature [#312](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/312).
+        * Added planned enhancement for disallowing future schedules to be marked [#304](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/304).
+        * Added planned enhancement for switching back to list view from calendar view [#304](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/304).
+        * Added planned enhancement for calendar UI colors [#304](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/304).
 
 * **Contribution to team-based tasks**:
     * Added schedule list to ModelManager [#92](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/92).
     * Updated SampleDataUtil to include sample schedules [#145](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/145).
     * Added status to Schedule [#133](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/133).
+    * Triage PED bugs. 
+    * Fix bugs: 
+      [#113](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/113),
+      [#185](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/185),
+      [#251](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/251),
+      [#270](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/270),
+      [#271](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/271),
+      [#276](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/276).
 
 * **Review/ mentoring contributions**:
     * Reviewed PRs:
