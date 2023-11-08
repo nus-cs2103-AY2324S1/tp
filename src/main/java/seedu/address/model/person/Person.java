@@ -8,10 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicyDate;
-import seedu.address.model.policy.PolicyNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -121,31 +118,49 @@ public class Person {
      * Returns true if the specified person has the default policy parameters
      */
     public boolean hasDefaultPolicy() {
-        return this.getPolicy().getPolicyNumber().value.equals(PolicyNumber.DEFAULT_VALUE)
-                && this.getPolicy().getPolicyExpiryDate().date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
-                && this.getPolicy().getPolicyIssueDate().date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
-                && this.getPolicy().getCompany().value.equals(Company.DEFAULT_VALUE);
+        return this.policy.isDefaultPolicyProfile();
     }
 
     /**
      * Returns true if the specified person has any policy parameters equal to the default
      */
     public boolean hasAnyDefaultPolicyParameters() {
-        return this.getPolicy().getPolicyNumber().value.equals(PolicyNumber.DEFAULT_VALUE)
-                || this.getPolicy().getPolicyExpiryDate().date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
-                || this.getPolicy().getPolicyIssueDate().date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
-                || this.getPolicy().getCompany().value.equals(Company.DEFAULT_VALUE);
+        return this.policy.hasDefaultParameter();
     }
 
     /**
      * Returns true if both persons have the same policy number
      */
     public boolean comparePolicyNumber(Person otherPerson) {
-        if (!this.getPolicy().getPolicyNumber().toString().equals(PolicyNumber.DEFAULT_VALUE)
-                && this.getPolicy().getPolicyNumber().equals(otherPerson.getPolicy().getPolicyNumber())) {
-            return true;
-        }
-        return false;
+        return this.policy.hasSamePolicyNumber(otherPerson.policy);
+    }
+
+    /**
+     * Returns true if the person has the default company parameter
+     */
+    public boolean hasDefaultCompanyPolicyParameter() {
+        return this.policy.hasDefaultCompanyParameter();
+    }
+
+    /**
+     * Returns true if the person has the default policy issue date parameter
+     */
+    public boolean hasDefaultPolicyIssueDateParameter() {
+        return this.policy.hasDefaultIssueDateParameter();
+    }
+
+    /**
+     * Returns true if the person has the default policy expiry date parameter
+     */
+    public boolean hasDefaultPolicyExpiryDateParameter() {
+        return this.policy.hasDefaultExpiryDateParameter();
+    }
+
+    /**
+     * Returns true if the person has the default policy number parameter
+     */
+    public boolean hasDefaultPolicyNumberParameter() {
+        return this.policy.hasDefaultNumberParameter();
     }
 
     /**

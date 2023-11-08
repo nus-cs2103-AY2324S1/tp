@@ -80,7 +80,66 @@ public class Policy {
      * @return int
      */
     public int compareDates() {
-        return this.getPolicyExpiryDate().compareTo(this.getPolicyIssueDate());
+        return this.policyExpiryDate.compareTo(policyIssueDate);
+    }
+
+    /**
+     * Returns true if policy is same as default
+     */
+    public boolean isDefaultPolicyProfile() {
+        return this.policyNumber.value.equals(PolicyNumber.DEFAULT_VALUE)
+                && this.policyExpiryDate.date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
+                && this.policyIssueDate.date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
+                && this.company.value.equals(Company.DEFAULT_VALUE);
+    }
+
+    /**
+     * Returns true if the policy has the default issue date
+     */
+    public boolean hasDefaultIssueDateParameter() {
+        return this.policyIssueDate.date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE);
+    }
+
+    /**
+     * Returns true if the policy has the default expiry date
+     */
+    public boolean hasDefaultExpiryDateParameter() {
+        return this.policyExpiryDate.date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE);
+    }
+
+    /**
+     * Returns true if the policy has the default number
+     */
+    public boolean hasDefaultNumberParameter() {
+        return this.policyNumber.value.equals(PolicyNumber.DEFAULT_VALUE);
+    }
+
+    /**
+     * Returns true if both policies have the same number
+     */
+    public boolean hasSamePolicyNumber(Policy otherPolicy) {
+        if (!this.policyNumber.toString().equals(PolicyNumber.DEFAULT_VALUE)
+                && this.policyNumber.equals(otherPolicy.policyNumber)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if any parameter is the default
+     */
+    public boolean hasDefaultParameter() {
+        return this.policyNumber.value.equals(PolicyNumber.DEFAULT_VALUE)
+                || this.policyExpiryDate.date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
+                || this.policyIssueDate.date.toString().equals(PolicyDate.DEFAULT_COMPARISON_VALUE)
+                || this.company.value.equals(Company.DEFAULT_VALUE);
+    }
+
+    /**
+     * Returns true if the company is the same as default
+     */
+    public boolean hasDefaultCompanyParameter() {
+        return this.company.value.equals(Company.DEFAULT_VALUE);
     }
 
     /**

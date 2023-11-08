@@ -23,12 +23,17 @@ public class Messages {
 
     public static final String MESSAGE_INCOMPLETE_POLICY_EDIT = "Error: "
             + "You must provide edits for all policy parameters";
-    public static final String MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND =
-            "Error: Some of the required fields are missing. "
+    public static final String MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND = "Error: "
+            + "Some of the required fields are missing. "
             + "\n"
             + "Please include the following: ";
-    public static final String MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND =
-            "Please include either all or none of the policy variables. "
+
+    public static final String MESSAGE_MISSING_FIELDS_POLICY_FOR_EDIT_COMMAND = "Error: "
+            + "Please provide all the policy parameters when editing a policy with no existing policy data. "
+            + "\n"
+            + "Please include the following: ";
+    public static final String MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND = "Error: "
+            + "Please include either all or none of the policy variables. "
             + "\n"
             + "You are missing the following: ";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";

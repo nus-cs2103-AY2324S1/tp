@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_DATES_NOT_COMPATIBLE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_POLICY_FOR_EDIT_COMMAND;
 import static seedu.address.logic.Messages.MESSAGE_USED_POLICY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
@@ -102,7 +104,20 @@ public class EditCommand extends Command {
 
         if (personToEdit.hasDefaultPolicy()) {
             if (!editedPerson.hasDefaultPolicy() && editedPerson.hasAnyDefaultPolicyParameters()) {
-                throw new CommandException(Messages.MESSAGE_INCOMPLETE_POLICY_EDIT);
+                String errorMessage = MESSAGE_MISSING_FIELDS_POLICY_FOR_EDIT_COMMAND;
+                if (editedPerson.hasDefaultCompanyPolicyParameter()) {
+                    errorMessage += "- Company(" + PREFIX_COMPANY + ") ";
+                }
+                if (editedPerson.hasDefaultPolicyNumberParameter()) {
+                    errorMessage += "- Policy Number(" + PREFIX_POLICY_NUMBER + ") ";
+                }
+                if (editedPerson.hasDefaultPolicyIssueDateParameter()) {
+                    errorMessage += "- Policy Issue Date(" + PREFIX_POLICY_ISSUE_DATE + ") ";
+                }
+                if (editedPerson.hasDefaultPolicyExpiryDateParameter()) {
+                    errorMessage += "- Policy Expiry Date(" + PREFIX_POLICY_EXPIRY_DATE + ") ";
+                }
+                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
             }
         }
 
