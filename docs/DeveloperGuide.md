@@ -452,7 +452,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​  | I want to …​                                                 | So that I can…​                                                         |
 |----------|----------|--------------------------------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | TA       | manually enter the details of students into my class manager | track the information                                                   |
+| `* * *`  | TA       | manually enter the details of students into my Class Manager | track the information                                                   |
 | `* * *`  | TA       | be able to delete students from the class                    | manage students who drop out                                            |
 | `* * *`  | TA       | edit the contact information of students                     | maintain the correct information if it changes                          |
 | `* *`    | TA       | keep track of the attendance percentage of each student      | use it for their participation grade                                    |
@@ -482,15 +482,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ClassManager` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Class Manager` and the **Actor** is the `user`, unless specified otherwise)
 
 ---
 **Use case: Delete a student**
 
 **MSS**
 
-1.  User requests to delete a specific student in the list with the student's student number
-2.  ClassManager deletes the student
+1.  User requests to delete a specific student with the student's student number
+2.  Class Manager deletes the student
 
     Use case ends.
 
@@ -498,13 +498,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given student number is invalid.
 
-    * 1a1. ClassManager shows an error message.
+    * 1a1. Class Manager shows an error message.
 
       Use case resumes at step 1.
 
-* 1b. The given student number does not exist in the list.
+* 1b. The given student number does not exist in Class Manager.
 
-    * 1b1. ClassManager shows an error message.
+    * 1b1. Class Manager shows an error message.
 
       Use case resumes at step 1.
 
@@ -514,9 +514,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list students
-2.  ClassManager shows a list of students
+2.  Class Manager shows a list of students
 3.  User requests to tag a specific student in the list
-4.  ClassManager tags the student
+4.  Class Manager tags the student
 
     Use case ends.
 
@@ -528,13 +528,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given student number is invalid.
 
-    * 3a1. ClassManager shows an error message.
+    * 3a1. Class Manager shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. The student already has the given tag.
 
-    * 3b1. ClassManager shows an error message.
+    * 3b1. Class Manager shows an error message.
 
       Use case resumes at step 2.
 
@@ -545,21 +545,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User copies saved JSON file to data folder
 2.  User requests to load JSON file
-3.  ClassManager reads and loads the JSON file
-4.  ClassManager updates the app to show the new data
+3.  Class Manager reads and loads the JSON file
+4.  Class Manager updates the app to show the new data
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The JSON file cannot be found
-  * 3a1. ClassManager shows an error message.
+* 3a. The JSON file cannot be found.
+
+  * 3a1. Class Manager shows an error message.
 
     Use case resumes at step 2.
 
 * 4a. The JSON file data is invalid.
 
-    * 4a1. ClassManager shows an error message.
+    * 4a1. Class Manager shows an error message.
 
       Use case resumes at step 3.
 
@@ -569,8 +570,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to look up students with a given criteria.
-2.  ClassManager check each student in the list with the given criteria.
-3.  ClassManager shows a list of students that match the criteria.
+2.  Class Manager check each student in the list with the given criteria.
+3.  Class Manager shows a list of students that match the criteria.
 
     Use case ends.
 
@@ -578,44 +579,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. There are no criteria given.
 
-    * 1a1. ClassManager shows an error message.
+    * 1a1. Class Manager shows an error message.
 
       Use case ends.
 
 * 2a. There are no students in the list that match the criteria.
 
-    * 2a1. ClassManager shows an error message.
+    * 2a1. Class Manager shows an error message.
 
       Use case ends.
 
 ---
-**Use case: Randomly select a list of students**
+**Use case: Randomly select a specific number of students**
 
 **MSS**
 
 1.  User requests to randomly select a specific number of students.
-2.  ClassManager randomly selects the students from the list.
-3.  ClassManager shows a list of students that are randomly selected.
+2.  Class Manager randomly selects the students from the list.
+3.  Class Manager shows a list of students that are randomly selected.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. There are no students on the list.
+* 1a. The number of students to be selected is more than the number of students in the list.
 
-    * 1a1. ClassManager shows an error message.
-
-      Use case ends.
-
-* 1b. The number of students to be selected is more than the number of students in the list.
-
-    * 1b1. ClassManager shows an error message.
+    * 1a1. Class Manager shows an error message.
 
       Use case ends.
 
-* 1c. The number of students to be selected is less than 1.
+* 1b. The number of students to be selected is less than 1.
 
-    * 1c1. ClassManager shows an error message.
+    * 1b1. Class Manager shows an error message.
 
       Use case ends.
 
@@ -625,23 +620,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to modify a student's class information.
-2.  ClassManager finds the student in the list.
-3.  ClassManager modifies the student's class information.
-4.  ClassManager shows the student's updated class information.
+2.  Class Manager modifies the student's class information.
+3.  Class Manager shows the student's updated class information.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The student does not exist in the list.
+* 1a. The student does not exist in Class Manager.
 
-    * 1a1. ClassManager shows an error message.
+    * 1a1. Class Manager shows an error message.
 
       Use case ends.
 
 * 1b. The modifying request is invalid.
 
-    * 1b1. ClassManager shows an error message.
+    * 1b1. Class Manager shows an error message.
 
       Use case ends.
 
@@ -696,16 +690,16 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a student
 
-1. Deleting a student from the current students added in the class manager.
+1. Deleting a student from the current students added in the Class Manager.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
-      Expected: The student with STUDENT_NUMBER is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the status message.
 
    1. Test case: `delete s/vnqvq1924`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. Student Number error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
-      Expected: Similar to previous.
+   1. Test case: `delete`<br>
+      Expected: No student is deleted. Command format error details shown in the status message.
 
 ### Saving data
 
