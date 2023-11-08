@@ -9,9 +9,9 @@ HealthSync is a desktop address book application used for teaching Software Engi
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added fields like NRIC, Appointment and Medical Histories.
+* **New Feature**: Added fields like ID, Appointment and Medical Histories.
   * What it does: Allows for necessary fields to be included in the profile
-  * Justification: This feature improves the product significantly because a user can now see the NRIC, appointment timings and medical history at one glance, since all information are bundled in a patient card.
+  * Justification: This feature improves the product significantly because a user can now see the ID, appointment timings and medical history at one glance, since all information are bundled in a patient card.
   * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing models, commands and test cases.
 
 * **New Feature**: Added logger tab UI to show logged profiles
