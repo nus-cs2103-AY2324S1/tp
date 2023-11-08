@@ -411,7 +411,7 @@ command.
 ### Reduce Coupling Between Availability and Animal Type
 Currently, the `animalType` field also contains information about the availability of a fosterer.<br>
 e.g. if the `animalType` field of a fosterer is `able.Dog`, it suggests that the fosterer is available, and is 
-fostering a dog. However, the user will still need to enter the `availability` field as `available`. <br>
+able to foster a dog. However, the user will still need to enter the `availability` field as `available`. <br>
 
 Building on the enhancement in [Shorter Command Formats](#shorter-command-formats), we will be revising the 
 `AVAILABILITY` and `ANIMAL_TYPE` parameters:
