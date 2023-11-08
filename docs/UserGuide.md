@@ -41,15 +41,15 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `hour.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-1/tp/releases).
+2. Download the latest `hour.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your employee list.
+3. Copy the file to the folder you want to use as the _home folder_ for your employee list.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hour.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hour.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/ug-pics/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `help`: Shows help window with link to user guide.
@@ -62,7 +62,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    
    * `find Alex Manager`: Lists all employees with the keywords `Alex` or `Manager`.
 
-   * `delete EID1234-5678` : Deletes the employee with employee id EID1234-5678 shown in the list.
+   * `delete EID2023-1234` : Deletes the employee with employee id EID2023-1234 shown in the list.
 
    * `sort f/salary in/asc`: Sorts the employees by their salaries in ascending order.
 
@@ -88,7 +88,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command
+6. Refer to the [Features](#features) below for details of each command
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -181,7 +181,7 @@ Format: `delete EMPLOYEE_ID`
 * The employee id **must follow the EID format** (EID[4 digits]-[4 digits])
 
 Examples:
-* `delete EID1234-5678` deletes the employee with employee id EID1234-5678 in the employee list.
+* `delete EID2023-1234` deletes the employee with employee id EID2023-1234 in the employee list.
 
 ![delete success](images/ug-pics/deleteSuccess.png)
 
@@ -261,6 +261,7 @@ Format: `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
 
 * Add dates between `START_DATE` and `END_DATE` inclusive into the leaves taken by employee with id `EMPLOYEE_ID`.
 * `START_DATE` must not be after `END_DATE`.
+* If the current date falls within the leave period, the leave status of the employee will change from **"Present"** to **"On Leave"**.
 
 Examples:
 * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` adds the dates 26, 27, and 28 December 2023 to the leaves taken
@@ -282,6 +283,7 @@ Format: `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
 * `START_DATE` must not be after `END_DATE`.
 * If the employee does not have leaves taken that fall anytime during the period between `START_DATE`and `END_DATE`,
   the command will output an error and will not change anything.
+* If the current date is deleted, the leave status of the employee will change from **"On Leave"** to **"Present"**.
 
 Examples:
 * `deleteleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` deletes all leave dates
@@ -305,6 +307,8 @@ Format: `editleave id/EMPLOYEE_ID old/OLD_DATE new/NEW_DATE`
 
 * Edits leave on `OLD_DATE` to `NEW_DATE` of the specified employee with id `EMPLOYEE_ID`.
 * `OLD_DATE` must already exist and `NEW_DATE` must not already exist.
+* If `OLD_DATE` is the current date, the leave status of the employee will change from **"On Leave"** to **"Present"**.
+* Conversely, if `NEW_DATE` is the current date, the leave status of the employee will change from **"Present"** to **"On Leave"**.
 
 Examples:
 * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28` edits the leave on 26 December 2023 to 28 December 2023
