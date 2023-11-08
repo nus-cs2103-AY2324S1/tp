@@ -109,7 +109,7 @@ Examples:
 
 Acceptable values for each parameter:
 * `n/NAME`: Name of the person (Compulsory)
-* `[p/PHONE_NUMBER]`: A valid phone number
+* `[p/PHONE_NUMBER]`: A valid phone number (without whitespaces)
 * `[e/EMAIL]`: A valid email address
 * `[a/ADDRESS]`: Address of the person
 * `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
@@ -154,7 +154,7 @@ Examples:
 Acceptable values for each parameter:
 * `PERSON_INDEX`: A positive integer
 * `[n/NAME]`: Name of the person
-* `[p/PHONE]`: A valid phone number
+* `[p/PHONE]`: A valid phone number (without whitespaces)
 * `[e/EMAIL]`: A valid email address
 * `[a/ADDRESS]`: Address of the person
 * `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
