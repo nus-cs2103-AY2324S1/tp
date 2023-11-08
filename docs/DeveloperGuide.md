@@ -296,6 +296,42 @@ short and quick, especially when the user may have to view multiple attendance r
 
   The current implementation, despite having to add new classes, is the optimal way to go about implementing this feature as we believe that having a user-friendly UI is a priority.
 
+### Finding a person `find`
+
+#### Implementation
+
+This `find` feature allows the user to search for students in TAvigator courses either by the student's name or ID. The user also need not enter the student's full name and can simply enter prefixes. This feature is implemented using the `FindCommand` class and parsed by the `FindCommandParser` class. If parsed successfully, it return a `FindCommand` object.
+
+The following sequence diagram shows how the FindCommand function works:
+
+![FindSeqDiagram](images/FindSeqDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a ViewCommand:
+
+![FindActivityDiagram](images/FindActivityDiagram.png)
+
+#### Design considerations
+
+The feature is implemented this way so that the user is able to access a particular student's contact quickly and conveniently without having to scroll through the entire course list. By allowing the user to search by prefixes or student IDs, there is a lot more freedom in terms of how the user wants to access the student's contact.
+
+#### Alternative implementations considered but not adopted:
+
+- Only allowing the user to find contacts by name
+
+  > Instead of having the user to enter the prefix everytime they want to find a contact, the process can be sped up by narrowing the functionality of this command to only find by name.
+
+  **Pros:**
+    - Implementation would be quite straightforward and simple as the default `find` feature would suffice for the feature specifications.
+    - The user need not enter the prefix everytime they want to use `find`, reducing the time taken to search for contacts.
+
+  **Cons:**
+    - The freedom of the user is limited greatly, considering that finding by student ID in a university is also rather common. By constraining them to a single search method, the user may end up spending more time finding students with longer names.
+
+  **Evaluation**:
+
+  The current implementation is the optimal way to go about implementing this feature as we believe that the value added by the feature triumphs the effort needed for implementation.
+
+
 ### \[Proposed\] Multiple Address Books for each Course
 
 #### Proposed Implementation
