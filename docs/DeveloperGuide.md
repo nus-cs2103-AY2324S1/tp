@@ -435,6 +435,18 @@ due to the presence of the special character `'` in the event name.
 We propose to allow the `createMember`, `editMember` , `createEvent` and `editEvent` commands to accept special 
 characters in the name field and not to be restricted to just alphanumeric characters.
 
+### Make UI stay on current view upon editMember or editEvent
+**Current Implementation:**
+* **Current Issue:** Currently, calling `editMember` or `editEvent` will result in the listing of all events and members.
+* **Example:** If the user is viewing a filtered list for example if they have just called `viewMember`, if the user
+  then edits a member or event using `editMember` or `editEvent`, all events and members will be displayed instead of their current
+filtered view. This will cause inconvenience for the user as they will have to relocate the edited member/event.
+
+**Proposed solution:**
+
+We propose to change the behaviour of `editMember` and `editEvent` such that calling them will no longer list all members and events,
+and instead remain on the user's current view.
+
 ### Provide more specific index error messages to the user
 **Current Implementation:**
 * **Current Issue:** As of now, for commands that accept more than 1 index as a parameter, it is hard to tell which index is wrong
