@@ -1,34 +1,53 @@
 ---
-  layout: default.md
-  title: "Chen Jizhuo's Project Portfolio Page"
+layout: default.md
+title: "Chen Jizhuo's Project Portfolio Page"
 ---
 
 ### Project: LinkTree
 
-LinkTree is the top contact solution for software professionals. Using our unique tag-based system, access contacts by roles and responsibilities instantly. With LinkTree, swiftly connect with the right stakeholder, ensuring smooth project execution and superior collaboration.
+LinkTree is a CLI-based contact management solution for software professionals. 
+Using our unique tag-based system, access contacts by roles and responsibilities 
+instantly. With LinkTree, easily visualise the structure and team compositions, leaderships
+of any software project, allowing you to instantly locate the target developer/ 
+team that you are looking for in a sea of developers.
 
 Given below are my contributions to the project.
 
-* **New Feature**: to be added soon
+* **New Feature**: 
+  * Allowing display of a list of teams in the current project, including the team names, 
+  leaders and team members (developers);
+  * Constantly display the statistics (how many existing developers, and teams in the project)
+  * Display of a summary of all commands when 'help' command is entered;
+  * Addition of the remark feature which acts as a short bio for developers.
+  
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jizhuochen&breakdown=true)
 
-* **Project management**: to be added soon
 
-* **Enhancements to existing features**: to be added soon
+* **Project management**: 
+  * Conducted regular checks and fixed style errors to maintain code quality;
+  * Conducted regular checks and bug testing and provided constructive feedbacks for the team.
+
+
+* **Enhancements to existing features**:
+  * Allowed dynamic changes in visibility of original person list;
+  * Allowed dynamic changes in size of the command result display area;
+
 
 * **Documentation**:
     * User Guide:
-        * Transform the form of our previous User Guide draft and upload into github
-
+        * Made changes to UG at the following parts: List developers, List teams, Help, Statistics display.
+      
     * Developer Guide:
-      to be added soon
+        * Made some changes and added UI UML diagrams;
+
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): to be added soon
-    * Contributed to forum discussions to be added soon
-    * Reported bugs and suggestions for other teams in the class to be added soon
-    * Some parts of the history feature I added was adopted by several other classmates to be added soon
+    * PRs reviewed (with non-trivial review comments).
+    * Contributed to forum discussions.
+    * Reported bugs and suggestions for other teams in the class.
+    * Some parts of the history feature I added was adopted by several other classmates.
+
 
 * **Tools**:
-  to be added soon
+    * Utilized various development tools to enhance project productivity and code quality

@@ -30,7 +30,14 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructs a new Person object with all required fields.
+     *
+     * @param name     The person's name.
+     * @param phone    The person's phone number.
+     * @param email    The person's email address.
+     * @param address  The person's address.
+     * @param remark   The person's remark.
+     * @param tags     The set of tags associated with the person.
      */
     public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -43,6 +50,17 @@ public class Person {
         this.identitycode = new IdentityCode(String.valueOf(IdentityCodeManager.getNextIdentityCode()));
     }
 
+    /**
+     * Constructs a new Person object with all fields, including the identity code.
+     *
+     * @param name         The person's name.
+     * @param phone        The person's phone number.
+     * @param email        The person's email address.
+     * @param address      The person's address.
+     * @param remark       The person's remark.
+     * @param tags         The set of tags associated with the person.
+     * @param identityCode The person's identity code.
+     */
     public Person(Name name, Phone phone, Email email, Address address, Remark remark,
                   Set<Tag> tags, IdentityCode identityCode) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -55,42 +73,75 @@ public class Person {
         this.identitycode = identityCode;
     }
 
-
+    /**
+     * Retrieves the name of the person.
+     *
+     * @return The person's name.
+     */
     public Name getName() {
         return name;
     }
 
+    /**
+     * Retrieves the phone number of the person.
+     *
+     * @return The person's phone number.
+     */
     public Phone getPhone() {
         return phone;
     }
 
+    /**
+     * Retrieves the email address of the person.
+     *
+     * @return The person's email address.
+     */
     public Email getEmail() {
         return email;
     }
 
+    /**
+     * Retrieves the address of the person.
+     *
+     * @return The person's address.
+     */
     public Address getAddress() {
         return address;
     }
 
+    /**
+     * Retrieves the remark associated with the person.
+     *
+     * @return The person's remark.
+     */
     public Remark getRemark() {
         return remark;
     }
 
+    /**
+     * Retrieves the identity code of the person.
+     *
+     * @return The person's identity code.
+     */
     public IdentityCode getIdentityCode() {
         return this.identitycode;
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an immutable set of tags associated with the person.
+     * Modifications to the returned set are not allowed.
+     *
+     * @return An unmodifiable set of tags.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Checks if two persons have the same name, defining a weaker notion of equality.
+     *
+     * @param otherPerson The other person to compare with.
+     * @return True if both persons have the same name, false otherwise.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -102,8 +153,10 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Checks if two persons have the same identity and data fields, defining a stronger notion of equality.
+     *
+     * @param other The object to compare with.
+     * @return True if both persons are equal, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -131,12 +184,22 @@ public class Person {
         }
     }
 
+    /**
+     * Computes the hash code for the Person object.
+     *
+     * @return The computed hash code.
+     */
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, remark, tags);
     }
 
+    /**
+     * Returns a string representation of the Person object.
+     *
+     * @return A string containing the person's information.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

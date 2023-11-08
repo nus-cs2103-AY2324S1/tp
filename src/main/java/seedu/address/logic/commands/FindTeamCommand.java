@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -12,7 +13,7 @@ import seedu.address.model.team.TeamContainsKeywordsPredicate;
  */
 public class FindTeamCommand extends Command {
 
-    public static final String COMMAND_WORD = "findTeam";
+    public static final String COMMAND_WORD = "findteam";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all teams whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -28,10 +29,16 @@ public class FindTeamCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredTeamList(predicate);
+        if (model.getFilteredTeamList().size() <= 1) {
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_TEAM_LISTED_OVERVIEW, model.getFilteredTeamList().size()),
+                    false, false, false, false, false, false, true);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_TEAMS_LISTED_OVERVIEW, model.getFilteredTeamList().size()),
-                false, false, true, false, false);
+                false, false, false, false, false, false, true);
     }
 
     @Override

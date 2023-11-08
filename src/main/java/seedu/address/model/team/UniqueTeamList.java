@@ -137,7 +137,9 @@ public class UniqueTeamList implements Iterable<Team> {
         requireNonNull(developerIdentityCode);
 
         for (Team team : internalList) {
-            return team.getTeamLeaderIdentityCode().equals(developerIdentityCode);
+            if (team.getTeamLeaderIdentityCode().equals(developerIdentityCode)) {
+                return true;
+            }
         }
         return false;
     }

@@ -67,7 +67,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-![UI Class Diagram](images/UML_images/UiDiagram.jpg)
+![UI Class Diagram](images/UML_images/UiDiagram.png)
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
