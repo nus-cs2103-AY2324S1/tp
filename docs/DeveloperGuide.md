@@ -3,13 +3,14 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
 * [SE-EDU Address-Book Level 3](https://github.com/se-edu/addressbook-level3)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -153,19 +154,41 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Tagging a Musician Feature
+### Tagging Musician with Instruments and Genres Feature
 
-#### Types of Tags
+There is no specialised command for tagging a musician with the instruments and genres they are specialised in. Instead, the user can tag a musician using the `i/` (for instruments) and `g/` (for genres) prefixes in both the `add` and `edit` commands. For example, to tag an existing musician with the instruments `guitar` and genre `jazz`, the user can use the command `edit INDEX i/guitar g/jazz`. For more detailed information on the `add` and `edit` command implementations, please refer to the [Add Musician Feature](#add-musician-feature) and [Edit Musician Feature](#edit-musician-feature) sections.
 
-There are three types of tags: 
+#### Implementation
+The instruments and genres of a musician are implemented as the subclasses of the general `Tag` class. They all have a single attribute called `tagName`, which denotes the content of the tag. 
 
-* the general tag which denotes anything noteworthy about a specific musician;
-* the `instrument` tag which denotes what instrument the musician specialises in;
-* the `genre` tag which denotes what genre the musician specialises in.
+However, they have different static methods for checking the validity of the inputs. While `Tag::isValidTagName(String)` allows any alphanumeric characters, `Instrument::isValidInstrumentName(String)` and `Genre::isValidGenreName(String)` checks for the semantics (against a comprehensive list of instruments/genres) to prevent any input that does not make sense or has typos.
 
-There are no input restriction on the general tag, but there are input validation for `instrument` and `genre` tags against a pre-defined fixed set of values to prevent typo and irrelevant information to be keyed in mistakenly.
+![TagClassDiagram.png](images%2FTagClassDiagram.png)
 
-The three types of tags are implemented in a class hierarchy as shown below. The `instrument` and `genre` tags are the subclasses of the general `tag` class. They all have a single attribute called `tagName`, which denotes the content of the tag. However, they have different static methods for checking the validity of the inputs. While `isValidTag(String)` allows any alphanumeric characters, `isValidInstrument(String)` and `isValidGenre(String)` checks for the semantics (against a comprehensive list of instruments/genres) to prevent any input that does not make sense or has typos.
+Since the implementation of [`Instrument`](https://github.com/AY2324S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/model/tag/Instrument.java) and [`Genre`](https://github.com/AY2324S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/model/tag/Genre.java) are similar, we will take `Instrument` as an example. 
+
+The `Instrument` class contains a static field `VALID_INSTRUMENTS` which contains a list of valid instruments.
+
+```java
+// LinkedHashSet is used to preserve the alphabetical order of the instrument list
+// when displayed to the user.
+public static final HashSet<String> VALID_INSTRUMENTS = new LinkedHashSet<>(
+         Arrays.asList("bass", "cello", ... "violin", "voice", "other"));
+```
+
+Then, when the user inputs an instrument in the command, the `Instrument::isValidInstrumentName(String)` method is called to check if the input is in the `VALID_INSTRUMENTS` before creating and storing the `Instrument` object for the musician.
+
+#### Design Considerations
+
+**Aspect: Validation checks for instruments and genres**
+* **Alternative 1 (current design):** Enforce validation checks for instruments and genres by creating more specialised subclasses of the general `Tag` classes.
+  * Pros: Prevents the user from storing invalid instruments and genres for a musician.
+  * Pros: Implementing `Instrument` and `Genre` as subclasses of `Tag` allows them to be treated as `Tag` objects in other components, which increases compatibility and reduces coupling with other existing components.
+  * Cons: Currently, the user cannot directly modify the lists of valid instruments and genres, so these lists have to be updated frequently by the developers to ensure niche instruments and genres are captured. 
+* **Alternative 2:** Store instruments and genres as general `Tag` objects with basic validation checks.
+  * Pros: Gives the user more freedom of tagging the musicians with instruments and genres.
+  * Cons: The user can store invalid instruments and genres (due to typos) for a musician. This way, the user will encounter difficulties when finding musicians by instruments or genres.
+
 
 ### Filtering Musicians by Name and Tags Feature
 To be Added.
@@ -272,91 +295,6 @@ Step 3: If the band name is not valid (There is no band with such a name), a `ME
    i. If the band is valid and exists, filtered band list is guaranteed to have only one band (because add a band enforce no band with the same name (case-insensitive) is allowed). Hence, If filtered band list size > 1, the band name must be invalid, exception is thrown.
 
    ii. If filtered band list size == 1 but the band obtained does not pass the predicate (in the possible scenario of user only stored 1 band), it means that the band name is invalid and does not correspond to the current band, exception is thrown.
-
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th musician in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new musician. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the musician was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the musician being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
