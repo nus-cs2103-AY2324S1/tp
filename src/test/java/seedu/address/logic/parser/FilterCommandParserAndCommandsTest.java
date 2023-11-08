@@ -30,6 +30,7 @@ class FilterCommandParserAndCommandsTest {
     private FilterCommandParser personFilter = new FilterCommandParser(State.STUDENT);
     private FilterCommandParser lessonFilter = new FilterCommandParser(State.SCHEDULE);
     // phone, address, remark, tags, email
+    // todo, make it clear what the filter command does for name.
     @Test
     void test_personFilter_name() throws ParseException, CommandException {
         Person person = Person.getDefaultPerson();
@@ -40,7 +41,10 @@ class FilterCommandParserAndCommandsTest {
         model.addPerson(person2);
         personFilter.parse(" -name test 123456").execute(model);
         assertTrue(model.getFilteredPersonList().contains(person));
-        assertFalse(model.getFilteredPersonList().contains(person2));
+        assertTrue(model.getFilteredPersonList().contains(person2));
+        personFilter.parse(" -name test 12345678").execute(model);
+        assertFalse(model.getFilteredPersonList().contains(person));
+        assertTrue(model.getFilteredPersonList().contains(person2));
     }
 
     @Test
