@@ -63,14 +63,15 @@ public class TimeSlot {
         List<TimeSlot> availableTime = new ArrayList<>();
         Date lastEnd = interval.getIntervalBegin().getTime();
         for (TimeSlot timeslot : timeslots) {
-            if (timeslot.start.after(lastEnd)) {
+            if (timeslot.start.after(interval.getIntervalEnd().getTime())) {
+                availableTime.add(new TimeSlot(lastEnd, interval.getIntervalEnd().getTime()));
+            } else if (timeslot.start.after(lastEnd)){
                 availableTime.add(new TimeSlot(lastEnd, timeslot.start));
             }
             if (lastEnd.before(timeslot.end)) {
                 lastEnd = timeslot.end;
             }
         }
-
         if (lastEnd.before(interval.getIntervalEnd().getTime())) {
             availableTime.add(new TimeSlot(lastEnd, interval.getIntervalEnd().getTime()));
         }
