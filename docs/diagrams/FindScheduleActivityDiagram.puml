@@ -11,7 +11,7 @@ start
 :Parse user input;
 
 if () then ([input is valid])
-    :Construct NameContainsKeywordsPredicate object;
+    :Construct TutorNameContainsKeywordsPredicate object;
     :Construct FindScheduleCommand object;
     :Return back to LogicManager;
     :LogicManager executes FindScheduleCommand;

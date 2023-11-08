@@ -521,13 +521,13 @@ The following shows the activity diagram from when a user executes the `find-s` 
 
 Step 1. The user has the application launched.
 
-Step 2. The user executes `find-s John Doe` to search for tutors with the name "John Doe". The command is parsed in the
+Step 2. The user executes `find-s John Doe` to search for tutors with the name "John" or "Doe". The command is parsed in the
 `AddressBookParser`.
 
-Step 3. `FindScheduleCommandParser` is created, and constructs a `NameContainsKeywordsPredicate` which matches for any of
+Step 3. `FindScheduleCommandParser` is created, and constructs a `TutorNameContainsKeywordsPredicate` which matches for any of
 the search keywords. A `FindScheduleCommand` object is then constructed with this predicate.
 
-Step 4. The `LogicManager` calls the `execute` in `FindScheduleCommand` which sets the predicate of the filtered schedule
+Step 4. The `LogicManager` calls the `execute()` method in `FindScheduleCommand` which sets the predicate of the filtered schedule
 list in `ModelManager` to be the predicate created earlier.
 
 Step 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
@@ -554,7 +554,7 @@ the lifeline reaches the end of diagram.
     - Pros: It simplifies the search process and reduces cognitive load for users, as they only need to provide the
       tutor's name.
     - Cons: If a user has incomplete or incorrect information about the tutor's name, they may not be able to find the
-      desired tutor.
+      desired schedule assigned by that tutor.
 - **Alternative 2:** Specifying search criteria like start date time or end date time.
     - Pros: Users would have the ability to search for schedules based on a wider range of criteria, such as start date time and end date time.
     - Cons: Implementing advanced search criteria may lead to a more complex user interface and search mechanism,
