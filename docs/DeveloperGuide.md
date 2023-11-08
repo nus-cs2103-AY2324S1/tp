@@ -226,18 +226,16 @@ The following shows the activity diagram from when a user executes the `list-t` 
 
 Step 1. The user has the application launched with at least 1 tutor added.
 
-Step 2. The user executes `find-t John Doe` to search for tutors with the name "John Doe".
+Step 2. The user executes `list-t` to view the full list of existing tutors. The command is parsed in 
+`AddressBookParser`.
 
-Step 3. The user executes `list-t` to view the full list of existing tutors. The command is parsed in 
-AddressBookParser.
+Step 3. A `ListTutorCommand` object is constructed.
 
-Step 4. A `ListTutorCommand` object is constructed.
-
-Step 5. The `LogicManager` calls the `execute` in `ListTutorCommand`, which calls the `updateFilteredPersonList`
+Step 4. The `LogicManager` calls the `execute` method in `ListTutorCommand`, which calls the `updateFilteredPersonList`
 method with the `PREDICATE_SHOW_ALL_PERSONS` predicate in the `ModelManager` to remove any filters on the
 `PersonList` so that the full list of existing tutors is displayed.
 
-Step 6. Finally, the `ListTutorCommand` object returns the `CommandResult`.
+Step 5. Finally, the `ListTutorCommand` object returns the `CommandResult`.
 
 The following sequence diagram shows how the above steps for list tutor operation works:
 
@@ -379,7 +377,7 @@ Step 1. The user has the application launched with at least 1 tutor added.
 Step 2. The user executes `list-t` to view all added tutors.
 
 Step 3. The user executes `delete-t 1` to delete the tutor with Tutor index 1 in the list of tutors displayed.
-The command is parsed in the AddressBookParser.
+The command is parsed in the `AddressBookParser`.
 
 Step 4. `DeleteTutorCommandParser` is created and gets the index of the tutor to be deleted.
 A `DeleteTutorCommand` object is then constructed with the specified tutor index.
@@ -849,6 +847,26 @@ the lifeline reaches the end of diagram.
   - Pros: The filepath does not need to pass through `ThemeCommand` and `CommandResult`. It is allocated and access 
     from `MainWindow` directly. Thus, `CommandResult` does not need another constructor and getter method.
   - Cons: `MainWindow` has to parse arguments.
+
+### Split MainWindow to display both tutor and schedule list together
+
+The main window of TutorConnect now displays both the tutor and schedule list side by side to give users an overview
+and provide easy reference when inputting commands to update the tutors or schedules.
+
+#### Implementation details
+
+To display both the tutor and schedule list together, another panel `ListsPanel` is used to combine both the 
+`personListPanel` and `scheduleListPanel` together in order to display them as a single panel in the `MainWindow`.
+
+#### Design rationale
+
+Initially, the list of tutors and schedules are individual panels and the `MainWindow` can only display one at a time.
+Therefore, users have to enter `list-t` or `list-s` commands to alternate between panels to refer when entering
+tutor-related commands followed by schedule-related commands or vice versa, which can be very troublesome.
+
+With the use of `ListsPanel` to combine both lists into one single panel to display in the `MainWindow`, it eliminates
+the need to alternate between panels as users can now enter tutor-related and schedule-related commands while having
+reference to both lists at the same time, providing convenience for users.
 
 ### Sorting of schedules
 
