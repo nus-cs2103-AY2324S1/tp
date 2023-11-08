@@ -1,5 +1,6 @@
 package seedu.address.model.booking;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -83,5 +84,27 @@ public class EmailTest {
 
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@gmail.com")));
+    }
+
+    @Test
+    public void testTruncatedEmailWithinLimit() {
+        // Test with an email address having a local-part within the 15-character limit
+        Email email = new Email("short@gmail.com");
+        assertEquals("short@gmail.com", email.truncatedEmail());
+    }
+
+    @Test
+    public void testTruncatedEmailExceedingLimit() {
+        // Test with an email address having a local-part exceeding the 15-character limit
+        Email email = new Email("verylonglocalpart@gmail.com");
+        assertEquals("verylongloca...@gmail.com", email.truncatedEmail());
+    }
+
+    @Test
+    public void testExceedingMaxEmailLength() {
+        // Test with an email address local-part exceeding the maximum allowed length
+        String longLocalPart = "thisisaverylonglocalpartthatiswaybeyondthelimitforemailaddresses";
+        String email = longLocalPart + "@gmail.com";
+        assertFalse(Email.isValidEmail(email));
     }
 }

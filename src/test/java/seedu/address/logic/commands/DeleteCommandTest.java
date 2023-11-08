@@ -119,4 +119,22 @@ public class DeleteCommandTest {
 
         assertTrue(model.getFilteredBookingList().isEmpty());
     }
+
+    @Test
+    public void execute_validIndices_success() {
+        Booking firstBooking = model.getFilteredBookingList().get(0);
+
+        // Delete the first and second bookings from the model
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, Index.fromOneBased(100));
+
+        Model expectedModel = new ModelManager(model.getBookingsBook(), new UserPrefs());
+        expectedModel.deleteBooking(firstBooking);
+
+        // Update the expected message to match the actual output from DeleteCommand
+        String expectedMessage = "Deleted Booking(s): Room number: 1; Booking Period: 2023-01-01 08:00 to 2023-01-02 "
+                + "12:00; Name: Alice Pauline; Phone: 94351253; Email: alice@gmail.com; Remark: N/A; "
+                + "Room Type: NORMAL\nInvalid index(es): 100";
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
 }

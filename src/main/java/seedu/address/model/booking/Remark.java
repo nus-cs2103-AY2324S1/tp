@@ -1,7 +1,8 @@
 package seedu.address.model.booking;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.model.booking.exceptions.RemarkNotFoundException;
 
 /**
  * Represents a Remark field in a given booking.
@@ -26,7 +27,9 @@ public class Remark {
      * @param remark A valid remark.
      */
     public Remark(String remark) {
-        requireNonNull(remark);
+        if (remark == null) {
+            throw new RemarkNotFoundException();
+        }
         if (!isValidRemark(remark)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }

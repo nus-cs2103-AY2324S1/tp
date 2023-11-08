@@ -149,7 +149,7 @@ public class BookingPeriod {
      * @param period A valid period in the format.
      * @throws IllegalArgumentException If the period is not in the expected format or violates constraints.
      */
-    private void setPeriod(String period) {
+    void setPeriod(String period) {
         try {
             // Split the string into start and end date parts
             String[] dateParts = period.split(" to");
