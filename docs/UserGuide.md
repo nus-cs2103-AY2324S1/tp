@@ -10,17 +10,59 @@ solution to manage your student details, including attendance records and assign
 
 ### Table of Contents
 
-- [Quick start](#Quick-start)
-- [Features](#features)
-- [FAQ](#faq)
-- [Known issues](#known-issues)
-- [Command summary](#command-summary)
+- [1. About this User Guide](#about-this-user-guide)
+- [2. Quick start](#Quick-start)
+- [3. Features](#features)
+- [4. Planned Enhancements](#planned-enhancements)
+- [5. FAQ](#faq)
+- [6. Known issues](#known-issues)
+- [7. Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
+## 1. About this User Guide
+This guide aims to
+* Teach first-time users how to start using TAvigator
+* Explain the features of each command and how to use them.
+* Provides a summary of the:
+    * Available commands with their respective formats
+    * Available prefixes and which commands use which prefixes
+
+### Navigating the User Guide
+**Information Box**
+<div markdown="block" class="alert alert-info">
+**:information_source: Info:** I am an example info box! I provide useful information.
+</div>
+
+**Tip Box**
+<div markdown="block" class="alert alert-success">
+**:bulb: Tip:** I am an example tip box! I provide pointers to advanced users to enhance experience.
+</div>
+
+**Warning Box**
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Warning:** I am an example warning box! I show important messages to take note to avoid any unintended effects.
+</div>
+
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
+
+<div markdown="block" class="alert alert-success">
+**:bulb: Tip:** **Not sure how to check your Java version?**
+**Step 1.** Open up **Command Prompt** (Windows) or **Terminal** (Mac and Linux).
+
+**Step 2.** Type and run the command `java -version`.
+
+**Step 3.** Check the version number provided (`xxx`) is at least `11`.
+
+An example is shown below.
+
+  ```
+  > java -version
+  java version "xxx" <Other information>
+  ```
+</div>
 
 2. Download the latest `tavigator.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-4/tp/releases).
 
@@ -186,6 +228,14 @@ Examples:
 Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER
 [r/REASON_OF_ABSENCE]`
 
+**Warning Box**
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Warning:** Kindly take note the following!
+* `mark` command is case-sensitive!
+* `mark` command currently does not support marking of students with same `STUDENT_NAME`! Please work around this by marking with `STUDENT_ID` instead!
+* `mark` command currently only supports **EITHER** `STUDENT_NAME` **OR** `STUDENT_ID` only but not both!
+</div>
+
 * Marks the attendance of one or more student corresponding to the `STUDENT_NAME` or `STUDENT_ID`.
 * To mark attendance for multiple students, provide a comma-separated list of `STUDENT_NAME` or `STUDENT_ID`.
 * If a student is present, `REASON_OF_ABSENCE` is not required.
@@ -336,6 +386,14 @@ If your changes to the data file makes its format invalid, TAvigator will discar
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+## Planned Enhancements
+
+### `[Coming in v2.0]` Marking attendance of student: `mark` 
+
+* Support marking of students with same `STUDENT_NAME`!
+* Support marking of students with both `STUDENT_NAME` and `STUDENT_ID`!
+* Support marking of student with case-insensitive `STUDENT_NAME`!
 
 --------------------------------------------------------------------------------------------------------------------
 
