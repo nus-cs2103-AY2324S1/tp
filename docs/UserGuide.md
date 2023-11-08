@@ -210,7 +210,7 @@ To edit name and address of your tutee:
 
 **Expected Output when the command succeeds**: Successfully deleted NAME from the list
 
-**Expected Output when the command fails**: Please input a valid index
+**Expected Output when the command fails**: The tutee index provided is invalid
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the list.
