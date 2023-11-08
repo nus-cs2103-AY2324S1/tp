@@ -583,7 +583,7 @@ Displays a list of all schedules in TutorConnect. List can be filtered by tutors
 
 You wish to view schedules assigned to tutor **Irfan Ibrahim** that have been marked as `COMPLETED`.
 
-Use list schedule function!
+Use the list schedule function!
 
 **Follow these steps**
 
