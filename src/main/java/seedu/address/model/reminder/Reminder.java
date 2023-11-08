@@ -1,8 +1,6 @@
 package seedu.address.model.reminder;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Name;
@@ -28,20 +26,6 @@ public final class Reminder implements Comparable<LocalDate> {
         this.followUpDate = person.getFollowUpDate().get();
     }
 
-    public LocalDate getFollowUpDate() {
-        return followUpDate;
-    }
-
-    public boolean isAfter(LocalDate date) {
-        return followUpDate.isAfter(date);
-    }
-    public boolean isAfterNow() {
-        return followUpDate.isAfter(LocalDate.now());
-    }
-
-    public long getDueTime() {
-        return ChronoUnit.MILLIS.between(LocalDateTime.now(), followUpDate.atStartOfDay());
-    }
     public Name getName() {
         return person.getName();
     }
@@ -50,24 +34,12 @@ public final class Reminder implements Comparable<LocalDate> {
         return person.getLead();
     }
 
-    /**
-     * Returns true if both reminders have the same identity and data fields.
-     * This defines a stronger notion of equality between two reminders.
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
+    public LocalDate getFollowUpDate() {
+        return followUpDate;
+    }
 
-        // instanceof handles nulls
-        if (!(other instanceof Person)) {
-            return false;
-        }
-
-        Reminder otherReminder = (Reminder) other;
-        return person.isSamePerson(otherReminder.person)
-                && followUpDate.equals(otherReminder.followUpDate);
+    public boolean isAfterNow() {
+        return this.compareTo(LocalDate.now()) > 0;
     }
 
     @Override
@@ -75,7 +47,7 @@ public final class Reminder implements Comparable<LocalDate> {
         if (this.followUpDate.isEqual(date)) {
             return 0;
         }
-        return this.followUpDate.isAfter(followUpDate) ? 1 : -1;
+        return this.followUpDate.isAfter(date) ? 1 : -1;
     }
 
     @Override

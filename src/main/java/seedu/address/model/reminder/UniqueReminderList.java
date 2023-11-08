@@ -1,7 +1,5 @@
 package seedu.address.model.reminder;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Iterator;
 
 import javafx.collections.FXCollections;
@@ -49,14 +47,6 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Returns true if the list contains an equivalent Reminder as the given argument.
-     */
-    public boolean contains(Reminder toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
-    }
-
-    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Reminder> asUnmodifiableObservableList() {
@@ -64,20 +54,9 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Returns the earliest reminder time in the {@code UniqueReminderList}
-     */
-    public long getEarliestReminderTime() {
-        if (internalList.isEmpty()) {
-            return -1;
-        }
-        return internalList.stream().mapToLong(Reminder::getDueTime).min().getAsLong();
-    }
-
-    /**
      * Updates the entire internal list of reminders using the list of persons in {@code model}.
      */
     public void updateReminders() {
-
         internalList.clear();
         for (Person person : model.getAddressBook().getPersonList()) {
             person.updateReminder();
@@ -92,7 +71,6 @@ public class UniqueReminderList implements Iterable<Reminder> {
         if (!isReminderListDirty) {
             return;
         }
-
         updateReminders();
         isReminderListDirty = false;
     }
