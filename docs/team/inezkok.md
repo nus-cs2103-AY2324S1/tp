@@ -11,7 +11,7 @@ It is written in Java, and has about 8 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the `reset` command that allows the user to reset certain fields for all employees.
+* **New Feature**: Reset Feature `reset`
     * What it does: Allows users to reset fields (overtime hours and number of leaves taken) for all employees by resetting them to their default value of o (0 overtime hours and an empty LeaveList).
     * Justification: This allows HR managers to efficiently reset overtime hours and number of leaves taken of every employee in just one command, as opposed to have to manually resetting them for each employee one by one.
 
