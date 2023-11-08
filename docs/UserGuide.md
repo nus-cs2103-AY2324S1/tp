@@ -44,8 +44,10 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
 
 
 Here are the icons you will see throughout this User Guide and what they mean:
-- :bulb: Tips and tricks that will help you get the most out of the app
+- :bulb: Tips and tricks that will help you get the most out of HealthSync
 - :wrench: Example usages of the feature that will help you save time
+- :exclamation: Things to take note of while reading the User Guide
+- :warning: Things to take caution with, as they may affect your use of HealthSync
 
 
 > :bulb: The main application consists of the:
@@ -221,15 +223,24 @@ Example commands:
 
 Logs the result of the find command to the logger tab, which can be viewed at all times.
 
+Upon app start, the logger tab is pre-populated with profiles of patients who have appointments on the day itself.
+
+This is how it looks like:
+
+![pre-populated log](images/originalLog.jpg)
+
+
 >:bulb: Use `log` command to save data you want to continue referring to
 
->:wrench: If you want to access the patient list/look up a new patient but would still need to refer to the current patient's details, simply `log` so the profile stays on your screen while you carry out your other tasks!
+>:wrench: If you want to access the patient list or look up a new patient but would still need to refer to the current patient's details, simply `log` so the profile stays on your screen while you carry out your other tasks!
+
+>:warning: The log tab does not update when logged patients' profiles are edited or deleted. The logger tab is intended to be a snapshot of the patients' details at the time that they were logged. To reflect the edited changes in the logger tab after a change has been made, do `log` after the change.
 
 
 * Saving to the logger tab only works for results of the `find` command.
 * The entire result will be saved.
 * The result will be saved in the same order and format.
-* Saving a new result clears the current saved result from the logger tab and replaces it.
+* Saving a new result completely clears the current saved result from the logger tab and replaces it.
 
 Format: `log`
 
@@ -253,13 +264,14 @@ Appends the new results of the most recent find command to the current data in t
 
 >:bulb: Use `alog` to save patient data you want to continue referring to, on top of the profiles you currently have logged
 
->:wrench: If you have multiple patients you need to toggle between, and do not want to keep doing `find` to retrieve their data, simply `alog` so their profiles stay on your screen for your easy access!
+>:wrench: If you have multiple patients you need to toggle between, and do not want to keep doing `find` to retrieve their data, simply `alog` so their profiles stay on your screen for easy access!
 
 
 * Adding to the logger tab only works for results of the `find` command.
 * The previously-saved result will remain the same.
 * The entire new result will be saved below the previously-saved result.
 * The result will be saved in the same order and format.
+* Duplicate persons will not be appended to the log. 
 
 Format: `alog`
 
@@ -350,7 +362,17 @@ Advanced users are welcome to update data directly by editing that data file.
 
 >:warning: **Caution:**
 >If your changes to the data file makes its format invalid, HealthSync will discard all data and start with an empty
->data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+>data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.
+> 
+>To make a backup of the file:
+>1) Locate the `healthsync.json` data file on your computer. This file is located in the same directory as `healthsync.jar`. The path is `[JAR file location]/data/healthsync.json`.
+>2) Right-click on the `healthsync.json` file, and select 'copy'.
+>3) Choose the location where you want to store the backup copy. You can create a separate folder for backups or choose any locations of your choice.
+>4) Right-click in the chosen location and select 'paste'. This creates a copy of the `healthsync.json` data file in the selected backup location.
+>
+>That's it! You can now safely edit the original `healthsync.json` file.
+> 
+>If anything goes wrong during the editing process, you can restore your data by copying the backup file back to its original location.
 
 ### Archiving Data Files `[coming in v5.0]`
 
