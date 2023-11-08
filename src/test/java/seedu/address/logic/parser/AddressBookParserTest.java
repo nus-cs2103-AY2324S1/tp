@@ -5,25 +5,39 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.AddPersonCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
+import seedu.address.logic.commands.EditLessonCommand;
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterLessonCommand;
+import seedu.address.logic.commands.FilterPersonCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NavigateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.state.State;
 
 
 public class AddressBookParserTest {
-
-    private final AddressBookParser parser = new AddressBookParser(new ModelManager());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+            getTypicalScheduleList());
+    private final AddressBookParser parser = new AddressBookParser(model);
 
     @Test
     public void parseCommand_clear() throws Exception {
@@ -32,7 +46,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addPerson() throws Exception {
         assertTrue(parser.parseCommand(AddPersonCommand.COMMAND_WORD
                 + " -name Yiwen") instanceof AddPersonCommand);
         assertTrue(parser.parseCommand(AddPersonCommand.COMMAND_WORD
@@ -41,25 +55,78 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addLesson() throws Exception {
-        assertTrue(parser
-                .parseCommand(AddLessonCommand.COMMAND_WORD
+        assertTrue(parser.parseCommand(AddLessonCommand.COMMAND_WORD
                         + " -name Yiwen -start 14:30 -end 17:30") instanceof AddLessonCommand);
     }
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_overloadedAdd() throws Exception {
+        model.setState(State.STUDENT);
+        assertTrue(parser.parseCommand("add -name name") instanceof AddPersonCommand);
+        model.setState(State.SCHEDULE);
+        assertTrue(parser.parseCommand("add -name name") instanceof AddLessonCommand);
+        model.setState(State.TASK);
+        assertThrows(ParseException.class, () -> parser.parseCommand("add -name name"));
+    }
+
+    @Test
+    public void parseCommand_addTask() throws Exception {
+        assertTrue(parser.parseCommand(AddTaskCommand.COMMAND_WORD
+                        + " 1 description") instanceof AddTaskCommand);
+        assertTrue(parser.parseCommand("task description") instanceof AddTaskCommand);
+    }
+    @Test
+    public void parseCommand_editPerson() throws Exception {
         assertTrue(parser
                 .parseCommand(EditPersonCommand.COMMAND_WORD + " 1 -name Yiwen") instanceof EditPersonCommand);
         assertTrue(parser
                 .parseCommand(EditPersonCommand.COMMAND_WORD
-                        + " 1 -name Yiwen -phone 12345678") instanceof EditPersonCommand);
+                        + " -name Yiwen -phone 12345678") instanceof EditPersonCommand);
     }
 
+    @Test
+    public void parseCommand_editLesson() throws Exception {
+        assertTrue(parser
+                .parseCommand(EditLessonCommand.COMMAND_WORD + " 1 -name lesson1") instanceof EditLessonCommand);
+        assertTrue(parser
+                .parseCommand(EditLessonCommand.COMMAND_WORD
+                        + " -name lesson1 -day 20") instanceof EditLessonCommand);
+    }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_overloadedEdit() throws Exception {
+        model.setState(State.STUDENT);
+        assertTrue(parser.parseCommand("edit 1 -name name") instanceof EditPersonCommand);
+        model.setState(State.SCHEDULE);
+        assertTrue(parser.parseCommand("edit 1 -name name") instanceof EditLessonCommand);
+        model.setState(State.TASK);
+        assertThrows(ParseException.class, () -> parser.parseCommand("edit 1 -name name"));
+    }
+
+    @Test
+    public void parseCommand_deletePerson() throws Exception {
         DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
                 DeletePersonCommand.COMMAND_WORD + " 1");
         assertEquals(new DeletePersonCommand(1), command);
+    }
+
+    @Test
+    public void parseCommand_deleteLesson() throws Exception {
+        assertTrue(parser.parseCommand(DeleteLessonCommand.COMMAND_WORD
+               + " 1") instanceof DeleteLessonCommand);
+    }
+    @Test
+    public void parseCommand_deleteTask() throws Exception {
+        assertTrue(parser.parseCommand(DeleteTaskCommand.COMMAND_WORD
+                + " 1") instanceof DeleteTaskCommand);
+    }
+    @Test
+    public void parseCommand_overloadedDelete() throws Exception {
+        model.setState(State.STUDENT);
+        assertTrue(parser.parseCommand("delete 1") instanceof DeletePersonCommand);
+        model.setState(State.SCHEDULE);
+        assertTrue(parser.parseCommand("delete 1") instanceof DeleteLessonCommand);
+        model.setState(State.TASK);
+        assertThrows(ParseException.class, () -> parser.parseCommand("delete 1"));
     }
 
     @Test
@@ -86,6 +153,32 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " STUDENTS") instanceof ListCommand);
+    }
+    @Test
+    public void parseCommand_filter() throws Exception {
+        model.setState(State.STUDENT);
+        assertTrue(parser.parseCommand("filter -name name") instanceof FilterPersonCommand);
+        model.setState(State.SCHEDULE);
+        assertTrue(parser.parseCommand("filter -name name") instanceof FilterLessonCommand);
+        model.setState(State.TASK);
+        assertThrows(ParseException.class, () -> parser.parseCommand("filter -name name"));
+    }
+
+    @Test
+    public void parseCommand_link_linkTo() throws Exception {
+        assertTrue(parser.parseCommand("link -lesson 1 -student 1") instanceof LinkCommand);
+        model.setState(State.STUDENT);
+        model.showPerson(model.getFilteredPersonList().get(0));
+        assertTrue(parser.parseCommand("linkto 1") instanceof LinkCommand);
+        model.setState(State.SCHEDULE);
+        model.showLesson(model.getFilteredScheduleList().get(0));
+        assertTrue(parser.parseCommand("linkto 1") instanceof LinkCommand);
+    }
+
+    @Test
+    public void parseCommand_nav() throws Exception {
+        assertTrue(parser.parseCommand("nav") instanceof NavigateCommand);
+        assertTrue(parser.parseCommand("navigate") instanceof NavigateCommand);
     }
 
     @Test
