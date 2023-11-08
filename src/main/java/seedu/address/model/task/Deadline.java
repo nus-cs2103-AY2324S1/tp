@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.event.exceptions.InvalidDeadlineException;
+import seedu.address.model.task.exceptions.InvalidDeadlineException;
 
 /**
  * An object representing the deadline of a task.

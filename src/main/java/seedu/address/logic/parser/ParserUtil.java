@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +19,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.exceptions.RuntimeParseException;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;
+import seedu.address.model.event.exceptions.InvalidEventPeriodException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -218,8 +220,12 @@ public class ParserUtil {
         requireAllNonNull(startDate, endDate);
         String trimmedStartDate = startDate.trim();
         String trimmedEndDate = endDate.trim();
-        if (!EventPeriod.isValidPeriod(trimmedStartDate, trimmedEndDate)) {
+        try {
+            EventPeriod.isValidPeriod(trimmedStartDate, trimmedEndDate);
+        } catch (DateTimeParseException dateTimeParseException) {
             throw new ParseException(EventPeriod.MESSAGE_CONSTRAINTS);
+        } catch (InvalidEventPeriodException invalidEventPeriodException) {
+            throw new ParseException(EventPeriod.PERIOD_INVALID);
         }
         return new EventPeriod(trimmedStartDate, trimmedEndDate);
     }

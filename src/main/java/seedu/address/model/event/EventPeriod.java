@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.model.event.exceptions.DateOutOfBoundsException;
+import seedu.address.model.event.exceptions.InvalidEventPeriodException;
 
 /**
  * Represents a period in time when an event will occur.
@@ -27,6 +28,7 @@ public class EventPeriod implements Comparable<EventPeriod> {
             + "    -'MM' is the month.\n"
             + "    -'dd' is the day.\n"
             + "    -'HH:mm' is the time in 24-hour format.";
+    public static final String PERIOD_INVALID = "The start date has to be before the end date.";
     public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HH:mm");
     private static final LocalTime MAX_TIME_OF_DAY = LocalTime.MIDNIGHT.minusMinutes(1);
@@ -85,13 +87,13 @@ public class EventPeriod implements Comparable<EventPeriod> {
 
         LocalDateTime startDateTime;
         LocalDateTime endDateTime;
-        try {
-            startDateTime = LocalDateTime.parse(startString, DATE_TIME_STRING_FORMATTER);
-            endDateTime = LocalDateTime.parse(endString, DATE_TIME_STRING_FORMATTER);
-        } catch (DateTimeParseException invalidFormatException) {
-            return false;
+        startDateTime = LocalDateTime.parse(startString, DATE_TIME_STRING_FORMATTER);
+        endDateTime = LocalDateTime.parse(endString, DATE_TIME_STRING_FORMATTER);
+
+        if (!startDateTime.isBefore(endDateTime)) {
+            throw new InvalidEventPeriodException();
         }
-        return startDateTime.isBefore(endDateTime);
+        return true;
     }
 
     /**
