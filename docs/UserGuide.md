@@ -1179,6 +1179,7 @@ Commands reference: [add-s](#adding-a-schedule-add-s), [edit-s](#editing-a-sched
 | **View Calendar**   | `show DATE` <br> e.g., `show 2023-09-15`                                                                   |
 | **Change Theme**    | `theme NEW_THEME` <br> e.g., `theme dark`                                                                  |
 | **Clear**           | `clear`                                                                                                    |
+| **Help**            | `help`                                                                                                     |
 | **Exit**            | `exit`                                                                                                     |
 
 [Back To Top](#table-of-contents)
