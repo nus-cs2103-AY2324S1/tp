@@ -425,10 +425,26 @@ Aspect: How the command finds free times:
 ### Sort interview feature
 
 #### Implementation
+The sort interview feature allows the user to sort all the interviews that have scheduled via the commands `sort SORT_PARAMETER`, where `SORT_PARAMETER` can either be `rate` or `time`.
 
+The `sort` command is facilitated by the `SortRateCommand` and the `SortTimeCommand`. It enables the user to sort all the scheduled interviews by rating or timing. For rating, the interviews will be sorted in descending order of rating. For interview times, the interviews will be sorted in ascending chronological order of start time. 
 #### How is the command executed
-
+1. The user inputs the `sort-rate` or `sort-time` command
+2. The `LogicManager` receives the `sort-rate` or `sort-time` command string and forwards it to the `AddressBookParser`.
+3. The `AddressBookParser` checks the type of command and returns either `SortRateCommand` or `SortTimeCommand`.
+4. The `LogicManager` executes the `SortRateCommand` or `SortTimeCommand` which calls the `Model#sortInterviewList(Comparator<Interview> comparator)` method.
+5. The `SortRateCommand` or `SortTimeCommand` has their own `Comparator` object instance. Their respective comparators will be passed into the `Model#sortInterviewList(Comparator<Interview> comparator)`
+6. `Model#sortInterviewList(Comparator<Interview> comparator)` will then call the `AddressBook#sortInterview(Comparator<Interview> comparator)`, passing in the given comparator as argument. 
+7. `Model#sortInterviewList(Comparator<Interview> comparator)` will call the `UniqueInterviewList#sort(Comparator<Interview> comparator)`, which will call the built-in `FXCollections#sort(Comparator<T> comparator)` method, which will then sort the internal list of interviews by either rating or timing. Note that `FXCollections#sort(Comparator<T> comparator)` is used since the list of interviews is implemented as an `ObservableList`
+8. The GUI will be updated automatically by when the list changes.
 #### Design consideration
+Aspect: How the sort command works
+* **Alternative 1 (current choice):** Implement the sort method in the `ModelManager`, `AddressBook`, and the `UniqueInterviewList` class
+    * Pros:
+        * Does not violate the _Law of Demeter_ principle, since the sort is called through `Model` in the `SortRateCommand` or `SortTimeCommand`, where the `Model` instance is passed as a parameter to the respective `execute` commands
+        * Does not violate the _information hiding_ principle. This is because the internal list of interviews is never accessed nor modified directly by the `execute` command of the respective command objects
+    * Cons:
+        * The command will cause the control to be passed to `ModelManager` first, then to `AddressBook` and then finally to `UniqueInterviewList` where only in `UniqueInterviewList` is the internal list sorted. This results in an additional layer of abstraction, which increases the complexity of the command slightly
 
 --------------------------------------------------------------------------------------------------------------------
 
