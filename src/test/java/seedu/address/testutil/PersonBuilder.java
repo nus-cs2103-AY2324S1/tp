@@ -143,6 +143,7 @@ public class PersonBuilder {
     }
 
 
+    // TODO: It doesn't properly change the user's status
     /**
      * Sets the {@code Status} of the {@code Person} that we are building.
      */
@@ -169,6 +170,7 @@ public class PersonBuilder {
      */
     public Person build() {
         Person createdPerson = new Person(name, phone, email, address, remark, tags);
+        createdPerson.setStatus(this.status);
         return createdPerson;
     }
 
