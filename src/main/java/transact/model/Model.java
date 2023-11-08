@@ -91,7 +91,7 @@ public interface Model {
      * Returns true if a person with the same id as {@code personId} exists in
      * the address book.
      */
-    boolean hasPerson(PersonId personId);
+    boolean hasPerson(Person person);
 
     /**
      * Deletes the given person with {@code personId}.
