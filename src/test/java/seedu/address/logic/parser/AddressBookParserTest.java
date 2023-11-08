@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -73,6 +74,12 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(AddTaskCommand.COMMAND_WORD
                         + " 1 description") instanceof AddTaskCommand);
         assertTrue(parser.parseCommand("task description") instanceof AddTaskCommand);
+        AddTaskCommand addTaskCommand = (AddTaskCommand) parser.parseCommand("task 1 description");
+        assertEquals(addTaskCommand.getTask().getDescription(), "description");
+        assertEquals(addTaskCommand.getIndex(), 1);
+        addTaskCommand = (AddTaskCommand) parser.parseCommand("task description");
+        assertEquals(addTaskCommand.getTask().getDescription(), "description");
+        assertNull(addTaskCommand.getIndex());
     }
     @Test
     public void parseCommand_editPerson() throws Exception {

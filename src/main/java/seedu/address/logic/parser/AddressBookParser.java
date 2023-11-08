@@ -99,12 +99,11 @@ public class AddressBookParser {
         default:
             break;
         }
-        final String arguments = matcher.group("arguments");
+        final String arguments = matcher.group("arguments").trim();
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
-        userInput = commandWord + " " + arguments;
         switch (commandWord) {
 
         case AddPersonCommand.COMMAND_WORD:
@@ -144,7 +143,7 @@ public class AddressBookParser {
             if (!model.getState().equals(SCHEDULE)) {
                 throw new ParseException("Please add tasks in the schedule list.");
             }
-            return new AddTaskCommandParser().parse("addtask " + arguments);
+            return new AddTaskCommandParser().parse(arguments);
         case DeleteTaskCommand.COMMAND_WORD:
             if (!model.getState().equals(SCHEDULE)) {
                 throw new ParseException("Please delete tasks in the schedule list.");
