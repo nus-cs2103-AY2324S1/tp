@@ -28,10 +28,6 @@ public class DeleteTaskCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
-    public DeleteTaskCommand(Index targetIndex) {
-        this.taskIndex = targetIndex.getZeroBased();
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

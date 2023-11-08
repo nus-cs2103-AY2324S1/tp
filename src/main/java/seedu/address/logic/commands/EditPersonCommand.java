@@ -40,18 +40,9 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
 
-    public EditPersonCommand(int index, Person editDescriptor) {
+    public EditPersonCommand(Integer index, Person editDescriptor) {
         super(index, editDescriptor);
     }
-
-    public EditPersonCommand(Person editDescriptor) {
-        super(editDescriptor);
-    }
-
-    public EditPersonCommand(Person editDescriptor, Person originalPerson) {
-        super(editDescriptor, originalPerson);
-    }
-
     @Override
     protected void initModelMethods() {
         currentShownEntry = model.getCurrentlyDisplayedPerson();

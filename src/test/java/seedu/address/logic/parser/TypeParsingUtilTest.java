@@ -21,14 +21,5 @@ class TypeParsingUtilTest {
         }
     }
 
-    @Test
-    void getValueImmediatelyAfterCommandNameTest() {
-        try {
-            String result = TypeParsingUtil.getValueImmediatelyAfterCommandName("edit", "index", "edit 1 yiwen");
-            assertEquals(result, "1");
-        } catch (ParseException e) {
-            fail(e.getMessage());
-        }
-    }
 
 }

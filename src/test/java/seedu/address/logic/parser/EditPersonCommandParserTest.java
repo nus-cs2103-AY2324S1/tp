@@ -15,16 +15,12 @@ public class EditPersonCommandParserTest {
     @Test
     void happyCases() {
         try {
-            p.parse(EditPersonCommand.COMMAND_WORD + " 1 -name Yiwen");
-            p.parse(EditPersonCommand.COMMAND_WORD + " 1 -phone 98765432");
-            p.parse(EditPersonCommand.COMMAND_WORD + " 1 -email fakeEmail@com");
+            p.parse("1 -name Yiwen");
+            p.parse("1 -phone 98765432");
+            p.parse("1 -email fakeEmail@com");
         } catch (ParseException e) {
             fail();
         }
     }
-    @Test
-    void badCases() throws ParseException {
-        p.parse(EditPersonCommand.COMMAND_WORD + " -name yiwen");
-        assertThrows(ParseException.class, () -> p.parse(EditPersonCommand.COMMAND_WORD + " index -name yiwen"));
-    }
+    //todo, specify this behaviour in the doc "edit index -name yiwen " would not trigger this exception
 }

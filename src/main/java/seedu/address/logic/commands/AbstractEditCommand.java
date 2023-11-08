@@ -38,7 +38,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
     /**
      * Pass in index to indicate which entry to edit
      */
-    public AbstractEditCommand(int index, T editDescriptor) {
+    public AbstractEditCommand(Integer index, T editDescriptor) {
         requireNonNull(editDescriptor);
         this.index = index;
         this.editDescriptor = editDescriptor;

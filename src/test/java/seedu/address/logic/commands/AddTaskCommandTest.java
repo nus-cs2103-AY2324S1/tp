@@ -28,11 +28,10 @@ class AddTaskCommandTest {
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
         Task validTask = new Task("Valid task");
-        Index lessonIndex = Index.fromOneBased(1);
 
-        CommandResult commandResult = new AddTaskCommand(lessonIndex, validTask).execute(modelStub);
+        CommandResult commandResult = new AddTaskCommand(1, validTask).execute(modelStub);
 
-        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, lessonIndex.getOneBased(), validTask.toString()),
+        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, 1, validTask.toString()),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
@@ -52,8 +51,7 @@ class AddTaskCommandTest {
     @Test
     public void execute_duplicateTask_throwsCommandException() throws CommandException {
         Task validTask = new Task("Valid Task");
-        Index lessonIndex = Index.fromOneBased(1);
-        AddTaskCommand addTaskCommand = new AddTaskCommand(lessonIndex, validTask);
+        AddTaskCommand addTaskCommand = new AddTaskCommand(1, validTask);
         ModelStub modelStub = new ModelStubWithTask(validTask);
         assertThrows(CommandException.class,
                 String.format(AddTaskCommand.DUPLICATE_TASK, 1), () -> addTaskCommand.execute(modelStub));
