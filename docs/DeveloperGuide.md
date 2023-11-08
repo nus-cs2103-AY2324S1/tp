@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI. Notably, Profile is a separate set of classes that handle the UI of the `view` command, which will be covered later in this document.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -153,6 +153,25 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### View feature
+
+Called `PersonProfile` or simply "profile" internally. The profile follow this structure:
+
+![Structure of Profile Component](images/UiProfileDiagram.png)
+
+With the exception of notes and tags, all other fosterer details are handled using dynamically created copies of `PersonProfileField`.
+
+- `PersonProfileHeader` serves as headers for the data, and cannot be edited by the user.
+- `PersonProfileField` handles a field key and a field value, where the value can be edited.
+- `PersonProfileNote` is similar to a field, except it contains a `TextArea` and supports multiline input.
+- `PersonProfileTags` also supports multiline input, but when in read mode displays tags in a `FlowPane`.
+
+The following is a sequence diagram that shows two separate processes: the user starting an edit in a field,
+and the user successfully completing that edit.
+
+![Sequence of PersonProfile](images/ProfileEditSequenceDiagram.png)
+
 
 ### Add feature
 

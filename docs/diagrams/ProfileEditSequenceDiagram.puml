@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":MainWindow" as mw UI_COLOR
+Participant ":PersonProfile" as profile LOGIC_COLOR
+Participant "email:PersonProfileField" as field MODEL_COLOR
+
+
+
+user -[USER_COLOR]> mw : "mail"
+activate mw UI_COLOR
+
+mw -[UI_COLOR]> profile : setFocus(Field.EMAIL)
+activate profile LOGIC_COLOR
+
+profile -[LOGIC_COLOR]> field : setFocus()
+activate field MODEL_COLOR
+
+field -[MODEL_COLOR]> field : updateState
+activate field MODEL_COLOR_T1
+field --[MODEL_COLOR]-> field
+deactivate field MODEL_COLOR_T1
+
+field --[MODEL_COLOR]-> profile
+deactivate field MODEL_COLOR
+
+profile --[LOGIC_COLOR]-> mw
+deactivate profile
+
+mw --[UI_COLOR]-> user
+deactivate mw
+
+
+
+user -[USER_COLOR]> field : "<enter>"
+activate field MODEL_COLOR
+
+field -[MODEL_COLOR]> field : confirmIfValid
+activate field MODEL_COLOR_T1
+
+field -[MODEL_COLOR_T1]> profile : updateField
+activate profile LOGIC_COLOR
+profile --[LOGIC_COLOR]-> field
+deactivate profile
+
+field -[MODEL_COLOR_T1]> profile : triggerEvent(AFTER_CONFIRM)
+activate profile LOGIC_COLOR
+
+profile -[LOGIC_COLOR]> profile : handleFieldLockIn
+activate profile LOGIC_COLOR_T1
+
+profile -[LOGIC_COLOR_T1]> profile : createAndUpdatePerson
+activate profile LOGIC_COLOR_T2
+profile --[LOGIC_COLOR_T2]-> profile
+deactivate profile LOGIC_COLOR_T2
+
+profile -[LOGIC_COLOR_T1]> profile : sendPersonCreated
+activate profile LOGIC_COLOR_T2
+
+
+profile -[LOGIC_COLOR_T2]> mw : sendFeedback
+
+profile --[LOGIC_COLOR_T2]-> profile
+deactivate profile LOGIC_COLOR_T2
+
+profile --[LOGIC_COLOR_T1]-> profile
+deactivate profile
+
+profile --[LOGIC_COLOR]-> field
+deactivate profile
+
+field --[MODEL_COLOR_T1]-> field
+deactivate field MODEL_COLOR_T1
+
+field --[MODEL_COLOR]-> user
+deactivate field
+
+@enduml
