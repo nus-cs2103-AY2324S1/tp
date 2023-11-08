@@ -352,32 +352,38 @@ Finds all applications whose fields match the keywords provided.
 
 **Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
 
-* At least one optional field must be provided.
-* If a [prefix](#prefix) is given, the search will only find applications containing the given keyword in the _specified_ field.
-* More than one `KEYWORDS` can be provided.
-* `KEYWORDS` are case-insensitive.
+* At least one optional parameter must be provided. Multiple parameters can be provided.
+* If a [prefix](#prefix) is given, the search will only find applications containing the given keywords in the specified
+    field.
+* Multiple keywords can be provided for one parameter.
+    * e.g. `find r/Software Engineer` is a valid command.
+* Keywords are case-insensitive.
 * If `KEYWORDS` is provided, the command will find all applications that contains the `KEYWORDS` in any field.
-* An application will be listed only if it contains _ALL_ the `KEYWORDS` provided.
+* An application will be listed only if it contains _ALL_ the keywords provided.
 * Applications with partially matching keywords will not be listed.
     * e.g. searching for the keyword "Goo" will not list applications containing "Google".
-* Characters not separated by white space is considered _ONE_ word.
+* Characters not separated by white space are considered _ONE_ word.
     * e.g. searching for the keyword "ADD" will not list applications containing "TO_ADD_DEADLINE".
-* Searches for deadline must be in the format `MMM DD YYYY HHMM`.
-    * e.g. Dec 31 2030 1200 is a valid deadline.
+* Searches for deadline must be formatted correctly. Refer to 
+  "[Structure of a job application](#structure-of-a-job-application)" for the correct format of a deadline.
 
 **Examples:**
 
-* `find c/Google`
+***Successful Commands:***
 
-  Finds all applications with "Google" in the company name.
+1. Finding by company: `find c/Google`
 
-* `find Google r/Software Engineer`
+* This command searches for all job applications with "Google" in the company name.
 
-  Finds all applications with "Software Engineer" in the role and "Google" in any field.
+2. Finding using multiple conditions: `find Google r/Software Engineer`
 
-* `find Google AI`
+* This command searches for all job applicaitons with "Google" in any field and the words "Software" and "Engineer". 
 
-  Finds all applications with _both_ "Google" and "AI" in any fields.
+***Failed Commands:***
+
+1. Missing keywords: `find`
+
+* This command is invalid because it doesn't specify any keywords to search for.
 
 **UI mockup:**
 ![](images/user-guide/FindCommand.png)
@@ -397,13 +403,26 @@ Sorts the list based on the prefix provided.
 
 **Examples:**
 
-* `sort d/`
+***Successful Commands:***
 
-  Lists all applications, starting from the one with the earliest deadline.
+1. Sort by company: `sort c/`
 
-* `sort r/`
+* This command sorts all job applications in ascending alphabetical order of company name.
 
-  Lists all applications sorted by role, in alphabetical order.
+2. Sort by role: `sort r/`
+
+* This command sorts all job applications in chronological order of deadline, starting from applications with the
+  earliest deadline.
+
+***Failed Commands:***
+
+1. Multiple prefixes: `sort r/ c/`
+
+* This command is invalid because only one prefix is accepted.
+
+2. Input following prefix: `sort r/Software`
+
+* This command is invalid because there should be nothing following the prefix provided.
 
 **UI mockup:**
 ![](images/user-guide/SortCommand.png)
