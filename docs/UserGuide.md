@@ -29,7 +29,6 @@ solution to manage your student details, including attendance records and assign
     - [Deleting multiple students : `delete all`](#328-deleting-multiple-students--delete-all)
     - [Merging two students : `merge`](#329-merging-two-students--merge)
     - [Viewing detailed attendance records : `view`](#3210-viewing-detailed-attendance-records--view)
-    - [Clearing all entries : `clear`](#3211-clearing-all-entries--clear)
 - [4. Planned Enhancements](#4-planned-enhancements)
 - [5. FAQ](#5-faq)
 - [6. Known issues](#6-known-issues)
@@ -92,13 +91,11 @@ An example is shown below.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list students` : Lists all contacts.
+   * `list students` : Lists all students in the current course.
 
    * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567M t/G10` : Adds a contact named `Fu Yiqiao` to TAvigator.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
@@ -127,7 +124,7 @@ An example is shown below.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -376,15 +373,7 @@ Format: `view INDEX`
 * If the student has attendance records, the attendance record will be shown week by week with the reason being provided for absences.
 
 Examples:
-* `view 1` views the attendance record for the student with index 1.
-
-#### 3.2.11 Clearing all entries : `clear`
-
-Clears all entries from the current address book.
-
-![clear](images/clear.png)
-
-Format: `clear`
+* `view 1` views the attendance records for the student with index 1.
 
 ### Exiting the program : `exit`
 
@@ -436,7 +425,6 @@ _Details coming soon ..._
 | Action     | Format, Examples                                                                                                                                                                                               |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP_ID]…` <br> e.g., `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G2`                                                     |
-| **Clear**  | `clear`                                                                                                                                                                                                        |
 | **Course** | `course create/delete/switch/edit course/COURSE_CODE`<br/> e.g., `course create course/CS2103T`                                                                                                                |
 | **Delete** | `delete all [tg/TUTORIAL_GROUP_ID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                                                   |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                                                                       |
