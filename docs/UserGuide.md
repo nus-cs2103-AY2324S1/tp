@@ -219,9 +219,10 @@ Examples:
    (list shows all flashcards with questions starting with 'What' and has the CS2100 Tag)
 ```
 
-#### Acceptable values for each parameters:
+#### To note:
 1. No Empty Input after q/ and t/.
 2. q/ and t/ is optional.
+3. Inputs are case-sensitive (cards/tags with the same input but different case will be recognised as different cards/tags)
 
 #### Expected output:
 ```
