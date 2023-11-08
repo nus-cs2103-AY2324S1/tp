@@ -170,11 +170,11 @@ The `UserPrefs` component,
 * stores the GUI settings of window size and position.
 * stores the path of the data file.
 
-The `UniqueList<T>` component,
+The `UniqueList<T>` class,
 
-* is a generic class ensures that items within the list conforms to the unique constraint. In other words, each pair of objects within the list must have a different identity. `UniqueList<T>` enforces `T` to implement `Identifiable<T>`, which has the method `isSame(T)` to check for identity against another object.
+* is a generic class that ensures that items within the list conforms to the unique constraint. In other words, each pair of objects within the list must have a different identity. `UniqueList<T>` enforces `T` to implement `Identifiable<T>`, which has the method `isSame(T)` to check for identity against another object.
 * The identity is determined by the class that `T` binds to.
-  * For `Name`, the identity is the name. Two names are equal if there string values are equal.
+  * For `Person`, the identity is the name. Two names are equal if there string values are equal.
   * For `Phone`, the identity is the literal string value of the phone.
   * For `Email`, the identity is the literal string value of the email.
   * For `Link`, the identity is the literal string value of the link.
@@ -287,6 +287,11 @@ as the parser should not need to know how the current model looks like.
 This design has the advantage that the parser does not need to know how the current model looks like.
 However, to keep `Command` classes consistent in design, 
 we decide to only have one `EditCommand` class and practice inheritance with `EditAction`.
+* Implement `EditCommand` such that `EditAction` edits the `Person` object directly.
+This means that `Person` class must be mutable, which breaks the defensiveness of the current code and has the potential of introducing more bug.
+Moreover, the `Person` class being immutable also accommodates for the `undo` and `redo` command,
+in which the `VersionedNetworkBook` only creates a shallow copy of the current list of `Person` objects
+and hence any mutation of the `Person` object might introduce bugs.
 
 
 ### \[Proposed\] Undo/redo feature
