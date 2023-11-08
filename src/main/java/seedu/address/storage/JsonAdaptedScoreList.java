@@ -51,7 +51,6 @@ public class JsonAdaptedScoreList {
      */
     public ScoreList toModelType() {
         ScoreList scoreList = new ScoreList();
-        System.out.print(scores);
         if (scores == null) {
             return scoreList;
         }
