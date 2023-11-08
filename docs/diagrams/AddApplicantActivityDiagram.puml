@@ -1,0 +1,15 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters command to add an applicant;
+
+if () then ([command is valid])
+    :Applicant is added to AddressBook;
+    :Success message is shown;
+else ([else])
+    : Error mesaage is shown;
+endif
+stop
+@enduml
