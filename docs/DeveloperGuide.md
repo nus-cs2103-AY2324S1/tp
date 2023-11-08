@@ -213,6 +213,40 @@ The `add-t` command was designed this way to ensure consistency with the previou
     * Cons: Allowing too many special characters decreases the ability to locate and reference the tutors in future 
       (e.g. ABC,123@!?:" should not be accepted as a valid name).
 
+### List tutor feature
+
+The "List Tutor" feature allows users to view the list of existing tutors in the address book. Below, we provide
+an example usage scenario and a detailed description of how the add tutor mechanism behaves at each step.
+
+The following shows the activity diagram from when a user executes the `list-t` command:
+
+![Activity Diagram for list-t Command](images/ListTutorActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched with at least 1 tutor added.
+
+Step 2. The user executes `find-t John Doe` to search for tutors with the name "John Doe".
+
+Step 3. The user executes `list-t` to view the full list of existing tutors. The command is parsed in 
+AddressBookParser.
+
+Step 4. A `ListTutorCommand` object is constructed.
+
+Step 5. The `LogicManager` calls the `execute` in `ListTutorCommand`, which calls the `updateFilteredPersonList`
+method with the `PREDICATE_SHOW_ALL_PERSONS` predicate in the `ModelManager` to remove any filters on the
+`PersonList` so that the full list of existing tutors is displayed.
+
+Step 6. Finally, the `ListTutorCommand` object returns the `CommandResult`.
+
+The following sequence diagram shows how the above steps for list tutor operation works:
+
+![Interactions Inside the Logic Component for the `list-t` Command](images/ListTutorSequenceDiagram.png)
+
+#### Design rationale
+
+The `list-t` command was designed this way to ensure consistency with the previous `list` person command.
+
 ### Edit tutor feature 
 
 The “Edit Tutor” feature allows users to edit an existing tutor in the address book given a tutor index. 
@@ -353,7 +387,7 @@ A `DeleteTutorCommand` object is then constructed with the specified tutor index
 Step 5. The `DeleteTutorCommand` object gets the specified person from the current filtered person list using the tutor
 index.
 
-Step 6. The `DeleteTutorCommand` object then calls the deletePerson method in the ModelManager with the specified 
+Step 6. The `DeleteTutorCommand` object then calls the `deletePerson` method in the ModelManager with the specified 
 person to delete. This method deletes the specified `Person` in the model.
 
 Step 7. Finally, the `DeleteTutorCommand` object returns the `CommandResult`.
