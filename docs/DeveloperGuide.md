@@ -366,7 +366,7 @@ is instantiated by their corresponding arguments and are mapped to their prefixe
 
 ![FindPredicateMapExample](images/FindPredicateMapExample.png)
 
-The predicates are combined into a single `Predicate<Person>` in `FindCommand::execute` and applied to each `Person` in the 
+The predicates are combined into a single `Predicate<Person>` in `FindCommand#execute` and applied to each `Person` in the 
 `FilteredPersonList` of the `Model`.
 
 To find a specialist, a similar parse and execution flow is conducted. 
