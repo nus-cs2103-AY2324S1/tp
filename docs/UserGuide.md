@@ -136,9 +136,10 @@ _A flashcard with a question, answer, tag and hint field._
 #### To Note:
 1. No Empty Input after `q/`, `a/`, `t/` and `h/`.
 2. `t/` and `h/` is optional and not necessary.
-3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards)
-4. Tagging is not supported in v1.2 and earlier.
-5. Hint is not supported before v1.3.
+3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
+4. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
+5. Tagging is not supported in v1.2 and earlier.
+6. Hint is not supported before v1.3.
 
 #### Expected outputs:
 
