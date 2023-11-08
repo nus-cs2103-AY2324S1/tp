@@ -85,6 +85,12 @@ public class AddressBookTest {
         assertEquals(expected, result);
     }
 
+    @Test void setPaidTest() {
+        addressBook.addPerson(ALICE);
+        addressBook.setPaid(ALICE);
+        assertEquals(true, addressBook.getPaid(ALICE));
+    }
+
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);

@@ -11,7 +11,7 @@ import seedu.address.model.Model;
  */
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
-    public static final String MESSAGE_SUCCESS = "Redo Successful!";
+    public static final String MESSAGE_SUCCESS = "Successfully redo previous command";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

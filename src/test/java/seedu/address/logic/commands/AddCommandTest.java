@@ -196,7 +196,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void getPersonPaid(Person target) {
+        public boolean getPersonPaid(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -239,6 +239,7 @@ public class AddCommandTest {
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public ObservableList<Person> getScheduleList() {
             throw new AssertionError("This method should not be called.");

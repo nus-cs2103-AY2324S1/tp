@@ -107,6 +107,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    public void setPaid(Person target) {
+        target.setPaid();
+    }
+
+    public boolean getPaid(Person target) {
+        return target.getPaid();
+    }
+
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
