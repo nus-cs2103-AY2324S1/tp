@@ -42,7 +42,10 @@ public class AddTagCommand extends AddCommand {
         if (person == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND + this.contactId);
         }
-        person.addTags(this.toAdd);
+        
+        Person toEdit = person;
+        toEdit.addTags(this.toAdd);
+        model.setPerson(person, toEdit);
 
         final StringBuilder builder = new StringBuilder();
         builder.append(MESSAGE_SUCCESS);

@@ -41,7 +41,10 @@ public class DeleteTagCommand extends DeleteCommand {
         if (person == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND + this.contactId);
         }
-        person.removeTags(toDelete);
+
+        Person toEdit = person;
+        toEdit.removeTags(this.toDelete);
+        model.setPerson(person, toEdit);
 
         final StringBuilder builder = new StringBuilder();
         builder.append(MESSAGE_SUCCESS);
