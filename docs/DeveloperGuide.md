@@ -1055,13 +1055,13 @@ This would then be used in the `execute` method of the `find` command object to 
 or schedule list with part of their names matching the user input.
 
 ### List Schedule by Pending Status
-In our current implementation, `list-s` only filters schedule by `COMPLETED` or `MISSED` status. Schedules have a default `PENDING` 
-status which should also be included in the `list-s` command for users to have a  comprehensive schedule management.
+In our current implementation, `list-s` only filters schedule by `COMPLETED` or `MISSED` status. Any schedules that have 
+not been assigned one of these statuses are categorised as unmarked, and it's important to include them in the list-s results.
 
 **Proposed implementation**:
-1. Update `list-s` command and `m/` parameter value to accept an additional `PENDING` status to filter by.
-2. This can be done by modifying `ListScheduleCommandParser.java` and `Status.java` to map an integer to enum `Status` called `PENDING`.
-3. When `ListScheduleCommand:execute` runs, the command should accept another integer input from `m/` parameter that represents the `PENDING` status.
-4. Then `Model::updateFilteredScheduleList` will take in `StatusPredicate.java` to filter schedules based on `PENDING` status.
-5. To show that schedules are filtered to `PENDING` status only, we can also update `ScheduleCard.java` to include a component and change the UI's background according to the schedule's status, such green for `COMPLETED`, red for `MISSED` and grey for `PENDING`.
+1. Update `list-s` command and `m/` parameter value to accept an additional value for unmarked status to filter by, such as `m/u`.
+2. This can be done by modifying `ListScheduleCommandParser.java` and `Status.java` to map an integer to enum `Status` that represents umarked status.
+3. When `ListScheduleCommand:execute` runs, the command should accept another input from `m/` parameter that represents the umarked status, such as `m/u`.
+4. Then `Model::updateFilteredScheduleList` will take in `StatusPredicate.java` to filter schedules based on unmarked status.
+5. To show that schedules are filtered to unmarked status only, we can also update `ScheduleCard.java` to include a component and change the UI's background according to the schedule's status, such green for `COMPLETED`, red for `MISSED` and grey for unmarked.
 
