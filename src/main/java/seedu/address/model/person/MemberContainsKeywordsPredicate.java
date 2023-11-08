@@ -29,6 +29,8 @@ public class MemberContainsKeywordsPredicate implements Predicate<Member> {
                 || StringUtil.containsWordIgnoreCase(member.getPhone().value, keyword)
                 || StringUtil.containsWordIgnoreCase(member.getEmail().value, keyword)
                 || StringUtil.containsWordIgnoreCase(member.getTelegram().toString(), keyword)
+                || member.getTasks().stream()
+                    .anyMatch(task -> StringUtil.containsWordIgnoreCase(task.taskName, keyword))
                 || member.getTags().stream()
                 .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
     }
