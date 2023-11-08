@@ -155,7 +155,7 @@ Examples:
 
 Opens the help window that shows a summary of all commands and its parameters, with a `Copy URL` button that provides access to this help page.
 
-<img alt="help message" src="images/helpMessage.png" width="900">
+<img alt="help message" src="images/helpMessage.png" width="750">
 
 Format: `help`
 
