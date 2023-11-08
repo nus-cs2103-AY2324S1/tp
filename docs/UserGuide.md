@@ -342,7 +342,7 @@ Format: `delete s/STUDENT_NUMBER`
 Example:
 * `delete s/A0249112A`
 
---- 
+---
 
 #### Edit a student's details : `edit`
 
