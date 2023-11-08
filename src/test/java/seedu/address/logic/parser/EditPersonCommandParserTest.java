@@ -1,11 +1,9 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class EditPersonCommandParserTest {

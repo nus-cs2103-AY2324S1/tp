@@ -1,14 +1,21 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySchedule;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
@@ -130,21 +137,22 @@ public class ModelStub implements Model {
     @Override
     public ObservableList<Lesson> getFilteredScheduleList() {
         return new ObservableList<Lesson>() {
+
+            @Override
+            public void addListener(InvalidationListener listener) {
+            }
             @Override
             public void addListener(ListChangeListener<? super Lesson> listener) {
 
+            }
+            @Override
+            public void removeListener(InvalidationListener listener) {
             }
 
             @Override
             public void removeListener(ListChangeListener<? super Lesson> listener) {
 
             }
-
-            @Override
-            public boolean addAll(Lesson... elements) {
-                return false;
-            }
-
             @Override
             public boolean setAll(Lesson... elements) {
                 return false;
@@ -154,42 +162,6 @@ public class ModelStub implements Model {
             public boolean setAll(Collection<? extends Lesson> col) {
                 return false;
             }
-
-            @Override
-            public boolean removeAll(Lesson... elements) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Lesson... elements) {
-                return false;
-            }
-
-            @Override
-            public void remove(int from, int to) {
-
-            }
-
-            @Override
-            public int size() {
-                return 2;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                return false;
-            }
-
-            @Override
-            public Iterator<Lesson> iterator() {
-                return null;
-            }
-
             @Override
             public Object[] toArray() {
                 return new Object[0];
@@ -198,21 +170,6 @@ public class ModelStub implements Model {
             @Override
             public <T> T[] toArray(T[] a) {
                 return null;
-            }
-
-            @Override
-            public boolean add(Lesson lesson) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> c) {
-                return false;
             }
 
             @Override
@@ -226,14 +183,31 @@ public class ModelStub implements Model {
             }
 
             @Override
+            public boolean addAll(Lesson... elements) {
+                return false;
+            }
+
+
+            @Override
             public boolean removeAll(Collection<?> c) {
                 return false;
             }
+            @Override
+            public boolean removeAll(Lesson... elements) {
+                return false;
+            }
+
 
             @Override
             public boolean retainAll(Collection<?> c) {
                 return false;
             }
+
+            @Override
+            public boolean retainAll(Lesson... elements) {
+                return false;
+            }
+
 
             @Override
             public void clear() {
@@ -252,12 +226,24 @@ public class ModelStub implements Model {
 
             @Override
             public void add(int index, Lesson element) {
-
             }
+            @Override
+            public boolean add(Lesson lesson) {
+                return false;
+            }
+
 
             @Override
             public Lesson remove(int index) {
                 return null;
+            }
+            @Override
+            public void remove(int from, int to) {
+
+            }
+            @Override
+            public boolean remove(Object o) {
+                return false;
             }
 
             @Override
@@ -286,12 +272,34 @@ public class ModelStub implements Model {
             }
 
             @Override
-            public void addListener(InvalidationListener listener) {
+            public int size() {
+                return 2;
             }
 
             @Override
-            public void removeListener(InvalidationListener listener) {
+            public boolean isEmpty() {
+                return false;
             }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<Lesson> iterator() {
+                return null;
+            }
+
+
+
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+
         };
     }
 

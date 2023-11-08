@@ -25,7 +25,7 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
         } catch (ParseException e) {
             throw new ParseException("Invalid lesson format. " + e.getMessage() + getUsageInfo());
         }
-        return new EditLessonCommand(index,lesson);
+        return new EditLessonCommand(index, lesson);
     }
 
     public static String getUsageInfo() {

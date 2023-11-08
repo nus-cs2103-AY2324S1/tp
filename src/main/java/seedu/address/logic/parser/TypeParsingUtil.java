@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import java.util.Arrays;
+import static seedu.address.logic.parser.RegularExpressionUtil.STARTING_WITH_ONE_TO_FIVE_DIGITS;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,9 +12,6 @@ import seedu.address.logic.parser.exceptions.RepeatedFlagException;
 import seedu.address.model.ListEntryField;
 import seedu.address.model.util.Of;
 
-import static seedu.address.logic.parser.RegularExpressionUtil.STARTING_WITH_ONE_TO_FIVE_DIGITS;
-
-// I am considering probably make sense to write specific parser inside each class.
 /**
  * Contains utility methods used for parsing strings into various desirable values, and validating them.
  */
@@ -77,7 +75,10 @@ public class TypeParsingUtil {
         return parseFlag(flag, input, false);
     }
 
-    public static Integer parseIndex(String input,  boolean isOptional) throws ParseException {
+    /**
+     * Parses the index from the input string
+     */
+    public static Integer parseIndex(String input, boolean isOptional) throws ParseException {
         Pattern p1 = Pattern.compile(STARTING_WITH_ONE_TO_FIVE_DIGITS);
         Pattern p2 = Pattern.compile(RegularExpressionUtil.STARTING_WITH_DIGITS);
         Pattern p3 = Pattern.compile(RegularExpressionUtil.STARTING_WITH_NEGATIVE_NUMBER);

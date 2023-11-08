@@ -53,7 +53,7 @@ public class ShowCommand extends Command {
             model.showPerson(personToShow);
             return new CommandResult(String.format(MESSAGE_SHOW_PERSON_SUCCESS, Messages.format(personToShow)));
         case SCHEDULE:
-            if (targetIndex - 1>= lastShownSchedule.size()) {
+            if (targetIndex - 1 >= lastShownSchedule.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
             }
             // Show lesson details
@@ -61,7 +61,7 @@ public class ShowCommand extends Command {
             model.showLesson(lessonToShow);
             return new CommandResult(String.format(MESSAGE_SHOW_LESSON_SUCCESS, Messages.formatLesson(lessonToShow)));
         case TASK:
-            if (targetIndex - 1>= fullTaskList.size()) {
+            if (targetIndex - 1 >= fullTaskList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
             // Show lesson details

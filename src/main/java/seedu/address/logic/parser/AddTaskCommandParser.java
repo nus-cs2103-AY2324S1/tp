@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.TypeParsingUtil.parseIndex;
+
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Task;
 
-import static seedu.address.logic.parser.RegularExpressionUtil.STARTING_WITH_ONE_TO_FIVE_DIGITS;
-import static seedu.address.logic.parser.TypeParsingUtil.*;
 
 /**
  * Parses input arguments and creates a new AddTaskCommand object

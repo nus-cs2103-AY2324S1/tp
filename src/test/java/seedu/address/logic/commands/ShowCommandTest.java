@@ -84,7 +84,7 @@ public class ShowCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredLessonList_throwsCommandException() {
         model.setState(State.SCHEDULE);
-        int outOfBoundIndex =model.getFilteredScheduleList().size() + 1;
+        int outOfBoundIndex = model.getFilteredScheduleList().size() + 1;
         ShowCommand showCommand = new ShowCommand(outOfBoundIndex);
 
         assertCommandFailure(showCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
