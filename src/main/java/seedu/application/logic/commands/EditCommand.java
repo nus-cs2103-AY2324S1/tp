@@ -25,6 +25,7 @@ import seedu.application.model.job.Job;
 import seedu.application.model.job.JobType;
 import seedu.application.model.job.Role;
 import seedu.application.model.job.Status;
+import seedu.application.model.job.interview.Interview;
 
 
 /**
@@ -35,31 +36,31 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the job identified "
-        + "by the index number used in the displayed job list.\n"
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: INDEX (must be a positive integer) "
-        + "[" + PREFIX_ROLE + "ROLE] "
-        + "[" + PREFIX_COMPANY + "COMPANY] "
-        + "[" + PREFIX_DEADLINE + "DEADLINE] "
-        + "[" + PREFIX_STATUS + "STATUS] "
-        + "[" + PREFIX_JOB_TYPE + "JOB TYPE] "
-        + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
-        + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_ROLE + "Software Engineer "
-        + PREFIX_COMPANY + "Google"
-        + PREFIX_DEADLINE + "Dec 31 2023 1200"
-        + PREFIX_STATUS + "Pending "
-        + PREFIX_JOB_TYPE + "INTERNSHIP"
-        + PREFIX_INDUSTRY + "Technology";
+                                                   + "by the index number used in the displayed job list.\n"
+                                                   + "Existing values will be overwritten by the input values.\n"
+                                                   + "Parameters: INDEX (must be a positive integer) "
+                                                   + "[" + PREFIX_ROLE + "ROLE] "
+                                                   + "[" + PREFIX_COMPANY + "COMPANY] "
+                                                   + "[" + PREFIX_DEADLINE + "DEADLINE] "
+                                                   + "[" + PREFIX_STATUS + "STATUS] "
+                                                   + "[" + PREFIX_JOB_TYPE + "JOB TYPE] "
+                                                   + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
+                                                   + "Example: " + COMMAND_WORD + " 1 "
+                                                   + PREFIX_ROLE + "Software Engineer "
+                                                   + PREFIX_COMPANY + "Google"
+                                                   + PREFIX_DEADLINE + "Dec 31 2023 1200"
+                                                   + PREFIX_STATUS + "Pending "
+                                                   + PREFIX_JOB_TYPE + "INTERNSHIP"
+                                                   + PREFIX_INDUSTRY + "Technology";
 
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n"
-        + PREFIX_COMPANY + " for Company\n"
-        + PREFIX_ROLE + " for Role\n"
-        + PREFIX_STATUS + " for Status\n"
-        + PREFIX_DEADLINE + " for Deadline\n"
-        + PREFIX_JOB_TYPE + " for Job Type\n"
-        + PREFIX_INDUSTRY + " for Industry\n";
+                                                        + PREFIX_COMPANY + " for Company\n"
+                                                        + PREFIX_ROLE + " for Role\n"
+                                                        + PREFIX_STATUS + " for Status\n"
+                                                        + PREFIX_DEADLINE + " for Deadline\n"
+                                                        + PREFIX_JOB_TYPE + " for Job Type\n"
+                                                        + PREFIX_INDUSTRY + " for Industry\n";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book.";
 
     private final Index index;
@@ -111,8 +112,10 @@ public class EditCommand extends Command {
         Status updatedStatus = editJobDescriptor.getStatus().orElse(jobToEdit.getStatus());
         JobType updatedJobType = editJobDescriptor.getJobType().orElse(jobToEdit.getJobType());
         Industry updatedIndustry = editJobDescriptor.getIndustry().orElse(jobToEdit.getIndustry());
+        List<Interview> updatedInterviews = editJobDescriptor.getInterviews().orElse(jobToEdit.getInterviews());
 
-        return new Job(updatedRole, updatedCompany, updatedDeadline, updatedStatus, updatedJobType, updatedIndustry);
+        return new Job(updatedRole, updatedCompany, updatedDeadline, updatedStatus, updatedJobType,
+            updatedIndustry, updatedInterviews);
     }
 
     @Override
@@ -128,15 +131,15 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-            && editJobDescriptor.equals(otherEditCommand.editJobDescriptor);
+                   && editJobDescriptor.equals(otherEditCommand.editJobDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("index", index)
-            .add("editJobDescriptor", editJobDescriptor)
-            .toString();
+                   .add("index", index)
+                   .add("editJobDescriptor", editJobDescriptor)
+                   .toString();
     }
 
     /**
@@ -150,6 +153,7 @@ public class EditCommand extends Command {
         private Status status;
         private JobType jobType;
         private Industry industry;
+        private List<Interview> interviews;
 
         public EditJobDescriptor() {
         }
@@ -164,6 +168,7 @@ public class EditCommand extends Command {
             setStatus(toCopy.status);
             setJobType(toCopy.jobType);
             setIndustry(toCopy.industry);
+            setInterview(toCopy.interviews);
         }
 
         /**
@@ -221,6 +226,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(industry);
         }
 
+        private void setInterview(List<Interview> interviews) {
+            this.interviews = interviews;
+        }
+
+        public Optional<List<Interview>> getInterviews() {
+            return Optional.ofNullable(interviews);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -234,23 +247,23 @@ public class EditCommand extends Command {
 
             EditJobDescriptor otherEditJobDescriptor = (EditJobDescriptor) other;
             return Objects.equals(company, otherEditJobDescriptor.company)
-                && Objects.equals(role, otherEditJobDescriptor.role)
-                && Objects.equals(deadline, otherEditJobDescriptor.deadline)
-                && Objects.equals(status, otherEditJobDescriptor.status)
-                && Objects.equals(jobType, otherEditJobDescriptor.jobType)
-                && Objects.equals(industry, otherEditJobDescriptor.industry);
+                       && Objects.equals(role, otherEditJobDescriptor.role)
+                       && Objects.equals(deadline, otherEditJobDescriptor.deadline)
+                       && Objects.equals(status, otherEditJobDescriptor.status)
+                       && Objects.equals(jobType, otherEditJobDescriptor.jobType)
+                       && Objects.equals(industry, otherEditJobDescriptor.industry);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                .add("company", company)
-                .add("role", role)
-                .add("deadline", deadline)
-                .add("status", status)
-                .add("jobType", jobType)
-                .add("industry", industry)
-                .toString();
+                       .add("company", company)
+                       .add("role", role)
+                       .add("deadline", deadline)
+                       .add("status", status)
+                       .add("jobType", jobType)
+                       .add("industry", industry)
+                       .toString();
         }
     }
 }
