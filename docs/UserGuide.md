@@ -363,11 +363,64 @@ Tasks:
 ```
 
 #### 4.1.7 Allocating a task to a member: `addtask` or `addt`
-Adds a task to the top of the task list of a specified member.
+Adds a task to the top of the task list of the specified member.
 
 #### Format:
-`addtask MEMBER_INDEX /task TASK_INDEX` <br/>
-`addt MEMBER_INDEX /task TASK_INDEX`
+`addtask MEMBER_INDEX /task TASK_NAME` <br/>
+`addt MEMBER_INDEX /task TASK_NAME`
+
+<div markdown="span" class="alert alert-primary">
+
+:information_source: **Notes about input parameter:**
+<br/>
+
+* `MEMBER_INDEX`: Only positive integers that are within the member list are accepted.
+* `TASK_NAME` : Accepts alphanumeric characters, spaces and #. Should not be blank.
+
+</div>
+
+#### Example of usage:
+`addtask 2 /task Implement solve feature` <br/><br/>
+`addt 2 /task Implement solve feature` <br/><br/>
+
+This adds a task with the description `Implement solve feature` to the top of task list of the member at 
+`MEMBER_INDEX` 2.
+
+![add_task](images/addTask.png)
+
+#### 4.1.8 Viewing all tasks allocated to a member: `viewtask` or `viewt`
+Shows the task list of a member at the specified index in the `Tasks` window.
+
+#### Format:
+`viewtask MEMBER_INDEX` </br>
+`viewt MEMBER_INDEX`
+
+<div markdown="span" class="alert alert-primary">
+
+:information_source: **Notes about input parameter:**
+<br/>
+
+* `MEMBER_INDEX`: Only positive integers that are within the member list are accepted.
+
+</div>
+
+#### Example of usage:
+`viewtask 2` <br/><br/>
+`viewt 2` <br/><br/>
+
+This shows the list of tasks assigned to the member at `MEMBER_INDEX` 2.
+![add_task](images/viewTask.png)
+
+#### 4.1.9 Deleting a task allocated to a member: `deletetask` or `delt`
+
+Deletes a task at the specified index of a task list, for the member at the specified index of the members list.
+
+#### Format:
+
+`deletetask MEMBER_INDEX /task TASK_INDEX`<br/>
+`delt MEMBER_INDEX /task TASK_INDEX`
+
+<div markdown="span" class="alert alert-primary">
 
 <div markdown="span" class="alert alert-primary">
 
@@ -377,44 +430,6 @@ Adds a task to the top of the task list of a specified member.
 * `MEMBER_INDEX`: Only positive integers that are within the member list are accepted.
 * `TASK_INDEX` : Only positive integers that are within the task list are accepted.
 
-</div>
-
-#### Example of usage:
-`addtask 2 /task Implement solve feature` <br/><br/>
-`addt 2 /task Implement solve feature` <br/><br/>
-
-This adds a task with the description `Resolve issue #15` to the top of task list of the member at `MEMBER_INDEX` 2.
-![add_task](images/addTask.png)
-
-#### 4.1.8 Viewing all tasks allocated to a member: `viewtask` or `viewt`
-Shows the task list of a member at the specified index.
-
-#### Format:
-`viewtask MEMBER_INDEX` </br>
-`viewt MEMBER_INDEX`
-
-#### Example of usage:
-`viewtask 2` <br/><br/>
-`viewt 2` <br/><br/>
-
-This shows the list of tasks assigned to the member at `MEMBER_INDEX` 2.
-![add_task](images/addTask.png)
-
-#### 4.1.9 Deleting a task allocated to a member: `deletetask` or `delt`
-
-Deletes a task at the specified index of a task list, for the member at the specified index of the members list.
-
-#### Format:
-
-`deletetask MEMBER_INDEX /task TASK_INDEX`<br/>
-`delt1 MEMBER_INDEX /task TASK_INDEX`
-
-<div markdown="span" class="alert alert-primary">
-
-:information_source: **Notes about input parameter:**
-<br/>
-* `MEMBER_INDEX`: Only positive integers are allowed.<br/>
-* `TASK_INDEX`: Only positive integers are allowed.
 </div>
 
 #### Example of usage:
