@@ -10,9 +10,9 @@ package swe.context.model.contact;
  */
 public class Phone {
     /*
-     * Requires at least 3 digits.
+     * Requires starting with at least 3 digits and extra characters are allowed after.
      */
-    public static final String REGEX_VALID = "^\\d{3,}";
+    public static final String REGEX_VALID = "^\\d{3,}.*$";
 
     public final String value;
 
