@@ -194,14 +194,15 @@ Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIP
     - Must be the name of a student found in the students list
 2. Date
     - Must be in the following format: `yyyy-mm-dd`
+    - Must be within a year from now
 3. Start/End Time
-    - Must be in the following format: `HH:mm`
+    - Must be in the following format: `hh:mm`
 4. Description
    - Minimum length of 1 character and maximum of 100 characters
 
 Examples:
 - `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
-- `schedule n/Yin Kiat date/2023-01-09 from/07:00 to/10:45 d/first counselling session`
+- `schedule n/Yin Kiat date/2023-12-09 from/07:00 to/10:45 d/first counselling session`
 
 #### 2.3.2 Cancelling an Appointment: `cancel`
 

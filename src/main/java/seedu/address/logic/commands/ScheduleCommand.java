@@ -7,6 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,6 +23,7 @@ import seedu.address.model.appointment.Appointment;
 public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
+    public static final int DAYS_IN_YEAR = 365;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules a new appointment. "
             + "Parameters: "
@@ -38,9 +43,11 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New appointment scheduled: %1$s";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists";
     public static final String MESSAGE_OVERLAPPING_APPOINTMENTS = "This appointment overlaps "
-                                                                  + "with an existing appointment!";
+                                                                  + "with an existing appointment";
 
-    public static final String MESSAGE_NO_STUDENT_FOR_APPOINTMENT = "No such student exists for this appointment!";
+    public static final String MESSAGE_NO_STUDENT_FOR_APPOINTMENT = "No such student exists for this appointment";
+    public static final String MESSAGE_DATE_IN_THE_PAST = "Appointment date and time should be in the future";
+    public static final String MESSAGE_DATE_EXCEED_ONE_YEAR = "Appointment can only be scheduled within a year";
 
     private final Appointment toAdd;
 
@@ -68,6 +75,21 @@ public class ScheduleCommand extends Command {
 
         if (model.hasNoStudentForAppointment(toAdd)) {
             throw new CommandException(MESSAGE_NO_STUDENT_FOR_APPOINTMENT);
+        }
+
+        LocalDate appointmentDate = toAdd.getDate().getLocalDate();
+        LocalDate todayDate = LocalDate.now();
+        LocalTime appointmentStartTime = toAdd.getStartTime().getLocalTime();
+        LocalTime timeNow = LocalTime.now();
+        long daysDifference = ChronoUnit.DAYS.between(todayDate, appointmentDate);
+
+        if (appointmentDate.isBefore(todayDate)
+                || (todayDate.isEqual(appointmentDate) && appointmentStartTime.isBefore(timeNow))) {
+            throw new CommandException(MESSAGE_DATE_IN_THE_PAST);
+        }
+
+        if (daysDifference > 365) {
+            throw new CommandException(MESSAGE_DATE_EXCEED_ONE_YEAR);
         }
 
         model.addAppointment(toAdd);
