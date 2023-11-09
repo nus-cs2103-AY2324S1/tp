@@ -86,8 +86,8 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 |------------------|---------------------------------------------------------------|---------------------------------------------------------------------|----------------------------------|
 | `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                    | `delete 1`                       |
 | `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANG] [tl/TRANSLATION_LANG]` | `add w/Hello t/你好`               |
-| `...`            | Parameter that will not be used                               | `help ...`                                                          | `help 123` is the same as `help` |
  | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                                 | `find hello, bye`                |
+| `...`            | Parameter that will not be used                               | `help ...`                                                          | `help 123` is the same as `help` |
 </div>
 
 
