@@ -1067,10 +1067,11 @@ Guarantees: Staff-Snap exits.
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless />
+<box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
+
 </box>
 
 ### Launch and shutdown
