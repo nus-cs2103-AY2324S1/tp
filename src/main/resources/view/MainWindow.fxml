@@ -21,20 +21,20 @@
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
-         <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="824.0" HBox.hgrow="ALWAYS">
+         <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="824.0">
             <children>
-               <VBox prefHeight="540.0" prefWidth="168.0" style="-fx-background-color: #16071f;" VBox.vgrow="ALWAYS">
+               <VBox prefHeight="540.0" prefWidth="162.0" style="-fx-background-color: #16071f;" VBox.vgrow="ALWAYS">
                   <children>
                      <Label alignment="CENTER" prefHeight="39.0" prefWidth="51.0" styleClass="menu-header" text=" Files" />
-                     <Button mnemonicParsing="false" text="Settings" />
-                      <Button mnemonicParsing="false" text="Import Data" />
-                      <Button mnemonicParsing="false" text="Export Data" />
+                     <Button disable="true" mnemonicParsing="false" text="Settings" wrapText="true" />
+                      <Button disable="true" mnemonicParsing="false" text="Import Data" wrapText="true" />
+                      <Button disable="true" mnemonicParsing="false" text="Export Data" wrapText="true" />
                      <Label alignment="CENTER" prefHeight="39.0" prefWidth="50.0" styleClass="menu-header" text=" Help" />
                      <Button mnemonicParsing="false" onAction="#handleHelp" text="User Guide" />
-                     <Button mnemonicParsing="false" text="Release Notes" />
+                     <Button disable="true" mnemonicParsing="false" text="Release Notes" wrapText="true" />
                      <Label alignment="CENTER" layoutX="10.0" layoutY="229.0" prefHeight="35.0" prefWidth="60.0" styleClass="menu-header" text=" Others" />
-                     <Button mnemonicParsing="false" text="About Us" />
-                     <Button mnemonicParsing="false" text="Feedback" />
+                     <Button disable="true" mnemonicParsing="false" text="About Us" wrapText="true" />
+                     <Button disable="true" mnemonicParsing="false" text="Feedback" wrapText="true" />
                      <Button mnemonicParsing="false" onAction="#handleExit" styleClass="button" text="Exit" />
                   </children>
                </VBox>

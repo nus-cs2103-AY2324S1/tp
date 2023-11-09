@@ -6,9 +6,19 @@
 
 # HealthSync User Guide
 
-HealthSync is a **desktop app for managing patient details, optimised for use via a Command Line Interface** (CLI)
-while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HealthSync can help you
-organise and manage patient details faster than traditional GUI apps.
+> "HealthSync will be your patient’s best friend, the frontdesk’s right hand, and time’s biggest foe." - Yi Chee, Developer, HealthSync
+
+HealthSync is a **powerful desktop application designed specifically for clinic assistants in small private clinics.** It offers a unique combination of a Command Line Interface (CLI) and a Graphical User Interface (GUI) to efficiently manage and organize patient details. If you're a fast typist, HealthSync can streamline your workflow and help you handle patient information more effectively than traditional GUI apps.
+
+## Why HealthSync?  
+
+1. **Tailored for Front Desk Workers**: HealthSync is built with the needs of front desk workers in mind. It provides a user-friendly interface that simplifies patient management tasks, allowing you to focus on providing excellent service to patients.
+
+2. **Fast and Efficient**: With HealthSync's CLI, you can quickly navigate through commands and perform actions without the need to rely solely on a mouse. This saves you valuable time and makes patient data management faster and more efficient.
+
+3. **Comprehensive Patient Details**: HealthSync enables you to store and access comprehensive patient details, including personal information, medical history, appointments, and more. All the essential information you need is organized in one centralized location.
+
+4. **Intuitive GUI Experience**: HealthSync's GUI complements the CLI by providing a visual representation of patient data. The GUI is intuitive and user-friendly, making it easy to view and update patient information with just a few keys.
 
 
 <!-- * Table of Contents -->
@@ -32,11 +42,24 @@ organise and manage patient details faster than traditional GUI apps.
 
    ![Ui](images/Ui_v1.3.1.jpg)
 
+
+Here are the icons you will see throughout this User Guide and what they mean:
+- :bulb: Tips and tricks that will help you get the most out of HealthSync
+- :wrench: Example usages of the feature that will help you save time
+- :exclamation: Things to take note of while reading the User Guide
+- :warning: Things to take caution with, as they may affect your use of HealthSync
+
+
 > :bulb: The main application consists of the:
-> 1. Patient List View
-> 2. Output Box
-> 3. Command Box
-> 4. Logger Tab
+> 1. Menu Sidebar `*`
+> 2. Patient List View
+> 3. Output Box
+> 4. Command Box
+> 5. Logger Tab
+>
+> :warning: **`*`**: The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
+
+>:bulb: Longer outputs have to scrolled to be viewed.
 
 5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -44,7 +67,7 @@ organise and manage patient details faster than traditional GUI apps.
 
    * `list` : Lists all patients.
 
-   * `add n/John Doe id/S8943782H p/98114839 e/john@example/com a/Kent Ridge Avenue 21 ` : Adds a patient named `John Doe` with the relevant field details to HealthSync.
+   * `add n/John Doe id/S8765432A p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 ap/17-10-2023 11:00 13:00 m/hypochondriac` : Adds a patient named `John Doe` with the relevant field details to HealthSync.
 
    * `delete n/Alex Yeoh` : Deletes Alex Yeoh's details from the current list.
 
@@ -95,7 +118,7 @@ Adds a patient into HealthSync, with the given patient information.
 * All the compulsory fields must be provided.
 * Optional fields like appointment and medical history need not be provided.
 
-Format: `add n/NAME id/IC_NUMBER [field] ...`
+Format: `add n/NAME id/ID_NUMBER [field] ...`
 
 >:bulb: Use `a` as a shortcut for `add`
 
@@ -116,7 +139,7 @@ Expected outputs when the command fails:
 
 Edits an existing patient's details in HealthSync.
 
- * Edits the person with the specified name or id.
+ * Edits the patient with the specified name or id.
  * If an invalid name or IC Number is passed, an error message will be logged.
  * At least one of the optional fields must be provided.
  * Existing fields will be updated to the input values.
@@ -124,7 +147,10 @@ Edits an existing patient's details in HealthSync.
 
 >:bulb: Update multiple fields in a single `edit` command to save time
 
-Format: `edit n/NAME or id/IC_NUMBER [field] ...`
+Formats:  
+ * `edit n/NAME [field] ...`
+ * `edit id/ID_NUMBER [field] ...`
+ * `edit n/NAME id/ID_NUMBER [field] ...`
 
 >:bulb: Use `e` as a shortcut for `edit`
 
@@ -137,18 +163,22 @@ Expected outputs when the command succeeds:
 * `Edited patient: ...`
 
 Expected outputs when command fails:
-* `INVALID name and/or NRIC! ...`
+* `INVALID name and/or ID! ...`
 
 ### Deleting a Patient or Field: `delete`
 
 Deletes the specified patient or an optional fields of the patient from HealthSync.
 
-* Deletes the patient or an optional field of the patient with the specified `n/NAME or id/IC_NUMBER`.
-* The name or IC must be valid.
+* Deletes the patient or an optional field of the patient with the specified `n/NAME or id/ID_NUMBER`.
+* You can choose to delete using only name or ID.
+* If both name and ID are used, both must be valid and belong to the same person.
+* You can only delete one patient at a time.
 * To delete a specified field only instead of the entire patient, we indicate the field after the identification.
-* If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
 
-Format: `delete n/NAME or id/IC_NUMBER [field]`
+Formats:  
+ * `delete n/NAME [field] ...`
+ * `delete id/ID_NUMBER [field] ...`
+ * `delete n/NAME id/ID_NUMBER [field] ...`
 
 >:bulb: Use the shortcut `d` for faster patient-deleting
 
@@ -157,7 +187,8 @@ Example commands:
 * `delete n/Alex Yeoh`
 * `delete n/John Doe m/`
 
->:bulb: Specify the medical history to be deleted using `m/` if it's only the medical history data that is to be deleted
+>:bulb: Specify the medical history to be deleted using `m/` if it's only the medical history data that is to be deleted  
+e.g `delete n/John Doe m/Diabetes`
 
 ![result for 'delete n/Alex Yeoh'](images/deleteResult.jpg)
 
@@ -166,7 +197,7 @@ Expected outputs when the command succeeds:
 * `Deleted Patient's field: ...`
 
 Expected output when the command fails:
-* `The given combination of Name and NRIC does not match any patient in the Patients list`.
+* `The given combination of Name and ID does not match any patient in the Patients list`.
 
 ### Delete All Patients: `clear`
 
@@ -178,39 +209,56 @@ Format: `clear`
 
 ![result for 'clear'](images/clearResult.jpg)
 
-### Locating Patients by Name or NRIC: `find`
+### Locating Patients by Name, ID or Appointment: `find`
 
-Searches the patient list for all patients matching the name or IC Number and returns their related information.
+Searches the patient list for all patients matching the name, IC Number or Appointment and returns their related information.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The search is case-insensitive.  
+e.g `hans` will match `Hans`, `08-Jan-2023 12 13` will match `08-jan-2023 12 13`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the name or IC number is searched.
+* Name, IC Number and Appointment can be searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * For the name, only patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
   
-Format: `find n/NAME or id/IC_NUMBER`
+Formats: 
+ * `find n/NAME`
+ * `find id/ID_NUMBER`
+ * `find ap/APPOINTMENT`
 
 >:bulb: Use the shortcut `f` for faster patient-finding
 
 Example commands:
 * `find n/Alex Yeoh`
 * `find id/T0123436F` 
+* `find ap/08-Aug-2023 0000 2359`
 
 ![result for 'find id/T0123456F'](images/findidT0123456FResult.jpg)
 
 >:bulb: This list command can be used to show the original patient list after a find command is executed
 
-### Preserving a `find` Command Result: `log`
+### Preserving a `find` Command Result in the Log: `log`
 
 Logs the result of the find command to the logger tab, which can be viewed at all times.
 
+Upon app start, the logger tab is pre-populated with profiles of patients who have appointments on the day itself.
+
+This is how it looks like:
+
+![pre-populated log](images/originalLog.jpg)
+
+
 >:bulb: Use `log` command to save data you want to continue referring to
+
+>:wrench: If you want to access the patient list or look up a new patient but would still need to refer to the current patient's details, simply `log` so the profile stays on your screen while you carry out your other tasks!
+
+>:warning: The logger tab does not update when logged patients' profiles are edited or deleted. The logger tab is intended to be a snapshot of the patients' details at the time that they were logged. To reflect the edited changes in the logger tab after a change has been made, do `log` after the change.
+
 
 * Saving to the logger tab only works for results of the `find` command.
 * The entire result will be saved.
 * The result will be saved in the same order and format.
-* Saving a new result clears the current saved result from the logger tab and replaces it.
+* Saving a new result completely clears the current saved result from the logger tab and replaces it.
 
 Format: `log`
 
@@ -228,16 +276,20 @@ Expected output when the command fails:
 
 >:bulb: `log` overwrites the data currently in the logger tab, so you do not need to perform clearing prior
 
-### Adding a New `find` Command Result to the Log: `alog`
+### Adding a New `find` Command Result to the current Log: `alog`
 
 Appends the new results of the most recent find command to the current data in the logger tab, which can be viewed at all times.
 
->:bulb: Use `alog` command to save data you want to continue referring to, on top of some others
+>:bulb: Use `alog` to save patient data you want to continue referring to, on top of the profiles you currently have logged
+
+>:wrench: If you have multiple patients you need to toggle between, and do not want to keep doing `find` to retrieve their data, simply `alog` so their profiles stay on your screen for easy access!
+
 
 * Adding to the logger tab only works for results of the `find` command.
 * The previously-saved result will remain the same.
 * The entire new result will be saved below the previously-saved result.
 * The result will be saved in the same order and format.
+* Duplicate persons will not be appended to the log. 
 
 Format: `alog`
 
@@ -287,12 +339,17 @@ Format:
 
 >:bulb: Simply entering `undo` will undo the last command
 
+Fields that can be deleted:
+* Appointment: Include `ap/` behind delete command
+* Medical History: Include `m/` behind delete command. Can delete specific Medical History. e.g `m/diabetes`
+
 Example commands:
 *  `undo 2`
 
 ![result for 'undo'](images/undoResult.jpg)
 
 Expected outputs when the command succeeds:
+
 * `Undoing 2 command(s): ...`
 
 Expected outputs when command fails:
@@ -301,7 +358,6 @@ Expected outputs when command fails:
 
 
 ### Exiting HealthSync: `exit`
-
 
 Exits HealthSync.
 
@@ -322,7 +378,17 @@ Advanced users are welcome to update data directly by editing that data file.
 
 >:warning: **Caution:**
 >If your changes to the data file makes its format invalid, HealthSync will discard all data and start with an empty
->data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+>data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.
+> 
+>To make a backup of the file:
+>1) Locate the `healthsync.json` data file on your computer. This file is located in the same directory as `healthsync.jar`. The path is `[JAR file location]/data/healthsync.json`.
+>2) Right-click on the `healthsync.json` file, and select 'copy'.
+>3) Choose the location where you want to store the backup copy. You can create a separate folder for backups or choose any locations of your choice.
+>4) Right-click in the chosen location and select 'paste'. This creates a copy of the `healthsync.json` data file in the selected backup location.
+>
+>That's it! You can now safely edit the original `healthsync.json` file.
+> 
+>If anything goes wrong during the editing process, you can restore your data by copying the backup file back to its original location.
 
 ### Archiving Data Files `[coming in v5.0]`
 
@@ -342,7 +408,7 @@ It streamlines tasks and provides a more efficient way to manage patient details
 by different users.
 
 **Q**: How do I import patient data from external sources into HealthSync?<br>
-**A**: Datafile storing current patient data will be stored in `data/addressbook.json` by default under the same folder.
+**A**: The data file that is storing current patient data will be stored in `data/addressbook.json` by default under the same folder.
 You may import patient data and store into that file. However, do adhere to the data format present in the current file.
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -427,7 +493,7 @@ The 2 identifying fields of a patient are given below:
 | Tag   | Representative Value  | Example Usage  | General Form in Commands |
 |-------|-----------------------|----------------|--------------------------|
 | `n/`  | Name                  | `n/Alex`       | `n/NAME`                 |
-| `id/` | Identification Number | `id/S2345678A` | `id/IC_NUMBER`           |
+| `id/` | Identification Number | `id/S2345678A` | `id/ID_NUMBER`           |
 
 1 or more identifying fields must be specified in each command, unless stated otherwise.
 
@@ -448,11 +514,11 @@ Unless stated otherwise, these fields are optional.
 
 The standard unique identifier for your patient. Each patient should have a unique alphanumeric name assigned to them.
 
-#### NRIC
+#### ID
 
 The ID-based unique identifier for your patient. Each patient should have a unique alphanumeric ID assigned to them.
 
-There is no verification system in place for NRIC. This allows you to use your custom identifier for your patients, if
+There is no verification system in place for ID. This allows you to use your custom identifier for your patients, if
 you wish.
 
 #### Phone Number
@@ -530,7 +596,11 @@ it has performed.
 The area where you type your instructions for HealthSync to perform.
 
 ### Logger Tab
-A 'sticky-note'-like area on the right of the Patient List View.
+A 'sticky-note'-like area on the right of the Patient List View. Serves as a snapshot of the patient data at the time they were logged with the [`log` command](#preserving-a-find-command-result-in-the-log--log).
+
+This comes in handy when you want to refer to certain patient profiles at the side, while still being able to carry on with other tasks.
+
+To maximise utility, upon app start, the logger tab displays a list of profiles of patients who have appointments on the day itself. This can be overwritten by the `log` command for patient profiles thereafter.
 
 ### Command History Stack
 The group of instructions HealthSync remembers performing. This group allows HealthSync to undo the
@@ -551,11 +621,11 @@ JavaScript Object Notation. This is the file format used by HealthSync to save a
 |----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**       | `h`      | `help`                                                                                                                                         |
 | **List**       | `ls`     | `list`                                                                                                                                         |
-| **Add**        | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
-| **Edit**       | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                 |
-| **Delete**     | `d`      | `delete n/NAME`                                                                                                                                |
+| **Add**        | `a`      | `add n/NAME id/ID_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
+| **Edit**       | `e`      | `edit n/NAME [field] ...` <br>`edit id/ID_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                 |
+| **Delete**     | `d`      | `delete n/NAME [field] ...`<br> `delete id/ID_NUMBER [field] ...` <br> e.g., `delete n/Alex Yeoh m/Diabetes`                                                                                                           |
 | **Clear**      | `c`      | `clear`                                                                                                                                        |
-| **Find**       | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/T0123436F`                                  |
+| **Find**       | `f`      | `find n/NAME` <br> `find id/ID_NUMBER` <br> `find ap/APPOINTMENT` <br> e.g., `find n/James Jake` *or* `find id/T0123436F` *or* `find ap/08-aug-2023 0000 2359`                                  |
 | **Log**        | `l`      | `log`                                                                                                                                          |
 | **Append Log** | `al`     | `alog`                                                                                                                                         |
 | **Clear Log**  | `cl`     | `clog`                                                                                                                                         |

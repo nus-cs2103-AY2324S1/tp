@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a patient to the address book.
  */
 public class AddCommand extends UndoableCommand {
 
@@ -28,7 +28,7 @@ public class AddCommand extends UndoableCommand {
             + ": Adds a Patient to the Patient list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_NRIC + "NRIC "
+            + PREFIX_ID + "ID "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
@@ -36,7 +36,7 @@ public class AddCommand extends UndoableCommand {
             + "[" + PREFIX_MEDICAL + "MEDICAL_HISTORY]...\n"
             + "Example 1: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_NRIC + "S8765432A "
+            + PREFIX_ID + "S8765432A "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
@@ -45,7 +45,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_MEDICAL + "on Medicine XYZ \n"
             + "Example 2: " + COMMAND_WORD_ALIAS + " "
             + PREFIX_NAME + "Alex Yeoh "
-            + PREFIX_NRIC + "S6742632F "
+            + PREFIX_ID + "S6742632F "
             + PREFIX_PHONE + "85743822 "
             + PREFIX_EMAIL + "alex@example.com "
             + PREFIX_ADDRESS + "420, Country Road, #02-25 "
@@ -54,7 +54,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_MEDICAL + "on Medicine CHS ";
 
     public static final String MESSAGE_SUCCESS = "New Patient added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This Patient already exists in HealthSync.";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This Patient already exists in HealthSync.";
     public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undoing the adding of Patient:  %1$s";
 
     private final Person toAdd;
@@ -72,7 +72,7 @@ public class AddCommand extends UndoableCommand {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
         model.addPerson(toAdd);

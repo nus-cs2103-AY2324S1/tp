@@ -18,8 +18,8 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "f";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
-            + ": Finds all Patients by name, NRIC or Appointment period, and displays them as a list.\n"
-            + "Name and NRIC should contain any of the specified keywords (case-insensitive) input.\n"
+            + ": Finds all Patients by name, ID or Appointment period, and displays them as a list.\n"
+            + "Name and ID should contain any of the specified keywords (case-insensitive) input.\n"
             + "Patients whose Appointment overlaps with the given period will be displayed in the list.\n"
             + "If multiple different search fields are specified, patients displayed will match all given fields.\n"
             + "Parameters: n/KEYWORD... OR id/KEYWORD... OR ap/APPOINTMENT [any additional unused conditions]...\n"
@@ -30,9 +30,9 @@ public class FindCommand extends Command {
     private final CompositePredicate predicate;
 
     /**
-     * Creates a {@code FindCommand} to find persons by with the specified composite predicate.
+     * Creates a {@code FindCommand} to find patients by with the specified composite predicate.
      *
-     * @param predicate The predicate to match persons by.
+     * @param predicate The predicate to match patients by.
      * @throws NullPointerException if {@code predicate} is null.
      */
     public FindCommand(CompositePredicate predicate) {
@@ -44,8 +44,12 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         model.updateFoundPersonsList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        if (model.getFilteredPersonList().isEmpty()) {
+            return new CommandResult(Messages.MESSAGE_NO_PATIENT_FOUND);
+        } else {
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        }
     }
 
     @Override
