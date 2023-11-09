@@ -61,7 +61,7 @@ What are you waiting for? Let's get started using **InterviewHub** by following 
 
 # How to use this user guide
 
-To quickly find the information you need, refer to the [Table of Contents](#table-of-contents) located at the beginning of this guide. 
+To quickly find the information you need, refer to the [Table of Contents](#table-of-contents) located at the beginning of this guide.
 It lists all the chapters and sections, allowing you to jump directly to the relevant content.
 
 Next, to get you started, we've included a [Quick Start](#quick-start) section in this user guide to ensure that you have no trouble setting up **InterviewHub**.
@@ -141,42 +141,26 @@ For each interview, we see the following details:
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list-i`, `list-a`, `list-i-done`, `list-i-not-done`,
-`list-today`, `sort-rate`, `sort-time`, `exit`, and `clear`) will be ignored.<br>
+  `list-today`, `sort-rate`, `sort-time`, `exit`, and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * List of accepted date formats:
   * DD/MM/YYYY and time:
-    * `16 May 2024 1515`
-    * `16 May 2024 3.15pm`
-    * `16 May 2024 3pm`
-    * `16-05-2024 1515`
-    * `16-05-2024 3.15pm`
-    * `16-05-2024 3pm`
-    * `16-05-24 1515`
-    * `16-05-24 3.15pm`
-    * `16-05-24 3pm`
-    * `16/05/2024 1515`
-    * `16/05/2024 3.15pm`
-    * `16/05/2024 3pm`
-    * `16/05/24 1515`
-    * `16/05/24 3.15pm`
-    * `16/05/24 3pm`
+    * `16 May 2024 TIME`
+    * `16-05-2024 TIME`
+    * `16-05-24 TIME`
+    * `16/05/2024 TIME`
+    * `16/05/24 TIME`
   * MM, DD and time:
-    * `16 May 1515`
-    * `16 May 3.15pm`
-    * `16 May 3pm`
-    * `16 January 1515`
-    * `16 January 3.15pm`
-    * `16 January 3pm`
-    * `16/5 1515`
-    * `16/5 3.15pm`
-    * `16/5 3pm`
-    * `16/05 1515`
-    * `16/05 3.15pm`
-    * `16/05 3pm`
+    * `16 May TIME`
+    * `16 January TIME`
+    * `16/5 TIME`
+    * `16/05 TIME`
+  * The `TIME` placeholder can be replaced with the formats below:
+    * `1515`
+    * `3.15pm`
+    * `3pm`
 </div>
-
-
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -221,13 +205,13 @@ Adds an applicant to **InterviewHub**.
 
 Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
-| Parameter      | Representation                    | Constraints                                            |
-|----------------|-----------------------------------|--------------------------------------------------------|
+| Parameter      | Representation                    | Constraints                                                   |
+|----------------|-----------------------------------|---------------------------------------------------------------|
 | `NAME`         | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
- | `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long |
-| `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`               |
-| `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                 |
-| `TAG`           | A tag belonging to the applicant  | Must contain only alphanumeric characters              |                                      
+| `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
+| `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`                      |
+| `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                        |
+| `TAG`          | A tag belonging to the applicant  | Must contain only alphanumeric characters                     |                                      
 
 
 
@@ -245,7 +229,7 @@ Format: `delete-a APPLICANT_INDEX`
 
 * Deletes the applicant at the specified `APPLICANT_INDEX`.
 * The `APPLICANT_INDEX` refers to the index number shown in the displayed applicant list.
-* The `APPLICANT_INDEX` **must be a positive unsigned integer** e.g. 1, 2, 3, …​ 
+* The `APPLICANT_INDEX` **must be a positive unsigned integer** e.g. 1, 2, 3, …​
 * The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 
 Examples:
@@ -260,26 +244,26 @@ Edits an existing applicant in **InterviewHub**.
 Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 * Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
-* The `INDEX` **must be a positive unsigned integer** e.g. 1, 2, 3, …​ 
+* The `INDEX` **must be a positive unsigned integer** e.g. 1, 2, 3, …​
 * The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-  | Parameter      | Representation                    | Constraints                                            |
-  |----------------|-----------------------------------|--------------------------------------------------------|
+  | Parameter      | Representation                    | Constraints                                                   |
+    |----------------|-----------------------------------|---------------------------------------------------------------|
   | `NAME`         | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
-  | `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long |
-  | `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`               |
-  | `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                 |
-  | `TAG`           | A tag belonging to the applicant  | Must contain only alphanumeric characters              |
+  | `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
+  | `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`                      |
+  | `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                        |
+  | `TAG`          | A tag belonging to the applicant  | Must contain only alphanumeric characters                     |
 
 Examples:
 *  `edit-a 1 n/John Doe` Edits the name of the 1st applicant to be `John Doe`.
 *  `edit-a 2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd applicant to be `91234567` and `johndoe@example.com` respectively.
-Before:
-![before edit-a command](images/editApplicantbefore.png)
-After:
-![result for 'edit-a 2 p/91234567 e/johndoe@example.com](images/editApplicantResult.png)
+   Before:
+   ![before edit-a command](images/editApplicantBefore.png)
+   After:
+   ![result for 'edit-a 2 p/91234567 e/johndoe@example.com](images/editApplicantResult.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -576,46 +560,46 @@ Format: `list-freetime DATE`
 * Displays a list of all the blocks of free time the user has in
   the given day, within the 9am to 5pm window of that day
 
-* If there is no free time, there will be no blocks of 
-free time that will be displayed
+* If there is no free time, there will be no blocks of
+  free time that will be displayed
   * This indicates that the entire day is not free
 
 * If there are no interviews on that day, the block of free time
-listed will be: `from: 09:00 to: 17:00`
+  listed will be: `from: 09:00 to: 17:00`
   * This indicates that the entire day is free
 
 * If the `DATE` not valid at all, this error message will
-be shown:`Please specify a valid date!`
+  be shown:`Please specify a valid date!`
 
 * If the `DATE` is valid but in the past, this error message will
-be shown:`Input date cannot be in the past!`
+  be shown:`Input date cannot be in the past!`
 
 #### Accepted date formats
-| Format                                 | Example      | Constraints                                                                                                                                                                                                                                                                                                                                                                                                 |
-|----------------------------------------|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `dd/mm/yyyy`                           | `12/12/2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year | 
-| `dd-mm-yyyy`                           | `12-12-2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted <br/><br/>- The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year | 
-| `dd/mm`                                | `12/12`      | - Adding additional parameters separated by a non-number string will be accepted <br/><br/>- The month and year must be **valid**                                                                                                                                                                                                                                                                           |
-| `other time formats (not recommended)` | `12/01-2024` | - Will be accepted within reasonable bounds <br/><br/>- **Will lead to unexpected/unintended behaviour**<br/><br/>- _Use with caution_                                                                                                                                                                                                                                                                      |
+| Format                                 | Example      | Constraints                                                                                                                                                                                                                                                                                                                                                                                    |
+|----------------------------------------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dd/mm/yyyy`                           | `12/12/2099` | If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year | 
+| `dd-mm-yyyy`                           | `12-12-2099` | If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year | 
+| `dd/mm`                                | `12/12`      | Adding additional parameters separated by a non-number string will be accepted. The month and year must be **valid**                                                                                                                                                                                                                                                                           |
+| `other time formats (not recommended)` | `12/01-2024` | Will be accepted within reasonable bounds. **Will lead to unexpected/unintended behaviour**. _Use with caution_                                                                                                                                                                                                                                                                                |
 
 [Back to the Table of Contents](#table-of-contents)
 
 ### Listing all interviews for today : `list-i-today`
 
-Displays all the interviews that the user has on the day the 
+Displays all the interviews that the user has on the day the
 command is executed.
 
 Format: `list-i-today`
 
-* Lists all interviews that have a start date that falls on the 
-day on which the user executed the command
-  * For example, if the user executed this command on `12/12/2023`, 
-the app will display all the interviews that the user has scheduled
-on `12/12/2023`
+* Lists all interviews that have a start date that falls on the
+  day on which the user executed the command
+  * For example, if the user executed this command on `12/12/2023`,
+    the app will display all the interviews that the user has scheduled
+    on `12/12/2023`
 * If there are no interviews scheduled on the day on which the command
-was executed, the app will not display any interviews 
-* Upon successful execution of the command, this message will be 
-shown: `Listed all interviews today`
+  was executed, the app will not display any interviews
+* Upon successful execution of the command, this message will be
+  shown: `Listed all interviews today`
 
 Example: `list-i-today`
 
@@ -627,9 +611,9 @@ Mark the specified `INTERVIEW_INDEX` in the **InterviewHub** as done.
 
 Format: `mark INTERVIEW_INDEX`
 
-| Parameter         | Representation                                                     | Constraints                                                                                                                                                                                                            |
-|-------------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INTERVIEW_INDEX` | - The index of the target interview as shown in the interview list | Must be a positive unsigned integer within the range 1 to n inclusive, where n is the number of interviews currently displayed in the interview list.<br/><br/>- Trailing zeros before a valid index will be accepted. |
+| Parameter         | Representation                                                     | Constraints                                                                                                                                                                                                  |
+|-------------------|--------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INTERVIEW_INDEX` | - The index of the target interview as shown in the interview list | Must be a positive unsigned integer within the range 1 to n inclusive, where n is the number of interviews currently displayed in the interview list.- Trailing zeros before a valid index will be accepted. |
 
 Examples:
 * `mark 1` marks the first interview shown on the list as done.
@@ -760,6 +744,13 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InterviewHub home folder.
+
+**Q**: How do I check if I have the correct version of Java installed?<br>
+**A**: You can check the version of Java installed in your computer by opening the Command Prompt and typing `java --version`.
+If you have Java 11 installed, the correct version of Java is installed and you can start using **InterviewHub**.
+
+**Q**: Do I need an active internet connection to use InterviewHub? <br>
+**A**: No. It is an offline app.
 
 [Back to the Table of Contents](#table-of-contents)
 

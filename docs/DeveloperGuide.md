@@ -184,6 +184,18 @@ in order to produce a filtered list containing only entries whose job correspond
 6. The `FindInterviewCommand` construct `CommandResult` containing the number of successful interviews filtered in the final list and returns it to `LogicManager`.
 7. The GUI will be updated automatically by when the list changes.
 
+The following sequence diagram shows how the `find-i` operation works:
+
+![FindInterviewSequenceDiagram](images/FindInterviewSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for FindInterviewCommandParser should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![FindInterviewActivity](images/FindInterviewActivityDiagram.png)
+
 #### Design Consideration
 **Aspect: Case-sensitivity in search:**
 
@@ -462,6 +474,18 @@ The `rate` feature is facilitated by the `Rating` class, `RateCommand` and the `
 5. The `LogicManager` executes the `RateCommand` which calls the `Model#getFilteredInterviewList` to get the size of the current list to ensure the `INTERVIEW_INDEX` is within the interview list size.
 6. The `Model#setInterview` method will be called next in `RateCommand` to update the new interview with the new rating.
 7. The `RateCommand` constructs `CommandResult`to return the success message to be displayed by the GUI.
+
+The following sequence diagram shows how the `rate` operation works:
+
+![RateInterviewSequenceDiagram](images/RateInterviewSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for RateCommandParser should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![RateInterviewActivity](images/RateInterviewActivityDiagram.png)
 
 #### Design consideration
 * **Alternative 1 (current choice):** Stricter rating value with specific format
