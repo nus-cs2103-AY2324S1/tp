@@ -81,18 +81,12 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `<UPPER_CASE>` are the parameters to be supplied by the user.<br>
-  e.g. in `delete <INDEX>`, index is a parameter which needs to be added to the command, without the <>. `delete 1` is an example of the usage.
+| Notation       | Description                           | Example Command                                                     | Example Usage                    |
+|----------------|---------------------------------------|---------------------------------------------------------------------|----------------------------------|
+| `<PARAMETER>`  | Parameter to be supplied by the user  | `delete <INDEX>`                                                    | `delete 1`                       |
+| `[OPTIONAL]`   | Indicates an optional parameter       | `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANG] [tl/TRANSLATION_LANG]` | `add w/Hello t/你好`               |
+| `(UNUSED)`     | Parameter that is not used            | `help (UNUSED)`                                                     | `help 123` is the same as `help` |
 
-* Words in square brackets, ie. `[<UPPER_CASE>]` indicate that the parameter is optional and can be omitted if deemed unnecessary
-  e.g. in `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANGUAGE] [tl/TRANSLATION_LANGUAGE]`, the `WORD` and `TRANSLATION` parameters are *MANDATORY*, whereas the `WORD_LANGUAGE` and `TRANSLATION_LANGUAGE` do not need to be in the command.
-  For example, both `add w/entschuldigung wl/Deutsch t/sorry tl/English` and `add w/regarder t/look` are valid usage of the command
-
-* If the parameters have ... as a suffix, ie. `<UPPER_CASE...>`, it means that it can take multiple parameters that are comma separated.
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`and `exit`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 
@@ -194,7 +188,7 @@ Examples:
 
 Shows the list of flash cards with both the original word and the corresponding translation.
 
-Format: `list`
+Format: `list (UNUSED)`
 
 Output:
 * `Listed all flash cards`
@@ -207,7 +201,7 @@ Output:
 
 To start a review session, user simply needs to type in `start` command.
 
-Format: `start`
+Format: `start (UNUSED)`
 
 Output: `Review Session has been started.`
 
@@ -220,7 +214,7 @@ Output: `Review Session has been started.`
 
 Ends the current flash card session and returns to the main menu.
 
-Format: `end`
+Format: `end (UNUSED)`
 
 Output: `Review Session has ended.`
 
@@ -243,7 +237,7 @@ Examples:![img.png](images/Reveal.png)
 Marks the word as memorized and advances the word into the next retention stage. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
-Format: `yes`
+Format: `yes (UNUSED)`
 
 Output: ![img.png](images/Yes.png)
 or
@@ -258,7 +252,7 @@ if there's no word left in the review session.
 Marks the word as not grasped and leaves it in its current retention stage. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
-Format: `no`
+Format: `no (UNUSED)`
 
 Output: ![img.png](images/No.png)
 or
@@ -271,7 +265,7 @@ if there's no word left in the review session.
 
 Displays learning statistics, i.e, the total number of flash cards and the number of words remembered.
 
-Format: `stats`
+Format: `stats (UNUSED)`
 
 
 ### Filtering list with specified language : `language`
@@ -284,7 +278,7 @@ Format: `language <SPECIFIED_LANGUAGE>`
 
 * `review` : Returns a list of words that the user should revise today.
 
-Format: `review`
+Format: `review (UNUSED)`
 
 ### Loading list of words: `load`
 Loads an Excel file of words into the app. The words will be added to the current list of flash cards and included in the
@@ -318,7 +312,7 @@ Switches between light and dark appearance of UI dashboard.
 * The theme will be saved and loaded when Flashlingo is restarted.
 * Default color theme is the **light theme**.
 
-Format: `switch`
+Format: `switch (UNUSED)`
 
 Output:
 
@@ -330,14 +324,14 @@ Output:
 
 Opens a browser with the help page (User Guide).
 
-Format: `help`
+Format: `help (UNUSED)`
 
 
 ### Exiting the program : `exit`
 
 Closes the GUI and terminates the Java program
 
-Format: `exit`
+Format: `exit (UNUSED)`
 
 
 
