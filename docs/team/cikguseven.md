@@ -5,7 +5,7 @@ title: "Kieron's Project Portfolio Page"
 
 ### Class Manager 2023
 
-Class Manager 2023 aims to provide fast access to NUS TAs in maintaining and managing student information across multiple classes. It also helps TAs visualise students’ grades, attendance and class participation. Class Manager 2023 is written in Java, and has about 20 kLoC.
+Class Manager 2023 aims to provide fast access to NUS TAs in maintaining and managing student information across multiple classes. It also helps TAs visualise students’ grades, attendance and class participation. Class Manager 2023 is written in Java, and has about 26 kLoC.
 
 Given below are my contributions to the project:
 
