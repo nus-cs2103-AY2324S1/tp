@@ -12,7 +12,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
 end box
 [-> LogicManager : execute("list-freetime 12/12/2099")
 activate LogicManager
@@ -24,38 +24,54 @@ create ListFreeTimeCommandParser
 AddressBookParser -> ListFreeTimeCommandParser
 activate ListFreeTimeCommandParser
 
-ListFreeTimeCommand --> AddressBookParser
+ListFreeTimeCommandParser --> AddressBookParser
 deactivate ListFreeTimeCommandParser
-
-AddressBookParser --> LogicManager : lftp
-deactivate AddressBookParser
 
 AddressBookParser --> ListFreeTimeCommandParser : parse(args)
 activate ListFreeTimeCommandParser
 
-AddressBookParser --> TimeParser : parseDate(args, true)
+ListFreeTimeCommandParser --> TimeParser : parseDate(args, true)
 activate TimeParser
 
-TimeParser --> AddressBookParser : givenDay
+TimeParser --> ListFreeTimeCommandParser : Time
 deactivate TimeParser
 
-ListFreeTimeCommand -> Model : listPocketsOfTimeOnGivenDay(givenDay)
+create ListFreeTimeCommand
+ListFreeTimeCommandParser --> ListFreeTimeCommand
+activate ListFreeTimeCommand
+ListFreeTimeCommand --> ListFreeTimeCommandParser
+deactivate ListFreeTimeCommand
+
+ListFreeTimeCommandParser --> AddressBookParser : ListFreeTimeCommand
+deactivate ListFreeTimeCommandParser
+
+AddressBookParser --> LogicManager : ListFreeTimeCommand
+deactivate AddressBookParser
+
+LogicManager --> ListFreeTimeCommand : execute(model)
+activate ListFreeTimeCommand
+
+ListFreeTimeCommand --> Model : listPocketsOfTimeOnGivenDay(givenDay)
 activate Model
 
-Model -> VersionedAddressBook : listPocketsOfTimeOnGivenDay(day)
-activate VersionedAddressBook
+Model --> AddressBook : listPocketsOfTimeOnGivenDay(day)
+activate AddressBook
 
-VersionedAddressBook --> Model : freeTimes
-deactivate VersionedAddressBook
+AddressBook --> Model
+deactivate AddressBook
 
-Model --> ListFreeTimeCommand : freeTimes
+Model --> ListFreeTimeCommand
 deactivate Model
 
-ListFreeTimeCommand --> LogicManager : result
-deactivate ListFreeTimeCommand
-ListFreeTimeCommand -[hidden]-> LogicManager : result
-destroy ListFreeTimeCommand
+ListFreeTimeCommand --> ListFreeTimeCommand : formatFreeTime(freeTimes)
+activate ListFreeTimeCommand
 
-[<--LogicManager
+ListFreeTimeCommand --> ListFreeTimeCommand
+deactivate ListFreeTimeCommand
+
+ListFreeTimeCommand --> LogicManager : CommandResult
+deactivate ListFreeTimeCommand
+
+[<--LogicManager : CommandResult
 deactivate LogicManager
 @enduml
