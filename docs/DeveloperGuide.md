@@ -441,10 +441,17 @@ Currently, names in Foster Family must be alphanumeric. However, this excludes c
 characters such as `/`. For example, we currently do not allow  `s/o` in a person's name as the `/` is used as a command
 delimiter. Hence, one possible improvement is to enforce that the name inputted by the user must be enclosed in quotation marks for parsing, and to allow symbols such as `/`, `'`, `-` etc. using regex. Additionally, we will disallow the use of numeric values in names, to prevent the case where a number is inputted as a name.
 
-e.g. `name/"Henry Tan"` and `name/"Nagaratnam s/o Suppiah"` are now valid name parameters.
+e.g. `n/"Henry Tan"` and `n/"Nagaratnam s/o Suppiah"` are now valid name parameters.
 
 
 ### Phone Number Input
+
+Currently, phone numbers in Foster Family accept more than 8 digits as a valid input. This might cause invalid phone numbers to 
+be recorded without error messages to warn the user of such mistakes, especially in the situation where local phone numbers are used.
+Hence, one possible improvement is to enforce that the phone number inputted by the user must be restricted to a maximum of 15 
+digits (according to the international phone numbering plan).
+
+e.g. `p/90876534567890234567` is now an invalid phone number parameter.
 
 ### Handle Invalid Fosterer - Corrupt Data File
 
@@ -456,8 +463,8 @@ inconvenient for the user to have to use a combination of different commands (an
 `save`) in order to record additional crucial information with regard to a particular fosterer. This breeds inefficiency in some 
 scenarios, especially in the situation where an animal with existing medical conditions is fostered and its health status has to 
 be frequently updated. Hence, an enhancement to this feature would be to make the notes feature a separate command, such that the
-user would be able to add important notes without having to navigate to the profile page and using the additional `save` command
-to add the notes. 
+user would be able to add important notes in the main window, without having to navigate to the profile page and using the 
+additional `save` command to add the notes. 
 
 e.g. `notes 1 n/require an urgent visit to the vet` would add the notes "require an urgent visit to the vet" under the fosterer
 listed at index 1.
