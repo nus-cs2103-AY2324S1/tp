@@ -1100,13 +1100,13 @@ testers are expected to do more *exploratory* testing.
        Expected: Applicant is added to the list. Details of the new applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` again (Duplicate applicant)<br>
+    2. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` again (Duplicate applicant)<br>
        Expected: No applicant is added. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` with any of the fields missing<br>
+    3. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` with any of the fields missing<br>
        Expected: Similar to previous.
 
-    1. Other incorrect add commands to try: `add`, `add x`, `add n/John Doe e/johndoe@gmail.com p/Software Engineer hp/x`<br>
+    4. Other incorrect add commands to try: `add`, `add x`, `add n/John Doe e/johndoe@gmail.com p/Software Engineer hp/x`<br>
        Expected: Similar to previous.
 
 ### Editing an applicant
@@ -1115,14 +1115,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `edit 1 n/Tom Greenwood`<br>
+    2. Test case: `edit 1 n/Tom Greenwood`<br>
        Expected: The name of the first applicant is updated to *Tom Greenwood*. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `edit n/Pop Greenwood`<br>
+    3. Test case: `edit n/Pop Greenwood`<br>
        Expected: No applicant is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect edit commands to try: `edit`, `edit x n/Jane Doe`, `edit e/email` (where x is larger than the list size)<br>
+    4. Other incorrect edit commands to try: `edit`, `edit x n/Jane Doe`, `edit e/email` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Deleting an applicant
@@ -1131,14 +1131,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `delete 1`<br>
+    2. Test case: `delete 1`<br>
        Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `delete 0`<br>
+    3. Test case: `delete 0`<br>
        Expected: No applicant is deleted. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `delete a` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `delete a` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Editing an applicant's status
@@ -1147,14 +1147,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `status 1 s/o`<br>
+    2. Test case: `status 1 s/o`<br>
        Expected: The status of the first applicant is updated to *OFFERED*. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `status 1 s/l`<br>
+    3. Test case: `status 1 s/l`<br>
        Expected: No applicant's status is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect edit status commands to try: `status`, `status x s/o`, `status 1 s/` (where x is larger than the list size)<br>
+    4. Other incorrect edit status commands to try: `status`, `status x s/o`, `status 1 s/` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Adding an interview to an applicant
@@ -1163,14 +1163,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `addi 1 t/technical r/8.6`<br>
+    2. Test case: `addi 1 t/technical r/8.6`<br>
        Expected: A technical interview with rating 8.6 is added to the first applicant in the list. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `addi 0`<br>
+    3. Test case: `addi 0`<br>
        Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect add interview commands to try: `addi`, `addi x`, `addi r/6.0`, `addi 1 t/toolonginterviewtypeeeeeeeeeeeeeeee` (where x is larger than the list size)<br>
+    4. Other incorrect add interview commands to try: `addi`, `addi x`, `addi r/6.0`, `addi 1 t/toolonginterviewtypeeeeeeeeeeeeeeee` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Editing an interview of an applicant
@@ -1179,14 +1179,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant has at least one interview.
 
-    1. Test case: `editi 1 i/1 t/technical r/8.6`<br>
+    2. Test case: `editi 1 i/1 t/technical r/8.6`<br>
        Expected: The first interview of the first applicant in the list is updated to a technical interview with rating 8.6. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `editi 0`<br>
+    3. Test case: `editi 0`<br>
        Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect edit interview commands to try: `editi`, `editi x`, `editi 1 i/x t/technical`, `editi 1 i/1 r/y` (where x is larger than the list size and y is larger than 10.0)<br>
+    4. Other incorrect edit interview commands to try: `editi`, `editi x`, `editi 1 i/x t/technical`, `editi 1 i/1 r/y` (where x is larger than the list size and y is larger than 10.0)<br>
        Expected: Similar to previous.
 
 ### Deleting an interview from an applicant
@@ -1195,14 +1195,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant has at least one interview.
 
-    1. Test case: `deletei 1 i/1`<br>
+    2. Test case: `deletei 1 i/1`<br>
        Expected: First interview is deleted from the first applicant in the list. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `deletei 0`<br>
+    3. Test case: `deletei 0`<br>
        Expected: No interview is deleted from any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect delete interview commands to try: `deletei`, `deletei x`, `deletei 1 i/x` (where x is larger than the list size)<br>
+    4. Other incorrect delete interview commands to try: `deletei`, `deletei x`, `deletei 1 i/x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Sorting applicants
@@ -1211,14 +1211,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `sort d/status`<br>
+    2. Test case: `sort d/status`<br>
        Expected: The applicants in the list are sorted by their status, in the order UNDECIDED, OFFERED, REJECTED. Success message shown in the response area.
        Applicant area shows the updated list of applicants in the sorted order.
 
-    1. Test case: `sort d/i`<br>
+    3. Test case: `sort d/i`<br>
        Expected: The list of applicants is not sorted. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect sort commands to try: `sort`, `sort d/`<br>
+    4. Other incorrect sort commands to try: `sort`, `sort d/`<br>
        Expected: Similar to previous.
 
 ### Filtering applicants
@@ -1227,12 +1227,12 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `filter gts/5.0`<br>
+    2. Test case: `filter gts/5.0`<br>
        Expected: The applicants in the list are filtered by their score, and the updated list contains only applicants with score of at least 5.0.
        Success message shown in the response area. Applicant area shows the filtered list of applicants.
 
-    1. Test case: `filter name`<br>
+    3. Test case: `filter name`<br>
        Expected: The list of applicants is not filtered. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect filter commands to try: `filter`, `filter n/`<br>
+    4. Other incorrect filter commands to try: `filter`, `filter n/`<br>
        Expected: Similar to previous.
