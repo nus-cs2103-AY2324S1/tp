@@ -8,8 +8,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class Task {
 
-    public static final String MESSAGE_CONSTRAINTS = "Task names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "^[\\w\\s]+$";
+    public static final String MESSAGE_CONSTRAINTS = "Task names should be alphanumeric and contain spaces or # only.";
+    public static final String VALIDATION_REGEX = "^[\\w\\s#]+$";
 
     public final String taskName;
 
