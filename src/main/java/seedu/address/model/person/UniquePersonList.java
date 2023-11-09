@@ -181,7 +181,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts Patient List by priority in order of {@code isAscending}
      * @param isAscending
      */
-    public void sortByBirthday(boolean isAscending) {
+    private void sortByBirthday(boolean isAscending) {
         if (isAscending) {
             internalList.sort(
                     Comparator.comparing(Person::getBirthdate));

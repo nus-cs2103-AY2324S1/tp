@@ -7,7 +7,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FEVER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.LOWERCASE_BENJAMIN;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -171,5 +175,63 @@ public class UniquePersonListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
+    }
+
+    @Test
+    public void sort_ascendingByName_success() {
+        uniquePersonList.add(CARL);
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.add(CARL);
+        uniquePersonList.sort(true, "name");
+        assertEquals(expectedUniquePersonList, uniquePersonList);
+    }
+
+    @Test
+    public void sort_descendingByNameWithLowercase_success() {
+        uniquePersonList.add(CARL);
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BENSON);
+        uniquePersonList.add(LOWERCASE_BENJAMIN);
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(CARL);
+        expectedUniquePersonList.add(BENSON);
+        expectedUniquePersonList.add(LOWERCASE_BENJAMIN);
+        expectedUniquePersonList.add(ALICE);
+        uniquePersonList.sort(false, "name");
+        assertEquals(expectedUniquePersonList, uniquePersonList);
+    }
+
+    @Test
+    public void sort_ascendingByBirthday_success() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BENSON);
+        uniquePersonList.add(CARL);
+        uniquePersonList.add(DANIEL);
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(CARL);
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.add(BENSON);
+        expectedUniquePersonList.add(DANIEL);
+        uniquePersonList.sort(true, "birthday");
+        assertEquals(expectedUniquePersonList, uniquePersonList);
+    }
+
+    @Test
+    public void sort_descendingByBirthday_success() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BENSON);
+        uniquePersonList.add(CARL);
+        uniquePersonList.add(DANIEL);
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(DANIEL);
+        expectedUniquePersonList.add(BENSON);
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.add(CARL);
+        uniquePersonList.sort(false, "birthday");
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 }

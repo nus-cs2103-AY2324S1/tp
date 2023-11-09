@@ -44,6 +44,12 @@ public class TypicalPersons {
             .withEmail("johnd@example.com").withPhone("98765432")
             .withBirthdate("2001/10/20")
             .withTags("owesMoney", "friends").build();
+    public static final Person LOWERCASE_BENJAMIN = new PersonBuilder().withName("benjamin Monk")
+            .withGender("MALE")
+            .withAddress("311, Clementi Ave 2, #02-25")
+            .withEmail("benj@example.com").withPhone("98765432")
+            .withBirthdate("2001/10/16")
+            .withTags("cancer", "diabetes").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withGender("MALE")
             .withPhone("95352563").withEmail("heinz@example.com").withBirthdate("1987/01/02")
             .withAddress("wall street").withTags("malaria").build();

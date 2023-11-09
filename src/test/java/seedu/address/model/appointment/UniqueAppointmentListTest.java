@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAppointments.APPOINTMENT1;
 import static seedu.address.testutil.TypicalAppointments.APPOINTMENT2;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT3;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT4;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -168,5 +170,62 @@ public class UniqueAppointmentListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniqueAppointmentList.asUnmodifiableObservableList().toString(), uniqueAppointmentList.toString());
+    }
+
+    @Test
+    public void sort_ascendingByTime_success() {
+        uniqueAppointmentList.add(APPOINTMENT1);
+        uniqueAppointmentList.add(APPOINTMENT2);
+        uniqueAppointmentList.add(APPOINTMENT3);
+        uniqueAppointmentList.add(APPOINTMENT4);
+        UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
+        expectedUniqueAppointmentList.add(APPOINTMENT3);
+        expectedUniqueAppointmentList.add(APPOINTMENT4);
+        expectedUniqueAppointmentList.add(APPOINTMENT2);
+        expectedUniqueAppointmentList.add(APPOINTMENT1);
+        uniqueAppointmentList.sort(true, "time");
+        assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
+    }
+    @Test
+    public void sort_descendingByNameWithLowercase_success() {
+        uniqueAppointmentList.add(APPOINTMENT1);
+        uniqueAppointmentList.add(APPOINTMENT2);
+        uniqueAppointmentList.add(APPOINTMENT3);
+        uniqueAppointmentList.add(APPOINTMENT4);
+        UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
+        expectedUniqueAppointmentList.add(APPOINTMENT1);
+        expectedUniqueAppointmentList.add(APPOINTMENT2);
+        expectedUniqueAppointmentList.add(APPOINTMENT4);
+        expectedUniqueAppointmentList.add(APPOINTMENT3);
+        uniqueAppointmentList.sort(false, "time");
+        assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
+    }
+    @Test
+    public void sort_ascendingByPriority_success() {
+        uniqueAppointmentList.add(APPOINTMENT1);
+        uniqueAppointmentList.add(APPOINTMENT2);
+        uniqueAppointmentList.add(APPOINTMENT3);
+        uniqueAppointmentList.add(APPOINTMENT4);
+        UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
+        expectedUniqueAppointmentList.add(APPOINTMENT2);
+        expectedUniqueAppointmentList.add(APPOINTMENT3);
+        expectedUniqueAppointmentList.add(APPOINTMENT1);
+        expectedUniqueAppointmentList.add(APPOINTMENT4);
+        uniqueAppointmentList.sort(true, "priority");
+        assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
+    }
+    @Test
+    public void sort_descendingByBirthday_success() {
+        uniqueAppointmentList.add(APPOINTMENT1);
+        uniqueAppointmentList.add(APPOINTMENT2);
+        uniqueAppointmentList.add(APPOINTMENT3);
+        uniqueAppointmentList.add(APPOINTMENT4);
+        UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
+        expectedUniqueAppointmentList.add(APPOINTMENT1);
+        expectedUniqueAppointmentList.add(APPOINTMENT4);
+        expectedUniqueAppointmentList.add(APPOINTMENT3);
+        expectedUniqueAppointmentList.add(APPOINTMENT2);
+        uniqueAppointmentList.sort(false, "priority");
+        assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
     }
 }
