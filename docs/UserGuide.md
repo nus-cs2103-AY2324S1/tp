@@ -141,6 +141,7 @@ Format: `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * All provided fields are searched
 * All tags containing the words will be matched e.g. `Ba` will return `Badminton` or `Basketball` or `Football` or `Backgammon`.
 * Only persons matching all specified fields will be returned (i.e. `and` search).
+* Indicating a field but leaving it blank e.g. `filter n/` will show all contacts.
 
 Examples:
 * `filter t/CS2103` - Displays all contacts with the CS2103 tag or tags containing ``CS2103`` e.g. CS2103T
