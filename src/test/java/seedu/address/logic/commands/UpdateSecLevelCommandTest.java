@@ -20,7 +20,7 @@ public class UpdateSecLevelCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void executeWithAllSec4() throws CommandException {
+    public void execute_allSec4_allDeleted() throws CommandException {
         Model model1 = new ModelManager();
         Student student1 = getSec4Student("Alice");
         Student student2 = getSec4Student("Bob");
@@ -33,10 +33,12 @@ public class UpdateSecLevelCommandTest {
         updateSecLevelCommand.execute(model1);
         //All sec level 4 students have been removed from database.
         assertEquals(0, model1.getFilteredPersonList().size());
+
+        undolevelToRemoveDependencyForTestCases();
     }
 
     @Test
-    public void executeWithAllNonSec4() throws CommandException {
+    public void execute_allNonSec4_allUpdated() throws CommandException {
         Model model1 = new ModelManager();
         Student[] nonSec4Students = getNonSec4Students();
         for (Student student : nonSec4Students) {
@@ -53,10 +55,12 @@ public class UpdateSecLevelCommandTest {
                 }
             }
         });
+
+        undolevelToRemoveDependencyForTestCases();
     }
 
     @Test
-    public void executewithMixedSec4AndNonSec4() throws CommandException {
+    public void execute_mixedSec4AndNonSec4_success() throws CommandException {
         Model model1 = new ModelManager();
         Student[] nonSec4Students = getNonSec4Students();
         for (Student student : nonSec4Students) {
@@ -78,10 +82,13 @@ public class UpdateSecLevelCommandTest {
                 }
             }
         });
+        undolevelToRemoveDependencyForTestCases();
     }
 
     @Test
-    public void executeWithCorrectMessage() throws CommandException {
+    public void execute_uplevelFollowedByUndo_showCorrectMessage() throws CommandException {
+        model.setAddressBook(getTypicalAddressBook());
+        model.setUserPrefs(new UserPrefs());
         String expectedMessageForUpdate = UpdateSecLevelCommand.MESSAGE_UPDATE_SUCCESS;
         String expectedMessageForUndo = UpdateSecLevelCommand.MESSAGE_UNDO_SUCCESS;
 
@@ -95,10 +102,15 @@ public class UpdateSecLevelCommandTest {
         CommandResult undoResult = undoUpdateSecLevelCommand.execute(model);
         assertEquals(expectedMessageForUndo, undoResult.getFeedbackToUser());
 
+        undolevelToRemoveDependencyForTestCases();
     }
 
+
+
     @Test
-    public void executeWithUndo() throws CommandException {
+    public void execute_undo_success() throws CommandException {
+        model.setAddressBook(getTypicalAddressBook());
+        model.setUserPrefs(new UserPrefs());
         UpdateSecLevelCommand updateSecLevelCommand = new UpdateSecLevelCommand();
         updateSecLevelCommand.execute(model);
         // after updating, the state before and state now must be different.
@@ -108,6 +120,30 @@ public class UpdateSecLevelCommandTest {
 
         // after undo updating, the state goes back to the previous state -> equal
         assertEquals(getTypicalAddressBook(), model.getAddressBook());
+
+        undolevelToRemoveDependencyForTestCases();
+    }
+
+    @Test
+    public void execute_undo_failure() throws CommandException {
+        model.setAddressBook(getTypicalAddressBook());
+        model.setUserPrefs(new UserPrefs());
+        UpdateSecLevelCommand undoUpdateSecLevelCommand1 = new UpdateSecLevelCommand(true);
+        CommandResult undoResult = undoUpdateSecLevelCommand1.execute(model);
+
+        // Undolevel command without uplevel command has been done should show failure message
+        String expectedMessage = UpdateSecLevelCommand.MESSAGE_UNDO_FAILURE;
+        assertEquals(expectedMessage, undoResult.getFeedbackToUser());
+
+
+        UpdateSecLevelCommand updateSecLevelCommand = new UpdateSecLevelCommand();
+        updateSecLevelCommand.execute(model); // call uplevel 1 time
+        undoUpdateSecLevelCommand1.execute(model); // call undolevel 1st time
+        CommandResult undoResult2 = undoUpdateSecLevelCommand1.execute(model); // call undolevel 2nd time
+        // Show failure messages when number of times for calling undolevel command is more than that of uplevel.
+        assertEquals(expectedMessage, undoResult2.getFeedbackToUser());
+
+        undolevelToRemoveDependencyForTestCases();
     }
 
     @Test
@@ -124,6 +160,7 @@ public class UpdateSecLevelCommandTest {
         // different type -> not equal
         assertFalse(updateSecLevelCommand1.equals(2.3));
         assertFalse(updateSecLevelCommand1.equals(otherCommand));
+
     }
 
     public Student getSec4Student(String name) {
@@ -152,5 +189,24 @@ public class UpdateSecLevelCommandTest {
                         .withNearestMrtStation("Jurong East")
                         .withSubjects("Chinese").build()
         };
+    }
+
+    /**
+     * perform undolevel command to clear the state keep tracked by UpdateSecLevelCommand class
+     * to remove dependency between test cases.
+     * @throws CommandException
+     */
+    private void undolevelToRemoveDependencyForTestCases() throws CommandException {
+        Model sampleModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        UpdateSecLevelCommand updateSecLevelCommand = new UpdateSecLevelCommand(true);
+
+        // keep execute undo until undo failure message occur to ensure that there is no state keep track by
+        // UpdateSecLevelCommand class.
+        while (true) {
+            CommandResult commandResult = updateSecLevelCommand.execute(sampleModel);
+            if (commandResult.getFeedbackToUser() == UpdateSecLevelCommand.MESSAGE_UNDO_FAILURE) {
+                break;
+            }
+        }
     }
 }
