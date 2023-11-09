@@ -2,10 +2,11 @@ package seedu.staffsnap.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.*;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HR;
 import static seedu.staffsnap.testutil.TypicalApplicants.BENSON;
 
-import javafx.scene.layout.VBox;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,10 +18,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.staffsnap.model.interview.Interview;
 
-import java.util.List;
 
 /**
  * Tests the UI for the ApplicantCard.
@@ -110,7 +111,7 @@ public class ApplicantCardTest {
                     .get(BENSON.getInterviewIndexForApplicantCard(interviewToCheck) - 1);
 
             HBox interviewHeader = (HBox) interviewBox.getChildren().get(0);
-            Label interviewLabel  = (Label) interviewHeader.getChildren().get(0);
+            Label interviewLabel = (Label) interviewHeader.getChildren().get(0);
 
             HBox interviewRating = (HBox) interviewBox.getChildren().get(1);
             Label interviewRatingLabel = (Label) interviewRating.getChildren().get(0);
