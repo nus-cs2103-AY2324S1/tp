@@ -318,11 +318,11 @@ The `redo` command does the opposite — it calls `Model#redoNetworkBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `open`. Commands that do not modify the NetworkBook, such as `list`, will usually not call `Model#commitNetworkBook()`, `Model#undoNetworkBook()` or `Model#redoNetworkBook()`. Thus, the `networkBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `open 1 /index 1`. Commands that do not modify NetworkBook's list of all contacts or displayed contacts, such as `open 1 /index 1`, will usually not call `Model#undoNetworkBook()` or `Model#redoNetworkBook()`, or any `Model` commands that call `VersionedNetworkBook#commit`. Thus, the `networkBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitNetworkBook()`. Since the `currentStatePointer` is not pointing at the end of the `networkBookStateList`, all NetworkBook states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#setNetworkBook()` which in turn calls `VersionedNetworkBook#commit()`. Since the `currentStatePointer` is not pointing at the end of the `networkBookStateList`, all NetworkBook states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -341,7 +341,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  * Cons: Additional implementation of each individual command requires more time and effort spent on achieving undo/redo behaviour for said command.
 
 ### \[Proposed\] Data archiving
 
@@ -544,31 +544,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. The list is empty.
+* 2a. The list is empty.
 
   Use case ends.
 
-- 3a. The given index is invalid.
+* 3a. The given index is invalid.
 
-  - 3a1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3b. User does not give a phone number.
-
-  - 3b1. NetworkBook shows an error message.
+  * 3a1. NetworkBook shows an error message.
 
     Use case resumes at step 2.
 
-- 3c. The given phone number is in an invalid format.
+* 3b. User does not give a phone number.
 
-  - 3c1. NetworkBook shows an error message.
+  * 3b1. NetworkBook shows an error message.
 
     Use case resumes at step 2.
 
-- 3c. The given phone number is already present in the contact's list of phone numbers.
+* 3c. The given phone number is in an invalid format.
 
-  - Use case resumes at step 5.
+  * 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3c. The given phone number is already present in the contact's list of phone numbers.
+
+  * Use case resumes at step 5.
 
 **Use case: Add graduation year to a contact**
 
