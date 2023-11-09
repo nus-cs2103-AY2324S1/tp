@@ -99,6 +99,11 @@ public class LogCommandTest {
         }
 
         @Override
+        public void addPersonAtIndex(Person person, int i) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }

@@ -123,6 +123,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPersonAtIndex(Person person, int i) {
+        addressBook.addPersonAtIndex(person, i);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 

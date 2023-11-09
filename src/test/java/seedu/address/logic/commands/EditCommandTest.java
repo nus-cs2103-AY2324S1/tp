@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICALHISTORY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -170,8 +171,9 @@ public class EditCommandTest {
     @Test
     public void undo_successfulEditCommand() throws CommandException {
         Model model = new ModelManager();
-        Person originalPerson = new PersonBuilder().build();
-        Person editedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).build();
+        Person originalPerson = new PersonBuilder().withMedical(VALID_MEDICALHISTORY).build();
+        Person editedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB)
+                .withMedical(VALID_MEDICALHISTORY).build();
 
         model.addPerson(originalPerson);
 

@@ -66,6 +66,11 @@ public class DeleteCommand extends UndoableCommand {
      * The state of the person after a field has been deleted.
      */
     private Person editedPerson;
+
+    /**
+     * The index of the original patient to be fully deleted. To be used with undo.
+     */
+    private int index;
     private final Name name;
     private final Nric nric;
     private final DeletePersonDescriptor deletePersonDescriptor;
@@ -97,6 +102,8 @@ public class DeleteCommand extends UndoableCommand {
         Person personToDelete = personOptional.get();
         originalPerson = personToDelete;
 
+        index = model.getFilteredPersonList().indexOf(personToDelete);
+
         if (deletePersonDescriptor.isAllFalse()) {
             model.deletePerson(personToDelete);
             model.addToHistory(this);
@@ -115,7 +122,7 @@ public class DeleteCommand extends UndoableCommand {
     public CommandResult undo(Model model) {
         requireNonNull(model);
         if (deletePersonDescriptor.isAllFalse()) {
-            model.addPerson(originalPerson);
+            model.addPersonAtIndex(originalPerson, index);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_UNDO_DELETE_PERSON_SUCCESS,
                     Messages.format(originalPerson)));
