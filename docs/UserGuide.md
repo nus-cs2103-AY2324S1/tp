@@ -348,7 +348,7 @@ Action | Format, Examples
     <th class="tg-fymr">Field</th>
     <th class="tg-0pky"><span style="font-weight:bold">Optional</span></th>
     <th class="tg-0pky"><span style="font-weight:bold">Blank accepted</span></th>
-    <th class="tg-0pky"><span style="font-weight:bold">Acceptable values</span></th>
+    <th class="tg-0pky"><span >Acceptable values</span></th>
   </tr>
 </thead>
 <tbody>
@@ -369,7 +369,7 @@ Action | Format, Examples
     <td class="tg-0pky">PHONE_NUMBER</td>
     <td class="tg-0pky">Yes</td>
     <td class="tg-0pky">No</td>
-    <td class="tg-0pky">Only contain numbers, and <span style="font-weight:bold">at least 3 digits long</span></td>
+    <td class="tg-0pky">Only contain numbers, and <span>at least 3 digits long</span></td>
   </tr>
   <tr>
     <td class="tg-0pky">EMAIL</td>
@@ -400,13 +400,13 @@ Action | Format, Examples
     <td class="tg-0pky">LOCATION</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
-    <td class="tg-0pky"><span style="font-weight:bold">Must not be blank </span>and can take in any values, except the following prefixes:<code>e/</code>, <code>l/</code>, <code>d/</code>, <code>t/</code></td>
+    <td class="tg-0pky"><span>Must not be blank </span>and can take in any values, except the following prefixes:<code>e/</code>, <code>l/</code>, <code>d/</code>, <code>t/</code></td>
   </tr>
   <tr>
     <td class="tg-0pky">DATE</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
-    <td class="tg-0pky">Must be a <span style="font-weight:bold">valid date </span>in the format of <span style="font-weight:bold">YYYY-MM-DD</span></td>
+    <td class="tg-0pky">Must be a <span>valid date </span>in the format of <span>YYYY-MM-DD</span></td>
   </tr>
   <tr>
     <td class="tg-0pky">TAG</td>
@@ -419,33 +419,33 @@ Action | Format, Examples
     <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
-    <td class="tg-0pky">Must be a<span style="font-weight:bold"> positive integer</span> that is within the range of the length of the <span style="font-weight:bold">currently displayed</span> member/event list</td>
+    <td class="tg-0pky">Must be a<span> positive integer</span> that is within the range of the length of the <span style="font-weight:bold">currently displayed</span> member/event list</td>
   </tr>
   <tr>
     <td class="tg-0pky" rowspan="3"><code>enrol</code> / <code>editEnrolment</code></td>
     <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
-    <td class="tg-0pky">Must be a <span style="font-weight:bold">positive integer</span> that is within the range of the length of the <span style="font-weight:bold">currently displayed</span> member/event list</td>
+    <td class="tg-0pky">Must be a <span>positive integer</span> that is within the range of the length of the <span>currently displayed</span> member/event list</td>
   </tr>
   <tr>
     <td class="tg-0pky">NUMBER_OF_HOURS</td>
     <td class="tg-0pky">Yes</td>
     <td class="tg-0pky">No</td>
-    <td class="tg-0pky">Must be a<span style="font-weight:bold"> positive integer </span>and must be <span style="font-weight:bold">less than or equal to 2147483647</span></td>
+    <td class="tg-0pky">Must be a<span> positive integer </span>and must be <span>less than or equal to 2147483647</span></td>
   </tr>
   <tr>
     <td class="tg-0pky">REMARK</td>
     <td class="tg-0pky">Yes</td>
     <td class="tg-0pky">No</td>
-    <td class="tg-0pky"><span style="font-weight:bold">Must not be blank </span>and can take in any values, except the following prefixes:<code>m/</code>, <code>e/</code>, <code>h/</code>, <code>r/</code></td>
+    <td class="tg-0pky"><span>Must not be blank </span>and can take in any values, except the following prefixes:<code>m/</code>, <code>e/</code>, <code>h/</code>, <code>r/</code></td>
   </tr>
   <tr>
     <td class="tg-0pky"><code>viewMember</code> / <code>viewEvent</code></td>
     <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
-    <td class="tg-0pky">Must be a <span style="font-weight:bold">positive integer</span> that is within the range of the length of the <span style="font-weight:bold">currently displayed</span> member/event list</td>
+    <td class="tg-0pky">Must be a <span>positive integer</span> that is within the range of the length of the <span>currently displayed</span> member/event list</td>
   </tr>
   <tr>
     <td class="tg-0pky"><code>findMember</code> / <code>findEvent</code></td>
