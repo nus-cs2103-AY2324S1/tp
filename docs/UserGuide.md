@@ -133,7 +133,7 @@ Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [
 - `NAME` should be a string.
 - `PHONE` should be an 8-digit integer.
 - `EMAIL` should contain "@".
-- `TELEGRAM` should be between 5-32 characters and start with "@".
+- `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
 - `FROM` should be a time in "HH:SS" format
 - `TO` should be a time in "HH:SS" format
 - `TAG` should be an alphanumeric string without spaces.
@@ -164,7 +164,7 @@ When the command fails:
 
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- Invalid telegram handle: `Telegram handle should be between 5-32 characters, and it should start with @`
+- Invalid telegram handle: `Telegram handle should be between 5-32 characters and start with @, and it cannot contain any special characters except underscore.`
 - Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
 and optionally end with an alphabet.`
 - Invalid free time: `TA's free time should have a start and end time in HH:mm format`
@@ -181,7 +181,7 @@ Format: `edit INDEX n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TA
 - `NAME` should be a string.
 - `PHONE` should be an 8-digit integer.
 - `EMAIL` should contain "@".
-- `TELEGRAM` should be between 5-32 characters and start with "@".
+- `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
 - `FROM` should be a time in "HH:SS" format
 - `TO` should be a time in "HH:SS" format
 - `TAG` should be an alphanumeric string without spaces.
@@ -212,7 +212,7 @@ When the command fails:
 
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- - Invalid telegram handle: `Telegram handle should be between 5-32 characters, and it should start with @`
+- - Invalid telegram handle: `Telegram handle should be between 5-32 characters and should start with @, and it cannot contain any special characters except underscore.`
 - Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
   and optionally end with an alphabet.`
 - Invalid free time: `TA's free time should have a start and end time in HH:mm format`
@@ -310,7 +310,6 @@ Listed all teaching assistants
 [list of TAs]
 ```
 
-<<<<<<< Updated upstream
 ### Updating Hours for All TAs in View: `hour`
 
 Updates the hour field to all TAs in the current list.
@@ -338,9 +337,6 @@ Hour updated to all TAs identified!
 When the command fails:
 
 - Invalid command format (updated new hour is invalid, either below 0 or above 9999): `Invalid command format!`
-
-=======
->>>>>>> Stashed changes
 
 ### Edit free time for a teaching assistant: `editft`
 
@@ -418,11 +414,7 @@ Action | Format, Examples
 **Course** | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`
-<<<<<<< Updated upstream
-**Hour** | `hour 6`
-=======
-**Hour** | `hour INTEGER`<br> e.g., `hour 2` 
->>>>>>> Stashed changes
+**Hour** | `hour INTEGER`<br> e.g., `hour 2`
 **List** | `list`
 **Help** | `help`
 **Teach** | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`
