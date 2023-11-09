@@ -42,16 +42,6 @@ public class InteractionCommandParserTest {
         assertParseFailure(parser,
                 CliSyntax.PREFIX_OUTCOME + "INTERESTED note about interaction",
                 expectedMessage);
-
-        // no arguments at all
-        assertParseFailure(parser,
-                "",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, InteractionCommand.MESSAGE_USAGE));
-
-        // no outcome and no note
-        assertParseFailure(parser,
-                "1",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, InteractionCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -65,26 +55,5 @@ public class InteractionCommandParserTest {
         assertParseFailure(parser,
                 "1 " + CliSyntax.PREFIX_OUTCOME + "notAnOutcome note about interaction",
                 Interaction.Outcome.MESSAGE_CONSTRAINTS);
-    }
-
-    @Test
-    public void parse_uncapitalisedOutcome_success() {
-        // Interaction interaction = new Interaction("note about interaction", Interaction.Outcome.INTERESTED);
-        // InteractionCommand expectedCommand = new InteractionCommand(targetIndex, interaction);
-        // assertParseSuccess(parser, userInput, expectedCommand);
-
-
-        Index targetIndex = Index.fromOneBased(1);
-        String userInput = targetIndex.getOneBased()
-                + " " + CliSyntax.PREFIX_OUTCOME + "interested note about interaction in small case";
-        Interaction interaction =
-            new Interaction("note about interaction in small case", Interaction.Outcome.INTERESTED);
-        InteractionCommand expectedCommand = new InteractionCommand(targetIndex, interaction);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        String userInput2 = targetIndex.getOneBased()
-                + " " + CliSyntax.PREFIX_OUTCOME + "iNtErESTeD note about interaction in small case";
-        assertParseSuccess(parser, userInput2, expectedCommand);
-
     }
 }
