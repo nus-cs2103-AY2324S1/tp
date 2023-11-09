@@ -182,7 +182,7 @@ Displaying a specific field with the new PersonCardWithSpecificField class.
 
 How the read feature works in sequence diagram.
 
-The user enters the command "read 1 /a" and executes it. The command is then parsed by AddressBookParser. The AddressBookParser parsed the input and created ReadCommandParser and ReadCommandParser parsed the remaining input(exclude the command word). If it parses successfully, it will eventually create a ReadCommand. The ReadCommand is then executed. If the index is not out of bounds, it will call Model#setSpecificPersonToDisplay() to filter the list to only the specific person. Then it will also call the respective getter to get the specific field from the Person. After getting the specific field, it will then create a CommandResult for the UI to display. 
+The user enters the command "read 1 /a" and executes it. The command is then parsed by AddressBookParser. The AddressBookParser parsed the input and created ReadCommandParser and ReadCommandParser parsed the remaining input(exclude the command word). If it parses successfully, it will eventually create a ReadCommand. The ReadCommand is then executed. If the index is not out of bounds, it will call Model#setSpecificPersonToDisplay() to filter the list to only the specific person. Then it will also call the respective getter to get the specific field from the Person. After getting the specific field, it will then create a CommandResult for the UI to display.
 
 This is the sequence diagram to show how the read operation works.
 ![ReadSequenceDiagram3](images/ReadSequenceDiagram.png)
@@ -200,7 +200,7 @@ This is the sequence diagram to show how the read operation works.
 * **Alternative 2:** Retrieve the entire person's data when executing the "Read" command.
   * Pros: Simple and consistent with other command implementations.
   * Cons: May have performance issues if the person's data is extensive.
-    
+
 **Aspect: Using Index:**
 
 * **Alternative 1 (current choice):** Use an index to identify the target person for the "Read" command.
@@ -330,7 +330,7 @@ The following activity diagram summarises the process of adding leave for an emp
 ![AddLeaveActivityDiagram](images/AddLeaveActivityDiagram.png)
 
 #### Design considerations:
- 
+
 **Aspect: How addleave executes:**
 
 * **Alternative 1 (current choice):** Saves the dates of the leave added.
@@ -341,7 +341,7 @@ The following activity diagram summarises the process of adding leave for an emp
   * Pros: will use less memory (e.g. each employee will only need to store an integer for the total number of days of leave per annul)
   * Cons: Not much useful information that can be used (e.g. we do not know the working status of each employee for each day)
 
-#### 2. Add Leave Feature
+#### 2. Delete Leave Feature
 The proposed Delete Leave feature is facilitated by `AnnualLeave`, `DeleteLeaveCommand`, `DeleteLeaveCommandParser` and `Person` classes.
 
 The `AnnualLeave` class is responsible for storing the leave data for a specific employee.
@@ -354,7 +354,7 @@ The `Person` class is responsible for updating the list of leave.
 
 The following class diagram shows how the different classes interact with one another in the Delete Leave Feature:
 
-![DeleteLeaveClassDiagram]
+![DeleteLeaveClassDiagram](images/DeleteLeaveClassDiagram.png)
 
 The following sequence diagram shows how the `deleteleave` operation works:
 
@@ -427,7 +427,7 @@ Step 2. The `mark` command calls `AttendanceStorage#markAbsent()` of the given e
 ### Product scope
 
 **Target user profile**:
-* Human Resource Managers 
+* Human Resource Managers
 * has a need to manage a significant number of employees' information
 * prefer desktop apps over other types
 * can type fast
@@ -473,13 +473,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. ManaGease displays a confirmation message that a member has been added.
 
    Use case ends.
-   
+
 **Extensions**
 
 * 1a. Invalid tags are included in the command.
-  
+
 	 * 1a1. ManaGease shows an error message.
-	
+
          Use case ends.
 
 <br>
@@ -493,13 +493,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. ManaGease displays a confirmation message that information for members is updated.
 
    Use case ends.
-   
+
 **Extensions**
 
 * 1a. Invalid command parameters are given.
-  
+
  	* 1a1. ManaGease shows an error message.
-	
+
    	     Use case ends.
 
 <br>
@@ -512,13 +512,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. ManaGease displays the information for a member.
 
    Use case ends.
-   
+
 **Extensions**
 
 * 1a. Invalid command parameters are given.
-  
+
 	* 1a1. ManaGease shows an error message.
-	
+
         Use case ends.
 
 <br>
@@ -539,11 +539,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. ManaGease shows an error message.
 
       Use case ends.
- 
+
 * 1b. User requests to delete existing member via name.
-  
+
 	 * 1b1. ManaGease will display a list of members with the same name.
- 
+
          Use case ends.
 
 <br>
@@ -611,6 +611,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 * 1b. Invalid date(s) are given.
+
+    * 1b1. ManaGease shows an error message.
+
+      Use case ends.
+
+**Use case: Delete leave from a specific employee**
+
+**MSS**
+
+1. User requests to delete leave from a specific employee.
+2. ManaGease deletes leave from the employee.
+3. ManaGease displays a confirmation message that the leave has been deleted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid command parameters are given.
+
+    * 1a1. ManaGease shows an error message.
+
+      Use case ends.
+
+* 1b. Invalid/Non-existing date(s) are given.
 
     * 1b1. ManaGease shows an error message.
 

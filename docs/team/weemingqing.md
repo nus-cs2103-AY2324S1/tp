@@ -30,14 +30,19 @@ Given below are my contributions to the project.
   * What it does: Allows user to see the working status of an employee; whether they are late, absent, on leave or present.
   * Justification: By employing colors to represent the work status of employees, this feature provides a quick visual reference for users to assess individual employee performance and efficiently plan workforce management.
 
-* **Code contributed**: [RepoSense link]
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=WeeMingQing&sort=groupTitle%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=zoom&zA=applepiofmyeye&zR=AY2324S1-CS2103T-W12-2%2Ftp%5Bmaster%5D&zACS=207.02777777777777&zS=2023-09-22&zFS=S2103T-W12-2&zU=2023-11-08&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
 * **Project management**:
   * Added issue for team on Github.
 
 * **Documentation**:
   * User Guide:
-    * Worked on the  
+    * Worked on the `Deleting an employee` section, as well as `Adding leave` and `Deleting leave` section.
+  * Developer Guide:
+    * Worked on the `Add Leave Feature` section
+    * Worked on the `Delete Leave Feature` section
+    * Designed the UML diagrams and writeup for the `Add Leave Feature` and `Delete Leave Feature` section.
+    * Worked on Use Cases for `Delete`, `Add Leave` and `Delete Leave`
 
 * **Community**:
   * Contributed in team meetings
