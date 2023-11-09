@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* The foundational code was derived from [Addressbook-level3](https://se-education.org/addressbook-level3/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -213,6 +213,38 @@ The `add-t` command was designed this way to ensure consistency with the previou
     * Cons: Allowing too many special characters decreases the ability to locate and reference the tutors in future 
       (e.g. ABC,123@!?:" should not be accepted as a valid name).
 
+### List tutor feature
+
+The "List Tutor" feature allows users to view the list of existing tutors in the address book. Below, we provide
+an example usage scenario and a detailed description of how the add tutor mechanism behaves at each step.
+
+The following shows the activity diagram from when a user executes the `list-t` command:
+
+![Activity Diagram for list-t Command](images/ListTutorActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched with at least 1 tutor added.
+
+Step 2. The user executes `list-t` to view the full list of existing tutors. The command is parsed in 
+`AddressBookParser`.
+
+Step 3. A `ListTutorCommand` object is constructed.
+
+Step 4. The `LogicManager` calls the `execute` method in `ListTutorCommand`, which calls the `updateFilteredPersonList`
+method with the `PREDICATE_SHOW_ALL_PERSONS` predicate in the `ModelManager` to remove any filters on the
+`PersonList` so that the full list of existing tutors is displayed.
+
+Step 5. Finally, the `ListTutorCommand` object returns the `CommandResult`.
+
+The following sequence diagram shows how the above steps for list tutor operation works:
+
+![Interactions Inside the Logic Component for the `list-t` Command](images/ListTutorSequenceDiagram.png)
+
+#### Design rationale
+
+The `list-t` command was designed this way to ensure consistency with the previous `list` person command.
+
 ### Edit tutor feature 
 
 The “Edit Tutor” feature allows users to edit an existing tutor in the address book given a tutor index. 
@@ -330,46 +362,35 @@ the lifeline reaches the end of diagram.
 
 ### Delete tutor feature
 
-The "Delete Tutor" feature allows users to delete an existing tutor in the address book given a tutor index.
-
+The "Delete Tutor" feature allows users to delete an existing tutor in the address book given a tutor index. 
 Below, we provide an example usage scenario and a detailed description of how the delete tutor mechanism behaves at
-each step. The following shows the activity diagram when a user executes the `delete-t` command:
+each step. 
+
+The following shows the activity diagram when a user executes the `delete-t` command:
 
 ![Activity diagram for delete-t command](images/DeleteTutorActivityDiagram.png)
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Limitations**<br>
-* Input format must adhere to the follow limitations:
-    * `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
-* TUTOR_INDEX parameter is compulsory.
-</div>
-
 #### Implementation
-
-The bulk of the implementation details is identical to that of other commands.
-As such only details specific to `delete-t` will be discussed.
 
 Step 1. The user has the application launched with at least 1 tutor added.
 
 Step 2. The user executes `list-t` to view all added tutors.
 
 Step 3. The user executes `delete-t 1` to delete the tutor with Tutor index 1 in the list of tutors displayed.
-The command is parsed in the AddressBookParser.
+The command is parsed in the `AddressBookParser`.
 
-Step 4. DeleteTutorCommandParser is created and gets the index of the tutor to be deleted.
-A DeleteTutorCommand object is then constructed with the specified tutor index.
+Step 4. `DeleteTutorCommandParser` is created and gets the index of the tutor to be deleted.
+A `DeleteTutorCommand` object is then constructed with the specified tutor index.
 
-Step 5. The DeleteTutorCommand object gets the specified person from the current filtered person list using the tutor
+Step 5. The `DeleteTutorCommand` object gets the specified person from the current filtered person list using the tutor
 index.
 
-Step 6. The DeleteTutorCommand object then calls the deletePerson method in the ModelManager with the specified person 
-to delete. This method deletes the specified `Person` in the model.
+Step 6. The `DeleteTutorCommand` object then calls the `deletePerson` method in the ModelManager with the specified 
+person to delete. This method deletes the specified `Person` in the model.
 
-Step 7. Finally, the DeleteTutorCommand object returns the `CommandResult`.
+Step 7. Finally, the `DeleteTutorCommand` object returns the `CommandResult`.
 
-The following sequence diagram shows how the above steps for delete tutor operation works, taking
-`execute("delete-t 1")` API call as an example.
+The following sequence diagram shows how the above steps for delete tutor operation works:
 
 ![Interactions inside the Logic Component for the `delete-t 1` Command](images/DeleteTutorSequenceDiagram.png)
 
@@ -381,6 +402,28 @@ but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 #### Design rationale
 The `delete-t` command was designed this way to ensure consistency with the previous `delete` person command.
+
+**Aspect: Specifying which tutor to delete**
+- **Alternative 1 (current choice):** Using tutor index.
+  - Pros: Using the tutor index provides a clear and unambiguous way for users to specify which tutor they want to 
+    delete. The index corresponds directly to the position of the tutor in the displayed list, making it easy for 
+    users to identify the target tutor.
+  - Pros: The use of tutor indices eliminates the potential challenge of dealing with long or complex names. Users do
+    not need to type out the entire name, which can be especially beneficial if a tutor 
+    has a lengthy or complicated name.
+  - Pros: The use of index aligns with the existing command structure, which is based on numeric indices for
+    identifying and interacting with specific entries in the address book.
+  - Cons: Users need to have knowledge of the specific index of the tutor they want to edit. This may require them to
+    first execute a `list-t` command to view the current list of tutors and their corresponding indices.
+- **Alternative 2:** Using tutor name.
+  - Pros: Allowing users to delete a tutor by specifying their name provides a more natural and intuitive method, as
+    users are likely more familiar with names than numeric indices.
+  - Cons: If a user provides an incorrect or misspelled name, the application would need to handle error cases and
+    provide appropriate feedback to guide the user.
+  - Cons: Names can be long, complex, or have unusual spellings, which may make them more challenging to type
+    accurately. This can lead to potential input errors or mismatches if the user misspells or mistypes the name.
+  - Cons: Names are case-sensitive. This means that users need to accurately input the name with the correct
+    capitalization, which can add an extra layer of precision required from the user.
 
 ### Add Schedule Feature
 
@@ -612,6 +655,91 @@ the lifeline reaches the end of diagram.
     - Cons: Implementing advanced search criteria may lead to a more complex user interface and search mechanism,
       potentially requiring additional user training or guidance.
 
+### Mark schedule feature
+
+The "Mark Schedule" feature allows users to mark a specified schedule as missed or completed.
+Below, we provide an example usage scenario and a detailed description of how the mark schedule mechanism behaves at
+each step.
+
+The following shows the activity diagram when a user executes the `mark` command:
+
+![MarkScheduleActivityDiagram](images/MarkScheduleActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched with at least 1 schedule added.
+
+Step 2. The user executes the `list-s` to view the list of schedules.
+
+Step 3. The user executes the `mark 1 m/1` command, which marks the schedule with index 1 shown in the list of 
+schedules displayed as completed. The command is parsed in the `AddressBookParser`.
+
+Step 4. `MarkScheduleCommandParser` is initialized to parse the user input to create a `MarkScheduleCommand` with
+the given `Index` and `Status` representing the user's input.
+
+Step 5. The `MarkScheduleCommand#execute(Model)` will perform the following checks in this order to ensure that the
+schedule can be safely marked as completed in the Model:
+
+- The `Index` is a valid integer.
+- The `Index` is not out of bounds (within the range of displayed schedule list's size).
+- The `Status` is a valid Status (either 0 for missed or 1 for completed).
+
+Step 6. The `execute` method then calls `Model::getFilteredScheduleList` and gets the specified `Schedule` using the
+`Index` given.
+
+Step 7. Once the checks are successful, the method then creates an edited schedule from the original schedule with its
+status set to completed.
+
+Step 8. The method then calls the `setSchedule` method in the `ModelManager` with the new edited schedule. This sets the
+specified `Schedule` in the model to be that edited schedule with completed status.
+
+Step 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
+`Logic`.
+
+The following sequence diagram shows how the above steps for mark schedule operation works:
+
+![Sequence diagram for mark command](images/MarkScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `MarkScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design rationale
+
+**Aspect: Usage of the `pending` status**
+- **Alternative 1 (current choice):** Users unable to mark a schedule as `pending`.
+  - Pros: This design is more intuitive for users, as it aligns with the common understanding of marking and
+    unmarking tasks.
+  - Pros: Users only need to be aware of the completed and missed status, simplifying the command's usage.
+  - Cons: The user must use a distinct command to unmark schedules with a status set.
+- **Alternative 2:** Users able to mark a schedule as `pending`.
+  - Pros: Users only need to be familiar with the mark command, which can toggle between completed, missed, and
+    pending statuses. This may lead to a more streamlined user experience.
+  - Cons: Introducing a third status option complicates the management of schedule statuses. Users and developers
+    alike must account for an additional state, potentially increasing the system's complexity.
+  - Cons: The definition and usage of the "pending" status may vary among users, potentially leading to ambiguity in
+    its interpretation.
+
+**Aspect: Format of schedule status**
+- **Alternative 1 (current choice):** Users input integers 0 or 1 to mark a schedule as `missed` or `completed`.
+  - Pros: Using integers provides a clear and unambiguous way for users to specify which status they want to
+    mark for the specified schedule. The index corresponds directly to the schedule status of `missed`, or `completed`,
+    making it easy to identify the correct schedule status.
+  - Pros: The use of indices eliminates the potential challenge of dealing with case-sensitive words. Users do
+    not need to type out the exact status word by word, which can be especially beneficial if a user is not a very
+    good at typing.
+  - Pros: The use of indices aligns with the existing command structure, which is based on numeric indices for
+    identifying and interacting with specific entries in the address book.
+  - Cons: Users need to have knowledge of the specific integer representing the schedule status they want to mark. 
+- **Alternative 2:** Users input the exact schedule status `missed` or `completed` in words.
+  - Pros: Allowing users to mark a schedule by specifying their schedule status provides a more natural and intuitive 
+    method, as users are likely more familiar with status than numeric indices.
+  - Cons: If a user provides an incorrect or misspelled status, the application would need to handle error cases and
+    provide appropriate feedback to guide the user.
+  - Cons: Typing out schedule status in words are case-sensitive. This means that users need to accurately input the 
+    schedule status with the correct capitalization, which can add an extra layer of precision required from the user.
 
 ### Unmark schedule feature
 
@@ -817,6 +945,26 @@ the lifeline reaches the end of diagram.
   - Pros: The filepath does not need to pass through `ThemeCommand` and `CommandResult`. It is allocated and access 
     from `MainWindow` directly. Thus, `CommandResult` does not need another constructor and getter method.
   - Cons: `MainWindow` has to parse arguments.
+
+### Split MainWindow to display both tutor and schedule list together
+
+The main window of TutorConnect now displays both the tutor and schedule list side by side to give users an overview
+and provide easy reference when inputting commands to update the tutors or schedules.
+
+#### Implementation details
+
+To display both the tutor and schedule list together, another panel `ListsPanel` is used to combine both the 
+`personListPanel` and `scheduleListPanel` together in order to display them as a single panel in the `MainWindow`.
+
+#### Design rationale
+
+Initially, the list of tutors and schedules are individual panels and the `MainWindow` can only display one at a time.
+Therefore, users have to enter `list-t` or `list-s` commands to alternate between panels to refer when entering
+tutor-related commands followed by schedule-related commands or vice versa, which can be very troublesome.
+
+With the use of `ListsPanel` to combine both lists into one single panel to display in the `MainWindow`, it eliminates
+the need to alternate between panels as users can now enter tutor-related and schedule-related commands while having
+reference to both lists at the same time, providing convenience for users.
 
 ### Sorting of schedules
 
@@ -1232,6 +1380,22 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent theme is retained. 
 
+### Adding a tutor
+
+Adding a tutor while all tutors are being shown
+
+   1. Prerequisites: List all tutors using the `list-t` command. Multiple tutors in the list.
+
+   2. Test case: `add-t n/John Doe p/98765432 e/johnd@example.com`<br>
+      Expected: The tutor is added at the end of tutor list. Details of the added tutor shown in the status message.
+
+   3. Test case: `add-t n/Jonny p/12345678`<br>
+      Expected: No tutor is added. Error details shown in the status message.
+
+   4. Other incorrect add tutor commands to try: `add-t`, `add-t n/abc`, `add-t n/abc p/1 e/abc@example.com`,
+      `add-t n/abc p/12345678 e/abc`<br>
+      Expected: Similar to previous.
+
 ### Deleting a tutor
 
 Deleting a tutor while all tutors are being shown
@@ -1248,9 +1412,75 @@ Deleting a tutor while all tutors are being shown
       tutor list size)<br>
       Expected: Similar to previous.
 
+### Editing a tutor
+
+Editing a tutor while all tutors are being shown
+
+   1. Prerequisites: List all tutors using the `list-t` command. Multiple tutors in the list.
+
+   2. Test case: `edit-t 1 n/John Doe p/98765432 e/johnd@example.com`<br>
+      Expected: First tutor's name, phone number and email updated in tutor list. Details of edited tutor shown in 
+      the status message.
+
+   3. Test case: `edit-t 1 n/Jonny p/12345678`<br>
+      Expected: First tutor's name and phone number updated in tutor list. Details of edited tutor shown in the 
+      status message.
+
+   4. Test case: `edit-t 1 n/Johnson`<br>
+      Expected: First tutor's name updated in tutor list. Details of edited tutor shown in the status message.
+
+   5. Test case: `edit-t 1`<br>
+      Expected: First tutor is not updated. Error details shown in the status message.
+
+   6. Other incorrect edit tutor commands to try: `edit-t`, `edit-t abc`, `edit-t 1 n/abc p/1`, `edit-t 0 n/abc`,
+      `edit-t 1 n/abc n/abc`, `edit-t 1 n/abc p/123 e/abc`, `edit-t x n/abc p/123 e/abc@exampl.com` (where x is larger
+      than the tutor list size)<br>
+      Expected: Similar to previous.
+
+### Listing all tutors
+
+Lists all existing tutors
+
+   1. Prerequisites: Multiple tutors in the list.
+
+   2. Test case: `list-t`<br>
+      Expected: All existing tutors are listed. `Listed all tutors` is shown in the status message.
+
+### Finding a tutor
+
+Finds a tutor while all tutors are being shown
+
+   1. Prerequisites: List all tutors using the `list-t` command. Multiple tutors in the list.
+
+   2. Test case: `find-t John`<br>
+      Expected: All tutors with names containing the searched keyword are listed. Number of tutors with names
+      containing the searched keyword is shown in the status message.
+
+   3. Test case: `find-t`<br>
+      Expected: No tutors are found. Error details shown in the status message.
+
+### Adding a schedule
+
+Adds a schedule while all schedules are being shown
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `add-s 1 st/2023-05-05T09:00 et/2023-05-05T11:00`<br>
+      Expected: New schedule for the first tutor in tutor list is added into the schedule list. Details of the added
+      schedule shown in the status message.
+
+   3. Test case: `add-s 1 st/2034-06-06T09:00`<br>
+      Expected: No new schedule added for the first tutor in tutor list. Error details shown in the status message.
+
+   4. Other incorrect add schedule commands to try: `add-s`, `add-s abc`, `add-s 1 st/2023-05-05 et/2023-05-06`,
+      `add-s 0 st/2023-05-05T09:00 et/2023-05-05T11:00`, `add-s 1 st/2023-05-05T09:00 st/2023-05-05T09:00`,
+      `add-s x st/2023-05-05T09:00 et/2023-05-05T11:00` (where x is larger than the tutor list size)<br>
+      Expected: Similar to previous.
+      
 ### Editing a schedule
 
 Edits a schedule while all schedules are being shown
+
    1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
    
    2. Test case: `edit-s 1 st/2023-05-05T09:00 et/2023-05-05T11:00`<br>
@@ -1270,13 +1500,125 @@ Edits a schedule while all schedules are being shown
       (where x is larger than the schedule list size)<br>
       Expected: Similar to previous.
 
-### Saving data
+### Listing all schedules
 
-1. Dealing with missing/corrupted data files
+Lists all existing schedules that may be filtered by tutor index or schedule status.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Prerequisites: At least 1 existing schedule in the list.
 
-1. _{ more test cases …​ }_
+2. Test case: `list-s`<br>
+   Expected: All existing schedules are listed. `Listed all schedules` is shown in the status message.
+
+3. Test case: `list-s 1`<br>
+   Expected: All existing schedules for the first tutor in tutor list are listed. Number of schedules for the first
+   tutor is shown in the status message.
+
+4. Test case: `list-s m/1`<br>
+   Expected: All existing schedules marked with the completed status are listed. Number of completed schedules are
+   listed in the status message.
+
+5. Test case: `list-s 1 m/0`<br>
+   Expected: All existing schedules for the first tutor marked with the completed status are listed. Number of
+   completed schedules for the first tutor is shown in the status message.
+
+6. Test case: `list-s 0`<br>
+   Expected: No change to the schedule list displayed. Error details shown in the status message.
+
+7. Other incorrect list schedule commands to try: `list-s`, `list-s abc`, `list-s m/0 m/1`, `list-s x` (where x is
+   larger than the tutor list size)<br>
+   Expected: Similar to previous.
+
+### Finding a schedule
+
+Finds a schedule while all schedules are being shown
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `find-s John`<br>
+      Expected: All schedules with tutor names containing the searched keyword are listed. Number of schedules with
+      tutor names containing the searched keyword is shown in the status message.
+
+   3. Test case: `find-s`<br>
+      Expected: No schedules are found. Error details shown in the status message.
+
+### Marking a schedule
+
+Marks a schedule as missed or completed while all schedules are being shown
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `mark 1 m/1`<br>
+      Expected: First schedule marked with the completed status. Details of the marked status shown in the status
+      message.
+
+   3. Test case: `mark 1`<br>
+      Expected: No schedule is marked. Error details shown in the status message.
+
+   4. Other incorrect mark commands to test: `mark`, `mark 0 m/0`, `mark 1 m/3`, `mark abc`, `mark x m/0` (where x is
+      larger than the schedule list size)<br>
+
+### Unmarking a schedule
+
+Unmarks a schedule while all schedules are being shown
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `unmark 1`<br>
+      Expected: Status of first schedule is removed. Details of the unmarked schedule is shown in the status message.
+
+   3. Test case: `unmark 0`<br>
+      Expected: No schedule status is removed. Error details shown in the status message.
+
+   4. Other incorrect unmark commands to test: `unmark`, `unmark abc`, `unmark m/1`, `unmark x` (where x is larger 
+      than the schedule list size)<br>
+
+### Deleting a schedule
+
+Deletes a schedule while all schedules are being shown
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `delete-s 1`<br>
+      Expected: First schedule is deleted from schedule list. Details of deleted schedule shown in the status message.
+
+   3. Test case: `delete-s 0`<br>
+      Expected: No schedule is deleted. Error details shown in the status message.
+
+   4. Other incorrect delete schedule commands to test: `delete-s`, `delete-s abc`, `delete-s x` (where x is larger 
+      than the schedule list size)<br>
+
+### Viewing calendar
+
+Displays schedule on a specified day as a calendar view
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `show 2023-09-15`<br>
+      Expected: Schedules on 2023-09-15 are displayed in a calendar view. `Viewing calendar` is shown in the status 
+      message.
+
+   3. Test case: `show 2023`<br>
+      Expected: No calendar view is shown. Error details shown in the status message.
+
+   4. Other incorrect show commands to test: `show`, `show abc`, `show 123`<br>
+      Expected: Similar to previous.
+
+### Changing theme
+
+Changes the theme of TutorConnect
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `theme light`<br>
+      Expected: The theme of TutorConnect is changed to light colour scheme. Details of the changed theme is shown
+      in the status message.
+
+   3. Test case: `theme white`<br>
+      Expected: No theme change in TutorConnect. Error details shown in status message.
+
+   4. Other incorrect theme commands to test: `theme`, `theme abc`, `theme Light`
+      Expected: Similar to previous.
+
 
 ## **Appendix: Planned enhancements** 
 
