@@ -139,7 +139,6 @@ FumbleLog allows you to add personalised contacts to your contact list.
 
 Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​`
 
-
 **Acceptable values for each parameter:**
 
 | Parameter     | Format                                                                                         | Example                          |
@@ -153,7 +152,6 @@ Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [
 | `GROUP`       | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                             | `CS2103T`                        |
 
 
-
 > Below are some examples on how to use `add_person` command:
 >
 > - `add_person n/Jonathan`: Adds a person with name "Jonathan".
@@ -162,6 +160,7 @@ Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [
 > 
 > - `add_person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/2023-09-30 g/friend g/partner`: Adds a person with name "John Doe", with phone "98765432", with email "johnd@example.com", with address "John street, block 123, #01-01", with birthday "2023-09-30" and with groups "friend" and "partner".
 
+<br>
 
 **Notes on `add_person` command:**
 
@@ -169,7 +168,7 @@ Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [
 * A person can be assigned to 0 or more groups.
 * Persons with the exact same name as another person cannot be added.
 
-
+<br>
 
 **This should be the expected output when the command succeeds:**
 * Input: `add_person n/James p/93748274 e/james@gmail.com a/Computing Drive b/2001-10-20`
@@ -188,7 +187,6 @@ If the details of a contact has changed, FumbleLog allows you to easily edit you
 Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​ [ug/GROUP]…​`
 
 
-
 **Acceptable values for each parameter:**
 
 | Parameter     | Format                                                                                                           | Example                          |
@@ -203,12 +201,13 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 | `GROUP`       | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                                               | `CS2103T`                        |
 
 
-
 > Below are some examples on how to use `edit_person` command:
 > 
 > *  `edit_person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 > *  `edit_person 2 n/Betsy Crower ug/CS2103T` Edits the name of the 2nd person to be `Betsy Crower` and unassigns the contact from group `CS2103T`. Any events that Betsy Crower is assigned to is also updated with this new name.
 > *  `edit_person 3 n/Betsy Crower b/2023-09-29` Edits the name of the 3rd person to be `Betsy Crower` and changes the birthday to 29th Sep 2023. Any events that Betsy Crower is assigned to is also updated with this new name.
+
+<br>
 
 **Notes on `edit_person`command:**
 * At least one of the parameters must be provided.
@@ -217,6 +216,8 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 * Parameter `ug/` is used to un-assign a person from a group. Once removed, the person's name will not be displayed in events that the group is assigned to.
 * Only parameters `p/`, `e/`, `a/` and `b/` can be empty strings. Doing so will remove the current values for the respective fields.  
 * When you edit a person's name, the person's name will be updated in all [events](#commands-for-events) that the person is assigned to.
+
+<br>
 
 **This should be the expected output when the command succeeds:**
 * Input: `edit_person 1 n/Alexa Yeoh` changes the name of the 1st person to be `Alexa Yeoh`, leaving the rest of the fields unchanged.
@@ -228,27 +229,29 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 
 ### Deleting a person : `delete_person`
 
-Deletes the specified person from FumbleLog.
-When a person is deleted, any [events](#commands-for-events) that the person is assigned to will also be updated, i.e. the person will be unassigned from the event.
+FumbleLog allows you to organize your contact list by deleting contacts that are no longer relevant.
 
 Format: `delete_person PERSON_INDEX`
 
 **Acceptable values for each parameter:**
 
-| Parameter     | Format                                                                                                           | Example                          |
-|---------------|------------------------------------------------------------------------------------------------------------------|----------------------------------|
-| `PERSON_INDEX`| A positive integer that is smaller than or equal to the number of contacts currently displayed in FumbleLog      | `1`                              |
+| Parameter     | Format                                                                                                       | Example                          |
+|---------------|--------------------------------------------------------------------------------------------------------------|----------------------------------|
+| `PERSON_INDEX`| A positive integer that is smaller than or equal to the number of contacts currently displayed in FumbleLog. | `1`                              |
 
 
-> Below are some examples on how to use `edit_person` command:
+> Below are some examples on how to use `delete_person` command:
 > 
 > * `list_all` followed by `delete_person 2` deletes the 2nd person in the person list.
 > * `find_all Betsy` followed by `delete_person 1` deletes the 1st person in the results of the `find` command. i.e Any person named `Betsy` at index `1` will be deleted.
 
+<br>
+
 **Notes on `delete_person` command:**
 * The index refers to the index number shown in the displayed person list.
+* When a person is deleted, any [events](#commands-for-events) that the person is assigned to will also be updated, i.e. the person will be unassigned from the event.
 
-Expected output when a command succeeds:
+<br>
 
 **This should be the expected output when the command succeeds:**
 
@@ -260,27 +263,38 @@ Input: `delete_person 1` deletes the first person on the list.
 
 ### Locating persons by name or group: `find_person`
 
-Find persons whose names or groups contain any of the given keywords.
+If you would like to quickly search for a contact, FumbleLog allows you to search for contacts by name or group.
 
 Format: `find_person KEYWORD [MORE_KEYWORDS]`
 
-* **Only full words will be matched** e.g. `Han` will not match `Hans`
-  * FumbleLog will return an empty person list when there are no keyword matches.
-* The search is case-insensitive. e.g `hans` will match `Hans`
+**Acceptable values for each parameter:**
+
+| Parameter                    | Format                                                                     | Example             |
+|------------------------------|----------------------------------------------------------------------------|---------------------|
+| `KEYWORD`  or `MORE_KEYWORDS` | Use any characters including whitespace. Must not only contain whitespaces | `Alice` or `Friends` |
+
+> Below are some examples on how to use `find_person` command:
+>
+> * `find_person John` returns `john` and `John Doe`
+> * `find_person friends` returns `Alex Yeoh` as he belongs to the `friends` group.
+
+<br>
+
+**Notes on `find_person` command:**
+* Only **full words** will be matched e.g. `Han` will not match `Hans`
+* The search is **case-insensitive**. e.g `hans` will match `Hans`
+* FumbleLog will return an empty person list when there are no keyword matches.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * `find_person` searches the name of the `Person` and `Group` that they are assigned 
 to and will display them accordingly.
 
-Examples:
-* `find_person John` returns `john` and `John Doe`
-* `find_person friends` returns `Alex Yeoh` as he belongs to the `friends` group.
 <br>
 
 Expected output when the command succeeds:
 
-Input: `find_person Alexa`
+Input: `find_person Alexa` displays all contacts with the name `Alexa` in the contact list.
 
 ![result for 'find_person alex david'](images/findFriendsResult.png)
 
