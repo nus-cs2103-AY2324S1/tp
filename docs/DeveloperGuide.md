@@ -829,3 +829,7 @@ Given below are some of the possible enhancements that could be added in future 
 3. The messages for `course` commands could be more specific. We plan to replace mentions of `address book` with `courses` to better fit the context of TAvigator and reduce confusion for users.
 4. Validation checks could be added for course names to ensure valid course names when adding or editing courses. A valid format would include two to three initial alphabetical letters, followed by four numbers and one optional alphabetical letter at the end. A valid example would be `CS2103T`.
 5. We plan to implement importing student records from a csv file in future, which may create duplicated records. This would be where our merge command comes into play, merging duplicated records so that no information is lost.
+6. Currently `mark` command's design does not encompass a few nice-to-haves. We plan to add support for the following
+   - Marking of students with the same student name
+   - Marking of students with both student name field and student ID field
+   - Marking of students with case-insensitive student name
