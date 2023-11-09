@@ -95,9 +95,9 @@ Examples:
 
 Invalid examples:
 * `add n/Sally c/94149785` (missing address)
-* `add n/Sa11y! c/1234 a/Woodlands Street 11 Blk 888 #08-08` (invalid name and phone number)
-* `add n/Sa11y! c/94149785 a/` (address is blank)
-* `add n/Sa11y! c/1234 a/Woodlands Street 11 Blk 888 #08-08 r/abc` (invalid risk level)
+* `add n/Sally! c/1234 a/Woodlands Street 11 Blk 888 #08-08` (invalid name and phone number)
+* `add n/Sally c/94149785 a/` (address is blank)
+* `add n/Sally c/1234 a/Woodlands Street 11 Blk 888 #08-08 r/abc` (invalid risk level)
 
 #### 2.2.2 Deleting a Student: `delete`
 
@@ -246,7 +246,7 @@ Examples:
 
 Invalid examples:
 * `schedule n/Jon date/2001-12-09 from/07:00 to/10:45 d/first counselling session` (date is in the past)
-* `schedule n/Jon date/2023-12-09 from/16:00 to/12:45 d/first counselling session` (start time is before end time)
+* `schedule n/Jon date/2023-12-09 from/16:00 to/12:45 d/first counselling session` (end time is before start time)
 * `schedule n/Jon date/09-12-2023 from/1100 to/1230 d/first counselling session` (date and time are in the wrong format)
 * `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/` (description is empty)
 
