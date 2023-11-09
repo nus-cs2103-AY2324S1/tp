@@ -3,9 +3,12 @@ package seedu.address.commons.util;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Utilities about date and time
@@ -19,16 +22,31 @@ public class DateTimeUtil {
      */
     public static LocalDateTime parseString(String str) throws DateTimeParseException {
         requireNonNull(str);
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm[:ss]");
+
+        DateTimeFormatter formatter1 = DateTimeFormatter
+                .ofPattern("uuuu-MM-dd HH:mm[:ss]")
+                .withResolverStyle(ResolverStyle.STRICT);
+
+        DateTimeFormatter onlyDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter onlyTimeFormatter = DateTimeFormatter.ofPattern("HH:mm[:ss]");
+
         LocalDateTime result = null;
+
         try {
             result = LocalDateTime.parse(str, formatter1);
         } catch (DateTimeParseException e2) {
             LocalDateTime now = LocalDateTime.now();
+
             if (str.contains("-")) {
+                // str only contains date, will immediately throw exception otherwise
+                LocalDate onlyDate = LocalDate.parse(str, onlyDateFormatter);
+
                 String appendTime = " 00:00:00";
                 result = LocalDateTime.parse(str + appendTime, formatter1);
             } else {
+                //str only contains time, will immediately throw exception otherwise
+                LocalTime onlyTime = LocalTime.parse(str, onlyTimeFormatter);
+
                 int month = now.getMonthValue();
                 int day = now.getDayOfMonth();
                 String appendDate = now.getYear() + "-" + (month <= 9 ? "0" + month : month)
