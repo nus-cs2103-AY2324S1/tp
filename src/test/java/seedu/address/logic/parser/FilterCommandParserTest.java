@@ -37,7 +37,7 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_MetricCaseInsensitive_success() {
+    public void parse_metricCaseInsensitive_success() {
         String userInput = " " + PREFIX_TAG + "CS2103T" + " " + PREFIX_METRIC + "mEaN";
         FilterCommand expectedCommand = new FilterCommand(VALID_TAG, StatisticMetric.MEAN, 0);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -98,6 +98,31 @@ public class FilterCommandParserTest {
     public void parse_invalidScoreWithoutValue_throwParseException() {
         String userInput = " " + PREFIX_TAG + "CS2103T" + " " + PREFIX_METRIC + "SCORE";
         assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
+
+    @Test
+    public void parse_invalidScoreValue_throwParseException() {
+        String userInput = " " + PREFIX_TAG + "CS2103T" + " " + PREFIX_METRIC + "SCORE" + " " + PREFIX_VALUE + "-50";
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
+
+    @Test
+    public void parse_invalidExtraField_throwParseException() {
+        String userInput = " " + PREFIX_TAG + "CS2103T" + " " + PREFIX_METRIC + "SCORE" + " " + PREFIX_VALUE + "50"
+                + " " + PREFIX_VALUE + "60";
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+
+        String userInput2 = " " + PREFIX_TAG + "CS2103T" + " " + PREFIX_METRIC + "SCORE" + " " + PREFIX_VALUE + "50"
+                + " " + PREFIX_TAG + "CS2103T";
+        assertThrows(ParseException.class, () -> parser.parse(userInput2));
+
+        String userInput3 = " " + PREFIX_TAG + "CS2103T" + " " + PREFIX_METRIC + "SCORE" + " " + PREFIX_VALUE + "50"
+                + " " + PREFIX_METRIC + "MEAN";
+        assertThrows(ParseException.class, () -> parser.parse(userInput3));
+
+        String userInput4 = " " + PREFIX_TAG + "CS2103T" + " " + PREFIX_METRIC + "SCORE" + " " + PREFIX_VALUE + "50"
+                + " " + PREFIX_TAG + "CS2103T" + " " + PREFIX_METRIC + "MEAN";
+        assertThrows(ParseException.class, () -> parser.parse(userInput4));
     }
 
 }

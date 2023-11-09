@@ -129,7 +129,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_view_invalidIndex_throwsParseException() {
+    public void parseCommand_viewWrongIndex_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand("view 0"));
     }
@@ -143,7 +143,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_filter_invalidTag_throwsParseException() {
+    public void parseCommand_filterInvalidTag_throwsParseException() {
         String message = "val/VALUE is missing, it is compulsory. \n" + FilterCommand.MESSAGE_USAGE;
         assertThrows(ParseException.class, message, ()
             -> parser.parseCommand("filter t/Interview met/PERCENTILE"));
