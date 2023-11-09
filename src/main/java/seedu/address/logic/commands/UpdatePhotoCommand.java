@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AVATAR;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -80,7 +79,6 @@ public class UpdatePhotoCommand extends Command {
 
         Person editedPerson = createPersonWithAvatar(personToEdit, avatar);
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
