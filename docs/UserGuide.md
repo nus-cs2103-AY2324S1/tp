@@ -580,8 +580,6 @@ and the interview time has been set to `7 January 2023 3:00pm`.
 This edits the particulars of the applicant at `APPLICANT_INDEX` 1 in the applicant list. The applicant's name is changed to `Alfred`,
 and the interview has been canceled and removed.
 
-![cancel interview](images/editApplicant2.png)
-
 #### 4.2.5 Deleting an applicant: `deleteapplicant` or `dela`
 
 The applicant at the specified index will be deleted from the list of applicants.
