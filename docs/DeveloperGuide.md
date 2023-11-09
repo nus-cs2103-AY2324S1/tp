@@ -115,7 +115,7 @@ call as an example.
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 <box type="info" seamless>
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
+Note: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline reaches the end of diagram.
 </box>
 
@@ -482,13 +482,14 @@ The GUI then updates to show this information to the user.
 
 **Target user profile**:
 
-* has a need to manage a significant number of applicants
+* has a need to manage a significant number of applicants (around 250 - 500 applicants)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: introduces organisation to applicant management, recruitment processes and streamlines hiring decisions
+**Value proposition**: 
+Introduces organisation to applicant management, recruitment processes and streamlines hiring decisions
 
 ### User stories
 
@@ -501,7 +502,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | edit an applicant descriptor                               | maintain an updated database of all applicants              |
 | `* * *`  | user    | view the full list of applicants                           | view the overall progress and performance of all applicants |
 | `* * *`  | user    | delete an applicant entry                                  | only track valid applicants                                 |
-| `* * *`  | user    | add an interview for an applicant                          | plan screenings                                             |
+| `* * *`  | user    | add an interview for an applicant                          | plan screenings and keep track of an applicant's interviews |
+| `* * *`  | user    | edit an interview for an applicant                         | keep accurate data on an applicant's interview              |
 | `* * *`  | user    | store data locally                                         | use it on a daily basis consistently                        |
 | `* *`    | user    | find a specific applicant                                  | access the applicant's information quickly                  |
 | `* *`    | user    | sort applicants by a descriptor                            | find relevant applicants quickly                            |
@@ -512,6 +514,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user    | mark an applicant as undecided, offered or rejected        | keep track of applicants' application status                |
 | `*`      | user    | schedule a date for an interview                           | keep track of all interview timings                         |
 | `*`      | user    | view a graphical representation of each applicant's rating | get a quick idea of each applicant's ability                |
+
+
 
 ### Use cases
 
@@ -829,7 +833,7 @@ Guarantees: A new interview will be added to the applicant.
       Use case ends
 
 * 1b. User enters an invalid index for the applicant.
-    
+
     * 1b1. Staff-Snap shows an error message.
 
       Use case ends.
@@ -878,15 +882,15 @@ Guarantees: The specified interview will be updated.
       Use case ends
 
 * 1b. User enters an invalid index for the applicant.
-        
+
     * 1b1. Staff-Snap shows an error message.
-    
+
       Use case ends.
 
 * 1c. User enters an invalid index for the interview.
-        
+
     * 1c1. Staff-Snap shows an error message.
-    
+
       Use case ends.
 
 * 1d. User does not enter a field to edit.
@@ -921,9 +925,9 @@ Guarantees: The specified interview will be deleted from the applicant.
       Use case ends
 
 * 1b. User enters an invalid index for the applicant.
-            
+
     * 1b1. Staff-Snap shows an error message.
-        
+
       Use case ends.
 
 * 1c. User enters an invalid index for the interview.
@@ -971,7 +975,7 @@ Guarantees: The specified interview will be deleted from the applicant.
 * **Graphical User Interface (GUI)**: A type of user interface that allows users to interact with software through
   graphical icons and visual indicators.
 * **UI**:
-* 
+*
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1120,7 +1124,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Sorting applicants while all applicants are being shown
 
-    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. 
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     1. Test case: `sort d/status`<br>
        Expected: The applicants in the list are sorted by their status, in the order UNDECIDED, OFFERED, REJECTED. Success message shown in the response area.
@@ -1139,7 +1143,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     1. Test case: `filter gts/5.0`<br>
-       Expected: The applicants in the list are filtered by their score, and the updated list contains only applicants with score of at least 5.0. 
+       Expected: The applicants in the list are filtered by their score, and the updated list contains only applicants with score of at least 5.0.
        Success message shown in the response area. Applicant area shows the filtered list of applicants.
 
     1. Test case: `filter name`<br>
