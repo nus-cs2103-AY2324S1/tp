@@ -50,6 +50,7 @@ Given below are my contributions to the project.
 * **Project management**:
   * Completed tasks for each milestone.
   * Facilitated meetings within the team.
+  * Oversaw the preparation of documentation.
 
 
 * **Enhancements to existing features**:
