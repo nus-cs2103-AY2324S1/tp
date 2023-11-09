@@ -158,7 +158,8 @@ The following shows the activity diagram from when a user executes the `add-t` c
 
 ![AddTutorActivityDiagram](images/AddTutorActivityDiagram.png)
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user launches the application for the first time.
 
@@ -176,6 +177,7 @@ The following sequence diagram shows how the above steps for add tutor operation
 ![AddTutorSequenceDiagram](images/AddTutorSequenceDiagram.png)
 
 #### Design rationale
+{:.no_toc}
 
 The `add-t` command was designed this way to ensure consistency with the previous `add` command in AB3.
 
@@ -223,7 +225,8 @@ The following shows the activity diagram from when a user executes the `list-t` 
 
 ![Activity Diagram for list-t Command](images/ListTutorActivityDiagram.png)
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user has the application launched with at least 1 tutor added.
 
@@ -243,6 +246,7 @@ The following sequence diagram shows how the above steps for list tutor operatio
 ![Interactions Inside the Logic Component for the `list-t` Command](images/ListTutorSequenceDiagram.png)
 
 #### Design rationale
+{:.no_toc}
 
 The `list-t` command was designed this way to ensure consistency with the previous `list` command in AB3.
 
@@ -254,7 +258,8 @@ The following shows the activity diagram from when a user executes the `edit-t` 
 
 ![Activity Diagram for edit-t Command](images/EditTutorActivityDiagram.png)
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user has the application launched with at least 1 tutor added.
 
@@ -288,6 +293,8 @@ the lifeline reaches the end of diagram.
 </div>
 
 #### Design rationale
+{:.no_toc}
+
 **Aspect: Specifying which tutor to edit**
 - **Alternative 1 (current choice):** Using tutor index.
     - Pros: Using the tutor index provides a clear and unambiguous way for users to specify which tutor they want to 
@@ -317,7 +324,8 @@ The following shows the activity diagram from when a user executes the `find-t` 
 
 ![Activity Diagram for find-t Command](images/FindTutorActivityDiagram.png)
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user has the application launched.
 
@@ -346,6 +354,7 @@ the lifeline reaches the end of diagram.
 </div>
 
 #### Design rationale
+{:.no_toc}
 
 **Aspect: Search criteria**
 - **Alternative 1 (current choice):** Only allowing users to search for tutors based on their names.
@@ -371,7 +380,8 @@ The following shows the activity diagram when a user executes the `delete-t` com
 
 ![Activity diagram for delete-t command](images/DeleteTutorActivityDiagram.png)
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user has the application launched with at least 1 tutor added.
 
@@ -402,6 +412,8 @@ but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 #### Design rationale
+{:.no_toc}
+
 The `delete-t` command was designed this way to ensure consistency with the previous `delete` person command.
 
 **Aspect: Specifying which tutor to delete**
@@ -428,7 +440,8 @@ The `delete-t` command was designed this way to ensure consistency with the prev
 
 ### Add Schedule Feature
 
-#### Implementation Details
+#### Implementation details
+{:.no_toc}
 
 The add schedule feature is facilitated by `AddScheduleCommand`. It extends `Command` with the necessary implementation to add a schedule to a `Model`. Additionally, it implements the following operation:
 
@@ -470,6 +483,7 @@ The following sequence diagram shows how the operation works:
 </div>
 
 #### Design rationale
+{:.no_toc}
 
 **Aspect: Checking for clashing schedule:**
 
@@ -501,7 +515,8 @@ usage scenario and a detailed description of how the edit schedule mechanism beh
 
 ![EditScheduleActivityDiagram](images/EditScheduleActivityDiagram.png)
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user has the application launched with at least 1 schedule added.
 
@@ -536,6 +551,7 @@ the lifeline reaches the end of diagram.
 </div>
 
 #### Design rationale
+{:.no_toc}
 
 **Aspect: Setting of schedule status**
 * **Alternative 1:** Use an additional prefix to edit the status of a schedule. 
@@ -564,7 +580,8 @@ usage scenario and a detailed description of how the list schedule mechanism beh
 
 ![ListScheduleActivityDiagram](images/ListScheduleActivityDiagram.png)
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user has the application launched with at least 1 schedule added.
 
@@ -596,6 +613,7 @@ the lifeline reaches the end of diagram.
 </div>
 
 #### Design rationale
+{:.no_toc}
 
 **Aspect: Filtering schedule by tutor name**
 * **Alternative 1:** Use an additional prefix to filter the list of schedules by tutor name.
@@ -613,7 +631,8 @@ The following shows the activity diagram from when a user executes the `find-s` 
 
 ![FindScheduleActivityDiagram](images/FindScheduleActivityDiagram.png)
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user has the application launched.
 
@@ -642,6 +661,7 @@ the lifeline reaches the end of diagram.
 </div>
 
 #### Design Rationale
+{:.no_toc}
 
 **Aspect: Search criteria**
 - **Alternative 1 (current choice):** Only allowing users to search for schedules based on their names.
@@ -666,7 +686,8 @@ The following shows the activity diagram when a user executes the `mark` command
 
 ![MarkScheduleActivityDiagram](images/MarkScheduleActivityDiagram.png)
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user has the application launched with at least 1 schedule added.
 
@@ -708,6 +729,7 @@ the lifeline reaches the end of diagram.
 </div>
 
 #### Design rationale
+{:.no_toc}
 
 **Aspect: Usage of the `pending` status**
 - **Alternative 1 (current choice):** Users unable to mark a schedule as `pending`.
@@ -750,7 +772,8 @@ The following shows the activity diagram from when a user executes the `unmark` 
 
 ![UnmarkScheduleActivityDiagram](images/UnmarkScheduleActivityDiagram.png)
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user has the application launched with at least 1 schedule marked as completed or missed.
 
@@ -791,6 +814,7 @@ the lifeline reaches the end of diagram.
 </div>
 
 #### Design rationale
+{:.no_toc}
 
 **Aspect: Existence of unmark command**
 - **Alternative 1 (current choice):** Separate `unmark` command for unmarking schedules.
@@ -807,7 +831,10 @@ the lifeline reaches the end of diagram.
       its interpretation.
 
 ### Delete Schedule Feature
-#### Implementation Details
+
+#### Implementation details
+{:.no_toc}
+
 The delete schedule feature is facilitated by `DeleteScheduleCommand`, which extends from `Command` with the necessary implementation to delete a schedule by a given index.
 The following operation is exposed in the abstract `Command` class as an abstract method:
 * `DeleteScheduleCommand#execute(Model)` - Deletes the schedule from the `Model` using the given index.
@@ -833,7 +860,10 @@ Given below is an example scenario on how the delete schedule command behaves:
 The following sequence diagram shows how the above steps for delete schedule operation works, taking `execute("delete-s 1")` API call as an example.
 
 ![Sequence diagram for delete-s command](images/DeleteScheduleSequenceDiagram.png)
+
 #### Design rationale
+{:.no_toc}
+
 The `delete-s` command was designed this way to ensure consistency with the previous delete person command.
 
 ### Show calendar feature
@@ -844,7 +874,8 @@ The following shows the activity diagram from when a user executes the `show` co
 
 ![Activity Diagram for show Command](images/ShowCalendarActivityDiagram.png)
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user has the application launched.
 
@@ -871,6 +902,7 @@ the lifeline reaches the end of diagram.
 </div>
 
 #### Design rationale
+{:.no_toc}
 
 **Aspect: Defining which tutor to display for calendar**
 - **Alternative 1 (current choice):** Show calendar for all tutors
@@ -894,7 +926,8 @@ the lifeline reaches the end of diagram.
 The "Change Theme" feature allows users to change the colour theme of the address book. Below, we provide an example 
 usage scenario and a detailed description of how the change theme mechanism behaves at each step.
 
-#### Implementation
+#### Implementation details
+{:.no_toc}
 
 Step 1. The user launches the application for the first time.
 
@@ -929,6 +962,7 @@ the lifeline reaches the end of diagram.
 </div>
 
 #### Design rationale
+{:.no_toc}
 
 **Aspect: Parsing the NEW_THEME**
 - **Alternative 1 (current choice):** New theme is parsed and the filepath is allocated in `ThemeCommandParser`.
@@ -947,17 +981,19 @@ the lifeline reaches the end of diagram.
     from `MainWindow` directly. Thus, `CommandResult` does not need another constructor and getter method.
   - Cons: `MainWindow` has to parse arguments.
 
-### Split MainWindow to display both tutor and schedule list together
+### Split `MainWindow` to display both tutor and schedule list together
 
 The main window of TutorConnect now displays both the tutor and schedule list side by side to give users an overview
 and provide easy reference when inputting commands to update the tutors or schedules.
 
 #### Implementation details
+{:.no_toc}
 
 To display both the tutor and schedule list together, another panel `ListsPanel` is used to combine both the 
 `personListPanel` and `scheduleListPanel` together in order to display them as a single panel in the `MainWindow`.
 
 #### Design rationale
+{:.no_toc}
 
 Initially, the list of tutors and schedules are individual panels and the `MainWindow` can only display one at a time.
 Therefore, users have to enter `list-t` or `list-s` commands to alternate between panels to refer when entering
@@ -971,11 +1007,13 @@ reference to both lists at the same time, providing convenience for users.
 
 The list of schedules is sorted to be more organised and easier to navigate for users.
 
-#### Implementation Details
+#### Implementation details
+{:.no_toc}
 
 The schedules are sorted by implementing the `Comparable` interface and its required `compareTo()` method.
 
 #### Design rationale
+{:.no_toc}
 
 `Schedule`s are sorted by `StartTime` as start time is what tuition centre coordinators are most concerned with.
 
