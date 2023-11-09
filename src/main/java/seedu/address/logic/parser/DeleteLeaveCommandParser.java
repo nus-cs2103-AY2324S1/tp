@@ -23,6 +23,7 @@ public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand> {
     public DeleteLeaveCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_FROM, PREFIX_TO);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_FROM, PREFIX_TO);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_FROM, PREFIX_TO)
                 || !argMultimap.getPreamble().isEmpty()) {

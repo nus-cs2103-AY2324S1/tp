@@ -22,6 +22,7 @@ public class ResetCommandParser implements Parser<ResetCommand> {
     public ResetCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIELD);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIELD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_FIELD) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResetCommand.MESSAGE_USAGE));
