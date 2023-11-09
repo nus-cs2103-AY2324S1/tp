@@ -405,12 +405,13 @@ Edits an interview of an applicant.
 
 Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
 * Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
+* `INTERVIEW_INDEX` refers to the index of the interview to be edited of the applicant.
 * At least one of the optional fields must be provided.
 * Existing values will be updated by the input values.
 
 Example:
 * `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview with rating 7.8.
-* `editi 3 i/2 t/screening` edits the 2nd interview type of the 3rd person in the displayed applicant list to a screening interview.
+* `editi 3 i/2 t/screening` edits the 2nd interview of the 3rd person in the displayed applicant list to a screening interview.
 * `editi 2 i/1 r/8.9` edits the 1st interview rating of the 2nd person in the displayed applicant list to 8.9.
 
 <br>
@@ -425,6 +426,7 @@ Deletes an interview from an applicant.
 
 Format: `deletei INDEX i/INTERVIEW_INDEX`
 * Deletes from the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
+* `INTERVIEW_INDEX` refers to the index of the interview to be edited of the applicant.
 
 Example:
 * `deletei 1 i/2` deletes the 2nd interview of the 1st person in the displayed applicant list.
@@ -514,10 +516,11 @@ Format: `filter [n/NAME] [e/EMAIL] [p/POSITION] [hp/PHONE] [s/STATUS] [lts/SCORE
 * All fields are optional, however at least one of the optional fields must be provided.
 * Any combination of multiple different fields is allowed.
 * Only one of each field can be provided.
-* Only applicants matching all fields will be returned. (i.e. AND search).
-* for `[n/NAME]` field, only applicants whose name contains the full substring will be returned, e.g. `n/Ivan Chew` will **NOT** return `Ivan Lee`.
+* Only applicants matching **ALL** fields will be returned. (i.e. AND search).
+* For `[n/NAME]` field, only applicants whose name contains the full substring will be returned, e.g. `n/Ivan Chew` will **NOT** return `Ivan Lee`.
 * `[n/NAME]` `[e/EMAIL]` `[p/POSITION]` fields are case-insensitive, e.g. `n/JOHN` will return `john`.
 * If provided, the fields `NAME`, `PHONE`, `EMAIL`, and `POSITION` must satisfy the [parameter constraints](#command-parameters-1) previously described.
+* `[s/STATUS]` takes in a value of either `u` or `o` or `r`.
 * `[lts/SCORE]` `[gts/SCORE]` fields do **NOT** include equality in filters, e.g. `gts/7` will return all applicants whose score is strictly greater than `7`.
 
 Example:
