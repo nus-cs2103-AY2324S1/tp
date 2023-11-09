@@ -51,6 +51,8 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
 >
 > :warning: **`*`**: The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
 
+>:bulb: Longer outputs have to scrolled to be viewed.
+
 5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -130,8 +132,8 @@ Expected outputs when the command fails:
 
 Edits an existing patient's details in HealthSync.
 
- * Edits the person with the specified [name](#name) or [ID](#ID).
- * If an invalid name or IC Number is passed, an error message will be logged.
+ * Edits the patient with the specified [name](#name) or [ID](#ID).
+ * If an invalid name or ID Number is passed, an error message will be logged.
  * At least one [field](#fields) to edit must be provided.
  * Existing fields will be updated to the input values.
  * If the particular field does not exist, the corresponding field with details will be added.
@@ -139,7 +141,9 @@ Edits an existing patient's details in HealthSync.
 >:bulb: Update multiple fields in a single `edit` command to save time
 
 [Format](#command-format):
-`edit n/NAME or id/ID_NUMBER <field> <[field]>...`
+ * `edit n/NAME <field> <[field]>...`
+ * `edit id/ID_NUMBER <field> <[field]>...`
+ * `edit n/NAME id/ID_NUMBER <field> <[field]>...`
 
 >:bulb: Use `e` as a shortcut for `edit`
 
@@ -159,7 +163,9 @@ Expected outputs when command fails:
 Deletes the specified patient or patient's specific details from HealthSync.
 
 * Deletes the patient or an optional [field](#fields) of the patient with the specified [name](#name) or [ID](#ID).
-* The Name or ID must be valid.
+* You can choose to delete using only name or ID.
+* If both name and ID are used, both must be valid and belong to the same patient.
+* You can only delete one patient at a time.
 * To delete a specified field only instead of the entire patient, indicate the field in the command.
   * You do not have to specify the value of that field to delete it, if HealthSync only stores 1 value for that field.
   * If you do not specify which field to delete for fields that can have multiple values,
@@ -167,7 +173,9 @@ Deletes the specified patient or patient's specific details from HealthSync.
 * The fields currently allowed for deletion are [Appointment](#appointment) and [Medical Histories](#medical-history).
 
 [Format](#command-format):
-`delete n/NAME or id/ID_NUMBER [ap/ or m/MEDICAL_HISTORY...]`
+ * `delete n/NAME [ap/] [m/MEDICAL_HISTORY...]`
+ * `delete id/ID_NUMBER [ap/] [m/MEDICAL_HISTORY...]`
+ * `delete n/NAME id/ID_NUMBER [ap/] [m/MEDICAL_HISTORY...]`
 
 >:bulb: Use the shortcut `d` for faster patient-deleting
 
@@ -177,6 +185,7 @@ Example commands:
 * `delete n/John Doe m/`
 
 >:bulb: Specify the medical history to be deleted using `m/` if it's the only medical history that needs to be deleted
+e.g `delete n/John Doe m/Diabetes`
 
 ![result for 'delete n/Alex Yeoh'](images/deleteResult.jpg)
 
@@ -203,9 +212,10 @@ Deletes all patients from HealthSync.
 Searches the patient list for all patients matching the [Name](#name), [ID](#ID) or [Appointment](#appointment)
 and returns their related information.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The search is case-insensitive.  
+e.g `hans` will match `Hans`, `08-Jan-2023 12 13` will match `08-jan-2023 12 13`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the name, ID and Appointment are searched.
+* Name, IC Number and Appointment can be searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * For the name and ID, only patients matching at least one keyword will be returned.
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
@@ -216,14 +226,17 @@ and returns their related information.
   the appointment timing for 10th August 23, 9 o'clock.
 
 [Format](#command-format):
-`find n/NAME or id/ID_NUMBER or ap/APPT`
+ * `find n/NAME`
+ * `find id/ID_NUMBER`
+ * `find ap/APPT`
+ * You may combine the fields. Example: `find n/NAME id/ID_NUMBER`
 
 >:bulb: Use the shortcut `f` for faster patient-finding
 
 Example commands:
 * `find n/Alex Yeoh`
 * `find id/T0123436F`
-* `find ap/12-Dec 0900 0900`
+* `find ap/12-Dec 0000 2359`
 * `find n/Alex Yeoh id/T0123436F`
 
 ![result for 'find id/T0123456F'](images/findidT0123456FResult.jpg)
@@ -495,7 +508,7 @@ The information fields are given below:
 | `e/`   | [Email Address](#email-address)     | `e/example@a.com`          | `e/EMAIL`                |                                 |
 | `a/`   | [Address](#address)                 | `a/Location, Here Rd`      | `a/ADDRESS`              |                                 |
 | `m/`   | [Medical History](#medical-history) | `m/Asthmatic`              | `m/MEDICAL_HISTORY`      | Can have multiple of this field |
-| `ap/`  | [Appointment](#appointment)         | `ap/11-2-2023 11:00 12:00` | `ap/APPT `               |                                 |
+| `ap/`  | [Appointment](#appointment)         | `ap/11-2-2023 11:00 12:00` | `ap/APPT`                |                                 |
 
 #### Name
 
@@ -600,17 +613,17 @@ JavaScript Object Notation. This is the file format used by HealthSync to save a
 
 ## Command summary
 
-| Action         | Shortcut | Format, Examples                                                                                                                              |
-|----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**       | `h`      | `help`                                                                                                                                        |
-| **List**       | `ls`     | `list`                                                                                                                                        |
-| **Add**        | `a`      | `add n/NAME id/ID_NUMBER fields ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
-| **Edit**       | `e`      | `edit n/NAME [fields] ...` *or* `edit id/ID_NUMBER [fields] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                          |
-| **Delete**     | `d`      | `delete n/NAME`                                                                                                                               |
-| **Clear**      | `c`      | `clear`                                                                                                                                       |
-| **Find**       | `f`      | `find n/NAME` *or* `find id/ID_NUMBER` *or* `find ap/APPT` <br> e.g., `find n/James Jake` *or* `find id/T0123436F`                            |
-| **Log**        | `l`      | `log`                                                                                                                                         |
-| **Append Log** | `al`     | `alog`                                                                                                                                        |
-| **Clear Log**  | `cl`     | `clog`                                                                                                                                        |
-| **Undo**       | `u`      | `undo`                                                                                                                                        |
-| **Exit**       | `e`      | `exit`                                                                                                                                        |
+| Action         | Shortcut | Format, Examples                                                                                                                                               |
+|----------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**       | `h`      | `help`                                                                                                                                                         |
+| **List**       | `ls`     | `list`                                                                                                                                                         |
+| **Add**        | `a`      | `add n/NAME id/ID_NUMBER fields ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com`                  |
+| **Edit**       | `e`      | `edit n/NAME [field] ...` <br>`edit id/ID_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                                              |
+| **Delete**     | `d`      | `delete n/NAME [field] ...`<br> `delete id/ID_NUMBER [field] ...` <br> e.g., `delete n/Alex Yeoh m/Diabetes`                                                   |
+| **Clear**      | `c`      | `clear`                                                                                                                                                        |
+| **Find**       | `f`      | `find n/NAME` <br> `find id/ID_NUMBER` <br> `find ap/APPOINTMENT` <br> e.g., `find n/James Jake` *or* `find id/T0123436F` *or* `find ap/08-aug-2023 0000 2359` |
+| **Log**        | `l`      | `log`                                                                                                                                                          |
+| **Append Log** | `al`     | `alog`                                                                                                                                                         |
+| **Clear Log**  | `cl`     | `clog`                                                                                                                                                         |
+| **Undo**       | `u`      | `undo`                                                                                                                                                         |
+| **Exit**       | `e`      | `exit`                                                                                                                                                         |
