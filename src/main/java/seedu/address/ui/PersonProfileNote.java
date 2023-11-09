@@ -30,6 +30,8 @@ public class PersonProfileNote extends UiPart<SplitPane> {
     private final PersonProfile personProfile;
     private String value;
     private State state;
+    private boolean isInConfirmationDialog;
+
     // endregion
 
     // region Enums
@@ -184,12 +186,18 @@ public class PersonProfileNote extends UiPart<SplitPane> {
 
     @FXML
     void setFocus() {
-        personProfile.triggerEvent(PersonProfile.Event.BEFORE_START_EDIT);
-        updateState(State.EDITING);
+        if (!isInConfirmationDialog) {
+            personProfile.triggerEvent(PersonProfile.Event.BEFORE_START_EDIT);
+            updateState(State.EDITING);
+        }
     }
 
     boolean isEditing() {
         return state == State.EDITING;
+    }
+
+    public void setIsInConfirmationDialog(boolean isInConfirmationDialog) {
+        this.isInConfirmationDialog = isInConfirmationDialog;
     }
 
     // endregion

@@ -481,6 +481,8 @@ public class PersonProfile extends UiPart<Region> {
     public void setIsInConfirmationDialog(boolean isInConfirmationDialog) {
         uiElements.values().stream()
                 .forEach(field -> field.setIsInConfirmationDialog(isInConfirmationDialog));
+        tagUI.setIsInConfirmationDialog(isInConfirmationDialog);
+        noteUI.setIsInConfirmationDialog(isInConfirmationDialog);
     }
 
     /**
