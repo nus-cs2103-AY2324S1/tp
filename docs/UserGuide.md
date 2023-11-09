@@ -637,6 +637,7 @@ To use this command, you must have selected a lesson or student using the `show`
 **Tips:**
 - A lesson can have multiple students, and a student can have multiple lessons. Just run the `linkTo` command multiple times.
 - As of now, you cannot unlink a student from a lesson and vice versa. Use caution when running the `linkTo` command.
+- To link a lesson to a student, the lesson must first be selected. To link a student to a lesson, the student must first be selected.
 </box>
 
 #### Example usage
@@ -677,6 +678,28 @@ LinkTo command usage: linkTo [LESSON_NAME]
 Example: linkTo CS2103T lab1
 Note: This command is only available when a student is shown
 ```
+
+### Viewing the linked students of a lesson, or the linked lessons of a student : `nav`
+After linking students to lessons or vice versa, you can "navigate" between the student and their linked lessons, or the lesson and its linked students.
+This comes in handy when you want to view the details of students in a lesson, or see what lessons a student has upcoming.
+
+#### Command format
+- When a lesson or a student is selected and there are associated students/lessons:
+  - `nav`
+
+<box type="tip" seamless>
+
+**Tips:**
+- The lesson (or student) must have at least one linked student (or lesson) for the command to work.
+  </box>
+
+#### Example usage
+- When a lesson is selected and it has linked students:
+  - `nav`
+  - Result: The app changes to the student list and only shows the students that are linked to the lesson.
+- When a lesson is selected and it has linked students:
+  - `nav`
+  - Result: The app changes to the schedule list and only shows the lessons that are linked to the student.
 
 ### Command history
 
