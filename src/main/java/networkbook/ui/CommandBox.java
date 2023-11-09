@@ -30,15 +30,15 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
-    private static final KeyCombination SHORTCUT_FIND =
+    private static final KeyCharacterCombination SHORTCUT_FIND =
             new KeyCharacterCombination("F", KeyCombination.SHORTCUT_DOWN);
-    private static final KeyCombination SHORTCUT_CREATE =
+    private static final KeyCharacterCombination SHORTCUT_CREATE =
             new KeyCharacterCombination("N", KeyCombination.SHORTCUT_DOWN);
-    private static final KeyCombination SHORTCUT_EDIT =
+    private static final KeyCharacterCombination SHORTCUT_EDIT =
             new KeyCharacterCombination("G", KeyCombination.SHORTCUT_DOWN);
-    private static final KeyCombination SHORTCUT_UNDO =
+    private static final KeyCharacterCombination SHORTCUT_UNDO =
             new KeyCharacterCombination("U", KeyCombination.SHORTCUT_DOWN);
-    private static final KeyCombination SHORTCUT_REDO =
+    private static final KeyCharacterCombination SHORTCUT_REDO =
             new KeyCharacterCombination("R", KeyCombination.SHORTCUT_DOWN);
     private static final KeyCode SHORTCUT_UP = KeyCode.UP;
     private static final KeyCode SHORTCUT_DOWN = KeyCode.DOWN;
@@ -68,19 +68,20 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if (SHORTCUT_FIND.match(event)) {
+                if (KeyboardShortcutUtil.shortcutMatchEvent(SHORTCUT_FIND, event)) {
+                    System.out.println("find shortcut executed");
                     autoFillCommandIfEmpty(FindCommand.COMMAND_WORD + WHITESPACE);
                     event.consume();
-                } else if (SHORTCUT_CREATE.match(event)) {
+                } else if (KeyboardShortcutUtil.shortcutMatchEvent(SHORTCUT_CREATE, event)) {
                     autoFillCommandIfEmpty(CreateCommand.COMMAND_WORD + WHITESPACE);
                     event.consume();
-                } else if (SHORTCUT_EDIT.match(event)) {
+                } else if (KeyboardShortcutUtil.shortcutMatchEvent(SHORTCUT_EDIT, event)) {
                     autoFillCommandIfEmpty(EditCommand.COMMAND_WORD + WHITESPACE);
                     event.consume();
-                } else if (SHORTCUT_UNDO.match(event)) {
+                } else if (KeyboardShortcutUtil.shortcutMatchEvent(SHORTCUT_UNDO, event)) {
                     autoFillCommandIfEmpty(UndoCommand.COMMAND_WORD);
                     event.consume();
-                } else if (SHORTCUT_REDO.match(event)) {
+                } else if (KeyboardShortcutUtil.shortcutMatchEvent(SHORTCUT_REDO, event)) {
                     autoFillCommandIfEmpty(RedoCommand.COMMAND_WORD);
                     event.consume();
                 } else if (noModifier(event) && event.getCode() == SHORTCUT_UP) {
