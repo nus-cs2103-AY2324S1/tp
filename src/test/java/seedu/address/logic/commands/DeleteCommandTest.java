@@ -308,7 +308,6 @@ public class DeleteCommandTest {
         assertEquals(expectedString, deleteCommand.toString());
     }
 
-    // TODO
     @Test
     public void toString_tagsAndStatus() {
         DeleteCommand deleteCommand = new DeleteCommand(PREDICATE_LIST_CONTAINING_TAG_AND_STATUS_ONE);
