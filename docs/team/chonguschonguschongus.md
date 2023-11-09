@@ -3,19 +3,22 @@ layout: page
 title: Isaac's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: MediLink Contacts
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+MediLink Contacts aims to help medical staff including nurses/doctors/pharmacists navigate through patient details in
+their high workload and time-pressured working environment. When medical emergencies arise, it becomes crucial to
+provide rapid access to emergency contacts for patients and access other details of the patients to make decisions more
+quickly. It is optimised for CLI so that users can quickly access the information. There is also a GUI created with
+JavaFX.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
-
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Enhanced the Find feature to function with NRIC, blood type, gender as well as name.
+    * What it does: Allows users to search for Patients/Doctors by their NRIC, blood type, gender or simply name
+    * Justification: Users can search by a specific attribute, increasing convenience
+ 
+* **New Feature**: Added a Find Appointment function to locate a specific appointment by NRIC of people involved
+* **New Feature** Added a Delete Appointment function to delete a specific appointment by NRIC of people involved
 
 * **Code contributed**: [RepoSense link]()
 
@@ -23,13 +26,13 @@ Given below are my contributions to the project.
     * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 
 * **Enhancements to existing features**:
+    * Wrote an abstract UniqueObjectList that can be inherited to form UniqueLists of Patients, Doctors and Appointments 
     * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+    * Wrote additional tests for existing features (Pull requests [\#36](), [\#38]())
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+        * Added documentation for the features `find`, `delete-appt`, `find-appt` [\#72]()
     * Developer Guide:
         * Added implementation details of the `delete` feature.
 
