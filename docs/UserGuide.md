@@ -141,17 +141,16 @@ Before you proceed to use commands to manage persons, you should know the proper
 
 <panel header=":fa-solid-book: **Command Parameter Table**" type="secondary" expanded no-close>
 
-| Parameter | Format                                                                                                                                                                                                                       | Example                        |
-|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| `NAME`     | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                                                                                                                                                                | `John Doe`                     |
-| `PHONE_NUMBER` | Use `0-9` only without whitespaces and should be at least 3 digits long and maximum of 17 digits.                                                                                                                            | `p/98765432`                   |
-| `EMAIL`       | Be in format `local-part@domain`. `local_part` should only contain alphanumeric values and special characters `+`, `_`, `.` and `-`. `domain` be at least 2 characters long, and start and end with alphanumeric characters. | `johndoe@gmail.com`              |
-| `ADDRESS` | Use any characters.                                                                                                                                                                                                          | `John Street, block 123, #01-01` |
-| `BIRTHDAY` | Have format `yyyy-MM-dd` and should not be later than current date.                                                                                                                                                          | `2001-12-30 `                    |
-| `REMARK` | Use any characters.                                                                                                                                                                                                          | `Owes me $2.`                    |
-| `GROUP` | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                                                                                                                                                           | `CS2103T`                      |
+| Parameter      | Format                                                                                                                                                                                                                       | Example                          |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
+| `NAME`         | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                                                                                                                                                                | `John Doe`                       |
+| `PHONE_NUMBER` | Use `0-9` only without whitespaces and should be at least 3 digits long and maximum of 17 digits.                                                                                                                            | `p/98765432`                     |
+| `EMAIL`        | Be in format `local-part@domain`. `local_part` should only contain alphanumeric values and special characters `+`, `_`, `.` and `-`. `domain` be at least 2 characters long, and start and end with alphanumeric characters. | `johndoe@gmail.com`              |
+| `ADDRESS`      | Use any characters.                                                                                                                                                                                                          | `John Street, block 123, #01-01` |
+| `BIRTHDAY`     | Have format `yyyy-MM-dd` and should not be later than current date.                                                                                                                                                          | `2001-12-30 `                    |
+| `REMARK`       | Use any characters.                                                                                                                                                                                                          | `Owes me $2.`                    |
+| `GROUP`        | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                                                                                                                                                           | `CS2103T`                        |
 
-</panel>
 
 ### Adding a person: `add_person`
 
@@ -299,21 +298,13 @@ Format: `list_persons`
 ### Properties of events
 Before you proceed to use commands to manage events, you should know the properties of an event in FumbleLog.
 
-<panel header=":fa-solid-book: **Command Parameter Table**" type="secondary" expanded no-close>
-
-| Parameter                  | Format                                                                        | Example           |
-|----------------------------|-------------------------------------------------------------------------------|-------------------|
-| `EVENT_NAME`               | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                 | `CS2103T meeting` |
-| `DATE`                     | Have format `yyyy-MM-dd` and should not be earlier than current date.         | `2023-12-01` |
-| `START_TIME` and `END_TIME` | Have format `HHmm`. `START_TIME` should be earlier than `END_TIME`.           | `1400` |
-| `NAME`| Multiple persons can be assigned to an event but only existing persons name can be added. | `John Doe` |
-| `GROUP` | Multiple groups can be assigned to an event but only existing groups can be added. | `CS2103T` |
-
-
-
-
-
-</panel>
+| Parameter                   | Format                                                                                    | Example           |
+|-----------------------------|-------------------------------------------------------------------------------------------|-------------------|
+| `EVENT_NAME`                | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                             | `CS2103T meeting` |
+| `DATE`                      | Have format `yyyy-MM-dd` and should not be earlier than current date.                     | `2023-12-01`      |
+| `START_TIME` and `END_TIME` | Have format `HHmm`. `START_TIME` should be earlier than `END_TIME`.                       | `1400`            |
+| `NAME`                      | Multiple persons can be assigned to an event but only existing persons name can be added. | `John Doe`        |
+| `GROUP`                     | Multiple groups can be assigned to an event but only existing groups can be added.        | `CS2103T`         |
 
 ### Adding an event : `add_event`
 
