@@ -214,14 +214,20 @@ Creates a new contact in the course with the specified name and details.
 
 Format: `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP_ID]…`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note that STUDENT_ID should be unique for all students**<br>
+
+</div>
+
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
 * `PHONE_NUMBER` should be a string made up of numbers
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
+* `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
 
 Examples:
-* `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E`
-* `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G2`
+* `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234568E`
+* `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234569E t/G2`
 
 #### 3.2.2 Editing a contact : `edit`
 
@@ -348,15 +354,15 @@ Examples:
 
 #### 3.2.9 Merging two students : `merge`
 
-Merges two students in the current address book. 
+Merges two students in the current address book.
 
 ![merge](images/mergeCommand.png)
 
 Format: `merge PRIMARY_INDEX SECONDARY_INDEX`
 
-* Information of the primary student is retained.
-* If any information fields of the primary student are empty, they are filled with information of the secondary student.
-* The merged student contains tutorial groups of both students.
+* NAME, PHONE_NUMBER, EMAIL, and STUDENT_ID of the primary student is retained.
+* The merged student contains the tutorial groups of both students.
+* The merged student contains attendance records of both students. In case of duplicated weeks, the attendance record of the primary student will be retained.
 
 Examples:
 * `merge 1 2` merges the information of the first two displayed students.
@@ -399,7 +405,7 @@ _Details coming soon ..._
 
 ## 4. Planned Enhancements
 
-### `[Coming in v2.0]` Marking attendance of student: `mark` 
+### `[Coming in v2.0]` Marking attendance of student: `mark`
 
 * Support marking of students with same `STUDENT_NAME`!
 * Support marking of students with both `STUDENT_NAME` and `STUDENT_ID`!
@@ -429,8 +435,8 @@ _Details coming soon ..._
 | **Delete** | `delete all [tg/TUTORIAL_GROUP_ID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                                                   |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                                                                       |
 | **Exit**   | `exit`                                                                                                                                                                                                         |
-| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… / id/STUDENT_ID [STUDENT_ID]…` <br/> e.g., `find n/Anthony Yiqiao`                                                                                                        |                                                                                                   
-| **List**   | `list attendance w/WEEK_NUMBER [tg/TUTORIAL_GROUP_ID]`<br/> e.g., `list students`                                                                                                                              |                                                          
+| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… / id/STUDENT_ID [STUDENT_ID]…` <br/> e.g., `find n/Anthony Yiqiao`                                                                                                        |
+| **List**   | `list attendance w/WEEK_NUMBER [tg/TUTORIAL_GROUP_ID]`<br/> e.g., `list students`                                                                                                                              |
 | **Help**   | `help`                                                                                                                                                                                                         |
 | **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… / id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER [r/REASON_OF_ABSENCE]` <br/> e.g., `mark n/Zong Jin, Fu Yiqiao a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
 | **Merge**  | `merge [PRIMARY_INDEX] [SECONDARY_INDEX]` <br/> e.g., `merge 1 2`                                                                                                                                              |
