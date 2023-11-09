@@ -16,12 +16,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -33,18 +32,18 @@ public class DeleteCommand extends UndoableCommand {
     public static final String COMMAND_WORD_ALIAS = "d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
-            + ": Delete the Patient identified by the full Name or NRIC of the patient.\n"
-            + "Parameters: n/NAME or id/NRIC\n"
+            + ": Delete the Patient identified by the full Name or ID of the patient.\n"
+            + "Parameters: n/NAME or id/ID\n"
             + "Fields that can be deleted: ap/APPOINTMENT m/MEDICAL_HISTORY \n"
             + "Example 1: " + COMMAND_WORD + " n/John Doe or " + COMMAND_WORD + " id/S1234567A " + "ap/ m/\n"
             + "Example 2: " + COMMAND_WORD_ALIAS + " n/Alex Yeoh or " + COMMAND_WORD_ALIAS + " id/T0123456F";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Patient: %1$s";
+    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
 
-    public static final String MESSAGE_DELETE_PERSON_FIELD_SUCCESS = "Deleted Patient's field: %1$s";
+    public static final String MESSAGE_DELETE_PATIENT_FIELD_SUCCESS = "Deleted Patient's field: %1$s";
 
-    public static final String MESSAGE_PERSON_NOT_FOUND =
-            "The given combination of Name and NRIC does not match any patient in the Patient List.";
+    public static final String MESSAGE_PATIENT_NOT_FOUND =
+            "The given combination of Name and ID does not match any patient in the Patient List.";
 
     public static final String MESSAGE_NO_APPOINTMENT_TO_DELETE = "Patient does not have an appointment to delete.";
 
@@ -54,32 +53,32 @@ public class DeleteCommand extends UndoableCommand {
     public static final String MESSAGE_INVALID_MEDICAL_HISTORY =
             "Patient does not have the medical histories specified.";
 
-    public static final String MESSAGE_UNDO_DELETE_PERSON_SUCCESS = "Undoing the deletion of Patient:  %1$s";
+    public static final String MESSAGE_UNDO_DELETE_PATIENT_SUCCESS = "Undoing the deletion of Patient:  %1$s";
 
     public static final String MESSAGE_UNDO_DELETE_FIELD_SUCCESS = "Undoing the deletion of a Patient's field:  %1$s";
 
     /**
-     * The original state of the person.
+     * The original state of the patient.
      */
     private Person originalPerson;
 
     /**
-     * The state of the person after a field has been deleted.
+     * The state of the patient after a field has been deleted.
      */
     private Person editedPerson;
     private final Name name;
-    private final Nric nric;
+    private final Id id;
     private final DeletePersonDescriptor deletePersonDescriptor;
 
     /**
-     * @param nric                   of the person in the filtered person list to
+     * @param id                     of the patient in the filtered patient list to
      *                               edit
-     * @param name                   of the person in the filtered person list to
+     * @param name                   of the patient in the filtered patient list to
      *                               edit
-     * @param deletePersonDescriptor details to delete the person with
+     * @param deletePersonDescriptor details to delete the patient with
      */
-    public DeleteCommand(Nric nric, Name name, DeletePersonDescriptor deletePersonDescriptor) {
-        this.nric = nric;
+    public DeleteCommand(Id id, Name name, DeletePersonDescriptor deletePersonDescriptor) {
+        this.id = id;
         this.name = name;
         this.deletePersonDescriptor = deletePersonDescriptor;
     }
@@ -89,10 +88,10 @@ public class DeleteCommand extends UndoableCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getUnfilteredPersonList();
 
-        Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, nric, lastShownList);
+        Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, id, lastShownList);
 
         if (personOptional.isEmpty()) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+            throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
         }
 
         Person personToDelete = personOptional.get();
@@ -102,13 +101,14 @@ public class DeleteCommand extends UndoableCommand {
             model.deletePerson(personToDelete);
             model.addToHistory(this);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+            return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(personToDelete)));
         } else {
             editedPerson = createDeletePerson(personToDelete, deletePersonDescriptor);
             model.setPerson(personToDelete, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             model.addToHistory(this);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(editedPerson)));
+            return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_FIELD_SUCCESS,
+                    Messages.format(editedPerson)));
         }
     }
 
@@ -118,7 +118,7 @@ public class DeleteCommand extends UndoableCommand {
         if (deletePersonDescriptor.isAllFalse()) {
             model.addPerson(originalPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_UNDO_DELETE_PERSON_SUCCESS,
+            return new CommandResult(String.format(MESSAGE_UNDO_DELETE_PATIENT_SUCCESS,
                     Messages.format(originalPerson)));
         } else {
             Person personToDelete = editedPerson;
@@ -142,7 +142,7 @@ public class DeleteCommand extends UndoableCommand {
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
 
-        return Objects.equals(nric, otherDeleteCommand.nric)
+        return Objects.equals(id, otherDeleteCommand.id)
                 && Objects.equals(name, otherDeleteCommand.name)
                 && Objects.equals(deletePersonDescriptor, otherDeleteCommand.deletePersonDescriptor);
     }
@@ -150,7 +150,7 @@ public class DeleteCommand extends UndoableCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("nric", nric)
+                .add("id", id)
                 .add("name", name)
                 .add("deletePersonDescriptor", deletePersonDescriptor)
                 .toString();
@@ -167,11 +167,10 @@ public class DeleteCommand extends UndoableCommand {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
-        Nric updatedNric = personToEdit.getNric();
+        Id updatedId = personToEdit.getId();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
-        Set<Tag> updatedTags = personToEdit.getTags();
         Set<MedicalHistory> updatedMedicalHistories = personToEdit.getMedicalHistories();
         Appointment updatedAppointment = personToEdit.getAppointment().isPresent() ? personToEdit.getAppointment().get()
                 : null;
@@ -206,8 +205,8 @@ public class DeleteCommand extends UndoableCommand {
             }
         }
 
-        return new Person(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress, updatedAppointment,
-                updatedMedicalHistories, updatedTags);
+        return new Person(updatedName, updatedId, updatedPhone, updatedEmail, updatedAddress, updatedAppointment,
+                updatedMedicalHistories);
     }
 
     /**
