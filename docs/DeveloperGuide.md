@@ -543,16 +543,16 @@ Step 4. `EditScheduleCommandParser` is created, and constructs an `EditScheduleD
 `Schedule`. An `EditScheduleCommand` object is then constructed with this `EditScheduleDescriptor` and the
 specified schedule index.
 
-Step 5. The `EditScheduleCommand` object gets the specified `schedule` from the current filtered schedule list using the
+Step 5. The `EditScheduleCommand` object gets the specified `Schedule` from the current filtered schedule list using the
 schedule index.
 
-Step 6. `EditScheduleCommand` object then creates an edited `schedule` from the specified `schedule` and the
+Step 6. `EditScheduleCommand` object then creates an edited `Schedule` from the specified `Schedule` and the
 `EditScheduleDescriptor`.
 
-Step 7. `EditScheduleCommand` object then calls the `setSchedule` method in the `ModelManager` with the new edited `schedule`.
-This method sets the specified `Schedule` in the model to be that edited `schedule`.
+Step 7. `EditScheduleCommand` object then calls the `setSchedule` method in the `ModelManager` with the new edited `Schedule`.
+This method sets the specified `Schedule` in the model to be that edited `Schedule`.
 
-Step 8. Finally, the `EditScheduleCommand` object updates the schedule list to display the edited `schedule`.
+Step 8. Finally, the `EditScheduleCommand` object updates the schedule list to display the edited `Schedule`.
 
 The following sequence diagram shows how the above steps for edit schedule operation works:
 
