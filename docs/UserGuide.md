@@ -153,8 +153,6 @@ Please refer to the [above](#editing-a-contact-edit).
 
 - Invalid indices will cause abortion of the delete command.
 
-- Contacts are 1-indexed, that is, the first contact has index number 1. Index number 0 is not valid.
-
 
 **Examples:**
 
