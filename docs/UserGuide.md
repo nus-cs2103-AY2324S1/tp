@@ -810,8 +810,8 @@ Shows a list of all employees in the workplace.
 Output:
 
 * ManaGease should display a list of all employees in the workplace.
-  <br><img src="images/listSuccess.png">
-  <br><img src="images/findAlexDavidResult2.png">
+  <br><img src="images/listSuccess.png" width="570">
+  <br><img src="images/findAlexDavidResult2.png" width="570" height="400">
 
 * Go back to [Table of Contents](#table-of-contents)
 
@@ -882,7 +882,6 @@ If your changes to the data file makes its format invalid, ManaGease will not ru
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -891,6 +890,7 @@ If your changes to the data file makes its format invalid, ManaGease will not ru
 
 **Q**: I am using multiple screens. If I move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen.<br>
 **A**: Delete the `preferences.json` file created by the application before running the application again.
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
