@@ -27,7 +27,6 @@ public class ScoreList {
         this.scoreList = scoreList;
     }
 
-    // TODO: have a TAG parser that checks if its a interview-related tag
 
     /**
      * Updates the score list with the new score.
@@ -102,7 +101,6 @@ public class ScoreList {
      * @return true if a given tag is a valid score tag
      */
     public static boolean isValidScoreTag(Tag tag) {
-        System.out.println("tag category: " + tag.tagCategory + " " + tag.tagName);
         return tag.tagCategory.toLowerCase().contains("assessment");
     }
 
