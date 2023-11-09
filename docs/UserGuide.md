@@ -27,10 +27,9 @@ pageNav: 3
 6. [Additional Features](#additional-features)
    - [Markdown Syntax](#markdown-syntax)
    - [Importing and Exporting Decks](#importing-and-exporting-decks)
-7. [Cautions](#cautions)
-8. [FAQ](#frequently-asked-questions)
-9. [Known Issues](#known-issues)
-10. [Contact Us](#contact-us)
+7. [FAQ](#frequently-asked-questions)
+8. [Known Issues](#known-issues)
+9. [Contact Us](#contact-us)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -631,13 +630,10 @@ is displayed for users to paste in the JSON file containing the decks of others.
 app will close upon clicking the `Import Data` button. Users will have to rerun the app
 to see their new decks.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Cautions
-
---------------------------------------------------------------------------------------------------------------------
-
-## Summary of Commands
+### Caution
+All data is saved as a JSON file at this specified path: [JAR file location]/data/deck.json. <br>
+It is **NOT** recommended for users to modify data directly as it can cause the app to malfunction. <br>
+If you still wish to proceed with modifying the data directly, lesSON would not be held accountable of the risks of such actions.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -651,9 +647,21 @@ queries, feel free to contact us!
 
 ## Known Issues
 
+1. Tags are not enforced to be unique, meaning it is possible to add multiple tags that are the same. Future enhancements
+to lesSON will check for duplicates and remove any if found. Until then, please do take caution to not add duplicate tags
+to the same card.
+2. When using multiple screens, if you move the application to a secondary screen, and later switch to using only the
+primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the
+application before running the application again.
+
+If you have encountered any bugs or errors, do let us know with the relevant details (e.g. screenshots) via our
+official channels found [here]().
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Contact Us
+
+For any feedback or relevant queries, do contact us via our [official channels](https://ay2324s1-cs2103t-w17-4.github.io/tp/AboutUs.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
