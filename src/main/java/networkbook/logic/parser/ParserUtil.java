@@ -226,6 +226,12 @@ public class ParserUtil {
 
         argMultiMap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_COURSE_START, CliSyntax.PREFIX_COURSE_END);
 
+        // Throws exception if course description is empty but has a start or end date
+        if (courseText.trim().startsWith(CliSyntax.PREFIX_COURSE_END.getPrefix())
+                || courseText.trim().startsWith(CliSyntax.PREFIX_COURSE_START.getPrefix())) {
+            throw new ParseException(Course.NO_COURSE_NAME);
+        }
+
         // Throws exception if there is an end date but no start date
         if (ArgumentMultimap.arePrefixesPresent(argMultiMap, CliSyntax.PREFIX_COURSE_END)
                 && !ArgumentMultimap.arePrefixesPresent(argMultiMap, CliSyntax.PREFIX_COURSE_START)) {
