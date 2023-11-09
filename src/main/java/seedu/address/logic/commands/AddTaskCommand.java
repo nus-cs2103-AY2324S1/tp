@@ -97,7 +97,7 @@ public class AddTaskCommand extends Command {
             throw new CommandException(String.format(DUPLICATE_TASK, taskIndex));
         }
     }
-    private static String getUsageInfo() {
+    public static String getUsageInfo() {
         return "\nUsage: addTask/task + [lesson index] [description]. "
                 + "You could omit the lesson index when adding task to showing lesson."
                 + "\nExample1: " + COMMAND_WORD + " 1 do homework"

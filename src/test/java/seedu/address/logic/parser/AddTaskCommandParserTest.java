@@ -18,6 +18,7 @@ class AddTaskCommandParserTest {
         assertEquals(Task.of("description, some description."), p.parse("1 description, some description.").getTask());
         assertEquals(Task.of("description lala?"), p.parse("description lala?").getTask());
         assertNull(p.parse("description lala?").getIndex());
+        assertEquals(Task.of("99description-l"), p.parse("99description-l").getTask());
     }
     @Test
     void test_invalidIndex_invalidTask() throws ParseException {
