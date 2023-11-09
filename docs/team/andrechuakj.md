@@ -12,14 +12,18 @@ My team and I adapted the product from an existing Java application called [Addr
 
 Given below is a summary of my contributions to the project. All of my code contributions can be found in this [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=andrechuakj&breakdown=true#/)
 
-* **Project management**:
+### Features Implemented
+* 
 
-* **Enhancements to existing features**:
+### Enhancements to existing features
 
-### Documentation:
+### Project management
+
+### Documentation
 * **User Guide**
     * Added command details and summaries for the following commands: `createMember`.
-    * Updated command details for the following commands: `deleteMember`, `editMember`, `createEvent`, `deleteEvent`, `editEvent`, `editEnrolment`, `viewMember`, `viewEvent`.
+    * Updated command details for the following commands: `deleteMember`, `editMember`, `createEvent`, `deleteEvent`,
+ `editEvent`, `editEnrolment`, `viewMember`, `viewEvent`.
     * Added list of commands that can be undone under the `undo` command section.
     * Added screenshots for the following commands: `list`, `viewMember`, `viewEvent`.
     * Created table to organise list of acceptable values for each command.
@@ -28,7 +32,7 @@ Given below is a summary of my contributions to the project. All of my code cont
     * Added 1 use case:
         * UC01 - Create a member
 
-* **Community**:
+### Community
 * This is the full [list](https://github.com/AY2324S1-CS2103T-F11-1/tp/pulls?q=is%3Apr+reviewed-by%3Aandrechuakj) of pull requests which I have reviewed.
 * Some non-trivial pull request review comments which I have given:
     * 
