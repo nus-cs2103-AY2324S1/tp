@@ -79,7 +79,9 @@ Note that contacts are identified by their name in ConText, and contacts with ex
 Hence, you will not be able to add a new contact with the same name as an existing contact.
 
 For example, if you already have a contact with name `John Doe`, you will not be able to add another contact with the same name `John Doe`.
-However, you may add another contact with name `John doe`, or `Alex John Doe`. You may also first modify the name of the existing contact.
+For two names to be considered the same, they must be identical in every way, and that includes casing, as well as whitespace in the middle of the name, etc.
+Therefore, you may add another contact with name `John doe`, `John    Doe`, or `Alex John Doe`. 
+You may also first modify the name of the existing contact.
 
 Should you need to make changes to an existing contact, use the `edit` command as explained below.
 
@@ -121,6 +123,7 @@ Edits an existing contact at the specified `INDEX`.
 :information_source: **About index numbers:**
 `INDEX` refers to the index number currently shown in the displayed contact list (#1, #2, #3 etc.).
 Indices must be a positive integer to be valid (1, 2, 3 etc.), and must exist in the displayed contact list.
+Contacts are 1-indexed, that is, the first contact has index number 1. Index number 0 is not valid.
 </div>
 
 <div markdown="span" class="alert alert-info">
@@ -160,6 +163,7 @@ Please refer to the [above](#editing-a-contact-edit).
 - Duplicate indices are only counted once.
 
 - Invalid indices will cause abortion of the delete command.
+
 
 **Examples:**
 
@@ -217,6 +221,19 @@ Shows contacts with a tag that fully matches the specified tag (case-insensitive
 **Format:**
 `filter TAG`
 
+- The search is case-insensitive.\
+  e.g. `filter friend` will match the tag `Friend`.
+
+- Only full tags will be matched.\
+  e.g. `filter Fri` will _not_ match the tag `Friend`.\
+  e.g. `filter Friend` will _not_ match the tag `Close Friend`.
+
+- The keyword can contain spaces.\
+  e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).  
+  e.g. <pre>`filter Close           Friend`</pre> will _not_ match the tag `Close Friend`.
+
+- In summary, `filter` looks for tags which are an exact match, ignoring casing only.
+
 **Examples:**
 
 - `filter NUS`
@@ -247,6 +264,28 @@ The displayed contact list is always automatically sorted in ascending alphabeti
 ### Automatic saving
 
 Your contacts get automatically saved to the file system after each successful command execution. There is no need to save manually.
+
+---
+
+## Command summary
+
+| Action            | Command Format                                                          | Example Usage                                                      |
+|-------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------|
+| Adding a contact  | `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...` | `add n/John Doe p/98765432 e/john.doe@email.com`                   |
+|                   |                                                                         | `add n/John Doe p/98765432 e/john.doe@email.com o/Likes SE. t/NUS t/CS2103 course a/Telegram: JohnDoe` |
+| Editing a contact | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...` | `edit 1 p/87654321 e/jane_doe@nus.edu.sg`                          |
+|                   |                                                                         | `edit 3 o/Member of NUS S/U t/`                                    |
+| Deleting contacts | `delete INDEX...`                                                       | `delete 1`                                                         |
+|                   |                                                                         | `delete 1 3 5`                                                     |
+| Clearing all contacts | `clear`                                                             | `clear`                                                            |
+| Listing all contacts  | `list`                                                              | `list`                                                             |
+| Finding by name      | `find KEYWORD...`                                                     | `find John`                                                        |
+|                     |                                                                         | `find amy Ben CHARLOTTE`                                           |
+| Filtering by tag     | `filter TAG`                                                          | `filter NUS`                                                       |
+|                      |                                                                         | `filter CS2103 course`                                             |
+| Viewing help         | `help`                                                                | `help`                                                             |
+| Exiting the app      | `exit`                                                                | `exit`                                                             |
+
 
 ---
 
