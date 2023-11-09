@@ -382,7 +382,7 @@ Format: `viewContactEvents INDEX`
 
 ## Task Management System
 
-Tasks consist of a `DESCRIPTION` and a `DEADLINE`. 
+Tasks consist of a `DESCRIPTION` and a `DEADLINE`.
 
 ### Viewing tasks: `switchList`
 
@@ -404,6 +404,8 @@ Format: `addTask d/DESCRIPTION [te/DEADLINE]`
 * `DEADLINE` can also be omitted to create a task with no specified deadline.
 * When adding a task with a deadline with a date that is invalid but with a day of 31 or less, instead adds a task with 
 a deadline on the last day of the month.
+* While there is no character limit for Task descriptions, descriptions will be truncated if they are too long to 
+display.
 
 Examples: 
 * `addTask d/Go for a run te/2023-02-14 19:00`
