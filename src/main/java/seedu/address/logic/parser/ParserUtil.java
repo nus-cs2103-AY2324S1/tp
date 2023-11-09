@@ -208,7 +208,7 @@ public class ParserUtil {
             LocalTime fromTime = LocalTime.parse(from);
             LocalTime toTime = LocalTime.parse(to);
             if (!TimeInterval.isValidTimeInterval(fromTime, toTime)) {
-                throw new ParseException(TimeInterval.MESSAGE_CONSTRAINTS);
+                throw new ParseException(TimeInterval.MESSAGE_TO_BEFORE_FROM);
             }
             return new TimeInterval(fromTime, toTime);
         } catch (DateTimeParseException e) {

@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Hour {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Hour should only be positive integers and should be less than 9999";
+            "Hour should only be between 0 to 9999, inclusive";
     public static final String EMPTY_HOUR = "0";
     public final Integer value;
 
