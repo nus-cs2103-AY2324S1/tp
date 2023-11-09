@@ -58,7 +58,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 && argMultimap.getValue(PREFIX_GREATER_THAN_SCORE).isEmpty()
         ) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_FAILURE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
         Name name = null;

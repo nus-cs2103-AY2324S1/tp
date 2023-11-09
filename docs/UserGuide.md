@@ -102,31 +102,28 @@ To begin using this guide, ensure you meet the [Minimum System Requirements](#mi
 <br>
 
 <a name="quick-start"></a>
-## Quick Start 
+## Quick Start
 
-1. Download the latest `staffsnap.jar` from [here](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases/tag/v1.3).
+
+1. Download the latest `staffsnap.jar` from [here](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases/tag/v1.4).
 2. Copy the [JAR](#glossary) file to an empty folder that you would like to use as the [home folder](#glossary) for Staff-Snap.
 3. Open the [command terminal](#glossary).
-4. Navigate into your home folder with the `cd` command.
+4. Navigate into your home folder with the `cd` command (e.g. `cd C:\Users\John\Desktop\MyHomeFolder`).
 5. Enter the `java -jar staffsnap.jar` command to run the application.
 6. You should see the [GUI](#glossary) displayed as shown below. Note how the application contains some sample data.<br>
 
-<br/>
+![gui](images/user-guide/gui.png)
 
-![Main Window view](images/user-guide/MainWindow.png)
-
-<br/>
-
-7. Type the [command](#glossary) in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window. Some example commands that you can try:
+7. Type the [command](#glossary) in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window. Some example commands that you can try:<br>
    * `add n/John Doe hp/81238123 p/Boss e/john@mail.com` : Adds an applicant named John Doe to the list. 
    * `list` : Lists all applicants.
    * `delete 1` : Deletes the 1st applicant shown in the current list.
    * `clear` : Clears all applicants from the list.
    * `exit` : Exits the application.
 
-
 <br>
-9. Refer to the [Features](#features) below for details of each command.
+
+8. Refer to the [Features](#features) below for details of each command.<br>
 
 <box type="tip" header="**For macOS users**" seamless>
 
@@ -167,7 +164,7 @@ This section introduces the symbols and notations used throughout this guide. We
 
 <br>
 
-![Main Window guide](images/user-guide/MainWindowGuide.png)
+![main_window_gui](images/user-guide/main_window_gui.png)
 
 <br>
 
@@ -175,7 +172,7 @@ This section introduces the symbols and notations used throughout this guide. We
 |----------------------------------------------|--------------------------------------------------------------------------|
 | Command Area                                 | This is where users type in commands for the application.                |
 | Response Area                                | This is where Staff-Snap displays messages in response to user commands. |
-| Working Area                                 | This is where the applicant list is displayed.                           |
+| Applicant Area                               | This is where the applicant list is displayed.                           |
 
 <br>
 
@@ -187,7 +184,7 @@ This section introduces the symbols and notations used throughout this guide. We
 
 <br>
 
-![Applicant Card guide](images/user-guide/ApplicantCardGuide.png)
+<img src="images/user-guide/applicant_card_gui.png" height="267" width="797" alt="applicant_card_gui">
 
 <br>
 
@@ -195,7 +192,7 @@ This section introduces the symbols and notations used throughout this guide. We
 |----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | Applicant details                            | This is where details about the applicant are displayed. These include their name, phone number, email, and position applied.          |
 | Applicant status                             | This is where the status of the applicant is displayed. The status is categorised into Offered, Rejected, or Undecided.                |
-| Overall score                                | This is where the overall score of the applicant is displayed. This represents the _average_ rating of all the applicant's interviews. |
+| Applicant score                              | This is where the overall score of the applicant is displayed. This represents the _average_ rating of all the applicant's interviews. |
 | Interview rating                             | This is where the rating for a each interview is displayed.                                                                            |
 
 ---
