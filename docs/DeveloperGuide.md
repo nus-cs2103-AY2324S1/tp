@@ -339,7 +339,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
 
   - The sequence diagram shown below shows how the API is called by other classes:
 
-    ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
+    ![TimeParserSequenceDiagram.png](images/TimeParserSequenceDiagram.png)
 
 #### How is the command executed
 1. The caller passes in the `date` string, which contains the date information. The caller also passes in the boolean flag `dateOnly`, which will indicate whether the string should be parsed into a `Time` instance containing date and time, or strictly date only.

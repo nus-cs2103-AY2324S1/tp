@@ -1,0 +1,10 @@
+@startuml
+hide footbox
+participant ":OtherClass" as OtherClass
+box "Logic"
+participant  "TimeParser"
+OtherClass -> TimeParser: parseDate(date, false)
+activate TimeParser
+TimeParser -> OtherClass: Time instance
+deactivate TimeParser
+@enduml
