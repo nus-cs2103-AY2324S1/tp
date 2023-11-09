@@ -3,6 +3,6 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox styleClass="pane-without-border" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-  <ListView fx:id="eventListView" minHeight="555.0" minWidth="555.0" styleClass="pane-without-border" stylesheets="@DarkTheme.css" VBox.vgrow="ALWAYS" />
+<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <ListView fx:id="eventListView" VBox.vgrow="ALWAYS" />
 </VBox>
