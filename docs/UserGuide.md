@@ -4,8 +4,7 @@
   pageNav: 3
 ---
 <style>
-img
-{
+img {
     display:block;
     float:none;
     margin-left:auto;
@@ -21,9 +20,13 @@ img
 [//]: # (<page-nav-print />)
 
 <a name="table-of-contents"></a>
+<nav>
+
 ## Table of Contents
 
+
 * [Introduction](#introduction)
+* [Minimum System Requirements](#minimum-system-requirements)
 * [Quick Start](#quick-start)
 * [Using this Guide](#using-this-guide)
   * [Understanding the Notations](#understanding-the-notations)
@@ -54,8 +57,14 @@ img
     * [Exiting the program: `exit`](#exit)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
+* [Command Summary](#command-summary)
+  * [Commands for Applicant Management Features](#commands-for-applicant-management-features)
+  * [Commands for Interview Management Features](#commands-for-interview-management-features)
+  * [Commands for Applicant Processing Features](#commands-for-applicant-processing-features)
+  * [Commands for Miscellaneous Features](#commands-for-miscellaneous-features)
 * [FAQ](#faq)
 * [Glossary](#glossary)
+
 
 ---
 <br>
@@ -74,7 +83,7 @@ to the most advanced features the application has to offer.
 These features range from the simple task of adding an applicant to being able to calculate an applicant's score from their ratings in the interview stages. 
 Every single feature is explained in this guide. You can check out the [Table of Contents](#table-of-contents) to navigate to a feature you might be interested in using.
 
-To begin using this guide, ensure you meet the [minimum system requirements](#minimum-system-requirements). Once this is done, go to the [quick start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features Staff-Snap has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
+To begin using this guide, ensure you meet the [Minimum System Requirements](#minimum-system-requirements). Once this is done, go to the [Quick Start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features Staff-Snap has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
 
 <br>
 
@@ -83,7 +92,7 @@ To begin using this guide, ensure you meet the [minimum system requirements](#mi
 
 ## Minimum System Requirements
 1. A Computer running Windows/MacOS/Linux.
-2. Java 11 or higher
+2. [Java](#glossary) 11 or higher
    1. If you do not have Java 11, follow [this](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) installation guide.
 
 
@@ -92,40 +101,29 @@ To begin using this guide, ensure you meet the [minimum system requirements](#mi
 ---
 <br>
 
-## Need help?
-If you are unable to follow any of the steps below or get help, please email our CEO at staffsnap@gmail.com or call our 24/7 technical helpline 69696969 for assistance. (For educational purposes, not real contact details.)
-
-<br>
-
----
-<br>
-
 <a name="quick-start"></a>
-## Quick Start 
+## Quick Start
 
-1. Download the latest `staffsnap.jar` from [here](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases/tag/v1.3).
+
+1. Download the latest `staffsnap.jar` from [here](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases/tag/v1.4).
 2. Copy the [JAR](#glossary) file to an empty folder that you would like to use as the [home folder](#glossary) for Staff-Snap.
 3. Open the [command terminal](#glossary).
-4. Navigate into your home folder with the `cd` command.
+4. Navigate into your home folder with the `cd` command (e.g. `cd C:\Users\John\Desktop\MyHomeFolder`).
 5. Enter the `java -jar staffsnap.jar` command to run the application.
 6. You should see the [GUI](#glossary) displayed as shown below. Note how the application contains some sample data.<br>
 
-<br/>
+![gui](images/user-guide/gui.png)
 
-![Main Window view](images/user-guide/MainWindow.png)
-
-<br/>
-
-7. Type the [command](#glossary) in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window. Some example commands that you can try:
+7. Type the [command](#glossary) in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window. Some example commands that you can try:<br>
    * `add n/John Doe hp/81238123 p/Boss e/john@mail.com` : Adds an applicant named John Doe to the list. 
    * `list` : Lists all applicants.
    * `delete 1` : Deletes the 1st applicant shown in the current list.
    * `clear` : Clears all applicants from the list.
    * `exit` : Exits the application.
 
-
 <br>
-9. Refer to the [Features](#features) below for details of each command.
+
+8. Refer to the [Features](#features) below for details of each command.<br>
 
 <box type="tip" header="**For macOS users**" seamless>
 
@@ -166,7 +164,7 @@ This section introduces the symbols and notations used throughout this guide. We
 
 <br>
 
-![Main Window guide](images/user-guide/MainWindowGuide.png)
+![main_window_gui](images/user-guide/main_window_gui.png)
 
 <br>
 
@@ -174,7 +172,7 @@ This section introduces the symbols and notations used throughout this guide. We
 |----------------------------------------------|--------------------------------------------------------------------------|
 | Command Area                                 | This is where users type in commands for the application.                |
 | Response Area                                | This is where Staff-Snap displays messages in response to user commands. |
-| Working Area                                 | This is where the applicant list is displayed.                           |
+| Applicant Area                               | This is where the applicant list is displayed.                           |
 
 <br>
 
@@ -186,7 +184,7 @@ This section introduces the symbols and notations used throughout this guide. We
 
 <br>
 
-![Applicant Card guide](images/user-guide/ApplicantCardGuide.png)
+<img src="images/user-guide/applicant_card_gui.png" height="267" width="797" alt="applicant_card_gui">
 
 <br>
 
@@ -194,7 +192,7 @@ This section introduces the symbols and notations used throughout this guide. We
 |----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | Applicant details                            | This is where details about the applicant are displayed. These include their name, phone number, email, and position applied.          |
 | Applicant status                             | This is where the status of the applicant is displayed. The status is categorised into Offered, Rejected, or Undecided.                |
-| Overall score                                | This is where the overall score of the applicant is displayed. This represents the _average_ rating of all the applicant's interviews. |
+| Applicant score                              | This is where the overall score of the applicant is displayed. This represents the _average_ rating of all the applicant's interviews. |
 | Interview rating                             | This is where the rating for a each interview is displayed.                                                                            |
 
 ---
@@ -228,7 +226,7 @@ This section introduces the full-suite of features in Staff-Snap. The features a
 | `PHONE`    | The applicant's phone number. <br/> <br/> It can only contain numbers, should be at least 3 digits long, and should not exceed 30 digits.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <ul><li>`91234726`</li><li>`1234567890123`</li></ul>             |
 | `EMAIL`    | The applicant's email. <br/> <br/> It should be of the format **local-part@domain**. <br/><br/> The **local-part** should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The **local-part** may not start or end with any special characters. <br/><br/> This is followed by a **'@'** and then a **domain name**. The **domain name** is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, and have each domain label consist of alphanumeric characters, separated only by hyphens, if any. <br/><br/> The entire email address should not exceed 30 characters. | <ul><li>`james@gmail.com`</li><li>`e9867626@u.nus.edu`</li></ul> |
 | `POSITION` | The position applied for by the applicant. <br/> <br/> It can take any value, should not be blank and should not exceed 30 characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | <ul><li>`Software Engineer`</li><li>`AI Architect 2`</li></ul>   |
-| `STATUS`   | The status of the applicant. <br/> <br/> It can only be `o` or `offered` for _OFFERED_, `r` or `rejected` for _REJECTED_, or `u` or `undecided` for _UNDECIDED_.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <ul><li>`o`</li><li>`u`</li><li>`rejected`</li></ul>             |
+| `STATUS`   | The status of the applicant. <br/> <br/> It can only be `o` or `offered` for _OFFERED_, `r` or `rejected` for _REJECTED_, or `u` or `undecided` for _UNDECIDED_. <br/> <br/> The default status for an applicant is _UNDECIDED_.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <ul><li>`o`</li><li>`u`</li><li>`rejected`</li></ul>             |
 | `INDEX`    | The index of the applicant in the displayed list. <br/> <br/> It must be a positive integer and not more than the total number of applicants.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | <ul><li>`2`</li></ul>                                            |
 
 
@@ -245,19 +243,31 @@ Adds a new applicant to the list.
 
 Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
+<a name="duplicate-applicants"></a>
 <box type="warning" header="**Caution**">
-    Duplicate applicants are not allowed. Two applicants are considered duplicates if they have the same phone number or email.
+    Duplicate applicants are not allowed. 
+    Two applicants are considered duplicates if they have the same phone number or email.
 </box>
 
 <box type="tip" header="**Note**">
-    As <code>NAME</code> can only contain alphanumeric characters and spaces, names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.  
+    As <code>NAME</code> can only contain alphanumeric characters and spaces, 
+    names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app. 
+    This is similar for other commands requiring a string input. Only alphanumeric strings are allowed in the app.
+</box>
+
+<box type="tip" header="**Note**">
+    Note that the default status for new Applicants is UNDECIDED.
 </box>
 
 
 Example:
 * `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer`
-* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
+Adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@gmail.com*, and position *Software Engineer*.
 
+<br/><br/>
+
+* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
+  Adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@yahoo.com*, and position *Project Manager*.
 <br>
 
 ---
@@ -335,7 +345,8 @@ Example:
 <br>
 
 <a name="command-parameters-2"></a>
-#### Command Parameters
+
+#### Command Parameters 
 
 | Parameter         | Description​                                                                                                                                                          | Examples​                                          |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
@@ -452,11 +463,15 @@ Find applicants whose name contains a particular keyword.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+* The total length of the keywords should not be more than 55 characters long.
 * The search is case-insensitive, e.g. `JOHN` will return `john`.
 * The order of the keywords does not matter, e.g. `Alice Tan` will match `Tan Alice`.
 * Only the applicant name is searched.
-* Any applicant whose name contains the sequence of characters given as the keyword will be given as a result, e.g. `Ed` will match both `Edward` and `Ed`.
-* Applicants matching at least one keyword will be returned (i.e. OR search), e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
+* Any applicant whose name contains the sequence of characters given as the keyword will be given as a result, 
+e.g. `Ed` will match both `Edward` and `Ed`.
+* Applicants matching at least one keyword will be returned (i.e. OR search), 
+e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
+
 
 Example:
 
@@ -525,12 +540,14 @@ Example:
 Imports applicants from a [CSV](#glossary) file.
 
 Format: `import f/FILENAME`
-* The CSV file must be placed in the home folder of Staff-Snap.
+* The CSV file must be placed in the [home folder](#glossary) of Staff-Snap.
 * The CSV file must have the following headers: `name`, `phone`, `email`, `position` in that order, as shown below.<br>
   
 <img src="images/user-guide/csv_header.png" alt="mac_os_warning">
 
 * The fields of the columns must satisfy the [parameter constraints](#command-parameters-1) for `NAME`, `PHONE`, `EMAIL`, and `POSITION` respectively.
+* The CSV file must not contain [duplicate applicants](#duplicate-applicants).
+* The CSV file must not contain applicants that are already in Staff-Snap.
 * A sample CSV file can be found [here](demo.csv).
 
 Example:
@@ -556,6 +573,9 @@ Format: `help`
 
 <br>
 
+---
+<br>
+
 <a name="clear"></a>
 #### Clearing all applicant entries: `clear`
 
@@ -569,6 +589,9 @@ Format: `clear`
 
 <br>
 
+---
+<br>
+
 <a name="exit"></a>
 #### Exiting the program: `exit`
 
@@ -578,6 +601,9 @@ Format: `exit`
 
 <br>
 
+---
+<br>
+
 <a name="saving-the-data"></a>
 #### Saving the data
 
@@ -585,14 +611,72 @@ Automatically saves the data to a local storage whenever there is a change to th
 
 <br>
 
+---
+<br>
+
 <a name="editing-the-data-file"></a>
 #### Editing the data file
 
 <box type="warning" header="**Caution**">
-    Please make a backup copy before you attempt to edit the data file. If the format of the edited data file is invalid, Staff-Snap will override the existing data file with an empty data file in the next run. 
+    Please make a backup copy before you attempt to edit the data file. If the format of the edited data file is invalid, 
+Staff-Snap will override the existing data file with an empty data file in the next run.
 </box>
 
 Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[JAR file location]/data/applicantBook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<br><br/>
+
+---
+
+<a name="command-summary"></a>
+## Command Summary
+
+<br>
+
+<a name="commands-for-applicant-management-features"></a>
+### Commands for Applicant Management Features
+
+| <div style="width:auto">Action</div> | Format                                                  |
+|--------------------------------------|---------------------------------------------------------|
+| Adding a new applicant               | `add n/NAME hp/PHONE e/EMAIL p/POSITION`                |
+| Editing an applicant                 | `edit INDEX [n/NAME] [hp/PHONE] [e/EMAIL] [p/POSITION]` |
+| Deleting an applicant                | `delete INDEX`                                          |
+| Listing all applicants               | `list`                                                  |
+| Editing an applicant status          | `status INDEX s/STATUS`                                 |
+
+<br>
+
+<a name="commands-for-interview-management-features"></a>
+### Commands for Interview Management Features
+
+| <div style="width:auto">Action</div>     | Format                                              |
+|------------------------------------------|-----------------------------------------------------|
+| Adding an interview to an applicant      | `addi INDEX t/TYPE [r/RATING]`                      |
+| Editing an interview of an applicant     | `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]` |
+| Deleting an interview from an applicant  | `deletei INDEX i/INTERVIEW_INDEX`                   |
+
+<br>
+
+<a name="commands-for-applicant-processing-features"></a>
+### Commands for Applicant Processing Features
+
+| <div style="width:auto">Action</div> | Format                                                                                 |
+|--------------------------------------|----------------------------------------------------------------------------------------|
+| Finding an applicant by name         | `find KEYWORD [MORE_KEYWORDS]`                                                         |
+| Sorting applicants by descriptors    | `sort d/DESCRIPTOR [dsc/]`                                                             |
+| Filtering applicants by fields       | `filter [n/NAME] [e/EMAIL] [p/POSITION] [hp/PHONE] [s/STATUS] [lts/SCORE] [gts/SCORE]` |
+| Importing from CSV                   | `import f/FILENAME`                                                                    |
+
+<br>
+
+<a name="commands-for-miscellaneous-features"></a>
+### Commands for Miscellaneous Features
+
+| <div style="width:auto">Action</div> | Format                  |
+|--------------------------------------|-------------------------|
+| Viewing help                         | `help`                  |
+| Clearing all applicant entries       | `clear`                 |
+| Exiting the program                  | `exit`                  |
 
 <br>
 
@@ -607,7 +691,7 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 - Method 1: Clear the current data using the [`clear`](#clearing-all-applicant-entries-clear) command and import your data using the [`import`](#importing-from-csv-import) command.
 - Method 2: Copy the data file `[JAR file location]/data/applicantBook.json` to the other computer.
 
-**Q**: Is my data secure? <br> 
+**Q**: Is my data secure? <br>
 **A**: Yes, your data is stored locally in your computer and is not accessible by anyone else.
 
 **Q**: Why is the first applicant from my CSV file not being imported? <br>
@@ -631,13 +715,13 @@ apply for multiple positions in future iterations.
 | Command	                           | A Command is an instruction given by the user to perform a certain action.                                                                     |
 | Command Line Interface (CLI)	      | The CLI is a text-based interface that allows users to type in commands to interact with the application.                                      |
 | Component	                         | A component is a part of the user interface.                                                                                                   |
-| Comma-separated values (CSV)	      | A CSV file is a text file format that uses commas to separate values. This allows data to be saved in a tabular format.                        |
+| Comma-Separated Values (CSV)	      | A CSV file is a text file format that uses commas to separate values. This allows data to be saved in a tabular format.                        |
 | Graphical User Interface (GUI)	    | The GUI is the visual display of the application which users can interact with.                                                                |
 | Home folder	                       | The main folder where you want to store all Staff-Snap related files.                                                                          |
 | Index	                             | The position of a certain applicant in a list. The first applicant on a list in Staff-Snap will always have the index 1.                       |
-| JAR	                               | A JAR file is a Java Archive file. It is the file format of Staff-Snap.                                                                        |
+| Java Archive File (JAR)	           | The file format of Staff-Snap.                                                                                                                 |
 | Java	                              | Java is a general-purpose, class-based, object-oriented programming language designed for having lesser implementation dependencies.           |
 | JavaScript Object Notation (JSON)	 | A data interchange file format used by Staff-Snap to store its applicant data.                                                                 |
 | Parameter	                         | Parameters are the details needed to perform a specific command. (e.g. When adding an applicant, a parameter can be the name of the applicant) |
-| Small medium enterprise (SME)	     | A SME is roughly defined as a small business that has more than 30 employees but less than 250 employees.                                      |
+| Small Medium Enterprise (SME)	     | A SME is roughly defined as a small business that has more than 30 employees but less than 250 employees.                                      |
 | User Interface (UI)	               | An User Interface is the visual display of the application where users can interact with the application.                                      |

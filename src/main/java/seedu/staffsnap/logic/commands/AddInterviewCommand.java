@@ -23,16 +23,15 @@ public class AddInterviewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an interview to an applicant identified "
             + "by the index number used in the displayed applicant list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TYPE + "TYPE" + " "
-            + "[" + PREFIX_RATING + "RATING]...\n"
+            + "[" + PREFIX_RATING + "RATING]\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + PREFIX_TYPE + "technical" + " "
             + PREFIX_RATING + "8.0";
 
     public static final String MESSAGE_SUCCESS = "New interview added to applicant: %1$s";
-    public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists for this applicant";
     public static final String MESSAGE_INTERVIEW_LIMIT_REACHED = "This applicant has reached the interview limit of 5";
 
     private final Index index;
@@ -62,6 +61,7 @@ public class AddInterviewCommand extends Command {
         if (applicantToEdit.getInterviews().size() == 5) {
             throw new CommandException(MESSAGE_INTERVIEW_LIMIT_REACHED);
         }
+
 
         while (applicantToEdit.getInterviews().contains(interviewToAdd)
                 || interviewToAdd.isContainedIn(applicantToEdit.getInterviews())) {
