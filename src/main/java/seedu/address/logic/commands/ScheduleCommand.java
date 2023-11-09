@@ -83,8 +83,8 @@ public class ScheduleCommand extends Command {
         LocalTime timeNow = LocalTime.now();
         long daysDifference = ChronoUnit.DAYS.between(todayDate, appointmentDate);
 
-        if (appointmentDate.isBefore(todayDate) ||
-                (todayDate.isEqual(appointmentDate) && appointmentStartTime.isBefore(timeNow))) {
+        if (appointmentDate.isBefore(todayDate)
+                || (todayDate.isEqual(appointmentDate) && appointmentStartTime.isBefore(timeNow))) {
             throw new CommandException(MESSAGE_DATE_IN_THE_PAST);
         }
 
