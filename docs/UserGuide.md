@@ -140,9 +140,10 @@ Expected outputs:
 
 Adds an employee to ManageHR’s entries.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE d/DEPARTMENT… m/MANAGER NAME…`
-- Adds an employee with the above fields
-- All fields must be provided
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER NAME]…`
+- Adds an employee with the above fields.
+- Name, Phone Number, Email, Address, Salary, Leave and Role fields must be provided.
+- Department and Manager fields are optional, and can contain more than one.
 
 Examples:
 * `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh`
@@ -150,16 +151,17 @@ Examples:
 
 Acceptable values for each parameter:
 
-| Parameters | Accepted input                                               |
-| --- |--------------------------------------------------------------|
-| `NAME` | Alphabets                                                    |
-| `PHONE_NUMBER` | 8 digits                                                     |
-| `EMAIL` | Email with the pattern x@x.com where ‘x’ are alphanumerics   |
-| `ADDRESS` | Alphanumerics and ascii characters i.e. #, -                 |
-| `SALARY` | Numerals                                                     |
-| `LEAVE` | Numerals                                                     |
-| `ROLE` | `manager` or `subordinate` (Case-insensitive)                |
-| `DEPARTMENT` | Alphabets and ascii characters i.e. &, -                     |
+| Parameters     | Accepted input                                             |
+|----------------|------------------------------------------------------------|
+| `NAME`         | Alphabets                                                  |
+| `PHONE_NUMBER` | 8 digits                                                   |
+| `EMAIL`        | Email with the pattern x@x.com where ‘x’ are alphanumerics |
+| `ADDRESS`      | Alphanumerics and ascii characters i.e. #, -               |
+| `SALARY`       | Numerals                                                   |
+| `LEAVE`        | Numerals                                                   |
+| `ROLE`         | `manager` or `subordinate` (Case-insensitive)              |
+| `DEPARTMENT`   | Alphabets and ascii characters i.e. &, -                   |
+| `MANAGER_NAME` | Optional. Name of an existing manager in ManageHR.         |
 
 Expected outputs:
 
@@ -331,9 +333,10 @@ Now, your data should be successfully transferred to the new computer.
 
 ## Command summary
 
+
 | Action         | Format, Examples                                                                                                                                                                                                                                |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE d/DEPARTMENT… m/MANAGER NAME…` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh` |
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER NAME]…` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh` |
 | **Clear**      | `clear`                                                                                                                                                                                                                                         |
 | **Delete**     | `delete INDEX`<br> e.g., `delete 4`                                                                                                                                                                                                             |
 | **Department** | `department t/(add/delete) n/DEPARTMENT_NAME` <br> e.g., `department t/add n/Engineering`                                                                                                                                                       |
