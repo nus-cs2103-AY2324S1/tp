@@ -862,4 +862,4 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration.
+1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, currently `add` is case-sensitive. We will accept keywords such as `Add` in the future iteration.
