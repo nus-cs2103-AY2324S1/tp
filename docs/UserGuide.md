@@ -51,7 +51,7 @@ head over to our [Interface Walkthrough](#3-interface-walkthrough) to better lea
 If you are already a seasoned user of CMC, you can refer to [Command Summary](#7-command-summary) for a
 quick reference to all the commands available in CMC.
 
-If you are facing any problems with the commands or are unsure of anything, you may refer to the [FAQ](#5-frequently-asked-questions--faqs-) for common questions,
+If you are facing any problems with the commands or are unsure of anything, you may refer to the [FAQ](#5-frequently-asked-questions-faqs) for common questions,
 or refer to [Common Mistakes](#6-common-mistakes) for common errors our users may face while using the application.
 
 ## 2. Quick start
@@ -72,15 +72,15 @@ or refer to [Common Mistakes](#6-common-mistakes) for common errors our users ma
 
     - `help`: Opens up the help window.
     - `addm /name Alicia Teng /phone 91126291 /email alicia_teng@gmail.com /tele @alicia_teng`: Adds a member
-      named `Alicia Teng` to the list of members. See how to [add member](#411-adding-a-member--addmember-or-addm)
+      named `Alicia Teng` to the list of members. See how to [add member](#411-adding-a-member-addmember-or-addm)
       for more.
     - `adda /name Chan Rui Jia /phone 97777117 /interview 10/12/2023 1400`: Adds an applicant named `Chan Rui Jia` to
-      the list. See how to [add applicant](#421-adding-an-applicant--addapplicant-or-adda) for more.
+      the list. See how to [add applicant](#421-adding-an-applicant-addapplicant-or-adda) for more.
     - `deltm 1`: Deletes the first member in the list of members.
     - `finda Win Sheng`: Searches for all applicants with `Win Sheng` in their contact details. See how
-      to [find an applicant](#422-finding-applicants--findapplicant-or-finda) for more.
+      to [find an applicant](#422-finding-applicants-findapplicant-or-finda) for more.
     - `editm 1 /tag Design`: Edits the tag of the first member in the list of members. See how
-      to [edit a member](#414-editing-a-member--editmember-or-editm) for more.
+      to [edit a member](#414-editing-a-member-editmember-or-editm) for more.
     - `exit`: Exits the application.
 
         <div markdown="span" class="alert alert-info">:bulb: **Tip:**
@@ -140,7 +140,7 @@ This section of the User Guide will explain about each feature in detail.
 * Items with … after them can be used multiple times including zero times.  
   For example, `[/tag TAG]…` can be used as /tag SWE, /tag UIUX /tag Product etc.
 
-* See [examples of fields](#442-examples-of-fields) for more examples of valid and invalid fields.
+* See [examples of fields](#443-examples-of-fields) for more examples of valid and invalid fields.
 
 </div>
 
@@ -232,7 +232,7 @@ This generates a list of all members whose details contain either `SWE` or `Prod
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 
 If you would like to go back to the whole list of members, use `viewmember`.
-You may check out the command [here](#413-viewing-members--viewmembers-or-viewm).
+You may check out the command [here](#413-viewing-members-viewmembers-or-viewm).
 
 </div>
 
@@ -240,7 +240,7 @@ You may check out the command [here](#413-viewing-members--viewmembers-or-viewm)
 
 Generates a list of all existing member(s). An example of where you might want to use this command is if
 you want to go back to viewing all members after a search.
-with [`findmember`](#412-finding-members--findmember-or-findm).
+with [`findmember`](#412-finding-members-findmember-or-findm).
 
 ##### Format:
 
@@ -308,8 +308,10 @@ The member at the specified index will be deleted from the list of members.
 `delm MEMBER_INDEX`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+
 This command is DESTRUCTIVE! This command cannot be undone. Deleted members will have to be re-added into the list of members via
-the [`addmember`](#411-adding-a-member--addmember-or-addm) command. **Proceed with caution!**
+the [`addmember`](#411-adding-a-member-addmember-or-addm) command. **Proceed with caution!**
+
 </div>
 
 <div markdown="span" class="alert alert-primary">
@@ -377,6 +379,7 @@ Adds a task to the top of the task list of the specified member.
 <br/>
 
 * `MEMBER_INDEX`: Only positive integers that are within the member list are accepted.
+
 * `TASK_NAME` : Accepts alphanumeric characters, spaces and #. Should not be blank.
 
 </div>
@@ -489,7 +492,7 @@ This adds a new applicant named `Lady Gaga` with phone number `99129969` to the 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 
 If you have created an applicant without an interview, you can still **schedule an interview** with the applicant using `editapplicant`.
-You may check out the command [here](#424-editing-an-applicant--editapplicant-or-edita).
+You may check out the command [here](#424-editing-an-applicant-editapplicant-or-edita).
 
 </div>
 
@@ -517,7 +520,7 @@ This generates a list of all members whose details contain `Rui`.
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 
 If you would like to go back to the whole list of applicants, use `viewapplicants`.
-You may check out the command [here](#423-viewing-applicants--viewapplicants-or-viewa).
+You may check out the command [here](#423-viewing-applicants-viewapplicants-or-viewa).
 
 </div>
 
@@ -525,7 +528,7 @@ You may check out the command [here](#423-viewing-applicants--viewapplicants-or-
 
 Generates a list of all existing applicant(s). An example of where you might want to use this command is if
 you want to go back to viewing all members after a search.
-with [`findapplicant`](#422-finding-applicants--findapplicant-or-finda).
+with [`findapplicant`](#422-finding-applicants-findapplicant-or-finda).
 
 ##### Format:
 
@@ -595,8 +598,10 @@ The applicant at the specified index will be deleted from the list of applicants
 `dela APPLICANT_INDEX`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+
 This command is DESTRUCTIVE! This command cannot be undone. Deleted applicants will have to be re-added into the list of applicants via
-the [`addapplicant`](#421-adding-an-applicant--addapplicant-or-adda) command. **Proceed with caution!**
+the [`addapplicant`](#421-adding-an-applicant-addapplicant-or-adda) command. **Proceed with caution!**
+
 </div>
 
 <div markdown="span" class="alert alert-primary">
@@ -718,7 +723,7 @@ There will be no prompt to confirm this action.
 Q: How do I see tasks of a different member?<br/>
 A: You have to use the `viewt` or `viewtask` method to view the tasks allocated to another member.  
 For example, if your window is currently on another member's task, use `viewt 3` to view the tasks of the member at
-`MEMBER_INDEX` 3. Click [here](#418-viewing-all-tasks-allocated-to-a-member--viewtask-or-viewt) for more details on the
+`MEMBER_INDEX` 3. Click [here](#418-viewing-all-tasks-allocated-to-a-member-viewtask-or-viewt) for more details on the
 `viewtask` command. <br/><br/>
 
 Q: How do I transfer my data to another person or computer?<br/>
@@ -739,7 +744,7 @@ These are some common mistakes that you might make while using our application.
 1. Problem : I can't seem to add an interview time, the error says that the input date is invalid. Why? <br/><br/>
 Answer: Please make sure that the month or date has 2 digits in them. For example, January will have to be `01` and not `1`. If you are trying to cancel the interview scheduled, ensure that nothing is capitalised in `cancel` as it is case-sensitive.<br/><br/>
 2. Problem : I am trying to delete a certain member off the member list. However, it seems to be deleting the wrong member. Why? <br/><br/>
-Answer: The `INDEX` used will have to be the current index shown on the screen. If you are deleting the wrong member, make sure you are following the correct index shown currently shown on the screen, and not an index from a previous view. You can refer to [here](#413-viewing-members--viewmembers-or-viewm) to view the entire list of members again.<br/><br/>
+Answer: The `INDEX` used will have to be the current index shown on the screen. If you are deleting the wrong member, make sure you are following the correct index shown currently shown on the screen, and not an index from a previous view. You can refer to [here](#413-viewing-members-viewmembers-or-viewm) to view the entire list of members again.<br/><br/>
 3. Problem : I can't seem to see the full interview time. How can I fix this? <br/><br/>
 Answer: On start-up, the resolution of the window may not be optimal for your screen size and the interview time may be cut off as a result. To fix this, you may readjust the dimensions of the CMC window by dragging the corners of the window, or maximising the view by clicking the button on the top right hand corner of the window. <br/><br/>
 
