@@ -35,13 +35,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
     private static final KeyCombination SHORTCUT_HELP = KeyCombination.valueOf("F1");
-    private static final KeyCombination SHORTCUT_EXIT =
+    private static final KeyCharacterCombination SHORTCUT_EXIT =
             new KeyCharacterCombination("W", KeyCombination.SHORTCUT_DOWN);
-    private static final KeyCombination SHORTCUT_UNDO_UNFOCUSED =
+    private static final KeyCharacterCombination SHORTCUT_UNDO_UNFOCUSED =
             new KeyCharacterCombination("Z", KeyCombination.SHORTCUT_DOWN);
-    private static final KeyCombination SHORTCUT_REDO_UNFOCUSED =
+    private static final KeyCharacterCombination SHORTCUT_REDO_UNFOCUSED =
             new KeyCharacterCombination("Y", KeyCombination.SHORTCUT_DOWN);
-    private static final KeyCombination SHORTCUT_SAVE =
+    private static final KeyCharacterCombination SHORTCUT_SAVE =
             new KeyCharacterCombination("S", KeyCombination.SHORTCUT_DOWN);
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -97,7 +97,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, SHORTCUT_HELP);
-        setAccelerator(exitMenuItem, SHORTCUT_EXIT);
+        exitMenuItem.setAccelerator(SHORTCUT_EXIT);
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (KeyboardShortcutUtil.shortcutMatchEvent(SHORTCUT_EXIT, event)) {
+                exitMenuItem.getOnAction().handle(new ActionEvent());
+                event.consume();
+            }
+        });
     }
 
     /**
@@ -150,13 +156,15 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setCommandBoxShortcutsWhenUnfocused(CommandBox commandBox) {
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (!commandBox.isTextFieldFocused() && SHORTCUT_UNDO_UNFOCUSED.match(event)) {
+            if (!commandBox.isTextFieldFocused()
+                    && KeyboardShortcutUtil.shortcutMatchEvent(SHORTCUT_UNDO_UNFOCUSED, event)) {
                 injectCommand(UndoCommand.COMMAND_WORD);
                 event.consume();
-            } else if (!commandBox.isTextFieldFocused() && SHORTCUT_REDO_UNFOCUSED.match(event)) {
+            } else if (!commandBox.isTextFieldFocused()
+                    && KeyboardShortcutUtil.shortcutMatchEvent(SHORTCUT_REDO_UNFOCUSED, event)) {
                 injectCommand(RedoCommand.COMMAND_WORD);
                 event.consume();
-            } else if (SHORTCUT_SAVE.match(event)) {
+            } else if (KeyboardShortcutUtil.shortcutMatchEvent(SHORTCUT_SAVE, event)) {
                 injectCommand(SaveCommand.COMMAND_WORD);
                 event.consume();
             }

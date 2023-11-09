@@ -299,7 +299,7 @@ public class UniqueListTest {
     }
 
     @Test
-    public void test_falsePredicate_returnsTrue() {
+    public void test_falsePredicate_returnsFalse() {
         assertFalse(getSampleList().test(INDEX1, FALSE_PREDICATE));
         assertFalse(getSampleList().test(INDEX2, FALSE_PREDICATE));
         assertFalse(getSampleList().test(INDEX2, SAMPLE_PREDICATE));
@@ -340,7 +340,6 @@ public class UniqueListTest {
     public void consumeAndComputeItem_null_throwsAssertionError() {
         assertThrowsAssertionError(() -> getSampleList().consumeAndComputeItem(INDEX1, null, SAMPLE_FUNCTION));
         assertThrowsAssertionError(() -> getSampleList().consumeAndComputeItem(INDEX1, SAMPLE_CONSUMER, null));
-        assertThrowsAssertionError(() -> getSampleList().consumeAndComputeItem(INDEX1, null, null));
     }
 
     @Test

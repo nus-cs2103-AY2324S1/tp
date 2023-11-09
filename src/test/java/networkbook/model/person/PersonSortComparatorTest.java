@@ -235,7 +235,7 @@ public class PersonSortComparatorTest {
         assertTrue(PersonSortComparator.isValidSortParams(SortField.PRIORITY, SortOrder.ASCENDING));
 
         // invalid
-        assertFalse(PersonSortComparator.isValidSortParams(SortField.INVALID, SortOrder.INVALID));
+        assertFalse(PersonSortComparator.isValidSortParams(SortField.NAME, SortOrder.INVALID));
         assertFalse(PersonSortComparator.isValidSortParams(SortField.INVALID, SortOrder.ASCENDING));
     }
 

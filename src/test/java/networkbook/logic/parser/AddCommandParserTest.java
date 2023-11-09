@@ -90,7 +90,7 @@ public class AddCommandParserTest {
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
                 "1" + CommandTestUtil.INVALID_EMAIL_DESC
-                        + CommandTestUtil.VALID_LINK_AMY + CommandTestUtil.VALID_PHONE_AMY,
+                        + CommandTestUtil.INVALID_LINK_DESC + CommandTestUtil.VALID_PHONE_AMY,
                 Email.MESSAGE_CONSTRAINTS);
     }
 
@@ -195,7 +195,7 @@ public class AddCommandParserTest {
         // valid followed by invalid
         Index targetIndex = TypicalIndexes.INDEX_FIRST_PERSON;
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
                 + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.PHONE_DESC_AMY
                 + CommandTestUtil.LINK_DESC_AMY + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND
