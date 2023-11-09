@@ -112,6 +112,7 @@ Edits an existing contact at the specified `INDEX`.
 :information_source: **About index numbers:**
 `INDEX` refers to the index number currently shown in the displayed contact list (#1, #2, #3 etc.).
 Indices must be a positive integer to be valid (1, 2, 3 etc.), and must exist in the displayed contact list.
+Contacts are 1-indexed, that is, the first contact has index number 1. Index number 0 is not valid.
 </div>
 
 <div markdown="span" class="alert alert-info">
@@ -151,6 +152,9 @@ Please refer to the [above](#editing-a-contact-edit).
 - Duplicate indices are only counted once.
 
 - Invalid indices will cause abortion of the delete command.
+
+- Contacts are 1-indexed, that is, the first contact has index number 1. Index number 0 is not valid.
+
 
 **Examples:**
 
