@@ -19,12 +19,12 @@ import seedu.classmanager.storage.JsonAdaptedClassDetails;
  */
 public class ClassDetails {
 
-
     public static final String MESSAGE_CONSTRAINTS = "Class number should be in the form 'T[Integer]',"
             + " such as 'T11'.";
     public static final String MESSAGE_INVALID_GRADE = "Grade should be an integer between 0 and 100 inclusive.";
     public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment index should be an integer "
             + "between 1 and %s.";
+
     public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should be an integer "
             + "between 1 and %s";
 
