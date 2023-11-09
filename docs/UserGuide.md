@@ -96,6 +96,10 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 </div>
 
 
+| :warning: Commands Supported Only Outside Review Session                                                                             | :warning: Commands Supported Only Inside Review Session |
+|--------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| `add` <br> `delete` <br> `edit` <br> `find` <br> `start` <br> `list` <br> `load` <br> `language` <br> `review` <br> `stats`          | `yes` <br> `no` <br> `end`                              |
+| *Error Message:* `Sorry, currently you are in a review session. Your command is not supported. Please end the review session first.` | *Error Message:* `You are not in a review session.`     |
 
 
 ### Adding a flash card: `add`
@@ -208,8 +212,6 @@ Format: `start`
 Output: `Review Session has been started.`
 
 **Note**
-* Users are not allowed to start a new review session if they are already in one. In this case,
-  `Sorry, currently you are in a review session. Your command is not supported. Please end the review session first.` will be prompted.
 * If there are no words to review, users will not be able to start review session. `You have no more words to review!`
   will be displayed.
 
@@ -221,10 +223,6 @@ Ends the current flash card session and returns to the main menu.
 Format: `end`
 
 Output: `Review Session has ended.`
-
-**Note**
-* Users are not allowed to end a review session if the session hasn't been started yet. The message of `You are not in a review session.`
-  will be given.
 
 ### Revealing the other side of the flashcard: `reveal`
 
@@ -253,8 +251,6 @@ or
 if there's no word left in the review session.
 
 **Note**
-* `yes` command will only take effect during review session. Otherwise, error message `You are not in a review session.`
-  will be printed out.
 * Pressing `yes` button will have the same effect.
 
 ###  Indicating user has forgotten the word : `no`
@@ -269,8 +265,6 @@ or
 ![img.png](images/No2.png)
 if there's no word left in the review session.
 **Note**
-* `no` command will only take effect during review session. Otherwise, error message`You are not in a review session.`
-  will be printed out.
 * Pressing `no` button will have the same effect.
 
 ### Show learning statistics : `stats`
@@ -278,7 +272,6 @@ if there's no word left in the review session.
 Displays learning statistics, i.e, the total number of flash cards and the number of words remembered.
 
 Format: `stats`
-
 
 
 ### Filtering list with specified language : `language`
@@ -314,7 +307,7 @@ Format: `load <FILE_NAME>`
 Output:
 * You have successfully loaded file: `<FILE_NAME>`: Successful loading.
 * File not found or accessible:
->⚠️ Make sure the file is in the correct directory with read permission.
+> ⚠️ Make sure the file is in the correct directory with read permission.
 * File cannot be read due to invalid content or format:
 >⚠️ Make sure the file contains only two columns with the nonempty words/translations.
 * `FLASH_CARD` flash card already exists!:
