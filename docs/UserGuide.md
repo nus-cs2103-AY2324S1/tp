@@ -680,20 +680,24 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 <a name="faq"></a>
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer? <br>
-**A**: There are 2 methods you can use to transfer your data.
-- Method 1: Clear the current data using the [`clear`](#clearing-all-applicant-entries-clear) command and import your data using the [`import`](#importing-from-csv-import) command.
-- Method 2: Copy the data file `[JAR file location]/data/applicantBook.json` to the other computer.
+**Q**: How do I transfer my data to another computer? <br>
+**A**: Install Staff-Snap on the other computer and replace the data file `[JAR file location]/data/applicantBook.json` in the other computer with the data file from your current computer. 
+
+**Q**: How do I transfer my spreadsheet data to Staff-Snap? <br>
+**A**: Export your spreadsheet data as a [CSV](#glossary) file, then use the [`import`](#import) command to import your CSV file into Staff-Snap. Ensure that your CSV file has the correct format and headers.
 
 **Q**: Is my data secure? <br>
 **A**: Yes, your data is stored locally in your computer and is not accessible by anyone else.
 
 **Q**: Why is the first applicant from my CSV file not being imported? <br>
-**A**: You might have omitted the header row. Ensure that the CSV file have the following headers: `name`, `phone`, `email`, `position` in that order
+**A**: You might have omitted the header row. Ensure that the CSV file has the following headers: `name`, `phone`, `email`, `position`, in that order.
 
 **Q**: Why is it that an applicant can only have one position? <br>
 **A**: For the current iteration, we only allow the applicant to apply for one position. We plan to allow users to 
 apply for multiple positions in future iterations.
+
+**Q**: Do I have to pay to use Staff-Snap? <br>
+**A**: No, Staff-Snap is completely free to use.
 
 <br>
 
