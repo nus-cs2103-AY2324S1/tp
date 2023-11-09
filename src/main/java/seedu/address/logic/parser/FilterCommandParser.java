@@ -22,6 +22,7 @@ import seedu.address.model.state.State;
  * Parses input arguments and creates a new FilterCommand object
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
+    private static final String FILTER_NO_FIELDS_ERROR = "You must specify at least one unique field to filter!";
     private final State state;
     /**
      * Creates a FilterCommandParser with the specified state.
@@ -63,11 +64,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     predicate.addPredicate(person -> person.getRemark().contains(remark));
                 }
                 if (predicate.isEmpty()) {
-                    throw new ParseException("You must specify at least one field to filter!");
+                    throw new ParseException(FILTER_NO_FIELDS_ERROR);
                 }
                 return new FilterPersonCommand(predicate);
             } catch (ParseException e) {
-                throw new ParseException("Invalid person format: " + e.getMessage() + ". "
+                throw new ParseException("Invalid filter format: " + e.getMessage() + ". "
                         + getFilterPersonUsageInfo());
             }
         } else if (state == State.SCHEDULE) {
@@ -95,7 +96,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     predicate.addPredicate(lesson -> lesson.getDay().compareTo(after) > 0);
                 }
                 if (predicate.isEmpty()) {
-                    throw new ParseException("You must specify at least one field to filter!");
+                    throw new ParseException(FILTER_NO_FIELDS_ERROR);
                 }
                 return new FilterLessonCommand(predicate);
             } catch (ParseException e) {
@@ -109,11 +110,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
     }
     public String getFilterPersonUsageInfo() {
-        return "\nUsage: filter (any number of -[name|phone|email|address|subject|tag|remark] [value]). "
+        return "\nUsage: filter (any number of unique -[name|phone|email|address|subject|tag|remark] [value]). "
                 + "\nFor example, filter -name John -phone 91234567.";
     }
     public String getFilterScheduleUsageInfo() {
-        return "\nUsage: filter -(any number of -[name|subject|before|on|after|remark] [value]). "
+        return "\nUsage: filter -(any number of unique -[name|subject|before|on|after|remark] [value]). "
                 + "\nFor example, filter -before 2023/10/10 -subject Math."
                 + "\nNote you should only use one of -before, -on, -after at a time.";
     }
