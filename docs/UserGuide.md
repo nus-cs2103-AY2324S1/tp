@@ -106,9 +106,11 @@ Before we begin, the table below describes some of the symbols and syntax you ma
 
 4. Open a terminal, and navigate to the folder you put the JAR file in. 
 
-5. Launch the app by using the command `java -jar InterviewHub.jar` in your terminal. The Graphical User Interface(GUI) should appear in a few seconds. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.
+5. Launch the app by using the command `java -jar InterviewHub.jar` in your terminal. 
 
-6. To get a better understanding of what you see. Please refer to the [GUI Summary](#gui-summary) for more details.
+6. The Graphical User Interface(GUI) should appear in a few seconds. Note that the app contains some sample data.
+
+7. To get a better understanding of what you see. Please refer to the [GUI Summary](#gui-summary) for more details.
 
 --------------------------------------------------------------------------------------------------------------------
 
