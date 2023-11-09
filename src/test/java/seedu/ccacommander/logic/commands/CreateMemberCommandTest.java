@@ -240,6 +240,14 @@ public class CreateMemberCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
+        public Predicate<Member> getLastFilteredMemberPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Predicate<Event> getLastFilteredEventPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public Collection<Name> updateMemberHoursAndRemark(Name eventName) {
             throw new AssertionError("This method should not be called.");
         }
