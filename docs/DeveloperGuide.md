@@ -7,6 +7,7 @@
 # Staff-Snap Developer Guide
 
 <!-- * Table of Contents -->
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -114,7 +115,7 @@ call as an example.
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 <box type="info" seamless>
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
+Note: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline reaches the end of diagram.
 </box>
 
@@ -232,17 +233,19 @@ The edit applicant feature allows users to edit the details of an applicant.
 
 ### Help feature
 
-#### Steps to trigger
-
-1. User opens the app
-2. User keys in `help`
-3. Command list is shown and opens user guide in browser
 
 #### Implementation
 
 1. When the user enters the term help. it triggers the help feature in the parser under the switch case.
 2. After it is triggered, it will display a short list of possible commands that the user can use.
 3. The user guide will also be opened in their browser
+
+
+#### Steps to trigger
+
+1. User opens the app
+2. User keys in `help`
+3. Command list is shown and opens user guide in browser
 
 #### Notes
 
@@ -251,18 +254,18 @@ The edit applicant feature allows users to edit the details of an applicant.
 
 ### Confirmation + Clear command
 
-#### Steps to trigger
-
-1. User opens the app
-2. User enters `clear` (and subsequently sees a message asking to confirm)
-3. User enters `yes` to confirm the clear
-
 #### Implementation
 
 1. This features requires the state of the parser to be known.
 2. The parser is modified to store the previous taken in command, in this case whether the previous command was a successful clear command.
 3. If the previous command is not a clear command, it looks for the keyword clear. Otherwise, it looks for the keyword yes.
 4. Hence, the user will first need to call clear, before calling yes to invoke the clear mechanism, ensuring safety of data.
+
+#### Steps to trigger
+
+1. User opens the app
+2. User enters `clear` (and subsequently sees a message asking to confirm)
+3. User enters `yes` to confirm the clear
 
 #### Notes
 
@@ -365,9 +368,9 @@ The following diagram summarises what happens when a user executes a Filter comm
 
 <puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommandActivityDiagram" />
 
-### Design considerations
+#### Design considerations
 
-#### Aspect: How to filter applicants
+##### Aspect: How to filter applicants
 
 - Alternative 1 (current choice): use a custom predicate and FilteredList, **compare using strings**
     - Pros: Current implementation of ModelManager already uses FilteredList, making a custom predicate an easy
@@ -382,7 +385,7 @@ The following diagram summarises what happens when a user executes a Filter comm
     - Cons: Will require greater complexity than alternative 1 in implementation. May be slower to integrate new classes
       in the future.
 
-#### Aspect: Command syntax
+##### Aspect: Command syntax
 
 - Alternative 1: `filter n/ [Name] e/ [Email] p/ [Position] hp/ [Phone] s/ [Status] lts/ [Score] gts/ [Score]`
     - Pros: Unambiguous and forces all fields to be entered, preventing errors.
@@ -401,31 +404,75 @@ The following diagram summarises what happens when a user executes a Filter comm
 ### Find feature
 
 #### Purpose
-The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient way of finding and tracking specific candidates.
+The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient way of 
+finding and tracking specific candidates.
 
 #### Implementation
-After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`, the input is passed to the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords in the input and creates a list of keywords.
+After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`,
+the input is passed to the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords
+in the input and creates a list of keywords.
 
-`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords. This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object. `LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by calling `ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
+`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords.
+This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object.
+`LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by calling
+`ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
 
-An instance of `CommandResult` is then created which contains the message and information that will be displayed to the user. The GUI then updates to show this information to the user.
+An instance of `CommandResult` is then created which contains the message and information that will be displayed to the user.
+The GUI then updates to show this information to the user.
 
+<puml src="diagrams/FindCommandSequenceDiagram.puml" alt="FindCommandSequenceDiagram" />
+
+#### Notes
+
+1. The search is case-insensitive, e.g. `find JOHN` will return both john and John.
+2. The order of the keywords does not matter. e.g. `find Alice Tan` will match Tan Alice.
+3. Only the applicant name is searched.
+4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
+   Applicants matching at least one keyword will be returned (i.e. OR search).
+   e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
 
 #### Steps to trigger
 1. User opens the app
 2. User keys in `find KEYWORD [MORE_KEYWORDS]`
 3. The GUI will update to show a list of applicants with name containing any of the keywords.
 
+<puml src="diagrams/FindCommandActivityDiagram.puml" alt="FindCommandActivityDiagram" />
 
-#### Notes
+#### Design considerations
 
-1. The search is case-insensitive, e.g. `find JOHN` will return both john and John. 
-2. The order of the keywords does not matter. e.g. `find Alice Tan` will match Tan Alice. 
-3. Only the applicant name is searched. 
-4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
-   Applicants matching at least one keyword will be returned (i.e. OR search). 
-   e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
+##### Aspect: How to find applicants
 
+- Alternative 1: Find applicants by name using exact match search 
+(e.g. `find Eddy` will only result in applicants whose name is Eddy)
+  - Pros: Users can find applicants by their exact name, 
+  allowing for a more specific search
+  - Cons: Users would have to type in the entire name exactly in order to
+  get their desired result. This can result in higher user error and takes more time to type.
+  
+- Alternative 2 (current choice): Find applicants by name using partial match search (or "fuzzy" search)
+  - Pros: More inclusive, can find matches that are related but not exactly the same as `KEYWORD`.
+  This is more user-friendly and allows for faster typing as users do not need to type the exact name out in order to find
+  an applicant.
+
+  - Cons: May return a larger number of results, some of which may not be relevant (false positives), 
+  potentially requiring additional filtering or sorting which can be inconvenient and time-consuming.
+
+##### Aspect: Command syntax 
+
+- Alternative 1: `find n/NAME` where `n/` represents the name to be searched
+  - Pros: Unambiguous that the term to be searched for is the name.
+  - Cons: As the current find function only supports searching by name, adding the additional `n/` is unnecessary.
+
+- Alternative 2 (current chocie): `find KEYWORDS [MORE_KEYWORDS]`
+  - Pros: Allows for faster typing as users do not need to input the unnecessary `n/` tag.
+  - Cons: Not immediately clear that the `find` command finds applications by name. 
+  This will have to be explained in the user guide.
+
+#### Future Extension:
+A future extension to this find command is to allow it to find applicants by other fields such as their email or their
+handphone number. 
+As handphone numbers and emails are likely to be distinct for each applicant, it is possible to
+enhance the find feature so that it can also search for applicants by these fields.
 
    
 --------------------------------------------------------------------------------------------------------------------
@@ -446,13 +493,14 @@ An instance of `CommandResult` is then created which contains the message and in
 
 **Target user profile**:
 
-* has a need to manage a significant number of applicants
+* has a need to manage a significant number of applicants (around 250 - 500 applicants)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: introduces organisation to applicant management, recruitment processes and streamlines hiring decisions
+**Value proposition**: 
+Introduces organisation to applicant management, recruitment processes and streamlines hiring decisions
 
 ### User stories
 
@@ -465,7 +513,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | edit an applicant descriptor                               | maintain an updated database of all applicants              |
 | `* * *`  | user    | view the full list of applicants                           | view the overall progress and performance of all applicants |
 | `* * *`  | user    | delete an applicant entry                                  | only track valid applicants                                 |
-| `* * *`  | user    | add an interview for an applicant                          | plan screenings                                             |
+| `* * *`  | user    | add an interview for an applicant                          | plan screenings and keep track of an applicant's interviews |
+| `* * *`  | user    | edit an interview for an applicant                         | keep accurate data on an applicant's interview              |
+| `* * *`  | user    | delete an interview for an applicant                       | delete incorrect or unnecessary interviews                  |
 | `* * *`  | user    | store data locally                                         | use it on a daily basis consistently                        |
 | `* *`    | user    | find a specific applicant                                  | access the applicant's information quickly                  |
 | `* *`    | user    | sort applicants by a descriptor                            | find relevant applicants quickly                            |
@@ -476,6 +526,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user    | mark an applicant as undecided, offered or rejected        | keep track of applicants' application status                |
 | `*`      | user    | schedule a date for an interview                           | keep track of all interview timings                         |
 | `*`      | user    | view a graphical representation of each applicant's rating | get a quick idea of each applicant's ability                |
+
+
 
 ### Use cases
 
@@ -561,32 +613,7 @@ Guarantees: The applicant's information will be updated.
 
       Use case ends.
 
-**Use case: UC03 - List all applicants**
-
-Guarantees: All applicants will be listed.
-
-**MSS**
-
-1. User inputs the command to view the list of all applicants.
-2. Staff-Snap displays the list of all applicants.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-
-    * 1a1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-* 1b. Applicant list is empty.
-
-    * 1b1. Staff-Snap shows an empty applicant list.
-
-      Use case ends.
-
-**Use case: UC04 - Delete an applicant**
+**Use case: UC03 - Delete an applicant**
 
 Guarantees: The applicant will be removed from the list of applicants.
 
@@ -611,7 +638,187 @@ Guarantees: The applicant will be removed from the list of applicants.
 
       Use case ends.
 
-**Use case: UC05 - Find an applicant by name**
+**Use case: UC04 - List all applicants**
+
+Guarantees: All applicants will be listed.
+
+**MSS**
+
+1. User inputs the command to view the list of all applicants.
+2. Staff-Snap displays the list of all applicants.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. Applicant list is empty.
+
+    * 1b1. Staff-Snap shows an empty applicant list.
+
+      Use case ends.
+
+**Use case: UC05 - Change an applicant's status**
+
+Guarantees: The applicant's status will be updated.
+
+**MSS**
+
+1. User inputs the command to edit the status of an applicant.
+2. Staff-Snap updates the applicant list to display the updated status of the applicant.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+  * 1a1. Staff-Snap shows an error message.
+
+    Use case ends.
+
+* 1b. User enters an invalid index for the applicant.
+
+  * 1b1. Staff-Snap shows an error message.
+
+    Use case ends.
+
+* 1c. User enters an invalid status.
+
+  * 1c1. Staff-Snap shows an error message.
+
+    Use case ends.
+
+**Use case: UC06 - Add an interview to an applicant**
+
+Guarantees: A new interview will be added to the applicant.
+
+**MSS**
+
+1. User inputs the command to add an interview to an applicant.
+2. Staff-Snap updates the applicant information with the new interview.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends
+
+* 1b. User enters an invalid index for the applicant.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User does not enter a required field.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1d. User enters an invalid value for a field.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1e. User enters a duplicate interview type for the applicant that does not exceeds the maximum length after duplicate handling.
+
+    * 1e1. Staff-Snap increment the last number in the interview type until it hits a unique input, or add 1 if there is no number at the end of the interview type.
+
+      Use case continues at step 2.
+
+* 1f. User enters a duplicate interview type for the applicant that exceeds the maximum length after duplicate handling.
+
+    * 1f1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC07 - Edit an interview of an applicant**
+
+Guarantees: The specified interview will be updated.
+
+**MSS**
+
+1. User inputs the command to edit an interview of an applicant.
+2. Staff-Snap updates the interview with the new details and updates the applicant information with the new interview.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends
+
+* 1b. User enters an invalid index for the applicant.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User enters an invalid index for the interview.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1d. User does not enter a field to edit.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1e. User enters an invalid value for a field.
+
+    * 1e1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC08 - Delete an interview from an applicant**
+
+Guarantees: The specified interview will be deleted from the applicant.
+
+**MSS**
+
+1. User inputs the command to delete an interview from an applicant.
+2. Staff-Snap removes the interview from the applicant and updates the applicant information.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends
+
+* 1b. User enters an invalid index for the applicant.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User enters an invalid index for the interview.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+
+**Use case: UC09 - Find an applicant by name**
 
 Guarantees: The applicants with name matching the search will be listed.
 
@@ -642,7 +849,7 @@ Guarantees: The applicants with name matching the search will be listed.
 
       Use case ends.
 
-**Use case: UC06 - Sort applicants**
+**Use case: UC10 - Sort applicants**
 
 Guarantees: The list of applicants will be sorted by the descriptor.
 
@@ -673,7 +880,7 @@ Guarantees: The list of applicants will be sorted by the descriptor.
 
       Use case ends.
 
-**Use case: UC07 - Filter applicants**
+**Use case: UC11 - Filter applicants**
 
 Guarantees: Only applicants that satisfies the specified criterion will be listed.
 
@@ -704,7 +911,56 @@ Guarantees: Only applicants that satisfies the specified criterion will be liste
 
       Use case ends.
 
-**Use case: UC08 - List all commands**
+**Use case: UC12 - import CSV file**
+
+Guarantees: The applicant list will be populated with data from the imported CSV file.
+
+**MSS**
+
+1. User inputs the command to import a CSV file.
+2. Staff-Snap updates the applicant list to show the applicant data from the CSV file.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+    
+    * 1a1. Staff-Snap shows an error message.
+  
+        Use case ends.
+
+* 1b. User enters an invalid filename.
+
+  * 1b1. Staff-Snap shows an error message.
+  
+    Use case ends.
+
+* 1c. User uses a file with incorrect headers.
+
+  * 1c1. Staff-Snap shows an error message.
+  
+    Use case ends.
+
+* 1d. User uses an file with duplicate applicants.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1e. User uses an file with applicants that are already in Staff-Snap.
+
+    * 1e1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1f. User uses an file with invalid fields.
+
+    * 1f1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC13 - List all commands**
 
 Guarantees: The list of all available commands will be made accessible.
 
@@ -723,30 +979,7 @@ Guarantees: The list of all available commands will be made accessible.
 
       Use case ends.
 
-**Use case: UC09 - Exit the program**
-
-Guarantees: Staff-Snap exits.
-
-**MSS**
-
-1. User inputs the command to exit the program.
-2. Staff-Snap exits and closes.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-
-    * 1a1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-* 1b. User closes the application window.
-
-  Use case resumes at step 2.
-
-**Use case: UC10 - Clear list of applicants**
+**Use case: UC14 - Clear list of applicants**
 
 Guarantees: The list of applicants will be cleared.
 
@@ -773,14 +1006,14 @@ Guarantees: The list of applicants will be cleared.
 
       Use case ends.
 
-**Use case: UC11 - Add an interview to an applicant**
+**Use case: UC15 - Exit the program**
 
-Guarantees: A new interview will be added to the applicant.
+Guarantees: Staff-Snap exits.
 
 **MSS**
 
-1. User inputs the command to add an interview to an applicant.
-2. Staff-Snap updates the applicant information with the new interview.
+1. User inputs the command to exit the program.
+2. Staff-Snap exits and closes.
 
    Use case ends.
 
@@ -790,111 +1023,12 @@ Guarantees: A new interview will be added to the applicant.
 
     * 1a1. Staff-Snap shows an error message.
 
-      Use case ends
-
-* 1b. User enters an invalid index for the applicant.
-    
-    * 1b1. Staff-Snap shows an error message.
-
       Use case ends.
 
-* 1c. User does not enter a required field.
+* 1b. User closes the application window.
 
-    * 1c1. Staff-Snap shows an error message.
+  Use case resumes at step 2.
 
-      Use case ends.
-
-* 1d. User enters an invalid value for a field.
-
-    * 1d1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-* 1e. User enters a duplicate interview type for the applicant that does not exceeds the maximum length after duplicate handling.
-
-    * 1e1. Staff-Snap increment the last number in the interview type until it hits a unique input, or add 1 if there is no number at the end of the interview type.
-
-      Use case continues at step 2.
-
-* 1f. User enters a duplicate interview type for the applicant that exceeds the maximum length after duplicate handling.
-
-    * 1f1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-**Use case: UC12 - Edit an interview of an applicant**
-
-Guarantees: The specified interview will be updated.
-
-**MSS**
-
-1. User inputs the command to edit an interview of an applicant.
-2. Staff-Snap updates the interview with the new details and updates the applicant information with the new interview.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-
-    * 1a1. Staff-Snap shows an error message.
-
-      Use case ends
-
-* 1b. User enters an invalid index for the applicant.
-        
-    * 1b1. Staff-Snap shows an error message.
-    
-      Use case ends.
-
-* 1c. User enters an invalid index for the interview.
-        
-    * 1c1. Staff-Snap shows an error message.
-    
-      Use case ends.
-
-* 1d. User does not enter a field to edit.
-
-    * 1d1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-* 1e. User enters an invalid value for a field.
-
-    * 1e1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-**Use case: UC13 - Delete an interview from an applicant**
-
-Guarantees: The specified interview will be deleted from the applicant.
-
-**MSS**
-
-1. User inputs the command to delete an interview from an applicant.
-2. Staff-Snap removes the interview from the applicant and updates the applicant information.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-
-    * 1a1. Staff-Snap shows an error message.
-
-      Use case ends
-
-* 1b. User enters an invalid index for the applicant.
-            
-    * 1b1. Staff-Snap shows an error message.
-        
-      Use case ends.
-
-* 1c. User enters an invalid index for the interview.
-
-    * 1c1. Staff-Snap shows an error message.
-
-      Use case ends.
 
 *{More to be added}*
 
@@ -934,8 +1068,8 @@ Guarantees: The specified interview will be deleted from the applicant.
   (e.g. a `.txt` file)
 * **Graphical User Interface (GUI)**: A type of user interface that allows users to interact with software through
   graphical icons and visual indicators.
-* **UI**:
-* 
+* **UI**: 
+*
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -947,6 +1081,7 @@ Given below are instructions to test the app manually.
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
+
 </box>
 
 ### Launch and shutdown
@@ -975,13 +1110,13 @@ testers are expected to do more *exploratory* testing.
        Expected: Applicant is added to the list. Details of the new applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` again (Duplicate applicant)<br>
+    2. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` again (Duplicate applicant)<br>
        Expected: No applicant is added. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` with any of the fields missing<br>
+    3. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` with any of the fields missing<br>
        Expected: Similar to previous.
 
-    1. Other incorrect add commands to try: `add`, `add x`, `add n/John Doe e/johndoe@gmail.com p/Software Engineer hp/x`<br>
+    4. Other incorrect add commands to try: `add`, `add x`, `add n/John Doe e/johndoe@gmail.com p/Software Engineer hp/x`<br>
        Expected: Similar to previous.
 
 ### Editing an applicant
@@ -990,14 +1125,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `edit 1 n/Tom Greenwood`<br>
+    2. Test case: `edit 1 n/Tom Greenwood`<br>
        Expected: The name of the first applicant is updated to *Tom Greenwood*. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `edit n/Pop Greenwood`<br>
+    3. Test case: `edit n/Pop Greenwood`<br>
        Expected: No applicant is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect edit commands to try: `edit`, `edit x n/Jane Doe`, `edit e/email` (where x is larger than the list size)<br>
+    4. Other incorrect edit commands to try: `edit`, `edit x n/Jane Doe`, `edit e/email` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Deleting an applicant
@@ -1006,14 +1141,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `delete 1`<br>
+    2. Test case: `delete 1`<br>
        Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `delete 0`<br>
+    3. Test case: `delete 0`<br>
        Expected: No applicant is deleted. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `delete a` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `delete a` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Editing an applicant's status
@@ -1022,14 +1157,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `status 1 s/o`<br>
+    2. Test case: `status 1 s/o`<br>
        Expected: The status of the first applicant is updated to *OFFERED*. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `status 1 s/l`<br>
+    3. Test case: `status 1 s/l`<br>
        Expected: No applicant's status is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect edit status commands to try: `status`, `status x s/o`, `status 1 s/` (where x is larger than the list size)<br>
+    4. Other incorrect edit status commands to try: `status`, `status x s/o`, `status 1 s/` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Adding an interview to an applicant
@@ -1038,14 +1173,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `addi 1 t/technical r/8.6`<br>
+    2. Test case: `addi 1 t/technical r/8.6`<br>
        Expected: A technical interview with rating 8.6 is added to the first applicant in the list. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `addi 0`<br>
+    3. Test case: `addi 0`<br>
        Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect add interview commands to try: `addi`, `addi x`, `addi r/6.0`, `addi 1 t/toolonginterviewtypeeeeeeeeeeeeeeee` (where x is larger than the list size)<br>
+    4. Other incorrect add interview commands to try: `addi`, `addi x`, `addi r/6.0`, `addi 1 t/toolonginterviewtypeeeeeeeeeeeeeeee` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Editing an interview of an applicant
@@ -1054,14 +1189,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant has at least one interview.
 
-    1. Test case: `editi 1 i/1 t/technical r/8.6`<br>
+    2. Test case: `editi 1 i/1 t/technical r/8.6`<br>
        Expected: The first interview of the first applicant in the list is updated to a technical interview with rating 8.6. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `editi 0`<br>
+    3. Test case: `editi 0`<br>
        Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect edit interview commands to try: `editi`, `editi x`, `editi 1 i/x t/technical`, `editi 1 i/1 r/y` (where x is larger than the list size and y is larger than 10.0)<br>
+    4. Other incorrect edit interview commands to try: `editi`, `editi x`, `editi 1 i/x t/technical`, `editi 1 i/1 r/y` (where x is larger than the list size and y is larger than 10.0)<br>
        Expected: Similar to previous.
 
 ### Deleting an interview from an applicant
@@ -1070,30 +1205,30 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant has at least one interview.
 
-    1. Test case: `deletei 1 i/1`<br>
+    2. Test case: `deletei 1 i/1`<br>
        Expected: First interview is deleted from the first applicant in the list. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
-    1. Test case: `deletei 0`<br>
+    3. Test case: `deletei 0`<br>
        Expected: No interview is deleted from any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect delete interview commands to try: `deletei`, `deletei x`, `deletei 1 i/x` (where x is larger than the list size)<br>
+    4. Other incorrect delete interview commands to try: `deletei`, `deletei x`, `deletei 1 i/x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Sorting applicants
 
 1. Sorting applicants while all applicants are being shown
 
-    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. 
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `sort d/status`<br>
+    2. Test case: `sort d/status`<br>
        Expected: The applicants in the list are sorted by their status, in the order UNDECIDED, OFFERED, REJECTED. Success message shown in the response area.
        Applicant area shows the updated list of applicants in the sorted order.
 
-    1. Test case: `sort d/i`<br>
+    3. Test case: `sort d/i`<br>
        Expected: The list of applicants is not sorted. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect sort commands to try: `sort`, `sort d/`<br>
+    4. Other incorrect sort commands to try: `sort`, `sort d/`<br>
        Expected: Similar to previous.
 
 ### Filtering applicants
@@ -1102,12 +1237,12 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-    1. Test case: `filter gts/5.0`<br>
-       Expected: The applicants in the list are filtered by their score, and the updated list contains only applicants with score of at least 5.0. 
+    2. Test case: `filter gts/5.0`<br>
+       Expected: The applicants in the list are filtered by their score, and the updated list contains only applicants with score of at least 5.0.
        Success message shown in the response area. Applicant area shows the filtered list of applicants.
 
-    1. Test case: `filter name`<br>
+    3. Test case: `filter name`<br>
        Expected: The list of applicants is not filtered. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect filter commands to try: `filter`, `filter n/`<br>
+    4. Other incorrect filter commands to try: `filter`, `filter n/`<br>
        Expected: Similar to previous.
