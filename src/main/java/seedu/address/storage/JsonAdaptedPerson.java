@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -18,6 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.SecLevel;
 import seedu.address.model.person.Student;
+import seedu.address.model.tag.EnrolDate;
 import seedu.address.model.tag.Subject;
 
 /**
@@ -36,6 +39,7 @@ class JsonAdaptedPerson {
     private final String nearestMrtStation;
 
     private final List<JsonAdaptedTag> subjects = new ArrayList<>();
+    private final List<JsonAdaptedEnrolDate> enrolDates = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given student details.
@@ -45,7 +49,8 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("gender") String gender, @JsonProperty("secLevel") String secLevel,
             @JsonProperty("nearestMrtStation") String nearestMrtStation,
-            @JsonProperty("tags") List<JsonAdaptedTag> subjects) {
+            @JsonProperty("tags") List<JsonAdaptedTag> subjects,
+            @JsonProperty("enrolDates") List<JsonAdaptedEnrolDate> enrolDates) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -55,6 +60,9 @@ class JsonAdaptedPerson {
         this.nearestMrtStation = nearestMrtStation;
         if (subjects != null) {
             this.subjects.addAll(subjects);
+        }
+        if (enrolDates != null) {
+            this.enrolDates.addAll(enrolDates);
         }
     }
 
@@ -72,6 +80,11 @@ class JsonAdaptedPerson {
         subjects.addAll(source.getSubjects().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        enrolDates.addAll(
+            source.getSubjects()
+                .stream().map(Subject::getEnrolDate)
+                .map(JsonAdaptedEnrolDate::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -80,9 +93,16 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Subject> personSubjects = new ArrayList<>();
-        for (JsonAdaptedTag subject : subjects) {
-            personSubjects.add(subject.toModelType());
+        List<Subject> personSubjects = new ArrayList<>();
+        if (enrolDates.size() != subjects.size()) {
+            throw new IllegalValueException(Messages.MESSAGE_DATE_NUMBER_NOT_MATCHING);
+        }
+        Iterator<JsonAdaptedEnrolDate> dateIterator = enrolDates.iterator();
+        Iterator<JsonAdaptedTag> tagIterator = subjects.iterator();
+        while (dateIterator.hasNext() && tagIterator.hasNext()) {
+            EnrolDate date = dateIterator.next().toModelType();
+            JsonAdaptedTag subject = tagIterator.next();
+            personSubjects.add(subject.toModelType(date));
         }
 
         if (name == null) {

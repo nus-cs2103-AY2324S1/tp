@@ -18,8 +18,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/TiwKangXu)]
 [[portfolio](team/tiwkangxu.md)]
 
-* Role:
-* Responsibilities:
+* Role: Developer
+* Responsibilities: Main reviewer for Ng Chuan Xin
 
 ### Lauren Lim Yi-Xing
 
@@ -28,8 +28,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/laurenlim2112)]
 [[portfolio](team/laurenlim2112.md)]
 
-* Role:
-* Responsibilities:
+* Role: Developer
+* Responsibilities: Main reviewer for Kam Jia Yue
 
 ### Lin Chenyu
 
@@ -38,8 +38,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/linchenyu2030s)]
 [[portfolio](team/linchenyu2030s.md)]
 
-* Role:
-* Responsibilities:
+* Role: Developer
+* Responsibilities: Main reviewer for Lauren Lim Yi-Xing
 
 ### Ng Chuan Xin
 
@@ -48,8 +48,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/ChuanXinNg)]
 [[portfolio](team/chuanxinng.md)]
 
-* Role:
-* Responsibilities:
+* Role: Developer
+* Responsibilities: Main reviewer for Lin Chenyu
 
 ### Kam Jia Yue
 
@@ -58,5 +58,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/KamJiaYue)]
 [[portfolio](team/kamjiayue.md)]
 
-* Role:
-* Responsibilities:
+* Role: Developer
+* Responsibilities: Main reviewer for Tiw Kang Xu
