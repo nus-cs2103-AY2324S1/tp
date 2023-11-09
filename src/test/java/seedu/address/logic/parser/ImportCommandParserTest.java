@@ -1,14 +1,10 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_DATE_NUMBER_NOT_MATCHING;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ImportCommandParser.MESSAGE_ERROR_READING_FILE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,7 +14,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ImportCommand;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 
 class ImportCommandParserTest {
@@ -29,47 +24,39 @@ class ImportCommandParserTest {
         // Create a relative path to the ImportDataTest directory
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
 
-        String fileName1 = relativePath + "/" + "test_data_successful.csv";
+        String fileName1 = relativePath + "/" + "student_data_test_success.csv";
         List<Student> expectedList1 = new ArrayList<>();
         expectedList1.add(AMY);
         expectedList1.add(BOB);
 
-        // whitespace only preamble
         assertParseSuccess(parser, fileName1, new ImportCommand(expectedList1, fileName1));
 
-        String fileName2 = relativePath + "/" + "test_data_no_subjects.csv";
+        String fileName2 = relativePath + "/" + "student_data_test_success_enrol_date.csv";
         List<Student> expectedList2 = new ArrayList<>();
-        expectedList2.add(HOON);
-        expectedList2.add(IDA);
+        expectedList2.add(AMY);
+        expectedList2.add(BOB);
 
-        // whitespace only preamble
         assertParseSuccess(parser, fileName2, new ImportCommand(expectedList2, fileName2));
-
-        String fileName3 = relativePath + "/" + "test_data_successful_with_enrol_dates.csv";
-        List<Student> expectedList3 = new ArrayList<>();
-        expectedList3.add(AMY);
-        expectedList3.add(BOB);
-
-        assertParseSuccess(parser, fileName3, new ImportCommand(expectedList3, fileName3));
     }
 
     @Test
     void parseCsvFail() {
         // Create a relative path to the ImportDataTest directory
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            "Header Error!\n" + ImportCommand.MESSAGE_USAGE);
 
-        String fileName1 = relativePath + "/" + "test_data_wrong_column.csv";
-        assertParseFailure(parser, fileName1, Phone.MESSAGE_CONSTRAINTS);
+        String fileName1 = relativePath + "/" + "student_data_test_fail_wrong_column.csv";
+        assertParseFailure(parser, fileName1, expectedMessage);
 
-        String fileName2 = relativePath + "/" + "test_data_missing_attributes.csv";
+        String fileName2 = relativePath + "/" + "student_data_test_fail_missing_attributes.csv";
         assertParseFailure(parser, fileName2, expectedMessage);
 
-        String fileName3 = relativePath + "/" + "test_data_doesnt_exists.csv";
-        assertParseFailure(parser, fileName3, MESSAGE_ERROR_READING_FILE + fileName3);
+        String fileName3 = relativePath + "/" + "student_data_test_fail_empty.csv";
+        assertParseFailure(parser, fileName3, expectedMessage);
 
-        String fileName4 = relativePath + "/" + "test_data_dates_subjects_mismatch.csv";
-        assertParseFailure(parser, fileName4, MESSAGE_DATE_NUMBER_NOT_MATCHING);
+        String fileName4 = relativePath + "/" + "student_data_test_fail_wrong_extra_attributes.csv";
+        assertParseFailure(parser, fileName4, expectedMessage);
     }
 
 }
