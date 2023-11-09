@@ -148,7 +148,7 @@ When the command fails:
 
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- - Invalid telegram handle: `Telegram handle should be between 5-32 characters, and it should start with @`
+- Invalid telegram handle: `Telegram handle should be between 5-32 characters, and it should start with @`
 - Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
   and optionally end with an alphabet.`
 - Invalid free time: `TA's free time should have a start and end time in HH:mm format`
@@ -202,6 +202,10 @@ Finds specified teaching assistants from the address book using search parameter
 Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
 
 - We can search by name, course or free time, using the prefixes `n/`, `c/` or `d/ from/ to/` respectively.
+- The name prefix `n/` allows for multiple keywords to be used, separated by spaces. e.g. `find n/Alex Bernice`.
+- The course prefix `c/` and free time prefix `d/ from/ to/` allows for one keyword to be used, separated by spaces.
+e.g. `find c/CS2103T` or `find d/1 from/10:00 to/12:00`.
+- For the free time, all three prefixes `d/ from/ to/` must be present and all respective parameters need to be correctly given.
 - The search is case-insensitive. e.g `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
 - Only full words will be matched e.g. `Alex` will not match `Alexis`, `cs1231` will not match `cs1231s`.
 - We can apply multiple search filters to narrow down the search results, through including multiple filters in 
