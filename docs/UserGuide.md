@@ -82,21 +82,19 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `<UPPER_CASE>` are the parameters to be supplied by the user.<br>
-  e.g. in `delete <INDEX>`, index is a parameter which needs to be added to the command, without the <>. `delete 1` is an example of the usage.
-
-* Words in square brackets, ie. `[<UPPER_CASE>]` indicate that the parameter is optional and can be omitted if deemed unnecessary
-  e.g. in `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANGUAGE] [tl/TRANSLATION_LANGUAGE]`, the `WORD` and `TRANSLATION` parameters are *MANDATORY*, whereas the `WORD_LANGUAGE` and `TRANSLATION_LANGUAGE` do not need to be in the command.
-  For example, both `add w/entschuldigung wl/Deutsch t/sorry tl/English` and `add w/regarder t/look` are valid usage of the command
-
-* If the parameters have ... as a suffix, ie. `<UPPER_CASE...>`, it means that it can take multiple parameters that are comma separated.
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`and `exit`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+| Notation         | Description                                                   | Example Command                                                     | Example Usage                    |
+|------------------|---------------------------------------------------------------|---------------------------------------------------------------------|----------------------------------|
+| `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                    | `delete 1`                       |
+| `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANG] [tl/TRANSLATION_LANG]` | `add w/Hello t/你好`               |
+ | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                                 | `find hello, bye`                |
+| `...`            | Parameter that will not be used                               | `help ...`                                                          | `help 123` is the same as `help` |
 </div>
 
 
+| :warning: Commands Supported Only Outside Review Session                                                                             | :warning: Commands Supported Only Inside Review Session |
+|--------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| `add` <br> `delete` <br> `edit` <br> `find` <br> `start` <br> `list` <br> `load` <br> `language` <br> `review` <br> `stats`          | `yes` <br> `no` <br> `end`                              |
+| *Error Message:* `Sorry, currently you are in a review session. Your command is not supported. Please end the review session first.` | *Error Message:* `You are not in a review session.`     |
 
 
 ### Adding a flash card: `add`
@@ -192,7 +190,7 @@ Examples:
 Shows the list of flash cards with both the original word and the corresponding translation.
 * Lists all the flash cards saved
   
-Format: list
+Format: `list ...`
 > All the saved flash cards, regardless of the review date, are listed.
 
 Output:
@@ -218,7 +216,7 @@ Displays the flash cards of all the words to be reviewed that day
 * The review command will present flash cards selected by Flash Lingo based on your level, utilizing the Leitner system.
 * If you wish to view all your saved flash cards without the Leitner system's selection criteria, please use the list command.
 
-Format: review
+Format: `review ...`
 
 Output:
 ![img.png](images/ReviewSuccess.png)
@@ -237,13 +235,11 @@ Output:
 
 To start a review session, user simply needs to type in `start` command.
 
-Format: `start`
+Format: `start ...`
 
 Output: `Review Session has been started.`
 
 **Note**
-* Users are not allowed to start a new review session if they are already in one. In this case,
-  `Sorry, currently you are in a review session. Your command is not supported. Please end the review session first.` will be prompted.
 * If there are no words to review, users will not be able to start review session. `You have no more words to review!`
   will be displayed.
 
@@ -252,13 +248,9 @@ Output: `Review Session has been started.`
 
 Ends the current flash card session and returns to the main menu.
 
-Format: `end`
+Format: `end ...`
 
 Output: `Review Session has ended.`
-
-**Note**
-* Users are not allowed to end a review session if the session hasn't been started yet. The message of `You are not in a review session.`
-  will be given.
 
 ### Revealing the other side of the flashcard: `reveal`
 
@@ -279,7 +271,7 @@ Examples:![img.png](images/Reveal.png)
 Marks the word as memorized and advances the word into the next retention stage. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
-Format: `yes`
+Format: `yes ...`
 
 Output: ![img.png](images/Yes.png)
 or
@@ -287,8 +279,6 @@ or
 if there's no word left in the review session.
 
 **Note**
-* `yes` command will only take effect during review session. Otherwise, error message `You are not in a review session.`
-  will be printed out.
 * Pressing `yes` button will have the same effect.
 
 ###  Indicating user has forgotten the word : `no`
@@ -296,15 +286,13 @@ if there's no word left in the review session.
 Marks the word as not grasped and leaves it in its current retention stage. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
-Format: `no`
+Format: `no ...`
 
 Output: ![img.png](images/No.png)
 or
 ![img.png](images/No2.png)
 if there's no word left in the review session.
 **Note**
-* `no` command will only take effect during review session. Otherwise, error message`You are not in a review session.`
-  will be printed out.
 * Pressing `no` button will have the same effect.
 
 ### Show learning statistics : stats
@@ -314,7 +302,7 @@ To help track user progress and inspire continued learning, this command offers 
 * Remembered Words: Shows the number of terms you have successfully retained in this session.
 * Success Rate: Presents a percentage representing your learning success for this session, motivating you to keep improving.
 
-Format: stats
+Format: `stats ...`
 Example:
 *stats would give the following output
 
@@ -362,7 +350,7 @@ Format: `load <FILE_NAME>`
 Output:
 * You have successfully loaded file: `<FILE_NAME>`: Successful loading.
 * File not found or accessible:
->⚠️ Make sure the file is in the correct directory with read permission.
+> ⚠️ Make sure the file is in the correct directory with read permission.
 * File cannot be read due to invalid content or format:
 >⚠️ Make sure the file contains only two columns with the valid words/translations.
 * `FLASH_CARD` flash card already exists!:
@@ -373,7 +361,7 @@ Switches between light and dark appearance of UI dashboard.
 * The theme will be saved and loaded when Flashlingo is restarted.
 * Default color theme is the **light theme**.
 
-Format: `switch`
+Format: `switch ...`
 
 Output:
 
@@ -385,13 +373,13 @@ Output:
 
 Opens a browser with the help page (User Guide). Pressing the `Help` button and then clicking `Help F1` will achieve the same effect.
 
-Format: `help`
+Format: `help ...`
 
 ### Exiting the program : exit
 
 Safely terminates the Flashlingo application and closes the graphical user interface (GUI).
 
-Format: exit
+Format: `exit ...`
 
 Example:
 * Input exit to end your session and close the application
@@ -453,32 +441,32 @@ Then, use the `load` command to import the data.
 
 ## Command summary
 
-| Action                  | Format, Examples                                                                                                           |
-|-------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`         |
-| **Delete**              | `delete <Index>`<br> e.g., `delete 1`                                                                                      |
-| **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` |
-| **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        |
-| **List**                | `list`                                                                                                                     |
-| **Review**              | `review`                                                                                                                   |
-| **Start**               | `start`                                                                                                                    |
-| **End**                 | `end`                                                                                                                      |
-| **Reveal**              | `reveal <INDEX>`                                                                                                           |
-| **Yes**                 | `yes`                                                                                                                      |
-| **No**                  | `no`                                                                                                                       |
-| **Learning Statistics** | `stats`                                                                                                                    |
-| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`                                                                  |
-| **Load**                | `load <FILE_NAME>`<br> e.g., `load SampleData.xlsx`                                                                        |
-| **Switch**              | `switch`                                                                                                                   |
-| **Help**                | `help`                                                                                                                     |
-| **Exit**                | `exit`                                                                                                                     |
+| Action                  | Format, Examples                                                                                                           | Supported Period       |
+|-------------------------|----------------------------------------------------------------------------------------------------------------------------|------------------------|
+| **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`         | Outside review session |
+| **Delete**              | `delete <Index>`<br> e.g., `delete 1`                                                                                      | Outside review session |
+| **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` | Outside review session |
+| **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        | Outside review session |
+| **List**                | `list`                                                                                                                     | Outside review session |
+| **Review**              | `review`                                                                                                                   | Outside review session |
+| **Start**               | `start`                                                                                                                    | Outside review session |
+| **End**                 | `end`                                                                                                                      | Inside review session  |
+| **Reveal**              | `reveal <INDEX>`                                                                                                           | Both                   |
+| **Yes**                 | `yes`                                                                                                                      | Inside review session  |
+| **No**                  | `no`                                                                                                                       | Inside review session  |
+| **Learning Statistics** | `stats`                                                                                                                    | Outside review session |
+| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`                                                                  | Outside review session |
+| **Load**                | `load <FILE_NAME>`<br> e.g., `load SampleData.xlsx`                                                                        | Outside review session |
+| **Switch**              | `switch`                                                                                                                   | Both                   |
+| **Help**                | `help`                                                                                                                     | Outside review session |
+| **Exit**                | `exit`                                                                                                                     | Both                   |
 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 
-| Term                                  | Definition                                                                                                                                                                                                                                                                                                                      |
+| Term                                  | Definition                                                                                                                                                                                                                                                                                                                      | 
 | ------------------------------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **CLI**                               | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system.                                                                                                                                                                                         |
 | **GUI**                               | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                                                                  |
