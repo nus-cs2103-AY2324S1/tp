@@ -189,9 +189,26 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getLastFilteredMemberPredicate_memberOperation_returnsMemberPredicate() {
+        String[] memberKeywords = ALICE.getName().name.split("\\s+");
+        Predicate<Member> pred = new MemberNameContainsKeywordsPredicate(Arrays.asList(memberKeywords));
+        modelManager.updateFilteredMemberList(pred);
+        Predicate<Member> lastMemberPredicate = modelManager.getLastFilteredMemberPredicate();
+        assertEquals(lastMemberPredicate, pred);
+    }
+
+    @Test
     public void getLastFilteredMemberPredicate_noOperation_returnsDefaultList() {
         Predicate<Member> lastMemberPredicate = modelManager.getLastFilteredMemberPredicate();
         assertEquals(lastMemberPredicate, PREDICATE_SHOW_ALL_MEMBERS);
+    }
+    @Test
+    public void getLastFilteredEventPredicate_eventOperation_returnsEventPredicate() {
+        String[] eventKeywords = AURORA_BOREALIS.getName().name.split("\\s+");
+        Predicate<Event> pred = new EventNameContainsKeywordsPredicate(Arrays.asList(eventKeywords));
+        modelManager.updateFilteredEventList(pred);
+        Predicate<Event> lastEventPredicate = modelManager.getLastFilteredEventPredicate();
+        assertEquals(lastEventPredicate, pred);
     }
 
     @Test
