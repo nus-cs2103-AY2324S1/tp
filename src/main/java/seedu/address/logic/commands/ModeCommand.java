@@ -19,4 +19,11 @@ public class ModeCommand extends Command {
         return new CommandResult(MESSAGE_TOGGLED, false, false, true);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        return other instanceof ModeCommand;
+    }
 }

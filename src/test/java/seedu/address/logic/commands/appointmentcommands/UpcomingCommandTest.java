@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.appointmentcommands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showAppointmentAtIndex;
 import static seedu.address.testutil.TypicalAppointments.UPCOMINGAPPOINTMENT;
@@ -22,5 +24,23 @@ public class UpcomingCommandTest {
         expectedModel.addAppointment(UPCOMINGAPPOINTMENT);
         showAppointmentAtIndex(expectedModel, Index.fromZeroBased(4));
         assertCommandSuccess(new UpcomingCommand(), model, UpcomingCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        UpcomingCommand firstUpcomingCommand = new UpcomingCommand();
+        UpcomingCommand secondUpcomingCommand = new UpcomingCommand();
+
+        // same object -> returns true
+        assertTrue(firstUpcomingCommand.equals(firstUpcomingCommand));
+
+        // same type -> returns true
+        assertTrue(firstUpcomingCommand.equals(secondUpcomingCommand));
+
+        // different types -> returns false
+        assertFalse(firstUpcomingCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(firstUpcomingCommand.equals(null));
     }
 }
