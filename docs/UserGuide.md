@@ -61,12 +61,12 @@ Let's dive into **InterviewHub** and transform the way you recruit!
 
 # Introduction - What is InterviewHub?
 
-**InterviewHub**  is a desktop app for hiring managers to schedule job interviews and manage applicants.
+**InterviewHub**  is a desktop app for hiring managers to schedule job interviews and manage applicants' contact information.
 **InterviewHub** allows users to:
 * seamlessly update and manage applicants for various job openings,
 * schedule and keep track of interviews with each applicant,
 
-all through a simple and easy-to-use platform!
+through an all-in-one user-friendly platform!
 
 It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
 If you are a hiring manager who can type fast, **InterviewHub** can get your Interview and applicant management tasks done faster than traditional GUI apps.
@@ -98,7 +98,7 @@ Before we begin, the table below describes some of the symbols and syntax you ma
 
 # Quick Start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have **Java 11** or above [installed in your Computer](#q-how-do-i-check-if-i-have-the-correct-version-of-java-installed).
 
 2. Download the latest `InterviewHub.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-2/tp/releases).
 
@@ -636,8 +636,12 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 
 # Frequently Asked Questions
 
-**Q**: How do I transfer my data to another Computer?<br>
+### **Q**: How do I transfer my data to another Computer?
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InterviewHub home folder.
+
+### **Q**: How do I check if I have the correct version of Java installed?
+**A**: You can check the version of Java installed in your computer by opening the terminal and running the `java --version` command.
+The correct version of Java required to run **InterviewHub** is **Java 11**. If you do not have Java, or the correct version of it, installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
 [Back to the Table of Contents](#table-of-contents)
 
