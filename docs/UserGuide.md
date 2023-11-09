@@ -15,15 +15,8 @@ img {
 <a name="staff-snap-user-guide"></a>
 # Staff-Snap User Guide
 
-
-[//]: # (<!-- * Table of Contents -->)
-[//]: # (<page-nav-print />)
-
 <a name="table-of-contents"></a>
-<nav>
-
 ## Table of Contents
-
 
 * [Introduction](#introduction)
 * [Minimum System Requirements](#minimum-system-requirements)
@@ -65,6 +58,7 @@ img {
 * [FAQ](#faq)
 * [Glossary](#glossary)
 
+<br>
 
 ---
 <br>
@@ -83,7 +77,7 @@ to the most advanced features the application has to offer.
 These features range from the simple task of adding an applicant to being able to calculate an applicant's score from their ratings in the interview stages. 
 Every single feature is explained in this guide. You can check out the [Table of Contents](#table-of-contents) to navigate to a feature you might be interested in using.
 
-To begin using this guide, ensure you meet the [Minimum System Requirements](#minimum-system-requirements). Once this is done, go to the [Quick Start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features Staff-Snap has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
+To begin using this guide, ensure you meet the [Minimum System Requirements](#minimum-system-requirements). Once this is done, go to the [Quick Start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features **Staff-Snap** has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
 
 <br>
 
@@ -104,7 +98,6 @@ To begin using this guide, ensure you meet the [Minimum System Requirements](#mi
 <a name="quick-start"></a>
 ## Quick Start
 
-
 1. Download the latest `staffsnap.jar` from [here](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases/tag/v1.4).
 2. Copy the [JAR](#glossary) file to an empty folder that you would like to use as the [home folder](#glossary) for Staff-Snap.
 3. Open the [command terminal](#glossary).
@@ -120,14 +113,11 @@ To begin using this guide, ensure you meet the [Minimum System Requirements](#mi
    * `delete 1` : Deletes the 1st applicant shown in the current list.
    * `clear` : Clears all applicants from the list.
    * `exit` : Exits the application.
-
-<br>
-
 8. Refer to the [Features](#features) below for details of each command.<br>
 
 <box type="tip" header="**For macOS users**" seamless>
 
-If you are unfamiliar with the command terminal, you can right-click the `staffsnap.jar` file and select **Open With > JavaLauncher.app** to launch the application. If you are shown the warning below, click Open to continue launching Staff-Snap.<br>
+If you are unfamiliar with the command terminal, you can right-click the `staffsnap.jar` file and select **Open With > JavaLauncher.app** to launch the application. If you are shown the warning below, click **Open** to continue launching Staff-Snap.<br>
 
 <img src="images/user-guide/mac_os_warning.png" height="400" width="334" alt="mac_os_warning">
 
@@ -184,7 +174,7 @@ This section introduces the symbols and notations used throughout this guide. We
 
 <br>
 
-<img src="images/user-guide/applicant_card_gui.png" height="267" width="797" alt="applicant_card_gui">
+<img src="images/user-guide/applicant_card_gui.png" height="201" width="598" alt="applicant_card_gui">
 
 <br>
 
@@ -246,7 +236,7 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 <a name="duplicate-applicants"></a>
 <box type="warning" header="**Caution**">
     Duplicate applicants are not allowed. 
-    Two applicants are considered duplicates if they have the same phone number or email.
+    Two applicants are considered duplicates if they have the same phone number or the same email.
 </box>
 
 <box type="tip" header="**Note**">
@@ -320,7 +310,6 @@ Edits the status of an applicant.
 
 Format: `status INDEX s/STATUS`
 * Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
-* `STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Example:
@@ -399,13 +388,14 @@ Edits an interview of an applicant.
 
 Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
 * Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
+* `INTERVIEW_INDEX` refers to the index of the interview to be edited of the applicant.
 * At least one of the optional fields must be provided.
 * Existing values will be updated by the input values.
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Example:
 * `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview with rating 7.8.
-* `editi 3 i/2 t/screening` edits the 2nd interview type of the 3rd person in the displayed applicant list to a screening interview.
+* `editi 3 i/2 t/screening` edits the 2nd interview of the 3rd person in the displayed applicant list to a screening interview.
 * `editi 2 i/1 r/8.9` edits the 1st interview rating of the 2nd person in the displayed applicant list to 8.9.
 
 <br>
@@ -420,7 +410,11 @@ Deletes an interview from an applicant.
 
 Format: `deletei INDEX i/INTERVIEW_INDEX`
 * Deletes from the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
+<<<<<<< HEAD
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
+=======
+* `INTERVIEW_INDEX` refers to the index of the interview to be edited of the applicant.
+>>>>>>> master
 
 Example:
 * `deletei 1 i/2` deletes the 2nd interview of the 1st person in the displayed applicant list.
@@ -510,10 +504,11 @@ Format: `filter [n/NAME] [e/EMAIL] [p/POSITION] [hp/PHONE] [s/STATUS] [lts/SCORE
 * All fields are optional, however at least one of the optional fields must be provided.
 * Any combination of multiple different fields is allowed.
 * Only one of each field can be provided.
-* Only applicants matching all fields will be returned. (i.e. AND search).
-* for `[n/NAME]` field, only applicants whose name contains the full substring will be returned, e.g. `n/Ivan Chew` will **NOT** return `Ivan Lee`.
+* Only applicants matching **ALL** fields will be returned. (i.e. AND search).
+* For `[n/NAME]` field, only applicants whose name contains the full substring will be returned, e.g. `n/Ivan Chew` will **NOT** return `Ivan Lee`.
 * `[n/NAME]` `[e/EMAIL]` `[p/POSITION]` fields are case-insensitive, e.g. `n/JOHN` will return `john`.
 * If provided, the fields `NAME`, `PHONE`, `EMAIL`, and `POSITION` must satisfy the [parameter constraints](#command-parameters-1) previously described.
+* `[s/STATUS]` takes in a value of either `u` or `o` or `r`.
 * `[lts/SCORE]` `[gts/SCORE]` fields do **NOT** include equality in filters, e.g. `gts/7` will return all applicants whose score is strictly greater than `7`.
 
 Example:
@@ -690,26 +685,34 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 **Q**: Is my data secure? <br>
 **A**: Yes, your data is stored locally in your computer and is not accessible by anyone else.
 
-<br><br/>
+**Q**: Why is the first applicant from my CSV file not being imported? <br>
+**A**: You might have omitted the header row. Ensure that the CSV file have the following headers: `name`, `phone`, `email`, `position` in that order
+
+**Q**: Why is it that an applicant can only have one position? <br>
+**A**: For the current iteration, we only allow the applicant to apply for one position. We plan to allow users to 
+apply for multiple positions in future iterations.
+
+<br>
 
 ---
+<br>
 
 <a name="glossary"></a>
 ## Glossary
 
-| Term                              | Definition                                                                                                                                     |
-|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| Parameter                         | Parameters are the details needed to perform a specific command. (e.g. When adding an applicant, a parameter can be the name of the applicant) |
-| Command                           | A Command is an instruction given by the user to perform a certain action.                                                                     |
-| Index                             | The position of a certain applicant in a list. The first applicant on a list in Staff-Snap will always have the index 1.                       |
-| User Interface (UI)               | An User Interface is the visual display of the application where users can interact with the application.                                      |
-| Graphical User Interface (GUI)    | The GUI is the visual display of the application which users can interact with.                                                                |
-| Command Line Interface (CLI)      | The CLI is a text-based interface that allows users to type in commands to interact with the application.                                      |
-| Component                         | A component is a part of the user interface.                                                                                                   |
-| Alphanumeric                      | Text that is consisting of or using both letters and numerals.                                                                                 |
-| JAR                               | A JAR file is a Java Archive file. It is the file format of Staff-Snap.                                                                        |
-| Java                              | Java is a general-purpose, class-based, object-oriented programming language designed for having lesser implementation dependencies.           |
-| Home folder                       | The main folder where you want to store all Staff-Snap related files.                                                                          |
-| Small Medium Enterprise (SME)     | A SME is roughly defined as a small business that has more than 30 employees but less than 250 employees.                                      |
-| Comma-Separated Values (CSV)      | A CSV file is a text file format that uses commas to separate values. This allows data to be saved in a tabular format.                        |          
-| JavaScript Object Notation (JSON) | A data interchange file format used by Staff-Snap to store its applicant data.                                                                 |
+| Term                               | Definition                                                                                                                                     |
+|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| Alphanumeric	                      | Text that is consisting of or using both letters and numerals.                                                                                 |
+| Command	                           | A Command is an instruction given by the user to perform a certain action.                                                                     |
+| Command Line Interface (CLI)	      | The CLI is a text-based interface that allows users to type in commands to interact with the application.                                      |
+| Component	                         | A component is a part of the user interface.                                                                                                   |
+| Comma-Separated Values (CSV)	      | A CSV file is a text file format that uses commas to separate values. This allows data to be saved in a tabular format.                        |
+| Graphical User Interface (GUI)	    | The GUI is the visual display of the application which users can interact with.                                                                |
+| Home folder	                       | The main folder where you want to store all Staff-Snap related files.                                                                          |
+| Index	                             | The position of a certain applicant in a list. The first applicant on a list in Staff-Snap will always have the index 1.                       |
+| Java Archive File (JAR)	           | The file format of Staff-Snap.                                                                                                                 |
+| Java	                              | Java is a general-purpose, class-based, object-oriented programming language designed for having lesser implementation dependencies.           |
+| JavaScript Object Notation (JSON)	 | A data interchange file format used by Staff-Snap to store its applicant data.                                                                 |
+| Parameter	                         | Parameters are the details needed to perform a specific command. (e.g. When adding an applicant, a parameter can be the name of the applicant) |
+| Small Medium Enterprise (SME)	     | A SME is roughly defined as a small business that has more than 30 employees but less than 250 employees.                                      |
+| User Interface (UI)	               | An User Interface is the visual display of the application where users can interact with the application.                                      |

@@ -55,7 +55,9 @@ public class Messages {
         builder.append("; Status: ")
                 .append(applicant.getStatus())
                 .append("; Score: ")
-                .append(applicant.getScore());
+                .append(applicant.getScore().getNumberOfRatings() == 0
+                        ? '-'
+                        : applicant.getScore());
         return builder.toString();
     }
 
