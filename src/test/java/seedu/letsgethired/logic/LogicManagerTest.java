@@ -5,7 +5,6 @@ import static seedu.letsgethired.logic.Messages.MESSAGE_INVALID_INTERN_APPLICATI
 import static seedu.letsgethired.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.letsgethired.logic.commands.CommandTestUtil.COMPANY_DESC_JANE_STREET;
 import static seedu.letsgethired.logic.commands.CommandTestUtil.CYCLE_DESC_SUMMER;
-import static seedu.letsgethired.logic.commands.CommandTestUtil.NOTE_DESC_BYTEDANCE;
 import static seedu.letsgethired.logic.commands.CommandTestUtil.ROLE_DESC_FULL_STACK;
 import static seedu.letsgethired.logic.commands.CommandTestUtil.STATUS_DESC_ACCEPTED;
 import static seedu.letsgethired.testutil.Assert.assertThrows;
@@ -174,7 +173,6 @@ public class LogicManagerTest {
                 + COMPANY_DESC_JANE_STREET
                 + ROLE_DESC_FULL_STACK
                 + CYCLE_DESC_SUMMER
-                + NOTE_DESC_BYTEDANCE
                 + STATUS_DESC_ACCEPTED;
         InternApplication expectedInternApplication = new InternApplicationBuilder(A).build();
         ModelManager expectedModel = new ModelManager();

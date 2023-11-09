@@ -58,7 +58,7 @@ public class InternApplicationTest {
         // name differs in case, all other attributes same -> returns false
         InternApplication editedOtherInternApplication = new InternApplicationBuilder(B)
                 .withCompany(VALID_COMPANY_BYTEDANCE.toLowerCase()).build();
-        assertFalse(B.isSameApplication(editedOtherInternApplication));
+        assertTrue(B.isSameApplication(editedOtherInternApplication));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_COMPANY_BYTEDANCE + " ";

@@ -4,7 +4,6 @@ import static seedu.letsgethired.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_CYCLE;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_NOTE_INSERT;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -36,8 +35,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_ROLE,
                         PREFIX_CYCLE,
                         PREFIX_STATUS,
-                        PREFIX_DEADLINE,
-                        PREFIX_NOTE_INSERT);
+                        PREFIX_DEADLINE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_ROLE, PREFIX_CYCLE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -49,8 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_ROLE,
                 PREFIX_CYCLE,
                 PREFIX_STATUS,
-                PREFIX_DEADLINE,
-                PREFIX_NOTE_INSERT);
+                PREFIX_DEADLINE);
 
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());

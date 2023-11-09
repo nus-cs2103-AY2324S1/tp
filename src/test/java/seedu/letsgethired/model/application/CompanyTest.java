@@ -28,8 +28,7 @@ public class CompanyTest {
         // invalid company
         assertFalse(Company.isValidCompany("")); // empty string
         assertFalse(Company.isValidCompany(" ")); // spaces only
-        assertFalse(Company.isValidCompany("^")); // only non-alphanumeric characters
-        assertFalse(Company.isValidCompany("Apple*")); // contains non-alphanumeric characters
+        assertFalse(Company.isValidCompany("Apple/")); // contains '/' characters
 
         // valid company
         assertTrue(Company.isValidCompany("big company")); // alphabets only

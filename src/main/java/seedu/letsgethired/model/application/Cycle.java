@@ -55,7 +55,7 @@ public class Cycle implements Comparable<Cycle> {
         }
 
         Cycle otherCycle = (Cycle) other;
-        return value.equals(otherCycle.value);
+        return value.equalsIgnoreCase(otherCycle.value);
     }
 
     @Override

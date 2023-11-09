@@ -20,7 +20,7 @@ import seedu.letsgethired.model.application.Role;
 import seedu.letsgethired.model.application.Status;
 
 public class JsonAdaptedInternApplicationTest {
-    private static final String INVALID_NAME = "J@ne";
+    private static final String INVALID_COMPANY = "Jane/Street";
     private static final String INVALID_ROLE = " ";
     private static final String INVALID_STATUS = " ";
     private static final String INVALID_CYCLE = "example.com";
@@ -48,7 +48,7 @@ public class JsonAdaptedInternApplicationTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedInternApplication application =
                 new JsonAdaptedInternApplication(
-                        INVALID_NAME, VALID_ROLE, VALID_CYCLE, VALID_NOTE, VALID_STATUS, VALID_DEADLINE);
+                        INVALID_COMPANY, VALID_ROLE, VALID_CYCLE, VALID_NOTE, VALID_STATUS, VALID_DEADLINE);
         String expectedMessage = Company.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
     }

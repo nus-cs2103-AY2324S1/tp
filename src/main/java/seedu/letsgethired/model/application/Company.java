@@ -10,13 +10,13 @@ import static seedu.letsgethired.commons.util.AppUtil.checkArgument;
 public class Company implements Comparable<Company> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Company should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Company should not contain a forward slash '/', and it should not be blank";
 
     /*
      * The first character of the status must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "(?!.*\\/)[\\S}][\\p{Print} ]*";
 
     public final String value;
 
@@ -56,7 +56,7 @@ public class Company implements Comparable<Company> {
         }
 
         Company otherCompany = (Company) other;
-        return value.equals(otherCompany.value);
+        return value.equalsIgnoreCase(otherCompany.value);
     }
 
     @Override

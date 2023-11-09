@@ -17,8 +17,7 @@ import seedu.letsgethired.model.application.Status;
  */
 public class ParserUtil {
 
-    public static final String APPLICATION_MESSAGE_INVALID_INDEX =
-            "Application index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -29,7 +28,7 @@ public class ParserUtil {
     public static Index parseApplicationIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(APPLICATION_MESSAGE_INVALID_INDEX);
+            throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -43,7 +42,7 @@ public class ParserUtil {
     public static Index parseNoteIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(Note.DELETE_MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -118,7 +117,7 @@ public class ParserUtil {
         requireNonNull(note);
         String trimmedNote = note.trim();
         if (!Note.isValidNote(trimmedNote)) {
-            throw new ParseException(Note.INSERT_MESSAGE_CONSTRAINTS);
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
         return new Note(trimmedNote);
     }

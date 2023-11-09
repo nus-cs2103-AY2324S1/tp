@@ -52,7 +52,7 @@ public class Role implements Comparable<Role> {
         }
 
         Role otherRole = (Role) other;
-        return value.equals(otherRole.value);
+        return value.equalsIgnoreCase(otherRole.value);
     }
 
     @Override

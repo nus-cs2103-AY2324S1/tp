@@ -46,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/aprupkale.md)]
 
 * Role: Developer
-* Responsibilities: Logic and Model
+* Responsibilities: Testing, Logic and Model, UML diagrams
 
 ### Zhi Sheng
 

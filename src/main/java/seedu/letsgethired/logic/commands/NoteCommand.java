@@ -13,7 +13,8 @@ public abstract class NoteCommand extends Command {
 
     public static final String COMMAND_WORD = "note";
 
-
+    public static final String INVALID_NOTE_DISPLAYED_INDEX =
+            "The note index provided is invalid";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add or Delete a note to the internship application "
             + "identified by the index number used in the last intern application listing.\n"

@@ -188,7 +188,10 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             internApplicationListPanel.assignInternApplicationListView(logic.getFilteredInternApplicationList());
-            commandResult.getInternApplicationResult().ifPresent(x -> selectView.displayDetails(x));
+            commandResult.getInternApplicationResult().ifPresentOrElse(x -> {
+                selectView.displayDetails(x);
+                internApplicationListPanel.selectItem(x);
+            }, () -> internApplicationListPanel.deselect());
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

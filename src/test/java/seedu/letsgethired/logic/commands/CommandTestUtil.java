@@ -56,13 +56,13 @@ public class CommandTestUtil {
     public static final String ROLE_SORT_ORDER_ASCENDING = " " + PREFIX_ROLE + VALID_SORT_ORDER_ASCENDING;
     public static final String STATUS_SORT_ORDER_DESCENDING = " " + PREFIX_STATUS + VALID_SORT_ORDER_DESCENDING;
     public static final String DEADLINE_SORT_ORDER_DESCENDING = " " + PREFIX_DEADLINE + VALID_SORT_ORDER_DESCENDING;
-
+    public static final String MULTIPLE_SORT_ORDERS = " " + PREFIX_DEADLINE + VALID_SORT_ORDER_DESCENDING
+            + " " + PREFIX_CYCLE + VALID_SORT_ORDER_DESCENDING;
     public static final String INVALID_COMPANY_DESC =
-            " " + PREFIX_COMPANY + "Jane Street&"; // '&' not allowed in company names
+            " " + PREFIX_COMPANY + "Jane Street/"; // '/' not allowed in company names
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + " "; // empty string is not allowed in roles
     public static final String INVALID_CYCLE_DESC = " " + PREFIX_CYCLE + "Summer!2023"; // '!' not allowed in cycles
     public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS; // empty string not allowed in status
-    public static final String INVALID_NOTE_DESC = " " + PREFIX_NOTE_INSERT;
     public static final String INVALID_COMPANY_SORT_ORDER = " " + PREFIX_COMPANY + "z";
     public static final String INVALID_ROLE_SORT_ORDER = " " + PREFIX_ROLE + "!";
     public static final String INVALID_CYCLE_SORT_ORDER = " " + PREFIX_CYCLE + "b";

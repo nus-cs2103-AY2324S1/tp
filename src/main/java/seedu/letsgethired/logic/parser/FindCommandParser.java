@@ -36,8 +36,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_COMPANY, PREFIX_ROLE, PREFIX_CYCLE, PREFIX_STATUS, PREFIX_NOTE_INSERT, PREFIX_DEADLINE);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMPANY,
-                PREFIX_ROLE, PREFIX_CYCLE, PREFIX_STATUS, PREFIX_NOTE_INSERT, PREFIX_DEADLINE);
+        argMultimap.verifyNoDuplicatePrefixesFor(
+                PREFIX_COMPANY, PREFIX_ROLE, PREFIX_CYCLE, PREFIX_STATUS, PREFIX_NOTE_INSERT, PREFIX_DEADLINE);
 
         ArrayList<Pair<Prefix, String>> fieldKeywords = new ArrayList<>();
 

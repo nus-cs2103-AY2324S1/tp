@@ -75,4 +75,13 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Throws a {@code ParseException} if more than one prefix is found in the multimap
+     */
+    public void verifyOnlyOnePrefix() throws ParseException {
+        if (argMultimap.size() > 2) {
+            throw new ParseException(Messages.MESSAGE_MULTIPLE_FIELDS);
+        }
+    }
 }

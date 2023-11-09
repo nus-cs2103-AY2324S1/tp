@@ -122,7 +122,6 @@ public class ModelManager implements Model {
     public void clearInternshipApplications() {
         internTracker.commit();
         internTracker.clear();
-        filteredInternApplications = new FilteredList<>(this.internTracker.getApplicationList());
     }
 
     //=========== Filtered Intern Application List Accessors =========================================================

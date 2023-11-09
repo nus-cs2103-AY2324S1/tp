@@ -8,7 +8,7 @@ import seedu.letsgethired.model.application.InternApplication;
 /**
  * An UI component that displays information of a {@code InternApplication}.
  */
-public class InternApplicationCard extends UiPart<Region> {
+public class InternApplicationListCard extends UiPart<Region> {
 
     private static final String FXML = "InternApplicationListCard.fxml";
     private static final String ACCEPTED_COLOR = "acceptStatus";
@@ -43,10 +43,10 @@ public class InternApplicationCard extends UiPart<Region> {
     private Label deadline;
 
     /**
-     * Creates a {@code InternApplicationCard} with the given {@code internApplication} and index to display.
+     * Creates a {@code InternApplicationListCard} with the given {@code internApplication} and index to display.
      */
-    public InternApplicationCard(InternApplication internApplication,
-                                 int displayedIndex) {
+    public InternApplicationListCard(InternApplication internApplication,
+                                     int displayedIndex) {
         super(FXML);
         this.internApplication = internApplication;
         this.indexNum = displayedIndex;

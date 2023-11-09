@@ -1,6 +1,6 @@
 {
   "applications": [ {
-    "company": "Internship Application with invalid company field: J@ne Street",
+    "company": "Internship Application with invalid company field: Jane/Street",
     "role" : "Economist",
     "cycle" : "Summer 2022",
     "status" : "Interview",

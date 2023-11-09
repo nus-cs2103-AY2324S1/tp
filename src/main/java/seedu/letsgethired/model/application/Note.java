@@ -15,12 +15,6 @@ public class Note {
                     + "Example: note 1 i/Need to brush up on database querying\n"
                     + "Note deletion must be followed by the prefix 'o/' and must only contain the index of the note.\n"
                     + "Example: 'note 1 o/3' will delete the 3rd note of the first InternApplication";
-    public static final String INSERT_MESSAGE_CONSTRAINTS = "Note insertion must be followed by the prefix 'i/' "
-            + "and should not contain any slashes, and it should not be blank\n"
-            + "Example: note 1 i/Need to brush up on database querying";
-    public static final String DELETE_MESSAGE_CONSTRAINTS = "Note deletion must be followed by the prefix 'o/' "
-            + "and must only contain the index of the note as shown in the Select View of the display.\n"
-            + "Example: 'note 1 o/3' will delete the 3rd note of the first InternApplication";
 
     public static final String VALIDATION_REGEX = "^[^/\\\\\\\\]*$";
 

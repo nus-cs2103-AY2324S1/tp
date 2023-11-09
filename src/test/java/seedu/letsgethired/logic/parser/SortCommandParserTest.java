@@ -8,6 +8,7 @@ import static seedu.letsgethired.logic.commands.CommandTestUtil.INVALID_COMPANY_
 import static seedu.letsgethired.logic.commands.CommandTestUtil.INVALID_CYCLE_SORT_ORDER;
 import static seedu.letsgethired.logic.commands.CommandTestUtil.INVALID_ROLE_SORT_ORDER;
 import static seedu.letsgethired.logic.commands.CommandTestUtil.INVALID_STATUS_SORT_ORDER;
+import static seedu.letsgethired.logic.commands.CommandTestUtil.MULTIPLE_SORT_ORDERS;
 import static seedu.letsgethired.logic.commands.CommandTestUtil.ROLE_SORT_ORDER_ASCENDING;
 import static seedu.letsgethired.logic.commands.CommandTestUtil.STATUS_SORT_ORDER_DESCENDING;
 import static seedu.letsgethired.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -20,13 +21,12 @@ import static seedu.letsgethired.model.application.InternApplicationComparator.S
 
 import org.junit.jupiter.api.Test;
 
+import seedu.letsgethired.logic.Messages;
 import seedu.letsgethired.logic.commands.SortCommand;
 
 public class SortCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
-    private static final String MESSAGE_INVALID_SORT_ORDER = String.format(MESSAGE_INVALID_FORMAT,
-            SortOrder.MESSAGE_CONSTRAINTS);
 
     private SortCommandParser parser = new SortCommandParser();
 
@@ -43,6 +43,7 @@ public class SortCommandParserTest {
         assertParseFailure(parser, INVALID_ROLE_SORT_ORDER, SortOrder.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, INVALID_CYCLE_SORT_ORDER, SortOrder.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, INVALID_STATUS_SORT_ORDER, SortOrder.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, MULTIPLE_SORT_ORDERS, Messages.MESSAGE_MULTIPLE_FIELDS);
     }
 
     @Test

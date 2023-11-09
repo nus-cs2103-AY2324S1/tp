@@ -5,34 +5,49 @@
 
 ### Project: LetsGetHired
 
-{Put project description here}
+_LetsGetHired_ is a **desktop application** designed to assist you in efficiently **tracking and managing your
+internship applications and their progress**.
+
+In addition to these capabilities, we recognize the importance of **speed and efficiency**. Thus, _LetsGetHired_ is
+**optimized for use via a Command Line Interface (CLI)**, but you still enjoy the advantages of a Graphical User Interface
+(GUI). If you are a swift typist, _LetsGetHired_ can streamline your internship tracking **faster than many standard
+GUI-based tools available.**
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New feature**: Added the command `NoteCommand` and its parser `NoteCommandParser` [#57](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/57)
+  * _What it does_: Adds a note to an internship application or deletes a note from an internship application
+  * _Justification_: Allows users to write notes to include background information on the company
+  * _Highlights_: Has been further improved by other developers to have separate commands for note addition and deletion
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **Enhancements to existing feature**: Improved the command `FindCommand` and its parser `FindCommandParser` [#82](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/82)
+  * _What it does_: Finds all internship applications that match either of the keyword and prefix pairs entered
+  * _Justification_: Allows users to search for internship applications easily by any value for any of the fields
+  * _Highlights_: Was initially implemented to search for internship application only by company name
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: 
+  * [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=aprupkale&breakdown=true) summarizes my contributions to the codebase
+  * [PRs authored by me](https://github.com/AY2324S1-CS2103T-W17-2/tp/pulls?q=is%3Apr+author%3AAprupKale) - over 15+ PRs authored and merged
 
-* **Project management**:
-    * {Put project management contributions here}
+* **Project management**: In overall project management, I contributed in the following areas
+  * Set up the GitHub team org
+  * Set up the GitHub team repo
+  * Set up build.gradle and maintained it
 
-* **Enhancements to existing features**:
-    * {Put enhancements to existing features here}
+* **Testing**: In terms of testing, I contributed in the following ways
+  * Overlooked overall testing for the project
+  * Made significant improvement to code coverage in logic, model and storage [#108](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/108)
 
 * **Documentation**:
-    * User Guide:
-        * {Put contribution to User Guide here}
-    * Developer Guide:
-        * {Put contribution to Developer Guide here}
+  * User Guide:
+    * Updated user guide for `note` command after implementing it
+    * Updated user guide for `find` command after improving it [#82](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/82)
+  * Developer Guide:
+    * Added "must have" user stories to the developer guide [#32](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/32)
+    * Added "must have" use cases to the developer guide [#32](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/32)
+    * Added implementation details for `note` command to the developer guide [#95](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/95)
+    * Added implementation details for `find` command to the developer guide [#95](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/95)
 
 * **Community**:
-    * {Put community contributions here}
-
-* **Tools**:
-    * {Put tools integrated here}
+  * [PRs reviewed by me](https://github.com/AY2324S1-CS2103T-W17-2/tp/pulls?q=is%3Apr+reviewed-by%3AAprupKale) - over 20+ PRs reviewed
+  * [Bug reports raise by me](https://github.com/AprupKale/ped/issues) - posted 9 bug reports to help other team improve their product
