@@ -45,15 +45,15 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jingting1412&breakdown=true)
 
+<div style="page-break-after: always;"></div>
 
 * **Project management**:
-
   * Completed tasks for each milestone.
   * Facilitated meetings within the team.
+  * Oversaw the preparation of documentation.
 
 
 * **Enhancements to existing features**:
-
   * Updated current UI to increase viewing experience. (Pull requests [#132](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/132))
   * Wrote additional tests for existing features to ensure correctness. 
   (Pull requests [#70](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/70), [#203](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/203))
@@ -73,6 +73,7 @@ Given below are my contributions to the project.
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [#31](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/31), 
   [#211](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/211#pullrequestreview-1720643976)
+
 
 * **Tools**:
   * Integrated a third party library (TestFX) to the project (Pull request [#132](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/132))
