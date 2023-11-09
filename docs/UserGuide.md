@@ -319,9 +319,7 @@ Format:
 
 >:bulb: Use `u` as a shortcut for `undo`
 
-
 >:bulb: Simply entering `undo` will undo the last command
-
 
 Fields that can be deleted:
 * Appointment: Include `ap/` behind delete command
