@@ -146,37 +146,23 @@ For each interview, we see the following details:
 
 * List of accepted date formats:
   * DD/MM/YYYY and time:
-    * `16 May 2024 1515`
-    * `16 May 2024 3.15pm`
-    * `16 May 2024 3pm`
-    * `16-05-2024 1515`
-    * `16-05-2024 3.15pm`
-    * `16-05-2024 3pm`
-    * `16-05-24 1515`
-    * `16-05-24 3.15pm`
-    * `16-05-24 3pm`
-    * `16/05/2024 1515`
-    * `16/05/2024 3.15pm`
-    * `16/05/2024 3pm`
-    * `16/05/24 1515`
-    * `16/05/24 3.15pm`
-    * `16/05/24 3pm`
+    * `16 May 2024 TIME`
+    * `16-05-2024 TIME`
+    * `16-05-24 TIME`
+    * `16/05/2024 TIME`
+    * `16/05/24 TIME`
   * MM, DD and time:
-    * `16 May 1515`
-    * `16 May 3.15pm`
-    * `16 May 3pm`
-    * `16 January 1515`
-    * `16 January 3.15pm`
-    * `16 January 3pm`
-    * `16/5 1515`
-    * `16/5 3.15pm`
-    * `16/5 3pm`
-    * `16/05 1515`
-    * `16/05 3.15pm`
-    * `16/05 3pm`
+    * `16 May TIME`
+    * `16 January TIME`
+    * `16/5 TIME`
+    * `16/05 TIME`
+  * The `TIME` placeholder can be replaced with the formats below
+  * | `TIME`   |
+    |----------|
+    | `1515`   |
+    | `3.15pm` |
+    | `3pm`    |
 </div>
-
-
 
 [Back to the Table of Contents](#table-of-contents)
 
