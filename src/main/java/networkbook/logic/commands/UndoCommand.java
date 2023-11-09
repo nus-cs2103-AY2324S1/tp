@@ -19,8 +19,12 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert model != null : "Model should not be null";
-        model.undoNetworkBook();
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (!model.canUndoNetworkBook()) {
+            throw new CommandException(MESSAGE_UNDO_DISALLOWED);
+        } else {
+            model.undoNetworkBook();
+            return new CommandResult(MESSAGE_SUCCESS);
+        }
     }
 
 }

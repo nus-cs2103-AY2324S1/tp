@@ -29,7 +29,7 @@ public class SortCommandTest {
     @Test
     public void equals() {
         PersonSortComparator firstComparator = new PersonSortComparator(SortField.NAME, SortOrder.DESCENDING);
-        PersonSortComparator secondComparator = new PersonSortComparator(SortField.NONE, SortOrder.ASCENDING);
+        PersonSortComparator secondComparator = new PersonSortComparator(SortField.GRAD, SortOrder.ASCENDING);
 
         SortCommand sortFirstCommand = new SortCommand(firstComparator);
         SortCommand sortSecondCommand = new SortCommand(secondComparator);
@@ -71,7 +71,7 @@ public class SortCommandTest {
 
     @Test
     public void toStringMethod() {
-        PersonSortComparator comparator = new PersonSortComparator(SortField.NONE, SortOrder.DESCENDING);
+        PersonSortComparator comparator = new PersonSortComparator(SortField.NAME, SortOrder.DESCENDING);
         SortCommand sortCommand = new SortCommand(comparator);
         String expected = SortCommand.class.getCanonicalName() + "{comparator=" + comparator + "}";
         assertEquals(expected, sortCommand.toString());
