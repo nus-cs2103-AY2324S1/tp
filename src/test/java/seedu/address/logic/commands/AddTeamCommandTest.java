@@ -36,7 +36,6 @@ import seedu.address.model.team.Team;
 import seedu.address.testutil.TypicalPersons;
 
 public class AddTeamCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTeamBook(), new UserPrefs());
 
     @Test
     public void constructor_nullTeamName_throwsNullPointerException() {

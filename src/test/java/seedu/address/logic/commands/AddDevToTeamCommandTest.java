@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.*;
 import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Name;
@@ -15,21 +17,111 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalTeams.getTypicalTeamBook;
 
 public class AddDevToTeamCommandTest {
 
-    private Model model = new ModelStubAcceptingTeamAdded();
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTeamBook(), new UserPrefs());
     @Test
     public void constructor_nullTeamName_throwsNullPointerException() {
-        Name leaderName = BENSON.getName();
-        assertThrows(NullPointerException.class, () -> new AddDevToTeamCommand(null, leaderName));
+        Name devName = BENSON.getName();
+        assertThrows(NullPointerException.class, () -> new AddDevToTeamCommand(null, devName));
+    }
+    @Test
+    public void constructor_nullTeamLeaderName_throwsNullPointerException() {
+        String teamName = "Team Test Alpha";
+        assertThrows(NullPointerException.class, () -> new AddDevToTeamCommand(teamName, null));
+    }
+    @Test
+    public void execute_invalidTeamName_throwsInvalidTeamCommandException() {
+        String teamName = "This team does not exist in the model";
+        Name devName = AMY.getName();
+        AddDevToTeamCommand addDevToTeam = new AddDevToTeamCommand(teamName, devName);
+        assertThrows(CommandException.class, () -> addDevToTeam.execute(model));
+    }
+    @Test
+    public void execute_invalidPerson_throwsInvalidPersonCommandException() {
+        String teamName = "TEAM1";
+        Name devName = new Name("This person does not exist");
+        AddDevToTeamCommand addDevToTeam = new AddDevToTeamCommand(teamName, devName);
+        assertThrows(CommandException.class, () -> addDevToTeam.execute(model));
+    }
+    @Test
+    public void execute_personAlreadyInTeam_throwsDuplicatePersonException() {
+        String teamName = "TEAM1";
+        Name devName = CARL.getName();
+        AddDevToTeamCommand addDevToTeam = new AddDevToTeamCommand(teamName, devName);
+        try {
+            addDevToTeam.execute(model);
+            fail("Expected this method to fail");
+        } catch (CommandException e) {
+            assertEquals("This developer already exists in this team!", e.getMessage());
+        }
+    }
+    @Test
+    public void execute_leaderOfTeamBeingAdded_throwsTeamLeaderAddException() {
+        String teamName = "TEAM1";
+        Name devName = ALICE.getName();
+        AddDevToTeamCommand addDevToTeam = new AddDevToTeamCommand(teamName, devName);
+        try {
+            addDevToTeam.execute(model);
+            fail("Expected this method to fail");
+        } catch (CommandException e) {
+            assertEquals("The leader of team cannot be added as a developer!", e.getMessage());
+        }
+    }
+    @Test
+    public void execute_validDeveloperAdded_success() throws CommandException {
+        String teamName = "TEAM2";
+        Name devName = ALICE.getName();
+        AddDevToTeamCommand addDevToTeam = new AddDevToTeamCommand(teamName, devName);
+        assertEquals(String.format(AddDevToTeamCommand.MESSAGE_SUCCESS, Messages.format(teamName, devName)),
+                addDevToTeam.execute(model).getFeedbackToUser());
+    }
+    @Test
+    public void equals() {
+        Name dev1 = ALICE.getName();
+        Name dev2 = BENSON.getName();
+        String teamName1 = "TEAM1";
+        String teamName2 = "TEAM2";
+        AddDevToTeamCommand addCommand1 = new AddDevToTeamCommand(teamName1, dev1);
+        AddDevToTeamCommand addCommand2 = new AddDevToTeamCommand(teamName2, dev2);
+
+        // same object -> returns true
+        assertTrue(addCommand1.equals(addCommand1));
+
+        // same values -> returns true
+        AddDevToTeamCommand addCommand3 = new AddDevToTeamCommand(teamName1, dev1);
+        assertTrue(addCommand3.equals(addCommand1));
+
+        // different types -> returns false
+        assertFalse(addCommand1.equals("abc"));
+
+        // null -> returns false
+        assertFalse(addCommand2.equals(null));
+
+        // different team command -> returns false
+        assertFalse(addCommand1.equals(addCommand2));
+
+        // same teamname,different leadername -> returns false
+        AddTeamCommand addTeam4Command = new AddTeamCommand(teamName1, dev2);
+        assertFalse(addCommand1.equals(addTeam4Command));
+    }
+    @Test
+    public void toStringMethod() {
+        String teamName = "TEAM1";
+        Name devToAdd = DANIEL.getName();
+        AddDevToTeamCommand addCommand = new AddDevToTeamCommand(teamName, devToAdd);
+        String expected = AddDevToTeamCommand.class.getCanonicalName() + "{devToAdd=" + devToAdd + "}";
+        assertEquals(expected, addCommand.toString());
     }
 
     /**
-     * A defau
-     * lt model stub that have all of the methods failing.
+     * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -258,15 +350,22 @@ public class AddDevToTeamCommandTest {
             return getTypicalAddressBook().containsPerson(name);
         }
         @Override
+        public boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd) {
+            requireNonNull(teamToAddTo);
+            requireNonNull(devToAdd);
+            IdentityCode identityCode = getIdentityCodeByName(devToAdd);
+            return getTypicalTeamBook().personAlreadyInTeam(teamToAddTo, identityCode);
+        }
+        @Override
         public Person getPersonByName(Name name) {
             requireNonNull(name);
             return getTypicalAddressBook().getPersonByName(name);
         }
-
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
     }
+
 }
