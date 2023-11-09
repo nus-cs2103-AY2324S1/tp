@@ -221,15 +221,7 @@ public class ModelManager implements Model {
 
     @Override
     public Set<Name> findInvalidNames(Set<Name> names) {
-        Set<Name> invalidNames = new HashSet<>();
-
-        for (Name name : names) {
-            boolean hasName = checkNameExists(name);
-            if (!hasName) {
-                invalidNames.add(name);
-            }
-        }
-        return invalidNames;
+        return this.addressBook.findInvalidNames(names);
     }
 
     @Override
@@ -273,15 +265,6 @@ public class ModelManager implements Model {
                 Optional.of(event.getStartTime()), Optional.of(event.getEndTime()),
                 event.getUpdatedNames(personToEdit.getName(), editedPerson.getName()),
                 event.getGroups());
-    }
-
-    private boolean checkNameExists(Name name) {
-        for (Person person : this.filteredPersons) {
-            if (person.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean checkGroupExists(Group group) {

@@ -88,20 +88,21 @@ public class EditPersonCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (editPersonDescriptor.getName().isPresent()) {
-            model.updateAssignedPersons(personToEdit, editedPerson);
-        }
-
+        // This check must happen first to check duplicate persons
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            System.out.println("duplicate detected 2");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.setPerson(personToEdit, editedPerson);
+
+        // Update assigned persons in the event list
         model.updateAssignedPersons(personToEdit, editedPerson);
 
-
+        /* Remove empty groups from event when un-assigning groups from persons
+            and that person is the last member of the group
+        */
         Set<Group> emptyGroups = model.getEmptyGroups(personToEdit);
-
         if (!emptyGroups.isEmpty()) {
             for (Group group : emptyGroups) {
                 logger.info(String.format("Removing empty group: %s", group));
@@ -110,6 +111,7 @@ public class EditPersonCommand extends Command {
         } else {
             model.updateGroups();
         }
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

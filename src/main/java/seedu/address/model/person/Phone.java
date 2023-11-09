@@ -12,7 +12,8 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
+            "Phone numbers should only contain numbers, and it should be at least 3"
+                    + " digits long and no longer than 17 digits.";
     public static final String VALIDATION_REGEX = "\\d{3,}";
     public static final Phone NULL_PHONE;
 
@@ -43,6 +44,10 @@ public class Phone {
         //to represent the case of optional time.
         if (test.trim().equals("")) {
             return true;
+        }
+
+        if (test.length() > 17) {
+            return false;
         }
         return test.matches(VALIDATION_REGEX);
     }

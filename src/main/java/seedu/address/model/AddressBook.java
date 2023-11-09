@@ -218,4 +218,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void sort() {
         this.events.sort();
     }
+
+    /**
+     * Returns a list of all the names that do not exist.
+     */
+    public Set<Name> findInvalidNames(Set<Name> names) {
+        return this.persons.findInvalidNames(names);
+    }
 }
