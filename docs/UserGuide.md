@@ -222,7 +222,7 @@ After the mapping, the new user-defined shortcut will work the same way as the c
 A command keyword can have multiple valid shortcuts mapped to it. 
 * i.e. both `del --> delete` and `rm --> delete` mappings can exist concurrently.
 
-A valid shortcut cannot be mapped to two different command words at once
+A valid shortcut cannot be mapped to multiple command words at once
 * i.e. both `e --> edit` and `e --> exit` mappings **cannot** exist concurrently.
 * If such a duplicate mapping is attempted, the previous one will be overridden.
 
@@ -264,7 +264,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the stored records.
+Clears all patient and specialist entries from the stored records.
 
 Format: `clear`
 
