@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "lftp:ListFreeTimeCommandParser" as ListFreeTimeCommandParser LOGIC_COLOR
+participant "lft:ListFreeTimeCommand" as ListFreeTimeCommand LOGIC_COLOR
+participant "TimeParser" as TimeParser <<class>> LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+end box
+[-> LogicManager : execute("list-freetime 12/12/2099")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("list-freetime 12/12/2099")
+activate AddressBookParser
+
+create ListFreeTimeCommandParser
+AddressBookParser -> ListFreeTimeCommandParser
+activate ListFreeTimeCommandParser
+
+ListFreeTimeCommandParser --> AddressBookParser
+deactivate ListFreeTimeCommandParser
+
+AddressBookParser --> ListFreeTimeCommandParser : parse(args)
+activate ListFreeTimeCommandParser
+
+ListFreeTimeCommandParser --> TimeParser : parseDate(args, true)
+activate TimeParser
+
+TimeParser --> ListFreeTimeCommandParser : Time
+deactivate TimeParser
+
+create ListFreeTimeCommand
+ListFreeTimeCommandParser --> ListFreeTimeCommand
+activate ListFreeTimeCommand
+ListFreeTimeCommand --> ListFreeTimeCommandParser
+deactivate ListFreeTimeCommand
+
+ListFreeTimeCommandParser --> AddressBookParser : ListFreeTimeCommand
+deactivate ListFreeTimeCommandParser
+destroy ListFreeTimeCommandParser
+
+AddressBookParser --> LogicManager : ListFreeTimeCommand
+deactivate AddressBookParser
+
+LogicManager --> ListFreeTimeCommand : execute(model)
+activate ListFreeTimeCommand
+
+ListFreeTimeCommand --> Model : listPocketsOfTimeOnGivenDay(givenDay)
+activate Model
+
+Model --> AddressBook : listPocketsOfTimeOnGivenDay(day)
+activate AddressBook
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> ListFreeTimeCommand
+deactivate Model
+
+ListFreeTimeCommand --> ListFreeTimeCommand : formatFreeTime(freeTimes)
+activate ListFreeTimeCommand
+
+ListFreeTimeCommand --> ListFreeTimeCommand
+deactivate ListFreeTimeCommand
+
+ListFreeTimeCommand --> LogicManager : CommandResult
+deactivate ListFreeTimeCommand
+
+[<--LogicManager : CommandResult
+destroy ListFreeTimeCommand
+deactivate LogicManager
+@enduml
