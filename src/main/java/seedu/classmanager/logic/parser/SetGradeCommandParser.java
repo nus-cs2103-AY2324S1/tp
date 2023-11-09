@@ -48,7 +48,7 @@ public class SetGradeCommandParser implements Parser<SetGradeCommand> {
         try {
             grade = Integer.parseInt(argMultimap.getValue(PREFIX_GRADE).get());
         } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetGradeCommand.MESSAGE_USAGE));
+            throw new ParseException(ClassDetails.MESSAGE_INVALID_GRADE);
         }
         return new SetGradeCommand(studentNumber, assignmentIndex, grade);
     }

@@ -102,6 +102,7 @@ public class ModelManager implements Model {
     public void toggleColorTheme() {
         userPrefs.toggleColorTheme();
     }
+
     //=========== ClassManager ================================================================================
 
     @Override
@@ -172,11 +173,11 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
-        if (!filteredStudents.isEmpty()) {
-            versionedClassManager.setSelectedStudent(filteredStudents.get(0));
-        }
     }
 
+    //@@author Cikguseven-reused
+    //Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+    // with minor modifications
     /**
      * Returns true if the model has previous Class Manager states to restore.
      */
@@ -216,14 +217,23 @@ public class ModelManager implements Model {
     public void commitClassManager() {
         versionedClassManager.commit();
     }
+    //@@author
 
     /**
      * Resets the history of the model after a load command.
      */
     @Override
-    public void reset(ReadOnlyClassManager classManager) {
-        this.versionedClassManager.reset(classManager);
+    public void loadReset(ReadOnlyClassManager classManager) {
+        this.versionedClassManager.loadReset(classManager);
         versionedClassManager.resetSelectedStudent();
+    }
+
+    /**
+     * Resets the history of the model after a config command.
+     */
+    @Override
+    public void configReset() {
+        this.versionedClassManager.configReset();
     }
 
     /**

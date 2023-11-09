@@ -42,12 +42,12 @@ public class RandomCommandTest {
         int largeInvalid = TypicalStudents.getTypicalStudents().size() + 1;
         RandomCommand invalidRandomCommand = new RandomCommand(largeInvalid);
         assertCommandFailure(invalidRandomCommand, model,
-            RandomCommand.MESSAGE_INVALID_NUM_OF_STUDENT, commandHistory);
+            RandomCommand.MESSAGE_INVALID_NUM_OF_STUDENTS, commandHistory);
 
         // input that is negative
         RandomCommand negativeRandomCommand = new RandomCommand(-1);
         assertCommandFailure(negativeRandomCommand, model,
-            RandomCommand.MESSAGE_INVALID_NUM_OF_STUDENT, commandHistory);
+            RandomCommand.MESSAGE_INVALID_NUM_OF_STUDENTS, commandHistory);
     }
 
     @Test

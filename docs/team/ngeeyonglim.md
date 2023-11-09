@@ -3,16 +3,14 @@ layout: default.md
 title: "Ngee Yong's Project Portfolio Page"
 ***
 
-# Class Manager 2023
+### Class Manager 2023
 
-Class Manager 2023 aims to provide fast access to NUS TAs who need help in maintaining student information across multiple classes. It also aims to help TAs visualize data across and within classes.
+*Class Manager 2023 aims to provide fast access to NUS TAs who need help in maintaining student information across multiple classes. It also aims to help TAs visualize data across and within classes.*
 
-
-## Summary of Contributions
-
+Given below are my contributions to the project.
 
 * **Code Contributed**:[RepoSense link](https://nus*cs2103*ay2324s1.github.io/tp*dashboard/?search=ngeeyonglim&breakdown=true)
-* 
+
 * **New Feature**: Edited Student to be referenced by Student Number instead of position in the list.
   * What it does: This allows for easier and more accurate referencing of students in the list.
   * Justification: This is a more accurate way of referencing students as the position of the student in the list may change.
