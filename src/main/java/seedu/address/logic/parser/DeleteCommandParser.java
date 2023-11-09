@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_MISSING_SECONDARY_COMMAND;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import seedu.address.logic.commands.DeleteCommand;
@@ -16,6 +17,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     @Override
     public DeleteCommand parse(String userInput) throws ParseException {
         String secondaryCommandWord = SecondaryCommandSelector.getSecondaryCommandWord(userInput);
+
+        if (secondaryCommandWord == null) {
+            throw new ParseException(String.format(MESSAGE_MISSING_SECONDARY_COMMAND, DeleteCommand.COMMAND_WORD));
+        }
+
         String args = SecondaryCommandSelector.getArguments(secondaryCommandWord, userInput);
         switch (secondaryCommandWord) {
         case DeletePersonCommand.SECONDARY_COMMAND_WORD:

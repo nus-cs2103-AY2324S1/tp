@@ -18,10 +18,10 @@ public class ListPersonCommand extends ListCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + SECONDARY_COMMAND_WORD
-            + ": Lists contacts in the address book."
-            + "Parameters: "
-            + PREFIX_TAG + " TAGNAME...\n"
-            + "Tag argument may be empty."
+            + ": Lists contacts in the address book.\n"
+            + "Usage: "
+            + COMMAND_WORD + " " + SECONDARY_COMMAND_WORD
+            + " [" + PREFIX_TAG + " TAGNAME...]\n"
             + "Example: \n"
             + "- " + COMMAND_WORD + " " + SECONDARY_COMMAND_WORD + "\n"
             + "- " + COMMAND_WORD + " " + SECONDARY_COMMAND_WORD + " " + PREFIX_TAG + " recruiter";
@@ -29,7 +29,8 @@ public class ListPersonCommand extends ListCommand {
     private final Set<Tag> tags;
 
     /**
-     * Creates a ListPersonCommand to list contacts based on tags (may be empty) {@code Person}
+     * Creates a ListPersonCommand to list contacts based on tags (may be empty)
+     * {@code Person}
      */
     public ListPersonCommand(Set<Tag> tags) {
         requireNonNull(tags);

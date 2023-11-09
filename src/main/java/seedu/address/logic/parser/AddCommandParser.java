@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_MISSING_SECONDARY_COMMAND;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import seedu.address.logic.commands.AddCommand;
@@ -17,6 +18,11 @@ public class AddCommandParser implements Parser<AddCommand> {
     @Override
     public AddCommand parse(String userInput) throws ParseException {
         String secondaryCommandWord = SecondaryCommandSelector.getSecondaryCommandWord(userInput);
+
+        if (secondaryCommandWord == null) {
+            throw new ParseException(String.format(MESSAGE_MISSING_SECONDARY_COMMAND, AddCommand.COMMAND_WORD));
+        }
+
         String args = SecondaryCommandSelector.getArguments(secondaryCommandWord, userInput);
         switch (secondaryCommandWord) {
         case AddPersonCommand.SECONDARY_COMMAND_WORD:
