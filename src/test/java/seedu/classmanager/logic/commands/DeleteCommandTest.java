@@ -43,7 +43,7 @@ public class DeleteCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertTrue(model.getSelectedStudent().isEmpty());
+        assertEquals(null, model.getSelectedStudent());
     }
 
     @Test

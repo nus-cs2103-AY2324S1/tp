@@ -51,7 +51,7 @@ public class SetGradeCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertEquals(editedStudent, model.getSelectedStudent().get(0));
+        assertEquals(editedStudent, model.getSelectedStudent());
     }
 
     @Test
