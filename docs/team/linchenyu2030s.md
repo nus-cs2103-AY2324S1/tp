@@ -15,23 +15,38 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=linchenyu2030s&breakdown=true)
 
 * **Enhancements implemented**:
-    * to be added soon
+    * enhance "edit" feature
+        * To allow user to edit by name or edit by index.
+        * To be able to edit those newly added fields.
+    * develop "table" feature.
+        * To allow user generate statistical table regarding student data.
+    * develop uplevel feature
+        * To allow user to update the sec levels for all students and delete all sec 4 students.
+    * develop undolevel feature.
+        * To allow user to perform "undo" action for uplevel feature in case user accidentally enter uplevel.
+        * To allow user revert the students data back to before previous uplevel action since the user open application.
+      
 
 * **Documentation**:
     * User Guide:
-        * Complete user guide for editing data.
+        * Complete user guide for editing data, table feature, update sec level feature and undo sec level update feature.
     * Developer Guide:
         * Complete user stories
         * Complete glossary
         * Complete Non Functional Requirements(NFRs)
+        * Added activity diagrams and sequence diagrams for the table feature.
+        * Provided details on alternative implementations of the table feature.
 
 * **Team-based tasks**:
-    * update "edit" feature
-    * merge Lauren's pull request and resolve merge conflict
-    * develop "table" feature that can generate statistical table regarding student.
+    * Improve code quality.
+    * Wrote and improved JUnit tests for enhancements implemented.
+    * Perform user testing for our product Tutorium.
+
 
 * **Review/mentoring contributions**:
-    * review Lauren's pull request
+    * review pull requests created by Lauren Lim.
+    * PRs merged and reviewed: 79, 93, 103, 104, 111, 176, 185
+
 
 * **Contributions beyond the project team**:
-    * to be added soon
+    * Reported bugs found in other teams' JAR files and User Guide during the PE Dry Run.
