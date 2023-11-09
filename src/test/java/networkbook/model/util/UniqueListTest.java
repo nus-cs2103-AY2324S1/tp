@@ -299,7 +299,7 @@ public class UniqueListTest {
     }
 
     @Test
-    public void test_falsePredicate_returnsTrue() {
+    public void test_falsePredicate_returnsFalse() {
         assertFalse(getSampleList().test(INDEX1, FALSE_PREDICATE));
         assertFalse(getSampleList().test(INDEX2, FALSE_PREDICATE));
         assertFalse(getSampleList().test(INDEX2, SAMPLE_PREDICATE));
