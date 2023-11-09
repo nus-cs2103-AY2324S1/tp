@@ -3,10 +3,9 @@ layout: page
 title: Cloud7050's Project Portfolio Page
 ---
 
-//TODO fill in as the project progresses
-// https://nus-cs2103-ay2324s1.github.io/website/schedule/week7/project.html#4-add-a-skeletal-ppp
-
 ## Overview
+
+//TODO
 
 ## Summary of contributions
 
@@ -16,20 +15,24 @@ title: Cloud7050's Project Portfolio Page
 
 ### Enhancements implemented
 
+//TODO
+
 ### Contributions to the UG
+
+//TODO
 
 ### Contributions to the DG
 
+//TODO
+
 ### Contributions to team-based tasks
+
+//TODO
 
 ### Review/mentoring contributions
 
+//TODO
+
 ### Contributions beyond the project team
 
-## Contributions to the developer guide (extracts)
-
-//NOTE optional
-
-## Contributions to the user guide (extracts)
-
-//NOTE optional
+//TODO
