@@ -193,6 +193,10 @@ _{more aspects and alternatives to be added}_
 The mark attendance feature is implemented using the `MarkAttendanceCommand` class. It is parsed by the `MarkAttendanceCommandParser` class.
 If parsed successfully, it returns a `MarkAttendanceCommand` object.
 
+The following sequence diagram shows how the `MarkAttendanceCommand` works:
+
+![MarkAttendanceSeqDiagram](images/MarkAttendanceSeqDiagram.png)
+
 The following activity diagram shows how the `MarkAttendanceCommand` works:
 
 ![MarkAttendanceActivityDiagram](images/MarkAttendanceActivityDiagram.png)
