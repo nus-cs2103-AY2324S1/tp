@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Collections;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
@@ -20,16 +18,16 @@ public class StatusPredicateTest {
         Person secondPredicateKeywordList = TypicalPersons.AMY;
 
         StatusPredicate firstPredicate =
-            new StatusPredicate(Collections.singletonList(Status.MISSED.toString()), firstPredicateKeywordList);
+            new StatusPredicate(Status.MISSED, firstPredicateKeywordList);
         StatusPredicate secondPredicate =
-            new StatusPredicate(Collections.singletonList(Status.COMPLETED.toString()), secondPredicateKeywordList);
+            new StatusPredicate(Status.COMPLETED, secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
         StatusPredicate firstPredicateCopy =
-            new StatusPredicate(Collections.singletonList(Status.MISSED.toString()), firstPredicateKeywordList);
+            new StatusPredicate(Status.MISSED, firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -45,30 +43,30 @@ public class StatusPredicateTest {
     @Test
     public void test_containsStatus_returnsTrue() {
         StatusPredicate predicate =
-            new StatusPredicate(Collections.singletonList(Status.PENDING.toString()), null);
+            new StatusPredicate(Status.PENDING, null);
         assertTrue(predicate.test(new ScheduleBuilder().build()));
     }
 
     @Test
     public void test_containsStatusAndPerson_returnsTrue() {
         StatusPredicate predicate =
-            new StatusPredicate(Collections.singletonList(Status.PENDING.toString()), TypicalPersons.ALICE);
+            new StatusPredicate(Status.PENDING, TypicalPersons.ALICE);
         assertTrue(predicate.test(new ScheduleBuilder().build()));
     }
 
     @Test
     public void test_containsStatusAndPerson_returnsFalse() {
         StatusPredicate predicate =
-            new StatusPredicate(Collections.singletonList(Status.PENDING.toString()), TypicalPersons.BOB);
+            new StatusPredicate(Status.PENDING, TypicalPersons.BOB);
         assertFalse(predicate.test(new ScheduleBuilder().build()));
     }
 
     @Test
     public void toStringMethod() {
         Person tutor = TypicalPersons.ALICE;
-        StatusPredicate predicate = new StatusPredicate(Collections.singletonList(Status.MISSED.toString()), tutor);
+        StatusPredicate predicate = new StatusPredicate(Status.MISSED, tutor);
 
-        String expected = StatusPredicate.class.getCanonicalName() + "{status=[" + Status.MISSED.toString() + "]}";
+        String expected = StatusPredicate.class.getCanonicalName() + "{status=" + Status.MISSED + "}";
         assertEquals(expected, predicate.toString());
     }
 }
