@@ -104,9 +104,11 @@ Before we begin, the table below describes some of the symbols and syntax you ma
 
 3. Copy the file to the folder you want to use as the home folder for InterviewHub.
 
-4. Double-click the file to start the app. The Graphical User Interface(GUI) should appear in a few seconds.
+4. Open a terminal, and navigate to the folder you put the JAR file in. 
 
-5. To get a better understanding of what you see. Please refer to the [GUI Summary](#gui-summary) for more details.
+5. Launch the app by using the command `java -jar InterviewHub.jar` in your terminal. The Graphical User Interface(GUI) should appear in a few seconds. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.
+
+6. To get a better understanding of what you see. Please refer to the [GUI Summary](#gui-summary) for more details.
 
 --------------------------------------------------------------------------------------------------------------------
 
