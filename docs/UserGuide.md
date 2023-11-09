@@ -241,15 +241,16 @@ e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <
 
 Examples:
 * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent`
-  * adds a fosterer named Jerry Tan with the phone number 98765412 and email address jerry123@example.com; his address is Baker street, block 5, #27-01, housing type is HDB and he is fostering a cat named Dexter. An urgent visit is required.
-* `add n/Tom Lee p/98123456 e/tom@example.com a/Happy street, block 123, #01-01 t/Available t/HDB t/able.Dog`
-  * adds a fosterer named Pete Tay with the phone number 98765411 and email address pete@example.com; his address is Happy street, block 5, #01-01, housing type is Condo and currently he is not fostering any animal but looking to foster a cat.
+  * adds a fosterer named Jerry Tan with the following details:
+    ![Add](images/screenshots/AddJerry.png)
+* `add n/Pete Tay p/98765411 e/pete@example.com a/Happy street, block 5, #27-01 housing/Condo availability/Available animal/nil animalType/able.Cat`
+  * adds a fosterer named Pete Tay with the following details:
+    ![Add](images/screenshots/AddPete.png)
 
 In the case where duplicates field descriptions are given, the last one will be chosen:
 * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB housing/Condo availability/Available availability/NotAvailable animal/Dexter animal/Happy animalType/able.Dog animalType/current.Cat t/Urgent`
-  * adds a fosterer named Jerry Tan with the phone number 98765412 and email address jerry123@example.com; his address is Baker street, block 5, #27-01, housing type is Condo and he is fostering a cat named Dexter. An urgent visit is required.
-
-![Add](images/screenshots/AddSuccess.png)
+  * adds a fosterer named Jerry Tan, who lives in a Condo and is fostering a cat named Happy.
+    ![Add](images/screenshots/AddDuplicate.png)
 
 ### Adding a fosterer through the profile page: `add`
 
