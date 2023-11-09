@@ -233,17 +233,19 @@ The edit applicant feature allows users to edit the details of an applicant.
 
 ### Help feature
 
-#### Steps to trigger
-
-1. User opens the app
-2. User keys in `help`
-3. Command list is shown and opens user guide in browser
 
 #### Implementation
 
 1. When the user enters the term help. it triggers the help feature in the parser under the switch case.
 2. After it is triggered, it will display a short list of possible commands that the user can use.
 3. The user guide will also be opened in their browser
+
+
+#### Steps to trigger
+
+1. User opens the app
+2. User keys in `help`
+3. Command list is shown and opens user guide in browser
 
 #### Notes
 
@@ -252,18 +254,18 @@ The edit applicant feature allows users to edit the details of an applicant.
 
 ### Confirmation + Clear command
 
-#### Steps to trigger
-
-1. User opens the app
-2. User enters `clear` (and subsequently sees a message asking to confirm)
-3. User enters `yes` to confirm the clear
-
 #### Implementation
 
 1. This features requires the state of the parser to be known.
 2. The parser is modified to store the previous taken in command, in this case whether the previous command was a successful clear command.
 3. If the previous command is not a clear command, it looks for the keyword clear. Otherwise, it looks for the keyword yes.
 4. Hence, the user will first need to call clear, before calling yes to invoke the clear mechanism, ensuring safety of data.
+
+#### Steps to trigger
+
+1. User opens the app
+2. User enters `clear` (and subsequently sees a message asking to confirm)
+3. User enters `yes` to confirm the clear
 
 #### Notes
 
@@ -366,9 +368,9 @@ The following diagram summarises what happens when a user executes a Filter comm
 
 <puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommandActivityDiagram" />
 
-### Design considerations
+#### Design considerations
 
-#### Aspect: How to filter applicants
+##### Aspect: How to filter applicants
 
 - Alternative 1 (current choice): use a custom predicate and FilteredList, **compare using strings**
     - Pros: Current implementation of ModelManager already uses FilteredList, making a custom predicate an easy
@@ -383,7 +385,7 @@ The following diagram summarises what happens when a user executes a Filter comm
     - Cons: Will require greater complexity than alternative 1 in implementation. May be slower to integrate new classes
       in the future.
 
-#### Aspect: Command syntax
+##### Aspect: Command syntax
 
 - Alternative 1: `filter n/ [Name] e/ [Email] p/ [Position] hp/ [Phone] s/ [Status] lts/ [Score] gts/ [Score]`
     - Pros: Unambiguous and forces all fields to be entered, preventing errors.
@@ -405,36 +407,28 @@ The following diagram summarises what happens when a user executes a Filter comm
 The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient way of 
 finding and tracking specific candidates.
 
+#### Implementation
+After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`,
+the input is passed to the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords
+in the input and creates a list of keywords.
+
+`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords.
+This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object.
+`LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by calling
+`ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
+
+An instance of `CommandResult` is then created which contains the message and information that will be displayed to the user.
+The GUI then updates to show this information to the user.
+
+
 #### Steps to trigger
 1. User opens the app
 2. User keys in `find KEYWORD [MORE_KEYWORDS]`
 3. The GUI will update to show a list of applicants with name containing any of the keywords.
 
-#### Implementation
-After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`, 
-the input is passed to the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords 
-in the input and creates a list of keywords.
+#### Design considerations
 
-`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords. 
-This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object. 
-`LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by calling 
-`ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
-
-An instance of `CommandResult` is then created which contains the message and information that will be displayed to the user. 
-The GUI then updates to show this information to the user.
-
-#### Notes
-
-1. The search is case-insensitive, e.g. `find JOHN` will return both john and John. 
-2. The order of the keywords does not matter. e.g. `find Alice Tan` will match Tan Alice. 
-3. Only the applicant name is searched. 
-4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
-   Applicants matching at least one keyword will be returned (i.e. OR search). 
-   e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
-
-### Design considerations
-
-#### Aspect: How to find applicants
+##### Aspect: How to find applicants
 
 - Alternative 1: Find applicants by name using exact match search 
 (e.g. `find Eddy` will only result in applicants whose name is Eddy)
@@ -450,7 +444,7 @@ The GUI then updates to show this information to the user.
   - Cons: May return a larger number of results, some of which may not be relevant (false positives), 
   potentially requiring additional filtering or sorting which can be inconvenient and time-consuming.
 
-#### Aspect: Command syntax 
+##### Aspect: Command syntax 
 
 - Alternative 1: `find n/NAME` where `n/` represents the name to be searched
   - Pros: Unambiguous that the term to be searched for is the name.
@@ -461,7 +455,14 @@ The GUI then updates to show this information to the user.
   - Cons: Not immediately clear that the `find` command finds applications by name. 
   This will have to be explained in the user guide.
 
+#### Notes
 
+1. The search is case-insensitive, e.g. `find JOHN` will return both john and John.
+2. The order of the keywords does not matter. e.g. `find Alice Tan` will match Tan Alice.
+3. Only the applicant name is searched.
+4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
+   Applicants matching at least one keyword will be returned (i.e. OR search).
+   e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
 
    
 --------------------------------------------------------------------------------------------------------------------
