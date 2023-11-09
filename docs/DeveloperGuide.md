@@ -602,32 +602,7 @@ Guarantees: The applicant's information will be updated.
 
       Use case ends.
 
-**Use case: UC03 - List all applicants**
-
-Guarantees: All applicants will be listed.
-
-**MSS**
-
-1. User inputs the command to view the list of all applicants.
-2. Staff-Snap displays the list of all applicants.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-
-    * 1a1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-* 1b. Applicant list is empty.
-
-    * 1b1. Staff-Snap shows an empty applicant list.
-
-      Use case ends.
-
-**Use case: UC04 - Delete an applicant**
+**Use case: UC03 - Delete an applicant**
 
 Guarantees: The applicant will be removed from the list of applicants.
 
@@ -652,14 +627,14 @@ Guarantees: The applicant will be removed from the list of applicants.
 
       Use case ends.
 
-**Use case: UC05 - Find an applicant by name**
+**Use case: UC04 - List all applicants**
 
-Guarantees: The applicants with name matching the search will be listed.
+Guarantees: All applicants will be listed.
 
 **MSS**
 
-1. User inputs the command to find an applicant by name.
-2. Staff-Snap displays the list of all applicants that match the search.
+1. User inputs the command to view the list of all applicants.
+2. Staff-Snap displays the list of all applicants.
 
    Use case ends.
 
@@ -671,150 +646,44 @@ Guarantees: The applicants with name matching the search will be listed.
 
       Use case ends.
 
-* 1b. No applicant found.
+* 1b. Applicant list is empty.
 
     * 1b1. Staff-Snap shows an empty applicant list.
 
       Use case ends.
 
-* 1c. No search term provided.
+**Use case: UC05 - Change an applicant's status**
 
-    * 1c1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-**Use case: UC06 - Sort applicants**
-
-Guarantees: The list of applicants will be sorted by the descriptor.
+Guarantees: The applicant's status will be updated.
 
 **MSS**
 
-1. User inputs the command to sort the applicants by a particular descriptor.
-2. Staff-Snap displays the list of applicants sorted by the descriptor.
+1. User inputs the command to edit the status of an applicant.
+2. Staff-Snap updates the applicant list to display the updated status of the applicant.
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
 * 1a. User enters an invalid command.
 
-    * 1a1. Staff-Snap shows an error message.
+  * 1a1. Staff-Snap shows an error message.
 
-      Use case ends.
+    Use case ends.
 
-* 1b. User enters an invalid descriptor.
+* 1b. User enters an invalid index for the applicant.
 
-    * 1b1. Staff-Snap shows an error message.
+  * 1b1. Staff-Snap shows an error message.
 
-      Use case ends.
+    Use case ends.
 
-* 1c. No descriptor provided.
+* 1c. User enters an invalid status.
 
-    * 1c1. Staff-Snap shows an error message.
+  * 1c1. Staff-Snap shows an error message.
 
-      Use case ends.
+    Use case ends.
 
-**Use case: UC07 - Filter applicants**
-
-Guarantees: Only applicants that satisfies the specified criterion will be listed.
-
-**MSS**
-
-1. User inputs the command to filter the list of applicants by a specified criterion.
-2. Staff-Snap displays the list of all applicants that satisfies the specified criterion.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-
-    * 1a1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-* 1b. User enters an invalid criterion.
-
-    * 1b1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-* 1c. No criterion provided.
-
-    * 1c1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-**Use case: UC08 - List all commands**
-
-Guarantees: The list of all available commands will be made accessible.
-
-**MSS**
-
-1. User inputs the command to view the list of all available commands.
-2. Staff-Snap opens the user guide in the default browser.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-
-    * 1a1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-**Use case: UC09 - Exit the program**
-
-Guarantees: Staff-Snap exits.
-
-**MSS**
-
-1. User inputs the command to exit the program.
-2. Staff-Snap exits and closes.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-
-    * 1a1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-* 1b. User closes the application window.
-
-  Use case resumes at step 2.
-
-**Use case: UC10 - Clear list of applicants**
-
-Guarantees: The list of applicants will be cleared.
-
-**MSS**
-
-1. User inputs the command to clear the list of applicants.
-2. Staff-Snap prompts for confirmation
-3. User confirms the action.
-4. Staff-Snap clears the list of applicants and displays an empty list.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-
-    * 1a1. Staff-Snap shows an error message.
-
-      Use case ends.
-
-* 2a. User rejects the confirmation.
-
-    * 2a1. Staff-Snap clears confirmation message.
-
-      Use case ends.
-
-**Use case: UC11 - Add an interview to an applicant**
+**Use case: UC06 - Add an interview to an applicant**
 
 Guarantees: A new interview will be added to the applicant.
 
@@ -863,7 +732,7 @@ Guarantees: A new interview will be added to the applicant.
 
       Use case ends.
 
-**Use case: UC12 - Edit an interview of an applicant**
+**Use case: UC07 - Edit an interview of an applicant**
 
 Guarantees: The specified interview will be updated.
 
@@ -906,7 +775,7 @@ Guarantees: The specified interview will be updated.
 
       Use case ends.
 
-**Use case: UC13 - Delete an interview from an applicant**
+**Use case: UC08 - Delete an interview from an applicant**
 
 Guarantees: The specified interview will be deleted from the applicant.
 
@@ -936,6 +805,219 @@ Guarantees: The specified interview will be deleted from the applicant.
     * 1c1. Staff-Snap shows an error message.
 
       Use case ends.
+
+
+**Use case: UC09 - Find an applicant by name**
+
+Guarantees: The applicants with name matching the search will be listed.
+
+**MSS**
+
+1. User inputs the command to find an applicant by name.
+2. Staff-Snap displays the list of all applicants that match the search.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. No applicant found.
+
+    * 1b1. Staff-Snap shows an empty applicant list.
+
+      Use case ends.
+
+* 1c. No search term provided.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC10 - Sort applicants**
+
+Guarantees: The list of applicants will be sorted by the descriptor.
+
+**MSS**
+
+1. User inputs the command to sort the applicants by a particular descriptor.
+2. Staff-Snap displays the list of applicants sorted by the descriptor.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User enters an invalid descriptor.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. No descriptor provided.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC11 - Filter applicants**
+
+Guarantees: Only applicants that satisfies the specified criterion will be listed.
+
+**MSS**
+
+1. User inputs the command to filter the list of applicants by a specified criterion.
+2. Staff-Snap displays the list of all applicants that satisfies the specified criterion.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User enters an invalid criterion.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. No criterion provided.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC12 - import CSV file**
+
+Guarantees: The applicant list will be populated with data from the imported CSV file.
+
+**MSS**
+
+1. User inputs the command to import a CSV file.
+2. Staff-Snap updates the applicant list to show the applicant data from the CSV file.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+    
+    * 1a1. Staff-Snap shows an error message.
+  
+        Use case ends.
+
+* 1b. User enters an invalid filename.
+
+  * 1b1. Staff-Snap shows an error message.
+  
+    Use case ends.
+
+* 1c. User uses a file with incorrect headers.
+
+  * 1c1. Staff-Snap shows an error message.
+  
+    Use case ends.
+
+* 1d. User uses an file with duplicate applicants.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1e. User uses an file with applicants that are already in Staff-Snap.
+
+    * 1e1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1f. User uses an file with invalid fields.
+
+    * 1f1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC13 - List all commands**
+
+Guarantees: The list of all available commands will be made accessible.
+
+**MSS**
+
+1. User inputs the command to view the list of all available commands.
+2. Staff-Snap opens the user guide in the default browser.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC14 - Clear list of applicants**
+
+Guarantees: The list of applicants will be cleared.
+
+**MSS**
+
+1. User inputs the command to clear the list of applicants.
+2. Staff-Snap prompts for confirmation
+3. User confirms the action.
+4. Staff-Snap clears the list of applicants and displays an empty list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 2a. User rejects the confirmation.
+
+    * 2a1. Staff-Snap clears confirmation message.
+
+      Use case ends.
+
+**Use case: UC15 - Exit the program**
+
+Guarantees: Staff-Snap exits.
+
+**MSS**
+
+1. User inputs the command to exit the program.
+2. Staff-Snap exits and closes.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User closes the application window.
+
+  Use case resumes at step 2.
+
 
 *{More to be added}*
 
@@ -975,7 +1057,7 @@ Guarantees: The specified interview will be deleted from the applicant.
   (e.g. a `.txt` file)
 * **Graphical User Interface (GUI)**: A type of user interface that allows users to interact with software through
   graphical icons and visual indicators.
-* **UI**:
+* **UI**: 
 *
 
 --------------------------------------------------------------------------------------------------------------------
