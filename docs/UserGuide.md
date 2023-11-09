@@ -74,9 +74,9 @@ Adds a new teaching assistant to TAManager.
 Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR`
 
 - `NAME` should be a string.
-- `PHONE` should be an 3-10 digits integer.
-- `EMAIL` should be a valid email address.
-- `TELEGRAM` should be between 5-32 characters and start with "@".
+- `PHONE` should be a 3-10 digits integer.
+- `EMAIL` should contain "@".
+- `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
 - `HOUR` should be an integer.
@@ -101,7 +101,7 @@ When the command fails:
 
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- Invalid telegram handle: `Telegram handle should be between 5-32 characters, and it should start with @`
+- Invalid telegram handle: `Telegram handle should be between 5-32 characters and start with @, and it cannot contain any special characters except underscore.`
 - Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
 and optionally end with an alphabet.`
 - Invalid free time: `TA's free time should have a start and end time in HH:mm format`
@@ -116,8 +116,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [t/TAG]... [c/C
 -  At least one field to edit must be provided.
 - `NAME` should be a string.
 - `PHONE` should be a 3-10 digits integer.
-- `EMAIL` should be a valid email address.
-- `TELEGRAM` should be between 5-32 characters and start with "@".
+- `EMAIL` should contain "@".
+- `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
 - `HOUR` should be an integer.
@@ -148,7 +148,7 @@ When the command fails:
 
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- Invalid telegram handle: `Telegram handle should be between 5-32 characters, and it should start with @`
+- Invalid telegram handle: `Telegram handle should be between 5-32 characters and should start with @, and it cannot contain any special characters except underscore.`
 - Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
   and optionally end with an alphabet.`
 - Invalid free time: `TA's free time should have a start and end time in HH:mm format`
