@@ -13,7 +13,7 @@ Given below are my contributions to the project.
 
   1. Added fields like ID, Appointment and Medical Histories.
         * What it does: Allows for necessary fields to be included in the profile
-        * Justification: This feature improves the product significantly because a user can now see the NRIC, appointment timings and medical history at one glance, since all information are bundled in a patient card. This caters to the needs of front desk staff who need to quickly identify patients, their medical histories and arrange appointments.
+        * Justification: This feature improves the product significantly because a user can now see the ID, appointment timings and medical history at one glance, since all information are bundled in a patient card. This caters to the needs of front desk staff who need to quickly identify patients, their medical histories and arrange appointments.
         * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing models, commands and test cases.
 
   2. Added logger tab UI to show logged profiles
@@ -21,10 +21,10 @@ Given below are my contributions to the project.
       * Justification: This feature improves the product significantly because a user can now utilise the logger like a memo.
       * Highlights: This enhancement affects log commands. The Person Cards UI are consistent in both the Logger Tab and Patient List View.
 
-  3. Added Side Menubar UI
+  3. Added Menu Sidebar UI
       * What it does: It shows users miscellaneous actions that can be performed in the application (ie. Help, Settings, Exit).
       * Justification: This feature provides a more intuitive way for users to navigate the application. It also supports future integration of file settings and help features.
-      * Highlights: The buttons present in this menubar have their corresponding shortcuts and can be executed through command text box.
+      * Highlights: The buttons present in this sidebar have their corresponding shortcuts and can be executed through command text box.
 
   4. Added `spacebar` key shortcut
       * What it does:  Allows users to jump to command text box without using mouse to click on command text box
@@ -40,7 +40,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Added new fields necessary for patient tracking.
   * Updated the GUI color scheme (Pull requests [\#107](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/107))
-  * Updated the frontend design of application, including side menubar, medical history tags and logger tabs.
+  * Updated the frontend design of application, including menu sidebar, medical history tags and logger tabs.
   * Wrote additional tests for existing features to increase coverage from 75% to XX% (Pull requests [\#63](), [\#38]())
   * Refactor File Names to be more consistent (Pull requests [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209))
 
