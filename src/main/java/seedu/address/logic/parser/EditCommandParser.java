@@ -67,10 +67,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Set<Tag> tags = parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).orElse(null);
         editPersonDescriptor.setTags(tags);
-        if (argMultimap.getValue(PREFIX_FROM).isPresent() && argMultimap.getValue(PREFIX_TO).isPresent()) {
-            editPersonDescriptor.setFreeTime(ParserUtil.parseFreeTime(argMultimap.getValue(PREFIX_FROM).get(),
-                    argMultimap.getValue(PREFIX_TO).get()));
-        }
         Set<Course> courses = parseCoursesForEdit(argMultimap.getAllValues(PREFIX_COURSE)).orElse(null);
         editPersonDescriptor.setCourses(courses);
 
@@ -78,7 +74,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setHour(ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).get()));
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (editPersonDescriptor.isNoFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 

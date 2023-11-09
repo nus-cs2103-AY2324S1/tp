@@ -59,5 +59,42 @@ public class TimeIntervalTest {
 
         // different values -> returns false
         assertNotEquals(freeTime, new TimeInterval(from, closeFrom));
+
+        // different types -> returns false
+        assertNotEquals(freeTime, 5);
+    }
+
+    @Test
+    public void isInBetween() {
+        LocalTime from = LocalTime.parse("12:20");
+        LocalTime to = LocalTime.parse("23:44");
+        LocalTime closeFrom = LocalTime.parse("12:21");
+        TimeInterval freeTime = new TimeInterval(from, to);
+        TimeInterval freeTime2 = new TimeInterval(from, closeFrom);
+        TimeInterval freeTime3 = new TimeInterval(closeFrom, to);
+
+        // same values -> returns true
+        assertTrue(freeTime.isInBetween(freeTime));
+
+        // same object -> returns true
+        assertTrue(freeTime.isInBetween(freeTime));
+
+        // null -> returns false
+        assertFalse(freeTime.isInBetween(null));
+
+        // time is in between -> returns true
+        assertTrue(freeTime.isInBetween(freeTime2));
+
+        // time is not in between -> returns false
+        assertFalse(freeTime2.isInBetween(freeTime3));
+    }
+
+    @Test
+    public void getFrom_getTo() {
+        LocalTime from = LocalTime.parse("12:20");
+        LocalTime to = LocalTime.parse("23:44");
+        TimeInterval freeTime = new TimeInterval(from, to);
+        assertEquals(freeTime.getFrom(), "12:20");
+        assertEquals(freeTime.getTo(), "23:44");
     }
 }

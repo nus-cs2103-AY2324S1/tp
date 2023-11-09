@@ -266,12 +266,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | add new TA to my address book                                |                                                        |
 | `* * *`  | user    | remove a TA from my address book                             | remove entries that I no longer need                   |
 | `* * *`  | user    | view all TAs in my address book                              |                                                        |
-| `* *`    | user    | add a person’s email address and telegram handle             | facilitate communication with that person              |
-| `* *`    | user    | update the contact information of my teaching assistants     | ensure I have the latest contact information           |
+| `* *`    | user    | add a TA’s email address and telegram handle                 | facilitate communication with that TA                  |
+| `* *`    | user    | update the contact information of my TA                      | ensure I have the latest contact information           |
+| `* *`    | user    | update the availability of my TA                             | contact the TA for replacement sessions if needed      |
+| `* *`    | user    | update the teaching hours of my TA                           | keep track of the TA's teaching hours                  |
+| `* *`    | user    | update the tags and courses of my TA                         | keep track of the TA's responsibilities                |
+| `*`      | user    | find a TA by name                                            | find the contact details of a specific TA              |
+| `*`      | user    | find a TA by course                                          | focus on management of a specific course               |
+| `*`      | user    | find a TA by tag                                             | easily sort my TAs                                     |
+| `* `     | user    | find a TA by free time                                       | find potential replacement TAs                         |
 | `*`      | user    | have my records saved for the next session                   | use the information over multiple sessions             |
+| `*`      | user    | set a course to prioritise                                   | filter TAs on startup and save time                    |
+| `*`      | user    | remove my prioritised course                                 | view all TAs on startup                                |
 | `*`      | user    | view the list of courses I'm teaching and their assigned TAs | filter TAs based on the courses they can teach         |
 
-*{More to be added}*
 
 ### Use cases
 

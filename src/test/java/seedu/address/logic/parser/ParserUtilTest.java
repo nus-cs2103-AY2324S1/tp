@@ -47,7 +47,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -220,6 +220,23 @@ public class ParserUtilTest {
         String hourWithWhitespace = WHITESPACE + VALID_HOUR + WHITESPACE;
         Hour expectedHour = new Hour(Integer.parseInt(VALID_HOUR));
         assertEquals(expectedHour, ParserUtil.parseHour(hourWithWhitespace));
+    }
+
+    @Test
+    public void parseTimeInterval_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTimeInterval(null, null));
+    }
+
+    @Test
+    public void parseTimeInterval_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTimeInterval(INVALID_HOUR, INVALID_HOUR));
+    }
+
+    @Test
+    public void parseTimeInterval_validValueWithoutWhitespace_returnsTimeInterval() throws Exception {
+        // Use parseInt because we assume the VALID_HOUR can be parsed correctly, and we only want to test for parser
+        Hour expectedHour = new Hour(Integer.parseInt(VALID_HOUR));
+        assertEquals(expectedHour, ParserUtil.parseHour(VALID_HOUR));
     }
 
 
