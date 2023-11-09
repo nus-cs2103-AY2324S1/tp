@@ -15,7 +15,7 @@ public class Nric {
      * Should be an alphanumeric string with 4 characters, with the first 3
      * being numbers and the last being a letter.
      */
-    public static final String VALIDATION_REGEX = "^\\d{3}[A-Z]$";
+    public static final String VALIDATION_REGEX = "^\\d{3}[A-Za-z]$";
 
     public final String value;
 
@@ -27,7 +27,7 @@ public class Nric {
     public Nric(String nric) {
         requireNonNull(nric);
         checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
-        value = nric;
+        value = nric.toUpperCase();
     }
 
     /**
