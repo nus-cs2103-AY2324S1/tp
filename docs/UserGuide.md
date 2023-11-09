@@ -234,7 +234,7 @@ This is how it looks like:
 
 >:wrench: If you want to access the patient list or look up a new patient but would still need to refer to the current patient's details, simply `log` so the profile stays on your screen while you carry out your other tasks!
 
->:warning: The log tab does not update when logged patients' profiles are edited or deleted. The logger tab is intended to be a snapshot of the patients' details at the time that they were logged. To reflect the edited changes in the logger tab after a change has been made, do `log` after the change.
+>:warning: The logger tab does not update when logged patients' profiles are edited or deleted. The logger tab is intended to be a snapshot of the patients' details at the time that they were logged. To reflect the edited changes in the logger tab after a change has been made, do `log` after the change.
 
 
 * Saving to the logger tab only works for results of the `find` command.
@@ -580,7 +580,9 @@ it has performed.
 The area where you type your instructions for HealthSync to perform.
 
 ### Logger Tab
-A 'sticky-note'-like area on the right of the Patient List View.
+A 'sticky-note'-like area on the right of the Patient List View. Serves as a snapshot of the patient data at the time they were logged with the [`log` command](#preserving-a-find-command-result-in-the-log--log).
+
+This comes in handy you want to refer to certain patient profiles at the side, while still being able to carry on with other tasks.
 
 ### Command History Stack
 The group of instructions HealthSync remembers performing. This group allows HealthSync to undo the
