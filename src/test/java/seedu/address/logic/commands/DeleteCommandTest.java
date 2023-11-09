@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalTagPerson;
 import static seedu.address.testutil.TypicalTags.TEST_TAG_NAME_STRING;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -24,6 +25,7 @@ import seedu.address.model.EventBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
@@ -240,5 +242,42 @@ public class DeleteCommandTest {
         model.updateFilteredPersonList(p -> false);
 
         assertTrue(model.getFilteredPersonList().isEmpty());
+    }
+
+    @Test
+    public void execute_eventDeleted_success() throws Exception {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+
+        Event event = new Event(personToDelete, "Test",
+                LocalDateTime.of(2023, 11, 1, 12, 0),
+                LocalDateTime.of(2023, 11, 1, 13, 0));
+
+        model.addEvent(event);
+        assertEquals(1, model.getFilteredEventList().size());
+        deleteCommand.execute(model);
+        assertEquals(0, model.getFilteredEventList().size());
+    }
+
+    @Test
+    public void execute_eventDeletedTags_success() throws Exception {
+        Person personToDelete = getTypicalTagPerson();
+
+        TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(List.of(TEST_TAG_NAME_STRING));
+        List<Predicate<Person>> predicateList = new ArrayList<>() {
+            {
+                add(tagPredicate);
+            }
+        };
+
+        DeleteCommand deleteCommand = new DeleteCommand(predicateList);
+
+        Event event = new Event(personToDelete, "Test",
+                LocalDateTime.of(2023, 11, 1, 12, 0),
+                LocalDateTime.of(2023, 11, 1, 13, 0));
+        model.addEvent(event);
+        assertEquals(1, model.getFilteredEventList().size());
+        deleteCommand.execute(model);
+        assertEquals(0, model.getFilteredEventList().size());
     }
 }
