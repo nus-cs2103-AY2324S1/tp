@@ -394,13 +394,14 @@ Parameters:
 in the filtered contact list must have part of the `[term]` in the `[field]`
 specified above.
 * `[taken]` (optional). Only for filtering by `course`, this parameter additionally filters
-  out contacts who have finished/haven't started the course at the current date of your system.
+  out contacts who have finished/haven't started the course as of the current date of your system.
 
     List of options:
 
     * `true` - Remove contacts whose courses' start and end date range are outside 
     your system's current date.
-    * `false` - (default). Include contacts who have finished/haven't started taking the course.
+    * `false` - (default). Include contacts who have finished/haven't started taking the course
+  as of the current date.
     * NOTE: `[taken]` compares the dates of the course with the current date of
     your system. It does not factor in other fields like graduation year.
 
