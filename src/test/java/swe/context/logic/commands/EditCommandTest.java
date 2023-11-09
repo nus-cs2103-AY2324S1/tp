@@ -182,4 +182,31 @@ public class EditCommandTest {
                 + editContactDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
+    
+    @Test
+    public void execute_editWithNoChangesUnfilteredList_success() {
+        Contact firstContact = model.getFilteredContactList().get(TestData.IndexContact.FIRST_CONTACT.getZeroBased());
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact).build();
+        EditCommand editCommand = new EditCommand(TestData.IndexContact.FIRST_CONTACT, descriptor);
+
+        String expectedMessage = Messages.editCommandSuccess(Contact.format(firstContact));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_editWithMixedFieldsUnfilteredList_success() {
+        Contact firstContact = model.getFilteredContactList().get(TestData.IndexContact.FIRST_CONTACT.getZeroBased());
+        Contact editedContact = new ContactBuilder(firstContact).withPhone(TestData.Valid.PHONE_BOB).build(); // change only the phone
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withPhone(TestData.Valid.PHONE_BOB).build();
+        EditCommand editCommand = new EditCommand(TestData.IndexContact.FIRST_CONTACT, descriptor);
+
+        String expectedMessage = Messages.editCommandSuccess(Contact.format(editedContact));
+
+        Model expectedModel = new ModelManager(new Contacts(model.getContacts()), new Settings());
+        expectedModel.updateContact(firstContact, editedContact);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
 }
