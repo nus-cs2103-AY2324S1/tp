@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.EnrolDate;
 import seedu.address.model.tag.Subject;
 
 /**
@@ -38,11 +39,11 @@ class JsonAdaptedTag {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public Subject toModelType() throws IllegalValueException {
+    public Subject toModelType(EnrolDate date) throws IllegalValueException {
         if (!Subject.isValidSubjectName(tagName)) {
             throw new IllegalValueException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return new Subject(tagName);
+        return new Subject(tagName, date);
     }
 
 }
