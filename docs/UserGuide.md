@@ -18,7 +18,7 @@ Table of Contents
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `ManageHR.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `ManageHR.jar` from [here](https://github.com/AY2324S1-CS2103-T16-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your app.
 
@@ -284,11 +284,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ManageHR data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ManageHR data are saved automatically as a JSON file `[JAR file location]/data/managehr.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ManageHR will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
@@ -306,7 +306,7 @@ If your changes to the data file makes its format invalid, ManageHR will discard
 
 2. Locate the empty data file that the app creates on the new computer.
 
-3. Replace the empty data file with the file containing the data from your previous AddressBook home folder.
+3. Replace the empty data file with the file containing the data from your previous ManageHR home folder.
 
 Now, your data should be successfully transferred to the new computer.
 
