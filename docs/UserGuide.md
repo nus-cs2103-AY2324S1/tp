@@ -400,11 +400,14 @@ Format: `addTask d/DESCRIPTION [te/DEADLINE]`
 
 * `DESCRIPTION` cannot be empty.
 * `DEADLINE` must be in the same format given above for date and time.
-* `DEADLINE` can also be omitted to create a task with no specified deadline
+* `DEADLINE` can also be omitted to create a task with no specified deadline.
+* When adding a task with a deadline with a date that is invalid but with a day of 31 or less, instead adds a task with 
+a deadline on the last day of the month.
 
 Examples: 
 * `addTask d/Go for a run te/2023-02-14 19:00`
 * `addTask d/Hydrate regularly!`
+* `addTask d/Fix CS2103 Project bug te/2023-02-31 12:00` creates the task with deadline `2023-02-28 12:00` instead.
 
 ### Deleting tasks: `deleteTask`
 
