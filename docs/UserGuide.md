@@ -53,7 +53,7 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
    Below shows the steps to perform such a task
     1. Open up the terminal.
     * For mac users, press `Command + Space` to open Spotlight search, type `Terminal`, and press `Enter`.
-      <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">
+      ![img.png](images/Terminal.png)
     * For windows users, press `Windows + R` keys simultaneously, type `cmd` and press `Enter`.
     2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
        <br>
@@ -200,6 +200,12 @@ Output:
   `3. ORIGINAL_WORD - TRANSLATION`
   `...`
 
+### Getting list for revision : `review`
+
+* `review` : Returns a list of words that the user should revise today.
+
+Format: `review`
+
 ###  Starts review session : `start`
 
 To start a review session, user simply needs to type in `start` command.
@@ -288,15 +294,12 @@ Displays a list where each word is from specified language.
 
 Format: `language <SPECIFIED_LANGUAGE>`
 
-### Getting list for revision : `review`
-
-* `review` : Returns a list of words that the user should revise today.
-
-Format: `review`
+<div id="load">
 
 ### Loading list of words: `load`
 Loads an Excel file of words into the app. The words will be added to the current list of flash cards and included in the
 review session automatically.
+</div>
 
 Format: `load <FILE_NAME>`
 
@@ -317,7 +320,7 @@ Output:
 * File not found or accessible:
 >⚠️ Make sure the file is in the correct directory with read permission.
 * File cannot be read due to invalid content or format:
->⚠️ Make sure the file contains only two columns with the nonempty words/translations.
+>⚠️ Make sure the file contains only two columns with the valid words/translations.
 * `FLASH_CARD` flash card already exists!:
 >⚠️ Modify the duplicated word/translation in the file.
 
@@ -336,7 +339,7 @@ Output:
 
 ### Viewing help : `help`
 
-Opens a browser with the help page (User Guide).
+Opens a browser with the help page (User Guide). Pressing the `Help` button and then clicking `Help F1` will achieve the same effect.
 
 Format: `help`
 
@@ -385,6 +388,12 @@ UI Prototype:
 **A**: Save your words and translations in the format specified above in an Excel file. Move the file to the same folder with `flashlingo.jar`.
 Then, use the `load` command to import the data.
 
+**Q**: What may be the reasons why my data cannot be loaded into the app?<br>
+**A**: 
+* First, check your file name by opening the located folder. The file name should be directly displayed. Also, you can right-click the file to view the file name in its detailed info.
+* If Flashlingo still cannot read the file, try inputting file name with and without the extension `.xlsx` in the `load` command. This may solve potential issues with file name loading within different systems.
+* Secondly, ensure the content in your file is correctly formatted and valid. All rules can be found [here](#load).
+
 **Q**: After I reviewed a flash card, I edited details of the card by the `edit` command. Will I see these changes immediately reflected in the review session?<br>
 **A**:
 * Unfortunately, no. The card is updated synchronously in the card list and the review session of Flashlingo. However, since the user has already reviewed the same card on the day, the card will not be included in the review session again.
@@ -401,22 +410,22 @@ Then, use the `load` command to import the data.
 
 | Action                  | Format, Examples                                                                                                           |
 |-------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| **Help**                | `help`                                                                                                                     |
-| **List**                | `list`                                                                                                                     |
 | **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`         |
 | **Delete**              | `delete <Index>`<br> e.g., `delete 1`                                                                                      |
 | **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` |
 | **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        |
+| **List**                | `list`                                                                                                                     |
+| **Review**              | `review`                                                                                                                   |
 | **Start**               | `start`                                                                                                                    |
+| **End**                 | `end`                                                                                                                      |
 | **Reveal**              | `reveal <INDEX>`                                                                                                           |
 | **Yes**                 | `yes`                                                                                                                      |
 | **No**                  | `no`                                                                                                                       |
-| **End**                 | `end`                                                                                                                      |
-| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`                                                                  |
-| **Review**              | `review`                                                                                                                   |
 | **Learning Statistics** | `stats`                                                                                                                    |
-| **Load**                | `load FILE_NAME`<br> e.g., `load SampleData.xlsx`                                                                          |
+| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`                                                                  |
+| **Load**                | `load <FILE_NAME>`<br> e.g., `load SampleData.xlsx`                                                                        |
 | **Switch**              | `switch`                                                                                                                   |
+| **Help**                | `help`                                                                                                                     |
 | **Exit**                | `exit`                                                                                                                     |
 
 
