@@ -32,8 +32,10 @@ public class FindEventCommand extends Command {
         requireNonNull(model);
         predicate.setPersonList(model.getFullPersonList());
         model.updateFilteredEventList(predicate);
+        int listSize = model.getFilteredEventList().size();
         return new CommandResult(
-                String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
+                String.format(listSize == 1 ? Messages.MESSAGE_EVENT_LISTED_OVERVIEW
+                        : Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, listSize));
     }
 
     @Override
