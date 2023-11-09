@@ -25,6 +25,9 @@ public final class Reminder implements Comparable<LocalDate> {
         assert person.getFollowUpDate().isPresent();
         this.followUpDate = person.getFollowUpDate().get();
     }
+    public Person getPerson() {
+        return person;
+    }
 
     public Name getName() {
         return person.getName();
@@ -40,6 +43,26 @@ public final class Reminder implements Comparable<LocalDate> {
 
     public boolean isAfterNow() {
         return this.compareTo(LocalDate.now()) > 0;
+    }
+
+    /**
+     * Returns true if both reminders have the same identity and data fields.
+     * This defines a stronger notion of equality between two reminders.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Reminder)) {
+            return false;
+        }
+
+        Reminder otherReminder = (Reminder) other;
+        return person.isSamePerson(otherReminder.person)
+                && followUpDate.equals(otherReminder.followUpDate);
     }
 
     @Override

@@ -1,8 +1,10 @@
 package seedu.address.model.reminder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.time.LocalDate;
 
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.person.interaction.Interaction;
+import seedu.address.testutil.PersonBuilder;
 
 public class ReminderTest {
 
@@ -50,4 +53,26 @@ public class ReminderTest {
                 + ", followUpDate=" + VALID_FUTURE_REMINDER.getFollowUpDate() + "}";
         assertEquals(expected, VALID_FUTURE_REMINDER.toString());
     }
+    @Test
+    public void equals() {
+        Reminder reminder = new Reminder(ALICE);
+
+        // same object -> returns true
+        assertTrue(reminder.equals(reminder));
+
+        // null -> returns false
+        assertFalse(reminder.equals(null));
+
+        // different type -> returns false
+        assertFalse(reminder.equals(5));
+
+        // different person -> returns false
+        Reminder other = new Reminder(BENSON);
+        assertFalse(reminder.equals(other));
+
+        // different followUpDate -> returns false
+        Person editedAlice = new PersonBuilder(ALICE).withLead("HOT").build();
+        assertFalse(reminder.equals(new Reminder(editedAlice)));
+    }
+
 }

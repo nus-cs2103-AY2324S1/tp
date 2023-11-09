@@ -65,6 +65,13 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
+     * Adds a reminder to the {@code internalList}
+     */
+    public void addReminder(Reminder reminder) {
+        internalList.add(reminder);
+    }
+
+    /**
      * Updates the internal list of reminders if the list is dirty.
      */
     public void updateRemindersIfDirty() {
@@ -89,6 +96,11 @@ public class UniqueReminderList implements Iterable<Reminder> {
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return internalList.toString();
     }
 
 }
