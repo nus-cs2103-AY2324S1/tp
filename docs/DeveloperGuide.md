@@ -395,7 +395,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
 #### Implementation
 The list free times for a given day feature allows the user to list all the blocks of time that are not taken by a scheduled interview. This command is in the format `list-freetime DATE` where `DATE` is a valid date string.
 
-The Sequence Diagram below illustrates the interactions within the `LogicManager` component when `execute("list-freetime 12/12/2099")` is called.
+The Sequence Diagram below illustrates the interactions within the `Logic` component when `execute("list-freetime 12/12/2099")` is called.
 ![images/ListFreeTimeSequenceDiagram.png](images/ListFreeTimeSequenceDiagram.png)
 
 The `list-freetime DATE` command is facilitated by the `ListFreeTimeCommand`, `ListFreeTimeCommandParser`, along with the other internal classes omitted for brevity.
@@ -442,7 +442,7 @@ Aspect: How the command finds free times:
 #### Implementation
 The list interviews done/not done feature allows the user to see all the interviews that are done or not done in a single command. The command format is `list-i-done` to show all the interviews that are done, and `list-i-not-done` to show all interviews that are not done.
 
-The Sequence Diagram below illustrates the interactions within the `LogicManager` component when `execute("list-i-done")` is called.
+The Sequence Diagram below illustrates the interactions within the `Logic` component when `execute("list-i-done")` is called.
 ![ListIDone.png](images/ListIDoneSequenceDiagram.png)
 
 #### How is the command executed
