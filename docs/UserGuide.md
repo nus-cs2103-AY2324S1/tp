@@ -190,13 +190,22 @@ Examples:
 
 Shows a list of all events or events within a specified time interval.
 
-Format: `list events [-descending] [-st filter_start_time] [-et filter_end_time]` (start time and end time are inclusive)
+Format: `list events [-descending] [-st FILTER_START_TIME] [-et FILTER_END_TIME]` (start time and end time are inclusive)
 
 Arguments `-st` and `-et` must both present or both not present.
   - If both are not present, all events will be listed.
   - If both present, events within the time interval wil listed.
 
 By default, the list of events are sorted by the start time in ascending order (i.e. from earlier to latest). If you want to use descending order, add `-descending` to the command.
+
+Date-Time Format:
+- You can use one of the following formats for `FILTER_START_TIME` and `FILTER_END_TIME`:
+  - Both date and time: `yyyy-MM-dd HH:mm[:ss]`
+    - Example: `2023-10-12 20:05`, `2023-10-12 20:05:30`
+  - Only date (Time will be defaulted to 00:00): `yyyy-MM-dd`
+    - Example: `2023-10-12`
+  - Only time (Date will be defaulted to the current date): `HH:mm[:ss]`
+    - Example: `00:10`, `05:01:45`
 
 Examples
 * `list events`
