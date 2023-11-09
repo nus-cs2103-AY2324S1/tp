@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam arrowThickness 1.1
+skinparam arrowColor PERSON_COLOR
+skinparam classBackgroundColor PERSON_COLOR
+show method
+show attribute
+
+Class "Attendance" as Attendance
+Class AttendanceStorage {
+    +markXYZ(): void
+    +getAttendanceReport(): int[]
+}
+
+
+Class Attendance {
+    - date
+    - attendanceType
+
+}
+
+Attendance "*" --left-- "1" AttendanceStorage
+AttendanceType "1" -down- "1" Attendance
+
+@enduml

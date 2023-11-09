@@ -379,9 +379,24 @@ The following activity diagram summarises the process of adding leave for an emp
     * Cons: Can be confusing to users as to what have been deleted, and also harder to maintain.
 
 
-### Attendance Marking
+### Attendance 
 
 #### Proposed Implementation
+
+The proposed attendance marking feature comprises 2 sub-features:
+1. Mark attendance feature
+2. Attendance Report feature
+
+These two features are dependent on the following classes:
+* AttendanceStorage
+* Attendance
+* AttendanceType
+
+Below are the relationships between these classes:
+
+![Attendance package classes](images/AttendanceStorageClassDiagram.png)
+
+#### 1. Mark attendance feature
 
 The mark mechanism is dependent on the Attendance class. The Attendance class contains information on the date and AttendanceType of a Person.  It implements the following operations:
 * `Attendance#markAbsent(LocalDate date)` -- marks the attendance of the employee on the provided date as absent.
@@ -395,11 +410,30 @@ Step 1. The user executes `mark 1 /at LATE` command to mark the 5th person in th
 
 Step 2. The `mark` command calls `MarkCommand#markByIndex()` of the given employee, which calls the `Attendance#markAbsent()` of the given Person.
 
+This working status is then updated in the GUI as shown below:
 
+![GUI after marking attendance](images/GUIAfterMarkCommand.png)
 
-Sequence diagram as below:
-![Attendance](images/MarkSequenceDiagram.png)
+Class diagram is as shown below:
 
+![Mark Sequence Diagram](images/MarkSequenceDiagram.png)
+
+#### 2. Attendance Report feature
+
+The attendance reporting mechanism is dependent on the AttendanceStorage class. The AttendanceStorage is a collection of the Attendances of a Person. It implements the following operations:
+* `AttendanceStorage#getCount(AttendanceType attendanceType, JoinDate joinDate, int numOfLeave)` -- counts the number of days the attendance of type `attendanceType` appears in the AttendanceStorage
+* `AttendanceStorage#getAttendanceReport(JoinDate joinDate, int numOfLeave)` -- provides an `int[]` of the number of days of each attendance type in the following order: [leave, absent, late]
+
+The AttendanceStorage stores all the Attendance objects of one Person, only storing Attendances that are late or absent. Dates that are not in the storage are assumed to be marked as present for that given Person.
+
+Given below is an example usage scenario and how the mechanism behaves at each step.
+
+Step 1. The user executes `attendance 1` command to mark the 5th person in the address book as present.
+
+Step 2. The `attendance` command calls `AttendanceCommand#reportByIndex()` of the given employee, which calls the `AttendanceStorage#getAttendanceReport()` of the given Person.
+
+Sequence diagram is as shown below:
+![Mark Sequence Diagram](images/AttendanceSequenceDiagram.png)
 
 
 #### Design considerations:
@@ -407,7 +441,7 @@ Sequence diagram as below:
 **Aspect: How AttendanceStorage is assigned to each Person**
 * **Alternative 1 (current choice):** As an attribute of a Person.
   * Pros: Easy to query for a Person's attendance status
-  * Cons: May be sub-par performance as it would store identical Attendance objects for each Person (person A: absent on 24th oct, person B: also absent on 24th oct)
+  * Cons: May be sub-par performance as it would store identical Attendance objects for each Person (Person A: absent on 24th oct, Person B: also absent on 24th oct)
 * **Alternative 2:** As a UniqueAttendanceList.
   * Pros: No copies of Attendance objects having the same attribute values
   * Cons: Difficult to reference a Person to each Attendance.
