@@ -156,12 +156,10 @@ For each interview, we see the following details:
     * `16 January TIME`
     * `16/5 TIME`
     * `16/05 TIME`
-  * The `TIME` placeholder can be replaced with the formats below
-  * | `TIME`   |
-    |----------|
-    | `1515`   |
-    | `3.15pm` |
-    | `3pm`    |
+  * The `TIME` placeholder can be replaced with the formats below:
+    * `1515`
+    * `3.15pm`
+    * `3pm`
 </div>
 
 [Back to the Table of Contents](#table-of-contents)
@@ -207,13 +205,13 @@ Adds an applicant to **InterviewHub**.
 
 Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
-| Parameter      | Representation                    | Constraints                                            |
-|----------------|-----------------------------------|--------------------------------------------------------|
+| Parameter      | Representation                    | Constraints                                                   |
+|----------------|-----------------------------------|---------------------------------------------------------------|
 | `NAME`         | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
-| `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long |
-| `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`               |
-| `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                 |
-| `TAG`           | A tag belonging to the applicant  | Must contain only alphanumeric characters              |                                      
+| `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
+| `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`                      |
+| `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                        |
+| `TAG`          | A tag belonging to the applicant  | Must contain only alphanumeric characters                     |                                      
 
 
 
@@ -251,19 +249,19 @@ Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-  | Parameter      | Representation                    | Constraints                                            |
-    |----------------|-----------------------------------|--------------------------------------------------------|
+  | Parameter      | Representation                    | Constraints                                                   |
+    |----------------|-----------------------------------|---------------------------------------------------------------|
   | `NAME`         | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
-  | `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long |
-  | `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`               |
-  | `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                 |
-  | `TAG`           | A tag belonging to the applicant  | Must contain only alphanumeric characters              |
+  | `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
+  | `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`                      |
+  | `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                        |
+  | `TAG`          | A tag belonging to the applicant  | Must contain only alphanumeric characters                     |
 
 Examples:
 *  `edit-a 1 n/John Doe` Edits the name of the 1st applicant to be `John Doe`.
 *  `edit-a 2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd applicant to be `91234567` and `johndoe@example.com` respectively.
    Before:
-   ![before edit-a command](images/editApplicantbefore.png)
+   ![before edit-a command](images/editApplicantBefore.png)
    After:
    ![result for 'edit-a 2 p/91234567 e/johndoe@example.com](images/editApplicantResult.png)
 
@@ -577,12 +575,12 @@ Format: `list-freetime DATE`
   be shown:`Input date cannot be in the past!`
 
 #### Accepted date formats
-| Format                                 | Example      | Constraints                                                                                                                                                                                                                                                                                                                                                                                       |
-|----------------------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `dd/mm/yyyy`                           | `12/12/2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted - The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year | 
-| `dd-mm-yyyy`                           | `12-12-2099` | - If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted - The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year | 
-| `dd/mm`                                | `12/12`      | - Adding additional parameters separated by a non-number string will be accepted - The month and year must be **valid**                                                                                                                                                                                                                                                                           |
-| `other time formats (not recommended)` | `12/01-2024` | - Will be accepted within reasonable bounds - **Will lead to unexpected/unintended behaviour**- _Use with caution_                                                                                                                                                                                                                                                                                |
+| Format                                 | Example      | Constraints                                                                                                                                                                                                                                                                                                                                                                                    |
+|----------------------------------------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dd/mm/yyyy`                           | `12/12/2099` | If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year | 
+| `dd-mm-yyyy`                           | `12-12-2099` | If the input string is a **valid** time string with day, month and year, adding additional parameters separated by a non-number string will be accepted. The year must be **valid**, else the current year will be taken as the year of the date, or the next year of the current year in the case where the day and month when the command was executed has since passed for the current year | 
+| `dd/mm`                                | `12/12`      | Adding additional parameters separated by a non-number string will be accepted. The month and year must be **valid**                                                                                                                                                                                                                                                                           |
+| `other time formats (not recommended)` | `12/01-2024` | Will be accepted within reasonable bounds. **Will lead to unexpected/unintended behaviour**. _Use with caution_                                                                                                                                                                                                                                                                                |
 
 [Back to the Table of Contents](#table-of-contents)
 
