@@ -700,21 +700,21 @@ If you have Java 11 installed, the correct version of Java is installed and you 
 
 ## Interview Management Commands
 
-| Action                           | Format, Examples                                                                                                                                        |
-|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add interview**                | `add-i app/APPLICANT_INDEX jr/JOB_ROLE time/INTERVIEW_DATETIME` <br> e.g., `add-i app/3 jr/Software Engineer start/03-11-2024 1500 end/03-11-2024 1600` |
-| **Delete interview**             | `delete-i INTERVIEW_INDEX`<br> e.g., `delete-i 3`                                                                                                       |
-| **Edit interview**               | `edit-i INTERVIEW_INDEX [app/APPLICANT_INDEX] [jr/JOB_ROLE] [time/INTERVIEW_DATETIME]`<br> e.g.,`edit-i 2 jr/software-engineer`                         |
-| **Find interview by job**        | `find-i KEYWORD(S)`<br> e.g., `find-i software-engineer`                                                                                                |
-| **List interview**               | `list-i` <br/> e.g. `list-i`                                                                                                                            |
-| **List free time**               | `list-freetime INTERVIEW_DATETIME` <br> e.g, `list-freetime 12-12-2023`, `list-freetime 12/12/2023`, `list-freetime 12/12`, `list-freetime 12 Dec`      |
-| **List interview for today**     | `list-i-today` <br/> e.g. `list-i-today`                                                                                                                |
-| **Mark interview as done**       | `mark INTERVIEW_INDEX` <br> e.g., `mark 3`                                                                                                              |
-| **Rate interview**               | `rate INTERVIEW_INDEX RATING` <br> e.g., `rate 1 3.0`                                                                                                   |
-| **List completed interview**     | `list-i-done` <br/> e.g. `list-i-done`                                                                                                                  |
-| **List incomplete interview**    | `list-i-not-done` <br/> e.g. `list-i-not-done`                                                                                                          |
-| **Sort interview by rating**     | `sort-rate` <br/> e.g. `sort-rate`                                                                                                                      |
-| **Sort interview by start time** | `sort-time` <br/> e.g. `sort-time`                                                                                                                      |
+| Action                           | Format, Examples                                                                                                                                                                |
+|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add interview**                | `add-i app/APPLICANT_INDEX jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME` <br> e.g., `add-i app/3 jr/Software Engineer start/12-12-2024 1500 end/12-12-2024 1600` |
+| **Delete interview**             | `delete-i INTERVIEW_INDEX`<br> e.g., `delete-i 3`                                                                                                                               |
+| **Edit interview**               | `edit-i INTERVIEW_INDEX [jr/JOB_ROLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME] `<br> e.g.,`edit-i 2 jr/software-engineer`                                            |
+| **Find interview by job**        | `find-i KEYWORD(S)`<br> e.g., `find-i software-engineer`                                                                                                                        |
+| **List interview**               | `list-i` <br/> e.g. `list-i`                                                                                                                                                    |
+| **List free time**               | `list-freetime INTERVIEW_DATETIME` <br> e.g, `list-freetime 12-12-2023`, `list-freetime 12/12/2023`, `list-freetime 12/12`, `list-freetime 12 Dec`                              |
+| **List interview for today**     | `list-i-today` <br/> e.g. `list-i-today`                                                                                                                                        |
+| **Mark interview as done**       | `mark INTERVIEW_INDEX` <br> e.g., `mark 3`                                                                                                                                      |
+| **Rate interview**               | `rate INTERVIEW_INDEX RATING` <br> e.g., `rate 1 3.0`                                                                                                                           |
+| **List completed interview**     | `list-i-done` <br/> e.g. `list-i-done`                                                                                                                                          |
+| **List incomplete interview**    | `list-i-not-done` <br/> e.g. `list-i-not-done`                                                                                                                                  |
+| **Sort interview by rating**     | `sort-rate` <br/> e.g. `sort-rate`                                                                                                                                              |
+| **Sort interview by start time** | `sort-time` <br/> e.g. `sort-time`                                                                                                                                              |
 
 [Back to the Table of Contents](#table-of-contents)
 
