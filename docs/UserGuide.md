@@ -203,9 +203,9 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 
 > Below are some examples on how to use `edit_person` command:
 > 
-> *  `edit_person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-> *  `edit_person 2 n/Betsy Crower ug/CS2103T` Edits the name of the 2nd person to be `Betsy Crower` and unassigns the contact from group `CS2103T`. Any events that Betsy Crower is assigned to is also updated with this new name.
-> *  `edit_person 3 n/Betsy Crower b/2023-09-29` Edits the name of the 3rd person to be `Betsy Crower` and changes the birthday to 29th Sep 2023. Any events that Betsy Crower is assigned to is also updated with this new name.
+> *  `edit_person 1 p/91234567 e/johndoe@example.com`: Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+> *  `edit_person 2 n/Betsy Crower ug/CS2103T`: Edits the name of the 2nd person to be `Betsy Crower` and unassigns the contact from group `CS2103T`. Any events that Betsy Crower is assigned to is also updated with this new name.
+> *  `edit_person 3 n/Betsy Crower b/2023-09-29`: Edits the name of the 3rd person to be `Betsy Crower` and changes the birthday to 29th Sep 2023. Any events that Betsy Crower is assigned to is also updated with this new name.
 
 <br>
 
@@ -242,8 +242,8 @@ Format: `delete_person PERSON_INDEX`
 
 > Below are some examples on how to use `delete_person` command:
 > 
-> * `list_all` followed by `delete_person 2` deletes the 2nd person in the person list.
-> * `find_all Betsy` followed by `delete_person 1` deletes the 1st person in the results of the `find` command. i.e Any person named `Betsy` at index `1` will be deleted.
+> * `list_all` followed by `delete_person 2`: Deletes the 2nd person in the person list.
+> * `find_all Betsy` followed by `delete_person 1`: Deletes the 1st person in the results of the `find` command. i.e Any person named `Betsy` at index `1` will be deleted.
 
 <br>
 
@@ -275,8 +275,8 @@ Format: `find_person KEYWORD [MORE_KEYWORDS]`
 
 > Below are some examples on how to use `find_person` command:
 >
-> * `find_person John` returns `john` and `John Doe`
-> * `find_person friends` returns `Alex Yeoh` as he belongs to the `friends` group.
+> * `find_person John`: Displays `john` and `John Doe`
+> * `find_person friends`: Displays `Alex Yeoh` as he belongs to the `friends` group.
 
 <br>
 
@@ -302,11 +302,13 @@ Input: `find_person Alexa` displays all contacts with the name `Alexa` in the co
 
 ### Listing all persons : `list_persons`
 
-Displays all persons stored in FumbleLog.
-
-- You should see a list of all persons under the Persons column.
+After using FumbleLog `find_person` or `find_all` command which filters the contact list, you can use `list_persons` to display the full contact list again.
 
 Format: `list_persons`
+
+> Below are some examples on how to use `list_persons` command:
+>
+> * `list_persons`: Lists all your saved contacts in FumbleLog.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
