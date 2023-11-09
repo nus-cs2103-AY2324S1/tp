@@ -19,14 +19,13 @@ import seedu.classmanager.storage.JsonAdaptedClassDetails;
  */
 public class ClassDetails {
 
-    public static final String MESSAGE_CONSTRAINTS = "Class number can start with 1 to 3 consecutive "
-            + "alphabetic characters followed by 1 to 5 consecutive numeric digits. "
-            + "Optionally, it can end with 0 or 1 alphabetic character.";
 
-    public static final String MESSAGE_INVALID_GRADE = "Grade should be between 0 and 100";
-    public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment index should an integer "
-            + "between 1 and %s";
-    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should an integer "
+    public static final String MESSAGE_CONSTRAINTS = "Class number should be in the form 'T[Integer]',"
+            + " such as 'T11'.";
+    public static final String MESSAGE_INVALID_GRADE = "Grade should be an integer between 0 and 100 inclusive.";
+    public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment index should be an integer "
+            + "between 1 and %s.";
+    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should be an integer "
             + "between 1 and %s";
 
     public static final String MESSAGE_INVALID_PARTICIPATION = "Participation should be "
@@ -40,8 +39,8 @@ public class ClassDetails {
     public static final String MESSAGE_ASSIGNMENT_COUNT_MISMATCH = "The number of configured assignments does not"
             + " match the number of assignments in the save file." + MESSAGE_RECONFIGURE;
 
-    // The class number should start with "T".
-    public static final String VALIDATION_REGEX = "^[a-zA-Z]{1,3}[0-9]{1,5}[a-zA-Z]{0,1}$";
+    // The class number should start with "T" or "t".
+    public static final String VALIDATION_REGEX = "[Tt].*";
 
     private static int tutorialCount = 13;
     private static int assignmentCount = 6;
