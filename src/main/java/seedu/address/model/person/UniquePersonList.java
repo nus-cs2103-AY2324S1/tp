@@ -188,4 +188,29 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+
+    /**
+     * Returns the set of invalid names that do not yet exist in the addressBook.
+     */
+    public Set<Name> findInvalidNames(Set<Name> names) {
+        Set<Name> invalidNames = new HashSet<>();
+
+        for (Name name : names) {
+            boolean hasName = checkNameExists(name);
+            if (!hasName) {
+                invalidNames.add(name);
+            }
+        }
+        return invalidNames;
+    }
+
+    private boolean checkNameExists(Name name) {
+        for (Person person : this.internalList) {
+            if (person.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
