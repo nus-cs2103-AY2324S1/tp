@@ -56,7 +56,7 @@ activate Model
 Model --> MarkAttendanceCommand
 deactivate Model
 
-loop for each person in filtered list
+loop for each valid person specified in parameters
     MarkAttendanceCommand -> Person : markAttendance(...)
     activate Person
 
