@@ -510,14 +510,14 @@ Format: `filter [n/NAME] [e/EMAIL] [p/POSITION] [hp/PHONE] [s/STATUS] [lts/SCORE
 * `[s/STATUS]` takes in a value of either `u` or `o` or `r`.
 * `[lts/SCORE]` `[gts/SCORE]` fields do **NOT** include equality in filters, e.g. `gts/7` will return all applicants whose score is strictly greater than `7`.
 
+<box type="warning" header="**Caution**">
+    Score will be rounded to the nearest 1 decimal place if more than 1 decimal place is provided.
+</box>
+
 Example:
 * `filter n/Ivan` filters the applicant list to applicants whose name contains `ivan`.
 * `filter n/Ivan p/Testing Engineer s/u` filters applicant list to applicants whose name contains `ivan` applying for the role of `testing engineer` and has a status of `Undecided`.
 * `filter gts/7` filters applicant list to applicants whose score is strictly greater than 7.
-
-<box type="warning" header="**Caution**">
-    Score will be rounded to the nearest 1 decimal place if more than 1 decimal place is provided.
-</box>
 
 <br>
 
@@ -641,11 +641,11 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 <a name="commands-for-interview-management-features"></a>
 ### Commands for Interview Management Features
 
-| <div style="width:auto">Action</div>     | Format                                                                         |
-|------------------------------------------|--------------------------------------------------------------------------------|
-| Adding an interview to an applicant      | `addi INDEX t/TYPE [r/RATING]` <br/> e.g. `addi 2 t/technical`                 |
-| Editing an interview of an applicant     | `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]` <br/> e.g. `editi 3 r/8.2` |
-| Deleting an interview from an applicant  | `deletei INDEX i/INTERVIEW_INDEX` <br/> e.g. `deletei 3 i/1`                   |
+| <div style="width:auto">Action</div>     | Format                                                                             |
+|------------------------------------------|------------------------------------------------------------------------------------|
+| Adding an interview to an applicant      | `addi INDEX t/TYPE [r/RATING]` <br/> e.g. `addi 2 t/technical`                     |
+| Editing an interview of an applicant     | `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]` <br/> e.g. `editi 3 i/2 r/8.2` |
+| Deleting an interview from an applicant  | `deletei INDEX i/INTERVIEW_INDEX` <br/> e.g. `deletei 3 i/1`                       |
 
 <br>
 
@@ -716,4 +716,4 @@ apply for multiple positions in future iterations.
 | JavaScript Object Notation (JSON)	 | A data interchange file format used by Staff-Snap to store its applicant data.                                                                 |
 | Parameter	                         | Parameters are the details needed to perform a specific command. (e.g. When adding an applicant, a parameter can be the name of the applicant) |
 | Small Medium Enterprise (SME)	     | A SME is roughly defined as a small business that has more than 30 employees but less than 250 employees.                                      |
-| User Interface (UI)	               | An User Interface is the visual display of the application where users can interact with the application.                                      |
+| User Interface (UI)	               | A User Interface is the visual display of the application where users can interact with the application.                                       |
