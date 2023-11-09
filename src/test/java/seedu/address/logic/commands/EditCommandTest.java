@@ -162,7 +162,7 @@ public class EditCommandTest {
         Person person = model.getFilteredPersonList().get(0);
 
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
-        EditCommand editCommand = new EditCommand(person.getName(), person.getNric(), descriptor);
+        EditCommand editCommand = new EditCommand(person.getName(), null, descriptor);
 
         assertThrows(CommandException.class, () -> editCommand.execute(model), MESSAGE_NO_CHANGE);
     }
