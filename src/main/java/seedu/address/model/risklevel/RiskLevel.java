@@ -65,7 +65,7 @@ public class RiskLevel {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + riskLevel + ']';
+        return riskLevel;
     }
 
 }
