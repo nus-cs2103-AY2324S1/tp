@@ -84,6 +84,10 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
+        if (person == null) {
+            return index.equals(otherEvent.index)
+                    && description.equals(otherEvent.description);
+        }
         return person.isSamePerson(otherEvent.person)
                 && description.equals(otherEvent.description);
     }
