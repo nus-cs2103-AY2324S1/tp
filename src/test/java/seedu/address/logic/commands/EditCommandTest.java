@@ -172,7 +172,7 @@ public class EditCommandTest {
         Person person = model.getFilteredPersonList().get(0);
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withMedicalHistories().build();
-        EditCommand editCommand = new EditCommand(person.getName(), person.getNric(), descriptor);
+        EditCommand editCommand = new EditCommand(person.getName(), null, descriptor);
 
         assertThrows(CommandException.class, () -> editCommand.execute(model), MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT);
 
