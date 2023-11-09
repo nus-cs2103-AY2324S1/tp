@@ -219,7 +219,7 @@ By default, the list of events are sorted by the start time in ascending order (
 
 Executing this command will create a popup window, which shows a table representing the events within the specified time interval. The columns inside the table are resizeable.
 
-Examples
+Examples:
 * `list events`
 * `list events -st 2023-11-01 -et 2023-11-02`
 * `list events -descending -st 2023-11-01 -et 2023-11-02`
