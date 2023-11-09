@@ -185,4 +185,11 @@ public class AddCommandTest {
             return new Contacts();
         }
     }
+
+    @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        Contact validContact = new ContactBuilder().build();
+        AddCommand addCommand = new AddCommand(validContact);
+        assertThrows(NullPointerException.class, () -> addCommand.execute(null));
+    }
 }
