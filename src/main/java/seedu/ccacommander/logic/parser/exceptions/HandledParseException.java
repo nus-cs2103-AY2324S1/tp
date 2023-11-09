@@ -18,15 +18,6 @@ public class HandledParseException extends ParseException {
     /**
      * Creates a new HandledParseException.
      * @param message
-     */
-    public HandledParseException(String message) {
-        super(message);
-        this.hpeMessage = message;
-    }
-
-    /**
-     * Creates a new HandledParseException.
-     * @param message
      * @param cause
      */
     public HandledParseException(String message, Throwable cause) {
