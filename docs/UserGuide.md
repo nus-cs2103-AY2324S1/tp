@@ -59,7 +59,7 @@ e.g. in `add n/NAME`, you should specify a `NAME` such as `add n/John Doe`.
 - Parameters in square brackets are optional.<br />
 e.g in `n/NAME [o/NOTE]`, you could specify `n/John Doe o/Good at SE.`, or just `n/John Doe`.
 
-<!-- The empty space below (in the ` `) is a non-breaking space, not a normal space. This forces Jekyll's Kramdown to preserve the space. -->
+<!-- NOTE The empty space below (in the ` `) is a non-breaking space, not a normal space. This forces Jekyll's Kramdown to preserve the space. -->
 - Parameters with `…`​ after them can be specified multiple times.<br />
 e.g. in `[t/TAG]…​`, which is optional but can also be specified multiple times, you could specify ` ` (none specified), `t/NUS`, `t/NUS t/CS2103 course` etc.
 
