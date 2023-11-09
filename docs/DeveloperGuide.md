@@ -601,20 +601,20 @@ Step 1. The user has the application launched with at least 1 schedule added.
 
 Step 2. The user executes `list-s` to view all added schedules.
 
-Step 3. The user can also choose to execute `list-s 1 m/0` where the index and `m/` status are optional parameters.
+Step 3. The user can also choose to execute `list-s 1 m/0` where the `Index` and `Status` are optional parameters.
 
 Step 4. The `ListScheduleCommandParser` will be initialised to parse the user input, checking for `Index` and `Status`. If they are provided but invalid, it will throw a `ParseException`.
 
 Step 5. The `ListScheduleCommandParser` will then create a `ListScheduleCommand` with a `Index` and `Status` representing the user's input.
 
-Step 6. If `Index` is a valid integer, but it is not within the schedule list of indexes, `ListScheduleCommand::execute` will return `CommandException` 
+Step 6. If `Index` is a valid integer, but it is not within the schedule list of indexes, `ListScheduleCommand::execute` will return `CommandException` .
 
 Step 7. `ListScheduleCommand::execute` then creates `TutorPredicate`, `StatusPredicate` or both predicates, depending on what parameters are present in the user input for `Index` and `Status` respectively.
 
 Step 8. `ListScheduleCommand::execute` then calls `ModelManager::getFilteredScheduleList` with the predicate as the argument.
-This method updates the list of `Schedule` in the model according to the predicate conditions and filters them.
+This method updates the list of schedule in the model according to the predicate conditions and filters them.
 
-Step 9. Finally, the `ListScheduleCommand` object updates the schedule list to display the filtered schedule.
+Step 9. Finally, the `ListScheduleCommand` object updates the schedule list to display the filtered schedules.
 
 The following sequence diagram shows how the above steps for list schedule operation works:
 
@@ -716,18 +716,18 @@ the given `Index` and `Status` representing the user's input.
 Step 5. The `MarkScheduleCommand#execute(Model)` will perform the following checks in this order to ensure that the
 schedule can be safely marked as completed in the Model:
 
-- The `Index` is a valid integer.
-- The `Index` is not out of bounds (within the range of displayed schedule list's size).
-- The `Status` is a valid Status (either 0 for missed or 1 for completed).
+1. The `Index` is a valid integer.
+2. The `Index` is not out of bounds (within the range of displayed schedule list's size).
+3. The `Status` is a valid (either 0 for missed or 1 for completed).
 
 Step 6. The `execute` method then calls `Model::getFilteredScheduleList` and gets the specified `Schedule` using the
 `Index` given.
 
-Step 7. Once the checks are successful, the method then creates an edited schedule from the original schedule with its
+Step 7. Once the checks are successful, the method then creates an edited `Schedule` from the original `Schedule` with its
 status set to completed.
 
-Step 8. The method then calls the `setSchedule` method in the `ModelManager` with the new edited schedule. This sets the
-specified `Schedule` in the model to be that edited schedule with completed status.
+Step 8. The method then calls the `setSchedule` method in the `ModelManager` with the new edited `Schedule`. This sets the
+specified `Schedule` in the model to be that edited `Schedule` with completed status.
 
 Step 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
 `Logic`.
@@ -752,27 +752,27 @@ the lifeline reaches the end of diagram.
   - Pros: Users only need to be aware of the completed and missed status, simplifying the command's usage.
   - Cons: The user must use a distinct command to unmark schedules with a status set.
 - **Alternative 2:** Users able to mark a schedule as `pending`.
-  - Pros: Users only need to be familiar with the mark command, which can toggle between completed, missed, and
+  - Pros: Users only need to be familiar with the `mark` command, which can toggle between completed, missed, and
     pending statuses. This may lead to a more streamlined user experience.
   - Cons: Introducing a third status option complicates the management of schedule statuses. Users and developers
     alike must account for an additional state, potentially increasing the system's complexity.
-  - Cons: The definition and usage of the "pending" status may vary among users, potentially leading to ambiguity in
+  - Cons: The definition and usage of the `pending` status may vary among users, potentially leading to ambiguity in
     its interpretation.
 
 **Aspect: Format of schedule status**
-- **Alternative 1 (current choice):** Users input integers 0 or 1 to mark a schedule as `missed` or `completed`.
+- **Alternative 1 (current choice):** Users input integers `0` or `1` to mark a schedule as `missed` or `completed`.
   - Pros: Using integers provides a clear and unambiguous way for users to specify which status they want to
     mark for the specified schedule. The index corresponds directly to the schedule status of `missed`, or `completed`,
     making it easy to identify the correct schedule status.
-  - Pros: The use of indices eliminates the potential challenge of dealing with case-sensitive words. Users do
+  - Pros: The use of integers eliminates the potential challenge of dealing with case-sensitive words. Users do
     not need to type out the exact status word by word, which can be especially beneficial if a user is not a very
     good at typing.
-  - Pros: The use of indices aligns with the existing command structure, which is based on numeric indices for
+  - Pros: The use of integers aligns with the existing command structure, which is based on numeric indices for
     identifying and interacting with specific entries in the address book.
   - Cons: Users need to have knowledge of the specific integer representing the schedule status they want to mark. 
 - **Alternative 2:** Users input the exact schedule status `missed` or `completed` in words.
   - Pros: Allowing users to mark a schedule by specifying their schedule status provides a more natural and intuitive 
-    method, as users are likely more familiar with status than numeric indices.
+    method, as users are likely more familiar with status than numeric integers.
   - Cons: If a user provides an incorrect or misspelled status, the application would need to handle error cases and
     provide appropriate feedback to guide the user.
   - Cons: Typing out schedule status in words are case-sensitive. This means that users need to accurately input the 
@@ -800,19 +800,19 @@ Step 4. `UnmarkScheduleCommandParser` is initialized to parse the user input to 
 the given `Index` representing the user's input.
 
 Step 5. The `UnmarkScheduleCommand#execute(Model)` will perform the following checks in this order to ensure that the 
-schedule can be safely unmarked in the Model:
+`Schedule` can be safely unmarked in the Model:
 
-- The `Index` is a valid integer.
-- The `Index` is not out of bounds (within the range of the displayed schedule list's size).
+1. The `Index` is a valid integer.
+2. The `Index` is not out of bounds (within the range of the displayed schedule list's size).
 
 Step 6. The `execute` method then calls `Model::getFilteredScheduleList` and gets the specified `Schedule` using the 
 `Index` given.
 
-Step 7. Once the checks are successful, the method then creates an edited schedule from the original schedule with its
-status set to pending.
+Step 7. Once the checks are successful, the method then creates an edited `Schedule` from the original `Schedule` with its
+`Status` set to pending.
 
-Step 8. The method then calls the `setSchedule` method in the `ModelManager` with the new edited schedule. This sets the 
-specified `Schedule` in the model to be that edited schedule with pending status.
+Step 8. The method then calls the `setSchedule` method in the `ModelManager` with the new edited `Schedule`. This sets the 
+specified `Schedule` in the model to be that edited `Schedule` with pending status.
 
 Step 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
 `Logic`.
@@ -846,6 +846,14 @@ the lifeline reaches the end of diagram.
 
 ### Delete schedule feature
 
+The "Delete Schedule" feature allows users to delete an existing schedule in the address book given a schedule index.
+Below, we provide an example usage scenario and a detailed description of how the delete schedule mechanism behaves at
+each step.
+
+The following shows the activity diagram when a user executes the `delete-s` command:
+
+![Activity diagram for delete-s command](images/DeleteScheduleActivityDiagram.png)
+
 #### Implementation details
 {:.no_toc}
 
@@ -853,23 +861,29 @@ The delete schedule feature is facilitated by `DeleteScheduleCommand`, which ext
 The following operation is exposed in the abstract `Command` class as an abstract method:
 * `DeleteScheduleCommand#execute(Model)` - Deletes the schedule from the `Model` using the given index.
 
-The following shows the activity diagram in which a user executes the `delete-s` command:
-
-![Activity diagram for delete-s command](images/DeleteScheduleActivityDiagram.png)
-
 Given below is an example scenario on how the delete schedule command behaves:
-1. The user has the application launched with at least 1 schedule added.
-2. The user executes `list-s` to view the list of schedules.
-3. The user executes `delete-s 1` command, which deletes the schedule with index 1 shown in the list of schedules displayed. The command is parsed in the `AddressBookParser`.
-4. `DeleteScheduleCommandParser` is initialized to parse the user input to create a `DeleteSchedulecommand` with the given `Index` representing the user's input.
-5. The `DeleteScheduleCommand#execute(Model)` will perform the following checks in this order to ensure that `Schedule` can be safely deleted from the `Model`:
-   - The `Index` is a valid integer.
-   - The `Index` is not out of bounds.
-     <div markdown="span" class="alert alert-info">:information_source: **Note:** An `Index` is considered valid if it's within the range of the schedule list's size. This is enforced by throwing an `CommandException` if it is not valid.
-       </div>
-6. The `execute` method will then call `Model::getFilteredScheduleList` and get the specified Schedule using the `Index` given.
-7. Once the checks are successful, the method then calls `Model::deleteSchedule` in `ModelManager` to delete the specified `Schedule` in the model.
-8. Finally, the `DeleteScheduleCommand` returns the `CommandResult`.
+
+Step 1. The user has the application launched with at least 1 schedule added.
+
+Step 2. The user executes `list-s` to view the list of schedules.
+
+Step 3. The user executes `delete-s 1` command, which deletes the schedule with index 1 shown in the list of schedules displayed. The command is parsed in the `AddressBookParser`.
+
+Step 4. `DeleteScheduleCommandParser` is initialized to parse the user input to create a `DeleteSchedulecommand` with the given `Index` representing the user's input.
+
+Step 5. The `DeleteScheduleCommand#execute(Model)` will perform the following checks in this order to ensure that `Schedule` can be safely deleted from the `Model`:
+
+1. The `Index` is a valid integer.
+2. The `Index` is not out of bounds.
+<div markdown="span" class="alert alert-info">
+    :information_source: **Note:** An `Index` is considered valid if it's within the range of the schedule list's size. This is enforced by throwing an `CommandException` if it is not valid.
+</div>
+
+Step 6. The `execute` method will then call `Model::getFilteredScheduleList` and get the specified Schedule using the `Index` given.
+
+Step 7. Once the checks are successful, the method then calls `Model::deleteSchedule` in `ModelManager` to delete the specified `Schedule` in the model.
+
+Step 8. Finally, the `DeleteScheduleCommand` returns the `CommandResult`.
 
 The following sequence diagram shows how the above steps for delete schedule operation works, taking `execute("delete-s 1")` API call as an example.
 
@@ -878,7 +892,7 @@ The following sequence diagram shows how the above steps for delete schedule ope
 #### Design rationale
 {:.no_toc}
 
-The `delete-s` command was designed this way to ensure consistency with the previous delete person command.
+The `delete-s` command was designed this way to ensure consistency with the previous `delete` in AB3.
 
 ### Show calendar feature
 
