@@ -19,7 +19,7 @@ public class HourCommand extends Command {
             + "Parameter: [HOUR] (must be an integer, can be both positive and negative) \n"
             + "Example: " + COMMAND_WORD + " 4 ";
     public static final String MESSAGE_SUCCESS = "Hour updated to all TAs identified";
-    public static final String MESSAGE_FAILURE = "Updated hour should be in range 0-9999";
+    public static final String MESSAGE_FAILURE = "Resulting hours after update should be in range 0-9999";
 
     private final Integer hourToAdd;
 

@@ -14,6 +14,8 @@ import java.util.Objects;
 public class TimeInterval {
     public static final String MESSAGE_CONSTRAINTS =
             "TA's free time should have a start and end time in HH:mm format";
+    public static final String MESSAGE_TO_BEFORE_FROM =
+            "The start time should be before the end time.";
     public final LocalTime from;
     public final LocalTime to;
 

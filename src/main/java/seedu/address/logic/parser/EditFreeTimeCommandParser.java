@@ -49,7 +49,7 @@ public class EditFreeTimeCommandParser implements Parser<EditFreeTimeCommand> {
                 throw new ParseException(EditFreeTimeCommand.MESSAGE_NOT_EDITED);
             }
             return new EditFreeTimeCommand(index, dayOfWeek, editPersonDescriptor);
-        } catch (NumberFormatException | ParseException | NoSuchElementException exception) {
+        } catch (NumberFormatException | NoSuchElementException exception) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditFreeTimeCommand.MESSAGE_USAGE), exception);
         }
