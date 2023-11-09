@@ -457,7 +457,7 @@ the lines of "The provided Event Index is not a non-zero unsigned integer."
 from the event by executing the `undo` command, all the members and events would then be listed. This inconveniences the user
 as they will then have to execute the `viewMember` command again to see their changes. 
 
-**Proposed solution:**
+**Proposed Solution:**
 
 We propose to change the behaviour of `undo` and `redo` such that executing them will no longer list all members and events,
 and instead remain on the user's current view.
