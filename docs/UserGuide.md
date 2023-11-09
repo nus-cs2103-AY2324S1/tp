@@ -146,6 +146,8 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 Shows a window with link to access the help page.
 
+Format: `help`
+
 ![help message](images/ug-pics/helpMessage.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -156,8 +158,6 @@ For Windows users, you can use keyboard shortcut **F1** to open up the help wind
 Note that if you are running HouR on another monitor, the help window defaults to the centre of the primary monitor.
 </div>
 
-Format: `help`
-
 ### Adding an employee: `add`
 
 Adds an employee to the employee list.
@@ -166,7 +166,7 @@ Format: `add n/NAME pos/POSITION id/EMPLOYEE_ID p/PHONE_NUMBER e/EMAIL s/SALARY 
 
 * Adds the employee with the specified details.
 * The `NAME`, `POSITION`, `PHONE_NUMBER`, `EMAIL` and `DEPARTMENT` parameters are **case-sensitive**.
-* The employee id refers to each employee's **unique** employee id (must not already exist) and must follow the **EID format** (EID[4 digits]-[4 digits])
+* The `EMPLOYEE_ID` refers to each employee's **unique** employee id (must not already exist) and must follow the **EID format** (EID[4 digits]-[4 digits])
 * The `SALARY` parameter only takes in **positive integers**.
 
 Examples:
@@ -187,7 +187,7 @@ Deletes an employee from the employee list.
 Format: `delete EMPLOYEE_ID`
 
 * Deletes the employee at the specified `EMPLOYEE_ID`.
-* The employee id refers to each employee's **unique** employee id and must follow the **EID format** (EID[4 digits]-[4 digits]).
+* The `EMPLOYEE_ID` refers to each employee's **unique** employee id and must follow the **EID format** (EID[4 digits]-[4 digits]).
 
 Examples:
 * `delete EID2023-1234` deletes the employee with employee id EID2023-1234 in the employee list.
@@ -205,7 +205,7 @@ Edits an existing employee in the employee list.
 Format: `edit INDEX [n/NAME] [pos/POSITION] [id/EMPLOYEE_ID] [p/PHONE_NUMBER] [e/EMAIL] [s/SALARY] [d/DEPARTMENT]...`
 
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list. 
-* The index must be a **positive integer less than or equals to** the number of employees shown in the displayed employee list 1, 2, 3, …​
+* The `INDEX` must be a **positive integer less than or equals to** the number of employees shown in the displayed employee list 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -279,8 +279,11 @@ Format: `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
 * `START_DATE` and `END_DATE` must be in the **YYYY-MM-DD** format.
 * `START_DATE` must not be after `END_DATE`.
 * Dates between `START_DATE` and `END_DATE` must not already exist in the leave list.
-* If the current date falls within the leave period, the **leave status** of the employee will change from **"Present"** to **"On Leave"**.
 * The **total number of annual leaves** used cannot exceed the **maximum of 14** as per the [Singapore Ministry of Manpower's guidelines](https://www.mom.gov.sg/employment-practices/leave/annual-leave/eligibility-and-entitlement).
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If the current date falls within the leave period, the **leave status** of the employee will change from **"Present"** to **"On Leave"**.
+</div>
 
 Examples:
 * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` adds the dates 26, 27, and 28 December 2023 to the leaves taken
@@ -329,7 +332,7 @@ Examples:
 ![deleteleave failure 2](images/ug-pics/deleteLeaveFailure2.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-There is currently no feature for viewing the full list of leaves taken by an employee. <br>
+There is currently no feature for viewing the full list of leaves taken by an employee. 
 However, you can curb this by adding a "dummy" leave using **addleave** before deleting the added "dummy" leave using **deleteleave**.
 You should be able to view the list of leaves taken by the employee in the Result Display.
 </div>
@@ -346,7 +349,7 @@ Format: `editleave id/EMPLOYEE_ID old/OLD_DATE new/NEW_DATE`
 * `OLD_DATE` must already exist and `NEW_DATE` must not already exist.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If **OLD_DATE** is the current date, the **leave status** of the employee will change from **"On Leave"** to **"Present"**.<br>
+If **OLD_DATE** is the current date, the **leave status** of the employee will change from **"On Leave"** to **"Present"**.
 Conversely, if **NEW_DATE** is the current date, the **leave status** of the employee will change from **"Present"** to **"On Leave"**.
 </div>
 
@@ -465,7 +468,7 @@ Generates a report with details on leaves, overtime hours, overtime pay, and rem
 Format: `report EMPLOYEE_ID`
 
 * Generates and downloads a report for the employee with the specified `EMPLOYEE_ID`.
-* The employee id must follow the **EID format** (EID[4 digits]-[4 digits])
+* The `EMPLOYEE_ID` must follow the **EID format** (EID[4 digits]-[4 digits])
 * The report is downloaded in a `.txt` file, located in the `reports` folder in the location of `hour.jar`.
   * The `.txt` file follows the naming convention `DATE_NAME` where `DATE` is the date the report is created, 
     and `NAME` is the name of the corresponding employee.
