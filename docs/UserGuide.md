@@ -1,4 +1,3 @@
-<link href="./assets/css/UserGuide.css" rel="stylesheet"></link>
 ---
 layout: page
 title: User Guide
