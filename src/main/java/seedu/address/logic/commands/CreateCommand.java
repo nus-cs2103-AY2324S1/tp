@@ -43,7 +43,7 @@ public class CreateCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney "
-            + PREFIX_TELEGRAM + "meowies "
+            + PREFIX_TELEGRAM + "@meowies "
             + PREFIX_PROFESSION + "student "
             + PREFIX_INCOME + "1000 "
             + PREFIX_DETAILS + "Likes to play games ";
