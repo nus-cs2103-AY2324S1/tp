@@ -24,6 +24,8 @@ public class HelpWindow extends UiPart<Stage> {
             + "Exit Class Manager - exit\n"
             + "View command history - history\n"
             + "List all students - list\n"
+            + "Undo previous command - undo\n"
+            + "Redo previous command - redo\n"
             + "Toggle theme - theme\n\n"
             + "Core Commands with Parameters:\n"
             + "Add - add s/STUDENT_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…\n"
