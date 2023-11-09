@@ -15,10 +15,10 @@ Given below is a summary of my contributions to the project. All of my code cont
 ### Features Implemented
 * **Delete Member Feature** [#104](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/104)
   * **Feature details:** Allows the user of CCACommander to delete a member from CCACommander's database.
-  * **Justifications:** Gives the user the power to delete any irrelevant members from the data once they are not needed anymore.
+  * **Justifications:** Gives the user the power to delete any irrelevant members from the database once they are not needed anymore.
 * **Delete Event Feature** [#104](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/104)
   * **Feature details:** Allows the user of CCACommander to delete an event from CCACommander's database.
-  * **Justifications:** Gives the user the power to delete any irrelevant events from the data once they are not needed anymore.
+  * **Justifications:** Gives the user the power to delete any irrelevant events from the database once they are not needed anymore.
 * **Find Member Feature** [#146](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/146)
   * **Feature details:** Allows the user of CCACommander to find a member from CCACommander's database by using the member's name.
   * **Justifications:** Speeds up the process where the user can determine if a particular member is in the database, especially if the member list has many members.
@@ -32,38 +32,39 @@ Given below is a summary of my contributions to the project. All of my code cont
 * **Undo Command** [#154](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/154)
     * **Feature details:** Allows the user of CCACommander undo previous commands that he/she has entered, which has changed the data within CCACommander.
     * **Justifications:** Greatly increases the efficiency of the user's workflow as he/she can quickly revert commands which has affected data within CCACommander.
-    * **Credits:** Implementation is inspired by [Address Book (Level 4)](https://github.com/se-edu/addressbook-level4)
+    * **Credits:** Implementation is inspired by [Address Book (Level 4)](https://github.com/se-edu/addressbook-level4).
 * **Redo Command** [#154](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/154)
   * **Feature details:** Allows the user of CCACommander to redo a command that he/she has undone previously.
   * **Justifications:** Greatly increases the efficiency of the user's workflow as he/she can quickly redo commands that he/she has accidentally undone.
-  * **Credits:** Implementation is inspired by [Address Book (Level 4)](https://github.com/se-edu/addressbook-level4)
+  * **Credits:** Implementation is inspired by [Address Book (Level 4)](https://github.com/se-edu/addressbook-level4).
 
 Relevant tests were added for these commands.
 
 ### Project Management
 * As the Team Lead, I managed task deadlines. I set internal deadlines and buffers to ensure that tasks can be completed on-time. I did so by setting up 
-and managing milestones on [GitHub's issue tracker](https://github.com/AY2324S1-CS2103T-F11-1/tp/milestones) and ensured that every team member is assigned to issues 
-and are updated on what they are supposed to do.
+and managing milestones on [GitHub's issue tracker](https://github.com/AY2324S1-CS2103T-F11-1/tp/milestones).
+* Opened and assigned [issues](https://github.com/AY2324S1-CS2103T-F11-1/tp/issues/created_by/selwynang) to every group member and ensured they are updated on what to do.
 * Released Releases [v1.3](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases/tag/v1.3) and [v1.3.1](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases/tag/v1.3.1) on GitHub.
 
 ### Documentation
 * **User Guide**
-  * Updated UI screenshot in the Quick Start section
+  * Updated UI screenshot in the Quick Start section.
   * Added command details and summaries for the following commands: `deleteMember`, `deleteEvent`, `findMember`, `findEvent`,
-  `unenrol`, `undo` and `redo`
+  `unenrol`, `undo` and `redo`.
 * **Developer Guide**
-  * Added implementation details for the `undo`/`redo` feature
-  * Created the Planned Enhancements section and added 5 planned enhancements
+  * Added implementation details for the `undo`/`redo` feature.
+  * Created the Planned Enhancements section and added 5 planned enhancements:
     * Allow users to add / delete tags without retyping previous tags
     * Allow users to create and edit a member/event with name containing non-alphanumeric characters
     * Provide more specific index error messages to the user
     * Provide specific error messages for unknown prefixes
-    * Show a more specific error message for negative index in `editMember` and `editEvent`
-  * Added 3 Use Cases
+    * Show a more specific error message for negative index in `editMember`, `editEvent`, `viewMember`, `viewEvent`, `deleteMember` and `deleteEvent` commands.
+  * Added 3 Use Cases:
     * UC02 - Delete a member
     * UC03 - List all members
     * UC03 - List all events
 
 ### Community
 * This is the full [list](https://github.com/AY2324S1-CS2103T-F11-1/tp/pulls?q=is%3Apr+reviewed-by%3Aselwynang) of pull requests which I have reviewed.
-* Some non-trival pull request review comments which I have given: [#179](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/179#discussion_r1375403205)
+* Some non-trival pull request review comments which I have given: [#179](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/179#discussion_r1375403205),
+[#254](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/254)
