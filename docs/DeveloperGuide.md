@@ -528,8 +528,7 @@ Step 2. The user executes `list-s` to view all added schedules.
 
 Step 3. The user can also choose to execute `list-s 1 m/0` where the index and `m/` status are optional parameters.
 
-Step 4. The `ListScheduleCommandParser` will be initialized to parse the user input, which it will check if `Index` and `Status`
-if they are `NULL` and valid, else it will throw a `ParseException`.
+Step 4. The `ListScheduleCommandParser` will be initialised to parse the user input, checking for `Index` and `Status`. If they are provided but invalid, it will throw a `ParseException`.
 
 Step 5. The `ListScheduleCommandParser` will then create a `ListScheduleCommand` with a `Index` and `Status` representing the user's input.
 
