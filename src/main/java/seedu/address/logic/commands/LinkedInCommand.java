@@ -39,11 +39,14 @@ public class LinkedInCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         String username = personToEdit.getLinkedIn().value;
+        if (username.isEmpty()) {
+            throw new CommandException("No LinkedIn account has been added for this candidate.");
+        }
         String linkedInUrl = "https://www.linkedin.com/in/" + username;
         try {
             Desktop.getDesktop().browse(new URI(linkedInUrl));
         } catch (IOException | URISyntaxException e) {
-            System.out.println(e.getMessage());
+            throw new CommandException(e.getMessage());
         }
 
         return new CommandResult(MESSAGE_SUCCESS);

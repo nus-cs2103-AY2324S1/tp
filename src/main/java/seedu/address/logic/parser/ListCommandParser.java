@@ -31,7 +31,6 @@ public class ListCommandParser implements Parser<ListCommand> {
         // Create the sorting comparator based on the sorting attribute
         Comparator<Person> sortingComparator = createSortingComparator(sortingAttribute);
 
-
         return new ListCommand(sortingComparator);
     }
 

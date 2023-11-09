@@ -17,7 +17,7 @@ public class Score implements Comparable<Score> {
      */
     public Score(int value) {
         requireNonNull(value);
-        checkArgument(isValidScore(value), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidScoreValue(value), MESSAGE_CONSTRAINTS);
         this.value = value;
     }
 
@@ -26,8 +26,12 @@ public class Score implements Comparable<Score> {
      * @param test integer to be tested
      * @return true if test is a non-negative integer
      */
-    public static boolean isValidScore(int test) {
+    public static boolean isValidScoreValue(int test) {
         return test >= 0;
+    }
+
+    public static boolean isValidScore(Score score) {
+        return isValidScoreValue(score.value);
     }
 
     @Override

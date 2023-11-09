@@ -34,6 +34,26 @@ public class Index {
     }
 
     /**
+     * Returns the default index. The default index is created with a value of
+     * Integer.MAX_VALUE.
+     *
+     * @return The default index with a value of Integer.MAX_VALUE.
+     */
+    public static Index getDefaultIndex() {
+        return new Index((Integer.MAX_VALUE));
+    }
+
+    /**
+     * Checks if the index is present. An index is considered present if its value
+     * is not equal to Integer.MAX_VALUE.
+     *
+     * @return {@code true} if the index is present; {@code false} otherwise.
+     */
+    public boolean isPresent() {
+        return zeroBasedIndex != Integer.MAX_VALUE;
+    }
+
+    /**
      * Creates a new {@code Index} using a zero-based index.
      */
     public static Index fromZeroBased(int zeroBasedIndex) {

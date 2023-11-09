@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
+import seedu.address.model.EventBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -21,7 +22,7 @@ import seedu.address.model.person.Person;
 public class ViewCommandTest {
     private static final Index INDEX_FIRST_PERSON = Index.fromOneBased(1);
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new EventBook(), new UserPrefs());
 
     @Test
     public void execute_viewUnfilteredList_success() {
@@ -29,7 +30,8 @@ public class ViewCommandTest {
         ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PERSON);
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(ViewCommand.MESSAGE_SUCCESSFUL_VIEW, Messages.format(firstPerson)), true);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new EventBook(), new UserPrefs());
         expectedModel.setLastViewedPersonIndex(INDEX_FIRST_PERSON);
         assertCommandSuccess(viewCommand, model, expectedCommandResult, expectedModel);
     }

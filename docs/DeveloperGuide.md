@@ -159,6 +159,79 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### LinkedIn/Github feature
+
+#### Implementation
+
+The LinkedIn/Github feature consists of two parts - adding the linkedin/github username to the candidate's data, and viewing the profile. 
+
+The addition is performed by the `AddLCommand` and `AddGCommand` classes. They extend `Command` and override the `execute()` method to add the username to the candidate's existing details. 
+
+It involves the command `AddLCommand` and `AddGCommand` classes, and their corresponding parsers `AddLCommandParser` and `AddGCommandParser`, that take in user input and return either `AddLCommand` or `AddGCommand` objects.
+
+When executed, `AddLCommand` and `AddGCommand` find the person at the specified index in the list, and adds either their linkedin or github username to the `LinkedIn` or `Github` class associated with that `Person`. The list is then updated, and a `CommandResult` object is returned.
+
+The viewing is performed by the `LinkedInCommand` and `GithubCommand` classes. They extend `Command` and override the `execute()` method to redirect the user to the candidate's LinkedIn or Github profile on the browser.
+
+It involves the command `LinkedInCommand` and `GithubCommand` classes, and their corresponding parsers `LinkedInCommandParser` and `GithubCommandParser`, that take in user input and return either `LinkedInCommand` or `GithubCommand` objects.
+
+When executed, `LinkedInCommand` and `GithubCommand` append the username of the person to the base URLs for LinkedIn and Github, and open the URL in the browser.
+
+
+
+Given below is an example usage scenario and how the linkedin and github feature behaves at each step.
+
+Step 1. The user launches the application. `JABPro` will be initialized with the current saved state
+
+User should see the UI as shown below.
+
+![Ui](images/Ui.png)
+
+Step 2. The user wants to add the LinkedIn username to the first person in the list. The user enters the command `addL 1 u/alexyeoh` to add the username to the candidate's existing details.
+
+The following sequence diagram shows how the AddL and AddG operations work:
+
+<puml src="diagrams/AddLSequenceDiagram.puml" alt="AddLSequenceDiagram" />
+<puml src="diagram/AddGSequenceDiagram.puml" alt="AddGSequenceDiagram" />
+
+User should see the UI as shown below after entering `addL 1 u/alexyeoh`
+
+![AddL](images/addLState.png)
+
+Step 3. The user can then view the linkedin profile for the candidate at index 1. The user enters the command `linkedin 1`.
+
+User should see the UI asa shown below after entering `linkedin 1`
+
+![LinkedIn](images/linkedinState.png)
+
+
+Alternatives considered
+
+Alternative 1 (Chosen): 
+
+`LinkedIn` and `Github` are attributes of a `Person` that can be added using the `AddLCommand` and `AddGCommand` and are initially provided with default string values when a Person is initialised.
+
+Pros: There may be candidates who do not provide their LinkedIn or Github profiles as part of their application.
+
+Cons: Person is always initialised with empty values for LinkedIn and Github, and those values would have to be manually set using the commands.
+
+Alternative 2:
+
+`LinkedIn` and `Github`, like all other attributes of `Person`, are required to be non null.
+
+Pros: These details will be provided at the time of addition of a new Person, without having to add them later separately.
+
+Cons: It limits the scope for candidates that do not possess a LinkedIn or Github account.
+
+Alternative 3:
+
+`LinkedIn` and `Github` are attributes of `Person` but are allowed to be null.
+
+Pros: This accounts for candidates that do not have those social profiles, and allows for their addition at the time of Person creation
+
+Cons: With defensive programming in mind, not the best approach having to deal with null values.
+
+=======
 ### View feature
 
 #### Implementation
@@ -218,6 +291,48 @@ Pros: Arguably a more OOP approach since all commands that trigger view IS-A `Vi
 
 Cons: You cannot implement any command that does not involve viewing but inherits from any command that is a children of `ViewCommand`.  
 An example could be trying to create identical commands that does not toggle the UI after execution. This would require duplication of the exact same command code but inheriting from `Command` instead of `ViewCommand`.
+
+
+### Search feature
+
+#### Implementation
+
+The search feature is implemented using the `SearchCommand` class. It extends `Command` and overrides the `execute()` method to
+filter users by the specified parameters.
+
+The search parameters from the user input are parsed using the parse method in the `SearchCommandParser` class. `SearchCommandParser::Parse`
+takes in the search parameters from the user input and combines them into a list of predicates. This list of predicates is then 
+passed as an argument to the `SearchCommand` constructor and the method returns a `SearchCommand` instance with the associated list of predicates.
+
+Currently, the search parameters could belong to any of the three following categories: `Name`, `Status`, and `Tag`. Prefixes
+`n/`, `st/` and `t/` are used to denote the category of the search parameters respectively. E.g. `search n/alex st/interviewed t/swe`
+
+The list of predicates is a list comprising predicate objects whose classes implement the `Predicate` class in Java.
+Each category has its own predicate class i.e. `NameContainsKeywordPredicate`, `StatusContainsKeywordPredicate`, `TagContainsKeywordPredicate`
+and each class overrides the `test` method which returns true if the persons list contains any of the given names/status/tags.
+
+Finally, the execute method in `SearchCommand` class invokes the `updateFilteredPersonList(predicatesList)` which will 
+update the list of persons displayed.
+
+Given below is an example usage scenario and how the search mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `search n/john st/offered t/swe` command to filter candidates having the name john,
+offered status and tagged as swe. 
+
+The following sequence diagram shows how the search operation works:
+
+**Note:** The lifeline for `SearchCommand` and `SearchCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+<puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram" />
+
+Step 3. The user should see the UI below upon entering `search n/john st/interviewed t/friends`.
+
+![View](images/search.png)
+
+**Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories.
+It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
 
 ### \[Proposed\] Undo/redo feature
 
@@ -374,6 +489,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles           |
 | `*` | Hiring Manager   | get data on which positions already have too many applicants                                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it |
 | `*` | Hiring Manager   | get a visual alert or a section to display urgent task                                                                        | I can stay organized and ensure that remain up to date and on task with the hiring process               |
+| `*` | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                               | I can perform further analysis using alternate tools on candidate data                                   |
 *{More to be added}*
 
 ### Use cases
@@ -386,15 +502,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add a person.
 2. JABPro shows that command has been executed successfully.
 3. JABPro adds the person to the list of persons.
-4. JABPro shows the person added at the end of the list of persons.
+4. JABPro shows the person added at the end of the list of persons.   
 Use case ends.
 
 **Extensions**
 * 2a. User does not provide the correct information for a person to be added.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.
+    * 2a1. JABPro shows an error message and provides course of action for remedy.  
     Use case resumes at step 1.
 * 2b. User has already been added to the list of persons.
-    * 2b1. JABPro shows an error message and provides course of action for remedy.
+    * 2b1. JABPro shows an error message and provides course of action for remedy.   
     Use case resumes at step 1.
 
 **Use case: Add a remark to a person**
@@ -402,15 +518,15 @@ Use case ends.
 **MSS**
 1. User requests to add a remark to a person.
 2. JABPro shows that command has been executed successfully.
-3. JABPro adds the remark to the person.
+3. JABPro adds the remark to the person.  
 Use case ends.
 
 **Extensions**
 * 2a. User provides invalid index.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.
+    * 2a1. JABPro shows an error message and provides course of action for remedy.  
     Use case resumes at step 1.
 * 2b. User does not provide a remark.
-    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.
+    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.  
     Use case ends.
 
 **Use case: List all persons**
@@ -428,58 +544,46 @@ Use case ends.
   * 2a1. JABPro shows an error message and provides course of action for remedy.  
   Use case resumes at step 1.
 * 2b. User attempts to list persons when there are no entries in the address book.
-  * 2b1. JABPro shows a message indicating that there are no persons to display. 
+  * 2b1. JABPro shows a message indicating that there are no persons to display.   
   Use case ends.
 
-**Use case: Search a person by name**
+**Use case: Search persons by the specified categories(name, status and/ tag)**
 
 **MSS**
-1.  Hiring manager types in name keywords to search users by name.
-2.  JABPro shows a list of persons whose names contain matching keywords. 
-    Use case ends.
+1.  Hiring manager types in search parameters to search users by the specified categories.
+2.  JABPro shows a list of persons whose profile matches the given parameters.
+Use case ends.
 
 **Extensions**
 
-* 1a. The given name keyword is invalid (invalid name).
+* 1a. The given name/status/tag parameter is invalid.
     * 1a1. JABPro shows an error message.
       Use case resumes at step 1.
-* 2a. The list is empty.
-  Use case ends.
-
-**Use case: Search a person by application status**
-
-**MSS**
-1.  User keys in search command with application status (i.e. interviewed, pending, rejected, offered).
-2.  JABPro shows a list of persons whose status match the given status keywords. 
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given name status is invalid (not from the given list of valid status keywords).
-    * 1a1. JABPro shows an error message.
-      Use case resumes at step 1.
-* 2a. The list is empty.
+* 2a. The list is empty. <br/>
   Use case ends.
 
 
 **Use case: Delete a person**
 
 **MSS**
-1.  User requests to list persons.
-2.  AddressBook shows a list of persons.
-3.  User requests to delete a specific person in the list.
-4.  AddressBook deletes the person.
-    Use case ends.
+1. User requests to list persons.
+2. AddressBook shows a list of persons.
+3. User requests to delete a specific person in the list by providing either the person's index or tags.
+4. AddressBook deletes the specified person(s).   
+Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
-    * 2a1. AddressBook displays a message indicating that the list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.   
       Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
       Use case resumes at step 3.
+* 3b. The given tags do not match any persons. 
+    * 3b1. AddressBook shows an error message indicating that no persons with the specified tags were found.  
+    Use case resumes at step 3
 * 4a. Deletion encounters an error
-    * 4a1. AddressBook displays an error message indicating that the deletion process failed.
+    * 4a1. AddressBook displays an error message indicating that the deletion process failed.  
       Use case ends.
 
 **Use case: Set a person's status**
@@ -488,18 +592,18 @@ Use case ends.
 1.  User requests to list persons.
 2.  AddressBook shows a list of persons.
 3.  User requests to set the status of a specific person in the list.
-4.  AddressBook sets the status of that person in the list.
+4.  AddressBook sets the status of that person in the list.  
     Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
-    * 2a1. AddressBook displays a message indicating that the list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.  
       Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
       Use case resumes at step 3.
 * 3b. The given status is invalid.
-    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.
+    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.  
       Use case resumes at step 3.
 
 **Use case: View a person's details**
@@ -508,12 +612,12 @@ Use case ends.
 1.  User requests to list persons.
 2.  AddressBook shows a list of persons.
 3.  User requests to view a specific person in the current displayed AddressBook.
-4.  The UI shows the details of that person.
+4.  The UI shows the details of that person.  
     Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
-    * 2a1. AddressBook displays a message indicating that the list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.  
       Use case ends.
 * 3a. The given index is invalid.
     * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
@@ -523,41 +627,66 @@ Use case ends.
     * 3b1. Displayed AddressBook changes to match that of search result.  
       Use case resumes at step 3.
 
+**Use case: Export the current data to excel**
 
-    
+**MSS**
+1.  User requests to export persons.
+2.  JABPro exports the list of persons to a .csv file.
+    Use case ends.
+
+**Extensions**
+* 2a. The .csv file to edit is open
+    * 2a1. AddressBook displays a message indicating that we cannot write to it as it is open.
+      Use case ends.
+
 **Use case: Add social profile to person's details**
 
 **MSS**
-1. User requests to add social profile (linkedin or github)
-2. JABPro shows that command has been executed successfully
-3. JABPro adds the social profile to the person's existing details in the list
+1. User requests to add social profile (linkedin or github).
+2. JABPro shows that command has been executed successfully.
+3. JABPro adds the social profile to the person's existing details in the list.  
    Use case ends.
 
 **Extensions**
 * 2a. User does not provide valid information for the person.
-    * 2a1. JABPro displays error message.
+    * 2a1. JABPro displays error message.  
       Use case resumes at Step 1.
 * 2b. User requests to add social profile other than LinkedIn or Github
-    * 2b1. JABPro displays error message.
+    * 2b1. JABPro displays error message.  
       Use case resumes at Step 1.
 
 **Use case: Open social profile for a person**
 
 **MSS**
-1. User requests to open social profile for a person
-2. JABPro shows that command has been executed successfully
-3. JABPro redirects to the webpage of the corresponding profile
+1. User requests to open social profile for a person.
+2. JABPro shows that command has been executed successfully.
+3. JABPro redirects to the webpage of the corresponding profile.  
    Use case ends.
 
 **Extension**
 * 1a. Person does not exist in the list.
-    * 1a1. JABPro displays error message.
+    * 1a1. JABPro displays error message.  
     Use case ends.
-* 1b. Social profile requested other than LinkedIn or Github
-    * 1b1. JABPro displays error message.
+* 1b. Social profile requested other than LinkedIn or Github.
+    * 1b1. JABPro displays error message.  
     Use case ends.
-* 3a. User does not exist on the social platform
+* 3a. User does not exist on the social platform.  
   Use case ends.
+
+**Use case: Add events relating to candidates**
+
+**MSS**
+1. User requests to add an event relating to a candidate
+2. JABPro shows that command has been executed successfully.
+3. JABPro adds the event to the list of events.
+   Use case ends.
+
+**Extension**
+* 2a. User does not provide the correct information for an event to be added.
+  * 2a1. JABPro shows an error message anf provides course of action for remedy. Use case resumes at step 1.
+* 2b. Event has already been added to the list of events.
+  * 2b1. JABPro shows an error message and provides course of action for remedy. Use case resumes at step 1.
+
 
 *{More to be added}*
 

@@ -18,6 +18,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScoreList;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -30,14 +31,22 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
+
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private EventWindow eventWindow;
+
+    private TagListWindow tagListWindow;
+
     private PersonInformationPanel personInformationPanel;
+
+    private SummaryStatisticScreen summaryStatisticScreen;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -47,12 +56,17 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+    @FXML
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane personInformationPanelPlaceholder;
+
+    @FXML
+    private StackPane summaryStatisticScreenPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -73,6 +87,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        eventWindow = new EventWindow(new Stage(), logic);
+        tagListWindow = new TagListWindow(new Stage(), logic);
     }
 
     public Stage getPrimaryStage() {
@@ -155,6 +171,30 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the events window.
+     */
+    @FXML
+    public void handleEvent() {
+        if (!eventWindow.isShowing()) {
+            eventWindow.show();
+        } else {
+            eventWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the tag list window.
+     */
+    @FXML
+    public void handleListTags() {
+        if (!tagListWindow.isShowing()) {
+            tagListWindow.show();
+        } else {
+            tagListWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -181,10 +221,31 @@ public class MainWindow extends UiPart<Stage> {
 
         personInformationPanel = new PersonInformationPanel(personToView);
         personInformationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
+
+        ScoreList scoreList = personToView.getScoreList();
+        if (scoreList.isEmpty()) {
+            logger.info("No score list detected");
+            summaryStatisticScreenPlaceholder.getChildren().clear();
+            return;
+        }
+
+        logger.info("Score list detected");
+
+
+        Person personToView2 = logic.getFilteredPersonList().get(index.getZeroBased());
+
+
+        summaryStatisticScreen = new SummaryStatisticScreen(logic.getSummaryStatistic(), personToView2);
+        summaryStatisticScreenPlaceholder.getChildren().add(summaryStatisticScreen.getRoot());
     }
+
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
     }
 
     /**
@@ -199,7 +260,6 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
 
-
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -209,7 +269,16 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isView()) {
+                logger.fine("View command detected");
                 handleView();
+            }
+
+            if (commandResult.isShowEvent()) {
+                handleEvent();
+            }
+
+            if (commandResult.isListTags()) {
+                handleListTags();
             }
 
             return commandResult;

@@ -18,8 +18,8 @@ import seedu.address.model.person.Person;
 public class AddLCommand extends Command {
     public static final String COMMAND_WORD = "addL";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds LinkedIn to details of a candidate. "
-            + "Parameters: " + "[" + COMMAND_WORD + " <USERID> <USERNAME>]...\n"
-            + "Example: " + COMMAND_WORD + " 2 alexyeoh";
+            + "Parameters: " + "[" + COMMAND_WORD + " <USERID> u/<USERNAME>]...\n"
+            + "Example: " + COMMAND_WORD + " 2 u/alexyeoh";
 
     public static final String MESSAGE_SUCCESS = "LinkedIn account added for: %1$s";
 

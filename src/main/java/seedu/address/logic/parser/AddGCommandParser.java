@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddGCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,6 +25,10 @@ public class AddGCommandParser implements Parser<AddGCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_USERNAME);
 
+        if (!arePrefixesPresent(argMultiMap, PREFIX_USERNAME)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGCommand.MESSAGE_USAGE));
+        }
+
         Index index;
 
         try {
@@ -35,5 +41,9 @@ public class AddGCommandParser implements Parser<AddGCommand> {
         String username = argMultiMap.getValue(PREFIX_USERNAME).orElse("");
 
         return new AddGCommand(index, new Github(username));
+    }
+
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
