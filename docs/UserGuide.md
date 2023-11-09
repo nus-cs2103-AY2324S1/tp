@@ -94,6 +94,13 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 * `TAGNAME` is case sensitive. For example, a contact can have tags `Frontend` and `frontend` at the same time.
 
+* `START_TIME` and `END_TIME` can be in one of the following formats:
+  * Both date and time: `yyyy-MM-dd HH:mm[:ss]`
+    - Example: `2023-10-12 20:05`, `2023-10-12 20:05:30`
+  * Only date (Time will be defaulted to 00:00): `yyyy-MM-dd`
+    - Example: `2023-10-12`
+  * Only time (Date will be defaulted to the current date): `HH:mm[:ss]`
+    - Example: `00:10`, `05:01:45`
 
 
 </box>
@@ -202,7 +209,7 @@ Examples:
 
 Shows a list of all events or events within a specified time interval.
 
-Format: `list events [-descending] [-st FILTER_START_TIME] [-et FILTER_END_TIME]` (start time and end time are inclusive)
+Format: `list events [-descending] [-st START_TIME] [-et END_TIME]` (start time and end time are inclusive)
 
 Arguments `-st` and `-et` must both present or both not present.
   - If both are not present, all events will be listed.
@@ -210,14 +217,7 @@ Arguments `-st` and `-et` must both present or both not present.
 
 By default, the list of events are sorted by the start time in ascending order (i.e. from earlier to latest). If you want to use descending order, add `-descending` to the command.
 
-Date-Time Format:
-- You can use one of the following formats for `FILTER_START_TIME` and `FILTER_END_TIME`:
-  - Both date and time: `yyyy-MM-dd HH:mm[:ss]`
-    - Example: `2023-10-12 20:05`, `2023-10-12 20:05:30`
-  - Only date (Time will be defaulted to 00:00): `yyyy-MM-dd`
-    - Example: `2023-10-12`
-  - Only time (Date will be defaulted to the current date): `HH:mm[:ss]`
-    - Example: `00:10`, `05:01:45`
+Executing this command will create a popup window, which shows a table representing the events within the specified time interval. The columns inside the table are resizeable.
 
 Examples
 * `list events`
@@ -232,13 +232,6 @@ Format: `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [
 
 * If `END_TIME` is not given, it will be defaulted to the `START_TIME`.
 * If `START_TIME` is exactly equals to `END_TIME`, the `END_TIME` for the event will not be displayed in text-based UI.
-* You can use one of the following formats for `START_TIME` and `END_TIME`:
-  * Both date and time: `yyyy-MM-dd HH:mm[:ss]`
-      - Example: `2023-10-12 20:05`, `2023-10-12 20:05:30`
-  * Only date (Time will be defaulted to 00:00): `yyyy-MM-dd`
-       - Example: `2023-10-12`
-  * Only time (Date will be defaulted to the current date): `HH:mm[:ss]`
-      - Example: `00:10`, `05:01:45`
 
 Examples:
 * `add event -id 1 -en Meeting with professor -st 12:00 -et 13:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
