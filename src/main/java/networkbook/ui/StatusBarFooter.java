@@ -32,7 +32,7 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
         updateFilterStatus("none");
-        updateSortStatus(SortField.NONE, SortOrder.ASCENDING);
+        updateSortStatus(SortField.NAME, SortOrder.ASCENDING);
     }
 
     /**
@@ -49,7 +49,7 @@ public class StatusBarFooter extends UiPart<Region> {
      * @param order Order that is currently being sorted by.
      */
     public void updateSortStatus(SortField field, SortOrder order) {
-        String displayedOrder = field == SortField.NONE ? "" : ", with order: " + order.toString().toLowerCase();
+        String displayedOrder = ", with order: " + order.toString().toLowerCase();
         sortStatus.setText(String.format(SORT_INDICATOR_FORMAT, field.toString().toLowerCase(), displayedOrder));
     }
 }
