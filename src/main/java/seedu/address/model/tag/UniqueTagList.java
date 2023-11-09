@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
+import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * Represents a list of unique tags. This class provides methods to manage a collection of tags,
@@ -106,6 +107,19 @@ public class UniqueTagList {
      */
     public ObservableList<Tag> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Removes a tag from the list.
+     *
+     * @param toRemove The tag to remove.
+     * @throws TagNotFoundException If the tag to remove is not found in the list.
+     */
+    public void remove(Tag toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new TagNotFoundException();
+        }
     }
 
     @Override
