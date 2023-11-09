@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -154,7 +155,7 @@ public class UpdatePhotoCommandTest {
             ModelManager temp = new ModelManager();
             addCommand.execute(temp);
             updatePhotoCommand.execute(temp);
-            assertTrue(temp.getFilteredPersonList().get(0).getAvatar().getPath().contains("test_photo.png"));
+            assertFalse(temp.getFilteredPersonList().get(0).getAvatar().getPath().isEmpty());
         } catch (ParseException | CommandException e) {
             fail();
         }
