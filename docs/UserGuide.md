@@ -104,12 +104,12 @@ Shows a list of all patients in HealthSync.
 
 Adds a patient into HealthSync, with the given patient information.
 
-* A patient's [name](#name) and [IC](#nric) are required when creating a new entry into HealthSync.
+* A patient's [name](#name) and [IC](#ID) are required when creating a new entry into HealthSync.
 * All the compulsory [fields](#fields) must be provided.
 * Optional fields like [Appointment](#appointment) and [medical history](#medical-history) need not be provided.
 
 [Format](#command-format):
-`add n/NAME id/IC_NUMBER p/PHONE_NUMBER e/EMAIL_ADDRESS a/ADDRESS [m/MEDICAL_HISTORY]... [ap/APPT]`
+`add n/NAME id/ID_NUMBER p/PHONE_NUMBER e/EMAIL_ADDRESS a/ADDRESS [m/MEDICAL_HISTORY]... [ap/APPT]`
 
 >:bulb: Use `a` as a shortcut for `add`
 
@@ -130,7 +130,7 @@ Expected outputs when the command fails:
 
 Edits an existing patient's details in HealthSync.
 
- * Edits the person with the specified [name](#name) or [id](#nric).
+ * Edits the person with the specified [name](#name) or [ID](#ID).
  * If an invalid name or IC Number is passed, an error message will be logged.
  * At least one [field](#fields) to edit must be provided.
  * Existing fields will be updated to the input values.
@@ -139,7 +139,7 @@ Edits an existing patient's details in HealthSync.
 >:bulb: Update multiple fields in a single `edit` command to save time
 
 [Format](#command-format):
-`edit n/NAME or id/IC_NUMBER <field> <[field]>...`
+`edit n/NAME or id/ID_NUMBER <field> <[field]>...`
 
 >:bulb: Use `e` as a shortcut for `edit`
 
@@ -152,14 +152,14 @@ Expected outputs when the command succeeds:
 * `Edited patient: ...`
 
 Expected outputs when command fails:
-* `INVALID name and/or NRIC! ...`
+* `INVALID name and/or ID! ...`
 
 ### Deleting a Patient or Field: `delete`
 
 Deletes the specified patient or patient's specific details from HealthSync.
 
-* Deletes the patient or an optional [field](#fields) of the patient with the specified [name](#name) or [id](#nric).
-* The Name or IC must be valid.
+* Deletes the patient or an optional [field](#fields) of the patient with the specified [name](#name) or [ID](#ID).
+* The Name or ID must be valid.
 * To delete a specified field only instead of the entire patient, indicate the field in the command.
   * You do not have to specify the value of that field to delete it, if HealthSync only stores 1 value for that field.
   * If you do not specify which field to delete for fields that can have multiple values,
@@ -167,7 +167,7 @@ Deletes the specified patient or patient's specific details from HealthSync.
 * The fields currently allowed for deletion are [Appointment](#appointment) and [Medical Histories](#medical-history).
 
 [Format](#command-format):
-`delete n/NAME or id/IC_NUMBER [ap/ or m/MEDICAL_HISTORY...]`
+`delete n/NAME or id/ID_NUMBER [ap/ or m/MEDICAL_HISTORY...]`
 
 >:bulb: Use the shortcut `d` for faster patient-deleting
 
@@ -185,7 +185,7 @@ Expected outputs when the command succeeds:
 * `Deleted Patient's field: ...`
 
 Expected output when the command fails:
-* `The given combination of Name and NRIC does not match any patient in the Patients list`.
+* `The given combination of Name and ID does not match any patient in the Patients list`.
 
 ### Delete All Patients: `clear`
 
@@ -198,9 +198,9 @@ Deletes all patients from HealthSync.
 
 ![result for 'clear'](images/clearResult.jpg)
 
-### Locating Patients by Name, NRIC or Appointment: `find`
+### Locating Patients by Name, ID or Appointment: `find`
 
-Searches the patient list for all patients matching the [Name](#name), [ID](#nric) or [Appointment](#appointment)
+Searches the patient list for all patients matching the [Name](#name), [ID](#ID) or [Appointment](#appointment)
 and returns their related information.
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
@@ -214,9 +214,9 @@ and returns their related information.
 * If multiple different fields are specified, they must ALL match the values given.
   e.g. `n/Hans Bo ap/10-Aug-2023 0900 0900` will return all patients matching BOTH the keywords `Hans Bo` and
   the appointment timing for 10th August 23, 9 o'clock.
-  
+
 [Format](#command-format):
-`find n/NAME or id/IC_NUMBER or ap/APPT`
+`find n/NAME or id/ID_NUMBER or ap/APPT`
 
 >:bulb: Use the shortcut `f` for faster patient-finding
 
@@ -232,7 +232,7 @@ Example commands:
 
 ### Preserving a `find` Command Result: `log`
 
-Logs the result of the [find command](#locating-patients-by-name-nric-or-appointment--find)
+Logs the result of the [find command](#locating-patients-by-name-id-or-appointment--find)
 to the [logger tab](#logger-tab), which can be viewed at all times.
 
 >:bulb: Use `log` command to save data you want to continue referring to
@@ -261,7 +261,7 @@ Expected output when the command fails:
 
 ### Adding a New `find` Command Result to the Log: `alog`
 
-Appends the new results of the most recent [find command](#locating-patients-by-name-nric-or-appointment--find)
+Appends the new results of the most recent [find command](#locating-patients-by-name-id-or-appointment--find)
 to the current data in the [logger tab](#logger tab), which can be viewed at all times.
 
 >:bulb: Use `alog` command to save data you want to continue referring to, on top of some others
@@ -479,10 +479,10 @@ include names, phone numbers, appointment times, etc. Fields can be classified i
 
 The 2 identifying fields of a patient are given below:
 
-| Tag   | Representative Value           | Example Usage  | General Form in Commands |
-|-------|--------------------------------|----------------|--------------------------|
-| `n/`  | [Name](#name)                  | `n/Alex`       | `n/NAME`                 |
-| `id/` | [Identification Number](#nric) | `id/S2345678A` | `id/IC_NUMBER`           |
+| Tag   | Representative Value         | Example Usage     | General Form in Commands |
+|-------|------------------------------|-------------------|--------------------------|
+| `n/`  | [Name](#name)                | `n/Alex`          | `n/NAME`                 |
+| `id/` | [Identification Number](#ID) | `id/S2345678A`    | `id/ID_NUMBER`           |
 
 1 or more identifying fields must be specified in each command, unless stated otherwise.
 
@@ -501,11 +501,11 @@ The information fields are given below:
 
 The standard unique identifier for your patient. Each patient should have a unique alphanumeric name assigned to them.
 
-#### NRIC
+#### ID
 
 The ID-based unique identifier for your patient. Each patient should have a unique alphanumeric ID assigned to them.
 
-There is no verification system in place for NRIC. This allows you to use your custom identifier for your patients, if
+There is no verification system in place for ID. This allows you to use your custom identifier for your patients, if
 you wish.
 
 #### Phone Number
@@ -604,11 +604,11 @@ JavaScript Object Notation. This is the file format used by HealthSync to save a
 |----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**       | `h`      | `help`                                                                                                                                        |
 | **List**       | `ls`     | `list`                                                                                                                                        |
-| **Add**        | `a`      | `add n/NAME id/IC_NUMBER fields ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
-| **Edit**       | `e`      | `edit n/NAME [fields] ...` *or* `edit id/IC_NUMBER [fields] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                          |
+| **Add**        | `a`      | `add n/NAME id/ID_NUMBER fields ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665 e/james@example.com` |
+| **Edit**       | `e`      | `edit n/NAME [fields] ...` *or* `edit id/ID_NUMBER [fields] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`                          |
 | **Delete**     | `d`      | `delete n/NAME`                                                                                                                               |
 | **Clear**      | `c`      | `clear`                                                                                                                                       |
-| **Find**       | `f`      | `find n/NAME` *or* `find id/IC_NUMBER` *or* `find ap/APPT` <br> e.g., `find n/James Jake` *or* `find id/T0123436F`                            |
+| **Find**       | `f`      | `find n/NAME` *or* `find id/ID_NUMBER` *or* `find ap/APPT` <br> e.g., `find n/James Jake` *or* `find id/T0123436F`                            |
 | **Log**        | `l`      | `log`                                                                                                                                         |
 | **Append Log** | `al`     | `alog`                                                                                                                                        |
 | **Clear Log**  | `cl`     | `clog`                                                                                                                                        |
