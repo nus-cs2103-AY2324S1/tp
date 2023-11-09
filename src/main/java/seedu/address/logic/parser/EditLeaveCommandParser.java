@@ -25,12 +25,7 @@ public class EditLeaveCommandParser implements Parser<EditLeaveCommand> {
     public EditLeaveCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_OLD, PREFIX_NEW);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_OLD, PREFIX_NEW)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLeaveCommand.MESSAGE_USAGE));
-        }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_OLD, PREFIX_NEW);
+        areValidPrefixes(argMultimap);
 
         Id id;
         LocalDate oldDate;
@@ -53,6 +48,20 @@ public class EditLeaveCommandParser implements Parser<EditLeaveCommand> {
             return new EditLeaveCommand(id, oldDate, newDate);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLeaveCommand.MESSAGE_USAGE));
+    }
+
+    /**
+     * Checks the validity of prefixes.
+     *
+     * @param argMultimap ArgumentMultimap to be used
+     * @throws ParseException If any of the prefixes are empty or repeated
+     */
+    public void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_OLD, PREFIX_NEW)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLeaveCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_OLD, PREFIX_NEW);
     }
 
     /**

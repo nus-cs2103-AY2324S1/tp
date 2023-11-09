@@ -40,40 +40,69 @@ public class ResetCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireAllNonNull(field);
+        isValidField(field.toLowerCase());
 
         List<Employee> employeeList = model.getFilteredEmployeeList();
+        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
 
-        switch(field.toLowerCase()) {
-        case "":
-            throw new CommandException(MESSAGE_NO_FIELD);
-        case "overtime":
+        for (Employee employee : employeeList) {
             model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
-            for (Employee employee: employeeList) {
-                model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
-                Employee employeeWithDefaultOvertime = new Employee(employee.getName(), employee.getPosition(),
-                        employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
-                        employee.getDepartments(), new OvertimeHours(Employee.DEFAULT_OVERTIME_HOURS),
-                        employee.getLeaveList(), employee.getRemarkList());
-                model.setEmployee(employee, employeeWithDefaultOvertime);
+            if (field.equalsIgnoreCase("overtime")) {
+                resetOvertime(model, employee);
+            } else if (field.equalsIgnoreCase("leaves")) {
+                resetLeaves(model, employee);
             }
-            break;
-        case "leaves":
-            model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
-            for (Employee employee: employeeList) {
-                model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
-                Employee employeeWithDefaultLeaveList = new Employee(employee.getName(), employee.getPosition(),
-                        employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
-                        employee.getDepartments(), employee.getOvertimeHours(), new LeaveList(),
-                        employee.getRemarkList());
-                model.setEmployee(employee, employeeWithDefaultLeaveList);
-            }
-            break;
-        default:
-            throw new CommandException(String.format(MESSAGE_WRONG_FIELD, field));
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, field.toLowerCase()));
+    }
+
+    /**
+     * Checks whether field is valid.
+     *
+     * @param field Field based on user's input
+     * @throws CommandException If user's input is not 'overtime' or 'leaves'
+     */
+    public void isValidField(String field) throws CommandException {
+        requireAllNonNull(field);
+
+        if (field.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_FIELD);
+        }
+
+        if (!field.equals("overtime") && !field.equals("leaves")) {
+            throw new CommandException(String.format(MESSAGE_WRONG_FIELD, field));
+        }
+    }
+
+    /**
+     * Resets the overtime hours of given employee in given model.
+     *
+     * @param model The model containing the employee
+     * @param employee The employee to be edited
+     */
+    public void resetOvertime(Model model, Employee employee) {
+        requireAllNonNull(model, employee);
+        Employee employeeWithDefaultOvertime = new Employee(employee.getName(), employee.getPosition(),
+                employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
+                employee.getDepartments(), new OvertimeHours(Employee.DEFAULT_OVERTIME_HOURS), employee.getLeaveList(),
+                employee.getRemarkList());
+        model.setEmployee(employee, employeeWithDefaultOvertime);
+    }
+
+    /**
+     * Resets the leave list of given employee in given model.
+     *
+     * @param model The model containing the employee
+     * @param employee The employee to be edited
+     */
+    public void resetLeaves(Model model, Employee employee) {
+        requireAllNonNull(model, employee);
+        Employee employeeWithDefaultLeaveList = new Employee(employee.getName(), employee.getPosition(),
+                employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
+                employee.getDepartments(), employee.getOvertimeHours(), new LeaveList(),
+                employee.getRemarkList());
+        model.setEmployee(employee, employeeWithDefaultLeaveList);
     }
 
     @Override
