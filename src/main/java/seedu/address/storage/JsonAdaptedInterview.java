@@ -17,8 +17,14 @@ class JsonAdaptedInterview {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Interview's %s field is missing!";
     public static final String APPLICANT_MISSING = "Applicant";
+    public static final String MESSAGE_INVALID_APPLICANT =
+            "Applicant's hasInterview field must be true if the applicant has an interview!";
+    public static final String MESSAGE_INVALID_RATING =
+            "Rating cannot be more than 0.0 if the interview is not done!";
     public static final String JOB_ROLE_MISSING = "Job role";
-    public static final String TIMING_MISSING = "Timing";
+    public static final String START_TIME_MISSING = "Start time";
+    public static final String END_TIME_MISSING = "End time";
+
 
     private final JsonAdaptedApplicant applicant;
     private final String jobRole;
@@ -71,12 +77,16 @@ class JsonAdaptedInterview {
 
         Applicant modelApplicant = applicant.toModelType();
 
+        if (!modelApplicant.hasInterview()) {
+            throw new IllegalValueException(MESSAGE_INVALID_APPLICANT);
+        }
+
         if (jobRole == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, JOB_ROLE_MISSING));
         }
 
         if (interviewStartTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TIMING_MISSING));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, START_TIME_MISSING));
         }
 
         if (rating == null) {
@@ -88,10 +98,14 @@ class JsonAdaptedInterview {
         }
 
         if (interviewEndTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TIMING_MISSING));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, END_TIME_MISSING));
         }
 
         final Rating modelRating = new Rating(rating);
+
+        if (!isDone && !modelRating.equals(new Rating("0.0"))) {
+            throw new IllegalValueException(String.format(MESSAGE_INVALID_RATING));
+        }
 
         return new Interview(modelApplicant, jobRole, modelRating,
                 TimeParser.parseDate(interviewStartTime, false),

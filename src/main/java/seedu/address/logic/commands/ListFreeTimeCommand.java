@@ -44,7 +44,6 @@ public class ListFreeTimeCommand extends Command {
      * @return a String of free times
      */
     private String formatFreeTime(List<Pair<Time, Time>> freeTimes) {
-        System.out.println(freeTimes);
         StringBuilder sb = new StringBuilder();
         for (Pair<Time, Time> pocketOfFreeTime : freeTimes) {
             sb.append("from: ").append(pocketOfFreeTime.getKey().getTime())
