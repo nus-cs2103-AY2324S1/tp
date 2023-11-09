@@ -219,7 +219,18 @@ InterviewHub data are saved in the hard disk automatically after any command tha
 
 Adds an applicant to **InterviewHub**.
 
-Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
+Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+
+| Parameter      | Representation                    | Constraints                                            |
+|----------------|-----------------------------------|--------------------------------------------------------|
+| `NAME`         | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
+ | `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long |
+| `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`               |
+| `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                 |
+| `TAG`           | A tag belonging to the applicant  | Must contain only alphanumeric characters              |                                      
+
+
+
 
 Examples:
 * `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`.
@@ -230,11 +241,12 @@ Examples:
 
 Deletes the specified applicant from **InterviewHub**.
 
-Format: `delete-a INDEX`
+Format: `delete-a APPLICANT_INDEX`
 
-* Deletes the applicant at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed applicant list.
-* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
+* Deletes the applicant at the specified `APPLICANT_INDEX`.
+* The `APPLICANT_INDEX` refers to the index number shown in the displayed applicant list.
+* The `APPLICANT_INDEX` **must be a positive unsigned integer** e.g. 1, 2, 3, …​ 
+* The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 
 Examples:
 * `delete-a 1` deletes the 1st applicant in the address book.
@@ -245,16 +257,29 @@ Examples:
 
 Edits an existing applicant in **InterviewHub**.
 
-Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 * Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
-* The `INDEX` **must be a positive unsigned integer** 1, 2, 3, …​ The upper limit of valid integers is the number of applicants currently displayed in the applicant list
+* The `INDEX` **must be a positive unsigned integer** e.g. 1, 2, 3, …​ 
+* The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+  | Parameter      | Representation                    | Constraints                                            |
+  |----------------|-----------------------------------|--------------------------------------------------------|
+  | `NAME`         | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
+  | `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long |
+  | `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`               |
+  | `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                 |
+  | `TAG`           | A tag belonging to the applicant  | Must contain only alphanumeric characters              |
 
 Examples:
 *  `edit-a 1 n/John Doe` Edits the name of the 1st applicant to be `John Doe`.
 *  `edit-a 2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd applicant to be `91234567` and `johndoe@example.com` respectively.
+Before:
+![before edit-a command](images/editApplicantbefore.png)
+After:
+![result for 'edit-a 2 p/91234567 e/johndoe@example.com](images/editApplicantResult.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -267,18 +292,153 @@ Format: ``find-a [n/KEYWORDS...] [p/NUMBER]
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Multiple keywords must be either space or comma separated
 * At least one of the optional fields must be provided
 * Any of the fields (name, phone, email, address, tags) can be searched
-* Only full words will be matched e.g. `Han` will not match `Hans` for name, address and tags
-* For phone, partial numbers will match e.g. `987` will match `98765432`
 * Applicants matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+The table below summarises how each field is matched in the search.
+<table>
+  <tbody>
+    <tr>
+      <th>Parameter</th>
+      <th align="center">Match</th>
+      <th align="right">Examples</th>
+    </tr>
+    <tr>
+      <td>
+
+`NAME`
+
+</td>
+      <td>Only full words will be matched</td>
+      <td>
+<ul>
+<li>
+
+`Han` will match `Han Bo` but not `Hans Bo`
+
+</li>
+<li>
+
+`John Doe` will match `John`, `Doe` and `John Doe`
+
+</li>
+</ul>
+</td>
+    </tr>
+    <tr>
+      <td>
+
+`PHONE`
+
+</td>
+      <td>Partial numbers will be matched</td>
+      <td>
+<ul>
+<li>
+
+`987` will match `98765432`
+
+</li>
+<li>
+
+`98765432` will match `98765432`
+
+</li>
+</ul>
+</td>
+    </tr>
+    <tr>
+      <td>
+
+`EMAIL`
+
+</td>
+      <td>
+
+Must be an exact match to the entire email, the part before the `@`, or the part after the `@`
+
+</td>
+      <td>
+<ul>
+<li>
+
+`john` will match `john@example.com`
+
+</li>
+<li>
+
+`exmaple.com` will match `john@example.com`
+
+</li>
+<li>
+
+`john@example.com` will match `john@example.com`
+
+</li>
+<li>
+
+`example` will not match `john@example.com`
+
+</li>
+</ul>
+</td>
+    </tr>
+    <tr>
+      <td>
+
+`ADDRESS`
+
+</td>
+      <td>Only full words will be matched</td>
+      <td>
+
+<ul>
+<li>
+
+`Serangoon` will match `Serangoon Gardens`
+
+</li>
+<li>
+
+`Ser` will not match `Serangoon`
+
+</li>
+</ul>
+
+
+</td>
+    </tr>
+<tr>
+<td>
+
+`TAG`
+
+</td>
+<td>Only full words will be matched</td>
+<td>
+
+<ul>
+<li>
+
+`software engineer` will  match `software engineer`
+
+</li>
+<li>
+
+`soft` will not match `software engineer`
+
+</li>
+</ul>
+
+</td>
+</tr>
+  </tbody>
+</table>
+
 Examples:
-* `find-a n/Alex` returns `Alex` and `Alex Yeoh`
-
-Before find-a command:
-
 * `find-a n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find-a n/alex david'](images/findAlexDavidResult.png)
 * `find-a p/874 a/serangoon ang` returns `97438807`, `Serangoon Gardens`,
