@@ -191,9 +191,11 @@ Adds a member to the list of members.
 
 :exclamation: **CAUTION:**
 <br/>
-For a new member to be created, the `MEMBER_NAME`, `PHONE_NUMBER`, `EMAIL`, and `TELEGRAM_HANDLE` have to all be unique.
+* For a new member to be created, the `MEMBER_NAME`, `PHONE_NUMBER`, `EMAIL`, and `TELEGRAM_HANDLE` have to all be unique.
 Otherwise, the system will reject this as a duplicate member.
-
+* The last valid parameter found will treat all of the characters after it as its input.
+  * Consider this command: `addm /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /invalid invalid`
+  * The `tele` parameter will treat `@tswift /invalid invalid` as its input which is invalid.
 </div>
 
 #### Example of usage:
@@ -466,8 +468,11 @@ Adds an applicant to the list of applicants.
 
 :exclamation: **CAUTION:**
 <br/>
-For a new applicant to be created, the `APPLICANT_NAME` and `PHONE_NUMBER` have to **both** be unique.
-Otherwise, the system will reject this as a duplicate applicant.
+* For a new applicant to be created, the `APPLICANT_NAME` and `PHONE_NUMBER` have to **both** be unique.
+  Otherwise, the system will reject this as a duplicate applicant.
+* The last valid parameter found will treat all of the characters after it as its input.
+    * Consider this command: `adda /name Lady Gaga /phone 99129969 /interview 01/01/2024 1200 /invalid invalid`
+    * The `interview` parameter will treat `01/01/2024 1200 /invalid invalid` as its input which is invalid.
 
 </div>
 
