@@ -236,6 +236,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                            | clear all contacts data                                                              | quickly erase all information stored when I will no longer use the app          |
 | `*`      | user who prefers CLI            | use keyboard shortcuts                                                               | perform tasks more efficiently                                                  |
 | `*`      | user                            | see a different background colour for each contact                                   | differentiate between contacts more easily                                      |
+| `*`      | infrequent user                 | view a “cheatsheet” or help dialog for the text commands                             | remember some basic commands I may have forgotten
 | `*`      | advanced user                   | search/filter by specific parts of contacts (e.g. containing certain words)          | narrow down contacts to exactly what I am looking for                           |
 | `*`      | user who prefers CLI            | switch between previously entered commands in history                                | easily repeat previous commands                                                 |
 
