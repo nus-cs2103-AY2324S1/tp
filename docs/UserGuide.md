@@ -77,7 +77,7 @@ Here are some benefits of adopting lesSON in your studying experience:
 
 Here is a quick overview of the user interface to get you oriented with where things are.
 
-![gui_overview](./images/UserGuide/1.3_gui_overview.png)
+![gui_overview](./images/UserGuide/1.3b_ui_overview.png)
 
 * Command Line Box - lesSON is optimised for typing commands. Type your commands in the command box
 to create and change flashcards!
