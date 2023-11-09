@@ -1,3 +1,4 @@
+<link href="./assets/css/UserGuide.css" rel="stylesheet"></link>
 ---
 layout: page
 title: User Guide
@@ -318,15 +319,6 @@ Action | Format, Examples
 
 ## List of acceptable values
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-.tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
-</style>
 <table class="tg">
 <thead>
   <tr>
@@ -351,7 +343,7 @@ Action | Format, Examples
   </tr>
   <tr>
     <td class="tg-0pky">EMAIL</td>
-    <td class="tg-0pky">A string with an email extension (e.g. <code>@gmail.com</code>)</td>
+    <td class="tg-0pky">An email with a valid extension (e.g. <code>@gmail.com</code>)</td>
   </tr>
   <tr>
     <td class="tg-0pky">ADDRESS</td>
@@ -372,7 +364,7 @@ Action | Format, Examples
   </tr>
   <tr>
     <td class="tg-0pky">DATE</td>
-    <td class="tg-0pky">Must be a <span style="font-weight:bold">valid date </span>in the format of <span style="font-weight:bold;font-style:italic">Y</span><span style="font-weight:bold">YYY-MM-DD</span></td>
+    <td class="tg-0pky">Must be a <span style="font-weight:bold">valid date </span>in the format of <span style="font-weight:bold">YYYY-MM-DD</span></td>
   </tr>
   <tr>
     <td class="tg-0pky">TAG</td>
@@ -404,7 +396,7 @@ Action | Format, Examples
   <tr>
     <td class="tg-0pky"><code>findMember</code> / <code>findEvent</code></td>
     <td class="tg-0pky">KEYWORD</td>
-    <td class="tg-0pky">Must match minimally one of the words in the name of the event to be found, where capitalisation does not matter</td>
+    <td class="tg-0pky">Must match minimally one of the words in the name of the member/event to be found, where capitalisation does not matter</td>
   </tr>
 </tbody>
 </table>
