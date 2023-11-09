@@ -267,41 +267,39 @@ However, to keep `Command` classes consistent in design,
 we decide to only have one `EditCommand` class and practice inheritance with `EditAction`.
 
 
-### \[Proposed\] Undo/redo feature
-    
-#### Proposed Implementation
+### Undo/redo
 
-The proposed undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `NetworkBook` with an undo/redo history, stored internally as an `networkBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `NetworkBook` with an undo/redo history of its state (encompassing list of all contacts and displayed list of contacts), stored internally as an `networkBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedNetworkBook#commit()` — Saves the current address book state in its history.
-* `VersionedNetworkBook#undo()` — Restores the previous address book state from its history.
-* `VersionedNetworkBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedNetworkBook#commit()` — Saves the current NetworkBook state in its history.
+* `VersionedNetworkBook#undo()` — Restores the previous NetworkBook state from its history.
+* `VersionedNetworkBook#redo()` — Restores a previously undone NetworkBook state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitNetworkBook()`, `Model#undoNetworkBook()` and `Model#redoNetworkBook()` respectively.
+These operations are called in functions of the `Model` interface, namely `Model#undoNetworkBook()`, `Model#redoNetworkBook()`, `Model#setPerson()`, `Model#addPerson()`, `Model#deletePerson()` and `Model#updateDisplayedPersonList()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedNetworkBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedNetworkBook` will be initialized with the initial NetworkBook state, and the `currentStatePointer` pointing to that single state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitNetworkBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `networkBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person displayed in NetworkBook. The `delete` command calls `Model#deletePerson()` which in turn calls `VersionedNetworkBook#commit()`, causing the modified state of the NetworkBook after the `delete 5` command executes to be saved in the `networkBookStateList`, and the `currentStatePointer` is shifted to the newly inserted NetworkBook state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitNetworkBook()`, causing another modified address book state to be saved into the `networkBookStateList`.
+Step 3. The user executes `create /name David …​` to add a new person. The `create` command also calls `Model#addPerson()` which also in turn calls `VersionedNetworkBook#commit()`, causing another modified NetworkBook state to be saved into the `networkBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitNetworkBook()`, so the address book state will not be saved into the `networkBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `VersionedNetworkBook#commit`, so the NetworkBook state will not be saved into the `networkBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoNetworkBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoNetworkBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous NetworkBook state, and restores the NetworkBook to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial NetworkBook state, then there are no previous NetworkBook states to restore. The `undo` command uses `Model#canUndoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial state of NetworkBook when the user began the current session, then there are no previous NetworkBook states to restore. The `undo` command uses `Model#canUndoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -314,17 +312,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoNetworkBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoNetworkBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the NetworkBook to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `networkBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone NetworkBook states to restore. The `redo` command uses `Model#canRedoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `networkBookStateList.size() - 1`, pointing to the latest NetworkBook state, then there are no undone NetworkBook states to restore. The `redo` command uses `Model#canRedoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitNetworkBook()`, `Model#undoNetworkBook()` or `Model#redoNetworkBook()`. Thus, the `networkBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `open`. Commands that do not modify the NetworkBook, such as `list`, will usually not call `Model#commitNetworkBook()`, `Model#undoNetworkBook()` or `Model#redoNetworkBook()`. Thus, the `networkBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitNetworkBook()`. Since the `currentStatePointer` is not pointing at the end of the `networkBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitNetworkBook()`. Since the `currentStatePointer` is not pointing at the end of the `networkBookStateList`, all NetworkBook states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -336,7 +334,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire NetworkBook state.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -344,8 +342,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
