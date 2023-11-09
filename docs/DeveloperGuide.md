@@ -420,6 +420,14 @@ This `NameContainsKeywordsPredicate` object is then used as the parameter to ins
 An instance of `CommandResult` is then created which contains the message and information that will be displayed to the user.
 The GUI then updates to show this information to the user.
 
+#### Notes
+
+1. The search is case-insensitive, e.g. `find JOHN` will return both john and John.
+2. The order of the keywords does not matter. e.g. `find Alice Tan` will match Tan Alice.
+3. Only the applicant name is searched.
+4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
+   Applicants matching at least one keyword will be returned (i.e. OR search).
+   e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
 
 #### Steps to trigger
 1. User opens the app
@@ -439,8 +447,9 @@ The GUI then updates to show this information to the user.
   
 - Alternative 2 (current choice): Find applicants by name using partial match search (or "fuzzy" search)
   - Pros: More inclusive, can find matches that are related but not exactly the same as `KEYWORD`.
-  More user-friendly as it accounts for variations or common misspellings. Allows for faster typing as users
-  do not need to type our the exact name.
+  This is more user-friendly and allows for faster typing as users do not need to type the exact name out in order to find
+  an applicant.
+
   - Cons: May return a larger number of results, some of which may not be relevant (false positives), 
   potentially requiring additional filtering or sorting which can be inconvenient and time-consuming.
 
@@ -451,18 +460,9 @@ The GUI then updates to show this information to the user.
   - Cons: As the current find function only supports searching by name, adding the additional `n/` is unnecessary.
 
 - Alternative 2 (current chocie): `find KEYWORDS [MORE_KEYWORDS]`
-  - Pros: Allows for faster typing and users do not need to input the unnecessary `n/` tag.
+  - Pros: Allows for faster typing as users do not need to input the unnecessary `n/` tag.
   - Cons: Not immediately clear that the `find` command finds applications by name. 
   This will have to be explained in the user guide.
-
-#### Notes
-
-1. The search is case-insensitive, e.g. `find JOHN` will return both john and John.
-2. The order of the keywords does not matter. e.g. `find Alice Tan` will match Tan Alice.
-3. Only the applicant name is searched.
-4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
-   Applicants matching at least one keyword will be returned (i.e. OR search).
-   e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
 
    
 --------------------------------------------------------------------------------------------------------------------
