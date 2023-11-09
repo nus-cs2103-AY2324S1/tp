@@ -251,23 +251,13 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
 <box type="tip" header="**Note**">
     As <code>NAME</code> can only contain alphanumeric characters and spaces, 
-    names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app. 
-    This is similar for other commands requiring a string input. Only alphanumeric strings are allowed in the app.
+    names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.
 </box>
-
-<box type="tip" header="**Note**">
-    Note that the default status for new Applicants is UNDECIDED.
-</box>
-
 
 Example:
-* `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer`
-Adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@gmail.com*, and position *Software Engineer*.
+* `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer` adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@<area>gmail.com*, and position *Software Engineer*.
 
-<br/><br/>
-
-* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
-  Adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@yahoo.com*, and position *Project Manager*.
+* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@<area>yahoo.com*, and position *Project Manager*.
 <br>
 
 ---
@@ -282,6 +272,7 @@ Format: `edit INDEX [n/NAME] [hp/PHONE] [e/EMAIL] [p/POSITION]`
 * Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated by the input values.
+* `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Example:
 * `edit 1 n/Vijay Sankar Kumar` edits the name of the 1st applicant in the list.
@@ -299,6 +290,7 @@ Deletes an applicant from the list.
 
 Format: `delete INDEX`
 * Deletes the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
+* `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Example:
 * `list` followed by `delete 2` deletes the 2nd person in the applicant list.
@@ -329,6 +321,7 @@ Edits the status of an applicant.
 Format: `status INDEX s/STATUS`
 * Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
 * `STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
+* `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Example:
 * `status 3 s/o` updates the status of the 3rd person in the displayed applicant list to _OFFERED_.
@@ -382,6 +375,7 @@ converted to `technical2`.
 Format: `addi INDEX t/TYPE [r/RATING]`
 * Adds an interview to the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
 * A maximum of 5 interviews can be added to each applicant.
+* `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Example:
 * `addi 1 t/technical r/8.6` adds a Technical interview with rating 8.6 to the 1st person in the displayed applicant list.
@@ -407,6 +401,7 @@ Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
 * Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated by the input values.
+* `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Example:
 * `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview with rating 7.8.
@@ -425,6 +420,7 @@ Deletes an interview from an applicant.
 
 Format: `deletei INDEX i/INTERVIEW_INDEX`
 * Deletes from the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
+* `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Example:
 * `deletei 1 i/2` deletes the 2nd interview of the 1st person in the displayed applicant list.
@@ -636,36 +632,36 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 <a name="commands-for-applicant-management-features"></a>
 ### Commands for Applicant Management Features
 
-| <div style="width:auto">Action</div> | Format                                                  |
-|--------------------------------------|---------------------------------------------------------|
-| Adding a new applicant               | `add n/NAME hp/PHONE e/EMAIL p/POSITION`                |
-| Editing an applicant                 | `edit INDEX [n/NAME] [hp/PHONE] [e/EMAIL] [p/POSITION]` |
-| Deleting an applicant                | `delete INDEX`                                          |
-| Listing all applicants               | `list`                                                  |
-| Editing an applicant status          | `status INDEX s/STATUS`                                 |
+| <div style="width:auto">Action</div> | Format                                                                                                                        |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Adding a new applicant               | `add n/NAME hp/PHONE e/EMAIL p/POSITION` <br/> e.g. `add n/Clarence Lee hp/81920192 e/clarence@gmail.com p/Software Engineer` |
+| Editing an applicant                 | `edit INDEX [n/NAME] [hp/PHONE] [e/EMAIL] [p/POSITION]` <br/> e.g. `edit 3 hp/82910293 e/lulule@gmail.com`                    |
+| Deleting an applicant                | `delete INDEX` <br/> e.g. `delete 3`                                                                                          |
+| Listing all applicants               | `list`                                                                                                                        |
+| Editing an applicant status          | `status INDEX s/STATUS` <br/> e.g. `status 3 s/u`                                                                             |
 
 <br>
 
 <a name="commands-for-interview-management-features"></a>
 ### Commands for Interview Management Features
 
-| <div style="width:auto">Action</div>     | Format                                              |
-|------------------------------------------|-----------------------------------------------------|
-| Adding an interview to an applicant      | `addi INDEX t/TYPE [r/RATING]`                      |
-| Editing an interview of an applicant     | `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]` |
-| Deleting an interview from an applicant  | `deletei INDEX i/INTERVIEW_INDEX`                   |
+| <div style="width:auto">Action</div>     | Format                                                                         |
+|------------------------------------------|--------------------------------------------------------------------------------|
+| Adding an interview to an applicant      | `addi INDEX t/TYPE [r/RATING]` <br/> e.g. `addi 2 t/technical`                 |
+| Editing an interview of an applicant     | `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]` <br/> e.g. `editi 3 r/8.2` |
+| Deleting an interview from an applicant  | `deletei INDEX i/INTERVIEW_INDEX` <br/> e.g. `deletei 3 i/1`                   |
 
 <br>
 
 <a name="commands-for-applicant-processing-features"></a>
 ### Commands for Applicant Processing Features
 
-| <div style="width:auto">Action</div> | Format                                                                                 |
-|--------------------------------------|----------------------------------------------------------------------------------------|
-| Finding an applicant by name         | `find KEYWORD [MORE_KEYWORDS]`                                                         |
-| Sorting applicants by descriptors    | `sort d/DESCRIPTOR [dsc/]`                                                             |
-| Filtering applicants by fields       | `filter [n/NAME] [e/EMAIL] [p/POSITION] [hp/PHONE] [s/STATUS] [lts/SCORE] [gts/SCORE]` |
-| Importing from CSV                   | `import f/FILENAME`                                                                    |
+| <div style="width:auto">Action</div> | Format                                                                                                                   |
+|--------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Finding an applicant by name         | `find KEYWORD [MORE_KEYWORDS]` <br/> e.g. `find jo tan`                                                                  |
+| Sorting applicants by descriptors    | `sort d/DESCRIPTOR [dsc/]` <br/> e.g. `sort d/name dsc/`                                                                 |
+| Filtering applicants by fields       | `filter [n/NAME] [e/EMAIL] [p/POSITION] [hp/PHONE] [s/STATUS] [lts/SCORE] [gts/SCORE]` <br/> e.g. `filter n/lee lts/7.8` |
+| Importing from CSV                   | `import f/FILENAME` <br/> e.g. `import f/demo.csv`                                                                       |
 
 <br>
 
