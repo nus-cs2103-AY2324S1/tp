@@ -394,8 +394,6 @@ _{insert diagram here}_
 
 </div>
 
-Step 4. The user executes `sort /by none`, which updates the `SortedList` predicate and resets the sorting.
-
 <!-- todo insert diagram-->
 
 The following activity diagram summarizes what happens when a user executes a new command:

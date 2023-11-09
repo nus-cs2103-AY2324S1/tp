@@ -27,7 +27,7 @@ public class PersonSortComparator implements Comparator<Person> {
     };
 
     public static final String MESSAGE_CONSTRAINTS_FIELD = "Field should be one of the following: "
-            + "name, grad, priority, none.";
+            + "name, grad, priority.";
     public static final String MESSAGE_CONSTRAINTS_ORDER = "Order should be one of the following: asc, desc.";
     public static final String MESSAGE_CONSTRAINTS = MESSAGE_CONSTRAINTS_FIELD + "\n" + MESSAGE_CONSTRAINTS_ORDER;
 
@@ -68,7 +68,6 @@ public class PersonSortComparator implements Comparator<Person> {
             return generateGradComparator(isAsc);
         case PRIORITY:
             return generatePriorityComparator(isAsc);
-        case NONE: // Fallthrough
         default:
             return EMPTY_COMPARATOR;
         }
@@ -175,8 +174,6 @@ public class PersonSortComparator implements Comparator<Person> {
             return SortField.GRAD;
         case "priority":
             return SortField.PRIORITY;
-        case "none":
-            return SortField.NONE;
         default:
             return SortField.INVALID;
         }
@@ -233,7 +230,6 @@ public class PersonSortComparator implements Comparator<Person> {
         NAME,
         GRAD,
         PRIORITY,
-        NONE,
         INVALID
     }
 
