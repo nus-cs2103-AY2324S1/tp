@@ -131,17 +131,17 @@ Click [here](#table-of-contents) to go back to contents.
 
 Format: `Hi`
 
-#### Features:
+##### Features:
 
 - When the command is invoked, it returns a greeting from Linktree and the current date and time.
 - The output format is consistent, showing "Welcome from Linktree, Current date and time: MM-DD-YYYY HH:MM:SS".
 
-#### Guidelines:
+##### Guidelines:
 
 - Please ensure that the first letter of the command is uppercase. For instance, use `Hi` instead of `hi` or `HI`.
 - The command does not take any additional arguments or keywords.
 
-#### Examples:
+##### Examples:
 
 When you enter the command (Hi):
 
@@ -191,16 +191,17 @@ When you enter the command (Hi):
 #### What this command does:
 * Finds persons whose names contain any of the given keywords.
 
-Format: 
-
- - Command: `find [KEYWORD]`
+##### Format: `find [KEYWORD]`
  - The search is case-insensitive. e.g hans will match Hans
  - The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
  - Only the name is searched.
  - Only full words will be matched e.g. Han will not match Hans
  - Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang
+
+##### Note:
+The find command is designed to show only a list of developers. If you wish to view the team list again, you should use the `listt` command. To display the complete list of developers, use the `list` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
    
-Examples:
+##### Examples:
 
  - find John returns john and John Doe
  - find alex david returns Alex Yeoh, David Li
@@ -273,16 +274,17 @@ and type `list` again when you want to go back to the main window.
 ### What this command does:
 - Finds teams whose names contain any of the given keywords.
 
-**Format:** 
-
-- Command: `findteam KEYWORD`
+##### Format: `findteam KEYWORD`
 - The search is case-insensitive. e.g., "team" will match "Team Alpha."
 - The order of the keywords does not matter. e.g., "Alpha Bravo" will match "Bravo Alpha Team."
 - Only the team name is searched.
 - Only full words will be matched. e.g., "Alph" will not match "Alpha Team."
 - Teams matching at least one keyword will be returned (i.e., OR search). e.g., "Alpha Bravo" will return "Team Alpha," "Bravo Team."
 
-### Examples:
+##### Note:
+The find command is designed to show only a list of teams. If you wish to view the developer list again, you should use the `list` command. To display the complete list of teams, use the `listt` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
+
+##### Examples:
 - `findteam Alpha` returns "Team Alpha" and "Alpha Squad."
 - `findteam Bravo Charlie` returns "Bravo Team," "Charlie Crew," and "Delta Bravo Charlie Team."
 
