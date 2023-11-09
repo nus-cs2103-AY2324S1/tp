@@ -318,7 +318,7 @@ The `redo` command does the opposite — it calls `Model#redoNetworkBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `open 1 /index 1`. Commands that do not modify NetworkBook's list of all contacts or displayed contacts, such as `open 1 /index 1`, will usually not call `Model#undoNetworkBook()` or `Model#redoNetworkBook()`, or any `Model` commands that call `VersionedNetworkBook#commit`. Thus, the `networkBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `open 1 /index 1`. Commands that do not modify NetworkBook's list of all contacts or displayed contacts, such as `open 1 /index 1`, will usually not call `Model#undoNetworkBook()`, `Model#redoNetworkBook()`, or any `Model` commands that call `VersionedNetworkBook#commit`. Thus, the `networkBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
