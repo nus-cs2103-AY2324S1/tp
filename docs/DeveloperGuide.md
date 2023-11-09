@@ -420,6 +420,8 @@ This `NameContainsKeywordsPredicate` object is then used as the parameter to ins
 An instance of `CommandResult` is then created which contains the message and information that will be displayed to the user.
 The GUI then updates to show this information to the user.
 
+<puml src="diagrams/FindCommandSequenceDiagram.puml" alt="FindCommandSequenceDiagram" />
+
 #### Notes
 
 1. The search is case-insensitive, e.g. `find JOHN` will return both john and John.
@@ -433,6 +435,8 @@ The GUI then updates to show this information to the user.
 1. User opens the app
 2. User keys in `find KEYWORD [MORE_KEYWORDS]`
 3. The GUI will update to show a list of applicants with name containing any of the keywords.
+
+<puml src="diagrams/FindCommandActivityDiagram.puml" alt="FindCommandActivityDiagram" />
 
 #### Design considerations
 
