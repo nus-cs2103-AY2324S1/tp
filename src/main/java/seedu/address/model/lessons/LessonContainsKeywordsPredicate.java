@@ -3,7 +3,6 @@ package seedu.address.model.lessons;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Lesson}'s {@code Name} matches any of the keywords given.

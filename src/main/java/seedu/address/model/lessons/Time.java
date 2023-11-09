@@ -4,7 +4,6 @@ import static java.lang.String.format;
 import static seedu.address.logic.parser.RegularExpressionUtil.ONE_TO_TWO_DIGITS;
 import static seedu.address.logic.parser.RegularExpressionUtil.TWO_DIGITS;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;

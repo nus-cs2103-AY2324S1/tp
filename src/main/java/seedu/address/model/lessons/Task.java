@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Objects;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntryField;
 
