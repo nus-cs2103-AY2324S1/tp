@@ -465,7 +465,7 @@ Find applicants whose name contains a particular keyword.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The total length of the keywords should not be more than 55 characters long.
+* The total length of the keywords, including spaces, should not be more than 55 characters long.
 * The search is case-insensitive, e.g. `JOHN` will return `john`.
 * The order of the keywords does not matter, e.g. `Alice Tan` will match `Tan Alice`.
 * Only the applicant name is searched.
