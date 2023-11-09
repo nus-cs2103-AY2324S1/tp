@@ -170,32 +170,33 @@ Adds a member to the list of members.
 #### Format:
 
 `addmember /name MEMBER_NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`<br/>
-The alias for this command is `addm`.
 
 <div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
 
 * `MEMBER_NAME`: Only alphabetical characters, spaces, @, (), /, are allowed. This field should not be blank.
-
+  <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
-
+  <br/>
 * `EMAIL`: The email has to follow localpart@domain format. See [email format](#441-email-format) for more details.
-
+  <br/>
 * `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
   Minimum of 5 and maximum of 32 characters are allowed.
-
+  <br/>
 * `TAG`: Only alphanumeric characters are allowed. Minimum of 1 and maximum of 15 characters are allowed. Spaces are not allowed.
 
 </div>
 
-<div markdown="span" class="alert alert-warning"> :exclamation: **CAUTION:**
+<div markdown="block" class="alert alert-warning">:exclamation: **CAUTION:**
 
 * For a new member to be created, the `MEMBER_NAME`, `PHONE_NUMBER`, `EMAIL`, and `TELEGRAM_HANDLE` have to all be unique.
   Otherwise, the system will reject this as a duplicate member.
 
 * The last valid parameter found will treat all of the characters after it as its input.
+
   * Consider this command: `addm /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /invalid invalid`
+  
   * The `tele` parameter will treat `@tswift /invalid invalid` as its input which is invalid.
 
 </div>
@@ -272,22 +273,20 @@ and the new tag in the `/tag` field of the command.
 This also means that to clear a member's tags, you can simply type `editm /tag`.
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
 
-* `MEMBER_INDEX`: Only positive integers are allowed.
-
-* `MEMBER_NAME`: Only alphabetical characters, spaces, @, (), / are allowed. Should not be blank.
-
+* `MEMBER_NAME`: Only alphabetical characters, spaces, @, (), /, are allowed. This field should not be blank.
+  <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
-
-* `EMAIL`: See [email format](#441-email-format) for more details.
-
+  <br/>
+* `EMAIL`: The email has to follow localpart@domain format. See [email format](#441-email-format) for more details.
+  <br/>
 * `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
   Minimum of 5 and maximum of 32 characters are allowed.
-
-* `TAG`: Only alphanumeric characters are allowed. Minimum of 1 and maximum of 15 characters are allowed.
+  <br/>
+* `TAG`: Only alphanumeric characters are allowed. Minimum of 1 and maximum of 15 characters are allowed. Spaces are not allowed.
 
 </div>
 
@@ -373,7 +372,7 @@ Adds a task to the top of the task list of the specified member.
 `addtask MEMBER_INDEX /task TASK_NAME` <br/>
 The alias for this command is `addt`.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
 
@@ -422,13 +421,13 @@ Deletes a task at the specified index of a task list, for the member at the spec
 `deletetask MEMBER_INDEX /task TASK_INDEX`<br/>
 The alias for this command is `delt`.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
 
 * `MEMBER_INDEX`: Only positive integers that are within the member list are accepted.
 
-* `TASK_INDEX` : Only positive integers that are within the task list are accepted.
+* `TASK_INDEX`: Only positive integers that are within the task list are accepted.
 
 </div>
 
@@ -458,11 +457,11 @@ The alias for this command is `adda`.
 
 - `APPLICANT_NAME`: Only alphabetical characters, spaces, @, (), / are allowed. Should not be blank.<br/>
 - `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
-- `INTERVIEW_TIME` : Only dates in the format of “DD/MM/YYYY HHmm” are allowed. This field is optional.
+- `INTERVIEW_TIME`: Only dates in the format of “DD/MM/YYYY HHmm” are allowed. This field is optional.
 
 </div>
 
-<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+<div markdown="block" class="alert alert-warning">:exclamation: **CAUTION:**
 
 * For a new applicant to be created, the `APPLICANT_NAME` and `PHONE_NUMBER` have to **both** be unique.
   Otherwise, the system will reject this as a duplicate applicant.
@@ -543,17 +542,16 @@ The applicant at the specified index will have his/her specified field(s) edited
 `editapplicant APPLICANT_INDEX [/name APPLICANT_NAME] [/phone PHONE_NUMBER] [/interview INTERVIEW_TIME]`<br/>
 The alias for this command is `edita`.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
-<br/>
 
 * `APPLICANT_INDEX`: Only positive integers are allowed. This will be based on the current **shown** list.
-
+  <br/>
 * `APPLICANT_NAME`: Only alphabetical characters, spaces, @, (), / are allowed. Should not be blank.
-
+  <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
-
+  <br/>
 * `INTERVIEW_TIME`: Only dates in the format of “DD/MM/YYYY HHmm” are allowed. To remove an interview time from an
   applicant, ‘cancel’ is also allowed.
 
@@ -570,7 +568,7 @@ and the interview time has been set to `7 January 2023 3:00pm`.
 
 2. `edita 1 /name Alfred /interview cancel`
 
-This edits the particulars of the applicant at `APPLICANT_INDEX` 1 in the applicant list. The applicant's name is changed to `Alfred`,
+    This edits the particulars of the applicant at `APPLICANT_INDEX` 1 in the applicant list. The applicant's name is changed to `Alfred`,
 and the interview has been cancelled and removed.
 
 #### 4.2.5 Deleting an applicant: `deleteapplicant` or `dela`
@@ -727,14 +725,19 @@ that the addressbook.json file used is **correct and accurate.**
 ## 6. Common Mistakes
 These are some common mistakes that you might make while using our application.
 
-1. Problem : I can't seem to add an interview time, the error says that the input date is invalid. Why? <br/><br/>
-Answer: Please make sure that the month or date has 2 digits in them. For example, January will have to be `01` and not `1`. If you are trying to cancel the interview scheduled, ensure that nothing is capitalised in `cancel` as it is case-sensitive.<br/><br/>
-2. Problem : I am trying to delete a certain member off the member list. However, it seems to be deleting the wrong member. Why? <br/><br/>
-Answer: The `INDEX` used will have to be the current index shown on the screen. If you are deleting the wrong member, make sure you are following the correct index shown currently shown on the screen, and not an index from a previous view. You can refer to [here](#413-viewing-members-viewmembers-or-viewm) to view the entire list of members again.<br/><br/>
-3. Problem : I can't seem to see the full interview time. How can I fix this? <br/><br/>
-Answer: On start-up, the resolution of the window may not be optimal for your screen size and the interview time may be cut off as a result. To fix this, you may readjust the dimensions of the CMC window by dragging the corners of the window, or maximising the view by clicking the button on the top right hand corner of the window. <br/><br/>
+1. Problem: I can't seem to add an interview time, the error says that the input date is invalid. Why?
 
-If you are facing a problem that has not been mentioned, please email us at helpdesk@cmc.com. 
+    Answer: Please make sure that the month or date has 2 digits in them. For example, January will have to be `01` and not `1`. If you are trying to cancel the interview scheduled, ensure that nothing is capitalised in `cancel` as it is case-sensitive.<br/><br/>
+
+2. Problem: I am trying to delete a certain member off the member list. However, it seems to be deleting the wrong member. Why?
+
+    Answer: The `INDEX` used will have to be the current index shown on the screen. If you are deleting the wrong member, make sure you are following the correct index shown currently shown on the screen, and not an index from a previous view. You can refer to [here](#413-viewing-members-viewmembers-or-viewm) to view the entire list of members again.<br/><br/>
+
+3. Problem: I can't seem to see the full interview time. How can I fix this?
+
+    Answer: On start-up, the resolution of the window may not be optimal for your screen size and the interview time may be cut off as a result. To fix this, you may readjust the dimensions of the CMC window by dragging the corners of the window, or maximising the view by clicking the button on the top right hand corner of the window. <br/><br/>
+
+If you are facing a problem that has not been mentioned, please email us at [helpdesk@cmc.com](mailto:helpdesk@cmc.com). 
 
 --------------------------------------------------------------------------------------------------------------------
 
