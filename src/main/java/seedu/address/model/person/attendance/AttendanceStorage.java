@@ -152,7 +152,7 @@ public class AttendanceStorage {
     /**
      * Gets the number of attendances for the given type.
      *
-     * @return count of number of attendances
+     * @return array of attendances, number of days leave, number of days absent and number of days late.
      */
     public int[] getAttendanceReport(JoinDate joinDate, int numOfLeave) {
         int numOfDaysOnLeave = numOfLeave;
