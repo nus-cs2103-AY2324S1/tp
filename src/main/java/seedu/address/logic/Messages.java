@@ -31,6 +31,8 @@ import seedu.address.ui.HelpWindow;
 public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String MESSAGE_MISSING_SECONDARY_COMMAND =
+            "Please be more specific. Type 'help %1$s' for more details.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_START_TIME_AFTER_END_TIME = "Start time %s is after the end time %s!\n";
     public static final String MESSAGE_INVALID_INTEGER_ARGUMENT =

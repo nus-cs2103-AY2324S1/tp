@@ -23,8 +23,10 @@ public class ListEventCommand extends ListCommand {
     public static final String MESSAGE_DESCENDING = "(in descending order):\n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + SECONDARY_COMMAND_WORD
-        + " [-descending] [-st filter_start_time] [-et filter_end_time]"
-        + " (-st and -et must either both present or both not present)";
+            + ": Shows a list of all events or events within a specified time interval.\n"
+            + "Usage: " + COMMAND_WORD + " " + SECONDARY_COMMAND_WORD
+            + " [-descending] [-st filter_start_time] [-et filter_end_time]"
+            + " (-st and -et must either both present or both not present)";
 
     private LocalDateTime filterStartTime;
     private LocalDateTime filterEndTime;
@@ -32,10 +34,12 @@ public class ListEventCommand extends ListCommand {
 
     /**
      * Constructor for {@code ListEventCommand} class
+     *
      * @param filterStartTime The start time for filter
-     * @param filterEndTime The end time for filter
-     * @param sortAscending Set to {@code true} to sort the events by start time in ascending order,
-     *     {@code false} in descending order.
+     * @param filterEndTime   The end time for filter
+     * @param sortAscending   Set to {@code true} to sort the events by start time
+     *                        in ascending order,
+     *                        {@code false} in descending order.
      */
     public ListEventCommand(EventTime filterStartTime, EventTime filterEndTime, boolean sortAscending) {
         this.filterStartTime = filterStartTime != null ? filterStartTime.getTime() : null;
@@ -54,8 +58,7 @@ public class ListEventCommand extends ListCommand {
         } else {
             model.updateFilteredEventList(
                     evt -> DateTimeUtil.withinTimeInterval(this.filterStartTime, this.filterEndTime,
-                            evt.getStartTime())
-            );
+                            evt.getStartTime()));
             result = MESSAGE_FILTERED;
         }
         result += this.sortAscending ? MESSAGE_ASCENDING : MESSAGE_DESCENDING;
@@ -65,8 +68,9 @@ public class ListEventCommand extends ListCommand {
             return (startTime1.isBefore(startTime2)
                     ? 1
                     : startTime1.equals(startTime2)
-                    ? 0
-                    : -1) * (sortAscending ? -1 : 1);
+                            ? 0
+                            : -1)
+                    * (sortAscending ? -1 : 1);
         });
         result += StringUtil.eventListToString(eventList);
         return new CommandResult(result, false, true);
