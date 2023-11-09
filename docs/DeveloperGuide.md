@@ -833,3 +833,4 @@ Given below are some of the possible enhancements that could be added in future 
    - Marking of students with the same student name
    - Marking of students with both student name field and student ID field
    - Marking of students with case-insensitive student name
+7. Currently, TAvigator supports a student having multiple tutorial groups, but attendance is marked based on the student only. As such, we plan to modify the `mark` command so that it takes in a `tg/` input, and attendance can be marked separately for each tutorial group the student belongs to.
