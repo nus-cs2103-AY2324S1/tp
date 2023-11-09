@@ -125,7 +125,7 @@ public class ModelManager implements Model {
 
     @Override
     public void markPersonUnPaid(Person target) {
-        target.setUnPaid();
+        addressBook.setUnPaid(target);
     }
 
     @Override
