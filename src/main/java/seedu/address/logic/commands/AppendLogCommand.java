@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-//import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LogBook;
 import seedu.address.model.Model;
@@ -49,13 +48,23 @@ public class AppendLogCommand extends UndoableCommand {
         logBookBeforeAppend = new LogBook(model.getLogBook());
         model.addToHistory(this);
 
+
+        boolean hasDupes = false; // tells the program if the execution encountered dupes
+        String duplicateClause = ""; // string collection of all dupes encountered
         for (Person person : model.getFoundPersonsList()) {
             if (model.getLogBook().hasPerson(person)) {
-                continue;
+                hasDupes = true;
+                duplicateClause += " " + person.getName() + ", ID: " + person.getId() + ".";
+                continue; // skip over the addition of the current person
             }
             model.getLogBook().addPerson(person);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        return hasDupes
+                ? new CommandResult("Person(s) already in list:" + duplicateClause
+                    + " They were not appended to the log.")
+                : new CommandResult(MESSAGE_SUCCESS);
+
     }
 
     /**

@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_ID;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -40,6 +42,10 @@ public class FindCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NAME));
         assertParseFailure(parser, " p/91234567",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/",
+                String.format(MESSAGE_INVALID_NAME, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " id/",
+                String.format(MESSAGE_INVALID_ID, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -55,7 +61,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void nricparse_validArgs_returnsFindCommand() {
+    public void idparse_validArgs_returnsFindCommand() {
         CompositePredicate findCommandPredicate = new CompositePredicate();
         findCommandPredicate.add(new IdContainsKeywordsPredicate(Arrays.asList("T0100606Z", "T0206006Z")));
         // no leading and trailing whitespaces
