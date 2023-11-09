@@ -745,6 +745,13 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InterviewHub home folder.
 
+**Q**: How do I check if I have the correct version of Java installed?<br>
+**A**: You can check the version of Java installed in your computer by opening the Command Prompt and typing `java --version`.
+If you have Java 11 installed, the correct version of Java is installed and you can start using **InterviewHub**.
+
+**Q**: Do I need an active internet connection to use InterviewHub? <br>
+**A**: No. It is an offline app.
+
 [Back to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
