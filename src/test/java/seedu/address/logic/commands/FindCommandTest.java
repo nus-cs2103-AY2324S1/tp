@@ -15,9 +15,12 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Balance;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -81,6 +84,44 @@ public class FindCommandTest {
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
+
+    // Integration tests for reactive commands
+    
+    @Test
+    public void execute_payAfterFiltered_reactive() throws CommandException {
+        Model tempModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        assert tempModel.hasPerson(CARL);
+
+        FindCommand command = new FindCommand(person -> person.getBalance().value < 50);
+        command.execute(tempModel);
+
+        int originalSize = tempModel.getFilteredPersonList().size();
+
+        assert tempModel.getFilteredPersonList().get(1) == CARL;
+
+        PayCommand payCommand = new PayCommand(Index.fromZeroBased(1), new Balance(50000));
+        payCommand.execute(tempModel);
+
+        assert CARL.getBalance().value >= 50;
+
+        assertEquals(originalSize - 1, tempModel.getFilteredPersonList().size());
+    }
+
+    @Test
+    public void execute_deleteAfterFiltered_reactive() {
+        Model tempModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        assert tempModel.hasPerson(CARL);
+
+        FindCommand command = new FindCommand(person -> true);
+        command.execute(tempModel);
+
+        int originalSize = tempModel.getFilteredPersonList().size();
+
+        tempModel.deletePerson(CARL);
+
+        assertEquals(originalSize - 1, tempModel.getFilteredPersonList().size());
+    }
+
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
