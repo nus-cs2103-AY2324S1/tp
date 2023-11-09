@@ -346,8 +346,8 @@ Action | Format, Examples
   <tr>
     <th class="tg-0pky"><span style="font-weight:bold">Command</span></th>
     <th class="tg-fymr">Field</th>
-    <th class="tg-0pky">Optional</th>
-    <th class="tg-0pky">Blank accepted</th>
+    <th class="tg-0pky"><span style="font-weight:bold">Optional</span></th>
+    <th class="tg-0pky"><span style="font-weight:bold">Blank accepted</span></th>
     <th class="tg-0pky"><span style="font-weight:bold">Acceptable values</span></th>
   </tr>
 </thead>
@@ -451,7 +451,7 @@ Action | Format, Examples
     <td class="tg-0pky"><code>findMember</code> / <code>findEvent</code></td>
     <td class="tg-0pky">KEYWORD</td>
     <td class="tg-0pky">No</td>
-    <td class="tg-0pky">Yes</td>
+    <td class="tg-0pky">No</td>
     <td class="tg-0pky">Any non-blank values</td>
   </tr>
 </tbody>
