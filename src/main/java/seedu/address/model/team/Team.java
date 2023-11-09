@@ -6,6 +6,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.IdentityCode;
+import seedu.address.model.person.Person;
 
 /**
  * Represents a Team in the address book.
@@ -117,6 +118,7 @@ public class Team {
                 && Objects.equals(teamName, team.teamName)
                 && Objects.equals(developerIdentityCodes, team.developerIdentityCodes);
     }
+
 
     @Override
     public int hashCode() {
