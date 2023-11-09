@@ -59,6 +59,7 @@ e.g. in `add n/NAME`, you should specify a `NAME` such as `add n/John Doe`.
 - Parameters in square brackets are optional.<br />
 e.g in `n/NAME [o/NOTE]`, you could specify `n/John Doe o/Good at SE.`, or just `n/John Doe`.
 
+<!-- The empty space below (in the ` `) is a non-breaking space, not a normal space. This forces Jekyll's Kramdown to preserve the space. -->
 - Parameters with `…`​ after them can be specified multiple times.<br />
 e.g. in `[t/TAG]…​`, which is optional but can also be specified multiple times, you could specify ` ` (none specified), `t/NUS`, `t/NUS t/CS2103 course` etc.
 
@@ -80,7 +81,7 @@ Hence, you will not be able to add a new contact with the same name as an existi
 
 For example, if you already have a contact with name `John Doe`, you will not be able to add another contact with the same name `John Doe`.
 For two names to be considered the same, they must be identical in every way, and that includes casing, as well as whitespace in the middle of the name, etc.
-Therefore, you may add another contact with name `John doe`, `John    Doe`, or `Alex John Doe`. 
+Therefore, you may add another contact with name `John doe`, `John    Doe`, or `Alex John Doe`.
 You may also first modify the name of the existing contact.
 
 Should you need to make changes to an existing contact, use the `edit` command as explained below.
@@ -220,7 +221,7 @@ Shows contacts with a tag that fully matches the specified tag (case-insensitive
   e.g. `filter Friend` will _not_ match the tag `Close Friend`.
 
 - The keyword can contain spaces.\
-  e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).  
+  e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).
   e.g. <pre>`filter Close           Friend`</pre> will _not_ match the tag `Close Friend`.
 
 - In summary, `filter` looks for tags which are an exact match, ignoring casing only.
