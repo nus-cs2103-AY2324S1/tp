@@ -29,10 +29,9 @@ solution to manage your student details, including attendance records and assign
     - [Deleting multiple students : `delete all`](#328-deleting-multiple-students--delete-all)
     - [Merging two students : `merge`](#329-merging-two-students--merge)
     - [Viewing detailed attendance records : `view`](#3210-viewing-detailed-attendance-records--view)
-- [4. Planned Enhancements](#4-planned-enhancements)
-- [5. FAQ](#5-faq)
-- [6. Known issues](#6-known-issues)
-- [7. Command summary](#7-command-summary)
+- [4. FAQ](#5-faq)
+- [5. Known issues](#6-known-issues)
+- [6. Command summary](#7-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 ## 1. About this User Guide
@@ -403,30 +402,22 @@ If your changes to the data file makes its format invalid, TAvigator will discar
 
 _Details coming soon ..._
 
-## 4. Planned Enhancements
-
-### `[Coming in v2.0]` Marking attendance of student: `mark`
-
-* Support marking of students with same `STUDENT_NAME`!
-* Support marking of students with both `STUDENT_NAME` and `STUDENT_ID`!
-* Support marking of student with case-insensitive `STUDENT_NAME`!
-
 --------------------------------------------------------------------------------------------------------------------
 
-## 5. FAQ
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAvigator home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 6. Known issues
+## 5. Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 7. Command summary
+## 6. Command summary
 
 | Action     | Format, Examples                                                                                                                                                                                               |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
