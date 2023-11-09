@@ -299,24 +299,35 @@ This class extends the Command abstract class, it implements the following opera
 
 #### Proposed Implementation
 
-The proposed leave tracking feature is facilitated by `AnnualLeave`, `AddLeaveCommand` and `AddLeaveCommandParser` classes.
+The proposed leave tracking feature comprises 2 sub-features:
 
-The `AnnualLeave` class is responsible for storing the leave data for a specific employee. It contains the following methods:
-(Class diagram to be added)
+1. Add Leave Feature
+2. Delete Leave Feature
 
-The `AddLeaveCommand` class is responsible for executing the `addleave` command. It contains the following methods:
-(Class diagram to be added)
+#### 1. Add Leave Feature
+The proposed Add Leave feature is facilitated by `AnnualLeave`, `AddLeaveCommand`, `AddLeaveCommandParser` and `Person` classes.
 
-The `AddLeaveCommandParser` class is responsible for parsing the user input for the `addleave` command. It contains the following methods:
-(Class diagram to be added)
+The `AnnualLeave` class is responsible for storing the leave data for a specific employee.
+
+The `AddLeaveCommand` class is responsible for executing the `addleave` command.
+
+The `AddLeaveCommandParser` class is responsible for parsing the user input for the `addleave` command.
+
+The `Person` class is responsible for updating the list of leave.
+
+The following class diagram shows how the different classes interact with one another in the Add Leave Feature:
+
+![AddLeaveClassDiagram](images/AddLeaveClassDiagram.png)
 
 The following sequence diagram shows how the `addleave` operation works:
-(Sequence diagram to be added)
 
-After `AddLeaveCommandParser` class parses the user input, the `AddLeaveCommand` class will be called to execute the command. The `AddLeaveCommand` class will then call the `Model` component to add leave for the employee, and store the leave as an arraylist in `AnnualLeave`.
+![AddLeaveSequenceDiagram](images/AddLeaveSequenceDiagram.png)
+
+After `AddLeaveCommandParser` class parses the user input, the `AddLeaveCommand` class will be called to execute the command. The `AddLeaveCommand` class will then call the `Model` component to obtain the list of employees, and then obtain the Person object to add leave for this employee, and store the leave as an arraylist in `AnnualLeave`.
 
 The following activity diagram summarises the process of adding leave for an employee:
-(Activity diagram to be added)
+
+![AddLeaveActivityDiagram](images/AddLeaveActivityDiagram.png)
 
 #### Design considerations:
  
@@ -329,6 +340,44 @@ The following activity diagram summarises the process of adding leave for an emp
 * **Alternative 2:** Saves only the total number of days of leave added.
   * Pros: will use less memory (e.g. each employee will only need to store an integer for the total number of days of leave per annul)
   * Cons: Not much useful information that can be used (e.g. we do not know the working status of each employee for each day)
+
+#### 2. Add Leave Feature
+The proposed Delete Leave feature is facilitated by `AnnualLeave`, `DeleteLeaveCommand`, `DeleteLeaveCommandParser` and `Person` classes.
+
+The `AnnualLeave` class is responsible for storing the leave data for a specific employee.
+
+The `DeleteLeaveCommand` class is responsible for executing the `deleteleave` command.
+
+The `DeleteLeaveCommandParser` class is responsible for parsing the user input for the `deleteleave` command.
+
+The `Person` class is responsible for updating the list of leave.
+
+The following class diagram shows how the different classes interact with one another in the Delete Leave Feature:
+
+![DeleteLeaveClassDiagram]
+
+The following sequence diagram shows how the `deleteleave` operation works:
+
+![DeleteLeaveSequenceDiagram](images/DeleteLeaveSequenceDiagram.png)
+
+After `DeleteLeaveCommandParser` class parses the user input, the `DeleteLeaveCommand` class will be called to execute the command. The `DeleteLeaveCommand` class will then call the `Model` component to to obtain the list of employees, and then obtain the Person object to delete the leave from this employee, and update the arraylist of leave in `AnnualLeave`.
+
+The following activity diagram summarises the process of adding leave for an employee:
+
+![DeleteLeaveActivityDiagram](images/DeleteLeaveActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How deleteleave executes:**
+
+* **Alternative 1 (current choice):** Deletes the dates of the leave only if all of them exist in the employee's list of leave.
+    * Pros: Ensures that the leave are always deleted correctly and easy to maintain.
+    * Cons: May cause inconvenience to users as they will have to know the exact dates to delete.
+
+* **Alternative 2:** Deletes all the matching dates of leave as long as they exist in employee's list of leave, ignoring those that do not exist.
+    * Pros: Users are able to delete the leave within the range of dates that they entered, provided that they exist.
+    * Cons: Can be confusing to users as to what have been deleted, and also harder to maintain.
+
 
 ### Attendance Marking
 

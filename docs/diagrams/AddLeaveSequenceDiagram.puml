@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddLeaveCommandParser" as AddLeaveCommandParser LOGIC_COLOR
+participant "al:AddLeaveCommand" as AddLeaveCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Person PERSON_COLOR
+participant ":Person" as Person PERSON_COLOR
+end box
+
+[-> LogicManager : execute("addleave 1 /on 28/02/2023")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addleave 1 /on 28/02/2023")
+activate AddressBookParser
+
+create AddLeaveCommandParser
+AddressBookParser -> AddLeaveCommandParser
+activate AddLeaveCommandParser
+
+AddLeaveCommandParser --> AddressBookParser
+deactivate AddLeaveCommandParser
+
+AddressBookParser -> AddLeaveCommandParser : parse("1 /on 28/02/2023")
+activate AddLeaveCommandParser
+
+create AddLeaveCommand
+AddLeaveCommandParser -> AddLeaveCommand
+activate AddLeaveCommand
+
+AddLeaveCommand --> AddLeaveCommandParser : al
+deactivate AddLeaveCommand
+
+AddLeaveCommandParser --> AddressBookParser : al
+deactivate AddLeaveCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddLeaveCommandParser -[hidden]-> AddressBookParser
+destroy AddLeaveCommandParser
+
+AddressBookParser --> LogicManager : al
+deactivate AddressBookParser
+
+LogicManager -> AddLeaveCommand : execute()
+activate AddLeaveCommand
+
+AddLeaveCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> AddLeaveCommand:
+deactivate Model
+
+AddLeaveCommand -> Person : addLeave()
+activate Person
+Person --> AddLeaveCommand :
+deactivate Person
+
+create CommandResult
+AddLeaveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddLeaveCommand : result
+deactivate CommandResult
+
+AddLeaveCommand --> LogicManager : result
+deactivate AddLeaveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

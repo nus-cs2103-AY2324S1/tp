@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteLeaveCommandParser" as DeleteLeaveCommandParser LOGIC_COLOR
+participant "dl:DeleteLeaveCommand" as DeleteLeaveCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Person PERSON_COLOR
+participant ":Person" as Person PERSON_COLOR
+end box
+
+[-> LogicManager : execute("deleteleave 1 /on 28/02/2023")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deleteleave 1 /on 28/02/2023")
+activate AddressBookParser
+
+create DeleteLeaveCommandParser
+AddressBookParser -> DeleteLeaveCommandParser
+activate DeleteLeaveCommandParser
+
+DeleteLeaveCommandParser --> AddressBookParser
+deactivate DeleteLeaveCommandParser
+
+AddressBookParser -> DeleteLeaveCommandParser : parse("1 /on 28/02/2023")
+activate DeleteLeaveCommandParser
+
+create DeleteLeaveCommand
+DeleteLeaveCommandParser -> DeleteLeaveCommand
+activate DeleteLeaveCommand
+
+DeleteLeaveCommand --> DeleteLeaveCommandParser : dl
+deactivate DeleteLeaveCommand
+
+DeleteLeaveCommandParser --> AddressBookParser : dl
+deactivate DeleteLeaveCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteLeaveCommandParser -[hidden]-> AddressBookParser
+destroy DeleteLeaveCommandParser
+
+AddressBookParser --> LogicManager : dl
+deactivate AddressBookParser
+
+LogicManager -> DeleteLeaveCommand : execute()
+activate DeleteLeaveCommand
+
+DeleteLeaveCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> DeleteLeaveCommand:
+deactivate Model
+
+DeleteLeaveCommand -> Person : deleteLeave()
+activate Person
+Person --> DeleteLeaveCommand :
+deactivate Person
+
+create CommandResult
+DeleteLeaveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteLeaveCommand : result
+deactivate CommandResult
+
+DeleteLeaveCommand --> LogicManager : result
+deactivate DeleteLeaveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
