@@ -40,6 +40,6 @@ Given below are my contributions to the project.
 
 - **Community**:
 
-  - PRs reviewed: [\#52](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/52), [\#67](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/67), [\#72](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/72), [\#79](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/79)
+  - PRs reviewed: [\#52](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/52), [\#67](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/67), [\#72](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/72), [\#79](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/79), [\#152](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/152)
   - Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/nicrandomlee/ped/issues/1), [2](https://github.com/nicrandomlee/ped/issues/2), [3](https://github.com/nicrandomlee/ped/issues/3), [4](https://github.com/nicrandomlee/ped/issues/4), [5](https://github.com/nicrandomlee/ped/issues/5), [6](https://github.com/nicrandomlee/ped/issues/6), [7](https://github.com/nicrandomlee/ped/issues/7), [8](https://github.com/nicrandomlee/ped/issues/8), [9](https://github.com/nicrandomlee/ped/issues/9), [10](https://github.com/nicrandomlee/ped/issues/10))
 
