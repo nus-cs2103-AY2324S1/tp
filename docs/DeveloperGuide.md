@@ -442,7 +442,7 @@ characters in the name field and not to be restricted to just alphanumeric chara
   then edits a member or event using `editMember` or `editEvent`, all events and members will be displayed instead of their current
 filtered view. This will cause inconvenience for the user as they will have to relocate the edited member/event.
 
-**Proposed solution:**
+**Proposed Solution:**
 
 We propose to change the behaviour of `editMember` and `editEvent` such that calling them will no longer list all members and events,
 and instead remain on the user's current view.
