@@ -164,6 +164,8 @@ public interface Model {
     ObservableList<Event> getFilteredEventList();
 
     ObservableList<Enrolment> getFilteredEnrolmentList();
+    Predicate<Member> getLastFilteredMemberPredicate();
+    Predicate<Event> getLastFilteredEventPredicate();
 
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.

@@ -466,6 +466,18 @@ We propose to make the index error messages more specific and highlight to the u
 that index is wrong. For example, in the `enrol m/1 e/-1` input, we will show an error message to the user along
 the lines of "The provided Event Index is not a non-zero unsigned integer."
 
+### Make UI stay on current view upon undo/redo
+**Current Implementation:**
+* **Current Issue:** Currently, the `undo` and `redo` commands will always result in all members and events being listed.
+* **Example:** For example, if the user enrols a member to an event and views the member, before deciding to unenrol the member
+from the event by executing the `undo` command, all the members and events would then be listed. This inconveniences the user
+as they will then have to execute the `viewMember` command again to see their changes. 
+
+**Proposed Solution:**
+
+We propose to change the behaviour of `undo` and `redo` such that executing them will no longer list all members and events,
+and instead remain on the user's current view.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
