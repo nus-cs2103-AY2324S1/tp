@@ -205,6 +205,7 @@ Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
 - The name prefix `n/` allows for multiple keywords to be used, separated by spaces. e.g. `find n/Alex Bernice`.
 - The course prefix `c/` and free time prefix `d/ from/ to/` allows for one keyword to be used, separated by spaces.
 e.g. `find c/CS2103T` or `find d/1 from/10:00 to/12:00`.
+- For the free time, all three prefixes `d/ from/ to/` must be present and all respective parameters need to be correctly given.
 - The search is case-insensitive. e.g `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
 - Only full words will be matched e.g. `Alex` will not match `Alexis`, `cs1231` will not match `cs1231s`.
 - We can apply multiple search filters to narrow down the search results, through including multiple filters in 
