@@ -172,8 +172,8 @@ Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [
 
 
 **This should be the expected output when the command succeeds:**
-* Input: `add_person n/james p/999 e/example@gmail.com a/1 Computing Drive b/2001-09-20`
-* Output: `New person added: james; Phone: 999; Email: example@gmail.com; Address: 1 Computing Drive; Birthday: Sep 20 2001  `
+* Input: `add_person n/James p/93748274 e/james@gmail.com a/Computing Drive b/2001-10-20`
+* Output: 
 
 ![Addperson](images/Addperson.png)
 
@@ -219,8 +219,8 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 * When you edit a person's name, the person's name will be updated in all [events](#commands-for-events) that the person is assigned to.
 
 **This should be the expected output when the command succeeds:**
-* Input: `edit_person 1 n/Alexa Yeoh`
-* Output: `Edited Person: Alexa Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; groups: [friends]`
+* Input: `edit_person 1 n/Alexa Yeoh` changes the name of the 1st person to be `Alexa Yeoh`, leaving the rest of the fields unchanged.
+* Output: 
 
 ![Editperson](images/Editperson.png)
 
@@ -233,20 +233,26 @@ When a person is deleted, any [events](#commands-for-events) that the person is 
 
 Format: `delete_person PERSON_INDEX`
 
-* Deletes the person at the specified `PERSON_INDEX`.
+**Acceptable values for each parameter:**
+
+| Parameter     | Format                                                                                                           | Example                          |
+|---------------|------------------------------------------------------------------------------------------------------------------|----------------------------------|
+| `PERSON_INDEX`| A positive integer that is smaller than or equal to the number of contacts currently displayed in FumbleLog      | `1`                              |
+
+
+> Below are some examples on how to use `edit_person` command:
+> 
+> * `list_all` followed by `delete_person 2` deletes the 2nd person in the person list.
+> * `find_all Betsy` followed by `delete_person 1` deletes the 1st person in the results of the `find` command. i.e Any person named `Betsy` at index `1` will be deleted.
+
+**Notes on `delete_person` command:**
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list_all` followed by `delete_person 2` deletes the 2nd person in the person list.
-* `find_all Betsy` followed by `delete_person 1` deletes the 1st person in the results of the `find` command. i.e Any person named `Betsy` at index `1` will be deleted.
-
-Acceptable values for each parameter:
-* `PERSON_INDEX`: A positive integer
 
 Expected output when a command succeeds:
 
-Input: `delete_person 1`
+**This should be the expected output when the command succeeds:**
+
+Input: `delete_person 1` deletes the first person on the list.
 
 ![DeletePerson](images/DeletePerson.png)
 
