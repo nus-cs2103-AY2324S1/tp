@@ -701,6 +701,40 @@ This comes in handy when you want to view the details of students in a lesson, o
   - `nav`
   - Result: The app changes to the schedule list and only shows the lessons that are linked to the student.
 
+#### Success outputs
+- When "CS2100 Tutorial" is selected that has two students ("Bernice Yu" and "John") linked to it:
+
+![Success for navigating to students](images/nav/nav_fromLesson_positive.png)
+
+- When "John" is selected and is linked to two lessons ("lesson1", "CS2100 Tutorial"):
+
+![Success for navigating to lessons](images/nav/nav_fromLesson_positive.png)
+
+#### Failure outputs
+- When the `nav` command is used without selecting either a student or a lesson:
+
+![Failure for navigating to students as no lesson is selected](images/nav/nav_noneSelected.png)
+```
+No lesson is currently displayed
+```
+Solution: Select a lesson or student using the `show` command (here)
+
+- When a lesson has no linked students:
+
+![Failure for navigating to students as no students are linked](images/nav/nav_noStudents.png)
+```
+This lesson has no linked students
+```
+Solution: link a student using the `linkTo` command (here)
+
+- When a student has no linked lessons:
+
+![Failure for navigating to lessons as no lessons are linked](images/nav/nav_noLessons.png)
+```
+This student has no linked lessons
+```
+Solution: link a student using the `linkTo` command (here)
+
 ### Command history
 
 The command history feature allows you to retrieve previously typed commands into the command text box.
