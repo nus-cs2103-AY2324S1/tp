@@ -450,6 +450,18 @@ e.g. `name/"Henry Tan"` and `name/"Nagaratnam s/o Suppiah"` are now valid name p
 
 ### Notes Feature as a Separate Command
 
+Currently, the notes feature is only available in the profile page, and its content, which can only be recorded via the
+`save` command, is inputted through the text box visible next to the `Notes` field. However, it could potentially be 
+inconvenient for the user to have to use a combination of different commands (an example would be `view`, followed by `notes` and 
+`save`) in order to record additional crucial information with regard to a particular fosterer. This breeds inefficiency in some 
+scenarios, especially in the situation where an animal with existing medical conditions is fostered and its health status has to 
+be frequently updated. Hence, an enhancement to this feature would be to make the notes feature a separate command, such that the
+user would be able to add important notes without having to navigate to the profile page and using the additional `save` command
+to add the notes. 
+
+e.g. `notes 1 n/require an urgent visit to the vet` would add the notes "require an urgent visit to the vet" under the fosterer
+listed at index 1.
+
 ### Specificity of Error Messages
 
 
