@@ -248,7 +248,7 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> name parameters} into a {@code List<String> of names}.
      */
-    public static List<String> parseSinglePrefixName(Collection<String> names, String commandMessage)
+    public static List<String> parseSinglePrefixName(Collection<String> names)
             throws ParseException {
         requireNonNull(names);
         String[] nameArr = parseSinglePrefixParams(names);

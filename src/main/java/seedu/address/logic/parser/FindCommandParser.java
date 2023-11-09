@@ -92,8 +92,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                              ArgumentMultimap argMultimap,
                              Prefix prefix) throws ParseException {
         if (prefix.equals(PREFIX_NAME)) {
-            List<String> keywords = ParserUtil.parseSinglePrefixName(argMultimap.getAllValues(PREFIX_NAME),
-                    FindCommand.MESSAGE_USAGE);
+            List<String> keywords = ParserUtil.parseSinglePrefixName(argMultimap.getAllValues(PREFIX_NAME));
             for (String keyword : keywords) {
                 nameKeywords.add(keyword);
             }
