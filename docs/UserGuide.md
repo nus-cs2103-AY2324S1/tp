@@ -416,7 +416,7 @@ Example usage:
 
 #### Undo last change to NetworkBook: `undo`
 
-You can use the `undo` command to undo the last change to the list of contacts stored in NetworkBook and/or the list of contacts displayed by NetworkBook. This command only works if a change has already been made to NetworkBook from its initial state.
+You can use the `undo` command to undo the last change to the list of contacts stored in NetworkBook and/or the list of contacts displayed by NetworkBook. This command can only undo changes made in your current session on NetworkBook.
 
 Format: `undo`
 
@@ -430,7 +430,7 @@ Example usage:
 
 #### Redo last undone change: `redo`
 
-You can use the `redo` command to redo the last change to the list of contacts stored in NetworkBook and/or the list of contacts displayed by NetworkBook. This command only works if there has been a change undone for NetworkBook.
+You can use the `redo` command to redo the last change to the list of contacts stored in NetworkBook and/or the list of contacts displayed by NetworkBook. This command only works if you have previously used `undo` commands in NetworkBook that can be reversed.
 
 Format: `redo`
 
