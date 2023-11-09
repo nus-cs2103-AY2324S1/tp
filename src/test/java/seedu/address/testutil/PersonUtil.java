@@ -57,6 +57,13 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getHousing().ifPresent(housing -> sb.append(PREFIX_HOUSING).append(housing.value).append(" "));
+        descriptor.getAvailability().ifPresent(availability -> sb.append(PREFIX_AVAILABILITY)
+                .append(availability.value).append(" "));
+        descriptor.getAnimalName().ifPresent(animalName -> sb.append(PREFIX_ANIMAL_NAME)
+                .append(animalName.fullName).append(" "));
+        descriptor.getAnimalType().ifPresent(animalType -> sb.append(PREFIX_ANIMAL_TYPE)
+                .append(animalType.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
