@@ -177,7 +177,7 @@ public class LogicManagerTest {
     @Test
     public void getSelectedStudent_success() {
         logic.setSelectedStudent(AMY);
-        assertEquals(AMY, logic.getSelectedStudent().get(0));
+        assertEquals(AMY, logic.getObservableSelectedStudent().get(0));
     }
 
     @Test
