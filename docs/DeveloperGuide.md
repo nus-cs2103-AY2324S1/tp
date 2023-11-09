@@ -1130,6 +1130,10 @@ Given below are the planned enhancements. The _current behaviour_ specifies how 
   * Current behaviour: Two phone numbers are identified as having the same identity if the user input of the two phones are the same. This means that `+65 12345678` and `+6512345678` are identified as two different phone numbers.
   * Enhanced behaviour: Two phone numbers are identified as having the same identity if they have the same country code and number part. This means that `+65 12345678` and `+6512345678` should be identified as the same phone number.
 
+* Better phone error message.
+  * Current behaviour: The error message is currently `Phone numbers should only contain numbers (and country code with "+" in front if applicable) and it should be at least 3 digits long (excluding country code).` This does not give information on how long the country code can be.
+  * Enhanced behaviour: The error message can be `Phone numbers should only contain numbers (and country code of 1-3 numeric digits with "+" in front if applicable) and it should be at least 3 digits long (excluding country code). Example: 1) +65 12345678 2) +6512345678 3) 12345678` so that it informs the user that country code can be between 1 - 3 digits, inclusive. The example also informs the user that a space character can optionally be used to separate country code from the rest.
+
 * Stricter link uniqueness constraint.
   * Current behaviour: Two links are identified as having the same identity if the user input of the two links are the same. This means that `https://google.com`, `www.google.com`, `http://google.com` and `google.com` are identified as 4 different links.
   * Enhanced behaviour: Two links are identified as having the same identity if the link excluding the protocol are the same. This means that `https://google.com`, `www.google.com`, `http://google.com` and `google.com` should be identified as the same link, as without the protocol, they are all reduced to `google.com`.
