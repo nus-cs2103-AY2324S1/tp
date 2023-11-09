@@ -80,7 +80,7 @@ Hence, you will not be able to add a new contact with the same name as an existi
 
 For example, if you already have a contact with name `John Doe`, you will not be able to add another contact with the same name `John Doe`.
 For two names to be considered the same, they must be identical in every way, and that includes casing, as well as whitespace in the middle of the name, etc.
-Therefore, you may add another contact with name `John doe`, `John    Doe`, or `Alex John Doe`. 
+Therefore, you may add another contact with name `John doe`, `John    Doe`, or `Alex John Doe`.
 You may also first modify the name of the existing contact.
 
 Should you need to make changes to an existing contact, use the `edit` command as explained below.
@@ -159,6 +159,9 @@ Please refer to the [above](#editing-a-contact-edit).
 - `delete 1`
 (Deletes the contact at index #1.)
 
+- `delete 1 1`
+(Deletes the contact at index #1 since duplicate indices count once.)
+
 - `delete 1 3 5`
 (Deletes the contacts at indices #1, #3, and #5.)
 
@@ -218,7 +221,7 @@ Shows contacts with a tag that fully matches the specified tag (case-insensitive
   e.g. `filter Friend` will _not_ match the tag `Close Friend`.
 
 - The keyword can contain spaces.\
-  e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).  
+  e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).
   e.g. <pre>`filter Close           Friend`</pre> will _not_ match the tag `Close Friend`.
 
 - In summary, `filter` looks for tags which are an exact match, ignoring casing only.
