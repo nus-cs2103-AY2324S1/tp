@@ -35,6 +35,6 @@ public class AddressComparator extends SortComparator {
         if (p1.equals(p2)) {
             return 0;
         }
-        return p1.getAddress().value.compareTo(p2.getAddress().value);
+        return p1.getAddress().value.toLowerCase().compareTo(p2.getAddress().value.toLowerCase());
     }
 }

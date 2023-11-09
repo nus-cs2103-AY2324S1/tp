@@ -163,13 +163,14 @@ Examples:
 
 ### Sort persons : `sort`
 
-* Sorts all persons by specified `comparator`.
-* The comparator refers to the attribute(s) provided for the basis to sort.
+* Sorts all persons by specified attribute.
+* Current attributes allowed for sorting: `/byname` for name, `/byemail` for email, `/byphone` for phone, '/byaddress' for address. `/reverse` field to indicate reverse is optional.
 * Sorting is done in ascending order by default. To sort by descending order, the keyword `reverse` can be used (see Examples below).
+* Only sorting by one attribute is allowed, due to the nature of most fields being unique (with the unlikely cases of name and address)
 
 Examples:
-* `sort /byname` sorts all contacts in UniMate address book by the full name of `Person`
-* `sort /byaddress /reverse` sorts all contacts in UniMate address book by the address of `Person`
+* `sort /byname` sorts all contacts in UniMate address book by their full name
+* `sort /byaddress /reverse` sorts all contacts in UniMate address book by their address
 
 ### Clearing all entries : `clear`
 
@@ -498,6 +499,7 @@ Action     | Format, Examples
 **Filter** | `filter TAG [MORE_TAGS]` <br> e.g., `filter CSGOD CS2103`
 **List** | `list`
 **Help** | `help`
+**Sort** | `sort`
 **addEvent** | `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
 **deleteEvent** | `deleteEvent DATE_TIME` <br> e.g., `deleteEvent 2023-02-03 12:00`
 **addContactEvent** | `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
