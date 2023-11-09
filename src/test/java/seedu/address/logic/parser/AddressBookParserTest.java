@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearTeachCommand;
+import seedu.address.logic.commands.CourseCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -25,7 +27,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HourCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.TeachCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -100,10 +104,31 @@ public class AddressBookParserTest {
                 HourCommand.COMMAND_WORD + " 5");
         assertEquals(new HourCommand(5), command);
     }
+
+    @Test
+    public void parseCommand_course() throws Exception {
+        CourseCommand command = (CourseCommand) parser.parseCommand(
+                CourseCommand.COMMAND_WORD + " c/CS2103T");
+        assertEquals(new CourseCommand(UniqueCourseList.findByCourseCode("CS2103T")), command);
+    }
+
+    @Test
+    public void parseCommand_teach() throws Exception {
+        TeachCommand command = (TeachCommand) parser.parseCommand(
+                TeachCommand.COMMAND_WORD + " c/CS2103T");
+        assertEquals(new TeachCommand(UniqueCourseList.findByCourseCode("CS2103T")), command);
+    }
+
+    @Test
+    public void parseCommand_clearTeach() throws Exception {
+        assertTrue(parser.parseCommand(ClearTeachCommand.COMMAND_WORD) instanceof ClearTeachCommand);
+        assertTrue(parser.parseCommand(ClearTeachCommand.COMMAND_WORD + " 3") instanceof ClearTeachCommand);
+    }
+
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test

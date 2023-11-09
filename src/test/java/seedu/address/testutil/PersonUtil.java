@@ -52,7 +52,7 @@ public class PersonUtil {
                 s -> sb.append(PREFIX_TAG).append(s.tagName).append(" ")
         );
         person.getCourses().forEach(
-            s -> sb.append(PREFIX_COURSE).append(s.getCourseCode()).append(" ")
+                s -> sb.append(PREFIX_COURSE).append(s.getCourseCode()).append(" ")
         );
         sb.append(PREFIX_HOUR + String.valueOf(person.getHour().value) + " ");
         return sb.toString();
@@ -67,7 +67,6 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getTelegram().ifPresent(address -> sb.append(PREFIX_TELEGRAM).append(address.value).append(" "));
-        descriptor.getFreeTime().ifPresent(freeTime -> sb.append(PREFIX_FREE_TIME).append(freeTime));
 
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
@@ -77,7 +76,7 @@ public class PersonUtil {
             Set<Course> mods = descriptor.getCourses().get();
             mods.forEach(s -> sb.append(PREFIX_COURSE).append(s.getCourseCode()).append(" "));
         }
-        descriptor.getHour().ifPresent(hour -> sb.append(PREFIX_HOUR).append(String.valueOf(hour.value)).append(" "));
+        descriptor.getHour().ifPresent(hour -> sb.append(PREFIX_HOUR).append(hour.value).append(" "));
         return sb.toString();
     }
 }

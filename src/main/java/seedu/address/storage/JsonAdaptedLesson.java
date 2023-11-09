@@ -13,6 +13,7 @@ import seedu.address.model.course.Lesson;
  */
 public class JsonAdaptedLesson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
+    public static final String CANNOT_BE_WEEKEND = "Day of week cannot be Saturday or Sunday";
     private final String name;
     private final String courseCode;
     private final String dayOfWeek;
@@ -51,6 +52,7 @@ public class JsonAdaptedLesson {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "name"));
         }
+
         if (courseCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "courseCode"));
         }
@@ -59,9 +61,19 @@ public class JsonAdaptedLesson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "timeInterval"));
         }
 
+        if (dayOfWeek == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "dayOfWeek"));
+        }
+
+        DayOfWeek dayOfWeekModel = DayOfWeek.valueOf(dayOfWeek);
+
+        if (dayOfWeekModel == DayOfWeek.SATURDAY || dayOfWeekModel == DayOfWeek.SUNDAY) {
+            throw new IllegalValueException(CANNOT_BE_WEEKEND);
+        }
+
         return new Lesson(name,
                 courseCode,
-                DayOfWeek.valueOf(dayOfWeek),
+                dayOfWeekModel,
                 timeInterval.toModelType());
     }
 }
