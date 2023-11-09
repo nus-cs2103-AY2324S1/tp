@@ -1374,7 +1374,7 @@ Lists all existing schedules that may be filtered by tutor index or schedule sta
    listed in the status message.
 
 5. Test case: `list-s 1 m/0`<br>
-   Expected: All existing schedules for the first tutor marked with the completed status  are listed. Number of
+   Expected: All existing schedules for the first tutor marked with the completed status are listed. Number of
    completed schedules for the first tutor is shown in the status message.
 
 6. Test case: `list-s 0`<br>
@@ -1388,7 +1388,7 @@ Lists all existing schedules that may be filtered by tutor index or schedule sta
 
 Finds a schedule while all schedules are being shown
 
-   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedules in the list.
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
 
    2. Test case: `find-s John`<br>
       Expected: All schedules with tutor names containing the searched keyword are listed. Number of schedules with

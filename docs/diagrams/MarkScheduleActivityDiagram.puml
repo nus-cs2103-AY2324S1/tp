@@ -11,7 +11,7 @@ start
 :Parse user input;
 
 if () then ([input is valid])
-    :Costruct MarkScheduleCommand object;
+    :Construct MarkScheduleCommand object;
     :Return back to LogicManager;
     :LogicManager executes MarkScheduleCommand;
     if () then ([index of schedule to mark exists])
