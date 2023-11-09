@@ -49,14 +49,14 @@ public class ContactCard extends UiPart<Region> {
         phone.setText(contact.getPhone().value);
         email.setText(contact.getEmail().value);
 
-        String note = contact.getNote().value;
-        if (!note.equals("")) {
-            this.note.setVisible(true);
-            this.note.setManaged(true);
-            this.note.setText(contact.getNote().value);
+        String noteText = contact.getNote().value;
+        if (!noteText.isEmpty()) {
+            note.setVisible(true);
+            note.setManaged(true);
+            note.setText(contact.getNote().value);
         } else {
-            this.note.setVisible(false);
-            this.note.setManaged(false);
+            note.setVisible(false);
+            note.setManaged(false);
         }
 
         contact.getTags().stream()
