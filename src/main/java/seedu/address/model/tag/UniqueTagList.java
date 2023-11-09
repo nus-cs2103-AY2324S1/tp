@@ -78,10 +78,9 @@ public class UniqueTagList {
             for (Tag tag : internalList) {
                 if (tag.tagName.equals(tagName) && tag.tagCategory.equals(tagCategory)) {
                     return tag;
-                } else {
-                    throw new ParseException("Tag category does not exist!");
                 }
             }
+            throw new ParseException("Tag category does not exist!");
         } else if (foundTag.isPresent()) {
             // tag category not specified
             long occurrence = internalList.stream()
