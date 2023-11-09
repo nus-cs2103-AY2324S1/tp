@@ -51,7 +51,6 @@ public class JsonDeckStorage implements DeckStorage {
             try {
                 Files.createDirectories(filePath.getParent());
                 Files.createFile(filePath);
-                Files.write(filePath, "{}".getBytes()); // Create the 'deck.json' file with empty JSON content
             } catch (IOException e) {
                 throw new DataLoadingException(e);
             }
@@ -61,7 +60,7 @@ public class JsonDeckStorage implements DeckStorage {
         try {
             String content = new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
             if (content.trim().isEmpty()) {
-                return Optional.empty();
+                Files.write(filePath, "{\"cards\":[]}".getBytes());
             }
         } catch (IOException e) {
             throw new DataLoadingException(e);

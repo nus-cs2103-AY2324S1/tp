@@ -28,6 +28,11 @@ public class SolveCommandParserTest {
     }
 
     @Test
+    public void parse_emptyArgs_returnsSolveCommand() {
+        assertParseSuccess(parser, "", new SolveCommand(INDEX_FIRST_CARD));
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SolveCommand.MESSAGE_USAGE));
     }
