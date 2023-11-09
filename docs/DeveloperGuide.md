@@ -468,6 +468,12 @@ The GUI then updates to show this information to the user.
   - Cons: Not immediately clear that the `find` command finds applications by name. 
   This will have to be explained in the user guide.
 
+#### Future Extension:
+A future extension to this find command is to allow it to find applicants by other fields such as their email or their
+handphone number. 
+As handphone numbers and emails are likely to be distinct for each applicant, it is possible to
+enhance the find feature so that it can also search for applicants by these fields.
+
    
 --------------------------------------------------------------------------------------------------------------------
 
