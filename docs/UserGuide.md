@@ -392,7 +392,7 @@ This adds a task with the description `Implement solve feature` to the top of ta
 Shows the task list of a member at the specified index in the `Tasks` window.
 
 #### Format:
-`viewtask MEMBER_INDEX` </br>
+`viewtask MEMBER_INDEX` <br/>
 `viewt MEMBER_INDEX`
 
 <div markdown="span" class="alert alert-primary">
@@ -569,10 +569,18 @@ and the new tag in the `/tag` field of the command.
 
 `editapplicant 1 /name Alfred /interview 07/01/2003 1500`<br/><br/>
 `edita 1 /name Alfred /interview 07/01/2003 1500`<br/><br/>
-This edits the particulars of the applicant at `APPLICANT_INDEX` 1 in the member list. The applicant's name is changed to `Alfred`,
+This edits the particulars of the applicant at `APPLICANT_INDEX` 1 in the applicant list. The applicant's name is changed to `Alfred`,
 and the interview time has been set to `7 January 2023 3:00pm`.
 
 ![edit_applicant](images/editApplicant.png)
+
+<br/><br/>
+`editapplicant 1 /name Alfred /interview cancel`<br/><br/>
+`edita 1 /name Alfred /interview cancel`<br/><br/>
+This edits the particulars of the applicant at `APPLICANT_INDEX` 1 in the applicant list. The applicant's name is changed to `Alfred`,
+and the interview has been canceled and removed.
+
+![cancel interview](images/editApplicant2.png)
 
 #### 4.2.5 Deleting an applicant: `deleteapplicant` or `dela`
 
@@ -670,14 +678,21 @@ There will be no prompt to confirm this action.
 
 - local-part:
     - Only alphanumerical and special characters "+_.-" are allowed.
-    - It cannot start or end with any special characters.
+    - It cannot start with any special characters.
 - domain:
     - Made up of 1 **or** 2 domain labels (separated by periods ".").
     - Each domain label can only contain alphanumerical characters and hyphens "-", if any.
     - Each domain label must start and end with an alphanumerical character.
     - The last domain label must contain at least 2 characters.
+    - 
+#### 4.4.2 `TELEGRAM_HANDLE` format
 
-#### 4.4.2 Examples of fields
+- Handle:
+    - Must start with the "@" symbol.
+    - Only alphanumerical characters and underscore "_" are allowed.
+    - Must be between 5 and 32 characters long (inclusive).
+
+#### 4.4.3 Examples of fields
 
 | Field               | Valid                                                      | Invalid                                                                                                   |
 |---------------------|------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
@@ -693,7 +708,6 @@ There will be no prompt to confirm this action.
 
 :information_source: Click [here](#4-features) to see all the features of CMC.
 </div>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. Frequently Asked Questions (FAQs)
