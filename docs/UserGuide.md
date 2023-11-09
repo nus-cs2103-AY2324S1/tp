@@ -310,12 +310,9 @@ This feature involves the command: `updatephoto`, which updates the photo of an 
 
 Format: `updatephoto PERSON_INDEX [path/NEW_PHOTO_PATH]`
 
-You can get the path to the photo by using the following steps: 
-  * Right click on the photo that you want to use.
-  * Choose the option: Copy as path (on Windows) or Copy "name_of_file" as Pathname (on MacOS).
-  * After pasting the copied path in CampusConnect, remember to remove the double quotation marks!
-
-  ![photo_path](images/photopath.png)
+To obtain the `NEW_PHOTO_PATH` of your photo: 
+* If you are a Windows user, click [here](https://www.timeatlas.com/copy-file-path/#:~:text=Select%20your%20file%2C%20right%2Dclick,Ctrl%20%2B%20Shift%20%2B%20%2B%20C%20).
+* If you are a macOS user, click [here](https://technastic.com/copy-file-path-mac/).
 
 <box type="info" icon=":fa-solid-magnifying-glass:">
 
@@ -390,7 +387,7 @@ The parameters for these commands are `PERSON_INDEX`, `NOTE_INDEX` and `NOTE_CON
 The fields you enter should follow the following format:
 - `PERSON_INDEX`: The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list.
 - `NOTE_INDEX`: The position of the note in the person's list of notes you want to modify. This should be a positive integer, and should be within the bounds of the list.
-- `NOTE_CONTENT`: The content of the note you want to add. It has to be non-empty, and can contain any printable ASCII character.
+- `NOTE_CONTENT`: The content of the note you want to add. It has to be non-empty, and can contain any printable [ASCII character](http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm).
 </panel>
 
 <br>
