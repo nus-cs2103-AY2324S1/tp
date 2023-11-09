@@ -46,6 +46,10 @@ Once you are familiarised, feel free to use the `clear` command to delete all th
 
 ## Features
 
+At a glance: the information that can be stored with each contact, and how it will appear in the application, is labelled below. 
+
+![Ui](images/UiLabelled.png)
+
 <div markdown="block" class="alert alert-info">
 **:information_source: About the command format:**<br />
 
