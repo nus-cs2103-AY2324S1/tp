@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -60,7 +59,7 @@ public class ViewExitCommand extends Command {
      *
      * @param model {@code Model} which the command should operate on.
      * @return CommandResult that carries the necessary details used to check
-     * if the person is saved or needs to be saved.
+     *     if the person is saved or needs to be saved.
      * @throws CommandException when the index of the fosterer is invalid.
      */
     @Override
@@ -90,7 +89,7 @@ public class ViewExitCommand extends Command {
         Person personToCompare = lastShownList.get(index.getZeroBased());
         Person editedPerson = newFosterer;
 
-        // fosterer is edited, exit without any message.
+        // fosterer is edited and saved, exit without any message.
         if (editedPerson.equals(personToCompare)) {
             return new CommandResult(
                     MESSAGE_EXIT_ACKNOWLEDGEMENT,
@@ -98,9 +97,8 @@ public class ViewExitCommand extends Command {
                     null,
                     CommandType.VIEW_EXIT,
                     true);
-        }
-        // fosterer is not edited, exit with message.
-        else {
+        } else {
+            // fosterer is edited but not saved, exit with message.
             return new CommandResult(
                     MESSAGE_CONFIRM_EXIT,
                     newFosterer,

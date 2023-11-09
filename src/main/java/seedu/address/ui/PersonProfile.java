@@ -483,7 +483,15 @@ public class PersonProfile extends UiPart<Region> {
                 .forEach(field -> field.setIsInConfirmationDialog(isInConfirmationDialog));
     }
 
+    /**
+     * Resets the field values back to the most recently edited valid details
+     * and change the red colored text, if there is any, back to black colored text.
+     */
     public void resetValues() {
+        if (person == null) {
+            return ;
+        }
+
         fields.keySet().forEach(field -> {
             if (field == Field.NAME) {
                 updateField(field, person.getName().toString());

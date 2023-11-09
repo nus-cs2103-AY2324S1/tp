@@ -226,7 +226,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-     void handleCancelViewExit() {
+    void handleCancelViewExit() {
         sendFeedback("Cancelled exit.");
         commandBox.setInConfirmationDialog(false);
         personProfile.setIsInConfirmationDialog(false);
@@ -275,7 +275,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleViewExit();
             }
             if (commandResult.getCommandType() == CommandType.EDIT_FIELD) {
-                String [] tagAndNote = new String[]{"tags", "notes"};
+                String[] tagAndNote = new String[]{"tags", "notes"};
                 Optional<String> tagOrNote = null;
 
                 Optional<PersonProfile.Field> field = Arrays.stream(PersonProfile.Field.values())
@@ -328,7 +328,6 @@ public class MainWindow extends UiPart<Stage> {
             throw new RuntimeException(e);
         }
     }
-
 
 
     protected void sendFeedback(String feedback) {

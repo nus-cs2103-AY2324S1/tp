@@ -11,8 +11,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.PersonProfile;
-import seedu.address.ui.PersonProfileField;
 
 /**
  * Represents a Person in the address book.
@@ -185,6 +183,7 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
 
     /**
      * Returns true if both persons have the same name.
