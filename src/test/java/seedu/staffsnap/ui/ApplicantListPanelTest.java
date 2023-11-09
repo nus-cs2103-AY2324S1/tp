@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.framework.junit5.Start;
 import seedu.staffsnap.model.applicant.Applicant;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +29,7 @@ class ApplicantListPanelTest extends ApplicationTest {
         Platform.startup(() -> {});
     }
 
-    @Override
+    @Start
     public void start(Stage stage) throws Exception {
         // Set the scene with the applicantListPanel
         this.stage = stage;
