@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Location {
 
-    public static final String MESSAGE_CONSTRAINTS = "Locations can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Locations can take any values (up to 255 characters), "
+            + "and it should not be blank.";
 
     /*
      * The first character of the location must not be a whitespace,
@@ -34,7 +35,7 @@ public class Location {
      * Returns true if a given string is a valid location.
      */
     public static boolean isValidLocation(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 255;
     }
 
     @Override
