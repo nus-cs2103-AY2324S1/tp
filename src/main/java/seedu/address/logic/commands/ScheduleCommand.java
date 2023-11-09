@@ -23,6 +23,7 @@ import seedu.address.model.appointment.Appointment;
 public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
+    public static final int DAYS_IN_YEAR = 365;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules a new appointment. "
             + "Parameters: "
@@ -82,7 +83,8 @@ public class ScheduleCommand extends Command {
         LocalTime timeNow = LocalTime.now();
         long daysDifference = ChronoUnit.DAYS.between(todayDate, appointmentDate);
 
-        if (appointmentDate.isBefore(todayDate) || appointmentStartTime.isBefore(timeNow)) {
+        if (appointmentDate.isBefore(todayDate) ||
+                (todayDate.isEqual(appointmentDate) && appointmentStartTime.isBefore(timeNow))) {
             throw new CommandException(MESSAGE_DATE_IN_THE_PAST);
         }
 
