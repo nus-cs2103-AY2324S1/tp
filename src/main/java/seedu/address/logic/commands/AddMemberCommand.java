@@ -28,7 +28,7 @@ public class AddMemberCommand extends Command {
             + PREFIX_PHONE + " {phoneNumber} "
             + PREFIX_EMAIL + " {email} "
             + PREFIX_TELEGRAM + " {telegramHandle} "
-            + "[" + PREFIX_TAG + " TAG...]"
+            + "[" + PREFIX_TAG + " TAG]..."
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
             + PREFIX_PHONE + " 98765432 "
