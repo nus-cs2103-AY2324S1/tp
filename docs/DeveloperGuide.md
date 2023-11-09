@@ -7,12 +7,6 @@ title: Developer Guide
 
 ---
 
-## **Setting up, getting started**
-
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
-
----
-
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -179,16 +173,6 @@ which replaces the old contact with the edited contact in the `UniqueContactList
 The following activity diagram summarises what happens when a user executes an edit command.
 
 ![EditActivityDiagram](images/EditActivityDiagram.png)
-
----
-
-## **Documentation, logging, testing, configuration, dev-ops**
-
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
 
 ---
 
