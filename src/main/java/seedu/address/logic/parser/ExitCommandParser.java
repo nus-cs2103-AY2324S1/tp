@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments to produce an {@code ExitCommand}.
  */
-public class ExitCommandParser {
+public class ExitCommandParser implements Parser<ExitCommand> {
 
     /**
      * Parses the given {@code String} of arguments to produce an {@code ExitCommand}.

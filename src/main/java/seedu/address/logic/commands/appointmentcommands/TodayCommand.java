@@ -26,4 +26,12 @@ public class TodayCommand extends Command {
                 appointment -> appointment.getStartTime().toLocalDate().isEqual(LocalDate.now()));
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        return other instanceof TodayCommand;
+    }
 }

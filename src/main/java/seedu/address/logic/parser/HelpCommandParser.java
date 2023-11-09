@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments to produce a {@code HelpCommand}.
  */
-public class HelpCommandParser {
+public class HelpCommandParser implements Parser<HelpCommand> {
 
     /**
      * Parses the given {@code String} of arguments to produce a {@code HelpCommand}.

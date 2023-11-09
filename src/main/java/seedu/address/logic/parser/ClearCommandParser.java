@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments to produce a {@code ClearCommand}.
  */
-public class ClearCommandParser {
+public class ClearCommandParser implements Parser<ClearCommand> {
 
     /**
      * Parses the given {@code String} of arguments to produce a {@code ClearCommand}.

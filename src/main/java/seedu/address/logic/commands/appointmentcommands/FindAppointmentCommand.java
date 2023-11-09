@@ -48,4 +48,16 @@ public class FindAppointmentCommand extends Command {
                 String.format(Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW,
                         model.getFilteredAppointmentList().size()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof FindAppointmentCommand) {
+            FindAppointmentCommand otherCommand = (FindAppointmentCommand) other;
+            return this.predicate.equals(otherCommand.predicate);
+        }
+        return false;
+    }
 }

@@ -3,12 +3,13 @@ package seedu.address.logic.parser.appointmentparser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.appointmentcommands.TodayCommand;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments to produce a {@code TodayCommand}.
  */
-public class TodayCommandParser {
+public class TodayCommandParser implements Parser<TodayCommand> {
 
     /**
      * Parses the given {@code String} of arguments to produce a {@code TodayCommand}.

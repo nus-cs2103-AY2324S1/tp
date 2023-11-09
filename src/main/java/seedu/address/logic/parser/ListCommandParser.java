@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments to produce a {@code ListCommand}.
  */
-public class ListCommandParser {
+public class ListCommandParser implements Parser<ListCommand> {
 
     /**
      * Parses the given {@code String} of arguments to produce a {@code ListCommand}.
