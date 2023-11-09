@@ -33,7 +33,7 @@ LogicManager -> ListTutorCommand : execute()
 activate ListTutorCommand
 
 ListTutorCommand -> Model ++ : updateFilteredPersonList()
-deactivate Model
+return
 
 deactivate Model
 

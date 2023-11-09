@@ -407,7 +407,7 @@ The `delete-t` command was designed this way to ensure consistency with the prev
 - **Alternative 1 (current choice):** Using tutor index.
   - Pros: Using the tutor index provides a clear and unambiguous way for users to specify which tutor they want to 
     delete. The index corresponds directly to the position of the tutor in the displayed list, making it easy for 
-    tutors to identify the target tutor.
+    users to identify the target tutor.
   - Pros: The use of tutor indices eliminates the potential challenge of dealing with long or complex names. Users do
     not need to type out the entire name, which can be especially beneficial if a tutor 
     has a lengthy or complicated name.
@@ -706,6 +706,8 @@ The lifeline for `MarkScheduleCommandParser` should end at the destroy marker (X
 the lifeline reaches the end of diagram.
 </div>
 
+#### Design rationale
+
 **Aspect: Usage of the `pending` status**
 - **Alternative 1 (current choice):** Users unable to mark a schedule as `pending`.
   - Pros: This design is more intuitive for users, as it aligns with the common understanding of marking and
@@ -720,7 +722,6 @@ the lifeline reaches the end of diagram.
   - Cons: The definition and usage of the "pending" status may vary among users, potentially leading to ambiguity in
     its interpretation.
 
-#### Design rationale
 **Aspect: Format of schedule status**
 - **Alternative 1 (current choice):** Users input integers 0 or 1 to mark a schedule as `missed` or `completed`.
   - Pros: Using integers provides a clear and unambiguous way for users to specify which status they want to
@@ -1599,7 +1600,7 @@ Displays schedule on a specified day as a calendar view
    3. Test case: `show 2023`<br>
       Expected: No calendar view is shown. Error details shown in the status message.
 
-   4. Other incorrect show commands to test: ` show`, `show abc`, `show 123`<br>
+   4. Other incorrect show commands to test: `show`, `show abc`, `show 123`<br>
       Expected: Similar to previous.
 
 ### Changing theme
@@ -1624,7 +1625,6 @@ Changes the theme of TutorConnect
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
 
 ## **Appendix: Planned enhancements** 
 

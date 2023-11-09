@@ -59,7 +59,7 @@ MarkScheduleCommand -> Model ++ : setSchedule(scheduleToEdit, editedSchedule)
 return
 
 MarkScheduleCommand -> Model ++ : updateFilteredScheduleList()
-deactivate Model
+return
 
 deactivate Model
 
