@@ -114,6 +114,9 @@ your contacts and events better.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Invalid prefixes, such as `t/` will be regarded as a part of the input, for example `n/John Doe g/friend`, the name 
+  will be parsed as `John Doe t/friend` instead of `John Doe`.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list_all`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
