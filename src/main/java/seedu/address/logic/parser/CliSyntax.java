@@ -11,4 +11,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_QUESTION = new Prefix("q/");
     public static final Prefix PREFIX_DIFFICULTY = new Prefix("d/");
     public static final Prefix PREFIX_HINT = new Prefix("h/");
+    public static final Prefix PREFIX_INVALID = new Prefix("i/");
 }
