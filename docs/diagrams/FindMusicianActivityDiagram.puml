@@ -1,0 +1,33 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+skinparam defaultTextAlignment center
+
+start
+:User executes find command;
+:Parse the input keywords;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([input is invalid])
+    :Show corresponding error message;
+else ([else])
+    :Separate the keywords into categories
+    (name, tag, instrument, and genre);
+    while () is ([else])
+        :Go to the next category;
+        if () then ([the category is empty])
+            :Skip this category;
+        else ([else])
+            :Filter the musicians who
+            match ANY of the keywords
+            in this category;
+        endif
+    endwhile ([all categories are checked])
+    :Return the musicians who pass ALL filters;
+endif
+
+stop
+@enduml
