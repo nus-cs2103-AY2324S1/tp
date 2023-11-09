@@ -51,4 +51,19 @@ public class SortPatientCommand extends Command {
             return "descending";
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortPatientCommand)) {
+            return false;
+        }
+
+        SortPatientCommand e = (SortPatientCommand) other;
+        return attribute.equals(e.attribute) && isAscending == e.isAscending;
+    }
 }
