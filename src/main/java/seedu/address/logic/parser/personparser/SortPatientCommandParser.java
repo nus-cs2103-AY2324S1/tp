@@ -55,4 +55,8 @@ public class SortPatientCommandParser implements Parser<SortPatientCommand> {
         return new SortPatientCommand(isAscending, attribute);
     }
 
+    public static String printAttributes() {
+        return Arrays.toString(ATTRIBUTES);
+    }
+
 }

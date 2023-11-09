@@ -51,4 +51,19 @@ public class SortCommand extends Command {
             return "descending";
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+
+        SortCommand e = (SortCommand) other;
+        return attribute.equals(e.attribute) && isAscending == e.isAscending;
+    }
 }

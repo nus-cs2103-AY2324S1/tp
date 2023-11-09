@@ -54,5 +54,8 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         return new SortCommand(isAscending, attribute);
     }
+    public static String printAttributes() {
+        return Arrays.toString(ATTRIBUTES);
+    }
 
 }
