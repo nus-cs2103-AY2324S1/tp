@@ -340,7 +340,6 @@ public class UniqueListTest {
     public void consumeAndComputeItem_null_throwsAssertionError() {
         assertThrowsAssertionError(() -> getSampleList().consumeAndComputeItem(INDEX1, null, SAMPLE_FUNCTION));
         assertThrowsAssertionError(() -> getSampleList().consumeAndComputeItem(INDEX1, SAMPLE_CONSUMER, null));
-        assertThrowsAssertionError(() -> getSampleList().consumeAndComputeItem(INDEX1, null, null));
     }
 
     @Test

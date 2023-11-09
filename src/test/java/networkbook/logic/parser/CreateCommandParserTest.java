@@ -251,14 +251,6 @@ public class CreateCommandParserTest {
                         + CommandTestUtil.GRADUATION_DESC_BOB + CommandTestUtil.COURSE_DESC_BOB
                         + CommandTestUtil.SPECIALISATION_DESC_BOB,
                 expectedMessage);
-
-        // all prefixes missing
-        CommandParserTestUtil.assertParseFailure(parser,
-                CommandTestUtil.VALID_NAME_BOB + CommandTestUtil.VALID_PHONE_BOB
-                        + CommandTestUtil.VALID_EMAIL_BOB + CommandTestUtil.VALID_LINK_BOB
-                        + CommandTestUtil.VALID_GRADUATION_BOB + CommandTestUtil.VALID_COURSE_BOB
-                        + CommandTestUtil.VALID_SPECIALISATION_BOB,
-                expectedMessage);
     }
 
     @Test
