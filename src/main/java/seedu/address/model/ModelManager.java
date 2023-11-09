@@ -213,6 +213,7 @@ public class ModelManager implements Model {
     public void addEvent(Event toAdd) {
         addressBook.addEvent(toAdd);
         sort();
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     private void sort() {
