@@ -26,4 +26,12 @@ public class UpcomingCommand extends Command {
                 appointment -> appointment.getStartTime().isAfter(LocalDateTime.now()));
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        return other instanceof UpcomingCommand;
+    }
 }

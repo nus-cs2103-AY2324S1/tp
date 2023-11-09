@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments to produce an {@code ModeCommand}.
  */
-public class ModeCommandParser {
+public class ModeCommandParser implements Parser<ModeCommand> {
 
     /**
      * Parses the given {@code String} of arguments to produce an {@code UpcomingCommand}.
