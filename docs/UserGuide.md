@@ -505,7 +505,7 @@ Action     | Format, Examples
 **compareCalendars** | `compareCalendars INDEX...` <br> e.g., `compareCalendar 1 3 5`
 **compareGroupCalendars** | `compareGroupCalendars TAG...` <br> e.g., `compareGroupCalendars school friend`
 **editContactEvent** | `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME][te/NEW_END_DATE_TIME]`
-**clearEvents** | `clearEvent ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `clearEvent ts/2023-02-03 12:00 te/2023-02-03 14:00`
+**clearEvents** | `clearEvent ts/START_DATE_TIME te/END_DATE_TIME [c/CONFRIMATION]` <br> e.g., `clearEvent ts/2023-02-03 12:00 te/2023-02-03 14:00`
 **addTask** | `addTask d/DESCRIPTION [te/DEADLINE]` <br> e.g. `addTask d/Go for a run te/2023-02-14 19:00`
 **deleteTask** | `deleteTask INDEX`
 **sortTasks** | `sortTasks PARAMETER` <br> e.g. `sortTasks DESCRIPTION` <br> e.g. `sortTasks DEADLINE`
