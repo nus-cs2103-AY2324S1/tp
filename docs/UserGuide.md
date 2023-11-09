@@ -1,4 +1,3 @@
-D
 ---
 layout: page
 title: User Guide
