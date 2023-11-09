@@ -52,6 +52,20 @@ public class DeleteRemarkCommandParser implements Parser<DeleteRemarkCommand> {
     }
 
     /**
+     * Checks validity of prefixes.
+     *
+     * @param argMultimap ArgumentMultimap to be used
+     * @throws ParseException If prefixes are empty or repeated
+     */
+    public void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_REMARK)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteRemarkCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_REMARK);
+    }
+
+    /**
      * Returns true if none of the prefixes contains empty {@code Optional} values
      * in the given
      * {@code ArgumentMultimap}.

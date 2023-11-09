@@ -1,14 +1,19 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -24,6 +29,91 @@ public class ResetCommandTest {
     private static final String NO_FIELD = "";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
+
+    @Test
+    void isValidField_nullField_throwsNullPointerException() {
+        ResetCommand resetCommand = new ResetCommand("overtime");
+        assertThrows(NullPointerException.class, () -> resetCommand.isValidField(null));
+    }
+
+    @Test
+    void isValidField_invalidField_throwsCommandException() {
+        ResetCommand resetCommand = new ResetCommand("overtime");
+
+        // empty field
+        assertThrows(CommandException.class, () -> resetCommand.isValidField(""));
+
+        // invalid field
+        assertThrows(CommandException.class, () -> resetCommand.isValidField("blah"));
+    }
+
+    @Test
+    void isValidField_validField_doesNotThrow() {
+        ResetCommand resetCommand = new ResetCommand("overtime");
+        assertAll(() -> {
+            // overtime
+            resetCommand.isValidField("overtime");
+
+            // leaves
+            resetCommand.isValidField("leaves");
+        });
+    }
+
+    @Test
+    void resetOvertime_nullModelNullEmployee_throwsNullPointerException() {
+        ResetCommand resetCommand = new ResetCommand("overtime");
+        Employee employee = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
+
+        // null model
+        assertThrows(NullPointerException.class, () -> resetCommand.resetOvertime(null, employee));
+
+        // null employee
+        assertThrows(NullPointerException.class, () -> resetCommand.resetOvertime(model, null));
+
+        // null model and employee
+        assertThrows(NullPointerException.class, () -> resetCommand.resetOvertime(null, null));
+    }
+
+    @Test
+    void resetOvertime_success() {
+        ResetCommand resetCommand = new ResetCommand("overtime");
+        Employee employee = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
+        Employee employeeWithDefaultOvertime = new Employee(employee.getName(), employee.getPosition(),
+                employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
+                employee.getDepartments(), new OvertimeHours(Employee.DEFAULT_OVERTIME_HOURS), employee.getLeaveList(),
+                employee.getRemarkList());
+        resetCommand.resetOvertime(model, employee);
+        assertEquals(employeeWithDefaultOvertime,
+                model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased()));
+    }
+
+    @Test
+    void resetLeaves_nullModelNullEmployee_throwsNullPointerException() {
+        ResetCommand resetCommand = new ResetCommand("leaves");
+        Employee employee = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
+
+        // null model
+        assertThrows(NullPointerException.class, () -> resetCommand.resetLeaves(null, employee));
+
+        // null employee
+        assertThrows(NullPointerException.class, () -> resetCommand.resetLeaves(model, null));
+
+        // null model and employee
+        assertThrows(NullPointerException.class, () -> resetCommand.resetLeaves(null, null));
+    }
+
+    @Test
+    void resetLeaves_success() {
+        ResetCommand resetCommand = new ResetCommand("leaves");
+        Employee employee = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
+        Employee employeeWithDefaultLeaveList = new Employee(employee.getName(), employee.getPosition(),
+                employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
+                employee.getDepartments(), employee.getOvertimeHours(), new LeaveList(),
+                employee.getRemarkList());
+        resetCommand.resetOvertime(model, employee);
+        assertEquals(employeeWithDefaultLeaveList,
+                model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased()));
+    }
 
     @Test
     void execute_resetOvertime_success() {
