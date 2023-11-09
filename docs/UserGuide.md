@@ -622,6 +622,62 @@ If no lesson is shown:
 Please use show lessonIndex before deleting task!
 ```
 
+### Linking students to lessons
+You can link lessons to students, and vice versa. For example, if a lesson has a few students, you can link each of the students to the lesson, so that you can quickly see who is attending this specific lesson.
+To use this command, you must have selected a lesson or student using the `show` command (see [here](#showing-a-lesson--task--students-details--show)).
+
+#### Command format
+- In the student list and a student is selected:
+  - `linkTo LESSON_NAME`
+- In the schedule list and a lesson is selected:
+  - `linkTo STUDENT_NAME`
+
+<box type="tip" seamless>
+
+**Tips:**
+- A lesson can have multiple students, and a student can have multiple lessons. Just run the `linkTo` command multiple times.
+- As of now, you cannot unlink a student from a lesson and vice versa. Use caution when running the `linkTo` command.
+</box>
+
+#### Example usage
+- In the student list and a student is selected:
+  - `linkTo CS2103T Lab`
+  - Result: The student is linked to the lesson with name "CS2103T Lab"
+- In the schedule list and a lesson is selected:
+  - `linkTo Bernice Yu`
+  - Result: The lesson is linked to the student "Bernice Yu"
+
+#### Success outputs
+- For the command `linkTo CS2103T Lab` in the student list when "Alex Wong" is selected:
+![Success for linking to lesson](images/linkTo/linkTo_lesson_positive.png)
+- For the command `linkTo John` in the schedule list when "CS2100 Tutorial" is selected:
+![Success for linking to student](images/linkTo/linkTo_student_positive.png)
+
+#### Failure outputs
+- In the schedule list and a lesson is NOT selected, when trying to link a student:
+![Failure for linking to student](images/linkTo/linkTo_noSelectedLesson.png)
+```
+No lesson is shown
+LinkTo command usage: linkTo [STUDENT_NAME]
+Example: linkTo Alice Pauline
+Note: This command is only available when a lesson is shown
+```
+
+- In the schedule list and a lesson is selected, when the student name specified in the `linkTo nonexisting student` command cannot be found:
+![Failure for linking to student](images/linkTo/linkTo_student_negative.png)
+```
+No such student with name nonexisting student found
+```
+
+- In the student list and a student is NOT selected, when trying to link a lesson:
+![Failure for linking to lesson](images/linkTo/linkTo_noSelectedStudent.png)
+```
+No student is shown
+LinkTo command usage: linkTo [LESSON_NAME]
+Example: linkTo CS2103T lab1
+Note: This command is only available when a student is shown
+```
+
 ### Command history
 
 The command history feature allows you to retrieve previously typed commands into the command text box.
