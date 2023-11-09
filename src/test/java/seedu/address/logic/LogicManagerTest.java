@@ -62,7 +62,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete n/invalid name";
-        assertCommandException(deleteCommand, DeleteCommand.MESSAGE_PERSON_NOT_FOUND);
+        assertCommandException(deleteCommand, DeleteCommand.MESSAGE_PATIENT_NOT_FOUND);
     }
 
     @Test
