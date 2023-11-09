@@ -14,10 +14,12 @@ Class UserPrefs
 Class "UniquePersonList<Member>" as UniqueMemberList
 Class "UniquePersonList<Applicant>" as UniqueApplicantList
 Class "ObservableList<Tag>" as UniqueTagList
+Class "ObservableList<Task>" as UniqueTaskList
 Class "{abstract}\nPerson" as Person
 Class Member
 Class Applicant
 Class Tag
+Class Task
 
 Class I #FFFFFF
 }
@@ -32,6 +34,7 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager --> "1" UniqueTaskList
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook --> "1" UniqueMemberList
@@ -40,6 +43,7 @@ AddressBook --> "1" UniqueTagList
 UniqueMemberList --> "~*  " Member
 UniqueApplicantList --> "~*" Applicant
 UniqueTagList --> "~* " Tag
+UniqueTaskList --> "~* " Task
 Member -down-|> Person
 Applicant -down-|> Person
 
