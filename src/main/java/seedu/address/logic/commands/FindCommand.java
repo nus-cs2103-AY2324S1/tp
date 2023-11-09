@@ -25,11 +25,11 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all applicants whose fields contain any of "
             + "the specified keyword (case-insensitive) or number and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + "[" + PREFIX_NAME + "KEYWORDS...] "
+            + "[" + PREFIX_NAME + "KEYWORDS(S)] "
             + "[" + PREFIX_PHONE + "NUMBER] "
-            + "[" + PREFIX_EMAIL + "KEYWORDS...] "
-            + "[" + PREFIX_ADDRESS + "KEYWORDS...] "
-            + "[" + PREFIX_TAG + "KEYWORDS...]\n"
+            + "[" + PREFIX_EMAIL + "KEYWORD(S)] "
+            + "[" + PREFIX_ADDRESS + "KEYWORD(S)] "
+            + "[" + PREFIX_TAG + "KEYWORD(S)]\n"
             + "Example: " + COMMAND_WORD + " n/alice bob charlie p/98765432 e/example@mail.com";
 
     private final Predicate<Applicant> predicate;

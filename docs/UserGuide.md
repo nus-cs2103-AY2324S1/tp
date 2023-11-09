@@ -49,7 +49,7 @@ title: User Guide
 
 Tired of sending out offers to the best candidates, just to receive a disappointing reply that they have already accepted another offer that was sent out before yours?
 
-**InterviewHub**  is a desktop app for engineering manager to schedule job interviews and manage applicants.
+**InterviewHub**  is a desktop app for engineering managers to schedule job interviews and manage applicants.
 By optimizing recruitment workflows, we enable faster decision-making, helping you secure top talent before your competitors.
 
 It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
@@ -137,6 +137,9 @@ For each interview, we see the following details:
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
+* Items with `(S)` after them can be used multiple times, including zero times but without the tag. <br>
+  e.g. `n/KEYWORD(S)` can be used as `n/John`, `n/John Alice Bob`
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -208,25 +211,32 @@ Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 | Parameter      | Representation                    | Constraints                                                   |
 |----------------|-----------------------------------|---------------------------------------------------------------|
 | `NAME`         | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
-| `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
+ | `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
 | `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`                      |
 | `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                        |
-| `TAG`          | A tag belonging to the applicant  | Must contain only alphanumeric characters                     |                                      
+| `TAG`          | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |                                      
 
 
 
 
 Examples:
-* `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`.
+* `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`.
+![Result of `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`](images/addApplicantResult.png)
+
 
 [Back to the Table of Contents](#table-of-contents)
 
 ### Deleting an applicant : `delete-a`
 
-Deletes the specified applicant from **InterviewHub**.
+Deletes the interview at the specified `APPLICANT_INDEX` from **InterviewHub**
 
 Format: `delete-a APPLICANT_INDEX`
 
+<<<<<<< HEAD
+
+| Parameter         | Representation                                                   | Constraints                                                                                    |
+|-------------------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| `APPLICANT_INDEX` | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed list |
 * Deletes the applicant at the specified `APPLICANT_INDEX`.
 * The `APPLICANT_INDEX` refers to the index number shown in the displayed applicant list.
 * The `APPLICANT_INDEX` **must be a positive unsigned integer** e.g. 1, 2, 3, …​
@@ -234,6 +244,7 @@ Format: `delete-a APPLICANT_INDEX`
 
 Examples:
 * `delete-a 1` deletes the 1st applicant in the address book.
+
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -244,18 +255,17 @@ Edits an existing applicant in **InterviewHub**.
 Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 * Edits the person at the specified `APPLICANT_INDEX`. The index refers to the index number shown in the displayed applicant list.
-* The `INDEX` **must be a positive unsigned integer** e.g. 1, 2, 3, …​
-* The upper limit of valid integers is the number of applicants currently displayed in the applicant list
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-  | Parameter      | Representation                    | Constraints                                                   |
-    |----------------|-----------------------------------|---------------------------------------------------------------|
-  | `NAME`         | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
-  | `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
-  | `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`                      |
-  | `ADDRESS`      | The address of the applicant      | Can take any value and cannot be blank                        |
-  | `TAG`          | A tag belonging to the applicant  | Must contain only alphanumeric characters                     |
+  | Parameter         | Representation                                                   | Constraints                                                                                    |
+  |-------------------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+    | `APPLICANT_INDEX` | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed list |
+  | `NAME`            | The name of the applicant                                        | Must contain only alphanumeric characters and cannot be blank                                  |
+  | `NUMBER`          | The phone number of the applicant                                | Must contain only numbers and be at least 3 digits long                                        |
+  | `EMAIL`           | The email of the applicant                                       | Must be in the format: `username@domain`                                                       |
+  | `ADDRESS`         | The address of the applicant                                     | Can take any value and cannot be blank                                                         |
+  | `TAG`             | A tag belonging to the applicant                                 | Must be a single word containing only alphanumeric characters                                  |
 
 Examples:
 *  `edit-a 1 n/John Doe` Edits the name of the 1st applicant to be `John Doe`.
@@ -271,156 +281,26 @@ Examples:
 
 Finds applicants whose attributes contain any of the given keywords.
 
-Format: ``find-a [n/KEYWORDS...] [p/NUMBER]
-[e/KEYWORDS...] [a/KEYWORDS...] [t/KEYWORDS...]``
+Format: ``find-a [n/KEYWORDS(S)] [p/NUMBER]
+[e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]`` 
 
+* Any of the fields (name, phone, email, address, tags) can be searched
+* At least one of the optional fields must be provided
+* Multiple keywords must be either space or comma separated
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Multiple keywords must be either space or comma separated
-* At least one of the optional fields must be provided
-* Any of the fields (name, phone, email, address, tags) can be searched
 * Applicants matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 The table below summarises how each field is matched in the search.
-<table>
-  <tbody>
-    <tr>
-      <th>Parameter</th>
-      <th align="center">Match</th>
-      <th align="right">Examples</th>
-    </tr>
-    <tr>
-      <td>
 
-`NAME`
-
-</td>
-      <td>Only full words will be matched</td>
-      <td>
-<ul>
-<li>
-
-`Han` will match `Han Bo` but not `Hans Bo`
-
-</li>
-<li>
-
-`John Doe` will match `John`, `Doe` and `John Doe`
-
-</li>
-</ul>
-</td>
-    </tr>
-    <tr>
-      <td>
-
-`PHONE`
-
-</td>
-      <td>Partial numbers will be matched</td>
-      <td>
-<ul>
-<li>
-
-`987` will match `98765432`
-
-</li>
-<li>
-
-`98765432` will match `98765432`
-
-</li>
-</ul>
-</td>
-    </tr>
-    <tr>
-      <td>
-
-`EMAIL`
-
-</td>
-      <td>
-
-Must be an exact match to the entire email, the part before the `@`, or the part after the `@`
-
-</td>
-      <td>
-<ul>
-<li>
-
-`john` will match `john@example.com`
-
-</li>
-<li>
-
-`exmaple.com` will match `john@example.com`
-
-</li>
-<li>
-
-`john@example.com` will match `john@example.com`
-
-</li>
-<li>
-
-`example` will not match `john@example.com`
-
-</li>
-</ul>
-</td>
-    </tr>
-    <tr>
-      <td>
-
-`ADDRESS`
-
-</td>
-      <td>Only full words will be matched</td>
-      <td>
-
-<ul>
-<li>
-
-`Serangoon` will match `Serangoon Gardens`
-
-</li>
-<li>
-
-`Ser` will not match `Serangoon`
-
-</li>
-</ul>
-
-
-</td>
-    </tr>
-<tr>
-<td>
-
-`TAG`
-
-</td>
-<td>Only full words will be matched</td>
-<td>
-
-<ul>
-<li>
-
-`software engineer` will  match `software engineer`
-
-</li>
-<li>
-
-`soft` will not match `software engineer`
-
-</li>
-</ul>
-
-</td>
-</tr>
-  </tbody>
-</table>
+| Parameter      | Match                                                                                          | Examples                                                                       |
+  |----------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `NAME`         | Only full words will be matched                                                                | `Han` will match `Han Bo` but not `Hans Bo`                                    |
+| `PHONE_NUMBER` | Partial numbers will be matched                                                                | `987` will match `98765432`                                                    |
+| `EMAIL`        | Must be an exact match to the entire email, the part before the `@`, or the part after the `@` | `john`, `example.com` and `john@example.com` will all match `john@example.com` |
+| `ADDRESS`      | Only full words will be matched                                                                | `Serangoon` will match `Serangoon Road` but not `Rangoon road`                 |
+| `TAG`          | Only full words will be matched                                                                | `Engineer` will match `Software Engineer` but not `Engineering Manager`        |
 
 Examples:
 * `find-a n/alex david` returns `Alex Yeoh`, `David Li`<br>
@@ -521,7 +401,7 @@ Examples:
 
 Find interviews which jobs title contain any of the given keywords.
 
-Format: `find-i KEYWORD [MORE_KEYWORDS]`
+Format: `find-i KEYWORD(S)`
 
 | Parameter         | Representation                             | Constraints                                                                                 |
 |-------------------|--------------------------------------------|---------------------------------------------------------------------------------------------|
@@ -602,6 +482,13 @@ Format: `list-i-today`
   shown: `Listed all interviews today`
 
 Example: `list-i-today`
+
+Suppose we have three interviews scheduled on 09/11/2023.
+![Before `list-i-today`](images/listInterviewsTodayBefore.png)
+
+
+Result of `list-i-today` on 09/11/2023.
+![Results of `list-i-today`](images/listInterviewsTodayResult.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -776,13 +663,13 @@ If you have Java 11 installed, the correct version of Java is installed and you 
 
 ## Applicant Management Commands
 
-| Action                   | Format, Examples                                                                                                                                                                                                 |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add applicant**        | `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                          |
-| **Delete applicant**     | `delete-a APPLICANT_INDEX`<br> e.g., `delete-a 3`                                                                                                                                                                |
-| **Edit applicant**       | `edit-a APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit-a 2 n/John Doe`                                                                                   |
-| **Find applicant**       | `find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER] [e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] [t/KEYWORDS [MORE_KEYWORDS]...]` <br> e.g., `find-a n/John Bob p/98765432 e/John@example.com` |
-| **List applicants**      | `list-a`                                                                                                                                                                                                         |
+| Action               | Format, Examples                                                                                                                                                        |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add applicant**    | `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Delete applicant** | `delete-a APPLICANT_INDEX`<br> e.g., `delete-a 3`                                                                                                                       |
+| **Edit applicant**   | `edit-a APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit-a 2 n/John Doe`                                          |
+| **Find applicant**   | `find-a [n/KEYWORDS...] [p/NUMBER] [e/KEYWORDS...] [a/KEYWORDS...] [t/KEYWORDS...]` <br> e.g., `find-a n/John Bob p/98765432 e/john@example.com`                        |
+| **List applicants**  | `list-a`                                                                                                                                                                |
 
 ## Interview Management Commands
 
