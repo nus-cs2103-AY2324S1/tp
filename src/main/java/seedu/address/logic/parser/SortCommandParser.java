@@ -20,7 +20,8 @@ import seedu.address.model.person.comparer.SortComparator;
 public class SortCommandParser implements Parser<SortCommand> {
 
     public static final String PARSE_EXCEPTION_MESSAGE = "Invalid syntax for sort. Please use the "
-            + "syntax as stated in user guide. For example: sort /byname /reverse";
+            + "following syntax: sort {/byattribute} {/reverse (optional)}. For example: sort /byname /reverse."
+            + " Possible attributes: /byname, /byemail, /byaddress, /byphone ";
     private static final Prefix PREFIX_DELIMITER = new Prefix("/");
     private static final String SORT_BY_ADDRESS_KEYWORD = "byaddress";
     private static final String SORT_BY_EMAIL_KEYWORD = "byemail";
