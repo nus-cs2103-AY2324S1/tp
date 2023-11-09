@@ -127,7 +127,7 @@ Format: `list`
 
 Modify and/or updates existing policy information in the database.
 
-Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [c/COMPANY] [l/LICENCE PLATE]
+Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]... [c/COMPANY] [l/LICENCE PLATE]
  [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
 
 * Edits the client policy details at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
@@ -140,7 +140,7 @@ Examples:
 *  `edit 2 pn/AB12345J pe/31-12-2024` updates the policy at the INDEX number 2 with the new policy number and expiration date.
 
 Acceptable values for each parameter:
-* `n/NAME`: Alphabets.
+* `n/NAME`: Alphanumeric.
 * `i/NRIC`: Alphanumeric, _exactly_ 4 characters.
 * `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters.
 * `e/EMAIL`: Alphanumeric and/or special characters, no white spaces allowed, standard email format.
@@ -148,7 +148,7 @@ Acceptable values for each parameter:
 * `t/TAG`: Alphabets, no white spaces allowed.
 * `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters.
 * `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
-* `pn/POLICY NUMBER`: Alphanumeric, _exactly_ 8 characters.
+* `pn/POLICY NUMBER`: Alphanumeric, _up to_ 8 characters.
 * `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE`: Date in the format dd-mm-yyyy.
 
 Expected output upon success: <br>
