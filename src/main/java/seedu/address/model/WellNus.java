@@ -124,7 +124,7 @@ public class WellNus implements ReadOnlyWellNus {
      * @param appointment The appointment potentially added
      * @return true if overlaps, false otherwise.
      */
-    public boolean overlapsWithAppointments(Appointment appointment) {
+    public boolean hasOverlapsWithAppointments(Appointment appointment) {
         requireNonNull(appointment);
         return appointments.overlaps(appointment);
     }
