@@ -1,46 +1,51 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Low Jun Hong's Project Portfolio Page
 ---
 
 ### Project: UniMate
 
-UniMate is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+UniMate is a desktop address book and calendar infused in one application intended for National University of Singapore
+(NUS) students to save group mate's contacts and sync calendars to schedule classes and group project meetings. The user
+interacts with it using primarily the Command Line Interface (CLI), but can choose to interact with the GUI using a
+mouse. Its GUI created with JavaFX, and the entire project is written in Java, and has about 25 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: To be determined
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **Add Contact Event Command**
+  * What it does: Facilitates the overall functionality of the calendar by adding events.
+  * Justification: Facilitates the overall functionality of comparing calendars between user and contact.
+  * Credits: The command uses some methods and modified code implemented by lihongguang00 for the Calendar class.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **Delete Contact Event Command**
+  * What it does: Adds an event to the personal calendar of a contact.
+  * Justification: Facilitates the overall functionality of the calendar by deleting events.
+  * Credits: The command uses some methods and modified code implemented by fallman2 and lihongguang00.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=zoom&zA=junhonglow&zR=AY2324S1-CS2103-F13-4%2Ftp%5Bmaster%5D&zACS=104.16170212765958&zS=2023-09-22&zFS=&zU=2023-10-05&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
+* **Storage classes**
+  * What it does: Manages the storage for the TaskList, Calendar and contact's Calendars.
+  * Justification: Facilitates the overall functionality of the application by maintaining proper storage of data.
+  * Credits: Adapted code from AB3 addressbook's storage.
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=junhonglow&tabRepo=AY2324S1-CS2103-F13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-
-* **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added UG documentation for the features `addContactEvent`, `deleteContactEvent` and all `Storage` functionality.
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
-
+    * `to be added soon`
+      
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * PRs reviewed (with non-trivial review comments): [\#36](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/36),
+      [\#40](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/40), [\#53](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/53),
+      [\#63](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/63), [\#64](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/64),
+      [\#70](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/70), [\#74](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/74),
+      [\#76](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/76), [\#78](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/78).
+  * Reported bugs and suggestions for other teams in the class (examples: 
+      [\#160](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues/160), [\#172](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues/172),
+      [\#175](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues/175), [\#178](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues/178),
+      [\#185](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues/185), [\#186](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues/186),
+      [\#187](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues/187).
