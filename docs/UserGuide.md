@@ -63,12 +63,8 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 * Items in square brackets are optional.<br>
   e.g `add contact -n NAME [-p PHONE_NUMBER] [-a ADDRESS] [-e EMAIL] [-t TAGNAME...]` can be used as `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com -t Frontend` or as `add contact -n Aaron -e aaron123@gmail.com`.
 
-* `CONTACT_ID` is the number that is on the left of the contact's name in each contact card.
-
 * Items with `…`​ after them can be used multiple times.<br>
   e.g. `[-t TAGNAME...]` can be used as `-t Frontend`, `-t Frontend -t Java` etc.
-
-* `TAGNAME` is case sensitive. For example, a contact can have tags `Frontend` and `frontend` at the same time.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n NAME -t NOTE_TITLE`, `-t NOTE_TITLE -n NAME` is also acceptable.
@@ -77,6 +73,28 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+**Requirements and details on user supplied parameters:** <br>
+
+* `CONTACT_ID` is the number that is on the left of the contact's name in each contact card.
+
+* `NAME` should be alphanumeric, spaces are allowed.
+
+* `PHONE_NUMBER` should be numbers at least 3 digits long.
+
+* `EMAIL` should be of the format local-part@domain:
+  *  The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+  * The domain name should:
+    *  end with a domain label at least 2 characters long
+    * have each domain label start and end with alphanumeric characters
+    * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+* `TAGNAME` should be alphanumeric, with no spaces.
+
+* `TAGNAME` is case sensitive. For example, a contact can have tags `Frontend` and `frontend` at the same time.
+
+
+
 </box>
 
 ### Viewing help : `help`
@@ -125,7 +143,7 @@ Examples:
 
 ### Finding a contact : `find`
 
-Finds a contact by their name by matching keywords with the contact's name. Keywords are **case insensitive**.
+Finds a contact by their name by matching keywords with the contact's name. Only word-word matches will be detected, and partial words match will not be detected. For example, `Ale` will not match `Alex` but will match `Alex Wong`. Keywords are **case insensitive**.
 
 Format: `find KEYWORD [OTHER_KEYWORDS...]`
 
@@ -141,9 +159,6 @@ Format: `add tag -id CONTACT_ID -t TAGNAME...`
 * Adds one or more tags to a contact.
 * Duplicates are accepted but only unique tags will be added.
 
-Requirements:
-* `TAGNAME` must be alphanumeric, with no spaces.
-
 Examples:
 * `add tag -id 1 -t Frontend` adds a tag with tag name "Frontend" to the first contact in the contact list.
 * `add tag -id 1 -t Frontend -t Java` adds two tags with tag name "Frontend" and "Java" to the first contact in the contact list.
@@ -157,9 +172,6 @@ Format: `delete tag -id CONTACT_ID -t TAGNAME...`
 
 * Deletes one or more tags to a contact, regardless if the tag exists in the contact or not.
 * Duplicates are accepted.
-
-Requirements:
-* `TAGNAME` must be alphanumeric, with no spaces.
 
 Examples:
 * `delete tag -id 1 -t Frontend` deletes a tag with tag name "Frontend" from the first contact in the contact list.
@@ -205,19 +217,18 @@ Examples
 
 ### Adding events : `add event`
 
-Adds an event to a contact. The added event should not have clashes in timing with other existing events in the contact list.
+Adds an event to a contact. The event should not have clashes in timing with other existing events in the contact list. Events with start time earlier than the current time are allowed for keeping track of past events.
 
 Format: `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]`
 
-(If start time is exactly equals to end time, the end time for the event will not be displayed when outputting the event to text-based UI)
-
-Date-Time Format:
- - You can use one of the following formats for `START_TIME` and `END_TIME`:
-    - Both date and time: `yyyy-MM-dd HH:mm[:ss]`
+* If `END_TIME` is not given, it will be defaulted to the `START_TIME`.
+* If `START_TIME` is exactly equals to `END_TIME`, the `END_TIME` for the event will not be displayed in text-based UI.
+* You can use one of the following formats for `START_TIME` and `END_TIME`:
+  * Both date and time: `yyyy-MM-dd HH:mm[:ss]`
       - Example: `2023-10-12 20:05`, `2023-10-12 20:05:30`
-   - Only date (Time will be defaulted to 00:00): `yyyy-MM-dd`
+  * Only date (Time will be defaulted to 00:00): `yyyy-MM-dd`
        - Example: `2023-10-12`
-    - Only time (Date will be defaulted to the current date): `HH:mm[:ss]`
+  * Only time (Date will be defaulted to the current date): `HH:mm[:ss]`
       - Example: `00:10`, `05:01:45`
 
 Examples:
