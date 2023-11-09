@@ -48,6 +48,7 @@ public class Appointment {
     public static final String FIELD_SEPARATOR_REGEX = "(,? )|(,)";
 
     private static final DateTimeFormatter INPUT_DATE_FORMATTER = new DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
             .optionalStart()
             .appendValue(ChronoField.DAY_OF_MONTH, 1, 2, SignStyle.NOT_NEGATIVE)
             .appendLiteral('-').appendValue(ChronoField.MONTH_OF_YEAR, 1, 2, SignStyle.NOT_NEGATIVE)
@@ -56,7 +57,7 @@ public class Appointment {
             .optionalEnd().optionalEnd()
             .optionalStart()
             .appendValue(ChronoField.DAY_OF_MONTH, 1, 2, SignStyle.NOT_NEGATIVE)
-            .appendLiteral('-').appendText(ChronoField.MONTH_OF_YEAR, TextStyle.SHORT)
+            .appendLiteral('-').appendText(ChronoField.MONTH_OF_YEAR, TextStyle.SHORT_STANDALONE)
             .optionalStart()
             .appendLiteral('-').appendValueReduced(ChronoField.YEAR, 2, 4, 2000)
             .optionalEnd().optionalEnd()
