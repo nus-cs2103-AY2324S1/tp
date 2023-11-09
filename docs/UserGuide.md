@@ -74,12 +74,12 @@ Adds a new teaching assistant to TAManager.
 Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR`
 
 - `NAME` should be a string.
-- `PHONE` should be an 8-digit integer.
+- `PHONE` should be an 3-10 digits integer.
 - `EMAIL` should be a valid email address.
 - `TELEGRAM` should be between 5-32 characters and start with "@".
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
-- `HOUR` should be an integer
+- `HOUR` should be an integer.
 
 Example:
 `add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx t/parttime c/CS2103T h/4` will add a new teaching assistant named Rayner Toh to TAManager.
@@ -115,12 +115,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [t/TAG]... [c/C
 
 -  At least one field to edit must be provided.
 - `NAME` should be a string.
-- `PHONE` should be an 8-digit integer.
+- `PHONE` should be a 3-10 digits integer.
 - `EMAIL` should be a valid email address.
 - `TELEGRAM` should be between 5-32 characters and start with "@".
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
-- `HOUR` should be an integer
+- `HOUR` should be an integer.
 
 Example: `edit INDEX tele/@raynertohjingxiang`
 
@@ -417,6 +417,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 | **Exit**       | `exit`                                                                                                                                                                                                     |
 | **Find**       | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                  |
 | **Help**       | `help`                                                                                                                                                                                                     |
-| **Hour**       | `hour 6`                                                                                                                                                                                                   |
+| **Hour**       | `hour INTEGER`<br> e.g., `hour 2`                                                                                                                                                                                                   |
 | **List**       | `list`                                                                                                                                                                                                     |
 | **Teach**      | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
+
