@@ -64,7 +64,6 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private void displayNote(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
-            System.out.println("Button clicked");
             showNote.execute(index);
         }
     }

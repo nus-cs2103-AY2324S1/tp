@@ -30,6 +30,8 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
 public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
+
+    public static final String VALID_NAME_ALICE = "Alice Pauline";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
@@ -93,11 +95,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditStudentDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY)
+        DESC_AMY = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_RISK_LEVEL_HIGH).build();
-        DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
+        DESC_BOB = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_RISK_LEVEL_LOW).build();
     }
 
