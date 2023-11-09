@@ -21,7 +21,7 @@ public class AddNoteCommand extends Command {
         + "identified by the index number used in the last person listing. "
         + "Parameters: INDEX (must be a positive integer) NOTE_CONTENT\n"
         + "Example: " + COMMAND_WORD + " 1 This is a sample note for the person.";
-    public static final String MESSAGE_NOTE_SUCCESS = "Added note to person.";
+    public static final String MESSAGE_NOTE_SUCCESS = "Added note to person: %s";
     private final Index index;
     private final Note note;
 
@@ -44,7 +44,7 @@ public class AddNoteCommand extends Command {
         }
         Person p = lastShownList.get(index.getZeroBased());
         p.addNote(note);
-        return new CommandResult(String.format(MESSAGE_NOTE_SUCCESS, Messages.format(p)));
+        return new CommandResult(String.format(MESSAGE_NOTE_SUCCESS, p.getName()));
     }
 
     @Override
