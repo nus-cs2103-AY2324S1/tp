@@ -106,7 +106,6 @@ public class ApplicantCardTest {
 
         for (int i = 0; i < interviewList.size(); i++) {
             Interview interviewToCheck = interviewList.get(i);
-            System.out.println(interviewToCheck.toString());
             VBox interviewBox = (VBox) interviews.getChildren()
                     .get(BENSON.getInterviewIndexForApplicantCard(interviewToCheck) - 1);
 

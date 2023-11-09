@@ -53,7 +53,6 @@ public class ApplicantListPanel extends UiPart<Region> {
      * Returns a copy of the applicant list.
      * @return copy of applicant list.
      */
-
     public ListView<Applicant> getApplicantListView() {
         ListView<Applicant> applicantListCopy = new ListView<>();
         applicantListCopy.setItems(applicantList);
