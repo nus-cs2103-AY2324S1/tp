@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AVATAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINKEDIN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECONDARY_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Optional;
 
@@ -22,6 +26,7 @@ public class UpdatePhotoCommandParser implements Parser<UpdatePhotoCommand> {
      */
     public UpdatePhotoCommand parse(String args) throws ParseException {
         ArgumentMultimap commandElements = ArgumentTokenizer.tokenize(args, PREFIX_AVATAR);
+        commandElements.verifyNoDuplicatePrefixesFor(PREFIX_AVATAR);
         String index = commandElements.getPreamble();
         Optional<String> photoPath = commandElements.getValue(PREFIX_AVATAR);
 
