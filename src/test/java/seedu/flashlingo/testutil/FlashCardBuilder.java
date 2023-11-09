@@ -32,8 +32,8 @@ public class FlashCardBuilder {
      * Creates a {@code FlashcardBuilder} with the default details.
      */
     public FlashCardBuilder() {
-        this.originalWord = new OriginalWord(ORIGINAL_WORD, "");
-        this.translatedWord = new TranslatedWord(TRANSLATED_WORD, "");
+        this.originalWord = new OriginalWord(ORIGINAL_WORD);
+        this.translatedWord = new TranslatedWord(TRANSLATED_WORD);
         this.whenToReview = WHEN_TO_REVIEW;
         this.level = new ProficiencyLevel(LEVEL);
     }
@@ -58,10 +58,26 @@ public class FlashCardBuilder {
     }
 
     /**
+     * Sets the {@code OriginalWord} of the {@code FlashCard} that we are building.
+     */
+    public FlashCardBuilder withOriginalWord(String word) {
+        this.originalWord = new OriginalWord(word);
+        return this;
+    }
+
+    /**
      * Sets the {@code TranslatedWord} of the {@code FlashCard} that we are building.
      */
     public FlashCardBuilder withTranslatedWord(String translatedWord, String language) {
-        this.translatedWord = new TranslatedWord(translatedWord, "");
+        this.translatedWord = new TranslatedWord(translatedWord, language);
+        return this;
+    }
+
+    /**
+     * Sets the {@code TranslatedWord} of the {@code FlashCard} that we are building.
+     */
+    public FlashCardBuilder withTranslatedWord(String translatedWord) {
+        this.translatedWord = new TranslatedWord(translatedWord);;
         return this;
     }
 

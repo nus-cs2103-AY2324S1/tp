@@ -55,9 +55,4 @@ public interface Logic {
      * Returns the user prefs' theme.
      */
     String getTheme();
-
-    /**
-     * Sets the user prefs' theme.
-     */
-    void setTheme(String theme);
 }
