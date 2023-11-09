@@ -54,7 +54,7 @@ public class AddRemarkCommandParser implements Parser<AddRemarkCommand> {
      * @param argMultimap ArgumentMultimap to be used
      * @throws ParseException If prefixes are empty or repeated
      */
-    public void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+    private void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_REMARK)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRemarkCommand.MESSAGE_USAGE));

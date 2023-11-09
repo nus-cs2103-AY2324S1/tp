@@ -25,10 +25,7 @@ public class DeleteRemarkCommandParser implements Parser<DeleteRemarkCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_REMARK);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_REMARK)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteRemarkCommand.MESSAGE_USAGE));
-        }
+        areValidPrefixes(argMultimap);
 
         Id id;
         Remark remark;

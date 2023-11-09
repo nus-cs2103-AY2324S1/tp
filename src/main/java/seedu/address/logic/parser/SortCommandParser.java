@@ -25,11 +25,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIELD, PREFIX_ORDER);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIELD, PREFIX_ORDER);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_FIELD, PREFIX_ORDER) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        }
+        areValidPrefixes(argMultimap);
 
         String field = argMultimap.getValue(PREFIX_FIELD).orElse("");
         String order = argMultimap.getValue(PREFIX_ORDER).orElse("");
@@ -44,5 +40,18 @@ public class SortCommandParser implements Parser<SortCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Checks validity of prefixes.
+     *
+     * @param argMultimap ArgumentMultimap to be used
+     * @throws ParseException If prefixes are empty or repeated
+     */
+    private void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_FIELD, PREFIX_ORDER) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIELD, PREFIX_ORDER);
     }
 }

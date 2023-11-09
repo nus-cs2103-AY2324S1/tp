@@ -22,11 +22,7 @@ public class ResetCommandParser implements Parser<ResetCommand> {
     public ResetCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIELD);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIELD);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_FIELD) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResetCommand.MESSAGE_USAGE));
-        }
+        areValidPrefixes(argMultimap);
 
         String field = argMultimap.getValue(PREFIX_FIELD).orElse("");
 
@@ -40,5 +36,18 @@ public class ResetCommandParser implements Parser<ResetCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Checks validity of prefixes.
+     *
+     * @param argMultimap ArgumentMultimap to be used
+     * @throws ParseException If prefixes are empty or repeated
+     */
+    private void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_FIELD) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResetCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIELD);
     }
 }

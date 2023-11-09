@@ -38,14 +38,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_POSITION, PREFIX_ID,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SALARY, PREFIX_DEPARTMENT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_POSITION, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_SALARY)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
+        areValidPrefixes(argMultimap);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_POSITION, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_SALARY);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Position position = ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get());
         Id id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
@@ -66,6 +60,22 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Checks validity of prefixes.
+     *
+     * @param argMultimap ArgumentMultimap to be used
+     * @throws ParseException If prefixes are empty or repeated
+     */
+    private void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_POSITION, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_SALARY)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_POSITION, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_SALARY);
     }
 
 }

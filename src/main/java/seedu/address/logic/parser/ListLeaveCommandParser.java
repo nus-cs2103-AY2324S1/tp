@@ -23,12 +23,7 @@ public class ListLeaveCommandParser implements Parser<ListLeaveCommand> {
     public ListLeaveCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ON);
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ON);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_ON) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLeaveCommand.MESSAGE_USAGE));
-        }
+        areValidPrefixes(argMultimap);
 
         String dateToParse = argMultimap.getValue(PREFIX_ON).get();
 
@@ -48,5 +43,18 @@ public class ListLeaveCommandParser implements Parser<ListLeaveCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Checks validity of prefixes.
+     *
+     * @param argMultimap ArgumentMultimap to be used
+     * @throws ParseException If prefixes are empty or repeated
+     */
+    private void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ON) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLeaveCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ON);
     }
 }
