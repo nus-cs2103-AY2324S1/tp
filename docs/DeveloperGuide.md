@@ -426,7 +426,7 @@ when editing the tags of the member/event:
 * **Current Issue:** Member/event name only accepts alphanumeric characters and restricts the user from entering special characters
 into the member/event name, which should be allowed as member/event names can contain special characters.
 * **Example:** The user wants to create a new event named "Raffles Hall's Musical Production" and the user enters
-`createEvent n/Raffles Hall's Musical Production l/Raffles Hall d/2023-09-19` but the message "Names should only contain 
+`createEvent n/Raffles Hall's Musical Production l/Raffles Hall d/2023-09-19` but the message "Names should only contain
 alphanumeric characters and spaces, and it should not be blank" is shown to the user instead of accepting it as a valid event. This is
 due to the presence of the special character `'` in the event name.
 
@@ -438,17 +438,17 @@ characters in the name field and not to be restricted to just alphanumeric chara
 ### Show a more specific error message for negative index in `editMember`, `editEvent`, `viewMember`, `viewEvent`, `deleteMember` and `deleteEvent`
 **Current Implementation:**
 * **Current Issue:** When the user inputs a negative index for the `editMember`, `editEvent`, `viewMember`, `viewEvent`,
-`deleteMember` or `deleteEvent` commands, the displayed error message is not specific enough and does not make it clear 
+`deleteMember` or `deleteEvent` commands, the displayed error message is not specific enough and does not make it clear
 to the user that he/she has wrongly input a negative index.
-* **Example:** The user enters the command `editMember -1 n/Jane Smith` and the error message displayed is 
-"Invalid command format!... Parameters: INDEX (must be a positive integer)...". The current error message fails to 
+* **Example:** The user enters the command `editMember -1 n/Jane Smith` and the error message displayed is
+"Invalid command format!... Parameters: INDEX (must be a positive integer)...". The current error message fails to
 highlight to the user the root cause of the error, which is a negative member index.
 
 **Proposed Solution:**
 
 We propose to make `editMember`, `editEvent`, `viewMember`, `viewEvent`, `deleteMember` and `deleteEvent` commands 
-display a more specific error message along the lines of "The provided index is negative and should be a positive integer 
-instead." when the user inputs a negative index. In order to implement this, the relevant `CommandParser` classes have 
+display a more specific error message along the lines of "The provided index is negative and should be a positive integer
+instead." when the user inputs a negative index. In order to implement this, the relevant `CommandParser` classes have
 to recognise negative indexes and throw more specific exceptions.
 
 ### Provide more specific index error messages to the user
@@ -463,7 +463,7 @@ There is a lack of information shown to the user which specific index is wrong.
 **Proposed solution:**
 
 We propose to make the index error messages more specific and highlight to the user which index is wrong and why
-that index is wrong. For example, in the `enrol m/1 e/-1` input, we will show an error message to the user along 
+that index is wrong. For example, in the `enrol m/1 e/-1` input, we will show an error message to the user along
 the lines of "The provided Event Index is not a non-zero unsigned integer."
 
 --------------------------------------------------------------------------------------------------------------------
