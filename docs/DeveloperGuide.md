@@ -348,9 +348,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
         * `16/05`
         * `16 May`
           * _Must be a prefix of a valid month of at least 3 characters_
-
-  - The sequence diagram shown below shows how the API is called by other classes:
-
+  - The Sequence Diagram below illustrates how other classes interact with `TimeParser` when `parseDate(date, false)` is called.
     ![TimeParserSequenceDiagram.png](images/TimeParserSequenceDiagram.png)
 
 #### How is the command executed
@@ -397,6 +395,9 @@ This feature is implemented though the `TimeParser` class. This class contains s
 #### Implementation
 The list free times for a given day feature allows the user to list all the blocks of time that are not taken by a scheduled interview. This command is in the format `list-freetime DATE` where `DATE` is a valid date string.
 
+The Sequence Diagram below illustrates the interactions within the `LogicManager` component when `execute("list-freetime 12/12/2099")` is called.
+![images/ListFreeTimeSequenceDiagram.png](images/ListFreeTimeSequenceDiagram.png)
+
 The `list-freetime DATE` command is facilitated by the `ListFreeTimeCommand`, `ListFreeTimeCommandParser`, along with the other internal classes omitted for brevity.
 #### How is the command executed
 1. The user inputs the `list-freetime DATE`
@@ -425,7 +426,8 @@ Aspect: How the command finds free times:
     * Cons:
         * The `ListFreeTimeCommand` will have to call the `getAddressBook` method of the `ModelManager` object instance, and then use the getter method of the `AddressBook` object instance. Violates the _Law of Demeter_ principle since the methods of a stranger (i.e. `AddressBook`) is being called, which `ListFreeTimeCommand` is not closely related to
         * Increases coupling since `ListFreeTimeCommand` now has a dependency with `AddressBook`
-// TODO: DRAW SEQUENCE DIAGRAMS HERE
+
+* 
       
 ### List all interviews for today feature
 
@@ -439,6 +441,9 @@ Aspect: How the command finds free times:
 
 #### Implementation
 The list interviews done/not done feature allows the user to see all the interviews that are done or not done in a single command. The command format is `list-i-done` to show all the interviews that are done, and `list-i-not-done` to show all interviews that are not done.
+
+The Sequence Diagram below illustrates the interactions within the `LogicManager` component when `execute("list-i-done")` is called.
+![ListIDone.png](images/ListIDoneSequenceDiagram.png)
 
 #### How is the command executed
 1. The user inputs `list-i-done` or `list-i-not-done` 
