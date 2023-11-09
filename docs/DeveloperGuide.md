@@ -1018,7 +1018,7 @@ and provide easy reference when inputting commands to update the tutors or sched
 {:.no_toc}
 
 To display both the tutor and schedule list together, another panel `ListsPanel` is used to combine both the 
-`personListPanel` and `scheduleListPanel` together in order to display them as a single panel in the `MainWindow`.
+`PersonListPanel` and `ScheduleListPanel` together in order to display them as a single panel in the `MainWindow`.
 
 #### Design rationale
 {:.no_toc}
@@ -1038,7 +1038,7 @@ The list of schedules is sorted to be more organised and easier to navigate for 
 #### Implementation details
 {:.no_toc}
 
-The schedules are sorted by implementing the `Comparable` interface and its required `compareTo()` method.
+The schedules are sorted by implementing the `Comparable` interface and its required `compareTo` method.
 
 #### Design rationale
 {:.no_toc}
@@ -1261,19 +1261,15 @@ otherwise.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
-
-* 1b. The given index is invalid.
-
-  * 1b1. TutorConnect shows an error message.
+  * 1a1. TutorConnect shows an error message.
 
     Use case resumes at step 1.
 
-* 1c. The schedule status parameters is invalid.
+* 1b. The schedule status parameters is invalid.
 
-  * 1c1. TutorConnect shows an error message.
+  * 1b1. TutorConnect shows an error message.
 
     Use case resumes at step 1.
 
@@ -1287,13 +1283,6 @@ otherwise.
 2.  TutorConnect shows a list of schedules filtered by keyword entered
 
     Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
 
 #### **Use case: Delete a schedule**
 {:.no_toc}
