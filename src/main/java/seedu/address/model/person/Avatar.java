@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javafx.scene.image.Image;
@@ -55,8 +57,15 @@ public class Avatar {
     private String copyImage(String path, Path dataDirectory) throws IOException {
         Files.createDirectories(dataDirectory);
         Path imagePath = Path.of(path);
-        Path outputPath = dataDirectory.resolve(imagePath.getFileName());
+        String fileExtension = getFileExtension(imagePath);
+        Path outputPath = dataDirectory.resolve(UUID.randomUUID().toString() + fileExtension);
         return Files.copy(imagePath, outputPath, StandardCopyOption.REPLACE_EXISTING).toString();
+    }
+
+    private String getFileExtension(Path path) {
+        String fileName = path.toString();
+        int dotIndex = fileName.lastIndexOf('.');
+        return dotIndex > 0 ? fileName.substring(dotIndex) : "";
     }
 
     private void verifyImage(String path) throws IOException {
