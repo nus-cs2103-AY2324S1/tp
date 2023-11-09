@@ -183,11 +183,16 @@ Examples:
 ### Update sec level : `uplevel`, `undolevel`
 
 - `uplevel` : update the sec levels for all students and remove all sec level 4 students.
-  - `undolevel` : restore the student records before the last update.
+  - `undolevel` : revert the student record to be before previous sec level update.
   Format: `uplevel`, `undolevel`
 
 * Command is case-sensitive
 * No prefix is required, only the command.
+* Note that `undolevel` feature is provided in case when the user accidentally enter `uplevel` AND the user do not close application immediately.
+* That means after doing `uplevel`, followed by any other `edit`, `add` or `delete` commands etc and then do `undolevel`, the commands in between will be invalid because the students records are revert back to before previous `uplevel`.
+* `undolevel` can be performed only when there is / are `uplevel` performed (and has not been undone) since user open application.
+
+
 Examples: `uplevel`, `undolevel`
 
   ![before entering 'uplevel'](images/ug_images/beforeUpdate.png)
