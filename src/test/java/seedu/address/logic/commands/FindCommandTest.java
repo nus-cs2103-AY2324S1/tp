@@ -86,7 +86,7 @@ public class FindCommandTest {
     }
 
     // Integration tests for reactive commands
-    
+
     @Test
     public void execute_payAfterFiltered_reactive() throws CommandException {
         Model tempModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
