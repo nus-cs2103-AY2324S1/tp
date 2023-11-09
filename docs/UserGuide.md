@@ -11,8 +11,7 @@ pageNav: 3
 2. [How to use the guide](#how-to-use-this-guide)
 3. [Glossary](#glossary)
 4. [Quick start](#quick-start)
-5. [CLI Notes](#cli-notes)
-6. [Feature list](#feature-list)
+5. [Feature list](#feature-list)
    - [Adding a FlashCard](#adding-a-flashcard-add)
    - [Deleting a Flashcard](#deleting-a-flashcard--delete)
    - [View All Flashcards](#view-all-flashcards--list)
@@ -25,13 +24,13 @@ pageNav: 3
    - [Clear all Flashcards](#clear-all-flashcards-clear)
    - [Setting goals](#setting-goals-goal)
    - [Getting help](#getting-help-help)
-7. [Additional Features](#additional-features)
+6. [Additional Features](#additional-features)
    - [Markdown Syntax](#markdown-syntax)
    - [Importing and Exporting Decks](#importing-and-exporting-decks)
-8. [Cautions](#cautions)
-9. [FAQ](#frequently-asked-questions)
-10. [Known Issues](#known-issues)
-11. [Contact Us](#contact-us)
+7. [Cautions](#cautions)
+8. [FAQ](#frequently-asked-questions)
+9. [Known Issues](#known-issues)
+10. [Contact Us](#contact-us)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -101,67 +100,89 @@ Throughout the user guide, you will see these colored blocks of code that contai
 
 ## Glossary
 
-`Deck` - A scrollable list of flashcards on the GUI.
+`GUI (Graphic User Interface):` A GUI is a user-friendly interface that allows you to interact with the software
+through visual elements like windows, icons, buttons, and menus, making it easy to navigate with a mouse and keyboard.
 
-`Flashcard`- A card created by the user containing its index, question, answer (not shown) and due date.
+`CLI (Command Line Interface):` A CLI is a text-based interface where you interact with the software by typing commands 
+nto a terminal or command prompt, providing more direct and precise control over the system.
 
-`Index` - The relative position of a flashcard within the deck.
+`Deck:` A scrollable list of flashcards on the GUI.
+
+`Flashcard:` A card created by the user containing its index, question, answer (not shown) and due date.
+
+`Index:` The relative position of a flashcard within the deck.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
 
+Get ready to embark on your productive study session!
+
 ### Installation
 
 1. Make sure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer.
-2. Download the latest jar file from [here](https://github.com/AY2324S1-CS2103T-W17-4/tp/releases/tag/v1.3(trial)).
-3. Move the jar file installed to a working folder you would store all of your flashcards
-4. Launch lesson by doing the following:
-   1. In the terminal or command prompt, use the `cd` command to navigate to the working folder.
-   [Not sure how to use cd?](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
-   2. Run lesSON using `java -jar lesSON.jar`
-
-1. To understand the terms we use in this guide better, check out [our glossary](#glossary).
-2. Better understand the GUI using [this guide](#user-interface-overview).
-3. For new users, we recommend reading [this tutorial](#tutorial).
-4. For advanced users, view all feature details in the [feature list](#feature-list).
+   - [How do I check my version of Java?]()
+2. Download the latest `lesSON.jar` file from [here](https://github.com/AY2324S1-CS2103T-W17-4/tp/releases/tag/v1.3(trial)).
+3. Move the jar file to a working folder where you would store all of your flashcards.
+4. Launch lesSON.
+   - For Windows users:
+      - Open the folder where `lesSON.jar` was moved to.
+      - Double-click `lesSON.jar` to start the application.
+   - For macOS users,
+     - Open a new Terminal window (<kbd>Command</kbd> + <kbd>Space</kbd> > type Terminal > <kbd>Enter</kbd>).
+     - Navigate to the folder where you have stored the jar file using the `cd` command.
+       - [Not sure how to use cd?](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
+     - Type `java -jar lesSON.jar` and press <kbd>Enter</kbd>.
+5. You should be able to see the GUI pop up here.
+   - If you are unable to see the GUI or are stuck anywhere in the installation process, follow a more detailed set of
+   instructions [here]().
 
 ### User Interface Overview
 
-Here is a quick overview of the user interface to get you oriented with where things are.
+Here is a quick overview of the user interface to get you oriented with where important details are.
 
 ![gui_overview](./images/UserGuide/1.3b_ui_overview.png)
 
-* Command Line Box - lesSON is optimised for typing commands. Type your commands in the command box
-to create and change flashcards!
-* Result Box - after inputting a command, the result will show up here. Any errors produced will also appear here, for
-instance in the event of a wrongfully formatted command.
-* Deck List - shows the list of flashcards
+Here is an overview of each component in the GUI of lesSON.
+
+| Name of component  | Description |
+|--------------------|-------------|
+| Menu               | $250        |
+| Goal               | $80         |
+| Command Line Box   | $420        |
+| Display Result Box | dwd         |
+| Deck               | dwdw        |
+| Card               | dddd        |
+| Footer             | dwadwdwd    |
 
 ### Tutorial
 
-This tutorial explains how to add, edit, tag, and practise your flashcards. Feel free to follow along with lesSON open!
-For advanced users, feel free to look at the [feature list](#feature-list) instead.
+This is a tutorial for first-time lesSON users that explains how to add, edit, tag, and practise your flashcards.
+For advanced users, feel free to explore the other features in the [feature list](#feature-list) instead.
 
-1. Firstly, let's add a card. type: <br>`add q/what does + mean in boolean algebra? a/it means OR.`
-2. Next, let's capitalise our previous input! Assuming the card is at index `1`, input: <br>`edit 1 q/What does + mean in boolean
-algebra? a/It means OR.`
-3. Next, let's tag it under the module CS1231S by inputting: <br>`edit 1 t/CS1231S`
-4. Feel free to add a few more cards by following steps 1 to 3!
-5. Next, to practise the first card, do: <br> `practise`
-6. Try to recall the answer, and when you are ready to reveal the answer, do: <br> `solve`
-7. How hard was the answer to recall? set the difficulty by doing one of these: <br>
-`set d/easy`
-`set d/medium`
+1. Launch lesSON if you have not done so.
+   - Refer to the instructions [here]() if you unsure how to launch lesSON.
+   - Note that users who are launching lesSON for the first time will have an empty deck.
+2. First, let's try to add your first card. Type the following command and hit <kbd>Enter</kbd>: <br>
+`add q/what does + mean in boolean algebra? a/it means OR.`
+3. Congratulations, you have made your first card. Now, let's try to edit the card created from previous input
+and capitalise it! Note that the card just created is at index `1`. Type the following command and hit <kbd>Enter</kbd>:
+<br>`edit 1 q/What does + mean in boolean algebra? a/It means OR.`
+4. Next, let's tag it under the module CS1231S. Type the following command and hit <kbd>Enter</kbd>: <br>`edit 1 t/CS1231S`
+5. Feel free to add a few more cards by following steps 1 to 3!
+6. Next, to practise the first card, do: <br> `practise`
+7. Try to recall the answer, and when you are ready to reveal the answer, type the following command and hit
+<kbd>Enter</kbd>: <br>`solve`
+8. How hard was the answer to recall? Set the difficulty of the card by typing any of the following command and hit
+<kbd>Enter</kbd>: <br>
+`set d/easy`<br>
+`set d/medium`<br>
 `set d/hard`
-8. The card will automatically be reinserted into deck. This is based on how difficult you found the card. Due to our
-spaced repetition system, as you practise, the more difficult cards will surface more at the top.
-9. Note that the `practise`, `solve`, and `set` commands support indexes, but it is recommended to use them without
+9. The card will automatically be reinserted into deck. This is based on how difficult you found the card. With our inbuilt
+spaced repetition system, as you practise, cards you find more difficult will surface more at the top.
+10. Note that the `practise`, `solve`, and `set` commands support indexes, but it is recommended to use them without
 indexes, as in this tutorial, to always operate on the most difficult card.
-
---------------------------------------------------------------------------------------------------------------------
-
-## CLI Notes
+11. Get familiar with these commands and when you are ready, do try the other commands available [here]().
 
 --------------------------------------------------------------------------------------------------------------------
 
