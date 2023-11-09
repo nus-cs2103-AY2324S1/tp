@@ -22,11 +22,14 @@ public class DeleteMemberTaskCommand extends Command {
     public static final String COMMAND_WORD = "deletetask";
     public static final String COMMAND_ALIAS = "delt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a specified task from the specified member "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
+            + ": Deletes a specified task from the specified member "
             + "by the index number used in the displayed member list "
             + "and the task index used in the displayed task list. \n"
             + "Parameters: MEMBER_INDEX (must be a positive integer) "
-            + PREFIX_TASK + " TASK_INDEX";
+            + PREFIX_TASK + " TASK_INDEX"
+            + "\nExample: " + COMMAND_WORD + " 1 "
+            + PREFIX_TASK + " 1 ";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Task %1$s deleted from member %2$s";
     private final Index memberIndex;

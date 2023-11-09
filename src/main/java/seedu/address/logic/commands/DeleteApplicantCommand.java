@@ -19,7 +19,7 @@ public class DeleteApplicantCommand extends Command {
     public static final String COMMAND_WORD = "deleteapplicant";
     public static final String COMMAND_ALIAS = "dela";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
             + ": Deletes the applicant identified by the index number used in the displayed applicant list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";

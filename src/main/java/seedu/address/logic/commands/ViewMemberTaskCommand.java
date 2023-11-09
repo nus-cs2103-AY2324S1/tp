@@ -18,7 +18,8 @@ public class ViewMemberTaskCommand extends Command {
     public static final String COMMAND_WORD = "viewtask";
     public static final String COMMAND_ALIAS = "viewt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views all tasks assigned to the specified member "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
+            + ": Views all tasks assigned to the specified member "
             + "by the index number used in the displayed member list. \n"
             + "Parameters: INDEX (must be a positive integer) ";
 

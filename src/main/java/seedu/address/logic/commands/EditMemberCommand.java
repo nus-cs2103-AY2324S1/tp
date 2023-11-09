@@ -36,15 +36,16 @@ public class EditMemberCommand extends Command {
     public static final String COMMAND_WORD = "editmember";
     public static final String COMMAND_ALIAS = "editm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
+            + ": Edits the details of the member identified "
             + "by the index number used in the displayed member list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + " {memberName} "
-            + PREFIX_PHONE + " {phoneNumber} "
-            + PREFIX_EMAIL + " {email} "
-            + PREFIX_TELEGRAM + " {telegramHandle} "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_NAME + " MEMBER_NAME] "
+            + "[" + PREFIX_PHONE + " PHONE_NUMBER] "
+            + "[" + PREFIX_EMAIL + " EMAIL] "
+            + "[" + PREFIX_TELEGRAM + " TELEGRAM_HANDLE] "
+            + "[" + PREFIX_TAG + " TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + " 91234567 "
             + PREFIX_EMAIL + " johndoe@example.com";
