@@ -13,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddLeaveCommand;
-import seedu.address.model.employee.Leave;
 
 public class AddLeaveCommandParserTest {
 
@@ -47,7 +47,7 @@ public class AddLeaveCommandParserTest {
 
         assertParseFailure(parser, invalidIdInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddLeaveCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, invalidDateInput, Leave.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, invalidDateInput, Messages.MESSAGE_INVALID_DATE);
     }
 
     @Test
@@ -68,12 +68,12 @@ public class AddLeaveCommandParserTest {
         assertParseFailure(parser, idInput + endDateInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
         assertParseFailure(parser, idInput + " " + PREFIX_FROM + endDateInput,
-                String.format(Leave.MESSAGE_CONSTRAINTS));
+                Messages.MESSAGE_INVALID_DATE);
 
         // missing end date
         assertParseFailure(parser, idInput + startDateInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
         assertParseFailure(parser, idInput + startDateInput + " " + PREFIX_TO,
-                String.format(Leave.MESSAGE_CONSTRAINTS));
+                Messages.MESSAGE_INVALID_DATE);
     }
 }

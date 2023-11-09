@@ -17,7 +17,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Id;
-import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
@@ -165,21 +164,6 @@ public class ParserUtil {
         }
         String parsedSalary = String.valueOf(Integer.parseInt(trimmedSalary));
         return new Salary(parsedSalary);
-    }
-
-    /**
-     * Parses a {@code String leaveDate} into a {@code LocalDate}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code leaveDate} is invalid.
-     */
-    public static LocalDate parseLeaveDate(String leaveDate) throws ParseException {
-        requireNonNull(leaveDate);
-        String trimmedDate = leaveDate.trim();
-        if (!Leave.isValidLeaveDate(trimmedDate)) {
-            throw new ParseException(Leave.MESSAGE_CONSTRAINTS);
-        }
-        return LocalDate.parse(trimmedDate, Leave.VALID_DATE_FORMAT);
     }
 
     /**

@@ -237,31 +237,4 @@ public class ParserUtilTest {
         assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
     }
 
-    @Test
-    public void parseLeaveDate_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseLeaveDate((String) null));
-    }
-
-    @Test
-    public void parseLeaveDate_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseLeaveDate(INVALID_DATE));
-    }
-
-    @Test
-    public void parseLeaveDate_invalidFormat_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseLeaveDate(INVALID_DATE_FORMAT));
-    }
-
-    @Test
-    public void parseLeaveDate_validValueWithoutWhitespace_returnsLocalDate() throws Exception {
-        LocalDate expectedDate = LocalDate.parse(VALID_DATE, ISO_LOCAL_DATE);
-        assertEquals(expectedDate, ParserUtil.parseLeaveDate(VALID_DATE));
-    }
-
-    @Test
-    public void parseLeaveDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
-        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
-        LocalDate expectedDate = LocalDate.parse(dateWithWhitespace.trim(), ISO_LOCAL_DATE);
-        assertEquals(expectedDate, ParserUtil.parseLeaveDate(dateWithWhitespace));
-    }
 }

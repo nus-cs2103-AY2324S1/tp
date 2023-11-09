@@ -48,8 +48,8 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_FROM).isPresent() && argMultimap.getValue(PREFIX_TO).isPresent()) {
-            startDate = ParserUtil.parseLeaveDate(argMultimap.getValue(PREFIX_FROM).get());
-            endDate = ParserUtil.parseLeaveDate(argMultimap.getValue(PREFIX_TO).get());
+            startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FROM).get());
+            endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_TO).get());
             if (startDate.isAfter(endDate)) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_INVALID_DATE_ORDER)

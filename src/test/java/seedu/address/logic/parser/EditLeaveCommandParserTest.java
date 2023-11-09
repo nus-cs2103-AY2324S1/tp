@@ -15,9 +15,9 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditLeaveCommand;
 import seedu.address.model.employee.Id;
-import seedu.address.model.employee.Leave;
 
 public class EditLeaveCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
@@ -47,11 +47,11 @@ public class EditLeaveCommandParserTest {
 
         // invalid old date
         userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD + " " + PREFIX_NEW + "2023-10-11";
-        assertParseFailure(parser, userInput, Leave.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, userInput, Messages.MESSAGE_INVALID_DATE);
 
         // invalid new date
         userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD + "2023-10-10 " + PREFIX_NEW + " ";
-        assertParseFailure(parser, userInput, Leave.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, userInput, Messages.MESSAGE_INVALID_DATE);
     }
 
     @Test
