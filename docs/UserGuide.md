@@ -256,6 +256,28 @@ Your contacts get automatically saved to the file system after each successful c
 
 ---
 
+## Command summary
+
+| Action            | Command Format                                                          | Example Usage                                                      |
+|-------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------|
+| Adding a contact  | `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...` | `add n/John Doe p/98765432 e/john.doe@email.com`                   |
+|                   |                                                                         | `add n/John Doe p/98765432 e/john.doe@email.com o/Likes SE. t/NUS t/CS2103 course a/Telegram: JohnDoe` |
+| Editing a contact | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...` | `edit 1 p/87654321 e/jane_doe@nus.edu.sg`                          |
+|                   |                                                                         | `edit 3 o/Member of NUS S/U t/`                                    |
+| Deleting contacts | `delete INDEX...`                                                       | `delete 1`                                                         |
+|                   |                                                                         | `delete 1 3 5`                                                     |
+| Clearing all contacts | `clear`                                                             | `clear`                                                            |
+| Listing all contacts  | `list`                                                              | `list`                                                             |
+| Finding by name      | `find KEYWORD...`                                                     | `find John`                                                        |
+|                     |                                                                         | `find amy Ben CHARLOTTE`                                           |
+| Filtering by tag     | `filter TAG`                                                          | `filter NUS`                                                       |
+|                      |                                                                         | `filter CS2103 course`                                             |
+| Viewing help         | `help`                                                                | `help`                                                             |
+| Exiting the app      | `exit`                                                                | `exit`                                                             |
+
+
+---
+
 ## Known limitations
 
 1. **Long contact details are not in the product's scope.**\
