@@ -223,7 +223,7 @@ and returns their related information.
 Example commands:
 * `find n/Alex Yeoh`
 * `find id/T0123436F`
-* `find appt/12-Dec 0900 0900`
+* `find ap/12-Dec 0900 0900`
 * `find n/Alex Yeoh id/T0123436F`
 
 ![result for 'find id/T0123456F'](images/findidT0123456FResult.jpg)
