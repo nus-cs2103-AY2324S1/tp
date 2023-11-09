@@ -295,7 +295,7 @@ Expected output when the command fails:
 ### Adding a New `find` Command Result to the current Log: `alog`
 
 Appends the new results of the most recent [find command](#locating-patients-by-name-id-or-appointment--find)
-to the current data in the [logger tab](#logger tab), which can be viewed at all times.
+to the current data in the [logger tab](#logger-tab), which can be viewed at all times.
 
 >:bulb: Use `alog` to save patient data you want to continue referring to, on top of the profiles you currently have logged
 
@@ -306,7 +306,7 @@ to the current data in the [logger tab](#logger tab), which can be viewed at all
 * The previously-saved result will remain the same.
 * The entire new result will be saved below the previously-saved result.
 * The result will be saved in the same order and format.
-* Duplicate persons will not be appended to the log. 
+* Duplicate patients will not be appended to the log. 
 
 [Format](#command-format):
 `alog`
