@@ -310,9 +310,9 @@ This feature involves the command: `updatephoto`, which updates the photo of an 
 
 Format: `updatephoto PERSON_INDEX [path/NEW_PHOTO_PATH]`
 
-To obtain the `NEW_PHOTO_PATH` of your photo: 
-* If you are a Windows user, click [here](https://www.timeatlas.com/copy-file-path/#:~:text=Select%20your%20file%2C%20right%2Dclick,Ctrl%20%2B%20Shift%20%2B%20%2B%20C%20).
-* If you are a macOS user, click [here](https://technastic.com/copy-file-path-mac/).
+If you are unsure on how to obtain the `NEW_PHOTO_PATH` of your photo: 
+* For Windows user, click [here](https://www.timeatlas.com/copy-file-path/#:~:text=Select%20your%20file%2C%20right%2Dclick,Ctrl%20%2B%20Shift%20%2B%20%2B%20C%20) and follow the guide.
+* For macOS user, click [here](https://technastic.com/copy-file-path-mac/) and follow the guide.
 
 <box type="info" icon=":fa-solid-magnifying-glass:">
 
