@@ -9,12 +9,12 @@ title: User Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
-Flashlingo is a versatile desktop application centered around learning words through flashcards. It is optimized for use via a Command Line Interface (CLI), 
-while also providing the advantages of a Graphical User Interface (GUI). Tailored with a focus on beginner language 
+Flashlingo is a versatile desktop application centered around learning words through flashcards. It is optimized for use via a Command Line Interface (CLI),
+while also providing the advantages of a Graphical User Interface (GUI). Tailored with a focus on beginner language
 learners, Flashlingo specializes in expanding vocabulary.
 
-The application leverages the scientifically-proven principle of the [**Forgetting Curve**](https://en.wikipedia.org/wiki/Forgetting_curve). 
-By incorporating the forgetting curve concept, Flashlingo schedules review sessions, ensuring words are revisited at 
+The application leverages the scientifically-proven principle of the [**Forgetting Curve**](https://en.wikipedia.org/wiki/Forgetting_curve).
+By incorporating the forgetting curve concept, Flashlingo schedules review sessions, ensuring words are revisited at
 optimal intervals to enhance long-term memory retention. This method assists users in effectively retaining and expanding their vocabulary over time.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -26,9 +26,11 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
   indicates the proficiency of the user with the word. The level of the flashcard will be updated after each review session.
 * **Reviewing flash cards**
    - In each review session, words that require reviewing will be presented to users one by one. For each word, users can indicate whether
-     - they have memorized the word  
+     - they have memorized the word
+     <br>
      This will advance the word into the next `level`, meaning less frequent review for the word in the near future.
-     - they have forgotten the word  
+     - they have forgotten the word
+     <br>
         This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -383,7 +385,7 @@ Then, use the `load` command to import the data.
 * To see the edits made, User can use the `list` or `find` command to locate the specific card in the card list. The changes will also be reflected in the next review session for that flash card.
 
 **Q**: If the displayed level of a flash card is "Word Mastered", what can I do if I want to review the card again?<br>
-**A**: 
+**A**:
 * Currently, there's no way for user to manually change the level of a flash card. Flashlingo is designed to automatically remove words that learners are familiar with from the review session.
 * However, if user must review the card, he/she can first use the `delete` command to delete the card and then use the `add` command to re-add the same card. The new card will be reset to level 1 and added in the review session.
 
