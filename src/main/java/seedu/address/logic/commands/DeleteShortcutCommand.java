@@ -21,7 +21,7 @@ public class DeleteShortcutCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the previously registered shortcut(s).\n"
             + "Parameters: "
-            + PREFIX_SHORTCUT + "SHORTCUT "
+            + PREFIX_SHORTCUT + "SHORTCUT...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SHORTCUT + "del "
             + PREFIX_SHORTCUT + "li ";

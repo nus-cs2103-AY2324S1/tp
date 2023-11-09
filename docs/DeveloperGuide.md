@@ -375,7 +375,7 @@ To find a specialist, a similar parse and execution flow is conducted.
 
 ### Shortcut management feature
 
-User defined shortcuts are managed by `ShortcutSettings`. Internally it contains a `shortcutMap` that stores mappings of 
+User defined shortcuts are managed by `ShortcutSettings`. Internally it contains a `shortcutMap` that stores _mappings_ of 
 user defined _shortcut aliases_ to existing valid _command keywords_. This class provides functionality for registering new shortcuts,
 removing previously defined shortcuts, and querying the map to see check if a shortcut has previously been defined.
 
@@ -426,6 +426,12 @@ ShortcutSettings implements the `Serializable` interface, thus is saved to `json
     * Pros: Will use less memory (No extra data structure created).
     * Cons: Difficult to manage duplicate shortcut mappings.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## **Planned Enhancements**
+
+1. DoConnek Pro currently checks for duplicate persons by name. This means that people with the same names cannot be added even if they have different parameters (like `Phone` or `Email`). 
+We plan on implementing an `NRIC` field for patients and an `MCR` field for specialists as unique identifiers to solve this issue. 
 
 --------------------------------------------------------------------------------------------------------------------
 
