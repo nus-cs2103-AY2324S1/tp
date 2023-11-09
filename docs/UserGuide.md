@@ -194,14 +194,13 @@ Edits an existing person in the FumbleLog.
 Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​ [ug/GROUP]…​`
 
 * **At least one of the optional parameters must be provided.**
-* Existing values will be updated to the input values.
-* When editing groups, the existing groups of the person will be removed i.e adding of groups is not cumulative.
-* You can remove all the person’s groups by typing `g/` without specifying any groups after it.
+* Existing values will be updated to the input values. This includes blanking out existing values. i.e. `edit_person 1 a/` will remove the current `ADDRESS`. 
+* `GROUP` edits are cumulative and will add to the current list of groups. Use the unassign commands, i.e. `ug/GROUP`, if you would like to unassign any group.
 * When you edit a person's name, the person's name will be updated in all [events](#commands-for-events) that the person is assigned to.
 
 Examples:
 *  `edit_person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit_person 2 n/Betsy Crower g/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing groups. Any events that Betsy Crower is assigned to is also updated with this new name.
+*  `edit_person 2 n/Betsy Crower g/CS2103T` Edits the name of the 2nd person to be `Betsy Crower` and add this person to the group CS2103T. Any events that Betsy Crower is assigned to is also updated with this new name.
 *  `edit_person 3 n/Betsy Crower b/2023-09-29` Edits the name of the 3rd person to be `Betsy Crower` and changes the birthday to 29th Sep 2023. Any events that Betsy Crower is assigned to is also updated with this new name.
 
 Acceptable values for each parameter:
@@ -212,8 +211,8 @@ Acceptable values for each parameter:
 * `[a/ADDRESS]`: Address of the person
 * `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
 * `[r/REMARK]`: Remark about the person
-* `[g/GROUP]`: Text for the group of the person
-* `[ug/GROUP]`: Text for the group of the person to be unassigned
+* `[g/GROUP]`: Text for the group to be assigned to the person
+* `[ug/GROUP]`: Text for the group to be unassigned from the person
 
 
 **Expected output when a command succeeds:**
@@ -352,8 +351,7 @@ Format: `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/E
 * **At least one of the optional parameters required.**
 * The input values will replace the existing values, except for `PERSON` AND `GROUP`.
 * `PERSON` and `GROUP` edits are cumulative and will add to the current list of persons and groups.
-  Use the unassign commands, i.e. `u/PERSON`, if you would like to unassign any person or group.
-* If there are any changes to the meeting date and time, the meeting will be automatically sorted by date and time with the earliest meeting at the top of the list.
+  Use the unassign commands, i.e. `u/PERSON` or `ug/GROUP`, if you would like to unassign any person or group.
 * All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023
 * All time are to be in the format `HHmm`. i.e. 1400 for 2pm.
 * The given `DATE`, `START_TIME` and `END_TIME` cannot be a time in the past.
@@ -372,10 +370,10 @@ Acceptable values for each parameter:
 * `[d/DATE]`: A valid date in the format `yyyy-MM-dd`
 * `[s/START_TIME]`: A valid time in the format `HHmm`
 * `[e/END_TIME]`: A valid time in the format `HHmm`
-* `[n/PERSON_NAME]`: Name of the person(s) to be assigned.
-* `[u/PERSON_NAME]`: Name of the person(s) to be unassigned.
-* `[g/GROUP]`: Name of the group(s) to be assigned.
-* `[ug/GROUP]`: Name of the group(s) to be unassigned.
+* `[n/PERSON_NAME]`: Name of the person to be assigned.
+* `[u/PERSON_NAME]`: Name of the person to be unassigned.
+* `[g/GROUP]`: Name of the group to be assigned.
+* `[ug/GROUP]`: Name of the group to be unassigned.
 
 Expected output when the command succeeds: 
 
