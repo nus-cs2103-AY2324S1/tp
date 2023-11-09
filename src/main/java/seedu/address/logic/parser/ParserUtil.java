@@ -160,13 +160,12 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
+        if (tags.size() == 0) {
+            return tagSet;
+        }
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");
         String[] tagNameCategoryPairs = cleanedList.split(",");
-
-        if (tagNameCategoryPairs.length == 1 && tagNameCategoryPairs[0].isBlank()) {
-            return tagSet;
-        }
 
         for (String tagNameCategory : tagNameCategoryPairs) {
             if (tagNameCategory.split("\\s+").length > 1) {
