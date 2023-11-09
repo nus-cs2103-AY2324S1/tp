@@ -1539,7 +1539,7 @@ Finds a schedule while all schedules are being shown
       tutor names containing the searched keyword is shown in the status message.
 
    3. Test case: `find-s`<br>
-      Expected: No schedules are found. Error details show in the status message.
+      Expected: No schedules are found. Error details shown in the status message.
 
 ### Marking a schedule
 
