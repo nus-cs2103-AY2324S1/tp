@@ -112,26 +112,29 @@ indexes, as in this tutorial, to always operate on the most difficult card.
 
 # Feature list
 
-### Adding a Flashcard `add`
+### Adding a Flashcard: `add`
 
 Adds a flashcard to the deck for the user.
 
 **Format:**
-
-`add q/question a/answer [t/TAG] [h/HINT]`
+```
+add q/question a/answer [t/TAG] [h/HINT]
+```
 
 **Examples:**
 
 _A flashcard with only a question and answer field._
-
-`add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude`
-
+```
+add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude
+```
 _A flashcard with a question, answer and tag field._
-
-`add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems`
-
+```
+add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems
+```
 _A flashcard with a question, answer, tag and hint field._
-`add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB`
+```
+add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB
+```
 
 #### To Note:
 1. No empty input or input with only whitespace after `q/`, `a/`, `t/` and `h/`.
@@ -141,10 +144,12 @@ _A flashcard with a question, answer, tag and hint field._
 5. Tagging is not supported in v1.2 and earlier.
 6. Hint is not supported before v1.3.
 
-#### Expected outputs:
+#### Expected Outputs:
 
 1. Given a correct input, a success message will be shown containing the user's input.
-   1. `“New Card added: Question: (question); Answer: (answer)“`
+   1. ```
+      “New Card added: Question: (question); Answer: (answer)“
+      ```
 2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
    1. ```
       Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank
@@ -154,35 +159,44 @@ _A flashcard with a question, answer, tag and hint field._
        add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
       ```
 #### Usage
-1. User Input: `add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS`
+1. User Input: 
+   ```
+   add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS
+   ```
 
 2. Successful Output
 
-![result of add command](./images/UserGuide/1.3b_add.png)
+![result of add command](./images/UserGuide/1.4_add.png)
 
 
 ### Deleting a Flashcard : `delete`
 Deletes a flashcard in the deck
 
 **Format:**
-
-`delete INDEX`
+```
+delete INDEX
+```
 
 **Examples:**
 
 _Deleting the card in th deck with an index of 2._
-
-`delete 2`
+```
+delete 2
+```
 
 #### To Note:
 1. Index must be positive integer.
 2. Index cannot exceed size of the deck.
 
-#### Expected outputs:
+#### Expected Outputs:
 1. Given a correct input, a success message will be shown containing the details of the deleted flashcard.
-   1. `Deleted Card: Question: <provided question>; Answer: <provided answer>`
+   1. ```
+      Deleted Card: Question: <provided question>; Answer: <provided answer>
+      ```
 2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
-   1. `The card index provided is invalid`
+   1. ```
+      The card index provided is invalid
+      ```
    2. ```
       Invalid command format!
       delete: Deletes the deck identified by the index number used in the displayed card list.
@@ -191,49 +205,70 @@ _Deleting the card in th deck with an index of 2._
       ```
 
 #### Usage:
-1. User Input: `delete 1`
+1. User Input: 
+   ```
+   delete 1
+   ```
 
 2. Successful Output
 
-![result of delete command](./images/UserGuide/1.3b_del.png)
+![result of delete command](./images/UserGuide/1.4_del.png)
 
 ### View All Flashcards : `list`
 Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
 
-Format: `list (q/t)/(prefix question starts with/ tag)`
-
-Note : Listing questions for markdown syntax should include their relevant markdown notation
-Examples:
+Format: 
 ```
-1. list
-   (list shows the full list of flashcards)
-
-2. list q/what
-   (list shows all flashcards with questions starting with 'What')
-
-3. list t/CS2100
-   (list shows all flashcards with the CS2100 Tag)
-
-4. list t/CS2100 t/MIPS
-   (list shows all flashcards with both MIPS and CS2100 Tag)
-
-5. list q/what t/CS2100
-   (list shows all flashcards with questions starting with 'What' and has the CS2100 Tag)
+list (q/t)/(prefix question starts with/ tag)
+```
+### Examples:
+_List full deck of flashcards._
+```
+list
+```
+_List all flashcards with question starting with "What"_
+```
+list q/What
+```
+_List all flashcards with the CS2100 Tag_
+```
+list t/CS2100
 ```
 
 #### To note:
-1. No Empty Input after q/ and t/.
-2. q/ and t/ is optional.
+1. No Empty Input after `q/` and `t/`.
+2. `q/` and `t/` is optional.
 3. Inputs are case-sensitive (cards/tags with the same input but different case will be recognised as different cards/tags)
+4. Listing questions with markdown syntax should include their relevant markdown notation.
+5. User can list multiple tags or a combination with a question keyword. In this case only flashcards that match all tags and keywords will be shown.
+6. Any extraneous parameters not `q/` and `t/` will be ignored, i.e. `list 12345` or `list a/000000` will be regarded as `list`.
 
 #### Expected output:
-```
-1. list
-   "All cards listed" message will be returned to the user via the CLI
-```
+
+1. Given a correct input, a success message will be shown.
+
+   1. ```
+      All cards listed
+      ```
+2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
+   1. ```
+      Invalid command format!
+      list: Lists Card from Deck. Parameters:
+      and/or q/WORD(s) questions start with (Cannot be left blank. Markdown syntax should be included.)
+      and/or t/Tag (Cannot be left blank. Multiple tags can be included.)
+      ```
+   2. ```
+      Tags names should be alphanumeric and can include spaces
+      ```   
 
 #### Usage
-![usage of list command](./images/UserGuide/1.3b_list_ans.png)
+1. User Input:
+   ```
+   list
+   ```
+
+2. Successful Output
+![usage of list command](./images/UserGuide/1.4_list.png)
 
 ### Editing a Specific Flashcard : `edit`
 Edits an existing Flashcard in the deck.
