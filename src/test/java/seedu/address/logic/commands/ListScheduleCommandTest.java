@@ -9,8 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_LAST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
-import java.util.Collections;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -68,7 +66,7 @@ public class ListScheduleCommandTest {
 
     @Test
     public void execute_validStatusUnfilteredList_success() {
-        StatusPredicate predicate = new StatusPredicate(Collections.singletonList(Status.MISSED.toString()), null);
+        StatusPredicate predicate = new StatusPredicate(Status.MISSED, null);
         ListScheduleCommand listScheduleCommand = new ListScheduleCommand(null, Status.MISSED);
 
         String expectedMessage = String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, 0);
@@ -113,7 +111,7 @@ public class ListScheduleCommandTest {
         showPersonAtIndex(model, INDEX_LAST_PERSON);
 
         Person tutor = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        StatusPredicate predicate = new StatusPredicate(Collections.singletonList(Status.MISSED.toString()), tutor);
+        StatusPredicate predicate = new StatusPredicate(Status.MISSED, tutor);
         ListScheduleCommand listScheduleCommand = new ListScheduleCommand(INDEX_FIRST_PERSON, Status.MISSED);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

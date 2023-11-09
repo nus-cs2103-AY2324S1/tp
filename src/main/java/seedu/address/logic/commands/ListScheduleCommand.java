@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
-import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -60,8 +59,7 @@ public class ListScheduleCommand extends Command {
         }
 
         if (status != null) {
-            StatusPredicate statusPredicate = new StatusPredicate(
-                Collections.singletonList(status.toString()), tutor);
+            StatusPredicate statusPredicate = new StatusPredicate(status, tutor);
             model.updateFilteredScheduleList(statusPredicate);
         }
 
