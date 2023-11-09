@@ -164,7 +164,7 @@ Here is an example step by step of how the 3 different commands might be execute
 
 Step 1. User inputs
 
-        tag A0245234N t/teamleader
+        tag s/A0245234N t/teamleader
 
 Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object which in turn creates a `TagCommandParser` object to parse the command.
 
@@ -491,6 +491,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `Class Manager` and the **Actor** is the `user`, unless specified otherwise)
 
 ---
+
 **Use case: Delete a student**
 
 **MSS**
@@ -515,6 +516,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 ---
+
 **Use case: Tag a student with a label**
 
 **MSS**
@@ -538,13 +540,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The student already has the given tag.
+* 3b. The given tag is invalid.
 
     * 3b1. Class Manager shows an error message.
 
       Use case resumes at step 2.
 
+* 3c. The given student number does not belong to any student in the list.
+
+    * 3c1. Class Manager shows an error message.
+
+      Use case resumes at step 2.
+
 ---
+
 **Use case: Loading a saved file**
 
 **MSS**
@@ -571,6 +580,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 ---
+
 **Use case: Look up a list of students**
 
 **MSS**
@@ -596,6 +606,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
+
 **Use case: Randomly select a specific number of students**
 
 **MSS**
@@ -621,6 +632,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
+
 **Use case: Modifying a student's class information**
 
 **MSS**
@@ -646,6 +658,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
+
+**Use case: Viewing a student's class information**
+
+**MSS**
+
+1. User request to view a student's class information.
+2. Class manager displays the student's class information.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The student requested does not exist in the Class Manager.
+
+    * 1a1. Class Manager displays an error message.
+      
+      Use case resumes at step 1.
+
+---
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -851,13 +883,27 @@ testers are expected to do more *exploratory* testing.
 1. Tagging an existing student in the current students list.
 
    1. Test case: `tag s/STUDENT_NUMBER t/TAG`<br>
-      Expected: The student with STUDENT_NUMBER is tagged with the new TAG.
-      <br><br>
-2. Adding a new student with tags.
+      Expected: All tags of student with STUDENT_NUMBER will be replaced with TAG.
 
-   1. Test case: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]...`<br>
-      Expected: The student with NAME, STUDENT_NUMBER, EMAIL and TAG is added to the list. Details of the added student shown in the result display box.
+2. Adding a new tags to student.
 
+   1. Test case: `tag s/STUDENT_NUMBER /add t/TAG`<br>
+      Expected: The student with STUDENT_NUMBER will have TAG added to existing tags.
+
+3. Deleting tags from student.
+
+   1. Test case: `tag s/STUDENT_NUMBER /delete t/TAG`<br>
+      Expected: The student with STUDENT_NUMBER will have the `Tag` TAG removed from existing tags. (Even if the student does not have TAG tagged, the command ensures that the student will not have TAG as one of the tags of the student)
+
+4. Deleting all tags from student.
+   
+   1. Test case: `tag s/STUDENT_NUMBER t/`<br>
+      Expected: The student with STUDENT_NUMBER will have all tags removed.
+
+5. Attempt to tag a student not in the currently student list.
+    
+   1. Test case: Tag command with a student number that is not in the list.
+      Expected: Error message is shown in the display result.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
