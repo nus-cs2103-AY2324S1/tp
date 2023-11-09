@@ -5,7 +5,6 @@ import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static seedu.ccacommander.model.ModelManager.findEnrolmentFromList;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -17,11 +16,7 @@ import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.enrolment.exceptions.EnrolmentNotFoundException;
 import seedu.ccacommander.model.event.Event;
-import seedu.ccacommander.model.event.EventInNameCollectionPredicate;
-import seedu.ccacommander.model.event.SameEventPredicate;
 import seedu.ccacommander.model.member.Member;
-import seedu.ccacommander.model.member.MemberInNameCollectionPredicate;
-import seedu.ccacommander.model.member.SameMemberPredicate;
 import seedu.ccacommander.model.shared.Name;
 
 /**
