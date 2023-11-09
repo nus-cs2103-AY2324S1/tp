@@ -362,6 +362,7 @@ Examples:
 Output:
 * If there are no errors, the app should display the following success message that the leave(s) has been added and display the number of leave left for the current year and the following year.
   <br>![result for successful addleave command](images/addLeaveSuccessMsg.png)
+* Note that the `ANNUAL_LEAVE` field displayed on the employee card remains unchanged, as it represents the promised number of annual leave.
 
 Possible Error Output:
 * If the index is not within the numbers in the list, or the format of the command is incorrect, the app should display the following error message.
