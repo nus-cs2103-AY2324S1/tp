@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -14,6 +13,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Mark the tutee as unpaid.
+ * (Make use of the template of Delete Command and did some modification)
  */
 public class UnPaidCommand extends Command {
     public static final String COMMAND_WORD = "unpaid";
@@ -21,7 +21,7 @@ public class UnPaidCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_PERSON_UNPAID_SUCCESS = "MARK PERSON UNPAID SUCCESS, paid: %1$s";
+    public static final String MESSAGE_MARK_PERSON_UNPAID_SUCCESS = "MARK PERSON UNPAID SUCCESS, Paid: %1$s";
 
     private final Index targetIndex;
 
@@ -42,7 +42,6 @@ public class UnPaidCommand extends Command {
 
         model.purgeAddressBook();
         model.markPersonUnPaid(personToMarkUnPaid);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_MARK_PERSON_UNPAID_SUCCESS, (personToMarkUnPaid.getPaid())));

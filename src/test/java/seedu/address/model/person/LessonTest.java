@@ -62,11 +62,13 @@ public class LessonTest {
         double expectedDurationOne = 1.5; // Expected hours between 8:00 AM and 4:00 PM is 8 hours
         assertEquals(expectedDurationOne, lessonOne.calculateLessonDuration());
 
-        // hours that have more than 2dp should be truncated
         Lesson lessonTwo = new Lesson(new Day("Tue"), new Begin("1900"), new End("1920"));
-        double expectedDurationTwo = 0.33;
+        double expectedDurationTwo = 1.0 / 3;
         assertEquals(expectedDurationTwo, lessonTwo.calculateLessonDuration());
 
+        Lesson lessonThree = new Lesson(new Day("Sun"), new Begin("1500"), new End("1501"));
+        double expectedDurationThree = 1.0 / 60;
+        assertEquals(expectedDurationThree, lessonThree.calculateLessonDuration());
     }
 
 }
