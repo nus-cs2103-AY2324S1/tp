@@ -223,7 +223,7 @@ The edit applicant feature allows users to edit the details of an applicant.
 ##### Aspect: Syntax for editing applicants
 
 - Alternative 1 (current choice): At least one field to edit has to be provided.
-    - Pros: More convenient for user to edit an applicant's details and shorter command.
+    - Pros: More convenient for user to edit an applicant's details and shorter command. Ensures that field not meant to be edited will remain unchanged.
     - Cons: Harder to implement due to more validation and checks needed.
 
 - Alternative 2:  All fields of the applicant has to be provided, regardless of whether it is edited.
@@ -458,24 +458,24 @@ An instance of `CommandResult` is then created which contains the message and in
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                               | So that I can…​                              |
-|----------|---------|------------------------------------------------------------|----------------------------------------------|
-| `* * *`  | user    | view all the available commands                            | know how to use the app                      |
-| `* * *`  | user    | add a new applicant                                        | track the the progress of all applicants     |
-| `* * *`  | user    | edit an applicant descriptor                               | maintain an updated database of all applicants |
-| `* * *`  | user    | view the full list of applicants                           | access important applicant information       |
-| `* * *`  | user    | delete an applicant entry                                  | only track valid applicants                  |
-| `* * *`  | user    | add an interview for an applicant                          | plan screenings                              |
-| `* * *`  | user    | store data locally                                         | use it on a daily basis consistently         |
-| `* *`    | user    | find a specific applicant                                  | access the applicant's information quickly   |
-| `* *`    | user    | sort applicants by a descriptor                            | find relevant applicants quickly             |
-| `* *`    | user    | filter applicants by a descriptor                          | find relevant applicants quickly             |
-| `* *`    | user    | purge all existing data                                    | remove sample data and populate real data    |
-| `* *`    | user    | exit the program                                           | close the program                            |
-| `* *`    | user    | import data from CSV file                                  | access all applicants' details               |
-| `* *`    | user    | mark an applicant as undecided, offered or rejected        | keep track of applicants' application status |
-| `*`      | user    | schedule a date for an interview                           | keep track of all interview timings          |
-| `*`     | user    | view a graphical representation of each applicant's rating | get a quick idea of each applicant's ability |
+| Priority | As a …​ | I want to …​                                               | So that I can…​                                             |
+|----------|---------|------------------------------------------------------------|-------------------------------------------------------------|
+| `* * *`  | user    | view all the available commands                            | know how to use the app                                     |
+| `* * *`  | user    | add a new applicant                                        | track the the progress of all applicants                    |
+| `* * *`  | user    | edit an applicant descriptor                               | maintain an updated database of all applicants              |
+| `* * *`  | user    | view the full list of applicants                           | view the overall progress and performance of all applicants |
+| `* * *`  | user    | delete an applicant entry                                  | only track valid applicants                                 |
+| `* * *`  | user    | add an interview for an applicant                          | plan screenings                                             |
+| `* * *`  | user    | store data locally                                         | use it on a daily basis consistently                        |
+| `* *`    | user    | find a specific applicant                                  | access the applicant's information quickly                  |
+| `* *`    | user    | sort applicants by a descriptor                            | find relevant applicants quickly                            |
+| `* *`    | user    | filter applicants by a descriptor                          | look at applicants of a specific category                   |
+| `* *`    | user    | purge all existing data                                    | remove sample data and populate real data                   |
+| `* *`    | user    | exit the program                                           | close the program                                           |
+| `* *`    | user    | import data from CSV file                                  | access all applicants' details                              |
+| `* *`    | user    | mark an applicant as undecided, offered or rejected        | keep track of applicants' application status                |
+| `*`      | user    | schedule a date for an interview                           | keep track of all interview timings                         |
+| `*`      | user    | view a graphical representation of each applicant's rating | get a quick idea of each applicant's ability                |
 
 ### Use cases
 
@@ -973,10 +973,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`<br>
        Expected: Applicant is added to the list. Details of the new applicant shown in the response area.
-       Working area shows the updated list of applicants.
+       Applicant area shows the updated list of applicants.
 
-    1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` again<br>
-       Expected: No applicant is added. Error details shown in the response area. Applicant list in working area remains the same.
+    1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` again (Duplicate applicant)<br>
+       Expected: No applicant is added. Error details shown in the response area. Applicant list in applicant area remains the same.
 
     1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` with any of the fields missing<br>
        Expected: Similar to previous.
@@ -992,10 +992,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `edit 1 n/Tom Greenwood`<br>
        Expected: The name of the first applicant is updated to *Tom Greenwood*. Updated details of the applicant shown in the response area.
-       Working area shows the updated list of applicants.
+       Applicant area shows the updated list of applicants.
 
     1. Test case: `edit n/Pop Greenwood`<br>
-       Expected: No applicant is edited. Error details shown in the response area. Applicant list in working area remains the same.
+       Expected: No applicant is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
 
     1. Other incorrect edit commands to try: `edit`, `edit x n/Jane Doe`, `edit e/email` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -1008,10 +1008,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `delete 1`<br>
        Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the response area.
-       Working area shows the updated list of applicants.
+       Applicant area shows the updated list of applicants.
 
     1. Test case: `delete 0`<br>
-       Expected: No applicant is deleted. Error details shown in the response area. Applicant list in working area remains the same.
+       Expected: No applicant is deleted. Error details shown in the response area. Applicant list in applicant area remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `delete a` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -1024,10 +1024,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `status 1 s/o`<br>
        Expected: The status of the first applicant is updated to *OFFERED*. Updated details of the applicant shown in the response area.
-       Working area shows the updated list of applicants.
+       Applicant area shows the updated list of applicants.
 
     1. Test case: `status 1 s/l`<br>
-       Expected: No applicant's status is edited. Error details shown in the response area. Applicant list in working area remains the same.
+       Expected: No applicant's status is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
 
     1. Other incorrect edit status commands to try: `status`, `status x s/o`, `status 1 s/` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -1040,12 +1040,12 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `addi 1 t/technical r/8.6`<br>
        Expected: A technical interview with rating 8.6 is added to the first applicant in the list. Updated details of the applicant shown in the response area.
-       Working area shows the updated list of applicants.
+       Applicant area shows the updated list of applicants.
 
     1. Test case: `addi 0`<br>
-       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in working area remains the same.
+       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect add interview commands to try: `addi`, `addi x`, `addi r/6.0` (where x is larger than the list size)<br>
+    1. Other incorrect add interview commands to try: `addi`, `addi x`, `addi r/6.0`, `addi 1 t/toolonginterviewtypeeeeeeeeeeeeeeee` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Editing an interview of an applicant
@@ -1056,12 +1056,12 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `editi 1 i/1 t/technical r/8.6`<br>
        Expected: The first interview of the first applicant in the list is updated to a technical interview with rating 8.6. Updated details of the applicant shown in the response area.
-       Working area shows the updated list of applicants.
+       Applicant area shows the updated list of applicants.
 
     1. Test case: `editi 0`<br>
-       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in working area remains the same.
+       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect edit interview commands to try: `editi`, `editi x`, `editi 1 i/x t/technical`, `editi 1 i/1 r/6.0` (where x is larger than the list size)<br>
+    1. Other incorrect edit interview commands to try: `editi`, `editi x`, `editi 1 i/x t/technical`, `editi 1 i/1 r/y` (where x is larger than the list size and y is larger than 10.0)<br>
        Expected: Similar to previous.
 
 ### Deleting an interview from an applicant
@@ -1072,10 +1072,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `deletei 1 i/1`<br>
        Expected: First interview is deleted from the first applicant in the list. Updated details of the applicant shown in the response area.
-       Working area shows the updated list of applicants.
+       Applicant area shows the updated list of applicants.
 
     1. Test case: `deletei 0`<br>
-       Expected: No interview is deleted from any applicant. Error details shown in the response area. Applicant list in working area remains the same.
+       Expected: No interview is deleted from any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
     1. Other incorrect delete interview commands to try: `deletei`, `deletei x`, `deletei 1 i/x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -1088,10 +1088,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `sort d/status`<br>
        Expected: The applicants in the list are sorted by their status, in the order UNDECIDED, OFFERED, REJECTED. Success message shown in the response area.
-       Working area shows the updated list of applicants in the sorted order.
+       Applicant area shows the updated list of applicants in the sorted order.
 
     1. Test case: `sort d/i`<br>
-       Expected: The list of applicants is not sorted. Error details shown in the response area. Applicant list in working area remains the same.
+       Expected: The list of applicants is not sorted. Error details shown in the response area. Applicant list in applicant area remains the same.
 
     1. Other incorrect sort commands to try: `sort`, `sort d/`<br>
        Expected: Similar to previous.
@@ -1104,10 +1104,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `filter gts/5.0`<br>
        Expected: The applicants in the list are filtered by their score, and the updated list contains only applicants with score of at least 5.0. 
-       Success message shown in the response area. Working area shows the filtered list of applicants.
+       Success message shown in the response area. Applicant area shows the filtered list of applicants.
 
     1. Test case: `filter name`<br>
-       Expected: The list of applicants is not filtered. Error details shown in the response area. Applicant list in working area remains the same.
+       Expected: The list of applicants is not filtered. Error details shown in the response area. Applicant list in applicant area remains the same.
 
     1. Other incorrect filter commands to try: `filter`, `filter n/`<br>
        Expected: Similar to previous.
