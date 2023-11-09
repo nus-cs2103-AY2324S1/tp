@@ -40,7 +40,7 @@ public class ResetCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        validateField(field.toLowerCase());
+        isValidField(field.toLowerCase());
 
         List<Employee> employeeList = model.getFilteredEmployeeList();
         model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
@@ -63,7 +63,7 @@ public class ResetCommand extends Command {
      * @param field Field based on user's input
      * @throws CommandException If user's input is not 'overtime' or 'leaves'
      */
-    public void validateField(String field) throws CommandException {
+    public void isValidField(String field) throws CommandException {
         requireAllNonNull(field);
 
         if (field.isEmpty()) {

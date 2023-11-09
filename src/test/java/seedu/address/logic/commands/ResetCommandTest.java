@@ -31,31 +31,31 @@ public class ResetCommandTest {
     private Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
 
     @Test
-    void validateField_nullField_throwsNullPointerException() {
+    void isValidField_nullField_throwsNullPointerException() {
         ResetCommand resetCommand = new ResetCommand("overtime");
-        assertThrows(NullPointerException.class, () -> resetCommand.validateField(null));
+        assertThrows(NullPointerException.class, () -> resetCommand.isValidField(null));
     }
 
     @Test
-    void validateField_invalidField_throwsCommandException() {
+    void isValidField_invalidField_throwsCommandException() {
         ResetCommand resetCommand = new ResetCommand("overtime");
 
         // empty field
-        assertThrows(CommandException.class, () -> resetCommand.validateField(""));
+        assertThrows(CommandException.class, () -> resetCommand.isValidField(""));
 
         // invalid field
-        assertThrows(CommandException.class, () -> resetCommand.validateField("blah"));
+        assertThrows(CommandException.class, () -> resetCommand.isValidField("blah"));
     }
 
     @Test
-    void validateField_validField_doesNotThrow() {
+    void isValidField_validField_doesNotThrow() {
         ResetCommand resetCommand = new ResetCommand("overtime");
         assertAll(() -> {
             // overtime
-            resetCommand.validateField("overtime");
+            resetCommand.isValidField("overtime");
 
             // leaves
-            resetCommand.validateField("leaves");
+            resetCommand.isValidField("leaves");
         });
     }
 
