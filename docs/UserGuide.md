@@ -131,7 +131,7 @@ Edits an existing patient's details in HealthSync.
 
  * Edits the person with the specified name or id.
  * If an invalid name or IC Number is passed, an error message will be logged.
- * At least one of the optional fields must be provided.
+ * At least one field to edit must be provided.
  * Existing fields will be updated to the input values.
  * If the fields do not exist, the corresponding field with details will be added.
 
