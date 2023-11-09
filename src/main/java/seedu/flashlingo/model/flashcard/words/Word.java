@@ -1,8 +1,6 @@
 package seedu.flashlingo.model.flashcard.words;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.flashlingo.commons.util.AppUtil.checkArgument;
-import static seedu.flashlingo.logic.Messages.MESSAGE_CONSTRAINTS;
 
 /**
  * Encapsulates an input word
@@ -25,7 +23,6 @@ public abstract class Word {
      */
     public Word(String word, String language) {
         requireNonNull(language);
-        checkArgument(isValidLanguage(language), MESSAGE_CONSTRAINTS);
         this.word = word.trim();
         this.language = language.trim();
     }

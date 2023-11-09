@@ -199,7 +199,6 @@ public class ModelManager implements Model {
             throw new CommandException("You have no more words to review!");
         }
         updateFilteredFlashCardList(new NextReviewWordPredicate(getFilteredFlashCardList().get(0)));
-        SessionManager.getInstance().setJustStarted(true);
     }
     @Override
     public void endSession() {
