@@ -159,6 +159,60 @@ Failure Output:
   Example: list tasks
 ```
 
+### Filtering the lesson / student list
+You can filter the list of lessons (obtained by typing `list schedule`) or the list of students (obtained by typing `list students`).
+The filter command will show only the relevant entries that match the entered flags and values.
+The filter command has different supported filter properties depending on the current list (refer to the `list` command [here](#listing-upcoming-lessons--tasks--students--list)):
+
+1. In `SCHEDULE` list:
+    - Shows a list of lessons that match the provided filters
+    - Format: `filter [-name NAME] [-subject SUBJECT] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`
+    - Note: Only one of `-before`, `-on`, `-after` can be used at once. For example, you cannot use both `-before` and `-after` in the same filter command.
+      - Allowed: `filter -before 2022/10/10`
+      - Not allowed: `filter -before 2022/10/10 -after 2022/01/01`
+2. In `STUDENTS` list:
+    - Shows a list of students that match the provided filters
+    - Format: `filter [-name NAME] [-subject SUBJECT] [-tag TAG] [-remark REMARK]`
+
+Explanation of fields that can be filtered
+
+| Flag         | Used when showing...    | Filter results                                                                                                                   | Example                                                                                            |
+|--------------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| **-name**    | Students, Schedule      | Lessons or students whose name partially or fully matches the name entered                                                       | `filter -name John`                                                                                |
+| **-subject** | Students, Schedule      | Lessons or students that have the specified subject. Valid values: MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY or ENGLISH.          | `filter -subject Mathematics`                                                                      |
+| **-before**  | Schedule                | Lessons that occur before (not including) the specified date. Valid input formats: `YYYY/MM/DD` or `YY/MM/DD` or `MM/DD` or `DD` | `filter -before 2023/12/01`, `filter -before 23/12/01`, `filter -before 12/01`, `filter -before 1` |
+| **-on**      | Schedule                | Lessons that occur on the specified date. Valid input formats: `YYYY/MM/DD` or `YY/MM/DD` or `MM/DD` or `DD`                     | `filter -on 2023/12/01`, `filter -on 23/12/01`, `filter -on 12/01`, `filter -on 1`                 |
+| **-after**   | Schedule                | Lessons that occur after (not including) the specified date. Valid input formats: `YYYY/MM/DD` or `YY/MM/DD` or `MM/DD` or `DD`  | `filter -after 2023/12/01`, `filter -after 23/12/01`, `filter -after 12/01`, `filter -after 1`     |
+| **-remark**  | Students, Schedule      | Lessons or students whose remarks partially or fully matches the remark entered                                                  | `filter -remark assistance`                                                                        |                                                                                                                                                                                                                                 |
+| **-tag**     | Students                | Students who have at least one tag that fully matches the tag name entered                                                       | `filter -tag primary`                                                                              |
+ 
+Notes
+- When filtering, all text is case-insensitive. That is, `filter -name LEAH` is the same as `filter -name leah`. 
+- You can filter by any number of flags, and in any order.
+- To reset the filter (view all students / lessons), type `list students` or `list schedule`.
+
+Examples:
+- In `SCHEDULE` list:
+  - `filter -name CS2103T -before 2023/12/11`
+- In `STUDENT` list:
+  - `filter -name Alex -tag primary -subject Mathematics`
+
+Success Output:
+- For the command `filter -name Alex -tag primary -subject Mathematics` in the _Student List_ with all detail fields shown
+![Success for filter 1](images/filter/filter_positive_1.png)
+- For the command `filter -name Alex -tag secondary` (No such students matching the filter found)
+![Success for filter 2](images/filter/filter_positive_2.png)
+
+Failure output:
+- When there are invalid values specified in the command `filter -on 2/2/2` (invalid date format)
+![Error for filter](images/filter/filter_negative_1.png)
+```
+Invalid lesson format: 2/2/2 is not a valid date, please use yyyy/mm/dd or mm/dd or dd
+for example, assume today is 2023/11/3, to add 2023/11/29, could use 29, 11/29, 2023/11/29 or 23/11/29. 
+Usage: filter -(any number of unique -[name|subject|before|on|after|remark] [value]). 
+```
+
+
 ### Showing a lesson / task / student's details : `show`
 
 The show command has different behaviours depending on the current list (refer to the `list` command [here](#listing-upcoming-lessons--tasks--students--list)):
