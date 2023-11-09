@@ -1,0 +1,33 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User runs list-s command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Parse user input with ListScheduleCommandParser;
+
+if () then ([input is valid])
+    :Construct ListScheduleCommand object;
+    :Return back to LogicManager;
+    :LogicManager executes ListScheduleCommand;
+        if () then ([user entered TUTOR_INDEX])
+        if () then ([user entered schedule STATUS])
+            :Set predicate to filter by TUTOR_INDEX and schedule STATUS;
+            :Update UI to show filtered list of schedules;
+        else ([else])
+            :Set predicate to filter by TUTOR_INDEX;
+            :Update UI to show filtered list of schedules;
+        endif
+    else ([else])
+        :Returns list of all schedules;
+        :Update UI to show list of all schedules;
+    endif
+else ([else])
+:Throw Exception;
+endif
+stop
+@enduml

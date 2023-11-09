@@ -556,6 +556,105 @@ the lifeline reaches the end of diagram.
   * Cons: In the editing of schedule, a `Person` is needed to create a new `Schedule`. Thus, the tutor allocated to 
     the target schedule needs to be obtained and used to create a new `Schedule`.
 
+### List schedule feature
+
+The "List Schedule" feature allows users to list schedules in the address book. Below, we provide an example
+usage scenario and a detailed description of how the list schedule mechanism behaves at each step.
+
+![ListScheduleActivityDiagram](images/ListScheduleActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched with at least 1 schedule added.
+
+Step 2. The user executes `list-s` to view all added schedules.
+
+Step 3. The user can also choose to execute `list-s 1 m/0` where the index and `m/` status are optional parameters.
+
+Step 4. The `ListScheduleCommandParser` will be initialised to parse the user input, checking for `Index` and `Status`. If they are provided but invalid, it will throw a `ParseException`.
+
+Step 5. The `ListScheduleCommandParser` will then create a `ListScheduleCommand` with a `Index` and `Status` representing the user's input.
+
+Step 6. If `Index` is a valid integer, but it is not within the schedule list of indexes, `ListScheduleCommand::execute` will return `CommandException` 
+
+Step 7. `ListScheduleCommand::execute` then creates `TutorPredicate`, `StatusPredicate` or both predicates, depending on what parameters are present in the user input for `Index` and `Status` respectively.
+
+Step 8. `ListScheduleCommand::execute` then calls `ModelManager::getFilteredScheduleList` with the predicate as the argument.
+This method updates the list of `Schedule` in the model according to the predicate conditions and filters them.
+
+Step 9. Finally, the `ListScheduleCommand` object updates the schedule list to display the filtered schedule.
+
+The following sequence diagram shows how the above steps for list schedule operation works:
+
+![ListScheduleSequenceDiagram](images/ListScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `ListScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design rationale
+
+**Aspect: Filtering schedule by tutor name**
+* **Alternative 1:** Use an additional prefix to filter the list of schedules by tutor name.
+    * Pros: Provides users the flexibility to various filter options in 1 command.
+    * Cons: Too many prefixes and parameters for listing a schedule, which will make it too different from its `list-t` command counterpart in usage.
+* **Alternative 2 (current choice):** Have a separate command for finding schedule by tutor name.
+    * Pros: It is more intuitive to the user since there is already a similar command `find-t`.
+    * Cons: Requires separate commands for searching schedules by keywords in the tutor's name.
+
+
+### Find schedule feature
+
+The "Find Schedule" feature allows users to search for schedules based on the tutor's name.
+The following shows the activity diagram from when a user executes the `find-s` command:
+
+![FindScheduleActivityDiagram](images/FindScheduleActivityDiagram.png)
+
+#### Implementation
+
+Step 1. The user has the application launched.
+
+Step 2. The user executes `find-s John Doe` to search for tutors with the name "John" or "Doe". The command is parsed in the
+`AddressBookParser`.
+
+Step 3. `FindScheduleCommandParser` is created, and constructs a `TutorNameContainsKeywordsPredicate` which matches for any of
+the search keywords. A `FindScheduleCommand` object is then constructed with this predicate.
+
+Step 4. The `LogicManager` calls the `execute()` method in `FindScheduleCommand` which sets the predicate of the filtered schedule
+list in `ModelManager` to be the predicate created earlier.
+
+Step 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
+`Logic`.
+
+Step 6. The filtered list of schedules is displayed to the user.
+
+The following sequence diagram shows how the above steps for find tutor operation works:
+
+![FindScheduleSequenceDiagram](images/FindScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `FindScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+#### Design Rationale
+
+**Aspect: Search criteria**
+- **Alternative 1 (current choice):** Only allowing users to search for schedules based on their names.
+    - Pros: This design provides a straightforward and clear search functionality for users, aligning with the common
+      understanding of searching for specific schedules by the assigned tutor's name.
+    - Pros: It simplifies the search process and reduces cognitive load for users, as they only need to provide the
+      tutor's name.
+    - Cons: If a user has incomplete or incorrect information about the tutor's name, they may not be able to find the
+      desired schedule assigned by that tutor.
+- **Alternative 2:** Specifying search criteria like start date time or end date time.
+    - Pros: Users would have the ability to search for schedules based on a wider range of criteria, such as start date time and end date time.
+    - Cons: Implementing advanced search criteria may lead to a more complex user interface and search mechanism,
+      potentially requiring additional user training or guidance.
+
 ### Mark schedule feature
 
 The "Mark Schedule" feature allows users to mark a specified schedule as missed or completed.
@@ -607,8 +706,6 @@ The lifeline for `MarkScheduleCommandParser` should end at the destroy marker (X
 the lifeline reaches the end of diagram.
 </div>
 
-#### Design rationale
-
 **Aspect: Usage of the `pending` status**
 - **Alternative 1 (current choice):** Users unable to mark a schedule as `pending`.
   - Pros: This design is more intuitive for users, as it aligns with the common understanding of marking and
@@ -623,6 +720,7 @@ the lifeline reaches the end of diagram.
   - Cons: The definition and usage of the "pending" status may vary among users, potentially leading to ambiguity in
     its interpretation.
 
+#### Design rationale
 **Aspect: Format of schedule status**
 - **Alternative 1 (current choice):** Users input integers 0 or 1 to mark a schedule as `missed` or `completed`.
   - Pros: Using integers provides a clear and unambiguous way for users to specify which status they want to
@@ -641,7 +739,6 @@ the lifeline reaches the end of diagram.
     provide appropriate feedback to guide the user.
   - Cons: Typing out schedule status in words are case-sensitive. This means that users need to accurately input the 
     schedule status with the correct capitalization, which can add an extra layer of precision required from the user.
-
 
 ### Unmark schedule feature
 
@@ -1073,15 +1170,61 @@ otherwise.
 
 * 3a. The given index is invalid.
 
-    * 3a1. TutorConnect shows an error message.
+  * 3a1. TutorConnect shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 * 3b. The schedule information parameters is invalid.
 
-    * 3b1. TutorConnect shows an error message.
+  * 3b1. TutorConnect shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
+
+
+#### **Use case: List schedules**
+{:.no_toc}
+
+**MSS**
+
+1.  User requests to list schedules by tutor and/or schedule status
+2.  TutorConnect shows a list of schedules
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 1b. The given index is invalid.
+
+  * 1b1. TutorConnect shows an error message.
+
+    Use case resumes at step 1.
+
+* 1c. The schedule status parameters is invalid.
+
+  * 1c1. TutorConnect shows an error message.
+
+    Use case resumes at step 1.
+
+
+#### **Use case: Find schedules**
+{:.no_toc}
+
+**MSS**
+
+1.  User requests to find schedules by typing in keywords
+2.  TutorConnect shows a list of schedules filtered by keyword entered
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
 
 
 #### **Use case: Delete a schedule**
