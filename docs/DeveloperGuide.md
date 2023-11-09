@@ -854,3 +854,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]...`<br>
       Expected: The student with NAME, STUDENT_NUMBER, EMAIL and TAG is added to the list. Details of the added student shown in the result display box.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. The current keywords are case-sensitive. We plan to make keywords are not case-sensitive in the future iteration.
