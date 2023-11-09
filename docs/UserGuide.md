@@ -187,24 +187,51 @@ Examples:
 * `find look` returns the flash card list and its translation that contains the keyword `look`
 * `find look, hello, goodbye` returns the flash card list that has all flash cards that contain `look`, `hello` and `goodbye`
 
-### Listing all flash cards : `list`
+### Listing all flash cards : list
 
 Shows the list of flash cards with both the original word and the corresponding translation.
-
-Format: `list`
+* Lists all the flash cards saved
+  
+Format: list
+> All the saved flash cards, regardless of the review date, are listed.
 
 Output:
-* `Listed all flash cards`
-  `1. ORIGINAL_WORD - TRANSLATION`
-  `2. ORIGINAL_WORD - TRANSLATION`
-  `3. ORIGINAL_WORD - TRANSLATION`
-  `...`
 
-### Getting list for revision : `review`
+| Before/After the review session | ![img.png](images/ListSuccess.png) |
+|:-----------------------:|:------------------------------------------:|
+| During the review session | ![img.png](images/ListDuringReview.png) |
 
-* `review` : Returns a list of words that the user should revise today.
+<div markdown="block" class="alert alert-info">
 
-Format: `review`
+:information_source: Things to note about the list command:<br>
+* list command cannot be used during a review session
+   * To ensure retention, only the flash cards - with the words to be reviewed - can be seen during the review session.
+   * As soon as the review session ends, all the flash cards can be listed once again
+> The error message:<br>
+> Sorry, currently you are in a review session. Your command is not supported.<br>
+> Please end the review session first.
+</div>
+
+### Getting list for revision : review
+
+Displays the flash cards of all the words to be reviewed that day
+* The review command will present flash cards selected by Flash Lingo based on your level, utilizing the Leitner system.
+* If you wish to view all your saved flash cards without the Leitner system's selection criteria, please use the list command.
+
+Format: review
+
+Output:
+![img.png](images/ReviewSuccess.png)
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Things to note about the review command:<br>
+* Flash cards will not be displayed in the following scenarios:
+   * No flash cards are scheduled for review on the current day.
+   * All flash cards due for review on the current day have already been completed.
+> The error message:<br>
+> 0 flash card(s) listed!<br>
+</div>
 
 ###  Starts review session : `start`
 
@@ -280,12 +307,29 @@ if there's no word left in the review session.
   will be printed out.
 * Pressing `no` button will have the same effect.
 
-### Show learning statistics : `stats`
+### Show learning statistics : stats
 
-Displays learning statistics, i.e, the total number of flash cards and the number of words remembered.
+To help track user progress and inspire continued learning, this command offers detailed statistics:
+* Total Flash Cards: Displays the total count of flash cards you have saved.
+* Remembered Words: Shows the number of terms you have successfully retained in this session.
+* Success Rate: Presents a percentage representing your learning success for this session, motivating you to keep improving.
 
-Format: `stats`
+Format: stats
+Example:
+*stats would give the following output
 
+Output:
+![img.png](images/Stats.png)
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Things to note about the stats command:<br>
+* The stats command is operational exclusively outside active review sessions.
+* The success rate is calculated solely on the basis of the current session.
+* If attempted inside a review session, the system will respond with the following error message:
+> Sorry, currently you are in a review session. Your command is not supported.<br>
+> Please end the review session first.
+</div>
 
 
 ### Filtering list with specified language : `language`
@@ -343,13 +387,14 @@ Opens a browser with the help page (User Guide). Pressing the `Help` button and 
 
 Format: `help`
 
+### Exiting the program : exit
 
-### Exiting the program : `exit`
+Safely terminates the Flashlingo application and closes the graphical user interface (GUI).
 
-Closes the GUI and terminates the Java program
+Format: exit
 
-Format: `exit`
-
+Example:
+* Input exit to end your session and close the application
 
 
 ### Saving the data
