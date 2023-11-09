@@ -226,7 +226,7 @@ Acceptable values for each parameter:
 * `[g/GROUP]`: Text for the group of the person
 * `[ug/GROUP]`: Text for the group of the person to be unassigned
 
-<<<<<<< HEAD
+
 **Expected output when a command succeeds:**
 * Input: `edit_person 1 n/Alexa Yeoh`
 * Output: `Edited Person: Alexa Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; groups: [friends]`
