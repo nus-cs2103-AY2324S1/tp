@@ -20,11 +20,14 @@ public class ApplicantListPanel extends UiPart<Region> {
     @FXML
     private ListView<Applicant> applicantListView;
 
+    private ObservableList<Applicant> applicantList;
+
     /**
      * Creates a {@code ApplicantListPanel} with the given {@code ObservableList}.
      */
     public ApplicantListPanel(ObservableList<Applicant> applicantList) {
         super(FXML);
+        applicantList = applicantList;
         applicantListView.setItems(applicantList);
         applicantListView.setCellFactory(listView -> new ApplicantListViewCell());
     }
@@ -44,6 +47,17 @@ public class ApplicantListPanel extends UiPart<Region> {
                 setGraphic(new ApplicantCard(applicant, getIndex() + 1).getRoot());
             }
         }
+    }
+
+    /**
+     * Returns a copy of the applicant list.
+     * @return copy of applicant list.
+     */
+
+    public ListView<Applicant> getApplicantListView() {
+        ListView<Applicant> applicantListCopy = new ListView<>();
+        applicantListCopy.setItems(applicantList);
+        return applicantListCopy;
     }
 
 }
