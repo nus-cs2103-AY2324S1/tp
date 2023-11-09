@@ -23,7 +23,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_WRONG_FORMAT = "Keyword(s) must be alphanumerical!"
             + "\nExample: LEE2, lee, Johnny Haw";
 
-    public static final String MESSAGE_TOO_LONG = "Please keep the keyword(s) to 55 or less characters!";
+    public static final String MESSAGE_TOO_LONG = "Please keep the keyword(s) to 55 or less characters including spaces!";
 
     private final NameContainsKeywordsPredicate predicate;
 
