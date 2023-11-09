@@ -57,7 +57,7 @@ public class EditLeaveCommandParserTest {
     @Test
     public void parse_emptyValue_failure() {
         // empty employee id
-        String userInput =  " " + PREFIX_ID + " " + PREFIX_OLD + "2023-10-10 " + PREFIX_NEW + "2023-10-11";
+        String userInput = " " + PREFIX_ID + " " + PREFIX_OLD + "2023-10-10 " + PREFIX_NEW + "2023-10-11";
         assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
 
         // empty old date
