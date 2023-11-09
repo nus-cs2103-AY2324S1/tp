@@ -34,10 +34,6 @@ public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLeaveCommand.MESSAGE_USAGE), pe);
         }
 
-        if (argMultimap.getValue(PREFIX_FROM).isEmpty() || argMultimap.getValue(PREFIX_TO).isEmpty()) {
-            throw new ParseException(DeleteLeaveCommand.MISSING_DATE);
-        }
-
         if (argMultimap.getValue(PREFIX_FROM).isPresent() && argMultimap.getValue(PREFIX_TO).isPresent()) {
             LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FROM).get());
             LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_TO).get());

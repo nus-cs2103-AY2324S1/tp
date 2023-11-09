@@ -175,6 +175,9 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
 
+        if (trimmedDate.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_MISSING_DATE);
+        }
         try {
             return LocalDate.parse(trimmedDate, ISO_LOCAL_DATE);
         } catch (DateTimeParseException e) {
@@ -210,9 +213,12 @@ public class ParserUtil {
      * Parses a {@code String remark} into a {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Remark parseRemark(String remark) {
+    public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
+        if (trimmedRemark.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_MISSING_REMARK);
+        }
         return new Remark(trimmedRemark);
     }
 }

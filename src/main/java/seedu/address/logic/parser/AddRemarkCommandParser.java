@@ -37,10 +37,6 @@ public class AddRemarkCommandParser implements Parser<AddRemarkCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRemarkCommand.MESSAGE_USAGE), pe);
         }
 
-        if (argMultimap.getValue(PREFIX_REMARK).isEmpty()) {
-            throw new ParseException(AddRemarkCommand.MISSING_REMARK);
-        }
-
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
             return new AddRemarkCommand(id, remark);

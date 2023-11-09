@@ -37,10 +37,6 @@ public class DeleteRemarkCommandParser implements Parser<DeleteRemarkCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteRemarkCommand.MESSAGE_USAGE), pe);
         }
 
-        if (argMultimap.getValue(PREFIX_REMARK).isEmpty()) {
-            throw new ParseException(DeleteRemarkCommand.MISSING_REMARK);
-        }
-
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
             return new DeleteRemarkCommand(id, remark);

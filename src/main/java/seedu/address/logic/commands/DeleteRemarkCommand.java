@@ -33,7 +33,6 @@ public class DeleteRemarkCommand extends Command {
             + PREFIX_REMARK + "Good worker";
 
     public static final String MESSAGE_SUCCESS = "Remark deleted: %1$s";
-    public static final String MISSING_REMARK = "No remark given!";
     public static final String MESSAGE_NONEXISTENT_REMARK = "This remark does not exist";
     private final Id targetId;
     private final Remark remark;

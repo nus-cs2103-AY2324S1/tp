@@ -68,12 +68,12 @@ public class AddLeaveCommandParserTest {
         assertParseFailure(parser, idInput + endDateInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
         assertParseFailure(parser, idInput + " " + PREFIX_FROM + endDateInput,
-                Messages.MESSAGE_INVALID_DATE);
+                Messages.MESSAGE_MISSING_DATE);
 
         // missing end date
         assertParseFailure(parser, idInput + startDateInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
         assertParseFailure(parser, idInput + startDateInput + " " + PREFIX_TO,
-                Messages.MESSAGE_INVALID_DATE);
+                Messages.MESSAGE_MISSING_DATE);
     }
 }
