@@ -23,7 +23,7 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because it allows users to display the list of TAs teaching under the default course when launching TAManager.
   * Highlights: This enhancement requires implementation of a new `TeachingCoursePredicate` class to filter the list of TAs teaching under the default course.
     The dependency between the classes required me to be careful as changing the implementation of one class may affect the other.
-  * Credits: This feature was implemented by using the `TeachingCoursePredicate` as written by my teammate [@raynertjx].
+  * Credits: This feature was implemented by using the `TeachingCoursePredicate` as written by my teammate Rayner.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=itssisi&breakdown=true)
 
@@ -33,17 +33,17 @@ Given below are my contributions to the project.
   * Managed bug reports for `v1.4` on Github
 
 * **Enhancements to existing features**:
-  * Added the ability to restrict `Phone` field to a valid phone number (Pull requests: [\#125] (https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/125))
-  * Refactored time in `Lesson` class into `TimeInterval` (Pull requests: [\#69] (https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/69))
+  * Added the ability to restrict `Phone` field to a valid phone number (Pull requests: [\#125](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/125))
+  * Refactored time in `Lesson` class into `TimeInterval` (Pull requests: [\#69](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/69))
 
 * **Documentation for Developer Guide**:
-  * Added implementation details of `TeachCommand` feature (Pull requests: [\#46] (https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/46))
+  * Added implementation details of `TeachCommand` feature (Pull requests: [\#46](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/46))
 
 * **Documentation for User Guide**:
-  * Added documentation for `TeachCommand` feature (Pull requests: [\#49] (https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/49)) 
-  * Did cosmetic tweaks to the existing documentation features `CourseCommand` (https://github.com/AY2324S1-CS2103T-T10-1/tp/commit/9b4c003a34332a412fb8e113189dc9a1906455be)
+  * Added documentation for `TeachCommand` feature (Pull requests: [\#49](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/49)) 
+  * Did cosmetic tweaks to the existing documentation features `CourseCommand` [Commit link](https://github.com/AY2324S1-CS2103T-T10-1/tp/commit/9b4c003a34332a412fb8e113189dc9a1906455be)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#27] (https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/27), 
-    [\#49] (https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/49), [\#61] (https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/61), [\#75] (https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/75)
+  * PRs reviewed (with non-trivial review comments): [\#27](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/27), 
+    [\#49](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/49), [\#61](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/61), [\#75](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/75)
   * Reported bugs and suggestions for other teams during PE-D (11 bug reports) 
