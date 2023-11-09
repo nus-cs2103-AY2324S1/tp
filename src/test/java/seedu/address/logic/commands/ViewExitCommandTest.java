@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.ViewExitCommand.*;
+import static seedu.address.logic.commands.ViewExitCommand.MESSAGE_CONFIRM_EXIT;
+import static seedu.address.logic.commands.ViewExitCommand.MESSAGE_CONFIRM_EXIT_WITHOUT_DETAILS;
+import static seedu.address.logic.commands.ViewExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -44,7 +46,7 @@ public class ViewExitCommandTest {
     @Test
     public void execute_viewExit_changesNotEdited() {
         Person p = model.getFilteredPersonList().get(0);
-        CommandResult expectedCommandResult =  new CommandResult(
+        CommandResult expectedCommandResult = new CommandResult(
                 MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 p,
                 null,
@@ -61,7 +63,7 @@ public class ViewExitCommandTest {
     @Test
     public void execute_viewExit_changesEdited() {
         Person fosterer = model.getFilteredPersonList().get(0);
-        CommandResult expectedCommandResult =  new CommandResult(
+        CommandResult expectedCommandResult = new CommandResult(
                 MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 fosterer,
                 null,
@@ -78,7 +80,7 @@ public class ViewExitCommandTest {
     @Test
     public void execute_viewExit_changesEditedNotSaved() {
         Person newFosterer = new PersonBuilder().build();
-        CommandResult expectedCommandResult =  new CommandResult(
+        CommandResult expectedCommandResult = new CommandResult(
                 MESSAGE_CONFIRM_EXIT,
                 newFosterer,
                 null,

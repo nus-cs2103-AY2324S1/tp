@@ -489,7 +489,7 @@ public class PersonProfile extends UiPart<Region> {
      */
     public void resetValues() {
         if (person == null) {
-            return ;
+            return;
         }
 
         fields.keySet().forEach(field -> {
