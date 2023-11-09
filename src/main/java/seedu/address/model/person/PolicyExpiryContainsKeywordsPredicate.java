@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.policy.PolicyDate;
 
 /**
  * Tests that a {@code Person}'s {@code Policy Expiry date} matches any of the keywords given.
@@ -14,8 +13,7 @@ public class PolicyExpiryContainsKeywordsPredicate extends FieldPredicates {
 
     @Override
     public boolean test(Person person) {
-        return !person.getPolicy().getPolicyExpiryDate().toString().equals(PolicyDate.DEFAULT_VALUE)
-                && keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+        return !person.hasDefaultPolicy() && keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
                         person.getPolicy().getPolicyExpiryDate().toString(), keyword));
     }
 
