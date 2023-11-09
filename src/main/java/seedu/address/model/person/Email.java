@@ -17,7 +17,7 @@ public class Email {
             + "characters.\n"
             + "2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
             + "separated by periods.\n"
-            + "3. The maximum size of an email is 255 character.\n"
+            + "3. The maximum size of an email is 255 characters.\n"
             + "The domain name must:\n"
             + "    - end with a domain label at least 2 characters long\n"
             + "    - have each domain label start and end with alphanumeric characters\n"
