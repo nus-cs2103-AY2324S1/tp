@@ -101,8 +101,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Student> getSelectedStudent() {
-        return model.getSelectedStudent();
+    public ObservableList<Student> getObservableSelectedStudent() {
+        return model.getObservableSelectedStudent();
     }
 
     @Override

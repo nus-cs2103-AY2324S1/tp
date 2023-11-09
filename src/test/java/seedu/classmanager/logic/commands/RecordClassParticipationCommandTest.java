@@ -53,7 +53,7 @@ public class RecordClassParticipationCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertEquals(editedStudent, model.getSelectedStudent().get(0));
+        assertEquals(editedStudent, model.getSelectedStudent());
     }
 
     @Test

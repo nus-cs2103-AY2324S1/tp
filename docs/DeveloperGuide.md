@@ -392,17 +392,16 @@ or assignment grade.
   * Cons: Will need to implement different functions for each type of class details. Implementation will be more
   complicated. SLAP principle might not be able to be adhered to.
 
-### Modify Class Details features
+### Present feature
 
-#### About the features
+#### About this feature
 
-Modify Class Details features includes command such as `present`, `absent`, `class-part` and `grade`.
-These features allow users to modify a specific student's class information in a specific tutorial.
+The present feature allows users to mark a specific student to be present in a specific tutorial in the app.
 
 This feature builds upon the current design of Student and ClassDetails.
 
 #### How it is implemented
-We show an example of the execution of the `present` command below.
+
 <puml src="diagrams/MarkPresentSequenceDiagram.puml" alt="MarkPresentSequenceDiagram" />
 
 <box type="info" seamless>
@@ -415,6 +414,11 @@ We show an example of the execution of the `present` command below.
 
 The feature should be implemented upon the current design of Student and ClassDetails. Alternative designs may exist, such as treating the attendance and participation as association classes.
 
+<box type="info" seamless>
+
+**Note:** Other similar features, such as `absent`, `class-part`, and `grade`, are implemented in a similar way.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -854,3 +858,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]...`<br>
       Expected: The student with NAME, STUDENT_NUMBER, EMAIL and TAG is added to the list. Details of the added student shown in the result display box.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, currently `add` is case-sensitive. We will accept keywords such as `Add` in the future iteration.

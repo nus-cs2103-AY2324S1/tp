@@ -75,13 +75,13 @@ public class ConfigCommand extends Command {
             model.setStudent(student, editedStudent);
         }
 
+        // clears the view panel after resetting class details of students
+        model.resetSelectedStudent();
+
         model.commitClassManager();
 
         // Reset the history of the model and prevent any undo commands
         model.configReset();
-
-        // clears the view panel after resetting class details of students
-        model.resetSelectedStudent();
 
         return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
     }
