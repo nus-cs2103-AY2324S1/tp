@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_GROUPS;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -49,7 +50,8 @@ public class EditPersonCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
-            + "[" + PREFIX_GROUP + "GROUP]...\n"
+            + "[" + PREFIX_GROUP + "GROUP]... "
+            + "[" + PREFIX_UNASSIGN_GROUPS + "GROUP]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -87,20 +89,21 @@ public class EditPersonCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (editPersonDescriptor.getName().isPresent()) {
-            model.updateAssignedPersons(personToEdit, editedPerson);
-        }
-
+        // This check must happen first to check duplicate persons
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            System.out.println("duplicate detected 2");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.setPerson(personToEdit, editedPerson);
+
+        // Update assigned persons in the event list
         model.updateAssignedPersons(personToEdit, editedPerson);
 
-
+        /* Remove empty groups from event when un-assigning groups from persons
+            and that person is the last member of the group
+        */
         Set<Group> emptyGroups = model.getEmptyGroups(personToEdit);
-
         if (!emptyGroups.isEmpty()) {
             for (Group group : emptyGroups) {
                 logger.info(String.format("Removing empty group: %s", group));
@@ -109,6 +112,7 @@ public class EditPersonCommand extends Command {
         } else {
             model.updateGroups();
         }
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

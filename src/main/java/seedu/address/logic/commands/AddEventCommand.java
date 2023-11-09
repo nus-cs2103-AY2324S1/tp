@@ -74,8 +74,10 @@ public class AddEventCommand extends Command {
                     listInvalidGroups(invalidGroups)));
         }
 
-        model.addEvent(this.toAdd); //else, all the names and groups exist
-
+        // This line must be at the end
+        assert invalidNames.isEmpty() || invalidGroups.isEmpty() : "Invalid names and groups should be checked first";
+        model.addEvent(this.toAdd);
+        
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatEvent(toAdd)));
     }
 
@@ -95,7 +97,6 @@ public class AddEventCommand extends Command {
             builder.append(group.toString());
             builder.append(", ");
         }
-
         builder.delete(builder.length() - 2, builder.length()); //removes the last comma
         return builder.toString();
     }
