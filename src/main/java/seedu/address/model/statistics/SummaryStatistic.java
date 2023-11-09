@@ -22,7 +22,6 @@ import seedu.address.model.tag.Tag;
 public class SummaryStatistic implements ReadOnlySummaryStatistic {
     private static final Logger logger = LogsCenter.getLogger(SummaryStatistic.class);
     private ObservableList<Person> personData;
-    private List<Person> personList;
 
     /**
      * Initializes a SummaryStatistic with the observable list of given person data.
@@ -31,7 +30,6 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
     public SummaryStatistic(ObservableList<Person> persons) {
         requireAllNonNull(persons);
         personData = persons;
-        personList = personData.stream().collect(Collectors.toList());
     }
 
     /**
@@ -42,13 +40,6 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
         personData = persons;
     }
 
-    /**
-     * Returns the number of people in the address book.
-     * @return number of people in the address book.
-     */
-    public int getNumOfPeople() {
-        return personList.size();
-    }
 
     /**
      * Returns the number of people in the address book associated with that tag.
@@ -66,11 +57,8 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
      * @return sorted stream of score value
      */
     private Stream<Integer> getSortedScoreValueStream(Tag tag) {
-        Stream<Person> filteredStream = personData.stream().filter(person -> person.getTags().contains(tag)
-                && person.getScoreList().hasTag(tag));
+        Stream<Person> filteredStream = filteredPersonsWithScoreTag(tag);
         Stream<ScoreList> scoreListStream = filteredStream.map(person -> person.getScoreList());
-
-
         Stream<Score> scoreStream = scoreListStream.map(scoreList -> scoreList.getScore(tag));
         Stream<Integer> scoreValueStream = scoreStream.map(score -> score.value);
         Stream<Integer> sortedScoreValueStream = scoreValueStream.sorted();
@@ -166,16 +154,12 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
         } else if (filteredList.size() == 1) {
             return 100;
         }
-        Stream<Person> filteredStreamWithScoreValue = personData.stream()
-                .filter(personInList -> personInList.getTags().contains(tag)
-                        && personInList.getScoreList().hasTag(tag))
+        Stream<Person> filteredStreamWithScoreValue = filteredPersonsWithScoreTag(tag)
                 .filter(personInList -> personInList.getScoreForTag(tag).compareTo(person.getScoreForTag(tag)) < 0);
         List<Person> filteredListWithScoreValue = filteredStreamWithScoreValue.collect(Collectors.toList());
         double percentile = 0;
 
-        int sameScoreIndividuals = personData.stream()
-                .filter(personInList -> personInList.getTags().contains(tag)
-                        && personInList.getScoreList().hasTag(tag))
+        int sameScoreIndividuals = filteredPersonsWithScoreTag(tag)
                 .filter(personInList -> personInList.getScoreForTag(tag).compareTo(person.getScoreForTag(tag)) == 0)
                 .collect(Collectors.toList()).size();
         int trueListSize = filteredList.size() - sameScoreIndividuals;
@@ -227,46 +211,38 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
     /**
      * Returns the list of people in the address book associated with that tag and has a value greater than
      * or equal to the metric and value provided by the user.
-     * @param tag
-     * @param metric
-     * @param value
+     * @param tag tag to be associated with
+     * @param metric metric to be associated with
+     * @param value value to be associated with
      * @return
      */
     public List<Person> filteredPersonList(Tag tag, StatisticMetric metric, int value) {
         switch (metric) {
         case SCORE:
-            Stream<Person> filteredStream = personData.stream().filter(person -> person.getTags().contains(tag)
-                    && person.getScoreList().hasTag(tag));
-            Stream<ScoreList> scoreListStream = filteredStream.map(person -> person.getScoreList());
-            Stream<Score> scoreStream = scoreListStream.map(scoreList -> scoreList.getScore(tag));
-            Stream<Integer> scoreValueStream = scoreStream.map(score -> score.value);
+            Stream<Integer> scoreValueStream = getSortedScoreValueStream(tag);
             Stream<Person> filteredPersonStream = scoreValueStream.filter(scoreValue -> scoreValue >= value)
-                    .map(scoreValue -> personData.stream()
+                    .flatMap(scoreValue -> personData.stream()
                     .filter(person -> person.getTags().contains(tag)
                             && person.getScoreList().hasTag(tag))
-                    .filter(person -> person.getScoreForTag(tag).value >= scoreValue))
-                    .flatMap(personStream -> personStream);
+                    .filter(person -> person.getScoreForTag(tag).value >= scoreValue)).distinct();
             List<Person> filteredPersonList = filteredPersonStream.collect(Collectors.toList());
             return filteredPersonList;
         case MEAN:
             Stream<Integer> sortedScoreValueStream = getSortedScoreValueStream(tag);
             int mean = calculateMean(sortedScoreValueStream);
-            Stream<Person> filteredPersonStreamWithMean = personData.stream()
-                    .filter(person -> person.getTags().contains(tag) && person.getScoreList().hasTag(tag))
+            Stream<Person> filteredPersonStreamWithMean = filteredPersonsWithScoreTag(tag)
                     .filter(person -> person.getScoreForTag(tag).value >= mean);
             List<Person> filteredPersonListWithMean = filteredPersonStreamWithMean.collect(Collectors.toList());
             return filteredPersonListWithMean;
         case MEDIAN:
             Stream<Integer> sortedScoreValueStreamWithMedian = getSortedScoreValueStream(tag);
             int median = calculateMedian(sortedScoreValueStreamWithMedian);
-            Stream<Person> filteredPersonStreamWithMedian = personData.stream()
-                    .filter(person -> person.getTags().contains(tag) && person.getScoreList().hasTag(tag))
+            Stream<Person> filteredPersonStreamWithMedian = filteredPersonsWithScoreTag(tag)
                     .filter(person -> person.getScoreForTag(tag).value >= median);
             List<Person> filteredPersonListWithMedian = filteredPersonStreamWithMedian.collect(Collectors.toList());
             return filteredPersonListWithMedian;
         case PERCENTILE:
-            Stream<Person> filteredStreamWithPercentile = personData.stream()
-                    .filter(person -> person.getTags().contains(tag) && person.getScoreList().hasTag(tag))
+            Stream<Person> filteredStreamWithPercentile = filteredPersonsWithScoreTag(tag)
                     .filter(person -> generatePercentileWithTag(person, tag) >= value);
             List<Person> filteredPersonListWithPercentile = filteredStreamWithPercentile.collect(Collectors.toList());
             return filteredPersonListWithPercentile;
@@ -274,6 +250,17 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
             assert false : "Invalid metric";
             return List.of();
         }
+    }
+
+    /**
+     * Returns the stream of people in JABPro associated with that tag and has a value greater than
+     * @param tag tag to be associated with
+     * @return stream of people in JABPro associated with that tag and has a value greater than
+     */
+    public Stream<Person> filteredPersonsWithScoreTag(Tag tag) {
+        Stream<Person> filteredStream = personData.stream().filter(person -> person.getTags().contains(tag)
+                && person.getScoreList().hasTag(tag));
+        return filteredStream;
     }
 
 
