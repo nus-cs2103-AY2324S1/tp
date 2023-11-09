@@ -814,7 +814,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the `CampusConnect.jar` file and copy into an empty folder
 
-   2. Double-click the `CampusConnect.jar` file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the `CampusConnect.jar` file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 2. Saving window preferences
 
@@ -944,13 +944,13 @@ testers are expected to do more *exploratory* testing.
     1. **Prerequisites:** List all `Persons` in CampusConnect using the `list` command.
 
     2. **Test case:** `owe 1 10`<br>
-       **Expected:** The first `Person` in the list owes you $10. Success details shown in the status message.
+       **Expected:** You owe the first `Person` in the list $10. Success details shown in the status message.
 
     3. **Test case:** `owe 1 10.555`<br>
-       **Expected:** The first `Person` in the list will not owe you $10.555. Error details shown in the status message.
+       **Expected:** You will not owe the first `Person` in the list $10.555. Error details shown in the status message.
 
    4.  **Test case:** `owe 1 50000`<br>
-       **Expected:** The first `Person` in the list will not owe you $50000. Error details shown in the status message.
+       **Expected:** You will not owe the first `Person` in the list $50000. Error details shown in the status message.
 
 2. To see if the money the `Person` owes is recorded, use the [find command](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#view-notes-of-contact-viewnotes) to search for the `Person` and verify the money owed.
 
