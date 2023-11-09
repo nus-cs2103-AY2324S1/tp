@@ -72,13 +72,18 @@ public class PersonInformationPanel extends UiPart<Region> {
         List<String> tagCategories = new ArrayList<>();
         UniqueTagList uniqueTagList = new UniqueTagList();
         for (Tag tag : uniqueTagList.asUnmodifiableObservableList()) {
-            if (!tagCategories.contains(tag.tagCategory)) {
+            if (!tagCategories.contains(tag.tagCategory) && !tag.tagCategory.equals("assessment")) {
                 tagCategories.add(tag.tagCategory);
             }
-        }
 
+        }
         for (Tag tag : tagsSet) {
             Label label = new Label(tag.tagName);
+
+            if (tag.tagCategory.equals("assessment")) { //assessment tag
+                label.getStyleClass().add("label7");
+            }
+
             if (tagCategories.indexOf(tag.tagCategory) == 0) {
                 label.getStyleClass().add("label2");
             } else if (tagCategories.indexOf(tag.tagCategory) == 1) {
@@ -89,7 +94,7 @@ public class PersonInformationPanel extends UiPart<Region> {
                 label.getStyleClass().add("label5");
             } else if (tagCategories.indexOf(tag.tagCategory) == 4) {
                 label.getStyleClass().add("label6");
-            } else {
+            } else { // uncategorised
                 label.getStyleClass().add("label1");
             }
             tags.getChildren().add(label);

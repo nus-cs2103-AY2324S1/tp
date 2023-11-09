@@ -77,10 +77,14 @@ public class PersonCard extends UiPart<Region> {
                 tagCategories.add(tag.tagCategory);
             }
         }
-        System.out.println("tagCategories: " + tagCategories);
 
         for (Tag tag : tagsSet) {
             Label label = new Label(tag.tagName);
+
+            if (tag.tagCategory.equals("assessment")) { //assessment tag
+                label.getStyleClass().add("label7");
+            }
+
             if (tagCategories.indexOf(tag.tagCategory) == 0) {
                 label.getStyleClass().add("label2");
             } else if (tagCategories.indexOf(tag.tagCategory) == 1) {
@@ -91,8 +95,6 @@ public class PersonCard extends UiPart<Region> {
                 label.getStyleClass().add("label5");
             } else if (tagCategories.indexOf(tag.tagCategory) == 4) {
                 label.getStyleClass().add("label6");
-            } else if (tag.tagCategory.equals("assessment")) { //assessment tag
-                label.getStyleClass().add("label7");
             } else { // uncategorised
                 label.getStyleClass().add("label1");
             }
