@@ -81,7 +81,7 @@ public class ClassDetailsTest {
         // valid class numbers
         assertTrue(ClassDetails.isValidClassDetails("T11"));
         assertTrue(ClassDetails.isValidClassDetails("T2222"));
-        assertTrue(ClassDetails.isValidClassDetails("T1"));
+        assertTrue(ClassDetails.isValidClassDetails("TG10"));
     }
 
     @Test
