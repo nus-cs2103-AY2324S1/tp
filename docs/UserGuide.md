@@ -54,7 +54,7 @@ This **light blue box** with the **magnifying glass icon** provides you with **c
     <div>
         <br>
         <panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
-This **collapsible grey panel** with the **book icon** contains large tables that describes the **syntax or parameters** of **parameter-heavy commands**, or the **attributes of large models** such as our [Person model](DeveloperGuide.md#model-component).
+This **collapsible grey panel** with the **book icon** contains large tables that describes the **syntax or parameters** of parameter-heavy commands, or the **attributes of large models** such as our [Person model](DeveloperGuide.md#model-component).
 
 | Sample | Table |
 | ------ | ----- |
@@ -287,7 +287,7 @@ Below are some examples on how to use the command:
 
 * `edit 1 tg/@johndoe e2/johndoe@gmail.com`: Edits telegram to "@johndoe" and secondary email to "johndoe@gmail.com" for contact at index 1 of your contact list.   
 * `edit 2 n/Betsy e/betsy@example.com a/Newgate Heavan p/98765411 t/bestfriend`: Edits name to "Besty", email to "besty@example.com", address to "Newgate Heavan", phone to "98765411" and tag to "bestfriend" for contact at index 2 of your contact list.  
-* `edit 3 t/` Removes all existing tags for contact at index 3 of your contact list. <br> **Note: In this case, for the parameter `[t/TAG]`, you can only input once if you will like to remove all existing tags of your contact, e.g. `edit 3 t/ t/` will not work.**
+* `edit 3 t/` Removes all existing tags for contact at index 3 of your contact list. <br> **Note: In this case, for the `[t/TAG]` parameter, you can only input it once if you want to remove all existing tags from your contact, e.g. `edit 3 t/ t/` will not work.**
 
 Refer to [properties of contact](#properties-of-contact) on the accepted formats for the respective parameters.
 
