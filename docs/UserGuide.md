@@ -156,7 +156,7 @@ For each **interview**, we see the following details:
 | **Job Title**        | The title of the job that the applicant is applying for             |
 | **Start Time**       | Start time of the interview                                         |
 | **End Time**         | Projected end time of the interview                                 |
-| **Rating**           | Interview performance rating of the applicant (from 1 - 10, if any) |
+| **Rating**           | Interview performance rating of the applicant (from 0.0 - 5.0, if any) |
 
 [Back to the Table of Contents](#table-of-contents)
 
