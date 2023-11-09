@@ -393,7 +393,11 @@ Given below is an example usage scenario and how the mechanism behaves at each s
 Step 1. The user executes `mark 5 P` command to mark the 5th person in the address book as present.
 
 Step 2. The `mark` command calls `AttendanceStorage#markAbsent()` of the given employee, which calls the `Attendance#markAbsent()`.
-(Sequence diagram to be added).
+
+
+
+Class diagram as below:
+![Attendance](images/AttendanceSequenceDiagram.puml)
 
 #### Design considerations:
 
