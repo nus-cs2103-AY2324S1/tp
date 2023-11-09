@@ -1236,6 +1236,22 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent theme is retained. 
 
+### Adding a tutor
+
+Adding a tutor while all tutors are being shown
+
+   1. Prerequisites: List all tutors using the `list-t` command. Multiple tutors in the list.
+
+   2. Test case: `add-t n/John Doe p/98765432 e/johnd@example.com`<br>
+      Expected: The tutor is added at the end of tutor list. Details of the added tutor shown in the status message.
+
+   3. Test case: `add-t n/Jonny p/12345678`<br>
+      Expected: No tutor is added. Error details shown in the status message.
+
+   4. Other incorrect add tutor commands to try: `add-t`, `add-t n/abc`, `add-t n/abc p/1 e/abc@example.com`,
+      `add-t n/abc p/12345678 e/abc`<br>
+      Expected: Similar to previous.
+
 ### Deleting a tutor
 
 Deleting a tutor while all tutors are being shown
@@ -1252,9 +1268,75 @@ Deleting a tutor while all tutors are being shown
       tutor list size)<br>
       Expected: Similar to previous.
 
+### Editing a tutor
+
+Editing a tutor while all tutors are being shown
+
+   1. Prerequisites: List all tutors using the `list-t` command. Multiple tutors in the list.
+
+   2. Test case: `edit-t 1 n/John Doe p/98765432 e/johnd@example.com`<br>
+      Expected: First tutor's name, phone number and email updated in tutor list. Details of edited tutor shown in 
+      the status message.
+
+   3. Test case: `edit-t 1 n/Jonny p/12345678`<br>
+      Expected: First tutor's name and phone number updated in tutor list. Details of edited tutor shown in the 
+      status message.
+
+   4. Test case: `edit-t 1 n/Johnson`<br>
+      Expected: First tutor's name updated in tutor list. Details of edited tutor shown in the status message.
+
+   5. Test case: `edit-t 1`<br>
+      Expected: First tutor is not updated. Error details shown in the status message.
+
+   6. Other incorrect edit tutor commands to try: `edit-t`, `edit-t abc`, `edit-t 1 n/abc p/1`, `edit-t 0 n/abc`,
+      `edit-t 1 n/abc n/abc`, `edit-t 1 n/abc p/123 e/abc`, `edit-t x n/abc p/123 e/abc@exampl.com` (where x is larger
+      than the tutor list size)<br>
+      Expected: Similar to previous.
+
+### Listing all tutors
+
+Lists all existing tutors
+
+   1. Prerequisites: Multiple tutors in the list.
+
+   2. Test case: `list-t`<br>
+      Expected: All existing tutors are listed. `Listed all tutors` is shown in the status message.
+
+### Finding a tutor
+
+Finds a tutor while all tutors are being shown
+
+   1. Prerequisites: List all tutors using the `list-t` command. Multiple tutors in the list.
+
+   2. Test case: `find-t John`<br>
+      Expected: All tutors with names containing the searched keyword are listed. Number of tutors with names
+      containing the searched keyword is shown in the status message.
+
+   3. Test case: `find-t`<br>
+      Expected: No tutors are found. Error details shown in the status message.
+
+### Adding a schedule
+
+Adds a schedule while all schedules are being shown
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `add-s 1 st/2023-05-05T09:00 et/2023-05-05T11:00`<br>
+      Expected: New schedule for the first tutor in tutor list is added into the schedule list. Details of the added
+      schedule shown in the status message.
+
+   3. Test case: `add-s 1 st/2034-06-06T09:00`<br>
+      Expected: No new schedule added for the first tutor in tutor list. Error details shown in the status message.
+
+   4. Other incorrect add schedule commands to try: `add-s`, `add-s abc`, `add-s 1 st/2023-05-05 et/2023-05-06`,
+      `add-s 0 st/2023-05-05T09:00 et/2023-05-05T11:00`, `add-s 1 st/2023-05-05T09:00 st/2023-05-05T09:00`,
+      `add-s x st/2023-05-05T09:00 et/2023-05-05T11:00` (where x is larger than the tutor list size)<br>
+      Expected: Similar to previous.
+      
 ### Editing a schedule
 
 Edits a schedule while all schedules are being shown
+
    1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
    
    2. Test case: `edit-s 1 st/2023-05-05T09:00 et/2023-05-05T11:00`<br>
@@ -1272,6 +1354,125 @@ Edits a schedule while all schedules are being shown
    6. Other incorrect edit schedule commands to try: `edit-s`, `edit-s abc`, `edit-s 1 st/2023-05-05`,
       `edit-s 0 st/2023-05-05`, `edit-s 1 st/2023-05-05T05:00 st/2023-05-05T05:00`, `edit-s x et/2023-05-05T17:00`
       (where x is larger than the schedule list size)<br>
+      Expected: Similar to previous.
+
+### Listing all schedules
+
+Lists all existing schedules that may be filtered by tutor index or schedule status.
+
+1. Prerequisites: At least 1 existing schedule in the list.
+
+2. Test case: `list-s`<br>
+   Expected: All existing schedules are listed. `Listed all schedules` is shown in the status message.
+
+3. Test case: `list-s 1`<br>
+   Expected: All existing schedules for the first tutor in tutor list are listed. Number of schedules for the first
+   tutor is shown in the status message.
+
+4. Test case: `list-s m/1`<br>
+   Expected: All existing schedules marked with the completed status are listed. Number of completed schedules are
+   listed in the status message.
+
+5. Test case: `list-s 1 m/0`<br>
+   Expected: All existing schedules for the first tutor marked with the completed status  are listed. Number of
+   completed schedules for the first tutor is shown in the status message.
+
+6. Test case: `list-s 0`<br>
+   Expected: No change to the schedule list displayed. Error details shown in the status message.
+
+7. Other incorrect list schedule commands to try: `list-s`, `list-s abc`, `list-s m/0 m/1`, `list-s x` (where x is
+   larger than the tutor list size)<br>
+   Expected: Similar to previous.
+
+### Finding a schedule
+
+Finds a schedule while all schedules are being shown
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedules in the list.
+
+   2. Test case: `find-s John`<br>
+      Expected: All schedules with tutor names containing the searched keyword are listed. Number of schedules with
+      tutor names containing the searched keyword is shown in the status message.
+
+   3. Test case: `find-s`<br>
+      Expected: No schedules are found. Error details show in the status message.
+
+### Marking a schedule
+
+Marks a schedule as missed or completed while all schedules are being shown
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `mark 1 m/1`<br>
+      Expected: First schedule marked with the completed status. Details of the marked status shown in the status
+      message.
+
+   3. Test case: `mark 1`<br>
+      Expected: No schedule is marked. Error details shown in the status message.
+
+   4. Other incorrect mark commands to test: `mark`, `mark 0 m/0`, `mark 1 m/3`, `mark abc`, `mark x m/0` (where x is
+      larger than the schedule list size)<br>
+
+### Unmarking a schedule
+
+Unmarks a schedule while all schedules are being shown
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `unmark 1`<br>
+      Expected: Status of first schedule is removed. Details of the unmarked schedule is shown in the status message.
+
+   3. Test case: `unmark 0`<br>
+      Expected: No schedule status is removed. Error details shown in the status message.
+
+   4. Other incorrect unmark commands to test: `unmark`, `unmark abc`, `unmark m/1`, `unmark x` (where x is larger 
+      than the schedule list size)<br>
+
+### Deleting a schedule
+
+Deletes a schedule while all schedules are being shown
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `delete-s 1`<br>
+      Expected: First schedule is deleted from schedule list. Details of deleted schedule shown in the status message.
+
+   3. Test case: `delete-s 0`<br>
+      Expected: No schedule is deleted. Error details shown in the status message.
+
+   4. Other incorrect delete schedule commands to test: `delete-s`, `delete-s abc`, `delete-s x` (where x is larger 
+      than the schedule list size)<br>
+
+### Viewing calendar
+
+Displays schedule on a specified day as a calendar view
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `show 2023-09-15`<br>
+      Expected: Schedules on 2023-09-15 are displayed in a calendar view. `Viewing calendar` is shown in the status 
+      message.
+
+   3. Test case: `show 2023`<br>
+      Expected: No calendar view is shown. Error details shown in the status message.
+
+   4. Other incorrect show commands to test: ` show`, `show abc`, `show 123`<br>
+      Expected: Similar to previous.
+
+### Changing theme
+
+Changes the theme of TutorConnect
+
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+
+   2. Test case: `theme light`<br>
+      Expected: The theme of TutorConnect is changed to light colour scheme. Details of the changed theme is shown
+      in the status message.
+
+   3. Test case: `theme white`<br>
+      Expected: No theme change in TutorConnect. Error details shown in status message.
+
+   4. Other incorrect theme commands to test: `theme`, `theme abc`, `theme Light`
       Expected: Similar to previous.
 
 ### Saving data
