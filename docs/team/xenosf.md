@@ -26,7 +26,7 @@ Given below are my contributions to the project:
 * **New Feature**: Mouse interaction
     * Implemented clickable elements in the GUI to allow for the following functionality:
         * Execution of `open` and `email` commands to open the clicked link/email
-        * Execution of `filter` based on the clicked course, specialization, or graduation semester
+        * Execution of `filter` based on the clicked tag, course, specialization, or graduation semester
     * The mouse interaction feature is not intended to replace the CLI-based interaction, but to complement it.
         * Mouse interaction can be faster in some cases as the user can click on the desired element right way without the extra step of typing the command (useful where actions are performed in quick succession, such as when opening multiple links of a given contact).
 * **Enhancement to existing features**: Improved contact fields display
@@ -43,7 +43,7 @@ Given below are my contributions to the project:
         * Added index numbering to each list item to allow users to easily run commands involving specific list items
     * Improved priority display for more clarity and faster visual identification:
         * Changed priority display to use symbols (1-3 stars) instead of text
-        * Color-coded priority display based on priority balue
+        * Color-coded priority display based on priority value
         * Moved priority display next to contact name
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=xenosf&breakdown=true)
 * **Project management**:
