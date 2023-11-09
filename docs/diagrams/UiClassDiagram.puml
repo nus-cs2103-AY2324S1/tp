@@ -11,8 +11,14 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class MemberListPanel
+Class ApplicantListPanel
+Class TagListPanel
+Class TaskListPanel
+Class MemberCard
+Class ApplicantCard
+Class TagCard
+Class TaskCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -30,31 +36,46 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
+MainWindow -down->  "1" CommandBox
+MainWindow -down-> "1" ResultDisplay
+MainWindow -down-> "1" MemberListPanel
+MainWindow -down-> "1" ApplicantListPanel
+MainWindow -down-> "1" TagListPanel
+MainWindow -down-> "1" TaskListPanel
+MainWindow -down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+MemberListPanel -down-> "*" MemberCard
+ApplicantListPanel -down-> "*" ApplicantCard
+TagListPanel -down-> "*" TagCard
+TaskListPanel -down-> "*" TaskCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+MemberListPanel --|> UiPart
+ApplicantListPanel --|> UiPart
+TagListPanel --|> UiPart
+TaskListPanel --|> UiPart
+MemberCard --|> UiPart
+ApplicantCard --|> UiPart
+TagCard --|> UiPart
+TaskCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+MemberCard ..> Model
+ApplicantCard ..> Model
+TagCard ..> Model
+TaskCard ..> Model
 
-PersonListPanel -[hidden]left- HelpWindow
+UiManager -right--> Logic
+MainWindow -left-> Logic
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+UI -[hidden]-----> Model
 
 MainWindow -[hidden]-|> UiPart
 @enduml

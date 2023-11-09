@@ -34,7 +34,10 @@ Below is a summary of my contributions to the project.
         * Adjusted the size of images so that they are not too big and flowed better with the document
         * Added callout boxes to highlight important information
 * Contributions to the DG:
-    * to be added soon
+  * Updated the DG and its diagrams and explanations to reflect the changes made to `Person`, `Member`, `Applicant`,
+    `DeleteMemberCommand` classes and more
+  * Wrote sections and added UML diagrams created with PlantUML explaining the view and copy commands and their
+    processes
 * Contributions to team-based tasks:
     * Created the team repo and added the team members to it
     * Set up the project website for the team
