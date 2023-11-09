@@ -10,25 +10,28 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
-  * to be added soon
+* **New Feature**: Added the ability to add remarks to person
+  * What it does: Allows the user to add comments / remarks to a client to remember special notes related to them
+  * Justification: This feature is useful to car insurance agents who have a large client base as they can better personalise their client engagement based on certain characteristics clients have (e.g. "prefers policies with longer coverage")
+
+* **Enhancements to existing features**:
+  * Extended the current `Model` to include more information to model the car insurance context
+    * New attributes in `Person` class: NRIC, licence plate, remark, policy
+    * New `Policy` class: company, policy number, policy date (encapsulates issue and expiry date)
+  * Handled exceptions for `find` command that came from functionality changes to search by other fields
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=cyaoxuan&breakdown=true)
 
-* **Project management**:
-  * to be added soon
-  
-* **Enhancements to existing features**:
-  * to be added soon
-
 * **Documentation**:
   * User Guide:
-    * to be added soon
+    * Added documentation for `remark` feature
   * Developer Guide:
-    * to be added soon
+    * Added implementation for `remark` feature
+    * Extended documentation for the Model component on the new attributes added and design considerations
+
+* **Project management**:
+  * Assigned issues to the team and manage milestones in `v1.1` 
 
 * **Community**:
-  * to be added soon
-
-* **Tools**:
-  * to be added soon
+  * PRs reviewed (selected ones only): [\#74](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/74), [\#77](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/77)
+  * Had the role of a "Git expert" in the team, and guided the team on how to use the Git CLI and forking workflow 
