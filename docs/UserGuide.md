@@ -346,6 +346,15 @@ This feature allows users to add leave(s) to an employee.
 * Adds leave to the employee specified by the `INDEX`. 
 * You have the flexibility to add leave for a single day or multiple consecutive days. 
 * You can add leave for the current year and the upcoming year, but you won't be able to add leave for past dates.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Please note that the sum of:
+    (1)number of days of leave you are tyring to add, and
+    (2)number of days the employee has been on leave
+should not exceed the total number of days of leave allowed for an employee (displayed on the employee's person card).
+To check (2), you may use the <a href="#view-an-employees-attendance-report-attendance"><code>attendance</code></a> command to see the number of days of leave the employee has been on.
+</div>
+
 * The `INDEX` refers to the index number shown in the displayed employee list.
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list (Total number of employees in the current list displayed)**.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
