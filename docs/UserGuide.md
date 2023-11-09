@@ -136,8 +136,6 @@ Format: `help`
 ### Properties of person
 Before you proceed to use commands to manage persons, you should know the properties of a person in FumbleLog.
 
-<panel header=":fa-solid-book: **Contact Parameter Table**" type="secondary" expanded no-close>
-
 | Parameter     | Format                                                                                                                                                                                                                       | Example                          |
 |---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
 | `NAME`        | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                                                                                                                                                                | `John Doe`                       |
@@ -148,7 +146,6 @@ Before you proceed to use commands to manage persons, you should know the proper
 | `REMARK`      | Use any characters.                                                                                                                                                                                                          | `Owes me $2.`                    |
 | `GROUP`       | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                                                                                                                                                           | `CS2103T`                        |
 
-</panel>
 
 ### Adding a person: `add_person`
 
@@ -296,8 +293,6 @@ Format: `list_persons`
 ### Properties of events
 Before you proceed to use commands to manage events, you should know the properties of an event in FumbleLog.
 
-<panel header=":fa-solid-book: **Event Parameter Table**" type="secondary" expanded no-close>
-
 | Parameter                   | Format                                                                                    | Example           |
 |-----------------------------|-------------------------------------------------------------------------------------------|-------------------|
 | `EVENT_NAME`                | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                             | `CS2103T meeting` |
@@ -305,8 +300,6 @@ Before you proceed to use commands to manage events, you should know the propert
 | `START_TIME` and `END_TIME` | Have format `HHmm`. `START_TIME` should be earlier than `END_TIME`.                       | `1400`            |
 | `NAME`                      | Multiple persons can be assigned to an event but only existing persons name can be added. | `John Doe`        |
 | `GROUP`                     | Multiple groups can be assigned to an event but only existing groups can be added.        | `CS2103T`         |
-
-</panel>
 
 ### Adding an event : `add_event`
 
