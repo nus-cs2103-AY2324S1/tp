@@ -1,5 +1,5 @@
 [![Java CI](https://github.com/AY2324S1-CS2103T-T14-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103T-T14-3/tp/actions/workflows/gradle.yml)
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/HealthSyncGUI_v1.4.png)
 
 # HealthSync
 
