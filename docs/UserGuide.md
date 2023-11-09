@@ -208,6 +208,19 @@ Shows contacts with a tag that fully matches the specified tag (case-insensitive
 **Format:**
 `filter TAG`
 
+- The search is case-insensitive.\
+  e.g. `filter friend` will match the tag `Friend`.
+
+- Only full tags will be matched.\
+  e.g. `filter Fri` will _not_ match the tag `Friend`.\
+  e.g. `filter Friend` will _not_ match the tag `Close Friend`.
+
+- The keyword can contain spaces.\
+  e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).  
+  e.g. <pre>`filter Close           Friend`</pre> will _not_ match the tag `Close Friend`.
+
+- In summary, `filter` looks for tags which are an exact match, ignoring casing only.
+
 **Examples:**
 
 - `filter NUS`
