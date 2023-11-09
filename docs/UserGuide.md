@@ -281,7 +281,7 @@ Examples:
 
 **Expected Output when the command succeeds**: MARK PERSON UNPAID SUCCESS, Paid: false
 
-**Expected Output when the command fails**: Invalid command format! paidExample: unpaid 1
+**Expected Output when the command fails**: Invalid command format! unpaidExample: unpaid 1
 
 Examples:
 * `list` followed by `unpaid 2` marks the 2nd person as not paid in the list.
@@ -295,7 +295,7 @@ Format: `list unpaid`
 
 ### Mark all persons as unpaid: `unpaidAll`
 
-**Description** : Mark all tutees in your list as not paid.
+**Description** : Mark all tutees in the current displayed list as not paid.
 
 Format: `unpaidAll`
 
