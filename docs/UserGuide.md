@@ -75,7 +75,7 @@ Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... 
 
 - `NAME` should be a string.
 - `PHONE` should be an 3-10 digits integer.
-- `EMAIL` should contain "@".
+- `EMAIL` should be a valid email address.
 - `TELEGRAM` should be between 5-32 characters and start with "@".
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
@@ -116,7 +116,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [t/TAG]... [c/C
 -  At least one field to edit must be provided.
 - `NAME` should be a string.
 - `PHONE` should be a 3-10 digits integer.
-- `EMAIL` should contain "@".
+- `EMAIL` should be a valid email address.
 - `TELEGRAM` should be between 5-32 characters and start with "@".
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
@@ -406,7 +406,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g., `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`
+**Add** | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g., `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`
 **Clear** | `clear`
 **Course** | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
