@@ -36,13 +36,13 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" MemberListPanel
-MainWindow *-down-> "1" ApplicantListPanel
-MainWindow *-down-> "1" TagListPanel
-MainWindow *-down-> "1" TaskListPanel
-MainWindow *-down-> "1" StatusBarFooter
+MainWindow -down->  "1" CommandBox
+MainWindow -down-> "1" ResultDisplay
+MainWindow -down-> "1" MemberListPanel
+MainWindow -down-> "1" ApplicantListPanel
+MainWindow -down-> "1" TagListPanel
+MainWindow -down-> "1" TaskListPanel
+MainWindow -down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 MemberListPanel -down-> "*" MemberCard
@@ -65,11 +65,17 @@ TaskCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-UiManager -right-> Logic
+MemberCard ..> Model
+ApplicantCard ..> Model
+TagCard ..> Model
+TaskCard ..> Model
+
+UiManager -right--> Logic
 MainWindow -left-> Logic
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+UI -[hidden]-----> Model
 
 MainWindow -[hidden]-|> UiPart
 @enduml

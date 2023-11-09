@@ -24,5 +24,6 @@ Member -down-> "1" Telegram
 Member -down-> "*" Tag
 Member -down-> "*" Task
 Applicant -down-> "1" Phone
+Applicant -down-> "1" InterviewTime
 
 @enduml
