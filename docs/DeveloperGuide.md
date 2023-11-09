@@ -1144,13 +1144,17 @@ Given below are the planned enhancements. The _current behaviour_ specifies how 
 
 * Better malformed JSON handling.
   * Current behaviour: Any invalid field (e.g. phone number containing a non-numerical character) of any contact will cause the data to not be loaded at all. NetworkBook would start with an empty contact list without warning.
-  * Enhanced behaviour: Load all contacts that do not have invalid fields and do not load any contact that has at least one invalid field. Warn the user that there are invalid fields in the storage, upon the launch of application.
+  * Enhanced behaviour: Load all contacts that do not have invalid fields and do not load any contact that has at least one invalid field. Warn the user that there are invalid fields in the storage, upon the launch of application. In the case that the JSON is incorrectly formatted such that it cannot be recognised as JSON, warn the user that the application fails to read from the JSON file due to formatting problem, and start with an empty contact list.
 
 ### UI
 
 * Better help window pop-up behaviour.
   * Current behaviour: When the help window is already opened and minimised, and the `help` command is called, the help window does not open again.
   * Enhanced behaviour: The help window should still pop up when the `help` command is called. (Note: this might already be the behaviour on Mac OS)
+
+* Display course details in greater details.
+  * Current behaviour: Each course tile only displays the title of the course, omitting the information on course start and end dates.
+  * Enhanced behaviour: Each course tile can display 3 pieces of information: name, start date and end date. This can be done by expanding each course tile vertically to have 3 lines, with first line displaying name, second line displaying start date, third line displaying end date.
 
 --------------------------------------------------------------------------------------------------------------------
 
