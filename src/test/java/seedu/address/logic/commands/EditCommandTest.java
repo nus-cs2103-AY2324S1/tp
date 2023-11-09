@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_NO_CHANGE;
 import static seedu.address.logic.commands.EditCommand.createEditedPerson;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -28,8 +29,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
-
-
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for the EditCommand.
@@ -163,9 +162,20 @@ public class EditCommandTest {
         Person person = model.getFilteredPersonList().get(0);
 
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
-        EditCommand editCommand = new EditCommand(person.getName(), null, descriptor);
+        EditCommand editCommand = new EditCommand(person.getName(), person.getNric(), descriptor);
 
         assertThrows(CommandException.class, () -> editCommand.execute(model), MESSAGE_NO_CHANGE);
+    }
+
+    @Test
+    public void execute_emptyMedicalHistory_throwsCommandException() {
+        Person person = model.getFilteredPersonList().get(0);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withMedicalHistories().build();
+        EditCommand editCommand = new EditCommand(person.getName(), person.getNric(), descriptor);
+
+        assertThrows(CommandException.class, () -> editCommand.execute(model), MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT);
+
     }
 
     @Test
