@@ -83,6 +83,39 @@ public class FilterCommandTest {
         assertEquals(expected, findCommand.toString());
     }
 
+    @Test
+    public void execute_partialKeyword_noContactFound() {
+        // Test the requirement for full matches by using a substring of a known tag
+        String expectedMessage = Messages.contactsListedOverview(0);
+        ContainsTagPredicate predicate = preparePredicate("frien"); // 'frien' is a substring of 'Friends'
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.setContactsFilter(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredContactList());
+    }
+
+    @Test
+    public void execute_mixedCaseKeyword_multipleContactsFound() {
+        // Test case insensitivity by mixing case in the keyword
+        String expectedMessage = Messages.contactsListedOverview(3);
+        ContainsTagPredicate predicate = preparePredicate("fRIeNdS"); // 'Friends' with mixed case
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.setContactsFilter(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(TestData.Valid.Contact.ALICE, TestData.Valid.Contact.BENSON, TestData.Valid.Contact.DANIEL), model.getFilteredContactList());
+    }
+
+    @Test
+    public void execute_nonExistentKeyword_noContactFound() {
+        // Test the behavior when using a tag that does not exist
+        String expectedMessage = Messages.contactsListedOverview(0);
+        ContainsTagPredicate predicate = preparePredicate("NonExistentTag");
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.setContactsFilter(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredContactList());
+    }
+
     /**
      * Parses {@code userInput} into a {@code ContainsTagPredicate}.
      */
