@@ -20,7 +20,10 @@ img {
 [//]: # (<page-nav-print />)
 
 <a name="table-of-contents"></a>
+<nav>
+
 ## Table of Contents
+
 
 * [Introduction](#introduction)
 * [Minimum System Requirements](#minimum-system-requirements)
@@ -61,6 +64,7 @@ img {
   * [Commands for Miscellaneous Features](#commands-for-miscellaneous-features)
 * [FAQ](#faq)
 * [Glossary](#glossary)
+
 
 ---
 <br>
@@ -225,7 +229,7 @@ This section introduces the full-suite of features in Staff-Snap. The features a
 | `PHONE`    | The applicant's phone number. <br/> <br/> It can only contain numbers, should be at least 3 digits long, and should not exceed 30 digits.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <ul><li>`91234726`</li><li>`1234567890123`</li></ul>             |
 | `EMAIL`    | The applicant's email. <br/> <br/> It should be of the format **local-part@domain**. <br/><br/> The **local-part** should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The **local-part** may not start or end with any special characters. <br/><br/> This is followed by a **'@'** and then a **domain name**. The **domain name** is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, and have each domain label consist of alphanumeric characters, separated only by hyphens, if any. <br/><br/> The entire email address should not exceed 30 characters. | <ul><li>`james@gmail.com`</li><li>`e9867626@u.nus.edu`</li></ul> |
 | `POSITION` | The position applied for by the applicant. <br/> <br/> It can take any value, should not be blank and should not exceed 30 characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | <ul><li>`Software Engineer`</li><li>`AI Architect 2`</li></ul>   |
-| `STATUS`   | The status of the applicant. <br/> <br/> It can only be `o` or `offered` for _OFFERED_, `r` or `rejected` for _REJECTED_, or `u` or `undecided` for _UNDECIDED_.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <ul><li>`o`</li><li>`u`</li><li>`rejected`</li></ul>             |
+| `STATUS`   | The status of the applicant. <br/> <br/> It can only be `o` or `offered` for _OFFERED_, `r` or `rejected` for _REJECTED_, or `u` or `undecided` for _UNDECIDED_. <br/> <br/> The default status for an applicant is _UNDECIDED_.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | <ul><li>`o`</li><li>`u`</li><li>`rejected`</li></ul>             |
 | `INDEX`    | The index of the applicant in the displayed list. <br/> <br/> It must be a positive integer and not more than the total number of applicants.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | <ul><li>`2`</li></ul>                                            |
 
 
@@ -244,18 +248,29 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
 <a name="duplicate-applicants"></a>
 <box type="warning" header="**Caution**">
-    Duplicate applicants are not allowed. Two applicants are considered duplicates if they have the same phone number or the same email.
+    Duplicate applicants are not allowed. 
+    Two applicants are considered duplicates if they have the same phone number or email.
 </box>
 
 <box type="tip" header="**Note**">
-    As <code>NAME</code> can only contain alphanumeric characters and spaces, names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.  
+    As <code>NAME</code> can only contain alphanumeric characters and spaces, 
+    names containing hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app. 
+    This is similar for other commands requiring a string input. Only alphanumeric strings are allowed in the app.
+</box>
+
+<box type="tip" header="**Note**">
+    Note that the default status for new Applicants is UNDECIDED.
 </box>
 
 
 Example:
 * `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer`
-* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
+Adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@gmail.com*, and position *Software Engineer*.
 
+<br/><br/>
+
+* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
+  Adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@yahoo.com*, and position *Project Manager*.
 <br>
 
 ---
@@ -333,7 +348,8 @@ Example:
 <br>
 
 <a name="command-parameters-2"></a>
-#### Command Parameters
+
+#### Command Parameters 
 
 | Parameter         | Description​                                                                                                                                                          | Examples​                                          |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
@@ -450,11 +466,15 @@ Find applicants whose name contains a particular keyword.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+* The total length of the keywords should not be more than 55 characters long.
 * The search is case-insensitive, e.g. `JOHN` will return `john`.
 * The order of the keywords does not matter, e.g. `Alice Tan` will match `Tan Alice`.
 * Only the applicant name is searched.
-* Any applicant whose name contains the sequence of characters given as the keyword will be given as a result, e.g. `Ed` will match both `Edward` and `Ed`.
-* Applicants matching at least one keyword will be returned (i.e. OR search), e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
+* Any applicant whose name contains the sequence of characters given as the keyword will be given as a result, 
+e.g. `Ed` will match both `Edward` and `Ed`.
+* Applicants matching at least one keyword will be returned (i.e. OR search), 
+e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
+
 
 Example:
 
@@ -601,15 +621,15 @@ Automatically saves the data to a local storage whenever there is a change to th
 #### Editing the data file
 
 <box type="warning" header="**Caution**">
-    Please make a backup copy before you attempt to edit the data file. If the format of the edited data file is invalid, Staff-Snap will override the existing data file with an empty data file in the next run. 
+    Please make a backup copy before you attempt to edit the data file. If the format of the edited data file is invalid, 
+Staff-Snap will override the existing data file with an empty data file in the next run.
 </box>
 
 Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[JAR file location]/data/applicantBook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<br>
+<br><br/>
 
 ---
-<br>
 
 <a name="command-summary"></a>
 ## Command Summary
@@ -687,7 +707,7 @@ apply for multiple positions in future iterations.
 <br>
 
 ---
-<br>
+<br>  
 
 <a name="glossary"></a>
 ## Glossary

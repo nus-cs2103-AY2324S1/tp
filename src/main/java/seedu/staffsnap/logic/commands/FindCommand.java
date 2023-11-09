@@ -18,9 +18,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all applicants whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie\n"
-            + "Expected outcome: Returns a list of applicants whose name contains any of the words "
-            + "\"alice\", \"bob\", or \"charlie\"";
+            + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     public static final String MESSAGE_WRONG_FORMAT = "Keyword(s) must be alphanumerical!"
             + "\nExample: LEE2, lee, Johnny Haw";
