@@ -1047,19 +1047,19 @@ otherwise.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 2b. The given index is invalid.
+* 1b. The given index is invalid.
 
-  * 2b1. TutorConnect shows an error message.
+  * 1b1. TutorConnect shows an error message.
 
     Use case resumes at step 1.
 
-* 2c. The schedule status parameters is invalid.
+* 1c. The schedule status parameters is invalid.
 
-  * 2c1. TutorConnect shows an error message.
+  * 1c1. TutorConnect shows an error message.
 
     Use case resumes at step 1.
 
