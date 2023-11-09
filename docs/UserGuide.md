@@ -83,8 +83,8 @@ To achieve this, we have 2 supporting sub-features:
 2. [Event List](#sub-feature-2-event-list)
 
 For the calendar system, we work solely with `events`, which differs from `tasks` used in the [task list feature](#main-feature-3-task-management-system).
-: `event` has a `description`, `start date and time` and `end date and time`
-: `task` only has a `description` and `end date and time`
+: - `event` has a `description`, `start date and time` and `end date and time`
+: - `task` only has a `description` and `end date and time`
 
 ### Sub-feature 1: Calendar
 
@@ -153,20 +153,25 @@ Some useful CLI-based functionalities supporting this feature includes:
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-## General Features
+## General Commands
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+Alternatively, the message can also be accessed by using the keyboard shortcut `F1` or
+through the menu bar (`Help` > `Help`).
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+Alternatively, the user can also exit the application through the menu bar (`File` > `Exit`)
 
 ## Address Book Management
 
@@ -191,14 +196,24 @@ In the example, after executing
 `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`, we see `John Doe`'s
 contact information stored in the address book as the 7th contact on the left-hand side of the GUI.
 
-### Listing all persons : `list`
+### Deleting a person : `delete`
 
-Shows a list of all persons in the address book. This command is particularly useful to
-display all the contacts after using the `find` and `filter` commands.
+Deletes the specified person from the address book.
 
-Format: `list`
+Format: `delete INDEX`
 
-![listCommand](images/listCommand.png)
+* Deletes the person at the specified `INDEX`
+* The index refers to the index number shown in the displayed person list
+* The index must be a **positive integer** (i.e. 1, 2, 3, …​)
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command
+
+![deleteCommand](images/deleteCommand.png)
+
+In this example, after executing `list`, followed by `delete 7`, `John Doe`, the person with index 7
+is removed from the displayed address book.
 
 ### Editing a person : `edit`
 
@@ -211,7 +226,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it
+  specifying any tags after it
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -224,7 +239,11 @@ phone number edited to `12345678`.
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain **any** of the given keywords. 
+
+> **Tip:** Multiple arguments passed into the `find` command will be delimited by whitespaces, which means
+the arguments `John Doe` will be parsed into 2 separate arguments `John` and `Doe`. To circumvent
+this delimitation, consider the [filter command](#filtering-persons-by-attribute-filter).
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -242,15 +261,16 @@ Examples:
 
 ### Filtering persons by attribute: `filter`
 
-Filters out persons whose fields contain any of the given keywords.
+Filters out persons whose fields contain any of the given keywords. The keywords contained in each field will be treated as a single argument.
 
 Format: `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Filter is case-insensitive. e.g. `cs2103` will match `CS2103`
 * The order of the fields does not matter
 * All provided fields are searched
-* All tags containing the words will be matched e.g. `Ba` will return `Badminton` or `Basketball` or `Football` or `Backgammon`
+* All tags containing the words or part-thereof will be matched (e.g. `Ba` will return `Badminton` or `Basketball` or `Football` or `Backgammon`)
 * Only persons matching all specified fields will be returned (i.e. `and` search)
+* Arguments in a specific field is not delimited (i.e. the argument `John Doe` in `filter n/John Doe` will be treated as a single argument)
 
 Examples:
 * `filter t/CS2103` - Displays all contacts with the CS2103 tag or tags containing ``CS2103`` e.g. CS2103T
@@ -260,26 +280,16 @@ with a name containing ``John`` and an email address with the domain ``u.nus.edu
 ![filterCommand](images/filterCommand.png)
 
 In this example, after executing `filter t/colleagues`, the address book list displays all contacts
-that have the `TAG` colleague.
+that have the `colleagues` tag.
 
-### Deleting a person : `delete`
+### Listing all persons : `list`
 
-Deletes the specified person from the address book.
+Shows a list of all persons in the address book. This command is particularly useful to
+display all the contacts after using the [find](#locating-persons-by-name-find) and [filter](#filtering-persons-by-attribute-filter) commands.
 
-Format: `delete INDEX`
+Format: `list`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-![deleteCommand](images/deleteCommand.png)
-
-In this example, after executing `list`, followed by `delete 7`, `John Doe`, the person with index 7 
-is removed from the displayed address book
+![listCommand](images/listCommand.png)
 
 ### Sort persons : `sort`
 
@@ -292,7 +302,7 @@ Format: `sort /COMPARATOR`
     - `byphone`
     - `byaddress`
 * The comparator refers to the attribute(s) provided for the basis to sort
-* The sorting is done according to ASCII value
+* The sorting is done according to [ASCII](https://www.ibm.com/docs/en/cobol-zos/6.1?topic=sequences-us-english-ascii-code-page) sequence, but is case-insensitive (i.e. `adam` has precedence over `Beatrice` when sorted in ascending order) 
 * Sorting is done in ascending order by default. To sort by descending order, the keyword `reverse` can be used (see Examples below)
 
 Examples:
@@ -304,26 +314,37 @@ Examples:
 In this example, after executing `sort /byphone`, the address book is now sorted according to the
 contact's phone numbers, in ascending numerical order.
 
-
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-## Calendar System
-> **Date Time Format**
->
->When inputting a date and time into a command, the following format is used: 
->
->* `yyyy-MM-dd HH:mm` where
->    * `yyyy` represents the year,
->    * `MM` represents the month,
->    * `dd` represents the day,
->    * `HH` represents the hours and
->    * `mm` represents the minutes.
+![clearCommand](images/clearCommand.png)
 
-### Adding an event: `addEvent`
+In this example, after executing `clear`, the address book is now cleared of all contacts.
+
+## Calendar System
+
+### General Definitions
+
+> **Date Time Format**
+>* When inputting a date and time into a command, the following format is used:
+>
+>  `yyyy-MM-dd HH:mm` where
+>      * `yyyy` represents the year,
+>      * `MM` represents the month,
+>      * `dd` represents the day,
+>      * `HH` represents the hours and
+>      * `mm` represents the minutes.
+>
+>**Event span**
+>*  The chronological span of the event is **inclusive** of the start date and time, but
+  **exclusive** of the end date and time.
+  This means that for 2 consecutive events, the later event can start at the same time the earlier
+  event ends.
+
+### \[USER CALENDAR\] Adding an event: `addEvent`
 
 Adds an event to the user's calendar.
 
@@ -335,9 +356,18 @@ Format: `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME`
 * `START_DATE_TIME` must be before `END_DATE_TIME` for the command to be valid
 
 Example:
-* `addEvent Cry about deadlines d/12/12/2012 s/2200 e/2359`
+* `addEvent d/Cry about deadlines ts/2023-01-01 13:00 te/2023-01-01 15:00`
 
-### Deleting an event: `deleteEvent`
+![addEventCommand](images/addEventCommand.png)
+
+In this example, after executing the command `addEvent d/myEvent ts/2023-11-08 14:00 te/2023-11-08 16:00`,
+the event `myEvent` is now visible in both the calendar on the right and the event list at the bottom, as
+the date of `myEvent` coincides with the current week when the screenshot was taken.
+
+In the case `myEvent` happens before/after the current week, it will not be displayed in the calendar, but will still
+show in the event list.
+
+### \[USER CALENDAR\] Deleting an event: `deleteEvent`
 
 Deletes an event from the user's calendar.
 
@@ -351,26 +381,47 @@ end time (exclusive).
 Example:
 `deleteEvent 2023-11-01 12:00`
 
-### Deleting multiple events: `clearEvents`
+![deleteEventCommand](images/deleteEventCommand.png)
+
+In this example, after executing the command `deleteEvent 2023-11-08 15:00`, `myEvent`(added in 
+the [addEvent command example](#user-calendar-adding-an-event-addevent)) that is happening during the
+specified time was deleted, leaving an empty calendar and event list.
+
+### \[USER CALENDAR\] Deleting multiple events: `clearEvents`
 
 Clears all events within a specified time range.
 
+> **Note:** In order to ensure the user does not make the mistake of deleting more events than intended,
+this command requires additional **confirmation** (refer to command format below) from the user to fully execute. 
+Without the confirmation, the result box will instead display the list of events that will be deleted if the
+command fully executes, for the user's verification.
+
 Format: `clearEvents ts/START_DATE_TIME te/END_DATE_TIME c/CONFIRMATION`
 
-* Deletes all events from the specified start date and time to the specified end date and time.
-* An event is considered to be within the time range if overlaps with the time range for any period of time.
+* Deletes all events from the specified start date and time to the specified end date and time
+* An event is considered to be within the time range if overlaps with the time range for any period of time, inclusive of `START_DATE_TIME` but exclusive of `END_DATE_TIME`
 * When the `CONFIRMATION` is absent, the command shows all events within the time range but does not delete them. The
-same command is then shown with the confirmation included that can be copied and pasted to execute the command.
-* If there is no `START_DATE_TIME` or `END_DATE_TIME`, an error will be thrown.
+same command is then shown with the confirmation included that can be copied and pasted to execute the command
+* The `START_DATE_TIME` must be before `END_DATE_TIME`
+* If there is no `START_DATE_TIME` or `END_DATE_TIME`, an error will be thrown
 
-### Viewing all events
+Example:
+`clearEvents ts/2023-01-01 00:00 te/2023-12-31 23:59 c/CONFIRMED`
 
-Events can be viewed from the calendar that appears on the right.
+![clearEventsCommand](images/clearEventsCommand.png)
+
+In this example, after executing `clearEvents ts/2023-11-08 14:00 te/2023-11-08 16:00 c/CONFIRMED`, `myEvent`(added in
+the [addEvent command example](#user-calendar-adding-an-event-addevent) that is happening during the duration of the
+specified time was deleted, leaving an empty calendar and event list. 
+
+### Event List/Task List switch: `switchList`
+
+Events can be viewed from the calendar GUI that appears on the right.
 
 Additionally, a list of all events are displayed by default at the bottom. This list at the bottom can be switched to a
-task list with the `switchList` command. More information can be found under `Viewing all Tasks`.
+task list with the `switchList` command. More information can be found under at [Viewing all Tasks](#task-management-system).
 
-### Adding an event to a contact
+### \[CONTACT CALENDAR\] Adding an event to a contact: `addContactEvent`
 
 Adds an event to a contact's calendar at the specified index.
 
@@ -382,7 +433,15 @@ Format: `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME ts/END_DATE_TIME
 Example:
 * `addContactEvent 1 d/Team Meeting ts/2024-01-01 09:00 te/2024-01-01 11:00`
 
-### Deleting an event from a contact
+![addContactEventCommand](images/addContactEventCommand.png)
+
+In this example, after executing `addContactEvent 1 d/Alex's Event ts/2023-11-08 14:00 te/2023-11-08 18:00` and 
+[double-clicking on the person card](#main-feature-1-address-book) of index 1 in the address book, the
+contact's calendar pops up, revealing `Alex's Event`. In the case that the event happens before/after
+the current week, it will not be shown in the calendar, but will still be displayed in the 
+[contact's event list](#viewing-a-contacts-event-list-viewcontactevents).
+
+### \[CONTACT CALENDAR\] Deleting an event from a contact: `deleteContactEvent`
 
 Deletes an event from a contact's calendar at the specified index.
 
@@ -393,18 +452,68 @@ Format `deleteContactEvent INDEX ts/DATE_TIME`
 Example:
 * `deleteContactEvent 1 ts/2024-01-01 09:00`
 
-### Comparing calendars with AddressBook Contacts
+![deleteContactEvent](images/deleteContactEventCommand.png)
 
-There are two ways for the user to compare calendars with their AddressBook Contacts. 
-Namely, the user can either isolate contacts of interest with their respective index,
-or compare calendars with a group of contacts using their tags. Therefore, the user can
-consider the following two commands and choose whichever suits their needs more.
+In this example, after executing `deleteContactEvent 1 ts/2023-11-08 14:00` and
+[double-clicking on the person card](#main-feature-1-address-book) of index 1 in the address book,
+the contact's calendar pops up, revealing an empty calendar as `Alex's Event` (added in the 
+[example in addContactEvent](#contact-calendar-adding-an-event-to-a-contact-addcontactevent)),
+occurring at the specified time, has been removed.
+
+### \[CONTACT CALENDAR\] Edit Contact Calendar Event: `editContactEvent`
+
+Edits the details of an event in a contact's calendar. 
+
+> **Note:** If this command is executed while the event list of the contact of interest is open, 
+the event list will not be updated until the tab is closed and open again.
+
+Format: `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME][te/NEW_END_DATE_TIME]`
+
+* Edits `EVENT_INDEX` event of the `PERSON_INDEX` person in the address book with the given fields.
+
+Example: `editContactEvent 1 1 d/Nap`, `editContactEvent 2 3 ts/2023-10-10 10:00 te/2023-10-12 15:00`
+
+* Note that all edited fields are optional, but there must be at least 1 edited field.
+
+![editContactEventBefore](images/editContactEventCommandBefore.png)
+
+In this example, we see this is the state of the calendar of `Alex Yeoh`, the person with index 1
+in the address book.
+
+![editContactEventMessage](images/editContactEventCommandMessage.png)
+
+After executing `editContactEvent 1 1 d/Edited Description`, we get this confirmation message
+
+![editContactEventAfter](images/editContactEventCommandAfter.png)
+
+We can see that the event `Nap` has its description changed to `Edited Description`.
+
+### Viewing a contact's event list: `viewContactEvents`
+
+Creates a pop-up that displays a list of all events of a calendar belonging to a person in the Addressbook.
+
+Format: `viewContactEvents INDEX`
+
+* Views the event list of the person at `INDEX` as displayed.
+
+Example:
+* `viewContactEvents 1`
+
+![viewContactEvents](images/viewContactEventsCommand.png)
+
+In this example, after execute `viewContactEvents 1`, a pop-up with the list of events of the person
+with index 1 in the address book, which in this case is `Alex Yeoh` shows up.
+
+### Comparing calendars with AddressBook Contacts
+There are 2 ways for the user to compare calendars with their address book contacts:
+- [Index](#1-comparison-by-index)
+- [Tag](#2-comparison-by-tag)
 
 The resulting pop-up calendar will pop up with the time periods where all parties
 are not available greyed out. The pop-up has to be closed in order for the user to access
-the main application again.
+the main application again. A shortcut for closing the pop-up is by hitting the `esc` key.
 
-Note that the arguments for the commands are optional, hence `compareCalendars` and
+>**Note:** Arguments for the commands are <mark>optional</mark>, hence `compareCalendars` and
 `compareGroupCalendars` are valid commands, but the resulting pop-up will just display the
 user's calendar.
 
@@ -420,6 +529,11 @@ Format `compareCalendars [INDEX]...`
 Example:
 `compareCalendars 1 3 5`
 
+![compareCalendars](images/compareCalendarsCommand.png)
+
+In this example, after executing `compareCalendars 1`, we see the timings when both the user and
+the person with index 1 (`Alex Yeoh`) are not free is blocked out.
+
 #### 2. Comparison by tag
 
 Format `compareGroupCalendars [TAG]...`
@@ -431,6 +545,11 @@ Format `compareGroupCalendars [TAG]...`
 
 Example:
 `compareGroupCalendars school friends`
+
+![compareGroupCalendars](images/compareGroupCalendarsCommand.png)
+
+In this example, after executing `compareGroupCalendars friends`, we see the timings when both the
+user and the contacts that have the `friends` tag are not free is blocked out.
 
 ### Import *.ics files (Coming Soon)
 
@@ -446,71 +565,6 @@ current week.
 
 Format: `viewWeek DATE`
 
-### Viewing another person's events: `viewContactEvents`
-
-Creates a pop-up that displays a list of all events of a calendar belonging to a person in the Addressbook.
-
-Format: `viewContactEvents INDEX`
-
-* Deletes an event at the specified date and time.
-* An event is considered to be at that date and time if the date time lies between the start time (inclusive) and the
-end time (exclusive).
-* If there is no event during `DATE_TIME_DURING_EVENT`, an error will be thrown.
-
-Example:
-`deleteEvent 2023-11-01 12:00`
-
-### Deleting multiple events: `clearEvents`
-
-Clears all events within a specified time range.
-
-Format: `clearEvents ts/START_DATE_TIME te/END_DATE_TIME c/CONFIRMATION`
-
-* Deletes all events from the specified start date and time to the specified end date and time.
-* An event is considered to be within the time range if overlaps with the time range for any period of time.
-* When the `CONFIRMATION` is absent, the command shows all events within the time range but does not delete them. The
-same command is then shown with the confirmation included that can be copied and pasted to execute the command.
-* If there is no `START_DATE_TIME` or `END_DATE_TIME`, an error will be thrown.
-
-
-### Viewing all events
-
-Events can be viewed from the calendar that appears on the right.
-
-Additionally, a list of all events are displayed by default at the bottom. This list at the bottom can be switched to a
-task list with the `switchList` command. More information can be found under `Viewing all Tasks`.
-
-### Adding an event to a contact
-
-Adds an event to a contact's calendar at the specified index.
-
-Format: `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME ts/END_DATE_TIME`
-
-* Adds the event starting from `START_DATE_TIME` and ending at `END_DATE_TIME`
-* `START_DATE_TIME` and `END_DATE_TIME` must be in `yyyy-MM-dd HH:mm` format
-
-Example:
-* `addContactEvent 1 d/Team Meeting ts/2024-01-01 09:00 te/2024-01-01 11:00`
-
-### Deleting an event from a contact
-
-Deletes an event from a contact's calendar at the specified index.
-
-Format `deleteContactEvent INDEX ts/DATE_TIME`
-
-* Deletes an event that contains the `DATE_TIME` from the contact
-
-Example:
-* `deleteContactEvent 1 ts/2024-01-01 09:00`
-
-### Viewing another person's events: `viewContactEvents`
-
-Creates a pop-up that displays a list of all events of a calendar belonging to a person in the Addressbook.
-
-Format: `viewContactEvents INDEX`
-
-* Views the event list of the person at `INDEX` as displayed.
-
 ## Task Management System
 
 Tasks consist of a `DESCRIPTION` and a `DEADLINE`. 
@@ -523,6 +577,11 @@ Format: `switchList`
 
 * All input after `switchList` will be ignored.
 * The bottom list displays the event list by default.
+
+![switchList](images/switchListCommand.png)
+
+In this example, after executing `switchList`, we see that the bottom of the GUI has switched from 
+[`event list`](#sub-feature-2-event-list) to the [`task list`](#main-feature-3-task-management-system).
 
 ### Adding tasks: `addTask`
 
@@ -538,6 +597,11 @@ Examples:
 * `addTask d/Go for a run te/2023-02-14 19:00`
 * `addTask d/Hydrate regularly!`
 
+![addTask](images/addTaskCommand.png)
+
+In this example, after executing `addTask d/Hydrate regularly!`, we see the new `Hydrate regularly!`
+task appearing at the bottom of the task list.
+
 ### Deleting tasks: `deleteTask`
 
 Deletes a task from the Task Manager according to the index of the task displayed in the task list.
@@ -546,7 +610,15 @@ Format: `deleteTask INDEX`
         
 * Throws an error if there is no `INDEX` present or if it exceeds the length of the task list.
 
-### Sorting tasks: `sortTask`
+Examples:
+* `deleteTask 1`
+
+![deleteTask](images/deleteTaskCommand.png)
+
+In this example, after executing `deleteTask 4`, the `Hydrate regularly!` task added in the 
+[previous example](#adding-tasks-addtask) was removed.
+
+### Sorting tasks: `sortTasks`
 
 Changes the way tasks in the Task Manager are displayed in the task list.
 
@@ -559,28 +631,12 @@ Examples:
 * `sortTasks DEADLINE` sorts tasks by their `DEADLINE`. Tasks with deadlines are prioritised above tasks with no 
 deadline.
 
+![sortTasks](images/sortTasksCommand.png)
+
+In this example, after executing `sortTasks DESCRIPTION`, the tasks are now sorted in ascending
+alphanumeric order.
 
 ## Miscellaneous
-
-### Edit Contact Calendar Event
-
-Edits the details of an event in a contact's calendar
-
-Format: `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME][te/NEW_END_DATE_TIME]`
-
-Edits `EVENT_INDEX` event of the `PERSON_INDEX` person in the address book with the given fields.
-
-Example: `editContactEvent 1 1 d/Nap`, `editContactEvent 2 3 ts/2023-10-10 10:00 te/2023-10-12 15:00`
-
-* Note that all edited fields are optional, but there must be at least 1 edited field.
-
-### Force saving all contacts and events
-
-Forces a save of all current contacts and events in the program.
-
-Format: `save`
-
-* All data is also saved in the hard disk automatically when the program is closed.
 
 ### Saving the data
 
@@ -605,23 +661,25 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UniMate home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+# Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+# Command summary
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help** | `help`
+**Exit** | `exit`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
@@ -629,15 +687,14 @@ Action     | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter TAG [MORE_TAGS]` <br> e.g., `filter CSGOD CS2103`
 **List** | `list`
-**Help** | `help`
 **addEvent** | `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
 **deleteEvent** | `deleteEvent DATE_TIME` <br> e.g., `deleteEvent 2023-02-03 12:00`
 **addContactEvent** | `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
 **deleteContactEvent** | `deleteContactEvent INDEX ts/DATE_TIME` <br> e.g., `deleteContactEvent 1 ts/2023-02-03 12:00`
-**compareCalendars** | `compareCalendars INDEX...` <br> e.g., `compareCalendar 1 3 5`
+**compareCalendars** | `compareCalendars INDEX...` <br> e.g., `compareCalendars 1 3 5`
 **compareGroupCalendars** | `compareGroupCalendars TAG...` <br> e.g., `compareGroupCalendars school friend`
-**editContactEvent** | `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME][te/NEW_END_DATE_TIME]`
-**clearEvents** | `clearEvent ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `clearEvent ts/2023-02-03 12:00 te/2023-02-03 14:00`
+**editContactEvent** | `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME] [te/NEW_END_DATE_TIME]`
+**clearEvents** | `clearEvents ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `clearEvents ts/2023-02-03 12:00 te/2023-02-03 14:00`
 **addTask** | `addTask d/DESCRIPTION [te/DEADLINE]` <br> e.g. `addTask d/Go for a run te/2023-02-14 19:00`
 **deleteTask** | `deleteTask INDEX`
 **sortTasks** | `sortTasks PARAMETER` <br> e.g. `sortTasks DESCRIPTION` <br> e.g. `sortTasks DEADLINE`
