@@ -1,16 +1,23 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.classmanager.logic.Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER;
+import static seedu.classmanager.logic.commands.CommandTestUtil.NONEXISTENT_STUDENT_NUMBER;
+import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.student.Comment;
-import seedu.address.model.student.StudentNumber;
-import seedu.address.testutil.TypicalStudents;
+import seedu.classmanager.logic.CommandHistory;
+import seedu.classmanager.logic.commands.exceptions.CommandException;
+import seedu.classmanager.model.Model;
+import seedu.classmanager.model.ModelManager;
+import seedu.classmanager.model.UserPrefs;
+import seedu.classmanager.model.student.Comment;
+import seedu.classmanager.model.student.Student;
+import seedu.classmanager.model.student.StudentNumber;
+import seedu.classmanager.testutil.StudentBuilder;
+import seedu.classmanager.testutil.TypicalStudents;
 
 public class CommentCommandTest {
 
@@ -19,39 +26,39 @@ public class CommentCommandTest {
     @Test
     public void execute_commentSuccess() throws CommandException {
 
-        // Define student number and comment
-        StudentNumber studentNumber = new StudentNumber("A0239123A");
         Comment comment = new Comment("Struggling with tutorials");
+        // Define student
+        Student studentToComment = new StudentBuilder(TypicalStudents.ALICE)
+                .withComment("Struggling with tutorials").build();
 
         // Create a CommentCommand
-        CommentCommand commentCommand = new CommentCommand(studentNumber, comment);
+        CommentCommand commentCommand = new CommentCommand(studentToComment.getStudentNumber(), comment);
 
-        // Execute the CommentCommand
-        CommandResult result = commentCommand.execute(model);
+        ModelManager expectedModel = new ModelManager(model.getClassManager(), new UserPrefs());
+        expectedModel.setStudent(TypicalStudents.ALICE, studentToComment);
+        expectedModel.commitClassManager();
 
-        // Check if the result message matches the expected message
-        assertEquals("Comment added successfully.", result.getFeedbackToUser());
-
-        // Check if the student's comment was updated
-        assertEquals(comment, model.getStudent(studentNumber).getComment());
+        assertCommandSuccess(commentCommand, model, CommentCommand.MESSAGE_COMMENT_SUCCESS,
+                expectedModel, commandHistory);
     }
 
     @Test
     public void execute_nonexistentStudentNumber_throwsCommandException() {
 
-        // Define a student number and comment
-        StudentNumber studentNumber = new StudentNumber("A1234567M");
         Comment comment = new Comment("Struggling with tutorials");
+        // Define student
+        Student studentToComment = new StudentBuilder(TypicalStudents.ALICE)
+                .withComment("Struggling with tutorials").build();
 
         // Create a CommentCommand
-        CommentCommand commentCommand = new CommentCommand(studentNumber, comment);
+        CommentCommand commentCommand = new CommentCommand(NONEXISTENT_STUDENT_NUMBER, comment);
 
-        // Execute the CommentCommand and expect a CommandException
-        try {
-            commentCommand.execute(model);
-        } catch (CommandException e) {
-            assertEquals("The student number provided does not exist here.", e.getMessage());
-        }
+        ModelManager expectedModel = new ModelManager(model.getClassManager(), new UserPrefs());
+        expectedModel.setStudent(TypicalStudents.ALICE, studentToComment);
+        expectedModel.commitClassManager();
+
+        assertCommandFailure(commentCommand, model,
+                MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
     }
 
     public void equals() {
