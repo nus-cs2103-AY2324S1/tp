@@ -396,7 +396,7 @@ Action | Format, Examples
   <tr>
     <td class="tg-0pky"><code>findMember</code> / <code>findEvent</code></td>
     <td class="tg-0pky">KEYWORD</td>
-    <td class="tg-0pky">Must match minimally one of the words in the name of the member/event to be found, where capitalisation does not matter</td>
+    <td class="tg-0pky">Any non-blank values</td>
   </tr>
 </tbody>
 </table>

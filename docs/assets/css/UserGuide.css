@@ -12,6 +12,9 @@
     padding:10px 5px;
     word-break:normal;
 }
+.tg td span {
+    font-weight:bold;
+}
 .tg th {
     border-color:black;
     border-style:solid;
