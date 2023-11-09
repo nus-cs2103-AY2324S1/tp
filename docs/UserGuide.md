@@ -63,18 +63,18 @@ will be the least of your worries.
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in upper case are compulsory parameters to be supplied by the user.<br>
   e.g. in `add -name NAME`, `NAME` is a parameter which can be used as `add -name Leah`.
   In this case, "Leah" is substituted for `NAME`.
 
 * Items in square brackets are optional.<br>
   e.g. `list [LIST] [KEYWORDS]` can be used as `list` or as `list students email`.
 
-* Parameters can be in any order.<br>
+* Flags can be in any order.<br>
   e.g. if the command specifies `-name NAME -phone PHONE_NUMBER`, `-phone PHONE_NUMBER -name NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g. if the command entered is `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
@@ -651,7 +651,7 @@ Note: Add, Edit & Delete commands are dependent on the list type [`SCHEDULE`, `T
 | **List**          | `list`, `list schedule`, `list students [KEYWORDs]`, `list tasks`                                                                                                                                                                                       | NA                                                                                |
 | **Show**          | `show INDEX`<br> e.g., `show 1`                                                                                                                                                                                                                         | `SCHEDULE`, `STUDENTS`, `TASKS`                                                   |
 | **Add Person**    | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECT] [-tag TAG] [-remark REMARK]` <br> e.g., `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | ANY LIST                                                                          |
-| **Edit Person**   | `editPerson INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG,…​] [-subject SUBJECT,…​`]<br> e.g.,`editPerson 2 -name James Lee -email jameslee@example.com`                                                         | ANY LIST                                                                          |
+| **Edit Person**   | `editPerson INDEX [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-tag TAG,…​] [-subject SUBJECT,…​`]<br> e.g.,`editPerson 2 -name James Lee -email jameslee@example.com`                                                   | ANY LIST                                                                          |
 | **Delete Person** | `deletePerson INDEX`<br> e.g., `deletePerson 3`                                                                                                                                                                                                         | `SCHEDULE`, `STUDENTS`                                                            |
 | **Add Lesson**    | `addLesson -name NAME [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]`                                                                                                                                                                 | ANY LIST                                                                          |
 | **Edit Lesson**   | `editLesson INDEX [-start HH:MM] [-end HH:MM] [-day YYYY/MM/DD] [-subject SUBJECT]` <br> e.g.,`editLesson 2 -start 13:00 -end 14:00`                                                                                                                    | ANY LIST                                                                          |
