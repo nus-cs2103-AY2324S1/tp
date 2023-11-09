@@ -1,0 +1,15 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters command to copy a member;
+
+if () then ([command and index is valid])
+    :Member details are copied into the user's clipboard;
+    :Success message is shown;
+else ([else])
+    : Error message is shown;
+endif
+stop
+@enduml

@@ -198,14 +198,23 @@ class.
 
 The add mechanism is facilitated by `LogicManager` which parses the command input from the user to determine the
 appropriate
-command to execute. The execute function checks whether the `member`/`applicant` is present in the `AddressBook`.
-The `member`/`applicant` is added into the `AddressBook` if it is not present. Otherwise, an error message is returned.
+command to execute. The execute function checks whether the `Member`/`Applicant` is present in the `AddressBook`.
+The `Member`/`Applicant` is added into the `AddressBook` if it is not present. Otherwise, an error message is returned.
 
 <img src="images/AddApplicantActivityDiagram.png">
 
 The diagram above describes the behaviour of adding an applicant to the `AddressBook`. When the user enters the command,
 the command is parsed to determine whether it is a valid command. If it is valid, the `Applicant` is added into the 
 `AddressBook` and a success message is shown, else, an error message is shown.
+
+### View all `Member`/`Applicant` feature
+
+Lists all members/applicants in the address book to the user. For example, if the previous list was filtered (say by `FindMemberCommand` or `FindApplicantCommand`),
+then set it to unfiltered again.
+
+1. The `ViewMembersCommand` or `ViewApplicantsCommand` object's execute() method is called. 
+2. This updates the model via its `updateFilteredMemberList()` or `updateFilteredApplicantList()` method which is called with its predicate as always returning true. 
+3. All members/applicants in the address book are shown to the user in the members/applicants list.
 
 ### Delete an applicant
 
@@ -298,49 +307,19 @@ values will be overwritten by the input values.
 * Step 5: After the execution of the `EditApplicantCommand`, the applicant's details are successfully edited in the
   applicant list.
 
-### View all members
+### Copy a `Member`/`Applicant`
 
-Lists all members in the address book to the user; e.g., If previous list was filtered (say by `FindMemberCommand`),
-then set it to unfiltered again.
+Copies the details of an existing `Member`/`Applicant` identified by their index number in the displayed member/applicant list into the
+clipboard. The commands are implemented in the `CopyMemberCommand` and `CopyApplicantCommand` classes, which extend the `Command` class.
 
-* Step 1: The `ViewMembersCommand` object's execute() method is called.
-* Step 2: The model object's `updateFilteredMemberList()` method is called with the predicate as always returning true.
-* Step 3: All members in the address book are shown to the user in the members list.
+1. The `CopyMemberCommand`/`CopyApplicantCommand` object's execute() method is called.
+2. The `Member`/`Applicant` index is checked to be within the valid range of the member list. If the index given is invalid (e.g., out of range), a `CommandException` is thrown.
+3. The `Member`/`Applicant` at the given index is referenced based on the provided member index.
+4. The `CopyMemberCommand`/`CopyApplicantCommand` calls the copies the details given by the `Member#detailsToCopy`/`Applicant#detailsToCopy` method into the clipboard.
 
-### View all applicants
+The diagram below describes this behaviour concisely. It shows how a user's command is processed and what message is ultimately shown if they decide, for example, to copy a member's details.
 
-Lists all applicants in the address book to the user; e.g., If previous list was filtered (say
-by `FindApplicantCommand`), then set it to unfiltered again.
-
-* Step 1: The `ViewApplicantsCommand` object's execute() method is called.
-* Step 2: The model object's `updateFilteredApplicantList()` method is called with the predicate as always returning
-  true.
-* Step 3: All applicants in the address book are shown to the user in the applicants list.
-
-### Copy a member
-
-Copies the details of an existing member identified by their index number in the displayed member list into the
-clipboard.
-
-* Step 1: The `CopyMemberCommand` object's execute() method is called.
-* Step 2: The member index is checked to be within the valid range of the member list. If the member index given is
-  invalid (e.g., out of range), a `CommandException` is thrown.
-* Step 3: The member at the given index is referenced based on the provided member index.
-* Step 4: The `CopyMemberCommand` calls the copies the member's details given by the `Member` `detailsToCopy()` method
-  into
-  the clipboard.
-
-### Copy an applicant
-
-Copies the details of an existing applicant identified by their index number in the displayed applicant list into the
-clipboard.
-
-* Step 1: The `CopyApplicantCommand` object's `execute()` method is called.
-* Step 2: The applicant index is checked to be within the valid range of the applicant list. If the applicant index
-  given is invalid (e.g., out of range), a `CommandException` is thrown.
-* Step 3: The applicant at the given index is referenced based on the provided applicant index.
-* Step 4: The `CopyApplicantCommand` calls the copies the applicant's details given by the `Applicant` `detailsToCopy()`
-  method into the clipboard.
+<img src="images/CopyMemberActivityDiagram.png">
 
 ### View all available tags
 
