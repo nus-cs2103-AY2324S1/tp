@@ -8,13 +8,6 @@ BandConnect++ helps musicians manage contact with other musicians to easily form
 
 Given below are my contributions to the project.
 
-* **New Feature**: to be added soon
-  * What it does:
-  * Justification:
-  * Highlights:
-  * Credits:
-
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/#/widget/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&chartGroupIndex=76&chartIndex=4)
 
 
@@ -44,7 +37,7 @@ Given below are my contributions to the project.
       * Exit
       * Save
   * Developer Guide:
-    * Updated existing UML diagrams
+    * Updated existing UML diagrams to conform to current project
     * Features:
       * List Band Members
       * Add Musician
@@ -59,7 +52,6 @@ Given below are my contributions to the project.
   * Helped improve code quality for the whole project
   * Made one jar release
   * Structured the whole UG
-  * Updated Introduction, Quick Start, Table of Contents, get help sections of UG
   * Changed the product icon and renamed the application
   * Refactored the old AB3 classes for BandConnet++
 

@@ -188,6 +188,8 @@ Command: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​  [i/INSTR
 * **Failing condition:** When edited information leads to duplicate name, phone or email with another musician already exists in storage.
 
 #### Implementation
+![EditMusicianActivityDiagram.png](images/uml/EditMusicianActivityDiagram.png)
+
 Within the `execute()` method of the command, a check is done to ensure that the model does not currently contain any musician with the same name, phone, or email with the edited musician information. This is achieved through the use of `Model::isSameMusician` and `Model::hasDuplicateInfo` method.
 
 #### Design Considerations
