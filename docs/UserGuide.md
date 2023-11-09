@@ -577,7 +577,7 @@ Else, typing in anything else then pressing enter will cancel the clear process.
 
 Format: `clear`
 
-![Clear UI Mockup](images/user-guide/clear.png)
+![clear](images/user-guide/clear.png)
 
 <br>
 
