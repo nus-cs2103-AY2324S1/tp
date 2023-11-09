@@ -269,6 +269,16 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+--------------------------------------------------------------------------------------------------------------------
+
+## **Planned Enhancements**
+
+This section describes some enhancement that can be made to the existing app.
+
+### User Interface
+
+* In the current version, long names (usually longer than 40 characters) are truncated in the interface. Wrapping of names can be implemented so that long names are displayed in a more readable and user-friendly manner.
+* The highlight of the contact entries is gray in color and the color of the text is white. The low contrast of the two colors decreases the readability of the texts. The color of the highlight can be changed to a darker color.
 
 --------------------------------------------------------------------------------------------------------------------
 
