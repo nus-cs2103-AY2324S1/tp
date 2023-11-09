@@ -168,7 +168,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The find interview by job title feature allows users to query the list of added interview for interviews that match the job title via the command `find-i KEYWORD [MORE_KEYWORD]... `, where `KEYWORD` must not
+The find interview by job role feature allows users to query the list of added interview for interviews that match the job role via the command `find-i KEYWORD [MORE_KEYWORD]... `, where `KEYWORD` must not
 be an empty string.
 
 The `find-i` command is facilitated by the `FindInterviewCommand`, `FindInterviewCommandParser`, and `JobContainsKeywordsPredicate`.
