@@ -34,8 +34,7 @@ public class RemoveNoteCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
 
         // non-numeric characters
-        assertParseFailure(parser, "a b",
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a b", ParserUtil.MESSAGE_NOT_A_INDEX);
 
         // more than two numbers
         assertParseFailure(parser, "1 2 3",
@@ -53,7 +52,6 @@ public class RemoveNoteCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
 
         // non-numeric characters
-        assertParseFailure(parser, "a b",
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a b", ParserUtil.MESSAGE_NOT_A_INDEX);
     }
 }

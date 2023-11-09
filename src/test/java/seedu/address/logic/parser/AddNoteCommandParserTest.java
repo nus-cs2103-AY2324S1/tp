@@ -22,11 +22,9 @@ public class AddNoteCommandParserTest {
     @Test
     public void parse_missingDetails_failure() {
         // Missing note details
-        assertParseFailure(parser, "1",
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1", AddNoteCommandParser.MESSAGE_EMPTY_NOTE);
 
         // Missing index
-        assertParseFailure(parser, "Test note",
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "Test note", ParserUtil.MESSAGE_NOT_A_INDEX);
     }
 }
