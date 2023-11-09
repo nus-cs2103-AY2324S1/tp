@@ -31,7 +31,6 @@ public class OvertimeCommandParser implements Parser<OvertimeCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OvertimeCommand.MESSAGE_USAGE));
         }
 
-
         Id id;
         try {
             id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());

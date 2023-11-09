@@ -25,8 +25,7 @@ import seedu.address.model.employee.Salary;
 import seedu.address.model.remark.Remark;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser
- * classes.
+ * Contains utility methods used for parsing strings in the various Parser classes.
  */
 public class ParserUtil {
 

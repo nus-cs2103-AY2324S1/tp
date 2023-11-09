@@ -31,9 +31,6 @@ public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand> {
         }
 
         Id id;
-        LocalDate startDate;
-        LocalDate endDate;
-
         try {
             id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
         } catch (ParseException pe) {
@@ -46,13 +43,9 @@ public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_FROM).isPresent() && argMultimap.getValue(PREFIX_TO).isPresent()) {
-            startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FROM).get());
-            endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_TO).get());
-            if (startDate.isAfter(endDate)) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLeaveCommand.MESSAGE_INVALID_DATE_ORDER)
-                );
-            }
+            LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FROM).get());
+            LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_TO).get());
+            checkDateOrder(startDate, endDate);
             return new DeleteLeaveCommand(id, startDate, endDate);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLeaveCommand.MESSAGE_USAGE));
@@ -65,5 +58,12 @@ public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private static void checkDateOrder(LocalDate startDate, LocalDate endDate) throws ParseException {
+        if (startDate.isAfter(endDate)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLeaveCommand.MESSAGE_INVALID_DATE_ORDER));
+        }
     }
 }

@@ -50,7 +50,31 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_SALARY);
 
         EditEmployeeDescriptor editEmployeeDescriptor = new EditEmployeeDescriptor();
+        editSpecifiedFields(editEmployeeDescriptor, argMultimap);
+        return new EditCommand(index, editEmployeeDescriptor);
+    }
 
+    /**
+     * Parses {@code Collection<String> departments} into a {@code Set<Department>}
+     * if {@code departments} is non-empty.
+     * If {@code departments} contain only one element which is an empty string, it
+     * will be parsed into a
+     * {@code Set<Department>} containing zero departments.
+     */
+    private Optional<Set<Department>> parseDepartmentsForEdit(Collection<String> departments) throws ParseException {
+        assert departments != null;
+
+        if (departments.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> departmentSet = departments.size() == 1 && departments.contains("")
+                ? Collections.emptySet()
+                : departments;
+        return Optional.of(ParserUtil.parseDepartments(departmentSet));
+    }
+
+    private void editSpecifiedFields(EditEmployeeDescriptor editEmployeeDescriptor,
+                                     ArgumentMultimap argMultimap) throws ParseException {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editEmployeeDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -75,27 +99,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!editEmployeeDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-        return new EditCommand(index, editEmployeeDescriptor);
-    }
-
-    /**
-     * Parses {@code Collection<String> departments} into a {@code Set<Department>}
-     * if {@code departments} is non-empty.
-     * If {@code departments} contain only one element which is an empty string, it
-     * will be parsed into a
-     * {@code Set<Department>} containing zero departments.
-     */
-    private Optional<Set<Department>> parseDepartmentsForEdit(Collection<String> departments) throws ParseException {
-        assert departments != null;
-
-        if (departments.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> departmentSet = departments.size() == 1 && departments.contains("")
-                ? Collections.emptySet()
-                : departments;
-        return Optional.of(ParserUtil.parseDepartments(departmentSet));
     }
 
 }
