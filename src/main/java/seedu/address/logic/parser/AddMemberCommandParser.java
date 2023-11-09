@@ -8,8 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -67,7 +65,7 @@ public class AddMemberCommandParser implements Parser<AddMemberCommand> {
             String messageFormat;
             messageFormat = String.format(AddMemberCommand.MESSAGE_USAGE);
             if (changed) {
-                messageFormat = String.format(finalMessage + finalMessage + AddMemberCommand.MESSAGE_USAGE);
+                messageFormat = String.format(finalString.toString() + finalMessage + AddMemberCommand.MESSAGE_USAGE);
 
             }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageFormat));
