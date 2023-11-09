@@ -126,7 +126,7 @@ Before we begin, the table below describes some of the symbols and syntax you ma
 
    * **`delete 1`** : Deletes the first job applicant displayed in **InterviewHub**.
 
-   * **`exit`** : Exits **InTrack**.
+   * **`exit`** : Exits **InterviewHub**.
 
 8. Refer to the [Features](#features) below for details of each command.
 
@@ -134,29 +134,29 @@ Before we begin, the table below describes some of the symbols and syntax you ma
 
 # GUI Summary
 
-The following is an annotated breakdown of InTrack’s GUI:
+The following is an annotated breakdown of InterviewHub’s GUI:
 
 ![GUI Summary](images/GuiSummary.png)
 
-For each applicant, we see the following details:
+For each **applicant**, we see the following details:
 
-| Applicant                                              |
-|--------------------------------------------------------|
-| **Name** - The full name of the applicant              |
-| **Tags** - WTF even is this lmao                       |
-| **Phone** - The mobile phone number of the applicant   |
-| **Address** - The residential address of the applicant |
-| **Email** - The email address of the applicant         |
+| Information | Description                                 |
+|-------------|---------------------------------------------|
+| **Name**    | The full name of the applicant              |
+| **Tags**    | Tags for the applicant (if any)             |
+| **Phone**   | The mobile phone number of the applicant    |
+| **Address** | The residential address of the applicant    |
+| **Email**   | The email address of the applicant          |
 
-For each interview, we see the following details:
+For each **interview**, we see the following details:
 
-| Interview                                                                        |
-|----------------------------------------------------------------------------------|
-| **Applicant's Name** - The full name of the applicant                            |
-| **Job Title** - The title of the job that the applicant is applying for          |
-| **Start Time** - Start time of the interview                                     |
-| **End Time** - Projected end time of the interview                               |
-| **Rating** - Interview performance rating of the applicant (from 1 - 10, if any) |
+| Information          | Description                                                         |
+|----------------------|---------------------------------------------------------------------|
+| **Applicant's Name** | The full name of the applicant                                      |
+| **Job Title**        | The title of the job that the applicant is applying for             |
+| **Start Time**       | Start time of the interview                                         |
+| **End Time**         | Projected end time of the interview                                 |
+| **Rating**           | Interview performance rating of the applicant (from 1 - 10, if any) |
 
 [Back to the Table of Contents](#table-of-contents)
 
