@@ -35,12 +35,14 @@ Given below are my contributions to the project.
 
 * **Contribution to team-based tasks**:
   * Managed issues on issue tracker 
-  * Updated `README.md` with product logo and appropriate description
+  * Updated `README.md` with product logo and appropriate description (PR: [#38](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/38))
 
 * **Documentation**:
     * User Guide:
-        * Re-organized sections in User Guide for better flow and readability
-        * Added `About this User Guide` section
+        * Re-organized sections in User Guide for better flow and readability (PR: [#153](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/153))
+          * Added `About this User Guide` section
+          * Categorized features for better navigation
+          * Added links to relevant sections for better navigation
         * Added details for `markAttendanceCommand` 
     * Developer Guide:
         * Added implementation details for `markAttendanceCommand`
@@ -48,7 +50,7 @@ Given below are my contributions to the project.
         * Added future enhancements
       
 * **Review/ mentoring contributions**:
-  * Reviewed 7 PRs with non-trivial review comments: 
+  * Reviewed 7 PRs with non-trivial review comments (PR: [#78](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/78))
 
 * **Contributions beyond project team**:
   * Reported bugs other teams with comprehensive detailing and suggestions. (Bug Reports: [1](https://github.com/AY2324S1-CS2103T-T08-2/tp/issues/191), [2](https://github.com/AY2324S1-CS2103T-T08-2/tp/issues/196), [3](https://github.com/AY2324S1-CS2103T-T08-2/tp/issues/198), [4](https://github.com/AY2324S1-CS2103T-T08-2/tp/issues/208), [5](https://github.com/AY2324S1-CS2103T-T08-2/tp/issues/211), [6](https://github.com/AY2324S1-CS2103T-T08-2/tp/issues/219), [7](https://github.com/AY2324S1-CS2103T-T08-2/tp/issues/220))
