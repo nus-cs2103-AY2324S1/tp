@@ -13,20 +13,21 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Viewing help : `help`](#viewing-help--help)
-  * [Listing contacts: `list contact`](#listing-contacts--list-contact)
-  * [Adding a contact: `add contact`](#adding-a-contact--add-contact)
-  * [Deleting a contact: `delete contact`](#deleting-a-contact--delete-contact)
-  * [Finding a contact: `find`](#finding-a-contact--find)
-  * [Adding tags: `add tag`](#adding-tags--add-tag)
-  * [Deleting tags: `delete tag`](#deleting-tags--delete-tag)
-  * [Adding a note: `add note`](#adding-notes-to-a-contact--add-note)
-  * [Deleting a note: `delete note`](#deleting-a-note--delete-note)
-  * [Listing events: `list events`](#listing-events--list-events)
-  * [Adding an event: `add event`](#adding-events--add-event)
-  * [Deleting an event: `delete event`](#deleting-an-event--delete-event)
-  * [Clearing data: `clear`](#clearing-all-data--clear)
-  * [Exit: `exit`](#exiting-the-program--exit)
+  * [Viewing help: `help`](#viewing-help-help)
+  * [Listing contacts: `list contact`](#listing-contacts-list-contact)
+  * [Adding a contact: `add contact`](#adding-a-contact-add-contact)
+  * [Deleting a contact: `delete contact`](#deleting-a-contact-delete-contact)
+  * [Finding a contact: `find`](#finding-a-contact-find)
+  * [Adding tags: `add tag`](#adding-tags-add-tag)
+  * [Deleting tags: `delete tag`](#deleting-tags-delete-tag)
+  * [Adding notes to a contact: `add note`](#adding-notes-to-a-contact-add-note)
+  * [Deleting a note: `delete note`](#deleting-a-note-delete-note)
+  * [Listing events: `list events`](#listing-events-list-events)
+  * [Adding an event: `add event`](#adding-events-add-event)
+  * [Deleting an event: `delete event`](#deleting-an-event-delete-event)
+  * [Clearing data: `clear`](#clearing-data-clear)
+  * [Exiting the program: `exit`](#exiting-the-program-exit)
+  * [Saving the data](#saving-the-data)
   * [Other Features: _coming soon..._](#other-features)
 * [FAQ](#faq)
 * [Known Issues](#known-issues)
@@ -79,7 +80,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a list of commands and functionalities.
 
@@ -91,7 +92,7 @@ Format: `help [COMMAND_WORD]`
 Examples:
 * `help add`
 
-### Listing contacts : `list contact`
+### Listing contacts: `list contact`
 
 Shows a list of all contacts in the contact list if tags not specified. 
 Otherwise, shows a list of contacts which contains any one of the specified tags. 
@@ -105,7 +106,7 @@ Examples:
 * `list contact` to show all contacts.
 * `list contact -t Recruiter` to show all contacts which have a recruiter tag.
 
-### Adding a contact : `add contact`
+### Adding a contact: `add contact`
 
 Adds a contact to the contact list.
 
@@ -114,7 +115,7 @@ Format: `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL [-t TAGNAME...]
 Examples:
 * `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com`
 
-### Deleting a contact : `delete contact`
+### Deleting a contact: `delete contact`
 
 Deletes the specified contact from the contact list.
 
@@ -123,7 +124,7 @@ Format: `delete contact CONTACT_ID`
 Examples:
 * `delete contact 1` deletes the first contact in the contact list.
 
-### Finding a contact : `find`
+### Finding a contact: `find`
 
 Finds a contact by their name by matching keywords with the contact's name. Keywords are **case insensitive**.
 
@@ -132,7 +133,7 @@ Format: `find KEYWORD [OTHER_KEYWORDS...]`
 Examples:
 * `find Alex`
 
-### Adding tags : `add tag`
+### Adding tags: `add tag`
 
 Adds one or more tags to a contact. Contact list will go back to showing all contacts upon successful addition.
 
@@ -149,7 +150,7 @@ Examples:
 * `add tag -id 1 -t Frontend -t Java` adds two tags with tag name "Frontend" and "Java" to the first contact in the contact list.
 
 
-### Deleting tags : `delete tag`
+### Deleting tags: `delete tag`
 
 Deletes one or more tags to a contact. Contact list will go back to showing all contacts upon successful deletion.
 
@@ -164,7 +165,7 @@ Examples:
 * `delete tag -id 1 -t Frontend` deletes a tag with tag name "Frontend" from the first contact in the contact list.
 * `add tag -id 1 -t Frontend -t Java` deletes two tags with tag name "Frontend" and "Java" from the first contact in the contact list.
 
-### Adding notes to a contact : `add note`
+### Adding notes to a contact: `add note`
 
 Adds a note to a contact from the contact list.
 
@@ -174,7 +175,7 @@ Examples:
 * `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`
 * `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`
 
-### Deleting a note : `delete note`
+### Deleting a note: `delete note`
 
 Deletes the specified note from the contact list.
 
@@ -185,7 +186,7 @@ Format: `delete note -id CONTACT_ID -nid NOTE_ID`
 Examples:
 * `delete note -id 1 -nid 1` deletes the first note from the first contact in the contact list.
 
-### Listing events : `list events`
+### Listing events: `list events`
 
 Shows a list of all events or events within a specified time interval.
 
@@ -202,7 +203,7 @@ Examples
 * `list events -st 2023-11-01 -et 2023-11-02`
 * `list events -descending -st 2023-11-01 -et 2023-11-02`
 
-### Adding events : `add event`
+### Adding events: `add event`
 
 Adds an event to a contact. The added event should not have clashes in timing with other existing events in the contact list.
 
@@ -223,7 +224,7 @@ Examples:
 * `add event -id 1 -en Meeting with professor -st 12:00 -et 13:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
 * `add event -id 2 -en Chat with TikTok recruiter -st 17:00`
 
-### Deleting an event : `delete event`
+### Deleting an event: `delete event`
 
 Deletes the specified event from a contact.
 
@@ -235,13 +236,13 @@ Format: `delete event -id CONTACT_ID -eid EVENT_ID`
 Examples:
 * `delete event -id 1 -eid 2` deletes the second event from the first contact in the contact list.
 
-### Clearing all data : `clear`
+### Clearing data: `clear`
 
 Clears all KeepInTouch entries.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
