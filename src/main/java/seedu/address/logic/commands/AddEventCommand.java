@@ -77,6 +77,7 @@ public class AddEventCommand extends Command {
         // This line must be at the end
         assert invalidNames.isEmpty() || invalidGroups.isEmpty() : "Invalid names and groups should be checked first";
         model.addEvent(this.toAdd);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatEvent(toAdd)));
     }
 

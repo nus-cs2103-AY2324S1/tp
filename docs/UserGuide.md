@@ -114,6 +114,9 @@ your contacts and events better.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Invalid prefixes, such as `t/` will be regarded as a part of the input, for example `n/John Doe g/friend`, the name 
+  will be parsed as `John Doe t/friend` instead of `John Doe`.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list_all`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -131,21 +134,7 @@ Format: `help`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
-## Commands for Persons
-
-### Properties of person
-Before you proceed to use commands to manage persons, you should know the properties of a person in FumbleLog.
-
-| Parameter     | Format                                                                                                                                                                                                                                                                                  | Example                          |
-|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
-| `NAME`        | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                                                                                                                                                                                                                           | `John Doe`                       |
-| `PHONE_NUMBER`| Use `0-9` only and should be at least 3 digits long and maximum of 17 digits.                                                                                                                                                                                                           | `p/98765432`                     |
-| `EMAIL`       | Be in format `local-part@domain`. `local_part` should only contain alphanumeric values and special characters `+`, `_`, `.` and `-`. `domain` be at least 2 characters long, start and end with alphanumeric characters, and made up of domain labels separated by one or more periods. | `johndoe@gmail.com`              |
-| `ADDRESS`     | Use any characters.                                                                                                                                                                                                                                                                     | `John Street, block 123, #01-01` |
-| `BIRTHDAY`    | Have format `yyyy-MM-dd` and should not be later than current date.                                                                                                                                                                                                                     | `2001-12-30 `                    |
-| `REMARK`      | Use any characters.                                                                                                                                                                                                                                                                     | `Owes me $2.`                    |
-| `GROUP`       | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                                                                                                                                                                                                                      | `CS2103T`                        |
-
+## Commands for Persons                                                                                                                                                                                                            
 
 ### Adding a person: `add_person`
 
