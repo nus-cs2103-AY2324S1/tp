@@ -99,15 +99,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
         }
         if (prefix.equals(PREFIX_STATUS)) {
-            List<String> keywords = ParserUtil.parseSinglePrefixStatus(argMultimap.getAllValues(PREFIX_STATUS),
-                    FindCommand.MESSAGE_USAGE);
+            List<String> keywords = ParserUtil.parseSinglePrefixStatus(argMultimap.getAllValues(PREFIX_STATUS));
             for (String keyword : keywords) {
                 statusKeywords.add(keyword);
             }
         }
         if (prefix.equals(PREFIX_TAG)) {
-            List<String> keywords = ParserUtil.parseSinglePrefixTags(argMultimap.getAllValues(PREFIX_TAG),
-                    FindCommand.MESSAGE_USAGE);
+            List<String> keywords = ParserUtil.parseSinglePrefixTags(argMultimap.getAllValues(PREFIX_TAG));
             for (String keyword : keywords) {
                 tagKeywords.add(keyword);
             }

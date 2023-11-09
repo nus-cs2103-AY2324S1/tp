@@ -20,6 +20,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -63,8 +64,7 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidTags_throwsParseException() {
         String userInput = " " + PREFIX_TAG + INVALID_TAG_STRING;
-        assertParseFailure(parser, userInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, Tag.MESSAGE_CONSTRAINTS);
     }
 
     @Test

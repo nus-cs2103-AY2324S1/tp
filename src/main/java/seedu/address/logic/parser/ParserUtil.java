@@ -221,28 +221,20 @@ public class ParserUtil {
      *     Example:
      *     If keywordsList is ["John Doe"], the returned array will be ["John", "Doe"].
      */
-    private static String[] parseSinglePrefixParams(Collection<String> keywordsList, String commandMessage)
-            throws ParseException {
+    private static String[] parseSinglePrefixParams(Collection<String> keywordsList) {
         String list = keywordsList.toString();
         String cleanedList = list.replaceAll("[\\[\\]]", "");
         String[] singlePrefixParams = cleanedList.split("\\s+");
-        for (String singlePrefixParam : singlePrefixParams) {
-            Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-            Matcher matcher = pattern.matcher(singlePrefixParam);
-            if (matcher.find()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, commandMessage));
-            }
-        }
         return singlePrefixParams;
     }
 
     /**
      * Parses {@code Collection<String> status parameters} into a {@code List<String> of status}.
      */
-    public static List<String> parseSinglePrefixStatus(Collection<String> statuses, String commandMessage)
+    public static List<String> parseSinglePrefixStatus(Collection<String> statuses)
             throws ParseException {
         requireNonNull(statuses);
-        String[] statusArr = parseSinglePrefixParams(statuses, commandMessage);
+        String[] statusArr = parseSinglePrefixParams(statuses);
         final List<String> statusList = new ArrayList<>();
         for (String status : statusArr) {
             status = status.trim();
@@ -261,7 +253,7 @@ public class ParserUtil {
     public static List<String> parseSinglePrefixName(Collection<String> names, String commandMessage)
             throws ParseException {
         requireNonNull(names);
-        String[] nameArr = parseSinglePrefixParams(names, commandMessage);
+        String[] nameArr = parseSinglePrefixParams(names);
         final List<String> nameList = new ArrayList<>();
         for (String name : nameArr) {
             name = name.trim();
@@ -277,10 +269,10 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tag parameters} into a {@code List<String> of tags}.
      */
-    public static List<String> parseSinglePrefixTags(Collection<String> tags, String commandMessage)
+    public static List<String> parseSinglePrefixTags(Collection<String> tags)
             throws ParseException {
         requireNonNull(tags);
-        String[] tagArr = parseSinglePrefixParams(tags, commandMessage);
+        String[] tagArr = parseSinglePrefixParams(tags);
         final List<String> tagList = new ArrayList<>();
         for (String tag : tagArr) {
             tag = tag.trim();
