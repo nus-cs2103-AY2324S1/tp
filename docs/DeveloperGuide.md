@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+  layout: default.md 
+  title: "Developer Guide"
+  pageNav: 3
 ---
 
 # Staff-Snap Developer Guide
@@ -194,6 +194,18 @@ The add applicant feature allows users to add an applicant to the applicant list
 4. If the check is successful, the `AddCommand#execute()` checks if the applicant exists in the applicant list.
 5. If the applicant does not exist, the `Model#addApplicant()` adds the applicant to the applicant list.
 
+#### Design considerations
+
+##### Aspect: Format for adding applicants and interviews
+
+- Alternative 1 (current choice): Separate command `add` and `addi` for adding applicants and interviews respectively.
+    - Pros: Shorter command for user and easier to handle exceptions.
+    - Cons: Harder to implement.
+
+- Alternative 2: Same command `add` for adding applicants and interviews.
+    - Pros: More convenient for user to add an applicant with interviews.
+    - Cons: Still necessary to have a separate `addi` command for user to add a new interview to an existing applicant.
+
 ### Edit applicant feature
 
 #### Implementation
@@ -205,6 +217,18 @@ The edit applicant feature allows users to edit the details of an applicant.
 3. The `EditCommandParser#parse()` checks whether the index of the applicant is valid and at least one prefix with the required values are provided.
 4. If the check is successful, the `EditCommand#execute()` checks if the identity of the applicant after the edit is the same as the identity of another existing applicant. 
 5. If the identity is not the same, the `Model#setApplicant()` updates the details of the applicant while the `Model#updateFilteredApplicantList()` updates applicant list to display the updated applicant list.
+
+#### Design considerations
+
+##### Aspect: Syntax for editing applicants
+
+- Alternative 1 (current choice): At least one field to edit has to be provided.
+    - Pros: More convenient for user to edit an applicant's details and shorter command. Ensures that field not meant to be edited will remain unchanged.
+    - Cons: Harder to implement due to more validation and checks needed.
+
+- Alternative 2:  All fields of the applicant has to be provided, regardless of whether it is edited.
+    - Pros: Easier to implement due to similarity to add feature.
+    - Cons: More areas for error as fields not meant to be edited might be edited due to a typo.
 
 ### Help feature
 
@@ -434,19 +458,24 @@ An instance of `CommandResult` is then created which contains the message and in
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                      | So that I can…​                                |
-|----------|---------|-----------------------------------|------------------------------------------------|
-| `* * *`  | user    | view all the available commands   | I know how to use the app                      |
-| `* * *`  | user    | add a new applicant               | track the the progress of all applicants       |
-| `* * *`  | user    | edit an applicant descriptor      | maintain an updated database of all applicants |
-| `* * *`  | user    | view the full list of applicants  | access important applicant information         |
-| `* * *`  | user    | delete an applicant entry         | only track valid applicants                    |
-| `* * *`  | user    | add an interview for an applicant | plan screenings                                |
-| `* * *`  | user    | store data locally                | use it on a daily basis consistently           |
-| `* *`    | user    | find a specific applicant         | access the applicant's information quickly     |
-| `* *`    | user    | sort applicants by a descriptor   | find relevant applicants quickly               |
-| `* *`    | user    | filter applicants by a descriptor | find relevant applicants quickly               |
-| `* *`    | user    | purge all existing data           | remove sample data and populate real data      |
+| Priority | As a …​ | I want to …​                                               | So that I can…​                                             |
+|----------|---------|------------------------------------------------------------|-------------------------------------------------------------|
+| `* * *`  | user    | view all the available commands                            | know how to use the app                                     |
+| `* * *`  | user    | add a new applicant                                        | track the the progress of all applicants                    |
+| `* * *`  | user    | edit an applicant descriptor                               | maintain an updated database of all applicants              |
+| `* * *`  | user    | view the full list of applicants                           | view the overall progress and performance of all applicants |
+| `* * *`  | user    | delete an applicant entry                                  | only track valid applicants                                 |
+| `* * *`  | user    | add an interview for an applicant                          | plan screenings                                             |
+| `* * *`  | user    | store data locally                                         | use it on a daily basis consistently                        |
+| `* *`    | user    | find a specific applicant                                  | access the applicant's information quickly                  |
+| `* *`    | user    | sort applicants by a descriptor                            | find relevant applicants quickly                            |
+| `* *`    | user    | filter applicants by a descriptor                          | look at applicants of a specific category                   |
+| `* *`    | user    | purge all existing data                                    | remove sample data and populate real data                   |
+| `* *`    | user    | exit the program                                           | close the program                                           |
+| `* *`    | user    | import data from CSV file                                  | access all applicants' details                              |
+| `* *`    | user    | mark an applicant as undecided, offered or rejected        | keep track of applicants' application status                |
+| `*`      | user    | schedule a date for an interview                           | keep track of all interview timings                         |
+| `*`      | user    | view a graphical representation of each applicant's rating | get a quick idea of each applicant's ability                |
 
 ### Use cases
 
@@ -471,6 +500,24 @@ Guarantees: The new applicant will be added to the list of applicants.
 
       Use case ends
 
+* 1b. User enters an applicant that already exists.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User does not enter a required field.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1d. User enters an invalid value for a field.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
 **Use case: UC02 - Edit applicant's information**
 
 Guarantees: The applicant's information will be updated.
@@ -487,6 +534,30 @@ Guarantees: The applicant's information will be updated.
 * 1a. User enters an invalid command.
 
     * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User enters an invalid index for the applicant.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User does not enter at least one field to edit.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1d. User enters an invalid value for a field.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1e. User edits the applicant's phone number or email to be the same as another applicant's.
+
+    * 1e1. Staff-Snap shows an error message.
 
       Use case ends.
 
@@ -508,6 +579,7 @@ Guarantees: All applicants will be listed.
     * 1a1. Staff-Snap shows an error message.
 
       Use case ends.
+
 * 1b. Applicant list is empty.
 
     * 1b1. Staff-Snap shows an empty applicant list.
@@ -533,6 +605,12 @@ Guarantees: The applicant will be removed from the list of applicants.
 
       Use case ends.
 
+* 1b. User enters an invalid index for the applicant.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
 **Use case: UC05 - Find an applicant by name**
 
 Guarantees: The applicants with name matching the search will be listed.
@@ -551,9 +629,16 @@ Guarantees: The applicants with name matching the search will be listed.
     * 1a1. Staff-Snap shows an error message.
 
       Use case ends.
+
 * 1b. No applicant found.
 
     * 1b1. Staff-Snap shows an empty applicant list.
+
+      Use case ends.
+
+* 1c. No search term provided.
+
+    * 1c1. Staff-Snap shows an error message.
 
       Use case ends.
 
@@ -576,6 +661,18 @@ Guarantees: The list of applicants will be sorted by the descriptor.
 
       Use case ends.
 
+* 1b. User enters an invalid descriptor.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. No descriptor provided.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
 **Use case: UC07 - Filter applicants**
 
 Guarantees: Only applicants that satisfies the specified criterion will be listed.
@@ -592,6 +689,18 @@ Guarantees: Only applicants that satisfies the specified criterion will be liste
 * 1a. User enters an invalid command.
 
     * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User enters an invalid criterion.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. No criterion provided.
+
+    * 1c1. Staff-Snap shows an error message.
 
       Use case ends.
 
@@ -683,6 +792,110 @@ Guarantees: A new interview will be added to the applicant.
 
       Use case ends
 
+* 1b. User enters an invalid index for the applicant.
+    
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User does not enter a required field.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1d. User enters an invalid value for a field.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1e. User enters a duplicate interview type for the applicant that does not exceeds the maximum length after duplicate handling.
+
+    * 1e1. Staff-Snap increment the last number in the interview type until it hits a unique input, or add 1 if there is no number at the end of the interview type.
+
+      Use case continues at step 2.
+
+* 1f. User enters a duplicate interview type for the applicant that exceeds the maximum length after duplicate handling.
+
+    * 1f1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC12 - Edit an interview of an applicant**
+
+Guarantees: The specified interview will be updated.
+
+**MSS**
+
+1. User inputs the command to edit an interview of an applicant.
+2. Staff-Snap updates the interview with the new details and updates the applicant information with the new interview.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends
+
+* 1b. User enters an invalid index for the applicant.
+        
+    * 1b1. Staff-Snap shows an error message.
+    
+      Use case ends.
+
+* 1c. User enters an invalid index for the interview.
+        
+    * 1c1. Staff-Snap shows an error message.
+    
+      Use case ends.
+
+* 1d. User does not enter a field to edit.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1e. User enters an invalid value for a field.
+
+    * 1e1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC13 - Delete an interview from an applicant**
+
+Guarantees: The specified interview will be deleted from the applicant.
+
+**MSS**
+
+1. User inputs the command to delete an interview from an applicant.
+2. Staff-Snap removes the interview from the applicant and updates the applicant information.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends
+
+* 1b. User enters an invalid index for the applicant.
+            
+    * 1b1. Staff-Snap shows an error message.
+        
+      Use case ends.
+
+* 1c. User enters an invalid index for the interview.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -754,6 +967,39 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding an applicant
+
+1. Adding an applicant
+
+    1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`<br>
+       Expected: Applicant is added to the list. Details of the new applicant shown in the response area.
+       Applicant area shows the updated list of applicants.
+
+    1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` again (Duplicate applicant)<br>
+       Expected: No applicant is added. Error details shown in the response area. Applicant list in applicant area remains the same.
+
+    1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` with any of the fields missing<br>
+       Expected: Similar to previous.
+
+    1. Other incorrect add commands to try: `add`, `add x`, `add n/John Doe e/johndoe@gmail.com p/Software Engineer hp/x`<br>
+       Expected: Similar to previous.
+
+### Editing an applicant
+
+1. Editing an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+
+    1. Test case: `edit 1 n/Tom Greenwood`<br>
+       Expected: The name of the first applicant is updated to *Tom Greenwood*. Updated details of the applicant shown in the response area.
+       Applicant area shows the updated list of applicants.
+
+    1. Test case: `edit n/Pop Greenwood`<br>
+       Expected: No applicant is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
+
+    1. Other incorrect edit commands to try: `edit`, `edit x n/Jane Doe`, `edit e/email` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
 ### Deleting an applicant
 
 1. Deleting an applicant while all applicants are being shown
@@ -761,11 +1007,107 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+       Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the response area.
+       Applicant area shows the updated list of applicants.
 
     1. Test case: `delete 0`<br>
-       Expected: No applicant is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No applicant is deleted. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `delete a` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Editing an applicant's status
+
+1. Editing an applicant's status while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+
+    1. Test case: `status 1 s/o`<br>
+       Expected: The status of the first applicant is updated to *OFFERED*. Updated details of the applicant shown in the response area.
+       Applicant area shows the updated list of applicants.
+
+    1. Test case: `status 1 s/l`<br>
+       Expected: No applicant's status is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
+
+    1. Other incorrect edit status commands to try: `status`, `status x s/o`, `status 1 s/` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Adding an interview to an applicant
+
+1. Adding an interview to an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+
+    1. Test case: `addi 1 t/technical r/8.6`<br>
+       Expected: A technical interview with rating 8.6 is added to the first applicant in the list. Updated details of the applicant shown in the response area.
+       Applicant area shows the updated list of applicants.
+
+    1. Test case: `addi 0`<br>
+       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
+
+    1. Other incorrect add interview commands to try: `addi`, `addi x`, `addi r/6.0`, `addi 1 t/toolonginterviewtypeeeeeeeeeeeeeeee` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Editing an interview of an applicant
+
+1. Editing an interview to an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant has at least one interview.
+
+    1. Test case: `editi 1 i/1 t/technical r/8.6`<br>
+       Expected: The first interview of the first applicant in the list is updated to a technical interview with rating 8.6. Updated details of the applicant shown in the response area.
+       Applicant area shows the updated list of applicants.
+
+    1. Test case: `editi 0`<br>
+       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
+
+    1. Other incorrect edit interview commands to try: `editi`, `editi x`, `editi 1 i/x t/technical`, `editi 1 i/1 r/y` (where x is larger than the list size and y is larger than 10.0)<br>
+       Expected: Similar to previous.
+
+### Deleting an interview from an applicant
+
+1. Deleting an interview from an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant has at least one interview.
+
+    1. Test case: `deletei 1 i/1`<br>
+       Expected: First interview is deleted from the first applicant in the list. Updated details of the applicant shown in the response area.
+       Applicant area shows the updated list of applicants.
+
+    1. Test case: `deletei 0`<br>
+       Expected: No interview is deleted from any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
+
+    1. Other incorrect delete interview commands to try: `deletei`, `deletei x`, `deletei 1 i/x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Sorting applicants
+
+1. Sorting applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. 
+
+    1. Test case: `sort d/status`<br>
+       Expected: The applicants in the list are sorted by their status, in the order UNDECIDED, OFFERED, REJECTED. Success message shown in the response area.
+       Applicant area shows the updated list of applicants in the sorted order.
+
+    1. Test case: `sort d/i`<br>
+       Expected: The list of applicants is not sorted. Error details shown in the response area. Applicant list in applicant area remains the same.
+
+    1. Other incorrect sort commands to try: `sort`, `sort d/`<br>
+       Expected: Similar to previous.
+
+### Filtering applicants
+
+1. Filtering applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+
+    1. Test case: `filter gts/5.0`<br>
+       Expected: The applicants in the list are filtered by their score, and the updated list contains only applicants with score of at least 5.0. 
+       Success message shown in the response area. Applicant area shows the filtered list of applicants.
+
+    1. Test case: `filter name`<br>
+       Expected: The list of applicants is not filtered. Error details shown in the response area. Applicant list in applicant area remains the same.
+
+    1. Other incorrect filter commands to try: `filter`, `filter n/`<br>
        Expected: Similar to previous.
