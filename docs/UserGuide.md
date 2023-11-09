@@ -43,7 +43,7 @@ Our guide uses **visual components** to highlight key information for your conve
     <div>
         <box theme="info" icon=":fa-solid-magnifying-glass:">
 
-**Example usages** of a feature will be contained in a **light blue box** with this **magnifying glass icon** :fa-solid-magnifying-glass:. These examples will show you how a feature works, and will include sample commands that you can try out yourself!
+This **light blue box** with the **magnifying glass icon** provides you with **command examples** that will show you how a feature works.
         </box>
     </div>
     <div style="font-size: 1.5em; display: flex; align-items: center;">
@@ -54,16 +54,14 @@ Our guide uses **visual components** to highlight key information for your conve
     <div>
         <br>
         <panel header=":fa-solid-book: **Command Parameter / Syntax Tables**" type="secondary" expanded no-close>
-Large tables describing the **syntax or parameters** of **parameter-heavy commands**, or the **attributes of large models**, will be contained in a **collapsible grey panel** like this one with a **book icon** :fa-solid-book:.
+This **collapsible grey panel** with the **book icon** contains large tables that describes the **syntax or parameters** of parameter-heavy commands, or the **attributes of large models** such as our [Person model](DeveloperGuide.md#model-component).
 
 | Sample | Table |
 | ------ | ----- |
 | Sample | Table Data |
 | Sample 2 | Table Data 2 |
 
-These tables will provide a quick reference on the meanings and usage of each parameter in commands which support many such parameters, or the attributes of large and complex models, such as our [Person model](#person-model).
-
-PDF Users will always see these panels expanded, but users of the web version of this guide can click on the panel header to collapse (and then re-expand) the panel if the information is no longer necessary.
+Only for web users, you can click on the panel header to collapse the panel if the information is no longer necessary.
         </panel>
         <br>
     </div>
@@ -74,7 +72,7 @@ PDF Users will always see these panels expanded, but users of the web version of
     </div>
     <div>
         <box type="warning">
-**Warnings / Error Cases** for features will be shown in a **yellow box** with this **exclamation mark icon** :fa-solid-exclamation: . These clarify cases which are expected to display errors to users, or explain enhancements that will be implemented in future releases of CampusConnect.
+This **yellow box** with the **exclamation mark icon** clarify cases which are expected to display **errors** to you, or explain **enhancements** that will be implemented in future releases of CampusConnect.
 
 All planned enhancements will also be listed in the [Planned Enhancements / Known Issues](#planned-enhancements-known-issues) section near the end of the guide.
         </box>
@@ -87,7 +85,7 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
     </div>
     <div>
         <box theme="primary" icon=":fa-solid-lightbulb:">
-**Tips** which provide useful additional information about a feature will be contained in a **darker blue box** with this **lightbulb icon** :fa-solid-lightbulb:. These tips aren't required to get through basic functionality of our features, but will help you get the most out of CampusConnect!
+This **darker blue box** with the **lightbulb icon** provides you **extra useful information** that but will help you get the most out of CampusConnect!
         </box>
     </div>
 </div>
@@ -112,24 +110,25 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 # Table of Contents
 1. [Quick Start](#quick-start)
 2. [Features](#features)
-   - [Manage Contacts](#manage-contacts)
+   - [Contact Management](#contact-management)
+     - [Properties of contact](#properties-of-contact)
      - [Add contact: `add`](#add-contact-add)
      - [Add alternative information to contact: `addalt`](#add-alternative-information-to-contact-addalt)
-     - [Edit contact information: `edit`](#edit-contact-information-edit)
-     - [Update contact's photo: `updatephoto`](#update-contact-s-photo-updatephoto)
+     - [Edit information of contact: `edit`](#edit-information-of-contact-edit)
+     - [Update photo of contact: `updatephoto`](#update-photo-of-contact-updatephoto)
      - [List all contacts: `list`](#list-all-contacts-list)
      - [Delete contact: `delete`](#delete-contact-delete)
    - [Notes](#notes)
-     - [Add a note to contact: `addnote`](#add-a-note-to-contact-addnote)
-     - [Remove a note from contact: `removenote`](#remove-a-note-from-contact-removenote)
-     - [View notes of a contact: `viewnotes`](#view-notes-of-a-contact-viewnotes)
+     - [Add note to contact: `addnote`](#add-note-to-contact-addnote)
+     - [Remove note from contact: `removenote`](#remove-note-from-contact-removenote)
+     - [View notes of contact: `viewnotes`](#view-notes-of-contact-viewnotes)
    - [Notifications](#notifications)
      - [Birthday notifications](#birthday-notifications)
    - [Payments](#payments)
      - [Money Amount Format](#money-amount-format)
-     - [Pay a contact money: `pay`](#pay-a-contact-money-pay)
-     - [Owe a contact money: `owe`](#owe-a-contact-money-owe)
-   - [Find Contacts](#find-contacts)
+     - [Pay money to contact: `pay`](#pay-money-to-contact-pay)
+     - [Owe money to contact: `owe`](#owe-money-to-contact-owe)
+   - [Contact Search](#contact-search)
      - [Basic Filtering](#basic-filtering)
      - [Advanced Filtering](#advanced-filtering)
 3. [FAQ](#faq)
@@ -192,24 +191,24 @@ All planned enhancements will also be listed in the [Planned Enhancements / Know
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-## Manage Contacts
+## Contact Management
 
 ### Properties of contact
 
 Before you proceed to use the manage contact features of CampusConnect, take a quick read of the table below that provides a summary of the accepted formats for each respective parameters.
 
-<panel header=":fa-solid-book: **Command Parameter Table**" type="secondary" expanded no-close>
+<panel header=":fa-solid-book: **Contact Management Parameters**" type="secondary" expanded no-close>
 
-| Parameter                   | Format                                                                                                                                         | Example                        |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| `NAME`                      | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                                                   | John Doe                       |
-| `PHONE_NUMBER`              | Use `0-9` only and should be at least 3 digits long                     | 98765432                       |
-| `EMAIL` / `SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                                                         | johndoe@gmail.com              |
-| `ADDRESS`                   | Use any characters                                                                                                                             | John street, block 123, #01-01 |
-| `TAG`                       | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined tags that indicate your contact as an emergency contact | friend                         |
-| `TELEGRAM`                  | Start with the `@` symbol, no whitespace with a minimum length of 5 characters. Use `a-z`, `0-9` and `_` only                                  | @john_doe123                   |
-| `LINKEDIN`                  | Use `a-z`, `A-Z`, `0-9`, `_` and `-` only                                                                                                      | john-doe-b9a38128a             |
-| `BIRTHDAY`                  | Have the format of `DD/MM`                                                                                                                     | 31/10                          |
+| Parameter                       | Format                                                                                                                                          | Example                                    |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|
+| `n/NAME`                        | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                                                    | n/John Doe                                 |
+| `p/PHONE_NUMBER`                | Use `0-9` only and should be at least 3 digits long                                                                                             | p/98765432                                 |
+| `e/EMAIL`  `e2/SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                                                          | e/johndoe@gmail.com   e2/johndoe@gmail.com |
+| `a/ADDRESS`                     | Use any characters                                                                                                                              | a/John street, block 123, #01-01           |
+| `t/TAG`                         | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined tags that indicate your contact as an emergency contact  | t/friend                                   |
+| `tg/TELEGRAM`                   | Start with the `@` symbol, no whitespace with a minimum length of 5 characters. Use `a-z`, `0-9` and `_` only                                   | tg/@john_doe123                            |
+| `li/LINKEDIN`                   | Use `a-z`, `A-Z`, `0-9`, `_` and `-` only                                                                                                       | li/john-doe-b9a38128a                      |
+| `b/BIRTHDAY`                    | Have the format of `DD/MM`                                                                                                                      | b/31/10                                    |
 
 </panel>
 
@@ -274,13 +273,13 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 </box>
 
-###  Edit contact information: `edit`
+###  Edit information of contact: `edit`
 
 If the details of your contacts have changed, CampusConnect enables you to edit your contacts with the latest updated information so that you can still continue to keep in touch with them! Moreover, if you have made a mistake earlier while adding your contact information, CampusConnect empowers you to correct your mistakes through the `edit` command!
 
 This feature involves the command: `edit`, which edits existing information saved to your contact.
 
-Format: `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
+Format: `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]... [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
 
 <box type="info" icon=":fa-solid-magnifying-glass:">
 
@@ -288,6 +287,7 @@ Below are some examples on how to use the command:
 
 * `edit 1 tg/@johndoe e2/johndoe@gmail.com`: Edits telegram to "@johndoe" and secondary email to "johndoe@gmail.com" for contact at index 1 of your contact list.   
 * `edit 2 n/Betsy e/betsy@example.com a/Newgate Heavan p/98765411 t/bestfriend`: Edits name to "Besty", email to "besty@example.com", address to "Newgate Heavan", phone to "98765411" and tag to "bestfriend" for contact at index 2 of your contact list.  
+* `edit 3 t/` Removes all existing tags for contact at index 3 of your contact list. <br> **Note: In this case, for the `[t/TAG]` parameter, you can only input it once if you want to remove all existing tags from your contact, e.g. `edit 3 t/ t/` will not work.**
 
 Refer to [properties of contact](#properties-of-contact) on the accepted formats for the respective parameters.
 
@@ -302,7 +302,7 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 </box>
 
-###  Update contact's photo: `updatephoto`
+###  Update photo of contact: `updatephoto`
 
 If you are afraid that you may forget who the saved contact is in CampusConnect, our application enables you to update the photo of your contact so that you can visually remember and recognize them!
 
@@ -398,7 +398,7 @@ The fields you enter should follow the following format:
 Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
 </box>
 
-### Add a note to contact: `addnote`
+### Add note to contact: `addnote`
 You can add notes to a person with the `addnote` command.
 
 Format: `addnote PERSON_INDEX NOTE_CONTENT`
@@ -412,7 +412,7 @@ Below are some examples on how to use the commands:
 </box>
 
 
-### Remove a note from contact: `removenote`
+### Remove note from contact: `removenote`
 You can remove notes from a person with the `removenote` command.
 
 Format: `removenote PERSON_INDEX NOTE_INDEX`
@@ -425,7 +425,7 @@ Below are some examples on how to use the commands:
 
 </box>
 
-### View notes of a contact: `viewnotes`
+### View notes of contact: `viewnotes`
 <div style="display:flex; justify-content:space-around; align-items:center;">
   <img src="images/notes/window_with_notes.png" alt="Window with Notes" style="height:400px; margin:10px;">
   <img src="images/notes/noteswindow2.png" alt="Window with Notes" style="height:400px; margin:10px;">
@@ -525,7 +525,7 @@ These convenience features are as follows:
 
 Now that you understand how to enter money when using our app, you can proceed to learn how to record payments in CampusConnect!
 
-### Pay a contact money: `pay`
+### Pay money to contact: `pay`
 
 Records a payment from you to a contact. The amount **the contact owes you** increases by that amount after this transaction.
 
@@ -551,7 +551,7 @@ At the end of both commands, **the contact owes you `$20.50`**.
 
 If you're looking to record a payment from a contact to you, read ahead on how you can use the [owe](#owe-a-contact-money-owe) command instead!
 
-### Owe a contact money: `owe`
+### Owe money to contact: `owe`
 
 Records a payment from a contact to you. The amount **you owe the contact** increases by that amount after this transaction.
 
@@ -580,7 +580,7 @@ At the end of both commands, **you owe the contact `$1.50`**.
 
 ---
 
-## Find Contacts
+## Contact Search
 
 Another feature of CampusConnect is the ability to search for contacts based on a variety of criteria. This is useful for quickly finding contacts whose details you may only partially remember, or for finding contacts who match a certain criteria.
 
