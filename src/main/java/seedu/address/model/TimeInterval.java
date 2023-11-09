@@ -13,7 +13,7 @@ public class TimeInterval {
 
     public static final String MESSAGE_CONSTRAINTS_SYNTAX = "The format of an interval should be: mon 1200 - tue 1400";
 
-    public static final String MESSAGE_CONSTRAINTS_LOGIC = "Your end time cannot be before your start time ";
+    public static final String MESSAGE_CONSTRAINTS_LOGIC = "Your end time cannot be before or equal your start time ";
 
     public static final String MESSAGE_CONSTRAINTS_OVERLAP = "No overlap is allowed in your interval. \n "
         + PREFIX_FREETIME + "mon 1200 - mon 1600 " + PREFIX_FREETIME + "mon 1400 - mon 1800 is not allowed. "
