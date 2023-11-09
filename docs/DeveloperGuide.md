@@ -386,14 +386,21 @@ The following activity diagram summarises the process of adding leave for an emp
 The mark mechanism is dependent on the Attendance class. The Attendance class contains information on the date and AttendanceType of a Person.  It implements the following operations:
 * `Attendance#markAbsent(LocalDate date)` -- marks the attendance of the employee on the provided date as absent.
 * `Attendance#markLate(LocalDate date)` -- marks the attendance of the employee on the provided date as late.
-  The AttendanceStorage stores all the Attendance objects of one Person, only storing Attendances that are late or absent. Dates that are not in the storage are assumed to be marked as present for that given Person.
+  
+The AttendanceStorage stores all the Attendance objects of one Person, only storing Attendances that are late or absent. Dates that are not in the storage are assumed to be marked as present for that given Person.
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
 
-Step 1. The user executes `mark 5 P` command to mark the 5th person in the address book as present.
+Step 1. The user executes `mark 1 /at LATE` command to mark the 5th person in the address book as present.
 
-Step 2. The `mark` command calls `AttendanceStorage#markAbsent()` of the given employee, which calls the `Attendance#markAbsent()`.
-(Sequence diagram to be added).
+Step 2. The `mark` command calls `MarkCommand#markByIndex()` of the given employee, which calls the `Attendance#markAbsent()` of the given Person.
+
+
+
+Sequence diagram as below:
+![Attendance](images/MarkSequenceDiagram.png)
+
+
 
 #### Design considerations:
 
