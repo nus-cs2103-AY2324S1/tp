@@ -75,20 +75,29 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Contact> lastShownList = model.getFilteredContactList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.INVALID_EDIT_INDEX);
-        }
+        validateIndex(lastShownList, index);
 
         Contact contactToEdit = lastShownList.get(index.getZeroBased());
         Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
-        if (!contactToEdit.isSameContact(editedContact) && model.containsContact(editedContact)) {
-            throw new CommandException(Messages.COMMAND_DUPLICATE_CONTACT);
-        }
+        ensureUniqueContact(model, contactToEdit, editedContact);
 
         model.updateContact(contactToEdit, editedContact);
         model.setContactsFilter(ModelManager.FILTER_NONE);
+
         return new CommandResult(Messages.editCommandSuccess(Contact.format(editedContact)));
+    }
+
+    private void validateIndex(List<Contact> contactList, Index index) throws CommandException {
+        if (index.getZeroBased() >= contactList.size()) {
+            throw new CommandException(Messages.INVALID_EDIT_INDEX);
+        }
+    }
+
+    private void ensureUniqueContact(Model model, Contact original, Contact edited) throws CommandException {
+        if (!original.isSameContact(edited) && model.containsContact(edited)) {
+            throw new CommandException(Messages.COMMAND_DUPLICATE_CONTACT);
+        }
     }
 
     /**

@@ -39,28 +39,36 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Contact> currentContactList = model.getFilteredContactList();
-        List<Contact> contactsToDelete = new ArrayList<>();
 
-        // Collect contacts to delete
+        List<Contact> currentContactList = model.getFilteredContactList();
+        validateIndices(currentContactList);
+
+        List<Contact> contactsToDelete = collectContactsToDelete(currentContactList);
+        contactsToDelete.forEach(model::removeContact);
+
+        String formattedContacts = formatContactsForMessage(contactsToDelete);
+        return new CommandResult(Messages.deleteCommandSuccess(formattedContacts));
+    }
+
+    private void validateIndices(List<Contact> contactList) throws CommandException {
         for (Index index : targetIndices) {
-            if (index.getZeroBased() >= currentContactList.size()) {
+            if (index.getZeroBased() >= contactList.size()) {
                 throw new CommandException(Messages.INVALID_DELETE_INDEX);
             }
-            contactsToDelete.add(currentContactList.get(index.getZeroBased()));
         }
+    }
 
-        // Delete the contacts
-        for (Contact contact : contactsToDelete) {
-            model.removeContact(contact);
-        }
+    private List<Contact> collectContactsToDelete(List<Contact> contactList) {
+        return targetIndices.stream()
+                .distinct()
+                .map(index -> contactList.get(index.getZeroBased()))
+                .collect(Collectors.toList());
+    }
 
-        // Format the deleted contacts for the message
-        String formattedContacts = contactsToDelete.stream()
+    private String formatContactsForMessage(List<Contact> contacts) {
+        return contacts.stream()
                 .map(Contact::format)
                 .collect(Collectors.joining(",\n"));
-
-        return new CommandResult(Messages.deleteCommandSuccess(formattedContacts));
     }
 
     @Override
