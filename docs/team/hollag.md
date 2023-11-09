@@ -40,5 +40,6 @@ Given below are my contributions to the project.
     * tP Team Repo Setup
 
 * **Review/mentoring contributions**:
-    * Reviewed PRs with comments
+    * Reviewed PRs with comments (13)
+    * Conducted bug testing 
 
