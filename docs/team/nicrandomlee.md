@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 
 - **Project management**:
 
-  - Contributed to the releases `v1.2` - `v1.3` (2 releases) on GitHub
+  - Contributed to the releases `v1.2` - `v1.4` (3 releases) on GitHub
 
 - **Enhancements to existing features**:
 
