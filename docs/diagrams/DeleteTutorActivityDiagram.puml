@@ -3,23 +3,26 @@ skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
-:User executes command;
+:User runs delete-t command;
 
 'Since the beta syntax does not support placing the condition outside the
  'diamond we place it as the true branch instead.
 
-if () then ([have index])
-    if() then ([numeric index])
-        if () then ([index within range])
-            :Delete tutor in Addressbook;
-        else ([else])
-         :ErrorInvalidPersonDisplayedIndex;
-        endif
+:Parse user input;
+
+if () then ([input is vaild])
+    :Construct DeleteTutorCommand object;
+    :Return back to LogicManager;
+    :LogicManager executes DeleteTutorCommand;
+    if () then ([index of person to delete exists])
+        :Delete person from PersonList;
+        :Update UI;
     else ([else])
-     :ErrorInvalidCommandFormat;
+        :Display invalid Person index error message;
     endif
 else ([else])
- :ErrorInvalidCommandFormat;
+    :Display error message;
+
 endif
 stop
 @enduml

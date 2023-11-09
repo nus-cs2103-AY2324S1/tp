@@ -1,0 +1,32 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User runs mark command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Parse user input;
+
+if () then ([input is valid])
+    :Construct MarkScheduleCommand object;
+    :Return back to LogicManager;
+    :LogicManager executes MarkScheduleCommand;
+    if () then ([index of schedule to mark exists])
+        if () then ([valid status input])
+            :Construct edited Schedule with Status as missed or completed;
+            :Replace schedule with edited schedule in ScheduleList;
+            :Update UI;
+        else ([else])
+            :Displays invalid Schedule Status error message;
+        endif
+    else ([else])
+        :Displays invalid Schedule Index error message;
+    endif
+else ([else])
+    :Displays error message;
+endif
+stop
+@enduml

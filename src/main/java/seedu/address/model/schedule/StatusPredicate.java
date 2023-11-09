@@ -1,9 +1,7 @@
 package seedu.address.model.schedule;
 
-import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
@@ -11,7 +9,7 @@ import seedu.address.model.person.Person;
  * Tests that a {@code Schedule}'s {@code Status} matches any of the keywords given.
  */
 public class StatusPredicate implements Predicate<Schedule> {
-    private final List<String> status;
+    private final Status status;
     private final Person tutor;
 
     /**
@@ -20,7 +18,7 @@ public class StatusPredicate implements Predicate<Schedule> {
      * @param status  status value
      * @param tutor   tutor
      */
-    public StatusPredicate(List<String> status, Person tutor) {
+    public StatusPredicate(Status status, Person tutor) {
         this.status = status;
         this.tutor = tutor;
     }
@@ -28,14 +26,10 @@ public class StatusPredicate implements Predicate<Schedule> {
     @Override
     public boolean test(Schedule schedule) {
         if (tutor != null) {
-            return status.stream()
-                .allMatch(status ->
-                    StringUtil.containsWordIgnoreCase(schedule.getStatus().toString(), status))
+            return status.equals(schedule.getStatus())
                 && schedule.getTutor().isSamePerson(tutor);
         } else {
-            return status.stream()
-                .allMatch(status ->
-                    StringUtil.containsWordIgnoreCase(schedule.getStatus().toString(), status));
+            return status.equals(schedule.getStatus());
         }
     }
 
