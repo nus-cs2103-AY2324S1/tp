@@ -182,13 +182,18 @@ public class EditCommandTest {
                 + editContactDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
-    
+
     @Test
     public void execute_editWithNoChangesUnfilteredList_success() {
-        Contact firstContact = model.getFilteredContactList().get(TestData.IndexContact.FIRST_CONTACT.getZeroBased());
+        Contact firstContact =
+                model.getFilteredContactList().get(TestData.IndexContact.FIRST_CONTACT.getZeroBased());
+        // Create an EditContactDescriptor using the same values as the first contact,
+        // implying no changes should be made when this descriptor is used to edit.
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact).build();
         EditCommand editCommand = new EditCommand(TestData.IndexContact.FIRST_CONTACT, descriptor);
 
+        // Prepare the expected message to be shown when edit is successful,
+        // which should indicate that the contact has been edited (even if it remains the same).
         String expectedMessage = Messages.editCommandSuccess(Contact.format(firstContact));
 
         assertCommandSuccess(editCommand, model, expectedMessage, model);
@@ -196,14 +201,20 @@ public class EditCommandTest {
 
     @Test
     public void execute_editWithMixedFieldsUnfilteredList_success() {
-        Contact firstContact = model.getFilteredContactList().get(TestData.IndexContact.FIRST_CONTACT.getZeroBased());
-        Contact editedContact = new ContactBuilder(firstContact).withPhone(TestData.Valid.PHONE_BOB).build(); // change only the phone
-        EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withPhone(TestData.Valid.PHONE_BOB).build();
+        Contact firstContact =
+                model.getFilteredContactList().get(TestData.IndexContact.FIRST_CONTACT.getZeroBased());
+        Contact editedContact = new ContactBuilder(firstContact).withPhone(TestData.Valid.PHONE_BOB).build();
+        // Create an EditContactDescriptor that will change the first contact's phone number
+        // to BOB's phone number.
+        EditContactDescriptor descriptor =
+                new EditContactDescriptorBuilder().withPhone(TestData.Valid.PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(TestData.IndexContact.FIRST_CONTACT, descriptor);
 
         String expectedMessage = Messages.editCommandSuccess(Contact.format(editedContact));
 
+        // Prepare an expected model state to reflect the contact list after the edit has been made.
         Model expectedModel = new ModelManager(new Contacts(model.getContacts()), new Settings());
+        // In the expected model, update the first contact to match the edited contact.
         expectedModel.updateContact(firstContact, editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
