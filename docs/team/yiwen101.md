@@ -27,10 +27,12 @@ Given below are my contributions to the project.
     * to be added soon
 
 * **Contributions to team-based tasks**:
-    * to be added soon
+  * Actively help with the maintaining of the issue tracker and codebase
+  * Helped with the release of v1.3 java jar.
+  * Generated multiple drafts for the tutorMate logo.
 
 * **Review/mentoring contributions**:
-    * to be added soon
+  * Actively help with the review of the PR.
 
 * **Contributions beyond the project team**:
     * to be added soon
