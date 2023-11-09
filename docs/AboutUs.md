@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/kailash201.png" width="200px">
 
 [[github](http://github.com/Kailash201)]
-[[portfolio](team/Kailash201.md)]
+[[portfolio](team/kailash201.md)]
 
 * Roel: Developer
 * Role: Team Lead
