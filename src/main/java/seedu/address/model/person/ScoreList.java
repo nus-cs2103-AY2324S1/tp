@@ -27,7 +27,6 @@ public class ScoreList {
         this.scoreList = scoreList;
     }
 
-    // TODO: have a TAG parser that checks if its a interview-related tag
 
     /**
      * Updates the score list with the new score.

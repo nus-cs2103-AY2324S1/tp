@@ -127,7 +127,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]â€¦â€
 **Notes regarding the design of the `add` command:**
 * The uniqueness of the person is determined by the name only. This means that you cannot have 2 persons with the same name in the application book.
 * All other fields other than name can be identical between different people in JABPro.
-* `n/NAME` - `Name` must be alphanumeric (Letters and numbers, no symbols allowed such as `/`, `,` ...)
+* `n/NAME` - `NAME` must be alphanumeric (Letters and numbers, no symbols allowed such as `/`, `,` ...)
 * `p/PHONE_NUMBER` - `PHONE_NUMBER` must contain numbers only and should be at-least 3 digits long
 * `e/EMAIL` - `EMAIL` must be the standard email address format (There must be an email-prefix followed by  `@` symbol and email domain)
 * `a/ADDRESS` - `ADDRESS` can be any value, including special characters such as `#`, `,` ...
