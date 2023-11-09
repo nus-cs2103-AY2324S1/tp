@@ -582,7 +582,7 @@ The area where you type your instructions for HealthSync to perform.
 ### Logger Tab
 A 'sticky-note'-like area on the right of the Patient List View. Serves as a snapshot of the patient data at the time they were logged with the [`log` command](#preserving-a-find-command-result-in-the-log--log).
 
-This comes in handy you want to refer to certain patient profiles at the side, while still being able to carry on with other tasks.
+This comes in handy when you want to refer to certain patient profiles at the side, while still being able to carry on with other tasks.
 
 ### Command History Stack
 The group of instructions HealthSync remembers performing. This group allows HealthSync to undo the
