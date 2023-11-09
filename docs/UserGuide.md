@@ -27,6 +27,28 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application.<br>  
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>  
    ![Ui](images/Ui.png)
+<br />
+<br />
+    **Here's what each part of the GUI signifies:**
+<br />
+    ![UiBreakdown](images/uibreak.png)
+
+   | Colour                                                   | Component                   | Description                                                                                                                                    |
+   |----------------------------------------------------------|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+   | <img src="images/red_1.png" width="10px" height="10px">  | Menu Bar                    | Provides buttons for exiting, opening Help window, and opening Events window                                                                   |
+   | <img src="images/orange.png" width="10px" height="10px"> | Command Box                 | Allows you to enter a command                                                                                                                  |
+   | <img src="images/yellow.png" width="10px" height="10px"> | Result Display              | Displays the result of the command execution                                                                                                   |
+   | <img src="images/green.png" width="10px" height="10px">  | Candidate List Panel        | Displays a list of all candidates in JABPro                                                                                                    |
+   | <img src="images/blue.png" width="10px" height="10px">   | Candidate Card              | Displays certain details of a candidate for quick view, such as name, address, phone, email, tags, LinkedIn/Github username                    |
+   | <img src="images/purple.png" width="10px" height="10px"> | Candidate Information Panel | Displays a detailed view of a candidate, providing information of status and remarks, in addition to the basic information about the candidate |
+   | <img src="images/brown.png" width="10px" height="10px">  | Summary Statistics Panel    | Displays summary statistics for a particular candidate pertaining to a specific tag                                                            |
+
+    In addition, there are windows such as:
+* Help Window [accessed by the `help` command, or through Menu Bar]
+* Events Window [accessed by the `schedule` command, or through Menu Bar]
+* TagList window [accessed through the `listT` command]
+
+    Details for each have been provided with the respective commands.
 
 5. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
@@ -475,10 +497,20 @@ Displays all events that have been added to JABPro.
 
 Format: `schedule`
 
-* Opens the `Events` window, which can also be accessed by clicking on `Events > Event` in the menu bar
+* Opens the `Events` window and displays all events that have been previously added.
+
+<box type="tip" seamless>
+
+**Tip:** The `Events` window can also be accessed by clicking `Events > Event` in the menu bar, located at the top of the window.
+        <img src="images/eventstab.png">
+
+
+</box>
 
 Example:
 * First, entering `event 1 d/Interview bt/2023-10-27 18:00 et/2023-10-27 21:00` adds the event, and entering `schedule` displays this event in a separate window, titled `Events`
+
+
 
 ### Clearing all entries : `clear`
 
