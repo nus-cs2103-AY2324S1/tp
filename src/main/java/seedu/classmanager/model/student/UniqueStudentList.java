@@ -82,6 +82,13 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Returns the student that is currently being selected to view.
+     */
+    public Student getSelectedStudent() {
+        return selectedStudent.isEmpty() ? null : selectedStudent.get(0);
+    }
+
+    /**
      * Removes the equivalent student from the list.
      * The student must exist in the list.
      */
@@ -141,7 +148,7 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Returns the {@code ObservableList} containing the selected student.
      */
-    public ObservableList<Student> getSelectedStudent() {
+    public ObservableList<Student> getObservableSelectedStudent() {
         return selectedStudent;
     }
 
