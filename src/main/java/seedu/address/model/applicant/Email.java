@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Applicant's email in the address book.
+ * Represents an Applicant's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
@@ -62,7 +62,7 @@ public class Email {
      * Returns domain of email.
      */
     public String getDomain() {
-        return value.split("@")[1].split("\\.")[0];
+        return value.split("@")[1];
     }
 
     @Override

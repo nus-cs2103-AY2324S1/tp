@@ -19,7 +19,7 @@ public class FindInterviewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all interviews which the job-role contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Parameters: KEYWORD(S)\n"
             + "Example: " + COMMAND_WORD + " software-engineer data-analyst";
 
     private final JobContainsKeywordsPredicate predicateJob;
