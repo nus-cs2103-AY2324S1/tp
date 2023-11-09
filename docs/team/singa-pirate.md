@@ -48,18 +48,18 @@ Given below are my contributions to the project.
 
 * **Project management**:
 
-  * Managed release `v1.3 `on GitHub
+  * Managed release `v1.3` on GitHub
 
 * **Documentation**:
 
   * User Guide:
-    *  [\#26](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/26) Refactored from AB3 descriptions and drafted documentation for v1.2 features
+    *  [#26](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/26) Refactored from AB3 descriptions and drafted documentation for v1.2 features
     *  [#132](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/132) Added command summary and FAQ sections in the user guide for v1.2
     *  [#175](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/175) Drafted documentation for v1.3 features
     *  [#244](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/244) Made the user guide more concise by formatting explanations of common terms
 
   - Developer Guide:
-    - [\#29](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/29/commits/1cb161408bbdcb1e941b21987bdc6a9759657ca4) Added user stories and non-functional requirements for v1.2 features
+    - [#29](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/29/commits/1cb161408bbdcb1e941b21987bdc6a9759657ca4) Added user stories and non-functional requirements for v1.2 features
     - [#58](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/58) Added use cases and glossary for `add` command
     - [#105](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/105) Conducted quality assurance on the developer guide for v1.2
     - [#263](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/263) Added use cases for v1.3 features and updated class diagram for `Storage`
