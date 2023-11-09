@@ -411,8 +411,7 @@ Step 1. The user executes `mark 1 /at LATE` command to mark the 5th person in th
 Step 2. The `mark` command calls `MarkCommand#markByIndex()` of the given employee, which calls the `Attendance#markAbsent()` of the given Person.
 
 This working status is then updated in the GUI as shown below:
-
-![GUI after marking attendance](images/GUIAfterMarkCommand.png)
+![GUI before mark command](images/GUIBeforeMarkCommand.png) ![GUI after mark command](images/GUIAfterMarkCommand.png)
 
 Class diagram is as shown below:
 
@@ -421,14 +420,14 @@ Class diagram is as shown below:
 #### 2. Attendance Report feature
 
 The attendance reporting mechanism is dependent on the AttendanceStorage class. The AttendanceStorage is a collection of the Attendances of a Person. It implements the following operations:
-* `AttendanceStorage#getCount(AttendanceType attendanceType, JoinDate joinDate, int numOfLeave)` -- counts the number of days the attendance of type `attendanceType` appears in the AttendanceStorage
-* `AttendanceStorage#getAttendanceReport(JoinDate joinDate, int numOfLeave)` -- provides an `int[]` of the number of days of each attendance type in the following order: [leave, absent, late]
+* `AttendanceStorage#getCount` -- counts the number of days the attendance of type `attendanceType` appears in the AttendanceStorage
+* `AttendanceStorage#getAttendanceReport` -- provides an `int` of the number of days of each attendance type in the following order: [leave, absent, late]
 
 The AttendanceStorage stores all the Attendance objects of one Person, only storing Attendances that are late or absent. Dates that are not in the storage are assumed to be marked as present for that given Person.
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
 
-Step 1. The user executes `attendance 1` command to mark the 5th person in the address book as present.
+Step 1. The user executes `attendance 1` command to retrieve the attendance of the first Person.
 
 Step 2. The `attendance` command calls `AttendanceCommand#reportByIndex()` of the given employee, which calls the `AttendanceStorage#getAttendanceReport()` of the given Person.
 
@@ -441,16 +440,13 @@ Sequence diagram is as shown below:
 **Aspect: How AttendanceStorage is assigned to each Person**
 * **Alternative 1 (current choice):** As an attribute of a Person.
   * Pros: Easy to query for a Person's attendance status
-  * Cons: May be sub-par performance as it would store identical Attendance objects for each Person (Person A: absent on 24th oct, Person B: also absent on 24th oct)
+  * Cons: May be sub-par performance as it would store identical Attendance objects for each Person.
+    * (Person A could be absent on 24th Oct, Person B could also absent on 24th Oct, but the current software architecture design does not allow shared usage of the duplicates)
 * **Alternative 2:** As a UniqueAttendanceList.
   * Pros: No copies of Attendance objects having the same attribute values
   * Cons: Difficult to reference a Person to each Attendance.
 
-
-
-
-
-
+    
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
