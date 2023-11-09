@@ -50,6 +50,8 @@ public class ModelManager implements Model {
 
         this.logBook.setPersons(foundPersonsList);
         loggedFilteredPersons = new FilteredList<>(this.logBook.getPersonList());
+
+        foundPersonsList.setPredicate(x -> false);
     }
 
     public ModelManager() {
