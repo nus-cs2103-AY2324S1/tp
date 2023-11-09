@@ -2,7 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INCORRECT_DATE_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DATES;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
@@ -27,6 +28,7 @@ public class EventCommandParserTest {
     private final String nonEmptyValidEndTime = "2023-11-01 13:00";
     private final String nonEmptyInvalidStartTime = "01-11-2023 12:00";
     private final String nonEmptyInvalidEndTime = "1 January 2023 12PM";
+    private final String invalidDate = "2023-02-30 12:00";
 
     @Test
     public void parse_indexSpecified_success() {
@@ -99,8 +101,8 @@ public class EventCommandParserTest {
     }
 
     @Test
-    public void parse_invalidDate_failure() {
-        String expectedMessage = MESSAGE_INVALID_DATES;
+    public void parse_invalidStart_failure() {
+        String expectedMessage = MESSAGE_INVALID_START;
 
         // end time = start time
         assertParseFailure(parser, EventCommand.COMMAND_WORD + " 0 " + PREFIX_DESCRIPTION
@@ -111,5 +113,14 @@ public class EventCommandParserTest {
         assertParseFailure(parser, EventCommand.COMMAND_WORD + " 0 " + PREFIX_DESCRIPTION
                 + nonEmptyDescription + " " + PREFIX_STARTTIME + nonEmptyValidEndTime + " " + PREFIX_ENDTIME
                 + nonEmptyValidStartTime, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidDate_failure() {
+        String expectedMessage = MESSAGE_INVALID_DATE;
+
+        assertParseFailure(parser, EventCommand.COMMAND_WORD + " 0 " + PREFIX_DESCRIPTION
+                + nonEmptyDescription + " " + PREFIX_STARTTIME + invalidDate + " " + PREFIX_ENDTIME
+                + nonEmptyValidEndTime, expectedMessage);
     }
 }

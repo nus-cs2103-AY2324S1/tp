@@ -24,7 +24,8 @@ public class EventCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT =
-            "Event with same description for the person has already been added!";
+            "An event with the same description, for the same person, already exists!";
+
     private final Event event;
 
     /**
@@ -40,9 +41,11 @@ public class EventCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         Index targetIndex = event.getIndex();
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
         Person person = lastShownList.get(targetIndex.getZeroBased());
         Event event1 = new Event(person, event.getDescription(), event.getStart_time(), event.getEnd_time());
         if (model.hasEvent(event1)) {
