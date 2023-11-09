@@ -212,6 +212,54 @@ for example, assume today is 2023/11/3, to add 2023/11/29, could use 29, 11/29, 
 Usage: filter -(any number of unique -[name|subject|before|on|after|remark] [value]). 
 ```
 
+### Locating students/lessons by name: `find`
+
+The find command generally finds items by its exact name, but has different behaviours depending on the current list:
+
+Format: `find SEARCH_STRING`
+
+1. In `SCHEDULE` list:
+    * Finds lesson(s) whose names contain the given search string.
+    * The search is case-insensitive. e.g. `lesson` will match `Lesson`.
+    * Lesson(s) with names containing the search string will be returned.
+      e.g. Both `Lesson Chem` and `sson Che` will return `Lesson Chemistry`, `Bishan Lesson Chem`.
+
+2. In `STUDENTS` list:
+    * Finds student(s) whose names contain the given search string.
+    * The search is case-insensitive. e.g `hans` will match `Hans`.
+    * Student(s) with names containing the search string will be returned.
+      e.g. `Hans` will return `Hanso Gruber`, `Lee Hansel`.
+
+3. In `TASKS` list:
+    * Find tasks by name/description is disabled.
+    * Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see task list of the lesson.
+
+Success Output:
+* In `SCHEDULE` list:
+```
+2 lessons listed!
+```
+* In `STUDENTS` list:
+```
+3 persons listed!
+```
+These are also counted as success outputs, since they can be a result of finding a valid search string (with no results):
+* In `SCHEDULE` list:
+```
+0 lessons listed!
+```
+* In `STUDENTS` list:
+```
+0 persons listed!
+```
+
+Failure Output:
+```
+Invalid command format! 
+find: Finds all persons or lesson whose names contains the specified search string (case-insensitive) and displays them as a list with index numbers.
+Parameter: SEARCH_STRING
+Example: find alex yeoh
+```
 
 ### Showing a lesson / task / student's details : `show`
 
@@ -572,55 +620,6 @@ Example: deleteTask 1
 If no lesson is shown:
 ```
 Please use show lessonIndex before deleting task!
-```
-
-### Locating students/lessons by name: `find`
-
-The find command generally finds items by its name, but has different behaviours depending on the current list:
-
-Format: `find SEARCH_STRING`
-
-1. In `SCHEDULE` list: 
-    * Finds lesson(s) whose names contain the given search string.
-    * The search is case-insensitive. e.g. `lesson` will match `Lesson`.
-    * Lesson(s) with names containing the search string will be returned.
-      e.g. Both `Lesson Chem` and `sson Che` will return `Lesson Chemistry`, `Bishan Lesson Chem`.
-
-2. In `STUDENTS` list: 
-    * Finds student(s) whose names contain the given search string.
-    * The search is case-insensitive. e.g `hans` will match `Hans`.
-    * Student(s) with names containing the search string will be returned.
-      e.g. `Hans` will return `Hanso Gruber`, `Lee Hansel`.
-
-3. In `TASKS` list:
-   * Find tasks by name/description is disabled. 
-   * Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see task list of the lesson.
-
-Success Output:
-* In `SCHEDULE` list:
-```
-2 lessons listed!
-```
-* In `STUDENTS` list:
-```
-3 persons listed!
-```
-These are also counted as success outputs, since they can be a result of finding a valid search string (with no results):
-* In `SCHEDULE` list:
-```
-0 lessons listed!
-```
-* In `STUDENTS` list:
-```
-0 persons listed!
-```
-
-Failure Output:
-```
-Invalid command format! 
-find: Finds all persons or lesson whose names contains the specified search string (case-insensitive) and displays them as a list with index numbers.
-Parameter: SEARCH_STRING
-Example: find alex yeoh
 ```
 
 ### Command history
