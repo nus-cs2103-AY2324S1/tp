@@ -55,5 +55,6 @@ SortRateCommand --> LogicManager
 deactivate SortRateCommand
 
 [<--LogicManager : CommandResult
+destroy SortRateCommand
 deactivate LogicManager
 @enduml

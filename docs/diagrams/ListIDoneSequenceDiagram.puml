@@ -47,7 +47,9 @@ deactivate Model
 
 ListInterviewsDoneCommand --> LogicManager : CommandResult
 deactivate ListInterviewsDoneCommand
+destroy InterviewIsDonePredicate
 
 [<--LogicManager : CommandResult
 deactivate LogicManager
+destroy ListInterviewsDoneCommand
 @enduml

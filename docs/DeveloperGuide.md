@@ -311,43 +311,29 @@ This feature is implemented though the `TimeParser` class. This class contains s
   
   - The `dateOnly` parameter is a flag to indicate how to parse the given `date`. If `dateOnly` is set to false, then the TimeParser will parse valid dates that are in the list of accepted date (without time) formats. Otherwise, if `dateOnly` is set to true, then the TimeParser will parse valid dates that are in the list of accepted date (with time) formats.
   - Accepted time formats:
-      * DD/MM/YYYY and time:
-          * `16 May 2024 1515`
-          * `16 May 2024 3.15pm`
-          * `16 May 2024 3pm`
-          * `16-05-2024 1515`
-          * `16-05-2024 3.15pm`
-          * `16-05-2024 3pm`
-          * `16-05-24 1515`
-          * `16-05-24 3.15pm`
-          * `16-05-24 3pm`
-          * `16/05/2024 1515`
-          * `16/05/2024 3.15pm`
-          * `16/05/2024 3pm`
-          * `16/05/24 1515`
-          * `16/05/24 3.15pm`
-          * `16/05/24 3pm`
-      * MM, DD and time:
-          * `16 May 1515`
-          * `16 May 3.15pm`
-          * `16 May 3pm`
-          * `16 January 1515`
-          * `16 January 3.15pm`
-          * `16 January 3pm`
-          * `16/5 1515`
-          * `16/5 3.15pm`
-          * `16/5 3pm`
-          * `16/05 1515`
-          * `16/05 3.15pm`
-          * `16/05 3pm`
-    - Accepted date formats
-      * DD/MM/YYYY:
-        * `16-05-2024`
-        * `16/05/2024`
-      * DD/MM:
-        * `16/05`
-        * `16 May`
-          * _Must be a prefix of a valid month of at least 3 characters_
+    * DD/MM/YYYY and time:
+        * `16 May 2024 TIME`
+        * `16-05-2024 TIME`
+        * `16-05-24 TIME`
+        * `16/05/2024 TIME`
+        * `16/05/24 TIME`
+    * MM, DD and time:
+        * `16 May TIME`
+        * `16 January TIME`
+        * `16/5 TIME`
+        * `16/05 TIME`
+    * The `TIME` placeholder can be replaced with the formats below:
+        * `1515`
+        * `3.15pm`
+        * `3pm`
+  - Accepted date formats
+    * DD/MM/YYYY:
+      * `16-05-2024`
+      * `16/05/2024`
+    * DD/MM:
+      * `16/05`
+      * `16 May`
+        * _Must be a prefix of a valid month of at least 3 characters_
   - The Sequence Diagram below illustrates how other classes interact with `TimeParser` when `parseDate(date, false)` is called.
     ![TimeParserSequenceDiagram.png](images/TimeParserSequenceDiagram.png)
 

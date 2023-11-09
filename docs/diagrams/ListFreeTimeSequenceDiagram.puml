@@ -7,7 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant "lftp:ListFreeTimeCommandParser" as ListFreeTimeCommandParser LOGIC_COLOR
 participant "lft:ListFreeTimeCommand" as ListFreeTimeCommand LOGIC_COLOR
-participant "TimeParser" as TimeParser LOGIC_COLOR
+participant "TimeParser" as TimeParser <<class>> LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -44,6 +44,7 @@ deactivate ListFreeTimeCommand
 
 ListFreeTimeCommandParser --> AddressBookParser : ListFreeTimeCommand
 deactivate ListFreeTimeCommandParser
+destroy ListFreeTimeCommandParser
 
 AddressBookParser --> LogicManager : ListFreeTimeCommand
 deactivate AddressBookParser
@@ -73,5 +74,6 @@ ListFreeTimeCommand --> LogicManager : CommandResult
 deactivate ListFreeTimeCommand
 
 [<--LogicManager : CommandResult
+destroy ListFreeTimeCommand
 deactivate LogicManager
 @enduml
