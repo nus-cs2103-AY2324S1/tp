@@ -120,8 +120,7 @@ How the parsing works:
 Here is an overview of what the other classes in `Logic` do:
 * `ArgumentMultiMap` and `ArgumentTokeniser` are used to map the parameters of 
 the user's input into key-value pairs, where the keys are specified using `ArgumentTokeniser`
-* `CliSyntax` is where command-specific keywords are stored. It is used as the arguments for `ArgumentTokeniser`
-  to process the user input into: `{keyword : parameter}` pairs.
+* `CliSyntax` is where command-specific keywords are stored. It is used as the arguments for `ArgumentTokeniser` to process the user input into: `{keyword : parameter}` pairs.
   * Example usage: The text `1 /name John Doe /phone 98765432` when
     mapped using `ArgumentTokeniser` with the keywords `/name`
     and `/phone` produces:
@@ -888,8 +887,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
-
-
 **Use case: Sort contacts**
 
 **MSS**
@@ -1174,7 +1171,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Contact**: a contact of the user whose information is stored in the app, which includes name, phone numbers, emails, links, graduation year, courses taken, specialisations, priority level and tags of/associated with the person.
 * **Field**: an attribute of a contact that describes information about the contact. Possible fields of a contact are elaborated in the **contact** term above.
 * **Single-valued field**: a field that cannot hold many values, so that each contact can only have one value. These fields include name, graduation year and priority level.
-* **Multi-valued field**: a field that can possibly hold many values, so that each contact has a list of values. These fields include phone numbers, emails, link, courses, specialisations and tags.
+* **Multi-valued field**: a field that can possibly hold many values, so that each contact has a list of values. These fields include phone numbers, emails, links, courses, specialisations and tags.
 * **Course taken**: a module that a person has taken in university or outside (for e.g. CS2103T module in NUS).
 * **Specialisation**: the specialisation a person can take in their computing degree in NUS (e.g. Software Engineering, Artificial Intelligence).
 * **Graduation year**: the year and semester that a person will graduate / has graduated from NUS (e.g. AY2526-S2, meaning the second semester of the academic year spanning from 2025 to 2026).
