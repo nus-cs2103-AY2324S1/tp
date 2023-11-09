@@ -31,18 +31,6 @@ deactivate NetworkBookParser
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : canUndoNetworkBook()
-activate Model
-
-Model -> VersionedNetworkBook : canUndo()
-activate VersionedNetworkBook
-
-VersionedNetworkBook --> Model : true
-deactivate VersionedNetworkBook
-
-Model --> UndoCommand : true
-deactivate Model
-
 UndoCommand -> Model : undoNetworkBook()
 activate Model
 

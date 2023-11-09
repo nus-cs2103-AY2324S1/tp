@@ -211,7 +211,6 @@ Otherwise, it creates a new instance of `CreateCommand` that corresponds to the 
 Upon execution, `CreateCommand` first queries the supplied model if it contains a person with an identical name.
 If no such person exists, `CreateCommand` then calls on `model::addPerson` to add the person into the networkBook data.
 
-
 We have considered the following alternative implementations:
 * Implement `CreateCommandParser` to parse the arguments using regular expressions.
   This is not optimal for our use case as having a regex expression to parse the field values would be more complicated to scale and debug.
@@ -275,7 +274,10 @@ The undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `Ne
 * `VersionedNetworkBook#undo()` — Restores the previous NetworkBook state from its history.
 * `VersionedNetworkBook#redo()` — Restores a previously undone NetworkBook state from its history.
 
-These operations are called in functions of the `Model` interface, namely `Model#undoNetworkBook()`, `Model#redoNetworkBook()`, `Model#setPerson()`, `Model#addPerson()`, `Model#deletePerson()` and `Model#updateDisplayedPersonList()` respectively.
+These operations are called in functions of the `Model` interface:
+* `VersionedNetworkBook#undo()` is called in `Model#undoNetworkBook()`.
+* `VersionedNetworkBook#redo()` is called in `Model#redoNetworkBook()`.
+* `VersionedNetworkBook#commit()` is called in `Model#setPerson()`, `Model#addPerson()`, `Model#deletePerson()` and `Model#updateDisplayedPersonList()`.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
