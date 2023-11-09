@@ -30,9 +30,9 @@ public class FindCommand extends Command {
     private final CompositePredicate predicate;
 
     /**
-     * Creates a {@code FindCommand} to find persons by with the specified composite predicate.
+     * Creates a {@code FindCommand} to find patients by with the specified composite predicate.
      *
-     * @param predicate The predicate to match persons by.
+     * @param predicate The predicate to match patients by.
      * @throws NullPointerException if {@code predicate} is null.
      */
     public FindCommand(CompositePredicate predicate) {
@@ -44,8 +44,12 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         model.updateFoundPersonsList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        if (model.getFilteredPersonList().isEmpty()) {
+            return new CommandResult(Messages.MESSAGE_NO_PATIENT_FOUND);
+        } else {
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        }
     }
 
     @Override
