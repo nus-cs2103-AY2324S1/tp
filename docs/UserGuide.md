@@ -344,16 +344,16 @@ Action | Format, Examples
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky"><span style="font-weight:bold">Command</span></th>
-    <th class="tg-fymr">Field</th>
-    <th class="tg-0pky"><span style="font-weight:bold">Optional</span></th>
-    <th class="tg-0pky"><span style="font-weight:bold">Blank accepted</span></th>
+    <th class="tg-0pky"><span>Command</span></th>
+    <th class="tg-0pky"><span>Field</span></th>
+    <th class="tg-0pky"><span>Optional</span></th>
+    <th class="tg-0pky"><span>Blank accepted</span></th>
     <th class="tg-0pky"><span >Acceptable values</span></th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky" rowspan="6"><code>createMember</code> / <code>editMember</code></td>
+    <td class="tg-0pky command" rowspan="6"><code>createMember</code> / <code>editMember</code></td>
     <td class="tg-0pky">MEMBER_NAME</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
@@ -390,7 +390,7 @@ Action | Format, Examples
     <td class="tg-0pky">Only contain alphanumeric characters with no spaces in between, but can be blank</td>
   </tr>
   <tr>
-    <td class="tg-0pky" rowspan="4"><code>createEvent</code> / <code>editEvent</code></td>
+    <td class="tg-0pky command" rowspan="4"><code>createEvent</code> / <code>editEvent</code></td>
     <td class="tg-0pky">EVENT_NAME</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
@@ -415,14 +415,14 @@ Action | Format, Examples
     <td class="tg-0pky">Only contain alphanumeric characters with no spaces in between, but can be blank</td>
   </tr>
   <tr>
-    <td class="tg-0pky"><code>deleteMember</code> / <code>deleteEvent</code></td>
+    <td class="tg-0pky command"><code>deleteMember</code> / <code>deleteEvent</code></td>
     <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
-    <td class="tg-0pky">Must be a<span> positive integer</span> that is within the range of the length of the <span style="font-weight:bold">currently displayed</span> member/event list</td>
+    <td class="tg-0pky">Must be a<span> positive integer</span> that is within the range of the length of the <span>currently displayed</span> member/event list</td>
   </tr>
   <tr>
-    <td class="tg-0pky" rowspan="3"><code>enrol</code> / <code>editEnrolment</code></td>
+    <td class="tg-0pky command" rowspan="3"><code>enrol</code> / <code>editEnrolment</code></td>
     <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
@@ -441,14 +441,14 @@ Action | Format, Examples
     <td class="tg-0pky"><span>Must not be blank </span>and can take in any values, except the following prefixes:<code>m/</code>, <code>e/</code>, <code>h/</code>, <code>r/</code></td>
   </tr>
   <tr>
-    <td class="tg-0pky"><code>viewMember</code> / <code>viewEvent</code></td>
+    <td class="tg-0pky command"><code>viewMember</code> / <code>viewEvent</code></td>
     <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">Must be a <span>positive integer</span> that is within the range of the length of the <span>currently displayed</span> member/event list</td>
   </tr>
   <tr>
-    <td class="tg-0pky"><code>findMember</code> / <code>findEvent</code></td>
+    <td class="tg-0pky command"><code>findMember</code> / <code>findEvent</code></td>
     <td class="tg-0pky">KEYWORD</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
