@@ -10,25 +10,31 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 
 Given below are my contributions to the project.
 
-* **New Feature**:
-    * to be added soon
+* **New Feature**: Added the ability to `sort` the client list.
+    * What it does: Allows the user to `sort` clients based on their policy expiration date, from those expiring earliest to those without policy data.
+    * Justification: The feature is useful to car insurance agents who will want to know which policies expiry fast so they can respond appropiately and not risk losing their business.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=RSXIX&breakdown=true)
 
-* **Project management**:
-    * to be added soon
-
 * **Enhancements to existing features**:
-    * to be added soon
+    * Throw exceptions for incomplete `add` and `edit` features, specifying the missing parameters.
+    * Throw exceptions for `delete` feature with erroneous index number.
+    * Add checks in the `Policy` class so that policy expiry date must fall after issue date.
+    * Allow duplicate names in `Person` class as long as there is another attribute that does not resemble the existing list of persons in the client list.
+    * Disallow policy numbers from being reused in the `Policy` class.
 
 * **Documentation**:
     * User Guide:
-        * to be added soon
+        * Added documentation for the `sort` feature.
     * Developer Guide:
-        * to be added soon
+        * Added implementation for the `delete` feature.
+
+* **Project management**:
+    * Added issues for exceptions in the `add` and `edit` features.
+    * Assigned a few issues in v1.3.
 
 * **Community**:
-    * to be added soon
+    * PRs reviewed (example) : [\#181](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/211/files)
+    * Had the responsibility "Testing" in the team, and helped implement and oversee error handling.
 
-* **Tools**:
-    * to be added soon
+
