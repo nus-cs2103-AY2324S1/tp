@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,12 +23,16 @@ public class EventCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2 d/Interview Round 1 bt/2023-10-22 09:00 et/2023-10-22 10:00";
 
     public static final String MESSAGE_SUCCESS = "Event added: %1$s";
-
     public static final String MESSAGE_DUPLICATE_EVENT = "An event with the same description, for the same person, already exists!";
 
     private final Event event;
 
+    /**
+     * Creates an EventCommand to add event.
+     * @param event The event to be added.
+     */
     public EventCommand(Event event) {
+        requireNonNull(event);
         this.event = event;
     }
 
@@ -46,5 +53,27 @@ public class EventCommand extends Command {
         model.addEvent(event1);
         return new CommandResult(String.format(MESSAGE_SUCCESS, event1),
                 false, false, false, false, false);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EventCommand)) {
+            return false;
+        }
+
+        EventCommand otherEventCommand = (EventCommand) other;
+        return event.equals(otherEventCommand.event);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("event", event)
+                .toString();
     }
 }

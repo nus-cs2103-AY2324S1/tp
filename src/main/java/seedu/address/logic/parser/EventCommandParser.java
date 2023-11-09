@@ -13,7 +13,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddGCommand;
 import seedu.address.logic.commands.EventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
@@ -54,7 +53,7 @@ public class EventCommandParser implements Parser<EventCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventCommand.MESSAGE_USAGE), pe);
         }
         index = ParserUtil.parseIndex(argMultimap.getPreamble());
         Event event = new Event(index, description, startTime, endTime);
