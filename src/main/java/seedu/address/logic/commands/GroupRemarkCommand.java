@@ -11,7 +11,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Changes the remark of an existing group in the address book.
  */
 public class GroupRemarkCommand extends Command {
 
@@ -32,6 +32,7 @@ public class GroupRemarkCommand extends Command {
     private final GroupRemark groupRemark;
 
     /**
+     * GroupRemarkCommand constructor.
      * @param groupName of the group to edit the remark
      * @param groupRemark of the group to be updated to
      */
@@ -41,6 +42,7 @@ public class GroupRemarkCommand extends Command {
         this.groupName = groupName;
         this.groupRemark = groupRemark;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

@@ -12,7 +12,7 @@ public class FreeTime implements Iterable<TimeInterval> {
 
     private final ObservableList<TimeInterval> internalList = FXCollections.observableArrayList();
     private final ObservableList<TimeInterval> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+        FXCollections.unmodifiableObservableList(internalList);
 
     public void addTime(TimeInterval timeInterval) {
         internalList.add(timeInterval);
@@ -33,6 +33,7 @@ public class FreeTime implements Iterable<TimeInterval> {
 
     /**
      * Check whether no time is stored
+     *
      * @return boolean representing whether no time is stored
      */
     public boolean isEmpty() {
@@ -42,12 +43,13 @@ public class FreeTime implements Iterable<TimeInterval> {
 
     /**
      * Generate String representing list of intervals
-     * @param br StringBuilder to store  message
+     *
+     * @param br     StringBuilder to store  message
      * @param format specify Message format
      */
     public void getMessage(StringBuilder br, String format) {
         int intervalCount = 1;
-        for (TimeInterval t: this.internalList) {
+        for (TimeInterval t : this.internalList) {
             br.append(br.append(String.format(format, intervalCount, t.toString())));
             intervalCount++;
         }

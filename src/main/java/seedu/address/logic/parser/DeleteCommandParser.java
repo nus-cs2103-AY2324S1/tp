@@ -29,8 +29,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
 
         // check if either n/ or g/ are present
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GROUPTAG)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if ((!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty())
+                && !arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteCommand.MESSAGE_USAGE));
         }

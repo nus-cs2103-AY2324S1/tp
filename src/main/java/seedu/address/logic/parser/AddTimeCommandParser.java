@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDINTERVAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -13,7 +12,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.person.Name;
 
-
+/**
+ * Parses input arguments and creates a new AddTimeCommand object
+ */
 public class AddTimeCommandParser implements Parser<AddTimeCommand> {
 
     @Override

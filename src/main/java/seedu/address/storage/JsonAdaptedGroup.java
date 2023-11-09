@@ -6,16 +6,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupList;
 import seedu.address.model.group.GroupRemark;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Jackson-friendly version of {@link Group}.
  */
 class JsonAdaptedGroup {
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
 
     private final String groupName;
     private final String groupRemark;
@@ -39,6 +43,7 @@ class JsonAdaptedGroup {
      * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
+        requireNonNull(source);
         groupName = source.getGroupName();
         groupRemark = source.getGroupRemark().value;
 
@@ -55,9 +60,17 @@ class JsonAdaptedGroup {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Group toModelType() throws IllegalValueException {
-        if (!Group.isValidGroup(groupName)) {
-            throw new IllegalValueException("illegal value");
+        if (groupName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName()));
         }
+        if (!Group.isValidGroupName(groupName)) {
+            throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
+        }
+
+        if (groupRemark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupRemark.class.getSimpleName()));
+        }
+
         TimeIntervalList modelTimeIntervalListList = new TimeIntervalList();
         for (JsonAdaptedTime freeTime : meetingTimeList) {
             modelTimeIntervalListList.addTime(freeTime.toModelType());

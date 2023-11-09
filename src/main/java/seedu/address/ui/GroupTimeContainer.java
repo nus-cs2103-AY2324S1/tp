@@ -3,11 +3,17 @@ package seedu.address.ui;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.group.Group;
 
+/**
+ * A helper class to create a object that contains a group and a single timeInterval
+ */
 public class GroupTimeContainer {
     private final Group group;
 
     private final TimeInterval timeInterval;
 
+    /**
+     * Constructor for GroupTimeContainer
+     */
     public GroupTimeContainer(Group group, TimeInterval timeInterval) {
         this.group = group;
         this.timeInterval = timeInterval;
@@ -31,8 +37,8 @@ public class GroupTimeContainer {
             return false;
         }
         GroupTimeContainer otherGrpTimeContainer = (GroupTimeContainer) other;
-        return this.group.equals(otherGrpTimeContainer.group) &&
-            this.timeInterval.equals(otherGrpTimeContainer.timeInterval);
+        return this.group.equals(otherGrpTimeContainer.group)
+            && this.timeInterval.equals(otherGrpTimeContainer.timeInterval);
     }
 
 }

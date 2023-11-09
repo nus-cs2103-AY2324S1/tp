@@ -26,12 +26,13 @@ public class DeleteGroupTimeCommand extends DeleteTimeCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        String commandOutcome;
         if (model.hasGroup(group)) {
-            model.deleteTimeFromGroup(group, timeIntervalsToDelete);
+            commandOutcome = model.deleteTimeFromGroup(group, timeIntervalsToDelete);
         } else {
             throw new CommandException("Group does not exists");
         }
-        return new CommandResult(String.format(MESSAGE_DELETE_TIME_SUCCESS, group.getGroupName()));
+        return new CommandResult(String.format(MESSAGE_DELETE_TIME + "\n" + commandOutcome, group.getGroupName()));
     }
 
     @Override

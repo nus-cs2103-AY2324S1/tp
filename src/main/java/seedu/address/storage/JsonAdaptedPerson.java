@@ -93,9 +93,17 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (groupList == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupList.class.getSimpleName()));
+        }
+
         GroupList modelGroupList = new GroupList();
         for (JsonAdaptedGroup group : groupList) {
             modelGroupList.add(group.toModelType());
+        }
+
+        if (freeTimeList == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TimeIntervalList.class.getSimpleName()));
         }
 
         TimeIntervalList modelTimeIntervalListList = new TimeIntervalList();

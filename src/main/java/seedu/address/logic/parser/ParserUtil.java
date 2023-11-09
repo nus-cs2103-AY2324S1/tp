@@ -125,7 +125,7 @@ public class ParserUtil {
     public static Group parseGroup(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedGroupName = groupName.trim();
-        if (!Group.isValidGroup(trimmedGroupName)) {
+        if (!Group.isValidGroupName(trimmedGroupName)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }
         Group group = new Group(trimmedGroupName);
@@ -168,7 +168,7 @@ public class ParserUtil {
     public static Group parseSingleGroup(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedGroup = groupName.trim();
-        if (!Group.isValidGroup(trimmedGroup)) {
+        if (!Group.isValidGroupName(trimmedGroup)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }
         return new Group(trimmedGroup);

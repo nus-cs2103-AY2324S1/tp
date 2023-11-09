@@ -1,6 +1,7 @@
 package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,10 +66,12 @@ public class Group {
     /**
      * Name field, listOfGroupMates and timeIntervalList must be present and not null.
      */
-    public Group(String groupName, GroupRemark groupRemark, List<Person> listOfGroupMates, TimeIntervalList timeIntervalList) {
+    public Group(String groupName, GroupRemark groupRemark, List<Person> listOfGroupMates,
+                 TimeIntervalList timeIntervalList) {
         requireNonNull(groupName);
         requireNonNull(listOfGroupMates);
         requireNonNull(timeIntervalList);
+        checkArgument(groupName.matches(VALIDATION_REGEX), MESSAGE_CONSTRAINTS);
         this.groupName = groupName;
         this.groupRemark = groupRemark;
         this.timeIntervalList.addAll(timeIntervalList);
@@ -82,6 +85,7 @@ public class Group {
     public TimeIntervalList getTimeIntervalList() {
         return timeIntervalList;
     }
+
     /**
      * Converts the internal list to streams.
      *
@@ -116,7 +120,7 @@ public class Group {
      * @return The validity of the group name.
      */
     //For now no constraints
-    public static boolean isValidGroup(String name) {
+    public static boolean isValidGroupName(String name) {
         requireNonNull(name);
 
         return !name.isBlank() && name.matches(VALIDATION_REGEX);
@@ -170,11 +174,12 @@ public class Group {
 
     /**
      * Modify StringBuilder to display message should any groupMate not input their free time
-     * @param br StringBuilder
+     *
+     * @param br     StringBuilder
      * @param format Format specifier
      */
     public void areAllFree(StringBuilder br, String format) {
-        for (Person p: this.listOfGroupMates) {
+        for (Person p : this.listOfGroupMates) {
             if (p.isNotFree()) {
                 br.append(String.format(format, p.getName().fullName));
             }
@@ -184,6 +189,7 @@ public class Group {
     /**
      * Compare each person in group to get overlap
      * Accumulate the result
+     *
      * @param duration represent duration in minutes
      * @return TimeInterval that can fit duration specified
      */
@@ -205,25 +211,26 @@ public class Group {
         }
 
         for (int i = 0; i < listOfGroupMates.size(); i++) {
-           if (i + 1 == listOfGroupMates.size()) {
-               break;
-           }
-           Person firstPerson = listOfGroupMates.get(i);
-           Person secondPerson = listOfGroupMates.get(i + 1);
-           TimeIntervalList first = firstPerson.getTime();
-           TimeIntervalList second = secondPerson.getTime();
-           // uninitialised freeTime e.g. first and second person in group
-           if (freeTime.isEmpty()) {
-               freeTime = first.findOverlap(second, duration);
-           } else {
-               freeTime = freeTime.findOverlap(second, duration);
-           }
+            if (i + 1 == listOfGroupMates.size()) {
+                break;
+            }
+            Person firstPerson = listOfGroupMates.get(i);
+            Person secondPerson = listOfGroupMates.get(i + 1);
+            TimeIntervalList first = firstPerson.getTime();
+            TimeIntervalList second = secondPerson.getTime();
+            // uninitialised freeTime e.g. first and second person in group
+            if (freeTime.isEmpty()) {
+                freeTime = first.findOverlap(second, duration);
+            } else {
+                freeTime = freeTime.findOverlap(second, duration);
+            }
         }
         return freeTime;
     }
 
     /**
      * Adds a single time interval to the group
+     *
      * @param toAddTime time interval to add
      */
     public void addTime(TimeInterval toAddTime) throws CommandException {
@@ -232,6 +239,7 @@ public class Group {
 
     /**
      * Adds a list of free time to the group
+     *
      * @param toAddTime List of time intervals to add
      * @throws CommandException When there is a clash in timings within the list
      */
@@ -241,6 +249,7 @@ public class Group {
 
     /**
      * Checks if the group has the time interval
+     *
      * @param timeInterval time interval to check
      * @return result of check
      */
@@ -252,7 +261,9 @@ public class Group {
         return this.timeIntervalList;
     }
 
-    public String deleteTime(ArrayList<TimeInterval> toDeleteTime) throws CommandException { return this.timeIntervalList.deleteTime(toDeleteTime);}
+    public String deleteTime(ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+        return this.timeIntervalList.deleteTime(toDeleteTime);
+    }
 
     @Override
     public boolean equals(Object group) {
@@ -272,8 +283,8 @@ public class Group {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Group name", groupName)
-                .toString();
+            .add("Group name", groupName)
+            .toString();
     }
 
     public int size() {

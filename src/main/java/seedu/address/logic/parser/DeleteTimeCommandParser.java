@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
 
-public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand>{
+public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteTimeCommand
@@ -22,20 +22,21 @@ public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand>{
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));
         }
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG, PREFIX_FREETIME);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG, PREFIX_FREETIME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_FREETIME)|| !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_FREETIME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
         ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_FREETIME));
         if ((arePrefixesPresent(argMultimap, PREFIX_NAME) && arePrefixesPresent(argMultimap, PREFIX_GROUPTAG))) {
-            throw new ParseException(String.format(DeleteCommand.MESSAGE_TWO_PARAMETERS, DeleteTimeCommand.MESSAGE_USAGE));
+            throw new ParseException(
+                String.format(DeleteCommand.MESSAGE_TWO_PARAMETERS, DeleteTimeCommand.MESSAGE_USAGE));
         }
         if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());

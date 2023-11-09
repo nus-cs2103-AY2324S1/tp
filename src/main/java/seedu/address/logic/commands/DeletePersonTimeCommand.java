@@ -26,13 +26,13 @@ public class DeletePersonTimeCommand extends DeleteTimeCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        String status;
+        String commandOutcome;
         if (model.hasPerson(personName)) {
-           status = model.deleteTimeFromPerson(personName, timeIntervalsToDelete);
+            commandOutcome = model.deleteTimeFromPerson(personName, timeIntervalsToDelete);
         } else {
             throw new CommandException("Person does not exist \n");
         }
-        return new CommandResult(String.format(MESSAGE_DELETE_TIME_SUCCESS + status, personName.fullName));
+        return new CommandResult(String.format(MESSAGE_DELETE_TIME + "\n" + commandOutcome, personName.toString()));
     }
 
     @Override

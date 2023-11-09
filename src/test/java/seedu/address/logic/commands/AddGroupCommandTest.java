@@ -40,7 +40,7 @@ public class AddGroupCommandTest {
         CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
 
         assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, Messages.format(validGroup)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
     }
 
@@ -50,7 +50,8 @@ public class AddGroupCommandTest {
         AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
         AddGroupCommandTest.ModelStub modelStub = new AddGroupCommandTest.ModelStubWithGroup(validGroup);
 
-        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () -> addGroupCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP,
+            () -> addGroupCommand.execute(modelStub));
     }
 
     @Test
@@ -210,7 +211,8 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public String deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete) throws CommandException {
+        public String deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete)
+            throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -226,7 +228,7 @@ public class AddGroupCommandTest {
 
         @Override
         public String deleteTimeFromGroup(Group group,
-                                        ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+                                          ArrayList<TimeInterval> toDeleteTime) throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 

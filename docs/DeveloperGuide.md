@@ -349,7 +349,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 _{Explain here how the data archiving feature will be implemented}_
 
 
-### Add Command Feature
+### Adding a Person 
 
 The add feature is facilitate by a number of classes such as `Person` and `Model` 
 
@@ -380,11 +380,11 @@ Note: No duplication is allowed in addressbook for most of Person’s attribute 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Create Group
+### Adding a Group
 
 #### Proposed Implementation
 
-The Create Group mechanism is facilitated by `Group`. It is stored internally as a `Group`. This operation is exposed in the `Model` interface as `Model#addGroup()`.
+The Add Group mechanism is facilitated by `Group`. It is stored internally as a `Group`. This operation is exposed in the `Model` interface as `Model#addGroup()`.
 
 Given below is an example usage scenario and how the group creation mechanism behaves at each step.
 
@@ -392,7 +392,11 @@ Given below is an example usage scenario and how the group creation mechanism be
 
 **Step 2:** The user executes `new g/GROUPNAME` to create a new group with the name GROUPNAME. `CreateGroupCommandParser` parses the GROUPNAME, ensuring the input is valid, and creates a `CreateGroupCommand`, which calls `Model#addGroup()`. The model retrieves the existing groupList from the addressBook and adds this new group to the groupList.
 
-The following sequence diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarizes what happens when a user executes a new command:
+<puml src="diagrams/CreateGroupActivityDiagram.puml" alt="CreateGroupActivityDiagram"/>
+
+Below is a sequence diagram that summarizes how a user creates a new group:
+<puml src="diagrams/CreateGroupSequenceDiagram.puml" alt="CreateGroupSequenceDiagram"/>
 
 #### Design Considerations
 
@@ -407,7 +411,7 @@ The following sequence diagram summarizes what happens when a user executes a ne
     * Cons: Users may get confused as to what each group is meant for
 
 
-### [Proposed] Delete Time Feature
+### Delete Time Feature
 
 #### Proposed Implementation
 
@@ -425,9 +429,13 @@ Step 3. The function will be called in the person's `timeInterval` list. The app
 
 Similarly, the group command does the same, except for the `Group` class.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following sequence diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/DeletePersonTimeDiagram.puml" alt="DeletePersonTimeDiagram"/>
+
+Below is an activity diagram that illustrates the control flow for Delete Person Time feature.
+
+<puml src="diagrams/DeletePersonTimeActivityDiagram.puml" alt="DeletePersonTimeActivityDiagram"/>
 
 #### Design Considerations
 
@@ -674,3 +682,13 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. In the `addmeeting` feature, user can add free time intervals to a group. Currently, user can add same free time intervals for 2 separate groups or overlapping time intervals between 2 or more groups, causing a clash in their schedule. (Eg. `Group A: Mon 1200 - Mon 1400`; `Group B: Mon 1300 - Mon 1500`). These clashes are not detected and will allow this state to exist. We plan to not allow this, so user cannot insert time intervals that are overlapping with other groups. Eg. `Group A: Mon 1200 - Mon 1400`; `Group B: Mon 1300 - Mon 1500` will not be allowed.
+2. Currently, ProjectPRO's output box height is relative short due to some commands that causes to output words with a lot of lines. Eg. `listime`. We plan to increase the height of the output box height, so that more lines can be seen in glance.
+3. Currently, for `addtime` feature, if the user typed a time interval to a person that clashes with another time interval in the person, it throws an error to the output box and removes the user input from the command box. Due to this, the user need to type the command again. We plan to disallow the deletion of old user input when the error is thrown, so that the user can fix the mistake quicker by editing the old input in the command box.
+4. Currently, for `deletetime` feature, if the user tries to delete a time interval that does not exist in person or group, it throws an error to the output box and removes the user input from the command box. Due to this, the user need to type the command again. We plan to disallow the deletion of old user input when the error is thrown, so that the user can fix the mistake quicker by editing the old input in the command box.

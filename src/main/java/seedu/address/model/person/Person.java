@@ -8,8 +8,8 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.TimeIntervalList;
 import seedu.address.model.TimeInterval;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
 
@@ -115,13 +115,6 @@ public class Person {
      */
     public boolean isSamePerson(Person otherPerson) {
         return isSameName(otherPerson);
-    }
-
-    public boolean isSameGroups(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-        return otherPerson != null && otherPerson.getGroups().equals(this.getGroups());
     }
 
     /**

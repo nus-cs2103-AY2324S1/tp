@@ -33,8 +33,10 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "%1$s is already in the contact list";
-    public static final String MESSAGE_DUPLICATE_EMAIL = "This email: %1$s already belongs to some one in the contact list";
-    public static final String MESSAGE_DUPLICATE_PHONE = "This phone number: %1$s belongs to some one in the contact list";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "This email: %1$s already belongs to some "
+        + "one in the contact list";
+    public static final String MESSAGE_DUPLICATE_PHONE = "This phone number: %1$s belongs to some one "
+        + "in the contact list";
 
     private final Person toAdd;
 
@@ -68,7 +70,7 @@ public class AddCommand extends Command {
                 model.addGroup(group);
             }
             try {
-                group.addPerson(toAdd);
+                model.findGroup(group.getGroupName()).addPerson(toAdd);
             } catch (CommandException e) {
                 throw new RuntimeException(e);
             }

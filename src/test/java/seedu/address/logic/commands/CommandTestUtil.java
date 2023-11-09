@@ -2,7 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -47,7 +52,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_GROUP_DESC_BLANK = " " + PREFIX_GROUPTAG; // empty string not allowed for group
-    public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUPTAG + "CS2103T&"; // '&' not allowed in group names
+    public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUPTAG
+        + "CS2103T&"; // '&' not allowed in group names
 
     public static final String VALID_TIME_MON = "mon 1300 - mon 1400";
     public static final String VALID_TIME_TUE = "tue 1300 - tue 1400";

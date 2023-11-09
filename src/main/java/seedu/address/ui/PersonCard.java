@@ -42,7 +42,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane groups;
     @FXML
-    private FlowPane free_time;
+    private FlowPane freeTime;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,6 +58,7 @@ public class PersonCard extends UiPart<Region> {
                 .toStream()
                 .sorted(Comparator.comparing(Group::getGroupName))
                 .forEach(group -> groups.getChildren().add(new Label(group.getGroupName())));
-        person.getTime().iterator().forEachRemaining(interval -> free_time.getChildren().add(new Label(interval.toString())));
+        person.getTime().iterator().forEachRemaining(interval ->
+            freeTime.getChildren().add(new Label(interval.toString())));
     }
 }
