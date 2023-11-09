@@ -260,14 +260,20 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 </box>
 
 
-Example:
+Valid examples:
 * `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer`
 Adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@gmail.com*, and position *Software Engineer*.
 
-<br/><br/>
 
 * `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
   Adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@yahoo.com*, and position *Project Manager*.
+
+
+Invalid examples:
+* `add n/John Doe hp/91234567`
+This is not allowed as all fields are required to add an applicant to the list.
+
+
 <br>
 
 ---
@@ -283,9 +289,16 @@ Format: `edit INDEX [n/NAME] [hp/PHONE] [e/EMAIL] [p/POSITION]`
 * At least one of the optional fields must be provided.
 * Existing values will be updated by the input values.
 
-Example:
+Valid examples:
 * `edit 1 n/Vijay Sankar Kumar` edits the name of the 1st applicant in the list.
 * `edit 2 hp/80081234 e/newEmail@hotmail.com` edits the phone number and email of the 2nd applicant in the list.
+
+Invalid examples:
+* `edit n/Vijay Sankar Kumar`
+This is not allowed as an `INDEX` is required to edit an applicant's details.
+
+`edit 1`
+This is not allowed as at least one of the optional fields must be provided.
 
 <br>
 
@@ -300,7 +313,7 @@ Deletes an applicant from the list.
 Format: `delete INDEX`
 * Deletes the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
 
-Example:
+Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the applicant list.
 * `sort d/name` followed by `delete 3` deletes the 3rd person in the sorted applicant list.
 
@@ -330,8 +343,15 @@ Format: `status INDEX s/STATUS`
 * Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
 * `STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
 
-Example:
+Valid examples:
 * `status 3 s/o` updates the status of the 3rd person in the displayed applicant list to _OFFERED_.
+* `status 1 s/r` updates the status of the 1st person in the displayed applicant list to _REJECTED_.
+
+Invalid examples:
+* `status 3 s/offered`
+This is not allowed as the format of the `STATUS` is wrong. 
+`STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
+
 
 <br>
 
@@ -383,7 +403,7 @@ Format: `addi INDEX t/TYPE [r/RATING]`
 * Adds an interview to the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
 * A maximum of 5 interviews can be added to each applicant.
 
-Example:
+Examples:
 * `addi 1 t/technical r/8.6` adds a Technical interview with rating 8.6 to the 1st person in the displayed applicant list.
 * `addi 3 t/screening` adds a Screening interview without rating to the 3rd person in the displayed applicant list.
 
@@ -409,7 +429,7 @@ Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
 * At least one of the optional fields must be provided.
 * Existing values will be updated by the input values.
 
-Example:
+Examples:
 * `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview with rating 7.8.
 * `editi 3 i/2 t/screening` edits the 2nd interview of the 3rd person in the displayed applicant list to a screening interview.
 * `editi 2 i/1 r/8.9` edits the 1st interview rating of the 2nd person in the displayed applicant list to 8.9.
@@ -428,8 +448,13 @@ Format: `deletei INDEX i/INTERVIEW_INDEX`
 * Deletes from the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
 * `INTERVIEW_INDEX` refers to the index of the interview to be edited of the applicant.
 
-Example:
+Valid examples:
 * `deletei 1 i/2` deletes the 2nd interview of the 1st person in the displayed applicant list.
+
+Invalid example:
+* `deletei 1 i/20` 
+This is not allowed because the index of the interview is invalid. As the maximum number of interviews for each applicant
+is 5, an interview index larger than 5 is not allowed.
 
 <br>
 
@@ -475,10 +500,16 @@ e.g. `Ed` will match both `Edward` and `Ed`.
 e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
 
 
-Example:
+Valid examples:
 
 * `find IVAN` finds any applicant whose name contains “ivan”.
 * `find IVAN CHEW` finds any applicant whose name contains “ivan” or contains “chew”.
+
+
+Invalid examples:
+
+* `find name!!!`
+This is not allowed as the `KEYWORD [MORE_KEYWORDS]` must be alphanumeric.
 
 <br>
 
@@ -696,6 +727,13 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 
 **Q**: Is my data secure? <br>
 **A**: Yes, your data is stored locally in your computer and is not accessible by anyone else.
+
+**Q**: Will I lose my data when I exit the app?
+**A**: No you will not. The data is stored on your computer and can still be displayed after exiting the app.
+
+**Q**: Do I need internet connection to use Staff-Snap?
+**A**: You will need internet connection to open the web version of our user guide after clicking `help` or typing the
+`help` command. Otherwise, no internet connection is required to perform the other features.
 
 **Q**: Why is the first applicant from my CSV file not being imported? <br>
 **A**: You might have omitted the header row. Ensure that the CSV file have the following headers: `name`, `phone`, `email`, `position` in that order
