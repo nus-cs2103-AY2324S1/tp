@@ -3,14 +3,13 @@ layout: default.md
 title: "Boh Shin's Project Portfolio Page"
 ---
 
-# Class Manager 2023
+### Class Manager 2023
 
 Class Manager 2023 aims to provide fast access to NUS TAs who need help in maintaining student information across multiple classes. It also helps TAs visualise students’ grades, attendance and class participation.
 
-## Summary of Contributions
+Given below are my contributions to the project.
 
-* **Code Contributed**:
-  * Can be viewed at this link: [Individual Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=yeobohshin&breakdown=true)
+* **Code Contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=yeobohshin&breakdown=true)
 
 * **Enhancements Implemented**:
   * New feature: `Assignment` and `AssignmentTracker` field (PR: [#72](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/72))
@@ -32,10 +31,10 @@ Class Manager 2023 aims to provide fast access to NUS TAs who need help in maint
     * Changes: Added a side panel that will display the class details of a student.
     * Highlights: Modifying the UI requires in-depth understanding of how the UI classes observe and update when the target component is changed. It also requires understanding of JavaFX, FXML and CSS.
 
-* **Contributions to the UG**
-  * Added complete documentation for the following features: tag, view.
-  * Updated documentation for other features.
-  * Fix small issues within the UG e.g. inconsistent use of variables
-
-* **Contributions to DG**
-  * Added explanation, implementation, diagrams and design considerations for the following feature: `tag`.
+* **Documentation**:
+  * User Guide:
+    * Added complete documentation for the following features: tag, view.
+    * Updated documentation for other features.
+    * Fix small issues within the UG e.g. inconsistent use of variables
+  * Developer Guide:
+    * Added explanation, implementation, diagrams and design considerations for the following feature: `tag`.

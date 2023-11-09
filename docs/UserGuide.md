@@ -46,7 +46,7 @@ Graphical User Interface (GUI). If you can type fast, CM 23 can get your class m
 
 # GUI Overview
 
-<img alt="Gui" src="images/Ui.png" width="600"> </br>
+<img alt="Gui" src="images/Ui.png" width="700"> </br>
 
 The **GUI** is split up into 4 main sections.
 
@@ -98,7 +98,7 @@ The **GUI** is split up into 4 main sections.
 
 ## Student Number
 
-* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the letter 'A' or 'a', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
 
 ## Command navigation
@@ -392,8 +392,8 @@ Format: `lookup [c/CLASS_NUMBER] [p/PHONE] [n/NAME] [e/EMAIL] [s/STUDENT_NUMBER]
 <box type="warning" seamless>
 
 **Caution:**
-_At least one_ of the optional fields must be provided. `lookup` alone is not allowed. <br>
-This command will not check for field validation. e.g. `lookup c/class 11` is allowed even though `class 11` is not a valid class number.
+- _At least one_ of the optional fields must be provided. `lookup` alone is not allowed. <br>
+- This command will not check for field validation. e.g. `lookup c/class 11` is allowed even though `class 11` is not a valid class number.
 </box>
 
 * The command is **case-insensitive**. e.g. `hans` will match `Hans`
@@ -492,6 +492,12 @@ Examples:
 
 Record the class participation for an existing student in Class Manager.
 
+<box type="warning" seamless>
+
+**Caution:** Currently, we allow a student not present for a tutorial session to have their class participation recorded as `true`.
+This will be changed in the future.
+</box>
+
 Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
 
 * `STUDENT_NUMBER` must be valid and exist.
@@ -545,6 +551,22 @@ Example:
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Class Manager 2023 home folder.
+<br><br>
+**Q**: How do I save file with different names?<br>
+**A**: You can rename the file manually after saving it. Start the Class Manager 2023 app and use the `load` command to load the renamed file. Note that the renamed file will then become the new default save file.
+<br><br>
+**Q**: I am unable to load my save file, what should I do?<br>
+**A**: Ensure that the save file is located in the `[JAR file location]/data` folder, and that the file name is valid. In addition, make sure that the number of tutorials and assignments in the save file is the same 
+as the current configuration of Class Manager 2023. You can reconfigure Class Manager 2023 to match the number of tutorials and assignments in the save file using the `config` command.
+<br><br>
+**Q**: I am unable to load my save file and I have tried all the solutions above, what should I do?<br>
+**A**: The save file may be corrupted. You can try to edit the save file manually to fix the corrupted save file. You can refer to [this section](#editing-the-data-file) for more information on the valid format of the data file.
+<br><br>
+**Q**: How do I change the save file location?<br>
+**A**: The save file is located at `[JAR file location]/data`. We currently do not support changing the save file location.
+<br><br>
+**Q**: I have found a bug, how can I report it?<br>
+**A**: Please report the bug by creating a new issue on the [Class Manager 2023 issue tracker](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -601,7 +623,7 @@ Example:
 # Glossary
 
 * **cd**: Change directory command in terminal/command line. cd takes the name of the folder you want to navigate to as an argument. The full command is cd `your-directory`.
-* **Student Number**: Unique matriculation number of a NUS student. In Class Manager, it must begin with the letter 'A' or 'a', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* **Student Number**: Unique matriculation number of a NUS student. In Class Manager, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.
