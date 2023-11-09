@@ -513,7 +513,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Invalid tags are included in the command.
+* 1a. Invalid parameters are included in the command.
 
 	 * 1a1. ManaGease shows an error message.
 
@@ -677,7 +677,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-*{More to be added}*
+**Use case: Mark an employee by name as absent**
+
+**MSS**
+
+1. User requests to mark an employee as absent.
+2. ManaGease changes the employee's attendance to absent.
+3. ManaGease displays a confirmation message that the attendance has been marked.
+    
+    Use case ends
+
+**Extensions**
+* 1a. Invalid command parameters are given.
+  * 1a1. ManaGease shows an error message.
+    
+    Use case ends.
+* 1b. Invalid attendance type given (i.e. mispelled words such as "latte" or "absenr")
+  * 1b1. ManaGease shows an error message.
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
