@@ -106,10 +106,6 @@ public class Person extends ListEntry<Person> {
     public Subjects getSubjects() {
         return subjects;
     }
-    public void setSubjects(Set<Subject> subjects) {
-        requireAllNonNull(subjects);
-        setSubjects(new Subjects(subjects));
-    }
     public void setSubjects(Subjects subjects) {
         requireAllNonNull(subjects);
         this.subjects = subjects;

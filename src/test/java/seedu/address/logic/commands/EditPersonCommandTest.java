@@ -195,5 +195,22 @@ public class EditPersonCommandTest {
             fail();
         }
     }
+    @Test
+    void test_indexOutOfBound() {
+        try {
+            Person person = Person.getDefaultPerson();
+            person.setName(new Name("test name 1 no collision"));
+            assertFalse(model.hasPerson(person));
+            new EditPersonCommand(1, person).execute(model);
+            assertTrue(model.hasPerson(person));
+            assertThrows(CommandException.class, () -> new EditPersonCommand(0, person).execute(model));
+            assertThrows(CommandException.class, () -> new EditPersonCommand(3, person).execute(model));
+            model.showPerson(model.getFilteredPersonList().get(0));
+            assertThrows(CommandException.class, () -> new EditPersonCommand(null, person).execute(model));
+            assertThrows(CommandException.class, () -> new EditPersonCommand(2, person).execute(model));
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
 

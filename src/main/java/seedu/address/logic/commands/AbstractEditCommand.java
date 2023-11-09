@@ -44,24 +44,6 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
         this.editDescriptor = editDescriptor;
     }
 
-    /**
-     * Pass in a temp object holding the value to be edited, will edit the currently displayed entry
-     */
-    public AbstractEditCommand(T editDescriptor) {
-        requireNonNull(editDescriptor);
-        this.editDescriptor = editDescriptor;
-    }
-
-    /**
-     * Pass in original to avoid having to search for it again
-     */
-    public AbstractEditCommand(T editDescriptor, T original) {
-        requireNonNull(editDescriptor);
-        this.original = original;
-        this.editDescriptor = editDescriptor;
-    }
-
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         this.model = model;

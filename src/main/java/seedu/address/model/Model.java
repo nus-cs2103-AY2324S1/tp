@@ -188,15 +188,9 @@ public interface Model {
 
     public boolean hasCurrentShownEntry();
 
-    default Person getCurrentlyDisplayedPerson() {
-        return null;
-    }
-    default Lesson getCurrentlyDisplayedLesson() {
-        return null;
-    }
-    default Task getCurrentlyDisplayedTask() {
-        return null;
-    }
+    Person getCurrentlyDisplayedPerson();
+    Lesson getCurrentlyDisplayedLesson();
+    Task getCurrentlyDisplayedTask();
 
     /** Returns a view of the full task list */
     ObservableList<Task> getFullTaskList();

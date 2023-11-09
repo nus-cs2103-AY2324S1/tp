@@ -45,14 +45,6 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
     }
 
     /**
-     * Constructor for a TaskList, given a set of tasks
-     */
-    public TaskList(Set<Task> tasks) {
-        this.internalTaskList.addAll(tasks);
-    }
-
-
-    /**
      * Returns true if the list contains an equivalent task as the given argument.
      */
     public boolean contains(Task toCheck) {

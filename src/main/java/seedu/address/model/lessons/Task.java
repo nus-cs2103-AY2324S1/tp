@@ -63,14 +63,6 @@ public class Task extends ListEntryField {
     }
 
     /**
-     * Constructs a {@code Task} used for testing
-     */
-    public Task() {
-        this.description = "testing";
-        this.isDone = false;
-    }
-
-    /**
      * Returns true if a given string is a valid task.
      */
     public static boolean isValidTask(String test) {
@@ -160,12 +152,6 @@ public class Task extends ListEntryField {
         Task otherTask = (Task) other;
         return description.equals(otherTask.description) && isDone == otherTask.isDone;
 
-    }
-
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description);
     }
 
     /**

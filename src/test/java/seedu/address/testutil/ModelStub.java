@@ -345,6 +345,21 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public Person getCurrentlyDisplayedPerson() {
+        return null;
+    }
+
+    @Override
+    public Lesson getCurrentlyDisplayedLesson() {
+        return null;
+    }
+
+    @Override
+    public Task getCurrentlyDisplayedTask() {
+        return null;
+    }
+
+    @Override
     public ObservableList<Task> getFullTaskList() {
         throw new AssertionError("This method should not be called.");
     }
