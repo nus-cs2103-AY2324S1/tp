@@ -104,6 +104,7 @@ To begin using this guide, ensure you meet the [Minimum System Requirements](#mi
 <a name="quick-start"></a>
 ## Quick Start
 
+
 1. Download the latest `staffsnap.jar` from [here](https://github.com/AY2324S1-CS2103T-W08-1/tp/releases/tag/v1.4).
 2. Copy the [JAR](#glossary) file to an empty folder that you would like to use as the [home folder](#glossary) for Staff-Snap.
 3. Open the [command terminal](#glossary).
@@ -113,12 +114,14 @@ To begin using this guide, ensure you meet the [Minimum System Requirements](#mi
 
 ![gui](images/user-guide/gui.png)
 
-7. Type the [command](#glossary) in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window. Some example commands that you can try:
+7. Type the [command](#glossary) in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing `help` and pressing <kbd>Enter</kbd> will open this User Guide in your browser window. Some example commands that you can try:<br>
    * `add n/John Doe hp/81238123 p/Boss e/john@mail.com` : Adds an applicant named John Doe to the list. 
    * `list` : Lists all applicants.
    * `delete 1` : Deletes the 1st applicant shown in the current list.
    * `clear` : Clears all applicants from the list.
    * `exit` : Exits the application.
+
+<br>
 
 8. Refer to the [Features](#features) below for details of each command.<br>
 
@@ -181,7 +184,7 @@ This section introduces the symbols and notations used throughout this guide. We
 
 <br>
 
-![applicant_card_gui](images/user-guide/applicant_card_gui.png)
+<img src="images/user-guide/applicant_card_gui.png" height="267" width="797" alt="applicant_card_gui">
 
 <br>
 
