@@ -211,7 +211,7 @@ The following sequence diagram shows how the batch delete operation works:
 
 <br>
 
-### Edit Feature
+### `edit`
 
 The `edit` command allows users to edit the details of a person in the address book.
 
