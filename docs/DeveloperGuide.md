@@ -743,3 +743,12 @@ any input that is either `male` or `female` will be accepted without worrying ab
 7. Currently, a patient's birthdate can be set after the current date that the command is executed on. For example, `2023/10/20`
 can be added as a patient's birthdate even though the current date might be `2023/08/08`. We plan to add a validation for birthdates
 such that birthdates after the current date will not be considered a valid birthdate.
+
+## **Appendix: Effort**
+
+### Difficulty Level 
+
+MediFlowR is a brown-field project that has been inspired from and based upon AB3. We have modified AB3's existing 
+model, Person, to accommodate our Patient records management. Moreover, we have extended the Person model to create 
+an Appointments model to keep track of the appointments scheduled for the patients. Having 2 models (Person and 
+Appointment) in MediFlowR has made it more complex than AB3.
