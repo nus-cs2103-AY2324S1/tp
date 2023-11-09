@@ -11,6 +11,8 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.PersonProfile;
+import seedu.address.ui.PersonProfileField;
 
 /**
  * Represents a Person in the address book.

@@ -140,12 +140,6 @@ public class PersonProfileField extends UiPart<SplitPane> {
         personProfile.updateField(field, value);
     }
 
-    private void refresh() {
-        value = personProfile.getValueOfField(field);
-        resetTextPaint();
-        updateState();
-    }
-
     private void resetTextPaint() {
         keyLabel.setStyle("");
         valueLabel.setStyle("");
@@ -214,6 +208,12 @@ public class PersonProfileField extends UiPart<SplitPane> {
 
     void indicateIsError() {
         setErrorTextPaint();
+    }
+
+    void refresh() {
+        value = personProfile.getValueOfField(field);
+        resetTextPaint();
+        updateState();
     }
 
     public void setIsInConfirmationDialog(boolean isInConfirmationDialog) {

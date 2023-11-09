@@ -483,5 +483,32 @@ public class PersonProfile extends UiPart<Region> {
                 .forEach(field -> field.setIsInConfirmationDialog(isInConfirmationDialog));
     }
 
+    public void resetValues() {
+        fields.keySet().forEach(field -> {
+            if (field == Field.NAME) {
+                updateField(field, person.getName().toString());
+            } else if (field == Field.PHONE) {
+                updateField(field, person.getPhone().toString());
+            } else if (field == Field.EMAIL) {
+                updateField(field, person.getEmail().toString());
+            } else if (field == Field.ADDRESS) {
+                updateField(field, person.getAddress().toString());
+            } else if (field == Field.HOUSING) {
+                updateField(field, person.getHousing().toString());
+            } else if (field == Field.AVAILABILITY) {
+                updateField(field, person.getAvailability().toString());
+            } else if (field == Field.ANIMAL_NAME) {
+                updateField(field, person.getAnimalName().toString());
+            } else if (field == Field.ANIMAL_TYPE) {
+                updateField(field, person.getAnimalType().toString());
+            }
+        });
+
+        uiElements.values().stream()
+                .forEach(field -> {
+                    field.refresh();
+                });
+    }
+
     // endregion
 }
