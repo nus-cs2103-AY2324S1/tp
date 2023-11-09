@@ -176,6 +176,18 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Feature
+
+The add command can be found in the `LogicManager` class. User input is first parsed into the `DeckParser` class using the `parseCommand`
+to validate if its add command with the specified fields and format. 
+
+The add command is exposed in the `Model` interface as the `Model#addCard`
+
+Here is the flow of how the add command is featured.
+
+1. User inputs the following valid input `add q/`
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -254,8 +266,9 @@ The following activity diagram summarizes what happens when a user executes a ne
    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
    * Cons: We must ensure that the implementation of each individual command are correct.
 
-### \[Proposed\] Filter by Tag feature
+### Filter by Tag feature
 
+<---! include the sequence diagram here--->
 #### Proposed Implementation
 
 The proposed feature aims to filter the flashcards and display cards of a specific `tag`. This allows the users to
