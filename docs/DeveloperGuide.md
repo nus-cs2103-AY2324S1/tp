@@ -437,12 +437,19 @@ The `delete-t` command was designed this way to ensure consistency with the prev
   - Cons: Names are case-sensitive. This means that users need to accurately input the name with the correct
     capitalization, which can add an extra layer of precision required from the user.
 
-### Add Schedule Feature
+### Add schedule feature
+
+The “Add Schedule” feature allows users to add a new schedule to the address book. Below, we provide an example usage
+scenario and a detailed description of how the add schedule mechanism behaves at each step.
+
+The following shows the activity diagram from when a user executes the `add-s` command:
+![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
 
 #### Implementation details
 {:.no_toc}
 
-The add schedule feature is facilitated by `AddScheduleCommand`. It extends `Command` with the necessary implementation to add a schedule to a `Model`. Additionally, it implements the following operation:
+The add schedule feature is facilitated by `AddScheduleCommand`. It extends `Command` with the necessary implementation 
+to add a schedule to a `Model`. Additionally, it implements the following operation:
 
 * `AddScheduleCommand#execute(Model)` — Adds the schedule to the `Model`.
 
@@ -450,28 +457,36 @@ This operation is exposed in the abstract `Command` class as an abstract method.
 
 Given below is an example usage scenario and how the add schedule command behaves.
 
-The user executes `add-s 1 st/2023-09-15T09:00 et/2023-09-15T11:00` command. The `AddScheduleCommandParser` will be initialized to parse the user input to create a `AddScheduleCommand` with a `Index`, `StartTime` and `EndTime` representing the user's input.
+Step 1. The user has the application launched with at least 1 tutor added.
 
-The `AddScheduleCommand#exceute(Model)` will perform the following checks in this order to ensure that the `Schedule` can be added to the `Model`:
+Step 2. The user executes `add-s 1 st/2023-09-15T09:00 et/2023-09-15T11:00` command.
+
+Step 3. The `AddScheduleCommandParser` will be initialized to parse the user input to create a `AddScheduleCommand` 
+with a `Index`, `StartTime` and `EndTime` representing the user's input.
+
+Step 4. The `AddScheduleCommand#execute(Model)` will perform the following checks in this order to ensure that the
+`Schedule` can be added to the `Model`:
 1. The `Index` is valid.
 2. A valid schedule can be created with the given `Index`, `StartTime` and `EndTime`.
-    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered valid if its start time is before its end time and both start time and end time falls on the same day. This is enforced by the constructor of the `Schedule` class, it throws an `IllegalArgumentException` if it is not valid.
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered valid if 
+   its start time is before its end time and both start time and end time falls on the same day. This is enforced by 
+   the constructor of the `Schedule` class, it throws an `IllegalArgumentException` if it is not valid.
 
     </div>
 3. Executing this command would not result in a duplicate schedule in the `Model`.
-    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered a duplicate if it belongs to the same `Person` and have the same `StartTime` and `EndTime` as an existing schedule in the `Model`.
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered a duplicate 
+   if it belongs to the same `Person` and have the same `StartTime` and `EndTime` as an existing schedule in the `Model`.
 
     </div>
 4. Executing this command would not result in a clashing schedule for the tutor specified by `Index` in the `Model`.
-    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered a clashing if it belongs to the same `Person` and have overlapping times. This is checked by `Schedule#isClashing(Schedule)`.
+    <div markdown="span" class="alert alert-info">
+   :information_source: **Note:** A `Schedule` is considered a clashing if it belongs to the same `Person` and have 
+   overlapping times. This is checked by `Schedule#isClashing(Schedule)`.
 
     </div>
 
-If any of these checks fail a `CommandException` with an appropriate error message will be thrown. Otherwise, it will create a `Schedule` and use `Model#addSchedule` to add the schedule to the `Model`.
-
-The following shows the activity diagram from when a user executes the `add-s` command:
-
-![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
+If any of these checks fail, a `CommandException` with an appropriate error message will be thrown. Otherwise, it will 
+create a `Schedule` and use `Model::addSchedule` to add the schedule to the `Model`.
 
 The following sequence diagram shows how the operation works:
 
@@ -488,13 +503,13 @@ The following sequence diagram shows how the operation works:
 
 * **Alternative 1 (current choice):** Perform the check in `AddScheduleCommand`.
     * Pros: Easy to implement.
-    * Cons: Have to directly access schedules in the `UniqueScheduleList` creating dependencies.
+    * Cons: Have to directly access schedules in the `UniqueScheduleList`, creating dependencies.
     * Cons: Can be inefficient, as we have to iterate over all schedules in the schedule list.
 
 * **Alternative 2:** Perform the check in `UniqueScheduleList`.
     * Pros: Consistent throughout the system as this check is enforced on all schedules being added to the `UniqueScheduleList` regardless of where it is being added from.
     * Pros: Can be optimised to use more efficient searching algorithms like binary search if the implementation of the underlying list is sorted.
-    * Cons: Every schedule in the system have to adhere to that. For eg., if we want to allow the user to override such constraints it would not be possible without modifying the functionality of the list.
+    * Cons: Every schedule in the system have to adhere to that. For e.g., if we want to allow the user to override such constraints it would not be possible without modifying the functionality of the list.
 
 **Aspect: Checking for valid schedule:**
 
@@ -522,22 +537,22 @@ Step 1. The user has the application launched with at least 1 schedule added.
 Step 2. The user executes `list-s` to view all added schedules.
 
 Step 3. The user executes `edit-s 1 st/2023-09-15T09:00` to edit the first schedule's start time in the list of
-schedules displayed. The command is parsed in AddressBookParser.
+schedules displayed. The command is parsed in `AddressBookParser`.
 
-Step 4. EditScheduleCommandParser is created, and constructs an `EditScheduleDescriptor` which describes the edited
-`Schedule`. An EditScheduleCommand object is then constructed with this `EditScheduleDescriptor` and the
+Step 4. `EditScheduleCommandParser` is created, and constructs an `EditScheduleDescriptor` which describes the edited
+`Schedule`. An `EditScheduleCommand` object is then constructed with this `EditScheduleDescriptor` and the
 specified schedule index.
 
-Step 5. The EditScheduleCommand object gets the specified schedule from the current filtered schedule list using the
+Step 5. The `EditScheduleCommand` object gets the specified `schedule` from the current filtered schedule list using the
 schedule index.
 
-Step 6. EditScheduleCommand object then creates an edited schedule from the specified schedule and the
+Step 6. `EditScheduleCommand` object then creates an edited `schedule` from the specified `schedule` and the
 `EditScheduleDescriptor`.
 
-Step 7. EditScheduleCommand object then calls the setSchedule method in the ModelManager with the new edited schedule.
-This method sets the specified `Schedule` in the model to be that edited schedule.
+Step 7. `EditScheduleCommand` object then calls the `setSchedule` method in the `ModelManager` with the new edited `schedule`.
+This method sets the specified `Schedule` in the model to be that edited `schedule`.
 
-Step 8. Finally, the EditScheduleCommand object updates the schedule list to display the edited schedule.
+Step 8. Finally, the `EditScheduleCommand` object updates the schedule list to display the edited `schedule`.
 
 The following sequence diagram shows how the above steps for edit schedule operation works:
 
@@ -829,7 +844,7 @@ the lifeline reaches the end of diagram.
     - Cons: The definition and usage of the "pending" status may vary among users, potentially leading to ambiguity in 
       its interpretation.
 
-### Delete Schedule Feature
+### Delete schedule feature
 
 #### Implementation details
 {:.no_toc}
@@ -1718,7 +1733,7 @@ scheduleToEdit's start and end times are earlier than the current datetime.
 
 If this validation fails, a `CommandException` with a clear and descriptive error message should be thrown.
 
-### Streamline `datetime` input
+### Streamline datetime input
 In the current implementation, the users have to enter `yyyy-MM-ddTHH:mm` each time for both `StartTime` and `EndTime`.
 However, since a `Schedule` is not allowed to start and end on different days, the user is unnecessarily repeating the
 input `yyyy-MM-dd`. This resulted in a command format that is longer than necessary. We plan to streamline the command 
@@ -1731,7 +1746,7 @@ prefix `d/` which will parse user input in the `yyyy-MM-dd` format into a `Date`
 
 For example, any command that uses the `st/` or `et/` prefix will now use `... d/yyyy-MM-dd st/HH:mm et/HH:m` instead.
 
-### Enhance flexibility of `datetime` inputs
+### Enhance flexibility of datetime inputs
 In the current implementation, users can only enter datetime in this `yyyy-MM-ddTHH:mm` format. This format can be
 restrictive as it requires leading zeroes and `-` as a separator. To enhance user experience, the input for datetime 
 related parameters should be able to handle most frequently used formats like `2023/1/1` and `10:00pm`.
@@ -1818,7 +1833,7 @@ create the `find` command object with the updated predicate.
 This would then be used in the `execute` method of the `find` command object to get the filtered tutor 
 or schedule list with part of their names matching the user input.
 
-### List Schedule by Pending Status
+### List schedule by pending status
 In our current implementation, `list-s` only filters schedule by `COMPLETED` or `MISSED` status. Any schedules that have 
 not been assigned one of these statuses are categorised as unmarked, and it's important to include them in the list-s results.
 
