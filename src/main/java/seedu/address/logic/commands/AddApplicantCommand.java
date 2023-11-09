@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -18,13 +19,16 @@ public class AddApplicantCommand extends Command {
     public static final String COMMAND_WORD = "addapplicant";
     public static final String COMMAND_ALIAS = "adda";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to the applicant list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
+            + ": Adds an applicant to the applicant list. "
             + "\nParameters: "
             + PREFIX_NAME + " {applicantName} "
             + PREFIX_PHONE + " {phoneNumber} "
+            + "[" + PREFIX_INTERVIEW + " interviewTime] "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
-            + PREFIX_PHONE + " 98765432";
+            + PREFIX_PHONE + " 98765432 "
+            + PREFIX_INTERVIEW + " 01/01/2024 1200";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
 

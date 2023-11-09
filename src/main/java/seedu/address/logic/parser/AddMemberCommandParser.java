@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -32,43 +33,32 @@ public class AddMemberCommandParser implements Parser<AddMemberCommand> {
      */
     public AddMemberCommand parse(String args) throws ParseException {
 
-        StringBuilder finalString = new StringBuilder();
-        Boolean changed = false;
-        String finalMessage = " is missing!\n";
+        ArrayList<String> missingPrefixes = new ArrayList<>();
 
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM, PREFIX_TAG);
 
         if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
-            finalString.append(Name.TYPE);
-            changed = true;
+            missingPrefixes.add(Name.TYPE);
         }
 
         if (argMultimap.getValue(PREFIX_PHONE).isEmpty()) {
-            finalString.append(", " + Phone.TYPE);
-            changed = true;
+            missingPrefixes.add(Phone.TYPE);
         }
 
         if (argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
-            finalString.append(", " + Email.TYPE);
-            changed = true;
+            missingPrefixes.add(Email.TYPE);
         }
 
         if (argMultimap.getValue(PREFIX_TELEGRAM).isEmpty()) {
-            finalString.append(", " + Telegram.TYPE);
-            changed = true;
+            missingPrefixes.add(Telegram.TYPE);
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM)
                 || !argMultimap.getPreamble().isEmpty()) {
-            String messageFormat;
-            messageFormat = String.format(AddMemberCommand.MESSAGE_USAGE);
-            if (changed) {
-                messageFormat = String.format(finalString.toString() + finalMessage + AddMemberCommand.MESSAGE_USAGE);
-
-            }
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageFormat));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    formatMissingPrefixesErrorMessage(missingPrefixes) + AddMemberCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM);
@@ -78,7 +68,6 @@ public class AddMemberCommandParser implements Parser<AddMemberCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Telegram telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
 
         Member member = new Member(name, phone, email, telegram, tagList);
 
@@ -93,4 +82,20 @@ public class AddMemberCommandParser implements Parser<AddMemberCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Formats the error message for missing prefixes to be displayed to the user.
+     */
+    private String formatMissingPrefixesErrorMessage(ArrayList<String> missingPrefixes) {
+        StringBuilder errorMessage = new StringBuilder("Missing fields: ");
+        int len = missingPrefixes.size();
+        for (int i = 0; i < len; i++) {
+            errorMessage.append(missingPrefixes.get(i));
+            if (i >= len - 1) {
+                break;
+            }
+            errorMessage.append(", ");
+        }
+        errorMessage.append(" is missing!\n");
+        return errorMessage.toString();
+    }
 }
