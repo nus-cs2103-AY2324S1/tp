@@ -193,7 +193,7 @@ data will be created
 
 Below is the sequence diagram for this flow:
 
-<img src="images/AddCommandSequenceDiagram.png" width="550" />
+<img src="images/AddCommandSequenceDiagram.png" width="600" />
 
 #### Design Considerations
 
@@ -224,7 +224,7 @@ Here is the flow of how the delete command is featured.
 
 Below is the sequence diagram for this flow:
 
-<img src="images/DeleteCommandSequenceDiagram.png" width="550" />
+<img src="images/DeleteSequenceDiagram.png" width="600" />
 
 
 ### \[Proposed\] Undo/redo feature
@@ -308,7 +308,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 ### Filter by Tag feature
 
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed feature aims to filter the flashcards and display cards of a specific `tag`. This allows the users to
 view specific groups of cards under the same `tag`, granting them more control over their study material.
@@ -445,7 +445,7 @@ We implemented an export functionality to allow our users to port over their dat
 This is not to be mistaken as a **Command** as it is meant to be used after the user decides to use our application
 for revision purposes.
 
-The export button will allow users to access a copy of the deck.json file and has a copy button function that allows
+The export button will allow users to access a copy of the `deck.json` file and has a copy button function that allows
 users to copy over their deck.json file with ease.
 
 #### Design considerations:
