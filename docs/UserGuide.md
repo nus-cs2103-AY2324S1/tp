@@ -33,6 +33,12 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
      <br>
         This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
 
+**:information_source: Notes about the command format:**<br>
+
+* The higher the `Level` is, the higher the proficiency of the user with the word is. The maximum level is 5, and it will be displayed as `word mastered`.
+
+* Words which are indicated as `word mastered` will not appear in review session.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -413,14 +419,16 @@ Then, use the `load` command to import the data.
 | **Switch**              | `switch`                                                                                                                   |
 | **Exit**                | `exit`                                                                                                                     |
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
-| Term                                  | Definition                                                                                                                                                                                                                                                                                                                       |
-|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| CLI                                   | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system.                                                                                                                                                                                          |
-| GUI                                   | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                                                                   |
-| JSON (JavaScript Object Notation)     | JSON is a lightweight data format commonly used for representing structured data.                                                                                                                                                                                                                                                |
-| Level                                 | The level represents the proficiency with a specific flashcard.                                                                                                                                                                                                                                                                  |
-| Review Session                        | A review session is a designated phase within the system where words requiring review are presented individually. Users can confirm their understanding or signal a need for further review.                                                                                                                                     |
-| Forgetting Curve                      | The forgetting curve illustrates the decline in memory retention over time if information is not periodically reviewed or reinforced. It demonstrates a rapid loss of information shortly after learning, with the most significant decline in the initial hours or days. The rate of forgetting gradually decreases over time.  |
+
+| Term                                  | Definition                                                                                                                                                                                                                                                                                                                      |
+| ------------------------------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**                               | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system.                                                                                                                                                                                         |
+| **GUI**                               | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                                                                  |
+| **JSON (JavaScript Object Notation)** | JSON is a lightweight data format commonly used for representing structured data.                                                                                                                                                                                                                                               |
+| **Level**                             | The level represents the proficiency with a specific flashcard. The higher the `Level` is, the higher the proficiency of the user with the word is.                                                                                                                                                                             |
+| **Review Session**                    | A review session is a designated phase within the system where words requiring review are presented individually. Users can confirm their understanding or signal a need for further review.                                                                                                                                    |
+| **Forgetting Curve**                  | The forgetting curve illustrates the decline in memory retention over time if information is not periodically reviewed or reinforced. It demonstrates a rapid loss of information shortly after learning, with the most significant decline in the initial hours or days. The rate of forgetting gradually decreases over time. |
