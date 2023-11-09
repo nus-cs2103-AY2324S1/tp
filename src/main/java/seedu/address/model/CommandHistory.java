@@ -3,23 +3,31 @@ package seedu.address.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Represents the command history of the app
+ */
 public class CommandHistory {
 
     private ArrayList<String> commands;
     private int id;
 
+    /**
+     * Constructs a command history
+     * @param commandList ArrayList of preset commands
+     * @param id Current id
+     */
     public CommandHistory(ArrayList<String> commandList, int id) {
         this.commands = commandList;
         this.id = id;
     }
 
+    /**
+     * Create command history with empty list and id
+     */
     public CommandHistory() {
         this(new ArrayList<String>(), 0);
     }
 
-    public CommandHistory(ArrayList<String> commandList) {
-        this(commandList, 0);
-    }
 
     /**
      * Returns the previous command.

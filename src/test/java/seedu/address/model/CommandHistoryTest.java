@@ -13,7 +13,6 @@ public class CommandHistoryTest {
 
 
     /* Test add method ==================================================== */
-    
     @Test
     public void addOneCommand() {
         CommandHistory expectedCommandHistory = new CommandHistory(new ArrayList<>(
@@ -29,8 +28,6 @@ public class CommandHistoryTest {
         commandHistory.add("command2");
         assertEquals(commandHistory, expectedCommandHistory);
     }
-
-    
 
     /* Test prev method ==================================================== */
 
@@ -113,8 +110,6 @@ public class CommandHistoryTest {
         assertEquals(commandHistory.prev(), "command1");
         assertEquals(commandHistory, expectedCommandHistory);
     }
-
-    
 
     /* Test next method ==================================================== */
 
