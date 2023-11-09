@@ -112,7 +112,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddTutorCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddTutorCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddTutorCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddTutorCommandParser`, `DeleteTutorCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -177,7 +177,7 @@ The following sequence diagram shows how the above steps for add tutor operation
 
 #### Design rationale
 
-The `add-t` command was designed this way to ensure consistency with the previous `add` person.
+The `add-t` command was designed this way to ensure consistency with the previous `add` command in AB3.
 
 **Aspect: Optional fields**
 * **Alternative 1:** Allow optional fields when adding tutor (e.g. user can omit phone number or email when adding a 
@@ -190,7 +190,7 @@ The `add-t` command was designed this way to ensure consistency with the previou
     * Cons: Users must have every field filled before they can add a tutor.
 
 **Aspect: Non-unique phone number and email restriction**
-* **Alternative 1:** Allow only unique phone numbers and emails of tutors.
+* **Alternative 1:** Allow only unique phone numbers and emails or tutors.
     * Pros: Decreases erroneous user input when duplicated tutors are entered.
     * Cons: There can be real life scenarios where tutors have the same phone numbers of emails (since there is no 
       strict requirement against it).
@@ -207,17 +207,17 @@ The `add-t` command was designed this way to ensure consistency with the previou
     * Pros: Tutors with the same name can be differentiated with numbers.
     * Pros: Tutors' names are restricted to a limited number of characters to promote easy searching and reference 
       in the future. This also introduces uniformity.
-    * Cons: Number inputs are accepted as names and users can erroneously use phone numbers as names instead.
+    * Cons: Number inputs are accepted as names, and users can erroneously use phone numbers as names instead.
     * Cons: Tutors' names with commas cannot be recognised and entered.
 * **Alternative 3:** Allow tutors to have names with special characters, especially commas.
     * Pros: More representative of various name types, especially those with commas in their names.
-    * Cons: Allowing too many special characters decreases the ability to locate and reference the tutors in future 
+    * Cons: Allowing too many special characters decreases the ability to locate and reference the tutors in the future 
       (e.g. ABC,123@!?:" should not be accepted as a valid name).
 
 ### List tutor feature
 
 The "List Tutor" feature allows users to view the list of existing tutors in the address book. Below, we provide
-an example usage scenario and a detailed description of how the add tutor mechanism behaves at each step.
+an example usage scenario and a detailed description of how the list tutor mechanism behaves at each step.
 
 The following shows the activity diagram from when a user executes the `list-t` command:
 
@@ -244,7 +244,7 @@ The following sequence diagram shows how the above steps for list tutor operatio
 
 #### Design rationale
 
-The `list-t` command was designed this way to ensure consistency with the previous `list` person command.
+The `list-t` command was designed this way to ensure consistency with the previous `list` command in AB3.
 
 ### Edit tutor feature 
 
