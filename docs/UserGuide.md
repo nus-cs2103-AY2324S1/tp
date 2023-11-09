@@ -582,7 +582,7 @@ Examples:
 
 ### Undoing the previous command : `undo`
 
-Undoes your previous command, given that the previous command successfully executed is either `add`, `delete`, or `edit`.
+Undoes your previous command, given that the previous command successfully executed is either `add`, `delete`, `edit`, or `sort`.
 
 Format: `undo`
 
