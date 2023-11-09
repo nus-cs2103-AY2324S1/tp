@@ -58,6 +58,6 @@ public class TaskDescription implements Comparable<TaskDescription> {
 
     @Override
     public int compareTo(TaskDescription other) {
-        return description.compareTo(other.description);
+        return description.toLowerCase().compareTo(other.description.toLowerCase());
     }
 }

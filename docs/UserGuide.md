@@ -130,13 +130,13 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating persons by tag: `filter`
+### Locating persons by field: `filter`
 
 Finds persons whose fields contain any of the given keywords.
 
 Format: `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Filter is case-insensitive. e.g. `cs2103` will match `CS2103`
+* Filter is non case-insensitive. e.g. `cs2103` will match `CS2103`
 * The order of the fields does not matter.
 * All provided fields are searched
 * All tags containing the words will be matched e.g. `Ba` will return `Badminton` or `Basketball` or `Football` or `Backgammon`.
