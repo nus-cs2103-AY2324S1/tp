@@ -1,0 +1,14 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes FindCommand;
+if () then ([Valid input])
+  :Add filter to list of contacts according to user specification;
+  :Update GUI to display filtered contact list;
+else ([Else])
+  :Show invalid Command message;
+endif
+stop
+@enduml

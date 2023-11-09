@@ -3,15 +3,15 @@ layout: page
 title: User Guide
 ---
 
-TAvigator is a **desktop app** targeted towards Teaching Assistants **for managing contacts, optimized for use via a 
-Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type 
+TAvigator is a **desktop app** targeted towards Teaching Assistants **for managing contacts, optimized for use via a
+Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type
 fast, TAvigator can get your contact management tasks done faster than traditional GUI apps. We offer a one-stop
 solution to manage your student details, including attendance records and assignment details.
 
 ### Table of Contents
 
 - [1. About this User Guide](#1-about-this-user-guide)
-- [2. Quick start](#2-Quick-start)
+- [2. Quick start](#2-quick-start)
 - [3. Features](#3-features)
   - [3.1 Basic Course Management](#31-basic-course-management)
     - [Creating an addressbook: `course create`](#311-creating-an-addressbook-course-create)
@@ -94,7 +94,7 @@ An example is shown below.
 
    * `list students` : Lists all contacts.
 
-   * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G10` : Adds a contact named `Fu Yiqiao` to TAvigator.
+   * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567M t/G10` : Adds a contact named `Fu Yiqiao` to TAvigator.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -303,7 +303,7 @@ Format: `find n/STUDENT_NAME [STUDENT_NAME]… | id/STUDENT_ID [STUDENT_ID]…`
 * `STUDENT_ID` should be a string made up of alphabetical characters and numbers, with no special characters or space.
 
 Examples:
-*  `find n/Anthony Yiqiao` Finds all contacts with the name "Anthony" and "Yiqiao".
+*  `find n/Anthony Yiqiao` Finds all contacts with the name "Anthony" and/or "Yiqiao".
 *  `find id/A0123456H` Finds all contacts with the student ID "A0123456H".
 
 #### 3.2.6 Listing students : `list students`
