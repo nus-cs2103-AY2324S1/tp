@@ -6,7 +6,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.IdentityCode;
-import seedu.address.model.person.Person;
 
 /**
  * Represents a Team in the address book.
