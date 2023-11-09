@@ -218,7 +218,13 @@ Format: `redo`
 
 Adds a shortcut mapped to a default command keyword for easier use. </br>
 After the mapping, the new user-defined shortcut will work the same way as the command keyword, and will be preserved between user sessions.
-Duplicate mappings will override previous shortcut mappings.
+
+A command keyword can have multiple valid shortcuts mapped to it. 
+* i.e. both `del --> delete` and `rm --> delete` mappings can exist concurrently.
+
+A valid shortcut cannot be mapped to two different command words at once
+* i.e. both `e --> edit` and `e --> exit` mappings **cannot** exist concurrently.
+* If such a duplicate mapping is attempted, the previous one will be overridden.
 
 Format: `addsc sc/SHORTCUT kw/KEYWORD`
  * `SHORTCUT` can only consist of Alphanumeric characters and must contain no whitespaces.
@@ -232,12 +238,17 @@ Examples:
 ### Deleting custom shortcuts : `delsc`
 
 Deletes the previously user-defined shortcuts.
+You can use `delsc` to try and delete multiple shortcut mappings at once. 
+
+If some shortcut mappings you try to delete did not exist originally, 
+DoConnek Pro will notify you while proceeding with deleting those existing shortcut mappings anyway.
 
 Format: `delsc sc/SHORTCUT...​`
 * `SHORTCUT` should match a previously user-defined shortcut.
 
 Examples:
-* `delsc sc/del sc/abc` will remove the previous mappings of `del` and `abc`.
+* `delsc sc/del sc/abc` when both `del` and `abc` are mapped to some command keyword will remove the previous mappings of `del` and `abc`.
+* `delsc sc/del sc/abc` when only `del` is mapped to some command keyword will remove the previous mapping of `del`, while notifying you that `abc` was not previously mapped to anything.
 
 
 ### Changing the Theme : `theme`
