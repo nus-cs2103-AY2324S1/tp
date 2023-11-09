@@ -52,7 +52,7 @@ public class EditCommandTest {
                 new Id(person.getId().toString()), descriptor);
 
         String expectedMessage =
-                String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+                String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(person, editedPerson);
@@ -71,7 +71,7 @@ public class EditCommandTest {
                 .withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(new Name(lastPerson.getName().toString()), null, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS,
                 Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -133,7 +133,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(new Name(nonExistentName), null, descriptor);
 
         // The expected CommandException should be thrown with the specified message
-        assertThrows(CommandException.class, () -> editCommand.execute(model), EditCommand.MESSAGE_PERSON_NOT_FOUND);
+        assertThrows(CommandException.class, () -> editCommand.execute(model), EditCommand.MESSAGE_PATIENT_NOT_FOUND);
     }
 
     @Test
