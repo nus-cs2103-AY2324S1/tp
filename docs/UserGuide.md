@@ -50,7 +50,6 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
     2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
        <br>
        ``cd Downloads```
-
     3. Simply type in `java -jar flashlingo.jar` to get started!
 
        A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
