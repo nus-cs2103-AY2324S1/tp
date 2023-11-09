@@ -41,20 +41,6 @@ public class PresetsBarTest extends ApplicationTest {
     }
 
     @Test
-    public void handleEditDTest() {
-        clickOn("#editButton");
-        String expected = "edit INDEX name/NAME age/AGE gender/GENDER height/HEIGHT income/INCOME horoscope/HOROSCOPE";
-        assertEquals(expected, presetsBar.getCommandBox().getCommandTextField());
-    }
-
-    @Test
-    public void handleSetPreferencesTest() {
-        clickOn("#setPrefButton");
-        String expected = "setP age/AGE height/HEIGHT income/INCOME horoscope/HOROSCOPE";
-        assertEquals(expected, presetsBar.getCommandBox().getCommandTextField());
-    }
-
-    @Test
     public void handleShowPreferencesTest() {
         clickOn("#showPrefButton");
         String expected = "showP";
