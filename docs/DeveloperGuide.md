@@ -266,21 +266,21 @@ Step 1. The user has the application launched with at least 1 tutor added.
 Step 2. The user executes `list-t` to view all added tutors.
 
 Step 3. The user executes `edit-t 1 n/John Doe` to edit the first tutor's name in the list of tutors displayed. 
-The command is parsed in AddressBookParser.
+The command is parsed in `AddressBookParser`.
 
 Step 4. `EditTutorCommandParser` is created, and constructs an `EditPersonDescriptor` which describes the edited 
 `Person` (omitted in sequence diagram below for brevity). An `EditTutorCommand` object is then constructed with this 
 `EditPersonDescriptor` and the specified tutor index.
 
-Step 5. The `EditTutorCommand` object gets the specified person from the current filtered person list using the 
+Step 5. The `EditTutorCommand` object gets the specified `Person` from the current filtered person list using the 
 tutor index.
 
-Step 6. `EditTutorCommand` object then creates an edited person from the specified person and the editPersonDescriptor.
+Step 6. `EditTutorCommand` object then creates an edited `Person` from the specified `Person` and the `EditPersonDescriptor`.
 
-Step 7. `EditTutorCommand` object then calls the `setPerson` method in the `ModelManager` with the new edited person. 
-This method sets the specified `Person` in the model to be that edited person.
+Step 7. `EditTutorCommand` object then calls the `setPerson` method in the `ModelManager` with the new edited `Person`. 
+This method sets the specified `Person` in the model to be that edited `Person`.
 
-Step 8. Finally, the `EditTutorCommand` object updates the person list to display the edited person.
+Step 8. Finally, the `EditTutorCommand` object updates the person list to display the edited `Person`.
 
 The following sequence diagram shows how the above steps for edit tutor operation works:
 
@@ -300,9 +300,9 @@ the lifeline reaches the end of diagram.
     - Pros: Using the tutor index provides a clear and unambiguous way for users to specify which tutor they want to 
       edit. The index corresponds directly to the position of the tutor in the displayed list, making it easy for users 
       to identify the target tutor.
-    - Pros: The use of tutor indices eliminates the potential challenge of dealing with long or complex names. Users do
+    - Pros: Using the tutor index eliminates the potential challenge of dealing with long or complex names. Users do
       not need to type out the entire name, which can be especially beneficial if a tutor has a lengthy or complicated name.
-    - Pros: The use of index aligns with the existing command structure, which is based on numeric indices for 
+    - Pros: Using the tutor index aligns with the existing command structure, which is based on numeric indices for 
       identifying and interacting with specific entries in the address book.
     - Cons: Users need to have knowledge of the specific index of the tutor they want to edit. This may require them to 
       first execute a `list-t` command to view the current list of tutors and their corresponding indices.
