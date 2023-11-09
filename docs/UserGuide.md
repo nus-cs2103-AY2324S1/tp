@@ -9,6 +9,8 @@ tr:nth-child(odd) {
 }
 </style>
 
+<!-- @@author awhb -->
+
 ## Product Overview
 
 **Land the dream internship or job opportunity you've always wanted by networking more effectively using _NetworkBook!_**
@@ -25,10 +27,14 @@ On top of these advantages, we believe that contact management must be efficient
 
 If you are new here, visit our [getting started guide](#getting-started) to start getting connected on NetworkBook!
 
+<!-- @@author -->
+
 ## Table of Contents
 
 * TOC
 {:toc}
+
+<!-- @@author Eola-Z -->
 
 ## About This User Guide
 
@@ -48,6 +54,9 @@ NetworkBook 1.3 includes several new features and improvements for ease of use.
 * Keyboard shortcuts added for easy access to common commands
 * Undo/redo command to fix mistakes
 * Refinement of user interface to be more clean and usable
+
+<!-- @@author -->
+<!-- @@author xenosf -->
 
 ## Getting Started
 
@@ -75,7 +84,11 @@ NetworkBook 1.3 includes several new features and improvements for ease of use.
 1. You can now start using NetworkBook!
     * Learn more about the commands in the [features](#features) section.
 
+<!-- @@author -->
+
 ## Features
+
+<!-- @@author Singa-Pirate -->
 
 <div markdown="block" class="alert alert-info">
 
@@ -113,6 +126,8 @@ In NetworkBook, you can manage contact information by changing the fields assign
 
 </div>
 
+<!-- @@author -->
+
 ### <u>Category 1 - Add contact information</u>
 
 #### Create new contact: `create /name [name] [optional fields]`
@@ -127,9 +142,7 @@ Parameters:
 * `[optional fields]` are the non-mandatory fields you can associate with the contact at the point of creation. The fields can also be added using the add command.
 
 <div markdown="block" class="alert alert-info">
-
 :information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
-
 </div>
 
 When creating a contact, if there is already another contact with the same name, you would be informed that another contact with the same name already exists (not case sensitive)
@@ -173,6 +186,7 @@ Example usage:
 ### <u>Category 2 - Edit contact details</u>
 
 #### Edit contact detail: `edit [index] [field] [options]`
+
 You can use the `edit` command to edit contact details of existing contacts in your book.
 
 Format:
@@ -194,13 +208,10 @@ For **multi-valued** fields, the `/index` prefix is optional and at most 1 index
 <div markdown="span" class="alert alert-secondary">
 :information_source: **Note:**
 If index of a multi-valued field is not specified, it will **default to 1**.
-
 </div>
 
 <div markdown="block" class="alert alert-info">
-
 :information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
-
 </div>
 
 Example usage:
@@ -252,15 +263,10 @@ For **multi-valued** fields, the `/index` prefix is optional and at most 1 index
 <div markdown="span" class="alert alert-secondary">
 :information_source: **Note:**
 If index of a multi-valued field is not specified, it will **default to 1**.
-
 </div>
 
-
 <div markdown="block" class="alert alert-info">
-
-
 :information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
-
 </div>
 
 Example usage:
@@ -270,6 +276,8 @@ Example usage:
 * `delete 10 /priority`
 
 [Table of Contents](#table-of-contents)
+
+<!-- @@author xenosf -->
 
 #### Delete all contacts: `clear`
 
@@ -309,6 +317,9 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
+<!-- @@author -->
+<!-- @@author nknguyenhc -->
+
 #### Find a contact: `find [name]`
 
 You can use the `find` command to search for contacts by their name if you wish to quickly reference a particular contact's details.
@@ -326,6 +337,9 @@ Example usage:
 * `find Kai Jie`
 
 [Table of Contents](#table-of-contents)
+
+<!-- @@author -->
+<!-- @@author xenosf -->
 
 #### Sort contacts list: `sort /by [field name] /order [asc/desc]`
 
@@ -366,6 +380,9 @@ Example usage:
 * `sort /by name`
 
 [Table of Contents](#table-of-contents)
+
+<!-- @@author -->
+<!-- @@author Eola-Z -->
 
 #### Filter contacts list: `filter /by [field] /with [term]`
 
@@ -412,6 +429,9 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
+<!-- @@author -->
+<!-- @@author awhb -->
+
 ### <u>Category 4 - Undo/redo</u>
 
 #### Undo last change to NetworkBook: `undo`
@@ -441,6 +461,9 @@ Example usage:
 * `redo`
 
 [Table of Contents](#table-of-contents)
+
+<!-- @@author -->
+<!-- @@author nknguyenhc -->
 
 ### <u>Category 5 - Open other apps</u>
 
@@ -484,7 +507,6 @@ Parameters:
 <div markdown="span" class="alert alert-secondary">
 :information_source: **Note:**
 It is optional to provide the email index. If not specified, it will **default to 1**.
-
 </div>
 
 Example usage:
@@ -495,6 +517,9 @@ Example usage:
 * `email 1 /index 2`
 
 [Table of Contents](#table-of-contents)
+
+<!-- @@author -->
+<!-- @@author Singa-Pirate -->
 
 ### <u>Category 6 - Keyboard shortcuts</u>
 
@@ -536,6 +561,9 @@ Note that this only works when the command box is not active. If you are typing 
 * `ctrl-W`: exit NetworkBook (equivalent to [`exit` command](#exit-networkbook-exit))
 
 [Table of Contents](#table-of-contents)
+
+<!-- @@author -->
+<!-- @@author xenosf -->
 
 ### <u>Category 7 - Mouse interaction</u>
 
@@ -603,6 +631,8 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
+<!-- @@author -->
+
 ## Command summary
 
 | Command                                                      | Prefixes                                                     | Format and examples                                          | What it does                                                 |
@@ -626,6 +656,8 @@ Example usage:
 | [**exit**](#exit-networkbook-exit)                           | N/A                                                          | `exit`                                                       | Exits NetworkBook.                                           |
 
 [Table of Contents](#table-of-contents)
+
+<!-- @@author Singa-Pirate -->
 
 ## FAQ
 
@@ -652,3 +684,5 @@ If you have any further issues, please raise an issue on our [GitHub page](https
 **A:** Locate the data file stored at `[JAR file location]/data/networkbook.json`. Copy over the data file to the corresponding location on your current device. After that, launch NetworkBook to check whether your contact details have been loaded properly.
 
 [Table of Contents](#table-of-contents)
+
+<!-- @@author -->
