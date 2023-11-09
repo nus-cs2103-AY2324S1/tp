@@ -7,14 +7,6 @@ title: Developer Guide
 
 ---
 
-## **Acknowledgements**
-
-- Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
-- Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
-
----
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -197,6 +189,14 @@ The following activity diagram summarises what happens when a user executes an e
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+---
+
+## **Acknowledgements**
+
+- Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
+- Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
 
 ---
 
@@ -450,5 +450,5 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ## **Appendix: Planned enhancements**
-1. Add a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command. If so, display an additional message to remind the user about the duplication. 
+1. Add a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command. If so, display an additional message to remind the user about the duplication.
 //TODO this is for countering known feature flaws to help grading, after the feature freeze. We can only list `4 members x 2 = 8` enhancements here
