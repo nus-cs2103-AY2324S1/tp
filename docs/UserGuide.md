@@ -34,7 +34,21 @@ will be the least of your worries.
 
 1. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases).
 
+
 1. Copy the file to the folder you want to use as the _home folder_ for your TutorMate.
+2. 
+2. Copy the file to the folder you want to use as the _Home Folder_ for your TutorMate.
+3. 
+3. Copy the file to the folder you want to use as the Home Folder for your TutorMate.
+4. 
+4. Copy the file to the folder you want to use as the HOME FOLDER for your TutorMate.
+5. 
+5. Copy the file to the folder you want to use as the `home folder` for your TutorMate.
+6. 
+6. Copy the file to the folder you want to use as the `Home Folder` for your TutorMate.
+7. 
+7. Copy the file to the folder you want to use as the [highlight]Home Folder[/highlight] for your TutorMate.
+8. 
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tutormate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -242,6 +256,17 @@ Examples:
 * `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
 * `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS,PHYSICS -tag abc,cde,fgh`
 * In `STUDENTS` list :
+* In STUDENT LIST :
+* In Student List :
+* In _student list_ :
+* In _Student List_ :
+* In [highlight]Student List[/highlight] :
+* 
+* 
+* 
+* 
+* 
+* 
   * `add -name John -phone 91234567`
   * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
   * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS,PHYSICS -tag abc,cde,fgh`
