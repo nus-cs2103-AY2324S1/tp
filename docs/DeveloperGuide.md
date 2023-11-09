@@ -477,6 +477,27 @@ listed at index 1.
 
 ### Specificity of Error Messages
 
+Currently, when the user attempts to add a fosterer with an invalid combination of availability, animal name and animal type,
+the same error message with multiple details of how to rectify different errors is sometimes shown, which could be confusing.
+In particular, in the following three cases, the same error message is displayed:
+
+Cases:
+1. `availability/nil` but `animalType/` is not `nil`.
+2. `availability/Available` with `animalType/` values set to other values which are NOT `able.Cat`, `able.Dog` or `nil`.
+3. `availability/NotAvailable` with `animalType/` values set to other values which are NOT `current.Cat`, `current.Dog` or `nil`.
+
+Error message:</br>
+"If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'.</br> 
+If animal type information is not available, it should be inputted as 'nil'.</br> 
+If fosterer is NOT available and is currently fostering, animal type should be 'current.Dog' / 'current.Cat'.</br> 
+If fosterer is currently unable to foster, animal type should be inputted as 'nil'.</br> 
+If availability is 'nil', animal type should be 'nil' too."</br>
+
+
+Hence, an enhancement would be to split the error message up to only show when each specific case occur, instead of grouping them
+all together into a single message. This would reduce confusion for the user and provide more convenience as the user is no longer
+required to read long error messages with details that might be irrelevant to the specific error made.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
