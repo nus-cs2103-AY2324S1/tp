@@ -167,7 +167,7 @@ These are all the features in regard to a **member** in CMC.
 
 Adds a member to the list of members.
 
-#### Format:
+<h5>Format</h5>
 
 `addmember /name MEMBER_NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`<br/>
 
@@ -192,16 +192,16 @@ Adds a member to the list of members.
 
 * For a new member to be created, the `MEMBER_NAME`, `PHONE_NUMBER`, `EMAIL`, and `TELEGRAM_HANDLE` have to all be unique.
   Otherwise, the system will reject this as a duplicate member.
-
+  <br/>
 * The last valid parameter found will treat all of the characters after it as its input.
-
+  <br/>
   * Consider this command: `addm /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /invalid invalid`
-  
+  <br/>
   * The `tele` parameter will treat `@tswift /invalid invalid` as its input which is invalid.
 
 </div>
 
-#### Example of usage:
+<h5>Example of usage</h5>
 
 `addm /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /tag Admin`
 
@@ -214,7 +214,7 @@ handle `tswift` and tag `Admin` to the list of members.
 
 Find and generate a list of all existing member(s) whose information contain any of the specified keyword(s).
 
-##### Format:
+<h5>Format</h5>
 
 `findmember KEYWORD...`<br/>
 The alias for this command is `findm`.
@@ -223,7 +223,7 @@ The alias for this command is `findm`.
 :information_source: **Notes about the command format:** `KEYWORD`s have to be separated by a space.
 </div>
 
-##### Example of usage:
+<h5>Example of usage</h5>
 
 `findm SWE Product`
 
@@ -243,12 +243,12 @@ You may check out the command [here](#413-viewing-members-viewmembers-or-viewm).
 Generates a list of all existing member(s). An example of where you might want to use this command is if
 you want to go back to viewing all members after a search with [`findmember`](#412-finding-members-findmember-or-findm).
 
-##### Format:
+<h5>Format</h5>
 
 `viewmembers`<br/>
 The alias for this command is `viewm`.
 
-##### Example of usage:
+<h5>Example of usage</h5>
 
 `viewmembers`
 
@@ -260,7 +260,7 @@ Generates a list of all existing member(s).
 
 The member at the specified index will have his/her specified field(s) edited.
 
-#### Format:
+<h5>Format</h5>:
 
 `editmember MEMBER_INDEX [/name MEMBER_NAME] [/phone PHONE_NUMBER] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...`<br/><br/>
 The alias for this command is `editm`.
@@ -290,7 +290,7 @@ This also means that to clear a member's tags, you can simply type `editm /tag`.
 
 </div>
 
-#### Example of usage:
+<h5>Example of usage</h5>:
 
 `editm 1 /name Taylor Swift /email taylorswift@era.tour /tele @tswift`
 
@@ -303,7 +303,7 @@ to `taylorswift@era.tour`, and telegram handle to `@tswift`.
 
 The member at the specified index will be deleted from the list of members.
 
-#### Format:
+<h5>Format</h5>
 
 `deletemember MEMBER_INDEX`<br/>
 The alias for this command is `delm`.
@@ -322,7 +322,7 @@ will be based on the current **shown** list. If `MEMBER_INDEX` is negative or 0,
 
 </div>
 
-#### Example of usage:
+<h5>Example of usage</h5>
 
 `delm 4`
 
@@ -334,7 +334,7 @@ This deletes the member at `MEMBER_INDEX` 4 in the member list.
 
 Copies the details of the member at the specified index to the clipboard.
 
-##### Format:
+<h5>Format</h5>
 
 `copyMember MEMBER_INDEX`<br/>
 The alias for this command is `cpm`.
@@ -346,7 +346,7 @@ will be based on the current **shown** list. If `MEMBER_INDEX` is negative or 0,
 
 </div>
 
-##### Example of usage:
+<h5>Example of usage</h5>
 
 `cpm 1`
 
@@ -368,7 +368,7 @@ Tasks:
 #### 4.1.7 Allocating a task to a member: `addtask` or `addt`
 Adds a task to the top of the task list of the specified member.
 
-#### Format:
+<h5>Format</h5>
 `addtask MEMBER_INDEX /task TASK_NAME` <br/>
 The alias for this command is `addt`.
 
@@ -377,12 +377,12 @@ The alias for this command is `addt`.
 :information_source: **Notes about input parameter:**
 
 * `MEMBER_INDEX`: Only positive integers that are within the member list are accepted.
-
+  <br/>
 * `TASK_NAME`: Accepts alphanumeric characters, spaces and #. Should not be blank.
 
 </div>
 
-#### Example of usage:
+<h5>Example of usage</h5>
 
 `addt 2 /task Implement solve feature`
 
@@ -394,7 +394,7 @@ This adds a task with the description `Implement solve feature` to the top of ta
 #### 4.1.8 Viewing all tasks allocated to a member: `viewtask` or `viewt`
 Shows the task list of a member at the specified index in the `Tasks` window.
 
-#### Format:
+<h5>Format</h5>
 `viewtask MEMBER_INDEX` <br/>
 The alias for this command is `viewt`.
 
@@ -405,7 +405,7 @@ will be based on the current **shown** list. If `MEMBER_INDEX` is negative or 0,
 
 </div>
 
-#### Example of usage:
+<h5>Example of usage</h5>
 
 `viewt 2`
 
@@ -416,7 +416,7 @@ This shows the list of tasks assigned to the member at `MEMBER_INDEX` 2.
 
 Deletes a task at the specified index of a task list, for the member at the specified index of the members list.
 
-#### Format:
+<h5>Format</h5>
 
 `deletetask MEMBER_INDEX /task TASK_INDEX`<br/>
 The alias for this command is `delt`.
@@ -426,12 +426,12 @@ The alias for this command is `delt`.
 :information_source: **Notes about input parameter:**
 
 * `MEMBER_INDEX`: Only positive integers that are within the member list are accepted.
-
+  <br/>
 * `TASK_INDEX`: Only positive integers that are within the task list are accepted.
 
 </div>
 
-#### Example of usage:
+<h5>Example of usage</h5>
 
 `delt 2 /task 2`
 
@@ -446,7 +446,7 @@ These are all the features in regard to an **applicant** in CMC.
 
 Adds an applicant to the list of applicants.
 
-#### Format:
+<h5>Format</h5>
 
 `addapplicant /name APPLICANT_NAME /phone PHONE_NUMBER [/interview INTERVIEW_TIME`]<br/>
 The alias for this command is `adda`.
@@ -471,7 +471,7 @@ The alias for this command is `adda`.
 
 </div>
 
-#### Example of usage:
+<h5>Example of usage</h5>
 
 `adda /name Lady Gaga /phone 99129969`
 
@@ -490,7 +490,7 @@ You may check out the command [here](#424-editing-an-applicant-editapplicant-or-
 
 Find and generate a list of all existing applicants(s) whose information contain any of the specified keyword(s).
 
-##### Format:
+<h5>Format</h5>
 
 `findapplicant KEYWORD...`  
 The alias for this command is `finda`.
@@ -499,7 +499,7 @@ The alias for this command is `finda`.
 :information_source: **Notes about the input parameter:** `KEYWORD`s have to be separated by a space.
 </div>
 
-##### Example of usage:
+<h5>Example of usage</h5>
 
 `finda Rui`
 
@@ -520,12 +520,12 @@ Generates a list of all existing applicant(s). An example of where you might wan
 you want to go back to viewing all members after a search.
 with [`findapplicant`](#422-finding-applicants-findapplicant-or-finda).
 
-##### Format:
+<h5>Format</h5>
 
 `viewapplicants`<br/>
 The alias for this command is `viewa`.
 
-##### Example of usage:
+<h5>Example of usage</h5>
 
 `viewa`
 
@@ -537,7 +537,7 @@ Generates a list of all existing applicant(s).
 
 The applicant at the specified index will have his/her specified field(s) edited.
 
-#### Format:
+<h5>Format</h5>
 
 `editapplicant APPLICANT_INDEX [/name APPLICANT_NAME] [/phone PHONE_NUMBER] [/interview INTERVIEW_TIME]`<br/>
 The alias for this command is `edita`.
@@ -557,7 +557,7 @@ The alias for this command is `edita`.
 
 </div>
 
-#### Example of usage:
+<h5>Example of usage</h5>
 
 1. `edita 1 /name Alfred /interview 07/01/2003 1500`
 
@@ -575,7 +575,7 @@ and the interview has been cancelled and removed.
 
 The applicant at the specified index will be deleted from the list of applicants.
 
-##### Format:
+<h5>Format</h5>
 
 `deleteapplicant APPLICANT_INDEX`<br/>
 The alias for this command is `dela`.
@@ -594,7 +594,7 @@ will be based on the current **shown** list. If `APPLICANT_INDEX` is negative or
 
 </div>
 
-##### Example of usage:
+<h5>Example of usage</h5>
 
 `dela 3`
 
@@ -606,7 +606,7 @@ This deletes the applicant at `APPLICANT_INDEX` 1 in the list of applicants.
 
 Copies the details of the applicant at the specified index to the clipboard.
 
-##### Format:
+<h5>Format</h5>
 
 `copyapplicant APPLICANT_INDEX`<br/>
 The alias for this command is `cpa`.
@@ -617,7 +617,7 @@ The alias for this command is `cpa`.
 based off the current **shown** list. If `APPLICANT_INDEX` is negative or 0, or the applicant does not exist in the list, this command will throw an error. 
 </div>
 
-##### Example of usage:
+<h5>Example of usage</h5>
 
 `cpa 1`
 
@@ -727,15 +727,15 @@ These are some common mistakes that you might make while using our application.
 
 1. Problem: I can't seem to add an interview time, the error says that the input date is invalid. Why?
 
-    Answer: Please make sure that the month or date has 2 digits in them. For example, January will have to be `01` and not `1`. If you are trying to cancel the interview scheduled, ensure that nothing is capitalised in `cancel` as it is case-sensitive.<br/><br/>
+    Answer: Please make sure that the month or date has 2 digits in them. For example, January will have to be `01` and not `1`. If you are trying to cancel the interview scheduled, ensure that nothing is capitalised in `cancel` as it is case-sensitive.
 
 2. Problem: I am trying to delete a certain member off the member list. However, it seems to be deleting the wrong member. Why?
 
-    Answer: The `INDEX` used will have to be the current index shown on the screen. If you are deleting the wrong member, make sure you are following the correct index shown currently shown on the screen, and not an index from a previous view. You can refer to [here](#413-viewing-members-viewmembers-or-viewm) to view the entire list of members again.<br/><br/>
+    Answer: The `INDEX` used will have to be the current index shown on the screen. If you are deleting the wrong member, make sure you are following the correct index shown currently shown on the screen, and not an index from a previous view. You can refer to [here](#413-viewing-members-viewmembers-or-viewm) to view the entire list of members again.
 
 3. Problem: I can't seem to see the full interview time. How can I fix this?
 
-    Answer: On start-up, the resolution of the window may not be optimal for your screen size and the interview time may be cut off as a result. To fix this, you may readjust the dimensions of the CMC window by dragging the corners of the window, or maximising the view by clicking the button on the top right hand corner of the window. <br/><br/>
+    Answer: On start-up, the resolution of the window may not be optimal for your screen size and the interview time may be cut off as a result. To fix this, you may readjust the dimensions of the CMC window by dragging the corners of the window, or maximising the view by clicking the button on the top right hand corner of the window.
 
 If you are facing a problem that has not been mentioned, please email us at [helpdesk@cmc.com](mailto:helpdesk@cmc.com). 
 
