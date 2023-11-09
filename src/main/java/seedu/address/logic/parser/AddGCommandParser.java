@@ -34,7 +34,7 @@ public class AddGCommandParser implements Parser<AddGCommand> {
         try {
             index = ParserUtil.parseIndex(argMultiMap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGCommand.MESSAGE_USAGE));
         }
 
         index = ParserUtil.parseIndex(argMultiMap.getPreamble());

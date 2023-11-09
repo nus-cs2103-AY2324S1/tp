@@ -127,7 +127,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]â€¦â€
 **Notes regarding the design of the `add` command:**
 * The uniqueness of the person is determined by the name only. This means that you cannot have 2 persons with the same name in the application book.
 * All other fields other than name can be identical between different people in JABPro.
-* `n/NAME` - `Name` must be alphanumeric (Letters and numbers, no symbols allowed such as `/`, `,` ...)
+* `n/NAME` - `NAME` must be alphanumeric (Letters and numbers, no symbols allowed such as `/`, `,` ...)
 * `p/PHONE_NUMBER` - `PHONE_NUMBER` must contain numbers only and should be at-least 3 digits long
 * `e/EMAIL` - `EMAIL` must be the standard email address format (There must be an email-prefix followed by  `@` symbol and email domain)
 * `a/ADDRESS` - `ADDRESS` can be any value, including special characters such as `#`, `,` ...
@@ -248,15 +248,15 @@ Format:
 `list so/ATTRIBUTE`
 
 * `so/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
-* As of v1.2, the attributes that are supported are `name` and `email`.
+* The attributes that are supported are `name` and `email`.
 * Attribute is case-insensitive: `list so/NAME` and `list so/name` return the same result.
 * The result will be sorted in **ascending** order.
-* Note: as of v1.2, the sorting algorithm is case-sensitive, which means it will treat uppercase and 
+* The sorting algorithm is case-sensitive, which means it will treat uppercase and 
 lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
 Examples:
 * `list` Shows a list of all persons.
-* `list s/name` Shows a list of all persons, sorted by name in ascending order.
+* `list so/name` Shows a list of all persons, sorted by name in ascending order.
 
 ### Listing all tags: `listT`
 
@@ -269,6 +269,8 @@ Format: `listT`
 
 **Example:**
 * `listT` Shows a list of all tags.
+
+![ListT](images/listT.png)
 
 ### Editing a person : `edit`
 
@@ -527,7 +529,7 @@ Understanding how to use these summary statistics meaningfully:
   * `percentile` as where this candidate stands among all other candidates (treat it like a ranking system, the higher the percentile, the better the candidate is performing) 
   * `percentile` 100.0 would represent the best performing candidate for that tag and `percentile` 0.0 would represent the worst performing candidate for that tag
 
-** Advanced users **
+**Advanced users**
 * Understand that `percentile` has limited functionality in certain context. Suppose you have 6 candidates with the scores `{80, 90, 100, 100, 100, 100}`
   * Median would be 90 in this case and percentile would be 50.0 for the candidate with a score of 90, however the upper half of the candidates are all 100.0 percentile
   * This comes as a consequence of the implementation where given you have the same score, you should have the same percentile / ranking
