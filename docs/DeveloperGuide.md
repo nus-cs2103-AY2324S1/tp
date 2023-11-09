@@ -329,13 +329,13 @@ The following shows the activity diagram from when a user executes the `find-t` 
 
 Step 1. The user has the application launched.
 
-Step 2. The user executes `find-t John Doe` to search for tutors with the name "John Doe". The command is parsed in the 
-`AddressBookParser`.
+Step 2. The user executes `find-t John Doe` to search for tutors whose name contains "John" or "Doe. The command is 
+parsed in the `AddressBookParser`.
 
 Step 3. `FindTutorCommandParser` is created, and constructs a `NameContainsKeywordsPredicate` which matches for any of 
 the search keywords. A `FindTutorCommand` object is then constructed with this predicate.
 
-Step 4. The `LogicManager` calls the `execute` in `FindTutorCommand` which sets the predicate of the filtered persons 
+Step 4. The `LogicManager` calls the `execute` method in `FindTutorCommand` which sets the predicate of the filtered persons 
 list in `ModelManager` to be the predicate created earlier.
 
 Step 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from 
@@ -387,7 +387,7 @@ Step 1. The user has the application launched with at least 1 tutor added.
 
 Step 2. The user executes `list-t` to view all added tutors.
 
-Step 3. The user executes `delete-t 1` to delete the tutor with Tutor index 1 in the list of tutors displayed.
+Step 3. The user executes `delete-t 1` to delete the tutor with index 1 in the list of tutors displayed.
 The command is parsed in the `AddressBookParser`.
 
 Step 4. `DeleteTutorCommandParser` is created and gets the index of the tutor to be deleted.
@@ -396,7 +396,7 @@ A `DeleteTutorCommand` object is then constructed with the specified tutor index
 Step 5. The `DeleteTutorCommand` object gets the specified person from the current filtered person list using the tutor
 index.
 
-Step 6. The `DeleteTutorCommand` object then calls the `deletePerson` method in the ModelManager with the specified 
+Step 6. The `DeleteTutorCommand` object then calls the `deletePerson` method in the `ModelManager` with the specified 
 person to delete. This method deletes the specified `Person` in the model.
 
 Step 7. Finally, the `DeleteTutorCommand` object returns the `CommandResult`.
@@ -414,19 +414,18 @@ but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 #### Design rationale
 {:.no_toc}
 
-The `delete-t` command was designed this way to ensure consistency with the previous `delete` person command.
+The `delete-t` command was designed this way to ensure consistency with the previous `delete` command in AB3.
 
 **Aspect: Specifying which tutor to delete**
 - **Alternative 1 (current choice):** Using tutor index.
   - Pros: Using the tutor index provides a clear and unambiguous way for users to specify which tutor they want to 
     delete. The index corresponds directly to the position of the tutor in the displayed list, making it easy for 
     users to identify the target tutor.
-  - Pros: The use of tutor indices eliminates the potential challenge of dealing with long or complex names. Users do
-    not need to type out the entire name, which can be especially beneficial if a tutor 
-    has a lengthy or complicated name.
-  - Pros: The use of index aligns with the existing command structure, which is based on numeric indices for
+  - Pros: Using the tutor index eliminates the potential challenge of dealing with long or complex names. Users do
+    not need to type out the entire name, which can be especially beneficial if a tutor has a lengthy or complicated name.
+  - Pros: Using the tutor index aligns with the existing command structure, which is based on numeric indices for
     identifying and interacting with specific entries in the address book.
-  - Cons: Users need to have knowledge of the specific index of the tutor they want to edit. This may require them to
+  - Cons: Users need to have knowledge of the specific index of the tutor they want to delete. This may require them to
     first execute a `list-t` command to view the current list of tutors and their corresponding indices.
 - **Alternative 2:** Using tutor name.
   - Pros: Allowing users to delete a tutor by specifying their name provides a more natural and intuitive method, as
@@ -636,13 +635,13 @@ The following shows the activity diagram from when a user executes the `find-s` 
 
 Step 1. The user has the application launched.
 
-Step 2. The user executes `find-s John Doe` to search for tutors with the name "John" or "Doe". The command is parsed in the
+Step 2. The user executes `find-s John Doe` to search for tutors whose name contains "John" or "Doe. The command is parsed in the
 `AddressBookParser`.
 
 Step 3. `FindScheduleCommandParser` is created, and constructs a `TutorNameContainsKeywordsPredicate` which matches for any of
 the search keywords. A `FindScheduleCommand` object is then constructed with this predicate.
 
-Step 4. The `LogicManager` calls the `execute()` method in `FindScheduleCommand` which sets the predicate of the filtered schedule
+Step 4. The `LogicManager` calls the `execute` method in `FindScheduleCommand` which sets the predicate of the filtered schedule
 list in `ModelManager` to be the predicate created earlier.
 
 Step 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
@@ -853,7 +852,7 @@ Given below is an example scenario on how the delete schedule command behaves:
    - The `Index` is not out of bounds.
      <div markdown="span" class="alert alert-info">:information_source: **Note:** An `Index` is considered valid if it's within the range of the schedule list's size. This is enforced by throwing an `CommandException` if it is not valid.
        </div>
-6. The `execute()` will then call `Model::getFilteredScheduleList` and get the specified Schedule using the `Index` given.
+6. The `execute` method will then call `Model::getFilteredScheduleList` and get the specified Schedule using the `Index` given.
 7. Once the checks are successful, the method then calls `Model::deleteSchedule` in `ModelManager` to delete the specified `Schedule` in the model.
 8. Finally, the `DeleteScheduleCommand` returns the `CommandResult`.
 
