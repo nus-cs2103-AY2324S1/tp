@@ -1,0 +1,24 @@
+@startuml
+skinparam activityBackgroundColor LightYellow
+skinparam activityBorderColor Blue
+skinparam activityArrowColor Black
+skinparam activityArrowFontSize 10
+skinparam activityFontSize 12
+
+start
+
+:User uses the FindInterview command;
+
+if () then ([command format is invalid])
+    :Show invalid command
+    error message;
+
+else ([else])
+    :Show number of matching
+    interviews and filtered
+    interview list;
+endif
+
+stop
+
+@enduml

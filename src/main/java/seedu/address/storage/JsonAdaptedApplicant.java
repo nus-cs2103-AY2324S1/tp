@@ -28,7 +28,7 @@ class JsonAdaptedApplicant {
     private final String phone;
     private final String email;
     private final String address;
-    private final boolean hasInterview;
+    private final Boolean hasInterview;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -107,6 +107,10 @@ class JsonAdaptedApplicant {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(applicantTags);
+
+        if (hasInterview == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "hasInterview"));
+        }
 
         return new Applicant(modelName, modelPhone, modelEmail, modelAddress, modelTags, hasInterview);
     }

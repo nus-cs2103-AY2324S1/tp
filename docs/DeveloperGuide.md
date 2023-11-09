@@ -168,7 +168,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The find interview by job title feature allows users to query the list of added interview for interviews that match the job title via the command `find-i KEYWORD [MORE_KEYWORD]... `, where `KEYWORD` must not
+The find interview by job role feature allows users to query the list of added interview for interviews that match the job role via the command `find-i KEYWORD [MORE_KEYWORD]... `, where `KEYWORD` must not
 be an empty string.
 
 The `find-i` command is facilitated by the `FindInterviewCommand`, `FindInterviewCommandParser`, and `JobContainsKeywordsPredicate`.
@@ -183,6 +183,18 @@ in order to produce a filtered list containing only entries whose job correspond
 5. The `LogicManager` executes the `FindInterviewCommand` which calls the `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` method.
 6. The `FindInterviewCommand` construct `CommandResult` containing the number of successful interviews filtered in the final list and returns it to `LogicManager`.
 7. The GUI will be updated automatically by when the list changes.
+
+The following sequence diagram shows how the `find-i` operation works:
+
+![FindInterviewSequenceDiagram](images/FindInterviewSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for FindInterviewCommandParser should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![FindInterviewActivity](images/FindInterviewActivityDiagram.png)
 
 #### Design Consideration
 **Aspect: Case-sensitivity in search:**
@@ -339,7 +351,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
 
   - The sequence diagram shown below shows how the API is called by other classes:
 
-    ![parseDateSequenceDiagram.png](images/parseDateSequenceDiagram.png)
+    ![TimeParserSequenceDiagram.png](images/TimeParserSequenceDiagram.png)
 
 #### How is the command executed
 1. The caller passes in the `date` string, which contains the date information. The caller also passes in the boolean flag `dateOnly`, which will indicate whether the string should be parsed into a `Time` instance containing date and time, or strictly date only.
@@ -461,6 +473,18 @@ The `rate` feature is facilitated by the `Rating` class, `RateCommand` and the `
 5. The `LogicManager` executes the `RateCommand` which calls the `Model#getFilteredInterviewList` to get the size of the current list to ensure the `INTERVIEW_INDEX` is within the interview list size.
 6. The `Model#setInterview` method will be called next in `RateCommand` to update the new interview with the new rating.
 7. The `RateCommand` constructs `CommandResult`to return the success message to be displayed by the GUI.
+
+The following sequence diagram shows how the `rate` operation works:
+
+![RateInterviewSequenceDiagram](images/RateInterviewSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for RateCommandParser should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![RateInterviewActivity](images/RateInterviewActivityDiagram.png)
 
 #### Design consideration
 * **Alternative 1 (current choice):** Stricter rating value with specific format

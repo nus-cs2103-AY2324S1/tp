@@ -35,11 +35,14 @@ all the way up the abstraction ladder (Model, AddressBook etc.) to the Observabl
 
 * **Documentation**:
   * User Guide:
+    * `add-i`, `edit-i`, `delete-i` and `list-i` commands
     * Ensured functionality and correctness of UG hyperlinks
     * Misc. enhancements to the UG
   * Developer Guide:
-    * Use Cases for v1.1
+    * `add-i` command
+    * All use Cases for `v1.1` and `v1.4`
   * Removed most traces of AB3 from the markdown pages, UG and DG in `v1.1`
+  * Adapted index, readme, etc. from AB3 to our product
 
 
 * **PRs reviewed** (with non-trivial comments):
