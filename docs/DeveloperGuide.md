@@ -455,6 +455,12 @@ e.g. `p/90876534567890234567` is now an invalid phone number parameter.
 
 ### Handle Invalid Fosterer - Corrupt Data File
 
+Currently, the Foster Family data is saved automatically as a JSON file, and in the case where the data file is updated directly
+and made invalid, Foster Family would either discard all data and start with an empty data file at the next run or the app would 
+not start at all. Even though it is advised in the user guide that user should not make changes to the data file directly, one 
+possible improvement to be made to prevent such incidents would be to either use a database with username and password authentication 
+or implement encryption.
+
 ### Notes Feature as a Separate Command
 
 Currently, the notes feature is only available in the profile page, and its content, which can only be recorded via the
