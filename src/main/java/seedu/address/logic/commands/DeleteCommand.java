@@ -14,6 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -55,6 +56,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Event> lastShownEventList = model.getFilteredEventList();
 
         // Delete by index
         if (targetIndex.isPresent()) {
@@ -64,6 +66,12 @@ public class DeleteCommand extends Command {
 
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
             model.deletePerson(personToDelete);
+            List<Event> eventsToDelete = lastShownEventList.stream()
+                    .filter(event -> event.getPerson().isSamePerson(personToDelete))
+                    .collect(Collectors.toList());
+            for (Event event : eventsToDelete) {
+                model.deleteEvent(event);
+            }
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         }
 
@@ -79,6 +87,16 @@ public class DeleteCommand extends Command {
         for (Person person : personsToDelete) {
             model.deletePerson(person);
         }
+
+        List<Event> eventsToDelete = lastShownEventList.stream()
+                .filter(event -> personsToDelete.stream()
+                        .anyMatch(person -> event.getPerson().isSamePerson(person)))
+                .collect(Collectors.toList());
+
+        for (Event event : eventsToDelete) {
+            model.deleteEvent(event);
+        }
+
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                 personsToDelete.size() == 1 ? Messages.format(personsToDelete.get(0))
@@ -109,7 +127,7 @@ public class DeleteCommand extends Command {
         }
 
         if (!predicatesList.isEmpty()) {
-            return stringBuilder.add("predicates list", predicatesList).toString();
+            return stringBuilder.add("predicateList", predicatesList).toString();
         }
 
         return stringBuilder.add("invalid", "No valid target specified").toString();
