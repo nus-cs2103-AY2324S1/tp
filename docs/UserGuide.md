@@ -1079,10 +1079,9 @@ use is sure to solve your scheduling needs.
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only 
    the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by 
    the application before running the application again.
-2. **For Window users with the Windows 11 operating system or older versions**, if you try double-clicking the jar file 
-   to launch the TutorConnect application, it will throw a Java Exception that prevents the jar file from opening. The 
-   remedy is to open a command terminal on the folder where `TutorConnect.jar` is and type the following command:
-   `java -jar TutorConnect.jar` before hitting enter. The command should run and launch the application.
+2. **When running Java versions older than `Java 11`**, users may encounter an error after double clicking to launch 
+   the application. The solution is to launch the application with a command terminal as described in `Warning
+   for unable to open jar file` in the [Quick Start](#quick-start) section.
 
 [Back To Top](#table-of-contents)
 
