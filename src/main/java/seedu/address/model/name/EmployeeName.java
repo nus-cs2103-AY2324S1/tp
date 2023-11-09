@@ -16,7 +16,7 @@ public class EmployeeName {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    private static String validationRegex = "[\\p{Alnum}][\\p{Alnum} ]*";
+    private static String validationRegex = "[\\p{Alpha}][\\p{Alpha}. ]*";
 
     public final String fullName;
     /**
