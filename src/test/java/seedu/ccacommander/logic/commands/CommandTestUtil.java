@@ -263,4 +263,14 @@ public class CommandTestUtil {
         model.deleteEvent(firstEvent);
         model.commit(String.format(MESSAGE_COMMIT, firstEvent.getName()));
     }
+
+    /**
+     * Deletes the last event in {@code model}'s filtered event list from {@code model}'s CCACommander.
+     */
+    public static void deleteLastEvent(Model model) {
+        int sizeofEventList = model.getFilteredEventList().size();
+        Event lastEvent = model.getFilteredEventList().get(sizeofEventList - 1);
+        model.deleteEvent(lastEvent);
+        model.commit(String.format(MESSAGE_COMMIT, lastEvent.getName()));
+    }
 }

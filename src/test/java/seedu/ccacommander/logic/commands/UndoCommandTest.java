@@ -3,6 +3,7 @@ package seedu.ccacommander.logic.commands;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.deleteFirstEvent;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.deleteLastEvent;
 import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,8 +23,10 @@ public class UndoCommandTest {
         expectedModel = new ModelManager(getTypicalCcaCommander(), new UserPrefs());
 
         deleteFirstEvent(model);
+        deleteLastEvent(model);
         deleteFirstEvent(model);
         deleteFirstEvent(expectedModel);
+        deleteLastEvent(expectedModel);
         deleteFirstEvent(expectedModel);
     }
 
@@ -34,10 +37,15 @@ public class UndoCommandTest {
         assertCommandSuccess(new UndoCommand(), model,
                 String.format(UndoCommand.MESSAGE_SUCCESS_UNDO, undoMessageFirst), expectedModel);
 
-        // one undoable command in model
+        // two undoable commands in model
         String undoMessageSecond = expectedModel.undo();
         assertCommandSuccess(new UndoCommand(), model,
                 String.format(UndoCommand.MESSAGE_SUCCESS_UNDO, undoMessageSecond), expectedModel);
+
+        // one undoable command in model
+        String undoMessageThird = expectedModel.undo();
+        assertCommandSuccess(new UndoCommand(), model,
+                String.format(UndoCommand.MESSAGE_SUCCESS_UNDO, undoMessageThird), expectedModel);
 
         // no more undoable command in model
         assertCommandFailure(new UndoCommand(), model, UndoCommand.MESSAGE_NO_AVAILABLE_COMMAND);
