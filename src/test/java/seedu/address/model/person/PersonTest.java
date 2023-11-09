@@ -128,6 +128,7 @@ public class PersonTest {
         attendanceRecords2.add(attendance2);
 
         Person emptyBob = new PersonBuilder(BOB).build();
+        emptyBob.addAttendance(attendance1);
         emptyBob.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyBob);
 
         List<Attendance> expectedRecords = new ArrayList<>();
@@ -150,6 +151,7 @@ public class PersonTest {
         attendanceRecords2.add(attendance2);
 
         Person emptyAmy = new PersonBuilder().build();
+        emptyAmy.addAttendance(attendance1);
         emptyAmy.mergeAttendanceRecords(attendanceRecords1, attendanceRecords2, emptyAmy);
 
         List<Attendance> expectedRecords = new ArrayList<>();

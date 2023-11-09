@@ -1,0 +1,108 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MergeCommandParser" as MergeCommandParser LOGIC_COLOR
+participant "m:MergeCommand" as MergeCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "1:Person" as Person1 LOGIC_COLOR
+participant "p:Person" as Person2 LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("merge 1 2")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("merge 1 2")
+activate AddressBookParser
+
+create MergeCommandParser
+AddressBookParser -> MergeCommandParser
+activate MergeCommandParser
+
+MergeCommandParser --> AddressBookParser
+deactivate MergeCommandParser
+
+AddressBookParser -> MergeCommandParser : parse("1 2")
+activate MergeCommandParser
+
+create MergeCommand
+MergeCommandParser -> MergeCommand
+activate MergeCommand
+
+MergeCommand --> MergeCommandParser : m
+deactivate MergeCommand
+
+MergeCommandParser --> AddressBookParser : m
+deactivate MergeCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MergeCommandParser -[hidden]-> AddressBookParser
+destroy MergeCommandParser
+
+AddressBookParser --> LogicManager : m
+deactivate AddressBookParser
+
+LogicManager -> MergeCommand : execute()
+activate MergeCommand
+
+MergeCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> MergeCommand
+deactivate Model
+
+create Person1
+MergeCommand [hidden]-> Person1 : 1
+
+MergeCommand -> Person1 : mergePersons(2)
+activate Person1
+
+create Person2
+Person1 -> Person2
+activate Person2
+
+Person2 -> Person2 : mergeAttendanceRecords(2)
+Person2 --> Person1 : p
+deactivate Person2
+
+Person1 --> MergeCommand : p
+deactivate Person1
+
+MergeCommand -> Model : setPerson(1, p)
+activate Model
+
+Model --> MergeCommand
+deactivate Model
+
+MergeCommand -> Model : deletePerson(2)
+activate Model
+
+Model --> MergeCommand
+deactivate Model
+
+MergeCommand -> Model : clearFilters()
+activate Model
+
+Model --> MergeCommand
+deactivate Model
+
+
+create CommandResult
+MergeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MergeCommand
+deactivate CommandResult
+
+MergeCommand --> LogicManager : result
+deactivate MergeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
