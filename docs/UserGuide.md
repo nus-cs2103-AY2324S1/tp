@@ -212,7 +212,7 @@ Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 | Parameter      | Representation                    | Constraints                                                   |
 |----------------|-----------------------------------|---------------------------------------------------------------|
 | `NAME`         | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
- | `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
+| `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
 | `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`                      |
 | `ADDRESS`      | The address of the applicant      | No constraints as long as it is not blank                     |
 | `TAG`          | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |                                      
@@ -254,7 +254,7 @@ Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] 
 
   | Parameter         | Representation                                                   | Constraints                                                                                    |
   |-------------------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-    | `APPLICANT_INDEX` | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed list |
+  | `APPLICANT_INDEX` | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed list |
   | `NAME`            | The name of the applicant                                        | Must contain only alphanumeric characters and cannot be blank                                  |
   | `NUMBER`          | The phone number of the applicant                                | Must contain only numbers and be at least 3 digits long                                        |
   | `EMAIL`           | The email of the applicant                                       | Must be in the format: `username@domain`                                                       |
@@ -290,7 +290,7 @@ Format: ``find-a [n/KEYWORDS(S)] [p/NUMBER]
 The table below summarises how each field is matched in the search.
 
 | Parameter      | Match                                                                                          | Examples                                                                       |
-  |----------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+|----------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 | `NAME`         | Only full words will be matched                                                                | `Han` will match `Han Bo` but not `Hans Bo`                                    |
 | `PHONE_NUMBER` | Partial numbers will be matched                                                                | `987` will match `98765432`                                                    |
 | `EMAIL`        | Must be an exact match to the entire email, the part before the `@`, or the part after the `@` | `john`, `example.com` and `john@example.com` will all match `john@example.com` |
@@ -326,8 +326,8 @@ Format: `add-i app/APPLICANT_INDEX jr/JOB_ROLE start/START_DATE_AND_TIME end/END
 |-----------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
 | `APPLICANT_INDEX`     | The index of the applicant as shown in the applicant list   | Must be a positive unsigned integer and must not exceed the size of the current displayed list                  |
 | `JOB_ROLE`            | The role/title of the job the applicant is interviewing for | Must contain only alphanumeric characters, spaces or commonly used special symbols (E.g. @ - # &)               |
-| `START_DATE_AND_TIME` | Starting time of the interview                              | Must be in one of the [accepted formats](#Features), before the end time and on the same day as the end time    |
-| `END_DATE_AND_TIME`   | Ending time of the interview                                | Must be in one of the [accepted formats](#Features), after the start time and on the same day as the start time |
+| `START_DATE_AND_TIME` | Starting time of the interview                              | Must be in one of the [accepted formats](#features), before the end time and on the same day as the end time    |
+| `END_DATE_AND_TIME`   | Ending time of the interview                                | Must be in one of the [accepted formats](#features), after the start time and on the same day as the start time |
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** `JOB_ROLE` allows empty strings to be entered to handle situations where the applicant is applying
@@ -343,7 +343,14 @@ Examples of accepted date formats (full list [here](#features)):
   * `16 May 3.15pm`
 
 Example:
-* `add-i app/3 jr/software engineer start/12-12-2023 1400 end/12-12-2023 1500`
+* `add-i app/3 jr/Software engineer start/12-12-2023 1400 end/12-12-2023 1500`
+![Result of `add-i app/3 jr/Software engineer start/12-12-2023 1400 end/ 12-12-2023 1500`](images/addInterviewSuccess.png)
+
+A common error that you may encounter is entering an invalid time or time format,
+please refer to the informative error message or [accepted formats list](#features) and reenter the command with proper parameters
+
+After `add-i app/4 jr/Software engineer start/Next Tuesday 4pm end/6pm that day`:
+![Result of `add-i app/4 jr/Software engineer start/Next Tuesday 4pm end/6pm that day`](images/addInterviewFailure.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -360,6 +367,18 @@ Format: `delete-i INTERVIEW_INDEX`
 Examples:
 * `delete-i 1` deletes the 1st interview in **InterviewHub**.
 
+Before `delete-i`: You should see the applicant and interview list (may be filtered depending if your previous commands filtered the lists)
+![before `delete-i`](images/beforedeletei.png)
+
+After `delete-i 1`: You should see a success message in the command result box. And the targeted interview is removed from the interview list.
+Also, the applicant associated with the interview will have their border change to red.
+![result of `delete-i 1`](images/afterdeletei.png)
+
+If you do not specify a valid index (or an index at all) you may encounter one of the informative error messages appearing in the command result box
+that should assist you with troubleshooting:
+
+![result of `delete-i 5`](images/afterdeletei5.png)
+
 [Back to the Table of Contents](#table-of-contents)
 
 ### Editing an interview : `edit-i`
@@ -372,8 +391,8 @@ Format: `edit-i INTERVIEW_INDEX [jr/JOB_ROLE] [start/START_DATE_AND_TIME] [end/E
 |-----------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | `INTERVIEW_INDEX`     | The index of the interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed list               |
 | `JOB_ROLE`            | The role the applicant is interviewing for                | Must contain only alphanumeric characters, spaces or commonly used special symbols (E.g. @ - # &)            |
-| `START_DATE_AND_TIME` | Starting time of the interview                            | Must be one of the [accepted formats](#Features), before the end time and on the same day as the end time    |
-| `END_DATE_AND_TIME`   | Ending time of the interview                              | Must be one of the [accepted formats](#Features), after the start time and on the same day as the start time |
+| `START_DATE_AND_TIME` | Starting time of the interview                            | Must be one of the [accepted formats](#features), before the end time and on the same day as the end time    |
+| `END_DATE_AND_TIME`   | Ending time of the interview                              | Must be one of the [accepted formats](#features), after the start time and on the same day as the start time |
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -389,6 +408,13 @@ Format: `edit-i INTERVIEW_INDEX [jr/JOB_ROLE] [start/START_DATE_AND_TIME] [end/E
 Examples:
 *  `edit-i 1 jr/software-engineer` Edits the job role of the 1st interview to be `software-engineer`.
 *  `edit-i 2 jr/data-analyst` Edits the job role of the 2nd interview to be `data-analyst`.
+
+View of the Interview list before editing:
+![before edit-i](images/beforeediti.png)
+
+View of the application after `edit-i 1 jr/Network Engineer`:
+![result of `edit-i 1 jr/Network Engineer`](images/aftereditisuccess.png)
+You can see that Alex Yeoh's role has been updated from Frontend Engineer to Network Engineer
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -421,6 +447,9 @@ Shows a list of all interviews in the address book onto the GUI.
 
 Format: `list-i`
 
+After `list-i`: You should see a success message in the command result box and the full list of interviews in the interview list
+![result of `list-i`](images/afterlisti.png)
+
 [Back to the Table of Contents](#table-of-contents)
 
 ### Listing all free time for the given date : `list-freetime`
@@ -430,9 +459,9 @@ Displays a list of all the blocks of free time the user has in
 
 Format: `list-freetime DATE`
 
-| Parameter | Representation                                                            | Constraints                                                                                                                                                        |
-|-----------|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DATE`    | The date for which the user wants to view the list of blocks of free time | The input date must be one of the [accepted formats](#Features) and cannot be in the past. Must contain only the date without the time |
+| Parameter | Representation                                                            | Constraints                                                                                                                            |
+|-----------|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `DATE`    | The date for which the user wants to view the list of blocks of free time | The input date must be one of the [accepted formats](#features) and cannot be in the past. Must contain only the date without the time |
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>

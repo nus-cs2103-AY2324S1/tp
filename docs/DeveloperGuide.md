@@ -793,6 +793,10 @@ name with the exact same string to be added. As the interview is identifiable mo
 confusion with the interview object. The future plan is to increase the visibility of the connection between applicant and interview, to remove dependency on the name itself.
 On the other hand, the duplication of phone number and email will be handled in future implementation and no longer allowing such duplication to be entered.
 
+6. The current implementation of find-i does not allow searching for an empty string, which represents the job role when an applicant is applying to the
+company in general. We plan to allow find-i to search for "" (empty string) and " " (whitespaces) so that interviews with applicants that are applying to the
+company in general can be found with the command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
