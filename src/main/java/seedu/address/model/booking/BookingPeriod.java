@@ -54,13 +54,17 @@ public class BookingPeriod {
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
+
         String[] dateTimeParts = test.split(" to ");
+
+        if (!isValidDate(dateTimeParts[0]) || !isValidDate(dateTimeParts[1])) {
+            return false;
+        }
+
         LocalDateTime startDateTime = LocalDateTime.parse(dateTimeParts[0], dateTimeFormatter);
         LocalDateTime endDateTime = LocalDateTime.parse(dateTimeParts[1], dateTimeFormatter);
 
-        return isValidDate(dateTimeParts[0]) && isValidDate(dateTimeParts[1])
-                && !endDateTime.isBefore(startDateTime)
-                && !startDateTime.equals(endDateTime);
+        return !endDateTime.isBefore(startDateTime) && !startDateTime.equals(endDateTime);
     }
 
     /**
