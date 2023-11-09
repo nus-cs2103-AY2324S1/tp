@@ -65,6 +65,26 @@ public class FindEventCommandTest {
     }
 
     @Test
+    public void execute_oneKeyword_oneEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        EventNameContainsKeywordsPredicate predicate = preparePredicate("Aurora");
+        FindEventCommand command = new FindEventCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(AURORA_BOREALIS), model.getFilteredEventList());
+    }
+
+    @Test
+    public void execute_notFirstNameKeyword_oneEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        EventNameContainsKeywordsPredicate predicate = preparePredicate("Borealis");
+        FindEventCommand command = new FindEventCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(AURORA_BOREALIS), model.getFilteredEventList());
+    }
+
+    @Test
     public void execute_multipleKeywords_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
         EventNameContainsKeywordsPredicate predicate = preparePredicate("Aurora Boxing Chinese");
@@ -72,6 +92,16 @@ public class FindEventCommandTest {
         expectedModel.updateFilteredEventList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(AURORA_BOREALIS, BOXING_DAY, CHINESE_NEW_YEAR), model.getFilteredEventList());
+    }
+
+    @Test
+    public void execute_oneKeywordWithDifferentCapitalisation_oneEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
+        EventNameContainsKeywordsPredicate predicate = preparePredicate("aUrORA");
+        FindEventCommand command = new FindEventCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(AURORA_BOREALIS), model.getFilteredEventList());
     }
 
     @Test
