@@ -435,6 +435,18 @@ due to the presence of the special character `'` in the event name.
 We propose to allow the `createMember`, `editMember` , `createEvent` and `editEvent` commands to accept special 
 characters in the name field and not to be restricted to just alphanumeric characters.
 
+### Allow users to delete values from optional fields in member/event/enrolment
+**Current Implementation:**
+* **Current Issue:** Currently, there is no way for the user to delete unwanted values for optional fields in member/event/enrolment.
+* **Example:** For example, if the user accidentally adds a remark to an enrolment, they are unable to remove it. The only way
+for the user to remove this unwanted remark is to delete the enrolment and add it again without the remark, which is highly
+inconvenient. This would be similar for the other optional fields in member and event.
+
+**Proposed Solution:**
+
+We propose to enhance the `editMember`, `editEvent` and `editEnrolment` commands to give the user the flexibility to remove
+any unwanted values from the optional fields in member/event/enrolment.
+
 ### Show a more specific error message for negative index in `editMember`, `editEvent`, `viewMember`, `viewEvent`, `deleteMember` and `deleteEvent`
 **Current Implementation:**
 * **Current Issue:** When the user inputs a negative index for the `editMember`, `editEvent`, `viewMember`, `viewEvent`, 
