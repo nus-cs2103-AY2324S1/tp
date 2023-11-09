@@ -504,6 +504,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | delete an applicant entry                                  | only track valid applicants                                 |
 | `* * *`  | user    | add an interview for an applicant                          | plan screenings and keep track of an applicant's interviews |
 | `* * *`  | user    | edit an interview for an applicant                         | keep accurate data on an applicant's interview              |
+| `* * *`  | user    | delete an interview for an applicant                       | delete incorrect or unnecessary interviews                  |
 | `* * *`  | user    | store data locally                                         | use it on a daily basis consistently                        |
 | `* *`    | user    | find a specific applicant                                  | access the applicant's information quickly                  |
 | `* *`    | user    | sort applicants by a descriptor                            | find relevant applicants quickly                            |
