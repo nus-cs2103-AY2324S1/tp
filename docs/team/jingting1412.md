@@ -48,13 +48,11 @@ Given below are my contributions to the project.
 <div style="page-break-after: always;"></div>
 
 * **Project management**:
-
   * Completed tasks for each milestone.
   * Facilitated meetings within the team.
 
 
 * **Enhancements to existing features**:
-
   * Updated current UI to increase viewing experience. (Pull requests [#132](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/132))
   * Wrote additional tests for existing features to ensure correctness. 
   (Pull requests [#70](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/70), [#203](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/203))
