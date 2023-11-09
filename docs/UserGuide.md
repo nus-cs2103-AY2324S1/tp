@@ -275,12 +275,12 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd employee in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
-Succeed:
-* You’ll see a reply "<Employee name> successfully deleted."
+| Outcome                          | Output                                                    |
+|----------------------------------|-----------------------------------------------------------|
+| **Success**                      | Deleted Employee: \<Employee name>; \<Additional Details> |
+| **Failure, incomplete command**  | Invalid command format!                                   | 
+| **Failure, invalid index**       | The employee index provided is invalid.                   | 
 
-Fail:
-* If the employee to be deleted does not exist, a warning will be displayed.
-“The employee you’re trying to delete does not exist.”
 
 Constraints:
 * [Manager-subordinate relationship](#deleting-an-existing-employee-with-manager-subordinate-relationships)
@@ -333,16 +333,17 @@ Now, your data should be successfully transferred to the new computer.
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                                                                                                    |
-|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+| Action         | Format, Examples                                                                                                                                                                                                                                |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE r/ROLE [d/DEPARTMENT]… [m/MANAGER NAME]…` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 r/subordinate d/ R&D m/ Alex Yeoh` |
-| **Clear**      | `clear`                                                                                                                                                                                                                                             |
-| **Delete**     | `delete INDEX`<br> e.g., `delete 4`                                                                                                                                                                                                                 |
-| **Department** | `delete t/(add/delete> n/DEPARTMENT_NAME` <br> e.g., `department t/add n/Engineering`                                                                                                                                                               |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER NAME]… [d/DEPARTMENT]…`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`                                                                          |
-| **Exit**       | `exit`                                                                                                                                                                                                                                              |
-| **Filter**     | `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]` <br> e.g., `filter d/R&D s/10000`                                                                                                              |
-| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                                                                                                          |
-| **Help**       | `help` or `help [command]` <br> e.g., `help add`                                                                                                                                                                                                    |
-| **List**       | `list`                                                                                                                                                                                                                                              |
+| **Clear**      | `clear`                                                                                                                                                                                                                                         |
+| **Delete**     | `delete INDEX`<br> e.g., `delete 4`                                                                                                                                                                                                             |
+| **Department** | `department t/(add/delete) n/DEPARTMENT_NAME` <br> e.g., `department t/add n/Engineering`                                                                                                                                                       |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGER NAME]… [d/DEPARTMENT]…`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`                                                                      |
+| **Exit**       | `exit`                                                                                                                                                                                                                                          |
+| **Filter**     | `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]` <br> e.g., `filter d/R&D s/10000`                                                                                                          |
+| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find alex david`                                                                                                                                                                                      |
+| **Help**       | `help` or `help [command]` <br> e.g., `help add`                                                                                                                                                                                                |
+| **List**       | `list`                                                                                                                                                                                                                                          |
 
