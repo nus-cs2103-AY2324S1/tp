@@ -3,9 +3,23 @@ layout: page
 title: User Guide
 ---
 
+# Welcome to InterviewHub!
+
+**Dear Hiring Managers,**
+
+Welcome to **InterviewHub**! We are excited to introduce you to your new partner in recruitment and interview scheduling. 
+
+As a hiring manager, you understand the importance of time. That's why we've optimized **InterviewHub** for those who can type fast, think faster, and make decisions on the fly. Navigate through applicants, schedule interviews, and manage your hiring pipeline with commands that execute in the blink of an eye.
+
+This guide is your roadmap to mastering **InterviewHub**. We'll guide you through each feature, helping you to leverage our interface to its full potential—so you can focus on what you do best: securing top talent.
+
+Let's dive into **InterviewHub** and transform the way you recruit!
+
+--------------------------------------------------------------------------------------------------------------------
+
 # Table of Contents
 
-- [Introduction](#introduction)
+- [Introduction](#introduction---what-is-interviewhub)
 - [How to use this user guide](#how-to-use-this-user-guide)
 - [Quick Start](#quick-start)
 - [GUI Summary](#gui-summary)
@@ -45,17 +59,17 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Introduction
+# Introduction - What is InterviewHub?
 
-Tired of sending out offers to the best candidates, just to receive a disappointing reply that they have already accepted another offer that was sent out before yours?
+**InterviewHub**  is a desktop app for hiring managers to schedule job interviews and manage applicants.
+**InterviewHub** allows users to:
+* seamlessly update and manage applicants for various job openings,
+* schedule and keep track of interviews with each applicant,
 
-**InterviewHub**  is a desktop app for engineering manager to schedule job interviews and manage applicants.
-By optimizing recruitment workflows, we enable faster decision-making, helping you secure top talent before your competitors.
+all through a simple and easy-to-use platform!
 
 It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
-If you can type fast, **InterviewHub** can get your Interview management tasks done faster than traditional GUI apps.
-
-What are you waiting for? Let's get started using **InterviewHub** by following the [How to use this user guide](#how-to-use-this-user-guide) section!
+If you are a hiring manager who can type fast, **InterviewHub** can get your Interview and applicant management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
