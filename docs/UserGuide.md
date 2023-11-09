@@ -155,8 +155,7 @@ Deletes one or more tags to a contact. Contact list will go back to showing all 
 
 Format: `delete tag -id CONTACT_ID -t TAGNAME...`
 
-* Deletes one or more tags to a contact, regardless if the tag exists in the contact or not.
-* Duplicates are accepted.
+* Duplicate `TAGNAME` are accepted, but they will be treated as one.
 
 Requirements:
 * `TAGNAME` must be alphanumeric, with no spaces.

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -21,6 +22,7 @@ public class DeleteTagCommand extends DeleteCommand {
             + "Usage:  delete tag -id CONTACT_ID -t TAGNAME...";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Can not find the target contact with ID: ";
     public static final String MESSAGE_SUCCESS = "Successfully deleted tags: ";
+    public static final String MESSAGE_TAGS_DOES_NOT_EXIST = "Could not find the following tags: ";
 
     private final Set<Tag> toDelete;
     private final int contactId;
@@ -43,12 +45,25 @@ public class DeleteTagCommand extends DeleteCommand {
         }
 
         Person toEdit = person;
-        toEdit.removeTags(this.toDelete);
+        Set<Tag> nonExistantTags = new HashSet<>();
+        Set<Tag> existantTags = new HashSet<>();
+        for (Tag t : toDelete) {
+            if (!toEdit.containsTag(t)) {
+                nonExistantTags.add(t);
+            } else {
+                existantTags.add(t);
+            }
+        }
+
+        toEdit.removeTags(existantTags);
         model.setPerson(person, toEdit);
 
         final StringBuilder builder = new StringBuilder();
         builder.append(MESSAGE_SUCCESS);
-        toDelete.forEach(builder::append);
+        existantTags.forEach(builder::append);
+        builder.append("\n");
+        builder.append(MESSAGE_TAGS_DOES_NOT_EXIST);
+        nonExistantTags.forEach(builder::append);
 
         return new CommandResult(builder.toString());
     }
