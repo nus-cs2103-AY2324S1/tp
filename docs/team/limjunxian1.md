@@ -56,7 +56,7 @@ Refer to this [RepoSense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboar
   * Managed release [v1.3.trial](https://github.com/AY2324S1-CS2103T-T13-2/tp/releases/tag/v1.3.trial)
 
 ## Review / Mentoring Contributions
-  * Pull Requests reviewed: 23 [(GitHub)](https://github.com/AY2324S1-CS2103T-T13-2/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me)
+  * Pull Requests reviewed: 23 [(GitHub)](https://github.com/AY2324S1-CS2103T-T13-2/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Alimjunxian1)
   * Pull Request reviewed with non-trivial comments: [#56](https://github.com/AY2324S1-CS2103T-T13-2/tp/pull/56), [#79](https://github.com/AY2324S1-CS2103T-T13-2/tp/pull/79), [#128](https://github.com/AY2324S1-CS2103T-T13-2/tp/pull/128), [#150](https://github.com/AY2324S1-CS2103T-T13-2/tp/pull/150), [#152](https://github.com/AY2324S1-CS2103T-T13-2/tp/pull/152)
 
 ## Contributions Beyond the Project Team
