@@ -8,9 +8,19 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.*;
-import static seedu.address.testutil.TypicalPredicateLists.*;
-import static seedu.address.testutil.TypicalTags.*;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalStatusPerson;
+import static seedu.address.testutil.TypicalPersons.getTypicalTagAndStatusPerson;
+import static seedu.address.testutil.TypicalPersons.getTypicalTagPerson;
+import static seedu.address.testutil.TypicalPredicateLists.PREDICATE_LIST_CONTAINING_STATUS_ONE;
+import static seedu.address.testutil.TypicalPredicateLists.PREDICATE_LIST_CONTAINING_STATUS_TWO;
+import static seedu.address.testutil.TypicalPredicateLists.PREDICATE_LIST_CONTAINING_TAG_AND_STATUS_MIX;
+import static seedu.address.testutil.TypicalPredicateLists.PREDICATE_LIST_CONTAINING_TAG_AND_STATUS_ONE;
+import static seedu.address.testutil.TypicalPredicateLists.PREDICATE_LIST_CONTAINING_TAG_AND_STATUS_TWO;
+import static seedu.address.testutil.TypicalPredicateLists.PREDICATE_LIST_CONTAINING_TAG_ONE;
+import static seedu.address.testutil.TypicalPredicateLists.PREDICATE_LIST_CONTAINING_TAG_TWO;
+import static seedu.address.testutil.TypicalTags.NO_MATCHING_TAG_NAME_STRING;
+import static seedu.address.testutil.TypicalTags.TEST_TAG_NAME_STRING;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,8 +124,8 @@ public class DeleteCommandTest {
         TagContainsKeywordsPredicate tagPredicate =
                 new TagContainsKeywordsPredicate(List.of(NO_MATCHING_TAG_NAME_STRING));
         List<Predicate<Person>> predicateList = new ArrayList<>() {{
-            add(tagPredicate);
-        }};
+                add(tagPredicate);
+            }};
 
         DeleteCommand deleteCommand = new DeleteCommand(predicateList);
         assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSONS_NOT_FOUND);
@@ -128,8 +138,8 @@ public class DeleteCommandTest {
         String testStatus = StatusTypes.REJECTED.toString();
         StatusContainsKeywordsPredicate statusPredicate = new StatusContainsKeywordsPredicate(List.of(testStatus));
         List<Predicate<Person>> predicateList = new ArrayList<>() {{
-            add(statusPredicate);
-        }};
+                add(statusPredicate);
+            }};
 
 
         DeleteCommand deleteCommand = new DeleteCommand(predicateList);
@@ -147,8 +157,8 @@ public class DeleteCommandTest {
         String testStatus = StatusTypes.OFFERED.toString();
         StatusContainsKeywordsPredicate statusPredicate = new StatusContainsKeywordsPredicate(List.of(testStatus));
         List<Predicate<Person>> predicateList = new ArrayList<>() {{
-            add(statusPredicate);
-        }};
+                add(statusPredicate);
+            }};
 
         DeleteCommand deleteCommand = new DeleteCommand(predicateList);
         assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSONS_NOT_FOUND);
@@ -165,9 +175,9 @@ public class DeleteCommandTest {
         StatusContainsKeywordsPredicate statusPredicate = new StatusContainsKeywordsPredicate(List.of(testStatus));
 
         List<Predicate<Person>> predicateList = new ArrayList<>() {{
-            add(tagPredicate);
-            add(statusPredicate);
-        }};
+                add(tagPredicate);
+                add(statusPredicate);
+            }};
 
         DeleteCommand deleteCommand = new DeleteCommand(predicateList);
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,

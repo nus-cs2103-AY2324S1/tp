@@ -2,15 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+// import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+// import java.util.regex.Matcher;
+// import java.util.regex.Pattern;
 
 import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
@@ -228,13 +228,13 @@ public class ParserUtil {
         String list = keywordsList.toString();
         String cleanedList = list.replaceAll("[\\[\\]]", "");
         String[] singlePrefixParams = cleanedList.split("\\s+");
-        for (String singlePrefixParam : singlePrefixParams) {
-            Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-            Matcher matcher = pattern.matcher(singlePrefixParam);
-            if (matcher.find()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, commandMessage));
-            }
-        }
+        //        for (String singlePrefixParam : singlePrefixParams) {
+        //            Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
+        //            Matcher matcher = pattern.matcher(singlePrefixParam);
+        //            if (matcher.find()) {
+        //                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, commandMessage));
+        //            }
+        //        }
         return singlePrefixParams;
     }
 

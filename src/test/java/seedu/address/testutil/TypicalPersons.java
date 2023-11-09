@@ -90,5 +90,7 @@ public class TypicalPersons {
         return BENSON;
     }
 
-    public static Person getTypicalTagAndStatusPerson() {return BENSON;}
+    public static Person getTypicalTagAndStatusPerson() {
+        return BENSON;
+    }
 }

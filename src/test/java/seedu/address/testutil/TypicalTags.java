@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.tag.Tag;
 
 /**
@@ -16,17 +13,4 @@ public class TypicalTags {
     public static final String INVALID_TAG_STRING = "@";
     public static final Tag TEST_TAG = new Tag(TEST_TAG_NAME_STRING, TEST_TAG_CATEGORY_STRING);
     public static final Tag NO_MATCHING_TAG = new Tag(NO_MATCHING_TAG_NAME_STRING, NO_MATCHING_TAG_CATEGORY_STRING);
-
-    // A set of typical tags, used by Typical Tag Person
-    public static final Set<Tag> TEST_TAG_SET = new HashSet<>() {{
-            add(TEST_TAG);
-        }};
-
-    // An empty set of tags
-    public static final Set<Tag> EMPTY_TAG_SET = new HashSet<>();
-
-    // A set of tags used by no person
-    public static final Set<Tag> NO_MATCHING_TAG_SET = new HashSet<>() {{
-            add(NO_MATCHING_TAG);
-        }};
 }
