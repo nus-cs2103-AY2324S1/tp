@@ -512,6 +512,9 @@ The sort interview feature allows the user to sort all the interviews that have 
 
 The `sort` command is facilitated by the `SortRateCommand` and the `SortTimeCommand`. It enables the user to sort all the scheduled interviews by rating or timing. For rating, the interviews will be sorted in descending order of rating. For interview times, the interviews will be sorted in ascending chronological order of start time.
 
+The Sequence Diagram below illustrates the interactions within the `Logic` component when `execute("sort-rate")` is called.
+![images/SortISequenceDiagram.png](images/SortISequenceDiagram.png)
+
 #### How is the command executed
 1. The user inputs the `sort-rate` or `sort-time` command
 2. The `LogicManager` receives the `sort-rate` or `sort-time` command string and forwards it to the `AddressBookParser`.
