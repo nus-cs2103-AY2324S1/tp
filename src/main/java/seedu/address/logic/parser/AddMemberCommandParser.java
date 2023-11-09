@@ -34,7 +34,8 @@ public class AddMemberCommandParser implements Parser<AddMemberCommand> {
      */
     public AddMemberCommand parse(String args) throws ParseException {
 
-        List<String> list = new ArrayList<>();
+        StringBuilder finalString = new StringBuilder();
+        Boolean changed = false;
         String finalMessage = " is missing!\n";
 
         requireNonNull(args);
@@ -42,29 +43,32 @@ public class AddMemberCommandParser implements Parser<AddMemberCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM, PREFIX_TAG);
 
         if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
-            list.add(Name.TYPE);
+            finalString.append(Name.TYPE);
+            changed = true;
         }
 
         if (argMultimap.getValue(PREFIX_PHONE).isEmpty()) {
-            list.add(Phone.TYPE);
+            finalString.append(", " + Phone.TYPE);
+            changed = true;
         }
 
         if (argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
-            list.add(Email.TYPE);
+            finalString.append(", " + Email.TYPE);
+            changed = true;
         }
 
         if (argMultimap.getValue(PREFIX_TELEGRAM).isEmpty()) {
-            list.add(Telegram.TYPE);
+            finalString.append(", " + Telegram.TYPE);
+            changed = true;
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM)
                 || !argMultimap.getPreamble().isEmpty()) {
             String messageFormat;
-            if (list.isEmpty()) {
-                messageFormat = String.format(AddMemberCommand.MESSAGE_USAGE);
-            } else {
-                String result = String.join(", ", list);
-                messageFormat = String.format(result + finalMessage + AddMemberCommand.MESSAGE_USAGE);
+            messageFormat = String.format(AddMemberCommand.MESSAGE_USAGE);
+            if (changed) {
+                messageFormat = String.format(finalMessage + finalMessage + AddMemberCommand.MESSAGE_USAGE);
+
             }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageFormat));
         }
