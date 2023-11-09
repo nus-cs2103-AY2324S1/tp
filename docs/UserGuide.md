@@ -158,9 +158,9 @@ Format: `list [DAY]`
 
 **Format**: `find n/[NAME] sb/[SUBJECT]`
 
-**Expected input:**
+> Find takes at least one of the two fields to be able to find for tutees.
 
-**Both are optional but must have at least one of the two:**
+**Expected input:**
 
 * **Name (Optional field)**: String composed of character between A-Z and a-z
 * **Subject (Optional field)**: String without restriction in characters
@@ -168,12 +168,24 @@ Format: `list [DAY]`
 **Expected Output when the command succeeds:** X tutees listed!
 
 **Expected Output when the command fails:**
+
+> [!WARNING]  
+> Inputting an invalid prefix after a valid prefix will result in the invalid prefix being read as 
+> part of the input for the valid prefix.
+> 
+> Example: `find n/Abc abc/B` will read `Abc abc/B` as its input.
+> 
+> The outputting error message would be depending on the valid prefix specified.
+
+* **Invalid Input for prefix n/**:
+Names should only contain alphanumeric characters and spaces,
+  and it should not be blank
+* **Invalid Input for prefix sb/**: Subject can take any values, and it should not be blank.
 * **Invalid Prefix other than n/ and sb/**:
 
   Invalid command format!
   find: Find persons with names or subjects matching the specified keywords (case-insensitive).
   Parameters: n/NAME sb/SUBJECT
-
 
   Examples:
 1. find n/Alice sb/Maths
@@ -386,7 +398,7 @@ Format: `exit`
 | **clear**       | `clear`                                                                                                                                                                                                                                |
 | **edit**        | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECTS d/DAY b/BEGIN end/END pr/PAYRATE`<br> e.g.,`edit p/91234567 d/Sun`                                                                                                      |
 | **list**        | `list`                                                                                                                                                                                                                                 |
-| **find**        | `find n/NAME sb/SUBJECT` <br> e.g., `find n/Alex sb/Math`, `find n/Alex`, `find sb/Maths`                                                                                                                                              |
+| **find**        | `find n/[NAME] sb/[SUBJECT]` <br> e.g., `find n/Alex sb/Math`, `find n/Alex`, `find sb/Maths`                                                                                                                                          |
 | **list by day** | `list DAY` <br> e.g., `list Monday`                                                                                                                                                                                                    |
 | **paid**        | `paid INDEX`<br> e.g., `paid 1`                                                                                                                                                                                                        |
 | **unpaid**      | `unpaid INDEX`<br> e.g., `unpaid 1`                                                                                                                                                                                                    |
