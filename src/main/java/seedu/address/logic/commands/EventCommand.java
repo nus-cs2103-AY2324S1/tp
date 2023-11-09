@@ -23,7 +23,8 @@ public class EventCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2 d/Interview Round 1 bt/2023-10-22 09:00 et/2023-10-22 10:00";
 
     public static final String MESSAGE_SUCCESS = "Event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "An event with the same description, for the same person, already exists!";
+    public static final String MESSAGE_DUPLICATE_EVENT =
+            "An event with the same description, for the same person, already exists!";
 
     private final Event event;
 
