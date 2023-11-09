@@ -118,6 +118,7 @@ public class Team {
                 && Objects.equals(developerIdentityCodes, team.developerIdentityCodes);
     }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(leaderIdentityCode, teamName, developerIdentityCodes);
