@@ -126,7 +126,7 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 - A patient **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result
   in an error.
 - Phone Numbers and Emails have to be in a valid format.
-    - PHONE_NUMBER must have exactly 8 digits.
+    - PHONE_NUMBER must have at least 3 digits
     - EMAIL must contain email domain (eg. `@gmail.com`).
 - TAG must indicate Priority Level of the Patient and be one of the following:
   - Low
@@ -235,7 +235,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons that match the query. Supports gender, NRIC and name.
+Finds persons that match the query.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -244,25 +244,55 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * When searching names, only full words will be matched e.g. `Han` will not match `Hans`
 * When searching names, Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Other supported attributes like NRIC, Gender and Blood Type will only handle one query `KEYWORD`, anything afterward
-  is discarded.
-* Below we have supported attributes and their example `KEYWORD`.
+* Note that if the name coincides with other find commands, it will be interpreted as the other find command first and extraneous paremeters will be ignored. e.g. `find F Kennedy John` will search for all female persons. 
 * It is recommended to use `list` to restore the view of all data after a `find` command
-
-  | Attribute | Example keywords |
-        |-----------|-----------------|
-  | NRIC      | T1125957G       |
-  | Gender    | M       |
-  | Blood Type | Blood Type A+   |
-  | Name | Travis Kelce
 
 Examples:
 
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-* `find T1125726G` returns the person with the matching NRIC.
+* `find kenny pickens` returns `Kenny Pickett`, `George Pickens`<br>
+  ![result for 'find alex david'](images/findpickettpickensresult.png)
+
+
+### Locating a person by NRIC : `find` ###
+
+Finds person that matches the NRIC query
+
+Format: `find NRIC`
+
+* NRIC input must be capitalised!
+* It is recommended to use `list` to restore the view of all data after a `find` command
+
+Examples:
+
+* `find T1125726G` returns the person with the matching NRIC
+
+### Locating people by gender : `find M`, `find F` ###
+
+Finds all persons with matching gender
+
+Format: `find M` or `find F`
+
+* M and F must be capitalised
+* It is recommended to use `list` to restore the view of all data after a `find` command
+
+Examples:
+
 * `find M` returns all male persons.
+
+### Locating people by blood types : `find Blood Type` ###
+
+Finds all Patients with query blood type
+
+Format: `find Blood Type QUERY` 
+
+* All blood type inputs must be capitalised
+* Acceptable blood types are A, A+, B, B+, O, O+, AB and AB+
+* It is recommended to use `list` to restore the view of all data after a `find` command
+
+Examples:
+
+* `find Blood Type A+` returns all Patients with blood type A+
 
 ### Deleting a person : `delete`
 
