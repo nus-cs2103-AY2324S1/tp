@@ -1619,12 +1619,6 @@ Changes the theme of TutorConnect
    4. Other incorrect theme commands to test: `theme`, `theme abc`, `theme Light`
       Expected: Similar to previous.
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
 
 ## **Appendix: Planned enhancements** 
 
