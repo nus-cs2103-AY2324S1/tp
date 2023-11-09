@@ -554,7 +554,7 @@ to 1pm.
    a zero when necessary. Example: `1200` for 12 noon, `0900` for 9am.
  * You may exclude minutes if you wish. Example: `15` will be interpreted as 3pm.
  * Date and the 2 Times needs to be separated by a comma or a space.
- * Appointment with 2 Times being the same is valid (ie. 0-minute appointment). HealthSync will register the start time as it is, and register end time as unconfirmed. This is useful for when you are unsure of the end time of an appointment.
+ * Appointment with the start and end time being the same is valid (ie. 0-minute appointment). HealthSync will register the start time as it is, and register end time as unconfirmed. This is useful for when you are unsure of the end time of an appointment.
 
 Some examples of valid Appointment formats are listed here:
 ```
