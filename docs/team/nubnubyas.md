@@ -40,7 +40,7 @@ Given below are my contributions to the project.
     * Update command formats of features to aid users and prevent confusion. [\#204](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/204)
     * Update description of features to better match the actual functionality of HealthSync. [\#204](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/204)
   * Developer Guide:
-    * Updated Glossary. [\#58](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/58) 
+    * Updated Glossary. [\#58](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/58)
     * Added implementation details of the `delete` feature. [\#102](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/102)
 
 * **Community**:
