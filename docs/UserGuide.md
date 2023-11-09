@@ -77,8 +77,6 @@ Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... 
 - `PHONE` should be a 3-10 digits integer.
 - `EMAIL` should contain "@".
 - `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
-- `FROM` should be a time in "HH:SS" format
-- `TO` should be a time in "HH:SS" format
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
 - `HOUR` should be an integer.
@@ -120,9 +118,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [t/TAG]... [c/C
 - `PHONE` should be a 3-10 digits integer.
 - `EMAIL` should contain "@".
 - `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
-- `FROM` should be a time in "HH:SS" format
-- `TO` should be a time in "HH:SS" format
-
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
 - `HOUR` should be an integer.
