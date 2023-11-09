@@ -112,27 +112,29 @@ Before we begin, the table below describes some of the symbols and syntax you ma
 
 # GUI Summary
 
+The following is an annotated breakdown of InTrack’s GUI:
+
 ![GUI Summary](images/GuiSummary.png)
 
 For each applicant, we see the following details:
 
-| Applicant |
-|-----------|
-| Name      |
-| Tags      |
-| Phone     |
-| Address   |
-| Email     |
+| Applicant                                              |
+|--------------------------------------------------------|
+| **Name** - The full name of the applicant              |
+| **Tags** - WTF even is this lmao                       |
+| **Phone** - The mobile phone number of the applicant   |
+| **Address** - The residential address of the applicant |
+| **Email** - The email address of the applicant         |
 
 For each interview, we see the following details:
 
-| Interview        |
-|------------------|
-| Applicant's Name |
-| Job Title        |
-| Start Time       |
-| End Time         |
-| Rating           |
+| Interview                                                                        |
+|----------------------------------------------------------------------------------|
+| **Applicant's Name** - The full name of the applicant                            |
+| **Job Title** - The title of the job that the applicant is applying for          |
+| **Start Time** - Start time of the interview                                     |
+| **End Time** - Projected end time of the interview                               |
+| **Rating** - Interview performance rating of the applicant (from 1 - 10, if any) |
 
 [Back to the Table of Contents](#table-of-contents)
 
