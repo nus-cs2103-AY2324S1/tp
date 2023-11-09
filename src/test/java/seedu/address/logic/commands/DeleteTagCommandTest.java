@@ -34,7 +34,9 @@ public class DeleteTagCommandTest {
         final Set<Tag> tagSet = new TagBuilder().inSet();
 
         assertCommandSuccessWithFeedback(() -> new DeleteTagCommand(personId, tagSet)
-                .execute(model), DeleteTagCommand.MESSAGE_SUCCESS + new TagBuilder().build().toString());
+                .execute(model),
+                DeleteTagCommand.MESSAGE_SUCCESS + "\n"
+                        + DeleteTagCommand.MESSAGE_TAGS_DOES_NOT_EXIST + new TagBuilder().build().toString());
     }
 
     @Test
