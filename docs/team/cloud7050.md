@@ -60,7 +60,26 @@ Some of the aforementioned sections may have been initially drafted by others, o
 
 ### Contributions to team-based tasks
 
-//TODO
+- Set up GitHub team org with permissions and invites. Set up repo with custom labels and user stories project board. Edited branch protections over time.
+- Made team PR in main course repo with product description.
+- Large amount of refactoring to help rename classes, methods, fields, variables, tests etc. to match our product.
+- Renamed packages to match our product.
+- Gradle:
+  - Managed Gradle configs, editing them as needed (e.g. fixing config features deprecated in Gradle V8.3, config simplification, improving `clean` task, removing temporary workarounds, enabling assertions).
+  - Updated and tested some dependencies.
+  - Upgraded Gradle wrapper.
+- Set up GitHub Pages Jekyll deployment.
+- Set up Codecov.
+- Extensively defined most tasks in the issue tracker over time. Managed milestones (some of which were split), labelled and kept track of work items, edited/assigned tasks, and kept the issue tracker up-to-date and tidy overall. Was very active in issue comments, such as adding details or meeting notes and linking relevant items.
+- Helped perform some milestone wrapups before deadlines, following defined checklists.
+- Helped tag, build, and create some releases as part of milestone wrapups or weekly project tasks.
+- Helped keep track of meeting agendas and which tasks were pending assignment or further discussion. Helped create and link forum posts to seek clarifications from Prof.
+- Helped track deliverables and ensure they were accomplished before their deadlines.
+- Worked on sections of the UG/DG not about my own features or specific to anybody's features (described [above](#contributions-to-the-ug)).
+- Updated `README.md`, `Ui.png`.
+- Set up and maintained PR template to aid in reviewer and milestone assignment.
+- Added and configured GitHub bot to automatically assign specific reviewers, with support for ignoring PRs under certain conditions.
+- Performed some week-specific team tasks, e.g. triaging PE-D bugs, collating issue statistics into tutor's Teams message.
 
 ### Review/mentoring contributions
 
