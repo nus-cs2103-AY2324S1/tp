@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddLeaveCommand;
+import seedu.address.logic.commands.DeleteLeaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.employee.Id;
 
@@ -25,17 +26,9 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
     public AddLeaveCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_FROM, PREFIX_TO);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_FROM, PREFIX_TO)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
-        }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_FROM, PREFIX_TO);
+        areValidPrefixes(argMultimap);
 
         Id id;
-        LocalDate startDate;
-        LocalDate endDate;
-
         try {
             id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
         } catch (ParseException pe) {
@@ -43,18 +36,10 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE), pe);
         }
 
-        if (argMultimap.getValue(PREFIX_FROM).isEmpty() || argMultimap.getValue(PREFIX_TO).isEmpty()) {
-            throw new ParseException(AddLeaveCommand.MISSING_DATE);
-        }
-
         if (argMultimap.getValue(PREFIX_FROM).isPresent() && argMultimap.getValue(PREFIX_TO).isPresent()) {
-            startDate = ParserUtil.parseLeaveDate(argMultimap.getValue(PREFIX_FROM).get());
-            endDate = ParserUtil.parseLeaveDate(argMultimap.getValue(PREFIX_TO).get());
-            if (startDate.isAfter(endDate)) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_INVALID_DATE_ORDER)
-                );
-            }
+            LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FROM).get());
+            LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_TO).get());
+            checkDateOrder(startDate, endDate);
             return new AddLeaveCommand(id, startDate, endDate);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
@@ -67,5 +52,27 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Checks validity of prefixes.
+     *
+     * @param argMultimap ArgumentMultimap to be used
+     * @throws ParseException If prefixes are empty or repeated
+     */
+    private void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_FROM, PREFIX_TO)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_FROM, PREFIX_TO);
+    }
+
+    private void checkDateOrder(LocalDate startDate, LocalDate endDate) throws ParseException {
+        if (startDate.isAfter(endDate)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLeaveCommand.MESSAGE_INVALID_DATE_ORDER));
+        }
     }
 }

@@ -22,8 +22,10 @@ public class Messages {
     public static final String MESSAGE_REPORT_STRING =
                 "Name: %1$s\nOvertime hours: %2$s\nOvertime pay: $%3$s\nNumber of leaves used: %4$s\nRemarks:\n%5$s";
     public static final String MESSAGE_INVALID_DATE = "Invalid date! Dates should be valid and in yyyy-MM-dd format.";
+    public static final String MESSAGE_MISSING_DATE = "No date given! Dates should be valid and in yyyy-MM-dd format.";
     public static final String MESSAGE_EMPLOYEES_ON_LEAVE_OVERVIEW = "%1$d employees are on leave on %2$s!";
     public static final String MESSAGE_REPORT_SAVE_ERROR = "Error saving report to file";
+    public static final String MESSAGE_MISSING_REMARK = "No remark given!";
 
 
     /**

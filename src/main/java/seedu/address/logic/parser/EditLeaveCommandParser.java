@@ -38,13 +38,9 @@ public class EditLeaveCommandParser implements Parser<EditLeaveCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLeaveCommand.MESSAGE_USAGE), pe);
         }
 
-        if (argMultimap.getValue(PREFIX_OLD).isEmpty() || argMultimap.getValue(PREFIX_NEW).isEmpty()) {
-            throw new ParseException(EditLeaveCommand.MISSING_DATE);
-        }
-
         if (argMultimap.getValue(PREFIX_OLD).isPresent() && argMultimap.getValue(PREFIX_NEW).isPresent()) {
-            oldDate = ParserUtil.parseLeaveDate(argMultimap.getValue(PREFIX_OLD).get());
-            newDate = ParserUtil.parseLeaveDate(argMultimap.getValue(PREFIX_NEW).get());
+            oldDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_OLD).get());
+            newDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_NEW).get());
             return new EditLeaveCommand(id, oldDate, newDate);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLeaveCommand.MESSAGE_USAGE));
@@ -56,7 +52,7 @@ public class EditLeaveCommandParser implements Parser<EditLeaveCommand> {
      * @param argMultimap ArgumentMultimap to be used
      * @throws ParseException If any of the prefixes are empty or repeated
      */
-    public void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+    private void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_OLD, PREFIX_NEW)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLeaveCommand.MESSAGE_USAGE));

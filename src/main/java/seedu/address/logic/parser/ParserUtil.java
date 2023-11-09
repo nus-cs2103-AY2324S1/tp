@@ -17,7 +17,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Id;
-import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
@@ -26,8 +25,7 @@ import seedu.address.model.employee.Salary;
 import seedu.address.model.remark.Remark;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser
- * classes.
+ * Contains utility methods used for parsing strings in the various Parser classes.
  */
 public class ParserUtil {
 
@@ -168,21 +166,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String leaveDate} into a {@code LocalDate}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code leaveDate} is invalid.
-     */
-    public static LocalDate parseLeaveDate(String leaveDate) throws ParseException {
-        requireNonNull(leaveDate);
-        String trimmedDate = leaveDate.trim();
-        if (!Leave.isValidLeaveDate(trimmedDate)) {
-            throw new ParseException(Leave.MESSAGE_CONSTRAINTS);
-        }
-        return LocalDate.parse(trimmedDate, Leave.VALID_DATE_FORMAT);
-    }
-
-    /**
      * Parses a {@code String date} into a {@code LocalDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -192,6 +175,9 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
 
+        if (trimmedDate.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_MISSING_DATE);
+        }
         try {
             return LocalDate.parse(trimmedDate, ISO_LOCAL_DATE);
         } catch (DateTimeParseException e) {
@@ -227,9 +213,12 @@ public class ParserUtil {
      * Parses a {@code String remark} into a {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Remark parseRemark(String remark) {
+    public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
+        if (trimmedRemark.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_MISSING_REMARK);
+        }
         return new Remark(trimmedRemark);
     }
 }

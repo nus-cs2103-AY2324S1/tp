@@ -97,6 +97,9 @@ public class AddressBookParser {
         case DeleteLeaveCommand.COMMAND_WORD:
             return new DeleteLeaveCommandParser().parse(arguments);
 
+        case EditLeaveCommand.COMMAND_WORD:
+            return new EditLeaveCommandParser().parse(arguments);
+
         case ListLeaveCommand.COMMAND_WORD:
             return new ListLeaveCommandParser().parse(arguments);
 
@@ -111,9 +114,6 @@ public class AddressBookParser {
 
         case DeleteRemarkCommand.COMMAND_WORD:
             return new DeleteRemarkCommandParser().parse(arguments);
-
-        case EditLeaveCommand.COMMAND_WORD:
-            return new EditLeaveCommandParser().parse(arguments);
 
         case OvertimeCommand.COMMAND_WORD:
             return new OvertimeCommandParser().parse(arguments);

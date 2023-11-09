@@ -25,12 +25,7 @@ public class OvertimeCommandParser implements Parser<OvertimeCommand> {
     public OvertimeCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_OPERATION, PREFIX_AMOUNT);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_OPERATION, PREFIX_AMOUNT)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OvertimeCommand.MESSAGE_USAGE));
-        }
-
+        areValidPrefixes(argMultimap);
 
         Id id;
         try {
@@ -39,8 +34,6 @@ public class OvertimeCommandParser implements Parser<OvertimeCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, OvertimeCommand.MESSAGE_USAGE), pe);
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_OPERATION, PREFIX_AMOUNT);
 
         String operation = argMultimap.getValue(PREFIX_OPERATION).get();
         boolean isIncrement = parseOperation(operation);
@@ -57,6 +50,20 @@ public class OvertimeCommandParser implements Parser<OvertimeCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Checks validity of prefixes.
+     *
+     * @param argMultimap ArgumentMultimap to be used
+     * @throws ParseException If prefixes are empty or repeated
+     */
+    public void areValidPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_OPERATION, PREFIX_AMOUNT)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OvertimeCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_OPERATION, PREFIX_AMOUNT);
     }
 
     private static boolean parseOperation(String operation) throws ParseException {

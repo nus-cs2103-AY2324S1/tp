@@ -15,9 +15,9 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditLeaveCommand;
 import seedu.address.model.employee.Id;
-import seedu.address.model.employee.Leave;
 
 public class EditLeaveCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
@@ -46,12 +46,27 @@ public class EditLeaveCommandParserTest {
         assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
 
         // invalid old date
-        userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD + " " + PREFIX_NEW + "2023-10-11";
-        assertParseFailure(parser, userInput, Leave.MESSAGE_CONSTRAINTS);
+        userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD + "2023-13-11 " + PREFIX_NEW + "2023-10-11";
+        assertParseFailure(parser, userInput, Messages.MESSAGE_INVALID_DATE);
 
         // invalid new date
+        userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD + "2023-10-10 " + PREFIX_NEW + "11-10-2023";
+        assertParseFailure(parser, userInput, Messages.MESSAGE_INVALID_DATE);
+    }
+
+    @Test
+    public void parse_emptyValue_failure() {
+        // empty employee id
+        String userInput = " " + PREFIX_ID + " " + PREFIX_OLD + "2023-10-10 " + PREFIX_NEW + "2023-10-11";
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        // empty old date
+        userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD + " " + PREFIX_NEW + "2023-10-11";
+        assertParseFailure(parser, userInput, Messages.MESSAGE_MISSING_DATE);
+
+        // empty new date
         userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD + "2023-10-10 " + PREFIX_NEW + " ";
-        assertParseFailure(parser, userInput, Leave.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, userInput, Messages.MESSAGE_MISSING_DATE);
     }
 
     @Test

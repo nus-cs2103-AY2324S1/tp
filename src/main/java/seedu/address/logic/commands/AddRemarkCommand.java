@@ -33,7 +33,6 @@ public class AddRemarkCommand extends Command {
             + PREFIX_REMARK + "Good worker";
 
     public static final String MESSAGE_SUCCESS = "New remark added: %1$s";
-    public static final String MISSING_REMARK = "No remark given!";
     public static final String MESSAGE_DUPLICATE_REMARK = "This remark already exists";
     private final Id targetId;
     private final Remark remark;
