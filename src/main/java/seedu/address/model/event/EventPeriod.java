@@ -30,7 +30,7 @@ public class EventPeriod implements Comparable<EventPeriod> {
     public static final String PERIOD_INVALID = "The start date has to be before the end date.";
     public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HH:mm");
-    private static final LocalTime MAX_TIME_OF_DAY = LocalTime.MIDNIGHT.minusMinutes(1);
+    public static final LocalTime MAX_TIME_OF_DAY = LocalTime.MIDNIGHT.minusMinutes(1);
 
     private final LocalDateTime start;
     private final LocalDateTime end;

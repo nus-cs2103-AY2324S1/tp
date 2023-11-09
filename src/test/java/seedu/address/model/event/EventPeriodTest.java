@@ -8,16 +8,21 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_EARLIE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_LATER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_EARLIER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_LATER;
+import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
+import static seedu.address.model.event.EventPeriod.MAX_TIME_OF_DAY;
 import static seedu.address.model.event.EventPeriod.isValidPeriod;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.event.exceptions.DateOutOfBoundsException;
 import seedu.address.model.event.exceptions.InvalidEventPeriodException;
 import seedu.address.testutil.EventPeriodBuilder;
 
@@ -116,6 +121,29 @@ public class EventPeriodTest {
         EventPeriod validEventPeriod = new EventPeriodBuilder().build();
 
         assertFalse(validEventPeriod.getDates().isEmpty());
+    }
+
+    @Test
+    public void boundByDateTest() {
+        LocalDate input = LocalDate.of(2023, 1, 2);
+
+        EventPeriod startAndEnd = new EventPeriodBuilder().build();
+        EventPeriod startNotEnd = new EventPeriodBuilder().changeEnd("2023-01-03 15:00").build();
+        EventPeriod expectedStartNotEnd = new EventPeriodBuilder()
+                .changeEnd(input.atTime(MAX_TIME_OF_DAY).format(DATE_TIME_STRING_FORMATTER)).build();
+        EventPeriod endNotStart = new EventPeriodBuilder().changeStart("2023-01-01 15:00").build();
+        EventPeriod expectedEndNotStart = new EventPeriodBuilder()
+                .changeStart(input.atTime(LocalTime.MIDNIGHT).format(DATE_TIME_STRING_FORMATTER)).build();
+        EventPeriod outOfBounds = new EventPeriodBuilder()
+                .changeStartAndEnd("2022-01-03 15:00", "2022-01-04 15:00").build();
+
+        assertEquals(startAndEnd, startAndEnd.boundPeriodByDate(input));
+
+        assertEquals(expectedStartNotEnd, startNotEnd.boundPeriodByDate(input));
+
+        assertEquals(expectedEndNotStart, endNotStart.boundPeriodByDate(input));
+
+        assertThrows(DateOutOfBoundsException.class, () -> outOfBounds.boundPeriodByDate(input));
     }
 
     @Test
