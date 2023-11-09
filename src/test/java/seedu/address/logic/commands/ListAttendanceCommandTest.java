@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_NO_STUDENTS;
 import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_SUCCESS;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager;
 
 import java.util.Optional;
@@ -17,11 +17,12 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Attendance;
+import seedu.address.model.person.Person;
 import seedu.address.model.predicate.AbsentFromTutorialPredicate;
 import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.week.Week;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListAttendanceCommand.
@@ -103,13 +104,17 @@ public class ListAttendanceCommandTest {
 
     @Test
     public void execute_listWithIncompleteAttendance_success() {
+        Person validPersonNoAttendance = new PersonBuilder(BOB).build();
+        model.addPerson(validPersonNoAttendance);
+        expectedModel.addPerson(validPersonNoAttendance);
+
         Optional<Tag> tag = Optional.empty();
         Week week = new Week(0);
         ListAttendanceCommand command = new ListAttendanceCommand(tag, week,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
 
         String message = String.format(ListAttendanceCommand.MESSAGE_INCOMPLETE_ATTENDANCE + "\n"
-                + "Students with unmarked attendance: Daniel Meier", week.getWeekNumber());
+                + "Students with unmarked attendance: Bob Choo", week.getWeekNumber());
 
         CommandResult expectedCommandResult = new CommandResult(message);
 
@@ -119,7 +124,6 @@ public class ListAttendanceCommandTest {
     @Test
     public void execute_listAttendanceNoTag_success() {
         Optional<Tag> tag = Optional.empty();
-        DANIEL.addAttendance(new Attendance(new Week(0), true, null));
         Week week = new Week(0);
         ListAttendanceCommand command = new ListAttendanceCommand(tag, week,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
