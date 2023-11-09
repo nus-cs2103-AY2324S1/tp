@@ -251,10 +251,10 @@ Updates the hour field to all TAs in the current list.
 
 Format: `hour HOUR`
 
-- This command update ths hour field for all TAs in view, by adding the `HOUR` value to their current values.
+- This command update ths hour field for all TAs in view, by adding the `HOUR` value to their current values. This `HOUR` value can be both negative and positive.
 - This command can be applied after the `find` command. e.g First type `find c/ CS2103T` will find all TAs with course
 `CS2103T`, then type `hour 6` will add 6 hours to all `CS2103T` TAs only, other TAs will not be updated.
-- The updated hour should still be within range of 0-9999.
+- The resulting working hour after updating should still be within range of 0-9999.
 
 Examples:
 
@@ -281,6 +281,7 @@ Format: `editft INDEX d/DAY from/FROM to/TO`
 
 - This command update ths time interval for the TA at the specified `INDEX` for weekday `DAY`.
 - Weekday `DAY` should be between 1 and 5, inclusive, and `FROM` and `TO` should be in "HH:SS" format and `FROM` time should be before `TO` time.
+- All three prefixes must be present and all respective parameters need to be correctly given for the command to be executed.
 
 Examples:
 
@@ -404,14 +405,18 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                           |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g., `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10` |
-| **Clear**  | `clear`                                                                                                                                                                                                    |
-| **Course** | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`                                                                                                                                                       |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                        |
-| **Find**   | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                 |
-| **Hour**   | `hour 6`                                                                                                                                                                                                   |
-| **List**   | `list`                                                                                                                                                                                                     |
-| **Help**   | `help`                                                                                                                                                                                                     |
-| **Teach**  | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
+| Action         | Format, Examples                                                                                                                                                                                           |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`  |
+| **Clear**      | `clear`                                                                                                                                                                                                    |
+| **ClearTeach** | `clearteach`                                                                                                                                                                                               |
+| **Course**     | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`                                                                                                                                                       |
+| **Delete**     | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                         |
+| **Edit**       | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `edit n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10` |
+| **Editft**     | `editft INDEX d/DAY from/FROM to/FROM` <br> e.g. `editft 1 d/2 from/12:30 to/13:30`                                                                                                                        |
+| **Exit**       | `exit`                                                                                                                                                                                                     |
+| **Find**       | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                  |
+| **Help**       | `help`                                                                                                                                                                                                     |
+| **Hour**       | `hour 6`                                                                                                                                                                                                   |
+| **List**       | `list`                                                                                                                                                                                                     |
+| **Teach**      | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
