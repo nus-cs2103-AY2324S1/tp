@@ -134,56 +134,61 @@ Format: `help`
 ### Properties of person
 Before you proceed to use commands to manage persons, you should know the properties of a person in FumbleLog.
 
-| Parameter     | Format                                                                                                                                                                                                                       | Example                          |
-|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
-| `NAME`        | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                                                                                                                                                                | `John Doe`                       |
-| `PHONE_NUMBER`| Use `0-9` only and should be at least 3 digits long and maximum of 17 digits.                                                                                                                                                | `p/98765432`                     |
-| `EMAIL`       | Be in format `local-part@domain`. `local_part` should only contain alphanumeric values and special characters `+`, `_`, `.` and `-`. `domain` be at least 2 characters long, and start and end with alphanumeric characters. | `johndoe@gmail.com`              |
-| `ADDRESS`     | Use any characters.                                                                                                                                                                                                          | `John Street, block 123, #01-01` |
-| `BIRTHDAY`    | Have format `yyyy-MM-dd` and should not be later than current date.                                                                                                                                                          | `2001-12-30 `                    |
-| `REMARK`      | Use any characters.                                                                                                                                                                                                          | `Owes me $2.`                    |
-| `GROUP`       | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                                                                                                                                                           | `CS2103T`                        |
+| Parameter     | Format                                                                                                                                                                                                                                                                                  | Example                          |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
+| `NAME`        | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                                                                                                                                                                                                                           | `John Doe`                       |
+| `PHONE_NUMBER`| Use `0-9` only and should be at least 3 digits long and maximum of 17 digits.                                                                                                                                                                                                           | `p/98765432`                     |
+| `EMAIL`       | Be in format `local-part@domain`. `local_part` should only contain alphanumeric values and special characters `+`, `_`, `.` and `-`. `domain` be at least 2 characters long, start and end with alphanumeric characters, and made up of domain labels separated by one or more periods. | `johndoe@gmail.com`              |
+| `ADDRESS`     | Use any characters.                                                                                                                                                                                                                                                                     | `John Street, block 123, #01-01` |
+| `BIRTHDAY`    | Have format `yyyy-MM-dd` and should not be later than current date.                                                                                                                                                                                                                     | `2001-12-30 `                    |
+| `REMARK`      | Use any characters.                                                                                                                                                                                                                                                                     | `Owes me $2.`                    |
+| `GROUP`       | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                                                                                                                                                                                                                      | `CS2103T`                        |
 
 
 ### Adding a person: `add_person`
 
-Adds a person to the FumbleLog.
+FumbleLog allows you to add personalised contacts to your contact list. 
 
 Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​`
 
-<div markdown="span" class="alert alert-primary">
-    :bulb: **Tip:**
-    A person can have any number of groups (including 0)
-</div>
+**Acceptable values for each parameter:**
 
-Examples:
-* `add_person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/2023-09-30 g/friend g/partner`
-* `add_person n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
-* `add_person n/Jonathan`
+| Parameter     | Format                                                                                                                                                                                                                                                                                  | Example                          |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
+| `NAME`        | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                                                                                                                                                                                                                           | `John Doe`                       |
+| `PHONE_NUMBER`| Use `0-9` only and should be at least 3 digits long and maximum of 17 digits.                                                                                                                                                                                                           | `p/98765432`                     |
+| `EMAIL`       | Be in format `local-part@domain`. `local_part` should only contain alphanumeric values and special characters `+`, `_`, `.` and `-`. `domain` be at least 2 characters long, start and end with alphanumeric characters, and made up of domain labels separated by one or more periods. | `johndoe@gmail.com`              |
+| `ADDRESS`     | Use any characters including whitespaces.                                                                                                                                                                                                                                               | `John Street, block 123, #01-01` |
+| `BIRTHDAY`    | Have format `yyyy-MM-dd` and should not be later than current date.                                                                                                                                                                                                                     | `2001-12-30 `                    |
+| `REMARK`      | Use any characters including whitespaces.                                                                                                                                                                                                                                               | `Owes me $2.`                    |
+| `GROUP`       | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                                                                                                                                                                                                                      | `CS2103T`                        |
 
-Acceptable values for each parameter:
-* `n/NAME`: Name of the person (Compulsory)
-* `[p/PHONE_NUMBER]`: A valid phone number
-* `[e/EMAIL]`: A valid email address
-* `[a/ADDRESS]`: Address of the person
-* `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
-* `[r/REMARK]`: A remark about the person
-* `[g/GROUP]`: A group for the person to be categorised into (no spaces)
+<box type="info" icon=":fa-solid-magnifying-glass:">
 
-<div markdown="span" class="alert alert-secondary">
-    :bulb: **Tip:**
-    The parameters are optional, but at least the name must be provided.
-</div>
+Below are some examples on how to use the command:
 
-Expected output when a command succeeds:
+* `add_person n/Jonathan`: Adds a person with name "Jonathan".
+* `add_person n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/12345678`: Adds a person with name "Betsy Crowe", with email "betsycrowe@example.com", with address "Newgate Prison" and phone "12345678".
+* `add_person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/2023-09-30 g/friend g/partner`: Adds a person with name "John Doe", with phone "98765432", with email "johnd@example.com", with address "John street, block 123, #01-01", with birthday "2023-09-30" and with groups "friend" and "partner".
+
+</box>
+
+<box type="warning">
+
+Notes on `add_person` command:
+
+* You must add a contact with a name, but the other fields are optional.
+* A person can be assigned to 0 or more groups.
+
+</box>
+
+
+This should be the expected output when the command succeeds:
 * Input: `add_person n/james p/999 e/example@gmail.com a/1 Computing Drive b/2001-09-20`
 * Output: `New person added: james; Phone: 999; Email: example@gmail.com; Address: 1 Computing Drive; Birthday: Sep 20 2001  `
 
 ![Addperson](images/Addperson.png)
 
-
-Expected output when the command fails
-* `Invalid command format! add_person: Adds a person to the FumbleLog. Parameters: n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -216,7 +221,7 @@ Acceptable values for each parameter:
 * `[g/GROUP]`: Text for the group of the person
 * `[ug/GROUP]`: Text for the group of the person to be unassigned
 
-Expected output when a command succeeds:
+**Expected output when a command succeeds:**
 * Input: `edit_person 1 n/Alexa Yeoh`
 * Output: `Edited Person: Alexa Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; groups: [friends]`
 
