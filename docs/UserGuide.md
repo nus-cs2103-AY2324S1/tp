@@ -369,7 +369,7 @@ Example usage:
 
 #### Filter contacts list: `filter /by [field] /with [term]`
 
-You can use the `filter` command to filter your list of conatacts,
+You can use the `filter` command to filter your list of contacts,
 temporarily hiding contacts that don't contain certain keywords
 for easy viewing. If the list is currently sorted (using [`sort`](#sort-contacts-list-sort-by-field-name-order-ascdesc)), the filtered list will be sorted.
 
