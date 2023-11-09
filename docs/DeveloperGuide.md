@@ -185,7 +185,46 @@ The add command is exposed in the `Model` interface as the `Model#addCard`
 
 Here is the flow of how the add command is featured.
 
-1. User inputs the following valid input `add q/`
+1. User inputs the following valid input `add q/what does + mean in boolean algebra? a/it means OR.`
+2. The command is parsed into the `DeckParser` to verify that it has the correct format and parameters
+3. Add command is executed, and if there is no duplicate entry found in `DeckStorage`, a new flashcard with the corresponding
+data will be created
+4. New generated flashcard is then stored in the `DeckStorage`
+
+Below is the sequence diagram for this flow:
+
+<img src="images/AddCommandSequenceDiagram.png" width="550" />
+
+#### Design Considerations
+
+**Aspect: Duplicate Entry Detection:**
+
+* **Alternative 1 (current choice):** No restriction on case sensitivity and mark down syntax
+    * Pros: Increased flexibility on how users wish to create flashcards, up to user's choice, duplicate entry is
+  determined only by the question and the answer input.
+    * Cons: Might lead to duplicate entries of cards of similar content .
+
+* **Alternative 2:** Clean the user input to obtain their intended question and answer
+    * Pros: Reduces chances of duplicate cards in deck
+    * Cons: Increased developer time to create such filtering functionality with little benefit
+
+### DeleteCommand
+
+The delete command can be found in the `LogicManager` class. User input is first parsed into the `DeckParser` class using the `parseCommand`
+to validate if it is a valid delete command with the specified fields and format.
+
+The delete command is exposed in the `Model` interface as the `Model#setCard`
+
+Here is the flow of how the delete command is featured.
+
+1. User inputs the following valid input `delete 1`
+2. The command is parsed into the `DeckParser` to verify that it has the correct format and parameter
+3. Delete command is now executed. If the index is valid, when it is greater than 0 and a card exists at the specified index, the specified card is now deleted from view.
+4. The corresponding card is also deleted from storage.
+
+Below is the sequence diagram for this flow:
+
+<img src="images/DeleteCommandSequenceDiagram.png" width="550" />
 
 
 ### \[Proposed\] Undo/redo feature
@@ -268,7 +307,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Filter by Tag feature
 
-<---! include the sequence diagram here--->
+
 #### Proposed Implementation
 
 The proposed feature aims to filter the flashcards and display cards of a specific `tag`. This allows the users to
