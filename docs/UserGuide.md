@@ -110,7 +110,25 @@ Before we begin, the table below describes some of the symbols and syntax you ma
 
 6. The Graphical User Interface(GUI) should appear in a few seconds. Note that the app contains some sample data.
 
-7. To get a better understanding of what you see. Please refer to the [GUI Summary](#gui-summary) for more details.
+7. Type the command in the command box and press Enter to execute it. E.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
+   Some example commands you can try:
+
+   * **`help`** : Opens the help window, which contains a link to this User Guide.
+
+   * **`list-a`** : Lists all job applicants.
+
+   * **`add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`** :
+     Adds an applicant information for `James Ho` to **InterviewHub**. 
+     * The applicant's phone number is `22224444`, 
+     * the applicant's email address is `jamesho@example.com`, and 
+     * the applicant's residential address is at `123, Clementi Rd, 1234665`.
+
+   * **`delete 1`** : Deletes the first job applicant displayed in **InterviewHub**.
+
+   * **`exit`** : Exits **InTrack**.
+
+8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
