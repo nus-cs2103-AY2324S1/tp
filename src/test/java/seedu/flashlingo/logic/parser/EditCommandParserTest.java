@@ -48,4 +48,13 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TRANSLATED_WORD));
     }
+
+    @Test
+    public void parse_notExistPrefix_failure() {
+        // no existing prefix
+        assertParseFailure(parser, " 1 e/example", MESSAGE_INVALID_FORMAT);
+
+        // invalid format for index
+        assertParseFailure(parser, " <1> w/word", MESSAGE_INVALID_FORMAT);
+    }
 }
