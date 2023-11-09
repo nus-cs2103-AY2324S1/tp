@@ -46,6 +46,7 @@ skinparam Class {
     BorderColor #FFFFFF
     StereotypeFontColor #FFFFFF
     FontName Arial
+    AttributeFontColor #FFFFFF
 }
 
 skinparam Actor {
@@ -75,5 +76,5 @@ skinparam DefaultTextAlignment center
 skinparam packageStyle Rectangle
 
 hide footbox
-hide members
+hide empty members
 hide circle
