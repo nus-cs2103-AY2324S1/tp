@@ -27,7 +27,7 @@ to start keeping track of all your members and applicants!
 
 </div>
 
-## Table of Contents
+<h2>Table of Contents</h2>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -170,6 +170,7 @@ Adds a member to the list of members.
 <h5>Format</h5>
 
 `addmember /name MEMBER_NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`<br/>
+The alias for this command is `addm`.
 
 <div markdown="block" class="alert alert-primary">
 
@@ -206,7 +207,7 @@ Adds a member to the list of members.
 `addm /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /tag Admin`
 
 This adds a new member named `Taylor Swift` with phone number `91691969`, email `taylorswift@era.tour`, telegram
-handle `tswift` and tag `Admin` to the list of members.
+handle `@tswift` and tag `Admin` to the list of members.
 
 ![Add_Member](images/addMember.png)
 
@@ -260,9 +261,9 @@ Generates a list of all existing member(s).
 
 The member at the specified index will have his/her specified field(s) edited.
 
-<h5>Format</h5>:
+<h5>Format</h5>
 
-`editmember MEMBER_INDEX [/name MEMBER_NAME] [/phone PHONE_NUMBER] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...`<br/><br/>
+`editmember MEMBER_INDEX [/name MEMBER_NAME] [/phone PHONE_NUMBER] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...`
 The alias for this command is `editm`.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
@@ -290,7 +291,7 @@ This also means that to clear a member's tags, you can simply type `editm /tag`.
 
 </div>
 
-<h5>Example of usage</h5>:
+<h5>Example of usage</h5>
 
 `editm 1 /name Taylor Swift /email taylorswift@era.tour /tele @tswift`
 
@@ -392,7 +393,7 @@ This adds a task with the description `Implement solve feature` to the top of ta
 ![add_task](images/addTask.png)
 
 #### 4.1.8 Viewing all tasks allocated to a member: `viewtask` or `viewt`
-Shows the task list of a member at the specified index in the `Tasks` window.
+Shows the task list of a member at the specified index in the Tasks window.
 
 <h5>Format</h5>
 `viewtask MEMBER_INDEX` <br/>
@@ -410,6 +411,7 @@ will be based on the current **shown** list. If `MEMBER_INDEX` is negative or 0,
 `viewt 2`
 
 This shows the list of tasks assigned to the member at `MEMBER_INDEX` 2.
+
 ![add_task](images/viewTask.png)
 
 #### 4.1.9 Deleting a task allocated to a member: `deletetask` or `delt`
