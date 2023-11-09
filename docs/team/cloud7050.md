@@ -5,7 +5,8 @@ title: Cloud7050's Project Portfolio Page
 
 ## Overview
 
-//TODO
+**ConText** is a desktop app that allows for managing contacts quickly via text commands, with useful features relevant to NUS SoC students.
+While it has a Graphical User Interface, most of its user interactions happen via an in-app Command Line Interface.
 
 ## Summary of contributions
 
