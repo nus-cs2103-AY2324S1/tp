@@ -1,10 +1,11 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,9 +13,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
+import seedu.address.model.person.LinkedIn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.ScoreList;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,7 +34,15 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<Map<String, String>> tags = new ArrayList<>();
+    private final JsonAdaptedScoreList scoreList;
+    private final String linkedIn;
+    private final String github;
+
+    private final String remark;
+    private final String status;
+
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,7 +50,11 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<Map<String, String>> tags,
+            @JsonProperty("scoreList") JsonAdaptedScoreList scoreList,
+            @JsonProperty("linkedIn") String linkedIn,
+            @JsonProperty("github") String github,
+            @JsonProperty("remark") String remark, @JsonProperty("status") String status) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +62,11 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.linkedIn = linkedIn;
+        this.github = github;
+        this.remark = remark;
+        this.status = status;
+        this.scoreList = scoreList;
     }
 
     /**
@@ -54,9 +77,18 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        Set<Tag> personTags = source.getTags();
+        for (Tag tag : personTags) {
+            Map<String, String> map = new HashMap<>();
+            map.put("tagCategory", tag.tagCategory);
+            map.put("tagName", tag.tagName);
+            this.tags.add(map);
+        }
+        scoreList = new JsonAdaptedScoreList(source.getScoreList());
+        linkedIn = source.getLinkedIn().value;
+        github = source.getGithub().value;
+        remark = source.getRemark().value;
+        status = source.getStatus().getValue();
     }
 
     /**
@@ -66,10 +98,15 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
+        for (Map<String, String> tagData : tags) {
+            String tagCategory = tagData.get("tagCategory");
+            String tagName = tagData.get("tagName");
+            if (!Tag.isValidTagName(tagName)) {
+                throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+            }
 
+            personTags.add(new Tag(tagName, tagCategory));
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -101,9 +138,25 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-    }
 
+        Person p = new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+        if (linkedIn != null) {
+            p.setLinkedIn(new LinkedIn(linkedIn));
+        }
+        if (github != null) {
+            p.setGithub(new Github(github));
+        }
+        if (status != null) {
+            p.setStatus(new Status(status));
+        }
+        ScoreList modelScoreList = (scoreList != null) ? scoreList.toModelType() : new ScoreList();
+        p.setScoreList(modelScoreList);
+        return p;
+    }
 }

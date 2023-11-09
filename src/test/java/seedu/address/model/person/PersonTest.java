@@ -88,12 +88,23 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different remark -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRemark("Some remark").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different score list -> returns false
+
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
+                + ", remark=" + ALICE.getRemark() + ", status=" + ALICE.getStatus() + ", score-list="
+                + ALICE.getScoreList()
+                + (!ALICE.getLinkedIn().value.isEmpty() ? ", linkedin=" + ALICE.getLinkedIn() : "")
+                + (!ALICE.getGithub().value.isEmpty() ? ", github=" + ALICE.getGithub() : "") + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

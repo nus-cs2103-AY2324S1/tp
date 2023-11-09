@@ -4,11 +4,16 @@ import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.statistics.ReadOnlySummaryStatistic;
+import seedu.address.model.tag.Tag;
 
 /**
  * API of the Logic component
@@ -30,13 +35,28 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    ReadOnlyEventBook getEventBook();
+
+    /**
+     * Returns the SummaryStatistic.
+     * @return SummaryStatistic
+     */
+    ReadOnlySummaryStatistic getSummaryStatistic();
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    ObservableList<Tag> getFilteredTagsList();
+
+    ObservableList<Event> getFilteredEventList();
+
 
     /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
+
+    Path getEventBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -47,4 +67,10 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the last viewed person index.
+     */
+    Index getLastViewedPersonIndex();
+
 }

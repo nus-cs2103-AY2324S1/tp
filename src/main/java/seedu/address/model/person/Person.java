@@ -23,18 +23,29 @@ public class Person {
 
     // Data fields
     private final Address address;
+
     private final Set<Tag> tags = new HashSet<>();
+    private LinkedIn linkedIn = new LinkedIn("");
+    private Github github = new Github("");
+    private Remark remark;
+    private Status currentStatus = new Status();
+
+    private ScoreList scoreList = new ScoreList();
+
+
+
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.remark = remark;
     }
 
     public Name getName() {
@@ -53,6 +64,17 @@ public class Person {
         return address;
     }
 
+    public Remark getRemark() {
+        return remark;
+    }
+
+
+    public Status getStatus() {
+        return currentStatus;
+    }
+
+
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -60,6 +82,51 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
+    public LinkedIn getLinkedIn() {
+        return linkedIn;
+    }
+
+    public Github getGithub() {
+        return github;
+    }
+
+
+    public Score getScoreForTag(Tag tag) {
+        return scoreList.getScore(tag);
+    }
+
+    public ScoreList getScoreList() {
+        return scoreList;
+    }
+
+    public void setLinkedIn(LinkedIn linkedIn) {
+        this.linkedIn = linkedIn;
+    }
+
+    public void setGithub(Github github) {
+        this.github = github;
+    }
+
+    /**
+     * Sets the score list of the person to the given score list.
+     * This is ONLY recommended for use in Person Builder. Strongly discouraged otherwise.
+     * @param scoreList the score list to set to
+     */
+    public void setScoreList(ScoreList scoreList) {
+        this.scoreList = scoreList;
+    }
+
+    public void setScoreForTag(Tag tag, Score score) {
+        requireAllNonNull(tag, score);
+        scoreList.updateScoreList(tag, score);
+    }
+
+    public void setStatus(Status newStatus) {
+        this.currentStatus = newStatus;
+    }
+
+
 
     /**
      * Returns true if both persons have the same name.
@@ -70,8 +137,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -90,28 +156,44 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && remark.equals(otherPerson.remark)
+                && scoreList.equals(otherPerson.scoreList)
                 && tags.equals(otherPerson.tags);
+
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, remark);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
+        ToStringBuilder builder = new ToStringBuilder(this);
+        builder.add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
-                .toString();
+                .add("remark", remark)
+                .add("status", currentStatus)
+                .add("score-list", scoreList);
+
+        if (!linkedIn.value.isEmpty()) {
+            builder.add("linkedin", linkedIn);
+        }
+
+        if (!github.value.isEmpty()) {
+            builder.add("github", github);
+        }
+
+        return builder.toString();
     }
 
 }

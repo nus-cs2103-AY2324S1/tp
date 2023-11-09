@@ -10,19 +10,27 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.statistics.SummaryStatistic;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -114,7 +122,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getEventBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEventBookFilePath(Path eventBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -124,7 +142,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEventBook(ReadOnlyEventBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -134,7 +162,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public ReadOnlyEventBook getEventBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -144,7 +187,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteEvent(Event target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEvent(Event target, Event editedEvent) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -155,6 +208,71 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonList(List<Predicate<Person>> predicatesList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPersonList(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void sortEventList(Comparator<Event> comparator) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<Event> getFilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredEventList(List<Predicate<Event>> predicatesList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Tag> getFilteredTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTagList(Predicate<Tag> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Index getLastViewedPersonIndex() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLastViewedPersonIndex(Index index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void loadSummaryStatistics() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public SummaryStatistic getSummaryStatistic() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -182,6 +300,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private Index index;
 
         @Override
         public boolean hasPerson(Person person) {
@@ -194,6 +313,18 @@ public class AddCommandTest {
             requireNonNull(person);
             personsAdded.add(person);
         }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            ObservableList<Person> filteredList = FXCollections.observableArrayList(personsAdded);
+            return filteredList;
+        }
+
+        @Override
+        public void setLastViewedPersonIndex(Index index) {
+            this.index = index;
+        }
+
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
