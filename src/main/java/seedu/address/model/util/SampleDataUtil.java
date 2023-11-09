@@ -62,7 +62,7 @@ public class SampleDataUtil {
             new Patient(new Name("Irfan Ibrahim"), new Phone("92492021"), new Phone("87438807"),
                     new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"), EMPTY_REMARK,
                     new Gender("M"), new Ic("S1111115Z"), new Condition("Unknown"), new BloodType("O+"),
-                    EMPTY_APPOINTMENTS, getTagSet("priority: Low")),
+                    EMPTY_APPOINTMENTS, getTagSet("priority: LOW")),
             new Patient(new Name("Roy Balakrishnan"), new Phone("92624417"), new Phone("87438807"),
                     new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_REMARK,
                     new Gender("M"), new Ic("S1111116Z"), new Condition("Unknown"), new BloodType("O+"),

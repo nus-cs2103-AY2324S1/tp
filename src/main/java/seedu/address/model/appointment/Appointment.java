@@ -63,6 +63,7 @@ public class Appointment {
     }
 
     public void setAppointmentTime(AppointmentTime appointmentTime) {
+        this.appointmentTime = appointmentTime;
     }
 
     public void changeDoctor(Ic newDoctorIc) {
