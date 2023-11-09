@@ -72,7 +72,6 @@ public class AppointmentTest {
         assertEquals(userInput2, userInput3);
         assertEquals(userInput3, userInput4);
         assertEquals(userInput4, storageInput);
-        assertEquals(0, 0);
 
         assertEquals("01-Jan-2021, 09:00 to 11:30", userInput1.toString());
     }
