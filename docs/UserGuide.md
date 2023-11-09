@@ -148,7 +148,7 @@ Acceptable values for each parameter:
 * `t/TAG`: Alphabets, no white spaces allowed.
 * `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters.
 * `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
-* `pn/POLICY NUMBER`: Alphanumeric, _exactly_ 8 characters.
+* `pn/POLICY NUMBER`: Alphanumeric, _up to_ 8 characters.
 * `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE`: Date in the format dd-mm-yyyy.
 
 Expected output upon success: <br>
