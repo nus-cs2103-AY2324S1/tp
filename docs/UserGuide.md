@@ -140,7 +140,7 @@ Examples:
 *  `edit 2 pn/AB12345J pe/31-12-2024` updates the policy at the INDEX number 2 with the new policy number and expiration date.
 
 Acceptable values for each parameter:
-* `n/NAME`: Alphabets.
+* `n/NAME`: Alphanumeric.
 * `i/NRIC`: Alphanumeric, _exactly_ 4 characters.
 * `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters.
 * `e/EMAIL`: Alphanumeric and/or special characters, no white spaces allowed, standard email format.
