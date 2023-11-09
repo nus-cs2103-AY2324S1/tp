@@ -229,7 +229,7 @@ This section introduces the full-suite of features in Staff-Snap. The features a
 <a name="add"></a>
 #### Adding a new applicant: `add`
 
-Adds a new applicant to the list.
+Adds a new applicant to the list. All newly added applicants have no interviews and have a default status of _UNDECIDED_.
 
 Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
@@ -247,7 +247,10 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 Example:
 * `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer` adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@<area>gmail.com*, and position *Software Engineer*.
 
-* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@<area>yahoo.com*, and position *Project Manager*.
+* `add n/Charlene Loh p/Staff Engineer e/cloh@gmail.com hp/91827271` adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@<area>yahoo.com*, and position *Project Manager*.
+  
+![add](images/user-guide/add.png)
+
 <br>
 
 ---
@@ -313,7 +316,9 @@ Format: `status INDEX s/STATUS`
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Example:
-* `status 3 s/o` updates the status of the 3rd person in the displayed applicant list to _OFFERED_.
+* `status 2 s/r` updates the status of the 2nd person in the displayed applicant list to _REJECTED_.
+
+![status](images/user-guide/status.png)
 
 <br>
 
@@ -366,13 +371,13 @@ Format: `addi INDEX t/TYPE [r/RATING]`
 * A maximum of 5 interviews can be added to each applicant.
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
-Example:
-* `addi 1 t/technical r/8.6` adds a Technical interview with rating 8.6 to the 1st person in the displayed applicant list.
-* `addi 3 t/screening` adds a Screening interview without rating to the 3rd person in the displayed applicant list.
-
 <box type="warning" header="**Caution**">
     Rating will be rounded to the nearest 1 decimal place if more than 1 decimal place is provided.
 </box>
+
+Example:
+* `addi 3 t/screening` adds a Screening interview without rating to the 3rd person in the displayed applicant list.
+* `addi 1 t/technical r/8.5` adds a Technical interview with rating 8.5 to the 1st person in the displayed applicant list.
 
 ![addi.png](images/user-guide/addi.png)
 
@@ -410,11 +415,7 @@ Deletes an interview from an applicant.
 
 Format: `deletei INDEX i/INTERVIEW_INDEX`
 * Deletes from the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
-<<<<<<< HEAD
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
-=======
-* `INTERVIEW_INDEX` refers to the index of the interview to be edited of the applicant.
->>>>>>> master
 
 Example:
 * `deletei 1 i/2` deletes the 2nd interview of the 1st person in the displayed applicant list.
@@ -446,7 +447,6 @@ Example:
 <br>
 
 <a name="find"></a>
-
 #### Finding an applicant by name: `find`
 
 Find applicants whose name contains a particular keyword.
@@ -461,7 +461,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 e.g. `Ed` will match both `Edward` and `Ed`.
 * Applicants matching at least one keyword will be returned (i.e. OR search), 
 e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
-
 
 Example:
 
@@ -542,7 +541,9 @@ Format: `import f/FILENAME`
 * A sample CSV file can be found [here](demo.csv).
 
 Example:
-* `import f/demo.csv`
+* `import f/applicants.csv`
+
+![import.png](images/user-guide/import.png)
 
 <br>
 
