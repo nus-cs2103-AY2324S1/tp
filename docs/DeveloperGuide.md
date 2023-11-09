@@ -413,7 +413,8 @@ Aspect: How the command finds free times:
     * Cons:
         * The `ListFreeTimeCommand` will have to call the `getAddressBook` method of the `ModelManager` object instance, and then use the getter method of the `AddressBook` object instance. Violates the _Law of Demeter_ principle since the methods of a stranger (i.e. `AddressBook`) is being called, which `ListFreeTimeCommand` is not closely related to
         * Increases coupling since `ListFreeTimeCommand` now has a dependency with `AddressBook`
-
+// TODO: DRAW SEQUENCE DIAGRAMS HERE
+      
 ### List all interviews for today feature
 
 #### Implementation
