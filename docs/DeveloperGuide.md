@@ -3,9 +3,13 @@ layout: page
 title: Developer Guide
 ---
 
-# ClubMembersContact
+## Table of Contents
 
 --------------------------------------------------------------------------------------------------------------------
+
+* Table of Contents
+{:toc}
+
 
 ## **Acknowledgements**
 
