@@ -9,12 +9,12 @@ title: User Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
-Flashlingo is a versatile desktop application centered around learning words through flashcards. It is optimized for use via a Command Line Interface (CLI), 
-while also providing the advantages of a Graphical User Interface (GUI). Tailored with a focus on beginner language 
+Flashlingo is a versatile desktop application centered around learning words through flashcards. It is optimized for use via a Command Line Interface (CLI),
+while also providing the advantages of a Graphical User Interface (GUI). Tailored with a focus on beginner language
 learners, Flashlingo specializes in expanding vocabulary.
 
-The application leverages the scientifically-proven principle of the [**Forgetting Curve**](https://en.wikipedia.org/wiki/Forgetting_curve). 
-By incorporating the forgetting curve concept, Flashlingo schedules review sessions, ensuring words are revisited at 
+The application leverages the scientifically-proven principle of the [**Forgetting Curve**](https://en.wikipedia.org/wiki/Forgetting_curve).
+By incorporating the forgetting curve concept, Flashlingo schedules review sessions, ensuring words are revisited at
 optimal intervals to enhance long-term memory retention. This method assists users in effectively retaining and expanding their vocabulary over time.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -26,9 +26,11 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
   indicates the proficiency of the user with the word. The level of the flashcard will be updated after each review session.
 * **Reviewing flash cards**
    - In each review session, words that require reviewing will be presented to users one by one. For each word, users can indicate whether
-     - they have memorized the word  
+     - they have memorized the word
+     <br>
      This will advance the word into the next `level`, meaning less frequent review for the word in the near future.
-     - they have forgotten the word  
+     - they have forgotten the word
+     <br>
         This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
 
 **:information_source: Notes about the command format:**<br>
@@ -51,12 +53,11 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
    Below shows the steps to perform such a task
     1. Open up the terminal.
     * For mac users, press `Command + Space` to open Spotlight search, type `Terminal`, and press `Enter`.
-      <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">
+      ![img.png](images/Terminal.png)
     * For windows users, press `Windows + R` keys simultaneously, type `cmd` and press `Enter`.
     2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
        <br>
        ``cd Downloads```
-
     3. Simply type in `java -jar flashlingo.jar` to get started!
 
        A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -184,18 +185,51 @@ Examples:
 * `find look` returns the flash card list and its translation that contains the keyword `look`
 * `find look, hello, goodbye` returns the flash card list that has all flash cards that contain `look`, `hello` and `goodbye`
 
-### Listing all flash cards : `list`
+### Listing all flash cards : list
 
 Shows the list of flash cards with both the original word and the corresponding translation.
-
+* Lists all the flash cards saved
+  
 Format: `list (UNUSED)`
+> All the saved flash cards, regardless of the review date, are listed.
 
 Output:
-* `Listed all flash cards`
-  `1. ORIGINAL_WORD - TRANSLATION`
-  `2. ORIGINAL_WORD - TRANSLATION`
-  `3. ORIGINAL_WORD - TRANSLATION`
-  `...`
+
+| Before/After the review session | ![img.png](images/ListSuccess.png) |
+|:-----------------------:|:------------------------------------------:|
+| During the review session | ![img.png](images/ListDuringReview.png) |
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Things to note about the list command:<br>
+* list command cannot be used during a review session
+   * To ensure retention, only the flash cards - with the words to be reviewed - can be seen during the review session.
+   * As soon as the review session ends, all the flash cards can be listed once again
+> The error message:<br>
+> Sorry, currently you are in a review session. Your command is not supported.<br>
+> Please end the review session first.
+</div>
+
+### Getting list for revision : review
+
+Displays the flash cards of all the words to be reviewed that day
+* The review command will present flash cards selected by Flash Lingo based on your level, utilizing the Leitner system.
+* If you wish to view all your saved flash cards without the Leitner system's selection criteria, please use the list command.
+
+Format: review
+
+Output:
+![img.png](images/ReviewSuccess.png)
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Things to note about the review command:<br>
+* Flash cards will not be displayed in the following scenarios:
+   * No flash cards are scheduled for review on the current day.
+   * All flash cards due for review on the current day have already been completed.
+> The error message:<br>
+> 0 flash card(s) listed!<br>
+</div>
 
 ###  Starts review session : `start`
 
@@ -261,11 +295,29 @@ if there's no word left in the review session.
 **Note**
 * Pressing `no` button will have the same effect.
 
-### Show learning statistics : `stats`
+### Show learning statistics : stats
 
-Displays learning statistics, i.e, the total number of flash cards and the number of words remembered.
+To help track user progress and inspire continued learning, this command offers detailed statistics:
+* Total Flash Cards: Displays the total count of flash cards you have saved.
+* Remembered Words: Shows the number of terms you have successfully retained in this session.
+* Success Rate: Presents a percentage representing your learning success for this session, motivating you to keep improving.
 
 Format: `stats (UNUSED)`
+Example:
+*stats would give the following output
+
+Output:
+![img.png](images/Stats.png)
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Things to note about the stats command:<br>
+* The stats command is operational exclusively outside active review sessions.
+* The success rate is calculated solely on the basis of the current session.
+* If attempted inside a review session, the system will respond with the following error message:
+> Sorry, currently you are in a review session. Your command is not supported.<br>
+> Please end the review session first.
+</div>
 
 
 ### Filtering list with specified language : `language`
@@ -274,15 +326,12 @@ Displays a list where each word is from specified language.
 
 Format: `language <SPECIFIED_LANGUAGE>`
 
-### Getting list for revision : `review`
-
-* `review` : Returns a list of words that the user should revise today.
-
-Format: `review (UNUSED)`
+<div id="load">
 
 ### Loading list of words: `load`
 Loads an Excel file of words into the app. The words will be added to the current list of flash cards and included in the
 review session automatically.
+</div>
 
 Format: `load <FILE_NAME>`
 
@@ -303,7 +352,7 @@ Output:
 * File not found or accessible:
 > ⚠️ Make sure the file is in the correct directory with read permission.
 * File cannot be read due to invalid content or format:
->⚠️ Make sure the file contains only two columns with the nonempty words/translations.
+>⚠️ Make sure the file contains only two columns with the valid words/translations.
 * `FLASH_CARD` flash card already exists!:
 >⚠️ Modify the duplicated word/translation in the file.
 
@@ -322,17 +371,18 @@ Output:
 
 ### Viewing help : `help`
 
-Opens a browser with the help page (User Guide).
+Opens a browser with the help page (User Guide). Pressing the `Help` button and then clicking `Help F1` will achieve the same effect.
 
 Format: `help (UNUSED)`
 
+### Exiting the program : exit
 
-### Exiting the program : `exit`
-
-Closes the GUI and terminates the Java program
+Safely terminates the Flashlingo application and closes the graphical user interface (GUI).
 
 Format: `exit (UNUSED)`
 
+Example:
+* Input exit to end your session and close the application
 
 
 ### Saving the data
@@ -371,13 +421,19 @@ UI Prototype:
 **A**: Save your words and translations in the format specified above in an Excel file. Move the file to the same folder with `flashlingo.jar`.
 Then, use the `load` command to import the data.
 
+**Q**: What may be the reasons why my data cannot be loaded into the app?<br>
+**A**: 
+* First, check your file name by opening the located folder. The file name should be directly displayed. Also, you can right-click the file to view the file name in its detailed info.
+* If Flashlingo still cannot read the file, try inputting file name with and without the extension `.xlsx` in the `load` command. This may solve potential issues with file name loading within different systems.
+* Secondly, ensure the content in your file is correctly formatted and valid. All rules can be found [here](#load).
+
 **Q**: After I reviewed a flash card, I edited details of the card by the `edit` command. Will I see these changes immediately reflected in the review session?<br>
 **A**:
 * Unfortunately, no. The card is updated synchronously in the card list and the review session of Flashlingo. However, since the user has already reviewed the same card on the day, the card will not be included in the review session again.
 * To see the edits made, User can use the `list` or `find` command to locate the specific card in the card list. The changes will also be reflected in the next review session for that flash card.
 
 **Q**: If the displayed level of a flash card is "Word Mastered", what can I do if I want to review the card again?<br>
-**A**: 
+**A**:
 * Currently, there's no way for user to manually change the level of a flash card. Flashlingo is designed to automatically remove words that learners are familiar with from the review session.
 * However, if user must review the card, he/she can first use the `delete` command to delete the card and then use the `add` command to re-add the same card. The new card will be reset to level 1 and added in the review session.
 
@@ -387,22 +443,22 @@ Then, use the `load` command to import the data.
 
 | Action                  | Format, Examples                                                                                                           |
 |-------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| **Help**                | `help`                                                                                                                     |
-| **List**                | `list`                                                                                                                     |
 | **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`         |
 | **Delete**              | `delete <Index>`<br> e.g., `delete 1`                                                                                      |
 | **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` |
 | **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        |
+| **List**                | `list`                                                                                                                     |
+| **Review**              | `review`                                                                                                                   |
 | **Start**               | `start`                                                                                                                    |
+| **End**                 | `end`                                                                                                                      |
 | **Reveal**              | `reveal <INDEX>`                                                                                                           |
 | **Yes**                 | `yes`                                                                                                                      |
 | **No**                  | `no`                                                                                                                       |
-| **End**                 | `end`                                                                                                                      |
-| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`                                                                  |
-| **Review**              | `review`                                                                                                                   |
 | **Learning Statistics** | `stats`                                                                                                                    |
-| **Load**                | `load FILE_NAME`<br> e.g., `load SampleData.xlsx`                                                                          |
+| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`                                                                  |
+| **Load**                | `load <FILE_NAME>`<br> e.g., `load SampleData.xlsx`                                                                        |
 | **Switch**              | `switch`                                                                                                                   |
+| **Help**                | `help`                                                                                                                     |
 | **Exit**                | `exit`                                                                                                                     |
 
 

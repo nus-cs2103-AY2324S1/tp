@@ -1,6 +1,5 @@
 package seedu.flashlingo.logic.commands;
 
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -17,7 +16,6 @@ import seedu.flashlingo.model.flashcard.words.TranslatedWord;
  * Reveals the other side of the flash card.
  */
 public class RevealCommand extends Command {
-
     public static final String COMMAND_WORD = "reveal";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reveals the flash card identified by the index number "
         + "used\nParameters: INDEX (must be a positive integer)\n"
