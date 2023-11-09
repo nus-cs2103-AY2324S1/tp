@@ -15,6 +15,8 @@ img {
 <a name="staff-snap-user-guide"></a>
 # Staff-Snap User Guide
 
+--- {.double}
+
 <a name="table-of-contents"></a>
 ## Table of Contents
 
@@ -247,7 +249,7 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 Example:
 * `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer` adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@<area>gmail.com*, and position *Software Engineer*.
 
-* `add n/Charlene Loh p/Staff Engineer e/cloh@gmail.com hp/91827271` adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@<area>yahoo.com*, and position *Project Manager*.
+* `add n/Charlene Loh p/Staff Engineer e/cloh@gmail.com hp/91827271` adds a new applicant with name *Charlene Loh*, phone number *91827271*, email *cloh@<area>gmail.com*, and position *Staff Engineer*.
   
 ![add](images/user-guide/add.png)
 
