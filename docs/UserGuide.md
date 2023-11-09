@@ -27,10 +27,8 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application.<br>  
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>  
    ![Ui](images/Ui.png)
-<br />
-<br />
+
     **Here's what each part of the GUI signifies:**
-<br />
     ![UiBreakdown](images/uibreak.png)
 
    | Colour                                                   | Component                   | Description                                                                                                                                    |
