@@ -332,7 +332,8 @@ reflected in the new tree. With that being said, if you enter command `tree` to
 show LinkTree and make some changes to the data, your changes will not be reflected
 in the current tree. You should hide the tree first and then call `tree` again to
 obtain a new tree which will reflect the changes you made.
-
+  - Team names and team leaders' names may not be shown fully if they are too long.
+You can refer back to the team list for their full names.
 ### Command format: 
 * `tree`
 #### Example usage: 
