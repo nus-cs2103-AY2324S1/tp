@@ -87,16 +87,23 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 * Words in upper case are compulsory parameters to be supplied by the user.<br>
   e.g. in `add -name NAME`, `NAME` is a parameter which can be used as `add -name Leah`.
   In this case, "Leah" is substituted for `NAME`.
-
-* Items in square brackets are optional.<br>
-  e.g. `list [LIST] [KEYWORDS]` can be used as `list` or as `list students email`.
-
+* Words in square brackets are optional.<br>
+  e.g. `list [LIST] [KEYWORDS]` can be used as `list` or as `list students email`, though the behaviour may differ.
 * Flags can be in any order.<br>
-  e.g. if the command specifies `-name NAME -phone PHONE_NUMBER`, `-phone PHONE_NUMBER -name NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command entered is `help 123`, it will be interpreted as `help`.
-
+  e.g. both `link -student student name -lesson lesson name` and `link -lesson lesson name -student student name` are acceptable.
+* Parameters without a flag need to strictly follow the order specified.<br>
+  e.g. For delete command which specifies `delete INDEX`, the "index" parameter must immediately follow the command name "delete".<br>
+* All command name are not case-sensitive. <br>
+  e.g. `linkTo` is the same as `linkto` or `LiNkTo`.
+* When applicable, extraneous parameters and flags for commands will be ignored .<br>
+  e.g. if the command entered is `add info -name new name -notValid flagBody -subject physics`, it will be interpreted as `add -name new name -subject physics`. "info " and "-notValid flagBody" will be ignored. <br>
+  e.g. if the command entered is `delete 3 extra`, it will be interpreted as `delete 3`; <br>
+  e.g. However, `delete extra 3`, it will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
+### Other Notes
+* Please avoid using " -" in the value of a parameter as tutorMate treats " -" as a reserved word that signifies the start of a new flag.
+* Please do not abuse the parser of tutorMate. For example, do not game it with special characters or code injections. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
+* TutorMate supports a maximum of 99999 students, 99999 lessons and 99999 tasks. Further data beyond this limit might be lost and not accessible in the application.
+* Please avoid manually modifying the data files in the data folder. Doing so may result in unexpected behaviour and data loss.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </box>
