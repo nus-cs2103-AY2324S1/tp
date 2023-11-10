@@ -117,21 +117,20 @@ Shows a list of all patients in HealthSync.
 Adds a patient into HealthSync, with the given patient information.
 
 * A patient's [name](#name) and [ID](#ID) are required when creating a new entry into HealthSync.
-* If the name or ID already exist in HealthSync, you cannot add the patient into HealthSync.
 * All the compulsory [fields](#fields) must be provided.
 * Optional fields like [Appointment](#appointment) and [medical history](#medical-history) need not be provided.
 
-> :warning: Once a patient is created, their name and ID cannot be changed later
-> :warning: HealthSync does not allow patients with identical names. Similarly, identical IDs are not allowed
+> :warning: Once a patient is created, their name and ID cannot be changed later.
 
+> :warning: HealthSync currently does not allow patients with identical names.
+> Similarly, identical IDs are not allowed.
+> 
+> Duplicate names will be allowed in the future, so stay tuned for updates.
 
 [Format](#command-format):
 `add n/NAME id/ID_NUMBER p/PHONE_NUMBER e/EMAIL_ADDRESS a/ADDRESS [m/MEDICAL_HISTORY]... [ap/APPT]`
 
 > :bulb: Use `a` as a shortcut for `add`
-
-> :exclamation: Currently, you are not allowed to add a duplicate name into the app! This is an enhancement that
-> we plan to add to the program in the future.
 
 Example commands:
 
@@ -274,13 +273,8 @@ This is how it looks like:
 
 ![pre-populated log](images/originalLog.jpg)
 
-
->:bulb: Use `log` command to save data you want to continue referring to
-
->:wrench: If you want to access the patient list or look up a new patient but would still need to refer to the current patient's details, simply `log` so the profile stays on your screen while you carry out your other tasks!
-
->:warning: The logger tab does not update when logged patients' profiles are edited or deleted. The logger tab is intended to be a snapshot of the patients' details at the time that they were logged. To reflect the edited changes in the logger tab after a change has been made, do `log` after the change.
-
+>:wrench: If you want to access the patient list or look up a new patient but would still need to refer to the current
+> patient's details, simply `log` so the profile stays on your screen while you carry out your other tasks!
 
 * Saving to the logger tab only works for results of the `find` command.
 * The entire result will be saved.
@@ -302,7 +296,12 @@ Expected outputs when the command succeeds:
 Expected output when the command fails:
 * `Cannot log an empty list.`
 
->:bulb: `log` overwrites the data currently in the logger tab, so you do not need to perform clearing prior
+>:bulb: `log` overwrites the data currently in the logger tab, so you do not need to clear the logger tab before using
+> this command
+
+>:warning: The logger tab does not update when logged patients' profiles are edited or deleted.
+> The logger tab is intended to be a snapshot of the patients' details at the time that they were logged.
+> To reflect the edited changes in the logger tab after a change has been made, do `log` after the change.
 
 ### Adding a New `find` Command Result to the current Log: `alog`
 
@@ -359,12 +358,12 @@ Expected output:
 
 Undoes the last undo-able action within HealthSync.
 
->:warning: Upon closing HealthSync, the undo history will be erased
-
 * An undo-able action includes the `add`, `clear`, `delete`, `edit`, `log`, `alog` and `clog` commands.
 * `undo` allows you to undo a specific number of previous commands if you specify a number behind the keyword.
 * `undo` can only undo the previous commands provided
   it does not exceed the size of the [command history stack](#command-history-stack).
+
+>:warning: Upon closing HealthSync, the undo history will be erased
 
 Format:
 * `undo [number]`
