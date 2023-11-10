@@ -16,13 +16,14 @@ can get your patients management tasks done faster than traditional GUI apps.
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. If you don't, install it for your relevant operating
+    system at this link https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html
 
 1. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your MLC.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Medilink.jar` command
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediLink.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -100,7 +101,7 @@ Format: `help`
 
 ### Adding a Doctor: `add-doctor`
 
-Adds a Doctor to the hospital database.
+Adds a Doctor to the clinic database.
 
 Format: `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -114,6 +115,8 @@ A doctor can have any number of tags (including 0). Duplicate tags, however, are
 
 - A doctor **MUST** have a non-empty NAME and a valid IC at the very least.
   Failure to include these details may result in an error.
+- A person can either be a doctor or a patient, but not both. Hence if the doctor's IC is already in the app
+as a patient, it may result in an error.
 - Phone Numbers and Emails have to be in a valid format.
 - PHONE_NUMBER must have exactly 8 digits.
 - EMAIL must contain email domain (eg. `@gmail.com`).
@@ -132,9 +135,9 @@ Examples:
 
 ### Adding a Patient: `add-patient`
 
-Adds a Patient to the hospital database.
+Adds a Patient to the clinic database.
 
-Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] ​`
+Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS c/CONDITION b/BLOODTYPE  [t/TAG] ​`
 
 <div markdown="block" class="alert alert-info">
 
@@ -142,14 +145,16 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 
 - A patient **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result
   in an error.
+- A person can either be a doctor or a patient, but not both. Hence, if the patient's IC is already in the app
+    as a doctor, it may result in an error.
 - Phone Numbers and Emails have to be in a valid format.
-    - PHONE_NUMBER must have at least 3 digits
+    - PHONE_NUMBER must have at least 3 digits.
     - EMAIL must contain email domain (eg. `@gmail.com`).
 - TAG must indicate Priority Level of the Patient and be one of the following:
   - Low
   - Medium
   - High
-- EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number.
+- EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number. This number can be the same the person's contact number.
 - Blood type must be a combination of A/B/AB/O and +/-.
 - A patient can only have up to one tag at any time.
 - Tags for patients represent the priority level of the patient. Only the following tags are allowed: Low, Medium, High.
@@ -160,7 +165,7 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 Examples:
 
 * `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
-* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High`
+* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 ec/12345678 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High`
 
 ### Creating an Appointment : `new-appt`
 
@@ -175,7 +180,7 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
 - TIME must follow the specified format (ie. `yyyy-MM-dd HH:mm`), where `HH:mm` follows the 24hr format.
 - PATIENT must contain the valid IC of a Patient in the Database.
 - DOCTOR must contain the valid IC of a Doctor in the Database.
-- There must not be conflicting Appointments (eg the doctor already has an appointment with another patient at the same time)
+- There must not be conflicting Appointments. (eg the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
 
 </div>
 
@@ -235,6 +240,7 @@ Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `NRIC`. The NRIC **must be a valid IC number**
 * At least one of the optional fields must be provided.
+* If the provided fields are the same as the original, the command will still work.
 * Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition of a
   doctor)
 * Existing values will be updated to the input values.
@@ -346,21 +352,6 @@ Repeats the previous command; an `undo` for an `undo` command.
 Format: `redo`
 
 * Can only do up to 5 redos at any one time.
-
-### Adding / Deleting remarks : `remark`
-
-Adds remark to specified person. Adding empty remark deletes the current remark from specified person.
-
-Format: `remark NRIC`
-
-* Modifies remark of the person with the specified NRIC.
-* The NRIC **must be a valid NRIC format** and must belong to a person in the addressbook.
-* The NRIC is case-sensitive. e.g `tXXXXXXXz` is not the same as `TXXXXXXXZ`
-
-Examples:
-
-* `remark S1234567J r/` deletes remarks belonging to Jonathan who has the NRIC `S1234567J`
-* `remark S1234567J r/Has Health Issues` changes current remarks belonging to Jonathan to `Has Health Issues`
 
 ### Exiting the program : `exit`
 

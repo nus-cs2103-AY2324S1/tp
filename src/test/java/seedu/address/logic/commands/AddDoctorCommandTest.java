@@ -24,16 +24,18 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.DoctorBuilder;
+//import seedu.address.testutil.PatientBuilder;
 
 public class AddDoctorCommandTest {
-
     @Test
     public void constructor_nullDoctor_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
+
 
     @Test
     public void execute_doctorAcceptedByModel_addSuccessful() throws Exception {
@@ -212,6 +214,10 @@ public class AddDoctorCommandTest {
         public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public boolean hasIc(Ic nric) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -229,6 +235,11 @@ public class AddDoctorCommandTest {
         public boolean hasPerson(Person doctor) {
             requireNonNull(doctor);
             return this.doctor.isSamePerson(doctor);
+        }
+        @Override
+        public boolean hasIc(Ic nric) {
+            requireNonNull(nric);
+            return this.doctor.getIc().equals(nric);
         }
     }
 
