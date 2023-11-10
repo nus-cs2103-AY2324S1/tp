@@ -65,12 +65,40 @@ Here are some benefits of adopting lesSON in your studying experience:
 
 # Glossary
 
+### Definitions
+
 `Deck` - A scrollable list of flashcards on the GUI.
 
 `Flashcard`- A card created by the user containing its index, question, answer (not shown) and due date.
 
 `Index` - The relative position of a flashcard within the deck.
 
+`Parameter` - Field that needs to be filled up.
+
+### Parameter Information
+
+The parameters used in lesSON have certain specifications. Here are some information to guide you through 
+how to use them. Invalid inputs are just one of many examples of invalid inputs. Cases that do not appear in the table may also be invalid if it is not of the accepted format.
+
+| Parameter  | Prefix | Accepted Format                                                                                  | Valid Input                                               | Invalid Input |
+|------------|--------|--------------------------------------------------------------------------------------------------|-----------------------------------------------------------|---------------|
+| QUESTION   | q/     | Alphanumerical values and certain special characters.                                            | How many types of instruction formats are there for MIPS? | 什么            | 
+| ANSWER     | a/     | Alphanumerical values and certain special characters.                                            | The opcode for R-format instruction is 000000.            | こんにちは         |
+| TAG        | t/     | Alphanumerical values.                                                                           | CS2100                                                    | !factorials   |
+| HINT       | h/     | Alphanumerical values, whitespace and certain special characters, i.e. !@#$%^&*(),./?";:{}[]-=_+ | 1 + 1                                                     | 💡            |
+| DIFFICULTY | d/     | Only "easy", "medium" or "hard".                                                                 | easy                                                      | difficult     |
+
+### Command Format
+
+| Format                                                                                 | Details                                                                                                                                                                                        | Example                                                                                                                           |
+|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `UPPER_CASE` words                                                                     | Field to be filed in by users. Must not be empty or only containing whitespace (except certain cases, see [edit](#editing-a-specific-flashcard--edit)).                                        | `add q/QUESTION a/ANSWER` means users need to input a question after the `q/` prefix.                                             |
+| Phrases with square brackets, i.e. `[ ]`                                               | Optional parameters that can be omitted by the users.                                                                                                                                          | `add q/QUESTION a/ANSWER [h/HINT]` means users can choose to omit hints when adding a card.                                       |
+| Phrases with ellipsis, i.e. `...`                                                      | Parameters that can be input repeatedly.                                                                                                                                                       | `add q/QUESTION a/ANSWER [t/TAG...]` means user can choose to add multiple tags while creating the card, each with a prefix `t/`. |
+| Certain combinations of characters are not allowed, i.e characters that form a prefix. | Inputs that contain prefixes are not valid inputs.                                                                                                                                             | Having `q/`, `a/`, `t/`, `h/` or `d/` in certain input fields.                                                                    |
+| Inputs are case-sensitive.                                                             | Cards with question that differ only in case will be regarded as different cards.                                                                                                              | `add q/QUESTION a/ANSWER` and `add q/question a/answer` will generate 2 different cards.                                          | 
+| Parameters can be input in any order                                                   | Parameters can be reordered without having any effect on the command.                                                                                                                          | `add q/QUESTION a/ANSWER` and `add a/ANSWER q/QUESTION` are both valid inputs that generates the same card.                       |
+| Commands that do not take in any parameters will disregard extraneous parameters.      | Certain commands such as `help`, `clear`, `exit`, `random` and `list` (in certain cases, see [list](#view-all-flashcards--list) for more details) will disregard any inputs after the command. | `help 123 ` or `clear a/abc` will be regarded as `help` and `clear`.                                                              |
 --------------------------------------------------------------------------------------------------------------------
 
 # User Interface Overview
@@ -118,7 +146,7 @@ Adds a flashcard to the deck for the user.
 
 **Format:**
 ```
-add q/question a/answer [t/TAG] [h/HINT]
+add q/QUESTION a/ANSWER [t/TAG...] [h/HINT]
 ```
 
 **Examples:**
@@ -137,36 +165,23 @@ add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Bac
 ```
 
 #### To Note:
-1. No empty input or input with only whitespace after `q/`, `a/`, `t/` and `h/`.
-2. `t/` and `h/` is optional and not necessary.
-3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
-4. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
-5. Tagging is not supported in v1.2 and earlier.
-6. Hint is not supported before v1.3.
+1. Tagging is not supported in v1.2 and earlier.
+2. Hint is not supported before v1.3.
 
-#### Expected Outputs:
+#### Expected Output:
 
-1. Given a correct input, a success message will be shown containing the user's input.
-   1. ```
-      “New Card added: Question: (question); Answer: (answer)“
-      ```
-2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
-   1. ```
-      Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank
-      ```
-   2. ```
-       Invalid command format!
-       add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
-      ```
-#### Usage
-1. User Input: 
+1. User Input:
    ```
    add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS
    ```
 
 2. Successful Output
-
+   1. Result box displays: `New Card added: Question: opcode for R format instructions; Answer: 000000`
+   2. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.
 ![result of add command](./images/UserGuide/1.4_add.png)
+
+   
+
 
 
 ### Deleting a Flashcard : `delete`
@@ -193,17 +208,6 @@ delete 2
    1. ```
       Deleted Card: Question: <provided question>; Answer: <provided answer>
       ```
-2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
-   1. ```
-      The card index provided is invalid
-      ```
-   2. ```
-      Invalid command format!
-      delete: Deletes the deck identified by the index number used in the displayed card list.
-      Parameters: INDEX (must be a positive integer)
-      Example: delete 1
-      ```
-
 #### Usage:
 1. User Input: 
    ```
@@ -219,7 +223,7 @@ Shows a list of all flashcards in the deck. A keyword may be specified to filter
 
 Format: 
 ```
-list (q/t)/(prefix question starts with/ tag)
+list [q/question] [t/tag]
 ```
 ### Examples:
 _List full deck of flashcards._
@@ -237,7 +241,7 @@ list t/CS2100
 
 #### To note:
 1. No Empty Input after `q/` and `t/`.
-2. `q/` and `t/` is optional.
+2. `q/` and `t/` is optional and be in any order.
 3. Inputs are case-sensitive (cards/tags with the same input but different case will be recognised as different cards/tags)
 4. Listing questions with markdown syntax should include their relevant markdown notation.
 5. User can list multiple tags or a combination with a question keyword. In this case only flashcards that match all tags and keywords will be shown.
@@ -251,15 +255,6 @@ list t/CS2100
       All cards listed
       ```
 2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
-   1. ```
-      Invalid command format!
-      list: Lists Card from Deck. Parameters:
-      and/or q/WORD(s) questions start with (Cannot be left blank. Markdown syntax should be included.)
-      and/or t/Tag (Cannot be left blank. Multiple tags can be included.)
-      ```
-   2. ```
-      Tags names should be alphanumeric and can include spaces
-      ```   
 
 #### Usage
 1. User Input:
@@ -273,36 +268,45 @@ list t/CS2100
 ### Editing a Specific Flashcard : `edit`
 Edits an existing Flashcard in the deck.
 
-Format: `edit INDEX (q/a/t/h)/(question/answer/tag/hint)`
-
-Examples:
+**Format:** 
 ```
-1. edit 1 q/What is the colour of the sun?
-   (changes the question at index 1 to “What is the colour of the sun?”)
+edit INDEX [q/question] [a/answer] [t/tag] [h/hint]
+```
 
-2. edit 1 a/Red
-   (changes the answer at index 1 to “Red”)
-
-3. edit 1 t/Weather t/Geogaphy
-   (changes the tag at index 1 to “Weather” and "Geography")
-
-4. edit 1 h/Apple
-   (changes the hint at index 1 to “Apple")
+**Examples:**
+_Change the question at index 1 to “What is the colour of the sun?”_
+```
+edit 1 q/What is the colour of the sun?
+```
+_Change the answer at index 1 to “Red”_
+```
+edit 1 a/Red
+```
+_Change the tag at index 1 to “Weather” and "Geography"_
+```
+edit 1 t/Weather t/Geogaphy
+```
+_Change the hint at index 1 to “Apple"_
+```
+edit 1 h/Apple
 ```
 
 #### To Note:
-1. No empty input or input with only whitespace after `q/`, `a/`, 
-2. Empty input after `t/` and `h/` will remove existing tags or hint respectively.
-3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
-4. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
-5. Tagging is not supported in v1.2 and earlier.
-6. Hint is not supported before v1.3.
+1. There must be at least one parameter (either `q/`, `a/`, `t/` or `h/`) for the command.
+2. No empty input or input with only whitespace after `q/`, `a/`, 
+3. Empty input after `t/` and `h/` will remove existing tags or hint respectively.
+4. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
+5. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
+6. Tagging is not supported in v1.2 and earlier.
+7. Hint is not supported before v1.3.
 
 #### Expected output:
-```
-“Successfully edited flashcard” message will be returned to the user via the CLI
-“The card index provided is invalid"
-```
+1. Given a correct input, a success message will be shown.
+   ```
+   Successfully edited flashcard
+   ```
+2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
+
 #### Usage:
 1. User Input
    ![usage of edit command](./images/UserGuide/1.3b_edit.png)
