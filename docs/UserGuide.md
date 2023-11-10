@@ -156,7 +156,7 @@ Shows a message explaining how to access the help page.
 
 `help`
 
-Output:
+**Output:**
 
 * A new window will pop up with the link to the help page.
   ![result for help command](images/helpSuccess.png)
@@ -189,17 +189,17 @@ Please input the field parameters in the correct format. You can refer to the <a
 Please note that the <code>NAME</code> parameter is case-sensitive. E.g., If you have an employee named <code>John Doe</code>, you are advised not to add another employee named <code>john doe</code>. This will be fixed by the next update.
 </div>
 
-Example:
+**Example:**
 * `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789
   /jd 12/09/2023 /s 1000.00 /l 10` adds an employee named `Jane Smith` with given information to ManaGease.
 
-Output:
+**Output:**
 * ManaGease should display a confirmation message indicating that the employee has been successfully added to the database.
 * The employee's profile should be updated with the provided information.
   <br>![result for adding employee](images/addSuccess1.png)
   <br>![result for adding employee person card](images/addSuccess2.png)
 
-Possible Error Output:
+**Possible Error Output:**
 * If prefix used is not defined, an error message will appear.
   <br>![failed result for adding employee](images/addFailed.png)
 
@@ -234,16 +234,16 @@ Please do not use negative integers, non-integers and extremely large integers(i
 Please input the field parameters in the correct format. You can refer to the <a href="#parameter-formats">parameter formats</a> for more information.
 </div>
 
-Examples:
+**Examples:**
 *  `edit 1 /p 91234567 /e johndoe@example.com` edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 /n Betsy Crower ` edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
 
-Successful Output:
+**Output:**
 * ManaGease should display the information of the updated employee.
 * The employee's profile should be updated with the provided information.
   <br>![result for editing employee](images/editSuccess.png)
 
-Possible Error Output:
+**Possible Error Output:**
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If the command is incorrect, the app should display the following message.
   <br>![result for incorrect edit command](images/incorrectEditCommand.png)
@@ -277,16 +277,16 @@ Please do not use negative integers, non-integers and extremely large integers(i
 
 * The `NAME` must be in the correct [format](#parameter-formats).
 
-Examples:
+**Examples:**
 * `list` followed by `delete 2` deletes the 2nd employee in the employee directory.
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
-Output:
+**Output:**
 * If the index is valid or there is only one employee in the list, whose name contains the keyword, ManaGease should display a confirmation message indicating that the employee information has been successfully deleted.
 * The employee's list should be updated by removing the employee.
   <br>![result for deleting employee](images/deleteSuccess.png)
 
-Possible Error Output:
+**Possible Error Output:**
 * If there are multiple employees with the same name, all the matching employees would be displayed. Hence, ManaGease will return “Here is the list of the matching employees:”
   <br><img src="images/deleteSameName.png">
   <br><img src="images/deleteSameName1.png">
@@ -313,15 +313,15 @@ Please do not use negative integers, non-integers and extremely large integers(i
 </div>
 
 
-Examples:
+**Examples:**
 * `read 1 /a` reads the address of the first employee in the most recently displayed list.
 
-Output:
+**Output:**
 
 * ManaGease should display the information of the employee specified by the `INDEX` and `PREFIX`, if the input is valid.
   ![result for reading employee](images/readSuccess.png)
 
-Possible Error Output:
+**Possible Error Output:**
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
   
 * If the command is incorrect, the app should display the following message.
@@ -364,16 +364,16 @@ Please do not use negative integers, non-integers and extremely large integers(i
 * The `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
 * For adding in multiple days of leave, the second `DATE` must be after the first `DATE`.
 
-Examples:
+**Examples:**
 * `addleave 3 /on 01/01/2024` adds a single day of leave of `01/01/2024` to the third employee in the most recently displayed list.
 * `addleave 3 /from 01/01/2024 /to 04/01/2024` adds in multiple days of leave to the third employee in the most recently displayed list from `01/01/2024` to `04/01/2024`, inclusive.
 
-Output:
+**Output:**
 * If there are no errors, the app should display the following success message that the leave(s) has been added and display the number of leave left for the current year and the following year.
   <br>![result for successful addleave command](images/addLeaveSuccessMsg.png)
 * Note that the `ANNUAL_LEAVE` field displayed on the employee card remains unchanged, as it represents the promised number of annual leave.
 
-Possible Error Output:
+**Possible Error Output:**
 * If the index is not within the numbers in the list, or the format of the command is incorrect, the app should display the following error message.
   <br>![result for incorrect addleave command](images/addLeaveInvalidIndexAndCommand.png)
 
@@ -414,15 +414,15 @@ Please do not use negative integers, non-integers and extremely large integers(i
 * The `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
 * For deleting multiple days of leave, the second `DATE` must be after the first `DATE`.
 
-Examples:
+**Examples:**
 * `deleteleave 3 /on 01/01/2024` deletes a single day of leave of `01/01/2024` from the third employee in the most recently displayed list.
 * `deleteleave 3 /from 01/01/2024 /to 04/01/2024` deletes multiple days of leave from the third employee in the most recently displayed list from `01/01/2024` to `04/01/2024`, inclusive.
 
-Output:
+**Output:**
 * If there are no errors, the app should display the following success message that the leave(s) has been added and display the number of leave left for the current year and the following year.
   <br>![result for successful deleteleave command](images/deleteLeaveSuccessMsg.png)
 
-Possible Error Output:
+**Possible Error Output:**
 * If the index is not within the numbers in the list, or the format of the command is incorrect, the app should display the following error message.
   <br>![result for incorrect deleteleave command](images/deleteLeaveInvalidIndexAndCommand.png)
 
@@ -453,15 +453,15 @@ This feature allows users to view employees who are on leave on a specific date.
 
 * The `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
 
-Examples:
+**Examples:**
 * `viewleave /on 01/01/2024` view employee who is on leave on 01/01/2024.
 
-Output:
+**Output:**
 * If the command executes successfully, the app should display the employee who is on leave on the specific date.
 
 <br>![result for correct viewleave command](images/view-leave-success.png)
 
-Possible Error Output:
+**Possible Error Output:**
 * If the command is incorrect, the app should display an error message indicating the command format is invalid followed by the command usage message.
   
 <br>![result for incorrect viewleave command](images/view-leave-wrong-format.png)
@@ -538,16 +538,16 @@ Please do not use negative integers, non-integers and extremely large integers(i
 * The `REASON` is **case-insensitive**.
 * The `NAME` must be in the correct [format](#parameter-formats).
 
-Examples:
+**Examples:**
 * `deduct 3 /v 100.00 /r absence` adds a deduction of $100.00 for being absent from work to the third employee in the most recently displayed list.
 * `deduct /n John Doe /v 100.00 /r cpf` adds a deduction of $100.00 for employee CPF deduction to the employee named John Doe.
 
-Output:
+**Output:**
 
 * ManaGease should display the deduction information of the employee specified, including the newly added deduction, if the input is valid.
   <br>![result for adding deduction](images/deductSuccess.png)
 
-Possible Error Output:
+**Possible Error Output:**
 
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If the command is incorrect, the app should display the following message.
@@ -588,16 +588,16 @@ Please do not use negative integers, non-integers and extremely large integers(i
 * The `REASON` is **case-insensitive**.
 * The `NAME` must be in the correct [format](#parameter-formats).
 
-Examples:
+**Examples:**
 * `benefit 3 /v 1000.00 /r bonus` adds a benefit of $1000.00 for annual bonus to the third employee in the most recently displayed list.
 * `benefit /n John Doe /v 200.00 /r transport` adds a benefit of $200.00 for transport allowance to the employee named John Doe.
 
-Output:
+**Output:**
 
 * ManaGease should display the benefit information of the employee specified, including the newly added benefit, if the input is valid.
   <br>![result for adding benefit](images/benefitSuccess.png)
 
-Possible Error Output:
+**Possible Error Output:**
 
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If the command is incorrect, the app should display the following message.
@@ -640,16 +640,16 @@ Editing the basic salary component (i.e., <code>SALARY</code>) of an employee wi
 E.g., If you edit the basic salary of an employee in January 2024, the basic salary will only be updated from the payroll period of February 2024 onwards.
 </div>
 
-Examples:
+**Examples:**
 
 * `payroll 3` calculates the payroll of the third employee in the most recently displayed list.
 * `payroll /n John Doe` calculates the payroll of the employee named John Doe.
 
-Output:
+**Output:**
 * ManaGease should display the payroll of the employee specified by the `INDEX` or `NAME`, if the input is valid.
   <br><img src="images/payrollSuccess.png">
 
-Possible Error Output:
+**Possible Error Output:**
 
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If there are more than one employee with the same name in the command, the app will display `x employees found! Refer to their indexes for payroll calculation` and will list down those employees for the user to view. The user should then use their index numbers to calculate the payroll.
@@ -688,13 +688,13 @@ Editing the basic salary component (i.e., <code>SALARY</code>) of an employee wi
 E.g., If you edit the basic salary of an employee in January 2024, the basic salary will only be updated from the payslip period of February 2024 onwards.
 </div>
 
-Examples:
+**Examples:**
 
 * `payslip 3` generates a payslip based on the latest payroll for the third employee in the most recently displayed list.
 * `payslip /n John Doe` generates a payslip based on the latest payroll for the employee named John Doe.
 * `payslip 3 /t 01/01/2024` generates a payslip for the third employee in the most recently displayed list for the month of January 2024.
 
-Output:
+**Output:**
 
 * ManaGease should display a success message saying that the payslip has been generated successfully, if the input is valid.
   <br>![result for generating payslip](images/payslipSuccess.png)
@@ -705,7 +705,7 @@ Output:
 Please close any payslip PDF file before generating another payslip. Otherwise, the payslip PDF file will not be generated successfully.
 </div>
 
-Possible Error Output:
+**Possible Error Output:**
 
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid`.
 * If the command is incorrect, the app should display the following message.
@@ -737,18 +737,18 @@ Please do not use negative integers, non-integers and extremely large integers(i
 * The `Attendance_Type` can only be: `ABSENT`, `LATE`, or `PRESENT`.
 * It is case-insensitive. e.g. you can either enter ABSENT or absent.
 
-Examples:
+**Examples:**
 
 * `mark /n John /at Absent` marks John as absent.
 * `mark 1 /at Present` marks the first employee in the current list to be present.
 
-Output:
+**Output:**
 
 * If the command is successful, the app should display the following message. The employee’s attendance status should also be updated accordingly.
   <br>![result for marking an employee to be absent](images/markSuccessMessage.png)
   <br>![person card](images/markSuccess1.png)
 
-Possible Error Output:
+**Possible Error Output:**
 
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
 * If the command is incorrect, the app should display `Invalid command format!`
@@ -778,16 +778,16 @@ Please do not use negative integers, non-integers and extremely large integers(i
 
 * The `NAME` must be in the correct [format](#parameter-formats).
 
-Examples:
+**Examples:**
 
 * `attendance /n John` views John’s attendance report for the year up till today.
 * `attendance 1` views the first employee’s attendance report for the year up till today.
 
-Output:
+**Output:**
 * If the command is successful, the app should display the attendance. The address book’s display of the employee’s attendance status should also be updated accordingly.
   <br>![result for attendance report](images/attendanceSuccess.png)
 
-Possible Error Output:
+**Possible Error Output:**
 
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
 * If the command is incorrect, the app should display `Invalid command format!`
@@ -807,7 +807,7 @@ Shows a list of all employees in the workplace.
 
 `list`
 
-Output:
+**Output:**
 
 * ManaGease should display a list of all employees in the workplace.
   <br><img src="images/listSuccess.png" width="570">
@@ -834,7 +834,7 @@ Finds employees whose names contain any of the given keywords.
 * Employees matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Example:
+**Example:**
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   <br><img src="images/findAlexDavidResult1.png" width="570">
   <br><img src="images/findAlexDavidResult2.png" width="570" height="400">
