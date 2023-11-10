@@ -9,13 +9,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class MedicalHistory {
 
-    public static final String MESSAGE_CONSTRAINTS = "Medical History can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Medical History can take any values, and it should not be blank."
+                                                    + "\nIt also should not be more than 50 characters long.";
 
     /*
      * The first character of the Medical History must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * The Medical History should not be more than 50 characters long.
+     * Took into account of the longest medical condition in the world, which is
+     * Pneumonoultramicroscopicsilicovolcanoconiosis, which is 45 characters long.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "[^\\s].{0,49}";
 
     public final String value;
 
