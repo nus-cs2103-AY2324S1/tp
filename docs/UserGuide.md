@@ -318,7 +318,7 @@ Invalid examples:
 * `delete`
 This is not allowed as an `INDEX` must be specified.
 * `delete -3`
-This is not allowed as an `INDEX` must be a positive integer.
+This is not allowed as the `INDEX` must be a positive integer.
 
 <br>
 
@@ -358,7 +358,7 @@ This is not allowed as `STATUS` must be either `o(ffered)` or `r(ejected)` or `u
 This is not allowed as a `STATUS` must be provided.
 
 * `status -3 s/o`
-This is not allowed as an `INDEX` must be a positive integer.
+This is not allowed as the `INDEX` must be a positive integer.
 
 <br>
 
