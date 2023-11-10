@@ -412,7 +412,7 @@ type both the old and new tags instead of just typing the new tag.
 add a new tag `early` to her. Upon entering the command `editMember 1 t/early`, the current implementation will override 
 all the initial tags and only the `early` tag will be displayed.
 
-**Proposed solution:**
+**Proposed Solution:**
 
 We propose to enhance the `editMember`/`editEvent` commands to give the user the flexibility to choose one of the following options
 when editing the tags of the member/event:
@@ -430,10 +430,38 @@ into the member/event name, which should be allowed as member/event names can co
 alphanumeric characters and spaces, and it should not be blank" is shown to the user instead of accepting it as a valid event. This is
 due to the presence of the special character `'` in the event name.
 
-**Proposed solution:**
+**Proposed Solution:**
 
 We propose to allow the `createMember`, `editMember` , `createEvent` and `editEvent` commands to accept special 
 characters in the name field and not to be restricted to just alphanumeric characters.
+
+### Make UI stay on current view upon editMember or editEvent
+**Current Implementation:**
+* **Current Issue:** Currently, calling `editMember` or `editEvent` will result in the listing of all events and members.
+* **Example:** If the user is viewing a filtered list for example if they have just called `viewMember`, if the user
+  then edits a member or event using `editMember` or `editEvent`, all events and members will be displayed instead of their current
+filtered view. This will cause inconvenience for the user as they will have to relocate the edited member/event.
+
+**Proposed Solution:**
+
+We propose to change the behaviour of `editMember` and `editEvent` such that calling them will no longer list all members and events,
+and instead remain on the user's current view.
+
+### Show a more specific error message for negative index in `editMember`, `editEvent`, `viewMember`, `viewEvent`, `deleteMember` and `deleteEvent`
+**Current Implementation:**
+* **Current Issue:** When the user inputs a negative index for the `editMember`, `editEvent`, `viewMember`, `viewEvent`, 
+`deleteMember` or `deleteEvent` commands, the displayed error message is not specific enough and does not make it clear 
+to the user that he/she has wrongly input a negative index.
+* **Example:** The user enters the command `editMember -1 n/Jane Smith` and the error message displayed is 
+"Invalid command format!... Parameters: INDEX (must be a positive integer)...". The current error message fails to 
+highlight to the user the root cause of the error, which is a negative member index.
+
+**Proposed Solution:**
+
+We propose to make `editMember`, `editEvent`, `viewMember`, `viewEvent`, `deleteMember` and `deleteEvent` commands 
+display a more specific error message along the lines of "The provided index is negative and should be a positive integer 
+instead." when the user inputs a negative index. In order to implement this, the relevant `CommandParser` classes have 
+to recognise negative indexes and throw more specific exceptions.
 
 ### Provide more specific index error messages to the user
 **Current Implementation:**
@@ -465,6 +493,19 @@ i.e. member/event name will not have to contain a word that matches exactly with
 the command `findMember a` will now match members with name "Alex", "Alice", etc. In addition, if the user remembers that
 an event name consists of 2 words, they can do `findEvent ‎`, which would list all events which have a blank space in
 their name.
+
+### Make UI stay on current view upon undo/redo
+**Current Implementation:**
+* **Current Issue:** Currently, the `undo` and `redo` commands will always result in all members and events being listed.
+* **Example:** For example, if the user enrols a member to an event and views the member, before deciding to unenrol the member
+from the event by executing the `undo` command, all the members and events would then be listed. This inconveniences the user
+as they will then have to execute the `viewMember` command again to see their changes. 
+
+**Proposed Solution:**
+
+We propose to change the behaviour of `undo` and `redo` such that executing them will no longer list all members and events,
+and instead remain on the user's current view.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

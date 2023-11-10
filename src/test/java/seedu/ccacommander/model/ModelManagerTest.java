@@ -19,15 +19,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.enrolment.exceptions.EnrolmentNotFoundException;
+import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
 import seedu.ccacommander.model.exceptions.RedoStateException;
 import seedu.ccacommander.model.exceptions.UndoStateException;
+import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
 import seedu.ccacommander.testutil.CcaCommanderBuilder;
 import seedu.ccacommander.testutil.EnrolmentBuilder;
@@ -183,6 +186,35 @@ public class ModelManagerTest {
     @Test
     public void getFilteredEnrolmentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEnrolmentList().remove(0));
+    }
+
+    @Test
+    public void getLastFilteredMemberPredicate_memberOperation_returnsMemberPredicate() {
+        String[] memberKeywords = ALICE.getName().name.split("\\s+");
+        Predicate<Member> pred = new MemberNameContainsKeywordsPredicate(Arrays.asList(memberKeywords));
+        modelManager.updateFilteredMemberList(pred);
+        Predicate<Member> lastMemberPredicate = modelManager.getLastFilteredMemberPredicate();
+        assertEquals(lastMemberPredicate, pred);
+    }
+
+    @Test
+    public void getLastFilteredMemberPredicate_noOperation_returnsDefaultList() {
+        Predicate<Member> lastMemberPredicate = modelManager.getLastFilteredMemberPredicate();
+        assertEquals(lastMemberPredicate, PREDICATE_SHOW_ALL_MEMBERS);
+    }
+    @Test
+    public void getLastFilteredEventPredicate_eventOperation_returnsEventPredicate() {
+        String[] eventKeywords = AURORA_BOREALIS.getName().name.split("\\s+");
+        Predicate<Event> pred = new EventNameContainsKeywordsPredicate(Arrays.asList(eventKeywords));
+        modelManager.updateFilteredEventList(pred);
+        Predicate<Event> lastEventPredicate = modelManager.getLastFilteredEventPredicate();
+        assertEquals(lastEventPredicate, pred);
+    }
+
+    @Test
+    public void getLastFilteredEventPredicate_noOperation_returnsDefaultList() {
+        Predicate<Event> lastEventPredicate = modelManager.getLastFilteredEventPredicate();
+        assertEquals(lastEventPredicate, PREDICATE_SHOW_ALL_EVENTS);
     }
 
     @Test

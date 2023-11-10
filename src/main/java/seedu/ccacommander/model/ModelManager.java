@@ -33,6 +33,8 @@ public class ModelManager implements Model {
     private final FilteredList<Event> filteredEvents;
     private final FilteredList<Enrolment> filteredEnrolments;
 
+    private Predicate<Event> lastEventPredicate;
+    private Predicate<Member> lastMemberPredicate;
     /**
      * Initializes a ModelManager with the given CcaCommander and userPrefs.
      */
@@ -46,6 +48,8 @@ public class ModelManager implements Model {
         filteredMembers = new FilteredList<>(this.versionedCcaCommander.getMemberList());
         filteredEvents = new FilteredList<>(this.versionedCcaCommander.getEventList());
         filteredEnrolments = new FilteredList<>(this.versionedCcaCommander.getEnrolmentList());
+        lastMemberPredicate = PREDICATE_SHOW_ALL_MEMBERS;
+        lastEventPredicate = PREDICATE_SHOW_ALL_EVENTS;
     }
 
     public ModelManager() {
@@ -325,15 +329,25 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Predicate<Member> getLastFilteredMemberPredicate() {
+        return this.lastMemberPredicate;
+    }
+    @Override
+    public Predicate<Event> getLastFilteredEventPredicate() {
+        return this.lastEventPredicate;
+    }
+    @Override
     public void updateFilteredMemberList(Predicate<Member> predicate) {
         requireNonNull(predicate);
         filteredMembers.setPredicate(predicate);
+        this.lastMemberPredicate = predicate;
     }
 
     @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+        this.lastEventPredicate = predicate;
     }
 
     @Override
