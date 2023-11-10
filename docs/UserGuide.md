@@ -86,19 +86,27 @@ This should be what you see when you open Tran$act for the first time:
 The menu bar contains three tabs:
 
 1. **File** — Contains actions like exporting data and exiting the program.
-   1. Export
-      1. Staff List — Exports the staff list into a JSON file. Opens a window of your computer's File System. Once you have chosen the folder where you want the JSON file of your staff list to be exported to, press Enter and it will appear there as `addressBook.json`.
-      2. Transaction List — Exports the transaction list into a CSV file. Opens a window of your computer's File system. Once you have chosen the folder where you want the CSV file of your transaction list to be exported to, press Enter and it will appear there as `transactions.csv`.
-   2. Exit — Exits the program.
+    1. Export
+        1. Staff List — Exports the staff list into a JSON file. Opens a window of your computer's File System. Once you
+           have chosen the folder where you want the JSON file of your staff list to be exported to, press Enter and it
+           will appear there as `addressBook.json`.
+        2. Transaction List — Exports the transaction list into a CSV file. Opens a window of your computer's File
+           system. Once you have chosen the folder where you want the CSV file of your transaction list to be exported
+           to, press Enter and it will appear there as `transactions.csv`.
+    2. Exit — Exits the program.
 2. **Tools** — Contains actions for clearing the transaction list and staff list.
-   1. Clear Staff — Clears all existing staff in the staff list. Performs the same function as the `clearstaff` command.
-   2. Clear Transactions — Clears all existing transactions. Performs the same function as the `cleartransaction` command.
+    1. Clear Staff — Clears all existing staff in the staff list. Performs the same function as the `clearstaff`
+       command.
+    2. Clear Transactions — Clears all existing transactions. Performs the same function as the `cleartransaction`
+       command.
 3. **Help** — Contains more information about Tran$act.
-   1. View User Guide — Opens your browser to show the user guide. Performs the same function as the `help` command. Can also be accessed by pressing F1 on the keyboard.
+    1. View User Guide — Opens your browser to show the user guide. Performs the same function as the `help` command.
+       Can also be accessed by pressing F1 on the keyboard.
 
 Under the menu bar contains three tabs:
 
-1. **Overview** — This tab shows you a monthly summary of your finances based on the transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
+1. **Overview** — This tab shows you a monthly summary of your finances based on the transactions you have entered.
+   Although it's empty right now, when you have added a few transactions it will begin to show graphs.
 2. **Transactions** — This tab shows you the transactions you have entered in a row-by-row format
    ![Ui](images/Ui-Transactions.png)
 3. **Staff List** — This tab shows you the persons or parties you have entered in a list format.
@@ -108,8 +116,10 @@ Under the menu bar contains three tabs:
 >
 > The indexing serves as a way to link transactions to the respective staff
 
-The input field below this with the grey text `Enter command here...` is the command box, where you can enter your commands.
-Below the command box is the output window. This is where messages Tran$act has will be provided to you, from success messages to command input errors. You can clear it with `clear`.
+The input field below this with the grey text `Enter command here...` is the command box, where you can enter your
+commands.
+Below the command box is the output window. This is where messages Tran$act has will be provided to you, from success
+messages to command input errors. You can clear it with `clear`.
 
 ## Features
 
@@ -163,7 +173,8 @@ longer associated with it, reducing bloat.
 
 **10. Dashboard Display**
 
-Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial information, including total monthly revenue and expenses, as well as a net profit graph for available months.
+Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial
+information, including total monthly revenue and expenses, as well as a net profit graph for available months.
 
 **11. Exporting Transactions in Comma-Separated Values (CSV) Format**
 
@@ -212,6 +223,9 @@ Format: `add ty/<TYPE> d/<DESCRIPTION> a/<AMOUNT> on/<DATE> [s/<STAFF ID>]`
 
 Success
 output: `New transaction added: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; [StaffId: <STAFF ID>]`
+
+> If you leave out the StaffId or enter a negative StaffId, then the success output will show "None" and the transaction
+> will not be linked to any staff member in the staff list.
 
 Examples:
 
@@ -421,7 +435,9 @@ Format: `exit`
 
 ### Saving the data
 
-Tran$act's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Tran$act's data is saved in the hard disk automatically after any command that changes the data. There is no need to
+save manually.
+
 ## FAQ
 
 1. How do I check my Java Version?

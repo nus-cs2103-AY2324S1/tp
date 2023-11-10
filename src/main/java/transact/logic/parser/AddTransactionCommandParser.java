@@ -45,12 +45,13 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-
-        Integer personId = -1;
+        int personId = -1;
         if (argMultimap.getValue(PREFIX_STAFF).isPresent()) {
             personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_STAFF).get());
         }
-
+        if (personId < 0) {
+            personId = -1;
+        }
         return new AddTransactionCommand(transactionType, description, amount, date, personId);
     }
 
