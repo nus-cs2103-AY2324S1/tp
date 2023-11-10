@@ -76,14 +76,21 @@ efficient at typing will help you make the most of the app and enhance your user
 
 ## How to use this guide?
 
-If you are a beginner, consider checking out our [Quick Start]() tutorial for new users. <br>
-If you are already familiar with lesSON, do explore all of our [features](). <br> 
-Here is an overview of all the [Commands]() available. <br>
+### Directory
+If you are a first time user, do visit our seamless onboarding process explained in the
+[quick start](#quick-start) section. <br>
+<br>
+For beginners, we recommend familiarising yourself with the basic commands shown in our [tutorial](#tutorial)
+for new users. <br>
+<br>
+If you are already familiar with lesSON, do try out all of our other [features](#feature-list). <br> 
+For a summary of available commands, visit [here]().
 
-Throughout the user guide, you will see these colored blocks of code that contain important information.
+### Legend
+Throughout this user guide, you will encounter some of these colored blocks highlighting some important information.
 
 <div markdown="block" class="alert alert-success">
-    💡 Green blocks contain tips to enhance your experience using Flagship.
+    💡 Green blocks contain tips to enhance your experience using lesSON.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -91,10 +98,12 @@ Throughout the user guide, you will see these colored blocks of code that contai
 </div>
 
 <div markdown="span" class="alert alert-danger">
-    ⚠️ Red blocks contain warnings that you must heed so that Flagship works as intended.
+    ⚠️ Red blocks contain warnings that you must heed so that lesSON works as intended.
 </div>
 
 <span style="color: red;">This is red text</span>
+
+[Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
