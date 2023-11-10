@@ -95,7 +95,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 * `TAGNAME` should be alphanumeric, with no spaces.
 
-* `TAGNAME` is case sensitive. For example, a contact can have tags `Frontend` and `frontend` at the same time.
+* `TAGNAME` is case-sensitive. For example, a [contact](#contact) can have [tags](#tag) `HR REPRESENTITIVE` and `HR representitive` at the same time.
 
 * `START_TIME` and `END_TIME` can be in one of the following formats:
   * Both date and time: `yyyy-MM-dd HH:mm[:ss]`
@@ -259,7 +259,7 @@ delete tag: Delete one or more tags from a contact.
 Usage:  delete tag -id CONTACT_ID -t TAGNAME...
 ```
 
-### Adding [notes](#note) to a contact: `add note`
+### Adding a [note](#note) to a [contact](#contact): `add note`
 
 Adds a note to a contact from the contact list.
 
@@ -429,9 +429,9 @@ _More features coming soon ..._
 ## FAQ
 
 **Q**: Why can't I run the app?<br>
-**A**: Make sure you have Java `11` or above installed before running the app.
+**A**: Make sure you have [Java 11](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html) installed before running the app, and make sure you have followed the way mentioned in [Quick Start](#quick-start).
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another device?<br>
 **A**: Please follow these steps:
   - Download the jar file for the app on the new device.
   - Copy the data folder from the old device to the new device, and put it in the [home directory](#home-directory) on the new device.
