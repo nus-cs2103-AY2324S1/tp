@@ -130,17 +130,18 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating persons by tag: `filter`
+### Locating persons by field: `filter`
 
 Finds persons whose fields contain any of the given keywords.
 
 Format: `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Filter is case-insensitive. e.g. `cs2103` will match `CS2103`
+* Filter is non case-insensitive. e.g. `cs2103` will match `CS2103`
 * The order of the fields does not matter.
 * All provided fields are searched
 * All tags containing the words will be matched e.g. `Ba` will return `Badminton` or `Basketball` or `Football` or `Backgammon`.
 * Only persons matching all specified fields will be returned (i.e. `and` search).
+* Indicating a field but leaving it blank e.g. `filter n/` will show all contacts.
 
 Examples:
 * `filter t/CS2103` - Displays all contacts with the CS2103 tag or tags containing ``CS2103`` e.g. CS2103T
@@ -333,7 +334,7 @@ Example:
 
 Clears all events within a specified time range.
 
-Format: `clearEvents ts/START_DATE_TIME te/END_DATE_TIME c/CONFIRMATION`
+Format: `clearEvents ts/START_DATE_TIME te/END_DATE_TIME [c/CONFIRMATION]`
 
 * Deletes all events from the specified start date and time to the specified end date and time.
 * An event is considered to be within the time range if overlaps with the time range for any period of time.
@@ -382,7 +383,7 @@ Format: `viewContactEvents INDEX`
 
 ## Task Management System
 
-Tasks consist of a `DESCRIPTION` and a `DEADLINE`. 
+Tasks consist of a `DESCRIPTION` and a `DEADLINE`.
 
 ### Viewing tasks: `switchList`
 
@@ -401,11 +402,16 @@ Format: `addTask d/DESCRIPTION [te/DEADLINE]`
 
 * `DESCRIPTION` cannot be empty.
 * `DEADLINE` must be in the same format given above for date and time.
-* `DEADLINE` can also be omitted to create a task with no specified deadline
+* `DEADLINE` can also be omitted to create a task with no specified deadline.
+* When adding a task with a deadline with a date that is invalid but with a day of 31 or less, instead adds a task with 
+a deadline on the last day of the month.
+* While there is no character limit for Task descriptions, descriptions will be truncated if they are too long to 
+display.
 
 Examples: 
 * `addTask d/Go for a run te/2023-02-14 19:00`
 * `addTask d/Hydrate regularly!`
+* `addTask d/Fix CS2103 Project bug te/2023-02-31 12:00` creates the task with deadline `2023-02-28 12:00` instead.
 
 ### Deleting tasks: `deleteTask`
 

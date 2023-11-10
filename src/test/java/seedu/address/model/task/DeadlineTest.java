@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.event.exceptions.InvalidDeadlineException;
+import seedu.address.model.task.exceptions.InvalidDeadlineException;
 
 class DeadlineTest {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
