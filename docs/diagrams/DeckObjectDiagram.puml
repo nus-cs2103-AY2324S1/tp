@@ -21,5 +21,4 @@ object "<u>:Card" as I3 {
 IL -down-> I3
 IL -down-> I1
 IL -down-> I2
-
 @enduml

@@ -330,7 +330,6 @@ hint 10
 #### Acceptable values for each parameters:
 1. Index must be positive integer
 2. Index cannot exceed size of the deck
-
 ### Solving Flashcards: `solve`
 Solves the question at the given index
 
