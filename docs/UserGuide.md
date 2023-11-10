@@ -30,7 +30,10 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 5. Clicking on a booking will allow you to see its details.
    ![ClickBooking.png](images%2FClickBooking.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Here is a quick summary of the Graphical User Interface (GUI), or what you can see on your screen right now.
+   ![GUILayout.png](images/GUILayout.png)
+
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all bookings.
@@ -45,7 +48,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
     * `exit` : Exits CheckMate and closes the application.
 
-6. Refer to the [Commands](#commands) below for details of each command.
+8. Refer to the [Commands](#commands) below for details of each command.
 
 </div>
 </details>
