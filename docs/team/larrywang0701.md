@@ -47,6 +47,7 @@ to be added soon
        - https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/32
        - https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/69
        - https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/163
+       - https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/168
 
   - #### Contributions beyond the project team
 

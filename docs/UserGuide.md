@@ -23,12 +23,13 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
   * [Adding notes to a contact: `add note`](#adding-notes-to-a-contact-add-note)
   * [Deleting a note: `delete note`](#deleting-a-note-delete-note)
   * [Listing events: `list events`](#listing-events-list-events)
-  * [Adding an event: `add event`](#adding-events-add-event)
+  * [Adding an event: `add event`](#adding-an-event-add-event)
   * [Deleting an event: `delete event`](#deleting-an-event-delete-event)
   * [Clearing data: `clear`](#clearing-data-clear)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Saving the data](#saving-the-data)
   * [Other Features: _coming soon..._](#other-features)
+* [Glossary](#glossary)
 * [FAQ](#faq)
 * [Known Issues](#known-issues)
 * [Command Summary](#command-summary)
@@ -37,11 +38,11 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have [Java 11](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html) installed in your Computer.
 
 2. Download the latest `keepintouch.jar` from [here](https://github.com/AY2324S1-CS2103T-W16-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your KeepInTouch app.
+3. Copy the file to the folder you want to use as the [home directory](#home-directory) for your KeepInTouch app.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar keepintouch.jar` command to run the application. (   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.)
 ![GUI example](images/Ui.png)
@@ -117,7 +118,7 @@ Format: `help [COMMAND_WORD]`
 Examples:
 * `help add`
 
-### Listing contacts: `list contact`
+### Listing [contacts](#contact): `list contact`
 
 Shows a list of all contacts in the contact list if tags not specified. 
 Otherwise, shows a list of contacts which contains any one of the specified tags. 
@@ -131,7 +132,7 @@ Examples:
 * `list contact` to show all contacts.
 * `list contact -t Recruiter` to show all contacts which have a recruiter tag.
 
-### Adding a contact: `add contact`
+### Adding a [contact](#contact): `add contact`
 
 Adds a contact to the contact list.
 
@@ -140,7 +141,7 @@ Format: `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL [-t TAGNAME...]
 Examples:
 * `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com`
 
-### Deleting a contact: `delete contact`
+### Deleting a [contact](#contact): `delete contact`
 
 Deletes the specified contact from the contact list.
 
@@ -149,7 +150,7 @@ Format: `delete contact CONTACT_ID`
 Examples:
 * `delete contact 1` deletes the first contact in the contact list.
 
-### Finding a contact: `find`
+### Finding a [contact](#contact): `find`
 
 Finds a contact by their name by matching keywords with the contact's name. Only word-word matches will be detected, and partial words match will not be detected. For example, `Ale` will not match `Alex` but will match `Alex Wong`. Keywords are **case insensitive**.
 
@@ -158,7 +159,7 @@ Format: `find KEYWORD [OTHER_KEYWORDS...]`
 Examples:
 * `find Alex`
 
-### Adding tags: `add tag`
+### Adding a [tag](#tag): `add tag`
 
 Adds one or more tags to a contact. Contact list will go back to showing all contacts upon successful addition.
 
@@ -172,7 +173,7 @@ Examples:
 * `add tag -id 1 -t Frontend -t Java` adds two tags with tag name "Frontend" and "Java" to the first contact in the contact list.
 
 
-### Deleting tags: `delete tag`
+### Deleting [tags](#tag): `delete tag`
 
 Deletes one or more tags to a contact. Contact list will go back to showing all contacts upon successful deletion.
 
@@ -184,7 +185,7 @@ Examples:
 * `delete tag -id 1 -t Frontend` deletes a tag with tag name "Frontend" from the first contact in the contact list.
 * `add tag -id 1 -t Frontend -t Java` deletes two tags with tag name "Frontend" and "Java" from the first contact in the contact list.
 
-### Adding notes to a contact: `add note`
+### Adding [notes](#note) to a contact: `add note`
 
 Adds a note to a contact from the contact list.
 
@@ -194,7 +195,7 @@ Examples:
 * `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`
 * `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`
 
-### Deleting a note: `delete note`
+### Deleting a [note](#note): `delete note`
 
 Deletes the specified note from the contact list.
 
@@ -205,7 +206,7 @@ Format: `delete note -id CONTACT_ID -nid NOTE_ID`
 Examples:
 * `delete note -id 1 -nid 1` deletes the first note from the first contact in the contact list.
 
-### Listing events: `list events`
+### Listing [events](#event): `list events`
 
 Shows a list of all events or events within a specified time interval.
 
@@ -224,7 +225,7 @@ Examples:
 * `list events -st 2023-11-01 -et 2023-11-02`
 * `list events -descending -st 2023-11-01 -et 2023-11-02`
 
-### Adding events: `add event`
+### Adding an [event](#event): `add event`
 
 Adds an event to a contact. The event should not have clashes in timing with other existing events in the contact list. Events with start time earlier than the current time are allowed for keeping track of past events.
 
@@ -237,7 +238,7 @@ Examples:
 * `add event -id 1 -en Meeting with professor -st 12:00 -et 13:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
 * `add event -id 2 -en Chat with TikTok recruiter -st 17:00`
 
-### Deleting an event: `delete event`
+### Deleting an [event](#event): `delete event`
 
 Deletes the specified event from a contact.
 
@@ -268,7 +269,22 @@ KeepInTouch data are saved in the hard disk automatically after any command that
 
 ### Other Features
 
-_More features coming coming soon ..._
+_More features coming soon ..._
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+ - ##### _home directory_:
+   The directory where the jar file for the application and the `data` folder presents.
+ - ##### _contact_:
+   The unit for storing the contact information for a person/entity in the address book. You can add [tags](#tag), [notes](#note) and [events](#event) to a _contact_.
+ - ##### _tag_:
+   Short tags to be added to the contact for you to reference. It can be the type of the contact, for example, `company`, `HR`, etc.
+ - ##### _note_
+   A piece of additional information for a contact that you want to store and reference in the future. It can be any additional information you'd like to keep with the contact.
+ - ##### _event_
+   A representative of an event that you will happen with a person/entity in a contact in the future. It can be job interviews, career fairs or HR meeting appointments.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -278,10 +294,16 @@ _More features coming coming soon ..._
 **A**: Make sure you have Java `11` or above installed before running the app.
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KeepInTouch home folder.
+**A**: Please follow these steps:
+  - Download the jar file for the app on the new device.
+  - Copy the data folder from the old device to the new device, and put it in the [home directory](#home-directory) on the new device.
+    - The data folder from the old device is located at [home directory](#home-directory)/data`. You need to copy the folder along with all files inside to the new device to complete data transfer.
+  - Run the application on the new device. Now you should see the data from old device on your new device.
+  - Similarly, if you want to move the jar file to another directory (change the [home directory](#home-directory)) within the same device, you also need to make sure that the `data` folder is always in the new [home directory](#home-directory) together with the jar file.
 
 **Q**: Can I modify the data file outside the application itself?<br>
 **A**: No, you **should _NOT_ directly modify the data file** outside the application at anytime, otherwise it may lead to unpredictable consequences and errors to the application.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
