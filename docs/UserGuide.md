@@ -511,7 +511,7 @@ There are 2 ways for the user to compare calendars with their address book conta
 
 The resulting pop-up calendar will pop up with the time periods where all parties
 are not available greyed out. The pop-up has to be closed in order for the user to access
-the main application again. A shortcut for closing the pop-up is by hitting the `esc` key.
+the main application again.
 
 >**Note:** Arguments for the commands are <mark>optional</mark>, hence `compareCalendars` and
 `compareGroupCalendars` are valid commands, but the resulting pop-up will just display the
