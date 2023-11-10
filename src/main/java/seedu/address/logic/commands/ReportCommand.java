@@ -23,7 +23,7 @@ public class ReportCommand extends Command {
     public static final String COMMAND_WORD = "report";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reports the performance metrics (overtime hours, "
-            + "overtime pay, number of leaves used, remarks (if any)) of an employee in the address book.\n"
+            + "overtime pay, number of leaves used, remarks (if any)) of an employee in the employee book.\n"
             + "Parameters: EMPLOYEE_ID\n"
             + "Example: " + COMMAND_WORD + " EID1234-5678";
 
