@@ -15,7 +15,7 @@ public class Height implements Comparable<Height> {
      * The first character of the Height must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^(?:[1-9]|[1-9][0-9]|[1-9][0-9][0-9]|1[0-9][0-9]|200|250)$";
+    public static final String VALIDATION_REGEX = "^(1\\d{2}|2[0-4]\\d|250)$";
 
     public final String value;
 

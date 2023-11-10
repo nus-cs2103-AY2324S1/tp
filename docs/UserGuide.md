@@ -15,7 +15,6 @@ online dating journey.
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## **Quick Start**
 
 ### **Download and Installation**
@@ -120,7 +119,7 @@ Here's a quick guide to help you understand what they mean.
 
 --------------------------------------------------------------------------------------------------------------------
 ### **Managing Dates**
-
+ 
 ### **Adding a new date: `add`**
 
 Adds a date to the LoveBook.
@@ -359,9 +358,22 @@ Example: sort name/increasing
 
 ### **Managing Preferences and Getting Matches**
 
+<box type="info" seamless>
+
+* By default, Date Preference is set to:
+  * AGE: 21
+  * HEIGHT: 170
+  * INCOME: 10000
+  * HOROSCOPE: ARIES
+
+* If you wish to change your Date Preference, please use the [`setP`](#setting-your-date-preferences-setp) command.
+* The [`bestMatch`](#getting-a-recommended-date-bestmatch) command will use the Date Preference set by the user.
+
+</box>
+
 ### **Showing your date preferences: `showP`**
 
-Shows the User's Date Preference. This can be edited using the [`setP`](#star-a-date-star) command.
+Shows the User's Date Preference. This can be edited using the [`setP`](#setting-your-date-preferences-setp) command.
 
 Format: `showP`
 
@@ -374,7 +386,7 @@ Sets the user's preferences for the matching algorithm.
 <box type="info" seamless>
 
 * Note: At least one field to edit must be provided.
-* The user's preferences will be used in the [`bestMatch`](#get-a-recommended-date-bestmatch) command.
+* The user's preferences will be used in the [`bestMatch`](#getting-a-recommended-date-bestmatch) command.
 * Gender is not taken into account here
 
 * The relevant fields are
@@ -507,11 +519,9 @@ to choose their own avatars.
 | Term                       | Definition                                                                                                        |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------|
 | Date                       | A person that the user is interested in and is currently seeing.                                                  |
- | Metric | A certain characteristic of a date. (e.g. Gender, Height)                                                         |
- | Command | Text that the user types into the application to perform an action.                                               |
- | Parameter | A value that the user provides to the application when executing a command. (e.g. in `gender/M` M is a parameter) |
- | GUI | Graphical User Interface                                                                                          |
- | CLI | Command Line Interface                                                                                            |
- 
- 
-* Mainstream OS: Windows, Linux, Unix, OS-X.
+| Metric | A certain characteristic of a date. (e.g. Gender, Height)                                                         |
+| Command | Text that the user types into the application to perform an action.                                               |
+| Parameter | A value that the user provides to the application when executing a command. (e.g. in `gender/M` M is a parameter) |
+| GUI | Graphical User Interface                                                                                          |
+| CLI | Command Line Interface                                                                                            |
+| Mainstream OS |  Windows, Linux, Unix, OS-X |
