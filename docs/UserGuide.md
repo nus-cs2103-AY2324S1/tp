@@ -317,14 +317,16 @@ If you are unsure on how to obtain the `NEW_PHOTO_PATH` of your photo:
 <box type="info" icon=":fa-solid-magnifying-glass:">
 
 Below are some examples on how to use the command:
-* `updatephoto 1 path/C:/photos/new_johndoe.jpg`: Updates the photo to the contact at index 1 with a new image from the specified path.
-* `updatephoto 2 path/D:/images/new_betsycrowe.png`: Updates the photo to the contact at index 2 with a new image from the specified path.
+* `updatephoto 1 path/C:/photos/new_johndoe.jpg`: Updates the photo of the contact at index 1 with the specified image (Windows).
+* `updatephoto 2 path//Users/john/Pictures/profile.png`: Updates the photo of the contact at index 2 with the specified image (macOS).
 
 </box>  
 
 <box type="warning">
 
 * You should provide a positive integer that is smaller than or equal to the number of contacts currently displayed in CampusConnect for `PERSON_INDEX`. 
+* Filetype of the photo must be either jpg or png
+* Photos must not be larger than 5MB
 
 </box>
 

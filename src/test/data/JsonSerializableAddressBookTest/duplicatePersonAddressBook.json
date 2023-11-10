@@ -5,12 +5,14 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ],
-    "balance": 0
+    "balance": 0,
+    "avatar": ""
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
-    "balance": 55
+    "balance": 55,
+    "avatar": ""
   } ]
 }

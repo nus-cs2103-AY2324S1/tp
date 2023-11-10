@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
 
 public class AvatarTest {
-
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "AvatarTest");
     private static final String DEFAULT_PATH = "/images/default_photo.png";
     private final String safePath = Paths.get("").toAbsolutePath()
             + "/src/main/resources/images/test_photo.png";
@@ -25,7 +26,7 @@ public class AvatarTest {
     @Test
     public void constructor_default() {
         Avatar avatar = new Avatar();
-        assertEquals(avatar.getPath(), null);
+        assertEquals(avatar.getPath(), "");
     }
 
     @Test
@@ -41,6 +42,11 @@ public class AvatarTest {
         } catch (IOException e) {
             fail();
         }
+    }
+
+    @Test
+    public void constructor_largeImage_exceptionThrown() {
+        assertThrows(IOException.class, () -> new Avatar(TEST_DATA_FOLDER.resolve("toolarge.png").toString()));
     }
 
     @Test

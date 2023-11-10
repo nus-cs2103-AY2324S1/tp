@@ -70,7 +70,7 @@ public class UpdatePhotoCommand extends Command {
 
         Avatar avatar;
         try {
-            avatar = new Avatar(path);
+            avatar = new Avatar(path, model.getDataDirectoryPath());
         } catch (FileNotFoundException e) {
             throw new CommandException("Invalid file path provided");
         } catch (IOException e) {

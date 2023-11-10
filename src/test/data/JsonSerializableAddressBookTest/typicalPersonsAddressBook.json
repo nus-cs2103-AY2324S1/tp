@@ -7,7 +7,8 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "linkedin" : "alice",
     "tags" : [ "friends" ],
-    "balance" : 0
+    "balance" : 0,
+    "avatar": ""
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -18,41 +19,47 @@
     "secondaryEmail" : "ben10@gmail.com",
     "telegram" : "@benson",
     "tags" : [ "owesMoney", "friends" ],
-    "balance" : 2700
+    "balance" : 2700,
+    "avatar": ""
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
-    "balance" : 55012
+    "balance" : 55012,
+    "avatar": ""
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ],
-    "balance" : 0
+    "balance" : 0,
+    "avatar": ""
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
-    "balance" : 124121
+    "balance" : 124121,
+    "avatar": ""
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
-    "balance" : -45531
+    "balance" : -45531,
+    "avatar": ""
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ],
-    "balance" : -2
+    "balance" : -2,
+    "avatar": ""
   } ]
 }

@@ -22,6 +22,7 @@ public class UpdatePhotoCommandParser implements Parser<UpdatePhotoCommand> {
      */
     public UpdatePhotoCommand parse(String args) throws ParseException {
         ArgumentMultimap commandElements = ArgumentTokenizer.tokenize(args, PREFIX_AVATAR);
+        commandElements.verifyNoDuplicatePrefixesFor(PREFIX_AVATAR);
         String index = commandElements.getPreamble();
         Optional<String> photoPath = commandElements.getValue(PREFIX_AVATAR);
 

@@ -70,6 +70,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getDataDirectoryPath() {
+        return getAddressBookFilePath().getParent();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
