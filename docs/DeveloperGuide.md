@@ -406,7 +406,7 @@ The AttendanceStorage stores all the Attendance objects of one Person, only stor
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
 
-Step 1. The user executes `mark 1 /at LATE` command to mark the 5th person in the address book as present.
+Step 1. The user executes `mark 1 /at LATE` command to mark the 1st Person in the list as late.
 
 Step 2. The `mark` command calls `MarkCommand#markByIndex()` of the given employee, which calls the `Attendance#markAbsent()` of the given Person.
 
@@ -414,7 +414,7 @@ This working status is then updated in the GUI as shown below:
 
 ![GUI before mark command](images/GUIBeforeMarkCommand.png) ![GUI after mark command](images/GUIAfterMarkCommand.png)
 
-Class diagram is as shown below:
+Sequence diagram is as shown below:
 
 ![Mark Sequence Diagram](images/MarkSequenceDiagram.png)
 
@@ -422,7 +422,7 @@ Class diagram is as shown below:
 
 The attendance reporting mechanism is dependent on the AttendanceStorage class. The AttendanceStorage is a collection of the Attendances of a Person. It implements the following operations:
 * `AttendanceStorage#getCount` -- counts the number of days the attendance of type `attendanceType` appears in the AttendanceStorage
-* `AttendanceStorage#getAttendanceReport` -- provides an `int` of the number of days of each attendance type in the following order: [leave, absent, late]
+* `AttendanceStorage#getAttendanceReport` -- provides an `int[]` of the number of days of each attendance type in the following order: [leave, absent, late]
 
 The AttendanceStorage stores all the Attendance objects of one Person, only storing Attendances that are late or absent. Dates that are not in the storage are assumed to be marked as present for that given Person.
 
@@ -529,9 +529,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   * 1b1. ManaGease shows an error message.
   
-  * 1a2. User requests to add a new employee.
+  * 1b2. User requests to add a new employee.
   
-  * Steps 1a1 and 1a2 repeat until the user inputs a correct command. 
+  * Steps 1b1 and 1b2 repeat until the user inputs a correct command. 
   
     Use case continues from Step 2.
   
