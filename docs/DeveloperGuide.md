@@ -150,27 +150,33 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Tag feature
 
+#### About this feature
+
+This feature allows users to tag their student with labels to allow easier recognition of their students by their traits.
+
 #### Implementation
 
-Tagging a student with `Tag` is facilitated by 3 commands:
+Tagging a student with `Tag` is facilitated by `TagCommand`, `AddTagCommand`, `DeleteTagCommand` and `TagCommandParser`.
 * `TagCommand` will replace all existing tags of a student with input tags.
 * `AddTagCommand` will add input tags to existing tags of the student.
 * `DeleteTagCommand` will delete input tags from the existing tags of the student.
+* `TagCommandParser` will be parse the user input and create the correct command object to execute.
 
-These commands will be executed based on the users input. The `TagCommandParser` will be responsible for parsing the user input and create the correct command object to execute.
-Only 1 of the 3 commands will be executed per user input.
+<box type="info" seamless>
 
-Here is an example step by step of how the 3 different commands might be executed.
+**Note:** Only 1 of the 3 commands will be executed per user input.
 
-Step 1. User inputs
+</box>
 
-        tag s/A0245234N t/teamleader
+Here is a step by step example of how the tag command might be executed.
+
+Step 1. User inputs the `tag` command.
 
 Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object which in turn creates a `TagCommandParser` object to parse the command.
 
 Step 3. Next `TagCommandParser` will check for any action identifiers,
 `/add` or `/delete`, which will create a `AddTagCommand` object or `DeleteTagCommand` object respectively,
-else a `TagCommand` object.
+else a `TagCommand` object. `ParseException` will be thrown for any invalid inputs.
 
 Step 4a. `AddTagCommand` will union the `HashSet<Tag>` with the student's existing `Tag`.
 
@@ -178,13 +184,25 @@ Step 4b. `DeleteTagCommand` will remove all `Tag` that are in the intersection o
 
 Step 4c. `TagCommand` will replace all existing `Tag` of the student with `HashSet<Tag>`.
 
-Step 5. All 3 commands will create a new `Student` object with the new `Tag` and copy all other details.
+Step 5. `TagCommand` creates a new `Student` object with the new `Tag` and copy all other details.
 
-Step 6. All 3 commands will update the `Model` with the new Student by calling `Model#setStudent()`.
+Step 6. `TagCommand` updates the `Model` with the new Student by calling `Model#setStudent()`.
 
-The following activity diagram summarizes what happens when a user executes a tag command:
+Step 7. Finally, the `TagCommand` creates a CommandResult with a success message and returns it to the LogicManager to complete the command execution. The GUI would also be updated with the change of status.
+
+<box type="info" seamless>
+
+**Note:** For Step 5, 6 and 7, `AddTagCommand` and `DeleteTagCommand` behaves the same way as `TagCommand`.
+
+</box>
+
+The following sequence diagram summarizes what happens when a user executes a `tag` command:
 
 <puml src="diagrams/TagCommand.puml" alt="TagCommand" />
+
+The following activity diagram summarises what happens when a user executes a `tag` command:
+
+<puml src="diagrams/TagCommandActivityDiagram.puml" alt="TagCommandActivityDiagram" />
 
 #### Design considerations:
 **Aspect: TagCommand**
@@ -420,6 +438,12 @@ The feature should be implemented upon the current design of Student and ClassDe
 
 </box>
 
+### View feature
+
+#### About this feature
+
+The view feature allows users to view the class information of their student.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -532,25 +556,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+  Use case resumes at step 1.
 
 * 3a. The given student number is invalid.
 
     * 3a1. Class Manager shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3b. The given tag is invalid.
 
     * 3b1. Class Manager shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3c. The given student number does not belong to any student in the list.
 
     * 3c1. Class Manager shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 ---
 
