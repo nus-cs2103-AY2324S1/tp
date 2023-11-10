@@ -79,7 +79,7 @@ The **GUI** is split up into 4 main sections.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Extraneous parameters for commands that **do** take in parameters will be considered as invalid. <br>
-  e.g. if the command specifies `delete 123 s/A0249112A` or `delete s/A0249112A c/t11`, it will be considered as invalid. <br>
+  e.g. if the command specifies `delete 123 s/A0249112A` or `delete s/A0249112A c/T11`, it will be considered as invalid. <br>
   Please **<u>refrain</u>** from using prefixes as input under another prefix.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -88,13 +88,12 @@ The **GUI** is split up into 4 main sections.
 ## Class Number
 
 * Class Number refers to the tutorial class number of a particular course.
-* Class Number is not case-sensitive, and it must begin with 1 to 3 consecutive alphabetical characters, followed by 1 to 5 consecutive digits. Optionally, it can end with 1 alphabetical character. Class Number must not be blank.
+* Class Number is case-sensitive, and it must begin with a capital "T", followed by any number of characters. Class Number must not be blank as well.
 * Class Number is stored verbatim based on your input, with case being preserved. 
 * Here are some valid examples of Class Number:
-    - `G11`
-    - `T11A`
-    - `SG10`
-    - `abc12345d`
+    - `T11`
+    - `TG11`
+    - `TG10B`
 
 ## Student Number
 
@@ -401,15 +400,15 @@ Format: `lookup [c/CLASS_NUMBER] [p/PHONE] [n/NAME] [e/EMAIL] [s/STUDENT_NUMBER]
 * The order of the fields does **not** matter. e.g. `lookup n/li c/T11` will return the same result as `lookup c/T11 n/li`
 * Field with nothing will be ignored. e.g. `lookup n/ c/T11` will return the same result as `lookup c/T11`.
 * This command can take multiple words per field. e.g. `lookup c/T11 T12` will return all students in `T11` or `T12`.
-* Complicated lookup can be done by combining multiple fields. e.g. `lookup n/alex david c/t11 t12`
-  will return all students with name `alex` or `david` **and** is in class `t11` or `t12`.
+* Complicated lookup can be done by combining multiple fields. e.g. `lookup n/alex david c/T11 T12`
+  will return all students with name `alex` or `david` **and** is in class `T11` or `T12`.
 
 Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
   <img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br></br>
-* `lookup c/t11` returns all students in class number T11<br>
-  <img alt="result for 'lookup c/t11'" src="images/lookupClassResult.png" width="700"> </br></br>
+* `lookup c/T11` returns all students in class number T11<br>
+  <img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br></br>
 
 ---
 
