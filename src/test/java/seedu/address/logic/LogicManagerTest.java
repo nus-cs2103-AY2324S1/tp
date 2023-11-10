@@ -10,11 +10,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -179,4 +181,19 @@ public class LogicManagerTest {
         expectedModel.addCard(expectedResult);
         assertCommandFailure(createCommand, CommandException.class, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void deck_filepathConsistency() {
+        Path actual = Paths.get("some/some.json");
+        model.setDeckFilePath(actual);
+        assertEquals(model.getDeckFilePath(), actual);
+    }
+
+    @Test
+    public void gui_settingsConsistency() {
+        GuiSettings settings = new GuiSettings();
+        model.setGuiSettings(settings);
+        assertEquals(model.getGuiSettings(), settings);
+    }
+
 }
