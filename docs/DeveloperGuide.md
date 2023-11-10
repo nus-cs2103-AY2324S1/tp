@@ -326,9 +326,10 @@ The YesCommand and NoCommand classes consist of important methods:
 
 #### **Implementation**
 
-The implementation of the "Yes" and "No" commands invoke the `rememberWord` and `nextReviewWord` methods.
+The implementation of the "Yes" and "No" commands invoke the `updateLevel` method of `FlashCard` and `hasNextRound` method of `Model`.
 
-- **rememberWord:** denotes whether the user has successfully memorized the word or not.
+- **updateLevel:** updates the proficiency level of the current word and determines the next review date for the word based on the updated proficiency level.
+- **hasNextRound:** determines whether there are more words to review.
 
 The application recognizes a word as memorized if the user inputs either 'yes' or 'no.'
 
@@ -342,11 +343,15 @@ Given below is an example usage scenario and how the yes/no mechanism behaves at
 
 **Step 3:** The user responds with either 'yes' or 'no' to indicate whether the recalled translation matches the recorded one.
 
-**Step 4:** If 'yes' is chosen, the `rememberWord` method within the `Model` class is invoked with the 'true' parameter; if 'no' is chosen, it is invoked with 'false'.
+**Step 4:** If 'yes' is chosen, the `updateLevel` method within the `FlashCard` class is invoked with the 'true' parameter; if 'no' is chosen, it is invoked with 'false'.
 
-**Step 5:** Inside the `rememberWord` method, the proficiency level of the current word is updated, and the next review date for the word is determined based on the updated proficiency level.
+**Step 5:** Inside the `updateLevel` method, the proficiency level of the flash card is updated, and the next review date for the word is determined based on the updated proficiency level.
 
-**Step 6:** The `nextReviewWord` method is called to present the next word for review. If there are no more words to review, the session concludes.
+**Step 6:** The `hasNextRound` method within the `Model` class is invoked to determine whether there are more words to review.
+
+**Step 7:** If there are more words to review, the next word is retrieved from the model and displayed on the screen. If there are no more words to review, the review session is concluded.
+
+**Step 8:** The user repeats steps 2-7 until the review session is concluded.
 
 The following sequence diagram summarizes the workflow when a user executes a `yes` command:
 
@@ -602,6 +607,7 @@ Use case resumes from step 3.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Proficiency level**: A number that indicates how well a user knows a word. The higher the number, the better the user knows the word.
 * **Flashcard**: A virtual card with a word on one side and its translation on the other side
 * **Word**: A word in the language you want to learn
 * **Translation**: The word in your native language that corresponds to the word you want to learn
