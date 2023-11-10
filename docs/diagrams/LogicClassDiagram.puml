@@ -30,12 +30,14 @@ HiddenOutside ..> Logic
 LogicManager .right.|> Logic
 LogicManager -down->"1" AddressBookParser
 LogicManager -down->"1" ViewModeParser
-LogicManager .up.> CommandType
-AddressBookParser ..> XYZCommand : creates >
-ViewModeParser .down.> XYZCommand : creates >
+LogicManager .down.> CommandType
+
+AddressBookParser .down..> XYZCommand : creates >
+ViewModeParser .down..> XYZCommand : creates >
+ViewModeParser .right.> Model
 
 XYZCommand -up-|> Command
-LogicManager .left.> Command : executes >
+LogicManager .down..> Command : executes >
 
 LogicManager --> Model
 LogicManager --> Storage
@@ -45,7 +47,7 @@ Command .right.> Model
 note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 
 Logic ..> CommandResult
-LogicManager .down.> CommandResult
+LogicManager .down..> CommandResult
 Command .up.> CommandResult : produces >
 CommandResult .right.>"0..1" CommandType
 @enduml
