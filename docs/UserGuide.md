@@ -43,7 +43,7 @@ This user guide contains **all** the commands available to you, along with **ste
 
 * `reset`, followed by `reset confirm` : Deletes all fosterers.
 
-* `exit` : Exits the app.
+* `exit` : Exits Foster Family.
 
 8. Refer to the [Features](#features) section for details of each command.
 
@@ -61,11 +61,12 @@ These are symbols we will be using to highlight certain information to you.
 ## Technical Terms
 These are the explanations of some technical terms you may come across in this user guide.
 
-| Term      | Definition                                                                |
-|-----------|---------------------------------------------------------------------------|
-| Command   | Keywords that Foster Family recognises to invoke specific functions       |
-| Parameter | Information to be passed to the commands as inputs                        |
-| Index     | The number next to a fosterer's name in the list shown in the main window |
+| Term                 | Definition                                                                                 |
+|----------------------|--------------------------------------------------------------------------------------------|
+| Command              | Keywords that Foster Family recognises to invoke specific functions                        |
+| Parameter / Argument | Information to be passed to the commands as inputs                                         |
+| Index                | The number next to a fosterer's name in the list shown in the main window                  |
+| Field                | Attributes associated with a fosterer entry in Foster Family, such as name and email, etc. |
 
 --------------------------------------------------------------------------------------------------------------------
 ## User Interface (UI)
@@ -73,7 +74,7 @@ These are the two different screens you will be interacting with in Foster Famil
 
 ### The Main Window 
 ![Ui](images/Ui.png)
-This is the main view that welcomes you when you first start the Foster Family app.
+This is the main view that welcomes you when you start up Foster Family.
 
 ### The Profile Page 
 ![Profile](images/screenshots/ProfilePage.png)
@@ -86,17 +87,17 @@ There are two ways you can use to navigate to the profile page.
 1. Enter <code>add</code> to view an _empty_ profile page to [add](#adding-a-fosterer-through-the-profile-page-add) a fosterer.
 2. Enter either <code>edit INDEX</code> or <code>view INDEX</code> to [edit](#editing-a-fosterers-detail-through-the-profile-page-edit) or [view](#viewing-a-fosterers-detail-view) the fosterer at index <code>INDEX</code> in Foster Family.
 
-Let's say you want to open a profile of a fosterer name Benson Meie who is currently on index 1. 
+Let's say you want to open the profile page of a fosterer name Benson Meie who is currently at index 1. 
 ![Benson](images/screenshots/BensonMeieView.png)
 <br>
 
-Simply enter <code>view 1</code> like the example above, which opens the profile page of the fosterer at index 1, Benson Meie. 
+To do so, enter <code>view 1</code> as shown in the image above, which opens the profile page of the fosterer at index 1, Benson Meie. 
 
 ![Example profile](images/screenshots/EditExample.png)
 
 <br>
 
-#### Navigating through fields
+#### Navigating through the fields
 Typing in the name of the field you want to edit, or substrings of the field, directs your cursor to the textbox, allowing you to make changes.
 
 ![Before typing name](images/screenshots/BeforeEnteringName.png)
@@ -105,8 +106,8 @@ In the example above, entering <code>name</code>, or a substring of name like <c
 
 ![Profile navigate field](images/screenshots/NavigatingFields.png)
 
-After you are done editing, pressing the Enter key brings your cursor back to the command box with your new changes intact. <br>
-If you want to revert back to the original value of the field while editing on the textbox, press the Esc key to cancel the changes and bring your cursor back to the command box. 
+After you are done editing, pressing the Enter key on your keyboard brings your cursor back to the command box with your new changes intact. <br>
+If you wish to revert back to the original value of the field while editing in the textbox, press the Esc key to undo the changes and direct your cursor back to the command box. 
 
 ![Cursor back to commandbox](images/screenshots/CursorBackToCommandbox.png)
 In the example above, after changing name from 'Meie' to 'Mei' the Enter key was pressed. 
@@ -125,13 +126,13 @@ Key in <code>save</code> and press Enter to save the changes.
 <br/>
 ![Save command after](images/screenshots/SaveCommandAfter.png)
 <br/>
-This saves the changes you made and updates the details of a fosterer, or adds a new fosterer with the input details (depending on the command used to open the profile page). 
+This saves the changes you have made and updates the details of a fosterer, or adds a new fosterer with the details inputted (depending on the command used to open the profile page). 
 
 <br>
 
 #### Exiting the profile page
 Entering <code>exit</code> closes the profile page and leads you back to the main window.
-Attempting to exit without saving your changes will give you a warning message, advising you to save your changes. 
+Attempting to exit without saving your changes will give you a warning message, prompting you to save your changes. 
 
 **1. Changes are saved** <br/>
 Let's say you have already saved your changes.
@@ -139,7 +140,7 @@ Let's say you have already saved your changes.
 
 <br>
 
-Type in <code>exit</code> and press Enter to close the profile page.
+Key in <code>exit</code> and press Enter to close the profile page.
 ![Exit command saved after](images/screenshots/ExitCommandSavedAfter.png)
 
 <br>
@@ -151,12 +152,12 @@ Let's say you did not save your changes and entered <code>exit</code>.
 
 <br>
 
-If you press Enter again, your changes are discarded and you are led back to the main window.
-If you press Esc key, the exit is cancelled and you can continue working on the profile page.
+If you press Enter again, your changes are discarded and you are redirected back to the main window.
+If you press the Esc key, the exit is cancelled and you can continue working on your changes in the profile page.
 
 ![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
 <br>
-The example above is the result of pressing the Esc key after you are warned.
+The image above is the result of pressing the Esc key after you are warned.
 
 <br>
 
@@ -236,7 +237,7 @@ Valid cases:
 | 4   | Not fostering (e.g. overseas, currently not able to foster) | `NotAvailable`            | `nil`             | `nil`         |
 | 5   | Fostering: ALL information must be present                  | `NotAvailable`            | `current.Dog/Cat` | NOT `nil`          |
 
-* For invalid cases, error messages will be shown when the invalid command is entered. For example:
+* For invalid cases, error messages will be shown when you enter the invalid commands. For example:
   ![Add](images/screenshots/AddErrorMessage.png)
 
 <div markdown="span" class="alert alert-danger">
@@ -263,7 +264,7 @@ In the case where duplicates field descriptions are given, the last one will be 
 
 ### Adding a fosterer through the profile page: `add`
 
-Brings you to an empty profile page with the fields set to `nil`. You can key in the fosterer's details and save the 
+Redirects you to an empty profile page with all the fields set to `nil`. In the profile page, you can key in the fosterer's details and save the 
 information, which then adds the fosterer to your address book.
 
 Format: `add`
@@ -331,7 +332,7 @@ Examples:
 
 ### Viewing a fosterer's detail: `view`
 
-Opens the profile page of the index-th fosterer in your currently displayed list.
+Redirects you to the profile page of the index-th fosterer in the list currently displayed in your address book.
 
 Format: `view INDEX`
 
@@ -357,11 +358,11 @@ To learn more about profile page, please refer to the section [User Interface: t
 
 #### Editing a fosterer’s details in profile page:
 
-1. Enter a fosterer’s profile page with `view INDEX`.
-2. Type in the name of the field you want to edit onto the command box, for example `name`. This will make the textbox visible next to the `name` field and automatically set the text cursor to the textbox.
+1. Navigate to a fosterer’s profile page with `view INDEX`.
+2. Type the name of the field you want to edit in the command box, for example `name`. This will make the textbox visible next to the `name` field and automatically set the text cursor to the textbox.
 3. Edit the original value - if it exists - to a new value, for example `John`.
 4. Press Enter to return the text cursor back to the command box.
-5. Type in `save` command and Enter to save the changes of the fosterer. 
+5. Type `save` command and Enter to save the changes of the fosterer. 
 
 Example:
 * `list` followed by `view 2`
@@ -369,7 +370,7 @@ Example:
 
 ### Saving changes in a fosterer's details: `save`
 
-Saves changes in details of the fosterer made in the profile page.
+Saves changes in details of the fosterer which you have made in the profile page.
 
 <div markdown="span" class="alert alert-danger">
 
@@ -384,7 +385,7 @@ Format: `save`
 
 ### Editing a fosterer's detail through the main window: `edit`
 
-Edits the details of the index-th fosterer in your currently displayed list, done through the main window.
+Edits the details of the index-th fosterer in the list currently displayed in your address book, done through the main window.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]`
 
@@ -442,7 +443,7 @@ Before you type the save command, make sure there is no accidental overwrite wit
 
 ### Editing a fosterer's detail through the profile page: `edit`
 
-Edits the details of the index-th fosterer in your currently displayed list, done through the profile page.
+Edits the details of the index-th fosterer in the list currently displayed in your address book, done through the profile page.
 
 Format: `edit INDEX`
 
@@ -483,7 +484,7 @@ To learn more about the profile page, please refer to the section [User Interfac
 
 ### Deleting a fosterer : `delete`
 
-Deletes the index-th fosterer in your currently displayed list.
+Deletes the index-th fosterer in the list currently displayed in your address book.
 
 Format: `delete INDEX [INDEX...]`
 
@@ -549,7 +550,7 @@ Format: `stats avail`
 
 **:information_source: Notes about the command:**<br>
 
-All statistic commands are calculated based on your currently displayed list.<br>
+All statistic commands are calculated based on the list currently displayed in your address book.<br>
 If you enter `find available` before `stats avail`, the resulting statistic will show that all listed fosterers are available. Hence, please ensure that the current list is the list you want your statistics to be calculated from.<br>
 
 ![Stats](images/screenshots/StatsAllAvail.png)
@@ -638,9 +639,9 @@ Format: `reset`, followed by `reset confirm`
 
 </div>
 
-### Exiting the program : `exit`
+### Exiting Foster Family : `exit`
 
-Exits the program.
+Exits the app.
 
 Format: `exit`
 
