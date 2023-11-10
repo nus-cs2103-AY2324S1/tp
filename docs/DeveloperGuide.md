@@ -524,6 +524,8 @@ The following activity diagram summarizes what happens when a user executes the 
 
 ![Edit Leave Activity Diagram](images/EditLeaveActivityDiagram.png)
 
+#### Design considerations:
+
 **Aspect: Model-Person Interaction:**
 
 * **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `DeleteRemarkCommand#execute()`.
