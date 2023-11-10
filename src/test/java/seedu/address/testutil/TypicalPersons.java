@@ -56,7 +56,7 @@ public class TypicalPersons {
             .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457")
             .withPayrollStorage(new ArrayList<>()).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").withSalary("1500.0" + "0")
+            .withEmail("lydia@example.com").withAddress("little tokyo").withSalary("1500.00")
             .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457")
             .withPayrollStorage(new ArrayList<>()).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
