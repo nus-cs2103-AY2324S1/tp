@@ -102,7 +102,9 @@ public class FilterCommandTest {
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.setContactsFilter(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TestData.Valid.Contact.ALICE, TestData.Valid.Contact.BENSON, TestData.Valid.Contact.DANIEL), model.getFilteredContactList());
+        assertEquals(Arrays.asList(TestData.Valid.Contact.ALICE,
+                TestData.Valid.Contact.BENSON, TestData.Valid.Contact.DANIEL),
+                model.getFilteredContactList());
     }
 
     @Test

@@ -1,6 +1,5 @@
 package swe.context.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static swe.context.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static swe.context.logic.commands.CommandTestUtil.showContactAtIndex;
 
