@@ -18,7 +18,12 @@ Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class AnnualLeave
+Class BankAccount
+Class Salary
+Class JoinDate
+Class AttendanceStorage
+Class PayrollStorage
 
 Class I #FFFFFF
 }
@@ -41,7 +46,12 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *--> AnnualLeave
+Person *--> BankAccount
+Person *--> Salary
+Person *--> JoinDate
+Person *--> AttendanceStorage
+Person *--> PayrollStorage
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

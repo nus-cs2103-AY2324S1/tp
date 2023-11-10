@@ -9,7 +9,9 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project uses a third-party library called [itext7](https://github.com/itext/itext7), which can help the target user of our app, HR managers, to easily generate payslips as PDF files. `itext7` is released under the [AGPL license](https://github.com/itext/itext7/blob/develop/LICENSE.md).
+* This project also uses a third-party library called [JavaWuzzy](https://github.com/xdrop/fuzzywuzzy#javawuzzy). It is released under the [GNU General Public License v2.0](https://github.com/xdrop/fuzzywuzzy/blob/master/LICENSE).
+  * Our user needs to type the reason for a deduction or benefit added. With this library used, they do not need to type the exact wording of the reasons in order to match the Reason enum. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -126,11 +128,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component
@@ -221,54 +218,72 @@ _{Explain here how the data archiving feature will be implemented}_
 
 #### Proposed Implementation
 
-The proposed deductions and benefits feature is facilitated by `Deduction` and `Benefit` classes. They represent payment deducted from and paid to an employee respectively.
+The proposed deductions and benefits feature comprises 2 sub-features:
 
-A `Deduction` object contains the following information:
-(Class diagram to be added)
+1. Add Deduction Feature
+2. Add Benefit Feature
 
-A `Benefit` object contains the following information:
-(Class diagram to be added)
+#### 1. Add Deduction Feature
+The proposed Add Deduction feature is facilitated by `Deduction`, `DeductCommand`, `DeductCommandParser`, `Person`, `PayrollStorage`, `Payroll` and `Salary` classes.
 
-Both `Deduction` and `Benefit` classes extend the `Payment` class, which contains the following information:
-(Class diagram to be added)
+The `Deduction` class is responsible for storing the deduction data for a specific employee.
 
-Adding deductions and benefits to an employee is done by the `DeductCommand` and `DeductCommandParser` classes and `BenefitCommand` and `BenefitCommandParser` classes respectively.
+The `DeductCommand` class is responsible for executing the `deduct` command.
 
-The following sequence diagram shows how the `deduct`/`benefit` operation works:
-(Sequence diagram to be added)
+The `DeductCommandParser` class is responsible for parsing the user input for the `deduct` command.
 
-After `DeductCommandParser` and `BenefitCommandParser` classes parse the user input, the `DeductCommand` and `BenefitCommand` classes will be called to execute the command. The `DeductCommand` and `BenefitCommand` classes will then call the `Model` component to add the deduction/benefit to the employee.
-`DeductCommand::execute(Model)` and `BenefitCommand::execute(Model)` will decide to call `DeductCommand::executeByIndex(Model)`/`BenefitCommand::executeByIndex(Model)` or `DeductCommand::executeByName(Model)`/`BenefitCommand::executeByName(Model)` based on whether an index has been specified in the user input.
+The `Person` class is responsible for updating the list of deductions.
 
-The following activity diagram summarises the process of adding a deduction/benefit to an employee:
-(Activity diagram to be added)
+The `PayrollStorage` class is responsible for storing all payroll data for an employee.
 
-#### Design considerations:
+The `Payroll` class is responsible for storing the monthly payroll data for an employee, including the starting and ending date of the payroll period.
 
-{what are the design considerations?}
+The `Salary` class is responsible for storing the monthly salary data for an employee.
 
-### Payslip generation
+The following class diagram shows how the different classes interact with one another in the Add Deduction Feature:
 
-#### Proposed Implementation
+![AddDeductionClassDiagram](images/AddDeductionClassDiagram.png)
 
-The proposed payslip generation feature is facilitated by `PayslipGenerator`, `PayslipCommand` and `PayslipCommandParser` classes.
+The following sequence diagram shows how the `deduct` operation works:
 
-The `PayslipGenerator` class is responsible for generating the payslip for a specific employee. It contains the following methods:
-(Class diagram to be added)
+![AddDeductionSequenceDiagram](images/AddDeductionSequenceDiagram.png)
 
-The `PayslipCommand` class is responsible for executing the `payslip` command. It contains the following methods:
-(Class diagram to be added)
+After `DeductCommandParser` class parses the user input, the `DeductCommand` class will be called to execute the command. The `DeductCommand` class will then call the `Model` component to obtain the list of employees, and then obtain the `Person` object to add deduction for this employee, and store the deduction as an arraylist in `Deduction`.
 
-The `PayslipCommandParser` class is responsible for parsing the user input for the `payslip` command. It contains the following methods:
-(Class diagram to be added)
+The following activity diagram summarises the process of adding deduction for an employee:
 
-The following sequence diagram shows how the `payslip` operation works:
-(Sequence diagram to be added)
+![AddDeductionActivityDiagram](images/AddDeductionActivityDiagram.png)
 
-After `PayslipCommandParser` class parses the user input, the `PayslipCommand` class will be called to execute the command. The `PayslipCommand` class will then call the `Model` component to generate the payslip for the employee, and store the payslip as a PDF file at `payslips/`.
+#### 2. Add Benefit Feature
+The proposed Add Benefit feature is facilitated by `Benefit`, `BenefitCommand`, `BenefitCommandParser`, `Person`, `PayrollStorage`, `Payroll` and `Salary` classes.
 
-The following activity diagram summarises the process of generating a payslip for an employee:
-(Activity diagram to be added)
+The `Benefit` class is responsible for storing the benefit data for a specific employee.
+
+The `BenefitCommand` class is responsible for executing the `benefit` command.
+
+The `BenefitCommandParser` class is responsible for parsing the user input for the `benefit` command.
+
+The `Person` class is responsible for updating the list of benefits.
+
+The `PayrollStorage` class is responsible for storing all payroll data for an employee.
+
+The `Payroll` class is responsible for storing the monthly payroll data for an employee, including the starting and ending date of the payroll period.
+
+The `Salary` class is responsible for storing the monthly salary data for an employee.
+
+The following class diagram shows how the different classes interact with one another in the Add Benefit Feature:
+
+![AddBenefitClassDiagram](images/AddBenefitClassDiagram.png)
+
+The following sequence diagram shows how the `benefit` operation works:
+
+![AddBenefitSequenceDiagram](images/AddBenefitSequenceDiagram.png)
+
+After `BenefitCommandParser` class parses the user input, the `BenefitCommand` class will be called to execute the command. The `BenefitCommand` class will then call the `Model` component to obtain the list of employees, and then obtain the `Person` object to add benefit for this employee, and store the benefit as an arraylist in `Benefit`.
+
+The following activity diagram summarises the process of adding benefit for an employee:
+
+![AddBenefitActivityDiagram](images/AddBenefitActivityDiagram.png)
 
 ### Payroll calculation feature
 
@@ -294,6 +309,32 @@ This class extends the Command abstract class, it implements the following opera
 #### Design considerations:
 
 {what are the design considerations?}
+
+### Payslip generation
+
+#### Proposed Implementation
+
+The proposed payslip generation feature is facilitated by `PayslipGenerator`, `PayslipCommand` and `PayslipCommandParser` classes.
+
+The `PayslipGenerator` class is responsible for generating the payslip for a specific employee.
+
+The `PayslipCommand` class is responsible for executing the `payslip` command.
+
+The `PayslipCommandParser` class is responsible for parsing the user input for the `payslip` command.
+
+The following class diagram shows how the different classes interact with one another in the payslip generation feature:
+
+![PayslipClassDiagram](images/PayslipClassDiagram.png)
+
+The following sequence diagram shows how the `payslip` operation works:
+
+![PayslipSequenceDiagram](images/PayslipSequenceDiagram.png)
+
+After `PayslipCommandParser` class parses the user input, the `PayslipCommand` class will be called to execute the command. The `PayslipCommand` class will then call the `Model` component to generate the payslip for the employee, and store the payslip as a PDF file at `payslips/`.
+
+The following activity diagram summarises the process of generating a payslip for an employee:
+
+![PayslipActivityDiagram](images/PayslipActivityDiagram.png)
 
 ### Leave Tracking
 
@@ -844,6 +885,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **HR manager**: Human Resource Manager in the company
 * **Employee**: A staff in the company
 * **Parameters**: 
+
+### Future Enhancements
+1. Modify the `add` feature to restrict the user from adding employees with the same name but in different cases (e.g. John Tan and john tan).
+    This can be done by modifying the `equals()` method in the `Person` class to ignore the case of the name, i.e. changing `name.equals(other.name)` to `name.toLowerCase().equals(other.name.toLowerCase())`.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
