@@ -59,6 +59,14 @@ public class AppointmentBuilder {
     }
 
     /**
+     * Sets the {@code AppointmentTime} for the Appointment being built.
+     */
+    public AppointmentBuilder withAppointmentTime(AppointmentTime appointmentTime) {
+        this.appointmentTime = this.appointmentTime;
+        return this;
+    }
+
+    /**
      * Sets the {@code Patient} for the Appointment being built.
      */
     public AppointmentBuilder withPatient(Person patient) {

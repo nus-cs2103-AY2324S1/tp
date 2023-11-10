@@ -1,6 +1,9 @@
 package seedu.address.logic.commands.appointmentcommands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PATIENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 
 import java.time.DayOfWeek;
@@ -32,6 +35,10 @@ public class AppointmentCommandTestUtil {
             .withSecond(0)
             .withNano(0));
 
+    public static final String VALID_PATIENT_ONE = "John Doe";
+
+    public static final String PATIENT_ONE_DESC = " " + PREFIX_APPOINTMENT_PATIENT + VALID_PATIENT_ONE;
+
     public static final String VALID_START_ONE = "2023/08/03 10:00";
     public static final String VALID_END_ONE = "2023/08/03 13:00";
 
@@ -40,6 +47,8 @@ public class AppointmentCommandTestUtil {
     public static final String VALID_END_TWO = "2023/09/03 11:00";
 
     public static final String VALID_DESCRIPTION_ONE = "Follow Up Blood Test";
+
+    public static final String DESCRIPTION_DESC_ONE = " " + PREFIX_APPOINTMENT_DESCRIPTION + VALID_DESCRIPTION_ONE;
     public static final String VALID_DESCRIPTION_TWO = "Routine Checkup";
 
     public static final String START_DESC_ONE = " " + PREFIX_APPOINTMENT_START + VALID_START_ONE;
@@ -56,4 +65,11 @@ public class AppointmentCommandTestUtil {
     public static final String INVALID_START_DESC = " " + PREFIX_APPOINTMENT_START + INVALID_START;
     public static final String INVALID_END_DESC = " " + PREFIX_APPOINTMENT_END + INVALID_END;
 
+    public static final String VALID_PRIORITY_TAG_HIGH = "high";
+
+    public static final String PRIORITY_TAG_DESC_HIGH = " " + PREFIX_APPOINTMENT_PRIORITY + VALID_PRIORITY_TAG_HIGH;
+    public static final String VALID_PRIORITY_TAG_MEDIUM = "medium";
+    public static final String PRIORITY_TAG_DESC_MEDIUM = " " + PREFIX_APPOINTMENT_PRIORITY + VALID_PRIORITY_TAG_MEDIUM;
+    public static final String VALID_PRIORITY_TAG_LOW = "low";
+    public static final String PRIORITY_TAG_DESC_LOW = " " + PREFIX_APPOINTMENT_PRIORITY + VALID_PRIORITY_TAG_LOW;
 }
