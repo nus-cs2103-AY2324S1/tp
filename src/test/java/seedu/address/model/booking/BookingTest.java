@@ -66,7 +66,7 @@ public class BookingTest {
                 + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail()
                 + ", remark=" + ALICE.getRemark()
-                + ", tags=" + ALICE.getTags() + "}";
+                + ", room type=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 
