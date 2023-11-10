@@ -46,8 +46,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Id;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -211,12 +211,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidMedicalHistory_failure() {
         //invalid
-        String userInput = COMMAND_WORD + NRIC_DESC_AMY + INVALID_MEDICAL_DESC;
+        String userInput = COMMAND_WORD + ID_DESC_AMY + INVALID_MEDICAL_DESC;
 
         assertParseFailure(parser, userInput, MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT);
 
         //valid and invalid
-        userInput = COMMAND_WORD + NRIC_DESC_AMY + INVALID_MEDICAL_DESC + MEDICAL_DESC_BOB;
+        userInput = COMMAND_WORD + ID_DESC_AMY + INVALID_MEDICAL_DESC + MEDICAL_DESC_BOB;
         assertParseFailure(parser, userInput, MedicalHistory.MESSAGE_CONSTRAINTS);
     }
 }
