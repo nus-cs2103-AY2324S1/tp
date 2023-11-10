@@ -16,7 +16,7 @@
           - Commands and features for add, list and delete events [#33](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/33)
             - `add event`, `list events` and `delete event`
           - Filter and sort events [#71](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/71)
-          - Relevant test cases for event feature
+          - Relevant test cases for event feature [#33](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/33) [#71](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/71) [#169](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/169)
           - Bug fixes for event feature [#47](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/47) [#85](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/85)
   
   - #### Enhancements implemented
@@ -29,9 +29,9 @@
         - For example: `add contact -n NAME [-p PHONE_NUMBER] [-a ADDRESS] [-e EMAIL]`
         - (in Project File on Google Docs)
       - Add details and tweak the description for `add event`, `list events` and `delete event` commands.
-    [#33(Click to view differences in UG)](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/33/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
-    [#71(Click to view differences in UG)](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/71/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
-      - Add glossary part for UG, more hyperlinks for navigation, add more details for transferring data, and various adjustments to UG. [#169](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/169/)
+    [#33](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/33/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
+    [#71](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/71/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
+      - Add glossary part for UG, more hyperlinks for navigation, add more details for transferring data, and various adjustments to UG. [#169](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/169/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
       - Add the line for telling user not to modify the data file directly in FAQ part. [#167](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/167)
 
   - #### Contributions to the DG
