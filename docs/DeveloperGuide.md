@@ -1797,19 +1797,15 @@ find and locate a particular schedule.
 The schedules would be sorted first by `StartTime`, then by `EndTime`, and finally alphabetically by the tutor's name.
 This would make the schedule list more organised, making it easier to use and navigate for the user.
 
-### UI for calendar to use colours to reflect status of schedules
-In the calendar view, incorporating schedule colors to represent their respective statuses can enhance user 
-intuitiveness.
+### Help window flickering when displayed 
+After moving the help window to the left, subsequent display of the help window will have a flickering animation before
+the window settles in the center of the screen.
 
 **Proposed implementation**
 
-In `CalendarCard.java`, the background color of the calendar card will be determined based on schedule status: green 
-for completed, red for missed, and yellow for pending (please note that these colors are not finalised).
-
-To differentiate between rows in the calendar, an alternating shading of green, red, and yellow will be applied.
-
-Additionally, each calendar card will have a visible border to separate it from adjacent schedule cards on 
-the same row.
+In `HelpWindow.java`, the window should be centred on instantiation with `getRoot().centerOnScreen()`.
+Additionally, the `show` method should be modified, to center first before showing the window, essentially swapping the
+order of the two.
 
 ### Allow partial name search for find command
 
