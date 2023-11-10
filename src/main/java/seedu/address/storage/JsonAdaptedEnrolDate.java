@@ -39,7 +39,7 @@ public class JsonAdaptedEnrolDate {
      */
     public EnrolDate toModelType() throws IllegalValueException {
         if (!EnrolDate.isValidDate(enrolDate)) {
-            throw new IllegalArgumentException(EnrolDate.MESSAGE_INVALID_DATE_FORMAT);
+            throw new IllegalValueException(EnrolDate.MESSAGE_INVALID_DATE_FORMAT);
         }
         return new EnrolDate(enrolDate);
     }
