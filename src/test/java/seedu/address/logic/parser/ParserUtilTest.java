@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -25,6 +26,8 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_IC1 = "Y9834876G";
+    private static final String INVALID_IC2 = "T934865H";
     private static final String INVALID_PATIENT_TAG = "priority: HIGHEST";
     private static final String INVALID_DOCTOR_TAG1 = "NURSE";
 
@@ -32,6 +35,8 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_IC1 = "T1234567H";
+    private static final String VALID_IC2 = "t1234567h";
     private static final String VALID_TAG1 = "FRIENDS";
     private static final String VALID_TAG2 = "STUDENT";
     private static final String VALID_PATIENT_TAG1 = "priority: LOW";
@@ -151,6 +156,34 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseIc_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseIc((String) null));
+    }
+
+    @Test
+    public void parseIc_invalidStartingCharacter_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIc(INVALID_IC1));
+    }
+
+    @Test
+    public void parseIc_invalidNumbers_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIc(INVALID_IC2));
+    }
+
+    @Test
+    public void parseIc_validIcWithCaps_returnsIc() throws Exception {
+        Ic expectedIc = new Ic(VALID_IC1);
+        assertEquals(expectedIc, ParserUtil.parseIc(VALID_IC1));
+    }
+
+    @Test
+    public void parseIc_validIcWithoutCaps_returnsIc() throws Exception {
+        String inputIc = VALID_IC2.toUpperCase();
+        Ic expectedIc = new Ic(inputIc);
+        assertEquals(expectedIc, ParserUtil.parseIc(VALID_IC2));
     }
 
     @Test

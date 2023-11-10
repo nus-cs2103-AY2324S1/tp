@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-MediLink Contacts(MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
+MediLink Contacts (MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
 Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MLC
 can get your patients management tasks done faster than traditional GUI apps.
 
@@ -19,16 +19,16 @@ can get your patients management tasks done faster than traditional GUI apps.
 1. Ensure you have Java `11` or above installed in your Computer. If you don't, install it for your relevant operating
     system at this link https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html
 
-1. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
+2. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your MLC.
+3. Copy the file to the folder you want to use as the _home folder_ for your MLC.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediLink.jar` command
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediLink.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
    Some example commands you can try:
 
@@ -43,7 +43,7 @@ can get your patients management tasks done faster than traditional GUI apps.
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Parameters
@@ -93,7 +93,7 @@ The list below contains the parameters that are used in various commands as well
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -228,7 +228,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the MediLink Contacts.
+Shows a list of all persons and appointments in the MediLink Contacts.
 
 Format: `list`
 
