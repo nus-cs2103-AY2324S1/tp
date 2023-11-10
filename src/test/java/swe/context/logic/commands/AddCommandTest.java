@@ -192,4 +192,54 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validContact);
         assertThrows(NullPointerException.class, () -> addCommand.execute(null));
     }
+
+    @Test
+    public void execute_contactWithMultipleTags_addSuccessful() throws Exception {
+        ModelStubAcceptingContactAdded modelStub = new ModelStubAcceptingContactAdded();
+        Contact multipleTagsContact = new ContactBuilder()
+            .withTags("tag1", "tag2", "tag3")
+            .build();
+
+        CommandResult commandResult = new AddCommand(multipleTagsContact).execute(modelStub);
+
+        assertEquals(Messages.addCommandSuccess(Contact.format(multipleTagsContact)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(multipleTagsContact), modelStub.contactsAdded);
+    }
+
+    @Test
+    public void execute_contactWithInvalidPhoneFormat_throwsCommandException() {
+        Contact invalidPhoneContact = new ContactBuilder().withPhone("invalidPhone").build();
+        AddCommand addCommand = new AddCommand(invalidPhoneContact);
+        ModelStub modelStub = new ModelStubWithContact(invalidPhoneContact);
+
+        assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_contactWithEmptyOptionalFields_addSuccessful() throws Exception {
+        ModelStubAcceptingContactAdded modelStub = new ModelStubAcceptingContactAdded();
+        Contact emptyOptionalFieldsContact = new ContactBuilder()
+            .withNote("")
+            .withTags()
+            .withAlternateContacts()
+            .build();
+
+        CommandResult commandResult = new AddCommand(emptyOptionalFieldsContact).execute(modelStub);
+
+        assertEquals(Messages.addCommandSuccess(Contact.format(emptyOptionalFieldsContact)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(emptyOptionalFieldsContact), modelStub.contactsAdded);
+    }
+
+    @Test
+    public void execute_contactWithMalformedTags_throwsCommandException() {
+        Contact malformedTagsContact = new ContactBuilder()
+            .withTags("Invalid Tag1", "123")
+            .build();
+        AddCommand addCommand = new AddCommand(malformedTagsContact);
+        ModelStub modelStub = new ModelStubWithContact(malformedTagsContact);
+
+        assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
+    }
 }
