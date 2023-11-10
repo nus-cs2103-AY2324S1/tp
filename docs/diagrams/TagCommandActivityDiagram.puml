@@ -5,7 +5,7 @@ start
 :User executes tag command;
 
 if () then ([command format invalid])
-    :show invalid command message;
+    :show invalid command format message;
 else ([else])
     if () then ([student number is invalid])
         : show invalid student number message;

@@ -356,7 +356,7 @@ grades. It will be stored as 3 separate classes to model each of the 3 different
 call them "class information"), and a tracker
 class to act as the manager for each of the class information, with the trackers composing the `ClassDetails` class.
 
-<puml src="diagrams/ClassInformation.puml" />
+<puml src="diagrams/ClassInformation.puml" alt="ClassInformation" />
 
 The 3 different types of class information are:
 
@@ -443,6 +443,45 @@ The feature should be implemented upon the current design of Student and ClassDe
 #### About this feature
 
 The view feature allows users to view the class information of their students.
+<box type="info" seamless>
+
+**Note:** The `view` command is the only way to change the student being viewed in the `GUI`.
+
+</box>
+
+#### Implementation
+
+The `view` command is facilitated by the `ViewCommandParser` and the `ViewCommand`. It uses `Model#setSelectedStudent()` to select the student that is to be viewed in the `GUI`.
+
+Here is a step by step example of how a `view` command is executed:
+
+Step 1. Users inputs a `view` command.
+
+Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object which in turn creates a `ViewCommandParser` object to parse the command.
+
+Step 3. `ViewCommandParser` will check if the input is valid. If input is valid, it will create a `ViewCommand` object to execute the command. Else `ParseException` is thrown.
+
+Step 4. `ViewCommand` will use `Model#setSelectedStudent()` to set the requested student to be viewed in the `GUI`.
+
+The following sequence diagram will show what happens when a user executes a `view` command:
+
+<puml src="diagrams/ViewCommand.puml" alt="ViewCommand" />
+
+The following activity diagram will show what happens when a user executes a `view` command:
+
+<puml src="diagrams/ViewCommandActivityDiagram/puml" alt="ViewCommandActivityDiagram" />
+
+#### Design Considerations
+
+**Aspect: ViewCommand**
+
+* **Alternative 1 (current choice):** Using a command to view the class information of a student.
+  * Pros: Reduces clutter in the `GUI`.
+  * Cons: Always have to type a command if the users wants to view a different student.
+
+* **Alternative 2:** Listing all the class information of every student.
+  * Pros: Easy to implement.
+  * Cons: Very messy and clutters the `GUI`.
 
 --------------------------------------------------------------------------------------------------------------------
 

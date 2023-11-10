@@ -28,12 +28,11 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
-        String number = argMultimap.getValue(PREFIX_STUDENT_NUMBER).orElse("");
-        if (!StudentNumber.isValidStudentNumber(number)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
-        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER);
 
-        StudentNumber studentNumber = new StudentNumber(number);
+        StudentNumber studentNumber = ParserUtil.parseStudentNumber(
+            argMultimap.getValue(PREFIX_STUDENT_NUMBER).get()
+        );
 
         return new ViewCommand(studentNumber);
     }
