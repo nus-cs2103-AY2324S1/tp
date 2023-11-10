@@ -289,11 +289,231 @@ Invalid command with the error message here
 
 <br>
 
-### Adding a student : `addPerson`
+### Adding of entries (Students, Lessons, Tasks)
 
-About the feature
+About the feature (generally that is similar across states)
 
-Format: `command COMPULSORY [optional]`
+Format: `command COMPULSORY [optional]` (if same command format across states)
+* Format info 1
+* Format info 2
+
+<box type="tip" seamless> 
+
+**Tips:**
+- Tip 1
+- Tip 2
+
+</box>
+
+
+#### For student list:
+
+Format: `command COMPULSORY [optional]` (for list specific format)
+* Format info 1
+* Format info 2
+
+<box type="tip" seamless>
+
+**Tips:**
+- Tip 1
+- Tip 2
+
+</box>
+
+Example usages:
+* `some code here`
+* `another code here`
+
+Success outputs:
+* Input: `code with compulsory parameters`
+* Input: `code with compulsory and optional parameters`
+```
+This block of code is for success outputs
+```
+Failure outputs:
+* Input: `invalid command code here`
+* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+```
+Invalid command with the error message here
+```
+
+* Input: `invalid command code here`
+* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+```
+Invalid command with the error message here
+```
+
+#### For schedule list:
+
+Format: `command COMPULSORY [optional]` (for list specific format)
+* Format info 1
+* Format info 2
+
+<box type="tip" seamless>
+
+**Tips:**
+- Tip 1
+- Tip 2
+
+</box>
+
+Example usages:
+* `some code here`
+* `another code here`
+
+Success outputs:
+* Input: `code with compulsory parameters`
+* Input: `code with compulsory and optional parameters`
+```
+This block of code is for success outputs
+```
+Failure outputs:
+* Input: `invalid command code here`
+* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+```
+Invalid command with the error message here
+```
+
+* Input: `invalid command code here`
+* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+```
+Invalid command with the error message here
+```
+
+#### For task list:
+
+Format: `command COMPULSORY [optional]` (for list specific format)
+* Format info 1
+* Format info 2
+
+<box type="tip" seamless>
+
+**Tips:**
+- Tip 1
+- Tip 2
+
+</box>
+
+Example usages:
+* `some code here`
+* `another code here`
+
+Success outputs:
+* Input: `code with compulsory parameters`
+* Input: `code with compulsory and optional parameters`
+```
+This block of code is for success outputs
+```
+Failure outputs:
+* Input: `invalid command code here`
+* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+```
+Invalid command with the error message here
+```
+
+* Input: `invalid command code here`
+* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+```
+Invalid command with the error message here
+```
+
+
+<br>
+
+### Deleting of entries (Students, Lessons, Tasks)
+
+About the feature (generally that is similar across states)
+
+Format: `command COMPULSORY [optional]` (if same command format across states)
+* Format info 1
+* Format info 2
+
+<box type="tip" seamless> 
+
+**Tips:**
+- Tip 1
+- Tip 2
+
+</box>
+
+
+#### For student list:
+
+Format: `command COMPULSORY [optional]` (for list specific format)
+* Format info 1
+* Format info 2
+
+<box type="tip" seamless>
+
+**Tips:**
+- Tip 1
+- Tip 2
+
+</box>
+
+Example usages:
+* `some code here`
+* `another code here`
+
+Success outputs:
+* Input: `code with compulsory parameters`
+* Input: `code with compulsory and optional parameters`
+```
+This block of code is for success outputs
+```
+Failure outputs:
+* Input: `invalid command code here`
+* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+```
+Invalid command with the error message here
+```
+
+* Input: `invalid command code here`
+* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+```
+Invalid command with the error message here
+```
+
+#### For schedule list:
+
+Format: `command COMPULSORY [optional]` (for list specific format)
+* Format info 1
+* Format info 2
+
+<box type="tip" seamless>
+
+**Tips:**
+- Tip 1
+- Tip 2
+
+</box>
+
+Example usages:
+* `some code here`
+* `another code here`
+
+Success outputs:
+* Input: `code with compulsory parameters`
+* Input: `code with compulsory and optional parameters`
+```
+This block of code is for success outputs
+```
+Failure outputs:
+* Input: `invalid command code here`
+* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+```
+Invalid command with the error message here
+```
+
+* Input: `invalid command code here`
+* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+```
+Invalid command with the error message here
+```
+
+#### For task list:
+
+Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
 * Format info 2
 
@@ -330,11 +550,26 @@ Invalid command with the error message here
 
 <br>
 
-### Adding a Lesson : `addLesson`
+### Editing of entries (Students, Lessons)
 
-About the feature
+About the feature (generally that is similar across states)
 
-Format: `command COMPULSORY [optional]`
+Format: `command COMPULSORY [optional]` (if same command format across states)
+* Format info 1
+* Format info 2
+
+<box type="tip" seamless> 
+
+**Tips:**
+- Tip 1
+- Tip 2
+
+</box>
+
+
+#### For student list:
+
+Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
 * Format info 2
 
@@ -369,13 +604,9 @@ Invalid command with the error message here
 Invalid command with the error message here
 ```
 
-<br>
+#### For schedule list:
 
-### Adding a task: `addTask`
-
-About the feature
-
-Format: `command COMPULSORY [optional]`
+Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
 * Format info 2
 
@@ -410,210 +641,10 @@ Invalid command with the error message here
 Invalid command with the error message here
 ```
 
-<br>
+#### For task list:
 
-### Deleting a student : `deletePerson`
+Editing of task lists is not supported at this time!
 
-About the feature
-
-Format: `command COMPULSORY [optional]`
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-Example usages:
-* `some code here`
-* `another code here`
-
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-<br>
-
-### Deleting a lesson : `deleteLesson`
-
-About the feature
-
-Format: `command COMPULSORY [optional]`
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-Example usages:
-* `some code here`
-* `another code here`
-
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-<br>
-
-### Deleting a task : `deleteTask`
-
-About the feature
-
-Format: `command COMPULSORY [optional]`
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-Example usages:
-* `some code here`
-* `another code here`
-
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-<br>
-
-### Editing a student : `editPerson`
-
-About the feature
-
-Format: `command COMPULSORY [optional]`
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-Example usages:
-* `some code here`
-* `another code here`
-
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-<br>
-
-### Editing a lesson : `editLesson`
-
-About the feature
-
-Format: `command COMPULSORY [optional]`
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-Example usages:
-* `some code here`
-* `another code here`
-
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
 
 <br>
 
