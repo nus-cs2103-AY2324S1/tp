@@ -169,7 +169,7 @@ public class Person {
         return map;
     }
 
-    private void tryPut(Map<String, String> map, String key, Object value) {
+    protected void tryPut(Map<String, String> map, String key, Object value) {
         if (Objects.isNull(value)) {
             return;
         }
