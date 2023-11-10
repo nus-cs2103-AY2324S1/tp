@@ -15,12 +15,12 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows events.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_HELP_MESSAGE = "Opened events window.";
+    public static final String SHOWING_SCHEDULE_MESSAGE = "Opened events window.";
 
     @Override
     public CommandResult execute(Model model) {
         model.sortEventList(Comparator.comparing(Event::getStart_time));
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
-        return new CommandResult(SHOWING_HELP_MESSAGE, false, false, false, true, false);
+        return new CommandResult(SHOWING_SCHEDULE_MESSAGE, false, false, false, true, false);
     }
 }

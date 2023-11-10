@@ -1,5 +1,6 @@
 package seedu.address.storage.event;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
@@ -22,6 +23,7 @@ import seedu.address.model.person.Remark;
 class JsonAdaptedEvent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";
+    public static final String INCORRECT_DATE_FORMAT = "Date is not in correct format!";
 
     private final String name;
     private final String description;
@@ -65,17 +67,28 @@ class JsonAdaptedEvent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "description"));
         }
 
+        LocalDateTime modelStartTime;
         if (startTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "startTime"));
+        } else {
+            try {
+                modelStartTime = LocalDateTime.parse(startTime, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+            } catch (DateTimeException e) {
+                throw new IllegalValueException(INCORRECT_DATE_FORMAT);
+            }
         }
 
-        LocalDateTime modelStartTime = LocalDateTime.parse(startTime, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-
+        LocalDateTime modelEndTime;
         if (endTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "endTime"));
+        } else {
+            try {
+                modelEndTime = LocalDateTime.parse(endTime, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+            } catch (DateTimeException e) {
+                throw new IllegalValueException(INCORRECT_DATE_FORMAT);
+            }
         }
 
-        LocalDateTime modelEndTime = LocalDateTime.parse(endTime, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         Person person = new Person(new Name(name), new Phone("00000"), new Email("filler@email.com"),
                 new Address("36 College Avenue East"), new Remark(""), new HashSet<>());
         Event e = new Event(person, description, modelStartTime, modelEndTime);

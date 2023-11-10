@@ -68,8 +68,8 @@ public class Event {
             return true;
         }
 
-        return otherEvent != null && otherEvent.getPerson().equals(getPerson())
-                && otherEvent.getDescription().equals(getDescription());
+        return otherEvent != null && otherEvent.getPerson().isSamePerson(getPerson())
+                && otherEvent.getDescription().equalsIgnoreCase(getDescription());
     }
 
     @Override
@@ -84,11 +84,12 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-
-        return person.equals(otherEvent.person)
-                && description.equals(otherEvent.description)
-                && startTime.equals(otherEvent.startTime)
-                && endTime.equals(otherEvent.endTime);
+        if (person == null) {
+            return index.equals(otherEvent.index)
+                    && description.equals(otherEvent.description);
+        }
+        return person.isSamePerson(otherEvent.person)
+                && description.equals(otherEvent.description);
     }
 
     @Override

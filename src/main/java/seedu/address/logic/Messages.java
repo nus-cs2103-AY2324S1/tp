@@ -24,7 +24,8 @@ public class Messages {
 
     public static final String MESSAGE_INCORRECT_DATE_FORMAT =
             "Date is not in correct format! \nRequired format: yyyy-MM-dd HH:mm";
-    public static final String MESSAGE_INVALID_DATES = "End time must be after start time!";
+    public static final String MESSAGE_INVALID_START = "End time must be after start time!";
+    public static final String MESSAGE_INVALID_DATE = "Date entered is invalid!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

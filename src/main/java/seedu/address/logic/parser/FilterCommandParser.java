@@ -34,6 +34,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         UniqueTagList uniqueTagList = new UniqueTagList();
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_METRIC, PREFIX_VALUE);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TAG, PREFIX_METRIC, PREFIX_VALUE);
 
         if (!(argMultimap.getValue(PREFIX_TAG).isPresent() && argMultimap.getValue(PREFIX_METRIC).isPresent())) {
             throw new ParseException(String.format("Incomplete parameter inputs. t/TAG and met/SCORE are compulsory"

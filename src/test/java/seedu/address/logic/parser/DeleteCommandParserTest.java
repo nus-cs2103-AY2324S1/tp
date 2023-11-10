@@ -20,6 +20,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.TypicalPredicateLists;
 
 
 /**
@@ -44,7 +46,7 @@ public class DeleteCommandParserTest {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
-    // Delete by tags and status tests
+    // Delete by tags tests
     @Test
     public void parse_validTags_returnsDeleteCommand() {
         String userInput = " " + CliSyntax.PREFIX_TAG + TEST_TAG_NAME_STRING;
@@ -63,16 +65,16 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidTags_throwsParseException() {
         String userInput = " " + PREFIX_TAG + INVALID_TAG_STRING;
-        assertParseFailure(parser, userInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, Tag.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_emptyTags_throwsParseException() {
-        assertParseFailure(parser, PREFIX_TAG.toString(),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        String userInput = " " + PREFIX_TAG;
+        assertParseFailure(parser, userInput, Tag.MESSAGE_CONSTRAINTS);
     }
 
+    // Delete by status tests
     @Test
     public void parse_validStatus_returnsDeleteCommand() {
         String testStatus = new Status().toString(); // "Preliminary"
@@ -95,21 +97,26 @@ public class DeleteCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
-    // TODO
     @Test
     public void parse_validTagsAndStatus_returnsDeleteCommand() {
+        String userInput = " " + PREFIX_TAG + TEST_TAG_NAME_STRING + " "
+                + PREFIX_STATUS + TypicalPredicateLists.TEST_STATUS_ONE;
+        List<Predicate<Person>> predicateList = TypicalPredicateLists.PREDICATE_LIST_CONTAINING_TAG_AND_STATUS_ONE;
 
+        // Create a DeleteCommand with the tag predicate
+        DeleteCommand expectedCommand = new DeleteCommand(predicateList);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    // TODO
     @Test
     public void parse_invalidTagsButValidStatus_throwsParseException() {
-
+        String userInput = " " + PREFIX_TAG + " " + PREFIX_STATUS + TypicalPredicateLists.TEST_STATUS_ONE;
+        assertParseFailure(parser, userInput, Tag.MESSAGE_CONSTRAINTS);
     }
 
-    // TODO
     @Test
     public void parse_invalidStatusButValidTags_throwsParseException() {
-
+        String userInput = " " + PREFIX_TAG + TEST_TAG_NAME_STRING + " " + PREFIX_STATUS; // empty status
+        assertParseFailure(parser, userInput, Status.MESSAGE_CONSTRAINTS);
     }
 }
