@@ -376,9 +376,9 @@ _{more aspects and alternatives to be added}_
 
 ### Appointment Sidebar Feature
 
-The appointment sidebar is facilitated by `ModelManager`. It etends `Model` and stores and additional `SortedList<Appointment>` object that represents all the existing appointments.
+The appointment sidebar is facilitated by `ModelManager`. It extends `Model` and stores and additional `SortedList<Appointment>` object that represents all the existing appointments.
 
-The `setAppointmentList()` method always check against `filteredPersons` to look for updates with regards to existing `Appointment` objects. Tg=he `getAppointmentList()` method is called once during startup of the program by `getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the `sortedList<Appointment>` object within `modelManager`.
+The `setAppointmentList()` method always check against `filteredPersons` to look for updates with regards to existing `Appointment` objects. The `getAppointmentList()` method is called once during startup of the program by `getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the `sortedList<Appointment>` object within `modelManager`.
 
 #### Design Considerations:
 
@@ -754,6 +754,11 @@ to `find` but return the person's email instead.
 6. The `complete`, `add`, `edit` and `schedule` commands currently display the whole list (i.e. undoes the result of
 any `find` command) after being executed, which might cause users to become disoriented. We plan to disable this
 interaction between these commands and `find`.
+7. The `clear` command confirmation window can be manipulated using the arrow and 'Enter' keys. The window is
+initialised with the focus on the `confirm` button. This makes it possible for a user to accidentally press 'Enter'
+twice and wipe the contact book anyway, bypassing the defence mechanism entirely. We plan to make the command more
+resistant to mistakes by having the user key in a specific phrase, or to initialise the window with the focus on the
+`cancel` button instead.
 
 *{More to be added}*
 
