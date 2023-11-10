@@ -12,6 +12,11 @@ activate StatsAvailCommand
 StatsAvailCommand --> StatsAvailCommand : availableFosterers
 deactivate StatsAvailCommand
 
+StatsAvailCommand -> StatsAvailCommand : calculatePercentage(availableCount, total)
+activate StatsAvailCommand
+StatsAvailCommand --> StatsAvailCommand
+deactivate StatsAvailCommand
+
 StatsAvailCommand -> StatsAvailCommand : getAbleDogCount(availableFosterers)
 activate StatsAvailCommand
 StatsAvailCommand --> StatsAvailCommand : ableDogCount
@@ -20,11 +25,6 @@ deactivate StatsAvailCommand
 StatsAvailCommand -> StatsAvailCommand : getAbleCatCount(availableFosterers)
 activate StatsAvailCommand
 StatsAvailCommand --> StatsAvailCommand : ableCatCount
-deactivate StatsAvailCommand
-
-StatsAvailCommand -> StatsAvailCommand : calculatePercentage(availableCount, total)
-activate StatsAvailCommand
-StatsAvailCommand --> StatsAvailCommand
 deactivate StatsAvailCommand
 
 StatsAvailCommand -> StatsAvailCommand : calculatePercentage(ableDogCount, availableCount)

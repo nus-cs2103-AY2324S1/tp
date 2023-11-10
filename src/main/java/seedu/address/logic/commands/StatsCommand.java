@@ -19,7 +19,8 @@ public abstract class StatsCommand extends Command {
             + "Please add some fosterers!";
 
     /**
-     * Calculates the percentage of a numerator and denominator.
+     * Calculates percentage using a numerator and denominator.
+     * Denominator must be a non-zero value.
      */
     protected static double calculatePercentage(int num, int denom) {
         assert(denom != 0);
