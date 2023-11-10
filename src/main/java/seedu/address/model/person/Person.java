@@ -152,7 +152,7 @@ public class Person {
      * Intended for use with predicates generated through the find command.
      *
      * @return a Map; keys include all publicly gettable fields as well as all tags,
-     *         and values are values of the respective fields, or {@code null} for tags.
+     *     and values are values of the respective fields, or {@code null} for tags.
      */
     public Map<String, String> getFieldsAndAttributes() {
         HashMap<String, String> map = new HashMap<>();
@@ -169,7 +169,7 @@ public class Person {
         return map;
     }
 
-    private void tryPut(Map<String, String> map, String key, Object value) {
+    protected void tryPut(Map<String, String> map, String key, Object value) {
         if (Objects.isNull(value)) {
             return;
         }
@@ -184,6 +184,27 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+
+    /**
+     * Returns true if person is an available fosterer.
+     */
+    public boolean isAvailableFosterer() {
+        return availability.equals(Availability.AVAILABLE);
+    }
+
+    /**
+     * Returns true if person is a current fosterer.
+     * Person is a current fosterer if and only if they are not available, and is
+     * currently fostering an animal.
+     */
+    public boolean isCurrentFosterer() {
+        boolean isNotAvailable = this.availability.equals(Availability.NOT_AVAILABLE);
+        boolean isAnimalNameNil = this.animalName.fullName.equals(Person.NIL_WORD);
+        boolean isAnimalCurrentCatOrDog = this.animalType.equals(AnimalType.CURRENT_DOG)
+                || this.animalType.equals(AnimalType.CURRENT_CAT);
+
+        return isNotAvailable && !isAnimalNameNil && isAnimalCurrentCatOrDog;
+    }
 
     /**
      * Returns true if both persons have the same name.
