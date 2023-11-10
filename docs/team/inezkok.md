@@ -7,7 +7,7 @@ title: Inez Kok's Project Portfolio Page
 
 HouR is a desktop HR management application used for managing and organising personnel data.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX.
-It is written in Java, and has about 8 kLoC.
+It is written in Java, and has about 9 kLoC.
 
 Given below are my contributions to the project.
 
@@ -48,9 +48,11 @@ Given below are my contributions to the project.
       * Updated guide for help feature to include tip and caution
       * Added all the UI screenshots in UG
 
-    * Developer Guide (TO BE CONTINUED):
-      * Added implementation guide for reset feature
+    * Developer Guide:
+      * Added implementation guide for reset, editleave, addremark and deleteremark feature (including their UML diagrams)
+      * Added instructions for manual testing for reset, editleave, addremark and deleteremark feature
+      * Added and updated user stories
 
 * **Community**:
 
-* **Tools**:
+* **Tools**: Java, JavaFX, IntelliJ, Github, Sourcetree
