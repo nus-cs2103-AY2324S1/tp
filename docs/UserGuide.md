@@ -9,9 +9,11 @@ title: User Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
-Flashlingo is a versatile desktop application centered around learning words through flashcards. It is optimized for use via a Command Line Interface (CLI),
-while also providing the advantages of a Graphical User Interface (GUI). Tailored with a focus on beginner language
-learners, Flashlingo specializes in expanding vocabulary.
+Flashlingo is a versatile desktop application centered around learning words through flashcards. It is optimized for use via a **Command Line Interface** (CLI),
+while also providing the advantages of a **Graphical User Interface** (GUI). Tailored with a focus on beginner language
+learners, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
+and the [**Command Summary**](#command-summary) section for a quick overview of the commands.
+
 
 The application leverages the scientifically-proven principle of the [**Forgetting Curve**](https://en.wikipedia.org/wiki/Forgetting_curve).
 By incorporating the forgetting curve concept, Flashlingo schedules review sessions, ensuring words are revisited at
@@ -57,7 +59,9 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
     * For windows users, press `Windows + R` keys simultaneously, type `cmd` and press `Enter`.
     2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
        <br>
-       ``cd Downloads```
+       ``cd Downloads``
+       <br>
+       >Click [here](https://en.wikipedia.org/wiki/Cd_(command)) for more information on how to navigate to a folder in the terminal.
     3. Simply type in `java -jar flashlingo.jar` to get started!
 
        A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -119,17 +123,37 @@ Examples:
 | **Words with language** |  ![img.png](images/WordWithLanguage.png)   |
 
 **Note**
-* Users are not allowed to add two **exact** same flash cards
-    * Same word **and** word language
-    * Same translation **and** translation language
+* Flash cards are case-insensitive. The following three commands are the same:
+  * `add w/ciao t/hello/bye`
+  * `add w/CIAO t/hello/bye`
+  * `add w/ciao t/HELLO/BYE`
+> The error message:<br>
+> This flash card already exists
 * Users can add two flash cards with the **same word and translation BUT in different language**<br>
   The following three commands can exist in the same list:
     * `add w/雪 t/snow`
     * `add w/雪 t/snow wl/Chinese tl/English`
     * `add w/雪 t/snow wl/Japanese tl/English`
+* Users are not allowed to add a flash card with the **same word and translation**<br>
+  The following command will not be added to the list:
+    * `add w/sorry t/sorry`
+    * `add w/sorry t/SORRY`
 > The error message:<br>
-> This flash card already exists
-
+> Word and translation should be different.
+* Users are not allowed to add a flash card with the **empty word or translation**<br>
+  The following command will not be added to the list:
+    * `add w/ t/sorry`
+    * `add w/sorry t/`
+    * `add w/ t/`
+> The error message:<br>
+> Word/Translation cannot be empty
+* Users are allowed to add a flash card with the **empty word language or translation language**<br>
+  The following command will be added to the list:
+    * `add w/sorry t/sorry wl/ tl/English`
+    * `add w/sorry t/sorry wl/Chinese tl/`
+    * `add w/sorry t/sorry wl/ tl/`
+> The default language for both word and translation are blank (`""`)<br>
+> Users do not need to specify the language if the language is blank (`""`)
 
 ### Deleting a flash card : `delete`
 
@@ -212,7 +236,7 @@ Output:
 ### Getting list for revision : `review`
 
 Displays the flash cards of all the words to be reviewed that day
-* The review command will present flash cards selected by Flash Lingo based on your level, utilizing the Leitner system.
+    * The review command will present flash cards selected by Flash Lingo based on your level, utilizing the Leitner system.
 * If you wish to view all your saved flash cards without the Leitner system's selection criteria, please use the list command.
 
 [Command Format](#commands): `review ...`
@@ -311,6 +335,9 @@ Output:
 Displays a list where each word is from specified language.
 
 [Command Format](#commands): `language <SPECIFIED_LANGUAGE>`
+
+Examples:
+* `language French` displays a list where each word or translation is from French language.
 
 <div id="load">
 
@@ -454,7 +481,7 @@ Then, use the `load` command to import the data.
 
 | Term                                  | Definition                                                                                                                                                                                                                                                                                                                      | 
 | ------------------------------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **CLI**                               | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system.                                                                                                                                                                                         |
+| **CLI**                               | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system. You can check the tutorial [**here**](https://tutorials.codebar.io/command-line/introduction/tutorial.html)                                                                             |
 | **GUI**                               | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                                                                  |
 | **JSON (JavaScript Object Notation)** | JSON is a lightweight data format commonly used for representing structured data.                                                                                                                                                                                                                                               |
 | **Level**                             | The level represents the proficiency with a specific flashcard. The higher the `Level` is, the higher the proficiency of the user with the word is.                                                                                                                                                                             |
