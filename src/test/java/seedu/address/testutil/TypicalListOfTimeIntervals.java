@@ -11,8 +11,6 @@ public class TypicalListOfTimeIntervals {
 	private final ObservableList<TimeInterval> internalList = FXCollections.observableArrayList();
 
 
-	// time interval -> time interval list
-
 
 
 
