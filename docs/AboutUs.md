@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/tanyyyming.png" width="200px">
 
 [[github](http://github.com/tanyyming)] 
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/tanyyyming.md)]
 
 * Role: Developer
 * Responsibilities: Scheduling and Tracking + Code Quality
