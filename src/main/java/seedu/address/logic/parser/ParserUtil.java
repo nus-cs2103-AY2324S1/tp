@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.OvertimeCommand.MESSAGE_EMPTY_OPERATION;
+import static seedu.address.logic.commands.OvertimeCommand.MESSAGE_MISSING_OPERATION;
 import static seedu.address.logic.commands.OvertimeCommand.MESSAGE_OPERATION_USAGE;
 
 import java.time.LocalDate;
@@ -240,7 +240,7 @@ public class ParserUtil {
         } else if (operation.equals("dec")) {
             return false;
         } else if (operation.isEmpty()) {
-            throw new ParseException(MESSAGE_EMPTY_OPERATION);
+            throw new ParseException(MESSAGE_MISSING_OPERATION);
         } else {
             throw new ParseException(MESSAGE_OPERATION_USAGE);
         }
