@@ -442,10 +442,10 @@ testers are expected to do more *exploratory* testing.
 
 
 1. Add a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command. If so, display an additional message to remind the user about the duplication.
-1. The current implementation of `Phone` allow users to include very long numbers that might not be a valid number in the
-  world. We also intend to allow users to include the `+` prefix to allow users to indicate country codes as well. The
-  invalid message `Phone numbers must start with at least 3 digits.` will need to be updated to reflect this enhancement.
-1. The current implementation of `AlternateContact` does not allow users to include whitespace in `TYPE` and `USERNAME`
-  and `USERNAME` only supports certain special characters. We intend to allow users to include whitespace in `TYPE` and
-  `USERNAME`. `USERNAME` will also be enhanced to include other special characters that are not supported currently. This
-  will allow `AlternateContact` to be used more flexibly.
+1. The current implementation of `Phone` allows users to include very long numbers that might not be a valid number in the
+   world. We also intend to allow users to include the `+` prefix to allow users to indicate country codes as well. The
+   invalid message `Phone numbers must start with at least 3 digits.` will need to be updated to reflect this enhancement.
+1. The current implementation of `AlternateContact` does not allow users to include whitespace in `TYPE` and `USERNAME`.
+   `USERNAME` currently only supports alphanumeric and certain special characters. We intend to allow users to include 
+   whitespace in`TYPE` and `USERNAME`. `USERNAME` will also be enhanced to include other special characters that are not
+   supported currently. This will allow `AlternateContact` to be used more flexibly.

@@ -102,7 +102,7 @@ Duplicate tags are only counted once.
 <div markdown="span" class="alert alert-info">
 :information_source: **About the alternate contact format:**
 The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon and the Username.
-Do note at this moment whitespace is not supported for `TYPE` and `USERNAME`. `USERNAME` supports only special characters `.`, `_` and `-`.
+Do note at this moment whitespace is not supported for `TYPE` and `USERNAME`. `USERNAME` only supports alphanumerics and some special characters `.`, `_` and `-`.
 </div>
 
 **Examples:**
