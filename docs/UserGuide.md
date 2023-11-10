@@ -117,13 +117,17 @@ Shows a list of all patients in HealthSync.
 Adds a patient into HealthSync, with the given patient information.
 
 * A patient's [name](#name) and [ID](#ID) are required when creating a new entry into HealthSync.
+* If the name or ID already exist in HealthSync, you cannot add the patient into HealthSync.
 * All the compulsory [fields](#fields) must be provided.
 * Optional fields like [Appointment](#appointment) and [medical history](#medical-history) need not be provided.
 
 [Format](#command-format):
 `add n/NAME id/ID_NUMBER p/PHONE_NUMBER e/EMAIL_ADDRESS a/ADDRESS [m/MEDICAL_HISTORY]... [ap/APPT]`
 
->:bulb: Use `a` as a shortcut for `add`
+> :bulb: Use `a` as a shortcut for `add`
+
+> :exclamation: Currently, you are not allowed to add a duplicate name into the app! This is an enhancement that
+> we plan to add to the program in the future.
 
 Example commands:
 
