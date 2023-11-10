@@ -45,7 +45,7 @@ All instructions executed in WellNUS generally have the following command format
 The list of all available prefixes and parameters, as well as constraints of each parameter, is shown in the table below. 
 To see a list of all command words, refer to the [Command Summary](#5-command-summary) section.
 
-| Prefix    | Parameter         | Parameter Meaning                | Valid example Usage                      | Parameter Constraints                                                                                                                                            |
+| Prefix    | Parameter         | Parameter Meaning                | Example Usage                      | Parameter Constraints                                                                                                                                            |
 |-----------|-------------------|----------------------------------|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **n/**    | STUDENT_NAME      | Name of student                  | n/Peter Johnson                    | STUDENT_NAME **must** only contain **alphabetical characters and spaces**, be **unique** up to **100 characters** long, and **cannot be blank**.                 |
 | **c/**    | CONTACT_NUMBER    | Contact number of student        | c/94738484                         | CONTACT_NUMBER **must** only contain **numerical characters** beginning with *6, 8 or 9*, be **exactly 8 digits long** (without spaces) and **cannot be blank**. |
