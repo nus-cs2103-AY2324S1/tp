@@ -161,15 +161,31 @@ Called `PersonProfile` or simply "profile" internally. The profile follow this s
 
 ![Structure of Profile Component](images/UiProfileDiagram.png)
 
-With the exception of notes and tags, all other fosterer details are handled using dynamically created copies of `PersonProfileField`.
+Except notes and tags, all other fosterer details are handled using dynamically created copies of `PersonProfileField`.
 
 - `PersonProfileHeader` serves as headers for the data, and cannot be edited by the user.
 - `PersonProfileField` handles a field key and a field value, where the value can be edited.
 - `PersonProfileNote` is similar to a field, except it contains a `TextArea` and supports multiline input.
 - `PersonProfileTags` also supports multiline input, but when in read mode displays tags in a `FlowPane`.
 
-The following is a sequence diagram that shows two separate processes: the user starting an edit in a field,
-and the user successfully completing that edit.
+The following is a sequence diagram that shows two sequential processes: the user starting an edit in a field,
+and the user successfully completing that edit. The alternative paths to this process are numerous, and covering them exhaustively
+is likely not productive. Instead, this represents the "success path" of a successful edit, where nearly every step handles potential failure.
+
+1. The user begins by entering "mail" in the command box of the main UI.
+2. The `MainWindow` finds the correct field that corresponds to the user input, and tells `PersonProfile`.
+3. `PersonProfile` locates the relevant `PersonProfileField`, and forwards the request for focus.
+4. The user's cursor now jumps to the relevant `PersonProfileField`, and thus their next action is handled directly from `PersonProfileField`.
+5. The user presses the `enter` key, which alongside the `esc` key, are special keys involved in the confirmation or cancellation of the edit.
+6. `PersonProfileField` checks that the entered information is valid for that particular field.
+7. `PersonProfileField` then updates the `PersonProfile` about the change.
+8. `PersonProfileField` triggers the event `AFTER_CONFIRM` because the user started a confirmation.
+9. One of the event handlers listening to the `AFTER_CONFIRM` event is `handleFieldLockIn`, which initiates the next two steps.
+10. `handleFieldLockIn` checks that the new `Person` object described by the fields is valid, and creates one.
+11. `handleFieldLockIn` then asks the `MainWindow` to tell the user that the `Person` is created.
+
+Further details on the `MainWindow` side are omitted in this explanation and diagram.
+
 
 ![Sequence of PersonProfile](images/ProfileEditSequenceDiagram.png)
 
