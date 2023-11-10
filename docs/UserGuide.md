@@ -27,7 +27,9 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 3. Copy the file to the folder you want to use as the _home folder_ for WellNUS.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wellnus.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+
+
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it.
@@ -40,11 +42,12 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 ### 1.2 About the command format
 
 All instructions executed in WellNUS generally have the following command format:<pre>COMMAND_WORD PREFIX/PARAMETER</pre>
-The list of all available prefixes and parameters, as well as constraints of each parameter, is shown in the table below.
+The list of all available prefixes and parameters, as well as constraints of each parameter, is shown in the table below. 
+To see a list of all command words, refer to the [Command Summary](#5-command-summary) section.
 
 | Prefix    | Parameter         | Parameter Meaning                | Example Usage                      | Parameter Constraints                                                                                                                                            |
 |-----------|-------------------|----------------------------------|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **n/**    | STUDENT_NAME      | Name of student                  | n/Peter Johnson                    | STUDENT_NAME **must** be **unique**, only contain **alphabetical characters and spaces**, and **cannot be blank**.                                               |
+| **n/**    | STUDENT_NAME      | Name of student                  | n/Peter Johnson                    | STUDENT_NAME **must** only contain **alphabetical characters and spaces**, be **unique** up to **100 characters** long, and **cannot be blank**.                 |
 | **c/**    | CONTACT_NUMBER    | Contact number of student        | c/94738484                         | CONTACT_NUMBER **must** only contain **numerical characters** beginning with *6, 8 or 9*, be **exactly 8 digits long** (without spaces) and **cannot be blank**. |
 | **a/**    | ADDRESS           | Address of student               | a/Blk 515 Choa Chu Kang Avenue 6   | ADDRESS can take any value up to **200 characters** long, and **cannot be blank**.                                                                               |
 | **r/**    | RISK_LEVEL        | Risk level assigned to student   | r/high                             | RISK_LEVEL **must** be one of the following three values: **high**, **medium**, **low**. **Case-insensitive**.                                                   |
@@ -81,7 +84,6 @@ The list of all available prefixes and parameters, as well as constraints of eac
 --------------------------------------------------------------------------------------------------------------------
 
 ## 2. Features
-
 ### 2.1 Utility Commands
 
 #### 2.1.1 Viewing help: `help`
@@ -124,8 +126,8 @@ Invalid examples:
 
 #### 2.2.2 Deleting a Student: `delete`
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
-Deleting a Student also cancels all appointments associated to that Student !
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Deleting a Student also cancels all appointments associated to that Student!
 </div>
 
 Deletes an existing student.
@@ -146,7 +148,7 @@ Invalid examples:
 
 #### 2.2.3 Adding notes for a Student: `note`
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 * Double-clicking on the Student card displays the Student notes under the Notes section!
 The "Notes" column will inform you if there are no student notes available.
@@ -256,10 +258,10 @@ Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIP
    - Maximum of 100 characters
    - Must be the name of a student found in the students list
 2. Date
-    - Must be in the following format: `yyyy-mm-dd`
+    - Must be in the following format: `yyyy-MM-dd`
     - Must be within a year from now
 3. Start/End Time
-    - Must be in the following format: `hh:mm`
+    - Must be in the following format: `HH:mm` in 24-hour format.
 4. Description
    - Maximum of 100 characters, cannot be blank
 
@@ -299,7 +301,7 @@ Format: `filter DATE`
 
 **Parameters**
 1. Date
-   - Must be in the following format: `yyyy-mm-dd`
+   - Must be in the following format: `yyyy-MM-dd`
 
 Example:
 * `filter 2023-10-16`
@@ -369,20 +371,20 @@ _Details coming soon ..._
 
 ## 5. Command summary
 
-| Action                                                                                    | Format, Examples                                                                                                                                                |
-|-------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Help](#211-viewing-help-help)                                                            | `help`                                                                                                                                                          |
-| [Add Student](#221-adding-a-student-add)                                                  | `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                |
-| [Delete Student](#222-deleting-a-student-delete)                                          | `delete STUDENT_INDEX`<br> e.g., `delete 3`                                                                                                                     |
-| [Add Student Note](#223-adding-notes-for-a-student-note)                                  | `note STUDENT_INDEX note/NOTE` <br> e.g., `note 1 note/Likes dogs`                                                                                              |
-| [Find Students](#224-finding-students-by-name-find)                                       | `find STUDENT_NAME` <br> e.g., `find John`                                                                                                                      |
-| [Assign Risk Level to Student](#225-assigning-risk-level-to-student-tag)                  | `tag STUDENT_INDEX r/RISK_LEVEL`<br> e.g.,`tag 4 r/high`                                                                                                        |
-| [Edit Student details](#226-editing-student-details-edit)                                 | `edit STUDENT_INDEX c/CONTACT_NUMBER A/HOME_ADDRESS`<br> e.g.,`edit 1 c/91234567`                                                                               |
-| [Schedule Appointment](#231-scheduling-an-appointment-schedule)                           | `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` |
-| [Cancel Appointment](#232-cancelling-an-appointment-cancel)                               | `cancel APPOINTMENT_INDEX`<br> e.g., `cancel 3`                                                                                                                 |
-| [Filter Appointments](#233-filtering-appointments-by-date-filter)                         | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                    |
+| Action                                                                                     | Format, Examples                                                                                                                                                |
+|--------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Help](#211-viewing-help-help)                                                             | `help`                                                                                                                                                          |
+| [Add Student](#221-adding-a-student-add)                                                   | `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                |
+| [Delete Student](#222-deleting-a-student-delete)                                           | `delete STUDENT_INDEX`<br> e.g., `delete 3`                                                                                                                     |
+| [Add Student Note](#223-adding-notes-for-a-student-note)                                   | `note STUDENT_INDEX note/NOTE` <br> e.g., `note 1 note/Likes dogs`                                                                                              |
+| [Find Students](#224-finding-students-by-name-find)                                        | `find STUDENT_NAME` <br> e.g., `find John`                                                                                                                      |
+| [Assign Risk Level to Student](#225-assigning-risk-level-to-student-tag)                   | `tag STUDENT_INDEX r/RISK_LEVEL`<br> e.g.,`tag 4 r/high`                                                                                                        |
+| [Edit Student details](#226-editing-student-details-edit)                                  | `edit STUDENT_INDEX c/CONTACT_NUMBER A/HOME_ADDRESS`<br> e.g.,`edit 1 c/91234567`                                                                               |
+| [Schedule Appointment](#231-scheduling-an-appointment-schedule)                            | `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` |
+| [Cancel Appointment](#232-cancelling-an-appointment-cancel)                                | `cancel APPOINTMENT_INDEX`<br> e.g., `cancel 3`                                                                                                                 |
+| [Filter Appointments](#233-filtering-appointments-by-date-filter)                          | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                    |
 | [View all Students and/or Appointments](#241-viewing-all-students-andor-appointments-view) | `view g/CATEGORY` <br> e.g., `view g/all`                                                                                                                       |
-| [Exit](#242-exiting-the-program-exit)                                                     | `exit`                                                                                                                                                          |
-| [Delete all data](#243-clearing-storage-clear)                                            | `clear`                                                                                                                                                         |
+| [Exit](#242-exiting-the-program-exit)                                                      | `exit`                                                                                                                                                          |
+| [Delete all data](#243-clearing-storage-clear)                                             | `clear`                                                                                                                                                         |
 
 
