@@ -35,7 +35,7 @@ public class InterviewType {
         if (isEmptyInterviewType(interviewType)) {
             this.interviewType = TO_ADD_INTERVIEW_TYPE;
         } else {
-            this.interviewType = interviewType;
+            this.interviewType = interviewType.toUpperCase();
         }
     }
 
