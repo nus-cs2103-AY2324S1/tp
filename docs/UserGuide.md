@@ -730,10 +730,10 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 **Q**: Is my data secure? <br>
 **A**: Yes, your data is stored locally in your computer and is not accessible by anyone else.
 
-**Q**: Will I lose my data when I exit the app?
+**Q**: Will I lose my data when I exit the app? <br>
 **A**: No you will not. The data is stored on your computer and can still be displayed after exiting the app.
 
-**Q**: Do I need internet connection to use Staff-Snap?
+**Q**: Do I need internet connection to use Staff-Snap? <br>
 **A**: You will need internet connection to open the web version of our user guide after clicking `help` or typing the
 `help` command. Otherwise, no internet connection is required to perform the other features.
 
