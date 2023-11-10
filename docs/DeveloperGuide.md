@@ -1,16 +1,15 @@
-
 ---
 layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -69,13 +68,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -86,7 +85,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -115,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -125,6 +124,8 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `ThemeProperty` object which represents the theme of the application.
+* stores a `CommandStringStash` object which has the history of recently executed commands.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -272,7 +273,7 @@ can be done if the user is already on the least recent command in the stash, and
 if the user has not yet cycled backward. To consider all these cases, the `commandInputString` is passed as a parameter
 to `CommandStringStash#getPrevCommandString(String commandInputString)` and `CommandStringStash#getPassedCommandString(String commandInputString)`.
 The `commandInputString` is the current command in the CLI textbox and is returned from these methods in the case of invalid operations
-so there is no change to the CLI textbox.
+so that there is no change to the CLI textbox.
 
 </div>
 
@@ -289,10 +290,10 @@ Step 2. The user executes the `list -sp` command to list the specialists in DoCo
 
 ![Recall Step 2](images/RecallStep2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **note:** After an addition, the `currentCmdIndex` is set to point
-one index after the last element in the `CommandStringStash`. The `Logic#getPrevCommandString` method decrements
-this index before returning the String pointed to by `currentCmdIndex` so this works as a way of 'resetting' the state
-allowing the user to start to cycle back from the most recently added command again.
+<div markdown="span" class="alert alert-info">:information_source: **note:** After `Logic#getPrevCommandString` is called,
+the `currentCmdIndex` is set to point one index after the last element in the `CommandStringStash`. 
+This 'resets' the state allowing the users to start to cycle back from the most recently added command again.
+The `Logic#getPrevCommandString` method decrements the `currentCmdIndex` before returning the String allowing the mechanism to work as intended.
 
 </div>
 
@@ -327,7 +328,7 @@ The following activity diagram summarises what happens when a user presses the u
 
 ![Up Arrow Activity Diagram](images/UpArrowActivityDiagram.png)
 
-Step 6. Instead of entering `help` the user decides to delete the first specialist currently displayed.
+Step 6. Instead of executing `help` the user decides to delete the first specialist currently displayed.
 They press the down arrow on the keyboard to recall the `delete 1` command they just passed.
 This results in `Logic#getPassedCommandString` being called which returns `delete 1`.  The user's CLI text box is then set to display `delete 1`.
 
@@ -428,12 +429,6 @@ ShortcutSettings implements the `Serializable` interface, thus is saved to `json
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Planned Enhancements**
-
-1. DoConnek Pro currently checks for duplicate persons by name. This means that people with the same names cannot be added even if they have different parameters (like `Phone` or `Email`). 
-We plan on implementing an `NRIC` field for patients and an `MCR` field for specialists as unique identifiers to solve this issue. 
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -507,14 +502,14 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
 (For all use cases below, the **System** is the `DoConnek Pro` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a patient from the records**
 
 **MSS**
 
-1.  User requests to list persons
-2.  System shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  System deletes the person
+1.  User requests to list some patients.
+2.  System shows a list of patients.
+3.  User requests to delete a specific patient in the list.
+4.  System deletes the patient.
 
     Use case ends.
 
@@ -524,97 +519,77 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. System detects invalid request format.
 
     * 3a1. System shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-**Use case: Add a patient**
+**Use case: Add a patient to the records**
 
 **MSS**
 
-1. User searches list to check if patient is already in the system
-2. System shows that there are no entries matching the patient's name
-3. User adds patient to the system
-4. System confirms that the person has been added
-
+1. User searches list to check if patient is already in the system.
+2. System shows that there are no entries matching the patient's name.
+3. User requests to add patient to the system.
+4. System confirms that the person has been added.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given parameters are invalid.
+* 1a. System shows that there is an existing patient with that name.
+
+    Use case ends.
+
+* 3a. System detects invalid request format.
 
   * 3a1. System shows an error message.
 
-    Use case resumes at step 2.
+    Use case resumes at step 3.
 
-**Use case: Listing all patients**
-
-**MSS**
-
-1. User requests to list all patients
-2. System shows a list of all patients stored 
-   
-    Use case ends.
-
-**Extensions**
-
-* 1a. System detects invalid request format
-
-    * 1a1. System shows an error message.
-  
-      Use case ends.
-
-**Use case: Listing all specialists**
+**Use case: List all patients in the records**
 
 **MSS**
 
-1. User requests to list all specialists
-2. System shows a list of all specialists stored 
+1. User requests to list all patients.
+2. System shows a list of all patients stored.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. System detects invalid request format
+* 1a. System detects invalid request format.
 
     * 1a1. System shows an error message.
 
       Use case ends.
 
-**Use case: Searching for patients**
+**Use case: Search for patients in the records**
 
 **MSS**
 
 1. User requests to find patients from a keyword.
-2. System shows a list of patients that match the keyword with their names.
+2. System shows a list of patients that match the keyword.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. System detects invalid request format
+* 1a. System detects invalid request format.
 
     * 1a1. System shows an error message.
 
       Use case ends.
 
-* 1b. System could not find any patient from the keyword
-
-    * 1b1. System shows an error message.
-
-      Use case ends.
-
-**Use case: View a person**
+**Use case: View details of a patient in the records**
 
 **MSS**
 
-1.  User requests to list persons
-2.  System shows a list of persons
-3.  User requests to view the details a specific person in the list
-4.  System shows the person details
+1.  User requests to list some patients.
+2.  System shows a list of patients.
+3.  User requests to view the details of a specific patient in the list.
+4.  System shows the patient's details.
 
     Use case ends.
 
@@ -624,7 +599,7 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. System detects invalid request format.
 
     * 3a1. System shows an error message.
 
@@ -634,16 +609,14 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
 **MSS**
 
-1.  User requests to exit the program
-2.  System exits the program
+1.  User requests to exit the program.
+2.  System exits the program.
 
 * 1a. System detects invalid request format.
 
   * 1a1. System shows an error message.
 
     Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -698,13 +671,12 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list - pa` command. Multiple persons in the list.
 
     1. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
@@ -715,13 +687,12 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Viewing a person
 
 1. Viewing a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list - pa` command. Multiple persons in the list.
 
     1. Test case: `view 1`<br>
        Expected: First person is selected to be viewed. Details of the viewed person shown in the View Person Panel.
@@ -733,19 +704,7 @@ Timestamp in the status bar is updated.
     1. Other incorrect view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
-
-# Appendix
-
-## Planned Enhancements
+## **Appendix: Planned Enhancements**
 
 1. Currently, the view panel can only be updated using the view command. 
 However, we are planning on implementing a feature that will allow users to update the view panel by simply clicking on a person in the list panel.
@@ -757,3 +716,7 @@ still seems intuitive and reasonable to expect.
    In contrast, the `delsc` command handles invalid shortcuts by recognizing and ignoring them, while continuing to remove any valid shortcuts in the command.
    The inconsistency between these two delete functions has been identified, and we have plans to address it in the future.
    Our upcoming improvement will entail modifying the `delete` command to acknowledge and ignore invalid indexes while effectively deleting records specified by valid indexes provided by the user.
+
+
+3. DoConnek Pro currently checks for duplicate persons by name. This means that people with the same names cannot be added even if they have different parameters (like `Phone` or `Email`).
+   We plan on implementing an `NRIC` field for patients and an `MCR` field for specialists as unique identifiers to solve this issue. 
