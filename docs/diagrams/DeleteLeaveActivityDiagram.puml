@@ -2,33 +2,27 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:ClickServlet.handleRequest();
-:new page;
-if (Page.onSecurityCheck) then (true)
-  :Page.onInit();
-  if (isForward?) then (no)
-    :Process controls;
-    if (continue processing?) then (no)
-      stop
-    endif
+:User inputs Edit Leave Command;
 
-    if (isPost?) then (yes)
-      :Page.onPost();
-    else (no)
-      :Page.onGet();
+if () then ([else])
+  :Display error message;
+else ([Valid command format])
+  if () then ([else])
+    :Display error message;
+  else ([Valid ID])
+    if () then ([else])
+        :Display error message;
+    else ([Valid date format])
+        if () then ([else])
+            :Display error message;
+        else ([no leave found between start and end dates])
+            if () then ([else])
+                :Display error message;
+            else ([leaves found between start and end dates])
+                : Delete leaves found between start and end dates;
+            endif
+        endif
     endif
-    :Page.onRender();
-  endif
-else (false)
-endif
-
-if (do redirect?) then (yes)
-  :redirect process;
-else
-  if (do forward?) then (yes)
-    :Forward request;
-  else (no)
-    :Render page template;
   endif
 endif
 

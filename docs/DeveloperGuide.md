@@ -272,7 +272,7 @@ Given below is an example usage scenario for the command:
 
 The following activity diagram summarizes what happens when a user executes the reset command:
 
-<INSERT SORT ACTIVITY DIAGRAM HERE>
+![Sort Activity Diagram](images/SortActivityDiagram.png)
 
 #### Design considerations:
 
@@ -542,7 +542,7 @@ Given below is an example usage scenario for the command:
 
 The following activity diagram summarizes what happens when a user executes the edit leave command:
 
-<INSERT DELETE LEAVE ACTIVITY DIAGRAM HERE>
+![Delete Leave Activity Diagram](images/DeleteLeaveActivityDiagram.png)
 
 #### Design considerations:
 
