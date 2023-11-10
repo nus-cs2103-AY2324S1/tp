@@ -127,7 +127,7 @@ Invalid examples:
 #### 2.2.2 Deleting a Student: `delete`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Be careful when deleting a student!**
-Deleting a Student also cancels all appointments associated to that Student!
+Deleting a Student also cancels all appointments associated to that Student.
 </div>
 
 Deletes an existing student.
@@ -204,7 +204,7 @@ Invalid example:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: How the find command works:**<br>
-The intended behaviour of the find instruction might be confusing. To illustrate the proper behaviour, consider the example scenario below:<br>
+The intended behaviour of the find instruction might be confusing. To illustrate the proper behaviour, consider the example scenario below.<br>
 Given a Student named `Roy Lee` is in the WellNUS student list:
 * `find Roy`, `find Lee` and `find Roy Lee` will successfully find the Student.
 * `find Royy`, `find Le`, `find Roy L`, `find RoyLee` will not find the Student.
@@ -235,7 +235,7 @@ Invalid examples:
 
 #### 2.2.6 Editing Student details: `edit`
 
-Edit a student's contact number or address
+Edit a student's contact number or address.
 
 Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
 
