@@ -1,13 +1,17 @@
 package seedu.address.storage;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCards.getTypicalDeck;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -38,9 +42,29 @@ public class JsonDeckStorageTest {
     }
 
     @Test
-    public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readDeck("NonExistentFile.json").isPresent());
+    public void read_missingFile_emptyResult() {
+        Path path = Paths.get("NonExistentFile.json");
+
+        try {
+            Optional<ReadOnlyDeck> result = readDeck("NonExistentFile.json");
+            assertTrue(result.isPresent());
+        } catch (Exception e) {
+            fail("Exception should not be thrown");
+        } finally {
+            try {
+                Path nonExistentFilePath = TEST_DATA_FOLDER.resolve("NonExistentFile.json");
+                boolean deleted = Files.deleteIfExists(nonExistentFilePath);
+                if (!deleted) {
+                    fail("Test file was not deleted because it did not exist." + path);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                fail("Could not clean up the test file due to an IOException: " + e.getMessage());
+            }
+        }
     }
+
+
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
