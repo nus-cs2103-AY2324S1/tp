@@ -175,4 +175,108 @@ public class PersonTest {
                 + ", animalType=" + ALICE.getAnimalType() + ", housing=" + ALICE.getHousing() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void isAvailableFosterer_allNil() {
+        //note: person constructor already checks for conflicting entries
+        Person fosterer = new PersonBuilder(ALICE)
+                .withAvailability(Person.NIL_WORD)
+                .withAnimalType(Person.NIL_WORD, Availability.NIL_AVAILABILITY)
+                .withAnimalName(Person.NIL_WORD)
+                .build();
+        assertFalse(fosterer.isCurrentFosterer());
+    }
+
+    @Test
+    public void isAvailableFosterer_NotAvailable_restNil() {
+        Person fosterer = new PersonBuilder(ALICE)
+                .withAvailability(Availability.NOT_AVAILABLE_WORD)
+                .withAnimalType(Person.NIL_WORD, Availability.NOT_AVAILABLE)
+                .withAnimalName(Person.NIL_WORD)
+                .build();
+        assertFalse(fosterer.isAvailableFosterer());
+    }
+
+    @Test
+    public void isAvailableFosterer_NotAvailable_animalTypeKnown() {
+        Person fosterer = new PersonBuilder(ALICE)
+                .withAvailability(Availability.NOT_AVAILABLE_WORD)
+                .withAnimalType(AnimalType.CURRENT_CAT_WORD, Availability.NOT_AVAILABLE)
+                .withAnimalName("miu")
+                .build();
+        assertFalse(fosterer.isAvailableFosterer());
+    }
+
+    @Test
+    public void isAvailableFosterer_available_restNil() {
+        Person fosterer = new PersonBuilder(ALICE)
+                .withAvailability(Availability.AVAILABLE_WORD)
+                .withAnimalType(Person.NIL_WORD, Availability.AVAILABLE)
+                .withAnimalName(Person.NIL_WORD)
+                .build();
+        assertTrue(fosterer.isAvailableFosterer());
+    }
+
+    @Test
+    public void isAvailableFosterer_available_animalTypeKnown() {
+        Person fosterer = new PersonBuilder(ALICE)
+                .withAvailability(Availability.AVAILABLE_WORD)
+                .withAnimalType(AnimalType.ABLE_DOG_WORD, Availability.AVAILABLE)
+                .withAnimalName(Person.NIL_WORD)
+                .build();
+        assertTrue(fosterer.isAvailableFosterer());
+    }
+
+    @Test
+    public void isCurrentFosterer_allNil() {
+        Person fosterer = new PersonBuilder(ALICE)
+                .withAvailability(Person.NIL_WORD)
+                .withAnimalType(Person.NIL_WORD, Availability.NIL_AVAILABILITY)
+                .withAnimalName(Person.NIL_WORD)
+                .build();
+        assertFalse(fosterer.isCurrentFosterer());
+    }
+
+    @Test
+    public void isCurrentFosterer_available_restNil() {
+        Person fosterer = new PersonBuilder(ALICE)
+                .withAvailability(Availability.AVAILABLE_WORD)
+                .withAnimalType(Person.NIL_WORD, Availability.AVAILABLE)
+                .withAnimalName(Person.NIL_WORD)
+                .build();
+        assertFalse(fosterer.isCurrentFosterer());
+    }
+
+    @Test
+    public void isCurrentFosterer_available_animalTypeKnown() {
+        Person fosterer = new PersonBuilder(ALICE)
+                .withAvailability(Availability.AVAILABLE_WORD)
+                .withAnimalType(AnimalType.ABLE_DOG_WORD, Availability.AVAILABLE)
+                .withAnimalName(Person.NIL_WORD)
+                .build();
+
+        assertFalse(fosterer.isCurrentFosterer());
+    }
+
+    @Test
+    public void isCurrentFosterer_available_notAvail_restNil() {
+        Person fosterer = new PersonBuilder(ALICE)
+                .withAvailability(Availability.NOT_AVAILABLE_WORD)
+                .withAnimalType(Person.NIL_WORD, Availability.NOT_AVAILABLE)
+                .withAnimalName(Person.NIL_WORD)
+                .build();
+
+        assertFalse(fosterer.isCurrentFosterer());
+    }
+
+    @Test
+    public void isCurrentFosterer_available_notAvail_animalTypeKnown() {
+        Person fosterer = new PersonBuilder(ALICE)
+                .withAvailability(Availability.NOT_AVAILABLE_WORD)
+                .withAnimalType(AnimalType.CURRENT_CAT_WORD, Availability.NOT_AVAILABLE)
+                .withAnimalName("miu")
+                .build();
+
+        assertTrue(fosterer.isCurrentFosterer());
+    }
 }
