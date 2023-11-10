@@ -40,6 +40,13 @@ public class UniquePatientList extends UniqueObjectList<Patient> {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
+    /**
+     * Returns true if the list contains an equivalent ic as the given argument.
+     */
+    public boolean containsIc(Ic nric) {
+        requireNonNull(nric);
+        return internalList.stream().anyMatch(patient -> patient.getIc().equals(nric));
+    }
 
     /**
      * Adds a person to the list.

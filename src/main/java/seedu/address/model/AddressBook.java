@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.UniqueAppointmentList;
 import seedu.address.model.person.UniqueDoctorList;
@@ -92,6 +93,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(patient);
         // return in patients list or in doctor list
         return patients.contains(patient);
+
     }
 
     /**
@@ -103,7 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a appointment with the same details as {@code appointment} exists in the address book.
+     * Returns true if an appointment with the same details as {@code appointment} exists in the address book.
      */
     public boolean hasAppointment(Appointment appointment) {
         requireNonNull(appointment);
@@ -233,5 +235,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return Objects.hash(patients, doctors, appointments);
+    }
+
+    /**
+     * Checks if an IC exists in the addressbook.
+     */
+    public boolean hasIc(Ic nric) {
+        return patients.containsIc(nric) || doctors.containsIc(nric);
     }
 }

@@ -60,7 +60,7 @@ public class AddDoctorCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasIc(toAdd.getIc()) || model.hasPerson(toAdd)) {
             logger.warning("Can't add doctor as doctor already exists");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -69,7 +69,6 @@ public class AddDoctorCommand extends Command {
         logger.info("Successfully added doctor");
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

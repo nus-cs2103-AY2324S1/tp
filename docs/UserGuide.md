@@ -16,7 +16,8 @@ can get your patients management tasks done faster than traditional GUI apps.
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. If you don't, install it for your relevant operating
+    system at this link https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html
 
 1. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
 
@@ -97,6 +98,8 @@ A doctor can have any number of tags (including 0). Duplicate tags, however, are
 
 - A doctor **MUST** have a non-empty NAME and a valid IC at the very least.
   Failure to include these details may result in an error.
+- A person can either be a doctor or a patient, but not both. Hence if the doctor's IC is already in the app
+as a patient, it may result in an error.
 - Phone Numbers and Emails have to be in a valid format.
 - PHONE_NUMBER must have exactly 8 digits.
 - EMAIL must contain email domain (eg. `@gmail.com`).
@@ -125,6 +128,8 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 
 - A patient **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result
   in an error.
+- A person can either be a doctor or a patient, but not both. Hence, if the patient's IC is already in the app
+    as a doctor, it may result in an error.
 - Phone Numbers and Emails have to be in a valid format.
     - PHONE_NUMBER must have at least 3 digits.
     - EMAIL must contain email domain (eg. `@gmail.com`).
@@ -218,6 +223,7 @@ Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `NRIC`. The NRIC **must be a valid IC number**
 * At least one of the optional fields must be provided.
+* If the provided fields are the same as the original, the command will still work.
 * Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition of a
   doctor)
 * Existing values will be updated to the input values.
@@ -329,21 +335,6 @@ Repeats the previous command; an `undo` for an `undo` command.
 Format: `redo`
 
 * Can only do up to 5 redos at any one time.
-
-### Adding / Deleting remarks : `remark`
-
-Adds remark to specified person. Adding empty remark deletes the current remark from specified person.
-
-Format: `remark NRIC`
-
-* Modifies remark of the person with the specified NRIC.
-* The NRIC **must be a valid NRIC format** and must belong to a person in the addressbook.
-* The NRIC is case-sensitive. e.g `tXXXXXXXz` is not the same as `TXXXXXXXZ`
-
-Examples:
-
-* `remark S1234567J r/` deletes remarks belonging to Jonathan who has the NRIC `S1234567J`
-* `remark S1234567J r/Has Health Issues` changes current remarks belonging to Jonathan to `Has Health Issues`
 
 ### Exiting the program : `exit`
 

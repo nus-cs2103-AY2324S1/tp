@@ -58,6 +58,4 @@ public class Ic {
     public int hashCode() {
         return value.hashCode();
     }
-
-
 }
