@@ -39,5 +39,5 @@ My code contributions for this project can be seen here: [TP RepoSense Code Dash
 //TODO
 
 ### Contributions beyond the project team
-* During PE-D, I have put in efforts to [find bugs](https://github.com/AY2324S1-CS2103T-T09-4/tp/issues?q=is%3Aissue+%22%5BPE-D%5D%5BTester+D%5D%22) that do not correspond to their UG.
+* During PE-D, I have put in effort to [find bugs](https://github.com/AY2324S1-CS2103T-T09-4/tp/issues?q=is%3Aissue+%22%5BPE-D%5D%5BTester+D%5D%22) that do not correspond to their UG
 
