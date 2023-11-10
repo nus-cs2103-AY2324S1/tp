@@ -1,0 +1,16 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters the "delete" command;
+
+
+if () then ([Input is a valid number])
+    : Card is succesfully deleted;
+
+else ([else])
+    : Parse Exception Thrown;
+endif
+stop
+@enduml

@@ -171,6 +171,11 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+Below is an example of the object diagram of how the cards are stored in the `Deck` class 
+
+<img src="images/DeckObjectDiagram.png" width="600" />
+
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
 
@@ -182,6 +187,10 @@ The add command can be found in the `LogicManager` class. User input is first pa
 to validate if its add command with the specified fields and format. 
 
 The add command is exposed in the `Model` interface as the `Model#addCard`
+
+Below is the overview on the add command:
+
+<img src="images/AddCommandActivityDiagram.png" width="600" />
 
 Here is the flow of how the add command is featured.
 
@@ -214,6 +223,10 @@ The delete command can be found in the `LogicManager` class. User input is first
 to validate if it is a valid delete command with the specified fields and format.
 
 The delete command is exposed in the `Model` interface as the `Model#setCard`
+
+Below is the overview on the delete command:
+
+<img src="images/DeleteCommandActivtityDiagram.png" width="600" />
 
 Here is the flow of how the delete command is featured.
 
