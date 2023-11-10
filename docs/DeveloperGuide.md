@@ -158,13 +158,10 @@ This section describes some noteworthy details on how certain features are imple
 The proposed implementation involves the ReadCommand and some associated classes:
 
 * `ReadCommand` — This class is responsible for executing the "Read" command. It parses the user input, retrieves information from the model, and passes the results to the UI for display.
-(class diagram to be added)
 
 * `ReadCommandParser` — Responsible for parsing user input and creating a ReadCommand object. It extracts the index of the employee in the last shown list and the requested field.
-(Class diagram to be added)
 
 * `PersonCardWithSpecificField` - Since we have to display only one specific field, we created another person card with just one field. This class is responsible for displaying the name of the person and a specific field requested by the user in the UI. It receives the necessary information from the command result and formats it for display.
-(Class diagram to be added)
 
 Displaying a specific field with the new PersonCardWithSpecificField class.
 
@@ -176,15 +173,21 @@ Displaying a specific field with the new PersonCardWithSpecificField class.
 
 ![ReadCommandAfterExecute](images/ReadCommandAfterExecute.png)
 
+The following class diagram shows how the different classes interact with one another in the read Feature:
 
-How the read feature works in sequence diagram.
+![ReadCommandClassDiagram](images/ReadClassDiagram.png)
 
-The user enters the command "read 1 /a" and executes it. The command is then parsed by AddressBookParser. The AddressBookParser parsed the input and created ReadCommandParser and ReadCommandParser parsed the remaining input(exclude the command word). If it parses successfully, it will eventually create a ReadCommand. The ReadCommand is then executed. If the index is not out of bounds, it will call Model#setSpecificPersonToDisplay() to filter the list to only the specific person. Then it will also call the respective getter to get the specific field from the Person. After getting the specific field, it will then create a CommandResult for the UI to display.
+The following activity diagram summarises the process of reading specific field for a particular employee:
+
+![ReadCommandActivityDiagram](images/ReadActivityDiagram.png)
 
 This is the sequence diagram to show how the read operation works.
+
 ![ReadSequenceDiagram3](images/ReadSequenceDiagram.png)
 
 :information_source: **Note:** The lifeline for `ReadCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The user enters the command "read 1 /a" and executes it. The command is then parsed by AddressBookParser. The AddressBookParser parsed the input and created ReadCommandParser and ReadCommandParser parsed the remaining input(exclude the command word). If it parses successfully, it will eventually create a ReadCommand. The ReadCommand is then executed. If the index is not out of bounds, it will call Model#setSpecificPersonToDisplay() to filter the list to only the specific person. Then it will also call the respective getter to get the specific field from the Person. After getting the specific field, it will then create a CommandResult for the UI to display.
 
 #### Design considerations:
 
@@ -419,6 +422,38 @@ The following activity diagram summarises the process of adding leave for an emp
     * Pros: Users are able to delete the leave within the range of dates that they entered, provided that they exist.
     * Cons: Can be confusing to users as to what have been deleted, and also harder to maintain.
 
+#### 3. View Leave Feature
+The proposed View Leave feature is facilitated by `ViewLeaveCommandParser`and `ViewLeaveCommand`
+
+The `ViewLeaveCommand` class is responsible for executing the `viewleave` command.
+
+The `ViewLeaveCommandParser` class is responsible for parsing the user input for the `viewleave` command.
+
+The following class diagram shows how the different classes interact with one another in the View Leave Feature:
+
+![ViewLeaveClassDiagram](images/ViewLeaveClassDiagram.png)
+
+The following sequence diagram shows how the `viewleave` operation works:
+
+![ViewLeaveSequenceDiagram](images/ViewLeaveSequenceDiagram.png)
+
+After parsing user input, the `ViewLeaveCommandParser` creates a `ViewLeaveCommand` and executes it. This command then interacts with the `Model` to fetch the list of employees. Subsequently, it generates a hashmap where each local date corresponds to a list of employees on leave. By querying this hashmap for the specified date, the command identifies employees on leave. Finally, it creates a `CommandResult` containing the names of employees on leave for the given date.
+
+The following activity diagram summarises the process of viewing leave for an employee:
+
+![ViewLeaveActivityDiagram](images/ViewLeaveActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How viewleave executes:**
+
+* **Alternative 1 (current choice):** View the employee who is on leave on the specific date
+    * Pros: User gets to know which specific employee is on leave on that date
+    * Cons: Scanning through a list of names could be less efficient
+
+* **Alternative 2:** View the number of employee who is on leave on the specific date
+    * Pros: Simpler implementation, providing a quick count of employees on leave.
+    * Cons: Users only obtain the number of employees on leave without individual details.
 
 ### Attendance 
 
