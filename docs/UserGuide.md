@@ -586,6 +586,12 @@ This feature involves only 1 command: `find`, which list contacts whose fields m
 
 Format: `find FIND_EXPRESSION`
 
+<box theme="primary" icon=":fa-solid-lightbulb:">
+
+The contact list will be filtered until you perform another `find` command or use the [`list` command](#list-all-contacts-list).
+This includes commands that add, delete, or edit contacts — newly-added more edited contacts will be shown only if they match the criteria.
+</box>
+
 Find expressions have a low barrier to entry that allows for simple filtering by field. This basic filtering for contacts is likely sufficient for most of your use cases. We recommend that you first read the [basic filtering](#basic-filtering) section to learn how to perform simple filtering by a single field.
 
 If you then find that the basic filtering is insufficient for your use case, you can read the [advanced filtering](#advanced-filtering) section to learn how to perform more complex filtering.
