@@ -8,7 +8,9 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
+* [File icon](https://www.flaticon.com/free-icon/document_2258853?term=file&page=1&position=6&origin=search&related_id=2258853) and [Help icon](https://www.flaticon.com/free-icon/question_471664?term=help&page=1&position=2&origin=search&related_id=471664) used in the main window are from Flaticon.
 
+* Useful notations in the User Guide was inspired from a past project [TaskBook](https://ay2223s1-cs2103t-t13-4.github.io/tp/UserGuide.html#useful-notations).
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -23,7 +25,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:**<br>
+The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +39,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +71,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +88,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -99,7 +102,6 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 </div>
 
 How the `Logic` component works:
-
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
@@ -114,10 +116,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
@@ -135,7 +136,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -215,37 +216,98 @@ The add feature ensures that user input is correctly parsed and validated, and i
 
 ### Delete feature
 
-The delete mechanism allows users to delete fosterers in the address book. This feature is facilitated by the `DeleteCommand`, `DeleteCommandParser` and `Indices` classes, to handle user input and delete the correct fosterers.  Specifically, the feature is implemented through the following components and operations:
+#### Implementation
+
+The delete mechanism allows users to delete fosterers in the address book. This feature is facilitated by the `DeleteCommand`, `DeleteCommandParser` and `Indices` classes, to handle user input and delete the correct fosterers.  This feature is implemented using the following components and operations:
 
 * `DeleteCommand` — The core component responsible for executing the deletion of fosterers in the address book.
-* `Indices` — Represents the indices that the user inputs, each index corresponding to a fosterer in the last seen list of fosterers. 
+* `Indices` — Represents the indices that the user inputs, each index corresponding to a fosterer in the last seen list of fosterers. This class encapsulates one or more `Index` objects. 
 * `ParserUtil` and `DeleteCommandParser` — Contains the parsing methods for string input of the user. They ensure that the indices are valid by meeting specific requirements. 
 
-Given below is an example usage scenario and how the delete mechanism behaves at each step.
+Given below is an example usage scenario and how the delete mechanism behaves at each step. The sequence diagram for deleting multiple fosterers is similar to the example in [Logic](#logic-component).
+
+![Interactions Inside the Logic Component for the `delete 1 2 3` Command](images/DeleteMultipleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 Step 1. The user enters the delete command with at least one index. The `DeleteCommandParser` is invoked to parse the user's input. 
 
-Step 2. `DeleteCommandParser` will then invoke the `ParserUtil` to check for the validity of the indices. If indices are invalid, the system will generate an error message. The error message will be displayed to the user, providing clear feedback about the issue and the specific constraints that are not met.
+Step 2. `DeleteCommandParser` will then invoke the `ParserUtil` to check for the validity of indices (omitted from diagram for simplicity). If indices are invalid, the system will generate an error message. The error message will be displayed to the user, providing feedback about the issue and the specific constraints that are not met.
 
-Step 3. If indices are valid, the `DeleteCommand` will then execute the deletion by obtaining the fosterers from last seen list, and then deleting them from the address book. This is done in the `execute`  method of `DeleteCommand`.
+Step 3. For each valid index, the `DeleteCommand` will execute the deletion by obtaining that fosterer from the list of unique persons in the address book, and then updating the model to remove the fosterer. This is done in the `execute` method of `DeleteCommand`.
 
-Step 4. A success message is displayed to the user to confirm that the fosterers have been deleted from the address book.
+Step 4. A success message is displayed to the user to confirm that the selected fosterers have been deleted from the address book.
 
-This delete feature allows the user to delete multiple fosterers at once, by ensuring that the user input indices are correctly parsed and validated. 
+Therefore, by ensuring that the user input indices are correctly parsed and validated, this delete feature allows the user to delete multiple fosterers at once.
 
 #### Design considerations:
 
 **Aspect: How delete executes:**
 
 * **Alternative 1 (current choice):** Delete multiple fosterers at once.
-    * Pros: Avoid having to update the model multiple times for multiple delete commands.
-    * Cons: Slightly harder to implement. 
-  
+    * Pros: Do not have to parse user input multiple times in order for the user to perform mass deletion.
+    * Cons: Slightly harder to implement.
 
 * **Alternative 2:** Delete only one fosterer at a time.
     * Pros: Easy to implement. 
     * Cons: Overhead associated with a chain of delete commands should the user choose to perform multiple deletions.
 
+
+### Statistics feature
+#### Implementation
+
+The Statistics feature provides a summary of selected address book data to the user. The data we can provide insights to are those of available fosterers, current fosterers and housing type of fosterers. Statistics include _number_ and _percentage_ information. <br>
+This is facilitated by the `StatsCommand`, `StatsAvailCommand`, `StatsCurrentCommand` and `StatsHousingCommand` classes, as well as the `StatsCommandParser` class. The relationship between the Stats command classes are shown below.
+![StatsClassDiagram](images/StatsClassDiagram.png)
+
+* `StatsCommand` — This is an abstract class that contains utility methods used by its subclasses for percentage calculation.
+* `StatsAvailCommand` — Contains methods to calculate statistics of available fosterers and the animals they can foster. 
+* `StatsCurrentCommand` — Contains methods to calculate statistics of current fosterers and the animals they are currently fostering. 
+* `StatsHousingCommand` — Contains methods to calculate statistics of the different housing types of fosterers. 
+* `StatsCommandParser` — Contains the parsing methods for string input of the user. It is in charge of parsing the type of statistics requested by the user, and creating the corresponding `StatsCommand`.<br>
+
+Given below is an example usage scenario and how the statistics feature behaves at each step. It shows the execution of a `stats avail` command, which requests for statistics about the available fosterers. 
+
+![Interactions Inside the Logic Component for the StatsAvailCommand](images/StatsAvailSequenceDiagram.png)
+
+![Self Invocation StatsAvail](images/StatsAvailSelfInvDiagram.png)
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `StatsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+Step 1. The user enters the `stats avail` command. The `StatsCommandParser` is invoked to parse the user's input.
+
+Step 2. `StatsCommandParser` will then parse the argument inputted with the `stats` command, in this case it is `avail`. If the argument is not `avail`, `curr` or `housing`, the `StatsCommandParser` will then generate an error message to the user, indicating that the requested statistic is not available. 
+
+Step 3. The `StatsAvailCommand` will then call relevant methods to obtain the needed numbers and percentages, done in the `execute` command. 
+
+Step 4. A success message with the statistics will then be displayed to the user.
+
+The other commands `stats curr` and `stats housing` have a similar execution path, replacing `StatsAvailCommand` with `StatsCurrCommand` and `StatsHousingCommand` respectively.
+
+#### Design considerations:
+
+**Aspect: How to display the statistics:**
+
+* **Alternative 1 (current choice):** Show the availability and current statistics separately.
+    * Pros: Displayed statistics are specific to the user's query, showing only the relevant data.
+    * Cons: Need to create more classes.
+
+* **Alternative 2:** Show availability and current statistics together.
+    * Pros: Easier to implement.
+    * Cons: Result message displayed will be very long, making the UI less desirable.
+
+**Aspect: Which list should the statistics be calculated from:**
+
+* **Alternative 1 (current choice):** Calculated from the currently displayed list.
+    * Pros: The resulting statistic corresponds to what the user sees, allowing for easy verification.
+    * Cons: The user may need to perform a find or list to query the list of interest before entering the stats command. 
+
+* **Alternative 2:** Calculated from the main list of fosterers.
+    * Pros: The resulting statistic corresponds to the whole address book, which may cause less confusion for the user.
+    * Cons: Less flexibility for the user.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -331,7 +393,8 @@ _{more aspects and alternatives to be added}_
 ## Planned Enhancements
 
 ### Shorter Command Formats
-Currently, the default add command may be too long for an average typer to key in quickly. A future enhancement we are planning would be to allow the addition of a fosterer with just the basic details, such as their name, phone number, email, housing type and availability. Only when the fosterer is ready to foster, then other details such as animal name, animal type and address need to be filled in via the `edit` command.
+Currently, the default add command may be too long for an average typer to key in quickly. A future enhancement we are planning would be to allow the addition of a fosterer with just the basic details, such as their name, phone number, email, housing type and availability. The rest of the fields will be set to `nil` by default.
+Only when the fosterer is ready to foster, then other details such as animal name, animal type and address need to be filled in via the `edit` command.
 
 We are also planning to shorten some input parameters when adding or editing a fosterer:
 
@@ -342,10 +405,53 @@ We are also planning to shorten some input parameters when adding or editing a f
 | availability/nil          | avail/nil    |
 | animalType/               | type/        |
 
+With this, the command `add n/Jerry Tan p/98765412 e/jerry123@example.com housing/HDB avail/true` will be a valid add
+command. 
+
+### Reduce Coupling Between Availability and Animal Type
+Currently, the `animalType` field also contains information about the availability of a fosterer.<br>
+e.g. if the `animalType` field of a fosterer is `able.Dog`, it suggests that the fosterer is available, and is 
+able to foster a dog. However, the user will still need to enter the `availability` field as `available`. <br>
+
+Building on the enhancement in [Shorter Command Formats](#shorter-command-formats), we will be revising the 
+`AVAILABILITY` and `ANIMAL_TYPE` parameters:
+
+| Param                  | About                                                             | Values                 | 
+|------------------------|-------------------------------------------------------------------|------------------------|
+| `AVAILABILITY`         | Indicates availability of fosterer                                | `false`, `true`, `nil` |     
+| `ABLE_ANIMAL_TYPE`     | Indicates the type of animals the fosterer can foster             | `dog`, `cat`, `nil`    |     
+| `CURRENT_ANIMAL_TYPE`  | Indicates the type of animals the fosterer is currently fostering | `dog`, `cat`, `nil`    |
+
+
+### Support More Animal Types
+
+Building on the enhancement in [Reduce Coupling Between Availability and Animal Type](#reduce-coupling-between-availability-and-animal-type), we can support more animal types by allowing the addition of animals other than cats and dogs under `ABLE_ANIMAL_TYPE` and `CURRENT_ANIMAL_TYPE`. Some examples include 
+`hamster` and `rabbit`. This will make our product available to more animal shelters.
+
+### Allow Fosterers To Foster More Than One Animal At A Time
+
+Currently, we only allow the assignment of one fosterer to one animal. To improve this, we can make the `ANIMAL_NAME`,
+`ABLE_ANIMAL_TYPE` and `CURRENT_ANIMAL_TYPE` fields to be maintained as lists instead. This will allow one fosterer to be associated with more than one animal.
+
 ### Case-sensitivity of Inputs
-Currently, the fields and parameters for housing, availability and animal type are case-sensitive. An enhancement to this would be to make these fields and their parameters case-insensitive to improve the user experience. Moreover, the aforementioned enhancements to shorten the command format will also be case-insensitive.
+Currently, the fields and parameters for housing, availability and animal type are case-sensitive. An enhancement to this would be to make these fields and their parameters case-insensitive to improve the user experience. Moreover, the aforementioned enhancements will also be case-insensitive.
+
+### Allow Symbols in Name
+Currently, names in Foster Family must be alphanumeric. However, this excludes certain legal names that have other 
+characters such as `/`. For example, we currently do not allow  `s/o` in a person's name as the `/` is used as a command
+delimiter. Hence, one possible improvement is to enforce that the name inputted by the user must be enclosed in quotation marks for parsing, and to allow symbols such as `/`, `'`, `-` etc. using regex. Additionally, we will disallow the use of numeric values in names, to prevent the case where a number is inputted as a name.
+
+e.g. `name/"Henry Tan"` and `name/"Nagaratnam s/o Suppiah"` are now valid name parameters.
+
+
+### Phone Number Input
+
+### Handle Invalid Fosterer - Corrupt Data File
+
+### Notes Feature as a Separate Command
 
 ### Specificity of Error Messages
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -364,37 +470,38 @@ Currently, the fields and parameters for housing, availability and animal type a
 ### Product scope
 
 **Target user profile**:
-* Foster manager of non-profit animal shelters which currently do not have a good logistical workflow to keep track of foster families
+* Foster manager of non-profit animal shelters for cats and dogs, who currently do not have a good logistical workflow to keep track of their fosterers
 * Prefer desktop apps over other types
 * Can type fast
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
-**Value proposition**: Low budget and efficient system that manages animal fosterers
+**Value proposition**: Low budget and efficient system that manages fosterers 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …         | I want to …                                                                                                     | So that I can…                                                                                                   |
-|----------|----------------|-----------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | foster manager | delete a fosterer from the list when they want to stop fostering with us                                        | update the list to see the fosterers who are currently in our program                                            |
-| `* * *`  | foster manager | delete multiple fosterers at once                                                                               | perform mass deletions quickly                                                                                   |
-| `* * *`  | foster manager | add each fosterer's details efficiently                                                                         | allow my colleagues who are conducting home visits to view these information without any inconvenience           |
-| `* * *`  | foster manager | provide details of the fostered animal of concern to the fosterer                                               | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for |
-| `* * *`  | foster manager | update each foster family’s and animal’s details                                                                | keep track of fosterer's most up-to-date information, including updated information of the animal fostered       |
-| `* * *`  | foster manager | search for a specific animal / fosterer’s detail  instead of browsing through the entire list                   | be more productive when conducting the allocation of animals, keeping in contact with the fosterers, etc.        |
-| `* * *`  | foster manager | to be aware of the address of the fosterer                                                                      | conduct checks on the fosterer to ensure the animal is well taken care of                                        |
-| `* * *`  | foster manager | retrieve the information about the foster family                                                                | provide the necessary information to the Nparks authorities for audit                                            |
-| `* * *`  | foster manager | sort the list of fosterers alphabetically                                                                       | have a neater, and more organised view of all the fosterers                                                      |
-| `* * * ` | foster manager | know the distribution of the different housing types among fosterers                                            | allocate the animals to foster homes that are able to accommodate them                                           |
-| `* * *`  | foster manager | obtain statistics about the currently available fosterers                                                       | better estimate the number of animals I can rescue                                                               |
-| `* * `   | foster manager | have the fosterer’s important information collated neatly                                                       | get all the information I need with one glance                                                                   |
-| `* * `   | foster manager | have an easily accessible (and visible) help button on the top left that leads to a very informative user guide | get help when I am unsure of what command to use                                                                 |
-| `* * `   | foster manager | undo my previous command                                                                                        | quickly resolve errors caused by an erroneous command                                                            |
+| Priority | As a …                  | I want to …                                                                                   | So that I can…                                                                                                   |
+|----------|-------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | foster manager          | delete a fosterer from the list when they want to stop fostering with us                      | update the list to see the fosterers who are currently in our program                                            |
+| `* * *`  | foster manager          | delete multiple fosterers at once                                                             | perform mass deletions quickly                                                                                   |
+| `* * *`  | foster manager          | add each fosterer's details efficiently                                                       | know how to contact the fosterer should I have animals that require fostering                                    |
+| `* * *`  | foster manager          | provide details of the fostered animal of concern to the fosterer                             | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for |
+| `* * *`  | foster manager          | update a fosterer's details                                                                   | keep track of fosterer's most up-to-date information, including information about the animal fostered            |
+| `* * *`  | foster manager          | search for a specific animal / fosterer’s detail  instead of browsing through the entire list | be more productive when searching for suitable fosterers for the animal that needs fostering                     |
+| `* * *`  | foster manager          | to be aware of the address of the fosterer                                                    | conduct checks on the fosterer to ensure the animal is well taken care of                                        |
+| `* * *`  | foster manager          | retrieve the information about the foster family                                              | provide the necessary information to the Nparks authorities for audit                                            |
+| `* * *`  | foster manager          | sort the list of fosterers alphabetically                                                     | have a neater, and more organised view of all the fosterers                                                      |
+| `* * * ` | foster manager          | know the distribution of the different housing types among fosterers                          | correctly allocate the animals to foster homes that are able to accommodate them                                 |
+| `* * *`  | foster manager          | obtain statistics about the currently available fosterers                                     | better estimate shelter capacity                                                                                 |
+| `* * `   | foster manager          | have the fosterer’s important information collated neatly                                     | get all the information I need with one glance                                                                   |
+| `* * `   | foster manager          | have an easily accessible and visible help button                                             | get help when I am unsure of what command to use                                                                 |
+| `* * `   | foster manager          | undo my previous command                                                                      | quickly resolve errors caused by the erroneous command                                                           |
+| `* *`    | new foster manager      | have my initial data file pre-populated with sample data                                      | work with this sample data as an introduction to the app                                                         |
+| `* *`    | new foster manager      | purge all current data from address book                                                      | remove all sample/ experimental data I used to explore the app                                                   |
+| `* *`    | careless foster manager | be asked to confirm my decision before purging all fosterer data                              | prevent myself from accidentally deleting all fosterer records                                                   |
 
-
-*{More to be added}*
 
 ### Use cases
 
@@ -444,15 +551,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC3 - Edit Fosterer**
 
-**Preconditions:** A list of fosterers is currently displayed.
-
 **MSS**
 
-1. Foster Manager requests to edit a fosterer referenced by their index shown in the list.
-2. System displays details of the selected fosterer.
-3. Foster Manager enters the desired changes.
-4. Foster Manager requests to save the changes.
-5. System displays the updated list of fosterers.
+1. Foster Manager lists fosterers (UC2).
+2. Foster Manager requests to edit a fosterer referenced by their index shown in the list.
+3. System displays details of the selected fosterer. 
+4. Foster Manager enters the desired changes. 
+5. Foster Manager requests to save the changes. 
+6. System displays the updated list of fosterers.
 
    Use case ends.
 
@@ -465,7 +571,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
   
-
 * 4a. System detects that the Foster Manager did not fill up compulsory fields.
     * 4a1. System indicates missing field error.
     * 4a2. Foster Manager fills up the missing compulsory fields.
@@ -479,10 +584,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Foster Manager requests to view a list of fosterers.
+1. Foster Manager lists fosterers (UC2).
 2. Foster Manager requests to delete fosterers referenced by their index shown in the list.
 3. System deletes selected fosterers.
-4. System displays the updated list of fosterers.
+4. System displays updated list of fosterers.
 
    Use case ends.
 
@@ -507,8 +612,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Foster Manager requests to sort the list of fosterer to the System.
-2. System displays the updated list of fosterers, sort alphabetically by name.
+1. Foster Manager lists fosterers (UC2).
+2. Foster Manager requests to sort the list of fosterers.
+3. System displays the updated list of fosterers, sorted alphabetically by name.
 
    Use case ends.
 
@@ -528,7 +634,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Foster Manager requests to view a list of fosterers. 
+1. Foster Manager lists fosterers (UC2). 
 2. Foster Manager requests to view a certain statistic of the displayed fosterers.
 3. System displays the relevant statistic.
 
@@ -582,12 +688,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Foster Manager requests to reset the System.
 2. System requests for confirmation.
 3. Foster Manager confirms.
+4. System purges all fosterer data from the system.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. Foster Manager chooses to cancel the reset.
+* 2a. Foster Manager chooses to cancel reset.
 
     Use case ends.
 
@@ -601,31 +708,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 fosterers without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The system should be usable by a novice admin staff who has never tried out keeping track of fosterers through this new system. 
+4.  The system should be usable by a novice foster manager who has never tried out keeping track of fosterers through this new system. 
 5.  The system should respond within two seconds. (i.e. each time a valid command is entered or there is any use action)
-6.  The system should not contain the fosterer's private information in the case that the fosterer did not give consent. 
-7.  The system should be able to contain up to 2000 entries of fosterers’ details. 
-8.  The user interface should be intuitive enough for users who are not IT-savvy. 
-9.  The user guide should be easily understood by target users. (admin staff of animal shelters, assuming they have no relevant technical knowledge)
-10. The system should be able to detect an error in formatting or validity of commands within 2 seconds. 
-11. The system must be able to scale up or down as needed. (in the case where there is a sudden influx of shelter animals, etc.)
-12. The system must comply with all applicable laws and regulations like PDPA. 
-13. The address book system system should be reliable, easy to maintain, and accessible 24/7. (in case urgent visits are required) 
-14. It should be ensured that the data recorded remains accurate and up-to-date. 
-15. The product should be able to run on mainstream OS.
-
-*{More to be added}*
+6. The user interface should be intuitive enough for users who are not IT-savvy. 
+7. The user guide should be easily understood by target users. (foster managers of animal shelters, assuming they have no relevant technical knowledge)
+8. The system should be able to detect invalidity of command within 2 seconds. 
+9. The system must be able to scale up or down as needed (in the case where there is a sudden fosterers).
+10. The system must comply with all applicable laws and regulations like the Personal Data Protection Act (PDPA). 
+11. The system should be reliable, easy to maintain, and accessible 24/7. 
+12. The product should be able to run on mainstream OS.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Fosterer**: A person who temporarily cares for an animal in their own home
 * **Housing type**: Categorised into HDB, Condo, Landed
 * **Types of animal fostered**: Categorised into solely cats and/or dogs (current.dog/cat or able.dog/cat depends on availability of fosterer)
 * **Current list**: The currently displayed list obtained from a list command or its variants
@@ -656,29 +757,21 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all fosterers are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` or `find` command. At least 3 fosterers in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First fosterer is deleted from the list. Details of the deleted fosterer shown in the status message.
+   
+   1. Test case: `delete 1 2 3`<br>
+      Expected: First, second and third fosterers are deleted from the list. Number of deleted fosterers, and their details are shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x`,  (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
