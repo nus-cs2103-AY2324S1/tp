@@ -394,30 +394,27 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                                                         | So that I can…​                                                            |
-|----------|---------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------------|
-| `* * *`  | new user                                    | see usage instructions                                               | refer to instructions when I forget how to use the App                     |
-| `* * *`  | new user                                    | purge all existing data                                              | get rid of the experimental data when exploring the app                    |
-| `* * *`  | lazy tutor                                  | add students by name                                                 | include new students into our app                                          |
-| `* * *`  | user                                        | delete a person                                                      | remove entries that I no longer need                                       |
-| `* * *`  | user                                        | find a student by name or subject                                    | locate details of persons without having to go through the entire list     |
-| `* * *`  | tutor                                       | update my students details as they progress through learning         | keep track of their information e.g. test scores                           |
-| `* * *`  | tutor                                       | quickly edit student details                                         | save time re-adding students if I have added the wrong details by accident |
-| `* * *`  | flexible tutor                              | edit my student’s lesson timings                                     | accommodate any changes in timing requested by them                        |
-| `* * *`  | private tutor                               | install the app on my device with one click                          | use the app with ease without much trouble building the environment        |
-| `* * *`  | private tutor                               | see a specific student’s data from the contact list                  | get a more concise and detailed view of the student                        |
-| `* *`    | user                                        | hide private contact details                                         | minimize chance of someone else seeing them by accident                    |
-| `*`      | user with many students in the address book | sort persons by name                                                 | locate a person easily                                                     |
-| `*`      | forgetful tutor                             | receive notifications on upcoming lessons                            | prevent forgetting to teach my students                                    |
-| `*`      | forgetful tutor                             | include certain tasks to do for each student                         | remember to do them in preparation for the student's next class            |
-| `*`      | tutor                                       | see my teaching schedule for the next day                            | complete lesson preparation that is catered to the student                 |
-| `*`      | efficient tutor                             | see my available time slots and allocate tuition timings accordingly | maximize my time usage                                                     |
-| `*`      | private tutor                               | add questions that the student has asked me in class to the app      | review and answer it in the next lesson                                    |
-| `*`      | regular app user                            | hide information that is not relevant to me currently                | have a cleaner User Interface                                              |
-| `*`      | advanced user                               | create new commands that group many primitive commands together      | save time and energy with these customized high level commands             |
+| Priority | As a …​          | I want to …​                                                            | So that I can…​                                                                    |
+|----------|------------------|-------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| `* * *`  | new user         | see usage instructions                                                  | refer to instructions when I forget how to use the App                             |
+| `* * *`  | new user         | purge all existing sample data                                          | get rid of the experimental data when exploring the app                            |
+| `* * *`  | lazy tutor       | add students by name                                                    | include new students into our app                                                  |
+| `* * *`  | user             | delete a person                                                         | remove entries that I no longer need                                               |
+| `* * *`  | user             | find a student by name or subject                                       | locate details of persons without having to go through the entire list             |
+| `* * *`  | tutor            | update my students details as they progress through learning in remarks | keep track of their information e.g. test scores                                   |
+| `* * *`  | tutor            | quickly edit student details                                            | save time re-adding students if I have added the wrong details by accident         |
+| `* * *`  | flexible tutor   | edit my student’s lesson timings                                        | accommodate any changes in timing requested by them                                |
+| `* * *`  | private tutor    | install the app on my device with one click                             | use the app with ease without much trouble building the environment                |
+| `* * *`  | private tutor    | see a specific student’s data from the contact list                     | get a more concise and detailed view of the student                                |
+| `* *`    | user             | hide private contact details                                            | minimize chance of someone else seeing them by accident                            |
+| `* *`    | efficient tutor  | add lessons to my schedule quickly                                      | maximize my time usage                                                             |
+| `* *`    | tutor            | see my teaching schedule                                                | complete lesson preparation that is catered to the student before tuition sessions |                                                                                                                |                                                                                    |
+| `* *`    | efficient tutor  | filter lessons to view lessons on a specific dates                      | plan my activities with the free time that is not occupied by lessons.             |
+| `* *`    | tutor            | link students to a lesson                                               | prepare for the lesson according to the students' weaknesses and strengths.        |
+| `*`      | forgetful tutor  | include certain tasks to do for each lesson                             | remember to do them in preparation for the tuition lesson                          |
+| `*`      | regular app user | hide information that is not relevant to me currently                   | have a cleaner User Interface                                                      |
 
 
-*{More to be added}*
 
 ### Use cases
 
@@ -451,16 +448,13 @@ MSS
 1. User chooses to add a new student.
 2. User enters the required details to create a student.
 3. TutorMate creates the student.
-4. The app shows the user the new student created.
 
 Use Case ends
 
 Extensions
-* 2a. Some required details are missing and / or incorrect.
-  * 2a1. The app informs the user of the error
-  * 2a2. The app requests for the correct data.
-  * 2a3. The user enters new data.
-  * Steps 2a2 - 2a3 are repeated until the data entered is correct.
+* 2a. Student's name is not specified and / or details specified are incorrect.
+  * 2a1. The app informs the user of the error.
+  * 2a2. The user enters new data.
   * Use case resumes from step 2.
 
 
@@ -468,31 +462,30 @@ Extensions
 
 **MSS**
 
-1. User requests to list students
-2. TutorMate shows a list of persons
-3. User requests to delete a specific person in the list
-4. TutorMate deletes the person
+1. User requests to list students.
+2. TutorMate shows a list of persons.
+3. User requests to delete a specific person in the list.
+4. TutorMate deletes the person.
 
 Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty (No students added).
+* 2a. The list is empty (No students in student list).
       Use case ends.
 * 3a. The given index is invalid.
-  * 3a1. TutorMate shows an error message.
-         Use case resumes at step 2.
-
+  * 3a1. TutorMate shows an error message. 
+  Use case resumes at step 2.
 
 
 ### Use case: Show a student [UC04]
 
 **MSS**
 
-1. User requests to list students
-2. TutorMate shows a list of students
-3. User requests to see a specific student
-4. TutorMate shows the student
+1. User requests to list students.
+2. TutorMate shows a list of students.
+3. User requests to see the details of a specific student.
+4. TutorMate shows the student.
 
 Use case ends.
 
@@ -508,40 +501,104 @@ Use case ends.
 ### Use case: Find & see a student with their details [UC05]
 
 **MSS**
-1. User requests to find a student by a specific characteristic e.g. Name
-2. TutorMate shows a list of students that match the user's input
+1. User requests to find a student by a specific characteristic e.g. Name.
+2. TutorMate shows a list of students that matches the user's input.
 3. User <u>shows a student (UC04)</u>
 
 Use Case ends
 
+**Extensions**
+
+* 2a. The list is empty (No students found that matches the user's input).
+  <br> Use case ends.
 
 
 ### Use case: Edit a student's details [UC06]
 
 **MSS**
-1. User requests to list students
-2. User chooses to edit a student and enters the required data
-3. TutorMate edits the student's details
-4. TutorMate shows the edited student's details
+1. User requests to list students.
+2. TutorMate shows the student list.
+3. User chooses to edit a student and enters the data.
+4. TutorMate edits the student's details.
 
 Use Case ends
 
-Extensions
-* 2a. Some required details are missing and / or incorrect.
-    * 2a1. The app informs the user of the error
-    * 2a2. The app requests for the correct data.
-    * 2a3. The user enters new data.
-    * Steps 2a2 - 2a3 are repeated until the data entered is correct.
-    * Use case resumes from step 2.
+**Extensions**
 
+* 3a. Some details are incorrect/ overlapping with existing app data.
+    * 3a1. The app informs the user of the error.
+    * 3a2. The user enters new data.
+    * Use case resumes from step 3.
+* 3b. The given index is invalid.
+    * 3b1. The app informs the user of the error.
+    * 3b2. The user enters new data.
+    * Use case resumes from step 3.
 
-### Use case: See a day's schedule [UC07]
+### Use case: Add a lesson [UC07]
 
 **MSS**
-1. User requests to see a day's schedule (today, or any day)
-2. TutorMate shows that day's schedule
+1. User requests to list schedule.
+2. TutorMate shows the schedule list.
+3. User enters the required details to create a lesson.
+4. TutorMate creates the lesson.
 
 Use Case ends
+
+**Extensions**
+
+* 3a. Lesson's name is not specified and / or details specified are incorrect.
+    * 3a1. The app informs the user of the error.
+    * 3a2. The user enters new data.
+    * Use case resumes from step 3.
+
+### Use case: Add a task to a lesson [UC08]
+
+**MSS**
+1. User requests to list schedule.
+2. TutorMate shows the schedule list.
+3. User enters the required details to create a task to a lesson.
+4. TutorMate creates the task in the task list of the lesson.
+
+Use Case ends
+
+**Extensions**
+
+* 2a. The list is empty (No lessons in schedule list).
+    Use case ends.
+* 3a. Description details are missing/ overlapping with existing app data.
+    * 3a1. The app informs the user of the error.
+    * 3a2. The user enters new data.
+    * Use case resumes from step 3.
+* 3b. The given index is invalid.
+    * 3b1. The app informs the user of the error.
+    * 3b2. The user enters new data.
+    * Use case resumes from step 3.
+
+### Use case: Delete a task to a lesson [UC09]
+
+**MSS**
+1. User requests to list schedule.
+2. TutorMate shows the schedule list.
+3. User requests to see the details of a lesson.
+4. TutorMate shows the lesson.
+5. User requests to delete a specific task in the lesson.
+6. TutorMate deletes the task.
+
+Use Case ends.
+
+**Extensions**
+
+* 2a. The list is empty (No lessons in schedule list).
+  Use case ends.
+* 3a. The given lesson index is invalid.
+    * 3a1. The app informs the user of the error.
+    * 3a2. The user enters new data.
+    * Use case resumes from step 3.
+* 5a. The given task index is invalid.
+    * 3a1. The app informs the user of the error.
+    * 3a2. The user enters new data.
+    * Use case resumes from step 5.
+
 
 ### Non-Functional Requirements
 
