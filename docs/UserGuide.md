@@ -308,7 +308,7 @@ If you are afraid that you may forget who the saved contact is in CampusConnect,
 
 This feature involves the command: `updatephoto`, which updates the photo of an existing contact.
 
-Format: `updatephoto PERSON_INDEX [path/NEW_PHOTO_PATH]`
+Format: `updatephoto PERSON_INDEX path/NEW_PHOTO_PATH`
 
 If you are unsure on how to obtain the `NEW_PHOTO_PATH` of your photo: 
 * For Windows user, click [here](https://www.timeatlas.com/copy-file-path/#:~:text=Select%20your%20file%2C%20right%2Dclick,Ctrl%20%2B%20Shift%20%2B%20%2B%20C%20) and follow the guide.

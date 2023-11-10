@@ -13,7 +13,13 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+CampusConnect is adapted from the [AddressBook Level-3](https://se-education.org/addressbook-level3/) created by the [SE-EDU initiative](https://se-education.org).
+
+Below are the Java libraries used in this project:
+
+* [Jackson](https://github.com/FasterXML/jackson) for Storage
+* [JavaFX](https://openjfx.io/) for UI
+* [JUnit5](https://github.com/junit-team/junit5) and [TestFX](https://github.com/TestFX/TestFX) for Testing
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -806,41 +812,162 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the `CampusConnect.jar` file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the `CampusConnect.jar` file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person
 
+1. Adding a `Person`:
+
+    1. **Test case:** `add n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01`<br>
+       **Expected:** A new `Person` is successfully created with name "John Doe", phone "98765432", email "johndoe@gmail.com" and address "John street, block 123, #01-01". Success details shown in the status message. Moreover, this new `Person` is visible in CampusConnect.
+
+    2. **Test case:** `add n/John Doe p/98765432 e/johndoe@gmail.com a/`<br>
+       **Expected:** No new `Person` is created. Error details shown in the status message.
+   
+   3. **Test case:** `add n/John Doe p/98765432 e/johndoe@gmail.com`<br>
+      **Expected:** No new `Person` is created. Error details shown in the status message. 
+   
+2. To see if the `Person` is added, use the `list` command and verify the last `Person` in CampusConnect.
+
+### Adding alternative contact to a person
+
+1. Adding alternative contact to a `Person`:
+
+   1. **Prerequisites:** List all `Persons` in CampusConnect using the `list` command.
+   
+   2. **Test case:** `addalt 1 tg/@johndoe_123 e2/johndoe@hotmail.com li/john-doe-b9a38128a b/31/10`<br>
+       **Expected:** The first `Person` in the list is added with the following alternative contact information: telegram "@johndoe_123", secondary email "johndoe@hotmail.com", linkedin "john-doe-b9a38128a" and birthday "31/10". Success details shown in the status message. The aforementioned happens only if the fields are initially empty. Otherwise, error details will be shown in status message. 
+
+   3. **Test case:** `addalt 1 tg/@johndoe_123 e2/`<br>
+       **Expected:** The first `Person` in the list will not be added with the following alternative contact information: telegram "@johndoe_123". Error details shown in the status message.
+
+   4. **Test case:** `addalt 1 tg/@johndoe_123 tg/@johnjohn`<br>
+      **Expected:** The first `Person` in the list will not be added with the following alternative contact information: telegram "@johndoe_123" or "@johnjohn". Error details shown in the status message.
+
+2. To see if the `Person` is added with alternative contact information, use the [find command](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#contact-search) to search for the `Person` and verify the details.
+
+3. To know exactly what are the alternative details of a `Person` that can be added, see [this](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#add-alternative-information-to-contact-addalt).
+
+### Editing a person
+
+1. Editing a `Person`:
+
+    1. **Prerequisites:** List all `Persons` in CampusConnect using the `list` command. 
+
+    2. **Test case:** `edit 1 p/98765411 e/johndoe@gmail.com`<br>
+       **Expected:** The first `Person` in the list will have phone edited to "98765411" and email edited to "johndoe@gmail.com". Success details shown in the status message. 
+   
+    3. **Test case:** `edit 1 tg/@johndoe e2/johndoe@gmail.com`<br>
+       **Expected:** The first `Person` in the list will have telegram edited to "@johndoe" and secondary email edited to "johndoe@gmail.com" only if the fields were not initially empty; success details shown in the status message. Otherwise, error details will be shown in status message.
+
+    4. **Test case:** `edit 1 tg/@johndoe_123 tg/@johnjohn`<br>
+       **Expected:** The first `Person` in the list will not have telegram edited. Error details shown in status message.
+
+2. To see if the `Person`'s details are edited, use the [find command](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#contact-search) to search for the `Person` and verify the details.
+
+3. To know exactly what are the details of a `Person` that can be edited, see [this](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#edit-information-of-contact-edit).
+   
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Updating photo of a person
 
-### Saving data
+1. Updating photo of a  `Person`:
 
-1. Dealing with missing/corrupted data files
+    1. **Prerequisites:** List all `Persons` in CampusConnect using the `list` command.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    2. **Test case:** `updatephoto 1 path/docs/images/johndoe.png`<br>
+       **Expected:** The first `Person` in the list will have profile photo updated to the picture "johndoe.png". Success details shown in the status message.
 
-1. _{ more test cases …​ }_
+    3. **Test case:** `updatephoto 1 path/C:/documents/test.docx`<br>
+       **Expected:** The first `Person` in the list will not have profile photo updated. Error details shown in the status message.
+
+2. To see if the `Person`'s profile photo is updated, use the [find command](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#contact-search) to search for the `Person` and verify the profile photo.
+
+### Adding note to a person
+
+1. Adding note to a `Person`:
+
+    1. **Prerequisites:** List all `Persons` in CampusConnect using the `list` command.
+
+    2. **Test case:** `addnote 1 This is a sample note for the person.`<br>
+       **Expected:** The first `Person` in the list will have a new note stating "This is a sample note for the person.". Success details shown in the status message.
+
+    3. **Test case:** `addnote 1 This person is very funny! 😀`<br>
+       **Expected:** The first `Person` in the list will not have a new note stating "This person is very funny! 😀". Error details shown in the status message.
+
+2. To see if the new note is added to `Person`, use the [viewnotes command](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#view-notes-of-contact-viewnotes) and verify the details of the notes.
+
+### Paying money to a person
+
+1. Paying money to a `Person`:
+
+    1. **Prerequisites:** List all `Persons` in CampusConnect using the `list` command.
+
+    2. **Test case:** `pay 1 10`<br>
+       **Expected:** The first `Person` in the list will be paid $10. Success details shown in the status message.
+
+    3. **Test case:** `pay 1 10.555`<br>
+       **Expected:** The first `Person` in the list will not be paid $10.555. Error details shown in the status message.
+
+   4.  **Test case:** `pay 1 50000`<br>
+       **Expected:** The first `Person` in the list will not be paid $50000. Error details shown in the status message.
+
+2. To see if the money is paid to `Person`, use the [find command](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#view-notes-of-contact-viewnotes) to search for the `Person` and verify the money paid.
+
+
+### Owing money to a person
+
+1. Owing money to a `Person`:
+
+    1. **Prerequisites:** List all `Persons` in CampusConnect using the `list` command.
+
+    2. **Test case:** `owe 1 10`<br>
+       **Expected:** You owe the first `Person` in the list $10. Success details shown in the status message.
+
+    3. **Test case:** `owe 1 10.555`<br>
+       **Expected:** You will not owe the first `Person` in the list $10.555. Error details shown in the status message.
+
+   4.  **Test case:** `owe 1 50000`<br>
+       **Expected:** You will not owe the first `Person` in the list $50000. Error details shown in the status message.
+
+2. To see if the money the `Person` owes is recorded, use the [find command](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#view-notes-of-contact-viewnotes) to search for the `Person` and verify the money owed.
+
+
+### Finding a person
+
+1. Finding a `Person` while all persons are being shown:
+
+    1. **Test case:** `find n/do`<br>
+       **Expected:** CampusConnect displays a list of `Person` that has name that contains the substring `do`.
+
+    2. **Test case:** `find t/friends`<br>
+       **Expected:** CampusConnect displays a list of `Person` that has tag that is equal to the tag `friends`.
+
+    3. **Test case:** `find a/John street, block 123, #01-01`<br>
+       **Expected:** CampusConnect will not display any `Person`. Error details shown in the status message.
+   
+    4. **Test case:** `find a/"John street, block 123, #01-01"`<br>
+       **Expected:** CampusConnect will display a list of `Person` with address `John street, block 123, #01-01`.
 
