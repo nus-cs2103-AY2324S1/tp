@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ListLeaveCommandParser" as ListLeaveCommandParser LOGIC_COLOR
+participant "r:ListLeaveCommand" as ListLeaveCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("listleave 2023-11-11")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("listleave 2023-11-11")
+activate AddressBookParser
+
+create ListLeaveCommandParser
+AddressBookParser -> ListLeaveCommandParser
+activate ListLeaveCommandParser
+
+ListLeaveCommandParser --> AddressBookParser
+deactivate ListLeaveCommandParser
+
+AddressBookParser -> ListLeaveCommandParser : parse("2023-11-11")
+activate ListLeaveCommandParser
+
+create ListLeaveCommand
+ListLeaveCommandParser -> ListLeaveCommand
+activate ListLeaveCommand
+
+ListLeaveCommand --> ListLeaveCommandParser : r
+deactivate ListLeaveCommand
+
+ListLeaveCommandParser --> AddressBookParser : r
+deactivate ListLeaveCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListLeaveCommandParser -[hidden]-> AddressBookParser
+destroy ListLeaveCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> ListLeaveCommand : execute()
+activate ListLeaveCommand
+
+ListLeaveCommand -> Model : updateFilteredEmployeeList()
+
+create CommandResult
+ListLeaveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListLeaveCommand
+deactivate CommandResult
+
+ListLeaveCommand --> LogicManager : result
+deactivate ListLeaveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
