@@ -35,20 +35,18 @@ This page is designed to closely follow the format required by grading scripts.
 
 <img src="./images/bwangpj.png" width="200px">
 
-[[github](http://github.com/bwangpj)] 
+[[github](http://github.com/bwangpj)]
 [[portfolio](./team/bwangpj.md)]
 
 - Role: Developer
-- Responsibilities: Documentation 
+- Responsibilities: Documentation
 
-### Jean Doe
+### rayshawntan
 
-<img src="./images/johndoe.png" width="200px">
+<img src="./images/rayshawntan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](./team/johndoe.md)]
+[[github](http://github.com/rayshawntan)]
+[[portfolio](./team/rayshawntan.md)]
 
 - Role: Developer
-- Responsibilities: Dev Ops + Threading
-
-//TODO once all sections are filled in, we can delete johndoe.png
+- Responsibilities: Scheduling and tracking
