@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Objects;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntryField;
 
@@ -60,14 +58,6 @@ public class Task extends ListEntryField {
         }
         this.description = description;
         this.isDone = isDone;
-    }
-
-    /**
-     * Constructs a {@code Task} used for testing
-     */
-    public Task() {
-        this.description = "testing";
-        this.isDone = false;
     }
 
     /**
@@ -160,12 +150,6 @@ public class Task extends ListEntryField {
         Task otherTask = (Task) other;
         return description.equals(otherTask.description) && isDone == otherTask.isDone;
 
-    }
-
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description);
     }
 
     /**

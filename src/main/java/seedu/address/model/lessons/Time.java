@@ -4,7 +4,6 @@ import static java.lang.String.format;
 import static seedu.address.logic.parser.RegularExpressionUtil.ONE_TO_TWO_DIGITS;
 import static seedu.address.logic.parser.RegularExpressionUtil.TWO_DIGITS;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -23,9 +22,6 @@ public class Time extends ListEntryField {
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("h:mm a");
     public static final Time DEFAULT_TIME = new Time();
     private LocalTime time;
-    public Time(LocalDateTime time) {
-        this.time = time.toLocalTime();
-    }
     public Time(LocalTime time) {
         this.time = time;
     }
@@ -49,17 +45,6 @@ public class Time extends ListEntryField {
     }
 
     /**
-     * Returns true if the given string is a valid time.
-     */
-    public static Boolean isValid(String test) {
-        try {
-            parseTime(test);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
-    /**
      * Parses the time from the input string, which can be in the following formats: hh:mm
      * @param input the input string where the time is to be parsed from
      * @return the time parsed
@@ -79,9 +64,6 @@ public class Time extends ListEntryField {
         } else {
             throw new InvalidInputException(input + " is not a valid time");
         }
-    }
-    public LocalTime getTime() {
-        return time;
     }
     @Override
     public boolean equals(Object other) {

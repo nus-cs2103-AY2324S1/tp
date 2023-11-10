@@ -1,16 +1,24 @@
 package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CommandHistoryTest {
 
-    private CommandHistory commandHistory = new CommandHistory();
+    private CommandHistory commandHistory;
 
+    @BeforeEach
+    public void setup() {
+        commandHistory = new CommandHistory();
+    }
 
     /* Test add method ==================================================== */
     @Test
@@ -228,6 +236,51 @@ public class CommandHistoryTest {
         assertEquals(commandHistory.next(), "command3");
         assertEquals(commandHistory.next(), "command3");
         assertEquals(commandHistory, expectedCommandHistory);
+    }
+
+    @Test
+    public void testNoCommandToString() {
+        assertEquals(commandHistory.toString() , "[]");
+    }
+
+    @Test
+    public void testCommandsToString() {
+        commandHistory.add("command1");
+        commandHistory.add("command2");
+        commandHistory.add("command3");
+        assertEquals(commandHistory.toString() , "[command1, command2, command3]");
+    }
+
+    @Test
+    public void equals() {
+        try {
+            CommandHistory emptyCommandHistory = new CommandHistory();
+            CommandHistory filledCommandHistory = new CommandHistory(
+                    new ArrayList<>(Arrays.asList("command1", "command2")), 2);
+
+            // same empty object
+            assertTrue(commandHistory.equals(emptyCommandHistory));
+
+            // same values -> returns true
+            commandHistory.add("command1");
+            commandHistory.add("command2");
+            assertTrue(commandHistory.equals(filledCommandHistory));
+
+            // same object -> returns true
+            assertTrue(commandHistory.equals(commandHistory));
+
+            // null -> returns false
+            assertFalse(commandHistory.equals(null));
+
+            // different types -> returns false
+            assertFalse(commandHistory.equals(5.0f));
+
+            // different values -> returns false
+            commandHistory.add("extra command");
+            assertFalse(commandHistory.equals(filledCommandHistory));
+        } catch (Exception e) {
+            fail();
+        }
     }
 
 }

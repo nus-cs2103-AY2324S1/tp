@@ -230,7 +230,7 @@ class EditLessonCommandTest {
         assertEquals(expected, model.getLessonClashWith(expected));
     }
     @Test
-    public void test_noEdit() throws ParseException, CommandException {
+    public void test_noEdit_indexOutBound() throws ParseException, CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 getTypicalScheduleList());
         Lesson lesson = model.getFilteredScheduleList().get(0);
@@ -240,5 +240,8 @@ class EditLessonCommandTest {
         model.showLesson(lesson);
         EditLessonCommand editLessonCommand2 = new EditLessonCommand(null, editDescriptor);
         assertThrows(CommandException.class, () -> editLessonCommand2.execute(model));
+        int size = model.getFilteredScheduleList().size();
+        EditLessonCommand editLessonCommand3 = new EditLessonCommand(size + 1, editDescriptor);
+        assertThrows(CommandException.class, () -> editLessonCommand3.execute(model));
     }
 }

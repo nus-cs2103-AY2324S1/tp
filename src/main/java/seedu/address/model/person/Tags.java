@@ -31,17 +31,6 @@ public class Tags extends ListEntryField {
         return new Tags(getTagSetClone());
     }
     /**
-     * Returns true if a given string is a valid tag.
-     */
-    public static Boolean isValid(String input) {
-        for (String str : input.split(",")) {
-            if (!Tag.isValid(str.trim())) {
-                return false;
-            }
-        }
-        return true;
-    }
-    /**
      * Constructs a {@code Tags} from input of format "tag1, tag2, tag3".
      */
     public static Tags of(String input) throws ParseException {

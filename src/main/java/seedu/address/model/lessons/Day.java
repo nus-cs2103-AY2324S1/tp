@@ -16,7 +16,7 @@ import seedu.address.model.ListEntryField;
 
 /**
  * Represents a Day in the application.
- * Guarantees: immutable; is valid as declared in {@link #isValid(String)}
+ * Guarantees: immutable;
  */
 public class Day extends ListEntryField {
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -44,17 +44,6 @@ public class Day extends ListEntryField {
      */
     public static Day deserialize(String str) {
         return new Day(LocalDate.parse(str, FORMATTER));
-    }
-    /**
-     * Returns true if a given string is a valid day.
-     */
-    public static Boolean isValid(String test) {
-        try {
-            parseDate(test);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
     }
 
     /**
@@ -129,8 +118,6 @@ public class Day extends ListEntryField {
         }
         return day.format(FORMATTER);
     }
-
-
     public LocalDate getDay() {
         return day;
     }
@@ -147,15 +134,6 @@ public class Day extends ListEntryField {
             return false;
         }
         return this.day.equals(otherDay.day);
-    }
-    /**
-     * Returns true if this day is after the other day.
-     */
-    public boolean isBefore(Day other) {
-        if (this == DEFAULT_DAY || other == DEFAULT_DAY) {
-            return other == DEFAULT_DAY;
-        }
-        return this.day.isBefore(other.day);
     }
     /**
      * Compares this day with another day, return 0 if equal, 1 if after, -1 if before.
