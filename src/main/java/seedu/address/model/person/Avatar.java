@@ -24,14 +24,14 @@ public class Avatar {
     private Image image;
 
     /**
-     * Constructor for default avatar
+     * Constructs thej default avatar
      */
     public Avatar() {
         this.image = new Image(this.getClass().getResourceAsStream(DEFAULT_PATH));
     }
 
     /**
-     * Constructor for avatar that does not copy image.
+     * Constructs avatar that does not copy image.
      * @param path Path of avatar image on filesystem.
      * @throws IOException if error is encountered while reading image.
      */
@@ -42,7 +42,7 @@ public class Avatar {
     }
 
     /**
-     * Constructor for avatar that copies image to data directory.
+     * Constructs avatar that copies image to data directory.
      * @param path Path of avatar image on filesystem.
      * @param dataDirectory Data directory for application.
      * @throws IOException if error is encountered while reading and copying image.
@@ -83,7 +83,7 @@ public class Avatar {
     }
 
     /**
-     * Get JavaFX {@code Image} of the avatar.
+     * Gets JavaFX {@code Image} of the avatar.
      * @return Image of the avatar.
      */
     public Image getImage() {
@@ -91,7 +91,7 @@ public class Avatar {
     }
 
     /**
-     * Get string path of the avatar image.
+     * Gets string path of the avatar image.
      * @return String path of the avatar image.
      */
     public String getPath() {
