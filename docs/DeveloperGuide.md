@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +23,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the
+[_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create
+and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +38,10 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes
+[`Main`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/MainApp.java))
+is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -51,16 +56,21 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
+the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class which follows the corresponding API
+`interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality
+using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given
+component through its interface rather than the concrete class (reason: to prevent outside component's being coupled
+to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -68,40 +78,53 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in
+[`Ui.java`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
+the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
+that are in the `src/main/resources/view` folder. For example, the layout of the
+[`MainWindow`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
+is specified in
+[`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Appointment` objects residing in the
+`Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** :
+[`Logic.java`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
+call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn
+creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
+is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -110,11 +133,16 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
+placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
+the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a
+`Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** :
+[`Model.java`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -122,32 +150,44 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* stores a `observableAppointments` object that represents existing appointments in the address book, sorted in a chronological order.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list
+which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be
+bound to this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
+`ReadOnlyUserPref` objects.
+* stores an `observableAppointments` object that represents existing appointments in the address book, sorted in a
+chronological order.
 * stores a `sortedAppointments` object that represents existing appointments in the address book.
-* `observableAppointments` and `sortedAppointments` depend on `filteredPersons`. Hence, appointments listed are for `Person` objects in `filteredPersons`.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* `observableAppointments` and `sortedAppointments` depend on `filteredPersons`. Hence, appointments listed are for
+`Person` objects in `filteredPersons`.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
+should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP)
+model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook`
+to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
-This approach is also use for `FinancialPlan`. The multiple `Tag` and `FinancialPlan` objects are stored in their respective `HashSet` where each object in the `HashSet` will have a corresponding hashcode.
+This approach is also use for `FinancialPlan`. The multiple `Tag` and `FinancialPlan` objects are stored in their
+respective `HashSet` where each object in the `HashSet` will have a corresponding hashcode.
 
 </div>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** :
+[`Storage.java`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+the functionality of only one is needed).
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
+that belong to the `Model`).
 
 ### Common classes
 
@@ -172,7 +212,11 @@ The flow of how a `Command` is executed is illustrated with the `Schedule` Comma
 ### Schedule Command
 
 #### Implementation Overview
-After the `AddressBookParser` identifies that the user's input has a schedule command word, it creates a `ScheduleCommandParser`. The `ScheduleCommandParser` then parses the users input and creates a new `ScheduleCommand` containing an `Appointment` and an `Index`. The `ScheduleCommand` is then executed by `Logic Manager`, which updates the `Person` in `Model` to have the created `Appointment`. A `CommandResult` which stores the message of the outcome of schedule command is then returned. The partial class diagram is shown below.
+After the `AddressBookParser` identifies that the user's input has a schedule command word, it creates a
+`ScheduleCommandParser`. The `ScheduleCommandParser` then parses the users input and creates a new `ScheduleCommand`
+containing an `Appointment` and an `Index`. The `ScheduleCommand` is then executed by `Logic Manager`, which updates
+the `Person` in `Model` to have the created `Appointment`. A `CommandResult` which stores the message of the outcome
+of schedule command is then returned. The partial class diagram is shown below.
 
 <img src="images/ScheduleClassDiagram.png" width="400"/>
 
@@ -186,31 +230,39 @@ The following activity diagram summarises what happens the user executes a sched
 
 Alternative 1 (Current Choice): Create an abstract class ScheduleItem and make it a compulsory field for Person.
 
-The diagram below illustrates our current implementation. A `Person` has is associated with 1 `ScheduleItem`, which can be a `NullAppointment`(empty appointment) or `Appointment`. 
+The diagram below illustrates our current implementation. A `Person` has is associated with 1 `ScheduleItem`, which can
+be a `NullAppointment`(empty appointment) or `Appointment`. 
 
 <img src="images/ScheduleItemClassDiagram.png" width="300"/> 
 
 - Pros: 
-  * This ensures a 1-to-1 relationship between Person and Appointment, making implementation of other functions like sort easier. This also prevents clutter of appointments in the UI.
-  * This makes use of a **facade** design pattern, where `NullAppointment` and `Appointment` will handle themselves without the `Person` knowing. 
+  * This ensures a 1-to-1 relationship between Person and Appointment, making implementation of other functions like
+  sort easier. This also prevents clutter of appointments in the UI.
+  * This makes use of a **facade** design pattern, where `NullAppointment` and `Appointment` will handle themselves
+  without the `Person` knowing. 
   
 - Cons: 
-  * This makes the scheduling of Appointments more inflexible, as the FA is unable to schedule multiple appointments with the same person.
+  * This makes the scheduling of Appointments more inflexible, as the FA is unable to schedule multiple appointments
+  with the same person.
 
 - Other considerations: 
-  * `NullAppointment` is a Singleton class to prevent multiple instances of it being created, making it more efficient for memory. 
+  * `NullAppointment` is a Singleton class to prevent multiple instances of it being created, making it more efficient
+  for memory. 
 
 Alternative 2: Create a hashset of Appointments for each Person. 
 - Pros:
   * More flexible, user can now schedule multiple appointment for a Person. 
   
 - Cons:
-  * Harder to implement operations such as editing of an appointment for a client. An additional step of finding the specified appointment within the hashset is required, which may potentially introduce more bugs.
+  * Harder to implement operations such as editing of an appointment for a client. An additional step of finding the
+  specified appointment within the hashset is required, which may potentially introduce more bugs.
   * Harder to implement default behaviours for when person has no appointment.
 
 ### Complete Feature
 
-The **Complete** feature is facilitated by the `CompleteCommand` and `CompleteCommandParser`. The `CompleteCommandParser` creates a `CompleteCommand` associated with a `CompleteCommandDescriptor` which contains information on how the appointments should be completed.
+The **Complete** feature is facilitated by the `CompleteCommand` and `CompleteCommandParser`. The
+`CompleteCommandParser` creates a `CompleteCommand` associated with a `CompleteCommandDescriptor` which contains
+information on how the appointments should be completed.
 
 The following sequence diagram illustrates how the complete operation is executed when date given. 
 
@@ -224,31 +276,46 @@ The following activity diagram illustrates how the complete operation is execute
 
 ### Gather Emails Feature
 
-The **Gather Emails** feature in our software system is a critical functionality designed to efficiently collect email addresses. This feature is facilitated through the `GatherCommand` class, which plays a central role in the process.
+The **Gather Emails** feature in our software system is a critical functionality designed to efficiently collect
+email addresses. This feature is facilitated through the `GatherCommand` class, which plays a central role in the process.
 
 #### Implementation Overview
 
-The `GatherCommand` class is instantiated by the `GatherCommandParser`, which parses user input commands. The `GatherCommandParser` class implements the following operations:
+The `GatherCommand` class is instantiated by the `GatherCommandParser`, which parses user input commands. The
+`GatherCommandParser` class implements the following operations:
 
-* `GatherCommandParser#parse(String args)` — Checks the prefixes (fp/ and t/) and instantiates `GatherCommand` accordingly. It passes either a `GatherEmailByFinancialPlan` or a `GatherEmailByTag` object, both implementations of the `GatherEmailPrompt` interface.
+* `GatherCommandParser#parse(String args)` — Checks the prefixes (fp/ and t/) and instantiates `GatherCommand`
+accordingly. It passes either a `GatherEmailByFinancialPlan` or a `GatherEmailByTag` object, both implementations of
+the `GatherEmailPrompt` interface.
 
-The `GatherCommand` takes in a `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand` class implements the following operations:
+The `GatherCommand` takes in a `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently
+interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand` class implements the following
+operations:
 
-* `GatherCommand#GatherCommand(GatherEmailPrompt prompt)` — Constructor that initializes the command with the provided `GatherEmailPrompt` object.
-* `GatherCommand#execute()` —  Executes the gathering operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`.
+* `GatherCommand#GatherCommand(GatherEmailPrompt prompt)` — Constructor that initializes the command with the
+provided `GatherEmailPrompt` object.
+* `GatherCommand#execute()` —  Executes the gathering operation by calling
+`Model#gatherEmails(GatherEmailPrompt prompt)`.
 
-The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data. It contains the following method:
+The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
+It contains the following method:
 
-* `ModelManager#gatherEmails(GatherEmailPrompt prompt)` —  Carries out the gathering operation by calling `AddressBook#gatherEmails(GatherEmailPrompt prompt)`.
+* `ModelManager#gatherEmails(GatherEmailPrompt prompt)` —  Carries out the gathering operation by calling
+`AddressBook#gatherEmails(GatherEmailPrompt prompt)`.
 
-This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
+This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and
+in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
 
 The `UniquePersonsList` class maintains a list of unique persons. Additionally, it implements the following operation:
-* `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  This method iterates through the persons list and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
+* `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  This method iterates through the persons list
+and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
 
-Depending on the scenario, it triggers either `Person#gatherEmailsContainsTag(String prompt)` or `Person#gatherEmailsContainsFinancialPlan(String prompt)`:
-* `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of the name of any Tag in the `Set<Tag>` of the current person.
-* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of the name of any Financial Plan in the `Set<Tag>` of the current person.
+Depending on the scenario, it triggers either `Person#gatherEmailsContainsTag(String prompt)` or
+`Person#gatherEmailsContainsFinancialPlan(String prompt)`:
+* `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of the name of
+any Tag in the `Set<Tag>` of the current person.
+* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of the
+name of any Financial Plan in the `Set<Tag>` of the current person.
 
 This is the class diagram for the gather command:
 
@@ -257,7 +324,8 @@ This is the class diagram for the gather command:
 **Usage Scenario:**
 
 **Scenario 1:**
-User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` will be initialized. Each person in the `UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
+User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` will be initialized. Each person in the
+`UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
 
 **Scenario 2:**
 User enters a gather `t/Elderly`. The `GatherEmailByTag` will be initialized. Each person in the `UniquePersonList` will be passed into the `GatherEmailByTag#gatherEmails(Person person)`.
