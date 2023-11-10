@@ -24,6 +24,7 @@ Given below are my contributions to the project.
 
 
 * **Project management**:
+    * Set up team repo, RepoSense, and all releases.
     * Led the delegation of bug fixes based on PE-D issues.
     * Coordinated team workflow on the DG.
     * Gathered tasks and improvements for the UG.
@@ -31,6 +32,7 @@ Given below are my contributions to the project.
 * **Documentation for Developer Guide**:
     * Edited developer guide based on changes to Course [\#63](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/63)
     * Updated user stories based on our product [\#122](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/122)
+    * Added links for ease of navigation [\#145](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/145)
 
 * **Documentation for User Guide**:
     * Updated index page and user guide based on changes to Course [\#28](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/28), [\#58](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/58)
