@@ -765,4 +765,5 @@ As we added more functionalities, more dependencies were introduced and the prog
 light of that we focussed on developing a user-centric, intuitive interface that is direct. For example, under a healthcare system's 
 standpoint, we wanted to include a variety of ways for users to search for information (through patient name,
 illness, today's appointments, etc.). The command words used were designed in a way that the user had to conscientiously
+
 specify the way they intended to search. 
