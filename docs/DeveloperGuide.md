@@ -3,14 +3,53 @@ layout: page
 title: Developer Guide
 ---
 
-- Table of Contents
-  {:toc}
+# Table of Contents
+
+- [Acknowledgements](#acknowledgements)
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
+- [Implementation](#implementation)
+  - [Edit Contacts and Meetings feature](#edit-contacts-and-meetings-feature)
+  - [View Contacts and Meetings feature](#view-contacts-and-meetings-feature)
+  - [Find meeting feature](#find-meeting-feature)
+  - [Add attendee feature](#add-attendee-feature)
+  - [Remove attendee feature](#remove-attendee-feature)
+  - [Keeping track of last meeting with contact](#keeping-track-of-last-meeting-with-contact)
+- [Planned Enhancements](#planned-enhanements)
+  - [\[Proposed\] Undo/redo feature](#proposed-undo-and-redo-feature)
+- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Requirements](#appendix-requirements)
+  - [Product scope](#product-scope)
+  - [User stories](#user-stories)
+  - [Use case](#use-case)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+  - [Launch and shutdown](#launch-and-shutdown) 
+  - [Adding a person](#adding-a-person)
+  - [Editing a person](#editing-a-person)
+  - [Deleting a person](#deleting-a-person)
+  - [View Contact](#view-contact)
+  - [Meeting Tests](#meeting-tests)
+  - [Meeting Attendees](#meeting-attendees)
+  - [Mark Meetings](#mark-meetings)
+  - [Saving data](#saving-data)
+
+<div style="page-break-after: always;"></div>
 
 ---
 
 ## **Acknowledgements**
 
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- This project has reused and adopted the structure of AB3.
+
+- Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 ---
 
@@ -25,8 +64,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` & `.uxf` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides (for `.puml`)](https://se-education.org/guides/tutorials/plantUml.html) or [_UMLet_ (for `.uxf`)](https://www.umlet.com) to learn how to create and edit diagrams.
-
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Architecture
 
@@ -69,6 +109,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -85,6 +127,8 @@ The `UI` component,
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 - depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -117,6 +161,8 @@ How the parsing works:
 - When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -131,6 +177,8 @@ The `Model` component,
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 - The Tag is a factory class that keeps its own HashMap of the Tags it has created before, thus it ensures that every Tag is unique and can be referenced by all Person and Meetings.
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -150,11 +198,13 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Edit Contacts/Meetings feature
+### Edit Contacts and Meetings feature
 
 Both the edit contact command `editc` and edit meeting command `editm` are implemented quite similarly due to the similarities between the `Person` and `Meeting` classes.
 
@@ -188,7 +238,9 @@ Finally, the old `Meeting` object is replaced with the new instance, and the `Mo
    - The commands `addmc` and `rmmc` are used to modify the attendee list of a meeting instead.
    - This retains the identity of the edit commands as commands that modify field information, as opposed to `addmc` and `rmmc` which can be seen as commands that link multiple objects together.
 
-### View Contacts/Meetings feature
+<div style="page-break-after: always;"></div>
+
+### View Contacts and Meetings feature
 
 #### Implementation
 
@@ -227,6 +279,8 @@ Once the indexes of the `Person` and `Meeting` objects to view (if any) are stor
      - For both edit commands, it is also more important that they can display dynamic updates.
    - For the case of `deletec`, `deletem`, `findc` and `findm`, the stored `Index` is set to null to prevent potential out-of-bounds error.
 
+<div style="page-break-after: always;"></div>
+
 ### Find meeting feature
 
 #### Behaviour and Implementation
@@ -257,6 +311,8 @@ The following diagrams show the entire sequence flow for `LogicManager#execute()
 
 <img src = "images/FindMeetingSequence2.png" width = "100%" />
 
+**Find Contact is implemented in a similar manner.**
+
 #### Design Considerations and Rationale
 
 1. Given the amount of predicates `FindMeetingCommand` is supposed to use, every predicate needs to be combined in order to maintain good SLAP.
@@ -264,6 +320,8 @@ The following diagrams show the entire sequence flow for `LogicManager#execute()
    - If there are no inputs for s/START and e/END, `FindMeetingCommandParser` will give `MeetingTimeContainsPredicate` both `LocalDateTime.MAX` & `LocaLDateTime.MIN`
 2. The coupling between predicate classes and `Logic` needs to be minimal as `FindMeetingCommandParser` should only be dependent on `GeneralMeetingPredicate` and `MeetingTime`.
    - `MeetingTime`is needed to check the validity of START and END in order for `parse()` to stop any invalid inputs, it cannot be removed.
+
+<div style="page-break-after: always;"></div>
 
 ### Add attendee feature
 
@@ -285,6 +343,8 @@ The following sequence diagram shows how the add attendee operation works:
 A Person object can be obtained from a Meeting's list of attendees by searching through `UniquePersonList`
 for a `Person` with a name matching `attendeeName`.
 
+<div style="page-break-after: always;"></div>
+
 ### Remove attendee feature
 
 User can specify an Attendee to remove from a specified Meeting by specifying its index in the list of Attendees.
@@ -294,7 +354,42 @@ The following sequence diagram shows how the remove attendee operation works:
 
 ![RemoveAttendeeSequenceDiagram](images/RemoveAttendeeSequenceDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+<div style="page-break-after: always;"></div>
+
+### Keeping track of last meeting with contact
+
+Keeping track of the user's last meeting with their contact is facilitated by the addition of a `LastContactedTime` object to `Person`.
+Thus, each instance of `Person` will contain an immutable `LastContactedTime` object that stores the user's last meeting with that contact.
+The following steps shows how `LastContactedTime` is implemented and utilized in the application.
+
+Step 1. The user inputs the `addc` command into the `CommandBox` input field, with the added field `l/[LAST_CONTACTED_TIME]`.
+
+The following diagram summarizes steps 2 to 6:
+<img src="images/LastContactedTime1.png" width="1000" />
+
+Step 2. Entering a correct command with the `Enter` key then calls `execute` on `LogicManager`.
+Step 3. `LogicManager` then calls `AddressBookParser#parseCommand(commandText)` on the `commandText` String, which recognizes that it is an `addc` command.
+Step 4. `AddressBookParser` then calls `AddCommandParser#parse()` on the command arguments.
+Step 5. `AddCommandParser` then calls `ParserUtil#parseContactTime()` which parses the last contacted time and returns a `LocalDateTime` object called `lastContactedTime`.
+Step 6. The `lastContactedTime` object is then passed to the `Person` constructor, which creates a new `Person` that calls the `LastContactedTime` constructor with it.
+
+The following diagram summarizes steps 7 and 8:
+<img src="images/LastContactedTime2.png" width="1000" />
+
+Step 7. The completed `Person` is passed to an `AddCommand` constructor which return a new `AddCommand` that can be executed.
+Step 8. `LogicManager` then executes the `AddCommand` on the application model.
+Step 9. Further execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
+
+#### Design Consideration: Updating last meeting with contact
+
+Solution:
+This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is marked as done, the attendees of the meeting will be updated with their LastContactedTime field updated to the end time of the meeting.
+
+<div style="page-break-after: always;"></div>
+
+## **Planned Enhancements**
+
+### \[Proposed\] Undo and redo feature
 
 #### Proposed Implementation
 
@@ -373,38 +468,23 @@ The following activity diagram summarizes what happens when a user executes a ne
   - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   - Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### Keeping track of last meeting with contact
-
-Keeping track of the user's last meeting with their contact is facilitated by the addition of a `LastContactedTime` object to `Person`.
-Thus, each instance of `Person` will contain an immutable `LastContactedTime` object that stores the user's last meeting with that contact.
-The following steps shows how `LastContactedTime` is implemented and utilized in the application.
-
-Step 1. The user inputs the `addc` command into the `CommandBox` input field, with the added field `l/[LAST_CONTACTED_TIME]`.
-
-The following diagram summarizes steps 2 to 6:
-<img src="images/LastContactedTime1.png" width="1000" />
-
-Step 2. Entering a correct command with the `Enter` key then calls `execute` on `LogicManager`.
-Step 3. `LogicManager` then calls `AddressBookParser#parseCommand(commandText)` on the `commandText` String, which recognizes that it is an `addc` command.
-Step 4. `AddressBookParser` then calls `AddCommandParser#parse()` on the command arguments.
-Step 5. `AddCommandParser` then calls `ParserUtil#parseContactTime()` which parses the last contacted time and returns a `LocalDateTime` object called `lastContactedTime`.
-Step 6. The `lastContactedTime` object is then passed to the `Person` constructor, which creates a new `Person` that calls the `LastContactedTime` constructor with it.
-
-The following diagram summarizes steps 7 and 8:
-<img src="images/LastContactedTime2.png" width="1000" />
-
-Step 7. The completed `Person` is passed to an `AddCommand` constructor which return a new `AddCommand` that can be executed.
-Step 8. `LogicManager` then executes the `AddCommand` on the application model.
-Step 9. Further execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
-
-#### Design Consideration: Updating last meeting with contact
-
-Solution:
-This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is marked as done, the attendees of the meeting will be updated with their LastContactedTime field updated to the end time of the meeting.
-
 ---
+
+<div style="page-break-after: always;"></div>
+
+## **Effort**
+
+### Effort in Model and Storage
+Compared to AB3, which only deals with 1 entity type, Person. OutBook deals with 2 entity types and allows significant interaction between them. This means that the model had to be extended and storage had to follow along with it. jackson does not allow storage of pointers, thus it became necessary to work around that using the unique fields on both Person and Meeting.
+
+### Effort in reducing coupling
+Compared to AB3, where there were no interaction between entities. OutBook was designed for professionals to manage both their contacts and their meetings, this inherently means that there needs to be interaction between both entities. This interaction increase coupling and decreases cohesion. In order to combat this, many instances of facade, command and observer design patterns were used.
+
+### Effort in implementing many features
+OutBook needed to make managing contacts and meetings an efficient process, this meant that there needed to be many quality of life features to make the professional's life easier. Therefore, much effort was dedicated to making data easily retrievable by making almost every field searchable.
+
+### Effort in managing interactions between entities
+OutBook required one meeting to interact with many other contacts and for one contact to interact with many other meetings. Because of the interactions between both classes, a change in 1 object must be reflected in everything that references the object while still being immutable. This required thorough testing and analysis to keep track of the interactions and account for them while we were adding more features.
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -428,6 +508,8 @@ This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is 
 - can type fast and is comfortable using CLI
 
 **Value proposition**: manage and organise contacts and meetings faster than a mouse/GUI driven app
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -458,7 +540,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | agent                                     | mark meetings as complete       | know which meetings are still pending |
 | `*`      | agent who wants to meet clients regularly | know the last contacted date    | when to touch base with a client      |
 
-_{More to be added}_
+<div style="page-break-after: always;"></div>
 
 ### Use case
 
@@ -570,7 +652,7 @@ _{More to be added}_
 
     Use case ends.
 
-_{More to be added}_
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -599,6 +681,8 @@ _{More to be added}_
 
 _{More to be added}_
 
+<div style="page-break-after: always;"></div>
+
 ### Glossary
 
 - **User Interface (UI)**: The point of interaction between a user and a software application, with both graphical and non-graphical elements.
@@ -609,15 +693,17 @@ _{More to be added}_
 - **Private contact detail**: A contact detail that is not meant to be shared with others
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info"> </div>
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+
 
 ### Launch and shutdown
 

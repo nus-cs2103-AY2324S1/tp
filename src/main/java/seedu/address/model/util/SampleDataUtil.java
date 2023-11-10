@@ -40,7 +40,7 @@ public class SampleDataUtil {
                         getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                         LocalDateTime.parse("02.10.2023 1700", FORMAT), new Status(""), new Remark(""),
-                        getTagSet("family")),
+                        getTagSet("colleagues")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                         LocalDateTime.parse("02.10.2023 1900", FORMAT), new Status(""), new Remark(""),
                         getTagSet("classmates")),
@@ -52,14 +52,14 @@ public class SampleDataUtil {
 
     public static Meeting[] getSampleMeetings() {
         return new Meeting[] {
-            new Meeting(new Title("Test Meeting 1"), new Location("Room 1"),
+            new Meeting(new Title("Meeting with Alex"), new Location("Starbucks"),
                     LocalDateTime.parse("02.10.2023 1000", FORMAT),
-                    LocalDateTime.parse("03.10.2023 1000", FORMAT),
+                    LocalDateTime.parse("02.10.2023 1200", FORMAT),
                     getAttendeeSet("Alex Yeoh"), getTagSet("work"), new MeetingStatus(false)),
-            new Meeting(new Title("Test Meeting 2"), new Location("Room 2"),
-                    LocalDateTime.parse("02.10.2023 1000", FORMAT),
-                    LocalDateTime.parse("02.10.2023 1000", FORMAT),
-                    getAttendeeSet(), getTagSet(), new MeetingStatus(false)),
+            new Meeting(new Title("Meet with team"), new Location("Office meeting room"),
+                    LocalDateTime.parse("03.10.2023 1000", FORMAT),
+                    LocalDateTime.parse("03.10.2023 1200", FORMAT),
+                    getAttendeeSet("Bernice Yu", "David Li"), getTagSet("work"), new MeetingStatus(false)),
         };
     }
 

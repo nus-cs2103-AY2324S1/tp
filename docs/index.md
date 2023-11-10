@@ -8,7 +8,7 @@ title: OutBook
 
 ![Ui](images/Ui.png)
 
-**OutBook is a desktop application that can help professionals to manage and schedule meetings.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**OutBook is a desktop app that allows freelance insurance agents to manage their numerous contacts and meeting schedule.** Users can link their contacts to their meetings, to keep track of the personnel attending these meetings.
 
 * If you are interested in using OutBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing OutBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
