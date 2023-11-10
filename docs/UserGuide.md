@@ -60,7 +60,7 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
       
    <div markdown="block" class="alert alert-info">
    :information_source: Note:
-   You may also use any application (e.g. Windows powershell, Visual Studio Code) that supports command line inputs.
+   You may also use any applications (e.g. Windows Powershell, Visual Studio Code) that support command line inputs.
    </div>
 
    A window similar to the below should appear in a few seconds. Note how the app contains some sample data.
