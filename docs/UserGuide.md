@@ -366,7 +366,7 @@ need to save manually.
 
 ### Editing the data file
 
-MediLink Contacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Users are advised to not make any changes directly to the json file as it may cause unexpected behaviours in MediLink Contacts.
+MediLink Contacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file. However, please ensure that the edits are valid, else it may cause unexpected behaviours when the invalid data is not detected by the system.
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
