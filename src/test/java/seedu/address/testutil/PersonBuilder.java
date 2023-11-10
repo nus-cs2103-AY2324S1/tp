@@ -154,6 +154,7 @@ public class PersonBuilder {
      */
     public PersonBuilder withPayrollStorage(ArrayList<Payroll> payrollStorage) {
         this.payrollStorage = new PayrollStorage(payrollStorage);
+        this.payrollStorage.add(new Payroll(this.salary));
         return this;
     }
 

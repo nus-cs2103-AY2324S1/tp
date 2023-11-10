@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
@@ -47,6 +48,34 @@ public class PayrollTest {
     }
 
     @Test
+    public void getTransportAllowancesString_addingTransportAllowance_addSuccessful() {
+        Payroll payroll = new Payroll(new Salary("800.00"));
+        payroll.addBenefit(new Benefit("200.00", Reason.TRANSPORT_ALLOWANCE));
+        assertTrue(payroll.getTransportAllowancesString().equals("200.00"));
+    }
+
+    @Test
+    public void getNoPayLeavesString_addingNoPayLeaves_addSuccessful() {
+        Payroll payroll = new Payroll(new Salary("20000.00"));
+        payroll.addDeduction(new Deduction("200.00", Reason.NO_PAY_LEAVE));
+        assertTrue(payroll.getNoPayLeavesString().equals("200.00"));
+    }
+
+    @Test
+    public void getAbsencesString_addingAbsences_addSuccessful() {
+        Payroll payroll = new Payroll(new Salary("3000.00"));
+        payroll.addDeduction(new Deduction("200.00", Reason.ABSENCE));
+        assertTrue(payroll.getAbsencesString().equals("200.00"));
+    }
+
+    @Test
+    public void getPaymentDate_checkPaymentDate_samePaymentDate() {
+        LocalDate localDate = LocalDate.parse("2023-11-30");
+        Payroll payroll = new Payroll((new Salary("200.00")));
+        assertTrue(payroll.getPaymentDate().equals(localDate));
+    }
+
+    @Test
     public void equals() {
         Payroll payroll1 = new Payroll(validSalary);
         Payroll payroll2 = new Payroll(validSalary, "01/11/2023", "30/11/2023", "05/12/2023");
@@ -71,8 +100,16 @@ public class PayrollTest {
         // different salary -> return false
         assertFalse(payroll1.equals(new Payroll(new Salary("200.00"))));
 
-        // different date -> return false
+        // different start date -> return false
         assertFalse(payroll2.equals(new Payroll(validSalary,
                 "02/11/2023", "30/11/2023", "05/12/2023")));
+
+        // different end date -> return false
+        assertFalse(payroll2.equals(new Payroll(validSalary,
+                "01/11/2023", "29/11/2023", "05/12/2023")));
+
+        // different payment date -> return false
+        assertFalse(payroll2.equals(new Payroll(validSalary,
+                "01/11/2023", "30/11/2023", "06/12/2023")));
     }
 }

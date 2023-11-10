@@ -62,6 +62,10 @@ public class TypicalPersons {
             .withEmail("stefan@example.com").withAddress("little india").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
+    public static final Person PAYROLL = new PersonBuilder().withName("George Best").withPhone("9482442")
+            .withEmail("anna@example.com").withAddress("4th street").withSalary("1500.00")
+            .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457")
+            .withPayrollStorage(new ArrayList<>()).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
@@ -88,6 +92,12 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        return ab;
+    }
+
+    public static AddressBook getTypicalAddressBookPayroll() {
+        AddressBook ab = new AddressBook();
+        ab.addPerson(PAYROLL);
         return ab;
     }
 
