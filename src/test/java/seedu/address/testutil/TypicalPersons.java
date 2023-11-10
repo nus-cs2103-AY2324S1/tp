@@ -36,26 +36,34 @@ public class TypicalPersons {
             .withAnnualLeave("2").withJoinDate("04/05/2021")
             .withAttendanceStorage(
                     new ArrayList<String>(List.of(
-                            new String[]{"12/02/2023//absent", "08/11/2023//late", "09/08/2023//absent"}))).build();
+                            new String[]{"12/02/2023//absent", "08/11/2023//late", "09/08/2023//absent"})))
+            .withPayrollStorage(new ArrayList<>()).build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
             .withPhone("98765432").withBankAccount("0123457").withSalary("1500.00")
-            .withAnnualLeave("2").withJoinDate("04/05/2021").build();
+            .withAnnualLeave("2").withJoinDate("04/05/2021")
+            .withPayrollStorage(new ArrayList<>()).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withSalary("1500.00")
-            .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457").build();
+            .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457")
+            .withPayrollStorage(new ArrayList<>()).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withSalary("1500.00")
-            .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457").build();
+            .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457")
+            .withPayrollStorage(new ArrayList<>()).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").withSalary("1500.00")
-            .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457").build();
+            .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457")
+            .withPayrollStorage(new ArrayList<>()).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").withSalary("1500.00")
-            .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457").build();
+            .withEmail("lydia@example.com").withAddress("little tokyo").withSalary("1500.0" +
+                    "0")
+            .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457")
+            .withPayrollStorage(new ArrayList<>()).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").withSalary("1500.00")
-            .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457").build();
+            .withAnnualLeave("2").withJoinDate("04/05/2021").withBankAccount("0123457")
+            .withPayrollStorage(new ArrayList<>()).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

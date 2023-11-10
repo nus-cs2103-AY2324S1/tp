@@ -20,12 +20,14 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Payroll;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Salary;
 
 class PayrollCommandTest {
 
     private Index index = Index.fromZeroBased(0);
     private NameContainsKeywordsPredicate name = new NameContainsKeywordsPredicate(Arrays.asList("Alice"));
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Salary salary = new Salary("2000.00");
 
     @Test
     public void constructor_nullModel_throwsNullPointerException() {
@@ -58,6 +60,21 @@ class PayrollCommandTest {
     }
 
     @Test
+    public void executeByIndex_differentStartDate_calculationSuccess() throws CommandException {
+        Payroll payroll = new Payroll(salary,
+                "01/12/2023", "01/01/2023", "05/01/2023");
+        List<Person> lastFilteredList = model.getFilteredPersonList();
+        Person personToCalculate = lastFilteredList.get(index.getZeroBased());
+        Payroll latestPayroll = personToCalculate.getLatestPayroll();
+        personToCalculate.addPayroll(payroll);
+
+        PayrollCommand payrollCommand = new PayrollCommand(index);
+        CommandResult commandResult = payrollCommand.execute(model);
+        assertTrue(String.format(PayrollCommand.MESSAGE_ARGUMENTS,
+                latestPayroll.calculatePayrollString()).equals(commandResult.getFeedbackToUser()));
+    }
+
+    @Test
     public void executeByName_nonExistentName_throwsCommandException() {
         NameContainsKeywordsPredicate nonExistentName = new NameContainsKeywordsPredicate(Arrays.asList("Boo"));
         PayrollCommand payrollCommand = new PayrollCommand(nonExistentName);
@@ -70,6 +87,22 @@ class PayrollCommandTest {
         List<Integer> indexes = model.getIndexOfFilteredPersonList(name);
         Person personToCalculate = lastFilteredList.get(indexes.get(0) - 1);
         Payroll latestPayroll = personToCalculate.getLatestPayroll();
+
+        PayrollCommand payrollCommand = new PayrollCommand(name);
+        CommandResult commandResult = payrollCommand.execute(model);
+        assertTrue(String.format(PayrollCommand.MESSAGE_ARGUMENTS,
+                latestPayroll.calculatePayrollString()).equals(commandResult.getFeedbackToUser()));
+    }
+
+    @Test
+    public void executeByName_differentStartDate_calculationSuccess() throws CommandException {
+        Payroll payroll = new Payroll(salary,
+                "01/12/2023", "01/01/2023", "05/01/2023");
+        List<Person> lastFilteredList = model.getFilteredPersonList();
+        List<Integer> indexes = model.getIndexOfFilteredPersonList(name);
+        Person personToCalculate = lastFilteredList.get(indexes.get(0) - 1);
+        Payroll latestPayroll = personToCalculate.getLatestPayroll();
+        personToCalculate.addPayroll(payroll);
 
         PayrollCommand payrollCommand = new PayrollCommand(name);
         CommandResult commandResult = payrollCommand.execute(model);
