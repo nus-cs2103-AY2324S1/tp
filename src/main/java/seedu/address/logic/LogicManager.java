@@ -41,6 +41,8 @@ public class LogicManager implements Logic {
      * @param storage The Storage component handling the saving and loading of data.
      */
     public LogicManager(Model model, Storage storage) {
+        assert model != null;
+        assert storage != null;
         this.model = model;
         this.storage = storage;
         bookingBookParser = new BookingBookParser();

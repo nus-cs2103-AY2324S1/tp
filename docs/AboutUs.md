@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/AryanG01)]
 [[portfolio](team/aryang01.md)]
 
-* Role: Project Advisor
+* Role: Developer
 
 ### Rohan Bahl
 
@@ -26,8 +26,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/RB9823)]
 [[portfolio](team/rb9823.md)]
 
-* Role: Developer
-* Responsibilities: Project Management and Implementation
+* Role: Developer and Project Manager
 
 ### Mark Garcera
 
@@ -37,7 +36,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/markgcera.md)]
 
 * Role: Developer
-* Responsibilities: Data
 
 ### Moon Ji Hoon
 
@@ -47,7 +45,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/iyioon.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Ting Si Yang Annabel
 
@@ -57,4 +54,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/annabelting.md)]
 
 * Role: Developer
-* Responsibilities: UI

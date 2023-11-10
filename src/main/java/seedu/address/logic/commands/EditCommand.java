@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -66,9 +65,8 @@ public class EditCommand extends Command {
      * @param editRoomDescriptor The details to edit the booking with.
      */
     public EditCommand(Index index, EditRoomDescriptor editRoomDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editRoomDescriptor);
-
+        assert index != null;
+        assert editRoomDescriptor != null;
         this.index = index;
         this.editRoomDescriptor = new EditRoomDescriptor(editRoomDescriptor);
     }
@@ -101,7 +99,7 @@ public class EditCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        assert model != null;
         List<Booking> lastShownList = model.getFilteredBookingList();
 
         if (index.getZeroBased() >= lastShownList.size()) {

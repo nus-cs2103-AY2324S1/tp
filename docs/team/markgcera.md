@@ -23,7 +23,7 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [Reposense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=markgcera&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
-* **Project management**:
+* **Project management**: 
   * Created the UI Mockup at the start of the project to give the team direction in what we want our first iteration to look like (Pull request [#78](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/78/files)).
   * Provided tasks done and possible next tasks to be done via the team's group chat as well as in PRs eg: (Pull request [#100](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/100))
   * Created and assigned some issues to teammates.
