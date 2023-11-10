@@ -3,9 +3,23 @@ layout: page
 title: User Guide
 ---
 
+# Welcome to InterviewHub!
+
+**Dear Hiring Managers,**
+
+Welcome to **InterviewHub**! We are excited to introduce you to your new partner in recruitment and interview scheduling. 
+
+As a hiring manager, you understand the importance of time. That's why we've optimized **InterviewHub** for those who can type fast, think faster, and make decisions on the fly. Navigate through applicants, schedule interviews, and manage your hiring pipeline with commands that execute in the blink of an eye.
+
+This guide is your roadmap to mastering **InterviewHub**. We'll guide you through each feature, helping you to leverage our interface to its full potential—so you can focus on what you do best: securing top talent.
+
+Let's dive into **InterviewHub** and transform the way you recruit!
+
+--------------------------------------------------------------------------------------------------------------------
+
 # Table of Contents
 
-- [Introduction](#introduction)
+- [Introduction](#introduction---what-is-interviewhub)
 - [How to use this user guide](#how-to-use-this-user-guide)
 - [Quick Start](#quick-start)
 - [GUI Summary](#gui-summary)
@@ -45,17 +59,17 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Introduction
+# Introduction - What is InterviewHub?
 
-Tired of sending out offers to the best candidates, just to receive a disappointing reply that they have already accepted another offer that was sent out before yours?
+**InterviewHub**  is a desktop app for hiring managers to schedule job interviews and manage applicants' contact information.
+**InterviewHub** allows users to:
+* seamlessly update and manage applicants for various job openings,
+* schedule and keep track of interviews with each applicant,
 
-**InterviewHub**  is a desktop app for engineering managers to schedule job interviews and manage applicants.
-By optimizing recruitment workflows, we enable faster decision-making, helping you secure top talent before your competitors.
+through an all-in-one user-friendly platform!
 
 It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
-If you can type fast, **InterviewHub** can get your Interview management tasks done faster than traditional GUI apps.
-
-What are you waiting for? Let's get started using **InterviewHub** by following the [How to use this user guide](#how-to-use-this-user-guide) section!
+If you are a hiring manager who can type fast, **InterviewHub** can get your Interview and applicant management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -84,41 +98,65 @@ Before we begin, the table below describes some of the symbols and syntax you ma
 
 # Quick Start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have **Java 11** or above [installed in your Computer](#q-how-do-i-check-if-i-have-the-correct-version-of-java-installed).
 
 2. Download the latest `InterviewHub.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for InterviewHub.
 
-4. Double-click the file to start the app. The Graphical User Interface(GUI) should appear in a few seconds.
+4. Open a terminal, and navigate to the folder you put the JAR file in. 
 
-5. To get a better understanding of what you see. Please refer to the [GUI Summary](#gui-summary) for more details.
+5. Launch the app by using the command `java -jar InterviewHub.jar` in your terminal. 
+
+6. The Graphical User Interface(GUI) should appear in a few seconds. Note that the app contains some sample data.
+
+7. Type the command in the command box and press Enter to execute it. E.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
+   Some example commands you can try:
+
+   * **`help`** : Opens the help window, which contains a link to this User Guide.
+
+   * **`list-a`** : Lists all job applicants.
+
+   * **`add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`** :
+     Adds an applicant information for `James Ho` to **InterviewHub**. 
+     * The applicant's phone number is `22224444`, 
+     * the applicant's email address is `jamesho@example.com`, and 
+     * the applicant's residential address is at `123, Clementi Rd, 1234665`.
+
+   * **`delete 1`** : Deletes the first job applicant displayed in **InterviewHub**.
+
+   * **`exit`** : Exits **InterviewHub**.
+
+8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 # GUI Summary
 
+The following is an annotated breakdown of InterviewHub’s GUI:
+
 ![GUI Summary](images/GuiSummary.png)
 
-For each applicant, we see the following details:
+For each **applicant**, we see the following details:
 
-| Applicant |
-|-----------|
-| Name      |
-| Tags      |
-| Phone     |
-| Address   |
-| Email     |
+| Information | Description                                 |
+|-------------|---------------------------------------------|
+| **Name**    | The full name of the applicant              |
+| **Tags**    | Tags for the applicant (if any)             |
+| **Phone**   | The mobile phone number of the applicant    |
+| **Address** | The residential address of the applicant    |
+| **Email**   | The email address of the applicant          |
 
-For each interview, we see the following details:
+For each **interview**, we see the following details:
 
-| Interview        |
-|------------------|
-| Applicant's Name |
-| Job Title        |
-| Start Time       |
-| End Time         |
-| Rating           |
+| Information          | Description                                                         |
+|----------------------|---------------------------------------------------------------------|
+| **Applicant's Name** | The full name of the applicant                                      |
+| **Job Title**        | The title of the job that the applicant is applying for             |
+| **Start Time**       | Start time of the interview                                         |
+| **End Time**         | Projected end time of the interview                                 |
+| **Rating**           | Interview performance rating of the applicant (from 0.0 - 5.0, if any) |
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -656,14 +694,14 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 
 # Frequently Asked Questions
 
-**Q**: How do I transfer my data to another Computer?<br>
+### **Q**: How do I transfer my data to another Computer?
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InterviewHub home folder.
 
-**Q**: How do I check if I have the correct version of Java installed?<br>
-**A**: You can check the version of Java installed in your computer by opening the Command Prompt and typing `java --version`.
-If you have Java 11 installed, the correct version of Java is installed and you can start using **InterviewHub**.
+### **Q**: How do I check if I have the correct version of Java installed?
+**A**: You can check the version of Java installed in your computer by opening the terminal and running the `java --version` command.
+The correct version of Java required to run **InterviewHub** is **Java 11**. If you do not have Java (or the correct version of it) installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
-**Q**: Do I need an active internet connection to use InterviewHub? <br>
+### **Q**: Do I need an active internet connection to use InterviewHub?<br>
 **A**: No. It is an offline app.
 
 [Back to the Table of Contents](#table-of-contents)
