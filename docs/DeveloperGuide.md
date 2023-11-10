@@ -802,25 +802,25 @@ If the implementation effort required to create AB3 from scratch is 10, we estim
 Tutorium is 11.
 
 ### Difficulty level
-Over the course of this project, each of us had to make design decisions when implementing the features we were 
-responsible for. For instance, the implementation of the filter feature involved the creation of several classes, each 
+Over the course of this project, each of us had to make design decisions when implementing the features we were
+responsible for. For instance, the implementation of the filter feature involved the creation of several classes, each
 representing a single predicate which could be used to filter the list of students. This was something we found challenging
 as it was the first time most of us needed to make such choices. Hence, creating Tutorium was not an easy task by any means.
 
 ### Challenges faced
-At the beginning of the project, we needed to refactor existing code from AB-3 by adding additional fields in order to 
-create our Student class from the original Person class. This resulted in dependencies, as we needed to wait for 
+At the beginning of the project, we needed to refactor existing code from AB-3 by adding additional fields in order to
+create our Student class from the original Person class. This resulted in dependencies, as we needed to wait for
 the relevant refactoring to be complete before we could work on further enhancements and new features.
 Learning how to use JavaFX to create new windows to display visuals such as graphs, charts and tables was
-something we had to grapple with as well due to the steep learning curve. Furthermore, it involved UI changes, 
+something we had to grapple with as well due to the steep learning curve. Furthermore, it involved UI changes,
 which we could only test manually.
 
 ### Effort required
-Tutorium was built upon AB-3 over a period of 5-6 weeks by our team. Overall, the 5 of us put in 
+Tutorium was built upon AB-3 over a period of 5-6 weeks by our team. Overall, the 5 of us put in
 our best effort to build a product that was optimised for our target user, tuition centre administrative staff, by
 brainstorming suitable features and enhancements to add.
-Every week, each of us would spend around 1-2 days adding our respective features. Furthermore, we also wrote automated 
-JUnit tests at each stage, expending plenty of effort on crafting a good variety of test cases to improve the effectiveness and efficiency of our tests. 
+Every week, each of us would spend around 1-2 days adding our respective features. Furthermore, we also wrote automated
+JUnit tests at each stage, expending plenty of effort on crafting a good variety of test cases to improve the effectiveness and efficiency of our tests.
 
 ### Achievements
 Listed below are the enhancements we managed to add into Tutorium.
@@ -831,13 +831,13 @@ Listed below are the enhancements we managed to add into Tutorium.
 
 ## **Appendix: Planned Enhancements**
 * Improving the phrasing of messages displayed to the user.
-  * Currently, some messages displayed to the user (such as error messages or success messages) are 
+  * Currently, some messages displayed to the user (such as error messages or success messages) are
     phrased awkwardly. We plan to rephrase these messages to provide a smoother experience for the user.
 * Include validity checks for the nearest MRT station field.
-  * At the moment, Tutorium accepts any user input for the nearest MRT station field, which can lead to 
+  * At the moment, Tutorium accepts any user input for the nearest MRT station field, which can lead to
     incorrectly-entered data in the case of user error. In the future, we will introduce validity checks
     to reduce the likelihood of such mistakes.
 * Disallow the use of invalid character inputs in the search command.
   *  Although only alphanumeric names are allowed, the search command allows the user to search for names
-     containing non-alphanumeric characters. Our team plans to improve the design of this feature by 
+     containing non-alphanumeric characters. Our team plans to improve the design of this feature by
      disallowing such inputs in a future version of the product.

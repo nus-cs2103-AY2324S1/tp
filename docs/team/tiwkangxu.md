@@ -15,7 +15,7 @@ Given below are my contributions to the project.
 
 * **Enhancements implemented**:
     * Added a sort feature to the app.
-        * This feature allows the user to sort the list of students by name in alphabetical order to enhance efficiency in searching. 
+        * This feature allows the user to sort the list of students by name in alphabetical order to enhance efficiency in searching.
     * Added an export feature to the app.
         * This feature allows the user to export a visual representation recently created, be it table or barchart.
 

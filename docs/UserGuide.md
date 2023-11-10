@@ -111,7 +111,7 @@ Format: `import FILENAME.csv`
 
 <box type="tip" seamless>
 
-**Note:** 
+**Note:**
 - The columns should be "Name", "Phone", "Email", "Address", "Gender", "Sec level", "Nearest Mrt Station", "Subject", "Enrol Date"
 - Enrol Date can be left blank
 - There must be a Enrol Date header after Subject header
@@ -303,7 +303,7 @@ Format: `export v/VISUAL`
 * `VISUAL` should be `TABLE` or `BAR`, non-case-sensitive.
 * `TABLE` indicates exporting the table created, while `BAR` indicates exporting the bar chart created.
 * A table should be created before exporting, this applies to exporting bar chart as well.
-* The visual representation exported will be the one that is recently created. 
+* The visual representation exported will be the one that is recently created.
   * i.e. if two bar charts are created consecutively, `export v/BAR` will export the most recent bar chart created (the 2nd bar chart)
 
 Examples:
