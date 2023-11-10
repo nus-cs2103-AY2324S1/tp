@@ -76,6 +76,15 @@ public class ClearCommandTest {
     }
 
     @Test
+    public void execute_noConfirmation_confirm() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_PROMPT);
+
+        assertCommandSuccess(new ClearCommand("confirm"), model, expectedCommandResult, model);
+    }
+
+    @Test
     public void execute_nullConfirmation_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
