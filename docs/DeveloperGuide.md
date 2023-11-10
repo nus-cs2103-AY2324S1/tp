@@ -428,33 +428,27 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### 4.1. Undo/redo feature
 
-#### 4.1.1. Description
+Currently, we do not have undo and redo feature which open rooms for users to accidentally have typos in their command messages, causing certain unwanted commands to be executed. This can cause an array of problems,
+from deleting important data along with the contact, to inconvenience for the users themselves. As such, we plan to implement undo and redo feature in the future to provide a better user experience for our users.
 
-Users may accidentally have typos in their command messages, causing certain unwanted commands to be executed. This can cause an array of problems,
-from deleting important data along with the contact, to inconvenience for the users themselves. As such, having an undo / redo feature might provide
-a better user experience for our users.
+### 4.2. `addtime`/`deletetime` feature
 
-### 4.2. Adding/Deleting time feature
-
-#### 4.1.2. Description
-
-Currently, our add and delete time features allow users to input multiple time slots. Should a certain input encounter an error, ProjectPRO adds / deletes the other time intervals that are valid
-and clears the input box. As we recognise that users might encounter accidental typos while typing time intervals, we believe having our program's input box keep the incorrect inputs can provide convenience
-to our users.
+Currently, our add and delete time features allow users to input multiple time slots in the command box. Should a certain input encounter an error (clashing time intervals), ProjectPRO adds / deletes the other time intervals that are valid and clears the command box. We recognise that users might encounter accidental typos while typing time intervals. Hence, we plan to disallow the clearing command box when the user typed an invalid input.
 
 ### 4.3. Improving our user interface. 
 
-#### 4.1.3. Description
-Our future implementation involves optimizing the output display by increasing the height of the output box. This enhancement aims to provide users with a more comprehensive and visually accessible view, allowing them to easily grasp the content at a glance.
-Not addressing the issue of the relatively short output box height in ProjectPRO could lead to user frustration and hindered efficiency. Users may find it challenging to quickly interpret and comprehend the output, especially when certain commands generate outputs with numerous lines. This limitation might result in a suboptimal user experience, making it difficult for users to extract the desired information promptly. Addressing this problem is crucial to ensuring a more user-friendly interface and improving the overall effectiveness of ProjectPRO for its users.
+Currently, ProjectPRO's output box height is relative short which could lead to user frustration and hindered efficiency. Users may find it challenging to quickly interpret and comprehend the output, especially when certain commands generate outputs with numerous lines. This limitation might result in a suboptimal user experience, making it difficult for users to extract the desired information promptly.Addressing this problem is crucial to ensuring a more user-friendly interface and improving the overall effectiveness of ProjectPRO for its users. Our future implementation involves optimizing the output display by increasing the height of the output box. This enhancement aims to provide users with a more comprehensive and visually accessible view, allowing them to easily grasp the content at a glance.
 
 ### 4.4. Allowing extensive modification to command words.
 
-#### 4.1.4. Description
 As ProjectPro is a CLI text-based application, it requires extensive typing which might prove troublesome at times. As a result, our users would naturally have their personal preferences regarding the command word inputs.
 Enabling users to customize input requirements for functions within ProjectPRO would significantly enhance the flexibility and adaptability of the system. This future implementation empowers users by allowing them to tailor input parameters based on their specific needs and preferences. By accommodating a range of input variations, users can streamline their workflows and optimize the tool to align with diverse use cases.
 
-* --------------------------------------------------------------------------------------------------------------------
+### 4.5 Improving `addmeeting` feature.
+
+In the `addmeeting` feature, user can add free time intervals to a group. Currently, user can add same free time intervals for 2 separate groups or overlapping time intervals between 2 or more groups, causing a clash in their schedule. (Eg. `Group A: Mon 1200 - Mon 1400`; `Group B: Mon 1300 - Mon 1500`). These clashes are not detected and will allow this state to exist. We plan to not allow this, so user cannot insert time intervals that are overlapping with other groups. Eg. `Group A: Mon 1200 - Mon 1400`; `Group B: Mon 1300 - Mon 1500` will not be allowed.
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 
