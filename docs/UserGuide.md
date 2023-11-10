@@ -58,14 +58,14 @@ Here are the icons you will see throughout this User Guide and what they mean:
 - :warning: Things to take caution with, as they may affect your use of HealthSync
 
 
-> :bulb: The main application consists of the:
+> :bulb: The main application consists of these components (as annotated in the image above):
 > 1. [Menu Sidebar](#menu-sidebar) `*`
 > 2. [Patient List View](#patient-list-view)
 > 3. [Logger Tab](#logger-tab)
 > 4. [Output Box](#output-box)
 > 5. [Command Box](#command-box)
 
-> :bulb: Click on the component in the list above to learn more about it.
+> :bulb: Click on the components in the list above to learn more about them.
 
 > :warning: **`*`**: The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
 
