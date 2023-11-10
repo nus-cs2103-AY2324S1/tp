@@ -1,7 +1,7 @@
 # KeepInTouch User Guide
 
-KeepInTouch is a **desktop app for managing contacts for people in the working industry (recruiters, engineers, etc.) as well as events for career purposes.
-KeepInTouch is optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+**_KeepInTouch_** is a desktop app for **managing contacts** for people in the **working industry** (recruiters, engineers, etc.) as well as **events for career purposes.**
+KeepInTouch is optimized for use via a _Line Interface (CLI)_ while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, KeepInTouch can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
@@ -452,18 +452,18 @@ _No known issues at the moment_
 
 ## Command summary
 
-Action             | Format, Examples
--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**List Contact**   | `list contact [-t TAGNAME...]` <br> e.g., `list contact -t Recruiter`
-**Add Contact**    | `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL [-t TAGNAME...]` <br> e.g., `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com -t Frontend`
-**Delete Contact** | `delete contact CONTACT_ID`<br> e.g., `delete contact 1`
-**Find Contact**   | `find KEYWORD [OTHER_KEYWORDS...]`<br> e.g., `find Alex`
-**Add Tag**        | `add tag -id CONTACT_ID -t TAGNAME...` <br> eg., `add tag -id 1 -t Frontend`
-**Delete Tag**        | `delete tag -id CONTACT_ID -t TAGNAME...` <br> eg., `delete tag -id 1 -t Frontend`
-**Add Note**       | `add note -id CONTACT_ID -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`
-**Delete Note**    | `delete note -id CONTACT_ID -t NOTE_TITLE`<br> e.g., `delete note -id 2 -t Meeting Topics`
-**List Events**    | `list events [-descending] [-st filter_start_time] [-et filter_end_time]`<br> e.g., `list events -descending -st 2023-11-01 -et 2023-11-02`
-**Add Event**      | `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]` <br> e.g., `add event -id 1 -en Meeting with professor -st 12:00 -et 13:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
-**Delete Event**   | `delete event -id CONTACT_ID -eid EVENT_ID`<br> e.g., `delete event -id 1 -eid 1`
-**Clear Data**   | `clear`
-**Help**           | `help [COMMAND_WORD]` <br> e.g., `help add`
+| Action             | Format, Examples                                                                                                                                                                                                                                                        |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **List Contact**   | `list contact [-t TAGNAME...]` <br> e.g., `list contact -t Recruiter`                                                                                                                                                                                                   |
+| **Add Contact**    | `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL [-t TAGNAME...]` <br> e.g., `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com -t Frontend`                                                                                            |
+| **Delete Contact** | `delete contact CONTACT_ID`<br> e.g., `delete contact 1`                                                                                                                                                                                                                |
+| **Find Contact**   | `find KEYWORD [OTHER_KEYWORDS...]`<br> e.g., `find Alex`                                                                                                                                                                                                                |
+| **Add Tag**        | `add tag -id CONTACT_ID -t TAGNAME...` <br> eg., `add tag -id 1 -t Frontend`                                                                                                                                                                                            |
+| **Delete Tag**     | `delete tag -id CONTACT_ID -t TAGNAME...` <br> eg., `delete tag -id 1 -t Frontend`                                                                                                                                                                                      |
+| **Add Note**       | `add note -id CONTACT_ID -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`                                                                                                     |
+| **Delete Note**    | `delete note -id CONTACT_ID -t NOTE_TITLE`<br> e.g., `delete note -id 2 -t Meeting Topics`                                                                                                                                                                              |
+| **List Events**    | `list events [-descending] [-st filter_start_time] [-et filter_end_time]`<br> e.g., `list events -descending -st 2023-11-01 -et 2023-11-02`                                                                                                                             |
+| **Add Event**      | `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]` <br> e.g., `add event -id 1 -en Meeting with professor -st 12:00 -et 13:00 -loc COM 1 Basement -info Discuss the project implementation with the professor` |
+| **Delete Event**   | `delete event -id CONTACT_ID -eid EVENT_ID`<br> e.g., `delete event -id 1 -eid 1`                                                                                                                                                                                       |
+| **Clear Data**     | `clear`                                                                                                                                                                                                                                                                 |
+| **Help**           | `help [COMMAND_WORD]` <br> e.g., `help add`                                                                                                                                                                                                                             |
