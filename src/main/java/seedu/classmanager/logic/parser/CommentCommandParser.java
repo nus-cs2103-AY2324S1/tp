@@ -42,7 +42,7 @@ public class CommentCommandParser implements Parser<CommentCommand> {
         try {
             studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
         } catch (IllegalValueException ive) {
-            throw new ParseException(ive.getMessage() + "\n" + CommentCommand.MESSAGE_USAGE);
+            throw new ParseException(ive.getMessage());
         }
 
         Comment comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).orElse(""));

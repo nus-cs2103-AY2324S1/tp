@@ -34,7 +34,7 @@ public class CommentCommandParserTest {
     @Test
     public void parse_invalidStudentNumber_throwsParseException() {
         assertParseFailure(parser, " s/ " + "T1234567M" + " cm/ Good student",
-                StudentNumber.MESSAGE_CONSTRAINTS + "\n" + CommentCommand.MESSAGE_USAGE);
+                StudentNumber.MESSAGE_CONSTRAINTS);
     }
 
     @Test
