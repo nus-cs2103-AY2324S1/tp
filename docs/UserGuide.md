@@ -15,16 +15,16 @@ UniMate is a desktop app for students to **manage contacts** and **manage schedu
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `UniMate.jar` from [here](https://github.com/AY2324S1-CS2103-F13-4/tp/releases).
+2. Download the latest `UniMate.jar` from [here](https://github.com/AY2324S1-CS2103-F13-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for UniMate.
+3. Copy the file to the folder you want to use as the _home folder_ for UniMate.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar UniMate.jar` command to run the application.<br><br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar UniMate.jar` command to run the application.<br><br>
    A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data,
 which may differ from that of a fresh download.<br>
    ![Ui](images/unimateScreenshot.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -37,7 +37,7 @@ which may differ from that of a fresh download.<br>
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 # Features Overview
@@ -99,10 +99,10 @@ Upcoming updates will allow the user to navigate beyond this chronological restr
 consider using the [Event List](#sub-feature-2-event-list) to view events outside the current week.
 
 For the **user**'s calendar, some major CLI-based functionalities supporting this sub-feature includes:
-- [Adding](#adding-an-event-addevent), [deleting](#deleting-an-event-deleteevent) and [clearing](#deleting-multiple-events-clearevents) operations to manipulate the events in the user's calendar
+- [Adding](#contact-calendar-adding-an-event-to-a-contact-addcontactevent), [deleting](#contact-calendar-deleting-an-event-from-a-contact-deletecontactevent) and [clearing](#user-calendar-deleting-multiple-events-clearevents) operations to manipulate the events in the user's calendar
 
 For the **contact**'s calendar, some major CLI-based functionalities supporting this sub-feature includes:
-- [Adding](#adding-an-event-to-a-contact), [deleting](#deleting-an-event-from-a-contact) and [editing](#edit-contact-calendar-event) operations to manipulate the events in the contact's calendar
+- [Adding](#contact-calendar-adding-an-event-to-a-contact-addcontactevent), [deleting](#contact-calendar-deleting-an-event-from-a-contact-deletecontactevent) and [editing](#contact-calendar-edit-contact-calendar-event-editcontactevent) operations to manipulate the events in the contact's calendar
 
 Other useful CLI-based functionalities not exclusive to the user/contact supporting this sub-feature includes:
 - Comparison operations to compare the user's calendar with their contacts' calendars either by [index](#1-comparison-by-index) or [tag](#2-comparison-by-tag)
@@ -115,7 +115,7 @@ The event list displays all the events for the user/contact. It serves as an ove
 events that the user or their contact have.
 
 The event list shown on the main UniMate GUI is the user's event list. To view a specific contact's
-event list, we have a [CLI-based command](#viewing-another-persons-events-viewcontactevents) that will
+event list, we have a [CLI-based command](#viewing-a-contacts-event-list-viewcontactevents) that will
 display the contact's event list in a popup window.
 
 ## Main-feature 3: Task Management System
@@ -125,7 +125,7 @@ between event and task is that a task does not have a starting date and time.
 
 Some useful CLI-based functionalities supporting this feature includes:
 - [Adding](#adding-tasks-addtask) and [deleting](#deleting-tasks-deletetask) operations to manipulate the tasks present in the task list
-- [Sorting](#sorting-tasks-sorttask) operation to reorganise the view of the task list when needed
+- [Sorting](#sorting-tasks-sorttasks) operation to reorganise the view of the task list when needed
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,7 +139,7 @@ Some useful CLI-based functionalities supporting this feature includes:
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -224,7 +224,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it
 
@@ -247,7 +247,7 @@ this delimitation, consider the [filter command](#filtering-persons-by-attribute
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -491,7 +491,7 @@ We can see that the event `Nap` has its description changed to `Edited Descripti
 
 ### Viewing a contact's event list: `viewContactEvents`
 
-Creates a pop-up that displays a list of all events of a calendar belonging to a person in the Addressbook.
+Creates a pop-up that displays a list of all events of a calendar belonging to a person in the address book.
 
 Format: `viewContactEvents INDEX`
 
