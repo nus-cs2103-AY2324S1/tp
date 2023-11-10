@@ -80,6 +80,8 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 * `CONTACT_ID` is the number that is on the left of the contact's name in each contact card.
 
+* `CONTACT_ID` should be a positive integer less than 2,147,483,648.
+
 * `NAME` should be alphanumeric, spaces are allowed.
 
 * `PHONE_NUMBER` should be numbers at least 3 digits long.
@@ -116,7 +118,12 @@ Format: `help [COMMAND_WORD]`
 * `COMMAND_WORD` includes: `add`, `delete`, `clear`, `find`, `list`.
 
 Examples:
+* `help`
 * `help add`
+
+Successful output:
+![help success output](images/success-outputs/help-output.png)
+![help add success output](images/success-outputs/help-add-output.png)
 
 ### Listing [contacts](#contact): `list contact`
 
@@ -132,6 +139,9 @@ Examples:
 * `list contact` to show all contacts.
 * `list contact -t Recruiter` to show all contacts which have a recruiter tag.
 
+Successful output:
+![list contact success output](images/success-outputs/list-contact-output.png)
+
 ### Adding a [contact](#contact): `add contact`
 
 Adds a contact to the contact list.
@@ -140,6 +150,31 @@ Format: `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL [-t TAGNAME...]
 
 Examples:
 * `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com`
+
+Successful output:
+![add contact success output](images/success-outputs/add-contact-output.png)
+
+Unsuccessful output:
+* Contact already exists: `This contact already exists in the contact list`
+* Invalid format<br>
+```
+Invalid command format! 
+add contact: Adds a contact to the contact list. 
+Usage: add contact -n NAME -p PHONE -e EMAIL -a ADDRESS [-t TAGNAME...]
+Example: add contact -n John Doe -p 98765432 -e johnd@example.com -a 311, Clementi Ave 2, #02-25 -t frontend 
+```
+* Invalid email:<br>
+```
+Emails should be of the format local-part@domain and adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+```
+* Invalid phone number: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
+
 
 ### Deleting a [contact](#contact): `delete contact`
 
@@ -150,6 +185,19 @@ Format: `delete contact CONTACT_ID`
 Examples:
 * `delete contact 1` deletes the first contact in the contact list.
 
+Successful output:
+![delete contact success output](images/success-outputs/delete-contact-output.png)
+
+Unsuccessful output:
+* Invalid index (out of range): `The person index provided is invalid`
+* Invalid format:<br>
+```
+Invalid command format! 
+delete contact: Deletes a contact by its index number used in the displayed contact list.
+Parameters: INDEX (must be a positive integer)
+Example: delete contact 1
+```
+
 ### Finding a [contact](#contact): `find`
 
 Finds a contact by their name by matching keywords with the contact's name. Only word-word matches will be detected, and partial words match will not be detected. For example, `Ale` will not match `Alex` but will match `Alex Wong`. Keywords are **case insensitive**.
@@ -157,7 +205,10 @@ Finds a contact by their name by matching keywords with the contact's name. Only
 Format: `find KEYWORD [OTHER_KEYWORDS...]`
 
 Examples:
-* `find Alex`
+* `find David`
+
+Successful output:
+![find success output](images/success-outputs/find-output.png)
 
 ### Adding a [tag](#tag): `add tag`
 
@@ -172,6 +223,17 @@ Examples:
 * `add tag -id 1 -t Frontend` adds a tag with tag name "Frontend" to the first contact in the contact list.
 * `add tag -id 1 -t Frontend -t Java` adds two tags with tag name "Frontend" and "Java" to the first contact in the contact list.
 
+Successful output:
+![add tag success output](images/success-outputs/add-tag-output.png)
+
+Unsuccessful output:
+* Invalid index (out of range): `Can not find the target contact with ID: 100`
+* Invalid format:<br>
+```
+Invalid command format! 
+add tag: Adds tags to a contact from the contact list.
+Usage:  add tag -id CONTACT_ID -t TAGNAME...
+```
 
 ### Deleting [tags](#tag): `delete tag`
 
@@ -183,7 +245,19 @@ Format: `delete tag -id CONTACT_ID -t TAGNAME...`
 
 Examples:
 * `delete tag -id 1 -t Frontend` deletes a tag with tag name "Frontend" from the first contact in the contact list.
-* `add tag -id 1 -t Frontend -t Java` deletes two tags with tag name "Frontend" and "Java" from the first contact in the contact list.
+* `delete tag -id 1 -t Frontend -t Java` deletes two tags with tag name "Frontend" and "Java" from the first contact in the contact list.
+
+Successful output:
+![delete tag success output](images/success-outputs/delete-tag-output.png)
+
+Unsuccessful output:
+* Invalid index (out of range): `Can not find the target contact with ID: 100`
+* Invalid format:<br>
+```
+Invalid command format! 
+delete tag: Delete one or more tags from a contact.
+Usage:  delete tag -id CONTACT_ID -t TAGNAME...
+```
 
 ### Adding [notes](#note) to a contact: `add note`
 
@@ -195,6 +269,18 @@ Examples:
 * `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`
 * `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`
 
+Successful output:
+![add note success output](images/success-outputs/add-note-output.png)
+
+Unsuccessful output:
+* Invalid index (out of range): `Can not find the target contact with ID: 100`
+* Invalid format:<br>
+```
+Invalid command format! 
+add note: Adds a note to a contact from the contact list.
+Usage:  add note -id CONTACT_ID -tit NOTE_TITLE -con NOTE_CONTENT
+```
+
 ### Deleting a [note](#note): `delete note`
 
 Deletes the specified note from the contact list.
@@ -205,6 +291,19 @@ Format: `delete note -id CONTACT_ID -nid NOTE_ID`
 
 Examples:
 * `delete note -id 1 -nid 1` deletes the first note from the first contact in the contact list.
+
+Successful output:
+![delete note success output](images/success-outputs/delete-note-output.png)
+
+Unsuccessful output:
+* Invalid contact index (out of range): `Can not find the target contact with ID: 100`
+* Invalid note index: `Note not found: ID = 5`
+* Invalid format:<br>
+```
+Invalid command format! 
+delete note: Deletes a note from a contact.
+Usage:  delete note -id CONTACT_ID -nid NOTE_ID
+```
 
 ### Listing [events](#event): `list events`
 
@@ -225,6 +324,18 @@ Examples:
 * `list events -st 2023-11-01 -et 2023-11-02`
 * `list events -descending -st 2023-11-01 -et 2023-11-02`
 
+Successful output:
+![list events success output](images/success-outputs/list-event-output-1.png)
+![list events success output](images/success-outputs/list-event-output-2.png)
+
+Unsuccessful ouput:
+* Invalid format:<br>
+```
+Invalid command format! 
+list events: Shows a list of all events or events within a specified time interval.
+Usage: list events [-descending] [-st filter_start_time] [-et filter_end_time] (-st and -et must either both present or both not present)
+```
+
 ### Adding an [event](#event): `add event`
 
 Adds an event to a contact. The event should not have clashes in timing with other existing events in the contact list. Events with start time earlier than the current time are allowed for keeping track of past events.
@@ -238,6 +349,20 @@ Examples:
 * `add event -id 1 -en Meeting with professor -st 12:00 -et 13:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
 * `add event -id 2 -en Chat with TikTok recruiter -st 17:00`
 
+Successful output:
+![add event success output](images/success-outputs/add-event-output.png)
+
+Unsuccessful output:
+* Event already exists: `Error: Operation would result in duplicate events`
+* Invalid contact index (out of range): `Can not find the target contact with ID: 100`
+* Invalid time format: `Invalid date-time format! Text '29/05/2024' could not be parsed at index 2`
+* Invalid command format:<br>
+```
+Invalid command format! 
+add event: Adds an event to a contact.
+Usage:  add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]
+```
+
 ### Deleting an [event](#event): `delete event`
 
 Deletes the specified event from a contact.
@@ -249,6 +374,19 @@ Format: `delete event -id CONTACT_ID -eid EVENT_ID`
 
 Examples:
 * `delete event -id 1 -eid 2` deletes the second event from the first contact in the contact list.
+
+Successful output:
+![delete event success output](images/success-outputs/delete-event-output.png)
+
+Unsuccessful output:
+* Invalid contact index (out of range): `Can not find the target contact with ID: 100`
+* Invalid note index: `Event not found: ID = 5`
+* Invalid format:<br>
+```
+Invalid command format! 
+delete event: Deletes an event from a contact.
+Usage:  delete event -id CONTACT_ID -eid EVENT_ID
+```
 
 ### Clearing data: `clear`
 

@@ -279,6 +279,7 @@ This section describes some enhancement that can be made to the existing app.
 
 * In the current version, long names (usually longer than 40 characters) are truncated in the interface. Wrapping of names can be implemented so that long names are displayed in a more readable and user-friendly manner.
 * The highlight of the contact entries is gray in color and the color of the text is white. The low contrast of the two colors decreases the readability of the texts. The color of the highlight can be changed to a darker color.
+* The viewing the list of events using the `list events` command, the details of the contact which the event belongs to, is not present. This is incovenient for users as they will have to look through the contact list manually to find the contact. Future updates can append the contact details together with the event details when listing events.
 
 --------------------------------------------------------------------------------------------------------------------
 
