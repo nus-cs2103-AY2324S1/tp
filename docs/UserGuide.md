@@ -2,10 +2,15 @@
 layout: page
 title: User Guide
 ---
+# TuitionConnect User Guide
 
-TuitionConnect is a **desktop app for simplifying the process of administration and finance management for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise tracking tutee-specific details, teaching-schedule management, and finance management. 
+TuitionConnect is a **desktop app for simplifying the process of administration and finance management for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise tracking tutee-specific details, teaching-schedule management, and finance management.
+
+## Table of Contents
 
 <!-- TOC -->
+* [TuitionConnect User Guide](#tuitionconnect-user-guide)
+  * [Table of Contents](#table-of-contents)
   * [Quick start](#quick-start)
   * [Input Formats](#input-formats)
     * [Command Format](#command-format)
@@ -16,11 +21,12 @@ TuitionConnect is a **desktop app for simplifying the process of administration 
     * [View the list of tutees specified by day : `list [DAY]`](#view-the-list-of-tutees-specified-by-day--list-day)
     * [Finding a tutee : `find`](#finding-a-tutee--find)
     * [Editing a tutee : `edit`](#editing-a-tutee--edit)
-    * [Deleting a person : `delete`](#deleting-a-person--delete)
+    * [Deleting a person: `delete`](#deleting-a-person-delete)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
     * [Marking a person as paid : `paid`](#marking-a-person-as-paid--paid)
     * [Marking a person as unpaid : `unpaid`](#marking-a-person-as-unpaid--unpaid)
     * [Show all the unpaid persons : `list unpaid`](#show-all-the-unpaid-persons--list-unpaid)
-    * [Mark all persons as unpaid : `unpaidAll`](#mark-all-persons-as-unpaid--unpaidall)
+    * [Mark all persons as unpaid: `unpaidAll`](#mark-all-persons-as-unpaid-unpaidall)
     * [Finding Free Time : `freeTime`](#finding-free-time--freetime)
     * [Undo previous command : `undo`](#undo-previous-command--undo)
     * [Redo previous command : `redo`](#redo-previous-command--redo)
@@ -50,7 +56,7 @@ TuitionConnect is a **desktop app for simplifying the process of administration 
 
    * `list` : Lists all tutees.
 
-   * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600` : Adds a tutee named `John Doe` to the list.
+   * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 end/1600 pr/20.00` : Adds a tutee named `John Doe` to the list.
 
    * `delete 3` : Deletes the 3rd tutee shown in the current list.
 
@@ -89,8 +95,6 @@ TuitionConnect is a **desktop app for simplifying the process of administration 
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-
 ### Viewing help : `help`
 
 Shows a message that helps redirects you to the user guide.
@@ -101,7 +105,7 @@ Shows a message that helps redirects you to the user guide.
 
 **Description**: Adds a tutee into the list.
 
-**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS sb/SUBJECT d/DAY b/BEGIN e/END`
+**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS sb/SUBJECT d/DAY b/BEGIN e/END pr/PAYRATE`
 
 **Expected Input**:
 * **Name (Compulsory field)**: String composed of character between A-Z and a-z.
@@ -119,6 +123,7 @@ Shows a message that helps redirects you to the user guide.
 **Expected Output when the command fails**:
 
 * **Missing name**: Please input a name
+* **Duplicate tutee**: This tutee already exists
 * **Invalid Phone number**: Please provide a valid phone number
 * **Invalid Day**: Please input a valid day
 * **Invalid Begin**: Please input a valid time for Begin in HHMM
@@ -126,8 +131,8 @@ Shows a message that helps redirects you to the user guide.
 * **Invalid PayRate**: PayRate can be either integers or decimals of up to 2 decimal places. It cannot be negative
 
 **Examples**:
-* `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600 pr/20`
-* `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison p/1234567 s/Secondary 3 Physics d/mon b/1900 e/1930 pr/35`
+* `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 end/1600 pr/20.00`
+* `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`
 
 
 ### View the list : `list`
@@ -151,11 +156,11 @@ Format: `list [DAY]`
 
 **Description** : Find tutees in the current list.
 
-**Format**: `find n/NAME sb/SUBJECT`
+**Format**: `find n/[NAME] sb/[SUBJECT]`
+
+> Find takes at least one of the two fields to be able to find for tutees.
 
 **Expected input:**
-
-**Both are optional but must have at least one of the two:**
 
 * **Name (Optional field)**: String composed of character between A-Z and a-z
 * **Subject (Optional field)**: String without restriction in characters
@@ -163,37 +168,48 @@ Format: `list [DAY]`
 **Expected Output when the command succeeds:** X tutees listed!
 
 **Expected Output when the command fails:**
+
+> [!WARNING]
+> Inputting an invalid prefix after a valid prefix will result in the invalid prefix being read as
+> part of the input for the valid prefix.
+>
+> Example: `find n/Abc abc/B` will read `Abc abc/B` as its input.
+>
+> The outputting error message would be depending on the valid prefix specified.
+
+* **Invalid Input for prefix n/**:
+Names should only contain alphanumeric characters and spaces,
+  and it should not be blank
+* **Invalid Input for prefix sb/**: Subject can take any values, and it should not be blank.
 * **Invalid Prefix other than n/ and sb/**:
 
   Invalid command format!
   find: Find persons with names or subjects matching the specified keywords (case-insensitive).
   Parameters: n/NAME sb/SUBJECT
 
-
   Examples:
 1. find n/Alice sb/Maths
 2. find n/Alice
 3. find sb/Maths
 
-* **No input after prefix name n/**: Names should only contain alphanumeric characters and spaces, 
-and it should not be blank 
+* **No input after prefix name n/**: Names should only contain alphanumeric characters and spaces,
+and it should not be blank
 * **No input after prefix subject sb/**: Subject can take any values, and it should not be blank.
 * **No input after prefixes name and subject n/ sb/**: Names should only contain alphanumeric characters and spaces,
   and it should not be blank
-  
 
 ### Editing a tutee : `edit`
 
 **Description** : Edit a tutee in the current list.
 
-**Format**: `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END pr/PAYRATE`
+**Format**: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECTS d/DAY b/BEGIN end/END pr/PAYRATE`
 
 **Expected Input**:
 * **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
 * **Name (Optional field)**: String composed of character between A-Z and a-z.
 * **Phone number (Optional field)**: 8 digit number.
 * **Address (Optional field)**: String without restriction in characters.
-* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
+* **Email (Optional field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
 * **Subject (Optional field)**: String without restriction in characters.
 * **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
 * **Begin (Optional field)**: String with restrictions (HHMM).
@@ -212,16 +228,16 @@ and it should not be blank
 
 **Examples**:
 
-To edit the phone number of your tutee and day of tutoring:
-*  `edit p/91234567 d/Sun`
+To edit the phone number and day of tutoring of your first tutee in list:
+*  `edit 1 p/91234567 d/Sun`
 
-To edit name and address of your tutee:
-*  `edit n/Betsy Crower a/Betsy street, block 110, #03-02`
+To edit name and address of your second tutee in list:
+*  `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02`
 
 
-### Deleting a person : `delete`
+### Deleting a person: `delete`
 
-**Description** Deletes the specific tutee from the list.
+**Description**: Deletes the specific tutee from the list.
 
 **Format**: `delete INDEX`
 
@@ -231,15 +247,25 @@ To edit name and address of your tutee:
 
 **Expected Output when the command succeeds**: Successfully deleted NAME from the list
 
-**Expected Output when the command fails**: Please input a valid index
+**Expected Output when the command fails**: The tutee index provided is invalid
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the list.
 
+### Clearing all entries : `clear`
+
+**Description**: Clears all entries from the tutee list.
+
+**Format**: `clear`
+
+![ClearCommand.png](images/ClearCommand.png)
+
+* Example image above shows the result of command `clear
+
 
 ### Marking a person as paid : `paid`
 
-**Description** Mark the specific tutee as paid in the list.
+**Description**: Mark the specific tutee as paid in the list.
 
 **Format**: `paid INDEX`
 
@@ -256,7 +282,7 @@ Examples:
 
 ### Marking a person as unpaid : `unpaid`
 
-**Description** Mark the specific tutee as not paid in the list.
+**Description**: Mark the specific tutee as not paid in the list.
 
 **Format**: `unpaid INDEX`
 
@@ -274,11 +300,11 @@ Examples:
 
 ### Show all the unpaid persons : `list unpaid`
 
-**Description** : Shows all the unpaid tutees in your list.
+**Description**: Shows all the unpaid tutees in your list.
 
 Format: `list unpaid`
 
-### Mark all persons as unpaid : `unpaidAll`
+### Mark all persons as unpaid: `unpaidAll`
 
 **Description** : Mark all tutees in the current displayed list as not paid.
 
@@ -326,8 +352,6 @@ Format: `unpaidAll`
 
 **Expected Output when the command fails**: Nothing to redo!
 
-**Format**: `freeTime d/DAY dur/DURATION b/BEGIN end/END`
-
 
 ### Calculating Monthly Revenue: `rev`
 
@@ -345,7 +369,6 @@ Format: `exit`
 
 * The application window closes automatically after you type the command `exit`
 
-</div>
 
 </div>
 </details>
@@ -360,27 +383,28 @@ Format: `exit`
 
 ## Known issues
 
-To be added soon
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action          | Format, Examples                                                                                                                                                                                   |
-|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **help**        | `help`                                                                                                                                                                                             |
-| **add**         | `add n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECT d/DAY b/BEGIN e/END pr/PAYRATE` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600 pr/20` |
-| **delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                |
-| **edit**        | `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END pr/PAYRATE`<br> e.g.,`edit p/91234567 d/Sun`                                                                            |
-| **list**        | `list`                                                                                                                                                                                             |
-| **find**        | `find n/NAME sb/SUBJECT` <br> e.g., `find n/Alex sb/Math`, `find n/Alex`, `find sb/Maths`                                                                                                          |
-| **list by day** | `list DAY` <br> e.g., `list Monday`                                                                                                                                                                |
-| **paid**        | `paid INDEX`<br> e.g., `paid 1`                                                                                                                                                                    |
-| **unpaid**      | `unpaid INDEX`<br> e.g., `unpaid 1`                                                                                                                                                                |
-| **list unpaid** | `list unpaid`                                                                                                                                                                                      |
-| **unpaidAll**   | `unpaidAll`                                                                                                                                                                                        |
-| **freeTime**    | `d/DAY dur/DURATION b/BEGIN end/END`                                                                                                                                                               |
-| **undo**        | `undo`                                                                                                                                                                                             |
-| **redo**        | `redo`                                                                                                                                                                                             |
-| **rev**         | `rev`                                                                                                                                                                                              |
-| **exit**        | `exit`                                                                                                                                                                                             |
+| Action          | Format, Examples                                                                                                                                                                                                                       |
+|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **help**        | `help`                                                                                                                                                                                                                                 |
+| **add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT d/DAY b/BEGIN end/END pr/PAYRATE` <br> e.g., `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 end/1600 pr/20.00` |
+| **delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                    |
+| **clear**       | `clear`                                                                                                                                                                                                                                |
+| **edit**        | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECTS d/DAY b/BEGIN end/END pr/PAYRATE`<br> e.g.,`edit p/91234567 d/Sun`                                                                                                      |
+| **list**        | `list`                                                                                                                                                                                                                                 |
+| **find**        | `find n/[NAME] sb/[SUBJECT]` <br> e.g., `find n/Alex sb/Math`, `find n/Alex`, `find sb/Maths`                                                                                                                                          |
+| **list by day** | `list DAY` <br> e.g., `list Monday`                                                                                                                                                                                                    |
+| **paid**        | `paid INDEX`<br> e.g., `paid 1`                                                                                                                                                                                                        |
+| **unpaid**      | `unpaid INDEX`<br> e.g., `unpaid 1`                                                                                                                                                                                                    |
+| **list unpaid** | `list unpaid`                                                                                                                                                                                                                          |
+| **unpaidAll**   | `unpaidAll`                                                                                                                                                                                                                            |
+| **freeTime**    | `d/DAY dur/DURATION b/BEGIN end/END`                                                                                                                                                                                                   |
+| **undo**        | `undo`                                                                                                                                                                                                                                 |
+| **redo**        | `redo`                                                                                                                                                                                                                                 |
+| **rev**         | `rev`                                                                                                                                                                                                                                  |
+| **exit**        | `exit`                                                                                                                                                                                                                                 |
