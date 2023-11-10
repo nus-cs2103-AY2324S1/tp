@@ -296,7 +296,65 @@ the fields that do not generate an `Optional` wrapper cannot be empty.
 `Appointment` is a special field belonging to the `Person` model class, as it implicitly stores a temporal
 relationship within itself.
 
+#### Proposed Implementation
+`Appointment` is distinctly different from other fields in `Person` in that it cannot store its values as
+a String directly - otherwise, this would complicate the process of defining temporal relationships within itself.
+
+<puml src="diagrams/AppointmentClassDiagram2.puml" width="250" />
+
+Above is a partial class diagram of `Appointment`. Note that several static members were excluded as they are not
+relevant to its data-structure properties in `HealthSync`.
+
+The default Java packages provides its implementation of temporal objects in the `java.time` package. In particular,
+`LocalDateTime` and its variants were the most relevant to us, as it allows the user to record time without needing
+to account for timezone differences. This is powerful, as our target audience is not expected to change locations in
+a significant way that causes them to change time regions entirely.
+
+With the use of the `java.time` package, the project could not use only `regex` for `Appointment`.
+This is due to the level of checks required to parse a temporal object, with the amount of dependencies that exist
+between the day, month and year fields. The provided `DateTimeFormatter` and `DateTimeFormatterBuilder` classes helps
+create the parser objects used for `Appointment`. However, the classes do not account for the combined time format that
+HealthSync requests of its users.
+
+Therefore, `Appointment` uses a combination of `regex` and `DateTimeFormatter` to resolve its user input.
+
+_{sequence diagram here}_
+
+As seen above, `ParserUtil` verifies if the Appointment user input is trivially valid using `regex`, before passing
+the input into the `of` constructor. `DateTimeFormatter` cannot fully verify input strings against its format without
+creating a `LocalDate`/`LocalTime` object as a side effect, so `of` handles a portion of the parse.
+
 #### Design Considerations:
+
+**Aspect: Constructor for `Appointment` to manage valid user input**
+
+* **Alternative 1:** Directly use constructors for `Appointment`, and using `isValidAppointment` to verify input
+    * Pros: Consistency with construction of other fields
+    * Cons:
+      * Construction called before user input is verified so exception thrown may not be intuitively understood
+      * Concerns over failed appointment creation not getting collected by Java Garbage Collection due to accessing
+       `now()` resource
+      * User input validation for temporal objects create the relevant object as a side effect, wasting resources to
+        construct the temporal object twice.
+
+  * **Alternative 2 (current choice):** Use of `of` factory method for `Appointment`, and verifying input inside `of`
+      * Pros:
+        * Explicit demarcation of `Appointment` as a class that can throw an `Exception` during construction
+        * Factory method can double as an explicit user verification method
+        * Construction of `Appointment` only performed once user input is verified
+      * Cons:
+        * "Uniqueness" of private constructor for this field only may cause confusion when extending the app
+        * Appointment handles part of `parse` for `ParserUtil`
+
+**Aspect: Value to store `Appointment` as**
+
+* **Alternative 1:** Use of raw `String` format for Appointment
+    * Pros: Far easier to parse and store as an object.
+    * Cons: Hard to extend upon in future use-cases, such as reminders, etc.
+
+* **Alternative 2 (current choice):** Use of Java Temporal-related objects for Appointment
+    * Pros: More direct paths of feature extension, such as searching by time period.
+    * Cons: Translation to and from Java Temporal objects can be non-trivial.
 
 **Aspect: Parsing of `Appointment` Field**
 
@@ -307,19 +365,6 @@ relationship within itself.
 * **Alternative 2:** Use of 2 flags to denote start and end time for appointment.
   * Pros: Immediate clarity on what fields to implement, and how to parse input string.
   * Cons: Strong dependence between 2 flags requires more fail-state management.
-
-**Aspect: Value to store `Appointment` as**
-
-* **Alternative 1 (current choice):** Use of raw `String` format for Appointment
-  * Pros: Far easier to parse and store as an object.
-  * Cons: Hard to extend upon in future use-cases, such as reminders, etc.
-
-* **Alternative 2:** Use of `DateTime`-related objects for Appointment
-  * Pros: More direct paths of feature extension in the long run.
-  * Cons: Translation to and from `DateTime` objects can be non-trivial.
-
-We are currently in the process of switching to Alternative 2, as Alternative 1 was chosen primarily for its
-fast implementation for the MVP.
 
 ### Delete Feature
 
