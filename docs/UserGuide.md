@@ -116,7 +116,7 @@ Shows a list of all patients in HealthSync.
 
 Adds a patient into HealthSync, with the given patient information.
 
-* A patient's [name](#name) and [IC](#ID) are required when creating a new entry into HealthSync.
+* A patient's [name](#name) and [ID](#ID) are required when creating a new entry into HealthSync.
 * All the compulsory [fields](#fields) must be provided.
 * Optional fields like [Appointment](#appointment) and [medical history](#medical-history) need not be provided.
 
@@ -225,7 +225,7 @@ and returns their related information.
 * The search is case-insensitive.  
 e.g `hans` will match `Hans`, `08-Jan-2023 12 13` will match `08-jan-2023 12 13`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Name, IC Number and Appointment can be searched.
+* Name, ID Number and Appointment can be searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * For the name and ID, only patients matching at least one keyword will be returned.
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
