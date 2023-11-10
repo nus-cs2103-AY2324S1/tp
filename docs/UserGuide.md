@@ -4,7 +4,7 @@ title: User Guide
 pageNav: 3
 ---
 
-# User Guide for lesSON
+# User Guide for <span style="color: green;">lesSON</span>
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -37,32 +37,40 @@ pageNav: 3
 
 #### ***Revolutionise your studying experience with lesSON!***
 
-Welcome to the user guide for lesSON, your ultimate companion in mastering the Computer Science
-curriculum at the National University of Singapore (NUS). This guide is designed to provide you with a
+Welcome to the user guide for <span style="color: green;">lesSON</span>, your ultimate companion in mastering the
+Computer Science curriculum at the National University of Singapore (NUS). This guide is designed to provide you with a
 comprehensive understanding of the app and how to leverage its powerful features for your academic success.
 
-##### What is lesSON?
+#### What is lesSON?
 
-lesSON is not just another study app; it's a game-changer in the world of education.
-Tailored specifically for NUS Computer Science students, this application revolutionizes the
-way you learn and revise. Say goodbye to time-consuming note-taking, and say hello to a more efficient,
-effective, and enjoyable study experience, where flashcard creation is made incredibly easy.
+<span style="color: green;">lesSON</span> is not just another study app; it's a game-changer in the world of education.
+Tailored specifically for NUS Computer Science students, this **desktop application** enables incredibly easy creation
+of flashcards for revision. It employs the efficacy of [active recall](#definitions) when you practise with the
+[flashcards](#definitions) you made to increase memory retention. Say goodbye to time-consuming note-taking,
+and say hello to a more efficient, effective, and enjoyable study experience.
 
-To maximise your study experience, here are some features we believe you'll love:
-1. **Enhanced Memory Retention:** Thanks to lesSON's inbuilt spaced repetition system, you can supercharge
-your memory and recall. The app optimizes when you should review your flashcards, ensuring you remember and grasp
-complex concepts with ease.
+Made with the intention to maximise your study experience, here are some features we believe you'll love:
+1. **Enhanced Memory Retention:** Thanks to lesSON's inbuilt [spaced repetition](#definitions) system, you can
+supercharge your memory and recall the important details needed. The app optimizes when you should review your
+flashcards, ensuring you remember and grasp complex concepts with ease.
 2. **Intuitive Card Categorization:** lesSON helps you categorize your flashcards based on subject. This feature
 makes it a breeze to organize and access specific topics, keeping your study sessions focused and productive.
 
-##### Prerequisites
+*... and many more!*
 
-Before you get started with lesSON, here's what we recommend you need to make full use of the app:
+#### Prerequisites
 
-1. **Comfortable with English**: Since lesSON is an English-based app, a basic understanding of the language will
+Before you get started with <span style="color: green;">lesSON</span>, here's what we recommend you need to make
+full use of the app:
+
+- **Comfortable with English**: Since lesSON is an English-based app, a basic understanding of the language will
 ensure a smooth and enjoyable experience.
-2. **Typing Proficiency**: lesSON primarily uses a Command Line Interface (CLI) alongside a Graphic User Interface (GUI).
-Being comfortable and efficient at typing will help you make the most of the app and enhance your user experience.
+- **Typing Proficiency**: lesSON primarily uses a [Command Line Interface (CLI)](#definitions) on top of a
+[Graphic User Interface (GUI)](#definitions). This means that most of the interaction with
+<span style="color: green;">lesSON</span> is through the use of [keystrokes](#definitions). Being comfortable and
+efficient at typing will help you make the most of the app and enhance your user experience.
+
+[Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -88,28 +96,20 @@ Throughout the user guide, you will see these colored blocks of code that contai
 
 <span style="color: red;">This is red text</span>
 
-<span style="position: relative; display: inline-block; cursor: pointer;">
-  Hover over me
-  <span style="position: absolute; visibility: hidden; width: 120px; background-color: #333; color: #fff; text-align: center; border-radius: 5px; padding: 5px; bottom: 125%; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 0.2s;">
-    This is the tooltip text.
-  </span>
-</span>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 
-`GUI (Graphic User Interface):` A GUI is a user-friendly interface that allows you to interact with the software
-through visual elements like windows, icons, buttons, and menus, making it easy to navigate with a mouse and keyboard.
+### Definitions
+|             Term             | Definition                                                                                                                                                                                     |
+|:----------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|        Active recall         | A popular method to strengthen memory retention by actively testing the memory to retrieve a piece of information.                                                                             |
+| Command Line Interface (CLI) | A text-based interface where you interact with the software by typing commands into a terminal or command prompt, providing more direct and precise control over the system.                   |
+|          Flashcard           | A card created by the user containing a question, answer (not shown) and due date.                                                                                                             |
+| Graphic User Interface (GUI) | A user-friendly interface that allows you to interact with the software through visual elements like windows, icons, buttons, and menus, making it easy to navigate with a mouse and keyboard. |
+|          Keystrokes          | Act of pressing a key on a computer keyboard                                                                                                                                                   |
+|      Spaced repetition       | An evidence-based learning technique where newly created and more difficult flashcards are shown more frequently than older and less difficult flashcards                                      |
 
-`CLI (Command Line Interface):` A CLI is a text-based interface where you interact with the software by typing commands 
-nto a terminal or command prompt, providing more direct and precise control over the system.
-
-`Deck:` A scrollable list of flashcards on the GUI.
-
-`Flashcard:` A card created by the user containing its index, question, answer (not shown) and due date.
-
-`Index:` The relative position of a flashcard within the deck.
 
 --------------------------------------------------------------------------------------------------------------------
 
