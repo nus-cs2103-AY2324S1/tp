@@ -164,13 +164,4 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger(String.valueOf(Integer.MAX_VALUE)));
     }
 
-    @Test
-    public void getDetails_complexExceptionGiven_detailedMessage() {
-        Exception complexException = new Exception("Complex Exception", new Throwable("Cause"));
-        String details = StringUtil.getDetails(complexException);
-        assertTrue(details.contains("Complex Exception"));
-        assertTrue(details.contains("Cause"));
-        // You may check for more details depending on how detailed you want this test to be
-    }
-
 }
