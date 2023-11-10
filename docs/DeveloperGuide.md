@@ -718,7 +718,7 @@ schedule can be safely marked as completed in the Model:
 
 1. The `Index` is a valid integer.
 2. The `Index` is not out of bounds (within the range of displayed schedule list's size).
-3. The `Status` is a valid (either 0 for missed or 1 for completed).
+3. The `Status` is valid (either 0 for missed or 1 for completed).
 
 Step 6. The `execute` method then calls `Model::getFilteredScheduleList` and gets the specified `Schedule` using the
 `Index` given.
