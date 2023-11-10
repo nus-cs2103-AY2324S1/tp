@@ -1,4 +1,4 @@
-@startuml
+@startuml ModelClassDiagram
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
@@ -28,12 +28,9 @@ Class Description
 Class Amount
 Class Date
 
-Class "UniqueEntryList<? extends Entry>" as UniqueEntryList_T
 Class "UniqueEntryMap<? extends Entry>" as UniqueEntryMap_T
-Class "UniqueEntryList<Person>" as UniqueEntryList_Person
 Class "UniqueEntryMap<Person>" as UniqueEntryMap_Person
 Class "UniqueEntryMap<Transaction>" as UniqueEntryMap_Transaction
-UniqueEntryList_T <|-- UniqueEntryList_Person
 UniqueEntryMap_T <|-- UniqueEntryMap_Person
 UniqueEntryMap_T <|-- UniqueEntryMap_Transaction
 
@@ -54,7 +51,6 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueEntryMap_Person
-AddressBook *--> "1" UniqueEntryList_Person
 UniqueEntryMap_Person --> "~* all" Person
 UniqueEntryMap_Transaction --> "~* all" Transaction
 Person .right.|> Entry
