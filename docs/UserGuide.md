@@ -401,7 +401,7 @@ Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 <box type="warning" header="**Caution**">
-    There is **NO** duplicate handling for the name of the interview in `editi` and attempting to do so will give an error message.
+    There is <b>NO</b> duplicate handling for the name of the interview in `editi` and attempting to do so will give an error message.
 </box>
 
 Example:
@@ -469,7 +469,7 @@ e.g. `Ed` will match both `Edward` and `Ed`.
 e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
 
 <box type="tip" header="**Note**">
-    `find` works on the entire applicant list and will display any applicant whose name matches at least one keyword, even if they were filtered out using `filter`.
+    <code>find</code> works on the entire applicant list and will display any applicant whose name matches at least one keyword, even if they were filtered out using <code>filter</code>.
 </box>
 
 Example:
