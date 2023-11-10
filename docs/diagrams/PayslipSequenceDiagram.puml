@@ -1,0 +1,127 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PayslipCommandParser" as PayslipCommandParser LOGIC_COLOR
+participant "pc:PayslipCommand" as PayslipCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Commons ATTENDANCE_COLOR_T1
+participant "<<class>>\nPayslipGenerator" as PayslipGenerator ATTENDANCE_COLOR
+end box
+
+box Person PERSON_COLOR
+participant ":Person" as Person PERSON_COLOR
+participant ":PayrollStorage" as PayrollStorage PERSON_COLOR
+participant ":Payroll" as Payroll PERSON_COLOR
+end box
+
+[-> LogicManager : execute("payslip 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("payslip 1")
+activate AddressBookParser
+
+create PayslipCommandParser
+AddressBookParser -> PayslipCommandParser
+activate PayslipCommandParser
+
+PayslipCommandParser --> AddressBookParser
+deactivate PayslipCommandParser
+
+AddressBookParser -> PayslipCommandParser : parse("1")
+activate PayslipCommandParser
+
+create PayslipCommand
+PayslipCommandParser -> PayslipCommand
+activate PayslipCommand
+
+PayslipCommand --> PayslipCommandParser : pc
+deactivate PayslipCommand
+
+PayslipCommandParser --> AddressBookParser : pc
+deactivate PayslipCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PayslipCommandParser -[hidden]-> AddressBookParser
+destroy PayslipCommandParser
+
+AddressBookParser --> LogicManager : pc
+deactivate AddressBookParser
+
+LogicManager -> PayslipCommand : execute()
+activate PayslipCommand
+
+PayslipCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> PayslipCommand:
+deactivate Model
+
+PayslipCommand -> PayslipGenerator : generatePayslip()
+activate PayslipGenerator
+PayslipGenerator -> PayslipGenerator : getFieldMap()
+activate PayslipGenerator
+
+PayslipGenerator -> Person : getPayrollStorage()
+activate Person
+create PayrollStorage
+Person -> PayrollStorage
+activate PayrollStorage
+
+Person -> PayrollStorage : getLatestPayroll()
+create Payroll
+PayrollStorage -> Payroll :
+activate Payroll
+
+PayslipGenerator -> Payroll : getBasicSalaryString()
+PayslipGenerator -> Payroll : getTotalDeductionsString()
+PayslipGenerator -> Payroll : getNetSalaryString()
+PayslipGenerator -> Payroll : getTotalAllowancesExceptBonusesString()
+PayslipGenerator -> Payroll : getGrossPayString()
+PayslipGenerator -> Payroll : getEmployeeCpfDeductionsString()
+PayslipGenerator -> Payroll : getAnnualBonusesString()
+PayslipGenerator -> Payroll : getAbsencesString()
+PayslipGenerator -> Payroll : getNoPayLeavesString()
+PayslipGenerator -> Payroll : getTransportAllowancesString()
+PayslipGenerator -> Payroll : getStartDateString()
+PayslipGenerator -> Payroll : getEndDateString()
+PayslipGenerator -> Payroll : getPaymentDateString()
+Payroll --> PayslipGenerator
+
+
+deactivate PayslipGenerator
+
+deactivate PayslipGenerator
+
+PayslipGenerator --> PayslipCommand
+
+
+Payroll --> PayrollStorage :
+deactivate Payroll
+PayrollStorage --> Person :
+deactivate PayrollStorage
+
+Person --> PayslipCommand :
+deactivate Person
+
+create CommandResult
+PayslipCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PayslipCommand : result
+deactivate CommandResult
+
+PayslipCommand --> LogicManager : result
+deactivate PayslipCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

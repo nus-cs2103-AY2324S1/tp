@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam arrowThickness 1.1
+skinparam arrowColor PERSON_COLOR
+skinparam classBackgroundColor PERSON_COLOR
+show method
+show attribute
+
+Class "<<interface>>\nParser" as Parser
+Class "{abstract}\nCommand" as Command
+Class BenefitCommandParser {
+    +parse(args: String): BenefitCommand
+}
+Class BenefitCommand {
+    +execute(model: Model)
+}
+Class PayrollStorage {
+    +getPayrolls(): ArrayList<Payroll>
+}
+Class Payroll {
+    +addBenefit(benefit: Benefit)
+}
+Class Salary {
+    -value: String
+}
+Class Benefit {
+    -value: String
+    -reason: Reason
+}
+Class "<<enumeration>>\nReason" as Reason {
+    +ANNUAL_BONUS
+    +TRANSPORT_ALLOWANCE
+}
+
+Parser <|-- BenefitCommandParser
+Command <|-- BenefitCommand
+BenefitCommandParser --> BenefitCommand
+BenefitCommand --> Person
+Person -right-> "1" PayrollStorage
+PayrollStorage *--> "*" Payroll
+Payroll *--> "1" Salary
+Salary *--> "*" Benefit
+Benefit -> Reason
+
+@enduml
