@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-MediLink Contacts(MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
+MediLink Contacts (MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
 Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MLC
 can get your patients management tasks done faster than traditional GUI apps.
 
@@ -19,16 +19,16 @@ can get your patients management tasks done faster than traditional GUI apps.
 1. Ensure you have Java `11` or above installed in your Computer. If you don't, install it for your relevant operating
     system at this link https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html
 
-1. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
+2. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your MLC.
+3. Copy the file to the folder you want to use as the _home folder_ for your MLC.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediLink.jar` command
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediLink.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
    Some example commands you can try:
 
@@ -43,9 +43,26 @@ can get your patients management tasks done faster than traditional GUI apps.
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Parameters
+
+The list below contains the parameters that are used in various commands as well as their various constraints. 
+
+| Parameter           | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Valid Examples                                                                                                  | Invalid Examples         |
+|:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|:-------------------------|
+| NRIC                | Starting with S or T, followed by 7 numbers, and ends with a letter. Not case-sensitive.                                                                                                                                                                                                                                                                                                                                                                                              | T0123456G, s33344476i                                                                                           | T01234567G, “”, t12367K  |
+| Doctor/Patient name | Empty strings are not allowed. Name must contain only alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                        | Cristiano Ronaldo, Tanveer Singh                                                                                | “”, 高橋紳助, s/o someone    |
+| Contact number      | 3 digit or more integer as phone number. Empty strings are not allowed.                                                                                                                                                                                                                                                                                                                                                                                                               | 91234569                                                                                                        | “”,  99                  |
+| Email               | Must be of the format `local-name`@`domain`. `local-name` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-), and may not start or end with any special characters. `domain` is made up of domain labels separated by periods, and must end with a domain label at least 2 characters long. Domain labels start and end with alphanumeric characters, consist of alphanumeric characters, separated only by hyphens, if any. | j@Email.com, isaac@a-b.com                                                                                      | isaac@a+b.com, james.com |
+| Blood type          | Accepts only strings containing valid blood types, that is a combination of A/B/AB/O and +/-.                                                                                                                                                                                                                                                                                                                                                                                         | B+, O, B-, AB                                                                                                   | J, K                     |
+| Address             | Any non-empty string.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Clementi, OneCare@Hougang Avenue                                                                                | ""                       |
+| Gender              | Either the character “M” or “F”.                                                                                                                                                                                                                                                                                                                                                                                                                                                      | M, F                                                                                                            | G, girl, male            |
+| Emergency Contact   | Valid Contact number. Same constraints as the Contact Number parameter.                                                                                                                                                                                                                                                                                                                                                                                                               | 91234569                                                                                                        | “”, 99                   |
+| Condition           | Any non-empty string.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Knee Injury, appendicitis                                                                                       | ""                       |
+| Patient Tag         | Accepts only strings containing valid priority levels, either low, medium or high. Not case-sensitive                                                                                                                                                                                                                                                                                                                                                                                 | low, MEDIUM, hiGh                                                                                               | extreme, med             |
+| Doctor Tag          | Accepts only strings containing valid specialisations. Not case-sensitive. The current allowed specialisations are listed in the examples box.                                                                                                                                                                                                                                                                                                                                        | CARDIOLOGIST, ORTHOPEDIC, PEDIATRICIAN, DERMATOLOGIST, NEUROLOGIST, GENERAL_PRACTITIONER, PSYCHIATRIST, SURGEON | Nurse, Head-Doctor       |
 
 ## Features
 
@@ -76,7 +93,7 @@ can get your patients management tasks done faster than traditional GUI apps.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -211,7 +228,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the MediLink Contacts.
+Shows a list of all persons and appointments in the MediLink Contacts.
 
 Format: `list`
 
@@ -381,20 +398,20 @@ the data of your previous MediLink Contacts home folder.
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                                                                                                                             |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **New Doctor**         | `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`                                                             |
+| Action                 | Format, Examples                                                                                                                                                                                                                                                                   |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **New Doctor**         | `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`                                                                   |
 | **New Patient**        | `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​` <br> e.g., `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High` |
-| **New Appointment**    | `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm` <br> e.g., `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`                                                                                                                                                       |
-| **Delete Appointment** | `delete-appt INDEX`  <br> e.g., delete-appt 1                                                                                                                                                                                                                                |
-| **Find Appointment**   | `find-appt NRIC` <br> e.g., find-appt T00012220                                                                                                                                                                                                                              |
-| **Clear**              | `clear`                                                                                                                                                                                                                                                                      |
-| **Undo**               | `undo`                                                                                                                                                                                                                                                                       |
-| **Redo**               | `redo`                                                                                                                                                                                                                                                                       |
+| **New Appointment**    | `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm` <br> e.g., `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`                                                                                                                                                             |
+| **Delete Appointment** | `delete-appt INDEX`  <br> e.g., delete-appt 1                                                                                                                                                                                                                                      |
+| **Find Appointment**   | `find-appt NRIC` <br> e.g., find-appt T00012220                                                                                                                                                                                                                                    |
+| **Clear**              | `clear`                                                                                                                                                                                                                                                                            |
+| **Undo**               | `undo`                                                                                                                                                                                                                                                                             |
+| **Redo**               | `redo`                                                                                                                                                                                                                                                                             |
 | **Delete**             | `delete NRIC`<br> e.g., `delete T0666485G`                                                                                                                                                                                                                                         |
-| **Edit**               | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit S9760431H n/James Lee e/jameslee@example.com`                                                                                                                                                |
-| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                   |
-| **List**               | `list`                                                                                                                                                                                                                                                                       |
-| **Help**               | `help`                                                                                                                                                                                                                                                                       |
-| **Exit**               | `exit`                                                                                                                                                                                                                                                                       |
+| **Edit**               | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit S9760431H n/James Lee e/jameslee@example.com`                                                                                                                                                 |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                         |
+| **List**               | `list`                                                                                                                                                                                                                                                                             |
+| **Help**               | `help`                                                                                                                                                                                                                                                                             |
+| **Exit**               | `exit`                                                                                                                                                                                                                                                                             |
 
