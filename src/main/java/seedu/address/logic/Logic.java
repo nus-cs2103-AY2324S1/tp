@@ -58,4 +58,6 @@ public interface Logic {
 
     CommandResult executeInView(String commandText, Person person, Index targetIndex)
             throws CommandException, ParseException;
+
+    boolean getFinalConfirmation();
 }

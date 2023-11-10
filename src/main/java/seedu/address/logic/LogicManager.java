@@ -171,4 +171,8 @@ public class LogicManager implements Logic {
     public boolean getIsViewExitCommand() {
         return isViewExitCommand;
     }
+
+    public boolean getFinalConfirmation() {
+        return this.finalConfirmation;
+    }
 }
