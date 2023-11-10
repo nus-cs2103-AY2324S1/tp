@@ -419,7 +419,7 @@ Action | Format, Examples
     <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
     <td class="tg-0pky">No</td>
     <td class="tg-0pky">No</td>
-    <td class="tg-0pky">Must be a<span> positive integer</span> that is within the range of the length of the <span style="font-weight:bold">currently displayed</span> member/event list</td>
+    <td class="tg-0pky">Must be a<span> positive integer</span> that is within the range of the length of the <span>currently displayed</span> member/event list</td>
   </tr>
   <tr>
     <td class="tg-0pky command" rowspan="3"><code>enrol</code> / <code>editEnrolment</code></td>
