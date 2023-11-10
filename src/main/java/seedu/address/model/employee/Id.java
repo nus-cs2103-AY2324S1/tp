@@ -10,9 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Id {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Employee IDs should start with the prefix EID followed by "
-            + "4 digits separated by a hyphen followed by 4 more digits,"
-            + "\n and it should not be blank";
+            "Employee IDs should follow the EID[4 digits]-[4 digits] format and it should not be blank.";
 
     /*
      * Should follow the format EIDXXXX-XXXX

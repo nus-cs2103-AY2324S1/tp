@@ -53,11 +53,12 @@ class OvertimeCommandParserTest {
     @Test
     public void parse_invalidId_failure() {
         // empty id
-        assertParseFailure(parser, PREFIX_ID + OPERATION_DESC_BOB + AMOUNT_DESC_BOB, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " " + PREFIX_ID + " " + OPERATION_DESC_BOB + AMOUNT_DESC_BOB,
+                Id.MESSAGE_CONSTRAINTS);
 
         // invalid id
         assertParseFailure(parser, INVALID_ID_DESC + OPERATION_DESC_BOB + AMOUNT_DESC_BOB,
-                MESSAGE_INVALID_FORMAT);
+                Id.MESSAGE_CONSTRAINTS);
 
         // invalid prefix
         assertParseFailure(parser, "i/" + VALID_ID_BOB + OPERATION_DESC_BOB + AMOUNT_DESC_BOB,
