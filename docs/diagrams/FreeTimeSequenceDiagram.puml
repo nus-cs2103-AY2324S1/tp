@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FreeTimeCommandParser" as FreeTimeCommandParser LOGIC_COLOR
+participant ":FreeTimeCommand" as FreeTimeCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniquePersonList" as UniquePersonList MODEL_COLOR
+participant "<<class>> \nTimeSlot" as TimeSlot MODEL_COLOR
+end box
+[-> LogicManager : execute("freeTime d/Sat dur/120 b/0700 end/1200")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("freeTime d/Sat dur/120 b/0700 end/1200")
+activate AddressBookParser
+
+create FreeTimeCommandParser
+AddressBookParser -> FreeTimeCommandParser
+activate FreeTimeCommandParser
+
+FreeTimeCommandParser --> AddressBookParser
+deactivate FreeTimeCommandParser
+
+AddressBookParser -> FreeTimeCommandParser : parse("d/Sat dur/120 b/0700 end/1200")
+activate FreeTimeCommandParser
+
+create FreeTimeCommand
+FreeTimeCommandParser -> FreeTimeCommand
+activate FreeTimeCommand
+FreeTimeCommand --> FreeTimeCommandParser
+deactivate FreeTimeCommand
+
+FreeTimeCommandParser --> AddressBookParser
+deactivate FreeTimeCommandParser
+
+FreeTimeCommandParser -[hidden]-> AddressBookParser
+destroy FreeTimeCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> FreeTimeCommand : execute()
+activate FreeTimeCommand
+
+FreeTimeCommand -> Model : findInterval(toFind)
+activate Model
+
+'ADD MORE HERE
+Model -> AddressBook : findInterval(interval)
+activate AddressBook
+AddressBook -> UniquePersonList : findInterval(interval)
+activate UniquePersonList
+UniquePersonList --> AddressBook
+deactivate UniquePersonList
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> FreeTimeCommand
+deactivate Model
+
+FreeTimeCommand -> TimeSlot : parseIntervals(results)
+activate TimeSlot
+TimeSlot --> FreeTimeCommand : timeslots
+deactivate TimeSlot
+
+FreeTimeCommand -> TimeSlot : findAvailableTime(timeslots, toFind)
+activate TimeSlot
+TimeSlot --> FreeTimeCommand : availableTime
+deactivate TimeSlot
+
+FreeTimeCommand --> LogicManager: result
+deactivate FreeTimeCommand
+
+FreeTimeCommand -[hidden]-> LogicManager: result
+destroy FreeTimeCommand
+
+[<--LogicManager
+@enduml
