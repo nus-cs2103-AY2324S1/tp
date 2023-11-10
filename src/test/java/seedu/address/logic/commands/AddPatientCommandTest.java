@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PatientBuilder;
@@ -146,6 +147,10 @@ public class AddPatientCommandTest {
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public boolean hasIc(Ic nric) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void deletePerson(Person target) {
@@ -217,6 +222,11 @@ public class AddPatientCommandTest {
             requireNonNull(patient);
             return this.patient.isSamePerson(patient);
         }
+        @Override
+        public boolean hasIc(Ic nric) {
+            return this.patient.getIc().equals(nric);
+        }
+
     }
 
     /**
@@ -240,6 +250,10 @@ public class AddPatientCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+        @Override
+        public boolean hasIc(Ic nric) {
+            return personsAdded.stream().anyMatch(person -> person.getIc().equals(nric));
         }
     }
 

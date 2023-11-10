@@ -34,6 +34,7 @@ public class IcTest {
         assertFalse(Ic.isValidIc(" ")); // spaces only
         assertFalse(Ic.isValidIc("S333444Z")); // only 6 numbers included
         assertFalse(Ic.isValidIc("G2223331H")); // starting alphabet not S or T
+        assertFalse(Ic.isValidIc("s2223331H")); // alphabets not in caps
 
         // valid nric
         assertTrue(Ic.isValidIc("S0345999H")); // starting alphabet S
