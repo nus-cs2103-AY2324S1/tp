@@ -243,22 +243,33 @@ _{Explain here how the data archiving feature will be implemented}_
 
 #### Implementation
 
-The proposed sorting mechanism is facilitated by `UniqueEmployeeList`. It implements the following operations:
+The sorting mechanism is facilitated by `SortCommandParser`. It implements the following operations:
 
-* `UniqueEmployeeList#sortEmployees(String attribute)` — sorts the internal list according to the attribute given.
+* `SortCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`,
+and creates a new `SortCommand` object with the parsed field and order.
 
-These operations are exposed in the `Model` interface as `Model#updateSortedEmployeeList(String attribute)`,  and in `AddressBook `class as `AddressBook#sortEmployees(String attribute)`
+The `SortCommand` object then communicates with the `Model` API by calling the following methods:
 
-Given below is an example usage scenario where the user attempts to sort the list by salary.
+* `Model#updateSortedEmployeeList(field, order)` — Calls `sortEmployees` method of `AddressBook` class.
+* `AddressBook#sortEmployees(field, order)` — Calls `sortEmployees` method of `UniqueEmployeeList` class.
+* `UniqueEmployeeList#sortEmployees(field, order)` — Sorts the internal list according to the field and order given.
 
-The user keys in `sort f/ salary`
+The following sequence diagram below shows how the sort operation works:
 
-the `sort` command will call `Model#updateSortedEmployeeList()`, which in turn calls `AddressBook#sortEmployees()`
-which then calls `UniqueEmployeeList#sortEmployees()`.
+![Sort Sequence Diagram](images/SortSequenceDiagram.png)
 
-This will call the `List#sort()` method of the observable list `internalList`, which contains the full list of employees.
+Given below is an example usage scenario for the command:
 
-Finally, the update to the internalList will change the view of the displayed list in the GUI.
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `sort f/FIELD in/ORDER` command in the CLI
+(note that only `name`, `salary`, `overtime` and `leaves` fields, as well as `asc` and `desc` orders are valid).
+
+**Step 3**: The list of all employees in the employee book will be sorted accordingly.
+
+The following activity diagram summarizes what happens when a user executes the reset command:
+
+<INSERT SORT ACTIVITY DIAGRAM HERE>
 
 #### Design considerations:
 
@@ -271,6 +282,7 @@ Finally, the update to the internalList will change the view of the displayed li
 * **Alternative 2:** Performs a sort on a copied list in `ModelManager`.
     * Pros: Allows the `list` command to list all employees by the order they were added.
     * Cons: Different lists in the `ModelManager` class may cause inconsistencies when `find` and `sort` commands are called consecutively.
+
 
 ### Report feature
 
@@ -487,6 +499,61 @@ Given below is an example usage scenario for the command.
 * **Alternative 2**: Create methods in model specifically to edit the `leaveList` attribute of the employee.
     * Pros: More OOP, follows the Single Responsibility Principle by not having `AddLeaveCommand#execute()` perform the editing directly. 
     * Cons: Longer command execution, requires more parts to work together.
+
+
+### Delete Leave feature
+
+The delete leave feature allows HouR to delete employee leaves.
+
+#### Implementation
+
+The delete leave command mechanism is facilitated by `DeleteLeaveCommandParser`. It implements the following operations:
+
+The delete leave command mechanism is facilitated by the `DeleteLeaveCommandParser` class which extends the `AddressbookParser`.
+
+`DeleteLeaveCommandParser#parse()` overrides  `Parser#parse()` in the Parser interface.
+
+`DeleteLeaveCommandParser` implements the following operations:
+
+* `DeleteLeaveCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `DeleteLeaveCommand` object with the parsed employee ID, start date and end date.
+
+The `DeleteLeaveCommand` object then communicates with the `Model` API by calling the following methods:
+
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `DeleteLeaveCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `DeleteLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the operation of deleting a leave appointment works:
+
+![Delete Leave Sequence Diagram](images/DeleteLeaveSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` command in the CLI.
+* `START_DATE` and `END_DATE` are inputs of format `yyyy-MM-dd`.
+
+**Step 3**: Leave appointments that fall between the start and end dates will be deleted from the employee specified with the employee ID input.
+* If no leave appointments exist between the start and end dates, an error will be produced and shown to the user.
+
+The following activity diagram summarizes what happens when a user executes the edit leave command:
+
+<INSERT DELETE LEAVE ACTIVITY DIAGRAM HERE>
+
+#### Design considerations:
+
+**Aspect: Model-Person Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in AddLeaveCommand#execute().
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates the Single Responsibility Principle.
+
+* **Alternative 2**: Create methods in model specifically to edit the `leaveList` attribute of the employee.
+    * Pros: More OOP, follows the Single Responsibility Principle by not having `DeleteLeaveCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requires more parts to work together, which can cause more bugs.
+
 
 ### Edit Leave feature
 

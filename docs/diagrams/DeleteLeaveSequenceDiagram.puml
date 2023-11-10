@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteLeaveCommandParser" as DeleteLeaveCommandParser LOGIC_COLOR
+participant "r:DeleteLeaveCommand" as DeleteLeaveCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("deleteleave id/EID1234-5678 from/2023-11-01 to/2023-11-02")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deleteleave id/EID1234-5678 from/2023-11-01 to/2023-11-02")
+activate AddressBookParser
+
+create DeleteLeaveCommandParser
+AddressBookParser -> DeleteLeaveCommandParser
+activate DeleteLeaveCommandParser
+
+DeleteLeaveCommandParser --> AddressBookParser
+deactivate DeleteLeaveCommandParser
+
+AddressBookParser -> DeleteLeaveCommandParser : parse("id/EID1234-5678 from/2023-11-01 to/2023-11-02")
+activate DeleteLeaveCommandParser
+
+create DeleteLeaveCommand
+DeleteLeaveCommandParser -> DeleteLeaveCommand
+activate DeleteLeaveCommand
+
+DeleteLeaveCommand --> DeleteLeaveCommandParser : r
+deactivate DeleteLeaveCommand
+
+DeleteLeaveCommandParser --> AddressBookParser : r
+deactivate DeleteLeaveCommandParser
+
+DeleteLeaveCommandParser -[hidden]-> AddressBookParser
+destroy DeleteLeaveCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> DeleteLeaveCommand : execute()
+activate DeleteLeaveCommand
+
+DeleteLeaveCommand -> Model : setEmployee(targetEmployee, editedEmployee)
+DeleteLeaveCommand -> Model : updateFilteredEmployeeList()
+
+create CommandResult
+DeleteLeaveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteLeaveCommand
+deactivate CommandResult
+
+DeleteLeaveCommand --> LogicManager : result
+deactivate DeleteLeaveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
