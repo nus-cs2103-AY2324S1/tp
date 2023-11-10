@@ -40,7 +40,7 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   ![Ui](images/Ui_v1.3.1.jpg)
+   ![Ui](images/quickstartGUI.png)
 
 
 Here are the icons you will see throughout this User Guide and what they mean:
@@ -51,12 +51,14 @@ Here are the icons you will see throughout this User Guide and what they mean:
 
 
 > :bulb: The main application consists of the:
-> 1. Menu Sidebar `*`
-> 2. Patient List View
-> 3. Output Box
-> 4. Command Box
-> 5. Logger Tab
->
+> 1. [Menu Sidebar](#menu-sidebar) `*`
+> 2. [Patient List View](#patient-list-view)
+> 3. [Logger Tab](#logger-tab)
+> 4. [Output Box](#output-box)
+> 5. [Command Box](#command-box)
+
+> :bulb: Click on the component in the list above to learn more about it.
+
 > :warning: **`*`**: The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
 
 >:bulb: Longer outputs have to scrolled to be viewed.
@@ -394,6 +396,8 @@ Exits HealthSync.
 HealthSync data are saved in the hard disk automatically after any command that changes the data is executed.
 There is no need to save manually.
 
+>:bulb: Only patient details inside patient list view are saved. The logger tab and command history used for `undo` are not saved after the application is closed. 
+
 ### Editing the Data File
 
 HealthSync data are saved automatically as a JSON file `[JAR file location]/data/healthsync.json`.
@@ -414,6 +418,8 @@ Advanced users are welcome to update data directly by editing that data file.
 >If anything goes wrong during the editing process, you can restore your data by copying the backup file back to its original location.
 
 ### Archiving Data Files `[coming in v5.0]`
+It allows you to efficiently store and organize patient records in HealthSync. With this feature, you can maintain a tidy and easily accessible archive of patient data, ensuring streamlined data management and quick retrieval when needed.
+
 
 ## [FAQ](#faq)
 
@@ -430,7 +436,7 @@ It streamlines tasks and provides a more efficient way to manage patient details
 by different users.
 
 **Q**: How do I import patient data from external sources into HealthSync?<br>
-**A**: The data file that is storing current patient data will be stored in `data/addressbook.json` by default under the same folder.
+**A**: The data file that is storing current patient data will be stored in `data/healthsync.json` by default under the same folder.
 You may import patient data and store into that file. However, do adhere to the data format present in the current file.
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -586,6 +592,15 @@ patient can have more than 1 medical history.
 Individually, medical histories do not have a strict format to adhere to. However, every medical
 history a patient has should be unique from one another.
 
+Medical Conditions are restricted to 50 alphanumeric characters, and may also contain these symbols: `+``_``.``-`.
+
+Some examples of valid Medical History formats are listed here:
+```
+Hypertension
+Covid-19
+Pneumonoultramicroscopicsilicovolcanoconiosis
+```
+
 #### Appointment
 
 The appointment slot assigned to your patients. A patient may have no appointment assigned to them.
@@ -604,6 +619,7 @@ to 1pm.
    a zero when necessary. Example: `1200` for 12 noon, `0900` for 9am.
  * You may exclude minutes if you wish. Example: `15` will be interpreted as 3pm.
  * Date and the 2 Times needs to be separated by a comma or a space.
+ * Appointment with the start and end time being the same is valid (ie. 0-minute appointment). HealthSync will register the start time as it is, and register end time as unconfirmed. This is useful for when you are unsure of the end time of an appointment.
 
 Some examples of valid Appointment formats are listed here:
 ```
@@ -619,26 +635,30 @@ Command Line Interface. Refers to computer programs which require you to type to
 ### GUI
 Graphical User Interface. Refers to computer programs with a visual window you can interact with directly.
 
-### Patient List View
-The main part of HealthSync where the list of all your patients are displayed.
+### [Menu Sidebar](#menu-sidebar)
+The Menu Sidebar is the area on the left of the Patient List View. It contains buttons that allow you to perform actions on HealthSync. Currently, only the `User Guide` and `Exit` buttons are functional. The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
 
-### Output Box
-A small box right below the Patient List View where HealthSync will provide any feedback it has on the instructions
-it has performed.
+### [Patient List View](#patient-list-view)
+The main part of HealthSync where the list of all your patients are displayed. This is where you can view patient profiles in list form, and perform actions on them. When actions are performed, the Patient List View will be updated to reflect the changes/results.
 
-### Command Box
-The area where you type your instructions for HealthSync to perform.
-
-### Logger Tab
+### [Logger Tab](#logger-tab)
 A 'sticky-note'-like area on the right of the Patient List View. Serves as a snapshot of the patient data at the time they were logged with the [`log` command](#preserving-a-find-command-result-in-the-log--log).
 
 This comes in handy when you want to refer to certain patient profiles at the side, while still being able to carry on with other tasks.
 
 To maximise utility, upon app start, the logger tab displays a list of profiles of patients who have appointments on the day itself. This can be overwritten by the `log` command for patient profiles thereafter.
 
+### [Output Box](#output-box)
+A small box right below the Patient List View where HealthSync will provide any feedback it has on the instructions
+it has performed. This includes error messages, success messages, and other information like example commands.
+
+### [Command Box](#command-box)
+The area where you type your instructions for HealthSync to perform.<br>
+> :bulb: You can use the `Spacebar` to focus on the Command Box. This allows you to type your instructions without using the mouse to click on the Command Box.
+
 ### Command History Stack
 The group of instructions HealthSync remembers performing. This group allows HealthSync to undo the
-instructions and return your list to an older state.
+instructions and return your list to an older state. This stack will be cleared when you exit HealthSync.
 
 ### Java
 A piece of software that our program builds on. In order to use HealthSync, your computer must be running at least
