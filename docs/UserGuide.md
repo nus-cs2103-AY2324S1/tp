@@ -83,7 +83,7 @@ The examples in this guide are formatted with the following conventions:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about the command format**<br>
 
 - Commands usually start with a command word.
 
@@ -170,7 +170,7 @@ interaction INDEX o/OUTCOME [DETAILS]
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the interaction command:**<br>
+**:information_source: Notes about the interaction command**<br>
 
 - `INDEX` refers to the index of the client profile in the displayed list of clients.
 
@@ -220,23 +220,31 @@ Use the ***dashboard*** command to view a summarized information of all your cli
 dashboard
 ````
 
-![Ui](images/Dashboard.png)
-***Statistics*** shows...
+You should see the following dashboard view in the application window.
 
-1) Uncontacted / Contacted / Closed clients
-2) Average interactions amongst all clients
-2) Breakdown of the different interaction outcomes
-3) Spread of HOT / WARM / COLD leads
+<figure>
+   <img src="images/Dashboard.png" alt="Dashboard view">
+   <figcaption align="center">
+       <em>The dashboard view. Data shown may vary.</em>
+   </figcaption>
+</figure>
+<br>
 
-While ***Follow-Ups*** shows...
-1) Follow ups in the future, with follow up dates being determined by the day of last interaction plus follow up times (determined by lead type as shown below)
+On the left, we have Connectify's statistics which shows:
+
+1. Uncontacted / Contacted / Closed clients
+2. Average interactions amongst all clients
+2. Breakdown of the different interaction outcomes
+3. Number of HOT / WARM / COLD leads
+
+On the right, we have the follow-ups section which shows upcoming follow-ups. Follow-up dates are determined by the day of last interaction plus a follow-up period, determined by lead type as shown:
 
 | LeadType | Follow-Up Time |
-|---|----------------|
-| HOT | 1 week         |
-| WARM | 4 weeks        |
-| COLD | 8 weeks        |
-| UNKNOWN | 4 weeks        |
+|----------|----------------|
+| HOT      | 1 week         |
+| WARM     | 4 weeks        |
+| COLD     | 8 weeks        |
+| UNKNOWN  | 4 weeks        |
 
 ### Viewing the list of clients: ***list***
 
@@ -247,31 +255,54 @@ You might want to go back to the list of clients you have added to Connectify. U
 list
 ```
 
+<figure>
+    <img src="images/ExampleEditBefore.png" alt="Client list view">
+    <figcaption align="center">
+        <em>The client list view. Data shown may vary.</em>
+    </figcaption>
+</figure>
+<br>
+
 You should then see the list of clients in the application window.
 
 ### Finding a client by name: ***find***
 
-Managing a large number of clients can be difficult. Some of our commands use indexes to refer to a client profile. This might be difficult to remember if you have a large number of clients.
-
-Don't worry, though, we have a solution for you! You can use the ***find*** command to search for a client by name.
+Managing a large number of clients can be difficult. Some of our commands use indexes to refer to a client profile. This might be difficult to remember if you have a large number of clients. Don't worry though, we have a solution for you! You can use the ***find*** command to search for a client by name.
 
 **Format**
 ```text
 find NAME
 ```
-💡 You don't need to type the full name of the client. You can type either the first name or last name and the command will return clients whose name contains the search term.
 
-Example:
-Finding a client with the name "John Doe"
-```
-find John Doe
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the find command**<br>
+
+You need to type either the **first** name or the **last** name of the client. You cannot type part of the client's name!
+
+</div>
+
+**Example**
+```text
+find David
 ```
 
-Example:
-Finding a client with the name "Chemmy Lee". Notice that you don't need to type the full name of the client.
-```
-find Chemmy
-```
+<figure>
+    <img src="images/ExampleEditBefore.png" alt="Client list view">
+    <figcaption align="center">
+        <em>The client list view. Data shown may vary.</em>
+    </figcaption>
+</figure>
+<br>
+
+<figure>
+    <img src="images/ExampleFindAfter.png" alt="Client list containing David's profile">
+    <figcaption align="center">
+        <em>Result of executing the above find command: David's profile is found at index 1. Indices may be different.</em>
+    </figcaption>
+</figure>
+<br>
+
 
 ### Viewing the full details of a client: ***view***
 
@@ -283,7 +314,36 @@ Well, not anymore! With Connectify, you can view the full details of a client an
 ```text
 view INDEX
 ```
-where INDEX refers to the index of the client profile in the displayed list of clients.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the view command**<br>
+
+`INDEX` refers to the index of the client profile in the displayed list of clients.
+
+</div>
+
+**Example**
+```text
+view 4
+```
+
+<figure>
+    <img src="images/ExampleEditBefore.png" alt="Client list view">
+    <figcaption align="center">
+        <em>The client list view. Note that David's profile is at index 4.</em>
+    </figcaption>
+</figure>
+<br>
+
+<figure>
+    <img src="images/ExampleViewAfter.png" alt="Detailed view of David's profile">
+    <figcaption align="center">
+        <em>Result of executing the above view command: David's profile details are shown.</em>
+    </figcaption>
+</figure>
+<br>
+
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -298,7 +358,7 @@ Not only that, you might find yourself needing to update the details of a client
 
 **Format**
 ```text
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [l/LEAD]
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]... [l/LEAD] 
 [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]
 ```
 
@@ -322,6 +382,15 @@ Example
         <em>Result of running commands (1) to (3).</em>
     </figcaption>
 </figure>
+<br>
+
+<div markdown="block" class="alert alert-warning">
+
+**:bulb: Clearing all tags of a particular client**<br>
+
+You can use the ***edit*** command to clear all tags of a client by supplying an empty tag parameter! For example, if you wish to clear the tags of a client at index 4, you can use `edit 4 t/`.
+
+</div>
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -335,9 +404,12 @@ Keep the list of clients in Connectify clean by deleting client profiles that ar
 
 Deleting a client profile is easy with the ***delete*** command.
 
-Format: `delete INDEX`
+**Format**
+```text
+delete INDEX
+```
 
-Example:
+**Example**
 ```
 delete 1
 ```
@@ -351,9 +423,9 @@ delete 1
 ## `INCOME` Parameter
 
 Incomes must only consist of numerical inputs. Connectify does not yet support:
-- Decimal values `600.50`
-- Currencies `10000 USD`
-- Other non-numeric input e.g. `10,000`
+* Decimal values `600.50`
+* Currencies `10000 USD`
+* Other non-numeric input e.g. `10,000`
 
 --------------------------------------------------------------------------------------------------------------------
 
