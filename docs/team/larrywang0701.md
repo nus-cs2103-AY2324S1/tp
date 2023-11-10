@@ -4,7 +4,7 @@
 ---
 
 ### Project  Overview:
-to be added soon
+**_KeepInTouch_** is a desktop application designed for job seekers. It can help the job-seekers to manage contacts and events conveniently. Here is my work and contributions to this project:
 ### Summary of Contributions
   - #### Code Contributed:
 
