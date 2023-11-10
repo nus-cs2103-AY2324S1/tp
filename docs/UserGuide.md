@@ -15,6 +15,10 @@ Click on the relevant links to easily navigate through the guide and access the 
 
 ## Table of Contents
 * [Quick Start](#quick-start)
+* [UI Components](#ui-components)
+  * [General UI Information](#general-ui-information)
+  * [Contact Card](#contact-card)
+  * [Appointment Card](#appointment-card)
 * [Features](#features)
   * [Help](#viewing-help--help)
   * [Add](#adding-a-person--add)
@@ -33,7 +37,7 @@ Click on the relevant links to easily navigate through the guide and access the 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -62,6 +66,36 @@ Click on the relevant links to easily navigate through the guide and access the 
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+## UI Components
+
+![generalUi](images/generalUi.png)
+
+### General UI information
+
+Component | Purpose
+--------|------------------
+**Navigation Bar** | Allows you to exit UNOFAS or view help
+**Command Line** | Location to enter commands
+**Result Line** | Displays the result after a command is entered
+**Contact List** | Displays clients
+**Appointment List** | Displays appointments
+**Contact Card** | Displays detailed information about a patient
+**Appointment Card** | Displays detailed information about an appointment
+**Save Location** | Displays the location where your UNOFAS data is stored
+
+### Contact Card
+
+![contactCardUi](images/contactCardUi.png)
+
+* Shows the client's name, phone number, financial plan(s) if any, address, email address, next-of-kin name, next-of-kin phone number, appointment (if any) and tags (if any).
+
+### Appointment Card
+
+![appointmentCardUi](images/appointmentCardUi.png)
+
+* Shows the appointment name, client allocated to the appointment and the appointment date and time.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -121,7 +155,6 @@ to view the arguments' prefix, and their acceptable values.
 
 -----------------------
 ### Viewing help : `help`
-> :warning: Due to new features, help page is currently being updated.
 
 Shows a message explaining how to access the help page, as well as a list of available keywords.
 
@@ -135,7 +168,7 @@ Format: `help`
 Add a client’s contacts to contact book (name, phone number, email, home address, next-of-kin name, next-of-kin phone
 number) into contact book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN]… [t/TAG]…​`
 
 * Adding a person with the exact same name (case-sensitive) as a person currently in the contact book will cause the
     command to fail.
@@ -150,23 +183,6 @@ A person can have any number of tags (including 0).
 </div>
 
 Examples:
-* `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202`
-
-Successful Output: `New person added: John; 
-Phone: 80101010; 
-Email: johndoe@gmail.com; 
-Address: Punggol Central Blk 444 #15-32 820123; 
-Next-of-kin Name: Brennan; 
-Next-of-kin Phone: 82020202; 
-Appointment: No Appointment made!; 
-Financial Plans: ; 
-Tags:`
-
-![result for 'add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202'](images/addUi.png)
-
-You can also add a client's contacts with a tag and a financial plan.
-
-Examples:
 * `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 t/80yo fp/Financial Plan C`
 
 Successful Output: `New person added: John; 
@@ -179,14 +195,16 @@ Appointment: No Appointment made!;
 Financial Plans: [Financial Plan C]; 
 Tags: [80yo]`
 
+![result for 'add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202'](images/addUi.png)
+
 <div markdown="span" class="alert alert-primary">:information_source: 
-**Do note** that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
+**Do note** that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done for financial plans with the `fp/` prefix.
 </div>
 
 ------------------
 ### Listing all persons : `list`
 
-Display a list of all the clients and their contact details
+Display a list of all the clients and their contact details.
 
 Format: `list`
 
@@ -210,8 +228,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN
 of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * You can remove all the person’s financial plans by typing `fp/` without
-  specifying any tags after it.
-* A person's appointment cannot in edited in this manner. Refer to [Schedule](#scheduling-an-appointment--schedule).
+  specifying any financial plans after it.
+* A person's appointment cannot be edited in this manner. Refer to [Schedule](#scheduling-an-appointment--schedule).
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -255,8 +273,8 @@ Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
 * `find n/john n/charlie` returns `Charlie`, `john doe`<br>
+
   ![result for 'find john charlie'](images/findJohnCharlieResult.png)
 
 ### Gathering emails of matching persons : `gather`
@@ -433,6 +451,7 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **Long names** for Financial Plans and Tags may not be fully visible.
 3. **When sorting the list**, we have chosen to not implement returning sorted list to original ordering due to the lack of necessity. However, due to feedback, we will implement this in the next release to enable users to return list to original order should they wish to.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
