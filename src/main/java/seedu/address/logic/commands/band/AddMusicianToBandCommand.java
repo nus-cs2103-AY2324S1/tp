@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BINDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MINDEX;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -58,9 +57,6 @@ public class AddMusicianToBandCommand extends Command {
 
         if (bandToAddInto.getZeroBased() >= lastShownBandList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_BAND_DISPLAYED_INDEX);
-        }
-        if (musiciansToAdd.size() > new HashSet<>(musiciansToAdd).size()) {
-            throw new CommandException(MESSAGE_MUSICIAN_INDEX_REPEATED);
         }
 
         // stop execution if there are exceptions without adding any musicians
