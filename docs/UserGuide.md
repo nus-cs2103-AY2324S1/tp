@@ -112,13 +112,13 @@ Format: `help`
 Adds a booking to the bookings book.
 
 Format: `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK`
-![AddCommand.png](images%2FAddCommand.png)
+![AddBooking.png](images%2FAddBooking.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 The room number is used to assign the room type.
 </div>
 
-* Image above shows result of command `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`
+* Image above shows result of command `add r/11 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`
 
 Examples:
 * `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`
@@ -140,7 +140,7 @@ Edits an existing booking in the bookings book.
 
 Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL]`
 
-![EditCommand.png](images%2FEditCommand.png)
+![EditBooking.png](images%2FEditBooking.png)
 
 * Example image above shows result of command `edit 1 p/91234567 e/johndoe@gmail.com`
 * Edits the booking at the specified `INDEX`. The index refers to the index number shown in the displayed booking list. The index **must be a positive integer** 1, 2, 3, …​
@@ -178,7 +178,7 @@ Deletes the specified booking(s) from the bookings book.
 
 Format: `delete INDEX ...`
 
-![DeleteCommand.png](images%2FDeleteCommand.png)
+![DeleteBooking.png](images%2FDeleteBooking.png)
 
 * Example image above shows result of command `delete 2`
 * Deletes the booking at the specified `INDEX`.
@@ -197,7 +197,7 @@ Adds the most recently deleted booking back to the system.
 
 Format: `undo`
 
-![UndoCommand.png](images%2FUndoCommand.png)
+![UndoBooking.png](images%2FUndoBooking.png)
 
 * Example image above shows the result of command `undo`
 * If the deleted item was manually added back, then undo was performed, the deleted booking will not be added as it 
