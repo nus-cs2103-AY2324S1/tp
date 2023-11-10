@@ -33,5 +33,5 @@ Given below are my contributions to the project.
   * Assigned issues to the team and manage milestones in `v1.1` 
 
 * **Community**:
-  * PRs reviewed (selected ones only): [\#74](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/74), [\#77](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/77)
+  * PRs reviewed (with non-trivial comments): [\#74](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/74), [\#77](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/77)
   * Had the role of a "Git expert" in the team, and guided the team on how to use the Git CLI and forking workflow 

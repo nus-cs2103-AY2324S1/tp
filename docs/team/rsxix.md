@@ -34,7 +34,7 @@ Given below are my contributions to the project.
     * Assigned a few issues in v1.3.
 
 * **Community**:
-    * PRs reviewed (example) : [\#181](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/211/files)
+    * PRs reviewed (with non-trivial comments) : [\#106](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/106)
     * Had the responsibility "Testing" in the team, and helped implement and oversee error handling.
 
 
