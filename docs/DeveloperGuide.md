@@ -22,7 +22,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
-
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
@@ -121,8 +120,7 @@ How the parsing works:
 Here is an overview of what the other classes in `Logic` do:
 * `ArgumentMultiMap` and `ArgumentTokeniser` are used to map the parameters of 
 the user's input into key-value pairs, where the keys are specified using `ArgumentTokeniser`
-* `CliSyntax` is where command-specific keywords are stored. It is used as the arguments for `ArgumentTokeniser`
-to process the user input into: `{keyword : parameter}` pairs.
+* `CliSyntax` is where command-specific keywords are stored. It is used as the arguments for `ArgumentTokeniser` to process the user input into: `{keyword : parameter}` pairs.
   * Example usage: The text `1 /name John Doe /phone 98765432` when
     mapped using `ArgumentTokeniser` with the keywords `/name`
     and `/phone` produces:
@@ -147,33 +145,55 @@ The sequence diagram below illustrates the interactions within the
 * `TO BE IMPLEMENTED IN 1.4`
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="1200" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniqueList<Person>` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the networkbook data, which in turn is all `Person` objects (which are contained in a `UniqueList<Person>` object).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* exposes the current list of displayed person as a `Observable<Person>` obtained from the `VersionedNetworkBook`.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `NetworkBook`, which `Person` references. This allows `NetworkBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+The `VersionedNetworkBook` component,
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+* stores the currently filtered `Person` objects (the result of a filter) as a separate _filtered_ list. This list is used as the intermediate list between the original `UniqueList<Person>` and the _sorted_ list.
+* stores the sorted list `Person` objects (the result of a filter and a sort) as a separate _sorted_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a list of states that can be backtracked/forwarded to. This list is extensively used in undo and redo command.
 
-</div>
+The `UserPrefs` component,
+
+* stores the GUI settings of window size and position.
+* stores the path of the data file.
+
+The `UniqueList<T>` class,
+
+* is a generic class that ensures that items within the list conforms to the unique constraint. In other words, each pair of objects within the list must have a different identity. `UniqueList<T>` enforces `T` to implement `Identifiable<T>`, which has the method `isSame(T)` to check for identity against another object.
+* The identity is determined by the class that `T` binds to.
+  * For `Person`, the identity is the name. Two names are equal if there string values are equal.
+  * For `Phone`, the identity is the literal string value of the phone.
+  * For `Email`, the identity is the literal string value of the email.
+  * For `Link`, the identity is the literal string value of the link.
+  * For `Course`, the identity is the literal string value of the course name.
+  If two courses are of the same name but of different start and end dates, they are considered having the same identity.
+  * For `Specialisation`, the identity is the literal string value of the specialisation.
+  * For `Tag`, the identity is the literal string value of the tag.
+* `UniqueList<T>` does an identity check upon adding every object to the list. It throws an `AssertionError` if duplicates are found.
+  * Any actor that wants to add an object to the list must ensure that an identity check has been done before the add method is called.
+* `UniqueList<T>` supports supplying the object at the specified index to a consumer through the method `consumeItem(int index, ThrowingIoExceptionConsumer<T> consumer)`. The method takes the item at `index` and passes it into the `consumer`.
+* `UniqueList<T>` supports supplying the object at the specified index to a consumer, at the same time applying a function on the same object to produce a value through the method `consumerAndComputeItem(int index, ThrowingIoExceptionConsumer<T> consumer, Function<T, U> function)`. The method works the same as above, and does an extra step of applying `function` on the object and return the computed value of type `U`.
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="900" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both NetworkBook data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `NetworkBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -221,7 +241,7 @@ The implementation of the edit command follows the convention of a normal comman
 where `EditCommandParser` is responsible for parsing the user input string
 into an executable command.
 
-![edit sequence](images/edit/EditDiagram.png)
+<img src="images/edit/EditDiagram.png" width="1200">
 
 `EditCommandParser` first obtains the values corresponding to the flags 
 `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` and `/index`.
@@ -264,6 +284,29 @@ as the parser should not need to know how the current model looks like.
 This design has the advantage that the parser does not need to know how the current model looks like.
 However, to keep `Command` classes consistent in design, 
 we decide to only have one `EditCommand` class and practice inheritance with `EditAction`.
+* Implement `EditCommand` such that `EditAction` edits the `Person` object directly.
+This means that `Person` class must be mutable, which breaks the defensiveness of the current code and has the potential of introducing more bug.
+Moreover, the `Person` class being immutable also accommodates for the `undo` and `redo` command,
+in which the `VersionedNetworkBook` only creates a shallow copy of the current list of `Person` objects
+and hence any mutation of the `Person` object might introduce bugs.
+
+
+### Open link/email
+
+The implementation of the opening link/email command follows the convention of normal command, where `OpenEmailCommandParser`/`OpenLinkCommandParser` is responsible for parsing the user input string into an executable command. Below illustrates the process for open link command. The process of opening email is similar, where the reader can simply replace `link` with `email` to get the process for opening email.
+
+![open link diagram](images/open/OpenDiagram.png)
+
+`OpenLinkCommandParser` first obtains the values corresponding to the preamble and the flag `/index`, and return an object of class `OpenLinkCommand`.
+* If there are multiple `/index` tags, `OpenLinkCommandParser` throws a `ParseException`.
+* If there is no `/index` tag, the link index takes the default value of `1`.
+
+`OpenLinkCommand` then executes on the `Model` to open the link at `personIndex` (index of contact) and `linkIndex` (index of contact). The `Model` calls on the `NetworkBook`, which then calls on the `Person` at the correct index to open the link at `linkIndex`.
+
+The `Person` opens the link by first detects which OS the application is running on.
+* On Windows, the `Person` executes `Desktop::browse(URI)`, where [`Desktop`](https://docs.oracle.com/javase/8/docs/api/java/awt/Desktop.html) and [`URI`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/net/URI.html) are java classes from default packages.
+* On Mac OS, the `Person` executes the `open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class, which is a built-in class in java language. The `open` command in the terminal opens the computer's default browser if the `URI` supplied is correctly formatted to be a web link.
+* On Ubuntu, the `Person` executes the `xdg-open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class.
 
 
 ### Undo/redo
@@ -391,8 +434,6 @@ _{insert diagram here}_
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
-
-Step 4. The user executes `sort /by none`, which updates the `SortedList` predicate and resets the sorting.
 
 <!-- todo insert diagram-->
 
@@ -786,6 +827,106 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Delete a single-valued field of a contact**
+
+**MSS**
+
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User specifies index of contact and a single-valued field to delete.
+
+4. NetworkBook updates the contact by deleting the field.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index of contact is invalid.
+
+  * 3a1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+
+* 3b. User provides multiple fields to delete.
+
+  * 3b1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3c. User provides an index field after the single-valued field to delete.
+
+  * 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3d. The single-valued field of the contact is empty.
+
+  * 3d1. NetworkBook does not change the contact.
+
+    Use case ends.
+
+**Use case: Delete a multi-valued field of a contact**
+
+**MSS**
+
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User specifies index of contact, a multi-valued field, and the index of entry to delete.
+
+4. NetworkBook updates the contact by deleting the entry from the field's list.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index of contact is invalid.
+
+  * 3a1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3b. User provides multiple fields to delete.
+
+  * 3b1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3c. The given index of entry is invalid.
+
+  * 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3d. User provides multiple indexes of entry to delete.
+
+  * 3d1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3e. User does not provide an index of entry.
+
+  * 3e1. The index of entry is default to 1.
+
+    * 3e1a. The contact's field does not have an entry at index 1.
+
+      Use case resumes at step 3c1.
+
+    * 3e1b. The contact's field has an entry at index 1.
+
+      Use case resumes at step 4.
 
 **Use case: Sort contacts**
 
@@ -880,13 +1021,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User has no contact to list.
+
+    * 1a1. NetworkBook shows an empty list
 
   Use case ends.
 
 * 4a. The user has not logged in to his default email app.
 
     * 4a1. User will be taken to the sign-in page of his default email app.
+
+      Use case ends.
+    
+* 3b. The command is invalid.
+    
+    * 3b1. NetworkBook notifies the user that the command is invalid.
 
       Use case ends.
 
@@ -908,25 +1057,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 4a. The social link is invalid.
+* 3a. The social link is invalid.
 
-    * 4a1. The user will see the error page displayed by the browser used to load the page link.
+    * 3a1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
 * 4b. The page is valid but fails to load.
 
     * 4b1. The user will see the error page displayed by the browser used to load the page link.
-
-      Use case ends.
-
-* 4c. The social link directs to a social media app which the user has not logged in.
-
-    * 4c1. The user will be taken to the sign-in page of the social media app.
 
       Use case ends.
 
@@ -1052,13 +1195,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 1. A new user should be able to familiarise him/herself with most of the basic features of the app upon finishing going through the quick-start guide.
 1. A user should be able to use commonly available and easy-to-remember keyboard shorcuts
-   * Ctrl+C: copy text
-   * Ctrl+V: paste text
-   * Ctrl+N: new contact detail
-   * Ctrl+W: exit the app
+   * Common shortcuts to edit text, including Ctrl+C to copy, Ctrl+V to paste, Ctrl+A to select all, Ctrl+Z to undo text change, Ctrl+Y to redo text change, etc.
    * Ctrl+F: find a contact
-   * Ctrl+H/Ctrl+R/Ctrl+G: edit a contact
-   * Up/down arrow keys: access previous commands
+   * Ctrl+N: create a new contact
+   * Ctrl+G: edit a contact
+   * Ctrl+Z: undo last command (when not editing text)
+   * Ctrl+Y: redo last command undone (when not editing text)
+   * Ctrl+W: exit the app
+   * Ctrl+S: manually save data
+   * Up/down arrow keys: navigate command history
 1. A new user should be able to understand the meaning of a command just by looking at the keywords used in the command.
 
 
@@ -1067,7 +1212,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **Command**: a string keyed in by the user in the GUI text input that signifies an action to be done by the app.
 * **Contact**: a contact of the user whose information is stored in the app, which includes name, phone numbers, emails, links, graduation year, courses taken, specialisations, priority level and tags of/associated with the person.
-* **Field**: an attribute of a contact that describes information about the contact and can take different values. Possible fields of a contact are elaborated in the **contact** term above.
+* **Field**: an attribute of a contact that describes information about the contact. Possible fields of a contact are elaborated in the **contact** term above.
+* **Single-valued field**: a field that cannot hold many values, so that each contact can only have one value. These fields include name, graduation year and priority level.
+* **Multi-valued field**: a field that can possibly hold many values, so that each contact has a list of values. These fields include phone numbers, emails, links, courses, specialisations and tags.
 * **Course taken**: a module that a person has taken in university or outside (for e.g. CS2103T module in NUS).
 * **Specialisation**: the specialisation a person can take in their computing degree in NUS (e.g. Software Engineering, Artificial Intelligence).
 * **Graduation year**: the year and semester that a person will graduate / has graduated from NUS (e.g. AY2526-S2, meaning the second semester of the academic year spanning from 2025 to 2026).

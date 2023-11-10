@@ -21,9 +21,6 @@ import networkbook.model.util.UniqueList;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person implements Identifiable<Person> {
-
-    private static final String[] BROWSERS = {"google-chrome", "firefox", "mozilla", "epiphany",
-        "konqueror", "netscape", "opera", "links", "lynx", "chromium", "brave-browser"};
     private static final Logger LOGGER = LogsCenter.getLogger(Person.class);
     private static final String LINK_OPENING_MESSAGE = "Opening URL %s on %s";
     private static final ThrowingIoExceptionConsumer<Link> LINK_OPENER = link -> {

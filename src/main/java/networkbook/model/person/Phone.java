@@ -11,8 +11,7 @@ import networkbook.model.util.Identifiable;
  */
 public class Phone implements Identifiable<Phone> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers"
-            + " (and country code of 1-3 numeric digits with \"+\" in front if applicable) "
+            "Phone numbers should only contain numbers (and country code with \"+\" in front if applicable)"
             + "and it should be at least 3 digits long (excluding country code).";
     public static final String VALIDATION_REGEX = "^(\\+\\d{1,3}\\s?)?\\d{3,}";
     public final String value;
