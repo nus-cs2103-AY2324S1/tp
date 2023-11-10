@@ -47,5 +47,5 @@ You can reach us at the email `shuenjin@u.nus.edu`
 [[github](https://github.com/seonlo99)]
 [[portfolio](team/seonlo99.md)]
 
-* Role: Bassist
-* Responsibilities: Double Bass
+* Role: Developer
+* Responsibilities: Features
