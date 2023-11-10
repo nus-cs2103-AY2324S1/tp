@@ -314,7 +314,7 @@ The sort feature offers the user a choice to ensure that the list of fosterers i
 
 * **Alternative 1 (current choice):** Implement an `undo` command to revert the list back to its original state (sorted chronologically based on when the fosterer is added).
     * Pros: Maintains consistency with undo mechanisms used in other features of Foster Family.
-    * Cons: If `sort` is executed multiple times consecutively followed by `undo`, the list will not revert back to its original state with the current implementation of `undo`, which only allows the users to undo the previous command.
+    * Cons: If `sort` is executed multiple times consecutively followed by `undo`, the list will not revert back to its original state with the current implementation of `undo`, which only allows the users to undo the last valid command.
 
 * **Alternative 2:** Implement another `sort` command like `sort time` to revert the list back to its original state (sorted chronologically based on when the fosterer is added).
     * Pros: Offers an explicit and clear command for reverting to the original sorting of the address book list.
@@ -483,11 +483,11 @@ able to foster a dog. However, the user will still need to enter the `availabili
 Building on the enhancement in [Shorter Command Formats](#shorter-command-formats), we will be revising the 
 `AVAILABILITY` and `ANIMAL_TYPE` parameters:
 
-| Param                  | About                                                             | Values                 | 
-|------------------------|-------------------------------------------------------------------|------------------------|
-| `AVAILABILITY`         | Indicates availability of fosterer                                | `false`, `true`, `nil` |     
-| `ABLE_ANIMAL_TYPE`     | Indicates the type of animals the fosterer can foster             | `dog`, `cat`, `nil`    |     
-| `CURRENT_ANIMAL_TYPE`  | Indicates the type of animals the fosterer is currently fostering | `dog`, `cat`, `nil`    |
+| Parameter             | About                                                             | Values                 | 
+|-----------------------|-------------------------------------------------------------------|------------------------|
+| `AVAILABILITY`        | Indicates availability of fosterer                                | `false`, `true`, `nil` |     
+| `ABLE_ANIMAL_TYPE`    | Indicates the type of animals the fosterer can foster             | `dog`, `cat`, `nil`    |     
+| `CURRENT_ANIMAL_TYPE` | Indicates the type of animals the fosterer is currently fostering | `dog`, `cat`, `nil`    |
 
 
 ### Support More Animal Types
@@ -545,7 +545,7 @@ listed at index 1.
 ### Specificity of Error Messages
 
 Currently, when the user attempts to add a fosterer with an invalid combination of availability, animal name and animal type,
-the same error message with multiple details of how to rectify different errors is sometimes shown, which could be confusing.
+the same error message with multiple details of how to rectify different errors is sometimes shown, which can be confusing for the user.
 In particular, in the following three cases, the same error message is displayed:
 
 Cases:
@@ -560,10 +560,15 @@ If fosterer is NOT available and is currently fostering, animal type should be '
 If fosterer is currently unable to foster, animal type should be inputted as 'nil'.</br> 
 If availability is 'nil', animal type should be 'nil' too."</br>
 
-
 Hence, an enhancement would be to split the error message up to only show when each specific case occur, instead of grouping them
 all together into a single message. This would reduce confusion for the user and provide more convenience as the user is no longer
 required to read long error messages with details that might be irrelevant to the specific error made.
+
+| Cases                                                                                                                         | Enhanced error message                                                                                                                                                                            |
+|-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `availability/nil` but `animalType/` is not `nil`                                                                             | If availability is 'nil', animal type should be 'nil' too.                                                                                                                                        |
+| `availability/Available` with `animalType/` values set to other values which are NOT `able.Cat`, `able.Dog` or `nil`          | If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If animal type information is not available, it should be inputted as 'nil'.                                             |
+| `availability/NotAvailable` with `animalType/` values set to other values which are NOT `current.Cat`, `current.Dog` or `nil` | If fosterer is NOT available and is currently fostering, animal type should be 'current.Dog' / 'current.Cat'. If fosterer is currently unable to foster, animal type should be inputted as 'nil'. |
 
 
 --------------------------------------------------------------------------------------------------------------------
