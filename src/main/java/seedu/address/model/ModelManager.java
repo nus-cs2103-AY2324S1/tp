@@ -141,7 +141,7 @@ public class ModelManager implements Model {
             return false;
         }
     }
-
+    @Override
     public boolean hasIc(Ic nric) {
         return addressBook.hasIc(nric);
     }

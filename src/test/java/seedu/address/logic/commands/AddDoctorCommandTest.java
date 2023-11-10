@@ -28,13 +28,14 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.DoctorBuilder;
+//import seedu.address.testutil.PatientBuilder;
 
 public class AddDoctorCommandTest {
-
     @Test
     public void constructor_nullDoctor_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
+
 
     @Test
     public void execute_doctorAcceptedByModel_addSuccessful() throws Exception {

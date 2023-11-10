@@ -93,6 +93,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(patient);
         // return in patients list or in doctor list
         return patients.contains(patient);
+
     }
 
     /**
@@ -104,7 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a appointment with the same details as {@code appointment} exists in the address book.
+     * Returns true if an appointment with the same details as {@code appointment} exists in the address book.
      */
     public boolean hasAppointment(Appointment appointment) {
         requireNonNull(appointment);
@@ -240,17 +241,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Checks if an IC exists in the addressbook.
      */
     public boolean hasIc(Ic nric) {
-        boolean flag = false;
-        for (Doctor doctor : doctors) {
-            if (doctor.getIc().equals(nric)) {
-                flag = true;
-            }
-        }
-        for (Patient patient: patients) {
-            if (patient.getIc().equals(nric)) {
-                flag = true;
-            }
-        }
-        return flag;
+        return patients.containsIc(nric) || doctors.containsIc(nric);
     }
 }
