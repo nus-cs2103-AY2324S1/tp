@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 
+/**
+ * Adds meeting time(s) to a group.
+ */
 public class AddGroupMeetingTimeCommand extends Command {
     public static final String COMMAND_WORD = "addmeeting";
 
@@ -32,7 +35,7 @@ public class AddGroupMeetingTimeCommand extends Command {
     private final ArrayList<TimeInterval> toAddFreeTime;
 
     /**
-     * AddGroupFreeTimeCommand constructor.
+     * AddGroupMeetingTimeCommand constructor.
      * @param toAdd The group object to be added to.
      * @param toAddFreeTime ArrayList of time intervals to be added to group.
      */
@@ -43,6 +46,13 @@ public class AddGroupMeetingTimeCommand extends Command {
         this.toAdd = toAdd;
     }
 
+    /**
+     * Executes the AddGroupMeetingTimeCommand.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return Result of command.
+     * @throws CommandException if there is an error.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -56,6 +66,12 @@ public class AddGroupMeetingTimeCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS + status, Messages.format(toAdd)));
     }
 
+    /**
+     * Checks if an AddGroupMeetingTimeCommand object is the same as another object.
+     *
+     * @param other The other object.
+     * @return Whether the two objects are equal.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

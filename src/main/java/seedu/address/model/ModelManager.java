@@ -96,12 +96,24 @@ public class ModelManager implements Model {
 
     //=========== Person functions ===========================================================================
 
+    /**
+     * Adds the specified person to the address book.
+     *
+     * @param person Person to be added.
+     */
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    /**
+     * Deletes the specified person from the address book.
+     *
+     * @param personName String representing name of person to be deleted.
+     * @return The deleted Person.
+     * @throws CommandException if the person cannot be deleted.
+     */
     @Override
     public Person deletePerson(String personName) throws CommandException {
         Person person = addressBook.getPerson(personName);
@@ -109,12 +121,24 @@ public class ModelManager implements Model {
         return person;
     }
 
+    /**
+     * Returns whether the person is in the address book.
+     *
+     * @param person Person to be checked.
+     * @return Whether the address book contains the person.
+     */
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
     }
 
+    /**
+     * Returns whether the person is in the address book.
+     *
+     * @param personName String representing person name.
+     * @return Whether the address book contains the specified person.
+     */
     @Override
     public boolean hasPerson(Name personName) {
         requireNonNull(personName);
@@ -122,11 +146,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Assign person to group
+     * Assigns person to group.
      *
-     * @param person person to be grouped
-     * @param group  group in consideration
-     * @throws CommandException if person has already been assigned to group
+     * @param person Person to be grouped.
+     * @param group  Group in consideration.
+     * @throws CommandException if person has already been assigned to group.
      */
     private void assignGroup(Person person, Group group) throws CommandException {
         group.addPerson(person);
@@ -134,17 +158,25 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Unassign person to group
+     * Unassigns person to group.
      *
-     * @param person person to be grouped
-     * @param group  group in consideration
-     * @throws CommandException if person has already been assigned to group
+     * @param person Person to be grouped.
+     * @param group  Group in consideration.
+     * @throws CommandException if person has already been assigned to group.
      */
     private void unassignGroup(Person person, Group group) throws CommandException {
         group.removePerson(person);
         person.removeGroup(group);
     }
 
+    /**
+     * Adds person into group.
+     *
+     * @param personName String representing person name.
+     * @param groupName  String representing group name.
+     * @return Pair containing the Person and the Group.
+     * @throws CommandException if the person cannot be added to the group.
+     */
     @Override
     public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException {
         // both throw exception if not exists exact match
@@ -156,6 +188,14 @@ public class ModelManager implements Model {
         return output;
     }
 
+    /**
+     * Removes person from group.
+     *
+     * @param personName String representing person name.
+     * @param groupName  String representing group name.
+     * @return Pair containing the Person and the Group.
+     * @throws CommandException if the person cannot be removed from the group.
+     */
     @Override
     public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
         Person person = addressBook.getPerson(personName);
@@ -166,6 +206,14 @@ public class ModelManager implements Model {
         return output;
     }
 
+    /**
+     * Adds free time to a person.
+     *
+     * @param toAddPerson String representing name of person.
+     * @param toAddTime ArrayList containing all Time Intervals.
+     * @return String showing added times and clashes (if any).
+     * @throws CommandException if the times cannot be added.
+     */
     @Override
     public String addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAddPerson);
@@ -180,10 +228,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Deletes free time from person
-     * @param personName Person to delete time from
-     * @param toDeleteTime Time to be deleted
-     * @throws CommandException if time does not exist
+     * Deletes free time from person.
+     *
+     * @param personName Person to delete time from.
+     * @param toDeleteTime Time to be deleted.
+     * @throws CommandException if time does not exist.
      */
     @Override
     public String deleteTimeFromPerson(Name personName,
@@ -209,7 +258,8 @@ public class ModelManager implements Model {
 
     /**
      * Adds a group to the address book.
-     * The group must not already exist in the address book.
+     *
+     * @param group Group to be added.
      */
     public void addGroup(Group group) {
         addressBook.addGroup(group);
@@ -238,6 +288,14 @@ public class ModelManager implements Model {
         return addressBook.getGroup(groupName);
     }
 
+    /**
+     * Adds meeting time to a group.
+     *
+     * @param toAdd The group to be modified.
+     * @param toAddTime ArrayList of Time Intervals to be added.
+     * @return String showing added meeting times and clashes (if any).
+     * @throws CommandException if the times cannot be added.
+     */
     public String addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAdd);
         Group groupToAdd = addressBook.getGroup(toAdd.getGroupName());
@@ -251,10 +309,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Deletes meeting time from group
-     * @param group Group to delete time from
-     * @param toDeleteTime Time to be deleted
-     * @throws CommandException if time does not exist
+     * Deletes meeting time from group.
+     *
+     * @param group Group to delete time from.
+     * @param toDeleteTime Time to be deleted.
+     * @throws CommandException if time does not exist.
      */
     @Override
     public String deleteTimeFromGroup(Group group,
@@ -271,16 +330,24 @@ public class ModelManager implements Model {
         }
     }
 
-    public Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException {
-        Group group = addressBook.getGroup(groupName);
-        group.setGroupRemark(groupRemark);
-        return group;
-    }
-
     public TimeIntervalList getTimeFromGroup(Group group) throws CommandException {
         requireNonNull(group);
         Group toAdd = addressBook.getGroup(group.getGroupName());
         return toAdd.getTime();
+    }
+
+    /**
+     * Adds remarks to a group.
+     *
+     * @param groupName Group to be modified.
+     * @param groupRemark Remark to be added.
+     * @return The modified group.
+     * @throws CommandException if the remark cannot be added.
+     */
+    public Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException {
+        Group group = addressBook.getGroup(groupName);
+        group.setGroupRemark(groupRemark);
+        return group;
     }
 
 
