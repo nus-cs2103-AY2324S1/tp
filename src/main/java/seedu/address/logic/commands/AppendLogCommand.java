@@ -23,6 +23,9 @@ public class AppendLogCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "The last filtered values have been added onto the logger tab.";
 
+    public static final String MESSAGE_DUPLICATES =
+            "Person(s) already in list: %1$s\nThey were not appended to the log.";
+
     public static final String MESSAGE_FAILURE = "Cannot log an empty list.";
 
     public static final String MESSAGE_UNDO_ALOG_SUCCESS = "Undoing the appending to log.";
@@ -49,20 +52,19 @@ public class AppendLogCommand extends UndoableCommand {
         model.addToHistory(this);
 
 
-        boolean hasDupes = false; // tells the program if the execution encountered dupes
-        String duplicateClause = ""; // string collection of all dupes encountered
+        boolean hasDupes = false;
+        String duplicateClause = "";
         for (Person person : model.getFoundPersonsList()) {
             if (model.getLogBook().hasPerson(person)) {
                 hasDupes = true;
-                duplicateClause += " " + person.getName() + ", ID: " + person.getId() + ".";
-                continue; // skip over the addition of the current person
+                duplicateClause += "\n  " + person.getName() + ", ID: " + person.getId();
+                continue;
             }
             model.getLogBook().addPerson(person);
         }
 
         return hasDupes
-                ? new CommandResult("Person(s) already in list:" + duplicateClause
-                    + " They were not appended to the log.")
+                ? new CommandResult(String.format(MESSAGE_DUPLICATES, duplicateClause))
                 : new CommandResult(MESSAGE_SUCCESS);
 
     }

@@ -10,7 +10,7 @@
 
 HealthSync is a **powerful desktop application designed specifically for clinic assistants in small private clinics.** It offers a unique combination of a Command Line Interface (CLI) and a Graphical User Interface (GUI) to efficiently manage and organize patient details. If you're a fast typist, HealthSync can streamline your workflow and help you handle patient information more effectively than traditional GUI apps.
 
-## Why HealthSync?  
+## Why HealthSync?
 
 1. **Tailored for Front Desk Workers**: HealthSync is built with the needs of front desk workers in mind. It provides a user-friendly interface that simplifies patient management tasks, allowing you to focus on providing excellent service to patients.
 
@@ -116,6 +116,10 @@ Format: `list`
 
 Adds a patient into HealthSync, with the given patient information.
 
+> :warning: Once a patient is created, their name and ID cannot be changed later
+
+> :warning: HealthSync does not allow patients with identical names. Similarly, identical IDs are not allowed
+
 * A patient's name and IC are required when creating a new entry into HealthSync.
 * All the compulsory fields must be provided.
 * Optional fields like appointment and medical history need not be provided.
@@ -143,13 +147,13 @@ Edits an existing patient's details in HealthSync.
 
  * Edits the patient with the specified name or id.
  * If an invalid name or IC Number is passed, an error message will be logged.
- * At least one of the optional fields must be provided.
+ * At least one field to edit must be provided.
  * Existing fields will be updated to the input values.
  * If the fields do not exist, the corresponding field with details will be added.
 
 >:bulb: Update multiple fields in a single `edit` command to save time
 
-Formats:  
+Formats:
  * `edit n/NAME [field] ...`
  * `edit id/ID_NUMBER [field] ...`
  * `edit n/NAME id/ID_NUMBER [field] ...`
@@ -177,7 +181,7 @@ Deletes the specified patient or an optional fields of the patient from HealthSy
 * You can only delete one patient at a time.
 * To delete a specified field only instead of the entire patient, we indicate the field after the identification.
 
-Formats:  
+Formats:
  * `delete n/NAME [field] ...`
  * `delete id/ID_NUMBER [field] ...`
  * `delete n/NAME id/ID_NUMBER [field] ...`
@@ -189,7 +193,7 @@ Example commands:
 * `delete n/Alex Yeoh`
 * `delete n/John Doe m/`
 
->:bulb: Specify the medical history to be deleted using `m/` if it's only the medical history data that is to be deleted  
+>:bulb: Specify the medical history to be deleted using `m/` if it's only the medical history data that is to be deleted
 e.g `delete n/John Doe m/Diabetes`
 
 ![result for 'delete n/Alex Yeoh'](images/deleteResult.jpg)
@@ -205,6 +209,8 @@ Expected output when the command fails:
 
 Deletes all patients from HealthSync.
 
+>:bulb: Use the undo command to revert accidentally clearing HealthSync
+
 Format: `clear`
 
 >:bulb: Use `c` as a shortcut for `clear`
@@ -215,15 +221,15 @@ Format: `clear`
 
 Searches the patient list for all patients matching the name, IC Number or Appointment and returns their related information.
 
-* The search is case-insensitive.  
+* The search is case-insensitive.
 e.g `hans` will match `Hans`, `08-Jan-2023 12 13` will match `08-jan-2023 12 13`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Name, IC Number and Appointment can be searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * For the name, only patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-  
-Formats: 
+
+Formats:
  * `find n/NAME`
  * `find id/ID_NUMBER`
  * `find ap/APPOINTMENT`
@@ -232,7 +238,7 @@ Formats:
 
 Example commands:
 * `find n/Alex Yeoh`
-* `find id/T0123436F` 
+* `find id/T0123436F`
 * `find ap/08-Aug-2023 0000 2359`
 
 ![result for 'find id/T0123456F'](images/findidT0123456FResult.jpg)
@@ -291,7 +297,7 @@ Appends the new results of the most recent find command to the current data in t
 * The previously-saved result will remain the same.
 * The entire new result will be saved below the previously-saved result.
 * The result will be saved in the same order and format.
-* Duplicate persons will not be appended to the log. 
+* Duplicate persons will not be appended to the log.
 
 Format: `alog`
 
@@ -329,6 +335,8 @@ Expected output:
 ### Undoing a Command: `undo`
 
 Undoes an undo-able command within HealthSync.
+
+>:warning: Upon closing HealthSync, the undo history will be erased
 
 * An undo-able command include an add, clear, delete, edit, log, alog and clog command.
 * The command allows you to undo a specific number of previous commands.
@@ -372,7 +380,7 @@ Format: `exit`
 HealthSync data are saved in the hard disk automatically after any command that changes the data is executed.
 There is no need to save manually.
 
->:bulb: Only patient details inside patient list view are saved. The logger tab and command history used for `undo` are not saved after the application is closed. 
+>:bulb: Only patient details inside patient list view are saved. The logger tab and command history used for `undo` are not saved after the application is closed.
 
 ### Editing the Data File
 
@@ -383,7 +391,7 @@ Advanced users are welcome to update data directly by editing that data file.
 >:warning: **Caution:**
 >If your changes to the data file makes its format invalid, HealthSync will discard all data and start with an empty
 >data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.
-> 
+>
 >To make a backup of the file:
 >1) Locate the `healthsync.json` data file on your computer. This file is located in the same directory as `healthsync.jar`. The path is `[JAR file location]/data/healthsync.json`.
 >2) Right-click on the `healthsync.json` file, and select 'copy'.
@@ -391,7 +399,7 @@ Advanced users are welcome to update data directly by editing that data file.
 >4) Right-click in the chosen location and select 'paste'. This creates a copy of the `healthsync.json` data file in the selected backup location.
 >
 >That's it! You can now safely edit the original `healthsync.json` file.
-> 
+>
 >If anything goes wrong during the editing process, you can restore your data by copying the backup file back to its original location.
 
 ### Archiving Data Files `[coming in v5.0]`
@@ -463,7 +471,7 @@ Fielded Command Formats will generally look like this:
 
  * `identity` represents compulsory identifying fields that need to be included with for that instruction type.
    * `or` can be specified between 2 identifying fields. This means that you may exclude one of the fields
-     for that instruction type. 
+     for that instruction type.
    * See [Fields](#fields) to understand how identifying fields are specified.
 
  * `field` refer to the information fields that can be specified in each command.
@@ -483,7 +491,7 @@ Field-less Command Formats will generally look like this:
 ```
 
  * For field-less commands, only the `<KEYWORD>` will be read by HealthSync, and the rest of the data you give it
-   will be ignored. 
+   will be ignored.
    * Example: if `help 123` was typed in, HealthSync will interpret it as `help`.
 
 ### Fields

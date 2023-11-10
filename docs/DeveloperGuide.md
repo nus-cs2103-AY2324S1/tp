@@ -772,3 +772,12 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Planned Enhancements**
+
+1. Our current app is unable to handle scenarios where patients share the same name. We plan to make it possible for
+   users to add patients with the same name into HealthSync.
+2. Our current app does not handle text wrapping on the UI well, and certain text labels may be obscured when user input
+   is too long. We plan to explicitly denote the labels on the individual UI cards and allow inputs to stretch its
+   container should it be a long input, so users would be able to discern easily what elements they are looking at on
+   the UI.

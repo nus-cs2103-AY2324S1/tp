@@ -9,7 +9,7 @@ HealthSync is a desktop address book application used for teaching Software Engi
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
 
   1. Added fields like ID, Appointment and Medical Histories.
         * What it does: Allows for necessary fields to be included in the profile
@@ -64,15 +64,12 @@ Given below are my contributions to the project.
 * **Tools**:
   * Utitlised JavaFx Scene Builder for building the frontend of the project ([\#107](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/107))
 
- 
+
 ### **References**:
 
 #### _Usage of Javafx Scene Builder_
-![Usage of JavaFx Scene Builder](../images/SceneBuilder.png) 
+![Usage of JavaFx Scene Builder](../images/SceneBuilder.png)
 
 
 #### _Changes to GUI_
 ![GUI Changes](../images/HealthSyncGUI_v1.4.png)
-
-
-
