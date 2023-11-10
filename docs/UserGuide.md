@@ -10,8 +10,8 @@ title: User Guide
 
 ## Introduction
 Flashlingo is a versatile desktop application centered around learning words through flashcards. It is optimized for use via a **Command Line Interface** (CLI),
-while also providing the advantages of a **Graphical User Interface** (GUI). Tailored with a focus on beginner language
-learners, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
+while also providing the advantages of a **Graphical User Interface** (GUI). Tailored with a focus on **beginner language
+learners** with [to be discussed] proficiency in command line, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
 and the [**Command Summary**](#command-summary) section for a quick overview of the commands.
 
 
@@ -35,11 +35,15 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
      <br>
         This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
 
-**:information_source: Notes about the command format:**<br>
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the level:**<br>
 
 * The higher the `Level` is, the higher the proficiency of the user with the word is. The maximum level is 5, and it will be displayed as `word mastered`.
 
 * Words which are indicated as `word mastered` will not appear in review session.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -57,9 +61,9 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
     * For mac users, press `Command + Space` to open Spotlight search, type `Terminal`, and press `Enter`.
       ![img.png](images/Terminal.png)
     * For windows users, press `Windows + R` keys simultaneously, type `cmd` and press `Enter`.
-    2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
+    2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder. So the command is:
        <br>
-       ``cd Downloads``
+       ```cd Downloads```
        <br>
        >Click [here](https://en.wikipedia.org/wiki/Cd_(command)) for more information on how to navigate to a folder in the terminal.
     3. Simply type in `java -jar flashlingo.jar` to get started!
@@ -86,12 +90,12 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 
 **:information_source: Notes about the command format:**<br>
 
-| Notation         | Description                                                   | Example Command                                                     | Example Usage                    |
-|------------------|---------------------------------------------------------------|---------------------------------------------------------------------|----------------------------------|
-| `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                    | `delete 1`                       |
-| `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANG] [tl/TRANSLATION_LANG]` | `add w/Hello t/你好`               |
- | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                                 | `find hello, bye`                |
-| `...`            | Parameter that will not be used                               | `help ...`                                                          | `help 123` is the same as `help` |
+| Notation         | Description                                                   | Example Command                                                 | Example Usage                        |
+|------------------|---------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------|
+| `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                | `delete 1`                           |
+| `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANG] [tl/TRANSLATION_LANG]` | `add w/Hello t/你好`                   |
+ | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                             | `find hello, bye`                    |
+| `...`            | Parameter that will not be used                               | `help ...`                                                      | `abc help 123` is the same as `help` |
 
 </div>
 
@@ -103,8 +107,13 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 
 
 ### Adding a flash card: `add`
+
+<div markdown="block" class="alert alert-info">
+
 :information_source: Notes about adding words:
 * In order to give users full customizability, there's no any restriction on input, as long as it is not empty.
+
+</div>
 
 Adds a word to the flash card with its translation.
 * Creates a wild flash card.
@@ -123,37 +132,23 @@ Examples:
 | **Words with language** |  ![img.png](images/WordWithLanguage.png)   |
 
 **Note**
-* Flash cards are case-insensitive. The following three commands are the same:
-  * `add w/ciao t/hello/bye`
+* Flash cards are case-insensitive. The following commands are the same:
   * `add w/CIAO t/hello/bye`
   * `add w/ciao t/HELLO/BYE`
-> The error message:<br>
-> This flash card already exists
 * Users can add two flash cards with the **same word and translation BUT in different language**<br>
-  The following three commands can exist in the same list:
+  The following three commands will not cause duplicate error:
     * `add w/雪 t/snow`
     * `add w/雪 t/snow wl/Chinese tl/English`
     * `add w/雪 t/snow wl/Japanese tl/English`
-* Users are not allowed to add a flash card with the **same word and translation**<br>
-  The following command will not be added to the list:
+* Users are allowed to add a flash card with the **empty word language or translation language**<br>
+> Users do not need to specify the language if the language is blank (`""`)
+---
+* Users are **not allowed** to add a flash card with the **same word and translation**<br>
+  The following command will cause duplicate error:
     * `add w/sorry t/sorry`
     * `add w/sorry t/SORRY`
-> The error message:<br>
-> Word and translation should be different.
-* Users are not allowed to add a flash card with the **empty word or translation**<br>
-  The following command will not be added to the list:
-    * `add w/ t/sorry`
-    * `add w/sorry t/`
-    * `add w/ t/`
-> The error message:<br>
-> Word/Translation cannot be empty
-* Users are allowed to add a flash card with the **empty word language or translation language**<br>
-  The following command will be added to the list:
-    * `add w/sorry t/sorry wl/ tl/English`
-    * `add w/sorry t/sorry wl/Chinese tl/`
-    * `add w/sorry t/sorry wl/ tl/`
-> The default language for both word and translation are blank (`""`)<br>
-> Users do not need to specify the language if the language is blank (`""`)
+* Users are **not allowed** to add a flash card with the **empty word or translation**<br>
+
 
 ### Deleting a flash card : `delete`
 
@@ -173,8 +168,7 @@ Output:
 
 ### Editing a flash card : `edit`
 
-Edits the word and its translation at the given index.
-* Edits a wild flash card.
+Edits the specified flash card at the given index.
 
 [Command Format](#commands): `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
 
@@ -201,7 +195,7 @@ Output:
 ### Finding a flash card : `find`
 
 Finds words whose original word or translation contains the given keyword.
-* Finds a flash card.
+
 * The search is insensitive. e.g `look` will match `Look`
 
 [Command Format](#commands): `find <KEYWORDS...>`
@@ -236,8 +230,8 @@ Output:
 ### Getting list for revision : `review`
 
 Displays the flash cards of all the words to be reviewed that day
-    * The review command will present flash cards selected by Flash Lingo based on your level, utilizing the Leitner system.
-* If you wish to view all your saved flash cards without the Leitner system's selection criteria, please use the list command.
+* The review command will present flash cards selected by Flash Lingo based on your level, utilizing the Leitner system.
+* If you wish to view all your saved flash cards without the [Leitner system's](https://en.wikipedia.org/wiki/Leitner_system#) selection criteria, please use the `list` command.
 
 [Command Format](#commands): `review ...`
 
@@ -245,13 +239,13 @@ Output:
 ![img.png](images/ReviewSuccess.png)
 
 **Note:**
-* The error message `0 flash card(s) listed!` occurs when:
+* The message `0 flash card(s) listed!` occurs when:
     * There are no flash cards scheduled for today's review.
-    * You have finished reviewing all flash cards for the day.
+    
 
 ###  Starts review session : `start`
 
-To start a review session, user simply needs to type in `start` command.
+Starts a new review session.
 
 [Command Format](#commands): `start ...`
 
@@ -264,7 +258,7 @@ Output: `Review Session has been started.`
 
 ### Ending the current review session : `end`
 
-Ends the current flash card session and returns to the main menu.
+Ends the current review session and returns to the main menu.
 
 [Command Format](#commands): `end ...`
 
@@ -286,15 +280,12 @@ Examples:![img.png](images/Reveal.png)
 
 ### Indicating user has memorized the word : `yes`
 
-Marks the word as memorized and advances the word into the next retention stage. If there are still remaining words to review,
+Marks the word as memorized and advances the word into the next level. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
 [Command Format](#commands): `yes ...`
 
 Output: ![img.png](images/Yes.png)
-or
-![img.png](images/Yes2.png)
-if there's no word left in the review session.
 
 **Note**
 * Pressing `yes` button will have the same effect.
@@ -307,8 +298,7 @@ they will be automatically shown in the section below. Otherwise, review session
 [Command Format](#commands): `no ...`
 
 Output: ![img.png](images/No.png)
-or
-![img.png](images/No2.png)
+
 if there's no word left in the review session.
 **Note**
 * Pressing `no` button will have the same effect.
@@ -483,7 +473,7 @@ Then, use the `load` command to import the data.
 | ------------------------------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **CLI**                               | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system. You can check the tutorial [**here**](https://tutorials.codebar.io/command-line/introduction/tutorial.html)                                                                             |
 | **GUI**                               | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                                                                  |
-| **JSON (JavaScript Object Notation)** | JSON is a lightweight data format commonly used for representing structured data.                                                                                                                                                                                                                                               |
+| **JSON** | JSON (JavaScript Object Notation) is a lightweight data format commonly used for representing structured data.                                                                                                                                                                                                                                               |
 | **Level**                             | The level represents the proficiency with a specific flashcard. The higher the `Level` is, the higher the proficiency of the user with the word is.                                                                                                                                                                             |
 | **Review Session**                    | A review session is a designated phase within the system where words requiring review are presented individually. Users can confirm their understanding or signal a need for further review.                                                                                                                                    |
 | **Forgetting Curve**                  | The forgetting curve illustrates the decline in memory retention over time if information is not periodically reviewed or reinforced. It demonstrates a rapid loss of information shortly after learning, with the most significant decline in the initial hours or days. The rate of forgetting gradually decreases over time. |
