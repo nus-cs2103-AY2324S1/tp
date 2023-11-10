@@ -1010,6 +1010,8 @@ Command: `list-freetime`</br>
 
 ### Listing all interviews for today
 Command: `list-i-today`
+1. Listing all interviews today
+    1. Test case: `list-a`<br>Expected: Shows all interviews scheduled for today (i.e. the date when the command was executed) in the interview list. Success message is displayed.
 
 ### Marking an interview as done
 Command: `mark`
