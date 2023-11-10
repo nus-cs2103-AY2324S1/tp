@@ -152,7 +152,7 @@ public class Person {
      * Intended for use with predicates generated through the find command.
      *
      * @return a Map; keys include all publicly gettable fields as well as all tags,
-     * and values are values of the respective fields, or {@code null} for tags.
+     *     and values are values of the respective fields, or {@code null} for tags.
      */
     public Map<String, String> getFieldsAndAttributes() {
         HashMap<String, String> map = new HashMap<>();
