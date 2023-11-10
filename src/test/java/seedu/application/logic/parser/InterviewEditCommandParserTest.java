@@ -2,7 +2,7 @@ package seedu.application.logic.parser;
 
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.commands.CommandTestUtil.*;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_SOURCE;
+import static seedu.application.logic.parser.CliSyntax.*;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.application.testutil.TypicalIndexes.*;
@@ -10,6 +10,7 @@ import static seedu.application.testutil.TypicalIndexes.*;
 import org.junit.jupiter.api.Test;
 
 import seedu.application.commons.core.index.Index;
+import seedu.application.logic.Messages;
 import seedu.application.logic.commands.InterviewEditCommand;
 import seedu.application.model.job.interview.InterviewType;
 import seedu.application.testutil.EditInterviewDescriptorBuilder;
@@ -115,5 +116,31 @@ class InterviewEditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_failure() {
+        // invalid followed by valid
+        Index targetIndex = INDEX_THIRD;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_JOB_SOURCE + targetIndex.getOneBased()
+                + INVALID_INTERVIEW_DATETIME_DESC + INTERVIEW_DATETIME_DESC_CHEF;
+
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INTERVIEW_DATETIME));
+
+        // valid followed by invalid
+        userInput = targetIndex.getOneBased() + " " + PREFIX_JOB_SOURCE + targetIndex.getOneBased()
+                + INTERVIEW_TYPE_DESC_CLEANER + INVALID_INTERVIEW_TYPE_DESC;
+
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INTERVIEW_TYPE));
+
+        // multiple valid fields repeated
+        userInput = targetIndex.getOneBased() + " " + PREFIX_JOB_SOURCE + targetIndex.getOneBased()
+                + INTERVIEW_ADDRESS_DESC_CLEANER + INTERVIEW_ADDRESS_DESC_CLEANER + INTERVIEW_ADDRESS_DESC_CHEF;
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INTERVIEW_ADDRESS));
+
+        // multiple invalid values
+        userInput = targetIndex.getOneBased() + " " + PREFIX_JOB_SOURCE + targetIndex.getOneBased()
+                + INVALID_INTERVIEW_DATETIME_DESC + INVALID_INTERVIEW_DATETIME_DESC;
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INTERVIEW_DATETIME));
     }
 }
