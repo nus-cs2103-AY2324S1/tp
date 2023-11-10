@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -11,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Level;
@@ -104,11 +104,14 @@ public class EditCommandParser implements Parser<EditCommand> {
             throws ParseException {
         assert medicalHistories != null;
 
+        if (medicalHistories.size() == 1 && medicalHistories.contains("")) {
+            throw new ParseException(MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT);
+        }
+
         if (medicalHistories.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> medicalHistorySet = medicalHistories.size() == 1 && medicalHistories.contains("")
-                ? Collections.emptySet() : medicalHistories;
-        return Optional.of(ParserUtil.parseMedicals(medicalHistorySet));
+
+        return Optional.of(ParserUtil.parseMedicals(medicalHistories));
     }
 }

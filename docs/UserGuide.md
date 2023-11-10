@@ -121,6 +121,10 @@ Adds a patient into HealthSync, with the given patient information.
 * All the compulsory [fields](#fields) must be provided.
 * Optional fields like [Appointment](#appointment) and [medical history](#medical-history) need not be provided.
 
+> :warning: Once a patient is created, their name and ID cannot be changed later
+> :warning: HealthSync does not allow patients with identical names. Similarly, identical IDs are not allowed
+
+
 [Format](#command-format):
 `add n/NAME id/ID_NUMBER p/PHONE_NUMBER e/EMAIL_ADDRESS a/ADDRESS [m/MEDICAL_HISTORY]... [ap/APPT]`
 
@@ -216,6 +220,8 @@ Deletes all patients from HealthSync.
 
 [Format](#command-format):
 `clear`
+
+>:bulb: Use the undo command to revert accidentally clearing HealthSync
 
 >:bulb: Use `c` as a shortcut for `clear`
 
@@ -353,7 +359,9 @@ Expected output:
 
 Undoes the last undo-able action within HealthSync.
 
-* An undo-able action include the `add`, `clear`, `delete`, `edit`, `log`, `alog` and `clog` commands.
+>:warning: Upon closing HealthSync, the undo history will be erased
+
+* An undo-able action includes the `add`, `clear`, `delete`, `edit`, `log`, `alog` and `clog` commands.
 * `undo` allows you to undo a specific number of previous commands if you specify a number behind the keyword.
 * `undo` can only undo the previous commands provided
   it does not exceed the size of the [command history stack](#command-history-stack).
