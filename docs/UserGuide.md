@@ -306,6 +306,8 @@ Format: `add`
 *  The restrictions imposed on what makes a valid fosterer, as explained in the section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-main-window-add), still applies in this alternative way of adding a fosterer.
 </div>
 
+Here is the profile page you can see after entering <code>add</code>: 
+
 ![Profile](images/screenshots/ProfilePage.png)
 
 To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page).  
@@ -395,15 +397,35 @@ To learn more about profile page, please refer to the section [User Interface: t
 
 #### Editing a fosterer’s details in profile page:
 
-1. Enter a fosterer’s profile page with `view INDEX`.
-2. Type in the name of the field you want to edit onto the command box, for example `name`. This will make the textbox visible next to the `name` field and automatically set the text cursor to the textbox.
-3. Edit the original value - if it exists - to a new value, for example `John`.
-4. Press Enter to return the text cursor back to the command box.
+Here is a step-by-step explanation of how you can edit a fosterer's details in profile page. 
+
+1. Enter a fosterer’s profile page with `view INDEX`. e.g. `view 1`.
+
+![view 1](images/screenshots/View1.png)
+
+<br>
+
+2. Type in the name of the field you want to edit onto the command box. This will make the textbox visible next to the field and automatically set the text cursor to the textbox. e.g. Enter 'name'.
+
+![enter name](images/screenshots/EnterName.png)
+
+<br>
+
+3. Edit the original value to a new value. e.g. From Alex Yeoh to 'Bob Yeoh'.
+
+![change name](images/screenshots/ChangeNameToBobYeoh.png)
+
+<br>
+
+4. Press Enter to return the text cursor back to the command box. This makes the textbox disappear. 
+
+![press enter](images/screenshots/BobYeoh.png)
+
+<br>
+
 5. Type in `save` command and Enter to save the changes of the fosterer. 
 
-Example:
-* `list` followed by `view 2`
-  * views the profile of the 2nd fosterer in the address book.
+![save bob](images/screenshots/SaveBobYeoh.png)
 
 <br> 
 
@@ -415,12 +437,34 @@ Saves changes in details of the fosterer made in the profile page.
 
 **:exclamation: Important:**<br>
 
-* This command is only available while in fosterer profile page.
-* This command works only in a profile page, which appears after executing a view command.
+This command is only available while in fosterer profile page.
+This command works only in a profile page, which appears after executing a view command.
 
 </div>
 
 Format: `save`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
+*  Entering <code>save</code> in [the profile of a new fosterer](#adding-a-fosterer-through-the-profile-page-add) saves the new fosterer and exits the profile page.
+*  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-detail-through-the-profile-page-edit) saves the changes but does not exit the profile page, in case you want to edit more details. 
+</div>
+
+Here is the result of entering <code>save</code> a new fosterer name John: 
+
+![Save a new fosterer](images/screenshots/SaveNewFosterer.png)
+
+As you can see, entering <code>save</code> for a new fosterer exits the profile page. 
+
+<br>
+
+Here is the result of entering <code>save</code> after changing the name from John to John Kim: 
+
+![Save existing fosterer](images/screenshots/SaveExistingFosterer.png)
+
+As you can see, entering <code>save</code> for an already existing fosterer does not exit the profile page. 
 
 <br> 
 
@@ -450,8 +494,6 @@ Parameters:
 **:bulb: Tip:**<br>
 
 * The index of the fosterer has to be provided, however the number of parameters to be edited can vary from zero to all fields.
-* `NAME`, `PHONE_NUMBER`, `EMAIL`, and `ADDRESS` are compulsory.<br/>
-  Empty compulsory values disable the save command that saves the edited fosterer data.
 
 </div>
 
@@ -466,9 +508,9 @@ Examples:
 *  `find` or `list` followed by `edit 3 n/John` 
    * edits the name of the 3rd fosterer in the address book to John.
 *  `find` or `list` followed by `edit 1 p/12345678 animal/Bob` 
-  * edits the phone number and the pet name of the 1st fosterer in the address book to 12345678 and Bob respectively.
+   * edits the phone number and the pet name of the 1st fosterer in the address book to 12345678 and Bob respectively.
 *  `find` or `list` followed by `edit 2` 
-  * changes the view to the profile page of the 2nd fosterer in the address book since parameters are not provided.
+   * changes the view to the profile page of the 2nd fosterer in the address book since parameters are not provided.
 
 <div markdown="span" class="alert alert-warning">
 
@@ -478,7 +520,7 @@ Edit may cause information loss.
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 </div>
 
-<br> 
+<br>
 
 ### Editing a fosterer's detail through the profile page: `edit`
 
@@ -515,7 +557,10 @@ profile page.
 Edit may cause information loss. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 </div>
+
 <br/>
+
+Here is an example of entering <code>view 1</code> to view a fosterer name Benson Meie who is currently at index 1:
 
 ![Example profile 1](images/screenshots/EditExample.png)
 
