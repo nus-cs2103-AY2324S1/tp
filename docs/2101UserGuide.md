@@ -139,7 +139,7 @@ Examples:
 
 <hr class="command-separator">
 
-#### Edits an Event : `editEvent`
+#### Edit an Event : `editEvent`
 
 Edits the event at the specified index with the specified attributes.
 
