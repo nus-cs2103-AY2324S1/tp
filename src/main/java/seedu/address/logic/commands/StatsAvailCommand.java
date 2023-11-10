@@ -28,7 +28,7 @@ public class StatsAvailCommand extends StatsCommand {
      */
     protected List<Person> getAvailableFosterers(List<Person> fosterers) {
         return fosterers.stream()
-                .filter(fosterer -> fosterer.isAvailableFosterer())
+                .filter(Person::isAvailableFosterer)
                 .collect(Collectors.toList());
     }
 

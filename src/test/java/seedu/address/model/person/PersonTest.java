@@ -188,7 +188,7 @@ public class PersonTest {
     }
 
     @Test
-    public void isAvailableFosterer_NotAvailable_restNil() {
+    public void isAvailableFosterer_notAvailable_restNil() {
         Person fosterer = new PersonBuilder(ALICE)
                 .withAvailability(Availability.NOT_AVAILABLE_WORD)
                 .withAnimalType(Person.NIL_WORD, Availability.NOT_AVAILABLE)
@@ -198,7 +198,7 @@ public class PersonTest {
     }
 
     @Test
-    public void isAvailableFosterer_NotAvailable_animalTypeKnown() {
+    public void isAvailableFosterer_notAvailable_animalTypeKnown() {
         Person fosterer = new PersonBuilder(ALICE)
                 .withAvailability(Availability.NOT_AVAILABLE_WORD)
                 .withAnimalType(AnimalType.CURRENT_CAT_WORD, Availability.NOT_AVAILABLE)
@@ -259,7 +259,7 @@ public class PersonTest {
     }
 
     @Test
-    public void isCurrentFosterer_available_notAvail_restNil() {
+    public void isCurrentFosterer_notAvailable_restNil() {
         Person fosterer = new PersonBuilder(ALICE)
                 .withAvailability(Availability.NOT_AVAILABLE_WORD)
                 .withAnimalType(Person.NIL_WORD, Availability.NOT_AVAILABLE)
@@ -270,7 +270,7 @@ public class PersonTest {
     }
 
     @Test
-    public void isCurrentFosterer_available_notAvail_animalTypeKnown() {
+    public void isCurrentFosterer_notAvailable_animalTypeKnown() {
         Person fosterer = new PersonBuilder(ALICE)
                 .withAvailability(Availability.NOT_AVAILABLE_WORD)
                 .withAnimalType(AnimalType.CURRENT_CAT_WORD, Availability.NOT_AVAILABLE)

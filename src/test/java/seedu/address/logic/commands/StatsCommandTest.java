@@ -8,10 +8,14 @@ import org.junit.jupiter.api.Test;
 public class StatsCommandTest {
 
     @Test
-    public void calculatePercentage() {
+    public void calculatePercentage_demomZero() {
         assertThrows(AssertionError.class, () -> {
             StatsCommand.calculatePercentage(1, 0);
         });
+    }
+
+    @Test
+    public void calculatePercentage() {
 
         assertEquals(0.0, StatsCommand.calculatePercentage(0, 10));
         assertEquals(3 / (double) 10 * 100, StatsCommand.calculatePercentage(3, 10));

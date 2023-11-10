@@ -186,8 +186,6 @@ public class Person {
 
     /**
      * Returns true if person is an available fosterer.
-     *
-     * @return
      */
     public boolean isAvailableFosterer() {
         return availability.equals(Availability.AVAILABLE);
