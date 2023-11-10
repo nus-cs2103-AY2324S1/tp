@@ -24,6 +24,9 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.testutil.EditCardDescriptorBuilder;
 
 public class EditCommandParserTest {
+
+    // @@author GSgiansen-reused
+    // Inspired from AB-3 EditCommandParserTest
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =

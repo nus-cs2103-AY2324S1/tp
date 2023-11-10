@@ -25,6 +25,9 @@ import seedu.address.model.card.Card;
 import seedu.address.testutil.CardBuilder;
 
 public class AddCommandParserTest {
+
+    // @@author GSgiansen-reused
+    // Inspired from AB-3 AddCommandParserTest
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
