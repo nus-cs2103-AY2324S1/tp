@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- [Opencsv](https://opencsv.sourceforge.net/)
+- [fx-yearmonth-picker](https://github.com/Alipsa/fx-yearmonth-picker)
 
 ---
 
@@ -74,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CardListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -287,13 +288,7 @@ The "import transactionbook" and "import addressbook" features shall be designed
 
 ---
 
-## **Appendix: Requirements**
-
-# Developer Guide
-
-## Introduction
-
-Welcome to the development guide for **Tran$act**, a command-line interface (CLI) application designed to help accountants in small businesses efficiently manage their financial transactions and related data. This guide provides detailed instructions for developers on how to build and maintain Tran$act, ensuring it meets the needs and expectations of our target users.
+# **Appendix: Requirements**
 
 ## Target User Profile
 
@@ -308,7 +303,10 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 - **Reasonably comfortable with CLI apps**: Users should have a basic understanding of using command-line applications.
 
 - **Required to produce financial reports**: Tran$act can automatically produce financial reports given the transactions that have been entered.
--
+
+**Value Proposition**:
+Quickly add company revenue and expenses via the CLI. Easily keep track of company profits and visualize them
+
 
 ## User Stories
 
@@ -594,7 +592,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 
 **Description:**
 
-1. The accountant selects the option to delete all address book contacts.
+1. The accountant selects the option in the menu bar to delete all address book contacts.
 2. The system permanently deletes all contacts from the address book.
 
 ## Non-functional Requirements (NFR)
@@ -607,12 +605,10 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 ## Glossary
 
 - **Accountant**: A professional who is responsible for managing a company/institution's financial records.
-- **Expense**: Costs incurred, including staff salaries and product costs.
 - **Mainstream OS**: Windows, Linux, Unix, OS-X.
 - **Revenue**: Money received, such as sales revenue.
+- **Expense**: Costs incurred, including staff salaries and product costs.
 - **Transaction**: An exchange of money, which includes buying and selling activities.
-- **Transactor/Party**: The person or entity that carried out the transaction or is related to it.
-- **Transactor/Party**: Person or group that carried out the transaction or is related to the transaction.
 
 ---
 
@@ -620,9 +616,9 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </div>
 
 ### Launch and shutdown
@@ -631,38 +627,32 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the overview GUI with a set of sample transactions loaded in. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delstaff 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+1. Deleting a person
+   1. Prerequisites: View the staff list using the `view s` command.
+   2. Test case: `delstaff 1`
+      Expected: Staff with id 1 is deleted from the list. Details of the deleted contact shown in the status message.
+   3. Test case: `delstaff 100`
+      Expected: No staff is deleted. Error details shown in the status message.
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is not associated with any staff id)
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
