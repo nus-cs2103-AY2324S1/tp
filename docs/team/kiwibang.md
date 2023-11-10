@@ -37,14 +37,15 @@ InterviewHub is a desktop application that helps engineering hiring managers to 
 * **Contributions to the UG**:
     * Created and added the `List of accepted date formats`
     * Added complete documentation for the following features: `list-freetime DATE`, `list-i-done`, `list-i-not-done`, `sort-time`
+    * Added screenshots for the following features: `list-i-done`, `list-i-not-done`, `sort-time`
 * **Contributions to the DG**:
-    * Added description, implementation, execution process, and design considerations for the following sections: `Time feature`, `List all free timing for a given day feature`, `List interviews done/not done feature`, `Sort interview feature`
+    * Added description, implementation, sequence diagrams, execution process, and design considerations for the following sections: `parseDate API`, `List all free timing for a given day feature`, `List interviews done/not done feature`, `Sort interview feature`
     * Added skeleton for the section: `Appendix: Instructions for manual testing`
     * Added test cases for the following commands in the section `Appendix: Instructions for manual testing`: `Listing all free timing for the given day`, `Listing all interviews for today`, `Listing all completed interview`, `Listing all incomplete interview`, and `Sorting the interview list by start-time`
 * **Contributions to team-based tasks**:
     * Maintain the issue tracker (e.g. assign priority levels to tasks, assign individuals to issues)
 * **Review/mentoring contributions**:
-    * Team PRs reviewed: [#31](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/31), [#34](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/34), [#58](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/58)
+    * Examples of team PRs reviewed: [#31](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/31), [#34](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/34), [#58](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/58)
     * Helped team members with testing and debugging their code.
 * **Contributions beyond the project team**:
     * Other team PR reviewed: [CS2103T-W08-1 #42](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/42) 

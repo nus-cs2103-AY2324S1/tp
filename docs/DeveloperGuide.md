@@ -168,7 +168,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The find interview by job title feature allows users to query the list of added interview for interviews that match the job title via the command `find-i KEYWORD [MORE_KEYWORD]... `, where `KEYWORD` must not
+The find interview by job role feature allows users to query the list of added interview for interviews that match the job role via the command `find-i KEYWORD [MORE_KEYWORD]... `, where `KEYWORD` must not
 be an empty string.
 
 The `find-i` command is facilitated by the `FindInterviewCommand`, `FindInterviewCommandParser`, and `JobContainsKeywordsPredicate`.
@@ -311,46 +311,30 @@ This feature is implemented though the `TimeParser` class. This class contains s
   
   - The `dateOnly` parameter is a flag to indicate how to parse the given `date`. If `dateOnly` is set to false, then the TimeParser will parse valid dates that are in the list of accepted date (without time) formats. Otherwise, if `dateOnly` is set to true, then the TimeParser will parse valid dates that are in the list of accepted date (with time) formats.
   - Accepted time formats:
-      * DD/MM/YYYY and time:
-          * `16 May 2024 1515`
-          * `16 May 2024 3.15pm`
-          * `16 May 2024 3pm`
-          * `16-05-2024 1515`
-          * `16-05-2024 3.15pm`
-          * `16-05-2024 3pm`
-          * `16-05-24 1515`
-          * `16-05-24 3.15pm`
-          * `16-05-24 3pm`
-          * `16/05/2024 1515`
-          * `16/05/2024 3.15pm`
-          * `16/05/2024 3pm`
-          * `16/05/24 1515`
-          * `16/05/24 3.15pm`
-          * `16/05/24 3pm`
-      * MM, DD and time:
-          * `16 May 1515`
-          * `16 May 3.15pm`
-          * `16 May 3pm`
-          * `16 January 1515`
-          * `16 January 3.15pm`
-          * `16 January 3pm`
-          * `16/5 1515`
-          * `16/5 3.15pm`
-          * `16/5 3pm`
-          * `16/05 1515`
-          * `16/05 3.15pm`
-          * `16/05 3pm`
-    - Accepted date formats
-      * DD/MM/YYYY:
-        * `16-05-2024`
-        * `16/05/2024`
-      * DD/MM:
-        * `16/05`
-        * `16 May`
-          * _Must be a prefix of a valid month of at least 3 characters_
-
-  - The sequence diagram shown below shows how the API is called by other classes:
-
+    * DD/MM/YYYY and time:
+        * `16 May 2024 TIME`
+        * `16-05-2024 TIME`
+        * `16-05-24 TIME`
+        * `16/05/2024 TIME`
+        * `16/05/24 TIME`
+    * MM, DD and time:
+        * `16 May TIME`
+        * `16 January TIME`
+        * `16/5 TIME`
+        * `16/05 TIME`
+    * The `TIME` placeholder can be replaced with the formats below:
+        * `1515`
+        * `3.15pm`
+        * `3pm`
+  - Accepted date formats
+    * DD/MM/YYYY:
+      * `16-05-2024`
+      * `16/05/2024`
+    * DD/MM:
+      * `16/05`
+      * `16 May`
+        * _Must be a prefix of a valid month of at least 3 characters_
+  - The Sequence Diagram below illustrates how other classes interact with `TimeParser` when `parseDate(date, false)` is called.
     ![TimeParserSequenceDiagram.png](images/TimeParserSequenceDiagram.png)
 
 #### How is the command executed
@@ -397,6 +381,9 @@ This feature is implemented though the `TimeParser` class. This class contains s
 #### Implementation
 The list free times for a given day feature allows the user to list all the blocks of time that are not taken by a scheduled interview. This command is in the format `list-freetime DATE` where `DATE` is a valid date string.
 
+The Sequence Diagram below illustrates the interactions within the `Logic` component when `execute("list-freetime 12/12/2099")` is called.
+![images/ListFreeTimeSequenceDiagram.png](images/ListFreeTimeSequenceDiagram.png)
+
 The `list-freetime DATE` command is facilitated by the `ListFreeTimeCommand`, `ListFreeTimeCommandParser`, along with the other internal classes omitted for brevity.
 #### How is the command executed
 1. The user inputs the `list-freetime DATE`
@@ -425,7 +412,7 @@ Aspect: How the command finds free times:
     * Cons:
         * The `ListFreeTimeCommand` will have to call the `getAddressBook` method of the `ModelManager` object instance, and then use the getter method of the `AddressBook` object instance. Violates the _Law of Demeter_ principle since the methods of a stranger (i.e. `AddressBook`) is being called, which `ListFreeTimeCommand` is not closely related to
         * Increases coupling since `ListFreeTimeCommand` now has a dependency with `AddressBook`
-
+      
 ### List all interviews for today feature
 
 #### Implementation
@@ -438,6 +425,9 @@ Aspect: How the command finds free times:
 
 #### Implementation
 The list interviews done/not done feature allows the user to see all the interviews that are done or not done in a single command. The command format is `list-i-done` to show all the interviews that are done, and `list-i-not-done` to show all interviews that are not done.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component when `execute("list-i-done")` is called.
+![ListIDone.png](images/ListIDoneSequenceDiagram.png)
 
 #### How is the command executed
 1. The user inputs `list-i-done` or `list-i-not-done` 
@@ -505,6 +495,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 The sort interview feature allows the user to sort all the interviews that have scheduled via the commands `sort-SORT_PARAMETER`, where `SORT_PARAMETER` can either be `rate` or `time`.
 
 The `sort` command is facilitated by the `SortRateCommand` and the `SortTimeCommand`. It enables the user to sort all the scheduled interviews by rating or timing. For rating, the interviews will be sorted in descending order of rating. For interview times, the interviews will be sorted in ascending chronological order of start time.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component when `execute("sort-rate")` is called.
+![images/SortISequenceDiagram.png](images/SortISequenceDiagram.png)
 
 #### How is the command executed
 1. The user inputs the `sort-rate` or `sort-time` command
@@ -792,6 +785,10 @@ as N/A and the subsequent user rating will be the same as the current model.
 name with the exact same string to be added. As the interview is identifiable mostly based on the name, allowing the same name string will result in
 confusion with the interview object. The future plan is to increase the visibility of the connection between applicant and interview, to remove dependency on the name itself.
 On the other hand, the duplication of phone number and email will be handled in future implementation and no longer allowing such duplication to be entered.
+
+6. The current implementation of find-i does not allow searching for an empty string, which represents the job role when an applicant is applying to the
+company in general. We plan to allow find-i to search for "" (empty string) and " " (whitespaces) so that interviews with applicants that are applying to the
+company in general can be found with the command.
 
 --------------------------------------------------------------------------------------------------------------------
 
