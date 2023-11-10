@@ -59,6 +59,8 @@ CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to man
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<hr class="feature-class-separator">
+
 ### Member commands
 
 #### Create a Member: `createMember`
@@ -71,6 +73,8 @@ Format: `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRE
 
 Examples:
 * `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader` creates a member `CHU WEI RONG` in CCACommander.
+
+<hr class="command-separator">
 
 #### Delete a Member : `deleteMember`
 
@@ -86,6 +90,8 @@ Examples:
 * `deleteMember 1 ` deletes the 1st member in the member list.
 * `deleteMember 10 ` deletes the 10th member in the member list.
 
+<hr class="command-separator">
+
 #### Edit a Member: `editMember`
 Edits the member at the specified index with the specified fields.
 
@@ -100,6 +106,8 @@ Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/
 Examples:
 * `editMember 1 a/RH t/Musician` edits the address and the tag fields of the 1st member in the member list.
 
+<hr class="feature-class-separator">
+
 ### Event commands
 
 #### Create an Event : `createEvent`
@@ -112,6 +120,8 @@ Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
 
 Examples:
 * `createEvent n/Party l/Raffles Hall d/2023-09-16` creates an event `Party` in CCACommander.
+
+<hr class="command-separator">
 
 #### Delete an Event: `deleteEvent`
 
@@ -126,6 +136,8 @@ Format: `deleteEvent EVENT_INDEX`
 Examples:
 * `deleteEvent 1` deletes the 1st event in the event list.
 * `deleteEvent 10` deletes the 10th event in the event list.
+
+<hr class="command-separator">
 
 #### Edits an Event : `editEvent`
 
@@ -146,6 +158,8 @@ Examples:
   Surprise Party`, the location to `UTR`, the date to `2023-10-31` and the tag to `sem1`.
 * `editEvent 3 l/UCC Theater` edits the 3rd event in the event list to change the location to `UCC Theater`.
 
+<hr class="feature-class-separator">
+
 ### Enrolment commands
 
 #### Enrol a Member to an Event: `enrol`
@@ -163,6 +177,8 @@ Examples:
 * `enrol m/1 e/5 h/3 r/did planning` enrols the 1st member in the member list to the 5th event in the event list, where the member had 3 hours of contributions to that event and has a remark stating that the member "did planning".
 * `enrol m/5 e/1` enrols the 5th member in the member list to the 1st event in the event list.
 
+<hr class="command-separator">
+
 #### Unenrol a Member from an Event: `unenrol`
 
 Unenrol a member from an event.
@@ -179,6 +195,8 @@ Examples:
 * `unenrol m/1 e/5` unenrols the 1st member in the member list from the 5th event in the event list.
 * `unenrol m/5 e/1` unenrols the 5th member in the member list from the 1st event in the event list.
 
+<hr class="command-separator">
+
 #### Edit an enrolment: `editEnrolment`
 Edits the enrolment details of a specified member at a specified event with the specified attributes.
 
@@ -194,6 +212,8 @@ Format: `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMAR
 Examples:
 * `editEnrolment m/1 e/1 h/0 r/Absent due to Covid` edits the enrolment of the 1st member in the member list for the 1st event of the event list to be `0` hours and have a remark `Absent due to Covid`.
 
+<hr class="feature-class-separator">
+
 ### View commands
 
 #### List all Members and all Events : `list`
@@ -204,6 +224,8 @@ Format: `list`
 
 A GUI similar to the one below will be shown after entering the command.
 ![list](images/list.png)
+
+<hr class="command-separator">
 
 #### View Events of Member : `viewMember`
 
@@ -223,6 +245,8 @@ A GUI similar to the one below will be shown after entering the command if the m
 The hours and remarks for each event is reflected here.
 ![viewMember](images/viewMember.png)
 
+<hr class="command-separator">
+
 ### View Members of Event : `viewEvent`
 
 Lists all the members of a specified event index.
@@ -240,6 +264,8 @@ A GUI similar to the one below will be shown after entering the command if the e
 The hours and remarks for each member is reflected here.
 ![viewEvent](images/viewEvent.png)
 
+<hr class="feature-class-separator">
+
 ### Utility commands
 
 #### Find Member in member list : `findMember`
@@ -255,6 +281,8 @@ Examples:
 * `findMember alice` displays the member(s) whose name(s) contain 'alice'
 * `findMember alice bob charlie` displays the member(s) whose name(s) contain 'alice', 'bob' and/or 'charlie'.
 
+<hr class="command-separator">
+
 #### Find Event in event list : `findEvent`
 
 Finds and lists event(s) which name(s) contain the provided `KEYWORD`.
@@ -267,6 +295,8 @@ Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findEvent party` displays the event(s) which name(s) contain 'party'
 * `findEvent party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
+
+<hr class="command-separator">
 
 #### Undoing a command: `undo`
 
@@ -286,16 +316,22 @@ List of commands that can be undone:
 * `unenrol`
 * `editEnrolment`
 
+<hr class="command-separator">
+
 #### Redoing a command: `redo`
 
 Redoes a command that the user has undone previously.
 
 Format: `redo`
 
+<hr class="command-separator">
+
 #### Clear all Members and Events: `clear`
 Clears all Member and Event entries from CCACommander.
 
 Format: `clear`
+
+<hr class="command-separator">
 
 #### Help: `help`
 
@@ -303,11 +339,15 @@ Displays a pop-out window that shows a link to this User Guide.
 
 Format: `help`
 
+<hr class="command-separator">
+
 #### Exit: `exit`
 
 Closes CCACommander and its display window.
 
 Format: `exit`
+
+<hr class="command-separator">
 
 #### Recall previous commands
 
@@ -324,6 +364,8 @@ Example:
 
 Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, users will have to re-navigate from the most recent command as it was treated as an edit or entry of command.
 </div>
+
+<hr class="command-separator">
 
 #### Saving the data
 
