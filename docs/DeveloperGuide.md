@@ -949,8 +949,19 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
+   1. If there is no saved data, the application will open with a new data file loaded with sample data
+   2. To do this:
+      1. Go to the location of the saved data. The location of the saved data can be found at the bottom left of the UNOFAS app.
+      2. Delete the file `addressbook.json`.
+      3. Restart the application.
+   3. A new file with sample contacts and appointments will be created.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+2. Dealing with corrupted data files
+   1. If saved data is corrupted, the application will wipe the corrupted data and restart with no contacts and appointments.
+   2. To simulate a corrupted file:
+      1. Go to the location of the saved data.
+      2. Open `addressbook.json` and corrupt the file in a way that makes it an invalid file to read (e.g. adding alphabets into a contact's phone number field)
+      3. Restart the application.
+   3. A new file will be created with no contacts and appointments.
 
-2. _{ more test cases …​ }_
