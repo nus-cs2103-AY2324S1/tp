@@ -442,7 +442,7 @@ The feature should be implemented upon the current design of Student and ClassDe
 
 #### About this feature
 
-The view feature allows users to view the class information of their student.
+The view feature allows users to view the class information of their students.
 
 --------------------------------------------------------------------------------------------------------------------
 
