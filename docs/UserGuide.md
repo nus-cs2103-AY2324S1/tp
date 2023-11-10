@@ -391,7 +391,7 @@ Please do not use negative integers, non-integers and extremely large integers(i
 * If the second `DATE` is before the first `DATE` when adding in multiple days of leave, the app should display the following error message.
   <br>![result for invalid leave range for addleave command](images/addLeaveStartEndDateError.png)
 
-* If any of the `DATE` is not in the current year or next year, or if the total number of days of leave added to a person exceeds the total days of leave allowed for an employee, the app should display the following error message.
+* If any of the `DATE` is not in the current year or next year, or if the total number of days of leave added to an employee exceeds the total days of leave allowed for an employee, the app should display the following error message.
   <br>![result for invalid number of days of leave to add](images/addLeaveExceedLeavesOrNextYear.png)
 
 * Go back to [Table of Contents](#table-of-contents)
