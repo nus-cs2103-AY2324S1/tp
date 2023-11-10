@@ -86,8 +86,8 @@ Format: `deleteMember MEMBER_INDEX`
 * The index **must be a positive integer** that is within the range of the length of the member list.
 
 Examples:
-* `deleteMember 1 ` deletes the 1st member in the member list.
-* `deleteMember 10 ` deletes the 10th member in the member list.
+* `deleteMember 1` deletes the 1st member in the member list.
+* `deleteMember 10` deletes the 10th member in the member list.
 
 ### Edit a Member: `editMember`
 Edits the member at the specified index with the specified fields.
