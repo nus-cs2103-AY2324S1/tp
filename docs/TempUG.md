@@ -617,7 +617,7 @@ Invalid command with the error message here
 
 <br>
 
-### Locating students/lessons by name : `find`
+### Finding students/lessons by name : `find`
 
 About the feature (generally that is similar across states)
 
