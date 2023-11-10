@@ -82,6 +82,7 @@ public class GroupBuilder {
         return this;
     }
 
+
     public Group build() {
         return new Group(groupName, groupRemark, listOfGroupMates, timeIntervalList);
     }

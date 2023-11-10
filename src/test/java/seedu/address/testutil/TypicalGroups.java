@@ -13,4 +13,7 @@ public class TypicalGroups {
     public static final Group CS = new Group(VALID_GROUP_CS);
     public static final Group CS2100 = new Group("CS2100", new GroupRemark("Test on friday"));
     public static final Group CS2103T = new Group(VALID_GROUP_CS2103T);
+
+    // name remark listofgroupmates time
+    public static final Group CS
 }
