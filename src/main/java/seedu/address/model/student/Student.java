@@ -110,7 +110,7 @@ public class Student {
                 .add("name", name)
                 .add("phone", phone)
                 .add("address", address)
-                .add("tags", riskLevel)
+                .add("risk level", riskLevel)
                 .add("note", note)
                 .toString();
     }
