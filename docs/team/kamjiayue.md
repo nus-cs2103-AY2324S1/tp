@@ -23,6 +23,7 @@ Given below are my contributions to the project.
         * Update add command
         * Update student fields
         * Update add command examples
+        * Added a new section for the trend feature
     * Developer Guide:
         * Update product name
         * Added activity diagrams for the add feature.
