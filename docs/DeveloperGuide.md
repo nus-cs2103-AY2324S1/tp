@@ -48,7 +48,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **2.1.1. Main components of the architecture**
 
-**`Main`** has two main classes called [`Main`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)). It is responsible for app launch and shut down. 
+**`Main`** has two main classes called [`Main`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)). It is responsible for app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -442,7 +442,7 @@ Currently, our add and delete time features allow users to input multiple time s
 and clears the input box. As we recognise that users might encounter accidental typos while typing time intervals, we believe having our program's input box keep the incorrect inputs can provide convenience
 to our users.
 
-### 4.3. Improving our user interface. 
+### 4.3. Improving our user interface.
 
 #### 4.1.3. Description
 Our future implementation involves optimizing the output display by increasing the height of the output box. This enhancement aims to provide users with a more comprehensive and visually accessible view, allowing them to easily grasp the content at a glance.
