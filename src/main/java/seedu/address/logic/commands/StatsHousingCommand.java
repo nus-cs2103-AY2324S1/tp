@@ -26,7 +26,8 @@ public class StatsHousingCommand extends StatsCommand {
     protected int getHdbCount(List<Person> fosterers) {
         return (int) fosterers.stream()
                 .filter(fosterer ->
-                        fosterer.getHousing().equals(Housing.HDB))
+                        fosterer.getHousing()
+                                .equals(Housing.HDB))
                 .count();
     }
 
@@ -36,7 +37,8 @@ public class StatsHousingCommand extends StatsCommand {
     protected int getCondoCount(List<Person> fosterers) {
         return (int) fosterers.stream()
                 .filter(fosterer ->
-                        fosterer.getHousing().equals(Housing.CONDO))
+                        fosterer.getHousing()
+                                .equals(Housing.CONDO))
                 .count();
     }
 
@@ -46,7 +48,8 @@ public class StatsHousingCommand extends StatsCommand {
     protected int getLandedCount(List<Person> fosterers) {
         return (int) fosterers.stream()
                 .filter(fosterer ->
-                        fosterer.getHousing().equals(Housing.LANDED))
+                        fosterer.getHousing()
+                                .equals(Housing.LANDED))
                 .count();
     }
 

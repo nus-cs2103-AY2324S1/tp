@@ -44,6 +44,7 @@ public class StatsAvailCommand extends StatsCommand {
                                 .equals(AnimalType.ABLE_DOG))
                 .count();
     }
+
     /**
      * Returns the number of fosterers from the given list who can foster cats.
      */

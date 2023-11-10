@@ -23,18 +23,25 @@ public class StatsCurrentCommand extends StatsCommand {
             + "- %3$d fostering cats (%4$.2f%%)";
 
     /**
-     * Returns a list of fosterers who are currently fostering.
+     * Checks if a fosterer is currently fostering.
      * A fosterer is considered currently fostering if and only if they are not available, and
      * currently has a dog or has a cat in their care, and animal name is not nil.
      */
+    protected boolean isCurrentFosterer(Person fosterer) {
+        boolean isNotAvailable = fosterer.getAvailability().equals(Availability.NOT_AVAILABLE);
+        boolean isAnimalNameNil = fosterer.getAnimalName().fullName.equals(Person.NIL_WORD);
+        boolean isAnimalCurrentCatOrDog = fosterer.getAnimalType().equals(AnimalType.CURRENT_DOG)
+                || fosterer.getAnimalType().equals(AnimalType.CURRENT_CAT);
+
+        return isNotAvailable && !isAnimalNameNil && isAnimalCurrentCatOrDog;
+    }
+
+    /**
+     * Returns a list of fosterers who are currently fostering.
+     */
     protected List<Person> getCurrentFosterers(List<Person> fosterers) {
         return fosterers.stream()
-                .filter(fosterer ->
-                        fosterer.getAvailability()
-                                .equals(Availability.NOT_AVAILABLE)
-                                && !fosterer.getAnimalName().fullName.equals(Person.NIL_WORD)
-                                && fosterer.getAnimalType().equals(AnimalType.CURRENT_DOG)
-                                || fosterer.getAnimalType().equals(AnimalType.CURRENT_CAT))
+                .filter(this::isCurrentFosterer)
                 .collect(Collectors.toList());
     }
 
