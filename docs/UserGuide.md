@@ -22,7 +22,7 @@ can get your patients management tasks done faster than traditional GUI apps.
 
 1. Copy the file to the folder you want to use as the _home folder_ for your MLC.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Medilink.jar` command
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediLink.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -83,7 +83,7 @@ Format: `help`
 
 ### Adding a Doctor: `add-doctor`
 
-Adds a Doctor to the hospital database.
+Adds a Doctor to the clinic database.
 
 Format: `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -115,9 +115,9 @@ Examples:
 
 ### Adding a Patient: `add-patient`
 
-Adds a Patient to the hospital database.
+Adds a Patient to the clinic database.
 
-Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] ​`
+Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS c/CONDITION b/BLOODTYPE  [t/TAG] ​`
 
 <div markdown="block" class="alert alert-info">
 
@@ -126,13 +126,13 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 - A patient **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result
   in an error.
 - Phone Numbers and Emails have to be in a valid format.
-    - PHONE_NUMBER must have at least 3 digits
+    - PHONE_NUMBER must have at least 3 digits.
     - EMAIL must contain email domain (eg. `@gmail.com`).
 - TAG must indicate Priority Level of the Patient and be one of the following:
   - Low
   - Medium
   - High
-- EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number.
+- EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number. This number can be the same the person's contact number.
 - Blood type must be a combination of A/B/AB/O and +/-.
 - A patient can only have up to one tag at any time.
 - Tags for patients represent the priority level of the patient. Only the following tags are allowed: Low, Medium, High.
@@ -143,7 +143,7 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 Examples:
 
 * `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
-* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High`
+* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 ec/12345678 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High`
 
 ### Creating an Appointment : `new-appt`
 
@@ -158,7 +158,7 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
 - TIME must follow the specified format (ie. `yyyy-MM-dd HH:mm`), where `HH:mm` follows the 24hr format.
 - PATIENT must contain the valid IC of a Patient in the Database.
 - DOCTOR must contain the valid IC of a Doctor in the Database.
-- There must not be conflicting Appointments (eg the doctor already has an appointment with another patient at the same time)
+- There must not be conflicting Appointments. (eg the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
 
 </div>
 
