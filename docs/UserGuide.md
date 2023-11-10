@@ -193,7 +193,7 @@ Invalid examples:
 
 Edit a student's contact number or address
 
-Format `edit STUDENT_INDEX c/CONTACT_NUMBER a/HOME_ADDRESS`
+Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
 
 **Parameters**:
 1. Student Index
@@ -209,7 +209,7 @@ Examples:
 * `edit 2 c/98574321`
 
 Invalid example:
-* `edit 1` (should contain at least 1 of the fields)
+* `edit 1` (Edit must contain at least 1 field)
 
 ### 2.3 Appointment Commands
 
