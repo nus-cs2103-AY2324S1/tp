@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs Edit Leave Command;
+
+if () then ([else])
+  :Display error message;
+else ([Valid command format])
+  if () then ([else])
+    :Display error message;
+  else ([Valid ID])
+    if () then ([else])
+        :Display error message;
+    else ([Valid date format])
+        if () then ([else])
+            :Display error message;
+        else ([old date exist in leaveList])
+            if () then ([else])
+                :Display error message;
+            else ([new date does not exist in leaveList])
+                : Edit old leave date to new leave date;
+            endif
+        endif
+    endif
+  endif
+endif
+
+stop
+
+@enduml

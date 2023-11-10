@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditLeaveCommandParser" as EditLeaveCommandParser LOGIC_COLOR
+participant "r:EditLeaveCommand" as EditLeaveCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("editleave EID1234-5678 2023-11-01 2023-11-02")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("editleave EID1234-5678 2023-11-01 2023-11-02")
+activate AddressBookParser
+
+create EditLeaveCommandParser
+AddressBookParser -> EditLeaveCommandParser
+activate EditLeaveCommandParser
+
+EditLeaveCommandParser --> AddressBookParser
+deactivate EditLeaveCommandParser
+
+AddressBookParser -> EditLeaveCommandParser : parse("EID1234-5678 2023-11-01 2023-11-02")
+activate EditLeaveCommandParser
+
+create EditLeaveCommand
+EditLeaveCommandParser -> EditLeaveCommand
+activate EditLeaveCommand
+
+EditLeaveCommand --> EditLeaveCommandParser : r
+deactivate EditLeaveCommand
+
+EditLeaveCommandParser --> AddressBookParser : r
+deactivate EditLeaveCommandParser
+
+EditLeaveCommandParser -[hidden]-> AddressBookParser
+destroy EditLeaveCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> EditLeaveCommand : execute()
+activate EditLeaveCommand
+
+EditLeaveCommand -> Model : setEmployee(targetEmployee, editedEmployee)
+EditLeaveCommand -> Model : updateFilteredEmployeeList()
+
+create CommandResult
+EditLeaveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditLeaveCommand
+deactivate CommandResult
+
+EditLeaveCommand --> LogicManager : result
+deactivate EditLeaveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
