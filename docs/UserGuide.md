@@ -271,6 +271,7 @@ Format: `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * All tags containing the words or part-thereof will be matched (e.g. `Ba` will return `Badminton` or `Basketball` or `Football` or `Backgammon`)
 * Only persons matching all specified fields will be returned (i.e. `and` search)
 * Arguments in a specific field is not delimited (i.e. the argument `John Doe` in `filter n/John Doe` will be treated as a single argument)
+* Indicating a field but leaving it blank e.g. `filter n/` will show all contacts.
 
 Examples:
 * `filter t/CS2103` - Displays all contacts with the CS2103 tag or tags containing ``CS2103`` e.g. CS2103T
@@ -293,7 +294,7 @@ Format: `list`
 
 ### Sort persons : `sort`
 
-Format: `sort /COMPARATOR`
+Format: `sort /COMPARATOR [/reverse]`
 
 * Sorts all persons by specified `COMPARATOR`
 * Currently supported `COMPARATOR` include:
@@ -302,12 +303,14 @@ Format: `sort /COMPARATOR`
     - `byphone`
     - `byaddress`
 * The comparator refers to the attribute(s) provided for the basis to sort
-* The sorting is done according to [ASCII](https://www.ibm.com/docs/en/cobol-zos/6.1?topic=sequences-us-english-ascii-code-page) sequence, but is case-insensitive (i.e. `adam` has precedence over `Beatrice` when sorted in ascending order) 
+* Only sorting by one attribute is allowed, due to the nature of most fields being unique (with the unlikely cases of name and address)
+* The sorting is done according to [ASCII](https://www.ibm.com/docs/en/cobol-zos/6.1?topic=sequences-us-english-ascii-code-page) sequence, but is case-insensitive (i.e. `adam` has precedence over `Beatrice` when sorted in ascending order)
+* * Include the `/reverse` field to sort in descending order
 * Sorting is done in ascending order by default. To sort by descending order, the keyword `reverse` can be used (see Examples below)
 
 Examples:
-* `sort /byname` sorts all contacts in UniMate address book by the full name of `Person`
-* `sort /byaddress /reverse` sorts all contacts in UniMate address book by the address of `Person`
+* `sort /byname` sorts all contacts in UniMate address book by their full name
+* `sort /byaddress /reverse` sorts all contacts in UniMate address book by their address
 
 ![sortCommand](images/sortCommand.png)
 
@@ -339,10 +342,8 @@ In this example, after executing `clear`, the address book is now cleared of all
 >      * `mm` represents the minutes.
 >
 >**Event span**
->*  The chronological span of the event is **inclusive** of the start date and time, but
-  **exclusive** of the end date and time.
-  This means that for 2 consecutive events, the later event can start at the same time the earlier
-  event ends.
+>*  The chronological span of the event is **inclusive** of the start date and time, but **exclusive** of the end date and time.
+  This means that for 2 consecutive events, the later event can start at the same time the earlier event ends.
 
 ### \[USER CALENDAR\] Adding an event: `addEvent`
 
@@ -567,7 +568,7 @@ Format: `viewWeek DATE`
 
 ## Task Management System
 
-Tasks consist of a `DESCRIPTION` and a `DEADLINE`. 
+Tasks consist of a `DESCRIPTION` and a `DEADLINE`.
 
 ### Viewing tasks: `switchList`
 
@@ -591,11 +592,16 @@ Format: `addTask d/DESCRIPTION [te/DEADLINE]`
 
 * `DESCRIPTION` cannot be empty.
 * `DEADLINE` must be in the same format given above for date and time.
-* `DEADLINE` can also be omitted to create a task with no specified deadline
+* `DEADLINE` can also be omitted to create a task with no specified deadline.
+* When adding a task with a deadline with a date that is invalid but with a day of 31 or less, instead adds a task with 
+a deadline on the last day of the month.
+* While there is no character limit for Task descriptions, descriptions will be truncated if they are too long to 
+display.
 
 Examples: 
 * `addTask d/Go for a run te/2023-02-14 19:00`
 * `addTask d/Hydrate regularly!`
+* `addTask d/Fix CS2103 Project bug te/2023-02-31 12:00` creates the task with deadline `2023-02-28 12:00` instead.
 
 ![addTask](images/addTaskCommand.png)
 

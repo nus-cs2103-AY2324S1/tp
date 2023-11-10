@@ -36,6 +36,6 @@ public class NameComparator extends SortComparator {
         if (p1.equals(p2)) {
             return 0;
         }
-        return p1.getName().fullName.compareTo(p2.getName().fullName);
+        return p1.getName().fullName.toLowerCase().compareTo(p2.getName().fullName.toLowerCase());
     }
 }

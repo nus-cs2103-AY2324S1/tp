@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;
+import seedu.address.model.event.exceptions.InvalidEventPeriodException;
 
 public class JsonAdaptedEventTest {
     private static final String INVALID_DESCRIPTION = "";
@@ -58,8 +59,8 @@ public class JsonAdaptedEventTest {
     @Test
     public void toModelType_isInvalidEventPeriod_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_DESCRIPTION, INVALID_EVENT_PERIOD);
-        String expectedMessage = EventPeriod.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
+        String expectedMessage = EventPeriod.PERIOD_INVALID;
+        assertThrows(InvalidEventPeriodException.class, expectedMessage, event::toModelType);
     }
 
 }

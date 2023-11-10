@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONFIRMATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 
@@ -21,9 +22,11 @@ import seedu.address.model.event.EventPeriod;
 public class ClearEventsCommand extends Command {
     public static final String COMMAND_WORD = "clearEvents";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes events within a time range from the calendar. "
+            + "Shows all events within the time range instead if confirmation is not present.\n"
             + "Parameters: "
             + PREFIX_EVENT_START_DATE_TIME + "START DATE AND TIME "
-            + PREFIX_EVENT_END_DATE_TIME + "END DATE AND TIME\n"
+            + PREFIX_EVENT_END_DATE_TIME + "END DATE AND TIME ["
+            + PREFIX_CONFIRMATION + "CONFIRMATION]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EVENT_START_DATE_TIME + "2024-01-01 12:00 "
             + PREFIX_EVENT_END_DATE_TIME + "2024-01-01 18:00";
