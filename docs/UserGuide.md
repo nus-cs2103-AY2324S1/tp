@@ -624,9 +624,7 @@ Format: `undo`
 
 Clears all your entries from the address book.
 
-Format:</br> 
-1. `reset`, followed by `reset confirm`
-2. `reset confirm`, followed by `reset confirm` again
+Format: `reset`, followed by `reset confirm`
 
 <div markdown="block" class="alert alert-info">
 
