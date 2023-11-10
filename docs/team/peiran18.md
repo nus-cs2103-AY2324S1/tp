@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Peiran's Project Portfolio Page
+title: Chen Peiran's Project Portfolio Page
 ---
 
 # Project: JobFindr
@@ -22,13 +22,11 @@ effortlessly.
 ## Summary of Contributions
 
 ### Enhancements
-
-1. **New Feature**:
-
-* What it does:
-* Justification:
-* Highlights:
-* Credits:
+1. Added `status` field
+  * **What it does**: Added `status` field for Job objects so that users can indicate whether the application is `PENDING`, `APPROVED`, `REJECTED`.
+  * **Justification**: Users should be able to add the status so that they can better track and decide on the next course of action of the applications.
+  * **Highlights**: Relevant classes such as Status class had to be added and relevant test cases such as StatusTest had to be implemented.
+    <br><br>
 
 ### Code Contributed
 
@@ -38,21 +36,19 @@ here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?sea
 ### Other Contributions
 
 * **Project management**:
+  * Actively assisted peers by providing technical advice and reviewing and approving PRs.
 * **Documentation**:
-    * Contributed extensively to both the User Guide (UG) and Developer Guide (DG).
+  * Contributed extensively to both the User Guide (UG) and Developer Guide (DG).
+  * Formatted most of the UG to ensure that the entire document is cohesive despite having inputs from every team member.
 * **Bug Fixes**:
-    * Fixed bugs reported during PE dry run. (PR #)
+  * Fixed bugs reported during PE dry run. (PR [#173](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/173))
 * **Community**:
-    * PRs reviewed (with non-trivial review comments):
-* **Tools**:
+  * PRs reviewed (with non-trivial review comments): PR [#66](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/66)
 
 ## Contributions to the User Guide
-
 *Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting
 end-users.*
 
 ## Contributions to the Developer Guide
-
 *Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical
 documentation and the technical depth of my contributions to the project.*
-

@@ -62,8 +62,8 @@ here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?sea
 ### Other Contributions
 
 * **Project management**:
-    * Actively assisted peers by providing technical advise and reviewing and approving PRs.
-    * Conducted multiple checks on code quality and refactored messy code.
+  * Actively assisted peers by providing technical advice and reviewing and approving PRs.
+  * Conducted multiple checks on code quality and refactored messy code.
 * **Documentation**:
     * Contributed extensively to both the User Guide (UG) and Developer Guide (DG).
 * **Bug Fixes**:
