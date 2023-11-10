@@ -148,4 +148,29 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void containsWordIgnoreCase_specialCharactersAndNumbers_correctResult() {
+        // Special characters
+        assertTrue(StringUtil.containsWordIgnoreCase("@special$ sentence#", "@special$"));
+        assertFalse(StringUtil.containsWordIgnoreCase("special sentence", "@special$"));
+
+        // Numeric values
+        assertTrue(StringUtil.containsWordIgnoreCase("123 456", "456"));
+        assertFalse(StringUtil.containsWordIgnoreCase("123456", "123"));
+    }
+
+    @Test
+    public void isNonZeroUnsignedInteger_maxIntegerValue_true() {
+        assertTrue(StringUtil.isNonZeroUnsignedInteger(String.valueOf(Integer.MAX_VALUE)));
+    }
+
+    @Test
+    public void getDetails_complexExceptionGiven_detailedMessage() {
+        Exception complexException = new Exception("Complex Exception", new Throwable("Cause"));
+        String details = StringUtil.getDetails(complexException);
+        assertTrue(details.contains("Complex Exception"));
+        assertTrue(details.contains("Cause"));
+        // You may check for more details depending on how detailed you want this test to be
+    }
+
 }
