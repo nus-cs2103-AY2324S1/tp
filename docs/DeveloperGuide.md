@@ -1,8 +1,11 @@
 ---
 layout: page
 title: Developer Guide
+
+## **About HouR**
+
 ---
-* Table of Contents
+## **Table of Contents**
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -147,7 +150,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -475,8 +478,7 @@ The method `AddLeaveCommand#execute()` returns a `CommandResult` object, which s
 
 The diagram below details how the operation of adding an appointment works.
 
-<INSERT DIAGRAM HERE!>
-
+![Add Leave Sequence Diagram](images/uml-diagrams/AddLeaveSequenceDiagram.png)
 
 Given below is an example usage scenario for the command.
 
@@ -591,6 +593,8 @@ The following activity diagram summarizes what happens when a user executes the 
 
 ![Edit Leave Activity Diagram](images/EditLeaveActivityDiagram.png)
 
+#### Design considerations:
+
 **Aspect: Model-Person Interaction:**
 
 * **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `DeleteRemarkCommand#execute()`.
@@ -600,6 +604,42 @@ The following activity diagram summarizes what happens when a user executes the 
 * **Alternative 2**: Create methods in model specifically to edit the `remarkList` attribute of the employee.
     * Pros: More OOP, follows SRP by not having `DeleteRemarkCommand#execute()` perform the editing directly.
     * Cons: Longer command execution, requires more parts to work together.
+
+
+### List Leave feature
+
+The list leave feature allows HouR user to view employees on leave on the specified date.
+
+#### Implementation
+
+The list leave command mechanism is facilitated by the `ListLeaveCommandParser` class which extends the `AddressbookParser`.
+
+`ListLeaveCommandParser#parse()` overrides  `Parser#parse()` in the Parser interface.
+
+`ListLeaveCommandParser` implements the following operations:
+
+* `ListLeaveCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `ListLeaveCommand` object with the parsed employee ID, start date and end date.
+
+The `ListLeaveCommand` object then communicates with the `Model` API by calling the following methods:
+
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `ListLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The diagram below details how the operation of adding an appointment works.
+
+![List Leave Sequence Diagram](images/uml-diagrams/ListLeaveSequenceDiagram.png)
+
+Given below is an example usage scenario for the command.
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `listleave on/DATE` command in the CLI.
+* `DATE` is an input of format `yyyy-MM-dd`.
+
+**Step 3**: Employees will be filtered based on whether they are on leave on the specified date.
+* The Employee List will be updated to contain only employees which have leaves taken on the specified date.
+
 
 _{more aspects and alternatives to be added}_
 
@@ -637,31 +677,34 @@ HouR is a desktop app for human resources staff managing employee data, optimise
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                 | I want to …​                                                                       | So that I can…​                                                                 |
-|----------|-------------------------|------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
-| `* * *`  | new user                | add/delete dummy data                                                              | familiarise myself with the commands available                                  |
-| `* * *`  | beginner user           | delete existing employee record                                                    | remove ex-employees from database                                               |
-| `* * *`  | beginner user           | see the list of all employee data                                                  | easily view all the employee data in one place                                  |
-| `* * *`  | beginner user           | add new employees to the database                                                  | keep the records up-to-date                                                     |
-| `* * *`  | new user                | see clear error messages when I enter incorrect or incomplete information          | correct mistakes efficiently                                                    |
-| `* *`    | beginner user           | assign custom tags to employees                                                    | organise them according to different criteria                                   |
-| `* *`    | new user                | access a user guide                                                                | know how to set up and launch the application                                   |
-| `* *`    | new user                | access a quick tutorial or guided tour                                             | learn how to use basic features of the application                              |
-| `* *`    | new user                | purge all current data                                                             | get rid of sample/experimental data I used for exploring the app                |
-| `* *`    | forgetful beginner user | access a command summary                                                           | easily know which commands to use                                               |
-| `* *`    | intermediate user       | modify existing records                                                            | update employees’ information and categories                                    |
-| `* *`    | intermediate user       | generate individual employee reports                                               | have an overview of the performance of each employee                            |
-| `* *`    | intermediate user       | reset specific fields of employees                                                 | reset fields like overtime hours and leaves regularly (monthly/yearly)          |
-| `* *`    | intermediate user       | check the leave status of employees                                                | better plan my manpower and schedule work for each employee                     |
-| `* *`    | intermediate user       | filter and search certain employees based on criteria like department and salaries | look for the data I need                                                        |
-| `* *`    | intermediate user       | batch delete records                                                               | keep my database organised and clutter-free                                     |
-| `* *`    | intermediate user       | sort the data / records by date and categories                                     | view relevant data in a more organised manner                                   |
-| `* *`    | long-time user          | private individuals’ personal details                                              | minimise the chance of someone else seeing them by accident and violating PDPA. |
-| `*`      | intermediate user       | create keyboard shortcuts for tasks                                                | save time on frequently performed tasks                                         |
-| `*`      | long-time user          | conduct advanced searches with multiple criteria                                   | gain deeper insights into employee performance                                  |
-| `*`      | long-time user          | access a knowledge base or community forum                                         | share best practices and learn from other experienced users                     |
-| `*`      | long-time user          | share / collaborate with other colleagues in my department                         | distribute work with my colleagues                                              |
-| `*`      | long-time user          | archive unused data                                                                | not distracted by irrelevant data                                               |
+| Priority | As a …​                 | I want to …​                                                                       | So that I can…​                                                                   |
+|----------|-------------------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| `* * *`  | new user                | add/delete dummy data                                                              | familiarise myself with the commands available                                    |
+| `* * *`  | beginner user           | delete existing employee record                                                    | remove ex-employees from database                                                 |
+| `* * *`  | beginner user           | see the list of all employee data                                                  | easily view all the employee data in one place                                    |
+| `* * *`  | beginner user           | add new employees to the database                                                  | keep the records up-to-date                                                       |
+| `* * *`  | new user                | see clear error messages when I enter incorrect or incomplete information          | correct mistakes efficiently                                                      |
+| `* *`    | beginner user           | assign departments to employees                                                    | organise them according to different departments                                  |
+| `* *`    | new user                | access a user guide                                                                | know how to set up and launch the application                                     |
+| `* *`    | new user                | purge all current data                                                             | get rid of sample/experimental data I used for exploring the app                  |
+| `* *`    | intermediate user       | modify existing records                                                            | update employees’ information and categories                                      |
+| `* *`    | intermediate user       | generate individual employee reports                                               | have an overview of the performance of each employee                              |
+| `* *`    | intermediate user       | keep track of overtime hours of employees                                          | keep track of how much I need to pay them in total (monthly pay and overtime pay) |
+| `* *`    | intermediate user       | reset specific fields of employees                                                 | reset fields like overtime hours and leaves regularly (monthly/yearly)            |
+| `* *`    | intermediate user       | check the leave status of employees                                                | better plan my manpower and schedule work for each employee                       |
+| `* *`    | intermediate user       | view employees who are on leave on certain date                                    | ensure that there are enough manpower                                             |
+| `* *`    | intermediate user       | allocate leaves for employees                                                      | keep track of leave schedule of each employee                                     |
+| `* *`    | intermediate user       | filter and search certain employees based on criteria like department and salaries | look for the data I need                                                          |
+| `* *`    | intermediate user       | batch delete records                                                               | keep my database organised and clutter-free                                       |
+| `* *`    | intermediate user       | sort the data / records by date and categories                                     | view relevant data in a more organised manner                                     |
+| `* *`    | long-time user          | private individuals’ personal details                                              | minimise the chance of someone else seeing them by accident and violating PDPA.   |
+| `*`      | new user                | access a quick tutorial or guided tour                                             | learn how to use basic features of the application                                |
+| `*`      | forgetful beginner user | access a command summary                                                           | easily know which commands to use                                                 |
+| `*`      | intermediate user       | create keyboard shortcuts for tasks                                                | save time on frequently performed tasks                                           |
+| `*`      | long-time user          | conduct advanced searches with multiple criteria                                   | gain deeper insights into employee performance                                    |
+| `*`      | long-time user          | access a knowledge base or community forum                                         | share best practices and learn from other experienced users                       |
+| `*`      | long-time user          | share / collaborate with other colleagues in my department                         | distribute work with my colleagues                                                |
+| `*`      | long-time user          | archive unused data                                                                | not distracted by irrelevant data                                                 |
 
 ### Use cases
 
@@ -895,8 +938,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -911,6 +952,43 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an invalid employee ID)<br>
       Expected: Similar to previous.
+
+### Adding Leave for an Employee
+
+1. Adding leave while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. At least 1 employee is in the list. 
+   Employee with employee ID "EID1234-5678" is in the list, and has one leave date "2023-11-11" in his LeaveList.
+   
+   2. Test case: `addleave id/EID1234-5678 from/2023-12-04 to/2023-12-05`<br>
+   Expected: The leave dates "2023-12-04" and "2023-12-05" are added to the leave list of the employee with ID "EID1234-5678".
+   Details of the employee's leave list shown in the result display.
+
+   3. Test case: `addleave id/EID0000-0000 from/2023-12-04 to/2023-12-05`<br>
+   Expected: No employee leave is added (ID does not exist). Error details shown in the result display. 
+
+   4. Test case: `addleave id/EID12345678 from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 from/2023-30-11 to/2023-30-11`<br>
+     Expected: No employee leave is added (incorrect field format). Error details shown in the result display. 
+
+   5. Test case: `addleave id/ from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 from/ to/2023-12-05` or `addleave id/EID1234-5678 from/2023-12-04 to/`<br>
+     Expected: No employee leave is added (empty fields). Error details shown in the result display. 
+
+   6. Test case: `addleave from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 to/2023-12-05` or `addleave id/EID1234-5678 from/2023-12-04`<br>
+     Expected: No employee leave is added (missing parameters). Error details shown in the result display. 
+   
+   7. Test case: `addleave id/EID1234-5678 from/2023-11-11 to/2023-11-13`<br>
+     Expected: No employee leave is added (leave date(s) already exists). Error details shown in the result display. 
+   
+   8. Test case: `addleave id/EID1234-5678 from/2023-12-05 to/2023-12-04`<br>
+     Expected: No employee leave is added (invalid date order). Error details shown in the result display.
+
+1. Adding leave while only some employees are being shown 
+
+   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list. 
+     Employee with id "EID1234-5678" has leaves "2023-11-11" and "2023-11-12" and is not in displayed list. 
+
+   2. Try the test cases in the previous section (Adding leave while all employees are being shown)
+     Expected: Same as the previous section
 
 ### Editing Leave for an Employee
 
@@ -947,6 +1025,37 @@ testers are expected to do more *exploratory* testing.
       Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list.
 
    1. Try the test cases in the previous section (Editing leave while all employees are being shown)
+      Expected: Same as the previous section
+
+### Listing Employees on Leave on a specified date
+
+1. Listing employees on leave while all employees are being shown 
+   1. Prerequisites: List all employees using the `list` command. At least one employee in the list.
+        Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02". No employees on leave on "2023-11-11".
+   
+   2. Test case: `listleave on/2023-11-01`<br>
+     Expected: The employees on leave on the specified date are displayed in the employee list.
+     Details of the number of employees on leave on the specified date shown in the result display. 
+
+   3. Test case: `listleave on/2023-11-11`<br>
+      Expected: No employee displayed (no employees on leave on specified date).
+      Details of the number of employees on leave on the specified date shown in the result display.
+
+   4. Test case: `listleave on/11-11-2023`<br>
+     Expected: No employee displayed (incorrect field format). Error details shown in the result display. 
+   
+   5. Test case: `listleave on/ `<br>
+   Expected: No employee displayed (empty field). Error details shown in the result display. 
+   
+   6. Test case: `listleave `<br>
+     Expected: No employee displayed (missing parameters). Error details shown in the result display.
+
+2. Listing employees on leave while only some employees are being shown 
+
+   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+      Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list. 
+
+   2. Try the test cases in the previous section (Listing employees on leave while all employees are being shown)
       Expected: Same as the previous section
 
 ### Adding Remark for an Employee
