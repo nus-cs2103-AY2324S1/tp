@@ -953,13 +953,44 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an invalid employee ID)<br>
       Expected: Similar to previous.
 
+
+### Sorting a list
+
+1. Sorting the list of employees while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. At least 1 employee is in the list.
+
+   2. Test case: `sort f/salary in/asc`<br>
+   Expected: Employees will be sorted based on their salaries in ascending order. 
+   Details of the deleted employee shown in the status message.
+
+   3. Test case: `sort f/phone in/asc` or `sort f/department in/desc`<br>
+   Expected: List is not sorted (field phone cannot be used to sort). Error details shown in the status message.
+
+   4. Test case: `sort f/name in/ascending` or `sort f/department in/random`<br>
+   Expected: List is not sorted (order parameter can only be asc or desc). Error details shown in the status message.
+
+   5. Test case: `sort f/name` or `sort in/desc`<br>
+   Expected: List is not sorted (missing parameters). Error details shown in the status message.
+   
+   6. Test case: `sort f/name in/` or `sort f/ in/desc`<br>
+      Expected: List is not sorted (empty parameters). Error details shown in the status message.
+
+2. Sorting the list of employees when only some employees are being shown
+
+   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+
+   2. Try the test cases in the previous section (Adding leave while all employees are being shown)
+      Expected: Same as the previous section
+
+
 ### Adding Leave for an Employee
 
 1. Adding leave while all employees are being shown
 
    1. Prerequisites: List all employees using the `list` command. At least 1 employee is in the list. 
    Employee with employee ID "EID1234-5678" is in the list, and has one leave date "2023-11-11" in his LeaveList.
-   
+
    2. Test case: `addleave id/EID1234-5678 from/2023-12-04 to/2023-12-05`<br>
    Expected: The leave dates "2023-12-04" and "2023-12-05" are added to the leave list of the employee with ID "EID1234-5678".
    Details of the employee's leave list shown in the result display.
@@ -977,18 +1008,57 @@ testers are expected to do more *exploratory* testing.
      Expected: No employee leave is added (missing parameters). Error details shown in the result display. 
    
    7. Test case: `addleave id/EID1234-5678 from/2023-11-11 to/2023-11-13`<br>
-     Expected: No employee leave is added (leave date(s) already exists). Error details shown in the result display. 
-   
-   8. Test case: `addleave id/EID1234-5678 from/2023-12-05 to/2023-12-04`<br>
-     Expected: No employee leave is added (invalid date order). Error details shown in the result display.
+     Expected: No employee leave is added (leave date(s) already exists). Error details shown in the result display.
 
-1. Adding leave while only some employees are being shown 
+   8. Test case: `addleave id/EID1234-5678 from/2023-12-05 to/2023-12-04`<br>
+      Expected: No employee leave is added (invalid date order). Error details shown in the result display.
+
+2. Adding leave while only some employees are being shown 
 
    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list. 
      Employee with id "EID1234-5678" has leaves "2023-11-11" and "2023-11-12" and is not in displayed list. 
 
    2. Try the test cases in the previous section (Adding leave while all employees are being shown)
      Expected: Same as the previous section
+
+
+### Deleting Leave for an Employee
+
+1. Deleting leave while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. At least 1 employee is in the list.
+      Employee with employee ID "EID1234-5678" is in the list, and has leaves "2023-12-01", "2023-12-02", and "2023-12-03".
+
+   2. Test case: `deleteleave id/EID1234-5678 from/2023-12-01 to/2023-12-02`<br>
+      Expected: The leave dates "2023-12-01" and "2023-12-02" are deleted from the leave list of the employee with ID "EID1234-5678".
+      Details of the employee's leave list shown in the result display.
+
+   3. Test case: `deleteleave id/EID0000-0000 from/2023-12-04 to/2023-12-05`<br>
+      Expected: No employee leave is deleted (ID does not exist). Error details shown in the result display.
+
+   4. Test case: `deleteleave id/EID12345678 from/2023-12-04 to/2023-12-05` or `deleteleave id/EID1234-5678 from/2023-30-11 to/2023-30-11`<br>
+      Expected: No employee leave is deleted (incorrect field format). Error details shown in the result display.
+
+   5. Test case: `deleteleave id/ from/2023-12-04 to/2023-12-05` or `deleteleave id/EID1234-5678 from/ to/2023-12-05` or `deleteleave id/EID1234-5678 from/2023-12-04 to/`<br>
+      Expected: No employee leave is deleted (empty fields). Error details shown in the result display.
+
+   6. Test case: `deleteleave from/2023-12-04 to/2023-12-05` or `deleteleave id/EID1234-5678 to/2023-12-05` or `deleteleave id/EID1234-5678 from/2023-12-04`<br>
+      Expected: No employee leave is deleted (missing parameters). Error details shown in the result display.
+
+   7. Test case: `deleteleave id/EID1234-5678 from/2023-12-05 to/2023-12-04`<br>
+      Expected: No employee leave is deleted (invalid date order). Error details shown in the result display.
+
+   8. Test case: `deleteleave id/EID1234-5678 from/2023-12-04 to/2023-12-05`<br>
+      Expected: No employee leave is deleted (no leaves exist between "2023-12-03" and "2023-12-05"). Error details shown in the result display.
+
+2. Deleting leave while only some employees are being shown
+
+   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+      Employee with id "EID1234-5678" has leaves "2023-12-01", "2023-12-02", and "2023-12-03" and is not in displayed list.
+
+   2. Try the test cases in the previous section (Deleting leave while all employees are being shown)
+      Expected: Same as the previous section
+
 
 ### Editing Leave for an Employee
 
