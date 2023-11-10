@@ -290,7 +290,7 @@ Invalid examples:
 This is not allowed as an `INDEX` is required to edit an applicant's details.
 
 * `edit 1`
-This is not allowed as at least one of the optional fields must be provided.
+This is not allowed as at least one of the optional fields, `[n/NAME] [hp/PHONE] [e/EMAIL] [p/POSITION]` must be provided.
 
 * `edit -20 hp/12341234`
 This is not allowed as the `INDEX` must be a positive integer.
@@ -352,8 +352,7 @@ Valid examples:
 
 Invalid examples:
 * `status 3 s/interviewing`
-This is not allowed as the format of the `STATUS` is wrong. 
-`STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
+This is not allowed as `STATUS` must be either `o(offered)` or `r(rejected)` or `u(undecided)`.
 
 * `status 3`
 This is not allowed as a `STATUS` must be provided.
