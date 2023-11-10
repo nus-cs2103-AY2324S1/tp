@@ -8,7 +8,7 @@
 ### Summary of Contributions
   - #### Code Contributed:
 
-    [Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=larrywang0701&breakdown=true)
+    [Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=larrywang0701&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&tabOpen=true&tabType=authorship&tabAuthor=larrywang0701&tabRepo=AY2324S1-CS2103T-W16-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
   - #### New feature implemented
       - Major parts for the event feature:
@@ -35,6 +35,7 @@
   - #### Contributions to the DG
 
      - Wrote the User Stories part in the DG [#10](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/10)
+     - Add details about secondary command parser in DG [#47](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/47/files#diff-1a95edf069a4136e9cb71bee758b0dc86996f6051f0d438ec2c424557de7160b)
      - more to be added soon
 
   - #### Contributions to team-based tasks
