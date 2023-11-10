@@ -3,64 +3,70 @@ layout: page
 title: Developer Guide
 ---
 
-# Developer Guide
-
 ## Table of Contents
+
 1. [Acknowledgements](#acknowledgements)
 2. [Setting Up](#setting-up)
 3. [Design](#design)
-   1. [Architecture](#architecture)
-   2. [UI Component](#ui-component)
-   3. [Logic Component](#logic-component)
-   4. [Model Component](#model-component)
-   5. [Storage Component](#storage-component)
-   6. [Common Classes](#common-classes)
+    1. [Overall Architecture](#overall-architecture)
+    2. [UI Component](#ui-component)
+    3. [Logic Component](#logic-component)
+    4. [Model Component](#model-component)
+    5. [Storage Component](#storage-component)
+    6. [Common Classes](#common-classes)
 4. [Implementation](#implementation)
-   1. [Add Command](#add-command)
-      1. [Implementation](#implementation)
-      2. [Design Considerations](#design-considerations)
-   2. [Edit Command](#edit-command)
-      1. [Implementation](#implementation)
-      2. [Design Considerations](#design-considerations)
-   3. [Delete Command](#delete-command)
-      1. [Implementation](#implementation)
-      2. [Design Considerations](#design-considerations)
-   4. [List Command](#list-command)
-      1. [Implementation](#implementation)
-      2. [Design Considerations](#design-considerations)
-   5. [Sort Command](#sort-command)
-       1. [Implementation](#implementation)
-       2. [Design Considerations](#design-considerations)
-   6. [Find Command](#find-command)
-      1. [Implementation](#implementation)
-      2. [Design Considerations](#design-considerations)
-   7. [Clear Command](#clear-command)
-      1. [Implementation](#implementation)
-      2. [Design Considerations](#design-considerations)
-   8. [Interview and Interview Commands](#interview-and-interview-commands)
-      1. [Implementation](#implementation)
-      2. [Design Considerations](#design-considerations)
+    1. [Add Command](#add-command)
+        1. [Implementation](#implementation)
+        2. [Design Considerations](#design-considerations)
+    2. [Edit Command](#edit-command)
+        1. [Implementation](#implementation)
+        2. [Design Considerations](#design-considerations)
+    3. [Delete Command](#delete-command)
+        1. [Implementation](#implementation)
+        2. [Design Considerations](#design-considerations)
+    4. [List Command](#list-command)
+        1. [Implementation](#implementation)
+        2. [Design Considerations](#design-considerations)
+    5. [Sort Command](#sort-command)
+        1. [Implementation](#implementation)
+        2. [Design Considerations](#design-considerations)
+    6. [Find Command](#find-command)
+        1. [Implementation](#implementation)
+        2. [Design Considerations](#design-considerations)
+    7. [Clear Command](#clear-command)
+        1. [Implementation](#implementation)
+        2. [Design Considerations](#design-considerations)
+    8. [Interview and Interview Commands](#interview-and-interview-commands)
+        1. [Implementation](#implementation)
+        2. [Design Considerations](#design-considerations)
 5. [Appendix A: Requirements](#appendix-a-requirements)
-   1. [Product scope](#product-scope)
-   2. [User stories](#user-stories)
-   3. [Use cases](#use-cases)
-   4. [Non-Functional Requirements](#non-functional-requirements)
-   5. [Glossary](#glossary)
+    1. [Product scope](#product-scope)
+    2. [User stories](#user-stories)
+    3. [Use cases](#use-cases)
+    4. [Non-Functional Requirements](#non-functional-requirements)
+    5. [Glossary](#glossary)
 6. [Appendix B: Instructions for Manual Testing](#appendix-b-instructions-for-manual-testing)
 7. [Appendix C: Effort](#appendix-c-effort)
 8. [Appendix D: Planned Enhancements](#appendix-d-planned-enhancements)
----
-## Acknowledgements
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries – include links to the original source as well}
 
 ---
-## Setting Up
+
+## **Acknowledgements**
+
+{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries – include links to the
+original source as well}
+
+---
+
+## **Setting Up**
+
 Refer to the guide [Setting up and getting started].
 
 ---
-## Design
 
-### Architecture
+## **Design**
+
+### Overall Architecture
 
 ### UI Component
 
@@ -177,7 +183,8 @@ The `DeleteCommand` class implements this command. It accepts an index and delet
 index.
 
 The `DeleteCommandParser` class is used to parse the arguments for the command from the user input. If the user input
-does not conform to the expected format e.g. the index is out of bounds, a `ParseException` is thrown. If the user input is
+does not conform to the expected format e.g. the index is out of bounds, a `ParseException` is thrown. If the user input
+is
 valid,
 then `DeleteCommandParser` returns the corresponding `DeleteCommand`.
 
@@ -302,6 +309,7 @@ The `ClearCommand` class implements this command.
 #### Design considerations
 
 ---
+
 ## **Appendix A: Requirements**
 
 ### Product scope
@@ -318,6 +326,7 @@ The `ClearCommand` class implements this command.
 **Value proposition**: Manage job applications faster than a typical mouse/GUI-driven app.
 
 ---
+
 ### User stories
 
 Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
@@ -336,7 +345,9 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 ### Use cases
 
-For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **Actor** is the `User`, unless specified otherwise. Furthermore, any reference to the `list` refers to the main list of job applications, unless specified otherwise.
+For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **Actor** is the `User`, unless specified
+otherwise. Furthermore, any reference to the `list` refers to the main list of job applications, unless specified
+otherwise.
 
 **System:** JobFindr
 
@@ -395,7 +406,8 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 
 1. User lists application UC3.
 2. User requests to find a list of applications based on the given keywords.
-3. System shows a list of applications with any of the fields (`Company`, `Role`, `Status`, `Deadline`, `JobType`, `Industry`) containing the given keywords.
+3. System shows a list of applications with any of the
+   fields (`Company`, `Role`, `Status`, `Deadline`, `JobType`, `Industry`) containing the given keywords.
 
    Use case ends.
 
@@ -403,11 +415,12 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 
 * 2a. No applications match the given keywords.
 
-   Use case ends.
+  Use case ends.
 
 #### Use case: UC5 - Find an application by specific field(s)
 
 **MSS**
+
 1. User lists application UC3.
 2. User requests to find a list of applications based on the given keywords for specific field(s).
 3. System shows a list of applications with the given field(s) containing the given keywords for each field.
@@ -418,11 +431,12 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 
 * 2a. No applications match the given keywords.
 
-   Use case ends.
+  Use case ends.
 
 #### Use case: UC6 - Edit an application
 
 **MSS**
+
 1. User finds application UC4.
 2. User requests to edit an application in the list, specifying an index.
 3. System updates the relevant fields in the application at the index specified.
@@ -433,16 +447,17 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 
 * 2a. The list is empty.
 
-   Use case ends.
+  Use case ends.
 
 * 3a. The given index is invalid.
-   * 3a1. System shows an error message.
+    * 3a1. System shows an error message.
 
-     Use case resumes at step 2.
+      Use case resumes at step 2.
 
 #### Use case: UC7 - Sort applications
 
 **MSS**
+
 1. User requests to sort the list of applications by a specific field.
 2. System sorts the list of applications by the given field.
 
@@ -452,16 +467,17 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 
 * 1a. The list is empty.
 
-   Use case ends.
+  Use case ends.
 
 * 2a. The given field is invalid.
-   * 2a1. System shows an error message.
+    * 2a1. System shows an error message.
 
-     Use case resumes at step 1.
+      Use case resumes at step 1.
 
 #### Use case: UC8 - Select an application
 
 **MSS**
+
 1. User requests to select an application in the list by clicking on it.
 2. System displays details of the selected application.
 
@@ -470,6 +486,7 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 #### Use case: UC9 - Add interview
 
 **MSS**
+
 1. User finds application UC4.
 2. User requests to add an interview to the application, specifying an index.
 3. System creates an Interview object.
@@ -478,66 +495,72 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
    Use case ends.
 
 **Extensions**
+
 * 1a. The application does not exist.
-  * 1a1. System shows an error message.
+    * 1a1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 * 2a. The given index is invalid.
-  * 2a1. System shows an error message.
+    * 2a1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 * 2b. The interview already exists.
-  * 2b1. System shows an error message.
+    * 2b1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 * 2c. The interview has invalid fields.
-  * 2c1. System shows an error message.
+    * 2c1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 #### Use case: UC10 - Delete interview
 
 **MSS**
+
 1. User requests to delete an interview from the application, specifying the interview index and the application index.
 2. System deletes the interview from the application at the index specified.
 
    Use case ends.
 
 **Extensions**
+
 * 1a. The application does not exist.
-  * 1a1. System shows an error message.
+    * 1a1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 * 1b. The interview to be deleted does not exist.
-  * 1b1. System shows an error message.
+    * 1b1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 #### Use case: UC11 - Edit interview
 
 **MSS**
+
 1. User requests to edit an interview from the application, specifying the interview index and the application index.
 2. System updates the relevant fields in the interview at the index specified.
 
    Use case ends.
 
 **Extensions**
+
 * 1a. The application does not exist.
-  * 1a1. System shows an error message.
+    * 1a1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 * 1b. The interview to be edited does not exist.
-  * 1b1. System shows an error message.
+    * 1b1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 * 1c. The interview to be created has invalid fields.
-  * 1c1. System shows an error message.
+    * 1c1. System shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 #### Use case: UC12 - Clear all applications
 
 **MSS**
+
 1. User requests to clear all applications.
 2. System clears all applications.
 
@@ -546,6 +569,7 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 #### Use case: UC13 - Exit application
 
 **MSS**
+
 1. User requests to exit the application.
 2. System exits the application.
 
@@ -554,12 +578,14 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 #### Use case: UC14 - Open help window
 
 **MSS**
+
 1. User requests to open the help window.
 2. System opens the help window.
 
    Use case ends.
 
 ---
+
 ### Non-Functional Requirements
 
 **Availability**
@@ -573,7 +599,8 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 **Performance**
 
 - Response time to any user command is within 3 seconds.
-- The application should be able to contain and handle up to 300 job applications before facing any form of performance bottleneck issues.
+- The application should be able to contain and handle up to 300 job applications before facing any form of performance
+  bottleneck issues.
 
 **Reliability**
 
@@ -586,7 +613,8 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 
 **Usability**
 
-- A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+- A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+  able to accomplish most of the tasks faster using commands than using the mouse.
 
 **Robustness**
 
@@ -600,7 +628,8 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 **Maintainability**
 
 - The application should be compliant with the coding standard and best coding practices highlighted in CS2103T.
-- The application should be designed such that any programmer with at least a year of experience should be able to read, maintain, and contribute to the source code easily.
+- The application should be designed such that any programmer with at least a year of experience should be able to read,
+  maintain, and contribute to the source code easily.
 
 **Process**
 
@@ -615,6 +644,7 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 - The application should not store any information related to the user's job applications in remote storage.
 
 ---
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -623,29 +653,32 @@ For all use cases below, the **System** is the `JobFindr` (JobFindr) and the **A
 * **UI**: User Interface
 * **MSS**: Main Success Scenario
 * **Job Application**: A record of a job application that contains relevant information.
-* **Fields**: The attributes of a job application, namely company, role, status, deadline, job type, industry, and interview details.
+* **Fields**: The attributes of a job application, namely company, role, status, deadline, job type, industry, and
+  interview details.
 
 ---
+
 ## **Appendix B: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
-> Note: These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
+> Note: These instructions only provide a starting point for testers to work on; testers are expected to do more
+*exploratory* testing.
 
 ### B.1. Launch and Shutdown
 
 1. Initial launch
-   1. Download the jar file and copy into an empty folder
-   2. Double-click the jar file
+    1. Download the jar file and copy into an empty folder
+    2. Double-click the jar file
 
-      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 
 2. Saving window preferences
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-   2. Re-launch the app by double-clicking the jar file.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    2. Re-launch the app by double-clicking the jar file.
 
-      Expected: The most recent window size and location is retained.
+       Expected: The most recent window size and location is retained.
 
 ### B.2. View Sample Job Application List
 
@@ -658,182 +691,190 @@ Given below are instructions to test the app manually.
 ### B.3. View Job Application List
 
 1. Viewing the list of job application(s).
-   1. Test case: `list`
+    1. Test case: `list`
 
-      Expected: The list of job applications is shown in the GUI.
+       Expected: The list of job applications is shown in the GUI.
 
 ### B.4. Add Job Application
 
 1. Adding a job application.
-   1. Test case: `add c/Microsoft r/Project Manager d/Dec 31 2023 1400 i/Technology s/Pending t/FULL_TIME`
+    1. Test case: `add c/Microsoft r/Project Manager d/Dec 31 2023 1400 i/Technology s/Pending t/FULL_TIME`
 
-      Expected: New job application is added to the bottom of the list. Details of the newly-added application is shown in the feedback box.
+       Expected: New job application is added to the bottom of the list. Details of the newly-added application is shown
+       in the feedback box.
 
-   2. Test case: `add r/Data Analyst`
+    2. Test case: `add r/Data Analyst`
 
-        Expected: Job application is not added. Error details are shown in feedback box.
+       Expected: Job application is not added. Error details are shown in feedback box.
 
 ### B.5. Delete Job Application
 
 1. Deleting a job application by index.
-   1. Prerequisites: At least one job application is displayed.
-      1. Test case: `delete 1`
+    1. Prerequisites: At least one job application is displayed.
+        1. Test case: `delete 1`
 
-         Expected: The first job application is deleted from the list. Details of the deleted application is shown in the feedback box.
-      2. Test case: `delete 0`
+           Expected: The first job application is deleted from the list. Details of the deleted application is shown in
+           the feedback box.
+        2. Test case: `delete 0`
 
-         Expected: No job application is deleted. Error details are shown in feedback box.
-      3. Other test cases: `delete`, `delete x` (where x is larger than the list size)
+           Expected: No job application is deleted. Error details are shown in feedback box.
+        3. Other test cases: `delete`, `delete x` (where x is larger than the list size)
 
-            Expected: Similar to test case 2.
+           Expected: Similar to test case 2.
 
 ### B.6. Edit Job Application
 
 1. Editing a job application by index.
-   1. Prerequisites: At least one job application is displayed.
-      1. Test case: `edit 1 c/Google r/Software Engineer`
+    1. Prerequisites: At least one job application is displayed.
+        1. Test case: `edit 1 c/Google r/Software Engineer`
 
-         Expected: The first job application is edited. Details of the edited application is shown in the feedback box.
-      2. Test case: `edit 0 c/Google r/Software Engineer`
+           Expected: The first job application is edited. Details of the edited application is shown in the feedback
+           box.
+        2. Test case: `edit 0 c/Google r/Software Engineer`
 
-         Expected: No job application is edited. Error details are shown in feedback box.
-      3. Test case: `edit c/Google r/Software Engineer`
+           Expected: No job application is edited. Error details are shown in feedback box.
+        3. Test case: `edit c/Google r/Software Engineer`
 
-            Expected: Similar to test case 2.
-      4. Test case: `edit 1 d/Nov 31 2023 1400`
+           Expected: Similar to test case 2.
+        4. Test case: `edit 1 d/Nov 31 2023 1400`
 
-            Expected: Invalid date format. Error details are shown in feedback box.
-      5. Test case: `edit 1 s/`
+           Expected: Invalid date format. Error details are shown in feedback box.
+        5. Test case: `edit 1 s/`
 
-            Expected: Invalid status format. Error details are shown in feedback box.
-      6. Test case: `edit 1 q/`
+           Expected: Invalid status format. Error details are shown in feedback box.
+        6. Test case: `edit 1 q/`
 
-            Expected: Invalid prefix. Error details are shown in feedback box.'
+           Expected: Invalid prefix. Error details are shown in feedback box.'
 
 ### B.7. Add Interview to Job Application
 
 1. Adding an interview to a job application by index.
-   1. Prerequisites: List all job applications using `list`.
-      1. Test case: `interview add 1 t/Technical a/Changi Business Park Central 1, 486036 d/Nov 30 2023 1400`
+    1. Prerequisites: List all job applications using `list`.
+        1. Test case: `interview add 1 t/Technical a/Changi Business Park Central 1, 486036 d/Nov 30 2023 1400`
 
-         Expected: Interview is added to the job application. Details of the interview is shown in the job details panel.
-      2. Test case: `interview add 0 t/Technical a/Changi Business Park Central 1, 486036 d/Nov 30 2023 1400`
+           Expected: Interview is added to the job application. Details of the interview is shown in the job details
+           panel.
+        2. Test case: `interview add 0 t/Technical a/Changi Business Park Central 1, 486036 d/Nov 30 2023 1400`
 
-         Expected: No interview is added. Error details are shown in feedback box.
-      3. Test case: `interview add 1 t/Technical d/Nov 30 2023 1400`
+           Expected: No interview is added. Error details are shown in feedback box.
+        3. Test case: `interview add 1 t/Technical d/Nov 30 2023 1400`
 
-            Expected: No interview is added. All fields are compulsory. Error details are shown in feedback box.
+           Expected: No interview is added. All fields are compulsory. Error details are shown in feedback box.
 
 ### B.8. Delete Interview from Job Application
 
 1. Deleting an interview from a job application by index.
-   1. Prerequisites: List all job applications using `list`.
-      1. Test case: `interview delete 1 from/1`
+    1. Prerequisites: List all job applications using `list`.
+        1. Test case: `interview delete 1 from/1`
 
-         Expected: Interview is deleted from the job application. Details of the interview is removed from the job details panel.
-      2. Test case: `interview delete 0 from/1`
+           Expected: Interview is deleted from the job application. Details of the interview is removed from the job
+           details panel.
+        2. Test case: `interview delete 0 from/1`
 
-         Expected: No interview is deleted. Error details are shown in feedback box.
-      3. Test case: `interview delete 1 from/0`
+           Expected: No interview is deleted. Error details are shown in feedback box.
+        3. Test case: `interview delete 1 from/0`
 
-            Expected: Similar error to test case 2.
+           Expected: Similar error to test case 2.
 
 ### B.9. Edit Interview from Job Application
 
 1. Editing an interview from a job application by index.
-   1. Prerequisites: List all job applications using `list`.
-      1. Test case: `interview edit 1 from/1 t/Technical a/Changi Business Park Central 1, 486036 d/Nov 30 2023 1200`
+    1. Prerequisites: List all job applications using `list`.
+        1. Test case: `interview edit 1 from/1 t/Technical a/Changi Business Park Central 1, 486036 d/Nov 30 2023 1200`
 
-         Expected: Interview is edited. Details of the interview is updated in the job details panel.
-      2. Test case: `interview edit 0 from/1 t/Technical a/Changi Business Park Central 1, 486036 d/Nov 30 2023 1400`
+           Expected: Interview is edited. Details of the interview is updated in the job details panel.
+        2. Test case: `interview edit 0 from/1 t/Technical a/Changi Business Park Central 1, 486036 d/Nov 30 2023 1400`
 
-         Expected: No interview is edited. Error details are shown in feedback box.
-      3. Test case: `interview edit 1 from/0 t/Technical a/Changi Business Park Central 1, 486036 d/Nov 30 2023 1400`
+           Expected: No interview is edited. Error details are shown in feedback box.
+        3. Test case: `interview edit 1 from/0 t/Technical a/Changi Business Park Central 1, 486036 d/Nov 30 2023 1400`
 
-            Expected: Similar error to test case 2.
-      4. Test case: `interview edit 1 from/1 t/Technical d/Nov 30 2023 1400`
+           Expected: Similar error to test case 2.
+        4. Test case: `interview edit 1 from/1 t/Technical d/Nov 30 2023 1400`
 
-            Expected: Interview is edited. Details of the interview is updated in the job details panel.
-      5. Test case: `interview edit 1 from/1 t/Home`
+           Expected: Interview is edited. Details of the interview is updated in the job details panel.
+        5. Test case: `interview edit 1 from/1 t/Home`
 
-            Expected: No interview is edited. Invalid interview type. Error details are shown in feedback box.
+           Expected: No interview is edited. Invalid interview type. Error details are shown in feedback box.
 
 ### B.10. Sort Job Application List
 
 1. Sorting the list of job application(s).
-   1. Prerequisites: At least one job application is displayed.
-      1. Test case: `sort c/`
+    1. Prerequisites: At least one job application is displayed.
+        1. Test case: `sort c/`
 
-         Expected: The list of job applications is sorted by company name.
-      2. Test case: `sort r/`
+           Expected: The list of job applications is sorted by company name.
+        2. Test case: `sort r/`
 
-         Expected: The list of job applications is sorted by role.
-      3. Test case: `sort s/`
+           Expected: The list of job applications is sorted by role.
+        3. Test case: `sort s/`
 
-            Expected: The list of job applications is sorted by status.
-      4. Test case: `sort d/`
+           Expected: The list of job applications is sorted by status.
+        4. Test case: `sort d/`
 
-            Expected: The list of job applications is sorted by deadline.
-      5. Test case: `sort t/`
+           Expected: The list of job applications is sorted by deadline.
+        5. Test case: `sort t/`
 
-            Expected: The list of job applications is sorted by job type.
-      6. Test case: `sort i/`
+           Expected: The list of job applications is sorted by job type.
+        6. Test case: `sort i/`
 
-            Expected: The list of job applications is sorted by industry.
-      7. Test case: `sort x/`
+           Expected: The list of job applications is sorted by industry.
+        7. Test case: `sort x/`
 
-            Expected: No sorting is done. Error details are shown in feedback box.
-   2. Prerequisites: Use `find` command to reduce size of job application list without deleting any job applications. For example, `find r/program`.
-      1. Test case: `sort c/`
+           Expected: No sorting is done. Error details are shown in feedback box.
+    2. Prerequisites: Use `find` command to reduce size of job application list without deleting any job applications.
+       For example, `find r/program`.
+        1. Test case: `sort c/`
 
-         Expected: No change to the number of job applications displayed.
-    3. Prerequisites: Ensure current job applications list has multiple applications with fields of the same value. For example, multiple applications with the `role` of `software developer`.
-       1. Test case: `sort r/`
+           Expected: No change to the number of job applications displayed.
+    3. Prerequisites: Ensure current job applications list has multiple applications with fields of the same value. For
+       example, multiple applications with the `role` of `software developer`.
+        1. Test case: `sort r/`
 
-          Expected: No change in order of job applications with identical roles.
+           Expected: No change in order of job applications with identical roles.
 
 ### B.11. Find Job Application
 
 1. Finding a job application by keywords.
-   1. Prerequisites: Starting with the sample job application list. Refer to B.2. for steps to load the sample job application list.
-      1. Test case: `find`
+    1. Prerequisites: Starting with the sample job application list. Refer to B.2. for steps to load the sample job
+       application list.
+        1. Test case: `find`
 
-         Expected: No change in list. Error details shown in the feedback box as at least one of the optional parameters must be entered.
-      2. Test case: `find full_time`
+           Expected: No change in list. Error details shown in the feedback box as at least one of the optional
+           parameters must be entered.
+        2. Test case: `find full_time`
 
-         Expected: Applications with the keyword `full_time` in any field are shown in the list.
-      3. Test case: `find s/Pending`
+           Expected: Applications with the keyword `full_time` in any field are shown in the list.
+        3. Test case: `find s/Pending`
 
-            Expected: All applications with `PENDING` status are shown in the list.
-      4. Test case: `find Dec`
+           Expected: All applications with `PENDING` status are shown in the list.
+        4. Test case: `find Dec`
 
-            Expected: All applications with `Dec` in the deadline are shown in the list.
-      5. Test case: `find Shop`
+           Expected: All applications with `Dec` in the deadline are shown in the list.
+        5. Test case: `find Shop`
 
-            Expected: No application is listed. `find` does not work with partial keywords.
+           Expected: No application is listed. `find` does not work with partial keywords.
 
 ### B.12. Clear Job Application List
 
 1. Clearing the list of job application(s).
-   1. Prerequisites: At least one job application is displayed.
-      1. Test case: `clear`
+    1. Prerequisites: At least one job application is displayed.
+        1. Test case: `clear`
 
-         Expected: The list of job applications is cleared. The list is empty.
+           Expected: The list of job applications is cleared. The list is empty.
 
 ### B.13. Exit JobFindr
 
 1. Exiting the application.
-   1. Test case: `exit`
+    1. Test case: `exit`
 
-      Expected: The application window closes.
+       Expected: The application window closes.
 
 ### B.14. Help
 
 1. Opening the help window.
-   1. Test case: `help`
+    1. Test case: `help`
 
-      Expected: The help window opens.
-
+       Expected: The help window opens.
 
 ---
 
@@ -847,7 +888,12 @@ Explain the difficulty level, challenges faced, effort required, and achievement
 
 listing fixes you propose to add in the near future, to counter known feature flaws.
 This section may contain up to team_size x 2 enhancements e.g., a 5-person team can have up to 10 enhancements.
-Each enhancement should be specific, describing the feature flaw it addresses and how exactly the feature will be changed, providing sample UIs/inputs/outputs if applicable. e.g.,
-The current error message for a failed contact deletion Operation failed! is too general. We plan to make the error message also mention which action failed and the reason for the failure: The contact Amy Lee could not be deleted as it is referenced by another contact Ben Chua.
+Each enhancement should be specific, describing the feature flaw it addresses and how exactly the feature will be
+changed, providing sample UIs/inputs/outputs if applicable. e.g.,
+The current error message for a failed contact deletion Operation failed! is too general. We plan to make the error
+message also mention which action failed and the reason for the failure: The contact Amy Lee could not be deleted as it
+is referenced by another contact Ben Chua.
 Each enhancement should be a tweak to an existing feature, and should not be a new feature altogether.
-type.FeatureFlaw bug reports matching an item in this section will not be penalized for the team, and testers will not earn credit for reporting them either. However, testers can report type.FeatureFlaw bugs on the enhancements listed in this section, if they think the planned feature tweak itself is flawed/inadequate.
+type.FeatureFlaw bug reports matching an item in this section will not be penalized for the team, and testers will not
+earn credit for reporting them either. However, testers can report type.FeatureFlaw bugs on the enhancements listed in
+this section, if they think the planned feature tweak itself is flawed/inadequate.
