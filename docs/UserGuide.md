@@ -180,10 +180,6 @@ add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Bac
    2. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.
 ![result of add command](./images/UserGuide/1.4_add.png)
 
-   
-
-
-
 ### Deleting a Flashcard : `delete`
 Deletes a flashcard in the deck
 
@@ -204,17 +200,15 @@ delete 2
 2. Index cannot exceed size of the deck.
 
 #### Expected Outputs:
-1. Given a correct input, a success message will be shown containing the details of the deleted flashcard.
-   1. ```
-      Deleted Card: Question: <provided question>; Answer: <provided answer>
-      ```
-#### Usage:
 1. User Input: 
    ```
+   add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS
    delete 1
    ```
 
 2. Successful Output
+   1. Result box displays: `Deleted Card: Question: opcode for R format instructions; Answer: 000000`
+   2. The corresponding card is deleted from the deck.
 
 ![result of delete command](./images/UserGuide/1.4_del.png)
 
@@ -223,7 +217,7 @@ Shows a list of all flashcards in the deck. A keyword may be specified to filter
 
 Format: 
 ```
-list [q/question] [t/tag]
+list [q/QUESTION] [t/TAG...]
 ```
 ### Examples:
 _List full deck of flashcards._
@@ -240,29 +234,20 @@ list t/CS2100
 ```
 
 #### To note:
-1. No Empty Input after `q/` and `t/`.
-2. `q/` and `t/` is optional and be in any order.
-3. Inputs are case-sensitive (cards/tags with the same input but different case will be recognised as different cards/tags)
-4. Listing questions with markdown syntax should include their relevant markdown notation.
-5. User can list multiple tags or a combination with a question keyword. In this case only flashcards that match all tags and keywords will be shown.
-6. Any extraneous parameters not `q/` and `t/` will be ignored, i.e. `list 12345` or `list a/000000` will be regarded as `list`.
+1. Any extraneous parameters not `q/` and `t/` will be ignored, i.e. `list 12345` or `list a/000000` will be regarded as `list`.
 
 #### Expected output:
-
-1. Given a correct input, a success message will be shown.
-
-   1. ```
-      All cards listed
-      ```
-2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
-
-#### Usage
 1. User Input:
    ```
-   list
+   add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude
+   add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems
+   add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB 
+   list t/CS2100
    ```
 
 2. Successful Output
+   1. Result box displays: `All cards listed`
+   2. The corresponding cards matching the keyword and tags is displayed.
 ![usage of list command](./images/UserGuide/1.4_list.png)
 
 ### Editing a Specific Flashcard : `edit`
