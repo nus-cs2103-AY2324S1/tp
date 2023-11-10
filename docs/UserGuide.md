@@ -150,6 +150,16 @@ create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [tg/TELEGRAM]
 [pf/PROFESSION] [i/INCOME] [d/DETAILS]
 ```
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Unique profiles**<br>
+
+Connectify checks for the uniqueness of a profile by its `NAME`. It doesn't allow you to create two profiles with the same name. If you happen to have two clients with the exact same name, you can possibly further differentiate them by adding some notes in brackets!
+
+e.g. `John Doe (Company A)` vs `John Doe (Company B)`
+
+</div>
+
 **Example**
 ```text
 create n/Bernice Yu p/99272758 e/berniceyu@example.com 
