@@ -36,4 +36,8 @@ public class ResultDisplay extends UiPart<Region> {
         bot.setImage(new Image("/images/bot.png"));
     }
 
+    public String getText() {
+        return resultDisplay.getText();
+    }
+
 }

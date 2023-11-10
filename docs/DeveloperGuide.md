@@ -632,7 +632,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Filtering Dates
 
-1. Filtering Dates by metric (e.g. name, age, height, income, horoscope)
+1. Filtering Dates by metric (e.g. name, age, height)
     * Type the following filter command into the text field.<br>
       `filter age/John`
     * Press enter.
@@ -660,7 +660,7 @@ testers are expected to do more *exploratory* testing.
     * Expected: The most recent window size and location is retained.
     * Note: The window looks best under 1920 x 1080 resolution, 125% scale.
 
-1. Saving data
+2. Saving data
     * Launch the app by double-clicking the jar file.
     * Execute an add command to add a `Date` in the database.
     * Close the app.
@@ -676,9 +676,29 @@ testers are expected to do more *exploratory* testing.
      allow this.
 
 2. Improve the income field to be more robust
-   - Currently the income field is unable to accept a range of values, which might not be inclusive of people who
+   - Currently, the income field is unable to accept a range of values, which might not be inclusive of people who
 have careers with variable income.
    - Additionally, right now the income field does not accept a value of 0. This is not inclusive towards students 
 who may not have any income. Hence, we plan to modify the field to accept a value of 0, on top of supporting a range 
 of values
-------------------------------------------------------------
+
+3. Improve issues regarding sorting stability
+   - Currently, you are able to sort the dates by a specific field. However, if we sort by income for instance, and two
+dates have the same value, then when one of those two dates are modified by operations such as star or edit, the order 
+of the two of them can change. The dates are still sorted in order, just that the stability is disrupted. We intend
+to improve upon our star and edit commands such that they do not disrupt the stability in the future.
+
+4. Improve error messages
+   - Currently, typing a value more than a million for the income field, throws an error that says that it 
+only accepts positive integers. In the future we intend to update it to say that it only accepts positive integers up 
+till a million. This is more accurate
+
+5. Improve the filter feature to be more robust. Some examples include:
+   - Currently, the filter feature only allows the user to filter by metrics limited to name, age, gender and height. We
+     are planning to allow the user to filter by other metrics such as horoscope and income.
+   - Currently, the filter feature only allows the user to filter by a single keyword for a single metric. We are planning to allow the user
+     to filter by multiple keywords.
+
+6. Improve the error message to be more comprehensive
+   - Currently, the error message for user that key in multiple invalid keywords only spots the first invalid keyword. We
+     are planning to allow the user to know all the invalid keywords that he/she has keyed in.

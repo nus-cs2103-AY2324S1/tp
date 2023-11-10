@@ -4,8 +4,6 @@ import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.lovebook.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -21,7 +19,6 @@ import seedu.lovebook.model.date.Name;
 public class FilterCommandParserTest {
 
     private FilterCommandParser parser = new FilterCommandParser();
-    private final ArrayList<MetricContainsKeywordPredicate> predicateList = new ArrayList<>();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -41,23 +38,26 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFilterCommand() {
+        ArrayList<MetricContainsKeywordPredicate> predicateList = new ArrayList<>();
         predicateList.add(new MetricContainsKeywordPredicate("Alice", PREFIX_NAME));
         predicateList.add(new MetricContainsKeywordPredicate("22", PREFIX_AGE));
         FilterCommand expectedFilterCommand = new FilterCommand(predicateList);
-        assertParseSuccess(parser, " age/ 22 name/ Alice", expectedFilterCommand);
+        assertParseSuccess(parser, " age/22 name/Alice", expectedFilterCommand);
     }
     @Test
     public void parse_validArgs_returnsFilterCommand2() {
+        ArrayList<MetricContainsKeywordPredicate> predicateList = new ArrayList<>();
+        predicateList.add(new MetricContainsKeywordPredicate("20", PREFIX_AGE));
         predicateList.add(new MetricContainsKeywordPredicate("123", PREFIX_HEIGHT));
-        predicateList.add(new MetricContainsKeywordPredicate("3000", PREFIX_INCOME));
         FilterCommand expectedFilterCommand = new FilterCommand(predicateList);
-        assertParseSuccess(parser, " income/ 3000 height/ 123", expectedFilterCommand);
+        assertParseSuccess(parser, " height/123 age/20", expectedFilterCommand);
     }
     @Test
     public void parse_validArgs_returnsFilterCommand3() {
+        ArrayList<MetricContainsKeywordPredicate> predicateList = new ArrayList<>();
         predicateList.add(new MetricContainsKeywordPredicate("F", PREFIX_GENDER));
-        predicateList.add(new MetricContainsKeywordPredicate("Libra", PREFIX_HOROSCOPE));
+        predicateList.add(new MetricContainsKeywordPredicate("123", PREFIX_HEIGHT));
         FilterCommand expectedFilterCommand = new FilterCommand(predicateList);
-        assertParseSuccess(parser, " horoscope/ Libra gender/ F", expectedFilterCommand);
+        assertParseSuccess(parser, " height/123 gender/F", expectedFilterCommand);
     }
 }

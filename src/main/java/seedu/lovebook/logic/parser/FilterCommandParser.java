@@ -66,18 +66,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             ParserUtil.parseHeight(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
-        if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
-            keyword = argMultimap.getValue(PREFIX_INCOME).get();
-            metric = new Prefix("income/");
-            ParserUtil.parseIncome(keyword); // checks validity
-            predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
-        }
-        if (argMultimap.getValue(PREFIX_HOROSCOPE).isPresent()) {
-            keyword = argMultimap.getValue(PREFIX_HOROSCOPE).get();
-            metric = new Prefix("horoscope/");
-            ParserUtil.parseHoroscope(keyword); // checks validity
-            predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
-        }
         if (metric == null || keyword.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }

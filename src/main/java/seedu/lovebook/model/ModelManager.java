@@ -43,7 +43,7 @@ public class ModelManager implements Model {
         this.loveBook = new LoveBook(loveBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.datePrefs = new DatePrefs(datePrefs);
-        sortedList = new SortedList<>(this.loveBook.getPersonList());
+        sortedList = new SortedList<>(this.loveBook.getPersonList()).sorted(Comparator.<Date>naturalOrder());
         filteredDates = new FilteredList<>(sortedList);
     }
 

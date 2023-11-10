@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
-import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.function.Predicate;
@@ -42,12 +40,6 @@ public class MetricContainsKeywordPredicate implements Predicate<Date> {
         }
         if (metric.equals(PREFIX_HEIGHT)) {
             return StringUtil.containsWordIgnoreCase(date.getHeight().value, keyword);
-        }
-        if (metric.equals(PREFIX_INCOME)) {
-            return StringUtil.containsWordIgnoreCase(date.getIncome().value, keyword);
-        }
-        if (metric.equals(PREFIX_HOROSCOPE)) {
-            return StringUtil.containsWordIgnoreCase(date.getHoroscope().value, keyword);
         }
         return false;
     }

@@ -17,7 +17,7 @@ public class Income implements Comparable<Income> {
      * The first character of the LoveBook must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^(0|[1-9]\\d{0,5}|1000000)$";
+    public static final String VALIDATION_REGEX = "^([1-9]\\d{0,5}|[1-9]\\d{0,5}|1000000)$";
 
     public final String value;
 
