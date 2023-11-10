@@ -67,13 +67,21 @@ Choose a topic from the table of contents below to find out how to manage your c
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
 # Reading the examples in this user guide
 
 The examples in this guide are formatted with the following conventions:
 * **Command** - The command to be typed into the command box.
-* **Command word(s)** - Words that specify the type of command to be executed. Written in ***bold italics***, always at the start of a line.
-* **Flags** - Indicators to differentiate various parts of the command. Always take the format `$/` followed by a **Parameter**. The `$` varies depending on the type of flag. <br/> E.g., `o/` in ***interaction*** command specifies the **Outcome** of the interaction, while `l/` in ***edit*** command specifies the **Lead** of the client.
-* **Parameters** - Component of the command that usually follows a **Flag**. A parameter might be written without a flag for some commands where it is clear what the parameter is referring to. <br/> E.g., `INDEX` following an ***edit*** command specifies the index of the client to be edited.
+
+* **Command word** - Words that specify the type of command to be executed. Written in ***bold italics***, always at the start of a line.
+
+* **Flags** - Indicators to differentiate various parts of the command. It takes the format `$/` followed by a **Parameter**. The `$` varies depending on the type of flag.
+
+    e.g. `o/` in ***interaction*** command specifies the **Outcome** of the interaction, while `l/` in ***edit*** command specifies the **Lead** of the client.
+
+* **Parameters** - Component of the command that usually follows a **Flag**. A parameter might be written without a flag for some commands where it is clear what the parameter is referring to.
+
+    e.g. `INDEX` following an ***edit*** command specifies the index of the client to be edited.
 
 [↑ Back to Table of Contents](#table-of-contents)
 
