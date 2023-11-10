@@ -50,7 +50,7 @@ My code contributions can be found here: [Reposense Report](https://nus-cs2103-a
 
 ### Other Contributions
 * **Project management**:
-  * Actively assisted peers by providing technical advise and reviewing and approving PRs.
+  * Actively assisted peers by providing technical advice and reviewing and approving PRs.
   * Conducted multiple checks on code quality and refactored messy code.
 * **Documentation**:
   * Contributed extensively to both the User Guide (UG) and Developer Guide (DG).

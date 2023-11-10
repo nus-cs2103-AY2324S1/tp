@@ -7,13 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.commands.CommandTestUtil.*;
 import static seedu.application.testutil.TypicalInterviews.CHEF_INTERVIEW;
 import static seedu.application.testutil.TypicalInterviews.CLEANER_INTERVIEW;
-import static seedu.application.testutil.TypicalJobs.CHEF;
-import static seedu.application.testutil.TypicalJobs.CLEANER;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.application.testutil.InterviewBuilder;
-import seedu.application.testutil.JobBuilder;
 
 public class InterviewTest {
 
@@ -27,21 +24,25 @@ public class InterviewTest {
 
         // To be implemented after non-identity fields are created
         // same role and company, all other attributes different -> returns true
-        Interview editedChefInterview = new InterviewBuilder(CHEF_INTERVIEW).withType(VALID_INTERVIEW_TYPE_CHEF).build();
+        Interview editedChefInterview = new InterviewBuilder(CHEF_INTERVIEW)
+            .withType(VALID_INTERVIEW_TYPE_CHEF).build();
         assertTrue(CHEF_INTERVIEW.isSameInterview(editedChefInterview));
 
         // different role, all other attributes same -> returns false
-        editedChefInterview = new InterviewBuilder(CHEF_INTERVIEW).withType(VALID_INTERVIEW_TYPE_CLEANER).build();
+        editedChefInterview = new InterviewBuilder(CHEF_INTERVIEW)
+            .withType(VALID_INTERVIEW_TYPE_CLEANER).build();
         assertFalse(CHEF_INTERVIEW.isSameInterview(editedChefInterview));
 
         // role and company differ in case, all other attributes same -> returns true
-        Interview editedCleanerInterview = new InterviewBuilder(CLEANER_INTERVIEW).withType(VALID_INTERVIEW_TYPE_CLEANER.toLowerCase())
+        Interview editedCleanerInterview = new InterviewBuilder(CLEANER_INTERVIEW)
+            .withType(VALID_INTERVIEW_TYPE_CLEANER.toLowerCase())
             .withAddress(VALID_INTERVIEW_ADDRESS_CLEANER.toLowerCase()).build();
         assertTrue(CLEANER_INTERVIEW.isSameInterview(editedCleanerInterview));
 
         // role has trailing spaces, all other attributes same -> returns false
         String addressWithTrailingSpaces = VALID_INTERVIEW_ADDRESS_CLEANER + " ";
-        editedCleanerInterview = new InterviewBuilder(CLEANER_INTERVIEW).withAddress(addressWithTrailingSpaces).build();
+        editedCleanerInterview = new InterviewBuilder(CLEANER_INTERVIEW)
+            .withAddress(addressWithTrailingSpaces).build();
         assertFalse(CLEANER_INTERVIEW.isSameInterview(editedCleanerInterview));
     }
 
@@ -66,17 +67,20 @@ public class InterviewTest {
         assertNotEquals(CHEF_INTERVIEW.hashCode(), CLEANER_INTERVIEW.hashCode());
 
         // different role -> returns false
-        Interview chefInterviewEditedType = new InterviewBuilder(CHEF_INTERVIEW).withType(VALID_INTERVIEW_TYPE_CLEANER).build();
+        Interview chefInterviewEditedType = new InterviewBuilder(CHEF_INTERVIEW)
+            .withType(VALID_INTERVIEW_TYPE_CLEANER).build();
         assertFalse(CHEF_INTERVIEW.equals(chefInterviewEditedType));
         assertNotEquals(CHEF_INTERVIEW.hashCode(), chefInterviewEditedType.hashCode());
 
         // different role -> returns false
-        Interview chefInterviewEditedDateTime = new InterviewBuilder(CHEF_INTERVIEW).withDateTime(VALID_INTERVIEW_DATETIME_CLEANER).build();
+        Interview chefInterviewEditedDateTime = new InterviewBuilder(CHEF_INTERVIEW)
+            .withDateTime(VALID_INTERVIEW_DATETIME_CLEANER).build();
         assertFalse(CHEF_INTERVIEW.equals(chefInterviewEditedDateTime));
         assertNotEquals(CHEF_INTERVIEW.hashCode(), chefInterviewEditedDateTime.hashCode());
 
         // different role -> returns false
-        Interview chefInterviewEditedAddress = new InterviewBuilder(CHEF_INTERVIEW).withAddress(VALID_INTERVIEW_ADDRESS_CLEANER).build();
+        Interview chefInterviewEditedAddress = new InterviewBuilder(CHEF_INTERVIEW)
+            .withAddress(VALID_INTERVIEW_ADDRESS_CLEANER).build();
         assertFalse(CHEF_INTERVIEW.equals(chefInterviewEditedAddress));
         assertNotEquals(CHEF_INTERVIEW.hashCode(), chefInterviewEditedAddress.hashCode());
 
