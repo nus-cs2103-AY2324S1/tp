@@ -72,11 +72,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getFlashlingoFilePath();
-    }
-
-    @Override
     public Path getFlashlingoFilePath() {
         return model.getFlashlingoFilePath();
     }
