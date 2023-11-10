@@ -43,7 +43,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
 
-        // edit here of add more than 1 group
         if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
             Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUPTAG).get());
             groupList.add(group);

@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.Time;
+import seedu.address.model.TimeInterval;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -22,6 +23,10 @@ public class TimeIntervalBuilder {
 		this.start = start;
 		this.end = end;
 		return this;
+	}
+
+	public TimeInterval build() {
+		return new TimeInterval(start, end);
 	}
 
 }
