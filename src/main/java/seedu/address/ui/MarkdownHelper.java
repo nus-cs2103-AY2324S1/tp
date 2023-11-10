@@ -6,6 +6,10 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+
+/**
+ * Helper class for the markdown functionality
+ */
 public class MarkdownHelper {
 
     public static void setTextWithMarkdown(TextFlow textFlowControl, String content, Color color) {
@@ -87,7 +91,15 @@ public class MarkdownHelper {
         }
     }
 
-
+    /**
+     * Takes in a textflow reference object and its content and updates the markdown accordingly
+     * @param textFlowControl reference object
+     * @param content actual string content to be displayed
+     * @param isBold boolean to see if there is bold
+     * @param isItalic boolean to see if there is italics
+     * @param isUnderlined boolean to see if there is underline
+     * @param color color of the font
+     */
     public static void addTextSegment(TextFlow textFlowControl, String content,
                                 boolean isBold, boolean isItalic, boolean isUnderlined, Color color) {
         Text textSegment = new Text(content);
