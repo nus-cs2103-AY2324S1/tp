@@ -23,8 +23,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER);
 
-        if (!argMultimap.getPreamble().isEmpty()
-                || areAdditionalPrefixesPresent(args, PREFIX_STUDENT_NUMBER)) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER)
+            || !argMultimap.getPreamble().isEmpty()
+            || areAdditionalPrefixesPresent(args, PREFIX_STUDENT_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
