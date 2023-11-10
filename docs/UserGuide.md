@@ -202,7 +202,7 @@ For each **interview**, we see the following details:
     * `3.15pm`
     * `3pm`
   * The `TIME` must be between 9am to 5pm.
-  * If the date is a parameter for the `list-freetime` command, please omit ` TIME` and enter the date only (e.g. `16 May 2024`)
+  * If the date is a parameter for the `list-freetime` command, please omit `TIME` and enter the date only (e.g. `16 May 2024`)
 </div>
 
 [Back to the Table of Contents](#table-of-contents)
