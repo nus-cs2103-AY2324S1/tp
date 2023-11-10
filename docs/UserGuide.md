@@ -195,7 +195,7 @@ Appointment: No Appointment made!;
 Financial Plans: [Financial Plan C]; 
 Tags: [80yo]`
 
-![result for 'add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202'](images/addUi.png)
+![result for 'add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 t/80yo fp/Financial Plan C'](images/addUi.png)
 
 <div markdown="span" class="alert alert-primary">:information_source: 
 **Do note** that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done for financial plans with the `fp/` prefix.
