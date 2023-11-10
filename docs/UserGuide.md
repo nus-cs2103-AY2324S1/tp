@@ -41,7 +41,7 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 ### 1.2 About the command format
 
-All instructions executed in WellNUS generally have the following command format:<pre>COMMAND_WORD PREFIX/PARAMETER</pre>
+All instructions executed in WellNUS generally have the following command format:```COMMAND_WORD PREFIX/PARAMETER```.
 The list of all available prefixes and parameters, as well as constraints of each parameter, is shown in the table below. 
 To see a list of all command words, refer to the [Command Summary](#5-command-summary) section.
 
@@ -88,7 +88,7 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 
 #### 2.1.1 Viewing help: `help`
 
-Shows a message with a link to the help page.
+Shows a message with a link to this user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -103,8 +103,8 @@ Adds a student with their relevant details.
 Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 
 **Parameters**:
-1. Name
-   - Cannot contain symbols, alphabetical characters only
+1. Student Name
+   - Must contain alphabetical characters only. Symbols and numerical characters are not allowed
    - Must be unique
    - Maximum of 100 characters
 2. Contact Number
@@ -114,7 +114,7 @@ Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 4. Risk Level
    - Must be `high`, `medium`, or `low`
 
-Examples:
+Valid examples:
 * `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
 * `add n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08 r/low`
 
@@ -126,7 +126,7 @@ Invalid examples:
 
 #### 2.2.2 Deleting a Student: `delete`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Be careful when deleting a student!**
 Deleting a Student also cancels all appointments associated to that Student!
 </div>
 
@@ -139,21 +139,24 @@ Format: `delete STUDENT_INDEX`
    - Must be an integer starting from 1
    - Must be found in the students list
 
-Example:
+Valid example:
 * `delete 2`
 
 Invalid examples:
 * `delete 0` (student index only starts from 1)
 * `delete John` (index should be a number)
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you know the name of the student you want to delete, use the `find` command to filter the student list first.
+</div>
+
 #### 2.2.3 Adding notes for a Student: `note`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="block" class="alert alert-info">
 
-* Double-clicking on the Student card displays the Student notes under the Notes section!
-The "Notes" column will inform you if there are no student notes available.
-
-* To delete an existing note, you can use either `note STUDENT_INDEX` or `note STUDENT_INDEX note/`
+**:information_source: Note:**<br>
+Double-clicking on the Student card displays the Student notes under the Notes section!
+The “Notes” column will inform you if there are no student notes for a particular Student.
 </div>
 
 Adds a note to an existing student, overwrites any existing note.
@@ -167,13 +170,17 @@ Format: `note STUDENT_INDEX note/NOTE`
 2. Note
    - Maximum of 500 characters
 
-Examples:
+Valid examples:
 * `note 1 note/Preferred language: mandarin`
 * `note 2` (deletes the note at index 2)
 
 Invalid examples:
 * `note 0` (invalid index)
 * `note Alex note/Likes dogs.` (index should be a number)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To delete an existing note, simply use `note STUDENT_INDEX` or `note STUDENT_INDEX note/`
+</div>
 
 #### 2.2.4 Finding Students by Name: `find`
 
@@ -182,16 +189,27 @@ If the name does not match entirely, the student will not be shown. Refer to the
 
 Format: `find STUDENT_NAME`
 
-Examples (assuming a student named Roy Lee is in WellNUS):
-* `find Roy`
-* `find Lee`
-* `find Roy Lee`
+**Parameters**:
+1. Student Name
+   - Must contain alphabetical characters only
 
-Invalid Examples:
-* `find Royy`
-* `find Le`
-* `find Roy L`
-* `find RoyLee`
+Valid example:
+* `find Mike Oxlong`
+
+Invalid example:
+* `find 39 Jane Street` (contains numerical characters)
+* `find @9th Jan!` (contains special characters)
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: How the find command works:**<br>
+The intended behaviour of the find instruction might be confusing. To illustrate the proper behaviour, consider the example scenario below:<br>
+Given a Student named `Roy Lee` is in the WellNUS student list:
+* `find Roy`, `find Lee` and `find Roy Lee` will successfully find the Student.
+* `find Royy`, `find Le`, `find Roy L`, `find RoyLee` will not find the Student.
+</div>
+
 
 ![Find feature](images/findFeature.png)
 <p align="center">
@@ -210,10 +228,11 @@ Format: `tag STUDENT_INDEX r/RISK_LEVEL`
    - Must be found in the students list
 2. Risk Level
    - Must be `high`, `medium`, or `low`
+   - Case-insensitive, i.e. `HIGH` is a valid input
 
-Examples:
+Valid examples:
 * `tag 2 r/high`
-* `tag 1 r/low`
+* `tag 1 r/MEDIUM`
 
 Invalid examples:
 * `tag -1 r/high` (invalid index)
@@ -234,7 +253,7 @@ Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
 3. Home Address 
    - Maximum of 200 characters, cannot be blank
 
-Examples:
+Valid examples:
 * `edit 1 c/98765432 a/Woodlands Street 11 Blk 888 #08-08`
 * `edit 2 c/98574321`
 
@@ -243,14 +262,14 @@ Invalid example:
 
 ### 2.3 Appointment Commands
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
-Appointments will be automatically sorted by Date and Time in ascending order.
+<div markdown="span" class="alert alert-info">:information_source:
+Appointments will be **automatically sorted** by Date and Time in **ascending order**.
 </div>
 
 #### 2.3.1 Scheduling an Appointment: `schedule`
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
-The Student must exist before an Appointment can be scheduled for the Student !
+<div markdown="span" class="alert alert-warning">:exclamation:
+The Student must exist before an Appointment can be scheduled for the Student!
 </div>
 
 Schedules a new appointment for a student.
@@ -270,7 +289,7 @@ Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIP
 4. Description
    - Maximum of 100 characters, cannot be blank
 
-Examples:
+Valid examples:
 * `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
 * `schedule n/Yin Kiat date/2023-12-09 from/07:00 to/10:45 d/first counselling session`
 
@@ -279,6 +298,12 @@ Invalid examples:
 * `schedule n/Jon date/2023-12-09 from/16:00 to/12:45 d/first counselling session` (end time is before start time)
 * `schedule n/Jon date/09-12-2023 from/1100 to/1230 d/first counselling session` (date and time are in the wrong format)
 * `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/` (description is empty)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+WellNUS automatically checks for overlaps between appointments whenever a new appointment is being added. If there is an
+overlap between the new appointment to be scheduled and existing appointments, the new appointment will be **not be scheduled**
+and will inform the user to reschedule the appointment.
+</div>
 
 #### 2.3.2 Cancelling an Appointment: `cancel`
 
@@ -291,7 +316,7 @@ Format: `cancel APPOINTMENT_INDEX`
    - Must be an integer starting from 1
    - Must be found in the appointments list
 
-Example:
+Valid example:
 * `cancel 2`
 
 Invalid examples:
@@ -308,7 +333,7 @@ Format: `filter DATE`
 1. Date
    - Must be in the following format: `yyyy-mm-dd`
 
-Example:
+Valid example:
 * `filter 2023-10-16`
 
 Invalid examples:
@@ -332,7 +357,7 @@ Format: `view g/CATEGORY`
 1. Category
    - Must be `students`, `appointments` or `all`
 
-Examples:
+Valid examples:
 * `view g/all`
 * `view g/appointments`
 * `view g/students`
@@ -398,7 +423,7 @@ You can always update the risk level later using the tag command when more infor
 
 ## 5. Command summary
 
-| Action                                                                                     | Format, Examples                                                                                                                                                |
+| Action                                                                                     | Format, Valid examples                                                                                                                                                |
 |--------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Help](#211-viewing-help-help)                                                             | `help`                                                                                                                                                          |
 | [Add Student](#221-adding-a-student-add)                                                   | `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                |
