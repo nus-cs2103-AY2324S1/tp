@@ -1,3 +1,4 @@
+//@@author kenvynKwek
 package seedu.address.model.employee;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -73,3 +74,4 @@ public class ContainsAllPredicateTest {
     }
 
 }
+//@@author

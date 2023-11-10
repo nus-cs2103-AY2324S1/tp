@@ -87,6 +87,7 @@ public class FilterCommandParserTest {
         predicate = new ContainsAllPredicate(new CustomSet<>(), new CustomSet<>(),
                 new CustomSet<>(), new CustomSet<>(), salarySet, new CustomSet<>(), new CustomSet<>(),
                 new CustomSet<>(), new CustomSet<>());
+        //@@author kenvynKwek
         expectedFilterCommand = new FilterCommand(predicate);
         assertParseSuccess(parser, userInput, expectedFilterCommand);
     }
@@ -107,3 +108,4 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, userInput, expectedFilterCommand);
     }
 }
+//@@author

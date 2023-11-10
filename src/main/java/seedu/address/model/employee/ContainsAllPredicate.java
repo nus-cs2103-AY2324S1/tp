@@ -87,11 +87,15 @@ public class ContainsAllPredicate implements Predicate<Employee> {
                 && phoneSet.equals(otherContainsPredicate.phoneSet)
                 && emailSet.equals(otherContainsPredicate.emailSet)
                 && addressSet.equals(otherContainsPredicate.addressSet)
+                //@@author kenvynKwek
                 && salarySet.equals(otherContainsPredicate.salarySet)
+                //@@author
                 && leaveSet.equals(otherContainsPredicate.leaveSet)
                 && roleSet.equals(otherContainsPredicate.roleSet)
                 && supervisorNameSet.equals(otherContainsPredicate.supervisorNameSet)
+                //@@author kenvynKwek
                 && departmentSet.equals(otherContainsPredicate.departmentSet);
+                //@@author
     }
 
     @Override
@@ -101,11 +105,15 @@ public class ContainsAllPredicate implements Predicate<Employee> {
                 .add(", phoneSet: ", phoneSet)
                 .add(", emailSet: ", emailSet)
                 .add(", addressSet: ", addressSet)
+                //@@author kenvynKwek
                 .add(", salarySet: ", salarySet)
+                //@@author
                 .add(", leaveSet: ", leaveSet)
                 .add(", roleSet: ", roleSet)
                 .add(", supervisorNameSet: ", supervisorNameSet)
+                //@@author kenvynKwek
                 .add(", departmentSet: ", departmentSet)
                 .toString();
+                //@@author
     }
 }

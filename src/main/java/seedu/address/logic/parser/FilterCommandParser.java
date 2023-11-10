@@ -41,11 +41,20 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @return FilterCommand object for execution.
      * @throws ParseException if the user inputs does not conform to the expected format.
      */
+    //@@author kenvynKwek
     public FilterCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_SALARY, PREFIX_LEAVE, PREFIX_ROLE, PREFIX_MANAGER, PREFIX_DEPARTMENT);
+                ArgumentTokenizer.tokenize(args,
+                        //@@author
+                        PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        //@@author kenvynKwek
+                        PREFIX_SALARY,
+                        //@@author
+                        PREFIX_LEAVE, PREFIX_ROLE, PREFIX_MANAGER,
+                        //@@author kenvynKwek
+                        PREFIX_DEPARTMENT);
+                        //@@author
 
         Set<EmployeeName> nameSet = parseNamesForFilter(argMultimap.getAllValues(PREFIX_NAME));
         Set<Phone> phoneSet = parsePhonesForFilter(argMultimap.getAllValues(PREFIX_PHONE));
@@ -58,8 +67,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Set<EmployeeName> supervisorNameSet = parseSupervisorsForFilter(argMultimap.getAllValues(PREFIX_MANAGER));
         Set<DepartmentName> departmentSet = parseDepartmentsForFilter(argMultimap.getAllValues(PREFIX_DEPARTMENT));
 
-        return new FilterCommand(new ContainsAllPredicate(nameSet, phoneSet, emailSet, addressSet,
-                salarySet, leaveSet, roleSet, supervisorNameSet, departmentSet));
+        //@@author kenvynKwek
+        return new FilterCommand(
+        //@@author
+                new ContainsAllPredicate(nameSet, phoneSet, emailSet, addressSet, salarySet, leaveSet, roleSet,
+                        supervisorNameSet, departmentSet));
     }
 
     private Set<EmployeeName> parseNamesForFilter(Collection<String> nameSet) throws ParseException {

@@ -22,13 +22,17 @@ import seedu.address.model.employee.ContainsAllPredicate;
  */
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
+    //@@author kenvynKwek
     public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " "
+    //@@author
             + PREFIX_LEAVE + " 15 "
             + PREFIX_DEPARTMENT + " R&D ";
+    //@@author kenvynKwek
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": "
             + "Finds all employees who have parameters contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters:\n"
+    //@@author
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -38,6 +42,7 @@ public class FilterCommand extends Command {
             + PREFIX_ROLE + "ROLE "
             + "[" + PREFIX_MANAGER + "MANAGER]...\n"
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
+            //@@author kenvynKwek
             + "\n"
             + "Example: \n" + MESSAGE_EXAMPLE;
     private final ContainsAllPredicate predicate;
@@ -76,3 +81,4 @@ public class FilterCommand extends Command {
                 .toString();
     }
 }
+//@@author
