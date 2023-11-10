@@ -10,8 +10,8 @@ To be Added Soon
 Given below are my contributions to the project:
 
 * **New Feature**:
-    * To be added soon
-    * To be added soon
+    * Added the `freeTime` Command
+    * Prevented Clashes in Schedules
 
 
 * **Code Contributed**: To be added soon
@@ -22,11 +22,13 @@ Given below are my contributions to the project:
 
 
 * **Enhancements to existing features**:
-    * To be added soon
+    * Refactored `Add` Command to contain new fields
+    * Refactored `Edit` Command to contain new fields
 
 
 * **Documentation**:
-    * To be added soon
+    * Made changes to the Mode.java Class Diagram
+    * Added the sequence diagram for `freeTime` command
     * To be added soon
         * To be added soon
 

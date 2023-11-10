@@ -121,16 +121,10 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the tutee data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component
@@ -166,6 +160,19 @@ the `FilteredPersonList` to only display Persons whose `Day` field matches the s
 * **Alternative 2:** Individual command class without extending `ListCommand`.
     * Pros: Easier to implement.
     * Cons: Less abstraction.
+
+### Find Free Time feature
+
+The `FreeTimeCommand` extends the `Command` class. The command first finds timeslots when the user is busy by looking at
+the tutees' schedules inside the `UniquePersonList`. The TimeSlot class then finds free time based on the list of
+timeslots when the user is busy.
+
+The following sequence diagram shows how the add command works.
+![FreeTimeSequenceDiagram](images/FreeTimeSequenceDiagram.png)
+
+#### Design Considerations
+
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -262,7 +269,7 @@ The proposed mark paid/check paid mechanism can check whether the person has pai
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-More graphs To be added. 
+More graphs To be added.
 
 #### Design considerations:
 
