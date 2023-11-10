@@ -9,7 +9,9 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project uses a third-party library called [itext7](https://github.com/itext/itext7), which can help the target user of our app, HR managers, to easily generate payslips as PDF files. `itext7` is released under the [AGPL license](https://github.com/itext/itext7/blob/develop/LICENSE.md).
+* This project also uses a third-party library called [JavaWuzzy](https://github.com/xdrop/fuzzywuzzy#javawuzzy). It is released under the [GNU General Public License v2.0](https://github.com/xdrop/fuzzywuzzy/blob/master/LICENSE).
+  * Our user needs to type the reason for a deduction or benefit added. With this library used, they do not need to type the exact wording of the reasons in order to match the Reason enum. 
 
 --------------------------------------------------------------------------------------------------------------------
 
