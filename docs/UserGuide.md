@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-WellNUS is a **desktop application used by NUS Counsellors to manage and schedule appointments with their student clients**
+WellNUS is a *desktop application* used by **NUS Counsellors to manage and schedule appointments with their student clients**
 It is optimised for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, WellNUS can get your contact management tasks done faster than traditional GUI apps.
 
@@ -16,14 +16,20 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 ###  1.1 Accessing the app
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. 
+   1. To check the current version of Java installed on your system, refer to [this guide](https://www.java.com/en/download/help/version_manual.html).
+   2. If Java is not installed, you may download it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 2. Download the latest `wellnus.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-4/tp/releases/tag/v1.3).
+   1. Click on the link above to be redirected to our *github repository*.
+   2. Under *Assets*, click on the `wellnus.jar` file to begin the download.
 
 3. Copy the file to the folder you want to use as the _home folder_ for WellNUS.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wellnus.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+
+
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it.
@@ -33,7 +39,27 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 6. Refer to the [Features](#2-features) below for details of each command.
 
-### 1.2 Prefixes and parameters used in commands
+### 1.2 About the command format
+
+All instructions executed in WellNUS generally have the following command format:```COMMAND_WORD PREFIX/PARAMETER```.
+The list of all available prefixes and parameters, as well as constraints of each parameter, is shown in the table below. 
+To see a list of all command words, refer to the [Command Summary](#5-command-summary) section.
+
+| Prefix    | Parameter         | Parameter Meaning                | Example Usage                      | Parameter Constraints                                                                                                                                            |
+|-----------|-------------------|----------------------------------|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **n/**    | STUDENT_NAME      | Name of student                  | n/Peter Johnson                    | STUDENT_NAME **must** only contain **alphabetical characters and spaces**, be **unique** up to **100 characters** long, and **cannot be blank**.                 |
+| **c/**    | CONTACT_NUMBER    | Contact number of student        | c/94738484                         | CONTACT_NUMBER **must** only contain **numerical characters** beginning with *6, 8 or 9*, be **exactly 8 digits long** (without spaces) and **cannot be blank**. |
+| **a/**    | ADDRESS           | Address of student               | a/Blk 515 Choa Chu Kang Avenue 6   | ADDRESS can take any value up to **200 characters** long, and **cannot be blank**.                                                                               |
+| **r/**    | RISK_LEVEL        | Risk level assigned to student   | r/high                             | RISK_LEVEL **must** be one of the following three values: **high**, **medium**, **low**. **Case-insensitive**.                                                   |
+| **note/** | NOTE              | Note associated with student     | note/Struggles with 3rd grade math | NOTE can take any value up to **500 characters** long.                                                                                                           |
+| --        | STUDENT_INDEX     | Index of student in the list     | --                                 | STUDENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the student list.                                                         |
+| **date/** | DATE              | Date of appointment              | date/2023-10-12                    | DATE **must** be in the following format: `yyyy-MM-dd`. Specified date must be **within a year from the current date**.                                          |
+| **from/** | START_TIME        | Start time of appointment        | from/16:30                         | START_TIME **must** be in the following format: `HH:mm`, in **24-hour format**.                                                                                  |
+| **to/**   | END_TIME          | End time of appointment          | to/17:30                           | END_TIME **must** be in the following format: `HH:mm`, in **24-hour format**.                                                                                    |
+| **d/**    | DESCRIPTION       | Description of appointment       | d/3rd counselling session          | DESCRIPTION can take any value up to **100 characters** long, and **cannot be blank**.                                                                           |
+| --        | APPOINTMENT_INDEX | Index of appointment in the list | --                                 | APPOINTMENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the appointment list.                                                 |
+| **g/**    | CATEGORY          | Category of search               | g/appointments                     | CATEGORY **must** be one of the following three values: **students**, **appointments**, **all**.                                                                 |
+
 
 <div markdown="block" class="alert alert-info">
 
@@ -58,12 +84,11 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 2. Features
-
 ### 2.1 Utility Commands
 
 #### 2.1.1 Viewing help: `help`
 
-Shows a message with a link to the help page.
+Shows a message with a link to this user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -78,8 +103,8 @@ Adds a student with their relevant details.
 Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 
 **Parameters**:
-1. Name
-   - Cannot contain symbols, alphabetical characters only
+1. Student Name
+   - Must contain alphabetical characters only. Symbols and numerical characters are not allowed
    - Must be unique
    - Maximum of 100 characters
 2. Contact Number
@@ -89,7 +114,7 @@ Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 4. Risk Level
    - Must be `high`, `medium`, or `low`
 
-Examples:
+Valid examples:
 * `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
 * `add n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08 r/low`
 
@@ -101,8 +126,8 @@ Invalid examples:
 
 #### 2.2.2 Deleting a Student: `delete`
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
-Deleting a Student also cancels all appointments associated to that Student !
+<div markdown="span" class="alert alert-warning">:exclamation: **Be careful when deleting a student!**
+Deleting a Student also cancels all appointments associated to that Student!
 </div>
 
 Deletes an existing student.
@@ -114,21 +139,24 @@ Format: `delete STUDENT_INDEX`
    - Must be an integer starting from 1
    - Must be found in the students list
 
-Example:
+Valid example:
 * `delete 2`
 
 Invalid examples:
 * `delete 0` (student index only starts from 1)
 * `delete John` (index should be a number)
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you know the name of the student you want to delete, use the `find` command to filter the student list first.
+</div>
+
 #### 2.2.3 Adding notes for a Student: `note`
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
+<div markdown="block" class="alert alert-info">
 
-* Double-clicking on the Student card displays the Student notes under the Notes section!
-The "Notes" column will inform you if there are no student notes available.
-
-* To delete an existing note, you can use either `note STUDENT_INDEX` or `note STUDENT_INDEX note/`
+**:information_source: Note:**<br>
+Double-clicking on the Student card displays the Student notes under the Notes section!
+The “Notes” column will inform you if there are no student notes for a particular Student.
 </div>
 
 Adds a note to an existing student, overwrites any existing note.
@@ -142,13 +170,17 @@ Format: `note STUDENT_INDEX note/NOTE`
 2. Note
    - Maximum of 500 characters
 
-Examples:
+Valid examples:
 * `note 1 note/Preferred language: mandarin`
 * `note 2` (deletes the note at index 2)
 
 Invalid examples:
 * `note 0` (invalid index)
 * `note Alex note/Likes dogs.` (index should be a number)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To delete an existing note, simply use `note STUDENT_INDEX` or `note STUDENT_INDEX note/`
+</div>
 
 #### 2.2.4 Finding Students by Name: `find`
 
@@ -157,16 +189,32 @@ If the name does not match entirely, the student will not be shown. Refer to the
 
 Format: `find STUDENT_NAME`
 
-Examples (assuming a student named Roy Lee is in WellNUS):
-* `find Roy`
-* `find Lee`
-* `find Roy Lee`
+**Parameters**:
+1. Student Name
+   - Must contain alphabetical characters only
 
-Invalid Examples:
-* `find Royy`
-* `find Le`
-* `find Roy L`
-* `find RoyLee`
+Valid example:
+* `find Mike Oxlong`
+
+Invalid example:
+* `find 39 Jane Street` (contains numerical characters)
+* `find @9th Jan!` (contains special characters)
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: How the find command works:**<br>
+The intended behaviour of the find instruction might be confusing. To illustrate the proper behaviour, consider the example scenario below:<br>
+Given a Student named `Roy Lee` is in the WellNUS student list:
+* `find Roy`, `find Lee` and `find Roy Lee` will successfully find the Student.
+* `find Royy`, `find Le`, `find Roy L`, `find RoyLee` will not find the Student.
+</div>
+
+
+![Find feature](images/findFeature.png)
+<p align="center">
+<em>Find student Alex Yeoh</em>
+</p>
 
 #### 2.2.5 Assigning risk level to Student: `tag`
 
@@ -180,10 +228,11 @@ Format: `tag STUDENT_INDEX r/RISK_LEVEL`
    - Must be found in the students list
 2. Risk Level
    - Must be `high`, `medium`, or `low`
+   - Case-insensitive, i.e. `HIGH` is a valid input
 
-Examples:
+Valid examples:
 * `tag 2 r/high`
-* `tag 1 r/low`
+* `tag 1 r/MEDIUM`
 
 Invalid examples:
 * `tag -1 r/high` (invalid index)
@@ -193,7 +242,7 @@ Invalid examples:
 
 Edit a student's contact number or address
 
-Format `edit STUDENT_INDEX c/CONTACT_NUMBER a/HOME_ADDRESS`
+Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
 
 **Parameters**:
 1. Student Index
@@ -204,23 +253,23 @@ Format `edit STUDENT_INDEX c/CONTACT_NUMBER a/HOME_ADDRESS`
 3. Home Address 
    - Maximum of 200 characters, cannot be blank
 
-Examples:
+Valid examples:
 * `edit 1 c/98765432 a/Woodlands Street 11 Blk 888 #08-08`
 * `edit 2 c/98574321`
 
 Invalid example:
-* `edit 1` (should contain at least 1 of the fields)
+* `edit 1` (Edit must contain at least 1 field)
 
 ### 2.3 Appointment Commands
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
-Appointments will be automatically sorted by Date and Time in ascending order.
+<div markdown="span" class="alert alert-info">:information_source:
+Appointments will be **automatically sorted** by Date and Time in **ascending order**.
 </div>
 
 #### 2.3.1 Scheduling an Appointment: `schedule`
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
-The Student must exist before an Appointment can be scheduled for the Student !
+<div markdown="span" class="alert alert-warning">:exclamation:
+The Student must exist before an Appointment can be scheduled for the Student!
 </div>
 
 Schedules a new appointment for a student.
@@ -233,14 +282,14 @@ Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIP
    - Maximum of 100 characters
    - Must be the name of a student found in the students list
 2. Date
-    - Must be in the following format: `yyyy-mm-dd`
+    - Must be in the following format: `yyyy-MM-dd`
     - Must be within a year from now
 3. Start/End Time
-    - Must be in the following format: `hh:mm`
+    - Must be in the following format: `HH:mm` in 24-hour format.
 4. Description
    - Maximum of 100 characters, cannot be blank
 
-Examples:
+Valid examples:
 * `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
 * `schedule n/Yin Kiat date/2023-12-09 from/07:00 to/10:45 d/first counselling session`
 
@@ -249,6 +298,12 @@ Invalid examples:
 * `schedule n/Jon date/2023-12-09 from/16:00 to/12:45 d/first counselling session` (end time is before start time)
 * `schedule n/Jon date/09-12-2023 from/1100 to/1230 d/first counselling session` (date and time are in the wrong format)
 * `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/` (description is empty)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+WellNUS automatically checks for overlaps between appointments whenever a new appointment is being added. If there is an
+overlap between the new appointment to be scheduled and existing appointments, the new appointment will be **not be scheduled**
+and will inform the user to reschedule the appointment.
+</div>
 
 #### 2.3.2 Cancelling an Appointment: `cancel`
 
@@ -261,7 +316,7 @@ Format: `cancel APPOINTMENT_INDEX`
    - Must be an integer starting from 1
    - Must be found in the appointments list
 
-Example:
+Valid example:
 * `cancel 2`
 
 Invalid examples:
@@ -276,14 +331,19 @@ Format: `filter DATE`
 
 **Parameters**
 1. Date
-   - Must be in the following format: `yyyy-mm-dd`
+   - Must be in the following format: `yyyy-MM-dd`
 
-Example:
+Valid example:
 * `filter 2023-10-16`
 
 Invalid examples:
 * `filter 16-10-2023` (date is in wrong format)
 * `filter 16 October 2023` (date is in wrong format)
+
+![Filter feature](images/filterFeature.png)
+<p align="center">
+<em>Filter appointments on 15 December 2023</em>
+</p>
 
 ### 2.4 Others
 
@@ -295,9 +355,9 @@ Format: `view g/CATEGORY`
 
 **Parameters**:
 1. Category
-   - Must be 'students', 'appointments' or 'all'
+   - Must be `students`, `appointments` or `all`
 
-Examples:
+Valid examples:
 * `view g/all`
 * `view g/appointments`
 * `view g/students`
@@ -333,8 +393,25 @@ _Details coming soon ..._
 
 ## 3. Frequently Asked Questions (FAQ)
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WellNUS home folder.
+1. **How do I transfer my data to another Computer ?**<br/>
+Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WellNUS home folder.
+
+2. **How can I view my appointments scheduled today ?**<br/>
+You can use the filter command with today's date. 
+Here's an example: `filter 2023-12-07`. Replace `2023-12-07` with today's date in `yyyy-mm-dd` format.
+
+3. **How do I clear all data in WellNUS ?**<br/>
+To clear all data, use the `clear` command. This resets the storage, deleting all appointments and students. 
+Exercise caution, as this action cannot be undone.
+
+4. **How do I exit the WellNUS application ?**<br/>
+To exit the program, use the exit command. This closes the application.
+
+5. **I am unsure of a new student's risk level, what should I put ?**<br/>
+If you're unsure of a new student's risk level, you can leave the risk level parameter blank when adding the student using the add command. 
+WellNUS is designed to handle optional parameters. Here's an example:
+`add n/John Doe c/98172645 a/821, Bishan, #02-124`
+You can always update the risk level later using the tag command when more information becomes available.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -346,20 +423,20 @@ _Details coming soon ..._
 
 ## 5. Command summary
 
-| Action                                                                                    | Format, Examples                                                                                                                                                |
-|-------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Help](#211-viewing-help-help)                                                            | `help`                                                                                                                                                          |
-| [Add Student](#221-adding-a-student-add)                                                  | `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                |
-| [Delete Student](#222-deleting-a-student-delete)                                          | `delete STUDENT_INDEX`<br> e.g., `delete 3`                                                                                                                     |
-| [Add Student Note](#223-adding-notes-for-a-student-note)                                  | `note STUDENT_INDEX note/NOTE` <br> e.g., `note 1 note/Likes dogs`                                                                                              |
-| [Find Students](#224-finding-students-by-name-find)                                       | `find STUDENT_NAME` <br> e.g., `find John`                                                                                                                      |
-| [Assign Risk Level to Student](#225-assigning-risk-level-to-student-tag)                  | `tag STUDENT_INDEX r/RISK_LEVEL`<br> e.g.,`tag 4 r/high`                                                                                                        |
-| [Edit Student details](#226-editing-student-details-edit)                                 | `edit STUDENT_INDEX c/CONTACT_NUMBER A/HOME_ADDRESS`<br> e.g.,`edit 1 c/91234567`                                                                               |
-| [Schedule Appointment](#231-scheduling-an-appointment-schedule)                           | `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` |
-| [Cancel Appointment](#232-cancelling-an-appointment-cancel)                               | `cancel APPOINTMENT_INDEX`<br> e.g., `cancel 3`                                                                                                                 |
-| [Filter Appointments](#233-filtering-appointments-by-date-filter)                         | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                    |
+| Action                                                                                     | Format, Valid examples                                                                                                                                                |
+|--------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Help](#211-viewing-help-help)                                                             | `help`                                                                                                                                                          |
+| [Add Student](#221-adding-a-student-add)                                                   | `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                |
+| [Delete Student](#222-deleting-a-student-delete)                                           | `delete STUDENT_INDEX`<br> e.g., `delete 3`                                                                                                                     |
+| [Add Student Note](#223-adding-notes-for-a-student-note)                                   | `note STUDENT_INDEX note/NOTE` <br> e.g., `note 1 note/Likes dogs`                                                                                              |
+| [Find Students](#224-finding-students-by-name-find)                                        | `find STUDENT_NAME` <br> e.g., `find John`                                                                                                                      |
+| [Assign Risk Level to Student](#225-assigning-risk-level-to-student-tag)                   | `tag STUDENT_INDEX r/RISK_LEVEL`<br> e.g.,`tag 4 r/high`                                                                                                        |
+| [Edit Student details](#226-editing-student-details-edit)                                  | `edit STUDENT_INDEX c/CONTACT_NUMBER A/HOME_ADDRESS`<br> e.g.,`edit 1 c/91234567`                                                                               |
+| [Schedule Appointment](#231-scheduling-an-appointment-schedule)                            | `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` |
+| [Cancel Appointment](#232-cancelling-an-appointment-cancel)                                | `cancel APPOINTMENT_INDEX`<br> e.g., `cancel 3`                                                                                                                 |
+| [Filter Appointments](#233-filtering-appointments-by-date-filter)                          | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                    |
 | [View all Students and/or Appointments](#241-viewing-all-students-andor-appointments-view) | `view g/CATEGORY` <br> e.g., `view g/all`                                                                                                                       |
-| [Exit](#242-exiting-the-program-exit)                                                     | `exit`                                                                                                                                                          |
-| [Delete all data](#243-clearing-storage-clear)                                            | `clear`                                                                                                                                                         |
+| [Exit](#242-exiting-the-program-exit)                                                      | `exit`                                                                                                                                                          |
+| [Delete all data](#243-clearing-storage-clear)                                             | `clear`                                                                                                                                                         |
 
 
