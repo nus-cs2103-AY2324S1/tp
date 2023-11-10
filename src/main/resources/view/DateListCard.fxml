@@ -12,15 +12,15 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane prefHeight="63.0" HBox.hgrow="ALWAYS">
+    <GridPane prefHeight="63.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="41.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="2000.0" minWidth="10.0" prefWidth="259.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="259.0" />
         </columnConstraints>
         <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="2">
             <padding>
-                <Insets bottom="5" left="15" right="5" top="5" />
+                <Insets bottom="5.0" right="5.0" top="5.0" />
             </padding>
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <Label fx:id="id" styleClass="cell_big_label">
@@ -43,7 +43,7 @@
                 </VBox.margin>
             </HBox>
             <GridPane.margin>
-                <Insets left="-60.0" />
+                <Insets />
             </GridPane.margin>
         </VBox>
         <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
@@ -71,4 +71,7 @@
     <opaqueInsets>
         <Insets bottom="10.0" top="10.0" />
     </opaqueInsets>
+    <cursor>
+        <Cursor fx:constant="HAND" />
+    </cursor>
 </HBox>
