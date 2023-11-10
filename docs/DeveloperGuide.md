@@ -447,6 +447,18 @@ inconvenient. This would be similar for the other optional fields in member and 
 We propose to enhance the `editMember`, `editEvent` and `editEnrolment` commands to give the user the flexibility to remove
 any unwanted values from the optional fields in member/event/enrolment.
 
+### Make UI stay on current view upon editMember or editEvent
+**Current Implementation:**
+* **Current Issue:** Currently, calling `editMember` or `editEvent` will result in the listing of all events and members.
+* **Example:** If the user is viewing a filtered list for example if they have just called `viewMember`, if the user
+  then edits a member or event using `editMember` or `editEvent`, all events and members will be displayed instead of their current
+filtered view. This will cause inconvenience for the user as they will have to relocate the edited member/event.
+
+**Proposed Solution:**
+
+We propose to change the behaviour of `editMember` and `editEvent` such that calling them will no longer list all members and events,
+and instead remain on the user's current view.
+
 ### Show a more specific error message for negative index in `editMember`, `editEvent`, `viewMember`, `viewEvent`, `deleteMember` and `deleteEvent`
 **Current Implementation:**
 * **Current Issue:** When the user inputs a negative index for the `editMember`, `editEvent`, `viewMember`, `viewEvent`, 
@@ -477,6 +489,18 @@ There is a lack of information shown to the user which specific index is wrong.
 We propose to make the index error messages more specific and highlight to the user which index is wrong and why
 that index is wrong. For example, in the `enrol m/1 e/-1` input, we will show an error message to the user along 
 the lines of "The provided Event Index is not a non-zero unsigned integer."
+
+### Make UI stay on current view upon undo/redo
+**Current Implementation:**
+* **Current Issue:** Currently, the `undo` and `redo` commands will always result in all members and events being listed.
+* **Example:** For example, if the user enrols a member to an event and views the member, before deciding to unenrol the member
+from the event by executing the `undo` command, all the members and events would then be listed. This inconveniences the user
+as they will then have to execute the `viewMember` command again to see their changes. 
+
+**Proposed Solution:**
+
+We propose to change the behaviour of `undo` and `redo` such that executing them will no longer list all members and events,
+and instead remain on the user's current view.
 
 --------------------------------------------------------------------------------------------------------------------
 
