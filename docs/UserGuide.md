@@ -74,8 +74,7 @@ Welcome to the **Staff-Snap** User Guide!
 optimised for use via a [Command Line Interface (CLI)](#glossary). Used by hiring managers in companies around the globe, 
 it is effective, easy-to-use and reliable, making the hiring process a much more enjoyable experience.
 
-The purpose of this guide is to get you familiar with the features of **Staff-Snap** - from the very basics, 
-to the most advanced features the application has to offer. 
+The purpose of this guide is to get you familiar with the features of **Staff-Snap**.
 These features range from the simple task of adding an applicant to being able to calculate an applicant's score from their ratings in the interview stages. 
 Every single feature is explained in this guide. You can check out the [Table of Contents](#table-of-contents) to navigate to a feature you might be interested in using.
 
