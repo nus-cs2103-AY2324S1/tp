@@ -55,7 +55,7 @@ public class OvertimeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Employee> lastShownList = model.getFilteredEmployeeList();
+        List<Employee> lastShownList = model.getAddressBook().getEmployeeList();
         Employee employeeToUpdate = lastShownList.stream().filter(employee -> employee.getId().equals(targetId))
                 .findFirst().orElse(null);
 
