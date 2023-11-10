@@ -53,9 +53,9 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 | **r/**    | RISK_LEVEL        | Risk level assigned to student   | r/high                             | RISK_LEVEL **must** be one of the following three values: **high**, **medium**, **low**. **Case-insensitive**.                                                   |
 | **note/** | NOTE              | Note associated with student     | note/Struggles with 3rd grade math | NOTE can take any value up to **500 characters** long.                                                                                                           |
 | --        | STUDENT_INDEX     | Index of student in the list     | --                                 | STUDENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the student list.                                                         |
-| **date/** | DATE              | Date of appointment              | date/2023-10-12                    | DATE **must** be in the following format: `yyyy-MM-dd`. Specified date must be **within a year from the current date**.                                          |
-| **from/** | START_TIME        | Start time of appointment        | from/16:30                         | START_TIME **must** be in the following format: `HH-mm`, in **24-hour format**.                                                                                  |
-| **to/**   | END_TIME          | End time of appointment          | to/17:30                           | END_TIME **must** be in the following format: `HH-mm`, in **24-hour format**.                                                                                    |
+| **date/** | DATE              | Date of appointment              | date/2023-10-12                    | DATE **must** be in the following format: `yyyy-mm-dd`. Specified date must be **within a year from the current date**.                                          |
+| **from/** | START_TIME        | Start time of appointment        | from/16:30                         | START_TIME **must** be in the following format: `hh:mm`, in **24-hour format**.                                                                                  |
+| **to/**   | END_TIME          | End time of appointment          | to/17:30                           | END_TIME **must** be in the following format: `hh:mm`, in **24-hour format**.                                                                                    |
 | **d/**    | DESCRIPTION       | Description of appointment       | d/3rd counselling session          | DESCRIPTION can take any value up to **100 characters** long, and **cannot be blank**.                                                                           |
 | --        | APPOINTMENT_INDEX | Index of appointment in the list | --                                 | APPOINTMENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the appointment list.                                                 |
 | **g/**    | CATEGORY          | Category of search               | g/appointments                     | CATEGORY **must** be one of the following three values: **students**, **appointments**, **all**.                                                                 |
@@ -258,7 +258,7 @@ Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIP
    - Maximum of 100 characters
    - Must be the name of a student found in the students list
 2. Date
-    - Must be in the following format: `yyyy-MM-dd`
+    - Must be in the following format: `yyyy-mm-dd`
     - Must be within a year from now
 3. Start/End Time
     - Must be in the following format: `HH:mm` in 24-hour format.
@@ -301,7 +301,7 @@ Format: `filter DATE`
 
 **Parameters**
 1. Date
-   - Must be in the following format: `yyyy-MM-dd`
+   - Must be in the following format: `yyyy-mm-dd`
 
 Example:
 * `filter 2023-10-16`
