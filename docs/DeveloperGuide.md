@@ -744,6 +744,9 @@ any input that is either `male` or `female` will be accepted without worrying ab
 can be added as a patient's birthdate even though the current date might be `2023/08/08`. We plan to add a validation for birthdates
 such that birthdates after the current date will not be considered a valid birthdate.
 
+8. Currently, the find command only is able to find by name. We plan to add the functionality to find anything that 
+matches the given conditions that could be other variables of a patient or appointment such as range of birthdays.
+
 ## **Appendix: Effort**
 
 ### Difficulty Level 
