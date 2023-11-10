@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class Room {
     public static final String VALIDATION_REGEX = "\\d{1,3}";
-    public static final String MESSAGE_CONSTRAINTS = "Room numbers are between 1 and 500 inclusive.";
+    public static final String MESSAGE_CONSTRAINTS = "Room number is an integer between 1 and 500 inclusive.";
     public static final int NUMBER_OF_NORMAL_ROOMS = 100;
     public static final int NUMBER_OF_STUDIO_ROOMS = 100;
     public static final int NUMBER_OF_DELUXE_ROOMS = 100;
