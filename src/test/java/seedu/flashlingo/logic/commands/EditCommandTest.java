@@ -131,7 +131,7 @@ public class EditCommandTest {
 
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicateFlashCardUnfilteredList_failure() {
         FlashCard firstFlashcard = model.getFilteredFlashCardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
         FlashCard descriptor = new FlashCardBuilder(firstFlashcard).build();
         String[] changes = new String[] {descriptor.getOriginalWord().getWord(),
@@ -144,10 +144,10 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
+    public void execute_duplicateFlashCardFilteredList_failure() {
         showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
 
-        // edit person in filtered list into a duplicate in address book
+        // edit flash card in filtered list into a duplicate in address book
         FlashCard flashCardInList = model.getFlashlingo().getFlashCardList().get(INDEX_SECOND_FLASHCARD.getZeroBased());
         FlashCard editedFlashcard = new FlashCardBuilder(flashCardInList).build();
         String[] changes = new String[]{editedFlashcard.getOriginalWord().getWord(), null,
@@ -158,7 +158,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidFlashCardIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashCardList().size() + 1);
         FlashCard descriptor = new FlashCardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB,
                 VALID_ORIGINAL_WORD_LANGUAGE).build();
@@ -174,7 +174,7 @@ public class EditCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidFlashCardIndexFilteredList_failure() {
         showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
         Index outOfBoundIndex = INDEX_SECOND_FLASHCARD;
         // ensures that outOfBoundIndex is still in bounds of address book list
