@@ -166,15 +166,27 @@ The add mechanism allows users to add new fosterers to the address book. This fe
 * `ParserUtil` and `AddCommandParser` — Contains parsing methods for various input fields (e.g., name, phone, email, etc.) to ensure they are valid by meeting specific requirements and conditions.
 * `ArgumentMultimap` — Tokenizes and manages command arguments.
 
-Given below is an example usage scenario and how the add mechanism behaves at each step.
+Given below is an example usage scenario and how the add mechanism behaves at each step. To make the sequence diagram for adding a fosterer more 
+readable, the following replacements for the lengthy add command format are used:
+
+1. `add n/Pete Tay p/98765411 e/pete@example.com a/Happy street block 5 housing/Condo availability/Available animal/nil animalType/able.Cat` 
+is replaced with `add command`.
+2. `n/Pete Tay p/98765411 e/pete@example.com a/Happy street block 5 housing/Condo availability/Available animal/nil animalType/able.Cat` 
+is replaced with `arguments`.
+3. `Pete Tay, 98765411, pete@example.com, Happy street block 5, Condo, Available, nil, able.Cat` is replaced with `attributes`.
+
+![Interactions Inside the Logic Component for the `add n/Pete Tay p/98765411 e/pete@example.com a/Happy street block 5 housing/Condo availability/Available animal/nil animalType/able.Cat` Command](images/AddSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 Step 1. The user enters the `add` command with relevant details for the new fosterer. The `AddCommandParser` is invoked to parse the user's input.
 
-Step 2. The `AddCommandParser` processes the user's input and verifies the presence of mandatory fields inputted in the correct format.<br/>
-If this check fails, the system will generate a specific error message indicating which field format is invalid.<br/>
+Step 2. The `AddCommandParser` processes the user's input and verifies the presence of mandatory fields inputted in the correct format (omitted from diagram for simplicity).<br/>
+If this check fails, the system will generate a specific error message indicating which field format is invalid. 
 For example, if the email format is incorrect, the system will report that the email input is invalid. The error message will be displayed to the user, providing clear feedback about the issue and the specific constraints that are not met.
 
-Step 3. If all mandatory fields are present with the valid format, the new person is created using the `Person` class. The person's details, including their name, phone, email, address, housing, availability, animal name, animal type, and tags, are recorded, and the Person class also ensures that there is no conflicting data.<br/>
+Step 3. If all mandatory fields are present with the valid format, the new person is created using the `Person` class. The person's details, including their name, phone, email, address, housing, availability, animal name, animal type, and tags, are recorded, and the Person class also ensures that there is no conflicting data (omitted from diagram for simplicity).<br/>
 If this check fails, the system will generate a specific error message indicating which field is invalid, and how can it be resolved.
 
 Step 4. The `Person` is then passed to the new `AddCommand` created, which adds the person to the address book, ensuring that it is not a duplicate of an existing entry. This check is performed in the `execute` method of the `AddCommand`.
@@ -190,7 +202,7 @@ The add feature ensures that user input is correctly parsed and validated, and i
 
 **Aspect: Handling duplicate persons:**
 
-* **Alternative 1 (current choice):** Checks for duplicates based on the person's name, which is case-sensitive.
+* **Alternative 1:** Checks for duplicates based on the person's name, which is case-sensitive.
     * Pros: Easy to implement, and is simple and effective.
     * Cons: May not catch duplicates with different names but similar attributes or similar names in different letter case.
 
@@ -198,7 +210,7 @@ The add feature ensures that user input is correctly parsed and validated, and i
     * Pros: Provides better duplicate detection by comparing multiple attributes.
     * Cons: May be more complex to implement.
 
-* **Alternative 3:** Implement a more effective duplicate check considering the presence of multiple spaces between different words of the same name, and case-sensitivity of names.
+* **Alternative 3 (current choice):** Implement a more effective duplicate check considering the presence of multiple spaces between different words of the same name, and case-sensitivity of names.
     * Pros: Provides better duplicate detection by identifying fosterers with the same name, but inputted in different formats.
     * Cons: May be more complex to implement and such cases might be less likely to happen.
 
