@@ -53,9 +53,9 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 | **r/**    | RISK_LEVEL        | Risk level assigned to student   | r/high                             | RISK_LEVEL **must** be one of the following three values: **high**, **medium**, **low**. **Case-insensitive**.                                                   |
 | **note/** | NOTE              | Note associated with student     | note/Struggles with 3rd grade math | NOTE can take any value up to **500 characters** long.                                                                                                           |
 | --        | STUDENT_INDEX     | Index of student in the list     | --                                 | STUDENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the student list.                                                         |
-| **date/** | DATE              | Date of appointment              | date/2023-10-12                    | DATE **must** be in the following format: `yyyy-mm-dd`. Specified date must be **within a year from the current date**.                                          |
-| **from/** | START_TIME        | Start time of appointment        | from/16:30                         | START_TIME **must** be in the following format: `hh:mm`, in **24-hour format**.                                                                                  |
-| **to/**   | END_TIME          | End time of appointment          | to/17:30                           | END_TIME **must** be in the following format: `hh:mm`, in **24-hour format**.                                                                                    |
+| **date/** | DATE              | Date of appointment              | date/2023-10-12                    | DATE **must** be in the following format: `yyyy-MM-dd`. Specified date must be **within a year from the current date**.                                          |
+| **from/** | START_TIME        | Start time of appointment        | from/16:30                         | START_TIME **must** be in the following format: `HH:mm`, in **24-hour format**.                                                                                  |
+| **to/**   | END_TIME          | End time of appointment          | to/17:30                           | END_TIME **must** be in the following format: `HH:mm`, in **24-hour format**.                                                                                    |
 | **d/**    | DESCRIPTION       | Description of appointment       | d/3rd counselling session          | DESCRIPTION can take any value up to **100 characters** long, and **cannot be blank**.                                                                           |
 | --        | APPOINTMENT_INDEX | Index of appointment in the list | --                                 | APPOINTMENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the appointment list.                                                 |
 | **g/**    | CATEGORY          | Category of search               | g/appointments                     | CATEGORY **must** be one of the following three values: **students**, **appointments**, **all**.                                                                 |
@@ -211,6 +211,11 @@ Given a Student named `Roy Lee` is in the WellNUS student list:
 </div>
 
 
+![Find feature](images/findFeature.png)
+<p align="center">
+<em>Find student Alex Yeoh</em>
+</p>
+
 #### 2.2.5 Assigning risk level to Student: `tag`
 
 Tags a student to a specific risk level.
@@ -277,7 +282,7 @@ Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIP
    - Maximum of 100 characters
    - Must be the name of a student found in the students list
 2. Date
-    - Must be in the following format: `yyyy-mm-dd`
+    - Must be in the following format: `yyyy-MM-dd`
     - Must be within a year from now
 3. Start/End Time
     - Must be in the following format: `HH:mm` in 24-hour format.
@@ -326,7 +331,7 @@ Format: `filter DATE`
 
 **Parameters**
 1. Date
-   - Must be in the following format: `yyyy-mm-dd`
+   - Must be in the following format: `yyyy-MM-dd`
 
 Valid example:
 * `filter 2023-10-16`
@@ -334,6 +339,11 @@ Valid example:
 Invalid examples:
 * `filter 16-10-2023` (date is in wrong format)
 * `filter 16 October 2023` (date is in wrong format)
+
+![Filter feature](images/filterFeature.png)
+<p align="center">
+<em>Filter appointments on 15 December 2023</em>
+</p>
 
 ### 2.4 Others
 
@@ -345,7 +355,7 @@ Format: `view g/CATEGORY`
 
 **Parameters**:
 1. Category
-   - Must be 'students', 'appointments' or 'all'
+   - Must be `students`, `appointments` or `all`
 
 Valid examples:
 * `view g/all`
@@ -383,8 +393,25 @@ _Details coming soon ..._
 
 ## 3. Frequently Asked Questions (FAQ)
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WellNUS home folder.
+1. **How do I transfer my data to another Computer ?**<br/>
+Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WellNUS home folder.
+
+2. **How can I view my appointments scheduled today ?**<br/>
+You can use the filter command with today's date. 
+Here's an example: `filter 2023-12-07`. Replace `2023-12-07` with today's date in `yyyy-mm-dd` format.
+
+3. **How do I clear all data in WellNUS ?**<br/>
+To clear all data, use the `clear` command. This resets the storage, deleting all appointments and students. 
+Exercise caution, as this action cannot be undone.
+
+4. **How do I exit the WellNUS application ?**<br/>
+To exit the program, use the exit command. This closes the application.
+
+5. **I am unsure of a new student's risk level, what should I put ?**<br/>
+If you're unsure of a new student's risk level, you can leave the risk level parameter blank when adding the student using the add command. 
+WellNUS is designed to handle optional parameters. Here's an example:
+`add n/John Doe c/98172645 a/821, Bishan, #02-124`
+You can always update the risk level later using the tag command when more information becomes available.
 
 --------------------------------------------------------------------------------------------------------------------
 
