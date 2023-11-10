@@ -55,7 +55,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             List<String> keywordList = Arrays.asList(splitKeywords);
 
             Predicate<Job> predicate;
-            System.out.println("");
             if (entry.getKey().equals(new Prefix(""))) {
                 predicate = FieldContainsKeywordsPredicate.getPreamblePredicate(keywordList);
             } else {

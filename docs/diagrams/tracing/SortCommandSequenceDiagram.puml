@@ -1,0 +1,20 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+box Logic #skyblue
+Participant ":SortCommand" as sc LOGIC_COLOR
+Participant ":CommandResult" as cr LOGIC_COLOR
+end box
+box Model #pink
+Participant "model:Model" as m MODEL_COLOR
+end box
+
+[-> sc ++: execute()
+sc -> m ++: sortJobs()
+deactivate m
+create cr
+sc -> cr ++: CommandResult()
+cr --> sc --: result
+sc -->[ --: result
+@enduml

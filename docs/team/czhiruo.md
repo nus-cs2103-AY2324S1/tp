@@ -54,7 +54,7 @@ here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?sea
 ### Other Contributions
 
 * **Project management**:
-* Conducted multiple checks on test cases to improve test code coverage.
+  * Conducted multiple checks on test cases to improve test code coverage.
 * **Documentation**:
   * Contributed to the User Guide (UG)
   * Contributed to the Developer Guide (DG).

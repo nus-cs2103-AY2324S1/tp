@@ -46,9 +46,11 @@ here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?sea
   * PRs reviewed (with non-trivial review comments): PR [#66](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/66)
 
 ## Contributions to the User Guide
+
 *Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting
 end-users.*
 
 ## Contributions to the Developer Guide
+
 *Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical
 documentation and the technical depth of my contributions to the project.*
