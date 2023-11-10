@@ -743,3 +743,25 @@ any input that is either `male` or `female` will be accepted without worrying ab
 7. Currently, a patient's birthdate can be set after the current date that the command is executed on. For example, `2023/10/20`
 can be added as a patient's birthdate even though the current date might be `2023/08/08`. We plan to add a validation for birthdates
 such that birthdates after the current date will not be considered a valid birthdate.
+
+## **Appendix: Effort**
+
+### Difficulty Level 
+
+MediFlowR is a brown-field project that has been inspired from and based upon AB3. We have modified AB3's existing 
+model, Person, to accommodate our Patient records management. Moreover, we have extended the Person model to create 
+an Appointments model to keep track of the appointments scheduled for the patients. Having 2 models (Person and 
+Appointment) in MediFlowR that interact with each other has made it more complex than AB3. Moreover, we have incorporated
+Priority Tags into the Appointments model which allows for triaging (sorting) of the appointments. The Appointment model
+brings additional complexity to the project while also improving its functionality by facilitating interaction between
+both models. 
+
+### Challenges
+
+During the initial phase, understanding the codebase was difficult as we were not familiar with it. There were multiple
+dependencies and layers of abstraction which made it difficult to understand the flow of the project. As time went by,
+we became more adept at understanding the underlying mechanism to tweak the program and finding bugs in the AB3 program.
+As we added more functionalities, more dependencies were introduced and the program became increasingly complicated. In
+light of that we focussed on developing a user-centric, intuitive interface that is direct. For example, under a healthcare system's
+standpoint, we wanted to include a variety of ways for users to search for information (through patient name, illness, today's appointments, etc.). The command words used were designed in a way that the user had to conscientiously specify the way they intended to search. 
+
