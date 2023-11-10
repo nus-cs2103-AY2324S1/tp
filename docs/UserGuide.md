@@ -79,6 +79,8 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 * `CONTACT_ID` is the number that is on the left of the contact's name in each contact card.
 
+* `CONTACT_ID` should be a positive integer less than 2,147,483,648.
+
 * `NAME` should be alphanumeric, spaces are allowed.
 
 * `PHONE_NUMBER` should be numbers at least 3 digits long.
