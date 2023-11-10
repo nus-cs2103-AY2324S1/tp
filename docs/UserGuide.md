@@ -56,7 +56,7 @@ The list below contains the parameters that are used in various commands as well
 | Doctor/Patient name | Empty strings are not allowed. Name must contain only alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                        | Cristiano Ronaldo, Tanveer Singh                                                                                | “”, 高橋紳助, s/o someone    |
 | Contact number      | 3 digit or more integer as phone number. Empty strings are not allowed.                                                                                                                                                                                                                                                                                                                                                                                                               | 91234569                                                                                                        | “”,  99                  |
 | Email               | Must be of the format `local-name`@`domain`. `local-name` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-), and may not start or end with any special characters. `domain` is made up of domain labels separated by periods, and must end with a domain label at least 2 characters long. Domain labels start and end with alphanumeric characters, consist of alphanumeric characters, separated only by hyphens, if any. | j@Email.com, isaac@a-b.com                                                                                      | isaac@a+b.com, james.com |
-| Blood type          | Accepts only strings containing valid blood types, that is a combination of A/B/AB/O and +/-.                                                                                                                                                                                                                                                                                                                                                                                         | B+, O, B-, AB                                                                                                   | J, K                     |
+| Blood type          | Accepts only strings containing valid blood types, that is a combination of A/B/AB/O and +/-.                                                                                                                                                                                                                                                                                                                                                                                         | B+, O+, B-, AB+                                                                                                 | J, K, A, O               |
 | Address             | Any non-empty string.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Clementi, OneCare@Hougang Avenue                                                                                | ""                       |
 | Gender              | Either the character “M” or “F”.                                                                                                                                                                                                                                                                                                                                                                                                                                                      | M, F                                                                                                            | G, girl, male            |
 | Emergency Contact   | Valid Contact number. Same constraints as the Contact Number parameter.                                                                                                                                                                                                                                                                                                                                                                                                               | 91234569                                                                                                        | “”, 99                   |
@@ -113,19 +113,15 @@ A doctor can have any number of tags (including 0). Duplicate tags, however, are
 
 **:information_source: Take Note:**<br>
 
-- A doctor **MUST** have a non-empty NAME and a valid IC at the very least.
-  Failure to include these details may result in an error.
-- A person can either be a doctor or a patient, but not both. Hence if the doctor's IC is already in the app
+- A doctor cannot have the same NRIC as another person.
+- A person can either be a doctor or a patient, but not both. Hence, if the doctor's NRIC is already in the app
 as a patient, it may result in an error.
-- Phone Numbers and Emails have to be in a valid format.
-- PHONE_NUMBER must have exactly 8 digits.
-- EMAIL must contain email domain (eg. `@gmail.com`).
-- PATIENT must contain the valid IC of a Patient in the Database.
-- Tags for doctors represent the specialisation(s) of the doctor. Only tags from the list below are supported 
-in our current version:
+- Adding additional prefixes (eg. `b/O+`) not specified by the command format above will be considered as a **parameter input**. For example:</br>
+  `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/O+` will result
+  in Address inputted as `a/John street, block 123, #01-01 b/O+`. </br>
+  Do avoid adding  your own prefixes as it may lead to unwanted errors!
+- However, inputting `r/REMARKS` will be ignored and automatically removed by the system. To add remarks, use the Edit Command mentioned later below.
 
-  `CARDIOLOGIST, ORTHOPEDIC, PEDIATRICIAN, DERMATOLOGIST, NEUROLOGIST, GENERAL_PRACTITIONER, PSYCHIATRIST, SURGEON`
-- Tags are not case-sensitive (e.g. `t/SURGEON` and `t/surgeon` are both valid inputs).
 </div>
 
 Examples:
@@ -143,22 +139,16 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 
 **:information_source: Take Note:**<br>
 
-- A patient **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result
-  in an error.
+- A patient cannot have the same NRIC as another person.
 - A person can either be a doctor or a patient, but not both. Hence, if the patient's IC is already in the app
     as a doctor, it may result in an error.
-- Phone Numbers and Emails have to be in a valid format.
-    - PHONE_NUMBER must have at least 3 digits.
-    - EMAIL must contain email domain (eg. `@gmail.com`).
-- TAG must indicate Priority Level of the Patient and be one of the following:
-  - Low
-  - Medium
-  - High
 - EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number. This number can be the same the person's contact number.
-- Blood type must be a combination of A/B/AB/O and +/-.
 - A patient can only have up to one tag at any time.
-- Tags for patients represent the priority level of the patient. Only the following tags are allowed: Low, Medium, High.
-- Tags are not case-sensitive (e.g. `t/LOW` and `t/low` are both valid inputs).
+- Adding additional prefixes (eg. `k/Always Injured`) not specified by the command format above will be considered as a **parameter input**. For example:</br>
+  `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax k/Always Injured b/O+` will result
+  in Condition inputted as `pneumothorax k/Always Injured`. </br>
+  Do avoid adding  your own prefixes as it may lead to unwanted errors!
+- However, inputting `r/REMARKS` will be ignored and automatically removed by the system. To add remarks, use the Edit Command mentioned later below.
 
 </div>
 
@@ -180,7 +170,7 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
 - TIME must follow the specified format (ie. `yyyy-MM-dd HH:mm`), where `HH:mm` follows the 24hr format.
 - PATIENT must contain the valid IC of a Patient in the Database.
 - DOCTOR must contain the valid IC of a Doctor in the Database.
-- There must not be conflicting Appointments. (eg the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
+- There must not be conflicting Appointments. (eg. the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
 
 </div>
 
@@ -238,7 +228,7 @@ Edits an existing person in the MediLink Contacts.
 
 Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `NRIC`. The NRIC **must be a valid IC number**
+* Edits the person with the specified `NRIC`. The NRIC **must be a valid IC number**
 * At least one of the optional fields must be provided.
 * If the provided fields are the same as the original, the command will still work.
 * Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition of a

@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -46,8 +47,17 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
+                .append(person.getAddress());
+        if (person instanceof Patient) {
+            Patient patient = (Patient) person;
+            builder.append("; Emergency Contact: ")
+                    .append(patient.getEmergencyContact())
+                    .append("; Blood Type: ")
+                    .append(patient.getBloodType())
+                    .append("; Condition: ")
+                    .append(patient.getCondition());
+        }
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         builder.append("; Appointments: ");
         person.getAppointments().forEach(builder::append);
