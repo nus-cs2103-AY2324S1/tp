@@ -14,7 +14,7 @@ public class LanguageCommand extends Command {
 
     public static final String COMMAND_WORD = "language";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all flash cards whose language are "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all flashcards whose language is "
             + "the specified language and displays them as a list with index numbers.\n"
             + "Parameters: LANGUAGE\n"
             + "Example: " + COMMAND_WORD + " English";

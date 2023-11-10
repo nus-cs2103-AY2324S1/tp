@@ -17,11 +17,11 @@ import seedu.flashlingo.model.flashcard.words.TranslatedWord;
  */
 public class RevealCommand extends Command {
     public static final String COMMAND_WORD = "reveal";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reveals the flash card identified by the index number "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reveals the flashcard identified by the index number "
         + "used\nParameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Trasnlated word: ";
+    public static final String MESSAGE_SUCCESS = "Flashcard has been revealed!";
     private final Index targetIndex;
     /**
      * Creates an RevealCommand.
