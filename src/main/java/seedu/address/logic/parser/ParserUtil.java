@@ -2,15 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
@@ -223,28 +220,20 @@ public class ParserUtil {
      *     Example:
      *     If keywordsList is ["John Doe"], the returned array will be ["John", "Doe"].
      */
-    private static String[] parseSinglePrefixParams(Collection<String> keywordsList, String commandMessage)
-            throws ParseException {
+    private static String[] parseSinglePrefixParams(Collection<String> keywordsList) {
         String list = keywordsList.toString();
         String cleanedList = list.replaceAll("[\\[\\]]", "");
         String[] singlePrefixParams = cleanedList.split("\\s+");
-        for (String singlePrefixParam : singlePrefixParams) {
-            Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-            Matcher matcher = pattern.matcher(singlePrefixParam);
-            if (matcher.find()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, commandMessage));
-            }
-        }
         return singlePrefixParams;
     }
 
     /**
      * Parses {@code Collection<String> status parameters} into a {@code List<String> of status}.
      */
-    public static List<String> parseSinglePrefixStatus(Collection<String> statuses, String commandMessage)
+    public static List<String> parseSinglePrefixStatus(Collection<String> statuses)
             throws ParseException {
         requireNonNull(statuses);
-        String[] statusArr = parseSinglePrefixParams(statuses, commandMessage);
+        String[] statusArr = parseSinglePrefixParams(statuses);
         final List<String> statusList = new ArrayList<>();
         for (String status : statusArr) {
             status = status.trim();
@@ -260,10 +249,10 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> name parameters} into a {@code List<String> of names}.
      */
-    public static List<String> parseSinglePrefixName(Collection<String> names, String commandMessage)
+    public static List<String> parseSinglePrefixName(Collection<String> names)
             throws ParseException {
         requireNonNull(names);
-        String[] nameArr = parseSinglePrefixParams(names, commandMessage);
+        String[] nameArr = parseSinglePrefixParams(names);
         final List<String> nameList = new ArrayList<>();
         for (String name : nameArr) {
             name = name.trim();
@@ -279,20 +268,38 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tag parameters} into a {@code List<String> of tags}.
      */
-    public static List<String> parseSinglePrefixTags(Collection<String> tags, String commandMessage)
+    public static List<String> parseSinglePrefixTags(Collection<String> tags)
             throws ParseException {
         requireNonNull(tags);
-        String[] tagArr = parseSinglePrefixParams(tags, commandMessage);
+        UniqueTagList uniqueTagList = new UniqueTagList();
+        String[] tagArr = parseSinglePrefixParams(tags);
         final List<String> tagList = new ArrayList<>();
+        List<String> nonExistingTags = new ArrayList<>();
+
         for (String tag : tagArr) {
             tag = tag.trim();
+
+            // Check if the tag is valid
             if (!Tag.isValidTagName(tag)) {
                 throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
             }
-            tagList.add(tag);
+
+            // Check if the tag already exists in the uniqueTagList
+            if (!uniqueTagList.contains(tag)) {
+                nonExistingTags.add(tag);
+            } else {
+                tagList.add(tag);
+            }
         }
+
+        if (!nonExistingTags.isEmpty()) {
+            // Throw an exception with a message specifying all non-existing tags
+            throw new ParseException(Tag.MESSAGE_TAG_DOES_NOT_EXIST + String.join(", ", nonExistingTags));
+        }
+
         return tagList;
     }
+
 
     /**
      * Parses a {@code String score} into a {@code Score}.
