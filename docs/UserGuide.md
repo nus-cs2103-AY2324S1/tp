@@ -10,7 +10,7 @@
 
 HealthSync is a **powerful desktop application designed specifically for clinic assistants in small private clinics.** It offers a unique combination of a Command Line Interface (CLI) and a Graphical User Interface (GUI) to efficiently manage and organize patient details. If you're a fast typist, HealthSync can streamline your workflow and help you handle patient information more effectively than traditional GUI apps.
 
-## Why HealthSync?  
+## Why HealthSync?
 
 1. **Tailored for Front Desk Workers**: HealthSync is built with the needs of front desk workers in mind. It provides a user-friendly interface that simplifies patient management tasks, allowing you to focus on providing excellent service to patients.
 
@@ -199,7 +199,7 @@ Example commands:
 * `delete n/John Doe m/`
 
 >:bulb: Specify the medical history to be deleted using `m/` if it's the only medical history that needs to be deleted
-e.g `delete n/John Doe m/Diabetes`
+> e.g `delete n/John Doe m/Diabetes`
 
 ![result for 'delete n/Alex Yeoh'](images/deleteResult.jpg)
 
@@ -226,7 +226,7 @@ Deletes all patients from HealthSync.
 Searches the patient list for all patients matching the [Name](#name), [ID](#ID) or [Appointment](#appointment)
 and returns their related information.
 
-* The search is case-insensitive.  
+* The search is case-insensitive.
 e.g `hans` will match `Hans`, `08-Jan-2023 12 13` will match `08-jan-2023 12 13`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Name, ID Number and Appointment can be searched.
@@ -400,7 +400,9 @@ Exits HealthSync.
 HealthSync data are saved in the hard disk automatically after any command that changes the data is executed.
 There is no need to save manually.
 
->:bulb: Only patient details inside patient list view are saved. The logger tab and command history used for `undo` are not saved after the application is closed. 
+> :bulb: Only patient details inside [patient list view](#patient-list-view) are saved.
+> The [logger tab](#logger-tab) and [command history](#command-history-stack) used for `undo` are not saved
+> after the application is closed.
 
 ### Editing the Data File
 
@@ -410,7 +412,7 @@ Advanced users are welcome to update data directly by editing that data file.
 >:warning: **Caution:**
 >If your changes to the data file makes its format invalid, HealthSync will discard all data and start with an empty
 >data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.
-> 
+>
 >To make a backup of the file:
 >1) Locate the `healthsync.json` data file on your computer. This file is located in the same directory as `healthsync.jar`. The path is `[JAR file location]/data/healthsync.json`.
 >2) Right-click on the `healthsync.json` file, and select 'copy'.
@@ -418,7 +420,7 @@ Advanced users are welcome to update data directly by editing that data file.
 >4) Right-click in the chosen location and select 'paste'. This creates a copy of the `healthsync.json` data file in the selected backup location.
 >
 >That's it! You can now safely edit the original `healthsync.json` file.
-> 
+>
 >If anything goes wrong during the editing process, you can restore your data by copying the backup file back to its original location.
 
 ### Archiving Data Files `[coming in v5.0]`
@@ -483,7 +485,7 @@ Fielded Command Formats will generally look like this:
 
  * `<KEYWORD>` is the word used to tell HealthSync what to do.
    * Example: to tell HealthSync to add a patient, you would use `add` as the keyword.
-
+ 
  * `<identity>` represents compulsory identifying fields that need to be included with for that instruction type.
    * See [Fields](#fields) to understand how identifying fields are specified.
 
@@ -520,7 +522,7 @@ Field-less Command Formats will generally look like this:
 ```
 
  * For field-less commands, only the `<KEYWORD>` will be read by HealthSync, and the rest of the data you give it
-   will be ignored. 
+   will be ignored.
    * Example: if `help 123` was typed in, HealthSync will interpret it as `help`.
 
 Exceptions to the format exist, but rest assured as you will be told that they do not follow the standard
@@ -639,24 +641,24 @@ Command Line Interface. Refers to computer programs which require you to type to
 ### GUI
 Graphical User Interface. Refers to computer programs with a visual window you can interact with directly.
 
-### [Menu Sidebar](#menu-sidebar)
+### Menu Sidebar
 The Menu Sidebar is the area on the left of the Patient List View. It contains buttons that allow you to perform actions on HealthSync. Currently, only the `User Guide` and `Exit` buttons are functional. The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
 
-### [Patient List View](#patient-list-view)
+### Patient List View
 The main part of HealthSync where the list of all your patients are displayed. This is where you can view patient profiles in list form, and perform actions on them. When actions are performed, the Patient List View will be updated to reflect the changes/results.
 
-### [Logger Tab](#logger-tab)
+### Logger Tab
 A 'sticky-note'-like area on the right of the Patient List View. Serves as a snapshot of the patient data at the time they were logged with the [`log` command](#preserving-a-find-command-result-in-the-log--log).
 
 This comes in handy when you want to refer to certain patient profiles at the side, while still being able to carry on with other tasks.
 
 To maximise utility, upon app start, the logger tab displays a list of profiles of patients who have appointments on the day itself. This can be overwritten by the `log` command for patient profiles thereafter.
 
-### [Output Box](#output-box)
+### Output Box
 A small box right below the Patient List View where HealthSync will provide any feedback it has on the instructions
 it has performed. This includes error messages, success messages, and other information like example commands.
 
-### [Command Box](#command-box)
+### Command Box
 The area where you type your instructions for HealthSync to perform.<br>
 > :bulb: You can use the `Spacebar` to focus on the Command Box. This allows you to type your instructions without using the mouse to click on the Command Box.
 
