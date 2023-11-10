@@ -51,7 +51,7 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String VIEWING_PROFILE_SUCCESS = "Editing Person: %1$s";
+    public static final String VIEWING_PROFILE_SUCCESS = "Viewing Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
