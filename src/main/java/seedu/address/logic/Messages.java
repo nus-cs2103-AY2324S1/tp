@@ -47,6 +47,10 @@ public class Messages {
     public static final String HELP_MESSAGE_PROPOSE_ALTERNATIVE_FORMAT =
         "Do you mean: %s? \n Type in \'help\' to see a list of the commands available";
 
+    public static final String DUPLICATED_EVENTS = "\"Operation would result in duplicate events\"";
+
+    public static final String EVENT_OVERLAP = "Event %s overlaps with event %s";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

@@ -9,9 +9,6 @@ public class EventLocation {
 
     private final String location;
 
-    private EventLocation() {
-        this.location = "unknown";
-    }
 
     private EventLocation(String location) {
         this.location = location;

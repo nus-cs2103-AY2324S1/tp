@@ -1,5 +1,7 @@
 package seedu.address.model.event.exceptions;
 
+import static seedu.address.logic.Messages.EVENT_OVERLAP;
+
 import seedu.address.model.event.Event;
 
 /**
@@ -7,6 +9,6 @@ import seedu.address.model.event.Event;
  */
 public class EventOverlapException extends RuntimeException {
     public EventOverlapException(Event e1, Event e2) {
-        super("Event " + e1.getUiText() + " overlaps with event " + e2.getUiText());
+        super(String.format(EVENT_OVERLAP, e1.getUiText(), e2.getUiText()));
     }
 }
