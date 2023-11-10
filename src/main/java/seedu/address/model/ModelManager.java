@@ -125,7 +125,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasOverlapsWithAppointments(Appointment appointment) {
         requireNonNull(appointment);
-        return wellNus.overlapsWithAppointments(appointment);
+        return wellNus.hasOverlapsWithAppointments(appointment);
     }
 
     @Override

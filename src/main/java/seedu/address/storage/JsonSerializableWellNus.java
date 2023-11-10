@@ -25,6 +25,7 @@ class JsonSerializableWellNus {
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Appointments list contains appointment(s) whose "
             + "corresponding student is not found in students list";
 
+    public static final String MESSAGE_OVERLAPPING_APPOINTMENT = "Appointments list contains overlapping appointments.";
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
@@ -71,6 +72,11 @@ class JsonSerializableWellNus {
             if (wellNus.hasNoStudentForAppointment(appointment)) {
                 throw new IllegalValueException(MESSAGE_STUDENT_NOT_FOUND);
             }
+
+            if (wellNus.hasOverlapsWithAppointments(appointment)) {
+                throw new IllegalValueException(MESSAGE_OVERLAPPING_APPOINTMENT);
+            }
+
             wellNus.addAppointment(appointment);
         }
         return wellNus;
