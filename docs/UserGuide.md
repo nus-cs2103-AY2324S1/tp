@@ -151,7 +151,7 @@ Please refer to the [above](#editing-a-contact-edit).
 - You can delete multiple contacts at once by specifying multiple indices separated by spaces.
 
 - Duplicate indices are only counted once.\
-e.g. `delete 1 1` will only deletes the contact at index #`1`.
+e.g. `delete 1 1` will only delete the contact at index #`1`.
 - Invalid indices will cause abortion of the delete command.
 
 **Examples:**
