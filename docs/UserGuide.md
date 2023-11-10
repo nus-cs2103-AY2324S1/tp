@@ -116,6 +116,10 @@ Format: `list`
 
 Adds a patient into HealthSync, with the given patient information.
 
+> :warning: Once a patient is created, their name and ID cannot be changed later
+
+> :warning: HealthSync does not allow patients with identical names. Similarly, identical IDs are not allowed
+
 * A patient's name and IC are required when creating a new entry into HealthSync.
 * All the compulsory fields must be provided.
 * Optional fields like appointment and medical history need not be provided.
@@ -143,7 +147,7 @@ Edits an existing patient's details in HealthSync.
 
  * Edits the patient with the specified name or id.
  * If an invalid name or IC Number is passed, an error message will be logged.
- * At least one of the optional fields must be provided.
+ * At least one field to edit must be provided.
  * Existing fields will be updated to the input values.
  * If the fields do not exist, the corresponding field with details will be added.
 
@@ -204,6 +208,8 @@ Expected output when the command fails:
 ### Delete All Patients: `clear`
 
 Deletes all patients from HealthSync.
+
+>:bulb: Use the undo command to revert accidentally clearing HealthSync
 
 Format: `clear`
 
@@ -329,6 +335,8 @@ Expected output:
 ### Undoing a Command: `undo`
 
 Undoes an undo-able command within HealthSync.
+
+>:warning: Upon closing HealthSync, the undo history will be erased
 
 * An undo-able command include an add, clear, delete, edit, log, alog and clog command.
 * The command allows you to undo a specific number of previous commands.
