@@ -369,7 +369,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-![result for 'findAlexMeeting'](images/findJohnMeetingResult.png)
+![result for 'findJohnMeeting'](images/findJohnMeetingResult.png)
 
 <div style="page-break-after: always;"></div>
 
