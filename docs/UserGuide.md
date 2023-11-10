@@ -79,17 +79,25 @@ Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 
 **Parameters**:
 1. Name
-   - Alphabetical characters only
+   - Cannot contain symbols, alphabetical characters only
+   - Must be unique
+   - Maximum of 100 characters
 2. Contact Number
    - Numbers only, must be 8 characters long
 3. Home Address
-   - Maximum of 200 characters
+   - Maximum of 200 characters, cannot be blank
 4. Risk Level
    - Must be `high`, `medium`, or `low`
 
 Examples:
 * `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
 * `add n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08 r/low`
+
+Invalid examples:
+* `add n/Sally c/94149785` (missing address)
+* `add n/Sally! c/1234 a/Woodlands Street 11 Blk 888 #08-08` (invalid name and phone number)
+* `add n/Sally c/94149785 a/` (address is blank)
+* `add n/Sally c/1234 a/Woodlands Street 11 Blk 888 #08-08 r/abc` (invalid risk level)
 
 #### 2.2.2 Deleting a Student: `delete`
 
@@ -106,11 +114,21 @@ Format: `delete STUDENT_INDEX`
    - Must be an integer starting from 1
    - Must be found in the students list
 
+Example:
+* `delete 2`
+
+Invalid examples:
+* `delete 0` (student index only starts from 1)
+* `delete John` (index should be a number)
+
 #### 2.2.3 Adding notes for a Student: `note`
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
-Double clicking on the Student card displays the Student notes under the Notes section!
+
+* Double-clicking on the Student card displays the Student notes under the Notes section!
 The "Notes" column will inform you if there are no student notes available.
+
+* To delete an existing note, you can use either `note STUDENT_INDEX` or `note STUDENT_INDEX note/`
 </div>
 
 Adds a note to an existing student, overwrites any existing note.
@@ -124,6 +142,14 @@ Format: `note STUDENT_INDEX note/NOTE`
 2. Note
    - Maximum of 500 characters
 
+Examples:
+* `note 1 note/Preferred language: mandarin`
+* `note 2` (deletes the note at index 2)
+
+Invalid examples:
+* `note 0` (invalid index)
+* `note Alex note/Likes dogs.` (index should be a number)
+
 #### 2.2.4 Finding Students by Name: `find`
 
 Find students and their related appointments based on their name. Can choose to find student based on their first name, last name or full name.
@@ -131,15 +157,16 @@ If the name does not match entirely, the student will not be shown. Refer to the
 
 Format: `find STUDENT_NAME`
 
-Example Scenario:
+Examples (assuming a student named Roy Lee is in WellNUS):
+* `find Roy`
+* `find Lee`
+* `find Roy Lee`
 
-Student Name: Roy Lee
-* "find Roy" works
-* "find Lee" works
-* "find Roy Lee" works
-* "find Ro" does not work
-* "find Le" does not work
-* "find Roy L" does not work
+Invalid Examples:
+* `find Royy`
+* `find Le`
+* `find Roy L`
+* `find RoyLee`
 
 #### 2.2.5 Assigning risk level to Student: `tag`
 
@@ -154,14 +181,19 @@ Format: `tag STUDENT_INDEX r/RISK_LEVEL`
 2. Risk Level
    - Must be `high`, `medium`, or `low`
 
-Example:
+Examples:
 * `tag 2 r/high`
+* `tag 1 r/low`
+
+Invalid examples:
+* `tag -1 r/high` (invalid index)
+* `tag 1 r/lowrisk` (invalid risk level)
 
 #### 2.2.6 Editing Student details: `edit`
 
 Edit a student's contact number or address
 
-Format `edit STUDENT_INDEX c/CONTACT_NUMBER A/HOME_ADDRESS`
+Format `edit STUDENT_INDEX c/CONTACT_NUMBER a/HOME_ADDRESS`
 
 **Parameters**:
 1. Student Index
@@ -169,8 +201,15 @@ Format `edit STUDENT_INDEX c/CONTACT_NUMBER A/HOME_ADDRESS`
    - Must be found in the students list
 2. Contact Number
    - Numbers only, must be 8 characters long
-3. Home Address
-   - Maximum of 200 characters
+3. Home Address 
+   - Maximum of 200 characters, cannot be blank
+
+Examples:
+* `edit 1 c/98765432 a/Woodlands Street 11 Blk 888 #08-08`
+* `edit 2 c/98574321`
+
+Invalid example:
+* `edit 1` (should contain at least 1 of the fields)
 
 ### 2.3 Appointment Commands
 
@@ -190,19 +229,26 @@ Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIP
 
 **Parameters**:
 1. Name
-    - Alphabetical characters only
-    - Must be the name of a student found in the students list
+   - Cannot contain symbols, alphabetical characters only
+   - Maximum of 100 characters
+   - Must be the name of a student found in the students list
 2. Date
     - Must be in the following format: `yyyy-mm-dd`
     - Must be within a year from now
 3. Start/End Time
     - Must be in the following format: `hh:mm`
 4. Description
-   - Minimum length of 1 character and maximum of 100 characters
+   - Maximum of 100 characters, cannot be blank
 
 Examples:
-- `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
-- `schedule n/Yin Kiat date/2023-12-09 from/07:00 to/10:45 d/first counselling session`
+* `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
+* `schedule n/Yin Kiat date/2023-12-09 from/07:00 to/10:45 d/first counselling session`
+
+Invalid examples:
+* `schedule n/Jon date/2001-12-09 from/07:00 to/10:45 d/first counselling session` (date is in the past)
+* `schedule n/Jon date/2023-12-09 from/16:00 to/12:45 d/first counselling session` (end time is before start time)
+* `schedule n/Jon date/09-12-2023 from/1100 to/1230 d/first counselling session` (date and time are in the wrong format)
+* `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/` (description is empty)
 
 #### 2.3.2 Cancelling an Appointment: `cancel`
 
@@ -218,6 +264,10 @@ Format: `cancel APPOINTMENT_INDEX`
 Example:
 * `cancel 2`
 
+Invalid examples:
+* `cancel 0` (invalid index)
+* `cancel first appointment` (index should be a number)
+
 #### 2.3.3 Filtering Appointments by Date: `filter`
 
 Filters appointments based on given date. 
@@ -230,6 +280,10 @@ Format: `filter DATE`
 
 Example:
 * `filter 2023-10-16`
+
+Invalid examples:
+* `filter 16-10-2023` (date is in wrong format)
+* `filter 16 October 2023` (date is in wrong format)
 
 ### 2.4 Others
 

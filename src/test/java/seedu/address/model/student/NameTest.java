@@ -21,21 +21,25 @@ public class NameTest {
 
     @Test
     public void isValidName() {
+        String hundredCharName = "Ali Ben Ching Dover Elephant Fishballs Ginormous Hugh Indiana Jelly Krispy "
+                + "Lambasted Mamamia Nutella";
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
-        assertFalse(Name.isValidName(" ")); // spaces only
+        assertFalse(Name.isValidName("  ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphabetical characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphabetical characters
         assertFalse(Name.isValidName("12345")); // numbers only
         assertFalse(Name.isValidName("peter the 2nd")); // contains numbers
+        assertFalse(Name.isValidName(hundredCharName + "a")); // more than 100 characters
 
         // valid name
+        assertTrue(Name.isValidName("A")); // single alphabet only
         assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr")); // long names
+        assertTrue(Name.isValidName(hundredCharName)); // exactly 100 characters
     }
 
     @Test
