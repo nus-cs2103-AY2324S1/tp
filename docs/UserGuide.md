@@ -507,15 +507,17 @@ You can delete multiple fosterers at once.<br>
 
 Examples:
 * `list` followed by `delete 2` 
-  * deletes the 2nd fosterer in the address book.
+  * deletes the 2nd fosterer in your address book.
 * `find Jerry` or `list Jerry`, followed by `delete 1`
-  * deletes the 1st fosterer in the result list.
+  * deletes the 1st fosterer in the result list of your `find` / `list` query
 * `list` followed by `delete 1 3 7` 
-  * deletes the 1st, 3rd and 7th fosterers in the address book.
+  * deletes the 1st, 3rd and 7th fosterers in your address book.
     ![Delete](images/screenshots/Delete.png)
+In this example, Alex, Bernice and Charlotte are the fosterers deleted. <br>
+  
 
 * `list` followed by `delete 3 3 3 3` 
-  * deletes the 3rd fosterer in the address book.
+  * deletes the 3rd fosterer in your address book.
 
 ### Sorting fosterers: `sort`
 
@@ -536,16 +538,22 @@ Format: `stats avail`
 **:information_source: Notes about the command:**<br>
 
 All statistic commands are calculated based on your currently displayed list.<br>
-If you enter `find available` before `stats avail`, the resulting statistic will show that all listed fosterers are available. Hence, please ensure that the current list is the list you want your statistics to be calculated from.<br>
+In the example below, `find available` was first entered, resulting in a list of 2 available fosterers. <br>
+`stats avail` was then entered, and we see the resulting statistic reporting all listed fosterers as available. <br>
 
-![Stats](images/screenshots/StatsAllAvail.png)
+![Stats](images/screenshots/StatsAllAvail.png)<br>
+
+Therefore, please ensure that the current list is the list you want your statistics to be calculated from.<br>
 
 </div>
 
 Examples:
 * `list` followed by `stats avail` 
-  * calculates statistics of available fosterers, based on all fosterers in the address book.
-    ![Stats](images/screenshots/StatsAvail.png)
+  * calculates statistics of available fosterers, based on all fosterers in your address book.<br>
+  Here, your have 6 fosterers in your address book, and 3 of them are available to foster.
+
+    ![Stats](images/screenshots/StatsAvail.png)<br>
+
 
 * `find cat` followed by `stats avail` 
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
@@ -558,7 +566,7 @@ Examples:
 Percentages may not add up to 100.00%.<br>
 Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat and 1 unknown.<br>
 * The calculated percentages will add up to 99.99%, instead of 100.00%.<br> 
-* It can be assumed that each group takes up 1/3 out of 100.00%.
+* Hence, it can be assumed that each group takes up 1/3 of 100.00%.
 
 ![Stats](images/screenshots/StatsTotalPercent.png)
 
@@ -571,8 +579,10 @@ Format: `stats current`
 
 Examples:
 * `list` followed by `stats current` 
-  * calculates statistics of current fosterers, based on all fosterers in the address book.
-  ![Stats](images/screenshots/StatsCurrent.png)
+  * calculates statistics of current fosterers, based on all fosterers in your address book. <br>
+  Here, you have 6 fosterers in your address book, and 2 of them are currently fostering.
+  ![Stats](images/screenshots/StatsCurrent.png)<br>
+
 
 * `find dog` followed by `stats current`
   * calculates statistics of current fosterers, based on fosterers who are either currently fostering a dog,  or are able to foster a dog.
@@ -584,8 +594,10 @@ Format: `stats housing`
 
 Examples:
 * `list` followed by `stats housing`
-  * calculates housing statistics based on all fosterers in the address book.
-    ![Stats](images/screenshots/StatsHousing.png)
+  * calculates housing statistics based on all fosterers in your address book.<br>
+  Here, out of the 6 fosterers in your address book, 3 live in HDBs, 1 live in a Condo, and 2 live in Landed properties.
+    ![Stats](images/screenshots/StatsHousing.png)<br>
+  
 
 * `find available` followed by `stats housing` 
   * calculates housing statistics based on fosterers who are available.
