@@ -127,7 +127,7 @@ public class DeleteCommand extends Command {
         }
 
         if (!predicatesList.isEmpty()) {
-            return stringBuilder.add("predicates list", predicatesList).toString();
+            return stringBuilder.add("predicateList", predicatesList).toString();
         }
 
         return stringBuilder.add("invalid", "No valid target specified").toString();

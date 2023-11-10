@@ -488,7 +488,13 @@ Format: `clear`
 
 ### Exporting all entries : `export`
 
-Exports the entries into a .csv file
+Exports the entries into a .csv file located in the current directory as (/data/export.csv)
+
+* Note: Export currently does not support Events.
+
+*  Usage Note: JABPro must have write permissions, this means that if the .csv file is open,
+exporting again will not be possible.
+
 
 Format: `export`
 
@@ -576,6 +582,10 @@ JABPro currently does not support editing tags i.e. editing tag name or category
 **Tip:**
 * If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
   </box>
+
+### Exporting events : `export`
+
+JABPro currently does not support exporting Events. This feature will be implemented in future iterations.
 
 
 --------------------------------------------------------------------------------------------------------------------
