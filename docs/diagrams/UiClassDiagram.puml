@@ -16,6 +16,9 @@ Class PersonCard
 Class StatusBarFooter
 Class PersonCardWithSpecificField
 Class CommandBox
+Class CalendarComponent
+Class ClockComponent
+Class YearMonthComponent
 }
 
 package Model <<Rectangle>> {
@@ -35,6 +38,9 @@ MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "1" CalendarComponent
+MainWindow *-down-> "1" ClockComponent
+MainWindow *-down-> "1" YearMonthComponent
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
@@ -51,6 +57,7 @@ HelpWindow --|> UiPart
 PersonCardWithSpecificField--|> UiPart
 
 PersonCard ..> Model
+CalendarComponent ..> Model
 PersonCardWithSpecificField ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
