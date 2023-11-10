@@ -92,12 +92,16 @@ Should you need to make changes to an existing contact, use the `edit` command a
 <div markdown="span" class="alert alert-info">
 :information_source: **About tags:**
 Duplicate tags are only counted once.
+Empty tags are not allowed. If you wish to omit tags, you may simply omit the `[t/TAG]` option.
 </div>
 
 <div markdown="span" class="alert alert-info">
 :information_source: **About the alternate contact format:**
 The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon and the Username.
+Empty alternate contacts are not allowed. If you wish to omit alternate contacts, you may simply omit the `[a/ALTERNATE_CONTACT]` option.
 </div>
+
+
 
 **Examples:**
 
@@ -128,8 +132,8 @@ Please refer to the [above](#adding-a-contact-add).
 - Each specified parameter will have its new value(s) replace all existing value(s) for that parameter.\
 e.g. `edit 1 n/The Myth` will edit the name of contact #`1` to `The Myth`, without changing any other parameter values for that contact.
     - When editing tags, the new specified tag(s) will similarly replace all existing tag(s).\
-    You can specify no tags via a _single_ `t/` without a value.
-    - Likewise, when editing alternate contacts, you can specify no alternate contacts via a _single_ `a/` without a value.
+    You can specify no tags (i.e. clear all tags) via a _single_ `t/` without a value.
+    - Likewise, when editing alternate contacts, you can specify no alternate contacts (i.e. clear all alternate contacts) via a _single_ `a/` without a value.
 
 **Examples:**
 
