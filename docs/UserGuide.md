@@ -383,7 +383,7 @@ Parameters:
 
 **:exclamation: Important:**<br>
 
-Only specific commands are available to you in the profile page. 
+Only specific commands are available to you in the profile page.<br> 
 The list of available commands are <code>help</code>, <code>save</code>, and <code>exit</code>. 
 </div> 
 
@@ -437,7 +437,7 @@ Saves changes in details of the fosterer made in the profile page.
 
 **:exclamation: Important:**<br>
 
-This command is only available while in fosterer profile page.
+This command is only available while in fosterer profile page.<br>
 This command works only in a profile page, which appears after executing a view command.
 
 </div>
@@ -509,8 +509,9 @@ Examples:
    * edits the name of the 3rd fosterer in the address book to John.
 *  `find` or `list` followed by `edit 1 p/12345678 animal/Bob` 
    * edits the phone number and the pet name of the 1st fosterer in the address book to 12345678 and Bob respectively.
+   ![edit 1 example](images/screenshots/EditExample2.png)
 *  `find` or `list` followed by `edit 2` 
-   * changes the view to the profile page of the 2nd fosterer in the address book since parameters are not provided.
+   * opens the profile page of the 2nd fosterer in the address book since parameters are not provided.
 
 <div markdown="span" class="alert alert-warning">
 
@@ -560,7 +561,7 @@ Before you type the save command, make sure there is no accidental overwrite wit
 
 <br/>
 
-Here is an example of entering <code>view 1</code> to view a fosterer name Benson Meie who is currently at index 1:
+Here is an example of entering <code>edit 1</code> to edit a fosterer name Benson Meie who is currently at index 1:
 
 ![Example profile 1](images/screenshots/EditExample.png)
 
@@ -577,6 +578,7 @@ Format: `delete INDEX [INDEX...]`
 <div markdown="span" class="alert alert-secondary">
 
 **:exclamation: Important:**<br>
+
 The index of a fosterer is not fixed. It is relative to the current list of fosterers you are handling.
 
 </div>
