@@ -1,4 +1,4 @@
-package seedu.classmanager.model.student.information;
+package seedu.classmanager.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.classmanager.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.classmanager.model.student.Comment;
 
 public class CommentTest {
 
@@ -50,4 +48,17 @@ public class CommentTest {
         Comment comment2 = new Comment("World");
         assertNotEquals(comment1, comment2);
     }
+
+    @Test
+    public void equals_sameComment_areEqual() {
+        Comment comment1 = new Comment("Hello");
+        assertEquals(comment1, comment1);
+    }
+
+    @Test
+    public void equals_differentType_areNotEqual() {
+        Comment comment1 = new Comment("Hello");
+        assertNotEquals(comment1, "Hello");
+    }
+
 }
