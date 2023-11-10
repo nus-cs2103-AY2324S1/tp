@@ -182,7 +182,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add Feature
 
-The add command can be found in the `LogicManager` class. User input is first parsed into the `DeckParser` class using the `parseCommand` to validate if its add command with the specified fields and format. 
+The add command can be found in the `LogicManager` class. User input is first parsed into the `DeckParser` class using the `parseCommand` to validate if its add command with the specified fields and format.
 
 The add command is exposed in the `Model` interface as the `Model#addCard`
 Below is the overview on the add command:

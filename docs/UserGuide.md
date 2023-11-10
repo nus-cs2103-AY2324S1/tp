@@ -69,7 +69,7 @@ Being comfortable and efficient at typing will help you make the most of the app
 ## How to use this guide?
 
 If you are a beginner, consider checking out our [Quick Start]() tutorial for new users. <br>
-If you are already familiar with lesSON, do explore all of our [features](). <br> 
+If you are already familiar with lesSON, do explore all of our [features](). <br>
 Here is an overview of all the [Commands]() available. <br>
 
 Throughout the user guide, you will see these colored blocks of code that contain important information.
@@ -102,7 +102,7 @@ Throughout the user guide, you will see these colored blocks of code that contai
 `GUI (Graphic User Interface):` A GUI is a user-friendly interface that allows you to interact with the software
 through visual elements like windows, icons, buttons, and menus, making it easy to navigate with a mouse and keyboard.
 
-`CLI (Command Line Interface):` A CLI is a text-based interface where you interact with the software by typing commands 
+`CLI (Command Line Interface):` A CLI is a text-based interface where you interact with the software by typing commands
 nto a terminal or command prompt, providing more direct and precise control over the system.
 
 `Deck:` A scrollable list of flashcards on the GUI.
@@ -362,7 +362,7 @@ Examples:
 ```
 
 #### To Note:
-1. No empty input or input with only whitespace after `q/`, `a/` 
+1. No empty input or input with only whitespace after `q/`, `a/`
 2. Empty input after `t/` and `h/` will remove existing tags or hint respectively.
 3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
 4. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
