@@ -6,7 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANIMAL_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANIMAL_TYPE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AVAILABILITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -52,6 +56,18 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHousing(VALID_HOUSING_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAvailability(VALID_AVAILABILITY_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAnimalName(VALID_ANIMAL_NAME_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAnimalType(VALID_ANIMAL_TYPE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -64,7 +80,11 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
+                + editPersonDescriptor.getAddress().orElse(null) + ", housing="
+                + editPersonDescriptor.getHousing().orElse(null) + ", availability="
+                + editPersonDescriptor.getAvailability().orElse(null) + ", animalName="
+                + editPersonDescriptor.getAnimalName().orElse(null) + ", animalType="
+                + editPersonDescriptor.getAnimalType().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
