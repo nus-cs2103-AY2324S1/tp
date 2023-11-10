@@ -127,7 +127,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]â€¦â€
 **Notes regarding the design of the `add` command:**
 * The uniqueness of the person is determined by the name only. This means that you cannot have 2 persons with the same name in the application book.
 * All other fields other than name can be identical between different people in JABPro.
-* `n/NAME` - `Name` must be alphanumeric (Letters and numbers, no symbols allowed such as `/`, `,` ...)
+* `n/NAME` - `NAME` must be alphanumeric (Letters and numbers, no symbols allowed such as `/`, `,` ...)
 * `p/PHONE_NUMBER` - `PHONE_NUMBER` must contain numbers only and should be at-least 3 digits long
 * `e/EMAIL` - `EMAIL` must be the standard email address format (There must be an email-prefix followed by  `@` symbol and email domain)
 * `a/ADDRESS` - `ADDRESS` can be any value, including special characters such as `#`, `,` ...
@@ -488,7 +488,13 @@ Format: `clear`
 
 ### Exporting all entries : `export`
 
-Exports the entries into a .csv file
+Exports the entries into a .csv file located in the current directory as (/data/export.csv)
+
+* Note: Export currently does not support Events.
+
+*  Usage Note: JABPro must have write permissions, this means that if the .csv file is open,
+exporting again will not be possible.
+
 
 Format: `export`
 
@@ -576,6 +582,10 @@ JABPro currently does not support editing tags i.e. editing tag name or category
 **Tip:**
 * If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
   </box>
+
+### Exporting events : `export`
+
+JABPro currently does not support exporting Events. This feature will be implemented in future iterations.
 
 
 --------------------------------------------------------------------------------------------------------------------
