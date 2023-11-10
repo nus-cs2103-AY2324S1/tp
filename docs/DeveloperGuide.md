@@ -9,6 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+* Adapted from [AB3](https://se-education.org/addressbook-level3/)
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -844,7 +845,133 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an invalid employee ID)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing Leave for an Employee
+
+1. Editing leave while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list. 
+      Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02".
+
+   1. Test case: `editleave id/EID1234-5678 old/2023-11-01 new/2023-11-03`<br>
+      Expected: The previous leave date "2023-11-01" of the employee with id "EID1234-5678" will be changed to "2023-11-03". 
+      Details of the edited employee shown in the result display.
+   
+   1. Test case: `editleave id/EID0000-0000 old/2023-11-01 new/2023-11-03`<br>
+      Expected: No employee leave is edited (no existing id). Error details shown in the result display.
+
+   1. Test case: `editleave id/12345678 old/2023-11-01 new/2023-11-03` or `editleave id/EID1234-5678 old/2023-28-11 new/2023-30-11`<br>
+      Expected: No employee leave is edited (incorrect field format). Error details shown in the result display.
+
+   1. Test case: `editleave id/ old/2023-11-01 new/2023-11-03` or `editleave id/EID1234-5678 old/ new/2023-11-03` or `editleave id/EID1234-5678 old/2023-11-01 new/`<br>
+      Expected: No employee leave is edited (empty fields). Error details shown in the result display.
+
+   1. Test case: `editleave old/2023-11-01 new/2023-11-03` or `editleave id/EID1234-5678 new/2023-11-03` or `editleave id/EID1234-5678 old/2023-11-01`<br>
+      Expected: No employee leave is edited (missing parameters). Error details shown in the result display.
+
+   1. Test case: `editleave id/EID1234-5678 old/2023-11-03 new/2023-11-04`<br>
+      Expected: No employee leave is edited (old leave doesn't exist). Error details shown in the result display.
+
+   1. Test case: `editleave id/EID1234-5678 old/2023-11-01 new/2023-11-02`<br>
+      Expected: No employee leave is edited (new leave already exists). Error details shown in the result display.
+
+1. Editing leave while only some employees are being shown  
+
+   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+      Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list.
+
+   1. Try the test cases in the previous section (Editing leave while all employees are being shown)
+      Expected: Same as the previous section
+
+### Adding Remark for an Employee
+
+1. Adding remark while all employees are being shown
+
+    1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
+       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines".
+
+    1. Test case: `addremark id/EID1234-5678 r/good leader` or `addremark id/EID1234-5678 r/GOOD LEADER`<br>
+       Expected: The remark "good leader" or "GOOD LEADER" will be added to the remark list of the employee with id "EID1234-5678".
+       Details of the edited employee shown in the result display.
+
+    1. Test case: `addremark id/EID0000-0000 r/good leader`<br>
+       Expected: No remark is added (no existing id). Error details shown in the result display.
+
+    1. Test case: `addremark id/12345678 r/good leader`<br>
+       Expected: No remark is added (incorrect id format). Error details shown in the result display.
+
+    1. Test case: `addremark id/ r/good leader` or `addremark id/EID1234-5678 r/`<br>
+       Expected: No remark is added (empty fields). Error details shown in the result display.
+
+    1. Test case: `addremark r/good leader` or `addremark id/EID1234-5678`<br>
+       Expected: No remark is added (missing parameters). Error details shown in the result display.
+
+    1. Test case: `addremark id/EID1234-5678 r/team player` or `addremark id/EID1234-5678 r/TEAM PLAYER`<br>
+       Expected: No remark is added (remark already exists). Error details shown in the result display.
+
+1. Adding remark while only some employees are being shown
+
+    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines", and is not in displayed list.
+
+    1. Try the test cases in the previous section (Adding remark while all employees are being shown)
+       Expected: Same as the previous section
+
+### Deleting Remark for an Employee
+
+1. Deleting remark while all employees are being shown
+
+    1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
+       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines".
+
+    1. Test case: `deleteremark id/EID1234-5678 r/slow on deadlines` or `addremark id/EID1234-5678 r/SLOW ON DEADLINES`<br>
+       Expected: The remark "slow on deadlines" will be deleted from the remark list of the employee with id "EID1234-5678".
+       Details of the edited employee shown in the result display.
+
+    1. Test case: `deleteremark id/EID0000-0000 r/slow on deadlines`<br>
+       Expected: No remark is deleted (no existing id). Error details shown in the result display.
+
+    1. Test case: `deleteremark id/12345678 r/slow on deadlines`<br>
+       Expected: No remark is deleted (incorrect id format). Error details shown in the result display.
+
+    1. Test case: `deleteremark id/ r/slow on deadlines` or `deleteremark id/EID1234-5678 r/`<br>
+       Expected: No remark is deleted (empty fields). Error details shown in the result display.
+
+    1. Test case: `deleteremark r/slow on deadlines` or `deleteremark id/EID1234-5678`<br>
+       Expected: No remark is deleted (missing parameters). Error details shown in the result display.
+
+    1. Test case: `deleteremark id/EID1234-5678 r/bad worker` or `deleteremark id/EID1234-5678 r/BAD WORKER`<br>
+       Expected: No remark is deleted (remark doesn't exist). Error details shown in the result display.
+
+1. Deleting remark while only some employees are being shown
+
+    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines", and is not in displayed list.
+
+    1. Try the test cases in the previous section (Deleting remark while all employees are being shown)
+       Expected: Same as the previous section
+
+### Resetting Fields for all Employees
+
+1. Resetting fields while all employees are being shown
+
+    1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
+
+    1. Test case: `reset f/overtime` or `reset f/OVERTIME` or `reset f/leaves` or `reset f/LEAVES`<br>
+       Expected: The overtime hour or leaveList of all employees will be reset to their default values 0 or empty list.
+
+    1. Test case: `reset f/name` or `reset f/salary` or `reset f/blah` <br>
+       Expected: Resetting is not done (not able to reset those fields). Error details shown in the result display.
+
+    1. Test case: `reset f/`<br>
+       Expected: Resetting is not done (empty field). Error details shown in the result display.
+   
+
+1. Resetting field while only some employees are being shown
+
+    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+
+    1. Try the test cases in the previous section (Resetting fields while all employees are being shown)
+       Expected: Same as the previous section
 
 ### Saving data
 
