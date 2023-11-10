@@ -223,7 +223,7 @@ The delete command is exposed in the `Model` interface as the `Model#setCard`
 
 Below is the overview on the delete command:
 
-<img src="images/DeleteCommandActivtityDiagram.png" width="600" />
+<img src="images/DeleteCommandActivityDiagram.png" width="600" />
 
 Here is the flow of how the delete command is featured.
 
