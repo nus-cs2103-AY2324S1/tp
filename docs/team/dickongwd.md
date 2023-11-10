@@ -34,7 +34,7 @@ Listed below are my contributions to the project:
 * **Team-based tasks**
   * Renamed our product to Connectify in various parts of the documentation ([#21](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/21), [#24](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/24)).
   * Migrated draft user guide to the product website ([#18](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/18))
-  * Fixed various bugs found ([#180](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/180), [#182](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/182), [#184](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/184))..
+  * Fixed various bugs found ([#180](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/180), [#182](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/182), [#184](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/184)).
     
 
 * **Reviewing pull requests**
@@ -43,3 +43,4 @@ Listed below are my contributions to the project:
 
 * **Community**
   * Reported bugs and gave suggestions to other team listed [here](https://github.com/dickongwd/ped/issues).
+
