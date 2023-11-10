@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Mark the tutee as paid.
+ * Mark the specific tutee as paid.
  * (Make use of the template of Delete Command and did some modification)
  */
 public class PaidCommand extends Command {

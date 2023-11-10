@@ -253,20 +253,45 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### \[Proposed\] Mark paid/check paid features
+### Mark paid/unpaid features
 The proposed mark paid/check paid mechanism can check whether the person has paid or not by implementing a new boolean field 'paid' in the person object, it implements the following operations:
 
 * `paid [index]` — Mark the person at the index as paid.
-* `ispaid [index]` — Check whether the person at the index is paid.
+* `unpaid [index]` — Mark the person at the index as not paid.
 * `list unpaid` — List all the persons who haven't paid in the list.
+* `unpaidAll` — Reset all students' payment status to not paid.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+The following sequence diagram shows how paid command works:
 
-More graphs To be added. 
+![PaidSequenceDiagram.png](images/PaidSequenceDiagram.png)
+
+The unpaid command works similar to the paid command.
+
+The following sequence diagram shows how unpaidAll command works:
+
+![UnpaidAllSequenceDiagram.png](images/UnpaidAllSequenceDiagram.png)
 
 #### Design considerations:
 
-_{more aspects and alternatives to be added}_
+**Aspect: The choice of paid data type:**
+
+* **Alternative 1 (current choice):** Use simple boolean value.
+    * Pros: Easy to implement, fits the requirement: two status (paid, not paid).
+    * Cons: Different from all other fields in the person class, hard to maintain.
+
+* **Alternative 2:** Create a new paid class.
+    * Pros: Fits the other fields in the class.
+    * Cons: Hard to implement, waste of source.
+
+**Aspect: How to implement mark paid features:**
+
+* **Alternative 1 (current choice):** Create a new person, set everything else the same as before, and set paid as true.
+    * Pros: Since we created a new person, the previous person's status will not change, this will benefit the design of undo/redo.
+    * Cons: Hard to implement.
+
+* **Alternative 2:** Change the paid value of the current person.
+    * Pros: Easy to implement.
+    * Cons: The future design of redo/undo command would be difficult.
 
 ### [Proposed] Total revenue command
 #### Proposed implementation
@@ -314,14 +339,16 @@ The logic behind finding total revenue is
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                        |
-| ------ |--------------------------------------------|---------------------------------------------|------------------------------------------------------------------------|
-| `* * *` | tutor                                      | view a list of all tutees                   |                                                                        |
+| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                       |
+| ------ |--------------------------------------------|---------------------------------------------|-----------------------------------------------------------------------|
+| `* * *` | tutor                                      | view a list of all tutees                   |                                                                       |
 | `* *`  | tutor                                      | view a list tutees on a specified day       | so that I can be reminded if I have any classes on that particular day |
-| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                        |
-| `* * *` | tutor                                      | add a new tutee                             |                                                                        |
-| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address        |
-| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                      |
+| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                       |
+| `* * *` | tutor                                      | add a new tutee                             |                                                                       |
+| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address       |
+| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                     |
+| `* *`  | tutor                                      | mark students that have already paid        | keep track of students' payment statuses                              |
+| `* *`  | tutor                                      | check all students who haven't paid         | easily remind students who haven't paid                               |
 
 *{More to be added}*
 
@@ -424,7 +451,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at 2.
 
-*{More to be added}*
+**Use case: UC05 - Mark a tutee as paid**
+
+**MSS**
+
+1.  User views the list of tutees.
+2.  User requests mark the specific tutee as paid.
+3.  System marks the tutee as paid.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The tutee that the user is trying to mark as paid does not exist in the list.
+    - 2a1. System informs that user does not exist.
+
+**Use case: UC06 - Reset all tutees in the list to not paid**
+
+**MSS**
+
+1.  User views the list of tutees.
+2.  User requests mark all the tutees in the current list as not paid.
+3.  System marks all the tutee in the list as not paid.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
