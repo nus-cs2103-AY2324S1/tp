@@ -197,7 +197,6 @@ and it should not be blank
 * **No input after prefix subject sb/**: Subject can take any values, and it should not be blank.
 * **No input after prefixes name and subject n/ sb/**: Names should only contain alphanumeric characters and spaces,
   and it should not be blank
- 
 
 ### Editing a tutee : `edit`
 
