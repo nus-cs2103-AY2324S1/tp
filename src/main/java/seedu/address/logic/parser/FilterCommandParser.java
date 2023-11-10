@@ -9,11 +9,8 @@ import seedu.address.logic.commands.FilterPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Day;
 import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Subjects;
 import seedu.address.model.person.Tags;
@@ -46,18 +43,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 Tags tags = parseField("tag", userInput, Tags::of);
                 if (tags != null) {
                     predicate.addPredicate(person -> person.getTags().containAll(tags));
-                }
-                Phone phone = parseField("phone", userInput, Phone::of);
-                if (phone != null) {
-                    predicate.addPredicate(person -> person.getPhone().equals(phone));
-                }
-                Email email = parseField("email", userInput, Email::of);
-                if (email != null) {
-                    predicate.addPredicate(person -> person.getEmail().equals(email));
-                }
-                Address address = parseField("address", userInput, Address::of);
-                if (address != null) {
-                    predicate.addPredicate(person -> person.getAddress().equals(address));
                 }
                 Remark remark = parseField("remark", userInput, Remark::of);
                 if (remark != null) {
@@ -110,12 +95,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
     }
     public String getFilterPersonUsageInfo() {
-        return "\nUsage: filter (any number of unique -[name|phone|email|address|subject|tag|remark] [value]). "
-                + "\nFor example, filter -name John -phone 91234567.";
+        return "\nUsage: filter (any number of unique -[name|subject|tag|remark] [value]). "
+                + "\nFor example, filter -name John -subject physics,english";
     }
     public String getFilterScheduleUsageInfo() {
         return "\nUsage: filter -(any number of unique -[name|subject|before|on|after|remark] [value]). "
-                + "\nFor example, filter -before 2023/10/10 -subject Math."
+                + "\nFor example, filter -before 2023/10/10 -subject Math"
                 + "\nNote you should only use one of -before, -on, -after at a time.";
     }
 }

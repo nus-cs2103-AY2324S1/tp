@@ -14,10 +14,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lessons.Day;
 import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Subjects;
@@ -45,36 +43,6 @@ class FilterCommandParserAndCommandsTest {
         personFilter.parse(" -name test 12345678").execute(model);
         assertFalse(model.getFilteredPersonList().contains(person));
         assertTrue(model.getFilteredPersonList().contains(person2));
-    }
-
-    @Test
-    void test_personFilter_phone() throws ParseException, CommandException {
-        Person person = Person.getDefaultPerson();
-        person.setPhone(Phone.of("12345678"));
-        person.setName(Name.of("person 1"));
-        Person person2 = Person.getDefaultPerson();
-        person2.setPhone(Phone.of("123456789"));
-        person2.setName(Name.of("person 2"));
-        model.addPerson(person);
-        model.addPerson(person2);
-        personFilter.parse(" -phone 12345678").execute(model);
-        assertTrue(model.getFilteredPersonList().contains(person));
-        assertFalse(model.getFilteredPersonList().contains(person2));
-    }
-
-    @Test
-    void test_personFilter_email() throws ParseException, CommandException {
-        Person person = Person.getDefaultPerson();
-        person.setEmail(Email.of("fake123@domain.com"));
-        person.setName(Name.of("person 1"));
-        Person person2 = Person.getDefaultPerson();
-        person2.setEmail(Email.of("fake1234@domain.com"));
-        person2.setName(Name.of("person 2"));
-        model.addPerson(person);
-        model.addPerson(person2);
-        personFilter.parse(" -email fake123@domain.com").execute(model);
-        assertTrue(model.getFilteredPersonList().contains(person));
-        assertFalse(model.getFilteredPersonList().contains(person2));
     }
 
     @Test
@@ -142,17 +110,17 @@ void test_personFilter_subjects() throws ParseException, CommandException {
         Person person = Person.getDefaultPerson();
         person.setTags(Tags.of("tag1,tag2"));
         person.setName(Name.of("person 1"));
-        person.setPhone(Phone.of("12345678"));
+        person.setRemark(Remark.of("remark1"));
         Person person2 = Person.getDefaultPerson();
         person2.setTags(Tags.of("tag1,tag3"));
         person2.setName(Name.of("person 2"));
-        person2.setPhone(Phone.of("123456789"));
+        person2.setRemark(Remark.of("remark2"));
         model.addPerson(person);
         model.addPerson(person2);
-        personFilter.parse(" -tag tag1 -phone 12345678").execute(model);
+        personFilter.parse(" -tag tag1 -remark remark1").execute(model);
         assertTrue(model.getFilteredPersonList().contains(person));
         assertFalse(model.getFilteredPersonList().contains(person2));
-        personFilter.parse(" -tag tag1 -phone 123456789").execute(model);
+        personFilter.parse(" -tag tag1 -remark remark2").execute(model);
         assertFalse(model.getFilteredPersonList().contains(person));
         assertTrue(model.getFilteredPersonList().contains(person2));
     }

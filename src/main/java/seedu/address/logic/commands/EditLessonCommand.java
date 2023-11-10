@@ -38,7 +38,7 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
 
     @Override
     String editableFieldsInfo() {
-        return "name, start, end, subject, day, remark";
+        return "name, start, end, subject, day";
     }
 
     @Override
