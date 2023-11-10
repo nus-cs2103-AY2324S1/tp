@@ -39,6 +39,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 1. Open a command terminal, navigate into the folder you put the jar file in using the change directory command `cd`, and use the `java -jar tutormate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
    ![Ui](images/about.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
@@ -46,7 +47,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
     * `list students` : Lists all students with their name.
 
-    * In list `STUDENTS`:
+    * In ___STUDENTS list___:
 
         * `add -name Leah` : Adds a student named "Leah" to the application.
 
@@ -65,7 +66,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 ### Basic usage
 * The app is split into 3 states: student list, schedule list and task list. Each corresponds to the main features of TutorMate.
 * Each state has its associated features, while certain features work with all states but has differing functionalities.
-* The student list handles student details management, schedule list handles lessons and scheduling, task list handles tasks.
+* The student list handles student details management, schedule list handles lessons, scheduling and the tasks for each lesson while the full task list is a view to display all tasks.
 * The GUI has several main components (see GUI image below):
   * The command box is for users to enter and execute commands.
   * The response box is to display responses for command execution, to indicate success or errors.
@@ -106,7 +107,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 | Parameter  | Used in                                                                   | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Valid examples                                                                                               | Invalid examples            |
 |------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------|
 | `INDEX`    | `show`<br/>`editPerson` `deletePerson`<br/>`editLesson` `deleteLesson`    | Must be a positive integer in the range of 1 to 99999 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | "1", "24", "12"                                                                                              | "-1", "2147483648", "10000" |
-| `LIST`     | `list`                                                                    | Must be either "Students", "Schedule", "Tasks". Is not case sensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | "STUDENTS", "stuDEnts"                                                                                       | "task", "student"           |
+| `LIST`     | `list`                                                                    | Must be either "Students", "Schedule", "Tasks". Parameter is case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | "STUDENTS", "stuDEnts"                                                                                       | "task", "student"           |
 | `KEYWORDS` | `list`                                                                    | Must be either "phone", "email", "address", "tags", "subjects", "remark", "none", or "all"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | "none", "all", "subJeCts"                                                                                    | "subject", ""               |
 | `NAME`     | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter` `find` | Must not be empty. <br/>Must only contain alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "John", "Elton"                                                                                              | "", "jo!"                   |   
 | `SUBJECT`  | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter`        | Must be either "Mathematics", "Physics", <br/>"Biology", "Chemistry" or "English"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | "mathematics", "MATHEMATICS"                                                                                 | "math"                      | 
@@ -114,7 +115,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 | `EMAIL`    | `addPerson` `editPerson`                                                  | Should follow the format localpart@domain.<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | "hello@gmail.com", "test@g.com"                                                                              | "hello.com", "f@f"          |
 | `ADDRESS`  | `addPerson` `editPerson`                                                  | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road"                                                                          | ""                          |  
 | `TAGS`     | `addPerson` `editPerson`<br/>`filter`                                     | Must not be empty and cannot contain any spaces. Multiple tags can be specified at once by using a comma (,) as a separator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | "jc,express", "weak"                                                                                         | "junior college"            |
-| `DATE`     | `addLesson` `editLesson`<br/>`filter`                                     | Must follow either the date format **yyyy/MM/dd**, *yy/MM/dd*, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                                 | To represent the date 13/08/2023 and assuming it is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        | 
+| `DATE`     | `addLesson` `editLesson`<br/>`filter`                                     | Must follow either the date format **yyyy/MM/dd**, **yy/MM/dd**, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                               | To represent the date 13/08/2023 and assuming it is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        | 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,189 +162,133 @@ Invalid command with the error message here
 
 <br>
 
-### Showing a lesson / task / student's details : `show`
+### Show Feature : `show`
 
-About the feature (generally that is similar across states)
+The show command has different behaviours depending on the current list. It shows the details of the specified item in the current list in the application.
 
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless> 
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
+Format: `show INDEX`
+* The command format is the same for all lists.
+* Shows the details of the lesson/task/student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed list.
+* Refer to the parameter constraints [here](#parameter-summary).
 
 
-#### For student list:
+#### For Student:
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
+In ___STUDENT list___, the show command shows the details of the specified student from the contact list in the application.
 
 Example usages:
-* `some code here`
-* `another code here`
+* `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the student list.
+* `find Betsy` followed by `show 1` shows the details of the 1st student in the results of the `find` command.
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `show 1`
 ```
-This block of code is for success outputs
+Showing Person: Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Subjects: BIOLOGYCHEMISTRY; Tags: [friends]; Remark: To be added
 ```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+![Success for show 1](images/show/show_student_positive.png)
 
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
 
-#### For schedule list:
+#### For Schedule:
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
+In ___SCHEDULE list___, the show command shows the details of the specified lesson from the schedule list in the application.
 
 Example usages:
-* `some code here`
-* `another code here`
+*  `list SCHEDULE` followed by `show 2` shows the details of the 2nd lesson in the schedule list.
+* `find lesson1` followed by `show 1` shows the details of the 1st lesson in the results of the `find` command.
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `show 1`
 ```
-This block of code is for success outputs
+Showing Lesson: Start: 12:30 PM; End: 2:30 PM
 ```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+![Success for show 1](images/show/show_lesson_positive.png)
 
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
 
-#### For task list:
+#### For Task:
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
+In ___TASK list___, the show command shows the details of the specified task from the full task list in the application.
 
 Example usages:
-* `some code here`
-* `another code here`
+* `list TASKS` followed by `show 2` shows the description of the 2nd task in the full task list.
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `show 1`
 ```
-This block of code is for success outputs
+Showing Task: Description: Revise CS2103T Materials
 ```
+![Success for show 1](images/show/show_task_positive.png)
+
+
+#### General Examples
+
 Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `show`
+  * Error: No index given. Enter a valid index!
+```  
+  Invalid command format!
+  show: Shows the details of the item identified by the index number used in the last item listing.
+  Parameters: INDEX (must be a positive integer)
+  Example: show 1
+ ```
+![failure for show with no index](images/show/show_negative.png)
+
+
+* Input: `show 100`
+  * Error: Index given exceeds the length of the displayed list. Enter a valid index!
 ```
-Invalid command with the error message here
+The lesson index provided is invalid
 ```
 
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+![failure for show with wrong index](images/show/show_negative_wrong_index.png)
 
 <br>
 
 ### Adding of entries (Students, Lessons, Tasks)
 
-About the feature (generally that is similar across states)
+#### For Student:
 
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless> 
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-
-#### For student list:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
+[-subject SUBJECT] [-tag TAG] [-remark REMARK]`
+* A new student cannot have the same name as existing students in the contact list.
+* A student can have any number of unique tags (including 0)
+* Duplicate phone numbers are allowed, since it is possible for 2 children to use their parent's number.
+* Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- If the user is currently in ___STUDENTS list___, the command can be shortened to `add`.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `addPerson -name John`
+* `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
+* In `STUDENTS` list :
+    * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
 ```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
+New person added: John; Phone: 91234567; Email: test@gmail.com; Address: 10 Kent Ridge Drive; Subjects: MATHEMATICS; Tags: ; Remark: To be added
 ```
 
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+![Success for addPerson](images/add-person/add_person_success.png)
+
+
+Failure outputs:
+* Input: `addPerson`
+* Error: No name given. Enter the -name flag with a valid name.
+```  
+Invalid person format: Flag name not found. 
+Usage: addPerson -name [NAME] (any number of unique -[phone|email|address|subject|tag|remark] [value]). 
+For example, addPerson -name John -phone 91234567
+If you are currently displaying student list, you could use 'add' inplace of 'addPerson'. 
+Note you must provide a 'name' not already in the address book.
+ ```
+![Failure for addPerson](images/add-person/add_person_failure.png)
+
 
 #### For schedule list:
 
@@ -424,131 +369,143 @@ Invalid command with the error message here
 
 ### Deleting of entries (Students, Lessons, Tasks)
 
-About the feature (generally that is similar across states)
-
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless> 
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
+Deletes the specified item in the student/schedule list of the application.
 
 
-#### For student list:
+#### For Student:
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+Deletes a student in the contact list of the application. 
+
+Format: `deletePerson INDEX`
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed `STUDENT` list.
+* The command is case-insensitive: eg. `deleteperson`, `deletePerson` and `DELETEPERSON` are all valid.
+* Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- If the user is currently in the ___STUDENT list___, the command can be shortened to `delete`.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `deletePerson 1`
+* In ___STUDENTS list___ : `delete 1`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `deletePerson 1`
 ```
-This block of code is for success outputs
+Deleted Person: Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Subjects: BIOLOGYCHEMISTRY; Tags: [friends]; Remark: To be added
 ```
+
+![Success for deletePerson](images/delete-person/delete_person_success.png)
+
 Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+* Input: `deletePerson`
+* Error: No index given. Enter a valid index!
+```  
+Invalid command format! 
+deleteperson: Deletes the entry identified by the index number used in the displayed list.
+Parameters: INDEX (must be a positive integer)
+Example: delete 1
+ ```
+![Failure for deletePerson](images/delete-person/delete_person_failure.png)
 
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
 
-#### For schedule list:
+#### For Schedule:
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+Deletes a lesson in the schedule list of the application. 
+
+Format: `deleteLesson INDEX`
+
+* Deletes the lesson at the specified `INDEX`.
+* The index refers to the index number shown in the displayed `SCHEDULE` list.
+* The command is case-insensitive: eg. `deletelesson`, `deleteLesson` and `DELETELESSON` are all valid.
+* Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- If the user is currently in the ___SCHEDULE list___, the command can be shortened to `delete`.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `deleteLesson 1`
+* In ___SCHEDULE list___ : `delete 1`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `deleteLesson 1`
 ```
-This block of code is for success outputs
+Deleted Lesson: Lesson lesson1 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEMATICS
 ```
+
+![Success for deleteLesson](images/delete-lesson/delete_lesson_success.png)
+
+
 Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+* Input: `deleteLesson`
+* Error: No index given. Enter a valid index!
+```  
+Invalid command format! 
+deletelesson: Deletes the lesson identified by the index number used in the displayed schedule list.
+Parameters: INDEX (must be a positive integer)
+Example: deletelesson 1
+ ```
+![Failure for deleteLesson](images/delete-lesson/delete_lesson_failure.png)
 
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
 
-#### For task list:
+#### For Task:
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+Deletes the specified task from the shown lesson in the application. User must be in the ___SCHEDULE list___ and showing a lesson.
 
-<box type="tip" seamless>
+Format: `deleteTask INDEX`
+* Deletes the task at the specified `INDEX` of the task list in the shown lesson.
+* The index refers to the index number shown in the displayed task list of the lesson.
+* The command is case-insensitive: eg. `deletetask`, `deleteTask` and `DELETETASK` are all valid.
+* Refer to the parameter constraints [here](#parameter-summary).
 
-**Tips:**
-- Tip 1
-- Tip 2
+<box type="warning" seamless>
 
+**Caution:**
+The deleteTask command can only be used in the ___SCHEDULE list___ and while a lesson is shown.
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* In ___SCHEDULE list___ : `show 1` followed by `deleteTask 2` deletes the 2nd task of the 1st lesson in the schedule list.
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `show 1` followed by `deleteTask 1`
 ```
-This block of code is for success outputs
+Deleted Task: Revise CS2103T Materials
 ```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+![Success for deleteTask](images/delete-task/delete_task_success.png)
 
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+Failure outputs:
+* Input: `show 1` followed by `deleteTask 100`
+* Error: The index given is invalid. Enter a valid task index!
 ```
-Invalid command with the error message here
+Task index do not belong to any tasks!
 ```
+![Failure for deleteTask wrong index](images/delete-task/delete_task_wrong_index.png)
+
+* Input: `show 1` followed by `deleteTask`
+* Error: No index given. Enter a valid task index!
+```
+Invalid command format! 
+deletetask: Deletes the task identified by the task index from the currently displayed lesson.
+Parameters: task index (must be a positive integer)
+Example: deletetask 1
+```
+![Failure for deleteTask no index](images/delete-task/delete_task_no_index.png)
+
+* Input: `deleteTask 1` without showing a lesson
+* Error: No lesson shown. Show a lesson with the `show` command.
+```
+Please use show lessonIndex before deleting task!
+```
+![Failure for deleteTask no show](images/delete-task/delete_task_no_show.png)
 
 <br>
 
