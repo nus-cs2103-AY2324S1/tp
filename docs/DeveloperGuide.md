@@ -454,8 +454,7 @@ testers are expected to do more *exploratory* testing.
 1. Currently, error messages displayed in ConText are generic. For example, if a user enters a negative index, the error message `Invalid command format` is displayed, even if the command format is technically correct. We plan to add more specific error messages for invalid indices (e.g. non-positive, too large, or does not exist in the list), to let the user know that the index itself is invalid, and why.
 1. Currently, special characters such as `-` and `/` are not allowed in names, even though they could conceivably be part of a contact's legal name. We plan to allow for special characters to be included in a contact's name. 
 1. Currently, the `find` command only allows for matching of full words. For example, the input keyword `John` will not match the name `Johnny` stored in the list. This may lead to unintended behaviour for some users. We plan to allow partial matches of contact names for `find`.  
-1. 
-1. Add warning messages for duplicate tags/alternates
+1. Currently, duplicate contacts are only detected by contacts having completely identical names, and not by other fields such as email address. Although this is meant to remove ambiguity in duplicate detection, it may be counter-intuitive for some users. We plan to include additional warning messages for the detection of duplicate contacts. We will warn users if they are adding contacts with duplicate information, such as duplicate email address, or names which differ only by whitespace (in the middle). The user can then confirm whether they would like the duplicate contact to go through, or whether they would like to make changes to the duplicate contact.
 1. Limiting phone numbers (regex)?
 1. Alternate contact to support whitespace and symbols?
 
