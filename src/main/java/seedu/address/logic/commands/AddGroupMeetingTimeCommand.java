@@ -1,15 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
+
+import java.util.ArrayList;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.group.Group;
-
-import java.util.ArrayList;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * Adds meeting time(s) to a group.

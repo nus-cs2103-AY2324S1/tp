@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.TimeInterval;
 import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
@@ -48,6 +49,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         grpList = personToCopy.getGroups();
+        timeIntervalList = personToCopy.getTime();
     }
 
     /**
@@ -66,8 +68,13 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withTimeInterval(String timeIntervalList) throws ParseException {
+    public PersonBuilder withTimeIntervalList(String timeIntervalList) throws ParseException {
         this.timeIntervalList.addTime(ParserUtil.parseEachInterval(timeIntervalList));
+        return this;
+    }
+
+    public PersonBuilder withTimeInterval(TimeInterval timeInterval) {
+        this.timeIntervalList.addTime(timeInterval);
         return this;
     }
 
@@ -90,7 +97,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, grpList);
+        return new Person(name, phone, email, grpList, timeIntervalList);
     }
 
 }

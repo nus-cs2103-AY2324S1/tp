@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.TimeIntervalList;
-import seedu.address.model.Model;
-import seedu.address.model.group.Group;
-
 import static java.util.Objects.requireNonNull;
 
-public class ListTimeGroupCommand extends ListTimeCommand{
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.TimeIntervalList;
+import seedu.address.model.group.Group;
+
+/**
+ * Lists the time of a group
+ */
+public class ListTimeGroupCommand extends ListTimeCommand {
     public static final String MESSAGE_LISTTIME_GROUP_SUCCESS = "Listed times of Group: %1$s";
     public static final String MESSAGE_NO_GROUP_WITH_NAME_FOUND = "No group with such name found.\n"
             + "Please provide the group's full name as in the existing contactlist.";
@@ -24,7 +27,8 @@ public class ListTimeGroupCommand extends ListTimeCommand{
             throw new CommandException(MESSAGE_NO_GROUP_WITH_NAME_FOUND);
         }
         TimeIntervalList timeIntervalList = model.getTimeFromGroup(group);
-        return new CommandResult(String.format(MESSAGE_LISTTIME_GROUP_SUCCESS, group.getGroupName()) + timeIntervalList);
+        return new CommandResult(String.format(MESSAGE_LISTTIME_GROUP_SUCCESS,
+                group.getGroupName()) + timeIntervalList);
     }
 
     @Override

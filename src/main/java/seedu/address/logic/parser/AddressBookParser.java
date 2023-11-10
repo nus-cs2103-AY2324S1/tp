@@ -8,7 +8,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGroupCommand;
+import seedu.address.logic.commands.AddGroupMeetingTimeCommand;
+import seedu.address.logic.commands.AddTimeCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTimeCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindFreeTimeCommand;
+import seedu.address.logic.commands.GroupPersonCommand;
+import seedu.address.logic.commands.GroupRemarkCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListGroupCommand;
+import seedu.address.logic.commands.ListTimeCommand;
+import seedu.address.logic.commands.UngroupPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -58,7 +75,7 @@ public class AddressBookParser {
             return new AddGroupCommandParser().parse(arguments);
 
         case GroupPersonCommand.COMMAND_WORD:
-             return new GroupPersonCommandParser().parse(arguments);
+            return new GroupPersonCommandParser().parse(arguments);
 
         case UngroupPersonCommand.COMMAND_WORD:
             return new UngroupPersonCommandParser().parse(arguments);

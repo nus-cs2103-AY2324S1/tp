@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.group.Group;
 
-import java.util.ArrayList;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Deletes a group's meeting time
+ */
 public class DeleteGroupTimeCommand extends DeleteTimeCommand {
     private final ArrayList<TimeInterval> timeIntervalsToDelete;
     private final Group group;

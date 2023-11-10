@@ -9,7 +9,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
-import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -85,11 +84,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person with the same name exists in the addressbook.
+     * Returns true if a person with the same name exists in the address book.
+     *
      * @param personName Name of the person.
-     * @return Returns true if a person with the same name exists in the addressbook.
+     * @return Returns true if a person with the same name exists in the address book.
      */
-     public boolean hasPerson(Name personName) {
+    public boolean hasPerson(Name personName) {
         requireNonNull(personName);
         for (Person person : persons) {
             if (person.getName().equals(personName)) {
@@ -98,6 +98,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         return false;
     }
+
 
     /**
      * Adds a person to the address book.
@@ -115,6 +116,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Adds a person to a group
+     * @param person person to add
+     * @param group group to add person to
+     */
     public void addPersonToGroup(Person person, Group group) {
         requireNonNull(person);
         requireNonNull(group);
@@ -172,7 +178,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @throws CommandException If group is not in address book
      */
     public Group getGroup(Group group) throws CommandException {
-        // group list get that group object with same name
         return groups.getGroup(group);
     }
 
@@ -227,7 +232,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasEmail(Person toAdd) {
         return persons.containsEmail(toAdd);
     }
-
 
     public boolean hasPhone(Person toAdd) {
         return persons.containsPhoneNumber(toAdd);

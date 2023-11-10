@@ -4,11 +4,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Lists the time of a person or group
  */
 public abstract class ListTimeCommand extends Command {
 

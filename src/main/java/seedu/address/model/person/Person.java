@@ -178,7 +178,8 @@ public class Person {
         return name.equals(otherPerson.name)
             && phone.equals(otherPerson.phone)
             && email.equals(otherPerson.email)
-            && personGroups.equals(otherPerson.personGroups);
+            && personGroups.equals(otherPerson.personGroups)
+            && timeIntervalList.equals(otherPerson.timeIntervalList);
     }
 
     @Override
@@ -205,7 +206,7 @@ public class Person {
         this.timeIntervalList.addTime(toAddFreeTime);
     }
 
-    public String addFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+    public String addFreeTime(ArrayList<TimeInterval> toAddFreeTime) {
         return this.timeIntervalList.addTime(toAddFreeTime);
     }
 

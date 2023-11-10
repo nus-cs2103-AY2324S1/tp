@@ -6,8 +6,6 @@ import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
@@ -74,6 +72,13 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         }
     }
 
+    /**
+     * Deletes a list of time intervals from the time interval list
+     * @param timeIntervals The list of time intervals to be deleted
+     * @return The message of time that has and has not been deleted
+     * @throws CommandException Throws exception if time interval list does not contain the time when being removed,
+     *                          which should not happen as we check using the contains method
+     */
     public String deleteTime(ArrayList<TimeInterval> timeIntervals) throws CommandException {
         boolean isPass = false;
         boolean isFail = false;
@@ -176,6 +181,12 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return personTime;
     }
 
+    /**
+     * Finds the overlap between 2 free times and a duration
+     * @param otherTime the other free times to compare with
+     * @param duration the duration of overlap needed
+     * @return a list of times that there is an overlap in time interval
+     */
     public TimeIntervalList findOverlap(TimeIntervalList otherTime, Duration duration) {
         // 4 steps, sort by start time, min start min end 2 pointers, get overlap, interval >= duration check
         this.internalList.sort(TimeInterval::compareStart);
