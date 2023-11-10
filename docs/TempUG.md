@@ -302,8 +302,15 @@ Invalid command with the error message here
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Copy TutorMate's jar file into the folder you want to use as the home folder in the other computer. Before running the application, copy _addressbook.json_, _personLessonMap.json_ and _schedulelist.json_ files from the home folder in your current computer into the home folder of the other computer. After copying the 3 files, running the application will show the same data. However, do note that the changes made through the application in one computer will not be reflected in the data in another computer.  
+**Q**: How do I transfer my data to another Computer? <br>
+**A**: Copy TutorMate's jar file into the folder you want to use as the home folder in the other computer. Before running the application, copy _addressbook.json_, _personLessonMap.json_ and _schedulelist.json_ files from the home folder in your current computer into the home folder of the other computer. After copying the 3 files, running the application will show the same data. However, do note that the changes made through the application in one computer will not be reflected in the data in another computer.
+
+**Q**: Can I edit the data in the application through the _addressbook.json, personLessonMap.json, schedulelist.json_ files directly? <br>
+**A**: Yes, it is possible. However, it is not advisable for you to do so as if the changes made to the data file makes its format invalid, TutorMate will discard all data and start with an empty data file at the next run. Please use the `edit` command to make changes to your data instead.
+
+**Q**: Can I still use the application without internet connection? <br>
+**A**: Yes, you can. TutorMate is an offline desktop application.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
