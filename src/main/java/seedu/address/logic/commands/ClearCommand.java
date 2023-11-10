@@ -14,11 +14,14 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "reset";
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
-    public static final String MESSAGE_USAGE = "This command will erase the entire Address Book.\n"
+    public static final String MESSAGE_USAGE = "The 'reset' command will erase the entire Address Book.\n"
             + "Are you sure you want to do this? "
             + "If you are sure, Enter 'reset confirm'.";
+    public static final String MESSAGE_PROMPT = "To reset the entire Address Book, "
+            + "enter 'reset' followed by 'reset confirm'.";
 
     private final String confirmation;
+    private boolean finalConfirmation = false;
 
     /**
      * Constructs a ClearCommand with the provided confirmation.
@@ -36,12 +39,14 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        if (Objects.equals(this.confirmation, "confirm")) {
+        if (Objects.equals(this.confirmation, "confirm") && this.finalConfirmation) {
             requireNonNull(model);
             model.setAddressBook(new AddressBook());
             return new CommandResult(MESSAGE_SUCCESS);
+        } else if (Objects.equals(this.confirmation, "confirm")) {
+            return new CommandResult(MESSAGE_PROMPT);
         } else {
-            return new CommandResult(MESSAGE_USAGE);
+            return new CommandResult(MESSAGE_USAGE, CommandType.CLEAR);
         }
 
     }
@@ -61,5 +66,11 @@ public class ClearCommand extends Command {
     @Override
     public int hashCode() {
         return Objects.hash(confirmation);
+    }
+
+    @Override
+    public String toString() {
+        this.finalConfirmation = true;
+        return this.confirmation;
     }
 }

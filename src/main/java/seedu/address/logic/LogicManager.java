@@ -42,7 +42,7 @@ public class LogicManager implements Logic {
     private boolean isViewCommand = false;
     private boolean isViewExitCommand = false;
     private final Model backupModel;
-    private boolean isEditFieldCommand = false;
+    private boolean finalConfirmation = false;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -75,7 +75,18 @@ public class LogicManager implements Logic {
         } else {
             backupModel.setAddressBook(model.getAddressBook());
         }
+
+        if (this.finalConfirmation) {
+            command.toString();
+        }
+
         commandResult = command.execute(model);
+
+        if (commandResult.getCommandType() == CommandType.CLEAR) {
+            this.finalConfirmation = true;
+        } else {
+            this.finalConfirmation = false;
+        }
 
         if (commandResult.getCommandType() == CommandType.VIEW) {
             isViewCommand = true;
