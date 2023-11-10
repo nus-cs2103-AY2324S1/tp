@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam arrowThickness 1.1
+skinparam arrowColor PERSON_COLOR
+skinparam classBackgroundColor PERSON_COLOR
+show method
+show attribute
+
+
+Class "<<interface>>\nParser" as Parser
+Class "{abstract}\nCommand" as Command
+
+class ReadCommand {
+  + execute(model: Model)
+  + getField(): String
+  + fieldValueToString(Person): String
+}
+
+class Model {
+  + getFilteredPersonList(): List<Person>
+  + setSpecificPersonToDisplay(Person)
+}
+
+class ReadCommandParser {
+    +parse(args: String): ReadCommand
+}
+
+class Person {
+  + getPhone(): Phone
+  + getAddress(): Address
+  + getEmail(): Email
+  + getBankAccount(): BankAccount
+  + getJoinDate(): JoinDate
+  + getSalary(): Salary
+  + getAnnualLeave(): AnnualLeave
+  + getWorkingStatusToday(): WorkingStatus
+}
+
+
+Parser <|-- ReadCommandParser
+Command <|-- ReadCommand
+ReadCommandParser --> ReadCommand
+ReadCommand --> Model
+ReadCommand --> Person
+
+
+
+
+
+@enduml

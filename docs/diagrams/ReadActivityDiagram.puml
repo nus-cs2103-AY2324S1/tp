@@ -1,0 +1,13 @@
+CommitActivityDiagram.puml@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User find the index of the employee;
+:User enters read command;
+:ManaGease reads and parses read command;
+:ManaGease retrieves the specific field of the particular employee and display it;
+
+stop
+@enduml
+ReadActivityDiagram.puml
