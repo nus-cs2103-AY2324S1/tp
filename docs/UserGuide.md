@@ -429,12 +429,19 @@ Incomes must only consist of numerical inputs. Connectify does not yet support:
 
 --------------------------------------------------------------------------------------------------------------------
 
-# FAQ [coming soon]
+# FAQ
 
+**Q**: How do I save my progress?
+<br>
+**A**: Your progress is saved after every command.
+
+**Q**: How do I transfer my data to another computer?
+<br>
+**A**: Download Connectify on the other computer and overwrite the data folder it creates with the data folder of your previous Connectify home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Known issues [coming soon]
+# Known issues 
 
 --------------------------------------------------------------------------------------------------------------------
 
