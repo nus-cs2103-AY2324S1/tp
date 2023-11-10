@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.comparator.SortByNameComparator;
+
 public class SortByNameComparatorTest {
     @Test
     public void equals() {
