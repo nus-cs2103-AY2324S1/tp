@@ -73,11 +73,6 @@ public class Subject extends ListEntryField {
             return false;
         }
     }
-
-    public static Boolean isValid(String input) {
-        return isValidSubject(input);
-    }
-
     /**
      * Returns the subject parsed from a string.
      */

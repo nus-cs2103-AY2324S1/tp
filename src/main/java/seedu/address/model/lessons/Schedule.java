@@ -41,25 +41,6 @@ public class Schedule implements Iterable<Lesson> {
     }
 
     /**
-     * Serializes the student's schedule
-     * TODO: make this override something
-     * TODO: Implementation
-     */
-    public String serialize() {
-
-        return "";
-
-    }
-
-    /**
-     * Deserialize to a schedule
-     * @return stringified version of schedule
-     */
-    public Schedule deserialize() {
-        // TODO
-        return new Schedule();
-    }
-    /**
      * Returns true if the list contains an equivalent lesson as the given argument.
      */
     public boolean contains(Lesson toCheck) {
@@ -138,12 +119,6 @@ public class Schedule implements Iterable<Lesson> {
         }
     }
 
-    public void setLessons(Schedule replacement) {
-        requireNonNull(replacement);
-        internalSchedule.setAll(replacement.internalSchedule);
-        internalSchedule.sort(lessonComparator);
-    }
-
     /**
      * Replaces the contents of this list with {@code lessons}.
      * {@code lessons} must not contain duplicate lessons.
@@ -183,11 +158,6 @@ public class Schedule implements Iterable<Lesson> {
 
         Schedule otherSchedule = (Schedule) other;
         return internalSchedule.equals(otherSchedule.internalSchedule);
-    }
-
-    @Override
-    public int hashCode() {
-        return internalSchedule.hashCode();
     }
 
     @Override

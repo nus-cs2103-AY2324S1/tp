@@ -37,7 +37,6 @@ public class Lesson extends ListEntry<Lesson> {
      * @param subject The subject of this lesson
      * @param taskList the tasks to be completed
      * @param studentNames The student attending this lesson. Note: Converted to ArrayList when stored
-     * @see seedu.address.logic.parser.ParserUtil
      */
     public Lesson(Name name, Time start, Time end, Day day, Subject subject, TaskList taskList, Name... studentNames) {
         requireAllNonNull(name, start, end, day, subject, taskList, studentNames);
@@ -322,11 +321,11 @@ public class Lesson extends ListEntry<Lesson> {
     @Override
     public Lesson clone() {
         Lesson cloned = new Lesson();
-        cloned.setStartIfNotDefault(this.start);
-        cloned.setEndIfNotDefault(this.end);
-        cloned.setSubjectIfNotDefault(this.subject);
-        cloned.setNameIfNotDefault(this.name);
-        cloned.setDayIfNotDefault(this.day);
+        cloned.setStartIfNotDefault(this.start.clone());
+        cloned.setEndIfNotDefault(this.end.clone());
+        cloned.setSubjectIfNotDefault(this.subject.clone());
+        cloned.setNameIfNotDefault(this.name.clone());
+        cloned.setDayIfNotDefault(this.day.clone());
         cloned.taskList = taskList.clone();
         return cloned;
     }

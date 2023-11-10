@@ -24,18 +24,6 @@ public class Subjects extends ListEntryField {
     }
 
     /**
-     * Returns true if a given string is a valid subject.
-     */
-    public static Boolean isValid(String input) {
-        for (String str : input.split(",")) {
-            if (!Subject.isValid(str.trim())) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * Constructs a {@code Subjects} from input of format "subject1, subject2, subject3".
      */
     public static Subjects of(String input) throws ParseException {

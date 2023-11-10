@@ -7,7 +7,6 @@ import static seedu.address.model.util.SerializeUtil.deserialize;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,14 +42,6 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
     public TaskList() {
 
     }
-
-    /**
-     * Constructor for a TaskList, given a set of tasks
-     */
-    public TaskList(Set<Task> tasks) {
-        this.internalTaskList.addAll(tasks);
-    }
-
 
     /**
      * Returns true if the list contains an equivalent task as the given argument.
