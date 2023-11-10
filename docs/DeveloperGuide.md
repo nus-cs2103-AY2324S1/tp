@@ -9,6 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+* Adapted from [AB3](https://se-education.org/addressbook-level3/)
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -240,7 +241,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Sort feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed sorting mechanism is facilitated by `UniqueEmployeeList`. It implements the following operations:
 
@@ -273,7 +274,7 @@ Finally, the update to the internalList will change the view of the displayed li
 
 ### Report feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed reporting mechanism is facilitated by `ReportCommandParser`. It implements the following operations:
 
@@ -309,37 +310,137 @@ This report will be displayed in the GUI. This also calls the `storage` componen
 
 ### Reset feature
 
-#### Proposed Implementation
+The reset feature allows HouR to reset employee overtime hours and leaves.
 
-The proposed resetting mechanism is facilitated by `Model`. It implements the following operation:
+#### Implementation
 
-* `Model#setEmployee(Employee target, Employee editedEmployee)` — edits the employee in the internal list to the new employee. 
+The reset command mechanism is facilitated by `ResetCommandParser` class which implements the `Parser` interface.
 
-Given below is an example usage scenario where the user attempts to reset the overtime hours field of all employees
-and how the reset mechanism behaves at each step.
+`ResetCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
 
-Step 1. The user keys in `reset f/overtime`. This leads to the `reset` command being executed. It checks the argument given and
-identifies that the `OvertimeHours` field is being reset. 
+`ResetCommandParser` implements the following operations:
+* `ResetCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`, 
+and creates a new `ResetCommand` object with the parsed field.
 
-Step 2. Then it loops through the list of existing employees in `model.getFilteredEmployeeList()`.
-It creates a new Employee for every employee with the `OvertimeHours` field being set to its default value 0 and all other fields remain the same.
-It then sets the new Employee in place of the old Employee using `model.setEmployee(oldEmployee, newEmployee)`.
+The `ResetCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `ResetCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
 
-Step 3. Finally, it calls `model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES)` to display the updated list in the GUI.
+The method `ResetCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the reset operation works:
+
+![Reset Sequence Diagram](images/ResetSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `reset f/FIELD` command in the CLI (note that only `overtime` and `leaves` are valid).
+
+**Step 3**: The given field of all employees in the employee book will be reset to their default value.
+
+The following activity diagram summarizes what happens when a user executes the reset command:
+
+![Reset Activity Diagram](images/ResetActivityDiagram.png)
 
 #### Design considerations:
 
-**Aspect: How reset executes:**
+**Aspect: Model-Employee Interaction:**
 
-* **Alternative 1 (current choice):** Create a new command specifically for Reset.
-    * Pros: Fast since it edits all the employees with a single command.
-    * Cons: More code to implement
+* **Alternative 1 (current choice):** Utilise `Model#setEmployee` to add the edited employee into the model, doing the direct editing in `ResetCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates SRP.
 
-* **Alternative 2:** Use existing Edit command.
-    * Pros: Less new code to implement.
-    * Cons: Difficult to edit all employees on the list since edit only edits one employee at a time.
+* **Alternative 2:** Create methods in `Model` class specifically to edit the fields of the employees.
+    * Pros: More OOP, follows SRP by not having `ResetCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requiring more parts to work together.
 
-### Add leave feature
+### Add Remark feature
+
+The add remark feature allows HouR to add employee remarks.
+
+#### Implementation
+
+The add remark command mechanism is facilitated by `AddRemarkCommandParser` class which implements the `Parser` interface.
+
+`AddRemarkCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`AddRemarkCommandParser` implements the following operations:
+* `AddRemarkCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
+  and creates a new `AddRemarkCommand` object with the parsed id and remark.
+
+The `AddRemarkCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `AddRemarkCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `AddRemarkCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the add remark operation works:
+
+![Add Remark Sequence Diagram](images/AddRemarkSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `addremark id/EMPLOYEE_ID r/REMARK` command in the CLI.
+
+**Step 3**: The given remark will be added to the remark list of the employee with the given id.
+
+**Aspect: Model-Person Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `AddRemarkCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates SRP.
+
+* **Alternative 2**: Create methods in model specifically to edit the `remarkList` attribute of the employee.
+    * Pros: More OOP, follows SRP by not having `AddRemarkCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requires more parts to work together.
+
+### Delete Remark feature
+
+The delete remark feature allows HouR to delete employee remarks.
+
+#### Implementation
+
+The delete remark command mechanism is facilitated by `DeleteRemarkCommandParser` class which implements the `Parser` interface.
+
+`DeleteRemarkCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`DeleteRemarkCommandParser` implements the following operations:
+* `DeleteRemarkCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
+  and creates a new `DeleteRemarkCommand` object with the parsed id and remark.
+
+The `DeleteRemarkCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `DeleteRemarkCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `DeleteRemarkCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the delete remark operation works:
+
+![Delete Remark Sequence Diagram](images/DeleteRemarkSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `deleteremark id/EMPLOYEE_ID r/REMARK` command in the CLI.
+
+**Step 3**: The given remark will be deleted from the remark list of the employee with the given id.
+
+**Aspect: Model-Person Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `DeleteRemarkCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates SRP.
+
+* **Alternative 2**: Create methods in model specifically to edit the `remarkList` attribute of the employee.
+    * Pros: More OOP, follows SRP by not having `DeleteRemarkCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requires more parts to work together.
+
+### Add Leave feature
 
 The add leave feature allows HouR to manage employee leaves.
 
@@ -385,6 +486,52 @@ Given below is an example usage scenario for the command.
 
 * **Alternative 2**: Create methods in model specifically to edit the `leaveList` attribute of the employee.
     * Pros: More OOP, follows the Single Responsibility Principle by not having `AddLeaveCommand#execute()` perform the editing directly. 
+    * Cons: Longer command execution, requires more parts to work together.
+
+### Edit Leave feature
+
+The edit leave feature allows HouR to edit employee leaves.
+
+#### Implementation
+
+The edit leave command mechanism is facilitated by `EditLeaveCommandParser` class which implements the `Parser` interface.
+
+`EditLeaveCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`EditLeaveCommandParser` implements the following operations:
+* `EditLeaveCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
+  and creates a new `EditLeaveCommand` object with the parsed id, old and new leave dates.
+
+The `EditLeaveCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `EditLeaveCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `EditLeaveCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the edit leave operation works:
+
+![Edit Leaave Sequence Diagram](images/EditLeaveSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `editleave id/EMPLOYEE_ID old/OLD_DATE new/NEW_DATE` command in the CLI.
+
+**Step 3**: The given remark will be deleted from the remark list of the employee with the given id.
+
+The following activity diagram summarizes what happens when a user executes the edit leave command:
+
+![Edit Leave Activity Diagram](images/EditLeaveActivityDiagram.png)
+
+**Aspect: Model-Person Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `DeleteRemarkCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates SRP.
+
+* **Alternative 2**: Create methods in model specifically to edit the `remarkList` attribute of the employee.
+    * Pros: More OOP, follows SRP by not having `DeleteRemarkCommand#execute()` perform the editing directly.
     * Cons: Longer command execution, requires more parts to work together.
 
 _{more aspects and alternatives to be added}_
@@ -698,7 +845,133 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an invalid employee ID)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing Leave for an Employee
+
+1. Editing leave while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list. 
+      Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02".
+
+   1. Test case: `editleave id/EID1234-5678 old/2023-11-01 new/2023-11-03`<br>
+      Expected: The previous leave date "2023-11-01" of the employee with id "EID1234-5678" will be changed to "2023-11-03". 
+      Details of the edited employee shown in the result display.
+   
+   1. Test case: `editleave id/EID0000-0000 old/2023-11-01 new/2023-11-03`<br>
+      Expected: No employee leave is edited (no existing id). Error details shown in the result display.
+
+   1. Test case: `editleave id/12345678 old/2023-11-01 new/2023-11-03` or `editleave id/EID1234-5678 old/2023-28-11 new/2023-30-11`<br>
+      Expected: No employee leave is edited (incorrect field format). Error details shown in the result display.
+
+   1. Test case: `editleave id/ old/2023-11-01 new/2023-11-03` or `editleave id/EID1234-5678 old/ new/2023-11-03` or `editleave id/EID1234-5678 old/2023-11-01 new/`<br>
+      Expected: No employee leave is edited (empty fields). Error details shown in the result display.
+
+   1. Test case: `editleave old/2023-11-01 new/2023-11-03` or `editleave id/EID1234-5678 new/2023-11-03` or `editleave id/EID1234-5678 old/2023-11-01`<br>
+      Expected: No employee leave is edited (missing parameters). Error details shown in the result display.
+
+   1. Test case: `editleave id/EID1234-5678 old/2023-11-03 new/2023-11-04`<br>
+      Expected: No employee leave is edited (old leave doesn't exist). Error details shown in the result display.
+
+   1. Test case: `editleave id/EID1234-5678 old/2023-11-01 new/2023-11-02`<br>
+      Expected: No employee leave is edited (new leave already exists). Error details shown in the result display.
+
+1. Editing leave while only some employees are being shown  
+
+   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+      Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list.
+
+   1. Try the test cases in the previous section (Editing leave while all employees are being shown)
+      Expected: Same as the previous section
+
+### Adding Remark for an Employee
+
+1. Adding remark while all employees are being shown
+
+    1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
+       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines".
+
+    1. Test case: `addremark id/EID1234-5678 r/good leader` or `addremark id/EID1234-5678 r/GOOD LEADER`<br>
+       Expected: The remark "good leader" or "GOOD LEADER" will be added to the remark list of the employee with id "EID1234-5678".
+       Details of the edited employee shown in the result display.
+
+    1. Test case: `addremark id/EID0000-0000 r/good leader`<br>
+       Expected: No remark is added (no existing id). Error details shown in the result display.
+
+    1. Test case: `addremark id/12345678 r/good leader`<br>
+       Expected: No remark is added (incorrect id format). Error details shown in the result display.
+
+    1. Test case: `addremark id/ r/good leader` or `addremark id/EID1234-5678 r/`<br>
+       Expected: No remark is added (empty fields). Error details shown in the result display.
+
+    1. Test case: `addremark r/good leader` or `addremark id/EID1234-5678`<br>
+       Expected: No remark is added (missing parameters). Error details shown in the result display.
+
+    1. Test case: `addremark id/EID1234-5678 r/team player` or `addremark id/EID1234-5678 r/TEAM PLAYER`<br>
+       Expected: No remark is added (remark already exists). Error details shown in the result display.
+
+1. Adding remark while only some employees are being shown
+
+    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines", and is not in displayed list.
+
+    1. Try the test cases in the previous section (Adding remark while all employees are being shown)
+       Expected: Same as the previous section
+
+### Deleting Remark for an Employee
+
+1. Deleting remark while all employees are being shown
+
+    1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
+       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines".
+
+    1. Test case: `deleteremark id/EID1234-5678 r/slow on deadlines` or `addremark id/EID1234-5678 r/SLOW ON DEADLINES`<br>
+       Expected: The remark "slow on deadlines" will be deleted from the remark list of the employee with id "EID1234-5678".
+       Details of the edited employee shown in the result display.
+
+    1. Test case: `deleteremark id/EID0000-0000 r/slow on deadlines`<br>
+       Expected: No remark is deleted (no existing id). Error details shown in the result display.
+
+    1. Test case: `deleteremark id/12345678 r/slow on deadlines`<br>
+       Expected: No remark is deleted (incorrect id format). Error details shown in the result display.
+
+    1. Test case: `deleteremark id/ r/slow on deadlines` or `deleteremark id/EID1234-5678 r/`<br>
+       Expected: No remark is deleted (empty fields). Error details shown in the result display.
+
+    1. Test case: `deleteremark r/slow on deadlines` or `deleteremark id/EID1234-5678`<br>
+       Expected: No remark is deleted (missing parameters). Error details shown in the result display.
+
+    1. Test case: `deleteremark id/EID1234-5678 r/bad worker` or `deleteremark id/EID1234-5678 r/BAD WORKER`<br>
+       Expected: No remark is deleted (remark doesn't exist). Error details shown in the result display.
+
+1. Deleting remark while only some employees are being shown
+
+    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines", and is not in displayed list.
+
+    1. Try the test cases in the previous section (Deleting remark while all employees are being shown)
+       Expected: Same as the previous section
+
+### Resetting Fields for all Employees
+
+1. Resetting fields while all employees are being shown
+
+    1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
+
+    1. Test case: `reset f/overtime` or `reset f/OVERTIME` or `reset f/leaves` or `reset f/LEAVES`<br>
+       Expected: The overtime hour or leaveList of all employees will be reset to their default values 0 or empty list.
+
+    1. Test case: `reset f/name` or `reset f/salary` or `reset f/blah` <br>
+       Expected: Resetting is not done (not able to reset those fields). Error details shown in the result display.
+
+    1. Test case: `reset f/`<br>
+       Expected: Resetting is not done (empty field). Error details shown in the result display.
+   
+
+1. Resetting field while only some employees are being shown
+
+    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+
+    1. Try the test cases in the previous section (Resetting fields while all employees are being shown)
+       Expected: Same as the previous section
 
 ### Saving data
 

@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs Reset Command;
+
+if () then ([else])
+  :Display error message;
+else ([Valid command format])
+  if () then ([else])
+    :Display error message;
+  else ([Field given is overtime or leaves])
+    :Reset overtime or leaves of all employees;
+  endif
+endif
+
+stop
+
+@enduml
