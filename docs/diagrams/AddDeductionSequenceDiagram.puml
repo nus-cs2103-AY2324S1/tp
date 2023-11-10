@@ -1,0 +1,103 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeductCommandParser" as DeductCommandParser LOGIC_COLOR
+participant "dc:DeductCommand" as DeductCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Person PERSON_COLOR
+participant ":Person" as Person PERSON_COLOR
+participant ":PayrollStorage" as PayrollStorage PERSON_COLOR
+participant ":Payroll" as Payroll PERSON_COLOR
+participant ":Salary" as Salary PERSON_COLOR
+end box
+
+[-> LogicManager : execute("deduct 1 /v 150.00 /r absence")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deduct 1 /v 150.00 /r absence")
+activate AddressBookParser
+
+create DeductCommandParser
+AddressBookParser -> DeductCommandParser
+activate DeductCommandParser
+
+DeductCommandParser --> AddressBookParser
+deactivate DeductCommandParser
+
+AddressBookParser -> DeductCommandParser : parse("1 /v 150.00 /r absence")
+activate DeductCommandParser
+
+create DeductCommand
+DeductCommandParser -> DeductCommand
+activate DeductCommand
+
+DeductCommand --> DeductCommandParser : dc
+deactivate DeductCommand
+
+DeductCommandParser --> AddressBookParser : dc
+deactivate DeductCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeductCommandParser -[hidden]-> AddressBookParser
+destroy DeductCommandParser
+
+AddressBookParser --> LogicManager : dc
+deactivate AddressBookParser
+
+LogicManager -> DeductCommand : execute()
+activate DeductCommand
+
+DeductCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> DeductCommand:
+deactivate Model
+
+DeductCommand -> Person : getPayrollStorage()
+activate Person
+create PayrollStorage
+Person -> PayrollStorage
+activate PayrollStorage
+
+Person -> PayrollStorage : getLatestPayroll()
+create Payroll
+PayrollStorage -> Payroll :
+activate Payroll
+
+PayrollStorage -> Payroll : addDeduction()
+create Salary
+Payroll -> Salary :
+activate Salary
+Payroll -> Salary : addDeduction()
+Salary --> Payroll :
+deactivate Salary
+Payroll --> PayrollStorage :
+deactivate Payroll
+PayrollStorage --> Person :
+deactivate PayrollStorage
+
+Person --> DeductCommand :
+deactivate Person
+
+create CommandResult
+DeductCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeductCommand : result
+deactivate CommandResult
+
+DeductCommand --> LogicManager : result
+deactivate DeductCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
