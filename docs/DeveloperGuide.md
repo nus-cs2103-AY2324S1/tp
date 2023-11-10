@@ -22,7 +22,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
-
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
@@ -121,8 +120,7 @@ How the parsing works:
 Here is an overview of what the other classes in `Logic` do:
 * `ArgumentMultiMap` and `ArgumentTokeniser` are used to map the parameters of 
 the user's input into key-value pairs, where the keys are specified using `ArgumentTokeniser`
-* `CliSyntax` is where command-specific keywords are stored. It is used as the arguments for `ArgumentTokeniser`
-to process the user input into: `{keyword : parameter}` pairs.
+* `CliSyntax` is where command-specific keywords are stored. It is used as the arguments for `ArgumentTokeniser` to process the user input into: `{keyword : parameter}` pairs.
   * Example usage: The text `1 /name John Doe /phone 98765432` when
     mapped using `ArgumentTokeniser` with the keywords `/name`
     and `/phone` produces:
@@ -190,12 +188,12 @@ The `UniqueList<T>` class,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="900" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both NetworkBook data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `NetworkBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -313,7 +311,7 @@ The `Person` opens the link by first detects which OS the application is running
 
 
 ### \[Proposed\] Undo/redo feature
-    
+
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `NetworkBook` with an undo/redo history, stored internally as an `networkBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -831,6 +829,106 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Delete a single-valued field of a contact**
+
+**MSS**
+
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User specifies index of contact and a single-valued field to delete.
+
+4. NetworkBook updates the contact by deleting the field.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index of contact is invalid.
+
+  * 3a1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+
+* 3b. User provides multiple fields to delete.
+
+  * 3b1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3c. User provides an index field after the single-valued field to delete.
+
+  * 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3d. The single-valued field of the contact is empty.
+
+  * 3d1. NetworkBook does not change the contact.
+
+    Use case ends.
+
+**Use case: Delete a multi-valued field of a contact**
+
+**MSS**
+
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User specifies index of contact, a multi-valued field, and the index of entry to delete.
+
+4. NetworkBook updates the contact by deleting the entry from the field's list.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index of contact is invalid.
+
+  * 3a1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3b. User provides multiple fields to delete.
+
+  * 3b1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3c. The given index of entry is invalid.
+
+  * 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3d. User provides multiple indexes of entry to delete.
+
+  * 3d1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3e. User does not provide an index of entry.
+
+  * 3e1. The index of entry is default to 1.
+
+    * 3e1a. The contact's field does not have an entry at index 1.
+
+      Use case resumes at step 3c1.
+
+    * 3e1b. The contact's field has an entry at index 1.
+
+      Use case resumes at step 4.
 
 **Use case: Sort contacts**
 
@@ -1099,13 +1197,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 1. A new user should be able to familiarise him/herself with most of the basic features of the app upon finishing going through the quick-start guide.
 1. A user should be able to use commonly available and easy-to-remember keyboard shorcuts
-   * Ctrl+C: copy text
-   * Ctrl+V: paste text
-   * Ctrl+N: new contact detail
-   * Ctrl+W: exit the app
+   * Common shortcuts to edit text, including Ctrl+C to copy, Ctrl+V to paste, Ctrl+A to select all, Ctrl+Z to undo text change, Ctrl+Y to redo text change, etc.
    * Ctrl+F: find a contact
-   * Ctrl+H/Ctrl+R/Ctrl+G: edit a contact
-   * Up/down arrow keys: access previous commands
+   * Ctrl+N: create a new contact
+   * Ctrl+G: edit a contact
+   * Ctrl+Z: undo last command (when not editing text)
+   * Ctrl+Y: redo last command undone (when not editing text)
+   * Ctrl+W: exit the app
+   * Ctrl+S: manually save data
+   * Up/down arrow keys: navigate command history
 1. A new user should be able to understand the meaning of a command just by looking at the keywords used in the command.
 
 
@@ -1114,7 +1214,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **Command**: a string keyed in by the user in the GUI text input that signifies an action to be done by the app.
 * **Contact**: a contact of the user whose information is stored in the app, which includes name, phone numbers, emails, links, graduation year, courses taken, specialisations, priority level and tags of/associated with the person.
-* **Field**: an attribute of a contact that describes information about the contact and can take different values. Possible fields of a contact are elaborated in the **contact** term above.
+* **Field**: an attribute of a contact that describes information about the contact. Possible fields of a contact are elaborated in the **contact** term above.
+* **Single-valued field**: a field that cannot hold many values, so that each contact can only have one value. These fields include name, graduation year and priority level.
+* **Multi-valued field**: a field that can possibly hold many values, so that each contact has a list of values. These fields include phone numbers, emails, links, courses, specialisations and tags.
 * **Course taken**: a module that a person has taken in university or outside (for e.g. CS2103T module in NUS).
 * **Specialisation**: the specialisation a person can take in their computing degree in NUS (e.g. Software Engineering, Artificial Intelligence).
 * **Graduation year**: the year and semester that a person will graduate / has graduated from NUS (e.g. AY2526-S2, meaning the second semester of the academic year spanning from 2025 to 2026).

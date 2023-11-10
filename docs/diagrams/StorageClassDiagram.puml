@@ -14,30 +14,44 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+package "NetworkBook Storage" #F4F6F6{
+Class "<<interface>>\nNetworkBookStorage" as NetworkBookStorage
+Class JsonNetworkBookStorage
+Class JsonSerializableNetworkBook
+Class JsonAdaptedPerson {
+    String name
+    String graduation
+    String priority
+}
+Class "JsonAdaptedProperty<Phone>"
+Class "JsonAdaptedProperty<Email>"
+Class "JsonAdaptedProperty<Link>"
+Class "JsonAdaptedProperty<Course>"
+Class "JsonAdaptedProperty<Specialisation>"
+Class "JsonAdaptedProperty<Tag>"
 }
 
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Storage
+HiddenOutside .r.> Storage
 
-StorageManager .up.|> Storage
+StorageManager .l.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -d-> "1" NetworkBookStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -u-|> UserPrefsStorage
+Storage -d-|> NetworkBookStorage
 
-JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonUserPrefsStorage .l.|> UserPrefsStorage
+JsonNetworkBookStorage .up.|> NetworkBookStorage
+JsonNetworkBookStorage ..> JsonSerializableNetworkBook
+JsonSerializableNetworkBook -r-> "*" JsonAdaptedPerson
+JsonAdaptedPerson -u-> "*" "JsonAdaptedProperty<Phone>"
+JsonAdaptedPerson -u-> "*" "JsonAdaptedProperty<Email>"
+JsonAdaptedPerson -r-> "*" "JsonAdaptedProperty<Link>"
+JsonAdaptedPerson -d-> "*" "JsonAdaptedProperty<Course>"
+JsonAdaptedPerson -d-> "*" "JsonAdaptedProperty<Specialisation>"
+JsonAdaptedPerson -d-> "*" "JsonAdaptedProperty<Tag>"
 
 @enduml
