@@ -450,5 +450,11 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ## **Appendix: Planned enhancements**
-1. Add a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command. If so, display an additional message to remind the user about the duplication. 
-//TODO this is for countering known feature flaws to help grading, after the feature freeze. We can only list `4 members x 2 = 8` enhancements here
+1. Currently, the `delete` command allows for duplicate indices to be entered. This may lead to unintended behaviour for some users. We plan to tweak this by displaying an additional warning message if duplicate indices are entered, to remind the user about the duplication. The user can then confirm whether they would like the command to go through, or whether they would like to make changes to their input command. This can be achieved by adding a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command.
+1. Currently, error messages displayed in ConText are generic. For example, if a user enters a negative index, the error message `Invalid command format` is displayed, even if the command format is technically correct. We plan to add more specific error messages for invalid indices (e.g. non-positive, too large, or does not exist in the list), to let the user know that the index itself is invalid, and why.
+1. 
+ 1. Add warning messages like indices, duplicate tags/alternates
+   Limiting phone numbers (regex)
+   Alternate contact to support whitespace and symbols
+   Name support regex (hyphens, slashes etc)
+   etc
