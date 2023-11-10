@@ -9,22 +9,36 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 --------------------------------------------------------------------------------------------------------------------
+## **1. Introduction**
 
-## **Acknowledgements**
+### **1.1. Product Overview**
+ProjectPro is a contact organisation application designed for university students.
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+University students often spend a lot of time coordinating project meetup sessions and finding project information, resulting in large amounts of time wasted.
+
+This app can help to save time by:
+* listing available time slots of individuals in a team.
+* Finding common time slots for meetings.
+* Saving extra information regarding a project.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+### **1.2. Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+### **1.3. Acknowledgements**
 
-### Architecture
+ProjectPro is a brownfield Java Project based on the AB3 project template created by the [SE-EDU initiative](https://se-education.org).
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **2. Design**
+
+### 2.1. Architecture
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
@@ -32,22 +46,24 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of main components and how they interact with each other.
 
-**Main components of the architecture**
+**2.1.1. Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** has two main classes called [`Main`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)). It is responsible for app launch and shut down. 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
-The bulk of the app's work is done by the following four components:
+
+
+The rest of the App consists of these main four components:
 
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+On the other hand, [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-**How the architecture components interact with each other**
+**2.1.2. How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete n/Alex`.
 
@@ -64,7 +80,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### 2.2. UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -81,7 +97,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### 2.3. Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -101,9 +117,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -113,7 +129,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### 2.4. Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
@@ -126,15 +142,16 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** A more in depth model is given below. It has a `Group` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Group` object per unique tag, instead of each `Person` needing their own `Group` objects.<br>
 </box>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
 
-### Storage component
+### 2.5. Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -145,15 +162,80 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+With the inclusion of `Group` and `TimeIntervals` in our application, more components had to be saved by our storage.
+
+To address this requirement, we updated our storage to save both classes in JSON format.
+
+### 2.6. Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **3. Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Adding a Person
+
+The add feature is facilitate by a number of classes such as `Person` and `Model`
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `“add n/John Doe p/98765432 e/johnd@example.com g/CS2103T”` command to add a new person. `LogicManager#execute` is called which then calls `AddressBookParser#parseCommand` to decide on the type of command. `AddressBookParse`r` then calls `AddCommandParser`,
+
+Step 3, The `AddCommandParser` is called to read the user input. `AddCommandParser` calls `ArgumentTokenizer#tokenize` to check the prefixes of the user input. `AddCommandParser` then calls `ArgumentMultimap#getValue()` to get inputs after each prefix.
+The result of it is then passed to `ParserUtil#parse{Attribute}` methods to parse each attributes such as `Name`. `AddCommandParser` then makes new person object. `AddCommandParser` then calls `AddCommand` and passes `Person` inside.
+
+Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook#addPerson()`. The latter method will add person inside the `uniquePersonList` in `addressBook`. `AddCommand` also calls `Model#addGroup` which then calls `AddressBook#addGroup` to add the group inside `grouplist` if the group does not exist.
+Lastly, `AddCommand` adds the person inside the group
+
+Note: No duplication is allowed in addressbook for most of Person’s attribute (name, email and phone number.)
+
+<puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
+
+#### Design consideration:
+
+**Aspect: Handling group attribute in user input**
+
+* **Alternative 1 (Current Choice):** Only allow user to add one group for each `Add` Command
+    * Pros: Conveniently adds a person into group while creating a new contact at the same time
+    * Cons: User input is relatively longer
+* **Alternative 2:** Allow user to add as many groups as required for each `Add` Command
+    * Pros: Conveniently adds a person into group while creating a new contact at the same time
+    * Cons: User input can get potentially very long, increasing the chance of invalid input
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Adding a Group
+
+#### Proposed Implementation
+
+The Add Group mechanism is facilitated by `Group`. It is stored internally as a `Group`. This operation is exposed in the `Model` interface as `Model#addGroup()`.
+
+Given below is an example usage scenario and how the group creation mechanism behaves at each step.
+
+**Step 1:** User launches the application.
+
+**Step 2:** The user executes `new g/GROUPNAME` to create a new group with the name GROUPNAME. `CreateGroupCommandParser` parses the GROUPNAME, ensuring the input is valid, and creates a `CreateGroupCommand`, which calls `Model#addGroup()`. The model retrieves the existing groupList from the addressBook and adds this new group to the groupList.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+<puml src="diagrams/CreateGroupActivityDiagram.puml" alt="CreateGroupActivityDiagram"/>
+
+Below is a sequence diagram that summarizes how a user creates a new group:
+<puml src="diagrams/CreateGroupSequenceDiagram.puml" alt="CreateGroupSequenceDiagram"/>
+
+#### Design Considerations
+
+**Aspect: Groups with the same name**
+
+* **Alternative 1 (current choice):** Group names are Unique
+    * Pros: Allow users to create groups with the same name
+    * Cons: User might have to be creative with naming groups
+
+* **Alternative 2:** Group names are not unique but tagged with an id
+    * Pros: Users can reuse commonly used group names
+    * Cons: Users may get confused as to what each group is meant for
 
 ### Delete feature
 
@@ -225,98 +307,10 @@ The following sequence diagram shows how the Delete Group operation works:
 </box>
 
 
-### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+### Group Remark Feature
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-[//]: # (<box type="info" seamless>)
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### Proposed Group Remark Feature
-
-#### Proposed Implementation
+#### Implementation
 
 The proposed group remark feature is facilitated by the `Group` class. It includes a `Group Remark` field and implements the `Group#setGroupRemark()` operation. This feature is exposed in the `Model` interface as `Model#addGroupRemark()`.
 
@@ -342,74 +336,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 - **Alternative 2:** Edits original remark
     - Pros: Easy to add more information.
     - Cons: Could be confusing to edit if there are many changes.
-
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
-### Adding a Person
-
-The add feature is facilitate by a number of classes such as `Person` and `Model`
-
-Step 1. The user launches the application for the first time.
-
-Step 2. The user executes `“add n/John Doe p/98765432 e/johnd@example.com g/CS2103T”` command to add a new person. `LogicManager#execute` is called which then calls `AddressBookParser#parseCommand` to decide on the type of command. `AddressBookParse`r` then calls `AddCommandParser`,
-
-Step 3, The `AddCommandParser` is called to read the user input. `AddCommandParser` calls `ArgumentTokenizer#tokenize` to check the prefixes of the user input. `AddCommandParser` then calls `ArgumentMultimap#getValue()` to get inputs after each prefix.
-The result of it is then passed to `ParserUtil#parse{Attribute}` methods to parse each attributes such as `Name`. `AddCommandParser` then makes new person object. `AddCommandParser` then calls `AddCommand` and passes `Person` inside.
-
-Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook#addPerson()`. The latter method will add person inside the `uniquePersonList` in `addressBook`. `AddCommand` also calls `Model#addGroup` which then calls `AddressBook#addGroup` to add the group inside `grouplist` if the group does not exist.
-Lastly, `AddCommand` adds the person inside the group
-
-Note: No duplication is allowed in addressbook for most of Person’s attribute (name, email and phone number.)
-
-<puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
-
-#### Design consideration:
-
-**Aspect: Handling group attribute in user input**
-
-* **Alternative 1 (Current Choice):** Only allow user to add one group for each `Add` Command
-  * Pros: Conveniently adds a person into group while creating a new contact at the same time
-  * Cons: User input is relatively longer
-* **Alternative 2:** Allow user to add as many groups as required for each `Add` Command
-  * Pros: Conveniently adds a person into group while creating a new contact at the same time
-  * Cons: User input can get potentially very long, increasing the chance of invalid input
-
---------------------------------------------------------------------------------------------------------------------
-
-### Adding a Group
-
-#### Proposed Implementation
-
-The Add Group mechanism is facilitated by `Group`. It is stored internally as a `Group`. This operation is exposed in the `Model` interface as `Model#addGroup()`.
-
-Given below is an example usage scenario and how the group creation mechanism behaves at each step.
-
-**Step 1:** User launches the application.
-
-**Step 2:** The user executes `new g/GROUPNAME` to create a new group with the name GROUPNAME. `CreateGroupCommandParser` parses the GROUPNAME, ensuring the input is valid, and creates a `CreateGroupCommand`, which calls `Model#addGroup()`. The model retrieves the existing groupList from the addressBook and adds this new group to the groupList.
-
-The following activity diagram summarizes what happens when a user executes a new command:
-<puml src="diagrams/CreateGroupActivityDiagram.puml" alt="CreateGroupActivityDiagram"/>
-
-Below is a sequence diagram that summarizes how a user creates a new group:
-<puml src="diagrams/CreateGroupSequenceDiagram.puml" alt="CreateGroupSequenceDiagram"/>
-
-#### Design Considerations
-
-**Aspect: Groups with the same name**
-
-* **Alternative 1 (current choice):** Group names are Unique
-    * Pros: Allow users to create groups with the same name
-    * Cons: User might have to be creative with naming groups
-
-* **Alternative 2:** Group names are not unique but tagged with an id
-    * Pros: Users can reuse commonly used group names
-    * Cons: Users may get confused as to what each group is meant for
-
 
 ### Delete Time Feature
 
@@ -471,7 +397,7 @@ Below is an activity diagram that illustrates the control flow for Delete Person
 
 --------------------------------------------------------------------------------------------------------------------
 
-### [Proposed] Group Person
+### Group Person
 
 #### Proposed Implementation
 
@@ -498,10 +424,41 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: Searching might become more costly.
 
 * --------------------------------------------------------------------------------------------------------------------
+## 4. Planned Enhancements
+
+### 4.1. Undo/redo feature
+
+#### 4.1.1. Description
+
+Users may accidentally have typos in their command messages, causing certain unwanted commands to be executed. This can cause an array of problems,
+from deleting important data along with the contact, to inconvenience for the users themselves. As such, having an undo / redo feature might provide
+a better user experience for our users.
+
+### 4.2. Adding/Deleting time feature
+
+#### 4.1.2. Description
+
+Currently, our add and delete time features allow users to input multiple time slots. Should a certain input encounter an error, ProjectPRO adds / deletes the other time intervals that are valid
+and clears the input box. As we recognise that users might encounter accidental typos while typing time intervals, we believe having our program's input box keep the incorrect inputs can provide convenience
+to our users.
+
+### 4.3. Improving our user interface. 
+
+#### 4.1.3. Description
+Our future implementation involves optimizing the output display by increasing the height of the output box. This enhancement aims to provide users with a more comprehensive and visually accessible view, allowing them to easily grasp the content at a glance.
+Not addressing the issue of the relatively short output box height in ProjectPRO could lead to user frustration and hindered efficiency. Users may find it challenging to quickly interpret and comprehend the output, especially when certain commands generate outputs with numerous lines. This limitation might result in a suboptimal user experience, making it difficult for users to extract the desired information promptly. Addressing this problem is crucial to ensuring a more user-friendly interface and improving the overall effectiveness of ProjectPRO for its users.
+
+### 4.4. Allowing extensive modification to command words.
+
+#### 4.1.4. Description
+As ProjectPro is a CLI text-based application, it requires extensive typing which might prove troublesome at times. As a result, our users would naturally have their personal preferences regarding the command word inputs.
+Enabling users to customize input requirements for functions within ProjectPRO would significantly enhance the flexibility and adaptability of the system. This future implementation empowers users by allowing them to tailor input parameters based on their specific needs and preferences. By accommodating a range of input variations, users can streamline their workflows and optimize the tool to align with diverse use cases.
+
+* --------------------------------------------------------------------------------------------------------------------
 
 
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **5. Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -511,9 +468,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **6. Appendix: Requirements**
 
-### Product scope
+### 6.1. Product scope
 
 **Target user profile**:
 
@@ -526,7 +483,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 responsibilities of each member. Our app will track the schedule of each contact and tasks individuals have to do for their project.
 
 
-### User stories
+### 6.2. User stories
 
 | Priority | As a ...                                    | I want to ...                | So that I can ...                                                      |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
@@ -552,11 +509,11 @@ responsibilities of each member. Our app will track the schedule of each contact
 | `*`      | user                                       | upload attachments/files     | improve collaboration and reference for tasks and projects             |
 | `*`      | user                                       | view contact profiles        | access course schedules, contact details, and profile pictures         |
 
-### Use cases
+### 6.3. Use cases
 
 (For all use cases below, the **System** is `ProjectPRO` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Creating contact**
+**6.3.1. Use case 1: Creating contact**
 
 **MSS**
 
@@ -576,7 +533,7 @@ responsibilities of each member. Our app will track the schedule of each contact
     * Use case ends.
 
 
-**Use case: Delete contact**
+** 6.3.2. Use case 2: Delete contact**
 
 **MSS**
 
@@ -612,17 +569,17 @@ responsibilities of each member. Our app will track the schedule of each contact
 
 *{More to be added}*
 
-### Non-Functional Requirements
+### 6.4. Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should be able to save the state of the user’s actions.
-5. Should be able to handle an increasing number of contacts and events without a significant degradation in performance.
-6. Data loss or corruption should not occur, even in the event of unexpected crashes or system failures.
-7. Should not support any online features. No user actions or data manipulation should require online features.
+1. Compatibility: Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Performance: Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. Usability: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Usability: Should be able to save the state of the user’s actions.
+5. Performance: Should be able to handle an increasing number of contacts and events without a significant degradation in performance.
+6. Usability: Data loss or corruption should not occur, even in the event of unexpected crashes or system failures.
+7. Accessibility: The system shall be operable even without internet connection.
 
-### Glossary
+### 6.5. Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Java 11**: Programming language
@@ -630,7 +587,7 @@ responsibilities of each member. Our app will track the schedule of each contact
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **7. Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -641,54 +598,51 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+
+### 7.1. Launch and shutdown
 
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### 7.2. Deleting a person
 
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete n/Alex Yeoh`<br>
+      Expected: Alex is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete n/Alex Yeoh`, after Alex has been deleted <br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete n/x`, `...` (where x is not in the list)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
-### Saving data
+### 7.3. Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Edit the JSON file by adding a number "1" to the top of the file.
+   2. Run the file.
 
 1. _{ more test cases …​ }_
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Planned Enhancements**
 
-1. In the `addmeeting` feature, user can add free time intervals to a group. Currently, user can add same free time intervals for 2 separate groups or overlapping time intervals between 2 or more groups, causing a clash in their schedule. (Eg. `Group A: Mon 1200 - Mon 1400`; `Group B: Mon 1300 - Mon 1500`). These clashes are not detected and will allow this state to exist. We plan to not allow this, so user cannot insert time intervals that are overlapping with other groups. Eg. `Group A: Mon 1200 - Mon 1400`; `Group B: Mon 1300 - Mon 1500` will not be allowed.
-2. Currently, ProjectPRO's output box height is relative short due to some commands that causes to output words with a lot of lines. Eg. `listime`. We plan to increase the height of the output box height, so that more lines can be seen in glance.
-3. Currently, for `addtime` feature, if the user typed a time interval to a person that clashes with another time interval in the person, it throws an error to the output box and removes the user input from the command box. Due to this, the user need to type the command again. We plan to disallow the deletion of old user input when the error is thrown, so that the user can fix the mistake quicker by editing the old input in the command box.
-4. Currently, for `deletetime` feature, if the user tries to delete a time interval that does not exist in person or group, it throws an error to the output box and removes the user input from the command box. Due to this, the user need to type the command again. We plan to disallow the deletion of old user input when the error is thrown, so that the user can fix the mistake quicker by editing the old input in the command box.
