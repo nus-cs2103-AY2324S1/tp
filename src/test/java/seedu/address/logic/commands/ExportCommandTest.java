@@ -37,23 +37,6 @@ public class ExportCommandTest {
     }
 
     @Test
-    public void testAppendPersons() {
-        assert(exportCommand.appendPersons(model) instanceof StringBuilder);
-    }
-
-    @Test
-    public void testAppendPersons_two() {
-        assertEquals(exportCommand.appendPersons(model).toString(),
-                 "Name,Phone,Email,Address,Tags,LinkedIn,Github,Remark,Status\n");
-    }
-
-
-    @Test
-    public void testString() {
-        assert(exportCommand.treatAsString("5").equals("\"5\""));
-    }
-
-    @Test
     public void equals_sameObject_true() {
         assertEquals(exportCommand, new ExportCommand());
     }

@@ -1,11 +1,15 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -13,9 +17,13 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Score;
+import seedu.address.model.person.ScoreList;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -131,13 +139,15 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
+    public static Tag parseTag(String tagName, String tagCategory) throws ParseException {
+        requireNonNull(tagName);
+        requireNonNull(tagCategory);
+        UniqueTagList uniqueTagList = new UniqueTagList();
+        String trimmedTag = tagName.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return uniqueTagList.getTag(trimmedTag, tagCategory);
     }
 
     /**
@@ -146,26 +156,186 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        String listTags = tags.toString();
+        String cleanedList = listTags.replaceAll("[\\[\\]]", "");
+        String[] tagNameCategoryPairs = cleanedList.split(",");
+
+        if (tagNameCategoryPairs.length == 1 && tagNameCategoryPairs[0].isBlank()) {
+            return tagSet;
+        }
+
+        for (String tagNameCategory : tagNameCategoryPairs) {
+            if (tagNameCategory.split("\\s+").length > 1) {
+                String[] nameCategory = tagNameCategory.split("\\s+");
+                // category specified
+                String tagName = nameCategory[1];
+                String tagCategory = nameCategory[0];
+                tagSet.add(parseTag(tagName, tagCategory));
+            } else {
+                // category not specified
+                tagSet.add(parseTag(tagNameCategory, ""));
+            }
         }
         return tagSet;
     }
 
     /**
-     * Parses {@code Collection<String> status} into a {@code Set<String> of status}.
+     * Parses a collection of tag strings into an array of tag categories.
+     *
+     * @param tags A collection of tag strings to be parsed.
+     * @return An array of tag categories extracted from the provided collection of tag strings.
      */
-    public static Set<String> parseStatus(Collection<String> statusList) throws ParseException {
-        requireNonNull(statusList);
-        final Set<String> statusSet = new HashSet<>();
-        for (String status : statusList) {
-            status = status.trim();
-            if (!Status.isValidStatus(status)) {
-                throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+    public static String[] parseTagCategories(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+        String listTags = tags.toString();
+        String cleanedList = listTags.replaceAll("[\\[\\]]", "");
+        String[] tagParams = cleanedList.split(",");
+        for (String tag : tagParams) {
+            if (tag.split("\\s+").length > 1) {
+                if (!Tag.isValidTagName(tag.split("\\s+")[1])) {
+                    throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                }
+            } else {
+                if (!Tag.isValidTagName(tag)) {
+                    throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                }
             }
-            statusSet.add(status);
         }
-        return statusSet;
+        return tagParams;
     }
 
+    /**
+     * Parses a list of keywords into an array of strings.
+     *
+     * @param keywordsList A list of keywords, where each element may contain multiple words.
+     * @return An array of strings where each element represents an individual keyword.
+     * @throws ParseException if any of the search parameters contain non-alphanumeric characters e.g. commas
+     *
+     *     The method first converts the list of keywords into a string representation,
+     *     e.g., [Alex, Yeoh] (including square brackets). It then removes the square brackets
+     *     from the string representation, resulting in a cleaned string, e.g., Alex, Yeoh (no square brackets).
+     *     Finally, the cleaned string is split into an array of strings, where each word separated
+     *     by a whitespace or comma is considered a single element.
+     *
+     *     Example:
+     *     If keywordsList is ["John Doe"], the returned array will be ["John", "Doe"].
+     */
+    private static String[] parseSinglePrefixParams(Collection<String> keywordsList) {
+        String list = keywordsList.toString();
+        String cleanedList = list.replaceAll("[\\[\\]]", "");
+        String[] singlePrefixParams = cleanedList.split("\\s+");
+        return singlePrefixParams;
+    }
+
+    /**
+     * Parses {@code Collection<String> status parameters} into a {@code List<String> of status}.
+     */
+    public static List<String> parseSinglePrefixStatus(Collection<String> statuses)
+            throws ParseException {
+        requireNonNull(statuses);
+        String[] statusArr = parseSinglePrefixParams(statuses);
+        final List<String> statusList = new ArrayList<>();
+        for (String status : statusArr) {
+            status = status.trim();
+            if (!StatusTypes.isValidStatusType(status.toLowerCase())) {
+                throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+            }
+            checkArgument(StatusTypes.isValidStatusType(status.toLowerCase()), Status.MESSAGE_CONSTRAINTS);
+            statusList.add(status);
+        }
+        return statusList;
+    }
+
+    /**
+     * Parses {@code Collection<String> name parameters} into a {@code List<String> of names}.
+     */
+    public static List<String> parseSinglePrefixName(Collection<String> names)
+            throws ParseException {
+        requireNonNull(names);
+        String[] nameArr = parseSinglePrefixParams(names);
+        final List<String> nameList = new ArrayList<>();
+        for (String name : nameArr) {
+            name = name.trim();
+            if (!Name.isValidName(name)) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            }
+            checkArgument(Name.isValidName(name), Name.MESSAGE_CONSTRAINTS);
+            nameList.add(name);
+        }
+        return nameList;
+    }
+
+    /**
+     * Parses {@code Collection<String> tag parameters} into a {@code List<String> of tags}.
+     */
+    public static List<String> parseSinglePrefixTags(Collection<String> tags)
+            throws ParseException {
+        requireNonNull(tags);
+        UniqueTagList uniqueTagList = new UniqueTagList();
+        String[] tagArr = parseSinglePrefixParams(tags);
+        final List<String> tagList = new ArrayList<>();
+        List<String> nonExistingTags = new ArrayList<>();
+
+        for (String tag : tagArr) {
+            tag = tag.trim();
+
+            // Check if the tag is valid
+            if (!Tag.isValidTagName(tag)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+
+            // Check if the tag already exists in the uniqueTagList
+            if (!uniqueTagList.contains(tag)) {
+                nonExistingTags.add(tag);
+            } else {
+                tagList.add(tag);
+            }
+        }
+
+        if (!nonExistingTags.isEmpty()) {
+            // Throw an exception with a message specifying all non-existing tags
+            throw new ParseException(Tag.MESSAGE_TAG_DOES_NOT_EXIST + String.join(", ", nonExistingTags));
+        }
+
+        return tagList;
+    }
+
+
+    /**
+     * Parses a {@code String score} into a {@code Score}.
+     *
+     * @param score String to be parsed
+     * @return Score object
+     * @throws ParseException if the given {@code score} is invalid.
+     */
+    public static Score parseScore(String score) throws ParseException {
+        requireNonNull(score);
+        String trimmedScore = score.trim();
+        if (!StringUtil.isNonNegativeInteger(trimmedScore)) {
+            throw new ParseException(Score.MESSAGE_CONSTRAINTS);
+        }
+        return new Score(Integer.parseInt(trimmedScore));
+    }
+
+    /**
+     * Parses a Tag Score string input and turns it into a Pair with head as Tag and tail as Score.
+     * @param tagScore String to be parsed
+     * @return Pair with head as Tag and tail as Score
+     * @throws ParseException if the given {@code tagScorePair} is invalid.
+     */
+    public static Pair<Tag, Score> parseTagScore(String tagScore) throws ParseException {
+        requireNonNull(tagScore);
+        String trimmedTagScorePair = tagScore.trim();
+        String[] tagScorePairArr = trimmedTagScorePair.split(" ");
+        if (tagScorePairArr.length != 2) {
+            throw new ParseException("Invalid score, score must be non-negative integer.");
+        }
+        Tag tag = parseTag(tagScorePairArr[0], "");
+        if (!ScoreList.isValidScoreTag(tag)) {
+            throw new ParseException("Invalid score tag, tag must a tag of the category assessment (made using "
+                    + "the create command.");
+        }
+        Score score = parseScore(tagScorePairArr[1]);
+        return new Pair<>(tag, score);
+    }
 }

@@ -11,6 +11,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Score;
+import seedu.address.model.person.ScoreList;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
@@ -29,12 +31,16 @@ public class PersonBuilder {
     public static final String DEFAULT_LINKEDIN = "";
     public static final String DEFAULT_GITHUB = "";
 
+    public static final int DEFAULT_SCORE_VALUE = 0;
+
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Remark remark;
+
+    private ScoreList scoreList;
 
     private Set<Tag> tags;
     private Status status;
@@ -50,6 +56,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_REMARK);
+        scoreList = new ScoreList();
         tags = new HashSet<>();
         status = new Status(); // default status is preliminary
         linkedIn = new LinkedIn(DEFAULT_LINKEDIN);
@@ -64,6 +71,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
+        scoreList = personToCopy.getScoreList();
         tags = new HashSet<>(personToCopy.getTags());
         linkedIn = personToCopy.getLinkedIn();
     }
@@ -116,9 +124,31 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code ScoreList} of the {@code Person} that we are building.
+     * @param scoreList the score list to be set
+     * @return PersonBuilder
+     */
+    public PersonBuilder withScoreList(ScoreList scoreList) {
+        this.scoreList = scoreList;
+        return this;
+    }
+
+    /**
+     * Sets the {@code Status} of the {@code Person} that we are building.
+     * @param score the score to be set
+     * @return PersonBuilder
+     */
+    public PersonBuilder withInterviewScore(int score) {
+        ScoreList newScoreList = new ScoreList();
+        newScoreList.updateScoreList(new Tag("Interview", "assessment"), new Score(score));
+        this.scoreList = newScoreList;
+        return this;
+    }
+
+    /**
      * Sets the {@code LinkedIn} of the {@code Person} that we are building.
      * @param username
-     * @return
+     * @return PersonBuilder
      */
     public PersonBuilder withLinkedIn(String username) {
         this.linkedIn = new LinkedIn(username);
@@ -130,17 +160,14 @@ public class PersonBuilder {
      * Sets the {@code Status} of the {@code Person} that we are building.
      */
     public PersonBuilder withStatus(String status) {
-        switch (status) {
-        case "Preliminary":
-            this.status.setStatusType(StatusTypes.PRELIMINARY);
-            break;
-        case "Interviewed":
+        switch (status.toLowerCase()) {
+        case "interviewed":
             this.status.setStatusType(StatusTypes.INTERVIEWED);
             break;
-        case "Rejected":
+        case "rejected":
             this.status.setStatusType(StatusTypes.REJECTED);
             break;
-        case "Offered":
+        case "offered":
             this.status.setStatusType(StatusTypes.OFFERED);
             break;
         default:
@@ -149,8 +176,15 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a person with the given parameters.
+     * @return Person
+     */
     public Person build() {
-        return new Person(name, phone, email, address, remark, tags);
+        Person createdPerson = new Person(name, phone, email, address, remark, tags);
+        createdPerson.setStatus(status);
+        createdPerson.setScoreList(scoreList);
+        return createdPerson;
     }
 
     /**

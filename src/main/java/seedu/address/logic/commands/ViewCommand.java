@@ -39,11 +39,11 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         model.setLastViewedPersonIndex(index);
-
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        model.loadSummaryStatistics();
         Person personToView = lastShownList.get(index.getZeroBased());
         return new CommandResult(generateSuccessMessage(personToView), true);
     }

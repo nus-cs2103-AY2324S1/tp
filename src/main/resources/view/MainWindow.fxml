@@ -13,9 +13,9 @@
 
 <?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="1000" minHeight="800" onCloseRequest="#handleExit">
+         title="JABPro" minWidth="1000" minHeight="800"  onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/jabpro.png" />
   </icons>
   <scene>
     <Scene>
@@ -32,6 +32,9 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="Events">
+            <MenuItem fx:id="eventItem" mnemonicParsing="false" onAction="#handleEvent" text="Events" />
           </Menu>
         </MenuBar>
 
@@ -56,17 +59,23 @@
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="personListPanelPlaceholder" styleClass="pane-with-border" minWidth="150" prefWidth="150"
+            <StackPane fx:id="personListPanelPlaceholder" styleClass="pane-with-border" minWidth="300" prefWidth="300"
                        VBox.vgrow="ALWAYS">
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
             </StackPane>
             <StackPane fx:id="personInformationPanelPlaceholder"
-                       styleClass="pane-with-border" minWidth="400" prefWidth="400" VBox.vgrow="ALWAYS">
+                       styleClass="pane-with-border" minWidth="600" prefWidth="600" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
+            </StackPane>
+            <StackPane fx:id="summaryStatisticScreenPlaceholder" styleClass="pane-with-border"
+                       minWidth="300" prefWidth="300">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
             </StackPane>
           </SplitPane>
         </HBox>

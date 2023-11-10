@@ -38,7 +38,6 @@ public class RemarkSyntaxHandler {
     public static Remark generateKeepRemarkCommand(String args, Remark currentRemark) {
         requireNonNull(args);
         String resultString = args.replaceAll(REGEX_KEEP_REMARK, currentRemark.value);
-        System.out.println(resultString);
         return new Remark(resultString);
     }
 

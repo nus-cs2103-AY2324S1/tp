@@ -41,7 +41,7 @@
 }
 
 .offered-button {
-    -fx-background-color: #00FF00;
+    -fx-background-color: #005910;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-padding: 5px 10px;
@@ -49,7 +49,7 @@
 }
 
 .rejected-button {
-    -fx-background-color: #ff0000;
+    -fx-background-color: #BC5150;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-padding: 5px 10px;
@@ -75,3 +75,4 @@
     -fx-min-height: 2px;
     -fx-max-height: 2px;
 }
+

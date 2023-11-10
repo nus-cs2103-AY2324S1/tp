@@ -27,9 +27,10 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private LinkedIn linkedIn = new LinkedIn("");
     private Github github = new Github("");
-
     private Remark remark;
     private Status currentStatus = new Status();
+
+    private ScoreList scoreList = new ScoreList();
 
 
 
@@ -72,9 +73,6 @@ public class Person {
         return currentStatus;
     }
 
-    public void setStatus(Status newStatus) {
-        this.currentStatus = newStatus;
-    }
 
 
     /**
@@ -93,6 +91,15 @@ public class Person {
         return github;
     }
 
+
+    public Score getScoreForTag(Tag tag) {
+        return scoreList.getScore(tag);
+    }
+
+    public ScoreList getScoreList() {
+        return scoreList;
+    }
+
     public void setLinkedIn(LinkedIn linkedIn) {
         this.linkedIn = linkedIn;
     }
@@ -100,6 +107,26 @@ public class Person {
     public void setGithub(Github github) {
         this.github = github;
     }
+
+    /**
+     * Sets the score list of the person to the given score list.
+     * This is ONLY recommended for use in Person Builder. Strongly discouraged otherwise.
+     * @param scoreList the score list to set to
+     */
+    public void setScoreList(ScoreList scoreList) {
+        this.scoreList = scoreList;
+    }
+
+    public void setScoreForTag(Tag tag, Score score) {
+        requireAllNonNull(tag, score);
+        scoreList.updateScoreList(tag, score);
+    }
+
+    public void setStatus(Status newStatus) {
+        this.currentStatus = newStatus;
+    }
+
+
 
     /**
      * Returns true if both persons have the same name.
@@ -135,6 +162,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && remark.equals(otherPerson.remark)
+                && scoreList.equals(otherPerson.scoreList)
                 && tags.equals(otherPerson.tags);
 
     }
@@ -154,7 +182,8 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("remark", remark)
-                .add("status", currentStatus);
+                .add("status", currentStatus)
+                .add("score-list", scoreList);
 
         if (!linkedIn.value.isEmpty()) {
             builder.add("linkedin", linkedIn);
