@@ -381,7 +381,7 @@ Examples of accepted date formats (full list [here](#features)):
   * `16 May 3.15pm`
 
 Example:
-* `add-i app/3 jr/Software engineer start/12-12-2023 1400 end/12-12-2023 1500`
+Result of `add-i app/3 jr/Software engineer start/12-12-2023 1400 end/12-12-2023 1500`
 ![Result of `add-i app/3 jr/Software engineer start/12-12-2023 1400 end/ 12-12-2023 1500`](images/addInterviewSuccess.png)
 
 A common error that you may encounter is entering an invalid time or time format,
@@ -435,7 +435,8 @@ Format: `edit-i INTERVIEW_INDEX [jr/JOB_ROLE] [start/START_DATE_AND_TIME] [end/E
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * To edit the `RATING` field (re-rating an interview), please refer to the [rate command](#rating-an-interview--rate)
-* Examples of accepted date formats (full list [here](#features)):
+
+Examples of accepted date formats (full list [here](#features)):
 * DD/MM/YYYY and time:
   * `16 May 2024 1515`
   * `16 May 2024 3.15pm`
