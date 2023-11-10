@@ -9,9 +9,6 @@ public class EventInformation {
 
     private final String information;
 
-    private EventInformation() {
-        this.information = "";
-    }
     private EventInformation(String information) {
         this.information = information;
     }

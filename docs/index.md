@@ -5,8 +5,8 @@
 
 # KeepInTouch
 
-[![CI Status](https://github.com/AY2324S1-CS2103T-W16-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-W16-1/tp/actions)
-[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-W16-1/tp/graph/badge.svg?token=KEJTLP53IM)](https://codecov.io/gh/AY2324S1-CS2103T-W16-1/tp)
+[![CI Status](https://github.com/AY2324S1-CS2103T-W16-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103T-W16-1/tp/actions)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-W16-1/tp/branch/master/graph/badge.svg?token=KEJTLP53IM)](https://codecov.io/gh/AY2324S1-CS2103T-W16-1/tp)
 
 ![Ui](images/Ui.png)
 

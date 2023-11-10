@@ -1,7 +1,7 @@
 # KeepInTouch User Guide
 
-KeepInTouch is a **desktop app for managing contacts for people in the working industry (recruiters, engineers, etc.) as well as events for career purposes.
-KeepInTouch is optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+**_KeepInTouch_** is a desktop app for **managing contacts** for **job-seekers**. It can also help job-seekers to manage **events for career purposes.**
+KeepInTouch is optimized for use via a _Line Interface (CLI)_ while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, KeepInTouch can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
@@ -23,12 +23,13 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
   * [Adding notes to a contact: `add note`](#adding-notes-to-a-contact-add-note)
   * [Deleting a note: `delete note`](#deleting-a-note-delete-note)
   * [Listing events: `list events`](#listing-events-list-events)
-  * [Adding an event: `add event`](#adding-events-add-event)
+  * [Adding an event: `add event`](#adding-an-event-add-event)
   * [Deleting an event: `delete event`](#deleting-an-event-delete-event)
   * [Clearing data: `clear`](#clearing-data-clear)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Saving the data](#saving-the-data)
   * [Other Features: _coming soon..._](#other-features)
+* [Glossary](#glossary)
 * [FAQ](#faq)
 * [Known Issues](#known-issues)
 * [Command Summary](#command-summary)
@@ -37,11 +38,11 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have [Java 11](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html) installed in your Computer.
 
 2. Download the latest `keepintouch.jar` from [here](https://github.com/AY2324S1-CS2103T-W16-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your KeepInTouch app.
+3. Copy the file to the folder you want to use as the [home directory](#home-directory) for your KeepInTouch app.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar keepintouch.jar` command to run the application. (   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.)
 ![GUI example](images/Ui.png)
@@ -94,7 +95,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 * `TAGNAME` should be alphanumeric, with no spaces.
 
-* `TAGNAME` is case sensitive. For example, a contact can have tags `Frontend` and `frontend` at the same time.
+* `TAGNAME` is case-sensitive. For example, a [contact](#contact) can have [tags](#tag) `HR REPRESENTITIVE` and `HR representitive` at the same time.
 
 * `START_TIME` and `END_TIME` can be in one of the following formats:
   * Both date and time: `yyyy-MM-dd HH:mm[:ss]`
@@ -124,7 +125,7 @@ Successful output:
 ![help success output](images/success-outputs/help-output.png)
 ![help add success output](images/success-outputs/help-add-output.png)
 
-### Listing contacts: `list contact`
+### Listing [contacts](#contact): `list contact`
 
 Shows a list of all contacts in the contact list if tags not specified. 
 Otherwise, shows a list of contacts which contains any one of the specified tags. 
@@ -141,7 +142,7 @@ Examples:
 Successful output:
 ![list contact success output](images/success-outputs/list-contact-output.png)
 
-### Adding a contact: `add contact`
+### Adding a [contact](#contact): `add contact`
 
 Adds a contact to the contact list.
 
@@ -175,7 +176,7 @@ The domain name must:
 * Invalid phone number: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
 
 
-### Deleting a contact: `delete contact`
+### Deleting a [contact](#contact): `delete contact`
 
 Deletes the specified contact from the contact list.
 
@@ -197,7 +198,7 @@ Parameters: INDEX (must be a positive integer)
 Example: delete contact 1
 ```
 
-### Finding a contact: `find`
+### Finding a [contact](#contact): `find`
 
 Finds a contact by their name by matching keywords with the contact's name. Only word-word matches will be detected, and partial words match will not be detected. For example, `Ale` will not match `Alex` but will match `Alex Wong`. Keywords are **case insensitive**.
 
@@ -209,7 +210,7 @@ Examples:
 Successful output:
 ![find success output](images/success-outputs/find-output.png)
 
-### Adding tags: `add tag`
+### Adding a [tag](#tag): `add tag`
 
 Adds one or more tags to a contact. Contact list will go back to showing all contacts upon successful addition.
 
@@ -234,7 +235,7 @@ add tag: Adds tags to a contact from the contact list.
 Usage:  add tag -id CONTACT_ID -t TAGNAME...
 ```
 
-### Deleting tags: `delete tag`
+### Deleting [tags](#tag): `delete tag`
 
 Deletes one or more tags to a contact. Contact list will go back to showing all contacts upon successful deletion.
 
@@ -258,7 +259,7 @@ delete tag: Delete one or more tags from a contact.
 Usage:  delete tag -id CONTACT_ID -t TAGNAME...
 ```
 
-### Adding notes to a contact: `add note`
+### Adding a [note](#note) to a [contact](#contact): `add note`
 
 Adds a note to a contact from the contact list.
 
@@ -280,7 +281,7 @@ add note: Adds a note to a contact from the contact list.
 Usage:  add note -id CONTACT_ID -tit NOTE_TITLE -con NOTE_CONTENT
 ```
 
-### Deleting a note: `delete note`
+### Deleting a [note](#note): `delete note`
 
 Deletes the specified note from the contact list.
 
@@ -304,7 +305,7 @@ delete note: Deletes a note from a contact.
 Usage:  delete note -id CONTACT_ID -nid NOTE_ID
 ```
 
-### Listing events: `list events`
+### Listing [events](#event): `list events`
 
 Shows a list of all events or events within a specified time interval.
 
@@ -335,7 +336,7 @@ list events: Shows a list of all events or events within a specified time interv
 Usage: list events [-descending] [-st filter_start_time] [-et filter_end_time] (-st and -et must either both present or both not present)
 ```
 
-### Adding events: `add event`
+### Adding an [event](#event): `add event`
 
 Adds an event to a contact. The event should not have clashes in timing with other existing events in the contact list. Events with start time earlier than the current time are allowed for keeping track of past events.
 
@@ -362,7 +363,7 @@ add event: Adds an event to a contact.
 Usage:  add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]
 ```
 
-### Deleting an event: `delete event`
+### Deleting an [event](#event): `delete event`
 
 Deletes the specified event from a contact.
 
@@ -406,20 +407,41 @@ KeepInTouch data are saved in the hard disk automatically after any command that
 
 ### Other Features
 
-_More features coming coming soon ..._
+_More features coming soon ..._
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+ - ##### _home directory_:
+   The directory where the jar file for the application and the `data` folder presents.
+ - ##### _contact_:
+   The unit for storing the contact information for a person/entity in the address book. You can add [tags](#tag), [notes](#note) and [events](#event) to a _contact_.
+ - ##### _tag_:
+   Short tags to be added to the contact for you to reference. It can be the type of the contact, for example, `company`, `HR`, etc.
+ - ##### _note_
+   A piece of additional information for a contact that you want to store and reference in the future. It can be any additional information you'd like to keep with the contact.
+ - ##### _event_
+   A representative of an event that you will happen with a person/entity in a contact in the future. It can be job interviews, career fairs or HR meeting appointments.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: Why can't I run the app?<br>
-**A**: Make sure you have Java `11` or above installed before running the app.
+**A**: Make sure you have [Java 11](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html) installed before running the app, and make sure you have followed the way mentioned in [Quick Start](#quick-start).
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KeepInTouch home folder.
+**Q**: How do I transfer my data to another device?<br>
+**A**: Please follow these steps:
+  - Download the jar file for the app on the new device.
+  - Copy the data folder from the old device to the new device, and put it in the [home directory](#home-directory) on the new device.
+    - The data folder from the old device is located at [home directory](#home-directory)/data`. You need to copy the folder along with all files inside to the new device to complete data transfer.
+  - Run the application on the new device. Now you should see the data from old device on your new device.
+  - Similarly, if you want to move the jar file to another directory (change the [home directory](#home-directory)) within the same device, you also need to make sure that the `data` folder is always in the new [home directory](#home-directory) together with the jar file.
 
 **Q**: Can I modify the data file outside the application itself?<br>
 **A**: No, you **should _NOT_ directly modify the data file** outside the application at anytime, otherwise it may lead to unpredictable consequences and errors to the application.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -430,18 +452,18 @@ _No known issues at the moment_
 
 ## Command summary
 
-Action             | Format, Examples
--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**List Contact**   | `list contact [-t TAGNAME...]` <br> e.g., `list contact -t Recruiter`
-**Add Contact**    | `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL [-t TAGNAME...]` <br> e.g., `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com -t Frontend`
-**Delete Contact** | `delete contact CONTACT_ID`<br> e.g., `delete contact 1`
-**Find Contact**   | `find KEYWORD [OTHER_KEYWORDS...]`<br> e.g., `find Alex`
-**Add Tag**        | `add tag -id CONTACT_ID -t TAGNAME...` <br> eg., `add tag -id 1 -t Frontend`
-**Delete Tag**        | `delete tag -id CONTACT_ID -t TAGNAME...` <br> eg., `delete tag -id 1 -t Frontend`
-**Add Note**       | `add note -id CONTACT_ID -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`
-**Delete Note**    | `delete note -id CONTACT_ID -t NOTE_TITLE`<br> e.g., `delete note -id 2 -t Meeting Topics`
-**List Events**    | `list events [-descending] [-st filter_start_time] [-et filter_end_time]`<br> e.g., `list events -descending -st 2023-11-01 -et 2023-11-02`
-**Add Event**      | `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]` <br> e.g., `add event -id 1 -en Meeting with professor -st 12:00 -et 13:00 -loc COM 1 Basement -info Discuss the project implementation with the professor`
-**Delete Event**   | `delete event -id CONTACT_ID -eid EVENT_ID`<br> e.g., `delete event -id 1 -eid 1`
-**Clear Data**   | `clear`
-**Help**           | `help [COMMAND_WORD]` <br> e.g., `help add`
+| Action             | Format, Examples                                                                                                                                                                                                                                                        |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **List Contact**   | `list contact [-t TAGNAME...]` <br> e.g., `list contact -t Recruiter`                                                                                                                                                                                                   |
+| **Add Contact**    | `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL [-t TAGNAME...]` <br> e.g., `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com -t Frontend`                                                                                            |
+| **Delete Contact** | `delete contact CONTACT_ID`<br> e.g., `delete contact 1`                                                                                                                                                                                                                |
+| **Find Contact**   | `find KEYWORD [OTHER_KEYWORDS...]`<br> e.g., `find Alex`                                                                                                                                                                                                                |
+| **Add Tag**        | `add tag -id CONTACT_ID -t TAGNAME...` <br> eg., `add tag -id 1 -t Frontend`                                                                                                                                                                                            |
+| **Delete Tag**     | `delete tag -id CONTACT_ID -t TAGNAME...` <br> eg., `delete tag -id 1 -t Frontend`                                                                                                                                                                                      |
+| **Add Note**       | `add note -id CONTACT_ID -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`                                                                                                     |
+| **Delete Note**    | `delete note -id CONTACT_ID -t NOTE_TITLE`<br> e.g., `delete note -id 2 -t Meeting Topics`                                                                                                                                                                              |
+| **List Events**    | `list events [-descending] [-st filter_start_time] [-et filter_end_time]`<br> e.g., `list events -descending -st 2023-11-01 -et 2023-11-02`                                                                                                                             |
+| **Add Event**      | `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]` <br> e.g., `add event -id 1 -en Meeting with professor -st 12:00 -et 13:00 -loc COM 1 Basement -info Discuss the project implementation with the professor` |
+| **Delete Event**   | `delete event -id CONTACT_ID -eid EVENT_ID`<br> e.g., `delete event -id 1 -eid 1`                                                                                                                                                                                       |
+| **Clear Data**     | `clear`                                                                                                                                                                                                                                                                 |
+| **Help**           | `help [COMMAND_WORD]` <br> e.g., `help add`                                                                                                                                                                                                                             |
