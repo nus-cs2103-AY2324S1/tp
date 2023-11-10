@@ -23,7 +23,9 @@ class Person {}
 Appointment -up-|> ScheduleItem
 NullAppointment -up-|> ScheduleItem
 
-Person -down- "1" ScheduleItem
+Person "1" *-down-> "1" ScheduleItem
+Person -[hidden]down-> NullAppointment
+Person -[hidden]down-> ScheduleItem
 Appointment -[hidden]left-> NullAppointment
 
 @enduml
