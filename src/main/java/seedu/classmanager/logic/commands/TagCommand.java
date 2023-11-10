@@ -28,7 +28,7 @@ public class TagCommand extends Command {
             + "Existing tags will be overwritten by the input.\n"
             + "Use /add to add or /delete to delete tags without overwriting all tags.\n"
             + "Parameters: s/STUDENT_NUMBER [/add] [/delete] t/[TAG]\n"
-            + "Example: " + COMMAND_WORD + " s/A1234567N /add t/smart.";
+            + "Example: " + COMMAND_WORD + " s/A1234567N /add t/smart";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added following tags to Student %1$s:\n";
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed following tags from Student %1$s:\n";
     public static final String MESSAGE_REPLACE_ALL_TAG_SUCCESS = "Replace all tags of Student %1$s with:\n";
