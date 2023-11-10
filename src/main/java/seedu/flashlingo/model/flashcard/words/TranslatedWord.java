@@ -1,7 +1,5 @@
 package seedu.flashlingo.model.flashcard.words;
 
-import static seedu.flashlingo.logic.Messages.MESSAGE_CONSTRAINTS;
-
 /**
  * Represents the translated word
  *
@@ -35,9 +33,6 @@ public class TranslatedWord extends Word {
     @Override
     public TranslatedWord editWord(String newWord, String newLanguage) {
         newLanguage = newLanguage.isEmpty() ? getLanguage() : newLanguage;
-        if (!Word.isValidLanguage(newLanguage)) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-        }
         return new TranslatedWord(
                 newWord.isEmpty() ? getWord() : newWord, newLanguage);
     }

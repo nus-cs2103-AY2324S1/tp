@@ -1,7 +1,6 @@
 package seedu.flashlingo.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.flashlingo.logic.Messages.MESSAGE_CONSTRAINTS;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.DATE_PATTERN;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.INVALID_DATE_FORMAT_MESSAGE;
 import static seedu.flashlingo.storage.JsonAdaptedFlashCard.MISSING_FIELD_MESSAGE_FORMAT;
@@ -21,8 +20,6 @@ import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 public class JsonAdaptedFlashCardTest {
-    private static final String INVALID_ORIGINAL_WORD_LANGUAGE = "English! ";
-    private static final String INVALID_TRANSLATED_WORD_LANGUAGE = "Fre1ch";
     private static final int INVALID_LEVEL = -1;
     private static final String INVALID_WHEN_TO_REVIEW = "2023-2-12T30:59:59Z";
 
@@ -41,28 +38,10 @@ public class JsonAdaptedFlashCardTest {
     }
 
     @Test
-    public void toModelType_invalidOriginalWordLanguage_throwsIllegalValueException() {
-        JsonAdaptedFlashCard flashCard =
-                new JsonAdaptedFlashCard(VALID_ORIGINAL_WORD, INVALID_ORIGINAL_WORD_LANGUAGE, VALID_TRANSLATED_WORD,
-                        VALID_TRANSLATED_WORD_LANGUAGE, VALID_WHEN_TO_REVIEW, VALID_LEVEL);
-        String expectedMessage = MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, flashCard::toModelType);
-    }
-
-    @Test
     public void toModelType_nullOriginalWord_throwsIllegalValueException() {
         JsonAdaptedFlashCard flashCard = new JsonAdaptedFlashCard(null, VALID_ORIGINAL_WORD_LANGUAGE,
                 VALID_TRANSLATED_WORD, VALID_TRANSLATED_WORD_LANGUAGE, VALID_WHEN_TO_REVIEW, VALID_LEVEL);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, OriginalWord.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, flashCard::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidTranslatedWordLanguage_throwsIllegalValueException() {
-        JsonAdaptedFlashCard flashCard =
-                new JsonAdaptedFlashCard(VALID_ORIGINAL_WORD, VALID_ORIGINAL_WORD_LANGUAGE, VALID_TRANSLATED_WORD,
-                        INVALID_TRANSLATED_WORD_LANGUAGE, VALID_WHEN_TO_REVIEW, VALID_LEVEL);
-        String expectedMessage = MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, flashCard::toModelType);
     }
 

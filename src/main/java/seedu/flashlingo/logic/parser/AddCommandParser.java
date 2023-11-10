@@ -1,6 +1,5 @@
 package seedu.flashlingo.logic.parser;
 
-import static seedu.flashlingo.logic.Messages.MESSAGE_CONSTRAINTS;
 import static seedu.flashlingo.logic.Messages.MESSAGE_EMPTY_VALUE;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
@@ -14,7 +13,6 @@ import seedu.flashlingo.logic.commands.AddCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
-import seedu.flashlingo.model.flashcard.words.Word;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -47,9 +45,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         if (arePrefixesPresent(argMultimap, PREFIX_ORIGINAL_WORD_LANGUAGE)) {
             String language = argMultimap.getValue(PREFIX_ORIGINAL_WORD_LANGUAGE).get();
-            if (!Word.isValidLanguage(language)) {
-                throw new ParseException(MESSAGE_CONSTRAINTS);
-            }
             return new OriginalWord(originalWord, language);
         } else {
             return new OriginalWord(originalWord);
@@ -63,9 +58,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         if (arePrefixesPresent(argMultimap, PREFIX_TRANSLATED_WORD_LANGUAGE)) {
             String language = argMultimap.getValue(PREFIX_TRANSLATED_WORD_LANGUAGE).get();
-            if (!Word.isValidLanguage(language)) {
-                throw new ParseException(MESSAGE_CONSTRAINTS);
-            }
             return new TranslatedWord(translationWord, language);
         } else {
             return new TranslatedWord(translationWord);

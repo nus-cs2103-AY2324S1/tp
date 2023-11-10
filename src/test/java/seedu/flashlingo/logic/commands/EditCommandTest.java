@@ -2,7 +2,6 @@ package seedu.flashlingo.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashlingo.logic.Messages.MESSAGE_CONSTRAINTS;
 import static seedu.flashlingo.logic.Messages.MESSAGE_DUPLICATE_FLASHCARD;
 import static seedu.flashlingo.logic.Messages.MESSAGE_SAME_WORD;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_BOB;
@@ -103,15 +102,6 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, changes);
 
         assertCommandFailure(editCommand, model, MESSAGE_DUPLICATE_FLASHCARD);
-    }
-
-    @Test
-    public void execute_invalidLanguageFormat_failure() {
-        FlashCard lastFlashcard = model.getFilteredFlashCardList().get(0);
-        String[] changes = new String[] {"", "...", "", ""};
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, changes);
-
-        assertCommandFailure(editCommand, model, MESSAGE_CONSTRAINTS);
     }
 
     @Test
