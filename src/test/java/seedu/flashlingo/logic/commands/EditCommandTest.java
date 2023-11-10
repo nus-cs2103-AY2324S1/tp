@@ -1,8 +1,8 @@
 package seedu.flashlingo.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.logic.Messages.MESSAGE_DUPLICATE_FLASHCARD;
 import static seedu.flashlingo.logic.Messages.MESSAGE_SAME_WORD;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_BOB;
@@ -221,7 +221,8 @@ public class EditCommandTest {
 
         // different changes -> returns false
         String differentWord = "differentWord";
-        String[] differentChanges = new String[] {differentWord, editWordLanguage, editTranslation, editTranslationLanguage};
+        String[] differentChanges = new String[] {
+            differentWord, editWordLanguage, editTranslation, editTranslationLanguage};
         editCommandDifferentIndex = new EditCommand(index, differentChanges);
         assertFalse(editCommand.equals(editCommandDifferentIndex));
 
