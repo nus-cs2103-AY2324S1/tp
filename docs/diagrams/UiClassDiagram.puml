@@ -38,7 +38,7 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
-MainWindow --> Profile
+MainWindow *--> Profile
 
 PersonListPanel -down-> "*" PersonCard
 
