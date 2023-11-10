@@ -221,9 +221,8 @@ The add feature ensures that user input is correctly parsed and validated, and i
     * Cons: May be time-inefficient and inconvenient if there is an influx of new fosterers to be added.
 
 * **Alternative 2:** Add multiple fosterers at once.
-  itself.
     * Pros: Do not have to parse user input multiple times in order for the user to perform mass addition of new fosterers.
-    * Cons: The add command would be even more convoluted due to the increase in length with all the fields/arguments required.
+    * Cons: The add command would be even more convoluted due to the increase in length with all the fields/arguments required, making the UI less desirable.
 
 
 ### Delete feature
@@ -270,56 +269,52 @@ Therefore, by ensuring that the user input indices are correctly parsed and vali
 #### Implementation
 
 The Sort feature allows the user to sort the list of fosterers alphabetically by name, to make the address book more organised. 
-This is facilitated by the `SortCommand` class, as well as the `StatsCommandParser` class. The relationship between the Stats command classes are shown below.
-![StatsClassDiagram](images/StatsClassDiagram.png)
+This is facilitated by the `SortCommand`, `Model`, `AddressBook`, and `UniquePersonList` classes:
 
-* `StatsCommand` — This is an abstract class that contains utility methods used by its subclasses for percentage calculation.
-* `StatsAvailCommand` — Contains methods to calculate statistics of available fosterers and the animals they can foster.
-* `StatsCurrentCommand` — Contains methods to calculate statistics of current fosterers and the animals they are currently fostering.
-* `StatsHousingCommand` — Contains methods to calculate statistics of the different housing types of fosterers.
-* `StatsCommandParser` — Contains the parsing methods for string input of the user. It is in charge of parsing the type of statistics requested by the user, and creating the corresponding `StatsCommand`.<br>
+* `SortCommand` — This class represents the command to sort the list of persons by name. It calls the `sortByName` method in the `Model` class.
+* `Model` and `ModelManager` — Declares and implements the `sortByName` method, specifying a comparator based on the person's name. It calls the `sortNames` method in the `AddressBook` class.
+* `AddressBook` — Implements the `sortNames` method which uses `sort` on the `persons` UniquePersonList.
+* `UniquePersonList` — Contains the `sort` method to perform the sorting operation by using the method on its `internalList`.
 
-Given below is an example usage scenario and how the statistics feature behaves at each step. It shows the execution of a `stats avail` command, which requests for statistics about the available fosterers.
+Given below is an example usage scenario and how the sort feature behaves at each step. 
 
-![Interactions Inside the Logic Component for the StatsAvailCommand](images/StatsAvailSequenceDiagram.png)
+![Interactions Inside the Logic Component for SortCommand](images/SortSequenceDiagram.png)
 
-![Self Invocation StatsAvail](images/StatsAvailSelfInvDiagram.png)
+Step 1. The user enters the `sort` command. The `SortCommand` is invoked, and it calls the `sortByName` method in the `Model` interface, which is implemented in the `ModelManager` class.
 
+Step 2. The `sortByName` method creates a comparator based on the name of a person.
+It then calls the `sortNames` method in the `AddressBook` class.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `StatsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
+Step 3. The `sortNames` method initiates the sorting process and sorts the list of persons using the provided comparator.
+It calls the `sort` method on the `persons` UniquePersonList.
 
-Step 1. The user enters the `stats avail` command. The `StatsCommandParser` is invoked to parse the user's input.
+Step 4. The `sort` method in the `UniquePersonList` class performs the actual sorting operation on its `internalList`.
 
-Step 2. `StatsCommandParser` will then parse the argument inputted with the `stats` command, in this case it is `avail`. If the argument is not `avail`, `curr` or `housing`, the `StatsCommandParser` will then generate an error message to the user, indicating that the requested statistic is not available.
+Step 5. A success message is displayed to the user to confirm that the address book has been sorted alphabetically by the names of the fosterers.
 
-Step 3. The `StatsAvailCommand` will then call relevant methods to obtain the needed numbers and percentages, done in the `execute` command.
-
-Step 4. A success message with the statistics will then be displayed to the user.
-
-The other commands `stats curr` and `stats housing` have a similar execution path, replacing `StatsAvailCommand` with `StatsCurrCommand` and `StatsHousingCommand` respectively.
+The sort feature offers the user a choice to ensure that the list of fosterers in the address book is collated neatly and systematically.
 
 #### Design considerations:
 
-**Aspect: How to display the statistics:**
+**Aspect: How sort executes:**
 
-* **Alternative 1 (current choice):** Show the availability and current statistics separately.
-    * Pros: Displayed statistics are specific to the user's query, showing only the relevant data.
-    * Cons: Need to create more classes.
-
-* **Alternative 2:** Show availability and current statistics together.
+* **Alternative 1 (current choice):** Sort alphabetically only based on the fosterers' names.
     * Pros: Easier to implement.
-    * Cons: Result message displayed will be very long, making the UI less desirable.
+    * Cons: Users may have different preferences for sorting (e.g., sorting by first name, last name, or a combination)..
 
-**Aspect: Which list should the statistics be calculated from:**
+* **Alternative 2:** Customisable sorting - Allow the user to choose to sort the list alphabetically based on either the fosterers' names or the names of the animals fostered.
+    * Pros: Offers greater flexibility for the users to choose which sorting criteria he/she prefers.
+    * Cons: If two animals have the same name or if both are `nil`, the sorting operation may change their relative order.
 
-* **Alternative 1 (current choice):** Calculated from the currently displayed list.
-    * Pros: The resulting statistic corresponds to what the user sees, allowing for easy verification.
-    * Cons: The user may need to perform a find or list to query the list of interest before entering the stats command.
+**Aspect: Reverting the sort operation:**
 
-* **Alternative 2:** Calculated from the main list of fosterers.
-    * Pros: The resulting statistic corresponds to the whole address book, which may cause less confusion for the user.
-    * Cons: Less flexibility for the user.
+* **Alternative 1 (current choice):** Implement an `undo` command to revert the list back to its original state (sorted chronologically based on when the fosterer is added).
+    * Pros: Maintains consistency with undo mechanisms used in other features of Foster Family.
+    * Cons: If `sort` is executed multiple times consecutively followed by `undo`, the list will not revert back to its original state with the current implementation of `undo`, which only allows the users to undo the previous command.
+
+* **Alternative 2:** Implement another `sort` command like `sort time` to revert the list back to its original state (sorted chronologically based on when the fosterer is added).
+    * Pros: Offers an explicit and clear command for reverting to the original sorting of the address book list.
+    * Cons: Introduces additional commands, potentially leading to increased cognitive load for the users.
 
 
 ### Statistics feature
