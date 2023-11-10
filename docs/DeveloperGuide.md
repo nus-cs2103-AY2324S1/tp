@@ -216,14 +216,14 @@ The add feature ensures that user input is correctly parsed and validated, and i
 
 **Aspect: How add executes:**
 
-* **Alternative 1 (current choice):** The Add feature saves the entire address book, including the newly added fosterer.
+* **Alternative 1 (current choice):** Add only one fosterer at a time.
     * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+    * Cons: May be time-inefficient and inconvenient if there is an influx of new fosterers to be added.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative 2:** Add multiple fosterers at once.
   itself.
-    * Pros: Will use less memory (e.g. for `add`, just save the person being added).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Do not have to parse user input multiple times in order for the user to perform mass addition of new fosterers.
+    * Cons: The add command would be even more convoluted due to the increase in length with all the fields/arguments required.
 
 
 ### Delete feature
@@ -264,6 +264,62 @@ Therefore, by ensuring that the user input indices are correctly parsed and vali
 * **Alternative 2:** Delete only one fosterer at a time.
     * Pros: Easy to implement. 
     * Cons: Overhead associated with a chain of delete commands should the user choose to perform multiple deletions.
+
+
+### Sort feature
+#### Implementation
+
+The Sort feature allows the user to sort the list of fosterers alphabetically by name, to make the address book more organised. 
+This is facilitated by the `SortCommand` class, as well as the `StatsCommandParser` class. The relationship between the Stats command classes are shown below.
+![StatsClassDiagram](images/StatsClassDiagram.png)
+
+* `StatsCommand` — This is an abstract class that contains utility methods used by its subclasses for percentage calculation.
+* `StatsAvailCommand` — Contains methods to calculate statistics of available fosterers and the animals they can foster.
+* `StatsCurrentCommand` — Contains methods to calculate statistics of current fosterers and the animals they are currently fostering.
+* `StatsHousingCommand` — Contains methods to calculate statistics of the different housing types of fosterers.
+* `StatsCommandParser` — Contains the parsing methods for string input of the user. It is in charge of parsing the type of statistics requested by the user, and creating the corresponding `StatsCommand`.<br>
+
+Given below is an example usage scenario and how the statistics feature behaves at each step. It shows the execution of a `stats avail` command, which requests for statistics about the available fosterers.
+
+![Interactions Inside the Logic Component for the StatsAvailCommand](images/StatsAvailSequenceDiagram.png)
+
+![Self Invocation StatsAvail](images/StatsAvailSelfInvDiagram.png)
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `StatsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+Step 1. The user enters the `stats avail` command. The `StatsCommandParser` is invoked to parse the user's input.
+
+Step 2. `StatsCommandParser` will then parse the argument inputted with the `stats` command, in this case it is `avail`. If the argument is not `avail`, `curr` or `housing`, the `StatsCommandParser` will then generate an error message to the user, indicating that the requested statistic is not available.
+
+Step 3. The `StatsAvailCommand` will then call relevant methods to obtain the needed numbers and percentages, done in the `execute` command.
+
+Step 4. A success message with the statistics will then be displayed to the user.
+
+The other commands `stats curr` and `stats housing` have a similar execution path, replacing `StatsAvailCommand` with `StatsCurrCommand` and `StatsHousingCommand` respectively.
+
+#### Design considerations:
+
+**Aspect: How to display the statistics:**
+
+* **Alternative 1 (current choice):** Show the availability and current statistics separately.
+    * Pros: Displayed statistics are specific to the user's query, showing only the relevant data.
+    * Cons: Need to create more classes.
+
+* **Alternative 2:** Show availability and current statistics together.
+    * Pros: Easier to implement.
+    * Cons: Result message displayed will be very long, making the UI less desirable.
+
+**Aspect: Which list should the statistics be calculated from:**
+
+* **Alternative 1 (current choice):** Calculated from the currently displayed list.
+    * Pros: The resulting statistic corresponds to what the user sees, allowing for easy verification.
+    * Cons: The user may need to perform a find or list to query the list of interest before entering the stats command.
+
+* **Alternative 2:** Calculated from the main list of fosterers.
+    * Pros: The resulting statistic corresponds to the whole address book, which may cause less confusion for the user.
+    * Cons: Less flexibility for the user.
 
 
 ### Statistics feature
