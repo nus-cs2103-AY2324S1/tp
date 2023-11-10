@@ -131,4 +131,11 @@ public class InputParserTest {
             () -> InputParser.parseCommand("unknownCommand")
         );
     }
+
+    @Test
+    public void parseCommand_addWithIncorrectArguments_throwsParseException() {
+        assertThrows(ParseException.class,
+                () -> InputParser.parseCommand(AddCommand.COMMAND_WORD + " wrong args"));
+    }
+
 }
