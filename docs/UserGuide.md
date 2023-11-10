@@ -278,7 +278,7 @@ Invalid examples:
 
 Edit a student's contact number or address.
 
-Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
+Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS] [r/RISK_LEVEL]`
 
 **Parameters**:
 1. Student Index
@@ -288,6 +288,14 @@ Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
    - Numbers only, must be 8 characters long
 3. Home Address 
    - Maximum of 200 characters, cannot be blank
+4. Risk Level
+   - Must be `high`, `medium`, or `low`
+   - Case-insensitive, i.e. `HIGH` is a valid input
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+The `tag STUDENT_INDEX r/RISK_LEVEL` command is equivalent to `edit STUDENT_INDEX r/RISK_LEVEL`.
+</div>
 
 Valid examples:
 * `edit 1 c/98765432 a/Woodlands Street 11 Blk 888 #08-08`
