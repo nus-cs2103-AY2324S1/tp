@@ -120,11 +120,15 @@ public class Person {
      * if modification is attempted.
      */
     public boolean getPaid() {
-        return paid;
+        return this.paid;
     }
 
     public void setPaid() {
         this.paid = true;
+    }
+
+    public void setUnPaid() {
+        this.paid = false;
     }
 
     public PayRate getPayRate() {
@@ -152,7 +156,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -214,5 +219,9 @@ public class Person {
                 .add("paid", paid)
                 .add("payrate", payRate)
                 .toString();
+    }
+
+    public double getMonthlyRevenue() {
+        return lesson.getMonthlyHours() * payRate.getValue();
     }
 }

@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_BEGIN_AFTER_END;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.interval.Interval;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -51,6 +54,35 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_beginBeforeEnd_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person validPerson = new PersonBuilder()
+                .withBegin("1500")
+                .withEnd("1600")
+                .build();
+
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_beginAfterEnd_throwsCommandException() {
+        Person invalidPerson = new PersonBuilder()
+                .withBegin("2200")
+                .withEnd("2100")
+                .build();
+
+        AddCommand addCommand = new AddCommand(invalidPerson);
+        ModelStub modelStub = new ModelStubWithPerson(invalidPerson);
+
+        assertThrows(CommandException.class, MESSAGE_BEGIN_AFTER_END, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -144,6 +176,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public List<String> findInterval(Interval interval) {
+            throw new AssertionError("This findInterval method should not be called");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -154,7 +191,42 @@ public class AddCommandTest {
         }
 
         @Override
-        public void getPersonPaid(Person target) {
+        public void markPersonUnPaid(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getPersonPaid(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void purgeAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -167,8 +239,14 @@ public class AddCommandTest {
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public ObservableList<Person> getScheduleList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getUnfilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -224,6 +302,12 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
+        @Override
+        public void purgeAddressBook() {}
+
+        @Override
+        public void commitAddressBook() {}
     }
 
 }

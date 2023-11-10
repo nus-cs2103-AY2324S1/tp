@@ -16,6 +16,7 @@ public class Day {
             "(?i)^(Mon|Monday|Tue|Tuesday|Wed|Wednesday|Thu|Thursday|Fri|Friday|Sat|Saturday|Sun|Sunday)$";
 
     public final DayOfWeek value;
+    public final String stringValue;
 
     /**
      * Constructs a {@code Day}.
@@ -25,6 +26,7 @@ public class Day {
     public Day(String day) {
         requireNonNull(day);
         value = parse(day);
+        stringValue = parseDay(day);
     }
 
     /**
@@ -60,6 +62,51 @@ public class Day {
         default:
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
+        //checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
+        //value = parseDay(day);
+    }
+
+    /**
+     * Parses the day input
+     * @param input string of Day
+     * @return parses the day into the complete day name
+     */
+    public String parseDay(String input) {
+        String day = input.toLowerCase();
+        String result = "";
+        switch (day) {
+        case "mon":
+        case "monday":
+            result = "Mon";
+            break;
+        case "tue":
+        case "tuesday":
+            result = "Tue";
+            break;
+        case "wed":
+        case "wednesday":
+            result = "Wed";
+            break;
+        case "thu":
+        case "thursday":
+            result = "Thu";
+            break;
+        case "fri":
+        case "friday":
+            result = "Fri";
+            break;
+        case "sat":
+        case "saturday":
+            result = "Sat";
+            break;
+        case "sun":
+        case "sunday":
+            result = "Sun";
+            break;
+        default:
+
+        }
+        return result;
     }
 
     public static boolean isValidDay(String test) {
@@ -68,7 +115,7 @@ public class Day {
 
     @Override
     public String toString() {
-        return value.toString();
+        return stringValue;
     }
 
     @Override

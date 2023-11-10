@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -24,10 +25,15 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        // same name, same phone number all other attributes different -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(ALICE.getPhone().toString()).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // same name, all other attributes different -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
@@ -90,4 +96,20 @@ public class PersonTest {
                 + ", payrate=" + ALICE.getPayRate() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void getMonthlyRevenueMethod() {
+        Person alice = new PersonBuilder(ALICE).withDay("Mon").withBegin("1000").withEnd("1004")
+                .withPayRate("1.52").build();
+        Person bob = new PersonBuilder(BOB).withDay("Mon").withBegin("1000").withEnd("1004")
+                .withPayRate("1.52").build();
+
+        // persons with same lesson and payrate should return same monthly revenue
+        assertEquals(alice.getMonthlyRevenue(), bob.getMonthlyRevenue());
+
+        Person modifiedAlice = new PersonBuilder(alice).withPayRate("1.53").build();
+        assertNotEquals(modifiedAlice.getMonthlyRevenue(), alice.getMonthlyRevenue());
+
+    }
+
 }

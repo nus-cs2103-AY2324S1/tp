@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_BEGIN_AFTER_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
@@ -28,11 +29,13 @@ import seedu.address.model.person.Begin;
 import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.End;
+import seedu.address.model.person.Lesson;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+
 /**
  * Edits the details of an existing person in the address book.
  */
@@ -60,7 +63,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This tutee already exists";
     public static final String MESSAGE_DUPLICATE_DATE = "This date clashes with an existing schedule";
 
     private final Index index;
@@ -90,14 +93,33 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        if (!Lesson.isValid(editedPerson.getBegin(), editedPerson.getEnd())) {
+            throw new CommandException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
+        }
+
+        if (editedPerson.getBegin() == null) {
+            if (!Lesson.isValid(personToEdit.getBegin(), editedPerson.getEnd())) {
+                throw new CommandException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
+            }
+        }
+
+        if (editedPerson.getEnd() == null) {
+            if (!Lesson.isValid(editedPerson.getBegin(), personToEdit.getEnd())) {
+                throw new CommandException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
+            }
+        }
+
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } else if (editPersonDescriptor.getEditSchedule() && model.hasDate(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_DATE);
         }
 
+        model.purgeAddressBook();
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitAddressBook();
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

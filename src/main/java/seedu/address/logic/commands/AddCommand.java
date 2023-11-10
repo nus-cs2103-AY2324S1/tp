@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_BEGIN_AFTER_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
@@ -15,13 +16,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Lesson;
 import seedu.address.model.person.Person;
 
 /**
  * Adds a person to the address book.
  */
 public class AddCommand extends Command {
-    //test
 
     public static final String COMMAND_WORD = "add";
 
@@ -31,7 +32,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "Example: " + COMMAND_WORD + " "
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -40,10 +41,10 @@ public class AddCommand extends Command {
             + PREFIX_DAY + "Mon "
             + PREFIX_BEGIN + "1200 "
             + PREFIX_END + "1300 "
-            + PREFIX_PAYRATE + "20";
+            + PREFIX_PAYRATE + "20.00";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This tutee already exists";
     public static final String MESSAGE_DUPLICATE_DATE = "This date and time clashes with an existing schedule";
 
     private final Person toAdd;
@@ -60,6 +61,10 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (!Lesson.isValid(toAdd.getBegin(), toAdd.getEnd())) {
+            throw new CommandException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
+        }
+
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -68,7 +73,10 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_DATE);
         }
 
+        model.purgeAddressBook();
         model.addPerson(toAdd);
+        model.commitAddressBook();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

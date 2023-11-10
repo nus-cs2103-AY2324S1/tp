@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
@@ -37,18 +38,16 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private Label subject;
-    @FXML
-    private Label day;
+
     @FXML
     private Label lesson;
-    @FXML
-    private Label begin;
-    @FXML
-    private Label end;
     @FXML
     private Label paid;
     @FXML
     private Label payRate;
+
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -62,11 +61,18 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         subject.setText(person.getSubject().value);
-        day.setText(person.getDay().value.toString());
-        begin.setText(person.getBegin().value);
-        end.setText(person.getEnd().value);
         lesson.setText(person.getLesson().toString());
-        payRate.setText("rate: " + person.getPayRate().toString() + "/h");
-        paid.setText(String.valueOf(person.getPaid()));
+        payRate.setText("Rate: " + person.getPayRate().toString() + "/h");
+
+        if (person.getPaid()) {
+            paid.setText("paid");
+            paid.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+        } else {
+            paid.setText("not paid");
+            paid.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+
+        }
+        tags.getChildren().add(paid);
+        tags.getChildren().add(subject);
     }
 }

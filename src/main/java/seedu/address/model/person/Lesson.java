@@ -3,7 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.time.DayOfWeek;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.TemporalAdjusters;
 
 
 /**
@@ -34,6 +37,14 @@ public class Lesson {
         this.end = end.getTime();
     }
 
+    public static boolean isValid(Begin begin, End end) {
+        return begin.getTime().compareTo(end.getTime()) < 0;
+    }
+
+    public String getTimeSlot() {
+        return begin.toString() + " - " + end.toString();
+    }
+
     @Override
     public String toString() {
         return day.toString() + ", " + begin.toString() + " - " + end.toString();
@@ -55,5 +66,53 @@ public class Lesson {
                 && begin.equals(otherLesson.begin)
                 && end.equals(otherLesson.end);
     }
+    public int getNumOfDaysInMonth(int year, int month) {
+        // Construct the LocalDate for the first day of the specified month and year
+        LocalDate firstDayOfMonth = LocalDate.of(year, month, 1);
+
+        // Construct the LocalDate for the last day of the specified month and year
+        LocalDate lastDayOfMonth = firstDayOfMonth.with(TemporalAdjusters.lastDayOfMonth());
+        // Count occurrences of the specific day in the current month
+        int count = 0;
+        LocalDate temp = firstDayOfMonth;
+        while (!temp.isAfter(lastDayOfMonth)) {
+            if (temp.getDayOfWeek() == day) {
+                count++;
+                temp = temp.plusDays(7);
+            } else {
+                temp = temp.plusDays(1);
+            }
+        }
+        assert count > 0 : "number of days should be more than 0";
+        return count;
+    }
+
+    /**
+     * Calculates the lesson duration in hours.
+     *
+     * @return duration in terms of hours.
+     */
+    public double calculateLessonDuration() {
+        Duration duration = Duration.between(begin, end);
+        long minutes = duration.toMinutes();
+        double hours = (double) minutes / 60; // Convert minutes to a fraction of hours
+        assert hours > 0.0 : "hours should be positive";
+
+        return hours;
+    }
+
+    /**
+     * Calculates the monthly lesson duration in hours.
+     *
+     * @return monthly duration in terms of hours.
+     */
+    public double getMonthlyHours() {
+        double hours = calculateLessonDuration() * getNumOfDaysInMonth(LocalDate.now()
+                .getYear(), LocalDate.now().getMonthValue());
+        assert hours > 0.0 : "hours should be positive";
+        return hours;
+    }
+
+
 
 }

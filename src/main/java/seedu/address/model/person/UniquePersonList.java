@@ -5,9 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.interval.Interval;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -47,6 +49,18 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Finds the list of timings which have the same day as the Interval from the address book
+     * @param interval
+     * @return list of timings
+     */
+    public List<String> findInterval(Interval interval) {
+        requireNonNull(interval);
+        return internalList.stream()
+                .filter(person -> person.getDay().toString().equals(interval.getIntervalDay().toString()))
+                .map(person -> person.getLesson().getTimeSlot()).collect(Collectors.toList());
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -76,6 +90,43 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+    }
+
+    /**
+     * Set the person as paid in the list.
+     * The person must exist in the list.
+     */
+    public void setPaid(Person toPaid) {
+        requireNonNull(toPaid);
+
+        int index = internalList.indexOf(toPaid);
+        Person p = new Person(toPaid.getName(), toPaid.getPhone(), toPaid.getEmail(), toPaid.getAddress(),
+                toPaid.getSubject(), toPaid.getDay(), toPaid.getBegin(),
+                toPaid.getEnd(), true, toPaid.getPayRate());
+        if (index != -1) {
+            internalList.set(index, p);
+        }
+    }
+
+    public boolean getPaid(Person toGet) {
+        int index = internalList.indexOf(toGet);
+        return internalList.get(index).getPaid();
+    }
+
+    /**
+     * Set the person as not paid in the list.
+     * The person must exist in the list.
+     */
+    public void setUnPaid(Person toUnPaid) {
+        requireNonNull(toUnPaid);
+
+        int index = internalList.indexOf(toUnPaid);
+        Person p = new Person(toUnPaid.getName(), toUnPaid.getPhone(), toUnPaid.getEmail(), toUnPaid.getAddress(),
+                toUnPaid.getSubject(), toUnPaid.getDay(), toUnPaid.getBegin(),
+                toUnPaid.getEnd(), false, toUnPaid.getPayRate());
+        if (index != -1) {
+            internalList.set(index, p);
+        }
     }
 
     /**

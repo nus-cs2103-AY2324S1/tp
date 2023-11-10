@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Mark the tutee as paid.
+ * (Make use of the template of Delete Command and did some modification)
  */
 public class PaidCommand extends Command {
     public static final String COMMAND_WORD = "paid";
@@ -38,9 +39,12 @@ public class PaidCommand extends Command {
         }
 
         Person personToMarkPaid = lastShownList.get(targetIndex.getZeroBased());
-        model.markPersonPaid(personToMarkPaid);
-        return new CommandResult(String.format(MESSAGE_MARK_PERSON_PAID_SUCCESS, personToMarkPaid.getPaid()));
 
+        model.purgeAddressBook();
+        model.markPersonPaid(personToMarkPaid);
+        model.commitAddressBook();
+
+        return new CommandResult(String.format(MESSAGE_MARK_PERSON_PAID_SUCCESS, personToMarkPaid.getPaid()));
     }
 
     @Override
