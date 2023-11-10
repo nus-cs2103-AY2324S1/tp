@@ -973,9 +973,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3b. The page is valid but fails to load.
+* 4b. The page is valid but fails to load.
 
-    * 3b1. The user will see the error page displayed by the browser used to load the page link.
+    * 4b1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
