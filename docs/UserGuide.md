@@ -364,7 +364,7 @@ Finds all applications whose fields match the keywords provided.
     * e.g. searching for the keyword "Goo" will not list applications containing "Google".
 * Characters not separated by white space are considered _ONE_ word.
     * e.g. searching for the keyword "ADD" will not list applications containing "TO_ADD_DEADLINE".
-* Searches for deadline must be formatted correctly. Refer to 
+* Searches for deadline must be formatted correctly. Refer to
   "[Structure of a job application](#structure-of-a-job-application)" for the correct format of a deadline.
 
 **Examples:**
@@ -377,7 +377,7 @@ Finds all applications whose fields match the keywords provided.
 
 2. Finding using multiple conditions: `find Google r/Software Engineer`
 
-* This command searches for all job applicaitons with "Google" in any field and the words "Software" and "Engineer". 
+* This command searches for all job applicaitons with "Google" in any field and the words "Software" and "Engineer".
 
 ***Failed Commands:***
 
@@ -440,7 +440,7 @@ Adds an interview to the specified application from the list.
 
 **Failed command:**
 
-* If any fields or prefixes are not included with the command, 
+* If any fields or prefixes are not included with the command,
 display "Invalid command format!" and the correct format for interview add command.
 
 * If any fields have invalid input, display the possible valid inputs for that field.

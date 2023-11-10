@@ -20,7 +20,7 @@ JobFindr was born out of this necessity, offering a one-stop solution for record
 1. Repurposed AB3 to fit the context of JobFindr
     * **What it does**: Instead of an address book containing a list of `Person` objects with fields such as `Name`, `Phone`
   and `Email`, the application was changed to contain a list of `Job` objects with the basic fields of `Company` and
-  `Role`. 
+  `Role`.
     * **Justification**: Since we intended to repurpose the application to cater to NUS fresh graduates who are searching
     for jobs, the current fields were irrelevant.
     * **Highlights**: This was a tedious process as it required many adjustments throughout the whole code. Not only did the
