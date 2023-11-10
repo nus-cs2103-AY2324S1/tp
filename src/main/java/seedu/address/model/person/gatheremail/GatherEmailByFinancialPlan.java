@@ -1,3 +1,4 @@
+//@@author AlyssaPng
 package seedu.address.model.person.gatheremail;
 
 import seedu.address.model.person.Person;
@@ -15,13 +16,15 @@ public class GatherEmailByFinancialPlan implements GatherEmailPrompt {
     public GatherEmailByFinancialPlan(String promptFp) {
         this.promptFp = promptFp;
     }
+
     /**
-     * Gathers the email of {@code person} if {@code person}'s financial plan names a specific prompt.
+     * Gathers the email of {@code person} if {@code person}'s financial plan names matches a specific prompt.
      */
     @Override
     public String gatherEmails(Person person) {
         return person.gatherEmailsContainsFinancialPlan(promptFp);
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -37,6 +40,9 @@ public class GatherEmailByFinancialPlan implements GatherEmailPrompt {
         return promptFp.equals(otherGatherByFinancialPlan.promptFp);
     }
 
+    /**
+     * Returns the String representation of GatherEmailByFinancialPlan Object.
+     */
     @Override
     public String toString() {
         return "Financial Plan: " + promptFp;

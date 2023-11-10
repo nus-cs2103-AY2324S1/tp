@@ -33,7 +33,7 @@ public class Tag {
     }
 
     /**
-     * Returns true if the given string is a substring of {@code tagName}
+     * Returns true if the given string is a substring of {@code tagName}.
      */
     public boolean containsSubstring(String substring) {
         return tagName.toLowerCase().contains(substring.toLowerCase());
