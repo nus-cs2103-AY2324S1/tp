@@ -1224,6 +1224,89 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Planned enhancements**
+
+Given below are the planned enhancements. The _current behaviour_ specifies how the application behaves as of `v1.4`, and the _enhanced behaviour_ specifies how the application should behave in a future milestone.
+
+### Logic
+
+* Better error handling on creating a duplicate contact (for `create` command).
+  * Current behaviour: When the user attempts to create a new contact of the same name as an existing contact, the app displays an error message and prevents the user from creating that new contact.
+  * Enhanced behaviour: When the user attempts to create a new contact of the same name as an existing contact, the app creates a new contact, but gives a warning message that another contact with the same name already exists. A sample warning message can be: `Noted, created new contact: Nguyen. Another contact with the name "Nguyen" already exists. If you created the new contact by accident, type "undo" to undo creating the contact.`
+  * Justification: This allows user to add two persons of exactly the same name to the contact list. As of the current implementation, it does not allow the user to add a second person of the same name to the contact list. The error message warns the user of a possible mistake, and also warns the user to handle the contacts of the same name with care so as to not mix up the two.
+
+* Handling duplicates of phone, email and link across different contacts.
+  * Current behaviour: When the user attempts to add the same phone, email or link as another contact's phone, email or link respectively, the software adds the detail without any warning.
+  * Enhanced behaviour: When the user attempts to add the same phone, email or link as nother contact's phone, email or link respectively, the software should still add the detail, but with a warning message. For example, suppose that the contact at index 2 has a phone number of `12345678`, the command `add 1 /phone 12345678` gives a warning message: `Added phone "12345678" to the contact at index 1. Phone number "12345678" already exists in the contact at index 2. If you added the phone number by accident, type "undo" to undo adding the phone number.`, and the command `create /name Nguyen /phone 12345678` gives a warning message: `Noted, created new contact: Nguyen; Phones: [12345678]. Phone number "12345678" already exists in the contact at index 2. If you added the phone number by accident, type "undo" to undo adding the phone number.`
+  * Justification: Generally, phone numbers, emails and links are not shared by multiple contacts, hence adding the warning message warns the user of a possible mistake. However, the software should not prevent the user totally from doing so to accommodate the rare case that a phone number, email or link is shared by multiple contacts.
+
+* Better command format for filtering course.
+  * Current behaviour: The command `filter /by course /with CS2103T /taken true` means filtering in all contacts that have course `CS2103T` and are taking the course (i.e. current date is between the start and end date), while `filter /by course /with CS2103T /taken false` means filtering in all contacts that have course `CS2103T` regardless of whether the contact is taking the course. The latter is equivalent to `filter /by course /with CS2103T`, without the `/taken` tag.
+  * Enhanced behaviour: The `/taken` flag can be changed to `/taking`, to clearly suggest filtering in contacts that are taking the course. Furthermore, the presence of the flag `/taking` should indicate filtering in contacts taking the course without the `true` value following the tag, while omitting the flag means no filtering based on whether the contacts are taking the course. This means that `filter /by course /with CS2103T /taking` means filtering in all contacts that are taking `CS2103T`, while `filter /by course /with CS2103T` (without the `/taking` flag) means filtering in all contacts that have course `CS2103T` regardless of whether they are taking the course.
+
+* More user-friendly info message for `create` command.
+  * Current behaviour: Upon a successful `create` command, the info message is rather verbose. For example, with command `create /name Nguyen /phone 12345678 /phone 87654321`, the info message is: `Noted, created new contact: Nguyen; Phones: [12345678, 87654321]; Emails: []; Links: []; Courses: []; Specialisations: []; Tags: `.
+  * Enhanced behaviour: The info message can be shortened to show only information being added. For example, with command `create /name Nguyen /phone 12345678 /phone`, the info message can be: `Noted, created new contact: Nguyen; Phones: [12345678, 87654321].`
+
+* More user-friendly info message for `add` command.
+  * Current behaviour: Upon a successful `add` command, the info message is rather verbose. For example, with command `add 1 /phone 12345678`, (depending on your contact list) the info message might be: `Added information to this contact: Bernice Yu; Phones: [99272758, 12345678]; Emails: [berniceyu@example.com]; Links: [github.com/bernfish]; Graduation: AY2020/2021 Semester 1; Courses: [Computer Science]; Specialisations [Artificial Intelligence]; Tags: [colleagues][friends]; Priority: High`.
+  * Enhanced behaviour: The info message can be shortened to show only the information being added. For example, with command `add 1 /phone 12345678`, the info message can be: `Added phone "12345678" to the contact at index 1 (name: Bernice Yu).`
+
+* More user-friendly info message for `edit` command.
+  * Current behaviour: Upon a successful `edit` command, the info message is rather verbose. For example, with command `edit 1 /phone 12345 /index 2`, (depending on your contact list) the info message might be: `Edited Person: Nguyen; Phones: [12345678, 12345]; Emails: []; Links: []; Courses: []; Specialisations []; Tags: `.
+  * Enhanced behaviour: The info message can be shortened to show the information being changed. For example, with command `edit 1 /phone 12345 /index 2`, the info message can be: `Changed phone at index 2 of the phone list of the contact at index 1 (name: Nguyen) from "87654321" to "12345".`
+
+* More user-friendly info message for `delete` command.
+  * Current behaviour: Upon a successful `delete` command that delete a field from a contact, the info message is rather verbose. For example, with command `delete 1 /phone /index 2`, (depending on your contact list), the info message might be: `Deleted some information of person: Alex Yeoh; Phones: [12345, 1234567, +65 123]; Emails: [alexyeoh@example.com]; Links: [github.com]; Graduation: AY2016/2017 Semester 1; Courses: [Information Systems]; Specialisations []; Tags: [friends]; Priority: Low`.
+  * Enhanced behaviour: The info message can be shortened to show only information being deleted. For example, with command `delete 1 /phone /index 2`, the info message can be: `Deleted phone "12345678" at index 2 of the phone list of the contact at index 1 (name: Alex Yeoh).`
+
+### Model
+
+* More relaxed person uniqueness constraint.
+  * Current behaviour: Two persons are identified as having the same identity if their names are the same.
+  * Enhanced behaviour: Two persons are identified as having the same identity if they have the same identification number. This can be achieved by having an `identity` field in the `Person` class. This means that two people of exactly the same name may be identified as two different persons.
+  * Justification: This allows user to add two persons of exactly the same name to the contact list. As of the current implementation, it does not allow the user to add a second person of the same name to the contact list.
+
+* More relaxed name constraint.
+  * Current behaviour: Name does not accept any non-alphanumeric characters and whitespace character.
+  * Enhanced behaviour: Name should accommodate for commas `,` and slash `/` characters. This also involves more extensive name validation, with ensuring that comma must be preceded by an alphanumeric character and succeeded by a whitespace character, and slash must be preceded and succeeded by alphanumeric characters.
+
+* Stricter phone uniqueness constraint.
+  * Current behaviour: Two phone numbers are identified as having the same identity if the user input of the two phones are the same. This means that `+65 12345678` and `+6512345678` are identified as two different phone numbers.
+  * Enhanced behaviour: Two phone numbers are identified as having the same identity if they have the same country code and number part. This means that `+65 12345678` and `+6512345678` should be identified as the same phone number.
+
+* Better phone error message.
+  * Current behaviour: The error message is currently `Phone numbers should only contain numbers (and country code with "+" in front if applicable) and it should be at least 3 digits long (excluding country code).` This does not give information on how long the country code can be.
+  * Enhanced behaviour: The error message can be `Phone numbers should only contain numbers (and country code of 1-3 numeric digits with "+" in front if applicable) and it should be at least 3 digits long (excluding country code). Example: 1) +65 12345678 2) +6512345678 3) 12345678` so that it informs the user that country code can be between 1 - 3 digits, inclusive. The example also informs the user that a space character can optionally be used to separate country code from the rest.
+
+* Stricter link uniqueness constraint.
+  * Current behaviour: Two links are identified as having the same identity if the user input of the two links are the same. This means that `https://google.com`, `www.google.com`, `http://google.com` and `google.com` are identified as 4 different links.
+  * Enhanced behaviour: Two links are identified as having the same identity if the link excluding the protocol are the same. This means that `https://google.com`, `www.google.com`, `http://google.com` and `google.com` should be identified as the same link, as without the protocol, they are all reduced to `google.com`.
+
+* Better range of priority.
+  * Current behaviour: Priority only has 3 possible values: `low`, `medium` and `high`.
+  * Enhanced behaviour: Number of priority values can be specified by the user and saved to `preference.json`, or whichever JSON file that the user indicates as preference JSON file in `config.json`. Priority then can be represented by a number. There should be a cap of `10` levels of priority level as well, to prevent GUI display problems.
+  * Justification: With the current range of priority, it may cause inconvenience for users that want to differentiate their contact in terms of priority in greater number of levels.
+  Hence the app should allow the user to specify the number of priority levels.
+
+### Storage
+
+* Better malformed JSON handling.
+  * Current behaviour: Any invalid field (e.g. phone number containing a non-numerical character) of any contact will cause the data to not be loaded at all. NetworkBook would start with an empty contact list without warning.
+  * Enhanced behaviour: Load all contacts that do not have invalid fields and do not load any contact that has at least one invalid field. Warn the user that there are invalid fields in the storage, upon the launch of application. In the case that the JSON is incorrectly formatted such that it cannot be recognised as JSON, warn the user that the application fails to read from the JSON file due to formatting problem, and start with an empty contact list.
+
+### UI
+
+* Better help window pop-up behaviour.
+  * Current behaviour: When the help window is already opened and minimised, and the `help` command is called, the help window does not open again.
+  * Enhanced behaviour: The help window should still pop up when the `help` command is called. (Note: this might already be the behaviour on Mac OS)
+
+* Display course details in greater details.
+  * Current behaviour: Each course tile only displays the title of the course, omitting the information on course start and end dates.
+  * Enhanced behaviour: Each course tile can display 3 pieces of information: name, start date and end date. This can be done by expanding each course tile vertically to have 3 lines, with first line displaying name, second line displaying start date, third line displaying end date.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
