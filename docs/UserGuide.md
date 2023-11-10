@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-WellNUS is a **desktop application used by NUS Counsellors to manage and schedule appointments with their student clients**
+WellNUS is a *desktop application* used by **NUS Counsellors to manage and schedule appointments with their student clients**
 It is optimised for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, WellNUS can get your contact management tasks done faster than traditional GUI apps.
 
@@ -16,9 +16,13 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 ###  1.1 Accessing the app
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. 
+   1. To check the current version of Java installed on your system, refer to [this guide](https://www.java.com/en/download/help/version_manual.html).
+   2. If Java is not installed, you may download it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 2. Download the latest `wellnus.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-4/tp/releases/tag/v1.3).
+   1. Click on the link above to be redirected to our *github repository*.
+   2. Under *Assets*, click on the `wellnus.jar` file to begin the download.
 
 3. Copy the file to the folder you want to use as the _home folder_ for WellNUS.
 
@@ -33,7 +37,26 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 6. Refer to the [Features](#2-features) below for details of each command.
 
-### 1.2 Prefixes and parameters used in commands
+### 1.2 About the command format
+
+All instructions executed in WellNUS generally have the following command format:<pre>COMMAND_WORD PREFIX/PARAMETER</pre>
+The list of all available prefixes and parameters, as well as constraints of each parameter, is shown in the table below.
+
+| Prefix    | Parameter         | Parameter Meaning                | Example Usage                      | Parameter Constraints                                                                                                                                            |
+|-----------|-------------------|----------------------------------|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **n/**    | STUDENT_NAME      | Name of student                  | n/Peter Johnson                    | STUDENT_NAME **must** be **unique**, only contain **alphabetical characters and spaces**, and **cannot be blank**.                                               |
+| **c/**    | CONTACT_NUMBER    | Contact number of student        | c/94738484                         | CONTACT_NUMBER **must** only contain **numerical characters** beginning with *6, 8 or 9*, be **exactly 8 digits long** (without spaces) and **cannot be blank**. |
+| **a/**    | ADDRESS           | Address of student               | a/Blk 515 Choa Chu Kang Avenue 6   | ADDRESS can take any value up to **200 characters** long, and **cannot be blank**.                                                                               |
+| **r/**    | RISK_LEVEL        | Risk level assigned to student   | r/high                             | RISK_LEVEL **must** be one of the following three values: **high**, **medium**, **low**. **Case-insensitive**.                                                   |
+| **note/** | NOTE              | Note associated with student     | note/Struggles with 3rd grade math | NOTE can take any value up to **500 characters** long.                                                                                                           |
+| --        | STUDENT_INDEX     | Index of student in the list     | --                                 | STUDENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the student list.                                                         |
+| **date/** | DATE              | Date of appointment              | date/2023-10-12                    | DATE **must** be in the following format: `yyyy-MM-dd`. Specified date must be **within a year from the current date**.                                          |
+| **from/** | START_TIME        | Start time of appointment        | from/16:30                         | START_TIME **must** be in the following format: `HH-mm`, in **24-hour format**.                                                                                  |
+| **to/**   | END_TIME          | End time of appointment          | to/17:30                           | END_TIME **must** be in the following format: `HH-mm`, in **24-hour format**.                                                                                    |
+| **d/**    | DESCRIPTION       | Description of appointment       | d/3rd counselling session          | DESCRIPTION can take any value up to **100 characters** long, and **cannot be blank**.                                                                           |
+| --        | APPOINTMENT_INDEX | Index of appointment in the list | --                                 | APPOINTMENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the appointment list.                                                 |
+| **g/**    | CATEGORY          | Category of search               | g/appointments                     | CATEGORY **must** be one of the following three values: **students**, **appointments**, **all**.                                                                 |
+
 
 <div markdown="block" class="alert alert-info">
 
