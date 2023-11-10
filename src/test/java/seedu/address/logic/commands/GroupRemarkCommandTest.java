@@ -4,9 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.*;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
@@ -24,100 +22,78 @@ import static seedu.address.logic.commands.AddGroupMeetingTimeCommand.MESSAGE_SU
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
-public class AddGroupMeetingTimeCommandTest {
+public class GroupRemarkCommandTest {
     Group validGroupWithMeeting = new GroupBuilder().withTimeIntervalList(VALID_TIME_MON).build();
     Group validGroup = new GroupBuilder().build();
 
     @Test
+    public void constructor_nullGroup_nullRemark_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new GroupRemarkCommand(null, null));
+    }
+
+    @Test
     public void constructor_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddGroupMeetingTimeCommand(null, null));
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK);
+        assertThrows(NullPointerException.class, () -> new GroupRemarkCommand(null, groupRemark));
     }
 
     @Test
-    public void execute_groupWithNoMeeting_groupTimeIntervalAdditionSuccess() throws Exception {
+    public void constructor_nullRemark_throwsNullPointerException() {
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK);
+        assertThrows(NullPointerException.class, () -> new GroupRemarkCommand(validGroup.getGroupName(), null));
+    }
+
+    @Test
+    public void execute_addGroupRemarkSuccess() throws Exception {
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
+        assertEquals(" ", validGroup.getGroupRemark().toString());
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK);
+        CommandResult commandResult = new GroupRemarkCommand(validGroup.getGroupName(), groupRemark).execute(modelStub);
 
-        ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
-        validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-
-        assertFalse(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_TUE)));
-
-        CommandResult commandResult = new AddGroupMeetingTimeCommand(validGroup, validTimeInterval).execute(modelStub);
-
-        // Time interval has been added
-        assertTrue(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_TUE)));
+        // Group remark has been added
+        assertEquals(VALID_GROUP_REMARK, validGroup.getGroupRemark().toString());
     }
 
     @Test
-    public void execute_groupWithMeeting_groupTimeIntervalAdditionSuccess() throws Exception {
+    public void execute_groupWithMeeting_addGroupRemarkSuccess() throws Exception {
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroupWithMeeting);
+        assertEquals(" ", validGroupWithMeeting.getGroupRemark().toString());
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK);
+        CommandResult commandResult = new GroupRemarkCommand(validGroupWithMeeting.getGroupName(), groupRemark).execute(modelStub);
 
-        ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
-        validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-
-        assertTrue(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
-        assertFalse(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_TUE)));
-
-        CommandResult commandResult = new AddGroupMeetingTimeCommand(validGroupWithMeeting, validTimeInterval).execute(modelStub);
-
-        // Time interval has been added
-        assertTrue(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
-        assertTrue(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_TUE)));
+        // Group remark has been added
+        assertEquals(VALID_GROUP_REMARK, validGroupWithMeeting.getGroupRemark().toString());
     }
 
     @Test
-    public void execute_multipleGroupTimeIntervals_additionSuccess() throws Exception {
+    public void execute_alphanumericSpecialCharacters_addGroupRemarkSuccess() throws Exception {
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
+        assertEquals(" ", validGroup.getGroupRemark().toString());
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK_SPECIAL);
+        CommandResult commandResult = new GroupRemarkCommand(validGroup.getGroupName(), groupRemark).execute(modelStub);
 
-        ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
-        validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
-        validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-        validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_WED));
-
-
-        assertFalse(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
-        assertFalse(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_TUE)));
-        assertFalse(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_WED)));
-
-        CommandResult commandResult = new AddGroupMeetingTimeCommand(validGroupWithMeeting, validTimeInterval).execute(modelStub);
-
-        // Time interval has been added
-        assertTrue(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
-        assertTrue(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_TUE)));
-        assertTrue(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_WED)));
-
+        // Group remark has been added
+        assertEquals(VALID_GROUP_REMARK_SPECIAL, validGroup.getGroupRemark().toString());
     }
 
     @Test
-    public void execute_duplicateTimeInterval_groupTimeIntervalAdditionFail() throws Exception {
-        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroupWithMeeting);
+    public void execute_unicodeCharacters_addGroupRemarkSuccess() throws Exception {
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
+        assertEquals(" ", validGroup.getGroupRemark().toString());
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK_UNICODE);
+        CommandResult commandResult = new GroupRemarkCommand(validGroup.getGroupName(), groupRemark).execute(modelStub);
 
-        ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
-        invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
-
-        CommandResult expectedOutput = new CommandResult(String.format(MESSAGE_SUCCESS
-                + "There is a clash in these input timings with your existing timings:\n"
-                + "MON 1300 - MON 1400 " + "\n", Messages.format(validGroupWithMeeting)));
-        AddGroupMeetingTimeCommand actualOutput = new AddGroupMeetingTimeCommand(validGroupWithMeeting, invalidTimeInterval);
-
-        assertEquals(expectedOutput, actualOutput.execute(modelStub));
+        // Group remark has been added
+        assertEquals(VALID_GROUP_REMARK_UNICODE, validGroup.getGroupRemark().toString());
     }
 
     @Test
-    public void execute_overlappingTimeInterval_groupTimeIntervalAdditionFail() throws Exception {
-        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroupWithMeeting);
-
-        ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
-        invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON_2));
-
-        CommandResult expectedOutput = new CommandResult(String.format(MESSAGE_SUCCESS
-                + "There is a clash in these input timings with your existing timings:\n"
-                + "MON 1330 - MON 1430 " + "\n", Messages.format(validGroupWithMeeting)));
-        AddGroupMeetingTimeCommand actualOutput = new AddGroupMeetingTimeCommand(validGroupWithMeeting, invalidTimeInterval);
-
-        assertEquals(expectedOutput, actualOutput.execute(modelStub));
+    public void execute_validCharacters_addGroupRemarkSuccess() throws CommandException {
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK_OTHERS);
+        CommandResult commandResult = new GroupRemarkCommand(validGroup.getGroupName(), groupRemark).execute(modelStub);
+        assertEquals(VALID_GROUP_REMARK_OTHERS, validGroup.getGroupRemark().toString());
     }
-
 
     /**
      * A default model stub that has all methods failing.
@@ -301,22 +277,17 @@ public class AddGroupMeetingTimeCommandTest {
         }
 
         /**
-         * Adds meeting time to a group.
+         * Adds remarks to a group.
          *
-         * @param toAdd The group to be modified.
-         * @param toAddTime ArrayList of Time Intervals to be added.
-         * @return String showing added meeting times and clashes (if any).
-         * @throws CommandException if the times cannot be added.
+         * @param groupName Group to be modified.
+         * @param groupRemark Remark to be added.
+         * @return The modified group.
+         * @throws CommandException if the remark cannot be added.
          */
-        @Override
-        public String addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
-            requireNonNull(toAdd);
-            Group groupInModel = this.group;
-            try {
-                return groupInModel.addTime(toAddTime);
-            } catch (CommandException e) {
-                throw new CommandException(e.getMessage());
-            }
+        public Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException {
+            Group group = this.group;
+            group.setGroupRemark(groupRemark);
+            return group;
         }
     }
 }

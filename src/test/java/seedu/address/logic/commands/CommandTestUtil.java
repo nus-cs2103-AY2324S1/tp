@@ -79,6 +79,11 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+    public static final String VALID_GROUP_REMARK = "quiz tomorrow";
+    public static final String VALID_GROUP_REMARK_SPECIAL = "sdd&IFUDH%f*89fd*(F!899#$#%\"'`";
+    public static final String VALID_GROUP_REMARK_UNICODE = "你好";
+    public static final String VALID_GROUP_REMARK_OTHERS = "gU4&😊!";
+
 
     /**
      * Executes the given {@code command}, confirms that <br>
