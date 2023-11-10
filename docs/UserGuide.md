@@ -401,7 +401,7 @@ Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 <box type="warning" header="**Caution**">
-    There is <b>NO</b> duplicate handling for the name of the interview in `editi` and attempting to do so will give an error message.
+    There is <b>NO</b> duplicate handling for the name of the interview in <code>editi</code> and attempting to do so will give an error message.
 </box>
 
 Example:
