@@ -95,7 +95,7 @@ public class TypicalPersons {
         return ab;
     }
 
-    public static  AddressBook getTypicalAddressBookPayroll() {
+    public static AddressBook getTypicalAddressBookPayroll() {
         AddressBook ab = new AddressBook();
         ab.addPerson(PAYROLL);
         return ab;
