@@ -250,6 +250,7 @@ Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 * For financial plans and tags, any substring will be matched e.g. `Senior` will match `SuperSenior`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`.
+* Upon successful execution of the command, only the relevant contact details will be reflected in the **Contacts list**. The relevant appointment details will also be updated in the **Appointments list**.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -411,7 +412,7 @@ UNOFAS data are saved in the hard disk automatically after any command that chan
 UNOFAS data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, UNOFAS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, UNOFAS will discard all data when a command is executed with the corrupted file and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -431,6 +432,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **Long names** for Financial Plans and Tags may not be fully visible.
+3. **When sorting the list**, we have chosen to not implement returning sorted list to original ordering due to the lack of necessity. However, due to feedback, we will implement this in the next release to enable users to return list to original order should they wish to.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary

@@ -1,3 +1,4 @@
+//@@author AlyssaPng
 package seedu.address.model.person.gatheremail;
 
 import seedu.address.model.person.Person;

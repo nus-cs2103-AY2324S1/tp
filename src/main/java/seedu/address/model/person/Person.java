@@ -117,6 +117,7 @@ public class Person {
                 result.append(email);
                 break; // Should only add email to result once
             }
+            assert result.length() == 0 : "Results string should be empty";
         }
         return result.toString();
     }
@@ -134,7 +135,9 @@ public class Person {
                 result.append(email);
                 break; // Should only add email to result once
             }
+            assert result.length() == 0 : "Results string should be empty";
         }
+
         return result.toString();
     }
 

@@ -20,6 +20,8 @@ public class ConfirmOverrideCommand extends Command {
      * @param personToEdit person whos old appointment will be replaced by the new appointment
      */
     public ConfirmOverrideCommand(Appointment appointment, Person personToEdit) {
+        requireNonNull(appointment);
+        requireNonNull(personToEdit);
         this.appointment = appointment;
         this.personToEdit = personToEdit;
     }

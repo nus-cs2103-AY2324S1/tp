@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.FINANCIAL_PLAN_DESC_1;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_FINANCIAL_PLAN_DESC;
@@ -7,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FINANCIAL_PLAN_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_PLAN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -50,5 +53,13 @@ public class GatherCommandParserTest {
         GatherEmailByTag tagPrompt = new GatherEmailByTag(VALID_TAG_HUSBAND);
         GatherCommand tagExpectedGatherCommand = new GatherCommand(tagPrompt);
         assertParseSuccess(parser, TAG_DESC_HUSBAND, tagExpectedGatherCommand);
+    }
+
+    @Test
+    public void removePrefix_success() {
+        // removes for Financial Plan
+        assertEquals(VALID_FINANCIAL_PLAN_1, parser.removePrefix(FINANCIAL_PLAN_DESC_1, PREFIX_FINANCIAL_PLAN));
+        // removes for Tag
+        assertEquals(VALID_TAG_HUSBAND, parser.removePrefix(TAG_DESC_HUSBAND, PREFIX_TAG));
     }
 }
