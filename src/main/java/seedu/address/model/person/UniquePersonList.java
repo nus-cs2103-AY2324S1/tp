@@ -93,6 +93,43 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Set the person as paid in the list.
+     * The person must exist in the list.
+     */
+    public void setPaid(Person toPaid) {
+        requireNonNull(toPaid);
+
+        int index = internalList.indexOf(toPaid);
+        Person p = new Person(toPaid.getName(), toPaid.getPhone(), toPaid.getEmail(), toPaid.getAddress(),
+                toPaid.getSubject(), toPaid.getDay(), toPaid.getBegin(),
+                toPaid.getEnd(), true, toPaid.getPayRate());
+        if (index != -1) {
+            internalList.set(index, p);
+        }
+    }
+
+    public boolean getPaid(Person toGet) {
+        int index = internalList.indexOf(toGet);
+        return internalList.get(index).getPaid();
+    }
+
+    /**
+     * Set the person as not paid in the list.
+     * The person must exist in the list.
+     */
+    public void setUnPaid(Person toUnPaid) {
+        requireNonNull(toUnPaid);
+
+        int index = internalList.indexOf(toUnPaid);
+        Person p = new Person(toUnPaid.getName(), toUnPaid.getPhone(), toUnPaid.getEmail(), toUnPaid.getAddress(),
+                toUnPaid.getSubject(), toUnPaid.getDay(), toUnPaid.getBegin(),
+                toUnPaid.getEnd(), false, toUnPaid.getPayRate());
+        if (index != -1) {
+            internalList.set(index, p);
+        }
+    }
+
+    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
