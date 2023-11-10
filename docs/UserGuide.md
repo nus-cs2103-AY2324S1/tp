@@ -90,12 +90,12 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 
 **:information_source: Notes about the command format:**<br>
 
-| Notation         | Description                                                   | Example Command                                                     | Example Usage                        |
-|------------------|---------------------------------------------------------------|---------------------------------------------------------------------|--------------------------------------|
-| `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                    | `delete 1`                           |
+| Notation         | Description                                                   | Example Command                                                 | Example Usage                        |
+|------------------|---------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------|
+| `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                | `delete 1`                           |
 | `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANG] [tl/TRANSLATION_LANG]` | `add w/Hello t/你好`                   |
- | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                                 | `find hello, bye`                    |
-| `...`            | Parameter that will not be used                               | `... help ...`                                                      | `abc help 123` is the same as `help` |
+ | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                             | `find hello, bye`                    |
+| `...`            | Parameter that will not be used                               | `help ...`                                                      | `abc help 123` is the same as `help` |
 
 </div>
 
@@ -209,7 +209,7 @@ Examples:
 Shows the list of flash cards with both the original word and the corresponding translation.
 * Lists all the flash cards saved
 
-[Command Format](#commands): `... list ...`
+[Command Format](#commands): `list ...`
 > All the saved flash cards, regardless of the review date, are listed.
 
 Output:
@@ -233,7 +233,7 @@ Displays the flash cards of all the words to be reviewed that day
 * The review command will present flash cards selected by Flash Lingo based on your level, utilizing the Leitner system.
 * If you wish to view all your saved flash cards without the [Leitner system's](https://en.wikipedia.org/wiki/Leitner_system#) selection criteria, please use the `list` command.
 
-[Command Format](#commands): `... review ...`
+[Command Format](#commands): `review ...`
 
 Output:
 ![img.png](images/ReviewSuccess.png)
@@ -247,7 +247,7 @@ Output:
 
 Starts a new review session.
 
-[Command Format](#commands): `... start ...`
+[Command Format](#commands): `start ...`
 
 Output: `Review Session has been started.`
 
@@ -260,7 +260,7 @@ Output: `Review Session has been started.`
 
 Ends the current review session and returns to the main menu.
 
-[Command Format](#commands): `... end ...`
+[Command Format](#commands): `end ...`
 
 Output: `Review Session has ended.`
 
@@ -283,7 +283,7 @@ Examples:![img.png](images/Reveal.png)
 Marks the word as memorized and advances the word into the next level. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
-[Command Format](#commands): `... yes ...`
+[Command Format](#commands): `yes ...`
 
 Output: ![img.png](images/Yes.png)
 
@@ -295,7 +295,7 @@ Output: ![img.png](images/Yes.png)
 Marks the word as not grasped and leaves it in its current retention stage. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
-[Command Format](#commands): `... no ...`
+[Command Format](#commands): `no ...`
 
 Output: ![img.png](images/No.png)
 
@@ -310,7 +310,7 @@ To help track user progress and inspire continued learning, this command offers 
 * Remembered Words: Shows the number of terms you have successfully retained in this session.
 * Success Rate: Presents a percentage representing your learning success for this session, motivating you to keep improving.
 
-[Command Format](#commands): `... stats ...`
+[Command Format](#commands): `stats ...`
 
 Output:
 
@@ -364,7 +364,7 @@ Switches between light and dark appearance of UI dashboard.
 * The theme will be saved and loaded when Flashlingo is restarted.
 * Default color theme is the **light theme**.
 
-[Command Format](#commands): `... switch ...`
+[Command Format](#commands): `switch ...`
 
 Output:
 
@@ -376,13 +376,13 @@ Output:
 
 Opens a browser with the help page (User Guide). Pressing the `Help` button and then clicking `Help F1` will achieve the same effect.
 
-[Command Format](#commands): `... help ...`
+[Command Format](#commands): `help ...`
 
 ### Exiting the program : `exit`
 
 Safely terminates the Flashlingo application and closes the graphical user interface (GUI).
 
-[Command Format](#commands): `... exit ...`
+[Command Format](#commands): `exit ...`
 
 Example:
 * Input `exit` to end your session and close the application
