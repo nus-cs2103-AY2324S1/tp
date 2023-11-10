@@ -620,11 +620,13 @@ Format: `undo`
 
 </div>
 
-### Clearing all entries : `reset`, followed by `reset confirm`
+### Clearing all entries : `reset` and `reset confirm`
 
 Clears all your entries from the address book.
 
-Format: `reset`, followed by `reset confirm`
+Format:</br> 
+1. `reset`, followed by `reset confirm`
+2. `reset confirm`, followed by `reset confirm` again
 
 <div markdown="block" class="alert alert-info">
 
