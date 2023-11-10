@@ -193,6 +193,11 @@ Invalid Examples:
 * `find Roy L`
 * `find RoyLee`
 
+![Find feature](images/findFeature.png)
+<p align="center">
+<em>Find student Alex Yeoh</em>
+</p>
+
 #### 2.2.5 Assigning risk level to Student: `tag`
 
 Tags a student to a specific risk level.
@@ -310,6 +315,11 @@ Invalid examples:
 * `filter 16-10-2023` (date is in wrong format)
 * `filter 16 October 2023` (date is in wrong format)
 
+![Filter feature](images/filterFeature.png)
+<p align="center">
+<em>Filter appointments on 15 December 2023</em>
+</p>
+
 ### 2.4 Others
 
 #### 2.4.1 Viewing all Students and/or Appointments: `view`
@@ -320,7 +330,7 @@ Format: `view g/CATEGORY`
 
 **Parameters**:
 1. Category
-   - Must be 'students', 'appointments' or 'all'
+   - Must be `students`, `appointments` or `all`
 
 Examples:
 * `view g/all`
@@ -358,8 +368,25 @@ _Details coming soon ..._
 
 ## 3. Frequently Asked Questions (FAQ)
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WellNUS home folder.
+1. **How do I transfer my data to another Computer ?**<br/>
+Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WellNUS home folder.
+
+2. **How can I view my appointments scheduled today ?**<br/>
+You can use the filter command with today's date. 
+Here's an example: `filter 2023-12-07`. Replace `2023-12-07` with today's date in `yyyy-mm-dd` format.
+
+3. **How do I clear all data in WellNUS ?**<br/>
+To clear all data, use the `clear` command. This resets the storage, deleting all appointments and students. 
+Exercise caution, as this action cannot be undone.
+
+4. **How do I exit the WellNUS application ?**<br/>
+To exit the program, use the exit command. This closes the application.
+
+5. **I am unsure of a new student's risk level, what should I put ?**<br/>
+If you're unsure of a new student's risk level, you can leave the risk level parameter blank when adding the student using the add command. 
+WellNUS is designed to handle optional parameters. Here's an example:
+`add n/John Doe c/98172645 a/821, Bishan, #02-124`
+You can always update the risk level later using the tag command when more information becomes available.
 
 --------------------------------------------------------------------------------------------------------------------
 
