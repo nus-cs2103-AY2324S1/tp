@@ -9,16 +9,34 @@ Tran$act - The transaction recorder is a powerful software tool tailored to meet
 
 Given below are my contributions to the project.
 
+### **Code Contributions**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=alains87&breakdown=true)
+
 * **New Feature**:
+    - Implemented the `exit`, `export`, `clear`, `clearstaff`, and `cleartransaction` commands, enhancing the command-line functionality.
 
-* **Code contributed**:
+* **Code Contributions**:
+    - Created the transaction class, incorporating features like Date, Description, Amount, TransactionID, and TransactionType.
+    - Developed the storage functionalities, enabling the import and export of transactions in CSV format.
+    - Established the TransactionBook class and ReadOnlyTransactionBook class, ensuring data integrity and modifiability.
+    - Modified the parser to recognize various error inputs, providing specific exception warnings.
+        - Improved date recognition, now detecting errors like incorrect formats or non-existent dates.
+    - Modified the GUI and CSS for an improved user interface, adding buttons like `exit`, `clearstaff`, and `cleartransaction`.
 
-* **Project management**:
+* **Project Management**:
+    - Orchestrated the development process to ensure smooth integration of features.
 
-* **Enhancements to existing features**:
-
+* **Enhancements to Existing Features**:
+    - Enhanced the GUI for better aesthetics and user convenience.
+    - Upgraded the parser to recognize various error inputs, providing specific exception warnings.
+        - Improved date recognition, now detecting errors like incorrect formats or non-existent dates.
+        - All types of exception message related to transaction's amount, id, date, description.
 * **Documentation**:
-
+    - Contributed to the User Guide, providing clear instructions on features and functionalities.
+    - Contributed to the Develper Guide on User Cases and User Story. 
 * **Community**:
+    - Collaborated with team members to address issues and optimize code.
 
 * **Tools**:
+    - Implemented crucial commands and features such as `exit`, `clear`, `clearstaff`, and `cleartransaction`.
+
+Feel free to share any specific achievements or challenges you'd like to highlight!
