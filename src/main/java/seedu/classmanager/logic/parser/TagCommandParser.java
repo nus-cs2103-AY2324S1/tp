@@ -50,11 +50,6 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         parseTags(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(this::setTags);
 
-        if (this.tags == null) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
-        }
-
         String action = argMultimap.getValue(PREFIX_WILDCARD).orElse("");
 
         switch (action) {
@@ -76,9 +71,7 @@ public class TagCommandParser implements Parser<TagCommand> {
      */
     private Optional<Set<Tag>> parseTags(Collection<String> tags) throws ParseException {
         assert tags != null;
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
+
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }

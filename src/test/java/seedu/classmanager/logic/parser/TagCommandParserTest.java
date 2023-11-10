@@ -47,8 +47,7 @@ public class TagCommandParserTest {
             MESSAGE_INVALID_FORMAT);
 
         // no student number and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
-
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
