@@ -163,18 +163,6 @@ chronological order.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
 should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP)
-model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook`
-to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-This approach is also used for `FinancialPlan`. The multiple `Tag` and `FinancialPlan` objects are stored in their
-respective `HashSet` where each object in the `HashSet` will have a corresponding hashcode.
-
-</div>
-
-
 ### Storage component
 
 **API** :
@@ -780,7 +768,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**U7: Schedule appointment for a client** \
+**U7: Sort client's contacts** \
+**Precondition:** NIL
+
+**MSS**
+
+1. User requests to list clients
+2. AddressBook shows a list of clients
+3. User requests to sort list of clients (by appointment time or name)
+4. AddressBook updates ordering of clients' contacts.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+  Use case ends.
+
+* 3a. User enters the wrong details.
+    * 3a1. System shows an error message.
+      Use case resumes at step 1.
+
+**U8: Schedule appointment for a client** \
 **Precondition:** Client must exist before scheduling appointment.
 
 **MSS**
@@ -805,15 +814,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System shows a warning message.
       Use case resumes at step 4.
 
-**U8: Sort client's contacts** \
-**Precondition:** NIL
+**U9: Complete appointment for a client** \
+**Precondition:** Appointment and client must exist before completing appointment.
 
 **MSS**
 
-1. User requests to list clients
-2. AddressBook shows a list of clients
-3. User requests to sort list of clients (by appointment time or name)
-4. AddressBook updates ordering of clients' contacts.
+1.  User requests to list clients
+2.  AddressBook shows a list of clients
+3.  User requests to complete appointment for client via the `complete` command
+4.  AddressBook removes appointment from appointment list and client's contact card
 
     Use case ends.
 
@@ -826,7 +835,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System shows an error message.
       Use case resumes at step 1.
 
-*{More to be added}*
+* 3b. User does not have an existing appointment scheduled.
+    * 3b1. System shows a warning message.
+      Use case ends.
+
+* 3c. User does not exist according to index provided.
+    * 3c1. System shows a warning message.
+      Use case ends.
 
 
 ### Non-Functional Requirements

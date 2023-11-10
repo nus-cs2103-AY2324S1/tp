@@ -250,6 +250,7 @@ Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 * For financial plans and tags, any substring will be matched e.g. `Senior` will match `SuperSenior`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`.
+* Upon successful execution of the command, only the relevant contact details will be reflected in the **Contacts list**. The relevant appointment details will also be updated in the **Appointments list**.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
