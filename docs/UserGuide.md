@@ -60,46 +60,68 @@ These are symbols we will be using to highlight certain information to you.
 
 --------------------------------------------------------------------------------------------------------------------
 ## User Interface (UI)
+
 These are the two different screens you will be interacting with in Foster Family. 
 
 ### The Main Window 
+
 ![Ui](images/Ui.png)
+
 This is the main view that welcomes you when you first open up Foster Family.
 
+<br>
+
 ### The Profile Page 
+
 ![Profile](images/screenshots/ProfilePage.png)
+
 This is the profile view that you can use to add a fosterer or edit an existing fosterer. 
 
 <br>
 
 #### How to open profile
+
 There are 2 ways you can use to open this profile page. 
 1. Enter <code>add</code> to view an _empty_ profile page to [add](#adding-a-fosterer-through-the-profile-page-add) a fosterer.
 2. Enter either <code>edit INDEX</code> or <code>view INDEX</code> to [edit](#editing-a-fosterers-detail-through-the-profile-page-edit) or [view](#viewing-a-fosterers-detail-view) the fosterer at index <code>INDEX</code> in Foster Family.
 
 Let's say you want to open a profile of a fosterer name Benson Meie who is currently on index 1. 
+
 ![Benson](images/screenshots/BensonMeieView.png)
+
 <br>
 
-Simply enter <code>view 1</code> like the example above, which opens the profile page of the fosterer at index 1, Benson Meie. 
+Enter <code>view 1</code> like the example above, which opens the profile page of the fosterer at index 1, Benson Meie. 
+
+<br>
 
 ![Example profile](images/screenshots/EditExample.png)
 
 <br>
 
 #### Navigating through fields
+
 Typing in the name of the field you want to edit, or substrings of the field, directs your cursor to the textbox, allowing you to make changes.
 
 ![Before typing name](images/screenshots/BeforeEnteringName.png)
 
+<br>
+
 In the example above, entering <code>name</code>, or a substring of name like <code>nam</code> brings the focus to the name field.
 
+<br>
+
 ![Profile navigate field](images/screenshots/NavigatingFields.png)
+
+<br>
 
 After you are done editing, pressing the Enter key brings your cursor back to the command box with your new changes intact. <br>
 If you want to revert back to the original value of the field while editing on the textbox, press the Esc key to cancel the changes and bring your cursor back to the command box. 
 
+<br>
+
 ![Cursor back to commandbox](images/screenshots/CursorBackToCommandbox.png)
+
 In the example above, after changing name from 'Meie' to 'Mei' the Enter key was pressed. 
 
 The same process can be applied to other fields.
@@ -107,35 +129,50 @@ The same process can be applied to other fields.
 <br>
 
 #### Saving changes
+
 Entering <code>save</code> saves the changes you made into the storage.
 
 Let's say after changing the name, you want to save your changes.
+
 ![Cursor back to commandbox](images/screenshots/SaveCommandBefore.png)
-<br/>
+
+<br>
+
 Key in <code>save</code> and press Enter to save the changes. 
-<br/>
+
+<br>
+
 ![Save command after](images/screenshots/SaveCommandAfter.png)
-<br/>
+
 This saves the changes you made and updates the details of a fosterer, or adds a new fosterer with the input details (depending on the command used to open the profile page). 
 
 <br>
 
 #### Exiting the profile page
+
 Entering <code>exit</code> closes the profile page and leads you back to the main window.
 Attempting to exit without saving your changes will give you a warning message, advising you to save your changes. 
 
-**1. Changes are saved** <br/>
+<br>
+
+**1. Changes are saved**
+
 Let's say you have already saved your changes.
+
 ![Exit command saved before](images/screenshots/ExitCommandSavedBefore.png)
 
 <br>
 
 Type in <code>exit</code> and press Enter to close the profile page.
+
+<br>
+
 ![Exit command saved after](images/screenshots/ExitCommandSavedAfter.png)
 
 <br>
 
-**2. Changes are not saved** <br/>
+**2. Changes are not saved**
+
 Let's say you did not save your changes and entered <code>exit</code>. 
 
 ![Exit command not saved warning](images/screenshots/ExitCommandNotSavedWarning.png)
@@ -145,11 +182,11 @@ Let's say you did not save your changes and entered <code>exit</code>.
 If you press Enter again, your changes are discarded and you are led back to the main window.
 If you press Esc key, the exit is cancelled and you can continue working on the profile page.
 
-![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
 <br>
-The example above is the result of pressing the Esc key after you are warned.
 
-<br>
+![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
+
+The example above is the result of pressing the Esc key after you are warned.
 
 To learn more about **adding a new fosterer through the profile page**, refer to the section [Adding a fosterer through the profile page: add](#adding-a-fosterer-through-the-profile-page-add). <br>
 To learn more about **editing a fosterer through the profile page**, refer to the section [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-detail-through-the-profile-page-edit).
