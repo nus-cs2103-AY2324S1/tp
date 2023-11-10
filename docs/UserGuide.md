@@ -246,6 +246,7 @@ Valid cases:
 
 You cannot add duplicate fosterers. This is detected using the fosterer's name.<br>
 e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne  (multiple spaces)  tay"</code>.
+
 </div> 
 
 
@@ -348,13 +349,14 @@ Parameters:
 
 Only specific commands are available to you in the profile page. 
 The list of available commands are <code>help</code>, <code>save</code>, and <code>exit</code>. 
+
 </div> 
 
 Examples:
 * `list` followed by `view 2`
   * views the profile of the 2nd fosterer in the address book.
 
-To learn more about profile page, please refer to the section [User Interface: the Profile View](#the-profile-view). 
+To learn more about profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
 
 #### Editing a fosterer’s details in profile page:
 
@@ -372,7 +374,7 @@ Example:
 
 Saves changes in details of the fosterer which you have made in the profile page.
 
-<div markdown="span" class="alert alert-danger">
+<div markdown="block" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
@@ -438,6 +440,7 @@ Examples:
 
 Edit may cause information loss. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
+
 </div>
 
 
@@ -473,8 +476,10 @@ profile page.
 <div markdown="span" class="alert alert-warning">
 
 **:warning: Caution:**<br>
+
 Edit may cause information loss. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
+
 </div>
 <br/>
 
@@ -491,6 +496,7 @@ Format: `delete INDEX [INDEX...]`
 <div markdown="span" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
+
 The index of a fosterer is not fixed. It is relative to the current list of fosterers you are handling.
 
 </div>
@@ -503,25 +509,28 @@ Parameters:
 
 <div markdown="span" class="alert alert-primary">
 
-**bulb: Tip:**<br>
+**:bulb: Tip:**<br>
+
 You can delete multiple fosterers at once.<br> 
 
-* Each index needs to be separated by a white space.<br> 
-
+* Each index needs to be separated by a white space.<br>
 * Any duplicates and extra white spaces will be ignored.
+
 </div>
 
 Examples:
 * `list` followed by `delete 2` 
-  * deletes the 2nd fosterer in the address book.
+  * deletes the 2nd fosterer in your address book.
 * `find Jerry` or `list Jerry`, followed by `delete 1`
-  * deletes the 1st fosterer in the result list.
+  * deletes the 1st fosterer in the result list of your `find` / `list` query
 * `list` followed by `delete 1 3 7` 
-  * deletes the 1st, 3rd and 7th fosterers in the address book.
+  * deletes the 1st, 3rd and 7th fosterers in your address book.
     ![Delete](images/screenshots/Delete.png)
+In this example, Alex, Bernice and Charlotte are the fosterers deleted. <br>
+  
 
 * `list` followed by `delete 3 3 3 3` 
-  * deletes the 3rd fosterer in the address book.
+  * deletes the 3rd fosterer in your address book.
 
 ### Sorting fosterers: `sort`
 
@@ -551,16 +560,22 @@ Format: `stats avail`
 **:information_source: Notes about the command:**<br>
 
 All statistic commands are calculated based on the list currently displayed in your address book.<br>
-If you enter `find available` before `stats avail`, the resulting statistic will show that all listed fosterers are available. Hence, please ensure that the current list is the list you want your statistics to be calculated from.<br>
+In the example below, `find available` was first entered, resulting in a list of 2 available fosterers. <br>
+`stats avail` was then entered, and we see the resulting statistic reporting all listed fosterers as available. <br>
 
-![Stats](images/screenshots/StatsAllAvail.png)
+![Stats](images/screenshots/StatsAllAvail.png)<br>
+
+Therefore, please ensure that the current list is the list you want your statistics to be calculated from.<br>
 
 </div>
 
 Examples:
 * `list` followed by `stats avail` 
-  * calculates statistics of available fosterers, based on all fosterers in the address book.
-    ![Stats](images/screenshots/StatsAvail.png)
+  * calculates statistics of available fosterers, based on all fosterers in your address book.<br>
+  Here, your have 6 fosterers in your address book, and 3 of them are available to foster.
+
+    ![Stats](images/screenshots/StatsAvail.png)<br>
+
 
 * `find cat` followed by `stats avail` 
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
@@ -570,8 +585,10 @@ Examples:
 
 **:warning: Caution:**<br>
 
-Percentages may not add up to 100.00%.<br>
-Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat and 1 unknown. The calculated percentages will add up to 99.99%, instead of 100.00%. It can be assumed that each group takes up 1/3 out of 100.00%.
+For all stat commands, percentages may not add up to 100.00%.<br>
+Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat and 1 unknown.<br>
+* The calculated percentages will add up to 99.99%, instead of 100.00%.<br> 
+* Hence, it can be assumed that each group takes up 1/3 of 100.00%.
 
 ![Stats](images/screenshots/StatsTotalPercent.png)
 
@@ -584,8 +601,10 @@ Format: `stats current`
 
 Examples:
 * `list` followed by `stats current` 
-  * calculates statistics of current fosterers, based on all fosterers in the address book.
-  ![Stats](images/screenshots/StatsCurrent.png)
+  * calculates statistics of current fosterers, based on all fosterers in your address book. <br>
+  Here, you have 6 fosterers in your address book, and 2 of them are currently fostering.
+  ![Stats](images/screenshots/StatsCurrent.png)<br>
+
 
 * `find dog` followed by `stats current`
   * calculates statistics of current fosterers, based on fosterers who are either currently fostering a dog,  or are able to foster a dog.
@@ -597,8 +616,10 @@ Format: `stats housing`
 
 Examples:
 * `list` followed by `stats housing`
-  * calculates housing statistics based on all fosterers in the address book.
-    ![Stats](images/screenshots/StatsHousing.png)
+  * calculates housing statistics based on all fosterers in your address book.<br>
+  Here, out of the 6 fosterers in your address book, 3 live in HDBs, 1 live in a Condo, and 2 live in Landed properties.
+    ![Stats](images/screenshots/StatsHousing.png)<br>
+  
 
 * `find available` followed by `stats housing` 
   * calculates housing statistics based on fosterers who are available.
@@ -667,9 +688,10 @@ edits using our user-friendly interface instead.
 <div markdown="span" class="alert alert-warning">
 
 **:warning: Caution:**<br>
-* If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
 
-* If your changes create an [invalid fosterer](#adding-a-fosterer-through-the-main-window--add), the app will not start. You will have to rectify the error in order to restart the app. 
+* If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
+* If your changes create an [invalid fosterer](#adding-a-fosterer-through-the-main-window--add), the app will not start. You will have to rectify the error in order to restart the app.
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
