@@ -161,6 +161,19 @@ the `FilteredPersonList` to only display Persons whose `Day` field matches the s
     * Pros: Easier to implement.
     * Cons: Less abstraction.
 
+### Find Free Time feature
+
+The `FreeTimeCommand` extends the `Command` class. The command first finds timeslots when the user is busy by looking at
+the tutees' schedules inside the `UniquePersonList`. The TimeSlot class then finds free time based on the list of
+timeslots when the user is busy.
+
+The following sequence diagram shows how the add command works.
+![FreeTimeSequenceDiagram](images/FreeTimeSequenceDiagram.png)
+
+#### Design Considerations
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
