@@ -12,7 +12,7 @@ import seedu.address.testutil.TypicalPersons;
 public class PayrollStorageTest {
     @Test
     public void getPayrollWithStartDate_sameDate_returnPayroll() {
-        PayrollStorage payrollStorage = TypicalPersons.ALICE.getPayrollStorage();
+        PayrollStorage payrollStorage = TypicalPersons.PAYROLL.getPayrollStorage();
         Payroll payroll = payrollStorage.getLatestPayroll();
 
         assertEquals(payroll, payrollStorage.getPayrollWithStartDate(LocalDate.parse("2023-11-01")));

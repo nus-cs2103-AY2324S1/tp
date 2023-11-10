@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookPayroll;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +27,9 @@ class PayrollCommandTest {
 
     private Index index = Index.fromZeroBased(0);
     private NameContainsKeywordsPredicate name = new NameContainsKeywordsPredicate(Arrays.asList("Alice"));
+    private NameContainsKeywordsPredicate name2 = new NameContainsKeywordsPredicate(Arrays.asList("George"));
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model2 = new ModelManager(getTypicalAddressBookPayroll(), new UserPrefs());
     private Salary salary = new Salary("2000.00");
 
     @Test
@@ -63,13 +66,13 @@ class PayrollCommandTest {
     public void executeByIndex_differentStartDate_calculationSuccess() throws CommandException {
         Payroll payroll = new Payroll(salary,
                 "01/12/2023", "01/01/2023", "05/01/2023");
-        List<Person> lastFilteredList = model.getFilteredPersonList();
+        List<Person> lastFilteredList = model2.getFilteredPersonList();
         Person personToCalculate = lastFilteredList.get(index.getZeroBased());
         Payroll latestPayroll = personToCalculate.getLatestPayroll();
         personToCalculate.addPayroll(payroll);
 
         PayrollCommand payrollCommand = new PayrollCommand(index);
-        CommandResult commandResult = payrollCommand.execute(model);
+        CommandResult commandResult = payrollCommand.execute(model2);
         assertTrue(String.format(PayrollCommand.MESSAGE_ARGUMENTS,
                 latestPayroll.calculatePayrollString()).equals(commandResult.getFeedbackToUser()));
     }
@@ -98,14 +101,14 @@ class PayrollCommandTest {
     public void executeByName_differentStartDate_calculationSuccess() throws CommandException {
         Payroll payroll = new Payroll(salary,
                 "01/12/2023", "01/01/2023", "05/01/2023");
-        List<Person> lastFilteredList = model.getFilteredPersonList();
-        List<Integer> indexes = model.getIndexOfFilteredPersonList(name);
+        List<Person> lastFilteredList = model2.getFilteredPersonList();
+        List<Integer> indexes = model2.getIndexOfFilteredPersonList(name2);
         Person personToCalculate = lastFilteredList.get(indexes.get(0) - 1);
         Payroll latestPayroll = personToCalculate.getLatestPayroll();
         personToCalculate.addPayroll(payroll);
 
-        PayrollCommand payrollCommand = new PayrollCommand(name);
-        CommandResult commandResult = payrollCommand.execute(model);
+        PayrollCommand payrollCommand = new PayrollCommand(name2);
+        CommandResult commandResult = payrollCommand.execute(model2);
         assertTrue(String.format(PayrollCommand.MESSAGE_ARGUMENTS,
                 latestPayroll.calculatePayrollString()).equals(commandResult.getFeedbackToUser()));
     }
