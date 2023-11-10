@@ -30,7 +30,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             LocalDate.parse(trimmedArgs);
             return new FilterCommand(new AppointmentDateMatchesPredicate(trimmedArgs));
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date format. Please use the format yyyy-mm-dd.");
+            throw new ParseException("Invalid date format. Please use the format yyyy-MM-dd.");
         }
     }
 }

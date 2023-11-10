@@ -16,7 +16,7 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters and lists appointments by the specified "
-            + "date.\n" + "Parameters: DATE (in the format yyyy-mm-dd)\n"
+            + "date.\n" + "Parameters: DATE (in the format yyyy-MM-dd)\n"
             + "Example: " + COMMAND_WORD + " 2023-10-26";
 
     private final AppointmentDateMatchesPredicate predicate;
