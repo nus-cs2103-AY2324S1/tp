@@ -29,14 +29,13 @@ to be added soon
       - Add details and tweak the description for `add event`, `list events` and `delete event` commands.
     [#33(Click to view differences in UG)](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/33/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
     [#71(Click to view differences in UG)](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/71/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
-      - Add glossary part for UG, more hyperlinks for navigation and add more details for transferring data. [#169](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/169/)
+      - Add glossary part for UG, more hyperlinks for navigation, add more details for transferring data, and various adjustments to UG. [#169](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/169/)
       - Add the line for telling user not to modify the data file directly in FAQ part. [#167](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/167)
 
   - #### Contributions to the DG
 
-    Wrote the User Stories part in the DG [#10](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/10)
-
-    more to be added soon
+     - Wrote the User Stories part in the DG [#10](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/10)
+     - more to be added soon
 
   - #### Contributions to team-based tasks
 
