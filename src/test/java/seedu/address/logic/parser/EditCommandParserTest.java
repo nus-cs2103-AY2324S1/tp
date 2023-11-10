@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_FIELD_DESC;
@@ -15,18 +17,16 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MEDICAL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICALHISTORY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.EditCommand.COMMAND_WORD;
@@ -47,8 +47,8 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.MedicalHistory;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -62,7 +62,7 @@ public class EditCommandParserTest {
         // no field specified
         assertParseFailure(parser, PREFIX_NAME + VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
-        // no name or nric and no field specified
+        // no name or id and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
@@ -135,15 +135,16 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecifiedUsingID_success() {
         // phone
-        String userInput = COMMAND_WORD + NRIC_DESC_AMY + PHONE_DESC_AMY;
+
+        String userInput = COMMAND_WORD + ID_DESC_AMY + PHONE_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
-        EditCommand expectedCommand = new EditCommand(null, new Nric(VALID_NRIC_AMY), descriptor);
+        EditCommand expectedCommand = new EditCommand(null, new Id(VALID_ID_AMY), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = COMMAND_WORD + NRIC_DESC_AMY + EMAIL_DESC_AMY;
+        userInput = COMMAND_WORD + ID_DESC_AMY + EMAIL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(null, new Nric(VALID_NRIC_AMY), descriptor);
+        expectedCommand = new EditCommand(null, new Id(VALID_ID_AMY), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
     }
@@ -185,20 +186,21 @@ public class EditCommandParserTest {
     }
     @Test
     public void parse_invalidInput_throwsParseException() {
-        // Missing NAME or NRIC prefix
-        String invalidInput = COMMAND_WORD + INVALID_EMAIL_DESC;
+        // Missing NAME or ID prefix
+        String invalidInput = COMMAND_WORD + " " + INVALID_EMAIL_DESC;
+
         assertThrows(ParseException.class, () -> parser.parse(invalidInput));
     }
 
     @Test
     public void parse_validInput_returnsEditCommand() throws ParseException {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
-        // Valid input with NRIC
-        String validInputWithNric = COMMAND_WORD + NRIC_DESC_BOB + PHONE_DESC_BOB
+        // Valid input with ID
+        String validInputWithId = COMMAND_WORD + ID_DESC_BOB + PHONE_DESC_BOB
                 + NAME_DESC_BOB;
-        EditCommand expectedCommandWithNric = new EditCommand(new Name(VALID_NAME_BOB),
-                new Nric(VALID_NRIC_BOB), descriptor);
-        assertEquals(parser.parse(validInputWithNric), expectedCommandWithNric);
+        EditCommand expectedCommandWithId = new EditCommand(new Name(VALID_NAME_BOB),
+                new Id(VALID_ID_BOB), descriptor);
+        assertEquals(parser.parse(validInputWithId), expectedCommandWithId);
 
         // Valid input with Name
         String validInputWithName = COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY;

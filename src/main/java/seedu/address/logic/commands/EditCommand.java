@@ -22,9 +22,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
@@ -39,9 +39,9 @@ public class EditCommand extends UndoableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
             + ": Edits the details of the Patient identified "
-            + "by the full Name or NRIC of the Patient.\n"
+            + "by the full Name or ID of the Patient.\n"
             + "Existing values will be overwritten by the input values.\n"
-            + "Format: edit n/NAME or id/NRIC [Fields] ...\n"
+            + "Format: edit n/NAME or id/ID [Fields] ...\n"
             + "Example 1: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "91234567 \n"
@@ -49,14 +49,14 @@ public class EditCommand extends UndoableCommand {
             + PREFIX_NAME + "Alex Yeoh "
             + PREFIX_PHONE + "82786151 \n";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Patient: %1$s";
-    public static final String MESSAGE_UNDO_EDIT_PERSON_SUCCESS = "Undoing the Editing of Patient:  %1$s";
+    public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
+    public static final String MESSAGE_UNDO_EDIT_PATIENT_SUCCESS = "Undoing the Editing of Patient:  %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
             + "Fields include phone (p/), email (e/), "
             + "address (a/), appointment (ap/) and medical history (m/)\n"
-            + "Name and NRIC cannot be edited\n";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "INVALID name and/or NRIC!\n"
-            + "The given combination of Name and/or NRIC does not match any person in the Patient list.";
+            + "Name and ID cannot be edited\n";
+    public static final String MESSAGE_PATIENT_NOT_FOUND = "INVALID name and/or ID!\n"
+            + "The given combination of Name and/or ID does not match any person in the Patient list.";
 
     public static final String MESSAGE_NO_CHANGE = "There are no changes in the editable fields provided.\n";
 
@@ -66,28 +66,28 @@ public class EditCommand extends UndoableCommand {
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
 
     /**
-     * The original state of the person before it was edited by the command.
+     * The original state of the patient before it was edited by the command.
      */
     private Person originalPerson;
 
     /**
-     * The edited state of the person after it was modified by the command.
+     * The edited state of the patient after it was modified by the command.
      */
     private Person editedPerson;
 
     private final Name name;
-    private final Nric nric;
+    private final Id id;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param name of the person in the filtered person list to edit
-     * @param nric of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param name of the patient in the filtered patient list to edit
+     * @param id of the patient in the filtered patient list to edit
+     * @param editPersonDescriptor details to edit the patient with
      */
-    public EditCommand(Name name, Nric nric, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Name name, Id id, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(editPersonDescriptor);
         this.name = name;
-        this.nric = nric;
+        this.id = id;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -95,11 +95,11 @@ public class EditCommand extends UndoableCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getUnfilteredPersonList();
-        Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, nric, lastShownList);
+        Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, id, lastShownList);
 
         if (personOptional.isEmpty()) {
             logger.log(Level.WARNING, "Person not found for editing");
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+            throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
         }
 
         Person personToEdit = personOptional.get();
@@ -117,7 +117,7 @@ public class EditCommand extends UndoableCommand {
         logger.log(Level.INFO, "EditCommand executed successfully");
 
         model.addToHistory(this);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, Messages.format(editedPerson)));
     }
 
     @Override
@@ -126,7 +126,7 @@ public class EditCommand extends UndoableCommand {
         model.setPerson(editedPerson, originalPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_UNDO_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_UNDO_EDIT_PATIENT_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**
@@ -137,7 +137,7 @@ public class EditCommand extends UndoableCommand {
         assert personToEdit != null;
 
         Name name = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Nric nric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
+        Id id = editPersonDescriptor.getId().orElse(personToEdit.getId());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
@@ -146,7 +146,7 @@ public class EditCommand extends UndoableCommand {
         Set<MedicalHistory> updatedMedicalHistories =
                 editPersonDescriptor.getMedicalHistories().orElse((personToEdit.getMedicalHistories()));
 
-        return new Person(name, nric, updatedPhone, updatedEmail, updatedAddress,
+        return new Person(name, id, updatedPhone, updatedEmail, updatedAddress,
                 updatedAppointment, updatedMedicalHistories);
     }
 
@@ -163,31 +163,31 @@ public class EditCommand extends UndoableCommand {
 
         EditCommand otherEditCommand = (EditCommand) other;
 
-        // Check if both the name and nric are equal for equality check
+        // Check if both the name and id are equal for equality check
         boolean isNameEqual = Objects.equals(name, otherEditCommand.name);
 
-        boolean isNricEqual = Objects.equals(nric, otherEditCommand.nric);
+        boolean isIdEqual = Objects.equals(id, otherEditCommand.id);
 
 
-        return isNameEqual && isNricEqual;
+        return isNameEqual && isIdEqual;
     }
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("nric", nric)
+                .add("id", id)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the patient with. Each non-empty field value will replace the
+     * corresponding field value of the patient.
      */
     public static class EditPersonDescriptor {
         private Name name;
 
-        private Nric nric;
+        private Id id;
         private Phone phone;
         private Email email;
         private Address address;
@@ -203,7 +203,7 @@ public class EditCommand extends UndoableCommand {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setNric(toCopy.nric);
+            setId(toCopy.id);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -220,11 +220,11 @@ public class EditCommand extends UndoableCommand {
             this.name = name;
         }
 
-        public Optional<Nric> getNric() {
-            return Optional.ofNullable(nric);
+        public Optional<Id> getId() {
+            return Optional.ofNullable(id);
         }
-        public void setNric(Nric nric) {
-            this.nric = nric;
+        public void setId(Id id) {
+            this.id = id;
         }
 
         public void setPhone(Phone phone) {
@@ -290,7 +290,7 @@ public class EditCommand extends UndoableCommand {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(nric, otherEditPersonDescriptor.nric)
+                    && Objects.equals(id, otherEditPersonDescriptor.id)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
@@ -309,7 +309,7 @@ public class EditCommand extends UndoableCommand {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("nric", nric)
+                    .add("id", id)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)

@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICALHISTORY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -50,14 +50,14 @@ public class PersonTest {
 
         // name has trailing spaces, diff IC, all other attributes same -> return false
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces)
-                .withNric(ALICE.getNric().toString()).build();
+                .withId(ALICE.getId().toString()).build();
         assertFalse(BOB.isSamePerson(editedBob));
     }
 
     @Test
-    public void isSamePersonNric() {
-        // different nric, all other attributes same including name -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
+    public void isSamePersonId() {
+        // different id, all other attributes same including name -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withId(VALID_ID_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
     }
 
@@ -100,7 +100,7 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expectedAppt = ALICE.getAppointment().isPresent() ? ALICE.getAppointment().get().toString() : null;
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", nric=" + ALICE.getNric()
+        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", id=" + ALICE.getId()
                 + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
                 + ", appointment=" + expectedAppt
