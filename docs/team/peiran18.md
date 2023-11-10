@@ -41,3 +41,4 @@ My code contributions can be found here: [Reposense Report](https://nus-cs2103-a
 
 ## Contributions to the Developer Guide
 *Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.*
+

@@ -806,7 +806,7 @@ Given below are instructions to test the app manually.
 
             Expected: All applications with `PENDING` status are shown in the list.
       4. Test case: `find Dec`
-      
+
             Expected: All applications with `Dec` in the deadline are shown in the list.
       5. Test case: `find Shop`
 
