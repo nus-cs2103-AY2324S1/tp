@@ -120,32 +120,31 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="600" />
+<img src="images/ModelClassDiagram.png"/>
 
-The `Model` component,
-
-#### **AddressBook:**
+#### **AddressBook**
 - stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 - stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
+</div>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
-#### **TransactionBook:**
+#### **TransactionBook**
 - Introduces a new component, the `TransactionBook`, responsible for managing financial transactions.
 - Utilizes a `UniqueEntryMap` to associate transactions with their unique `transactionId`.
-- Each transaction consists of essential details:
-  - Amount
+- Each transaction consists of the following:
   - TransactionId
-  - Person description
-  - Date
   - TransactionType
+  - Description
+  - Amount
+  - Date
+  - Integer id of person (Optional)
 - Similar to the `AddressBook`, maintains an `ObservableList<Transaction>` that can be observed by external entities, facilitating automatic updates in the UI.
-
-</div>
 
 ### Storage component
 
@@ -154,14 +153,10 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png"/>
 
 The `Storage` component,
-#### **AddressBook:**
-- can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-- inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- can save address book data and user preference data in JSON format, and saves transaction book data in CSV format. It can also read them back into corresponding objects.
+- inherits from `AddressBookStorage`, `TransactionBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
-#### **TransactionBook:**
-- Can save both transaction book data and user preference data in CSV format, facilitating easy storage and retrieval.
-- Inherits from both `TransactionBookStorage` and `UserPrefStorage`, providing versatility in functionality usage.
-- Relies on some classes in the `Model` component since the `Storage` component is responsible for managing the persistence of objects within the `Model`.
+
 ### Common classes
 
 Classes used by multiple components are in the `transact.commons` package.
