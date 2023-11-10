@@ -436,7 +436,7 @@ Example:
     * `and` status is either interviewed `or` rejected.
     * `and` has a tag `intern`
 
-![Search](images/search-3.png)
+![Search](images/search-2.png)
 
 ### Deleting a person : `delete`
 

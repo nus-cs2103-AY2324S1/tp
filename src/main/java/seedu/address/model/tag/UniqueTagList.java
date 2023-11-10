@@ -37,7 +37,7 @@ public class UniqueTagList {
      * @param categoryToCheck The category to check for in the list. Must not be null.
      * @return True if a tag with the specified category is found in the list, false otherwise.
      */
-    public boolean contains(String categoryToCheck) {
+    public boolean containsTagCategory(String categoryToCheck) {
         requireNonNull(categoryToCheck);
         for (Tag tag : internalList) {
             if (tag.tagCategory.equals(categoryToCheck)) {
@@ -46,6 +46,24 @@ public class UniqueTagList {
         }
         return false;
     }
+
+    /**
+     * Checks if the list contains a tag with the specified name.
+     *
+     * @param nameToCheck The category to check for in the list. Must not be null.
+     * @return True if a tag with the specified name is found in the list, false otherwise.
+     */
+    public boolean containsTagName(String nameToCheck) {
+        requireNonNull(nameToCheck);
+        for (Tag tag : internalList) {
+            if (tag.tagName.equals(nameToCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
     /**
      * Adds a tag to the list.

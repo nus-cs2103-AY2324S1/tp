@@ -21,6 +21,7 @@ import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.testutil.TypicalPredicateLists;
 
 
@@ -50,6 +51,9 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_validTags_returnsDeleteCommand() {
         String userInput = " " + CliSyntax.PREFIX_TAG + TEST_TAG_NAME_STRING;
+
+        UniqueTagList uniqueTagList = new UniqueTagList();
+        uniqueTagList.add(new Tag("developer", "role"));
 
         // Create predicate based on the expected tag value
         TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(List.of(TEST_TAG_NAME_STRING));
