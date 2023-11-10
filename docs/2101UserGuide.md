@@ -247,7 +247,7 @@ The hours and remarks for each event is reflected here.
 
 <hr class="command-separator">
 
-### View Members of Event : `viewEvent`
+#### View Members of Event : `viewEvent`
 
 Lists all the members of a specified event index.
 
