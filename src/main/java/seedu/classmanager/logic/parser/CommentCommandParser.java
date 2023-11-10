@@ -26,7 +26,6 @@ public class CommentCommandParser implements Parser<CommentCommand> {
     public CommentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER, PREFIX_COMMENT);
-        String a = argMultimap.getPreamble();
         if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_COMMENT)
                 || !argMultimap.getPreamble().isEmpty()
                 || areAdditionalPrefixesPresent(args, PREFIX_STUDENT_NUMBER, PREFIX_COMMENT)) {

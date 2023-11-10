@@ -34,9 +34,13 @@ public interface Logic {
     ObservableList<Student> getFilteredStudentList();
 
     /** Returns view of selected student. */
-    ObservableList<Student> getSelectedStudent();
+    ObservableList<Student> getObservableSelectedStudent();
 
-    /** Sets a student to be selected to view class details. */
+    /**
+     * Sets a student to be selected to view class details.
+     *
+     * @param student to be set as the selected student.
+     */
     void setSelectedStudent(Student student);
 
     /**

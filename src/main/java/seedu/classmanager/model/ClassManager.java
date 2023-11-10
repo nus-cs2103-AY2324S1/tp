@@ -59,8 +59,8 @@ public class ClassManager implements ReadOnlyClassManager {
         requireNonNull(newData);
         setStudents(newData.getStudentList());
         resetSelectedStudent();
-        if (!newData.getSelectedStudent().isEmpty()) {
-            setSelectedStudent(newData.getSelectedStudent().get(0));
+        if (newData.getSelectedStudent() != null) {
+            setSelectedStudent(newData.getSelectedStudent());
         }
     }
 
@@ -82,6 +82,13 @@ public class ClassManager implements ReadOnlyClassManager {
     public Student getStudent(StudentNumber studentNumber) {
         requireNonNull(studentNumber);
         return students.getStudent(studentNumber);
+    }
+
+    /**
+     * Returns the selected student.
+     */
+    public Student getSelectedStudent() {
+        return students.getSelectedStudent();
     }
 
     /**
@@ -147,8 +154,8 @@ public class ClassManager implements ReadOnlyClassManager {
     }
 
     @Override
-    public ObservableList<Student> getSelectedStudent() {
-        return students.getSelectedStudent();
+    public ObservableList<Student> getObservableSelectedStudent() {
+        return students.getObservableSelectedStudent();
     }
 
     /**
