@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -8,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -313,5 +315,37 @@ public class ParserUtilTest {
     public void validateFinancialPlans_missingInputs_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.validateFinancialPlans(
                 Arrays.asList("", VALID_FINANCIAL_PLAN_1)));
+    }
+
+    @Test
+    void isValidDay_validDate_shouldReturnTrue() {
+        // November has 30 days
+        YearMonth yearMonth = YearMonth.of(2022, 11);
+        String date = "15-11-2022";
+        assertTrue(ParserUtil.isValidDay(yearMonth, date));
+    }
+
+    @Test
+    void isValidDay_invalidDate_shouldReturnFalse() {
+        // February has 28 days
+        YearMonth yearMonth = YearMonth.of(2022, 2);
+        String date = "31-02-2022";
+        assertFalse(ParserUtil.isValidDay(yearMonth, date));
+    }
+
+    @Test
+    void parseValidAppointmentDate_validDate_shouldParseSuccessfully() throws ParseException {
+        String validDateString = "15-11-2022 14:30";
+        try {
+            ParserUtil.parseValidAppointmentDate(validDateString);
+        } catch (ParseException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void parseValidAppointmentDate_invalidDate_shouldThrowParseException() {
+        String invalidDateString = "31-02-2022 14:30";
+        assertThrows(ParseException.class, () -> ParserUtil.parseValidAppointmentDate(invalidDateString));
     }
 }
