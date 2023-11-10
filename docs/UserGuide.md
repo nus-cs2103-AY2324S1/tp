@@ -5,6 +5,7 @@ title: User Guide
 
 Teaching Assistant Manager (TAManager) is a desktop application for managing teaching assistants, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAM can help you manage your teaching assistant tasks more efficiently than traditional GUI apps.
 
+## Table of Contents
 * Table of Contents
 {:toc}
 
@@ -59,6 +60,7 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
