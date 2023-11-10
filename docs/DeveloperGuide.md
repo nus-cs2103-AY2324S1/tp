@@ -521,13 +521,15 @@ digits (according to the international phone numbering plan).
 
 e.g. `p/90876534567890234567` is now an invalid phone number parameter.
 
-### Handle Invalid Fosterer - Corrupt Data File
+### Prevent Foster Family from crashing due to the Corruption of Data File 
 
 Currently, the Foster Family data is saved automatically as a JSON file, and in the case where the data file is updated directly
 and made invalid, Foster Family would either discard all data and start with an empty data file at the next run or the app would 
 not start at all. Even though it is advised in the user guide that user should not make changes to the data file directly, one 
 possible improvement to be made to prevent such incidents would be to either use a database with username and password authentication 
-or implement encryption.
+or implement encryption. An alternative solution would be to account for all the cases to handle an invalid fosterer entry in the data file 
+by editing the classes in `storage` (for example, `JsonAdaptedPerson`) such that the user would be informed of the steps to take 
+to rectify the errors made.
 
 ### Notes Feature as a Separate Command
 
