@@ -43,7 +43,7 @@ Given below are my contributions to the project.
     * <puml src="diagrams/DeletePersonTimeActivityDiagram.puml" alt="DeletePersonTimeActivityDiagram"/>
   
 * **Contributions beyond project team**
-    * Meticulously review other groups work and provided feedback on potential bugs and how they could imrpove their product [here](https://github.com/nicholastng010601/ped/tree/main/files).
+    * Meticulously review other groups work and provided feedback on potential bugs and how they could improve their product [here](https://github.com/nicholastng010601/ped/tree/main/files).
 
 
 [//]: # (* **Community**:)

@@ -1,7 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
@@ -27,7 +28,8 @@ public class AddGroupMeetingTimeCommandParser implements Parser<AddGroupMeetingT
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUPTAG, PREFIX_FREETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupMeetingTimeCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddGroupMeetingTimeCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUPTAG);

@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 
 import java.util.stream.Stream;
 
@@ -29,12 +29,10 @@ public class FindFreeTimeCommandParser implements Parser<FindFreeTimeCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindFreeTimeCommand.MESSAGE_USAGE));
         }
 
-//		return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_DURATION, PREFIX_GROUPTAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DURATION, PREFIX_GROUPTAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DURATION, PREFIX_GROUPTAG) ||
-            !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DURATION, PREFIX_GROUPTAG)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindFreeTimeCommand.MESSAGE_USAGE));
         }
         String groupName = argMultimap.getValue(PREFIX_GROUPTAG).get();

@@ -1,18 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 
-import javafx.util.Pair;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Duration;
-import seedu.address.model.FreeTime;
+import seedu.address.model.Model;
 import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
-import seedu.address.model.Model;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
-import seedu.address.model.person.Person;
 
 /**
  * Adds a person to a group.
@@ -21,8 +19,8 @@ public class FindFreeTimeCommand extends Command {
 
     public static final String COMMAND_WORD = "findfreetime";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a free time slot given a group and duration \n" +
-        "Parameters: " + PREFIX_GROUPTAG + "GROUPNAME " + PREFIX_DURATION + "DURATION";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a free time slot given a group and duration \n"
+            + "Parameters: " + PREFIX_GROUPTAG + "GROUPNAME " + PREFIX_DURATION + "DURATION";
 
     public static final String MESSAGE_DURATION_USAGE = "Enter Duration in minutes";
 
