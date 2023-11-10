@@ -50,6 +50,8 @@ public class ModelManager implements Model {
 
         this.logBook.setPersons(foundPersonsList);
         loggedFilteredPersons = new FilteredList<>(this.logBook.getPersonList());
+
+        foundPersonsList.setPredicate(x -> false);
     }
 
     public ModelManager() {
@@ -119,6 +121,12 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addPersonAtIndex(Person person, int i) {
+        addressBook.addPersonAtIndex(person, i);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
