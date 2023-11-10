@@ -43,14 +43,14 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
 
         String[] changes = getChanges(argMultimap);
-        if (Arrays.equals(changes, new String[] {"", "", "", ""})) {
+        if (Arrays.equals(changes, new String[4])) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         return new EditCommand(index, changes);
     }
     private String[] getChanges(ArgumentMultimap argMultimap) {
-        String[] changes = new String[] {"", "", "", ""};
+        String[] changes = new String[4];
         for (int i = 0; i < prefixes.length; i++) {
             Optional<String> temp = argMultimap.getValue(prefixes[i]);
             if (temp.isPresent()) {
