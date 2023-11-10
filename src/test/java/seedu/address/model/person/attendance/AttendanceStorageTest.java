@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -65,5 +67,58 @@ public class AttendanceStorageTest {
     public void getValue_emptyAttendanceStorage() {
         AttendanceStorage attendanceStorage = new AttendanceStorage();
         assertTrue(attendanceStorage.getValue().equals(new ArrayList<>()));
+    }
+
+    @Test
+    public void allValidTests() {
+        AttendanceStorage attendanceStorage = new AttendanceStorage();
+
+        // markAbsent -- valid LocalDate input
+        attendanceStorage.markAbsent(
+                LocalDate.parse("20/04/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        String stringAttendance = attendanceStorage.getValue().get(0);
+        assertEquals(stringAttendance, "20/04/2023//absent");
+
+
+        // markLate -- valid LocalDate input, same date
+        attendanceStorage.markLate(
+                LocalDate.parse("20/04/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        stringAttendance = attendanceStorage.getValue().get(0);
+        assertEquals(stringAttendance, "20/04/2023//late");
+
+
+        // markPresent -- valid LocalDate input, same date
+        attendanceStorage.markPresent(
+                LocalDate.parse("20/04/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        int size = attendanceStorage.getValue().size();
+        assertEquals(size, 0);
+
+        // markAbsent -- valid LocalDate input
+        attendanceStorage.markAbsent(
+                LocalDate.parse("20/04/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        stringAttendance = attendanceStorage.getValue().get(0);
+        assertEquals(stringAttendance, "20/04/2023//absent");
+
+
+        // markLate -- valid LocalDate input, different date
+        attendanceStorage.markLate(
+                LocalDate.parse("21/04/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        stringAttendance = attendanceStorage.getValue().get(1);
+        assertEquals(stringAttendance, "21/04/2023//late");
+
+
+        // markPresent -- valid LocalDate input, different date
+        attendanceStorage.markPresent(
+                LocalDate.parse("22/04/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        size = attendanceStorage.getValue().size();
+        assertEquals(size, 2);
+
+        // getType -- valid LocalDate input
+        AttendanceType attendanceType = attendanceStorage.getType(
+                LocalDate.parse("21/04/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        assertEquals(attendanceType, AttendanceType.LATE);
+
+
+
     }
 }
