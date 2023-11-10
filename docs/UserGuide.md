@@ -56,6 +56,7 @@ We hope you enjoy using ManaGease as much as we enjoyed building it.
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
   * [FAQ](#faq)
+  * * [Glossary](#glossary)
   * [Command summary](#command-summary)
 <!-- TOC -->
 
@@ -64,12 +65,16 @@ We hope you enjoy using ManaGease as much as we enjoyed building it.
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed in your Computer. 
+1. Ensure you have Java `11` or above installed on your Computer. 
 2. Download the latest `ManaGease.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-2/tp/releases)
 3. Copy the file to the folder you want to use as the **home folder** for your ManaGease. 
 4. Open a command terminal, `cd` into the folder you put the jar file in(i.e. `cd DIRECTORY_PATH`), and enter the `java -jar ManaGease.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+   A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.
    <img src="images/UiAnnotated.png" width="800">
+
+   <div markdown="span" class="alert alert-primary">:bulb: **Note:**
+   The calendar and clock are generated based on the local date and time of your machine. Please verify your machine's date and time before starting the application!
+   </div>
 
     Employee information is displayed on the person card below:
     <img src="images/PersonCardAnnotated.png" width="800">
@@ -77,19 +82,19 @@ We hope you enjoy using ManaGease as much as we enjoyed building it.
 5. Type the command in the command box and press Enter on your keyboard to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all employees.
+   * `list`: Lists all employees.
 
    * `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 12/09/2023 /s 1000.00 /l 10`: Adds an employee named `Jane Smith` to ManaGease
 
-   * `delete 3` : Deletes the 3rd employee shown in the current list.
+   * `delete 3`: Deletes the 3rd employee shown in the current list.
    
-   * `read 3 /b` : Reads the bank account of the 3rd employee shown in the current list.
+   * `read 3 /b`: Reads the bank account of the 3rd employee shown in the current list.
    
-   * `edit 2 /n Betsy Crower` : Edits the name of the 2nd employee to be `Betsy Crower`.
+   * `edit 2 /n Betsy Crower`: Edits the name of the 2nd employee to be `Betsy Crower`.
 
-   * `clear` : Deletes all employees.
+   * `clear`: Deletes all employees.
 
-   * `exit` : Exits the app.
+   * `exit`: Exits the app.
 
 Refer to [Command Summary](#command-summary) below for a summary of all commands, and the [Features](#features) below for details of each command.
 * Go back to [Table of Contents](#table-of-contents)
@@ -106,9 +111,9 @@ Refer to [Command Summary](#command-summary) below for a summary of all commands
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `edit INDEX /n NAME`, `INDEX` and `NAME` are parameters which can be used as `edit 3 /n John Doe`.
+  e.g. in `edit INDEX /n NAME`, `INDEX` and `NAME` are parameters that can be used as `edit 3 /n John Doe`.
 
-* Commands, prefixes and most parameters are to be entered in lower case. You can only enter capitalized letters for parameters of `NAME`, `EMAIL` and `ADDRESS`.<br>
+* Commands, prefixes and most parameters are to be entered in lowercase. You can only enter capitalized letters for parameters of `NAME`, `EMAIL` and `ADDRESS`.<br>
 
 * Items in square brackets are optional.<br>
   e.g. `/n NAME [/p PHONE]` can be used as `/n John Doe /p 98988989` or as `/n John Doe`.
@@ -891,7 +896,22 @@ If your changes to the data file makes its format invalid, ManaGease will not ru
 **Q**: I am using multiple screens. If I move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen.<br>
 **A**: Delete the `preferences.json` file created by the application before running the application again.
 
+**Q**: Is internet access necessary for the application? <br>
+**A**: ManaGease doesn't need internet access as the data are stored locally in your machine.
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## Glossary
+
+| Term                                                                | Description                                                                                        |
+|------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Benefit**                                     | Benefit are additional financial rewards provided to employees.  |
+| **Deduction**                                   | Deductions refer to the removal of a specified amount from an employee's salary. |
+| **Payslip**                                     | An itemised payslip generated based on payroll in pdf format. The template payslip is retrieved from Ministry of Manpower (MOM) website|
+| **Payroll**                                     | A report that show the net salary, basic pay, total deductions and total benefits in the result box.   |
+| **Attendace report**                            | A report that show the number of days on leave, absent and late for an employee in the result box.   |
 
 <div style="page-break-after: always;"></div>
 
@@ -920,6 +940,7 @@ If your changes to the data file makes its format invalid, ManaGease will not ru
 | **[Attendance](#view-an-employees-attendance-report-attendance)**      | `attendance INDEX` or `attendance /n NAME`<br /> e.g, `attendance 3`                                                                                                                                                         |
 | **[Help](#viewing-help-help)**                                         | `help`                                                                                                                                                                                                                       |
 | **[Exit](#exiting-the-program-exit)**                                  | `exit`                                                                                                                                                                                                                       |
+
 
 
 * Go back to [Features](#features)
