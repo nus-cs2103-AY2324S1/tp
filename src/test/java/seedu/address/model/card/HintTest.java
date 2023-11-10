@@ -53,4 +53,17 @@ public class HintTest {
         // different values -> returns false
         assertNotEquals(hint.hashCode(), new Hint("Other Valid Hint").hashCode());
     }
+
+    @Test
+    public void equal_empty() {
+        Hint.EmptyHint emptyHint = new Hint.EmptyHint();
+        Hint.EmptyHint emptyHint2 = new Hint.EmptyHint();
+        assertTrue(emptyHint.equals(new Hint.EmptyHint()));
+
+        // same object -> returns true
+        assertTrue(emptyHint.equals(emptyHint));
+
+        assertTrue(emptyHint.equals(emptyHint2));
+
+    }
 }
