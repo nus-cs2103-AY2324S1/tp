@@ -563,7 +563,7 @@ Examples:
 
 **:warning: Caution:**<br>
 
-Percentages may not add up to 100.00%.<br>
+For all stat commands, percentages may not add up to 100.00%.<br>
 Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat and 1 unknown.<br>
 * The calculated percentages will add up to 99.99%, instead of 100.00%.<br> 
 * Hence, it can be assumed that each group takes up 1/3 of 100.00%.
