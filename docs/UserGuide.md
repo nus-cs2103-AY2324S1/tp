@@ -400,6 +400,10 @@ Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
 * Existing values will be updated by the input values.
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
+<box type="warning" header="**Caution**">
+    There is **NO** duplicate handling for the name of the interview in `editi` and attempting to do so will give an error message.
+</box>
+
 Example:
 * `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview with rating 7.8.
 * `editi 3 i/2 t/screening` edits the 2nd interview of the 3rd person in the displayed applicant list to a screening interview.
@@ -463,6 +467,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 e.g. `Ed` will match both `Edward` and `Ed`.
 * Applicants matching at least one keyword will be returned (i.e. OR search), 
 e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
+
+<box type="tip" header="**Note**">
+    `find` works on the entire applicant list and will display any applicant whose name matches at least one keyword, even if they were filtered out using `filter`.
+</box>
 
 Example:
 
@@ -698,6 +706,9 @@ apply for multiple positions in future iterations.
 
 **Q**: Do I have to pay to use Staff-Snap? <br>
 **A**: No, Staff-Snap is completely free to use.
+
+**Q**: Can I contact somebody for support? <br>
+**A**: Yes, if you require support from our team while using Staff-Snap, feel free to drop us an email at [support@staffsnap.com](support@staffsnap.com).
 
 <br>
 
