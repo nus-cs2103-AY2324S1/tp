@@ -681,22 +681,23 @@ Action     | Format, Examples
 **Help** | `help`
 **Exit** | `exit`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `filter TAG [MORE_TAGS]` <br> e.g., `filter CSGOD CS2103`
+**Filter** | `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g., `filter n/John Doe`
 **List** | `list`
+**Sort** | `sort /COMPARATOR` <br> e.g., `sort /byname`
+**Clear**  | `clear`
 **addEvent** | `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
 **deleteEvent** | `deleteEvent DATE_TIME` <br> e.g., `deleteEvent 2023-02-03 12:00`
+**clearEvents** | `clearEvents ts/START_DATE_TIME te/END_DATE_TIME c/CONFIRMATION` <br> e.g., `clearEvents ts/2023-02-03 12:00 te/2023-02-03 14:00 c/CONFIRMED`
+**switchList** | `switchList`
 **addContactEvent** | `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
 **deleteContactEvent** | `deleteContactEvent INDEX ts/DATE_TIME` <br> e.g., `deleteContactEvent 1 ts/2023-02-03 12:00`
-**compareCalendars** | `compareCalendars INDEX...` <br> e.g., `compareCalendars 1 3 5`
-**compareGroupCalendars** | `compareGroupCalendars TAG...` <br> e.g., `compareGroupCalendars school friend`
-**editContactEvent** | `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME] [te/NEW_END_DATE_TIME]`
-**clearEvents** | `clearEvents ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `clearEvents ts/2023-02-03 12:00 te/2023-02-03 14:00`
+**editContactEvent** | `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME] [te/NEW_END_DATE_TIME]` <br> e.g., `editContactEvent 1 1 d/Edited Description`
+**viewContactEvents** | `viewContactEvents INDEX` <br> e.g., `viewContactEvents 1`
+**compareCalendars** | `compareCalendars [INDEX]...` <br> e.g., `compareCalendars 1 3 5`
+**compareGroupCalendars** | `compareGroupCalendars [TAG]...` <br> e.g., `compareGroupCalendars school friend`
 **addTask** | `addTask d/DESCRIPTION [te/DEADLINE]` <br> e.g. `addTask d/Go for a run te/2023-02-14 19:00`
-**deleteTask** | `deleteTask INDEX`
+**deleteTask** | `deleteTask INDEX` <br> e.g. `deleteTask 1`
 **sortTasks** | `sortTasks PARAMETER` <br> e.g. `sortTasks DESCRIPTION` <br> e.g. `sortTasks DEADLINE`
-**switchList** | `switchList`
-**viewContactEvents** | `viewContactEvents INDEX`
