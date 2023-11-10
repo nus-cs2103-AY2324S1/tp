@@ -7,20 +7,6 @@ title: Developer Guide
 
 ---
 
-## **Acknowledgements**
-
-- Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
-- Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
-
----
-
-## **Setting up, getting started**
-
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
-
----
-
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -190,13 +176,11 @@ The following activity diagram summarises what happens when a user executes an e
 
 ---
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Acknowledgements**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+- Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
+- Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
 
 ---
 
@@ -389,10 +373,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Portable**: Software that doesn't require installation and can be run from any location, such as from a USB stick.
 
-
 ---
 
 ## **Appendix: Instructions for manual testing**
+
+//TODO
 
 Given below are instructions to test the app manually.
 
@@ -449,14 +434,18 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## **Appendix: Planned enhancements**
-1. Add a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command. If so, display an additional message to remind the user about the duplication. 
-//TODO this is for countering known feature flaws to help grading, after the feature freeze. We can only list `4 members x 2 = 8` enhancements here
+## **Appendix: Effort**
 
-* The current implementation of `Phone` allow users to include very long numbers that might not be a valid number in the
-world. We also intend to allow users to include the `+` prefix to allow users to indicate country codes as well. The 
-invalid message `Phone numbers must start with at least 3 digits.` will need to be updated to reflect this enhancement.
-* The current implementation of `AlternateContact` does not allow users to include whitespace in `TYPE` and `USERNAME` 
-and `USERNAME` only supports certain special characters. We intend to allow users to include whitespace in `TYPE` and 
-`USERNAME`. `USERNAME` will also be enhanced to include other special characters that are not supported currently. This
-will allow `AlternateContact` to be used more flexibly.
+//TODO
+
+## **Appendix: Planned enhancements**
+
+
+1. Add a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command. If so, display an additional message to remind the user about the duplication.
+1. The current implementation of `Phone` allow users to include very long numbers that might not be a valid number in the
+  world. We also intend to allow users to include the `+` prefix to allow users to indicate country codes as well. The
+  invalid message `Phone numbers must start with at least 3 digits.` will need to be updated to reflect this enhancement.
+1. The current implementation of `AlternateContact` does not allow users to include whitespace in `TYPE` and `USERNAME`
+  and `USERNAME` only supports certain special characters. We intend to allow users to include whitespace in `TYPE` and
+  `USERNAME`. `USERNAME` will also be enhanced to include other special characters that are not supported currently. This
+  will allow `AlternateContact` to be used more flexibly.

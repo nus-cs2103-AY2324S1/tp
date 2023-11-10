@@ -14,7 +14,7 @@ public final class AlternateContact {
      * Requires a form similar to AlternateContact: name.
      */
     public static final String REGEX_VALID =
-            "^[a-zA-Z\\d]+(?:[a-zA-Z\\d]+)*" + ":\\s([._-]?[a-zA-Z0-9]?)+";
+            "^[a-zA-Z\\d]+: [a-zA-Z\\d._-]+$";
 
     public final String value;
 
