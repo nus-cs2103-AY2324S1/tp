@@ -428,17 +428,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### 4.1. Undo/redo feature
 
-#### 4.1.1. Description
-
-Users may accidentally have typos in their command messages, causing certain unwanted commands to be executed. This can cause an array of problems,
-from deleting important data along with the contact, to inconvenience for the users themselves. As such, having an undo / redo feature might provide
-a better user experience for our users.
+Currently, we do not have undo and redo feature which open rooms for users to accidentally have typos in their command messages, causing certain unwanted commands to be executed. This can cause an array of problems,
+from deleting important data along with the contact, to inconvenience for the users themselves. As such, we plan to implement undo and redo feature in the future to provide a better user experience for our users.
 
 ### 4.2. Adding/Deleting time feature
 
 #### 4.1.2. Description
 
-Currently, our add and delete time features allow users to input multiple time slots. Should a certain input encounter an error, ProjectPRO adds / deletes the other time intervals that are valid
+Currently, our add and delete time features allow users to input multiple time slots in the command box. Should a certain input encounter an error, ProjectPRO adds / deletes the other time intervals that are valid
 and clears the input box. As we recognise that users might encounter accidental typos while typing time intervals, we believe having our program's input box keep the incorrect inputs can provide convenience
 to our users.
 
