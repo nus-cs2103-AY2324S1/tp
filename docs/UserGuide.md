@@ -29,11 +29,9 @@ solution to manage your student details, including attendance records and assign
     - [Deleting multiple students : `delete all`](#328-deleting-multiple-students--delete-all)
     - [Merging two students : `merge`](#329-merging-two-students--merge)
     - [Viewing detailed attendance records : `view`](#3210-viewing-detailed-attendance-records--view)
-    - [Clearing all entries : `clear`](#3211-clearing-all-entries--clear)
-- [4. Planned Enhancements](#4-planned-enhancements)
-- [5. FAQ](#5-faq)
-- [6. Known issues](#6-known-issues)
-- [7. Command summary](#7-command-summary)
+- [4. FAQ](#5-faq)
+- [5. Known issues](#6-known-issues)
+- [6. Command summary](#7-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 ## 1. About this User Guide
@@ -92,13 +90,11 @@ An example is shown below.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list students` : Lists all contacts.
+   * `list students` : Lists all students in the current course.
 
    * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567M t/G10` : Adds a contact named `Fu Yiqiao` to TAvigator.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
@@ -116,18 +112,18 @@ An example is shown below.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/G01` or as `n/John Doe`.
+  e.g `n/NAME [t/TUTORIAL_GROUP_ID]` can be used as `n/John Doe t/G01` or as `n/John Doe`.
 
 * Items with `|` indicate that the command accepts either parameters.<br>
   e.g `mark n/STUDENTNAME | id/STUDENTID` takes in `STUDENTNAME` or `STUDENTID` as its first argument.
 
 * Items with `…​` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as many times as desired (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TUTORIAL_GROUP_ID]…​` can be used as many times as desired (i.e. 0 times), `t/T01`, `t/T01 t/B14` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -152,7 +148,7 @@ Creates a new addressbook.
 Format: `course create course/COURSE_CODE`
 
 * Creates a new addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
 * `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must not exist.
 
@@ -168,7 +164,7 @@ Delete an addressbook.
 Format: `course delete course/COURSE_CODE`
 
 * Deletes the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
 * `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must exist.
 
@@ -184,7 +180,7 @@ Switches the active addressbook.
 Format: `course switch course/COURSE_CODE`
 
 * Switches to the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
 * `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must exist.
 
@@ -200,7 +196,7 @@ Edits the active addressbook course code.
 Format: `course edit course/COURSE_CODE`
 
 * Changes the course code of active addressbook to `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
 * `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must not exist.
 
@@ -221,6 +217,8 @@ Format: `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GRO
 
 **:information_source: Note that STUDENT_ID should be unique for all students**<br>
 
+</div>
+
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
 * `PHONE_NUMBER` should be a string made up of numbers
 * `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
@@ -236,17 +234,20 @@ Edits the contact details.
 
 ![edit contact](images/editContact.png)
 
-Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP]...`
+Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`
 
-* Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …
+* Edits the person at the specified `INDEX`. 
+* `INDEX` refers to the index number shown in the displayed person list.
+* `INDEX` must be a positive integer 1, 2, 3, …
+* The same restrictions from the `add` command are applied to `STUDENT_NAME`, `PHONE_NUMBER`, `STUDENT_ID` and `TUTORIAL_GROUP_ID`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+* When editing tutorial groups, the existing tutorial groups of the person will be removed i.e adding of tutorial groups is not cumulative.
+* You can remove all the person’s tutorial groups by typing t/ without specifying any tutorial groups after it.
 
 Examples:
 *  `edit 1 n/Tan Liyan` Edits the name of the first person to be Tan Liyan.
-*  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tutorial group tags from contact.
+*  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tutorial groups from contact.
 
 #### 3.2.3 Marking attendance of student: `mark`
 
@@ -266,7 +267,7 @@ Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]…
 * If a student is present, `REASON_OF_ABSENCE` is not required.
 * If a student is absent, `REASON_OF_ABSENCE` is mandatory.
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
 * `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
 * `WEEK_NUMBER` should be an integer from 0 to 13.
 
@@ -288,7 +289,7 @@ Format: `list attendance w/WEEK_NUMBER [tg/TUTORIAL_GROUP_ID]`
 * If tutorial group is specified, shows a list of absentees and summary of the attendance of students corresponding to the specified tutorial group in the course for the specified week number.
 * If tutorial group is not specified, shows a list of absentees and summary of the attendance of all students in the course for the specified week number.
 * `TUTORIAL_GROUP_ID` is optional.
-* `TUTORIAL_GROUP_ID` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
 * `WEEK_NUMBER` should be an integer from 0 to 13.
 
 Examples:
@@ -304,7 +305,7 @@ Finds a student's or multiple students' contact either via their name or student
 Format: `find n/STUDENT_NAME [STUDENT_NAME]… | id/STUDENT_ID [STUDENT_ID]…`
 
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
-* `STUDENT_ID` should be a string made up of alphabetical characters and numbers, with no special characters or space.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
 
 Examples:
 *  `find n/Anthony Yiqiao` Finds all contacts with the name "Anthony" and/or "Yiqiao".
@@ -329,11 +330,11 @@ Deletes the specified person from TAvigator.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* `INDEX` refers to the index number shown in the displayed person list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list students` followed by `delete 2` deletes the 2nd person in TAvigator.
+* `list students` followed by `delete 2` deletes the 2nd person in the course.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 #### 3.2.8 Deleting multiple students : `delete all`
@@ -347,7 +348,7 @@ Format: `delete all [tg/TUTORIAL_GROUP_ID]`
 * If tutorial group is specified, deletes all students corresponding to the specified tutorial group in the course.
 * If tutorial group is not specified, deletes all students in the course.
 * `TUTORIAL_GROUP_ID` is optional.
-* `TUTORIAL_GROUP_ID` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
 
 Examples:
 * `delete all` deletes all students from the course.
@@ -362,7 +363,7 @@ Merges two students in the current address book.
 Format: `merge PRIMARY_INDEX SECONDARY_INDEX`
 
 * NAME, PHONE_NUMBER, EMAIL, and STUDENT_ID of the primary student is retained.
-* The merged student contains tags of both students.
+* The merged student contains the tutorial groups of both students.
 * The merged student contains attendance records of both students. In case of duplicated weeks, the attendance record of the primary student will be retained.
 
 Examples:
@@ -378,17 +379,11 @@ Format: `view INDEX`
 
 * If the student has no attendance records, it will return a message indicating that the student has no attendance records.
 * If the student has attendance records, the attendance record will be shown week by week with the reason being provided for absences.
+* `INDEX` refers to the index number shown in the displayed person list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `view 1` views the attendance record for the student with index 1.
-
-#### 3.2.11 Clearing all entries : `clear`
-
-Clears all entries from the current address book.
-
-![clear](images/clear.png)
-
-Format: `clear`
+* `view 1` views the attendance records for the student with index 1.
 
 ### Exiting the program : `exit`
 
@@ -412,35 +407,26 @@ If your changes to the data file makes its format invalid, TAvigator will discar
 
 _Details coming soon ..._
 
-## 4. Planned Enhancements
-
-### `[Coming in v2.0]` Marking attendance of student: `mark`
-
-* Support marking of students with same `STUDENT_NAME`!
-* Support marking of students with both `STUDENT_NAME` and `STUDENT_ID`!
-* Support marking of student with case-insensitive `STUDENT_NAME`!
-
 --------------------------------------------------------------------------------------------------------------------
 
-## 5. FAQ
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAvigator home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 6. Known issues
+## 5. Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 7. Command summary
+## 6. Command summary
 
 | Action     | Format, Examples                                                                                                                                                                                               |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP_ID]…` <br> e.g., `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G2`                                                     |
-| **Clear**  | `clear`                                                                                                                                                                                                        |
 | **Course** | `course create/delete/switch/edit course/COURSE_CODE`<br/> e.g., `course create course/CS2103T`                                                                                                                |
 | **Delete** | `delete all [tg/TUTORIAL_GROUP_ID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                                                   |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                                                                       |

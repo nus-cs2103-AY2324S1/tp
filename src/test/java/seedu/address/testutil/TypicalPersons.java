@@ -35,7 +35,8 @@ public class TypicalPersons {
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withId("A1234567M").withEmail("heinz@example.com").withAttendance(VALID_W0_PRESENT).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withId("A1234567N").withEmail("cornelia@example.com").withTags("T01").build();
+            .withId("A1234567N").withEmail("cornelia@example.com").withTags("T01")
+            .withAttendance(VALID_W0_PRESENT).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withId("A1234567L").withEmail("werner@example.com").withAttendance(VALID_W0_PRESENT).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")

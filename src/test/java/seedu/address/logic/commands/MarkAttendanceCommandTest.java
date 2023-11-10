@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PERSON_
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PRESENT;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_UPDATED_SUCCESS;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager;
 
@@ -61,7 +62,7 @@ public class MarkAttendanceCommandTest {
      */
     @Test
     public void execute_marksAttendanceAsAbsentWithValidPersonName_success() {
-        Person amy = new PersonBuilder().build();
+        Person amy = new PersonBuilder(AMY).build();
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee"), false,
                 new Week(1), "Late");
@@ -70,7 +71,7 @@ public class MarkAttendanceCommandTest {
                 amy.getName(), amy.getName(), "Late");
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), true, "Late"));
+        expectedAmy.addAttendance(new Attendance(new Week(1), false, "Late"));
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -108,7 +109,7 @@ public class MarkAttendanceCommandTest {
                 amy.getName(), amy.getName(), "Late");
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), true, "Late"));
+        expectedAmy.addAttendance(new Attendance(new Week(1), false, "Late"));
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -178,7 +179,7 @@ public class MarkAttendanceCommandTest {
 
         StringBuilder expectedMessage = new StringBuilder();
 
-        Person amy = new PersonBuilder().build();
+        Person amy = new PersonBuilder(AMY).build();
         Person bob = new PersonBuilder(BOB).build();
         model.addPerson(amy);
         model.addPerson(bob);
@@ -194,7 +195,7 @@ public class MarkAttendanceCommandTest {
         Person expectedAmy = new PersonBuilder(amy).build();
         expectedAmy.addAttendance(new Attendance(new Week(1), false, "Late"));
         Person expectedBob = new PersonBuilder(bob).build();
-        expectedBob.addAttendance(new Attendance(new Week(1), true, "Late"));
+        expectedBob.addAttendance(new Attendance(new Week(1), false, "Late"));
 
         expectedModel.addPerson(expectedAmy);
         expectedModel.addPerson(expectedBob);

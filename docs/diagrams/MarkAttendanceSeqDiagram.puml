@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkAttendanceCommandParser" as MarkAttendanceCommandParser LOGIC_COLOR
+participant "mac:MarkAttendanceCommand" as MarkAttendanceCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("mark attendance ...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("mark attendance ...")
+activate AddressBookParser
+
+create MarkAttendanceCommandParser
+AddressBookParser -> MarkAttendanceCommandParser
+activate MarkAttendanceCommandParser
+
+MarkAttendanceCommandParser --> AddressBookParser
+deactivate MarkAttendanceCommandParser
+
+AddressBookParser -> MarkAttendanceCommandParser : parse(...)
+activate MarkAttendanceCommandParser
+
+create MarkAttendanceCommand
+MarkAttendanceCommandParser -> MarkAttendanceCommand
+activate MarkAttendanceCommand
+
+MarkAttendanceCommand --> MarkAttendanceCommandParser : mac
+deactivate MarkAttendanceCommand
+
+MarkAttendanceCommandParser --> AddressBookParser : mac
+deactivate MarkAttendanceCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MarkAttendanceCommandParser -[hidden]-> AddressBookParser
+destroy MarkAttendanceCommandParser
+
+AddressBookParser --> LogicManager : mac
+deactivate AddressBookParser
+
+LogicManager -> MarkAttendanceCommand : execute()
+activate MarkAttendanceCommand
+
+MarkAttendanceCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> MarkAttendanceCommand
+deactivate Model
+
+loop for each valid person specified in parameters
+    MarkAttendanceCommand -> Person : markAttendance(...)
+    activate Person
+
+    Person --> MarkAttendanceCommand
+    deactivate Person
+end
+
+create CommandResult
+MarkAttendanceCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MarkAttendanceCommand
+deactivate CommandResult
+
+MarkAttendanceCommand --> LogicManager : result
+deactivate MarkAttendanceCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
