@@ -60,8 +60,8 @@ public class EditCommand extends UndoableCommand {
 
     public static final String MESSAGE_NO_CHANGE = "There are no changes in the editable fields provided.\n";
 
-    public static final String MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT = "Medical history cannot be edited to be empty. "
-            + "To set the medical history to be empty, use the delete command.\n";
+    public static final String MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT = "Medical History can take any values, "
+            + "and it should not be blank.\n";
 
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
 
@@ -107,10 +107,6 @@ public class EditCommand extends UndoableCommand {
 
         originalPerson = personToEdit;
         editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (editedPerson.getMedicalHistories().isEmpty()) {
-            throw new CommandException(MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT);
-        }
 
         if (originalPerson.equals(editedPerson)) {
             throw new CommandException(MESSAGE_NO_CHANGE);

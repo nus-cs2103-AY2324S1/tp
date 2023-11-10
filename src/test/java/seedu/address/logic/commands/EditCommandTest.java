@@ -4,12 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICALHISTORY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.EditCommand.MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_NO_CHANGE;
 import static seedu.address.logic.commands.EditCommand.createEditedPerson;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -168,27 +166,17 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_emptyMedicalHistory_throwsCommandException() {
-        Person person = model.getFilteredPersonList().get(0);
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withMedicalHistories().build();
-        EditCommand editCommand = new EditCommand(person.getName(), null, descriptor);
-
-        assertThrows(CommandException.class, () -> editCommand.execute(model), MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT);
-
-    }
-
-    @Test
     public void undo_successfulEditCommand() throws CommandException {
         Model model = new ModelManager();
-        Person originalPerson = new PersonBuilder().withMedical(VALID_MEDICALHISTORY).build();
+        Person originalPerson = new PersonBuilder().build();
         Person editedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB)
-                .withMedical(VALID_MEDICALHISTORY).build();
+               .build();
 
         model.addPerson(originalPerson);
 
         EditCommand editCommand = new EditCommand(originalPerson.getName(),
                 null, new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).build());
+
         editCommand.execute(model);
 
         Person personAfterEdit = model.getFilteredPersonList().get(0);
