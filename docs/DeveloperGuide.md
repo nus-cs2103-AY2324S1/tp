@@ -948,15 +948,27 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `tag s/STUDENT_NUMBER t/TAG`<br>
       Expected: All tags of student with STUDENT_NUMBER will be replaced with TAG.
 
-2. Adding a new tags to student.
+2. Adding a tags to student.
 
    1. Test case: `tag s/STUDENT_NUMBER /add t/TAG`<br>
       Expected: The student with STUDENT_NUMBER will have TAG added to existing tags.
 
+   <box type="info" seamless>
+
+   **Note:** Even if the student has TAG tagged, the command ensures that the student will have TAG as one of the tags.
+
+    </box>
+
 3. Deleting tags from student.
 
    1. Test case: `tag s/STUDENT_NUMBER /delete t/TAG`<br>
-      Expected: The student with STUDENT_NUMBER will have the `Tag` TAG removed from existing tags. (Even if the student does not have TAG tagged, the command ensures that the student will not have TAG as one of the tags of the student)
+      Expected: The student with STUDENT_NUMBER will have the `Tag` TAG removed from existing tags.
+
+    <box type="info" seamless>
+
+    **Note:** Even if the student does not have TAG tagged, the command ensures that the student will not have TAG as one of the tags.
+
+    </box>
 
 4. Deleting all tags from student.
    
@@ -965,8 +977,26 @@ testers are expected to do more *exploratory* testing.
 
 5. Attempt to tag a student not in the currently student list.
     
-   1. Test case: Tag command with a student number that is not in the list.
+   1. Test case: `tag` command with a student number that is not in the list.
       Expected: Error message is shown in the display result.
+
+### Viewing a student
+
+1. Viewing a student in Class Manager
+
+   1. Test case: `view s/STUDENT_NUMBER`<br>
+      Expected: The class information of the student with STUDENT_NUMBER will be displayed in the class information panel on the right.
+
+2. Viewing a student not in Class Manager
+
+   1. Test case: `view` command with a student number not in Class Manager<br>
+      Expected: Error message shown in the display result.
+
+3. Invalid Student number
+
+   1. Test case: `view s/b012345N`<br>
+      Expected: Error message shown in the display result.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
