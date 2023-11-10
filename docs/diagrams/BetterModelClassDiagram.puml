@@ -4,15 +4,15 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+Class "UniqueEntryMap<Person>" as UniqueEntryMap_Person
+Class "<<interface>>\nEntry" as Entry
 
-UniqueTagList -right-> "*" Tag
-UniquePersonList -right-> Person
+AddressBook *-right-> "1" UniqueEntryMap_Person
 
-Person -up-> "*" Tag
+UniqueEntryMap_Person -down-> Person
+
+Person *-left-> "*" Tag
+Person .right.|> Entry
 
 Person *--> Name
 Person *--> Phone

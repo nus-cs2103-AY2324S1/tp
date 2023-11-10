@@ -147,6 +147,8 @@ How the parsing works:
   - Integer id of person (Optional)
 - Similar to the `AddressBook`, maintains an `ObservableList<Transaction>` that can be observed by external entities, facilitating automatic updates in the UI.
 
+<img src="images/TransactionClassDiagram.png" width="450" />
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/storage/Storage.java)

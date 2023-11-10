@@ -44,11 +44,8 @@ skinparam Class {
     FontSize 15
     BorderThickness 1
     BorderColor #FFFFFF
-    StereotypeFontColor #FFFFFF
     FontName Arial
 }
-
-skinparam genericDisplay old
 
 skinparam Actor {
     BorderColor USER_COLOR
