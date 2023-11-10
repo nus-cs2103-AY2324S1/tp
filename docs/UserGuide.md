@@ -223,6 +223,7 @@ Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `NRIC`. The NRIC **must be a valid IC number**
 * At least one of the optional fields must be provided.
+* If the provided fields are the same as the original, the command will still work.
 * Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition of a
   doctor)
 * Existing values will be updated to the input values.
@@ -334,21 +335,6 @@ Repeats the previous command; an `undo` for an `undo` command.
 Format: `redo`
 
 * Can only do up to 5 redos at any one time.
-
-### Adding / Deleting remarks : `remark`
-
-Adds remark to specified person. Adding empty remark deletes the current remark from specified person.
-
-Format: `remark NRIC`
-
-* Modifies remark of the person with the specified NRIC.
-* The NRIC **must be a valid NRIC format** and must belong to a person in the addressbook.
-* The NRIC is case-sensitive. e.g `tXXXXXXXz` is not the same as `TXXXXXXXZ`
-
-Examples:
-
-* `remark S1234567J r/` deletes remarks belonging to Jonathan who has the NRIC `S1234567J`
-* `remark S1234567J r/Has Health Issues` changes current remarks belonging to Jonathan to `Has Health Issues`
 
 ### Exiting the program : `exit`
 
