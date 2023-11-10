@@ -4,8 +4,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DATE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.appointment.NullAppointment;
-import seedu.address.model.person.Person;
 
 /**
  * Completes and removes appointments from one or multiple person in address book.
@@ -29,13 +27,4 @@ public abstract class CompleteCommand extends Command {
             + " No Appointments found with the current date";
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
-
-    /**
-     * Returns a copy of the {@Person} with a NullAppointment.
-     */
-    public static Person createPersonWithoutAppointment(Person personToEdit) {
-        return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getNextOfKinName(), personToEdit.getNextOfKinPhone(),
-                personToEdit.getFinancialPlans(), personToEdit.getTags(), NullAppointment.getNullAppointment());
-    }
 }

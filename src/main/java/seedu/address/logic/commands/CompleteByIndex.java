@@ -35,7 +35,7 @@ public class CompleteByIndex extends CompleteCommand {
             throw new CommandException(MESSAGE_PERSON_NO_APPOINTMENT);
         }
 
-        Person personWithoutAppointment = super.createPersonWithoutAppointment(personToEdit);
+        Person personWithoutAppointment = personToEdit.clearAppointment();
 
         model.setPerson(personToEdit, personWithoutAppointment);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -48,7 +48,7 @@ public class CompleteByIndex extends CompleteCommand {
             return true;
         }
 
-        // instanceof handles nulls
+        // instanceof handles null
         if (!(other instanceof CompleteByIndex)) {
             return false;
         }
