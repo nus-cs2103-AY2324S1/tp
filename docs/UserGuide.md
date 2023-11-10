@@ -8,6 +8,14 @@
 
 > "HealthSync will be your patient’s best friend, the frontdesk’s right hand, and time’s biggest foe." - Yi Chee, Developer, HealthSync
 
+<br>
+
+<!-- Hopefully this is centered in GH pages, else might need to make changes to css or remove this -->
+![Logo](images/address_book_32.jpg) 
+
+<br>
+
+
 HealthSync is a **powerful desktop application designed specifically for clinic assistants in small private clinics.** It offers a unique combination of a Command Line Interface (CLI) and a Graphical User Interface (GUI) to efficiently manage and organize patient details. If you're a fast typist, HealthSync can streamline your workflow and help you handle patient information more effectively than traditional GUI apps.
 
 ## Why HealthSync?
@@ -40,7 +48,7 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   ![Ui](images/quickstartGUI.png)
+   ![Ui](images/v1.4-screenshots/quickstartGUI.jpg)
 
 
 Here are the icons you will see throughout this User Guide and what they mean:
@@ -92,6 +100,8 @@ Here are the icons you will see throughout this User Guide and what they mean:
 
 >:exclamation: To enhance the User Guide's clarity, command outputs have been simplified and are now presented with added information indicated by an ellipsis (...).
 
+<br>
+
 ### Viewing Help: `help`
 
 Shows a message explaining how to access the help page. The link will bring the user to the User Guide.
@@ -102,6 +112,8 @@ Format: `help`
 
 >:bulb: Click on `Copy URL` after entering the `help` command and paste the link in your preferred browser
 
+<br>
+
 ### Listing All Patients: `list`
 
 Shows a list of all patients in HealthSync.
@@ -110,7 +122,9 @@ Format: `list`
 
 >:bulb: Use `ls` as a shortcut for `list`
 
-![result for 'list'](images/listResult.jpg)
+![result for 'list'](images/v1.4-screenshots/list.jpg)
+
+<br>
 
 ### Adding a Patient: `add`
 
@@ -132,7 +146,7 @@ Example commands:
 
 * `add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mailhere a/Serangoon HDB 123`
 
-![result for 'add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mailhere a/Serangoon HDB 123'](images/addResult.jpg)
+![result for 'add n/Aaron Tan id/S8765432A p/98765432 e/atjj@example.com a/311, Clementi Ave 21, #12-25 ap/17-12-2023 11:00 13:00 m/Covid-19'](images/v1.4-screenshots/add.jpg)
 
 Expected outputs when the command succeeds:
 * `New Patient added: ...`
@@ -140,6 +154,8 @@ Expected outputs when the command succeeds:
 Expected outputs when the command fails:
 * `Patient already exists in HealthSync.`
 * `Invalid command format! ...`
+
+<br>
 
 ### Editing a Patient's Details: `edit`
 
@@ -163,13 +179,15 @@ Formats:
 Example commands:
  * `edit n/Alex Yeoh p/91234567 e/alexyeoh@example.com`
 
-![result for 'edit n/Alex Yeoh p/91234567 e/alexyeoh@example.com'](images/editResult.jpg)
+![result for 'edit n/Alex Yeoh p/99991239'](images/v1.4-screenshots/edit.jpg)
 
 Expected outputs when the command succeeds:
 * `Edited patient: ...`
 
 Expected outputs when command fails:
 * `INVALID name and/or ID! ...`
+
+<br>
 
 ### Deleting a Patient or Field: `delete`
 
@@ -196,7 +214,7 @@ Example commands:
 >:bulb: Specify the medical history to be deleted using `m/` if it's only the medical history data that is to be deleted
 e.g `delete n/John Doe m/Diabetes`
 
-![result for 'delete n/Alex Yeoh'](images/deleteResult.jpg)
+![result for 'delete n/alex yeoh'](images/v1.4-screenshots/delete.jpg)
 
 Expected outputs when the command succeeds:
 * `Deleted Patient: ...`
@@ -204,6 +222,8 @@ Expected outputs when the command succeeds:
 
 Expected output when the command fails:
 * `The given combination of Name and ID does not match any patient in the Patients list`.
+
+<br>
 
 ### Delete All Patients: `clear`
 
@@ -215,7 +235,9 @@ Format: `clear`
 
 >:bulb: Use `c` as a shortcut for `clear`
 
-![result for 'clear'](images/clearResult.jpg)
+![result for 'clear'](images/v1.4-screenshots/clear.jpg)
+
+<br>
 
 ### Locating Patients by Name, ID or Appointment: `find`
 
@@ -241,9 +263,11 @@ Example commands:
 * `find id/T0123436F`
 * `find ap/08-Aug-2023 0000 2359`
 
-![result for 'find id/T0123456F'](images/findidT0123456FResult.jpg)
+![result for 'find id/S0123452F'](images/v1.4-screenshots/find.jpg)
 
 >:bulb: This list command can be used to show the original patient list after a find command is executed
+
+<br>
 
 ### Preserving a `find` Command Result in the Log: `log`
 
@@ -253,7 +277,7 @@ Upon app start, the logger tab is pre-populated with profiles of patients who ha
 
 This is how it looks like:
 
-![pre-populated log](images/originalLog.jpg)
+![pre-populated log](images/v1.4-screenshots/logExample.jpg)
 
 
 >:bulb: Use `log` command to save data you want to continue referring to
@@ -274,7 +298,7 @@ Format: `log`
 
 Example Command: `log` (after entering a FindCommand)
 
-![result for 'log'](images/logResult.jpg)
+![result for 'log'](images/v1.4-screenshots/log.jpg)
 
 Expected outputs when the command succeeds:
 * `The last filtered values have overridden the logger tab.`
@@ -283,6 +307,8 @@ Expected output when the command fails:
 * `Cannot log an empty list.`
 
 >:bulb: `log` overwrites the data currently in the logger tab, so you do not need to perform clearing prior
+
+<br>
 
 ### Adding a New `find` Command Result to the current Log: `alog`
 
@@ -305,7 +331,7 @@ Format: `alog`
 
 Example Command: `alog` (after entering a FindCommand)
 
-![result for 'alog'](images/alogResult.jpg)
+![result for 'alog'](images/v1.4-screenshots/alog.jpg)
 
 Expected outputs when the command succeeds:
 * `The last filtered values have been added onto the logger tab.`
@@ -314,6 +340,8 @@ Expected output when the command fails:
 * `Cannot log an empty list.`
 
 >:bulb: `alog` does not overwrite the data and instead adds on to it, so you do not have to keep performing `log` to save more data
+
+<br>
 
 ### Clearing Data from the Log: `clog`
 
@@ -327,10 +355,12 @@ Format: `clog`
 
 Example Command: `clog`
 
-![result for 'clog'](images/clogResult.jpg)
+![result for 'clog'](images/v1.4-screenshots/clog.jpg)
 
 Expected output:
 * `Logger tab has been cleared!`
+
+<br>
 
 ### Undoing a Command: `undo`
 
@@ -356,7 +386,7 @@ Fields that can be deleted:
 Example commands:
 *  `undo 2`
 
-![result for 'undo'](images/undoResult.jpg)
+![result for 'undo'](images/v1.4-screenshots/undo.jpg)
 
 Expected outputs when the command succeeds:
 
@@ -366,6 +396,7 @@ Expected outputs when command fails:
 * `Please proved a valid number of steps to undo, not exceeding the available command history.`
 * `Undo step count cannot be a negative number or zero.`
 
+<br>
 
 ### Exiting HealthSync: `exit`
 
@@ -375,12 +406,16 @@ Format: `exit`
 
 >:bulb: Use `ex` as a shortcut for `exit`
 
+<br>
+
 ### Auto Save
 
 HealthSync data are saved in the hard disk automatically after any command that changes the data is executed.
 There is no need to save manually.
 
 >:bulb: Only patient details inside patient list view are saved. The logger tab and command history used for `undo` are not saved after the application is closed.
+
+<br>
 
 ### Editing the Data File
 
@@ -402,10 +437,12 @@ Advanced users are welcome to update data directly by editing that data file.
 >
 >If anything goes wrong during the editing process, you can restore your data by copying the backup file back to its original location.
 
+<br>
+
 ### Archiving Data Files `[coming in v5.0]`
 It allows you to efficiently store and organize patient records in HealthSync. With this feature, you can maintain a tidy and easily accessible archive of patient data, ensuring streamlined data management and quick retrieval when needed.
 
-
+<br>
 
 ## [FAQ](#faq)
 
@@ -440,11 +477,15 @@ The app will attempt to recover your work upon restart.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<br>
+
 ## [Known issues](#known-issues)
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
    the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by
    the application before running the application again.
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
