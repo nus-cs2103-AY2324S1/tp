@@ -507,7 +507,7 @@ Parameters:
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:**<br>
 
@@ -581,7 +581,7 @@ Examples:
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
 
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
@@ -685,7 +685,7 @@ Your Foster Family data is saved automatically as a JSON file `[JAR file locatio
 advise you to update the data file directly only if you are an advanced user. Otherwise, we highly recommend you to perform 
 edits using our user-friendly interface instead.
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
