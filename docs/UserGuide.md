@@ -280,6 +280,8 @@ _More features coming coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KeepInTouch home folder.
 
+**Q**: Can I modify the data file outside the application itself?<br>
+**A**: No, you **should _NOT_ directly modify the data file** outside the application at anytime, otherwise it may lead to unpredictable consequences and errors to the application.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
