@@ -10,8 +10,8 @@ title: User Guide
 
 ## Introduction
 Flashlingo is a versatile desktop application centered around learning words through flashcards. It is optimized for use via a **Command Line Interface** (CLI),
-while also providing the advantages of a **Graphical User Interface** (GUI). Tailored with a focus on beginner language
-learners, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
+while also providing the advantages of a **Graphical User Interface** (GUI). Tailored with a focus on **beginner language
+learners** with [to be discussed] proficiency in command line, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
 and the [**Command Summary**](#command-summary) section for a quick overview of the commands.
 
 
@@ -35,11 +35,15 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
      <br>
         This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
 
-**:information_source: Notes about the command format:**<br>
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the level:**<br>
 
 * The higher the `Level` is, the higher the proficiency of the user with the word is. The maximum level is 5, and it will be displayed as `word mastered`.
 
 * Words which are indicated as `word mastered` will not appear in review session.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -57,9 +61,9 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
     * For mac users, press `Command + Space` to open Spotlight search, type `Terminal`, and press `Enter`.
       ![img.png](images/Terminal.png)
     * For windows users, press `Windows + R` keys simultaneously, type `cmd` and press `Enter`.
-    2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
+    2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder. So the command is:
        <br>
-       ``cd Downloads``
+       ```cd Downloads```
        <br>
        >Click [here](https://en.wikipedia.org/wiki/Cd_(command)) for more information on how to navigate to a folder in the terminal.
     3. Simply type in `java -jar flashlingo.jar` to get started!
@@ -86,12 +90,12 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 
 **:information_source: Notes about the command format:**<br>
 
-| Notation         | Description                                                   | Example Command                                                     | Example Usage                    |
-|------------------|---------------------------------------------------------------|---------------------------------------------------------------------|----------------------------------|
-| `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                    | `delete 1`                       |
-| `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANG] [tl/TRANSLATION_LANG]` | `add w/Hello t/你好`               |
- | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                                 | `find hello, bye`                |
-| `...`            | Parameter that will not be used                               | `help ...`                                                          | `help 123` is the same as `help` |
+| Notation         | Description                                                   | Example Command                                                     | Example Usage                        |
+|------------------|---------------------------------------------------------------|---------------------------------------------------------------------|--------------------------------------|
+| `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                    | `delete 1`                           |
+| `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANG] [tl/TRANSLATION_LANG]` | `add w/Hello t/你好`                   |
+ | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                                 | `find hello, bye`                    |
+| `...`            | Parameter that will not be used                               | `... help ...`                                                      | `abc help 123` is the same as `help` |
 
 </div>
 
@@ -215,7 +219,7 @@ Examples:
 Shows the list of flash cards with both the original word and the corresponding translation.
 * Lists all the flash cards saved
 
-[Command Format](#commands): `list ...`
+[Command Format](#commands): `... list ...`
 > All the saved flash cards, regardless of the review date, are listed.
 
 Output:
@@ -239,7 +243,7 @@ Displays the flash cards of all the words to be reviewed that day
     * The review command will present flash cards selected by Flash Lingo based on your level, utilizing the Leitner system.
 * If you wish to view all your saved flash cards without the Leitner system's selection criteria, please use the list command.
 
-[Command Format](#commands): `review ...`
+[Command Format](#commands): `... review ...`
 
 Output:
 ![img.png](images/ReviewSuccess.png)
@@ -253,7 +257,7 @@ Output:
 
 To start a review session, user simply needs to type in `start` command.
 
-[Command Format](#commands): `start ...`
+[Command Format](#commands): `... start ...`
 
 Output: `Review Session has been started.`
 
@@ -266,7 +270,7 @@ Output: `Review Session has been started.`
 
 Ends the current flash card session and returns to the main menu.
 
-[Command Format](#commands): `end ...`
+[Command Format](#commands): `... end ...`
 
 Output: `Review Session has ended.`
 
@@ -289,7 +293,7 @@ Examples:![img.png](images/Reveal.png)
 Marks the word as memorized and advances the word into the next retention stage. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
-[Command Format](#commands): `yes ...`
+[Command Format](#commands): `... yes ...`
 
 Output: ![img.png](images/Yes.png)
 or
@@ -304,7 +308,7 @@ if there's no word left in the review session.
 Marks the word as not grasped and leaves it in its current retention stage. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
-[Command Format](#commands): `no ...`
+[Command Format](#commands): `... no ...`
 
 Output: ![img.png](images/No.png)
 or
@@ -320,7 +324,7 @@ To help track user progress and inspire continued learning, this command offers 
 * Remembered Words: Shows the number of terms you have successfully retained in this session.
 * Success Rate: Presents a percentage representing your learning success for this session, motivating you to keep improving.
 
-[Command Format](#commands): `stats ...`
+[Command Format](#commands): `... stats ...`
 
 Output:
 
@@ -374,7 +378,7 @@ Switches between light and dark appearance of UI dashboard.
 * The theme will be saved and loaded when Flashlingo is restarted.
 * Default color theme is the **light theme**.
 
-[Command Format](#commands): `switch ...`
+[Command Format](#commands): `... switch ...`
 
 Output:
 
@@ -386,13 +390,13 @@ Output:
 
 Opens a browser with the help page (User Guide). Pressing the `Help` button and then clicking `Help F1` will achieve the same effect.
 
-[Command Format](#commands): `help ...`
+[Command Format](#commands): `... help ...`
 
 ### Exiting the program : `exit`
 
 Safely terminates the Flashlingo application and closes the graphical user interface (GUI).
 
-[Command Format](#commands): `exit ...`
+[Command Format](#commands): `... exit ...`
 
 Example:
 * Input `exit` to end your session and close the application
