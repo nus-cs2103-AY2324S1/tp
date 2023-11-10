@@ -1,0 +1,21 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+Participant ":SortCommandParser" as scp LOGIC_COLOR
+Participant ":Prefix" as p LOGIC_COLOR
+Participant ":FieldComparator" as fc LOGIC_COLOR
+Participant ":SortCommand" as sc LOGIC_COLOR
+
+[-> scp ++: parse(args)
+create p
+scp -> p ++: Prefix(specifier)
+p --> scp --
+create fc
+scp -> fc ++
+fc --> scp --
+create sc
+scp -> sc ++
+sc --> scp --: command
+scp -->[ --: command
+@enduml
