@@ -30,13 +30,7 @@ public class EditLeaveCommandParser implements Parser<EditLeaveCommand> {
         Id id;
         LocalDate oldDate;
         LocalDate newDate;
-
-        try {
-            id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLeaveCommand.MESSAGE_USAGE), pe);
-        }
+        id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
 
         if (argMultimap.getValue(PREFIX_OLD).isPresent() && argMultimap.getValue(PREFIX_NEW).isPresent()) {
             oldDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_OLD).get());

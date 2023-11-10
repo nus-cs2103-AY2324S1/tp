@@ -43,7 +43,7 @@ public class EditLeaveCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid employee id
         String userInput = INVALID_ID_DESC + " " + PREFIX_OLD + "2023-10-10 " + PREFIX_NEW + "2023-10-11";
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput, Id.MESSAGE_CONSTRAINTS);
 
         // invalid old date
         userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD + "2023-13-11 " + PREFIX_NEW + "2023-10-11";
@@ -58,7 +58,7 @@ public class EditLeaveCommandParserTest {
     public void parse_emptyValue_failure() {
         // empty employee id
         String userInput = " " + PREFIX_ID + " " + PREFIX_OLD + "2023-10-10 " + PREFIX_NEW + "2023-10-11";
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput, Id.MESSAGE_CONSTRAINTS);
 
         // empty old date
         userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_OLD + " " + PREFIX_NEW + "2023-10-11";

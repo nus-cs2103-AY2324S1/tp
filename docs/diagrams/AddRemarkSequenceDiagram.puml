@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddRemarkCommandParser" as AddRemarkCommandParser LOGIC_COLOR
+participant "r:AddRemarkCommand" as AddRemarkCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("addremark EID1234-5678 team-player")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addremark EID1234-5678 team-player")
+activate AddressBookParser
+
+create AddRemarkCommandParser
+AddressBookParser -> AddRemarkCommandParser
+activate AddRemarkCommandParser
+
+AddRemarkCommandParser --> AddressBookParser
+deactivate AddRemarkCommandParser
+
+AddressBookParser -> AddRemarkCommandParser : parse("EID1234-5678 team-player")
+activate AddRemarkCommandParser
+
+create AddRemarkCommand
+AddRemarkCommandParser -> AddRemarkCommand
+activate AddRemarkCommand
+
+AddRemarkCommand --> AddRemarkCommandParser : r
+deactivate AddRemarkCommand
+
+AddRemarkCommandParser --> AddressBookParser : r
+deactivate AddRemarkCommandParser
+
+AddRemarkCommandParser -[hidden]-> AddressBookParser
+destroy AddRemarkCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> AddRemarkCommand : execute()
+activate AddRemarkCommand
+
+AddRemarkCommand -> Model : setEmployee(targetEmployee, editedEmployee)
+AddRemarkCommand -> Model : updateFilteredEmployeeList()
+
+create CommandResult
+AddRemarkCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddRemarkCommand
+deactivate CommandResult
+
+AddRemarkCommand --> LogicManager : result
+deactivate AddRemarkCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

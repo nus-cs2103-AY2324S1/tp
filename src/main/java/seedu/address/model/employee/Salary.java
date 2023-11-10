@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Salary implements Comparable<Salary> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Salary should contain integers only.";
+    public static final String MESSAGE_CONSTRAINTS = "Salary should be a non-empty positive integer.";
 
     public static final String VALIDATION_REGEX = "\\d{1,}";
 

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddLeaveCommand;
+import seedu.address.model.employee.Id;
 
 public class AddLeaveCommandParserTest {
 
@@ -45,8 +46,7 @@ public class AddLeaveCommandParserTest {
         String invalidDateInput = " " + PREFIX_ID + ALICE.getId() + " " + PREFIX_FROM + "2023-02-26 "
                 + PREFIX_TO + "2023-02-29";
 
-        assertParseFailure(parser, invalidIdInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddLeaveCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, invalidIdInput, Id.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, invalidDateInput, Messages.MESSAGE_INVALID_DATE);
     }
 
@@ -57,8 +57,7 @@ public class AddLeaveCommandParserTest {
         // missing id
         assertParseFailure(parser, datesInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, " " + PREFIX_ID + datesInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " " + PREFIX_ID + " " + datesInput, Id.MESSAGE_CONSTRAINTS);
 
         String idInput = " " + PREFIX_ID + ALICE.getId();
         String startDateInput = " " + PREFIX_FROM + "2023-12-26";
