@@ -598,6 +598,7 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+
 ### 7.1. Launch and shutdown
 
 1. Initial launch
