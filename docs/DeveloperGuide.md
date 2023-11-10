@@ -379,9 +379,24 @@ The following activity diagram summarises the process of adding leave for an emp
     * Cons: Can be confusing to users as to what have been deleted, and also harder to maintain.
 
 
-### Attendance Marking
+### Attendance 
 
 #### Proposed Implementation
+
+The proposed attendance marking feature comprises 2 sub-features:
+1. Mark attendance feature
+2. Attendance Report feature
+
+These two features are dependent on the following classes:
+* AttendanceStorage
+* Attendance
+* AttendanceType
+
+Below are the relationships between these classes:
+
+![Attendance package classes](images/AttendanceStorageClassDiagram.png)
+
+#### 1. Mark attendance feature
 
 The mark mechanism is dependent on the Attendance class. The Attendance class contains information on the date and AttendanceType of a Person.  It implements the following operations:
 * `Attendance#markAbsent(LocalDate date)` -- marks the attendance of the employee on the provided date as absent.
@@ -391,15 +406,34 @@ The AttendanceStorage stores all the Attendance objects of one Person, only stor
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
 
-Step 1. The user executes `mark 1 /at LATE` command to mark the 5th person in the address book as present.
+Step 1. The user executes `mark 1 /at LATE` command to mark the 1st Person in the list as late.
 
 Step 2. The `mark` command calls `MarkCommand#markByIndex()` of the given employee, which calls the `Attendance#markAbsent()` of the given Person.
 
+This working status is then updated in the GUI as shown below:
 
+![GUI before mark command](images/GUIBeforeMarkCommand.png) ![GUI after mark command](images/GUIAfterMarkCommand.png)
 
-Sequence diagram as below:
-![Attendance](images/MarkSequenceDiagram.png)
+Sequence diagram is as shown below:
 
+![Mark Sequence Diagram](images/MarkSequenceDiagram.png)
+
+#### 2. Attendance Report feature
+
+The attendance reporting mechanism is dependent on the AttendanceStorage class. The AttendanceStorage is a collection of the Attendances of a Person. It implements the following operations:
+* `AttendanceStorage#getCount` -- counts the number of days the attendance of type `attendanceType` appears in the AttendanceStorage
+* `AttendanceStorage#getAttendanceReport` -- provides an `int[]` of the number of days of each attendance type in the following order: [leave, absent, late]
+
+The AttendanceStorage stores all the Attendance objects of one Person, only storing Attendances that are late or absent. Dates that are not in the storage are assumed to be marked as present for that given Person.
+
+Given below is an example usage scenario and how the mechanism behaves at each step.
+
+Step 1. The user executes `attendance 1` command to retrieve the attendance of the first Person.
+
+Step 2. The `attendance` command calls `AttendanceCommand#reportByIndex()` of the given employee, which calls the `AttendanceStorage#getAttendanceReport()` of the given Person.
+
+Sequence diagram is as shown below:
+![Mark Sequence Diagram](images/AttendanceSequenceDiagram.png)
 
 
 #### Design considerations:
@@ -407,16 +441,13 @@ Sequence diagram as below:
 **Aspect: How AttendanceStorage is assigned to each Person**
 * **Alternative 1 (current choice):** As an attribute of a Person.
   * Pros: Easy to query for a Person's attendance status
-  * Cons: May be sub-par performance as it would store identical Attendance objects for each Person (person A: absent on 24th oct, person B: also absent on 24th oct)
+  * Cons: May be sub-par performance as it would store identical Attendance objects for each Person.
+    * (Person A could be absent on 24th Oct, Person B could also absent on 24th Oct, but the current software architecture design does not allow shared usage of the duplicates)
 * **Alternative 2:** As a UniqueAttendanceList.
   * Pros: No copies of Attendance objects having the same attribute values
   * Cons: Difficult to reference a Person to each Attendance.
 
-
-
-
-
-
+    
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -449,119 +480,220 @@ Sequence diagram as below:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                                            | So that I can…​                                                         |
-| -------- | ------------------------------------------ | ------------------------------                         | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add new full-time staff members                        | maintain an up-to-date database of employees.                          |
-| `* * *`  | user                                       | delete an employee's information                       |keep the system clean and organized by removing unused data when employees resign |
-| `* * *`  | user                                       | edit employee information (contacts, addresses, bank account, etc.) | keep the system clean and organized by removing unused data when employees resign.|
-| `* * *`  | new user                                   | easily access the user guide within the app or platform| quickly learn how to use the application's features and functionalities effectively |
-| `* *`    | user                                       | receive concise and informative error messages         | quickly identify my mistake and take corrective actions promptly      |
-| `* *`    | user                                       | generate a report that shows the total payroll amount received by a specific employee| track the employee's overall compensation. |
-| `* *`    | user                                       | effectively manage employees' annual leave balances    | make sure the employees do not exceed their allocated limits |
-| `* * `   | user                                       | read specific information about a particular employee  | don’t need to manually scroll through multiple pages to find the required information|
-| `* *`    | user                                       | close the application using a command       | i can expedite the process without relying on the mouse                                        |
-| `* *`    | user                                       | calculate payroll for employees to be automatically based on their join dates and proposed salaries | ensure there are no discrepancies in compensation|
-| `*`      | user                                       | have a user-friendly application          | I can quickly learn how to use it in a short time                                               |
-| `*`      | user                                       | have the ability to sort employees by their join date/salary | make informed decisions and efficiently manage the workforce based on the sorted list.|
-| `*`      | user                                       | have an application capable of detecting and preventing the input of duplicate employee information| locate a person easily | ensure the system does not mix up or duplicate payroll data and also helps to prevent errors.|
+| Priority | As a …​                                     | I want to …​                                                                                            | So that I can…​                                                                               |
+| -------- | ------------------------------------------ |---------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `* * *`  | user                                       | add new full-time staff members                                                                         | maintain an up-to-date database of employees.                                                 |
+| `* * *`  | user                                       | delete an employee's information                                                                        | keep the system clean and organized by removing unused data when employees resign             |
+| `* * *`  | user                                       | edit employee information (contacts, addresses, bank account, etc.)                                     | keep the system clean and organized by removing unused data when employees resign.            |
+| `* * *`  | new user                                   | easily access the user guide within the app or platform                                                 | quickly learn how to use the application's features and functionalities effectively           |
+| `* *`    | user                                       | receive concise and informative error messages                                                          | quickly identify my mistake and take corrective actions promptly                              |
+| `* *`    | user                                       | generate a report that shows the total payroll amount received by a specific employee                   | track the employee's overall compensation.                                                    |
+| `* *`    | user                                       | effectively manage employees' annual leave balances                                                     | make sure the employees do not exceed their allocated limits                                  |
+| `* * `   | user                                       | read specific information about a particular employee                                                   | don’t need to manually scroll through multiple pages to find the required information         |
+| `* *`    | user                                       | close the application using a command                                                                   | i can expedite the process without relying on the mouse                                       |
+| `* *`    | user                                       | calculate payroll for employees to be automatically based on their join dates and proposed salaries     | ensure there are no discrepancies in compensation                                             |
+| `*`      | user                                       | have a user-friendly application                                                                        | I can quickly learn how to use it in a short time                                             |
+| `*`      | user                                       | have the ability to sort employees by their join date/salary                                            | make informed decisions and efficiently manage the workforce based on the sorted list.        |
+| `*`      | user                                       | have an application capable of detecting and preventing the input of duplicate employee information     | ensure the system does not mix up or duplicate payroll data and also helps to prevent errors. |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ManaGease` and the **User** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ManaGease` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add new full-time staff members**
+<u>**Use case: UC01 – Add a new full-time employee**</u>
+
+**Guarantees:**
+* Entered employee will be added.
 
 **MSS**
 
-1. User requests to add a new staff member.
-2. ManaGease adds members to the list.
-3. ManaGease displays a confirmation message that a member has been added.
+1. User requests to add a new employee.
+2. ManaGease adds employee to the employee database.
+3. ManaGease displays a confirmation message that an employee has been added.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Invalid tags are included in the command.
+* 1a. Invalid parameters are included in the command.
 
 	 * 1a1. ManaGease shows an error message.
+  
+     * Use case continues from Step 1.
 
          Use case ends.
+  
+* 1b. User does not input a compulsory parameter.
+
+  * 1b1. ManaGease shows an error message.
+  
+  * 1b2. User requests to add a new employee.
+  
+  * Steps 1b1 and 1b2 repeat until the user inputs a correct command. 
+  
+    Use case continues from Step 2.
+  
+* 1c. Identical employee is added to the list.
+
+  * 1c1. ManaGease shows an error message, identical employee cannot be added to the list.
+  
+    Use case ends.
 
 <br>
 
-**Use case: Edit information of existing full-time staff members**
+<u>**Use case: UC02 – List all employees**</u>
+
+**MSS**
+1. User requests to list all employees.
+2. ManaGease displays all the employees in the employee database.
+
+**Extensions**
+
+* 2a. Employee database is empty.
+
+  * 2a1. ManaGease shows an empty list of employees.
+  
+    Use case ends.
+
+<u>**Use case: UC03 – Edit information of existing full-time employee**</u>
+
+**Pre-conditions:**
+* Employee to edit should exist in the list.
 
 **MSS**
 
-1. User requests to edit an existing staff member.
-2. ManaGease edits the information of members.
-3. ManaGease displays a confirmation message that information for members is updated.
+1. User <u>lists the employees</u>.(UC02)
+2. ManaGease displays a list of all the employees.
+3. User requests to edit an existing employee.
+4. ManaGease edits the information of the specified employee.
+5. ManaGease displays a confirmation message that information for employees have been updated.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Invalid command parameters are given.
+* 3a. Invalid command parameters are given.
 
- 	* 1a1. ManaGease shows an error message.
+ 	* 3a1. ManaGease shows an error message.
 
-   	     Use case ends.
+       Use case continues from step 3.
+
+* 3b. Same information is given to edit the person to.
+
+  * 3b1. ManaGease shows an error message, the field to change is the same as the existing one.
 
 <br>
 
-**Use case: Read information on existing full-time staff members**
+<u>**Use case: UC04 – View one piece of information on a full-time employee**</u>
+
+**Guarantees:**
+* Information required from the specified employee will be displayed for the user.
+
+**Pre-conditions:**
+* Employee to view from the list should exist in the list.
 
 **MSS**
 
-1. User requests to read information about existing staff members.
-2. ManaGease displays the information for a member.
+1. User <u>lists the employees</u>.(UC02)
+2. ManaGease shows a list of all the employees.
+3. User requests to view one piece of information from an existing employee.
+4. ManaGease displays the information for an employee.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Invalid command parameters are given.
+* 3a. Invalid command parameters are given.
 
-	* 1a1. ManaGease shows an error message.
+	* 3a1. ManaGease shows an error message.
 
-        Use case ends.
+        Use case continues from Step 3.
 
 <br>
 
-**Use case: Delete existing full-time staff members**
+<u>**Use case: UC05 – Delete and existing employee**</u>
+
+**Guarantees:**
+* Entered employee will be deleted.
+
+**Pre-conditions:**
+* Employee to delete from the list should exist in the list.
+
 
 **MSS**
 
-1. User requests to delete an existing staff member.
-2. ManaGease deletes existing members.
+1. User <u>lists the employees</u>.(UC02)
+2. ManaGease shows a list of all the employees.
+3. User requests to delete an existing employee.
+4. ManaGease deletes existing employee.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Invalid command parameters are given.
+* 3a. Invalid command parameters are given.
 
-    * 1a1. ManaGease shows an error message.
+  * 3a1. ManaGease shows an error message.
+  
+  Use case resumes from Step 3.
 
-      Use case ends.
+* 3a. User requests to delete existing member via name.
 
-* 1b. User requests to delete existing member via name.
-
-	 * 1b1. ManaGease will display a list of members with the same name.
+	 * 3a1. ManaGease will display a list of members with the same name.
 
          Use case ends.
+  
+* 3b. User inputs an employee index or name that does not exist in the list.
+
+  * 3b1. ManaGease shows an error message.
+  
+    Use case resumes from Step 3.
 
 <br>
 
-**Use case: Add deductions/benefits to the monthly salary of an employee**
+<u>**Use case: UC06 – Add deductions/benefits to the monthly salary of an employee**</u>
+
+**Guarantees:**
+* Specified employee's deductions/benefits for the month will be added.
+* The specified employee's monthly salary will decrease based on the deductions for the month and increase based on the benefits for the month.
+
+**Pre-conditions:**
+* Employee to add deductions/benefits to should be in the list.
+
+**MSS**
+1. User <u>lists the employees</u>.(UC02)
+2. ManaGease shows a list of all the employees.
+3. User requests to add deductions/benefits to the monthly salary of an employee.
+4. ManaGease adds deductions/benefits to the monthly salary of an employee.
+5. ManaGease displays a confirmation message that deductions/benefits have been added.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. Invalid command parameters are given.
+
+    * 3a1. ManaGease shows an error message.
+
+      Use case resumes at Step 3.
+
+<br>
+
+<u>**Use case: UC07 – Generate a PDF payslip for a specific employee**</u>
+
+**Pre-conditions:**
+* Employee to generate payslip for to should be in the list.
+
 
 **MSS**
 
-1. User requests to add deductions/benefits to the monthly salary of an employee.
-2. ManaGease adds deductions/benefits to the monthly salary of an employee.
-3. ManaGease displays a confirmation message that deductions/benefits have been added.
+1. User <u>lists the employees</u>.(UC02)
+2. ManaGease shows a list of all the employees.
+3. User requests to generate a payslip for a specific employee.
+4. ManaGease generates a PDF payslip for the employee.
+5. ManaGease displays a confirmation message that a payslip has been generated.
 
    Use case ends.
 
@@ -571,98 +703,147 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. ManaGease shows an error message.
 
-      Use case ends.
-
-<br>
-
-**Use case: Generate a PDF payslip for a specific employee**
-
-**MSS**
-
-1. User requests to generate a payslip for a specific employee.
-2. ManaGease generates a PDF payslip for the employee.
-3. ManaGease displays a confirmation message that a payslip has been generated.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. Invalid command parameters are given.
-
-    * 1a1. ManaGease shows an error message.
-
-      Use case ends.
+      Use case resumes at Step 3.
 
 * 2a. Template file for the payslip is not found.
 
-    * 2a1. ManaGease shows an error message.
+    * 2a1. ManaGease shows an error message, requesting user to add a template file for payslip.
 
       Use case ends.
 
-**Use case: Add leave for a specific employee**
+<u>**Use case: UC08 – Add leave for a specific employee**</u>
+
+**Guarantees:**
+* Specified employee's days of leave will be added –– they will be considered taken.
+* The employee's remaining days of leave will reduce by the number of leaves added.
+
+**Pre-conditions:**
+* Employee to add leave to should be in the list.
 
 **MSS**
-
-1. User requests to add leave for a specific employee.
-2. ManaGease adds leave for the employee.
-3. ManaGease displays a confirmation message that the leave has been added.
+1. User <u>lists the employees</u>.(UC02)
+2. ManaGease shows a list of all the employees.
+3. User requests to add leave for a specific employee.
+4. ManaGease adds leave for the employee.
+5. ManaGease displays a confirmation message that the leave has been added.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Invalid command parameters are given.
+* 3a. Invalid command parameters are given.
 
-    * 1a1. ManaGease shows an error message.
+    * 3a1. ManaGease shows an error message.
 
-      Use case ends.
+      Use case resumes at Step 3.
 
-* 1b. Invalid date(s) are given.
+* 3b. Invalid date(s) are given.
 
-    * 1b1. ManaGease shows an error message.
+    * 3b1. ManaGease shows an error message.
 
-      Use case ends.
+      Use case resumes at Step 3.
+  
+* 3c. Non-existing index given.
 
-**Use case: Delete leave from a specific employee**
+  * 3c1. ManaGease shows an error message.
+
+    Use case resumes at Step 3.
+
+
+<u>**Use case: UC09 – Delete leave from a specific employee**</u>
+
+**Guarantees:**
+* Specified employee's days of leave will be deleted –– they will no longer be considered taken.
+* The employee's leave will revert back to the original value before the leave was taken.
+
+**Pre-conditions:**
+* Employee to delete leave from should be in the list.
 
 **MSS**
-
-1. User requests to delete leave from a specific employee.
-2. ManaGease deletes leave from the employee.
-3. ManaGease displays a confirmation message that the leave has been deleted.
+1. User <u>lists the employees</u>.(UC02)
+2. ManaGease shows a list of all the employees.
+3. User requests to delete leave from a specific employee.
+4. ManaGease deletes leave from the employee.
+5. ManaGease displays a confirmation message that the leave has been deleted.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Invalid command parameters are given.
+* 3a. Invalid command parameters are given.
 
-    * 1a1. ManaGease shows an error message.
+    * 3a1. ManaGease shows an error message.
+
+      Use case resumes at Step 3.
+
+* 3b. Invalid/Non-existing date(s) are given.
+
+    * 3b1. ManaGease shows an error message.
+
+      Use case resumes at Step 3.
+  
+* 3c. Non-existing index given.
+
+  * 3c1. ManaGease shows an error message.
+  
+    Use case resumes at Step 3.
+
+<u>**Use case: UC10 – Mark an employee's attendance**</u>
+
+**MSS**
+1. User <u>lists the employees</u>.(UC02)
+2. ManaGease shows a list of all the employees.
+3. User requests to mark an employee's attendance.
+4. ManaGease changes the employee's attendance.
+5. ManaGease displays a confirmation message that the attendance has been marked.
+6. ManaGease changes the working status of the employee as the specified attendance type.
+    
+    Use case ends
+
+**Extensions**
+* 3a. Invalid command parameters are given.
+
+  * 3a1. ManaGease shows an error message.
+    
+    Use case resumes at step 3.
+
+* 3b. Invalid attendance type given
+
+  * 3b1. ManaGease shows an error message.
+
+    Use case resumes at Step 3.
+  
+* 3c. User requests to delete existing member via name.
+
+    * 3c1. ManaGease will display a list of members with the same name.
 
       Use case ends.
+  
+* 4a. Employee is currently on leave
 
-* 1b. Invalid/Non-existing date(s) are given.
+  * 4a1. ManaGease will display an error message, users are not allowed to mark the attendance of an employee on leave.
 
-    * 1b1. ManaGease shows an error message.
-
-      Use case ends.
+    Use case ends.
 
 *{More to be added}*
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-4.  The application should be designed with an intuitive and user-friendly interface to cater to HR managers who have not previously used such software.
-5.  The application is designed and available exclusively in the English language.
-6.  The application is not required to handle the printing of the reports.
+3. The application should be designed with an intuitive and user-friendly interface to cater to HR managers who have not previously used such software.
+4. The application is designed and available exclusively in the English language.
+5. The application is not required to handle the printing of the reports.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **HR manager**: Human Resource Manager in the company
 * **Employee**: A staff in the company
+* **Parameters**: 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -679,18 +860,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1a. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1b. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2a. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2b. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -698,21 +879,20 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2._{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1a. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
