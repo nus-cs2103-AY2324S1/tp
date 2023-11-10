@@ -176,8 +176,8 @@ It uses `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` to a
 in order to produce a filtered list containing only entries whose job correspond to `KEYWORD(S)`.
 
 #### How is the command executed
-1. The user inputs the `find-i` command together with non-empty job-title as keyword(s);
-2. The `LogicManager` receives the command string and forwards it to the `AddressBookParser`.
+1. The user inputs the `find-i` command together with non-empty job role as keyword(s);
+2. The `LogicManager` receives the command string and forwarded it to the `AddressBookParser`.
 3. The `AddressBookParser` checks the type of command and constructs `FindInterviewCommandParser` to parse the keyword(s).
 4. The `FindInterviewCommandParser` constructs `JobContainsKeywordsPredicate` containing the keyword as predicate.
 5. The `LogicManager` executes the `FindInterviewCommand` which calls the `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` method.
@@ -626,31 +626,31 @@ Aspect: How the sort command works
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                               | I want to …​                             | So that I can…​                                                           |
-|----------|-------------------------------------------------------|------------------------------------------|---------------------------------------------------------------------------|
-| `* * *`  | New user of the app                                   | see usage instructions                   | refer to instructions when I first started to use the App                 |
-| `* * *`  | Engineering Manager ready for job applicant           | add a new applicant                      | save their contact details into the App                                   |
-| `* * *`  | Engineering Manager with many applicants              | rate an applicant                        | keep track of the applicant performance for the interview                 |
-| `* * *`  | Engineering Manager ready to start an interview       | schedule an interview                    | save the interview information into the application                       |
-| `* * *`  | Engineering Manager ready for next round of interview | delete an applicant                      | remove their contact details that I no longer need                        |
-| `* * *`  | Engineering Manager that finished an interview        | delete an interview                      | remove the interview that has already been completed                      |
-| `* * *`  | Busy Engineering Manager                              | find an applicant by name                | locate details of applicants without having to go through the entire list |
-| `* * *`  | Busy Engineering Manager                              | find a interview by job role             | easily locate the interview for the particular job role                   |
-| `* *`    | Busy Engineering Manager                              | set reminder of interview                | stay organised and track upcoming interview                               |
-| `* *`    | Engineering Manager with sensitive information        | hide private contact details             | protect the privacy of the applicants information in the App              |
-| `* *`    | Engineering Manager with many applicants              | sort the applicants by skill             | prioritise and focus on the most promising candidates                     |
-| `* *`    | Busy Engineering Manager                              | find free time slot                      | schedule an interview without time clash                                  |
-| `* *`    | Engineering Manager                                   | update an applicant details              | easily update their information on the App                                |
-| `* *`    | Engineering Manager                                   | update a job role                        | easily change the details about the job role                              |
-| `* *`    | Engineering Manager with limited budget               | track the cost per hire                  | ensure that the company budget is not exceeded                            |
-| `* *`    | Team-Oriented Engineering Manager                     | add other interviewer                    | facilitate collaboration and delegation of responsibilities               |
-| `*`      | Organised Engineering Manager                         | sort applicants by name                  | locate an applicant easily                                                |
-| `*`      | Engineering Manager with many contacts                | import contacts from other file          | add multiple contacts into the App smoothly                               |
-| `*`      | Meticulous Engineering Manager                        | store the applicant's background         | make a more informed choice to benefit the company                        |
-| `*`      | Engineering Manager with multiple rounds of interview | track the progress of each candidate     | maintain a clear overview of our recruitment efforts                      |
-| `*`      | New Engineering Manager                               | analyse the performance of the interview | make improvements to my interview processes                               |
-| `*`      | Helpful Engineering Manager                           | provide feedback to the applicant        | offer constructive advice to help them improve their skills               |
-| `*`      | Long user of the app                                  | provide feedback to the developer        | suggest improvements and enhancements for the app                         |
+| Priority | As a …​                                                      | I want to …​                             | So that I can…​                                                           |
+|----------|--------------------------------------------------------------|------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | New user of the app                                          | see usage instructions                   | refer to instructions when I first started to use the App                 |
+| `* * *`  | Engineering Hiring Manager ready for job applicant           | add a new applicant                      | save their contact details into the App                                   |
+| `* * *`  | Engineering Hiring Manager with many applicants              | rate an applicant                        | keep track of the applicant performance for the interview                 |
+| `* * *`  | Engineering Hiring Manager ready to start an interview       | schedule an interview                    | save the interview information into the application                       |
+| `* * *`  | Engineering Hiring Manager ready for next round of interview | delete an applicant                      | remove their contact details that I no longer need                        |
+| `* * *`  | Engineering Hiring Manager that finished an interview        | delete an interview                      | remove the interview that has already been completed                      |
+| `* * *`  | Busy Engineering Hiring Manager                              | find an applicant by name                | locate details of applicants without having to go through the entire list |
+| `* * *`  | Busy Engineering Hiring Manager                              | find a interview by job role             | easily locate the interview for the particular job role                   |
+| `* *`    | Busy Engineering Hiring Manager                              | set reminder of interview                | stay organised and track upcoming interview                               |
+| `* *`    | Engineering Hiring Manager with sensitive information        | hide private contact details             | protect the privacy of the applicants information in the App              |
+| `* *`    | Engineering Hiring Manager with many applicants              | sort the applicants by skill             | prioritise and focus on the most promising candidates                     |
+| `* *`    | Busy Engineering Hiring Manager                              | find free time slot                      | schedule an interview without time clash                                  |
+| `* *`    | Engineering Hiring Manager                                   | update an applicant details              | easily update their information on the App                                |
+| `* *`    | Engineering Hiring Manager                                   | update a job role                        | easily change the details about the job role                              |
+| `* *`    | Engineering Hiring Manager with limited budget               | track the cost per hire                  | ensure that the company budget is not exceeded                            |
+| `* *`    | Team-Oriented Engineering Hiring Manager                     | add other interviewer                    | facilitate collaboration and delegation of responsibilities               |
+| `*`      | Organised Engineering Hiring Manager                         | sort applicants by name                  | locate an applicant easily                                                |
+| `*`      | Engineering Hiring Manager with many contacts                | import contacts from other file          | add multiple contacts into the App smoothly                               |
+| `*`      | Meticulous Engineering Hiring Manager                        | store the applicant's background         | make a more informed choice to benefit the company                        |
+| `*`      | Engineering Hiring Manager with multiple rounds of interview | track the progress of each candidate     | maintain a clear overview of our recruitment efforts                      |
+| `*`      | New Engineering Hiring Manager                               | analyse the performance of the interview | make improvements to my interview processes                               |
+| `*`      | Helpful Engineering Hiring Manager                           | provide feedback to the applicant        | offer constructive advice to help them improve their skills               |
+| `*`      | Long user of the app                                         | provide feedback to the developer        | suggest improvements and enhancements for the app                         |
 
 ### Use cases
 
@@ -818,7 +818,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to handle as many applicants as the user is able to manage in their workday/workweek.
 3.  The app should be reasonably responsive to the entire set of user requests(i.e. within 1 second at maximum load).
-4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Managers
+4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Hiring Managers
 that have many years of programming experience).
 
 ### Glossary
@@ -827,7 +827,7 @@ that have many years of programming experience).
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Applicant**: The applicant applying to a particular job role.
 * **Hiring manager**: The manager interviewing the applicant.
-This manager is familiar with the technical aspects of the role. Also called engineering manager.
+This manager is familiar with the technical aspects of the role. Also called engineering hiring manager.
 * **MSS**: Main Success Scenario. It describes the most straightforward
 interaction in a use case where nothing goes wrong.
 * **Extensions**: In a use case, an extension describes an alternative flow of events
