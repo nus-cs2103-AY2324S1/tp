@@ -349,9 +349,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 _{Explain here how the data archiving feature will be implemented}_
 
 
-### Adding a Person 
+### Adding a Person
 
-The add feature is facilitate by a number of classes such as `Person` and `Model` 
+The add feature is facilitate by a number of classes such as `Person` and `Model`
 
 Step 1. The user launches the application for the first time.
 
@@ -496,7 +496,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Store reference to the other entity, e.g. store a list of groups in person.
     * Pros: Easier to load from storage. One centralized place to store data. Less coupling.
     * Cons: Searching might become more costly.
-  
+
 * --------------------------------------------------------------------------------------------------------------------
 
 
@@ -522,7 +522,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * This app can help to save time by listing available time slots of individuals in a team.
 
 
-**Value proposition**: Text-friendly project management tool that helps students schedule meetings with different groups while also keeping track of tasks and 
+**Value proposition**: Text-friendly project management tool that helps students schedule meetings with different groups while also keeping track of tasks and
 responsibilities of each member. Our app will track the schedule of each contact and tasks individuals have to do for their project.
 
 
@@ -562,7 +562,7 @@ responsibilities of each member. Our app will track the schedule of each contact
 
 1. User requests to add contact
 2. ProjectPRO adds new contact
-3. User gets back success command result 
+3. User gets back success command result
 
    Use Case ends.
 
@@ -572,24 +572,24 @@ responsibilities of each member. Our app will track the schedule of each contact
     * Use case repeats from step 1
 
 * 1b. System detects duplicate contact requested by user.
-    * 1b1. System displays corresponding error message. 
+    * 1b1. System displays corresponding error message.
     * Use case ends.
 
-    
+
 **Use case: Delete contact**
 
 **MSS**
 
-1. User requests to delete contact 
-2. System deletes contact. 
+1. User requests to delete contact
+2. System deletes contact.
 3. System produces a success message.
 
    Use Case ends
 
 **Extensions**
-* 1a. System detects incorrect data entered. 
-    * 1a1. System requests for the correct data. 
-    * 1a2. User enters new data 
+* 1a. System detects incorrect data entered.
+    * 1a1. System requests for the correct data.
+    * 1a2. User enters new data
     * 1a3. Steps 1a1-1a2 are repeated until the data entered are correct.
     * Use case resumes from step 2.
 
@@ -597,17 +597,17 @@ responsibilities of each member. Our app will track the schedule of each contact
 
 **MSS**
 
-1. User requests to add a contact into a group. 
-2. System adds user into the group successfully. 
+1. User requests to add a contact into a group.
+2. System adds user into the group successfully.
 3. System displays a success message.
 
    Use Case ends
 
 **Extensions**
 * 1a. System detects an error in the data entered.
-    * 1a1. System requests for the correct data. 
-    * 1a2. User enters new data 
-    * 1a3. Steps 1a1-1a2 are repeated until the data entered are correct. 
+    * 1a1. System requests for the correct data.
+    * 1a2. User enters new data
+    * 1a3. Steps 1a1-1a2 are repeated until the data entered are correct.
     * Use case resumes from step 2.
 
 *{More to be added}*

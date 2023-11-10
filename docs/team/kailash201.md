@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to allow user add free time interval into their contacts.
   * What it does: allows the user to add non-clashing free time interval into their contacts.
-  * Justification: This feature allows the user to see when their contacts or group mates are free. In addition to that, this feature allows `findfreetime` feature to work. 
+  * Justification: This feature allows the user to see when their contacts or group mates are free. In addition to that, this feature allows `findfreetime` feature to work.
   * Highlights: This feature needed to ensure that the time interval added to a contact by the user does not clash with other time interval that contact has. This feature allows multiple time intervals to be added in a single input. Due to that, a lot of challenges were faced in the parsing logic as making it convenient for the user in terms of input will open up room for more invalid errors.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&chartGroupIndex=36&chartIndex=2%23%2F%23%2F)

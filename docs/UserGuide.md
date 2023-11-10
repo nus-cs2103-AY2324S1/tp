@@ -93,7 +93,7 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 ## Quick Start
 
 
-1. Ensure you have Java 11 or above installed on your computer. 
+1. Ensure you have Java 11 or above installed on your computer.
    - Simply go to your terminal and type `java -version`. ![here](images/UG/QuickStart1.png)
 
 2. Download the latest ProjectPRO.jar from [here](https://github.com/AY2324S1-CS2103T-T10-3/tp/releases).
@@ -103,9 +103,9 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
    - For Mac Users:
      - ![MACGUIDE](images/UG/QuickStart3.png)
    - For Windows Users:
-   
+
 4. Launch ProjectPRO.
-   - For Mac users: 
+   - For Mac users:
      1. Open a command terminal
      2. type `cd Desktop` , followed by `cd ProjectPro`
      3. type `java -jar ProjectPRO.jar` to run the application.
@@ -478,7 +478,7 @@ You can remove available time slots of your contacts.
 **Example(s):**
 - `deletetime n/Alex Yeoh  t/mon 1400 - mon 1600`
   This removes a time slot when Alex Yeoh is available from your contact list.
-  
+
 Insert Image
   Deleted Time From: Alex Yeoh
 
@@ -504,7 +504,7 @@ You list all available time slots of your contacts.
 **Example(s):**
 - `listtime n/Alex Yeoh`
   This lists all time slots when Alex Yeoh is available from your contact list.
-  
+
 Insert Image
   Listed times of Person: Alex Yeoh
   MON 1400 - MON 1600
@@ -562,7 +562,7 @@ You can remove meeting times from your groups.
 **Example(s):**
 - `deletetime g/CS2100  t/mon 1400 - mon 1600`
   This removes a time slot when Alex Yeoh is available from your contact list.
-  
+
 Insert Image
   Deleted Time From: Alex Yeoh
 
@@ -588,7 +588,7 @@ You list meeting time for your groups.
 **Example(s):**
 - `listtime g/CS2100`
   This lists all meeting times of the CS2100 group.
-  
+
 Insert Image
   Listed Time From: CS2100
 
@@ -614,7 +614,7 @@ You can find a meeting time slot for your group where everyone is available.
 **Example(s):**
 - `findfreetime g/CS2100 d/60`
   This finds a common meeting time of 60 minutes for your CS2100 group.
-  
+
 Insert Image
 
 
