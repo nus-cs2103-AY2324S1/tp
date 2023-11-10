@@ -195,6 +195,10 @@ Step 5. A success message is displayed to the user to confirm that the new foste
 
 The add feature ensures that user input is correctly parsed and validated, and it prevents duplicate entries in the address book.
 
+The following activity diagram summarizes what happens when a user executes an add command:
+
+![Add Command Activity Diagram](images/AddActivityDiagram.png)
+
 #### Design considerations:
 
 * **Data Validation** — The add feature performs thorough validation on input data, ensuring that it adheres to constraints for each field.
@@ -283,10 +287,10 @@ Given below is an example usage scenario and how the sort feature behaves at eac
 Step 1. The user enters the `sort` command. The `SortCommand` is invoked, and it calls the `sortByName` method in the `Model` interface, which is implemented in the `ModelManager` class.
 
 Step 2. The `sortByName` method creates a comparator based on the name of a person.
-It then calls the `sortNames` method in the `AddressBook` class.
+It then calls the `sortNames` method in the `AddressBook` class (omitted from diagram for simplicity).
 
 Step 3. The `sortNames` method initiates the sorting process and sorts the list of persons using the provided comparator.
-It calls the `sort` method on the `persons` UniquePersonList.
+It calls the `sort` method on the `persons` UniquePersonList (omitted from diagram for simplicity).
 
 Step 4. The `sort` method in the `UniquePersonList` class performs the actual sorting operation on its `internalList`.
 
