@@ -8,6 +8,8 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Comparator;
+
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
@@ -59,6 +61,7 @@ public class AddCommand extends Command {
         }
 
         model.addDate(toAdd);
+        model.updateSortedPersonList(Comparator.<Date>naturalOrder());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

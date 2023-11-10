@@ -34,12 +34,15 @@ public class CommandBox extends UiPart<Region> {
     public void setCommandTextField(String text) {
         commandTextField.setText(text);
     }
+    public String getCommandTextField() {
+        return commandTextField.getText();
+    }
 
     /**
      * Handles the Enter button pressed event.
      */
     @FXML
-    private void handleCommandEntered() {
+    public void handleCommandEntered() {
         String commandText = commandTextField.getText();
         if (commandText.equals("")) {
             return;

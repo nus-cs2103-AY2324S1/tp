@@ -72,6 +72,22 @@ public class PresetsBar extends UiPart<Region> {
         commandBox.setCommandTextField("showP");
     }
 
+    /**
+     * Gets the text in the command box.
+     * @return the text in the command box.
+     */
+    public String getCommandBoxTest() {
+        return commandBox.getCommandTextField();
+    }
+
+    /**
+     * Gets the Command Box.
+     * @return the Command Box.
+     */
+    public CommandBox getCommandBox() {
+        return commandBox;
+    }
+
 }
 
 
