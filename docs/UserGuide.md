@@ -71,6 +71,7 @@ Here are some benefits of adopting lesSON in your studying experience:
 
 `Index` - The relative position of a flashcard within the deck.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 # User Interface Overview
@@ -103,6 +104,7 @@ algebra? a/It means OR.`
 `set d/easy`
 `set d/medium`
 `set d/hard`
+
 8. The card will automatically be reinserted into deck. This is based on how difficult you found the card. Due to our
 spaced repetition system, as you practise, the more difficult cards will surface more at the top.
 9. Note that the `practise`, `solve`, and `set` commands support indexes, but it is recommended to use them without
@@ -330,6 +332,8 @@ hint 10
 #### Acceptable values for each parameters:
 1. Index must be positive integer
 2. Index cannot exceed size of the deck
+
+
 ### Solving Flashcards: `solve`
 Solves the question at the given index
 
