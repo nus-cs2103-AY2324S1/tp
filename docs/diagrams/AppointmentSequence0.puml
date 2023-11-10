@@ -4,61 +4,31 @@ skinparam ArrowFontStyle plain
 
 Participant ":PersonListPanel" as panel UI_COLOR
 Participant ":PersonCard" as personCardA UI_COLOR
-Participant ":PersonCard" as personCardB UI_COLOR
 Participant "Alice:Person" as personA MODEL_COLOR
-Participant "Benson:Person" as personB MODEL_COLOR
+Participant "apptX:Appointment" as appt MODEL_COLOR
 
-[-> panel : updateItem(Benson, false)
-activate panel
+[-> panel : updateItem(Alice, false)
 
 Create personCardA
 panel -> personCardA : new PersonCard(Alice)
-activate personCardA
 
 personCardA -> personA : getName()
-activate personA
 personA -> personCardA : Alice:Name
-deactivate
 
 personCardA -> personA : getPhone()
-activate personA
 personA -> personCardA : 1234:Phone
-deactivate
 
-personCardA -> personA : getAppointment()
-activate personA
-personA -> personCardA : 12-12: Appointment
-deactivate
-
-personCardA -> panel
-deactivate
-<- panel
-deactivate
-
-[-> panel : updateItem(Benson, false)
-activate panel
-
-Create personCardB
-panel -> personCardB : new PersonCard(Alice)
-activate personCardB
-
-personCardB -> personB : getName()
-activate personB
-personB -> personCardB : Benson:Name
-deactivate
-
-personCardB -> personB : getPhone()
-activate personB
-personB -> personCardB : 5678:Phone
-deactivate
-
-personCardB -> personB : getAppointment()
-activate personB
-personB -> personCardB : //null//
-deactivate
-
-personCardB -> panel : NullPointerException
-deactivate
-<- panel : NullPointerException
-deactivate
+alt Alice has appointment
+    personCardA -> personA : getAppointment()
+    personA -> personCardA : apptX
+    personCardA -> appt : toString()
+    appt -> personCardA
+    personCardA -> panel : PersonCard object
+    <- panel : end update
+else Alice does not have appointment
+    personCardA -> personA : getAppointment()
+    personA -> personCardA : //null//
+    personCardA -> panel : //null//.toString() throws NullPointerException
+    <- panel : NullPointerException
+end
 @enduml

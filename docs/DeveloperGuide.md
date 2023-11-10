@@ -318,11 +318,14 @@ HealthSync requests of its users.
 
 Therefore, `Appointment` uses a combination of `regex` and `DateTimeFormatter` to resolve its user input.
 
-_{sequence diagram here}_
+<puml src="diagrams/AppointmentActivity0.puml" width="250" />
 
-As seen above, `ParserUtil` verifies if the Appointment user input is trivially valid using `regex`, before passing
-the input into the `of` constructor. `DateTimeFormatter` cannot fully verify input strings against its format without
-creating a `LocalDate`/`LocalTime` object as a side effect, so `of` handles a portion of the parse.
+A partial activity diagram illustrating the relevant segment of the parse process.
+
+As seen above, `ParserUtil` verifies if the Appointment user input is trivially valid using
+`regex`, before passing the input into the `of` constructor. `DateTimeFormatter` cannot fully verify input strings
+against its format without creating a `LocalDate`/`LocalTime` object as a side effect,
+so `of` handles a portion of the parse.
 
 #### Design Considerations:
 
