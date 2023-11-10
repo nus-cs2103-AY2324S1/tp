@@ -58,22 +58,31 @@ These are symbols we will be using to highlight certain information to you.
 | :warning:            | Warnings about command, where action may lead to data loss or  misinterpretation |
 | :bulb:               | Tips to optimise the use of Foster Family                                        |
 
+## Technical Terms
+These are the explanations of some technical terms you may come across in this user guide.
+
+| Term      | Definition                                                                |
+|-----------|---------------------------------------------------------------------------|
+| Command   | Keywords that Foster Family recognises to invoke specific functions       |
+| Parameter | Information to be passed to the commands as inputs                        |
+| Index     | The number next to a fosterer's name in the list shown in the main window |
+
 --------------------------------------------------------------------------------------------------------------------
 ## User Interface (UI)
 These are the two different screens you will be interacting with in Foster Family. 
 
 ### The Main Window 
 ![Ui](images/Ui.png)
-This is the main view that welcomes you when you first open up Foster Family.
+This is the main view that welcomes you when you first start the Foster Family app.
 
 ### The Profile Page 
 ![Profile](images/screenshots/ProfilePage.png)
-This is the profile view that you can use to add a fosterer or edit an existing fosterer. 
+This is the profile view that you can use to add a fosterer or edit the details of an existing fosterer. 
 
 <br>
 
-#### How to open profile
-There are 2 ways you can use to open this profile page. 
+#### How to open the profile page
+There are two ways you can use to navigate to the profile page. 
 1. Enter <code>add</code> to view an _empty_ profile page to [add](#adding-a-fosterer-through-the-profile-page-add) a fosterer.
 2. Enter either <code>edit INDEX</code> or <code>view INDEX</code> to [edit](#editing-a-fosterers-detail-through-the-profile-page-edit) or [view](#viewing-a-fosterers-detail-view) the fosterer at index <code>INDEX</code> in Foster Family.
 
