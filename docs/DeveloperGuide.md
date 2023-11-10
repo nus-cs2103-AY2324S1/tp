@@ -328,7 +328,8 @@ User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` wil
 `UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
 
 **Scenario 2:**
-User enters a gather `t/Elderly`. The `GatherEmailByTag` will be initialized. Each person in the `UniquePersonList` will be passed into the `GatherEmailByTag#gatherEmails(Person person)`.
+User enters a gather `t/Elderly`. The `GatherEmailByTag` will be initialized. Each person in the `UniquePersonList`
+will be passed into the `GatherEmailByTag#gatherEmails(Person person)`.
 
 The following sequence diagram shows how the gather operation works:
 
@@ -399,29 +400,36 @@ modifying the `FindCommandParser`.
 
 ### Sort Feature
 
-The **Sort** feature in our software system is designed to sort the list of clients by name as well as appointment time. This feature is facilitated through the `SortCommand` class.
+The **Sort** feature in our software system is designed to sort the list of clients by name as well as appointment
+time. This feature is facilitated through the `SortCommand` class.
 
 #### Implementation Overview
 
-The `SortCommand` class is instantiated by the `SortCommandParser`, which parses user input commands. The `SortCommandParser` class implements the following operations:
+The `SortCommand` class is instantiated by the `SortCommandParser`, which parses user input commands. The
+`SortCommandParser` class implements the following operations:
 
 - **`SortCommandParser#parse(String args)` —  Checks the sort command keyword passed in by the user. 
 
-The `SortCommand` takes in a `Comparator<Person>` object and passes it into the current `Model` model. The `SortCommand` class implements the following operations:
+The `SortCommand` takes in a `Comparator<Person>` object and passes it into the current `Model` model. The
+`SortCommand` class implements the following operations:
 
 - **`SortCommand#execute()` —  Executes the sort operation by calling `model.sortFilteredPersonList(comparator)`.
 
-The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data. It contains the following method:
+The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
+It contains the following method:
 
-- **`ModelManager#sortFilteredPersonList(Comparator<Person> comparator)` —  Carries out the sorting operation by setting the comparator on the list of clients wrapped in a SortedList wrapper.
+- **`ModelManager#sortFilteredPersonList(Comparator<Person> comparator)` —  Carries out the sorting operation by
+setting the comparator on the list of clients wrapped in a SortedList wrapper.
 
 **Aspect: Usage Scenario:**
 
 **Scenario 1:**
-User enters a sort command `sort appointment`. The `SortByAppointmentComparator` will be initialized and used to instantiate a SortCommand that when executed causes the list to be sorted by appointment, showing the earlier appointment first.
+User enters a sort command `sort appointment`. The `SortByAppointmentComparator` will be initialized and used to
+instantiate a SortCommand that when executed causes the list to be sorted by appointment, showing the earlier appointment first.
 
 **Scenario 2:**
-User enters a sort command `sort name`. The `SortByNameComparator` will be initialized and used to instantiate a SortCommand that when executed causes the list to be sorted by lexicographical ordering of name.
+User enters a sort command `sort name`. The `SortByNameComparator` will be initialized and used to instantiate a
+SortCommand that when executed causes the list to be sorted by lexicographical ordering of name.
 
 The following sequence diagram shows how the gather operation works:
 
@@ -431,71 +439,93 @@ The following sequence diagram shows how the gather operation works:
 
 **Aspect: How Sort Executes**
 
-**Aspect 1 :** User can sort by name and appointment at any time. As such, calling find on the sorted list will result in the ordering of find to also be sorted.
-- **Pros:** Improved usability of maintaining order of list throughout without the list having to be reordered after each command
+**Aspect 1 :** User can sort by name and appointment at any time. As such, calling find on the sorted list will result
+in the ordering of find to also be sorted.
+- **Pros:** Improved usability of maintaining order of list throughout without the list having to be reordered after
+each command
 - **Cons:** Limited sorting options as of now
 
 **Aspect 2:** After sorting the first time, it will not be possible to return the list to its original ordering
 - **Pros:** Easier implementation of the sorting function.
-- **Cons:** Unlikely, but if for some reason the user wants the list sorted back to its original order, the only way is to restart the app at the current moment.
+- **Cons:** Unlikely, but if for some reason the user wants the list sorted back to its original order, the only way
+is to restart the app at the current moment.
 
 _{more aspects and alternatives to be added}_
 
 
 ### Appointment Sidebar Feature
 
-The appointment sidebar is facilitated by `ModelManager`. It extends `Model` and stores and additional `SortedList<Appointment>` object that represents all the existing appointments.
+The appointment sidebar is facilitated by `ModelManager`. It extends `Model` and stores and additional
+`SortedList<Appointment>` object that represents all the existing appointments.
 
-The `setAppointmentList()` method always check against `filteredPersons` to look for updates regarding existing `Appointment` objects. Tg=he `getAppointmentList()` method is called once during startup of the program by `getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the `sortedList<Appointment>` object within `modelManager`.
+The `setAppointmentList()` method always check against `filteredPersons` to look for updates regarding existing
+`Appointment` objects. Tg=he `getAppointmentList()` method is called once during startup of the program by
+`getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the
+`sortedList<Appointment>` object within `modelManager`.
 
 #### Design Considerations:
 
 **Aspect: Where to create SortedList<Appointment>**
 * **Alternative 1 (current choice):** Implement it within `modelManager`
-    * Pros: `SortedAppointments` object references `filteredPersons` which ensures that the appointment sidebar corresponds with `persons` from `addressBook`.
+    * Pros: `SortedAppointments` object references `filteredPersons` which ensures that the appointment sidebar
+    corresponds with `persons` from `addressBook`.
     * Cons: Errors with respect to `addressBook` will affect the appointment sidebar rendered.
 
 * **Alternative 2:** Implement it within `addressBook`
-    * Pros: `persons` and `appointmentList` are handled separately within `addressBook` and hence the appointment sidebar is not dependent on `persons` in `addressBook`
-    * Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer dependent on `filteredPersons`.
+    * Pros: `persons` and `appointmentList` are handled separately within `addressBook` and hence the appointment
+    sidebar is not dependent on `persons` in `addressBook`
+    * Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer
+    dependent on `filteredPersons`.
 
 ### \[Proposed\] Undo/redo feature
 
 ### \[Proposed\] Undo/redo feature
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
+history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
+following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and
+`Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
+initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls
+`Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be
+saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls
+`Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it
+will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the
+`undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once
+to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index
+0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo`
+command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user
+rather than attempting to perform the undo.
 
 </div>
 
@@ -503,21 +533,31 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end
+at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer`
+once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index
+`addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook
+states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will
+return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as
+`list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
+Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
+pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
+purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
+desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -793,7 +833,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with typing speed of above 80WPM for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with typing speed of above 80WPM for regular English text (i.e. not code, not system admin commands) should
+be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  A user should be able to have up to 2000 clients.
 5.  The product is offered as a free offline service.
 6.  The codebase should be well-documented to aid in future maintenance and updates.
@@ -850,7 +891,8 @@ resistant to mistakes by having the user key in a specific phrase, or to initial
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting
+point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
@@ -879,7 +921,8 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+      Timestamp in the status bar is updated.
 
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
