@@ -329,6 +329,16 @@ so `of` handles a portion of the parse.
 
 #### Design Considerations:
 
+**Aspect: Value to store `Appointment` as**
+
+* **Alternative 1:** Use of raw `String` format for Appointment
+    * Pros: Far easier to parse and store as an object.
+    * Cons: Hard to extend upon in future use-cases, such as reminders, etc.
+
+* **Alternative 2 (current choice):** Use of Java Temporal-related objects for Appointment
+    * Pros: More direct paths of feature extension, such as searching by time period.
+    * Cons: Translation to and from Java Temporal objects can be non-trivial.
+
 **Aspect: Constructor for `Appointment` to manage valid user input**
 
 * **Alternative 1:** Directly use constructors for `Appointment`, and using `isValidAppointment` to verify input
@@ -340,26 +350,16 @@ so `of` handles a portion of the parse.
       * User input validation for temporal objects create the relevant object as a side effect, wasting resources to
         construct the temporal object twice.
 
-  * **Alternative 2 (current choice):** Use of `of` factory method for `Appointment`, and verifying input inside `of`
-      * Pros:
-        * Explicit demarcation of `Appointment` as a class that can throw an `Exception` during construction
-        * Factory method can double as an explicit user verification method
-        * Construction of `Appointment` only performed once user input is verified
-      * Cons:
-        * "Uniqueness" of private constructor for this field only may cause confusion when extending the app
-        * Appointment handles part of `parse` for `ParserUtil`
+* **Alternative 2 (current choice):** Use of `of` factory method for `Appointment`, and verifying input inside `of`
+    * Pros:
+      * Explicit demarcation of `Appointment` as a class that can throw an `Exception` during construction
+      * Factory method can double as an explicit user verification method
+      * Construction of `Appointment` only performed once user input is verified
+    * Cons:
+      * "Uniqueness" of private constructor for this field only may cause confusion when extending the app
+      * Appointment handles part of `parse` for `ParserUtil`
 
-**Aspect: Value to store `Appointment` as**
-
-* **Alternative 1:** Use of raw `String` format for Appointment
-    * Pros: Far easier to parse and store as an object.
-    * Cons: Hard to extend upon in future use-cases, such as reminders, etc.
-
-* **Alternative 2 (current choice):** Use of Java Temporal-related objects for Appointment
-    * Pros: More direct paths of feature extension, such as searching by time period.
-    * Cons: Translation to and from Java Temporal objects can be non-trivial.
-
-**Aspect: Parsing of `Appointment` Field**
+**Aspect: Parsing of `Appointment` Field as multiple fields or single field**
 
 * **Alternative 1 (current choice):** Use of the single `ap/` flag.
   * Pros: Easy to input on the user-end.
