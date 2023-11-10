@@ -6,9 +6,9 @@ pageNav: 3
 
 # LoveBook User Guide
 
-LoveBook, is a dating-focused application, revolving around providing users with a convenient
-and enjoyable tool to enhance their dating experiences. Featuring user preferences management, date organization,
-customizable filtering options and best match algorithms, LoveBook enhances the efficiency and effectiveness of your
+LoveBook, is a **dating-focused** application, revolving around providing users with a **convenient**
+and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date organization**,
+**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and **effectiveness** of your
 online dating journey.
 
 <!-- * Table of Contents -->
@@ -17,6 +17,8 @@ online dating journey.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Quick Start**
+
+### **Download and Installation**
 
 1. Ensure that you have Java `11` or above installed in your Computer.
 
@@ -36,6 +38,47 @@ online dating journey.
     * `exit` : Exits the app
 
 5. Refer to the features below for details of each command.
+
+### **Navigating the GUI**
+
+If you're new to this program, the initial screen might appear a bit daunting. Don't fret; let's explore the various elements of the LoveBook interface together.
+We suggest enlarging the program window for a clearer perspective, allowing you to view more content.
+
+Here's the detailed breakdown of the LoveBook screen: <br>
+![GUI](images/navigation.png)
+
+- **Menu Bar** - This is where you can find the `File` and `Help` options. Click on `File` to access the `Exit` option. Click on `Help` to access the `Help` option.
+- **Command Box** - This is where you type in your commands. Press `Enter` to execute the command.
+- **Presets Bar** - This is where you can find the preset commands. Click on a preset command to populate your command box.
+- **Result Display** - This is where the results of your commands are displayed.
+- **Date List Panel** - This is where the list of dates are displayed. The list is scrollable, and you can scroll up and down to view the entire list.
+
+### **Common Symbols**
+
+As you navigate through the application, you may come across certain symbols depicting your date's gender and horoscope.
+Here's a quick guide to help you understand what they mean.
+
+#### Gender Symbols
+| Gender  | Symbol                                                                   |
+|---------|--------------------------------------------------------------------------|
+| Male    | <img src="../src/main/resources/images/genders/male.png" height="50">    |
+| Female  | <img src="../src/main/resources/images/genders/female.png" height="70">  |
+
+#### Horoscope Symbols
+| Horoscope   | Symbol                                                                               | Birthday Range            |
+|-------------|--------------------------------------------------------------------------------------|---------------------------|
+| Aries       | <img src="../src/main/resources/images/horoscopes/aries.png" height="50">            | March 21 - April 19       |
+| Taurus      | <img src="../src/main/resources/images/horoscopes/taurus.png" height="50">           | April 20 - May 20         |
+| Gemini      | <img src="../src/main/resources/images/horoscopes/gemini.png" height="50">           | May 21 - June 20          |
+| Cancer      | <img src="../src/main/resources/images/horoscopes/cancer.png" height="50">           | June 21 - July 22         |
+| Leo         | <img src="../src/main/resources/images/horoscopes/leo.png" height="50">              | July 23 - August 22       |
+| Virgo       | <img src="../src/main/resources/images/horoscopes/virgo.png" height="50">            | August 23 - September 22  |
+| Libra       | <img src="../src/main/resources/images/horoscopes/libra.png" height="50">            | September 23 - October 22 |
+| Scorpio     | <img src="../src/main/resources/images/horoscopes/scorpio.png" height="50">          | October 23 - November 21  |
+| Sagittarius | <img src="../src/main/resources/images/horoscopes/sagittarius.png" height="50">      | November 22 - December 21 |
+| Capricorn   | <img src="../src/main/resources/images/horoscopes/capricorn.png" height="50">        | December 22 - January 19  |
+| Aquarius    | <img src="../src/main/resources/images/horoscopes/aquarius.png" height="50">         | January 20 - February 18  |
+| Pisces      | <img src="../src/main/resources/images/horoscopes/pisces.png" height="50">           | February 19 - March 20    |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -65,6 +108,7 @@ online dating journey.
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+ ### Prefix Table
 | Metric | Prefix | Constraints                                                                    |
 |--------|--------|--------------------------------------------------------------------------------|
 | Name | `name/` | Name can only contain letters, numbers and spaces. It must not be left blank.  |
@@ -429,17 +473,9 @@ your data. In the event of a power outage, all your data will be safe.
 **A**: LoveBook will clear all the existing data and reset to as it was when you installed it. It is highly discouraged
 to manually edit the data file.
 
---------------------------------------------------------------------------------------------------------------------
-## **Prefix Summary for Metrics**
-
-| Metric | Prefix | Constraints                                                                    |
-|--------|--------|--------------------------------------------------------------------------------|
-| Name | `name/` | Name can only contain letters, numbers and spaces. It must not be left blank.  |
-| Age | `age/` | Age should be a positive integer between 18 and 150 (inclusive).               |
-| Gender | `gender/` | Gender should be either M or F. It is case sensitive.                          |
-| Height | `height/` | Height should be a positive integer in cm between 100cm and 250cm (inclusive). |
-| Income | `income/` | Income (per month) should be a positive integer in SGD.                        |
-| Horoscope | `horoscope/` | Horoscope should be a valid zodiac sign. It is case insensitive.               |
+**Q**: How do I change my date's avatar? <br>
+**A**: Currently, the avatars are randomly selected from a pool of 9 avatars. We are working on a feature to allow users
+to choose their own avatars.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -471,8 +507,6 @@ to manually edit the data file.
 | Term                       | Definition                                                                                                        |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------|
 | Date                       | A person that the user is interested in and is currently seeing.                                                  |
- | User | The person who is using the application.                                                                           |
-| LoveBook                   | The application that the user is using.                                                                           |
  | Metric | A certain characteristic of a date. (e.g. Gender, Height)                                                         |
  | Command | Text that the user types into the application to perform an action.                                               |
  | Parameter | A value that the user provides to the application when executing a command. (e.g. in `gender/M` M is a parameter) |
