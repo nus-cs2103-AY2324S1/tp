@@ -866,8 +866,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -882,6 +880,43 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an invalid employee ID)<br>
       Expected: Similar to previous.
+
+### Adding Leave for an Employee
+
+1. Adding leave while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. At least 1 employee is in the list. 
+   Employee with employee ID "EID1234-5678" is in the list, and has one leave date "2023-11-11" in his LeaveList.
+   
+   2. Test case: `addleave id/EID1234-5678 from/2023-12-04 to/2023-12-05`<br>
+   Expected: The leave dates "2023-12-04" and "2023-12-05" are added to the leave list of the employee with ID "EID1234-5678".
+   Details of the employee's leave list shown in the result display.
+
+   3. Test case: `addleave id/EID0000-0000 from/2023-12-04 to/2023-12-05`<br>
+   Expected: No employee leave is added (ID does not exist). Error details shown in the result display. 
+
+   4. Test case: `addleave id/EID12345678 from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 from/2023-30-11 to/2023-30-11`<br>
+     Expected: No employee leave is added (incorrect field format). Error details shown in the result display. 
+
+   5. Test case: `addleave id/ from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 from/ to/2023-12-05` or `addleave id/EID1234-5678 from/2023-12-04 to/`<br>
+     Expected: No employee leave is added (empty fields). Error details shown in the result display. 
+
+   6. Test case: `addleave from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 to/2023-12-05` or `addleave id/EID1234-5678 from/2023-12-04`<br>
+     Expected: No employee leave is added (missing parameters). Error details shown in the result display. 
+   
+   7. Test case: `addleave id/EID1234-5678 from/2023-11-11 to/2023-11-13`<br>
+     Expected: No employee leave is added (leave date(s) already exists). Error details shown in the result display. 
+   
+   8. Test case: `addleave id/EID1234-5678 from/2023-12-05 to/2023-12-04`<br>
+     Expected: No employee leave is added (invalid date order). Error details shown in the result display.
+
+1. Adding leave while only some employees are being shown 
+
+   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list. 
+     Employee with id "EID1234-5678" has leaves "2023-11-11" and "2023-11-12" and is not in displayed list. 
+
+   2. Try the test cases in the previous section (Adding leave while all employees are being shown)
+     Expected: Same as the previous section
 
 ### Editing Leave for an Employee
 
@@ -918,6 +953,37 @@ testers are expected to do more *exploratory* testing.
       Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list.
 
    1. Try the test cases in the previous section (Editing leave while all employees are being shown)
+      Expected: Same as the previous section
+
+### Listing Employees on Leave on a specified date
+
+1. Listing employees on leave while all employees are being shown 
+   1. Prerequisites: List all employees using the `list` command. At least one employee in the list.
+        Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02". No employees on leave on "2023-11-11".
+   
+   2. Test case: `listleave on/2023-11-01`<br>
+     Expected: The employees on leave on the specified date are displayed in the employee list.
+     Details of the number of employees on leave on the specified date shown in the result display. 
+
+   3. Test case: `listleave on/2023-11-11`<br>
+      Expected: No employee displayed (no employees on leave on specified date).
+      Details of the number of employees on leave on the specified date shown in the result display.
+
+   4. Test case: `listleave on/11-11-2023`<br>
+     Expected: No employee displayed (incorrect field format). Error details shown in the result display. 
+   
+   5. Test case: `listleave on/ `<br>
+   Expected: No employee displayed (empty field). Error details shown in the result display. 
+   
+   6. Test case: `listleave `<br>
+     Expected: No employee displayed (missing parameters). Error details shown in the result display.
+
+2. Listing employees on leave while only some employees are being shown 
+
+   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+      Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list. 
+
+   2. Try the test cases in the previous section (Listing employees on leave while all employees are being shown)
       Expected: Same as the previous section
 
 ### Adding Remark for an Employee
