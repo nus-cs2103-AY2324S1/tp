@@ -455,11 +455,11 @@ _{more aspects and alternatives to be added}_
 
 ### Appointment Sidebar Feature
 
-The appointment sidebar is facilitated by `ModelManager`. It extends `Model` and stores and additional
-`SortedList<Appointment>` object that represents all the existing appointments.
+The appointment sidebar is facilitated by `ModelManager`. It extends `Model` and stores an additional
+`SortedList<Appointment>` object that represents all existing appointments.
 
-The `setAppointmentList()` method always check against `filteredPersons` to look for updates regarding existing
-`Appointment` objects. Tg=he `getAppointmentList()` method is called once during startup of the program by
+The `setAppointmentList()` method checks against `filteredPersons` to look for updates regarding existing
+`Appointment` objects. The `getAppointmentList()` method is called once during the startup of the program by
 `getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the
 `sortedList<Appointment>` object within `modelManager`.
 
