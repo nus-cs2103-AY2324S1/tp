@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":StatsCommandParser" as StatsCommandParser LOGIC_COLOR
+participant "a:StatsAvailCommand" as StatsAvailCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("stats avail")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("stats avail")
+activate AddressBookParser
+
+create StatsCommandParser
+AddressBookParser -> StatsCommandParser
+activate StatsCommandParser
+
+StatsCommandParser --> AddressBookParser
+deactivate StatsCommandParser
+
+AddressBookParser -> StatsCommandParser : parse("avail")
+activate StatsCommandParser
+
+create StatsAvailCommand
+StatsCommandParser -> StatsAvailCommand
+activate StatsAvailCommand
+
+StatsAvailCommand --> StatsCommandParser : a
+deactivate StatsAvailCommand
+
+StatsCommandParser --> AddressBookParser : a
+deactivate StatsCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+StatsCommandParser -[hidden]-> AddressBookParser
+destroy StatsCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> StatsAvailCommand : execute()
+activate StatsAvailCommand
+
+StatsAvailCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> StatsAvailCommand : list
+deactivate Model
+
+ref over StatsAvailCommand
+get availability statistics
+end ref
+
+create CommandResult
+StatsAvailCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> StatsAvailCommand
+deactivate CommandResult
+
+StatsAvailCommand --> LogicManager : result
+deactivate StatsAvailCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
