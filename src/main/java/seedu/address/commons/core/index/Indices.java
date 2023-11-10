@@ -30,7 +30,7 @@ public class Indices {
      * Creates a new {@code Indices} using zero-based indices.
      */
     public static Indices fromZeroBased(int[] zeroBasedIndices) {
-        assert(zeroBasedIndices != null);
+        assert (zeroBasedIndices != null);
         SortedSet<Index> result = new TreeSet<>();
 
         for (int index : zeroBasedIndices) {
@@ -44,7 +44,7 @@ public class Indices {
      * Creates a new {@code Indices} using one-based indices.
      */
     public static Indices fromOneBased(int[] oneBasedIndices) {
-        assert(oneBasedIndices != null);
+        assert (oneBasedIndices != null);
         SortedSet<Index> result = new TreeSet<>();
 
         for (int index : oneBasedIndices) {
