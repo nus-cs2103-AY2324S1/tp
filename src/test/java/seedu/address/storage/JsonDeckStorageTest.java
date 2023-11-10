@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalCards.getTypicalDeck;
+import static seedu.address.testutil.TypicalCards.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -101,6 +101,18 @@ public class JsonDeckStorageTest {
         jsonDeckStorage.saveDeck(original, filePath);
         ReadOnlyDeck readBack = jsonDeckStorage.readDeck(filePath).get();
         assertEquals(original, new Deck(readBack));
+
+        // Modify data, overwrite exiting file, and read back
+        original.removeCard(CS1101S);
+        jsonDeckStorage.saveDeck(original, filePath);
+        readBack = jsonDeckStorage.readDeck(filePath).get();
+        assertEquals(original, new Deck(readBack));
+
+        // Save and read without specifying file path
+        jsonDeckStorage.saveDeck(original); // file path not specified
+        readBack = jsonDeckStorage.readDeck().get(); // file path not specified
+        assertEquals(original, new Deck(readBack));
+
     }
 
     @Test
