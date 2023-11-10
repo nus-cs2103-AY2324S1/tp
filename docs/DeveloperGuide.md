@@ -736,7 +736,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The student requested does not exist in the Class Manager.
 
     * 1a1. Class Manager displays an error message.
-      
+
       Use case resumes at step 1.
 
 ---
@@ -818,7 +818,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Loading data files
 ###### Setup
-- Move the JAR file to a fresh directory. 
+- Move the JAR file to a fresh directory.
 - Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
 - Copy the sample data file `classmanager.json`. And paste 2 copies of it in the same directory as the `classmanager.json`. Rename the copies to `t1.json` and `t2.json`.
 - Do not delete the data file `classmanager.json` as it will be used as the starting default file.
@@ -826,7 +826,7 @@ testers are expected to do more *exploratory* testing.
 ###### Test cases
 1. Loading a valid data file
    - Enter: `load f/t1`<br>
-        Expected: The data in `t1.json` is loaded into the app. The status bar on the bottom left changed to the new file path. 
+        Expected: The data in `t1.json` is loaded into the app. The status bar on the bottom left changed to the new file path.
         The list of students shown in the GUI is the same as the one in `classmanager.json`.
    <br><br>
 2. Loading a corrupted data file
@@ -834,7 +834,7 @@ testers are expected to do more *exploratory* testing.
    - Enter: `load f/t2`<br>
         Expected: The data in `t2.json` is not loaded into the app. The address bar on the bottom left is unchanged.
         File error details shown in the result display box.
-    <br><br> 
+    <br><br>
 3. Loading a missing data file
    - Enter: `load f/t3`<br>
        Expected: The status bar on the bottom left is unchanged. File error details shown in the result display box.
@@ -844,14 +844,14 @@ testers are expected to do more *exploratory* testing.
 1. Undoing a command
     1. Test case: `clear` -> `undo`<br>
         Expected: The `clear` command is undone. The list of students shown in the GUI is the same as the one before the `clear` command.
-    
+
     2. Test case: `add` -> `undo`<br>
         Expected: The `add` command is undone. The newly added student is removed from the list of students.
 
 2. Redoing a command
     1. Test case: `clear` -> `undo` -> `redo`<br>
         Expected: The `clear` command is redone. The list of students shown in the GUI is empty.
-   
+
     2.  Test case: `add` -> `add` -> `undo` -> `undo` -> `redo` (Add 2 students, and then 2 undo with 1 redo)<br>
         Expected: The first `add` command is redone. The first student is added back to the list of students.
 
@@ -864,7 +864,7 @@ testers are expected to do more *exploratory* testing.
 
 ###### Test cases
 1. Dealing with missing data files
-    - Edit the `preferences.json` to have the entry: 
+    - Edit the `preferences.json` to have the entry:
     ```
     "classManagerFilePath" : "data\\missing.json"
     ```
@@ -915,11 +915,11 @@ testers are expected to do more *exploratory* testing.
 1. Editing a student's details in the current students list.
 
    1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
-      Expected: The student with STUDENT_NUMBER is edited to have the new NAME. 
+      Expected: The student with STUDENT_NUMBER is edited to have the new NAME.
    2. Test case: `edit STUDENT_NUMBER s/NEW_STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the NEW_STUDENT_NUMBER.
       <br><br>
-2. Editing a student's details where the student is not in the list (Invalid Student Number). 
+2. Editing a student's details where the student is not in the list (Invalid Student Number).
 
    1. Test case: Edit command with Student Number that is not present in the list <br>
       Expected: No student is edited. Error details shown in the result display box.
@@ -930,8 +930,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `comment s/STUDENT_NUMBER cm/COMMENT`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new COMMENT.
-      <br><br>   
-2. Adding a comment to a student where the student is not in the list (Invalid Student Number). 
+      <br><br>
+2. Adding a comment to a student where the student is not in the list (Invalid Student Number).
 
    1. Test case: Comment command with Student Number that is not present in the list <br>
       Expected: No student is edited. Error details shown in the result display box.
@@ -939,7 +939,7 @@ testers are expected to do more *exploratory* testing.
 3. Adding a comment to a student where the new comment is empty.
 
    1. Test case: `comment s/STUDENT_NUMBER cm/`<br>
-      Expected: Student is edited to have an empty comment. 
+      Expected: Student is edited to have an empty comment.
 
 ### Tagging a student
 
@@ -971,12 +971,12 @@ testers are expected to do more *exploratory* testing.
     </box>
 
 4. Deleting all tags from student.
-   
+
    1. Test case: `tag s/STUDENT_NUMBER t/`<br>
       Expected: The student with STUDENT_NUMBER will have all tags removed.
 
 5. Attempt to tag a student not in the currently student list.
-    
+
    1. Test case: `tag` command with a student number that is not in the list.
       Expected: Error message is shown in the display result.
 

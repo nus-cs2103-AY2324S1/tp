@@ -89,7 +89,7 @@ The **GUI** is split up into 4 main sections.
 
 * Class Number refers to the tutorial class number of a particular course.
 * Class Number is not case-sensitive, and it must begin with 1 to 3 consecutive alphabetical characters, followed by 1 to 5 consecutive digits. Optionally, it can end with 1 alphabetical character. Class Number must not be blank.
-* Class Number is stored verbatim based on your input, with case being preserved. 
+* Class Number is stored verbatim based on your input, with case being preserved.
 * Here are some valid examples of Class Number:
     - `G11`
     - `T11A`
@@ -556,7 +556,7 @@ Example:
 **A**: You can rename the file manually after saving it. Start the Class Manager 2023 app and use the `load` command to load the renamed file. Note that the renamed file will then become the new default save file.
 <br><br>
 **Q**: I am unable to load my save file, what should I do?<br>
-**A**: Ensure that the save file is located in the `[JAR file location]/data` folder, and that the file name is valid. In addition, make sure that the number of tutorials and assignments in the save file is the same 
+**A**: Ensure that the save file is located in the `[JAR file location]/data` folder, and that the file name is valid. In addition, make sure that the number of tutorials and assignments in the save file is the same
 as the current configuration of Class Manager 2023. You can reconfigure Class Manager 2023 to match the number of tutorials and assignments in the save file using the `config` command.
 <br><br>
 **Q**: I am unable to load my save file and I have tried all the solutions above, what should I do?<br>
