@@ -59,26 +59,26 @@ As you navigate through the application, you may come across certain symbols dep
 Here's a quick guide to help you understand what they mean.
 
 #### Gender Symbols
-| Gender  | Symbol                                                                   |
-|---------|--------------------------------------------------------------------------|
-| Male    | <img src="../src/main/resources/images/genders/male.png" height="50">    |
-| Female  | <img src="../src/main/resources/images/genders/female.png" height="70">  |
+| Gender  | Symbol                                                                                                                                 |
+|---------|----------------------------------------------------------------------------------------------------------------------------------------|
+| Male    | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/genders/male.png?raw=true" height="50">   |
+| Female  | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/genders/female.png?raw=true" height="70"> |
 
 #### Horoscope Symbols
-| Horoscope   | Symbol                                                                               | Birthday Range            |
-|-------------|--------------------------------------------------------------------------------------|---------------------------|
-| Aries       | <img src="../src/main/resources/images/horoscopes/aries.png" height="50">            | March 21 - April 19       |
-| Taurus      | <img src="../src/main/resources/images/horoscopes/taurus.png" height="50">           | April 20 - May 20         |
-| Gemini      | <img src="../src/main/resources/images/horoscopes/gemini.png" height="50">           | May 21 - June 20          |
-| Cancer      | <img src="../src/main/resources/images/horoscopes/cancer.png" height="50">           | June 21 - July 22         |
-| Leo         | <img src="../src/main/resources/images/horoscopes/leo.png" height="50">              | July 23 - August 22       |
-| Virgo       | <img src="../src/main/resources/images/horoscopes/virgo.png" height="50">            | August 23 - September 22  |
-| Libra       | <img src="../src/main/resources/images/horoscopes/libra.png" height="50">            | September 23 - October 22 |
-| Scorpio     | <img src="../src/main/resources/images/horoscopes/scorpio.png" height="50">          | October 23 - November 21  |
-| Sagittarius | <img src="../src/main/resources/images/horoscopes/sagittarius.png" height="50">      | November 22 - December 21 |
-| Capricorn   | <img src="../src/main/resources/images/horoscopes/capricorn.png" height="50">        | December 22 - January 19  |
-| Aquarius    | <img src="../src/main/resources/images/horoscopes/aquarius.png" height="50">         | January 20 - February 18  |
-| Pisces      | <img src="../src/main/resources/images/horoscopes/pisces.png" height="50">           | February 19 - March 20    |
+| Horoscope   | Symbol                                                                                                                                         | Birthday Range            |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| Aries       | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/aries.png?raw=true" height="50">       | March 21 - April 19       |
+| Taurus      | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/taurus.png?raw=true" height="50">      | April 20 - May 20         |
+| Gemini      | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/gemini.png?raw=true" height="50">      | May 21 - June 20          |
+| Cancer      | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/cancer.png?raw=true" height="50">      | June 21 - July 22         |
+| Leo         | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/leo.png?raw=true" height="50">         | July 23 - August 22       |
+| Virgo       | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/virgo.png?raw=true" height="50">       | August 23 - September 22  |
+| Libra       | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/libra.png?raw=true" height="50">       | September 23 - October 22 |
+| Scorpio     | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/scorpio.png?raw=true" height="50">     | October 23 - November 21  |
+| Sagittarius | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/sagittarius.png?raw=true" height="50"> | November 22 - December 21 |
+| Capricorn   | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/capricorn.png?raw=true" height="50">   | December 22 - January 19  |
+| Aquarius    | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/aquarius.png?raw=true" height="50">    | January 20 - February 18  |
+| Pisces      | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/pisces.png?raw=true" height="50">      | February 19 - March 20    |
 
 --------------------------------------------------------------------------------------------------------------------
 
