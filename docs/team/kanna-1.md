@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to undo a Command
     * What it does: allows the user to undo an edit, add, delete and clear command.
     * Justification: This feature allows users to be able to quickly recover from errors made without having to go through a series of other commands to achieve the same goal.
-    * Implemention: A new abstract class undo-able command was implemented to do this.
+    * Implementation: A new abstract class undo-able command was implemented to do this.
     * Note: The undo for log, alog and clog was implemented by another team member.
 
 
@@ -34,7 +34,7 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `edit`
-        * Added dcoumentation for the features `undo`
+        * Added documentation for the features `undo`
         * Re-factored the features description and ordering in the UG ([#137](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/137))
         * Added relevant tips to the UG and the corresponding shorcuts for features ([#137](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/137))
 
