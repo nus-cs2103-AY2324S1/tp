@@ -23,7 +23,7 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags the student identified "
-            + "by the index number used in the displayed student list to a risk level: high/medium/low. "
+            + "by the index number used in the displayed student list to a risk level: high/medium/low.\n"
             + "Existing risk level will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_RISK_LEVEL + "RISK LEVEL] "

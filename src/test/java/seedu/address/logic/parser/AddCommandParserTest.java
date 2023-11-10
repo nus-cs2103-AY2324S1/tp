@@ -13,7 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.RISK_DESC_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.RISK_DESC_LOW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -22,6 +21,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_RISK_LEVEL_LOW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RISK_LEVEL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalStudents.AMY;
@@ -77,7 +77,8 @@ public class AddCommandParserTest {
         assertParseFailure(parser,
                 validExpectedStudentString + PHONE_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
                         + validExpectedStudentString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS,
+                        PREFIX_PHONE, PREFIX_RISK_LEVEL));
 
         // invalid value followed by valid value
 
@@ -141,19 +142,19 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + ADDRESS_DESC_BOB
-                + RISK_DESC_LOW + RISK_DESC_HIGH, Name.MESSAGE_CONSTRAINTS);
+                + RISK_DESC_LOW, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB
-                + RISK_DESC_LOW + RISK_DESC_HIGH, Phone.MESSAGE_CONSTRAINTS);
+                + RISK_DESC_LOW, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_ADDRESS_DESC
-                + RISK_DESC_LOW + RISK_DESC_HIGH, Address.MESSAGE_CONSTRAINTS);
+                + RISK_DESC_LOW, Address.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_RISK_LEVEL_DESC + VALID_RISK_LEVEL_LOW, RiskLevel.MESSAGE_CONSTRAINTS);
+                + INVALID_RISK_LEVEL_DESC, RiskLevel.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + INVALID_ADDRESS_DESC,
@@ -161,7 +162,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB
-                + ADDRESS_DESC_BOB + RISK_DESC_LOW + RISK_DESC_HIGH,
+                + ADDRESS_DESC_BOB + RISK_DESC_LOW,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
