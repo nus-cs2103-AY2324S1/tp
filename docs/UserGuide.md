@@ -7,31 +7,15 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
 ## Table of Contents
 
-* [Quick Start](#quick-start)
-* [Input Formats](#input-formats)
-* [Commands](#commands)
-  * [Help Command](#viewing-help--help)
-  * [Add Command](#adding-a-booking-add)
-  * [List Command](#listing-all-bookings--list)
-  * [Edit Command](#editing-a-booking--edit)
-  * [Find Command](#locating-bookings-by-name-or-room-find)
-  * [Delete Command](#deleting-a-booking--delete)
-  * [Undo Command](#undo-a-deletion--undo)
-  * [Clear Command](#clearing-all-entries--clear)
-  * [Exit Command](#exiting-the-program--exit)
-* [Features](#features)
-  * [Saving Data](#saving-the-data)
-  * [Editing Data File](#editing-the-data-file)
-  * [Prefix Completion](#prefix-completion)
-* [FAQ](#faq)
-* [Known Issues](#known-issues)
-* [Commands Summary](#commands-summary)
+* Table of Contents
+{:toc}
 
----
+--------------------------------------------------------------------------------------------------------------------
 <details open>
 <summary><strong>Quick start</strong></summary>
+<div markdown="1">
 
-## Quick Start
+## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -51,7 +35,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
     * `list` : Lists all bookings.
 
-    * `add r/1 d/2023-11-03 08:00 to 2023-11-04 11:00 n/Aikenot Dueet p/98765432 e/aikenotdueet@gmail.com` : Adds a booking for the room number `1` to the Bookings Book.
+    * `add r/1 d/2023-11-03 08:00 to 2023-11-04 11:00 n/Aikenot Dueet p/98765432 e/aikenotduet@gmail.com` : Adds a booking for the room number `1` to the Bookings Book.
 
     * `delete 3` : Deletes the 3rd booking shown in the current list.
 
@@ -63,15 +47,16 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
 6. Refer to the [Commands](#commands) below for details of each command.
 
+</div>
 </details>
-
----
-
+--------------------------------------------------------------------------------------------------------------------
 <details open>
 <summary><strong>Formats</strong></summary>
+<div markdown="1">
 
 ## Input Formats
 
+<div markdown="block" class="alert alert-info">
 ### Command Format
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -87,26 +72,23 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
 
 ### Parameter Format
 
 * `r/ROOM`: `ROOM` can be any integer from 1 to 500 inclusive.
-* `d/BOOKING_PERIOD`: `BOOKING_PERIOD` is in the format `YYYY-MM-dd HH:mm to YYYY-M-dd HH:mm` where the end of the period must come after the start.
-* `n/NAME`: `NAME` can be any String within 50 characters and it should not be blank.
-* `p/PHONE_NUMBER`: `PHONE_NUMBER` can be any positive integer between 3 and 15 digits in length (inclusive).
-* `e/EMAIL`: `EMAIL` is in the format `local-part@domain` with a 50-character limit. The local-part should only contain 
-alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start 
-or end with any special characters. This is followed by a '@' and then a domain name. The domain name is made up of 
-domain labels separated by periods. The domain name must end with a domain label that is supported: 
-  * gmail, yahoo, outlook, hotmail, icloud.
-* `rm/REMARK`: `REMARK` can be any String within 50 characters.
+* `d/BOOKING_PERIOD`: `BOOKING_PERIOD` is in the format `YYYY-MM-dd HH:mm to YYYY-M-dd HH:mm`.
+* `n/NAME`: `NAME` can be any String.
+* `p/PHONE_NUMBER`: `PHONE_NUMBER` can be any integer.
+* `e/EMAIL`: `EMAIL` can be any String as long as it contains `@` inside the String.
+* `rm/REMARK`: `REMARK` can be any String less than or equal to 50 characters in length.
 
+</div>
 </details>
-
----
-
+--------------------------------------------------------------------------------------------------------------------
 <details open>
 <summary><strong>Commands</strong></summary>
+<div markdown="1">
 
 ## Commands
 
@@ -125,14 +107,15 @@ Adds a booking to the bookings book.
 Format: `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK`
 ![AddCommand.png](images%2FAddCommand.png)
 
-> ❗**NOTE:**  
-> The room number is used to assign the room type.
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+The room number is used to assign the room type.
+</div>
 
-* Image above shows result of command `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`
+* Image above shows result of command `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@example.com`
 
 Examples:
-* `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`
-* `add r/256 d/2023-02-01 15:00 to 2023-02-02 23:59 n/Betsy Crowe p/99990000 e/betsycrowe@gmail.com`
+* `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@example.com`
+* `add r/256 d/2023-02-01 15:00 to 2023-02-02 23:59 n/Betsy Crowe p/99990000 e/betsycrowe@example.com`
 
 ### Listing all bookings : `list`
 
@@ -152,14 +135,14 @@ Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL]`
 
 ![EditCommand.png](images%2FEditCommand.png)
 
-* Example image above shows result of command `edit 1 p/91234567 e/johndoe@gmail.com`
+* Example image above shows result of command `edit 1 p/91234567 e/johndoe@example.com`
 * Edits the booking at the specified `INDEX`. The index refers to the index number shown in the displayed booking list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The Room number is used to map to the Room type; there is no way to directly edit the room type without changing the Room number.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@gmail.com` Edits the phone number and email of the 1st booking to be `91234567` and `johndoe@gmail.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email of the 1st booking to be `91234567` and `johndoe@example.com` respectively.
 
 ### Locating bookings by name or room: `find`
 
@@ -170,7 +153,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 ![FindCommand.png](images%2FFindCommand.png)
 
 * Example image above shows result of command `find 1`
-* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name and room is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -231,15 +214,6 @@ Format: `exit`
 
 * The window will close automatically on command `exit`
 
-</details>
-
----
-
-<details open>
-<summary><strong>Features</strong></summary>
-
-## Features
-
 ### Saving the data
 
 CheckMate data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -248,8 +222,9 @@ CheckMate data are saved in the hard disk automatically after any command that c
 
 CheckMate data are saved automatically as a JSON file `[JAR file location]/data/checkmate.json`. Advanced users are welcome to update data directly by editing that data file.
 
-> ⚠️**Caution:**  
-> If your changes to the data file makes its format invalid, CheckMate will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, CheckMate will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+</div>
 
 ### Prefix Completion
 
@@ -262,35 +237,23 @@ Example:
   * gives the unused prefix with the actual information for the booking at the index.
 
 Prefix completions works with `add` and `edit` command and does not validate your input format.
+
+</div>
 </details>
-
----
-
-<details open>
-<summary><strong>FAQ</strong></summary>
+--------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CheckMate home folder.
 
-</details>
-
----
-
-<details open>
-<summary><strong>Known Issues</strong></summary>
+--------------------------------------------------------------------------------------------------------------------
 
 ## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
-</details>
-
----
-
-<details open>
-<summary><strong>Command Summary</strong></summary>
+--------------------------------------------------------------------------------------------------------------------
 
 ## Commands Summary
 
@@ -305,4 +268,3 @@ Prefix completions works with `add` and `edit` command and does not validate you
 | **List**   | `list`                                                                                                                                                                                        |
 | **Help**   | `help`                                                                                                                                                                                        |
 | **Exit**   | `exit`                                                                                                                                                                                        |
-</details>
