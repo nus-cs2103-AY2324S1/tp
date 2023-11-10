@@ -13,6 +13,18 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 <!-- * Table of Contents -->
 <page-nav-print />
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Key definitions
+You are a 'beginner' user if ...
+
+1. you are new to JABPro (used JABPro less than 5 times) and
+2. you wish to fully rely on the JABPro interface
+
+You are an 'advanced' user if ...
+1. you have used JABPro multiple times now and
+2. you use JABPro's search and summary statistics extensively for comparison or
+3. you would like to challenge yourself to go beyond the JABPro user interface and manually edit files
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,6 +59,8 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
     * `github Alex Yeoh`: Redirects the user to the Github account of the candidate [provided github has been added previously]
 
 Refer to the [Features](#features) below for details of each command.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
