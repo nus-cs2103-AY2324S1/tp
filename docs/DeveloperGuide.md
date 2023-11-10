@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple components above.
 
 **How the architecture components interact with each other**
 
