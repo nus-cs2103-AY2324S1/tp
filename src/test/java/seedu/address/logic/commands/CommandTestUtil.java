@@ -56,6 +56,7 @@ public class CommandTestUtil {
         + "CS2103T&"; // '&' not allowed in group names
 
     public static final String VALID_TIME_MON = "mon 1300 - mon 1400";
+    public static final String VALID_TIME_MON_2 = "mon 1330 - mon 1430";
     public static final String VALID_TIME_TUE = "tue 1300 - tue 1400";
     public static final String VALID_TIME_WED = "wed 1300 - wed 1400";
     public static final String VALID_TIME_MON_CAPS = "MON 1300 - mOn 1400";
