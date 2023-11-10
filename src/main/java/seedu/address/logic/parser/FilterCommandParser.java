@@ -54,7 +54,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                         PREFIX_LEAVE, PREFIX_ROLE, PREFIX_MANAGER,
                         //@@author kenvynKwek
                         PREFIX_DEPARTMENT);
-                        //@@author
+        //@@author
 
         Set<EmployeeName> nameSet = parseNamesForFilter(argMultimap.getAllValues(PREFIX_NAME));
         Set<Phone> phoneSet = parsePhonesForFilter(argMultimap.getAllValues(PREFIX_PHONE));
@@ -69,7 +69,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         //@@author kenvynKwek
         return new FilterCommand(
-        //@@author
+                //@@author
                 new ContainsAllPredicate(nameSet, phoneSet, emailSet, addressSet, salarySet, leaveSet, roleSet,
                         supervisorNameSet, departmentSet));
     }

@@ -95,7 +95,7 @@ public class ContainsAllPredicate implements Predicate<Employee> {
                 && supervisorNameSet.equals(otherContainsPredicate.supervisorNameSet)
                 //@@author kenvynKwek
                 && departmentSet.equals(otherContainsPredicate.departmentSet);
-                //@@author
+        //@@author
     }
 
     @Override
@@ -114,6 +114,6 @@ public class ContainsAllPredicate implements Predicate<Employee> {
                 //@@author kenvynKwek
                 .add(", departmentSet: ", departmentSet)
                 .toString();
-                //@@author
+        //@@author
     }
 }
