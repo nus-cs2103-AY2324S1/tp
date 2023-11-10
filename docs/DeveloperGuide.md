@@ -1,8 +1,11 @@
 ---
 layout: page
 title: Developer Guide
+
+## **About HouR**
+
 ---
-* Table of Contents
+## **Table of Contents**
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -147,7 +150,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -463,8 +466,7 @@ The method `AddLeaveCommand#execute()` returns a `CommandResult` object, which s
 
 The diagram below details how the operation of adding an appointment works.
 
-<INSERT DIAGRAM HERE!>
-
+![Add Leave Sequence Diagram](images/uml-diagrams/AddLeaveSequenceDiagram.png)
 
 Given below is an example usage scenario for the command.
 
@@ -533,6 +535,42 @@ The following activity diagram summarizes what happens when a user executes the 
 * **Alternative 2**: Create methods in model specifically to edit the `remarkList` attribute of the employee.
     * Pros: More OOP, follows SRP by not having `DeleteRemarkCommand#execute()` perform the editing directly.
     * Cons: Longer command execution, requires more parts to work together.
+
+
+### List Leave feature
+
+The list leave feature allows HouR user to view employees on leave on the specified date.
+
+#### Implementation
+
+The list leave command mechanism is facilitated by the `ListLeaveCommandParser` class which extends the `AddressbookParser`.
+
+`ListLeaveCommandParser#parse()` overrides  `Parser#parse()` in the Parser interface.
+
+`ListLeaveCommandParser` implements the following operations:
+
+* `ListLeaveCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `ListLeaveCommand` object with the parsed employee ID, start date and end date.
+
+The `ListLeaveCommand` object then communicates with the `Model` API by calling the following methods:
+
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `ListLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The diagram below details how the operation of adding an appointment works.
+
+![List Leave Sequence Diagram](images/uml-diagrams/ListLeaveSequenceDiagram.png)
+
+Given below is an example usage scenario for the command.
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `listleave on/DATE` command in the CLI.
+* `DATE` is an input of format `yyyy-MM-dd`.
+
+**Step 3**: Employees will be filtered based on whether they are on leave on the specified date.
+* The Employee List will be updated to contain only employees which have leaves taken on the specified date.
+
 
 _{more aspects and alternatives to be added}_
 
