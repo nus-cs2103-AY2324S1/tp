@@ -26,13 +26,7 @@ public class DeleteLeaveCommandParser implements Parser<DeleteLeaveCommand> {
         areValidPrefixes(argMultimap);
 
         Id id;
-
-        try {
-            id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLeaveCommand.MESSAGE_USAGE), pe);
-        }
+        id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
 
         if (argMultimap.getValue(PREFIX_FROM).isPresent() && argMultimap.getValue(PREFIX_TO).isPresent()) {
             LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FROM).get());

@@ -39,7 +39,11 @@ public class DeleteRemarkCommandParserTest {
     void parse_invalidValue_failure() {
         // invalid employee id
         String userInput = " " + PREFIX_ID + "ID1234-5678 " + PREFIX_REMARK + "good worker";
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput, Id.MESSAGE_CONSTRAINTS);
+
+        // empty id
+        userInput = " " + PREFIX_ID + " " + PREFIX_REMARK + "good worker";
+        assertParseFailure(parser, userInput, Id.MESSAGE_CONSTRAINTS);
     }
 
     @Test

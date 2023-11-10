@@ -29,13 +29,7 @@ public class DeleteRemarkCommandParser implements Parser<DeleteRemarkCommand> {
 
         Id id;
         Remark remark;
-
-        try {
-            id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteRemarkCommand.MESSAGE_USAGE), pe);
-        }
+        id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
 
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
