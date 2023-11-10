@@ -15,7 +15,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.GoalCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HintCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PractiseCommand;
 import seedu.address.logic.commands.SetDifficultyCommand;
 import seedu.address.logic.commands.SolveCommand;
