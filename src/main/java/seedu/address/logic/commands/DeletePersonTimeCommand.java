@@ -1,14 +1,19 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.person.Name;
 
-import java.util.ArrayList;
 
-import static java.util.Objects.requireNonNull;
 
+/**
+ * Deletes a person's free time
+ */
 public class DeletePersonTimeCommand extends DeleteTimeCommand {
     private final ArrayList<TimeInterval> timeIntervalsToDelete;
     private final Name personName;

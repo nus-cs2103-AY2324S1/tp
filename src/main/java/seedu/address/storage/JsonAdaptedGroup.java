@@ -1,19 +1,18 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupList;
 import seedu.address.model.group.GroupRemark;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Jackson-friendly version of {@link Group}.
@@ -68,7 +67,8 @@ class JsonAdaptedGroup {
         }
 
         if (groupRemark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupRemark.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GroupRemark.class.getSimpleName()));
         }
 
         TimeIntervalList modelTimeIntervalListList = new TimeIntervalList();
