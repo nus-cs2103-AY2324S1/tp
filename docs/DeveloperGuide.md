@@ -759,8 +759,9 @@ both models.
 ### Challenges
 
 During the initial phase, understanding the codebase was difficult as we were not familiar with it. There were multiple
-dependencies and layers of abstraction which made it difficult to understand the flow of the project. As time went by, 
+dependencies and layers of abstraction which made it difficult to understand the flow of the project. As time went by,
 we became more adept at understanding the underlying mechanism to tweak the program and finding bugs in the AB3 program.
 As we added more functionalities, more dependencies were introduced and the program became increasingly complicated. In
-light of that we focussed on developing a user-centric, intuitive interface that is direct. For example, under a healthcare system's 
-standpoint, we wanted to include a variety of ways for users to search for information (through patient name, illness, today's appointments, etc.). The command words used were designed in a way that the user had to conscientiously specify the way they intended to search. 
+light of that we focussed on developing a user-centric, intuitive interface that is direct. For example, under a healthcare system's
+standpoint, we wanted to include a variety of ways for users to search for information (through patient name, illness, today's appointments, etc.).
+The command words used were designed in a way that the user had to conscientiously specify the way they intended to search. 
