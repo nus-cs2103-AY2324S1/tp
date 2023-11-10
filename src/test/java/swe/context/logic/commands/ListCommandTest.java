@@ -1,5 +1,6 @@
 package swe.context.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static swe.context.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static swe.context.logic.commands.CommandTestUtil.showContactAtIndex;
 
@@ -36,4 +37,12 @@ public class ListCommandTest {
         showContactAtIndex(model, TestData.IndexContact.FIRST_CONTACT);
         assertCommandSuccess(new ListCommand(), model, Messages.COMMAND_LIST_SUCCESS, expectedModel);
     }
+
+    @Test
+    public void execute_emptyContactList_showsEmptyList() {
+        model = new ModelManager(); // Assuming this initializes an empty contact list
+        expectedModel = new ModelManager();
+        assertCommandSuccess(new ListCommand(), model, Messages.COMMAND_LIST_SUCCESS, expectedModel);
+    }
+
 }
