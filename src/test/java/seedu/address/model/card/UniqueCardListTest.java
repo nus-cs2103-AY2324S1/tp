@@ -1,8 +1,6 @@
 package seedu.address.model.card;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCards.CS1101S;
 import static seedu.address.testutil.TypicalCards.CS2100;
@@ -194,4 +192,21 @@ public class UniqueCardListTest {
         otherList.add(HIGH);
         assertTrue(uniqueCardList.equals(otherList));
     }
+
+    @Test
+    public void equals() {
+        assertEquals(uniqueCardList, uniqueCardList);
+
+        assertNotEquals(uniqueCardList, null);
+    }
+
+    @Test
+    public void hashcode() {
+        assertEquals(uniqueCardList.hashCode(), uniqueCardList.hashCode());
+        UniqueCardList second_list = new UniqueCardList();
+        second_list.add(CS2100);
+        assertNotEquals(uniqueCardList, second_list);
+    }
+
+
 }
