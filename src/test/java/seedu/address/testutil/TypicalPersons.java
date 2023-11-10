@@ -71,9 +71,14 @@ public class TypicalPersons {
         return ab;
     }
 
-    // Use this function to make sure that for every test cases, we use complete new Person instances
-    // This can prevent unintentionally sharing and reusing of the typical person instances between different test cases
-    private static Person copyTypicalPerson(Person typicalPerson) {
+    /**
+     * Use this function to make sure that for every test cases, we use complete new Person instances.
+     * This can prevent unintentionally sharing and reusing of the typical person instances between
+     * different test cases.
+     * @param typicalPerson The typical person instance you want to copy
+     * @return The copied typical person instance
+     */
+    public static Person copyTypicalPerson(Person typicalPerson) {
         List<String> tagList = typicalPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList());
         return new PersonBuilder()
                 .withName(typicalPerson.getName().toString())

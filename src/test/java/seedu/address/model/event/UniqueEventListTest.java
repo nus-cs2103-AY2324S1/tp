@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.event.exceptions.DuplicateEventException;
@@ -47,6 +50,7 @@ public class UniqueEventListTest {
     public void test_setEvents_pass() {
         UniqueEventList list1 = new UniqueEventList();
         Event event1 = new Event("n", "00:00", "00:00", "loc", "info");
+        Event event1Duplicate = new Event("n", "00:00", "00:00", "loc", "info");
         Event event2 = new Event("n2", "00:10", "00:15", "loc", "info");
         list1.add(event1);
         list1.add(event2);
@@ -55,6 +59,12 @@ public class UniqueEventListTest {
         assertEquals(list2.asUnmodifiableObservableList().size(), 2);
         assertEquals(list2.asUnmodifiableObservableList().get(0), event1);
         assertEquals(list2.asUnmodifiableObservableList().get(1), event2);
+        List<Event> eventList = Arrays.asList(new Event[]{event1, event2});
+        List<Event> eventListWithDuplicate = Arrays.asList(new Event[]{event1, event1Duplicate});
+        UniqueEventList list3 = new UniqueEventList();
+        assertDoesNotThrow(() -> list3.setEvents(eventList));
+        UniqueEventList list4 = new UniqueEventList();
+        assertThrows(DuplicateEventException.class, () -> list4.setEvents(eventListWithDuplicate));
     }
 
     @Test
@@ -68,9 +78,11 @@ public class UniqueEventListTest {
         UniqueEventList list2 = new UniqueEventList();
         list2.add(event1);
         list2.add(event2);
+        assertTrue(list1.equals(list1));
         assertTrue(list1.equals(list2));
         list2.add(event3);
         assertFalse(list1.equals(list2));
+        assertFalse(list1.equals(new Object()));
     }
 
 }

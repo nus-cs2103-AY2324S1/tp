@@ -22,6 +22,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class AddressBookTest {
 
@@ -86,6 +87,31 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void eventListToStringTest() {
+        Event event1 = new Event("n", "2023-11-10 00:00", "2023-11-10 00:00", "loc1",
+                "info1");
+        Event event2 = new Event("n2", "2023-11-10 00:10", "2023-11-10 00:20", "loc2",
+                "info2");
+        Event event3 = new Event("n3", "2023-11-10 00:25", "2023-11-10 00:45", "loc3",
+                "info3");
+        Event event4 = new Event("n4", "2023-11-10 00:50", "2023-11-10 00:55", "loc4",
+                "info4");
+        Person owner = TypicalPersons.copyTypicalPerson(ALICE);
+        addressBook.addPerson(owner);
+        addressBook.addEvent(event1, owner);
+        addressBook.addEvent(event2, owner);
+        addressBook.addEvent(event3, owner);
+        addressBook.addEvent(event4, owner);
+        assertEquals(addressBook.eventListToString(),
+                "[Alice Pauline] n\nStarts at: 2023-11-10 00:00:00\nLocation: loc1\nInformation: info1\n"
+                        + "[Alice Pauline] n2\nStarts at: 2023-11-10 00:10:00\nEnds at: 2023-11-10 00:20:00\n"
+                        + "Location: loc2\nInformation: info2\n[Alice Pauline] n3\nStarts at: 2023-11-10 00:25:00\n"
+                        + "Ends at: 2023-11-10 00:45:00\nLocation: loc3\nInformation: info3\n[Alice Pauline] n4\n"
+                        + "Starts at: 2023-11-10 00:50:00\nEnds at: 2023-11-10 00:55:00\nLocation: loc4\n"
+                        + "Information: info4\n");
     }
 
     /**
