@@ -1,6 +1,7 @@
 package seedu.address.storage.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.Messages.MESSAGE_INCORRECT_DATE_FORMAT;
 import static seedu.address.storage.event.JsonAdaptedEvent.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.EVENT_1;
@@ -12,13 +13,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 public class JsonAdaptedEventTest {
-    private static final String INVALID_START_TIME = "2023-09-22 18:00";
-    private static final String INVALID_END_TIME = "2023-09-22 19:00";
+    private static final String VALID_START_TIME = "2023-09-22 18:00";
+    private static final String VALID_END_TIME = "2023-09-22 19:00";
 
     private static final String VALID_DESCRIPTION = "Interview";
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_START_TIME = "22-09-2023 18:00";
-    private static final String VALID_END_TIME = "22-09-2023 19:00";
+    private static final String INVALID_START_TIME = "22-09-2023 18:00";
+    private static final String INVALID_END_TIME = "22-09-2023 19:00";
 
     @Test
     public void toModelType_validEventDetails_returnsEvent() throws Exception {
@@ -58,7 +59,7 @@ public class JsonAdaptedEventTest {
     public void toModelType_invalidStartTime_throwsIllegalValueException() {
         JsonAdaptedEvent event =
                 new JsonAdaptedEvent(ALICE.getName().toString(), VALID_DESCRIPTION, INVALID_START_TIME, VALID_END_TIME);
-        String expectedMessage = "Date is not in correct format!";
+        String expectedMessage = MESSAGE_INCORRECT_DATE_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
@@ -66,7 +67,7 @@ public class JsonAdaptedEventTest {
     public void toModelType_invalidEndTime_throwsIllegalValueException() {
         JsonAdaptedEvent event =
                 new JsonAdaptedEvent(ALICE.getName().toString(), VALID_DESCRIPTION, VALID_START_TIME, INVALID_END_TIME);
-        String expectedMessage = "Date is not in correct format!";
+        String expectedMessage = MESSAGE_INCORRECT_DATE_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 

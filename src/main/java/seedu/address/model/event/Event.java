@@ -97,8 +97,8 @@ public class Event {
         ToStringBuilder builder = new ToStringBuilder(this.getClass().getSimpleName());
         builder.add("name", person.getName().fullName)
                 .add("description", description)
-                .add("startTime", startTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")))
-                .add("endTime", endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+                .add("startTime", startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
+                .add("endTime", endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
 
         return builder.toString();
     }

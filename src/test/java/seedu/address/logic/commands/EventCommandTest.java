@@ -193,11 +193,6 @@ public class EventCommandTest {
         }
 
         @Override
-        public boolean hasEvent(Event event) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
@@ -306,12 +301,6 @@ public class EventCommandTest {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         private Index index;
-
-        @Override
-        public boolean hasEvent(Event event) {
-            requireNonNull(event);
-            return eventsAdded.stream().anyMatch(event::isSameEvent);
-        }
 
         @Override
         public void addEvent(Event event) {
