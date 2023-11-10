@@ -51,17 +51,17 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 VersionedNetworkBook -left-> "1" "UniqueList<Person>"
 "UniqueList<Person>" --> "*" Person
-VersionedNetworkBook --> "~* filtered" "Person"
-VersionedNetworkBook --> "~* sorted" "Person"
+VersionedNetworkBook --> "*" "Person" : filtered
+VersionedNetworkBook --> "*" "Person" : sorted
 
-Person --> Name
+Person --> "1" Name
 Person --> "UniqueList<Phone>"
 Person --> "UniqueList<Email>"
 Person --> "UniqueList<Link>"
-Person --> Graduation
+Person --> "0..1" Graduation
 Person --> "UniqueList<Course>"
 Person --> "UniqueList<Specialisation>"
-Person --> Priority
+Person --> "0..1" Priority
 Person --> "UniqueList<Tag>"
 
 "UniqueList<Phone>" --> "*" Phone

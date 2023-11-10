@@ -927,13 +927,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. User has no contact to list.
+
+    * 1a1. NetworkBook shows an empty list
 
   Use case ends.
 
-* 3a. The user has not logged in to his default email app.
+* 4a. The user has not logged in to his default email app.
 
-    * 3a1. User will be taken to the sign-in page of his default email app.
+    * 4a1. User will be taken to the sign-in page of his default email app.
 
       Use case ends.
     
