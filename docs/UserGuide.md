@@ -108,14 +108,14 @@ Here's a quick guide to help you understand what they mean.
 </div>
 
  ### Prefix Table
-| Metric | Prefix | Constraints                                                                    |
-|--------|--------|--------------------------------------------------------------------------------|
-| Name | `name/` | Name can only contain letters, numbers and spaces. It must not be left blank.  |
-| Age | `age/` | Age should be a positive integer between 18 and 150 (inclusive).               |
-| Gender | `gender/` | Gender should be either M or F. It is case sensitive.                          |
-| Height | `height/` | Height should be a positive integer in cm between 100cm and 250cm (inclusive). |
-| Income | `income/` | Income (per month) should be a positive integer in SGD.                        |
-| Horoscope | `horoscope/` | Horoscope should be a valid zodiac sign. It is case insensitive.               |
+| Metric | Prefix | Constraints                                                                             |
+|--------|--------|-----------------------------------------------------------------------------------------|
+| Name | `name/` | Name can only contain letters, numbers and spaces. It must not be left blank.           |
+| Age | `age/` | Age should be a positive integer between 18 and 150 (inclusive).                        |
+| Gender | `gender/` | Gender should be either M or F. It is case sensitive.                                   |
+| Height | `height/` | Height should be a positive integer in cm between 100cm and 250cm (inclusive).          |
+| Income | `income/` | Income (per month) should be a positive integer in SGD less than or equal to a million. |
+| Horoscope | `horoscope/` | Horoscope should be a valid zodiac sign. It is case insensitive.                        |
 
 --------------------------------------------------------------------------------------------------------------------
 ### **Managing Dates**
