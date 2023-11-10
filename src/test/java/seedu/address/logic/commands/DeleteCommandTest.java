@@ -70,6 +70,40 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validNameUnfilteredList_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String name = personToDelete.getName().toString();
+        String[] words = name.split("\\s+");
+        DeleteCommand deleteCommand = new DeleteCommand(new NameContainsKeywordsPredicate(Arrays.asList(words)));
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validNameFilteredList_success() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String name = personToDelete.getName().toString();
+        String[] words = name.split("\\s+");
+        DeleteCommand deleteCommand = new DeleteCommand(new NameContainsKeywordsPredicate(Arrays.asList(words)));
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
@@ -131,6 +165,27 @@ public class DeleteCommandTest {
 
         // different person -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+    }
+
+    @Test
+    public void equalsForNameAndIndex_failure() {
+        Person firstPersonToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPersonToDelete = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        NameContainsKeywordsPredicate firstPersonName =
+                new NameContainsKeywordsPredicate(Arrays.asList(
+                        new String[] {firstPersonToDelete.getName().toString()}));
+        NameContainsKeywordsPredicate secondPersonName =
+                new NameContainsKeywordsPredicate(Arrays.asList(
+                        new String[] {secondPersonToDelete.getName().toString()}));
+        DeleteCommand deleteFirstCommand = new DeleteCommand(firstPersonName);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(secondPersonName);
+        DeleteCommand deleteFirstIndexCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteSecondIndexCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        assertFalse(deleteFirstCommand.equals(deleteFirstIndexCommand));
+        assertFalse(deleteFirstCommand.equals(deleteSecondIndexCommand));
+        assertFalse(deleteSecondCommand.equals(deleteFirstIndexCommand));
+        assertFalse(deleteSecondCommand.equals(deleteSecondIndexCommand));
+
     }
 
     @Test
