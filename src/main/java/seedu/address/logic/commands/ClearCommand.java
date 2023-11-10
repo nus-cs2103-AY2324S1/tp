@@ -11,7 +11,6 @@ import seedu.address.model.Model;
  * Clears the address book.
  */
 public class ClearCommand extends Command {
-
     public static final String COMMAND_WORD = "reset";
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
     public static final String MESSAGE_USAGE = "The 'reset' command will erase the entire Address Book.\n"
