@@ -1,25 +1,5 @@
 package seedu.address.logic.parser.appointmentparser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.appointmentcommands.RescheduleCommand;
-import seedu.address.logic.commands.appointmentcommands.ScheduleCommand;
-import seedu.address.logic.parser.appointmentparser.ScheduleCommandParser;
-
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.AppointmentDescription;
-import seedu.address.model.appointment.AppointmentTime;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.PriorityTag;
-import seedu.address.testutil.AppointmentBuilder;
-import seedu.address.testutil.AppointmentTimeBuilder;
-import seedu.address.testutil.PersonBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.DESCRIPTION_DESC_ONE;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.END_DESC_ONE;
@@ -34,6 +14,20 @@ import static seedu.address.logic.commands.appointmentcommands.AppointmentComman
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.appointmentcommands.ScheduleCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDescription;
+import seedu.address.model.appointment.AppointmentTime;
+import seedu.address.model.person.Name;
+import seedu.address.model.tag.PriorityTag;
+import seedu.address.testutil.AppointmentTimeBuilder;
+
 public class ScheduleCommandParserTest {
     private ScheduleCommandParser parser = new ScheduleCommandParser();
 
@@ -42,10 +36,10 @@ public class ScheduleCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() throws ParseException {
 
-       String patient = VALID_PATIENT_ONE;
-       Name patientName = new Name(patient);
-        String userInput = PATIENT_ONE_DESC + START_DESC_ONE + END_DESC_ONE + DESCRIPTION_DESC_ONE +
-                PRIORITY_TAG_DESC_HIGH;
+        String patient = VALID_PATIENT_ONE;
+        Name patientName = new Name(patient);
+        String userInput = PATIENT_ONE_DESC + START_DESC_ONE + END_DESC_ONE + DESCRIPTION_DESC_ONE
+                + PRIORITY_TAG_DESC_HIGH;
         AppointmentTime appointmentTime = new AppointmentTimeBuilder()
                 .withStart(VALID_START_ONE)
                 .withEnd(VALID_END_ONE).build();
@@ -54,11 +48,12 @@ public class ScheduleCommandParserTest {
         String priority = VALID_PRIORITY_TAG_HIGH;
         PriorityTag priorityTag = new PriorityTag(priority);
 
-        Appointment expectedAppointment = new Appointment(patientName, appointmentTime, appointmentDescription1, priorityTag);
+        Appointment expectedAppointment = new Appointment(patientName, appointmentTime, appointmentDescription1,
+                priorityTag);
 
         ScheduleCommand expectedCommand = new ScheduleCommand(expectedAppointment, patientName);
 
-        assertEquals(parser.parse(userInput).toString(), expectedCommand.toString() );
+        assertEquals(parser.parse(userInput).toString(), expectedCommand.toString());
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
