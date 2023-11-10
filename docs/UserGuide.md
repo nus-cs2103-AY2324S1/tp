@@ -83,8 +83,8 @@ To achieve this, we have 2 supporting sub-features:
 2. [Event List](#sub-feature-2-event-list)
 
 For the calendar system, we work solely with `events`, which differs from `tasks` used in the [task list feature](#main-feature-3-task-management-system).
-: - `event` has a `description`, `start date and time` and `end date and time`
-: - `task` only has a `description` and `end date and time`
+- `event` has a `description`, `start date and time` and `end date and time`
+- `task` only has a `description` and `end date and time`
 
 ### Sub-feature 1: Calendar
 
