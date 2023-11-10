@@ -352,7 +352,7 @@ Valid examples:
 
 Invalid examples:
 * `status 3 s/interviewing`
-This is not allowed as `STATUS` must be either `o(offered)` or `r(rejected)` or `u(undecided)`.
+This is not allowed as `STATUS` must be either `o(ffered)` or `r(ejected)` or `u(ndecided)`.
 
 * `status 3`
 This is not allowed as a `STATUS` must be provided.
