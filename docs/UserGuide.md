@@ -246,7 +246,6 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
     names containing non-alphanumeric characters such as hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.
 </box>
 
-<<<<<<< HEAD
 <box type="tip" header="**Note**">
     Note that the default status for new Applicants is UNDECIDED.
 </box>
@@ -255,7 +254,6 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 Valid examples:
 * `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer`
 Adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@gmail.com*, and position *Software Engineer*.
-
 
 * `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
   Adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@yahoo.com*, and position *Project Manager*.
@@ -299,8 +297,12 @@ Invalid examples:
 * `edit n/Vijay Sankar Kumar`
 This is not allowed as an `INDEX` is required to edit an applicant's details.
 
-`edit 1`
+* `edit 1`
 This is not allowed as at least one of the optional fields must be provided.
+
+* `edit -20 hp/12341234`
+This is not allowed as the `INDEX` must be a positive integer.
+
 
 <br>
 
@@ -316,9 +318,15 @@ Format: `delete INDEX`
 * Deletes the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
-Examples:
+Valid examples:
 * `list` followed by `delete 2` deletes the 2nd person in the applicant list.
 * `sort d/name` followed by `delete 3` deletes the 3rd person in the sorted applicant list.
+
+Invalid examples:
+* `delete`
+This is not allowed as an `INDEX` must be specified.
+* `delete -3`
+This is not allowed as an `INDEX` must be a positive integer.
 
 <br>
 
@@ -354,6 +362,12 @@ Invalid examples:
 * `status 3 s/interviewing`
 This is not allowed as the format of the `STATUS` is wrong. 
 `STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
+
+* `status 3`
+This is not allowed as a `STATUS` must be provided.
+
+* `status -3 s/o`
+This is not allowed as an `INDEX` must be a positive integer.
 
 <br>
 
@@ -410,9 +424,17 @@ Format: `addi INDEX t/TYPE [r/RATING]`
     Rating will be rounded to the nearest 1 decimal place if more than 1 decimal place is provided.
 </box>
 
-Example:
+Valid examples:
 * `addi 3 t/screening` adds a Screening interview without rating to the 3rd person in the displayed applicant list.
 * `addi 1 t/technical r/8.5` adds a Technical interview with rating 8.5 to the 1st person in the displayed applicant list.
+
+Invalid examples:
+* `addi 1`
+This is not allowed as a `TYPE` must be provided.
+
+* `addi -1 t/HR`
+This is not allowed as the `INDEX` must be a positive integer.
+
 
 ![addi.png](images/user-guide/addi.png)
 
@@ -433,10 +455,20 @@ Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
 * Existing values will be updated by the input values.
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
-Examples:
+Valid examples:
 * `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview with rating 7.8.
 * `editi 3 i/2 t/screening` edits the 2nd interview of the 3rd person in the displayed applicant list to a screening interview.
 * `editi 2 i/1 r/8.9` edits the 1st interview rating of the 2nd person in the displayed applicant list to 8.9.
+
+Invalid examples:
+* `editi 1`
+This is not allowed as an `INTERVIEW_INDEX` must be provided.
+
+* `editi 1 i/1`
+This is not allowed as at least one of the optional fields, `[t/TYPE] [r/RATING]`, must be provided.
+
+* `editi -1 i/2 t/Assessment`
+This is not allowed as the `INDEX` must be a positive integer.
 
 <br>
 
@@ -459,6 +491,9 @@ Invalid example:
 * `deletei 1 i/20` 
 This is not allowed because the index of the interview is invalid. As the maximum number of interviews for each applicant
 is 5, an interview index larger than 5 is not allowed.
+
+* `deletei -1 i/3`
+This is not allowed as the `INDEX` must be a positive integer.
 
 <br>
 
