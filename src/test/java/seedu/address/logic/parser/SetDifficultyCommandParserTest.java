@@ -43,5 +43,4 @@ public class SetDifficultyCommandParserTest {
                 SetDifficultyCommand.MESSAGE_USAGE));
     }
 
-
 }

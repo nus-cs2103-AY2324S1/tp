@@ -19,7 +19,7 @@ public class Messages {
     public static final String MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY = "%1$s";
     public static final String MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM = "%1$s";
     public static final String MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD = "%1$s";
-    public static final String MESSAGE_CARDS_SET_DIFFICULTY_VIEW_INVALID = " is not an invalid difficult "
+    public static final String MESSAGE_CARDS_SET_DIFFICULTY_VIEW_INVALID = " is not a valid difficult "
             + "level! Please enter easy, medium or hard!";
 
     public static final String MESSAGE_CARDS_SOLVE_VIEW = "%1$s";
