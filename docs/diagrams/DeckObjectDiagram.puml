@@ -1,4 +1,5 @@
 @startuml
+
 object "<u>:Deck" as IL {
   cards = UniqueCardList()
 }

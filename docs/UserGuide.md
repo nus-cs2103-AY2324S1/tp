@@ -258,7 +258,7 @@ Examples:
 ```
 
 #### To Note:
-1. No empty input or input with only whitespace after `q/`, `a/`, 
+1. No empty input or input with only whitespace after `q/`, `a/` 
 2. Empty input after `t/` and `h/` will remove existing tags or hint respectively.
 3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
 4. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.

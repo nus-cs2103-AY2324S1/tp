@@ -3,6 +3,7 @@
 skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
+
 start
 : User enters "add" command;
 
