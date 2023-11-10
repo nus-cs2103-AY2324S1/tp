@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.logging.Logger;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -8,15 +10,14 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.financialplan.FinancialPlan;
 
-import java.util.logging.Logger;
 
 /**
  * Jackson-friendly version of {@link FinancialPlan}.
  */
 public class JsonAdaptedFinancialPlan {
 
-    private final String financialPlanName;
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private final String financialPlanName;
 
     /**
      * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
