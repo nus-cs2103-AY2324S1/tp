@@ -5,11 +5,11 @@ title: User Guide
 
 # Welcome to InterviewHub!
 
-**Dear Hiring Managers,**
+**Dear Engineering Hiring Managers,**
 
 Welcome to **InterviewHub**! We are excited to introduce you to your new partner in recruitment and interview scheduling. 
 
-As a hiring manager, you understand the importance of time. That's why we've optimized **InterviewHub** for those who can type fast, think faster, and make decisions on the fly. Navigate through applicants, schedule interviews, and manage your hiring pipeline with commands that execute in the blink of an eye.
+As an engineering hiring manager, you understand the importance of time. That's why we've optimized **InterviewHub** for those who can type fast, think faster, and make decisions on the fly. Navigate through applicants, schedule interviews, and manage your hiring pipeline with commands that execute in the blink of an eye.
 
 This guide is your roadmap to mastering **InterviewHub**. We'll guide you through each feature, helping you to leverage our interface to its full potential—so you can focus on what you do best: securing top talent.
 
@@ -61,7 +61,7 @@ Let's dive into **InterviewHub** and transform the way you recruit!
 
 # Introduction - What is InterviewHub?
 
-**InterviewHub**  is a desktop app for hiring managers to schedule job interviews and manage applicants' contact information.
+**InterviewHub**  is a desktop app for engineering hiring managers to schedule job interviews and manage applicants' contact information.
 **InterviewHub** allows users to:
 * seamlessly update and manage applicants for various job openings,
 * schedule and keep track of interviews with each applicant,
@@ -69,7 +69,7 @@ Let's dive into **InterviewHub** and transform the way you recruit!
 through an all-in-one user-friendly platform!
 
 It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
-If you are a hiring manager who can type fast, **InterviewHub** can get your Interview and applicant management tasks done faster than traditional GUI apps.
+If you are an engineering hiring manager who have a good understanding in CLI-based application and can type fast, **InterviewHub** can get your Interview and applicant management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -84,7 +84,7 @@ To get a better understanding of what you see, you can head over to [GUI Summary
 
 Along the way if you encounter unfamiliar terms, our [Glossary](#glossary) provides definitions and explanations for product-specific terminology. Refer to it whenever needed.
 
-Before we begin, the table below describes some of the symbols and syntax you may see throughout our guide:
+Before we begin, the table below describes some symbols and syntax you may see throughout our guide:
 
 | Symbol                                    | Meaning                                                                                          |
 |-------------------------------------------|--------------------------------------------------------------------------------------------------|
@@ -102,7 +102,7 @@ Before we begin, the table below describes some of the symbols and syntax you ma
 
 2. Download the latest `InterviewHub.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the home folder for InterviewHub.
+3. Copy the file to the folder you want to use as the home folder for **InterviewHub**.
 
 4. Open a terminal, and navigate to the folder you put the JAR file in. 
 
@@ -112,7 +112,7 @@ Before we begin, the table below describes some of the symbols and syntax you ma
 
 7. Type the command in the command box and press Enter to execute it. E.g. typing **`help`** and pressing Enter will
    open the help window.<br>
-   Some example commands you can try:
+   Some example commands you can try to get comfortable with **InterviewHub**:
 
    * **`help`** : Opens the help window, which contains a link to this User Guide.
 
@@ -150,13 +150,13 @@ For each **applicant**, we see the following details:
 
 For each **interview**, we see the following details:
 
-| Information          | Description                                                         |
-|----------------------|---------------------------------------------------------------------|
-| **Applicant's Name** | The full name of the applicant                                      |
-| **Job Title**        | The title of the job that the applicant is applying for             |
-| **Start Time**       | Start time of the interview                                         |
-| **End Time**         | Projected end time of the interview                                 |
-| **Rating**           | Interview performance rating of the applicant (from 0.0 - 5.0, if any) |
+| Information          | Description                                                    |
+|----------------------|----------------------------------------------------------------|
+| **Applicant's Name** | The full name of the applicant                                 |
+| **Job Role**         | The job role which the applicant is applying for               |
+| **Start Time**       | Start time of the interview                                    |
+| **End Time**         | Projected end time of the interview                            |
+| **Rating**           | Interview performance rating of the applicant (from 0.0 - 5.0) |
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -202,6 +202,7 @@ For each **interview**, we see the following details:
     * `3.15pm`
     * `3pm`
   * The `TIME` must be between 9am to 5pm.
+  * If the date is a parameter for the `list-freetime` command, please omit ` TIME` and enter the date only (e.g. `16 May 2024`)
 </div>
 
 [Back to the Table of Contents](#table-of-contents)
@@ -210,7 +211,7 @@ For each **interview**, we see the following details:
 
 ### Viewing help : `help`
 
-A pop up window containing the link as shown below will appear to lead you to **InterviewHub** User Guide.
+A pop-up window, containing the link as shown below, will appear to guide you to the **InterviewHub** User Guide.
 
 ![help message](images/helpMessage.png)
 
@@ -226,12 +227,12 @@ Format: `exit`
 
 Clears all applicants and interviews from **InterviewHub**.
 
+Format: `clear`
+
 <div markdown="block" class="alert alert-warning">
-**:exclamation: Warning:** <br>
+**:warning: Warning:** <br>
 * This action is irreversible, therefore do proceed with caution!
 </div>
-
-Format: `clear`
 
 ### Saving the data
 
@@ -251,17 +252,13 @@ Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 |----------------|-----------------------------------|---------------------------------------------------------------|
 | `NAME`         | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
 | `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
-| `EMAIL`        | The email of the applicant        | Must be in the format: `username@domain`                      |
+| `EMAIL`        | The email of the applicant        | Must be in the format: `local-part@domain`                    |
 | `ADDRESS`      | The address of the applicant      | No constraints as long as it is not blank                     |
-| `TAG`          | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |                                      
-
-
-
+| `TAG`          | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |
 
 Examples:
 * `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`.
 ![Result of `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`](images/addApplicantResult.png)
-
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -271,9 +268,15 @@ Deletes the applicant at the specified `APPLICANT_INDEX` from **InterviewHub**
 
 Format: `delete-a APPLICANT_INDEX`
 
-| Parameter         | Representation                                                   | Constraints                                                                                    |
-|-------------------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| `APPLICANT_INDEX` | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed list |
+| Parameter         | Representation                                                   | Constraints                                                                                              |
+|-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| `APPLICANT_INDEX` | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed applicant list |
+
+<div markdown="block" class="alert alert-warning">
+**:warning: Warning:** <br>
+
+* This action is irreversible, therefore do proceed with caution!
+</div>
 
 Examples:
 * `delete-a 1` deletes the 1st applicant in the address book.
@@ -287,17 +290,21 @@ Edits the applicant at the specified `APPLICANT_INDEX` from **InterviewHub**
 
 Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
+| Parameter         | Representation                                                   | Constraints                                                                                              |
+|-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| `APPLICANT_INDEX` | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed applicant list |
+| `NAME`            | The name of the applicant                                        | Must contain only alphanumeric characters and cannot be blank                                            |
+| `NUMBER`          | The phone number of the applicant                                | Must contain only numbers and be at least 3 digits long                                                  |
+| `EMAIL`           | The email of the applicant                                       | Must be in the format: `local-part@domain`                                                               |
+| `ADDRESS`         | The address of the applicant                                     | No constraints as long as it is not blank                                                                |
+| `TAG`             | A tag belonging to the applicant                                 | Must be a single word containing only alphanumeric characters                                            |
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note about the command usage.**<br>
+
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-
-  | Parameter         | Representation                                                   | Constraints                                                                                    |
-  |-------------------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-  | `APPLICANT_INDEX` | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed list |
-  | `NAME`            | The name of the applicant                                        | Must contain only alphanumeric characters and cannot be blank                                  |
-  | `NUMBER`          | The phone number of the applicant                                | Must contain only numbers and be at least 3 digits long                                        |
-  | `EMAIL`           | The email of the applicant                                       | Must be in the format: `username@domain`                                                       |
-  | `ADDRESS`         | The address of the applicant                                     | No constraints as long as it is not blank                                                      |
-  | `TAG`             | A tag belonging to the applicant                                 | Must be a single word containing only alphanumeric characters                                  |
+</div>
 
 Examples:
 *  `edit-a 1 n/John Doe` Edits the name of the 1st applicant to be `John Doe`.
@@ -314,16 +321,8 @@ Examples:
 
 Finds applicants whose attributes contain any of the given keywords.
 
-Format: ``find-a [n/KEYWORDS(S)] [p/NUMBER]
-[e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]`` 
-
-* Any of the fields (name, phone, email, address, tags) can be searched
-* At least one of the optional fields must be provided
-* Multiple keywords must be either space or comma separated
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Applicants matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Format: ``find-a [n/KEYWORD(S)] [p/NUMBER]
+[e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]``
 
 The table below summarises how each field is matched in the search.
 
@@ -334,6 +333,18 @@ The table below summarises how each field is matched in the search.
 | `EMAIL`        | Must be an exact match to the entire email, the part before the `@`, or the part after the `@` | `john`, `example.com` and `john@example.com` will all match `john@example.com` |
 | `ADDRESS`      | Only full words will be matched                                                                | `Serangoon` will match `Serangoon Road` but not `Rangoon road`                 |
 | `TAG`          | Only full words will be matched                                                                | `Eng` will match `Eng` but not `Engineer`                                      |
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note about the command usage.**<br>
+
+* Any of the fields (name, phone, email, address, tags) can be searched
+* At least one of the optional fields must be provided
+* Multiple keywords must be either space or comma separated
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Applicants matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+</div>
 
 Examples:
 * `find-a n/alex david` returns `Alex Yeoh`, `David Li`<br>
@@ -360,12 +371,12 @@ Adds an interview to **InterviewHub**.
 
 Format: `add-i app/APPLICANT_INDEX jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME`
 
-| Parameter             | Representation                                              | Constraints                                                                                                     |
-|-----------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `APPLICANT_INDEX`     | The index of the applicant as shown in the applicant list   | Must be a positive unsigned integer and must not exceed the size of the current displayed list                  |
-| `JOB_ROLE`            | The role/title of the job the applicant is interviewing for | Must contain only alphanumeric characters, spaces or commonly used special symbols (E.g. @ - # &)               |
-| `START_DATE_AND_TIME` | Starting time of the interview                              | Must be in one of the [accepted formats](#features), before the end time and on the same day as the end time    |
-| `END_DATE_AND_TIME`   | Ending time of the interview                                | Must be in one of the [accepted formats](#features), after the start time and on the same day as the start time |
+| Parameter             | Representation                                            | Constraints                                                                                                     |
+|-----------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| `APPLICANT_INDEX`     | The index of the applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed applicant list        |
+| `JOB_ROLE`            | The job role which the applicant is applying for          | No constraint                                                                                                   |
+| `START_DATE_AND_TIME` | Starting time of the interview                            | Must be in one of the [accepted formats](#features), before the end time and on the same day as the end time    |
+| `END_DATE_AND_TIME`   | Ending time of the interview                              | Must be in one of the [accepted formats](#features), after the start time and on the same day as the start time |
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** `JOB_ROLE` allows empty strings to be entered to handle situations where the applicant is applying
@@ -398,14 +409,20 @@ Deletes the interview at the specified `INTERVIEW_INDEX` from **InterviewHub**
 
 Format: `delete-i INTERVIEW_INDEX`
 
-| Parameter         | Representation                                                   | Constraints                                                                                                                                             |
-|-------------------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer 1, 2, 3, …​ The upper limit of valid integers is the number of interviews currently displayed in the interview list |
+| Parameter         | Representation                                                   | Constraints                                                                                              |
+|-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed interview list |
+
+<div markdown="block" class="alert alert-warning">
+**:warning: Warning:** <br>
+
+* This action is irreversible, therefore do proceed with caution!
+</div>
 
 Examples:
 * `delete-i 1` deletes the 1st interview in **InterviewHub**.
 
-Before `delete-i`: You should see the applicant and interview list (may be filtered depending if your previous commands filtered the lists)
+Before `delete-i`: You should see the applicant and interview list (may be filtered depending on whether your previous commands filtered the lists)
 ![before `delete-i`](images/beforedeletei.png)
 
 After `delete-i 1`: You should see a success message in the command result box. And the targeted interview is removed from the interview list.
@@ -427,14 +444,18 @@ Format: `edit-i INTERVIEW_INDEX [jr/JOB_ROLE] [start/START_DATE_AND_TIME] [end/E
 
 | Parameter             | Representation                                            | Constraints                                                                                                  |
 |-----------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| `INTERVIEW_INDEX`     | The index of the interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed list               |
-| `JOB_ROLE`            | The role the applicant is interviewing for                | Must contain only alphanumeric characters, spaces or commonly used special symbols (E.g. @ - # &)            |
+| `INTERVIEW_INDEX`     | The index of the interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed interview list     |
+| `JOB_ROLE`            | The role the applicant is interviewing for                | No constraints                                                                                               |
 | `START_DATE_AND_TIME` | Starting time of the interview                            | Must be one of the [accepted formats](#features), before the end time and on the same day as the end time    |
 | `END_DATE_AND_TIME`   | Ending time of the interview                              | Must be one of the [accepted formats](#features), after the start time and on the same day as the start time |
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note about the command usage.**<br>
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * To edit the `RATING` field (re-rating an interview), please refer to the [rate command](#rating-an-interview--rate)
+</div>
 
 Examples of accepted date formats (full list [here](#features)):
 * DD/MM/YYYY and time:
@@ -463,9 +484,12 @@ Find interviews which jobs roles contain any of the given keywords.
 
 Format: `find-i KEYWORD(S)`
 
-| Parameter         | Representation                            | Constraints                                                                                 |
-|-------------------|-------------------------------------------|---------------------------------------------------------------------------------------------|
-| `KEYWORD`         | The job role the interview is assigned of | Each keyword must not contain any spaces, otherwise it will be treated as multiple keywords |
+| Parameter         | Representation                             | Constraints                                                                                 |
+|-------------------|--------------------------------------------|---------------------------------------------------------------------------------------------|
+| `KEYWORD`         | The job role the interview is assigned for | Each keyword must not contain any spaces, otherwise it will be treated as multiple keywords |
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note about the command usage.**<br>
 
 * The search is case-insensitive. e.g. `ANALYST` will match `analyst`
 * Must provide at least one keyword
@@ -474,6 +498,7 @@ Format: `find-i KEYWORD(S)`
 * Only full words will be matched e.g. `Analyst` will not match `Analysts`
 * Interviews matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Software Engineer` will return interviews with the job role of `Software Developer` and `System Engineer`
+</div>
 
 Examples:
 * `find-i software data` returns `Software Engineer` and `Data Analyst`.
@@ -504,6 +529,7 @@ Format: `list-freetime DATE`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>
+
 * Additional parameters separated by non-number characters will be accepted.
 * e.g. 12-12-2024hello
 </div>
@@ -526,8 +552,6 @@ Examples:
 * `list-freetime 03-11-2024`
 * `list-freetime 5-5-2025`
 
-
-
 [Back to the Table of Contents](#table-of-contents)
 
 ### Listing all interviews for today : `list-i-today`
@@ -536,6 +560,9 @@ Displays all the interviews that the user has on the day the
 command is executed.
 
 Format: `list-i-today`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note about the command usage.**<br>
 
 * Lists all interviews that have a start date that falls on the
   day on which the user executed the command
@@ -546,6 +573,7 @@ Format: `list-i-today`
   was executed, the app will not display any interviews
 * Upon successful execution of the command, this message will be
   shown: `Listed all interviews today`
+</div>
 
 Example: `list-i-today`
 
@@ -564,9 +592,9 @@ Mark the specified `INTERVIEW_INDEX` in the **InterviewHub** as done.
 
 Format: `mark INTERVIEW_INDEX`
 
-| Parameter         | Representation                                                   | Constraints                                                                                    |
-|-------------------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed list |
+| Parameter         | Representation                                                   | Constraints                                                                                              |
+|-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed interview list |
 
 Examples:
 * `mark 1` marks the first interview shown on the list as done.
@@ -580,16 +608,16 @@ Rate the specified `INTERVIEW_INDEX` in the **InterviewHub** with the indicated 
 
 Format: `rate INTERIVEW_INDEX RATING`
 
-| Parameter         | Representation                                                   | Constraints                                                                                    |
-|-------------------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed list |
-| `RATING`          | The rating number to be assigned to the interview indicated      | Must be a positive unsigned one decimal place number between 0.0 to 5.0 inclusive              |
-
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>
-* The interview has to be marked done before it is can be rated.
+* The interview has to be marked done before it can be rated.
 * The new rating will always replace the existing rating.
 </div>
+
+| Parameter         | Representation                                                   | Constraints                                                                                              |
+|-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed interview list |
+| `RATING`          | The rating number to be assigned to the interview indicated      | Must be a positive unsigned one decimal place number between 0.0 to 5.0 inclusive                        |
 
 Examples:
 * `rate 1 3.0` rates the first interview with a rating of 3.0.
@@ -608,11 +636,9 @@ Shows a list of all the interviews in **InterviewHub** that are done onto the GU
 
 Format: `list-i-done`
 
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 To see all interviews regardless of completion status, use the command `list-i`.
 </div>
-
 
 Before `list-i-done`:
 ![beforelistidone](images/beforelistidone.png)
@@ -628,11 +654,9 @@ Show a list of all the interviews in **InterviewHub** that are not done onto the
 
 Format:`list-i-not-done`
 
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 To see all interviews regardless of completion status, use the command `list-i`.
 </div>
-
 
 Before `list-i-not-done`:
 ![beforelistinotdone](images/beforelistinotdone.png)
@@ -673,10 +697,10 @@ To sort the full unfiltered interview list, use the command `list-i` before usin
 </div>
 
 Before `sort-time`:
-![beforesort](images/beforesorttime.png)
+![beforesorttime](images/beforesorttime.png)
 
 After `sort-time`:
-![aftersort](images/aftersorttime.png)
+![aftersorttime](images/aftersorttime.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
