@@ -54,6 +54,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String TEAMNAME_DESC_TEAM3 = " " + PREFIX_TEAMNAME + VALID_TEAM_TEAM3;
     public static final String TEAMLEADER_DESC_LEADER3 = " " + PREFIX_TEAMLEADER + VALID_NAME_FIONA;
+    public static final String DEVELOPER_DESC_DEVELOPER1 = " " + PREFIX_NAME + VALID_NAME_AMY;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
