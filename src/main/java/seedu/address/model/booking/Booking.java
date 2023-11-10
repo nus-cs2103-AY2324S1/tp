@@ -164,7 +164,7 @@ public class Booking {
                 .add("phone", this.phone)
                 .add("email", this.email)
                 .add("remark", this.remark)
-                .add("tags", this.getTags())
+                .add("room type", this.getTags())
                 .toString();
     }
 }
