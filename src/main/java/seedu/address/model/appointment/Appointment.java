@@ -17,22 +17,6 @@ public class Appointment {
     private AppointmentTime appointmentTime;
 
     /**
-     * Constructs a new appointment with the specified doctor, patient, and appointment time.
-     *
-     * @param doctorIc        The doctor involved in the appointment.
-     * @param patientIc       The patient involved in the appointment.
-     * @param appointmentTime The date and time of the appointment.
-     */
-    public Appointment(Ic doctorIc, Ic patientIc, AppointmentTime appointmentTime) {
-        requireNonNull(doctorIc);
-        requireNonNull(patientIc);
-        requireNonNull(appointmentTime);
-        this.doctorIc = doctorIc;
-        this.patientIc = patientIc;
-        this.appointmentTime = appointmentTime;
-    }
-
-    /**
      * Constructs a new appointment with the specified doctor, patient, appointment time, and status.
      *
      * @param doctorIc        The doctor involved in the appointment.
