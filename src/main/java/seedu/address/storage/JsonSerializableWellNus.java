@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.WellNus;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.risklevel.exceptions.ExceedMaxRiskLevelSizeException;
 import seedu.address.model.student.Student;
 
 /**
@@ -62,6 +63,8 @@ class JsonSerializableWellNus {
             if (wellNus.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
+
+
             wellNus.addStudent(student);
         }
         for (JsonAdaptedAppointment jsonAdaptedAppointment : appointments) {
