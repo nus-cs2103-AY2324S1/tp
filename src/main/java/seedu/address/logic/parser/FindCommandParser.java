@@ -40,6 +40,14 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         return new FindCommand(combinedPredicate);
     }
+
+    /**
+     * Processes the raw command string into an ArgumentMultimap.
+     *
+     * @param args Raw command string.
+     * @return ArgumentMultimap containing argument values to find.
+     * @throws ParseException if the string contains no arguments or has a non-empty preamble.
+     */
     private ArgumentMultimap processRawCommand(String args) throws ParseException {
         requireNonNull(args);
         String trimmedArgs = args.trim();
@@ -51,16 +59,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         return argMultimap;
     }
-    private List<String> getNameList(ArgumentMultimap argumentMultimap) throws ParseException {
-        return getFieldList(argumentMultimap, PREFIX_NAME, ParserUtil::validateName);
-    }
-    private List<String> getFinancialPlanList(ArgumentMultimap argumentMultimap) throws ParseException {
-        return getFieldList(argumentMultimap, PREFIX_FINANCIAL_PLAN, ParserUtil::validateFinancialPlan);
-    }
-    private List<String> getTagList(ArgumentMultimap argumentMultimap) throws ParseException {
-        return getFieldList(argumentMultimap, PREFIX_TAG, ParserUtil::validateTag);
-    }
-
     /**
      * Gets the list of values mapped to the given prefix from the given multimap.
      *
@@ -81,5 +79,14 @@ public class FindCommandParser implements Parser<FindCommand> {
             validator.validate(string);
         }
         return list;
+    }
+    private List<String> getNameList(ArgumentMultimap argumentMultimap) throws ParseException {
+        return getFieldList(argumentMultimap, PREFIX_NAME, ParserUtil::validateName);
+    }
+    private List<String> getFinancialPlanList(ArgumentMultimap argumentMultimap) throws ParseException {
+        return getFieldList(argumentMultimap, PREFIX_FINANCIAL_PLAN, ParserUtil::validateFinancialPlan);
+    }
+    private List<String> getTagList(ArgumentMultimap argumentMultimap) throws ParseException {
+        return getFieldList(argumentMultimap, PREFIX_TAG, ParserUtil::validateTag);
     }
 }
