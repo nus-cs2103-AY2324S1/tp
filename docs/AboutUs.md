@@ -18,18 +18,18 @@ You can reach us at the email `shuenjin@u.nus.edu`
 [[github](https://github.com/leezhanpeng)]
 [[portfolio](team/leezhanpeng.md)]
 
-* Role: Lead Singer
-* Responsibilities: Singing
+* Role: Head Developer
+* Responsibilities: UI, Administrative
 
 ### Eric Xiong
 
 <img src="images/ericxiong420.png" width="200px">
 
 [[github](http://github.com/EricXiong420)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/ericxiong420.md)]
 
-* Role: Piano Man
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Logic
 
 ### Ng Shuen Jin
 
