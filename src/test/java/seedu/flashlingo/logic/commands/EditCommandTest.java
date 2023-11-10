@@ -1,6 +1,7 @@
 package seedu.flashlingo.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.logic.Messages.MESSAGE_DUPLICATE_FLASHCARD;
 import static seedu.flashlingo.logic.Messages.MESSAGE_SAME_WORD;
@@ -60,7 +61,7 @@ public class EditCommandTest {
     public void execute_changeWordLanguageOnly_success() {
         FlashCard editedFlashcard = new FlashCardBuilder().build();
         FlashCard lastFlashcard = model.getFilteredFlashCardList().get(0);
-        String[] changes = new String[] {"", editedFlashcard.getOriginalWord().getLanguage(), "", ""};
+        String[] changes = new String[] {null, editedFlashcard.getOriginalWord().getLanguage(), null, null};
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, changes);
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS,
                 Messages.format(lastFlashcard.editFlashCard(changes)));
@@ -75,7 +76,7 @@ public class EditCommandTest {
     public void execute_changeTranslationWordOnly_success() {
         FlashCard editedFlashcard = new FlashCardBuilder().build();
         FlashCard lastFlashcard = model.getFilteredFlashCardList().get(0);
-        String[] changes = new String[] {"", "", editedFlashcard.getTranslatedWord().getWord(), ""};
+        String[] changes = new String[] {null, null, editedFlashcard.getTranslatedWord().getWord(), null};
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, changes);
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS,
                 Messages.format(lastFlashcard.editFlashCard(changes)));
@@ -89,7 +90,7 @@ public class EditCommandTest {
     @Test
     public void execute_changeTranslationToBeSameAsWord_failure() {
         FlashCard lastFlashcard = model.getFilteredFlashCardList().get(0);
-        String[] changes = new String[] {"", "", lastFlashcard.getOriginalWord().getWord(), ""};
+        String[] changes = new String[] {null, null, lastFlashcard.getOriginalWord().getWord(), null};
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, changes);
 
         assertCommandFailure(editCommand, model, MESSAGE_SAME_WORD);
@@ -98,7 +99,7 @@ public class EditCommandTest {
     @Test
     public void execute_changeWordToUpperCase_failure() {
         FlashCard lastFlashcard = model.getFilteredFlashCardList().get(0);
-        String[] changes = new String[] {lastFlashcard.getOriginalWord().getWord().toUpperCase(), "", "", ""};
+        String[] changes = new String[] {lastFlashcard.getOriginalWord().getWord().toUpperCase(), null, null, null};
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, changes);
 
         assertCommandFailure(editCommand, model, MESSAGE_DUPLICATE_FLASHCARD);
@@ -115,8 +116,8 @@ public class EditCommandTest {
                 .withTranslatedWord(VALID_TRANSLATION_BOB, VALID_TRANSLATION_LANGUAGE)
                 .build();
 
-        String[] changes = new String[]{editedFlashcard.getOriginalWord().getWord(), "",
-                editedFlashcard.getTranslatedWord().getWord(), ""};
+        String[] changes = new String[]{editedFlashcard.getOriginalWord().getWord(), null,
+                editedFlashcard.getTranslatedWord().getWord(), null};
         EditCommand editCommand = new EditCommand(indexLastFlashcard, changes);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS,
@@ -130,7 +131,7 @@ public class EditCommandTest {
 
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicateFlashCardUnfilteredList_failure() {
         FlashCard firstFlashcard = model.getFilteredFlashCardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
         FlashCard descriptor = new FlashCardBuilder(firstFlashcard).build();
         String[] changes = new String[] {descriptor.getOriginalWord().getWord(),
@@ -143,25 +144,25 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
+    public void execute_duplicateFlashCardFilteredList_failure() {
         showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
 
-        // edit person in filtered list into a duplicate in address book
+        // edit flash card in filtered list into a duplicate in address book
         FlashCard flashCardInList = model.getFlashlingo().getFlashCardList().get(INDEX_SECOND_FLASHCARD.getZeroBased());
         FlashCard editedFlashcard = new FlashCardBuilder(flashCardInList).build();
-        String[] changes = new String[]{editedFlashcard.getOriginalWord().getWord(), "",
-                editedFlashcard.getTranslatedWord().getWord(), ""};
+        String[] changes = new String[]{editedFlashcard.getOriginalWord().getWord(), null,
+                editedFlashcard.getTranslatedWord().getWord(), null};
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, changes);
 
         assertCommandFailure(editCommand, model, MESSAGE_DUPLICATE_FLASHCARD);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidFlashCardIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashCardList().size() + 1);
         FlashCard descriptor = new FlashCardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB,
                 VALID_ORIGINAL_WORD_LANGUAGE).build();
-        String[] changes = new String[] {descriptor.getOriginalWord().getWord(), "",
+        String[] changes = new String[] {descriptor.getOriginalWord().getWord(), null,
                 descriptor.getTranslatedWord().getWord()};
         EditCommand editCommand = new EditCommand(outOfBoundIndex, changes);
 
@@ -173,7 +174,7 @@ public class EditCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidFlashCardIndexFilteredList_failure() {
         showFlashCardAtIndex(model, INDEX_FIRST_FLASHCARD);
         Index outOfBoundIndex = INDEX_SECOND_FLASHCARD;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -181,13 +182,53 @@ public class EditCommandTest {
 
         FlashCard editedFlashcard = new FlashCardBuilder()
                 .withOriginalWord(VALID_ORIGINAL_WORD_BOB, VALID_TRANSLATION_LANGUAGE).build();
-        String[] changes = new String[]{editedFlashcard.getOriginalWord().getWord(), "",
-                editedFlashcard.getTranslatedWord().getWord(), ""};
+        String[] changes = new String[]{editedFlashcard.getOriginalWord().getWord(), null,
+                editedFlashcard.getTranslatedWord().getWord(), null};
         EditCommand editCommand = new EditCommand(outOfBoundIndex, changes);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
+    @Test
+    public void equalsTest() {
+        Index index = Index.fromOneBased(1);
+        FlashCard flashCard = new FlashCardBuilder().build();
+        String editWord = flashCard.getOriginalWord().getWord();
+        String editTranslation = flashCard.getTranslatedWord().getWord();
+        String editWordLanguage = flashCard.getOriginalWord().getLanguage();
+        String editTranslationLanguage = flashCard.getTranslatedWord().getLanguage();
+        String[] changes = new String[] {editWord, editWordLanguage, editTranslation, editTranslationLanguage};
+        EditCommand editCommand = new EditCommand(index, changes);
+        EditCommand editCommandDifferentIndex;
+
+        // same object -> returns true
+        assertTrue(editCommand.equals(editCommand));
+
+        // same values -> returns true
+        EditCommand editCommandCopy = new EditCommand(index, changes);
+        assertTrue(editCommand.equals(editCommandCopy));
+
+        // different types -> returns false
+        assertFalse(editCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(editCommand.equals(null));
+
+        // different index -> returns false
+        Index differentIndex = Index.fromOneBased(2);
+        editCommandDifferentIndex = new EditCommand(differentIndex, changes);
+        assertFalse(editCommand.equals(editCommandDifferentIndex));
+
+        // different changes -> returns false
+        String differentWord = "differentWord";
+        String[] differentChanges = new String[] {
+            differentWord, editWordLanguage, editTranslation, editTranslationLanguage};
+        editCommandDifferentIndex = new EditCommand(index, differentChanges);
+        assertFalse(editCommand.equals(editCommandDifferentIndex));
+
+        //different command -> returns false
+        assertFalse(editCommand.equals(new AddCommand(flashCard)));
+    }
 
     @Test
     public void toStringMethod() {

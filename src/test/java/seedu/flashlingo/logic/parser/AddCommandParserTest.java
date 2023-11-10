@@ -36,10 +36,10 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = WORD_DESC_BOB + TRANSLATION_DESC_BOB;
+        String validExpectedFlashCardString = WORD_DESC_BOB + TRANSLATION_DESC_BOB;
 
         // multiple Word
-        assertParseFailure(parser, WORD_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, WORD_DESC_AMY + validExpectedFlashCardString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ORIGINAL_WORD));
 
     }

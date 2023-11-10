@@ -1,6 +1,7 @@
 package seedu.flashlingo.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.flashlingo.logic.Messages.MESSAGE_EMPTY_VALUE;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD_LANGUAGE;
@@ -43,20 +44,24 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
 
         String[] changes = getChanges(argMultimap);
-        if (Arrays.equals(changes, new String[] {"", "", "", ""})) {
+        if (Arrays.equals(changes, new String[4])) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         return new EditCommand(index, changes);
     }
-    private String[] getChanges(ArgumentMultimap argMultimap) {
-        String[] changes = new String[] {"", "", "", ""};
+    private String[] getChanges(ArgumentMultimap argMultimap) throws ParseException {
+        String[] changes = new String[4];
         for (int i = 0; i < prefixes.length; i++) {
             Optional<String> temp = argMultimap.getValue(prefixes[i]);
-            if (temp.isPresent()) {
-                changes[i] = temp.get().trim();
-            }
+            changes[i] = temp.orElse(null);
+        }
+        if (isInvalidWord(changes[0]) || isInvalidWord(changes[2])) {
+            throw new ParseException(MESSAGE_EMPTY_VALUE);
         }
         return changes;
+    }
+    private boolean isInvalidWord(String change) {
+        return change != null && change.isEmpty();
     }
 }
