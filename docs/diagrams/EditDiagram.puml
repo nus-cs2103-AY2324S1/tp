@@ -3,39 +3,39 @@
 skinparam ArrowFontStyle plain
 
 Participant ":Logic" as logic LOGIC_COLOR
-Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR_T1
-Participant ":EditCommandParser" as editCommandParser LOGIC_COLOR_T2
-Participant ":EditAction" as editAction MODEL_COLOR
-Participant ":EditCommand" as editCommand MODEL_COLOR_T1
-Participant ":Model" as model MODEL_COLOR_T2
-Participant ":EditPersonDescriptor" as editPersonDescriptor MODEL_COLOR_T3
+Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR
+Participant ":EditCommandParser" as editCommandParser LOGIC_COLOR_T1
+Participant ":EditAction" as editAction LOGIC_COLOR_T1
+Participant ":EditCommand" as editCommand LOGIC_COLOR_T1
+Participant ":EditPersonDescriptor" as editPersonDescriptor LOGIC_COLOR_T1
+Participant ":Model" as model MODEL_COLOR
 
 -> logic : execute("edit" + details)
-activate logic
+activate logic LOGIC_COLOR
 
 logic -> networkBookParser : "edit" + details
-activate networkBookParser LOGIC_COLOR_T1
+activate networkBookParser LOGIC_COLOR
 
 create editCommandParser
 networkBookParser -> editCommandParser
-activate editCommandParser LOGIC_COLOR_T2
+activate editCommandParser LOGIC_COLOR_T1
 
 editCommandParser --> networkBookParser
 deactivate editCommandParser
 
 networkBookParser -> editCommandParser : parse(details)
-activate editCommandParser LOGIC_COLOR_T2
+activate editCommandParser LOGIC_COLOR_T1
 
 create editAction
 editCommandParser -> editAction : generateAction
-activate editAction MODEL_COLOR
+activate editAction LOGIC_COLOR_T1
 
 editAction --> editCommandParser : action
 deactivate editAction
 
 create editCommand
 editCommandParser -> editCommand : new EditCommand(index, action)
-activate editCommand MODEL_COLOR_T1
+activate editCommand LOGIC_COLOR_T1
 
 editCommand --> editCommandParser : editCommand
 deactivate editCommand
@@ -47,23 +47,23 @@ networkBookParser --> logic : editCommand
 deactivate networkBookParser
 
 logic -> editCommand: execute(model)
-activate editCommand MODEL_COLOR_T1
+activate editCommand LOGIC_COLOR_T1
 
 editCommand -> model : get p at index
-activate model MODEL_COLOR_T2
+activate model MODEL_COLOR
 
 model --> editCommand : p at index
 deactivate model
 
 create editPersonDescriptor
 editCommand -> editPersonDescriptor: person
-activate editPersonDescriptor MODEL_COLOR_T3
+activate editPersonDescriptor LOGIC_COLOR_T1
 
 editPersonDescriptor --> editCommand : editPersonDescriptor
 deactivate editPersonDescriptor
 
 editCommand -> editAction : edit(editPersonDescriptor)
-activate editAction MODEL_COLOR_T1
+activate editAction LOGIC_COLOR_T1
 
 editAction -> editPersonDescriptor : modify field
 
@@ -71,7 +71,7 @@ editAction --> editCommand
 deactivate editAction
 
 editCommand -> editPersonDescriptor : toPerson()
-activate editPersonDescriptor MODEL_COLOR_T3
+activate editPersonDescriptor LOGIC_COLOR_T1
 
 editPersonDescriptor --> editCommand : new person
 deactivate editPersonDescriptor
