@@ -217,6 +217,8 @@ To learn more about **editing a fosterer through the profile page**, refer to th
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<br> 
+
 ### Viewing Help for Commands : `help`
 
 Opens a pop-up window, providing you with the link to our User Guide for help.
@@ -224,6 +226,8 @@ Opens a pop-up window, providing you with the link to our User Guide for help.
 Format: `help`
 
 ![Help](images/screenshots/HelpWindow.png)
+
+<br> 
 
 ### Adding a fosterer through the main window: `add`
 
@@ -306,6 +310,9 @@ Format: `add`
 
 To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page).  
 
+<br> 
+
+
 ### Listing fosterers: `list` (Alias: `find`)
 
 Lists fosterers in your address book that match a particular description or search, or all fosterers if the search is blank.
@@ -356,6 +363,8 @@ Examples:
 * `list "John" / zam & doe`
     * lists entries which match "John Doe" and "Doe Shazam", but not "John Grahm".
 
+<br> 
+
 ### Viewing a fosterer's detail: `view`
 
 Opens the profile page of the index-th fosterer in your currently displayed list.
@@ -382,6 +391,8 @@ Examples:
 
 To learn more about profile page, please refer to the section [User Interface: the Profile View](#the-profile-view). 
 
+<br> 
+
 #### Editing a fosterer’s details in profile page:
 
 1. Enter a fosterer’s profile page with `view INDEX`.
@@ -393,6 +404,8 @@ To learn more about profile page, please refer to the section [User Interface: t
 Example:
 * `list` followed by `view 2`
   * views the profile of the 2nd fosterer in the address book.
+
+<br> 
 
 ### Saving changes in a fosterer's details: `save`
 
@@ -408,6 +421,8 @@ Saves changes in details of the fosterer made in the profile page.
 </div>
 
 Format: `save`
+
+<br> 
 
 ### Editing a fosterer's detail through the main window: `edit`
 
@@ -463,6 +478,7 @@ Edit may cause information loss.
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 </div>
 
+<br> 
 
 ### Editing a fosterer's detail through the profile page: `edit`
 
@@ -505,6 +521,8 @@ Before you type the save command, make sure there is no accidental overwrite wit
 
 To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
 
+<br> 
+
 ### Deleting a fosterer : `delete`
 
 Deletes the index-th fosterer in your currently displayed list.
@@ -546,6 +564,8 @@ Examples:
 * `list` followed by `delete 3 3 3 3` 
   * deletes the 3rd fosterer in the address book.
 
+<br> 
+
 ### Sorting fosterers: `sort`
 
 Sorts your list of fosterers alphabetically, by name.
@@ -553,6 +573,8 @@ Sorts your list of fosterers alphabetically, by name.
 Format: `sort`
 
 ![Sort](images/screenshots/Sort.png)
+
+<br> 
 
 ### Viewing Statistics of Available Fosterers : `stats avail`
 
@@ -591,6 +613,8 @@ Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat a
 
 </div>
 
+<br> 
+
 ### Viewing Statistics of Current Fosterers : `stats current`
 Helps you calculate statistics about fosterers who are currently fostering, and the type of animals they are fostering. Percentages are calculated to 2 decimal places.
 
@@ -604,6 +628,8 @@ Examples:
 * `find dog` followed by `stats current`
   * calculates statistics of current fosterers, based on fosterers who are either currently fostering a dog,  or are able to foster a dog.
 
+<br> 
+
 ### Viewing Housing Statistics : `stats housing`
 Helps you calculate statistics about the various housing types of fosterers. Percentages are calculated to 2 decimal places.
 
@@ -616,6 +642,8 @@ Examples:
 
 * `find available` followed by `stats housing` 
   * calculates housing statistics based on fosterers who are available.
+
+<br> 
 
 ### Undoing the previous command : `undo`
 
@@ -633,6 +661,8 @@ Format: `undo`
 ![Undo](images/screenshots/UndoError.png)
 
 </div>
+
+<br> 
 
 ### Clearing all entries : `reset`, followed by `reset confirm`
 
@@ -653,6 +683,8 @@ Format: `reset`, followed by `reset confirm`
 
 </div>
 
+<br> 
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -667,10 +699,13 @@ Format: `exit`
 * On the profile page, attempting to <code>exit</code> without saving changes with <code>save</code> prompts a warning message (refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page)). 
 </div>
 
+<br> 
 
 ### Saving data
 
 In the main window, your Foster Family data is saved in the hard disk automatically after any command that changes the data, so no manual saving is needed. However, edits made in the profile page have to be saved via the `save` command. Else, changes will be discarded once you exit out of that fosterer's profile page.
+
+<br> 
 
 ### Editing data file
 
