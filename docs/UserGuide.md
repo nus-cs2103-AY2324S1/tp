@@ -159,6 +159,108 @@ Failure Output:
   Example: list tasks
 ```
 
+### Filtering the lesson / student list
+You can filter the list of lessons (obtained by typing `list schedule`) or the list of students (obtained by typing `list students`).
+The filter command will show only the relevant entries that match the entered flags and values.
+The filter command has different supported filter properties depending on the current list (refer to the `list` command [here](#listing-upcoming-lessons--tasks--students--list)):
+
+1. In `SCHEDULE` list:
+    - Shows a list of lessons that match the provided filters
+    - Format: `filter [-name NAME] [-subject SUBJECT] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`
+    - Note: Only one of `-before`, `-on`, `-after` can be used at once. For example, you cannot use both `-before` and `-after` in the same filter command.
+      - Allowed: `filter -before 2022/10/10`
+      - Not allowed: `filter -before 2022/10/10 -after 2022/01/01`
+2. In `STUDENTS` list:
+    - Shows a list of students that match the provided filters
+    - Format: `filter [-name NAME] [-subject SUBJECT] [-tag TAG] [-remark REMARK]`
+
+Explanation of fields that can be filtered
+
+| Flag         | Used when showing...    | Filter results                                                                                                                   | Example                                                                                            |
+|--------------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| **-name**    | Students, Schedule      | Lessons or students whose name partially or fully matches the name entered                                                       | `filter -name John`                                                                                |
+| **-subject** | Students, Schedule      | Lessons or students that have the specified subject. Valid values: MATHEMATICS, PHYSICS, BIOLOGY, CHEMISTRY or ENGLISH.          | `filter -subject Mathematics`                                                                      |
+| **-before**  | Schedule                | Lessons that occur before (not including) the specified date. Valid input formats: `YYYY/MM/DD` or `YY/MM/DD` or `MM/DD` or `DD` | `filter -before 2023/12/01`, `filter -before 23/12/01`, `filter -before 12/01`, `filter -before 1` |
+| **-on**      | Schedule                | Lessons that occur on the specified date. Valid input formats: `YYYY/MM/DD` or `YY/MM/DD` or `MM/DD` or `DD`                     | `filter -on 2023/12/01`, `filter -on 23/12/01`, `filter -on 12/01`, `filter -on 1`                 |
+| **-after**   | Schedule                | Lessons that occur after (not including) the specified date. Valid input formats: `YYYY/MM/DD` or `YY/MM/DD` or `MM/DD` or `DD`  | `filter -after 2023/12/01`, `filter -after 23/12/01`, `filter -after 12/01`, `filter -after 1`     |
+| **-remark**  | Students, Schedule      | Lessons or students whose remarks partially or fully matches the remark entered                                                  | `filter -remark assistance`                                                                        |                                                                                                                                                                                                                                 |
+| **-tag**     | Students                | Students who have at least one tag that fully matches the tag name entered                                                       | `filter -tag primary`                                                                              |
+ 
+Notes
+- When filtering, all text is case-insensitive. That is, `filter -name LEAH` is the same as `filter -name leah`. 
+- You can filter by any number of flags, and in any order.
+- To reset the filter (view all students / lessons), type `list students` or `list schedule`.
+
+Examples:
+- In `SCHEDULE` list:
+  - `filter -name CS2103T -before 2023/12/11`
+- In `STUDENT` list:
+  - `filter -name Alex -tag primary -subject Mathematics`
+
+Success Output:
+- For the command `filter -name Alex -tag primary -subject Mathematics` in the _Student List_ with all detail fields shown
+![Success for filter 1](images/filter/filter_positive_1.png)
+- For the command `filter -name Alex -tag secondary` (No such students matching the filter found)
+![Success for filter 2](images/filter/filter_positive_2.png)
+
+Failure output:
+- When there are invalid values specified in the command `filter -on 2/2/2` (invalid date format)
+![Error for filter](images/filter/filter_negative_1.png)
+```
+Invalid lesson format: 2/2/2 is not a valid date, please use yyyy/mm/dd or mm/dd or dd
+for example, assume today is 2023/11/3, to add 2023/11/29, could use 29, 11/29, 2023/11/29 or 23/11/29. 
+Usage: filter -(any number of unique -[name|subject|before|on|after|remark] [value]). 
+```
+
+### Locating students/lessons by name: `find`
+
+The find command generally finds items by its exact name, but has different behaviours depending on the current list:
+
+Format: `find SEARCH_STRING`
+
+1. In `SCHEDULE` list:
+    * Finds lesson(s) whose names contain the given search string.
+    * The search is case-insensitive. e.g. `lesson` will match `Lesson`.
+    * Lesson(s) with names containing the search string will be returned.
+      e.g. Both `Lesson Chem` and `sson Che` will return `Lesson Chemistry`, `Bishan Lesson Chem`.
+
+2. In `STUDENTS` list:
+    * Finds student(s) whose names contain the given search string.
+    * The search is case-insensitive. e.g `hans` will match `Hans`.
+    * Student(s) with names containing the search string will be returned.
+      e.g. `Hans` will return `Hanso Gruber`, `Lee Hansel`.
+
+3. In `TASKS` list:
+    * Find tasks by name/description is disabled.
+    * Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see task list of the lesson.
+
+Success Output:
+* In `SCHEDULE` list:
+```
+2 lessons listed!
+```
+* In `STUDENTS` list:
+```
+3 persons listed!
+```
+These are also counted as success outputs, since they can be a result of finding a valid search string (with no results):
+* In `SCHEDULE` list:
+```
+0 lessons listed!
+```
+* In `STUDENTS` list:
+```
+0 persons listed!
+```
+
+Failure Output:
+```
+Invalid command format! 
+find: Finds all persons or lesson whose names contains the specified search string (case-insensitive) and displays them as a list with index numbers.
+Parameter: SEARCH_STRING
+Example: find alex yeoh
+```
+
 ### Showing a lesson / task / student's details : `show`
 
 The show command has different behaviours depending on the current list (refer to the `list` command [here](#listing-upcoming-lessons--tasks--students--list)):
@@ -520,54 +622,118 @@ If no lesson is shown:
 Please use show lessonIndex before deleting task!
 ```
 
-### Locating students/lessons by name: `find`
+### Linking students to lessons
+You can link lessons to students, and vice versa. For example, if a lesson has a few students, you can link each of the students to the lesson, so that you can quickly see who is attending this specific lesson.
+To use this command, you must have selected a lesson or student using the `show` command (see [here](#showing-a-lesson--task--students-details--show)).
 
-The find command generally finds items by its name, but has different behaviours depending on the current list:
+#### Command format
+- In the student list and a student is selected:
+  - `linkTo LESSON_NAME`
+- In the schedule list and a lesson is selected:
+  - `linkTo STUDENT_NAME`
 
-Format: `find SEARCH_STRING`
+<box type="tip" seamless>
 
-1. In `SCHEDULE` list: 
-    * Finds lesson(s) whose names contain the given search string.
-    * The search is case-insensitive. e.g. `lesson` will match `Lesson`.
-    * Lesson(s) with names containing the search string will be returned.
-      e.g. Both `Lesson Chem` and `sson Che` will return `Lesson Chemistry`, `Bishan Lesson Chem`.
+**Tips:**
+- A lesson can have multiple students, and a student can have multiple lessons. Just run the `linkTo` command multiple times.
+- As of now, you cannot unlink a student from a lesson and vice versa. Use caution when running the `linkTo` command.
+- To link a lesson to a student, the lesson must first be selected. To link a student to a lesson, the student must first be selected.
+</box>
 
-2. In `STUDENTS` list: 
-    * Finds student(s) whose names contain the given search string.
-    * The search is case-insensitive. e.g `hans` will match `Hans`.
-    * Student(s) with names containing the search string will be returned.
-      e.g. `Hans` will return `Hanso Gruber`, `Lee Hansel`.
+#### Example usage
+- In the student list and a student is selected:
+  - `linkTo CS2103T Lab`
+  - Result: The student is linked to the lesson with name "CS2103T Lab"
+- In the schedule list and a lesson is selected:
+  - `linkTo Bernice Yu`
+  - Result: The lesson is linked to the student "Bernice Yu"
 
-3. In `TASKS` list:
-   * Find tasks by name/description is disabled. 
-   * Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see task list of the lesson.
+#### Success outputs
+- For the command `linkTo CS2103T Lab` in the student list when "Alex Wong" is selected:
+![Success for linking to lesson](images/linkTo/linkTo_lesson_positive.png)
+- For the command `linkTo John` in the schedule list when "CS2100 Tutorial" is selected:
+![Success for linking to student](images/linkTo/linkTo_student_positive.png)
 
-Success Output:
-* In `SCHEDULE` list:
+#### Failure outputs
+- In the schedule list and a lesson is NOT selected, when trying to link a student:
+![Failure for linking to student](images/linkTo/linkTo_noSelectedLesson.png)
 ```
-2 lessons listed!
-```
-* In `STUDENTS` list:
-```
-3 persons listed!
-```
-These are also counted as success outputs, since they can be a result of finding a valid search string (with no results):
-* In `SCHEDULE` list:
-```
-0 lessons listed!
-```
-* In `STUDENTS` list:
-```
-0 persons listed!
+No lesson is shown
+LinkTo command usage: linkTo [STUDENT_NAME]
+Example: linkTo Alice Pauline
+Note: This command is only available when a lesson is shown
 ```
 
-Failure Output:
+- In the schedule list and a lesson is selected, when the student name specified in the `linkTo nonexisting student` command cannot be found:
+![Failure for linking to student](images/linkTo/linkTo_student_negative.png)
 ```
-Invalid command format! 
-find: Finds all persons or lesson whose names contains the specified search string (case-insensitive) and displays them as a list with index numbers.
-Parameter: SEARCH_STRING
-Example: find alex yeoh
+No such student with name nonexisting student found
 ```
+
+- In the student list and a student is NOT selected, when trying to link a lesson:
+![Failure for linking to lesson](images/linkTo/linkTo_noSelectedStudent.png)
+```
+No student is shown
+LinkTo command usage: linkTo [LESSON_NAME]
+Example: linkTo CS2103T lab1
+Note: This command is only available when a student is shown
+```
+
+### Viewing the linked students of a lesson, or the linked lessons of a student : `nav`
+After linking students to lessons or vice versa, you can "navigate" between the student and their linked lessons, or the lesson and its linked students.
+This comes in handy when you want to view the details of students in a lesson, or see what lessons a student has upcoming.
+
+#### Command format
+- When a lesson or a student is selected and there are associated students/lessons:
+  - `nav`
+
+<box type="tip" seamless>
+
+**Tips:**
+- The lesson (or student) must have at least one linked student (or lesson) for the command to work.
+  </box>
+
+#### Example usage
+- When a lesson is selected and it has linked students:
+  - `nav`
+  - Result: The app changes to the student list and only shows the students that are linked to the lesson.
+- When a lesson is selected and it has linked students:
+  - `nav`
+  - Result: The app changes to the schedule list and only shows the lessons that are linked to the student.
+
+#### Success outputs
+- When "CS2100 Tutorial" is selected that has two students ("Bernice Yu" and "John") linked to it:
+
+![Success for navigating to students](images/nav/nav_fromLesson_positive.png)
+
+- When "John" is selected and is linked to two lessons ("lesson1", "CS2100 Tutorial"):
+
+![Success for navigating to lessons](images/nav/nav_fromLesson_positive.png)
+
+#### Failure outputs
+- When the `nav` command is used without selecting either a student or a lesson:
+
+![Failure for navigating to students as no lesson is selected](images/nav/nav_noneSelected.png)
+```
+No lesson is currently displayed
+```
+Solution: Select a lesson or student using the `show` command (here)
+
+- When a lesson has no linked students:
+
+![Failure for navigating to students as no students are linked](images/nav/nav_noStudents.png)
+```
+This lesson has no linked students
+```
+Solution: link a student using the `linkTo` command (here)
+
+- When a student has no linked lessons:
+
+![Failure for navigating to lessons as no lessons are linked](images/nav/nav_noLessons.png)
+```
+This student has no linked lessons
+```
+Solution: link a student using the `linkTo` command (here)
 
 ### Command history
 
