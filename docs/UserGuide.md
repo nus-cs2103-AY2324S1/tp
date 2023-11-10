@@ -17,7 +17,7 @@ Our guide has three main components:
 2. List of *available features*, and
 3. Our *Frequently Asked Questions (FAQs)*. Refer to the [Table of Contents](#table-of-contents) below to navigate to your area of interest.
 
-If you are interested in the more technical details, please refer to our [Developer Guide](https://ay2324s1-cs2103t-w13-4.github.io/tp/DeveloperGuide.html).
+If you are interested in more technical details, please refer to our [Developer Guide](https://ay2324s1-cs2103t-w13-4.github.io/tp/DeveloperGuide.html).
 
 <div markdown="block" class="alert alert-info">
 :information_source: 
