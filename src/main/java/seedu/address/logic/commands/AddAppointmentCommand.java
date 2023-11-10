@@ -16,7 +16,7 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 
 /**
- * Adds a person to the address book.
+ * Adds an Appointment to the address book.
  */
 public class AddAppointmentCommand extends Command {
 
@@ -55,6 +55,11 @@ public class AddAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (toAdd.getDoctor().equals(toAdd.getPatient())) {
+            throw new CommandException(MESSAGE_SAME_DOCTOR_AND_PATIENT);
+        }
+
         Patient chosenPatient = findPatient(model);
         Doctor chosenDoctor = findDoctor(model);
         checkPatientAndDoctor(chosenPatient, chosenDoctor);
@@ -74,6 +79,7 @@ public class AddAppointmentCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT_DOCTOR);
         }
     }
+
     private void checkPatientAndDoctor(Patient chosenPatient, Doctor chosenDoctor) throws CommandException {
         if (chosenPatient == null) {
             throw new CommandException(MESSAGE_INVALID_PATIENT);

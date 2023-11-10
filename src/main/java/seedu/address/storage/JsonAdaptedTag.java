@@ -38,9 +38,16 @@ class JsonAdaptedTag {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+    public Tag toModelPatientType() throws IllegalValueException {
+        if (!Tag.isValidFullPatientTagName(tagName)) {
+            throw new IllegalValueException(Tag.INVALID_PATIENT_TAG);
+        }
+        return new Tag(tagName);
+    }
+
+    public Tag toModelDoctorType() throws IllegalValueException {
+        if (!Tag.isValidDoctorTagName(tagName)) {
+            throw new IllegalValueException(Tag.INVALID_DOCTOR_TAG);
         }
         return new Tag(tagName);
     }

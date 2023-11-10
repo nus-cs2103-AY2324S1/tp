@@ -64,9 +64,7 @@ public class Messages {
                 .append("; Doctor involved: ")
                 .append(appointment.getDoctor())
                 .append("; Time of appointment: ")
-                .append(appointment.getAppointmentTime())
-                .append("; Status: ")
-                .append(appointment.getStatus());
+                .append(appointment.getAppointmentTime());
         return builder.toString();
     }
 

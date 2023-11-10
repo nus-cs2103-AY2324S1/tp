@@ -62,7 +62,7 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
         Remark remark = new Remark(""); // add command does not allow adding remarks straight away
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Ic ic = ParserUtil.parseIc(argMultimap.getValue(PREFIX_NRIC).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> tagList = ParserUtil.parseDoctorTags(argMultimap.getAllValues(PREFIX_TAG));
         // appointments need to be added separately, so we initialise doctors with empty appointments
         Set<Appointment> appointmentList = new HashSet<>();
 

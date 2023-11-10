@@ -5,12 +5,12 @@ title: User Guide
 
 MediLink Contacts(MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
 Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MLC
-cang get your patients management tasks done faster than traditional GUI apps.
+can get your patients management tasks done faster than traditional GUI apps.
 
 ### Table of Contents
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -18,11 +18,11 @@ cang get your patients management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `mediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
+1. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your MLC.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar medilink.jar` command
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Medilink.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -89,7 +89,7 @@ Format: `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TA
 
 <div markdown="span" class="alert alert-primary">:bulb:
 **Tip:**
-A person can have any number of tags (including 0)
+A doctor can have any number of tags (including 0). Duplicate tags, however, are NOT allowed.
 </div>
 <div markdown="block" class="alert alert-info">
 
@@ -101,19 +101,23 @@ A person can have any number of tags (including 0)
 - PHONE_NUMBER must have exactly 8 digits.
 - EMAIL must contain email domain (eg. `@gmail.com`).
 - PATIENT must contain the valid IC of a Patient in the Database.
+- Tags for doctors represent the specialisation(s) of the doctor. Only tags from the list below are supported 
+in our current version:
 
+  `CARDIOLOGIST, ORTHOPEDIC, PEDIATRICIAN, DERMATOLOGIST, NEUROLOGIST, GENERAL_PRACTITIONER, PSYCHIATRIST, SURGEON`
+- Tags are not case-sensitive (e.g. `t/SURGEON` and `t/surgeon` are both valid inputs).
 </div>
 
 Examples:
 
-* `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
+* `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`
 * `add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`
 
 ### Adding a Patient: `add-patient`
 
 Adds a Patient to the hospital database.
 
-Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​`
+Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] ​`
 
 <div markdown="block" class="alert alert-info">
 
@@ -122,56 +126,83 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 - A patient **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result
   in an error.
 - Phone Numbers and Emails have to be in a valid format.
-    - PHONE_NUMBER must have exactly 8 digits.
+    - PHONE_NUMBER must have at least 3 digits
     - EMAIL must contain email domain (eg. `@gmail.com`).
-- DOCTOR must contain the valid IC of a doctor in the Database.
+- TAG must indicate Priority Level of the Patient and be one of the following:
+  - Low
+  - Medium
+  - High
 - EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number.
-- Blood type must be a combination of A/B/AB/O and +/-
+- Blood type must be a combination of A/B/AB/O and +/-.
+- A patient can only have up to one tag at any time.
+- Tags for patients represent the priority level of the patient. Only the following tags are allowed: Low, Medium, High.
+- Tags are not case-sensitive (e.g. `t/LOW` and `t/low` are both valid inputs).
 
 </div>
 
 Examples:
 
-* `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`
-* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/High Priority pt/T0123556H`
+* `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
+* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High`
 
 ### Creating an Appointment : `new-appt`
 
 Creates a new appointment for patients.
 
-Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm:ss`
+Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- TIME must follow the specified format (ie. `yyyy-MM-dd HH:mm:ss`).
+- TIME must follow the specified format (ie. `yyyy-MM-dd HH:mm`), where `HH:mm` follows the 24hr format.
 - PATIENT must contain the valid IC of a Patient in the Database.
 - DOCTOR must contain the valid IC of a Doctor in the Database.
+- There must not be conflicting Appointments (eg the doctor already has an appointment with another patient at the same time)
 
 </div>
 
 Examples:
 
-* `new-appt pic/T0123456H dic/S9851586G time/2023-10-30T13:00:00`
+* `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`
 
-### Finding an Appointment : `find-appt`
+### Deleting an Appointment : `delete-appt`
+
+Deletes an existing appointment.
+
+Format: `delete-appt INDEX`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
+- Index is according to the list view in the application.
+- Use `list` command to find index of desired appointment.
+
+</div>
+
+Examples:
+
+* `delete-appt 1`
+
+### Finding a Appointment : `find-appt`
 
 Finds all appointments that involve a specific patient/doctor.
 
-Format: `find-appt IC`
+Format: `find-appt NRIC`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- IC must contain the valid IC of a Patient or Doctor in the Database.
+- NRIC must contain the valid NRIC of a Patient or Doctor in the Database.
+- Either Doctor NRIC or Patient NRIC can be used in the search
+- It is recommended to use `list` to restore the view of all data after a `find` command.
 
 </div>
 
 Examples:
 
-* `find-appt T0123456H`
+* `find-appt T0001222Q`
 
 ### Listing all persons : `list`
 
@@ -193,37 +224,75 @@ Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+* Note: In our app, the Remark Section will be left blank by default. Edit Command can be used to add any misc info not captured by other fields such as possible allergies, medical history, etc.
 
 Examples:
 
 * `edit T0123456A p/91234567 e/johndoe@example.com g/F` Edits the phone number and email address of the 1st person to
   be `91234567` and `johndoe@example.com` respectively.
-* `edit S9876543B pt/T0123456A n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all
+* `edit S9876543B n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all
   existing tags.
 
 ### Locating persons by name: `find`
 
-Finds persons that match the query. Supports gender, NRIC and name.
+Finds persons that match the query.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* When searching names, the search is case-insensitive. e.g `hans` will match `Hans`
+* When searching names, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* When searching names, only full words will be matched e.g. `Han` will not match `Hans`
+* When searching names, Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* When searching by NRIC, input the NRIC as the keyword.
-* When searching by gender, input either `M` or `F` as the keyword.
-* When searching by name, input the names as per above.
+* Note that if the name coincides with other find commands, it will be interpreted as the other find command first and extraneous paremeters will be ignored. e.g. `find F Kennedy John` will search for all female persons. 
+* It is recommended to use `list` to restore the view of all data after a `find` command
 
 Examples:
 
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-* `find T1125726G` returns the person with the matching NRIC.
+* `find kenny pickens` returns `Kenny Pickett`, `George Pickens`<br>
+  ![result for 'find alex david'](images/findpickettpickensresult.png)
+
+
+### Locating a person by NRIC : `find` ###
+
+Finds person that matches the NRIC query
+
+Format: `find NRIC`
+
+* NRIC input must be capitalised!
+* It is recommended to use `list` to restore the view of all data after a `find` command
+
+Examples:
+
+* `find T1125726G` returns the person with the matching NRIC
+
+### Locating people by gender : `find M`, `find F` ###
+
+Finds all persons with matching gender
+
+Format: `find M` or `find F`
+
+* M and F must be capitalised
+* It is recommended to use `list` to restore the view of all data after a `find` command
+
+Examples:
+
 * `find M` returns all male persons.
+
+### Locating people by blood types : `find Blood Type` ###
+
+Finds all Patients with query blood type
+
+Format: `find Blood Type QUERY` 
+
+* All blood type inputs must be capitalised
+* Acceptable blood types are A, A+, B, B+, O, O+, AB and AB+
+* It is recommended to use `list` to restore the view of all data after a `find` command
+
+Examples:
+
+* `find Blood Type A+` returns all Patients with blood type A+
 
 ### Deleting a person : `delete`
 
@@ -251,7 +320,7 @@ Undoes the effect of the last command.
 
 Format: `undo`
 
-* Can only do upto 5 undos at any one time.
+* Can only do up to 5 undos at any one time.
 
 ### Redo last action : `redo`
 
@@ -259,7 +328,22 @@ Repeats the previous command; an `undo` for an `undo` command.
 
 Format: `redo`
 
-* Can only do upto 5 redos at any one time.
+* Can only do up to 5 redos at any one time.
+
+### Adding / Deleting remarks : `remark`
+
+Adds remark to specified person. Adding empty remark deletes the current remark from specified person.
+
+Format: `remark NRIC`
+
+* Modifies remark of the person with the specified NRIC.
+* The NRIC **must be a valid NRIC format** and must belong to a person in the addressbook.
+* The NRIC is case-sensitive. e.g `tXXXXXXXz` is not the same as `TXXXXXXXZ`
+
+Examples:
+
+* `remark S1234567J r/` deletes remarks belonging to Jonathan who has the NRIC `S1234567J`
+* `remark S1234567J r/Has Health Issues` changes current remarks belonging to Jonathan to `Has Health Issues`
 
 ### Exiting the program : `exit`
 
@@ -306,17 +390,20 @@ the data of your previous MediLink Contacts home folder.
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                                                                                                                                                                                                             |
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **New Doctor**      | `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`                                                                                               |
-| **New Patient**     | `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​` <br> e.g., `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+` |
-| **New Appointment** | `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm:ss` <br> e.g., `new-appt pic/T0123456H dic/S9851586G time/yyyy-MM-dd 13:00:00`                                                                                                                                                                                 |
-| **Clear**           | `clear`                                                                                                                                                                                                                                                                                                      |
-| **Undo**            | `undo`                                                                                                                                                                                                                                                                                                       |
-| **Redo**            | `redo`                                                                                                                                                                                                                                                                                                       |
-| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                                          |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                                  |
-| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                                   |
-| **List**            | `list`                                                                                                                                                                                                                                                                                                       |
-| **Help**            | `help`                                                                                                                                                                                                                                                                                                       |
+| Action                 | Format, Examples                                                                                                                                                                                                                                                             |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **New Doctor**         | `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`                                                             |
+| **New Patient**        | `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​` <br> e.g., `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High` |
+| **New Appointment**    | `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm` <br> e.g., `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`                                                                                                                                                       |
+| **Delete Appointment** | `delete-appt INDEX`  <br> e.g., delete-appt 1                                                                                                                                                                                                                                |
+| **Find Appointment**   | `find-appt NRIC` <br> e.g., find-appt T00012220                                                                                                                                                                                                                              |
+| **Clear**              | `clear`                                                                                                                                                                                                                                                                      |
+| **Undo**               | `undo`                                                                                                                                                                                                                                                                       |
+| **Redo**               | `redo`                                                                                                                                                                                                                                                                       |
+| **Delete**             | `delete NRIC`<br> e.g., `delete T0666485G`                                                                                                                                                                                                                                         |
+| **Edit**               | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit S9760431H n/James Lee e/jameslee@example.com`                                                                                                                                                |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                   |
+| **List**               | `list`                                                                                                                                                                                                                                                                       |
+| **Help**               | `help`                                                                                                                                                                                                                                                                       |
+| **Exit**               | `exit`                                                                                                                                                                                                                                                                       |
 

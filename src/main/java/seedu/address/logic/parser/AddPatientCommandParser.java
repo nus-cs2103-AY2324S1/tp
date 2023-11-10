@@ -58,7 +58,7 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
                 PREFIX_GENDER, PREFIX_NRIC, PREFIX_CONDITION, PREFIX_BLOODTYPE, PREFIX_EMERGENCY_CONTACT);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
@@ -71,7 +71,7 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
         Ic ic = ParserUtil.parseIc(argMultimap.getValue(PREFIX_NRIC).get());
         BloodType bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOODTYPE).get());
         Condition condition = ParserUtil.parseCondition(argMultimap.getValue(PREFIX_CONDITION).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> tagList = ParserUtil.parsePatientTags(argMultimap.getAllValues(PREFIX_TAG));
         // appointments need to be added separately, so we initialise patients with empty appointments
         Set<Appointment> appointmentList = new HashSet<>();
         Patient patient =

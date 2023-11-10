@@ -3,44 +3,45 @@ layout: page
 title: Kai Jie's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: MediLink Contacts
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+MediLink Contacts aims to help medical staff including nurses/doctors/pharmacists navigate through patient details in
+their high workload and time-pressured working environment. When medical emergencies arise, it becomes crucial to
+provide rapid access to emergency contacts for patients and access other details of the patients to make decisions more
+quickly. It is optimised for CLI so that users can quickly access the information. There is also a GUI created with 
+JavaFX.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
+* **New Feature**: Added the ability to undo/redo previous commands (done with Tanveer).
   * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
   * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
   * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Allowed only specific tags to be added for patients and doctors respectively.
+  * What it does: restricts the user to only enter specific tags for patients and doctors. Patients can only have up to one tag specifying their priority level. Doctors can have up to multiple tags specifying their specialisations.
+  * Justification: This feature ensures that tags have a clear purpose and users cannot enter tags that do not add value to the patient or doctor (e.g adding Engineer tag for a doctor).
+  * Highlights: While this enhancement itself did not affect much other commands, the implementation itself was challenging as it required choosing between different implementation methods, and choosing the most future-proof and OOP-friendly one.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [Link to TP code dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=kohkaijie&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Managed releases `v1.1` - `v1.3` (3 releases) on GitHub
+  * Added issues on GitHub for various tasks.
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Created classes for new fields for Patient and Doctor classes.
+  * Wrote additional tests for existing features such as Patient fields, UndoCommand and Tags.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for the features `delete` and usage of special tags.
   * Developer Guide:
     * Added implementation details of the `delete` feature.
+    * Modified UML diagram for DeleteSequenceDiagram.
+    * Added Use Case for UndoCommand and extensions for EditCommand.
 
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+* **Team-based tasks**:
+  * Reviewed PRs and approved when needed for merging.
 
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
 
-* _{you can add/remove categories in the list above}_

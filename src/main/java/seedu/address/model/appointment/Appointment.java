@@ -2,8 +2,6 @@ package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import seedu.address.model.person.Ic;
@@ -14,11 +12,9 @@ import seedu.address.model.person.Ic;
  * Doctor and patient ic should not be the same.
  */
 public class Appointment {
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private Ic doctorIc;
     private Ic patientIc;
-    private LocalDateTime appointmentTime;
-    private String status = "scheduled";
+    private AppointmentTime appointmentTime;
 
     /**
      * Constructs a new appointment with the specified doctor, patient, and appointment time.
@@ -27,7 +23,7 @@ public class Appointment {
      * @param patientIc       The patient involved in the appointment.
      * @param appointmentTime The date and time of the appointment.
      */
-    public Appointment(Ic doctorIc, Ic patientIc, LocalDateTime appointmentTime) {
+    public Appointment(Ic doctorIc, Ic patientIc, AppointmentTime appointmentTime) {
         requireNonNull(doctorIc);
         requireNonNull(patientIc);
         requireNonNull(appointmentTime);
@@ -44,7 +40,7 @@ public class Appointment {
      * @param appointmentTime The date and time of the appointment.
      * @param status          The status of the appointment.
      */
-    public Appointment(Ic doctorIc, Ic patientIc, LocalDateTime appointmentTime, String status) {
+    public Appointment(Ic doctorIc, Ic patientIc, AppointmentTime appointmentTime, String status) {
         requireNonNull(doctorIc);
         requireNonNull(patientIc);
         requireNonNull(appointmentTime);
@@ -52,10 +48,9 @@ public class Appointment {
         this.doctorIc = doctorIc;
         this.patientIc = patientIc;
         this.appointmentTime = appointmentTime;
-        this.status = status;
     }
 
-    public LocalDateTime getAppointmentTime() {
+    public AppointmentTime getAppointmentTime() {
         return appointmentTime;
     }
 
@@ -67,11 +62,7 @@ public class Appointment {
         return patientIc;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setAppointmentTime(LocalDateTime appointmentTime) {
+    public void setAppointmentTime(AppointmentTime appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
 
@@ -81,10 +72,6 @@ public class Appointment {
 
     public void changePatient(Ic newPatientIc) {
         this.patientIc = newPatientIc;
-    }
-
-    public void changeStatus(String newStatus) {
-        this.status = newStatus;
     }
 
     @Override
@@ -101,18 +88,17 @@ public class Appointment {
         Appointment otherAppointment = (Appointment) other;
         return this.doctorIc.equals(otherAppointment.doctorIc)
                 && this.patientIc.equals(otherAppointment.patientIc)
-                && this.appointmentTime.equals(otherAppointment.appointmentTime)
-                && this.status.equals(otherAppointment.status);
+                && this.appointmentTime.equals(otherAppointment.appointmentTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(doctorIc, patientIc, appointmentTime, status);
+        return Objects.hash(doctorIc, patientIc, appointmentTime);
     }
 
     @Override
     public String toString() {
         return "Patient with IC " + patientIc + ", Doctor with IC " + doctorIc + " at "
-                + appointmentTime.format(FORMATTER);
+                + appointmentTime.toString();
     }
 }
