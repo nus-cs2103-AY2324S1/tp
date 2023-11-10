@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +23,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the
+[_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create
+and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +38,10 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes
+[`Main`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/MainApp.java))
+is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -51,16 +56,21 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
+the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class which follows the corresponding API
+`interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality
+using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given
+component through its interface rather than the concrete class (reason: to prevent outside component's being coupled
+to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -68,53 +78,71 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in
+[`Ui.java`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
+the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
+that are in the `src/main/resources/view` folder. For example, the layout of the
+[`MainWindow`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
+is specified in
+[`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Appointment` objects residing in the
+`Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** :
+[`Logic.java`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
+call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn
+creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
+is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
+placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
+the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a
+`Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** :
+[`Model.java`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -122,32 +150,44 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* stores a `observableAppointments` object that represents existing appointments in the address book, sorted in a chronological order.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list
+which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be
+bound to this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
+`ReadOnlyUserPref` objects.
+* stores an `observableAppointments` object that represents existing appointments in the address book, sorted in a
+chronological order.
 * stores a `sortedAppointments` object that represents existing appointments in the address book.
-* `observableAppointments` and `sortedAppointments` depend on `filteredPersons`. Hence, appointments listed are for `Person` objects in `filteredPersons`.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* `observableAppointments` and `sortedAppointments` depend on `filteredPersons`. Hence, appointments listed are for
+`Person` objects in `filteredPersons`.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
+should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP)
+model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook`
+to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
-This approach is also use for `FinancialPlan`. The multiple `Tag` and `FinancialPlan` objects are stored in their respective `HashSet` where each object in the `HashSet` will have a corresponding hashcode.
+This approach is also used for `FinancialPlan`. The multiple `Tag` and `FinancialPlan` objects are stored in their
+respective `HashSet` where each object in the `HashSet` will have a corresponding hashcode.
 
 </div>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** :
+[`Storage.java`](https://github.com/AY2324S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+the functionality of only one is needed).
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
+that belong to the `Model`).
 
 ### Common classes
 
@@ -172,7 +212,11 @@ The flow of how a `Command` is executed is illustrated with the `Schedule` Comma
 ### Schedule Command
 
 #### Implementation Overview
-After the `AddressBookParser` identifies that the user's input has a schedule command word, it creates a `ScheduleCommandParser`. The `ScheduleCommandParser` then parses the users input and creates a new `ScheduleCommand` containing an `Appointment` and an `Index`. The `ScheduleCommand` is then executed by `Logic Manager`, which updates the `Person` in `Model` to have the created `Appointment`. A `CommandResult` which stores the message of the outcome of schedule command is then returned. The partial class diagram is shown below.
+After the `AddressBookParser` identifies that the user's input has a schedule command word, it creates a
+`ScheduleCommandParser`. The `ScheduleCommandParser` then parses the users input and creates a new `ScheduleCommand`
+containing an `Appointment` and an `Index`. The `ScheduleCommand` is then executed by `Logic Manager`, which updates
+the `Person` in `Model` to have the created `Appointment`. A `CommandResult` which stores the message of the outcome
+of schedule command is then returned. The partial class diagram is shown below.
 
 <img src="images/ScheduleClassDiagram.png" width="400"/>
 
@@ -186,31 +230,39 @@ The following activity diagram summarises what happens the user executes a sched
 
 Alternative 1 (Current Choice): Create an abstract class ScheduleItem and make it a compulsory field for Person.
 
-The diagram below illustrates our current implementation. A `Person` has is associated with 1 `ScheduleItem`, which can be a `NullAppointment`(empty appointment) or `Appointment`. 
+The diagram below illustrates our current implementation. A `Person` has is associated with 1 `ScheduleItem`, which can
+be a `NullAppointment`(empty appointment) or `Appointment`. 
 
 <img src="images/ScheduleItemClassDiagram.png" width="300"/> 
 
 - Pros: 
-  * This ensures a 1-to-1 relationship between Person and Appointment, making implementation of other functions like sort easier. This also prevents clutter of appointments in the UI.
-  * This makes use of a **facade** design pattern, where `NullAppointment` and `Appointment` will handle themselves without the `Person` knowing. 
+  * This ensures a 1-to-1 relationship between Person and Appointment, making implementation of other functions like
+  sort easier. This also prevents clutter of appointments in the UI.
+  * This makes use of a **facade** design pattern, where `NullAppointment` and `Appointment` will handle themselves
+  without the `Person` knowing. 
   
 - Cons: 
-  * This makes the scheduling of Appointments more inflexible, as the FA is unable to schedule multiple appointments with the same person.
+  * This makes the scheduling of Appointments more inflexible, as the FA is unable to schedule multiple appointments
+  with the same person.
 
 - Other considerations: 
-  * `NullAppointment` is a Singleton class to prevent multiple instances of it being created, making it more efficient for memory. 
+  * `NullAppointment` is a Singleton class to prevent multiple instances of it being created, making it more efficient
+  for memory. 
 
 Alternative 2: Create a hashset of Appointments for each Person. 
 - Pros:
   * More flexible, user can now schedule multiple appointment for a Person. 
   
 - Cons:
-  * Harder to implement operations such as editing of an appointment for a client. An additional step of finding the specified appointment within the hashset is required, which may potentially introduce more bugs.
+  * Harder to implement operations such as editing of an appointment for a client. An additional step of finding the
+  specified appointment within the hashset is required, which may potentially introduce more bugs.
   * Harder to implement default behaviours for when person has no appointment.
 
 ### Complete Feature
 
-The **Complete** feature is facilitated by the `CompleteCommand` and `CompleteCommandParser`. The `CompleteCommandParser` creates a `CompleteCommand` associated with a `CompleteCommandDescriptor` which contains information on how the appointments should be completed.
+The **Complete** feature is facilitated by the `CompleteCommand` and `CompleteCommandParser`. The
+`CompleteCommandParser` creates a `CompleteCommand` associated with a `CompleteCommandDescriptor` which contains
+information on how the appointments should be completed.
 
 The following sequence diagram illustrates how the complete operation is executed when date given. 
 
@@ -224,31 +276,46 @@ The following activity diagram illustrates how the complete operation is execute
 
 ### Gather Emails Feature
 
-The **Gather Emails** feature in our software system is a critical functionality designed to efficiently collect email addresses. This feature is facilitated through the `GatherCommand` class, which plays a central role in the process.
+The **Gather Emails** feature in our software system is a critical functionality designed to efficiently collect
+email addresses. This feature is facilitated through the `GatherCommand` class, which plays a central role in the process.
 
 #### Implementation Overview
 
-The `GatherCommand` class is instantiated by the `GatherCommandParser`, which parses user input commands. The `GatherCommandParser` class implements the following operations:
+The `GatherCommand` class is instantiated by the `GatherCommandParser`, which parses user input commands. The
+`GatherCommandParser` class implements the following operations:
 
-* `GatherCommandParser#parse(String args)` — Checks the prefixes (fp/ and t/) and instantiates `GatherCommand` accordingly. It passes either a `GatherEmailByFinancialPlan` or a `GatherEmailByTag` object, both implementations of the `GatherEmailPrompt` interface.
+* `GatherCommandParser#parse(String args)` — Checks the prefixes (fp/ and t/) and instantiates `GatherCommand`
+accordingly. It passes either a `GatherEmailByFinancialPlan` or a `GatherEmailByTag` object, both implementations of
+the `GatherEmailPrompt` interface.
 
-The `GatherCommand` takes in a `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand` class implements the following operations:
+The `GatherCommand` takes in a `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently
+interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand` class implements the following
+operations:
 
-* `GatherCommand#GatherCommand(GatherEmailPrompt prompt)` — Constructor that initializes the command with the provided `GatherEmailPrompt` object.
-* `GatherCommand#execute()` —  Executes the gathering operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`.
+* `GatherCommand#GatherCommand(GatherEmailPrompt prompt)` — Constructor that initializes the command with the
+provided `GatherEmailPrompt` object.
+* `GatherCommand#execute()` —  Executes the gathering operation by calling
+`Model#gatherEmails(GatherEmailPrompt prompt)`.
 
-The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data. It contains the following method:
+The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
+It contains the following method:
 
-* `ModelManager#gatherEmails(GatherEmailPrompt prompt)` —  Carries out the gathering operation by calling `AddressBook#gatherEmails(GatherEmailPrompt prompt)`.
+* `ModelManager#gatherEmails(GatherEmailPrompt prompt)` —  Carries out the gathering operation by calling
+`AddressBook#gatherEmails(GatherEmailPrompt prompt)`.
 
-This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
+This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and
+in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
 
 The `UniquePersonsList` class maintains a list of unique persons. Additionally, it implements the following operation:
-* `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  This method iterates through the persons list and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
+* `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  This method iterates through the persons list
+and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
 
-Depending on the scenario, it triggers either `Person#gatherEmailsContainsTag(String prompt)` or `Person#gatherEmailsContainsFinancialPlan(String prompt)`:
-* `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of the name of any Tag in the `Set<Tag>` of the current person.
-* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of the name of any Financial Plan in the `Set<Tag>` of the current person.
+Depending on the scenario, it triggers either `Person#gatherEmailsContainsTag(String prompt)` or
+`Person#gatherEmailsContainsFinancialPlan(String prompt)`:
+* `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of the name of
+any Tag in the `Set<Tag>` of the current person.
+* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of the
+name of any Financial Plan in the `Set<Tag>` of the current person.
 
 This is the class diagram for the gather command:
 
@@ -257,10 +324,12 @@ This is the class diagram for the gather command:
 **Usage Scenario:**
 
 **Scenario 1:**
-User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` will be initialized. Each person in the `UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
+User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` will be initialized. Each person in the
+`UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
 
 **Scenario 2:**
-User enters a gather `t/Elderly`. The `GatherEmailByTag` will be initialized. Each person in the `UniquePersonList` will be passed into the `GatherEmailByTag#gatherEmails(Person person)`.
+User enters a gather `t/Elderly`. The `GatherEmailByTag` will be initialized. Each person in the `UniquePersonList`
+will be passed into the `GatherEmailByTag#gatherEmails(Person person)`.
 
 The following sequence diagram shows how the gather operation works:
 
@@ -331,29 +400,36 @@ modifying the `FindCommandParser`.
 
 ### Sort Feature
 
-The **Sort** feature in our software system is designed to sort the list of clients by name as well as appointment time. This feature is facilitated through the `SortCommand` class.
+The **Sort** feature in our software system is designed to sort the list of clients by name as well as appointment
+time. This feature is facilitated through the `SortCommand` class.
 
 #### Implementation Overview
 
-The `SortCommand` class is instantiated by the `SortCommandParser`, which parses user input commands. The `SortCommandParser` class implements the following operations:
+The `SortCommand` class is instantiated by the `SortCommandParser`, which parses user input commands. The
+`SortCommandParser` class implements the following operations:
 
 - **`SortCommandParser#parse(String args)` —  Checks the sort command keyword passed in by the user. 
 
-The `SortCommand` takes in a `Comparator<Person>` object and passes it into the current `Model` model. The `SortCommand` class implements the following operations:
+The `SortCommand` takes in a `Comparator<Person>` object and passes it into the current `Model` model. The
+`SortCommand` class implements the following operations:
 
 - **`SortCommand#execute()` —  Executes the sort operation by calling `model.sortFilteredPersonList(comparator)`.
 
-The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data. It contains the following method:
+The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
+It contains the following method:
 
-- **`ModelManager#sortFilteredPersonList(Comparator<Person> comparator)` —  Carries out the sorting operation by setting the comparator on the list of clients wrapped in a SortedList wrapper.
+- **`ModelManager#sortFilteredPersonList(Comparator<Person> comparator)` —  Carries out the sorting operation by
+setting the comparator on the list of clients wrapped in a SortedList wrapper.
 
 **Aspect: Usage Scenario:**
 
 **Scenario 1:**
-User enters a sort command `sort appointment`. The `SortByAppointmentComparator` will be initialized and used to instantiate a SortCommand that when executed causes the list to be sorted by appointment, showing the earlier appointment first.
+User enters a sort command `sort appointment`. The `SortByAppointmentComparator` will be initialized and used to
+instantiate a SortCommand that when executed causes the list to be sorted by appointment, showing the earlier appointment first.
 
 **Scenario 2:**
-User enters a sort command `sort name`. The `SortByNameComparator` will be initialized and used to instantiate a SortCommand that when executed causes the list to be sorted by lexicographical ordering of name.
+User enters a sort command `sort name`. The `SortByNameComparator` will be initialized and used to instantiate a
+SortCommand that when executed causes the list to be sorted by lexicographical ordering of name.
 
 The following sequence diagram shows how the gather operation works:
 
@@ -363,71 +439,93 @@ The following sequence diagram shows how the gather operation works:
 
 **Aspect: How Sort Executes**
 
-**Aspect 1 :** User can sort by name and appointment at any time. As such, calling find on the sorted list will result in the ordering of find to also be sorted.
-- **Pros:** Improved usability of maintaining order of list throughout without the list having to be reordered after each command
-- **Cons:** Limitedsorting options as of now
+**Aspect 1 :** User can sort by name and appointment at any time. As such, calling find on the sorted list will result
+in the ordering of find to also be sorted.
+- **Pros:** Improved usability of maintaining order of list throughout without the list having to be reordered after
+each command
+- **Cons:** Limited sorting options as of now
 
 **Aspect 2:** After sorting the first time, it will not be possible to return the list to its original ordering
 - **Pros:** Easier implementation of the sorting function.
-- **Cons:** Unlikely, but if for some reason the user wants the list sorted back to its original order, the only way is to restart the app at the current moment.
+- **Cons:** Unlikely, but if for some reason the user wants the list sorted back to its original order, the only way
+is to restart the app at the current moment.
 
 _{more aspects and alternatives to be added}_
 
 
 ### Appointment Sidebar Feature
 
-The appointment sidebar is facilitated by `ModelManager`. It extends `Model` and stores and additional `SortedList<Appointment>` object that represents all the existing appointments.
+The appointment sidebar is facilitated by `ModelManager`. It extends `Model` and stores an additional
+`SortedList<Appointment>` object that represents all existing appointments.
 
-The `setAppointmentList()` method always check against `filteredPersons` to look for updates with regards to existing `Appointment` objects. The `getAppointmentList()` method is called once during startup of the program by `getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the `sortedList<Appointment>` object within `modelManager`.
+The `setAppointmentList()` method checks against `filteredPersons` to look for updates regarding existing
+`Appointment` objects. The `getAppointmentList()` method is called once during the startup of the program by
+`getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the
+`sortedList<Appointment>` object within `modelManager`.
 
 #### Design Considerations:
 
 **Aspect: Where to create SortedList<Appointment>**
 * **Alternative 1 (current choice):** Implement it within `modelManager`
-    * Pros: `SortedAppointments` object references `filteredPersons` which ensures that the appointment sidebar corresponds with `persons` from `addressBook`.
+    * Pros: `SortedAppointments` object references `filteredPersons` which ensures that the appointment sidebar
+    corresponds with `persons` from `addressBook`.
     * Cons: Errors with respect to `addressBook` will affect the appointment sidebar rendered.
 
 * **Alternative 2:** Implement it within `addressBook`
-    * Pros: `persons` and `appointmentList` are handled separately within `addressBook` and hence the appointment sidebar is not dependent on `persons` in `addressBook`
-    * Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer dependent on `filteredPersons`.
+    * Pros: `persons` and `appointmentList` are handled separately within `addressBook` and hence the appointment
+    sidebar is not dependent on `persons` in `addressBook`
+    * Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer
+    dependent on `filteredPersons`.
 
 ### \[Proposed\] Undo/redo feature
 
 ### \[Proposed\] Undo/redo feature
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
+history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
+following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and
+`Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
+initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls
+`Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be
+saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls
+`Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it
+will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the
+`undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once
+to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index
+0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo`
+command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user
+rather than attempting to perform the undo.
 
 </div>
 
@@ -435,21 +533,31 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end
+at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer`
+once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index
+`addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook
+states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will
+return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as
+`list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
+Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
+pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
+purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
+desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -725,7 +833,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with typing speed of above 80WPM for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with typing speed of above 80WPM for regular English text (i.e. not code, not system admin commands) should
+be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  A user should be able to have up to 2000 clients.
 5.  The product is offered as a free offline service.
 6.  The codebase should be well-documented to aid in future maintenance and updates.
@@ -768,8 +877,8 @@ resistant to mistakes by having the user key in a specific phrase, or to initial
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **API**: Application Programming Interface that enables application to use capabilities or data from another application
 * **Financial Advisor**: A person who provides financial advice to clients
-* **Financial Products**: A product connected with the way a person manages or uses money(eg. Insurance)
-* **Client**: A person whos financial products are being managed by a financial advisor
+* **Financial Products**: A product connected with the way a person manages or uses money(e.g. Insurance)
+* **Client**: A person whose financial products are being managed by a financial advisor
 * **Portfolio value**: The intrinsic value of all financial products being held under a clients name
 * **Central Repository**: A centralised storage location for all user data
 * **Contact details**: Name, email, phone number, next-of-kin name, next-of-kin phone number and home address of a client
@@ -782,7 +891,8 @@ resistant to mistakes by having the user key in a specific phrase, or to initial
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting
+point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
@@ -793,16 +903,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -810,16 +920,17 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+      Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -827,4 +938,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
