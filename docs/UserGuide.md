@@ -230,7 +230,7 @@ Valid cases:
 * For invalid cases, error messages will be shown when the invalid command is entered. For example:
   ![Add](images/screenshots/AddErrorMessage.png)
 
-<div markdown="span" class="alert alert-secondary">
+<div markdown="span" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
@@ -332,7 +332,7 @@ Parameters:
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `INDEX`     | - Index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - Index must be a positive integer | `1`, `2`, `3` |
 
-<div markdown="span" class="alert alert-secondary">
+<div markdown="span" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
@@ -362,7 +362,7 @@ Example:
 
 Saves changes in details of the fosterer made in the profile page.
 
-<div markdown="span" class="alert alert-secondary">
+<div markdown="span" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
@@ -381,18 +381,18 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOU
 
 Parameters:
 
-| Parameter        | About                                                                                                                                                                                                                                                                               | Example                                                     |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
-| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
-| `NAME`           | Updated name of the fosterer                                                                                                                                                                                                                                                        | `Alice Tan`, `Harry Yeo`                                    |
-| `PHONE_NUMBER`   | Updated Phone number of the fosterer                                                                                                                                                                                                                                                | `93456778`, `89067547`                                      |
-| `EMAIL`          | Updated email of the fosterer                                                                                                                                                                                                                                                       | `thomas718@gmail.com`, `kate@yahoo.com.sg`                  |
-| `ADDRESS`        | Updated address of the fosterer                                                                                                                                                                                                                                                     | `Orchard road, Blk 8, #13-04`                               |
-| `HOUSING_TYPE`   | - Updated housing type of the fosterer<br/> - Case-sensitive<br/> - Can be HDB / Condo / Landed / nil                                                                                                                                                                               | `HDB`, `Condo`, `Landed`, `nil`                             |
-| `AVAILABILITY`   | - Updated availability of the fosterer<br/> - Case-sensitive<br/> - Can be Available / NotAvailable / nil                                                                                                                                                                           | `NotAvailable`, `Available`, `nil`                          |
-| `ANIMAL_NAME`    | - If `availability/NotAvailable`: Updated name of animal fostered<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                         | `Fluffball`, `nil`                                          |
+| Parameter        | About                                                                                                                                                                                                                                                                              | Example                                                     |
+|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
+| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command<br/> - Index must be a positive integer                                                                                                                                                      | `1`, `2`, `3`                                               |
+| `NAME`           | Updated name of the fosterer                                                                                                                                                                                                                                                       | `Alice Tan`, `Harry Yeo`                                    |
+| `PHONE_NUMBER`   | Updated Phone number of the fosterer                                                                                                                                                                                                                                               | `93456778`, `89067547`                                      |
+| `EMAIL`          | Updated email of the fosterer                                                                                                                                                                                                                                                      | `thomas718@gmail.com`, `kate@yahoo.com.sg`                  |
+| `ADDRESS`        | Updated address of the fosterer                                                                                                                                                                                                                                                    | `Orchard road, Blk 8, #13-04`                               |
+| `HOUSING_TYPE`   | - Updated housing type of the fosterer<br/> - Case-sensitive<br/> - Can be HDB / Condo / Landed / nil                                                                                                                                                                              | `HDB`, `Condo`, `Landed`, `nil`                             |
+| `AVAILABILITY`   | - Updated availability of the fosterer<br/> - Case-sensitive<br/> - Can be Available / NotAvailable / nil                                                                                                                                                                          | `NotAvailable`, `Available`, `nil`                          |
+| `ANIMAL_NAME`    | - If `availability/NotAvailable`: Updated name of animal fostered<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                        | `Fluffball`, `nil`                                          |
 | `TYPE_OF_ANIMAL` | - Updated type of animal which the fosterer is currently fostering, or prefer to foster<br/> - Case-sensitive<br/> - If `availability/NotAvailable`: current.Dog / current.Cat / nil<br/> - If `availability/Available`: able.Dog / able.Cat / nil<br/> - If `availability/nil`: nil | `current.Dog`, `current.Cat`, `able.Dog`, `able.Cat`, `nil` |
-| `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                      | `experienced`, `urgent`                                     |
+| `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                             | `experienced`, `urgent`                                     |
 
 <div markdown="block" class="alert alert-primary">
 
@@ -404,11 +404,14 @@ Parameters:
 
 </div>
 
-<div markdown="span" class="alert alert-secondary">
+<div markdown="block" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
-If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the addressbook. 
+* If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the addressbook. 
+* If you ran the same `edit` command multiple times consecutively (resulting in no visible change after the first run), the `undo` command would not be able to revert the data back to the original state 
+since it can only undo the last _valid_ command ran.
+
 </div>
 
 Examples:
@@ -475,7 +478,7 @@ Deletes the index-th fosterer in your currently displayed list.
 
 Format: `delete INDEX [INDEX...]`
 
-<div markdown="span" class="alert alert-secondary">
+<div markdown="span" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 The index of a fosterer is not fixed. It is relative to the current list of fosterers you are handling.
@@ -517,6 +520,15 @@ Sorts your list of fosterers alphabetically, by name.
 Format: `sort`
 
 ![Sort](images/screenshots/Sort.png)
+
+<div markdown="span" class="alert alert-danger">
+
+**:exclamation: Important:**<br>
+
+If you run the `sort` command multiple times consecutively (resulting in no visible change after the first run), the `undo` command would not be able to revert the data back to the original state
+since it can only undo the last _valid_ command ran.
+
+</div> 
 
 ### Viewing Statistics of Available Fosterers : `stats avail`
 
