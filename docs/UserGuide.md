@@ -366,8 +366,8 @@ Saves changes in details of the fosterer made in the profile page.
 
 **:exclamation: Important:**<br>
 
-* This command is only available while in fosterer profile page.
-* This command works only in a profile page, which appears after executing a view command.
+* This command is only available in the profile page of a fosterer.
+* This command only works in the profile page, which you can navigate to by executing the `view` command.
 
 </div>
 
