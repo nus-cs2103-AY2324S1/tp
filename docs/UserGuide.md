@@ -5,7 +5,34 @@ title: User Guide
 
 Teaching Assistant Manager (TAManager) is a desktop application for managing teaching assistants, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAM can help you manage your teaching assistant tasks more efficiently than traditional GUI apps.
 
-* Table of Contents
+### 🌟 Welcome to TAManager - Your Teaching Assistant's Best Friend! 🌟
+
+Are you ready to turbocharge your teaching assistant management experience? Meet TAManager - the desktop application designed to make your life easier, whether you're a seasoned pro or just starting out.
+
+### 🚀 Why TAManager?
+TAManager isn't your average app. It's like having a teaching assistant for your teaching assistants! Imagine a tool that's as fast as typing and as intuitive as a friendly chat. That's TAManager for you.
+
+### 💡 Who is it for?
+TAManager is crafted with both experienced educators and newbies in mind. If you're someone who types faster than you can click, this is the tool for you! Whether you're managing one assistant or a whole team, TAManager is your go-to solution.
+
+
+### 🎉 What can TAManager do for you?
+- Effortlessly manage teaching assistant tasks
+- Navigate tasks with the speed of a command line interface
+- Enjoy the perks of a sleek graphical user interface
+
+Ready to revolutionize your teaching assistant game? Let's dive into the world of TAManager and make managing tasks a breeze! 🚀
+
+
+## Using this Guide
+
+This section will guide you on the various features of TAManager and how to use them.
+
+If you are a new user, we recommend that you read this guide starting from the [Quick Start](#quick-start) section.
+
+If you are an experienced user, you can use the [Table of Contents](#table-of-contents) below to quickly locate the relevant section. Alternatively, you can jump to the [Command Summary](#command-summary) section for an overview of the command syntax.
+
+## Table of Contents
 {:toc}
 
 ---
@@ -26,14 +53,14 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
    Here are some example commands you can try:
 
    - `list`: Lists all teaching assistants.
-   - `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`: Adds a teaching assistant named Snowball to the list.
+   - `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball t/fulltime c/CS1231S h/10`: Adds a teaching assistant named Snowball to the list.
    - `delete 3`: Deletes the 3rd teaching assistant shown in the current list.
    - `clear`: Deletes all teaching assistants.
    - `exit`: Exits the app.
 
 6. Refer to the [Features](#features) section below for details on each command.
 
---------------------------------------------------------------------------------------------------------------------
+You can click here to return to [Table of Contents](#table-of-contents).
 
 ## Features
 
@@ -105,7 +132,7 @@ When the command fails:
 - Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
 and optionally end with an alphabet.`
 - Invalid free time: `TA's free time should have a start and end time in HH:mm format`
-- Invalid work hour: `Hour should only be positive integers and should be less than 9999`
+- Invalid work hour: `Hour should only be between 0 to 9999, inclusive`
 
 ### Editing a Teaching Assistant: `edit`
 
@@ -152,7 +179,7 @@ When the command fails:
 - Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
   and optionally end with an alphabet.`
 - Invalid free time: `TA's free time should have a start and end time in HH:mm format`
-- Invalid work hour: `Hour should only be positive integers and should be less than 9999`
+- Invalid work hour: `Hour should only be between 0 to 9999, inclusive`
 
 ### Removing a Teaching Assistant: `delete`
 
@@ -273,7 +300,7 @@ When the command fails:
 
 - Invalid command format (updated new hour is invalid, either below 0 or above 9999): `Invalid command format!`
 
-### Edit free time for a teaching assistant: `editft`
+### Editing free time for a Teaching Assistant: `editft`
 
 Edits the free time for a specified day for a TA with a specified index.
 
