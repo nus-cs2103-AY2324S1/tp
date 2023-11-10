@@ -122,7 +122,6 @@ public class StatsAvailCommandTest {
 
     @Test
     public void execute_filteredList_expectZero() throws CommandException {
-        //should
         model.updateFilteredPersonList(fosterer -> !TypicalPersons.getAvailableFosterers().contains(fosterer));
         List<Person> fosterers = model.getFilteredPersonList();
         int total = fosterers.size();

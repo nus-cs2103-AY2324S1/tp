@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.AnimalType;
-import seedu.address.model.person.Availability;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,17 +23,10 @@ public class StatsCurrentCommand extends StatsCommand {
 
     /**
      * Returns a list of fosterers who are currently fostering.
-     * A fosterer is considered currently fostering if and only if they are not available, and
-     * currently has a dog or has a cat in their care, and animal name is not nil.
      */
     protected List<Person> getCurrentFosterers(List<Person> fosterers) {
         return fosterers.stream()
-                .filter(fosterer ->
-                        fosterer.getAvailability()
-                                .equals(Availability.NOT_AVAILABLE)
-                                && !fosterer.getAnimalName().fullName.equals(Person.NIL_WORD)
-                                && fosterer.getAnimalType().equals(AnimalType.CURRENT_DOG)
-                                || fosterer.getAnimalType().equals(AnimalType.CURRENT_CAT))
+                .filter(Person::isCurrentFosterer)
                 .collect(Collectors.toList());
     }
 

@@ -60,6 +60,7 @@ public class PersonProfile extends UiPart<Region> {
 
     // region FXML
     @FXML private VBox vbox;
+
     // endregion
 
     // region Enums
@@ -470,6 +471,53 @@ public class PersonProfile extends UiPart<Region> {
 
     public boolean isStillEditing() {
         return editingInProgress() || person == null;
+    }
+
+    /**
+     * Sets a Boolean that represents whether the profile page is in save confirmation dialog
+     * by mapping through each PersonProfileField and setting their inConfirmationDialog boolean values.
+     * @param isInConfirmationDialog is a boolean the tells whether the current window is is showing confirmation dialog
+     */
+    public void setIsInConfirmationDialog(boolean isInConfirmationDialog) {
+        uiElements.values().stream()
+                .forEach(field -> field.setIsInConfirmationDialog(isInConfirmationDialog));
+        tagUI.setIsInConfirmationDialog(isInConfirmationDialog);
+        noteUI.setIsInConfirmationDialog(isInConfirmationDialog);
+    }
+
+    /**
+     * Resets the field values back to the most recently edited valid details
+     * and change the red colored text, if there is any, back to black colored text.
+     */
+    public void resetValues() {
+        if (person == null) {
+            return;
+        }
+
+        fields.keySet().forEach(field -> {
+            if (field == Field.NAME) {
+                updateField(field, person.getName().toString());
+            } else if (field == Field.PHONE) {
+                updateField(field, person.getPhone().toString());
+            } else if (field == Field.EMAIL) {
+                updateField(field, person.getEmail().toString());
+            } else if (field == Field.ADDRESS) {
+                updateField(field, person.getAddress().toString());
+            } else if (field == Field.HOUSING) {
+                updateField(field, person.getHousing().toString());
+            } else if (field == Field.AVAILABILITY) {
+                updateField(field, person.getAvailability().toString());
+            } else if (field == Field.ANIMAL_NAME) {
+                updateField(field, person.getAnimalName().toString());
+            } else if (field == Field.ANIMAL_TYPE) {
+                updateField(field, person.getAnimalType().toString());
+            }
+        });
+
+        uiElements.values().stream()
+                .forEach(field -> {
+                    field.refresh();
+                });
     }
 
     // endregion
