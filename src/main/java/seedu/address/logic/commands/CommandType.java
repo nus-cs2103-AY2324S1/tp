@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+
+
 /**
  * Represents the types of commands, which are used to detect them and set appropriate handlers for teach type in
  * MainWindow.

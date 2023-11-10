@@ -82,6 +82,7 @@ public class EditCommand extends Command {
         this.index = index;
         this.editPersonDescriptor = null;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -313,6 +314,10 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(housing, otherEditPersonDescriptor.housing)
+                    && Objects.equals(availability, otherEditPersonDescriptor.availability)
+                    && Objects.equals(animalName, otherEditPersonDescriptor.animalName)
+                    && Objects.equals(animalType, otherEditPersonDescriptor.animalType)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -323,6 +328,10 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("housing", housing)
+                    .add("availability", availability)
+                    .add("animalName", animalName)
+                    .add("animalType", animalType)
                     .add("tags", tags)
                     .toString();
         }

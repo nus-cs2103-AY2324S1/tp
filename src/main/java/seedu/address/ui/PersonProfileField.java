@@ -33,6 +33,9 @@ public class PersonProfileField extends UiPart<SplitPane> {
 
     private String value;
     private State state;
+
+    private Boolean isInConfirmationDialog = false;
+
     // endregion
 
     // region Enums
@@ -41,7 +44,7 @@ public class PersonProfileField extends UiPart<SplitPane> {
      * Represents that the Field is either under edit, or not.
      */
     enum State {
-        READ_ONLY, EDITING
+        READ_ONLY, EDITING, LOCKED
     }
 
     // endregion
@@ -137,12 +140,6 @@ public class PersonProfileField extends UiPart<SplitPane> {
         personProfile.updateField(field, value);
     }
 
-    private void refresh() {
-        value = personProfile.getValueOfField(field);
-        resetTextPaint();
-        updateState();
-    }
-
     private void resetTextPaint() {
         keyLabel.setStyle("");
         valueLabel.setStyle("");
@@ -199,8 +196,10 @@ public class PersonProfileField extends UiPart<SplitPane> {
 
     @FXML
     void setFocus() {
-        personProfile.triggerEvent(PersonProfile.Event.BEFORE_START_EDIT);
-        updateState(State.EDITING);
+        if (!isInConfirmationDialog) {
+            personProfile.triggerEvent(PersonProfile.Event.BEFORE_START_EDIT);
+            updateState(State.EDITING);
+        }
     }
 
     boolean isEditing() {
@@ -209,6 +208,16 @@ public class PersonProfileField extends UiPart<SplitPane> {
 
     void indicateIsError() {
         setErrorTextPaint();
+    }
+
+    void refresh() {
+        value = personProfile.getValueOfField(field);
+        resetTextPaint();
+        updateState();
+    }
+
+    public void setIsInConfirmationDialog(boolean isInConfirmationDialog) {
+        this.isInConfirmationDialog = isInConfirmationDialog;
     }
 
     // endregion

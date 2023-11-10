@@ -189,7 +189,6 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    @FXML
     private void handleView(Person personToView) {
         if (personListPanelPlaceholder.isVisible() && personToView != null) {
             personProfile = new PersonProfile(personToView, this);
@@ -213,36 +212,30 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    @FXML
     void handleViewExit() {
         if (isSaved || commandBox.getInConfirmationDialog()) {
             commandBox.setInConfirmationDialog(false);
+            personProfile.setIsInConfirmationDialog(false);
             personListPanelPlaceholder.setVisible(true);
             personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
             personProfilePlaceholder.setVisible(false);
             sendFeedback("Exiting view as requested.");
         } else {
             commandBox.setInConfirmationDialog(true);
+            personProfile.setIsInConfirmationDialog(true);
         }
     }
-    /*
-    void handleConfirm() {
-        if (commandBox.getInConfirmationDialog()) {
-            commandBox.setInConfirmationDialog(false);
-            personListPanelPlaceholder.setVisible(true);
-            personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
-            personProfilePlaceholder.setVisible(false);
-            sendFeedback("Exiting view as requested.");
-        } else {
-            commandBox.setInConfirmationDialog(true);
-        }
-    }
-
-    */
 
     void handleCancelViewExit() {
         sendFeedback("Cancelled exit.");
         commandBox.setInConfirmationDialog(false);
+        personProfile.setIsInConfirmationDialog(false);
+    }
+
+    private void resetValues() {
+        if (personProfilePlaceholder.isVisible()) {
+            personProfile.resetValues();
+        }
     }
 
     /**
@@ -263,12 +256,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.getCommandType() == CommandType.HELP) {
                 handleHelp();
             }
-            /*
-            if (commandResult.getCommandType() == CommandType.CLEAR) {
-                handleConfirm();
-            }
-
-            */
 
             if (commandResult.getCommandType() == CommandType.EXIT) {
                 handleExit();
@@ -279,12 +266,16 @@ public class MainWindow extends UiPart<Stage> {
                 handleView(commandResult.getPersonToView());
             }
 
+            if (commandResult.getCommandType() == CommandType.SAVE) {
+                resetValues();
+            }
+
             if (commandResult.getCommandType() == CommandType.VIEW_EXIT) {
                 isSaved = commandResult.getIsFostererEdited();
                 handleViewExit();
             }
             if (commandResult.getCommandType() == CommandType.EDIT_FIELD) {
-                String [] tagAndNote = new String[]{"tags", "notes"};
+                String[] tagAndNote = new String[]{"tags", "notes"};
                 Optional<String> tagOrNote = null;
 
                 Optional<PersonProfile.Field> field = Arrays.stream(PersonProfile.Field.values())
@@ -329,6 +320,7 @@ public class MainWindow extends UiPart<Stage> {
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+            resetValues();
             throw e;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -336,7 +328,6 @@ public class MainWindow extends UiPart<Stage> {
             throw new RuntimeException(e);
         }
     }
-
 
 
     protected void sendFeedback(String feedback) {
