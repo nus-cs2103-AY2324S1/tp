@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteRemarkCommandParser" as DeleteRemarkCommandParser LOGIC_COLOR
+participant "r:DeleteRemarkCommand" as DeleteRemarkCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("deleteremark EID1234-5678 lazy")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deleteremark EID1234-5678 lazy")
+activate AddressBookParser
+
+create DeleteRemarkCommandParser
+AddressBookParser -> DeleteRemarkCommandParser
+activate DeleteRemarkCommandParser
+
+DeleteRemarkCommandParser --> AddressBookParser
+deactivate DeleteRemarkCommandParser
+
+AddressBookParser -> DeleteRemarkCommandParser : parse("EID1234-5678 lazy")
+activate DeleteRemarkCommandParser
+
+create DeleteRemarkCommand
+DeleteRemarkCommandParser -> DeleteRemarkCommand
+activate DeleteRemarkCommand
+
+DeleteRemarkCommand --> DeleteRemarkCommandParser : r
+deactivate DeleteRemarkCommand
+
+DeleteRemarkCommandParser --> AddressBookParser : r
+deactivate DeleteRemarkCommandParser
+
+DeleteRemarkCommandParser -[hidden]-> AddressBookParser
+destroy DeleteRemarkCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> DeleteRemarkCommand : execute()
+activate DeleteRemarkCommand
+
+DeleteRemarkCommand -> Model : setEmployee(targetEmployee, editedEmployee)
+DeleteRemarkCommand -> Model : updateFilteredEmployeeList()
+
+create CommandResult
+DeleteRemarkCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteRemarkCommand
+deactivate CommandResult
+
+DeleteRemarkCommand --> LogicManager : result
+deactivate DeleteRemarkCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

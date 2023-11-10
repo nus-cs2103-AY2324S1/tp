@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ResetCommandParser" as ResetCommandParser LOGIC_COLOR
+participant "r:ResetCommand" as ResetCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("reset overtime")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("reset overtime")
+activate AddressBookParser
+
+create ResetCommandParser
+AddressBookParser -> ResetCommandParser
+activate ResetCommandParser
+
+ResetCommandParser --> AddressBookParser
+deactivate ResetCommandParser
+
+AddressBookParser -> ResetCommandParser : parse("overtime")
+activate ResetCommandParser
+
+create ResetCommand
+ResetCommandParser -> ResetCommand
+activate ResetCommand
+
+ResetCommand --> ResetCommandParser : r
+deactivate ResetCommand
+
+ResetCommandParser --> AddressBookParser : r
+deactivate ResetCommandParser
+
+ResetCommandParser -[hidden]-> AddressBookParser
+destroy ResetCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> ResetCommand : execute()
+activate ResetCommand
+
+ResetCommand -> Model : setEmployee(targetEmployee, editedEmployee)
+ResetCommand -> Model : updateFilteredEmployeeList()
+
+create CommandResult
+ResetCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ResetCommand
+deactivate CommandResult
+
+ResetCommand --> LogicManager : result
+deactivate ResetCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

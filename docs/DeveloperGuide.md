@@ -240,7 +240,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Sort feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed sorting mechanism is facilitated by `UniqueEmployeeList`. It implements the following operations:
 
@@ -273,7 +273,7 @@ Finally, the update to the internalList will change the view of the displayed li
 
 ### Report feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed reporting mechanism is facilitated by `ReportCommandParser`. It implements the following operations:
 
@@ -309,37 +309,137 @@ This report will be displayed in the GUI. This also calls the `storage` componen
 
 ### Reset feature
 
-#### Proposed Implementation
+The reset feature allows HouR to reset employee overtime hours and leaves.
 
-The proposed resetting mechanism is facilitated by `Model`. It implements the following operation:
+#### Implementation
 
-* `Model#setEmployee(Employee target, Employee editedEmployee)` — edits the employee in the internal list to the new employee. 
+The reset command mechanism is facilitated by `ResetCommandParser` class which implements the `Parser` interface.
 
-Given below is an example usage scenario where the user attempts to reset the overtime hours field of all employees
-and how the reset mechanism behaves at each step.
+`ResetCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
 
-Step 1. The user keys in `reset f/overtime`. This leads to the `reset` command being executed. It checks the argument given and
-identifies that the `OvertimeHours` field is being reset. 
+`ResetCommandParser` implements the following operations:
+* `ResetCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`, 
+and creates a new `ResetCommand` object with the parsed field.
 
-Step 2. Then it loops through the list of existing employees in `model.getFilteredEmployeeList()`.
-It creates a new Employee for every employee with the `OvertimeHours` field being set to its default value 0 and all other fields remain the same.
-It then sets the new Employee in place of the old Employee using `model.setEmployee(oldEmployee, newEmployee)`.
+The `ResetCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `ResetCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
 
-Step 3. Finally, it calls `model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES)` to display the updated list in the GUI.
+The method `ResetCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the reset operation works:
+
+![Reset Sequence Diagram](images/ResetSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `reset f/FIELD` command in the CLI (note that only `overtime` and `leaves` are valid).
+
+**Step 3**: The given field of all employees in the employee book will be reset to their default value.
+
+The following activity diagram summarizes what happens when a user executes the reset command:
+
+![Reset Activity Diagram](images/ResetActivityDiagram.png)
 
 #### Design considerations:
 
-**Aspect: How reset executes:**
+**Aspect: Model-Employee Interaction:**
 
-* **Alternative 1 (current choice):** Create a new command specifically for Reset.
-    * Pros: Fast since it edits all the employees with a single command.
-    * Cons: More code to implement
+* **Alternative 1 (current choice):** Utilise `Model#setEmployee` to add the edited employee into the model, doing the direct editing in `ResetCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates SRP.
 
-* **Alternative 2:** Use existing Edit command.
-    * Pros: Less new code to implement.
-    * Cons: Difficult to edit all employees on the list since edit only edits one employee at a time.
+* **Alternative 2:** Create methods in `Model` class specifically to edit the fields of the employees.
+    * Pros: More OOP, follows SRP by not having `ResetCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requiring more parts to work together.
 
-### Add leave feature
+### Add Remark feature
+
+The add remark feature allows HouR to add employee remarks.
+
+#### Implementation
+
+The add remark command mechanism is facilitated by `AddRemarkCommandParser` class which implements the `Parser` interface.
+
+`AddRemarkCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`AddRemarkCommandParser` implements the following operations:
+* `AddRemarkCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
+  and creates a new `AddRemarkCommand` object with the parsed id and remark.
+
+The `AddRemarkCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `AddRemarkCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `AddRemarkCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the add remark operation works:
+
+![Add Remark Sequence Diagram](images/AddRemarkSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `addremark id/EMPLOYEE_ID r/REMARK` command in the CLI.
+
+**Step 3**: The given remark will be added to the remark list of the employee with the given id.
+
+**Aspect: Model-Person Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `AddRemarkCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates SRP.
+
+* **Alternative 2**: Create methods in model specifically to edit the `remarkList` attribute of the employee.
+    * Pros: More OOP, follows SRP by not having `AddRemarkCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requires more parts to work together.
+
+### Delete Remark feature
+
+The delete remark feature allows HouR to delete employee remarks.
+
+#### Implementation
+
+The delete remark command mechanism is facilitated by `DeleteRemarkCommandParser` class which implements the `Parser` interface.
+
+`DeleteRemarkCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`DeleteRemarkCommandParser` implements the following operations:
+* `DeleteRemarkCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
+  and creates a new `DeleteRemarkCommand` object with the parsed id and remark.
+
+The `DeleteRemarkCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `DeleteRemarkCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `DeleteRemarkCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the delete remark operation works:
+
+![Delete Remark Sequence Diagram](images/DeleteRemarkSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `deleteremark id/EMPLOYEE_ID r/REMARK` command in the CLI.
+
+**Step 3**: The given remark will be deleted from the remark list of the employee with the given id.
+
+**Aspect: Model-Person Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `DeleteRemarkCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates SRP.
+
+* **Alternative 2**: Create methods in model specifically to edit the `remarkList` attribute of the employee.
+    * Pros: More OOP, follows SRP by not having `DeleteRemarkCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requires more parts to work together.
+
+### Add Leave feature
 
 The add leave feature allows HouR to manage employee leaves.
 
@@ -385,6 +485,52 @@ Given below is an example usage scenario for the command.
 
 * **Alternative 2**: Create methods in model specifically to edit the `leaveList` attribute of the employee.
     * Pros: More OOP, follows the Single Responsibility Principle by not having `AddLeaveCommand#execute()` perform the editing directly. 
+    * Cons: Longer command execution, requires more parts to work together.
+
+### Edit Leave feature
+
+The edit leave feature allows HouR to edit employee leaves.
+
+#### Implementation
+
+The edit leave command mechanism is facilitated by `EditLeaveCommandParser` class which implements the `Parser` interface.
+
+`EditLeaveCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`EditLeaveCommandParser` implements the following operations:
+* `EditLeaveCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
+  and creates a new `EditLeaveCommand` object with the parsed id, old and new leave dates.
+
+The `EditLeaveCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `EditLeaveCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `EditLeaveCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the edit leave operation works:
+
+![Edit Leaave Sequence Diagram](images/EditLeaveSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `editleave id/EMPLOYEE_ID old/OLD_DATE new/NEW_DATE` command in the CLI.
+
+**Step 3**: The given remark will be deleted from the remark list of the employee with the given id.
+
+The following activity diagram summarizes what happens when a user executes the edit leave command:
+
+![Edit Leave Activity Diagram](images/EditLeaveActivityDiagram.png)
+
+**Aspect: Model-Person Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `DeleteRemarkCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates SRP.
+
+* **Alternative 2**: Create methods in model specifically to edit the `remarkList` attribute of the employee.
+    * Pros: More OOP, follows SRP by not having `DeleteRemarkCommand#execute()` perform the editing directly.
     * Cons: Longer command execution, requires more parts to work together.
 
 _{more aspects and alternatives to be added}_
