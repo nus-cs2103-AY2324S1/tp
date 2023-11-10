@@ -258,21 +258,13 @@ Adds a new applicant with name *John Doe*, phone number *91234567*, email *johnd
 * `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
   Adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@yahoo.com*, and position *Project Manager*.
 
-
 Invalid examples:
 * `add n/John Doe hp/91234567`
 This is not allowed as all fields are required to add an applicant to the list.
 
 
-=======
-Example:
-* `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer` adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@<area>gmail.com*, and position *Software Engineer*.
-
-* `add n/Charlene Loh p/Staff Engineer e/cloh@gmail.com hp/91827271` adds a new applicant with name *Charlene Loh*, phone number *91827271*, email *cloh@<area>gmail.com*, and position *Staff Engineer*.
-  
 ![add](images/user-guide/add.png)
 
->>>>>>> master
 <br>
 
 ---
