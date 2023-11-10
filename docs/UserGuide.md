@@ -202,6 +202,7 @@ For each **interview**, we see the following details:
     * `3.15pm`
     * `3pm`
   * The `TIME` must be between 9am to 5pm.
+  * If the date is a parameter for the `list-freetime` command, please omit ` TIME` and enter the date only (e.g. `16 May 2024`)
 </div>
 
 [Back to the Table of Contents](#table-of-contents)
@@ -210,7 +211,7 @@ For each **interview**, we see the following details:
 
 ### Viewing help : `help`
 
-A pop-up window containing the link as shown below will appear to lead you to **InterviewHub** User Guide.
+A pop-up window, containing the link as shown below, will appear to guide you to the **InterviewHub** User Guide.
 
 ![help message](images/helpMessage.png)
 
@@ -483,9 +484,9 @@ Find interviews which jobs roles contain any of the given keywords.
 
 Format: `find-i KEYWORD(S)`
 
-| Parameter         | Representation                            | Constraints                                                                                 |
-|-------------------|-------------------------------------------|---------------------------------------------------------------------------------------------|
-| `KEYWORD`         | The job role the interview is assigned of | Each keyword must not contain any spaces, otherwise it will be treated as multiple keywords |
+| Parameter         | Representation                             | Constraints                                                                                 |
+|-------------------|--------------------------------------------|---------------------------------------------------------------------------------------------|
+| `KEYWORD`         | The job role the interview is assigned for | Each keyword must not contain any spaces, otherwise it will be treated as multiple keywords |
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>
@@ -696,10 +697,10 @@ To sort the full unfiltered interview list, use the command `list-i` before usin
 </div>
 
 Before `sort-time`:
-![beforesort](images/beforesorttime.png)
+![beforesorttime](images/beforesorttime.png)
 
 After `sort-time`:
-![aftersort](images/aftersorttime.png)
+![aftersorttime](images/aftersorttime.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
