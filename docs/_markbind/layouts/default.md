@@ -18,3 +18,15 @@
   </navbar>
 </header>
 <br>
+
+<div id="flex-body">
+  <div id="content-wrapper">
+    {{ content }}
+  </div>
+  <nav id="page-nav">
+    <div class="nav-component slim-scroll">
+      <page-nav />
+    </div>
+  </nav>
+  <scroll-top-button></scroll-top-button>
+</div>
