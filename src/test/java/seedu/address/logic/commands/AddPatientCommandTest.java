@@ -163,19 +163,6 @@ public class AddPatientCommandTest {
         }
 
         @Override
-        public void setAppointment(Appointment target, Appointment editedAppointment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        /**
-         * Returns an unmodifiable view of the filtered person list
-         */
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            return null; // not sure abt this method
-        }
-
-        @Override
         public ObservableList<Patient> getFilteredPatientList() {
             throw new AssertionError("This method should not be called.");
         }

@@ -81,10 +81,7 @@ public class JsonAdaptedPatient extends JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Condition modelCondition = checkCondition();
         final BloodType modelBloodType = checkBloodType();
-        final List<Appointment> personAppointments = new ArrayList<>();
-        for (JsonAdaptedAppointment appointment : this.getAppointments()) {
-            personAppointments.add(appointment.toModelType());
-        }
+        final List<Appointment> personAppointments = checkAppointments();
         final Set<Appointment> modelAppointments = new HashSet<>(personAppointments);
         return new Patient(modelName, modelPhone, modelEmergencyContact, modelEmail, modelAddress, modelRemark,
                 modelGender, modelIc, modelCondition, modelBloodType, modelAppointments, modelTags);

@@ -50,6 +50,11 @@ public class PatientTest {
     }
 
     @Test
+    public void isDoctor() {
+        assertFalse(ALICE.isDoctor());
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Patient aliceCopy = new PatientBuilder(ALICE).build();
@@ -98,6 +103,51 @@ public class PatientTest {
         // different blood type -> return false
         editedAlice = new PatientBuilder(ALICE).withBloodType(VALID_BLOODTYPE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        // same values -> returns true
+        Patient aliceCopy = new PatientBuilder(ALICE).build();
+        assertTrue(ALICE.hashCode() == aliceCopy.hashCode());
+
+        // same object -> returns true
+        assertTrue(ALICE.hashCode() == ALICE.hashCode());
+
+        // different person shuold have different hashCode -> returns false
+        assertFalse(ALICE.hashCode() == BOB.hashCode());
+
+        // different name -> returns false
+        Patient editedAlice = new PatientBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.hashCode() == editedAlice.hashCode());
+
+        // different phone -> returns false
+        editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.hashCode() == editedAlice.hashCode());
+
+        // different email -> returns false
+        editedAlice = new PatientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.hashCode() == editedAlice.hashCode());
+
+        // different address -> returns false
+        editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(ALICE.hashCode() == editedAlice.hashCode());
+
+        // different tags -> returns false
+        editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_MEDIUM).build();
+        assertFalse(ALICE.hashCode() == editedAlice.hashCode());
+
+        // different emergency contact -> return false
+        editedAlice = new PatientBuilder(ALICE).withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).build();
+        assertFalse(ALICE.hashCode() == editedAlice.hashCode());
+
+        // different condition -> return false
+        editedAlice = new PatientBuilder(ALICE).withCondition(VALID_CONDITION_BOB).build();
+        assertFalse(ALICE.hashCode() == editedAlice.hashCode());
+
+        // different blood type -> return false
+        editedAlice = new PatientBuilder(ALICE).withBloodType(VALID_BLOODTYPE_BOB).build();
+        assertFalse(ALICE.hashCode() == editedAlice.hashCode());
     }
 
     @Test

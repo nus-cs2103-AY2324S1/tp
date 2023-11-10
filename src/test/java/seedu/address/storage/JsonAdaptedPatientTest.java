@@ -6,12 +6,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatient.BENSON;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
@@ -20,6 +22,8 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.testutil.AppointmentBuilder;
 
 public class JsonAdaptedPatientTest {
     private static final String INVALID_NAME = "R@chel";
@@ -44,10 +48,12 @@ public class JsonAdaptedPatientTest {
     private static final String VALID_EMERGENCY_CONTACT = BENSON.getEmergencyContact().toString();
     private static final String VALID_CONDITION = BENSON.getCondition().toString();
     private static final String VALID_BLOODTYPE = BENSON.getBloodType().toString();
+    private static final Appointment BENSON_APPOINTMENT =
+            new AppointmentBuilder().withPatientIc(BENSON.getIc()).build();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedAppointment> VALID_APPOINTMENTS = BENSON.getAppointments().stream()
+    private static final List<JsonAdaptedAppointment> VALID_APPOINTMENTS = Arrays.asList(BENSON_APPOINTMENT).stream()
             .map(JsonAdaptedAppointment::new)
             .collect(Collectors.toList());
 
@@ -195,6 +201,17 @@ public class JsonAdaptedPatientTest {
     }
 
     @Test
+    public void toModelType_nullRemark_throwsIllegalValueException() {
+        JsonAdaptedPatient patient =
+                new JsonAdaptedPatient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, null,
+                        VALID_GENDER, VALID_NRIC, VALID_TAGS, VALID_APPOINTMENTS, VALID_CONDITION, VALID_BLOODTYPE,
+                        VALID_EMERGENCY_CONTACT);
+        String expectedMessage =
+                String.format(JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidCondition_throwsIllegalValueException() {
         JsonAdaptedPatient patient =
                 new JsonAdaptedPatient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REMARK,
@@ -254,4 +271,12 @@ public class JsonAdaptedPatientTest {
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 
+    @Test
+    public void test_getAppointment() {
+        JsonAdaptedPatient patient =
+                new JsonAdaptedPatient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REMARK,
+                        VALID_GENDER, VALID_NRIC, VALID_TAGS, VALID_APPOINTMENTS, VALID_CONDITION, VALID_BLOODTYPE,
+                        VALID_EMERGENCY_CONTACT);
+        assertEquals(VALID_APPOINTMENTS, patient.getAppointments());
+    }
 }

@@ -91,13 +91,6 @@ public interface Model {
 
     void addAppointment(Appointment appointment);
 
-    void setAppointment(Appointment target, Appointment editedAppointment);
-
-    /**
-     * Returns an unmodifiable view of the filtered person list
-     */
-    ObservableList<Person> getFilteredPersonList();
-
     /**
      * Returns an unmodifiable view of the filtered patient list
      */

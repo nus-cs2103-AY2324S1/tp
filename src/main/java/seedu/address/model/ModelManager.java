@@ -132,12 +132,10 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        if (person instanceof Patient) {
+        if (person.isPatient()) {
             return addressBook.hasPatient((Patient) person);
-        } else if (person instanceof Doctor) {
-            return addressBook.hasDoctor((Doctor) person);
         } else {
-            return false;
+            return addressBook.hasDoctor((Doctor) person);
         }
     }
 
@@ -191,19 +189,6 @@ public class ModelManager implements Model {
         }
     }
 
-    @Override
-    public void setAppointment(Appointment target, Appointment editedAppointment) {
-        updateBackup();
-        addressBook.setAppointment(target, editedAppointment);
-    }
-
-    /**
-     * Returns an unmodifiable view of the filtered person list
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return null;
-    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -235,6 +220,7 @@ public class ModelManager implements Model {
         filteredPatients.setPredicate(predicate);
         filteredDoctors.setPredicate(predicate);
     }
+
     @Override
     public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
         requireNonNull(predicate);
@@ -256,6 +242,7 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredDoctors.equals(otherModelManager.filteredDoctors)
-                && filteredPatients.equals(otherModelManager.filteredPatients);
+                && filteredPatients.equals(otherModelManager.filteredPatients)
+                && filteredAppointments.equals(otherModelManager.filteredAppointments);
     }
 }

@@ -87,10 +87,6 @@ public class AddAppointmentCommand extends Command {
         if (chosenDoctor == null) {
             throw new CommandException(MESSAGE_INVALID_DOCTOR);
         }
-        // check that patient and doctor are not the same person
-        if (chosenPatient.isSamePerson(chosenDoctor)) {
-            throw new CommandException(MESSAGE_SAME_DOCTOR_AND_PATIENT);
-        }
     }
 
     private Patient findPatient(Model model) {
