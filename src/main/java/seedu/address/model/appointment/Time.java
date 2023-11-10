@@ -11,7 +11,7 @@ import java.time.LocalTime;
  */
 public class Time {
     public static final String MESSAGE_CONSTRAINTS =
-            "Time should follow HH:mm";
+            "Time should follow hh:mm";
     public static final String VALIDATION_REGEX =
             "([01][0-9]|2[0-3]):([0-5][0-9])$";
 
