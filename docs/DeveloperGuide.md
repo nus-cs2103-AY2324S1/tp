@@ -269,7 +269,7 @@ The proposed mark paid/check paid mechanism can check whether the person has pai
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-More graphs To be added. 
+More graphs To be added.
 
 #### Design considerations:
 
