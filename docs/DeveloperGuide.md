@@ -270,6 +270,8 @@ _{more aspects and alternatives to be added}_
 
 ### [Proposed] Total revenue command
 #### Proposed implementation
+![RevenueSequenceDiagram.png](images/RevenueSequenceDiagram.png)
+
 The proposed total revenue command is facilitated by the payRate field in Person class, as well as the start and end fields in person class.
 
 The following sequence diagram shows how the total revenue command works:
