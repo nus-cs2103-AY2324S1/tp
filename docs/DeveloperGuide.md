@@ -394,24 +394,25 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                                                 | So that I can…​                                                                    |
-|----------|---------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------|
-| `* * *`  | new user                                    | see usage instructions                                       | refer to instructions when I forget how to use the App                             |
-| `* * *`  | new user                                    | purge all existing data                                      | get rid of the experimental data when exploring the app                            |
-| `* * *`  | lazy tutor                                  | add students by name                                         | include new students into our app                                                  |
-| `* * *`  | user                                        | delete a person                                              | remove entries that I no longer need                                               |
-| `* * *`  | user                                        | find a student by name or subject                            | locate details of persons without having to go through the entire list             |
-| `* * *`  | tutor                                       | update my students details as they progress through learning | keep track of their information e.g. test scores                                   |
-| `* * *`  | tutor                                       | quickly edit student details                                 | save time re-adding students if I have added the wrong details by accident         |
-| `* * *`  | flexible tutor                              | edit my student’s lesson timings                             | accommodate any changes in timing requested by them                                |
-| `* * *`  | private tutor                               | install the app on my device with one click                  | use the app with ease without much trouble building the environment                |
-| `* * *`  | private tutor                               | see a specific student’s data from the contact list          | get a more concise and detailed view of the student                                |
-| `* *`    | user                                        | hide private contact details                                 | minimize chance of someone else seeing them by accident                            |
-| `*`      | tutor                                       | see my teaching schedule                                     | complete lesson preparation that is catered to the student before tuition sessions |         |                                             |                                                              |                                                                                    |
-| `*`      | user with many students in the student list | sort persons by name                                         | locate a person easily                                                             |
-| `*`      | forgetful tutor                             | include certain tasks to do for each lesson                  | remember to do them in preparation for the tuition lesson                          |
-| `*`      | efficient tutor                             | add lessons to my schedule quickly                           | maximize my time usage                                                             |
-| `*`      | regular app user                            | hide information that is not relevant to me currently        | have a cleaner User Interface                                                      |
+| Priority | As a …​          | I want to …​                                                            | So that I can…​                                                                    |
+|----------|------------------|-------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| `* * *`  | new user         | see usage instructions                                                  | refer to instructions when I forget how to use the App                             |
+| `* * *`  | new user         | purge all existing sample data                                          | get rid of the experimental data when exploring the app                            |
+| `* * *`  | lazy tutor       | add students by name                                                    | include new students into our app                                                  |
+| `* * *`  | user             | delete a person                                                         | remove entries that I no longer need                                               |
+| `* * *`  | user             | find a student by name or subject                                       | locate details of persons without having to go through the entire list             |
+| `* * *`  | tutor            | update my students details as they progress through learning in remarks | keep track of their information e.g. test scores                                   |
+| `* * *`  | tutor            | quickly edit student details                                            | save time re-adding students if I have added the wrong details by accident         |
+| `* * *`  | flexible tutor   | edit my student’s lesson timings                                        | accommodate any changes in timing requested by them                                |
+| `* * *`  | private tutor    | install the app on my device with one click                             | use the app with ease without much trouble building the environment                |
+| `* * *`  | private tutor    | see a specific student’s data from the contact list                     | get a more concise and detailed view of the student                                |
+| `* *`    | user             | hide private contact details                                            | minimize chance of someone else seeing them by accident                            |
+| `* *`    | efficient tutor  | add lessons to my schedule quickly                                      | maximize my time usage                                                             |
+| `* *`    | tutor            | see my teaching schedule                                                | complete lesson preparation that is catered to the student before tuition sessions |                                                                                                                |                                                                                    |
+| `* *`    | efficient tutor  | filter lessons to view lessons on a specific dates                      | plan my activities with the free time that is not occupied by lessons.             |
+| `* *`    | tutor            | link students to a lesson                                               | prepare for the lesson according to the students' weaknesses and strengths.        |
+| `*`      | forgetful tutor  | include certain tasks to do for each lesson                             | remember to do them in preparation for the tuition lesson                          |
+| `*`      | regular app user | hide information that is not relevant to me currently                   | have a cleaner User Interface                                                      |
 
 
 
