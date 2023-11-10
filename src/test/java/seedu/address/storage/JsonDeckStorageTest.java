@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalCards.*;
+import static seedu.address.testutil.TypicalCards.CS1101S;
+import static seedu.address.testutil.TypicalCards.getTypicalDeck;
 
 import java.io.IOException;
 import java.nio.file.Files;
