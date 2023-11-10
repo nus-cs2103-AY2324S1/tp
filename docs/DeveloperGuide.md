@@ -393,6 +393,31 @@ The following sequence diagram shows how the upcoming command works:
 
 ![UpcomingCommandSequenceDiagram](images/UpcomingCommandSequenceDiagram.png)
 
+### Sort patients feature
+
+[SortPatientCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/personparser/SortPatientCommandParser.java
+[SortPatientCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/personcommands/SortPatientCommand.java
+
+#### Implementation
+
+For _sort-p_ command, the noteworthy classes involved are:
+
+- [`SortPatientCommandParser.java`][SortPatientCommandParser.java] - This parses the user input and creates a new `SortPatientCommand` object.
+
+- [`SortPatientCommand.java`][SortPatientCommand.java] - This command object executes to sort the patient list by ascending or descending order and by the given attribute to sort by.
+
+The feature is implemented by sorting the unfiltered patient list stored in the model with using a custom comparator depending on each attribute.
+
+
+The following sequence diagram shows how the sort patient command works:
+![SortPatientCommandSequenceDiagram](images/SortPatientCommandSequenceDiagram.png)
+
+#### Design considerations:
+1. We decided to implement the comparator for names to compare the names after the names have been converted to lower case. This is as we want it to be sorted in that order, where john doe is considered smaller than Kevin Porter Jr.
+2. We eventually want to sort from distance from the current location of the machine so we made the attributes easily expandable for future support.
+#### Additional Info:
+1. The sort command under appointments is implemented similarly but sorts the appointment list either by priority or time.
+
 ### Undo/Redo Feature
 
 [UndoCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/UndoCommandParser.java
