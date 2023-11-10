@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public class MeetingTimeTest {
     public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy HHmm");
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new MeetingTime(null, null));
@@ -21,17 +22,15 @@ public class MeetingTimeTest {
     }
 
     @Test
-    public void isValidMeetingTime() {
-        // null
-        assertThrows(NullPointerException.class, () -> MeetingTime.isValidMeetingTime(null, null));
-
-        // invalid
+    public void isValidMeetingTime_success() {
+        // false
         assertFalse(MeetingTime.isValidMeetingTime(LocalDateTime.parse("03.10.2023 1000", FORMAT),
                 LocalDateTime.parse("02.10.2023 1000", FORMAT))); // start is after end
 
-        // valid
+        // true
         assertTrue(MeetingTime.isValidMeetingTime(LocalDateTime.parse("02.10.2023 1000", FORMAT),
                 LocalDateTime.parse("03.10.2023 1000", FORMAT))); // start before end
+
         assertTrue(MeetingTime.isValidMeetingTime(LocalDateTime.parse("02.10.2023 1000", FORMAT),
                 LocalDateTime.parse("02.10.2023 1000", FORMAT))); // start equal end
     }

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -48,10 +49,28 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_personWithSameName_throwsCommandException() {
+        ModelStub modelStub = new ModelStubWithPerson(ALICE);
+        Person person = new PersonBuilder(BOB).withName(ALICE.getName().fullName).build();
+        AddCommand addCommand = new AddCommand(person);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_personWithSameEmail_throwsCommandException() {
+        ModelStub modelStub = new ModelStubWithPerson(ALICE);
+        Person person = new PersonBuilder(BOB).withEmail(ALICE.getEmail().value).build();
+        AddCommand addCommand = new AddCommand(person);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_personWithSamePhone_throwsCommandException() {
+        ModelStub modelStub = new ModelStubWithPerson(ALICE);
+        Person person = new PersonBuilder(BOB).withPhone(ALICE.getPhone().value).build();
+        AddCommand addCommand = new AddCommand(person);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
@@ -91,6 +110,11 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        @Override
+        public Model copy() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -241,7 +265,7 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
-            return this.person.isSamePerson(person);
+            return this.person.isDuplicate(person);
         }
     }
 

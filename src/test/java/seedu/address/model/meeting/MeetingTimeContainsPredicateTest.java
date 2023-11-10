@@ -3,7 +3,7 @@ package seedu.address.model.meeting;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
+import static seedu.address.commons.util.DateTimeUtil.format;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -47,11 +47,11 @@ public class MeetingTimeContainsPredicateTest {
         MeetingTimeContainsPredicate predicate =
                 new MeetingTimeContainsPredicate(start, end);
         assertTrue(predicate.test(new MeetingBuilder()
-                .withStart(startOn30.format(FORMAT)).withEnd(endOn30.format(FORMAT)).build()));
+                .withStart(format(startOn30)).withEnd(format(endOn30)).build()));
 
         predicate = new MeetingTimeContainsPredicate(start, end);
         assertTrue(predicate.test(new MeetingBuilder()
-                .withStart(start.format(FORMAT)).withEnd(end.format(FORMAT)).build()));
+                .withStart(format(start)).withEnd(format(end)).build()));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class MeetingTimeContainsPredicateTest {
         MeetingTimeContainsPredicate predicate =
             new MeetingTimeContainsPredicate(startOn30, endOn30);
         assertFalse(predicate.test(new MeetingBuilder()
-                .withStart(start.format(FORMAT)).withEnd(end.format(FORMAT)).build()));
+                .withStart(format(start)).withEnd(format(end)).build()));
     }
 
     @Test

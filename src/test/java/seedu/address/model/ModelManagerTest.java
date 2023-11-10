@@ -31,6 +31,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void copy() {
+        assertEquals(modelManager, modelManager.copy());
+    }
+
+    @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
     }

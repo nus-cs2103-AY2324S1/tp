@@ -51,6 +51,33 @@ public class PersonTest {
     }
 
     @Test
+    public void isDuplicate() {
+        // same object -> returns true
+        assertTrue(ALICE.isDuplicate(ALICE));
+
+        // null -> returns false
+        assertFalse(ALICE.isDuplicate(null));
+
+        // same name -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isDuplicate(editedAlice));
+
+        // same email -> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withName(VALID_NAME_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isDuplicate(editedAlice));
+
+        // same phone -> returns true
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isDuplicate(editedAlice));
+
+        // different person -> returns false
+        assertFalse((ALICE.isDuplicate(BOB)));
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();

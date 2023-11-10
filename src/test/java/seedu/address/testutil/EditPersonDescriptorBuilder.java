@@ -1,8 +1,7 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
+import static seedu.address.commons.util.DateTimeUtil.parse;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -73,7 +72,7 @@ public class EditPersonDescriptorBuilder {
      * building.
      */
     public EditPersonDescriptorBuilder withLastContactedTime(String lastContactedTime) {
-        descriptor.setLastContactedTime(LocalDateTime.parse(lastContactedTime, FORMAT));
+        descriptor.setLastContactedTime(parse(lastContactedTime));
         return this;
     }
 

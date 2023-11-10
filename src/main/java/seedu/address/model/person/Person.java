@@ -59,6 +59,10 @@ public class Person {
         return lastContactedTime.getTime();
     }
 
+    public String getLastContactedDisplay() {
+        return lastContactedTime.getDisplay();
+    }
+
     public Remark getRemark() {
         return remark;
     }
@@ -86,6 +90,29 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if both persons have the same email, name or phone.
+     */
+    public boolean isDuplicate(Person otherPerson) {
+        if (otherPerson == null) {
+            return false;
+        }
+
+        if (otherPerson.getName().equals(getName())) {
+            return true;
+        }
+
+        if (otherPerson.getPhone().equals(getPhone())) {
+            return true;
+        }
+
+        if (otherPerson.getEmail().equals(getEmail())) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -137,6 +164,6 @@ public class Person {
      */
     public String toDisplayString() {
         return String.format("Name: %s\nPhone: %s\nEmail: %s\nLast Meeting: %s\nStatus: %s\nRemark: %s",
-                name, phone, email, LastContactedTime.toDisplayFormat(lastContactedTime), status, remark);
+                name, phone, email, lastContactedTime.getDisplay(), status, remark);
     }
 }

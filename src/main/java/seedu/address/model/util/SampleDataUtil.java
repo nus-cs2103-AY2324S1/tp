@@ -1,13 +1,11 @@
 package seedu.address.model.util;
 
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
-
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.meeting.Attendee;
@@ -30,22 +28,22 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                        LocalDateTime.parse("02.10.2023 1000", FORMAT), new Status(""), new Remark(""),
+                        DateTimeUtil.parse("02.10.2023 1000"), new Status(""), new Remark(""),
                         getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                        LocalDateTime.parse("02.10.2023 1300", FORMAT), new Status(""), new Remark(""),
+                        DateTimeUtil.parse("02.10.2023 1300"), new Status(""), new Remark(""),
                         getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                        LocalDateTime.parse("02.10.2023 1500", FORMAT), new Status(""), new Remark(""),
+                        DateTimeUtil.parse("02.10.2023 1500"), new Status(""), new Remark(""),
                         getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                         LocalDateTime.parse("02.10.2023 1700", FORMAT), new Status(""), new Remark(""),
                         getTagSet("colleagues")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                        LocalDateTime.parse("02.10.2023 1900", FORMAT), new Status(""), new Remark(""),
+                        DateTimeUtil.parse("02.10.2023 1900"), new Status(""), new Remark(""),
                         getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                        LocalDateTime.parse("12.10.2023 1000", FORMAT), new Status(""), new Remark(""),
+                        DateTimeUtil.parse("12.10.2023 1000"), new Status(""), new Remark(""),
                         getTagSet("colleagues"))
         };
     }

@@ -20,13 +20,16 @@ My contributions to the project are listed below.
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jason-raiin&breakdown=true)
 
 - **Project management**:
-  - Contributed issues
+  - Contributed issues and bugs
   - Reviewed PRs
 
 - **Enhancements to existing features**:
-  - Add Tags field to meetings
-  - Convert Tag to factory class with no duplicates
-  - Added Status field to meetings
+  - Add tags to meetings
+  - Convert `Tag` to factory class with no duplicates
+  - Added `Status` field to meetings
+  - Duplicate contacts: added checks for duplicate emails and phones
+  - Email format: Improved Regex for email field
+  - `ParseException`: Improved throwing, handling, and display of parsing exceptions
 
 - **Documentation**:
 
@@ -49,3 +52,4 @@ My contributions to the project are listed below.
 - **Tools**:
   - Added util method `parseIndexes`
   - Improved methods for `typicalMeetings` and `typicalAddressBook`
+  - Added `DateTimeUtil` for parsing and formatting dates

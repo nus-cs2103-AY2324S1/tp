@@ -1,7 +1,8 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.DateTimeUtil.verbose;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -37,15 +38,7 @@ public class MeetingCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label dateStart;
-    @FXML
-    private Label dateEnd;
-    @FXML
     private Label start;
-    @FXML
-    private Label spacer;
-    @FXML
-    private Label secondSpacer;
     @FXML
     private Label end;
     @FXML
@@ -64,12 +57,8 @@ public class MeetingCard extends UiPart<Region> {
         l.setText(meeting.getLocation().shortLocation());
         LocalDateTime startTime = meeting.getStart();
         LocalDateTime endTime = meeting.getEnd();
-        dateStart.setText(startTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-        spacer.setText("-");
-        dateEnd.setText(endTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-        start.setText(startTime.format(DateTimeFormatter.ofPattern("HHmm")));
-        secondSpacer.setText("-");
-        end.setText(meeting.getEnd().format(DateTimeFormatter.ofPattern("HHmm")));
+        start.setText("Start: " + verbose(startTime));
+        end.setText("End: " + verbose(endTime));
         meeting.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.shortTagName())));

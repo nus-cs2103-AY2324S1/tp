@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -15,6 +14,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -119,7 +119,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_findc() throws Exception {
-        LocalDateTime lastContacted = LocalDateTime.parse("20.09.2023 1000", FORMAT);
+        LocalDateTime lastContacted = DateTimeUtil.parse("20.09.2023 1000");
         FindCommand command = (FindCommand) parser
                 .parseCommand(FindCommand.COMMAND_WORD + " n/Alice p/913 e/gmail lc/20.09.2023 1000 s/Active t/friend");
         assertEquals(new FindCommand(
@@ -129,8 +129,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_findm() throws Exception {
-        LocalDateTime start = LocalDateTime.parse("20.09.2023 1000", FORMAT);
-        LocalDateTime end = LocalDateTime.parse("20.09.2023 1200", FORMAT);
+        LocalDateTime start = DateTimeUtil.parse("20.09.2023 1000");
+        LocalDateTime end = DateTimeUtil.parse("20.09.2023 1200");
         FindMeetingCommand command = (FindMeetingCommand) parser.parseCommand(FindMeetingCommand.COMMAND_WORD
                 + " m/CS2103T a/Zoom s/20.09.2023 1000 e/20.09.2023 1200 n/Alice Bob t/friend");
         assertEquals(

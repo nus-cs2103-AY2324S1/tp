@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -26,6 +25,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -124,7 +124,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_oneLastContactKeyword_onePersonFound() {
-        LocalDateTime time = LocalDateTime.parse("20.10.2023 1100", FORMAT);
+        LocalDateTime time = DateTimeUtil.parse("20.10.2023 1100");
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         GeneralPersonPredicate phonePredicate = preparePredicate(new String[]{"", "", "", "", ""}, time);
         FindCommand findPhoneCommand = new FindCommand(phonePredicate);

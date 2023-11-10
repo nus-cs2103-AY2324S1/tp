@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.DateTimeUtil.verbose;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -17,7 +17,7 @@ public class LastContactedTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Last Contacted Time should have the format [dd.mm.yyyy HHmm]\n"
             + "eg. 18.09.2023 1500 represents 18 September 2023, 3PM";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy, HHmm");
+
     private LocalDateTime lastContactedTime;
 
     /**
@@ -30,10 +30,6 @@ public class LastContactedTime {
 
     public LocalDateTime getTime() {
         return lastContactedTime;
-    }
-
-    public static String toDisplayFormat(LastContactedTime dateTime) {
-        return dateTime.lastContactedTime.format(FORMATTER);
     }
 
     /**
@@ -63,6 +59,14 @@ public class LastContactedTime {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(lastContactedTime);
+    }
+
+    public String getDisplay() {
+        if (lastContactedTime.equals(LocalDateTime.MIN)) {
+            return "NA";
+        }
+
+        return verbose(lastContactedTime);
     }
 
     @Override

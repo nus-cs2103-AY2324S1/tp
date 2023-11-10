@@ -3,7 +3,6 @@ package seedu.address.model.meeting;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -16,7 +15,7 @@ public class MeetingTime {
 
     public static final String MESSAGE_CONSTRAINTS = "Meeting Time should have the format [dd.mm.yyyy HHmm] and Start"
             + " cannot be after End\neg. 18.09.2023 1500 represents 18 September 2023, 3PM";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy, HHmm");
+
     private final LocalDateTime start;
     private final LocalDateTime end;
 
@@ -38,12 +37,8 @@ public class MeetingTime {
         return end;
     }
 
-    public static String toDisplayFormat(LocalDateTime dateTime) {
-        return dateTime.format(FORMATTER);
-    }
-
     public static boolean isValidMeetingTime(LocalDateTime start, LocalDateTime end) {
-        return !start.isAfter(end);
+        return !start.isAfter(end) && start.isAfter(LocalDateTime.MIN) && end.isBefore(LocalDateTime.MAX);
     }
 
     @Override

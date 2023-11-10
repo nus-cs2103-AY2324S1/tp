@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
+import static seedu.address.commons.util.DateTimeUtil.parse;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -42,7 +42,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        lastContactedTime = LocalDateTime.parse(DEFAULT_LASTTIME, FORMAT);
+        lastContactedTime = parse(DEFAULT_LASTTIME);
         status = new Status(DEFAULT_STATUS);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
@@ -105,7 +105,7 @@ public class PersonBuilder {
      * Sets the {@code LastContactedTime} of the {@code Person} that we are building.
      */
     public PersonBuilder withLastContactedTime(String lastContactedTime) {
-        this.lastContactedTime = LocalDateTime.parse(lastContactedTime, FORMAT);
+        this.lastContactedTime = parse(lastContactedTime);
         return this;
     }
 

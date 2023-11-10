@@ -3,13 +3,13 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.GeneralPersonPredicate;
@@ -53,7 +53,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgsLastContacted_returnsFindCommand() {
-        LocalDateTime time = LocalDateTime.parse("20.09.2023 1000", FORMAT);
+        LocalDateTime time = DateTimeUtil.parse("20.09.2023 1000");
         FindCommand expectedFindCommand =
                 new FindCommand(preparePredicate(new String[]{"", "", "", "", ""}, time));
         assertParseSuccess(parser, " lc/20.09.2023 1000", expectedFindCommand);
@@ -75,7 +75,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        LocalDateTime time = LocalDateTime.parse("20.09.2023 1000", FORMAT);
+        LocalDateTime time = DateTimeUtil.parse("20.09.2023 1000");
         FindCommand expectedFindCommand =
                 new FindCommand(preparePredicate(new String[]{"Alice", "913", "gmail", "Active", "friend"}, time));
         assertParseSuccess(parser, " n/Alice p/913 e/gmail lc/20.09.2023 1000 s/Active t/friend", expectedFindCommand);

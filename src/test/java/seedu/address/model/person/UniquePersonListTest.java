@@ -63,6 +63,27 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void add_duplicateName_throwsDuplicatePersonException() {
+        uniquePersonList.add(ALICE);
+        Person personWithSameName = new PersonBuilder(BOB).withName(ALICE.getName().fullName).build();
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(personWithSameName));
+    }
+
+    @Test
+    public void add_duplicateEmail_throwsDuplicatePersonException() {
+        uniquePersonList.add(ALICE);
+        Person personWithSameEmail = new PersonBuilder(BOB).withEmail(ALICE.getEmail().value).build();
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(personWithSameEmail));
+    }
+
+    @Test
+    public void add_duplicatePhone_throwsDuplicatePersonException() {
+        uniquePersonList.add(ALICE);
+        Person personWithSamePhone = new PersonBuilder(BOB).withPhone(ALICE.getPhone().value).build();
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(personWithSamePhone));
+    }
+
+    @Test
     public void getPerson_isInList_success() {
         uniquePersonList.add(ALICE);
         assertEquals(ALICE, uniquePersonList.getPerson(ALICE.getName().fullName));

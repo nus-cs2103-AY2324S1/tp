@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -55,10 +53,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().shortEmail());
-        LocalDateTime time = person.getLastContactedTime();
-        lastContactedTime.setText(time.isEqual(LocalDateTime.MIN)
-                ? "Not contacted yet"
-                : "LC: " + time.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HHmm")));
+        lastContactedTime.setText("Last contacted: " + person.getLastContactedDisplay());
         status.setText(person.getStatus().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

@@ -47,6 +47,14 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
+    @Override
+    public Model copy() {
+        Model copy = new ModelManager();
+        copy.setAddressBook(addressBook);
+        copy.setUserPrefs(userPrefs);
+        return copy;
+    }
+
     //=========== UserPrefs ==================================================================================
 
     @Override

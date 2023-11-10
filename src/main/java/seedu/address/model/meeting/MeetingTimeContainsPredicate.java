@@ -1,6 +1,6 @@
 package seedu.address.model.meeting;
 
-import static seedu.address.logic.parser.ParserUtil.FORMAT;
+import static seedu.address.commons.util.DateTimeUtil.format;
 
 import java.time.LocalDateTime;
 import java.util.function.Predicate;
@@ -22,8 +22,8 @@ public class MeetingTimeContainsPredicate implements Predicate<Meeting> {
     public MeetingTimeContainsPredicate(LocalDateTime start, LocalDateTime end) {
         this.start = start;
         this.end = end;
-        this.start.format(FORMAT);
-        this.end.format(FORMAT);
+        format(this.start);
+        format(this.end);
         MeetingTime.isValidMeetingTime(start, end);
     }
 
