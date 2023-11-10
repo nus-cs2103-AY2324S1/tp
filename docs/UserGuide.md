@@ -405,7 +405,7 @@ To clear all data, use the `clear` command. This resets the storage, deleting al
 Exercise caution, as this action cannot be undone.
 
 4. **How do I exit the WellNUS application ?**<br/>
-To exit the program, use the exit command. This closes the application.
+To exit the program, use the `exit` command. This closes the application.
 
 5. **I am unsure of a new student's risk level, what should I put ?**<br/>
 If you're unsure of a new student's risk level, you can leave the risk level parameter blank when adding the student using the add command. 
