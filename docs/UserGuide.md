@@ -88,6 +88,7 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 | `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANG] [tl/TRANSLATION_LANG]` | `add w/Hello t/你好`               |
  | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                                 | `find hello, bye`                |
 | `...`            | Parameter that will not be used                               | `help ...`                                                          | `help 123` is the same as `help` |
+
 </div>
 
 
@@ -106,7 +107,7 @@ Adds a word to the flash card with its translation.
 * Works to add a word with its translation in their respective languages.
 * The already saved translation can be overridden with a new translation in a different language.
 
-Format: `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
+[Command Format](#commands): `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
 > The default language for both word and translation are blank (`""`)
 
 Examples:
@@ -135,7 +136,7 @@ Examples:
 Deletes a words and its related information
 * Deletes a flash card.
 
-Format: `delete <INDEX>`
+[Command Format](#commands): `delete <INDEX>`
 
 Examples:
 * `delete 2` deletes the word and its translation at index 2
@@ -151,7 +152,7 @@ Output:
 Edits the word and its translation at the given index.
 * Edits a wild flash card.
 
-Format: `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
+[Command Format](#commands): `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
 
 Examples:
 * `edit 1 w/こんにちわ t/Hello` edits the translation at index 1
@@ -179,7 +180,7 @@ Finds words whose original word or translation contains the given keyword.
 * Finds a flash card.
 * The search is insensitive. e.g `look` will match `Look`
 
-Format: `find <KEYWORDS...>`
+[Command Format](#commands): `find <KEYWORDS...>`
 
 Examples:
 * `find look` returns the flash card list and its translation that contains the keyword `look`
@@ -189,8 +190,8 @@ Examples:
 
 Shows the list of flash cards with both the original word and the corresponding translation.
 * Lists all the flash cards saved
-  
-Format: `list ...`
+
+[Command Format](#commands): `list ...`
 > All the saved flash cards, regardless of the review date, are listed.
 
 Output:
@@ -214,7 +215,7 @@ Displays the flash cards of all the words to be reviewed that day
 * The review command will present flash cards selected by Flash Lingo based on your level, utilizing the Leitner system.
 * If you wish to view all your saved flash cards without the Leitner system's selection criteria, please use the list command.
 
-Format: `review ...`
+[Command Format](#commands): `review ...`
 
 Output:
 ![img.png](images/ReviewSuccess.png)
@@ -228,7 +229,7 @@ Output:
 
 To start a review session, user simply needs to type in `start` command.
 
-Format: `start ...`
+[Command Format](#commands): `start ...`
 
 Output: `Review Session has been started.`
 
@@ -241,7 +242,7 @@ Output: `Review Session has been started.`
 
 Ends the current flash card session and returns to the main menu.
 
-Format: `end ...`
+[Command Format](#commands): `end ...`
 
 Output: `Review Session has ended.`
 
@@ -249,7 +250,7 @@ Output: `Review Session has ended.`
 
 To show the translation of the flash card in
 
-Format: `reveal [<INDEX>]`
+[Command Format](#commands): `reveal [<INDEX>]`
 
 Output : `Flashcard has been revealed!`
 
@@ -264,7 +265,7 @@ Examples:![img.png](images/Reveal.png)
 Marks the word as memorized and advances the word into the next retention stage. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
-Format: `yes ...`
+[Command Format](#commands): `yes ...`
 
 Output: ![img.png](images/Yes.png)
 or
@@ -279,7 +280,7 @@ if there's no word left in the review session.
 Marks the word as not grasped and leaves it in its current retention stage. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
-Format: `no ...`
+[Command Format](#commands): `no ...`
 
 Output: ![img.png](images/No.png)
 or
@@ -295,27 +296,21 @@ To help track user progress and inspire continued learning, this command offers 
 * Remembered Words: Shows the number of terms you have successfully retained in this session.
 * Success Rate: Presents a percentage representing your learning success for this session, motivating you to keep improving.
 
-Format: `stats ...`
-
-Example:
-* `stats` would give the following output
+[Command Format](#commands): `stats ...`
 
 Output:
 
 ![img.png](images/Stats.png)
 
 **Note:**
-* The `stats` command is operational exclusively outside active review sessions.
 * The success rate is calculated solely on the basis of the current session.
-* If attempted inside a review session, the system will respond with the following error message:
-> Sorry, currently you are in a review session. Your command is not supported.<br>
-> Please end the review session first.
+
 
 ### Filtering list with specified language : `language`
 
 Displays a list where each word is from specified language.
 
-Format: `language <SPECIFIED_LANGUAGE>`
+[Command Format](#commands): `language <SPECIFIED_LANGUAGE>`
 
 <div id="load">
 
@@ -324,7 +319,7 @@ Loads an Excel file of words into the app. The words will be added to the curren
 review session automatically.
 </div>
 
-Format: `load <FILE_NAME>`
+[Command Format](#commands): `load <FILE_NAME>`
 
 <div markdown="block" class="alert alert-info">
 
@@ -352,7 +347,7 @@ Switches between light and dark appearance of UI dashboard.
 * The theme will be saved and loaded when Flashlingo is restarted.
 * Default color theme is the **light theme**.
 
-Format: `switch ...`
+[Command Format](#commands): `switch ...`
 
 Output:
 
@@ -364,13 +359,13 @@ Output:
 
 Opens a browser with the help page (User Guide). Pressing the `Help` button and then clicking `Help F1` will achieve the same effect.
 
-Format: `help ...`
+[Command Format](#commands): `help ...`
 
 ### Exiting the program : `exit`
 
 Safely terminates the Flashlingo application and closes the graphical user interface (GUI).
 
-Format: `exit ...`
+[Command Format](#commands): `exit ...`
 
 Example:
 * Input `exit` to end your session and close the application
