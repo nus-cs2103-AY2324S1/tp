@@ -37,8 +37,8 @@ public class SampleDataUtil {
                         DateTimeUtil.parse("02.10.2023 1500"), new Status(""), new Remark(""),
                         getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                        DateTimeUtil.parse("02.10.2023 1700"), new Status(""), new Remark(""),
-                        getTagSet("family")),
+                        DateTimeUtil.parse("02.10.2023 1000"), new Status(""), new Remark(""),
+                        getTagSet("colleagues")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                         DateTimeUtil.parse("02.10.2023 1900"), new Status(""), new Remark(""),
                         getTagSet("classmates")),
@@ -50,14 +50,14 @@ public class SampleDataUtil {
 
     public static Meeting[] getSampleMeetings() {
         return new Meeting[] {
-            new Meeting(new Title("Test Meeting 1"), new Location("Room 1"),
+            new Meeting(new Title("Meeting with Alex"), new Location("Starbucks"),
                     DateTimeUtil.parse("02.10.2023 1000"),
-                    DateTimeUtil.parse("03.10.2023 1000"),
+                    DateTimeUtil.parse("02.10.2023 1200"),
                     getAttendeeSet("Alex Yeoh"), getTagSet("work"), new MeetingStatus(false)),
-            new Meeting(new Title("Test Meeting 2"), new Location("Room 2"),
+            new Meeting(new Title("Meet with team"), new Location("Office meeting room"),
                     DateTimeUtil.parse("02.10.2023 1000"),
-                    DateTimeUtil.parse("02.10.2023 1000"),
-                    getAttendeeSet(), getTagSet(), new MeetingStatus(false)),
+                    DateTimeUtil.parse("03.10.2023 1200"),
+                    getAttendeeSet("Bernice Yu", "David Li"), getTagSet("work"), new MeetingStatus(false)),
         };
     }
 

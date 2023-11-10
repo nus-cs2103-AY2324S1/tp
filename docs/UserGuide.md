@@ -63,6 +63,7 @@ Managing clients and a busy schedule have never been easier. With OutBook, all y
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar OutBook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+<br><br><br><br><br><br>
 5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -82,6 +83,7 @@ Managing clients and a busy schedule have never been easier. With OutBook, all y
 
 Return to the [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 ---
 
 # Navigating OutBook
@@ -193,6 +195,8 @@ Examples:
 - `listc` followed by `delete 2` deletes the 2nd person in the results of the `listc` command.
 - `findc Betsy` followed by `delete 1` deletes the 1st person in the results of the `findc` command.
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a contact : `editc`
 
 Edits an existing contact in OutBook.
@@ -211,9 +215,6 @@ Examples:
 - `editc 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 
-<div style="page-break-after: always;"></div>
-
-
 ### Viewing detailed contact information : `viewc`
 
 Views detailed information of a contact in OutBook.
@@ -230,6 +231,7 @@ Format: `viewc INDEX`
 Examples:
 - `viewc 2` Displays detailed information related to the 2nd contact on the list.
 
+<div style="page-break-after: always;"></div>
 
 ### Finding persons using contact fields: `findc`
 Find persons whose contact details match the keywords specified for at least 1 of these fields: `NAME`, `PHONE_NUMBER`, `EMAIL`, `STATUS`, `TAG`.
@@ -248,6 +250,8 @@ Format: `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [lc/DATETIME] [s/KEYWORDS]
 * If multiple fields are provided, only Persons matching at least one keyword in each field will be returned (i.e. `AND` search).
   - e.g. `n/John Doe s/active` will return `Name: John Lee, Status: Active` but not `Name: James Doe, Status: Claimant`.
 * This command clears the contact that is currently displayed via the `viewc` command.
+
+<div style="page-break-after: always;"></div>
 
 Examples:
 - `findc n/alice` returns `Alice` and `alice tan`
@@ -285,6 +289,7 @@ Format: `listm`
 
 * This command may change the Meeting that is currently displayed via the `viewm` command, as detailed in the description for `viewm`.
 
+<div style="page-break-after: always;"></div>
 
 ### Deleting a meeting : `deletem`
 
@@ -317,6 +322,8 @@ Format: `editm INDEX [m/TITLE] [a/LOCATION] [s/START] [e/END] [t/TAG]…​`
 Examples:
 - `editm 1 a/Hawker Centre s/15.09.2023 1500` Edits the location and start of the 1st meeting to be `Hawker Centre` and `15.09.2023 1500` respectively.
 - `editm 2 m/Zoom meeting t/` Edits the title of the 2nd meeting to be `Zoom meeting` and clears all existing tags.
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing detailed meeting information : `viewm`
 
@@ -362,7 +369,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-![result for 'findAlexMeeting'](images/findJohnMeetingResult.png)
+![result for 'findJohnMeeting'](images/findJohnMeetingResult.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -396,6 +403,8 @@ Format: `rmmc MEETING_INDEX ATTENDEE_INDEX`
 
 Examples:
 - `rmmc 3 2` removes the 2nd attendee from the 3rd meeting in OutBook.
+
+<div style="page-break-after: always;"></div>
 
 ### Marking a meeting as complete : `mark`
 
