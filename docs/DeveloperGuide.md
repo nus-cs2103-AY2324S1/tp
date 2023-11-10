@@ -169,7 +169,7 @@ to only require one `Tag` object per unique tag, instead of each `Person` needin
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
-This approach is also use for `FinancialPlan`. The multiple `Tag` and `FinancialPlan` objects are stored in their
+This approach is also used for `FinancialPlan`. The multiple `Tag` and `FinancialPlan` objects are stored in their
 respective `HashSet` where each object in the `HashSet` will have a corresponding hashcode.
 
 </div>
