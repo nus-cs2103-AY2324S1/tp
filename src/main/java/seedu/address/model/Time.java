@@ -28,6 +28,8 @@ public class Time {
      * @param hour The time of the day.
      */
     public Time(DayOfWeek day, LocalTime hour) {
+        requireNonNull(day);
+        requireNonNull(hour);
         this.day = day;
         this.hour = hour;
     }

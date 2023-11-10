@@ -49,6 +49,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         grpList = personToCopy.getGroups();
+        timeIntervalList = personToCopy.getTime();
     }
 
     /**

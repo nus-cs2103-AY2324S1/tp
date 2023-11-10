@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
 
 import java.time.DayOfWeek;
@@ -31,6 +32,8 @@ public class TimeInterval {
      * @param end   The end time of the interval.
      */
     public TimeInterval(Time start, Time end) {
+        requireNonNull(start);
+        requireNonNull(end);
         this.start = start;
         this.end = end;
     }

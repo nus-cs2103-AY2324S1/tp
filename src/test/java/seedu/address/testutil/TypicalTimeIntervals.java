@@ -21,6 +21,21 @@ public class TypicalTimeIntervals {
         .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(14, 00)).build(),
         new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(15, 00)).build()).build();
 
+    public static TimeInterval timeIntervalFourNoOverlap = new TimeIntervalBuilder()
+        .withStartTimeAndEndTime(new TimeBuilder()
+        .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(22, 00)).build(),
+        new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(23, 00)).build()).build();
+
+    public static TimeInterval timeIntervalFiveNoOverlap = new TimeIntervalBuilder()
+        .withStartTimeAndEndTime(new TimeBuilder()
+        .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(21, 05)).build(),
+        new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(21, 9)).build()).build();
+
+    public static TimeInterval timeIntervalSixNoOverlap = new TimeIntervalBuilder()
+        .withStartTimeAndEndTime(new TimeBuilder()
+        .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(21, 12)).build(),
+        new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(21, 23)).build()).build();
+
 
     public static TimeInterval timeIntervalOneOverlapA = new TimeIntervalBuilder()
         .withStartTimeAndEndTime(new TimeBuilder()
@@ -46,6 +61,30 @@ public class TypicalTimeIntervals {
         .withStartTimeAndEndTime(new TimeBuilder()
         .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(12, 00)).build(),
         new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(13, 00)).build()).build();
+
+
+    public static TimeInterval timeIntervalOneOverlapB = new TimeIntervalBuilder()
+        .withStartTimeAndEndTime(new TimeBuilder()
+        .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(5, 00)).build(),
+        new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(12, 00)).build()).build();
+
+    public static TimeInterval timeIntervalTwoOverlapB = new TimeIntervalBuilder()
+        .withStartTimeAndEndTime(new TimeBuilder()
+        .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(6, 00)).build(),
+        new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(8, 00)).build()).build();
+
+    public static TimeInterval timeIntervalOneOverlapC = new TimeIntervalBuilder()
+        .withStartTimeAndEndTime(new TimeBuilder()
+        .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(5, 00)).build(),
+        new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(12, 00)).build()).build();
+
+    public static TimeInterval timeIntervalTwoOverlapC = new TimeIntervalBuilder()
+        .withStartTimeAndEndTime(new TimeBuilder()
+        .withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(6, 00)).build(),
+        new TimeBuilder().withDayAndHour(DayOfWeek.FRIDAY, LocalTime.of(8, 00)).build()).build();
+
+
+
 
 
 
