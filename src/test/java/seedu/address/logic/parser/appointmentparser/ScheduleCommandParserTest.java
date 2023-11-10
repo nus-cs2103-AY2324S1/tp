@@ -6,6 +6,7 @@ import seedu.address.logic.commands.appointmentcommands.ScheduleCommand;
 import seedu.address.logic.parser.appointmentparser.ScheduleCommandParser;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -19,6 +20,7 @@ import seedu.address.testutil.AppointmentBuilder;
 import seedu.address.testutil.AppointmentTimeBuilder;
 import seedu.address.testutil.PersonBuilder;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.DESCRIPTION_DESC_ONE;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.END_DESC_ONE;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.PATIENT_ONE_DESC;
@@ -38,25 +40,25 @@ public class ScheduleCommandParserTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void parse_allFieldsPresent_success() {
+    public void parse_allFieldsPresent_success() throws ParseException {
 
-        Person patient = new PersonBuilder().build();
+       String patient = VALID_PATIENT_ONE;
+       Name patientName = new Name(patient);
         String userInput = PATIENT_ONE_DESC + START_DESC_ONE + END_DESC_ONE + DESCRIPTION_DESC_ONE +
                 PRIORITY_TAG_DESC_HIGH;
         AppointmentTime appointmentTime = new AppointmentTimeBuilder()
                 .withStart(VALID_START_ONE)
                 .withEnd(VALID_END_ONE).build();
         String appointmentDescription = VALID_DESCRIPTION_ONE;
+        AppointmentDescription appointmentDescription1 = new AppointmentDescription(appointmentDescription);
         String priority = VALID_PRIORITY_TAG_HIGH;
+        PriorityTag priorityTag = new PriorityTag(priority);
 
-        Appointment expectedAppointment = new AppointmentBuilder()
-                .withPatient(patient)
-                .withAppointmentTime(appointmentTime)
-                .withDescription(appointmentDescription)
-                .withPriorityTag(priority).build();
+        Appointment expectedAppointment = new Appointment(patientName, appointmentTime, appointmentDescription1, priorityTag);
 
-        ScheduleCommand expectedCommand = new ScheduleCommand(expectedAppointment, patient.getName());
+        ScheduleCommand expectedCommand = new ScheduleCommand(expectedAppointment, patientName);
 
+        assertEquals(parser.parse(userInput).toString(), expectedCommand.toString() );
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
