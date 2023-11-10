@@ -75,7 +75,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Processes the raw command string into an ArgumentMultimap.
+     * Processes the given {@code String} into an ArgumentMultimap in the context of an EditCommand.
      *
      * @param args Raw command string.
      * @return ArgumentMultimap containing argument values to edit a Person with.

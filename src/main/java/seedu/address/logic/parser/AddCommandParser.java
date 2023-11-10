@@ -51,11 +51,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
     /**
-     * Processes the raw command string into an ArgumentMultimap.
+     * Processes the given {@code String} into an ArgumentMultimap in the context of an AddCommand.
      *
      * @param args Raw command string.
      * @return ArgumentMultimap containing argument values to create a Person with.
-     * @throws ParseException if the string contains invalid arguments.
+     * @throws ParseException if the string contains invalid arguments or duplicate arguments for Person fields that
+     *      require exactly one argument.
      */
     private ArgumentMultimap processRawCommand(String args) throws ParseException {
         ArgumentMultimap argumentMultimap =
