@@ -89,7 +89,7 @@ Component | Purpose
 
 ![contactCardUi](images/contactCardUi.png)
 
-* Shows the client's name, phone number, financial plan(s) if any, address, email address, next-of-kin name, next-of-kin phone number, appointment (if any) and tags (if any).
+* Shows the client's name, phone number, financial plan(s) (if any), address, email address, next-of-kin name, next-of-kin phone number, appointment (if any) and tag(s) (if any).
 
 ### Appointment Card
 
