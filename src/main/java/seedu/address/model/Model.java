@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
@@ -122,4 +123,5 @@ public interface Model {
     void redo() throws CommandException;
 
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+    boolean hasIc(Ic nric);
 }

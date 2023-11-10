@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.UniqueAppointmentList;
 import seedu.address.model.person.UniqueDoctorList;
@@ -233,5 +234,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return Objects.hash(patients, doctors, appointments);
+    }
+
+    /**
+     * Checks if an IC exists in the addressbook.
+     */
+    public boolean hasIc(Ic nric) {
+        boolean flag = false;
+        for (Doctor doctor : doctors) {
+            if (doctor.getIc().equals(nric)) {
+                flag = true;
+            }
+        }
+        for (Patient patient: patients) {
+            if (patient.getIc().equals(nric)) {
+                flag = true;
+            }
+        }
+        return flag;
     }
 }

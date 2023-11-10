@@ -208,6 +208,11 @@ public class AddAppointmentCommandTest {
         public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasIc(Ic nric) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
 }

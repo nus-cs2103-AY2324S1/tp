@@ -17,6 +17,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
@@ -141,6 +142,10 @@ public class ModelManager implements Model {
         }
     }
 
+    public boolean hasIc(Ic nric) {
+        return addressBook.hasIc(nric);
+    }
+
     @Override
     public void deletePerson(Person target) {
         if (target instanceof Patient) {
@@ -258,4 +263,5 @@ public class ModelManager implements Model {
                 && filteredDoctors.equals(otherModelManager.filteredDoctors)
                 && filteredPatients.equals(otherModelManager.filteredPatients);
     }
+
 }
