@@ -169,14 +169,14 @@ Remember to check out how to use this guide [here](#how-to-use-this-guide).
 ##### What this command does:
 * The "Hi" command displays a welcome message along with the current date and time.
 
-Format: `Hi`
+#### Command format: `Hi`
 
 ##### Features:
 
 - You can use this command to check the date and time! Type in `hi` and hit enter!
 - You can now see "Welcome to Linktree, Current date and time: MM-DD-YYYY HH:MM:SS" displayed on the UI.
 
-##### Examples:
+##### Example usage:
 
 When you enter the command (Hi):
 
@@ -349,6 +349,7 @@ and type `list` again when you want to go back to the main window.
 <br>
 
 ### Remove developer from team
+#### What this command does:
 * Performs deletion of existing developer from the given team.
 #### Command format:
 * `deletedev tn/[TeamName] n/[DeveloperName]`
@@ -369,11 +370,12 @@ and type `list` again when you want to go back to the main window.
 ### Edit team name
 #### What this command does: 
 * Takes a team name and a new name for the team. Changes team name if it doesn't already exist in the teambook.
-  - Command: `editTeamName [tn/TEAMNAME(original team name)] [tn/TEAMNAME(new team name)]`
-  - Example: `editTeamName tn/Alpha Team tn/Beta Team`
-  - Result: Now, the team with original team name `Alpha Team` changed its team name
-    to `Beta Team`.
-  ![EditTeamNameCommand](images/UG_images/EditTeamNameCommand.png)
+#### Command format:
+* `editTeamName [tn/TEAMNAME(original team name)] [tn/TEAMNAME(new team name)]`
+#### Example usage:
+  * Example: `editTeamName tn/Alpha Team tn/Beta Team`
+  - Result: Now, the team with original team name `Alpha Team` changed its team name to `Beta Team`.
+    ![EditTeamNameCommand](images/UG_images/EditTeamNameCommand.png)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -383,9 +385,10 @@ and type `list` again when you want to go back to the main window.
 <br>
 
 ### Edit team leader
+#### What this command does:
 * Edits the team leader of a team.
-  - Command: `editTeamLeader [tn/TEAMNAME] [tl/TEAMLEADER]`
-  - Example: `editTeamLeader tn/Alpha Team tl/Bob`
+#### Command format: `editTeamLeader [tn/TEAMNAME] [tl/TEAMLEADER]`
+#### Example usage: `editTeamLeader tn/Alpha Team tl/Bob`
   - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
   ![EditTeamLeaderCommand](images/UG_images/EditTeamLeaderCommand.png)
 <div markdown="block" class="alert alert-primary">
