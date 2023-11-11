@@ -273,21 +273,21 @@ testing your memory with the most difficult flashcard.
 # Feature list
 ## Command Summary
 
-| Command  | Description                             |
-|----------|-----------------------------------------|
-| add      | Adds a Flashcard to the deck.           |
-| delete   | Removes a Flashcard from the deck.      |
-| list     | Displays a specified set of Flashcards. |
-| edit     | Modifies an existing Flashcard.         |
-| practise | Practises a Flashcard.                  |
-| hint     | Shows the hint set for a Flashcard.     |
-| solve    | Solves a Flashcard.                     |
-| set      | Sets the difficulty for a Flashcard.    |
-| random   | Practises a random Flashcard.           |
-| clear    | Removes all Flashcards from the deck.   |
-| goal     | Sets the goal for the session.          |
-| help     | Shows link to User Guide.               |
-| exit     | Exits and closes the application.       |
+| Command                                                  | Description                             |
+|----------------------------------------------------------|-----------------------------------------|
+| [add](#adding-a-flashcard--add)                          | Adds a Flashcard to the deck.           |
+| [delete](#deleting-a-flashcard--delete)                  | Removes a Flashcard from the deck.      |
+| [list](#view-all-flashcards--list)                       | Displays a specified set of Flashcards. |
+| [edit](#editing-a-specific-flashcard--edit)              | Modifies an existing Flashcard.         |
+| [practise](#practise-flashcards--practise)               | Practises a Flashcard.                  |
+| [hint](#hints-for-flashcards--hint)                      | Shows the hint set for a Flashcard.     |
+| [solve](#solving-flashcards--solve)                      | Solves a Flashcard.                     |
+| [set](#setting-difficulty-of-flashcards--set)            | Sets the difficulty for a Flashcard.    |
+| [random](#randomly-practise-flashcards--random)          | Practises a random Flashcard.           |
+| [clear](#clear-all-flashcards--clear)                    | Removes all Flashcards from the deck.   |
+| [goal](#setting-goals--goal)                             | Sets the goal for the session.          |
+| [help](#getting-help--help)                              | Shows link to User Guide.               |
+| [exit](#exiting-span-stylecolor-green-lesson-span--exit) | Exits and closes the application.       |
 
 
 ## Commands
