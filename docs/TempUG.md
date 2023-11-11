@@ -64,7 +64,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 ## Important notes
 
 ### Basic usage
-* The app is split into 3 states: student list, schedule list and task list. Each corresponds to the main features of TutorMate.
+* The app is split into 3 states: student list, schedule list (default) and task list. Each corresponds to the main features of TutorMate.
 * Each state has its associated features, while certain features work with all states but has differing functionalities.
 * The student list handles student details management, schedule list handles lessons, scheduling and the tasks for each lesson while the full task list is a view to display all tasks.
 * The GUI has several main components (see GUI image below):
@@ -76,7 +76,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 ### Terminologies / Symbols
 * Flag: denoted with a dash before the flag name e.g. -name.
-* Text formatted as code snippets are either commands e.g. `list SCHEDULE`, command formats e.g. `list [LIST][KEYWORDS]` or parameters e.g. `NAME`.
+* Text formatted as code snippets are either commands e.g. `list schedule`, command formats e.g. `list [LIST][KEYWORDS]` or parameters e.g. `NAME`.
 * <box type="info" seamless>This box denotes additional information.</box>
 * <box type="tip" seamless>This box denotes tips to improve usability.</box>
 * <box type="warning" seamless>This box denotes warnings that can cause errors.</box>
@@ -120,7 +120,7 @@ This box denotes command outputs.
 |------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------|
 | `INDEX`    | `show`<br/>`editPerson` `deletePerson`<br/>`editLesson` `deleteLesson`    | Must be a positive integer in the range of 1 to 99999 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | "1", "24", "12"                                                                                              | "-1", "2147483648", "10000" |
 | `LIST`     | `list`                                                                    | Must be either "Students", "Schedule", "Tasks". Parameter is case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | "STUDENTS", "stuDEnts"                                                                                       | "task", "student"           |
-| `KEYWORDS` | `list`                                                                    | Must be either "phone", "email", "address", "tags", "subjects", "remark", "none", or "all"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | "none", "all", "subJeCts"                                                                                    | "subject", ""               |
+| `KEYWORDS` | `list`                                                                    | Must be either "phone", "email", "address", "tags", "subjects", "remark", "none", or "all". Parameter must be in **lower case**. Multiple keywords can be specified using a **space separator.**                                                                                                                                                                                                                                                                                                                                                                                                                                   | "none", "all", "subJeCts"                                                                                    | "subject", ""               |
 | `NAME`     | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter` `find` | Must not be empty. <br/>Must only contain alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "John", "Elton"                                                                                              | "", "jo!"                   |   
 | `SUBJECT`  | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter`        | Must be either "Mathematics", "Physics", <br/>"Biology", "Chemistry" or "English"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | "mathematics", "MATHEMATICS"                                                                                 | "math"                      | 
 | `PHONE`    | `addPerson` `editPerson`                                                  | Should be at least 3 characters long, and can only contain numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "96681234", "823234"                                                                                         | "+6592212341", "98"         |
@@ -135,41 +135,59 @@ This box denotes command outputs.
 
 ### Listing upcoming lessons / tasks / students : `list`
 
-About the feature
+The list command is the way to navigate between the 3 states in our app.
+It will display the specified list and its corresponding details panel.
 
-Format: `command COMPULSORY [optional]`
-* Format info 1
-* Format info 2
+Format: `list [LIST] [KEYWORDS]`
+* Shows the list and associated detail panel for the specified `[LIST]`.
+* The `[KEYWORDS]` is for which specifying student details to display, and is only valid for students list. When used for schedule and task list, they will be ignored.
+* Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- `list` without specifying the `[LIST]` parameter defaults to showing the schedule list.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `list` and `list schedule` displays the schedule list with all the lessons with their names in time order.
+* `list students` displays all the students with their names (including previously specified fields).
+* `list students subjects email` displays all the students with their names, a list of subjects for each student and their email.
+* `list tasks` displays all the tasks with their description.
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `list` or `list schedule`
 ```
-This block of code is for success outputs
+Showing list SCHEDULE
 ```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  ![Success for list SCHEDULE](images/list/list_schedule_positive.png)
+* Input: `list students` (with no additional student details):
 ```
-Invalid command with the error message here
+Showing list STUDENT
 ```
+  ![Success for list STUDENTS](images/list/list_student_positive.png)
+* Input: `list tasks`
+```
+Showing list TASK
+```
+  ![Success for list STUDENTS](images/list/list_tasks_positive.png)
+* If there are no entries, e.g. there are no students added yet or there are no tasks added yet, an empty list is displayed.
+  ![Empty list](images/list/list_tasks_empty.png)
 
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
+Failure outputs:
+* Input: `list student`, `list task`, `list students EMAIL`, `list students subject`, `list students subjects,phone`
+* First command should spell `students` instead of `student`.
+* Second command should spell `tasks` instead of `task`.
+* Third command should spell `email` in lower case, not `EMAIL`.
+* Fourth command should spell `subjects` instead of `subject`.
+* Fifth command should use space separation `subjects phone` for keywords instead of comma separation.
+```Invalid command format!
+  list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list, optional parameters can be used to specify what student details to display.
+  Parameters: [LIST] [KEYWORDS]...
+  Example: list schedule
+  Example: list students phone email
+  Example: list tasks
 ```
 
 <br>
