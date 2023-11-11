@@ -407,7 +407,7 @@ Format: `addi INDEX t/TYPE [r/RATING]`
 * A maximum of 5 interviews can be added to each applicant.
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
-<box type="warning" header="**Caution**">
+<box type="tip" header="**Tip**">
     Rating will be rounded to the nearest 1 decimal place if more than 1 decimal place is provided.
 </box>
 
