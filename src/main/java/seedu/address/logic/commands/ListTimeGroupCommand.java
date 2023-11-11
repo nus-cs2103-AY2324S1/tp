@@ -17,6 +17,9 @@ public class ListTimeGroupCommand extends ListTimeCommand {
             + "Please provide the group's full name as in the existing contactlist.";
     private final Group group;
 
+    /**
+     * Creates a ListTimeGroupCommand to list the times of the group.
+     */
     public ListTimeGroupCommand(Group group) {
         requireNonNull(group);
         this.group = group;
