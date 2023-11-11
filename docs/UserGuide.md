@@ -10,7 +10,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+---
 <details open>
 <summary><strong>Quick start</strong></summary>
 <div markdown="1">
@@ -38,7 +38,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
     * `list` : Lists all bookings.
 
-    * `add r/1 d/2023-11-03 08:00 to 2023-11-04 11:00 n/Aikenot Dueet p/98765432 e/aikenotduet@gmail.com` : Adds a booking for the room number `1` to the Bookings Book.
+    * `add r/1 d/2023-11-03 08:00 to 2023-11-04 11:00 n/Aikenot Dueet p/98765432 e/aikenotdueet@gmail.com` : Adds a booking for the room number `1` to the Bookings Book.
 
     * `delete 3` : Deletes the 3rd booking shown in the current list.
 
@@ -52,7 +52,8 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
 </div>
 </details>
---------------------------------------------------------------------------------------------------------------------
+
+---
 <details open>
 <summary><strong>Formats</strong></summary>
 <div markdown="1">
@@ -60,6 +61,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 ## Input Formats
 
 <div markdown="block" class="alert alert-info">
+
 ### Command Format
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -80,15 +82,20 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 ### Parameter Format
 
 * `r/ROOM`: `ROOM` can be any integer from 1 to 500 inclusive.
-* `d/BOOKING_PERIOD`: `BOOKING_PERIOD` is in the format `YYYY-MM-dd HH:mm to YYYY-M-dd HH:mm`.
-* `n/NAME`: `NAME` can be any String.
-* `p/PHONE_NUMBER`: `PHONE_NUMBER` can be any integer.
-* `e/EMAIL`: `EMAIL` can be any String as long as it contains `@` inside the String.
+* `d/BOOKING_PERIOD`: `BOOKING_PERIOD` is in the format `YYYY-MM-dd HH:mm to YYYY-M-dd HH:mm` where the end to the period must come after the start.
+* `n/NAME`: `NAME` can be any String within 50 characters, and it should not be blank.
+* `p/PHONE_NUMBER`: `PHONE_NUMBER` can be any positive integer between 3 and 15 digits in length (inclusive).
+* `e/EMAIL`: `EMAIL` is in the format `local-part@domain` with a 50-character limit. The local-part should only contain
+  alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start
+  or end with any special characters. This is followed by a '@' and then a domain name. The domain name is made up of
+  domain labels separated by periods. The domain name must end with a domain label that is supported:
+    * gmail, yahoo, outlook, hotmail, icloud.
 * `rm/REMARK`: `REMARK` can be any String less than or equal to 50 characters in length.
 
 </div>
 </details>
---------------------------------------------------------------------------------------------------------------------
+
+---
 <details open>
 <summary><strong>Commands</strong></summary>
 <div markdown="1">
@@ -108,17 +115,17 @@ Format: `help`
 Adds a booking to the bookings book.
 
 Format: `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK`
-![AddCommand.png](images%2FAddCommand.png)
+![AddBooking.png](images%2FAddBooking.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 The room number is used to assign the room type.
 </div>
 
-* Image above shows result of command `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@example.com`
+* Image above shows result of command `add r/11 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`
 
 Examples:
-* `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@example.com`
-* `add r/256 d/2023-02-01 15:00 to 2023-02-02 23:59 n/Betsy Crowe p/99990000 e/betsycrowe@example.com`
+* `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`
+* `add r/256 d/2023-02-01 15:00 to 2023-02-02 23:59 n/Betsy Crowe p/99990000 e/betsycrowe@gmail.com`
 
 ### Listing all bookings : `list`
 
@@ -136,16 +143,16 @@ Edits an existing booking in the bookings book.
 
 Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL]`
 
-![EditCommand.png](images%2FEditCommand.png)
+![EditBooking.png](images%2FEditBooking.png)
 
-* Example image above shows result of command `edit 1 p/91234567 e/johndoe@example.com`
+* Example image above shows result of command `edit 1 p/91234567 e/johndoe@gmail.com`
 * Edits the booking at the specified `INDEX`. The index refers to the index number shown in the displayed booking list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The Room number is used to map to the Room type; there is no way to directly edit the room type without changing the Room number.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email of the 1st booking to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@gmail.com` Edits the phone number and email of the 1st booking to be `91234567` and `johndoe@gmail.com` respectively.
 
 ### Locating bookings by name or room: `find`
 
@@ -174,7 +181,7 @@ Deletes the specified booking(s) from the bookings book.
 
 Format: `delete INDEX ...`
 
-![DeleteCommand.png](images%2FDeleteCommand.png)
+![DeleteBooking.png](images%2FDeleteBooking.png)
 
 * Example image above shows result of command `delete 2`
 * Deletes the booking at the specified `INDEX`.
@@ -193,7 +200,7 @@ Adds the most recently deleted booking back to the system.
 
 Format: `undo`
 
-![UndoCommand.png](images%2FUndoCommand.png)
+![UndoBooking.png](images%2FUndoBooking.png)
 
 * Example image above shows the result of command `undo`
 * If the deleted item was manually added back, then undo was performed, the deleted booking will not be added as it 
@@ -260,14 +267,14 @@ Prefix completions works with `add` and `edit` command and does not validate you
 
 ## Commands Summary
 
-| Action     | Format, Examples                                                                                                                                                                              |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK` <br> e.g., `add r/1 d/2023-01-01 08:00 to 2023-01-02 11:00 n/James Ho p/22224444 e/jamesho@example.com rm/Extra Towels` |
-| **Clear**  | `clear`                                                                                                                                                                                       |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                           |
-| **Undo**   | `undo`                                                                                                                                                                                        |
-| **Edit**   | `edit INDEX [r/ROOM] [d/BOOKING _PERIOD] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rm/REMARK]`<br> e.g.,`edit 2 r/2 d/2023-01-01 08:00 to 2023-01-02 11:00 n/James Lee e/jameslee@example.com`                 |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find 1`                                                                                                                                             |
-| **List**   | `list`                                                                                                                                                                                        |
-| **Help**   | `help`                                                                                                                                                                                        |
-| **Exit**   | `exit`                                                                                                                                                                                        |
+| Action     | Format, Examples                                                                                                                                                                            |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK` <br> e.g., `add r/1 d/2023-01-01 08:00 to 2023-01-02 11:00 n/James Ho p/22224444 e/jamesho@gmail.com rm/Extra Towels` |
+| **Clear**  | `clear`                                                                                                                                                                                     |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                         |
+| **Undo**   | `undo`                                                                                                                                                                                      |
+| **Edit**   | `edit INDEX [r/ROOM] [d/BOOKING _PERIOD] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rm/REMARK]`<br> e.g.,`edit 2 r/2 d/2023-01-01 08:00 to 2023-01-02 11:00 n/James Lee e/jameslee@gmail.com`     |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find 1`                                                                                                                                           |
+| **List**   | `list`                                                                                                                                                                                      |
+| **Help**   | `help`                                                                                                                                                                                      |
+| **Exit**   | `exit`                                                                                                                                                                                      |
