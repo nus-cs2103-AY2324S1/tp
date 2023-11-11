@@ -3,9 +3,9 @@
   title: "User Guide"
   pageNav: 3
 ---
-# Class Manager 2023 User Guide
+# Class Manager 2023 User Guide 
 
-# Welcome to Class Manager 2023 (CM 23)!
+## Welcome to Class Manager 2023 (CM 23)!
 
 Are you tired of managing your teaching assistant duties by juggling notes, spreadsheets, and calendars?
 
