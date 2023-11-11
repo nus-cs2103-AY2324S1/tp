@@ -8,7 +8,7 @@
 
 ## Product Overview
 
-Are you tired of managing candidate applications through cumbersome spreadsheets? Upgrade your hiring process with JABPro, a CLI based desktop app that allows you to easily manage candidate applications, schedule interviews, and gain valuable insights on their interview performance. From interns to full-time roles, software to marketing, JABPro’s versatile interface allows you to keep track of all kinds of job applicants in various industries. Access our self-curated user guide below to learn more on how you can integrate various JABPro’s functions into your workflow.
+Are you tired of managing candidate applications through cumbersome spreadsheets? Upgrade your hiring process with JABPro (JobApplicationsBook Pro), a CLI based desktop app that allows you to easily manage candidate applications, schedule interviews, and gain valuable insights on their interview performance. From interns to full-time roles, software to marketing, JABPro’s versatile interface allows you to keep track of all kinds of job applicants in various industries. Access our self-curated user guide below to learn more on how you can integrate various JABPro’s functions into your workflow.
 
 <!-- * Table of Contents -->
 <page-nav-print />
