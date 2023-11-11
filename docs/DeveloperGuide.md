@@ -784,6 +784,16 @@ the lifeline reaches the end of diagram.
   - Cons: Typing out schedule status in words are case-sensitive. This means that users need to accurately input the 
     schedule status with the correct capitalization, which can add an extra layer of precision required from the user.
 
+**Aspect: Number of `m/` tags accepted**
+- **Alternative 1 (current choice):** Users input more than one `m/` tags and only the last `m/` tag is taken.
+  - Pros: Users who are fast typists can easily correct earlier mistakes without deleting text.
+  - Pros: There are less erroneous behaviours that will result in failure of the command (e.g. entering `m/0 m/0 
+    m/1` will result in the schedule being marked as `completed`, as opposed to encoutering an error).
+  - Cons: Some users may be confused about the behaviour of the command especially if tags provided are conflicting.
+- **Alternative 2:** Users input only one `m/` tag. Multiple tags will result in an error.
+  - Pros: The command is unambiguous to use, since multiple (hence conflicting) tags are not accepted. 
+  - Cons: It is inconvenient for fast typists to have to go back to previously typed commands to edit fields.
+
 ### Unmark schedule feature
 
 The "Unmark Schedule" feature allows users to unmark a schedule that was previously marked as completed or missed. 
@@ -1678,6 +1688,14 @@ Changes the theme of TutorConnect
       Expected: Similar to previous.
 
 
+<div markdown="span" class="alert alert-warning">
+
+:warning: **Manual edits to JSON file:**
+For advanced users who wish to make manual edits to the JSON file, incorrect edits to the datafile can result in 
+unexpected behaviours. Please proceed only if you are confident.
+
+</div>
+
 ## **Appendix: Planned enhancements** 
 
 Given below are the planned enhancements for future iterations of the app.
@@ -1751,16 +1769,25 @@ prefix `d/` which will parse user input in the `yyyy-MM-dd` format into a `Date`
 
 For example, any command that uses the `st/` or `et/` prefix will now use `... d/yyyy-MM-dd st/HH:mm et/HH:m` instead.
 
-### Enhance flexibility of datetime inputs
-In the current implementation, users can only enter datetime in this `yyyy-MM-ddTHH:mm` format. This format can be
-restrictive as it requires leading zeroes and `-` as a separator. To enhance user experience, the input for datetime 
-related parameters should be able to handle most frequently used formats like `2023/1/1` and `10:00pm`.
+### Tutor and schedule information view
+In the current implementation, tutors and schedules with long fields of over 40 characters are truncated. They can 
+be seen by resizing the window. To improve user experience, the information should be able to be viewed by users 
+without the window resizing.
 
 **Proposed implementation**
 
-The parser handling date and time should be updated to handle different date and time formats. This can be achieved by
-having a list of acceptable datetime formats and checking the users input against each one of them. If the user input
-does not match any of the acceptable formats, we should throw a `ParseException`.
+In the `PersonListCard` and `ScheduleListCard`, the column constraints should be removed. This will add a horizontal 
+scroll bar in the event the information to be displayed is too long.
+
+### Calendar row view
+In the current implementation, schedule details cannot be viewed in the calendar for schedules that are shorter than 
+45min long. The additional details are truncated. These details cannot be viewed even with resizing the window and 
+can only be viewed in the `list-s` view.
+
+**Proposed implementation**
+
+In the `CalendarRow`, the column constraints should be removed. This will add a horizontal scroll bar in the event 
+the information to be displayed is too long.
 
 ### Switching back to list view from calendar view
 In the current system, when executing any commands, including actions like marking, unmarking, or deleting schedules 
@@ -1799,46 +1826,22 @@ find and locate a particular schedule.
 The schedules would be sorted first by `StartTime`, then by `EndTime`, and finally alphabetically by the tutor's name.
 This would make the schedule list more organised, making it easier to use and navigate for the user.
 
-### Help window opening animation fix 
-After moving the help window to the left, subsequent display of the help window will have a flickering animation before
-the window settles in the center of the screen.
+### Accepting one input for theme change
+In the current implementation, the `theme` command disregards any other input after the first. For example, `theme 
+dark blue` is regarded as `theme dark`. This may cause confusion for some users.
 
 **Proposed implementation**
 
-In `HelpWindow.java`, the window should be centred on instantiation with `getRoot().centerOnScreen()`.
-Additionally, the `show` method should be modified, to center first before showing the window, essentially swapping the
-order of the two.
-
-### Allow partial name search for find command
-
-The `find-t` and `find-s` commands should allow users to search for tutors without having to input their full names.
-
-The current two `find` commands only allow searching for tutor when a full word in their names matches the user 
-input exactly. We plan to change search to match partial words instead of only a full word match.
-
-This would allow users to search for tutors without knowing the tutors' exact name. They can search using just a few
-characters of the name.
-
-For example: `find-t john` will now match: `john`, `JOHN123` and `johnetta`.
-
-**Proposed implementation**
-
-A new method `containsPartialWordIgnoreCase` can be added in `StringUtil` that will be used by
-`NameContainsKeywordsPredicate` and `TutorNameContainsKeywordsPredicate` to test for a match.
-
-This method will call `String::contains` instead of `String::equals` to match partial words too.
-
-Depending on the command prefix, the parse method of the `findTutorCommandParser` or `findScheduleCommandParser` will 
-create the `find` command object with the updated predicate.
-
-This would then be used in the `execute` method of the `find` command object to get the filtered tutor 
-or schedule list with part of their names matching the user input.
+Within the parsing of the input in `ThemeCommandParser`, a `ParseException` would be thrown when more than one word 
+after the command word is detected. This means that `theme dark blue` would result in a `ParseException` and only one 
+word after the command word `theme` is accepted.
 
 ### List schedule by pending status
 In our current implementation, `list-s` only filters schedule by `COMPLETED` or `MISSED` status. Any schedules that have 
 not been assigned one of these statuses are categorised as unmarked, and it's important to include them in the list-s results.
 
 **Proposed implementation**:
+
 1. Update `list-s` command and `m/` parameter value to accept an additional value for unmarked status to filter by, such as `m/u`.
 2. This can be done by modifying `ListScheduleCommandParser.java` and `Status.java` to map an integer to enum `Status` that represents umarked status.
 3. When `ListScheduleCommand:execute` runs, the command should accept another input from `m/` parameter that represents the umarked status, such as `m/u`.
