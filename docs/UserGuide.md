@@ -35,7 +35,7 @@ pageNav: 3
 
 ## Introduction
 
-#### ***Revolutionise your studying experience with lesSON!***
+#### ***Revolutionise your studying experience with <span style="color: green;">lesSON</span>!***
 
 Welcome to the user guide for <span style="color: green;">lesSON</span>, your ultimate companion in mastering the
 Computer Science curriculum at the National University of Singapore (NUS). This guide is designed to provide you with a
@@ -53,7 +53,7 @@ Made with the intention to maximise your study experience, here are some feature
 1. **Enhanced Memory Retention:** Thanks to lesSON's inbuilt [spaced repetition](#definitions) system, you can
 supercharge your memory and recall the important details needed. The app optimizes when you should review your
 flashcards, ensuring you remember and grasp complex concepts with ease.
-2. **Intuitive Card Categorization:** lesSON helps you categorize your flashcards based on subject. This feature
+2. **Intuitive Card Categorisation:** lesSON helps you categorize your flashcards based on subject. This feature
 makes it a breeze to organize and access specific topics, keeping your study sessions focused and productive.
 
 *... and many more!*
@@ -63,12 +63,12 @@ makes it a breeze to organize and access specific topics, keeping your study ses
 Before you get started with <span style="color: green;">lesSON</span>, here's what we recommend you need to make
 full use of the app:
 
-- **Comfortable with English**: Since lesSON is an English-based app, a basic understanding of the language will
-ensure a smooth and enjoyable experience.
-- **Typing Proficiency**: lesSON primarily uses a [Command Line Interface (CLI)](#definitions) on top of a
-[Graphic User Interface (GUI)](#definitions). This means that most of the interaction with
-<span style="color: green;">lesSON</span> is through the use of [keystrokes](#definitions). Being comfortable and
-efficient at typing will help you make the most of the app and enhance your user experience.
+- **Comfortable with English**: Since <span style="color: green;">lesSON</span> is an English-based app, a basic
+understanding of the language will ensure a smooth and enjoyable experience.
+- **Typing Proficiency**: <span style="color: green;">lesSON</span> primarily uses a
+[Command Line Interface (CLI)](#definitions) on top of a [Graphic User Interface (GUI)](#definitions). This means that
+most of the interaction with <span style="color: green;">lesSON</span> is through the use of [keystrokes](#definitions).
+Being comfortable and efficient at typing will help you make the most of the app and enhance your user experience.
 
 [Go to Table of Contents](#table-of-contents)
 
@@ -83,7 +83,7 @@ If you are a first time user, do visit our seamless onboarding process explained
 For beginners, we recommend familiarising yourself with the basic commands shown in our [tutorial](#tutorial)
 for new users. <br>
 <br>
-If you are already familiar with lesSON, do try out all of our other [features](#feature-list). <br> 
+If you are already comfortable using <span style="color: green;">lesSON</span>, do try out all of our other [features](#feature-list). <br> 
 For a summary of available commands, visit [here]().
 
 ### Legend
@@ -672,6 +672,11 @@ Shortcut to open the command prompt:
 - For Windows: Press <kbd>Windows</kbd> + <kbd>R</kbd> and enter `cmd`.
 - For macOS: Press <kbd>Command</kbd> + <kbd>Space</kbd> and enter `Terminal`.
 
+### App not showing
+
+**Q:** The application is running fine, but I am unable to see the [GUI](#definitions). What should I do? <br>
+**A:** This is a currently [known issue](#known-issues) with a temporary hotfix. We are working on a solution.
+
 [Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -681,9 +686,10 @@ Shortcut to open the command prompt:
 1. As of v1.4, users can create duplicate tags for the same flashcard. We plan to enforce uniqueness of tags for a
 flashcard in future enhancements. Until then, please do take caution to avoid adding duplicate tags for the same
 flashcard.
-2. As of v1.4, When using multiple screens, if you move the application to a secondary screen, and later switch to using only the
-primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the
-application before running the application again.
+2. As of v1.4, the app may not show for users with multiple displays. If you relocate the app to a secondary display and
+subsequently cease using the secondary display, the app will continue to run but will no longer be visible on your
+primary display. Closing the app and re-running it will not solve the issue. We are working on a solution but until then,
+we recommend relocating the app back to your main display before disconnecting your secondary display.
 
 If you encountered any other bugs or errors, do let us know with the relevant details (e.g. screenshots) via our
 official channels found [here](#contact-us).
