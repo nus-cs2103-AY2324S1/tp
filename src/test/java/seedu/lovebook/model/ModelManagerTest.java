@@ -109,6 +109,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void executeRandomPerson_noPerson() throws CommandException {
+        assertThrows(CommandException.class, () -> modelManager.getRandomDate());
+    }
+
+    @Test
     public void equals() {
         LoveBook loveBook = new LoveBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         LoveBook differentLoveBook = new LoveBook();
