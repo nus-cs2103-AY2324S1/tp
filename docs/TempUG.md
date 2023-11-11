@@ -774,11 +774,11 @@ Example usages:
 * `filter -name CS2103T Lab`
 
 Success outputs:
-* Input: `filter -before 2022/10/10 -subject Mathematics`
+* Input: `filter -before 2023/12/20 -subject Mathematics`
 ```
 Filtered schedule list successfully!
 ```
-![Success for filter 1](images/filter/filter_positive_1.png)
+![Success for filter 2](images/filter/filter_positive_2.png)
 Failure outputs:
 * Input: `filter -before 2022/10/10 -after 2022/01/01`
   * Error: Both the `-before` and `-after` flags are specified. Use only one of `-before`, `-after`, and `-on` in the same command.
