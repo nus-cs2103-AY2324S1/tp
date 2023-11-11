@@ -328,10 +328,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Extensions**
+
+* 2a. The filtered list is empty.
+
+  Use case ends
+
 **Use case: UC07 - Filter tags**
 
 1. User requests to filter the list contacts.
 2. ConText displays a filtered list of contacts based on the given tag.
+
+**Extensions**
+
+* 2a. The filtered list is empty.
+
+  Use case ends
 
 *{More to be added}*
 
