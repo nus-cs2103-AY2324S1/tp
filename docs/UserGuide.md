@@ -230,7 +230,7 @@ Output:
 Filter the list of flash cards by the specified language. All the flash cards whose word or translation is in the specified language will be displayed.
 * The search is case-insensitive. e.g `french` will match `French`
 
-[Command Format](#commands): `language <SPECIFIED_LANGUAGE>`
+[Command Format](#commands): `language [<SPECIFIED_LANGUAGE>]`
 
 Examples:
 * `language French` displays a list where each word or translation is from French language.
