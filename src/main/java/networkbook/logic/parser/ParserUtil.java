@@ -27,7 +27,6 @@ import networkbook.model.util.UniqueList;
 public class ParserUtil {
 
     // TODO: avoid returning null for optional fields
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_PHONE_DUPLICATE = "Your list of phones contains duplicates.\n"
             + "Please ensure that you do not input the same phone more than once.";
     public static final String MESSAGE_EMAIL_DUPLICATE = "Your list of emails contains duplicates.\n"
@@ -49,10 +48,10 @@ public class ParserUtil {
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
+    public static Index parseIndex(String oneBasedIndex, String errorMessage) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(errorMessage);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }

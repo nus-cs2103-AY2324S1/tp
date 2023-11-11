@@ -48,17 +48,10 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Index index;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(
-                            Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            AddCommand.MESSAGE_USAGE
-                    ),
-                    pe
-            );
-        }
+        index = ParserUtil.parseIndex(argMultimap.getPreamble(),
+                String.format(
+                        Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_USAGE));
 
         argMultimap.verifyNoDuplicatePrefixesFor(
                 CliSyntax.PREFIX_NAME,

@@ -95,6 +95,24 @@ public class AddCommandParserTest {
     }
 
     @Test
+    public void parse_invalidIndex_failure() {
+        // negative index
+        assertParseFailure(parser, CommandTestUtil.INVALID_INDEX_DESC_NEGATIVE
+                        + CommandTestUtil.VALID_COURSE_DESC + CommandTestUtil.VALID_COURSE_AMY,
+                        MESSAGE_INVALID_FORMAT);
+
+        // zero
+        assertParseFailure(parser, CommandTestUtil.INVALID_INDEX_DESC_ZERO
+                        + CommandTestUtil.VALID_TAG_DESC + CommandTestUtil.VALID_TAG_FRIEND,
+                MESSAGE_INVALID_FORMAT);
+
+        // integer overflow
+        assertParseFailure(parser, CommandTestUtil.INVALID_INDEX_DESC_OVERFLOW
+                        + CommandTestUtil.VALID_TAG_DESC + CommandTestUtil.VALID_TAG_FRIEND,
+                MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
     public void parse_nameSpecified_failure() {
         Index index = TypicalIndexes.INDEX_FIRST_PERSON;
         String userInput = index.getOneBased() + CommandTestUtil.VALID_NAME_DESC;

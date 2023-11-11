@@ -21,18 +21,13 @@ public class OpenLinkCommandParser implements Parser<OpenLinkCommand> {
 
         Index personIndex;
 
-        try {
-            personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, OpenLinkCommand.MESSAGE_USAGE),
-                    pe
-            );
-        }
+        personIndex = ParserUtil.parseIndex(argMultimap.getPreamble(),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, OpenLinkCommand.MESSAGE_USAGE));
 
         argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_INDEX);
 
-        Index linkIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index linkIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, OpenLinkCommand.MESSAGE_USAGE));
 
         return new OpenLinkCommand(personIndex, linkIndex);
     }
