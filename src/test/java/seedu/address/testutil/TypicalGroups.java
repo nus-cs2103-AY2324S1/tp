@@ -19,14 +19,15 @@ public class TypicalGroups {
 
     public static final Group CS2102 = new GroupBuilder().withName("CS2102")
             .withGroupRemark("CS2102 remark").withListOfGroupMates("Amelia", "Benson", "Charles", "David")
-            .withTimeIntervalList("mon 1200 - mon 1400", "wed 1600 - thur 1800").build();
+            .withTimeIntervalList("mon 1200 - mon 1400", "wed 1600 - thu 1800").build();
 
     public static final Group CS2103 = new GroupBuilder().withName("CS2103")
             .withGroupRemark("CS2103 remark").withListOfGroupMates("Annie", "Ben", "Cricket", "Dog")
-            .withTimeIntervalList("mon 1200 - mon 1400", "wed 1600 - thur 1800").build();
+            .withTimeIntervalList("mon 1200 - mon 1400", "wed 1600 - thu 1800").build();
+
     public static final Group CS2105 = new GroupBuilder().withName("CS2105")
             .withGroupRemark("CS2105 remark").withListOfGroupMates("Avner", "Bernie", "Coin", "Dawson")
-            .withTimeIntervalList("mon 1200 - mon 1400", "wed 1600 - thur 1800").build();
+            .withTimeIntervalList("mon 1200 - mon 1400", "wed 1600 - thu 1800").build();
 
 
     public static GroupList getTypicalPGroup() {
