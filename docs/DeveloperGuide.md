@@ -1,9 +1,11 @@
 ---
-layout: page
+layout: default
 title: Developer Guide
 ---
 
-# Table of Contents
+# Developer Guide for <span style="color: green;">lesSON</span> 
+
+## Table of Contents
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
 3. [Design](#design)
@@ -14,8 +16,9 @@ title: Developer Guide
    - [Storage component](#storage-component)
    - [Common classes](#common-classes)
 4. [Implementation](#implementation)
+   - [Add]()
    - [Undo/Redo](#proposed-undoredo-feature)
-   - [Filter](#proposed-filter-by-tag-feature)
+   - [Filter](#filter-by-tag-feature)
    - [Markdown Support](#proposed-markdown-support-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
@@ -139,7 +142,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W17-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -173,7 +176,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 Below is an example of the object diagram of how the cards are stored in the `Deck` class
 
-<img src="images/DeckObjectDiagram.png" width="600" />
+<img src="images/DeckObjectDiagram.png"  />
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -200,7 +203,7 @@ data will be created
 
 Below is the sequence diagram for this flow:
 
-<img src="images/AddCommandSequenceDiagram.png" width="600" />
+<img src="images/AddCommandSequenceDiagram.png" width="1000" />
 
 #### Design Considerations
 
@@ -260,7 +263,7 @@ Step 2. The user executes `delete 5` command to delete the 5th card in the deck.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new card. The `add` command also calls `Model#commitDeck()`, causing another modified deck state to be saved into the `deckStateList`.
+Step 3. The user executes `add q/What …​` to add a new card. The `add` command also calls `Model#commitDeck()`, causing another modified deck state to be saved into the `deckStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -295,7 +298,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitDeck()`. Since the `currentStatePointer` is not pointing at the end of the `deckStateList`, all deck states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitDeck()`. Since the `currentStatePointer` is not pointing at the end of the `deckStateList`, all deck states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add q/What …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -440,22 +443,6 @@ but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
     * Cons: 
       1. Harder to manage codebase because `PractiseCommand` will have two different responsibilities (i.e. practising in order and randomly)
 
-### Search Filter feature
-
-Introducing a search feature that allows users to search for specific flashcards based on their questions. This feature empowers users with greater navigability over their study materials.
-
-Below is an example of the usage of the Search filter
-
-Step 1: Assuming the user has existing cards in lesson, with their own set of questions and answers
-
-Step 2: When you want to search for cards with a particular staring phrase, execute the `search q/What` command.
-
-Step 3: The system will then display the cards that match the starting phrase.
-
-Step 4: To return to viewing your full deck of cards, simply execute the `list` command to view all cards stored in lesSON
-
-Step 5: If the user wishes to practise from this view, simply `practise index` for the index of the card
-
 ### Markdown support feature
 
 #### Implementation
@@ -537,11 +524,16 @@ Step 5: The card is automatically sorted in the list according to the new `nextP
 will now appear earlier when using the `practice` command without index now.
 
 
-### Export Functionality
+
+### Data Transfer Functionality
+
+Both export and import features are not to be mistaken as a **Command** as it is meant to be used before the user decides to use our application
+for revision purposes.
+
+
+#### Export 
 
 We implemented an export functionality to allow our users to port over their data with ease.
-This is not to be mistaken as a **Command** as it is meant to be used after the user decides to use our application
-for revision purposes.
 
 The export button will allow users to access a copy of the `deck.json` file and has a copy button function that allows
 users to copy over their deck.json file with ease.
@@ -551,27 +543,24 @@ users to copy over their deck.json file with ease.
 **Aspect: How can we showcase the data while preventing users from editing directly:**
 
 * We decided that showing a copy of the text found in `deck.json` will prevent the user from directly editing
-`deck.json`, and thus prevents any accidental erasure of the deck should the user tamper with it unknowningly
-
+`deck.json`, and thus prevents any accidental erasure of the deck should the user tamper with it unknowningly.
 
 Given below is an example usage of the Export Feature.
 
-Step 1: User generates cards according to their needs and produced a deck for revision
+1. User generates cards according to their needs and produced a deck for revision
 
-Step 2: User wishes to share their deck with peers or online, and needs a fixed format
+2. User wishes to share their deck with peers or online, and needs a fixed format
 to be used across all lesSON applications
 
-Step 3: User navigates to the menu bar at the top of the screen and presses on it.
+3. User navigates to the menu bar at the top of the screen and presses on it.
 
-Step 4: The dropdown menu displays the export function, and it produces the text of the `deck.json` to be copied
+4. The dropdown menu displays the export function, and it produces the text of the `deck.json` to be copied
 
-Step 5: User proceeds to click on the copy data button, and it is copied to the users clipboard
+5. User proceeds to click on the copy data button, and it is copied to the users clipboard
 
-### Import Functionality
+### Import
 
 We implemented an import functionality to allow our users to port over their data with ease.
-Similarly to Export, this is not to be mistaken as a **Command** as it is meant to be used before the user decides to use our application
-for revision purposes.
 
 The Import button will allow users who have received the text from the Export function to transfer the deck of carss over, thereby
 effectively importing over the shared deck of cards generated by another user.
@@ -590,19 +579,19 @@ effectively importing over the shared deck of cards generated by another user.
 
 Given below is an example usage of the Import Feature.
 
-Step 1: User A has used lesSON and already a pre-existing deck of cards
+1. User A has used lesSON and already a pre-existing deck of cards.
 
-Step 2: User A then clicks on the Export button (mentioned above) <!-- Put link in the DG -->
+2. User A then clicks on the Export button (mentioned above).
 
-Step 3: User B receives the text from User A either via message, text or email.
+3. User B receives the text from User A either via message, text or email.
 
-Step 4: User B opens lesSOn and clicks on the menu button
+4. User B opens lesSON and clicks on the menu button.
 
-Step 5: User B clicks on the Import menu button and copies and pastes the text received from A into the text field.
+5. User B clicks on the Import menu button and copies and pastes the text received from A into the text field.
 
-Step 6: User B clicks on Import data button which will then import the data and closes the application
+6. User B clicks on Import data button which will then import the data and closes the application
 
-Step 7: User B re-opens lesSOn to see his new functional deck of cards.
+7. User B re-opens lesSON to see his new functional deck of cards.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -615,7 +604,28 @@ Step 7: User B re-opens lesSOn to see his new functional deck of cards.
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned Enhancements**
 
+1. Tag
+    - Currently duplicate tags can be created through the edit and add function.
+
+2. Hint supporting `r`
+    - Hint does not support the `r` syntax
+
+3. Markdown stacking syntax
+    - We are unable to stack multiple markdown syntax for a particular phrase
+
+    
+
+---------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+
+
+
+
+---------------------------------------------------------------------------
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -877,3 +887,5 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+

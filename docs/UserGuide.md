@@ -245,9 +245,9 @@ testing your memory with the most difficult flashcard.
 Adds a flashcard to the deck for the user.
 
 #### Format:
-```
+<code>
 add q/QUESTION a/ANSWER [t/TAG...] [h/HINT]
-```
+</code>
 
 #### Examples:
 
@@ -296,10 +296,8 @@ delete 2
 
 #### Expected Outputs:
 1. User Input: 
-   ```
-   add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS
-   delete 1
-   ```
+   >```add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS``` <br>
+   >```delete 1```
 
 2. Successful Output
    1. Result box displays: `Deleted Card: Question: opcode for R format instructions; Answer: 000000`
@@ -708,7 +706,7 @@ edit 1 q/How many bits can a <u>Half Adder</u> add up
 2. Do ensure that the phrase intended for styling is wrapped within an open and close syntax of the same type, i.e. `**bold**` for bold `*italics*` for italics and `<u>underline</u>` for underline. 
 3. In the case when unexpected MarkDown format is observed, edit the flashcard again with the without the MarkDown syntax/with appropriate syntaxes.
 
-# Importing and Exporting Decks
+## Importing and Exporting Decks
 
 <div markdown="block" class="alert alert-info">
 

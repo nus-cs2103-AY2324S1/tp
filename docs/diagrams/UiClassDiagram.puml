@@ -15,6 +15,9 @@ Class CardListPanel
 Class DisplayCard
 Class StatusBarFooter
 Class CommandBox
+Class GoalBox
+Class ExportWindow
+Class ImportWindow
 }
 
 package Model <<Rectangle>> {
@@ -30,8 +33,9 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
+MainWindow *-down-> "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down-> "1" GoalBox
 MainWindow *-down-> "1" CardListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
@@ -46,6 +50,7 @@ CardListPanel --|> UiPart
 DisplayCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+GoalBox --|> UiPart
 
 DisplayCard ..> Model
 UiManager -right-> Logic
