@@ -36,4 +36,4 @@ It is written in Java.
 ### **Developer Guide**
 
 - Update User Stories (PR[#49](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/49))
-- 
+

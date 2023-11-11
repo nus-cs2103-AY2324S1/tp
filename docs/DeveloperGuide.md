@@ -151,19 +151,12 @@ How the parsing works:
 
 #### **AddressBook**
 
-- stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-- stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
-  this list so that the UI automatically updates when the data in the list change.
-- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
-  a `ReadOnlyUserPref` objects.
-- does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
-  should make sense on their own without depending on other components)
+- Stores the address book data i.e., all `Person` objects (which are contained in a `UniqueEntryMap` object).
+- Stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+- Stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+- Does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
-</div>
-
+##### **Person class diagram**
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 #### **TransactionBook**
@@ -171,15 +164,16 @@ How the parsing works:
 - Introduces a new component, the `TransactionBook`, responsible for managing financial transactions.
 - Utilizes a `UniqueEntryMap` to associate transactions with their unique `transactionId`.
 - Each transaction consists of the following:
-    - TransactionId
-    - TransactionType
-    - Description
-    - Amount
-    - Date
-    - PersonId (Optional association with a staff member)
-- Similar to the `AddressBook`, maintains an `ObservableList<Transaction>` that can be observed by external entities,
-  facilitating automatic updates in the UI.
+  - TransactionId
+  - TransactionType
+  - Description
+  - Amount
+  - Date
+  - PersonId (Optional association with a staff member)
+- Similar to the `AddressBook`, maintains an `ObservableList<Transaction>` that can be observed by external entities, facilitating automatic updates in the UI.
+- In addition to a _filtered_ list like in `AddressBook`, the `TransactionBook` also maintains a _sorted_ list of transactions, which is used to sort filtered transactions by relevant attributes.
 
+##### **Transaction class diagram**
 <img src="images/TransactionClassDiagram.png" width="450" />
 
 ### Storage component
@@ -234,7 +228,7 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the add
 calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
 to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
 state.
-
+    
 ![UndoRedoState1](images/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also
