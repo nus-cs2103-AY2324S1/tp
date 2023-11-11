@@ -19,7 +19,7 @@ public class ApplicantPredicate implements Predicate<Applicant> {
     @Override
     public boolean test(Applicant applicant) {
         return predicateList.stream().reduce(false, (accumulator, pred)
-                -> accumulator || pred.test(applicant), (x, y) -> x || y);
+                -> accumulator || pred.test(applicant), (accumulator1, accumulator2) -> accumulator1 || accumulator2);
     }
 
     @Override

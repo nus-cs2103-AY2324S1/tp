@@ -54,7 +54,7 @@ destroy FindInterviewCommandParser
 AddressBookParser --> LogicManager : fi
 deactivate AddressBookParser
 
-LogicManager -> FindInterviewCommand : execute()
+LogicManager -> FindInterviewCommand : execute(model)
 activate FindInterviewCommand
 
 FindInterviewCommand -> JobPredicate : test(interview)
@@ -63,7 +63,7 @@ activate JobPredicate
 JobPredicate --> FindInterviewCommand
 deactivate JobPredicate
 
-FindInterviewCommand -> Model : updateFilteredPersonList(predicate)
+FindInterviewCommand -> Model : updateFilteredInterviewList(predicate)
 activate Model
 
 Model --> FindInterviewCommand

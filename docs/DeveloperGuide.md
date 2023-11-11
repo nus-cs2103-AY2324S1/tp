@@ -168,12 +168,12 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The find interview by job role feature allows users to query the list of added interview for interviews that match the job role via the command `find-i KEYWORD(S) `, where `KEYWORD` must not
+The find interview by job role feature allows users to query the list of added interview for interviews that match the job role via the command `find-i KEYWORD(S)`, where `KEYWORD(S)` must not
 be an empty string.
 
 The `find-i` command is facilitated by the `FindInterviewCommand`, `FindInterviewCommandParser`, and `JobContainsKeywordsPredicate`.
 It uses `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` to apply the `JobContainsKeywordsPredicate`
-in order to produce a filtered list containing only entries whose job correspond to `KEYWORD [MORE_KEYWORD]...`.
+in order to produce a filtered list containing only entries whose job correspond to `KEYWORD(S)`.
 
 #### How is the command executed
 1. The user inputs the `find-i` command together with non-empty job role as keyword(s);
@@ -182,7 +182,7 @@ in order to produce a filtered list containing only entries whose job correspond
 4. The `FindInterviewCommandParser` constructs `JobContainsKeywordsPredicate` containing the keyword as predicate.
 5. The `LogicManager` executes the `FindInterviewCommand` which calls the `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` method.
 6. The `FindInterviewCommand` construct `CommandResult` containing the number of successful interviews filtered in the final list and returns it to `LogicManager`.
-7. The GUI will be updated automatically by when the list changes.
+7. The GUI will be updated automatically when the list changes.
 
 The following sequence diagram shows how the `find-i` operation works:
 
@@ -226,23 +226,51 @@ The following activity diagram summarizes what happens when a user executes a ne
       * Less powerful since users can only search job based on one keyword.
 
 ### Find applicant feature
-
 #### Implementation
 
 The find applicant feature allows users to query the list of applicants for applicants
 whose name, phone, email, address and tags match the given arguments.
 
 This can be done
-via the command `find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER]
-[e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] t/KEYWORDS [MORE_KEYWORDS]...]`.
+via the command `find-a [n/KEYWORD(S)] [p/NUMBER]
+[e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]`.
 
 The find applicant feature is facilitated by `FindApplicantCommand`, `FindApplicantCommandParser`,
 `AddressContainsKeywordsPredicate`, `EmailContainsKeywordsPredicate`, `NameContainsKeywordsPredicate`,
-`PhoneContainsNumberPredicate`, `TagContainsKeywordsPredicate`.
+`PhoneContainsNumberPredicate`, `TagContainsKeywordsPredicate` and `ApplicantPredicate`.
 It uses `Model#updateFilteredApplicantList(Predicate<Applicant>)` to apply the predicates
 in order to produce a filtered list containing only the filtered entries.
 
 #### How is the command executed
+1. The user inputs the `find-a` command together with arguments.
+2. The `LogicManager` receives The LogicManager receives the command string and forwards it to the AddressBookParser.
+3. The `AddressBookParser` checks the type of command and constructs
+   `FindCommandParser` to parse the arguments.
+4. If the arguments contain the `n/` prefix, a `NameContainsKeywordsPredicate` is created with the keywords.
+5. If the arguments contain the `p/` prefix, a `PhoneContainsNumberPredicate` is created with the number.
+6. If the arguments contain the `e/` prefix, a `EmailContainsKeywordsPredicate` is created with the keywords.
+7. If the arguments contain the `a/` prefix, a `AddressContainsKeywordsPredicate` is created with the keywords.
+8. If the arguments contain the `t/` prefix, a `TagContainsKeywordsPredicate` is created with the keywords.
+9. An `ApplicantPredicate` is created with all the predicates created above.
+10. The `FindCommandParser` constructs the `FindCommand` with the `ApplicantPredicate` 
+and returns it to `LogicManager`.
+11. The `LogicManager` executes the `FindCommand` which calls the 
+`Model#updateFilteredApplicantList(Predicate<Interview> predicate)` method.
+12. The `FindCommand` constructs a `CommandResult` containing the number of applicants
+found and the success message. 
+13. `FindCommand` returns the `CommandResult` to LogicManager.
+14. The GUI updates automatically when the list changes.
+
+The following sequence diagram shows how the `find-a` operation works:
+![FindApplicantSequenceDiagram](images/FindApplicantSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for FindCommandParser should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a new command:
+![FindApplicantActivityDiagram](images/FindApplicantActivityDiagram.png)
+
 
 #### Design Considerations
 
@@ -386,7 +414,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 The `list-freetime DATE` command is facilitated by the `ListFreeTimeCommand`, `ListFreeTimeCommandParser`, along with the other internal classes omitted for brevity.
 #### How is the command executed
-1. The user inputs the `list-freetime DATE`
+1. The user inputs the `list-freetime DATE` command.
 2. The `LogicManager` receives the command string and forwards it to the `AddressBookParser`.
 3. The `AddressBookParser` checks the type of command and constructs `ListFreeTimeCommandParser` to parse the keyword(s).
 4. The `execute` method of the `ListFreeTimeCommandParser` is called, which will call the `parseDate` method of the `TimeParser` API class.
@@ -416,10 +444,55 @@ Aspect: How the command finds free times:
 ### List all interviews for today feature
 
 #### Implementation
+The list all interviews today feature allows users to list all the interviews that are scheduled on the day the user
+executes the command. 
 
 #### How is the command executed
+1. The user inputs the `list-i-today` command.
+2. The `LogicManager` receives the command string and forwards it to `AddressBookParser`.
+3. The `AddressBookParser` checks the type of command and constructs a `ListInterviewsTodayCommand` instance.
+4. `AddressBookParser` returns the `ListInterviewsToday` instance to `LogicManager`.
+5. The `LogicManager` executes the `ListInterviewsToday` command.
+6. The execute method in `ListInterviewsToday` calls the 
+`Model#updateFilteredInterviewList(Predicate<Interview> predicate)` method and
+passes in a predicate which tests if an interview is scheduled for today.
+7. `ListInterviewsToday` constructs a `CommandResult` containing the success message 
+and returns it `LogicManager`.
+8. The GUI updates automatically when the list changes.
+
+The following sequence shows how the `list-i-today` command works:
+![ListInterviewsTodaySequenceDiagram](images/ListInterviewsTodaySequenceDiagram.png)
 
 #### Design consideration
+Aspect: Command format
+* **Alternative 1 (current choice):** `list-i-today`
+  * Pros:
+    * Easy and fast to type
+    * Easy to implement
+  * Cons:
+    * Can only list interviews today
+    * Need to type a few hyphens which can be less intuitive than space
+
+* **Alternative 2:** `list-i DATE`
+  * Pros:
+    * Can list interviews on any date
+    * More flexible
+  * Cons:
+    * Can be annoying to type exact date
+    * Listing interviews today requires the user to know the date today
+    * Harder to implement
+* **Alternative 3:** `list-i today`
+  * Pros:
+    * Some users may prefer typing spaces instead of hyphens
+  * Cons:
+    * Harder to implement as the parser needs to differentiate between 
+`list-i` and `list-i today`
+    * Some users may prefer the hyphen instead of a space
+
+
+
+
+
 
 ### List interviews done/not done feature
 
@@ -457,7 +530,7 @@ The `rate` feature is facilitated by the `Rating` class, `RateCommand` and the `
 
 #### How is the command executed
 1. The user inputs the `rate` command together with the valid parameters.
-2. The `LogicManager` receives the command string and forwarded it to the `AddressBookParser`.
+2. The `LogicManager` receives the command string and forwards it to the `AddressBookParser`.
 3. The `AddressBookParser` checks the type of command and constructs `RateCommandParser` to parse the parameters.
 4. The `RateCommandParser` will pass the `INTERVIEW_INDEX` and `RATING` to the `ParseUtil` to check for validity and creates `RateCommand`.
 5. The `LogicManager` executes the `RateCommand` which calls the `Model#getFilteredInterviewList` to get the size of the current list to ensure the `INTERVIEW_INDEX` is within the interview list size.
@@ -790,6 +863,10 @@ On the other hand, the duplication of phone number and email will be handled in 
 company in general. We plan to allow find-i to search for "" (empty string) and " " (whitespaces) so that interviews with applicants that are applying to the
 company in general can be found with the command.
 
+7. Currently there is no way to unmark an interview after marking the interview since an interview's status cannot change once it is done. 
+However, some users may accidentally mark an unfinished interview as done. In the future, an unmark feature will
+be implemented to allow users to change the status of interviews from done to not done.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -834,27 +911,59 @@ Command: `exit`
 ### Adding an applicant
 Command: `add-a`
 
+1. Adding an applicant
+   1. Test case: `add-a n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/engineer t/frontend` <br>
+       Expected: An applicant `John Doe` is added with the phone number `98765432`, email `johnd@example.com`, 
+       address `311, Clementi Ave 2, #02-25` and the tags `engineer` and `frontend`.
+   2. Test case: `add-a n/John Doe` <br>
+       Expected: No applicant is added. Error details shown in the status message.
+
 ### Deleting an applicant
 Command: `delete-a`
 
 1. Deleting an applicant while all applicants are being shown
     1. Prerequisites: List all applicants using the `list-a` command. Multiple applicants in the list.
-    2. Test case: `delete-a 1`
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
-    3. Test case: `delete-a 0`
+    2. Test case: `delete-a 1` <br>
+       Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the status message. 
+    3. Test case: `delete-a 0` <br>
        Expected: No applicant is deleted. Error details shown in the status message.
+2. Deleting an applicant while no applicants are in the list
+   1. Prerequisites: Clear all applicants using the `clear` command. List is empty.
+   2. Test case: `delete-a 1` <br>
+      Expected: No applicant is deleted. Error details shown in the status message. 
 
 ### Editing an applicant
 Command: `edit-a`
 
+1. Editing an applicant while all applicants are being shown
+   1. Prerequisites: List all applicants using the `list-a` command. Multiple applicants in the list.
+   2. Test case: `edit-a 1 n/Bob` <br>
+       Expected: First applicant's name is edited to `Bob`. Details of the edited applicant shown in the status message.
+   3. Test case: `edit-a 0` <br>
+       Expected: No applicant is edited. Error details shown in the status message.
+   4. Test case: `edit-a 1` <br>
+       Expected: No applicant is edited. Error details shown in the status message.
+
 ### Finding applicants from the list
 Command: `find-a`
+
+1. Finding an applicant while all applicants are being shown
+   1. Prerequisites: List all applicants using the `list-a` command. Multiple applicants in the list. 
+    One of the applicants is named `John Doe`. Another applicant `Alex Yeoh` has phone number `87438807`. 
+    No other applicant has `John` as part of their name. No other applicant has the number `874` as part of their phone number.
+   2. Test case: `find-a n/John p/874` <br>
+       Expected: Two applicants are shown in the applicant list. The applicants shown are `John Doe` and `Alex Yeoh`.
+        The number of applicants found is shown in the status message.
+   3. Test case: `find-a` <br>
+       Expected: List shown on GUI does not change. Error details shown in the status message.
+   4. Test case: `find-a n/` <br>
+      Expected: List shown on GUI does not change. Error details shown in the status message.
 
 ### Listing all applicants
 Command: `list-a`
 
 1. Listing all the applicants
-   1. Test case: `list-a`</br>Expected: Shows all the applicants in the applicant list. Success message is displayed.
+   1. Test case: `list-a`<br>Expected: Shows all the applicants in the applicant list. Success message is displayed.
 
 ### Adding an interview
 Command: `add-i`
@@ -930,6 +1039,8 @@ Command: `list-freetime`</br>
 
 ### Listing all interviews for today
 Command: `list-i-today`
+1. Listing all interviews today
+    1. Test case: `list-a`<br>Expected: Shows all interviews scheduled for today (i.e. the date when the command was executed) in the interview list. Success message is displayed.
 
 ### Marking an interview as done
 Command: `mark`
