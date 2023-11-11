@@ -191,7 +191,7 @@ The alias for this command is `addm`.
 
 <div markdown="block" class="alert alert-warning">:exclamation: **CAUTION:**
 
-* For a new member to be created, the `MEMBER_NAME`, `PHONE_NUMBER`, `EMAIL`, and `TELEGRAM_HANDLE` have to all be unique.
+* For a new member to be created, the `PHONE_NUMBER`, `EMAIL`, and `TELEGRAM_HANDLE` have to all be unique.
   Otherwise, the system will reject this as a duplicate member.
   <br/>
 * The last valid parameter found will treat all of the characters after it as its input.
@@ -465,7 +465,7 @@ The alias for this command is `adda`.
 
 <div markdown="block" class="alert alert-warning">:exclamation: **CAUTION:**
 
-* For a new applicant to be created, the `APPLICANT_NAME` and `PHONE_NUMBER` have to **both** be unique.
+* For a new applicant to be created, the `PHONE_NUMBER` has to be unique.
   Otherwise, the system will reject this as a duplicate applicant.
 * The last valid parameter found will treat all of the characters after it as its input.
     * Consider this command: `adda /name Lady Gaga /phone 99129969 /interview 01/01/2024 1200 /invalid invalid`
