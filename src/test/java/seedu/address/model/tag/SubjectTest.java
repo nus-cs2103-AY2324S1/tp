@@ -74,4 +74,12 @@ public class SubjectTest {
 
     }
 
+    @Test
+    public void getCorrectedSubjectNameMethod() {
+        assertEquals(Subject.PHY, Subject.getCorrectedSubjectName("phySICS"));
+        assertEquals(Subject.SOC, Subject.getCorrectedSubjectName("socIAL STUDIES"));
+
+        assertEquals(null, Subject.getCorrectedSubjectName("This is an invalid subject name"));
+    }
+
 }

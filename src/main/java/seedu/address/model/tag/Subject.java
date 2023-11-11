@@ -111,10 +111,10 @@ public class Subject {
     /**
      * This method is used to make the subjectNames for the same subject to be consistent.
      * @param subjectName user input subject name
-     * @return corrected subject name that follows our convention.
+     * @return corrected subject name that follows our convention, return null for invalid user input subject name.
      */
-    private String getCorrectedSubjectName(String subjectName) {
-        checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
+    public static String getCorrectedSubjectName(String subjectName) {
+        requireNonNull(subjectName);
         String[] subjectNames = new String[] {ENG, CHI, EMATH, AMATH, PHY, CHEMI, BIO, GEOG, HIST, SOC};
 
         for (String s : subjectNames) {
