@@ -10,17 +10,30 @@ It makes their life easier by allowing them to easily fetch important info about
 ## Summary of Contributions
 **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=madlamprey&breakdown=true)
 
-**Enhancement implemented**:
+**Enhancements implemented**:
+
+***LinkedIn and Github***
+* Implemented the ability to add LinkedIn and Github usernames to details of candidates
+* Implemented the redirection to the respective accounts on the default browser using the Java awt library
+
+***Events***
+* Introduced Events to JABPro, which allows for addition of events relating to candidates
+* Updated the UI to include an Events window to display the events, in order of their occurence
+* Implemented functionality to allow events to be stored as JSON files in an EventBook as well
+* Updated implementations of existing commands - Delete and Edit, to allow for cascading deletion of events
 
 **Contribution to the UG**:
+* Updated the User Guide for the Github/LinkedIn and the Events sections
+* Added a GUI breakdown to help explain what each part of the interface does/showcases
 
 **Contribution to DG**:
 * Contributed to DG for non-functional requirements
+* Contributed to use cases relating to LinkedIn/Github and Events features
+* Contributed to DG for implementation details of Events
 
 **Contribution to team-based tasks**:
-* Keeping track of deadlines and objectives
+* Ensuring testing meets coverage requirements
 
 **Review/mentoring contributions**:
-
-**Contributions beyond the project team**:
+* Reviewed few PR contributions of team members
 

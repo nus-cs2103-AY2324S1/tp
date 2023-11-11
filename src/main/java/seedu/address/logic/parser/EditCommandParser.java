@@ -89,7 +89,6 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
-
         if (tags.isEmpty()) {
             return Optional.empty();
         }
@@ -103,6 +102,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         scoreList.updateScoreList(tagScorePair.getKey(), tagScorePair.getValue());
         return scoreList;
     }
-
-
 }
