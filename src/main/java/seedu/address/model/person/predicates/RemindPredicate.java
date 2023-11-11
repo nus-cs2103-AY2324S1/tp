@@ -6,8 +6,6 @@ import java.util.function.Predicate;
 
 import seedu.address.model.person.Person;
 
-
-
 /**
  * Tests that a {@code Person}'s {@code Policy Expiry Date}is within a certain period from the current date.
  */
