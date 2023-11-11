@@ -4,36 +4,82 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "groupList" : [ "CS2103T"]
+    "groupList" : [ {
+      "groupRemark" : "CS2105 remark",
+      "meetingTimeList" : [],
+      "groupName" : "CS2105"
+    }],
+    "freeTimeList" : [ ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "groupList" : [ "CS2103T"]
+    "groupList" : [ {
+      "groupRemark" : "CS2105 remark",
+      "meetingTimeList" : [],
+      "groupName" : "CS2105"
+    }],
+    "freeTimeList" : [ ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "groupList" : [ "CS2103T"]
+    "groupList" : [ {
+      "groupRemark" : "CS2105 remark",
+      "meetingTimeList" : [],
+      "groupName" : "CS2105"
+    }],
+    "freeTimeList" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "groupList" : [ "CS2103T"]
+    "groupList" : [ {
+      "groupRemark" : "CS2105 remark",
+      "meetingTimeList" : [],
+      "groupName" : "CS2105"
+    }],
+    "freeTimeList" : [ ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "groupList" : [ "CS2103T"]
+    "groupList" : [ {
+      "groupRemark" : "CS2105 remark",
+      "meetingTimeList" : [],
+      "groupName" : "CS2105"
+    }],
+    "freeTimeList" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "groupList" : [ "CS2103T"]
+    "groupList" : [ {
+      "groupRemark" : "CS2105 remark",
+      "meetingTimeList" : [],
+      "groupName" : "CS2105"
+    }],
+    "freeTimeList" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "groupList" : [ "CS2103T"]
-  } ]
+    "groupList" : [ {
+      "groupRemark" : "CS2105 remark",
+      "meetingTimeList" : [],
+      "groupName" : "CS2105"
+    }],
+    "freeTimeList" : [ ]
+  } ],
+  "groups" : [ {
+    "groupRemark" : "CS2105 remark",
+    "meetingTimeList" : [ {
+      "start" : "MON 1200",
+      "end" : "MON 1400"
+    }, {
+      "start" : "WED 1600",
+      "end" : "THU 1800"
+    }],
+    "groupName" : "CS2105"
+  }]
 }
