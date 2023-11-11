@@ -29,7 +29,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java 11 or above installed in your Computer. You can check by opening a command terminal and typing `java -version`.
 
@@ -61,14 +61,14 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Important notes
+## Important Notes
 
-### Basic usage
+### Basic Usage
 
 <!-- todo, illustrate -->
-* The app is split into 3 states: student list, schedule list (default) and task list. Each corresponds to the main features of TutorMate.
+* The app is split into 3 states: ___STUDENTS list___, ___SCHEDULE list___ (default) and ___TASKS list___. Each corresponds to the main features of TutorMate.
 * Each state has its associated features, while certain features work with all states but has differing functionalities.
-* The student list handles student details management, schedule list handles lessons, scheduling and the tasks for each lesson while the full task list is a view to display all tasks.
+* The ___STUDENTS list___ handles student details management, ___SCHEDULE list___ handles lessons, scheduling and the tasks for each lesson while the full ___TASKS list___ is a view to display all tasks.
 * The GUI has several main components (see GUI image below):
   * The command box is for users to enter and execute commands.
   * The response box is to display responses for command execution, to indicate success or errors.
@@ -87,7 +87,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 This box denotes command outputs.
 ```
 
-### Notes on command format
+### Notes on Command Format
 <box type="info" seamless>
 
 * Words in upper case are compulsory parameters to be supplied by the user.<br>
@@ -99,16 +99,15 @@ This box denotes command outputs.
   e.g. both `link -student student name -lesson lesson name` and `link -lesson lesson name -student student name` are acceptable.
 * Parameters without a flag need to strictly follow the order specified.<br>
   e.g. For delete command which specifies `delete INDEX`, the "index" parameter must immediately follow the command name "delete".<br>
-* All command name are not case-sensitive. <br>
+* All command name are case-insensitive. <br>
   e.g. `linkTo` is the same as `linkto` or `LiNkTo`.
 * When applicable, extraneous parameters and flags for commands will be ignored .<br>
   e.g. if the command entered is `add info -name new name -notValid flagBody -subject physics`, it will be interpreted as `add -name new name -subject physics`. "info " and "-notValid flagBody" will be ignored. <br>
-  e.g. if the command entered is `delete 3 extra`, it will be interpreted as `delete 3`; <br>
-
+  e.g. if the command entered is `delete 3 extra`, it will be interpreted as `delete 3`.<br>
   e.g. However, `delete extra 3` will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
 </box>
 
-### Other notes
+### Other Notes
 <box type="warning" seamless>
 
 * Please avoid using " -" in the value of a parameter as tutorMate treats " -" as a reserved word that signifies the start of a new flag.
@@ -119,7 +118,7 @@ This box denotes command outputs.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Parameter summary
+### Parameter Summary
 
 | Parameter       | Used in                                                                   | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Valid examples                                                                                                  | Invalid examples            |
 |-----------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------|
@@ -141,25 +140,25 @@ This box denotes command outputs.
 
 ## Features
 
-### Listing upcoming lessons / tasks / students : `list`
+### List Feature : `list`
 
 The list command is the way to navigate between the 3 states in our app.
 It will display the specified list and its corresponding details panel.
 
 Format: `list [LIST] [KEYWORDS]`
 * Shows the list and associated detail panel for the specified `[LIST]`.
-* The `[KEYWORDS]` is for which specifying student details to display, and is only valid for students list. When used for schedule and task list, they will be ignored.
+* The `[KEYWORDS]` is for which specifying student details to display, and is only valid for ___STUDENTS list___. When used for ___SCHEDULE list___ and ___TASKS list___, they will be ignored.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- `list` without specifying the `[LIST]` parameter defaults to showing the schedule list.
+- `list` without specifying the `[LIST]` parameter defaults to showing the ___SCHEDULE list___.
 
 </box>
 
 Example usages:
-* `list` and `list schedule` displays the schedule list with all the lessons with their names in time order.
+* `list` and `list schedule` displays the ___SCHEDULE list___ with all the lessons with their names in time order.
 * `list students` displays all the students with their names (including previously specified fields).
 * `list students subjects email` displays all the students with their names, a list of subjects for each student and their email.
 * `list tasks` displays all the tasks with their description.
@@ -177,7 +176,7 @@ Showing list STUDENT
   ![Success for list STUDENTS](images/list/list_student_positive.png)
 * Input: `list tasks`
 ```
-Showing list TASK
+Showing list TASKS
 ```
   ![Success for list STUDENTS](images/list/list_tasks_positive.png)
 * If there are no entries, e.g. there are no students added yet or there are no tasks added yet, an empty list is displayed.
@@ -214,10 +213,10 @@ Format: `show INDEX`
 
 #### For Student:
 
-In ___STUDENT list___, the show command shows the details of the specified student from the contact list in the application.
+In ___STUDENT list___, the show command shows the details of the specified student from the ___STUDENT list___ in the application.
 
 Example usages:
-* `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the student list.
+* `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the ___STUDENT list___.
 * `find Betsy` followed by `show 1` shows the details of the 1st student in the results of the `find` command.
 
 Success outputs:
@@ -230,10 +229,10 @@ Showing Person: Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address
 
 #### For Schedule:
 
-In ___SCHEDULE list___, the show command shows the details of the specified lesson from the schedule list in the application.
+In ___SCHEDULE list___, the show command shows the details of the specified lesson from the ___SCHEDULE list___ in the application.
 
 Example usages:
-*  `list SCHEDULE` followed by `show 2` shows the details of the 2nd lesson in the schedule list.
+*  `list SCHEDULE` followed by `show 2` shows the details of the 2nd lesson in the ___SCHEDULE list___.
 * `find lesson1` followed by `show 1` shows the details of the 1st lesson in the results of the `find` command.
 
 Success outputs:
@@ -246,10 +245,10 @@ Showing Lesson: Start: 12:30 PM; End: 2:30 PM
 
 #### For Task:
 
-In ___TASK list___, the show command shows the details of the specified task from the full task list in the application.
+In ___TASKS list___, the show command shows the details of the specified task from the full ___TASKS list___ in the application.
 
 Example usages:
-* `list TASKS` followed by `show 2` shows the description of the 2nd task in the full task list.
+* `list TASKS` followed by `show 2` shows the description of the 2nd task in the full ___TASKS list___.
 
 Success outputs:
 * Input: `show 1`
@@ -283,13 +282,13 @@ The lesson index provided is invalid
 
 <br>
 
-### Adding of entries (Students, Lessons, Tasks)
+### Add Feature
 
 #### For Student:
 
 Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
 [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
-* A new student cannot have the same name as existing students in the contact list.
+* A new student cannot have the same name as existing students in the ___STUDENTS list___.
 * A student can have any number of unique tags (including 0)
 * Duplicate phone numbers are allowed, since it is possible for 2 children to use their parent's number.
 * Refer to the parameter constraints [here](#parameter-summary).
@@ -329,7 +328,7 @@ Note you must provide a 'name' not already in the address book.
 ![Failure for addPerson](images/add-person/add_person_failure.png)
 
 
-#### For schedule list:
+#### For Schedule:
 <!-- use "SUBJECT" as parameter for lesson -->
 Format: `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]` (for list specific format)
 * Format info 1
@@ -366,7 +365,7 @@ Invalid command with the error message here
 Invalid command with the error message here
 ```
 
-#### For task list:
+#### For Task:
 
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -406,25 +405,25 @@ Invalid command with the error message here
 
 <br>
 
-### Deleting of entries (Students, Lessons, Tasks)
+### Delete Feature
 
-Deletes the specified item in the student/schedule list of the application.
+Deletes the specified item in the ___STUDENTS list___ or ___SCHEDULE list___ of the application.
 
 
 #### For Student:
 
-Deletes a student in the contact list of the application. 
+Deletes a student in the ___STUDENTS list___ of the application. 
 
 Format: `deletePerson INDEX`
 * Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed `STUDENT` list.
-* The command is case-insensitive: eg. `deleteperson`, `deletePerson` and `DELETEPERSON` are all valid.
+* The index refers to the index number shown in the displayed ___STUDENTS list___.
+* The command is case-insensitive: e.g. `deleteperson`, `deletePerson` and `DELETEPERSON` are all valid.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- If the user is currently in the ___STUDENT list___, the command can be shortened to `delete`.
+- If the user is currently in the ___STUDENTS list___, the command can be shortened to `delete`.
 
 </box>
 
@@ -454,13 +453,13 @@ Example: delete 1
 
 #### For Schedule:
 
-Deletes a lesson in the schedule list of the application. 
+Deletes a lesson in the ___SCHEDULE list___ of the application. 
 
 Format: `deleteLesson INDEX`
 
 * Deletes the lesson at the specified `INDEX`.
-* The index refers to the index number shown in the displayed `SCHEDULE` list.
-* The command is case-insensitive: eg. `deletelesson`, `deleteLesson` and `DELETELESSON` are all valid.
+* The index refers to the index number shown in the displayed ___SCHEDULE list___.
+* The command is case-insensitive: e.g. `deletelesson`, `deleteLesson` and `DELETELESSON` are all valid.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
@@ -500,9 +499,9 @@ Example: deletelesson 1
 Deletes the specified task from the shown lesson in the application. User must be in the ___SCHEDULE list___ and showing a lesson.
 
 Format: `deleteTask INDEX`
-* Deletes the task at the specified `INDEX` of the task list in the shown lesson.
-* The index refers to the index number shown in the displayed task list of the lesson.
-* The command is case-insensitive: eg. `deletetask`, `deleteTask` and `DELETETASK` are all valid.
+* Deletes the task at the specified `INDEX` of the ___TASKS list___ in the shown lesson.
+* The index refers to the index number shown in the displayed ___TASKS list___ of the lesson.
+* The command is case-insensitive: e.g. `deletetask`, `deleteTask` and `DELETETASK` are all valid.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="warning" seamless>
@@ -512,7 +511,7 @@ The deleteTask command can only be used in the ___SCHEDULE list___ and while a l
 </box>
 
 Example usages:
-* In ___SCHEDULE list___ : `show 1` followed by `deleteTask 2` deletes the 2nd task of the 1st lesson in the schedule list.
+* In ___SCHEDULE list___ : `show 1` followed by `deleteTask 2` deletes the 2nd task of the 1st lesson in the ___SCHEDULE list___.
 
 Success outputs:
 * Input: `show 1` followed by `deleteTask 1`
@@ -548,7 +547,7 @@ Please use show lessonIndex before deleting task!
 
 <br>
 
-### Editing of entries (Students, Lessons)
+### Edit Feature
 
 About the feature (generally that is similar across states)
 
@@ -565,7 +564,7 @@ Format: `command COMPULSORY [optional]` (if same command format across states)
 </box>
 
 
-#### For student list:
+#### For Student:
 <!-- use -subject SUBJECT for student -->
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -602,7 +601,7 @@ Invalid command with the error message here
 Invalid command with the error message here
 ```
 
-#### For schedule list:
+#### For Schedule:
 <!-- use "-subject SUBJECTS" for lesson -->
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -639,16 +638,16 @@ Invalid command with the error message here
 Invalid command with the error message here
 ```
 
-#### For task list:
+#### For Task:
 
-Editing of task lists is not supported at this time!
+Editing of ___TASKS list___ is not supported at this time!
 
 
 <br>
 
-### Finding students/lessons by name : `find`
+### Find Feature : `find`
 
-The find command finds students (in student list) or lessons (in schedule list) whose names contain the search string.
+The find command finds students (in ___STUDENTS list___) or lessons (in ___SCHEDULE list___) whose names contain the search string.
 
 Format: `find SEARCH_STRING`
 * The search is case-insensitive. e.g. `lesson` will match `Lesson`. `hans` will match `Hans`.
@@ -659,10 +658,10 @@ Format: `find SEARCH_STRING`
 
 **Caution:**
 * Find tasks by name/description is disabled.
-* Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see task list of the lesson.
+* Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see list of tasks of the lesson.
 </box>
 
-#### For student list:
+#### For Student:
 
 Example usages:
 * `find bernice`
@@ -678,7 +677,7 @@ Success outputs:
 0 persons listed!
 ```
 
-#### For schedule list:
+#### For Schedule:
 
 Example usages:
 * `find lesson`
@@ -705,7 +704,7 @@ find: Finds all persons or lesson whose names contains the specified search stri
 Parameter: SEARCH_STRING
 Example: find alex yeoh
 ```
-* Input: `find task1` (in task list)
+* Input: `find task1` (in ___TASKS list___)
     * Error: Find command is disabled in task list.
 ```
 Unknown command
@@ -713,7 +712,7 @@ Unknown command
 
 <br>
 
-### Filtering the student / schedule list : `filter`
+### Filter Feature : `filter`
 
 About the feature (generally that is similar across states)
 <!-- use "SUBJECTS" as parameter here -->
@@ -730,7 +729,7 @@ Format: `command COMPULSORY [optional]` (if same command format across states)
 </box>
 
 
-#### For student list:
+#### For Student:
 
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -767,7 +766,7 @@ Invalid command with the error message here
 Invalid command with the error message here
 ```
 
-#### For schedule list:
+#### For Schedule:
 
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -804,7 +803,7 @@ Invalid command with the error message here
 Invalid command with the error message here
 ```
 
-#### For task list:
+#### For Task:
 
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -843,7 +842,7 @@ Invalid command with the error message here
 
 <br>
 
-### Linking students to lessons (and vice versa) : `linkTo`
+### Link Feature : `linkTo`
 
 About the feature (generally that is similar across states)
 
@@ -860,7 +859,7 @@ Format: `command COMPULSORY [optional]` (if same command format across states)
 </box>
 
 
-#### For student list:
+#### For Student:
 
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -897,7 +896,7 @@ Invalid command with the error message here
 Invalid command with the error message here
 ```
 
-#### For schedule list:
+#### For Schedule:
 
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -934,7 +933,7 @@ Invalid command with the error message here
 Invalid command with the error message here
 ```
 
-#### For task list:
+#### For Task:
 
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -973,7 +972,7 @@ Invalid command with the error message here
 
 <br>
 
-### Viewing the linked students of a lesson, or the linked lessons of a student : `nav`
+### Navigate Feature : `nav`
 
 About the feature (generally that is similar across states)
 
@@ -990,7 +989,7 @@ Format: `command COMPULSORY [optional]` (if same command format across states)
 </box>
 
 
-#### For student list:
+#### For Student:
 
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -1027,7 +1026,7 @@ Invalid command with the error message here
 Invalid command with the error message here
 ```
 
-#### For schedule list:
+#### For Schedule:
 
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -1064,7 +1063,7 @@ Invalid command with the error message here
 Invalid command with the error message here
 ```
 
-#### For task list:
+#### For Task:
 
 Format: `command COMPULSORY [optional]` (for list specific format)
 * Format info 1
@@ -1103,7 +1102,7 @@ Invalid command with the error message here
 
 <br>
 
-### Command history
+### Command History Feature
 
 The command history feature allows you to retrieve previously typed commands into the command text box.
 
@@ -1136,7 +1135,7 @@ Example usages:
 
 <br>
 
-### Clearing data : `clear`
+### Clearing Data : `clear`
 
 Clears the program data.
 
@@ -1144,7 +1143,7 @@ Format: `clear`
 
 <br>
 
-### Exiting the program : `exit`
+### Exit Program : `exit`
 
 Exits the program.
 
@@ -1152,7 +1151,7 @@ Format: `exit`
 
 <br>
 
-### Viewing help : `help`
+### View Help : `help`
 
 Shows a message explaining how to access the help page.
 Click on the button to copy the link, enter it in a web browser to visit our user guide.
@@ -1163,13 +1162,13 @@ Format: `help`
 
 <br>
 
-### Saving the data
+### Saving Data
 
 TutorMate data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 <br>
 
-### Editing the data file
+### Editing Data File
 
 TutorMate data is saved automatically as JSON files `[JAR file location]/data/addressbook.json`, `[JAR file location]/data/schedulelist.json` and `[JAR file location]/data/personLessonMap.json`. Advanced users are welcome to update data directly by editing that data file.
 Be very careful, especially when you modify attributes such as Start and End time of lessons, as any overlapping lesson timings will render the data as invalid. For example, lesson clashes will not be detected. Scenarios like these are not exhaustive.
@@ -1195,14 +1194,14 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 | Action       | Format           | Examples               | List    | Remarks                     |
 |--------------|------------------|------------------------|---------|-----------------------------|
@@ -1217,7 +1216,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Command Terminal** | A text based user interface where most of the interaction is done by inputting commands. You can search for "terminal" to find and launch the inbuilt terminal in your operating system (Windows, Linus and MacOS). |
 | **GUI**              | Abbreviation for graphical user interface, which allow user to interact with graphical components such as icons, buttons, and menus.                                                                                |
-| **Home Folder**      | The folder tutorMate is located at while running. This will be the folder where tutorMate read the date from and write the data to.                                                                                 |
-| **JAVA**             | A programming language that you need to install before you are able to launch tutorMate. You could refer to FQA for tips on how to verify whether you already have Java installed and how to install it.            |
+| **Home Folder**      | The folder TutorMate is located at while running. This will be the folder where tutorMate read the date from and write the data to.                                                                                 |
+| **Java**             | A programming language that you need to install before you are able to launch tutorMate. You could refer to FAQ for tips on how to verify whether you already have Java installed and how to install it.            |
 | **Flag**             | A flag is a tab started with dash "-" that is used to identify the type of information that is being provided. For example, in "add -name John", "-name" is a flag and "John" is the value of this flag.            |
 
