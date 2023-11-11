@@ -99,12 +99,13 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 * When applicable, extraneous parameters and flags for commands will be ignored .<br>
   e.g. if the command entered is `add info -name new name -notValid flagBody -subject physics`, it will be interpreted as `add -name new name -subject physics`. "info " and "-notValid flagBody" will be ignored. <br>
   e.g. if the command entered is `delete 3 extra`, it will be interpreted as `delete 3`; <br>
-  e.g. However, `delete extra 3`, it will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
+  e.g. However, `delete extra 3`  will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
 ### Other Notes
 * Please avoid using " -" in the value of a parameter as tutorMate treats " -" as a reserved word that signifies the start of a new flag.
 * Please do not abuse the parser of tutorMate. For example, do not game it with special characters or code injections. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
 * TutorMate supports a maximum of 99999 students, 99999 lessons and 99999 tasks. Further data beyond this limit might be lost and not accessible in the application.
 * Please avoid manually modifying the data files in the data folder. Doing so may result in unexpected behaviour and data loss.
+* Please avoid running multiple instances of TutorMate at the same time. Doing so may result in unexpected behaviour and data loss.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </box>
@@ -1197,10 +1198,10 @@ Format: `help`
 **A**: Copy TutorMate's jar file into the folder you want to use as the home folder in the other computer. Before running the application, copy _addressbook.json_, _personLessonMap.json_ and _schedulelist.json_ files from the home folder in your current computer into the home folder of the other computer. After copying the 3 files, running the application will show the same data. However, do note that the changes made through the application in one computer will not be reflected in the data in another computer.
 
 **Q**: Can I edit the data in the application through the _addressbook.json, personLessonMap.json, schedulelist.json_ files directly? <br>
-**A**: Yes, it is possible. However, it is not advisable for you to do so as if the changes made to the data file makes its format invalid, TutorMate will discard all data and start with an empty data file at the next run. Please use the `edit` command to make changes to your data instead.
+**A**: It is possible. However, it is not advisable for you to do so as if the changes made to the data file makes its format invalid, TutorMate will discard all data and start with an empty data file at the next run. Please use the `edit` command to make changes to your data instead.
 
 **Q**: Can I still use the application without internet connection? <br>
-**A**: Yes, you can. TutorMate is an offline desktop application.
+**A**: Yes, you can. TutorMate is an offline desktop application. The only exception is the "help" command which provides a URL to the user guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
