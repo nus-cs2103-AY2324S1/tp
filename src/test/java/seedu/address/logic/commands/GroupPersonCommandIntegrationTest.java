@@ -1,7 +1,13 @@
+
 package seedu.address.logic.commands;
+
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -12,68 +18,70 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 public class GroupPersonCommandIntegrationTest {
-	private Model model;
+    private Model model;
 
-	@BeforeEach
-	public void setUp() {
-		model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-	}
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
 
-	@Test
-	public void execute_groupPerson_Success() throws CommandException {
-		Person validPerson = new PersonBuilder().withName("Alice Pauline").build(); // Alice Pauline
-		Group validGroup = new GroupBuilder().withName("CS2100").build(); // CS2100
+    @Test
+    public void executeGroupPersonSuccess() throws CommandException {
+        Person validPerson = new PersonBuilder().withName("Alice Pauline").build(); // Alice Pauline
+        Group validGroup = new GroupBuilder().withName("CS2100").build(); // CS2100
 
-		Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-		expectedModel.assignGroup(validPerson, validGroup);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.assignGroup(validPerson, validGroup);
 
-		assertCommandSuccess(new GroupPersonCommand(validPerson.getName().toString(), validGroup.getGroupName()), model,
-				String.format(GroupPersonCommand.MESSAGE_SUCCESS, validPerson.getName().toString(), validGroup.getGroupName()),
-				expectedModel);
-	}
+        assertCommandSuccess(new GroupPersonCommand(validPerson.getName().toString(),
+            validGroup.getGroupName()),
+            model,
+            String.format(GroupPersonCommand.MESSAGE_SUCCESS,
+            validPerson.getName().toString(), validGroup.getGroupName()), expectedModel);
+    }
 
-	@Test
-	public void execute_groupDoesNotExist_UnSuccessful() throws CommandException {
-		Person validPerson = new PersonBuilder().withName("Alice Pauline").build(); // Alice Pauline
-		Group validGroup = new GroupBuilder().withName("CS2107").build(); // CS2100
+    @Test
+    public void executeGroupDoesNotExistUnSuccessful() throws CommandException {
+        Person validPerson = new PersonBuilder().withName("Alice Pauline").build(); // Alice Pauline
+        Group validGroup = new GroupBuilder().withName("CS2107").build(); // CS2100
 
-		Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-		expectedModel.assignGroup(validPerson, validGroup);
-
-
-		assertCommandFailure(new GroupPersonCommand(validPerson.getName().toString(), validGroup.toString()), model,
-				Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
-	}
-	@Test
-	public void execute_personDoesNotExist_UnSuccessful() throws CommandException {
-		Person validPerson = new PersonBuilder().withName("Alice").build(); // Alice Pauline
-		Group validGroup = new GroupBuilder().withName("CS2100").build(); // CS2100
-
-		Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-		expectedModel.assignGroup(validPerson, validGroup);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.assignGroup(validPerson, validGroup);
 
 
-		assertCommandFailure(new GroupPersonCommand(validPerson.getName().toString(), validGroup.toString()), model,
-				Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
-	}
+        assertCommandFailure(new GroupPersonCommand(validPerson.getName().toString(), validGroup.toString()),
+            model,
+            Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
+    }
 
-	// person is already in the group
-	@Test
-	public void execute_personInGroupUnSuccessful() throws CommandException {
-		Person personInList = model.getAddressBook().getPersonList().get(0); // Alice Pauline
-		Group groupInList = model.getAddressBook().getGroupList().get(2); // CS2103
-		String personName = personInList.getName().toString();
-		String groupName = groupInList.getGroupName();
+    @Test
+    public void executePersonDoesNotExistUnSuccessful() throws CommandException {
+        Person validPerson = new PersonBuilder().withName("Alice").build(); // Alice Pauline
+        Group validGroup = new GroupBuilder().withName("CS2100").build(); // CS2100
 
-		Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.assignGroup(validPerson, validGroup);
 
-		assertCommandFailure(new GroupPersonCommand(personInList.getName().toString(), groupInList.getGroupName()), model,
-				String.format("%s is already in this group: %s", personName, groupName));
-	}
+
+        assertCommandFailure(new GroupPersonCommand(validPerson.getName().toString(),
+            validGroup.toString()), model,
+            Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
+    }
+
+    // person is already in the group
+    @Test
+    public void executePersonInGroupUnSuccessful() throws CommandException {
+        Person personInList = model.getAddressBook().getPersonList().get(0); // Alice Pauline
+        Group groupInList = model.getAddressBook().getGroupList().get(2); // CS2103
+        String personName = personInList.getName().toString();
+        String groupName = groupInList.getGroupName();
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        assertCommandFailure(new GroupPersonCommand(personInList.getName().toString(), groupInList.getGroupName()),
+            model,
+            String.format("%s is already in this group: %s", personName, groupName));
+    }
 
 }

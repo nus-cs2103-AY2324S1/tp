@@ -8,11 +8,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.testutil.TypicalGroups.*;
+import static seedu.address.testutil.TypicalGroups.CS2100;
+import static seedu.address.testutil.TypicalGroups.CS2102;
+import static seedu.address.testutil.TypicalGroups.CS2103;
+import static seedu.address.testutil.TypicalGroups.CS2105;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.group.Group;
