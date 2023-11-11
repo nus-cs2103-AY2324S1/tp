@@ -140,8 +140,6 @@ Output:
     * `add w/雪 t/snow`
     * `add w/雪 t/snow wl/Chinese tl/English`
     * `add w/雪 t/snow wl/Japanese tl/English`
-* Users are allowed to add a flash card with the **empty word language or translation language**<br>
-> Users do not need to specify the language if the language is blank (`""`)
 * Users are **not allowed** to add a flash card with the **same word and translation**<br>
   The following command will cause duplicate error:
     * `add w/sorry t/sorry`
