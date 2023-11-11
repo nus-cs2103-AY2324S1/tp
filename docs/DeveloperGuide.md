@@ -652,7 +652,7 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+testers are welcomed to do more *exploratory* testing.
 
 </div>
 
@@ -671,38 +671,88 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a patient or specialist
+1. Adding a patient to the existing list.
+    
+    1. Recommendation: List all patients by entering `list -pa` to better observe the results.
 
-### Deleting a person
+    2. Test case: `add -pa n/Abigail Lim p/89074463 e/abilim@test.com t/friends a/22 m/Bronchitis m/Fever`<br>
+       Expected: A patient by the name of Abigail Lim is added to the list of patients. The details of the newly added patient can be seen via the `view` command.
+   
+    3. Test case: `add -pa n/Abigail Lim e/abilim@test.com t/friends a/22 m/Bronchitis` (missing `p/PHONE` field)<br>
+    Expected: No patient is added to the list. Error message is shown in the command result box.
+   
+    4. Test Case: `add -pa n/Abigail Lim p/89074463 e/abilim@test.com t/friends a/twenty-two m/Bronchitis` (invalid `a/AGE` field)<br>
+       Expected: No patient is added to the list. Error message of accepted `a/AGE` format is shown.
+
+Similar tests for adding a specialists can be done using the `add` command format for specified for specialists.
+
+### Viewing a patient or specialist
+
+1. Viewing a patient while all patients are being shown in the list panel.
+
+    1. Prerequisites: List all patients using the `list - pa` command. Multiple patients in the list.
+
+    2. Test case: `view 1`<br>
+       Expected: First patient is selected to be viewed. Details of the viewed patient are shown in the view panel.
+       Details of the viewed patients is also displayed in the command result box.
+
+    3. Test case: `view 0`<br>
+       Expected: No person is viewed. Error details shown in command result box.
+
+    4. Other incorrect view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+Similar tests for viewing a specialist can be done using the `view` command after listing all specialists via `list -sp` command.
+
+### Editing a patient or specialist
+
+1. Editing a specialist while a specialist is being viewed in the view panel.
+
+    1. Prerequisites: Viewing a specialist in the view panel.
+
+    2. Test case: `edit n/Jonathan Holland` (editing a single attribute)<br>
+       Expected: The name of the specialist being viewed is modified to **Jonathan Holland**.
+
+    3. Test case: `edit n/John Holland p/88889009 s/Dentistry` (editing multiple attributes)<br>
+       Expected: The specialist being viewed is modified to have the **name John Holland** with **phone number 88889009** and has **Dentistry as a specialisation**.
+
+    4. Test case: `edit t/`(clearing tags)<br>
+       Expected: The specialist being viewed is modified to have no tags.
+
+    5. Test case: `edit n/`
+       Expected: The specialist being viewed is not modified. Error message indicating arguments cannot be blank is shown.
+
+Similar tests for editing a patient can be done using the `edit` command after viewing a patient in the view panel using the `view` command.
+    
+### Deleting a patient or specialist
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list - pa` command. Multiple persons in the list.
+    1. Prerequisites: List all specialists using the `list -sp` command. Multiple specialists in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete 1`<br>
+       Expected: First specialist is deleted from the specialist list. Shorter details of the deleted specialists is shown in the command result box.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `delete 2 3 4`<br>
+       Expected: Second, third and fourth specialist is deleted from the specialist list. Shorter details of the deleted specialists is shown in the command result box.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    4. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message.
+
+    5. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+Similar tests for deleting a patient can be done by first listing all patients using the `list -pa` command with multiple patients listed.
 
-### Viewing a person
+### Finding patients or specialists
+_To be added._
 
-1. Viewing a person while all persons are being shown
+### Undo and redo commands
+_To be added._
 
-    1. Prerequisites: List all persons using the `list - pa` command. Multiple persons in the list.
-
-    1. Test case: `view 1`<br>
-       Expected: First person is selected to be viewed. Details of the viewed person shown in the View Person Panel.
-Timestamp in the status bar is updated.
-
-    1. Test case: `view 0`<br>
-       Expected: No person is viewed. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+### Shortcut aliases
+_To be added._
 
 ## **Appendix: Planned Enhancements**
 
@@ -711,15 +761,13 @@ However, we are planning on implementing a feature that will allow users to upda
 This change is driven by our goal to enhance user experience: although our application primarily caters to CLI users, such  behaviour
 still seems intuitive and reasonable to expect.
 
-
 2. Currently, when the `delete` command encounters invalid indexes, it generates an error and does not delete any patient or specialist records.
-   In contrast, the `delsc` command handles invalid shortcuts by recognizing and ignoring them, while continuing to remove any valid shortcuts in the command.
-   The inconsistency between these two delete functions has been identified, and we have plans to address it in the future.
-   Our upcoming improvement will entail modifying the `delete` command to acknowledge and ignore invalid indexes while effectively deleting records specified by valid indexes provided by the user.
-
+In contrast, the `delsc` command handles invalid shortcuts by recognizing and ignoring them, while continuing to remove any valid shortcuts in the command.
+The inconsistency between these two delete functions has been identified, and we have plans to address it in the future.
+Our upcoming improvement will entail modifying the `delete` command to acknowledge and ignore invalid indexes while effectively deleting records specified by valid indexes provided by the user.
 
 3. DoConnek Pro currently checks for duplicate persons by name. This means that people with the same names cannot be added even if they have different parameters (like `Phone` or `Email`).
-   We plan on implementing an `NRIC` field for patients and an `MCR` field for specialists as unique identifiers to solve this issue. 
+We plan on implementing an `NRIC` field for patients and an `MCR` field for specialists as unique identifiers to solve this issue. 
 
 4. DoConnek Pro currently disallows the use of "/" in a person name because it is used as a command delimiter.
 Users may face problems due to this if they have to, for example, add a person with "s/o" in their name.
