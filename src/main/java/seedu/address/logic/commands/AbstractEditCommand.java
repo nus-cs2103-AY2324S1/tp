@@ -121,7 +121,9 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
                     + editableFieldsInfo() + " to different value.");
         }
         try {
+            // When this deletes, it also deletes from `personLessonMap`. Need to find a way to preserve it
             deleteMethod.accept(original);
+
         } catch (Exception e) {
             throw new CommandException("Internal Error in deleting original entry: " + original.toString());
         }

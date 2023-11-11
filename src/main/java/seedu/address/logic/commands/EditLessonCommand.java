@@ -19,7 +19,7 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
         currentShownEntry = model.getCurrentlyDisplayedLesson();
         list = model.getFilteredScheduleList();
         hasClashWith = model::hasLessonClashWith;
-        deleteMethod = model::deleteLesson;
+        deleteMethod = model::deleteLessonForEdit;
         addMethod = model::addLesson;
         getClashingEntry = model::getLessonClashWith;
         showMethod = model::showLesson;

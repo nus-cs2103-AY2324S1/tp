@@ -168,6 +168,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deletePersonForEdit(Person target) {
+        addressBook.removePerson(target);
+    }
+
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -240,6 +246,11 @@ public class ModelManager implements Model {
     public void deleteLesson(Lesson target) {
         scheduleList.removeLesson(target);
         personToLessonMap.removeReverse(target);
+    }
+
+    @Override
+    public void deleteLessonForEdit(Lesson target) {
+        scheduleList.removeLesson(target);
     }
 
     @Override

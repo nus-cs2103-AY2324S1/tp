@@ -19,7 +19,7 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
         currentShownEntry = model.getCurrentlyDisplayedPerson();
         list = model.getFilteredPersonList();
         hasClashWith = model::hasPersonClashWith;
-        deleteMethod = model::deletePerson;
+        deleteMethod = model::deletePersonForEdit;
         addMethod = model::addPerson;
         getClashingEntry = model::getPersonClashWith;
         showMethod = model::showPerson;

@@ -88,6 +88,9 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
      * When there is a name change to the key, this method should be called to update the map
      */
     public void update(T tOld, T tNew) {
+        if (tOld.equals(tNew)) {
+            return;
+        }
         Name[] names = get(tOld);
         remove(tOld);
         for (Name name : names) {
