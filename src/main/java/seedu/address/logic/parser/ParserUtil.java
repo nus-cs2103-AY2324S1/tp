@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ID;
@@ -156,6 +157,21 @@ public class ParserUtil {
             throw new ParseException(Week.MESSAGE_CONSTRAINTS);
         }
         return new Week(weekNumber);
+    }
+
+    /**
+     * Parses a {@code String courseCode} into a {@code Course}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code courseCode} is invalid.
+     */
+    public static Course parseCourse(String courseCode) throws ParseException {
+        requireNonNull(courseCode);
+        String trimmedCourseCode = courseCode.trim();
+        if (!Course.isValidCourse(trimmedCourseCode)) {
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+        }
+        return new Course(trimmedCourseCode);
     }
 
     /**
