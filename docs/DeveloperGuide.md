@@ -242,8 +242,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User request to add a contact
-2.  ConText adds the contact
+1.  User requests to add a contact.
+2.  ConText adds the contact.
 
     Use case ends.
 
@@ -259,9 +259,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to view the list of contacts (UC03)
-2.  User requests to delete a specific contact in the list
-3.  ConText deletes the contact
+1. User requests to view the list of contacts (UC03).
+2. User requests to delete a specific contact in the list.
+3. ConText deletes the contact.
 
     Use case ends.
 
@@ -269,22 +269,69 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given index is invalid.
 
-    * 2a1. ConText shows an error message.
-
-      Use case resumes at step 2.
+  * 2a1. ConText shows an error message.
+  
+    Use case resumes at step 2.
 
 **Use case: UC03 - List all contacts**
 
 **MSS**
 
-1. User requests to list contacts
-2. ConText shows a list of contacts
+1. User requests to list contacts.
+2. ConText shows a list of contacts.
 
 **Extensions**
 
 * 2a. The list is empty.
 
     Use case ends
+
+**Use case: UC04 - Edit a contact**
+
+**MSS**
+
+1. User requests to view the list of contacts (UC03).
+2. User requests to edit a contact.
+3. ConText edits the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+  * 2a1. ConText shows an error message.
+    
+    Use case resumes at step 2.
+
+* 2b. The given data is incorrect.
+
+  * 2b1. ConText shows an error message.
+    
+    Use case resumes at step 2.
+
+**Use case: UC05 - Clear all contacts**
+
+**MSS**
+
+1. User requests to clear all contacts.
+2. ConText clears all contacts.
+
+    Use case ends.
+
+**Use case: UC06 - Find a contact**
+
+**MSS**
+
+1. User requests to find a contact.
+2. ConText displays a list of contacts matching the given data.
+
+    Use case ends.
+
+**Use case: UC07 - Filter tags**
+
+1. User requests to filter the list contacts.
+2. ConText displays a filtered list of contacts based on the given tag.
 
 *{More to be added}*
 
