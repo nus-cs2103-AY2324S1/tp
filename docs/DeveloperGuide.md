@@ -104,7 +104,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a applicant).
+3. The command can communicate with the `Model` when it is executed (e.g. to delete an applicant).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -683,164 +683,360 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `InterviewHub` and the **Actor** is the `hiring manager`, unless specified otherwise)
+(For all use cases below, the **System** is the `InterviewHub` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 Add an interview**
+**Use case: UC01 - View help**
 
 **MSS**
 
-1. Hiring manager requests to add an interview.
-2. InterviewHub adds the interview.
+1. User requests to view help.
+2. InterviewHub displays the help instructors.
+
+    Use case ends.
+
+---
+
+**Use case: UC02 - Clear all data**
+
+**MSS**
+
+1. User requests to clear all data.
+2. InterviewHub deletes all data.
+
+   Use case ends.
+
+---
+
+**Use case: UC03 - View all applicants**
+
+**MSS**
+
+1. User requests to list all applicants.
+2. InterviewHub displays a list of all applicants.
+
+   Use case ends.
+
+---
+
+**Use case: UC04 - View all interviews**
+
+**MSS**
+
+1. User requests to list all interviews.
+2. InterviewHub displays a list of all interviews.
+
+   Use case ends.
+
+---
+
+**Use case: UC05 - Exit the application**
+
+**MSS**
+
+1. User requests to exit the application.
+2. InterviewHub terminates gracefully.
+
+   Use case ends.
+
+---
+
+**Use case: UC06 Add a new applicant**
+
+**MSS**
+
+1. User requests to add a new applicant.
+2. InterviewHub adds the new applicant.
 
     Use case ends.
 
 **Extensions**
-* 1a. One of the user-provided parameters is invalid
+* 1a. The given command is invalid or one of the user-provided parameters is invalid.
     * 1a1. InterviewHub shows an error message.
 
       Use case resumes at step 1.
 
-**Use case: UC02 List all interview**
+* 1b. The given applicant already exists in InterviewHub.
+    * 1b1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+---
+
+**Use case: UC07 Add a new interview**
 
 **MSS**
 
-1. Hiring manager requests to list all interviews.
-2. InterviewHub displays all scheduled interviews.
-
-    Use case ends.
-
-**Extensions**
-* 1a. The list is empty
-  * 1a1. InterviewHub shows an error message.
-
-    Use case ends.
-
-**Use case: UC03 Delete an Interview**
-
-**MSS**
-
-1. Hiring manager <u> views the list of all interviews (UC02) </u>
-2. Hiring manager requests to delete a specific interview
-3. InterviewHub deletes the specified interview
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The provided index is invalid
-  * 2a1. InterviewHub shows an error message.
-
-    Use case resumes at step 2.
-
-**Use case: UC04 Add a job role**
-
-**MSS**
-
-1. Hiring manager requests to add a job role.
-2. InterviewHub adds the job role.
-
-    Use case ends.
-
-**Extensions**
-* 1a. One of the user-provided parameters is invalid
-  * 1a1. InterviewHub shows an error message.
-
-    Use case resumes at step 1.
-
-**Use case: UC05 List all job roles**
-
-**MSS**
-
-1. Hiring manager requests to list all job roles.
-2. InterviewHub displays all job roles.
-
-    Use case ends.
-
-**Extensions**
-* 1a. The list is empty
-  * 1a1. InterviewHub shows an error message.
-
-    Use case ends.
-
-**Use case: UC06 List all applicants for a job role**
-
-**MSS**
-
-1. Hiring manager <u> views the list of all job roles (UC05) </u>
-2. Hiring manager requests to view all applicants for a specific job role.
-3. InterviewHub displays all the applicants for the specific job role.
-
-    Use case ends.
-
-* 2a. The provided index is invalid
-  * 2a1. InterviewHub shows an error message.
-
-    Use case resumes at step 2.
-
-**Use case: UC07 Delete a job role**
-
-**MSS**
-
-1. Hiring manager <u> views the list of all job roles (UC02) </u>
-2. Hiring manager requests to delete a specific job role
-3. InterviewHub deletes the specified job role
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The provided index is invalid
-  * 2a1. InterviewHub shows an error message.
-
-    Use case resumes at step 2.
-
-
-**Use case: UC08 Add an applicant**
-
-**MSS**
-
-1. Hiring manager requests to add an applicant.
-2. InterviewHub adds the applicant.
+1. User requests to add a new interview.
+2. InterviewHub adds the new interview.
 
    Use case ends.
 
 **Extensions**
-* 1a. One of the user-provided parameters is invalid
-  * 1a1. InterviewHub shows an error message.
+* 1a. The given command is invalid or one of the user-provided parameters is invalid.
+    * 1a1. InterviewHub shows an error message.
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
-**Use case: UC09 List all applicants**
+* 1b. The given interview already exists in InterviewHub.
+    * 1b1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1c. The given interview causes a schedule clash.
+    * 1c1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+---
+
+**Use case: UC08 Delete an applicant**
 
 **MSS**
 
-1. Hiring manager requests to list all applicants.
-2. InterviewHub displays all scheduled applicants.
+1. User <u> views the list of all applicants (UC03).</u>
+2. User requests to delete a specific applicant.
+3. InterviewHub deletes the specified applicant and any interviews the applicant was associated with.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
-* 1a. The list is empty
-  * 1a1. InterviewHub shows an error message.
 
-      Use case ends.
+* 2a. The provided index is invalid.
+  * 2a1. InterviewHub shows an error message.
 
-**Use case: UC010 Delete an applicant**
+    Use case resumes at step 2.
+
+--- 
+
+**Use case: UC09 Delete an interview**
 
 **MSS**
 
-1. Hiring manager <u> views the list of all applicants (UC09) </u>
-2. Hiring manager requests to delete a specific applicant
-3. InterviewHub deletes the specified applicant
+1. User <u> views the list of all interviews (UC04).</u>
+2. User requests to delete a specific interview.
+3. InterviewHub deletes the specified interview.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The provided index is invalid
+* 2a. The provided index is invalid.
     * 2a1. InterviewHub shows an error message.
 
       Use case resumes at step 2.
+
+--- 
+
+**Use case: UC10 Edit an applicant**
+
+**MSS**
+
+1. User <u> views the list of all applicants (UC03).</u>
+2. User requests to edit a specific applicant.
+3. InterviewHub edits the specified applicant and any interviews the applicant was associated with.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given command is invalid or one of the user-provided parameters is invalid.
+    * 2a1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. The edited applicant already exists in InterviewHub
+    * 2b1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+--- 
+
+**Use case: UC11 Edit an interview**
+
+**MSS**
+
+1. User <u> views the list of all interviews (UC04).</u>
+2. User requests to edit a specific interview.
+3. InterviewHub edits the specified interview.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The given command is invalid or one of the user-provided parameters is invalid.
+    * 2a1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. The edited interview already exists in InterviewHub.
+    * 2b1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+* 2c. The edited interview causes a schedule clash.
+    * 2c1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+* 2d. The selected interview to be edited is marked as done.
+    * 2d1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+--- 
+
+**Use case: UC12 - Find applicants**
+
+**MSS**
+
+1. User requests to find applicants.
+2. InterviewHub finds and displays the applicants that match the user provided input.
+
+   Use case ends.
+
+---
+
+**Use case: UC13 - Find interviews**
+
+**MSS**
+
+1. User requests to find interviews.
+2. InterviewHub finds and displays the interviews that match the user provided input.
+
+   Use case ends.
+
+---
+
+**Use case: UC14 - Marking an interview as done**
+
+**MSS**
+
+1. User requests to mark an interview.
+2. InterviewHub marks the selected interview as done.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The provided index is invalid.
+    * 1a1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The selected interview is already marked as done.
+    * 1b1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+---
+
+**Use case: UC15 - Rating an interview**
+
+**MSS**
+
+1. User requests to rate an interview.
+2. InterviewHub updates the rating of the selected interview.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The provided index is invalid.
+    * 1a1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The selected interview is not yet marked as done.
+    * 1b1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1c. The provided rating is an invalid value
+    * 1c1. InterviewHub shows an error message.
+
+      Use case resumes at step1.
+
+---
+
+**Use case: UC16 - View all completed interviews**
+
+**MSS**
+
+1. User requests to list all completed interviews.
+2. InterviewHub displays a list of all completed interviews.
+
+   Use case ends.
+
+---
+
+**Use case: UC17 - View all incomplete interviews**
+
+**MSS**
+
+1. User requests to list all incomplete interviews.
+2. InterviewHub displays a list of all incomplete interviews.
+
+   Use case ends.
+
+---
+
+**Use case: UC18 - View all interviews scheduled for today**
+
+**MSS**
+
+1. User requests to list all interviews scheduled for today.
+2. InterviewHub displays a list of all interviews scheduled for today.
+
+   Use case ends.
+
+---
+
+**Use case: UC19 - View all free time on a given date**
+
+**MSS**
+
+1. User requests to list all free time on a given date.
+2. InterviewHub displays a list of all free time on a given date.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The provided date is invalid.
+    * 1a1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The provided date is in the past.
+    * 1b1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1c. The provided date contains no free time.
+    * 1c1. InterviewHub shows a blank message to denote that there is no free time.
+
+      Use case ends.
+
+---
+
+**Use case: UC20 - Sort interviews in descending order of rating**
+
+**MSS**
+
+1. User requests to sort interviews in descending order of rating.
+2. InterviewHub sorts the current list of interviews in descending order of rating.
+
+   Use case ends.
+
+---
+
+**Use case: UC21 - Sort interviews in chronological order**
+
+**MSS**
+
+1. User requests to sort interviews in chronological order.
+2. InterviewHub sorts the current list of interviews in chronological order.
+
+   Use case ends.
+
+---
 
 ### Non-Functional Requirements
 
