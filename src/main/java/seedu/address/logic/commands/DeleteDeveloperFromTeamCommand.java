@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAMNAME;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -47,23 +48,65 @@ public class DeleteDeveloperFromTeamCommand extends Command {
      * @param model The current state of the application model.
      * @return A CommandResult indicating the result of executing this command on the given model.
      * @throws CommandException if the team name or developer name is invalid
-     *          ,or if the developer is not part of the team.
+     *          , or if the developer is not part of the team.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        IdentityCode developerIndentityCode = model.getIdentityCodeByName(developerToDelete);
+        // Check if the team exists in the model
         if (!model.hasTeam(teamName)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TEAM_NAME_DISPLAYED);
-        } else if (!model.containsPerson(developerToDelete)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
-        } else if (!model.personAlreadyInTeam(teamName, developerToDelete)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_IN_TEAM);
-        } else {
-            model.deleteDeveloperFromTeam(teamName, developerIndentityCode);
-            return new CommandResult(String.format(MESSAGE_DELETE_DEVELOPER_FROM_TEAM_SUCCESS,
-                    developerToDelete.toString()));
         }
+
+        // Check if the developer exists in the model
+        if (!model.containsPerson(developerToDelete)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
+        }
+
+        // Check if the developer is part of the team
+        if (!model.personAlreadyInTeam(teamName, developerToDelete)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_IN_TEAM);
+        }
+
+        // If all checks pass, remove the developer from the team
+        IdentityCode developerIdentityCode = model.getIdentityCodeByName(developerToDelete);
+        model.deleteDeveloperFromTeam(teamName, developerIdentityCode);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_DEVELOPER_FROM_TEAM_SUCCESS, developerToDelete));
+    }
+
+
+    /**
+     * Compares this command with another object for equality.
+     *
+     * @param other The object to compare with.
+     * @return true if the objects are the same or equal, false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteDeveloperFromTeamCommand)) {
+            return false;
+        }
+
+        DeleteDeveloperFromTeamCommand otherDeleteDevFromTeamCommand = (DeleteDeveloperFromTeamCommand) other;
+        return developerToDelete.equals(otherDeleteDevFromTeamCommand.developerToDelete);
+    }
+    /**
+     * Generates a string representation of this command.
+     *
+     * @return A string representing the team name to delete.
+     */
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("developerToDelete", developerToDelete)
+                .add("teamName", teamName)
+                .toString();
     }
 }

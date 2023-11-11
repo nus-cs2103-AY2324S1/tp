@@ -9,28 +9,39 @@ LinkTree is the top contact solution for software professionals. Using our uniqu
 
 Given below are my contributions to the project.
 
-* **New Feature**: to be added soon
+* **New Feature**:
+  * Added "DeleteTeam" feature, allowing the users to delete a team using the team name whenever needed. 
+  * Added "DeleteDeveloperFromTeam" feature, allowing the users to remove developers from a specific team to reorganise the team.
+  
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=erohsikivar&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
-* **Project management**: to be added soon
+* **Project management**:
+  * Added new test cases to our project to handle all the edge cases to maximise the test coverage.
+  * Modified the pre-defined test cases to support our new storage system.
+  * Also made sure our team followed the coding standards and did not 
 
-* **Enhancements to existing features**: to be added soon
+* **Enhancements to existing features**:
+  * Modified the "Delete" feature to handle all the exceptions before deleting a developer. 
 
 * **Documentation**:
   * User Guide:
-    * Transform the form of our previous User Guide draft and upload into github
+    * Updated the introduction part of our UG.
+    * Added new features to the UG such as "DeleteTeam" and "DeleteDeveloperFromTeam".
+    * Added and modified all images to ensure uniformity in the UG.
+    * Added Command summary and Glossary to our UG.
 
   * Developer Guide:
-    to be added soon
+    * Modified the UML diagrams in Developer guide for the Model part.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): to be added soon
   * Contributed to forum discussions to be added soon
-  * Reported bugs and suggestions for other teams in the class to be added soon
+  * Reported bugs and suggestions for other teams in the class during the Pratical Exam Dry Run.
   * Some parts of the history feature I added was adopted by several other classmates to be added soon
 
 * **Tools**:
- to be added soon
+  * Used PlantUML tool to design our diagrams in the developer guide.
+  * Used SceneBuilder to edit fxml files and make changes to our GUI. 
 
 

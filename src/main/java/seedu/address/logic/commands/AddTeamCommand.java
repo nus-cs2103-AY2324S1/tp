@@ -48,8 +48,6 @@ public class AddTeamCommand extends Command {
         teamToAdd = teamName;
         leaderToAdd = teamLeader;
     }
-    //execute method WILL NOT RUN because the "team" attribute is not configured to return a formatted string.
-    //update that class and then this will run
     /**
      * Executes the AddTeamCommand by adding a new team to the model.
      *
@@ -70,8 +68,6 @@ public class AddTeamCommand extends Command {
         //gets the Person object of leader, then his identity code
         IdentityCode teamLeaderIdentityCode = model.getPersonByName(leaderToAdd).getIdentityCode();
 
-        //model.updateFilteredPersonList(person -> person.getName().equals(leaderToAdd));
-        //Person teamLeader = model.getFilteredPersonList().stream().findFirst().orElse(null);
         Team team = new Team(teamLeaderIdentityCode, teamToAdd);
         model.addTeam(team);
 
@@ -91,12 +87,12 @@ public class AddTeamCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddDevCommand)) {
+        if (!(other instanceof AddTeamCommand)) {
             return false;
         }
 
         AddTeamCommand otherAddCommand = (AddTeamCommand) other;
-        return teamToAdd.equals(otherAddCommand.teamToAdd);
+        return teamToAdd.equals(otherAddCommand.teamToAdd) && leaderToAdd.equals(otherAddCommand.leaderToAdd);
     }
 
     /**

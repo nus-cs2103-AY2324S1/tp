@@ -22,6 +22,7 @@ public class TypicalTeams {
      */
     public static final Team TEAM2 = new TeamBuilder().withTeamLeader("2")
             .withTeamName("TEAM2").withDevelopers("3").build();
+    public static final Team TEAM3 = new TeamBuilder().withTeamLeader("6").withTeamName("TEAM3").build();
 
     /**
      * Gets typical team book.
