@@ -144,8 +144,10 @@ How the parsing works:
   - Description
   - Amount
   - Date
-  - Integer id of person (Optional)
+  - PersonId (Optional association with a staff member)
 - Similar to the `AddressBook`, maintains an `ObservableList<Transaction>` that can be observed by external entities, facilitating automatic updates in the UI.
+
+<img src="images/TransactionClassDiagram.png" width="450" />
 
 ### Storage component
 
