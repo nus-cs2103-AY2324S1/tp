@@ -245,7 +245,7 @@ Examples:
 ### Getting list for revision : `review`
 
 Displays the flash cards of all the words to be reviewed that day
-* The review command will present flash cards selected by Flashlingo based on your level, utilizing the Leitner system.
+* The review command will present flash cards selected by Flashlingo based on your level, as well as the interval between the last review, utilizing the Leitner system.
 * If you wish to view all your saved flash cards without the [Leitner system's](https://en.wikipedia.org/wiki/Leitner_system#) selection criteria, please use the `list` command.
 
 [Command Format](#commands): `review ...`
@@ -256,7 +256,7 @@ Output:
 
 **Note**
 * The message `0 flashcards listed!` occurs when:
-    * There are no flash cards scheduled for today's review.
+    * There are no flash cards scheduled for review at the time when the command is executed.
     
 
 ###  Starts review session : `start`
@@ -268,7 +268,7 @@ Starts a new review session.
 Output: `Review Session has been started.`
 
 **Note**
-* If there are no words to review, users will not be able to start review session. `You have no more words to review!`
+* If there are no words to review, users will not be able to start review session. <br> `You have no more words to review!`
   will be displayed.
 
 
@@ -318,8 +318,6 @@ they will be automatically shown in the section below. Otherwise, review session
 Output:  
 
 ![img.png](images/No.png)
-
-if there's no word left in the review session.  
 
 **Note**
 * Pressing `no` button will have the same effect.
