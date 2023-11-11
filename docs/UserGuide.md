@@ -117,6 +117,17 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+
+### 1.3 About student notes
+
+Student notes of a student can be viewed by double-clicking on the specific student that you want under the "Student"
+column. You can only view student notes for one student at a time. When you perform any commands, the notes column
+will be cleared (You will have to double-click once again).
+
+If you have any feedback on our features pertaining to student notes, feel free to send your feedback to the 
+developer team!
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 2. Features
@@ -294,7 +305,8 @@ Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS] [r/RISK_LEVEL]`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
-The `tag STUDENT_INDEX r/RISK_LEVEL` command is equivalent to `edit STUDENT_INDEX r/RISK_LEVEL`.
+- The `tag STUDENT_INDEX r/RISK_LEVEL` command is equivalent to `edit STUDENT_INDEX r/RISK_LEVEL`.
+- Providing the same field as before (eg. changing contact from 99998888 to 99998888) will not throw an error
 </div>
 
 Valid examples:
