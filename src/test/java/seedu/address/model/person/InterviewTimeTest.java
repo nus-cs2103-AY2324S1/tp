@@ -23,8 +23,8 @@ public class InterviewTimeTest {
         assertFalse(InterviewTime.isValidTime(" ")); // spaces only
         assertFalse(InterviewTime.isValidTime("^")); // only numbers and '/'
         assertFalse(InterviewTime.isValidTime("10/30/2003 3pm")); // invalid format
-        assertFalse(InterviewTime.isValidTime(("00/00/0000 1200"))); // invalid format
-        assertFalse(InterviewTime.isValidTime(("01/01/1999 1000"))); //out of range
+        assertFalse(InterviewTime.isValidTime("00/00/0000 1200")); // invalid format
+        assertFalse(InterviewTime.isValidTime("01/01/1999 1000")); //out of range
 
         // valid name
         assertTrue(InterviewTime.isValidTime("01/01/2001 0100")); // correct format

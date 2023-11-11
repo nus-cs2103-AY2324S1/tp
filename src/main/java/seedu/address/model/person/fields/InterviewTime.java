@@ -39,17 +39,16 @@ public class InterviewTime {
     public static boolean isValidTime(String test) {
         if (test.equals("cancel")) {
             return true;
-        } else {
-            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            try {
-                LocalDateTime dateTime = LocalDateTime.parse(test, inputFormatter);
-                LocalDateTime minDate = LocalDateTime.of(2000, 1, 1, 00, 00);
-                LocalDateTime maxDate = LocalDateTime.of(9999, 12, 31, 00, 00);
-                boolean isWithinInvalidTime = dateTime.isBefore(minDate) || dateTime.isAfter(maxDate);
-                return test.matches(VALIDATION_REGEX) && !isWithinInvalidTime;
-            } catch (DateTimeException e) {
-                return false;
-            }
+        }
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(test, inputFormatter);
+            LocalDateTime minDate = LocalDateTime.of(2000, 1, 1, 00, 00);
+            LocalDateTime maxDate = LocalDateTime.of(9999, 12, 31, 00, 00);
+            boolean isWithinInvalidTime = dateTime.isBefore(minDate) || dateTime.isAfter(maxDate);
+            return test.matches(VALIDATION_REGEX) && !isWithinInvalidTime;
+        } catch (DateTimeException e) {
+            return false;
         }
     }
 
