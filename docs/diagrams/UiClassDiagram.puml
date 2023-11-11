@@ -32,25 +32,28 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
-UiManager -down-> "1" MainWindow
+UiManager --> "1" MainWindow
 MainWindow *-down-> "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" GoalBox
-MainWindow *-down-> "1" CardListPanel
+MainWindow *-left-> "1" GoalBox
+MainWindow *-right-> "1" CardListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
-
+MainWindow --> "0..1" ExportWindow
+MainWindow --> "0..1" ImportWindow
 CardListPanel -down-> "*" DisplayCard
 
-MainWindow -left-|> UiPart
+MainWindow -right-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 CardListPanel --|> UiPart
-DisplayCard --|> UiPart
-StatusBarFooter --|> UiPart
+DisplayCard ---|> UiPart
+StatusBarFooter ---|> UiPart
 HelpWindow --|> UiPart
 GoalBox --|> UiPart
+ImportWindow --|> UiPart
+ExportWindow --|> UiPart
 
 DisplayCard ..> Model
 UiManager -right-> Logic
@@ -58,6 +61,8 @@ MainWindow -left-> Logic
 
 CardListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
+ExportWindow -[hidden]left- CommandBox
+ImportWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 

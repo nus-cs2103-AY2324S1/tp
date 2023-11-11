@@ -31,12 +31,12 @@ Given below are my contributions to the project.
   * Justification: Storing solve count in json file will allow ease of reference and statistics tracker
   * Highlights: Solve counts keeps track of number of times a card is solved in history
 
-* **Export**: Export functionality
+* **New Feature**: Export
   * What it does: Showcases the current deck of cards and allows users to copy them and send to their peers.
   * Justification: Allows one to share the generated cards with their peers
   * Highlights: Separate window pops up for export
 
-* **Import**: Import functionality
+* **New Feature**: Import
   * What it does: Allows users to input the text that they have received from their peers
   * Justification: Users will need to import the cards their peers shared with them in a fixed format
   * Highlights: Separate window pops up for import, will close the app after importing for best Ui experience
@@ -49,10 +49,10 @@ Given below are my contributions to the project.
   * Release `1.3(final)` for PE-D
 
 * **Enhancements to existing features**:
-  * Removal of test cases that were only applicable to the previous project [#83]()
-  * Hid the answers from the Display Card to simulate exam conditions [#72]()
-  * Wrote additional tests for existing features to increase coverage from 60% to 63% [\#116]()
-  * Enhance existing test cases to increase code coverage from 65% to 69% () [\#209]()
+  * Removal of test cases that were only applicable to the previous project. [#83]()
+  * Hid the answers from the Display Card to simulate exam conditions. [#72]()
+  * Wrote additional tests for existing features to increase coverage from 60% to 63%. [\#116]()
+  * Enhance existing test cases to increase code coverage from 65% to 69% . [\#209]()
 
 * **Documentation**:
   * User Guide:
