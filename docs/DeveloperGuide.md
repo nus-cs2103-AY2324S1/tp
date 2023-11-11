@@ -275,11 +275,11 @@ The following activity diagram summarizes what happens when a user executes an a
     * Pros: Do not have to parse user input multiple times in order for the user to perform mass addition of new fosterers.
     * Cons: The add command would be even more convoluted due to the increase in length with all the fields/arguments required, making the UI less desirable.
 
-### Edit in Profile Page Feature
+### Editing the Changes in Profile Page Feature
 
 #### Implementation 
 
-The mechanism allows the user to edit details of a fosterer in their profile page by jumping the text cursor to the detail field. This feature is facilitated by `ViewModeParser` and `EditFieldCommand` classes, to handle user input in the profile page and edit the correct detail of a fosterer. This feature is implemented using the following components and operations: 
+The mechanism allows the user to edit details of a fosterer in their profile page. This feature is facilitated by `ViewModeParser`, and `EditFieldCommand` classes, to handle user input in the profile page and edit the correct detail of a fosterer. This feature is implemented using the following components and operations: 
 
 * `ViewModeParser` - Represents the parser that parses commands that are executed in a fosterer's profile. 
 * `EditFieldCommand` - The core component responsible for executing the edit of a fosterer in the address book. 
@@ -292,8 +292,25 @@ Step 1. The user enters the name of the field. e.g. "name". Since the normal per
 
 Step 2. With `executeInView()`, `ViewModeParser` is used to parse the command which returns `EditFieldCommand`.
 
-Step 3. `EditFieldCommand` is executed, and with the `CommandType.EDIT_FIELD` carried by `CommandResult`, `MainWindow` calls `handleEditField()` method. 
+Step 3. `EditFieldCommand` is executed, and with the `CommandType.EDIT_FIELD` carried by `CommandResult`, `MainWindow` calls `handleEditField()` method. The interaction between `MainWindow` and `PersonProfile` is covered in detail in **[View Feature](#view-feature)**. 
 
+
+### Saving the Changes in Profile Page Feature 
+
+The mechanism allows the user to save the edited details of a fosterer in their profile page. This feature is facilitated by `ViewModeParser`, and `SaveCommand` classes, to handle user input in the profile page and save the updated fosterer. This feature is implemented using the following components and operations:
+
+* `ViewModeParser` - Represents the parser that parses commands that are executed in a fosterer's profile.
+* `SaveCommand` - The core component responsible for saving the changes made by the user.
+* `MainWindow` - The UI component that handles navigating through fields.
+* `CommandType` - The Enum class that represents the type of command which MainWindow checks to handle the UI change.
+
+Given below is an example usage scenario and how the save mechanism behaves at each step, given that the user already opened person profile page:
+
+Step 1. The user enters `save` command. Since the normal person list is invisible, the command text "save" is passed to `executeInView()` method in `MainWindow` class.
+
+Step 2. With `executeInView()`, `ViewModeParser` is used to parse the command text which returns `SaveCommand`.
+
+Step 3. `EditFieldCommand` is executed, and with the `CommandType.SAVE` carried by `CommandResult`, `MainWindow` calls `handleEditField()` method. The interaction between `MainWindow` and `PersonProfile` is covered in detail in **[View Feature](#view-feature)**.
 
 
 ### Delete feature
