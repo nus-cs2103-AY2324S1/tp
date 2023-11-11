@@ -49,6 +49,12 @@ public class PersonBuilder {
         grpList = personToCopy.getGroups();
         timeIntervalList = personToCopy.getTime();
     }
+
+
+    /**
+     * Default person builder
+     * @param groupToCopy groupList to copy
+     */
     public PersonBuilder(GroupList groupToCopy) {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);

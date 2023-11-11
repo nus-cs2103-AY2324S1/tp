@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupList;
-import seedu.address.model.group.GroupRemark;
-
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS2103T;
 
@@ -12,8 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupList;
 import seedu.address.model.group.GroupRemark;
-
 /**
  * A utility class containing a list of {@code Group} objects to be used in tests.
  */
