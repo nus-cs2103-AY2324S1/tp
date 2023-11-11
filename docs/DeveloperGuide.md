@@ -702,16 +702,15 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a student
 
-1. Deleting a student from the current students list.
+1. Deleting a student from Class Manager.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the result display box.
 
-2. Deleting a student that is not in the current students list.
+2. Deleting a student that is not in Class Manager.
 
    1. Test case: `delete s/vnqvq1924`<br>
       Expected: No student is deleted. Student Number error details shown in the result display box.
-
 
 3. Deleting a student with an invalid student number.
 
@@ -801,16 +800,18 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a student
 
-1. Adding a new student to the current students list.
+1. Adding a new student to Class Manager.
 
    1. Test case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`<br>
       Expected: The student with NAME, STUDENT_NUMBER and EMAIL is added to the list. Details of the added student shown in the result display box.
       <br><br>
-2. Adding an already existing student to the current students list.
+   
+2. Adding an already existing student to Class Manager.
 
    1. Test case: Student Number that is already present in the list <br>
       Expected: No student is added. Error details shown in the result display box.
       <br><br>
+   
 3. Adding a student without some required fields <br>
    1. Test Case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`, `add n/NAME s/PHONE e/EMAIL`<br>
       Expected: No student is added. Error details shown in the result display box.
@@ -831,16 +832,17 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a comment to a student
 
-1. Adding a comment to a student in the current students list.
+1. Adding a comment to a student in Class Manager.
 
    1. Test case: `comment s/STUDENT_NUMBER cm/COMMENT`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new COMMENT.
       <br><br>   
-2. Adding a comment to a student where the student is not in the list (Invalid Student Number). 
+2. Adding a comment to a student where the student is not in Class Manager (Invalid Student Number). 
 
    1. Test case: Comment command with Student Number that is not present in the list <br>
       Expected: No student is edited. Error details shown in the result display box.
       <br><br>
+   
 3. Adding a comment to a student where the new comment is empty.
 
    1. Test case: `comment s/STUDENT_NUMBER cm/`<br>
@@ -857,6 +859,30 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]...`<br>
       Expected: The student with NAME, STUDENT_NUMBER, EMAIL and TAG is added to the list. Details of the added student shown in the result display box.
+
+### Listing students
+
+1. Listing all students in Class Manager.
+
+   1. Test case: `list`<br>
+      Expected: The list of students is shown in the result display box.
+      <br><br>
+
+### Display help
+
+1. Displaying help.
+
+   1. Test case: `help`<br>
+      Expected: The help window with list of command is shown.
+      <br><br>
+
+### Exiting the app
+
+1. Exiting the app.
+
+   1. Test case: `exit`<br>
+      Expected: The app closes and all data is saved.
+      <br><br>
 
 --------------------------------------------------------------------------------------------------------------------
 
