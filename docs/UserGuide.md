@@ -77,6 +77,8 @@ If you are an engineering hiring manager who have a good understanding in CLI-ba
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 # How to use this user guide
 
 To quickly find the information you need, refer to the [Table of Contents](#table-of-contents) located at the beginning of this guide.
@@ -221,8 +223,6 @@ For each **interview**, we see the following details:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always"></div>
-
 ## General Features
 
 ### Viewing help : `help`
@@ -255,8 +255,6 @@ Format: `clear`
 InterviewHub data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Back to the Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always"></div>
 
 ## Applicant Management Features
 
@@ -382,8 +380,6 @@ Shows a list of all applicants in **InterviewHub** onto the GUI.
 Format: `list-a`
 
 [Back to the Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always"></div>
 
 ## Interview Management Features
 
@@ -732,7 +728,7 @@ After `sort-time`:
 InterviewHub data are saved automatically as a JSON file `[JAR file location]/data/interviewhub.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-If your changes to the data file makes its format invalid, InterviewHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, InterviewHub will not work. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 [Back to the Table of Contents](#table-of-contents)
@@ -808,8 +804,6 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 [Back to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always"></div>
 
 # Glossary
 
