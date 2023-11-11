@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -246,6 +247,15 @@ public class Person {
 
     public ObservableList<Note> getNotes() {
         return notes;
+    }
+
+    /**
+     * Adds a listener to the notes list, currently used to ensure the notes list
+     * window is reactive.
+     * @param listener Listener to add.
+     */
+    public void addNotesListener(ListChangeListener<Note> listener) {
+        notes.addListener(listener);
     }
 
     /**

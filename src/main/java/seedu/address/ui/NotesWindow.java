@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -90,6 +91,15 @@ public class NotesWindow extends UiPart<Stage> {
         // make sure the width is always correct even after resizing the window
         notesListView.widthProperty().addListener((observable) -> {
             notesListView.refresh();
+        });
+
+        // Observe the person's notes for changes
+        this.person.addNotesListener((ListChangeListener.Change<? extends Note> c) -> {
+            while (c.next()) {
+                if (c.wasAdded() || c.wasRemoved()) {
+                    populateListView(person.getNotes());
+                }
+            }
         });
     }
 
