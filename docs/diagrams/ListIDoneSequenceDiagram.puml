@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "lid:ListInterviewsDoneCommand" as ListInterviewsDoneCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":InterviewIsDonePredicate" as InterviewIsDonePredicate MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list-i-done")
+activate LogicManager
+
+LogicManager --> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser
+
+create ListInterviewsDoneCommand
+AddressBookParser --> ListInterviewsDoneCommand
+activate ListInterviewsDoneCommand
+
+ListInterviewsDoneCommand --> AddressBookParser
+deactivate ListInterviewsDoneCommand
+
+AddressBookParser --> LogicManager : ListInterviewsDoneCommand
+deactivate AddressBookParser
+
+LogicManager --> ListInterviewsDoneCommand : execute(model)
+activate ListInterviewsDoneCommand
+
+create InterviewIsDonePredicate
+ListInterviewsDoneCommand --> InterviewIsDonePredicate
+activate InterviewIsDonePredicate
+
+InterviewIsDonePredicate --> ListInterviewsDoneCommand
+deactivate InterviewIsDonePredicate
+
+ListInterviewsDoneCommand --> Model : updateFilteredInterviewList(interviewIsDonePredicate)
+activate Model
+
+Model --> ListInterviewsDoneCommand
+deactivate Model
+
+ListInterviewsDoneCommand --> LogicManager : CommandResult
+deactivate ListInterviewsDoneCommand
+destroy InterviewIsDonePredicate
+
+[<--LogicManager : CommandResult
+deactivate LogicManager
+destroy ListInterviewsDoneCommand
+@enduml

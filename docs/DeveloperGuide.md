@@ -164,11 +164,11 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Design consideration
 
-### Find interview by job title feature
+### Find interview by job role feature
 
 #### Implementation
 
-The find interview by job role feature allows users to query the list of added interview for interviews that match the job role via the command `find-i KEYWORD [MORE_KEYWORD]... `, where `KEYWORD` must not
+The find interview by job role feature allows users to query the list of added interview for interviews that match the job role via the command `find-i KEYWORD(S) `, where `KEYWORD` must not
 be an empty string.
 
 The `find-i` command is facilitated by the `FindInterviewCommand`, `FindInterviewCommandParser`, and `JobContainsKeywordsPredicate`.
@@ -176,7 +176,7 @@ It uses `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` to a
 in order to produce a filtered list containing only entries whose job correspond to `KEYWORD [MORE_KEYWORD]...`.
 
 #### How is the command executed
-1. The user inputs the `find-i` command together with non-empty job-title as keyword(s);
+1. The user inputs the `find-i` command together with non-empty job role as keyword(s);
 2. The `LogicManager` receives the command string and forwarded it to the `AddressBookParser`.
 3. The `AddressBookParser` checks the type of command and constructs `FindInterviewCommandParser` to parse the keyword(s).
 4. The `FindInterviewCommandParser` constructs `JobContainsKeywordsPredicate` containing the keyword as predicate.
@@ -311,46 +311,30 @@ This feature is implemented though the `TimeParser` class. This class contains s
   
   - The `dateOnly` parameter is a flag to indicate how to parse the given `date`. If `dateOnly` is set to false, then the TimeParser will parse valid dates that are in the list of accepted date (without time) formats. Otherwise, if `dateOnly` is set to true, then the TimeParser will parse valid dates that are in the list of accepted date (with time) formats.
   - Accepted time formats:
-      * DD/MM/YYYY and time:
-          * `16 May 2024 1515`
-          * `16 May 2024 3.15pm`
-          * `16 May 2024 3pm`
-          * `16-05-2024 1515`
-          * `16-05-2024 3.15pm`
-          * `16-05-2024 3pm`
-          * `16-05-24 1515`
-          * `16-05-24 3.15pm`
-          * `16-05-24 3pm`
-          * `16/05/2024 1515`
-          * `16/05/2024 3.15pm`
-          * `16/05/2024 3pm`
-          * `16/05/24 1515`
-          * `16/05/24 3.15pm`
-          * `16/05/24 3pm`
-      * MM, DD and time:
-          * `16 May 1515`
-          * `16 May 3.15pm`
-          * `16 May 3pm`
-          * `16 January 1515`
-          * `16 January 3.15pm`
-          * `16 January 3pm`
-          * `16/5 1515`
-          * `16/5 3.15pm`
-          * `16/5 3pm`
-          * `16/05 1515`
-          * `16/05 3.15pm`
-          * `16/05 3pm`
-    - Accepted date formats
-      * DD/MM/YYYY:
-        * `16-05-2024`
-        * `16/05/2024`
-      * DD/MM:
-        * `16/05`
-        * `16 May`
-          * _Must be a prefix of a valid month of at least 3 characters_
-
-  - The sequence diagram shown below shows how the API is called by other classes:
-
+    * DD/MM/YYYY and time:
+        * `16 May 2024 TIME`
+        * `16-05-2024 TIME`
+        * `16-05-24 TIME`
+        * `16/05/2024 TIME`
+        * `16/05/24 TIME`
+    * MM, DD and time:
+        * `16 May TIME`
+        * `16 January TIME`
+        * `16/5 TIME`
+        * `16/05 TIME`
+    * The `TIME` placeholder can be replaced with the formats below:
+        * `1515`
+        * `3.15pm`
+        * `3pm`
+  - Accepted date formats
+    * DD/MM/YYYY:
+      * `16-05-2024`
+      * `16/05/2024`
+    * DD/MM:
+      * `16/05`
+      * `16 May`
+        * _Must be a prefix of a valid month of at least 3 characters_
+  - The Sequence Diagram below illustrates how other classes interact with `TimeParser` when `parseDate(date, false)` is called.
     ![TimeParserSequenceDiagram.png](images/TimeParserSequenceDiagram.png)
 
 #### How is the command executed
@@ -397,6 +381,9 @@ This feature is implemented though the `TimeParser` class. This class contains s
 #### Implementation
 The list free times for a given day feature allows the user to list all the blocks of time that are not taken by a scheduled interview. This command is in the format `list-freetime DATE` where `DATE` is a valid date string.
 
+The Sequence Diagram below illustrates the interactions within the `Logic` component when `execute("list-freetime 12/12/2099")` is called.
+![images/ListFreeTimeSequenceDiagram.png](images/ListFreeTimeSequenceDiagram.png)
+
 The `list-freetime DATE` command is facilitated by the `ListFreeTimeCommand`, `ListFreeTimeCommandParser`, along with the other internal classes omitted for brevity.
 #### How is the command executed
 1. The user inputs the `list-freetime DATE`
@@ -425,7 +412,7 @@ Aspect: How the command finds free times:
     * Cons:
         * The `ListFreeTimeCommand` will have to call the `getAddressBook` method of the `ModelManager` object instance, and then use the getter method of the `AddressBook` object instance. Violates the _Law of Demeter_ principle since the methods of a stranger (i.e. `AddressBook`) is being called, which `ListFreeTimeCommand` is not closely related to
         * Increases coupling since `ListFreeTimeCommand` now has a dependency with `AddressBook`
-
+      
 ### List all interviews for today feature
 
 #### Implementation
@@ -438,6 +425,9 @@ Aspect: How the command finds free times:
 
 #### Implementation
 The list interviews done/not done feature allows the user to see all the interviews that are done or not done in a single command. The command format is `list-i-done` to show all the interviews that are done, and `list-i-not-done` to show all interviews that are not done.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component when `execute("list-i-done")` is called.
+![ListIDone.png](images/ListIDoneSequenceDiagram.png)
 
 #### How is the command executed
 1. The user inputs `list-i-done` or `list-i-not-done` 
@@ -506,6 +496,9 @@ The sort interview feature allows the user to sort all the interviews that have 
 
 The `sort` command is facilitated by the `SortRateCommand` and the `SortTimeCommand`. It enables the user to sort all the scheduled interviews by rating or timing. For rating, the interviews will be sorted in descending order of rating. For interview times, the interviews will be sorted in ascending chronological order of start time.
 
+The Sequence Diagram below illustrates the interactions within the `Logic` component when `execute("sort-rate")` is called.
+![images/SortISequenceDiagram.png](images/SortISequenceDiagram.png)
+
 #### How is the command executed
 1. The user inputs the `sort-rate` or `sort-time` command
 2. The `LogicManager` receives the `sort-rate` or `sort-time` command string and forwards it to the `AddressBookParser`.
@@ -560,31 +553,31 @@ Aspect: How the sort command works
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                               | I want to …​                             | So that I can…​                                                           |
-|----------|-------------------------------------------------------|------------------------------------------|---------------------------------------------------------------------------|
-| `* * *`  | New user of the app                                   | see usage instructions                   | refer to instructions when I first started to use the App                 |
-| `* * *`  | Engineering Manager ready for job applicant           | add a new applicant                      | save their contact details into the App                                   |
-| `* * *`  | Engineering Manager with many applicants              | rate an applicant                        | keep track of the applicant performance for the interview                 |
-| `* * *`  | Engineering Manager ready to start an interview       | schedule an interview                    | save the interview information into the application                       |
-| `* * *`  | Engineering Manager ready for next round of interview | delete an applicant                      | remove their contact details that I no longer need                        |
-| `* * *`  | Engineering Manager that finished an interview        | delete an interview                      | remove the interview that has already been completed                      |
-| `* * *`  | Busy Engineering Manager                              | find an applicant by name                | locate details of applicants without having to go through the entire list |
-| `* * *`  | Busy Engineering Manager                              | find a interview by job role             | easily locate the interview for the particular job role                   |
-| `* *`    | Busy Engineering Manager                              | set reminder of interview                | stay organised and track upcoming interview                               |
-| `* *`    | Engineering Manager with sensitive information        | hide private contact details             | protect the privacy of the applicants information in the App              |
-| `* *`    | Engineering Manager with many applicants              | sort the applicants by skill             | prioritise and focus on the most promising candidates                     |
-| `* *`    | Busy Engineering Manager                              | find free time slot                      | schedule an interview without time clash                                  |
-| `* *`    | Engineering Manager                                   | update an applicant details              | easily update their information on the App                                |
-| `* *`    | Engineering Manager                                   | update a job role                        | easily change the details about the job role                              |
-| `* *`    | Engineering Manager with limited budget               | track the cost per hire                  | ensure that the company budget is not exceeded                            |
-| `* *`    | Team-Oriented Engineering Manager                     | add other interviewer                    | facilitate collaboration and delegation of responsibilities               |
-| `*`      | Organised Engineering Manager                         | sort applicants by name                  | locate an applicant easily                                                |
-| `*`      | Engineering Manager with many contacts                | import contacts from other file          | add multiple contacts into the App smoothly                               |
-| `*`      | Meticulous Engineering Manager                        | store the applicant's background         | make a more informed choice to benefit the company                        |
-| `*`      | Engineering Manager with multiple rounds of interview | track the progress of each candidate     | maintain a clear overview of our recruitment efforts                      |
-| `*`      | New Engineering Manager                               | analyse the performance of the interview | make improvements to my interview processes                               |
-| `*`      | Helpful Engineering Manager                           | provide feedback to the applicant        | offer constructive advice to help them improve their skills               |
-| `*`      | Long user of the app                                  | provide feedback to the developer        | suggest improvements and enhancements for the app                         |
+| Priority | As a …​                                                      | I want to …​                             | So that I can…​                                                           |
+|----------|--------------------------------------------------------------|------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | New user of the app                                          | see usage instructions                   | refer to instructions when I first started to use the App                 |
+| `* * *`  | Engineering Hiring Manager ready for job applicant           | add a new applicant                      | save their contact details into the App                                   |
+| `* * *`  | Engineering Hiring Manager with many applicants              | rate an applicant                        | keep track of the applicant performance for the interview                 |
+| `* * *`  | Engineering Hiring Manager ready to start an interview       | schedule an interview                    | save the interview information into the application                       |
+| `* * *`  | Engineering Hiring Manager ready for next round of interview | delete an applicant                      | remove their contact details that I no longer need                        |
+| `* * *`  | Engineering Hiring Manager that finished an interview        | delete an interview                      | remove the interview that has already been completed                      |
+| `* * *`  | Busy Engineering Hiring Manager                              | find an applicant by name                | locate details of applicants without having to go through the entire list |
+| `* * *`  | Busy Engineering Hiring Manager                              | find a interview by job role             | easily locate the interview for the particular job role                   |
+| `* *`    | Busy Engineering Hiring Manager                              | set reminder of interview                | stay organised and track upcoming interview                               |
+| `* *`    | Engineering Hiring Manager with sensitive information        | hide private contact details             | protect the privacy of the applicants information in the App              |
+| `* *`    | Engineering Hiring Manager with many applicants              | sort the applicants by skill             | prioritise and focus on the most promising candidates                     |
+| `* *`    | Busy Engineering Hiring Manager                              | find free time slot                      | schedule an interview without time clash                                  |
+| `* *`    | Engineering Hiring Manager                                   | update an applicant details              | easily update their information on the App                                |
+| `* *`    | Engineering Hiring Manager                                   | update a job role                        | easily change the details about the job role                              |
+| `* *`    | Engineering Hiring Manager with limited budget               | track the cost per hire                  | ensure that the company budget is not exceeded                            |
+| `* *`    | Team-Oriented Engineering Hiring Manager                     | add other interviewer                    | facilitate collaboration and delegation of responsibilities               |
+| `*`      | Organised Engineering Hiring Manager                         | sort applicants by name                  | locate an applicant easily                                                |
+| `*`      | Engineering Hiring Manager with many contacts                | import contacts from other file          | add multiple contacts into the App smoothly                               |
+| `*`      | Meticulous Engineering Hiring Manager                        | store the applicant's background         | make a more informed choice to benefit the company                        |
+| `*`      | Engineering Hiring Manager with multiple rounds of interview | track the progress of each candidate     | maintain a clear overview of our recruitment efforts                      |
+| `*`      | New Engineering Hiring Manager                               | analyse the performance of the interview | make improvements to my interview processes                               |
+| `*`      | Helpful Engineering Hiring Manager                           | provide feedback to the applicant        | offer constructive advice to help them improve their skills               |
+| `*`      | Long user of the app                                         | provide feedback to the developer        | suggest improvements and enhancements for the app                         |
 
 ### Use cases
 
@@ -752,7 +745,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to handle as many applicants as the user is able to manage in their workday/workweek.
 3.  The app should be reasonably responsive to the entire set of user requests(i.e. within 1 second at maximum load).
-4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Managers
+4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Hiring Managers
 that have many years of programming experience).
 
 ### Glossary
@@ -761,7 +754,7 @@ that have many years of programming experience).
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Applicant**: The applicant applying to a particular job role.
 * **Hiring manager**: The manager interviewing the applicant.
-This manager is familiar with the technical aspects of the role. Also called engineering manager.
+This manager is familiar with the technical aspects of the role. Also called engineering hiring manager.
 * **MSS**: Main Success Scenario. It describes the most straightforward
 interaction in a use case where nothing goes wrong.
 * **Extensions**: In a use case, an extension describes an alternative flow of events
@@ -792,6 +785,10 @@ as N/A and the subsequent user rating will be the same as the current model.
 name with the exact same string to be added. As the interview is identifiable mostly based on the name, allowing the same name string will result in
 confusion with the interview object. The future plan is to increase the visibility of the connection between applicant and interview, to remove dependency on the name itself.
 On the other hand, the duplication of phone number and email will be handled in future implementation and no longer allowing such duplication to be entered.
+
+6. The current implementation of find-i does not allow searching for an empty string, which represents the job role when an applicant is applying to the
+company in general. We plan to allow find-i to search for "" (empty string) and " " (whitespaces) so that interviews with applicants that are applying to the
+company in general can be found with the command.
 
 --------------------------------------------------------------------------------------------------------------------
 

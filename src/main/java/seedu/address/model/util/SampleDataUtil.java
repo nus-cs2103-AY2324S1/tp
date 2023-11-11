@@ -14,6 +14,7 @@ import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.Rating;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -62,8 +63,10 @@ public class SampleDataUtil {
         return new Interview[] {
             new Interview(sampleApplicant,
                     "Frontend Engineer",
+                    new Rating("0.0"),
                     new Time(LocalDateTime.of(2025, 1, 1, 10, 0)),
-                    new Time(LocalDateTime.of(2025, 1, 1, 12, 0))
+                    new Time(LocalDateTime.of(2025, 1, 1, 12, 0)),
+                    true
             ),
             new Interview(sampleApplicant2,
                     "Backend Engineer",

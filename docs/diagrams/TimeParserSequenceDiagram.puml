@@ -1,10 +1,16 @@
 @startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
 hide footbox
-participant ":OtherClass" as OtherClass
-box "Logic"
-participant  "TimeParser"
+participant ":OtherClass" as OtherClass USER_COLOR
+
+box "Logic" LOGIC_COLOR_T1
+participant  "TimeParser" as TimeParser <<class>> LOGIC_COLOR
+end box
+
 OtherClass -> TimeParser: parseDate(date, false)
 activate TimeParser
-TimeParser -> OtherClass: Time instance
+TimeParser -> OtherClass: Time
 deactivate TimeParser
 @enduml
