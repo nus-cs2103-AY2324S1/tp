@@ -202,7 +202,7 @@ The following sequence diagram describes the process of `add` command:
 **Aspect: Handling group attribute in user input**
 
 * **Alternative 1 (Current Choice):** Only allow user to add one group for each `add` Command
-    * Pros: Conveniently adds a person into a single group while creating a new contact at the same time, relatively easier to implement parser. 
+    * Pros: Conveniently adds a person into a single group while creating a new contact at the same time, relatively easier to implement parser.
     * Cons: User input may get relatively longer.
 * **Alternative 2:** Allow user to add as many groups as required for each `add` Command
     * Pros: Conveniently adds a person into multiple group while creating a new contact at the same time.
@@ -232,7 +232,7 @@ The following sequence diagram describes the process of `addtime` command:
 **Aspect: Handling group attribute in user input**
 
 * **Alternative 1 (Current Choice):** Allows user to add more than one time intervals in each `addtime` command.
-  * Pros: Conveniently adds a multiple time intervals into person. 
+  * Pros: Conveniently adds a multiple time intervals into person.
   * Cons: User input may get relatively longer, relatively harder to implement parser.
 * **Alternative 2:** Allow user to only add single time interval in each `addtime` Command
   * Pros: Conveniently adds a person into group while creating a new contact at the same time, relatively easier to implement parser.
@@ -339,8 +339,6 @@ The following sequence diagram shows how the Delete Group operation works:
 
 </box>
 
-
-
 ### Group Remark Feature
 
 #### Implementation
@@ -359,6 +357,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/GroupRemarkSequenceDiagram.puml" alt="GroupRemarkSequenceDiagram" />
 
+<box type="info" seamless>
+
+**Note:** The lifeline for `GroupRemarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
 #### Design Considerations
 
 **Aspects:**
@@ -368,7 +372,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     - Cons: May be troublesome if the user wants to keep contents from the original remark.
 - **Alternative 2:** Edits original remark
     - Pros: Easy to add more information.
-    - Cons: Could be confusing to edit if there are many changes.
+    - Cons: Could be confusing to edit if there are many changes or remark is too long.
 
 ### Delete Time Feature
 
@@ -432,7 +436,7 @@ Below is an activity diagram that illustrates the control flow for Delete Person
 
 ### Group Person
 
-#### Proposed Implementation
+#### Implementation
 
 The group remark mechanism is facilitated by `Group`. It is stored internally as a `Group Remark`. This operation is exposed in the `Model` interface as `Model#groupPerson(personName, groupName)`.
 
@@ -614,7 +618,7 @@ Use Case ends.
 
 * 1a. If the user provides incomplete or incorrect information.
     * 1a1. ProjectPRO displays an error message.
-    * Use case repeats from step 1. 
+    * Use case repeats from step 1.
 
 **6.3.6. Use case 6: Deleting a group**
 
@@ -646,14 +650,14 @@ Use Case ends.
 * 1a. If the group does not exist.
   * 1a1. ProjectPRO displays an error message.
   * Use case ends.
-  
+
 Use Case ends.
 
 **6.3.8. Use case 8: Finding a group**
 
 **MSS**
 1. User requests to find a group.
-2. ProjectPRO searches for the contact. 
+2. ProjectPRO searches for the contact.
 3. ProjectPRO shows all the contacts from the group and the group remark.
 
 Use Case ends.
@@ -769,7 +773,7 @@ Use Case ends.
 **MSS**
 
 1. User requests to add meeting time to a group.
-2. ProjectPRO adds the meeting time to the group. 
+2. ProjectPRO adds the meeting time to the group.
 3. ProjectPRO displays a success message.
 Use Case ends.
 
@@ -932,7 +936,7 @@ testers are expected to do more *exploratory* testing.
 
 ### 7.6. Deleting a Group
 
-1. Deleting a Group 
+1. Deleting a Group
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -947,7 +951,7 @@ testers are expected to do more *exploratory* testing.
 
 ### 7.7. Adding a group remark
 
-1. Adding a group remark 
+1. Adding a group remark
 
    1. Test case: `remark g/CS2103 r/Lecture on friday`<br>
       Expected: New remark with "Lecture on friday" is added to CS2103.
@@ -1032,7 +1036,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Delete free time to contact
 
-  1. 
+  1.
      2. Prerequisite: `list`<br>
           Expected: All contacts will be shown in address book.
      3. Prerequisite: `addtime n/Alex Yeoh t/mon 1300 - mon 1400`<br>
@@ -1084,7 +1088,7 @@ testers are expected to do more *exploratory* testing.
 
 ### 7.16. Deleting meeting time from group
 
-1. Delete meeting time from group 
+1. Delete meeting time from group
 
 1.
   2. Prerequisite: `list`<br>

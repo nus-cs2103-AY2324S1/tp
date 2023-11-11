@@ -43,7 +43,7 @@ Given below are my contributions to the project.
     * <puml src="diagrams/DeletePersonTimeDiagram.puml" alt="DeletePersonTimeDiagram"/>
     * <puml src="diagrams/DeletePersonTimeActivityDiagram.puml" alt="DeletePersonTimeActivityDiagram"/>
   * Documentation:
-    * Meticulously edited style errors and java docs for `commands`[/#238](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/238) and `tests`[/#250](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/250). 
+    * Meticulously edited style errors and java docs for `commands`[/#238](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/238) and `tests`[/#250](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/250).
 * **Contributions beyond project team**
     * Meticulously review other groups work and provided feedback on potential bugs and how they could improve their product [here](https://github.com/nicholastng010601/ped/tree/main/files).
 
