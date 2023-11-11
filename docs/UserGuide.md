@@ -15,20 +15,20 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Key definitions
-You are a 'beginner' user if ...
+## Key Definitions
+You are a **beginner** user if ...
 
-1. you are new to JABPro (used JABPro less than 5 times) and
-2. you wish to fully rely on the JABPro interface
+1. you are new to JABPro (used JABPro less than 5 times) *and*
+2. you wish to fully rely on the JABPro interface.
 
-You are an 'advanced' user if ...
-1. you have used JABPro multiple times now and
-2. you use JABPro's search and summary statistics extensively for comparison or
-3. you would like to challenge yourself to go beyond the JABPro user interface and manually edit files
+You are an **advanced** user if ...
+1. you have used JABPro multiple times now *and*
+2. you use JABPro's search and summary statistics extensively for comparison *or*
+3. you would like to challenge yourself to go beyond the JABPro user interface and manually edit files.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -80,7 +80,7 @@ Refer to the [Features](#features) below for details of each command.
   e.g in the command `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `t/TAGNAME…​` can be used as ` ` (i.e. 0 times), `t/swe t/intern` for `add` commands or `t/swe intern` for `search` and `delete` commands.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -138,6 +138,12 @@ Adds a person to JABPro.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]…​`
 
+<box type="tip" seamless>
+
+**Tip:** 
+* A person can have any number of tags (including 0)!
+</box>
+
 **Notes regarding the design of the `add` command:**
 * The uniqueness of the person is determined by the name only. This means that you cannot have 2 persons with the same name in the application book.
 * All other fields other than name can be identical between different people in JABPro.
@@ -160,13 +166,6 @@ the tag would still be saved but it would be "uncategorised" by default.
 * If you have multiple tags in different categories with the same name, you must specify the category when you want to 
 add one of these tags to the candidate you are adding.
 
-
-<box type="tip" seamless>
-
-**Tip:** 
-* A person can have any number of tags (including 0)!
-</box>
- 
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -378,17 +377,17 @@ Ideally, this feature can then be used to find the best candidates easily withou
 
 
 
-### Search job applicants by category: `search`
+### Searching job applicants by category: `search`
 
 Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
 
-Format: `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`
+Format: `search (n/NAME... / st/STATUS... / t/TAGNAME...)`
 
-#### Search job applicants by name
+#### Searching job applicants by name
 
 Finds job applicants whose names contain the given keywords.
 
-Format: `search n/KEYWORD [MORE KEYWORDS]`
+Format: `search n/NAME...`
 
 * Keywords are case-insensitive: `search n/Josh` and `search n/josh` return the same result.
 * Keyword has to be a string that does not contain any non-alpha numeric characters.
@@ -401,11 +400,11 @@ Examples:
 * `search n/John` returns `john` and `John Doe`
 * `search n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
-#### Search job applicants by status
+#### Searching job applicants by status
 
 Finds job applicants whose status match any of the given keywords.
 
-Format: `search st/KEYWORD [MORE KEYWORDS]`
+Format: `search st/STATUS...`
 
 * Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
   e.g. `search st/interviewing` will give an error.
@@ -414,13 +413,13 @@ Format: `search st/KEYWORD [MORE KEYWORDS]`
 Example:
 * `search st/interviewed`
 
-#### Search job applicants by tag
+#### Searching job applicants by tag
 
 Finds job applicants whose tag(s) match any of the given tag keywords
 
-Format: `search t/KEYWORD [MORE KEYWORDS]`
+Format: `search t/TAGNAME...`
 
-* Keywords are case-insensitive: `search t/hardworking' and `search t/HARDWORKING` return the same result.
+* Keywords are case-insensitive: `search t/hardworking` and `search t/HARDWORKING` return the same result.
 
 Example:
 * `search t/hardworking`
@@ -438,23 +437,60 @@ Example:
 
 ![Search](images/search-2.png)
 
-### Deleting a person : `delete`
+### Deleting job applicants : `delete`
 
 Deletes the specified job applicants from the address book.
 
-Format: `delete INDEX` or `delete t/TAG`
+Format: `delete INDEX` or `delete (t/TAGNAME... st/STATUS...)`
 
-* Delete by index
-  * Deletes the person at the specified `INDEX`.
-  * The index refers to the index number shown in the displayed person list.
-  * The index **must be a positive integer** 1, 2, 3, …​
-* Delete by tags
-  * Deletes all persons who have the specified TAG or a combination of tags. 
-  * The tag(s) must be prefixed with t/.
+Note:
+* User **cannot** do delete by index and delete by tags & status in a single command.<br>
+  E.g. `delete 1 t/hardworking` is not allowed. 
 
-Examples:
+#### Deleting job applicants by index
+
+Deletes job applicants at the specified index.
+
+Format `delete INDEX`
+
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example: 
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+#### Deleting job applicants by tag
+
+Deletes job applicants whose tag(s) match any of the given tag keywords
+
+* Keywords are case-insensitive: `delete t/hardworking` and `delete t/HARDWORKING` return the same result.
+
+Example:
+* `delete t/hardworking`
+
+#### Deleting job applicants by status
+
+Deletes job applicants whose status match any of the given keywords.
+
+Format: `delete st/STATUS...`
+
+* Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
+  E.g. `delete st/interviewing` will give an error.
+* Keywords are case-insensitive: `delete st/interviewed` and `delete st/INTERVIEWED` return the same result.
+
+Example:
+* `delete st/interviewed`
+
+#### Notes for advanced users:
+* You can combine the status and tags prefixes (e.g. `delete st/offered t/hardworking`) in a single delete command.
+* Each delete category can be used at most once in a single search command.<br>
+  E.g. `delete st/interviewed st/rejected` is not allowed.
+
+Example:
+* `delete st/interviewed rejected t/intern manager` will delete applicants whose:
+    * status is either **interviewed** or **rejected**
+    * AND has a tag `intern` or `manager`
 
 ### Setting an applicant's status : `set`
 
