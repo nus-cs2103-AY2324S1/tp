@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
@@ -64,6 +65,29 @@ public class LogicManagerTest {
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
         backupModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    }
+    @Test
+    public void testFinalConfirmationOnClearCommand() {
+
+        try {
+            logic.execute("reset");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(logic.getFinalConfirmation());
+    }
+
+    @Test
+    public void execute_nonClearCommand_shouldSetFinalConfirmationToFalse() throws Exception {
+        try {
+            logic.execute("random command");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Assert
+        assertFalse(logic.getFinalConfirmation());
     }
 
     @Test
@@ -184,8 +208,6 @@ public class LogicManagerTest {
 
         assertEquals(guiSettings, updatedGuiSettings);
     }
-
-
 
 
 
