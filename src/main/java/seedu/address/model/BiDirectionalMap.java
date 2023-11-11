@@ -167,4 +167,21 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
         }
         return m;
     }
+
+    /**
+     * Faciliates comparison when testing.
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof BiDirectionalMap)) {
+            return false;
+        }
+        BiDirectionalMap<?, ?> other = (BiDirectionalMap<?, ?>) o;
+        return forwardMap.equals(other.forwardMap) && reverseMap.equals(other.reverseMap);
+    }
 }
