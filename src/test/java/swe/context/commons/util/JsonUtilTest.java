@@ -29,7 +29,7 @@ public class JsonUtilTest {
     public static Path tempDir;
 
     private Path getSerializationPath() {
-        return JsonUtilTest.tempDir.resolve("serialization.json");
+        return JsonUtilTest.tempDir.resolve("folder/serialization.json");
     }
 
     @Test

@@ -15,11 +15,13 @@ import swe.context.model.contact.ContainsTagPredicate;
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Filters and lists all contacts whose tags match the"
-            + " specified tag in full. Case insensitive."
-            + "\nParameters: TAG"
-            + "\nExample: " + COMMAND_WORD + " Friend";
+    public static final String MESSAGE_USAGE = String.format(
+        "%s: Filters contacts by tag. Case insensitive. Requires full tag match."
+                + "%nParameters: TAG"
+                + "%nExample: %s CS2103 course",
+        FilterCommand.COMMAND_WORD,
+        FilterCommand.COMMAND_WORD
+    );
 
     private final ContainsTagPredicate predicate;
 

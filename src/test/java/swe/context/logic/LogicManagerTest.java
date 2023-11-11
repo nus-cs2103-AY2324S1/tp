@@ -13,6 +13,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import swe.context.logic.commands.AddCommand;
 import swe.context.logic.commands.CommandResult;
+import swe.context.logic.commands.HelpCommand;
 import swe.context.logic.commands.ListCommand;
 import swe.context.logic.commands.exceptions.CommandException;
 import swe.context.logic.parser.exceptions.ParseException;
@@ -49,7 +50,7 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, Messages.COMMAND_UNKNOWN);
+        assertParseException(invalidCommand, Messages.commandUnknown(HelpCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -61,7 +62,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, Messages.LIST_COMMAND_SUCCESS, model);
+        assertCommandSuccess(listCommand, Messages.COMMAND_LIST_SUCCESS, model);
     }
 
     @Test

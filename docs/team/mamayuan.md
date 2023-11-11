@@ -8,6 +8,9 @@ title: mamayuan's Project Portfolio Page
 
 ## Overview
 
+**ConText** is a desktop app that allows for managing contacts quickly via text commands, with useful features relevant to NUS SoC students.
+While it has a Graphical User Interface, most of its user interactions happen via an in-app Command Line Interface.
+
 ## Summary of contributions
 
 ### Code contributed
@@ -19,10 +22,13 @@ title: mamayuan's Project Portfolio Page
 ### Contributions to the UG
 
 ### Contributions to the DG
+- Define `Glossary` section
 
 ### Contributions to team-based tasks
 
 ### Review/mentoring contributions
+- Helped review some of [team PRs](https://github.com/AY2324S1-CS2103-W14-3/tp/pulls?q=is%3Apr) that required approval before merging into the master branch and provided relevant feedbacks.
+- Contributed to GitHub/Telegram/Zoom discussions to help clarify/answer questions and add my thoughts.
 
 ### Contributions beyond the project team
 

@@ -66,7 +66,9 @@ public final class InputParser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         default:
-            throw new ParseException(Messages.COMMAND_UNKNOWN);
+            throw new ParseException(
+                Messages.commandUnknown(HelpCommand.MESSAGE_USAGE)
+            );
         }
     }
 

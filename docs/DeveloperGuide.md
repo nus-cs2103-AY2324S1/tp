@@ -7,31 +7,17 @@ title: Developer Guide
 
 ---
 
-## **Acknowledgements**
-
-- Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
-- Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
-
----
-
-## **Setting up, getting started**
-
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
-
----
-
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
-    :bulb: **Tip:** The `.puml` files used to create diagrams in this document are in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document are in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the app.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -43,9 +29,9 @@ Given below is a quick overview of main components and how they interact with ea
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of the app.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of the app in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -96,7 +82,6 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `InputParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -120,7 +105,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Contact` objects (which are contained in a `UniqueContactList` object).
+* stores the contacts data i.e., all `Contact` objects (which are contained in a `UniqueContactList` object).
 * stores the currently 'selected' `Contact` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `Settings` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlySettings` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -132,7 +117,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both contacts data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `ContactsStorage` and `SettingsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -166,14 +151,14 @@ The following sequence diagram shows how the add command works:
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
-It filters contacts by calling `Model#setContactsFilter` with a `ContainsTagPredicate predicate` as argument, which sets the `predicate` 
-on the list of contacts in the `ModelManager`. 
+It filters contacts by calling `Model#setContactsFilter` with a `ContainsTagPredicate predicate` as argument, which sets the `predicate`
+on the list of contacts in the `ModelManager`.
 
 ### Maintaining sorting while supporting filtering
 
 The contact list is automatically kept in a constantly sorted state by leveraging `SortedList` from the JavaFX Collections library. Since the class works with `ObservableList`s, which the Model's `Contacts` also utilises, we are able to leverage this class more easily.
 
-The Model obtains an unsorted, unmodifiable list from `Contacts` and wraps it in a `SortedList`. We specify an `AlphabeticalComparator` to define our own alphabetical sorting order, which takes casing into account. This facilitates the intended propagation of changes from the nested list to the sorted list.
+The Model obtains an unsorted, unmodifiable list from `Contacts` and wraps it in a `SortedList`. We specify an `AlphabeticalComparator` to define our own alphabetical sorting order, which takes capitalization into account. This facilitates the intended propagation of changes from the nested list to the sorted list.
 
 For operability with the find feature, this sorted list is further wrapped in a `FilteredList` to limit the scope of what the user sees as needed. A dummy filter `Predicate` which allows all contacts to pass is used as the default filter. It is this filtered list that the model stores in a field.
 
@@ -191,13 +176,11 @@ The following activity diagram summarises what happens when a user executes an e
 
 ---
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Acknowledgements**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+- Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
+- Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
 
 ---
 
@@ -206,9 +189,11 @@ The following activity diagram summarises what happens when a user executes an e
 ### Product scope
 
 **Target user profile**: NUS SoC students, who:
-- can type fast and prefer typing
-- are reasonably comfortable with command-line inputs
-- wish to label contacts by category (e.g. classmates from certain courses, professors)
+
+- Can type fast and prefer typing
+- Are reasonably comfortable with command-line inputs
+- Wish to label contacts by category (e.g. professors, classmates from certain courses, friends)
+- Have many different ways to reach their contacts (e.g. social media like Telegram/Discord, additional phone numbers like house phone)
 
 **Value proposition**: Manage contacts quickly via text commands, with useful features relevant to SoC students.
 
@@ -346,17 +331,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Commons**: Classes or utilities used by multiple components of the application.
 
-* **Sequence Diagram**: A type of diagram that visually represents how objects in the system interact with each other in a particular sequence.
+* **UI (User Interface)**: The space where interactions between humans and the software occur. The goal of this interaction is to allow effective operation and control of the machine from the human end.
 
-* **API (Application Programming Interface)**: A set of rules that allows different software entities to communicate with each other.
+* **GUI (Graphical User Interface)**: A type of user interface that allows users to interact with electronic devices through graphical elements such as images, buttons, icons, and windows instead of text-based command lines.
 
-* **JavaFx**: A Java library used to create desktop applications. It is the framework used for the UI component of the app.
+* **Logic**: In the context of software, it refers to the set of rules and algorithms that process and respond to user inputs.
 
-* **JSON (JavaScript Object Notation)**: A lightweight data-interchange format that's easy to read and write for humans and easy to parse and generate for machines.
+* **Model**: The part of the application that manages data and application logic.
+
+* **Storage**: The part of the application responsible for saving and loading data to and from persistent storage.
+
+* **API (Application Programming Interface)**: A set of rules and tools that allows different software applications to communicate with each other. In this context, it refers to the interfaces defined for each component, such as `Logic.java`, `Model.java`, etc.
+
+* **Sequence Diagram**: A type of UML diagram that shows how objects interact in a specific order.
+
+* **UML (Unified Modeling Language)**: A standardized modeling language enabling developers to specify, visualize, construct, and document artifacts of a software system.
+
+* **PlantUML**: A tool that allows users to create UML diagrams using a simple and intuitive language.
+
+* **`puml` files**: Files written in a text-based markup language used by PlantUML to generate UML diagrams.
+
+* **MSS (Main Success Scenario)**: Represents the sequence of steps that describe a successful execution of a use case.
+
+* **CLI (Command Line Interface)**: A user interface that allows users to interact with the software by typing text-based commands.
+
+* **JavaFX**: A Java library used to create desktop applications. It is used for designing the user interface of this application.
+
+* **ObservableList**: A list that allows listeners to track changes when they occur. Used in the context of JavaFX to automatically update the UI when the data changes.
+
+* **JSON (JavaScript Object Notation)**: A lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate. Used for storing data in this application.
+
+* **JUnit**: A testing framework for Java programming language. JUnit5 refers to the fifth major version of this framework.
+
+* **Predicate**: A functional interface that represents a condition (test) and is used to filter data.
 
 * **Brownfield**: A term used in software development to describe a project that has existing constraints, typically an existing system or codebase, as opposed to a greenfield project which starts from scratch.
-
-* **CLI (Command Line Interface)**: A type of user interface that allows users to interact with software by typing in commands.
 
 * **Platform independent**: Software that can run on any computer regardless of its operating system, such as Mac/Windows/Linux.
 
@@ -368,10 +377,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
+//TODO
+
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">
-    :information_source: **Note:** These instructions only provide a starting point for testers to work on;
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 </div>
 
@@ -422,3 +433,11 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Effort**
+
+//TODO
+
+## **Appendix: Planned enhancements**
+
+1. Add a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command. If so, display an additional message to remind the user about the duplication.

@@ -22,24 +22,28 @@ import swe.context.model.contact.Contact;
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
-    //TODO values like these could be in some kind of ProductionData, which
-    // could be used in tests alongside TestData.Valid
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + "[" + PREFIX_NOTE + "NOTE] "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_ALTERNATE + "ALTERNATE CONTACTS]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "john.doe@email.com "
-            + PREFIX_NOTE + "CS2103 Prof. "
-            + PREFIX_TAG + "NUS "
-            + PREFIX_TAG + "CS2103 course "
-            + PREFIX_ALTERNATE + "Telegram@JohnDoe";
+    public static final String MESSAGE_USAGE = String.format(
+        "%s: Adds a contact."
+                + "%nParameters: %sNAME %sPHONE_NUMBER %sEMAIL"
+                + " [%sNOTE] [%sTAG]... [%sALTERNATE_CONTACT]..."
+                + "%nExample: %s %sJohn Doe %s98765432 %sjohn.doe@email.com"
+                + " %sLikes SE. %sNUS %sCS2103 course %sTelegram: JohnDoe",
+        AddCommand.COMMAND_WORD,
+        PREFIX_NAME,
+        PREFIX_PHONE,
+        PREFIX_EMAIL,
+        PREFIX_NOTE,
+        PREFIX_TAG,
+        PREFIX_ALTERNATE,
+        AddCommand.COMMAND_WORD,
+        PREFIX_NAME,
+        PREFIX_PHONE,
+        PREFIX_EMAIL,
+        PREFIX_NOTE,
+        PREFIX_TAG,
+        PREFIX_TAG,
+        PREFIX_ALTERNATE
+    );
 
     private final Contact toAdd;
     /**

@@ -11,8 +11,8 @@ import swe.context.commons.util.ToStringBuilder;
  * Immutably represents GUI settings.
  */
 public class GuiSettings {
-    private static final double DEFAULT_HEIGHT = 600;
-    private static final double DEFAULT_WIDTH = 740;
+    private static final double DEFAULT_HEIGHT = 650;
+    private static final double DEFAULT_WIDTH = 1250;
 
     private final double windowWidth;
     private final double windowHeight;

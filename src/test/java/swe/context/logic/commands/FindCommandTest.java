@@ -53,7 +53,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noContactFound() {
-        String expectedMessage = Messages.contactsListedOverview( 0);
+        String expectedMessage = Messages.contactsListedOverview(0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.setContactsFilter(predicate);

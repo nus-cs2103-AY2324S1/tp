@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import swe.context.commons.util.ToStringBuilder;
 import swe.context.model.alternate.AlternateContact;
@@ -91,10 +92,21 @@ public class Contact {
     }
 
     /**
-     * Formats the {@code contact} for display to the user.
+     * Formats this for display to the user.
      */
     public static String format(Contact contact) {
-        final StringBuilder builder = new StringBuilder();
+        String tags = contact
+                .getTags()
+                .stream()
+                .map(Tag::toString)
+                .collect(Collectors.joining(", "));
+        String alternates = contact
+                .getAlternates()
+                .stream()
+                .map(AlternateContact::toString)
+                .collect(Collectors.joining(", "));
+
+        StringBuilder builder = new StringBuilder();
         builder.append(contact.getName())
                 .append("; Phone: ")
                 .append(contact.getPhone())
@@ -102,10 +114,10 @@ public class Contact {
                 .append(contact.getEmail())
                 .append("; Note: ")
                 .append(contact.getNote())
-                .append("; Tags: ");
-        contact.getTags().forEach(builder::append);
-        builder.append("; Alternate Contacts: ");
-        contact.getAlternates().forEach(builder::append);
+                .append("; Tags: ")
+                .append(tags)
+                .append("; Alternate Contacts: ")
+                .append(alternates);
         return builder.toString();
     }
 

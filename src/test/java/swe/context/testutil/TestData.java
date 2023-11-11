@@ -48,7 +48,7 @@ public final class TestData {
         public static final String EMAIL_AMY = "amy@example.com";
         public static final String EMAIL_BOB = "bob@example.com";
         public static final String NOTE_AMY = "";
-        public static final String NOTE_BOB = "CS2013 tutorial mate.";
+        public static final String NOTE_BOB = "CS2103 tutorial mate.";
         public static final String NAME_DESC_AMY = " " + PREFIX_NAME + NAME_AMY;
         public static final String NAME_DESC_BOB = " " + PREFIX_NAME + NAME_BOB;
         public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + PHONE_AMY;
