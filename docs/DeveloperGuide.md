@@ -398,22 +398,21 @@ Step 5: The `UI` renders the `Card` with the relevant fields meant to be written
 * **Alternative 1 :** Use existing libraries that support Markdown using JavaFX.
     * Pros: Easy to implement.
     * Cons:
-        1. Dependency on third party library.
-        2. Large .jar file size.
-* **Alternative 2:** Individually support each type of Markdown language.
+      1. Dependency on third party library.
+      2. Increase application size
+      3. Many features included in the library are redundant
+* **Alternative 2 (Current Choice):** Individually support each type of Markdown language by creating our own implementation for each syntax.
     * Pros: Scope of support can be determined by developer.
     * Cons:
         1. Time-consuming.
-        2. Possible errors
+        2. Potentital for Bugs
 
 
 **Finalised Implementation:**
 
-Settled on using alternative 2 as it ensures that only the features that are needed are implemented,
-and it greatly reduces the application size.
+Settled on using alternative 2 as it allows us to be flexible on what Markdown syntax we want to implement. We decided to implement bold, 
+italic and underline since they are the most commonly used ones. This also greatly reduces the application file size.
 
-We focused on bold, italic and underline which are the main styling that used by flashcard user,
-and having only the essential features reduces the possibility of bugs.
 
 
 ### Spaced Repetition Feature
