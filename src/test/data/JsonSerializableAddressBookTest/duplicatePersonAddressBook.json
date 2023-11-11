@@ -5,8 +5,7 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@gmail.com",
-    "remark": "",
-    "tags": [ "friends" ]
+    "remark": ""
   }, {
     "room": "1",
     "bookingPeriod" : "2023-01-01 08:00 to 2023-01-01 12:00",
