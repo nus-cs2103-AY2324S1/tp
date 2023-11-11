@@ -1,9 +1,12 @@
 package seedu.ccacommander.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_EVENTS;
+import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static seedu.ccacommander.model.ModelManager.findEnrolmentFromList;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.commons.util.ToStringBuilder;
@@ -77,6 +80,19 @@ public class UnenrolCommand extends Command {
 
         assert enrolmentToDelete != null : "The enrolment to delete should be null";
         model.deleteEnrolment(enrolmentToDelete);
+
+        Predicate<Member> unenrolMemberPredicate = model.getUnenrolMemberPredicate(eventName);
+        Predicate<Event> unenrolEventPredicate = model.getUnenrolEventPredicate(memberName);
+
+        // Updating to lastPredicate alone cannot refresh the member/EVENT card
+        // We need to revert back to original list and then update again the last predicate
+
+        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+        model.updateFilteredMemberList(unenrolMemberPredicate);
+
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        model.updateFilteredEventList(unenrolEventPredicate);
+
         model.commit(String.format(MESSAGE_COMMIT, enrolmentToDelete.getMemberAndEventEnrolment()));
         return new CommandResult(String.format(MESSAGE_DELETE_ENROLMENT_SUCCESS, Messages.format(enrolmentToDelete)));
     }
