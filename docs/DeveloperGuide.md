@@ -365,7 +365,7 @@ The following activity diagram summarises the process of adding benefit for an e
 
 ![AddBenefitActivityDiagram](images/AddBenefitActivityDiagram.png)
 
-### Payroll calculation feature
+### Payroll Calculation
 
 #### Implementation
 
@@ -390,7 +390,7 @@ This class extends the Command abstract class, it implements the following opera
 
 {what are the design considerations?}
 
-### Payslip generation
+### Payslip Generation
 
 #### Proposed Implementation
 

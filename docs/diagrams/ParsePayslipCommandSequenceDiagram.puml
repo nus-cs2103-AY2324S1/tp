@@ -15,6 +15,7 @@ activate PayslipCommandParser
 PayslipCommandParser -> ArgumentTokenizer : tokenize("1 /t 09/10/2023",\nPREFIX_NAME, \nPREFIX_MONTH_YEAR) \n or \n tokenize("/n Alex",\nPREFIX_NAME, \nPREFIX_MONTH_YEAR)
 activate ArgumentTokenizer
 
+create ArgMultimap
 ArgumentTokenizer -> ArgMultimap : new
 activate ArgMultimap
 ArgumentTokenizer <-- ArgMultimap
