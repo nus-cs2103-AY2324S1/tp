@@ -386,7 +386,7 @@ The student number entered __without__ the `s/` prefix will be the **old** stude
 * `STUDENT_NUMBER` must be valid and exist.
 * `STUDENT_NUMBER` must be entered before the details to be modified.
 * Replace the student's existing student number with `NEW_STUDENT_NUMBER`.
-* `PHONE` must be a 3 to 20 digit positive integer.
+* `PHONE` must be a positive integer with 3 or more digits.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The `NEW_STUDENT_NUMBER` must be valid and unique (does not exist in Class Manager).
@@ -460,10 +460,10 @@ Examples:
 
 Mark the tutorial attendance for an existing student as absent in Class Manager.
 
-Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION`
+Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `absent s/A0245234A tut/1`
@@ -474,10 +474,10 @@ Examples:
 
 Mark the tutorial attendance for an existing student as present in Class Manager.
 
-Format: `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION`
+Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `present s/A0245234A tut/1`
@@ -488,9 +488,9 @@ Examples:
 
 Mark the tutorial attendance for all students in the current list displayed as absent in the class manager.
 
-Format: `absent-all tut/TUTORIAL_SESSION`
+Format: `absent-all tut/TUTORIAL_INDEX`
 
-* The `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `absent-all tut/1`
@@ -501,9 +501,9 @@ Examples:
 
 Mark the tutorial attendance for all students in the current list displayed as present in Class Manager.
 
-Format: `present-all tut/TUTORIAL_SESSION`
+Format: `present-all tut/TUTORIAL_INDEX`
 
-* The `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `present-all tut/1`
