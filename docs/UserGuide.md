@@ -126,6 +126,16 @@ In NetworkBook, you can manage contact information by changing the fields assign
 
 </div>
 
+<div markdown="block" class="alert alert-secondary">
+
+<span id="indices">:information_source: **Indices**</span>
+
+In NetworkBook, you often need to provide an index to specify a contact, or an entry in a multi-valued field of a contact. Indices are **integers counted from 1**.
+
+Make sure to provide indices that has a corresponding item in your book. The exact valid range is from 1 to 2147483647 inclusive. If your command contains an invalid index, it will be considered an invalid command.
+
+</div>
+
 <!-- @@author -->
 
 ### <u>Category 1 - Add contact information</u>
@@ -163,7 +173,7 @@ Format: `add [index] [field prefix] [field value] ...`
 
 Parameters:
 
-* `[index]` is the index of the contact in the list.
+* `[index]` is the index of the contact in the list, within [valid range](#indices).
 * `[field prefix]` specifies the corresponding field to add.
 * `[field value]` is the value to add to the field specified by the preceding prefix.
 
@@ -196,10 +206,10 @@ Format:
 
 Parameters:
 
-* `[index of contact]` is the index of the contact in the list.
+* `[index of contact]` is the index of the contact in the list, within [valid range](#indices).
 * `[field prefix]` specifies the field of information to edit.
 * `[field value]` is the new value to replace the original value with.
-* `[index of entry]` for a multi-valued field is the index of the element in the list representing that field.
+* `[index of entry]` for a multi-valued field is the index of the element in the list representing that field, within [valid range](#indices).
 
 For **single-valued** fields, the `/index` prefix should not be used.
 
@@ -231,7 +241,7 @@ Format: `delete [index]`
 
 Parameters:
 
-* `[index]` is the index of the contact in the list
+* `[index]` is the index of the contact in the list, within [valid range](#indices).
 
 Example usage:
 
@@ -252,9 +262,9 @@ Format:
 
 Parameters:
 
-* `[index of contact]` is the index of the contact in the list.
+* `[index of contact]` is the index of the contact in the list, within [valid range](#indices).
 * `[field prefix]` specifies the field of information to delete.
-* `[index of entry]` for a multi-valued field is the index of the element in the list representing that field.
+* `[index of entry]` for a multi-valued field is the index of the element in the list representing that field, within [valid range](#indices).
 
 For **single-valued** fields, the `/index` prefix should not be used.
 
@@ -475,8 +485,8 @@ Format: `open [index] /index [link index]`
 
 Parameters:
 
-* `[index]` is the index of the contact in the list.
-* `[link index]` is the index of the link within the contact's link list.
+* `[index]` is the index of the contact in the list, within [valid range](#indices).
+* `[link index]` is the index of the link within the contact's link list, within [valid range](#indices).
 
 <div markdown="span" class="alert alert-secondary">
 :information_source: **Note:**
@@ -501,8 +511,8 @@ Format: `email [index] /index [email index]`
 
 Parameters:
 
-* `[index]` is the index of the contact in the list.
-* `[email index]` is the index of the email address within the contact's email list.
+* `[index]` is the index of the contact in the list, within [valid range](#indices).
+* `[email index]` is the index of the email address within the contact's email list, within [valid range](#indices).
 
 <div markdown="span" class="alert alert-secondary">
 :information_source: **Note:**
