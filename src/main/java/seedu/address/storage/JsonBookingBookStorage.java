@@ -45,8 +45,8 @@ public class JsonBookingBookStorage implements BookingBookStorage {
     public Optional<ReadOnlyBookingsBook> readBookingBook(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableBookingBook> jsonAddressBook = JsonUtil.readJsonFile(
+                filePath, JsonSerializableBookingBook.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
@@ -74,7 +74,7 @@ public class JsonBookingBookStorage implements BookingBookStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableBookingBook(addressBook), filePath);
     }
 
 }
