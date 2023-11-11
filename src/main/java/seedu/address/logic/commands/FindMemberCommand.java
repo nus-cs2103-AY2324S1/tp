@@ -17,7 +17,8 @@ public class FindMemberCommand extends Command {
     public static final String COMMAND_WORD = "findmember";
     public static final String COMMAND_ALIAS = "findm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members whose information contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
+            + ": Finds all members whose information contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice 91119111 design";

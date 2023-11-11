@@ -22,7 +22,7 @@ public class CopyMemberCommand extends Command {
     public static final String COMMAND_WORD = "copymember";
     public static final String COMMAND_ALIAS = "cpm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
             + ": Copies the details (name, phone number, email, telegram, and tags) of the member"
             + " at the specified index to clipboard\n"
             + "Parameters: INDEX (must be a positive integer)\n"
