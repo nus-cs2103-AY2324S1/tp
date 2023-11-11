@@ -12,7 +12,6 @@ import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CHEF;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_STATUS_CHEF;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_STATUS_CLEANER;
-import static seedu.application.testutil.TypicalInterviews.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,31 +26,31 @@ import seedu.application.model.job.*;
 public class TypicalJobs {
 
     public static final Job SOFTWARE_ENGINEER = new JobBuilder().withRole("Software Engineer")
-        .withCompany("Google").withStatus(Status.IN_PROGRESS)
+        .withCompany("Google").withStatus(Status.TO_ADD_STATUS)
         .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
         .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(new InterviewBuilder().build()).build();
     public static final Job TEACHER = new JobBuilder().withRole("Teacher")
-        .withCompany("NUS").withStatus(Status.IN_PROGRESS)
+        .withCompany("NUS").withStatus(Status.TO_ADD_STATUS)
         .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
         .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(new InterviewBuilder().build()).build();
     public static final Job WAITER = new JobBuilder().withRole("Waiter")
-        .withCompany("McDonalds").withStatus(Status.IN_PROGRESS)
+        .withCompany("McDonalds").withStatus(Status.TO_ADD_STATUS)
         .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
         .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(new InterviewBuilder().build()).build();
     public static final Job PILOT = new JobBuilder().withRole("Pilot")
-        .withCompany("Singapore Airlines").withStatus(Status.IN_PROGRESS)
+        .withCompany("Singapore Airlines").withStatus(Status.TO_ADD_STATUS)
         .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
         .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(new InterviewBuilder().build()).build();
     public static final Job POLICE_OFFICER = new JobBuilder().withRole("Police Officer")
-        .withCompany("SPF").withStatus(Status.IN_PROGRESS)
+        .withCompany("SPF").withStatus(Status.TO_ADD_STATUS)
         .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
         .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(new InterviewBuilder().build()).build();
     public static final Job FRUIT_SELLER = new JobBuilder().withRole("Fruit Seller")
-        .withCompany("ABC Fruits").withStatus(Status.IN_PROGRESS)
+        .withCompany("ABC Fruits").withStatus(Status.TO_ADD_STATUS)
         .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
         .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(new InterviewBuilder().build()).build();
     public static final Job GRASS_CUTTER = new JobBuilder().withRole("Grass Cutter")
-        .withCompany("XYZ Gardening").withStatus(Status.IN_PROGRESS)
+        .withCompany("XYZ Gardening").withStatus(Status.TO_ADD_STATUS)
         .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
         .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(new InterviewBuilder().build()).build();
     // Manually added
@@ -69,8 +68,6 @@ public class TypicalJobs {
         .withCompany(VALID_COMPANY_CLEANER).withStatus(VALID_STATUS_CLEANER)
         .withDeadline(VALID_DEADLINE_CLEANER).withJobType(VALID_JOB_TYPE_CLEANER)
         .withIndustry(VALID_INDUSTRY_CLEANER).withInterview(new InterviewBuilder().build()).build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalJobs() {
     } // prevents instantiation

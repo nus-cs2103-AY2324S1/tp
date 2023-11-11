@@ -32,11 +32,7 @@ public class JobType {
     public JobType(String jobType) {
         requireNonNull(jobType);
         AppUtil.checkArgument(isValidJobType(jobType), MESSAGE_CONSTRAINTS);
-        if (isEmptyJobType(jobType)) {
-            this.jobType = TO_ADD_JOB_TYPE;
-        } else {
-            this.jobType = jobType;
-        }
+        this.jobType = jobType;
     }
 
     /**

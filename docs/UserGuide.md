@@ -256,12 +256,12 @@ The following are valid interview types:
 
 | Action               | Format                                                                                   |
 |----------------------|------------------------------------------------------------------------------------------|
-| **Add**              | `add c/COMPANY r/ROLE [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`                 |
-| **Edit**             | `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`      |
+| **Add**              | `add c/COMPANY r/ROLE [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`                 |
+| **Edit**             | `edit INDEX [c/COMPANY] [r/ROLE] [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`      |
 | **Delete**           | `delete INDEX`                                                                           |
 | **List**             | `list`                                                                                   |
-| **Find**             | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]` |
-| **Sort**             | `sort FIELD_SPECIFIER`                                                                   |
+| **Find**             | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]` |
+| **Sort**             | `sort PREFIX`                                                                            |
 | **Interview add**    | `interview add INDEX t/TYPE d/DATETIME a/ADDRESS`                                        |
 | **Interview delete** | `interview delete INTERVIEWINDEX from/JOBINDEX`                                          |
 | **Interview edit**   | `interview edit INTERVIEWINDEX from/JOBINDEX`                                            |
@@ -307,7 +307,7 @@ Shows a list of all applications in the list in alphabetical order.
 
 Adds a job application to the list.
 
-**Format:** `add c/COMPANY r/ROLE [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
+**Format:** `add c/COMPANY r/ROLE [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`
 
 **Examples:**
 
@@ -380,7 +380,7 @@ Deletes the specified application from the list.
 
 Edits an application in the list.
 
-**Format:** `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
+**Format:** `edit INDEX [c/COMPANY] [r/ROLE] [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`
 
 * Edits the application to the company at the specified `INDEX`.
 * At least one of the optional fields must be provided.
@@ -421,7 +421,7 @@ Edits an application in the list.
 
 Finds all applications whose fields match the keywords provided.
 
-**Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
+**Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`
 
 * At least one optional parameter must be provided. Multiple parameters can be provided.
 * If a [prefix](#prefix) is given, the search will only find applications containing the given keywords in the specified

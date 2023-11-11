@@ -47,7 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     continue;
                 } else {
                     throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_EMPTY_KEYWORDS));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
                 }
             }
 

@@ -45,10 +45,10 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_JOB_TYPE, PREFIX_INDUSTRY);
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
-        Status status = Status.DEFAULT_STATUS; // Status is an optional field for add command
+        Status status = Status.EMPTY_STATUS; // Status is an optional field for add command
         Deadline deadline = Deadline.EMPTY_DEADLINE; // Deadline is an optional field for add command
         JobType jobType = JobType.EMPTY_JOB_TYPE; // Job Type is an optional field for add command
-        Industry industry = Industry.DEFAULT_INDUSTRY; // Industry is an optional field for add command
+        Industry industry = Industry.EMPTY_INDUSTRY; // Industry is an optional field for add command
 
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
