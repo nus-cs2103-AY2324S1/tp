@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 
 public class NameContainsKeywordsPredicateTest {
@@ -39,8 +38,7 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameContainsKeywordsPredicate predicate =
-                new NameContainsKeywordsPredicate("Alice Bob");
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate("Alice Bob");
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Trailing and Leading white spaces
@@ -50,16 +48,24 @@ public class NameContainsKeywordsPredicateTest {
         // Mixed-case keywords
         predicate = new NameContainsKeywordsPredicate("aLIce bOB");
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+
+        // Partial keyword
+        predicate = new NameContainsKeywordsPredicate("Ali");
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate("test");
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
-
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate("Carol");
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate("Carol");
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+
+        // Keyword only matches word that is separated by white space
+        predicate = new NameContainsKeywordsPredicate("Alice Bob");
+        assertFalse(predicate.test(new PersonBuilder().withName("AliceBob").build()));
+
+        // Keyword do not match exact
+        predicate = new NameContainsKeywordsPredicate("Alice Bob Carol");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
     }
 
