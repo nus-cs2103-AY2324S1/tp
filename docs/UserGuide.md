@@ -17,7 +17,7 @@ Let's dive into **InterviewHub** and transform the way you recruit!
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always"></div>
 
 # Table of Contents
 
@@ -61,7 +61,7 @@ Let's dive into **InterviewHub** and transform the way you recruit!
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always"></div>
 
 # Introduction - What is InterviewHub?
 
@@ -100,7 +100,7 @@ Before we begin, the table below describes some symbols and syntax you may see t
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always"></div>
 
 # Quick Start
 
@@ -138,7 +138,7 @@ Before we begin, the table below describes some symbols and syntax you may see t
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always"></div>
 
 # GUI Summary
 
@@ -146,7 +146,6 @@ The following is an annotated breakdown of InterviewHub’s GUI:
 
 ![GUI Summary](images/GuiSummary.png)
 
-<div style="page-break-after: always;"></div>
 
 For each **applicant**, we see the following details:
 
@@ -172,7 +171,7 @@ For each **interview**, we see the following details:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always"></div>
 
 # Features
 
@@ -222,7 +221,7 @@ For each **interview**, we see the following details:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always"></div>
 
 ## General Features
 
@@ -257,7 +256,7 @@ InterviewHub data are saved in the hard disk automatically after any command tha
 
 [Back to the Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always"></div>
 
 ## Applicant Management Features
 
@@ -275,7 +274,6 @@ Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 | `ADDRESS`      | The address of the applicant      | No constraints as long as it is not blank                     |
 | `TAG`          | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |
 
-<div style="page-break-after: always;"></div>
 
 Examples:
 * `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`.
@@ -283,7 +281,6 @@ Examples:
 
 [Back to the Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
 
 ### Deleting an applicant : `delete-a`
 
@@ -386,7 +383,7 @@ Format: `list-a`
 
 [Back to the Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always"></div>
 
 ## Interview Management Features
 
@@ -742,6 +739,8 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 # Frequently Asked Questions
 
 ### **Q**: How do I transfer my data to another Computer?
@@ -765,6 +764,8 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 [Back to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
 
 # Command Summary
 
@@ -807,6 +808,8 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 [Back to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
 
 # Glossary
 
