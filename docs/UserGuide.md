@@ -654,7 +654,7 @@ scenarios:
 
 <div markdown="block" class="alert alert-info">
 
-**:tip: Optional inputs**<br>
+**:bulb: Optional inputs**<br>
 
 `TUTOR_INDEX` and `m/` are optional fields. You don't need to include them. If you do, make sure that the 
 input is valid!
