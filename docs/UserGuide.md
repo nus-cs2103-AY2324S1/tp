@@ -1,7 +1,7 @@
 ---
 layout: default.md
 title: "User Guide"
-pageNav: 3
+pageNav: 4
 ---
 
 # LoveBook User Guide
@@ -120,7 +120,7 @@ Here's a quick guide to help you understand what they mean.
 --------------------------------------------------------------------------------------------------------------------
 ### **Managing Dates**
  
-### **Adding a new date: `add`**
+#### **Adding a new date: `add`**
 
 Adds a date to the LoveBook.
 
@@ -140,7 +140,7 @@ add: Adds a Date to the LoveBook. Parameters: name/NAME age/AGE gender/GENDER he
 Example: add name/John Doe age/21 gender/M height/123 income/3000 horoscope/Libra
 ```
 
-### **Editing a date: `edit`**
+#### **Editing a date: `edit`**
 
 Edits a date in the specified index in the LoveBook.
 
@@ -174,7 +174,7 @@ Parameters: INDEX (must be a positive integer) [name/NAME] [age/AGE] [gender/GEN
 Example: edit 1 age/24 gender/M height/180 income/3000 horoscope/SCORPIO 
 ```
 
-### **Deleting a date: `delete`**
+#### **Deleting a date: `delete`**
 
 Deletes the specified date from the LoveBook.
 
@@ -199,7 +199,7 @@ Parameters: INDEX (must be a positive integer)
 Example: delete 1
 ```
 
-### **Listing all dates: `list`**
+#### **Listing all dates: `list`**
 
 Shows a list of all dates in the LoveBook.
 
@@ -209,7 +209,7 @@ Format: `list`
 
 Expected output: `Listed all Dates`
 
-### **Clearing all dates: `clear`**
+#### **Clearing all dates: `clear`**
 
 Clears all dates in the LoveBook.
 
@@ -221,7 +221,7 @@ Format: `clear`
 
 Expected output: `LoveBook has been cleared!`
 
-### **Starring a date: `star`**
+#### **Starring a date: `star`**
 
 Stars a date in the LoveBook.
 
@@ -246,7 +246,7 @@ Example: star 1
 
 </box>
 
-### **Unstarring a date: `unstar`**
+#### **Unstarring a date: `unstar`**
 
 Unstars a date in the LoveBook.
 
@@ -276,7 +276,7 @@ Output if index out of bounds:
 
 ### **Sorting, Searching for dates**
 
-### **Finding a date: `find`**
+#### **Finding a date: `find`**
 
 Finds a date in the LoveBook by a specific name(s)
 
@@ -296,7 +296,7 @@ Expected Output: `Lists the dates with the name(s) specified`
 
 Output if error: `0 dates listed!`
 
-### **Filtering dates by a certain metric: `filter`**
+#### **Filtering dates by a certain metric: `filter`**
 
 Filters the dates in the LoveBook by a specific metric.
 
@@ -317,7 +317,7 @@ Expected Output: `Lists the dates with the metric specified`
 
 Output if error: `No dates found!`
 
-### **Sorting dates by a certain metric: `sort`**
+#### **Sorting dates by a certain metric: `sort`**
 
 Sorts the dates in the LoveBook by a specific metric.
 
@@ -371,7 +371,7 @@ Example: sort name/increasing
 
 </box>
 
-### **Showing your date preferences: `showP`**
+#### **Showing your date preferences: `showP`**
 
 Shows the User's Date Preference. This can be edited using the [`setP`](#setting-your-date-preferences-setp) command.
 
@@ -379,7 +379,7 @@ Format: `showP`
 
 Expected output: `Here are your preferences: Age: 22; Height: 180; Income: 2000; Horoscope: TAURUS`
 
-### **Setting your date preferences: `setP`**
+#### **Setting your date preferences: `setP`**
 
 Sets the user's preferences for the matching algorithm.
 
@@ -415,7 +415,7 @@ Please try the following command format: setP: Sets Date Preference. Parameters:
 Example: setP age/21 height/180 income/3000 horoscope/Scorpio
 ```
 
-### **Getting a recommended date: `bestMatch`**
+#### **Getting a recommended date: `bestMatch`**
 
 Filters out the most compatible date based on the set preferences.
 
@@ -429,7 +429,7 @@ Expected Output: `Here's your best match!`
 
 Output if error: `Initialise list with dates before calling bestMatch`
 
-### **Getting a blind date: `blindDate`**
+#### **Getting a blind date: `blindDate`**
 
 Outputs a blind date from the LoveBook.
 
@@ -445,7 +445,7 @@ Output if error: `Initialise list with dates before calling blindDates`
 
 ### **Other Commands**
 
-### **Exiting the application: `exit`**
+#### **Exiting the application: `exit`**
 
 Exits the program.
 
@@ -453,7 +453,7 @@ Format: `exit`
 
 Expected output: `Exiting LoveBook...`
 
-### **Getting help: `help`**
+#### **Getting help: `help`**
 
 Shows a window to bring user to the LoveBook User Guide.
 

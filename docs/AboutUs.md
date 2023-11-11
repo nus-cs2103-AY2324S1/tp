@@ -7,8 +7,6 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the gender `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Goh En Rui Ryann
@@ -18,9 +16,7 @@ You can reach us at the gender `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/ryamgoh)]
 [[portfolio](team/ryamgoh.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
-
+* Role: Developer
 
 ### Lynn Low
 
@@ -30,7 +26,6 @@ You can reach us at the gender `seer[at]comp.nus.edu.sg`
 [[portfolio](team/lynnlow175.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Shishir Bychapur
 
@@ -40,7 +35,7 @@ You can reach us at the gender `seer[at]comp.nus.edu.sg`
 [[portfolio](team/shishirbychapur.md)]
 
 * Role: Developer
-* Responsibilities: Logic
+
 * ### Lee Seng Kitt
 
 <img src="images/bobscodedump.png" width="200px">
@@ -49,7 +44,7 @@ You can reach us at the gender `seer[at]comp.nus.edu.sg`
 [[portfolio](team/bobscodedump.md)]
 
 * Role: Developer
-* Responsibilities: Software Engineering
+
 * ### Cleon Tan De Xuan
 
 <img src="images/cleon2.png" width="200px">
@@ -58,4 +53,3 @@ You can reach us at the gender `seer[at]comp.nus.edu.sg`
 [[portfolio](team/cleon2.md)]
 
 * Role: Developer
-* Responsibilities: Software Engineering

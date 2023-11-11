@@ -13,7 +13,7 @@
 **Style guidance:**
 
 * Follow the [**_Google developer documentation style guide_**](https://developers.google.com/style).
-* Also relevant is the [_se-edu/guides **Markdown coding standard**_](https://se-education.org/guides/conventions/markdown.html).
+* Also, relevant is the [_se-edu/guides **Markdown coding standard**_](https://se-education.org/guides/conventions/markdown.html).
 
 
 **Converting to PDF**
