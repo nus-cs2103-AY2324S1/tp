@@ -19,7 +19,7 @@ public class FindMemberCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members whose information contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Parameters: [KEYWORD]...\n"
             + "Example: " + COMMAND_WORD + " alice 91119111 design";
 
     private final MemberContainsKeywordsPredicate predicate;

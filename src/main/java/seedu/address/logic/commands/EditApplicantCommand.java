@@ -33,9 +33,9 @@ public class EditApplicantCommand extends Command {
             + "by the index number used in the displayed applicant list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + " {applicantName} "
-            + PREFIX_PHONE + " {phoneNumber} "
-            + PREFIX_INTERVIEW + "{interviewTime}\n"
+            + PREFIX_NAME + " APPLICANT_NAME "
+            + PREFIX_PHONE + " PHONE_NUMBER "
+            + PREFIX_INTERVIEW + "INTERVIEW_TIME\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + " Johnny Doe "
             + PREFIX_PHONE + " 91234567";
