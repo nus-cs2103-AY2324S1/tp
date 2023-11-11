@@ -29,41 +29,70 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above illustrates the high-level design of the App. 
 
-Given below is a quick overview of main components and how they interact with each other.
+You can see that the bulk of the app's works are done by the UI, Logic, Model and Storage components. Below are the general duties of each component and how they interact with each other.
 
-**Main components of the architecture**
+#### Duties of each component
+[**`UI`**](#ui-component) is responsible for
+* Rendering visuals to the user.
+* Handling and responding to user interactions.
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+[**`Logic`**](#logic-component) is responsible for 
+* Interpreting the user command to find the corresponding strategies to execute.
+* Parsing the user command to construct the corresponding parameters for the strategies.
+* Executing the strategies to modify the data and state of the app.
+* Updating the UI to reflect the changes in the data and state of the app.
 
-The bulk of the app's work is done by the following four components:
+[**`Model`**](#model-component) is responsible for
+* Providing accurate representation of the current data and state of the app
+* Providing APIs for other components to access and modify the data and state.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+[**`Storage`**](#storage-component): is responsible for
+* Loading the user data from the hard disk.
+* Saving the user data to the hard disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+#### How the architecture components interact with each other
 
-**How the architecture components interact with each other**
+[**`UI`**](#ui-component):
+* Delegates the interpretation of user command to the `Logic` component. 
+* Relies on the `Model` component to obtain the appropriate data to display.
+
+[**`Logic`**](#logic-component):
+* Informs `UI` what to display.
+* Utilises `Model` to access and modify the current data and state <br>
+* Instructs `Storage` to save data to the hard disk.
+
+[**`Model`**](#model-component): 
+* Provides APIs for `Logic` and `UI` to access and modify the data. 
+* Depends on `Storage` to load data from the hard disk to initialise.
+
+[**`Storage`**](#storage-component):
+* Provides APIs for `Logic` to save data to the hard disk.
+* Provides APIs for `Model` to load data from the hard disk to initialise.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+#### Other notes
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
-
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
-
-<puml src="diagrams/ComponentManagers.puml" width="300" />
+1. Each of the four main components (also shown in the diagram above)
+   * Defines its *API* in an `interface` with the same name as the Component.
+   * Implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point. 
+   
+   For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class.
+2. The team has decided to force all components to interact via interfaces rather than the concrete classes as illustrated in the (partial) class diagram below (reason: to prevent outside component's being coupled to the implementation of a component).
+   <puml src="diagrams/ComponentManagers.puml" width="300" />
+   If you are to contribute to this project, please align with this group decision.
+3. There are other components that are not shown in the diagram above. These components are: 
+    * `Commons` component: contains classes that are used by multiple other components.
+    * `Entry Point` classes: `Main` and `MainApp` classes that are in charge of the app launch and shut down.
+4. Please be reminded that, despite similar naming, our architecture is not the [Model-View-Controller (MVC)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) architecture. The major difference is that there is not a clear "Controller" component in our architecture. Instead, the role of the "Controller" is played by all the main components (UI, Logic, Model and Storage) working together.
 
 The sections below give more details of each component.
+
+## Components
 
 ### UI component
 
@@ -171,10 +200,13 @@ The `Storage` component,
 * inherits from both `AddressBookStorage`, `UserPrefStorage` and `ScheduleStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+### Entry point classes
+**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+
 ### Common classes
-
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
-
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components. They are in the `seedu.addressbook.commons` package.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
