@@ -51,6 +51,11 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
         return EditPersonCommandParser.getUsageInfo();
     }
 
+    @Override
+    String getClashType(Person edited, Person clashWith) {
+        return "Name";
+    }
+
     public Person getEditDescriptor() {
         return editDescriptor;
     }
