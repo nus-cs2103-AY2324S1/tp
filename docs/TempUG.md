@@ -331,7 +331,7 @@ Note you must provide a 'name' not already in the address book.
 ![Failure for addPerson](images/add-person/add_person_failure.png)
 
 
-#### For schedule list:
+#### For Schedule:
 
 Format: `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`
 * A new lesson cannot have the same name as existing students in the contact list.
@@ -381,10 +381,9 @@ Usage: addLesson -name NAME (any number of unique [-subject|day|start|end VALUE]
  If you are currently displaying schedule list, you could use 'add' inplace of 'addLesson'. 
  Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.
 ```
-![Failure for addLesson](images/add-lesson/add_lesson_failure2.png)
 
 
-#### For task list:
+#### For Task:
 
 Format: `addTask [INDEX] DESCRIPTION` 
 * Adds the task to the lesson at specified `INDEX` of the displayed ___SCHEDULE list___ or to the shown lesson (if `INDEX` is omitted).
@@ -416,7 +415,6 @@ Invalid description: Tasks can take any values, and it should not be blank
 Usage: addTask/task + [lesson index] [description]. You could omit the lesson index when adding task to showing lesson.
 Example1: addtask 1 do homework
 ```
-![Failure for addTask](images/add-task/add_task_failure.png)
 
 
 
