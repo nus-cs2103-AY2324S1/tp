@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
@@ -21,22 +22,36 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SetCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.model.statistics.StatisticMetric;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
+    private static final UniqueTagList uniqueTagList = new UniqueTagList();
     private final AddressBookParser parser = new AddressBookParser();
+
+    @AfterEach
+    public void clearTestData() {
+        Tag tag = new Tag("Interview", "assessment");
+        if (uniqueTagList.contains(tag)) {
+            uniqueTagList.remove(new Tag("Interview", "assessment"));
+        }
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -116,6 +131,39 @@ public class AddressBookParserTest {
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_REMARK + remark);
         assertEquals(new RemarkCommand(INDEX_FIRST_PERSON, new Remark(remark)), command);
     }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ViewCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_viewWrongIndex_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), ()
+            -> parser.parseCommand("view 0"));
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        Tag tag = new Tag("Interview", "assessment");
+        uniqueTagList.add(tag);
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + "t/Interview met/MEAN");
+        assertEquals(new FilterCommand(tag, StatisticMetric.MEAN, 0), command);
+    }
+
+    @Test
+    public void parseCommand_filterInvalidTag_throwsParseException() {
+        Tag tag = new Tag("Interview", "assessment");
+        uniqueTagList.add(tag);
+        String message = "val/VALUE is missing, it is compulsory. \n" + FilterCommand.MESSAGE_USAGE;
+        assertThrows(ParseException.class, message, ()
+            -> parser.parseCommand("filter t/Interview met/PERCENTILE"));
+    }
+
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

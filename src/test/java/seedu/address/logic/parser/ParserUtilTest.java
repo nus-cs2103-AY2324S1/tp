@@ -33,7 +33,7 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "developer";
+    private static final String VALID_TAG_1 = "intern";
     private static final String VALID_TAG_2 = "tech";
     private static final String WHITESPACE = " \t\r\n";
 
@@ -161,15 +161,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1, "role");
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1, "role"));
+        Tag expectedTag = new Tag(VALID_TAG_1, "uncategorised");
+        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1, ""));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1, "role");
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace, "role"));
+        Tag expectedTag = new Tag(VALID_TAG_1, "uncategorised");
+        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace, ""));
     }
 
     @Test
@@ -214,5 +214,20 @@ public class ParserUtilTest {
     @Test
     public void parseScore_negativeValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseScore("-1"));
+    }
+
+    @Test
+    public void parseTagScore_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTagScore(null));
+    }
+
+    @Test
+    public void parseTagScore_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagScore("a"));
+    }
+
+    @Test
+    public void parseTagScore_invalidValueTwoTabs_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagScore("Interview 100 awadaw"));
     }
 }

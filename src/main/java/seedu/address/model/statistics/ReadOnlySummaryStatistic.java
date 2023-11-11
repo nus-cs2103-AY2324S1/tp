@@ -50,8 +50,4 @@ public interface ReadOnlySummaryStatistic {
      */
     public int generateMinScoreValueWithTag(Tag tag);
 
-    public int getNumOfPeople();
-
-
-
 }

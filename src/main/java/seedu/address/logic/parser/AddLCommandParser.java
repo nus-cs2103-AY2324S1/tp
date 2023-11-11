@@ -30,7 +30,7 @@ public class AddLCommandParser implements Parser<AddLCommand> {
         try {
             index = ParserUtil.parseIndex(argMultiMap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLCommand.MESSAGE_USAGE));
         }
 
         if (!arePrefixesPresent(argMultiMap, PREFIX_USERNAME)) {

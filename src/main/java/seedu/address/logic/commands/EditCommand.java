@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -22,6 +23,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
@@ -79,6 +81,7 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Event> lastShownEventList = model.getFilteredEventList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -98,6 +101,15 @@ public class EditCommand extends Command {
         model.setLastViewedPersonIndex(index);
         model.loadSummaryStatistics();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        for (Event event : lastShownEventList) {
+            if (event.getPerson().isSamePerson(personToEdit)) {
+                Event updatedEvent = new Event(editedPerson, event.getDescription(), event.getStart_time(),
+                        event.getEnd_time());
+                model.setEvent(event, updatedEvent);
+            }
+        }
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)), true);
     }
 

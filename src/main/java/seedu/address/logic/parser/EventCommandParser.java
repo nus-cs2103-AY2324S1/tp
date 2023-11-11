@@ -2,7 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INCORRECT_DATE_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DATES;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
@@ -10,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -39,15 +41,20 @@ public class EventCommandParser implements Parser<EventCommand> {
         String description = argMultimap.getValue(PREFIX_DESCRIPTION).get();
         try {
             startTime = LocalDateTime.parse(argMultimap.getValue(PREFIX_STARTTIME).get(),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm").withResolverStyle(ResolverStyle.STRICT));
             endTime = LocalDateTime.parse(argMultimap.getValue(PREFIX_ENDTIME).get(),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm").withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeException e) {
-            throw new ParseException(MESSAGE_INCORRECT_DATE_FORMAT);
+            String s = e.getMessage();
+            if (s.contains("Invalid")) {
+                throw new ParseException(MESSAGE_INVALID_DATE);
+            } else {
+                throw new ParseException(MESSAGE_INCORRECT_DATE_FORMAT);
+            }
         }
 
         if (!(endTime.isAfter(startTime))) {
-            throw new ParseException(MESSAGE_INVALID_DATES);
+            throw new ParseException(MESSAGE_INVALID_START);
         }
         Index index;
         try {

@@ -62,7 +62,8 @@ public class CreateTagCommand extends Command {
                 if (model.hasTag(newTag)) {
                     throw new CommandException(MESSAGE_DUPLICATE_TAG);
                 }
-                if (countDistinctCategories(uniqueTagList.asUnmodifiableObservableList()) > 5) {
+                if (!uniqueTagList.containsTagCategory(tagCategory)
+                        && countDistinctCategories(uniqueTagList.asUnmodifiableObservableList()) > 5) {
                     throw new CommandException(MESSAGE_FAILURE);
                 }
                 model.addTag(newTag);

@@ -68,8 +68,8 @@ public class Event {
             return true;
         }
 
-        return otherEvent != null && otherEvent.getPerson().equals(getPerson())
-                && otherEvent.getDescription().equals(getDescription());
+        return otherEvent != null && otherEvent.getPerson().isSamePerson(getPerson())
+                && otherEvent.getDescription().equalsIgnoreCase(getDescription());
     }
 
     @Override
