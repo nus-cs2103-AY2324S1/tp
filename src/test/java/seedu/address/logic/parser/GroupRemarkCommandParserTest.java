@@ -1,16 +1,28 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.GroupRemarkCommand;
-import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupRemark;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_REMARK_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_REMARK_OTHERS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_REMARK_SPECIAL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_REMARK_UNICODE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CS;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CS2103T;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_REMARK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_REMARK_OTHERS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_REMARK_SPECIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_REMARK_UNICODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPREMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.GroupRemarkCommand;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupRemark;
 
 public class GroupRemarkCommandParserTest {
 
@@ -48,7 +60,7 @@ public class GroupRemarkCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupRemarkCommand.MESSAGE_USAGE));
 
         // missing time prefix
-        assertParseFailure(parser,  VALID_GROUP_CS + VALID_GROUP_REMARK,
+        assertParseFailure(parser, VALID_GROUP_CS + VALID_GROUP_REMARK,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupRemarkCommand.MESSAGE_USAGE));
     }
 

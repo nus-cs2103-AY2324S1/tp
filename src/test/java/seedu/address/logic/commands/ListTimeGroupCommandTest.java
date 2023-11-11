@@ -1,34 +1,37 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
-import javafx.util.Pair;
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
-import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupRemark;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.GroupBuilder;
-import seedu.address.testutil.PersonBuilder;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_MON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_TUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_WED;
+import static seedu.address.logic.commands.ListTimeGroupCommand.MESSAGE_LISTTIME_GROUP_SUCCESS;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.commands.ListTimeGroupCommand.MESSAGE_LISTTIME_GROUP_SUCCESS;
-import static seedu.address.logic.commands.ListTimePersonCommand.MESSAGE_LISTTIME_PERSON_SUCCESS;
-import static seedu.address.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
+import javafx.util.Pair;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TimeInterval;
+import seedu.address.model.TimeIntervalList;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupRemark;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.GroupBuilder;
 
 public class ListTimeGroupCommandTest {
-
-    Group validGroup = new GroupBuilder().build();
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -36,7 +39,8 @@ public class ListTimeGroupCommandTest {
     }
 
     @Test
-    public void execute_groupWithNoTimeInterval_ListSuccess() throws Exception {
+    public void execute_groupWithNoTimeIntervalListSuccess() throws Exception {
+        Group validGroup = new GroupBuilder().build();
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
 
         // Person has time interval to be listed
@@ -51,7 +55,8 @@ public class ListTimeGroupCommandTest {
     }
 
     @Test
-    public void execute_personWithSingleTimeInterval_ListSuccess() throws Exception {
+    public void execute_personWithSingleTimeIntervalListSuccess() throws Exception {
+        Group validGroup = new GroupBuilder().build();
         ModelStubGroupWithSingleTiming modelStub = new ModelStubGroupWithSingleTiming(validGroup);
 
         // Person has time interval to be listed
@@ -68,7 +73,8 @@ public class ListTimeGroupCommandTest {
     }
 
     @Test
-    public void execute_personWithMultipleTimeIntervals_ListSuccess() throws Exception {
+    public void execute_personWithMultipleTimeIntervalsListSuccess() throws Exception {
+        Group validGroup = new GroupBuilder().build();
         ModelStubGroupWithMultipleTimings modelStub = new ModelStubGroupWithMultipleTimings(validGroup);
 
         // Person has time interval to be listed
@@ -80,14 +86,16 @@ public class ListTimeGroupCommandTest {
         CommandResult commandResult =
                 new ListTimeGroupCommand(validGroup).execute(modelStub);
         CommandResult expectedResult =
-                new CommandResult(String.format(MESSAGE_LISTTIME_GROUP_SUCCESS,
-                        validGroup.getGroupName()) + "\nMON 1300 - MON 1400 \nTUE 1300 - TUE 1400 \nWED 1300 - WED 1400 ");
+                new CommandResult(
+                        String.format(MESSAGE_LISTTIME_GROUP_SUCCESS, validGroup.getGroupName())
+                        + "\nMON 1300 - MON 1400 \nTUE 1300 - TUE 1400 \nWED 1300 - WED 1400 ");
 
         assertEquals(expectedResult, commandResult);
     }
 
     @Test
-    public void execute_nonExistentPerson_ListFail() throws Exception {
+    public void execute_nonExistentPerson_listFail() throws Exception {
+        Group validGroup = new GroupBuilder().build();
         ModelStubGroupWithMultipleTimings modelStub = new ModelStubGroupWithMultipleTimings(validGroup);
         Group invalidGroup = new Group("CS2100");
         assertThrows(CommandException.class, () -> new ListTimeGroupCommand(invalidGroup).execute(modelStub));

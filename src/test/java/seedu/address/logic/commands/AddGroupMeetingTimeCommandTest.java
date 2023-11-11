@@ -1,32 +1,40 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.AddGroupMeetingTimeCommand.MESSAGE_SUCCESS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_MON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_MON_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_TUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_WED;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
-import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TimeInterval;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.AddGroupMeetingTimeCommand.MESSAGE_SUCCESS;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.Assert.assertThrows;
-
 public class AddGroupMeetingTimeCommandTest {
-    Group validGroupWithMeeting = new GroupBuilder().withTimeIntervalList(VALID_TIME_MON).build();
-    Group validGroup = new GroupBuilder().build();
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
@@ -35,6 +43,8 @@ public class AddGroupMeetingTimeCommandTest {
 
     @Test
     public void execute_groupWithNoMeeting_groupTimeIntervalAdditionSuccess() throws Exception {
+        Group validGroup = new GroupBuilder().build();
+
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
 
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
@@ -50,6 +60,8 @@ public class AddGroupMeetingTimeCommandTest {
 
     @Test
     public void execute_groupWithMeeting_groupTimeIntervalAdditionSuccess() throws Exception {
+        Group validGroupWithMeeting = new GroupBuilder().withTimeIntervalList(VALID_TIME_MON).build();
+
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroupWithMeeting);
 
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
@@ -58,7 +70,8 @@ public class AddGroupMeetingTimeCommandTest {
         assertTrue(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
         assertFalse(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_TUE)));
 
-        CommandResult commandResult = new AddGroupMeetingTimeCommand(validGroupWithMeeting, validTimeInterval).execute(modelStub);
+        CommandResult commandResult =
+                new AddGroupMeetingTimeCommand(validGroupWithMeeting, validTimeInterval).execute(modelStub);
 
         // Time interval has been added
         assertTrue(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
@@ -67,6 +80,9 @@ public class AddGroupMeetingTimeCommandTest {
 
     @Test
     public void execute_multipleGroupTimeIntervals_additionSuccess() throws Exception {
+        Group validGroupWithMeeting = new GroupBuilder().withTimeIntervalList(VALID_TIME_MON).build();
+        Group validGroup = new GroupBuilder().build();
+
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
 
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
@@ -79,7 +95,8 @@ public class AddGroupMeetingTimeCommandTest {
         assertFalse(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_TUE)));
         assertFalse(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_WED)));
 
-        CommandResult commandResult = new AddGroupMeetingTimeCommand(validGroupWithMeeting, validTimeInterval).execute(modelStub);
+        CommandResult commandResult =
+                new AddGroupMeetingTimeCommand(validGroupWithMeeting, validTimeInterval).execute(modelStub);
 
         // Time interval has been added
         assertTrue(modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
@@ -90,6 +107,8 @@ public class AddGroupMeetingTimeCommandTest {
 
     @Test
     public void execute_duplicateTimeInterval_groupTimeIntervalAdditionFail() throws Exception {
+        Group validGroupWithMeeting = new GroupBuilder().withTimeIntervalList(VALID_TIME_MON).build();
+
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroupWithMeeting);
 
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
@@ -98,13 +117,16 @@ public class AddGroupMeetingTimeCommandTest {
         CommandResult expectedOutput = new CommandResult(String.format(MESSAGE_SUCCESS
                 + "There is a clash in these input timings with your existing timings:\n"
                 + "MON 1300 - MON 1400 " + "\n", Messages.format(validGroupWithMeeting)));
-        AddGroupMeetingTimeCommand actualOutput = new AddGroupMeetingTimeCommand(validGroupWithMeeting, invalidTimeInterval);
+        AddGroupMeetingTimeCommand actualOutput =
+                new AddGroupMeetingTimeCommand(validGroupWithMeeting, invalidTimeInterval);
 
         assertEquals(expectedOutput, actualOutput.execute(modelStub));
     }
 
     @Test
     public void execute_overlappingTimeInterval_groupTimeIntervalAdditionFail() throws Exception {
+        Group validGroupWithMeeting = new GroupBuilder().withTimeIntervalList(VALID_TIME_MON).build();
+
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroupWithMeeting);
 
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
@@ -113,7 +135,8 @@ public class AddGroupMeetingTimeCommandTest {
         CommandResult expectedOutput = new CommandResult(String.format(MESSAGE_SUCCESS
                 + "There is a clash in these input timings with your existing timings:\n"
                 + "MON 1330 - MON 1430 " + "\n", Messages.format(validGroupWithMeeting)));
-        AddGroupMeetingTimeCommand actualOutput = new AddGroupMeetingTimeCommand(validGroupWithMeeting, invalidTimeInterval);
+        AddGroupMeetingTimeCommand actualOutput =
+                new AddGroupMeetingTimeCommand(validGroupWithMeeting, invalidTimeInterval);
 
         assertEquals(expectedOutput, actualOutput.execute(modelStub));
     }
@@ -244,7 +267,8 @@ public class AddGroupMeetingTimeCommandTest {
         }
 
         @Override
-        public String deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete) throws CommandException {
+        public String deleteTimeFromPerson(Name personName,
+                                           ArrayList<TimeInterval> listOfTimesToDelete) throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -1,33 +1,38 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_REMARK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_REMARK_OTHERS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_REMARK_SPECIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_REMARK_UNICODE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_MON;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
-import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TimeInterval;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.AddGroupMeetingTimeCommand.MESSAGE_SUCCESS;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.Assert.assertThrows;
-
 public class GroupRemarkCommandTest {
-    Group validGroupWithMeeting = new GroupBuilder().withTimeIntervalList(VALID_TIME_MON).build();
-    Group validGroup = new GroupBuilder().build();
-
     @Test
-    public void constructor_nullGroup_nullRemark_throwsNullPointerException() {
+    public void constructor_nullGroupNullRemark_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new GroupRemarkCommand(null, null));
     }
 
@@ -38,13 +43,16 @@ public class GroupRemarkCommandTest {
     }
 
     @Test
-    public void constructor_nullRemark_throwsNullPointerException() {
+    public void constructor_nullRemarkThrowsNullPointerException() {
+        Group validGroup = new GroupBuilder().build();
         GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK);
         assertThrows(NullPointerException.class, () -> new GroupRemarkCommand(validGroup.getGroupName(), null));
     }
 
     @Test
     public void execute_addGroupRemarkSuccess() throws Exception {
+        Group validGroup = new GroupBuilder().build();
+
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
         assertEquals(" ", validGroup.getGroupRemark().toString());
         GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK);
@@ -56,10 +64,13 @@ public class GroupRemarkCommandTest {
 
     @Test
     public void execute_groupWithMeeting_addGroupRemarkSuccess() throws Exception {
+        Group validGroupWithMeeting = new GroupBuilder().withTimeIntervalList(VALID_TIME_MON).build();
+
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroupWithMeeting);
         assertEquals(" ", validGroupWithMeeting.getGroupRemark().toString());
         GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK);
-        CommandResult commandResult = new GroupRemarkCommand(validGroupWithMeeting.getGroupName(), groupRemark).execute(modelStub);
+        CommandResult commandResult =
+                new GroupRemarkCommand(validGroupWithMeeting.getGroupName(), groupRemark).execute(modelStub);
 
         // Group remark has been added
         assertEquals(VALID_GROUP_REMARK, validGroupWithMeeting.getGroupRemark().toString());
@@ -67,6 +78,8 @@ public class GroupRemarkCommandTest {
 
     @Test
     public void execute_alphanumericSpecialCharacters_addGroupRemarkSuccess() throws Exception {
+        Group validGroup = new GroupBuilder().build();
+
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
         assertEquals(" ", validGroup.getGroupRemark().toString());
         GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK_SPECIAL);
@@ -78,6 +91,8 @@ public class GroupRemarkCommandTest {
 
     @Test
     public void execute_unicodeCharacters_addGroupRemarkSuccess() throws Exception {
+        Group validGroup = new GroupBuilder().build();
+
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
         assertEquals(" ", validGroup.getGroupRemark().toString());
         GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK_UNICODE);
@@ -89,6 +104,8 @@ public class GroupRemarkCommandTest {
 
     @Test
     public void execute_validCharacters_addGroupRemarkSuccess() throws CommandException {
+        Group validGroup = new GroupBuilder().build();
+
         ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
         GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK_OTHERS);
         CommandResult commandResult = new GroupRemarkCommand(validGroup.getGroupName(), groupRemark).execute(modelStub);
@@ -220,7 +237,8 @@ public class GroupRemarkCommandTest {
         }
 
         @Override
-        public String deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete) throws CommandException {
+        public String deleteTimeFromPerson(Name personName,
+                                           ArrayList<TimeInterval> listOfTimesToDelete) throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -1,32 +1,37 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_MON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_TUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_WED;
+import static seedu.address.logic.commands.ListTimePersonCommand.MESSAGE_LISTTIME_PERSON_SUCCESS;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
-import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TimeInterval;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.commands.ListTimePersonCommand.MESSAGE_LISTTIME_PERSON_SUCCESS;
-import static seedu.address.testutil.Assert.assertThrows;
-
 public class ListTimePersonCommandTest {
-
-    Person validPerson = new PersonBuilder().build();
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -34,7 +39,8 @@ public class ListTimePersonCommandTest {
     }
 
     @Test
-    public void execute_personWithNoTimeInterval_ListSuccess() throws Exception {
+    public void execute_personWithNoTimeIntervalListSuccess() throws Exception {
+        Person validPerson = new PersonBuilder().build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
 
         // Person has time interval to be listed
@@ -49,7 +55,8 @@ public class ListTimePersonCommandTest {
     }
 
     @Test
-    public void execute_personWithSingleTimeInterval_ListSuccess() throws Exception {
+    public void execute_personWithSingleTimeIntervalListSuccess() throws Exception {
+        Person validPerson = new PersonBuilder().build();
         ModelStubPersonWithSingleTiming modelStub = new ModelStubPersonWithSingleTiming(validPerson);
 
         // Person has time interval to be listed
@@ -66,7 +73,8 @@ public class ListTimePersonCommandTest {
     }
 
     @Test
-    public void execute_personWithMultipleTimeIntervals_ListSuccess() throws Exception {
+    public void execute_personWithMultipleTimeIntervalsListSuccess() throws Exception {
+        Person validPerson = new PersonBuilder().build();
         ModelStubPersonWithMultipleTimings modelStub = new ModelStubPersonWithMultipleTimings(validPerson);
 
         // Person has time interval to be listed
@@ -85,7 +93,8 @@ public class ListTimePersonCommandTest {
     }
 
     @Test
-    public void execute_nonExistentPerson_ListFail() throws Exception {
+    public void execute_nonExistentPersonListFail() throws Exception {
+        Person validPerson = new PersonBuilder().build();
         ModelStubPersonWithMultipleTimings modelStub = new ModelStubPersonWithMultipleTimings(validPerson);
         Name invalidName = new Name("John");
         assertThrows(CommandException.class, () -> new ListTimePersonCommand(invalidName).execute(modelStub));

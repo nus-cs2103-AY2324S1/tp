@@ -1,16 +1,26 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
-import javafx.util.Pair;
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.GuiSettings;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.testutil.Assert.assertThrows;
 
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
+import javafx.util.Pair;
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TimeInterval;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Name;
@@ -18,26 +28,18 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.testutil.Assert.assertThrows;
-
 public class UngroupPersonCommandTest {
-    Group validGroup = new GroupBuilder().build();
-    Person validPerson = new PersonBuilder().build();
-
 
     @Test
-    public void constructor_nullPerson_nullGroup_throwsNullPointerException() {
+    public void constructor_nullPersonNullGroupThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new UngroupPersonCommand(null, null));
     }
 
     @Test
     public void execute_ungroupPersonSuccess() throws CommandException {
+        Group validGroup = new GroupBuilder().build();
+        Person validPerson = new PersonBuilder().build();
+
         ModelStubWithGroupAndSingleMember modelStub = new ModelStubWithGroupAndSingleMember(validGroup, validPerson);
         assertTrue(validGroup.contains(validPerson));
 
@@ -48,7 +50,10 @@ public class UngroupPersonCommandTest {
     }
 
     @Test
-    public void execute_personNotInGroup_ungroupPersonFailure() throws CommandException {
+    public void execute_personNotInGroup_ungroupPersonFailure() {
+        Group validGroup = new GroupBuilder().build();
+        Person validPerson = new PersonBuilder().build();
+
         ModelStubWithEmptyGroup modelStub = new ModelStubWithEmptyGroup(validGroup, validPerson);
         assertFalse(validGroup.contains(validPerson));
 
@@ -181,7 +186,8 @@ public class UngroupPersonCommandTest {
         }
 
         @Override
-        public String deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete) throws CommandException {
+        public String deleteTimeFromPerson(Name personName,
+                                           ArrayList<TimeInterval> listOfTimesToDelete) throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -306,8 +306,6 @@ The following sequence diagram shows how the Delete Group operation works:
 
 </box>
 
-
-
 ### Group Remark Feature
 
 #### Implementation
@@ -326,6 +324,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/GroupRemarkSequenceDiagram.puml" alt="GroupRemarkSequenceDiagram" />
 
+<box type="info" seamless>
+
+**Note:** The lifeline for `GroupRemarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
 #### Design Considerations
 
 **Aspects:**
@@ -335,7 +339,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     - Cons: May be troublesome if the user wants to keep contents from the original remark.
 - **Alternative 2:** Edits original remark
     - Pros: Easy to add more information.
-    - Cons: Could be confusing to edit if there are many changes.
+    - Cons: Could be confusing to edit if there are many changes or remark is too long.
 
 ### Delete Time Feature
 
@@ -399,7 +403,7 @@ Below is an activity diagram that illustrates the control flow for Delete Person
 
 ### Group Person
 
-#### Proposed Implementation
+#### Implementation
 
 The group remark mechanism is facilitated by `Group`. It is stored internally as a `Group Remark`. This operation is exposed in the `Model` interface as `Model#groupPerson(personName, groupName)`.
 
