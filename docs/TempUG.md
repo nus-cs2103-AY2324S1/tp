@@ -886,7 +886,7 @@ Linked Bernice Yu to CS2103T Lab
 Failure outputs:
 * Current state: In the ___SCHEDULE list___ and no lesson is selected
 * Input: `linkTo Bernice Yu`
-  * Error: A student is not yet selected. Select a student using `show INDEX` first.
+  * Error: A lesson is not yet selected. Select a lesson using `show INDEX` first.
 ```
 No lesson is shown
 LinkTo command usage: linkTo [STUDENT_NAME]
