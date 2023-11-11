@@ -20,7 +20,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -241,6 +240,9 @@ public class MainWindow extends UiPart<Stage> {
             case SAVE:
                 handleSave();
                 break;
+
+            default:
+                break;
             }
 
             return commandResult;
@@ -258,7 +260,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     void handleViewExit() {
-        // if the fosterer is already saved or the confirmation message is already displayed, then exit the profile page.
+        // if the fosterer is already saved or the confirmation message is already displayed, exit the profile page.
         if (isSaved || commandBox.getInConfirmationDialog()) {
             commandBox.setInConfirmationDialog(false);
             personProfile.setIsInConfirmationDialog(false);
