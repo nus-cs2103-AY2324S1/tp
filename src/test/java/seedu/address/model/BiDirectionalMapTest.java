@@ -1,32 +1,29 @@
 package seedu.address.model;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.Assert;
-import seedu.address.testutil.TypicalLessons;
-import seedu.address.testutil.TypicalPersons;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lessons.Lesson;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.TypicalLessons;
+import seedu.address.testutil.TypicalPersons;
 
 public class BiDirectionalMapTest {
-    private BiDirectionalMap<Person, Lesson> biDirectionalMap;
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "BiDirectionalMapTest");
+    private BiDirectionalMap<Person, Lesson> biDirectionalMap;
     @BeforeEach
     public void setup() {
         this.biDirectionalMap = new BiDirectionalMap<>();
@@ -47,8 +44,8 @@ public class BiDirectionalMapTest {
      * Converts a Java Array into a List.
      *
      * @param input the input array
-     * @return a List with the same elements as the input array
      * @param <T> The type of the input array
+     * @return a List with the same elements as the input array
      */
     public <T> List<T> convertToList(T[] input) {
         return Arrays.stream(input).collect(Collectors.toList());
