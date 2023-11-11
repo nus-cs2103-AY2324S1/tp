@@ -148,6 +148,14 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+The `AddCommand` extends the `Command` class. While mostly similar to `delete` illustrated above, the command contains 
+checks to prevent any duplicate `Person` object (i.e. same name and phone number) as well as clashes in schedules. 
+If it passes these checks, the person is added into the system.
+
+The following sequence diagram shows how the add command works.
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
 ### List by day feature
 
 The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
@@ -172,7 +180,18 @@ The following sequence diagram shows how the add command works.
 
 #### Design Considerations
 
+### Calculate total revenue for the month
 
+
+The 'RevenueCommand' extends the 'command class'. The command first gets a list containing all tutees.
+The total revenue monthly can be calculated now by iterating through the list and calling 'getMonthlyRevenue()' on each
+tutee.
+
+*Total Revenue* = number of tutees x tutee.getMonthlyRevenue()
+
+
+The following sequence diagram shows how the total revenue command works:
+![RevenueSequenceDiagram.png](images/RevenueSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -299,19 +318,6 @@ The following sequence diagram shows how unpaidAll command works:
 * **Alternative 2:** Change the paid value of the current person.
     * Pros: Easy to implement.
     * Cons: The future design of redo/undo command would be difficult.
-
-### [Proposed] Total revenue command
-#### Proposed implementation
-![RevenueSequenceDiagram.png](images/RevenueSequenceDiagram.png)
-
-The proposed total revenue command is facilitated by the payRate field in Person class, as well as the start and end fields in person class.
-
-The following sequence diagram shows how the total revenue command works:
-_{to be implemented in the future}_
-
-The logic behind finding total revenue is
-
-*Total Revenue* = payRate.value x hours of lesson x  number of lessons in current month
 
 
 

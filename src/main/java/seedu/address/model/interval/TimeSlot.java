@@ -1,5 +1,7 @@
 package seedu.address.model.interval;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class TimeSlot {
      * @param end a Date object for end
      */
     public TimeSlot(Date start, Date end) {
+        requireAllNonNull(start, end);
         this.start = start;
         this.end = end;
     }
@@ -61,10 +64,10 @@ public class TimeSlot {
         timeslots.sort(Comparator.comparing(timeslot -> timeslot.getStart()));
 
         List<TimeSlot> availableTime = new ArrayList<>();
-        Date lastEnd = interval.getIntervalBegin().getTime();
+        Date lastEnd = interval.getIntervalBegin().getTimes();
         for (TimeSlot timeslot : timeslots) {
-            if (timeslot.getStart().after(interval.getIntervalEnd().getTime())) {
-                availableTime.add(new TimeSlot(lastEnd, interval.getIntervalEnd().getTime()));
+            if (timeslot.getStart().after(interval.getIntervalEnd().getTimes())) {
+                availableTime.add(new TimeSlot(lastEnd, interval.getIntervalEnd().getTimes()));
             } else if (timeslot.getStart().after(lastEnd)) {
                 availableTime.add(new TimeSlot(lastEnd, timeslot.getStart()));
             }
@@ -72,8 +75,8 @@ public class TimeSlot {
                 lastEnd = timeslot.getEnd();
             }
         }
-        if (lastEnd.before(interval.getIntervalEnd().getTime())) {
-            availableTime.add(new TimeSlot(lastEnd, interval.getIntervalEnd().getTime()));
+        if (lastEnd.before(interval.getIntervalEnd().getTimes())) {
+            availableTime.add(new TimeSlot(lastEnd, interval.getIntervalEnd().getTimes()));
         }
         List<TimeSlot> validTimeSlots = availableTime.stream()
                 .filter(timeslot -> timeslot.getDurationMinutes() >= interval.getDuration().toInt())
