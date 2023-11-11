@@ -65,7 +65,7 @@ public class NotesWindowTest extends ApplicationTest {
                 new Note("Is a chad"),
                 new Note("Is a chad2")
             );
-            Note noteToAdd = new Note ("Is a chad2");
+            Note noteToAdd = new Note("Is a chad2");
             testPerson.addNote(noteToAdd);
             verifyThat("#notesListView", hasItems(4));
             ObservableList<Note> actualNotes = notesWindow.getNotesListView().getItems();
@@ -88,7 +88,7 @@ public class NotesWindowTest extends ApplicationTest {
             assertTrue(actualNotes.containsAll(expectedNotes));
 
             testPerson.addNote(
-                new Note ("Is a chad")
+                new Note("Is a chad")
             );
         });
     }
