@@ -116,19 +116,21 @@ This box denotes command outputs.
 
 ### Parameter summary
 
-| Parameter       | Used in                                                                   | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Valid examples                                                                                               | Invalid examples            |
-|-----------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------|
-| `INDEX`         | `show`<br/>`editPerson` `deletePerson`<br/>`editLesson` `deleteLesson`    | Must be a positive integer in the range of 1 to 99999 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | "1", "24", "12"                                                                                              | "-1", "2147483648", "10000" |
-| `LIST`          | `list`                                                                    | Must be either "Students", "Schedule", "Tasks". Parameter is case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | "STUDENTS", "stuDEnts"                                                                                       | "task", "student"           |
-| `KEYWORDS`      | `list`                                                                    | Must be either "phone", "email", "address", "tags", "subjects", "remark", "none", or "all". Parameter must be in **lower case**. Multiple keywords can be specified using a **space separator.**                                                                                                                                                                                                                                                                                                                                                                                                                                   | "none", "all", "subJeCts"                                                                                    | "subject", ""               |
-| `NAME`          | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter` `find` | Must not be empty. <br/>Must only contain alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "John", "Elton"                                                                                              | "", "jo!"                   |   
-| `SUBJECT`       | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter`        | Must be either "Mathematics", "Physics", <br/>"Biology", "Chemistry" or "English"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | "mathematics", "MATHEMATICS"                                                                                 | "math"                      | 
-| `PHONE`         | `addPerson` `editPerson`                                                  | Should be at least 3 characters long, and can only contain numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "96681234", "823234"                                                                                         | "+6592212341", "98"         |
-| `EMAIL`         | `addPerson` `editPerson`                                                  | Should follow the format localpart@domain.<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | "hello@gmail.com", "test@g.com"                                                                              | "hello.com", "f@f"          |
-| `ADDRESS`       | `addPerson` `editPerson`                                                  | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road"                                                                          | ""                          |  
-| `TAGS`          | `addPerson` `editPerson`<br/>`filter`                                     | Must not be empty and cannot contain any spaces. Multiple tags can be specified at once by using a comma (,) as a separator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | "jc,express", "weak"                                                                                         | "junior college"            |
-| `DATE`          | `addLesson` `editLesson`<br/>`filter`                                     | Must follow either the date format **yyyy/MM/dd**, **yy/MM/dd**, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                               | To represent the date 13/08/2023 and assuming it is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        |
-| `SEARCH_STRING` | `find`                                                                    | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Alex", "alex yeoh", "+asdf-"                                                                                | ""                          |
+| Parameter       | Used in                                                                                             | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Valid examples                                                                                               | Invalid examples            |
+|-----------------|-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------|
+| `INDEX`         | `show`<br/>`editPerson` `deletePerson`<br/>`editLesson` `deleteLesson` <br/> `addTask` `deleteTask` | Must be a positive integer in the range of 1 to 99999 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | "1", "24", "12"                                                                                              | "-1", "2147483648", "10000" |
+| `LIST`          | `list`                                                                                              | Must be either "Students", "Schedule", "Tasks". Parameter is case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | "STUDENTS", "stuDEnts"                                                                                       | "task", "student"           |
+| `KEYWORDS`      | `list`                                                                                              | Must be either "phone", "email", "address", "tags", "subjects", "remark", "none", or "all". Parameter must be in **lower case**. Multiple keywords can be specified using a **space separator.**                                                                                                                                                                                                                                                                                                                                                                                                                                   | "none", "all", "subJeCts"                                                                                    | "subject", ""               |
+| `NAME`          | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter` `find`                           | Must not be empty. <br/>Must only contain alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "John", "Elton"                                                                                              | "", "jo!"                   |   
+| `SUBJECT`       | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter`                                  | Must be either "Mathematics", "Physics", <br/>"Biology", "Chemistry" or "English"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | "mathematics", "MATHEMATICS"                                                                                 | "math"                      | 
+| `PHONE`         | `addPerson` `editPerson`                                                                            | Should be at least 3 characters long, and can only contain numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "96681234", "823234"                                                                                         | "+6592212341", "98"         |
+| `EMAIL`         | `addPerson` `editPerson`                                                                            | Should follow the format localpart@domain.<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | "hello@gmail.com", "test@g.com"                                                                              | "hello.com", "f@f"          |
+| `ADDRESS`       | `addPerson` `editPerson`                                                                            | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road"                                                                          | ""                          |  
+| `TAGS`          | `addPerson` `editPerson`<br/>`filter`                                                               | Must not be empty and cannot contain any spaces. Multiple tags can be specified at once by using a comma (,) as a separator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | "jc,express", "weak"                                                                                         | "junior college"            |
+| `DATE`          | `addLesson` `editLesson`<br/>`filter`                                                               | Must follow either the date format **yyyy/MM/dd**, **yy/MM/dd**, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                               | To represent the date 13/08/2023 and assuming it is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        |
+| `TIME`          | `addLesson` `editLesson`                                                                            | Must follow the time format **HH:mm**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                                                                            | "10:00", "15:00"                                                                                             | "10a.m.", "3pm", "5PM"      |
+| `DESCRIPTION`   | `addTask`                                                                                           | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Mark Alkanes Notes", "Mark Chemistry Practice Paper"                                                        | ""                          |
+| `SEARCH_STRING` | `find`                                                                                              | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Alex", "alex yeoh", "+asdf-"                                                                                | ""                          |
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -296,7 +298,7 @@ Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADD
 Example usages:
 * `addPerson -name John`
 * `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
-* In `STUDENTS` list :
+* In ___STUDENTS list___ :
     * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
 
 Success outputs:
@@ -323,77 +325,98 @@ Note you must provide a 'name' not already in the address book.
 
 #### For schedule list:
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+Format: `addLesson -name NAME [-start TIME] [-end TIME] [-day DATE] [-subject SUBJECT]`
+* A new lesson cannot have the same name as existing students in the contact list.
+* Start time cannot be after end time.
+* Only one subject can be assigned to a lesson.
+* Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+If the user is currently in ___SCHEDULE list___, the command can be shortened to `add`.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `addLesson -name Chemistry Lesson at Bishan`
+* `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`
+* In ___SCHEDULE list___ :
+  * `add -name Lesson at Yishun -day 21 -subject MATHEMATICS`
+
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `addLesson -name Chemistry Lesson at Bishan`
 ```
-This block of code is for success outputs
+New lesson added: Lesson Chemistry Lesson at Bishan
 ```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`
 ```
-Invalid command with the error message here
+New lesson added: Lesson Lesson at Tai Seng from 9:00 AM to 11:00 AM on 21-03-2023 for PHYSICS
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+
+Failure outputs:
+* Input: `addLesson -name Chemistry Lesson` followed by `addLesson -name Chemistry Lesson -day 2023/12/12`
+  * Error: A new lesson cannot have the same name as an existing lesson. Enter another name for the new lesson.
 ```
-Invalid command with the error message here
+Lesson with this name already exists in the schedule
 ```
+
+
+* Input: `addLesson -name English Lesson -start 13:00 -end 10:00`
+  * Error: The start time specified for a lesson cannot be after its end time. Enter a start time that is before the end time.
+```
+Invalid lesson input: End time: 10:00 AM cannot be before start time: 1:00 PM.. 
+Usage: addLesson -name NAME (any number of unique [-subject|day|start|end VALUE]). 
+ For example, addLesson -name John -subject English -day 23 -start 14:30 -end 16:30
+ If you are currently displaying schedule list, you could use 'add' inplace of 'addLesson'. 
+ Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.
+```
+![Failure for addLesson](images/add-lesson/add_lesson_failure2.png)
+
 
 #### For task list:
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+Format: `addTask [INDEX] DESCRIPTION` 
+* Adds the task to the lesson at specified `INDEX` of the displayed ___SCHEDULE list___.
+* A new task cannot have the same description as existing tasks in the task list of that specific lesson.
+* Refer to the parameter constraints [here](#parameter-summary).
+
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+The command can be shortened to `addTask DESCRIPTION` if the task is to be added to the shown lesson.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `addTask 1 Make Forces Notes`
+* With a lesson shown:
+  * `addTask Mark MYE Practice Paper`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `addTask 1 Make Forces Notes`
 ```
-This block of code is for success outputs
+New task added to lesson with index 1: Make Forces Notes
 ```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `addTask Mark MYE Practice Paper`
 ```
-Invalid command with the error message here
+New task added to current lesson: Mark MYE Practice Paper
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+Failure outputs:
+* Input: `addTask`
+  * Error: No lesson index specified and no lesson shown. Missing description. <br>
+    Use the `show` command or add the lesson index you want to add tasks to after `addTask`. Add description of the task at the end of the command.
 ```
-Invalid command with the error message here
+Invalid description: Tasks can take any values, and it should not be blank
+Usage: addTask/task + [lesson index] [description]. You could omit the lesson index when adding task to showing lesson.
+Example1: addtask 1 do homework
 ```
+![Failure for addTask](images/add-task/add_task_failure.png)
+
 
 
 <br>
