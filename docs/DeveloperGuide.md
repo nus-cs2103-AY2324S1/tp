@@ -194,6 +194,45 @@ The following activity diagram summarizes what happens when a user executes a `f
     * Less in line with users' expectations of a `filter` command; not as intuitive.
 * We made the choice of Alternative 1 over Alternative 2 as we found that more intuitive commands would be easier for users to learn and eventually master.
 
+### uplevel, undolevel feature
+
+#### Implementation
+
+The `uplevel` command allows the user to increase the sec levels of all students by one and remove all sec 4 students.
+
+The `undolevel` command allows the user to undo the `uplevel` command and revert the student records to be before previous `uplevel` operation since open application.
+
+When the user enter an uplevel/undolevel command, the `AddressBookParser` parses the user input and returns a `UpdateSecLevelCommand`.
+
+The following sequence diagram shows how the `UpdateSecLevelCommand` works. In this example, the user is executing `uplevel`.
+
+<puml src="diagrams/UpdateSecLevelSequenceDiagram.puml" alt="UpdateSecLevelSequenceDiagram" />
+
+When the `AddressBookParser` parses the argument, it creates either `UpdateSecLevelCommand(isUndo: false)` for `uplevel` or `UpdateSecLevelCommand(isUndo: true`) for `undolevel`.
+
+The following activity diagram summarizes what happen when a user executes a `UpdateSecLevelCommand`.
+
+<puml src="diagrams/UpdateSecLevelActivityDiagram.puml" alt="UpdateSecLevelActivityDiagram" width="250" />
+
+#### Design consideration:
+
+**Aspect: How other commands executed after `uplevel` and before `undolevel` should be addressed.
+
+* **Alternative 1 (current choice):** The other commands executed after `uplevel` and before `undolevel` will be invalid.
+  * Pros:
+    * To avoid conflict between those commands and `undolevel` command.
+    * More in line with what the user expect from reverting student records state to be before an `uplevel` command.
+  * Cons:
+    * User will need to perform those "in-between" commands again.
+* Alternative 2: Keep track of what the user have done after any `uplevel` command.
+  * Pros:
+    * User will not need to perform those "in-between" commands again after doing `undolevel` to undone the sec level update.
+  * Cons:
+    * Less in line with users' expectations of reverting student records state to be before an `uplevel` command.
+    * May have conflict between those "in-between" commands and `undolevel` command. E.g., edit a student's sec level and then perform `undolevel`.
+    * Decline in performance due to the need to keep track every operation after `uplevel`.
+* We made the choice of Alternative 1 over Alternative 2 as undolevel is provided in case a user accidentally perform `uplevel` that the user didn't intend to. As such, we found that Alternative 1 is more in line of users' expectations and will not mess up the logic.
+
 ### Sort feature
 
 #### Implementation
