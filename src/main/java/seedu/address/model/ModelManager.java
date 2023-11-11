@@ -227,13 +227,10 @@ public class ModelManager implements Model {
     public String addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAddPerson);
         Person person = addressBook.getPerson(toAddPerson.fullName);
-        try {
-            String msg = person.addFreeTime(toAddTime);
-            forceUpdateList();
-            return msg;
-        } catch (CommandException e) {
-            throw new CommandException(e.getMessage());
-        }
+        String msg = person.addFreeTime(toAddTime);
+        forceUpdateList();
+        return msg;
+
     }
 
     /**
@@ -425,5 +422,4 @@ public class ModelManager implements Model {
             && userPrefs.equals(otherModelManager.userPrefs)
             && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

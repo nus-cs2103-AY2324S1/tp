@@ -5,16 +5,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Duration;
-import seedu.address.model.TimeIntervalList;
 import seedu.address.model.TimeInterval;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.person.Person;
-
-import java.util.stream.Stream;
 
 /**
  * Class representing a group
@@ -28,7 +28,8 @@ public class Group {
     private final TimeIntervalList timeIntervalList = new TimeIntervalList();
 
     /**
-     * Name field must be present and not null.
+     * Constructs a group with the name, name must not be null
+     * @param groupName Name of group
      */
     public Group(String groupName) {
         requireNonNull(groupName);
@@ -36,6 +37,11 @@ public class Group {
         this.groupRemark = new GroupRemark("");
     }
 
+    /**
+     * Constructs a group with the name and remark, name must not be null
+     * @param groupName Name of group
+     * @param groupRemark Remark of group
+     */
     public Group(String groupName, GroupRemark groupRemark) {
         requireNonNull(groupName);
         this.groupName = groupName;

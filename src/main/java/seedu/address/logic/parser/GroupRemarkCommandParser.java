@@ -2,14 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPREMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
+
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.GroupRemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupRemark;
-
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new {@code GroupRemarkCommand} object

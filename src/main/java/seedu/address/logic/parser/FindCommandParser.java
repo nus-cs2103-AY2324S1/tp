@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.commands.FindGroupCommand;
+import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 

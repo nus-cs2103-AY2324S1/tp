@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
 
 import java.time.DayOfWeek;
@@ -31,6 +32,8 @@ public class TimeInterval {
      * @param end   The end time of the interval.
      */
     public TimeInterval(Time start, Time end) {
+        requireNonNull(start);
+        requireNonNull(end);
         this.start = start;
         this.end = end;
     }
@@ -42,15 +45,10 @@ public class TimeInterval {
      * @return Returns true if the timeInterval overlaps with one another.
      */
     public static boolean isTimeIntervalOverlap(ArrayList<TimeInterval> intervals) {
-        for (int i = 0; i < intervals.size(); i++) {
-            for (int j = i + 1; j < intervals.size(); j++) {
-                int startComparison = intervals.get(i).compareStart(intervals.get(j));
-                int endComparison = intervals.get(i).compareEnd(intervals.get(j));
-                boolean noClash = ((startComparison < 0 && endComparison < 0)
-                    || (startComparison > 0 && endComparison > 0));
-                if ((startComparison == 0 && endComparison == 0) || !noClash) {
-                    return true;
-                }
+        intervals.sort(TimeInterval::compareStart);
+        for (int i = 0; i < intervals.size() - 1; i++) {
+            if (intervals.get(i).isClash(intervals.get(i + 1))) {
+                return true;
             }
         }
         return false;

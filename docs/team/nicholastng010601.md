@@ -15,14 +15,14 @@ Given below are my contributions to the project.
   * Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design principles. Since it involved creating a new class of objects, it required careful planning and utilising of OOP principles.
 
 * **New Feature**: Added the ability to delete time.
-  * What it does: allows the user to delete time which had been added to a contact or group. 
+  * What it does: allows the user to delete time which had been added to a contact or group.
   * Justification: This feature improves the product significantly because a user can make mistakes in adding free time to contacts and this function provides a convenient way for users to remove the error.
   * Highlights: This enhancement required an in-depth analysis of parser and various conditions whereby the command would be carried out. For example, the time keyed in must exist within the contact. Various designs were also considered, such as allowing multiple time slots to be keyed in at once to improve the user experience. In such a case, we also wanted to allow time that was keyed in correctly to be deleted, even if the command had certain time slots which were wrong. The implementation too was difficult as it required the involvement of our time interval class and comparing the various time slots to come up with a error-free yet efficient implementation.
 
 * **Improved Feature**: Added the ability to save not only contacts, but groups and time intervals.
   * What it does: allows the user's application to save groups and time intervals in the form of JSON, so that when the user reboots their application, their data will be saved and loaded up properly.
-  * Justification: This feature is a core feature as without it, users would have to retype all their groups and times everytime they on their application. 
-  * Highlights: This enhancement required the in-depth analysis of the existing process of saving and loading of the JSON file. It required meticulousness and attention to detail as it involved complex logical processes such as adding a person to the group he is in, while also adding the group to the person's own internal list, whereby any error would result in unexpected results. It also required careful considerations regarding the important variables that had to be stored for the save function to fully capture all the details and allow the user to load the application just as he or she stored it.  
+  * Justification: This feature is a core feature as without it, users would have to retype all their groups and times everytime they on their application.
+  * Highlights: This enhancement required the in-depth analysis of the existing process of saving and loading of the JSON file. It required meticulousness and attention to detail as it involved complex logical processes such as adding a person to the group he is in, while also adding the group to the person's own internal list, whereby any error would result in unexpected results. It also required careful considerations regarding the important variables that had to be stored for the save function to fully capture all the details and allow the user to load the application just as he or she stored it.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/#/widget/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&chartGroupIndex=36&chartIndex=3)
 
@@ -41,9 +41,8 @@ Given below are my contributions to the project.
     * Added activity and sequence diagrams for the above functions. This includes for delete person time command, shown here.
     * <puml src="diagrams/DeletePersonTimeDiagram.puml" alt="DeletePersonTimeDiagram"/>
     * <puml src="diagrams/DeletePersonTimeActivityDiagram.puml" alt="DeletePersonTimeActivityDiagram"/>
-  
 * **Contributions beyond project team**
-    * Meticulously review other groups work and provided feedback on potential bugs and how they could imrpove their product [here](https://github.com/nicholastng010601/ped/tree/main/files).
+    * Meticulously review other groups work and provided feedback on potential bugs and how they could improve their product [here](https://github.com/nicholastng010601/ped/tree/main/files).
 
 
 [//]: # (* **Community**:)

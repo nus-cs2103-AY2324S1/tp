@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
@@ -27,24 +27,21 @@ public class GroupPersonCommandParser implements Parser<GroupPersonCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupPersonCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupPersonCommand.MESSAGE_USAGE));
         }
 
-//		return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG);
-
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GROUPTAG)
-            || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupPersonCommand.MESSAGE_USAGE));
         }
-		argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
         String personName = argMultimap.getValue(PREFIX_NAME).get();
         String groupName = argMultimap.getValue(PREFIX_GROUPTAG).get();
 
-        return new GroupPersonCommand(
-            personName, groupName);
+        return new GroupPersonCommand(personName, groupName);
     }
 
     /**

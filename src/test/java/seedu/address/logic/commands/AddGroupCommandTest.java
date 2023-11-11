@@ -1,29 +1,35 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
-import javafx.util.Pair;
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
-import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupRemark;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.TypicalGroups;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGroups.CS2103T;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalGroups.CS2103T;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
+import javafx.util.Pair;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TimeInterval;
+import seedu.address.model.TimeIntervalList;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupRemark;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.TypicalGroups;
 
 public class AddGroupCommandTest {
 
@@ -33,14 +39,14 @@ public class AddGroupCommandTest {
     }
 
     @Test
-    public void execute_GroupAcceptedByModel_addSuccessful() throws Exception {
+    public void executeGroupAcceptedByModelAddSuccessful() throws Exception {
         ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
         Group validGroup = CS2103T;
 
         CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
 
         assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, Messages.format(validGroup)),
-            commandResult.getFeedbackToUser());
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
     }
 
@@ -50,32 +56,32 @@ public class AddGroupCommandTest {
         AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
         AddGroupCommandTest.ModelStub modelStub = new AddGroupCommandTest.ModelStubWithGroup(validGroup);
 
-        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP,
-            () -> addGroupCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
+                addGroupCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Group CS2103T = TypicalGroups.CS2103T;
-        Group CS = TypicalGroups.CS;
-        AddGroupCommand addCS2103TCommand = new AddGroupCommand(CS2103T);
-        AddGroupCommand addCSCommand = new AddGroupCommand(CS);
+        Group cs2103T = TypicalGroups.CS2103T;
+        Group cs = TypicalGroups.CS;
+        AddGroupCommand addCs2103tCommand = new AddGroupCommand(cs2103T);
+        AddGroupCommand addCsCommand = new AddGroupCommand(cs);
 
         // same object -> returns true
-        assertTrue(addCS2103TCommand.equals(addCS2103TCommand));
+        assertTrue(addCs2103tCommand.equals(addCs2103tCommand));
 
         // same values -> returns true
-        AddGroupCommand addCS2103TCommandCopy = new AddGroupCommand(CS2103T);
-        assertTrue(addCS2103TCommand.equals(addCS2103TCommandCopy));
+        AddGroupCommand addCS2103TCommandCopy = new AddGroupCommand(cs2103T);
+        assertTrue(addCs2103tCommand.equals(addCS2103TCommandCopy));
 
         // different types -> returns false
-        assertFalse(addCS2103TCommand.equals(1));
+        assertFalse(addCs2103tCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addCS2103TCommand.equals(null));
+        assertFalse(addCs2103tCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addCS2103TCommand.equals(addCSCommand));
+        assertFalse(addCs2103tCommand.equals(addCsCommand));
     }
 
     @Test
@@ -221,7 +227,7 @@ public class AddGroupCommandTest {
 
         @Override
         public String deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete)
-            throws CommandException {
+                throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -236,8 +242,7 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public String deleteTimeFromGroup(Group group,
-                                          ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+        public String deleteTimeFromGroup(Group group, ArrayList<TimeInterval> toDeleteTime) throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -277,7 +282,7 @@ public class AddGroupCommandTest {
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingGroupAdded extends AddGroupCommandTest.ModelStub {
+    private class ModelStubAcceptingGroupAdded extends ModelStub {
         final ArrayList<Group> groupsAdded = new ArrayList<>();
 
         @Override

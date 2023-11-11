@@ -9,6 +9,9 @@ import static java.util.Objects.requireNonNull;
 public class GroupRemark {
     public final String value;
 
+    /**
+     * Creates a group remark object with the string provided
+     */
     public GroupRemark(String groupRemark) {
         requireNonNull(groupRemark);
         value = groupRemark;

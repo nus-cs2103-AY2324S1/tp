@@ -2,12 +2,10 @@ package seedu.address.testutil;
 
 import java.util.Arrays;
 
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.TimeInterval;
 import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -49,6 +47,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         grpList = personToCopy.getGroups();
+        timeIntervalList = personToCopy.getTime();
     }
     public PersonBuilder(GroupList groupToCopy) {
         name = new Name(DEFAULT_NAME);
@@ -74,8 +73,11 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withTimeInterval(String timeIntervalList) throws ParseException {
-        this.timeIntervalList.addTime(ParserUtil.parseEachInterval(timeIntervalList));
+    /**
+     * Adds the {@code free time} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTimeInterval(TimeInterval timeInterval) {
+        this.timeIntervalList.addTime(timeInterval);
         return this;
     }
 
@@ -98,7 +100,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, grpList);
+        return new Person(name, phone, email, grpList, timeIntervalList);
     }
 
 }
