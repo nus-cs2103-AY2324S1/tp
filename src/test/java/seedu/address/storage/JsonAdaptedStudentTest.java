@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Phone;
 
 public class JsonAdaptedStudentTest {
@@ -92,5 +93,4 @@ public class JsonAdaptedStudentTest {
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS, invalidTags, VALID_NOTE);
         assertThrows(IllegalValueException.class, student::toModelType);
     }
-
 }
