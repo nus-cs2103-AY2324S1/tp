@@ -82,6 +82,9 @@ public interface Model {
     boolean hasPerson(Person person);
 
     boolean hasPerson(Name personName);
+    public void assignGroup(Person person, Group group) throws CommandException;
+
+    public void unassignGroup(Person person, Group group) throws CommandException;
 
     /**
      * Assign person to group and return corresponding person and group object in a pair

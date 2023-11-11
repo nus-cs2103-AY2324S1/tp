@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
@@ -152,7 +153,8 @@ public class ModelManager implements Model {
      * @param group  Group in consideration.
      * @throws CommandException if person has already been assigned to group.
      */
-    private void assignGroup(Person person, Group group) throws CommandException {
+    @Override
+    public void assignGroup(Person person, Group group) throws CommandException {
         group.addPerson(person);
         person.addGroup(group);
     }
@@ -164,7 +166,8 @@ public class ModelManager implements Model {
      * @param group  Group in consideration.
      * @throws CommandException if person has already been assigned to group.
      */
-    private void unassignGroup(Person person, Group group) throws CommandException {
+    @Override
+    public void unassignGroup(Person person, Group group) throws CommandException {
         group.removePerson(person);
         person.removeGroup(group);
     }
@@ -182,6 +185,12 @@ public class ModelManager implements Model {
         // both throw exception if not exists exact match
         Person person = addressBook.getPerson(personName);
         Group group = addressBook.getGroup(groupName);
+        if (person == null) {
+            throw new CommandException(Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND);
+        }
+        if (group == null) {
+            throw new CommandException(Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
+        }
         this.assignGroup(person, group);
         forceUpdateList();
         Pair<Person, Group> output = new Pair<>(person, group);

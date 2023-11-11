@@ -48,12 +48,15 @@ public class CommandTestUtil {
     public static final String GROUP_DESC_BOB = " " + PREFIX_GROUPTAG + VALID_GROUP_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB + "&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_GROUP_DESC_BLANK = " " + PREFIX_GROUPTAG; // empty string not allowed for group
     public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUPTAG
         + "CS2103T&"; // '&' not allowed in group names
+    public static final String INVALID_GROUP_DESC_BOB = " " + PREFIX_GROUPTAG
+            + VALID_GROUP_BOB + "&"; // '&' not allowed in group names
 
     public static final String VALID_TIME_MON = "mon 1300 - mon 1400";
     public static final String VALID_TIME_TUE = "tue 1300 - tue 1400";
@@ -73,6 +76,8 @@ public class CommandTestUtil {
 
     public static final String VALID_GROUP_CS = "CS";
     public static final String VALID_GROUP_CS2103T = "CS2103T";
+    public static final String VALID_GROUP_ST2334 = "ST2334";
+
     public static final String NAME_DESC_CS = " " + PREFIX_GROUPTAG + VALID_GROUP_CS;
     public static final String NAME_DESC_CS2103T = " " + PREFIX_GROUPTAG + VALID_GROUP_CS2103T;
 

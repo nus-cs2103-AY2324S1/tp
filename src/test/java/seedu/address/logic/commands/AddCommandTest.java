@@ -34,8 +34,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
-    @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    @Test public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
@@ -132,6 +131,17 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
+        @Override
+        public void assignGroup(Person person, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unassignGroup(Person person, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
