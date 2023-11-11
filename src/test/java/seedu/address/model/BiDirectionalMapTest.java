@@ -190,7 +190,7 @@ public class BiDirectionalMapTest {
 
     @Test
     public void readMap_invalidData_returnEmptyMap() throws ParseException {
-        Path filePath = TEST_DATA_FOLDER.resolve("TempAddressBook.json");
+        Path filePath = TEST_DATA_FOLDER.resolve("notexist.json");
         // there's nothing here to begin with
         BiDirectionalMap<Person, Lesson> readBack = BiDirectionalMap.readFrom(filePath);
         assertEquals(readBack, new BiDirectionalMap<>());
@@ -198,7 +198,7 @@ public class BiDirectionalMapTest {
 
     @Test
     public void readAndSaveMap_allInOrder_success() throws ParseException {
-        Path filePath = TEST_DATA_FOLDER.resolve("TempAddressBook.json");
+        Path filePath = TEST_DATA_FOLDER.resolve("personLessonMap.json");
 
         Person person1 = TypicalPersons.ALICE;
         Person person2 = TypicalPersons.AMY;
@@ -232,8 +232,7 @@ public class BiDirectionalMapTest {
 
 
         // cleanup
-        File file = new File(String.valueOf(filePath));
-        file.delete();
+
 
     }
 
