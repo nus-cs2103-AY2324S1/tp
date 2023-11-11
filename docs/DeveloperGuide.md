@@ -222,66 +222,42 @@ then set it to unfiltered again.
 2. This updates the model via its `updateFilteredMemberList()` or `updateFilteredApplicantList()` method which is called with its predicate as always returning true. 
 3. All members/applicants in the address book are shown to the user in the members/applicants list.
 
-### Delete an applicant
+### Delete a `Member`/`Applicant`
 
-The applicant at the specific `applicantIndex` in the applicant list will be deleted. Compulsory fields for the
-`DeleteApplicantCommand` include: `applicantIndex`. An example of how this feature can be used is as follows:
+Deletes a existing `Member`/ `Applicant` indentified by their `MEMBER_INDEX`/`APPLICANT_INDEX` in the displayed applicant/member list.
+The commands are implemented in the `DeleteMemberCommand` and `DeleteApplicantCommand` classes which extend the `Command` class.
 
-* Step 1. The `DeleteApplicantCommand` object's `execute()` method is called.
-* Step 2. The `applicantIndex` is checked to be within the valid range of the applicant list. If the `applicantIndex`
-  given
-  is invalid, a `CommandException` is thrown.
-* Step 3. The applicant at the given `applicantIndex` is referenced.
-* Step 4. The model object's `deleteApplicant()` method is called. The input parameter is the referenced applicant.
-* Step 5. The applicant is deleted from the applicant list.
+* Step 1. The `DeleteMemberCommand`/`DeleteApplicantCommand` object's `execute()` method is called.
+* Step 2. The `MEMBER_INDEX`/`APPLICANT_INDEX` is checked to be within the valid range of the displayed applicant/member list. If the `MEMBER_INDEX`/`APPLICANT_INDEX` given is invalid(i.e out of range), a `CommandException` is thrown.
+* Step 3. The `Member`/`Applicant` at the given `MEMBER_INDEX`/`APPLICANT_INDEX` is referenced.
+* Step 4. The model object's `deleteMember()`/`deleteApplicant()` method is called. The input parameter is the referenced `Member`/`Applicant`.
+* Step 5. The `Member`/`Applicant` is deleted from the member/applicant list.
 
-### Delete a member
+The diagram below describes this behaviour concisely. It shows how a user’s command is processed and what message is ultimately shown if they decide, for example, to delete an applicant.
 
-The member at the specific memberIndex in the member list will be deleted. Compulsory fields for
-the `DeleteMemberCommand`
-include: `memberIndex`. An example of how this feature can be used is as follows:
+<img src="images/DeleteApplicantActivityDiagram.png">
 
-* Step 1. The `DeleteMemberCommand` object's `execute()` method is called.
-* Step 2. The `memberIndex` is checked to be within the valid range of the member list. If the `memberIndex` given is
-  invalid, a `CommandException` is thrown.
-* Step 3. The member at the given `memberIndex` is referenced.
-* Step 4. The model object's `deleteMember()` method is called. The input parameter is the referenced member.
-* Step 5. The member is deleted from the member list.
+The sequence diagram below also shows the interaction between the various components during the execution of the `DeleteApplicantCommand`. The execution of the `DeleteMemberCommand` is almost identical, except that it uses the `Member` class instead of the `Applicant` class.
 
-### Delete an applicant
+<img src="images/DeleteApplicantSequenceDiagram.png">
 
-The applicant at the specific `applicantIndex` in the applicant list will be deleted. Compulsory fields for the
-`DeleteApplicantCommand` include: `applicantIndex`. An example of how this feature can be used is as follows:
 
-* Step 1. The `DeleteApplicantCommand` object's `execute()` method is called.
-* Step 2. The `applicantIndex` is checked to be within the valid range of the applicant list. If the `applicantIndex`
-  given
-  is invalid, a `CommandException` is thrown.
-* Step 3. The applicant at the given `applicantIndex` is referenced.
-* Step 4. The model object's `deleteApplicant()` method is called. The input parameter is the referenced applicant.
-* Step 5. The applicant is deleted from the applicant list.
+### Find a `Member`/`Applicant`
 
-### Find an applicant
+Finds any `Member`(s)/`Applicant`(s) that have any fields with the specified `KEYWORD`(s). The commands are implemented in the FindMemberCommand
+and FindApplicant command classes, which extend the `Command` class.
 
-All applicants that contains any field with the specified keyword will be listed. Compulsory fields for the
-`FindApplicantCommand` include: `keyword`. An example of how this feature can be used is as follows:
+* Step 1. The `FindMemberCommand`/`FindApplicantCommand` object's `execute()` method is called.
+* Step 2. The `KEYWORD`(s) are parsed and are searched for in each field for each `Member`/`Applicant`.
+* Step 3. If the `KEYWORD`(s) are found in any field of the `Member`(s)/`Applicant`(s), they will be shown on the member/applicant list.
 
-* Step 1. The `FindApplicantCommand` object's `execute()` method is called.
-* Step 2. The model object's `updateFilteredApplicantList()` is called, with the keyword as the predicate.
-* Step 3. The applicant list is filtered to only reflect applicants with fields (name, phone number) that contain the
-  keyword.
-* Step 4. The filtered member list is shown.
+The diagram below describes this behaviour concisely. It shows how a user’s command is processed and what message is ultimately shown if they decide, for example, to find a member with `KEYWORD`(s).
 
-### Find a member
+<img src="images/FindMemberActivityDiagram.png">
 
-All members that contains any field with the specified keyword will be listed. Compulsory fields for
-`FindApplicantCommand` include: `keyword`. An example of how this feature can be used is as follows:
+The sequence diagram below also shows the interaction between the various components during the execution of the FindMemberCommand. The execution of the FindApplicantCommand is almost identical, except that it uses the Applicant class instead of the Member class.
 
-* Step 1. The `FindMemberCommand` object's `execute()` method is called.
-* Step 2. The model object's `updateFilteredMemberList()` is called, with the keyword as the predicate.
-* Step 3. The member list is filtered to only reflect members with fields (name, email, phone number, telegram handle,
-  tag) that contain the keyword.
-* Step 4. The filtered member list is shown.
+<img src="images/FindMemberSequenceDiagram.png">
 
 ### Edit a member
 
@@ -570,6 +546,18 @@ otherwise)
 
 **Use case: UC03 - Finding members**
 
+**MSS** 
+
+1. User requests to find members.
+2. ClubMembersContact displays all members with any field that matches the inputted keyword.
+
+Use case ends.
+
+**Extensions**
+* 2a. The user input for the `KEYWORD` is empty.
+  * 2a1. ClubMembersContact shows an error message.  
+  Use case resumes from step 1.
+  
 ---
 
 **Use case: UC04 - Viewing members**
@@ -587,6 +575,18 @@ otherwise)
 ---
 
 **Use case: UC06 - Deleting a member**
+
+**MSS**:
+1. User requests to delete a member from the member list.
+2. ClubMembersContact deletes the member from the member list and the member is no longer displayed.  
+   Use case ends.
+
+**Extensions**
+* 1a. The inputted index is invalid.
+    * 1a1. Club Members Contact shows an error message.  
+      Use case resumes from step 1.
+* 2a. The member list is empty.  
+  Use case ends.
 
 ---
 
@@ -636,6 +636,17 @@ otherwise)
 
 **Use case: UC12 - Finding applicants**
 
+**MSS**
+
+1. User requests to find applicants.
+2. ClubMembersContact displays all applicants with any field that matches the inputted keyword.
+
+Use case ends.
+
+**Extensions**
+* 2a. The user input for the `KEYWORD` is empty.
+    * 2a1. ClubMembersContact shows an error message.  
+      Use case resumes from step 1.
 ---
 
 **Use case: UC13 - Viewing applicants**
@@ -650,6 +661,28 @@ Similar to UC04 - Viewing members except that it displays a list of applicants i
 
 **Use case: UC15 - Deleting an applicant**
 
+**MSS**:
+1. User requests to delete an applicant from the applicant list.
+2. ClubMembersContact deletes the applicant from the applicant list and the applicant is no longer displayed.  
+    Use case ends.
+
+**Extensions**
+* 1a. The inputted index is invalid.
+  * 1a1. Club Members Contact shows an error message.  
+    Use case resumes from step 1.
+* 2a. The applicant list is empty.  
+    Use case ends.
+  **MSS**:
+1. User requests to delete an applicant from the applicant list.
+2. ClubMembersContact deletes the applicant from the applicant list and applicant is no longer displayed.  
+   Use case ends.
+
+**Extensions**
+* 1a. The inputted index is invalid.
+    * 1a1. Club Members Contact shows an error message.  
+      Use case resumes from step 1.
+* 2a. The applicant list is empty.  
+  Use case ends.
 ---
 
 **Use case: UC16 - Copying an applicant**

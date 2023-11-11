@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "FindMemberCommandParser" as FindMemberCommandParser LOGIC_COLOR
+participant "p:MemberContainsKeywordsPredicate" as Predicate LOGIC_COLOR
+participant "s:FindMemberCommand" as FindMemberCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+
+[-> LogicManager : execute("findm keyword")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findm keyword")
+activate AddressBookParser
+
+create FindMemberCommandParser
+AddressBookParser -> FindMemberCommandParser
+activate FindMemberCommandParser
+
+FindMemberCommandParser --> AddressBookParser
+deactivate FindMemberCommandParser
+
+AddressBookParser -> FindMemberCommandParser : parse("keyword")
+activate FindMemberCommandParser
+
+create Predicate
+FindMemberCommandParser -> Predicate
+activate Predicate
+Predicate --> FindMemberCommandParser : p
+deactivate Predicate
+
+create FindMemberCommand
+FindMemberCommandParser -> FindMemberCommand : FindMemberCommand(p)
+activate FindMemberCommand
+
+FindMemberCommand --> FindMemberCommandParser : f
+deactivate FindMemberCommand
+
+FindMemberCommandParser --> AddressBookParser : f
+deactivate FindMemberCommandParser
+
+FindMemberCommandParser -[hidden]-> AddressBookParser
+destroy FindMemberCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FindMemberCommand : execute()
+activate FindMemberCommand
+
+FindMemberCommand -> Model : updateFilteredMemberList(p)
+activate Model
+
+Model --> FindMemberCommand
+deactivate Model
+
+create CommandResult
+FindMemberCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindMemberCommand
+deactivate CommandResult
+
+FindMemberCommand --> LogicManager : result
+deactivate FindMemberCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
