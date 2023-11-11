@@ -261,6 +261,7 @@ public class MainWindow extends UiPart<Stage> {
         // if the fosterer is already saved or the confirmation message is already displayed, then exit the profile page.
         if (isSaved || commandBox.getInConfirmationDialog()) {
             commandBox.setInConfirmationDialog(false);
+            personProfile.setIsInConfirmationDialog(false);
             personListPanelPlaceholder.setVisible(true);
             personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
             personProfilePlaceholder.setVisible(false);
@@ -268,12 +269,14 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             // if fosterer is not saved or message is not displayed before, display the confirmation message
             commandBox.setInConfirmationDialog(true);
+            personProfile.setIsInConfirmationDialog(true);
         }
     }
 
     void handleCancelViewExit() {
         sendFeedback("Cancelled exit.");
         commandBox.setInConfirmationDialog(false);
+        personProfile.setIsInConfirmationDialog(false);
     }
 
 

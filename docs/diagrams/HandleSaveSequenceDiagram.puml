@@ -21,7 +21,10 @@ CommandResult --> MainWindow : CommandType.SAVE
 
 MainWindow -> MainWindow : handleSave()
 activate MainWindow
-MainWindow -> MainWindow :
+MainWindow -> MainWindow : resetValues()
+activate MainWindow
+
+MainWindow -> PersonProfile : resetValues()
 
 deactivate MainWindow
 
