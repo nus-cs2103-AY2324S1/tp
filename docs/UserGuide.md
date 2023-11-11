@@ -179,13 +179,13 @@ Output:
 | **After edit** | ![img.png](images/AfterEdit.png)  |
 
 **Note**
-* Users are not allowed to edit a flash card to an existing flash card
 * `<INDEX>` is the index of each flash card in the `list`
-* Users change at **LEAST** one certain parameter by using certain prefix
+* Users must change at **LEAST** one certain parameter by using certain prefix
     * Word: `w/WORD`
     * Word Language: `wl/WORD_LANGUAGE`
     * Translation: `t/TRANSLATION`
     * Translation Language: `tl/TRANSLATION_LANGUAGE`
+* Users are not allowed to edit a flash card to an existing flash card
 > The error message: <br>
 > `This flash card already exists in Flashlingo!`
 
