@@ -93,7 +93,7 @@ Click [here](#table-of-contents) to go back to contents.
 
 ### Initial Setup
 
-1. Open a command terminal, `cd` into the folder where you placed the jar file, and use the `java -jar addressbook.jar` command to run the application. A GUI similar to the one below should appear in a few seconds, containing some sample data.
+1. Open a command terminal, `cd` into the folder where you placed the jar file, and use the `java -jar linktree.jar` command to run the application. A GUI similar to the one below should appear in a few seconds, containing some sample data.
    ![Ui](images/Ui.png)
 
 2. Type a command into the command box and press Enter to execute it. For example. type `help` in the command box and press Enter.
