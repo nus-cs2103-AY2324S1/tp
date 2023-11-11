@@ -713,133 +713,87 @@ Unknown command
 
 <br>
 
-### Filtering the student / schedule list : `filter`
+### Filtering the displayed list : `filter`
 
-About the feature (generally that is similar across states)
-<!-- use "SUBJECTS" as parameter here -->
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless> 
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-
-#### For student list:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+#### For Student:
+* <box type="info" seamless>You must be in the **_STUDENTS list_** to run this command. Type `list STUDENTS` to go to the **_STUDENTS list_**.</box>
+Format: `[-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
+* Multiple fields can be specified at the same time.
+* Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
-
+- When filtering by multiple fields, only the students which match all the fields are returned.
+- To reset the view to an unfiltered state, type `list STUDENTS`.
+- If no students that match the filters are found, an empty list will be shown.
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `filter -name Alex -tag primary -subject Mathematics`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `filter -name Alex -tag primary -subject Mathematics`
+* Input: `filter -name Brian`
 ```
-This block of code is for success outputs
+Filtered student list successfully!
 ```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+![Success for filter 1](images/filter/filter_positive_1.png)
 
-* Input: `invalid command code here`
-*   Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+Failure outputs:
+* Input: `filter -name Alan!`
+  * Error: The non-alphanumeric character "!" is used. To fix the error, remove all non-alphanumeric characters.
 ```
-Invalid command with the error message here
+Invalid filter format: Names should only contain alphanumeric characters and spaces, and it should not be blank. 
+Usage: filter (any number of unique -[name|subject|tag|remark] [value]). 
+For example, filter -name John -subject physics,english
 ```
 
 #### For schedule list:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+* <box type="info" seamless>You must be in the **_SCHEDULE list_** to run this command. Type `list SCHEDULE` to go to the **_SCHEDULE list_**.</box>
+Format: `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`
+* Only one of `-before`, `-on`, `-after` can be used at once. For example, you cannot use both `-before` and `-after` in the same filter command.
+* The dates specified in `-before` and `-after` are exclusive. For example, specifying `-before 2023/05/01` will find lessons before but not on 2023/05/01.
+* Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- When filtering by multiple fields, only the lessons which match all the fields are returned.
+- To reset the view to an unfiltered state, type `list SCHEDULE`.
+- If no lessons that match the filters are found, an empty list will be shown.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `filter -before 2022/10/10 -subject Mathematics`
+* `filter -name CS2103T Lab`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `filter -before 2022/10/10 -subject Mathematics`
 ```
-This block of code is for success outputs
+Filtered schedule list successfully!
 ```
+![Success for filter 1](images/filter/filter_positive_1.png)
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `filter -before 2022/10/10 -after 2022/01/01`
+  * Error: Both the `-before` and `-after` flags are specified. Use only one of `-before`, `-after`, and `-on` in the same command.
 ```
-Invalid command with the error message here
+TODO
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `filter -on 2/2/2`
+  * Error: The date given is invalid. Please specify a date using the correct format (see [here](#parameter-summary))
 ```
-Invalid command with the error message here
+Invalid lesson format: 2/2/2 is not a valid date, please use yyyy/mm/dd or mm/dd or dd
+for example, assume today is 2023/11/3, to add 2023/11/29, could use 29, 11/29, 2023/11/29 or 23/11/29. 
+Usage: filter -(at least one of unique [-name|subject|before|on|after|remark VALUE]). 
+For example, filter -before 2023/10/10 -subject physics
+Note you should only use one of -before, -on, -after at a time.
 ```
 
 #### For task list:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-Example usages:
-* `some code here`
-* `another code here`
-
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+Filtering is not supported in the Task List at this time.
 
 <br>
 
