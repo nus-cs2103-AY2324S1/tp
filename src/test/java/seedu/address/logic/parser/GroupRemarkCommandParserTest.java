@@ -25,7 +25,6 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
 
 public class GroupRemarkCommandParserTest {
-
     private GroupRemarkCommandParser parser = new GroupRemarkCommandParser();
 
     @Test
