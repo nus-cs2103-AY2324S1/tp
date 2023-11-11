@@ -51,8 +51,8 @@ ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserv
 - [Adding remarks to a Group `remark`](#adding-remarks-to-a-group-remark)
 - [Finding a Group `find`](#finding-a-group-find)
 - [Listing a Group `list`](#listing-a-group-listgroup)
-- [Grouping a Person `group`](#grouping-a-person-group)
-- [Ungrouping a Person `ungroup`](#ungrouping-a-person-ungroup)
+- [Grouping a Contact `group`](#grouping-a-contact-group)
+- [Ungrouping a Contact `ungroup`](#ungrouping-a-contact-ungroup)
 9. [Commands to Manage Time](#commands-to-manage-time)
 - [Adding Time to a Contact `addtime`](#adding-time-to-a-contact-addtime)
 - [Removing Time from a Contact `deletetime`](#removing-time-from-a-contact-deletetime)
@@ -87,7 +87,7 @@ We are happy to have you on board as a first-time user of ProjectPRO! To get sta
 #### Experienced User
 
 
-Welcome back to ProjectPRO. Simply head over to our Features section to gain insights into our commands. If you are looking for a quick reference, click [here](#table-of-contents) for our commands' summary table.
+Welcome back to ProjectPRO. Simply head over to our Features section to gain insights into our commands. If you are looking for a quick reference, click [here](#table-of-contents) for our table of contents.
 
 
 ## Quick Start
@@ -166,7 +166,7 @@ Written below are some extra information regarding our command formats:
 You can create a contact in your contact list.
 
 
-**Format:** `add n/NAME p/PHONE e/EMAIL g/GROUP_NAME`
+**Format:** `add n/NAME p/PHONE e/EMAIL [g/GROUP_NAME]`
 
 
 **Acceptable values:**
@@ -178,20 +178,20 @@ You can create a contact in your contact list.
 
 **Example(s):**
 - `add n/John Doe p/98765432 e/johnd@example.com g/CS2103T`
-  This creates a person in the contact list with a person named John Doe who is in group CS2103T.
+  This creates a contact in the contact list, named John Doe, who is in group CS2103T.
 - `add n/John Doe p/98765432 e/johnd@example.com`
-  This creates a person in the contact list with a person named John Doe who is not in any group.
+  This creates a contact in the contact list, named John Doe, who is not in any group.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix, duplicate prefixes):
+- Incorrect format (e.g., no prefix, duplicate prefixes).
 
 
-- The person you are trying to add already exists in your contact list: `This person already exists in your contact list`.
+- The contact you are trying to add already exists in your contact list: `This person already exists in your contact list`.
 
 
 ### Deleting a contact `delete`
-You can delete a person from the contact list.
+You can delete a contact from your contact list.
 
 
 **Format:** `delete n/NAME`
@@ -207,14 +207,14 @@ You can delete a person from the contact list.
 
 
 **Potential error(s):**
-- Invalid format (e.g., no prefix, duplicate prefixes):
+- Invalid format (e.g., no prefix, duplicate prefixes).
 
 
-- The contact you are trying to delete does not exist in your contact list: `Please provide the person's full name as in the existing contact list`.
+- The contact you are trying to delete does not exist in your contact list: `No person with such name found. Please provide the person's full name as in the existing contact list`.
 
 
 ### Finding a contact `find`
-You can find all the persons from the contact list with the matching keywords.
+You can find all the contacts from your contact list with the matching keywords.
 
 
 **Format:** `find n/KEYWORDS_IN_NAME`
@@ -230,7 +230,7 @@ You can find all the persons from the contact list with the matching keywords.
 
 
 **Potential error(s):**
-- Invalid format (e.g., no prefix, duplicate prefixes):
+- Invalid format (e.g., no prefix, duplicate prefixes).
 
 
 
@@ -248,7 +248,7 @@ No additional parameters.
 
 **Example(s):**
 - `List`
-  This lists all the people in the group.
+  This lists all the contacts in the group.
 
 
 **Potential error(s):**
@@ -275,7 +275,7 @@ You can create a group in your contact list.
 
 
 **Potential error(s):**
-- Invalid command format (e.g., no prefix, duplicate prefixes):
+- Invalid command format (e.g., no prefix, duplicate prefixes).
 
 - The group you are trying to add already exists in your contact list: `This group already exists in the contact list`.
 
@@ -298,10 +298,10 @@ You can delete a group in your contact list.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix, duplicate prefixes):
+- Incorrect format (e.g., no prefix, duplicate prefixes).
 
 
-- The group you are trying to delete does not exist in your contact list:
+- The group you are trying to delete does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list`.
 
 
 
@@ -323,8 +323,8 @@ You can add remarks to a group in your contact list.
 
 
 **Potential errors(s):**
-- Incorrect format (e.g. no prefix, duplicate prefixes):
-- The group you entered does not exist in your contact list:
+- Incorrect format (e.g. no prefix, duplicate prefixes).
+- The group you entered does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list`.
 
 
 
@@ -345,10 +345,10 @@ You can find a group in your contact list. This allows you to view the group's m
 
 
 **Potential error(s):**
-- Incorrect format (e.g. no prefix, duplicate prefixes):
+- Incorrect format (e.g. no prefix, duplicate prefixes).
 
 
-- The group you are trying to find does not exist in your contact list:
+- The group you are trying to find does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list`.
 
 
 
@@ -373,7 +373,7 @@ No additional parameters.
 - Extra inputs detected.
 
 
-### Grouping a Person `group`
+### Grouping a Contact `group`
 You can add an existing contact to an existing group.
 
 
@@ -394,14 +394,14 @@ You can add an existing contact to an existing group.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix, duplicate prefixes):
+- Incorrect format (e.g., no prefix, duplicate prefixes).
 
 
 - The contact you are trying to add is already a member of the group: `NAME is already in this group: GROUP_NAME`.
 
 
-### Ungrouping a Person `ungroup`
-You can remove a person from a group.
+### Ungrouping a Contact `ungroup`
+You can remove a contact from a group.
 
 
 **Format:** `ungroup n/NAME g/GROUP_NAME`
@@ -421,7 +421,7 @@ You can remove a person from a group.
 
 
 **Potential error(s):**
-- Incorrect format (e.g., no prefix, duplicate prefixes):
+- Incorrect format (e.g., no prefix, duplicate prefixes).
 
 
 - The contact you are trying to remove is not a member of the group: `Bernice Yu is not in this group: CS2103T`.
@@ -506,7 +506,7 @@ You list all available time slots of your contacts.
   This lists all time slots when Alex Yeoh is available from your contact list.
 
 Insert Image
-  Listed times of Person: Alex Yeoh
+  Listed times of Contact: Alex Yeoh
   MON 1400 - MON 1600
 
 
