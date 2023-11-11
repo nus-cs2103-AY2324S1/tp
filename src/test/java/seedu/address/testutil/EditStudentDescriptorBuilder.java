@@ -1,12 +1,7 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.address.model.risklevel.RiskLevel;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -33,7 +28,6 @@ public class EditStudentDescriptorBuilder {
         descriptor = new EditStudentDescriptor();
         descriptor.setPhone(student.getPhone());
         descriptor.setAddress(student.getAddress());
-        descriptor.setTags(student.getTags());
     }
 
     /**
@@ -49,16 +43,6 @@ public class EditStudentDescriptorBuilder {
      */
     public EditStudentDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditStudentDescriptor}
-     * that we are building.
-     */
-    public EditStudentDescriptorBuilder withTags(String... tags) {
-        Set<RiskLevel> tagSet = Stream.of(tags).map(RiskLevel::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
         return this;
     }
 

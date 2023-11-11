@@ -305,7 +305,9 @@ Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS] [r/RISK_LEVEL]`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
+
 - The `tag STUDENT_INDEX r/RISK_LEVEL` command is equivalent to `edit STUDENT_INDEX r/RISK_LEVEL`.
+
 - Providing the same field as before (eg. changing contact from 99998888 to 99998888) will not throw an error
 </div>
 

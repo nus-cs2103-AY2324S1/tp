@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_RISK_LEVEL_LOW;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,10 +41,6 @@ public class EditStudentDescriptorTest {
         // different address -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
-
-        // different tags -> returns false
-        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTags(VALID_RISK_LEVEL_LOW).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
@@ -53,8 +48,7 @@ public class EditStudentDescriptorTest {
         EditCommand.EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
         String expected = EditCommand.EditStudentDescriptor.class.getCanonicalName() + "{phone="
                 + editStudentDescriptor.getPhone().orElse(null) + ", address="
-                + editStudentDescriptor.getAddress().orElse(null) + ", risk level="
-                + editStudentDescriptor.getTags().orElse(null) + "}";
+                + editStudentDescriptor.getAddress().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }
 }
