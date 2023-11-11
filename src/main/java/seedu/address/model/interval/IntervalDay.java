@@ -30,5 +30,4 @@ public class IntervalDay extends Day {
                 || (other instanceof seedu.address.model.interval.IntervalDay // instanceof handles nulls
                 && value.equals(((seedu.address.model.interval.IntervalDay) other).value)); // state check
     }
-    
 }
