@@ -19,7 +19,11 @@ import seedu.ccacommander.commons.core.LogsCenter;
 import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.enrolment.exceptions.EnrolmentNotFoundException;
 import seedu.ccacommander.model.event.Event;
+import seedu.ccacommander.model.event.EventInNameCollectionPredicate;
+import seedu.ccacommander.model.event.SameEventPredicate;
 import seedu.ccacommander.model.member.Member;
+import seedu.ccacommander.model.member.MemberInNameCollectionPredicate;
+import seedu.ccacommander.model.member.SameMemberPredicate;
 import seedu.ccacommander.model.shared.Name;
 
 /**
@@ -335,6 +339,25 @@ public class ModelManager implements Model {
     @Override
     public Predicate<Event> getLastFilteredEventPredicate() {
         return this.lastEventPredicate;
+    }
+
+    @Override
+    public Predicate<Member> getUnenrolMemberPredicate(Name eventName) {
+        if (lastEventPredicate instanceof SameEventPredicate) {
+            Collection<Name> memberNamesCollection = this.updateMemberHoursAndRemark(eventName);
+            return new MemberInNameCollectionPredicate(memberNamesCollection);
+        } else {
+            return lastMemberPredicate;
+        }
+    }
+    @Override
+    public Predicate<Event> getUnenrolEventPredicate(Name memberName) {
+        if (lastMemberPredicate instanceof SameMemberPredicate) {
+            Collection<Name> eventNamesCollection = this.updateEventHoursAndRemark(memberName);
+            return new EventInNameCollectionPredicate(eventNamesCollection);
+        } else {
+            return lastEventPredicate;
+        }
     }
     @Override
     public void updateFilteredMemberList(Predicate<Member> predicate) {
