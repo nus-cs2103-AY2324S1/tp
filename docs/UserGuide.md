@@ -192,18 +192,6 @@ Output:
 > The error message: <br>
 > `This flash card already exists in Flashlingo`
 
-### Finding a flash card : `find`
-
-Finds words whose original word or translation contains the given keyword.
-
-* The search is insensitive. e.g `look` will match `Look`
-
-[Command Format](#commands): `find <KEYWORDS...>`
-
-Examples:
-* `find look` returns the flash card list and its translation that contains the keyword `look`
-* `find look, hello, goodbye` returns the flash card list that has all flash cards that contain `look`, `hello` and `goodbye`
-
 ### Listing all flash cards : `list`
 
 Shows the list of flash cards with both the original word and the corresponding translation.
@@ -226,6 +214,41 @@ Output:
 > The error message:<br>
 > Sorry, currently you are in a review session. Your command is not supported.<br>
 > Please end the review session first.
+
+### Finding a flash card : `find`
+
+Filters the flash card list by the given keywords. All the flash cards whose word or translation contains the keywords will be displayed.
+* The search is case-insensitive. e.g `food` will match `Food`
+* Users can search for specific substring. e.g `oo` will match `food`
+
+[Command Format](#commands): `find <KEYWORDS>`
+
+Examples:
+* `find food` returns the flash card list and its translation that contains the keyword `food`
+* `find oo` returns the flash card list and its translation that contains the substring `oo`
+
+Output:
+
+|  Before find   |![img.png](images/Beforefind.png)  |
+|:--------------:|:---------------------------------:|
+| **After find** | ![img.png](images/AfterFind.png)  |
+
+### Filtering list with specified language : `language`
+
+Filter the list of flash cards by the specified language. All the flash cards whose word or translation is in the specified language will be displayed.
+* The search is case-insensitive. e.g `french` will match `French`
+
+[Command Format](#commands): `language <SPECIFIED_LANGUAGE>`
+
+Examples:
+* `language French` displays a list where each word or translation is from French language.
+
+**Note:**
+* Unlike the `find` command, the `language` command will not display the flash cards whose word or translation contains the specified language as a substring or keyword.
+    * e.g. `language Chinese` will not display following flash cards:
+        * `w/雪 t/snow wl/中文 tl/English`
+        * `w/俺 t/I wl/Chinses dialect tl/English`
+* `language` without any parameter will display all the flash cards with default language `"""`.
 
 ### Getting list for revision : `review`
 
@@ -318,16 +341,6 @@ Output:
 
 **Note:**
 * The success rate is calculated solely on the basis of the current session.
-
-
-### Filtering list with specified language : `language`
-
-Displays a list where each word is from specified language.
-
-[Command Format](#commands): `language <SPECIFIED_LANGUAGE>`
-
-Examples:
-* `language French` displays a list where each word or translation is from French language.
 
 <div id="load">
 
