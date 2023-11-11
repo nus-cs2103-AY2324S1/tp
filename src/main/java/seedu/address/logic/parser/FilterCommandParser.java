@@ -68,24 +68,31 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 if (subjects != null) {
                     predicate.addPredicate(lesson -> subjects.contains(lesson.getSubject()));
                 }
+                int count = 0;
                 Day before = parseField("before", userInput, Day::of);
                 if (before != null) {
+                    count += 1;
                     predicate.addPredicate(lesson -> lesson.getDay().compareTo(before) < 0);
                 }
                 Day on = parseField("on", userInput, Day::of);
                 if (on != null) {
+                    count += 1;
                     predicate.addPredicate(lesson -> lesson.getDay().equals(on));
                 }
                 Day after = parseField("after", userInput, Day::of);
                 if (after != null) {
+                    count += 1;
                     predicate.addPredicate(lesson -> lesson.getDay().compareTo(after) > 0);
                 }
                 if (predicate.isEmpty()) {
                     throw new ParseException(FILTER_NO_FIELDS_ERROR);
                 }
+                if (count > 1) {
+                    throw new ParseException("You can only use one of -before, -on, -after at a time");
+                }
                 return new FilterLessonCommand(predicate);
             } catch (ParseException e) {
-                throw new ParseException("Invalid lesson format: " + e.getMessage() + ". "
+                throw new ParseException("Invalid filter format: " + e.getMessage() + ". "
                         + getFilterScheduleUsageInfo());
             }
         } else if (state == State.TASK) {
