@@ -65,7 +65,7 @@ public class Messages {
                 .append("; Date: ")
                 .append(transaction.getDate())
                 .append("; StaffId: ")
-                .append((transaction.getPersonId() == -1) ? "None" : transaction.getPersonId());
+                .append(transaction.getPersonId());
         return builder.toString();
     }
 }
