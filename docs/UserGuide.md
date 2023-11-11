@@ -88,12 +88,13 @@ Format: `help`
 
 Adds a patient or specialist to the address book.
 
-Format (for patients): `add -pa n/NAME e/EMAIL p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...​ [t/TAG]...​`<br>
+Format (for patients): `add -pa n/NAME p/PHONE e/EMAIL [t/TAG]...​ a/AGE [m/MEDICAL_HISTORY]...​` <br>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A patient can have any number of medical histories and tags (including 0)
 </div>
 
-Format (for specialists): `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION [t/TAG]...​`
+Format (for specialists): `add -sp n/NAME p/PHONE e/EMAIL [t/TAG]...​ l/LOCATION s/SPECIALISATION`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A specialist can have any number of tags (including 0)
@@ -101,12 +102,12 @@ A specialist can have any number of tags (including 0)
 
 Parameter specifications: 
 * `NAME`, `EMAIL`, `LOCATION`, `TAG`, `MEDICAL_HISTORY`, and `SPECIALISATION` can contain 1 - 255 alphanumeric characters.
-* `PHONE_NUMBER` can contain 4 - 15 numeric characters.
+* `PHONE` can contain 4 - 15 numeric characters.
 * `AGE` can contain any integer in the range 0 to 149 inclusive.
 
 Examples:
-* `add -pa n/John e/johnmctavish@gmail.com p/12345678 a/35 m/Osteoporosis m/Rheumatoid arthritis t/friend`
-* `add -sp n/Jane e/janepeter@gmail.com p/73331515 s/Dermatologist l/Ang Mo Kio`
+* `add -pa n/John p/12345678 e/johnmctavish@gmail.com t/friend a/35 m/Osteoporosis m/Rheumatoid arthritis`
+* `add -sp n/Jane p/73331515 e/janepeter@gmail.com l/Ang Mo Kio s/Dermatologist`
 
 ### Listing patient or specialist records: `list`
 
@@ -124,11 +125,14 @@ Finds patients or specialists whose attributes contain any of the given keywords
 Multiple attributes can be searched at once, the result will display any person
 with all attributes containing any of the corresponding keywords in the command.
 
-Format: `find -PERSON_TYPE [PREFIX/KEYWORD]...`
+Format (for patients): `find -pa [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [a/AGE] [m/MEDICAL HISTORY]...​`
 
-* All prefixes are optional. Hence, entering `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed.
+Format (for specialists): `find -sp [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [l/LOCATION] [s/SPECIALTY]`
+
+* All parameters with prefixes are optional. Hence, entering `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed.
+  * e.g. `find -sp` will list all specialist records.
 * The search is case-insensitive.
-  * e.g `hans` will match `Hans`
+  * e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. 
   * e.g. `Hans Bo` will match `Bo Hans`
 * There are different behaviours regarding the searching of different parameters:
@@ -177,14 +181,16 @@ Changes the content of a pre-existing patient or specialist record in the view p
 Multiple attributes of a person can be changed at once. The view panel will be updated with the
 modified results immediately after each successful command execution.
 
-Format: `edit PREFIX/KEYWORD…​`
+Format (for patients): `edit [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [a/AGE] [m/MEDICAL HISTORY]...​`
+
+Format (for specialists): `edit [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [l/LOCATION] [s/SPECIALTY]`
 
 * When entering an `edit` command, at least one valid prefix must be present. 
 I.e. entering `edit` (without any prefixes) will result in an error message being displayed.
 * Only the patient or specialist in the view panel will be edited. Hence, when editing a specialist specific attribute
 while viewing a patient (or vice versa), an error message be displayed.
   * e.g. when a patient is present in the view panel, `edit s/Dentistry` will result in an error message being displayed as
-  patients do not have the specialty attribute.
+  patients do not have the specialisation attribute.
 * The new values of compulsory attributes for a patient or specialist cannot be empty.
   * e.g. `edit s/` (empty Specialty attribute) will result in an error when trying to edit a specialist.
   * e.g. `edit n/` (empty Name attribute) will result in an error when trying to edit a patient or specialist.
@@ -193,9 +199,9 @@ in a patient or specialist.
   * e.g. `edit t/` (empty Tag attribute) will remove the tags of the patient or specialist being displayed in the view panel.
 
 Examples:
-* `list -pa` > `view 1` > `edit n/John Wick` modifies the name of the first patient in the list to `John Wick`.
-*  `find -sp t/friend` > `view 3` > `edit s/Surgery` modifies the specialty of the third specialist in the list with
-the `friend` tag.
+* `list -pa` > `view 1` > `edit n/John Wick` modifies the name of the first patient in the list to **John Wick**.
+*  `find -sp t/friend` > `view 3` > `edit s/Surgery` modifies the specialisation of the third specialist in the list with
+the **friend** tag to **Surgery**.
 <br>
 
 
