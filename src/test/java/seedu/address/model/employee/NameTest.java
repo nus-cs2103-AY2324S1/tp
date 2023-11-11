@@ -31,13 +31,16 @@ public class NameTest {
         assertFalse(EmployeeName.isValidName(" ")); // spaces only
         assertFalse(EmployeeName.isValidName("^")); // only non-alphanumeric characters
         assertFalse(EmployeeName.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(EmployeeName.isValidName("12345")); // numbers only
+        assertFalse(EmployeeName.isValidName("peter the 2nd")); // alphanumeric characters
+        assertFalse(EmployeeName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
 
         // valid name
         assertTrue(EmployeeName.isValidName("peter jack")); // alphabets only
-        assertTrue(EmployeeName.isValidName("12345")); // numbers only
-        assertTrue(EmployeeName.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(EmployeeName.isValidName("Capital Tan")); // with capital letters
-        assertTrue(EmployeeName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(EmployeeName.isValidName("Frank Sinatra Jr.")); // with a full stop
+        assertTrue(EmployeeName.isValidName("Elizabeth II")); // roman numerals
+
     }
 
     @Test
