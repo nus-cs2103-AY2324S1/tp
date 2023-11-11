@@ -77,6 +77,8 @@ If you are an engineering hiring manager who have a good understanding in CLI-ba
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 # How to use this user guide
 
 To quickly find the information you need, refer to the [Table of Contents](#table-of-contents) located at the beginning of this guide.
@@ -221,8 +223,6 @@ For each **interview**, we see the following details:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always"></div>
-
 ## General Features
 
 ### Viewing help : `help`
@@ -255,8 +255,6 @@ Format: `clear`
 InterviewHub data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Back to the Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always"></div>
 
 ## Applicant Management Features
 
@@ -382,8 +380,6 @@ Shows a list of all applicants in **InterviewHub** onto the GUI.
 Format: `list-a`
 
 [Back to the Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always"></div>
 
 ## Interview Management Features
 
