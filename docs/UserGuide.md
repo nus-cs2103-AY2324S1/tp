@@ -137,6 +137,7 @@ Throughout this user guide, you will encounter some of these colored blocks high
 ## Glossary
 
 ### Definitions
+
 |             Term             | Definition                                                                                                                                                                                     |
 |:----------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |        Active recall         | A popular method to strengthen memory retention by actively testing the memory to retrieve a piece of information.                                                                             |
@@ -440,6 +441,7 @@ hint 3
    1. Result box displays: `Hint for Question 1: Zeros`
    ![result of hint command](./images/UserGuide/1.4_hint.png)
    
+
 
 ### Solving Flashcards: `solve`
 Solves the question at the given index

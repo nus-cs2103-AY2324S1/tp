@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment": "Deck save file which contains the same Card values as in TypicalCards#getTypicalDeck()",
   "cards": [
     {
       "question": "Low Priority?",

@@ -27,7 +27,7 @@ activate DeleteCommandParser
 DeleteCommandParser --> DeckParser
 deactivate DeleteCommandParser
 
-DeckParser -> DeleteCommandParser : parse("1")
+DeckParser -> DeleteCommandParser : parse("delete 1")
 activate DeleteCommandParser
 
 create DeleteCommand
