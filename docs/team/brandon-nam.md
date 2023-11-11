@@ -30,14 +30,13 @@ Given below are my contributions to the project.
         * Added a note for the feature `exit` which behaves differently in the two different windows.
         * Added a section of User Interface that explains the different windows we have.
     * Developer Guide:
+        * Updated the class diagram for `Logic` class.
+        * Updated the class diagram for `Parser` classes.
+        * Added explanation of parsing commands in profile page.
+        * Added explanation of assigning UI change handler methods in `MainWindow` class. 
         * Added implementation details of the `edit` feature.
-        * Added implementation details of the `view` feature. 
         * Added implementation details of the `save` feature. 
-        * Added implementation details of the `exit` feature. 
 * **Project Mangement**: 
-* 
+  * PR reviewed: [#59](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/59)
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=brandon-nam&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
-
-* **Community**:
-
-* **Tools**:
