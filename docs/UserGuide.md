@@ -127,7 +127,8 @@ Student Number refers to the unique matriculation number of a NUS student. In **
 
 ## Data visualiation
 
-TODO: Ngee Yong to add details of what each bar graph shows (average grades, attendance and class participation percentages of a student).
+**Data Visualisation** of student information will be automatically generated in the Data Visualisation segment of the GUI (within the student list segment).
+* There will be 3 bar graphs, each representing the average grades, attendance and class participation percentages of a student.
 
 ## Command navigation
 
