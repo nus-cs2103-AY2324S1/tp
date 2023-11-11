@@ -603,7 +603,7 @@ Click [here](#table-of-contents) to go back to contents.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Future Enhancement
-- Currently, the find and finteam functions output "1 persons" and "1 teams" respectively, regardless of the number. The objective is to modify these functions to correctly handle singular and plural nouns. When the count is 1, the function should output "1 person" or "1 team," and for counts greater than 1, the function should output "N persons" or "N teams" appropriately.
+
 
 Click [here](#table-of-contents) to go back to contents.
 
