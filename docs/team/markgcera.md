@@ -5,7 +5,6 @@ title: Mark Garcera's Project Portfolio Page
 
 ### Project: CheckMate
 
-
 CheckMate is designed to streamline the process of room bookings for hotel employees. With a Graphical User Interface (GUI) that provides the necessary information needed at a glance, and the application
 being optimised for use via a Command Line Interface (CLI), we have combined elegance and efficiency when it comes to
 the process of room booking for hotel receptionists.
@@ -45,6 +44,7 @@ Given below are my contributions to the project.
     * Added a part under the Quick Start section showing and explaining the GUI Layout (Pull request [#260](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/260)).
   * Developer Guide:
     * Added implementation details of the `Room Statistics PieChart`, `JsonInjectionParser` features.
-
+    * Added `Appendix: Effort` and `Appendix: Planned Enhancements`. (Pull request [#268](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/268))
+    * Added `Appendix: Instructions for manual testing`. (Pull request [#270](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/270))
 * **Community**:
   * Provided 9 bug reports for the team I was assigned during the PE-D.

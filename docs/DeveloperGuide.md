@@ -520,31 +520,95 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding a Booking
 
-1. Deleting a person while all persons are being shown
+1. Adding a booking to an empty `Current Bookings` list.
+   1. Prerequisites: Have an empty `Current Bookings` list.
+   2. Test case: `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com` <br>
+      Expected: New booking is added.
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+2. Adding a booking where there is a missing field except for `remark` field.
+   1. Prerequisites: Have an empty `Current Bookings` list.
+   2. Test case: `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432` <br>
+      Expected: No booking is added. Error message shown is `Invalid command format!
+      add: Adds a person to the address book. Parameters: r/ROOM d/BOOKING PERIOD n/NAME p/PHONE e/EMAIL rm/REMARK
+      Example: add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com rm/Requested extra Queen's size bed`
+
+3. Adding a booking where there are invalid fields.
+   1. Prerequisites: Have an empty `Current Bookings` list.
+   2. Test case: `add r/0 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com` <br>
+      Expected: No booking is added. Error message shown is `Room number is an integer between 1 and 500 inclusive.`
+   3. Test case: `add r/501 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com` <br>
+      Expected: No booking is added. Error message shown is `Room number is an integer between 1 and 500 inclusive.`
+   4. Test case: `add r/1 d/2023-01-01 08:00 to 2023-01-01 08:00 n/John Doe p/98765432 e/johnd@gmail.com` <br>
+      Expected: No booking is added. Error message shown is `Booking periods must be in the format 'YYYY-MM-DD HH:MM to YYYY-MM-DD HH:MM', and the end datetime must be after to the start datetime.`
+   5. Test case: `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John_Doe p/98765432 e/johnd@gmail.com` <br>
+      Expected: No booking is added. Error message shown is `Names should only contain alphanumeric characters and spaces, should not be blank and should be at max 50 characters in length`
+   6. Test case: `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/11 e/johnd@gmail.com` <br>
+      Expected: No booking is added. Error message shown is `Phone numbers should only contain numbers, and it should be between 3 and 15 digits in length (inclusive)`
+   7. Test case: `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/1111111111111111 e/johnd@gmail.com` <br>
+      Expected: No booking is added. Error message shown is `Phone numbers should only contain numbers, and it should be between 3 and 15 digits in length (inclusive)`
+   8. Test case: `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@notallowed.com` <br>
+      Expected: No booking is added. Error message shown is `Emails should be of the format local-part@domain and adhere to the following constraints: The local-part should only contain at most 50 alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+   The domain name must end with a domain label that is`
+
+
+### Deleting a Booking
+
+1. Deleting a booking while all bookings are being shown
+
+    1. Prerequisites: List all bookings using the `list` command.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First booking is deleted from the list. Message shown is `Deleted Booking(s): ` followed by the details of the deleted booking.
+       For example, `Deleted Booking(s): Room number: 1; Booking Period: 2023-11-08 19:28 to 2023-11-09 11:00; Name: John Doe; Phone: 98765432; Email: johnd@gmail.com; Remark: Requested extra Queen's sized bed; Room Type: NORMAL`
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No booking is deleted. Error message shown is `Index should be a non-zero unsigned integer.`
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing a Booking
 
-### Saving data
+1. Editing a booking while there is a non-empty `Current Bookings`.
+   1. Prerequisites: Have a fixed number of bookings currently in the `Current Bookings` list (eg: 3 Bookings)
+   2. Test case: `edit 1 p/91234567 e/johndoe@gmail.com`<br>
+      Expected: The first booking in the list is edited. Message shown is `Edited Booking: ` followed by the details of the edited booking. 
+      For example, `Edited Booking: Room number: 2; Booking Period: 2023-11-08 19:28 to 2023-11-09 11:00; Name: John Doe; Phone: 91234567; Email: johndoe@gmail.com; Remark: Requested extra Queen's sized bed; Room Type: NORMAL`
+   3. Test case: `edit 0 p/91234567 e/johndoe@gmail.com`<br>
+      Expected: No booking is edited. Error message shown is `Index should be a non-zero unsigned integer.`
+   4. Test case: `edit 100 p/91234567 e/johndoe@gmail.com`<br>
+      Expected: No booking is edited. Error message shown is `The booking index provided is invalid`
 
-1. Dealing with missing/corrupted data files
+2. Editing a booking and not changing any details in the booking.
+   1. Prerequisites: Have an empty `Current Bookings` list, then type in the command `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`
+      so that there is only 1 booking.
+   2. Test case: `edit 1`<br>
+      Expected: No booking is edited. Error message shown is `No changes made. At least one field to edit must be provided`
+   3. Test case: `edit 1 r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`<br>
+   Expected: No booking is edited. Error message shown is `No changes made. At least one field to edit must be provided`
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Finding a Booking
 
-1. _{ more test cases …​ }_
+1. Finding a booking.
+    1. Test case: `find 1`<br>
+       Expected: First booking is found in the list and the `Current Bookings` only shows the first booking. Message shown is `1 bookings listed!`.
 
+    1. Test case: `find 0` or any other find commands that do not match the name or room number of a booking. <br>
+       Expected: No booking is shown. Message shown is `0 bookings listed!`
+
+### Undo the deletion of a Booking
+
+1. Undoing the deletion of a booking when a booking has been recently deleted.
+    1. Prerequisites: delete a booking from the `Current Bookings` list.
+    2. Test case: `undo`<br>
+       Expected: Last deletion is undone. Message shown is `Last deletion has been undone.`
+
+2. Undoing the deletion of a booking when no booking has been deleted.
+    1. Prerequisites: Have an empty `Current Bookings` by opening the application with no pre-loaded data.
+    2. Test case: `undo`<br>
+       Expected: No deletions is undone. Error message shown is `No deletions to undo.`
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
