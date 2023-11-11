@@ -616,6 +616,46 @@ otherwise)
 
     Use case resumes at step 1.
 
+---
+
+**Use case: UC08 - Allocating a task to a member**
+
+---
+
+**Use case: UC09 - Viewing all tasks allocated to a member**
+
+---
+
+**Use case: UC10 - Deleting a task allocated to a member**
+
+---
+
+**Use case: UC1 - Adding an applicant**
+
+---
+
+**Use case: UC12 - Finding applicants**
+
+---
+
+**Use case: UC13 - Viewing applicants**
+
+Similar to UC04 - Viewing members except that it displays a list of applicants instead of members.
+
+---
+
+**Use case: UC14 - Editing an applicant**
+
+---
+
+**Use case: UC15 - Deleting an applicant**
+
+---
+
+**Use case: UC16 - Copying an applicant**
+
+Similar to UC07 - Copying a member except that it copies an applicant instead of a member.
+
 ### Non-Functional Requirements
 
 1. The application should work on any _mainstream_ OS as long as it has Java `11` or above installed.
