@@ -2,7 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -51,7 +56,6 @@ public class CommandTestUtil {
         + "CS2103T&"; // '&' not allowed in group names
 
     public static final String VALID_TIME_MON = "mon 1300 - mon 1400";
-    public static final String VALID_TIME_MON_2 = "mon 1330 - mon 1430";
     public static final String VALID_TIME_TUE = "tue 1300 - tue 1400";
     public static final String VALID_TIME_WED = "wed 1300 - wed 1400";
     public static final String VALID_TIME_MON_CAPS = "MON 1300 - mOn 1400";
@@ -61,7 +65,6 @@ public class CommandTestUtil {
 
     public static final String VALID_TIME_DESC_MON = " " + PREFIX_FREETIME + VALID_TIME_MON;
     public static final String VALID_TIME_DESC_TUE = " " + PREFIX_FREETIME + VALID_TIME_TUE;
-    public static final String VALID_TIME_DESC_WED = " " + PREFIX_FREETIME + VALID_TIME_WED;
     public static final String VALID_TIME_DESC_MON_2 = " " + PREFIX_FREETIME + VALID_TIME_MON_CAPS;
 
     public static final String INVALID_TIME_DESC_MON = " " + PREFIX_FREETIME + INVALID_TIME_MON;
@@ -75,16 +78,6 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-    public static final String VALID_GROUP_REMARK = "quiz tomorrow";
-    public static final String GROUP_REMARK_DESC = " " + PREFIX_GROUPREMARK + VALID_GROUP_REMARK;
-    public static final String VALID_GROUP_REMARK_SPECIAL = "sdd&IFUDH%f*89fd*(F!899#$#%\"'`";
-    public static final String GROUP_REMARK_SPECIAL_DESC = " " + PREFIX_GROUPREMARK + VALID_GROUP_REMARK_SPECIAL;
-    public static final String VALID_GROUP_REMARK_UNICODE = "我要吃面包";
-    public static final String GROUP_REMARK_UNICODE_DESC = " " + PREFIX_GROUPREMARK + VALID_GROUP_REMARK_UNICODE;
-    public static final String VALID_GROUP_REMARK_OTHERS = "gU4&😊!";
-    public static final String GROUP_REMARK_OTHERS_DESC = " " + PREFIX_GROUPREMARK + VALID_GROUP_REMARK_OTHERS;
-
-
 
     /**
      * Executes the given {@code command}, confirms that <br>
