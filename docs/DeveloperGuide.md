@@ -9,8 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* Small snippets of code written with the help of AI tool (can be found in `PersonListPanel.java` and `ShortcutSettings.java`).
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Small snippets of code written with the help of AI tool (can be found in `PersonListPanel.java` and `ShortcutSettings.java`).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -415,7 +415,7 @@ The following activity diagrams summarise the process of adding and removing sho
 ![Delete Shortcut Activity](images/DeleteShortcutActivityDiagram.png)
 
 #### Saving between sessions
-ShortcutSettings implements the `Serializable` interface, thus is saved to `json` format as a part of `UserPrefs`. 
+`ShortcutSettings` implements the `Serializable` interface, thus is saved to `json` format as a part of `UserPrefs`. 
 
 #### Design considerations:
 **Aspect: How shortcuts are stored and accessed:**
