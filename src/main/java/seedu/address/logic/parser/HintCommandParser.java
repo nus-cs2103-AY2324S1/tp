@@ -19,12 +19,7 @@ public class HintCommandParser implements Parser<HintCommand> {
     public HintCommand parse(String args) throws ParseException {
         assert args != null : "Command is empty";
         String argsToCheck = args.trim();
-
-        // Check if the args string is a single integer
-        if (!argsToCheck.matches("^\\d+$")) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, HintCommand.MESSAGE_USAGE));
-        }
+        
 
         try {
             Index index = ParserUtil.parseIndex(args);
