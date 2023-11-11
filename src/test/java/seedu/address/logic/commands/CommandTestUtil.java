@@ -95,10 +95,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditStudentDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_RISK_LEVEL_HIGH).build();
-        DESC_BOB = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_RISK_LEVEL_LOW).build();
+        DESC_AMY = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY).build();
+        DESC_BOB = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB).build();
     }
 
     /**
