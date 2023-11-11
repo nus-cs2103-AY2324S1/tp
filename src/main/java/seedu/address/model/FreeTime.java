@@ -6,16 +6,30 @@ import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.group.Group;
 
+/**
+ * A class representing a free time interval of a group
+ */
 public class FreeTime implements Iterable<TimeInterval> {
 
     private final ObservableList<TimeInterval> internalList = FXCollections.observableArrayList();
     private final ObservableList<TimeInterval> internalUnmodifiableList =
         FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Adds a time interval to the list
+     * @param timeInterval the time interval to add
+     */
     public void addTime(TimeInterval timeInterval) {
         internalList.add(timeInterval);
+    }
+
+    /**
+     * Adds a list of time intervals to the list
+     * @param timeIntervals the list of time intervals to add
+     */
+    public void addTime(ArrayList<TimeInterval> timeIntervals) {
+        internalList.addAll(timeIntervals);
     }
 
     /**
@@ -27,9 +41,6 @@ public class FreeTime implements Iterable<TimeInterval> {
         return internalList.stream();
     }
 
-    public void addTime(ArrayList<TimeInterval> timeIntervals) {
-        internalList.addAll(timeIntervals);
-    }
 
     /**
      * Check whether no time is stored
@@ -56,6 +67,12 @@ public class FreeTime implements Iterable<TimeInterval> {
 
     }
 
+    /**
+     * Finds the overlap between 2 free times and a duration
+     * @param otherTime the other free times to compare with
+     * @param duration the duration of overlap needed
+     * @return a list of times that there is an overlap in time interval
+     */
     public FreeTime findOverlap(FreeTime otherTime, Duration duration) {
         // 4 steps, sort by start time, min start min end 2 pointers, get overlap, interval >= duration check
         this.internalList.sort(TimeInterval::compareStart);

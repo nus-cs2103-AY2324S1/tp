@@ -47,7 +47,8 @@ public class GroupRemarkCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Group editedGroup = model.addGroupRemark(this.groupName, this.groupRemark);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedGroup.getGroupName(), editedGroup.getGroupRemark()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedGroup.getGroupName(),
+                editedGroup.getGroupRemark()));
     }
 
     @Override

@@ -27,7 +27,7 @@ public class ListGroupCommand extends Command {
         MESSAGE_SUCCESS.append("Groups in address book:\n");
         ObservableList<Group> groupList = model.getFilteredGroupList();
         groupList.stream().forEach(
-                g -> MESSAGE_SUCCESS.append(g.getGroupName()+ "\n")
+                g -> MESSAGE_SUCCESS.append(g.getGroupName() + "\n")
         );
         return new CommandResult(MESSAGE_SUCCESS.toString());
     }
