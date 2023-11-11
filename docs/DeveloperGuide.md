@@ -643,6 +643,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is `UNOFAS` and the **Actor** is the `financial advisor`, unless specified otherwise)
+
 --------------------------------------------------------------------------------------------------------------------
 **Use Case: UC01 - Show a list of all clients**\
 **Precondition:** NIL\
