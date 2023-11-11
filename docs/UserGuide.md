@@ -142,7 +142,6 @@ Examples:
     * `add w/雪 t/snow wl/Japanese tl/English`
 * Users are allowed to add a flash card with the **empty word language or translation language**<br>
 > Users do not need to specify the language if the language is blank (`""`)
----
 * Users are **not allowed** to add a flash card with the **same word and translation**<br>
   The following command will cause duplicate error:
     * `add w/sorry t/sorry`
@@ -244,11 +243,11 @@ Examples:
 * `language French` displays a list where each word or translation is from French language.
 
 **Note:**
-* Unlike the `find` command, the `language` command will not display the flash cards whose word or translation contains the specified language as a substring or keyword.
+* Unlike the `find` command, the `language` command uses exact search. So it will not display the flash cards whose word or translation contains the specified language as a substring or keyword.
     * e.g. `language Chinese` will not display following flash cards:
         * `w/读书 t/read book wl/简体中文 tl/English`
         * `w/讀書 t/I wl/Traditional Chinses tl/English`
-* `language` without any parameter will display all the flash cards with default language `"""`.
+* `language` without any parameter will display all the flash cards with default language `""`.
 
 ### Getting list for revision : `review`
 
