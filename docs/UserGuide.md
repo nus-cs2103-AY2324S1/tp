@@ -410,7 +410,7 @@ Format: `addi INDEX t/TYPE [r/RATING]`
 </box>
 
 Valid examples:
-* `addi 3 t/screening` adds a Screening interview without rating to the 3rd person in the displayed applicant list.
+* `addi 3 t/screening` adds a _screening_ interview without rating to the 3rd person in the displayed applicant list.
 * `addi 1 t/technical r/8.5` adds a _technical_ interview with rating 8.5 to the 1st person in the displayed applicant list, as shown in the GUI below.
 
 ![addi.png](images/user-guide/addi.png)
