@@ -201,13 +201,14 @@ For each **interview**, we see the following details:
 
 * List of accepted date formats:
   * DD/MM/YYYY and time:
-    * `16 May 2024 TIME`
+    * `16 Jan 2024 TIME`
+    * `16 January 2024 TIME`
     * `16-05-2024 TIME`
     * `16-05-24 TIME`
     * `16/05/2024 TIME`
     * `16/05/24 TIME`
   * MM, DD and time:
-    * `16 May TIME`
+    * `16 Jan TIME`
     * `16 January TIME`
     * `16/5 TIME`
     * `16/05 TIME`
@@ -282,7 +283,7 @@ Examples:
 
 ### Deleting an applicant : `delete-a`
 
-Deletes the applicant at the specified `APPLICANT_INDEX` from **InterviewHub**
+Deletes the applicant at the specified `APPLICANT_INDEX` from **InterviewHub**.
 
 Format: `delete-a APPLICANT_INDEX`
 
@@ -304,7 +305,7 @@ Examples:
 
 ### Editing an applicant : `edit-a`
 
-Edits the applicant at the specified `APPLICANT_INDEX` from **InterviewHub**
+Edits the applicant at the specified `APPLICANT_INDEX` from **InterviewHub**.
 
 Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
@@ -337,7 +338,7 @@ Examples:
 
 ### Finding applicants : `find-a`
 
-Finds applicants whose attributes contain any of the given keywords.
+Finds applicants whose attributes contain any of the given keywords or number.
 
 Format: ``find-a [n/KEYWORD(S)] [p/NUMBER]
 [e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]``
@@ -349,7 +350,7 @@ The table below summarises how each field is matched in the search.
 | `NAME`         | Only full words will be matched                                                                | `Han` will match `Han Bo` but not `Hans Bo`                                    |
 | `PHONE_NUMBER` | Partial numbers will be matched                                                                | `987` will match `98765432`                                                    |
 | `EMAIL`        | Must be an exact match to the entire email, the part before the `@`, or the part after the `@` | `john`, `example.com` and `john@example.com` will all match `john@example.com` |
-| `ADDRESS`      | Only full words will be matched                                                                | `Serangoon` will match `Serangoon Road` but not `Rangoon road`                 |
+| `ADDRESS`      | Only full words will be matched                                                                | `Serangoon` will match `Serangoon Road` but not `Serangoons road`              |
 | `TAG`          | Only full words will be matched                                                                | `Eng` will match `Eng` but not `Engineer`                                      |
 
 <div markdown="block" class="alert alert-info">
@@ -375,7 +376,7 @@ Examples:
 
 ### Listing all applicants : `list-a`
 
-Shows a list of all applicants in **InterviewHub** onto the GUI.
+Shows a list of all applicants in **InterviewHub** on the GUI.
 
 Format: `list-a`
 
@@ -423,7 +424,7 @@ After `add-i app/4 jr/Software engineer start/Next Tuesday 4pm end/6pm that day`
 
 ### Deleting an interview : `delete-i`
 
-Deletes the interview at the specified `INTERVIEW_INDEX` from **InterviewHub**
+Deletes the interview at the specified `INTERVIEW_INDEX` from **InterviewHub**.
 
 Format: `delete-i INTERVIEW_INDEX`
 
@@ -525,7 +526,7 @@ Examples:
 
 ### Listing all interviews : `list-i`
 
-Shows a list of all interviews in the address book onto the GUI.
+Shows a list of all interviews in **InterviewHub** on the GUI.
 
 Format: `list-i`
 
@@ -574,8 +575,7 @@ Examples:
 
 ### Listing all interviews for today : `list-i-today`
 
-Displays all the interviews that the user has on the day the
-command is executed.
+Shows a list of the interviews in **InterviewHub** which are scheduled on the day the command is executed.
 
 Format: `list-i-today`
 
@@ -587,7 +587,7 @@ Format: `list-i-today`
   * For example, if the user executed this command on `12/12/2023`,
     the app will display all the interviews that the user has scheduled
     on `12/12/2023`
-* If there are no interviews scheduled on the day on which the command
+* If there are no interviews scheduled on the day which the command
   was executed, the app will not display any interviews
 * Upon successful execution of the command, this message will be
   shown: `Listed all interviews today`
@@ -595,7 +595,7 @@ Format: `list-i-today`
 
 Example: `list-i-today`
 
-Suppose we have three interviews scheduled on 09/11/2023.
+We have three interviews scheduled on 09/11/2023 as shown below:
 ![Before `list-i-today`](images/listInterviewsTodayBefore.png)
 
 
@@ -650,7 +650,7 @@ After rating the interview at `INTERVIEW_INDEX` 1 with a `RATING` of 4.0:
 
 ### Listing all completed interview : `list-i-done`
 
-Shows a list of all the interviews in **InterviewHub** that are done onto the GUI.
+Shows a list of all the interviews in **InterviewHub** that are done on the GUI.
 
 Format: `list-i-done`
 
@@ -668,7 +668,7 @@ After `list-i-done`:
 
 ### Listing all incomplete interview : `list-i-not-done`
 
-Show a list of all the interviews in **InterviewHub** that are not done onto the GUI.
+Show a list of all the interviews in **InterviewHub** that are not done on the GUI.
 
 Format:`list-i-not-done`
 
@@ -725,7 +725,7 @@ After `sort-time`:
 
 ### Editing the data file
 
-InterviewHub data are saved automatically as a JSON file `[JAR file location]/data/interviewhub.json`. Advanced users are welcome to update data directly by editing that data file.
+InterviewHub data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 If your changes to the data file makes its format invalid, InterviewHub will not work. Hence, it is recommended to take a backup of the file before editing it.
@@ -785,21 +785,21 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 
 ## Interview Management Commands
 
-| Action                           | Format, Examples                                                                                                                                                                |
-|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add interview**                | `add-i app/APPLICANT_INDEX jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME` <br> e.g., `add-i app/3 jr/Software Engineer start/12-12-2024 1500 end/12-12-2024 1600` |
-| **Delete interview**             | `delete-i INTERVIEW_INDEX`<br> e.g., `delete-i 3`                                                                                                                               |
-| **Edit interview**               | `edit-i INTERVIEW_INDEX [jr/JOB_ROLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME] `<br> e.g.,`edit-i 2 jr/software-engineer`                                            |
-| **Find interview by job**        | `find-i KEYWORD(S)`<br> e.g., `find-i software-engineer`                                                                                                                        |
-| **List interview**               | `list-i` <br/> e.g. `list-i`                                                                                                                                                    |
-| **List free time**               | `list-freetime INTERVIEW_DATETIME` <br> e.g, `list-freetime 12-12-2023`, `list-freetime 12/12/2023`, `list-freetime 12/12`, `list-freetime 12 Dec`                              |
-| **List interview for today**     | `list-i-today` <br/> e.g. `list-i-today`                                                                                                                                        |
-| **Mark interview as done**       | `mark INTERVIEW_INDEX` <br> e.g., `mark 3`                                                                                                                                      |
-| **Rate interview**               | `rate INTERVIEW_INDEX RATING` <br> e.g., `rate 1 3.0`                                                                                                                           |
-| **List completed interview**     | `list-i-done` <br/> e.g. `list-i-done`                                                                                                                                          |
-| **List incomplete interview**    | `list-i-not-done` <br/> e.g. `list-i-not-done`                                                                                                                                  |
-| **Sort interview by rating**     | `sort-rate` <br/> e.g. `sort-rate`                                                                                                                                              |
-| **Sort interview by start time** | `sort-time` <br/> e.g. `sort-time`                                                                                                                                              |
+| Action                            | Format, Examples                                                                                                                                                                |
+|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add interview**                 | `add-i app/APPLICANT_INDEX jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME` <br> e.g., `add-i app/3 jr/Software Engineer start/12-12-2024 1500 end/12-12-2024 1600` |
+| **Delete interview**              | `delete-i INTERVIEW_INDEX`<br> e.g., `delete-i 3`                                                                                                                               |
+| **Edit interview**                | `edit-i INTERVIEW_INDEX [jr/JOB_ROLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME] `<br> e.g.,`edit-i 2 jr/software-engineer`                                            |
+| **Find interview by job**         | `find-i KEYWORD(S)`<br> e.g., `find-i software-engineer`                                                                                                                        |
+| **List interviews**               | `list-i` <br/> e.g. `list-i`                                                                                                                                                    |
+| **List free time**                | `list-freetime INTERVIEW_DATETIME` <br> e.g, `list-freetime 12-12-2023`, `list-freetime 12/12/2023`, `list-freetime 12/12`, `list-freetime 12 Dec`                              |
+| **List interviews for today**     | `list-i-today` <br/> e.g. `list-i-today`                                                                                                                                        |
+| **Mark interview as done**        | `mark INTERVIEW_INDEX` <br> e.g., `mark 3`                                                                                                                                      |
+| **Rate interview**                | `rate INTERVIEW_INDEX RATING` <br> e.g., `rate 1 3.0`                                                                                                                           |
+| **List completed interviews**     | `list-i-done` <br/> e.g. `list-i-done`                                                                                                                                          |
+| **List incomplete interviews**    | `list-i-not-done` <br/> e.g. `list-i-not-done`                                                                                                                                  |
+| **Sort interviews by rating**     | `sort-rate` <br/> e.g. `sort-rate`                                                                                                                                              |
+| **Sort interviews by start time** | `sort-time` <br/> e.g. `sort-time`                                                                                                                                              |
 
 [Back to the Table of Contents](#table-of-contents)
 
