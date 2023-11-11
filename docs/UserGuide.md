@@ -585,15 +585,12 @@ JABPro currently does not support editing tags i.e. editing tag name or category
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JABPro home folder.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+**Q**: What's the difference between **tip** and **note**?<br>
+**A**: **Tip** is something useful to know and can be done beforehand, while **note** is something you have to be concious about and take into account. 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 
  Action                   | Format, Examples                                                                                                                                               
@@ -617,6 +614,23 @@ JABPro currently does not support editing tags i.e. editing tag name or category
  **Event**                | `event INDEX d/DESCRIPTION bt/START_TIME et/END_TIME`
  **Schedule**             | `schedule`
 
+## Prefix Summary
+Prefix                    | Name         | Commands                                                                                                                                            
+--------------------------|--------------| --------------------------
+`n/`                      | name         | Add, Edit, Search
+`p/`                      | phone number | Add, Edit
+`e/`                      | email        | Add, Edit
+`a/`                      | address      | Add, Edit
+`t/`                      | tag          | Add, Edit, Search, Create, Delete
+`st/`                     | status       | Search, Delete, Set
+`r/`                      | remark       | Remark
+`u/`                      | username     | Add Github/LinkedIn
+`met/`                    | metric       | Filter
+`val/`                    | value        | Filter
+`so/`                     | sort         | List
+`d/`                      | description  | Event
+`bt/`                     | begin time   | Event
+`et/`                     | end time     | Event
 
 
 
