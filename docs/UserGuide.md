@@ -24,6 +24,7 @@ img {
 * [Minimum System Requirements](#minimum-system-requirements)
 * [Quick Start](#quick-start)
 * [Using this Guide](#using-this-guide)
+  * [Understanding the Symbols](#understanding-the-symbols)
   * [Understanding the Notations](#understanding-the-notations)
   * [Understanding the Main Window GUI](#understanding-the-main-window-gui)
   * [Understanding the Applicant Card GUI](#understanding-the-applicant-card-gui)
@@ -70,15 +71,11 @@ img {
 
 Welcome to the **Staff-Snap** User Guide!
 
-**Staff-Snap** is a desktop app for Hiring Managers like you to manage the hiring and tracking of applicants, 
-optimised for use via a [Command Line Interface (CLI)](#glossary). Used by hiring managers in companies around the globe, 
-it is effective, easy-to-use and reliable, making the hiring process a much more enjoyable experience.
+**Staff-Snap** is a desktop app for Hiring Managers like you to manage the hiring and tracking of applicants, optimised for use via a [Command Line Interface (CLI)](#glossary). Used by Hiring Managers in companies around the globe, it is effective, easy-to-use and reliable, making the hiring process a much more enjoyable experience.
 
-The purpose of this guide is to get you familiar with the features of **Staff-Snap**.
-These features range from the simple task of adding an applicant to being able to calculate an applicant's score from their ratings in the interview stages. 
-Every single feature is explained in this guide. You can check out the [Table of Contents](#table-of-contents) to navigate to a feature you might be interested in using.
+The purpose of this guide is to get you familiar with the features of **Staff-Snap**. These features range from the simple task of adding an applicant to being able to sort your applicants by their overall score. Every single feature is explained in this guide.
 
-To begin using this guide, ensure you meet the [Minimum System Requirements](#minimum-system-requirements). Once this is done, go to the [Quick Start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features **Staff-Snap** has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
+To begin using this guide, ensure you meet the [Minimum System Requirements](#minimum-system-requirements) to run **Staff-Stap**. Once this is done, go to the [Quick Start](#quick-start) section to get the application up and running. Once you have done so, feel free to go through the [Features](#features) section to find out about the features **Staff-Snap** offers. We recommend going through it in the order of this guide but any order works as well! You may check out our [Table of Contents](#table-of-contents) to jump to any section of your choice.
 
 <br>
 
@@ -86,10 +83,8 @@ To begin using this guide, ensure you meet the [Minimum System Requirements](#mi
 <br>
 
 ## Minimum System Requirements
-1. A Computer running Windows/MacOS/Linux.
-2. [Java](#glossary) 11 or higher
-   1. If you do not have Java 11, follow [this](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) installation guide.
-
+1. A computer running on Windows, macOS, or Linux.
+2. Ensure you have [Java](#glossary) 11 or above installed in your computer. If you do not have Java 11, follow [this](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) installation guide.
 
 <br>
 
@@ -114,7 +109,7 @@ To begin using this guide, ensure you meet the [Minimum System Requirements](#mi
    * `delete 1` : Deletes the 1st applicant shown in the current list.
    * `clear` : Clears all applicants from the list.
    * `exit` : Exits the application.
-8. Refer to the [Features](#features) below for details of each command.<br>
+8. Refer to the [Features](#features) section below for details of each command.<br>
 
 <box type="tip" header="**For macOS users**" seamless>
 
@@ -133,7 +128,23 @@ If you are unfamiliar with the command terminal, you can right-click the `staffs
 ---
 <br>
 
-This section introduces the symbols and notations used throughout this guide. We recommend that you read this section closely before using this guide.
+This section introduces the symbols and notations used throughout this guide. The application's GUI [components](#glossary) are also explained here. We recommend that you read this section closely before using this guide.
+
+<a name="understanding-the-symbols"></a>
+### Understanding the Symbols
+
+<br>
+
+| <div style="width:130px">Symbol</div> | <div style="width:auto">Meaning</div>                                                   |
+|---------------------------------------|-----------------------------------------------------------------------------------------|
+| <box type="info" ></box>              | This is reminder of essential information that is required for proper Staff-Snap usage. |
+| <box type="tip" ></box>               | This is a small friendly advice to make your Staff-Snap experience more enjoyable.      |
+| <box type="warning" ></box>           | This is a warning that cautions the user against common errors.                         |
+
+<br>
+
+---
+<br>
 
 <a name="understanding-the-notations"></a>
 ### Understanding the Notations
@@ -184,7 +195,7 @@ This section introduces the symbols and notations used throughout this guide. We
 | Applicant details                            | This is where details about the applicant are displayed. These include their name, phone number, email, and position applied.          |
 | Applicant status                             | This is where the status of the applicant is displayed. The status is categorised into Offered, Rejected, or Undecided.                |
 | Applicant score                              | This is where the overall score of the applicant is displayed. This represents the _average_ rating of all the applicant's interviews. |
-| Interview rating                             | This is where the rating for a each interview is displayed.                                                                            |
+| Interview rating                             | This is where the rating for each interview is displayed.                                                                              |
 
 ---
 <br>
