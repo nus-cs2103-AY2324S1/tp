@@ -13,15 +13,19 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `DocConnekPro.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-1/tp/releases).
+1. Download the latest `DoConnekPro.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your DocConnek Pro.
+1. Copy the file to the folder you want to use as the _home folder_ for your DoConnek Pro.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar DocConnekPro.jar` command to run the application.<br>
+1. Open a command terminal (You can search for the "Command Prompt" application on Windows or the "Terminal" application on MacOS).
+
+1. `cd` into the folder you put the jar file in ([How to use `cd`](https://www.lifewire.com/change-directories-in-command-prompt-5185508#:~:text=In%20the%20command%20prompt%20window%2C%20type%20cd%20followed%20by%20the,the%20one%20you're%20in.&text=If%20you%20want%20to%20go,back%20to%20the%20original%20option.)).
+
+1. Use the `java -jar DoConnekPro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command input box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command input box at the top and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list -pa` : Lists all patients.
@@ -44,11 +48,11 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 
 **:information_source: Notes about the command format:**<br>
 
-* Commands acting on the address book must contain the `-pa` (for patient) and the `-sp` (for specialist) tag to specify which subset they 
-would like the command to operate on.
-
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add -pa n/NAME`, `NAME` is a parameter which can be used as `add -pa n/John Doe`.
+
+* Certain command require `-PERSON_TYPE` as a parameter. This parameter can only take two values: `-pa` or `-sp`
+and specifies whether the command is to act on the patients (`-pa`) or on the specialists (`-sp`) in the address book.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [m/MEDICAL_HISTORY]` can be used as `n/John Doe m/Osteoporosis` or as `n/John Doe`.
@@ -95,8 +99,10 @@ Format (for specialists): `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATIO
 A specialist can have any number of tags (including 0)
 </div>
 
-* Email and location can only contain up to 255 characters.
-* Phone number can only contain up to 15 numbers;
+Parameter specifications: 
+* `NAME`, `EMAIL`, `LOCATION`, `TAG`, `MEDICAL_HISTORY`, and `SPECIALISATION` can contain 1 - 255 alphanumeric characters.
+* `PHONE_NUMBER` can contain 4 - 15 numeric characters.
+* `AGE` can contain any integer in the range 0 to 149 inclusive.
 
 Examples:
 * `add -pa n/John e/johnmctavish@gmail.com p/12345678 a/35 m/Osteoporosis m/Rheumatoid arthritis t/friend`
@@ -118,7 +124,7 @@ Finds patients or specialists whose attributes contain any of the given keywords
 Multiple attributes can be searched at once, the result will display any person
 with all attributes containing any of the corresponding keywords in the command.
 
-Format: `find -PERSON_TYPE [PREFIX/KEYWORDS]`
+Format: `find -PERSON_TYPE [PREFIX/KEYWORD]...`
 
 * All prefixes are optional. Hence, entering `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed.
 * The search is case-insensitive.
@@ -126,7 +132,7 @@ Format: `find -PERSON_TYPE [PREFIX/KEYWORDS]`
 * The order of the keywords does not matter. 
   * e.g. `Hans Bo` will match `Bo Hans`
 * There are different behaviours regarding the searching of different parameters:
-  * For `NAME`, `MEDICAL_HISTORY`, `SPECIALISATION`, `EMAIL`, `LOCATION` and `PHONE`, even substrings will be matched. 
+  * For `NAME`, `MEDICAL_HISTORY`, `SPECIALISATION`, `EMAIL`, `LOCATION` and `PHONE_NUMBER`, even substrings will be matched. 
     * e.g. `ha` will match `Hans`
   * For `AGE` and `TAGS` only full words will be matched. 
     * e.g. `1` will not match `18`
@@ -222,10 +228,10 @@ Format: `redo`
 
 ### Adding a custom shortcut : `addsc`
 
-Adds a shortcut mapped to a default command keyword for easier use. </br>
+Adds a shortcut mapped to a default command keyword for easier use. <br>
 After the mapping, the new user-defined shortcut will work the same way as the command keyword, and will be preserved between user sessions.
 
-A command keyword can have multiple valid shortcuts mapped to it. 
+A command keyword can have multiple valid shortcuts mapped to it.
 * i.e. both `del --> delete` and `rm --> delete` mappings can exist concurrently.
 
 A valid shortcut cannot be mapped to multiple command words at once
@@ -233,7 +239,7 @@ A valid shortcut cannot be mapped to multiple command words at once
 * If such a duplicate mapping is attempted, the previous one will be overridden.
 
 Format: `addsc sc/SHORTCUT kw/KEYWORD`
- * `SHORTCUT` can only consist of Alphanumeric characters and must contain no whitespaces.
+ * `SHORTCUT` can only consist of alphanumeric characters and must contain no whitespaces.
  * `SHORTCUT` cannot be an existing command keyword.
  * `KEYWORD` must match an existing command keyword.
 
@@ -261,12 +267,14 @@ Examples:
 
 Changes the theme of the application. The default theme on launch is the dark theme.
 
-Format: `theme TYPE`
-* `TYPE` has the following possibilities: `dark`, `light` (case-insensitive)
+Format: `theme THEMETYPE`
+* `THEMETYPE` has the following possibilities: `dark`, `light` (case-insensitive)
 
 Examples:
 * `theme dark` sets the application theme to the dark theme.
+![img.png](images/ThemeDark.png)
 * `theme LIGHT` sets the application theme to the light theme.
+![img_1.png](images/ThemeLight.png)
 
 ### Clearing all entries : `clear`
 
@@ -304,16 +312,12 @@ DoConnek Pro data are saved automatically as a JSON file `[JAR file location]/da
 If your changes to the data file makes its format invalid, DoConnek Pro will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-### UI mock-up :
-
-![UI mock-up](images/Ui.png)
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the data folder it creates with the data folder in your previous DoConnekPro home directory.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -331,13 +335,13 @@ If your changes to the data file makes its format invalid, DoConnek Pro will dis
 | **Add (patient)**    | `add -pa n/NAME e/EMAIL p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...​ [t/TAG]...​` <br> e.g., `add -pa n/John e/johnmctavish@example.com p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis` |
 | **Add (specialist)** | `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION [t/TAG]...​` <br> e.g., `add -sp n/Jane e/janepeter@example.com p/73331515 s/Dermatologist l/Ang Mo Kio`                    |
 | **Delete**           | `delete INDEX...​`<br> e.g., `delete 3`                                                                                                                                                        |
-| **Find**             | `find -PERSON_TYPE PREFIX/KEYWORD [MORE_PREFIX/KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`                                                                                         |
-| **Edit**             | `edit PREFIX/KEYWORD [MORE_PREFIX/KEYWORDS]` <br> e.g. `edit n/Jonathan Wick p/09883100`                                                                                                       |
+| **Find**             | `find -PERSON_TYPE PREFIX/KEYWORD...` <br> e.g., `find -pa n/James Jake p/73281193`                                                                                                            |
+| **Edit**             | `edit PREFIX/KEYWORD...` <br> e.g. `edit n/Jonathan Wick p/09883100`                                                                                                                           |
 | **List**             | `list -PERSON_TYPE` <br> e.g. `list -pa`                                                                                                                                                       |
 | **Undo**             | `undo`                                                                                                                                                                                         |
 | **Redo**             | `redo`                                                                                                                                                                                         |
 | **Add shortcut**     | `addsc sc/SHORTCUT kw/KEYWORD` <br> e.g., `addsc sc/del kw/delete`                                                                                                                             |
-| **Delete shortcut**  | `delsc sc/SHORTCUT [sc/SHORTCUT]...` <br> e.g., `delsc sc/del sc/li`                                                                                                                           |
-| **Change Theme**     | `theme TYPE` <br> e.g., `theme dark`                                                                                                                                                           |
+| **Delete shortcut**  | `delsc sc/SHORTCUT...` <br> e.g., `delsc sc/del sc/li`                                                                                                                                         |
+| **Change Theme**     | `theme THEMETYPE` <br> e.g., `theme dark`                                                                                                                                                      |
 | **Clear**            | `clear`                                                                                                                                                                                        |
 | **Exit**             | `exit`                                                                                                                                                                                         |
