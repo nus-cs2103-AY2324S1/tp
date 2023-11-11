@@ -871,8 +871,6 @@ initialised with the focus on the `confirm` button. This makes it possible for a
 twice and wipe the contact book anyway, bypassing the defence mechanism entirely. We plan to make the command more
 resistant to mistakes by having the user key in a specific phrase, or to initialise the window with the focus on the
 `cancel` button instead.
-8. Currently, long names for `tags` and `financial plans` may not be fully visible in the UI. We plan to restrict the
-length of such values so that we can ensure that these values will always be fully visible.
 
 *{More to be added}*
 

@@ -466,13 +466,12 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **Long names** for Financial Plans and Tags may not be fully visible.
-3. **When sorting the list**, we have chosen to not implement returning sorted list to original ordering due to the lack of necessity. However, due to feedback, we will implement this in the next release to enable users to return list to original order should they wish to.
-4. **It is possible to add appointments with dates** before the current date and time.
-5. **On macOS Systems**, you have to use the cursor to manually click the confirm or cancel buttons for the overriding and clear prompts. In contrast, Windows users can choose to hit enter to confirm execution of command.
-6. **No current method to deconflict clashing appointments**. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other. The appointment sidebar may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6a.
-7. **The appointment sidebar** may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6.
-8. **Checking for duplicate persons** is done by checking their full name, case sensitive. The future plan is to do this by checking of phone number as it is less likely 2 people share the same phone number as compared to name.
+2. **When sorting the list**, we have chosen to not implement returning sorted list to original ordering due to the lack of necessity. However, due to feedback, we will implement this in the next release to enable users to return list to original order should they wish to.
+3. **It is possible to add appointments with dates** before the current date and time.
+4. **On macOS Systems**, you have to use the cursor to manually click the confirm or cancel buttons for the overriding and clear prompts. In contrast, Windows users can choose to hit enter to confirm execution of command.
+5. **No current method to deconflict clashing appointments**. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other. The appointment sidebar may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6a.
+6. **The appointment sidebar** may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6.
+7. **Checking for duplicate persons** is done by checking their full name, case-sensitive. The future plan is to do this by checking of phone number as it is less likely 2 people share the same phone number than compared to name.
 
 --------------------------------------------------------------------------------------------------------------------
 
