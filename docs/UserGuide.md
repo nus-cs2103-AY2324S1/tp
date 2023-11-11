@@ -10,6 +10,8 @@ _Find Your Success with JobFindr_
 ## Table of Contents
 
 1. [Introduction](#introduction)
+    2. [First Time at JobFindr](#first-time-at-jobfindr)
+    3. [Experience at JobFindr](#experienced-at-jobfindr)
 2. [Quick Start](#quick-start)
 3. [Key Information](#key-information)
     1. [User Interface](#user-interface)
@@ -53,6 +55,18 @@ JobFindr combines the rapid efficiency of Command Line Interface (CLI) with the 
 [Graphical User Interface (GUI)](#user-interface), offering job application management that is suited for your specific
 needs and preferences.
 
+### First Time at JobFindr?
+
+_Welcome onboard JobFindr! Let us be part of your job search journey!_
+
+1. To get started with JobFindr, refer to the [Quick Star](#quick-start) below.
+2. After setting up JobFindr on your computer, you can get started with a Quick Tutorial to get familiar with the
+   features.
+3. You may also explore JobFindr at your own pace, you can refer to the [Feature](#features) section for all the
+   available features on JobFindr.
+
+### Experienced at JobFindr
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -67,27 +81,41 @@ needs and preferences.
    ![DownloadJar](images/DownloadJar.png)
 3. Copy the file to the folder you want to use as the **home folder** for your AddressBook.
 4. [Open a command terminal](#2-how-do-i-open-up-terminal-on-my-computer), `cd` into the folder you put the jar file in,
-   and enter the command `java -jar JobFindr.jar`
-   to run the application.
+   and enter the command `java -jar JobFindr.jar` to run the application.
 5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
-
 6. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter
    will open the help window.<br>
    Some example commands you can try:
-
     * `list` : Lists all applications.
-
     * `add c/Microsoft r/Software Engineer d/Nov 17 2023 1200 i/Technology s/Pending` :
       Adds an application for the company named `Microsoft` to the Application Book.
-
     * `delete 3` : Deletes the 3rd application shown in the current list.
-
     * `clear` : Deletes all applications.
-
     * `exit` : Exits the app.
-
 7. Refer to "[Key Information](#key-information)" below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick Tutorial
+
+Let us help you begin your job search journey with JobFindr. Here is a quick tutorial to help you understand the basic
+features to get started on JobFindr.
+
+1. [Add your first job application on JobFindr](#1-add-your-first-job-application-on-jobfindr)
+2. [Edit a field in the newly added application](#2-edit-a-field-in-the-newly-added-application)
+3. [Delete the application](#3-delete-the-application)
+
+### 1. Add your first job application on JobFindr
+
+Leverage on the power of flexibility by adding applications with minimal mandatory fields. Now let us try to add an
+application onto JobFindr.
+
+Step 1:
+
+### 2. Edit a field in the newly added application
+
+### 3. Delete the application
 
 --------------------------------------------------------------------------------------------------------------------
 
