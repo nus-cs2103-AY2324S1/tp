@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import transact.logic.commands.AddTransactionCommand;
 import transact.logic.parser.exceptions.ParseException;
+import transact.model.person.PersonId;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
@@ -45,13 +46,17 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-
-        Integer personId = -1;
         if (argMultimap.getValue(PREFIX_STAFF).isPresent()) {
-            personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_STAFF).get());
+            int personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_STAFF).get());
+            if (personId < 0) {
+                throw new ParseException(PersonId.MESSAGE_CONSTRAINTS);
+            }
+            return new AddTransactionCommand(transactionType, description, amount, date, personId);
         }
-
+        // Case when no staff ID is entered.
+        int personId = -1;
         return new AddTransactionCommand(transactionType, description, amount, date, personId);
+
     }
 
     /**
