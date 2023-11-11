@@ -26,7 +26,7 @@ public class RemindPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         long dayDifference = ChronoUnit.DAYS.between(LocalDate.now(), person.getPolicy().getPolicyExpiryDate().date);
-        return !person.hasDefaultPolicy() && dayDifference >= 0 && dayDifference <= days;
+        return !person.hasDefaultPolicy() && dayDifference >= NON_EXPIRY_DAY && dayDifference <= days;
     }
 
     @Override
