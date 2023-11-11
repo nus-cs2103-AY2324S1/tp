@@ -28,7 +28,7 @@ public class NoteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NOTE + "Likes to swim.";
 
-    public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added note to Person: %1$s";
+    public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added note to Person: %1$s\nNote added: %2$s";
     public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed note from Person: %1$s";
 
     private final Index index;
@@ -59,16 +59,21 @@ public class NoteCommand extends Command {
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
-        return new CommandResult(generateSuccessMessage(editedStudent));
+        return new CommandResult(generateSuccessMessage(editedStudent, note));
     }
 
     /**
      * Generates a command execution success message based on whether the note is added to or removed from
      * {@code StudentToEdit}.
      */
-    private String generateSuccessMessage(Student studentToEdit) {
-        String message = !note.value.isEmpty() ? MESSAGE_ADD_NOTE_SUCCESS : MESSAGE_DELETE_NOTE_SUCCESS;
-        return String.format(message, Messages.format(studentToEdit));
+    private String generateSuccessMessage(Student studentToEdit, Note note) {
+        String noteString = note.value.length() > 100
+                ? note.value.substring(0, 100).trim() + "... (Double-click on the student card to view the full note)"
+                : note.value;
+        String message = !note.value.isEmpty()
+                ? String.format(MESSAGE_ADD_NOTE_SUCCESS, Messages.format(studentToEdit), noteString)
+                : String.format(MESSAGE_DELETE_NOTE_SUCCESS, Messages.format(studentToEdit));
+        return message;
     }
 
     @Override

@@ -81,20 +81,20 @@ All instructions executed in WellNUS generally use the following command format:
 The list of all available prefixes and parameters, as well as constraints of each parameter, is shown in the table below. 
 To see a list of all command words, refer to the [Command Summary](#5-command-summary) section.
 
-| Prefix    | Parameter         | Parameter Meaning                | Example Usage                      | Parameter Constraints                                                                                                                            |
-|-----------|-------------------|----------------------------------|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| Prefix    | Parameter         | Parameter Meaning                | Example Usage                      | Parameter Constraints                                                                                                                          |
+|-----------|-------------------|----------------------------------|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | **n/**    | STUDENT_NAME      | Name of student                  | n/Peter Johnson                    | STUDENT_NAME **must** only contain **alphabetical characters and spaces**, be **unique** up to **100 characters** long, and **cannot be blank**. |
-| **c/**    | CONTACT_NUMBER    | Contact number of student        | c/94738484                         | CONTACT_NUMBER **must** only contain **numerical characters**, be **exactly 8 digits long** (without spaces) and **cannot be blank**.            |
-| **a/**    | ADDRESS           | Address of student               | a/Blk 515 Choa Chu Kang Avenue 6   | ADDRESS can take any value up to **200 characters** long, and **cannot be blank**.                                                               |
-| **r/**    | RISK_LEVEL        | Risk level assigned to student   | r/high                             | RISK_LEVEL **must** be one of the following three values: **high**, **medium**, **low**. **Case-insensitive**.                                   |
-| **note/** | NOTE              | Note associated with student     | note/Struggles with 3rd grade math | NOTE can take any value up to **500 characters** long.                                                                                           |
-| --        | STUDENT_INDEX     | Index of student in the list     | --                                 | STUDENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the student list.                                         |
-| **date/** | DATE              | Date of appointment              | date/2023-10-12                    | DATE **must** be in the following format: `yyyy-MM-dd`. Specified date must be **within a year from the current date**.                          |
-| **from/** | START_TIME        | Start time of appointment        | from/16:30                         | START_TIME **must** be in the following format: `HH:mm`, in **24-hour format**.                                                                  |
-| **to/**   | END_TIME          | End time of appointment          | to/17:30                           | END_TIME **must** be in the following format: `HH:mm`, in **24-hour format**.                                                                    |
-| **d/**    | DESCRIPTION       | Description of appointment       | d/3rd counselling session          | DESCRIPTION can take any value up to **100 characters** long, and **cannot be blank**.                                                           |
-| --        | APPOINTMENT_INDEX | Index of appointment in the list | --                                 | APPOINTMENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the appointment list.                                 |
-| **g/**    | CATEGORY          | Category of search               | g/appointments                     | CATEGORY **must** be one of the following three values: **students**, **appointments**, **all**.                                                 |
+| **c/**    | CONTACT_NUMBER    | Contact number of student        | c/94738484                         | CONTACT_NUMBER **must** only contain **numerical characters**, be **exactly 8 digits long** (without spaces) and **cannot be blank**.          |
+| **a/**    | ADDRESS           | Address of student               | a/Blk 515 Choa Chu Kang Avenue 6   | ADDRESS can take any value up to **200 characters** long, and **cannot be blank**.                                                             |
+| **r/**    | RISK_LEVEL        | Risk level assigned to student   | r/high                             | RISK_LEVEL **must** be one of the following three values: **high**, **medium**, **low**. **Case-sensitive**.                                   |
+| **note/** | NOTE              | Note associated with student     | note/Struggles with 3rd grade math | NOTE can take any value up to **500 characters** long.                                                                                         |
+| --        | STUDENT_INDEX     | Index of student in the list     | --                                 | STUDENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the student list.                                       |
+| **date/** | DATE              | Date of appointment              | date/2023-10-12                    | DATE **must** be in the following format: `yyyy-MM-dd`. Specified date must be **within a year from the current date**.                        |
+| **from/** | START_TIME        | Start time of appointment        | from/16:30                         | START_TIME **must** be in the following format: `HH:mm`, in **24-hour format**.                                                                |
+| **to/**   | END_TIME          | End time of appointment          | to/17:30                           | END_TIME **must** be in the following format: `HH:mm`, in **24-hour format**.                                                                  |
+| **d/**    | DESCRIPTION       | Description of appointment       | d/3rd counselling session          | DESCRIPTION can take any value up to **100 characters** long, and **cannot be blank**.                                                         |
+| --        | APPOINTMENT_INDEX | Index of appointment in the list | --                                 | APPOINTMENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the appointment list.                               |
+| **g/**    | CATEGORY          | Category of search               | g/appointments                     | CATEGORY **must** be one of the following three values: **students**, **appointments**, **all**.                                               |
 
 
 <div markdown="block" class="alert alert-info">
@@ -116,6 +116,17 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+
+### 1.3 About student notes
+
+Student notes of a student can be viewed by double-clicking on the specific student that you want under the "Student"
+column. You can only view student notes for one student at a time. When you perform any commands, the notes column
+will be cleared (You will have to double-click once again).
+
+If you have any feedback on our features pertaining to student notes, feel free to send your feedback to the 
+developer team!
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -294,7 +305,8 @@ Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS] [r/RISK_LEVEL]`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
-The `tag STUDENT_INDEX r/RISK_LEVEL` command is equivalent to `edit STUDENT_INDEX r/RISK_LEVEL`.
+- The `tag STUDENT_INDEX r/RISK_LEVEL` command is equivalent to `edit STUDENT_INDEX r/RISK_LEVEL`.
+- Providing the same field as before (eg. changing contact from 99998888 to 99998888) will not throw an error
 </div>
 
 Valid examples:

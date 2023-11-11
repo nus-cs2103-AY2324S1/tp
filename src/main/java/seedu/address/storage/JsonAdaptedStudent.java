@@ -105,6 +105,8 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(EXCEED_RISK_LEVEL_SIZE_MESSAGE);
         }
 
+        assert tags != null;
+
         for (JsonAdaptedRiskLevel riskLevel : tags) {
             studentRiskLevel.add(riskLevel.toModelType());
         }
