@@ -334,18 +334,23 @@ public class ParserUtilTest {
     }
 
     @Test
-    void parseValidAppointmentDate_validDate_shouldParseSuccessfully() throws ParseException {
-        String validDateString = "15-11-2022 14:30";
+    void parseAppointmentDate_validDate_shouldParseSuccessfully() throws ParseException {
+        String validDateString = "29-02-2024 14:30";
         try {
-            ParserUtil.parseValidAppointmentDate(validDateString);
+            ParserUtil.parseAppointmentDate(validDateString);
         } catch (ParseException e) {
             fail();
         }
     }
 
     @Test
-    void parseValidAppointmentDate_invalidDate_shouldThrowParseException() {
-        String invalidDateString = "31-02-2022 14:30";
-        assertThrows(ParseException.class, () -> ParserUtil.parseValidAppointmentDate(invalidDateString));
+    void parseAppointmentDate_invalidDate_shouldThrowParseException() {
+        // 29th Feb for non leap year
+        String invalidDateString1 = "29-02-2022 14:30";
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(invalidDateString1));
+
+        // No 31st Nov
+        String invalidDateString2 = "31-11-2023 14:30";
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(invalidDateString2));
     }
 }

@@ -184,14 +184,12 @@ public class ParserUtil {
             throw new ParseException(Appointment.MESSAGE_DATE_CONSTRAINTS);
         }
 
-        LocalDateTime appointmentDate;
         try {
-            appointmentDate = parseValidAppointmentDate(appointmentDateString);
+            LocalDateTime appointmentDate = parseAppointmentDate(appointmentDateString);
+            return new Appointment(trimmedAppointmentName, appointmentDate);
         } catch (DateTimeParseException e) {
             throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
         }
-
-        return new Appointment(trimmedAppointmentName, appointmentDate);
     }
 
     /**
@@ -199,12 +197,11 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static LocalDateTime parseValidAppointmentDate(String appointmentDateString) throws ParseException {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static LocalDateTime parseAppointmentDate(String appointmentDateString) throws ParseException {
         String date = appointmentDateString.split(" ")[0];
 
         try {
-            YearMonth yearMonth = YearMonth.parse(date, dateFormatter);
+            YearMonth yearMonth = YearMonth.parse(date, Appointment.DATE_FORMATTER);
             if (!isValidDay(yearMonth, date)) {
                 throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
             }
@@ -225,25 +222,21 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
 
-        String dateValidation = "\\d{2}-\\d{2}-\\d{4}";
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter dateFormatter = Appointment.DATE_FORMATTER;
 
-        if (!trimmedDate.matches(dateValidation)) {
+        if (!trimmedDate.matches(Appointment.VALIDATION_DATE_REGEX)) {
             throw new ParseException(CompleteCommand.MESSAGE_INVALID_DATE_FORMAT);
         }
 
-        LocalDate appointmentDate;
         try {
             YearMonth yearMonth = YearMonth.parse(date, dateFormatter);
             if (!isValidDay(yearMonth, date)) {
                 throw new ParseException(CompleteCommand.MESSAGE_INVALID_DATE);
             }
-            appointmentDate = LocalDate.parse(date, dateFormatter);
+            return LocalDate.parse(date, dateFormatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(CompleteCommand.MESSAGE_INVALID_DATE);
         }
-
-        return appointmentDate;
     }
 
     /**
