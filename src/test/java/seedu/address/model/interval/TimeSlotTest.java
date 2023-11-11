@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class TimeSlotTest {
 
-    public static  SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
     @Test
     public void equals() throws ParseException {
@@ -142,7 +142,7 @@ public class TimeSlotTest {
                 new IntervalEnd("2200"));
         List<TimeSlot> result6 = TimeSlot.findAvailableTime(timeslots6, interval6);
         String printedResult = TimeSlot.printResults(result6);
-        String expectedResult = "Free from 08:00 - 14:00\n" + "Free from 16:00 - 22:00\n" ;
+        String expectedResult = "Free from 08:00 - 14:00\n" + "Free from 16:00 - 22:00\n";
         assertEquals(printedResult, expectedResult);
     }
 
