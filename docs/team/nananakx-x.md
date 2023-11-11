@@ -65,6 +65,7 @@ Given below are my contributions to the project.
         * Added activity diagram for `add` feature
         * Added implementation details of the `sort` feature
         * Added sequence diagram for `sort` feature
+        * Added non-functional requirements
         * Added user stories and use cases related to `add`, `sort` and `undo`
         * Updated user stories and use cases related to `help` and `reset`
         * Added planned enhancements for:
