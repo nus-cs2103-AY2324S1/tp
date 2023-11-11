@@ -180,7 +180,7 @@ The alias for this command is `addm`.
   <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
   <br/>
-* `EMAIL`: The email has to follow localpart@domain format. See [email format](#441-email-format) for more details.
+* `EMAIL`: The email has to follow localpart@domain format. See [email format](#53-email-format) for more details.
   <br/>
 * `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
   Minimum of 5 and maximum of 32 characters are allowed.
@@ -282,7 +282,7 @@ This also means that to clear a member's tags, you can simply type `editm /tag`.
   <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
   <br/>
-* `EMAIL`: The email has to follow localpart@domain format. See [email format](#441-email-format) for more details.
+* `EMAIL`: The email has to follow localpart@domain format. See [email format](#53-email-format) for more details.
   <br/>
 * `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
   Minimum of 5 and maximum of 32 characters are allowed.
@@ -664,9 +664,21 @@ Exits the application.
 There will be no prompt to confirm this action.
 </div>
 
-### 4.4 Field Constraints
+## 5 Field Constraints Summary
 
-#### 4.4.1 `EMAIL` format
+### 5.1 `NAME` format
+
+- Name:
+  - Only alphabetical characters, spaces, @, (), / are allowed.
+  - First character of the name should not be a space.
+
+### 5.2 `PHONE_NUMBER` format
+
+- Phone number:
+  - Only numbers are allowed.
+  - At least 3 digits are required.
+
+### 5.3 `EMAIL` format
 
 `EMAIL` field should be of the format **local-part@domain**.
 
@@ -679,14 +691,14 @@ There will be no prompt to confirm this action.
     - Each domain label must start and end with an alphanumerical character.
     - The last domain label must contain at least 2 characters.
 
-#### 4.4.2 `TELEGRAM_HANDLE` format
+### 5.4 `TELEGRAM_HANDLE` format
 
 - Handle:
     - Must start with the "@" symbol.
     - Only alphanumerical characters and underscore "_" are allowed.
     - Must be between 5 and 32 characters long (inclusive).
 
-#### 4.4.3 Examples of fields
+## 5.5 Examples of fields
 
 | Field               | Valid                                                      | Invalid                                                                                                   |
 |---------------------|------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
