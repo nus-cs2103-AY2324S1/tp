@@ -388,7 +388,8 @@ public class FindExpressionParser {
          * (This comment is not a Javadoc comment, and is meant for future maintainers)
          */
 
-        private <T> Predicate<Person> createOptionalFieldContainsKeywordPredicate(Function<Person, Optional<T>> getter) {
+        private <T> Predicate<Person> createOptionalFieldContainsKeywordPredicate(
+                Function<Person, Optional<T>> getter) {
             return person -> getter.apply(person)
                     .map(value -> StringUtil.containsSubstringIgnoreCase(value.toString(), keyword))
                     .orElse(false);
