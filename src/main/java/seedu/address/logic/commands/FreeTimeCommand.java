@@ -32,6 +32,8 @@ public class FreeTimeCommand extends Command {
             + PREFIX_DURATION + "60 "
             + PREFIX_BEGIN + "0800 "
             + PREFIX_END + "2200 ";
+
+    public static final String MESSAGE_SUCCESS = "Here is your list of free time:\n%s";
     public static final String MESSAGE_ERROR = "An error occurred when executing the freeTime command.";
     private final Interval toFind;
 
@@ -50,7 +52,7 @@ public class FreeTimeCommand extends Command {
         try {
             List<TimeSlot> timeslots = TimeSlot.parseIntervals(result);
             List<TimeSlot> availableTime = TimeSlot.findAvailableTime(timeslots, toFind);
-            return new CommandResult(TimeSlot.printResults(availableTime));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, TimeSlot.printResults(availableTime)));
         } catch (ParseException e) {
             throw new CommandException(MESSAGE_ERROR);
         }

@@ -62,8 +62,4 @@ public class Duration {
         return value.equals(otherDuration.value);
     }
 
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
 }
