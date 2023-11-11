@@ -116,19 +116,19 @@ This box denotes command outputs.
 
 ### Parameter summary
 
-| Parameter  | Used in                                                                   | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Valid examples                                                                                               | Invalid examples            |
-|------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------|
-| `INDEX`    | `show`<br/>`editPerson` `deletePerson`<br/>`editLesson` `deleteLesson`    | Must be a positive integer in the range of 1 to 99999 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | "1", "24", "12"                                                                                              | "-1", "2147483648", "10000" |
-| `LIST`     | `list`                                                                    | Must be either "Students", "Schedule", "Tasks". Parameter is case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | "STUDENTS", "stuDEnts"                                                                                       | "task", "student"           |
-| `KEYWORDS` | `list`                                                                    | Must be either "phone", "email", "address", "tags", "subjects", "remark", "none", or "all". Parameter must be in **lower case**. Multiple keywords can be specified using a **space separator.**                                                                                                                                                                                                                                                                                                                                                                                                                                   | "none", "all", "subJeCts"                                                                                    | "subject", ""               |
-| `NAME`     | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter` `find` | Must not be empty. <br/>Must only contain alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "John", "Elton"                                                                                              | "", "jo!"                   |   
-| `SUBJECT`  | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter`        | Must be either "Mathematics", "Physics", <br/>"Biology", "Chemistry" or "English"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | "mathematics", "MATHEMATICS"                                                                                 | "math"                      | 
-| `PHONE`    | `addPerson` `editPerson`                                                  | Should be at least 3 characters long, and can only contain numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "96681234", "823234"                                                                                         | "+6592212341", "98"         |
-| `EMAIL`    | `addPerson` `editPerson`                                                  | Should follow the format localpart@domain.<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | "hello@gmail.com", "test@g.com"                                                                              | "hello.com", "f@f"          |
-| `ADDRESS`  | `addPerson` `editPerson`                                                  | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road"                                                                          | ""                          |  
-| `TAGS`     | `addPerson` `editPerson`<br/>`filter`                                     | Must not be empty and cannot contain any spaces. Multiple tags can be specified at once by using a comma (,) as a separator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | "jc,express", "weak"                                                                                         | "junior college"            |
-| `DATE`     | `addLesson` `editLesson`<br/>`filter`                                     | Must follow either the date format **yyyy/MM/dd**, **yy/MM/dd**, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                               | To represent the date 13/08/2023 and assuming it is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        |
-
+| Parameter       | Used in                                                                   | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Valid examples                                                                                               | Invalid examples            |
+|-----------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------|
+| `INDEX`         | `show`<br/>`editPerson` `deletePerson`<br/>`editLesson` `deleteLesson`    | Must be a positive integer in the range of 1 to 99999 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | "1", "24", "12"                                                                                              | "-1", "2147483648", "10000" |
+| `LIST`          | `list`                                                                    | Must be either "Students", "Schedule", "Tasks". Parameter is case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | "STUDENTS", "stuDEnts"                                                                                       | "task", "student"           |
+| `KEYWORDS`      | `list`                                                                    | Must be either "phone", "email", "address", "tags", "subjects", "remark", "none", or "all". Parameter must be in **lower case**. Multiple keywords can be specified using a **space separator.**                                                                                                                                                                                                                                                                                                                                                                                                                                   | "none", "all", "subJeCts"                                                                                    | "subject", ""               |
+| `NAME`          | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter` `find` | Must not be empty. <br/>Must only contain alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "John", "Elton"                                                                                              | "", "jo!"                   |   
+| `SUBJECT`       | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter`        | Must be either "Mathematics", "Physics", <br/>"Biology", "Chemistry" or "English"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | "mathematics", "MATHEMATICS"                                                                                 | "math"                      | 
+| `PHONE`         | `addPerson` `editPerson`                                                  | Should be at least 3 characters long, and can only contain numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "96681234", "823234"                                                                                         | "+6592212341", "98"         |
+| `EMAIL`         | `addPerson` `editPerson`                                                  | Should follow the format localpart@domain.<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | "hello@gmail.com", "test@g.com"                                                                              | "hello.com", "f@f"          |
+| `ADDRESS`       | `addPerson` `editPerson`                                                  | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road"                                                                          | ""                          |  
+| `TAGS`          | `addPerson` `editPerson`<br/>`filter`                                     | Must not be empty and cannot contain any spaces. Multiple tags can be specified at once by using a comma (,) as a separator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | "jc,express", "weak"                                                                                         | "junior college"            |
+| `DATE`          | `addLesson` `editLesson`<br/>`filter`                                     | Must follow either the date format **yyyy/MM/dd**, **yy/MM/dd**, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                               | To represent the date 13/08/2023 and assuming it is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        |
+| `SEARCH_STRING` | `find`                                                                    | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Alex", "alex yeoh", "+asdf-"                                                                                | ""                          |
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -173,15 +173,16 @@ Showing list TASK
 ```
   ![Success for list STUDENTS](images/list/list_tasks_positive.png)
 * If there are no entries, e.g. there are no students added yet or there are no tasks added yet, an empty list is displayed.
-  ![Empty list](images/list/list_tasks_empty.png)
+
+![Empty list](images/list/list_tasks_empty.png)
 
 Failure outputs:
 * Input: `list student`, `list task`, `list students EMAIL`, `list students subject`, `list students subjects,phone`
-* First command should spell `students` instead of `student`.
-* Second command should spell `tasks` instead of `task`.
-* Third command should spell `email` in lower case, not `EMAIL`.
-* Fourth command should spell `subjects` instead of `subject`.
-* Fifth command should use space separation `subjects phone` for keywords instead of comma separation.
+  * Error: First command should spell `students` instead of `student`.
+  * Error: Second command should spell `tasks` instead of `task`.
+  * Error: Third command should spell `email` in lower case, not `EMAIL`.
+  * Error: Fourth command should spell `subjects` instead of `subject`.
+  * Error: Fifth command should use space separation `subjects phone` for keywords instead of comma separation.
 ```Invalid command format!
   list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list, optional parameters can be used to specify what student details to display.
   Parameters: [LIST] [KEYWORDS]...
@@ -309,7 +310,7 @@ New person added: John; Phone: 91234567; Email: test@gmail.com; Address: 10 Kent
 
 Failure outputs:
 * Input: `addPerson`
-* Error: No name given. Enter the -name flag with a valid name.
+  * Error: No name given. Enter the -name flag with a valid name.
 ```  
 Invalid person format: Flag name not found. 
 Usage: addPerson -name [NAME] (any number of unique -[phone|email|address|subject|tag|remark] [value]). 
@@ -346,13 +347,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -383,13 +384,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -433,7 +434,7 @@ Deleted Person: Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address
 
 Failure outputs:
 * Input: `deletePerson`
-* Error: No index given. Enter a valid index!
+  * Error: No index given. Enter a valid index!
 ```  
 Invalid command format! 
 deleteperson: Deletes the entry identified by the index number used in the displayed list.
@@ -476,7 +477,7 @@ Deleted Lesson: Lesson lesson1 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEM
 
 Failure outputs:
 * Input: `deleteLesson`
-* Error: No index given. Enter a valid index!
+  * Error: No index given. Enter a valid index!
 ```  
 Invalid command format! 
 deletelesson: Deletes the lesson identified by the index number used in the displayed schedule list.
@@ -514,14 +515,14 @@ Deleted Task: Revise CS2103T Materials
 
 Failure outputs:
 * Input: `show 1` followed by `deleteTask 100`
-* Error: The index given is invalid. Enter a valid task index!
+  * Error: The index given is invalid. Enter a valid task index!
 ```
 Task index do not belong to any tasks!
 ```
 ![Failure for deleteTask wrong index](images/delete-task/delete_task_wrong_index.png)
 
 * Input: `show 1` followed by `deleteTask`
-* Error: No index given. Enter a valid task index!
+  * Error: No index given. Enter a valid task index!
 ```
 Invalid command format! 
 deletetask: Deletes the task identified by the task index from the currently displayed lesson.
@@ -531,7 +532,7 @@ Example: deletetask 1
 ![Failure for deleteTask no index](images/delete-task/delete_task_no_index.png)
 
 * Input: `deleteTask 1` without showing a lesson
-* Error: No lesson shown. Show a lesson with the `show` command.
+  * Error: No lesson shown. Show a lesson with the `show` command.
 ```
 Please use show lessonIndex before deleting task!
 ```
@@ -582,13 +583,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -619,13 +620,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -639,130 +640,67 @@ Editing of task lists is not supported at this time!
 
 ### Finding students/lessons by name : `find`
 
-About the feature (generally that is similar across states)
+The find command finds students (in student list) or lessons (in schedule list) whose names contain the search string.
 
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
+Format: `find SEARCH_STRING`
+* The search is case-insensitive. e.g. `lesson` will match `Lesson`. `hans` will match `Hans`.
+* Names does not need to match the search string, as long as they contain it they will be returned. e.g. search string `sson Che` will return `Lesson Chemistry`. 
+* While non-alphanumeric characters are allowed in the search string, they will likely not return any results as `NAME` parameter only allows alphanumeric characters.
 
-<box type="tip" seamless> 
+<box type="warning" seamless>
 
-**Tips:**
-- Tip 1
-- Tip 2
-
+**Caution:**
+* Find tasks by name/description is disabled.
+* Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see task list of the lesson.
 </box>
-
 
 #### For student list:
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
 Example usages:
-* `some code here`
-* `another code here`
+* `find bernice`
+* `find a`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `find bernice`
 ```
-This block of code is for success outputs
+1 persons listed!
 ```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `find a[s*(|o`
 ```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
+0 persons listed!
 ```
 
 #### For schedule list:
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
 Example usages:
-* `some code here`
-* `another code here`
+* `find lesson`
+* `find b`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `find lesson`
 ```
-This block of code is for success outputs
+4 lessons listed!
 ```
+* Input: `find &*af1`
+```
+0 lessons listed!
+```
+
+#### General Examples
+
 Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `find` or `find `
+  * Error: search string is empty.
 ```
-Invalid command with the error message here
+Invalid command format! 
+find: Finds all persons or lesson whose names contains the specified search string (case-insensitive) and displays them as a list with index numbers.
+Parameter: SEARCH_STRING
+Example: find alex yeoh
 ```
-
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `find task1` (in task list)
+    * Error: Find command is disabled in task list.
 ```
-Invalid command with the error message here
-```
-
-#### For task list:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-Example usages:
-* `some code here`
-* `another code here`
-
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
+Unknown command
 ```
 
 <br>
@@ -810,13 +748,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+*   Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -847,13 +785,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -884,13 +822,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -940,13 +878,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -977,13 +915,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -1014,13 +952,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -1070,13 +1008,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -1107,13 +1045,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -1144,13 +1082,13 @@ This block of code is for success outputs
 ```
 Failure outputs:
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
 
 * Input: `invalid command code here`
-* Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
 ```
 Invalid command with the error message here
 ```
@@ -1217,24 +1155,22 @@ Format: `help`
 
 <br>
 
-----------
+### Saving the data
 
+TutorMate data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-* list 
-* show 
-* add (person, lesson, task)
-* delete (person, lesson, task)
-* edit (person, lesson)
-* find 
-* filter (person, lesson)
-* link 
-* nav 
-* command history 
-* clear 
-* exit 
-* help
-* save data 
-* edit data 
+<br>
+
+### Editing the data file
+
+TutorMate data is saved automatically as JSON files `[JAR file location]/data/addressbook.json`, `[JAR file location]/data/schedulelist.json` and `[JAR file location]/data/personLessonMap.json`. Advanced users are welcome to update data directly by editing that data file.
+Be very careful, especially when you modify attributes such as Start and End time of lessons, as any overlapping lesson timings will render the data as invalid. For example, lesson clashes will not be detected. Scenarios like these are not exhaustive.
+
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, TutorMate will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
