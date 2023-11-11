@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
@@ -182,14 +183,32 @@ public class ParserUtil {
             throw new ParseException(Appointment.MESSAGE_DATE_CONSTRAINTS);
         }
 
-        LocalDateTime appointmentDate;
         try {
-            appointmentDate = Appointment.parseAppointmentDate(appointmentDateString);
+            LocalDateTime appointmentDate = parseAppointmentDate(appointmentDateString);
+            return new Appointment(trimmedAppointmentName, appointmentDate);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
+        }
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDateTime}.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDateTime parseAppointmentDate(String appointmentDate) throws ParseException {
+        String date = appointmentDate.split(" ")[0];
+
+        try {
+            YearMonth yearMonth = YearMonth.parse(date, Appointment.DATE_FORMATTER);
+            if (!isValidDay(yearMonth, date)) {
+                throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
+            }
+            return Appointment.parseAppointmentDate(appointmentDate);
         } catch (DateTimeParseException e) {
             throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
         }
 
-        return new Appointment(trimmedAppointmentName, appointmentDate);
     }
 
     /**
@@ -202,22 +221,32 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
 
-        String dateValidation = "\\d{2}-\\d{2}-\\d{4}";
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter dateFormatter = Appointment.DATE_FORMATTER;
 
-
-        if (!trimmedDate.matches(dateValidation)) {
+        if (!trimmedDate.matches(Appointment.VALIDATION_DATE_REGEX)) {
             throw new ParseException(CompleteCommand.MESSAGE_INVALID_DATE_FORMAT);
         }
 
-        LocalDate appointmentDate;
         try {
-            appointmentDate = LocalDate.parse(date, dateFormatter);
+            YearMonth yearMonth = YearMonth.parse(date, dateFormatter);
+            if (!isValidDay(yearMonth, date)) {
+                throw new ParseException(CompleteCommand.MESSAGE_INVALID_DATE);
+            }
+            return LocalDate.parse(date, dateFormatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(CompleteCommand.MESSAGE_INVALID_DATE);
         }
+    }
 
-        return appointmentDate;
+    /**
+     * Checks if the day of the month in the given user-input date is valid.
+     *
+     * @param date The String representation of the date in "dd-MM-yyyy" format.
+     * @return True if the day is within the valid range for the month.
+     */
+    public static boolean isValidDay(YearMonth yearMonth, String date) {
+        int day = Integer.parseInt(date.split("-")[0]);
+        return day >= 1 && day <= yearMonth.lengthOfMonth();
     }
 
     /**

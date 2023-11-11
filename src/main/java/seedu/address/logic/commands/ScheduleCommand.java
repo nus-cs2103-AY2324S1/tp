@@ -25,8 +25,8 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules an appointment of the person identified "
             + "by the index number used in the displayed person list. "
             + "\nParameters: INDEX(must be a positive integer) "
-            + "[" + PREFIX_APPOINTMENT + "Appointment Name] "
-            + "[" + PREFIX_APPOINTMENT_DATE + "Appointment Date] "
+            + PREFIX_APPOINTMENT + "Appointment Name "
+            + PREFIX_APPOINTMENT_DATE + "Appointment Date "
             + "\nExample: " + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + "Review Insurance "
             + PREFIX_APPOINTMENT_DATE + "01-01-2023 20:00";

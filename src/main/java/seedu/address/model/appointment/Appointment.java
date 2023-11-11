@@ -24,11 +24,13 @@ public class Appointment extends ScheduleItem implements Comparable<ScheduleItem
             + "characters and spaces, and it should not be blank";
     public static final String MESSAGE_APT_CONSTRAINTS = "Invalid appointment string. "
             + "Should be (description), (date) (time)";
-    public static final String VALIDATION_DATE_REGEX = "\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}";
+    public static final String VALIDATION_DATE_TIME_REGEX = "\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}";
+    public static final String VALIDATION_DATE_REGEX = "\\d{2}-\\d{2}-\\d{4}";
     public static final String VALIDATION_DESC_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public static final String VALIDATION_APT_REGEX = "^([\\p{Alnum}][\\p{Alnum} ]*), "
             + "(\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2})$";
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public final String value;
     public final LocalDateTime date;
@@ -58,7 +60,7 @@ public class Appointment extends ScheduleItem implements Comparable<ScheduleItem
     }
     @Override
     public String toString() {
-        return value + ", " + date.format(DATE_FORMATTER);
+        return value + ", " + date.format(DATE_TIME_FORMATTER);
     }
 
     @Override
@@ -94,7 +96,7 @@ public class Appointment extends ScheduleItem implements Comparable<ScheduleItem
      */
     public static boolean isValidDateFormat(String date) {
         requireNonNull(date);
-        return date.matches(VALIDATION_DATE_REGEX);
+        return date.matches(VALIDATION_DATE_TIME_REGEX);
     }
 
     /**
@@ -113,7 +115,7 @@ public class Appointment extends ScheduleItem implements Comparable<ScheduleItem
      * @throws IllegalArgumentException If input date does not match specified format.
      */
     public static LocalDateTime parseAppointmentDate(String input) throws DateTimeParseException {
-        return LocalDateTime.parse(input, DATE_FORMATTER);
+        return LocalDateTime.parse(input, DATE_TIME_FORMATTER);
     }
 
     /**
