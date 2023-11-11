@@ -110,7 +110,19 @@ between classes that represent parts of the visible GUI.
 ### Model Component
 
 ### Storage Component
+**API:**
+[`Storage.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/storage/Storage.java)
 
+**Description:**
+The `Storage` component is responsible for storing the job applications data in JSON format.
+
+**Functionality:**
+The `Storage` component,
+* can save `Userpref` objects in json format and read it back.
+* can save the job application data in json format and read it back.
+
+**Component Structure:**
+<img src="images/StorageClassDiagram.png" width="900" />
 ### Common Classes
 
 ---
