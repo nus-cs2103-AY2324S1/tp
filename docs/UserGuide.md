@@ -138,16 +138,16 @@ Below is a quick overview of the various components of our interface.
 
 ## TutorConnect Tutorial (for new users)
 
-Hello and welcome to TutorConnect! We're delighted you've chosen our platform to manage your tuition center's tutors and schedules. 
+Hello and welcome to TutorConnect! We're delighted you've chosen our platform to manage your tuition centre's tutors and schedules. 
 
 Before we begin, please ensure that you have viewed the following sections of the guide:
 * [Quick Start](#quick-start) to help you get TutorConnect up and running.
-* [Navigating the Interface](#navigating-the-interface) to get you familiarised on how to navigate TutorConnect.
+* [Navigating the Interface](#navigating-the-interface) to get you familiarised with navigating TutorConnect.
 
 This tutorial aims to guide you through the essential features and functionalities of TutorConnect that you will use 
 on a day-to-day basis. You will be adding your first tutor and corresponding schedule!
 
-Click on any of these below to jump to the respective sections of the guide!
+Click on any of these below to jump to the respective sections of the tutorial!
 * [Start](#start)
 * [Adding your first tutor](#adding-your-first-tutor)
 * [Adding your first schedule](#adding-your-first-schedule)
@@ -198,7 +198,7 @@ Here is how to use the [**add-s**](#adding-a-schedule-add-s) command to assign t
    ![tutor-index](images/tutorial/tutor-index.png)
 2. Simply type `add-s 1 st/2023-10-01T09:00 et/2023-10-01T11:00` into the command box
 3. Hit enter
-4. Tada! John Doe now has a schedule on **1 October 2023** from **9AM to 11AM**
+4. Tada! John Doe now has a class scheduled on **1 October 2023** from **9AM to 11AM**
 
 ### Marking your schedule as completed
 
@@ -391,7 +391,7 @@ Anything you type after `list-t` will be ignored.
 
 #### Locating tutors by name: `find-t`
 
-Find tutors whose names contain any of the given keywords.
+Finds tutors whose names contain any of the given keywords.
 
 ##### :star: First time users
 {:.no_toc}
@@ -512,7 +512,7 @@ Wow! The new schedule for Bernice Yu has now been added to the list of schedules
 
 <img src="images/addSchedule.png" height="400px">
 
-<div markdown="span" class="alert alert-success">
+<div markdown="span" class="alert alert-info">
 
 **:bulb: Position of new schedule**<br>
 
@@ -633,7 +633,7 @@ marked as `COMPLETED`.
 
 <div markdown="block" class="alert alert-success">
 
-**:bulb: Tip**<br>
+**:bulb: `list-s` usage**<br>
 
 Good news! `list-s` command is equipped with various options to view a list of schedules that covers the following 
 scenarios:
@@ -654,7 +654,7 @@ scenarios:
 
 <div markdown="block" class="alert alert-info">
 
-**:warning: Optional inputs**<br>
+**:tip: Optional inputs**<br>
 
 `TUTOR_INDEX` and `m/` are optional fields. You don't need to include them. If you do, make sure that the 
 input is valid!
@@ -696,7 +696,7 @@ The find schedule function is here for that!
 
 **What you can expect to see**
 
-Tada! The schedule list has now been updated to show schedules assign to tutors whose names contain the word "Bernice".
+Tada! The schedule list has now been updated to show schedules assigned to tutors whose names contain the word "Bernice".
 
 ![find schedule tutor](images/find-schedules/find-s.png)
 
@@ -766,7 +766,7 @@ Yay! The schedule has been marked as COMPLETED.
 * To set the status of the specified schedule to MISSED, use `m/0` as 0 indicates the MISSED status.
 * To set the status of the specified schedule to COMPLETED, use `m/1` as 1 indicates the COMPLETED status.
 * You can provide multiple values for the status field, e.g. `mark 1 m/0 m/0 m/1`. Only the last status field will be 
-  used, in the example earlier, it will use `m/1` and set the schedule status to be COMPLETED.
+  used. In the example earlier, it will use m/1 and set the schedule status to be COMPLETED.
 
 </div>
 
@@ -891,7 +891,7 @@ Displays schedules on a specified day as a calendar view.
 
 **Scenario**
 
-After adding all your tutor's schedules, you would like to view the schedules on a given day as a calendar.
+After adding all your tutors' schedules, you would like to view the schedules on a given day as a calendar.
 
 You're in luck with the calendar view command!
 
@@ -908,14 +908,13 @@ Woah look at that! The schedules are now being displayed in a calendar form.
 <div markdown="block" class="alert alert-success">
 
 **:bulb: Worried about having too many schedules to view?**<br>
-* The calendar can show schedules for selected tutors only!
+
 1. Simply use [`find-t`](#locating-tutors-by-name-find-t) to show the tutors first (e.g. `find-t John` to show all
   tutors with the name John).
 2. Now, just use the [`show`](#viewing-calendar-show) command to view their schedules in calendar view on a given date. 
    It's that simple!
 
-**Note**:
-* Use [`list-t`](#listing-all-tutors-list-t) before [`show`](#viewing-calendar-show) to view the schedules for all 
+**Note**: Use [`list-t`](#listing-all-tutors-list-t) before [`show`](#viewing-calendar-show) to view the schedules for all 
   tutors again.
 
 </div>
@@ -933,14 +932,14 @@ Woah look at that! The schedules are now being displayed in a calendar form.
 
 This command might seem complicated, but it is easy to use with only 1 possible error:
 
-| Error Message             | Reason                   |
-|---------------------------|--------------------------|
-| `Invalid command format!` | Invalid or missing DATE. |
+| Error Message             | Reason                     |
+|---------------------------|----------------------------|
+| `Invalid command format!` | Invalid or missing `DATE`. |
 
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Calendar limitations**<br>
-* Schedules with very short duration will be truncated (only the schedule's index will be displayed).
+* Schedules with very short duration may not be displayed correctly  (the schedule's information will not be readable).
 * Using any other commands will hide the calendar view. Use the `show` command to view calendar again. 
 
 </div>
@@ -1004,10 +1003,10 @@ For example:
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                   | Reason                                              |
-|---------------------------------|-----------------------------------------------------|
-| `Invalid command format!`       | New theme field was left blank and not specified.   |
-| `Theme provided does not exist` | New theme field was not `dark`, `light` or `blue`.  |
+| Error Message                   | Reason                                               |
+|---------------------------------|------------------------------------------------------|
+| `Invalid command format!`       | `NEW_THEME` field was left blank and not specified.  |
+| `Theme provided does not exist` | `NEW_THEME` field was not `dark`, `light` or `blue`. |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -1065,7 +1064,7 @@ Opens a window with instructions for getting help.
 
 **Scenario**
 
-Unsure on how to use a command? Encountered an unknown error?
+Unsure of how to use a command? Encountered an unknown error?
 
 Get help from within the app by using the help command!
 
@@ -1121,7 +1120,7 @@ All your data in TutorConnect is automatically saved in your computer. No more w
 
 **:warning: Exiting the app**<br>
 
-To prevent any unexpected behaviour in TutorConnect, exit the app using only the [`exit`](#exiting-the-program-exit) or
+To prevent any unexpected behaviour in TutorConnect, exit the app using only the [`exit command`](#exiting-the-program-exit) or
 the close window button.
 
 Do not stop the app from the command terminal (using [Windows](https://www.lifewire.com/open-command-prompt-in-a-folder-5185505) or [Mac](https://support.apple.com/en-sg/guide/terminal/trmlb20c7888/mac#:~:text=On%20your%20Mac%2C%20open%20a,window%3A%20Choose%20Open%20in%20Terminal)).
@@ -1256,8 +1255,8 @@ Commands reference: [add-t](#adding-a-tutor-add-t), [edit-t](#editing-a-tutor-ed
 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 
 The domain name must:
-* end with a domain label at least 2 characters long
-* have each domain label start and end with alphanumeric characters
+* end with a domain label at least 2 characters long.
+* have each domain label start and end with alphanumeric characters.
 * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
 
