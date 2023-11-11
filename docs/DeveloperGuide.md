@@ -446,6 +446,10 @@ The following sequence diagram shows the referenced process of calculating payro
 3. The `PayrollCommand` then calls the `getPayrollString()` method of the `Payroll` object to get payroll description of the person.
 4. The `Payroll` object then calls the `getNetSalaryString()` method of the `Salary` object to get the details of the `deductions`, `benefits` and basic salary.
 
+The following activity diagram summarises the process of payroll calculation for an employee:
+
+![PayrollCalculationActivityDiagram](images/PayrollCalculationAdActivityDiagram.png)
+
 ### Payslip Generation
 
 #### Proposed Implementation
