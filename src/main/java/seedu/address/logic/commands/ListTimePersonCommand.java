@@ -17,7 +17,13 @@ public class ListTimePersonCommand extends ListTimeCommand {
             + "Please provide the person's full name as in the existing contactlist.";
     private final Name personName;
 
+    /**
+     * Constructor of ListTimePersonCommand
+     *
+     * @param personName Name of person to list time for.
+     */
     public ListTimePersonCommand(Name personName) {
+        requireNonNull(personName);
         this.personName = personName;
     }
 

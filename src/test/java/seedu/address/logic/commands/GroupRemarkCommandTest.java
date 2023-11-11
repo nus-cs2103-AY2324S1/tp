@@ -4,11 +4,6 @@ import javafx.collections.ObservableList;
 import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.*;
 import seedu.address.model.group.Group;
@@ -16,44 +11,88 @@ import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.address.logic.commands.AddGroupMeetingTimeCommand.MESSAGE_SUCCESS;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
-public class UngroupPersonCommandTest {
+public class GroupRemarkCommandTest {
+    Group validGroupWithMeeting = new GroupBuilder().withTimeIntervalList(VALID_TIME_MON).build();
     Group validGroup = new GroupBuilder().build();
-    Person validPerson = new PersonBuilder().build();
-
 
     @Test
-    public void constructor_nullPerson_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new UngroupPersonCommand(null, null));
+    public void constructor_nullGroup_nullRemark_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new GroupRemarkCommand(null, null));
     }
 
     @Test
-    public void execute_ungroupPersonSuccess() throws CommandException {
-        ModelStubWithGroupAndSingleMember modelStub = new ModelStubWithGroupAndSingleMember(validGroup, validPerson);
-        assertTrue(validGroup.contains(validPerson));
-
-        CommandResult commandResult = new UngroupPersonCommand(validGroup.getGroupName(),
-                validPerson.getName().toString()).execute(modelStub);
-
-        assertFalse(validGroup.contains(validPerson));
+    public void constructor_nullGroup_throwsNullPointerException() {
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK);
+        assertThrows(NullPointerException.class, () -> new GroupRemarkCommand(null, groupRemark));
     }
 
     @Test
-    public void execute_personNotInGroup_ungroupPersonFailure() throws CommandException {
-        ModelStubWithEmptyGroup modelStub = new ModelStubWithEmptyGroup(validGroup, validPerson);
-        assertFalse(validGroup.contains(validPerson));
+    public void constructor_nullRemark_throwsNullPointerException() {
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK);
+        assertThrows(NullPointerException.class, () -> new GroupRemarkCommand(validGroup.getGroupName(), null));
+    }
 
-        assertThrows(CommandException.class, () -> new UngroupPersonCommand(validGroup.getGroupName(),
-                validPerson.getName().toString()).execute(modelStub));
+    @Test
+    public void execute_addGroupRemarkSuccess() throws Exception {
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
+        assertEquals(" ", validGroup.getGroupRemark().toString());
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK);
+        CommandResult commandResult = new GroupRemarkCommand(validGroup.getGroupName(), groupRemark).execute(modelStub);
+
+        // Group remark has been added
+        assertEquals(VALID_GROUP_REMARK, validGroup.getGroupRemark().toString());
+    }
+
+    @Test
+    public void execute_groupWithMeeting_addGroupRemarkSuccess() throws Exception {
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroupWithMeeting);
+        assertEquals(" ", validGroupWithMeeting.getGroupRemark().toString());
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK);
+        CommandResult commandResult = new GroupRemarkCommand(validGroupWithMeeting.getGroupName(), groupRemark).execute(modelStub);
+
+        // Group remark has been added
+        assertEquals(VALID_GROUP_REMARK, validGroupWithMeeting.getGroupRemark().toString());
+    }
+
+    @Test
+    public void execute_alphanumericSpecialCharacters_addGroupRemarkSuccess() throws Exception {
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
+        assertEquals(" ", validGroup.getGroupRemark().toString());
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK_SPECIAL);
+        CommandResult commandResult = new GroupRemarkCommand(validGroup.getGroupName(), groupRemark).execute(modelStub);
+
+        // Group remark has been added
+        assertEquals(VALID_GROUP_REMARK_SPECIAL, validGroup.getGroupRemark().toString());
+    }
+
+    @Test
+    public void execute_unicodeCharacters_addGroupRemarkSuccess() throws Exception {
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
+        assertEquals(" ", validGroup.getGroupRemark().toString());
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK_UNICODE);
+        CommandResult commandResult = new GroupRemarkCommand(validGroup.getGroupName(), groupRemark).execute(modelStub);
+
+        // Group remark has been added
+        assertEquals(VALID_GROUP_REMARK_UNICODE, validGroup.getGroupRemark().toString());
+    }
+
+    @Test
+    public void execute_validCharacters_addGroupRemarkSuccess() throws CommandException {
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
+        GroupRemark groupRemark = new GroupRemark(VALID_GROUP_REMARK_OTHERS);
+        CommandResult commandResult = new GroupRemarkCommand(validGroup.getGroupName(), groupRemark).execute(modelStub);
+        assertEquals(VALID_GROUP_REMARK_OTHERS, validGroup.getGroupRemark().toString());
     }
 
     /**
@@ -217,17 +256,14 @@ public class UngroupPersonCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person in a group.
+     * A Model stub that contains a single person and a time interval.
      */
-    private class ModelStubWithGroupAndSingleMember extends ModelStub {
+    private class ModelStubWithGroup extends ModelStub {
         private final Group group;
-        private final Person person;
-        ModelStubWithGroupAndSingleMember(Group group, Person person) throws CommandException {
-            requireAllNonNull(group, person);
+
+        ModelStubWithGroup(Group group) {
+            requireNonNull(group);
             this.group = group;
-            this.person = person;
-            group.addPerson(person);
-            person.addGroup(group);
         }
 
         public boolean hasGroup(Group group) {
@@ -235,81 +271,23 @@ public class UngroupPersonCommandTest {
             return this.group.equals(group);
         }
 
-        /**
-         * Unassigns person to group.
-         *
-         * @param person Person to be grouped.
-         * @param group  Group in consideration.
-         * @throws CommandException if person has already been assigned to group.
-         */
-        private void unassignGroup(Person person, Group group) throws CommandException {
-            group.removePerson(person);
-            person.removeGroup(group);
+        public boolean hasTime(TimeInterval timeInterval) {
+            requireNonNull(timeInterval);
+            return this.group.hasTime(timeInterval);
         }
 
         /**
-         * Removes person from group.
+         * Adds remarks to a group.
          *
-         * @param personName String representing person name.
-         * @param groupName  String representing group name.
-         * @return Pair containing the Person and the Group.
-         * @throws CommandException if the person cannot be removed from the group.
+         * @param groupName Group to be modified.
+         * @param groupRemark Remark to be added.
+         * @return The modified group.
+         * @throws CommandException if the remark cannot be added.
          */
-        @Override
-        public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
-            Person person = this.person;
+        public Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException {
             Group group = this.group;
-            this.unassignGroup(person, group);
-            Pair<Person, Group> output = new Pair<>(person, group);
-            return output;
-        }
-    }
-
-    /**
-     * A Model stub that contains a single person in a group.
-     */
-    private class ModelStubWithEmptyGroup extends ModelStub {
-        private final Group group;
-        private final Person person;
-
-        ModelStubWithEmptyGroup(Group group, Person person) {
-            requireAllNonNull(group, person);
-            this.group = group;
-            this.person = person;
-        }
-
-        public boolean hasGroup(Group group) {
-            requireNonNull(group);
-            return this.group.equals(group);
-        }
-
-        /**
-         * Unassigns person to group.
-         *
-         * @param person Person to be grouped.
-         * @param group  Group in consideration.
-         * @throws CommandException if person has already been assigned to group.
-         */
-        private void unassignGroup(Person person, Group group) throws CommandException {
-            group.removePerson(person);
-            person.removeGroup(group);
-        }
-
-        /**
-         * Removes person from group.
-         *
-         * @param personName String representing person name.
-         * @param groupName  String representing group name.
-         * @return Pair containing the Person and the Group.
-         * @throws CommandException if the person cannot be removed from the group.
-         */
-        @Override
-        public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
-            Person person = this.person;
-            Group group = this.group;
-            this.unassignGroup(person, group);
-            Pair<Person, Group> output = new Pair<>(person, group);
-            return output;
+            group.setGroupRemark(groupRemark);
+            return group;
         }
     }
 }
