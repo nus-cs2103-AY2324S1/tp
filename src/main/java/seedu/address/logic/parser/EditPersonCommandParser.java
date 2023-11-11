@@ -27,7 +27,7 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
         return new EditPersonCommand(index, person);
     }
     public static String getUsageInfo() {
-        return "\nUsage: edit <Index> (at least one of -[name|phone|email|address|subject|tag|remark] [value]). "
+        return "\nUsage: edit [INDEX] (at least one of unique -[name|phone|email|address|subject|tag|remark VALUE]). "
                 + "\nFor example, edit 1 -name John -phone 91234567"
                 + "\nIf you want to edit the currently shown person, you could omit the index. "
                 + "\nNote your edited 'name' must not already in the address book.";
