@@ -46,7 +46,7 @@ public class InterviewDateTime {
      * Returns true if a given string is a valid interview date time.
      */
     public static boolean isValidInterviewDateTime(String test) {
-        if (isEmptyInterviewDateTime(test)) {
+        if (test.equals(TO_ADD_INTERVIEW_DATE_TIME)) {
             return true;
         }
         try {

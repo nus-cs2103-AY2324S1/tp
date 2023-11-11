@@ -90,7 +90,7 @@ public class ParserUtil {
      */
     private static String formatDeadline(String deadline) {
         String[] stringSplit = deadline.split(" ");
-        if (stringSplit.length >= 3) {
+        if (stringSplit.length == 4) {
             String month = stringSplit[0];
             month = month.substring(0, 1).toUpperCase() + month.substring(1).toLowerCase();
             stringSplit[0] = month;
