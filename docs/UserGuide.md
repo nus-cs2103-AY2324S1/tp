@@ -266,14 +266,6 @@ The member at the specified index will have his/her specified field(s) edited.
 `editmember MEMBER_INDEX [/name MEMBER_NAME] [/phone PHONE_NUMBER] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...`
 The alias for this command is `editm`.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
-When editing a member's tag, the new tag(s) will replace any old existing tag(s). 
-If you want to add a new tag to a member, you will have to include **both** the old tag(s)
-and the new tag in the `/tag` field of the command.
-
-This also means that to clear a member's tags, you can simply type `editm /tag`.
-</div>
-
 <div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
@@ -290,6 +282,19 @@ Even though all the fields are optional, **at least one field** has to be specif
   Minimum of 5 and maximum of 32 characters are allowed.
   <br/>
 * `TAG`: Only alphanumeric characters are allowed. Minimum of 1 and maximum of 15 characters are allowed. Spaces are not allowed.
+
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+
+* When editing a member's tag, the new tag(s) will replace any old existing tag(s).
+  If you want to add a new tag to a member, you will have to include **both** the old tag(s)
+  and the new tag in the `/tag` field of the command.
+  <br/>
+    * This also means that to clear a member's tags, you can simply type `editm /tag`.
+      <br/>
+* You will not be allowed to edit a member's `PHONE_NUMBER` to a `PHONE_NUMBER` that is registered under a different member.
+  The `PHONE_NUMBER` will have to be **unique**, or it will be flagged by the system as a duplicate member.
 
 </div>
 
@@ -560,6 +565,13 @@ Even though all the fields are optional, **at least one field** has to be specif
   <br/>
 * `INTERVIEW_TIME`: Only dates in the format of “DD/MM/YYYY HHmm” are allowed. To remove an interview time from an
   applicant, ‘cancel’ is also allowed.
+
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+
+You will not be allowed to edit a member's `PHONE_NUMBER` to a `PHONE_NUMBER` that is registered under a different member.
+The `PHONE_NUMBER` will have to be **unique**, or it will be flagged by the system as a duplicate member.
 
 </div>
 
