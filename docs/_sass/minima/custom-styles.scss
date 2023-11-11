@@ -32,6 +32,16 @@ h2, h3, h4, h5, h6 {
   }
 }
 
+.command-separator {
+    border-top: 1px solid #AAA;
+    margin: 20px 0;
+}
+
+.feature-class-separator {
+    border-top: 1px solid #000;
+    margin: 30px 0;
+}
+
 .tg  {
     border-collapse:collapse;
     border-spacing:0;
