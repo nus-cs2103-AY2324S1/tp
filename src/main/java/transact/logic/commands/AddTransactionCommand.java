@@ -77,7 +77,6 @@ public class AddTransactionCommand extends Command {
         }
 
         Transaction newTransaction = new Transaction(transactionType, description, amount, date, staffId);
-        System.out.println(newTransaction);
         model.addTransaction(newTransaction);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newTransaction)),
