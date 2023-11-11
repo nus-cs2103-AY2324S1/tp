@@ -87,6 +87,7 @@ how to use them. Invalid inputs are just one of many examples of invalid inputs.
 | TAG        | t/     | Alphanumerical values.                                                                           | CS2100                                                    | !factorials   |
 | HINT       | h/     | Alphanumerical values, whitespace and certain special characters, i.e. !@#$%^&*(),./?";:{}[]-=_+ | 1 + 1                                                     | 💡            |
 | DIFFICULTY | d/     | Only "easy", "medium" or "hard".                                                                 | easy                                                      | difficult     |
+| INDEX      | NA     | Positive integer less than size of deck.                                                         | 1                                                         | 0             |
 
 ### Command Format
 
@@ -190,14 +191,10 @@ delete INDEX
 
 **Examples:**
 
-_Deleting the card in th deck with an index of 2._
+_Deleting the card in the deck with an index of 2._
 ```
 delete 2
 ```
-
-#### To Note:
-1. Index must be positive integer.
-2. Index cannot exceed size of the deck.
 
 #### Expected Outputs:
 1. User Input: 
@@ -224,11 +221,11 @@ _List full deck of flashcards._
 ```
 list
 ```
-_List all flashcards with question starting with "What"_
+_List all flashcards with question starting with "What"._
 ```
 list q/What
 ```
-_List all flashcards with the CS2100 Tag_
+_List all flashcards with the CS2100 Tag._
 ```
 list t/CS2100
 ```
@@ -259,19 +256,19 @@ edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG...] [h/HINT]
 ```
 
 **Examples:**
-_Change the question at index 1 to “What is the colour of the sun?”_
+_Change the question at index 1 to "What is the colour of the sun?"._
 ```
 edit 1 q/What is the colour of the sun?
 ```
-_Change the answer at index 1 to “Red”_
+_Change the answer at index 1 to "Red"._
 ```
 edit 1 a/Red
 ```
-_Change the tag at index 1 to “Weather” and "Geography"_
+_Change the tag at index 1 to "Weather" and "Geography"._
 ```
 edit 1 t/Weather t/Geogaphy
 ```
-_Change the hint at index 1 to “Apple"_
+_Change the hint at index 1 to "Apple"._
 ```
 edit 1 h/Apple
 ```
@@ -297,32 +294,26 @@ edit 1 h/Apple
 ### Practise Flashcards: `practise`
 Practise a single Flashcard in the deck
 
-Format: `practise INDEX`
-
-#### Acceptable values for each parameters:
-1. Index must be positive integer
-2. Index cannot exceed size of the deck
+Format: `practise [INDEX]`
 
 #### Examples:
+_Practising the card in the deck with an index of 2._
 ```
-practise 1
-(showcases the question at index 1)
+practise 2
 ```
+
+#### To Note:
+1. If user omits INDEX in the command input, the first card in the deck will be practised.
+
 #### Expected outputs:
-```
-practise 1
-"Practising question 1 : <provided question>"
-
-practise 10
-"The card index provided is invalid"
-```
-
-#### Usage:
 1. User Input
-   ![usage of practise command](./images/UserGuide/1.3b_practise.png)
-
+   ```
+   add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS
+   practise
+   ```
 2. Successful Output
-   ![result of practise command](./images/UserGuide/1.3b_practise_ans.png)
+   1. Result box displays: `Practising Question 1: opcode for R format instructions`
+   ![result of practise command](./images/UserGuide/1.4_practise.png)
 
 ### Hints for Flashcards: `hint`
 See the hint for a question at the given index
