@@ -54,9 +54,6 @@ public class ListCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_LESSONS);
         model.updateFullTaskList();
-        model.showPerson(null);
-        model.showLesson(null);
-        model.showTask(null);
         if (model.sameState(state)) {
             return new CommandResult(MESSAGE_SUCCESS + " " + state.toString(), displayParams);
         } else {
