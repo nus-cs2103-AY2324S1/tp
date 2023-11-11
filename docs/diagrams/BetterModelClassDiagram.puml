@@ -17,7 +17,7 @@ Card -up-> "*" Tag
 Card *--> "1"  Question
 Card *--> "1"   Answer
 Card *--> "1"   Hint
-Card -up-> "2" PractiseDate
+Card -up-> "2" PracticeDate
 Card *--> "1"  Difficulty
 Card *--> "1"  SolveCount
 

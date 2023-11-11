@@ -172,6 +172,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 Below is an example of the object diagram of how the cards are stored in the `Deck` class
+
 <img src="images/DeckObjectDiagram.png" width="600" />
 
 

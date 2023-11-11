@@ -18,7 +18,7 @@ Class Question
 Class Answer
 Class Hint
 Class Tag
-Class PractiseDate
+Class PracticeDate
 Class Difficulty
 Class SolveCount
 
@@ -43,7 +43,7 @@ Card *--> "1" Answer
 Card *--> "1" Hint
 Card *--> "1" Question
 Card *--> "*" Tag
-Card *--> "2" PractiseDate
+Card *--> "2" PracticeDate
 Card *--> "1" Difficulty
 Card *--> "1" SolveCount
 
