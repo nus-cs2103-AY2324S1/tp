@@ -490,6 +490,25 @@ as they will then have to execute the `viewMember` command again to see their ch
 We propose to change the behaviour of `undo` and `redo` such that executing them will no longer list all members and events,
 and instead remain on the user's current view.
 
+### Provide specific error messages for unknown prefixes
+**Current Implementation:**
+* **Current Issue:** Many of the commands require the use of prefixes in the input, such as `n/`, `g/`, `p/`, etc.
+However, upon inputting an erroneous unknown prefix in the command input, the error message shown to the user is not accurate.
+The error message displayed will be based on the error message of the preceding prefix.
+* **Example**: The user inputs the command `createMember n/Jane Smith g/Female q/test` but the error message displayed
+will not highlight that the unknown `q/` prefix was typed in. The error message displayed to the user will be "Gender 
+should only be one of the following: Male, Female, or Others" which is based off the standard error message
+for gender prefixes, which happens to be the prefix preceding the `q/` prefix.
+
+**Proposed Solution:**
+
+We propose to display a more specific error message to the users if they input unknown prefixes. For example, if the user 
+provides the command, `createMember n/Jane Smith g/Female q/test`, an error message along the lines of "The 
+q/ prefix is not a correct prefix for this command." will be displayed. This will involve us improving the relevant 
+`CommandParser` classes to properly sieve out cases of unknown prefixes being entered and throwing more
+specific exceptions related to such issues.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
