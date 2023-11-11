@@ -78,6 +78,19 @@ used for easy navigation.
 **Formatting and Icons**: Throughout the guide, we use bold text and colors to emphasize key points and important terms.
 Icons are used to draw your attention to noteworthy tips and additional information.
 
+[//]: # (Table inspired by NUSCoursemates https://ay2324s1-cs2103t-t17-4.github.io/tp/UserGuide.html)
+Here are some symbols you might encounter in our guide, and their respective meanings:
+| Symbol               | Meaning                                                                                        |
+|----------------------|------------------------------------------------------------------------------------------------|
+| :information_source: | Note. Provides additional information.                                                         |
+| :bulb:               | Tip. Information that might better your experience.                                                 |
+| :exclamation:        | Warning. Cautionary statement to prevent you from undesirable consequences. |
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* These symbols (:information_source: :bulb: :exclamation:) will be encapsulated in a box as such.
+</div>
+
 Click [here](#table-of-contents) to go back to contents.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -184,10 +197,18 @@ When you enter the command (Hi):
 - In this example, the index of John is 7. So type, `delete 7`.
   ![DeletedPersonFromListExample](images/UG_images/DeletedPersonFromListExample.png)
 
-> **NOTE:** You cannot delete a developer who is **team leader** for any of the teams. Inorder, delete that developer
-you need to change the team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
+<div markdown="block" class="alert alert-primary">
 
-> **WARNING:** Deleting a developer who is not a team leader will remove that developer from all the teams. 
+**:information_source: Note:**<br>
+* You cannot delete a developer who is **team leader** for any of the teams. Inorder, delete that developer
+  you need to change the team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
+</div>
+
+<div markdown="block" class="alert alert-danger">
+
+**:exclamation: Warning:**<br>
+* Deleting a developer who is not a team leader will remove that developer from all the teams.
+</div>
 
 ### Edit developer
 #### What this command does:
@@ -196,11 +217,15 @@ you need to change the team leader using `editTeamLeader` command. Only then you
   - Example: `edit 1 n/John Wick e/new.email@example.com`
   - Result: The person of index `1` now has a new name `John Wick` and a new
   email address `new.email@example.com`.
-  - Note: You **do not need to provide** the arguments that you do not want to edit. In the
-  given example above, I only want to edit this person's name and email address and nothing else,
-  so I only provided this person's index `1`, new name `n/John Wick` 
-  and new email address `e/new.email@example.com`.
 
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* You **do not need to provide** the arguments that you do not want to edit. In the
+  given example above, I only want to edit this person's name and email address and nothing else,
+  so I only provided this person's index `1`, new name `n/John Wick`
+  and new email address `e/new.email@example.com`.
+</div>
 
 ### Find developer
 #### What this command does:
@@ -212,9 +237,11 @@ you need to change the team leader using `editTeamLeader` command. Only then you
  - Only the name is searched.
  - Only full words will be matched e.g. Han will not match Hans
  - Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang
+<div markdown="block" class="alert alert-primary">
 
-##### Note:
-The find command is designed to show only a list of developers. If you wish to view the team list again, you should use the `listt` command. To display the complete list of developers, use the `list` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
+**:information_source: Note:**<br>
+* The find command is designed to show only a list of developers. If you wish to view the team list again, you should use the `listt` command. To display the complete list of developers, use the `list` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
+</div>
    
 ##### Examples:
 
@@ -224,8 +251,12 @@ The find command is designed to show only a list of developers. If you wish to v
 ### List developers
 #### What this command does:
 * Show only the list of all developers in the project.
-* Note: Any additional words provided after the command will be ignored.
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* Any additional words provided after the command will be ignored.
   (e.g. entering `list help delete 1 HAHAHA-1234` is equivalent to entering `list`)
+</div>
 
 #### Command format:
 * `list`
@@ -233,13 +264,16 @@ The find command is designed to show only a list of developers. If you wish to v
 * `list` (and an example result is shown below)
   ![ListCommandExample](images/UG_images/ListCommandExample.png)
 
-### To return to the home page
-* Use the same command `list`
-* You will return to the home page.
+<div markdown="block" class="alert alert-warning">
 
-**Example usage**: When you are at the main window, type `list` to show the developer list
+**:bulb: Tips:**<br><br>
+**To return to the home page again**: <br>
+Use the same command `list`. You will return to the home page.
+
+**Example usage**: <br>
+When you are at the main window, type `list` to show the developer list
 and type `list` again when you want to go back to the main window.
-
+</div>
 
 ## Managing Teams
 
@@ -284,8 +318,12 @@ and type `list` again when you want to go back to the main window.
 **Roy Balakrishnan** will be removed from **Team Alpha**.
   ![AfterDeleteDevFromTeam](images/UG_images/AfterDeleteDevFromTeam.png)
 
-> **NOTE:** You cannot delete a developer who is **team leader**. Inorder, delete that developer you need to change the
-team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* You cannot delete a developer who is **team leader**. Inorder, delete that developer you need to change the
+  team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
+</div>
 
 ### Edit team name
 * To edit team name:
@@ -311,8 +349,12 @@ team leader using `editTeamLeader` command. Only then you can remove that develo
 - Only full words will be matched. e.g., "Alph" will not match "Alpha Team."
 - Teams matching at least one keyword will be returned (i.e., OR search). e.g., "Alpha Bravo" will return "Team Alpha," "Bravo Team."
 
-##### Note:
-The find command is designed to show only a list of teams. If you wish to view the developer list again, you should use the `list` command. To display the complete list of teams, use the `listt` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* The find command is designed to show only a list of teams. If you wish to view the developer list again, you should use the `list` command. To display the complete list of teams, use the `listt` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
+
+</div>
 
 ##### Examples:
 - `findteam Alpha` returns "Team Alpha" and "Alpha Squad."
@@ -324,8 +366,13 @@ The find command is designed to show only a list of teams. If you wish to view t
 ### List teams
 #### What this command does:
 * Show only the list of all existing teams in the project.
-* Note: Any additional words provided after the command will be ignored.
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* Any additional words provided after the command will be ignored.
   (e.g. entering `listt help delete 1 HAHAHA-1234` is equivalent to entering `listt`)
+</div>
 
 #### Command format:
 * `listt`
@@ -333,60 +380,71 @@ The find command is designed to show only a list of teams. If you wish to view t
 * `listt` (and an example result is shown below)
   ![ListTeamCommandExample](images/UG_images/ListTeamCommandExample.png)
 
-  
-### To return to the home page
-* Use the same command `listt`
-* You will return to the home page.
+<div markdown="block" class="alert alert-warning">
 
+**:bulb: Tips:**<br><br>
+**To return to the home page again**: <br>
+Use the same command `listt`. You will return to the home page.
 
-**Example usage**: When you are at the main window, type `listt` to show the team list
+**Example usage**: <br>
+When you are at the main window, type `listt` to show the team list
 and type `listt` again when you want to go back to the main window.
-
+</div>
 
 
 ### Display tree
 #### What this command does:
 * Provides a tree visualisation of all the teams and members in the project.
-* Note: 
-  - Any additional words provided after the command will be ignored.
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* Any additional words provided after the command will be ignored.
   (e.g. entering `tree list delete 1 HAHAHA-1234` is equivalent to entering `tree`)
-  - The project name **cannot be edited** because our application is designed to hold
-the contact information of all the developers in **one** software engineering project,
-the naming of this project is not important since there is only one project, and
-we do not need names to differentiate between different projects.
-  - The content in the tree **will not be updated in real time** because that requires
-too much computer resources. Instead, the tree is **updated every time you show it**.
-So, when you have some changes to the data, you should **hide the tree first if it is
-shown**, and call command `tree` again to show the tree. Then your changes will be 
-reflected in the new tree. With that being said, if you enter command `tree` to
-show LinkTree and make some changes to the data, your changes will not be reflected
-in the current tree. You should hide the tree first and then call `tree` again to
-obtain a new tree which will reflect the changes you made.
-  - Team names and team leaders' names may not be shown fully if they are too long.
-You can refer back to the team list for their full names.
+* The project name **cannot be edited** because our application is designed to hold
+    the contact information of all the developers in **one** software engineering project,
+    the naming of this project is not important since there is only one project, and
+    we do not need names to differentiate between different projects.
+* The content in the tree **will not be updated in real time** because that requires
+    too much computer resources. Instead, the tree is **updated every time you show it**.
+    So, when you have some changes to the data, you should **hide the tree first if it is
+    shown**, and call command `tree` again to show the tree. Then your changes will be
+    reflected in the new tree. With that being said, if you enter command `tree` to
+    show LinkTree and make some changes to the data, your changes will not be reflected
+    in the current tree. You should hide the tree first and then call `tree` again to
+    obtain a new tree which will reflect the changes you made.
+* Team names and team leaders' names may not be shown fully if they are too long.
+    You can refer back to the team list for their full names.
+</div>
+
 ### Command format: 
 * `tree`
 #### Example usage: 
 * `tree` (and an example result is shown below)
 ![TreeResultExample](images/UG_images/TreeResultExample.png)
 
-  
+<div markdown="block" class="alert alert-warning">
 
-### To hide the tree
-  * Use the same command `tree`
-  * You will return to the home page.
+**:bulb: Tips:**<br><br>
+**To hide the tree**: <br>
+Use the same command `tree`. You will return to the home page.
 
-
-**Example usage**: When you are at the main window, type `tree` to show the tree graph
+**Example usage**: <br>
+When you are at the main window, type `tree` to show the tree graph
 and type `tree` again when you want to hide the tree and go back to the main window.
+</div>
 
 
 ### Help
 #### What this command does:
 * Opens up a window which shows the link to this User Guide, which also comes with a button allowing copying the link;
 * Display a summary of all commands of LinkTree, specifying the parameters needed.
-* Note: Any additional words provided after the command will be ignored.
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* Any additional words provided after the command will be ignored.
   (e.g. entering `help list delete 1 HAHAHA-1234` is equivalent to entering `help`)
+</div>
 
 #### Command format:
 * `help`
@@ -409,6 +467,11 @@ This command can be used when you want to restart the project.
 #### Example usage:
 * `clear` (and you will see an empty list of developers and teams)
   ![ClearCommand](images/UG_images/ClearCommand.png)
+<div markdown="block" class="alert alert-danger">
+
+**:exclamation: Warning:**<br>
+* Using the clear command might result in unintended loss of data! Use it only when you intend to remove all of your data!
+</div>
 
 ### Exit the application
 #### What this command does:
