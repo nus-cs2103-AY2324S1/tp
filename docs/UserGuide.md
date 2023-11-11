@@ -66,16 +66,18 @@ This user guide is your key to mastering **Class Manager 2023**, with step-by-st
 
 # GUI Overview
 
-The image below shows an annotated overview of **Class Manager 2023's** GUI:
+The blurred image below shows an annotated overview of **Class Manager 2023's** GUI:
 
-<img alt="Gui" src="images/GUI-overview.png" width="700"> </br>
+<img alt="Gui" src="images/GUI-overview-blur.png" width="700"> </br>
 
-The **GUI** is split up into 4 main sections.
+The **GUI** has 6 notable sections:
 
 1. **Command Box** - This is where you can type in commands to execute.
 2. **Result Display** - This is where the results of the commands and any errors will be displayed.
-3. **Student List** - This is where the list of students will be displayed.
+3. **Data Visualisation** - This is where the average grades, attendance and class participation percentages of a student will be displayed.
 4. **Class Information** - This is where the class information of the selected student, such as attendance, class participation and assignment grades, will be displayed.
+5. **Student List** - This is where the list of students will be displayed.
+6. **Current File** - This is where the current file path of the loaded data file will be displayed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -122,6 +124,10 @@ The **GUI** is split up into 4 main sections.
 Student Number refers to the unique matriculation number of a NUS student. In **Class Manager 2023**, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
 
 **Class Manager 2023** uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
+
+## Data visualiation
+
+TODO: Ngee Yong to add details of what each bar graph shows (average grades, attendance and class participation percentages of a student).
 
 ## Command navigation
 

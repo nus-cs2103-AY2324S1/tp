@@ -888,4 +888,6 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, currently `add` is case-sensitive. We will accept keywords such as `Add` in the future iteration.
+1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, currently `add` is case-sensitive. We will accept keywords such as `Add` in the future.
+2. Class Numbers are currently limited to tutorials that begin with T. We plan to allow Class Numbers to be any alphanumeric string in the future.
+3. Clicking on a student in the student list will highlight the student. We plan to prevent this in the future as it affects the visibility of the student's contact details and visualised graphs.
