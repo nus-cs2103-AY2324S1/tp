@@ -33,16 +33,16 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 1. Ensure you have Java 11 or above installed in your Computer. You can check by opening a command terminal and typing `java -version`.
 
-1. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases).
+2. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TutorMate.
+3. Copy the file to the folder you want to use as the _home folder_ for your TutorMate.
 
-1. Open a command terminal, navigate into the folder you put the jar file in using the change directory command `cd`, and use the `java -jar tutormate.jar` command to run the application.<br>
+4. Open a command terminal, navigate into the folder you put the jar file in using the change directory command `cd`, and use the `java -jar tutormate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/about.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list students` : Lists all students with their name.
@@ -55,9 +55,9 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
-2. Refer to the [Command Summary](#command-summary) below for the summary of all commands.
-2. Refer to the [Glossary](#glossary) below for definitions of glossary terms.
+6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Command Summary](#command-summary) below for the summary of all commands.
+8. Refer to the [Glossary](#glossary) below for definitions of glossary terms.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -278,6 +278,8 @@ The lesson index provided is invalid
 <br>
 
 ### Adding of entries (Students, Lessons, Tasks)
+
+Adds a student/lesson/task to the students/schedule list of the application or the task list of a lesson in the application.
 
 #### For Student:
 
@@ -1203,7 +1205,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 **A**: Copy TutorMate's jar file into the folder you want to use as the home folder in the other computer. Before running the application, copy _addressbook.json_, _personLessonMap.json_ and _schedulelist.json_ files from the home folder in your current computer into the home folder of the other computer. After copying the 3 files, running the application will show the same data. However, do note that the changes made through the application in one computer will not be reflected in the data in another computer.
 
 **Q**: Can I edit the data in the application through the _addressbook.json, personLessonMap.json, schedulelist.json_ files directly? <br>
-**A**: Yes, it is possible. However, it is not advisable for you to do so as if the changes made to the data file makes its format invalid, TutorMate will discard all data and start with an empty data file at the next run. Please use the `edit` command to make changes to your data instead.
+**A**: Yes, it is possible. However, it is not advisable for you to do so as if the changes made to the data file makes its format invalid, TutorMate will discard all data. Read more about editing the storage files [here](#editing-the-data-file). Please use the `edit` command to make changes to your data instead.
 
 **Q**: Can I still use the application without internet connection? <br>
 **A**: Yes, you can. TutorMate is an offline desktop application.
