@@ -1,3 +1,4 @@
+//@@author AlyssaPng
 package seedu.address.model.person.gatheremail;
 
 import seedu.address.model.person.Person;
@@ -15,9 +16,11 @@ public class GatherEmailByTag implements GatherEmailPrompt {
     public GatherEmailByTag(String promptTag) {
         this.promptTag = promptTag;
     }
+
     /**
      * Gathers the email of {@code person} if {@code person}'s tag names matches a specific prompt.
      */
+
     @Override
     public String gatherEmails(Person person) {
         return person.gatherEmailsContainsTag(promptTag);
@@ -36,6 +39,9 @@ public class GatherEmailByTag implements GatherEmailPrompt {
         return promptTag.equals(otherGatherCommand.promptTag);
     }
 
+    /**
+     * Returns the String representation of GatherEmailByTag Object.
+     */
     @Override
     public String toString() {
         return "Tag: " + promptTag;

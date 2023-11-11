@@ -113,7 +113,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         return emails.toString().trim();
-    };
+    }
 
     /**
      * Clears all appointments of {@code Person} in {@code persons} that match the given {@code LocalDate date}.

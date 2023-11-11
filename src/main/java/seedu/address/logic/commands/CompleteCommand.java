@@ -12,7 +12,7 @@ public abstract class CompleteCommand extends Command {
 
     public static final String COMMAND_WORD = "complete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Completes an appointment identified by "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Completes an appointment identified "
             + "by the index number used in the displayed person list or "
             + "by a specified date\n"
             + "Parameters: [INDEX(must be a positive integer)] "

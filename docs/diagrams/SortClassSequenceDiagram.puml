@@ -30,14 +30,14 @@ create SortCommand
 SortCommandParser -> SortCommand: SortCommand(new SortByAppointmentComparator)
 activate SortCommand
 
-SortCommand --> SortByAppointmentComparator
+SortCommand -> SortByAppointmentComparator
 activate SortByAppointmentComparator
 SortByAppointmentComparator --> SortCommand
 deactivate SortByAppointmentComparator
 
-SortCommand --> Model: Model.sortFilteredPersonList(comparator)
+SortCommand -> Model: Model.sortFilteredPersonList(comparator)
 activate Model
-Model --> Person: setComparator
+Model -> Person: setComparator
 activate Person
 Person --> Model
 deactivate Person
@@ -52,7 +52,7 @@ SortCommandParser --> AddressBookParser
 deactivate SortCommandParser
 AddressBookParser --> LogicManager
 deactivate AddressBookParser
-[<- LogicManager
+[<-- LogicManager
 deactivate LogicManager
 
 

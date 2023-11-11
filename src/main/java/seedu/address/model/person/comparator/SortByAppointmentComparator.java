@@ -1,8 +1,9 @@
-package seedu.address.model.person;
+package seedu.address.model.person.comparator;
 
 import java.util.Comparator;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Compares a {@code Person}'s {@code Appointment} to another {@code Person}'s {@code Appointment} to determine

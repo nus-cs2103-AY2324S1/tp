@@ -1,16 +1,22 @@
 package seedu.address.storage;
 
+import java.util.logging.Logger;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import seedu.address.MainApp;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.financialplan.FinancialPlan;
+
 
 /**
  * Jackson-friendly version of {@link FinancialPlan}.
  */
 public class JsonAdaptedFinancialPlan {
 
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     private final String financialPlanName;
 
     /**
@@ -40,6 +46,7 @@ public class JsonAdaptedFinancialPlan {
      */
     public FinancialPlan toModelType() throws IllegalValueException {
         if (!FinancialPlan.isValidFinancialPlanName(financialPlanName)) {
+            logger.warning("Invalid Financial Plan Name: " + financialPlanName);
             throw new IllegalValueException(FinancialPlan.MESSAGE_CONSTRAINTS);
         }
         return new FinancialPlan(financialPlanName);

@@ -38,7 +38,6 @@ public class MainApp extends Application {
 
     public static final Version VERSION = new Version(1, 3, 0, false);
 
-
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
@@ -89,9 +88,21 @@ public class MainApp extends Application {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            this.saveEmptyAddressBook(initialData);
         }
 
         return new ModelManager(initialData, userPrefs);
+    }
+
+    /**
+     * Wipes corrupted data in addressbook.json when starting the application with corrupted data.
+     */
+    private void saveEmptyAddressBook(ReadOnlyAddressBook initialData) {
+        try {
+            storage.saveAddressBook(initialData);
+        } catch (IOException e) {
+            logger.warning("Failed to locate filepath.");
+        }
     }
 
     private void initLogging(Config config) {
