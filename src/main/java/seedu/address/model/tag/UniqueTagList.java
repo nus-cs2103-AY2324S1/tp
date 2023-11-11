@@ -1,17 +1,12 @@
 package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
@@ -19,7 +14,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
  * Represents a list of unique tags. This class provides methods to manage a collection of tags,
  * ensuring that no duplicate tags are allowed in the list.
  */
-public class UniqueTagList implements Iterable<Tag> {
+public class UniqueTagList {
 
     private static final ObservableList<Tag> internalList = FXCollections.observableArrayList();
     private final ObservableList<Tag> internalUnmodifiableList =
@@ -37,12 +32,28 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
+     * Checks if the list contains a tag with the specified category.
+     *
+     * @param categoryToCheck The category to check for in the list. Must not be null.
+     * @return True if a tag with the specified category is found in the list, false otherwise.
+     */
+    public boolean containsTagCategory(String categoryToCheck) {
+        requireNonNull(categoryToCheck);
+        for (Tag tag : internalList) {
+            if (tag.tagCategory.equals(categoryToCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Checks if the list contains a tag with the specified name.
      *
-     * @param nameToCheck The name to check for in the list. Must not be null.
+     * @param nameToCheck The category to check for in the list. Must not be null.
      * @return True if a tag with the specified name is found in the list, false otherwise.
      */
-    public boolean contains(String nameToCheck) {
+    public boolean containsTagName(String nameToCheck) {
         requireNonNull(nameToCheck);
         for (Tag tag : internalList) {
             if (tag.tagName.equals(nameToCheck)) {
@@ -51,6 +62,8 @@ public class UniqueTagList implements Iterable<Tag> {
         }
         return false;
     }
+
+
 
     /**
      * Adds a tag to the list.
@@ -74,86 +87,35 @@ public class UniqueTagList implements Iterable<Tag> {
      * @throws ParseException If the tag is not found in the list.
      */
     public Tag getTag(String tagName, String tagCategory) throws ParseException {
+
         Optional<Tag> foundTag = internalList.stream()
                 .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))
                 .findFirst();
 
-        if (foundTag.isPresent()) {
+        if (!tagCategory.isEmpty()) {
+            // tag category is specified
+            for (Tag tag : internalList) {
+                if (tag.tagName.equals(tagName) && tag.tagCategory.equals(tagCategory)) {
+                    return tag;
+                }
+            }
+            throw new ParseException("Tag category does not exist!");
+        } else if (foundTag.isPresent()) {
+            // tag category not specified
             long occurrence = internalList.stream()
                     .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))
                     .count();
+            // if tag occurs more than once in tag list
             if (occurrence > 1) {
                 throw new ParseException("Multiple tags exists with the same name! "
                         + "Specify the category of the tag when adding it to a person e.g. edit 1 t/experience 3");
             }
             return foundTag.get();
-        } else if (!tagCategory.isEmpty()) {
-            Tag newTag = new Tag(tagName, tagCategory);
-            add(newTag);
-            return newTag;
         }
-        return new Tag(tagName, "uncategorised");
-    }
-
-    /**
-     * Replaces a target tag with an edited tag.
-     *
-     * @param target The tag to be replaced.
-     * @param editedTag The edited tag to replace the target.
-     * @throws TagNotFoundException If the target tag is not found in the list.
-     * @throws DuplicateTagException If the edited tag is already present in the list.
-     */
-    public void setTag(Tag target, Tag editedTag) {
-        requireAllNonNull(target, editedTag);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new TagNotFoundException();
-        }
-
-        if (!target.equals(editedTag) && contains(editedTag)) {
-            throw new DuplicateTagException();
-        }
-
-        internalList.set(index, editedTag);
-    }
-
-    /**
-     * Removes a tag from the list.
-     *
-     * @param toRemove The tag to remove.
-     * @throws PersonNotFoundException If the tag to remove is not found in the list.
-     */
-    public void remove(Tag toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
-        }
-    }
-
-    /**
-     * Replaces the current list of tags with a new list.
-     *
-     * @param replacement The new list of tags to replace the current list.
-     */
-    public void setTags(UniqueTagList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
-    /**
-     * Sets the list of tags with a given list of tags.
-     *
-     * @param tags The list of tags to set.
-     * @throws DuplicatePersonException If the tags are not unique in the list.
-     */
-    public void setTags(List<Tag> tags) {
-        requireAllNonNull(tags);
-        if (!tagsAreUnique(tags)) {
-            throw new DuplicatePersonException();
-        }
-
-        internalList.setAll(tags);
+        // tag is uncategorised
+        Tag uncategorisedTag = new Tag(tagName, "uncategorised");
+        this.add(uncategorisedTag); // add uncategorised tag to unique tag list
+        return uncategorisedTag;
     }
 
     /**
@@ -165,9 +127,17 @@ public class UniqueTagList implements Iterable<Tag> {
         return internalUnmodifiableList;
     }
 
-    @Override
-    public Iterator<Tag> iterator() {
-        return internalList.iterator();
+    /**
+     * Removes a tag from the list.
+     *
+     * @param toRemove The tag to remove.
+     * @throws TagNotFoundException If the tag to remove is not found in the list.
+     */
+    public void remove(Tag toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new TagNotFoundException();
+        }
     }
 
     @Override
@@ -182,26 +152,5 @@ public class UniqueTagList implements Iterable<Tag> {
 
         UniqueTagList otherUniqueTagList = (UniqueTagList) other;
         return internalList.equals(otherUniqueTagList.internalList);
-    }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return internalList.toString();
-    }
-
-    private boolean tagsAreUnique(List<Tag> tags) {
-        for (int i = 0; i < tags.size() - 1; i++) {
-            for (int j = i + 1; j < tags.size(); j++) {
-                if (tags.get(i).equals(tags.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }
