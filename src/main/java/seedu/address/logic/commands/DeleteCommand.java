@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -50,7 +49,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        assert model != null : "Model cannot be null.";
         List<Booking> lastShownList = model.getFilteredBookingList();
         List<Booking> deleteList = new ArrayList<>();
         List<Integer> invalidIndices = new ArrayList<>(); // To keep track of invalid indices

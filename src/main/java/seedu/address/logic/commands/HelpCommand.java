@@ -22,6 +22,7 @@ public class HelpCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) {
+        assert model != null;
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false, true);
     }
 }

@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -29,7 +27,8 @@ public class CommandResult {
      * @param showRoomStatistics Whether room statistics should be displayed.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showRoomStatistics) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
+        assert feedbackToUser != null : "Feedback to user cannot be empty.";
+        this.feedbackToUser = feedbackToUser;
         this.showHelp = showHelp;
         this.exit = exit;
         this.showRoomStatistics = showRoomStatistics;

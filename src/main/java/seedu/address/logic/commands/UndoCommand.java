@@ -18,6 +18,7 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert model != null;
         List<Booking> lastDeletion = model.undoDeletion();
 
         if (lastDeletion.isEmpty()) {
