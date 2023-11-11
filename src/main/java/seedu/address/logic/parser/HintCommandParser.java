@@ -18,8 +18,6 @@ public class HintCommandParser implements Parser<HintCommand> {
      */
     public HintCommand parse(String args) throws ParseException {
         assert args != null : "Command is empty";
-        String argsToCheck = args.trim();
-        
 
         try {
             Index index = ParserUtil.parseIndex(args);
