@@ -3,10 +3,13 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.TimeBuilder;
 import seedu.address.testutil.TypicalTimeIntervals;
 
@@ -20,68 +23,68 @@ public class TimeIntervalTest {
     @Test
     public void isTimeIntervalOverlap_noOverlaps_returnFalse() {
         ArrayList<TimeInterval> timeIntervalArrayList = new ArrayList<>();
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalOneNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalTwoNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalThreeNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFourNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFiveNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalSixNoOverlap);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_ONE_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_TWO_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_THREE_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FOUR_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FIVE_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_SIX_NO_OVERLAP);
         assertFalse(TimeInterval.isTimeIntervalOverlap(timeIntervalArrayList));
     }
 
     //all time interval overlaps
     @Test
-    public void isTimeIntervalOverlap_OverlapsA_returnTrue() {
+    public void isTimeIntervalOverlap_overlapsA_returnTrue() {
         ArrayList<TimeInterval> timeIntervalArrayList = new ArrayList<>();
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalOneOverlapA);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalTwoOverlapA);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalThreeOverlapA);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFourOverlapA);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFiveOverlapA);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_A);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_THREE_OVERLAP_A);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FOUR_OVERLAP_A);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FIVE_OVERLAP_A);
         assertTrue(TimeInterval.isTimeIntervalOverlap(timeIntervalArrayList));
     }
 
     @Test
-    public void isTimeIntervalOverlap_OneOverlapsA_returnTrue() {
+    public void isTimeIntervalOverlap_oneOverlapsA_returnTrue() {
         ArrayList<TimeInterval> timeIntervalArrayList = new ArrayList<>();
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalOneOverlapA);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalThreeNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFourNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalTwoOverlapA);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFiveNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalSixNoOverlap);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_THREE_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FOUR_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_A);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FIVE_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_SIX_NO_OVERLAP);
         assertTrue(TimeInterval.isTimeIntervalOverlap(timeIntervalArrayList));
     }
 
     @Test
-    public void isTimeIntervalOverlap_EqualOverlapsA_returnTrue() {
+    public void isTimeIntervalOverlap_equalOverlapsA_returnTrue() {
         ArrayList<TimeInterval> timeIntervalArrayList = new ArrayList<>();
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalOneOverlapA);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFiveNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalSixNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalThreeOverlapA);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FIVE_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_SIX_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_THREE_OVERLAP_A);
         assertTrue(TimeInterval.isTimeIntervalOverlap(timeIntervalArrayList));
     }
 
     @Test
-    public void isTimeIntervalOverlap_InsideOutsideOverlapsB_returnTrue() {
+    public void isTimeIntervalOverlap_insideOutsideOverlapsB_returnTrue() {
         ArrayList<TimeInterval> timeIntervalArrayList = new ArrayList<>();
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalOneOverlapB);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFourNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFiveNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalTwoOverlapB);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalSixNoOverlap);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_B);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FOUR_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FIVE_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_B);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_SIX_NO_OVERLAP);
         assertTrue(TimeInterval.isTimeIntervalOverlap(timeIntervalArrayList));
     }
 
     @Test
-    public void isTimeIntervalOverlap_DiffDaysOverlapsC_returnTrue() {
+    public void isTimeIntervalOverlap_diffDaysOverlapsC_returnTrue() {
         ArrayList<TimeInterval> timeIntervalArrayList = new ArrayList<>();
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalOneOverlapC);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFourNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFiveNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalTwoOverlapC);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalSixNoOverlap);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_C);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FOUR_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FIVE_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_C);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_SIX_NO_OVERLAP);
         assertTrue(TimeInterval.isTimeIntervalOverlap(timeIntervalArrayList));
     }
 
@@ -117,43 +120,43 @@ public class TimeIntervalTest {
 
     @Test
     public void isValidTimeIntervalLogic_validInput_returnTrue() {
-        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(2,00)).build();
-        Time end =  new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(2,00)).build();
+        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(2, 0)).build();
+        Time end = new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(2, 0)).build();
         assertTrue(TimeInterval.isValidTimeIntervalLogic(start, end));
     }
 
     @Test
     public void isValidTimeIntervalLogic_validInputB_returnFalse() {
-        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.TUESDAY, LocalTime.of(23,59)).build();
-        Time end =  new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(00,00)).build();
+        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.TUESDAY, LocalTime.of(23, 59)).build();
+        Time end = new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(0, 0)).build();
         assertTrue(TimeInterval.isValidTimeIntervalLogic(start, end));
     }
 
     @Test
     public void isValidTimeIntervalLogic_inValidInputEqual_returnFalse() {
-        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(2,00)).build();
-        Time end =  new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(2,00)).build();
+        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(2, 0)).build();
+        Time end = new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(2, 0)).build();
         assertFalse(TimeInterval.isValidTimeIntervalLogic(start, end));
     }
 
     @Test
     public void isValidTimeIntervalLogic_inValidInputEndBeforeStart_returnFalse() {
-        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(12,00)).build();
-        Time end =  new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(2,00)).build();
+        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(12, 0)).build();
+        Time end = new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(2, 0)).build();
         assertFalse(TimeInterval.isValidTimeIntervalLogic(start, end));
     }
 
     @Test
     public void isValidTimeIntervalLogic_inValidInputEndBeforeStartA_returnFalse() {
-        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(12,00)).build();
-        Time end =  new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(11,59)).build();
+        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(12, 0)).build();
+        Time end = new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(11, 59)).build();
         assertFalse(TimeInterval.isValidTimeIntervalLogic(start, end));
     }
 
     @Test
     public void isValidTimeIntervalLogic_inValidInputEndBeforeStartB_returnFalse() {
-        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.SUNDAY, LocalTime.of(12,00)).build();
-        Time end =  new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(00,00)).build();
+        Time start = new TimeBuilder().withDayAndHour(DayOfWeek.SUNDAY, LocalTime.of(12, 0)).build();
+        Time end = new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(0, 0)).build();
         assertFalse(TimeInterval.isValidTimeIntervalLogic(start, end));
     }
 
