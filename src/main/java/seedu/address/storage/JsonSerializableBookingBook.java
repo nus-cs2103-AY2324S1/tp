@@ -14,30 +14,30 @@ import seedu.address.model.ReadOnlyBookingsBook;
 import seedu.address.model.booking.Booking;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable BookingBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+class JsonSerializableBookingBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedBooking> persons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableBookingBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableBookingBook(@JsonProperty("persons") List<JsonAdaptedBooking> persons) {
         this.persons.addAll(persons);
     }
 
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableBookingBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyBookingsBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+    public JsonSerializableBookingBook(ReadOnlyBookingsBook source) {
+        persons.addAll(source.getPersonList().stream().map(JsonAdaptedBooking::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,7 +47,7 @@ class JsonSerializableAddressBook {
      */
     public BookingsBook toModelType() throws IllegalValueException {
         BookingsBook addressBook = new BookingsBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
+        for (JsonAdaptedBooking jsonAdaptedPerson : persons) {
             Booking booking = jsonAdaptedPerson.toModelType();
             if (addressBook.hasBooking(booking)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);

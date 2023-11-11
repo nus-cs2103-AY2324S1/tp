@@ -15,7 +15,7 @@ import seedu.address.model.person.Phone;
 /**
  * Jackson-friendly version of {@link Booking}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedBooking {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Booking's %s field is missing!";
 
@@ -26,13 +26,13 @@ class JsonAdaptedPerson {
     private final String remark;
     private final String bookingPeriod;
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedBooking} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("room") String room, @JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("bookingPeriod") String bookingPeriod,
-                             @JsonProperty("remark") String remark) {
+    public JsonAdaptedBooking(@JsonProperty("room") String room, @JsonProperty("name") String name,
+                              @JsonProperty("phone") String phone,
+                              @JsonProperty("email") String email, @JsonProperty("bookingPeriod") String bookingPeriod,
+                              @JsonProperty("remark") String remark) {
         this.room = room;
         this.bookingPeriod = bookingPeriod;
         this.name = name;
@@ -44,7 +44,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Booking source) {
+    public JsonAdaptedBooking(Booking source) {
         room = String.valueOf(source.getRoom().getRoomNumber());
         bookingPeriod = source.getBookingPeriod().value;
         name = source.getName().fullName;
