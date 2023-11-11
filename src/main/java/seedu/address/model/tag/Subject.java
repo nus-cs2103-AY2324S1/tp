@@ -60,10 +60,7 @@ public class Subject {
      * @param subjectName A valid subject name.
      */
     public Subject(String subjectName) {
-        requireNonNull(subjectName);
-        checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
-        this.subjectName = subjectName;
-        this.enrolDate = new EnrolDate();
+        this(subjectName, new EnrolDate());
     }
 
     /**
@@ -74,7 +71,9 @@ public class Subject {
      */
     public Subject(String subjectName, EnrolDate enrolDate) {
         requireNonNull(subjectName);
-        this.subjectName = subjectName;
+        requireNonNull(enrolDate);
+        checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
+        this.subjectName = getCorrectedSubjectName(subjectName);
         this.enrolDate = enrolDate;
     }
 
@@ -107,6 +106,23 @@ public class Subject {
         }
 
         return subject != Subjects.INVALID;
+    }
+
+    /**
+     * This method is used to make the subjectNames for the same subject to be consistent.
+     * @param subjectName
+     * @return
+     */
+    private String getCorrectedSubjectName(String subjectName) {
+        checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
+        String[] subjectNames = new String[] {ENG, CHI, EMATH, AMATH, PHY, CHEMI, BIO, GEOG, HIST, SOC};
+
+        for (String s : subjectNames) {
+            if (subjectName.equalsIgnoreCase(s)) {
+                return s;
+            }
+        }
+        return null;
     }
 
     /**
