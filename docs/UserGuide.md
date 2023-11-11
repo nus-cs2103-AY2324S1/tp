@@ -191,7 +191,7 @@ The alias for this command is `addm`.
 
 <div markdown="block" class="alert alert-warning">:exclamation: **CAUTION:**
 
-* For a new member to be created, the `PHONE_NUMBER`, `EMAIL`, and `TELEGRAM_HANDLE` have to all be unique.
+* For a new member to be created, the `PHONE_NUMBER` has to be unique.
   Otherwise, the system will reject this as a duplicate member.
   <br/>
 * The last valid parameter found will treat all of the characters after it as its input.
@@ -277,6 +277,8 @@ This also means that to clear a member's tags, you can simply type `editm /tag`.
 <div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
+
+Even though all the fields are optional, **at least one field** has to be specified for the command to work.
 
 * `MEMBER_NAME`: Only alphabetical characters, spaces, @, (), /, are allowed. This field should not be blank.
   <br/>
@@ -547,6 +549,8 @@ The alias for this command is `edita`.
 <div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
+
+Even though all the fields are optional, **at least one field** has to be specified for the command to work.
 
 * `APPLICANT_INDEX`: Only positive integers are allowed. This will be based on the current **shown** list.
   <br/>
