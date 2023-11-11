@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BINDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MINDEX;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -40,6 +41,9 @@ public class AddMusicianToBandCommandParser implements Parser<AddMusicianToBandC
         List<Index> musicianIndices = new ArrayList<>();
         for (String indexString : argMultimap.getAllValues(PREFIX_MINDEX)) {
             musicianIndices.add(ParserUtil.parseIndex(indexString));
+        }
+        if (musicianIndices.size() > new HashSet<>(musicianIndices).size()) {
+            throw new ParseException(AddMusicianToBandCommand.MESSAGE_MUSICIAN_INDEX_REPEATED);
         }
         return new AddMusicianToBandCommand(bandIndex, musicianIndices);
     }

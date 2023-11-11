@@ -80,4 +80,11 @@ class AddMusicianToBandCommandParserTest {
         assertParseFailure(parser, MUSICIAN_INDEX_DESC_FIRST
                 + INVALID_BAND_INDEX_DESC_ZERO, ParserUtil.MESSAGE_INVALID_INDEX);
     }
+
+    @Test
+    public void parse_repeatedMusicianIndices_failure() {
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + BAND_INDEX_DESC_FIRST + MUSICIAN_INDEX_DESC_FIRST
+                + MUSICIAN_INDEX_DESC_FIRST,
+                AddMusicianToBandCommand.MESSAGE_MUSICIAN_INDEX_REPEATED);
+    }
 }

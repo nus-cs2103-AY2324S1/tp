@@ -264,6 +264,15 @@ Step 2. Then, the `FindCommndParser` creates a `FindCommand` object with the set
 
 Step 3. When the `FindCommand` object is executed, it combines all the predicates into a single `combinedPrediacte`. This predicate is then used to filter the musician list using the `Model::updateFilteredMusicianList(Predicate)` method.
 
+#### Design Considerations
+
+**Aspect: Filtering musicians by multiple categories**
+* **Alternative 1 (current design):** only allow finding musicians by four categories: name, tag, genre, and instrument.
+* **Alternative 2:** on top of the four categories, the application also supports find by email and phone.
+The reasons for us to choose alternative 1 are:
+* The four categories are the most important frequently used categories for the user to find musicians. A music producer (the user for our product) is more likely to remember musicians by their names, instruments, genres over their emails and phones.
+* Implementing the extra two categories is simply a repetitive task of creating two more predicates and adding them to the `FindCommandParser`. Hence, there is not sufficient value of implementing the extra two categories in both technical aspects and usability.
+
 ### Add Band Feature 
 The user can add a new Band entity to the storage through the `addb` Command.
 
@@ -303,27 +312,14 @@ Within the `execute` method of the command, `UniqueBandList` loops through all b
 
 ### Add Musician To Band Feature
 
-The user can add a Musician to a Band through the `addm` Command.
-
-Command: `addm bin/[BAND_INDEX] min/[MUSICIAN_INDEX]`
-
-### Behaviour
-* **Success Scenario:**
-    1. A success message is returned.
-    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
-
-* **Failed Scenario (when band index/musician index is invalid):**
-    1. An error message is returned.
-    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
-
-* **Failed Scenario (when adding a musician that is already in the band):**
-    1. An error message is returned.
-    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+The user can add multiple musicians to a band through the `addm` command.
 
 #### Implementation
-Within the execute method of the command, a check is done to ensure that the index specified is not equal to or greater
-than the size of the list containing all Bands.
-Another check is done to ensure that the musicians is not already in the band.
+Multiple checks are put in place to ensure the correct execution of the command. The `AddMusicianToBandCommandParser` is responsible for checking the validity of the input format, e.g. both musician and band indices should be provided, while the `AddMusicianToBandCommand` is responsible for checking the validity of the indices, e.g. the musician is not already in the band, and the indices are valid.
+
+The following activity diagram illustrates the logic flow of the feature and how it deals with different invalid inputs.
+
+![AddMusicianToBandActivityDiagram.png](images%2FAddMusicianToBandActivityDiagram.png)
 
 
 ### Delete Band Feature
