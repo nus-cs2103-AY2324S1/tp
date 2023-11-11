@@ -91,7 +91,7 @@ public class LoveBookTest {
     @Test
     public void equalsMethod() {
         //same instance -> returns true
-        assertEquals(loveBook,loveBook);
+        assertEquals(loveBook, loveBook);
         // same object -> returns true
         LoveBook loveBookCopy = new LoveBook();
         assertEquals(loveBook, loveBookCopy);
