@@ -3,14 +3,6 @@
   title: "User Guide"
   pageNav: 3
 ---
-<style>
-img {
-    display:block;
-    float:none;
-    margin-left:auto;
-    margin-right:auto;
-}
-</style>
 
 <a name="staff-snap-user-guide"></a>
 # Staff-Snap User Guide
@@ -24,6 +16,7 @@ img {
 * [Minimum System Requirements](#minimum-system-requirements)
 * [Quick Start](#quick-start)
 * [Using this Guide](#using-this-guide)
+  * [Understanding the Symbols](#understanding-the-symbols)
   * [Understanding the Notations](#understanding-the-notations)
   * [Understanding the Main Window GUI](#understanding-the-main-window-gui)
   * [Understanding the Applicant Card GUI](#understanding-the-applicant-card-gui)
@@ -70,15 +63,11 @@ img {
 
 Welcome to the **Staff-Snap** User Guide!
 
-**Staff-Snap** is a desktop app for Hiring Managers like you to manage the hiring and tracking of applicants, 
-optimised for use via a [Command Line Interface (CLI)](#glossary). Used by hiring managers in companies around the globe, 
-it is effective, easy-to-use and reliable, making the hiring process a much more enjoyable experience.
+**Staff-Snap** is a desktop app for Hiring Managers like you to manage the hiring and tracking of applicants, optimised for use via a [Command Line Interface (CLI)](#glossary). Used by Hiring Managers in companies around the globe, it is effective, easy-to-use and reliable, making the hiring process a much more enjoyable experience.
 
-The purpose of this guide is to get you familiar with the features of **Staff-Snap**.
-These features range from the simple task of adding an applicant to being able to calculate an applicant's score from their ratings in the interview stages. 
-Every single feature is explained in this guide. You can check out the [Table of Contents](#table-of-contents) to navigate to a feature you might be interested in using.
+The purpose of this guide is to get you familiar with the features of **Staff-Snap**. These features range from the simple task of adding an applicant to being able to sort your applicants by their overall score. Every single feature is explained in this guide.
 
-To begin using this guide, ensure you meet the [Minimum System Requirements](#minimum-system-requirements). Once this is done, go to the [Quick Start](#quick-start) section to get the app up and running. Once you have done so, please feel free to go through the features sections to find out what features **Staff-Snap** has installed. We recommend going through it in the order of this guide but any order works as well! You may check out our table of contents to jump to any section of your choice.
+To begin using this guide, ensure you meet the [Minimum System Requirements](#minimum-system-requirements) to run **Staff-Stap**. Once this is done, go to the [Quick Start](#quick-start) section to get the application up and running. Once you have done so, feel free to go through the [Features](#features) section to find out about the features **Staff-Snap** offers. We recommend going through it in the order of this guide but any order works as well! You may check out our [Table of Contents](#table-of-contents) to jump to any section of your choice.
 
 <br>
 
@@ -86,15 +75,15 @@ To begin using this guide, ensure you meet the [Minimum System Requirements](#mi
 <br>
 
 ## Minimum System Requirements
-1. A Computer running Windows/MacOS/Linux.
-2. [Java](#glossary) 11 or higher
-   1. If you do not have Java 11, follow [this](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) installation guide.
-
+1. A computer running on Windows, macOS, or Linux.
+2. Ensure you have [Java](#glossary) 11 or above installed in your computer. If you do not have Java 11, follow [this](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) installation guide.
 
 <br>
 
 ---
 <br>
+
+<div style="page-break-after: always;"></div>
 
 <a name="quick-start"></a>
 ## Quick Start
@@ -114,18 +103,23 @@ To begin using this guide, ensure you meet the [Minimum System Requirements](#mi
    * `delete 1` : Deletes the 1st applicant shown in the current list.
    * `clear` : Clears all applicants from the list.
    * `exit` : Exits the application.
-8. Refer to the [Features](#features) below for details of each command.<br>
+8. Refer to the [Features](#features) section below for details of each command.<br>
 
 <box type="tip" header="**For macOS users**" seamless>
 
 If you are unfamiliar with the command terminal, you can right-click the `staffsnap.jar` file and select **Open With > JavaLauncher.app** to launch the application. If you are shown the warning below, click **Open** to continue launching Staff-Snap.<br>
 
-<img src="images/user-guide/mac_os_warning.png" height="400" width="334" alt="mac_os_warning">
+<img src="images/user-guide/mac_os_warning.png" height="400" width="334" alt="mac_os_warning" style="display:block;
+float:none;
+margin-left:auto;
+margin-right:auto;">
 
 </box>
 
 ---
 <br>
+
+<div style="page-break-after: always;"></div>
 
 <a name="using-this-guide"></a>
 ## Using this Guide
@@ -133,7 +127,25 @@ If you are unfamiliar with the command terminal, you can right-click the `staffs
 ---
 <br>
 
-This section introduces the symbols and notations used throughout this guide. We recommend that you read this section closely before using this guide.
+This section introduces the symbols and notations used throughout this guide. The application's GUI [components](#glossary) are also explained here. We recommend that you read this section closely before using this guide.
+
+<br>
+
+<a name="understanding-the-symbols"></a>
+### Understanding the Symbols
+
+<br>
+
+| <div style="width:130px">Symbol</div>           | <div style="width:auto">Meaning</div>                                                     |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------|
+| <box type="info" header="**Note**"></box>       | This is a reminder of essential information that is required for proper Staff-Snap usage. |
+| <box type="tip" header="**Tip**"></box>         | This is a small friendly advice to make your Staff-Snap experience more enjoyable.        |
+| <box type="warning" header="**Caution**"></box> | This is a warning that cautions the user against common errors.                           |
+
+<br>
+
+---
+<br>
 
 <a name="understanding-the-notations"></a>
 ### Understanding the Notations
@@ -175,7 +187,10 @@ This section introduces the symbols and notations used throughout this guide. We
 
 <br>
 
-<img src="images/user-guide/applicant_card_gui.png" height="201" width="598" alt="applicant_card_gui">
+<img src="images/user-guide/applicant_card_gui.png" height="201" width="598" alt="applicant_card_gui" style="display:block;
+float:none;
+margin-left:auto;
+margin-right:auto;">
 
 <br>
 
@@ -184,10 +199,12 @@ This section introduces the symbols and notations used throughout this guide. We
 | Applicant details                            | This is where details about the applicant are displayed. These include their name, phone number, email, and position applied.          |
 | Applicant status                             | This is where the status of the applicant is displayed. The status is categorised into Offered, Rejected, or Undecided.                |
 | Applicant score                              | This is where the overall score of the applicant is displayed. This represents the _average_ rating of all the applicant's interviews. |
-| Interview rating                             | This is where the rating for a each interview is displayed.                                                                            |
+| Interview rating                             | This is where the rating for each interview is displayed.                                                                              |
 
 ---
 <br>
+
+<div style="page-break-after: always;"></div>
 
 <a name="features"></a>
 ## Features
@@ -236,33 +253,22 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
 <a name="duplicate-applicants"></a>
 <box type="warning" header="**Caution**">
-    Duplicate applicants are not allowed. 
-    Two applicants are considered duplicates if they have the same phone number or the same email.
+    Duplicate applicants are not allowed. Two applicants are considered duplicates if they have the same phone number or the same email.
 </box>
 
-<box type="tip" header="**Note**">
-    As <code>NAME</code> can only contain alphanumeric characters and spaces, 
-    names containing non-alphanumeric characters such as hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.
+<box type="info" header="**Note**">
+    As <code>NAME</code> can only contain alphanumeric characters and spaces, names containing non-alphanumeric characters such as hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.
 </box>
-
-<box type="tip" header="**Note**">
-    Note that the default status for new Applicants is UNDECIDED.
-</box>
-
 
 Valid examples:
-* `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer`
-Adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@gmail.com*, and position *Software Engineer*.
+* `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer` adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@<area>gmail.com*, and position *Software Engineer*.
 
-* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
-  Adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@yahoo.com*, and position *Project Manager*.
+* `add n/Charlene Loh p/Staff Engineer e/cloh@gmail.com hp/91827271` adds a new applicant with name *Charlene Loh*, phone number *91827271*, email *cloh@<area>gmail.com*, and position *Staff Engineer*, as shown in the GUI below.
+  
+![add](images/user-guide/add.png)
 
 Invalid examples:
-* `add n/John Doe hp/91234567`
-This is not allowed as all fields are required to add an applicant to the list.
-
-
-![add](images/user-guide/add.png)
+* `add n/John Doe hp/91234567` is not allowed as all fields are required to add an applicant to the list.
 
 <br>
 
@@ -285,15 +291,11 @@ Valid examples:
 * `edit 2 hp/80081234 e/newEmail@hotmail.com` edits the phone number and email of the 2nd applicant in the list.
 
 Invalid examples:
-* `edit n/Vijay Sankar Kumar`
-This is not allowed as an `INDEX` is required to edit an applicant's details.
+* `edit n/Vijay Sankar Kumar` is not allowed as `INDEX` is a required parameter and must be specified.
 
-* `edit 1`
-This is not allowed as at least one of the optional fields, `[n/NAME] [hp/PHONE] [e/EMAIL] [p/POSITION]` must be provided.
+* `edit 1` is not allowed as at least one of the optional fields `[n/NAME]`,  `[hp/PHONE]`, `[e/EMAIL]`, or `[p/POSITION]` must be provided.
 
-* `edit -20 hp/12341234`
-This is not allowed as the `INDEX` must be a positive integer.
-
+* `edit -20 hp/12341234` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
@@ -314,10 +316,8 @@ Valid examples:
 * `sort d/name` followed by `delete 3` deletes the 3rd person in the sorted applicant list.
 
 Invalid examples:
-* `delete`
-This is not allowed as an `INDEX` must be specified.
-* `delete -3`
-This is not allowed as the `INDEX` must be a positive integer.
+* `delete` is not allowed as `INDEX` is a required parameter and must be specified.
+* `delete -3` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
@@ -342,27 +342,23 @@ Format: `list`
 Edits the status of an applicant.
 
 Format: `status INDEX s/STATUS`
-* Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
+* Edits the status of the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Valid examples:
 * `status 3 s/o` updates the status of the 3rd person in the displayed applicant list to _OFFERED_.
-* `status 1 s/r` updates the status of the 1st person in the displayed applicant list to _REJECTED_.
+* `status 1 s/rejected` updates the status of the 1st person in the displayed applicant list to _REJECTED_.
 
 Invalid examples:
-* `status 3 s/interviewing`
-This is not allowed as `STATUS` must be either `o(ffered)` or `r(ejected)` or `u(ndecided)`.
+* `status 3 s/interviewing` is not allowed as `STATUS` must be either `o` or `offered` or `r` or `rejected` or `u` or `undecided`.
 
-* `status 3`
-This is not allowed as a `STATUS` must be provided.
+* `status 3` is not allowed as `STATUS` is a required parameter and must be specified.
 
-* `status -3 s/o`
-This is not allowed as the `INDEX` must be a positive integer.
+* `status -3 s/o` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
 ---
-
 <br>
 
 <a name="interview-management-features"></a>
@@ -371,7 +367,6 @@ This is not allowed as the `INDEX` must be a positive integer.
 <br>
 
 <a name="command-parameters-2"></a>
-
 #### Command Parameters 
 
 | Parameter         | Description​                                                                                                                                                          | Examples​                                          |
@@ -410,23 +405,19 @@ Format: `addi INDEX t/TYPE [r/RATING]`
 * A maximum of 5 interviews can be added to each applicant.
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
-<box type="warning" header="**Caution**">
+<box type="tip" header="**Tip**">
     Rating will be rounded to the nearest 1 decimal place if more than 1 decimal place is provided.
 </box>
 
 Valid examples:
-* `addi 3 t/screening` adds a Screening interview without rating to the 3rd person in the displayed applicant list.
-* `addi 1 t/technical r/8.5` adds a Technical interview with rating 8.5 to the 1st person in the displayed applicant list.
-
-Invalid examples:
-* `addi 1`
-This is not allowed as a `TYPE` must be provided.
-
-* `addi -1 t/HR`
-This is not allowed as the `INDEX` must be a positive integer.
-
+* `addi 3 t/screening` adds a _screening_ interview without rating to the 3rd person in the displayed applicant list.
+* `addi 1 t/technical r/8.5` adds a _technical_ interview with rating 8.5 to the 1st person in the displayed applicant list, as shown in the GUI below.
 
 ![addi.png](images/user-guide/addi.png)
+
+Invalid examples:
+* `addi 1` is not allowed as `TYPE` is a required parameter and must be specified.
+* `addi -1 t/screening` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
@@ -443,26 +434,21 @@ Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
 * `INTERVIEW_INDEX` refers to the index of the interview to be edited of the applicant.
 * At least one of the optional fields must be provided.
 * Existing values will be updated by the input values.
-* `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
+* `INDEX` and `INTERVIEW_INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 <box type="warning" header="**Caution**">
     There is <b>NO</b> duplicate handling for the name of the interview in <code>editi</code> and attempting to do so will give an error message.
 </box>
 
 Valid examples:
-* `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview with rating 7.8.
-* `editi 3 i/2 t/screening` edits the 2nd interview of the 3rd person in the displayed applicant list to a screening interview.
+* `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a _technical_ interview with rating 7.8.
+* `editi 3 i/2 t/screening` edits the 2nd interview of the 3rd person in the displayed applicant list to a _screening_ interview.
 * `editi 2 i/1 r/8.9` edits the 1st interview rating of the 2nd person in the displayed applicant list to 8.9.
 
 Invalid examples:
-* `editi 1`
-This is not allowed as an `INTERVIEW_INDEX` must be provided.
-
-* `editi 1 i/1`
-This is not allowed as at least one of the optional fields, `[t/TYPE] [r/RATING]`, must be provided.
-
-* `editi -1 i/2 t/Assessment`
-This is not allowed as the `INDEX` must be a positive integer.
+* `editi 1` is not allowed as an `INTERVIEW_INDEX` is a required parameter and must be specified.
+* `editi 1 i/1` is not allowed as at least one of the optional fields `[t/TYPE]` or `[r/RATING]` must be provided.
+* `editi -1 i/2 t/Assessment` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
@@ -476,18 +462,14 @@ Deletes an interview from an applicant.
 
 Format: `deletei INDEX i/INTERVIEW_INDEX`
 * Deletes from the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
-* `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
+* `INDEX` and `INTERVIEW_INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Valid examples:
 * `deletei 1 i/2` deletes the 2nd interview of the 1st person in the displayed applicant list.
 
 Invalid example:
-* `deletei 1 i/20` 
-This is not allowed because the index of the interview is invalid. As the maximum number of interviews for each applicant
-is 5, an interview index larger than 5 is not allowed.
-
-* `deletei -1 i/3`
-This is not allowed as the `INDEX` must be a positive integer.
+* `deletei 1 i/20` is not allowed as the index of the interview is invalid. Since the maximum number of interviews for each applicant is 5, an interview index larger than 5 is not allowed.
+* `deletei -1 i/3` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
@@ -508,7 +490,6 @@ This is not allowed as the `INDEX` must be a positive integer.
 | `KEYWORD`    | The keyword to find in an applicant's name. <br/> <br/> It should be alphanumerical.                                                   | <ul><li>`Lee`</li><li>`Zhang Jordan`</li></ul>           |
 | `SCORE`      | The applicant's overall score. <br/> <br/> It should be a number between 0.0 and 10.0 inclusive, to 1 decimal place.                   | <ul><li>`0.0`</li><li>`8.3`</li></ul>                    |
 | `FILENAME`   | The file name of the csv file to import. <br/> <br/> It should end with the `.csv` suffix and should not be blank.                     | <ul><li>`demo.csv`</li><li>`applicantBook.csv`</li></ul> |
-
 
 <br>
 
@@ -531,7 +512,7 @@ e.g. `Ed` will match both `Edward` and `Ed`.
 * Applicants matching at least one keyword will be returned (i.e. OR search), 
 e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
 
-<box type="tip" header="**Note**">
+<box type="info" header="**Note**">
     <code>find</code> works on the entire applicant list and will display any applicant whose name matches at least one keyword, even if they were filtered out using <code>filter</code>.
 </box>
 
@@ -540,8 +521,7 @@ Valid examples:
 * `find IVAN CHEW` finds any applicant whose name contains “ivan” or contains “chew”.
 
 Invalid examples:
-* `find name!!!`
-This is not allowed as the `KEYWORD [MORE_KEYWORDS]` must be alphanumeric.
+* `find name!!!` is not allowed as the `KEYWORD [MORE_KEYWORDS]` must be alphanumeric.
 
 <br>
 
@@ -609,7 +589,10 @@ Format: `import f/FILENAME`
 * The CSV file must be placed in the [home folder](#glossary) of Staff-Snap.
 * The CSV file must have the following headers: `name`, `phone`, `email`, `position` in that order, as shown below.<br>
   
-<img src="images/user-guide/csv_header.png" alt="mac_os_warning">
+<img src="images/user-guide/csv_header.png" alt="mac_os_warning" style="display:block;
+float:none;
+margin-left:auto;
+margin-right:auto;">
 
 * The fields of the columns must satisfy the [parameter constraints](#command-parameters-1) for `NAME`, `PHONE`, `EMAIL`, and `POSITION` respectively.
 * The CSV file must not contain [duplicate applicants](#duplicate-applicants).
@@ -617,14 +600,13 @@ Format: `import f/FILENAME`
 * A sample CSV file can be found [here](demo.csv).
 
 Example:
-* `import f/applicants.csv`
+* `import f/applicants.csv` will import the applicants from the `applicants.csv` file, as shown in the GUI below.
 
 ![import.png](images/user-guide/import.png)
 
 <br>
 
 ---
-
 <br>
 
 <a name="miscellaneous-features"></a>
@@ -647,9 +629,7 @@ Format: `help`
 <a name="clear"></a>
 #### Clearing all applicant entries: `clear`
 
-After typing `clear`, system asks the user to confirm clearing. If user types `yes` and clicks enter, 
-all the current data stored in the system is then cleared. 
-Else, typing in anything else then pressing enter will cancel the clear process. 
+After typing `clear`, system asks the user to confirm clearing. If user types `yes` and clicks enter, all the current data stored in the system is then cleared. Else, typing in anything else then pressing enter will cancel the clear process. 
 
 Format: `clear`
 
@@ -695,6 +675,8 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 <br><br/>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 <a name="command-summary"></a>
 ## Command Summary
@@ -751,6 +733,8 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 ---
 <br>
 
+<div style="page-break-after: always;"></div>
+
 <a name="faq"></a>
 ## FAQ
 
@@ -787,6 +771,8 @@ apply for multiple positions in future iterations.
 
 ---
 <br>
+
+<div style="page-break-after: always;"></div>
 
 <a name="glossary"></a>
 ## Glossary
