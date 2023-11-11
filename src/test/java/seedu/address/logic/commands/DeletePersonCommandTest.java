@@ -8,9 +8,14 @@ import static seedu.address.logic.commands.DeletePersonCommand.MESSAGE_DELETE_PE
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
-import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,10 +30,6 @@ import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.function.Predicate;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -76,16 +77,16 @@ public class DeletePersonCommandTest {
         Person nonexistentPerson = new PersonBuilder().build();
         DeletePersonCommand deletePersonCommand =
                 new DeletePersonCommand(nonexistentPerson.getName().toString());
-        DeletePersonCommandTest.ModelStub modelStub
-                = new DeletePersonCommandTest.ModelStubDeletingPerson();
+        DeletePersonCommandTest.ModelStub modelStub =
+                new DeletePersonCommandTest.ModelStubDeletingPerson();
 
-        assertThrows(CommandException.class, Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND,
-                () -> deletePersonCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND, () -> deletePersonCommand.execute(modelStub));
 
         // empty input
         String emptyInput = "";
-        assertThrows(CommandException.class, Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND,
-                () -> new DeletePersonCommand(emptyInput).execute(modelStub));
+        assertThrows(CommandException.class, Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND, () ->
+                new DeletePersonCommand(emptyInput).execute(modelStub));
     }
 
     @Test

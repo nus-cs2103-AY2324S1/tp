@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -18,7 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 
@@ -57,16 +54,14 @@ public class FindGroupCommandTest {
 
         // empty input
         String emptyInput = "";
-        assertThrows(CommandException.class, expectedMessage,
-                () -> new FindGroupCommand(emptyInput).execute(model));
+        assertThrows(CommandException.class, expectedMessage, () -> new FindGroupCommand(emptyInput).execute(model));
 
         // nonexistent group
         Group nonexistentGroup = new GroupBuilder().build();
         FindGroupCommand findGroupCommand =
                 new FindGroupCommand(nonexistentGroup.getGroupName());
 
-        assertThrows(CommandException.class, expectedMessage,
-                () -> findGroupCommand.execute(model));
+        assertThrows(CommandException.class, expectedMessage, () -> findGroupCommand.execute(model));
 
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
     }

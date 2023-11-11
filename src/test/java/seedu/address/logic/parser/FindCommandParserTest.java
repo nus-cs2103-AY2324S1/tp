@@ -23,21 +23,21 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
-    private String WHITESPACE = " ";
-
-    private String KEYWORDS_NO_WHITESPACES = WHITESPACE + PREFIX_NAME + "Amy Bob";
-    private String KEYWORDS_WITH_WHITESPACES = WHITESPACE + PREFIX_NAME + " \n Amy \n \t Bob  \t";
-
-    private String KEYWORDS_NO_PREFIX = WHITESPACE + "Amy Bob";
+    private String whitespace = " ";
+    private String keywordsWithoutWhitespace = whitespace + PREFIX_NAME + "Amy Bob";
+    private String keywordsWithWhitespace = whitespace + PREFIX_NAME + " \n Amy \n \t Bob  \t";
+    private String keywordsNoPrefix = whitespace + "Amy Bob";
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // valid command format for find person
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORDS_NO_WHITESPACES,
-                new FindPersonCommand(new NameContainsKeywordsPredicate(Arrays.asList("Amy", "Bob")))); // no leading and trailing whitespaces
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + keywordsWithoutWhitespace,
+                new FindPersonCommand(new NameContainsKeywordsPredicate(
+                        Arrays.asList("Amy", "Bob")))); // no leading and trailing whitespaces
 
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORDS_WITH_WHITESPACES,
-                new FindPersonCommand(new NameContainsKeywordsPredicate(Arrays.asList("Amy", "Bob")))); // multiple whitespaces between keywords
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + keywordsWithWhitespace,
+                new FindPersonCommand(new NameContainsKeywordsPredicate(
+                        Arrays.asList("Amy", "Bob")))); // multiple whitespaces between keywords
 
         // valid command format for find group
         assertParseSuccess(parser, NAME_DESC_CS,
@@ -51,7 +51,7 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
 
         // missing name prefix
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + KEYWORDS_NO_PREFIX,
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + keywordsNoPrefix,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
 
         // missing group prefix
@@ -62,7 +62,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         // multiple name prefixes
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + KEYWORDS_NO_WHITESPACES + KEYWORDS_WITH_WHITESPACES,
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + keywordsWithoutWhitespace + keywordsWithWhitespace,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple group prefixes
@@ -70,20 +70,19 @@ public class FindCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GROUPTAG));
 
         //multiple name and group prefixes
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + KEYWORDS_NO_WHITESPACES + KEYWORDS_WITH_WHITESPACES
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + keywordsWithoutWhitespace + keywordsWithWhitespace
                         + NAME_DESC_CS + NAME_DESC_CS2103T,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_GROUPTAG));
 
         // name and group
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + KEYWORDS_NO_WHITESPACES + NAME_DESC_CS,
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + keywordsWithoutWhitespace + NAME_DESC_CS,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_TWO_PARAMETERS));
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // empty name for find person command
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + WHITESPACE + PREFIX_NAME,
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + whitespace + PREFIX_NAME,
                 FindCommand.MESSAGE_EMPTY_NAME);
     }
-
 }

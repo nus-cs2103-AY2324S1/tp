@@ -7,11 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.DeleteGroupCommand.MESSAGE_DELETE_GROUP_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGroups.CS2103;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
-import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,10 +31,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.function.Predicate;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -51,7 +51,6 @@ public class DeleteGroupCommandTest {
                 commandResult.getFeedbackToUser());
         ArrayList<Group> emptyGroupList = new ArrayList<>();
         assertEquals(emptyGroupList, modelStub.groups); // checks group removed from contact list
-
     }
 
     @Test
@@ -82,24 +81,24 @@ public class DeleteGroupCommandTest {
         Group nonexistentGroup = new GroupBuilder().build();
         DeleteGroupCommand deleteGroupCommand =
                 new DeleteGroupCommand(nonexistentGroup.getGroupName());
-        DeleteGroupCommandTest.ModelStub modelStub
-                = new DeleteGroupCommandTest.ModelStubDeletingGroup();
+        DeleteGroupCommandTest.ModelStub modelStub =
+                new DeleteGroupCommandTest.ModelStubDeletingGroup();
 
-        assertThrows(CommandException.class, Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND,
-                () -> deleteGroupCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND, () -> deleteGroupCommand.execute(modelStub));
 
         // empty input
         String emptyInput = "";
-        assertThrows(CommandException.class, Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND,
-                () -> new DeleteGroupCommand(emptyInput).execute(modelStub));
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND, () -> new DeleteGroupCommand(emptyInput).execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Group CS2103 = new GroupBuilder().withName("CS2103").build();
-        Group CS2103T = new GroupBuilder().withName("CS2103T").build();
-        DeleteGroupCommand deleteCS2103Command = new DeleteGroupCommand(CS2103.getGroupName());
-        DeleteGroupCommand deleteCS2103TCommand = new DeleteGroupCommand(CS2103T.getGroupName());
+        Group cs2103 = new GroupBuilder().withName("CS2103").build();
+        Group cs2103T = new GroupBuilder().withName("CS2103T").build();
+        DeleteGroupCommand deleteCS2103Command = new DeleteGroupCommand(cs2103.getGroupName());
+        DeleteGroupCommand deleteCS2103TCommand = new DeleteGroupCommand(cs2103T.getGroupName());
 
         // same object -> returns true
         assertTrue(deleteCS2103Command.equals(deleteCS2103Command));
