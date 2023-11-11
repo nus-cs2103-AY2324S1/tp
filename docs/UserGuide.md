@@ -728,7 +728,7 @@ After `sort-time`:
 InterviewHub data are saved automatically as a JSON file `[JAR file location]/data/interviewhub.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-If your changes to the data file makes its format invalid, InterviewHub will not work.
+If your changes to the data file makes its format invalid, InterviewHub will not work. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 [Back to the Table of Contents](#table-of-contents)
