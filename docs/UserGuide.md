@@ -85,7 +85,6 @@ for new users. <br>
 <br>
 If you are already comfortable using <span style="color: green;">lesSON</span>, do try out all of our other [features](#feature-list). <br> 
 For a summary of available commands, visit [here]().
->>>>>>> master
 
 ### Legend
 Throughout this user guide, you will encounter some of these colored blocks highlighting some important information.
@@ -121,7 +120,6 @@ Throughout this user guide, you will encounter some of these colored blocks high
 |      Spaced repetition       | An evidence-based learning technique where newly created and more difficult flashcards are shown more frequently than older and less difficult flashcards                                      |
 
 [Go to Table of Contents](#table-of-contents)
->>>>>>> master
 
 --------------------------------------------------------------------------------------------------------------------
 
