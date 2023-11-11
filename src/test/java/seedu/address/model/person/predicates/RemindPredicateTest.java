@@ -50,7 +50,7 @@ public class RemindPredicateTest {
         // Policy expiry date is 60 days away from 12/11/2023
         predicate = new RemindPredicate(60);
         assertTrue(predicate.test(new PersonBuilder().withPolicy(VALID_COMPANY_AMY, VALID_POLICY_NO_AMY,
-                VALID_POLICY_ISSUE_DATE_AMY, "11-01-2024").build()));
+                VALID_POLICY_ISSUE_DATE_AMY, "10-01-2024").build()));
 
         // Policy expiry date is within 60 days away from 12/11/2023
         assertTrue(predicate.test(new PersonBuilder().withPolicy(VALID_COMPANY_AMY, VALID_POLICY_NO_AMY,
