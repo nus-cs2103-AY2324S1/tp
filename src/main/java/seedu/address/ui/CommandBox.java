@@ -71,7 +71,8 @@ public class CommandBox extends UiPart<Region> {
                 commandTextField.setText(currentText + completion);
 
                 // Highlight the example part for easy replacement
-                int startOfSelection = currentText.length() + 2; // Including prefix
+                int prefixLength = completion.indexOf('/') + 1;
+                int startOfSelection = currentText.length() + prefixLength; // Including prefix
                 int endOfSelection = commandTextField.getText().length();
                 commandTextField.selectRange(startOfSelection, endOfSelection);
 
