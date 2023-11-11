@@ -31,12 +31,15 @@ public class CommandResult {
     private final boolean findPerson;
     /** The application should show the Teams found */
     private final boolean findTeam;
+    /** The application should refresh statistics */
+    private final boolean isAddingOrDeleting;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-                         boolean listTeam, boolean listPerson, boolean showTree, boolean findPerson, boolean findTeam) {
+                         boolean listTeam, boolean listPerson, boolean showTree, boolean findPerson,
+                         boolean findTeam, boolean isAddingOrDeleting) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -45,6 +48,7 @@ public class CommandResult {
         this.showTree = showTree;
         this.findPerson = findPerson;
         this.findTeam = findTeam;
+        this.isAddingOrDeleting = isAddingOrDeleting;
     }
 
     /**
@@ -52,7 +56,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -84,6 +88,9 @@ public class CommandResult {
     public boolean isFindTeam() {
         return findTeam;
     }
+    public boolean isAddingOrDeleting() {
+        return isAddingOrDeleting;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -104,12 +111,14 @@ public class CommandResult {
                 && listPerson == otherCommandResult.listPerson
                 && showTree == otherCommandResult.showTree
                 && findPerson == otherCommandResult.findPerson
-                && findTeam == otherCommandResult.findTeam;
+                && findTeam == otherCommandResult.findTeam
+                && isAddingOrDeleting == otherCommandResult.isAddingOrDeleting;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, listTeam, listPerson, showTree, findPerson, findTeam);
+        return Objects.hash(feedbackToUser, showHelp, exit, listTeam, listPerson, showTree, findPerson, findTeam,
+                isAddingOrDeleting);
     }
 
     @Override
@@ -123,7 +132,7 @@ public class CommandResult {
                 .add("showTree", showTree)
                 .add("findPerson", findPerson)
                 .add("findTeam", findTeam)
+                .add("isAddingOrDeleting", isAddingOrDeleting)
                 .toString();
     }
-
 }

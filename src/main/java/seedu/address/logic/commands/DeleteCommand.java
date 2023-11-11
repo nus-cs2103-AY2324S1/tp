@@ -62,10 +62,12 @@ public class DeleteCommand extends Command {
         } else if (model.removeDeveloperFromAllTeams(personID)) {
             model.deletePerson(personToDelete);
             return new CommandResult(String.format(
-                    MESSAGE_DELETE_PERSON_FROM_ALL_TEAMS, Messages.format(personToDelete)));
+                    MESSAGE_DELETE_PERSON_FROM_ALL_TEAMS, Messages.format(personToDelete)),
+                    false, false, false, false, false, false, false, true);
         } else {
             model.deletePerson(personToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)),
+                    false, false, false, false, false, false, false, true);
         }
     }
 
