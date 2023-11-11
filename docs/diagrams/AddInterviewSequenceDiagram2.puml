@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "cmd:AddInterviewCommand" as AddInterviewCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "inter:Interview" as Interview MODEL_COLOR
+end box
+
+activate LogicManager
+LogicManager -> AddInterviewCommand : execute( )
+activate AddInterviewCommand
+
+AddInterviewCommand -> Model : getFilteredApplicantList( )
+activate Model
+Model --> AddInterviewCommand
+deactivate Model
+
+create Interview
+AddInterviewCommand -> Interview : Interview(Applicant1, "SWE",\n "12-12-2024 1500", "12-12-2024 1600")
+activate Interview
+Interview --> AddInterviewCommand : inter
+deactivate Interview
+
+AddInterviewCommand -> Model : setApplicant(Applicant1, updatedApplicant1)
+activate Model
+deactivate Model
+
+AddInterviewCommand -> Model : addInterview(inter)
+activate Model
+deactivate Model
+
+create CommandResult
+AddInterviewCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddInterviewCommand : result
+deactivate CommandResult
+
+AddInterviewCommand --> LogicManager : result
+deactivate AddInterviewCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml
