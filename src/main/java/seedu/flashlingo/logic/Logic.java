@@ -1,3 +1,6 @@
+//@@author A1WAYSD-reused
+//Reused from AB-3 Logic.java with minor modifications
+//Added getTheme() method
 package seedu.flashlingo.logic;
 
 import java.nio.file.Path;

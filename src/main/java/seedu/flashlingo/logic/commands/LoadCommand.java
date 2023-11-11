@@ -31,7 +31,6 @@ public class LoadCommand extends Command {
             + "Example: " + COMMAND_WORD + " words.xslx";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "Duplicated card ";
     public static final String MESSAGE_EMPTY_WORDS = "Word/translation cannot be empty!";
-
     public final String fileName;
 
     public LoadCommand(String fileName) {

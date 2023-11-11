@@ -28,6 +28,7 @@ public class JsonAdaptedFlashCard {
     private final String translatedWordLanguage;
     private final String whenToReview;
     private final int level;
+
     /**
      * Constructs a {@code JsonAdaptedFlashCard} with the given flash card details.
      */
@@ -61,8 +62,10 @@ public class JsonAdaptedFlashCard {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
         String iso8601Date = formatter.format(zonedDateTime);
         this.whenToReview = iso8601Date;
+        //TODO: name change
     }
 
+    //Solution below adapted by AB-3 JsonAdaptedPerson.java
     /**
      * Converts this Jackson-friendly adapted flash card object into the model's {@code FlashCard} object.
      *
