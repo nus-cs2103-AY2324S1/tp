@@ -7,16 +7,16 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.CompanyContainsKeywordsPredicate;
-import seedu.address.model.person.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.LicenceContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.PolicyExpiryContainsKeywordsPredicate;
-import seedu.address.model.person.PolicyIssueContainsKeywordsPredicate;
-import seedu.address.model.person.PolicyNumberContainsKeywordsPredicate;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.CompanyContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.LicenceContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NricContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PolicyExpiryContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PolicyIssueContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PolicyNumberContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.TagContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.RemindPredicate;
+import seedu.address.model.person.predicates.RemindPredicate;
 
 /**
  * Finds and lists all persons in address book whose policy expiry date is approaching within a certain period.

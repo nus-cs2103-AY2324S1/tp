@@ -1,6 +1,7 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicates;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.Person;
 
 /**
  * Tests that a {@code Person}'s {@code NRIC} matches any of the keywords given.
