@@ -390,6 +390,10 @@ time. This feature is facilitated through the `SortCommand` class.
 
 #### Implementation Overview
 
+The following diagram summarises what happens when the user executes a sort command
+
+<img src="images/SortClassActivityDiagram.png" width="700"/>
+
 The `SortCommand` class is instantiated by the `SortCommandParser`, which parses user input commands. The
 `SortCommandParser` class implements the following operations:
 
@@ -405,6 +409,8 @@ It contains the following method:
 
 - **`ModelManager#sortFilteredPersonList(Comparator<Person> comparator)` —  Carries out the sorting operation by
 setting the comparator on the list of clients wrapped in a SortedList wrapper.
+
+A `CommandResult` class is created and returned
 
 **Aspect: Usage Scenario:**
 
@@ -434,8 +440,6 @@ each command
 - **Pros:** Easier implementation of the sorting function.
 - **Cons:** Unlikely, but if for some reason the user wants the list sorted back to its original order, the only way
 is to restart the app at the current moment.
-
-_{more aspects and alternatives to be added}_
 
 
 ### Appointment Sidebar Feature

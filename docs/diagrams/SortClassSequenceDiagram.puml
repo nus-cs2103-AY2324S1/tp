@@ -7,7 +7,6 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
 participant "command:SortCommand" as SortCommand LOGIC_COLOR
-participant ":SortByAppointmentComparator" as SortByAppointmentComparator LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -30,28 +29,35 @@ create SortCommand
 SortCommandParser -> SortCommand: SortCommand(new SortByAppointmentComparator)
 activate SortCommand
 
-SortCommand -> SortByAppointmentComparator
-activate SortByAppointmentComparator
-SortByAppointmentComparator --> SortCommand
-deactivate SortByAppointmentComparator
+SortCommand --> SortCommandParser
+deactivate SortCommand
 
-SortCommand -> Model: Model.sortFilteredPersonList(comparator)
+SortCommandParser --> AddressBookParser
+deactivate SortCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> SortCommand: execute()
+activate SortCommand
+SortCommand -> Model: model.sortFilteredPersonList(comparator);
 activate Model
-Model -> Person: setComparator
+
+Model -> Person : sortFilteredPersonList(SortByAppointmentComparator)
 activate Person
-Person --> Model
 deactivate Person
-Model --> CommandResult
+
+Model --> SortCommand
 deactivate Model
+
+create CommandResult
+SortCommand -> CommandResult
 activate CommandResult
 CommandResult --> SortCommand
 deactivate CommandResult
-SortCommand --> SortCommandParser : command
+SortCommand --> LogicManager
 deactivate SortCommand
-SortCommandParser --> AddressBookParser
-deactivate SortCommandParser
-AddressBookParser --> LogicManager
-deactivate AddressBookParser
+
 [<-- LogicManager
 deactivate LogicManager
 
