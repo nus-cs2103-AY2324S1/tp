@@ -79,7 +79,7 @@ used for easy navigation.
 * Click [here](#features) to view all detailed features of our app.
 * Already know how to use this guide and can't wait to start? [Get started](#getting-started)!<br>
 * Want an overview of all the commands? Click [here](#command-summary)!<br>
-* Any further questions that are unresolved? Check out our [FAQ](#faqs)!<br>
+* Any further questions that are unresolved? Check out our [FAQ](#faq)!<br>
 * You may also contact us at [service@linktree.com](mailto:service@linktree.com) for further doubts!
 
 **Formatting and Icons**: Throughout the guide, we use bold text and colors to emphasize key points and important terms.
@@ -106,20 +106,19 @@ Here are some symbols you might encounter in our guide, and their respective mea
 ### Installation
 
 1. Ensure you have Java `11` or above installed on your Computer. 
-Check out our [FAQ](#faqs) if you are not sure how to download Java `11`.
+Check out our [FAQ](#faq) if you are not sure how to download Java `11`.
 2. LinkTree is compatible with all major operating systems, including Windows, macOS and Linux.
-3. Download the latest `LinkTree.jar` from [here](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases).
+3. Download the latest `linktree.jar` from [here](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases).
 
 ### Initial Setup
 
-<<<<<<< HEAD
-1. Open a command terminal, navigate to the folder where you store the downloaded jar file, and use the 
-`java -jar addressbook.jar` command to run the application. A GUI similar to the one below should appear in a few 
+1. Open a command terminal, navigate to the folder where you have stored the downloaded jar file. Type the command
+`java -jar linktree.jar` to run the application. A GUI similar to the one below should appear in a few 
 seconds, containing some sample data:
    ![Ui](images/MainUi.png)
 
-2. Type a command into the command box and press Enter to execute it. For example. type `help` in the command box and press Enter.
-It will open a new help window, and shows a command summary in the result display.
+2. Typing a command into the command box and hitting `Enter` will execute it. For example, try typing `help` into the command box and hit Enter.
+It will open a new help window, that shows all the commands in linktree.
 
 3. Refer to the [features](#features) section for details of each command.
 
@@ -128,10 +127,10 @@ It will open a new help window, and shows a command summary in the result displa
 
  ![Understanding GUI](images/UG_images/Understanding%20GUI.png)
 
-* Our GUI is simple and easy to understand:
-1. **Command Box**: You have to type your commands in this box.
+* Linktree's GUI is simple and easy to understand!
+1. **Command Box**: You'll have to type the commands in this box.
 2. **Result Display**: Based on the inputs given, your result will be displayed in this box.
-3. **Help Button**: Type `help` in the command box, and you will see a help window pop up. Giving you the link to 
+3. **Help Button**: Type `help` into the command box, and you will see a help window pop up, giving you the link to 
 this UserGuide. The Result Display will also show a summary of commands.
 4. **Developers Panel**: Lists all the existing developers (or a filtered list of developers after the `find` command, 
 check out [find developer command](#find-developer) for more details).
@@ -143,16 +142,17 @@ check out [find team command](#find-team) for more details).
 | Commands                                    | Description                                                                                                                              |
 |---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | `add`, `delete`, `find`, etc.               | The main command keyword.                                                                                                                |
-| `n/`<br/>`tn/`                              | n/ - Prefix for developer names<br/>tn/ - Prefix for team names.                                                                         |
+| `n/`<br/>`tn/`<br/>`tl`                      | n/ - Prefix for developer names<br/>tn/ - Prefix for team names.  <br/>tl/ -Prefix for team leader name.                                 |
 | `p/`<br/>`e/`<br/> `a/`<br/> `r/`<br/> `t/` | p/ - Prefix for phone number<br/> e/ - Prefix for email<br/>a/ - Prefix for address<br/>r/ - Prefix for remark<br/>t/ - Prefix for tags. |                                                                  |
 | `[DeveloperName]`, `[Phone]`, etc.          | Arguments that follow the command.                                                                                                       |
 | `(optional)`                                | Optional elements like Remark and Tags can be omitted.                                                                                   |                   |
-| `...`                                       | Ellipsis indicates that more arguments can follow.                                                                                       |
 
 
 Example - `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
 
 Click [here](#table-of-contents) to go back to contents.
+
+<br/>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,7 +161,9 @@ Click [here](#table-of-contents) to go back to contents.
 Click [here](#table-of-contents) to go back to contents.<br>
 Click [here](#how-to-use-this-guide) to go back to How to use this Guide.<br>
 
-### Welcome to LinkTree
+</br>
+
+#### Welcome to LinkTree
 
 #### What this command does:
 * The "Hi" command displays a welcome message along with the current date and time.
@@ -170,8 +172,8 @@ Format: `Hi`
 
 ##### Features:
 
-- When the command is invoked, it returns a greeting from Linktree and the current date and time.
-- The output format is consistent, showing "Welcome to Linktree, Current date and time: MM-DD-YYYY HH:MM:SS".
+- You can use this command to check the date and time! Type in `hi` and hit enter!
+- You can now see "Welcome to Linktree, Current date and time: MM-DD-YYYY HH:MM:SS" displayed on the UI.
 
 ##### Guidelines:
 
@@ -188,7 +190,7 @@ When you enter the command (Hi):
 
 ### Add developer
 #### What this command does:
-* Allows you to add developer information into the storage.
+* This command helps you to add a new developer to the addressbook.
 
 ##### Command format: 
 * `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`

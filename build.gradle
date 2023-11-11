@@ -71,7 +71,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook_1.3.jar'
+    archiveFileName = 'linktree.jar'
 }
 
 run {
