@@ -210,7 +210,7 @@ Displays detailed information of a contact in the details list.
 Format: `viewc INDEX`
 
 - Displays the name, phone number, email, last contacted time, status, remarks and tags of the contact at the specified `INDEX`.
-- The `INDEX` refers to the index number shown in the displayed person list.
+- The `INDEX` refers to the number shown beside each contact's name in the contacts list.
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
 - As this command displays the contact at the specified `INDEX` in the contacts list, the contact displayed in the details list may change due to a modification in list order through the use of `addc`, `editc` or `listc` commands. This is intentional.
 - The displayed contact is cleared from the details list when the `deletec` and `findc` commands are used.
