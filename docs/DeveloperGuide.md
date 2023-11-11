@@ -478,7 +478,7 @@ We propose to make the index error messages more specific and highlight to the u
 that index is wrong. For example, in the `enrol m/1 e/-1` input, we will show an error message to the user along 
 the lines of "The provided Event Index is not a non-zero unsigned integer."
 
-### Improve findMember/findEvent criteria
+### Improve `findMember`/`findEvent` criteria
 **Current Implementation:**
 * **Current Issue:** As of now, `findMember` and `findEvent` commands will only match the respective member and event if
 the name of the member or event contains a word that matches exactly the entire given find keyword. This means that the user will
