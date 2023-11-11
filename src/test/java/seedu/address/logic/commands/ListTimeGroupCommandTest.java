@@ -88,7 +88,7 @@ public class ListTimeGroupCommandTest {
         CommandResult expectedResult =
                 new CommandResult(
                         String.format(MESSAGE_LISTTIME_GROUP_SUCCESS, validGroup.getGroupName())
-                        + "\nMON 1300 - MON 1400 \nTUE 1300 - TUE 1400 \nWED 1300 - WED 1400 ");
+                                + "\nMON 1300 - MON 1400 \nTUE 1300 - TUE 1400 \nWED 1300 - WED 1400 ");
 
         assertEquals(expectedResult, commandResult);
     }

@@ -55,13 +55,12 @@ public class UngroupPersonCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof UngroupPersonCommand)) {
+        if (!(other instanceof GroupPersonCommand)) {
             return false;
         }
 
         UngroupPersonCommand otherUngroupPersonCommand = (UngroupPersonCommand) other;
-        return this.personName.equals(otherUngroupPersonCommand.personName)
-                && this.groupName.equals(otherUngroupPersonCommand.groupName);
+        return this.equals(otherUngroupPersonCommand);
 
     }
 

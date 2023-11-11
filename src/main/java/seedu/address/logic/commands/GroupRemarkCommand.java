@@ -66,6 +66,6 @@ public class GroupRemarkCommand extends Command {
         // state check
         GroupRemarkCommand e = (GroupRemarkCommand) other;
         return groupRemark.equals(e.groupRemark)
-                && groupName.equals(e.groupName);
+                && groupRemark.equals(e.groupName);
     }
 }

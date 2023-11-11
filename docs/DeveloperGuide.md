@@ -178,32 +178,65 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Adding a Person
 
-The add feature is facilitate by a number of classes such as `Person` and `Model`
+#### Implementation
+
+The `add` feature is facilitated by a number of classes such as `Person` and `Model`
 
 Step 1. The user launches the application for the first time.
 
 Step 2. The user executes `“add n/John Doe p/98765432 e/johnd@example.com g/CS2103T”` command to add a new person. `LogicManager#execute` is called which then calls `AddressBookParser#parseCommand` to decide on the type of command. `AddressBookParse`r` then calls `AddCommandParser`,
 
 Step 3, The `AddCommandParser` is called to read the user input. `AddCommandParser` calls `ArgumentTokenizer#tokenize` to check the prefixes of the user input. `AddCommandParser` then calls `ArgumentMultimap#getValue()` to get inputs after each prefix.
-The result of it is then passed to `ParserUtil#parse{Attribute}` methods to parse each attributes such as `Name`. `AddCommandParser` then makes new person object. `AddCommandParser` then calls `AddCommand` and passes `Person` inside.
+The result of it is then passed to `ParserUtil#parse` methods to parse each attributes such as `Name`. `AddCommandParser` then makes new person object. `AddCommandParser` then calls `AddCommand` and passes `Person` inside.
 
 Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook#addPerson()`. The latter method will add person inside the `uniquePersonList` in `addressBook`. `AddCommand` also calls `Model#addGroup` which then calls `AddressBook#addGroup` to add the group inside `grouplist` if the group does not exist.
 Lastly, `AddCommand` adds the person inside the group
 
 Note: No duplication is allowed in addressbook for most of Person’s attribute (name, email and phone number.)
 
+The following sequence diagram describes the process of `add` command:
 <puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
 
 #### Design consideration:
 
 **Aspect: Handling group attribute in user input**
 
-* **Alternative 1 (Current Choice):** Only allow user to add one group for each `Add` Command
-    * Pros: Conveniently adds a person into group while creating a new contact at the same time
-    * Cons: User input is relatively longer
-* **Alternative 2:** Allow user to add as many groups as required for each `Add` Command
-    * Pros: Conveniently adds a person into group while creating a new contact at the same time
-    * Cons: User input can get potentially very long, increasing the chance of invalid input
+* **Alternative 1 (Current Choice):** Only allow user to add one group for each `add` Command
+    * Pros: Conveniently adds a person into a single group while creating a new contact at the same time, relatively easier to implement parser. 
+    * Cons: User input may get relatively longer.
+* **Alternative 2:** Allow user to add as many groups as required for each `add` Command
+    * Pros: Conveniently adds a person into multiple group while creating a new contact at the same time.
+    * Cons: User input can get potentially very long, increasing the chance of invalid input, relatively harder to implement parser.
+
+--------------------------------------------------------------------------------------------------------------------
+### Adding Time a Person
+
+#### Implementation
+
+The `addtime` feature is facilitated by a number of classes such as `Person`, `Model` and `TimeInterval`
+
+Step 1. User launches the application.
+
+Step 2. The user executes `“addtime n/Alex Yeoh t/mon 1200 - mon 1400 t/tue 1000 - wed 1600”` command to add time slots to the person, Alex Yeoh. `LogicManager#execute` is called which then calls `AddressBookParser#parseCommand` to decide on the type of command. `AddressBookParser` then calls `AddTimeCommandParser`,
+
+Step 3, The `AddTimeCommandParser` is called to read the user input. `AddTimeCommandParser` calls `ArgumentTokenizer#tokenize` to check the prefixes of the user input. `AddTimeCommandParser` then calls `ArgumentMultimap#getValue()` to get inputs after each unique single prefix and `ArgumentMultimap#getAllValues()` to get inputs from prefix that are used more than once.
+The result of it is then passed to `ParserUtil#parse()` methods to parse each attributes such as `Name`. `AddTimeCommandParser` then calls `AddTimeCommand`.
+
+Step.4 `AddTimeCommand` then calls `Model#addTimeToPerson()` which then calls `AddressBook#addTimeToPerson()`. The latter method will add time to the person.
+
+The following sequence diagram describes the process of `addtime` command:
+<puml src="diagrams/AddTimeCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
+
+#### Design consideration:
+
+**Aspect: Handling group attribute in user input**
+
+* **Alternative 1 (Current Choice):** Allows user to add more than one time intervals in each `addtime` command.
+  * Pros: Conveniently adds a multiple time intervals into person. 
+  * Cons: User input may get relatively longer, relatively harder to implement parser.
+* **Alternative 2:** Allow user to only add single time interval in each `addtime` Command
+  * Pros: Conveniently adds a person into group while creating a new contact at the same time, relatively easier to implement parser.
+  * Cons: User input can get potentially very long, increasing the chance of invalid input.
 
 --------------------------------------------------------------------------------------------------------------------
 
