@@ -36,20 +36,22 @@
 
 ## Product Overview
 
-JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of companies to ease the management of applicants, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JABPro can get your applicant management tasks done faster than traditional GUI apps.
+Are you tired of managing candidate applications through cumbersome spreadsheets? Upgrade your hiring process with JABPro (JobApplicationsBook Pro), a CLI based desktop app that allows you to easily manage candidate applications, schedule interviews, and gain valuable insights on their interview performance. From interns to full-time roles, software to marketing, JABPro’s versatile interface allows you to keep track of all kinds of job applicants in various industries. Access our self-curated user guide below to learn more on how you can integrate various JABPro’s functions into your workflow.
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+
 ## Key Definitions
-You are a 'beginner' user if ...
+You are a **beginner** user if ...
 
-1. you are new to JABPro (used JABPro less than 5 times) and
-2. you wish to fully rely on the JABPro interface
+1. you are new to JABPro (used JABPro less than 5 times) *and*
+2. you wish to fully rely on the JABPro interface.
 
-You are an 'advanced' user if ...
-1. you have used JABPro multiple times now and
-2. you use JABPro's search and summary statistics extensively for comparison or
-3. you would like to challenge yourself to go beyond the JABPro user interface and manually edit files
+You are an **advanced** user if ...
+1. you have used JABPro multiple times now *and*
+2. you use JABPro's search and summary statistics extensively for comparison *or*
+3. you would like to challenge yourself to go beyond the JABPro user interface and manually edit files.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Overview of Main Features
@@ -82,7 +84,7 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -133,7 +135,7 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
   e.g in the command `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `t/TAGNAME…​` can be used as ` ` (i.e. 0 times), `t/swe t/intern` for `add` commands or `t/swe intern` for `search` and `delete` commands.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -207,7 +209,6 @@ Mandatory| `a/ADDRESS`             | `ADDRESS` can be any value, including speci
 * All other fields other than name can be identical between different people in JABPro.
 * Persons added using the `add` command will be added to the end of the list.
 
-
 **Notes on adding tags:**
 * If you would like to tag a user with a tag that has not been categorised yet using the `create` command,
 you can specify the category that you would like it to be categorised to in the `add` command. e.g. `...t/role swe`
@@ -216,10 +217,9 @@ the tag would still be saved but it would be "uncategorised" by default.
 * If you have multiple tags in different categories with the same name, you must specify the category when you want to 
 add one of these tags to the candidate you are adding.
 
-
 <box type="tip" seamless>
 
-**Tip:** 
+**Tip:**
 * A person can have any number of tags (including 0)!
 </box>
 
@@ -333,6 +333,7 @@ An example of the `view` command failing to execute due to wrong index:
 2. This is the result of the failed `view` command:
    ![View-Fail](images/view-command-failure.png)
 <br>
+
 
 
 ### Adding Github/LinkedIn username for a user: `addG` or `addL`
@@ -474,6 +475,7 @@ An example of the `edit` command being wrongly executed due to trying to attach 
 
 
 
+
 ### Filter job applicants by statistics: `filter`
 
 Filters and display applicants in the current displayed applicant list using statistical metrics and values.
@@ -497,8 +499,6 @@ Optional| `val/VALUE`           | Optional only for `mean` and `median`. Otherwi
 
 **Notes on the different metrics:**
 Do look at the [Summary Statistics](#summary-statistics) section for more details on the summary statistics metrics.
-
-
 
 <box type="tip" seamless>
 
@@ -546,7 +546,6 @@ An example of the `filter` command being incorrectly executed due to an invalid 
    ![Filter-Fail](images/filter-command-failure-2.png)
 <br>
 
-
 **Significance of using `filter` with the metrics `score`, `percentile`, `mean` and `median`:**
 In essence, this allows you to find job applicants whose performance rating is above a certain percentile, score or mean/median score for that tag.  
 Ideally, this feature can then be used to find the best candidates easily and quickly without having to manually look through the list of candidates.
@@ -554,18 +553,17 @@ Ideally, this feature can then be used to find the best candidates easily and qu
 
 
 
-
-### Search job applicants by category: `search`
+### Searching job applicants by category: `search`
 
 Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
 
-Format: `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`
+Format: `search (n/NAME... / st/STATUS... / t/TAGNAME...)`
 
-#### Search job applicants by name
+#### Searching job applicants by name
 
 Finds job applicants whose names contain the given keywords.
 
-Format: `search n/KEYWORD [MORE KEYWORDS]`
+Format: `search n/NAME...`
 
 * Keywords are case-insensitive: `search n/Josh` and `search n/josh` return the same result.
 * Keyword has to be a string that does not contain any non-alpha numeric characters.
@@ -578,11 +576,11 @@ Examples:
 * `search n/John` returns `john` and `John Doe`
 * `search n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
-#### Search job applicants by status
+#### Searching job applicants by status
 
 Finds job applicants whose status match any of the given keywords.
 
-Format: `search st/KEYWORD [MORE KEYWORDS]`
+Format: `search st/STATUS...`
 
 * Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
   e.g. `search st/interviewing` will give an error.
@@ -591,13 +589,13 @@ Format: `search st/KEYWORD [MORE KEYWORDS]`
 Example:
 * `search st/interviewed`
 
-#### Search job applicants by tag
+#### Searching job applicants by tag
 
 Finds job applicants whose tag(s) match any of the given tag keywords
 
-Format: `search t/KEYWORD [MORE KEYWORDS]`
+Format: `search t/TAGNAME...`
 
-* Keywords are case-insensitive: `search t/hardworking' and `search t/HARDWORKING` return the same result.
+* Keywords are case-insensitive: `search t/hardworking` and `search t/HARDWORKING` return the same result.
 
 Example:
 * `search t/hardworking`
@@ -615,23 +613,60 @@ Example:
 
 ![Search](images/search-2.png)
 
-### Deleting a person : `delete`
+### Deleting job applicants : `delete`
 
 Deletes the specified job applicants from the address book.
 
-Format: `delete INDEX` or `delete t/TAG`
+Format: `delete INDEX` or `delete (t/TAGNAME... st/STATUS...)`
 
-* Delete by index
-  * Deletes the person at the specified `INDEX`.
-  * The index refers to the index number shown in the displayed person list.
-  * The index **must be a positive integer** 1, 2, 3, …​
-* Delete by tags
-  * Deletes all persons who have the specified TAG or a combination of tags. 
-  * The tag(s) must be prefixed with t/.
+Note:
+* User **cannot** delete by index and delete by tags & status in a single command.<br>
+  E.g. `delete 1 t/hardworking` is not allowed. 
 
-Examples:
+#### Deleting job applicants by index
+
+Deletes job applicants at the specified index.
+
+Format `delete INDEX`
+
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example: 
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+#### Deleting job applicants by tag
+
+Deletes job applicants whose tag(s) match any of the given tag keywords
+
+* Keywords are case-insensitive: `delete t/hardworking` and `delete t/HARDWORKING` return the same result.
+
+Example:
+* `delete t/hardworking`
+
+#### Deleting job applicants by status
+
+Deletes job applicants whose status match any of the given keywords.
+
+Format: `delete st/STATUS...`
+
+* Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
+  E.g. `delete st/interviewing` will give an error.
+* Keywords are case-insensitive: `delete st/interviewed` and `delete st/INTERVIEWED` return the same result.
+
+Example:
+* `delete st/interviewed`
+
+#### Notes for advanced users:
+* You can combine the status and tags prefixes (e.g. `delete st/offered t/hardworking`) in a single delete command.
+* Each delete category can be used at most once in a single search command.<br>
+  E.g. `delete st/interviewed st/rejected` is not allowed.
+
+Example:
+* `delete st/interviewed rejected t/intern manager` will delete applicants whose:
+    * status is either **interviewed** or **rejected**
+    * AND has a tag `intern` or `manager`
 
 ### Setting an applicant's status : `set`
 
@@ -683,7 +718,7 @@ Exports the entries into a .csv file located in the current directory as (/data/
 
 * Note: Export currently does not support Events.
 
-*  Usage Note: JABPro must have write permissions, this means that if the .csv file is open,
+* Usage Note: JABPro must have write permissions, this means that if the .csv file is open,
 exporting again will not be possible.
 
 
@@ -800,15 +835,12 @@ JABPro currently does not support exporting Events. This feature will be impleme
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JABPro home folder.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+**Q**: What's the difference between *tip* and *note*?<br>
+**A**: *Tip* is something useful to know and can be done beforehand, while *note* is something you have to be concious about and take into account. 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 
  Action                   | Format, Examples                                                                                                                                               
@@ -832,6 +864,23 @@ JABPro currently does not support exporting Events. This feature will be impleme
  **Event**                | `event INDEX d/DESCRIPTION bt/START_TIME et/END_TIME`
  **Schedule**             | `schedule`
 
+## Prefix Summary
+Prefix                    | Name         | Commands                                                                                                                                            
+--------------------------|--------------| --------------------------
+`n/`                      | name         | Add, Edit, Search
+`p/`                      | phone number | Add, Edit
+`e/`                      | email        | Add, Edit
+`a/`                      | address      | Add, Edit
+`t/`                      | tag          | Add, Edit, Search, Create, Delete
+`st/`                     | status       | Search, Delete, Set
+`r/`                      | remark       | Remark
+`u/`                      | username     | Add Github/LinkedIn
+`met/`                    | metric       | Filter
+`val/`                    | value        | Filter
+`so/`                     | sort         | List
+`d/`                      | description  | Event
+`bt/`                     | begin time   | Event
+`et/`                     | end time     | Event
 
 
 
