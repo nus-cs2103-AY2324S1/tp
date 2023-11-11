@@ -25,4 +25,4 @@ To increase the flexibility and efficiency of the flashcard software, lesSON is 
 - [ ] Tagging of flashcards into categories
 
 ## Links
-* [User Guide](https://docs.google.com/document/d/17tfwoslLc0Ky1ygVAM4aDlNsUm8nSdBxpDvt-hqFyWk/edit)
+* [User Guide](https://ay2324s1-cs2103t-w17-4.github.io/tp/UserGuide.html)
