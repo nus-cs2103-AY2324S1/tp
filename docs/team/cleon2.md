@@ -41,12 +41,18 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=cleon2&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByAuthors&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
+  * Assigned milestones and issues to teammates on GitHub
 
 * **Enhancements to existing features**:
 
 * **Documentation**:
-    * User Guide:
-    * Developer Guide:
+  * User Guide:
+    - Added documentation for star, unstar commands
+    - Added quickstart tutorial
+    - Ensured standardisation of format and commands
+  * Developer Guide:
+    - Added Sequence and Activity Diagrams for the `star` and `unstar` commands
+    
 
 * **Community**:
 

@@ -221,7 +221,7 @@ The Sequence Diagram below shows how the components interact with each other for
 
 <puml src="diagrams/EditSequenceDiagram.puml" width="450" />
 
-## List Dates
+### List Dates
 The list dates feature is implemented using the `ListCommand` class. The `ListCommand` class takes in a `Predicate` object as a parameter. The `Predicate` object is used to filter the `Date` objects in the `Model` component. The `ListCommand` class then returns a `CommandResult` object that contains the filtered `Date` objects.
 
 ### Filter dates
@@ -347,21 +347,22 @@ finding the perfect match.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| As a …​  | I want to …​                                                                                    | So that I can…​                                                                             |
-|----------|-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| new user | be greeted with a welcome message when i launch the app                                         | so that I feel welcome                                                                      |
-| new user | be able to key in my height in my preferences                                                   | so that the algorithm can recommend me a suitable date based on our height compatibility    |
-| new user | be able to key in my horoscope in my preferences                                                | so that the algorithm can recommend me a suitable date based on our horoscope compatibility |
-| new user | be able to key in my own income in my preferences                                               | so that the algorithm can recommend me a suitable date based on our income compatibility    |
-| new user | to be able to key in my own gender in my preferences                                            | so that the algorithm can match me to the appropriate gender                                |
-| dater    | be able to pull up a list of my previous dates                                                  | so that I can keep track of who I have dated in the past                                    |
-| dater    | be able to delete dates from my list                                                            | so that my dating list is only limited to those who I am still interested in                |
-| dater    | to be able create a new date entry with his/her gender, name, income, height, horoscope and age | so that I can keep my list growing                                                          |
-| dater    | to be able to edit the details of my date                                                       | so that I can keep my dates details up to date                                              |
-| dater    | to be able to be recommended a complete random date                                             | so that I can have an exciting surprise date that day                                       |
-| dater    | to be able to filter my past dates based on a particular metric                                 | so that I can find dates that I am interested in amidst my long and ever growing list       |
-| dater    | to be able to be recommended the most compatible date for me                                    | so that I optimize my chance of finding my one true love                                    |
-
+| As a …​      | I want to …​                                                                                    | So that I can…​                                                                             |
+|--------------|-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| new user     | be greeted with a welcome message when i launch the app                                         | so that I feel welcome                                                                      |
+| new user     | be able to key in my height in my preferences                                                   | so that the algorithm can recommend me a suitable date based on our height compatibility    |
+| new user     | be able to key in my horoscope in my preferences                                                | so that the algorithm can recommend me a suitable date based on our horoscope compatibility |
+| new user     | be able to key in my own income in my preferences                                               | so that the algorithm can recommend me a suitable date based on our income compatibility    |
+| new user     | to be able to key in my own gender in my preferences                                            | so that the algorithm can match me to the appropriate gender                                |
+| serial dater | be able to pull up a list of my previous dates                                                  | so that I can keep track of who I have dated in the past                                    |
+| serial dater | be able to delete dates from my list                                                            | so that my dating list is only limited to those who I am still interested in                |
+| serial dater | to be able create a new date entry with his/her gender, name, income, height, horoscope and age | so that I can keep my list growing                                                          |
+| serial dater | to be able to edit the details of my date                                                       | so that I can keep my dates details up to date                                              |
+| serial dater | to be able to be recommended a complete random date                                             | so that I can have an exciting surprise date that day                                       |
+| serial dater | to be able to filter my past dates based on a particular metric                                 | so that I can find dates that I am interested in amidst my long and ever growing list       |
+| serial dater | to be able to be recommended the most compatible date for me                                    | so that I optimize my chance of finding my one true love                                    |
+| serial dater | to be able to star dates                                                                        | so that I can keep track of outstanding dates                                               |
+| serial dater | to be able to unstar dates                                                                      | so that I can keep focused on people who are still outstanding to me                        |
 *{More to be added}*
 
 ### Use cases
@@ -543,6 +544,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+| Term                       | Definition                                                                                                        |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------|
+| Date                       | A person that the user is interested in and is currently seeing.                                                  |
+| Metric | A certain characteristic of a date. (e.g. Gender, Height)                                                         |
+| Command | Text that the user types into the application to perform an action.                                               |
+| Parameter | A value that the user provides to the application when executing a command. (e.g. in `gender/M` M is a parameter) |
+| GUI | Graphical User Interface                                                                                          |
+| CLI | Command Line Interface                                                                                            |
+| Mainstream OS |  Windows, Linux, Unix, OS-X |
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -688,17 +699,12 @@ dates have the same value, then when one of those two dates are modified by oper
 of the two of them can change. The dates are still sorted in order, just that the stability is disrupted. We intend
 to improve upon our star and edit commands such that they do not disrupt the stability in the future.
 
-4. Improve error messages
-   - Currently, typing a value more than a million for the income field, throws an error that says that it 
-only accepts positive integers. In the future we intend to update it to say that it only accepts positive integers up 
-till a million. This is more accurate
-
-5. Improve the filter feature to be more robust. Some examples include:
+4. Improve the filter feature to be more robust. Some examples include:
    - Currently, the filter feature only allows the user to filter by metrics limited to name, age, gender and height. We
      are planning to allow the user to filter by other metrics such as horoscope and income.
    - Currently, the filter feature only allows the user to filter by a single keyword for a single metric. We are planning to allow the user
      to filter by multiple keywords.
 
-6. Improve the error message to be more comprehensive
+5. Improve the error message to be more comprehensive
    - Currently, the error message for user that key in multiple invalid keywords only spots the first invalid keyword. We
      are planning to allow the user to know all the invalid keywords that he/she has keyed in.
