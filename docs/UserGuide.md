@@ -203,15 +203,15 @@ For each **interview**, we see the following details:
   * DD/MM/YYYY and time:
     * `16 Jan 2024 TIME`
     * `16 January 2024 TIME`
-    * `16-05-2024 TIME`
-    * `16-05-24 TIME`
-    * `16/05/2024 TIME`
-    * `16/05/24 TIME`
+    * `16-01-2024 TIME`
+    * `16-01-24 TIME`
+    * `16/01/2024 TIME`
+    * `16/01/24 TIME`
   * MM, DD and time:
     * `16 Jan TIME`
     * `16 January TIME`
-    * `16/5 TIME`
-    * `16/05 TIME`
+    * `16/1 TIME`
+    * `16/01 TIME`
   * The `TIME` placeholder can be replaced with the formats below:
     * `1515`
     * `3.15pm`
@@ -733,7 +733,7 @@ After `sort-time`:
 
 ### Editing the data file
 
-InterviewHub data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+InterviewHub data are saved automatically as a JSON file `[JAR file location]/data/interviewhub.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 If your changes to the data file makes its format invalid, InterviewHub will not work. Hence, it is recommended to take a backup of the file before editing it.
