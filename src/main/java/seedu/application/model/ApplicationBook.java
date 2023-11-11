@@ -1,6 +1,7 @@
 package seedu.application.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.application.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.model.job.FieldComparator;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.UniqueJobList;
+import seedu.application.model.job.interview.Interview;
 
 /**
  * Wraps all data at the application-book level
@@ -77,6 +79,16 @@ public class ApplicationBook implements ReadOnlyApplicationBook {
         requireNonNull(editedJob);
 
         jobs.setJob(target, editedJob);
+    }
+    /**
+     * Replaces the given job {@code target} in the list with {@code editedJob}.
+     * {@code target} must exist in the application book.
+     * The job identity of {@code editedJob} must not be the same as another existing job in the application book.
+     */
+    public void setInterview(Job job, Interview target, Interview editedInterview) {
+        requireAllNonNull(job, editedInterview);
+
+        job.setInterview(target, editedInterview);
     }
 
     /**
