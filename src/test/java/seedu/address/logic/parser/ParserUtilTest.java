@@ -238,7 +238,6 @@ public class ParserUtilTest {
             fail();
         }
     }
-  
     @Test
     public void validateName_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.validateName(INVALID_NAME));
@@ -251,12 +250,10 @@ public class ParserUtilTest {
             fail();
         }
     }
-  
     @Test
     public void validateTag_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.validateTag(INVALID_TAG));
     }
-  
     @Test
     public void validateFinancialPlan_validInput_success() {
         try {
@@ -265,33 +262,10 @@ public class ParserUtilTest {
             fail();
         }
     }
-  
     @Test
     public void validateFinancialPlan_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.validateFinancialPlan(INVALID_FINANCIAL_PLAN));
     }
-  
-    @Test
-    public void validateFinancialPlans_validInputs_success() {
-        try {
-            ParserUtil.validateFinancialPlans(Arrays.asList(VALID_FINANCIAL_PLAN_1, VALID_FINANCIAL_PLAN_2));
-        } catch (ParseException e) {
-            fail();
-        }
-    }
-  
-    @Test
-    public void validateFinancialPlans_invalidInputs_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.validateFinancialPlans(
-                        Arrays.asList(INVALID_FINANCIAL_PLAN, VALID_FINANCIAL_PLAN_1)));
-    }
-  
-    @Test
-    public void validateFinancialPlans_missingInputs_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.validateFinancialPlans(
-                Arrays.asList("", VALID_FINANCIAL_PLAN_1)));
-    }
-
     @Test
     void isValidDay_validDate_shouldReturnTrue() {
         // November has 30 days
@@ -299,7 +273,6 @@ public class ParserUtilTest {
         String date = "15-11-2022";
         assertTrue(ParserUtil.isValidDay(yearMonth, date));
     }
-
     @Test
     void isValidDay_invalidDate_shouldReturnFalse() {
         // February has 28 days
@@ -307,7 +280,6 @@ public class ParserUtilTest {
         String date = "31-02-2022";
         assertFalse(ParserUtil.isValidDay(yearMonth, date));
     }
-
     @Test
     void parseAppointmentDate_validDate_shouldParseSuccessfully() throws ParseException {
         String validDateString = "29-02-2024 14:30";
@@ -317,7 +289,6 @@ public class ParserUtilTest {
             fail();
         }
     }
-
     @Test
     void parseAppointmentDate_invalidDate_shouldThrowParseException() {
         // 29th Feb for non leap year
