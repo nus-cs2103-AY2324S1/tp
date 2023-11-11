@@ -34,5 +34,5 @@ public class CliSyntax {
     /**
      * Prefix definition for remark.
      */
-    public static final Prefix PREFIX_REMARK = new Prefix("m/");
+    public static final Prefix PREFIX_REMARK = new Prefix("rm/");
 }
