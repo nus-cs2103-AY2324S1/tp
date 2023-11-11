@@ -224,7 +224,7 @@ Format: `add ty/<TYPE> d/<DESCRIPTION> a/<AMOUNT> on/<DATE> [s/<STAFF ID>]`
 Success
 output: `New transaction added: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; [StaffId: <STAFF ID>]`
 
-> If you leave out the StaffId or enter a negative StaffId, then the success output will show "None" and the transaction
+> If you leave out the StaffId then the success output will show "None" and the transaction
 > will not be linked to any staff member in the staff list.
 
 Examples:
