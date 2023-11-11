@@ -31,7 +31,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 The ***Architecture Diagram*** given above illustrates the high-level design of the App. 
 
-You could see that The bulk of the app's works are done by the UI, Logic, Model and Storage components. Below are the general duties of each component and how they interact with each other.
+You can see that the bulk of the app's works are done by the UI, Logic, Model and Storage components. Below are the general duties of each component and how they interact with each other.
 
 #### Duties of each component
 [**`UI`**](#ui-component) is responsible for
