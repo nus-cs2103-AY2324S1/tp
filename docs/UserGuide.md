@@ -10,38 +10,44 @@ _Find Your Success with JobFindr_
 ## Table of Contents
 
 1. [Introduction](#introduction)
-    1. [First Time at JobFindr](#first-time-at-jobfindr)
-    2. [Experience at JobFindr](#experienced-at-jobfindr)
+    * [First Time at JobFindr](#first-time-at-jobfindr)
+    * [Experience at JobFindr](#experienced-at-jobfindr)
 2. [Quick Start](#quick-start)
 3. [Quick Tutorial](#quick-tutorial)
 4. [Key Information](#key-information)
-    1. [User Interface](#user-interface)
-    2. [Structure of a job application](#structure-of-a-job-application)
-    3. [Valid statuses](#valid-statuses)
-    4. [Valid job types](#valid-job-types)
-    5. [Structure of an interview](#structure-of-an-interview)
-    6. [Valid interview types](#valid-interview-types)
-    7. [Command Format](#command-format)
+    * [User Interface](#user-interface)
+    * [Structure of a job application](#structure-of-a-job-application)
+    * [Valid statuses](#valid-statuses)
+    * [Valid job types](#valid-job-types)
+    * [Structure of an interview](#structure-of-an-interview)
+    * [Valid interview types](#valid-interview-types)
+    * [Command Format](#command-format)
 5. [Features](#features)
-    1. [Command Summary](#command-summary)
-    2. [Asking for help: `help`](#asking-for-help-help)
-    3. [Listing all applications: `list`](#listing-all-applications--list)
-    4. [Adding an application: `add`](#adding-an-application--add)
-    5. [Deleting an application: `delete`](#deleting-an-application--delete)
-    6. [Editing an application: `edit`](#editing-an-application--edit)
-    7. [Finding an application: `find`](#finding-an-application--find)
-    8. [Sorting the applications: `sort`](#sorting-all-applications--sort)
-    9. [Adding an Interview: `interview add`](#adding-an-interview-interview-add)
-    10. [Deleting an Interview: `interview delete`](#deleting-an-interview-interview-delete)
-    11. [Editing an Interview: `interview edit`](#editing-an-interview-interview-edit)
-    12. [Clearing All Applications: `clear`](#clearing-all-applications-clear)
-    13. [Exiting the Programme: `exit`](#exiting-the-programme-exit)
+    * [Command Summary](#command-summary)
+    * [System Features](#general-features)
+        * [Asking for help: `help`](#asking-for-help-help)
+        * [Exiting the Programme: `exit`](#exiting-the-programme-exit)
+    * [Job Application Features](#job-application-features)
+        * [Listing all applications: `list`](#listing-all-applications--list)
+        * [Adding an application: `add`](#adding-an-application--add)
+        * [Deleting an application: `delete`](#deleting-an-application--delete)
+        * [Editing an application: `edit`](#editing-an-application--edit)
+        * [Clearing All Applications: `clear`](#clearing-all-applications-clear)
+        * [Finding an application: `find`](#finding-an-application--find)
+        * [Sorting the applications: `sort`](#sorting-all-applications--sort)
+    * [Interview Features](#interview-features)
+        * [Adding an Interview: `interview add`](#adding-an-interview-interview-add)
+        * [Deleting an Interview: `interview delete`](#deleting-an-interview-interview-delete)
+        * [Editing an Interview: `interview edit`](#editing-an-interview-interview-edit)
 6. [FAQ](#faq)
 7. [Glossary](#glossary)
 
+* TOC
+  {:toc}
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Introduction
+## **Introduction**
 
 JobFindr is a **Desktop-based Job Application Management App** for NUS Fresh Graduates to record, track and organise
 their job applications.
@@ -69,7 +75,7 @@ _Welcome onboard JobFindr! Let us be part of your job search journey!_
 
 ### Experienced at JobFindr
 
-_Good to see you back here! Let see how we can help you?_
+_Good to see you back here! How we can help you?_
 
 1. Facing problem with specific command?
     * You may refer to the detailed instruction for each command in the [Features](#features) section or access the
@@ -80,9 +86,11 @@ _Good to see you back here! Let see how we can help you?_
 3. Any other issues faced when using JobFindr?
     * You may refer to the [FAQ](#faq) Section for solutions to common issues faced by our users.
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## **Quick Start**
 
 1. Ensure you have Java `11` or above installed in your Computer.
     1. To check if you have installed the correct Java version
@@ -91,7 +99,7 @@ _Good to see you back here! Let see how we can help you?_
        over [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
        to install Java `11`
 2. Download the latest `JobFindr.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-3/tp/releases).
-   ![DownloadJar](images/DownloadJar.png)
+   ![DownloadJar](images/user-guide/DownloadJar.png)
 3. Copy the file to the folder you want to use as the **home folder** for your AddressBook.
 4. [Open a command terminal](#2-how-do-i-open-up-terminal-on-my-computer), `cd` into the folder you put the jar file in,
    and enter the command `java -jar JobFindr.jar` to run the application.
@@ -100,6 +108,8 @@ _Good to see you back here! Let see how we can help you?_
 6. Get started on JobFindr with our guided [Quick Tutorial](#quick-tutorial) to learn the basics of using JobFindr in a
    few minutes.
 7. Refer to [Key Information](#key-information) below for details of each command.
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -175,10 +185,11 @@ Congrats! You have now master the basics of JobFindr! You may head right below t
 about [JobFindr in details](#key-information)
 or go on to learn about [the other commands](#features) you can utilise in JobFindr.
 
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Key Information
+## **Key Information**
 
 <div markdown="block" class="alert alert-info">
 
@@ -188,7 +199,7 @@ We designed our Graphical User Interface(GUI) with both **functionality** and **
 seamless experience for you at JobFindr.
 
 Below are the components of our GUI:
-![GUI](images/UiStructure.png)
+![GUI](images/user-guide/UiStructure.png)
 
 | Index | Component            | Description                                                            |
 |-------|----------------------|------------------------------------------------------------------------|
@@ -308,9 +319,11 @@ The following are valid interview types:
 
 </div>
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## **Features**
 
 ### Command summary
 
@@ -329,39 +342,55 @@ The following are valid interview types:
 | **Clear**            | `clear`                                                                                  |
 | **Exit**             | `exit`                                                                                   |
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+### **General Features**
 
 ### Asking for help: `help`
 
-Shows a list of commands and how they can be used.
+_Shows a list of commands and how they can be used._
+
+This command opens up a separate window, displaying all the available commands on JobFindr and their formats.
 
 **Format:** `help`
 
-***Successful Commands:***
+***Successful Example:***
+![HelpCommandExample](images/user-guide/HelpCommandEg.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
-1. Launching the help window: `help`
+--------------------------------------------------------------------------------------------------------------------
 
-* This command opens up a separate window, displaying all the availble commands on JobFindr and their formats.
+### Exiting the programme: `exit`
+
+_Exits the program._
+
+**Format:** `exit`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:** <br>
+* Job applications will be saved automatically, no further action is required!
+</div>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+### **Job Application Features**
 
 ### Listing all applications : `list`
 
-Shows a list of all applications in the list in alphabetical order.
+_Shows a list of all job applications in alphabetical order of the company name._
 
 **Format:** `list`
 
-**Successful command:**
+**Successful Example:** <br>
+**Step 1:** Type `list` in the Command Box and press **Enter**.
+![ListCommandEg1](images/user-guide/ListCommandEg1.png)
+![ListCommandEg1](images/user-guide/ListCommandEg2.png)
 
-* List out all applications to companies in the list with index.
-
-**UI mockup:**
-![ListCommand](images/user-guide/ListCommand.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding an application : `add`
 
@@ -399,7 +428,7 @@ Adds a job application to the list.
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ### Deleting an application : `delete`
 
@@ -434,7 +463,7 @@ Deletes the specified application from the list.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing an application : `edit`
 
@@ -475,7 +504,17 @@ Edits an application in the list.
 ![](images/user-guide/EditCommand.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+### Clearing all applications: `clear`
+
+Clears all applications from the application book.
+
+**Format:** `clear`
+
+[&uarr; Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Finding an application : `find`
 
@@ -520,7 +559,7 @@ Finds all applications whose fields match the keywords provided.
 ![](images/user-guide/FindCommand.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ### Sorting all applications : `sort`
 
@@ -561,7 +600,9 @@ Sorts the list based on the prefix provided.
 ![](images/user-guide/SortCommand.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+### **Interview Features**
 
 ### Adding an interview: `interview add`
 
@@ -591,7 +632,7 @@ Adds an interview to the specified application from the list.
 ![](images/user-guide/IntAddCommand.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ### Deleting an interview: `interview delete`
 
@@ -621,7 +662,7 @@ Deletes an interview of the specified application from the list.
 ![](images/user-guide/IntDeleteCommand.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing an interview: `interview edit`
 
@@ -656,43 +697,16 @@ Edits an interview of the specified application from the list.
 ![](images/user-guide/IntEditCommand.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
-
-### Clearing all applications: `clear`
-
-Clears all applications from the application book.
-
-**Format:** `clear`
-
-[&uarr; Back to Table of Contents](#table-of-contents)
-
-
----
-
-### Exiting the programme: `exit`
-
-Exits the program.
-
-**Format:** `exit`
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Notes:** <br>
-* Applications will be saved automatically before exiting. No further action is required.
-</div>
-
-[&uarr; Back to Table of Contents](#table-of-contents)
-
-
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## **FAQ**
 
 ### 1. How do I make sure I have installed the correct Java version?
 
 - [Open up terminal](#2-how-do-i-open-up-terminal-on-my-computer) on your computer.
 - Type `java -version` in your terminal and press enter. You will see the following if you have installed Java 11
-  correctly:
-  ![Screenshot 2023-11-10 at 2.33.40 PM.png](..%2F..%2FDesktop%2FScreenshot%202023-11-10%20at%202.33.40%E2%80%AFPM.png)
+  correctly:<br>
+  ![CheckJavaVer](images/user-guide/FaqCheckJavaVer.png)
 - If you do not have Java 11 installed, please refer
   to [this guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
   to download it to your computer.
@@ -711,12 +725,12 @@ On **Mac**:
 On **Windows**:
 
 1. Open your computer's **Start** menu by clicking the Windows Start
-   icon <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Windows_logo_-_2012_%28dark_blue%29.svg/176px-Windows_logo_-_2012_%28dark_blue%29.svg.png?20220530123831"  width="24" height="24">
-   at the bottom-left corner of your desktop or press the Win
-   key <img src="https://w7.pngwing.com/pngs/609/896/png-transparent-laptop-desktop-windows-10-mobile-windows-angle-electronics-rectangle.png"  width="24" height="24">
+   icon <img src="images/user-guide/FaqWinLogo.png"  width="24" height="24">
+   in the bottom-left corner of your desktop or press the Win
+   key <img src="images/user-guide/FaqWinKey.png"  width="24" height="24">
    on your keyboard.
 2. Type **"Command Prompt"** or **"Powershell"**
-3. You should see the corret application at the top of your results. **Double-click** it or **press Enter** to
+3. You should see the correct application at the top of your results. **Double-click** it or **press Enter** to
    open up Command Prompt or Powershell.
 
 ### 3. How do I transfer my data to another Computer?
@@ -728,7 +742,7 @@ On **Windows**:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+## **Glossary**
 
 #### Prefix
 
