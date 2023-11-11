@@ -859,11 +859,42 @@ Command: `list-a`
 ### Adding an interview
 Command: `add-i`
 
+1. Adding an interview
+    1. Prerequisites: List all applicants using the `list-a` command. Have at least one applicant that does not have an interview scheduled.
+       Ensure that the input applicant ID chosen for step `ii` belongs to an applicant which does not have an interview scheduled. (The border around the applicant should be red)
+    2. Test case: `add-i app/3 jr/Software Engineer start/12-12-2024 1500 end/12-12-2024 1600` <br>
+        Expected: An interview is added with the applicant at the target index on the applicant list, with the
+        job role `Software Engineer`, starting datetime of `12-12-2024 1500` and ending datetime of `12-12-2024 1600`.
+    3. Test case: `add-i jr/PE Tester` <br>
+       Expected: No interview is added. Error details shown in the status message.
+
 ### Deleting an interview
 Command: `delete-i`
 
+1. Deleting an interview while all interviews are being shown
+    1. Prerequisites: List all interviews using the `list-i` command. List all applicants using the `list-a` command. Multiple interviews in the list.
+    2. Test case: `delete-i 1` <br>
+       Expected: First interview is deleted from the list. Details of the deleted interview shown in the status message.
+       The corresponding applicant associated with that interview should have their border turn from green to red
+    3. Test case: `delete-i 0` <br>
+       Expected: No interview is deleted. Error details shown in the status message.
+2. Deleting an interview while no interviews are in the interview list
+    1. Prerequisites: Clear all interviews (and applicants) using the `clear` command (Note that this is irreversible). Interview list is empty.
+    2. Test case: `delete-i 1` <br>
+       Expected: No interview is deleted. Error details shown in the status message.
+
 ### Editing an interview
 Command: `edit-i`
+
+1. Editing an interview while all interviews are being shown
+    1. Prerequisites: List all interviews using the `list-i` command. Multiple interviews in the list.
+       Ensure that the selected interview index chosen for step `ii` belongs to an interview that is not marked as done (border around interview is red). 
+    2. Test case: `edit-i 2 jr/PE Tester` <br>
+       Expected: The second interview's job role is edited to `PE Tester`. Details of the edited interview shown in the status message.
+    3. Test case: `edit-i 0` <br>
+       Expected: No interview is edited. Error details shown in the status message.
+    4. Test case: `edit-i 1` <br>
+       Expected: No interview is edited. Error details shown in the status message.
 
 ### Finding interviews from the list
 Command: `find-i`
