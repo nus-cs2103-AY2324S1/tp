@@ -39,7 +39,7 @@ activate ModelManager
 
 ModelManager -> ModelManager :resetData(ReadOnlyModelManager)
 activate ModelManager MODEL_COLOR_T3
-ModelManager -> ModelManager
+ModelManager --> ModelManager
 deactivate ModelManager
 ModelManager --> Model :
 deactivate ModelManager
