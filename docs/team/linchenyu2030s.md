@@ -34,14 +34,14 @@ Given below are my contributions to the project.
         * Complete user stories
         * Complete glossary
         * Complete Non Functional Requirements(NFRs)
-        * Added activity diagrams and sequence diagrams for the table feature.
-        * Provided details on alternative implementations of the table feature.
+        * Added activity diagrams and sequence diagrams for the table, uplevel and undolevel features.
+        * Provided details on alternative implementations of the table, uplevel and undolevel features.
 
 * **Team-based tasks**:
     * Improve code quality.
     * Wrote and improved JUnit tests for enhancements implemented.
     * Perform user testing for our product Tutorium.
-
+    * Release Management(v1.3, v1.3.1)
 
 * **Review/mentoring contributions**:
     * review pull requests created by Lauren Lim.

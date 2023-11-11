@@ -28,9 +28,9 @@ public class SubjectTest {
 
     @Test
     public void equals() {
-        Subject subject1 = new Subject("Chemistry");
-        Subject subject2 = new Subject("Chemistry");
-        Subject subject3 = new Subject("English");
+        Subject subject1 = new Subject(Subject.CHEMI);
+        Subject subject2 = new Subject(Subject.CHEMI);
+        Subject subject3 = new Subject(Subject.ENG);
 
         //same values -> equal
         assertEquals(subject1, subject2);
@@ -46,16 +46,40 @@ public class SubjectTest {
     }
 
     @Test
+    public void constructor_validSubjectName_success() {
+        Subject english = new Subject("enGLISH");
+        Subject chemistry = new Subject("cHEmisTRY");
+        Subject physics = new Subject("PHYSICS");
+        Subject aMaths = new Subject("Additional Mathematics");
+        Subject socialStudies = new Subject("soCIal STUdies");
+
+        assertEquals(Subject.ENG, english.getSubjectName());
+        assertEquals(Subject.CHEMI, chemistry.getSubjectName());
+        assertEquals(Subject.PHY, physics.getSubjectName());
+        assertEquals(Subject.AMATH, aMaths.getSubjectName());
+        assertEquals(Subject.SOC, socialStudies.getSubjectName());
+    }
+
+    @Test
     public void getSubjectNameMethod() {
-        Subject subject1 = new Subject("Chemistry");
-        assertEquals(subject1.getSubjectName(), "Chemistry");
+        Subject subject1 = new Subject(Subject.CHEMI);
+        assertEquals(subject1.getSubjectName(), Subject.CHEMI);
         assertFalse(subject1.getSubjectName().equals(" "));
     }
 
     @Test
     public void getEnrolDateMethod() {
-        Subject subject = new Subject("Biology", new EnrolDate("Jul 2023"));
+        Subject subject = new Subject(Subject.BIO, new EnrolDate("Jul 2023"));
         assertEquals(new EnrolDate("Jul 2023"), subject.getEnrolDate());
 
     }
+
+    @Test
+    public void getCorrectedSubjectNameMethod() {
+        assertEquals(Subject.PHY, Subject.getCorrectedSubjectName("phySICS"));
+        assertEquals(Subject.SOC, Subject.getCorrectedSubjectName("socIAL STUDIES"));
+
+        assertEquals(null, Subject.getCorrectedSubjectName("This is an invalid subject name"));
+    }
+
 }
