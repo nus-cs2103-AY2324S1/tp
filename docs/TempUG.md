@@ -79,7 +79,9 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 * <box type="info" seamless>This box denotes additional information.</box>
 * <box type="tip" seamless>This box denotes tips to improve usability.</box>
 * <box type="warning" seamless>This box denotes warnings that can cause errors.</box>
-* ```This box denotes command outputs.```
+```
+This box denotes command outputs.
+```
 
 ### Notes on command format
 <box type="info" seamless>
@@ -99,13 +101,16 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
   e.g. if the command entered is `add info -name new name -notValid flagBody -subject physics`, it will be interpreted as `add -name new name -subject physics`. "info " and "-notValid flagBody" will be ignored. <br>
   e.g. if the command entered is `delete 3 extra`, it will be interpreted as `delete 3`; <br>
   e.g. However, `delete extra 3`, it will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
-### Other Notes
+</box>
+
+### Other notes
+<box type="warning" seamless>
+
 * Please avoid using " -" in the value of a parameter as tutorMate treats " -" as a reserved word that signifies the start of a new flag.
 * Please do not abuse the parser of tutorMate. For example, do not game it with special characters or code injections. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
 * TutorMate supports a maximum of 99999 students, 99999 lessons and 99999 tasks. Further data beyond this limit might be lost and not accessible in the application.
 * Please avoid manually modifying the data files in the data folder. Doing so may result in unexpected behaviour and data loss.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
 </box>
 
 ### Parameter summary
@@ -121,7 +126,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 | `EMAIL`    | `addPerson` `editPerson`                                                  | Should follow the format localpart@domain.<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | "hello@gmail.com", "test@g.com"                                                                              | "hello.com", "f@f"          |
 | `ADDRESS`  | `addPerson` `editPerson`                                                  | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road"                                                                          | ""                          |  
 | `TAGS`     | `addPerson` `editPerson`<br/>`filter`                                     | Must not be empty and cannot contain any spaces. Multiple tags can be specified at once by using a comma (,) as a separator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | "jc,express", "weak"                                                                                         | "junior college"            |
-| `DATE`     | `addLesson` `editLesson`<br/>`filter`                                     | Must follow either the date format **yyyy/MM/dd**, *yy/MM/dd*, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                                 | To represent the date 13/08/2023 and assuming it is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        | 
+| `DATE`     | `addLesson` `editLesson`<br/>`filter`                                     | Must follow either the date format **yyyy/MM/dd**, *yy/MM/dd*, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                                 | To represent the date 13/08/2023 and assuming it is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        |
 
 --------------------------------------------------------------------------------------------------------------------
 
