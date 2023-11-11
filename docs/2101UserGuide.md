@@ -410,3 +410,87 @@ Action | Format, Examples
 **Undo** | `undo`
 **Help** | `help`
 **Exit** | `exit`
+
+## List of acceptable values
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky"><span>Command</span></th>
+    <th class="tg-0pky"><span>Field</span></th>
+    <th class="tg-0pky"><span>Acceptable values</span></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky command" rowspan="6"><code>createMember</code> / <code>editMember</code></td>
+    <td class="tg-0pky">MEMBER_NAME</td>
+    <td class="tg-0pky">Only contain alphanumeric characters and spaces, and should not be blank</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">GENDER</td>
+    <td class="tg-0pky"><code>Male</code>, <code>Female</code>, <code>Others</code></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">PHONE_NUMBER</td>
+    <td class="tg-0pky">Only contain numbers, and <span>at least 3 digits long</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">EMAIL</td>
+    <td class="tg-0pky">An email with a valid extension (e.g. <code>@gmail.com</code>)</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">ADDRESS</td>
+    <td class="tg-0pky">Any non-blank values except the following prefixes: <code>n/</code>, <code>g/</code>, <code>p/</code>, <code>e/</code>, <code>a/</code>, <code>t/</code></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">TAG</td>
+    <td class="tg-0pky">Only contain alphanumeric characters with no spaces in between, but can be blank</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky command" rowspan="4"><code>createEvent</code> / <code>editEvent</code></td>
+    <td class="tg-0pky">EVENT_NAME</td>
+    <td class="tg-0pky">Only contain alphanumeric characters and spaces, and should not be blank</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">LOCATION</td>
+    <td class="tg-0pky"><span>Must not be blank </span>and can take in any values, except the following prefixes:<code>e/</code>, <code>l/</code>, <code>d/</code>, <code>t/</code></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">DATE</td>
+    <td class="tg-0pky">Must be a <span>valid date </span>in the format of <span>YYYY-MM-DD</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">TAG</td>
+    <td class="tg-0pky">Only contain alphanumeric characters with no spaces in between, but can be blank</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky command"><code>deleteMember</code> / <code>deleteEvent</code></td>
+    <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
+    <td class="tg-0pky">Must be a<span> positive integer</span> that is within the range of the length of the <span>currently displayed</span> member/event list</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky command" rowspan="3"><code>enrol</code> / <code>editEnrolment</code></td>
+    <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
+    <td class="tg-0pky">Must be a <span>positive integer</span> that is within the range of the length of the <span>currently displayed</span> member/event list</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">NUMBER_OF_HOURS</td>
+    <td class="tg-0pky">Must be a<span> positive integer </span>and must be <span>less than or equal to 2147483647</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">REMARK</td>
+    <td class="tg-0pky"><span>Must not be blank </span>and can take in any values, except the following prefixes:<code>m/</code>, <code>e/</code>, <code>h/</code>, <code>r/</code></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky command"><code>viewMember</code> / <code>viewEvent</code></td>
+    <td class="tg-0pky">MEMBER_INDEX / EVENT_INDEX</td>
+    <td class="tg-0pky">Must be a <span>positive integer</span> that is within the range of the length of the <span>currently displayed</span> member/event list</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky command"><code>findMember</code> / <code>findEvent</code></td>
+    <td class="tg-0pky">KEYWORD</td>
+    <td class="tg-0pky">Any non-blank values</td>
+  </tr>
+</tbody>
+</table>
