@@ -29,7 +29,8 @@ public class EditApplicantCommand extends Command {
     public static final String COMMAND_WORD = "editapplicant";
     public static final String COMMAND_ALIAS = "edita";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the applicant identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
+            + ": Edits the details of the applicant identified "
             + "by the index number used in the displayed applicant list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
