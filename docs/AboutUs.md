@@ -29,21 +29,12 @@ We currently do not offer any means to contacting us, thank you for your underst
 * Role: Developer
 * Responsibilities: Improve `add`, `edit`, `delete` features
 
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
 ### Jony
 
 <img src="images/jonyxzx.png" width="200px">
 
 [[github](http://github.com/jonyxzx)]
-[[portfolio](team/jonyxzx.md)]
+[[portfolio](team/jonyxzx.md)_]_
 
 * Role: Developer
 * Responsibilities: Improve find feature
