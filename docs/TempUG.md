@@ -269,16 +269,12 @@ Failure outputs:
   Parameters: INDEX (must be a positive integer)
   Example: show 1
  ```
-![failure for show with no index](images/show/show_negative.png)
-
 
 * Input: `show 100`
   * Error: Index given exceeds the length of the displayed list. Enter a valid index!
 ```
 The lesson index provided is invalid
 ```
-
-![failure for show with wrong index](images/show/show_negative_wrong_index.png)
 
 <br>
 
@@ -437,8 +433,6 @@ Success outputs:
 Deleted Person: Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Subjects: BIOLOGYCHEMISTRY; Tags: [friends]; Remark: To be added
 ```
 
-![Success for deletePerson](images/delete-person/delete_person_success.png)
-
 Failure outputs:
 * Input: `deletePerson`
   * Error: No index given. Enter a valid index!
@@ -448,8 +442,6 @@ deleteperson: Deletes the entry identified by the index number used in the displ
 Parameters: INDEX (must be a positive integer)
 Example: delete 1
  ```
-![Failure for deletePerson](images/delete-person/delete_person_failure.png)
-
 
 #### For Schedule:
 
@@ -479,9 +471,6 @@ Success outputs:
 Deleted Lesson: Lesson lesson1 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEMATICS
 ```
 
-![Success for deleteLesson](images/delete-lesson/delete_lesson_success.png)
-
-
 Failure outputs:
 * Input: `deleteLesson`
   * Error: No index given. Enter a valid index!
@@ -491,8 +480,6 @@ deletelesson: Deletes the lesson identified by the index number used in the disp
 Parameters: INDEX (must be a positive integer)
 Example: deletelesson 1
  ```
-![Failure for deleteLesson](images/delete-lesson/delete_lesson_failure.png)
-
 
 #### For Task:
 
@@ -518,7 +505,6 @@ Success outputs:
 ```
 Deleted Task: Revise CS2103T Materials
 ```
-![Success for deleteTask](images/delete-task/delete_task_success.png)
 
 Failure outputs:
 * Input: `show 1` followed by `deleteTask 100`
@@ -526,7 +512,6 @@ Failure outputs:
 ```
 Task index do not belong to any tasks!
 ```
-![Failure for deleteTask wrong index](images/delete-task/delete_task_wrong_index.png)
 
 * Input: `show 1` followed by `deleteTask`
   * Error: No index given. Enter a valid task index!
@@ -536,14 +521,12 @@ deletetask: Deletes the task identified by the task index from the currently dis
 Parameters: task index (must be a positive integer)
 Example: deletetask 1
 ```
-![Failure for deleteTask no index](images/delete-task/delete_task_no_index.png)
 
 * Input: `deleteTask 1` without showing a lesson
   * Error: No lesson shown. Show a lesson with the `show` command.
 ```
 Please use show lessonIndex before deleting task!
 ```
-![Failure for deleteTask no show](images/delete-task/delete_task_no_show.png)
 
 <br>
 
