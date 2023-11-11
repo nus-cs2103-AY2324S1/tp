@@ -115,6 +115,10 @@ Other fields are **multi-valued fields**. Each contact has a **list** of differe
 | specialisations     | /spec   | Any non-empty value                                          |
 | tags                | /tag    | Any non-empty value                                          |
 
+Please take note:
+* Phone numbers with and without whitespace character (to separate country code from the rest) are treated as two different phone numbers. For e.g. `+6587654321` and `+65 87654321` are treated as two different phone numbers. For the best user experience, we advise you to keep a consistent style in keeping phone numbers, i.e. either do not add any space for any phone number, or add space to separate country code for all phone numbers.
+* Link must be URL-encoded. That is, when you key in a web link into the URL bar of the browser, the browser encodes the link by modifying some of the characters in the link, that modified link must match the link you input into the app.
+
 In NetworkBook, you can manage contact information by changing the fields assigned to them. Following are the commands you can use to manage fields of a contact:
 
 | Command                                                          | How does it manage the fields                                  |
@@ -170,6 +174,13 @@ Parameters:
 <div markdown="block" class="alert alert-info">
 
 :information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
+
+</div>
+
+<div markdown="span" class="alert alert-warning">
+
+:bulb: This command ignores any input field values that are already present in your target contact.
+For example, if your contact at index `1` already has the phone number `12345678`, the command `add 1 /phone 12345678` does nothing.
 
 </div>
 
