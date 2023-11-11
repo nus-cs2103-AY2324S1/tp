@@ -9,6 +9,8 @@ import static seedu.address.testutil.TypicalIcs.FIRST_NRIC;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAppointmentCommand;
+import seedu.address.logic.commands.AddDoctorCommand;
 import seedu.address.logic.commands.AddPatientCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
@@ -19,8 +21,16 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
+import seedu.address.testutil.AppointmentBuilder;
+import seedu.address.testutil.AppointmentUtil;
+import seedu.address.testutil.DoctorBuilder;
+import seedu.address.testutil.DoctorUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PatientUtil;
@@ -38,6 +48,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_add_doctor() throws Exception {
+        Doctor doctor = new DoctorBuilder().build();
+        AddDoctorCommand command = (AddDoctorCommand) parser.parseCommand(DoctorUtil.getAddDoctorCommand(doctor));
+        assertEquals(new AddDoctorCommand(doctor), command);
+    }
+
+    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
@@ -48,6 +65,14 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + FIRST_NRIC);
         assertEquals(new DeleteCommand(FIRST_NRIC), command);
+    }
+
+    @Test
+    public void parseCommand_addAppointment() throws Exception {
+        Appointment appointment = new AppointmentBuilder().build();
+        AddAppointmentCommand command =
+                (AddAppointmentCommand) parser.parseCommand(AppointmentUtil.getAddAppointmentCommand(appointment));
+        assertEquals(new AddAppointmentCommand(appointment), command);
     }
 
     @Test
@@ -64,6 +89,18 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + person.getIc() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(person.getIc(), descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD + " 3") instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD + " 3") instanceof RedoCommand);
     }
 
     @Test
