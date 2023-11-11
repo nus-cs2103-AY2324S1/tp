@@ -130,16 +130,18 @@ If you are unfamiliar with the command terminal, you can right-click the `staffs
 
 This section introduces the symbols and notations used throughout this guide. The application's GUI [components](#glossary) are also explained here. We recommend that you read this section closely before using this guide.
 
+<br>
+
 <a name="understanding-the-symbols"></a>
 ### Understanding the Symbols
 
 <br>
 
-| <div style="width:130px">Symbol</div> | <div style="width:auto">Meaning</div>                                                   |
-|---------------------------------------|-----------------------------------------------------------------------------------------|
-| <box type="info" ></box>              | This is reminder of essential information that is required for proper Staff-Snap usage. |
-| <box type="tip" ></box>               | This is a small friendly advice to make your Staff-Snap experience more enjoyable.      |
-| <box type="warning" ></box>           | This is a warning that cautions the user against common errors.                         |
+| <div style="width:130px">Symbol</div>           | <div style="width:auto">Meaning</div>                                                   |
+|-------------------------------------------------|-----------------------------------------------------------------------------------------|
+| <box type="info" header="**Note**"></box>       | This is reminder of essential information that is required for proper Staff-Snap usage. |
+| <box type="tip" header="**Tip**"></box>         | This is a small friendly advice to make your Staff-Snap experience more enjoyable.      |
+| <box type="warning" header="**Caution**"></box> | This is a warning that cautions the user against common errors.                         |
 
 <br>
 
