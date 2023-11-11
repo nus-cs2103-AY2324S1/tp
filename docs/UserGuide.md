@@ -203,15 +203,15 @@ For each **interview**, we see the following details:
   * DD/MM/YYYY and time:
     * `16 Jan 2024 TIME`
     * `16 January 2024 TIME`
-    * `16-05-2024 TIME`
-    * `16-05-24 TIME`
-    * `16/05/2024 TIME`
-    * `16/05/24 TIME`
+    * `16-01-2024 TIME`
+    * `16-01-24 TIME`
+    * `16/01/2024 TIME`
+    * `16/01/24 TIME`
   * MM, DD and time:
     * `16 Jan TIME`
     * `16 January TIME`
-    * `16/5 TIME`
-    * `16/05 TIME`
+    * `16/1 TIME`
+    * `16/01 TIME`
   * The `TIME` placeholder can be replaced with the formats below:
     * `1515`
     * `3.15pm`
