@@ -8,7 +8,7 @@ title: OutBook
 
 ![Ui](images/Ui.png)
 
-**OutBook is a desktop app that allows freelance insurance agents to manage their numerous contacts and meeting schedule.** Users can link their contacts to their meetings, to keep track of the personnel attending these meetings.
+**OutBook is a desktop application designed for freelance insurance agents, enabling them to effectively organize and oversee their extensive contacts and meeting schedules.** Users can link their contacts to their meetings, to keep track of the people attending these meetings.
 
 * If you are interested in using OutBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing OutBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.

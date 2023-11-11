@@ -2,19 +2,18 @@
 layout: page
 title: OutBook User Guide
 ---
-# OutBook
 
 ## About OutBook
-OutBook is a desktop application that allows freelance insurance agents to manage their numerous contacts and meeting schedule. It is optimised for Command Line Interface (CLI) and aims to significantly reduce the time needed for organizational tasks.
+OutBook is a desktop application designed for freelance insurance agents, enabling them to effectively organize and oversee their extensive contacts and meeting schedules. It is optimised for Command Line Interface (CLI) and aims to significantly reduce the time needed for organizational tasks.
 
 This guide aims to help you explore its features and learn how to use them.
 
 ## Key Features
 To help you simplify and streamline the process of organizing your contacts and meeting schedule, our application provides these easy-to-use and efficient features:
-1. **Client Information Management**: Easily store, access and modify client details such as contact number, email and last contacted time. Add status, custom tags and remarks to organize your clients according to your preference.
-2. **Meeting Schedule and Information Management**: Keep track of where and when your meetings are, and who you are meeting, to ensure you never miss an important appointment.
+1. **Client Information Management**: Easily store, access and modify client details such as contact number, email and last contacted time. Add statuses, custom tags and remarks to organize your clients according to your preferences.
+2. **Meeting Schedule and Information Management**: Keep track of where and when your meetings are, and who you are meeting, to ensure you will be prepared for every appointment.
 
-Managing clients and a busy schedule have never been easier. With OutBook, all you need is a keyboard and a few seconds to type in short commands!
+Managing clients and a busy schedule has never been easier. With OutBook, all you need is a keyboard and a few seconds to type out simple commands!
 <div style="page-break-after: always;"></div>
 
 # Table of Contents
@@ -23,23 +22,24 @@ Managing clients and a busy schedule have never been easier. With OutBook, all y
 - [Navigating OutBook](#navigating-outbook)
 - [Features](#features)
   - [Contact Commands](#contact-commands)
-    - [Adding a contact: `addc`](#adding-a-contact--addc)
-    - [Listing all persons: `listc`](#listing-all-persons--listc)
-    - [Deleting a person: `deletec`](#deleting-a-person--deletec)
+    - [Adding a contact: `addc`](#adding-a-contact-addc)
+    - [Listing all contacts: `listc`](#listing-all-contacts-listc)
+    - [Deleting a contact: `deletec`](#deleting-a-contact-deletec)
     - [Editing a contact: `editc`](#editing-a-contact--editc)
     - [Viewing detailed contact information: `viewc`](#viewing-detailed-contact-information--viewc)
-    - [Finding persons: `findc`](#search-for-persons-using-contact-fields--findc)
+    - [Finding contacts: `findc`](#finding-contacts-findc)
   - [Meeting Commands](#meeting-commands)
-    - [Adding a meeting: `addm`](#adding-a-meeting--addm)
+    - [Adding a meeting: `addm`](#adding-a-meeting-addm)
     - [Listing all meetings: `listm`](#listing-all-meetings--listm)
     - [Deleting a meeting: `deletem`](#deleting-a-meeting--deletem)
     - [Editing a meeting: `editm`](#editing-a-meeting--editm)
     - [Viewing detailed meeting information: `viewm`](#viewing-detailed-meeting-information--viewm)
-    - [Finding meetings: `findm`](#search-for-meetings-using-meeting-fields--findm)
-    - [Adding contact to meeting: `addmc`](#add-contact-to-meeting--addmc)
-    - [Removing contact from meeting: `rmmc`](#remove-contact-from-meeting--rmmc)
+    - [Finding meetings: `findm`](#finding-meetings-findm)
+    - [Adding contact to meeting: `addmc`](#adding-contact-to-meeting-addmc)
+    - [Removing contact from meeting: `rmmc`](#removing-contact-from-meeting-rmmc)
     - [Marking a meeting as complete : `mark`](#marking-a-meeting-as-complete--mark)
   - [Miscellaneous Commands](#miscellaneous-commands)
+    - [Viewing help: `help`](#viewing-help--help)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
     - [Exiting the program: `exit`](#exiting-the-program--exit)
   - [Saving the data](#saving-the-data)
@@ -56,13 +56,14 @@ Managing clients and a busy schedule have never been easier. With OutBook, all y
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `OutBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F12-4/tp/releases).
+2. Download the latest `OutBook.jar` [here](https://github.com/AY2324S1-CS2103T-F12-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for OutBook.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar OutBook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Open a command terminal, navigate to the _home folder_ using `cd`, and use the `java -jar OutBook.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app comes pre-loaded with some sample data.<br>
+
+![Ui](images/Ui.png)
 <br><br><br><br><br><br>
 5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -79,25 +80,25 @@ Managing clients and a busy schedule have never been easier. With OutBook, all y
 
    - `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command. 
+6. You can refer to the [Features](#features) section below for details of each command. 
 
-Return to the [Table of Contents](#table-of-contents)
+[Click here to return to the Table of Contents](#table-of-contents)
+___
 
 <div style="page-break-after: always;"></div>
----
 
 # Navigating OutBook
 ![User Interface for OutBook](images/UserInterface.png)
 
 | Name          | Function                                                                                                                                                                                                                                              |
 |---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Command Box   | Enter your commands here                                                                                                                                                                                                                              |
-| Status Box    | Displays the results after a command is executed                                                                                                                                                                                                      |
-| Contacts List | Displays contact details                                                                                                                                                                                                                              |
-| Meetings List | Displays meetings that are scheduled                                                                                                                                                                                                                  |
-| Details List  | Displays all the fields of a contact and/or meeting in full detail, completed with labels. Use [viewc](#viewing-detailed-contact-information--viewc)/[viewm](#viewing-detailed-meeting-information--viewm) to specify the contact/meeting to display. |
+| Command Box   | Allows you to enter your commands here.                                                                                                                                                                                                               |
+| Status Box    | Displays the results after a command is executed.                                                                                                                                                                                                     |
+| Contacts List | Displays your contacts along with a summary of their details.                                                                                                                                                                                         |
+| Meetings List | Displays meetings that are scheduled along with a summary of their details.                                                                                                                                                                           |
+| Details List  | Displays all the fields of a contact and/or meeting in full detail, complete with labels. Use [viewc](#viewing-detailed-contact-information--viewc)/[viewm](#viewing-detailed-meeting-information--viewm) to specify the contact/meeting to display.  |
 
-Return to the [Table of Contents](#table-of-contents)
+[Click here to return to the Table of Contents](#table-of-contents)
 
 ---
 
@@ -109,31 +110,20 @@ Return to the [Table of Contents](#table-of-contents)
 
 **:information_source: Notes about the command format:**<br>
 
-- Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
-  e.g. in `addc n/NAME`, `NAME` is a parameter which can be used as `addc n/John Doe`.
+- Every word in uppercase represents a field you can supply.<br>
+  e.g. in `addc n/NAME`, `NAME` is a parameter that can be substituted for `John Doe`, as in `addc n/John Doe`.
 
-- Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+- Fields contained in square brackets are optional.<br>
+  e.g. when provided with the fields `n/NAME [t/TAG]`, you can submit `n/John Doe t/friend` if you want to mark this contact as a `friend`, or `n/John Doe` otherwise.
 
-- Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+- Fields with `…`​ after them can be submitted any number of times, including zero.<br>
+  e.g. when provided with the field `[t/TAG]…​`, you can leave the field blank, or submit `t/friend`, `t/friend t/family`, etc.
 
-- You can place parameters in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+- You can submit fields in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, submitting in the format `p/PHONE_NUMBER n/NAME`, such as in `p/91472381 n/John Doe`, is also acceptable.
 
-- Any extraneous parameters you place for commands that do not take in parameters (such as `help`, `listc`, `exit` and `clear`) will be ignored.<br>
-  e.g. if you type `help 123`, it will be interpreted as `help`.
-
-- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. This is to avoid omission of space characters surrounding line-breaks when lengthy text is copied over to the application.
 </div>
-
-### Viewing help : `help`
-
-Shows you a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
 
 <div style="page-break-after: always;"></div>
 
@@ -154,7 +144,7 @@ Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL [lc/LAST_CONTACTED_TIME] [s/STATUS] 
     - If `LAST_CONTACTED_TIME` is not specified, it will be defaulted to the minimum datetime provided by Java (i.e. `LocalDateTime.MIN`) and displayed as `NA` in the contacts list.
   - `STATUS` must be one of `NIL, Prospective, Active, Inactive, Claimant, Renewal` or blank.
     - If `STATUS` is not specified, it will be defaulted to `NIL`.
-- This command may change the contact that is currently displayed via the `viewc` command, as detailed in the description for `viewc`.
+- This command may change the contact that is currently displayed in the details list via the `viewc` command, as detailed [here](#viewing-detailed-contact-information--viewc).
 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -167,24 +157,24 @@ Examples:
 
 <br/><br/>
 
-### Listing all persons : `listc`
+### Listing all contacts: `listc`
 
-Shows an unfiltered list of all contacts in OutBook. Contacts are sorted by `LAST_CONTACTED_TIME` by default.
+Shows an unfiltered list of all contacts in OutBook in the contacts list. Contacts are sorted by their `LAST_CONTACTED_TIME`.
 
 Format: `listc`
 
-* This command may change the contact that is currently displayed via the `viewc` command, as detailed [here](#viewing-detailed-contact-information--viewc).
+* This command may change the contact that is currently displayed in the details list via the `viewc` command, as detailed [here](#viewing-detailed-contact-information--viewc).
 
 
-### Deleting a person : `deletec`
+### Deleting a contact: `deletec`
 
 Deletes a contact from OutBook.
 
 Format: `deletec INDEX`
 
 - Deletes the contact at the specified `INDEX`.
-- The index refers to the number shown beside each contact's name in the contacts list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The `INDEX` refers to the number shown beside each contact's name in the contacts list.
+- The `INDEX` **must be a positive integer** 1, 2, 3, …​
 - This command clears the contact that is currently displayed in the details list via the `viewc` command.
 
 Examples:
@@ -199,16 +189,18 @@ Edits an existing contact in OutBook.
 
 Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [lc/LAST_CONTACTED_TIME] [s/STATUS] [r/REMARK] [t/TAG]…​`
 
-- Edits the contact at the specified `INDEX`. The index refers to the number shown beside each contact's name in the contacts list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the contact at the specified `INDEX`. 
+- The `INDEX` refers to the number shown beside each contact's name in the contacts list. 
+- The `INDEX` **must be a positive integer** 1, 2, 3, …​
 - All fields are optional, but at least one must be provided.
 - Existing values in each specified field will be updated to the corresponding input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+- When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
+- You can remove all the contact's tags by typing `t/` without specifying any tags after it.
 - This command may change the contact that is currently displayed via the `viewc` command, as detailed [here](#viewing-detailed-contact-information--viewc).
 
 Examples:
-- `editc 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `editc 2 n/Betsy Crower t/` edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `editc 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+- `editc 2 n/Betsy Crower t/` edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 
 ### Viewing detailed contact information : `viewc`
@@ -218,9 +210,9 @@ Displays detailed information of a contact in the details list.
 Format: `viewc INDEX`
 
 - Displays the name, phone number, email, last contacted time, status, remarks and tags of the contact at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
-- As this command displays by `Index`, the displayed contact may change when the specified `INDEX` refers to a different person due to a change in list order through `addc`, `editc` and `listc`. This is intentional.
+- The `INDEX` refers to the index number shown in the displayed person list.
+- The `INDEX` **must be a positive integer** 1, 2, 3, …​
+- As this command displays the contact at the specified `INDEX` in the contacts list, the contact displayed in the details list may change due to a modification in list order through the use of `addc`, `editc` or `listc` commands. This is intentional.
 - The displayed contact is cleared from the details list when the `deletec` and `findc` commands are used.
 
 Examples:
@@ -258,11 +250,19 @@ Examples:
 
 ## Meeting Commands
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about meetings:**<br>
+
+- Meetings in OutBook are sorted by their start time.
+
+- Meetings are allowed to overlap and multiple meetings can be occuring at the same time.
+
+</div>
+
 ### Adding a meeting: `addm`
 
 Adds a meeting to OutBook.
-Meetings are sorted by start time given.
-Meetings are allowed to overlap and multiple meetings can be occuring at the same time.
 
 Format: `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​`
 
@@ -276,7 +276,7 @@ Examples:
 
 ### Listing all meetings : `listm`
 
-Shows an unfiltered list of all meetings in OutBook. Meetings are sorted by `START` by default.
+Shows an unfiltered list of all meetings in OutBook in the meetings list. Meetings are sorted by their `START` time.
 
 Format: `listm`
 
@@ -291,8 +291,8 @@ Deletes a meeting from OutBook.
 Format: `deletem INDEX`
 
 - Deletes the meeting at the specified `INDEX`.
-- The index refers to the number shown beside each meeting's title in the meetings list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The `INDEX` refers to the number shown beside each meeting's title in the meetings list.
+- The `INDEX` **must be a positive integer** 1, 2, 3, …​
 - This command clears the meeting that is currently displayed in the details list via the `viewm` command.
 
 Examples:
@@ -305,12 +305,13 @@ Edits an existing meeting in OutBook.
 
 Format: `editm INDEX [m/TITLE] [a/LOCATION] [s/START] [e/END] [t/TAG]…​`
 
-- Edits the meeting at the specified `INDEX`. The index refers to the number shown beside each meeting's title in the meetings list. The index **must be a positive integer** 1, 2, 3, …​
-- At least one of the optional fields must be provided.
-- Existing values will be updated to the input values.
+- Edits the meeting at the specified `INDEX`. The index refers to the number shown beside each meeting's title in the meetings list. 
+- The `INDEX` **must be a positive integer** 1, 2, 3, …​
+- All fields are optional, but at least one must be provided.
+- Existing values in each specified field will be updated to the corresponding input values.
 - When editing tags, the existing tags of the meeting will be removed, i.e. adding of tags is not cumulative.
-- You can remove all the meeting’s tags by typing `t/` without specifying any tags after it.
-- This command may change the Meeting that is currently displayed via the `viewm` command, as detailed in the description for `viewm`.
+  - You can therefore remove all of a meeting’s tags by typing `t/` without specifying any tags after it.
+- This command may change the meeting that is currently displayed in the details list via the `viewm` command, as detailed [here](#viewing-detailed-meeting-information--viewm).
 
 Examples:
 - `editm 1 a/Hawker Centre s/15.09.2023 1500` edits the location and start of the 1st meeting to be `Hawker Centre` and `15.09.2023 1500` respectively.
@@ -325,9 +326,9 @@ Displays detailed information of a meeting in the details list.
 Format: `viewm INDEX`
 
 - Displays the title, location, start and end times, attendees and tags of the meeting at the specified `INDEX`.
-- The index refers to the number shown beside each meeting's title in the meetings list.
-- The index **must be a positive integer** 1, 2, 3, …​
-- As this command displays by `Index`, the displayed meeting may change when the specified `INDEX` refers to a different meeting due to a change in list order through `addm`, `editm` and `listm`. This is intentional.
+- The `INDEX` refers to the number shown beside each meeting's title in the meetings list.
+- The `INDEX` **must be a positive integer** 1, 2, 3, …​
+- As this command displays the contact at the specified `INDEX` in the meetings list, the meeting displayed in the details list may change due to a modification in list order through the use of `addm`, `editm` and `listm` commands. This is intentional.
 - The displayed meeting is cleared from the details list when the `deletem` and `findm` commands are used.
 
 Examples:
@@ -366,7 +367,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-### Add contact to meeting: `addmc`
+### Adding contact to meeting: `addmc`
 
 Adds a contact to a meeting as an attendee.
 
@@ -382,7 +383,7 @@ Format: `addmc MEETING_INDEX CONTACT_INDEX`
 Examples:
 - `addmc 3 1` adds the 1st contact in the contacts list to the 3rd meeting in the meetings list.
 
-### Remove contact from meeting: `rmmc`
+### Removing contact from meeting: `rmmc`
 
 Removes a contact from a meeting.
 
@@ -390,7 +391,7 @@ Format: `rmmc MEETING_INDEX ATTENDEE_INDEX`
 
 - Removes a contact at the specified `ATTENDEE_INDEX` to the meeting at the specified `MEETING_INDEX`.
 - `MEETING_INDEX` refers to the number beside each meeting's title in the meetings list.
-- `ATTENDEE_INDEX` refers to the number beside each attendee's name as shown in [`viewm`](#viewing-detailed-meeting-information--viewm).
+- `ATTENDEE_INDEX` refers to the number beside each attendee's name when [`viewm MEETING_INDEX`](#viewing-detailed-meeting-information--viewm) is used.
 - The indexes **must be positive integers** 1, 2, 3, …​
 - Both `MEETING_INDEX` & `ATTENDEE_INDEX` must refer to the index of an existing meeting or attendee.
 
@@ -406,47 +407,53 @@ Marks a meeting as complete. All attendees of the meeting will have their `LAST_
 Format: `mark INDEX`
 
 - Marks the meeting at the specified `INDEX` as complete.
-- The index refers to the number shown beside each meeting's title in the meetings list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The `INDEX` refers to the index number shown in the displayed meeting list.
+- The `INDEX` **must be a positive integer** such as 1, 2, 3, …​
 
 Examples:
 - `listm` followed by `mark 2` marks the 2nd meeting in the unfiltered meetings list returned by [`listm`](#listing-all-meetings--listm).
 
 ## Miscellaneous Commands
 
+### Viewing help : `help`
+
+Displays a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
 ### Clearing all entries : `clear`
 
-Clears all entries from OutBook.
+Clears all entries from the contacts, meetings and details list in OutBook, effectively wiping all data from OutBook.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Closes and exits OutBook.
 
 Format: `exit`
 
 ## Saving the data
 
-OutBook's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+OutBook's data is saved in the hard disk automatically after any command that modifies the data. There is no need to save manually.
 
 ### Editing the data file
 
-OutBook's data are saved automatically as a JSON file `[JAR file location]/data/outbook.json`. If you are an experienced user, you are welcome to update data directly by editing that data file.
+OutBook's data is saved as a JSON file `[JAR file location]/data/outbook.json`. If you are an experienced user, you may attempt to update data directly by editing this data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, OutBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
-</div>
+If your changes to the data file render its format invalid, OutBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.
+</div>  
 
-Return to the [Table of Contents](#table-of-contents)
-
----
+[Click here to return to the Table of Contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
 ## Command summary
 
-| Action                          | Format, Examples                                                                                                                                                                         |
+| Action                          | Format, Example                                                                                                                                                                         |
 |---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add contact**                 | `addc n/NAME p/PHONE_NUMBER e/EMAIL [lc/LAST_CONTACTED_TIME] [r/REMARK] [t/TAG]…​` <br> e.g., `addc n/James Ho p/22224444 e/jamesho@example.com lc/09.09.2023 0000 t/friend t/colleague` |
 | **Add contact to meeting**      | `addmc MEETING_INDEX CONTACT_INDEX` <br> e.g., `addmc 2 1`                                                                                                                               |
@@ -466,7 +473,7 @@ Return to the [Table of Contents](#table-of-contents)
 | **View meeting details**        | `viewm INDEX` <br> e.g., `viewm 4`                                                                                                                                                       |
 | **Exit**                        | `exit`                                                                                                                                                                                   |
 
-Return to the [Table of Contents](#table-of-contents)
+[Click here to return to the Table of Contents](#table-of-contents)
 
 ---
 
@@ -474,20 +481,20 @@ Return to the [Table of Contents](#table-of-contents)
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Follow these steps:
-1. Install the app in the other computer. An empty data file will be created in the same folder that the app is in. 
-2. Overwrite this empty data file with the file that contains the data of your previous OutBook home folder.
+1. Install OutBook on the other computer following the same instructions as in the [Quick Start Guide](#quick-start). An empty data file will be created in the same folder as the application. 
+2. Replace this empty data file with the file that contains the data from your previous OutBook installation.
 3. Your transferred data should now be visible upon launching OutBook.
 
-Return to the [Table of Contents](#table-of-contents)
+[Click here to return to the Table of Contents](#table-of-contents)
 
 ---
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. You can solve this by deleting the `preferences.json` file created by the application, before running the application again.
 
-Return to the [Table of Contents](#table-of-contents)
+[Click here to return to the Table of Contents](#table-of-contents)
 
 ---
