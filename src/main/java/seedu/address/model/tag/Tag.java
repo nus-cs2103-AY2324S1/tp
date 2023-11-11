@@ -23,6 +23,7 @@ public class Tag {
      */
     public Tag(String tagName, String tagCategory) {
         requireNonNull(tagName);
+        requireNonNull(tagCategory);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
         this.tagCategory = tagCategory;

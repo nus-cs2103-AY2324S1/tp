@@ -1,39 +1,63 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Status;
+import seedu.address.model.person.StatusContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
 
+    private UniqueTagList uniqueTagList = new UniqueTagList();
+
+    @BeforeEach
+    public void clearTagList() {
+        if (uniqueTagList.contains(new Tag("developer", "role"))) {
+            uniqueTagList.remove(new Tag("developer", "role"));
+        }
+        if (uniqueTagList.contains(new Tag("intern", "employment"))) {
+            uniqueTagList.remove(new Tag("intern", "employment"));
+        }
+    }
+
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
+        uniqueTagList.add(new Tag("developer", "role"));
         FindCommand expectedFindCommand =
                 new FindCommand(Arrays.asList(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")),
-                        new StatusContainsKeywordsPredicate(Arrays.asList("Interviewed")), new TagContainsKeywordsPredicate(Arrays.asList("developer"))));
+                        new StatusContainsKeywordsPredicate(Arrays.asList("Interviewed")),
+                        new TagContainsKeywordsPredicate(Arrays.asList("developer"))));
         assertParseSuccess(parser, " n/Alice Bob st/Interviewed t/developer", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " n/ \n Alice \n \t Bob  \t st/Interviewed    \t t/developer", expectedFindCommand);
+        assertParseSuccess(parser, " n/ \n Alice \n \t Bob  \t st/Interviewed    \t t/developer",
+                expectedFindCommand);
+
     }
 
     @Test
@@ -51,7 +75,8 @@ public class FindCommandParserTest {
     public void parse_validArgsWithOnlyStatus_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(Arrays.asList(new StatusContainsKeywordsPredicate(Arrays.asList("preliminary", "rejected"))));
+                new FindCommand(Arrays.asList(new StatusContainsKeywordsPredicate(Arrays.asList("preliminary",
+                        "rejected"))));
         assertParseSuccess(parser, " st/preliminary rejected", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -61,6 +86,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgsWithOnlyTag_returnsFindCommand() {
         // no leading and trailing whitespaces
+        uniqueTagList.add(new Tag("developer", "role"));
+        uniqueTagList.add(new Tag("intern", "employment"));
         FindCommand expectedFindCommand =
                 new FindCommand(Arrays.asList(new TagContainsKeywordsPredicate(Arrays.asList("developer", "intern"))));
         assertParseSuccess(parser, " t/developer intern", expectedFindCommand);
@@ -137,17 +164,20 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_multipleNamePrefixes_throwsParseException() {
-        assertParseFailure(parser, " n/alex n/bernice", Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+        assertParseFailure(parser, " n/alex n/bernice",
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
     }
 
     @Test
     public void parse_multipleStatusPrefixes_throwsParseException() {
-        assertParseFailure(parser, " st/interviewed st/rejected", Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
+        assertParseFailure(parser, " st/interviewed st/rejected",
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
     }
 
     @Test
     public void parse_multipleTagPrefixes_throwsParseException() {
-        assertParseFailure(parser, " t/software t/developer", Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TAG));
+        assertParseFailure(parser, " t/software t/developer",
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TAG));
     }
 
 
