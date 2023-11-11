@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import java.text.ParseException;
 import java.util.List;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.interval.Interval;
@@ -32,6 +33,8 @@ public class FreeTimeCommand extends Command {
             + PREFIX_DURATION + "60 "
             + PREFIX_BEGIN + "0800 "
             + PREFIX_END + "2200 ";
+
+    public static final String MESSAGE_SUCCESS = "Here is your list of free time:\n%s";
     public static final String MESSAGE_ERROR = "An error occurred when executing the freeTime command.";
     private final Interval toFind;
 
@@ -43,6 +46,12 @@ public class FreeTimeCommand extends Command {
         toFind = interval;
     }
 
+    /**
+     * executes the command.
+     * @param model {@code Model} which the command should operate on.
+     * @return
+     * @throws CommandException
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -50,7 +59,7 @@ public class FreeTimeCommand extends Command {
         try {
             List<TimeSlot> timeslots = TimeSlot.parseIntervals(result);
             List<TimeSlot> availableTime = TimeSlot.findAvailableTime(timeslots, toFind);
-            return new CommandResult(TimeSlot.printResults(availableTime));
+            return new CommandResult(String.format(MESSAGE_SUCCESS,TimeSlot.printResults(availableTime)));
         } catch (ParseException e) {
             throw new CommandException(MESSAGE_ERROR);
         }
