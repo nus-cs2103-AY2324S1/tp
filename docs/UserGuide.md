@@ -374,7 +374,6 @@ edit 1 h/Apple
 
 #### To Note:
 1. There must be at least one optional parameter included for the command input.
->>>>>>> master
 2. Empty input after `t/` and `h/` will remove existing tags or hint respectively.
 3. Tagging is not supported in v1.2 and earlier.
 4. Hint is not supported before v1.3.
