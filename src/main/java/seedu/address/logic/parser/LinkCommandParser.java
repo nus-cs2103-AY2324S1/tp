@@ -73,22 +73,22 @@ public class LinkCommandParser implements Parser<LinkCommand> {
     }
     public String getStaticUsageInfo() {
         return "Link command usage: link "
-                + "-student STUDENT_NAME"
-                + "-lesson LESSON_NAME"
+                + "-student [STUDENT_NAME]"
+                + "-lesson [LESSON_NAME]"
                 + "\nExample: " + LinkCommand.COMMAND_WORD + " "
                 + "-student Alice Pauline -lesson CS2103T lab1";
     }
     //todo make it cleat that commands are case insensitive
     public String getStatefulUsageInfoLesson() {
         return "LinkTo command usage: linkTo "
-                + "STUDENT_NAME"
+                + "[STUDENT_NAME]"
                 + "\nExample: linkTo "
                 + "Alice Pauline"
                 + "\nNote: This command is only available when a lesson is shown";
     }
     public String getStatefulUsageInfoPerson() {
         return "LinkTo command usage: linkTo "
-                + "LESSON_NAME"
+                + "[LESSON_NAME]"
                 + "\nExample: linkTo "
                 + "CS2103T lab1"
                 + "\nNote: This command is only available when a student is shown";
