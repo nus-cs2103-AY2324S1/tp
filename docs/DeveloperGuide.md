@@ -472,7 +472,7 @@ user cannot tell immediately which provided index is wrong.
 such as `enrol m/1 e/-1` where the event index is wrong, the error message displayed to the user is just "Index is not a non-zero unsigned integer."
 There is a lack of information shown to the user which specific index is wrong.
 
-**Proposed solution:**
+**Proposed Solution:**
 
 We propose to make the index error messages more specific and highlight to the user which index is wrong and why
 that index is wrong. For example, in the `enrol m/1 e/-1` input, we will show an error message to the user along 
@@ -491,7 +491,7 @@ listed.
 We propose that the find criteria will be improved such that it will find any event/member name which contains the given keyword string,
 i.e. member/event name will not have to contain a word that matches exactly with the given find keyword. For example,
 the command `findMember a` will now match members with name "Alex", "Alice", etc. In addition, if the user remembers that
-an event name consists of 2 words, they can do `findEvent ‎`, which would list all events which have a blank space in
+an event name consists of 2 words, they can do `findEvent  ‎`, which would list all events which have a blank space in
 their name.
 
 ### Make UI stay on current view upon undo/redo
