@@ -246,8 +246,8 @@ Examples:
 **Note:**
 * Unlike the `find` command, the `language` command will not display the flash cards whose word or translation contains the specified language as a substring or keyword.
     * e.g. `language Chinese` will not display following flash cards:
-        * `w/雪 t/snow wl/中文 tl/English`
-        * `w/俺 t/I wl/Chinses dialect tl/English`
+        * `w/读书 t/read book wl/简体中文 tl/English`
+        * `w/讀書 t/I wl/Traditional Chinses tl/English`
 * `language` without any parameter will display all the flash cards with default language `"""`.
 
 ### Getting list for revision : `review`
