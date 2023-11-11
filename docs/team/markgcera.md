@@ -6,7 +6,9 @@ title: Mark Garcera's Project Portfolio Page
 ### Project: CheckMate
 
 
-CheckMate is designed to streamline the process of room bookings for hotel employees. With an emphasis on efficient room-booking matching using the Gale-Shapley algorithm, it offers real-time room search, service scheduling, and amenity management. Optimized for administrative roles, it ensures that room allocation and guest needs are seamlessly addressed.
+CheckMate is designed to streamline the process of room bookings for hotel employees. With a Graphical User Interface (GUI) that provides the necessary information needed at a glance, and the application
+being optimised for use via a Command Line Interface (CLI), we have combined elegance and efficiency when it comes to
+the process of room booking for hotel receptionists.
 
 Given below are my contributions to the project.
 
@@ -39,8 +41,9 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added a Table of Contents for the UG and updated it to match the then-capabilities of our application (Pull request [#127](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/127)).
+    * Added a part under the Quick Start section showing and explaining the GUI Layout (Pull request [#260](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/260)).
   * Developer Guide:
     * Added implementation details of the`Room Statistics PieChart`, `JsonInjectionParser` features.
 
 * **Community**:
-  * Approved PRs and commented on some eg: (Pull request [#185](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/185))
+  * Provided 9 bug reports for the team I was assigned during the PE-D.

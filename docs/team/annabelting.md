@@ -5,7 +5,9 @@ title: Annabel Ting's Project Portfolio Page
 
 ### Project: CheckMate
 
-CheckMate is designed to streamline the process of room bookings for hotel employees. With an emphasis on efficient room-booking matching using the Gale-Shapley algorithm, it offers real-time room search, service scheduling, and amenity management. Optimized for administrative roles, it ensures that room allocation and guest needs are seamlessly addressed.
+CheckMate is designed to streamline the process of room bookings for hotel employees. With a Graphical User Interface (GUI) that provides the necessary information needed at a glance, and the application
+being optimised for use via a Command Line Interface (CLI), we have combined elegance and efficiency when it comes to
+the process of room booking for hotel receptionists.
 
 Given below are my contributions to the project.
 
