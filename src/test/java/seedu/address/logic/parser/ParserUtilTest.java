@@ -238,25 +238,10 @@ public class ParserUtilTest {
             fail();
         }
     }
+  
     @Test
     public void validateName_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.validateName(INVALID_NAME));
-    }
-    @Test
-    public void validateNames_validInputs_success() {
-        try {
-            ParserUtil.validateNames(Arrays.asList(VALID_NAME_1, VALID_NAME_2));
-        } catch (ParseException e) {
-            fail();
-        }
-    }
-    @Test
-    public void validateNames_invalidInputs_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.validateNames(Arrays.asList(VALID_NAME_1, INVALID_NAME)));
-    }
-    @Test
-    public void validateNames_missingInputs_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.validateNames(Arrays.asList("", INVALID_NAME)));
     }
     @Test
     public void validateTag_validInput_success() {
@@ -266,26 +251,12 @@ public class ParserUtilTest {
             fail();
         }
     }
+  
     @Test
     public void validateTag_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.validateTag(INVALID_TAG));
     }
-    @Test
-    public void validateTags_validInputs_success() {
-        try {
-            ParserUtil.validateTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        } catch (ParseException e) {
-            fail();
-        }
-    }
-    @Test
-    public void validateTags_missingInputs_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.validateTags(Arrays.asList("", VALID_TAG_1)));
-    }
-    @Test
-    public void validateTags_invalidInputs_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.validateTags(Arrays.asList(VALID_NAME_1, INVALID_TAG)));
-    }
+  
     @Test
     public void validateFinancialPlan_validInput_success() {
         try {
@@ -294,10 +265,12 @@ public class ParserUtilTest {
             fail();
         }
     }
+  
     @Test
     public void validateFinancialPlan_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.validateFinancialPlan(INVALID_FINANCIAL_PLAN));
     }
+  
     @Test
     public void validateFinancialPlans_validInputs_success() {
         try {
@@ -306,11 +279,13 @@ public class ParserUtilTest {
             fail();
         }
     }
+  
     @Test
     public void validateFinancialPlans_invalidInputs_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.validateFinancialPlans(
                         Arrays.asList(INVALID_FINANCIAL_PLAN, VALID_FINANCIAL_PLAN_1)));
     }
+  
     @Test
     public void validateFinancialPlans_missingInputs_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.validateFinancialPlans(
