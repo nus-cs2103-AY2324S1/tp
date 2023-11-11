@@ -262,7 +262,6 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
 Valid examples:
 * `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer` adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@<area>gmail.com*, and position *Software Engineer*.
-
 * `add n/Charlene Loh p/Staff Engineer e/cloh@gmail.com hp/91827271` adds a new applicant with name *Charlene Loh*, phone number *91827271*, email *cloh@<area>gmail.com*, and position *Staff Engineer*, as shown in the GUI below.
   
 ![add](images/user-guide/add.png)
@@ -292,9 +291,7 @@ Valid examples:
 
 Invalid examples:
 * `edit n/Vijay Sankar Kumar` is not allowed as `INDEX` is a required parameter and must be specified.
-
 * `edit 1` is not allowed as at least one of the optional fields `[n/NAME]`,  `[hp/PHONE]`, `[e/EMAIL]`, or `[p/POSITION]` must be provided.
-
 * `edit -20 hp/12341234` is not allowed as `INDEX` must be a positive integer.
 
 <br>
@@ -351,9 +348,7 @@ Valid examples:
 
 Invalid examples:
 * `status 3 s/interviewing` is not allowed as `STATUS` must be either `o` or `offered` or `r` or `rejected` or `u` or `undecided`.
-
 * `status 3` is not allowed as `STATUS` is a required parameter and must be specified.
-
 * `status -3 s/o` is not allowed as `INDEX` must be a positive integer.
 
 <br>
