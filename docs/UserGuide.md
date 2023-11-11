@@ -46,7 +46,7 @@ you can access contacts by roles and responsibilities instantly.
     * [Find team](#find-team)
     * [List teams](#list-teams)
   * [Display tree](#display-tree)
-  * [Help](#help)
+  * [Help Command](#help-command)
   * [Reset the project](#reset-the-project)
   * [Exit the application](#exit-the-application)
 * [Troubleshooting](#troubleshooting)
@@ -93,6 +93,7 @@ Here are some symbols you might encounter in our guide, and their respective mea
 | :information_source: | Note. Provides additional information.                                      |
 | :bulb:               | Tip. Information that might better your experience.                         |
 | :exclamation:        | Warning. Cautionary statement to prevent you from undesirable consequences. |
+
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
@@ -146,6 +147,7 @@ check out [find team command](#find-team) for more details).
 | `p/`<br/>`e/`<br/> `a/`<br/> `r/`<br/> `t/` | p/ - Prefix for phone number<br/> e/ - Prefix for email<br/>a/ - Prefix for address<br/>r/ - Prefix for remark<br/>t/ - Prefix for tags. |                                                                  |
 | `[DeveloperName]`, `[Phone]`, etc.          | Arguments that follow the command.                                                                                                       |
 | `(optional)`                                | Optional elements like Remark and Tags can be omitted.                                                                                   |                   |
+| `...`                                       | Ellipsis indicates that more arguments can follow.                                                                                       |
 
 
 Example - `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
@@ -196,28 +198,39 @@ When you enter the command (Hi):
 
 ##### Command format: 
 * `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
+* `newdev n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
   
 ##### Example usage:
-* `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`
+- For example, to add a new developer John to the addressboook, type
+`add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`.
   ![AddCommand](images/UG_images/AddCommand.png)
 
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* You can use `add` and `newdev` command interchangeably as both achieves the same result. Users have the option to choose 
+the one which suits them.
+</div>
   
-### Remove developer
+#### Remove developer
 
 ##### What this command does:
 * Performs deletion of existing developers from the storage. Specify the index number as shown on the list.
-#### Command format:
-* `delete [index number]`
+##### Command format:
+* `delete [Index number]`
 
-#### Example usage:
-- For example, to delete the developer John from the list. First find the index number of John.
-- In this example, the index of developer John is 7. So type, `delete 7`.
+##### Example usage:
+- For example, to delete developer **Jane Lim** from the list fo developers. First find the index number of **Jane Lim** from the list of developers.
+Then type `delete 3` to delete that entry.
+- In the following example, you can see that **Jane Lim** is removed from the list of developers. 
   ![DeleteCommand](images/UG_images/DeleteCommand.png)
 
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
-* You cannot delete a developer who is **team leader** for any of the teams. Inorder to delete that developer, we 
+* Index must be a positive integer.
+* You cannot delete a developer who is a **team leader** for any of the teams. Inorder to delete that developer, we 
 recommend you to change the team leader using `editTeamLeader` command. And then you can remove that developer from the 
 team.
  ![DeleteTeamLeader](images/UG_images/DeleteTeamLeader.png)
@@ -230,47 +243,45 @@ team.
 of developers.
 </div>
 
-### Edit developer
-#### What this command does:
-* To edit personal information:
-  - Command: `edit INDEX(must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`
-  - Example: `edit 1 n/John Wick e/new.email@example.com`
-  - Result: The person of index `1` now has a new name `John Wick` and a new
+#### Edit developer
+##### What this command does:
+
+##### Command format:
+`edit [Index number] n/[Name] p/[Phone] e/[Email] a/[Address] r/[Remark] t/[Tag]...`
+
+##### Example usage:
+- For example, to edit a details of developer **John Wick**, firstly find the index number of **John Wick**. Then type 
+`edit 1 n/John Wick e/new.email@example.com` to change John's name and email address.
+- In the following example, you can see that now index `1` has a new name `John Wick` and a new email address `new.email@example.com`.
   ![EditCommand](images/UG_images/EditCommand.png)
-  email address `new.email@example.com`.
 
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
+* Index must be a positive integer.
 * You **do not need to provide** the arguments that you do not want to edit. In the
   given example above, I only want to edit this person's name and email address and nothing else,
   so I only provided this person's index `1`, new name `n/John Wick`
   and new email address `e/new.email@example.com`.
 </div>
 
-### Find developer
-#### What this command does:
+#### Find developer
+##### What this command does:
 * Finds persons whose names contain any of the given keywords.
 
-##### Format: `find [KEYWORD]`
- - The search is case-insensitive. e.g hans will match Hans
- - The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
- - Only the name is searched.
- - Only full words will be matched e.g. Han will not match Hans
- - Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang
-<div markdown="block" class="alert alert-primary">
+##### Command Format: 
+`find [Keyword1] ...`
 
-**:information_source: Note:**<br>
-* The find command is designed to show only a list of developers. If you wish to view the team list again, you should use the `listt` command. To display the complete list of developers, use the `list` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
-</div>
-   
-##### Examples:
+##### Example Usage:
+- For example, to find developers whose first or last name is **John**, type `find John`.
+- In the following example, you can see that there are 3 developers with their first name **John** in the list of developers.
+  ![FindCommandUsing1Keyword](images/UG_images/FindCommand1.png)
+- You can use `find` command with multiple keywords. For example, if you type `find alex david` you get all the developers 
+with first or last name being **Alex** or **David**.
+  ![FindCommandUsingMultipleKeyword](images/UG_images/FindCommand2.png)
 
- - find John returns john and John Doe
- - find alex david returns Alex Yeoh, David Li
-   ![FindCommand](images/UG_images/FindCommand.png)
 ### List developers
-#### What this command does:
+##### What this command does:
 * Show only the list of all developers in the project.
 <div markdown="block" class="alert alert-primary">
 
@@ -279,10 +290,11 @@ of developers.
   (e.g. entering `list help delete 1 HAHAHA-1234` is equivalent to entering `list`)
 </div>
 
-#### Command format:
-* `list`
-#### Example usage:
-* `list` (and an example result is shown below)
+##### Command format:
+`list`
+
+##### Example usage:
+* For example, type `list` and you will see the list of developers in the system.
   ![ListCommand](images/UG_images/ListCommand.png)
 
 <div markdown="block" class="alert alert-warning">
@@ -295,35 +307,46 @@ Use the same command `list`. You will return to the home page.
 When you are at the main window, type `list` to show the developer list
 and type `list` again when you want to go back to the main window.
 </div>
+<br>
 
-## Managing Teams
+--------------------------------------------------------------------------------------------------------------------
 
-### Create teams
-#### What this command does:
+### Managing Teams
+<br>
+
+#### Create teams
+##### What this command does:
 * Creates a new team based on the given team name and leader name.
 
-#### Command format:
+##### Command format:
 * `newteam tn/[TeamName] tl/[TeamLeader]`
-#### Example usage:
-* `newteam tn/Team Delta tl/David Li`
+
+##### Example usage:
+* For example, to add a new team with team name **Team Delta** and team leader **David Li**, 
+type `newteam tn/Team Delta tl/David Li`
+* In the following example, you can see new team **Team Delta** is added to the team list.
   ![AddTeamCommand](images/UG_images/AddTeamCommand.png)
 
-### Add developers to team
-#### What this command does:
+#### Add developers to team
+##### What this command does:
 * To add a developer into an existing team:
-#### Command format:
+
+##### Command format:
 * `dev2team tn/[TeamName] n/[Developer Name]`
-#### Example usage:
+
+##### Example usage:
 * `dev2team tn/Team Delta n/Irfan Ibrahim`
   ![AddDeveloperToTeam](images/UG_images/AddDevToTeamCommand.png)
 
 ### Delete team
 #### What this command does:
 * Performs deletion of existing teams from the storage.
+
 #### Command format:
 * `deleteteam tn/[TeamName]`
+
 #### Example usage:
-* Example: If you want to delete **Team Alpha** from the list of teams.
+* For example, if you want to delete **Team Alpha** from the list of teams.
 * You need to type `deleteteam tn/Team Alpha`, then the **Team Alpha** will be deleted from the list of teams.
   ![DeleteTeamCommand](images/UG_images/DeleteTeam.png)
 
@@ -332,7 +355,7 @@ and type `list` again when you want to go back to the main window.
 #### Command format:
 * `deletedev tn/[TeamName] n/[DeveloperName]`
 #### Example usage:
-* Example: If you want to delete developer **John Lim** from **Team Bravo**.
+* For example: if you want to delete developer **John Lim** from **Team Bravo**.
 * You need to type `deletedev tn/Team Bravo n/John Lim`, then the developer 
 **John Lim** will be removed from **Team Alpha**.
   ![DeleteDevFromTeam](images/UG_images/DeleteDevFromTeam.png)
@@ -359,33 +382,22 @@ and type `list` again when you want to go back to the main window.
   - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
   ![EditTeamLeaderCommand](images/UG_images/EditTeamLeaderCommand.png)
 
-## Find Team
-### What this command does:
+#### Find Team
+##### What this command does:
 - Finds teams whose names contain any of the given keywords.
 
-##### Format: `findteam KEYWORD`
-- The search is case-insensitive. e.g., "team" will match "Team Alpha."
-- The order of the keywords does not matter. e.g., "Alpha Bravo" will match "Bravo Alpha Team."
-- Only the team name is searched.
-- Only full words will be matched. e.g., "Alph" will not match "Alpha Team."
-- Teams matching at least one keyword will be returned (i.e., OR search). e.g., "Alpha Bravo" will return "Team Alpha," "Bravo Team."
+##### Command Format: 
+* `findteam [Keyword1] ...`
 
-<div markdown="block" class="alert alert-primary">
-
-**:information_source: Note:**<br>
-* The findteam command is designed to show only a list of teams. If you wish to view the developer list again, you should use the `list` command. To display the complete list of teams, use the `listt` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
-
-</div>
-
-##### Examples:
-- `findteam Alpha` returns "Team Alpha" and "Alpha Squad."
-- `findteam Bravo Charlie` returns "Bravo Team," "Charlie Crew," and "Delta Bravo Charlie Team."
-
-![FindTeamCommand](images/UG_images/FindTeamCommnd.png)
-
+##### Example usage:
+- For example, type `findteam Alpha` to find all the teams with keyword **Alpha**.
+- In the following example, you can see that the matching results are **Team Alpha** and **Alpha Squad**.
+  ![FindTeamCommand](images/UG_images/FindTeamCommnd.png)
+- You can also use multiple keywords, for example type `findteam Bravo Charlie` which shows the following teams 
+**Bravo Team**, **Charlie Crew** and **Delta Bravo Charlie Team**.
 
 ### List teams
-#### What this command does:
+##### What this command does:
 * Show only the list of all existing teams in the project.
 
 <div markdown="block" class="alert alert-primary">
@@ -395,10 +407,11 @@ and type `list` again when you want to go back to the main window.
   (e.g. entering `listt help delete 1 HAHAHA-1234` is equivalent to entering `listt`)
 </div>
 
-#### Command format:
+##### Command format:
 * `listt`
-#### Example usage:
-* `listt` (and an example result is shown below)
+
+##### Example usage:
+* Type `listt` and you will see list of teams with team name, team leader and developers similar to the example shown below.
   ![ListTeamCommand](images/UG_images/ListTeam.png)
 
 <div markdown="block" class="alert alert-warning">
@@ -439,8 +452,9 @@ and type `listt` again when you want to go back to the main window.
 
 ### Command format: 
 * `tree`
+
 #### Example usage: 
-* `tree` (and an example result is shown below)
+* Type `tree` and you will see a tree similar to the one shown below.
 ![TreeResultExample](images/UG_images/TreeResultExample.png)
 
 <div markdown="block" class="alert alert-warning">
@@ -454,8 +468,9 @@ When you are at the main window, type `tree` to show the tree graph
 and type `tree` again when you want to hide the tree and go back to the main window.
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
 
-### Help
+### Help Command
 #### What this command does:
 * Opens up a window which shows the link to this User Guide, which also comes with a button allowing copying the link;
 * Display a summary of all commands of LinkTree, specifying the parameters needed.
@@ -472,7 +487,7 @@ and type `tree` again when you want to hide the tree and go back to the main win
 * Or simply press F1
 
 #### Example usage:
-* `help` (and an example result is shown below)
+* Type `help` and you will see a pop up window and command summary as shown below.
   ![HelpWindow](images/UG_images/HelpWindow.png)
   ![HelpCommandResult](images/UG_images/HelpCommandResult.png)
 
@@ -486,8 +501,9 @@ This command can be used when you want to restart the project.
 * `clear`
 
 #### Example usage:
-* `clear` (and you will see an empty list of developers and teams)
+* Type `clear` and you will see an empty list of developers and teams that is entire data will be erased.
   ![ClearCommand](images/UG_images/ClearCommand.png)
+
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Warning:**<br>
@@ -502,7 +518,7 @@ This command can be used when you want to restart the project.
 * `exit`
 
 #### Example usage:
-* `exit` (the application will close automatically)
+* Type `exit` and the application will close automatically.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Troubleshooting
