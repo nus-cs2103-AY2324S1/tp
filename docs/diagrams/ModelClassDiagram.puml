@@ -43,6 +43,7 @@ Model .left.> ReadOnlyAddressBook
 Model .right.> ReadOnlyTransactionBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -right-> "1" TransactionBook
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueEntryMap_Person
