@@ -28,10 +28,11 @@ public class IntervalBegin extends Begin {
         return dateFormat.parse(value);
     }
 
-
-    @Override
-    public String toString() {
-        return value;
+    /**
+     * @return a defensive copy of IntervalBegin
+     */
+    public IntervalBegin copy() {
+        return new IntervalBegin(this.value);
     }
 
     @Override
