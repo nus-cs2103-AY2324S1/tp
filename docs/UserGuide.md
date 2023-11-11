@@ -216,7 +216,7 @@ Here is how to use the [**mark**](#marking-a-schedule-mark) command to mark the 
 **Congratulations!** You have successfully added your first tutor and schedule, and also marked a schedule as 
 completed in TutorConnect. We hope that this tutorial has helped guide you through the basic features of 
 TutorConnect. Please refer to the [**Features Section**](#features) to see what else TutorConnect can do. 
-Alternatively, visit the [**FAQ Section**](#frequently-asked-questions) to view some frequently asked questions.
+Alternatively, you can visit the [**FAQ Section**](#frequently-asked-questions).
 
 [Back To Top](#table-of-contents)
 
