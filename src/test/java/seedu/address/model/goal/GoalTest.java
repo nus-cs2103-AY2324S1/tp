@@ -79,4 +79,25 @@ public class GoalTest {
 
         goalTextProperty.removeListener(listener);
     }
+    @Test
+    public void equals() {
+        Goal goal = new Goal(new Deck());
+        Goal goal2 = new Goal(new Deck());
+        goal2.setTarget(5);
+
+        // same values -> returns true
+        assertTrue(goal.equals(new Goal(new Deck())));
+
+        // same object -> returns true
+        assertTrue(goal.equals(goal));
+
+        // null -> returns false
+        assertFalse(goal.equals(null));
+
+        // different types -> returns false
+        assertFalse(goal.equals(1));
+
+        // different values -> returns false
+        assertFalse(goal.equals(goal2));
+    }
 }

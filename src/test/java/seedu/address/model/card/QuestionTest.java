@@ -1,6 +1,8 @@
 package seedu.address.model.card;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -54,5 +56,18 @@ public class QuestionTest {
 
         // different values -> returns false
         assertFalse(question.equals(new Question("Other Valid Question")));
+    }
+    @Test
+    public void hashcode() {
+        Question question = new Question("Valid Question");
+
+        // same values -> returns true
+        assertEquals(question.hashCode(), new Question("Valid Question").hashCode());
+
+        // same object -> returns true
+        assertEquals(question.hashCode(), question.hashCode());
+
+        // different values -> returns false
+        assertNotEquals(question.hashCode(), new Question("Other Valid Question").hashCode());
     }
 }

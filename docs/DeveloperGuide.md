@@ -315,31 +315,62 @@ The following activity diagram summarizes what happens when a user executes a ne
    * Pros: Will use less memory (e.g. for `delete`, just save the card being deleted).
    * Cons: We must ensure that the implementation of each individual command are correct.
 
-### Filter by Tag feature
+### Filtering by Tag
 
+The `list` command supports filtering the deck by tag by entering the relevant tag(s) in the command parameters. This allows the users to
+view specific groups of cards under the same `tag`, granting them more control over their study material.
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The `list` command also provides support for filtering by question keywords. The implementation is largely the same as filtering by tag.
+</div>
 
 #### Implementation
 
-The proposed feature aims to filter the flashcards and display cards of a specific `tag`. This allows the users to
-view specific groups of cards under the same `tag`, granting them more control over their study material.
+Performing a `list` command involves executing `ListCommand`.
+* This command is parsed by `ListCommandParser`.
+* `ListCommandParser#parse()` parses the user input to return a `ListCommand` object that will be executed.
 
-Given below is an example usage of the filter feature.
+Given below is an example usage of the `list` command to filter the deck and how the filtering mechanism behaves at each step.
 
-Step 1: User creates various cards.
+**Step 1.**
+Suppose the user has a deck containing some cards with the tag `CS2103T`. The user keys in this command to filter by the `CS2103T` tag.
 
-Step 2: User executes `edit 1 t/CS2103T`. This causes the first card to be tagged with the tag `CS2103T`.
+```
+list t/CS2103T
+```
 
-Step 3: User repeats step 2 for all the cards associated with `CS2103T`.
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** At least one tag should be provided.
+</div>
 
-Step 4: User now wants to display only cards with the `CS2103T` tag. User will execute the `filter t/CS2103T`.
+**Step 2.**
+The `ListCommandParser` will execute to get the field and keyword pairs 
+using the `ArgumentTokenizer`. This parses every parameter into a list of `Predicate<Card>` objects.
+The parser then returns a `ListCommand` object with the list of predicates.
 
-Step 5: Deck will now display only the cards with the `CS2103T` tag.
+**Step 3.** The `ListCommand#execute()` method is invoked by the `LogicManager`.
+The list of predicates is combined into a single `Predicate<Card>` object.
+Then, `ListCommand` calls `Model#updateFilteredCardList()` with the `Predicate<Card>`
+to update the filtered flashcard list with a new list, filtered by the tag entered.
 
-Step 6: Should user want to see the full deck, they will execute `list` to view their full deck of cards.
+**Step 4.** Finally, the `ListCommand` creates a `CommandResult` object that
+contains feedback and displays the filtered flashcard list to the
+user. This result is then returned to the `LogicManager`. As a result, 
+the deck will now display only the cards with the `CS2103T` tag.
+
+The sequence diagram below shows the process of filtering the deck with tags.
+
+![FilterByTagSequenceDiagram](images/FilterByTagSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `ListCommandParser` and `ListCommand`
+should end at the destroy marker (X)
+but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 #### Design considerations:
 
-**Aspect: How filter executes:**
+**Aspect: How `list` executes with filter parameters:**
 
 * **Alternative 1 (current choice):** Filter through the whole deck using the filter method on a stream of cards.
     * Pros: Easy to implement.
@@ -351,6 +382,62 @@ Step 6: Should user want to see the full deck, they will execute `list` to view 
     * Cons:
       1. Will use more memory.
       2. Adding/Deleting/Editing cards will require modifications to \'mini-deck\'.
+
+### Random Command
+
+The `random` command enables the user to practise with a random card from the deck. 
+It offers compatibility with the `solve` and `set` commands by making sure the index of the 
+randomly selected card is remembered for those commands.
+
+#### Implementation
+
+Performing a `random` command involves executing `RandomCommand`.
+* This command does not have its own parser because it does not require any parameters.
+* Hence, this command is directly executed by `LogicManager`
+
+**Step 1.**
+Suppose the user has a deck containing some cards. The user keys in this command to practise a random card.
+```
+random
+```
+
+**Step 2.**
+A new `RandomCommand` object is created by `DeckParser`. 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** This is slightly different from other commands, as there is no need for 
+parsing by its own parser because there are no additional parameters to be parsed for this command.
+</div>
+
+**Step 3.**
+The `RandomCommand#execute()` method is invoked by the `LogicManager`.
+`RandomCommand` then calls `Model#getFilteredCardList()` to get the deck list, so as to generate a random index.
+The random index is generated by calling `RandomCommand#generateRandomIndex()`.
+This random index is saved in the `Model` by calling `Model#setRandomIndex()`.
+This is so that the index can be accessed later by commands `solve` and `set`.
+
+**Step 4.**
+A random card is selected with the newly generated index, which is then used to return a `CommandResult` to `LogicManager`.
+As a result, the randomly selected card's question will be shown to the user to practise with.
+
+The sequence diagram below shows the process of randomly selecting a card to practise.
+
+![RandomCommandSequenceDiagram](images/RandomCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `RandomCommand`
+should end at the destroy marker (X)
+but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: How random executes:**
+
+* **Alternative 1 (current choice):** Modify `PractiseCommand` and `PractiseCommandParser` to accept an `r` parameter to practise a random question
+    * Pros: 
+      1. Similar command format with `solve` and `set`, so it may be easier to use for some users.
+    * Cons: 
+      1. Harder to manage codebase because `PractiseCommand` will have two different responsibilities (i.e. practising in order and randomly)
 
 ### Search Filter feature
 

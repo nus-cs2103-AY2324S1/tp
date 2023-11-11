@@ -69,9 +69,7 @@ public class SetDifficultyCommandTest {
     public void execute_setDifficultyInvalid_failure() {
         SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(0), "middle");
 
-        String expectedMessage = "middle is not an invalid difficult level! Please enter easy, medium or hard!";
-
-
+        String expectedMessage = "middle is not a valid difficult level! Please enter easy, medium or hard!";
         assertCommandFailure(setDifficultyCommand, model, expectedMessage);
     }
 

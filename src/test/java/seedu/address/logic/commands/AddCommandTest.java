@@ -69,6 +69,7 @@ public class AddCommandTest {
         Card cs1101s = new CardBuilder().withQuestion("what colour is the grass").build();
         AddCommand addcs2100Command = new AddCommand(cs2100);
         AddCommand addcs1101sCommand = new AddCommand(cs1101s);
+        assertNotEquals(addcs2100Command, addcs1101sCommand);
 
         // same object -> returns true
         assertEquals(addcs2100Command, addcs2100Command);
