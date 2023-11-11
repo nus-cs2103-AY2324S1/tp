@@ -14,6 +14,7 @@
 ## **Acknowledgements**
 
 - The features `undo`, `redo`, `history` and arrow key command navigation (including the code) was reused with some changes from AddressBook-Level4.
+- Our book icon favicon was taken from [Smashicons from Flaticon](https://www.flaticon.com/free-icons/book).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -162,15 +163,11 @@ Only 1 of the 3 commands will be executed per user input.
 
 Here is an example step by step of how the 3 different commands might be executed.
 
-Step 1. User inputs
-
-        tag A0245234N t/teamleader
+Step 1. User inputs `tag s/A0245234N t/teamleader`
 
 Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object which in turn creates a `TagCommandParser` object to parse the command.
 
-Step 3. Next `TagCommandParser` will check for any action identifiers,
-`/add` or `/delete`, which will create a `AddTagCommand` object or `DeleteTagCommand` object respectively,
-else a `TagCommand` object.
+Step 3. Next `TagCommandParser` will check for any action identifiers, `/add` or `/delete`, which will create a `AddTagCommand` object or `DeleteTagCommand` object respectively,  else a `TagCommand` object.
 
 Step 4a. `AddTagCommand` will union the `HashSet<Tag>` with the student's existing `Tag`.
 
@@ -187,10 +184,13 @@ The following activity diagram summarizes what happens when a user executes a ta
 <puml src="diagrams/TagCommand.puml" alt="TagCommand" />
 
 #### Design considerations:
+
 **Aspect: TagCommand**
+
 * **Alternative 1 (current choice):** Use different types of TagCommand to handle add and delete tags.
   * Pros: Able to handle add and delete of tags. Users do not have to retype tags that they want to keep.
   * Cons: Users have to input more details.
+  
 * **Alternative 2:** Replace all existing tags with input tags.
   * Pros: Easy to implement.
   * Cons: Users have to always replace the tag even if they want to keep it.
@@ -199,7 +199,7 @@ The following activity diagram summarizes what happens when a user executes a ta
 
 #### Implementation
 
-The undo/redo feature works similarly to the one implemented in AddressBook-Level 4, but with support for more commands. The undo/redo mechanism is facilitated by `VersionedClassManager`. It extends `ClassManager` with an undo/redo history, stored internally as an `classManagerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo feature works similarly to the one implemented in AddressBook-Level 4, but with support for more commands and a limit to the number of Class Manager states stored. The undo/redo mechanism is facilitated by `VersionedClassManager`. It extends `ClassManager` with an undo/redo history, stored internally as an `classManagerStateList` and `currentStatePointer`. `classManagerStateList` only stores up to 10 most recent states of Class Manager to avoid performance issues when a large number of commands are executed. Additionally, it implements the following operations:
 
 * `VersionedClassManager#commit()` — Saves the current Class Manager state in its history.
 * `VersionedClassManager#undo()` — Restores the previous Class Manager state from its history.
@@ -265,6 +265,8 @@ Step 6. The user executes `clear`, which calls `Model#commitClassManager()`. Sin
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
+In order to implement `undo` and `redo` in Class Manager, `load` and `config` commands are not supported by `undo` and `redo`. This is because undoing `load` and `config` can cause Class Manager to be in an inconsistent state. To prevent this, `load` and `config` commands calls `Model#loadReset()` and `Model#configReset()` respectively. These methods essentially clear `classManagerStateList` and reset the `currentStatePointer` to the current Class Manager state, allowing 9 more states of Class Manager to be stored after `load` and `config` commands.
+
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
@@ -295,17 +297,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: Commands that support undo & redo**
 
 * **Alternative 1 (current choice):** Not supporting undo/redo for `load` and `config`
-  * Pros: Ensures that Class Manager will not run into issues when undoing `load` for missing saved files. Enforces the immutability of tutorial and assignment count after `config` has been entered.
-  * Cons: Unable to change tutorial and assignment count after `config` has been entered.
+  * Pros: Ensures that Class Manager will not run into issues such as inconsistent states when undoing `load` for missing saved files.
+  * Cons: Unable to restore student's class information after `config` command resets student class information.
 * **Alternative 2:** Supporting undo/redo for all commands.
   * Pros: Ensures that app is consistent with undo/redo and users will not be unsure if a certain command can be undone.
-  * Cons: Can be confusing for the user to use undo/redo with `load`.
+  * Cons: Can be confusing for the user to use undo/redo with `load` and `config`.
+
+**Aspect: Number of Class Manager states to store**
+
+* **Alternative 1 (current choice):** Store up to 10 Class Manager states.
+  * Pros: Ensures that app will not run into performance issues when a large number of commands are executed.
+  * Cons: Unable to undo/redo more than 10 commands.
+* **Alternative 2:** Store all Class Manager states.
+  * Pros: Able to undo/redo more than 10 commands and restore any state of Class Manager in the current session.
+  * Cons: Will have performance issues when a large number of commands are executed.
 
 ### Load feature
 
 #### About this feature
 
-The load feature allows users to load a saved JSON file into the app. Load allows data from the new JSON file to be displayed in Class Manager, while setting the new default save file to be the new JSON file. The status bar footer also updates to show the current file.
+The load feature allows users to load a saved JSON file into the app. Load allows data from the new JSON file to be displayed in Class Manager, while setting the new default save file to be the new JSON file. The status bar footer also updates to show the current file path.
 
 This feature is an improvement to the previous method of directly editing the `classmanager.json` file located in `[JAR file location]/data`. Users are now able to have multiple JSON files in `[JAR file location]/data` and choose which file is to be loaded into Class Manager. This allows TAs with multiple courses to have a JSON file for each course, and load the JSON file for the course they are currently teaching.
 
@@ -313,7 +324,7 @@ This feature is an improvement to the previous method of directly editing the `c
 
 <puml src="diagrams/LoadSequenceDiagram.puml" alt="LoadSequenceDiagram" />
 
-The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `LoadCommand` attempts to read the JSON file and calls `setClassManager` and `setClassManagerFilePath` of `Model` to update the new save file path and Class Manager data to be displayed.
+The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `LoadCommand` attempts to read the JSON file and checks if the tutorial and assignment count for each student matches the current configuration of Class Manager. If the file is valid, it then calls `setClassManager` and `setClassManagerFilePath` of `Model` to update the new save file path and Class Manager data to be displayed. `LoadCommand` then resets `VersionedClassManager` to clear the undo/redo history of Class Manager.
 
 #### Parsing user input
 
@@ -323,9 +334,51 @@ The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `Loa
 4. The file name is then check to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
 5. The `LoadCommandParser` then creates the `LoadCommand` based on the processed input.
 
+#### Design considerations:
+
+**Aspect: Files that can be loaded:**
+
+* **Alternative 1 (current choice):** Only JSON files can be loaded.
+  * Pros: Easy to implement.
+  * Cons: Users may want to load other types of files.
+* **Alternative 2:** Allow users to load any type of file.
+  * Pros: Users can use files of other formats that may be generated from other applications.
+  * Cons: A lot of effort to ensure that the data of each file type is valid.
+
 ### Config feature
 
-The config feature is mandatory for TAs to enter before using Class Manager. It allows TAs to set the number of tutorials and the number of assignments in a module. This allows Class Manager to be able to display the correct number of tutorials and assignments for the TA to enter the grades for each student.
+The `config` command allows TAs to set the number of tutorials and the number of assignments in a module. This allows Class Manager to be able to display the correct number of tutorials and assignments for the TA to enter the grades for each student. This also provides more flexibility to TAs as their class may differ from the default configuration of 13 tutorials and 6 assignments.
+
+#### How it is implemented
+
+<puml src="diagrams/ConfigSequenceDiagram.puml" alt="ConfigSequenceDiagram" />
+
+The `config` command is facilitated by `ConfigCommand` and `ConfigCommandParser`. `ConfigCommand` updates the tutorial and assignment count of Class Manager by calling `setTutorialCount` and `setAssignmentCount` of `Model` to update the `preferences.json` file, while simultaneously updating the static tutorial and assignment count of `ClassDetails` to accurately recreate the `ClassDetails` objects for students. All students in the current file will have their class information updated to correctly reflect the new configuration. `ConfigCommand` then resets the student shown in the view panel, as well as `VersionedClassManager` to clear the undo/redo history of Class Manager.
+
+#### Parsing user input
+
+1. The user inputs the `config` command.
+2. The `ClassManagerParser` processes the input and creates a new `ConfigCommandParser`.
+3. The `ConfigCommandParser` then calls ArgumentTokenizer#tokenize(String argString, Prefix... prefixes) to extract the tutorial count and assignment count. If there are duplicate prefixes, a ParseException would be thrown.
+4. The tutorial and assignment counts are then check to ensure that they are integers between 1 and 40 inclusive. If any of the counts are not valid, a ParseException would be thrown.
+5. The `ConfigCommandParser` then creates the `ConfigCommand` based on the processed input.
+
+#### Design considerations:
+
+Initially in v1.3, `config` was implemented as a command that users could only execute once before they started using Class Manager. This allows `ClassDetails` to create fixed length arrays for `AssignmentTracker`, `AttendanceTracker` and `ClassParticipationTracker`. 
+
+However, this implementation was changed in v1.4 to allow users to execute `config` multiple times. This allows users to reconfigure Class Manager if they have entered the wrong information previously. We decided to reset the class information of a student back to the default values of 0 for attendance, class participation and assignment grades, as it ensures a consistent implementation of `config` regardless of whether the new tutorial count and assignment count was smaller or larger than the previous configuration.
+
+In addition, the tutorial and assignment count was limited to an integer between 1 and 40 inclusive in v1.4. This prevents division by zero bugs encountered in data visualisation, as well as Class Manager being unresponsive when the user enters a large number of tutorials and assignments.
+
+**Aspect: Number of times Class Manager can be configured:**
+
+* **Alternative 1 (current choice):** Class Manager can be configured multiple times.
+  * Pros: Provides more flexibility to TAs as they may enter the wrong information when configuring.
+  * Cons: Student class information is completely reset upon configuration, which may be an issue for the user.
+* **Alternative 2:** Class Manager can only be configured once.
+  * Pros: Ensures that Class Manager will not run into issues with data visualisation.
+  * Cons: Unable to change the tutorial and assignment count of Class Manager after it has been configured.
 
 
 ### Class Details feature
@@ -653,22 +706,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The Application should be secure (with password) as sensitive information is stored.
-5.  The Application needs to have proper documentation and user guide so that users can understand how to use the application.
-6.  The Application should allow users to create and customize their profiles, including preferences for shortcuts, views, and layouts, to enhance the user experience.
-7.  The Application should be able to handle multiple windows at the same time.
-8.  The Application should comply with the specific policies and regulations of the university regarding data storage, security, and access control.
+4.  The Application needs to have proper documentation and user guide so that users can understand how to use the application.
+5.  The Application should allow users to create and customize their profiles, including preferences for shortcuts, views, and layouts, to enhance the user experience.
+6.  The Application should be able to handle multiple windows at the same time.
+7.  The Application should comply with the specific policies and regulations of the university regarding data storage, security, and access control.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Student Number**: Matriculation number of NUS student. It must begin with capital letter 'A', followed by any number of alphanumeric characters. It must not be blank.
-* **Email**: Any valid email address, such as NUS email address (eXXXXXXX@u.nus.edu).
+* **Student Number**: Unique matriculation number of a NUS student. In Class Manager, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.
 * **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
 * **JAR**: Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
-* **Class details / Class information**: The grades, attendance and class participation details of a student in Class Manager.
+* **Class information**: The grades, attendance and class participation details of a student in Class Manager.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -865,7 +917,7 @@ testers are expected to do more *exploratory* testing.
 1. Listing all students in Class Manager.
 
    1. Test case: `list`<br>
-      Expected: The list of students is shown in the result display box.
+      Expected: The list of students is shown in the student list.
       <br><br>
 
 ### Display help
@@ -873,7 +925,7 @@ testers are expected to do more *exploratory* testing.
 1. Displaying help.
 
    1. Test case: `help`<br>
-      Expected: The help window with list of command is shown.
+      Expected: The help window with list of commands is shown.
       <br><br>
 
 ### Exiting the app
@@ -889,5 +941,5 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Planned Enhancements**
 
 1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, currently `add` is case-sensitive. We will accept keywords such as `Add` in the future.
-2. Class Numbers are currently limited to tutorials that begin with T. We plan to allow Class Numbers to be any alphanumeric string in the future.
-3. Clicking on a student in the student list will highlight the student. We plan to prevent this in the future as it affects the visibility of the student's contact details and visualised graphs.
+2. Class Numbers are currently limited to tutorials that begin with T. We plan to allow Class Numbers to be any sensible alphanumeric string, such as `R15` and `SG06`.
+3. Clicking on a student in the student list currently highlights the student's card. We plan to disable this interaction as it affects the visibility of the student's contact details and visualised graphs.

@@ -73,11 +73,11 @@ The blurred image below shows an annotated overview of **Class Manager 2023's** 
 The **GUI** has 6 notable sections:
 
 1. **Command Box** - This is where you can type in commands to execute.
-2. **Result Display** - This is where the results of the commands and any errors will be displayed.
+2. **Result Display Box** - This is where the results of the commands and any errors will be displayed.
 3. **Data Visualisation** - This is where the average grades, attendance and class participation percentages of a student will be displayed.
-4. **Class Information** - This is where the class information of the selected student, such as attendance, class participation and assignment grades, will be displayed.
-5. **Student List** - This is where the list of students will be displayed.
-6. **Current File** - This is where the current file path of the loaded data file will be displayed.
+4. **View Panel** - This is where the class information of the selected student, such as attendance, class participation and assignment grades, will be displayed.
+5. **Student List** - This is where the current list of students will be displayed in card form.
+6. **Status Bar** - This is where the current file path of the loaded data file will be displayed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -236,19 +236,21 @@ Format: `load f/FILE_NAME`
 Example:
 * `load f/sample` loads `sample.json` file in the `/data` folder.
 
-Before `load` is executed:
+Before `load f/sample` is executed:
 
 <img alt="load before" src="images/theme-light.png" width="700"> <br><br>
 
-After `load` is executed successfully:
+After `load f/sample` is executed successfully:
 
 <img alt="load success" src="images/load-outcome.png" width="750"> <br><br>
 
-Possible errors:
-* If file does not exist in the `/data` folder
-  * The file `FILE_NAME.json` cannot be found. Please make sure the file is in the /data folder.
+The file path at the bottom left of the application is be updated to `.\data\sample.json`.
+
+Possible errors and their corresponding error messages:
+* If `sample.json` does not exist in the `/data` folder
+  * Error message: The file `sample.json` cannot be found. Please make sure the file is in the /data folder.
 * The file name entered is not a valid JSON file, or the tutorial and assignment count does not match the current configuration of **Class Manager 2023**
-  * The file `FILE_NAME.json` cannot be loaded. Please make sure the file is formatted correctly.
+  * Error message: The file `sample.json` cannot be loaded. Please make sure the file is formatted correctly.
 
 ---
 
@@ -266,36 +268,9 @@ Example:
 
 ---
 
-### Redo a command : `redo`
-
-Redo a previously undone command that modified the state of **Class Manager 2023**. Redo only works with commands that can be undone. **Class Manager 2023** only stores up to 10 modified states, which resets after a `load` or `config` command. Redo can be used multiple times to redo multiple undo commands, or until **Class Manager 2023** reaches its most recent state after a maximum of 9 redos.
-
-Format: `redo`
-
-Here is the list of commands that can be redone after they are undone (same list as undo):
-* `add`
-* `class-part`
-* `clear`
-* `comment`
-* `delete`
-* `edit`
-* `grade`
-* `present`
-* `absent`
-* `present-all`
-* `absent-all`
-* `tag`
-* `view`
-
-Displayed result if redo is successful: `Redo success!`
-
-Displayed result if there are no more commands to redo: `No more commands to redo!`
-
----
-
 ### Undo a command : `undo`
 
-Undo the previous command that modified the state of **Class Manager 2023**. Undo only works with commands that changes **Class Manager 2023**, and does not work with commands such as `load` and `config`. **Class Manager 2023** only stores up to 10 modified states, which resets after a `load` or `config` command. Undo can be used multiple times to undo multiple commands, or until **Class Manager 2023** reaches its last stored state after a maximum of 9 undos.
+Undo the previous command that modified the state of **Class Manager 2023**. Undo only works with the commands mentioned below that modifies the state of **Class Manager 2023**, and does not work with commands such as `load` and `config`. **Class Manager 2023** only stores up to 10 modified states, which **resets** after a `load` or `config` command. Undo can be used multiple times to undo multiple commands, or until **Class Manager 2023** reaches its last stored state after a maximum of 9 undos.
 
 Format: `undo`
 
@@ -317,6 +292,33 @@ Here is the list of commands that can be undone/redone:
 Displayed result if undo is successful: `Undo success!`
 
 Displayed result if there are no more commands to undo: `No more commands to undo!`
+
+---
+
+### Redo a command : `redo`
+
+Redo a previously undone command that modified the state of **Class Manager 2023**. Redo only works with commands that can be undone. **Class Manager 2023** only stores up to 10 modified states, which **resets** after a `load` or `config` command. Redo can be used multiple times to redo multiple undo commands, or until **Class Manager 2023** reaches its most recent state after a maximum of 9 redos.
+
+Format: `redo`
+
+Here is the list of commands that can be redone after they are undone (same list as undo):
+* `add`
+* `class-part`
+* `clear`
+* `comment`
+* `delete`
+* `edit`
+* `grade`
+* `present`
+* `absent`
+* `present-all`
+* `absent-all`
+* `tag`
+* `view`
+
+Displayed result if redo is successful: `Redo success!`
+
+Displayed result if there are no more commands to redo: `No more commands to redo!`
 
 ---
 
