@@ -135,9 +135,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
-        if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
-        }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
@@ -159,6 +156,10 @@ class JsonAdaptedPerson {
         }
         final LicencePlate modelLicencePlate = new LicencePlate(licencePlate);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Remark.class.getSimpleName()));
+        }
         final Remark modelRemark = new Remark(remark);
 
         // Policy fields
@@ -182,7 +183,7 @@ class JsonAdaptedPerson {
 
         if (policyIssueDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    PolicyDate.class.getSimpleName()));
+                    PolicyDate.class.getSimpleName() + " (Issue Date)"));
         }
         if (!PolicyDate.isValidPolicyDate(policyIssueDate)) {
             throw new IllegalValueException(PolicyDate.MESSAGE_CONSTRAINTS);
@@ -191,7 +192,7 @@ class JsonAdaptedPerson {
 
         if (policyExpiryDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    PolicyDate.class.getSimpleName()));
+                    PolicyDate.class.getSimpleName() + " (Expiry Date)"));
         }
         if (!PolicyDate.isValidPolicyDate(policyExpiryDate)) {
             throw new IllegalValueException(PolicyDate.MESSAGE_CONSTRAINTS);

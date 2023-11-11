@@ -9,12 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Company {
 
-    public static final String MESSAGE_CONSTRAINTS = "Should not contain unrecognizable characters";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Company name can be anything understandable to human being.";
 
     /*
      * Company name can be anything understandable to human being.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9. ]+$";
+    public static final String VALIDATION_REGEX = "\\S.*";
     public static final String DEFAULT_VALUE = "NOCOMPANY";
 
     public final String value;
