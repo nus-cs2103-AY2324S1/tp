@@ -57,7 +57,7 @@ public class FindTeamCommandTest {
         FindTeamCommand command = new FindTeamCommand(predicate);
         expectedModel.updateFilteredTeamList(predicate);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                false, false, false, false, false, false, true);
+                false, false, false, false, false, false, true, false);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredTeamList());
     }
@@ -69,7 +69,7 @@ public class FindTeamCommandTest {
         FindTeamCommand command = new FindTeamCommand(predicate);
         expectedModel.updateFilteredTeamList(predicate);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                false, false, false, false, false, false, true);
+                false, false, false, false, false, false, true, false);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(TEAM1), model.getFilteredTeamList());
     }
@@ -80,7 +80,7 @@ public class FindTeamCommandTest {
         FindTeamCommand command = new FindTeamCommand(predicate);
         expectedModel.updateFilteredTeamList(predicate);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                false, false, false, false, false, false, true);
+                false, false, false, false, false, false, true, false);
 
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(TEAM1, TEAM2), model.getFilteredTeamList());

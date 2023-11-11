@@ -17,7 +17,7 @@ public class WelcomeCommand extends Command {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String strDate = formatter.format(date);
-        String welcomeMessage = "Welcome from Linktree, Current date and time: " + strDate;
+        String welcomeMessage = "Welcome to Linktree, Current date and time: " + strDate;
         return new CommandResult(welcomeMessage);
     }
 }

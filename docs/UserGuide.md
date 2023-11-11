@@ -79,7 +79,7 @@ used for easy navigation.
 * Click [here](#features) to view all detailed features of our app.
 * Already know how to use this guide and can't wait to start? [Get started](#getting-started)!<br>
 * Want an overview of all the commands? Click [here](#command-summary)!<br>
-* Any further questions that are unresolved? Check out our [FAQ](#faqs)!<br>
+* Any further questions that are unresolved? Check out our [FAQ](#faq)!<br>
 * You may also contact us at [service@linktree.com](mailto:service@linktree.com) for further doubts!
 
 **Formatting and Icons**: Throughout the guide, we use bold text and colors to emphasize key points and important terms.
@@ -88,10 +88,10 @@ Here are some symbols you might encounter in our guide, and their respective mea
 
 [//]: # (Table inspired by NUSCoursemates https://ay2324s1-cs2103t-t17-4.github.io/tp/UserGuide.html)
 
-| Symbol               | Meaning                                                                                        |
-|----------------------|------------------------------------------------------------------------------------------------|
-| :information_source: | Note. Provides additional information.                                                         |
-| :bulb:               | Tip. Information that might better your experience.                                                 |
+| Symbol               | Meaning                                                                     |
+|----------------------|-----------------------------------------------------------------------------|
+| :information_source: | Note. Provides additional information.                                      |
+| :bulb:               | Tip. Information that might better your experience.                         |
 | :exclamation:        | Warning. Cautionary statement to prevent you from undesirable consequences. |
 <div markdown="block" class="alert alert-primary">
 
@@ -106,18 +106,21 @@ Here are some symbols you might encounter in our guide, and their respective mea
 ### Installation
 
 1. Ensure you have Java `11` or above installed on your Computer. 
-Check out our [FAQ](#faqs) if you are not sure how to download Java `11`.
+Check out our [FAQ](#faq) if you are not sure how to download Java `11`.
 2. LinkTree is compatible with all major operating systems, including Windows, macOS and Linux.
-3. Download the latest `LinkTree.jar` from [here](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases).
+3. Download the latest `linktree.jar` from [here](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases).
 
 ### Initial Setup
 
-1. Open a command terminal, `cd` into the folder where you placed the jar file, and use the `java -jar linktree.jar` command to run the application. A GUI similar to the one below should appear in a few seconds, containing some sample data.
 
-   ![Ui](images/Ui.png)
+1. Open a command terminal, navigate to the folder where you have stored the downloaded jar file. Type the command
+`java -jar linktree.jar` to run the application. A GUI similar to the one below should appear in a few 
 
-2. Type a command into the command box and press Enter to execute it. For example. type `help` in the command box and press Enter.
-It will open a new help window, and shows a command summary in the result display.
+seconds, containing some sample data:
+   ![Ui](images/MainUi.png)
+
+2. Typing a command into the command box and hitting `Enter` will execute it. For example, try typing `help` into the command box and hit Enter.
+It will open a new help window, that shows all the commands in linktree.
 
 3. Refer to the [features](#features) section for details of each command.
 
@@ -126,10 +129,10 @@ It will open a new help window, and shows a command summary in the result displa
 
  ![Understanding GUI](images/UG_images/Understanding%20GUI.png)
 
-* Our GUI is simple and easy to understand:
-1. **Command Box**: You have to type your commands in this box.
+* Linktree's GUI is simple and easy to understand!
+1. **Command Box**: You'll have to type the commands in this box.
 2. **Result Display**: Based on the inputs given, your result will be displayed in this box.
-3. **Help Button**: Type `help` in the command box, and you will see a help window pop up. Giving you the link to 
+3. **Help Button**: Type `help` into the command box, and you will see a help window pop up, giving you the link to 
 this UserGuide. The Result Display will also show a summary of commands.
 4. **Developers Panel**: Lists all the existing developers (or a filtered list of developers after the `find` command, 
 check out [find developer command](#find-developer) for more details).
@@ -141,16 +144,17 @@ check out [find team command](#find-team) for more details).
 | Commands                                    | Description                                                                                                                              |
 |---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | `add`, `delete`, `find`, etc.               | The main command keyword.                                                                                                                |
-| `n/`<br/>`tn/`                              | n/ - Prefix for developer names<br/>tn/ - Prefix for team names.                                                                         |
+| `n/`<br/>`tn/`<br/>`tl`                      | n/ - Prefix for developer names<br/>tn/ - Prefix for team names.  <br/>tl/ -Prefix for team leader name.                                 |
 | `p/`<br/>`e/`<br/> `a/`<br/> `r/`<br/> `t/` | p/ - Prefix for phone number<br/> e/ - Prefix for email<br/>a/ - Prefix for address<br/>r/ - Prefix for remark<br/>t/ - Prefix for tags. |                                                                  |
 | `[DeveloperName]`, `[Phone]`, etc.          | Arguments that follow the command.                                                                                                       |
 | `(optional)`                                | Optional elements like Remark and Tags can be omitted.                                                                                   |                   |
-| `...`                                       | Ellipsis indicates that more arguments can follow.                                                                                       |
 
 
 Example - `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
 
 Click [here](#table-of-contents) to go back to contents.
+
+<br/>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -159,7 +163,9 @@ Click [here](#table-of-contents) to go back to contents.
 Click [here](#table-of-contents) to go back to contents.<br>
 Click [here](#how-to-use-this-guide) to go back to How to use this Guide.<br>
 
-### Welcome to LinkTree
+</br>
+
+#### Welcome to LinkTree
 
 #### What this command does:
 * The "Hi" command displays a welcome message along with the current date and time.
@@ -168,8 +174,8 @@ Format: `Hi`
 
 ##### Features:
 
-- When the command is invoked, it returns a greeting from Linktree and the current date and time.
-- The output format is consistent, showing "Welcome from Linktree, Current date and time: MM-DD-YYYY HH:MM:SS".
+- You can use this command to check the date and time! Type in `hi` and hit enter!
+- You can now see "Welcome to Linktree, Current date and time: MM-DD-YYYY HH:MM:SS" displayed on the UI.
 
 ##### Guidelines:
 
@@ -180,20 +186,20 @@ Format: `Hi`
 
 When you enter the command (Hi):
 
-  ![Welcome](images/UG_images/Hi.png)
+  ![Welcome](images/UG_images/WelcomeCommand.png)
 
 ### Managing Developers
 
 ### Add developer
 #### What this command does:
-* Allows you to add developer information into the storage.
+* This command helps you to add a new developer to the addressbook.
 
 ##### Command format: 
 * `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
   
 ##### Example usage:
 * `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`
-  ![AddNewDevToListExample](images/UG_images/AddNewDevToListExample.png)
+  ![AddCommand](images/UG_images/AddCommand.png)
 
   
 ### Remove developer
@@ -204,22 +210,24 @@ When you enter the command (Hi):
 * `delete [index number]`
 
 #### Example usage:
-- For example, to delete John from the list. First find the index number of John.
-  ![DeletePersonFromListExample](images/UG_images/DeletePersonFromListExample.png)
-- In this example, the index of John is 7. So type, `delete 7`.
-  ![DeletedPersonFromListExample](images/UG_images/DeletedPersonFromListExample.png)
+- For example, to delete the developer John from the list. First find the index number of John.
+- In this example, the index of developer John is 7. So type, `delete 7`.
+  ![DeleteCommand](images/UG_images/DeleteCommand.png)
 
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
-* You cannot delete a developer who is **team leader** for any of the teams. Inorder, delete that developer
-  you need to change the team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
+* You cannot delete a developer who is **team leader** for any of the teams. Inorder to delete that developer, we 
+recommend you to change the team leader using `editTeamLeader` command. And then you can remove that developer from the 
+team.
+ ![DeleteTeamLeader](images/UG_images/DeleteTeamLeader.png)
 </div>
 
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Warning:**<br>
-* Deleting a developer who is not a team leader will remove that developer from all the teams.
+* Deleting a developer who is not a team leader will remove that developer from all the teams and also from list
+of developers.
 </div>
 
 ### Edit developer
@@ -228,6 +236,7 @@ When you enter the command (Hi):
   - Command: `edit INDEX(must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`
   - Example: `edit 1 n/John Wick e/new.email@example.com`
   - Result: The person of index `1` now has a new name `John Wick` and a new
+  ![EditCommand](images/UG_images/EditCommand.png)
   email address `new.email@example.com`.
 
 <div markdown="block" class="alert alert-primary">
@@ -259,7 +268,7 @@ When you enter the command (Hi):
 
  - find John returns john and John Doe
  - find alex david returns Alex Yeoh, David Li
-   ![Find](images/UG_images/Find.png)
+   ![FindCommand](images/UG_images/FindCommand.png)
 ### List developers
 #### What this command does:
 * Show only the list of all developers in the project.
@@ -274,7 +283,7 @@ When you enter the command (Hi):
 * `list`
 #### Example usage:
 * `list` (and an example result is shown below)
-  ![ListCommandExample](images/UG_images/ListCommandExample.png)
+  ![ListCommand](images/UG_images/ListCommand.png)
 
 <div markdown="block" class="alert alert-warning">
 
@@ -297,7 +306,7 @@ and type `list` again when you want to go back to the main window.
 * `newteam tn/[TeamName] tl/[TeamLeader]`
 #### Example usage:
 * `newteam tn/Team Delta tl/David Li`
-  ![AddTeamCommandExample](images/UG_images/AddTeamCommandExample.png)
+  ![AddTeamCommand](images/UG_images/AddTeamCommand.png)
 
 ### Add developers to team
 #### What this command does:
@@ -306,7 +315,7 @@ and type `list` again when you want to go back to the main window.
 * `dev2team tn/[TeamName] n/[Developer Name]`
 #### Example usage:
 * `dev2team tn/Team Delta n/Irfan Ibrahim`
-  ![AddDeveloperToTeamExample](images/UG_images/AddDevToTeamCommandExample.png)
+  ![AddDeveloperToTeam](images/UG_images/AddDevToTeamCommand.png)
 
 ### Delete team
 #### What this command does:
@@ -315,20 +324,18 @@ and type `list` again when you want to go back to the main window.
 * `deleteteam tn/[TeamName]`
 #### Example usage:
 * Example: If you want to delete **Team Alpha** from the list of teams.
-  ![BeforeDeleteTeamCommand](images/UG_images/BeforeDeleteTeamCommand.png)
 * You need to type `deleteteam tn/Team Alpha`, then the **Team Alpha** will be deleted from the list of teams.
-  ![AfterDeleteTeamCommand](images/UG_images/AfterDeleteTeamCommand.png)
+  ![DeleteTeamCommand](images/UG_images/DeleteTeam.png)
 
 ### Remove developer from team
 * Performs deletion of existing developer from the given team.
 #### Command format:
 * `deletedev tn/[TeamName] n/[DeveloperName]`
 #### Example usage:
-* Example: If you want to delete developer **Roy Balakrishnan** from **Team Alpha**.
-  ![BeforeDeleteDevFromTeam](images/UG_images/BeforeDeleteDevFromTeam.png)
-* You need to type `deletedev tn/Team Alpha n/Roy Balakrishnan`, then the developer 
-**Roy Balakrishnan** will be removed from **Team Alpha**.
-  ![AfterDeleteDevFromTeam](images/UG_images/AfterDeleteDevFromTeam.png)
+* Example: If you want to delete developer **John Lim** from **Team Bravo**.
+* You need to type `deletedev tn/Team Bravo n/John Lim`, then the developer 
+**John Lim** will be removed from **Team Alpha**.
+  ![DeleteDevFromTeam](images/UG_images/DeleteDevFromTeam.png)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -343,12 +350,14 @@ and type `list` again when you want to go back to the main window.
   - Example: `editTeamName tn/Alpha Team tn/Beta Team`
   - Result: Now, the team with original team name `Alpha Team` changed its team name
     to `Beta Team`.
+  ![EditTeamNameCommand](images/UG_images/EditTeamNameCommand.png)
 
 ### Edit team leader
 * To edit team leader:
   - Command: `editTeamLeader [tn/TEAMNAME] [tl/TEAMLEADER]`
   - Example: `editTeamLeader tn/Alpha Team tl/Bob`
   - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
+  ![EditTeamLeaderCommand](images/UG_images/EditTeamLeaderCommand.png)
 
 ## Find Team
 ### What this command does:
@@ -372,7 +381,7 @@ and type `list` again when you want to go back to the main window.
 - `findteam Alpha` returns "Team Alpha" and "Alpha Squad."
 - `findteam Bravo Charlie` returns "Bravo Team," "Charlie Crew," and "Delta Bravo Charlie Team."
 
-![Find Team](images/UG_images/Findteam.png)
+![FindTeamCommand](images/UG_images/FindTeamCommnd.png)
 
 
 ### List teams
@@ -390,7 +399,7 @@ and type `list` again when you want to go back to the main window.
 * `listt`
 #### Example usage:
 * `listt` (and an example result is shown below)
-  ![ListTeamCommandExample](images/UG_images/ListTeamCommandExample.png)
+  ![ListTeamCommand](images/UG_images/ListTeam.png)
 
 <div markdown="block" class="alert alert-warning">
 
@@ -607,7 +616,7 @@ Click [here](#table-of-contents) to go back to contents.
 | `tree`             | Format: `tree`<br/>Example: `tree`                                                                                                                                         |
 | `help` or Press F1 | Format: `help`<br/>Example: `help`                                                                                                                                         |
 | `clear`            | Format: `clear`<br/>Example: `clear`                                                                                                                                       |
-| `exit`             | Format: `exit`<br/>Example: `exit`                                                                                                                                              |
+| `exit`             | Format: `exit`<br/>Example: `exit`                                                                                                                                         |
 
 Click [here](#table-of-contents) to go back to contents.
 

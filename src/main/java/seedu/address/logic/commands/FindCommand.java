@@ -33,11 +33,11 @@ public class FindCommand extends Command {
         if (model.getFilteredPersonList().size() <= 1) {
             return new CommandResult(
                     String.format(Messages.MESSAGE_PERSON_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
-                    false, false, false, false, false, true, false);
+                    false, false, false, false, false, true, false, false);
         }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
-                false, false, false, false, false, true, false);
+                false, false, false, false, false, true, false, false);
     }
 
     @Override

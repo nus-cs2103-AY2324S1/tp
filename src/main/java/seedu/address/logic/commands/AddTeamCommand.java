@@ -71,7 +71,8 @@ public class AddTeamCommand extends Command {
         Team team = new Team(teamLeaderIdentityCode, teamToAdd);
         model.addTeam(team);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(team, leaderToAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(team, leaderToAdd)),
+                false, false, false, false, false, false, false, true);
     }
 
     /**

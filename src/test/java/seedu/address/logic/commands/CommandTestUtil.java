@@ -111,13 +111,25 @@ public class CommandTestUtil {
     }
 
     /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} for all adding,
+     * deleting and clearing related commands that takes a string {@code expectedMessage}.
+     */
+    public static void assertCommandSuccessForAddDeleteClear(Command command, Model actualModel, String expectedMessage,
+                                            Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                false, false, false, false, false, false, false, true);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+
+    /**
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} for list command
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccessForListPersons(Command command, Model actualModel, String expectedMessage,
                                             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(
-                expectedMessage, false, false, false, true, false, false, false);
+                expectedMessage, false, false, false, true, false, false, false, false);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
@@ -128,7 +140,7 @@ public class CommandTestUtil {
     public static void assertCommandSuccessForListTeams(Command command, Model actualModel, String expectedMessage,
                                                           Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(
-                expectedMessage, false, false, true, false, false, false, false);
+                expectedMessage, false, false, true, false, false, false, false, false);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
