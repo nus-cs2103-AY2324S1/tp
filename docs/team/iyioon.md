@@ -24,6 +24,7 @@ Given below are my contributions to the project.
   * Managed release `v1.2`
 
 * **Enhancements to existing features**:
+  * Provided initial skeleton consisting of booking and room model (Pull request [#99](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/99))
   * Updated `find` command to support room searching (Pull request [#114](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/114))
   * Added booking period for check in/out time for bookings (Pull request [#120](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/120))
 
