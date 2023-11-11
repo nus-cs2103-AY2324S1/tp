@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Developer Guide
+title: OutBook Developer Guide
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Acknowledgements](#acknowledgements)
 - [Setting up, getting started](#setting-up-getting-started)
