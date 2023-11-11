@@ -291,24 +291,6 @@ Command: `addb n/BANDNAME`
 Within the execute method of the command, a check is done to ensure that the model does not currently contain the band
 to be added. This is achieved through the use of `Model#hasBand(Band)` method.
 
-### List Band Members Feature
-The user can list all band members in a specified band through the `findb` Command.
-
-Command: `findb BANDNAME`
-
-#### Behaviour
-* **Success Scenario:**
-    1. A success message is returned.
-    2. In the musician panel, it shows musicians in the specified band. In the band panel, it shows the specified band.
-
-* **Failed Scenario (when band name is incorrect or incomplete):**
-    1. An error message is returned.
-    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
-
-#### Implementation
-Within the `execute` method of the command, `UniqueBandList` loops through all bands and find the band with specified name, and retrieve musician information from the band.
-
-
 
 ### Add Musician To Band Feature
 
@@ -337,6 +319,7 @@ Command: `deleteb [INDEX]`
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
 
 #### Implementation
+![DeleteBandActivityDiagram.png](images/uml/DeleteBandActivityDiagram.png)
 Within the execute method of the command, a check is done to ensure that the index specified is not equal to or greater 
 than the size of the list containing all Bands.
 
@@ -355,6 +338,8 @@ This feature lists all the musicians in band with name of `BANDNAME`.
     1. An error message is returned.
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
 #### Implementation
+The following activity diagram shows the logic flow of this feature.
+![FindBandActivityDiagram.png](images/uml/FindBandActivityDiagram.png)
 Find band members through a band name is achieved via `ModelManager.updateFilteredBandMusicianList(Predicate<Band>)` method.
 
 Step 1: It takes in a `BandNameContainsKeywordPredicate` as argument and updates the filtered band based on this predicate. 
@@ -363,6 +348,18 @@ Step 2: If the band name is valid, the filtered band list is guaranteed to conta
 
 Step 3: If the band name is not valid (There is no band with such a name), a `MESSAGE_UNKNOWN_BAND` error message will be throw as a command exception.
 
+The following sequence diagram explains in detail how the findb feature works in an example scenario.
+![FindBandSequenceDiagram.png](images/uml/FindBandSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">
+
+**Meanings of the abbreviations used in the diagram:**
+
+* `BNCKP`: `BandNameContainsKeywordsPredicate`
+
+Abbreviations are used to reduce the clutter in the diagram.
+
+</div>
 #### Rationale 
 1. **Rationale for abstracting a method for updating band and musician list simultaneously:**
 
@@ -382,6 +379,29 @@ Step 3: If the band name is not valid (There is no band with such a name), a `ME
 
    ii. If filtered band list size == 1 but the band obtained does not pass the predicate (in the possible scenario of user only stored 1 band), it means that the band name is invalid and does not correspond to the current band, exception is thrown.
 
+### Edit Band Feature
+The user can edit the name and genres of an existing band through the `editb` command, referenced by current index in the band list.
+
+
+Command: `editb INDEX [n/NAME] [g/GENRE]…​`
+
+#### Behaviour
+* **Success Scenario:**
+    1. A success message is returned.
+    2. The band panel immediately reflects the updated band list with the updated band. The musician panel shows all musicians.
+
+* **Failed Scenario:**
+    1. An error message is returned.
+    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+* **Failing condition:** When edited information leads to duplicate name, phone or email with another musician already exists in storage.
+
+#### Implementation
+![EditBandActivityDiagram.png](images/uml/EditBandActivityDiagram.png)
+
+Within the `execute()` method of the command, a check is done to ensure that the model does not currently contain any band with the same name as the edited band. This is achieved through the use of `Model::hasBand` method.
+
+#### Design Considerations
+It is important to maintain the unique constraint of name of bands at all times. Hence, `Model::hasBand` is called to check that no bands have the same name as the edited band.
 
 --------------------------------------------------------------------------------------------------------------------
 
