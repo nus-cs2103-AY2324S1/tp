@@ -41,10 +41,12 @@ public class DeletePersonTimeCommandTest {
         Person validPerson = new PersonBuilder().build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
 
-        modelStub.person.getTime().forEach(x->System.out.print(x+"\n\n\n"));
         // Person has time interval to be deleted
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
+
+        // Time interval has been deleted
+        assertEquals(true, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
 
         CommandResult commandResult =
                 new DeletePersonTimeCommand(validPerson.getName(), validTimeInterval).execute(modelStub);
