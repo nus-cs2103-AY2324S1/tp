@@ -138,12 +138,6 @@ Adds a person to JABPro.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]…​`
 
-<box type="tip" seamless>
-
-**Tip:** 
-* A person can have any number of tags (including 0)!
-</box>
-
 **Notes regarding the design of the `add` command:**
 * The uniqueness of the person is determined by the name only. This means that you cannot have 2 persons with the same name in the application book.
 * All other fields other than name can be identical between different people in JABPro.
@@ -157,7 +151,6 @@ They cannot be blank and must follow the convention as mentioned above.
 * The `t/[CATEGORY] TAGNAME` field is optional. You can add as many tags as you want, including 0 tags.
 * Persons added using the `add` command will be added to the end of the list.
 
-
 **Notes on adding tags:**
 * If you would like to tag a user with a tag that has not been categorised yet using the `create` command,
 you can specify the category that you would like it to be categorised to in the `add` command. e.g. `...t/role swe`
@@ -166,6 +159,11 @@ the tag would still be saved but it would be "uncategorised" by default.
 * If you have multiple tags in different categories with the same name, you must specify the category when you want to 
 add one of these tags to the candidate you are adding.
 
+<box type="tip" seamless>
+
+**Tip:**
+* A person can have any number of tags (including 0)!
+  </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -211,19 +209,18 @@ Format: `view INDEX`
 * Compatible with search and other features that change the order and content of the list.
 * Refer to the [Summary Statistics](#summary-statistics) section for more details on the summary statistics.
 
+<box type="tip" seamless>
+
+**Tip:** Other operations that affect user's data will trigger a refresh of the view.
+These include `add`, `edit`, `set`, `remark`, `addL`, `addG`.
+
+</box>
+
 Examples:
 * `view 1` Shows the complete details of the 1st person on the list.
 
 An example of the `view` command in action:
 ![View](images/view.png)
-
-<box type="tip" seamless>
-
-**Tip:** Other operations that affect user's data will trigger a refresh of the view.
-These include `add`, `edit`, `set`, `remark`, `addL`, `addG`. 
-
-
-</box>
 
 
 ### Adding Github/LinkedIn username for a user: `addG` or `addL`
@@ -315,6 +312,13 @@ Notes on rules for `edit` command involving tags with categories:
   * If you have multiple tags in different categories with the same name, you must specify the category when you want to
     tag the specified candidate with one of these tags.
 
+<box type="tip" seamless>
+
+**Note:** Editing the tags of a person or adding a score to a tag will trigger a refresh of the summary statistics table.
+
+To find out more about the summary statistics table, refer to the [Summary Statistics](#summary-statistics) section.
+
+</box>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -325,15 +329,6 @@ Examples:
 
 An example of the `edit` command in action for editing `tag` and `score`:
 ![Edit](images/editscore.png)
-
-<box type="tip" seamless>
-
-**Note:** Editing the tags of a person or adding a score to a tag will trigger a refresh of the summary statistics table.  
-
-To find out more about the summary statistics table, refer to the [Summary Statistics](#summary-statistics) section.
-
-</box>
-
 
 ### Filter job applicants by statistics: `filter`
 
@@ -645,8 +640,8 @@ JABPro currently does not support exporting Events. This feature will be impleme
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JABPro home folder.
 
-**Q**: What's the difference between **tip** and **note**?<br>
-**A**: **Tip** is something useful to know and can be done beforehand, while **note** is something you have to be concious about and take into account. 
+**Q**: What's the difference between *tip* and *note*?<br>
+**A**: *Tip* is something useful to know and can be done beforehand, while *note* is something you have to be concious about and take into account. 
 
 --------------------------------------------------------------------------------------------------------------------
 
