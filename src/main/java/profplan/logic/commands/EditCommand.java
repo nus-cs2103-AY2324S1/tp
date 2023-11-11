@@ -27,8 +27,6 @@ import profplan.model.task.Name;
 import profplan.model.task.Priority;
 import profplan.model.task.Task;
 
-
-
 /**
  * Edits the details of an existing task in the task list.
  */
@@ -41,11 +39,11 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_DETAILS = "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PRIORITY + "PRIORITY "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + PREFIX_DUEDATE + "DUEDATE "
-            + PREFIX_LINK + "LINK\n";
+            + PREFIX_NAME + "[name] "
+            + PREFIX_PRIORITY + "[priority] "
+            + PREFIX_DUEDATE + "[dueDate] "
+            + PREFIX_TAG + "[tag...] "
+            + PREFIX_LINK + "[link] ";
 
     public static final String MESSAGE_EXAMPLE = "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PRIORITY + "4 ";
@@ -58,7 +56,7 @@ public class EditCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param index of the task in the filtered task list to edit
+     * @param index              of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
     public EditCommand(Index index, EditTaskDescriptor editTaskDescriptor) {
@@ -104,7 +102,7 @@ public class EditCommand extends Command {
         DueDate updatedDueDate = editTaskDescriptor.getDueDate().orElse(taskToEdit.getDueDate());
         return new Task(updatedName, updatedPriority, taskToEdit.getIsRecurring(),
                 taskToEdit.getRecurringType(), updatedTags,
-                        updatedDueDate, updatedLink, taskToEdit.getDescription());
+                updatedDueDate, updatedLink, taskToEdit.getDescription());
     }
 
     @Override
@@ -132,7 +130,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
+     * Stores the details to edit the task with. Each non-empty field value will
+     * replace the
      * corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
@@ -142,7 +141,8 @@ public class EditCommand extends Command {
         private DueDate dueDate;
         private Link link;
 
-        public EditTaskDescriptor() {}
+        public EditTaskDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -188,7 +188,8 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable tag set, which throws
+         * {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */

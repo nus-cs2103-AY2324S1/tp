@@ -8,7 +8,8 @@ import profplan.model.Model;
 import profplan.model.task.predicates.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all tasks in task list whose name contains any of the argument keywords.
+ * Finds and lists all tasks in task list whose name contains any of the
+ * argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
@@ -17,7 +18,7 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.";
-    public static final String MESSAGE_DETAILS = "Parameters: [KEYWORDS...]\n";
+    public static final String MESSAGE_DETAILS = "Parameters: [keywords...]\n";
     public static final String MESSAGE_EXAMPLE = "Example: " + COMMAND_WORD + " canvas quiz";
 
     private final NameContainsKeywordsPredicate predicate;
