@@ -137,11 +137,11 @@ This section introduces the symbols and notations used throughout this guide. Th
 
 <br>
 
-| <div style="width:130px">Symbol</div>           | <div style="width:auto">Meaning</div>                                                   |
-|-------------------------------------------------|-----------------------------------------------------------------------------------------|
-| <box type="info" header="**Note**"></box>       | This is reminder of essential information that is required for proper Staff-Snap usage. |
-| <box type="tip" header="**Tip**"></box>         | This is a small friendly advice to make your Staff-Snap experience more enjoyable.      |
-| <box type="warning" header="**Caution**"></box> | This is a warning that cautions the user against common errors.                         |
+| <div style="width:130px">Symbol</div>           | <div style="width:auto">Meaning</div>                                                     |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------|
+| <box type="info" header="**Note**"></box>       | This is a reminder of essential information that is required for proper Staff-Snap usage. |
+| <box type="tip" header="**Tip**"></box>         | This is a small friendly advice to make your Staff-Snap experience more enjoyable.        |
+| <box type="warning" header="**Caution**"></box> | This is a warning that cautions the user against common errors.                           |
 
 <br>
 
@@ -249,33 +249,22 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
 
 <a name="duplicate-applicants"></a>
 <box type="warning" header="**Caution**">
-    Duplicate applicants are not allowed. 
-    Two applicants are considered duplicates if they have the same phone number or the same email.
+    Duplicate applicants are not allowed. Two applicants are considered duplicates if they have the same phone number or the same email.
 </box>
 
 <box type="tip" header="**Note**">
-    As <code>NAME</code> can only contain alphanumeric characters and spaces, 
-    names containing non-alphanumeric characters such as hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.
+    As <code>NAME</code> can only contain alphanumeric characters and spaces, names containing non-alphanumeric characters such as hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.
 </box>
-
-<box type="tip" header="**Note**">
-    Note that the default status for new Applicants is UNDECIDED.
-</box>
-
 
 Valid examples:
-* `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer`
-Adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@gmail.com*, and position *Software Engineer*.
+* `add n/John Doe hp/91234567 e/johndoe@gmail.com p/Software Engineer` adds a new applicant with name *John Doe*, phone number *91234567*, email *johndoe@<area>gmail.com*, and position *Software Engineer*.
 
-* `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`
-  Adds a new applicant with name *Jane Greenwood*, phone number *81234567*, email *janeg@yahoo.com*, and position *Project Manager*.
+* `add n/Charlene Loh p/Staff Engineer e/cloh@gmail.com hp/91827271` adds a new applicant with name *Charlene Loh*, phone number *91827271*, email *cloh@<area>gmail.com*, and position *Staff Engineer*, as shown in the GUI below.
+  
+![add](images/user-guide/add.png)
 
 Invalid examples:
-* `add n/John Doe hp/91234567`
-This is not allowed as all fields are required to add an applicant to the list.
-
-
-![add](images/user-guide/add.png)
+* `add n/John Doe hp/91234567` is not allowed as all fields are required to add an applicant to the list.
 
 <br>
 
