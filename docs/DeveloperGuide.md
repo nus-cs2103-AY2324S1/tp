@@ -186,7 +186,7 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the cur
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commit()`, causing another modified ModelManager state to be saved into the `ModelManagerStateList`.
+Step 3. The user executes `add -pa n/David …​` to add a new person. The `add` command also calls `Model#commit()`, causing another modified ModelManager state to be saved into the `ModelManagerStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -217,8 +217,8 @@ The `redo` command does the opposite — it calls `Model#redo()`, which shif
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Since this command modifies the ModelManager, `Model#commit()` is called.
-Since the `currentStatePointer` is not pointing at the end of the `ModelManagerStateList`, all ModelManager states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 5. The user then decides to execute the command `list -pa`. Since this command modifies the ModelManager, `Model#commit()` is called.
+Since the `currentStatePointer` is not pointing at the end of the `ModelManagerStateList`, all ModelManager states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add -pa n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 

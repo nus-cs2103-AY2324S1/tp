@@ -205,14 +205,15 @@ Examples:
 ### Undo previous entry : `undo`
 
 Undo the previous command, stackable (all commands that were successfully executed previously can be continuously undone until there are no commands left to be undone).
-The undo/redo command is affected by all successful commands, whether they change the data or not.
-For example, 2 successive `list -sp` commands will require 2 undos, although the second command might not produce any visible change.
+The undo command is affected by all successful commands, whether they change the data or not.
+For example, 2 successive `list -sp` commands will require 2 undos, although the second command might not produce any visible change in the user interface.
 
 Format: `undo`
 
 ### Redo previous undo : `redo`
 
-Redo the previous 'undo', stackable. (Able to keep redoing-ing till there are no undo left to be redone)
+Redo the previous 'undo', stackable. (all commands that were undone previously can be continuously redone until there are no commands left to be redone).
+The redo command is affected by all previous undo commands, even if the undo command does not create any visible change in the user interface.
 
 Format: `redo`
 

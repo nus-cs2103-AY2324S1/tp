@@ -73,12 +73,14 @@ public class ModelManager implements Model {
      * @param toCopyFrom ModelManager to copy from
      */
     public void resetData(ReadOnlyModelManager toCopyFrom) {
-        setAddressBook(toCopyFrom.addressBook);
-        setUserPrefs(toCopyFrom.userPrefs);
-        updateSelectedPerson(toCopyFrom.selectedPerson);
-        //Since Predicate is only set from addCommand, findCommand and listCommand, and they all only use
-        //Predicate<Person>, this typecast should be safe
-        updateFilteredPersonList((Predicate<Person>) toCopyFrom.filteredPersons.getPredicate());
+        setAddressBook(new AddressBook(toCopyFrom.addressBook));
+        setUserPrefs(toCopyFrom.userPrefs.getCopy());
+        Person personCopy = toCopyFrom.selectedPerson == null
+                ? null
+                : toCopyFrom.selectedPerson.getCopy();
+        updateSelectedPerson(personCopy);
+        Predicate<Person> predicateCopy = toCopyFrom.filteredPersons.getPredicate()::test;
+        updateFilteredPersonList(predicateCopy);
         setTheme(toCopyFrom.themeProperty.getValue());
     }
 
