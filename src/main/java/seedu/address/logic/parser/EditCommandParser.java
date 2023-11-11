@@ -50,39 +50,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_NEXT_OF_KIN_NAME, PREFIX_NEXT_OF_KIN_PHONE);
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-        if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME).isPresent()) {
-            editPersonDescriptor.setNextOfKinName(ParserUtil.parseNextOfKinName(argMultimap
-                    .getValue(PREFIX_NEXT_OF_KIN_NAME)
-                    .get()));
-        }
-        if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE).isPresent()) {
-            editPersonDescriptor.setNextOfKinPhone(ParserUtil.parseNextOfKinPhone(argMultimap
-                    .getValue(PREFIX_NEXT_OF_KIN_PHONE)
-                    .get()));
-        }
-
-        parseFinancialPlansForEdit(argMultimap.getAllValues(PREFIX_FINANCIAL_PLAN))
-                .ifPresent(editPersonDescriptor::setFinancialPlans);
-
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
+        EditPersonDescriptor editPersonDescriptor = makeEditPersonDescriptor(argMultimap);
 
         return new EditCommand(index, editPersonDescriptor);
     }
@@ -120,4 +88,41 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Creates a EditPersonDescriptor with a given ArgumentMultimap that contains the inputs.
+     *
+     * @param argMultimap Multimap to get values from.
+     * @return Descriptor to pass to the EditCommand.
+     * @throws ParseException If no fields are edited or there are invalid multimap values.
+     */
+    private EditPersonDescriptor makeEditPersonDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+        if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME).isPresent()) {
+            editPersonDescriptor.setNextOfKinName(ParserUtil.parseNextOfKinName(argMultimap
+                    .getValue(PREFIX_NEXT_OF_KIN_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE).isPresent()) {
+            editPersonDescriptor.setNextOfKinPhone(ParserUtil.parseNextOfKinPhone(argMultimap
+                    .getValue(PREFIX_NEXT_OF_KIN_PHONE).get()));
+        }
+        parseFinancialPlansForEdit(argMultimap.getAllValues(PREFIX_FINANCIAL_PLAN))
+                .ifPresent(editPersonDescriptor::setFinancialPlans);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+        return editPersonDescriptor;
+    }
 }

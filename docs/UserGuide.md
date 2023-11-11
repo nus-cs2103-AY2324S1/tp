@@ -109,7 +109,7 @@ Component | Purpose
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Unless explicitly allowed, blank inputs or inputting any number of spaces as an argument for a field is invalid.
 
@@ -170,8 +170,9 @@ number) into contact book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN]… [t/TAG]…​`
 
-* Adding a person with the exact same name (case-sensitive) as a person currently in the contact book will cause the
-    command to fail.
+* Adding a person with the exact same name (case-sensitive) as a person currently in the contact book counts as a
+    duplicate and will cause the command to fail. Duplicate information in other ways does not count as a duplicate
+    person.
 * To prevent accidentally adding duplicates, you can use [Find](#locating-persons-by-name-financial-plan-andor-tag--find)
     to check if you have already added the person already.
 
@@ -223,8 +224,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Editing the name of a person to be the exact same name as another person currently in the contact book
-(case-sensitive) will cause the command to fail.
-* When editing financial plans or tags, the existing financial plans or tags of the person will be removed i.e adding
+(case-sensitive) counts as a duplicate and will cause the command to fail. Duplicate information in other ways does
+not count as a duplicate person.
+* When editing financial plans or tags, the existing financial plans or tags of the person will be removed i.e. adding
 of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * You can remove all the person’s financial plans by typing `fp/` without
@@ -285,7 +287,7 @@ Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
 
 * Generates a list of emails separated by spaces, making it convenient for copying and pasting into the recipient input of an email application.
 * Either **Financial Plan or Tag** can be searched at once, but **not both**.
-* The search is case-insensitive. e.g `financial` will match `FINANCIAL` or `Financial`.
+* The search is case-insensitive e.g. `financial` will match `FINANCIAL` or `Financial`.
 * A person's email will be gathered if the prompt matches a substring of their financial plan or tag.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
@@ -334,7 +336,7 @@ Format: `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE_TIME`
 
 - Schedules appointment with the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 - **Both appointment name and date-time** must be provided.
-- Upon successful execution of the command, the scheduled appointment details will be updated in the **Contacts list**. The appointment details will also be updated in the **Appointments list**. 
+- Upon successful execution of the command, the scheduled appointment details will be updated in the **Contacts list**. The appointment details will also be updated in the **Appointments list**.
 
 <div markdown="span" class="alert alert-primary">:information_source: 
 If there is an existing appointment with the person when the command is executed, you can replace it with a new appointment by **clicking confirm** or **pressing the enter key** when the prompt is given.
@@ -451,6 +453,7 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **Long names** for Financial Plans and Tags may not be fully visible.
 3. **When sorting the list**, we have chosen to not implement returning sorted list to original ordering due to the lack of necessity. However, due to feedback, we will implement this in the next release to enable users to return list to original order should they wish to.
+4. It is possible to add appointments with dates before the current date and time.
 
 --------------------------------------------------------------------------------------------------------------------
 
