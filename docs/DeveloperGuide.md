@@ -176,6 +176,12 @@ The following sequence diagram shows how the above steps for add tutor operation
 
 ![AddTutorSequenceDiagram](images/AddTutorSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `AddTutorCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
 #### Design rationale
 {:.no_toc}
 
@@ -1440,15 +1446,13 @@ testers are expected to do more *exploratory* testing.
 
 Adding a tutor while all tutors are being shown
 
-   1. Prerequisites: List all tutors using the `list-t` command. Multiple tutors in the list.
-
-   2. Test case: `add-t n/John Doe p/98765432 e/johnd@example.com`<br>
+   1. Test case: `add-t n/John Doe p/98765432 e/johnd@example.com`<br>
       Expected: The tutor is added at the end of tutor list. Details of the added tutor shown in the status message.
 
-   3. Test case: `add-t n/Jonny p/12345678`<br>
+   2. Test case: `add-t n/Jonny p/12345678`<br>
       Expected: No tutor is added. Error details shown in the status message.
 
-   4. Other incorrect add tutor commands to try: `add-t`, `add-t n/abc`, `add-t n/abc p/1 e/abc@example.com`,
+   3. Other incorrect add tutor commands to try: `add-t`, `add-t n/abc`, `add-t n/abc p/1 e/abc@example.com`,
       `add-t n/abc p/12345678 e/abc`<br>
       Expected: Similar to previous.
 
@@ -1474,7 +1478,7 @@ Editing a tutor while all tutors are being shown
 
    1. Prerequisites: List all tutors using the `list-t` command. Multiple tutors in the list.
 
-   2. Test case: `edit-t 1 n/John Doe p/98765432 e/johnd@example.com`<br>
+   2. Test case: `edit-t 1 n/John Dong p/98765432 e/johnd@example.com`<br>
       Expected: First tutor's name, phone number and email updated in tutor list. Details of edited tutor shown in 
       the status message.
 
@@ -1519,7 +1523,7 @@ Finds a tutor while all tutors are being shown
 
 Adds a schedule while all schedules are being shown
 
-   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+   1. Prerequisites: List all tutors using the `list-t` command. At least 1 existing tutor in the list.
 
    2. Test case: `add-s 1 st/2023-05-05T09:00 et/2023-05-05T11:00`<br>
       Expected: New schedule for the first tutor in tutor list is added into the schedule list. Details of the added
@@ -1539,7 +1543,7 @@ Edits a schedule while all schedules are being shown
 
    1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
    
-   2. Test case: `edit-s 1 st/2023-05-05T09:00 et/2023-05-05T11:00`<br>
+   2. Test case: `edit-s 1 st/2023-05-05T11:00 et/2023-05-05T13:00`<br>
       Expected: First schedule start and end time updated. Details of edited schedule shown in the status message.
    
    3. Test case: `edit-s 1 st/2023-05-05T05:00`<br>
@@ -1617,7 +1621,7 @@ Marks a schedule as missed or completed while all schedules are being shown
 
 Unmarks a schedule while all schedules are being shown
 
-   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
+   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing marked schedule in the list.
 
    2. Test case: `unmark 1`<br>
       Expected: Status of first schedule is removed. Details of the unmarked schedule is shown in the status message.
@@ -1663,16 +1667,14 @@ Displays schedule on a specified day as a calendar view
 
 Changes the theme of TutorConnect
 
-   1. Prerequisites: List all schedules using the `list-s` command. At least 1 existing schedule in the list.
-
-   2. Test case: `theme light`<br>
+   1. Test case: `theme light`<br>
       Expected: The theme of TutorConnect is changed to light colour scheme. Details of the changed theme is shown
       in the status message.
 
-   3. Test case: `theme white`<br>
+   2. Test case: `theme white`<br>
       Expected: No theme change in TutorConnect. Error details shown in status message.
 
-   4. Other incorrect theme commands to test: `theme`, `theme abc`, `theme Light`
+   3. Other incorrect theme commands to test: `theme`, `theme abc`, `theme Light`
       Expected: Similar to previous.
 
 
@@ -1797,7 +1799,7 @@ find and locate a particular schedule.
 The schedules would be sorted first by `StartTime`, then by `EndTime`, and finally alphabetically by the tutor's name.
 This would make the schedule list more organised, making it easier to use and navigate for the user.
 
-### Help window flickering when displayed 
+### Help window opening animation fix 
 After moving the help window to the left, subsequent display of the help window will have a flickering animation before
 the window settles in the center of the screen.
 
