@@ -204,15 +204,13 @@ Output:
 
 **Note**
 * `list` command cannot be used during a review session
-   * To ensure retention, only the flash cards - with the words to be reviewed - can be seen during the review session.
+   * To facilitate learning, only the flash cards - that are to be reviewed - can be seen during the review session.
    * As soon as the review session ends, all the flash cards can be listed once again.
 
 ### Finding a flash card : `find`
 
 Filters the flash card list by the given keywords. All the flash cards whose word or translation contains the keywords will be displayed.
 * The search is case-insensitive. e.g `food` will match `Food`
-* Users can search for specific substring. e.g `oo` will match `food`
-* Users can search for multiple keywords. e.g `food, bye` will match `food` and `bye`
 
 [Command Format](#commands): `find <KEYWORDS...>`
 
