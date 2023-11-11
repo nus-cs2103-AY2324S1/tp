@@ -172,17 +172,28 @@ The following is a sequence diagram that shows two sequential processes: the use
 and the user successfully completing that edit. The alternative paths to this process are numerous, and covering them exhaustively
 is likely not productive. Instead, this represents the "success path" of a successful edit, where nearly every step handles potential failure.
 
-1. The user begins by entering "mail" in the command box of the main UI.
-2. The `MainWindow` finds the correct field that corresponds to the user input, and tells `PersonProfile`.
-3. `PersonProfile` locates the relevant `PersonProfileField`, and forwards the request for focus.
-4. The user's cursor now jumps to the relevant `PersonProfileField`, and thus their next action is handled directly from `PersonProfileField`.
-5. The user presses the `enter` key, which alongside the `esc` key, are special keys involved in the confirmation or cancellation of the edit.
-6. `PersonProfileField` checks that the entered information is valid for that particular field.
-7. `PersonProfileField` then updates the `PersonProfile` about the change.
-8. `PersonProfileField` triggers the event `AFTER_CONFIRM` because the user started a confirmation.
-9. One of the event handlers listening to the `AFTER_CONFIRM` event is `handleFieldLockIn`, which initiates the next two steps.
-10. `handleFieldLockIn` checks that the new `Person` object described by the fields is valid, and creates one.
-11. `handleFieldLockIn` then asks the `MainWindow` to tell the user that the `Person` is created.
+Step 1. The user begins by entering "mail" in the command box of the main UI.
+
+Step 2. The `MainWindow` finds the correct field that corresponds to the user input, and tells `PersonProfile`.
+
+Step 3. `PersonProfile` locates the relevant `PersonProfileField`, and forwards the request for focus.
+
+Step 4. The user's cursor now jumps to the relevant `PersonProfileField`, and thus their next action is handled directly from `PersonProfileField`.
+
+Step 5. The user presses the `enter` key, which alongside the `esc` key, are special keys involved in the confirmation or cancellation of the edit.
+
+Step 6. `PersonProfileField` checks that the entered information is valid for that particular field.
+
+Step 7. `PersonProfileField` then updates the `PersonProfile` about the change.
+
+Step 8. `PersonProfileField` triggers the event `AFTER_CONFIRM` because the user started a confirmation.
+
+Step 9. One of the event handlers listening to the `AFTER_CONFIRM` event is `handleFieldLockIn`, which initiates the next two steps.
+
+Step 10. `handleFieldLockIn` checks that the new `Person` object described by the fields is valid, and creates one.
+
+Step 11. `handleFieldLockIn` then asks the `MainWindow` to tell the user that the `Person` is created.
+
 
 Further details on the `MainWindow` side are omitted in this explanation and diagram.
 
