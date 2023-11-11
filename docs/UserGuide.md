@@ -191,7 +191,7 @@ Get ready to embark on your productive study session with <span style="color: gr
 you have created to you. Here is a brief overview of the GUI to help you familiarise yourself with the key elements and
 their locations.
 
-![gui_overview](./images/UserGuide/1.3b_ui_overview.png)
+![gui_overview](./images/UserGuide/1.4_ui_overview.png)
 
 Here is a summary of what each component in the GUI displays.
 
@@ -222,6 +222,7 @@ feel free to explore the other features in the [command summary](#command-summar
 2. First, let's try to add your very first flashcard. Type the following command and hit <kbd>Enter</kbd>: <br>
 `add q/what does + mean in boolean algebra? a/it means OR.`
 
+![adding a card](./images/UserGuide/1.4_tutorial_add.png)
 
 3. Congratulations, you have created your first flashcard! Now, let's try to edit the card created from the
 previous input by capitalising it! Note that the flashcard just created is at index `1`. Type the following command
