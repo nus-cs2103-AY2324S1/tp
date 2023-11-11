@@ -4,7 +4,7 @@
 start
 :User inputs add command;
 
-if () then ([else]) 
+if () then ([else])
   :Display error message;
 else ([Valid command format])
   if () then ([else])
@@ -40,5 +40,4 @@ endif
 endif
 stop
 
-                
-
+@enduml
