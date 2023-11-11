@@ -18,7 +18,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.name.NameContainsKeywordsPredicate;
+import seedu.address.testutil.DepartmentBuilder;
 import seedu.address.testutil.ManageHrBuilder;
 
 public class ModelManagerTest {
@@ -94,6 +96,37 @@ public class ModelManagerTest {
     @Test
     public void getFilteredEmployeeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEmployeeList().remove(0));
+    }
+
+    @Test
+    public void hasDepartment_departmentExists_success() {
+        modelManager.addDepartment(DEPARTMENT_LOGISTICS);
+        assertTrue(modelManager.hasDepartment(DEPARTMENT_LOGISTICS));
+    }
+
+    @Test
+    public void hasDepartment_noDepartment_failure() {
+        modelManager.addDepartment(DEPARTMENT_LOGISTICS);
+        assertFalse(modelManager.hasDepartment(DEPARTMENT_INVESTMENT));
+    }
+
+    @Test
+    public void hasEmployeeWithName_employeeExists_success() {
+        modelManager.addEmployee(ELLE);
+        assertTrue(modelManager.hasEmployeeWithName(ELLE.getName()));
+    }
+
+    @Test
+    public void hasEmployeeWithName_noEmployee_failure() {
+        modelManager.addEmployee(ELLE);
+        assertFalse(modelManager.hasEmployeeWithName(ALICE.getName()));
+    }
+
+    @Test
+    public void addDeleteDepartment_hasDept_success() {
+        modelManager.addDepartment(DEPARTMENT_LOGISTICS);
+        modelManager.deleteDepartment(DEPARTMENT_LOGISTICS);
+        assertFalse(modelManager.hasDepartment(DEPARTMENT_LOGISTICS));
     }
 
     @Test
