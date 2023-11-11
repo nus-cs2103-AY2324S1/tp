@@ -28,12 +28,13 @@ Given below are my contributions to the project:
 
 * **Documentation**:
     * User Guide:
-      * Added documentation for the following features: `load`, `config`, `undo`, `redo`, `history`.
-      * Formatted the command summary into relevant sections.
+      * Added documentation for the following features: `load`, `config`, `undo`, `redo`, `history`, `help`, `exit`.
+      * Added introduction and overview sections.
+      * Formatted the command summary table into relevant sections.
       * Added features section that provides helpful tips to users.
       * Handled formatting of the User Guide.
     * Developer Guide:
-      * Added implementation details of the following features: `load`, `config`, `undo`, `redo`, `history`.
+      * Added implementation details of the following features: `load`, `config`, `undo`, `redo`.
       * Added user stories and use cases.
 
 * **Team-based tasks**:

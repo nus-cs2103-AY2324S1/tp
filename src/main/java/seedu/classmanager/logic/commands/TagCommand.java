@@ -24,7 +24,7 @@ public class TagCommand extends Command {
     public static final String DELETE_TAGS = "delete";
     public static final String DEFAULT = "";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the tags of an existing student identified by the student number.\n"
+            + ": Edits the tags of the student identified by the student number.\n"
             + "Existing tags will be overwritten by the input.\n"
             + "Use /add to add or /delete to delete tags without overwriting all tags.\n"
             + "Parameters: s/STUDENT_NUMBER [/add] [/delete] t/[TAG]\n"

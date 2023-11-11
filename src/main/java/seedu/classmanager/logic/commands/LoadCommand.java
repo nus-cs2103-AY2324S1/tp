@@ -34,10 +34,7 @@ public class LoadCommand extends Command {
     public static final String MESSAGE_FILE_NOT_FOUND = "The file %1$s.json cannot be found.\n"
             + "Please make sure the file is in the /data folder.\n";
     public static final String MESSAGE_FILE_CANNOT_LOAD = "The file %1$s.json cannot be loaded.\n"
-            + "Please make sure the file is formatted correctly.\n"
-            + "The number of tutorials and assignments of each student in the file must match"
-            + " the current configuration of Class Manager.\n"
-            + "You can configure Class Manager before loading the file.";
+            + "Please make sure the file is formatted correctly.\n";
 
     private final String fileName;
     private final Path filePath;
@@ -66,6 +63,7 @@ public class LoadCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));
         }
         requireNonNull(model);
+
         ClassManagerStorage tempClassManagerStorage = new JsonClassManagerStorage(filePath);
         Optional<ReadOnlyClassManager> classManagerOptional;
         ReadOnlyClassManager newData;
@@ -75,6 +73,7 @@ public class LoadCommand extends Command {
         } catch (DataLoadingException e) {
             throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));
         }
+
         model.setClassManagerFilePath(filePath);
         model.loadReset(newData);
 
@@ -114,7 +113,7 @@ public class LoadCommand extends Command {
 
     /**
      * Returns the hashcode of the file path and file name.
-     * @return
+     * @return Hashcode of the file path and file name.
      */
     @Override
     public int hashCode() {

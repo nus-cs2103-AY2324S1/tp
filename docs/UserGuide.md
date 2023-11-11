@@ -3,19 +3,17 @@
   title: "User Guide"
   pageNav: 3
 ---
-# Class Manager 2023 User Guide
+# Class Manager 2023 User Guide 
 
-# Welcome to Class Manager 2023 (CM 23)!
+## Welcome to Class Manager 2023!
 
-Are you tired of managing your teaching assistant duties by juggling notes, spreadsheets, and calendars?
+To all CS2103/T Teaching Assistants (TAs), 
 
-Are you on the hunt for a more efficient and organized solution to handle your responsibilities as a teaching assistant?
+We understand your struggles in managing your students' information. We know that you have to keep track of your students' contact information, attendance, class participation and assignment grades. We also know that you have to manage multiple classes while juggling your own schoolwork and other commitments.
 
-Introducing **Class Manager 2023**!
+This is why we are excited to introduce **Class Manager 2023**, an all-in-one application designed to streamline your class management duties. **Class Manager 2023** will help you to save time, streamline your TA duties and allow you to focus on what matters most - your students.
 
-CM 23 is your ticket to an enhanced teaching experience! We present to you an all-in-one application designed to streamline your class management duties. Bid farewell to the stress of missed deadlines and the chaos of TA duties slipping through the cracks.
-
-So, what's holding you back? This user guide is your key to mastery of CM 23, with step-by-step instructions on how you can install and use our application. CM 23 is designed to be intuitive and easy to use, so you can get started right away!
+This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on how you can install and use our application. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started right away!
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -24,14 +22,15 @@ So, what's holding you back? This user guide is your key to mastery of CM 23, wi
 
 # Overview
 
-CM 23 is a desktop application for CS2103/T: Software Engineering Teaching Assistants (TAs) in National University of Singapore to manage their students' contacts and class information. 
+**Class Manager 2023** is an offline desktop application for CS2103/T: Software Engineering Teaching Assistants (TAs) in National University of Singapore to manage their students' contacts and class information. 
 
-CM 23 allows users to:
-* Store and manage student's contact information.
-* Keep track of and visualise student's class information such as attendance, class participation and assignment grades.
-* Easily mark the attendance of multiple students for each tutorial session.
+**Class Manager 2023** allows users to:
+* store and manage student's contact information,
+* keep track of and visualise student's class information such as attendance, class participation and assignment grades,
+* easily mark the attendance of multiple students for each tutorial session,
+* and much more!
 
-CM 23 is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI). Since CS2103/T TAs have an adequate understanding of CLI, CM 23 will allow class management tasks to be completed faster than traditional GUI apps.
+**Class Manager 2023** is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI). Since CS2103/T TAs have an adequate understanding of CLI, **Class Manager 2023** will allow class management tasks to be completed faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,7 +40,7 @@ CM 23 is optimized for use via a Command Line Interface (CLI), while still havin
 
 2. Download the latest `class-manager-2023.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your ClassManager.
+3. Copy the file to the folder you want to use as the _home folder_ for **Class Manager 2023**.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar class-manager-2023.jar` command to run the application.
    Note the app contains some sample data.<br>
@@ -51,23 +50,23 @@ CM 23 is optimized for use via a Command Line Interface (CLI), while still havin
 
    * `list` : Lists all student details.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11` : Adds a student named `John Doe` to the Class Manager.
+   * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11` : Adds a student named `John Doe` to **Class Manager 2023**.
 
    * `delete s/A0245234A` : Deletes the student with student number A0245234A, which is added in the previous step.
 
    * `exit` : Exits the app.
 
-6. To begin using Class Manager, configure Class Manager with your module information using the `config` command. For example:
-   * `config #t/10 #a/1` configures Class Manager to have 10 tutorials and 1 assignment.
+6. To begin using **Class Manager 2023**, configure **Class Manager 2023** with your module information using the `config` command. For example:
+   * `config #t/10 #a/1` configures **Class Manager 2023** to have 10 tutorials and 1 assignment.
 
-7. That's it! You can now explore Class Manager! Refer to the [Commands](#commands) below for details of each command. <br>
+7. That's it! You can now explore **Class Manager 2023**! Refer to the [Commands](#commands) below for details of each command. <br>
    You can also refer to the [Command Summary](#command-summary).
 
 --------------------------------------------------------------------------------------------------------------------
 
 # GUI Overview
 
-The image below shows an annotated overview of Class Manager's GUI:
+The image below shows an annotated overview of **Class Manager 2023's** GUI:
 
 <img alt="Gui" src="images/GUI-overview.png" width="700"> </br>
 
@@ -120,27 +119,28 @@ The **GUI** is split up into 4 main sections.
 
 ## Student Number
 
-* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
-* Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
+Student Number refers to the unique matriculation number of a NUS student. In **Class Manager 2023**, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
+
+**Class Manager 2023** uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
 
 ## Command navigation
 
-* Class Manager allows you to navigate to previously entered commands using the arrow keys. Navigate to earlier commands using the **up arrow** key, and later commands using the **down arrow** key.
+**Class Manager 2023** allows you to navigate to previously entered commands using the arrow keys. Navigate to earlier commands using the **up arrow** key, and later commands using the **down arrow** key.
 
 ## Saving your data
 
-Class Manager data is saved on your computer automatically after any command that changes the data. There is no need to save manually.
+**Class Manager 2023** data is saved on your computer automatically after any command that changes the data. There is no need to save manually.
 
 ## Editing the data file
 
-Class Manager data is saved as a JSON file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below.
+**Class Manager 2023's** data is saved as a JSON file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below.
 
 <img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file make its format invalid, Class Manager 2023 will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file make its format invalid, **Class Manager 2023** will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 
@@ -150,22 +150,22 @@ If your changes to the data file make its format invalid, Class Manager 2023 wil
 
 ## Essential commands
 
-### Configure Class Manager : `config`
+### Configure **Class Manager 2023** : `config`
 
 <box type="warning" seamless>
 
 **Caution:**
-Configuring Class Manager resets the class information (grades, attendance and class participation details) of all students, as well as the past states of Class Manager. This **cannot** be undone using the `undo` command. It is recommended to configure Class Manager before adding students.
+Configuring **Class Manager 2023** resets the class information (grades, attendance and class participation details) of all students, as well as the past states of **Class Manager 2023**. This **cannot** be undone using the `undo` command. It is recommended to configure **Class Manager 2023** before adding students.
 </box>
 
-Before you begin using Class Manager, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, and allows Class Manager to automatically generate the correct number of class information fields for each student. <br><br>
-Class Manager can be configured _at any time_, but do take note of the warning above regarding **loss** of student data and past Class Manager states. If you configure Class Manager after adding students, each student will have the correct number of tutorials and assignments. However, their class information data will be **reset** and there will be no previous states of Class Manager you can return to via the `undo` command.
+Before you begin using **Class Manager 2023**, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, and allows **Class Manager 2023** to automatically generate the correct number of class information fields for each student. <br><br>
+**Class Manager 2023** can be configured _at any time_, but do take note of the warning above regarding **loss** of student data and past **Class Manager 2023** states. If you configure **Class Manager 2023** after adding students, each student will have the correct number of tutorials and assignments. However, their class information data will be **reset** and there will be no previous states of **Class Manager 2023** you can return to via the `undo` command.
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
 * `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` must be a positive integer between 1 and 40 inclusive.
 * Inputting the same `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` as the previous configuration will also **reset** the class information of all students.
-* `config` resets the state history of Class Manager, preventing you from using the `undo` command to reach a state before the `config` command was executed.
+* `config` resets the state history of **Class Manager 2023**, preventing you from using the `undo` command to reach a state before the `config` command was executed.
 
 Examples:
 * `config #t/13 #a/1`
@@ -185,9 +185,9 @@ Format: `help`
 
 ## Miscellaneous commands
 
-### Exit Class Manager : `exit`
+### Exit **Class Manager 2023** : `exit`
 
-Exits the application.
+Exits **Class Manager 2023** immediately.
 
 Format: `exit`
 
@@ -203,29 +203,36 @@ Format: `history`
 
 ### Load a save file : `load`
 
-Load student information from an existing JSON file. Copy the JSON file to be loaded into the `/data` folder. The data in the JSON file will be loaded into the app via the `load` command. This file also becomes the new default save file. You can refer to [this section](#editing-the-data-file) for more information on the valid format of the data file.
+Load student information from an existing JSON file. To load a file, first copy the JSON file to be loaded into the `/data` folder. Next, the JSON file can be loaded into the app via the `load` command. This file also becomes the new default save file. You can refer to [this section](#editing-the-data-file) for more information on the valid format of the data file.
 
 Format: `load f/FILE_NAME`
-* File name does not include the .json extension.
+* File name must not include the .json extension.
 * File name is case-insensitive
-* File name must be valid and exist in the `/data` folder.
-* Number of tutorials and assignments in the loaded file must be the same as the current configuration of Class Manager. You can reconfigure Class Manager to match the number of tutorials and assignments in the loaded file using the `config` command.
-* `load` resets the state history of Class Manager, preventing you from using the `undo` command to reach a state before the `load` command was executed.
+* File must be valid and exist in the `/data` folder.
+* Number of tutorials and assignments in the loaded file must be the same as the current configuration of **Class Manager 2023**. You can reconfigure **Class Manager 2023** to match the number of tutorials and assignments in the loaded file using the `config` command.
+* `load` resets the state history of **Class Manager 2023**, preventing you from using the `undo` command to reach a state before the `load` command was executed.
 
 Example:
-* `load f/sample` loads the sample.json file in the `/data` folder.
+* `load f/sample` loads `sample.json` file in the `/data` folder.
+
+Successful outcome:
 
 <img alt="load_outcome" src="images/load-outcome.png" width="750"> <br><br>
+
+Possible error outcomes:
+* `File not found!` - The file name entered does not exist in the `/data` folder.
+* `Invalid file format!` - The file name entered is not a valid JSON file.
+* 
 
 ---
 
 ### Randomly select students : `random`
 
-Randomly select a specific number of students from all students displayed in Class Manager.
+Randomly select a specific number of students from all students displayed in **Class Manager 2023**.
 
 Format: `random NUMBER_OF_STUDENTS`
 
-* `NUMBER_OF_STUDENTS` must be a valid positive integer, smaller than or equal to the number of current students displayed in the class manager.
+* `NUMBER_OF_STUDENTS` must be a valid positive integer, smaller than or equal to the number of current students displayed in **Class Manager 2023**.
 
 Example:
 
@@ -235,7 +242,7 @@ Example:
 
 ### Redo a command : `redo`
 
-Redo a previously undone command that modified the state of Class Manager. Redo only works with commands that can be undone. Class Manager only stores up to 10 modified states, which resets after a `load` or `config` command. Redo can be used multiple times to redo multiple undo commands, or until Class Manager reaches its most recent state after a maximum of 9 redos.
+Redo a previously undone command that modified the state of **Class Manager 2023**. Redo only works with commands that can be undone. **Class Manager 2023** only stores up to 10 modified states, which resets after a `load` or `config` command. Redo can be used multiple times to redo multiple undo commands, or until **Class Manager 2023** reaches its most recent state after a maximum of 9 redos.
 
 Format: `redo`
 
@@ -262,7 +269,7 @@ Displayed result if there are no more commands to redo: `No more commands to red
 
 ### Undo a command : `undo`
 
-Undo the previous command that modified the state of Class Manager. Undo only works with commands that changes Class Manager, and does not work with commands such as `load` and `config`. Class Manager only stores up to 10 modified states, which resets after a `load` or `config` command. Undo can be used multiple times to undo multiple commands, or until Class Manager reaches its last stored state after a maximum of 9 undos.
+Undo the previous command that modified the state of **Class Manager 2023**. Undo only works with commands that changes **Class Manager 2023**, and does not work with commands such as `load` and `config`. **Class Manager 2023** only stores up to 10 modified states, which resets after a `load` or `config` command. Undo can be used multiple times to undo multiple commands, or until **Class Manager 2023** reaches its last stored state after a maximum of 9 undos.
 
 Format: `undo`
 
@@ -305,7 +312,7 @@ Format: `theme`
 
 ### Add a student : `add`
 
-Adds a student to Class Manager.
+Adds a student to **Class Manager 2023**.
 
 Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​`
 
@@ -329,7 +336,7 @@ Examples:
 
 ### Comment on a student : `comment`
 
-Adds or replaces a comment of an existing student in Class Manager.
+Adds or replaces a comment of an existing student in **Class Manager 2023**.
 
 Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
@@ -352,7 +359,7 @@ Examples:
 
 ### Delete all students : `clear`
 
-Clears all existing students from Class Manager. This command will not delete the data file. Use the `undo` command to undo this command.
+Clears all existing students from **Class Manager 2023**. This command will not delete the data file. Use the `undo` command to undo this command.
 
 Format: `clear`
 
@@ -360,7 +367,7 @@ Format: `clear`
 
 ### Delete one student : `delete`
 
-Deletes an existing student in Class Manager by specifying the student number of the student to be deleted.
+Deletes an existing student in **Class Manager 2023** by specifying the student number of the student to be deleted.
 
 Format: `delete s/STUDENT_NUMBER`
 
@@ -373,7 +380,7 @@ Example:
 
 ### Edit a student's details : `edit`
 
-Edits an existing student's details in Class Manager. One or more details can be edited at once.
+Edits an existing student's details in **Class Manager 2023**. One or more details can be edited at once.
 
 Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`
 
@@ -386,10 +393,10 @@ The student number entered __without__ the `s/` prefix will be the **old** stude
 * `STUDENT_NUMBER` must be valid and exist.
 * `STUDENT_NUMBER` must be entered before the details to be modified.
 * Replace the student's existing student number with `NEW_STUDENT_NUMBER`.
-* `PHONE` must be a 3 to 20 digit positive integer.
+* `PHONE` must be a positive integer with 3 or more digits.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* The `NEW_STUDENT_NUMBER` must be valid and unique (does not exist in Class Manager).
+* The `NEW_STUDENT_NUMBER` must be valid and unique (does not exist in **Class Manager 2023**).
 
 Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
@@ -399,7 +406,7 @@ Examples:
 
 ### List all students : `list`
 
-Shows a list of all students in Class Manager.
+Shows a list of all students in **Class Manager 2023**.
 
 Format: `list`
 
@@ -437,7 +444,7 @@ Examples:
 
 ### Tag a student : `tag`
 
-Tags the existing student in Class Manager.
+Tags the existing student in **Class Manager 2023**.
 
 Format: `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
@@ -458,12 +465,12 @@ Examples:
 
 ### Mark a student as absent : `absent`
 
-Mark the tutorial attendance for an existing student as absent in Class Manager.
+Mark the tutorial attendance for an existing student as absent in **Class Manager 2023**.
 
-Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION`
+Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `absent s/A0245234A tut/1`
@@ -472,12 +479,12 @@ Examples:
 
 ### Mark a student as present : `present`
 
-Mark the tutorial attendance for an existing student as present in Class Manager.
+Mark the tutorial attendance for an existing student as present in **Class Manager 2023**.
 
-Format: `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION`
+Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `present s/A0245234A tut/1`
@@ -486,11 +493,11 @@ Examples:
 
 ### Mark all displayed students as absent : `absent-all`
 
-Mark the tutorial attendance for all students in the current list displayed as absent in the class manager.
+Mark the tutorial attendance for all students in the current list displayed as absent in **Class Manager 2023**.
 
-Format: `absent-all tut/TUTORIAL_SESSION`
+Format: `absent-all tut/TUTORIAL_INDEX`
 
-* The `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `absent-all tut/1`
@@ -499,11 +506,11 @@ Examples:
 
 ### Mark all displayed students as present : `present-all`
 
-Mark the tutorial attendance for all students in the current list displayed as present in Class Manager.
+Mark the tutorial attendance for all students in the current list displayed as present in **Class Manager 2023**.
 
-Format: `present-all tut/TUTORIAL_SESSION`
+Format: `present-all tut/TUTORIAL_INDEX`
 
-* The `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
 
 Examples:
 * `present-all tut/1`
@@ -512,7 +519,7 @@ Examples:
 
 ### Record class participation for a student : `class-part`
 
-Record the class participation for an existing student in Class Manager.
+Record the class participation for an existing student in **Class Manager 2023**.
 
 <box type="warning" seamless>
 
@@ -537,7 +544,7 @@ Examples:
 
 ### Set assignment grade for a student : `grade`
 
-Setting an assignment grade for an existing student in Class Manager.
+Setting an assignment grade for an existing student in **Class Manager 2023**.
 
 Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 
@@ -557,7 +564,7 @@ View the class information of a student that will be displayed on the right side
 Format: `view s/STUDENT_NUMBER`
 
 * The STUDENT_NUMBER must be valid.
-* The STUDENT_NUMBER must belong to a student in Class Manager.
+* The STUDENT_NUMBER must belong to a student in **Class Manager 2023**.
 
 Example:
 
@@ -571,15 +578,14 @@ Example:
 
 # FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Class Manager 2023 home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install **Class Manager 2023** on the other computer and overwrite the empty data file it creates with your saved data file.
 <br><br>
-**Q**: How do I save file with different names?<br>
-**A**: You can rename the file manually after saving it. Start the Class Manager 2023 app and use the `load` command to load the renamed file. Note that the renamed file will then become the new default save file.
+**Q**: How do I save a file with a different name?<br>
+**A**: You can rename the file manually after saving it. Launch **Class Manager 2023** and use the `load` command to load the renamed file. Note that the renamed file will then become the new default save file.
 <br><br>
 **Q**: I am unable to load my save file, what should I do?<br>
-**A**: Ensure that the save file is located in the `[JAR file location]/data` folder, and that the file name is valid. In addition, make sure that the number of tutorials and assignments in the save file is the same 
-as the current configuration of Class Manager 2023. You can reconfigure Class Manager 2023 to match the number of tutorials and assignments in the save file using the `config` command.
+**A**: Ensure that the save file is located in the `[JAR file location]/data` folder, and that the file name is valid. In addition, make sure that the number of tutorials and assignments in the save file is the same as the current configuration of **Class Manager 2023**. You can reconfigure **Class Manager 2023** to match the number of tutorials and assignments in the save file using the `config` command.
 <br><br>
 **Q**: I am unable to load my save file and I have tried all the solutions above, what should I do?<br>
 **A**: The save file may be corrupted. You can try to edit the save file manually to fix the corrupted save file. You can refer to [this section](#editing-the-data-file) for more information on the valid format of the data file.
@@ -587,10 +593,10 @@ as the current configuration of Class Manager 2023. You can reconfigure Class Ma
 **Q**: How do I change the save file location?<br>
 **A**: The save file is located at `[JAR file location]/data`. We currently do not support changing the save file location.
 <br><br>
-**Q**: The GUI opens off-screen when I have multiple screens.<br>
-**A**: This is a known issue with JavaFX when you have multiple screens. If you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file before running CM 23 again.
+**Q**: Why does the GUI open off-screen?<br>
+**A**: This is a known issue with JavaFX when you have multiple screens. If you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file before running **Class Manager 2023** again.
 <br><br>
-**Q**: I have found a bug with CM 23, how can I report it?<br>
+**Q**: I have found a bug with **Class Manager 2023**, how can I report it?<br>
 **A**: Please report the bug by creating a new issue on the [Class Manager 2023 issue tracker](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -598,15 +604,15 @@ as the current configuration of Class Manager 2023. You can reconfigure Class Ma
 # Command summary
 
 ## Essential commands
-| Action                                                         | Format, Examples                                                            |
-|----------------------------------------------------------------|-----------------------------------------------------------------------------|
-| [**Configure Class Manager**](#configure-class-manager-config) | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/10 #a/3` |
-| [**Open help window**](#open-help-window-help)                 | `help`                                                                      |
+| Action                                                                   | Format, Examples                                                            |
+|--------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| [**Configure Class Manager 2023**](#configure-class-manager-2023-config) | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/10 #a/3` |
+| [**Open help window**](#open-help-window-help)                           | `help`                                                                      |
 
 ## Miscellaneous commands
 | Action                                                           | Format, Examples                                 |
 |------------------------------------------------------------------|--------------------------------------------------|
-| [**Exit Class Manager**](#exit-class-manager-exit)               | `exit`                                           |
+| [**Exit Class Manager 2023**](#exit-class-manager-2023-exit)     | `exit`                                           |
 | [**View command history**](#view-command-history-history)        | `history`                                        |
 | [**Load a save file**](#load-a-save-file-load)                   | `load f/FILE_NAME`<br> e.g. `load f/sample`      |
 | [**Randomly select students**](#randomly-select-students-random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2` |
@@ -642,10 +648,10 @@ as the current configuration of Class Manager 2023. You can reconfigure Class Ma
 # Glossary
 
 * **cd**: Change directory command in terminal/command line. cd takes the name of the folder you want to navigate to as an argument. The full command is cd `your-directory`.
-* **Student Number**: Unique matriculation number of a NUS student. In Class Manager, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* **Student Number**: Unique matriculation number of a NUS student. In **Class Manager 2023**, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.
 * **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
 * **JAR**: Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
-* **Class information**: The grades, attendance and class participation details of a student in Class Manager.
+* **Class information**: The grades, attendance and class participation details of a student in **Class Manager 2023**.
