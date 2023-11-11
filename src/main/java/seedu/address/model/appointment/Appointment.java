@@ -104,7 +104,7 @@ public class Appointment implements Comparable<Appointment> {
         }
 
         Appointment otherAppointment = (Appointment) other;
-        return patient.equals(otherAppointment.patient)
+        return patientName.equals(otherAppointment.patientName)
                 && appointmentTime.equals(otherAppointment.appointmentTime)
                 && appointmentDescription.equals(otherAppointment.appointmentDescription)
                 && priorityTag.equals(otherAppointment.priorityTag);
