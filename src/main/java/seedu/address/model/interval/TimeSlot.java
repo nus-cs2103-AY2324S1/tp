@@ -58,19 +58,20 @@ public class TimeSlot {
      * @throws ParseException
      */
     public static List<TimeSlot> findAvailableTime(List<TimeSlot> timeslots, Interval interval) throws ParseException {
-        timeslots.sort(Comparator.comparing(timeslot -> timeslot.start));
+        timeslots.sort(Comparator.comparing(timeslot -> timeslot.getStart()));
 
         List<TimeSlot> availableTime = new ArrayList<>();
         Date lastEnd = interval.getIntervalBegin().getTime();
         for (TimeSlot timeslot : timeslots) {
-            if (timeslot.start.after(lastEnd)) {
-                availableTime.add(new TimeSlot(lastEnd, timeslot.start));
+            if (timeslot.getStart().after(interval.getIntervalEnd().getTime())) {
+                availableTime.add(new TimeSlot(lastEnd, interval.getIntervalEnd().getTime()));
+            } else if (timeslot.getStart().after(lastEnd)) {
+                availableTime.add(new TimeSlot(lastEnd, timeslot.getStart()));
             }
-            if (lastEnd.before(timeslot.end)) {
-                lastEnd = timeslot.end;
+            if (lastEnd.before(timeslot.getEnd())) {
+                lastEnd = timeslot.getEnd();
             }
         }
-
         if (lastEnd.before(interval.getIntervalEnd().getTime())) {
             availableTime.add(new TimeSlot(lastEnd, interval.getIntervalEnd().getTime()));
         }
@@ -95,8 +96,8 @@ public class TimeSlot {
 
         for (TimeSlot timeslot : timeslots) {
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-            String startTime = timeFormat.format(timeslot.start);
-            String endTime = timeFormat.format(timeslot.end);
+            String startTime = timeFormat.format(timeslot.getStart());
+            String endTime = timeFormat.format(timeslot.getEnd());
             result = result + "Free from " + startTime + " - " + endTime + "\n";
         }
         return result;
@@ -128,7 +129,7 @@ public class TimeSlot {
         }
 
         TimeSlot otherTimeslot = (TimeSlot) other;
-        return start.equals(otherTimeslot.start)
-                && end.equals(otherTimeslot.end);
+        return start.equals(otherTimeslot.getStart())
+                && end.equals(otherTimeslot.getEnd());
     }
 }

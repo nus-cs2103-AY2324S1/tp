@@ -4,7 +4,7 @@ title: User Guide
 ---
 # TuitionConnect User Guide
 
-TuitionConnect is a **desktop app for simplifying the process of administration and finance management for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise tracking tutee-specific details, teaching-schedule management, and finance management. 
+TuitionConnect is a **desktop app for simplifying the process of administration and finance management for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise tracking tutee-specific details, teaching-schedule management, and finance management.
 
 ## Table of Contents
 
@@ -169,12 +169,12 @@ Format: `list [DAY]`
 
 **Expected Output when the command fails:**
 
-> [!WARNING]  
-> Inputting an invalid prefix after a valid prefix will result in the invalid prefix being read as 
+> [!WARNING]
+> Inputting an invalid prefix after a valid prefix will result in the invalid prefix being read as
 > part of the input for the valid prefix.
-> 
+>
 > Example: `find n/Abc abc/B` will read `Abc abc/B` as its input.
-> 
+>
 > The outputting error message would be depending on the valid prefix specified.
 
 * **Invalid Input for prefix n/**:
@@ -192,12 +192,11 @@ Names should only contain alphanumeric characters and spaces,
 2. find n/Alice
 3. find sb/Maths
 
-* **No input after prefix name n/**: Names should only contain alphanumeric characters and spaces, 
-and it should not be blank 
+* **No input after prefix name n/**: Names should only contain alphanumeric characters and spaces,
+and it should not be blank
 * **No input after prefix subject sb/**: Subject can take any values, and it should not be blank.
 * **No input after prefixes name and subject n/ sb/**: Names should only contain alphanumeric characters and spaces,
   and it should not be blank
-  
 
 ### Editing a tutee : `edit`
 

@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +68,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `ScheduleListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-F10-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +85,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,28 +114,22 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the tutee data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -166,6 +160,19 @@ the `FilteredPersonList` to only display Persons whose `Day` field matches the s
 * **Alternative 2:** Individual command class without extending `ListCommand`.
     * Pros: Easier to implement.
     * Cons: Less abstraction.
+
+### Find Free Time feature
+
+The `FreeTimeCommand` extends the `Command` class. The command first finds timeslots when the user is busy by looking at
+the tutees' schedules inside the `UniquePersonList`. The TimeSlot class then finds free time based on the list of
+timeslots when the user is busy.
+
+The following sequence diagram shows how the add command works.
+![FreeTimeSequenceDiagram](images/FreeTimeSequenceDiagram.png)
+
+#### Design Considerations
+
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -253,23 +260,50 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### \[Proposed\] Mark paid/check paid features
+### Mark paid/unpaid features
 The proposed mark paid/check paid mechanism can check whether the person has paid or not by implementing a new boolean field 'paid' in the person object, it implements the following operations:
 
 * `paid [index]` — Mark the person at the index as paid.
-* `ispaid [index]` — Check whether the person at the index is paid.
+* `unpaid [index]` — Mark the person at the index as not paid.
 * `list unpaid` — List all the persons who haven't paid in the list.
+* `unpaidAll` — Reset all students' payment status to not paid.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+The following sequence diagram shows how paid command works:
 
-More graphs To be added. 
+![PaidSequenceDiagram.png](images/PaidSequenceDiagram.png)
+
+The unpaid command works similar to the paid command.
+
+The following sequence diagram shows how unpaidAll command works:
+
+![UnpaidAllSequenceDiagram.png](images/UnpaidAllSequenceDiagram.png)
 
 #### Design considerations:
 
-_{more aspects and alternatives to be added}_
+**Aspect: The choice of paid data type:**
+
+* **Alternative 1 (current choice):** Use simple boolean value.
+    * Pros: Easy to implement, fits the requirement: two status (paid, not paid).
+    * Cons: Different from all other fields in the person class, hard to maintain.
+
+* **Alternative 2:** Create a new paid class.
+    * Pros: Fits the other fields in the class.
+    * Cons: Hard to implement, waste of source.
+
+**Aspect: How to implement mark paid features:**
+
+* **Alternative 1 (current choice):** Create a new person, set everything else the same as before, and set paid as true.
+    * Pros: Since we created a new person, the previous person's status will not change, this will benefit the design of undo/redo.
+    * Cons: Hard to implement.
+
+* **Alternative 2:** Change the paid value of the current person.
+    * Pros: Easy to implement.
+    * Cons: The future design of redo/undo command would be difficult.
 
 ### [Proposed] Total revenue command
 #### Proposed implementation
+![RevenueSequenceDiagram.png](images/RevenueSequenceDiagram.png)
+
 The proposed total revenue command is facilitated by the payRate field in Person class, as well as the start and end fields in person class.
 
 The following sequence diagram shows how the total revenue command works:
@@ -314,14 +348,16 @@ The logic behind finding total revenue is
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                        |
-| ------ |--------------------------------------------|---------------------------------------------|------------------------------------------------------------------------|
-| `* * *` | tutor                                      | view a list of all tutees                   |                                                                        |
+| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                       |
+| ------ |--------------------------------------------|---------------------------------------------|-----------------------------------------------------------------------|
+| `* * *` | tutor                                      | view a list of all tutees                   |                                                                       |
 | `* *`  | tutor                                      | view a list tutees on a specified day       | so that I can be reminded if I have any classes on that particular day |
-| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                        |
-| `* * *` | tutor                                      | add a new tutee                             |                                                                        |
-| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address        |
-| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                      |
+| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                       |
+| `* * *` | tutor                                      | add a new tutee                             |                                                                       |
+| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address       |
+| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                     |
+| `* *`  | tutor                                      | mark students that have already paid        | keep track of students' payment statuses                              |
+| `* *`  | tutor                                      | check all students who haven't paid         | easily remind students who haven't paid                               |
 
 *{More to be added}*
 
@@ -424,7 +460,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at 2.
 
-*{More to be added}*
+**Use case: UC05 - Mark a tutee as paid**
+
+**MSS**
+
+1.  User views the list of tutees.
+2.  User requests mark the specific tutee as paid.
+3.  System marks the tutee as paid.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The tutee that the user is trying to mark as paid does not exist in the list.
+    - 2a1. System informs that user does not exist.
+
+**Use case: UC06 - Reset all tutees in the list to not paid**
+
+**MSS**
+
+1.  User views the list of tutees.
+2.  User requests mark all the tutees in the current list as not paid.
+3.  System marks all the tutee in the list as not paid.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
