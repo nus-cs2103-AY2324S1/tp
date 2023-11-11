@@ -26,7 +26,6 @@ public class AddInterviewCommand extends Command {
 
     public static final String COMMAND_WORD = "add-i";
 
-    /* TODO Update format with intended final format accepted*/
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an interview to the address book.\n"
             + "Parameters: "
             + PREFIX_APPLICANT + "APPLICANT_ID "

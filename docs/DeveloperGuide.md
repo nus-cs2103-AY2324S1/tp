@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* The foundational code for add and find features are adapted from [AB-3](https://github.com/nus-cs2103-AY2324S1/tp).
+* The foundational code for add, find and Interview's CRUD features are adapted from [AB-3](https://github.com/nus-cs2103-AY2324S1/tp).
 * The formatting for the developer guide is inspired by [NUSCoursemates](https://ay2324s1-cs2103t-t17-4.github.io/tp/DeveloperGuide.html).
 * The formatting for the developer guide is inspired by [InTrack](https://ay2223s1-cs2103t-t11-2.github.io/tp/DeveloperGuide.html).
 
@@ -157,12 +157,41 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add interview feature
+The add interview feature allows users to quickly add a scheduled interview into the application via the command
+`add-i app/APPLICANT_INDEX jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME`
 
 #### Implementation
+The `add-i` command is facilitated by the `AddInterviewCommand` and the `AddInterviewCommandParser`.
+It uses `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)` to extract the corresponding inputs for each field defined.
+The Applicant is then obtained from the model using `Model#getFilteredApplicantList()` to get the Applicant List,
+followed by `List#get(int index)` where the index is the provided Applicant Index.
+A new `Interview` object is then created with the obtained applicant, the inputted job role, start time and end time.
+By default, the rating field will be set to `0.0` and the isDone field set to `false`.
+`Model#setApplicant(Applicant target, Applicant editedApplicant)` is then called to update the target applicant's `hasInterview` status to `true`.
+`Model#addInterview(Interview interview)` is then called to add the new `Interview` object into the list of interviews.
 
 #### How is the command executed
+1. The user inputs the `add-i` command with correct parameters provided
+2. The `AddressBookParser` processes the input and creates a new `AddInterviewCommandParser`.
+3. The `AddInterviewCommandParser` then extracts the relevant inputs for each prefix.
+If any of the compulsory prefixes have an absent or invalid input, a ParseException will be thrown.
+4. The `AddInterviewCommandParser` then creates the `AddInterviewCommand` based on the processed input.
+5. The `LogicManager` executes the `AddInterviewCommand`.
+6. The `AddInterviewCommand` then creates a new `Interview` object with the corresponding parsed inputs for each field.
+7. The `AddInterviewCommand` then calls `Model#setApplicant(Applicant target, Applicant editedApplicant)` to update the Applicant in the Applicant list
+8. The `AddInterviewCommand` then calls `Model#addInterview(Interview interview)` to add the new `Interview` object to the list of interviews.
+9. Finally, the `AddInterviewCommand` creates a `CommandResult` with the success message and returns it to the `LogicManager` to complete the command execution.
+The GUI would then be updated to display the updated lists and success message.
 
-#### Design consideration
+For easier of viewing, 2 sequence diagrams will be used to show how the `add-i` command works.
+Step 1 to 4:
+
+![AddInterviewSequenceDiagram1](images/AddInterviewSequenceDiagram1.png)
+The activation bar of `LogicManager` is intended to not end since it continues being in the activated state.
+
+Step 5 to 9:
+
+![AddInterviewSequenceDiagram2](images/AddInterviewSequenceDiagram2.png)
 
 ### Find interview by job role feature
 

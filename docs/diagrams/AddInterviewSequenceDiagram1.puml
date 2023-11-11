@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddInterviewCommandParser" as AddInterviewCommandParser LOGIC_COLOR
+participant "cmd:AddInterviewCommand" as AddInterviewCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("add-i app/1 jr/SWE \n start/12-12-2023 1500 end/12-12-2023 1600")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add-i app/1 jr/SWE \n start/12-12-2024 1500 end/12-12-2024 1600")
+activate AddressBookParser
+
+create AddInterviewCommandParser
+AddressBookParser -> AddInterviewCommandParser
+activate AddInterviewCommandParser
+
+AddInterviewCommandParser --> AddressBookParser
+deactivate AddInterviewCommandParser
+
+AddressBookParser -> AddInterviewCommandParser : parse("add-i app/1 jr/SWE \n start/12-12-2024 1500 end/12-12-2024 1600")
+activate AddInterviewCommandParser
+
+create AddInterviewCommand
+AddInterviewCommandParser -> AddInterviewCommand
+activate AddInterviewCommand
+
+AddInterviewCommand --> AddInterviewCommandParser : cmd
+deactivate AddInterviewCommand
+
+AddInterviewCommandParser --> AddressBookParser : cmd
+deactivate AddInterviewCommandParser
+
+AddressBookParser --> LogicManager : cmd
+deactivate AddressBookParser
+
+@enduml
