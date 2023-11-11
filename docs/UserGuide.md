@@ -76,11 +76,6 @@ Being comfortable and efficient at typing will help you make the most of the app
 
 ## How to use this guide?
 
-<<<<<<< HEAD
-If you are a beginner, consider checking out our [Quick Start]() tutorial for new users. <br>
-If you are already familiar with lesSON, do explore all of our [features](). <br>
-Here is an overview of all the [Commands]() available. <br>
-=======
 ### Directory
 If you are a first time user, do visit our seamless onboarding process explained in the
 [quick start](#quick-start) section. <br>
@@ -125,16 +120,6 @@ Throughout this user guide, you will encounter some of these colored blocks high
 |          Keystrokes          | Act of pressing a key on a computer keyboard                                                                                                                                                   |
 |      Spaced repetition       | An evidence-based learning technique where newly created and more difficult flashcards are shown more frequently than older and less difficult flashcards                                      |
 
-<<<<<<< HEAD
-`CLI (Command Line Interface):` A CLI is a text-based interface where you interact with the software by typing commands
-nto a terminal or command prompt, providing more direct and precise control over the system.
-
-`Deck:` A scrollable list of flashcards on the GUI.
-
-`Flashcard:` A card created by the user containing its index, question, answer (not shown) and due date.
-
-`Index:` The relative position of a flashcard within the deck.
-=======
 [Go to Table of Contents](#table-of-contents)
 >>>>>>> master
 
@@ -167,38 +152,9 @@ Get ready to embark on your productive study session with <span style="color: gr
 
 ### Navigating the app
 
-<<<<<<< HEAD
-# Quick Start
-
-1. To understand the terms we use in this guide better, check out [our glossary](#glossary).
-2. Better understand the GUI using [this guide](#user-interface-overview).
-3. For new users, we recommend reading [this tutorial](#tutorial).
-4. For advanced users, view all feature details in the [feature list](#feature-list).
-
---------------------------------------------------------------------------------------------------------------------
-
-# Glossary
-
-`Deck` - A scrollable list of flashcards on the GUI.
-
-`Flashcard`- A card created by the user containing its index, question, answer (not shown) and due date.
-
-`Index` - The relative position of a flashcard within the deck.
-
-
---------------------------------------------------------------------------------------------------------------------
-
-# User Interface Overview
-
-Here is a quick overview of the user interface to get you oriented with where things are.
-=======
-Here is a quick overview of the user interface to get you oriented with where important details are.
->>>>>>> master
-=======
 <span style="color: green;">lesSON</span> uses a [Graphical User Interface (GUI)](#glossary) to display the flashcards
 you have created to you. Here is a brief overview of the GUI to help you familiarise yourself with the key elements and
 their locations.
->>>>>>> master
 
 ![gui_overview](./images/UserGuide/1.3b_ui_overview.png)
 
@@ -243,19 +199,6 @@ and hit <kbd>Enter</kbd>: <br>`edit 1 q/What does + mean in boolean algebra? a/I
 `set d/easy`<br>
 `set d/medium`<br>
 `set d/hard`
-<<<<<<< HEAD
-
-8. The card will automatically be reinserted into deck. This is based on how difficult you found the card. Due to our
-spaced repetition system, as you practise, the more difficult cards will surface more at the top.
-9. Note that the `practise`, `solve`, and `set` commands support indexes, but it is recommended to use them without
-=======
-9. The card will automatically be reinserted into deck. This is based on how difficult you found the card. With our inbuilt
-spaced repetition system, as you practise, cards you find more difficult will surface more at the top.
-10. Note that the `practise`, `solve`, and `set` commands support indexes, but it is recommended to use them without
->>>>>>> master
-indexes, as in this tutorial, to always operate on the most difficult card.
-11. Get familiar with these commands and when you are ready, do try the other commands available [here]().
-=======
 10. The flashcard will automatically be reinserted into deck. This is based on how difficult you found the question
 to be. With our inbuilt [spaced repetition](#glossary) system, as you practise, flashcards you find more difficult will
 surface more at the top.
@@ -265,7 +208,6 @@ testing your memory with the most difficult flashcard.
 12. Get familiar with these commands and when you are ready, move on to the other commands listed [here]().
 
 [Go to Table of Contents](#table-of-contents)
->>>>>>> master
 
 --------------------------------------------------------------------------------------------------------------------
 
