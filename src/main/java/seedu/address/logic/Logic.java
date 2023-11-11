@@ -52,10 +52,6 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    boolean getIsViewCommand();
-
-    boolean getIsViewExitCommand();
-
     CommandResult executeInView(String commandText, Person person, Index targetIndex)
             throws CommandException, ParseException;
 
