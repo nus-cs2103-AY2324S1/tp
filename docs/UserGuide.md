@@ -30,21 +30,19 @@ you can access contacts by roles and responsibilities instantly.
   * [Tutorial on using our Commands](#tutorial-on-using-our-commands)
 * [Features](#features)
   * [Date & Time Command](#date--time-command)
-  * [Managing developers](#managing-developers)
-    * [Add developer](#add-developer)
-    * [Remove developer](#remove-developer)
-    * [Edit developer](#edit-developer)
-    * [Find developer](#find-developer)
-    * [List developers](#list-developers)
-  * [Managing teams](#managing-teams)
-    * [Create teams](#create-teams)
-    * [Add developer to team](#add-developers-to-team)
-    * [Delete teams](#delete-team)
-    * [Remove developer from team](#remove-developer)
-    * [Edit team name](#edit-team-name)
-    * [Edit team leader](#edit-team-leader)
-    * [Find team](#find-team)
-    * [List teams](#list-teams)
+  * [Add developer](#add-developer)
+  * [Remove developer](#remove-developer)
+  * [Edit developer](#edit-developer)
+  * [Find developer](#find-developer)
+  * [List developers](#list-developers)
+  * [Create teams](#create-teams)
+  * [Add developer to team](#add-developers-to-team)
+  * [Delete teams](#delete-team)
+  * [Remove developer from team](#remove-developer)
+  * [Edit team name](#edit-team-name)
+  * [Edit team leader](#edit-team-leader)
+  * [Find team](#find-team)
+  * [List teams](#list-teams)
   * [Display tree](#display-tree)
   * [Help Command](#help-command)
   * [Reset the project](#reset-the-project)
@@ -167,17 +165,17 @@ Remember to check out how to use this guide [here](#how-to-use-this-guide).
 
 ### Date & Time Command
 
-##### What this command does:
+#### What this command does:
 * The "Hi" command displays a welcome message along with the current date and time.
 
 #### Command format: `Hi`
 
-##### Features:
+#### Features:
 
 - You can use this command to check the date and time! Type in `hi` and hit enter!
 - You can now see "Welcome to Linktree, Current date and time: MM-DD-YYYY HH:MM:SS" displayed on the UI.
 
-##### Example usage:
+#### Example usage:
 
 When you enter the command (Hi):
   ![Welcome](images/UG_images/WelcomeCommand.png)
@@ -193,15 +191,15 @@ When you enter the command (Hi):
 --------------------------------------------------------------------------------------------------------------------
 **The following commands are for managing developers.** 
 ### Add command
-##### What this command does:
+#### What this command does:
 * This command allows you to add a new developer to the addressbook.
 
 
-##### Command format: 
+#### Command format: 
 * `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
 * `newdev n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
   
-##### Example usage:
+#### Example usage:
 - For example, to add a new developer John to the addressboook, type
 `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`.
   ![AddCommand](images/UG_images/AddCommand.png)
@@ -214,15 +212,15 @@ the one which suits them.
 </div>
 <br>
 
-#### Remove developer
+### Remove developer
 
-##### What this command does:
+#### What this command does:
 * Performs deletion of existing developers from the addressbook.
 
-##### Command format:
+#### Command format:
 * `delete [Index number]`
 
-##### Example usage:
+#### Example usage:
 - For example, to delete developer **Jane Lim** from the list fo developers. First find the index number of **Jane Lim** from the list of developers.
 Then type `delete 3` to delete that entry.
 - In the following example, you can see that **Jane Lim** is removed from the list of developers.
@@ -246,14 +244,14 @@ of developers.
 </div>
 <br>
 
-#### Edit developer
-##### What this command does:
+### Edit developer
+#### What this command does:
 * Edits personal information of an existing developer.
 
-##### Command format:
+#### Command format:
 `edit [Index number] n/[Name] p/[Phone] e/[Email] a/[Address] r/[Remark] t/[Tag]...`
 
-##### Example usage:
+#### Example usage:
 - For example, to edit a details of developer **John Wick**, firstly find the index number of **John Wick**. Then type 
 `edit 1 n/John Wick e/new.email@example.com` to change John's name and email address.
 - In the following example, you can see that now index `1` has a new name `John Wick` and a new email address `new.email@example.com`.
@@ -271,17 +269,17 @@ of developers.
 <br>
 
 
-#### Find developer
-##### What this command does:
+### Find developer
+#### What this command does:
 * Finds developers whose names satisfy the following parameter:
     * Any name, provided you can remember at least the first/last name.
     * Only full words will be matched e.g. Han will not match Hans
     * Multiple developer names can also be given as paramaters. The program will display the developers that have those names.
 
-##### Command Format: 
+#### Command Format: 
 `find [Keyword1] ...`
 
-##### Example Usage:
+#### Example Usage:
 - For example, to find developers whose first or last name is **John**, type `find John`.
 - In the following example, you can see that there are 3 developers with their first name **John** in the list of developers.
   ![FindCommandUsing1Keyword](images/UG_images/FindCommand1.png)
@@ -311,10 +309,10 @@ with first or last name being **Alex** or **David**.
   (e.g. entering `list help delete 1 HAHAHA-1234` is equivalent to entering `list`)
 </div>
 
-##### Command format:
+#### Command format:
 `list`
 
-##### Example usage:
+#### Example usage:
 * For example, type `list` and you will see the list of developers in the system.
   ![ListCommand](images/UG_images/ListCommand.png)
 
@@ -339,10 +337,10 @@ The following commands are for managing teams
 #### What this command does:
 * Takes a team name and a team leader name. Creates a new team with these paramaters if the given team leader is already an existing developer in the project.
 
-##### Command format:
+#### Command format:
 * `newteam tn/[TeamName] tl/[TeamLeader]`
 
-##### Example usage:
+#### Example usage:
 * For example, to add a new team with team name **Team Delta** and team leader **David Li**, 
 type `newteam tn/Team Delta tl/David Li`
 * In the following example, you can see new team **Team Delta** is added to the team list.
@@ -356,7 +354,7 @@ type `newteam tn/Team Delta tl/David Li`
 #### Command format:
 * `dev2team tn/[TeamName] n/[Developer Name]`
 
-##### Example usage:
+#### Example usage:
 * `dev2team tn/Team Delta n/Irfan Ibrahim`
   ![AddDeveloperToTeam](images/UG_images/AddDevToTeamCommand.png)
 
@@ -440,14 +438,14 @@ type `newteam tn/Team Delta tl/David Li`
 </div>
 <br>
 
-#### Find Team
-##### What this command does:
+### Find Team
+#### What this command does:
 - Finds matching teams whose names contain any of the given keywords.
 
-##### Command Format: 
+#### Command Format: 
 * `findteam [Keyword1] ...`
 
-##### Example usage:
+#### Example usage:
 - For example, type `findteam Alpha` to find all the teams with keyword **Alpha**.
 - In the following example, you can see that the matching results are **Team Alpha** and **Alpha Squad**.
   ![FindTeamCommand](images/UG_images/FindTeamCommnd.png)
@@ -482,10 +480,10 @@ type `newteam tn/Team Delta tl/David Li`
   (e.g. entering `listt help delete 1 HAHAHA-1234` is equivalent to entering `listt`)
 </div>
 
-##### Command format:
+#### Command format:
 * `listt`
 
-##### Example usage:
+#### Example usage:
 * Type `listt` and you will see list of teams with team name, team leader and developers similar to the example shown below.
   ![ListTeamCommand](images/UG_images/ListTeam.png)
 
@@ -525,7 +523,7 @@ and type `listt` again when you want to go back to the main window.
     You can refer back to the team list for their full names.
 </div>
 
-### Command format: 
+#### Command format: 
 * `tree`
 
 #### Example usage: 
