@@ -17,6 +17,8 @@ Let's dive into **InterviewHub** and transform the way you recruit!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 # Table of Contents
 
 - [Introduction](#introduction---what-is-interviewhub)
@@ -29,7 +31,7 @@ Let's dive into **InterviewHub** and transform the way you recruit!
     - [Clearing all the data: `clear`](#clearing-all-applicants-and-interviews--clear)
     - [Exiting the program: `exit`](#exiting-the-program--exit)
     - [Saving the data](#saving-the-data)
-  - [Application Management Features](#applicant-management-features)
+  - [Applicant Management Features](#applicant-management-features)
     - [Adding an applicant: `add-a`](#adding-an-applicant--add-a)
     - [Deleting an applicant: `delete-a`](#deleting-an-applicant--delete-a)
     - [Editing an applicant: `edit-a`](#editing-an-applicant--edit-a)
@@ -39,25 +41,27 @@ Let's dive into **InterviewHub** and transform the way you recruit!
     - [Adding an interview: `add-i`](#adding-an-interview--add-i)
     - [Deleting an interview: `delete-i`](#deleting-an-interview--delete-i)
     - [Editing an interview: `edit-i`](#editing-an-interview--edit-i)
-    - [Finding interviews from the list: `find-i`](#finding-interview-by-job-role--find-i)
+    - [Finding interviews by job role: `find-i`](#finding-interviews-by-job-role--find-i)
     - [Listing all interviews: `list-i`](#listing-all-interviews--list-i)
-    - [Listing all free timing for the given day: `list-freetime`](#listing-all-free-time-for-the-given-date--list-freetime)
+    - [Listing all free timing for the given date: `list-freetime`](#listing-all-free-time-for-the-given-date--list-freetime)
     - [Listing all interviews for today: `list-i-today`](#listing-all-interviews-for-today--list-i-today)
-    - [Marking an interview as done: `mark`](#marking-an-interview--mark)
+    - [Marking an interview as done: `mark`](#marking-an-interview-as-done--mark)
     - [Rating an interview: `rate`](#rating-an-interview--rate)
     - [Listing all completed interview: `list-i-done`](#listing-all-completed-interview--list-i-done)
     - [Listing all incomplete interview: `list-i-not-done`](#listing-all-incomplete-interview--list-i-not-done)
-    - [Sorting the interview list by rating: `sort-rate`](#sorting-interviews-by-rating--sort-rate)
-    - [Sorting the interview list by start-time: `sort-time`](#sorting-interviews-by-start-time--sort-time)
+    - [Sorting interviews by rating: `sort-rate`](#sorting-interviews-by-rating--sort-rate)
+    - [Sorting interviews by start time: `sort-time`](#sorting-interviews-by-start-time--sort-time)
 - [Frequently Asked Questions](#frequently-asked-questions)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
   - [General Commands](#general-commands)
-  - [Application Management Commands](#applicant-management-commands)
+  - [Applicant Management Commands](#applicant-management-commands)
   - [Interview Management Commands](#interview-management-commands)
 - [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
 
 # Introduction - What is InterviewHub?
 
@@ -96,6 +100,8 @@ Before we begin, the table below describes some symbols and syntax you may see t
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 # Quick Start
 
 1. Ensure you have **Java 11** or above [installed in your Computer](#q-how-do-i-check-if-i-have-the-correct-version-of-java-installed).
@@ -132,11 +138,14 @@ Before we begin, the table below describes some symbols and syntax you may see t
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 # GUI Summary
 
 The following is an annotated breakdown of InterviewHub’s GUI:
 
 ![GUI Summary](images/GuiSummary.png)
+
 
 For each **applicant**, we see the following details:
 
@@ -161,6 +170,9 @@ For each **interview**, we see the following details:
 [Back to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
+
 # Features
 
 <div markdown="block" class="alert alert-info">
@@ -207,6 +219,10 @@ For each **interview**, we see the following details:
 
 [Back to the Table of Contents](#table-of-contents)
 
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
+
 ## General Features
 
 ### Viewing help : `help`
@@ -240,6 +256,8 @@ InterviewHub data are saved in the hard disk automatically after any command tha
 
 [Back to the Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always"></div>
+
 ## Applicant Management Features
 
 ### Adding an applicant : `add-a`
@@ -256,11 +274,13 @@ Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 | `ADDRESS`      | The address of the applicant      | No constraints as long as it is not blank                     |
 | `TAG`          | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |
 
+
 Examples:
 * `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`.
 ![Result of `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`](images/addApplicantResult.png)
 
 [Back to the Table of Contents](#table-of-contents)
+
 
 ### Deleting an applicant : `delete-a`
 
@@ -362,6 +382,8 @@ Shows a list of all applicants in **InterviewHub** onto the GUI.
 Format: `list-a`
 
 [Back to the Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always"></div>
 
 ## Interview Management Features
 
@@ -478,7 +500,7 @@ You can see that Alex Yeoh's role has been updated from Frontend Engineer to Net
 
 [Back to the Table of Contents](#table-of-contents)
 
-### Finding interview by job role : `find-i`
+### Finding interviews by job role : `find-i`
 
 Find interviews which jobs roles contain any of the given keywords.
 
@@ -586,7 +608,7 @@ Result of `list-i-today` on 09/11/2023.
 
 [Back to the Table of Contents](#table-of-contents)
 
-### Marking an interview : `mark`
+### Marking an interview as done : `mark`
 
 Mark the specified `INTERVIEW_INDEX` in the **InterviewHub** as done.
 
@@ -684,7 +706,7 @@ After `sort-rate`:
 
 [Back to the Table of Contents](#table-of-contents)
 
-### Sorting interviews by start-time : `sort-time`
+### Sorting interviews by start time : `sort-time`
 
 Sort the shown interview list by interview start time
 in chronologically ascending order (interviews with earlier start times
@@ -717,6 +739,8 @@ If your changes to the data file makes its format invalid, InterviewHub will dis
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always"></div>
+
 # Frequently Asked Questions
 
 ### **Q**: How do I transfer my data to another Computer?
@@ -740,6 +764,8 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 [Back to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
 
 # Command Summary
 
@@ -782,6 +808,8 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 [Back to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
 
 # Glossary
 
