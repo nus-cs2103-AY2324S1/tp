@@ -340,30 +340,30 @@ The proposed commandHistory mechanism is facilitated by `CommandHistory`. It con
 
 Given below is an example usage scenario and how the commandHistory behaves at each step.
 
-Step 1. The user launches the application for the first time and enters their first command. 
+Step 1. The user launches the application for the first time and enters their first command.
 The `CommandHistory` will save the command and the `currentCommandPointer` won't be pointing to any command.
 
 ![CommandHistoryState0](images/CommandHistoryState0.png)
 
-Step 2. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called and the previous command is displayed in the commandBox. 
+Step 2. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called and the previous command is displayed in the commandBox.
 When the previous command is entered into the commandBox, the new version of command will not be stored in `CommandHistory` after calling `CommandHistory#isLastCommandEqualCommand()`
 and it returns true.
 
 
 ![CommandHistoryState1](images/CommandHistoryState1.png)
 
-Step 3. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called 
+Step 3. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called
 and the previous command is displayed in the commandBox. When the previous command is edited and is entered into the commandBox, the newly edited version of command will be stored in `CommandHistory` after calling `CommandHistory#addCommand()`.
 
 ![CommandHistoryState3](images/CommandHistoryState2.png)
 
-Step 4. The user has pressed '↑' while selecting the commandBox until the first Command and `CommandHistory#getPreviousCommand()` 
+Step 4. The user has pressed '↑' while selecting the commandBox until the first Command and `CommandHistory#getPreviousCommand()`
 is called multiple times. The user then presses '↓' and `CommandHistory#getNextCommand()` is called and the command1 (the next command) will then be displayed in the commandBox.
 
 ![CommandHistoryState3](images/CommandHistoryState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentCommandPointer` is at 
-index 0, pointing to the initial first command, then there are no previous commands to restore. The program uses 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentCommandPointer` is at
+index 0, pointing to the initial first command, then there are no previous commands to restore. The program uses
 `CommandHistory#hasPreviousCommand()` to check if this is the case. If so, it will not change anything.
 
 </div>
@@ -371,7 +371,7 @@ index 0, pointing to the initial first command, then there are no previous comma
 
 The opposite occurs too when calling the next command  —  the program calls `CommandHistory#hasNextCommand()`, which shifts the `currentCommandPointer` once to the right, pointing to the previously entered command and displaying that command instead.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `commandHistoryPointer` is at index `commandHistoryList.size()`, pointing to nothing, and there are no undone CcaCommander states to restore. 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `commandHistoryPointer` is at index `commandHistoryList.size()`, pointing to nothing, and there are no undone CcaCommander states to restore.
 The program uses `CommandHistory#hasNextCommand()` to check if this is the case. If so, it will not call `CommandHistory#getNextCommand()`
 but will instead use `CommandHistory#isLastCommand()` to check if the `commandHistoryPointer` is at the last command and set the commandBox to be blank.
 
@@ -406,10 +406,10 @@ _{Explain here how the data archiving feature will be implemented}_
 **Current Implementation:**
 * **Current Issue:** Each member/event can have tags attached to it and these tags can be edited using the `editMember`/`editEvent`
 commands. However, upon adding a new tag to a member/event without typing all the old tags, it will override the initial tags attached to
-the member/event and only the new tag will be displayed. This brings inconvenience to the user as the user has to 
+the member/event and only the new tag will be displayed. This brings inconvenience to the user as the user has to
 type both the old and new tags instead of just typing the new tag.
-* **Example:** We have a member called Alice with a member index of 1, and she has an initial tag called `friend`. We want to 
-add a new tag `early` to her. Upon entering the command `editMember 1 t/early`, the current implementation will override 
+* **Example:** We have a member called Alice with a member index of 1, and she has an initial tag called `friend`. We want to
+add a new tag `early` to her. Upon entering the command `editMember 1 t/early`, the current implementation will override
 all the initial tags and only the `early` tag will be displayed.
 
 **Proposed Solution:**
@@ -425,14 +425,14 @@ when editing the tags of the member/event:
 **Current Implementation:**
 * **Current Issue:** Member/event name only accepts alphanumeric characters and restricts the user from entering special characters
 into the member/event name, which should be allowed as member/event names can contain special characters.
-* **Example:** The user wants to create a new event named "Raffles Hall's Musical Production" and the user enters 
-`createEvent n/Raffles Hall's Musical Production l/Raffles Hall d/2023-09-19` but the message "Names should only contain 
+* **Example:** The user wants to create a new event named "Raffles Hall's Musical Production" and the user enters
+`createEvent n/Raffles Hall's Musical Production l/Raffles Hall d/2023-09-19` but the message "Names should only contain
 alphanumeric characters and spaces, and it should not be blank" is shown to the user instead of accepting it as a valid event. This is
 due to the presence of the special character `'` in the event name.
 
 **Proposed Solution:**
 
-We propose to allow the `createMember`, `editMember` , `createEvent` and `editEvent` commands to accept special 
+We propose to allow the `createMember`, `editMember` , `createEvent` and `editEvent` commands to accept special
 characters in the name field and not to be restricted to just alphanumeric characters.
 
 ### Make UI stay on current view upon editMember or editEvent
@@ -449,18 +449,18 @@ and instead remain on the user's current view.
 
 ### Show a more specific error message for negative index in `editMember`, `editEvent`, `viewMember`, `viewEvent`, `deleteMember` and `deleteEvent`
 **Current Implementation:**
-* **Current Issue:** When the user inputs a negative index for the `editMember`, `editEvent`, `viewMember`, `viewEvent`, 
-`deleteMember` or `deleteEvent` commands, the displayed error message is not specific enough and does not make it clear 
+* **Current Issue:** When the user inputs a negative index for the `editMember`, `editEvent`, `viewMember`, `viewEvent`,
+`deleteMember` or `deleteEvent` commands, the displayed error message is not specific enough and does not make it clear
 to the user that he/she has wrongly input a negative index.
-* **Example:** The user enters the command `editMember -1 n/Jane Smith` and the error message displayed is 
-"Invalid command format!... Parameters: INDEX (must be a positive integer)...". The current error message fails to 
+* **Example:** The user enters the command `editMember -1 n/Jane Smith` and the error message displayed is
+"Invalid command format!... Parameters: INDEX (must be a positive integer)...". The current error message fails to
 highlight to the user the root cause of the error, which is a negative member index.
 
 **Proposed Solution:**
 
 We propose to make `editMember`, `editEvent`, `viewMember`, `viewEvent`, `deleteMember` and `deleteEvent` commands 
-display a more specific error message along the lines of "The provided index is negative and should be a positive integer 
-instead." when the user inputs a negative index. In order to implement this, the relevant `CommandParser` classes have 
+display a more specific error message along the lines of "The provided index is negative and should be a positive integer
+instead." when the user inputs a negative index. In order to implement this, the relevant `CommandParser` classes have
 to recognise negative indexes and throw more specific exceptions.
 
 ### Provide more specific index error messages to the user
@@ -475,7 +475,7 @@ There is a lack of information shown to the user which specific index is wrong.
 **Proposed solution:**
 
 We propose to make the index error messages more specific and highlight to the user which index is wrong and why
-that index is wrong. For example, in the `enrol m/1 e/-1` input, we will show an error message to the user along 
+that index is wrong. For example, in the `enrol m/1 e/-1` input, we will show an error message to the user along
 the lines of "The provided Event Index is not a non-zero unsigned integer."
 
 ### Make UI stay on current view upon undo/redo
