@@ -809,7 +809,7 @@ You can link lessons to students, and vice versa. For example, if a lesson has a
 <box type="info" seamless>
 
 You must be in the **_STUDENT list_** and are viewing a student to run this command. Type `list STUDENTS` to go to the **_STUDENT list_**, then type `show INDEX` to select a student to link lessons to.</box>
-Format: `linkTo LESSON_NAME` (for list specific format)
+Format: `linkTo LESSON_NAME`
 * `LESSON_NAME` is the name of the lesson you would like to link to.
 * * Refer to `LESSON_NAME`'s constraints [here](#parameter-summary).
 
@@ -857,7 +857,7 @@ No such lesson
 <box type="info" seamless>
 
 You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list SCHEDULE` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson to link students to.</box>
-Format: `linkTo STUDENT_NAME` (for list specific format)
+Format: `linkTo STUDENT_NAME`
 * `STUDENT_NAME` is the name of the student you would like to link to.
 * Refer to `STUDENT_NAME`'s constraints [here](#parameter-summary).
 
