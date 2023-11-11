@@ -951,7 +951,7 @@ testers are expected to do more *exploratory* testing.
 
 ### 7.7. Adding a group remark
 
-1. Adding a group remark 
+1. Adding a group remark
 
    1. Test case: `remark g/CS2103 r/Lecture on friday`<br>
       Expected: New remark with "Lecture on friday" is added to CS2103.
