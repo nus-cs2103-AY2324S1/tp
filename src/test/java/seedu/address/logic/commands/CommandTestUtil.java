@@ -2,12 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -80,9 +75,14 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
     public static final String VALID_GROUP_REMARK = "quiz tomorrow";
+    public static final String GROUP_REMARK_DESC = " " + PREFIX_GROUPREMARK + VALID_GROUP_REMARK;
     public static final String VALID_GROUP_REMARK_SPECIAL = "sdd&IFUDH%f*89fd*(F!899#$#%\"'`";
-    public static final String VALID_GROUP_REMARK_UNICODE = "你好";
+    public static final String GROUP_REMARK_SPECIAL_DESC = " " + PREFIX_GROUPREMARK + VALID_GROUP_REMARK_SPECIAL;
+    public static final String VALID_GROUP_REMARK_UNICODE = "我要吃面包";
+    public static final String GROUP_REMARK_UNICODE_DESC = " " + PREFIX_GROUPREMARK + VALID_GROUP_REMARK_UNICODE;
     public static final String VALID_GROUP_REMARK_OTHERS = "gU4&😊!";
+    public static final String GROUP_REMARK_OTHERS_DESC = " " + PREFIX_GROUPREMARK + VALID_GROUP_REMARK_OTHERS;
+
 
 
     /**
