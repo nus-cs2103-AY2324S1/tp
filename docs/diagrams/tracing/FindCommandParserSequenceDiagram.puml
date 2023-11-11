@@ -17,9 +17,9 @@ loop for each entry in argMultimap
 end
 create cp
 fcp -> cp ++: CombinedPredicate(predicateList)
-cp --> fcp --
+cp --> fcp --: cp
 create fc
-fcp -> fc ++
+fcp -> fc ++: FindCommand(cp)
 fc --> fcp --: command
 fcp -->[ --: command
 @enduml

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.parser.CliSyntax.*;
-import static seedu.application.model.job.Deadline.TO_ADD_DEADLINE;
 import static seedu.application.testutil.TypicalJobs.CHEF;
 import static seedu.application.testutil.TypicalJobs.CLEANER;
 
@@ -36,8 +35,8 @@ public class FieldComparatorTest {
 
     @Test
     public void compare_validSpecifiers_correctComparison() {
-        Job job1 = new JobBuilder(CLEANER).withDeadline(TO_ADD_DEADLINE).build();
-        Job job2 = new JobBuilder(CHEF).withDeadline(TO_ADD_DEADLINE).build();
+        Job job1 = new JobBuilder(CLEANER).withDeadline("Dec 15 2024 1200").build();
+        Job job2 = new JobBuilder(CHEF).withDeadline("Dec 15 2024 1200").build();
 
         FieldComparator roleComparator = new FieldComparator(PREFIX_ROLE);
         assertTrue(roleComparator.compare(job1, job2) > 0); // job2 should be before job1

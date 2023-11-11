@@ -77,7 +77,7 @@ public class ParserUtil {
         String trimmedDeadline = deadline.trim();
         String formattedDeadline = formatDeadline(trimmedDeadline);
         if (!Deadline.isValidDeadline(formattedDeadline)) {
-            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS + formattedDeadline);
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
         }
         return new Deadline(formattedDeadline);
     }
