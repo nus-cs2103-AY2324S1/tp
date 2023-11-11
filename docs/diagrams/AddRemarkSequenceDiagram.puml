@@ -12,10 +12,10 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute("addremark EID1234-5678 team-player")
+[-> LogicManager : execute("addremark id/EID1234-5678 r/team-player")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addremark EID1234-5678 team-player")
+LogicManager -> AddressBookParser : parseCommand("addremark id/EID1234-5678 r/team-player")
 activate AddressBookParser
 
 create AddRemarkCommandParser
@@ -25,7 +25,7 @@ activate AddRemarkCommandParser
 AddRemarkCommandParser --> AddressBookParser
 deactivate AddRemarkCommandParser
 
-AddressBookParser -> AddRemarkCommandParser : parse("EID1234-5678 team-player")
+AddressBookParser -> AddRemarkCommandParser : parse("id/EID1234-5678 r/team-player")
 activate AddRemarkCommandParser
 
 create AddRemarkCommand
@@ -48,7 +48,14 @@ LogicManager -> AddRemarkCommand : execute()
 activate AddRemarkCommand
 
 AddRemarkCommand -> Model : setEmployee(targetEmployee, editedEmployee)
+activate Model
+
+Model --> AddRemarkCommand
+
 AddRemarkCommand -> Model : updateFilteredEmployeeList()
+
+Model --> AddRemarkCommand
+deactivate Model
 
 create CommandResult
 AddRemarkCommand -> CommandResult
