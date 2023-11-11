@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.util;
 
 import seedu.address.model.TimeInterval;
 import seedu.address.model.group.Group;

@@ -9,6 +9,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.ui.util.GroupTimeContainer;
 
 /**
  * The UI component that is responsible for each day in the calendar

@@ -28,26 +28,30 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
+<<<<<<< HEAD
             .withGroupList("CS2103T", "CS2103").build();
+=======
+            .withGroupList("CS2105").build();
+>>>>>>> 1ef35a06f9abd34fedc24492cb8d6fcfa1d960a9
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withGroupList("CS2103T").build();
+            .withGroupList("CS2105").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withGroupList("CS2103T").build();
+            .withEmail("heinz@example.com").withGroupList("CS2105").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withGroupList("CS2103T").build();
+            .withEmail("cornelia@example.com").withGroupList("CS2105").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withGroupList("CS2103T").build();
+            .withEmail("werner@example.com").withGroupList("CS2105").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withGroupList("CS2103T").build();
+            .withEmail("lydia@example.com").withGroupList("CS2105").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withGroupList("CS2103T").build();
+            .withEmail("anna@example.com").withGroupList("CS2105").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withGroupList("CS2103T").build();
+            .withEmail("stefan@example.com").withGroupList("CS2105").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withGroupList("CS2103T").build();
+            .withEmail("hans@example.com").withGroupList("CS2105").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
@@ -68,6 +72,8 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
+        Group group = TypicalGroups.getTypicalGroup().get(0);
+        ab.addGroup(group);
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
