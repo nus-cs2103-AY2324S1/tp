@@ -10,6 +10,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+* Small snippets of code written with the help of AI tool (can be found in `PersonListPanel.java` and `ShortcutSettings.java`).
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -377,7 +378,7 @@ To find a specialist, a similar parse and execution flow is conducted.
 
 User defined shortcuts are managed by `ShortcutSettings`. Internally it contains a `shortcutMap` that stores _mappings_ of 
 user defined _shortcut aliases_ to existing valid _command keywords_. This class provides functionality for registering new shortcuts,
-removing previously defined shortcuts, and querying the map to see check if a shortcut has previously been defined.
+removing previously defined shortcuts, and querying the map to check if a shortcut has previously been defined.
 
 These shortcut mappings need to be updated by command execution, as well as used in parsing of user input. Thus, the following design decisions have been made:
 1. Shortcut operations are exposed in the `Model` interface as 
