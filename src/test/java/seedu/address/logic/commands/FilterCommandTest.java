@@ -46,7 +46,6 @@ public class FilterCommandTest {
     private static final String VALID_SALARY_2000 = "2000";
     private static final String VALID_SALARY_3000 = "3000";
     private static final String VALID_SALARY_4300 = "4300";
-    private static final String VALID_LEAVE = "14";
     private Model model = new ModelManager(getTypicalManageHr(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalManageHr(), new UserPrefs());
 
@@ -61,8 +60,8 @@ public class FilterCommandTest {
         Set<EmployeeName> supervisorSet = new CustomSet<>();
         Set<DepartmentName> departmentSet = new CustomSet<>();
 
-        String[] prefix = prefixes.split(",");
-        String[] keyword = keywords.split(",");
+        String[] prefix = prefixes.split("_");
+        String[] keyword = keywords.split("_");
         for (int i = 0; i < prefix.length; i++) {
             switch (prefix[i]) {
             case "name":
@@ -128,19 +127,168 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_multipleEmployeesFound() {
-        // filter n/Benson Meier from typical employees
+    public void filterNameTest() {
+        // filter n/Alice Pauline from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
-        ContainsAllPredicate predicate = createContainsAllPredicateHelper("name", BENSON.getName().toString());
+        ContainsAllPredicate predicate = createContainsAllPredicateHelper("name", ALICE.getName().toString());
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredEmployeeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON), model.getFilteredEmployeeList());
+        assertEquals(Arrays.asList(ALICE), model.getFilteredEmployeeList());
 
-        // filter d/investment from typical employees
-        expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
-        predicate = createContainsAllPredicateHelper("department", VALID_DEPARTMENT_INVESTMENT);
+        // filter n/Benson Meier from typical employees
+        predicate = createContainsAllPredicateHelper("name", BENSON.getName().toString());
         command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getFilteredEmployeeList());
+    }
+
+    @Test
+    public void filterPhoneTest() {
+        // filter ALICE's number from typical employees
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
+        ContainsAllPredicate predicate = createContainsAllPredicateHelper("phone", ALICE.getPhone().toString());
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredEmployeeList());
+
+        // filter BENSON's number from typical employees
+        predicate = createContainsAllPredicateHelper("phone", BENSON.getPhone().toString());
+        command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getFilteredEmployeeList());
+    }
+
+    @Test
+    public void filterEmailTest() {
+        // filter ALICE's email from typical employees
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
+        ContainsAllPredicate predicate = createContainsAllPredicateHelper("email", ALICE.getEmail().toString());
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredEmployeeList());
+
+        // filter BENSON's email from typical employees
+        predicate = createContainsAllPredicateHelper("email", BENSON.getEmail().toString());
+        command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getFilteredEmployeeList());
+    }
+
+    @Test
+    public void filterAddressTest() {
+        // filter ALICE's address from typical employees
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
+        ContainsAllPredicate predicate = createContainsAllPredicateHelper("address", ALICE.getAddress().toString());
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredEmployeeList());
+
+        // filter BENSON's address from typical employees
+        predicate = createContainsAllPredicateHelper("address", BENSON.getAddress().toString());
+        command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getFilteredEmployeeList());
+    }
+
+    @Test
+    public void filterSalaryTest() {
+        // filter s/2000 (salary <= 2000) from typical employees
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
+        ContainsAllPredicate predicate = createContainsAllPredicateHelper("salary", VALID_SALARY_2000);
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ELLE, FIONA, GEORGE), model.getFilteredEmployeeList());
+
+        // filter s/3000 (salary <= 3000) from typical employees
+        expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 4);
+        predicate = createContainsAllPredicateHelper("salary", VALID_SALARY_3000);
+        command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, ELLE, FIONA, GEORGE), model.getFilteredEmployeeList());
+
+        // filter s/4300 (salary <= 4300) from typical employees
+        expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 5);
+        predicate = createContainsAllPredicateHelper("salary", VALID_SALARY_4300);
+        command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, CARL, ELLE, FIONA, GEORGE), model.getFilteredEmployeeList());
+    }
+
+    @Test
+    public void filterLeaveTest() {
+        // filter l/14 (leave == 14) from typical employees
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 2);
+        ContainsAllPredicate predicate = createContainsAllPredicateHelper("leave", ALICE.getLeave().toString());
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, CARL), model.getFilteredEmployeeList());
+
+        // filter l/35 (leave == 35) from typical employees
+        expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
+        predicate = createContainsAllPredicateHelper("leave", DANIEL.getLeave().toString());
+        command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(DANIEL), model.getFilteredEmployeeList());
+
+        // filter l/0 (leave == 0) from typical employees
+        expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
+        predicate = createContainsAllPredicateHelper("leave", ELLE.getLeave().toString());
+        command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ELLE, FIONA, GEORGE), model.getFilteredEmployeeList());
+    }
+
+    @Test
+    public void filterRoleTest() {
+        // filter r/subordinate from typical employees
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
+        ContainsAllPredicate predicate = createContainsAllPredicateHelper("role", VALID_ROLE_BOB);
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, FIONA, GEORGE), model.getFilteredEmployeeList());
+
+        // filter r/manager from typical employees
+        expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 4);
+        predicate = createContainsAllPredicateHelper("role", VALID_ROLE_AMY);
+        command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL, ELLE), model.getFilteredEmployeeList());
+    }
+
+    @Test
+    public void filterSupervisorTest() {
+        // filter m/Benson Meier from typical employees
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 2);
+        ContainsAllPredicate predicate = createContainsAllPredicateHelper("supervisor",
+                BENSON.getName().toString());
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredEmployeeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, DANIEL), model.getFilteredEmployeeList());
+    }
+
+    @Test
+    public void departmentFilterTest() {
+        // filter d/investment from typical employees
+        String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
+        ContainsAllPredicate predicate = createContainsAllPredicateHelper("department", VALID_DEPARTMENT_INVESTMENT);
+        FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredEmployeeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredEmployeeList());
@@ -152,40 +300,14 @@ public class FilterCommandTest {
         expectedModel.updateFilteredEmployeeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON), model.getFilteredEmployeeList());
-
-        // filter r/subordinate from typical employees
-        expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
-        predicate = createContainsAllPredicateHelper("role", VALID_ROLE_BOB);
-        command = new FilterCommand(predicate);
-        expectedModel.updateFilteredEmployeeList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, FIONA, GEORGE), model.getFilteredEmployeeList());
-
-        // filter s/3000 (salary <= 3000) from typical employees
-        expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 4);
-        predicate = createContainsAllPredicateHelper("salary", VALID_SALARY_3000);
-        command = new FilterCommand(predicate);
-        expectedModel.updateFilteredEmployeeList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, ELLE, FIONA, GEORGE), model.getFilteredEmployeeList());
-
-        // filter l/14 (leave == 14) from typical employees
-        expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 2);
-        predicate = createContainsAllPredicateHelper("leave", VALID_LEAVE);
-        command = new FilterCommand(predicate);
-        expectedModel.updateFilteredEmployeeList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, CARL), model.getFilteredEmployeeList());
     }
 
     @Test
-    public void multiplePrefixFilterTest() {
-        // combination tests
-
+    public void multiplePrefixFilterTest() { // combination tests
         // filter r/manager and d/investment from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
-        ContainsAllPredicate predicate = createContainsAllPredicateHelper("role,department",
-                VALID_ROLE_AMY + "," + VALID_DEPARTMENT_INVESTMENT);
+        ContainsAllPredicate predicate = createContainsAllPredicateHelper("role_department",
+                VALID_ROLE_AMY + "_" + VALID_DEPARTMENT_INVESTMENT);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredEmployeeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -193,8 +315,8 @@ public class FilterCommandTest {
 
         // filter s/4300 and l/14 from typical employees
         expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
-        predicate = createContainsAllPredicateHelper("salary,leave", VALID_SALARY_4300 + ","
-                + VALID_LEAVE);
+        predicate = createContainsAllPredicateHelper("salary_leave", VALID_SALARY_4300 + "_"
+                + ALICE.getLeave().toString());
         command = new FilterCommand(predicate);
         expectedModel.updateFilteredEmployeeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -202,7 +324,7 @@ public class FilterCommandTest {
 
         // filter r/subordinate s/2000 from typical employees
         expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 2);
-        predicate = createContainsAllPredicateHelper("role,salary", VALID_ROLE_BOB + ","
+        predicate = createContainsAllPredicateHelper("role_salary", VALID_ROLE_BOB + "_"
                 + VALID_SALARY_2000);
         command = new FilterCommand(predicate);
         expectedModel.updateFilteredEmployeeList(predicate);
