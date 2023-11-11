@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -268,7 +268,7 @@ The following operations are implemented by the `CommandStringStash`:
 * `CommandStringStash#getPrevCommandString(String commandInputString)` - Cycles one command further back in history.
 * `CommandStringStash#getPassedCommandString(String commandInputString)` - Cycles one command further forward in history.
 
-<div markdown="span" class="alert alert-info">:information_source: **note:** Cycling fowards or backwards may not always be
+<div markdown="span" class="alert alert-info">:information_source: **note:** Cycling forwards or backwards may not always be
 valid operations. No cycling forward or backward can be done if the stash is empty. No cycling backward
 can be done if the user is already on the least recent command in the stash, and no cycling forward can be done
 if the user has not yet cycled backward. To consider all these cases, the `commandInputString` is passed as a parameter
@@ -722,10 +722,17 @@ still seems intuitive and reasonable to expect.
 3. DoConnek Pro currently checks for duplicate persons by name. This means that people with the same names cannot be added even if they have different parameters (like `Phone` or `Email`).
    We plan on implementing an `NRIC` field for patients and an `MCR` field for specialists as unique identifiers to solve this issue. 
 
+
 4. DoConnek Pro currently disallows the use of "/" in a person name because it is used as a command delimiter.
 Users may face problems due to this if they have to, for example, add a person with "s/o" in their name.
 Future updates to the application plan to account for such cases.
 
+
 5. DoConnek Pro is currently not intelligent enough to detect incorrect-but-close-enough flags. Users must enter the
 commands in the exact format specified in the user guide. For example, even if users input `tag/` instead of `t/`, DoConnek
 Pro will not accept this as a valid input format. In the future we plan to make DoConnek Pro more flexible in this regard.
+
+
+6. DoConnek Pro allows users to add multiple entries for certain attributes, notably `MEDICAL_HISTORY` and `TAG`. However, 
+it cannot guarantee the ordering of these entries as inputted by the user in the command line. 
+We plan on rectifying DoConnek Pro to maintain this user-specified ordering in the future.
