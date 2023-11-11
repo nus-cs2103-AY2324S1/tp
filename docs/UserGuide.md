@@ -34,6 +34,7 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
 
 6. Refer to the [Features](#features) section below for details on each command.
 
+<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -59,8 +60,6 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
-
-<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -388,12 +387,13 @@ TAManager data are saved in the hard disk automatically after any command that c
 ### Editing the data file
 
 TAManager data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
+<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
