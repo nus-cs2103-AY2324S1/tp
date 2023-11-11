@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.DayOfWeek;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
+import seedu.address.model.person.Day;
 
 /**
  * Represents the day in the interval
@@ -27,45 +31,8 @@ public class IntervalDay {
     public IntervalDay(String day) {
         requireNonNull(day);
         checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
-        value = parse(day);
-        stringValue = parseDay(day);
-    }
-
-    /**
-     * Parses an input as a DayOfWeek object.
-     *
-     * @param test
-     * @return DayOfWeek object
-     */
-    public DayOfWeek parse(String test) {
-        String lowerCaseTest = test.toLowerCase();
-        switch (lowerCaseTest) {
-        case "mon":
-        case "monday":
-            return DayOfWeek.MONDAY;
-        case "tue":
-        case "tuesday":
-            return DayOfWeek.TUESDAY;
-        case "wed":
-        case "wednesday":
-            return DayOfWeek.WEDNESDAY;
-        case "thu":
-        case "thursday":
-            return DayOfWeek.THURSDAY;
-        case "fri":
-        case "friday":
-            return DayOfWeek.FRIDAY;
-        case "sat":
-        case "saturday":
-            return DayOfWeek.SATURDAY;
-        case "sun":
-        case "sunday":
-            return DayOfWeek.SUNDAY;
-        default:
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-        }
-        //checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
-        //value = parseDay(day);
+        value = Day.parse(day);
+        stringValue = value.getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
     }
 
     /**

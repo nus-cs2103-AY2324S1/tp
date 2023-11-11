@@ -153,8 +153,32 @@ The `AddCommand` extends the `Command` class. While mostly similar to `delete` i
 checks to prevent any duplicate `Person` object (i.e. same name and phone number) as well as clashes in schedules. 
 If it passes these checks, the person is added into the system.
 
+`AddCommand` takes in the following fields:
+* **Name (Compulsory field)**: String composed of character between A-Z and a-z.
+* **Phone number (Compulsory field)**: Any number.
+* **Address (Compulsory field)**: String without restriction in characters.
+* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
+* **Subject (Compulsory field)**: String without restriction in characters.
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+* **Begin (Compulsory field)**: String with restrictions (HHMM).
+* **End (Compulsory field)**: String with restrictions (HHMM).
+* **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
+
 The following sequence diagram shows how the add command works.
+
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![AddActivityDiagram](images/AddActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How add executes:**
+
+* **Alternative 1 (current choice):** All fields must be included in a single command input.
+    * Pros: Easy to implement.
+    * Cons: Command input may be too long and less user-friendly.
 
 ### List by day feature
 

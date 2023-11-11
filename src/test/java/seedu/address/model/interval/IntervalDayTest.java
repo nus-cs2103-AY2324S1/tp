@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.time.DayOfWeek;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.model.person.Day;
 
 public class IntervalDayTest {
 
@@ -60,16 +61,13 @@ public class IntervalDayTest {
         IntervalDay intervalDay2 = new IntervalDay("Fri");
 
         assertTrue(intervalDay.parseDay("mon") == "Mon");
-        assertTrue(intervalDay.parseDay("friday") == "Fri");
+        assertTrue(intervalDay2.parseDay("friday") == "Fri");
     }
 
     @Test
     public void parse() {
-        IntervalDay intervalDay = new IntervalDay("Mon");
-        IntervalDay intervalDay2 = new IntervalDay("Fri");
-
-        assertTrue(intervalDay.parse("mon").equals(DayOfWeek.MONDAY));
-        assertTrue(intervalDay.parse("friday").equals(DayOfWeek.FRIDAY));
+        assertTrue(Day.parse("mon").equals(DayOfWeek.MONDAY));
+        assertTrue(Day.parse("friday").equals(DayOfWeek.FRIDAY));
     }
 
     @Test
@@ -77,8 +75,8 @@ public class IntervalDayTest {
         IntervalDay intervalDay = new IntervalDay("mon");
         IntervalDay intervalDay2 = new IntervalDay("FRIDAY");
 
-        assertTrue(intervalDay.toString() == "Mon");
-        assertTrue(intervalDay2.toString() == "Fri");
+        assertTrue(intervalDay.toString().equals("Mon"));
+        assertTrue(intervalDay2.toString().equals("Fri"));
     }
 
 
