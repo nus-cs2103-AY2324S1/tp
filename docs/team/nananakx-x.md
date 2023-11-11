@@ -26,8 +26,9 @@ Given below are my contributions to the project.
   ignored and in the case where duplicate fields are given, only the last one will be chosen. 
     * Justification: In the previous implementation, the foster manager can only add name, email, phone number and address of fosterers, which is not well-suited for the 
   needs of the target user since crucial information like housing type should also be taken into account, given the context of managing fosterers for cat and dog shelters.
-    * Highlights: This feature requires tweaks to the existing `Person` class, and also new classes to encapsulate the new attributes. Furthermore, methods to check if the 
-  combination of data / data inputted is valid are implemented and there are multiples cases to consider.
+      * Highlights: This feature requires tweaks to the existing `Person` class, and also new classes to encapsulate the new attributes. Furthermore, the implementation was also 
+  challenging when coming up with methods to check if the combination of data / data inputted is valid are implemented since there were multiples cases to consider. Failing to 
+  identify some logical lapses at the initial stages of implementation, constant changes were made to improve on the checks and usefulness of error messages.
     * Pull requests: [#63](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/63), [#73](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/73), 
   [#82](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/82) 
 
@@ -64,7 +65,6 @@ Given below are my contributions to the project.
         * Added activity diagram for `add` feature
         * Added implementation details of the `sort` feature
         * Added sequence diagram for `sort` feature
-        * Updated `Model` class diagram
         * Added user stories and use cases related to `add`, `sort` and `undo`
         * Updated user stories and use cases related to `help` and `reset`
         * Added planned enhancements for:

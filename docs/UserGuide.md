@@ -253,9 +253,12 @@ e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <
 Examples:
 * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent`
   * adds a fosterer named Jerry Tan with the following details:
+    <br/><br/>
     ![Add](images/screenshots/AddJerry.png)
+    <br/><br/>
 * `add n/Pete Tay p/98765411 e/pete@example.com a/Happy street, block 5, #27-01 housing/Condo availability/Available animal/nil animalType/able.Cat`
   * adds a fosterer named Pete Tay with the following details:
+    <br/><br/>
     ![Add](images/screenshots/AddPete.png)
 
 In the case where duplicates field descriptions are given, the last one will be chosen:
