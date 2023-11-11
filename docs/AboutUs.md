@@ -34,7 +34,7 @@ We currently do not offer any means to contacting us, thank you for your underst
 <img src="images/jonyxzx.png" width="200px">
 
 [[github](http://github.com/jonyxzx)]
-[[portfolio](team/jonyxzx.md)_]_
+[[portfolio](team/jonyxzx.md)]
 
 * Role: Developer
 * Responsibilities: Improve find feature
