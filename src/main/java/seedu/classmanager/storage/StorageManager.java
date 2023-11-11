@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Refactored from AddressBook-Level 3 (https://github.com/se-edu/addressbook-level3)
+// Not supposed to own code in file.
 package seedu.classmanager.storage;
 
 import java.io.IOException;
@@ -76,3 +79,4 @@ public class StorageManager implements Storage {
     }
 
 }
+//@@author
