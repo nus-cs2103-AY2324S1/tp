@@ -189,5 +189,4 @@ public class DeckParserTest {
         assertThrows(ParseException.class,
                 Messages.MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
-
 }
