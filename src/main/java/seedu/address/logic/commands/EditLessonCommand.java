@@ -50,6 +50,12 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
     public String getUsageInfo() {
         return EditLessonCommandParser.getUsageInfo();
     }
+
+    @Override
+    String getClashType(Lesson edited, Lesson clashWith) {
+        return edited.getName().equals(clashWith.getName()) ? "Name" : "Time";
+    }
+
     public Lesson getEditDescriptor() {
         return editDescriptor;
     }

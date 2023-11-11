@@ -288,7 +288,7 @@ The lesson index provided is invalid
 
 Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
 [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
-* A new student cannot have the same name as existing students in the contact list.
+* A new student cannot have the same name (case-insensitive) as existing students in the contact list.
 * A student can have any number of unique tags (including 0)
 * Duplicate phone numbers are allowed, since it is possible for 2 children to use their parent's number.
 * Refer to the parameter constraints [here](#parameter-summary).
@@ -549,93 +549,117 @@ Please use show lessonIndex before deleting task!
 
 ### Editing of entries (Students, Lessons)
 
-About the feature (generally that is similar across states)
-
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless> 
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
+Edits the specified item in the student/schedule list of the application.
 
 #### For student list:
-<!-- use -subject SUBJECT for student -->
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
+Format: `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
+[-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
+* Edits the student at the specified `INDEX` if it is provided, otherwise edits the currently/lastly shown student.
+* The name of the student after editing cannot be the same (case-insensitive) as other existing students in the contact list.
+* You must specify at least one field to edit.
+* Refer to the parameter constraints [here](#parameter-summary).
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
-
+- If you are currently in ___STUDENTS list___, the command can be shortened to `edit`.
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `editPerson 1 -name John`
+* To edit the currently shown student in ___STUDENTS list___:
+   * `edit -phone 91234567 -tag jc,express` 
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `editPerson 1 -name new name -phone 91234567 -tag jc,express`
 ```
-This block of code is for success outputs
+Edit success.
+ from: Bernice Yu; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Subjects: MATHEMATICSENGLISH; Tags: [colleagues][friends]; Remark: sn
+ to: new name; Phone: 91234567; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Subjects: MATHEMATICSENGLISH; Tags: [jc][express]; Remark: sn
 ```
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `editPerson 1`
+  * Error: No field to edit given. Need to enter at least one field to edit.
 ```
-Invalid command with the error message here
+No edit detected. Please edit at least one field: name, phone, email, address, subjects, remark, tags to different value.
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `editPerson 1 -name David Li` (assuming there is already another student named David Li)
+  * Error: The name of the student after editing cannot be the same as other existing students in the contact list.
 ```
-Invalid command with the error message here
+Clash detected.
+Edited: David Li; Phone: 91234567; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Subjects: MATHEMATICSENGLISH; Tags: [jc][express]; Remark: sn
+Clashes with: David Li; Phone: 91031282; Email: lidavid@example.com; Address: Blk 436 Serangoon Gardens Street 26, #16-43; Subjects: BIOLOGY; Tags: [family]; Remark: .
+```
+* Input: `editPerson -phone 91234567 -tag jc,express` (assuming no student is currently shown)
+  * Error: Duplicate tags detected. Please remove duplicate tags.
+```
+Using edit command without specifying index when no entry is shown. 
+Usage: edit [INDEX] (at least one of unique [-name|phone|email|address|subject|tag|remark VALUE]). 
+For example, edit 1 -name John -phone 91234567
+If you want to edit the currently shown person, you could omit the index. 
+Note your edited 'name' must not already in the address book.
 ```
 
 #### For schedule list:
 <!-- use "-subject SUBJECTS" for lesson -->
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
+Format: `editLesson [INDEX] [-name NAME] [-start TIME] [-end TIME] [-day DATE] [-subject SUBJECT]` (for list specific format)
+* Edits the lesson at the specified `INDEX` if it is provided, otherwise edits the currently/lastly shown lesson.
+* You must specify at least one field to edit.
+* The name of the lesson after editing cannot be the same (case-insensitive) as other existing lessons in the schedule list.
+* The start time of the lesson after editing cannot be after the end time of the lesson, if the end time is specified, and vice versa.
+* The lesson cannot clash (same day, start and end all specified and are overlapping) in time with other lessons  in the schedule list.
+* Please note that unlike the `addLesson` command, the `editLesson` command's "-subject" flag only accepts one subject, not multiple subjects (parameter is SUBJECT, not SUBJECTS).
+* Refer to the parameter constraints [here](#parameter-summary).
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- If you are currently in ___SCHEDULE list___, the command can be shortened to `edit`.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `editLesson 1 -start 12:35 -end 14:35 -day 2023/11/21 -subject English`
+* To edit the currently shown lesson in ___SCHEDULE list___:
+   * `edit -start 12:30 -end 14:30 -day 2023/11/20 -subject English`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `editLesson 1 -start 12:35 -end 14:35 -subject English`
 ```
-This block of code is for success outputs
+Edit success.
+from: Lesson lesson1 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEMATICS
+to: Lesson lesson1 from 12:35 PM to 2:35 PM on 20-11-2023 for ENGLISH
 ```
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `editLesson 1`
+  * Error: No field to edit given. Need to enter at least one field to edit.
 ```
-Invalid command with the error message here
+No edit detected. Please edit at least one field: name, start, end, subject, day to different value.
+```
+Failure outputs:
+* Input: `editLesson -name a new name` (assuming no lesson is currently shown)
+  * Error: No lesson shown. Show a lesson with the `show` command.
+```
+Using edit command without specifying index when no entry is shown. 
+Usage: edit [INDEX] (at least one of unique [-name|subject|day|start|end VALUE]). 
+For example, edit 1 -name lesson2 -subject English -day 23/12 -start 14:30 -end 16:30
+If you want to edit the currently shown lesson, you could omit the index. 
+Note your edited 'name' must not already in the schedule and 'start' must be before 'end'.
+```
+Failure outputs:
+* Input: `editLesson 1 -start 12:35 -end 14:35 -day 2023/11/21` (assuming there is already another lesson with clashing time)
+  * Error: The lesson cannot clash (same day, start and end all specified and are overlapping) in time with other lessons  in the schedule list.
+```
+Time clash detected.
+Edited: Lesson lesson1 from 12:35 PM to 2:35 PM on 21-11-2023 for ENGLISH
+Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `editLesson 1 -name lesson2` (assuming there is already another lesson named lesson2)
+  * Error: The name of the lesson after editing cannot be the same as other existing lessons in the schedule list.
 ```
-Invalid command with the error message here
+Name clash detected.
+Edited: Lesson lesson2 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEMATICS
+Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
 ```
 
 #### For task list:
