@@ -30,28 +30,6 @@ public class SortCommandParser implements Parser<SortCommand> {
         if (!isValidArgMultimap(argMultimap)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
-
-        /*
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        }
-
-        String[] splitArgs = trimmedArgs.split("\\s+");
-        if (splitArgs.length > 1) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        }
-
-        String specifier = splitArgs[0];
-        if (!(FieldComparator.isValidPrefix(specifier))) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_INVALID_SPECIFIER));
-        }
-
-        return new SortCommand(new FieldComparator(new Prefix(specifier)));
-        */
         return new SortCommand(new FieldComparator(getPrefix(argMultimap)));
     }
 
