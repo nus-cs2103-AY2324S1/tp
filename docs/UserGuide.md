@@ -441,6 +441,11 @@ Below are some examples on how to use the commands:
 
 </box>
 
+<box theme="primary" icon=":fa-solid-lightbulb:">
+
+The notes window will automatically update when you add or remove notes, so you can keep it open and see your changes. You may also open multiple notes windows at once, for the same or different contacts.
+</box>
+
 ## Notifications
 
 For our forgetful users, CampusConnect provides a useful Notification System!

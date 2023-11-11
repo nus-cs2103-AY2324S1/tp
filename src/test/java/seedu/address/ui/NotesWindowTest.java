@@ -57,6 +57,43 @@ public class NotesWindowTest extends ApplicationTest {
     }
 
     @Test
+    public void displayNotes_noteAddedToPerson_displaysExpectedNotes() {
+        interact(() -> {
+            List<Note> expectedNotes = Arrays.asList(
+                new Note("Likes to swim"),
+                new Note("Likes to run"),
+                new Note("Is a chad"),
+                new Note("Is a chad2")
+            );
+            Note noteToAdd = new Note("Is a chad2");
+            testPerson.addNote(noteToAdd);
+            verifyThat("#notesListView", hasItems(4));
+            ObservableList<Note> actualNotes = notesWindow.getNotesListView().getItems();
+            assertTrue(actualNotes.containsAll(expectedNotes));
+
+            testPerson.removeNote(3);
+        });
+    }
+
+    @Test
+    public void displayNotes_noteRemovedFromPerson_displaysExpectedNotes() {
+        interact(() -> {
+            List<Note> expectedNotes = Arrays.asList(
+                new Note("Likes to swim"),
+                new Note("Likes to run")
+            );
+            testPerson.removeNote(2);
+            verifyThat("#notesListView", hasItems(2));
+            ObservableList<Note> actualNotes = notesWindow.getNotesListView().getItems();
+            assertTrue(actualNotes.containsAll(expectedNotes));
+
+            testPerson.addNote(
+                new Note("Is a chad")
+            );
+        });
+    }
+
+    @Test
     public void isShowing_afterShow_returnsTrue() {
         assertTrue(notesWindow.isShowing());
     }
