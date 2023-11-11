@@ -33,16 +33,16 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 1. Ensure you have Java 11 or above installed in your Computer. You can check by opening a command terminal and typing `java -version`.
 
-1. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases).
+2. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TutorMate.
+3. Copy the file to the folder you want to use as the _home folder_ for your TutorMate.
 
-1. Open a command terminal, navigate into the folder you put the jar file in using the change directory command `cd`, and use the `java -jar tutormate.jar` command to run the application.<br>
+4. Open a command terminal, navigate into the home folder using the change directory command `cd`, and use the `java -jar tutormate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/about.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list students` : Lists all students with their name.
@@ -55,9 +55,9 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
-2. Refer to the [Command Summary](#command-summary) below for the summary of all commands.
-2. Refer to the [Glossary](#glossary) below for definitions of glossary terms.
+6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Command Summary](#command-summary) below for the summary of all commands.
+8. Refer to the [Glossary](#glossary) below for definitions of glossary terms.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -103,7 +103,6 @@ This box denotes command outputs.
   e.g. `linkTo` is the same as `linkto` or `LiNkTo`.
 * When applicable, extraneous parameters and flags for commands will be ignored .<br>
   e.g. if the command entered is `add info -name new name -notValid flagBody -subject physics`, it will be interpreted as `add -name new name -subject physics`. "info " and "-notValid flagBody" will be ignored. <br>
-  e.g. if the command entered is `delete 3 extra`, it will be interpreted as `delete 3`.<br>
   e.g. However, `delete extra 3` will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
 </box>
 
@@ -299,6 +298,8 @@ The lesson index provided is invalid
 
 ### Add Feature
 
+Adds a student/lesson/task to the students/schedule list of the application or the task list of a lesson in the application.
+
 #### For Student:
 
 Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
@@ -318,7 +319,7 @@ Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADD
 Example usages:
 * `addPerson -name John`
 * `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
-* In `STUDENTS` list :
+* In ___STUDENTS list___ :
     * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
 
 Success outputs:
@@ -344,78 +345,90 @@ Note you must provide a 'name' not already in the address book.
 
 
 #### For Schedule:
-<!-- use "SUBJECT" as parameter for lesson -->
-Format: `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]` (for list specific format)
-* Format info 1
-* Format info 2
+
+Format: `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`
+* A new lesson cannot have the same name as existing students in the contact list.
+* Start time cannot be after end time.
+* Users can choose to specify the start or end time of a lesson only.
+* Refer to the parameter constraints [here](#parameter-summary).
+
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+If the user is currently in ___SCHEDULE list___, the command can be shortened to `add`.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `addLesson -name Chemistry Lesson at Bishan`
+* `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`
+* In ___SCHEDULE list___ :
+  * `add -name Lesson at Yishun -day 21 -subject MATHEMATICS`
+
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `addLesson -name Chemistry Lesson at Bishan`
 ```
-This block of code is for success outputs
+New lesson added: Lesson Chemistry Lesson at Bishan
 ```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`
 ```
-Invalid command with the error message here
+New lesson added: Lesson Lesson at Tai Seng from 9:00 AM to 11:00 AM on 21-03-2023 for PHYSICS
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+
+Failure outputs:
+* Input: `addLesson -name Chemistry Lesson` followed by `addLesson -name Chemistry Lesson -day 2023/12/12`
+  * Error: A new lesson cannot have the same name as an existing lesson. Enter another name for the new lesson.
 ```
-Invalid command with the error message here
+Lesson with this name already exists in the schedule
 ```
+
+* Input: `addLesson -name English Lesson -start 13:00 -end 10:00`
+  * Error: The start time specified for a lesson cannot be after its end time. Enter a start time that is before the end time.
+```
+Invalid lesson input: End time: 10:00 AM cannot be before start time: 1:00 PM.. 
+Usage: addLesson -name NAME (any number of unique [-subject|day|start|end VALUE]). 
+ For example, addLesson -name John -subject English -day 23 -start 14:30 -end 16:30
+ If you are currently displaying schedule list, you could use 'add' inplace of 'addLesson'. 
+ Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.
+```
+
 
 #### For Task:
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+Format: `addTask [INDEX] DESCRIPTION` 
+* Adds the task to the lesson at specified `INDEX` of the displayed ___SCHEDULE list___ or to the shown lesson (if `INDEX` is omitted).
+* A new task cannot have the same description as existing tasks in the task list of that specific lesson.
+* Refer to the parameter constraints [here](#parameter-summary).
 
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `addTask 1 Make Forces Notes`
+* With a lesson shown:
+  * `addTask Mark MYE Practice Paper`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `addTask 1 Make Forces Notes`
 ```
-This block of code is for success outputs
+New task added to lesson with index 1: Make Forces Notes
 ```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `addTask Mark MYE Practice Paper`
 ```
-Invalid command with the error message here
+New task added to current lesson: Mark MYE Practice Paper
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+Failure outputs:
+* Input: `addTask`
+  * Error: No lesson index specified and no lesson shown. Missing description. <br>
+    Use the `show` command or add the lesson index you want to add tasks to after `addTask`. Add description of the task at the end of the command.
 ```
-Invalid command with the error message here
+Invalid description: Tasks can take any values, and it should not be blank
+Usage: addTask/task + [lesson index] [description]. You could omit the lesson index when adding task to showing lesson.
+Example1: addtask 1 do homework
 ```
+
 
 
 <br>
@@ -1189,7 +1202,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 **A**: Copy TutorMate's jar file into the folder you want to use as the home folder in the other computer. Before running the application, copy _addressbook.json_, _personLessonMap.json_ and _schedulelist.json_ files from the home folder in your current computer into the home folder of the other computer. After copying the 3 files, running the application will show the same data. However, do note that the changes made through the application in one computer will not be reflected in the data in another computer.
 
 **Q**: Can I edit the data in the application through the _addressbook.json, personLessonMap.json, schedulelist.json_ files directly? <br>
-**A**: It is possible. However, it is not advisable for you to do so as if the changes made to the data file makes its format invalid, TutorMate will discard all data and start with an empty data file at the next run. Please use the `edit` command to make changes to your data instead.
+**A**: It is possible. However, it is not advisable for you to do so as if the changes made to the data file makes its format invalid, TutorMate will discard all data. Please use the `edit` command to make changes to your data instead. If you insist on directly modifying data files, please read this section [here](#editing-the-data-file) before doing so.
 
 **Q**: Can I still use the application without internet connection? <br>
 **A**: Yes, you can. TutorMate is an offline desktop application. The only exception is the "help" command which provides a URL to the user guide.
