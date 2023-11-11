@@ -11,6 +11,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
 end box
 
 [-> LogicManager : execute("rev")
@@ -36,6 +37,13 @@ activate Model
 
 Model --> RevenueCommand
 deactivate Model
+
+loop number of tutees
+RevenueCommand -> Person : getMonthlyRevenue()
+activate Person
+Person --> RevenueCommand : lessonRevenue
+deactivate Person
+end
 
 create CommandResult
 RevenueCommand -> CommandResult
