@@ -34,16 +34,17 @@ public class FindCommand extends Command {
     @Override @SuppressWarnings("unchecked")
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.resetAllShowFields();
         switch (model.getState()) {
         case STUDENT:
             predicate = new NameContainsKeywordsPredicate(trimmedArgs);
             model.updateFilteredPersonList(predicate);
+            model.showPerson(null);
             return new CommandResult(
                     String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
         case SCHEDULE:
             predicate = new LessonContainsKeywordsPredicate(trimmedArgs);
             model.updateFilteredScheduleList(predicate);
+            model.showLesson(null);
             return new CommandResult(
                     String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, model.getFilteredScheduleList().size()));
         default:

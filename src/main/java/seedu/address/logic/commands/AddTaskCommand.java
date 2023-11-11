@@ -56,7 +56,6 @@ public class AddTaskCommand extends Command {
             throw new CommandException(String.format(NO_INDEX, this.index));
         }
         model.addTask(task, lessonIndex);
-        model.resetAllShowFields();
         model.showLesson(model.getFilteredScheduleList().get(lessonIndex));
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.index, task.toString()));
     }
@@ -80,7 +79,6 @@ public class AddTaskCommand extends Command {
         Lesson editedLesson = lesson.clone();
         editedLesson.addToTaskList(task);
         model.setLesson(lesson, editedLesson);
-        model.resetAllShowFields();
         model.showLesson(editedLesson);
         return new CommandResult(String.format(TASK_ADDED_TO_CURRENT_LESSON, task.toString()));
     }
