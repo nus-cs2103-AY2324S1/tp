@@ -36,7 +36,7 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Command Format
 
 <div markdown="block" class="alert alert-info">
 
@@ -61,35 +61,31 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
 </div>
 
 <span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
-### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
-
-Format: `help`
-
-![help message](images/helpMessage.png)
+## Teaching Assistant Commands
 
 ### Adding a Teaching Assistant: `add`
 
 You can add a new teaching assistant to TAManager.
 
-Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR`
+Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM h/HOUR [t/TAG]... [c/COURSE_CODE]...`
 
 - `NAME` should be a string.
 - `PHONE` should be a 3-10 digits integer.
 - `EMAIL` should contain "@".
 - `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
+- `HOUR` should be an integer.
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
-- `HOUR` should be an integer.
 
 Example:
-`add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx t/parttime c/CS2103T h/4` will add a new teaching assistant named Rayner Toh to TAManager.
+`add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx h/4 t/parttime c/CS2103T` will add a new teaching assistant named Rayner Toh to TAManager.
 
 ![add TA](images/addTA.png)
 
-When the command succeeds:
-
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+<div markdown="block" class="code">
 ```
 New teaching assistant added: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertjx; 
 Free Time:  Tags: [parttime]; 
@@ -98,38 +94,40 @@ Name: Software Engineering
 Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
 Work Hour: 4
 ```
+</div>
+</div>
 
-When the command fails:
-
+<div markdown="block" class="alert alert-danger">
+:x: When the command fails:
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- Invalid telegram handle: `Telegram handle should be between 5-32 characters and start with @, and it cannot contain any special characters except underscore.`
-- Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
-and optionally end with an alphabet.`
-- Invalid free time: `TA's free time should have a start and end time in HH:mm format`
-- Invalid work hour: `Hour should only be positive integers and should be less than 9999`
+- Invalid parameter: The corresponding error message will be displayed.<br/>
+e.g. Invalid Telegram handle: `Telegram handle should be between 5-32 characters and should start with @, and it cannot contain any special characters except underscore.`
+</div>
 
 ### Editing a Teaching Assistant: `edit`
 
 You can change the details of a teaching assistant in TAManager.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [t/TAG]... [c/COURSE_CODE]... [h/HOUR]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [h/HOUR] [t/TAG]... [c/COURSE_CODE]...`
 
 -  At least one field to edit must be provided.
 - `NAME` should be a string.
 - `PHONE` should be a 3-10 digits integer.
 - `EMAIL` should contain "@".
 - `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
+- `HOUR` should be an integer.
 - `TAG` should be an alphanumeric string without spaces.
 - `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
-- `HOUR` should be an integer.
 
 Example: `edit INDEX tele/@raynertohjingxiang`
 
 ![edit TA](images/editTA.png)
 
 
-When the command succeeds:
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+<div markdown="block" class="code">
 
 ```
 Edited Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang; 
@@ -145,16 +143,16 @@ Name: Software Engineering
 Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
 Work Hour: 4
 ```
+</div>
+</div>
 
-When the command fails:
-
+<div markdown="block" class="alert alert-danger">
+:x: When the command fails:
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- Invalid telegram handle: `Telegram handle should be between 5-32 characters and should start with @, and it cannot contain any special characters except underscore.`
-- Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
-  and optionally end with an alphabet.`
-- Invalid free time: `TA's free time should have a start and end time in HH:mm format`
-- Invalid work hour: `Hour should only be positive integers and should be less than 9999`
+- Invalid parameter: The corresponding error message will be displayed.<br/>
+e.g. Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits, and optionally end with an alphabet.`
+</div>
 
 ### Removing a Teaching Assistant: `delete`
 
@@ -173,8 +171,9 @@ Examples:
 
 ![remove TA](images/deleteTA.png)
 
-When the command succeeds:
-
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+<div markdown="block" class="code">
 ```
 Deleted Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang; 
 Free Time: 
@@ -189,13 +188,14 @@ Name: Software Engineering
 Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
 Work Hour: 4
 ```
+</div>
+</div>
 
-When the command fails:
-
+<div markdown="block" class="alert alert-danger">
+:x: When the command fails:
 - Incorrect format (missing index or index is not a positive integer): `Invalid command format!`
-- Index does not correspond to a TA: For example, there are only 5 TAs but the user tried to delete a TA at index 6
-
-  `The person index provided is invalid`
+- Index does not correspond to a TA (there are only 5 TAs but the user tried to delete a TA at index): `The person index provided is invalid`
+</div>
 
 ### Finding a Teaching Assistant: `find`
 
@@ -225,16 +225,21 @@ Examples:
 
 ![find TA](images/findTA.png)
 
-When the command succeeds:
-
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+<div markdown="block" class="code">
 ```
 Filters applied: [filters applied by the user]
 [number of TAs found] persons listed!
 ```
+</div>
+</div>
 
-When the command fails:
+<div markdown="block" class="alert alert-danger">
+:x: When the command fails:
 
 - Incorrect format (missing prefix or parameter): `Invalid command format!`
+</div>
 
 ### Viewing Teaching Assistants: `list`
 
@@ -244,12 +249,16 @@ Format: `list`
 
 ![list TA](images/listTA.png)
 
-When the command succeeds:
 
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+<div markdown="block" class="code">
 ```
 Listed all teaching assistants
 [list of TAs]
 ```
+</div>
+</div>
 
 ### Updating Hours for All TAs in View: `hour`
 
@@ -269,15 +278,20 @@ Examples:
 
 ![update Hour](images/addHours.png)
 
-When the command succeeds:
-
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+<div markdown="block" class="code">
 ```
 Hour updated to all TAs identified!
 ```
+</div>
+</div>
 
-When the command fails:
+<div markdown="block" class="alert alert-danger">
+:x: When the command fails:
 
 - Invalid command format (updated new hour is invalid, either below 0 or above 9999): `Invalid command format!`
+</div>
 
 ### Edit free time for a teaching assistant: `editft`
 
@@ -295,16 +309,23 @@ Examples:
 
 ![update Hour](images/editFreeTime.png)
 
-When the command succeeds:
-
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+<div markdown="block" class="code">
 ```
 Edited Teaching Assistant: [Details of TA specified]
 ```
+</div>
+</div>
 
-When the command fails:
+<div markdown="block" class="alert alert-danger">
+:x: When the command fails:
 
 - Incorrect format (missing prefix or parameter, or `DAY` out of range, or invalid `FROM` or `TO` format): `Invalid command format!`
 - Index out of range: `The person index provided is invalid`
+</div>
+
+## Course Commands
 
 ### Viewing course information : `course`
 
@@ -316,13 +337,17 @@ Example: `course c/CS2103T` returns the course information and tutorial timings 
 
 ![view course](images/viewCourse.png)
 
-When the command succeeds:
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+<div markdown="block" class="code">
 ```
 Course: CS2103T Software Engineering
 CS2103T Lecture 10:00-12:00
 CS2103T Tutorial 10:00-12:00
 CS2103T Laboratory 10:00-12:00
 ```
+</div>
+</div>
 
 ### Adding a default course : `teach`
 
@@ -343,15 +368,20 @@ Example: `teach c/CS2103T` sets the default course to the course CS2103T.
 
 ![teach command](images/teachCourse.png)
 
-When the command succeeds:
-
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+<div markdown="block" class="code">
 ```CS2103T is successfully added as default course.```
+</div>
+</div>
 
-When the command fails:
+<div markdown="block" class="alert alert-danger">
+:x: When the command fails:
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
   and optionally end with an alphabet.`
 - Valid course code, but course not found: `Course not found.`
+</div>
 
 ### Reset the default course : `clearteach`
 
@@ -365,9 +395,22 @@ Example: `clearteach`
 
 ![clearteach command](images/clearTeach.png)
 
-When the command succeeds:
-
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+<div markdown="block" class="code">
 ```Default course has been cleared!```
+</div>
+</div>
+
+## Utility Commands
+
+### Viewing help : `help`
+
+Shows you the link to access the user guide if you need it.
+
+Format: `help`
+
+![help message](images/helpMessage.png)
 
 ### Clearing all entries : `clear`
 
@@ -381,11 +424,11 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
+## Saving the data
 
 TAManager data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+## Editing the data file
 
 TAManager data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 <span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
@@ -403,13 +446,8 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
---------------------------------------------------------------------------------------------------------------------
-
 ## Command summary
+Commands are arranged in alphabetical order for your easy reference.
 
 | Action                                                        | Format, Examples                                                                                                                                                                                           |
 |---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
