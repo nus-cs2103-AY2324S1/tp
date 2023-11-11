@@ -150,7 +150,7 @@ If your changes to the data file make its format invalid, **Class Manager 2023**
 
 ## Essential commands
 
-### Configure **Class Manager 2023** : `config`
+### Configure Class Manager 2023 : `config`
 
 <box type="warning" seamless>
 
@@ -164,12 +164,23 @@ Before you begin using **Class Manager 2023**, it is recommended that you config
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
 * `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` must be a positive integer between 1 and 40 inclusive.
-* Inputting the same `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` as the previous configuration will also **reset** the class information of all students.
+* Inputting the same `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` as the previous configuration will also **reset** the class information of all students.
 * `config` resets the state history of **Class Manager 2023**, preventing you from using the `undo` command to reach a state before the `config` command was executed.
 
 Examples:
 * `config #t/13 #a/1`
-* `config #a/4 #t/39`
+
+Before `config` is executed:
+
+<img alt="config before" src="images/config-before.png" width="700">
+
+After `config` is executed successfully and `view s/A0247243A` is executed to view the first student's class information:
+
+<img alt="config success" src="images/config-success.png" width="700">
+
+If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is missing:
+
+<img alt="config error" src="images/config-error.png" width="500">
 
 ---
 
@@ -177,15 +188,17 @@ Examples:
 
 Opens the help window that shows a summary of all commands and its parameters, with a `Copy URL` button that provides access to this help page.
 
-<img alt="help message" src="images/helpMessage.png" width="900">
-
 Format: `help`
+
+After `help` is executed successfully:
+
+<img alt="help message" src="images/helpMessage.png" width="900">
 
 ---
 
 ## Miscellaneous commands
 
-### Exit **Class Manager 2023** : `exit`
+### Exit Class Manager 2023 : `exit`
 
 Exits **Class Manager 2023** immediately.
 
@@ -195,9 +208,11 @@ Format: `exit`
 
 ### View command history : `history`
 
-Shows a list of all previously entered inputs in the result display box, with the most recent inputs at the top of the list.
+Shows a list of all previously entered inputs, with the most recent inputs at the top of the list.
 
 Format: `history`
+
+After `history` is executed successfully: Result display box shows `Entered commands (from most recent to earliest):` and lists all previously entered inputs.
 
 ---
 
@@ -215,14 +230,19 @@ Format: `load f/FILE_NAME`
 Example:
 * `load f/sample` loads `sample.json` file in the `/data` folder.
 
-Successful outcome:
+Before `load` is executed:
 
-<img alt="load_outcome" src="images/load-outcome.png" width="750"> <br><br>
+<img alt="load before" src="images/theme-light.png" width="700"> <br><br>
 
-Possible error outcomes:
-* `File not found!` - The file name entered does not exist in the `/data` folder.
-* `Invalid file format!` - The file name entered is not a valid JSON file.
-* 
+After `load` is executed successfully:
+
+<img alt="load success" src="images/load-outcome.png" width="750"> <br><br>
+
+Possible errors:
+* If file does not exist in the `/data` folder
+  * The file `FILE_NAME.json` cannot be found. Please make sure the file is in the /data folder.
+* The file name entered is not a valid JSON file, or the tutorial and assignment count does not match the current configuration of **Class Manager 2023**
+  * The file `FILE_NAME.json` cannot be loaded. Please make sure the file is formatted correctly.
 
 ---
 
