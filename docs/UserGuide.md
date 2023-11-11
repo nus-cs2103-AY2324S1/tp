@@ -366,7 +366,8 @@ _List all flashcards with the CS2100 Tag._
     ⚠️ To Note:<br>
 
 1. Any extraneous parameters not `q/` and `t/` will be ignored, i.e. `list 12345` or `list a/000000` will be regarded as `list`.<br>
-2. Listing questions with markdown syntax should include their relevant markdown notation, i.e. `list q/**What**` for questions starting with **What**.
+2. Listing questions with markdown syntax should include their relevant markdown notation, i.e. `list q/**What**` for questions starting with **What**.<br>
+3. Newly added cards may not appear if they do not match the current filter.
 </div>
 
 <div markdown="span" class="alert alert-success">
