@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -229,10 +228,6 @@ public class BiDirectionalMapTest {
 
         BiDirectionalMap<Person, Lesson> readBack2 = BiDirectionalMap.readFrom(filePath);
         assertEquals(readBack2, readBack);
-
-
-        // cleanup
-
 
     }
 
