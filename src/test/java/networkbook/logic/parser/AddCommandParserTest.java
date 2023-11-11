@@ -126,7 +126,8 @@ public class AddCommandParserTest {
                 + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
                 + CommandTestUtil.GRADUATION_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
                 + CommandTestUtil.SPECIALISATION_DESC_AMY
-                + CommandTestUtil.TAG_DESC_FRIEND;
+                + CommandTestUtil.TAG_DESC_FRIEND
+                + CommandTestUtil.PRIORITY_DESC_AMY;
 
         AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
@@ -136,6 +137,7 @@ public class AddCommandParserTest {
                 .withCourse(CommandTestUtil.VALID_COURSE_AMY)
                 .withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY)
                 .withTags(CommandTestUtil.VALID_TAG_HUSBAND, CommandTestUtil.VALID_TAG_FRIEND)
+                .withPriority(CommandTestUtil.VALID_PRIORITY_AMY)
                 .build();
         AddCommand expectedCommand = new AddCommand(targetIndex, descriptor);
 
