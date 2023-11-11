@@ -264,9 +264,7 @@ A GUI similar to the one below will be shown after entering the command if the e
 The hours and remarks for each member is reflected here.
 ![viewEvent](images/viewEvent.png)
 
-<hr class="feature-class-separator">
-
-### Utility commands
+<hr class="command-separator">
 
 #### Find Member in member list : `findMember`
 
@@ -296,7 +294,9 @@ Examples:
 * `findEvent party` displays the event(s) which name(s) contain 'party'
 * `findEvent party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
 
-<hr class="command-separator">
+<hr class="feature-class-separator">
+
+### Utility commands
 
 #### Undoing a command: `undo`
 
