@@ -422,7 +422,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use case: Install the app [UC01]
 
-MSS
+**MSS**
 1. User executes the installation package
 2. The app asks to continue or cancel the installation
 3. User responds by indicating continue
@@ -430,7 +430,7 @@ MSS
 5. The app informs the user that the installation is successful
 Use Case ends
 
-Extensions
+**Extensions**
 * 3a. User responds by indicating cancel
   * 3a1. The app closes the installation package
   * Use case ends
@@ -441,17 +441,17 @@ Extensions
 
 ### Use case: Add a student [UC02]
 
-Preconditions
+**Preconditions**
 1. User has installed the app
 
-MSS
+**MSS**
 1. User chooses to add a new student.
 2. User enters the required details to create a student.
 3. TutorMate creates the student.
 
 Use Case ends
 
-Extensions
+**Extensions**
 * 2a. Student's name is not specified and / or details specified are incorrect.
   * 2a1. The app informs the user of the error.
   * 2a2. The user enters new data.
