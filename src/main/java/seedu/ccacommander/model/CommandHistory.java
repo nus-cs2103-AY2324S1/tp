@@ -4,11 +4,17 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+
+import seedu.ccacommander.commons.core.LogsCenter;
 
 /**
- * The facilitator of storing commands and functions related to recalling previously entered commands.
+ * Solution below inspired by [Tutor's Pet](https://github.com/AY2021S1-CS2103T-T10-4/tp/)
+ *
+ * Facilitates storing of commands and functions related to recalling previously entered commands.
  */
 public class CommandHistory {
+    private final Logger logger = LogsCenter.getLogger(CommandHistory.class);
     private List<String> commandHistoryList;
     private int currentCommandPointer;
 
@@ -78,6 +84,9 @@ public class CommandHistory {
                 : "currentCommandPointer is at the newest command already";
         this.currentCommandPointer++;
         String nextCommand = this.commandHistoryList.get(this.currentCommandPointer);
+
+        logger.info("----------------[RECALLED NEXT COMMAND][" + nextCommand + "]");
+
         return nextCommand;
     }
 
@@ -89,8 +98,10 @@ public class CommandHistory {
         assert this.currentCommandPointer > 0
                 : "currentCommandPointer is at the oldest command already";
         this.currentCommandPointer--;
-        String command = this.commandHistoryList.get(this.currentCommandPointer);
-        return command;
+        String previousCommand = this.commandHistoryList.get(this.currentCommandPointer);
+
+        logger.info("----------------[RECALLED PREVIOUS COMMAND][" + previousCommand + "]");
+        return previousCommand;
     }
 
     /**
@@ -98,6 +109,7 @@ public class CommandHistory {
      * This will be used to move the pointer past the last command.
      */
     public void resetPointer() {
+        logger.info("----------------[COMMAND HISTORY RESET POINTER]");
         this.currentCommandPointer = this.commandHistoryList.size();
     }
 
