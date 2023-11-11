@@ -26,7 +26,7 @@ public class CommentCommand extends Command {
             + "Parameters: " + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER (must be an existing student number) "
             + PREFIX_COMMENT + "COMMENT\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + "A1234567M" + " "
-            + PREFIX_COMMENT + " Struggling with tutorials.";
+            + PREFIX_COMMENT + "Struggling with tutorials.";
 
     public static final String MESSAGE_COMMENT_SUCCESS = "Comment added successfully.";
 

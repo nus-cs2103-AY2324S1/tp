@@ -66,16 +66,18 @@ This user guide is your key to mastering **Class Manager 2023**, with step-by-st
 
 # GUI Overview
 
-The image below shows an annotated overview of **Class Manager 2023's** GUI:
+The blurred image below shows an annotated overview of **Class Manager 2023's** GUI:
 
-<img alt="Gui" src="images/GUI-overview.png" width="700"> </br>
+<img alt="Gui" src="images/GUI-overview-blur.png" width="700"> </br>
 
-The **GUI** is split up into 4 main sections.
+The **GUI** has 6 notable sections:
 
 1. **Command Box** - This is where you can type in commands to execute.
-2. **Result Display** - This is where the results of the commands and any errors will be displayed.
-3. **Student List** - This is where the list of students will be displayed.
-4. **Class Information** - This is where the class information of the selected student, such as attendance, class participation and assignment grades, will be displayed.
+2. **Result Display Box** - This is where the results of the commands and any errors will be displayed.
+3. **Data Visualisation** - This is where the average grades, attendance and class participation percentages of a student will be displayed.
+4. **View Panel** - This is where the class information of the selected student, such as attendance, class participation and assignment grades, will be displayed.
+5. **Student List** - This is where the current list of students will be displayed in card form.
+6. **Status Bar** - This is where the current file path of the loaded data file will be displayed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -123,6 +125,10 @@ Student Number refers to the unique matriculation number of a NUS student. In **
 
 **Class Manager 2023** uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
 
+## Data visualiation
+
+TODO: Ngee Yong to add details of what each bar graph shows (average grades, attendance and class participation percentages of a student).
+
 ## Command navigation
 
 **Class Manager 2023** allows you to navigate to previously entered commands using the arrow keys. Navigate to earlier commands using the **up arrow** key, and later commands using the **down arrow** key.
@@ -150,7 +156,7 @@ If your changes to the data file make its format invalid, **Class Manager 2023**
 
 ## Essential commands
 
-### Configure **Class Manager 2023** : `config`
+### Configure Class Manager 2023 : `config`
 
 <box type="warning" seamless>
 
@@ -164,12 +170,23 @@ Before you begin using **Class Manager 2023**, it is recommended that you config
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
 * `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` must be a positive integer between 1 and 40 inclusive.
-* Inputting the same `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` as the previous configuration will also **reset** the class information of all students.
+* Inputting the same `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` as the previous configuration will also **reset** the class information of all students.
 * `config` resets the state history of **Class Manager 2023**, preventing you from using the `undo` command to reach a state before the `config` command was executed.
 
 Examples:
 * `config #t/13 #a/1`
-* `config #a/4 #t/39`
+
+Before `config` is executed:
+
+<img alt="config before" src="images/config-before.png" width="700">
+
+After `config` is executed successfully and `view s/A0247243A` is executed to view the first student's class information:
+
+<img alt="config success" src="images/config-success.png" width="700">
+
+If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is missing:
+
+<img alt="config error" src="images/config-error.png" width="500">
 
 ---
 
@@ -177,15 +194,17 @@ Examples:
 
 Opens the help window that shows a summary of all commands and its parameters, with a `Copy URL` button that provides access to this help page.
 
-<img alt="help message" src="images/helpMessage.png" width="900">
-
 Format: `help`
+
+After `help` is executed successfully:
+
+<img alt="help message" src="images/helpMessage.png" width="900">
 
 ---
 
 ## Miscellaneous commands
 
-### Exit **Class Manager 2023** : `exit`
+### Exit Class Manager 2023 : `exit`
 
 Exits **Class Manager 2023** immediately.
 
@@ -195,9 +214,11 @@ Format: `exit`
 
 ### View command history : `history`
 
-Shows a list of all previously entered inputs in the result display box, with the most recent inputs at the top of the list.
+Shows a list of all previously entered inputs, with the most recent inputs at the top of the list.
 
 Format: `history`
+
+After `history` is executed successfully: Result display box shows `Entered commands (from most recent to earliest):` and lists all previously entered inputs.
 
 ---
 
@@ -215,14 +236,21 @@ Format: `load f/FILE_NAME`
 Example:
 * `load f/sample` loads `sample.json` file in the `/data` folder.
 
-Successful outcome:
+Before `load f/sample` is executed:
 
-<img alt="load_outcome" src="images/load-outcome.png" width="750"> <br><br>
+<img alt="load before" src="images/theme-light.png" width="700"> <br><br>
 
-Possible error outcomes:
-* `File not found!` - The file name entered does not exist in the `/data` folder.
-* `Invalid file format!` - The file name entered is not a valid JSON file.
-* 
+After `load f/sample` is executed successfully:
+
+<img alt="load success" src="images/load-outcome.png" width="750"> <br><br>
+
+The file path at the bottom left of the application is be updated to `.\data\sample.json`.
+
+Possible errors and their corresponding error messages:
+* If `sample.json` does not exist in the `/data` folder
+  * Error message: The file `sample.json` cannot be found. Please make sure the file is in the /data folder.
+* The file name entered is not a valid JSON file, or the tutorial and assignment count does not match the current configuration of **Class Manager 2023**
+  * Error message: The file `sample.json` cannot be loaded. Please make sure the file is formatted correctly.
 
 ---
 
@@ -240,36 +268,9 @@ Example:
 
 ---
 
-### Redo a command : `redo`
-
-Redo a previously undone command that modified the state of **Class Manager 2023**. Redo only works with commands that can be undone. **Class Manager 2023** only stores up to 10 modified states, which resets after a `load` or `config` command. Redo can be used multiple times to redo multiple undo commands, or until **Class Manager 2023** reaches its most recent state after a maximum of 9 redos.
-
-Format: `redo`
-
-Here is the list of commands that can be redone after they are undone (same list as undo):
-* `add`
-* `class-part`
-* `clear`
-* `comment`
-* `delete`
-* `edit`
-* `grade`
-* `present`
-* `absent`
-* `present-all`
-* `absent-all`
-* `tag`
-* `view`
-
-Displayed result if redo is successful: `Redo success!`
-
-Displayed result if there are no more commands to redo: `No more commands to redo!`
-
----
-
 ### Undo a command : `undo`
 
-Undo the previous command that modified the state of **Class Manager 2023**. Undo only works with commands that changes **Class Manager 2023**, and does not work with commands such as `load` and `config`. **Class Manager 2023** only stores up to 10 modified states, which resets after a `load` or `config` command. Undo can be used multiple times to undo multiple commands, or until **Class Manager 2023** reaches its last stored state after a maximum of 9 undos.
+Undo the previous command that modified the state of **Class Manager 2023**. Undo only works with the commands mentioned below that modifies the state of **Class Manager 2023**, and does not work with commands such as `load` and `config`. **Class Manager 2023** only stores up to 10 modified states, which **resets** after a `load` or `config` command. Undo can be used multiple times to undo multiple commands, or until **Class Manager 2023** reaches its last stored state after a maximum of 9 undos.
 
 Format: `undo`
 
@@ -291,6 +292,33 @@ Here is the list of commands that can be undone/redone:
 Displayed result if undo is successful: `Undo success!`
 
 Displayed result if there are no more commands to undo: `No more commands to undo!`
+
+---
+
+### Redo a command : `redo`
+
+Redo a previously undone command that modified the state of **Class Manager 2023**. Redo only works with commands that can be undone. **Class Manager 2023** only stores up to 10 modified states, which **resets** after a `load` or `config` command. Redo can be used multiple times to redo multiple undo commands, or until **Class Manager 2023** reaches its most recent state after a maximum of 9 redos.
+
+Format: `redo`
+
+Here is the list of commands that can be redone after they are undone (same list as undo):
+* `add`
+* `class-part`
+* `clear`
+* `comment`
+* `delete`
+* `edit`
+* `grade`
+* `present`
+* `absent`
+* `present-all`
+* `absent-all`
+* `tag`
+* `view`
+
+Displayed result if redo is successful: `Redo success!`
+
+Displayed result if there are no more commands to redo: `No more commands to redo!`
 
 ---
 
