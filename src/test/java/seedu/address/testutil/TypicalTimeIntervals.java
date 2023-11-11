@@ -101,6 +101,4 @@ public class TypicalTimeIntervals {
                 .withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(6, 00)).build(),
                     new TimeBuilder().withDayAndHour(DayOfWeek.FRIDAY, LocalTime.of(8, 00))
                         .build()).build();
-
-
 }

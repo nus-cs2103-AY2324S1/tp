@@ -1,31 +1,37 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_MON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_TUE;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
-import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TimeInterval;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.Assert.assertThrows;
-
 public class DeletePersonTimeCommandTest {
 
-    Person validPerson = new PersonBuilder().build();
+    public static final Person VALID_PERSON = new PersonBuilder().build();
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -34,14 +40,14 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personTimeIntervalDeletionSuccess() throws Exception {
-        ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
+        ModelStubWithPerson modelStub = new ModelStubWithPerson(VALID_PERSON);
 
 
         // Person has time interval to be deleted
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
         CommandResult commandResult =
-            new DeletePersonTimeCommand(validPerson.getName(), validTimeInterval).execute(modelStub);
+                new DeletePersonTimeCommand(VALID_PERSON.getName(), validTimeInterval).execute(modelStub);
 
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
@@ -49,11 +55,12 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personSingleTimeIntervalDeletionFail() throws Exception {
-        ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
+        ModelStubWithPerson modelStub = new ModelStubWithPerson(VALID_PERSON);
         // Person does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(validPerson.getName(), invalidTimeInterval);
+        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(VALID_PERSON.getName(),
+                invalidTimeInterval);
 
         failedCommand.execute(modelStub);
 
@@ -63,12 +70,13 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personMultipleTimeIntervalDeletionFail() throws Exception {
-        ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
+        ModelStubWithPerson modelStub = new ModelStubWithPerson(VALID_PERSON);
         // Person does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(validPerson.getName(), invalidTimeInterval);
+        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(VALID_PERSON.getName(),
+                invalidTimeInterval);
 
         failedCommand.execute(modelStub);
 
@@ -80,12 +88,12 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personMultipleTimeIntervalDeletionPass() throws Exception {
-        ModelStubPersonWithMultipleTimings modelStub = new ModelStubPersonWithMultipleTimings(validPerson);
+        ModelStubPersonWithMultipleTimings modelStub = new ModelStubPersonWithMultipleTimings(VALID_PERSON);
         // Person has all the time intervals
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(validPerson.getName(), validTimeInterval);
+        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(VALID_PERSON.getName(), validTimeInterval);
 
         failedCommand.execute(modelStub);
 
@@ -221,7 +229,7 @@ public class DeletePersonTimeCommandTest {
 
         @Override
         public String deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete)
-            throws CommandException {
+                throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
