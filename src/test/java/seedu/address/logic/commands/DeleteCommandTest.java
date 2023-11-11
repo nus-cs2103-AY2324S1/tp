@@ -40,8 +40,10 @@ public class DeleteCommandTest {
     @Test
     public void isValidIndex() throws CommandException {
         assertTrue(DeleteCommand.isValidIndex(0, 1));
-        assertThrows(CommandException.class, () -> DeleteCommand.isValidIndex(1, 1));
+        assertTrue(DeleteCommand.isValidIndex(0, 2));
         assertThrows(CommandException.class, () -> DeleteCommand.isValidIndex(-1, 1));
+        assertThrows(CommandException.class, () -> DeleteCommand.isValidIndex(1, -1));
+        assertThrows(CommandException.class, () -> DeleteCommand.isValidIndex(1, 1));
     }
 
     @Test
