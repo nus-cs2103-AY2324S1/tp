@@ -3,9 +3,6 @@ layout: default.md
 title: "Shishir Bychapur's Project Portfolio Page"
 ---
 
-<!-- Table of Contents -->
-<page-nav-print />
-
 # Shishir's Project Portfolio Page
 
 ## Project: LoveBook
@@ -70,13 +67,9 @@ My code contributions can be accessed using this [RepoSense Link](https://nus-cs
 
 #### **User Guide**
 - Updated documentation for add, edit, delete dates.
-- Added a command summary table for the documentation.
-- Added introduction section to the documentation.
-- Updated the quick start section.
-- Updated the FAQ section.
-- Updated the Glossary section.
-- Added the Common Symbols section.
-- Added the Navigating the GUI section.
+- Added introduction section, command summary table for the documentation.
+- Updated the Quick start, FAQ, Glossary sections.
+- Added the Common Symbols, Navigating the GUI section.
 
 #### **Developer Guide**
 - Updated the existing UML models to reflect the current state of the application.
@@ -85,15 +78,6 @@ My code contributions can be accessed using this [RepoSense Link](https://nus-cs
 
 ### **Community**
 * Reviewed PRs and gave constructive feedback to my teammates:
-  - [#247](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/247)
-  - [#246](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/246)
-  - [#245](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/245)
-  - [#225](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/225)
-  - [#149](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/149)
-  - [#131](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/131)
-  - [#123](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/123)
-  - [#119](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/119)
-  - [#101](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/101)
-  - [#100](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/100)
+  - [#247](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/247), [#246](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/246), [#245](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/245), [#225](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/225), [#149](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/149), [#131](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/131), [#123](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/123)
 * Posed queries in the forum to ensure PR's dont violate course guidelines.
   - [Query](https://github.com/nus-cs2103-AY2324S1/forum/issues/394)
