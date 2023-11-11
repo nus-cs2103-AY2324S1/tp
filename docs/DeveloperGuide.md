@@ -239,6 +239,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | infrequent user                 | view a "cheatsheet" or help dialog for the text commands                             | remember some basic commands I may have forgotten
 | `*`      | advanced user                   | search/filter by specific parts of contacts (e.g. containing certain words)          | narrow down contacts to exactly what I am looking for                           |
 | `*`      | user who prefers CLI            | switch between previously entered commands in history                                | easily repeat previous commands                                                 |
+| `*`      | busy user                       | use icons to denote certain contact information                                      | identify the information I want at a glance                                     |
 
 ### Use cases
 
