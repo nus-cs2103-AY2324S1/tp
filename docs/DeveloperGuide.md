@@ -720,3 +720,11 @@ still seems intuitive and reasonable to expect.
 
 3. DoConnek Pro currently checks for duplicate persons by name. This means that people with the same names cannot be added even if they have different parameters (like `Phone` or `Email`).
    We plan on implementing an `NRIC` field for patients and an `MCR` field for specialists as unique identifiers to solve this issue. 
+
+4. DoConnek Pro currently disallows the use of "/" in a person name because it is used as a command delimiter.
+Users may face problems due to this if they have to, for example, add a person with "s/o" in their name.
+Future updates to the application plan to account for such cases.
+
+5. DoConnek Pro is currently not intelligent enough to detect incorrect-but-close-enough flags. Users must enter the
+commands in the exact format specified in the user guide. For example, even if users input `tag/` instead of `t/`, DoConnek
+Pro will not accept this as a valid input format. In the future we plan to make DoConnek Pro more flexible in this regard.
