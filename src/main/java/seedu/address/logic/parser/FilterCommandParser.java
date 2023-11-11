@@ -95,7 +95,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
     }
     public String getFilterPersonUsageInfo() {
-        return "\nUsage: filter (at least one of unique [-name|subject|tag|remark VALUE]). "
+        return "\nUsage: filter (any number of unique -[name|subject|tag|remark] [value]). "
                 + "\nFor example, filter -name John -subject physics,english";
     }
     public String getFilterScheduleUsageInfo() {

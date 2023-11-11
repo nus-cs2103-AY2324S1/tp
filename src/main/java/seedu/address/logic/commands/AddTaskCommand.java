@@ -56,7 +56,6 @@ public class AddTaskCommand extends Command {
             throw new CommandException(String.format(NO_INDEX, this.index));
         }
         model.addTask(task, lessonIndex);
-        model.resetAllShowFields();
         model.showLesson(model.getFilteredScheduleList().get(lessonIndex));
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.index, task.toString()));
     }
@@ -80,7 +79,6 @@ public class AddTaskCommand extends Command {
         Lesson editedLesson = lesson.clone();
         editedLesson.addToTaskList(task);
         model.setLesson(lesson, editedLesson);
-        model.resetAllShowFields();
         model.showLesson(editedLesson);
         return new CommandResult(String.format(TASK_ADDED_TO_CURRENT_LESSON, task.toString()));
     }
@@ -98,7 +96,7 @@ public class AddTaskCommand extends Command {
         }
     }
     public static String getUsageInfo() {
-        return "\nUsage: addTask/task + [LESSON INDEX] DESCRIPTION. "
+        return "\nUsage: addTask/task + [lesson index] [description]. "
                 + "You could omit the lesson index when adding task to showing lesson."
                 + "\nExample1: " + COMMAND_WORD + " 1 do homework"
                 + "\nExample2 (a lesson is shown): " + COMMAND_WORD + " do homework"

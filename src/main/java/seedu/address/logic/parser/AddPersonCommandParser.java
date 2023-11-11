@@ -50,6 +50,7 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
         }
     }
     private static String getUsageInfo() {
+
         return "\nUsage: addPerson -name NAME (any number of unique "
                 + "[-phone|email|address|subject|tag|remark VALUE]). "
                 + "\nFor example, addPerson -name John -phone 91234567"
