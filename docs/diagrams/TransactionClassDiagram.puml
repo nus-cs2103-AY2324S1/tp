@@ -14,7 +14,8 @@ Class "<<enumeration>>\nTransactionType" as TransactionType {
     EXPENSE
 }
 Class Transaction {
-    transactionType
+    transactionType: TransactionType
+    personId: Integer
 }
 
 TransactionBook *-right-> "1" UniqueEntryMap_Transaction
@@ -26,6 +27,5 @@ Transaction *-left-> TransactionId
 Transaction *--> Description
 Transaction *--> Amount
 Transaction *--> Date
-Transaction *--> "0..1" Staff_ID
 
 @enduml
