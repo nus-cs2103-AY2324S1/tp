@@ -149,8 +149,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add feature
-The `AddCommand` extends the `Command` class. The command checks and prevents any duplicate `Person` object (i.e. same 
-name and phone number) as well as clashes in schedules. If it passes these checks, the person is added into the system.
+The `AddCommand` extends the `Command` class. While mostly similar to `delete` illustrated above, the command contains 
+checks to prevent any duplicate `Person` object (i.e. same name and phone number) as well as clashes in schedules. 
+If it passes these checks, the person is added into the system.
 
 The following sequence diagram shows how the add command works.
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
