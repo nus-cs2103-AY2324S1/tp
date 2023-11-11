@@ -607,6 +607,27 @@ help
    2. Popup window with link ot User Guide is generated.
       ![result of help command](./images/UserGuide/1.4_help.png)
 
+### Exiting lesSON: `exit`
+Exits and closes the lesSON application.
+
+#### Format:
+```
+exit
+```
+
+#### Example:
+_Closes lesSON._
+```
+exit
+```
+
+#### Expected outputs:
+1. User Input
+   ```
+   exit
+   ```
+2. Successful Output
+   1. lesSON closes.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Additional Features
