@@ -48,7 +48,14 @@ LogicManager -> DeleteLeaveCommand : execute()
 activate DeleteLeaveCommand
 
 DeleteLeaveCommand -> Model : setEmployee(targetEmployee, editedEmployee)
+activate Model
+
+Model --> DeleteLeaveCommand
+
 DeleteLeaveCommand -> Model : updateFilteredEmployeeList()
+
+Model --> DeleteLeaveCommand
+deactivate Model
 
 create CommandResult
 DeleteLeaveCommand -> CommandResult

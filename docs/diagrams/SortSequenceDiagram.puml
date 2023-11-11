@@ -60,13 +60,13 @@ activate AddressBook
 AddressBook -> UniqueEmployeeList : sortEmployeesAscending("salary");
 activate UniqueEmployeeList
 
-UniqueEmployeeList --> AddressBook : s
+UniqueEmployeeList --> AddressBook
 deactivate UniqueEmployeeList
 
-AddressBook --> Model : s
+AddressBook --> Model
 deactivate AddressBook
 
-Model --> SortCommand : s
+Model --> SortCommand
 deactivate Model
 
 create CommandResult
