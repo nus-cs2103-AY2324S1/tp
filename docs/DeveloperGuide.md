@@ -238,7 +238,7 @@ The diagram below illustrates our current implementation. A `Person` has is asso
 Alternative 2: Create a hashset of Appointments for each Person.
 - Pros:
   * More flexible, user can now schedule multiple appointment for a Person.
-  
+
 - Cons:
   * Harder to implement operations such as editing of an appointment for a client. An additional step of finding the
   specified appointment within the hashset is required, which may potentially introduce more bugs.
@@ -250,13 +250,13 @@ The **Complete** feature is facilitated by the `CompleteCommand` and `CompleteCo
 `CompleteCommandParser` creates a `CompleteCommand` associated with a `CompleteCommandDescriptor` which contains
 information on how the appointments should be completed.
 
-The following sequence diagram illustrates how the complete operation is executed when date given. 
+The following sequence diagram illustrates how the complete operation is executed when date given.
 
 <img src="images/CompleteSequenceDiagram.png" width="800"/>
 
 > :warn: The lifeline of the diagram should end at the destroyer mark (X) but reaches end of diagram due to limitation of plantUML
 
-The following activity diagram illustrates how the complete operation is executed. 
+The following activity diagram illustrates how the complete operation is executed.
 
 <img src="images/CompleteActivityDiagram.png" width="800"/>
 
@@ -294,7 +294,7 @@ in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmails
 
 The `UniquePersonsList` class maintains a list of unique persons. Additionally, it implements the following operation:
 * `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  This method iterates through the persons list
-and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
+and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person.
 
 Depending on the scenario, it triggers either `Person#gatherEmailsContainsTag(String prompt)` or
 `Person#gatherEmailsContainsFinancialPlan(String prompt)`:
@@ -337,7 +337,7 @@ _{more aspects and alternatives to be added}_
 
 ### Expanded Find feature
 
-The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure. 
+The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure.
 It extends the `find` command with the ability to search for multiple terms at once, implemented using an array
 of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `CombinedPredicate`.
 ![CombinedPredicateClassDiagram](images/CombinedPredicateClassDiagram.png)
