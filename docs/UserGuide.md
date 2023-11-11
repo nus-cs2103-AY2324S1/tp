@@ -5,6 +5,7 @@ title: User Guide
 
 Teaching Assistant Manager (TAManager) is a desktop application for managing teaching assistants, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAM can help you manage your teaching assistant tasks more efficiently than traditional GUI apps.
 
+## Table of Contents
 * Table of Contents
 {:toc}
 
@@ -59,6 +60,7 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -166,8 +168,8 @@ Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd teaching assistant in the address book.
-- `find n/Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the `find` command.
+- [`list`](#viewing-teaching-assistants-list) followed by `delete 2` deletes the 2nd teaching assistant in the address book.
+- `find n/Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the [`find`](#finding-a-teaching-assistant-find) command.
 
 ![remove TA](images/deleteTA.png)
 
@@ -256,7 +258,7 @@ Updates the hour field to all TAs in the current list.
 Format: `hour HOUR`
 
 - This command update ths hour field for all TAs in view, by adding the `HOUR` value to their current values. This `HOUR` value can be both negative and positive.
-- This command can be applied after the `find` command. e.g First type `find c/ CS2103T` will find all TAs with course
+- This command can be applied after the [`find`](#finding-a-teaching-assistant-find) command. e.g First type `find c/ CS2103T` will find all TAs with course
 `CS2103T`, then type `hour 6` will add 6 hours to all `CS2103T` TAs only, other TAs will not be updated.
 - The resulting working hour after updating should still be within range of 0-9999.
 
@@ -356,7 +358,7 @@ When the command fails:
 
 Resets the default course in the address book.
 
-This will revert the changes made by the `teach` command.
+This will revert the changes made by the [`teach`](#adding-a-default-course--teach) command.
 
 If no default course is set, the command will execute successfully but nothing will happen.
 
@@ -387,6 +389,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 ### Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
@@ -409,19 +412,20 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                                                           |
-|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`  |
-| **Clear**      | `clear`                                                                                                                                                                                                    |
-| **ClearTeach** | `clearteach`                                                                                                                                                                                               |
-| **Course**     | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`                                                                                                                                                       |
-| **Delete**     | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                         |
-| **Edit**       | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `edit n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10` |
-| **Editft**     | `editft INDEX d/DAY from/FROM to/FROM` <br> e.g. `editft 1 d/2 from/12:30 to/13:30`                                                                                                                        |
-| **Exit**       | `exit`                                                                                                                                                                                                     |
-| **Find**       | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                  |
-| **Help**       | `help`                                                                                                                                                                                                     |
-| **Hour**       | `hour INTEGER`<br> e.g., `hour 2`                                                                                                                                                                                                   |
-| **List**       | `list`                                                                                                                                                                                                     |
-| **Teach**      | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
+| Action                                                        | Format, Examples                                                                                                                                                                                           |
+|---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-teaching-assistant-add)**                   | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`  |
+| **[Clear](#clearing-all-entries--clear)**                     | `clear`                                                                                                                                                                                                    |
+| **[ClearTeach](#reset-the-default-course--clearteach)**       | `clearteach`                                                                                                                                                                                               |
+| **[Course](#viewing-course-information--course)**             | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`                                                                                                                                                       |
+| **[Delete](l#removing-a-teaching-assistant-delete)**          | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                         |
+| **[Edit](#editing-a-teaching-assistant-edit)**                | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `edit n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10` |
+| **[Editft](#edit-free-time-for-a-teaching-assistant-editft)** | `editft INDEX d/DAY from/FROM to/FROM` <br> e.g. `editft 1 d/2 from/12:30 to/13:30`                                                                                                                        |
+| **[Exit](#exiting-the-program--exit)**                        | `exit`                                                                                                                                                                                                     |
+| **[Find](#finding-a-teaching-assistant-find)**                | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                  |
+| **[Help](#viewing-help--help)**                               | `help`                                                                                                                                                                                                     |
+| **[Hour](l#updating-hours-for-all-tas-in-view-hour)**         | `hour INTEGER`<br> e.g., `hour 2`                                                                                                                                                                          |
+| **[List](#viewing-teaching-assistants-list)**                 | `list`                                                                                                                                                                                                     |
+| **[Teach](#adding-a-default-course--teach)**                  | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
 
+<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
