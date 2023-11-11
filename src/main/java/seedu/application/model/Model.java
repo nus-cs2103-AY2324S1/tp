@@ -87,12 +87,6 @@ public interface Model {
      * The job identity of {@code editedJob} must not be the same as another existing job in the application book.
      */
     void setJob(Job target, Job editedJob);
-    /**
-     * Replaces the given interview {@code target} with {@code editedInteriew} in {@code job}.
-     * {@code target} must exist in the job.
-     * The interview identity of {@code editedInterview} must not be the same as another existing interview in the job.
-     */
-    void setInterview(Job job, Interview target, Interview editedInterview);
 
     /**
      * Returns an unmodifiable view of the filtered job list

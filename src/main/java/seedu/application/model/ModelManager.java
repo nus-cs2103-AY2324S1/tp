@@ -117,13 +117,6 @@ public class ModelManager implements Model {
         applicationBook.setJob(target, editedJob);
     }
 
-    @Override
-    public void setInterview(Job job, Interview target, Interview editedInterview) {
-        CollectionUtil.requireAllNonNull(job, target, editedInterview);
-
-        applicationBook.setInterview(job, target, editedInterview);
-    }
-
     //=========== Filtered Job List Accessors =============================================================
 
     /**
