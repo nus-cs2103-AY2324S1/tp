@@ -1,6 +1,12 @@
 package seedu.application.logic.parser;
 
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.application.logic.parser.CliSyntax.*;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import seedu.application.logic.commands.SortCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
@@ -17,6 +23,15 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @throws ParseException if the user input does not conform to the expected format.
      */
     public SortCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_COMPANY,
+                        PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_JOB_TYPE, PREFIX_INDUSTRY);
+
+        if (!isValidArgMultimap(argMultimap)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
+        /*
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -36,5 +51,29 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
 
         return new SortCommand(new FieldComparator(new Prefix(specifier)));
+        */
+        return new SortCommand(new FieldComparator(getPrefix(argMultimap)));
+    }
+
+    private boolean isValidArgMultimap(ArgumentMultimap argMultimap) {
+        if (argMultimap.size() != 2) {
+            return false;
+        }
+
+        for (Map.Entry<Prefix, List<String>> e: argMultimap.getArgMultimap().entrySet()) {
+            if (!e.getValue().equals(Arrays.asList(""))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Prefix getPrefix(ArgumentMultimap argMultimap) {
+        for (Prefix p : argMultimap.getArgMultimap().keySet()) {
+            if (!p.equals(new Prefix(""))) {
+                return p;
+            }
+        }
+        return null;
     }
 }

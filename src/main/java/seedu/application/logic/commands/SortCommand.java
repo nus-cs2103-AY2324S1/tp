@@ -1,12 +1,7 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_TYPE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.application.model.Model;
 import seedu.application.model.job.FieldComparator;
@@ -22,16 +17,8 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of jobs based on "
             + "the specified field and displays them as a list with index numbers.\n"
-            + "Parameters: FIELD\n\n"
+            + "Parameters: PREFIX\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_ROLE;
-
-    public static final String MESSAGE_INVALID_SPECIFIER = "Specifiers should only be one of the following: "
-            + PREFIX_COMPANY + " (Company), "
-            + PREFIX_ROLE + " (Role), "
-            + PREFIX_STATUS + " (Status), "
-            + PREFIX_INDUSTRY + " (Industry), "
-            + PREFIX_DEADLINE + " (Deadline), "
-            + PREFIX_JOB_TYPE + " (Job Type)";
 
     private final FieldComparator comparator;
 

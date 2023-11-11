@@ -20,32 +20,27 @@ public class Deadline {
 
     public static final String TO_ADD_DEADLINE = "TO_ADD_DEADLINE";
     public static final Deadline EMPTY_DEADLINE = new Deadline(TO_ADD_DEADLINE);
-    public static final String DEFAULT_DATETIME_FORMAT = "MMM dd yyyy HHmm";
-    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
+    private static final String DEFAULT_DATETIME_FORMAT = "MMM dd yyyy HHmm";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
 
     public final String deadline;
 
     /**
      * Constructs a {@code Deadline}.
      *
-     * @param dateTime A valid dateTime.
+     * @param deadline A {@code String} representing a valid date and time.
      */
-    public Deadline(String dateTime) {
-        requireNonNull(dateTime);
-        AppUtil.checkArgument(isValidDeadline(dateTime), MESSAGE_CONSTRAINTS);
-
-        if (isEmptyDeadline(dateTime)) {
-            this.deadline = TO_ADD_DEADLINE;
-        } else {
-            this.deadline = dateTime;
-        }
+    public Deadline(String deadline) {
+        requireNonNull(deadline);
+        AppUtil.checkArgument(isValidDeadline(deadline), MESSAGE_CONSTRAINTS);
+        this.deadline = deadline;
     }
 
     /**
      * Returns true if a given string is a valid deadline.
      */
     public static boolean isValidDeadline(String test) {
-        if (isEmptyDeadline(test)) {
+        if (test.equals(TO_ADD_DEADLINE)) {
             return true;
         }
         try {
@@ -56,9 +51,6 @@ public class Deadline {
         }
     }
 
-    private static boolean isEmptyDeadline(String test) {
-        return test.equals(TO_ADD_DEADLINE);
-    }
 
     /**
      * Checks if the date and time represented by this {@code Deadline} is earlier
@@ -68,11 +60,11 @@ public class Deadline {
      * @return -1 if this deadline is earlier, 0 if they are equal, and 1 if this deadline is later.
      */
     public int compareTo(Deadline other) {
-        if (this.deadline.equals(TO_ADD_DEADLINE)) {
-            return other.deadline.equals(TO_ADD_DEADLINE) ? 0 : -1;
+        if (this.equals(EMPTY_DEADLINE)) {
+            return other.equals(EMPTY_DEADLINE) ? 0 : -1;
         }
 
-        if (other.deadline.equals(TO_ADD_DEADLINE)) {
+        if (other.equals(EMPTY_DEADLINE)) {
             return 1;
         }
 
@@ -90,8 +82,8 @@ public class Deadline {
 
     @Override
     public String toString() {
-        if (isEmptyDeadline(deadline)) {
-            return TO_ADD_DEADLINE;
+        if (this.equals(EMPTY_DEADLINE)) {
+            return deadline;
         } else {
             LocalDateTime parsedDeadline = LocalDateTime.parse(deadline, DATE_TIME_FORMATTER);
             return parsedDeadline.format(DATE_TIME_FORMATTER);

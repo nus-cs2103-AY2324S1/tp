@@ -12,8 +12,8 @@ public class Status {
     public static final String MESSAGE_CONSTRAINTS =
         "Status is case-insensitive and should only be in the form: TO_ADD_STATUS, PENDING, APPROVED, REJECTED";
 
-    public static final String IN_PROGRESS = JobStatus.TO_ADD_STATUS.toString();
-    public static final Status DEFAULT_STATUS = new Status(IN_PROGRESS);
+    public static final String TO_ADD_STATUS = JobStatus.TO_ADD_STATUS.toString();
+    public static final Status EMPTY_STATUS = new Status(TO_ADD_STATUS);
 
     public final String status;
 

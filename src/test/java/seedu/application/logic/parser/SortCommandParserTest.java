@@ -27,7 +27,7 @@ public class SortCommandParserTest {
 
         // invalid specifier
         assertParseFailure(parser, "b/",
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_INVALID_SPECIFIER));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
         // no arguments
         assertParseFailure(parser, "",
@@ -38,6 +38,6 @@ public class SortCommandParserTest {
     public void parse_validArgs_returnsListCommand() {
         FieldComparator fieldComparator = new FieldComparator(PREFIX_COMPANY);
         SortCommand expectedCommand = new SortCommand(fieldComparator);
-        assertParseSuccess(parser, PREFIX_COMPANY.toString(), expectedCommand);
+        assertParseSuccess(parser, " " + PREFIX_COMPANY, expectedCommand);
     }
 }

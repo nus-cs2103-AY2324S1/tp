@@ -36,21 +36,21 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the job identified "
-                                                   + "by the index number used in the displayed job list.\n"
+                                                   + "by the index number used in the displayed job list. "
                                                    + "Existing values will be overwritten by the input values.\n"
                                                    + "Parameters: INDEX (must be a positive integer) "
                                                    + "[" + PREFIX_ROLE + "ROLE] "
                                                    + "[" + PREFIX_COMPANY + "COMPANY] "
-                                                   + "[" + PREFIX_DEADLINE + "DEADLINE] "
                                                    + "[" + PREFIX_STATUS + "STATUS] "
+                                                   + "[" + PREFIX_DEADLINE + "DEADLINE] "
                                                    + "[" + PREFIX_JOB_TYPE + "JOB TYPE] "
-                                                   + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
+                                                   + "[" + PREFIX_INDUSTRY + "INDUSTRY]\n"
                                                    + "Example: " + COMMAND_WORD + " 1 "
                                                    + PREFIX_ROLE + "Software Engineer "
-                                                   + PREFIX_COMPANY + "Google"
-                                                   + PREFIX_DEADLINE + "Dec 31 2023 1200"
+                                                   + PREFIX_COMPANY + "Google "
                                                    + PREFIX_STATUS + "Pending "
-                                                   + PREFIX_JOB_TYPE + "INTERNSHIP"
+                                                   + PREFIX_DEADLINE + "Dec 31 2023 1200 "
+                                                   + PREFIX_JOB_TYPE + "INTERNSHIP "
                                                    + PREFIX_INDUSTRY + "Technology";
 
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";
