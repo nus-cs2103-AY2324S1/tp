@@ -37,10 +37,10 @@ public class HeightTest {
 
     @Test
     public void equals() {
-        Height height = new Height("20");
+        Height height = new Height("120");
 
         // same values -> returns true
-        assertTrue(height.equals(new Height("20")));
+        assertTrue(height.equals(new Height("120")));
 
         // same object -> returns true
         assertTrue(height.equals(height));
@@ -52,23 +52,23 @@ public class HeightTest {
         assertFalse(height.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(height.equals(new Height("30")));
+        assertFalse(height.equals(new Height("130")));
     }
 
     @Test
     void compareTo() {
-        Height height = new Height("20");
+        Height height = new Height("120");
 
         // same values -> returns true
-        assertTrue(height.compareTo(new Height("20")) == 0);
+        assertTrue(height.compareTo(new Height("120")) == 0);
 
         // same object -> returns true
         assertTrue(height.compareTo(height) == 0);
 
         // different values -> returns false
-        assertTrue(height.compareTo(new Height("30")) < 0);
+        assertTrue(height.compareTo(new Height("130")) < 0);
 
         // different values -> returns false
-        assertTrue(height.compareTo(new Height("10")) > 0);
+        assertTrue(height.compareTo(new Height("110")) > 0);
     }
 }
