@@ -43,7 +43,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
-    }
+    }   
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
