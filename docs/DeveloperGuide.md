@@ -349,49 +349,143 @@ CheckMate empowers hotel employees to efficiently manage room bookings, optimize
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​        | I want to …​                                 | So that I can…​                                      |
+|----------|----------------|----------------------------------------------|------------------------------------------------------|
+| `* * *`  | hotel employee | add a new room booking                       | keep track of who is staying in which room           |
+| `* * *`  | hotel employee | cancel an existing room booking              | manage changes in client plans or circumstances      |
+| `* * *`  | hotel employee | edit details of an existing booking          | make changes as required                             |
+| `* * *`  | hotel employee | view a list of all bookings                  | quickly understand room occupancy                    |
+| `* * *`  | hotel employee | search for a booking using the client's name | quickly retrieve their details                       |
+| `* * *`  | hotel employee | view room availability                       | manage and plan room allocations effectively         |
+| `* * *`  | hotel employee | view a client's check-in/check-out times     | keep records for management and service improvement  |
+| `* *`    | hotel employee | assign a specific room number to a client    | ensure clients know where to stay                    |
+| `* *`    | hotel employee | reassign a different room number to a client | accommodate changes or needs                         |
+| `* *`    | hotel employee | leave notes on a booking                     | note special requests or important information       |
+| `* *`    | hotel employee | handle special requests                      | provide personalized service to clients              |
+| `* *`    | admin          | set different room categories                | offer diverse accommodation options                  |
+| `* *`    | hotel employee | check out a client from their room           | manage room availability at the end of stays         |
+| `*`      | admin          | set room rates                               | ensure clients are charged appropriately             |
+| `*`      | hotel employee | apply discounts to a booking                 | provide promotions and special offers to clients     |
+| `*`      | hotel employee | handle client complaints                     | ensure customer satisfaction and address issues      |
+| `*`      | hotel employee | schedule room cleaning                       | maintain cleanliness and readiness of rooms          |
+| `*`      | hotel employee | block rooms for maintenance                  | ensure no bookings are made for unavailable rooms    |
+| `*`      | hotel employee | view the history of a room                   | track and understand room usage over time            |
+| `*`      | hotel employee | process payments for room bookings           | manage financial transactions for stays              |
+| `*`      | hotel employee | issue refunds                                | manage cancellations and returns appropriately       |
+| `*`      | admin          | generate daily reports                       | understand hotel operations and finances             |
+| `*`      | admin          | set schedules for hotel employees            | ensure adequate staffing for hotel operations        |
+| `*`      | admin          | add new rooms to the hotel's inventory       | expand and update the hotel's room offerings         |
+| `*`      | hotel employee | archive old bookings                         | keep the system organized and up-to-date             |
+| `*`      | admin          | set up promotional offers                    | attract clients and offer competitive services       |
+| `*`      | hotel employee | manage online bookings                       | handle reservations made through digital platforms   |
+| `*`      | hotel employee | send booking confirmation emails             | inform clients about their booking status            |
+| `*`      | hotel employee | handle emergency situations                  | ensure safety and rapid response in crises           |
+| `*`      | admin          | manage the hotel's inventory                 | maintain adequate supplies of necessary items        |
+| `*`      | hotel employee | manage group bookings                        | accommodate events or large groups effectively       |
+| `*`      | admin          | monitor hotel security                       | ensure safety and security within the hotel premises |
+| `*`      | hotel employee | receive and manage client feedback           | improve services based on client suggestions         |
+| `*`      | hotel employee | coordinate with other departments            | provide seamless service across the hotel            |
+| `*`      | hotel employee | manage lost and found items                  | assist clients with their misplaced belongings       |
+| `*`      | hotel employee | manage long-term bookings                    | cater to clients staying for extended periods        |
+| `*`      | hotel employee | organize transport for clients               | provide additional services for client convenience   |
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `CheckMate` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### Use case: Delete a person
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Hotel employee requests to add a booking.
+2. CheckMate prompts for booking details.
+3. Hotel employee enters the booking details.
+4. CheckMate adds the booking and confirms the addition.
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
-* 2a. The list is empty.
+* 3a. The entered details are invalid.
+    * 3a1. CheckMate shows an error message.
+    * 3a2. Hotel employee re-enters the details.
+
+  Use case resumes at step 3.
+
+#### Use case: Cancel a booking
+
+**MSS:**
+
+1. Hotel employee requests to list all bookings.
+2. CheckMate displays the list of bookings.
+3. Hotel employee selects a booking to cancel.
+4. CheckMate cancels the selected booking and confirms the cancellation.
+
+   Use case ends.
+
+**Extensions:**
+
+* 2a. The booking list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The selected booking index is invalid.
+    * 3a1. CheckMate shows an error message.
 
-    * 3a1. AddressBook shows an error message.
+  Use case resumes at step 2.
 
-      Use case resumes at step 2.
+#### Use case: Edit a booking
 
+**MSS:**
+
+1. Hotel employee requests to edit a booking.
+2. CheckMate prompts for the booking index and new details.
+3. Hotel employee enters the booking index and new details.
+4. CheckMate updates the booking and confirms the changes.
+
+   Use case ends.
+
+**Extensions:**
+* 3a. The provided index or details are invalid.
+    * 3a1. CheckMate displays an error message.
+
+  Use case resumes at step 2.
+
+#### Use case: View all bookings
+
+**MSS:**
+
+1. Hotel employee requests to view all bookings.
+2. CheckMate displays a list of all bookings.
+
+   Use case ends.
+
+#### Use case: Search for a booking
+
+**MSS:**
+
+1. Hotel employee requests to search for a booking.
+2. CheckMate prompts for search criteria.
+3. Hotel employee enters search criteria.
+4. CheckMate displays bookings matching the criteria.
+
+   Use case ends.
+
+**Extensions:**
+
+* 3a. No bookings match the search criteria.
+    * 3a1. CheckMate shows a message that no matches were found.
+
+  Use case resumes at step 2.
 
 ###  Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 bookings without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+4.  Should have a user-friendly and intuitive graphical user interface (GUI) that complements the command line interface (CLI), making it accessible for users who may not be as comfortable with CLI.
+5.  Response time for any command should not exceed 2 seconds, ensuring quick feedback and a smooth user experience.
 
 ### Glossary
 
