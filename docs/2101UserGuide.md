@@ -1,11 +1,12 @@
 ---
 layout: page
+style: guide
 title: User Guide
 ---
 ## CCACommander Ultra Promax Xtra 9000PLUS - User Guide
 CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to manage CCA members and events, optimised for CCA Heads who prefer to use command line interface.
 
-* Table of Contents
+1. Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
