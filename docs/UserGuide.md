@@ -204,8 +204,8 @@ file.
 | \<TYPE>        | R (for Revenue), or E (for Expense)                             |
 | \<AMOUNT>      | Any number                                                      |
 | \<DATE>        | In dd/MM/yy format                                              |
-| \<ID>          | ID of a transaction, an integer                                 |
-| \<STAFF ID>    | ID of staff, an integer                                         |
+| \<ID>          | ID of a transaction, a positive integer                         |
+| \<STAFF ID>    | ID of staff, a positive integer                                 |
 | \<SORT TYPE>   | asc (ascending) or desc (descending)                            |
 | ...            | Multiple entries allowed, separated by a space                  |
 

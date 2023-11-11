@@ -77,6 +77,7 @@ public class AddTransactionCommand extends Command {
         }
 
         Transaction newTransaction = new Transaction(transactionType, description, amount, date, staffId);
+        System.out.println(newTransaction);
         model.addTransaction(newTransaction);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newTransaction)),
@@ -85,24 +86,11 @@ public class AddTransactionCommand extends Command {
 
     @Override
     public String toString() {
-        System.out.println("Hello" + staffIDtoString());
         return new ToStringBuilder(this)
                 .add("type", transactionType)
                 .add("description", description)
                 .add("amount", amount)
                 .add("staffId", staffId)
                 .toString();
-    }
-
-    /**
-     * Returns empty string if staffID is equal to -1. Else, returns staffID.
-     * @return staffID if it is not equal to -1.
-     */
-    public String staffIDtoString() {
-        if (staffId == -1) {
-            return "";
-        } else {
-            return staffId.toString();
-        }
     }
 }
