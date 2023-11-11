@@ -17,6 +17,8 @@ Let's dive into **InterviewHub** and transform the way you recruit!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # Table of Contents
 
 - [Introduction](#introduction---what-is-interviewhub)
@@ -59,6 +61,8 @@ Let's dive into **InterviewHub** and transform the way you recruit!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # Introduction - What is InterviewHub?
 
 **InterviewHub**  is a desktop app for engineering hiring managers to schedule job interviews and manage applicants' contact information.
@@ -96,6 +100,8 @@ Before we begin, the table below describes some symbols and syntax you may see t
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # Quick Start
 
 1. Ensure you have **Java 11** or above [installed in your Computer](#q-how-do-i-check-if-i-have-the-correct-version-of-java-installed).
@@ -132,11 +138,15 @@ Before we begin, the table below describes some symbols and syntax you may see t
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # GUI Summary
 
 The following is an annotated breakdown of InterviewHub’s GUI:
 
 ![GUI Summary](images/GuiSummary.png)
+
+<div style="page-break-after: always;"></div>
 
 For each **applicant**, we see the following details:
 
@@ -161,6 +171,9 @@ For each **interview**, we see the following details:
 [Back to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 # Features
 
 <div markdown="block" class="alert alert-info">
@@ -207,6 +220,10 @@ For each **interview**, we see the following details:
 
 [Back to the Table of Contents](#table-of-contents)
 
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## General Features
 
 ### Viewing help : `help`
@@ -240,6 +257,8 @@ InterviewHub data are saved in the hard disk automatically after any command tha
 
 [Back to the Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## Applicant Management Features
 
 ### Adding an applicant : `add-a`
@@ -256,11 +275,15 @@ Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 | `ADDRESS`      | The address of the applicant      | No constraints as long as it is not blank                     |
 | `TAG`          | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`.
 ![Result of `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`](images/addApplicantResult.png)
 
 [Back to the Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an applicant : `delete-a`
 
@@ -362,6 +385,8 @@ Shows a list of all applicants in **InterviewHub** onto the GUI.
 Format: `list-a`
 
 [Back to the Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## Interview Management Features
 
