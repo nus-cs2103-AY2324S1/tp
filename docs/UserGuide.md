@@ -112,7 +112,6 @@ Check out our [FAQ](#faqs) if you are not sure how to download Java `11`.
 
 ### Initial Setup
 
-<<<<<<< HEAD
 1. Open a command terminal, navigate to the folder where you store the downloaded jar file, and use the 
 `java -jar addressbook.jar` command to run the application. A GUI similar to the one below should appear in a few 
 seconds, containing some sample data:
