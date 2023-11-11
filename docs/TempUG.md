@@ -908,131 +908,83 @@ This feature is not used for tasks!
 
 ### Viewing the linked students of a lesson, or the linked lessons of a student : `nav`
 
-About the feature (generally that is similar across states)
+After linking students to lessons or vice versa, you can "navigate" between the student and their linked lessons, or the lesson and its linked students.
+This comes in handy when you want to view the details of students in a lesson, or see what lessons a student has upcoming.
 
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
+Format: `nav` 
 
-<box type="tip" seamless> 
+#### For Student:
+<box type="info" seamless>
 
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-
-#### For student list:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+You must be in the **_STUDENT list_** and are viewing a student to run this command. Type `list STUDENTS` to go to the **_STUDENT list_**, then type `show INDEX` to select a student.</box>
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- The student must have at least one linked lesson for the command to work.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `nav`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `nav`
 ```
-This block of code is for success outputs
+Navigated to student's lessons
 ```
+![Success for navigating to lessons](images/nav/nav_fromStudent_positive.png)
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___STUDENT list___ and a student is not selected
+* Input: `nav`
+  * Error: `nav` only works when a student is selected. Select a student with the `show INDEX` command and try again.
 ```
-Invalid command with the error message here
+No student is currently displayed
+```
+* Current state: In the ___STUDENT list___ and a student without any linked lessons is selected
+* Input: `nav`
+  * Error: `nav` only works when a student has linked lessons. Link a lesson with the `linkTo` command.
+```
+This student has no linked lessons
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+#### For Schedule:
+<box type="info" seamless>
 
-#### For schedule list:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list SCHEDULE` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson.</box>
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- The lesson must have at least one linked student for the command to work.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `nav`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `nav`
 ```
-This block of code is for success outputs
+Navigated to lesson's students
 ```
+![Success for navigating to students](images/nav/nav_fromLesson_positive.png)
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___SCHEDULE list___ and a lesson is not selected
+* Input: `nav`
+  * Error: `nav` only works when a lesson is selected. Select a lesson with the `show INDEX` command and try again.
 ```
-Invalid command with the error message here
+No lesson is currently displayed
 ```
-
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___SCHEDULE list___ and a lesson without any linked students is selected
+* Input: `nav`
+  * Error: `nav` only works when a lesson has linked students. Link a student with the `linkTo` command.
 ```
-Invalid command with the error message here
+This lesson has no linked students
 ```
 
 #### For task list:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-Example usages:
-* `some code here`
-* `another code here`
-
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+This feature is not used for tasks!
 
 <br>
 
