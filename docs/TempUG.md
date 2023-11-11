@@ -796,138 +796,113 @@ For example, filter -before 2023/10/10 -subject physics
 Note you should only use one of -before, -on, -after at a time.
 ```
 
-#### For task list:
-Filtering is not supported in the Task List at this time.
+#### For Task:
+Filtering is not supported in the Task List at this time!
 
 <br>
 
 ### Linking students to lessons (and vice versa) : `linkTo`
-
-About the feature (generally that is similar across states)
-
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless> 
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
+You can link lessons to students, and vice versa. For example, if a lesson has a few students, you can link each of the students to the lesson, so that you can quickly see who is attending this specific lesson.  
 
 
-#### For student list:
+#### For Student:
+<box type="info" seamless>
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+You must be in the **_STUDENT list_** and are viewing a student to run this command. Type `list STUDENTS` to go to the **_STUDENT list_**, then type `show INDEX` to select a student to link lessons to.</box>
+Format: `linkTo LESSON_NAME` (for list specific format)
+* `LESSON_NAME` is the name of the lesson you would like to link to.
+* * Refer to `LESSON_NAME`'s constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- You can link a student to multiple lessons. Simply run the `linkTo` command repeatedly.
+- `LESSON_NAME` is not case-sensitive. This means that "CS2103T Lab" and "cs2103T lab" are treated as the same lesson.
 
 </box>
 
+<box type="warning" seamless>
+
+As of now, you **cannot** unlink a lesson from a student. Use caution when running the `linkTo` command.
+</box>
+
 Example usages:
-* `some code here`
-* `another code here`
+* `linkTo CS2103T Lab`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `linkTo CS2103T Lab`
 ```
-This block of code is for success outputs
+Linked Alex Wong to CS2103T Lab
 ```
+![Success for linking to lesson](images/linkTo/linkTo_lesson_positive.png)
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___STUDENT list___ and no student is selected
+* Input: `linkTo CS2103T Lab`
+  * Error: A student is not yet selected. Select a student using `show INDEX` first.
 ```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
+No student is shown
+LinkTo command usage: linkTo [LESSON_NAME]
+Example: linkTo CS2103T lab1
+Note: This command is only available when a student is shown
 ```
 
-#### For schedule list:
+* Current state: In the ___STUDENT list___ and a student is selected
+* Input: `linkTo CS2109 Lab`
+  * Error: No such lesson with the name "CS2109 Lab". Make sure the lesson's name is correct and try again.
+```
+No such lesson
+```
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+#### For Schedule:
+<box type="info" seamless>
+
+You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list SCHEDULE` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson to link students to.</box>
+Format: `linkTo STUDENT_NAME` (for list specific format)
+* `STUDENT_NAME` is the name of the student you would like to link to.
+* Refer to `STUDENT_NAME`'s constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- You can link a lesson to multiple students. Simply run the `linkTo` command repeatedly.
+- `STUDENT_NAME` is not case-sensitive. This means that "Alex Yeoh" and "alex yeoh" are treated as the same student.
 
 </box>
 
-Example usages:
-* `some code here`
-* `another code here`
+<box type="warning" seamless>
 
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-#### For task list:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
+As of now, you **cannot** unlink a student from a lesson. Use caution when running the `linkTo` command.
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `linkTo Bernice Yu`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `linkTo Bernice Yu`
 ```
-This block of code is for success outputs
+Linked Bernice Yu to CS2103T Lab
 ```
+![Success for linking to lesson](images/linkTo/linkTo_lesson_positive.png)
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___SCHEDULE list___ and no lesson is selected
+* Input: `linkTo Bernice Yu`
+  * Error: A student is not yet selected. Select a student using `show INDEX` first.
 ```
-Invalid command with the error message here
+No lesson is shown
+LinkTo command usage: linkTo [STUDENT_NAME]
+Example: linkTo Alice Pauline
+Note: This command is only available when a lesson is shown
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___SCHEDULE list___ and a lesson is selected
+* Input: `linkTo Bernice Yong`
+  * Error: No such student with the name "Bernice Yong". Make sure the student's name is correct and try again.
 ```
-Invalid command with the error message here
+No such student with name Bernice Yong found
 ```
+
+#### For Task:
+This feature is not used for tasks!
 
 <br>
 
