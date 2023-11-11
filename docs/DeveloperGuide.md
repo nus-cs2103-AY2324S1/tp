@@ -491,7 +491,7 @@ The feature should be implemented upon the current design of Student and ClassDe
 
 **Target user profile**:
 
-* NUS Teaching Assistants
+* NUS CS2103/T Teaching Assistants
 * has a need to manage student information across different classes
 * prefer desktop apps over other types
 * can type fast
@@ -699,7 +699,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -943,3 +942,4 @@ testers are expected to do more *exploratory* testing.
 1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, currently `add` is case-sensitive. We will accept keywords such as `Add` in the future.
 2. Class Numbers are currently limited to tutorials that begin with T. We plan to allow Class Numbers to be any sensible alphanumeric string, such as `R15` and `SG06`.
 3. Clicking on a student in the student list currently highlights the student's card. We plan to disable this interaction as it affects the visibility of the student's contact details and visualised graphs.
+4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc. to allow for better representation of student's efforts in class.
