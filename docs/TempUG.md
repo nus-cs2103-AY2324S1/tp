@@ -1140,7 +1140,34 @@ Invalid command with the error message here
 <br>
 
 ### Command history
-...
+
+The command history feature allows you to retrieve previously typed commands into the command text box.
+
+* To start navigating the command history, press the up or down arrow, which will point and return the most recent command text (for invalid commands, it will retrieve it again since it is also saved, hence it will not change the command text yet). 
+* Cycle through the command history using the up arrow to go back to previous commands, and down arrow to go to next commands, going beyond the command history will retrieve the oldest or newest command text for respectively. 
+
+<box type="tip" seamless>
+
+**Tips:**
+- Command history is only valid per session, it does not save into storage. 
+- Invalid commands are also saved into command history. 
+- During each successful command execution, the pointer resets again, hence pressing the up or down arrow will point and return the most recent command text.
+- Retrieved commands will replace the existing text in command box.
+
+</box>
+
+<box type="warning" seamless>
+
+**Caution:**
+* The index in command history remains when user clears the command box while scrolling through the history.
+* e.g. For the history [`list tasks`, `list students`, `list schedule`], if user is retrieves the command history with `list students` and clears his command box, pressing up again will retrieve `list tasks`.
+</box>
+
+Example usages:
+* Input: `list students`, `list schedule`, `list tasks` were entered in this order.
+1. Pressing up arrow will go back in the command history and retrieve: `list tasks`.
+2. Pressing up arrow will go further back in the command history and retrieve: `list schedule`.
+3. Pressing down arrow will go forward in the command history and retrieve: `list tasks`.
 
 
 <br>
@@ -1164,6 +1191,7 @@ Format: `exit`
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
+Click on the button to copy the link, enter it in a web browser to visit our user guide.
 
 ![help message](images/helpMessage.png)
 
