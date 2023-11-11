@@ -39,7 +39,6 @@ public class MarkScheduleCommandParser implements Parser<MarkScheduleCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MarkScheduleCommand.MESSAGE_USAGE));
         } else {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STATUS);
             status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         }
 
