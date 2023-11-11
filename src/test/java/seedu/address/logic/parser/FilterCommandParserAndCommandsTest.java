@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -195,5 +196,10 @@ void test_personFilter_subjects() throws ParseException, CommandException {
         lessonFilter.parse(" -subject physics -on 1").execute(model);
         assertTrue(model.getFilteredScheduleList().contains(lesson));
         assertFalse(model.getFilteredScheduleList().contains(lesson2));
+    }
+
+    @Test
+    void test_multipleBeforeOnAfter() {
+        assertThrows(ParseException.class, () -> lessonFilter.parse(" -before 1 -on 1"));
     }
 }
