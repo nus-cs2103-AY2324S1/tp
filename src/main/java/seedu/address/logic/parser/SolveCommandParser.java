@@ -23,7 +23,7 @@ public class SolveCommandParser implements Parser<SolveCommand> {
             if (args.trim().isEmpty()) {
                 index = Index.fromZeroBased(0);
             } else {
-                index = ParserUtil.parseIndex(args);
+                index = ParserUtil.parseIndexWithR(args);
             }
 
             return new SolveCommand(index);

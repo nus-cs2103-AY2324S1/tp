@@ -171,10 +171,72 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+Below is an example of the object diagram of how the cards are stored in the `Deck` class
+
+<img src="images/DeckObjectDiagram.png" width="600" />
+
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add Feature
+
+The add command can be found in the `LogicManager` class. User input is first parsed into the `DeckParser` class using the `parseCommand` to validate if its add command with the specified fields and format.
+
+The add command is exposed in the `Model` interface as the `Model#addCard`
+Below is the overview on the add command:
+
+<img src="images/AddCommandActivityDiagram.png" width="600" />
+
+Here is the flow of how the add command is featured.
+
+1. User inputs the following valid input `add q/what does + mean in boolean algebra? a/it means OR.`
+2. The command is parsed into the `DeckParser` to verify that it has the correct format and parameters
+3. Add command is executed, and if there is no duplicate entry found in `DeckStorage`, a new flashcard with the corresponding
+data will be created
+4. New generated flashcard is then stored in the `DeckStorage`
+
+Below is the sequence diagram for this flow:
+
+<img src="images/AddCommandSequenceDiagram.png" width="600" />
+
+#### Design Considerations
+
+**Aspect: Duplicate Entry Detection:**
+
+* **Alternative 1 (current choice):** No restriction on case sensitivity and mark down syntax
+    * Pros: Increased flexibility on how users wish to create flashcards, up to user's choice, duplicate entry is
+  determined only by the question and the answer input.
+    * Cons: Might lead to duplicate entries of cards of similar content .
+
+* **Alternative 2:** Clean the user input to obtain their intended question and answer
+    * Pros: Reduces chances of duplicate cards in deck
+    * Cons: Increased developer time to create such filtering functionality with little benefit
+
+### DeleteCommand
+
+The delete command can be found in the `LogicManager` class. User input is first parsed into the `DeckParser` class using the `parseCommand`
+to validate if it is a valid delete command with the specified fields and format.
+
+The delete command is exposed in the `Model` interface as the `Model#setCard`
+
+Below is the overview on the delete command:
+
+<img src="images/DeleteCommandActivityDiagram.png" width="600" />
+
+Here is the flow of how the delete command is featured.
+
+1. User inputs the following valid input `delete 1`
+2. The command is parsed into the `DeckParser` to verify that it has the correct format and parameter
+3. Delete command is now executed. If the index is valid, when it is greater than 0 and a card exists at the specified index, the specified card is now deleted from view.
+4. The corresponding card is also deleted from storage.
+
+Below is the sequence diagram for this flow:
+
+<img src="images/DeleteSequenceDiagram.png" width="600" />
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -421,21 +483,23 @@ Step 5: The `UI` renders the `Card` with the relevant fields meant to be written
 
 * **Alternative 1 :** Use existing libraries that support Markdown using JavaFX.
     * Pros: Easy to implement.
-    * Cons: Dependency on third party library.
+    * Cons:
+        1. Dependency on third party library.
+        2. Large .jar file size.
 * **Alternative 2:** Individually support each type of Markdown language.
     * Pros: Scope of support can be determined by developer.
     * Cons:
         1. Time-consuming.
-        2. More checks and assertions required for increased edge cases.
-        3. More testing.
+        2. Possible errors
 
 
 **Finalised Implementation:**
 
-Settled on using alternative 1 as it provides out of the box markdown support for our application.
+Settled on using alternative 2 as it ensures that only the features that are needed are implemented,
+and it greatly reduces the application size.
 
-The external library we used `johnrengelman.shadow` that allowed us to display the mark down text as we wanted.
-
+We focused on bold, italic and underline which are the main styling that used by flashcard user,
+and having only the essential features reduces the possibility of bugs.
 
 
 ### Spaced Repetition Feature
@@ -481,7 +545,7 @@ We implemented an export functionality to allow our users to port over their dat
 This is not to be mistaken as a **Command** as it is meant to be used after the user decides to use our application
 for revision purposes.
 
-The export button will allow users to access a copy of the deck.json file and has a copy button function that allows
+The export button will allow users to access a copy of the `deck.json` file and has a copy button function that allows
 users to copy over their deck.json file with ease.
 
 #### Design considerations:
