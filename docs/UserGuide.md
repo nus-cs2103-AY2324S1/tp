@@ -139,14 +139,16 @@ TODO: Ngee Yong to add details of what each bar graph shows (average grades, att
 
 ## Editing the data file
 
-**Class Manager 2023's** data is saved as a JSON file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below.
+**Class Manager 2023's** data is saved as a JSON file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below. 
+
+The size of `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of `assignmentTracker` array must match the configured assignment count. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. You can configure **Class Manager 2023** using the `config` command first before loading the edited data file. 
 
 <img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file make its format invalid, **Class Manager 2023** will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file make its format invalid (missing value pairs or not matching the configured tutorial and assignment count), **Class Manager 2023** will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 
