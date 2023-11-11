@@ -327,6 +327,10 @@ The diagram below describes this behaviour concisely. It shows how a user's comm
 
 <img src="images/CopyMemberActivityDiagram.png">
 
+The sequence diagram below also shows the interaction between the various components during the execution of the `CopyMemberCommand`. The execution of the `CopyApplicantCommand` is almost identical, except that it uses the `Applicant` class instead of the `Member` class.
+
+<img src="images/CopyMemberSequenceDiagram.png">
+
 ### View all available tags
 
 The view tags mechanism lists all available tags in the address book that a user can use to tag a member.
