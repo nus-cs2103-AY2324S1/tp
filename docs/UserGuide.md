@@ -364,7 +364,7 @@ An example of the `filter` command in action:
 
 A more complete example guide on how to use filter effectively from when you first start JABPro:  
 1. `create t/assessment interview` creates a tag `interview` under the `assessment` category.
-** Take note, only edit if the index exists, adapt this guide accordingly **
+**Take note, only edit if the index exists, adapt this guide accordingly**
 2. `edit 1 t/interview sc/interview 80` edits the tag of the 1st person to have a tag `interview` with a score of 80.
 3. `edit 2 t/interview sc/interview 90` edits the tag of the 2nd person to have a tag `interview` with a score of 90.
 4. `edit 3 t/interview sc/interview 70` edits the tag of the 3rd person to have a tag `interview` with a score of 70.
@@ -444,7 +444,7 @@ Deletes the specified job applicants from the address book.
 Format: `delete INDEX` or `delete (t/TAGNAME... st/STATUS...)`
 
 Note:
-* User **cannot** do delete by index and delete by tags & status in a single command.<br>
+* User **cannot** delete by index and delete by tags & status in a single command.<br>
   E.g. `delete 1 t/hardworking` is not allowed. 
 
 #### Deleting job applicants by index
@@ -542,7 +542,7 @@ Exports the entries into a .csv file located in the current directory as (/data/
 
 * Note: Export currently does not support Events.
 
-*  Usage Note: JABPro must have write permissions, this means that if the .csv file is open,
+* Usage Note: JABPro must have write permissions, this means that if the .csv file is open,
 exporting again will not be possible.
 
 
