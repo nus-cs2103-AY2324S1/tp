@@ -1,10 +1,10 @@
 package seedu.address.model.interval;
 
-import seedu.address.model.person.End;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import seedu.address.model.person.End;
 
 /**
  * Represents an Interval's End in the address book.
