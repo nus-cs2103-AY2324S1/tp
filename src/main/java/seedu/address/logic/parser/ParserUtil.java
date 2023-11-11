@@ -183,10 +183,12 @@ public class ParserUtil {
     public static LocalDateTime parseContactTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedStart = time.trim();
+
         //set last contacted to LocalDateTime.MIN if last contacted field is not specified
         if (trimmedStart.isEmpty()) {
             return LocalDateTime.MIN;
         }
+
         try {
             LocalDateTime preppedTime = DateTimeUtil.parse(trimmedStart);
             if (!LastContactedTime.isValidLastContactedTime(preppedTime)) {

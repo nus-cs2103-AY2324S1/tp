@@ -143,22 +143,17 @@ Format: `help`
 
 Adds a contact to OutBook.
 
-Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [s/STATUS] [r/REMARK] [t/TAG]…​`
+Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL [lc/LAST_CONTACTED_TIME] [s/STATUS] [r/REMARK] [t/TAG]…​`
 
-- `NAME`, `PHONE_NUMBER`, `EMAIL` and `LAST_CONTACTED_TIME` are compulsory fields. `STATUS`, `REMARK` and `TAG` are optional.
-- `PHONE_NUMBER` must contain only numbers, and be at least 3 digits long.
-- `EMAIL` must be of the format local-part@domain and adhere to the following constraints:
-  1. The local-part should only contain alphanumeric characters and the following special characters `+ _ . -`.
-  2. The local-part may not start or end with any special characters.
-  3. The domain name is made up of domain labels separated by periods.
-     The domain name must:
-     - end with a domain label at least 2 characters long
-     - have each domain label start and end with alphanumeric characters
-     - have each domain label consist of alphanumeric characters, separated only by hyphen
-
-- `LAST_CONTACTED_TIME` must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format.
-  -  eg. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
-- STATUS, if included, must be one of `NIL, Prospective, Active, Inactive, Claimant, Renewal` or blank.
+- Duplicate contacts are not allowed. Contacts are duplicates if they have the same name, phone number, or email.
+- `NAME`, `PHONE_NUMBER`, and `EMAIL` are compulsory fields:
+  - `PHONE_NUMBER` must contain only numbers, and be at least 3 digits long.
+  - `EMAIL` must adhere to the format LOCAL-PART@SERVER.DOMAIN, e.g. `example@mail.com`.
+- `LAST_CONTACTED_TIME`, `STATUS`, `REMARK` and `TAG` are optional fields:
+  - `LAST_CONTACTED_TIME` must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format. eg. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
+    - If `LAST_CONTACTED_TIME` is not specified, it will be defaulted to the minimum datetime provided by Java (i.e. `LocalDateTime.MIN`) and displayed as `NA` in the contacts list.
+  - `STATUS` must be one of `NIL, Prospective, Active, Inactive, Claimant, Renewal` or blank.
+    - If `STATUS` is not specified, it will be defaulted to `NIL`.
 - This command may change the contact that is currently displayed via the `viewc` command, as detailed in the description for `viewc`.
 
 
