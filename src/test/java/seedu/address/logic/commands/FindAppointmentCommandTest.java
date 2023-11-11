@@ -86,9 +86,9 @@ public class FindAppointmentCommandTest {
     @Test
     public void toStringMethod() {
         AppointmentIcPredicate predicate = new AppointmentIcPredicate("keyword");
-        FindAppointmentCommand FindAppointmentCommand = new FindAppointmentCommand(predicate);
+        FindAppointmentCommand findAppointmentCommand = new FindAppointmentCommand(predicate);
         String expected = FindAppointmentCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, FindAppointmentCommand.toString());
+        assertEquals(expected, findAppointmentCommand.toString());
     }
 
     /**

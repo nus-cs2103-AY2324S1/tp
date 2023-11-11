@@ -25,26 +25,26 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Appointment AppointmentToDelete = model.getFilteredAppointmentList().get(0);
-        int AppointmentToDeleteIndex = 1;
-        DeleteAppointmentCommand DeleteAppointmentCommand = new DeleteAppointmentCommand(AppointmentToDeleteIndex);
+        Appointment appointmentToDelete = model.getFilteredAppointmentList().get(0);
+        int appointmentToDeleteIndex = 1;
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(appointmentToDeleteIndex);
 
-        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-                Messages.format(AppointmentToDelete));
+        String expectedMessage = String.format(deleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+                Messages.format(appointmentToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteAppointment(AppointmentToDelete);
+        expectedModel.deleteAppointment(appointmentToDelete);
 
-        assertCommandSuccess(DeleteAppointmentCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        DeleteAppointmentCommand DeleteAppointmentCommand = new DeleteAppointmentCommand(4);
-        DeleteAppointmentCommand DeleteAppointmentCommand2 = new DeleteAppointmentCommand(-1);
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(4);
+        DeleteAppointmentCommand deleteAppointmentCommand2 = new DeleteAppointmentCommand(-1);
 
-        assertCommandFailure(DeleteAppointmentCommand, model, Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
-        assertCommandFailure(DeleteAppointmentCommand2, model, Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
+        assertCommandFailure(deleteAppointmentCommand, model, Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
+        assertCommandFailure(deleteAppointmentCommand2, model, Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
     }
 
     @Test
@@ -71,9 +71,9 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void toStringMethod() {
-        DeleteAppointmentCommand DeleteAppointmentCommand = new DeleteAppointmentCommand(1);
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(1);
         String expected = DeleteAppointmentCommand.class.getCanonicalName() + "{targetIc=" + 1 + "}";
-        assertEquals(expected, DeleteAppointmentCommand.toString());
+        assertEquals(expected, deleteAppointmentCommand.toString());
     }
 
     /**
