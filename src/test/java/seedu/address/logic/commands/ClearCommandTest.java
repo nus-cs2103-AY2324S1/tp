@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -45,19 +46,22 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_confirmClear_success() {
+    public void execute_confirmClear_success() throws CommandException {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
         CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_SUCCESS);
-        assertCommandSuccess(new ClearCommand("confirm"), model, expectedCommandResult, expectedModel);
+        Command clearCommand = new ClearCommand("confirm");
+        clearCommand.toString();
+        clearCommand.execute(model);
+        assertCommandSuccess(clearCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_rejectClear_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_USAGE);
+        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_USAGE, CommandType.CLEAR);
 
         assertCommandSuccess(new ClearCommand("reject"), model, expectedCommandResult, model);
     }
@@ -66,16 +70,25 @@ public class ClearCommandTest {
     public void execute_noConfirmation_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_USAGE);
+        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_USAGE, CommandType.CLEAR);
 
         assertCommandSuccess(new ClearCommand(""), model, expectedCommandResult, model);
+    }
+
+    @Test
+    public void execute_noConfirmation_confirm() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_PROMPT);
+
+        assertCommandSuccess(new ClearCommand("confirm"), model, expectedCommandResult, model);
     }
 
     @Test
     public void execute_nullConfirmation_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_USAGE);
+        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_USAGE, CommandType.CLEAR);
 
         assertCommandSuccess(new ClearCommand("null"), model, expectedCommandResult, model);
     }

@@ -16,8 +16,7 @@ public class ClearCommandParser {
      */
     public ClearCommand parse(String args) throws ParseException {
         if (args.trim().isEmpty()) {
-            throw new ParseException(
-                    String.format(ClearCommand.MESSAGE_USAGE));
+            return new ClearCommand("reset prompt");
         }
         try {
             String confirmation = ParserUtil.parseSimpleString(args);
