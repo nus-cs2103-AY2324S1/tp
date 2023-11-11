@@ -2,11 +2,6 @@ package seedu.address.model.interval;
 
 import seedu.address.model.person.Day;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
-import java.time.DayOfWeek;
-
 /**
  * Represents the day in the interval
  * Guarantees: immutable; is valid as declared in {@link #isValidDay(String)}
@@ -20,6 +15,13 @@ public class IntervalDay extends Day {
      */
     public IntervalDay(String day) {
         super(day);
+    }
+
+    /**
+     * @return a defensive copy of IntervalDay
+     */
+    public IntervalDay copy() {
+        return new IntervalDay(this.stringValue);
     }
 
     @Override

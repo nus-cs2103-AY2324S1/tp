@@ -33,19 +33,19 @@ public class Interval {
     }
 
     public IntervalDay getIntervalDay() {
-        return intervalDay;
+        return intervalDay.copy();
     }
 
     public Duration getDuration() {
-        return duration;
+        return duration.copy();
     }
 
     public IntervalBegin getIntervalBegin() {
-        return intervalBegin;
+        return intervalBegin.copy();
     }
 
     public IntervalEnd getIntervalEnd() {
-        return intervalEnd;
+        return intervalEnd.copy();
     }
 
     @Override
