@@ -18,7 +18,8 @@ public abstract class CompleteCommand extends Command {
             + "by the index number used in the displayed person list or "
             + "by a specified date\n"
             + "Parameters: [INDEX(must be a positive integer)] "
-            + "[" + PREFIX_APPOINTMENT_DATE + "Appointment Date] *At least one parameter specified\n"
+            + "[" + PREFIX_APPOINTMENT_DATE + "Appointment Date] *Only one of the 2 parameters may and "
+            + "must be specified\n"
             + "Example: " + COMMAND_WORD + " 1 ";
     public static final String MESSAGE_COMPLETE_SUCCESS = "Appointment(s) Completed!";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Input Date should be in format of dd-MM-yyyy";
