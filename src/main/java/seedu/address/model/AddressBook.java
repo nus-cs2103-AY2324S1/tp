@@ -107,12 +107,28 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    /**
+     * Set the person as paid in the address book.
+     * The person must exist in the address book.
+     */
     public void setPaid(Person target) {
-        target.setPaid();
+        persons.setPaid(target);
     }
 
+    /**
+     * Set the person as not paid in the address book.
+     * The person must exist in the address book.
+     */
+    public void setUnPaid(Person target) {
+        persons.setUnPaid(target);
+    }
+
+    /**
+     * Get the person's paid status.
+     * The person must exist in the address book.
+     */
     public boolean getPaid(Person target) {
-        return target.getPaid();
+        return persons.getPaid(target);
     }
 
     /**

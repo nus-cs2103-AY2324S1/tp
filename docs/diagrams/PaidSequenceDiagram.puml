@@ -1,0 +1,83 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PaidCommandParser" as PaidCommandParser LOGIC_COLOR
+participant "d:PaidCommand" as PaidCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("paid 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("paid 1")
+activate AddressBookParser
+
+create PaidCommandParser
+AddressBookParser -> PaidCommandParser
+activate PaidCommandParser
+
+PaidCommandParser --> AddressBookParser
+deactivate PaidCommandParser
+
+AddressBookParser -> PaidCommandParser : parse("1")
+activate PaidCommandParser
+
+create PaidCommand
+PaidCommandParser -> PaidCommand
+activate PaidCommand
+
+PaidCommand --> PaidCommandParser : p
+deactivate PaidCommand
+
+PaidCommandParser --> AddressBookParser : p
+deactivate PaidCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PaidCommandParser -[hidden]-> AddressBookParser
+destroy PaidCommandParser
+
+AddressBookParser --> LogicManager : p
+deactivate AddressBookParser
+
+LogicManager -> PaidCommand : execute()
+activate PaidCommand
+
+PaidCommand -> Model : purgeAddressBook()
+activate Model
+
+Model --> PaidCommand
+deactivate Model
+
+PaidCommand -> Model : markPersonPaid(1)
+activate Model
+
+Model --> PaidCommand
+deactivate Model
+
+PaidCommand -> Model : commitAddressBook()
+activate Model
+
+Model --> PaidCommand
+deactivate Model
+
+create CommandResult
+PaidCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PaidCommand
+deactivate CommandResult
+
+PaidCommand --> LogicManager : result
+deactivate PaidCommand
+
+PaidCommand -[hidden]-> LogicManager
+destroy PaidCommand
+[<--LogicManager
+deactivate LogicManager
+@enduml

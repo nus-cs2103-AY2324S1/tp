@@ -8,6 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new PaidCommand object
+ * (Make use of the template of DeleteCommandParser and did some modifications)
  */
 public class PaidCommandParser implements Parser<PaidCommand> {
 
