@@ -25,6 +25,7 @@ There are two ways to run tests.
 <box type="info" seamless>
 
 **Link**: Read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/tutorials/gradle.html) to learn more about using Gradle.
+
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -35,7 +36,7 @@ This project has three types of tests:
 
 1. *Unit tests* targeting the lowest level methods/classes.<br>
    e.g. `seedu.lovebook.commons.StringUtilTest`
-1. *Integration tests* that are checking the integration of multiple code units (those code units are assumed to be working).<br>
+2. *Integration tests* that are checking the integration of multiple code units (those code units are assumed to be working).<br>
    e.g. `seedu.lovebook.storage.StorageManagerTest`
-1. Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
+3. Hybrids of unit and integration tests. These test are checking multiple code units as well as how they are connected together.<br>
    e.g. `seedu.lovebook.logic.LogicManagerTest`
