@@ -290,7 +290,10 @@ The following activity diagram shows how the cancel operation works:
 
 ### Schedule feature 
 
-Implementation
+[ScheduleCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/appointmentparser/ScheduleCommandParser.java
+[ScheduleCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/appointmentcommands/ScheduleCommand.java
+
+#### Implementation
 
 The implementation of the schedule feature is similar to the implementation for adding a patient. The Schedule command 
 takes in an _Appointment object_ (containing the Start Time, End Time and Appointment Description) and _Name object_ 
@@ -372,6 +375,31 @@ Step 9. Appointment is rescheduled.
 The following activity diagram shows how the reschedule operation works:
 
 ![RescheduleCommandActivityDiagram](images/RescheduleCommandActivityDiagram.png)
+
+### Find patient appointments feature
+
+[FindAppointmentCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/appointmentparser/FindAppointmentCommandParser.java
+[FindAppointmentCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/appointmentcommands/FindAppointmentCommand.java
+
+### Implementation
+
+For _FindAppointment_ command, the noteworthy classes involved are:
+
+- [`FindAppointmentCommandParser.java`][FindAppointmentCommandParser.java] - This parses the user input, checks for its validity and creates a new `FindAppointmentCommand` object.
+
+- [`FindAppointmentCommand.java`][FindAppointmentCommand.java] - This command object executes to update the filtered appointments list to show all appointments that is tagged to a patient whose named is specified through the keyword. 
+
+The feature is implemented by first creating a predicate based upon the keywords input by the user. The predicate is then
+used to the update the filtered appointment list stored in the model such that it will only display appointments tagged
+to patients whose name matches the keywords.
+
+Note: 
+1) Multiple keywords, denoted by a space, can be used. 
+2) Patient name must be an exact match to any one of the keywords keyed into the program (CASE-INSENSITIVE). 
+
+The following sequence diagram shows how the find appointment command works:
+
+![FindAppointmentCommandSequenceDiagram](images/FindAppointmentCommandSequenceDiagram.png)
 
 ### Display upcoming appointments feature
 

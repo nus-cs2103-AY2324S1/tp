@@ -45,7 +45,7 @@ destroy UpcomingCommandParser
 AddressBookParser --> LogicManager : upcomingCommand
 deactivate AddressBookParser
 
-LogicManager -> UpcomingCommand : execute()
+LogicManager -> UpcomingCommand : execute(model)
 activate UpcomingCommand
 
 UpcomingCommand -> Model : updateFilteredAppointmentList()
