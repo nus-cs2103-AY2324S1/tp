@@ -7,6 +7,7 @@ import static seedu.classmanager.logic.parser.CommandParserTestUtil.assertParseS
 
 import org.junit.jupiter.api.Test;
 
+import seedu.classmanager.logic.Messages;
 import seedu.classmanager.logic.commands.CommentCommand;
 import seedu.classmanager.model.student.Comment;
 import seedu.classmanager.model.student.StudentNumber;
@@ -53,13 +54,13 @@ public class CommentCommandParserTest {
     public void parse_multipleStudentPrefix_throwsParseException() {
         assertParseFailure(parser, " s/ " + VALID_STUDENT_NUMBER_BOB
                 + " s/ " + VALID_STUDENT_NUMBER_BOB
-                + " cm/ Good student", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CommentCommand.MESSAGE_USAGE));
+                + " cm/ Good student", Messages.getErrorMessageForDuplicatePrefixes(new Prefix("s/")));
     }
 
     @Test
     public void parse_multipleCommentPrefix_throwsParseException() {
         assertParseFailure(parser, " s/ " + VALID_STUDENT_NUMBER_BOB + " cm/ Good student cm/ Good Student",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CommentCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageForDuplicatePrefixes(new Prefix("cm/")));
     }
 
 }
