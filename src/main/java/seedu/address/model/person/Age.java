@@ -57,4 +57,7 @@ public class Age {
         return value.hashCode();
     }
 
+    public Age getCopy() {
+        return new Age(this.value);
+    }
 }

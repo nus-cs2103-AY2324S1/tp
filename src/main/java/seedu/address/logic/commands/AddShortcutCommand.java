@@ -40,15 +40,16 @@ public class AddShortcutCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         String feedback = model.registerShortcut(shortcutAlias, command);
-        model.commitAddressBook();
         if (feedback == null) {
             // Completely new mapping
+            model.commit();
             return new CommandResult(String.format(MESSAGE_SUCCESS, shortcutAlias + " --> " + command));
         } else if (feedback.equals(command.keyword)) {
             // A duplicate mapping was replaced
             return new CommandResult(String.format(MESSAGE_DUPLICATE, shortcutAlias + " --> " + command));
         } else {
             // A non-duplicate mapping was replaced
+            model.commit();
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS, shortcutAlias + " --> " + command)
                             + "\n"

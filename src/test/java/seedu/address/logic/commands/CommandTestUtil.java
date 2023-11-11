@@ -148,8 +148,7 @@ public class CommandTestUtil {
                                             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook(),
-                actualModel.getShortcutSettings());
+        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
@@ -204,7 +203,7 @@ public class CommandTestUtil {
         try {
             commandResult = logicManager.execute(input);
         } catch (Exception e) {
-            fail("Expected CommandResult but exception was thrown : " + e.getMessage());
+            fail("Expected CommandResult but exception was thrown : " + e + " : " + e.getMessage());
             return;
         }
         assertEquals(expectedCommandResult, commandResult);

@@ -42,7 +42,7 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.canRedo();
 
         assertCommandSuccess(deleteCommand, model, expectedMessageBuilder.toString(), expectedModel);
     }
@@ -67,7 +67,7 @@ public class DeleteCommandTest {
         for (Person person: personsToDelete) {
             expectedModel.deletePerson(person);
         }
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
         assertCommandSuccess(deleteCommand, model, expectedMessageBuilder.toString(), expectedModel);
     }
 
@@ -95,7 +95,7 @@ public class DeleteCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
 
         assertCommandSuccess(deleteCommand, model, expectedMessageBuilder.toString(), expectedModel);
     }

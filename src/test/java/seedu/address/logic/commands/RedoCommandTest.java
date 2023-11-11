@@ -74,7 +74,7 @@ public class RedoCommandTest {
     private static void deleteFirstPerson(Model model) {
         Person firstPerson = model.getFilteredPersonList().get(0);
         model.deletePerson(firstPerson);
-        model.commitAddressBook();
+        model.commit();
     }
 
     @BeforeEach
@@ -82,23 +82,23 @@ public class RedoCommandTest {
         // set up of both models' undo/redo history
         deleteFirstPerson(model);
         deleteFirstPerson(model);
-        model.undoAddressBook();
-        model.undoAddressBook();
+        model.undo();
+        model.undo();
 
         deleteFirstPerson(expectedModel);
         deleteFirstPerson(expectedModel);
-        expectedModel.undoAddressBook();
-        expectedModel.undoAddressBook();
+        expectedModel.undo();
+        expectedModel.undo();
     }
 
     @Test
     public void execute() {
         // multiple redoable states in model
-        expectedModel.redoAddressBook();
+        expectedModel.redo();
         assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single redoable state in model
-        expectedModel.redoAddressBook();
+        expectedModel.redo();
         assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no redoable state in model
@@ -113,18 +113,18 @@ public class RedoCommandTest {
         //multiple successions of addsc and undo
         model.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        model.commitAddressBook();
+        model.commit();
 
         model.getShortcutSettings().registerShortcut(new ShortcutAlias("del2"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        model.commitAddressBook();
+        model.commit();
 
         model.getShortcutSettings().registerShortcut(new ShortcutAlias("del3"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        model.commitAddressBook();
-        model.undoAddressBook();
-        model.undoAddressBook();
-        model.undoAddressBook();
+        model.commit();
+        model.undo();
+        model.undo();
+        model.undo();
 
         //all previously added and then undone should throw unknown command error when called
         assertExceptionExecutedFromLogicManager(logicManager, "del 1",
@@ -134,9 +134,9 @@ public class RedoCommandTest {
         assertExceptionExecutedFromLogicManager(logicManager, "del3 1",
                 new ParseException(MESSAGE_UNKNOWN_COMMAND));
 
-        model.redoAddressBook();
-        model.redoAddressBook();
-        model.redoAddressBook();
+        model.redo();
+        model.redo();
+        model.redo();
 
         String expectedFeedback = "Deleted 1 Person(s):\n"
                 + "1. Patient: Alice Pauline; Phone: 94351253";
@@ -148,7 +148,7 @@ public class RedoCommandTest {
         //final addsc to make sure previous unknown command errors are not flukes
         model.getShortcutSettings().registerShortcut(new ShortcutAlias("del4"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        model.commitAddressBook();
+        model.commit();
 
         String commandResultString = "Deleted 1 Person(s):\n"
                 + "1. Patient: Benson Meier; Phone: 98765432";
@@ -164,7 +164,7 @@ public class RedoCommandTest {
         //add and test shortcut works
         model.getShortcutSettings().registerShortcut(new ShortcutAlias("del2"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        model.commitAddressBook();
+        model.commit();
         String commandResultString = "Deleted 1 Person(s):\n"
                 + "1. Patient: Alice Pauline; Phone: 94351253";
         assertCommandResultExecutedFromLogicManager(logicManager, "del2 1",
@@ -172,12 +172,12 @@ public class RedoCommandTest {
 
         //remove and test shortcut doesn't work
         model.getShortcutSettings().removeShortcut(new ShortcutAlias("del2"));
-        model.commitAddressBook();
+        model.commit();
         assertExceptionExecutedFromLogicManager(logicManager, "del2 1",
                 new ParseException(MESSAGE_UNKNOWN_COMMAND));
 
-        model.undoAddressBook();
-        model.redoAddressBook();
+        model.commit();
+        model.commit();
         assertExceptionExecutedFromLogicManager(logicManager, "del2 1",
                 new ParseException(MESSAGE_UNKNOWN_COMMAND));
     }

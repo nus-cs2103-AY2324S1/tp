@@ -17,7 +17,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
@@ -52,10 +51,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook(), new ShortcutSettings()),
-                new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPatient);
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
         expectedModel.updateSelectedPerson(editedPatient);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -77,11 +75,11 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook(), model.getShortcutSettings()),
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new UserPrefs());
         expectedModel.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
         expectedModel.setPerson(lastPerson, editedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
         expectedModel.updateSelectedPerson(editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -96,11 +94,11 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook(), model.getShortcutSettings()),
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new UserPrefs());
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
         expectedModel.updateSelectedPerson(editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

@@ -85,6 +85,7 @@ public class FindCommand extends Command {
                 .map(pred -> pred.test(person))
                 .reduce(true, (x, y) -> x && y);
         model.updateFilteredPersonList(predicate.and(personType.getSearchPredicate()));
+        model.commit();
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

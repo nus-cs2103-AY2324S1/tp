@@ -90,7 +90,7 @@ public class AddCommand extends Command {
         } else {
             model.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
         }
-        model.commitAddressBook();
+        model.commit();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

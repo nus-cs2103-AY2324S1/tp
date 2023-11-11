@@ -26,7 +26,7 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoAddressBook();
+        model.undo();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

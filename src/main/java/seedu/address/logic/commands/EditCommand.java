@@ -115,8 +115,8 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.commitAddressBook();
         model.updateSelectedPerson(editedPerson);
+        model.commit();
 
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }

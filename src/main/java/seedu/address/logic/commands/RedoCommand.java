@@ -27,7 +27,7 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.redoAddressBook();
+        model.redo();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

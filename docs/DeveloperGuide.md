@@ -158,39 +158,48 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Undo/redo feature
 
-The undo/redo mechanism is facilitated by `TrackedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. 
-Each `AddressBook` also stores a copy of `ShortcutSettings` that matches the shortcuts that the user is using at that frame.
-Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `ModelManager`. It implements `Model` with an undo/redo history, stored internally as an `modelManagerStateList` and `currentStatePointer`.
 
-* `TrackedAddressBook#commit()` — Saves the current address book state in its history.
-* `TrackedAddressBook#undo()` — Restores the previous address book state from its history.
-* `TrackedAddressBook#redo()` — Restores a previously undone address book state from its history.
+`modelManagerStateList` contains a list of `ReadOnlyModelManager`
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Each `ReadOnlyModelManager` contains : 
+*  `addressBook`
+*  `filteredPersons`
+*  `userPrefs`
+*  `selectedPerson`
+*  `themeProperty`
+
+Additionally, ModelManager implements the following operations:
+
+* `ModelManager#commit()` — Saves the current ModelManager state in its history.
+* `ModelManager#undo()` — Restores the previous ModelManager state from its history.
+* `ModelManager#redo()` — Restores a previously undone ModelManager state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commit()`, `Model#undo()` and `Model#redo()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `TrackedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `ModelManager` will be initialized and `ModelManager#Commit` is called with the initial ModelManager state, and the `currentStatePointer` pointing to that single ReadOnlyModelManager state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the current list. The `delete` command calls `Model#commit()`, causing the modified state of the ModelManager after the `delete 5` command executes to be saved in the `modelManagerStateList`, and the `currentStatePointer` is shifted to the newly inserted ModelManager state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add -pa n/David …​` to add a new person. The `add` command also calls `Model#commit()`, causing another modified ModelManager state to be saved into the `ModelManagerStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commit()`, so the ModelManager state will not be saved into the `ModelManagerStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undo()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous ModelManager state, and restores the ModelManager to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial ModelManager state, then there are no previous ModelManager states to restore. The `undo` command uses `ModelManager#hasHistory()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -203,19 +212,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redo()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the ModelManager to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `ModelManagerStateList.size() - 1`, pointing to the latest ModelManager state, then there are no undone ModelManager states to restore. The `redo` command uses `ModelManager#canRedo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list -pa`. Since this command modifies the ModelManager, `Model#commit()` is called.
+Since the `currentStatePointer` is not pointing at the end of the `ModelManagerStateList`, all ModelManager states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add -pa n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 

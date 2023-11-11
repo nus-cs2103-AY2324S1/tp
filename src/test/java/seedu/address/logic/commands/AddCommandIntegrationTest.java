@@ -35,7 +35,7 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
         expectedModel.updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
 
         assertCommandSuccess(new AddCommand(validPerson), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
@@ -48,7 +48,7 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
         expectedModel.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
 
         assertCommandSuccess(new AddCommand(validPerson), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),

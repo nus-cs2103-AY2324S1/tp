@@ -212,17 +212,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undo() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redo() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commit() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -302,7 +302,7 @@ public class AddCommandTest {
          * override ModelStub to not throw an error, but does nothing
          */
         @Override
-        public void commitAddressBook() {
+        public void commit() {
         }
     }
 

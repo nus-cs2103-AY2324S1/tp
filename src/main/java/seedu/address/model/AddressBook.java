@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -17,7 +16,6 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private ShortcutSettings shortcutSettings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,7 +25,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        shortcutSettings = new ShortcutSettings();
         persons = new UniquePersonList();
     }
 
@@ -37,9 +34,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied, ShortcutSettings shortcutSettings) {
+    public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
-        resetData(toBeCopied, shortcutSettings);
+        resetData(toBeCopied);
     }
 
     //// list overwrite operations
@@ -55,10 +52,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData} and {@code shortcutSettings}.
      */
-    public void resetData(ReadOnlyAddressBook newData, ShortcutSettings shortcutSettings) {
+    public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        requireNonNull(shortcutSettings);
-        this.shortcutSettings = shortcutSettings;
         setPersons(newData.getPersonList());
     }
 
@@ -111,10 +106,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
-    }
-    @Override
-    public ShortcutSettings getShortcutSettings() {
-        return this.shortcutSettings;
     }
     @Override
     public boolean equals(Object other) {

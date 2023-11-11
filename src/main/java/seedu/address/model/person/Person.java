@@ -56,6 +56,7 @@ public abstract class Person {
     }
 
     public abstract boolean isSamePerson(Person otherPerson);
+    public abstract Person getCopy();
 
     /**
      * Returns true if both persons have the same identity and data fields.

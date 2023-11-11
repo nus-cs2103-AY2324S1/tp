@@ -142,7 +142,7 @@ public interface Model {
 
     boolean hasHistory();
     boolean canRedo();
-    void undoAddressBook();
-    void redoAddressBook();
-    void commitAddressBook();
+    void undo();
+    void redo();
+    void commit();
 }

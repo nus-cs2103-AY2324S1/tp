@@ -59,4 +59,7 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    public Tag getCopy() {
+        return new Tag(this.tagName);
+    }
 }

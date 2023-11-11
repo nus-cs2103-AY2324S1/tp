@@ -78,7 +78,7 @@ public class UndoCommandTest {
     public static void deleteFirstPerson(Model model) {
         Person firstPerson = model.getFilteredPersonList().get(0);
         model.deletePerson(firstPerson);
-        model.commitAddressBook();
+        model.commit();
     }
 
     @BeforeEach
@@ -94,11 +94,11 @@ public class UndoCommandTest {
     @Test
     public void execute() {
         // multiple undoable states in model
-        expectedModel.undoAddressBook();
+        expectedModel.undo();
         assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single undoable state in model
-        expectedModel.undoAddressBook();
+        expectedModel.undo();
         assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no undoable states in model
@@ -113,18 +113,18 @@ public class UndoCommandTest {
         //multiple successions of addsc and undo
         model.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        model.commitAddressBook();
+        model.commit();
 
         model.getShortcutSettings().registerShortcut(new ShortcutAlias("del2"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        model.commitAddressBook();
+        model.commit();
 
         model.getShortcutSettings().registerShortcut(new ShortcutAlias("del3"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        model.commitAddressBook();
-        model.undoAddressBook();
-        model.undoAddressBook();
-        model.undoAddressBook();
+        model.commit();
+        model.undo();
+        model.undo();
+        model.undo();
 
         //all previously added and then undone should throw unknown command error when called
         assertExceptionExecutedFromLogicManager(logicManager, "del 1",
@@ -137,7 +137,7 @@ public class UndoCommandTest {
         //final addsc to make sure previous unknown command errors are not flukes
         model.getShortcutSettings().registerShortcut(new ShortcutAlias("del4"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        model.commitAddressBook();
+        model.commit();
 
         String commandResultString = "Deleted 1 Person(s):\n"
                 + "1. Patient: Alice Pauline; Phone: 94351253";
@@ -153,7 +153,7 @@ public class UndoCommandTest {
         //add and test shortcut works
         model.getShortcutSettings().registerShortcut(new ShortcutAlias("del2"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
-        model.commitAddressBook();
+        model.commit();
         String commandResultString = "Deleted 1 Person(s):\n"
                 + "1. Patient: Alice Pauline; Phone: 94351253";
         assertCommandResultExecutedFromLogicManager(logicManager, "del2 1",
@@ -161,12 +161,12 @@ public class UndoCommandTest {
 
         //remove and test shortcut doesnt work
         model.getShortcutSettings().removeShortcut(new ShortcutAlias("del2"));
-        model.commitAddressBook();
+        model.commit();
         assertExceptionExecutedFromLogicManager(logicManager, "del2 1",
                 new ParseException(MESSAGE_UNKNOWN_COMMAND));
 
         //undo and test shortcut works again
-        model.undoAddressBook();
+        model.undo();
         commandResultString = "Deleted 1 Person(s):\n"
                 + "1. Patient: Benson Meier; Phone: 98765432";
         assertCommandResultExecutedFromLogicManager(logicManager, "del2 1",

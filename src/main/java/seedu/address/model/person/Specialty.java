@@ -62,4 +62,7 @@ public class Specialty {
         return value.hashCode();
     }
 
+    public Specialty getCopy() {
+        return new Specialty(this.value);
+    }
 }

@@ -77,4 +77,8 @@ public class Email {
         return value.hashCode();
     }
 
+    public Email getCopy() {
+        return new Email(this.value);
+    }
+
 }

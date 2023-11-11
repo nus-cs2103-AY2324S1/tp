@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -18,13 +20,16 @@ import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.ShortcutAlias;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private final TrackedAddressBook trackedAddressBook;
+    private final List<ReadOnlyModelManager> modelManagerStateList;
+    private int currentStatePointer;
+    private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private Person selectedPerson;
@@ -34,7 +39,7 @@ public class ModelManager implements Model {
      * JSON Serialising library, it causes errors when put under there, and so the
      * theme preference cannot be saved from session to session.
      */
-    private ThemeProperty themeProperty;
+    private final ThemeProperty themeProperty;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,20 +49,39 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.trackedAddressBook = new TrackedAddressBook(addressBook, userPrefs.getShortcutSettings());
+        this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.trackedAddressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.commandStringStash = new CommandStringStash();
         this.themeProperty = new ThemeProperty();
+        this.modelManagerStateList = new ArrayList<>();
+        this.currentStatePointer = -1;
 
         // DoConnek Pro shows all patients on startup by default.
         updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
 
         this.selectedPerson = filteredPersons.size() == 0 ? null : filteredPersons.get(0);
+        commit();
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
+    }
+
+    /**
+     * Resets this ModelManager's data to copy another ModelManager's
+     * @param toCopyFrom ModelManager to copy from
+     */
+    public void resetData(ReadOnlyModelManager toCopyFrom) {
+        setAddressBook(new AddressBook(toCopyFrom.addressBook));
+        setUserPrefs(toCopyFrom.userPrefs.getCopy());
+        Person personCopy = toCopyFrom.selectedPerson == null
+                ? null
+                : toCopyFrom.selectedPerson.getCopy();
+        updateSelectedPerson(personCopy);
+        Predicate<Person> predicateCopy = toCopyFrom.filteredPersons.getPredicate()::test;
+        updateFilteredPersonList(predicateCopy);
+        setTheme(toCopyFrom.themeProperty.getValue());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -124,28 +148,28 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.trackedAddressBook.resetData(addressBook, userPrefs.getShortcutSettings());
+        this.addressBook.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return trackedAddressBook;
+        return addressBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return trackedAddressBook.hasPerson(person);
+        return addressBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        trackedAddressBook.removePerson(target);
+        addressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        trackedAddressBook.addPerson(person);
+        addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -153,7 +177,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        trackedAddressBook.setPerson(target, editedPerson);
+        addressBook.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -233,7 +257,7 @@ public class ModelManager implements Model {
             return false;
         }
         ModelManager otherModelManager = (ModelManager) other;
-        return trackedAddressBook.equals(otherModelManager.trackedAddressBook)
+        return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && ((this.isSelectedEmpty() && otherModelManager.isSelectedEmpty())
@@ -244,26 +268,80 @@ public class ModelManager implements Model {
     //=========== Undo-Redo =============================================================
     @Override
     public boolean hasHistory() {
-        return trackedAddressBook.hasHistory();
+        return currentStatePointer > 0;
     }
 
     @Override
     public boolean canRedo() {
-        return trackedAddressBook.canRedo();
+        return currentStatePointer < modelManagerStateList.size() - 1;
     }
 
     @Override
-    public void undoAddressBook() {
-        trackedAddressBook.undo();
+    public void redo() {
+        if (!canRedo()) {
+            throw new ModelManager.NoRedoableStateException();
+        }
+        currentStatePointer++;
+        resetData(modelManagerStateList.get(currentStatePointer));
     }
 
+    /**
+     * Saves a copy of the current {@code ModelManager} state at the end of the state list.
+     * Undone states are removed from the state list.
+     */
     @Override
-    public void commitAddressBook() {
-        trackedAddressBook.commit();
+    public void commit() {
+        removeStatesAfterCurrentPointer();
+        Person personCopy =
+                this.selectedPerson == null
+                ? null
+                : this.selectedPerson.getCopy();
+        //making a copy of current filteredPersons
+        UniquePersonList obListCopy = new UniquePersonList();
+        obListCopy.setPersons(this.addressBook.getPersonList());
+        FilteredList<Person> filteredListCopy = new FilteredList<>(obListCopy.asUnmodifiableObservableList());
+        filteredListCopy.setPredicate(this.filteredPersons.getPredicate());
+
+        modelManagerStateList.add(new ReadOnlyModelManager(
+                new AddressBook(this.addressBook),
+                filteredListCopy,
+                this.userPrefs.getCopy(),
+                personCopy,
+                this.themeProperty.getCopy()
+        ));
+        currentStatePointer++;
     }
 
+    private void removeStatesAfterCurrentPointer() {
+        modelManagerStateList.subList(currentStatePointer + 1, modelManagerStateList.size()).clear();
+    }
+
+    /**
+     * Restores the ModelManager to its previous state.
+     */
     @Override
-    public void redoAddressBook() {
-        trackedAddressBook.redo();
+    public void undo() {
+        if (!hasHistory()) {
+            throw new seedu.address.model.ModelManager.NoUndoableStateException();
+        }
+        currentStatePointer--;
+        resetData(modelManagerStateList.get(currentStatePointer));
+    }
+    /**
+     * Thrown when trying to {@code undo()} but can't.
+     */
+    public static class NoUndoableStateException extends RuntimeException {
+        private NoUndoableStateException() {
+            super("Current state pointer at start of addressBookState list, unable to undo.");
+        }
+    }
+
+    /**
+     * Thrown when trying to {@code redo()} but can't.
+     */
+    public static class NoRedoableStateException extends RuntimeException {
+        private NoRedoableStateException() {
+            super("Current state pointer at end of addressBookState list, unable to redo.");
+        }
     }
 }
