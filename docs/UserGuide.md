@@ -228,7 +228,7 @@ Examples:
 
 Output:
 
-|  Before find   |![img.png](images/Beforefind.png)  |
+|  Before find   | ![img.png](images/BeforeFind.png) |
 |:--------------:|:---------------------------------:|
 | **After find** | ![img.png](images/AfterFind.png)  |
 
