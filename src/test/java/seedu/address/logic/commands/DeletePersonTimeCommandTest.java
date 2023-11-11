@@ -31,8 +31,6 @@ import seedu.address.testutil.PersonBuilder;
 
 public class DeletePersonTimeCommandTest {
 
-    public static final Person VALID_PERSON = new PersonBuilder().build();
-
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DeletePersonTimeCommand(null, null));
@@ -40,12 +38,14 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personTimeIntervalDeletionSuccess() throws Exception {
+        Person VALID_PERSON = new PersonBuilder().build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(VALID_PERSON);
 
-
+        modelStub.person.getTime().forEach(x->System.out.print(x+"\n\n\n"));
         // Person has time interval to be deleted
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
+
         CommandResult commandResult =
                 new DeletePersonTimeCommand(VALID_PERSON.getName(), validTimeInterval).execute(modelStub);
 
@@ -55,6 +55,7 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personSingleTimeIntervalDeletionFail() throws Exception {
+        Person VALID_PERSON = new PersonBuilder().build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(VALID_PERSON);
         // Person does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
@@ -70,6 +71,7 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personMultipleTimeIntervalDeletionFail() throws Exception {
+        Person VALID_PERSON = new PersonBuilder().build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(VALID_PERSON);
         // Person does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
@@ -88,6 +90,7 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personMultipleTimeIntervalDeletionPass() throws Exception {
+        Person VALID_PERSON = new PersonBuilder().build();
         ModelStubPersonWithMultipleTimings modelStub = new ModelStubPersonWithMultipleTimings(VALID_PERSON);
         // Person has all the time intervals
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
@@ -303,7 +306,7 @@ public class DeletePersonTimeCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubPersonWithMultipleTimings extends ModelStub {
-        private final Person person;
+        private Person person;
 
         ModelStubPersonWithMultipleTimings(Person person) throws ParseException {
             requireNonNull(person);

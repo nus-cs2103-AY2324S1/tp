@@ -81,7 +81,7 @@ public class GroupBuilder {
                 throw new RuntimeException(e);
             }
         });
-        this.timeIntervalList = tempList;
+        this.timeIntervalList.addAll(tempList);
         return this;
     }
 

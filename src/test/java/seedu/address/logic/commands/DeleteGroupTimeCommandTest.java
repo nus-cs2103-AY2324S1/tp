@@ -30,16 +30,10 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 
 public class DeleteGroupTimeCommandTest {
-    public static final Group VALID_GROUP = new GroupBuilder()
-            .withTimeIntervalList(VALID_TIME_MON, VALID_TIME_TUE).build();
-
-    @Test
-    public void constructor_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeletePersonTimeCommand(null, null));
-    }
-
     @Test
     public void execute_groupTimeIntervalDeletionSuccess() throws Exception {
+        Group VALID_GROUP = new GroupBuilder()
+                .withTimeIntervalList(VALID_TIME_MON, VALID_TIME_TUE).build();
         ModelStubWithGroup modelStub = new ModelStubWithGroup(VALID_GROUP);
 
         // Group has time interval to be deleted
@@ -56,7 +50,14 @@ public class DeleteGroupTimeCommandTest {
     }
 
     @Test
+    public void constructor_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeletePersonTimeCommand(null, null));
+    }
+
+    @Test
     public void execute_groupSingleTimeIntervalDeletionFail() throws Exception {
+        Group VALID_GROUP = new GroupBuilder()
+                .withTimeIntervalList(VALID_TIME_MON, VALID_TIME_TUE).build();
         ModelStubWithGroup modelStub = new ModelStubWithGroup(VALID_GROUP);
         // Person does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
@@ -70,6 +71,8 @@ public class DeleteGroupTimeCommandTest {
 
     @Test
     public void execute_groupMultipleTimeIntervalDeletionFail() throws Exception {
+        Group VALID_GROUP = new GroupBuilder()
+                .withTimeIntervalList(VALID_TIME_MON, VALID_TIME_TUE).build();
         ModelStubWithGroup modelStub = new ModelStubWithGroup(VALID_GROUP);
         // Group does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
@@ -87,6 +90,8 @@ public class DeleteGroupTimeCommandTest {
 
     @Test
     public void execute_groupMultipleTimeIntervalDeletionPass() throws Exception {
+        Group VALID_GROUP = new GroupBuilder()
+                .withTimeIntervalList(VALID_TIME_MON, VALID_TIME_TUE).build();
         ModelStubGroupWithMultipleTimings modelStub = new ModelStubGroupWithMultipleTimings(VALID_GROUP);
         // Person has all the time intervals
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
@@ -290,9 +295,8 @@ public class DeleteGroupTimeCommandTest {
         public String deleteTimeFromGroup(Group group,
                                           ArrayList<TimeInterval> toDeleteTime) throws CommandException {
             requireNonNull(group);
-            Group groupInModel = this.group;
             try {
-                return groupInModel.deleteTime(toDeleteTime);
+                return group.deleteTime(toDeleteTime);
             } catch (CommandException e) {
                 throw new CommandException(e.getMessage());
             }
