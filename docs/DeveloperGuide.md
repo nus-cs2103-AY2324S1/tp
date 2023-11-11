@@ -607,7 +607,7 @@ testers are expected to do more *exploratory* testing.
 
     { more test cases …​ }_
 
-### 7 Saving data
+### 7. Saving data
 
 1. Dealing with missing/corrupted data files
 
