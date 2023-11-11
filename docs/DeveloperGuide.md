@@ -76,7 +76,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI. Notably, Profile is a separate set of classes that handle the UI of the `view` command, which will be covered later in this document.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -155,6 +155,52 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### View feature
+
+Called `PersonProfile` or simply "profile" internally. The profile follow this structure:
+
+![Structure of Profile Component](images/UiProfileDiagram.png)
+
+Except notes and tags, all other fosterer details are handled using dynamically created copies of `PersonProfileField`.
+
+- `PersonProfileHeader` serves as headers for the data, and cannot be edited by the user.
+- `PersonProfileField` handles a field key and a field value, where the value can be edited.
+- `PersonProfileNote` is similar to a field, except it contains a `TextArea` and supports multiline input.
+- `PersonProfileTags` also supports multiline input, but when in read mode displays tags in a `FlowPane`.
+
+The following is a sequence diagram that shows two sequential processes: the user starting an edit in a field,
+and the user successfully completing that edit. The alternative paths to this process are numerous, and covering them exhaustively
+is likely not productive. Instead, this represents the "success path" of a successful edit, where nearly every step handles potential failure.
+
+Step 1. The user begins by entering "mail" in the command box of the main UI.
+
+Step 2. The `MainWindow` finds the correct field that corresponds to the user input, and tells `PersonProfile`.
+
+Step 3. `PersonProfile` locates the relevant `PersonProfileField`, and forwards the request for focus.
+
+Step 4. The user's cursor now jumps to the relevant `PersonProfileField`, and thus their next action is handled directly from `PersonProfileField`.
+
+Step 5. The user presses the `enter` key, which alongside the `esc` key, are special keys involved in the confirmation or cancellation of the edit.
+
+Step 6. `PersonProfileField` checks that the entered information is valid for that particular field.
+
+Step 7. `PersonProfileField` then updates the `PersonProfile` about the change.
+
+Step 8. `PersonProfileField` triggers the event `AFTER_CONFIRM` because the user started a confirmation.
+
+Step 9. One of the event handlers listening to the `AFTER_CONFIRM` event is `handleFieldLockIn`, which initiates the next two steps.
+
+Step 10. `handleFieldLockIn` checks that the new `Person` object described by the fields is valid, and creates one.
+
+Step 11. `handleFieldLockIn` then asks the `MainWindow` to tell the user that the `Person` is created.
+
+
+Further details on the `MainWindow` side are omitted in this explanation and diagram.
+
+
+![Sequence of PersonProfile](images/ProfileEditSequenceDiagram.png)
+
 
 ### Add feature
 
