@@ -291,7 +291,8 @@ testing your memory with the most difficult flashcard.
 
 
 ## Commands
-### Adding a Flashcard: `add`
+
+### Adding a Flashcard : `add`
 
 Adds a flashcard to the deck for the user.
 
@@ -425,7 +426,7 @@ _Change the hint at index 1 to "Apple"._
        ![result of edit command](./images/UserGuide/1.4_edit.png)
 </div>
 
-### Practise Flashcards: `practise`
+### Practise Flashcards : `practise`
 Practise a single Flashcard in the deck
 
 #### Format:
@@ -454,7 +455,7 @@ _Practising the card in the deck with an index of 2._
    ![result of practise command](./images/UserGuide/1.4_practise.png)
 </div>
 
-### Hints for Flashcards: `hint`
+### Hints for Flashcards : `hint`
 See the hint for a question at the given index
 
 Format: 
@@ -483,7 +484,7 @@ _Hint the card in the deck with an index of 3._
    ![result of hint command](./images/UserGuide/1.4_hint.png)
 </div>
 
-### Solving Flashcards: `solve`
+### Solving Flashcards : `solve`
 Solves the question at the given index
 
 Format: 
@@ -513,7 +514,7 @@ _Solve the card in the deck with an index of 2._
    ![result of solve command](./images/UserGuide/1.4_solve.png)
 </div>
 
-### Setting Difficulty of Flashcards: `set`
+### Setting Difficulty of Flashcards : `set`
 Setting the difficulty of a flashcard, based on the user.
 
 Format: 
@@ -543,7 +544,7 @@ _Set the first card as easy_
    ![result of set command](./images/UserGuide/1.4_set.png)
 </div>
 
-### Randomly Practise Flashcards: `random`
+### Randomly Practise Flashcards : `random`
 Practise a single random Flashcard in the deck.
 
 #### Format: 
@@ -574,7 +575,7 @@ _Practise a random card._
    ![result of random command](./images/UserGuide/1.4_random.png)
 </div>
 
-### Clear All Flashcards: `clear`
+### Clear All Flashcards : `clear`
 Clears all flashcards found in the Deck. Deck is reset back to empty.
 
 #### Format: 
@@ -603,7 +604,7 @@ _Delete all flashcards from the deck._
       ![result of clear command](./images/UserGuide/1.4_clear.png)
 </div>
 
-### Setting Goals: `goal`
+### Setting Goals : `goal`
 Set a goal for the current studying session.
 
 #### Format:
@@ -632,7 +633,7 @@ _Set a goal of 5 for this session._
       ![result of goal command](./images/UserGuide/1.4_goal.png)
 </div>
       
-### Getting Help: `help`
+### Getting Help : `help`
 Seek more details from a link provided leading to the User Guide.
 Users can also access this function by clicking on the **File** button located at the top
 left of the application, and then navigating to the **Help** tab.
@@ -658,7 +659,7 @@ _Open help window._
       ![result of help command](./images/UserGuide/1.4_help.png)
 </div>
 
-### Exiting <span style="color: green;">lesSON</span>: `exit`
+### Exiting <span style="color: green;">lesSON</span> : `exit`
 Exits and closes the <span style="color: green;">lesSON</span> application.
 
 #### Format:
