@@ -37,7 +37,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TutorMate.
 
-4. Open a command terminal, navigate into the folder you put the jar file in using the change directory command `cd`, and use the `java -jar tutormate.jar` command to run the application.<br>
+4. Open a command terminal, navigate into the home folder using the change directory command `cd`, and use the `java -jar tutormate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/about.png)
@@ -336,6 +336,7 @@ Note you must provide a 'name' not already in the address book.
 Format: `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`
 * A new lesson cannot have the same name as existing students in the contact list.
 * Start time cannot be after end time.
+* Users can choose to specify the start or end time of a lesson only.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
@@ -394,7 +395,7 @@ Format: `addTask [INDEX] DESCRIPTION`
 <box type="tip" seamless>
 
 **Tips:**
-The command can be shortened to `addTask DESCRIPTION` if the task is to be added to the shown lesson.
+The command can be shortened to `addTask DESCRIPTION` without the `INDEX` if the task is to be added to the shown lesson.
 
 </box>
 
@@ -1210,7 +1211,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 **A**: Copy TutorMate's jar file into the folder you want to use as the home folder in the other computer. Before running the application, copy _addressbook.json_, _personLessonMap.json_ and _schedulelist.json_ files from the home folder in your current computer into the home folder of the other computer. After copying the 3 files, running the application will show the same data. However, do note that the changes made through the application in one computer will not be reflected in the data in another computer.
 
 **Q**: Can I edit the data in the application through the _addressbook.json, personLessonMap.json, schedulelist.json_ files directly? <br>
-**A**: It is possible. However, it is not advisable for you to do so as if the changes made to the data file makes its format invalid, TutorMate will discard all data. Read more about editing the storage files [here](#editing-the-data-file). Please use the `edit` command to make changes to your data instead.
+**A**: It is possible. However, it is not advisable for you to do so as if the changes made to the data file makes its format invalid, TutorMate will discard all data. Please use the `edit` command to make changes to your data instead. If you insist on directly modifying data files, please read this section [here](#editing-the-data-file) before doing so.
 
 **Q**: Can I still use the application without internet connection? <br>
 **A**: Yes, you can. TutorMate is an offline desktop application. The only exception is the "help" command which provides a URL to the user guide.
