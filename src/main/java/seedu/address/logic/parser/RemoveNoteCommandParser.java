@@ -17,22 +17,17 @@ public class RemoveNoteCommandParser implements Parser<RemoveNoteCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public RemoveNoteCommand parse(String args) throws ParseException {
-        try {
-            // Split based on space
-            String[] splitArgs = args.trim().split("\\s");
+        // Split based on space
+        String[] splitArgs = args.trim().split("\\s");
 
-            if (splitArgs.length != 2) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    RemoveNoteCommand.MESSAGE_USAGE));
-            }
-
-            Index indexPerson = ParserUtil.parseIndex(splitArgs[0]);
-            Index indexNote = ParserUtil.parseIndex(splitArgs[1]);
-
-            return new RemoveNoteCommand(indexPerson, indexNote);
-        } catch (ParseException pe) {
+        if (splitArgs.length != 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RemoveNoteCommand.MESSAGE_USAGE), pe);
+                RemoveNoteCommand.MESSAGE_USAGE));
         }
+
+        Index indexPerson = ParserUtil.parseIndex(splitArgs[0]);
+        Index indexNote = ParserUtil.parseIndex(splitArgs[1]);
+
+        return new RemoveNoteCommand(indexPerson, indexNote);
     }
 }

@@ -86,7 +86,7 @@ public class AddAltCommandParserTest {
         assertParseFailure(parser, "1 b/24/07 b/25/07", Messages.MESSAGE_DUPLICATE_FIELDS + "b/");
 
         // Invalid prefix
-        assertParseFailure(parser, "1 i/string b/24/07", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/string b/24/07", ParserUtil.MESSAGE_NOT_A_INDEX);
     }
 
     @Test
@@ -94,10 +94,10 @@ public class AddAltCommandParserTest {
         // Heuristic: Boundary value analysis
 
         // One value below boundary
-        assertParseFailure(parser, "-1 b/24/07/01" , MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-1 b/24/07/01" , ParserUtil.MESSAGE_INVALID_INDEX);
 
         // Value at boundary
-        assertParseFailure(parser, "0 b/24/07/01" , MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0 b/24/07/01" , ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
 }

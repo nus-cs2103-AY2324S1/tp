@@ -26,6 +26,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Avatar;
 import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
@@ -126,10 +127,11 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Optional<Integer> id = personToEdit.getId();
         ObservableList<Note> notes = personToEdit.getNotes();
+        Avatar avatar = personToEdit.getAvatar();
         Balance balance = personToEdit.getBalance();
 
         Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
-                updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id, notes, balance);
+                updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id, avatar, notes, balance);
 
         // Records down the alternative contact fields that are initially empty.
         ArrayList<String> emptyAlternativeContactFields = new ArrayList<>();

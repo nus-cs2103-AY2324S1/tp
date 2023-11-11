@@ -28,6 +28,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_NOT_A_INDEX = "Index should be an integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -36,10 +37,15 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+        try {
+            boolean isValidIndex = StringUtil.isNonZeroUnsignedInteger(trimmedIndex);
+            if (!isValidIndex) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_NOT_A_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
     /**
@@ -170,7 +176,10 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            Tag tagToAdd = parseTag(tagName);
+            if (!tagSet.contains(tagToAdd)) {
+                tagSet.add(tagToAdd);
+            }
         }
         return tagSet;
     }

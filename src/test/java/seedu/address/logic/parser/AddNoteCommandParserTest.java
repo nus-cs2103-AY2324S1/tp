@@ -1,12 +1,12 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddNoteCommand;
 import seedu.address.model.person.Note;
 
@@ -21,12 +21,14 @@ public class AddNoteCommandParserTest {
 
     @Test
     public void parse_missingDetails_failure() {
+        // No arguments
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNoteCommand.MESSAGE_USAGE));
+
         // Missing note details
-        assertParseFailure(parser, "1",
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1", AddNoteCommandParser.MESSAGE_EMPTY_NOTE);
 
         // Missing index
-        assertParseFailure(parser, "Test note",
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddNoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "Test note", ParserUtil.MESSAGE_NOT_A_INDEX);
     }
 }

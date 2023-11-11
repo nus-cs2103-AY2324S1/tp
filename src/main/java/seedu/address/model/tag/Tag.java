@@ -26,7 +26,7 @@ public class Tag {
          */
         public static boolean isEmergencyTag(String tagName) {
             for (EmergencyTags tag : EmergencyTags.values()) {
-                if (tag.name().equals(tagName)) {
+                if (tag.name().equals(tagName.toUpperCase())) {
                     return true;
                 }
             }
@@ -64,12 +64,12 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.compareToIgnoreCase(otherTag.tagName) == 0;
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return tagName.toUpperCase().hashCode();
     }
 
     /**
