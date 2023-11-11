@@ -713,7 +713,7 @@ Unknown command
 
 <br>
 
-### Filtering the displayed list : `filter`
+### Filter Feature : `filter`
 
 #### For Student:
 <box type="info" seamless>
