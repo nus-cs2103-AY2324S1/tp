@@ -10,8 +10,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all persons in address book whose fields match the specified predicate.
+ * Keyword matching details and predicate creation is delegated to {@code FindExpressionParser}.
  */
 public class FindCommand extends Command {
 

@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.Set;
 
 /**
  * Helper functions for handling strings.
@@ -58,6 +59,31 @@ public class StringUtil {
 
 
         return stringToCheck.toLowerCase().contains(preppedSubstring.toLowerCase());
+    }
+
+    /**
+     * Returns true if the {@code setToCheck} contains the {@code searchString}.
+     *   Ignores case, and an exact match to any member of the set is required.
+     *   <br>examples:<pre>
+     *      containsStringIgnoreCaseInSet(new HashSet<>(Arrays.asList("aBc", "DeF")), "aBc") == true
+     *      containsStringIgnoreCaseInSet(new HashSet<>(Arrays.asList("aBc", "DeF")), "abc") == true
+     *
+     *      // not an exact match to a member
+     *      containsStringIgnoreCaseInSet(new HashSet<>(Arrays.asList("aBc", "DeF")), "aB") == false
+     *      </pre>
+     *
+     * @param setToCheck cannot be null
+     * @return true if the {@code setToCheck} contains the {@code searchString}
+     */
+    public static boolean containsStringIgnoreCaseInSet(Set<String> setToCheck, String searchString) {
+        requireNonNull(setToCheck);
+        requireNonNull(searchString);
+
+        String preppedSearchString = searchString.trim();
+        checkArgument(!preppedSearchString.isEmpty(), "Search string parameter cannot be empty");
+
+        return setToCheck.stream()
+                .anyMatch(preppedSearchString::equalsIgnoreCase);
     }
 
     /**

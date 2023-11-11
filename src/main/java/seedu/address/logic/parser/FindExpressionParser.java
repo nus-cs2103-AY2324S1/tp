@@ -14,44 +14,23 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.FindFilterStringTokenizer.Token;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Balance;
-import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a parser that constructs and interprets expression trees
  * from tokenized search queries. This parser helps in translating user
  * input queries into predicates that can be applied to filter lists of
  * persons.
- * <p>
- * Uses a basic recursive-descent parsing strategy, since for now the
- * grammar is compact. Grammar for find command is given, in
- * Backus–Naur form (BNF) syntax, as follows:
- *
- * <p>
- *
- * <pre>{@code
- * <expression> ::= <term> | <term> "||" <expression>
- * <term>       ::= <factor> | <factor> "&&" <term>
- * <factor>     ::= "!" <factor>
- *                | "(" <expression> ")"
- *                | <condition>
- * <condition>  ::= <prefix> "/" <keyword>
- * <keyword>    ::= <character> | <character> <keyword>
- * <prefix>     ::= "n" | "p" | "e" | "a" | "t"
- * }</pre>
- *
- * <p>
- *
- * Notice that an expression can be a term (if no OR is present)
- * which can itself be a factor (if no AND is present).
- *
  */
 public class FindExpressionParser {
 
@@ -319,65 +298,160 @@ public class FindExpressionParser {
 
             switch (field) {
             case NAME:
-                return person -> StringUtil.containsSubstringIgnoreCase(person.getName().fullName, keyword);
+                return createNamePredicate();
             case PHONE:
-                return person -> StringUtil.containsSubstringIgnoreCase(person.getPhone().value, keyword);
+                return createPhonePredicate();
             case EMAIL:
-                return person -> StringUtil.containsSubstringIgnoreCase(person.getEmail().value, keyword);
+                return createEmailPredicate();
             case ADDRESS:
-                return person -> StringUtil.containsSubstringIgnoreCase(person.getAddress().value, keyword);
+                return createAddressPredicate();
             case TAG:
-                // Tags are slightly more complicated -- a person passes the predicate if the tag
-                // specified is a member of the person's tag set. The specified tag must be an exact
-                // match, not a substring match.
-                return person -> person.getTags().contains(new Tag(keyword));
-            // For optional fields, we need to check if the optional is present before applying the predicate.
-            // If the optional field is not present, we return false no matter what the substring is.
+                return createTagPredicate();
             case BIRTHDAY:
-                return person -> StringUtil.containsSubstringIgnoreCase(person.getBirthday()
-                        .map(Birthday::toString).orElse(""), keyword);
+                return createBirthdayPredicate();
             case LINKEDIN:
-                return person -> StringUtil.containsSubstringIgnoreCase(person.getLinkedin()
-                        .map(l -> l.value).orElse(""), keyword);
+                return createLinkedinPredicate();
             case SECONDARY_EMAIL:
-                return person -> StringUtil.containsSubstringIgnoreCase(person.getSecondaryEmail()
-                        .map(e -> e.value).orElse(""), keyword);
+                return createSecondaryEmailPredicate();
             case TELEGRAM:
-                return person -> StringUtil.containsSubstringIgnoreCase(person.getTelegram()
-                        .map(t -> t.value).orElse(""), keyword);
+                return createTelegramPredicate();
             case NOTE:
-                // Notes are slightly more complicated -- a person passes the predicate if the keyword
-                // specified is a substring of any note in the person's note set. The specified keyword does
-                // not have to be an exact match of a full note, which makes this distinct from TAG.
-                return person -> person.getNotes().stream()
-                        .anyMatch(note -> StringUtil.containsSubstringIgnoreCase(note.toString(), keyword));
+                return createNotePredicate();
             case BALANCE:
-                // Balances are slightly more complicated -- a person passes the predicate if the absolute
-                // value of their balance is greater than or equal to the absolute value of the keyword
-                // which is parsed into a Balance but does support negative signs.
-                try {
-                    // if there is a negative sign at start of keyword, remove it but record isNegative
-                    boolean isNegative = keyword.trim().startsWith("-");
-                    String justBalanceString = keyword.trim();
-                    if (isNegative) {
-                        justBalanceString = justBalanceString.replaceFirst("-", "");
-                    }
-
-                    Balance inputBalance = ParserUtil.parseBalance(justBalanceString);
-
-                    if (isNegative) {
-                        return person -> person.getBalance().value <= -inputBalance.value;
-                    } else {
-                        return person -> person.getBalance().value >= inputBalance.value;
-                    }
-
-                } catch (NumberFormatException | ParseException e) {
-                    throw new ParseException("Invalid balance format: " + Balance.MESSAGE_CONSTRAINTS
-                            + "\nAdditionally, when finding with a balance field, you can use"
-                            + " a negative sign to find negative balances.");
-                }
+                return createBalancePredicate();
             default:
                 throw new AssertionError("Invalid field type!");
+            }
+        }
+
+        /*
+         * The following section includes methods that create predicates for
+         * compulsory fields that use the basic "value contains keyword" logic.
+         *
+         * The createFieldContainsKeywordPredicate method facilitates
+         * this by taking in a Person's getter function that returns a compulsory field.
+         *
+         * (This comment is not a Javadoc comment, and is meant for future maintainers)
+         */
+
+        private <T> Predicate<Person> createFieldContainsKeywordPredicate(Function<Person, T> getter) {
+            return person -> StringUtil.containsSubstringIgnoreCase(getter.apply(person).toString(), keyword);
+        }
+
+        private Predicate<Person> createNamePredicate() {
+            return createFieldContainsKeywordPredicate(Person::getName);
+        }
+
+        private Predicate<Person> createPhonePredicate() {
+            return createFieldContainsKeywordPredicate(Person::getPhone);
+        }
+
+        private Predicate<Person> createEmailPredicate() {
+            return createFieldContainsKeywordPredicate(Person::getEmail);
+        }
+
+        private Predicate<Person> createAddressPredicate() {
+            return createFieldContainsKeywordPredicate(Person::getAddress);
+        }
+
+        /*
+         * The following section includes methods that create predicates for
+         * optional fields that use the basic "value contains keyword" logic,
+         * but always return false if the optional field is not present.
+         *
+         * The createOptionalFieldContainsKeywordPredicate method facilitates
+         * this by taking in a Person's getter function that returns an optional field.
+         *
+         * (This comment is not a Javadoc comment, and is meant for future maintainers)
+         */
+
+        private <T> Predicate<Person> createOptionalFieldContainsKeywordPredicate(
+                Function<Person, Optional<T>> getter) {
+            return person -> getter.apply(person)
+                    .map(value -> StringUtil.containsSubstringIgnoreCase(value.toString(), keyword))
+                    .orElse(false);
+        }
+
+        private Predicate<Person> createBirthdayPredicate() {
+            return createOptionalFieldContainsKeywordPredicate(Person::getBirthday);
+        }
+
+        private Predicate<Person> createLinkedinPredicate() {
+            return createOptionalFieldContainsKeywordPredicate(Person::getLinkedin);
+        }
+
+        private Predicate<Person> createSecondaryEmailPredicate() {
+            return createOptionalFieldContainsKeywordPredicate(Person::getSecondaryEmail);
+        }
+
+        private Predicate<Person> createTelegramPredicate() {
+            return createOptionalFieldContainsKeywordPredicate(Person::getTelegram);
+        }
+
+        /*
+         * The following section is for methods that have field-specific behavior.
+         *
+         * (This comment is not a Javadoc comment, and is meant for future maintainers)
+         */
+
+        /**
+         * Creates a predicate for the tags field.
+         * Matches tags by checking if the keyword is an exact match of any tag in the person's tag set.
+         *
+         * @return A predicate that checks if a person's tag set contains the specified tag.
+         */
+        private Predicate<Person> createTagPredicate() {
+            return person -> {
+                // use tagName instead of Tag::toString to avoid considering the square brackets
+                Set<String> tagsAsStrings = person.getTags().stream()
+                        .map(tag -> tag.tagName).collect(Collectors.toSet());
+                return StringUtil.containsStringIgnoreCaseInSet(tagsAsStrings, keyword);
+            };
+        }
+
+        /**
+         * Creates a predicate for the notes field.
+         * Matches notes by checking if the keyword is a substring of any note in the person's note set.
+         *
+         * @return A predicate that checks if any note in a person's note set contains the specified keyword.
+         */
+        private Predicate<Person> createNotePredicate() {
+            return person -> person.getNotes().stream()
+                    .anyMatch(note -> StringUtil.containsSubstringIgnoreCase(note.toString(), keyword));
+        }
+
+        /**
+         * Creates a predicate for the balance field.
+         * If the keyword is a valid balance and is positive, the predicate checks if the person's balance is
+         * greater than or equal to the keyword.
+         * If the keyword is a valid balance and is negative, the predicate checks if the person's balance is
+         * less than or equal to the keyword.
+         * If the keyword is not a valid balance, the predicate throws a ParseException.
+         *
+         * @return A predicate that checks if a person's balance matches the given balance based on described logic.
+         */
+        private Predicate<Person> createBalancePredicate() throws ParseException {
+            try {
+                String preppedBalanceString = keyword.trim();
+
+                // if there is a negative sign at start of keyword, remove it but record isNegative
+                boolean isNegative = preppedBalanceString.startsWith("-");
+                if (isNegative) {
+                    preppedBalanceString = preppedBalanceString.replaceFirst("-", "");
+                }
+
+                Balance inputBalance = ParserUtil.parseBalance(preppedBalanceString);
+
+                if (isNegative) {
+                    return person -> person.getBalance().value <= -inputBalance.value;
+                } else {
+                    return person -> person.getBalance().value >= inputBalance.value;
+                }
+
+            } catch (NumberFormatException | ParseException e) {
+                throw new ParseException("Invalid balance format: " + Balance.MESSAGE_CONSTRAINTS
+                        + "\nAdditionally, when finding with a balance field, you can use"
+                        + " a negative sign to find negative balances.");
             }
         }
     }

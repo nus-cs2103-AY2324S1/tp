@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -204,6 +207,81 @@ public class StringUtilTest {
 
         // Matches part of a stringToCheck word
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "bb"));
+    }
+
+    //---------------- Tests for containsStringIgnoreCaseInSet --------------------------------------
+
+    /*
+     * Invalid equivalence partitions for keyword: null, empty
+     * Invalid equivalence partitions for set: null, empty set
+     * The four test cases below test one invalid input at a time.
+     */
+
+    @Test
+    public void containsStringIgnoreCaseInSet_nullKeyword_throwsNullPointerException() {
+        Set<String> set = new HashSet<>(Arrays.asList("abc", "def"));
+        assertThrows(NullPointerException.class, () -> StringUtil.containsStringIgnoreCaseInSet(set, null));
+    }
+
+    @Test
+    public void containsStringIgnoreCaseInSet_emptyKeyword_throwsIllegalArgumentException() {
+        Set<String> set = new HashSet<>(Arrays.asList("abc", "def"));
+        assertThrows(IllegalArgumentException.class, "Search string parameter cannot be empty", ()
+            -> StringUtil.containsStringIgnoreCaseInSet(set, "  "));
+    }
+
+    @Test
+    public void containsStringIgnoreCaseInSet_nullSet_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsStringIgnoreCaseInSet(null, "abc"));
+    }
+
+    @Test
+    public void containsStringIgnoreCaseInSet_emptySet_returnsFalse() {
+        Set<String> set = new HashSet<>();
+        assertFalse(StringUtil.containsStringIgnoreCaseInSet(set, "abc"));
+    }
+
+    /*
+     * Valid equivalence partitions for keyword:
+     *   - any keyword
+     *   - keyword containing symbols/numbers
+     *   - keyword with leading/trailing spaces
+     *
+     * Valid equivalence partitions for set:
+     *   - set with one string
+     *   - set with multiple strings
+     *   - set with mixed case strings
+     *
+     * Possible scenarios returning true:
+     *   - keyword matches a string in the set, regardless of case
+     *   - keyword matches multiple strings in the set
+     *
+     * Possible scenarios returning false:
+     *   - keyword does not match any string in the set
+     *   - keyword matches part of a string in the set
+     *
+     * The test method below tries to verify all above with a reasonably low number of test cases.
+     */
+
+    @Test
+    public void containsStringIgnoreCaseInSet_validInputs_correctResult() {
+        // Set with mixed case strings
+        Set<String> set = new HashSet<>(Arrays.asList("aBc", "DeF"));
+
+        // Same case: true
+        assertTrue(StringUtil.containsStringIgnoreCaseInSet(set, "aBc"));
+
+        // Different case: true
+        assertTrue(StringUtil.containsStringIgnoreCaseInSet(set, "ABC"));
+
+        // Partial match: false
+        assertFalse(StringUtil.containsStringIgnoreCaseInSet(set, "a"));
+
+        // No match: false
+        assertFalse(StringUtil.containsStringIgnoreCaseInSet(set, "ghi"));
+
+        // Multiple matches: true
+        assertTrue(StringUtil.containsStringIgnoreCaseInSet(set, "def"));
     }
 
     //---------------- Tests for getDetails --------------------------------------
