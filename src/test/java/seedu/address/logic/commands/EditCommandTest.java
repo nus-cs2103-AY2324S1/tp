@@ -40,7 +40,7 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void executeEditWithNameAndWithIndexAreSame() {
+    public void execute_editWithNameAndWithIndexAreSame_success() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Student lastStudent = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
         Name nameLastPerson = lastStudent.getName();

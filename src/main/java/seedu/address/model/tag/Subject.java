@@ -110,8 +110,8 @@ public class Subject {
 
     /**
      * This method is used to make the subjectNames for the same subject to be consistent.
-     * @param subjectName
-     * @return
+     * @param subjectName user input subject name
+     * @return corrected subject name that follows our convention.
      */
     private String getCorrectedSubjectName(String subjectName) {
         checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
