@@ -62,7 +62,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                false, false, false, false, false, true, false);
+                false, false, false, false, false, true, false, false);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
@@ -74,7 +74,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                false, false, false, false, false, true, false);
+                false, false, false, false, false, true, false, false);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
     }
@@ -86,7 +86,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                false, false, false, false, false, true, false);
+                false, false, false, false, false, true, false, false);
 
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());

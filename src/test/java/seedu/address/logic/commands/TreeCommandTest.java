@@ -14,7 +14,7 @@ public class TreeCommandTest {
         Model model = new ModelManager();
         CommandResult expectedCommandResult = new CommandResult(
                 TreeCommand.MESSAGE_SUCCESS, false, false,
-                false, false, true, false, false);
+                false, false, true, false, false, false);
         TreeCommand command = new TreeCommand();
 
         CommandResult result = command.execute(model);

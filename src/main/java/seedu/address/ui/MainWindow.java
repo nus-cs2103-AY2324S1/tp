@@ -497,11 +497,16 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isFindPerson()) {
                 handleFindPerson();
             }
+
             if (commandResult.isFindTeam()) {
                 handleFindTeam();
             }
+
+            if (commandResult.isAddingOrDeleting()) {
+                refreshStatistics();
+            }
+
             refreshCardContainer();
-            refreshStatistics();
 
             return commandResult;
         } catch (CommandException | ParseException e) {

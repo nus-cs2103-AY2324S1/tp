@@ -36,18 +36,20 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Made changes to UG at the following parts: List developers, List teams, Help, Statistics display.
-      
+        * In charge of adding the following parts to UG: List developers, List teams, Getting Started,
+            How to Use This Guide, adding different colored blocks and icons for notes, tips and warnings.
+        * Also made major changes to UG at the following parts: Tree Command, Help Command, Clear Command.
+
     * Developer Guide:
         * Made some changes and added UI UML diagrams;
+        * In charge of adding Instructions for Manual Testing
 
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments).
+    * PRs reviewed (with non-trivial review comments) -- reviewed various PRs by team members.
     * Contributed to forum discussions.
-    * Reported bugs and suggestions for other teams in the class.
-    * Some parts of the history feature I added was adopted by several other classmates.
-
+    * Reported bugs and suggestions for other teams in the class -- reviewed products of other team and provided 
+  constructive feedbacks.
 
 * **Tools**:
     * Utilized various development tools to enhance project productivity and code quality
