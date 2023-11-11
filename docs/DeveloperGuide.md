@@ -393,6 +393,31 @@ The following sequence diagram shows how the upcoming command works:
 
 ![UpcomingCommandSequenceDiagram](images/UpcomingCommandSequenceDiagram.png)
 
+### Sort patients feature
+
+[SortPatientCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/personparser/SortPatientCommandParser.java
+[SortPatientCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/personcommands/SortPatientCommand.java
+
+#### Implementation
+
+For _sort-p_ command, the noteworthy classes involved are:
+
+- [`SortPatientCommandParser.java`][SortPatientCommandParser.java] - This parses the user input and creates a new `SortPatientCommand` object.
+
+- [`SortPatientCommand.java`][SortPatientCommand.java] - This command object executes to sort the patient list by ascending or descending order and by the given attribute to sort by.
+
+The feature is implemented by sorting the unfiltered patient list stored in the model with using a custom comparator depending on each attribute.
+
+
+The following sequence diagram shows how the sort patient command works:
+![SortPatientCommandSequenceDiagram](images/SortPatientCommandSequenceDiagram.png)
+
+#### Design considerations:
+1. We decided to implement the comparator for names to compare the names after the names have been converted to lower case. This is as we want it to be sorted in that order, where john doe is considered smaller than Kevin Porter Jr.
+2. We eventually want to sort from distance from the current location of the machine so we made the attributes easily expandable for future support.
+#### Additional Info:
+1. The sort command under appointments is implemented similarly but sorts the appointment list either by priority or time.
+
 ### Undo/Redo Feature
 
 [UndoCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/UndoCommandParser.java
@@ -743,6 +768,9 @@ any input that is either `male` or `female` will be accepted without worrying ab
 7. Currently, a patient's birthdate can be set after the current date that the command is executed on. For example, `2023/10/20`
 can be added as a patient's birthdate even though the current date might be `2023/08/08`. We plan to add a validation for birthdates
 such that birthdates after the current date will not be considered a valid birthdate.
+
+8. Currently, the find command only is able to find by name. We plan to add the functionality to find anything that 
+matches the given conditions that could be other variables of a patient or appointment such as range of birthdays.
 
 ## **Appendix: Effort**
 

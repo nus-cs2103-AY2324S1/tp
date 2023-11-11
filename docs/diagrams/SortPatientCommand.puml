@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SortPatientCommandParser" as SortPatientCommandParser LOGIC_COLOR
+participant "cmd:SortPatientCommand" as SortPatientCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("sort-p asc by=name")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("sort-p asc by=name")
+activate AddressBookParser
+
+create SortPatientCommandParser
+AddressBookParser -> SortPatientCommandParser
+activate SortPatientCommandParser
+
+SortPatientCommandParser --> AddressBookParser
+deactivate SortPatientCommandParser
+
+AddressBookParser -> SortPatientCommandParser : parse("asc by=name")
+activate SortPatientCommandParser
+
+create SortPatientCommand
+SortPatientCommandParser -> SortPatientCommand
+activate SortPatientCommand
+
+SortPatientCommand --> SortPatientCommandParser : cmd
+deactivate SortPatientCommand
+
+SortPatientCommandParser --> AddressBookParser : cmd
+deactivate SortPatientCommandParser
+
+SortPatientCommandParser -[hidden]-> AddressBookParser
+destroy SortPatientCommandParser
+
+AddressBookParser --> LogicManager : cmd
+deactivate AddressBookParser
+
+LogicManager -> SortPatientCommand : execute()
+activate SortPatientCommand
+
+SortPatientCommand -> Model : sortPatientList()
+activate Model
+
+Model --> SortPatientCommand
+deactivate Model
+
+create CommandResult
+SortPatientCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortPatientCommand
+deactivate CommandResult
+
+SortPatientCommand --> LogicManager : result
+deactivate SortPatientCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
