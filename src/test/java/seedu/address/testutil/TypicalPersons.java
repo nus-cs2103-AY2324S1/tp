@@ -28,11 +28,7 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-<<<<<<< HEAD
-            .withGroupList("CS2103T", "CS2103").build();
-=======
-            .withGroupList("CS2105").build();
->>>>>>> 1ef35a06f9abd34fedc24492cb8d6fcfa1d960a9
+            .withGroupList("CS2105", "CS2103T", "CS2103").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withGroupList("CS2105").build();
@@ -77,8 +73,8 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
-        for (Group group: getTypicalGroups()) {
-            ab.addGroup(group);
+        for (Group g: getTypicalGroups()) {
+            ab.addGroup(g);
         }
         return ab;
     }

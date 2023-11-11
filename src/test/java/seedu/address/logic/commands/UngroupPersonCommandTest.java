@@ -66,6 +66,15 @@ public class UngroupPersonCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public void assignGroup(Person person, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unassignGroup(Person person, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
@@ -248,7 +257,7 @@ public class UngroupPersonCommandTest {
          * @param group  Group in consideration.
          * @throws CommandException if person has already been assigned to group.
          */
-        private void unassignGroup(Person person, Group group) throws CommandException {
+        public void unassignGroup(Person person, Group group) throws CommandException {
             group.removePerson(person);
             person.removeGroup(group);
         }
@@ -296,7 +305,7 @@ public class UngroupPersonCommandTest {
          * @param group  Group in consideration.
          * @throws CommandException if person has already been assigned to group.
          */
-        private void unassignGroup(Person person, Group group) throws CommandException {
+        public void unassignGroup(Person person, Group group) throws CommandException {
             group.removePerson(person);
             person.removeGroup(group);
         }
