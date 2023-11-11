@@ -63,8 +63,8 @@
         "hasInterview": true
       },
       "jobRole": "StandardJobRole",
-      "interviewStartTime": "21/12/2024 7pm",
-      "interviewEndTime": "21/12/2024 9pm",
+      "interviewStartTime": "21/12/2024 1200",
+      "interviewEndTime": "21/12/2024 1300",
       "rating": "0.0"
     },
     {
@@ -77,8 +77,8 @@
         "hasInterview": true
       },
       "jobRole": "StandardJobRole2",
-      "interviewStartTime": "21/12/2025 2pm",
-      "interviewEndTime": "21/12/2025 4pm",
+      "interviewStartTime": "21/12/2025 1400",
+      "interviewEndTime": "21/12/2025 1600",
       "rating": "0.0"
     },
     {
@@ -91,8 +91,8 @@
         "hasInterview": true
       },
       "jobRole": "StandardJobRole3",
-      "interviewStartTime": "21/05/2024 9am",
-      "interviewEndTime": "21/05/2024 11am",
+      "interviewStartTime": "21/05/2024 0900",
+      "interviewEndTime": "21/05/2024 1100",
       "rating": "0.0"
     },
     {
@@ -105,8 +105,8 @@
         "hasInterview": true
       },
       "jobRole": "StandardJobRole4",
-      "interviewStartTime": "12/07/2024 10.45am",
-      "interviewEndTime": "12/07/2024 12.45pm",
+      "interviewStartTime": "12/07/2024 1045",
+      "interviewEndTime": "12/07/2024 1245",
       "rating": "0.0"
     }
   ]

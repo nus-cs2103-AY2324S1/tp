@@ -193,7 +193,7 @@ For each **interview**, we see the following details:
   e.g. `n/KEYWORD(S)` can be used as `n/John`, `n/John Alice Bob`
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list-i`, `list-a`, `list-i-done`, `list-i-not-done`,
   `list-today`, `sort-rate`, `sort-time`, `exit`, and `clear`) will be ignored.<br>
@@ -263,15 +263,15 @@ InterviewHub data are saved in the hard disk automatically after any command tha
 
 Adds an applicant to **InterviewHub**.
 
-Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add-a n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`
 
-| Parameter      | Representation                    | Constraints                                                   |
-|----------------|-----------------------------------|---------------------------------------------------------------|
-| `NAME`         | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
-| `PHONE_NUMBER` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
-| `EMAIL`        | The email of the applicant        | Must be in the format: `local-part@domain`                    |
-| `ADDRESS`      | The address of the applicant      | No constraints as long as it is not blank                     |
-| `TAG`          | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |
+| Parameter | Representation                    | Constraints                                                   |
+|---------|-----------------------------------|---------------------------------------------------------------|
+| `NAME`  | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
+| `PHONE` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
+| `EMAIL` | The email of the applicant        | Must be in the format: `local-part@domain`                    |
+| `ADDRESS` | The address of the applicant      | No constraints as long as it is not blank                     |
+| `TAG`   | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |
 
 
 Examples:
@@ -307,13 +307,13 @@ Examples:
 
 Edits the applicant at the specified `APPLICANT_INDEX` from **InterviewHub**.
 
-Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 | Parameter         | Representation                                                   | Constraints                                                                                              |
 |-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `APPLICANT_INDEX` | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed applicant list |
 | `NAME`            | The name of the applicant                                        | Must contain only alphanumeric characters and cannot be blank                                            |
-| `NUMBER`          | The phone number of the applicant                                | Must contain only numbers and be at least 3 digits long                                                  |
+| `PHONE`           | The phone number of the applicant                                | Must contain only numbers and be at least 3 digits long                                                  |
 | `EMAIL`           | The email of the applicant                                       | Must be in the format: `local-part@domain`                                                               |
 | `ADDRESS`         | The address of the applicant                                     | No constraints as long as it is not blank                                                                |
 | `TAG`             | A tag belonging to the applicant                                 | Must be a single word containing only alphanumeric characters                                            |
@@ -323,6 +323,7 @@ Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] 
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Editing the name of an applicant will also be reflected in any interview the applicant has.
 </div>
 
 Examples:
@@ -345,13 +346,13 @@ Format: ``find-a [n/KEYWORD(S)] [p/NUMBER]
 
 The table below summarises how each field is matched in the search.
 
-| Parameter      | Match                                                                                          | Examples                                                                       |
-|----------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| `NAME`         | Only full words will be matched                                                                | `Han` will match `Han Bo` but not `Hans Bo`                                    |
-| `PHONE_NUMBER` | Partial numbers will be matched                                                                | `987` will match `98765432`                                                    |
-| `EMAIL`        | Must be an exact match to the entire email, the part before the `@`, or the part after the `@` | `john`, `example.com` and `john@example.com` will all match `john@example.com` |
-| `ADDRESS`      | Only full words will be matched                                                                | `Serangoon` will match `Serangoon Road` but not `Serangoons road`              |
-| `TAG`          | Only full words will be matched                                                                | `Eng` will match `Eng` but not `Engineer`                                      |
+| Prefix | Field     | Match                                                                                          | Examples                                                                       |
+|--------|-----------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `n/`   | `NAME`    | Only full words will be matched                                                                | `Han` will match `Han Bo` but not `Hans Bo`                                    |
+| `p/`   | `PHONE`   | Partial numbers will be matched                                                                | `987` will match `98765432`                                                    |
+| `e/`   | `EMAIL`   | Must be an exact match to the entire email, the part before the `@`, or the part after the `@` | `john`, `example.com` and `john@example.com` will all match `john@example.com` |
+| `a/`   | `ADDRESS` | Only full words will be matched                                                                | `Serangoon` will match `Serangoon Road` but not `Serangoons road`              |
+| `t/`   | `TAG`     | Only full words will be matched                                                                | `Eng` will match `Eng` but not `Engineer`                                      |
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>
@@ -473,7 +474,8 @@ Format: `edit-i INTERVIEW_INDEX [jr/JOB_ROLE] [start/START_DATE_AND_TIME] [end/E
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* To edit the `RATING` field (re-rating an interview), please refer to the [rate command](#rating-an-interview--rate)
+* To edit the `RATING` field (re-rating an interview), please refer to the [rate command](#rating-an-interview--rate).
+* An interview that is marked as done can no longer be edited.
 </div>
 
 Examples of accepted date formats (full list [here](#features)):
@@ -617,6 +619,12 @@ Format: `mark INTERVIEW_INDEX`
 Examples:
 * `mark 1` marks the first interview shown on the list as done.
 * `mark 3` marks the third interview shown on the list as done.
+* 
+<div markdown="block" class="alert alert-info">
+**:information_source: Note about the command usage.**<br>
+* You can only mark interviews with a red border (i.e. interviews that are not done).
+* Marking an interview that is already done will result in an error message.
+</div>
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -628,7 +636,7 @@ Format: `rate INTERIVEW_INDEX RATING`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>
-* The interview has to be marked done before it can be rated.
+* The interview has to be marked as done before it can be rated.
 * The new rating will always replace the existing rating.
 </div>
 
@@ -775,13 +783,13 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 
 ## Applicant Management Commands
 
-| Action               | Format, Examples                                                                                                                                                        |
-|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add applicant**    | `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Delete applicant** | `delete-a APPLICANT_INDEX`<br> e.g., `delete-a 3`                                                                                                                       |
-| **Edit applicant**   | `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit-a 2 n/John Doe`                                                      |
-| **Find applicant**   | `find-a [n/KEYWORD(S)] [p/NUMBER] [e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]` <br> e.g., `find-a n/John Bob p/98765432 e/john@example.com`                            |
-| **List applicants**  | `list-a`                                                                                                                                                                |
+| Action               | Format, Examples                                                                                                                                          |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add applicant**    | `add-a n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Delete applicant** | `delete-a APPLICANT_INDEX`<br> e.g., `delete-a 3`                                                                                                         |
+| **Edit applicant**   | `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit-a 2 n/John Doe`                                               |
+| **Find applicant**   | `find-a [n/KEYWORD(S)] [p/NUMBER] [e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]` <br> e.g., `find-a n/John Bob p/98765432 e/john@example.com`              |
+| **List applicants**  | `list-a`                                                                                                                                                  |
 
 ## Interview Management Commands
 

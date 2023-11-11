@@ -22,9 +22,10 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_APPLICANT = "Applicants list contains duplicate applicant(s).";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "Interviews list contains duplicate interview(s).";
+    public static final String MESSAGE_INVALID_INTERVIEW = "Interviews list contains interview(s) with invalid time.";
     public static final String MESSAGE_INTERVIEW_CLASH = "Interviews list contains clashing interviews";
     public static final String MESSAGE_APPLICANT_MISMATCH =
-            "An interview's applicant does not exist in applicants list or has mismatching fields.";
+            "Interviews list contains interview(s) where the applicant does not exist in the applicants list.";
 
     private final List<JsonAdaptedInterview> interviews = new ArrayList<>();
     private final List<JsonAdaptedApplicant> applicants = new ArrayList<>();
@@ -67,6 +68,9 @@ class JsonSerializableAddressBook {
         }
         for (JsonAdaptedInterview jsonAdaptedInterview : interviews) {
             Interview interview = jsonAdaptedInterview.toModelType();
+            if (!interview.isValid()) {
+                throw new IllegalValueException(MESSAGE_INVALID_INTERVIEW);
+            }
             if (addressBook.hasInterview(interview)) {
                 throw new IllegalValueException((MESSAGE_DUPLICATE_INTERVIEW));
             }
