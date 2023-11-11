@@ -3,14 +3,6 @@
   title: "User Guide"
   pageNav: 3
 ---
-<style>
-img {
-    display:block;
-    float:none;
-    margin-left:auto;
-    margin-right:auto;
-}
-</style>
 
 <a name="staff-snap-user-guide"></a>
 # Staff-Snap User Guide
@@ -117,7 +109,10 @@ To begin using this guide, ensure you meet the [Minimum System Requirements](#mi
 
 If you are unfamiliar with the command terminal, you can right-click the `staffsnap.jar` file and select **Open With > JavaLauncher.app** to launch the application. If you are shown the warning below, click **Open** to continue launching Staff-Snap.<br>
 
-<img src="images/user-guide/mac_os_warning.png" height="400" width="334" alt="mac_os_warning">
+<img src="images/user-guide/mac_os_warning.png" height="400" width="334" alt="mac_os_warning" style="display:block;
+float:none;
+margin-left:auto;
+margin-right:auto;">
 
 </box>
 
@@ -192,7 +187,10 @@ This section introduces the symbols and notations used throughout this guide. Th
 
 <br>
 
-<img src="images/user-guide/applicant_card_gui.png" height="201" width="598" alt="applicant_card_gui">
+<img src="images/user-guide/applicant_card_gui.png" height="201" width="598" alt="applicant_card_gui" style="display:block;
+float:none;
+margin-left:auto;
+margin-right:auto;">
 
 <br>
 
@@ -591,7 +589,10 @@ Format: `import f/FILENAME`
 * The CSV file must be placed in the [home folder](#glossary) of Staff-Snap.
 * The CSV file must have the following headers: `name`, `phone`, `email`, `position` in that order, as shown below.<br>
   
-<img src="images/user-guide/csv_header.png" alt="mac_os_warning">
+<img src="images/user-guide/csv_header.png" alt="mac_os_warning" style="display:block;
+float:none;
+margin-left:auto;
+margin-right:auto;">
 
 * The fields of the columns must satisfy the [parameter constraints](#command-parameters-1) for `NAME`, `PHONE`, `EMAIL`, and `POSITION` respectively.
 * The CSV file must not contain [duplicate applicants](#duplicate-applicants).
