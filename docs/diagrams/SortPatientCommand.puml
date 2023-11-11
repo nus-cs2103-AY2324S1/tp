@@ -45,10 +45,10 @@ destroy SortPatientCommandParser
 AddressBookParser --> LogicManager : cmd
 deactivate AddressBookParser
 
-LogicManager -> SortPatientCommand : execute()
+LogicManager -> SortPatientCommand : execute(model)
 activate SortPatientCommand
 
-SortPatientCommand -> Model : sortPatientList()
+SortPatientCommand -> Model : sortPatientList(true, "name")
 activate Model
 
 Model --> SortPatientCommand
