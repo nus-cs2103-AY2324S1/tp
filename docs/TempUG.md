@@ -1207,12 +1207,6 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
-// Code injection is
-// String is a sequence of characters
-// Pointer is 
-// Hard disk is the long term storage of the computer. what is written to the hard disk will be stored even after the computer is turned off.
-// JSON is abbreviation for JavaScript Object Notation. It is a format for storing data
-// URL is abbreviation for uniform resource locator. It is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it.
 
 | id | Term                 | Definition                                                                                                                                                                                                          |
 |----|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
