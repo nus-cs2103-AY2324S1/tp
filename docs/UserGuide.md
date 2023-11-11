@@ -5,12 +5,33 @@
 ---
 # Class Manager 2023 User Guide
 
-Class Manager 2023 (CM 23) is a **desktop app for Teaching Assistants (TAs) to manage their students' contacts in the class,
-optimized for use via a Command Line Interface** (CLI) while still having the benefits of a
-Graphical User Interface (GUI). If you can type fast, CM 23 can get your class management tasks done faster than traditional GUI apps.
+# Welcome to Class Manager 2023 (CM 23)!
+
+Are you tired of managing your teaching assistant duties by juggling notes, spreadsheets, and calendars?
+
+Are you on the hunt for a more efficient and organized solution to handle your responsibilities as a teaching assistant?
+
+Introducing **Class Manager 2023**!
+
+CM 23 is your ticket to an enhanced teaching experience! We present to you an all-in-one application designed to streamline your class management duties. Bid farewell to the stress of missed deadlines and the chaos of TA duties slipping through the cracks.
+
+So, what's holding you back? This user guide is your key to mastery of CM 23, with step-by-step instructions on how you can install and use our application. CM 23 is designed to be intuitive and easy to use, so you can get started right away!
 
 <!-- * Table of Contents -->
 <page-nav-print />
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Overview
+
+CM 23 is a desktop application for CS2103/T: Software Engineering Teaching Assistants (TAs) in National University of Singapore to manage their students' contacts and class information. 
+
+CM 23 allows users to:
+* Store and manage student's contact information.
+* Keep track of and visualise student's class information such as attendance, class participation and assignment grades.
+* Easily mark the attendance of multiple students for each tutorial session.
+
+CM 23 is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI). Since CS2103/T TAs have an adequate understanding of CLI, CM 23 will allow class management tasks to be completed faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -46,14 +67,16 @@ Graphical User Interface (GUI). If you can type fast, CM 23 can get your class m
 
 # GUI Overview
 
-<img alt="Gui" src="images/Ui.png" width="700"> </br>
+The image below shows an annotated overview of Class Manager's GUI:
+
+<img alt="Gui" src="images/GUI-overview.png" width="700"> </br>
 
 The **GUI** is split up into 4 main sections.
 
-1. **Command Box** - (_Located at the top with the text "Enter command here..."_) This is where you can type in commands to execute.
-2. **Result Display** - (_Located below command box_) This is where the results of the commands and any errors will be displayed.
-3. **Student List** - (_Located on the bottom left_) This is where the list of students will be displayed.
-4. **Student Details** - (_Located on the bottom right_) This is where the details of the selected student will be displayed.
+1. **Command Box** - This is where you can type in commands to execute.
+2. **Result Display** - This is where the results of the commands and any errors will be displayed.
+3. **Student List** - This is where the list of students will be displayed.
+4. **Class Information** - This is where the class information of the selected student, such as attendance, class participation and assignment grades, will be displayed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -132,16 +155,16 @@ If your changes to the data file make its format invalid, Class Manager 2023 wil
 <box type="warning" seamless>
 
 **Caution:**
-Configuring Class Manager resets the class details (grades, attendance and class participation details) of all students, as well as the past states of Class Manager. This **cannot** be undone using the `undo` command. It is recommended to configure Class Manager before adding students.
+Configuring Class Manager resets the class information (grades, attendance and class participation details) of all students, as well as the past states of Class Manager. This **cannot** be undone using the `undo` command. It is recommended to configure Class Manager before adding students.
 </box>
 
-Before you begin using Class Manager, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, and allows Class Manager to automatically generate the correct number of class details fields for each student. <br><br>
-Class Manager can be configured _at any time_, but do take note of the warning above regarding **loss** of student data and past Class Manager states. If you configure Class Manager after adding students, each student will have the correct number of tutorials and assignments. However, their class details data will be **reset** and there will be no previous states of Class Manager you can return to via the `undo` command.
+Before you begin using Class Manager, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, and allows Class Manager to automatically generate the correct number of class information fields for each student. <br><br>
+Class Manager can be configured _at any time_, but do take note of the warning above regarding **loss** of student data and past Class Manager states. If you configure Class Manager after adding students, each student will have the correct number of tutorials and assignments. However, their class information data will be **reset** and there will be no previous states of Class Manager you can return to via the `undo` command.
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 
 * `TUTORIAL_COUNT` and `ASSIGNMENT_COUNT` must be a positive integer between 1 and 40 inclusive.
-* Inputting the same `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` as the previous configuration will also **reset** the class details of all students.
+* Inputting the same `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` as the previous configuration will also **reset** the class information of all students.
 * `config` resets the state history of Class Manager, preventing you from using the `undo` command to reach a state before the `config` command was executed.
 
 Examples:
@@ -290,7 +313,7 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…�
 * The `NAME` field is case-sensitive.
 * `PHONE` must be a 3 to 20 digit positive integer.
 * `STUDENT_NUMBER` needs to be unique, and must not be blank.
-* The class details of a student will be automatically populated to be 0 for all fields during the creation of a student.
+* When a student is added, their grades, attendance and class participation details will be initialised to `0`, `absent` and `false` respectively for all tutorials.
 * Comment for a student can only be added after the student is instantiated.
 
 <box type="tip" seamless>
@@ -430,7 +453,7 @@ Examples:
 
 ---
 
-## Class details commands
+## Class information commands
 
 
 ### Mark a student as absent : `absent`
@@ -527,9 +550,9 @@ Examples:
 
 ---
 
-### View a student's class details : `view`
+### View a student's class information : `view`
 
-View the class details of a student that will be displayed on the right side of the application.
+View the class information of a student that will be displayed on the right side of the application.
 
 Format: `view s/STUDENT_NUMBER`
 
@@ -564,14 +587,11 @@ as the current configuration of Class Manager 2023. You can reconfigure Class Ma
 **Q**: How do I change the save file location?<br>
 **A**: The save file is located at `[JAR file location]/data`. We currently do not support changing the save file location.
 <br><br>
-**Q**: I have found a bug, how can I report it?<br>
+**Q**: The GUI opens off-screen when I have multiple screens.<br>
+**A**: This is a known issue with JavaFX when you have multiple screens. If you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file before running CM 23 again.
+<br><br>
+**Q**: I have found a bug with CM 23, how can I report it?<br>
 **A**: Please report the bug by creating a new issue on the [Class Manager 2023 issue tracker](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues).
-
---------------------------------------------------------------------------------------------------------------------
-
-# Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -606,7 +626,7 @@ as the current configuration of Class Manager 2023. You can reconfigure Class Ma
 | [**Lookup students**](#lookup-students-lookup)                 | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
 | [**Tag a student**](#tag-a-student-tag)                        | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                  |
 
-## Class details commands
+## Class information commands
 | Action                                                                                               | Format, Examples                                                                                                         |
 |------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
@@ -615,7 +635,7 @@ as the current configuration of Class Manager 2023. You can reconfigure Class Ma
 | [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/1`                                                         |
 | [**Record class participation for a student**](#record-class-participation-for-a-student-class-part) | `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION` <br> e.g. `class-part s/A0245234A tut/1 part/true` |
 | [**Set assignment grade for a student**](#set-assignment-grade-for-a-student-grade)                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                             |
-| [**View a student's class details**](#view-a-student-s-class-details-view)                           | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
+| [**View a student's class information**](#view-a-student-s-class-information-view)                           | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -628,4 +648,4 @@ as the current configuration of Class Manager 2023. You can reconfigure Class Ma
 * **GUI**: Graphical User Interface.
 * **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
 * **JAR**: Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
-* **Class details**: The grades, attendance and class participation details of a student in Class Manager.
+* **Class information**: The grades, attendance and class participation details of a student in Class Manager.
