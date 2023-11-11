@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.PractiseCommand;
 
+
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
  * outside of the PractiseCommand code. For example, inputs "1" and "1 abc" take the
@@ -23,6 +24,11 @@ public class PractiseCommandParserTest {
     @Test
     public void parse_validArgs_returnsPractiseCommand() {
         assertParseSuccess(parser, "1", new PractiseCommand(INDEX_FIRST_CARD));
+    }
+
+    @Test
+    public void parse_emptyArgs_returnsPractiseCommand() {
+        assertParseSuccess(parser, "", new PractiseCommand(INDEX_FIRST_CARD));
     }
 
     @Test

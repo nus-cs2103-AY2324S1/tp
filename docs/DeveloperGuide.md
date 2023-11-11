@@ -171,10 +171,72 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+Below is an example of the object diagram of how the cards are stored in the `Deck` class
+
+<img src="images/DeckObjectDiagram.png" width="600" />
+
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add Feature
+
+The add command can be found in the `LogicManager` class. User input is first parsed into the `DeckParser` class using the `parseCommand` to validate if its add command with the specified fields and format.
+
+The add command is exposed in the `Model` interface as the `Model#addCard`
+Below is the overview on the add command:
+
+<img src="images/AddCommandActivityDiagram.png" width="600" />
+
+Here is the flow of how the add command is featured.
+
+1. User inputs the following valid input `add q/what does + mean in boolean algebra? a/it means OR.`
+2. The command is parsed into the `DeckParser` to verify that it has the correct format and parameters
+3. Add command is executed, and if there is no duplicate entry found in `DeckStorage`, a new flashcard with the corresponding
+data will be created
+4. New generated flashcard is then stored in the `DeckStorage`
+
+Below is the sequence diagram for this flow:
+
+<img src="images/AddCommandSequenceDiagram.png" width="600" />
+
+#### Design Considerations
+
+**Aspect: Duplicate Entry Detection:**
+
+* **Alternative 1 (current choice):** No restriction on case sensitivity and mark down syntax
+    * Pros: Increased flexibility on how users wish to create flashcards, up to user's choice, duplicate entry is
+  determined only by the question and the answer input.
+    * Cons: Might lead to duplicate entries of cards of similar content .
+
+* **Alternative 2:** Clean the user input to obtain their intended question and answer
+    * Pros: Reduces chances of duplicate cards in deck
+    * Cons: Increased developer time to create such filtering functionality with little benefit
+
+### DeleteCommand
+
+The delete command can be found in the `LogicManager` class. User input is first parsed into the `DeckParser` class using the `parseCommand`
+to validate if it is a valid delete command with the specified fields and format.
+
+The delete command is exposed in the `Model` interface as the `Model#setCard`
+
+Below is the overview on the delete command:
+
+<img src="images/DeleteCommandActivityDiagram.png" width="600" />
+
+Here is the flow of how the delete command is featured.
+
+1. User inputs the following valid input `delete 1`
+2. The command is parsed into the `DeckParser` to verify that it has the correct format and parameter
+3. Delete command is now executed. If the index is valid, when it is greater than 0 and a card exists at the specified index, the specified card is now deleted from view.
+4. The corresponding card is also deleted from storage.
+
+Below is the sequence diagram for this flow:
+
+<img src="images/DeleteSequenceDiagram.png" width="600" />
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -254,30 +316,62 @@ The following activity diagram summarizes what happens when a user executes a ne
    * Pros: Will use less memory (e.g. for `delete`, just save the card being deleted).
    * Cons: We must ensure that the implementation of each individual command are correct.
 
-### \[Proposed\] Filter by Tag feature
+### Filtering by Tag
 
-#### Proposed Implementation
-
-The proposed feature aims to filter the flashcards and display cards of a specific `tag`. This allows the users to
+The `list` command supports filtering the deck by tag by entering the relevant tag(s) in the command parameters. This allows the users to
 view specific groups of cards under the same `tag`, granting them more control over their study material.
 
-Given below is an example usage of the filter feature.
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The `list` command also provides support for filtering by question keywords. The implementation is largely the same as filtering by tag.
+</div>
 
-Step 1: User creates various cards.
+#### Implementation
 
-Step 2: User executes `edit 1 t/CS2103T`. This causes the first card to be tagged with the tag `CS2103T`.
+Performing a `list` command involves executing `ListCommand`.
+* This command is parsed by `ListCommandParser`.
+* `ListCommandParser#parse()` parses the user input to return a `ListCommand` object that will be executed.
 
-Step 3: User repeats step 2 for all the cards associated with `CS2103T`.
+Given below is an example usage of the `list` command to filter the deck and how the filtering mechanism behaves at each step.
 
-Step 4: User now wants to display only cards with the `CS2103T` tag. User will execute the `filter t/CS2103T`.
+**Step 1.**
+Suppose the user has a deck containing some cards with the tag `CS2103T`. The user keys in this command to filter by the `CS2103T` tag.
 
-Step 5: Deck will now display only the cards with the `CS2103T` tag.
+```
+list t/CS2103T
+```
 
-Step 6: Should user want to see the full deck, they will execute `list` to view their full deck of cards.
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** At least one tag should be provided.
+</div>
+
+**Step 2.**
+The `ListCommandParser` will execute to get the field and keyword pairs 
+using the `ArgumentTokenizer`. This parses every parameter into a list of `Predicate<Card>` objects.
+The parser then returns a `ListCommand` object with the list of predicates.
+
+**Step 3.** The `ListCommand#execute()` method is invoked by the `LogicManager`.
+The list of predicates is combined into a single `Predicate<Card>` object.
+Then, `ListCommand` calls `Model#updateFilteredCardList()` with the `Predicate<Card>`
+to update the filtered flashcard list with a new list, filtered by the tag entered.
+
+**Step 4.** Finally, the `ListCommand` creates a `CommandResult` object that
+contains feedback and displays the filtered flashcard list to the
+user. This result is then returned to the `LogicManager`. As a result, 
+the deck will now display only the cards with the `CS2103T` tag.
+
+The sequence diagram below shows the process of filtering the deck with tags.
+
+![FilterByTagSequenceDiagram](images/FilterByTagSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `ListCommandParser` and `ListCommand`
+should end at the destroy marker (X)
+but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 #### Design considerations:
 
-**Aspect: How filter executes:**
+**Aspect: How `list` executes with filter parameters:**
 
 * **Alternative 1 (current choice):** Filter through the whole deck using the filter method on a stream of cards.
     * Pros: Easy to implement.
@@ -289,6 +383,62 @@ Step 6: Should user want to see the full deck, they will execute `list` to view 
     * Cons:
       1. Will use more memory.
       2. Adding/Deleting/Editing cards will require modifications to \'mini-deck\'.
+
+### Random Command
+
+The `random` command enables the user to practise with a random card from the deck. 
+It offers compatibility with the `solve` and `set` commands by making sure the index of the 
+randomly selected card is remembered for those commands.
+
+#### Implementation
+
+Performing a `random` command involves executing `RandomCommand`.
+* This command does not have its own parser because it does not require any parameters.
+* Hence, this command is directly executed by `LogicManager`
+
+**Step 1.**
+Suppose the user has a deck containing some cards. The user keys in this command to practise a random card.
+```
+random
+```
+
+**Step 2.**
+A new `RandomCommand` object is created by `DeckParser`. 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** This is slightly different from other commands, as there is no need for 
+parsing by its own parser because there are no additional parameters to be parsed for this command.
+</div>
+
+**Step 3.**
+The `RandomCommand#execute()` method is invoked by the `LogicManager`.
+`RandomCommand` then calls `Model#getFilteredCardList()` to get the deck list, so as to generate a random index.
+The random index is generated by calling `RandomCommand#generateRandomIndex()`.
+This random index is saved in the `Model` by calling `Model#setRandomIndex()`.
+This is so that the index can be accessed later by commands `solve` and `set`.
+
+**Step 4.**
+A random card is selected with the newly generated index, which is then used to return a `CommandResult` to `LogicManager`.
+As a result, the randomly selected card's question will be shown to the user to practise with.
+
+The sequence diagram below shows the process of randomly selecting a card to practise.
+
+![RandomCommandSequenceDiagram](images/RandomCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `RandomCommand`
+should end at the destroy marker (X)
+but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design considerations:
+
+**Aspect: How random executes:**
+
+* **Alternative 1 (current choice):** Modify `PractiseCommand` and `PractiseCommandParser` to accept an `r` parameter to practise a random question
+    * Pros: 
+      1. Similar command format with `solve` and `set`, so it may be easier to use for some users.
+    * Cons: 
+      1. Harder to manage codebase because `PractiseCommand` will have two different responsibilities (i.e. practising in order and randomly)
 
 ### Search Filter feature
 
@@ -393,7 +543,7 @@ We implemented an export functionality to allow our users to port over their dat
 This is not to be mistaken as a **Command** as it is meant to be used after the user decides to use our application
 for revision purposes.
 
-The export button will allow users to access a copy of the deck.json file and has a copy button function that allows
+The export button will allow users to access a copy of the `deck.json` file and has a copy button function that allows
 users to copy over their deck.json file with ease.
 
 #### Design considerations:

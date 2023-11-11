@@ -88,5 +88,22 @@ public class JsonUserPrefsStorageTest {
         }
     }
 
+    @Test
+    public void saveUserPrefs_success() throws DataLoadingException, IOException {
+
+        UserPrefs original = new UserPrefs();
+
+        Path pefsFilePath = testFolder.resolve("Temp.json");
+        JsonUserPrefsStorage jsonUserPrefsStorage =
+                new JsonUserPrefsStorage(pefsFilePath);
+
+        jsonUserPrefsStorage.saveUserPrefs(original);
+        UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
+        assertEquals(original, readBack);
+
+        jsonUserPrefsStorage.saveUserPrefs(original);
+        readBack = jsonUserPrefsStorage.readUserPrefs().get();
+        assertEquals(original, readBack);
+    }
 
 }

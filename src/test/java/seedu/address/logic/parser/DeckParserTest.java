@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -12,6 +14,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.GoalCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HintCommand;
 import seedu.address.logic.commands.PractiseCommand;
 import seedu.address.logic.commands.SetDifficultyCommand;
 import seedu.address.logic.commands.SolveCommand;
@@ -161,6 +164,18 @@ public class DeckParserTest {
     }
 
     @Test
+    public void parseCommand_hintCommand_success() throws ParseException {
+        Index testIndex = Index.fromOneBased(8);
+        String hintTestCommand = HintCommand.COMMAND_WORD + " " + testIndex.getOneBased();
+        HintCommand testCommand = (HintCommand) parser.parseCommand(hintTestCommand);
+
+        assertEquals(new HintCommand(testIndex), testCommand);
+
+    }
+
+
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(
                 ParseException.class,
@@ -174,5 +189,4 @@ public class DeckParserTest {
         assertThrows(ParseException.class,
                 Messages.MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
-
 }

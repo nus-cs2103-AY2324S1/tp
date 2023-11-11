@@ -59,7 +59,8 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Removal of test cases that were only applicable to the previous project [#83]()
   * Hid the answers from the Display Card to simulate exam conditions [#72]()
-  * Wrote additional tests for existing features to increase coverage from 60% to 63% (Pull requests [\#116]())
+  * Wrote additional tests for existing features to increase coverage from 60% to 63% [\#116]()
+  * Enhance existing test cases to increase code coverage from 65% to 69% () [\#209]()
 
 * **Documentation**:
   * User Guide:
@@ -73,8 +74,11 @@ Given below are my contributions to the project.
 
   * Developer Guide:
     * Add search implementation for future developments [\#98]()
-    * Changed the diagrams in the guide to reflect latest project flow [\#190]()
+    * Updated the diagrams in the guide to reflect latest project flow [\#190]()
     * Included implementation for Export and Import and finalised proposed features [\#190]()
+    * Added sequence and activity diagrams for Add and Delete commands [#213]()
+    * Added object diagrams illustrating Card and Deck classes [#213]()
+
 
 * **Tools**:
   * Integrated codecov into GitHub actions and CodeCov badge [\#107]()
