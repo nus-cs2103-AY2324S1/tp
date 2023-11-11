@@ -182,13 +182,13 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleFocusField(PersonProfile.Field field) {
-        if (personProfilePlaceholder.isVisible()) {
+        if (personProfilePlaceholder.isVisible() && !personListPanelPlaceholder.isVisible()) {
             personProfile.setFocus(field);
         }
     }
 
     private void resetValues() {
-        if (personProfilePlaceholder.isVisible()) {
+        if (personProfilePlaceholder.isVisible() && !personListPanelPlaceholder.isVisible()) {
             personProfile.resetValues();
         }
     }
