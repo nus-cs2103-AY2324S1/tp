@@ -13,7 +13,7 @@ public class ReviewCommand extends Command {
 
     public static final String COMMAND_WORD = "review";
 
-    public static final String MESSAGE_SUCCESS = "Listed all flash cards you need to review";
+    public static final String MESSAGE_SUCCESS = "Listed all flashcards you need to review";
 
     /**
      * The predicate used to filter the flash card which is overdue.

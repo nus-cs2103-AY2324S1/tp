@@ -608,6 +608,43 @@ Use case resumes from step 3.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Planned Enhancement**
+
+### Enhancement 1: Improving UI
+
+**Feature Flaw**
+
+* Users are not able to see the words clearly as the current font size is too small.
+* Users now are not able to check the translation language unless they enter the `reveal` command. This is not user-friendly as users may want to know the translation language before revealing the translation.
+
+**Proposed Enhancement**
+* Increasing the font size of the words and translations in the flash cards.
+* Adding language tag under the `level` tag on each flash card. This will allow users to distinguish different languages of the translations before calling the `reveal` command.
+
+**Sample UI**  
+
+![img.png](images/LanguageTag.png)
+
+### Enhancement 2: Improving the content of output messages
+
+**Feature Flaw**
+
+Some of our current output messages are not formatted properly. For example, the message entering the `reveal` command is "Flashcard has been revealed!" followed directly by the translation. Users may be confused to distinguish the message and the translation.
+
+**Proposed Enhancement**
+* Formatting the messages to be more clear and user-friendly.
+* Specifying output messages to be more detailed and grammatically correct.
+
+**Sample Output**
+
+| Current Output Message               | After Enhancement         |
+|--------------------------------------|---------------------------| 
+| ![img.png](images/RevealMessage.png) | Translation: word         |
+| ![img.png](images/ReviewMessage.png) | ...1 flashcard(s) listed! |
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.

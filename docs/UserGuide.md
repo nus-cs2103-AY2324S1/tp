@@ -402,19 +402,6 @@ If your changes to the data file makes its format invalid, Flashlingo will disca
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Planned Enhancement
-
-### Adding language tags in UI
-
-The UI will display translation language tag of the flash cards to users. This will allow users to distinguish different languages of the translations and help them
-recall the translation and verify the correctness of the translation by further entering the `reveal` command.
-
-UI Prototype:
-![img.png](images/LanguageTag.png)
-
-
---------------------------------------------------------------------------------------------------------------------
-
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
