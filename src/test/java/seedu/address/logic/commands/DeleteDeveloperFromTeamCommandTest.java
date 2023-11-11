@@ -78,7 +78,7 @@ public class DeleteDeveloperFromTeamCommandTest {
         DeleteDeveloperFromTeamCommand deleteDevCommand2 = new DeleteDeveloperFromTeamCommand(teamName, developer2);
 
         // same object -> returns true
-        assertTrue(deleteDevCommand1.equals(deleteDevCommand1));
+        assertTrue(deleteDevCommand2.equals(deleteDevCommand2));
 
         // same values -> returns true
         DeleteDeveloperFromTeamCommand deleteDevCommand1Copy = new DeleteDeveloperFromTeamCommand(teamName, developer1);
