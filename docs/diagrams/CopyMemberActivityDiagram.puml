@@ -11,9 +11,8 @@ else ([else])
     if () then ([index is invalid])
         : Error message for invalid index is shown;
     else ([else])
-        : Copy the member's details;
-        : Show success message;
-        : Show the member's details;
+        : Copy the member's details into the clipboard;
+        : Show success message with member's details;
     endif
 endif
 stop

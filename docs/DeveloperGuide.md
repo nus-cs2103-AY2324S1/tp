@@ -673,6 +673,7 @@ Similar to UC07 - Copying a member except that it copies an applicant instead of
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **CLI**: Command Line Interface: A way of interacting with a computer program where the user issues commands to the
   program in the form of successive lines of text (command lines). This type of interface emphasises text-based user interaction over graphical user interfaces.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
