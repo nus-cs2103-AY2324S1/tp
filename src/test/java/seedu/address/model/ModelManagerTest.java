@@ -18,9 +18,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.name.NameContainsKeywordsPredicate;
-import seedu.address.testutil.DepartmentBuilder;
 import seedu.address.testutil.ManageHrBuilder;
 
 public class ModelManagerTest {
