@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":DeckParser" as DeckParser LOGIC_COLOR
+participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
+participant "li:ListCommand" as ListCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("list t/CS2103T")
+activate LogicManager
+
+LogicManager -> DeckParser : parseCommand("list t/CS2103T")
+activate DeckParser
+
+create ListCommandParser
+DeckParser -> ListCommandParser
+activate ListCommandParser
+ListCommandParser -> DeckParser
+deactivate ListCommandParser
+
+DeckParser -> ListCommandParser : parse("list t/CS2103T")
+activate ListCommandParser
+
+create ListCommand
+ListCommandParser -> ListCommand : new ListCommand(predicates)
+activate ListCommand
+
+ListCommand --> ListCommandParser : li
+deactivate ListCommand
+
+ListCommandParser --> DeckParser : li
+deactivate ListCommandParser
+ListCommandParser -[hidden]-> DeckParser
+destroy ListCommandParser
+
+DeckParser --> LogicManager : li
+deactivate DeckParser
+
+LogicManager -> ListCommand : execute()
+activate ListCommand
+
+ListCommand -> Model : updateFilteredCardList(predicate)
+activate Model
+
+Model --> ListCommand
+deactivate Model
+
+create CommandResult
+ListCommand -> CommandResult
+activate CommandResult
+CommandResult --> ListCommand
+deactivate CommandResult
+
+ListCommand --> LogicManager : result
+deactivate ListCommand
+ListCommand -[hidden]-> LogicManager : result
+destroy ListCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
