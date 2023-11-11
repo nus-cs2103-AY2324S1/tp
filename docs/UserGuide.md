@@ -235,7 +235,7 @@ list t/CS2100
 
 #### To note:
 1. Any extraneous parameters not `q/` and `t/` will be ignored, i.e. `list 12345` or `list a/000000` will be regarded as `list`.
-
+2. Listing questions with markdown syntax should include their relevant markdown notation.
 #### Expected output:
 1. User Input:
    ```
@@ -255,7 +255,7 @@ Edits an existing Flashcard in the deck.
 
 **Format:** 
 ```
-edit INDEX [q/question] [a/answer] [t/tag] [h/hint]
+edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG...] [h/HINT]
 ```
 
 **Examples:**
@@ -277,28 +277,22 @@ edit 1 h/Apple
 ```
 
 #### To Note:
-1. There must be at least one parameter (either `q/`, `a/`, `t/` or `h/`) for the command.
-2. No empty input or input with only whitespace after `q/`, `a/`, 
-3. Empty input after `t/` and `h/` will remove existing tags or hint respectively.
-4. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
-5. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
-6. Tagging is not supported in v1.2 and earlier.
-7. Hint is not supported before v1.3.
+1. There must be at least one optional parameter included for the command input.
+2. Empty input after `t/` and `h/` will remove existing tags or hint respectively.
+3. Tagging is not supported in v1.2 and earlier.
+4. Hint is not supported before v1.3.
 
 #### Expected output:
-1. Given a correct input, a success message will be shown.
+1. User Input:
    ```
-   Successfully edited flashcard
+   add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa 
+   edit 1 a/If is a negative number, invert all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems
    ```
-2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
-
-#### Usage:
-1. User Input
-   ![usage of edit command](./images/UserGuide/1.3b_edit.png)
 
 2. Successful Output
-   ![result of edit command](./images/UserGuide/1.3b_edit_ans.png)
-
+    1. Result box displays: `Edited Card: Question: How do you you convert from binary to 1s Complement?; Answer: If is a negative number, invert all the bits, i.e. 0 to 1 and vice versa`
+    2. The corresponding card in the deck will be updated.
+       ![result of edit command](./images/UserGuide/1.4_edit.png)
 
 ### Practise Flashcards: `practise`
 Practise a single Flashcard in the deck
