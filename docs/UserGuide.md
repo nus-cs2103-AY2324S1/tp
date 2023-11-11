@@ -319,7 +319,7 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]窶ｦ窶
 * **ALL** the fields must be provided.
 * The `NAME` field is case-sensitive.
 * `PHONE` must be a 3 to 20 digit positive integer.
-* `STUDENT_NUMBER` needs to be unique, and must not be blank.
+* [`STUDENT_NUMBER`](#student-number) needs to be unique, and must not be blank.
 * When a student is added, their grades, attendance and class participation details will be initialised to `0`, `absent` and `false` respectively for all tutorials.
 * Comment for a student can only be added after the student is instantiated.
 
@@ -340,7 +340,7 @@ Adds or replaces a comment of an existing student in **Class Manager 2023**.
 
 Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
-* The `STUDENT_NUMBER` must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
 * Every student can only have 1 comment.
 * The `COMMENT` must be a valid string.
     * Take note that the `COMMENT` string must not include any prefix.
@@ -371,7 +371,7 @@ Deletes an existing student in **Class Manager 2023** by specifying the student 
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The `STUDENT_NUMBER` must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
 
 Example:
 * `delete s/A0249112A`
@@ -386,12 +386,12 @@ Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER]
 
 <box type="warning" seamless>
 
-**Caution:**
-The student number entered __without__ the `s/` prefix will be the **old** student number.
+**Note:**
+The student number entered __without__ the `s/` prefix is the **current** student number.
 </box>
 
-* `STUDENT_NUMBER` must be valid and exist.
-* `STUDENT_NUMBER` must be entered before the details to be modified.
+* [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* [`STUDENT_NUMBER`](#student-number) must be entered before the details to be modified.
 * Replace the student's existing student number with `NEW_STUDENT_NUMBER`.
 * `PHONE` must be a positive integer with 3 or more digits.
 * At least one of the optional fields must be provided.
@@ -470,7 +470,7 @@ Mark the tutorial attendance for an existing student as absent in **Class Manage
 Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 
 Examples:
 * `absent s/A0245234A tut/1`
@@ -484,7 +484,7 @@ Mark the tutorial attendance for an existing student as present in **Class Manag
 Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 
 Examples:
 * `present s/A0245234A tut/1`
@@ -497,7 +497,7 @@ Mark the tutorial attendance for all students in the current list displayed as a
 
 Format: `absent-all tut/TUTORIAL_INDEX`
 
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config)) command.
 
 Examples:
 * `absent-all tut/1`
@@ -510,7 +510,7 @@ Mark the tutorial attendance for all students in the current list displayed as p
 
 Format: `present-all tut/TUTORIAL_INDEX`
 
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 
 Examples:
 * `present-all tut/1`
@@ -530,7 +530,7 @@ This will be changed in the future.
 Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
 
 * `STUDENT_NUMBER` must be valid and exist.
-* `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 * `PARTICIPATION` must be either `true` or `false`.
     * The `true` value indicates that the student has participated in the tutorial, while the `false` value indicates that the student has not participated in the tutorial.
 * `PARTICIPATION` is case-insensitive.
@@ -549,7 +549,7 @@ Setting an assignment grade for an existing student in **Class Manager 2023**.
 Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 
 * The `STUDENT_NUMBER` must be valid and exist.
-* The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 * The `GRADE` must be a valid integer between 0 and 100.
 
 Examples:
@@ -604,44 +604,44 @@ Example:
 # Command summary
 
 ## Essential commands
-| Action                                                                   | Format, Examples                                                            |
-|--------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| [**Configure Class Manager 2023**](#configure-class-manager-2023-config) | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/10 #a/3` |
-| [**Open help window**](#open-help-window-help)                           | `help`                                                                      |
+| Action                                                                    | Format, Examples                                                            |
+|---------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| [**Configure Class Manager 2023**](#configure-class-manager-2023--config) | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/10 #a/3` |
+| [**Open help window**](#open-help-window--help)                           | `help`                                                                      |
 
 ## Miscellaneous commands
-| Action                                                           | Format, Examples                                 |
-|------------------------------------------------------------------|--------------------------------------------------|
-| [**Exit Class Manager 2023**](#exit-class-manager-2023-exit)     | `exit`                                           |
-| [**View command history**](#view-command-history-history)        | `history`                                        |
-| [**Load a save file**](#load-a-save-file-load)                   | `load f/FILE_NAME`<br> e.g. `load f/sample`      |
-| [**Randomly select students**](#randomly-select-students-random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2` |
-| [**Redo a command**](#redo-a-command-redo)                       | `redo`                                           |
-| [**Undo a command**](#undo-a-command-undo)                       | `undo`                                           |
-| [**Toggle UI theme**](#toggle-ui-theme-theme)                    | `theme`                                          |
+| Action                                                            | Format, Examples                                 |
+|-------------------------------------------------------------------|--------------------------------------------------|
+| [**Exit Class Manager 2023**](#exit-class-manager-2023--exit)     | `exit`                                           |
+| [**View command history**](#view-command-history--history)        | `history`                                        |
+| [**Load a save file**](#load-a-save-file--load)                   | `load f/FILE_NAME`<br> e.g. `load f/sample`      |
+| [**Randomly select students**](#randomly-select-students--random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2` |
+| [**Redo a command**](#redo-a-command--redo)                       | `redo`                                           |
+| [**Undo a command**](#undo-a-command--undo)                       | `undo`                                           |
+| [**Toggle UI theme**](#toggle-ui-theme--theme)                    | `theme`                                          |
 
 ## Student list commands
 | Action                                                         | Format, Examples                                                                                                                                             |
 |----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add a student**](#add-a-student-add)                        | `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]窶ｦ窶義 <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend` |
-| [**Comment on a student**](#comment-on-a-student-comment)      | `comment s/STUDENT_NUMBER cm/COMMENT` <br> e.g. `comment s/A0249112A cm/This student is very hardworking.`                                                   |
-| [**Delete all students**](#delete-all-students-clear)          | `clear`                                                                                                                                                      |
-| [**Delete one student**](#delete-one-student-delete)           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                      |
-| [**Edit a student's details**](#edit-a-student-s-details-edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
-| [**List all students**](#list-all-students-list)               | `list`                                                                                                                                                       |
-| [**Lookup students**](#lookup-students-lookup)                 | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
-| [**Tag a student**](#tag-a-student-tag)                        | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]窶ｦ窶義 <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                  |
+| [**Add a student**](#add-a-student--add)                       | `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]窶ｦ窶義 <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend` |
+| [**Comment on a student**](#comment-on-a-student--comment)     | `comment s/STUDENT_NUMBER cm/COMMENT` <br> e.g. `comment s/A0249112A cm/This student is very hardworking.`                                                   |
+| [**Delete all students**](#delete-all-students--clear)         | `clear`                                                                                                                                                      |
+| [**Delete one student**](#delete-one-student--delete)          | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                      |
+| [**Edit a student's details**](#edit-a-students-details--edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
+| [**List all students**](#list-all-students--list)              | `list`                                                                                                                                                       |
+| [**Lookup students**](#lookup-students--lookup)                | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
+| [**Tag a student**](#tag-a-student--tag)                       | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]窶ｦ窶義 <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                  |
 
 ## Class information commands
-| Action                                                                                               | Format, Examples                                                                                                         |
-|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
-| [**Mark a student as present**](#mark-a-student-as-present-present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/1`                                    |
-| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/1`                                                           |
-| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/1`                                                         |
-| [**Record class participation for a student**](#record-class-participation-for-a-student-class-part) | `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION` <br> e.g. `class-part s/A0245234A tut/1 part/true` |
-| [**Set assignment grade for a student**](#set-assignment-grade-for-a-student-grade)                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                             |
-| [**View a student's class information**](#view-a-student-s-class-information-view)                           | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
+| Action                                                                                                | Format, Examples                                                                                                         |
+|-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| [**Mark a student as absent**](#mark-a-student-as-absent--absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
+| [**Mark a student as present**](#mark-a-student-as-present--present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/1`                                    |
+| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent--absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/1`                                                           |
+| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present--present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/1`                                                         |
+| [**Record class participation for a student**](#record-class-participation-for-a-student--class-part) | `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION` <br> e.g. `class-part s/A0245234A tut/1 part/true` |
+| [**Set assignment grade for a student**](#set-assignment-grade-for-a-student--grade)                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                             |
+| [**View a student's class information**](#view-a-students-class-information--view)                    | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
 
 --------------------------------------------------------------------------------------------------------------------
 
