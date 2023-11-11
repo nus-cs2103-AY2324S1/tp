@@ -64,7 +64,6 @@ public class Messages {
             builder.append("N/A;");
         } else {
             person.getMedicalHistories().forEach(builder::append);
-            builder.append(";");
         }
         return builder.toString();
     }

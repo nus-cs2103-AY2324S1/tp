@@ -10,14 +10,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Email {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain.tld and adhere"
-            + "to the following constraints:\n"
+    public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format"
+            + " local-part@domain.tld (tld = top-level domain)"
+            + " and adhere to the following constraints:\n"
             + "1. The local-part should only contain alphanumeric characters and these special characters ("
             + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special characters.\n"
             + "2. This is followed by a '@' , a domain name, a '.', and the top-level domain (tld). "
             + "The domain name is made up of domain labels separated by periods.\n"
             + "The domain name must:\n"
-            + "    - end with a top-level domain (tld) which is at least 2 characters long\n"
+            + "    - end with a tld which is at least 2 characters long\n"
             + "    - have each domain label start and end with alphanumeric characters\n"
             + "    - have each domain label and tld consist of alphanumeric characters,"
             + " separated only by hyphens, if any.";
