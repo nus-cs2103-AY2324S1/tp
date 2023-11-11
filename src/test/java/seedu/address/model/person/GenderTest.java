@@ -57,6 +57,6 @@ public class GenderTest {
         assertFalse(male.equals(5.0f));
 
         // different values -> return false
-        assertFalse(male.equals(new Gender ("F")));
+        assertFalse(male.equals(new Gender("F")));
     }
 }
