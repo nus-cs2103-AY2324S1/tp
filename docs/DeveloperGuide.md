@@ -187,11 +187,11 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Overview 
+### Overview
 
-The basic idea of what happens when a user types a command: 
+The basic idea of what happens when a user types a command:
 1. The LogicManager executes method is called and takes in the user's input.
-2. The user's input is then parsed by `AddressBookParser`, which then creates the respective `XYZCommandParser`. 
+2. The user's input is then parsed by `AddressBookParser`, which then creates the respective `XYZCommandParser`.
 3. `XYZCommandParser` parses the additional arguments provided by the user and creates and `XYZCommand`.
 4. `XYZCommand` then communicates with ModelManager to execute and returns a `CommandResult` which is displayed to the user.
 
@@ -208,39 +208,37 @@ of schedule command is then returned. The partial class diagram is shown below.
 
 <img src="images/ScheduleClassDiagram.png" width="400"/>
 
-The following activity diagram summarises what happens the user executes a schedule command. 
+The following activity diagram summarises what happens the user executes a schedule command.
 
 <img src="images/ScheduleActivityDiagram.png" width="400"/>
 
 **Design Considerations**
 
-**Aspect: How to implement Appointments for Person**  
+**Aspect: How to implement Appointments for Person**
 
 Alternative 1 (Current Choice): Create an abstract class ScheduleItem and make it a compulsory field for Person.
 
-The diagram below illustrates our current implementation. A `Person` has is associated with 1 `ScheduleItem`, which can
-be a `NullAppointment`(empty appointment) or `Appointment`. 
+The diagram below illustrates our current implementation. A `Person` has is associated with 1 `ScheduleItem`, which can be a `NullAppointment`(empty appointment) or `Appointment`.
 
-<img src="images/ScheduleItemClassDiagram.png" width="300"/> 
+<img src="images/ScheduleItemClassDiagram.png" width="300"/>
 
-- Pros: 
+- Pros:
   * This ensures a 1-to-1 relationship between Person and Appointment, making implementation of other functions like
   sort easier. This also prevents clutter of appointments in the UI.
   * This makes use of a **facade** design pattern, where `NullAppointment` and `Appointment` will handle themselves
-  without the `Person` knowing. 
-  
-- Cons: 
+  without the `Person` knowing.
+
+- Cons:
   * This makes the scheduling of Appointments more inflexible, as the FA is unable to schedule multiple appointments
   with the same person.
 
-- Other considerations: 
-  * `NullAppointment` is a Singleton class to prevent multiple instances of it being created, making it more efficient
-  for memory. 
+- Other considerations:
+  * `NullAppointment` is a Singleton class to prevent multiple instances of it being created, making it more efficient for memory.
 
-Alternative 2: Create a hashset of Appointments for each Person. 
+Alternative 2: Create a hashset of Appointments for each Person.
 - Pros:
-  * More flexible, user can now schedule multiple appointment for a Person. 
-  
+  * More flexible, user can now schedule multiple appointment for a Person.
+
 - Cons:
   * Harder to implement operations such as editing of an appointment for a client. An additional step of finding the
   specified appointment within the hashset is required, which may potentially introduce more bugs.
@@ -252,13 +250,13 @@ The **Complete** feature is facilitated by the `CompleteCommand` and `CompleteCo
 `CompleteCommandParser` creates a `CompleteCommand` associated with a `CompleteCommandDescriptor` which contains
 information on how the appointments should be completed.
 
-The following sequence diagram illustrates how the complete operation is executed when date given. 
+The following sequence diagram illustrates how the complete operation is executed when date given.
 
 <img src="images/CompleteSequenceDiagram.png" width="800"/>
 
 > :warn: The lifeline of the diagram should end at the destroyer mark (X) but reaches end of diagram due to limitation of plantUML
 
-The following activity diagram illustrates how the complete operation is executed. 
+The following activity diagram illustrates how the complete operation is executed.
 
 <img src="images/CompleteActivityDiagram.png" width="800"/>
 
@@ -296,7 +294,7 @@ in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmails
 
 The `UniquePersonsList` class maintains a list of unique persons. Additionally, it implements the following operation:
 * `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  This method iterates through the persons list
-and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
+and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person.
 
 Depending on the scenario, it triggers either `Person#gatherEmailsContainsTag(String prompt)` or
 `Person#gatherEmailsContainsFinancialPlan(String prompt)`:
@@ -339,14 +337,13 @@ _{more aspects and alternatives to be added}_
 
 ### Expanded Find feature
 
-The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure. 
+The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure.
 It extends the `find` command with the ability to search for multiple terms at once, implemented using an array
 of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `CombinedPredicate`.
 ![CombinedPredicateClassDiagram](images/CombinedPredicateClassDiagram.png)
 
 In the `FindCommandParser`, `CombinedPredicate` is initialised with a `NameContainsKeywordsPredicate`,
-`FinancialPlanContainsKeywordsPredicate` and `TagContainsKeywordsPredicate`. These predicates check a `Person` if the
-respective field contains any of the keywords supplied to the predicate.
+`FinancialPlanContainsKeywordsPredicate` and `TagContainsKeywordsPredicate`. These predicates check a `Person` if the respective field contains any of the keywords supplied to the predicate.
 
 Note that only `NameContainsKeywordsPredicate` checks for whole words, because it is rare to search for people by
 substrings e.g. `Marc` and `Marcus` should not show up in the same search. On the other hand,
@@ -396,7 +393,7 @@ time. This feature is facilitated through the `SortCommand` class.
 The `SortCommand` class is instantiated by the `SortCommandParser`, which parses user input commands. The
 `SortCommandParser` class implements the following operations:
 
-- **`SortCommandParser#parse(String args)` —  Checks the sort command keyword passed in by the user. 
+- **`SortCommandParser#parse(String args)` —  Checks the sort command keyword passed in by the user.
 
 The `SortCommand` takes in a `Comparator<Person>` object and passes it into the current `Model` model. The
 `SortCommand` class implements the following operations:
@@ -872,8 +869,7 @@ symbols so that names like `Thaarshen s/o Thaarshen` and `O'Brien` are accepted.
 validity checker for both fields.
 5. The current `gather` command does not allow the gathering of all emails in the contact book or by multiple fields
 at once. To allow the gathering of all the persons emails using `gather all` command, we plan create another
-`GatherEmailPrompt` class, with a method that will call the Person `getEmail()` method. To allow gathering emails
-by multiple fields, for example using the `fp/` and `t/` prefixes at once, we plan to use a similar approach 
+`GatherEmailPrompt` class, with a method that will call the Person `getEmail()` method. To allow gathering emails by multiple fields, for example using the `fp/` and `t/` prefixes at once, we plan to use a similar approach
 to `find` but return the person's email instead.
 6. The `complete`, `add`, `edit` and `schedule` commands currently display the whole list (i.e. undoes the result of
 any `find` command) after being executed, which might cause users to become disoriented. We plan to disable this
@@ -949,8 +945,19 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
+   1. If there is no saved data, the application will open with a new data file loaded with sample data
+   2. To do this:
+      1. Go to the location of the saved data. The location of the saved data can be found at the bottom left of the UNOFAS app.
+      2. Delete the file `addressbook.json`.
+      3. Restart the application.
+   3. A new file with sample contacts and appointments will be created.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+2. Dealing with corrupted data files
+   1. If saved data is corrupted, the application will wipe the corrupted data and restart with no contacts and appointments.
+   2. To simulate a corrupted file:
+      1. Go to the location of the saved data.
+      2. Open `addressbook.json` and corrupt the file in a way that makes it an invalid file to read (e.g. adding alphabets into a contact's phone number field)
+      3. Restart the application.
+   3. A new file will be created with no contacts and appointments.
 
-2. _{ more test cases …​ }_
