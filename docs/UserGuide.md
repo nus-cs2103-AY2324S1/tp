@@ -90,12 +90,12 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 
 **:information_source: Notes about the command format:**<br>
 
-| Notation         | Description                                                   | Example Command                                                 | Example Usage                        |
-|------------------|---------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------|
-| `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                | `delete 1`                           |
-| `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANG] [tl/TRANSLATION_LANG]` | `add w/Hello t/你好`                   |
- | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                             | `find hello, bye`                    |
-| `...`            | Parameter that will not be used                               | `help ...`                                                      | `abc help 123` is the same as `help` |
+| Notation         | Description                                                   | Example Command                                                 | Example Usage                   |
+|------------------|---------------------------------------------------------------|-----------------------------------------------------------------|---------------------------------|
+| `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                | `delete 1`                      |
+| `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANG] [tl/TRANSLATION_LANG]` | `add w/Hello t/你好`              |
+ | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                             | `find hello, bye`                |
+| `...`            | Parameter that will not be used                               | `help ...`                                                      | `help 123` is the same as `help` |
 
 </div>
 
@@ -219,16 +219,18 @@ Output:
 Filters the flash card list by the given keywords. All the flash cards whose word or translation contains the keywords will be displayed.
 * The search is case-insensitive. e.g `food` will match `Food`
 * Users can search for specific substring. e.g `oo` will match `food`
+* Users can search for multiple keywords. e.g `food, bye` will match `food` and `bye`
 
 [Command Format](#commands): `find <KEYWORDS>`
 
 Examples:
 * `find food` returns the flash card list and its translation that contains the keyword `food`
 * `find oo` returns the flash card list and its translation that contains the substring `oo`
+* `find food, bye` returns the flash card list and its translation that contains the keyword `food` and `bye`
 
 Output:
 
-|  Before find   |![img.png](images/Beforefind.png)  |
+|  Before find   | ![img.png](images/BeforeFind.png) |
 |:--------------:|:---------------------------------:|
 | **After find** | ![img.png](images/AfterFind.png)  |
 
