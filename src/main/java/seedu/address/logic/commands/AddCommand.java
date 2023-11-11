@@ -32,6 +32,11 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_SUBJECT + "SUBJECT "
+            + PREFIX_DAY + "DAY "
+            + PREFIX_BEGIN + "START "
+            + PREFIX_END + "END "
+            + PREFIX_PAYRATE + "PAYRATE"
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -44,7 +49,9 @@ public class AddCommand extends Command {
             + PREFIX_PAYRATE + "20.00";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the TuitionConnect System";
+
+    public static final String MESSAGE_DUPLICATE_PERSON = "This tutee already exists";
+
     public static final String MESSAGE_DUPLICATE_DATE = "This date and time clashes with an existing schedule";
 
     private final Person toAdd;

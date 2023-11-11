@@ -12,7 +12,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Check if the tutee paid.
+ * Check if the tutee is paid.
+ * (Make use of the template of Delete Command and did some modification)
  */
 public class IsPaidCommand extends Command {
     public static final String COMMAND_WORD = "ispaid";

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -13,7 +12,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Mark the tutee as paid.
+ * Mark the specific tutee as paid.
+ * (Make use of the template of Delete Command and did some modification)
  */
 public class PaidCommand extends Command {
     public static final String COMMAND_WORD = "paid";
@@ -39,9 +39,9 @@ public class PaidCommand extends Command {
         }
 
         Person personToMarkPaid = lastShownList.get(targetIndex.getZeroBased());
+
         model.purgeAddressBook();
         model.markPersonPaid(personToMarkPaid);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_MARK_PERSON_PAID_SUCCESS, personToMarkPaid.getPaid()));

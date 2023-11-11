@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":UnPaidAllCommandParser" as UnPaidAllCommandParser LOGIC_COLOR
+participant "d:UnPaidAllCommand" as UnPaidAllCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("unpaidAll")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("unpaidAll")
+activate AddressBookParser
+
+create UnPaidAllCommandParser
+AddressBookParser -> UnPaidAllCommandParser
+activate UnPaidAllCommandParser
+
+UnPaidAllCommandParser --> AddressBookParser
+deactivate UnPaidAllCommandParser
+
+AddressBookParser -> UnPaidAllCommandParser : parse("unpaidAll")
+activate UnPaidAllCommandParser
+
+create UnPaidAllCommand
+UnPaidAllCommandParser -> UnPaidAllCommand
+activate UnPaidAllCommand
+
+UnPaidAllCommand --> UnPaidAllCommandParser : p
+deactivate UnPaidAllCommand
+
+UnPaidAllCommandParser --> AddressBookParser : p
+deactivate UnPaidAllCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+UnPaidAllCommandParser -[hidden]-> AddressBookParser
+destroy UnPaidAllCommandParser
+
+AddressBookParser --> LogicManager : p
+deactivate AddressBookParser
+
+LogicManager -> UnPaidAllCommand : execute()
+activate UnPaidAllCommand
+
+UnPaidAllCommand -> Model : purgeAddressBook()
+activate Model
+
+Model --> UnPaidAllCommand
+deactivate Model
+
+loop for each person in the address book
+    UnPaidAllCommand -> Model : markPersonUnPaid(index)
+    activate Model
+    Model --> UnPaidAllCommand
+    deactivate Model
+end loop
+
+UnPaidAllCommand -> Model : updateFilteredPersonList()
+activate Model
+
+Model --> UnPaidAllCommand
+deactivate Model
+
+UnPaidAllCommand -> Model : commitAddressBook()
+activate Model
+
+Model --> UnPaidAllCommand
+deactivate Model
+
+UnPaidAllCommand -[hidden]-> LogicManager
+deactivate UnPaidAllCommand
+
+UnPaidAllCommand --> LogicManager : result
+deactivate UnPaidAllCommand
+[<--LogicManager
+deactivate LogicManager
+@enduml

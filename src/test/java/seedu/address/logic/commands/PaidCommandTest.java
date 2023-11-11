@@ -21,32 +21,32 @@ import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code UnpaidCommand}.
+ * {@code PaidCommand}.
  */
-public class UnPaidCommandTest {
+public class PaidCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToUnPaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        UnPaidCommand unpaidCommand = new UnPaidCommand(INDEX_FIRST_PERSON);
+        Person personToPaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(UnPaidCommand.MESSAGE_MARK_PERSON_UNPAID_SUCCESS,
-                personToUnPaid.getPaid());
+        String expectedMessage = String.format(PaidCommand.MESSAGE_MARK_PERSON_PAID_SUCCESS,
+                personToPaid.getPaid());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.markPersonUnPaid(personToUnPaid);
+        expectedModel.markPersonPaid(personToPaid);
 
-        assertCommandSuccess(unpaidCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(paidCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        UnPaidCommand unpaidCommand = new UnPaidCommand(outOfBoundIndex);
+        PaidCommand paidCommand = new PaidCommand(outOfBoundIndex);
 
-        assertCommandFailure(unpaidCommand, model, Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
+        assertCommandFailure(paidCommand, model, Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
     }
 
     @Test
@@ -57,38 +57,38 @@ public class UnPaidCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        UnPaidCommand unpaidCommand = new UnPaidCommand(outOfBoundIndex);
+        PaidCommand paidCommand = new PaidCommand(outOfBoundIndex);
 
-        assertCommandFailure(unpaidCommand, model, Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
+        assertCommandFailure(paidCommand, model, Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        UnPaidCommand unpaidFirstCommand = new UnPaidCommand(INDEX_FIRST_PERSON);
-        UnPaidCommand unpaidSecondCommand = new UnPaidCommand(INDEX_SECOND_PERSON);
+        PaidCommand paidFirstCommand = new PaidCommand(INDEX_FIRST_PERSON);
+        PaidCommand paidSecondCommand = new PaidCommand(INDEX_SECOND_PERSON);
 
         // same object -> returns true
-        assertTrue(unpaidFirstCommand.equals(unpaidFirstCommand));
+        assertTrue(paidFirstCommand.equals(paidFirstCommand));
 
         // same values -> returns true
-        UnPaidCommand unpaidFirstCommandCopy = new UnPaidCommand(INDEX_FIRST_PERSON);
-        assertTrue(unpaidFirstCommand.equals(unpaidFirstCommandCopy));
+        PaidCommand paidFirstCommandCopy = new PaidCommand(INDEX_FIRST_PERSON);
+        assertTrue(paidFirstCommand.equals(paidFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(unpaidFirstCommand.equals(1));
+        assertFalse(paidFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(unpaidFirstCommand.equals(null));
+        assertFalse(paidFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(unpaidFirstCommand.equals(unpaidSecondCommand));
+        assertFalse(paidFirstCommand.equals(paidSecondCommand));
     }
 
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        UnPaidCommand unpaidCommand = new UnPaidCommand(targetIndex);
-        String expected = UnPaidCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, unpaidCommand.toString());
+        PaidCommand paidCommand = new PaidCommand(targetIndex);
+        String expected = PaidCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, paidCommand.toString());
     }
 }
