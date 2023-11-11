@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant "FindMemberCommandParser" as FindMemberCommandParser LOGIC_COLOR
-participant "p:MemberContainsKeywordsPredicate" as Predicate LOGIC_COLOR
+participant "p:MemberContainsKeywordPredicate" as Predicate LOGIC_COLOR
 participant "s:FindMemberCommand" as FindMemberCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
