@@ -38,6 +38,14 @@ public class Duration {
         }
     }
 
+    /**
+     * @return defensive copy of Duration
+     */
+
+    public Duration copy() {
+        return new Duration(this.value);
+    }
+
     public int toInt() {
         return Integer.parseInt(value);
     }
@@ -62,8 +70,4 @@ public class Duration {
         return value.equals(otherDuration.value);
     }
 
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
 }

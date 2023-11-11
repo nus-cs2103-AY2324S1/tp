@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Mark All tutees as unpaid.
+ * Mark All tutees in the current list as unpaid.
  */
 public class UnPaidAllCommand extends Command {
     public static final String COMMAND_WORD = "unpaidAll";

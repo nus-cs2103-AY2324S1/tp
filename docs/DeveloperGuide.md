@@ -148,6 +148,14 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+The `AddCommand` extends the `Command` class. While mostly similar to `delete` illustrated above, the command contains 
+checks to prevent any duplicate `Person` object (i.e. same name and phone number) as well as clashes in schedules. 
+If it passes these checks, the person is added into the system.
+
+The following sequence diagram shows how the add command works.
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
 ### Find feature
 The `findCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
 subject using their prefixes.
@@ -163,7 +171,6 @@ The following sequence diagram shows how the edit command works.
 ![EditSequenceDiagram](images/EditSequenceDiagram.png)
 
 ### List by day feature
-
 The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
 the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
 
@@ -186,7 +193,18 @@ The following sequence diagram shows how the freeTime command works.
 
 #### Design Considerations
 
+### Calculate total revenue for the month
 
+
+The 'RevenueCommand' extends the 'command class'. The command first gets a list containing all tutees.
+The total revenue monthly can be calculated now by iterating through the list and calling 'getMonthlyRevenue()' on each
+tutee.
+
+*Total Revenue* = number of tutees x tutee.getMonthlyRevenue()
+
+
+The following sequence diagram shows how the total revenue command works:
+![RevenueSequenceDiagram.png](images/RevenueSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -274,33 +292,45 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### \[Proposed\] Mark paid/check paid features
+### Mark paid/unpaid features
 The proposed mark paid/check paid mechanism can check whether the person has paid or not by implementing a new boolean field 'paid' in the person object, it implements the following operations:
 
 * `paid [index]` — Mark the person at the index as paid.
-* `ispaid [index]` — Check whether the person at the index is paid.
+* `unpaid [index]` — Mark the person at the index as not paid.
 * `list unpaid` — List all the persons who haven't paid in the list.
+* `unpaidAll` — Reset all students' payment status to not paid.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+The following sequence diagram shows how paid command works:
 
-More graphs To be added.
+![PaidSequenceDiagram.png](images/PaidSequenceDiagram.png)
+
+The unpaid command works similar to the paid command.
+
+The following sequence diagram shows how unpaidAll command works:
+
+![UnpaidAllSequenceDiagram.png](images/UnpaidAllSequenceDiagram.png)
 
 #### Design considerations:
 
-_{more aspects and alternatives to be added}_
+**Aspect: The choice of paid data type:**
 
-### [Proposed] Total revenue command
-#### Proposed implementation
-![RevenueSequenceDiagram.png](images/RevenueSequenceDiagram.png)
+* **Alternative 1 (current choice):** Use simple boolean value.
+    * Pros: Easy to implement, fits the requirement: two status (paid, not paid).
+    * Cons: Different from all other fields in the person class, hard to maintain.
 
-The proposed total revenue command is facilitated by the payRate field in Person class, as well as the start and end fields in person class.
+* **Alternative 2:** Create a new paid class.
+    * Pros: Fits the other fields in the class.
+    * Cons: Hard to implement, waste of source.
 
-The following sequence diagram shows how the total revenue command works:
-_{to be implemented in the future}_
+**Aspect: How to implement mark paid features:**
 
-The logic behind finding total revenue is
+* **Alternative 1 (current choice):** Create a new person, set everything else the same as before, and set paid as true.
+    * Pros: Since we created a new person, the previous person's status will not change, this will benefit the design of undo/redo.
+    * Cons: Hard to implement.
 
-*Total Revenue* = payRate.value x hours of lesson x  number of lessons in current month
+* **Alternative 2:** Change the paid value of the current person.
+    * Pros: Easy to implement.
+    * Cons: The future design of redo/undo command would be difficult.
 
 
 
@@ -337,14 +367,16 @@ The logic behind finding total revenue is
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                        |
-| ------ |--------------------------------------------|---------------------------------------------|------------------------------------------------------------------------|
-| `* * *` | tutor                                      | view a list of all tutees                   |                                                                        |
+| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                       |
+| ------ |--------------------------------------------|---------------------------------------------|-----------------------------------------------------------------------|
+| `* * *` | tutor                                      | view a list of all tutees                   |                                                                       |
 | `* *`  | tutor                                      | view a list tutees on a specified day       | so that I can be reminded if I have any classes on that particular day |
-| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                        |
-| `* * *` | tutor                                      | add a new tutee                             |                                                                        |
-| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address        |
-| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                      |
+| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                       |
+| `* * *` | tutor                                      | add a new tutee                             |                                                                       |
+| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address       |
+| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                     |
+| `* *`  | tutor                                      | mark students that have already paid        | keep track of students' payment statuses                              |
+| `* *`  | tutor                                      | check all students who haven't paid         | easily remind students who haven't paid                               |
 
 *{More to be added}*
 
@@ -447,7 +479,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at 2.
 
-*{More to be added}*
+**Use case: UC05 - Mark a tutee as paid**
+
+**MSS**
+
+1.  User views the list of tutees.
+2.  User requests mark the specific tutee as paid.
+3.  System marks the tutee as paid.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The tutee that the user is trying to mark as paid does not exist in the list.
+    - 2a1. System informs that user does not exist.
+
+**Use case: UC06 - Reset all tutees in the list to not paid**
+
+**MSS**
+
+1.  User views the list of tutees.
+2.  User requests mark all the tutees in the current list as not paid.
+3.  System marks all the tutee in the list as not paid.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
