@@ -31,11 +31,11 @@ public class StudentNumberTest {
         assertFalse(StudentNumber.isValidStudentNumber("A023819")); // no alphabet at the end
         assertFalse(StudentNumber.isValidStudentNumber("A023819 /g")); // Symbol at the end\
         assertFalse(StudentNumber.isValidStudentNumber("023819F ")); // Does not start with A
+        assertFalse(StudentNumber.isValidStudentNumber("a222222A")); // start with 'a'
 
         // valid student numbers
         assertTrue(StudentNumber.isValidStudentNumber("A024392341A"));
         assertTrue(StudentNumber.isValidStudentNumber("A023819F")); // one character
-        assertTrue(StudentNumber.isValidStudentNumber("a222222A")); // start with 'a'
     }
 
     @Test

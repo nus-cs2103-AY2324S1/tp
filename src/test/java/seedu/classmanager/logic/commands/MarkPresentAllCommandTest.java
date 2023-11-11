@@ -45,7 +45,7 @@ public class MarkPresentAllCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(markPresentAllCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertEquals(selectedStudent, model.getSelectedStudent().get(0));
+        assertEquals(selectedStudent, model.getSelectedStudent());
     }
 
     @Test

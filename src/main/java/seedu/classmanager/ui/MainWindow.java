@@ -133,7 +133,7 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay(WELCOME_MESSAGE);
 
-        classDetailBox = new ClassDetailBox(logic.getSelectedStudent());
+        classDetailBox = new ClassDetailBox(logic.getObservableSelectedStudent());
         studentClassDetail.getChildren().add(classDetailBox.getRoot());
 
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

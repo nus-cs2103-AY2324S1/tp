@@ -14,7 +14,7 @@ public class StudentNumber {
     /*
      * The first character of the student number needs to be "A".
      */
-    public static final String VALIDATION_REGEX = "^[Aa]\\d+[A-Za-z]$";
+    public static final String VALIDATION_REGEX = "^A\\d+[A-Za-z]$";
 
     public final String value;
 

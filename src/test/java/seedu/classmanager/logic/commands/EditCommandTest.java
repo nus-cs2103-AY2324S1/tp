@@ -54,7 +54,7 @@ public class EditCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertEquals(expectedModel.getSelectedStudent().get(0), model.getSelectedStudent().get(0));
+        assertEquals(expectedModel.getSelectedStudent(), model.getSelectedStudent());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class EditCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertTrue(model.getSelectedStudent().isEmpty());
+        assertEquals(null, model.getSelectedStudent());
     }
 
     @Test

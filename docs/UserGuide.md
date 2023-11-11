@@ -46,7 +46,7 @@ Graphical User Interface (GUI). If you can type fast, CM 23 can get your class m
 
 # GUI Overview
 
-<img alt="Gui" src="images/Ui.png" width="600"> </br>
+<img alt="Gui" src="images/Ui.png" width="700"> </br>
 
 The **GUI** is split up into 4 main sections.
 
@@ -79,7 +79,7 @@ The **GUI** is split up into 4 main sections.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Extraneous parameters for commands that **do** take in parameters will be considered as invalid. <br>
-  e.g. if the command specifies `delete 123 s/A0249112A` or `delete s/A0249112A c/t11`, it will be considered as invalid. <br>
+  e.g. if the command specifies `delete 123 s/A0249112A` or `delete s/A0249112A c/T11`, it will be considered as invalid. <br>
   Please **<u>refrain</u>** from using prefixes as input under another prefix.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -88,17 +88,16 @@ The **GUI** is split up into 4 main sections.
 ## Class Number
 
 * Class Number refers to the tutorial class number of a particular course.
-* Class Number is not case-sensitive, and it must begin with 1 to 3 consecutive alphabetical characters, followed by 1 to 5 consecutive digits. Optionally, it can end with 1 alphabetical character. Class Number must not be blank.
+* Class Number is case-sensitive, and it must begin with a capital "T", followed by any number of characters. Class Number must not be blank as well.
 * Class Number is stored verbatim based on your input, with case being preserved. 
 * Here are some valid examples of Class Number:
-    - `G11`
-    - `T11A`
-    - `SG10`
-    - `abc12345d`
+    - `T11`
+    - `TG11`
+    - `TG10B`
 
 ## Student Number
 
-* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the letter 'A' or 'a', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* Student Number refers to the unique matriculation number of a NUS student. In Class Manager, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * Class Manager uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
 
 ## Command navigation
@@ -392,8 +391,8 @@ Format: `lookup [c/CLASS_NUMBER] [p/PHONE] [n/NAME] [e/EMAIL] [s/STUDENT_NUMBER]
 <box type="warning" seamless>
 
 **Caution:**
-_At least one_ of the optional fields must be provided. `lookup` alone is not allowed. <br>
-This command will not check for field validation. e.g. `lookup c/class 11` is allowed even though `class 11` is not a valid class number.
+- _At least one_ of the optional fields must be provided. `lookup` alone is not allowed. <br>
+- This command will not check for field validation. e.g. `lookup c/class 11` is allowed even though `class 11` is not a valid class number.
 </box>
 
 * The command is **case-insensitive**. e.g. `hans` will match `Hans`
@@ -401,15 +400,15 @@ This command will not check for field validation. e.g. `lookup c/class 11` is al
 * The order of the fields does **not** matter. e.g. `lookup n/li c/T11` will return the same result as `lookup c/T11 n/li`
 * Field with nothing will be ignored. e.g. `lookup n/ c/T11` will return the same result as `lookup c/T11`.
 * This command can take multiple words per field. e.g. `lookup c/T11 T12` will return all students in `T11` or `T12`.
-* Complicated lookup can be done by combining multiple fields. e.g. `lookup n/alex david c/t11 t12`
-  will return all students with name `alex` or `david` **and** is in class `t11` or `t12`.
+* Complicated lookup can be done by combining multiple fields. e.g. `lookup n/alex david c/T11 T12`
+  will return all students with name `alex` or `david` **and** is in class `T11` or `T12`.
 
 Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
   <img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br></br>
-* `lookup c/t11` returns all students in class number T11<br>
-  <img alt="result for 'lookup c/t11'" src="images/lookupClassResult.png" width="700"> </br></br>
+* `lookup c/T11` returns all students in class number T11<br>
+  <img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br></br>
 
 ---
 
@@ -492,6 +491,12 @@ Examples:
 
 Record the class participation for an existing student in Class Manager.
 
+<box type="warning" seamless>
+
+**Caution:** Currently, we allow a student not present for a tutorial session to have their class participation recorded as `true`.
+This will be changed in the future.
+</box>
+
 Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
 
 * `STUDENT_NUMBER` must be valid and exist.
@@ -545,6 +550,22 @@ Example:
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Class Manager 2023 home folder.
+<br><br>
+**Q**: How do I save file with different names?<br>
+**A**: You can rename the file manually after saving it. Start the Class Manager 2023 app and use the `load` command to load the renamed file. Note that the renamed file will then become the new default save file.
+<br><br>
+**Q**: I am unable to load my save file, what should I do?<br>
+**A**: Ensure that the save file is located in the `[JAR file location]/data` folder, and that the file name is valid. In addition, make sure that the number of tutorials and assignments in the save file is the same 
+as the current configuration of Class Manager 2023. You can reconfigure Class Manager 2023 to match the number of tutorials and assignments in the save file using the `config` command.
+<br><br>
+**Q**: I am unable to load my save file and I have tried all the solutions above, what should I do?<br>
+**A**: The save file may be corrupted. You can try to edit the save file manually to fix the corrupted save file. You can refer to [this section](#editing-the-data-file) for more information on the valid format of the data file.
+<br><br>
+**Q**: How do I change the save file location?<br>
+**A**: The save file is located at `[JAR file location]/data`. We currently do not support changing the save file location.
+<br><br>
+**Q**: I have found a bug, how can I report it?<br>
+**A**: Please report the bug by creating a new issue on the [Class Manager 2023 issue tracker](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -601,7 +622,7 @@ Example:
 # Glossary
 
 * **cd**: Change directory command in terminal/command line. cd takes the name of the folder you want to navigate to as an argument. The full command is cd `your-directory`.
-* **Student Number**: Unique matriculation number of a NUS student. In Class Manager, it must begin with the letter 'A' or 'a', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
+* **Student Number**: Unique matriculation number of a NUS student. In Class Manager, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Number must not be blank as well.
 * **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
 * **CLI**: Command Line Interface.
 * **GUI**: Graphical User Interface.

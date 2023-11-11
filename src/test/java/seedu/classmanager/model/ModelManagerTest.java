@@ -97,7 +97,7 @@ public class ModelManagerTest {
     public void setSelectedStudent_setStudent_success() {
         modelManager.addStudent(ALICE);
         modelManager.setSelectedStudent(ALICE);
-        assertEquals(ALICE, modelManager.getSelectedStudent().get(0));
+        assertEquals(ALICE, modelManager.getSelectedStudent());
     }
 
     @Test

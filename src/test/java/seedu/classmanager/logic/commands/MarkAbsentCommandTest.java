@@ -50,7 +50,7 @@ public class MarkAbsentCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(markAbsentCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertEquals(expectedModel.getSelectedStudent().get(0), model.getSelectedStudent().get(0));
+        assertEquals(expectedModel.getSelectedStudent(), model.getSelectedStudent());
 
         // if the student is not the selected student to view
         ModelManager otherModel = new ModelManager(new ClassManager(model.getClassManager()), new UserPrefs());
@@ -62,7 +62,7 @@ public class MarkAbsentCommandTest {
         expectedOtherModel.commitClassManager();
 
         assertCommandSuccess(markAbsentCommand, otherModel, expectedMessage, expectedOtherModel, commandHistory);
-        assertTrue(otherModel.getSelectedStudent().isEmpty());
+        assertEquals(null, otherModel.getSelectedStudent());
     }
 
     @Test
