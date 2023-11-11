@@ -10,7 +10,6 @@ import java.util.function.Predicate;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ListEntry;
 import seedu.address.model.Model;
-import seedu.address.model.lessons.Lesson;
 
 /**
  * Abstract class for edit commands
@@ -129,7 +128,8 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
                         + " error adding deleted original entry back. original: "
                         + original.toString() + " edited: " + edited.toString() + ".");
             }
-            throw new CommandException(getClashType(edited, clashingEntry) + " clash detected.\nEdited: " + edited.toString() + "\nClashes with: "
+            throw new CommandException(getClashType(edited, clashingEntry)
+                    + " clash detected.\nEdited: " + edited.toString() + "\nClashes with: "
                     + clashingEntry.toString());
         }
         addMethod.accept(edited);
