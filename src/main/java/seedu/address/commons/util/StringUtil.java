@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.Set;
-import java.util.stream.StreamSupport;
 
 /**
  * Helper functions for handling strings.
