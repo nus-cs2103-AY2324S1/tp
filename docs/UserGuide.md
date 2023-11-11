@@ -10,10 +10,11 @@ _Find Your Success with JobFindr_
 ## Table of Contents
 
 1. [Introduction](#introduction)
-    2. [First Time at JobFindr](#first-time-at-jobfindr)
-    3. [Experience at JobFindr](#experienced-at-jobfindr)
+    1. [First Time at JobFindr](#first-time-at-jobfindr)
+    2. [Experience at JobFindr](#experienced-at-jobfindr)
 2. [Quick Start](#quick-start)
-3. [Key Information](#key-information)
+3. [Quick Tutorial](#quick-tutorial)
+4. [Key Information](#key-information)
     1. [User Interface](#user-interface)
     2. [Structure of a job application](#structure-of-a-job-application)
     3. [Valid statuses](#valid-statuses)
@@ -21,7 +22,7 @@ _Find Your Success with JobFindr_
     5. [Structure of an interview](#structure-of-an-interview)
     6. [Valid interview types](#valid-interview-types)
     7. [Command Format](#command-format)
-4. [Features](#features)
+5. [Features](#features)
     1. [Command Summary](#command-summary)
     2. [Asking for help: `help`](#asking-for-help-help)
     3. [Listing all applications: `list`](#listing-all-applications--list)
@@ -35,8 +36,8 @@ _Find Your Success with JobFindr_
     11. [Editing an Interview: `interview edit`](#editing-an-interview-interview-edit)
     12. [Clearing All Applications: `clear`](#clearing-all-applications-clear)
     13. [Exiting the Programme: `exit`](#exiting-the-programme-exit)
-5. [FAQ](#faq)
-6. [Glossary](#glossary)
+6. [FAQ](#faq)
+7. [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -59,22 +60,34 @@ needs and preferences.
 
 _Welcome onboard JobFindr! Let us be part of your job search journey!_
 
-1. To get started with JobFindr, refer to the [Quick Star](#quick-start) below.
-2. After setting up JobFindr on your computer, you can get started with a Quick Tutorial to get familiar with the
+1. To get started with JobFindr, refer to the [Quick Start](#quick-start) below.
+2. After setting up JobFindr on your computer, you can get started with a [Quick Tutorial](#quick-tutorial) to get
+   familiar with the
    features.
 3. You may also explore JobFindr at your own pace, you can refer to the [Feature](#features) section for all the
    available features on JobFindr.
 
 ### Experienced at JobFindr
 
+_Good to see you back here! Let see how we can help you?_
+
+1. Facing problem with specific command?
+    * You may refer to the detailed instruction for each command in the [Features](#features) section or access the
+      hyperlink from our [Table of Contents](#table-of-contents).
+2. Forgot the commands available on JobFindr?
+    * Please kindly refer to the [Command Summary](#command-summary) for a quick reminder of what you can do on
+      JobFindr.
+3. Any other issues faced when using JobFindr?
+    * You may refer to the [FAQ](#faq) Section for solutions to common issues faced by our users.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-    2. To check if you have installed the correct Java version
+    1. To check if you have installed the correct Java version
        over [here](#1-how-do-i-make-sure-i-have-installed-the-correct-java-version)
-    3. Follow the instruction
+    2. Follow the instruction
        over [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
        to install Java `11`
 2. Download the latest `JobFindr.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-3/tp/releases).
@@ -84,16 +97,9 @@ _Welcome onboard JobFindr! Let us be part of your job search journey!_
    and enter the command `java -jar JobFindr.jar` to run the application.
 5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
-6. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter
-   will open the help window.<br>
-   Some example commands you can try:
-    * `list` : Lists all applications.
-    * `add c/Microsoft r/Software Engineer d/Nov 17 2023 1200 i/Technology s/Pending` :
-      Adds an application for the company named `Microsoft` to the Application Book.
-    * `delete 3` : Deletes the 3rd application shown in the current list.
-    * `clear` : Deletes all applications.
-    * `exit` : Exits the app.
-7. Refer to "[Key Information](#key-information)" below for details of each command.
+6. Get started on JobFindr with our guided [Quick Tutorial](#quick-tutorial) to learn the basics of using JobFindr in a
+   few minutes.
+7. Refer to [Key Information](#key-information) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -111,11 +117,64 @@ features to get started on JobFindr.
 Leverage on the power of flexibility by adding applications with minimal mandatory fields. Now let us try to add an
 application onto JobFindr.
 
-Step 1:
+**Step 1**: Find the [Command Box](#user-interface) on JobFindr and type in `add c/Google r/Software Engineer` before
+pressing **Enter**.<br>
+<img src="images/user-guide/QuickTutorial1.png"  width="600">
+
+* Learn more about the structure of a job application [here](#structure-of-a-job-application).
+
+**Step 2**: You should see a new entry added to the Job List Panel just like this: <br>
+<img src="images/user-guide/QuickTutorial2.png"  width="300">
+
+* You may need to scroll down the list to view the new entry by using the scroll bar.
+
+_[Optional]_ Good job! You have added your first application onto JobFindr! Now, you may try out adding other
+applications with different field inputs. Try entering or copy-paste the following into the Command Box:
+
+1. `add c/Apple r/iOS Engineer d/Jan 02 2024 2359`
+2. `add c/Facebook r/Product Manager d/Jan 04 2023 1200 s/Pending`
+3. `add c/Microsoft r/Project Manager d/Dec 31 2023 1400 i/Technology s/Pending t/FULL_TIME`
 
 ### 2. Edit a field in the newly added application
 
+Now you have learnt how to add applications onto JobFindr, what if you want to edit/update a specific field in the newly
+added application? Let's try using the edit feature.
+
+**Step 1**: Locate the [index](#command-format) of the application you want to edit. Let's edit our newly added
+application to `Google` for now. <br>
+<img src="images/user-guide/QuickTutorial3.png"  width="300">
+
+* You may want to enter the [`list`](#listing-all-applications--list) command to list all available applications.
+
+**Step 2**: Type `edit 8 r/Java Programmer` into the Command Box and press **Enter**. You should see an update to the
+application's
+role.<br>
+<img src="images/user-guide/QuickTutorial4.png"  width="300">
+
+_[Optional]_ Great! You have now edited the role of your application. Try editing other fields as well:
+
+1. `edit 8 s/PENDING`
+2. `edit 8 d/Dec 02 2023 2359`
+
 ### 3. Delete the application
+
+What if the application is no longer relevant to you now? Can we delete the application from our app? Yes, definitely
+let's do exactly that now.
+
+**Step 1**: Locate the [index](#command-format) of the application you want to edit. Let's edit our newly added
+application to `Google` for now. <br>
+<img src="images/user-guide/QuickTutorial5.png"  width="300">
+
+* You may want to enter the [`list`](#listing-all-applications--list) command to list all available applications.
+
+**Step 2**: Type `delete 8` into the Command Box and press **Enter**. You should notice that the application will be
+removed from the list of applications.<br>
+<br>
+
+Congrats! You have now master the basics of JobFindr! You may head right below to learn more
+about [JobFindr in details](#key-information)
+or go on to learn about [the other commands](#features) you can utilise in JobFindr.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -123,9 +182,10 @@ Step 1:
 
 <div markdown="block" class="alert alert-info">
 
-### User interface
+### User Interface
 
-JobFindr's GUI is designed with both **functionality** and **visual appeal** in mind.
+We designed our Graphical User Interface(GUI) with both **functionality** and **visual appeal** in mind. To provide a
+seamless experience for you at JobFindr.
 
 Below are the components of our GUI:
 ![GUI](images/UiStructure.png)
@@ -141,7 +201,7 @@ Below are the components of our GUI:
 | 7     | Interview Card       | Displays the specific interview                                        |
 | 8     | Interview List Panel | Displays the list of interviews you have added to that job application |
 
-### Structure of a job application
+### Structure of a Job Application
 
 | Field    | Prefix | Remarks                                                        | Optional? | Sort Order    |
 |----------|--------|----------------------------------------------------------------|-----------|---------------|
@@ -157,7 +217,7 @@ Below are the components of our GUI:
 
 * Deadline refers to the application submission deadline.
 
-### Valid statuses
+### Valid Statuses
 
 The following are valid statuses:
 
@@ -168,7 +228,7 @@ The following are valid statuses:
 | `APPROVED`      | An application that you have received a job offer for                     |
 | `REJECTED`      | An application that you have been rejected for                            |
 
-### Valid job types
+### Valid Job Types
 
 The following are valid job types:
 
@@ -183,11 +243,11 @@ The following are valid job types:
 | `FREELANCE`       | A freelance job                       |
 | `VOLUNTEER`       | A volunteered job                     |
 
-### Structure of an interview
+### Structure of an Interview
 
 | Field    | Prefix | Remarks                                                                                                             | Optional? |
 |----------|--------|---------------------------------------------------------------------------------------------------------------------|-----------|
-| Type     | `t/`   | Possible values in "[Valid interview types](#valid-interview-types)"                                                | No        |
+| Type     | `t/`   | Possible values in "[Valid Interview Types](#valid-interview-types)"                                                | No        |
 | DateTime | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 31 2030 1200) and cannot be earlier than the current date and time | No        |
 | Address  | `a/`   | Must start with an alphanumeric character                                                                           | No        |
 
@@ -199,7 +259,7 @@ The following are valid job types:
 
 * Multiple interviews with the same DateTime can be added if they are not duplicate interviews.
 
-### Valid interview types
+### Valid Interview Types
 
 The following are valid interview types:
 
@@ -614,6 +674,11 @@ Clears all applications from the application book.
 Exits the program.
 
 **Format:** `exit`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:** <br>
+* Applications will be saved automatically before exiting. No further action is required.
+</div>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
