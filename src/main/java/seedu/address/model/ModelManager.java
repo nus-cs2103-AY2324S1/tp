@@ -153,7 +153,6 @@ public class ModelManager implements Model {
      * @param group  Group in consideration.
      * @throws CommandException if person has already been assigned to group.
      */
-    @Override
     public void assignGroup(Person person, Group group) throws CommandException {
         group.addPerson(person);
         person.addGroup(group);
@@ -166,7 +165,6 @@ public class ModelManager implements Model {
      * @param group  Group in consideration.
      * @throws CommandException if person has already been assigned to group.
      */
-    @Override
     public void unassignGroup(Person person, Group group) throws CommandException {
         group.removePerson(person);
         person.removeGroup(group);

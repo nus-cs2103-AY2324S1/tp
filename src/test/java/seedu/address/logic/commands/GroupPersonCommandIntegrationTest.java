@@ -31,7 +31,7 @@ public class GroupPersonCommandIntegrationTest {
         Person validPerson = new PersonBuilder().withName("Alice Pauline").build(); // Alice Pauline
         Group validGroup = new GroupBuilder().withName("CS2100").build(); // CS2100
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.assignGroup(validPerson, validGroup);
 
         assertCommandSuccess(new GroupPersonCommand(validPerson.getName().toString(),
@@ -46,7 +46,7 @@ public class GroupPersonCommandIntegrationTest {
         Person validPerson = new PersonBuilder().withName("Alice Pauline").build(); // Alice Pauline
         Group validGroup = new GroupBuilder().withName("CS2107").build(); // CS2100
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.assignGroup(validPerson, validGroup);
 
 
@@ -59,8 +59,7 @@ public class GroupPersonCommandIntegrationTest {
     public void executePersonDoesNotExistUnSuccessful() throws CommandException {
         Person validPerson = new PersonBuilder().withName("Alice").build(); // Alice Pauline
         Group validGroup = new GroupBuilder().withName("CS2100").build(); // CS2100
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.assignGroup(validPerson, validGroup);
 
 

@@ -117,15 +117,6 @@ public class GroupRemarkCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void assignGroup(Person person, Group group) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void unassignGroup(Person person, Group group) {
-            throw new AssertionError("This method should not be called.");
-        }
-        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
