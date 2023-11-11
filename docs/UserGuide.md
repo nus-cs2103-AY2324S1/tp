@@ -377,9 +377,9 @@ Switches between light and dark appearance of UI dashboard.
 
 Output:
 
-|  light theme   | ![img.png](images/LightTheme.png) |
+|  Light theme   | ![img.png](images/LightTheme.png) |
 |:--------------:|:---------------------------------:|
-| **dark theme** | ![img.png](images/DarkTheme.png)  |
+| **Dark theme** | ![img.png](images/DarkTheme.png)  |
 
 ### Viewing help : `help`
 
@@ -437,25 +437,27 @@ Then, use the `load` command to import the data.
 
 ## Command summary
 
+Refer to [Commands](#commands) if unsure of how to interpret the format.
+
 | Action                  | Format, Examples                                                                                                           | Supported Period       |
 |-------------------------|----------------------------------------------------------------------------------------------------------------------------|------------------------|
 | **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`         | Outside review session |
-| **Delete**              | `delete <Index>`<br> e.g., `delete 1`                                                                                      | Outside review session |
+| **Delete**              | `delete <INDEX>`<br> e.g., `delete 1`                                                                                      | Outside review session |
 | **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` | Outside review session |
-| **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        | Outside review session |
-| **List**                | `list`                                                                                                                     | Outside review session |
-| **Review**              | `review`                                                                                                                   | Outside review session |
-| **Start**               | `start`                                                                                                                    | Outside review session |
-| **End**                 | `end`                                                                                                                      | Inside review session  |
-| **Reveal**              | `reveal <INDEX>`                                                                                                           | Both                   |
-| **Yes**                 | `yes`                                                                                                                      | Inside review session  |
-| **No**                  | `no`                                                                                                                       | Inside review session  |
-| **Learning Statistics** | `stats`                                                                                                                    | Outside review session |
-| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`                                                                  | Outside review session |
+| **Find**                | `find <KEYWORD...>`<br> e.g., `find bye`                                                                                   | Outside review session |
+| **List**                | `list ...`                                                                                                                 | Outside review session |
+| **Review**              | `review ...`                                                                                                               | Outside review session |
+| **Start**               | `start ...`                                                                                                                | Outside review session |
+| **End**                 | `end ...`                                                                                                                  | Inside review session  |
+| **Reveal**              | `reveal [<INDEX>]`                                                                                                         | Both                   |
+| **Yes**                 | `yes ...`                                                                                                                  | Inside review session  |
+| **No**                  | `no ...`                                                                                                                   | Inside review session  |
+| **Learning Statistics** | `stats ...`                                                                                                                | Outside review session |
+| **Language**            | `language [<SPECIFIED_LANGUAGE>]`<br> e.g., `language French`                                                              | Outside review session |
 | **Load**                | `load <FILE_NAME>`<br> e.g., `load SampleData.xlsx`                                                                        | Outside review session |
-| **Switch**              | `switch`                                                                                                                   | Both                   |
-| **Help**                | `help`                                                                                                                     | Outside review session |
-| **Exit**                | `exit`                                                                                                                     | Both                   |
+| **Switch**              | `switch ...`                                                                                                               | Both                   |
+| **Help**                | `help ...`                                                                                                                 | Outside review session |
+| **Exit**                | `exit ...`                                                                                                                 | Both                   |
 
 
 --------------------------------------------------------------------------------------------------------------------
