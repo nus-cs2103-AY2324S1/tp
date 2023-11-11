@@ -164,9 +164,10 @@ public class ParserUtil {
         }
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");
-        String[] tagNameCategoryPairs = removeExtraSpaces(cleanedList.split(","));
+        String[] tagNameCategoryPairs = cleanedList.split(",");
 
         for (String tagNameCategory : tagNameCategoryPairs) {
+            tagNameCategory = tagNameCategory.trim();
             if (tagNameCategory.split("\\s+").length > 1) {
                 String[] nameCategory = tagNameCategory.split("\\s+");
                 // category specified
@@ -191,10 +192,11 @@ public class ParserUtil {
         requireNonNull(tags);
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");
-        String[] tagNameCategoryPairs = removeExtraSpaces(cleanedList.split(","));
-        for (String tag : tagNameCategoryPairs) {
-            if (tag.split("\\s+").length > 1) {
-                if (!Tag.isValidTagName(tag.split("\\s+")[1])) {
+        String[] tagNameCategoryPairs = cleanedList.split(",");
+        for (String tagNameCategory : tagNameCategoryPairs) {
+            tagNameCategory = tagNameCategory.trim();
+            if (tagNameCategory.split("\\s+").length > 1) {
+                if (!Tag.isValidTagName(tagNameCategory.split("\\s+")[1])) {
                     throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
                 }
             } else {
@@ -337,18 +339,5 @@ public class ParserUtil {
         }
         Score score = parseScore(tagScorePairArr[1]);
         return new Pair<>(tag, score);
-    }
-
-    /**
-     * Removes extra spaces between elements of a string array used for parsing.
-     *
-     * @param inputArr The input array containing string elements.
-     * @return A new array with extra spaces removed between elements.
-     */
-    public static String[] removeExtraSpaces(String[] inputArr) {
-        String inputStr = Arrays.toString(inputArr);
-        String resultStr = String.join(" ", inputStr.split("\\s+"));
-        String[] resultArray = resultStr.substring(1, resultStr.length() - 1).split(", ");
-        return resultArray;
     }
 }
