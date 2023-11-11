@@ -18,6 +18,7 @@ alt argMultimap.getValue(PREFIX_VALUE).isPresent()
     deactivate ArgMultimap
     DeductCommandParser -> ParserUtil : parseDeduction("150.00", Reason.ABSENCE)
     activate ParserUtil
+    create Deduction
     ParserUtil -> Deduction : new Deduction("150.00", Reason.ABSENCE)
     activate Deduction
     Deduction --> ParserUtil : deduction

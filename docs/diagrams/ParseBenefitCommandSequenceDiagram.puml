@@ -15,6 +15,7 @@ activate BenefitCommandParser
 BenefitCommandParser -> ArgumentTokenizer : tokenize("1 /v 150.00 /r bonus",\nPREFIX_NAME, \nPREFIX_VALUE, \nPREFIX_REASON) \n or \n tokenize("/n Alex /v 150.00 /r bonus",\nPREFIX_NAME, \nPREFIX_VALUE, \nPREFIX_REASON)
 activate ArgumentTokenizer
 
+create ArgMultimap
 ArgumentTokenizer -> ArgMultimap : new
 activate ArgMultimap
 ArgumentTokenizer <-- ArgMultimap
