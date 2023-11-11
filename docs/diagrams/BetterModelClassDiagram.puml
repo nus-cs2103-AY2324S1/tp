@@ -9,11 +9,12 @@ Class "<<interface>>\nEntry" as Entry
 
 AddressBook *-right-> "1" UniqueEntryMap_Person
 
-UniqueEntryMap_Person -down-> Person
+UniqueEntryMap_Person -down-> "*" Person
 
 Person *-left-> "*" Tag
 Person .right.|> Entry
 
+Person *--> PersonId
 Person *--> Name
 Person *--> Phone
 Person *--> Email
