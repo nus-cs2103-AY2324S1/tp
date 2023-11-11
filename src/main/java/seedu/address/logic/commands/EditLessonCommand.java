@@ -37,6 +37,11 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
     }
 
     @Override
+    protected void updatePersonLessonMap() {
+        model.getPersonLessonMap().updateReverse(original, edited);
+    }
+
+    @Override
     String editableFieldsInfo() {
         return "name, start, end, subject, day";
     }

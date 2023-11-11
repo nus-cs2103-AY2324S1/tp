@@ -37,6 +37,11 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
     }
 
     @Override
+    protected void updatePersonLessonMap() {
+        model.getPersonLessonMap().update(original, edited);
+    }
+
+    @Override
     String editableFieldsInfo() {
         return "name, phone, email, address, subjects, remark, tags";
     }

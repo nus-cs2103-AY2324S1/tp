@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -92,6 +93,13 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
         for (Name name : names) {
             reverseMap.get(name).add(tNew.getName());
         }
+
+        // update the forward map
+        forwardMap.put(tNew.getName(), convertArrayToHashSet(names));
+    }
+
+    public <R> HashSet<R> convertArrayToHashSet(R[] list) {
+        return new HashSet<>(Arrays.asList(list));
     }
 
     /**

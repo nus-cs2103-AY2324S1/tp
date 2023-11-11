@@ -50,6 +50,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
         initModelMethods();
         init();
         editFields();
+        updatePersonLessonMap();
         validateEditedAndWriteBack();
         showMethod.accept(edited);
         return new CommandResult("Edit success.\n from: " + original.toString() + "\n to: " + edited.toString());
@@ -72,6 +73,11 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
      * Note that common fields like name, remark, and tags are already set in the editFields method.
      */
     protected abstract void setNonDefaultFields() throws CommandException;
+
+    /**
+     * Updates the PersonLessonMap.
+     */
+    protected abstract void updatePersonLessonMap();
 
     /**
      * Build the original object if it is not present.
