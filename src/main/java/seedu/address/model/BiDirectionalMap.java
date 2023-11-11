@@ -111,6 +111,9 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
         for (Name name : names) {
             forwardMap.get(name).add(pNew.getName());
         }
+
+        // update the reverse map
+        reverseMap.put(pNew.getName(), convertArrayToHashSet(names));
     }
 
     /**
