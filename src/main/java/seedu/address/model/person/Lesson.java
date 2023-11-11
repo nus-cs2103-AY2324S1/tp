@@ -37,12 +37,22 @@ public class Lesson {
         this.end = end.getTime();
     }
 
+    public Lesson(Lesson original) {
+        this.day = original.day;
+        this.begin = original.begin;
+        this.end = original.end;
+    }
+
     public static boolean isValid(Begin begin, End end) {
         return begin.getTime().compareTo(end.getTime()) < 0;
     }
 
     public String getTimeSlot() {
         return begin.toString() + " - " + end.toString();
+    }
+
+    public Lesson copy() {
+        return new Lesson(this);
     }
 
     @Override
