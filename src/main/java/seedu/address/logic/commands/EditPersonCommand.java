@@ -19,7 +19,7 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
         currentShownEntry = model.getCurrentlyDisplayedPerson();
         list = model.getFilteredPersonList();
         hasClashWith = model::hasPersonClashWith;
-        deleteMethod = model::deletePerson;
+        deleteMethod = model::deletePersonForEdit;
         addMethod = model::addPerson;
         getClashingEntry = model::getPersonClashWith;
         showMethod = model::showPerson;
@@ -34,6 +34,11 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
         edited.setSubjectsIfNotDefault(editDescriptor.getSubjects());
         edited.setRemarkIfNotDefault(editDescriptor.getRemark());
         edited.setTagsIfNotDefault(editDescriptor.getTags());
+    }
+
+    @Override
+    protected void updatePersonLessonMap() {
+        model.getPersonLessonMap().update(original, edited);
     }
 
     @Override

@@ -90,6 +90,12 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes the given person, WITHOUT affecting the personLessonMap.
+     * Used in AbstractEditCommand
+     */
+    void deletePersonForEdit(Person target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -131,6 +137,12 @@ public interface Model {
      * The lesson must exist in the schedule list.
      */
     void deleteLesson(Lesson target);
+
+    /**
+     * Deletes the given lesson, WITHOUT affecting the personLessonMap.
+     * Used in AbstractEditCommand
+     */
+    void deleteLessonForEdit(Lesson target);
 
     /**
      * Adds the given lesson.
