@@ -1,6 +1,7 @@
 ---
 layout: page
 title: User Guide
+sidebar: toc
 ---
 # CheckMate User Guide
 CheckMate is a **desktop app for streamlining the process of room bookings for hotel employees, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise real-time room searching, service scheduling, and amenity management. Optimized for administrative roles, it ensures that room allocation and guest needs are seamlessly addressed.
