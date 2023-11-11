@@ -54,24 +54,39 @@ public class Person {
 
     }
 
+    /**
+     * @return a defensive copy of name
+     */
     public Name getName() {
-        return name;
+        return name.copy();
     }
 
+    /**
+     * @return a defensive copy of phone
+     */
     public Phone getPhone() {
-        return phone;
+        return phone.copy();
     }
 
+    /**
+     * @return a defensive copy of email
+     */
     public Email getEmail() {
-        return email;
+        return email.copy();
     }
 
+    /**
+     * @return a defensive copy of address
+     */
     public Address getAddress() {
-        return address;
+        return address.copy();
     }
 
+    /**
+     * @return a defensive copy of subject
+     */
     public Subject getSubject() {
-        return subject;
+        return subject.copy();
     }
 
     /**
@@ -103,16 +118,25 @@ public class Person {
         return new End(end);
     }
 
+    /**
+     * @return a defensive copy of lesson
+     */
     public Lesson getLesson() {
-        return lesson;
+        return lesson.copy();
     }
 
+    /**
+     * @return a defensive copy of beginTime
+     */
     public Date getBeginTime() {
-        return beginTime;
+        return (Date) beginTime.clone();
     }
 
+    /**
+     * @return a defensive copy of endTime
+     */
     public Date getEndTime() {
-        return endTime;
+        return (Date) endTime.clone();
     }
 
     /**
