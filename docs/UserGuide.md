@@ -124,6 +124,8 @@ If you are unfamiliar with the command terminal, you can right-click the `staffs
 ---
 <br>
 
+<div style="page-break-after: always;"></div>
+
 <a name="using-this-guide"></a>
 ## Using this Guide
 
@@ -133,8 +135,6 @@ If you are unfamiliar with the command terminal, you can right-click the `staffs
 This section introduces the symbols and notations used throughout this guide. The application's GUI [components](#glossary) are also explained here. We recommend that you read this section closely before using this guide.
 
 <br>
-
-<div style="page-break-after: always;"></div>
 
 <a name="understanding-the-symbols"></a>
 ### Understanding the Symbols
@@ -206,6 +206,8 @@ This section introduces the symbols and notations used throughout this guide. Th
 ---
 <br>
 
+<div style="page-break-after: always;"></div>
+
 <a name="features"></a>
 ## Features
 
@@ -256,7 +258,7 @@ Format: `add n/NAME hp/PHONE e/EMAIL p/POSITION`
     Duplicate applicants are not allowed. Two applicants are considered duplicates if they have the same phone number or the same email.
 </box>
 
-<box type="tip" header="**Note**">
+<box type="info" header="**Note**">
     As <code>NAME</code> can only contain alphanumeric characters and spaces, names containing non-alphanumeric characters such as hyphens <code>-</code> or slashes <code>/</code> are not allowed in this version of the app.
 </box>
 
@@ -512,7 +514,7 @@ e.g. `Ed` will match both `Edward` and `Ed`.
 * Applicants matching at least one keyword will be returned (i.e. OR search), 
 e.g. `Ben Bobby` will return `Ben Yang` and `Bobby Chin`.
 
-<box type="tip" header="**Note**">
+<box type="info" header="**Note**">
     <code>find</code> works on the entire applicant list and will display any applicant whose name matches at least one keyword, even if they were filtered out using <code>filter</code>.
 </box>
 
@@ -673,6 +675,8 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 <a name="command-summary"></a>
 ## Command Summary
 
@@ -728,6 +732,8 @@ Staff-Snap applicant data are saved automatically as a [JSON](#glossary) file `[
 ---
 <br>
 
+<div style="page-break-after: always;"></div>
+
 <a name="faq"></a>
 ## FAQ
 
@@ -764,6 +770,8 @@ apply for multiple positions in future iterations.
 
 ---
 <br>
+
+<div style="page-break-after: always;"></div>
 
 <a name="glossary"></a>
 ## Glossary
