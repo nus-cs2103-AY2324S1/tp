@@ -149,7 +149,6 @@ public class AddDoctorCommandTest {
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
@@ -265,6 +264,10 @@ public class AddDoctorCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+        @Override
+        public boolean hasIc(Ic nric) {
+            return personsAdded.stream().anyMatch(person -> person.getIc().equals(nric));
         }
     }
 
