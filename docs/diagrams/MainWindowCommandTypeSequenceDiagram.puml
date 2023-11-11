@@ -19,7 +19,7 @@ alt commandResult.getCommandType == CommandType.HELP
 else commandResult.getCommandType == CommandType.EXIT
     MainWindow -> MainWindow : handleExit()
 else commandResult.getCommandType == CommandType.VIEW
-    MainWindow -> MainWindow : handleExit()
+    MainWindow -> MainWindow : handleView()
 else commandResult.getCommandType == CommandType.VIEW_EXIT
     MainWindow -> MainWindow : handleViewExit()
 else commandResult.getCommandType == CommandType.EDIT_FIELD

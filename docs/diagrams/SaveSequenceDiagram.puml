@@ -68,8 +68,9 @@ deactivate SaveCommand
 LogicManager --> MainWindow : commandResult
 deactivate LogicManager
 
-MainWindow -> MainWindow : handleSave()
-activate MainWindow
+group ref [Handle Save]
+    MainWindow -[hidden]-> PersonProfile
+end
 
 deactivate MainWindow
 

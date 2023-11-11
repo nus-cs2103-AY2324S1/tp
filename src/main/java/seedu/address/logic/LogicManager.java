@@ -39,8 +39,6 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final AddressBookParser addressBookParser;
     private final ViewModeParser viewModeParser;
-    private boolean isViewCommand = false;
-    private boolean isViewExitCommand = false;
     private final Model backupModel;
     private boolean finalConfirmation = false;
 
