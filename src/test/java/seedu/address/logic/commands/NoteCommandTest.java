@@ -29,6 +29,8 @@ import seedu.address.testutil.StudentBuilder;
 public class NoteCommandTest {
 
     private static final String NOTE_STUB = "Some note";
+    private static final String HUNDRED_CHAR_NOTE_STUB = "Lorem Ipsum is simply dummy text of the printing and "
+            + "typesetting industry. Lorem Ipsum has been the industry’s standard";
 
     private Model model = new ModelManager(getTypicalWellNus(), new UserPrefs());
 
@@ -40,7 +42,24 @@ public class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_STUDENT, new Note(editedStudent.getNote().value));
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS,
-                Messages.format(editedStudent));
+                Messages.format(editedStudent), NOTE_STUB);
+
+        Model expectedModel = new ModelManager(new WellNus(model.getWellNusData()), new UserPrefs());
+        expectedModel.setStudent(firstStudent, editedStudent);
+
+        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addNoteMoreThanHundredChars_success() {
+        Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student editedStudent = new StudentBuilder(firstStudent).withNote(HUNDRED_CHAR_NOTE_STUB).build();
+
+        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_STUDENT, new Note(editedStudent.getNote().value));
+
+        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS,
+                Messages.format(editedStudent), HUNDRED_CHAR_NOTE_STUB.substring(0, 100).trim()
+                        + "... (Double-click on the student card to view the full note)");
 
         Model expectedModel = new ModelManager(new WellNus(model.getWellNusData()), new UserPrefs());
         expectedModel.setStudent(firstStudent, editedStudent);
@@ -76,7 +95,7 @@ public class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_STUDENT, new Note(editedStudent.getNote().value));
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS,
-                Messages.format(editedStudent));
+                Messages.format(editedStudent), NOTE_STUB);
 
         Model expectedModel = new ModelManager(new WellNus(model.getWellNusData()), new UserPrefs());
         expectedModel.setStudent(firstStudent, editedStudent);
