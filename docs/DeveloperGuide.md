@@ -247,8 +247,7 @@ Alternative 2: Create a hashset of Appointments for each Person.
 ### Complete Feature
 
 The **Complete** feature is facilitated by the `CompleteCommand` and `CompleteCommandParser`. The
-`CompleteCommandParser` creates a `CompleteByIndex` or `CompleteByDate` object depending on the user's input. 
- Both `CompleteByIndex` and `CompleteByDate` extends `CompleteCommand` as illustrated in the class diagram below. 
+`CompleteCommandParser` creates a `CompleteByIndex` or `CompleteByDate` object depending on the user's input. Both `CompleteByIndex` and `CompleteByDate` extends `CompleteCommand` as illustrated in the class diagram below.
 
 <img src="images/CompleteClassDiagram.png" width="400"/>
 
