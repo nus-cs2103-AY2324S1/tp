@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -8,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -263,5 +265,80 @@ public class ParserUtilTest {
     @Test
     public void validateFinancialPlan_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.validateFinancialPlan(INVALID_FINANCIAL_PLAN));
+    }
+    @Test
+    void isValidDay_validDate_shouldReturnTrue() {
+        // November has 30 days
+        YearMonth yearMonth = YearMonth.of(2022, 11);
+        String date = "15-11-2022";
+        assertTrue(ParserUtil.isValidDay(yearMonth, date));
+    }
+    @Test
+    void isValidDay_invalidDate_shouldReturnFalse() {
+        // February has 28 days
+        YearMonth yearMonth = YearMonth.of(2022, 2);
+        String date = "31-02-2022";
+        assertFalse(ParserUtil.isValidDay(yearMonth, date));
+    }
+
+    @Test
+    void parseDate_validDate_shouldParseSuccessfully() throws ParseException {
+        String validDateString = "29-02-2024";
+        try {
+            ParserUtil.parseDate(validDateString);
+        } catch (ParseException e) {
+            fail();
+        }
+    }
+    @Test
+    void parseDate_invalidDate_shouldThrowParseException() {
+        // 29th Feb for non leap year
+        String invalidDateString1 = "29-02-2022";
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(invalidDateString1));
+
+        // No 31st Nov
+        String invalidDateString2 = "31-04-2023";
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(invalidDateString2));
+    }
+    @Test
+    void parseAppointment_validInput_shouldParseSuccessfully() throws ParseException {
+        try {
+            ParserUtil.parseAppointment(VALID_APPOINTMENT_DESC, VALID_APPOINTMENT_DATE);
+        } catch (ParseException e) {
+            fail();
+        }
+    }
+    @Test
+    void parseAppointment_invalidInput_shouldThrowParseException() {
+        // Invalid description
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseAppointment(INVALID_APPOINTMENT_DESC, VALID_APPOINTMENT_DATE));
+        // 29th Feb for non leap year
+        String invalidDateString1 = "29-02-2022 14:30";
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseAppointment(VALID_APPOINTMENT_DESC, invalidDateString1));
+        // No 31st Nov
+        String invalidDateString2 = "31-11-2023 14:30";
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseAppointment(VALID_APPOINTMENT_DESC, invalidDateString2));
+    }
+    @Test
+    void parseAppointmentDate_validDate_shouldParseSuccessfully() throws ParseException {
+        String validDateString = "29-02-2024 14:30";
+        try {
+            ParserUtil.parseAppointmentDate(validDateString);
+        } catch (ParseException e) {
+            fail();
+        }
+    }
+    @Test
+    void parseAppointmentDate_invalidDate_shouldThrowParseException() {
+        // 29th Feb for non leap year
+        String invalidDateString1 = "29-02-2022 14:30";
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(invalidDateString1));
+
+        // No 31st Nov
+        String invalidDateString2 = "31-11-2023 14:30";
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(invalidDateString2));
     }
 }

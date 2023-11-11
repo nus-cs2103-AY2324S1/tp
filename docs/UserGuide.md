@@ -6,7 +6,7 @@ title: UNOFAS User Guide
 UNOFAS (UNO: One FAS: Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts,
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a
 Graphical User Interface (GUI). If you can type fast, UNOFAS can help you manage and retrieve client's information
-better than traditional GUI apps. 
+better than traditional GUI apps.
 
 This guide provides you with comprehensive instructions on utilizing UNOFAS. It also serves as a mode of referral to
 help learn the various commands required to effectively learn and be able to integrate the application to your daily
@@ -15,6 +15,10 @@ Click on the relevant links to easily navigate through the guide and access the 
 
 ## Table of Contents
 * [Quick Start](#quick-start)
+* [UI Components](#ui-components)
+  * [General UI Information](#general-ui-information)
+  * [Contact Card](#contact-card)
+  * [Appointment Card](#appointment-card)
 * [Features](#features)
   * [Help](#viewing-help--help)
   * [Add](#adding-a-person--add)
@@ -33,7 +37,7 @@ Click on the relevant links to easily navigate through the guide and access the 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -64,6 +68,36 @@ Click on the relevant links to easily navigate through the guide and access the 
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## UI Components
+
+![generalUi](images/generalUi.png)
+
+### General UI information
+
+Component | Purpose
+--------|------------------
+**Navigation Bar** | Allows you to exit UNOFAS or view help
+**Command Line** | Location to enter commands
+**Result Line** | Displays the result after a command is entered
+**Contact List** | Displays clients
+**Appointment List** | Displays appointments
+**Contact Card** | Displays detailed information about a patient
+**Appointment Card** | Displays detailed information about an appointment
+**Save Location** | Displays the location where your UNOFAS data is stored
+
+### Contact Card
+
+![contactCardUi](images/contactCardUi.png)
+
+* Shows the client's name, phone number, financial plan(s) (if any), address, email address, next-of-kin name, next-of-kin phone number, appointment (if any) and tag(s) (if any).
+
+### Appointment Card
+
+![appointmentCardUi](images/appointmentCardUi.png)
+
+* Shows the appointment name, client allocated to the appointment and the appointment date and time.
+
+--------------------------------------------------------------------------------------------------------------------
 
 # Features
 
@@ -75,7 +109,7 @@ Click on the relevant links to easily navigate through the guide and access the 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Unless explicitly allowed, blank inputs or inputting any number of spaces as an argument for a field is invalid.
 
@@ -121,7 +155,6 @@ to view the arguments' prefix, and their acceptable values.
 
 -----------------------
 ### Viewing help : `help`
-> :warning: Due to new features, help page is currently being updated.
 
 Shows a message explaining how to access the help page, as well as a list of available keywords.
 
@@ -135,10 +168,11 @@ Format: `help`
 Add a client’s contacts to contact book (name, phone number, email, home address, next-of-kin name, next-of-kin phone
 number) into contact book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN]… [t/TAG]…​`
 
-* Adding a person with the exact same name (case-sensitive) as a person currently in the contact book will cause the
-    command to fail.
+* Adding a person with the exact same name (case-sensitive) as a person currently in the contact book counts as a
+    duplicate and will cause the command to fail. Duplicate information in other ways does not count as a duplicate
+    person.
 * To prevent accidentally adding duplicates, you can use [Find](#locating-persons-by-name-financial-plan-andor-tag--find)
     to check if you have already added the person already.
 
@@ -150,43 +184,28 @@ A person can have any number of tags (including 0).
 </div>
 
 Examples:
-* `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202`
-
-Successful Output: `New person added: John; 
-Phone: 80101010; 
-Email: johndoe@gmail.com; 
-Address: Punggol Central Blk 444 #15-32 820123; 
-Next-of-kin Name: Brennan; 
-Next-of-kin Phone: 82020202; 
-Appointment: No Appointment made!; 
-Financial Plans: ; 
-Tags:`
-
-![result for 'add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202'](images/addUi.png)
-
-You can also add a client's contacts with a tag and a financial plan.
-
-Examples:
 * `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 t/80yo fp/Financial Plan C`
 
-Successful Output: `New person added: John; 
-Phone: 80101010; 
-Email: johndoe@gmail.com; 
-Address: Punggol Central Blk 444 #15-32 820123; 
-Next-of-kin Name: Brennan; 
-Next-of-kin Phone: 82020202; 
-Appointment: No Appointment made!; 
-Financial Plans: [Financial Plan C]; 
+Successful Output: `New person added: John;
+Phone: 80101010;
+Email: johndoe@gmail.com;
+Address: Punggol Central Blk 444 #15-32 820123;
+Next-of-kin Name: Brennan;
+Next-of-kin Phone: 82020202;
+Appointment: No Appointment made!;
+Financial Plans: [Financial Plan C];
 Tags: [80yo]`
 
-<div markdown="span" class="alert alert-primary">:information_source: 
-**Do note** that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
+![result for 'add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 t/80yo fp/Financial Plan C'](images/addUi.png)
+
+<div markdown="span" class="alert alert-primary">:information_source:
+**Do note** that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done for financial plans with the `fp/` prefix.
 </div>
 
 ------------------
 ### Listing all persons : `list`
 
-Display a list of all the clients and their contact details
+Display a list of all the clients and their contact details.
 
 Format: `list`
 
@@ -205,13 +224,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Editing the name of a person to be the exact same name as another person currently in the contact book
-(case-sensitive) will cause the command to fail.
-* When editing financial plans or tags, the existing financial plans or tags of the person will be removed i.e adding
+(case-sensitive) counts as a duplicate and will cause the command to fail. Duplicate information in other ways does
+not count as a duplicate person.
+* When editing financial plans or tags, the existing financial plans or tags of the person will be removed i.e. adding
 of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * You can remove all the person’s financial plans by typing `fp/` without
-  specifying any tags after it.
-* A person's appointment cannot in edited in this manner. Refer to [Schedule](#scheduling-an-appointment--schedule).
+  specifying any financial plans after it.
+* A person's appointment cannot be edited in this manner. Refer to [Schedule](#scheduling-an-appointment--schedule).
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -219,19 +239,19 @@ Examples:
 *  `edit 4 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st person to be `john doe` and `woodlands ave 123` respectively.
 
 Successful Output:
-`Edited Person: john doe; 
-Phone: 80101010; 
-Email: johndoe@gmail.com; 
-Address: 23 woodlands ave 123; 
-Next-of-kin Name: Brennan; 
-Next-of-kin Phone: 82020202; 
-Appointment: No Appointment made!; 
-Financial Plans: ; 
+`Edited Person: john doe;
+Phone: 80101010;
+Email: johndoe@gmail.com;
+Address: 23 woodlands ave 123;
+Next-of-kin Name: Brennan;
+Next-of-kin Phone: 82020202;
+Appointment: No Appointment made!;
+Financial Plans: ;
 Tags:`
 
 ![result for 'edit 4 n/john doe a/23 woodlands ave 123'](images/editUi.png)
 
-<div markdown="span" class="alert alert-primary">:information_source: 
+<div markdown="span" class="alert alert-primary">:information_source:
 **Do note** that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
 </div>
 
@@ -255,19 +275,19 @@ Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
 * `find n/john n/charlie` returns `Charlie`, `john doe`<br>
+
   ![result for 'find john charlie'](images/findJohnCharlieResult.png)
 
 ### Gathering emails of matching persons : `gather`
 
-Gathers all the emails of persons with a desired financial plan or tag. 
+Gathers all the emails of persons with a desired financial plan or tag.
 
 Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
 
 * Generates a list of emails separated by spaces, making it convenient for copying and pasting into the recipient input of an email application.
 * Either **Financial Plan or Tag** can be searched at once, but **not both**.
-* The search is case-insensitive. e.g `financial` will match `FINANCIAL` or `Financial`.
+* The search is case-insensitive e.g. `financial` will match `FINANCIAL` or `Financial`.
 * A person's email will be gathered if the prompt matches a substring of their financial plan or tag.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
@@ -297,28 +317,28 @@ Examples:
 * `list` followed by `delete 1` deletes the 1st person in the contact book.
 
 Successful Output:
-`Deleted Person: David; 
-Phone: 93234567; 
-Email: davidmiller@gmail.com; 
-Address: Bishan Blk 999 #08-15 569874; 
-Next-of-kin Name: Olivia; 
-Next-of-kin Phone: 56981234; 
-Appointment: Meeting, 15-12-2023 17:30; 
-Financial Plans: [Financial Plan A][Financial Plan B]; 
+`Deleted Person: David;
+Phone: 93234567;
+Email: davidmiller@gmail.com;
+Address: Bishan Blk 999 #08-15 569874;
+Next-of-kin Name: Olivia;
+Next-of-kin Phone: 56981234;
+Appointment: Meeting, 15-12-2023 17:30;
+Financial Plans: [Financial Plan A][Financial Plan B];
 Tags: `
 
 ----------
 ### Scheduling an Appointment : `schedule`
 
-Schedules an appointment for a client using an index followed by the appointment details. 
+Schedules an appointment for a client using an index followed by the appointment details.
 
 Format: `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE_TIME`
 
 - Schedules appointment with the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 - **Both appointment name and date-time** must be provided.
-- Upon successful execution of the command, the scheduled appointment details will be updated in the **Contacts list**. The appointment details will also be updated in the **Appointments list**. 
+- Upon successful execution of the command, the scheduled appointment details will be updated in the **Contacts list**. The appointment details will also be updated in the **Appointments list**.
 
-<div markdown="span" class="alert alert-primary">:information_source: 
+<div markdown="span" class="alert alert-primary">:information_source:
 If there is an existing appointment with the person when the command is executed, you can replace it with a new appointment by **clicking confirm** or **pressing the enter key** when the prompt is given.
 </div>
 
@@ -326,7 +346,7 @@ If there is an existing appointment with the person when the command is executed
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
-Example: 
+Example:
 - `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`
 
 Successful Output: `Appointment updated!`
@@ -336,7 +356,7 @@ Successful Output: `Appointment updated!`
 ----------
 ### Completing an Appointment : `complete`
 
-Completes an appointment either with the person at the specified `INDEX` or complete all appointments with matching `APPOINTMENT_DATE`. 
+Completes an appointment either with the person at the specified `INDEX` or complete all appointments with matching `APPOINTMENT_DATE`.
 
 Format: `complete [INDEX] [d/APPOINTMENT_DATE]`
 
@@ -346,8 +366,8 @@ Format: `complete [INDEX] [d/APPOINTMENT_DATE]`
 matching the one input by user. This can allow the user to clear all his/her appointments finished throughout the
 entire day quickly.
 
-<div markdown="span" class="alert alert-primary">:information_source: 
-**Note** that an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the year, month and day are the same. Time of the appointment does not matter in this command. 
+<div markdown="span" class="alert alert-primary">:information_source:
+**Note** that an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the year, month and day are the same. Time of the appointment does not matter in this command.
 </div>
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
@@ -433,6 +453,8 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **Long names** for Financial Plans and Tags may not be fully visible.
 3. **When sorting the list**, we have chosen to not implement returning sorted list to original ordering due to the lack of necessity. However, due to feedback, we will implement this in the next release to enable users to return list to original order should they wish to.
+4. It is possible to add appointments with dates before the current date and time.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary

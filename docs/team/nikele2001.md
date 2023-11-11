@@ -17,24 +17,24 @@ Given below are my contributions to the project.
     * Justification: As a financial advisor, it would be convenient to have a person's current financial plans available for business purposes.
     * (Pull request [#69](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/69))
 
-* **New Feature**: Added appointment sidebar that shows upcoming appointments of clients in chronological order and wrote tests 
+* **New Feature**: Added appointment sidebar that shows upcoming appointments of clients in chronological order and wrote tests
     * Justification: Financial advisors may want to view all upcoming appointments easily in chronological order so that it is easier for them to plan their timetables.
     * Highlights: This enhancement creates another UI element to show various other appointment-specific details in the future. It requires an understanding of ObservableList interface and the way the list is being tracked by JavaFX.
     * (Pull request [#110](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/110))
 
 * **Code Contributed**: [RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=nikele2001&breakdown=true)
 
-* **Enhancements Implemented**: 
+* **Enhancements Implemented**:
     * `FinancialPlan` field to allow financial advisors to execute commands specific to financial plans subscribed by clients
     * Override prompt to ask user for confirmation before overriding an appointment.
 
-* **Contributions to the UG**: 
+* **Contributions to the UG**:
   * Added and updated all UI images.
 
-* **Contributions to the DG**: 
+* **Contributions to the DG**:
   * Added use cases for `schedule` command, adding financial plans via the `fp/` prefix and sorting clients' contacts.
 
-* **Contributions to team-based tasks**: 
+* **Contributions to team-based tasks**:
   * Set up team organisation.
   * Set up TP repository.
   * Set up Jekyll.
