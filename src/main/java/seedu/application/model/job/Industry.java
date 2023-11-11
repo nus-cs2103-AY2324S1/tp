@@ -15,7 +15,7 @@ public class Industry {
                     + "1. Must start with an alphanumeric character\n";
 
     public static final String TO_ADD_INDUSTRY = "TO_ADD_INDUSTRY";
-    public static final Industry DEFAULT_INDUSTRY = new Industry(TO_ADD_INDUSTRY);
+    public static final Industry EMPTY_INDUSTRY = new Industry(TO_ADD_INDUSTRY);
 
     /*
      * The first character of the role must not be a whitespace,
@@ -33,7 +33,7 @@ public class Industry {
     public Industry(String industry) {
         requireNonNull(industry);
         AppUtil.checkArgument(isValidIndustry(industry), MESSAGE_CONSTRAINTS);
-        this.industry = industry.toUpperCase();
+        this.industry = industry;
     }
 
     /**

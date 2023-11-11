@@ -27,34 +27,34 @@
 //public class TypicalJobs {
 //
 //    public static final Job SOFTWARE_ENGINEER = new JobBuilder().withRole("Software Engineer")
-//        .withCompany("Google").withStatus(Status.IN_PROGRESS)
+//        .withCompany("Google").withStatus(Status.TO_ADD_STATUS)
 //        .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
 //        .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(new InterviewBuilder(TECHNICAL_INTERVIEW).build())
 //        .withInterview(new InterviewBuilder(ONLINE_INTERVIEW).build()).build();
 //    public static final Job TEACHER = new JobBuilder().withRole("Teacher")
-//        .withCompany("NUS").withStatus(Status.IN_PROGRESS)
+//        .withCompany("NUS").withStatus(Status.TO_ADD_STATUS)
 //        .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
 //        .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(BEHAVIOURAL_INTERVIEW)
 //        .withInterview(TECHNICAL_INTERVIEW).build();
 //    public static final Job WAITER = new JobBuilder().withRole("Waiter")
-//        .withCompany("McDonalds").withStatus(Status.IN_PROGRESS)
+//        .withCompany("McDonalds").withStatus(Status.TO_ADD_STATUS)
 //        .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
 //        .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(ONLINE_INTERVIEW)
 //        .withInterview(BEHAVIOURAL_INTERVIEW).build();
 //    public static final Job PILOT = new JobBuilder().withRole("Pilot")
-//        .withCompany("Singapore Airlines").withStatus(Status.IN_PROGRESS)
+//        .withCompany("Singapore Airlines").withStatus(Status.TO_ADD_STATUS)
 //        .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
 //        .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(TECHNICAL_INTERVIEW).build();
 //    public static final Job POLICE_OFFICER = new JobBuilder().withRole("Police Officer")
-//        .withCompany("SPF").withStatus(Status.IN_PROGRESS)
+//        .withCompany("SPF").withStatus(Status.TO_ADD_STATUS)
 //        .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
 //        .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(BEHAVIOURAL_INTERVIEW).build();
 //    public static final Job FRUIT_SELLER = new JobBuilder().withRole("Fruit Seller")
-//        .withCompany("ABC Fruits").withStatus(Status.IN_PROGRESS)
+//        .withCompany("ABC Fruits").withStatus(Status.TO_ADD_STATUS)
 //        .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
 //        .withIndustry(Industry.TO_ADD_INDUSTRY).build();
 //    public static final Job GRASS_CUTTER = new JobBuilder().withRole("Grass Cutter")
-//        .withCompany("XYZ Gardening").withStatus(Status.IN_PROGRESS)
+//        .withCompany("XYZ Gardening").withStatus(Status.TO_ADD_STATUS)
 //        .withDeadline(Deadline.TO_ADD_DEADLINE).withJobType(JobType.TO_ADD_JOB_TYPE)
 //        .withIndustry(Industry.TO_ADD_INDUSTRY).withInterview(ONLINE_INTERVIEW).build();
 //    // Manually added

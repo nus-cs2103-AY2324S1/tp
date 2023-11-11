@@ -36,7 +36,7 @@ class DeadlineTest {
         // Create Deadline objects
         Deadline earlierDeadline = new Deadline("Dec 31 2023 1200");
         Deadline laterDeadline = new Deadline("Dec 31 2030 1200");
-        Deadline emptyDeadline = new Deadline(Deadline.TO_ADD_DEADLINE);
+        Deadline emptyDeadline = Deadline.EMPTY_DEADLINE;
 
         // when both deadlines are empty
         assertEquals(0, emptyDeadline.compareTo(emptyDeadline));

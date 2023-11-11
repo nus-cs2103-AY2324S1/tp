@@ -33,7 +33,7 @@ public class InterviewAddress {
     public InterviewAddress(String interviewAddress) {
         requireNonNull(interviewAddress);
         AppUtil.checkArgument(isValidInterviewAddress(interviewAddress), MESSAGE_CONSTRAINTS);
-        this.interviewAddress = interviewAddress;
+        this.interviewAddress = interviewAddress.toUpperCase();
     }
 
     /**

@@ -10,20 +10,20 @@ import seedu.application.commons.util.AppUtil;
 public class Status {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Status is case-insensitive and should only be in the form: TO_BE_SUBMITTED, PENDING, APPROVED, REJECTED";
+        "Status is case-insensitive and should only be in the form: TO_ADD_STATUS, PENDING, APPROVED, REJECTED";
 
-    public static final String IN_PROGRESS = JobStatus.TO_ADD_STATUS.toString();
-    public static final Status DEFAULT_STATUS = new Status(IN_PROGRESS);
+    public static final String TO_ADD_STATUS = JobStatus.TO_ADD_STATUS.toString();
+    public static final Status EMPTY_STATUS = new Status(TO_ADD_STATUS);
 
     public final String status;
 
     /**
      * The enumeration representing the status of a job application.
      * Possible values are:
-     *   TO_BE_SUBMITTED: The job application is yet to be submitted.
-     *   PENDING: The job application is pending review or processing.
-     *   APPROVED: The job application has been approved.
-     *   REJECTED: The job application has been rejected.
+     * TO_ADD_STATUS: The job status has yet to be added.
+     * PENDING: The job application is pending review or processing.
+     * APPROVED: The job application has been approved.
+     * REJECTED: The job application has been rejected.
      */
     public enum JobStatus {
         TO_ADD_STATUS, PENDING, APPROVED, REJECTED

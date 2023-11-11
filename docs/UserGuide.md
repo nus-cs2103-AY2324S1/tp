@@ -3,6 +3,10 @@ layout: page
 title: User Guide
 ---
 
+# Welcome to JobFindr!
+
+_Find Your Success with JobFindr_
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
@@ -36,19 +40,34 @@ title: User Guide
 
 ## Introduction
 
-JobFindr is an **Application Book app** for NUS fresh graduates to manage their job applications.
+JobFindr is a **Desktop-based Job Application Management App** for NUS Fresh Graduates to record, track and organise
+their job applications.
 
-It simplifies _job application management_ , promotes _efficiency_, and enhances _organisation_,
-helping you keep track of all your past and upcoming applications.
+JobFindr aims to simplify your job application management by targeting the following benefits:
+
+1. _Flexibility_ in **adding**, **deleting** and **editing** job applications and interviews
+2. _Efficiency_ in **finding** the specific application with minimal keywords
+3. _Organisation_ in **sorting** the list of applications to not miss out on key opportunities
+
+JobFindr combines the rapid efficiency of Command Line Interface (CLI) with the visual clarity of
+[Graphical User Interface (GUI)](#user-interface), offering job application management that is suited for your specific
+needs and preferences.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
+    2. To check if you have installed the correct Java version
+       over [here](#1-how-do-i-make-sure-i-have-installed-the-correct-java-version)
+    3. Follow the instruction
+       over [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
+       to install Java `11`
 2. Download the latest `JobFindr.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-3/tp/releases).
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-4. Open a command terminal, `cd` into the folder you put the jar file in, and enter the command `java -jar JobFindr.jar`
+   ![DownloadJar](images/DownloadJar.png)
+3. Copy the file to the folder you want to use as the **home folder** for your AddressBook.
+4. [Open a command terminal](#2-how-do-i-open-up-terminal-on-my-computer), `cd` into the folder you put the jar file in,
+   and enter the command `java -jar JobFindr.jar`
    to run the application.
 5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
@@ -59,7 +78,7 @@ helping you keep track of all your past and upcoming applications.
 
     * `list` : Lists all applications.
 
-    * `add c/Microsoft r/Software Engineer d/Nov 12 2022 1200 i/Technology s/Pending` :
+    * `add c/Microsoft r/Software Engineer d/Nov 17 2023 1200 i/Technology s/Pending` :
       Adds an application for the company named `Microsoft` to the Application Book.
 
     * `delete 3` : Deletes the 3rd application shown in the current list.
@@ -78,18 +97,32 @@ helping you keep track of all your past and upcoming applications.
 
 ### User interface
 
+JobFindr's GUI is designed with both **functionality** and **visual appeal** in mind.
+
+Below are the components of our GUI:
 ![GUI](images/UiStructure.png)
+
+| Index | Component            | Description                                                            |
+|-------|----------------------|------------------------------------------------------------------------|
+| 1     | Menu Bar             | Contains system based features like `exit` and `help`                  |
+| 2     | Job Card             | Displays the specific job application                                  |
+| 3     | Job List Panel       | Displays the list of applications you have added to JobFindr           |
+| 4     | Result Display       | Displays success or error messages of the most recent command          |
+| 5     | Command Box          | Key in your commands here                                              |
+| 6     | Job Details Panel    | Displays detail of the application you have selected                   |
+| 7     | Interview Card       | Displays the specific interview                                        |
+| 8     | Interview List Panel | Displays the list of interviews you have added to that job application |
 
 ### Structure of a job application
 
-| Field    | Prefix | Remarks                                                                                                             | Optional? | Sort Order    |
-|----------|--------|---------------------------------------------------------------------------------------------------------------------|-----------|---------------|
-| Company  | `c/`   | No restrictions                                                                                                     | No        | Alphabetical  |
-| Role     | `r/`   | Must only contain alphanumeric characters and spaces                                                                | No        | Alphabetical  |
-| Status   | `s/`   | Possible values in "[Valid statuses](#valid-statuses)"                                                              | Yes       | Alphabetical  |
-| Industry | `i/`   | Must start with an alphanumeric character                                                                           | Yes       | Alphabetical  |
-| Deadline | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 31 2030 1200) and cannot be earlier than the current date and time | Yes       | Chronological |
-| Job Type | `t/`   | Possible values in "[Valid job types](#valid-job-types)"                                                            | Yes       | Alphabetical  |
+| Field    | Prefix | Remarks                                                        | Optional? | Sort Order    |
+|----------|--------|----------------------------------------------------------------|-----------|---------------|
+| Company  | `c/`   | No restrictions                                                | No        | Alphabetical  |
+| Role     | `r/`   | Must only contain alphanumeric characters and spaces           | No        | Alphabetical  |
+| Status   | `s/`   | Possible values in "[Valid statuses](#valid-statuses)"         | Yes       | Alphabetical  |
+| Industry | `i/`   | Must start with an alphanumeric character                      | Yes       | Alphabetical  |
+| Deadline | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 01 2030 1200) | Yes       | Chronological |
+| Job Type | `t/`   | Possible values in "[Valid job types](#valid-job-types)"       | Yes       | Alphabetical  |
 
 * Applications with the same company _AND_ role are considered duplicate jobs.
   JobFindr does not allow the creation of duplicate jobs.
@@ -130,8 +163,9 @@ The following are valid job types:
 | DateTime | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 31 2030 1200) and cannot be earlier than the current date and time | No        |
 | Address  | `a/`   | Must start with an alphanumeric character                                                                           | No        |
 
-* Interviews in the **same application** with the same type _AND_ datetime _AND_ address are considered duplicate interviews.
-JobFindr does not allow the creation of duplicate interviews.
+* Interviews in the **same application** with the same type _AND_ datetime _AND_ address are considered duplicate
+  interviews.
+  JobFindr does not allow the creation of duplicate interviews.
 
 * DateTime of interview can be after Deadline of application.
 
@@ -194,12 +228,12 @@ The following are valid interview types:
 
 | Action               | Format                                                                                   |
 |----------------------|------------------------------------------------------------------------------------------|
-| **Add**              | `add c/COMPANY r/ROLE [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`                 |
-| **Edit**             | `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`      |
+| **Add**              | `add c/COMPANY r/ROLE [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`                 |
+| **Edit**             | `edit INDEX [c/COMPANY] [r/ROLE] [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`      |
 | **Delete**           | `delete INDEX`                                                                           |
 | **List**             | `list`                                                                                   |
-| **Find**             | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]` |
-| **Sort**             | `sort FIELD_SPECIFIER`                                                                   |
+| **Find**             | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]` |
+| **Sort**             | `sort PREFIX`                                                                            |
 | **Interview add**    | `interview add INDEX t/TYPE d/DATETIME a/ADDRESS`                                        |
 | **Interview delete** | `interview delete INTERVIEWINDEX from/JOBINDEX`                                          |
 | **Interview edit**   | `interview edit INTERVIEWINDEX from/JOBINDEX`                                            |
@@ -221,6 +255,8 @@ Shows a list of commands and how they can be used.
 
 * This command opens up a separate window, displaying all the availble commands on JobFindr and their formats.
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Listing all applications : `list`
@@ -235,6 +271,7 @@ Shows a list of all applications in the list in alphabetical order.
 
 **UI mockup:**
 ![ListCommand](images/user-guide/ListCommand.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -242,7 +279,7 @@ Shows a list of all applications in the list in alphabetical order.
 
 Adds a job application to the list.
 
-**Format:** `add c/COMPANY r/ROLE [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
+**Format:** `add c/COMPANY r/ROLE [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`
 
 **Examples:**
 
@@ -271,6 +308,8 @@ Adds a job application to the list.
 
 **UI mockup:**
 ![](images/user-guide/AddCommand.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 
 ---
 
@@ -305,13 +344,15 @@ Deletes the specified application from the list.
 
 * This command is invalid because 5 is not a valid job index.
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Editing an application : `edit`
 
 Edits an application in the list.
 
-**Format:** `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
+**Format:** `edit INDEX [c/COMPANY] [r/ROLE] [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`
 
 * Edits the application to the company at the specified `INDEX`.
 * At least one of the optional fields must be provided.
@@ -344,17 +385,19 @@ Edits an application in the list.
 
 **UI mockup:**
 ![](images/user-guide/EditCommand.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Finding an application : `find`
 
 Finds all applications whose fields match the keywords provided.
 
-**Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
+**Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`
 
 * At least one optional parameter must be provided. Multiple parameters can be provided.
 * If a [prefix](#prefix) is given, the search will only find applications containing the given keywords in the specified
-    field.
+  field.
 * Multiple keywords can be provided for one parameter.
     * e.g. `find r/Software Engineer` is a valid command.
 * Keywords are case-insensitive.
@@ -364,7 +407,7 @@ Finds all applications whose fields match the keywords provided.
     * e.g. searching for the keyword "Goo" will not list applications containing "Google".
 * Characters not separated by white space are considered _ONE_ word.
     * e.g. searching for the keyword "ADD" will not list applications containing "TO_ADD_DEADLINE".
-* Searches for deadline must be formatted correctly. Refer to 
+* Searches for deadline must be formatted correctly. Refer to
   "[Structure of a job application](#structure-of-a-job-application)" for the correct format of a deadline.
 
 **Examples:**
@@ -377,7 +420,7 @@ Finds all applications whose fields match the keywords provided.
 
 2. Finding using multiple conditions: `find Google r/Software Engineer`
 
-* This command searches for all job applicaitons with "Google" in any field and the words "Software" and "Engineer". 
+* This command searches for all job applicaitons with "Google" in any field and the words "Software" and "Engineer".
 
 ***Failed Commands:***
 
@@ -387,6 +430,8 @@ Finds all applications whose fields match the keywords provided.
 
 **UI mockup:**
 ![](images/user-guide/FindCommand.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Sorting all applications : `sort`
@@ -426,6 +471,8 @@ Sorts the list based on the prefix provided.
 
 **UI mockup:**
 ![](images/user-guide/SortCommand.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Adding an interview: `interview add`
@@ -436,12 +483,13 @@ Adds an interview to the specified application from the list.
 
 **Successful command:**
 
-* When an interview is successfully added, display “New interview added: (`TYPE`) interview; Date and Time: (`DATETIME`); Address: (`ADDRESS`)”.
+* When an interview is successfully added, display “New interview added: (`TYPE`) interview; Date and
+  Time: (`DATETIME`); Address: (`ADDRESS`)”.
 
 **Failed command:**
 
-* If any fields or prefixes are not included with the command, 
-display "Invalid command format!" and the correct format for interview add command.
+* If any fields or prefixes are not included with the command,
+  display "Invalid command format!" and the correct format for interview add command.
 
 * If any fields have invalid input, display the possible valid inputs for that field.
 
@@ -453,6 +501,8 @@ display "Invalid command format!" and the correct format for interview add comma
 
 **UI mockup:**
 ![](images/user-guide/IntAddCommand.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Deleting an interview: `interview delete`
@@ -465,7 +515,8 @@ Deletes an interview of the specified application from the list.
 
 **Successful command:**
 
-* When an interview is successfully deleted, display “Interview deleted: (`TYPE`) interview; Date and Time: (`DATETIME`); Address: (`ADDRESS`)”.
+* When an interview is successfully deleted, display “Interview deleted: (`TYPE`) interview; Date and
+  Time: (`DATETIME`); Address: (`ADDRESS`)”.
 
 **Failed command:**
 
@@ -480,6 +531,8 @@ Deletes an interview of the specified application from the list.
 
 **UI mockup:**
 ![](images/user-guide/IntDeleteCommand.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Editing an interview: `interview edit`
@@ -493,7 +546,8 @@ Edits an interview of the specified application from the list.
 
 **Successful command:**
 
-* When an interview is successfully edited, display “Interview successfully edited: (`TYPE`) interview; Date and Time: (`DATETIME`); Address: (`ADDRESS`)”.
+* When an interview is successfully edited, display “Interview successfully edited: (`TYPE`) interview; Date and
+  Time: (`DATETIME`); Address: (`ADDRESS`)”.
 
 **Failed command:**
 
@@ -512,6 +566,8 @@ Edits an interview of the specified application from the list.
 
 **UI mockup:**
 ![](images/user-guide/IntEditCommand.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Clearing all applications: `clear`
@@ -519,6 +575,9 @@ Edits an interview of the specified application from the list.
 Clears all applications from the application book.
 
 **Format:** `clear`
+
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 
 ---
 
@@ -528,18 +587,59 @@ Exits the program.
 
 **Format:** `exit`
 
+[&uarr; Back to Table of Contents](#table-of-contents)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AddressBook home folder.
+### 1. How do I make sure I have installed the correct Java version?
+
+- [Open up terminal](#2-how-do-i-open-up-terminal-on-my-computer) on your computer.
+- Type `java -version` in your terminal and press enter. You will see the following if you have installed Java 11
+  correctly:
+  ![Screenshot 2023-11-10 at 2.33.40 PM.png](..%2F..%2FDesktop%2FScreenshot%202023-11-10%20at%202.33.40%E2%80%AFPM.png)
+- If you do not have Java 11 installed, please refer
+  to [this guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
+  to download it to your computer.
+
+### 2. How do I open up terminal on my computer?
+
+On **Mac**:
+
+1. Open up **Spotlight Search** by clicking the button in your menu bar. Or simply use the keyboard
+   shortcut `Command + Space`.
+2. Type **“Terminal”**
+3. You should see the Terminal application at the top of your results. **Double-click** it or **press Enter** to
+   open up
+   Terminal.
+
+On **Windows**:
+
+1. Open your computer's **Start** menu by clicking the Windows Start
+   icon <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Windows_logo_-_2012_%28dark_blue%29.svg/176px-Windows_logo_-_2012_%28dark_blue%29.svg.png?20220530123831"  width="24" height="24">
+   at the bottom-left corner of your desktop or press the Win
+   key <img src="https://w7.pngwing.com/pngs/609/896/png-transparent-laptop-desktop-windows-10-mobile-windows-angle-electronics-rectangle.png"  width="24" height="24">
+   on your keyboard.
+2. Type **"Command Prompt"** or **"Powershell"**
+3. You should see the corret application at the top of your results. **Double-click** it or **press Enter** to
+   open up Command Prompt or Powershell.
+
+### 3. How do I transfer my data to another Computer?
+
+- Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+  the data of your previous AddressBook home folder.
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 
 #### Prefix
+
 * An affix that placed before the field to indicate the type of field
 * Examples: c/ r/ s/ from/
+
+[&uarr; Back to Table of Contents](#table-of-contents)

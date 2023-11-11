@@ -18,26 +18,26 @@ public class SortCommandParserTest {
     @Test
     public void parse_invalidArgs_throwParseException() {
         // extra characters after "sort" that are no specifiers
-        assertParseFailure(parser, "by role",
+        assertParseFailure(parser, " by role",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
         // more than one specifier
-        assertParseFailure(parser, PREFIX_COMPANY + " " + PREFIX_STATUS,
+        assertParseFailure(parser, " " + PREFIX_COMPANY + " " + PREFIX_STATUS,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
         // invalid specifier
-        assertParseFailure(parser, "b/",
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_INVALID_SPECIFIER));
+        assertParseFailure(parser, " b/",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
         // no arguments
-        assertParseFailure(parser, "",
+        assertParseFailure(parser, " ",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_validArgs_returnsListCommand() {
+    public void parse_validArgs_returnsSortCommand() {
         FieldComparator fieldComparator = new FieldComparator(PREFIX_COMPANY);
         SortCommand expectedCommand = new SortCommand(fieldComparator);
-        assertParseSuccess(parser, PREFIX_COMPANY.toString(), expectedCommand);
+        assertParseSuccess(parser, " " + PREFIX_COMPANY, expectedCommand);
     }
 }

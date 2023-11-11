@@ -15,7 +15,7 @@ public class JobBuilder {
     public static final String DEFAULT_COMPANY = "Sparkletots";
     public static final String DEFAULT_DEADLINE = Deadline.TO_ADD_DEADLINE;
     public static final String DEFAULT_JOB_TYPE = JobType.TO_ADD_JOB_TYPE;
-    public static final String DEFAULT_STATUS = Status.IN_PROGRESS;
+    public static final String DEFAULT_STATUS = Status.TO_ADD_STATUS;
     public static final String DEFAULT_INDUSTRY = Industry.TO_ADD_INDUSTRY;
 
     private Role role;

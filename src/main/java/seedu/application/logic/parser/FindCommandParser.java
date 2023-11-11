@@ -47,7 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     continue;
                 } else {
                     throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_EMPTY_KEYWORDS));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
                 }
             }
 
@@ -55,7 +55,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             List<String> keywordList = Arrays.asList(splitKeywords);
 
             Predicate<Job> predicate;
-            System.out.println("");
             if (entry.getKey().equals(new Prefix(""))) {
                 predicate = FieldContainsKeywordsPredicate.getPreamblePredicate(keywordList);
             } else {

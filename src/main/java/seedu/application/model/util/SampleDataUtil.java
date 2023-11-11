@@ -25,7 +25,7 @@ public class SampleDataUtil {
                 new JobType("Full_Time"), new Industry("ELECTRONICS MANUFACTURING")),
             new Job(new Role("Junior Business Analyst"), new Company("eToro"),
                 new Deadline("Dec 31 2023 2359"), new Status("PENDING"),
-                new JobType("Full_Time"), Industry.DEFAULT_INDUSTRY),
+                new JobType("Full_Time"), Industry.EMPTY_INDUSTRY),
             new Job(new Role("Apprenticeship Program"), new Company("JPMorgan"),
                 new Deadline("Feb 25 2024 2359"), new Status("APPROVED"),
                 new JobType("Full_Time"), new Industry("FINANCIAL SERVICES")),
@@ -36,7 +36,7 @@ public class SampleDataUtil {
                 new Deadline("Jan 31 2024 2359"), new Status("PENDING"),
                 new JobType("Internship"), new Industry("BUSINESS CONSULTING AND SERVICES")),
             new Job(new Role("Model Labelling Project Specialist"), new Company("TikTok"),
-                new Deadline("Dec 15 2023 2359"), Status.DEFAULT_STATUS,
+                new Deadline("Dec 15 2023 2359"), Status.EMPTY_STATUS,
                 new JobType("Full_Time"), new Industry("ENTERTAINMENT PROVIDERS"))
         };
     }
