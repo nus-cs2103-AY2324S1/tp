@@ -805,8 +805,6 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always"></div>
-
 # Glossary
 
 | Term          | Definition                                                                                                                                                                                               |
