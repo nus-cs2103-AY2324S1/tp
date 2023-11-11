@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("VALID COMMAND")
+[-> LogicManager : execute("add n/John Doe p/98765432 \ne/johnd@example.com a/311, Clementi Ave 2, #02-25 \nsb/Maths d/Mon b/1200 end/1300 pr/20.00")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("VALID COMMAND")
+LogicManager -> AddressBookParser : parseCommand("add n/John Doe p/98765432 \ne/johnd@example.com a/311, Clementi Ave 2, #02-25 \nsb/Maths d/Mon b/1200 end/1300 pr/20.00")
 activate AddressBookParser
 
 create AddCommandParser
@@ -27,7 +27,7 @@ activate AddCommandParser
 AddCommandParser --> AddressBookParser
 deactivate AddCommandParser
 
-AddressBookParser -> AddCommandParser : parse("ADD PARAMETERS")
+AddressBookParser -> AddCommandParser : parse("n/John Doe p/98765432 \ne/johnd@example.com a/311, Clementi Ave 2, #02-25 \nsb/Maths d/Mon b/1200 end/1300 pr/20.00")
 activate AddCommandParser
 
 create AddCommand
