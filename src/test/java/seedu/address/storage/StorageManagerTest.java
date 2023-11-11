@@ -48,4 +48,11 @@ public class StorageManagerTest {
         assertNotNull(storageManager.getDeckFilePath());
     }
 
+    @Test
+    public void getUserPrefsFilePath() {
+        Path expectedPath = getTempFilePath("prefs");
+        Path actualPath = storageManager.getUserPrefsFilePath();
+        assertEquals(expectedPath, actualPath);
+    }
+
 }
