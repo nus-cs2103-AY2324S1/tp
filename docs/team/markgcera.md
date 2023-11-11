@@ -12,7 +12,7 @@ the process of room booking for hotel receptionists.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Room Statistics Pie Chart (The class DoughnutPieChart.java which creates the pie chart with an empty centre is taken from https://stackoverflow.com/questions/24121580/can-piechart-from-javafx-be-displayed-as-a-doughnut, but the class RoomPieChart.java is self created). (Pull request [#148](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/148))
+* **New Feature**: Room Statistics Pie Chart (The class DoughnutPieChart.java which creates the pie chart with an empty centre is taken fromuser`jewelsea`'s comment in this Stack Overflow [post](https://stackoverflow.com/questions/24121580/can-piechart-from-javafx-be-displayed-as-a-doughnut), but the class RoomPieChart.java is self created). (Pull request [#148](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/148))
   * What it does: Allows the user to see the overall distribution of available room types and occupied rooms at a glance using the pie chart, as well as see the exact numbers using the legend of the pie chart.
   * Justification: This feature greatly enhances user experience and the ability of the user to do their jobs as hotel receptionists by allowing them an overview of the types of rooms available and occupied rooms.
   * Highlights: Implementing this feature required an understanding of both the UI components and logic of the commands.
@@ -37,13 +37,14 @@ Given below are my contributions to the project.
     * Editing the FXML files to allow the new Room field to be displayed
   * Created the BookingPeriod class based on the initial skeleton provided by Ji Hoon (Pull request [#123](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/123))
   * Created the User Interface (UI) Overhaul which is the foundation of our application's current UI (Pull request [#166](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/166)).
+  * Abstracted out the Command Parse Exceptions into their own package for OOP purposes (Pull request [#250](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/250))
 
 * **Documentation**:
   * User Guide:
     * Added a Table of Contents for the UG and updated it to match the then-capabilities of our application (Pull request [#127](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/127)).
     * Added a part under the Quick Start section showing and explaining the GUI Layout (Pull request [#260](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/260)).
   * Developer Guide:
-    * Added implementation details of the`Room Statistics PieChart`, `JsonInjectionParser` features.
+    * Added implementation details of the `Room Statistics PieChart`, `JsonInjectionParser` features.
 
 * **Community**:
   * Provided 9 bug reports for the team I was assigned during the PE-D.

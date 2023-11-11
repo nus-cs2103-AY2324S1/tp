@@ -544,3 +544,68 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+<div markdown="span" class="alert alert-info">
+
+</div>
+
+### Difficulty Level
+* Medium
+* Reason: Compared to AB3 which has one homogenous entity of Persons, CheckMate deals with 2 heterogenous entities of 
+Persons and Bookings which adds a bit more complexity, but not as much as compared to other projects which deal with
+homogenous entities which have different roles that could overlap and could result in cyclical relationships (eg: 
+Teaching Assistants and their students).
+
+### Challenges Faced
+* Scope of expansion: Trying to expand AB3's capabilities to Room Bookings was a challenge as we had to narrow down
+what we wanted CheckMate to do and what we could realistically make it do, for example for the Booking Periods, we
+could theoretically get the application to check the system's current time and get the application to provide reminders
+for expiring bookings and maybe even automatically delete expired bookings, but we decided that this was out of our
+current scope and we would only implement it if we had the time to do so.
+
+### Effort Required
+* Medium-High
+* Reason: We adopted a mentality of mixing "double down or double work" when it comes to making the first iterations or
+skeletons of new features, which to summarise basically means that we either completely rely on the perfect
+implementation and on time delivery of the skeleton code by one developer (hence "double down"), or we allow the entire
+team to have an attempt (hence "double work") and during the weekly team meetings we vote on which skeleton we will 
+continue to expand upon to allow maximum creativity of the skeletons provided. 
+
+### Achievements of the Project
+* Expanded AB3 to the point where it looks completely new User Interface wise.
+* Skillfully integrated the architecture of AB3 to work for a completely new purpose.
+* Maximised the abilities of every teammate we have.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+<div markdown="span" class="alert alert-info">
+
+</div>
+
+### Universal Undo
+* This is an enhancement to the current undo function, which currently only undoes the most recent delete command.
+The planned universal undo will be able to undo the most recent command, which can be any command and not just delete.
+
+### Enhanced Prefix Completion
+* This is an enhancement to the current prefix completion feature which currently only loads example data when `tab` is
+pressed. The enhancement will instead use a trie to keep track of the most suitable next input for each field, thereby
+being a true prefix completion similar to autocomplete in common software such as Microsoft Word.
+
+### Room Type Allocation
+* This is an enhancement to the way that room types are allocated. Currently they are allocated automatically according
+to the room number, however this raises an issue of having the hotel receptionist memorise which room numbers
+correspond to which room types. In the planned enhancement, we will allow hotel receptionists to book a room according
+to the room type instead of the room number, allowing them to more seamlessly make bookings without the mental overhead
+of memorising which rooms are which types.
+
+### Mass Add Booking
+* This is an enhancement to the add command. Currently, a hotel receptionist is only able to book one room at a time,
+however this may be problematic when it comes to events such as weddings where one person books many rooms. In this
+planned enhancement, we will make the add command work similarly to the delete command which currently has a mass
+delete feature.
