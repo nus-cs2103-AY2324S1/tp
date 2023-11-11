@@ -34,7 +34,7 @@
   * [Glossary]({{ baseUrl }}/UserGuide.html#glossary)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
-  * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
+  * [Getting Started]({{ baseUrl }}/DeveloperGuide.html#getting-started)
   * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
   * [Implementation]({{ baseUrl }}/DeveloperGuide.html#implementation)
   * [Documentation, Logging, Testing, Configuration, DevOps]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-devops)

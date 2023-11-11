@@ -19,7 +19,7 @@ Staff-Snap is based on the [AddressBook-Level3](https://se-education.org/address
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -1074,7 +1074,7 @@ Guarantees: Staff-Snap exits.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -1239,7 +1239,9 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect filter commands to try: `filter`, `filter n/`<br>
        Expected: Similar to previous.
-       
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Planned Enhancements**
 
 1. Allow users to add applicants whose names include non-alphanumeric characters such as hyphens `-` and slashes `/`.
