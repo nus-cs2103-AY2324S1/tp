@@ -15,7 +15,9 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /**
+     * Help information should be shown to the user.
+     */
 
     private final Person personToView;
 
@@ -95,8 +97,8 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && personToView == otherCommandResult.personToView
-                && targetIndex == otherCommandResult.targetIndex
+                && Objects.equals(personToView, otherCommandResult.personToView)
+                && Objects.equals(targetIndex, otherCommandResult.targetIndex)
                 && commandType == otherCommandResult.commandType
                 && isFostererEdited == otherCommandResult.isFostererEdited;
     }

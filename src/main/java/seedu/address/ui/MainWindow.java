@@ -180,6 +180,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleFocusField(PersonProfile.Field field) {
+        if (personProfilePlaceholder.isVisible()) {
+            personProfile.setFocus(field);
+        }
+    }
+
+    private void resetValues() {
+        if (personProfilePlaceholder.isVisible()) {
+            personProfile.resetValues();
+        }
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -231,6 +244,7 @@ public class MainWindow extends UiPart<Stage> {
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+            resetValues();
             throw e;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -261,6 +275,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Opens a fosterer's profile.
+     *
      * @param personToView is a person to view their profile.
      */
     private void handleView(Person personToView) {
@@ -281,7 +296,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleEditField(String commandText) {
-        String [] tagAndNote = new String[]{"tags", "notes"};
+        String[] tagAndNote = new String[]{"tags", "notes"};
         Optional<PersonProfile.Field> field;
         Optional<String> tagOrNote = null;
 

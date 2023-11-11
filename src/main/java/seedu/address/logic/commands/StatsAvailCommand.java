@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.AnimalType;
-import seedu.address.model.person.Availability;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,9 +27,7 @@ public class StatsAvailCommand extends StatsCommand {
      */
     protected List<Person> getAvailableFosterers(List<Person> fosterers) {
         return fosterers.stream()
-                .filter(fosterer ->
-                        fosterer.getAvailability()
-                                .equals(Availability.AVAILABLE))
+                .filter(Person::isAvailableFosterer)
                 .collect(Collectors.toList());
     }
 
@@ -44,6 +41,7 @@ public class StatsAvailCommand extends StatsCommand {
                                 .equals(AnimalType.ABLE_DOG))
                 .count();
     }
+
     /**
      * Returns the number of fosterers from the given list who can foster cats.
      */
