@@ -202,7 +202,7 @@ The following sequence diagram describes the process of `add` command:
 **Aspect: Handling group attribute in user input**
 
 * **Alternative 1 (Current Choice):** Only allow user to add one group for each `add` Command
-    * Pros: Conveniently adds a person into a single group while creating a new contact at the same time, relatively easier to implement parser. 
+    * Pros: Conveniently adds a person into a single group while creating a new contact at the same time, relatively easier to implement parser.
     * Cons: User input may get relatively longer.
 * **Alternative 2:** Allow user to add as many groups as required for each `add` Command
     * Pros: Conveniently adds a person into multiple group while creating a new contact at the same time.
@@ -232,7 +232,7 @@ The following sequence diagram describes the process of `addtime` command:
 **Aspect: Handling group attribute in user input**
 
 * **Alternative 1 (Current Choice):** Allows user to add more than one time intervals in each `addtime` command.
-  * Pros: Conveniently adds a multiple time intervals into person. 
+  * Pros: Conveniently adds a multiple time intervals into person.
   * Cons: User input may get relatively longer, relatively harder to implement parser.
 * **Alternative 2:** Allow user to only add single time interval in each `addtime` Command
   * Pros: Conveniently adds a person into group while creating a new contact at the same time, relatively easier to implement parser.
@@ -618,7 +618,7 @@ Use Case ends.
 
 * 1a. If the user provides incomplete or incorrect information.
     * 1a1. ProjectPRO displays an error message.
-    * Use case repeats from step 1. 
+    * Use case repeats from step 1.
 
 **6.3.6. Use case 6: Deleting a group**
 
@@ -650,14 +650,14 @@ Use Case ends.
 * 1a. If the group does not exist.
   * 1a1. ProjectPRO displays an error message.
   * Use case ends.
-  
+
 Use Case ends.
 
 **6.3.8. Use case 8: Finding a group**
 
 **MSS**
 1. User requests to find a group.
-2. ProjectPRO searches for the contact. 
+2. ProjectPRO searches for the contact.
 3. ProjectPRO shows all the contacts from the group and the group remark.
 
 Use Case ends.
@@ -773,7 +773,7 @@ Use Case ends.
 **MSS**
 
 1. User requests to add meeting time to a group.
-2. ProjectPRO adds the meeting time to the group. 
+2. ProjectPRO adds the meeting time to the group.
 3. ProjectPRO displays a success message.
 Use Case ends.
 
@@ -936,7 +936,7 @@ testers are expected to do more *exploratory* testing.
 
 ### 7.6. Deleting a Group
 
-1. Deleting a Group 
+1. Deleting a Group
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -1036,7 +1036,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Delete free time to contact
 
-  1. 
+  1.
      2. Prerequisite: `list`<br>
           Expected: All contacts will be shown in address book.
      3. Prerequisite: `addtime n/Alex Yeoh t/mon 1300 - mon 1400`<br>
@@ -1088,7 +1088,7 @@ testers are expected to do more *exploratory* testing.
 
 ### 7.16. Deleting meeting time from group
 
-1. Delete meeting time from group 
+1. Delete meeting time from group
 
 1.
   2. Prerequisite: `list`<br>
