@@ -60,6 +60,7 @@ makes it a breeze to organize and access specific topics, keeping your study ses
 
 #### Prerequisites
 
+
 Before you get started with <span style="color: green;">lesSON</span>, here's what we recommend you need to make
 full use of the app:
 
@@ -72,6 +73,32 @@ Being comfortable and efficient at typing will help you make the most of the app
 
 [Go to Table of Contents](#table-of-contents)
 
+### Parameter Information
+
+The parameters used in lesSON have certain specifications. Here are some information to guide you through 
+how to use them. Invalid inputs are just one of many examples of invalid inputs. Cases that do not appear in the table may also be invalid if it is not of the accepted format.
+
+| Parameter  | Prefix | Accepted Format                                                                                                         | Valid Input                                               | Invalid Input |
+|------------|--------|-------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|---------------|
+| QUESTION   | q/     | Alphanumerical values and certain special characters.                                                                   | How many types of instruction formats are there for MIPS? | 什么            | 
+| ANSWER     | a/     | Alphanumerical values and certain special characters.                                                                   | The opcode for R-format instruction is 000000.            | こんにちは         |
+| TAG        | t/     | Alphanumerical values.                                                                                                  | CS2100                                                    | !factorials   |
+| HINT       | h/     | Alphanumerical values, whitespace and certain special characters, i.e. !@#$%^&*(),./?";:{}[]-=_+                        | 1 + 1                                                     | 💡            |
+| DIFFICULTY | d/     | Only "easy", "medium" or "hard".                                                                                        | easy                                                      | difficult     |
+| INDEX      | NA     | Positive integer less than size of deck or `r` for certain cases (see [random](#randomly-practise-flashcards--random)). | 1                                                         | 0             |
+| NUMBER     | NA     | Positive integer not more than 2147483647                                                                               | 1000                                                      | 2147483648    |
+
+### Command Format
+
+| Format                                                                                 | Details                                                                                                                                                                                        | Example                                                                                                                           |
+|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `UPPER_CASE` words                                                                     | Field to be filed in by users. Must not be empty or only containing whitespace (except certain cases, see [edit](#editing-a-specific-flashcard--edit)).                                        | `add q/QUESTION a/ANSWER` means users need to input a question after the `q/` prefix.                                             |
+| Phrases with square brackets, i.e. `[ ]`                                               | Optional parameters that can be omitted by the users.                                                                                                                                          | `add q/QUESTION a/ANSWER [h/HINT]` means users can choose to omit hints when adding a card.                                       |
+| Phrases with ellipsis, i.e. `...`                                                      | Parameters that can be input repeatedly.                                                                                                                                                       | `add q/QUESTION a/ANSWER [t/TAG...]` means user can choose to add multiple tags while creating the card, each with a prefix `t/`. |
+| Certain combinations of characters are not allowed, i.e characters that form a prefix. | Inputs that contain prefixes are not valid inputs.                                                                                                                                             | Having `q/`, `a/`, `t/`, `h/` or `d/` in certain input fields.                                                                    |
+| Inputs are case-sensitive.                                                             | Cards with question that differ only in case will be regarded as different cards.                                                                                                              | `add q/QUESTION a/ANSWER` and `add q/question a/answer` will generate 2 different cards.                                          | 
+| Parameters can be input in any order                                                   | Parameters can be reordered without having any effect on the command.                                                                                                                          | `add q/QUESTION a/ANSWER` and `add a/ANSWER q/QUESTION` are both valid inputs that generates the same card.                       |
+| Commands that do not take in any parameters will disregard extraneous parameters.      | Certain commands such as `help`, `clear`, `exit`, `random` and `list` (in certain cases, see [list](#view-all-flashcards--list) for more details) will disregard any inputs after the command. | `help 123 ` or `clear a/abc` will be regarded as `help` and `clear`.                                                              |
 --------------------------------------------------------------------------------------------------------------------
 
 ## How to use this guide?
@@ -209,373 +236,376 @@ testing your memory with the most difficult flashcard.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Feature list
 
-### Adding a Flashcard `add`
+# Feature list
+## Commands
+### Adding a Flashcard: `add`
 
 Adds a flashcard to the deck for the user.
 
-**Format:**
+#### Format:
+```
+add q/QUESTION a/ANSWER [t/TAG...] [h/HINT]
+```
 
-`add q/question a/answer [t/TAG] [h/HINT]`
-
-**Examples:**
+#### Examples:
 
 _A flashcard with only a question and answer field._
-
-`add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude`
-
+```
+add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude
+```
 _A flashcard with a question, answer and tag field._
-
-`add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems`
-
+```
+add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems
+```
 _A flashcard with a question, answer, tag and hint field._
-`add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB`
+```
+add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB
+```
 
 #### To Note:
-1. No empty input or input with only whitespace after `q/`, `a/`, `t/` and `h/`.
-2. `t/` and `h/` is optional and not necessary.
-3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
-4. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
-5. Tagging is not supported in v1.2 and earlier.
-6. Hint is not supported before v1.3.
+1. Tagging is not supported in v1.2 and earlier.
+2. Hint is not supported before v1.3.
 
-#### Expected outputs:
+#### Expected Output:
 
-1. Given a correct input, a success message will be shown containing the user's input.
-   1. `“New Card added: Question: (question); Answer: (answer)“`
-2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
-   1. ```
-      Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank
-      ```
-   2. ```
-       Invalid command format!
-       add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
-      ```
-#### Usage
-1. User Input: `add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS`
+1. User Input:
+   ```
+   add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS
+   ```
 
 2. Successful Output
-
-![result of add command](./images/UserGuide/1.3b_add.png)
-
+   1. Result box displays: `New Card added: Question: opcode for R format instructions; Answer: 000000`
+   2. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.
+![result of add command](./images/UserGuide/1.4_add.png)
 
 ### Deleting a Flashcard : `delete`
 Deletes a flashcard in the deck
 
-**Format:**
+#### Format:
+```
+delete INDEX
+```
 
-`delete INDEX`
+#### Examples:
+_Deleting the card in the deck with an index of 2._
+```
+delete 2
+```
 
-**Examples:**
-
-_Deleting the card in th deck with an index of 2._
-
-`delete 2`
-
-#### To Note:
-1. Index must be positive integer.
-2. Index cannot exceed size of the deck.
-
-#### Expected outputs:
-1. Given a correct input, a success message will be shown containing the details of the deleted flashcard.
-   1. `Deleted Card: Question: <provided question>; Answer: <provided answer>`
-2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
-   1. `The card index provided is invalid`
-   2. ```
-      Invalid command format!
-      delete: Deletes the deck identified by the index number used in the displayed card list.
-      Parameters: INDEX (must be a positive integer)
-      Example: delete 1
-      ```
-
-#### Usage:
-1. User Input: `delete 1`
+#### Expected Outputs:
+1. User Input: 
+   ```
+   add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS
+   delete 1
+   ```
 
 2. Successful Output
+   1. Result box displays: `Deleted Card: Question: opcode for R format instructions; Answer: 000000`
+   2. The corresponding card is deleted from the deck.
 
-![result of delete command](./images/UserGuide/1.3b_del.png)
+![result of delete command](./images/UserGuide/1.4_del.png)
 
 ### View All Flashcards : `list`
 Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
 
-Format: `list (q/t)/(prefix question starts with/ tag)`
-
-Note : Listing questions for markdown syntax should include their relevant markdown notation
-Examples:
+#### Format: 
 ```
-1. list
-   (list shows the full list of flashcards)
-
-2. list q/what
-   (list shows all flashcards with questions starting with 'What')
-
-3. list t/CS2100
-   (list shows all flashcards with the CS2100 Tag)
-
-4. list t/CS2100 t/MIPS
-   (list shows all flashcards with both MIPS and CS2100 Tag)
-
-5. list q/what t/CS2100
-   (list shows all flashcards with questions starting with 'What' and has the CS2100 Tag)
+list [q/QUESTION] [t/TAG...]
+```
+### Examples:
+_List full deck of flashcards._
+```
+list
+```
+_List all flashcards with question starting with "What"._
+```
+list q/What
+```
+_List all flashcards with the CS2100 Tag._
+```
+list t/CS2100
 ```
 
 #### To note:
-1. No Empty Input after q/ and t/.
-2. q/ and t/ is optional.
-3. Inputs are case-sensitive (cards/tags with the same input but different case will be recognised as different cards/tags)
+1. Any extraneous parameters not `q/` and `t/` will be ignored, i.e. `list 12345` or `list a/000000` will be regarded as `list`.
+2. Listing questions with markdown syntax should include their relevant markdown notation.
 
 #### Expected output:
-```
-1. list
-   "All cards listed" message will be returned to the user via the CLI
-```
+1. User Input:
+   ```
+   add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude
+   add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems
+   add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB 
+   list t/CS2100
+   ```
 
-#### Usage
-![usage of list command](./images/UserGuide/1.3b_list_ans.png)
+2. Successful Output
+   1. Result box displays: `All cards listed`
+   2. The corresponding cards matching the keyword and tags is displayed.
+![usage of list command](./images/UserGuide/1.4_list.png)
 
 ### Editing a Specific Flashcard : `edit`
 Edits an existing Flashcard in the deck.
 
-Format: `edit INDEX (q/a/t/h)/(question/answer/tag/hint)`
-
-Examples:
+#### Format:
 ```
-1. edit 1 q/What is the colour of the sun?
-   (changes the question at index 1 to “What is the colour of the sun?”)
+edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG...] [h/HINT]
+```
 
-2. edit 1 a/Red
-   (changes the answer at index 1 to “Red”)
-
-3. edit 1 t/Weather t/Geogaphy
-   (changes the tag at index 1 to “Weather” and "Geography")
-
-4. edit 1 h/Apple
-   (changes the hint at index 1 to “Apple")
+#### Examples:
+_Change the question at index 1 to "What is the colour of the sun?"._
+```
+edit 1 q/What is the colour of the sun?
+```
+_Change the answer at index 1 to "Red"._
+```
+edit 1 a/Red
+```
+_Change the tag at index 1 to "Weather" and "Geography"._
+```
+edit 1 t/Weather t/Geogaphy
+```
+_Change the hint at index 1 to "Apple"._
+```
+edit 1 h/Apple
 ```
 
 #### To Note:
-1. No empty input or input with only whitespace after `q/`, `a/`, 
+1. There must be at least one optional parameter included for the command input.
 2. Empty input after `t/` and `h/` will remove existing tags or hint respectively.
-3. Inputs are case-sensitive (cards with the same input but different case will be recognised as different cards).
-4. Prefixes (such as `q/`, `a/`, `t/`, `h/`) are not allow in the input fields.
-5. Tagging is not supported in v1.2 and earlier.
-6. Hint is not supported before v1.3.
+3. Tagging is not supported in v1.2 and earlier.
+4. Hint is not supported before v1.3.
 
 #### Expected output:
-```
-“Successfully edited flashcard” message will be returned to the user via the CLI
-“The card index provided is invalid"
-```
-#### Usage:
-1. User Input
-   ![usage of edit command](./images/UserGuide/1.3b_edit.png)
+1. User Input:
+   ```
+   add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa 
+   edit 1 a/If is a negative number, invert all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems
+   ```
 
 2. Successful Output
-   ![result of edit command](./images/UserGuide/1.3b_edit_ans.png)
-
+    1. Result box displays: `Edited Card: Question: How do you you convert from binary to 1s Complement?; Answer: If is a negative number, invert all the bits, i.e. 0 to 1 and vice versa`
+    2. The corresponding card in the deck will be updated.
+       ![result of edit command](./images/UserGuide/1.4_edit.png)
 
 ### Practise Flashcards: `practise`
 Practise a single Flashcard in the deck
 
-Format: `practise INDEX`
-
-#### Acceptable values for each parameters:
-1. Index must be positive integer
-2. Index cannot exceed size of the deck
+#### Format:
+```
+practise [INDEX]
+```
 
 #### Examples:
+_Practising the card in the deck with an index of 2._
 ```
-practise 1
-(showcases the question at index 1)
+practise 2
 ```
+
+#### To Note:
+1. If user omits INDEX in the command input, the first card in the deck will be practised.
+
 #### Expected outputs:
-```
-practise 1
-"Practising question 1 : <provided question>"
-
-practise 10
-"The card index provided is invalid"
-```
-
-#### Usage:
 1. User Input
-   ![usage of practise command](./images/UserGuide/1.3b_practise.png)
-
+   ```
+   add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS
+   practise
+   ```
 2. Successful Output
-   ![result of practise command](./images/UserGuide/1.3b_practise_ans.png)
+   1. Result box displays: `Practising Question 1 : opcode for R format instructions`
+   ![result of practise command](./images/UserGuide/1.4_practise.png)
 
 ### Hints for Flashcards: `hint`
 See the hint for a question at the given index
 
-Format: `hint INDEX`
+Format: 
+```
+hint INDEX
+```
 
 #### Examples:
+_Hint the card in the deck with an index of 3._
 ```
-hint 1
+hint 3
 ```
+
 #### Expected outputs:
-```
-hint 1
-"Hint for Question 1: 5 stages: IF, ID, EX, MEM, WB "
-
-hint 2
-"Hint for Question 2: No hint was provided."
-
-hint 10
-"The card index provided is invalid"
-```
-
-#### Acceptable values for each parameters:
-1. Index must be positive integer
-2. Index cannot exceed size of the deck
+1. User Input
+   ```
+   add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS h/Zeros
+   hint 1
+   ```
+2. Successful Output
+   1. Result box displays: `Hint for Question 1: Zeros`
+   ![result of hint command](./images/UserGuide/1.4_hint.png)
+   
 
 ### Solving Flashcards: `solve`
 Solves the question at the given index
 
-Format: `solve INDEX`
-
-#### Acceptable values for each parameters:
-1. Index must be positive integer
-2. Index cannot exceed size of the deck
+Format: 
+```
+solve [INDEX]
+```
 
 #### Examples:
+_Solve the card in the deck with an index of 2._
 ```
-solve 1
+solve 2
 ```
+
+#### To Note:
+1. If user omits INDEX in the command input, the first card in the deck will be solved.
+
 #### Expected outputs:
-```
-solve 1
-"Solved Question 1: What pipline protocols are covered
-Answer:2"
-
-solve 10
-"The card index provided is invalid"
-```
-
-#### Usage:
 1. User Input
-   ![usage of solve command](./images/UserGuide/1.3b_solve.png)
+   ```
+   add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS h/Zeros
+   solve
+   ```
 
 2. Successful Output
-   ![result of solve command](./images/UserGuide/1.3b_solve_ans.png)
+   1. Result box displays: `Solved Question 1: opcode for R format instructions Answer: 000000`
+   2. Solve count of the card gets updated.
+   ![result of solve command](./images/UserGuide/1.4_solve.png)
 
 
 ### Setting Difficulty of Flashcards: `set`
-Setting the difficulty of a flashcard
+Setting the difficulty of a flashcard, based on the user.
 
-This difficulty refers to how difficult you found the flashcard.
-This flashcard will be rescheduled based on the difficulty, as indicated by their due date.
-More difficult cards will appear more often in the practice rotation.
-This also takes into account past practices, so the more a card is practised,
-the less it will appear in the practice rotation.
-
-Format: set INDEX DIFFICULTY
-
-#### Acceptable values for each parameters:
-1. Index must be positive integer
-2. Index cannot exceed size of the deck
-3. Difficulty must be either ‘easy’, ‘medium’, ‘hard’
+Format: 
+```
+set [INDEX] d/DIFFICULTY
+```
 
 #### Example:
-```
-set 1
-```
-
-#### Expected outputs:
+_Set the first card as easy_
 ```
 set 1 d/easy
-"Set Difficulty for Question 1 (Diffculty Level: easy)
-
-set 10 d/easy
-"The card index provided is invalid"
 ```
 
-#### Usage:
+#### To Note:
+1. If user omits INDEX in the command input, the first card in the deck will be set.
+
+#### Expected outputs:
 1. User Input
-   ![usage of set command](./images/UserGuide/1.3b_set.png)
+   ```
+   add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS h/Zeros
+   set d/easy
+   ```
 
 2. Successful Output
-   ![result of set command](./images/UserGuide/1.3b_set_ans.png)
+   1. Result box displays: `Set Difficulty for Question 1 (Difficulty level: EASY)`
+   2. Due date of the card updated.
+   ![result of set command](./images/UserGuide/1.4_set.png)
 
 ### Randomly Practise Flashcards: `random`
-Practise a single Flashcard in the deck. This command chooses a random flashcard,
-as opposed to `practise` command which chooses the first (highest priority) flashcard.
-Use `r` index with `solve` and `set` for this random card.
+Practise a single random Flashcard in the deck.
 
-Format: `random`
-
-#### Acceptable values for each parameters:
-* There are no parameters.
+#### Format: 
+```
+random
+```
 
 #### Examples:
+_Practise a random card._
 ```
 random
-(showcases a random question)
 ```
-#### Expected outputs:
-```
-random
-"Practising question 1 : <provided question>"
-```
-Note: since the output is random, the above can be any question.
 
+#### To Note:
+1. Users can choose to note the index of question and solve and set based on the index. Alternatively, users can also use `r` as the index.
+
+#### Expected outputs:
+1. User Input
+   ```
+   add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems
+   add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB
+   random
+   ```
+2. Successful Output (assuming random chooses the card at index 2)
+   1. Result box displays: `Practising Question 2 : What are the 5 stages of MIPS?`
+      ![result of random command](./images/UserGuide/1.4_random.png)
 
 ### Clear all flashcards: `clear`
 Clears all flashcards found in the Deck. Deck is reset back to empty.
 
-Format: clear
+#### Format: 
+```
+clear
+```
 
 #### Example:
+_Delete all flashcards from the deck._
 ```
 clear
 ```
 
 #### Expected outputs:
-```
-clear
-"Deck has been cleared!"
-```
+1. User Input
+   ```
+   add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems
+   clear
+   ```
+2. Successful Output
+   1. Result box displays: `Deck has been cleared!`
+      ![result of clear command](./images/UserGuide/1.4_clear.png)
+
 ### Setting goals: `goal`
 Set a goal for the current studying session.
-Initially, the goal is set to 0, and out of the number of cards due that day
 
-ie. If you have 5 cards due that day, it will be set to 0/5 initially
-
-Format: goal NUMBER
+#### Format:
+```
+goal NUMBER
+```
 
 #### Example:
+_Set a goal of 5 for this session._
 ```
 goal 5
 ```
 
-### Important Note:
-Do not stack MarkDown Syntax
+#### To Note:
+1. On initialisation of lesSON, the target of the goal will be the size of the deck and the number of cards solved will be 0.
 
-Example:
-`` edit 1 q/ *** ``
+#### Expected outputs:
+1. User Input
+   ```
+   goal 10
+   ```
+2. Successful Output
+   1. Result box displays: `New goal set.`
+   2. Goal box updated with new target and goal completion status.
+      ![result of goal command](./images/UserGuide/1.4_goal.png)
 
-This may lead to unexpected behavior of text in the display view.
-
->>>>>>> master
+      
 ### Getting help: `help`
 Seek more details from a link provided leading to the User Guide.
 Users can also access this function by clicking on the **File** button located at the top
 left of the application, and then navigating to the **Help** tab.
 
-Format: help
+#### Format: 
+```
+help
+```
 
 #### Example:
+_Open help window._
 ```
 help
 ```
 
+
 #### Expected outputs:
-```
-help
-(A window with the URL leading to the User Guide will pop out.
-Users can copy the URL by simply clicking on the 'Copy URL' button.)
-```
+1. User Input
+   ```
+   help
+   ```
+2. Successful Output
+   1. Result box displays: `Opened help window.`
+   2. Popup window with link ot User Guide is generated.
+      ![result of help command](./images/UserGuide/1.4_help.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -591,44 +621,71 @@ For user who wish to incorporate styling in lesSON, there are 3 font styles curr
 #### Bold
 To bold a line of text, wrap text with `**`
 
-##### Example:
+
+#### Example:
+_Bolding a phrase in the question_
 ```
 edit 1 q/How many bits can a **Half Adder** add up
 ```
-##### Expected Result:
-![usage of bold syntax](./images/UserGuide/1.3b_bold.png)
+
+#### Expected Result:
+1. User Input
+   ```
+   add q/What is the **Stage** where calculations are operated? a/ALU
+   ```
+2. Successful Output
+   1. Result box displays: `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`
+   2. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.
+   3. `Stage` will appear bolded in both instances.
+![usage of bold syntax](./images/UserGuide/1.4_bold.png)
 
 #### Italic
 To italicise a line of text, wrap text with `*`
 
-##### Example:
+#### Example:
+_Italicising a phrase in the question_
 ```
 edit 1 q/How many bits can a *Half Adder* add up
 ```
-##### Expected Result:
-![usage of bold syntax](./images/UserGuide/1.3b_italics.png)
+#### Expected Result:
+1. User Input
+   ```
+   add q/What is the *Stage* where calculations are operated? a/ALU
+   ```
+2. Successful Output
+   1. Result box displays: `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`
+   2. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.
+   3. `Stage` will appear italicised in both instances.
+      ![usage of italics syntax](./images/UserGuide/1.4_italics.png)
 
 #### Underline
 To underline a line of text, insert `<u>` at the beginning of the text,
 and end with `</u>` at the end of the underlined text.
 
-##### Example:
+#### Example:
+_Underlining a phrase in the question_
 ```
 edit 1 q/How many bits can a <u>Half Adder</u> add up
 ```
-##### Expected Result:
-![usage of bold syntax](./images/UserGuide/1.3b_underline.png)
+#### Expected Result:
+1. User Input
+   ```
+   add q/What is the <u>Stage</u> where calculations are operated? a/ALU
+   ```
+2. Successful Output
+   1. Result box displays: `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`
+   2. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.
+   3. `Stage` will appear underlined in both instances.
+      ![usage of underline syntax](./images/UserGuide/1.4_underline.png)
 
 
-### Important Note:
-Do not stack MarkDown Syntaxes
 
-Example:
-`` edit 1 q/ *** ``
+### To Note:
+1. Do not stack MarkDown Syntax. This may lead to unexpected behavior of text in the display view. 
+2. Do ensure that the phrase intended for styling is wrapped within an open and close syntax of the same type, i.e. `**bold**` for bold `*italics*` for italics and `<u>underline</u>` for underline. 
+3. In the case when unexpected MarkDown format is observed, edit the flashcard again with the without the MarkDown syntax/with appropriate syntaxes.
 
-This may lead to unexpected behavior of text in the display view. In the case when unexpected MarkDown format is observed, edit the flashcard again with the without the MarkDown syntax/ with appropriate syntaxes.
-
-## Importing and Exporting Decks
+# Importing and Exporting Decks
 
 <div markdown="block" class="alert alert-info">
 
