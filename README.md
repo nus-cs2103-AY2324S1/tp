@@ -22,7 +22,10 @@ To increase the flexibility and efficiency of the flashcard software, lesSON is 
 - [x] View all current flashcards
 - [x] Edit existing flashcards
 - [x] Practise with existing flashcards
-- [ ] Tagging of flashcards into categories
+- [x] Tagging of flashcards into categories
+- [x] Spaced repetition to enhance learning experience
+
+and much more!
 
 ## Links
 * [User Guide](https://ay2324s1-cs2103t-w17-4.github.io/tp/UserGuide.html)
