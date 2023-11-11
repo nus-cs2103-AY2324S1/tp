@@ -133,6 +133,9 @@ public class ModelManager implements Model {
     @Override
     public void addFlashCards(ArrayList<FlashCard> flashCards) {
         for (FlashCard flashCard : flashCards) {
+            if (flashlingo.hasFlashCard(flashCard)) {
+                continue;
+            }
             flashlingo.addFlashCard(flashCard);
         }
         updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
