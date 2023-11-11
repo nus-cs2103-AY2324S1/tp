@@ -125,7 +125,7 @@ Student Number refers to the unique matriculation number of a NUS student. In **
 
 **Class Manager 2023** uses the Student Number to uniquely identify each student in most commands. The Student Number is not case-sensitive. e.g. Student Number `A123V` and `A123v` refers to the same student.
 
-## Data visualiation
+## Data visualisation
 
 TODO: Ngee Yong to add details of what each bar graph shows (average grades, attendance and class participation percentages of a student).
 
@@ -139,14 +139,16 @@ TODO: Ngee Yong to add details of what each bar graph shows (average grades, att
 
 ## Editing the data file
 
-**Class Manager 2023's** data is saved as a JSON file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below.
+**Class Manager 2023's** data is saved as a JSON file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below. 
+
+The size of `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of `assignmentTracker` array must match the configured assignment count. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. You can configure **Class Manager 2023** using the `config` command first before loading the edited data file. 
 
 <img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file make its format invalid, **Class Manager 2023** will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file make its format invalid (missing value pairs or not matching the configured tutorial and assignment count), **Class Manager 2023** will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 
@@ -184,9 +186,19 @@ After `config` is executed successfully and `view s/A0247243A` is executed to vi
 
 <img alt="config success" src="images/config-success.png" width="700">
 
-If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is missing:
+Possible errors and their corresponding error messages:
+* If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is missing
+    * Error message: `Invalid command format! 
+        config: Configures Class Manager with the module information.
+        WARNING: Configuring Class Manager resets the grades, attendance and class participation details of all students. This cannot be undone.
+        The default Class Manager is configured with 13 tutorials and 6 assignments.
+        Parameters: #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT
+        Example: config #t/10 #a/4`
+* If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is less than 1 
+    * Error message: `Invalid count values! The count value of tutorials/assignments cannot be less than 1.`
+* If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is more than 40
+    * Error message: `Invalid count values! The count value of tutorials/assignments cannot be more than 40.`
 
-<img alt="config error" src="images/config-error.png" width="500">
 
 ---
 
@@ -244,13 +256,13 @@ After `load f/sample` is executed successfully:
 
 <img alt="load success" src="images/load-outcome.png" width="750"> <br><br>
 
-The file path at the bottom left of the application is be updated to `.\data\sample.json`.
+The file path at the bottom left of the application is updated to `.\data\sample.json`.
 
 Possible errors and their corresponding error messages:
 * If `sample.json` does not exist in the `/data` folder
-  * Error message: The file `sample.json` cannot be found. Please make sure the file is in the /data folder.
+  * Error message: `The file sample.json cannot be found. Please make sure the file is in the /data folder.`
 * The file name entered is not a valid JSON file, or the tutorial and assignment count does not match the current configuration of **Class Manager 2023**
-  * Error message: The file `sample.json` cannot be loaded. Please make sure the file is formatted correctly.
+  * Error message: `The file sample.json cannot be loaded. Please make sure the file is formatted correctly.`
 
 ---
 
@@ -270,7 +282,7 @@ Example:
 
 ### Undo a command : `undo`
 
-Undo the previous command that modified the state of **Class Manager 2023**. Undo only works with the commands mentioned below that modifies the state of **Class Manager 2023**, and does not work with commands such as `load` and `config`. **Class Manager 2023** only stores up to 10 modified states, which **resets** after a `load` or `config` command. Undo can be used multiple times to undo multiple commands, or until **Class Manager 2023** reaches its last stored state after a maximum of 9 undos.
+Undo the previous command that modified the state of **Class Manager 2023**. Undo only works with the commands mentioned below that modifies the state of **Class Manager 2023**, and does not work with commands such as `load` and `config`. **Class Manager 2023** only stores up to 10 modified states, which **resets** after a `load` or `config` command. Undo can be used multiple times to undo multiple commands, or until **Class Manager 2023** reaches its last stored state after a maximum of 9 undoes.
 
 Format: `undo`
 
@@ -297,7 +309,7 @@ Displayed result if there are no more commands to undo: `No more commands to und
 
 ### Redo a command : `redo`
 
-Redo a previously undone command that modified the state of **Class Manager 2023**. Redo only works with commands that can be undone. **Class Manager 2023** only stores up to 10 modified states, which **resets** after a `load` or `config` command. Redo can be used multiple times to redo multiple undo commands, or until **Class Manager 2023** reaches its most recent state after a maximum of 9 redos.
+Redo a previously undone command that modified the state of **Class Manager 2023**. Redo only works with commands that can be undone. **Class Manager 2023** only stores up to 10 modified states, which **resets** after a `load` or `config` command. Redo can be used multiple times to redo multiple undo commands, or until **Class Manager 2023** reaches its most recent state after a maximum of 9 redoes.
 
 Format: `redo`
 
