@@ -17,13 +17,7 @@ public class ListTimeGroupCommand extends ListTimeCommand {
             + "Please provide the group's full name as in the existing contactlist.";
     private final Group group;
 
-    /**
-     * Constructor of ListTimeGroupCommand
-     *
-     * @param group Group to list time for.
-     */
     public ListTimeGroupCommand(Group group) {
-        requireNonNull(group);
         this.group = group;
     }
     @Override
