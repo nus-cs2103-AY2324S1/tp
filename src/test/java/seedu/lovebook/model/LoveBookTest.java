@@ -88,6 +88,32 @@ public class LoveBookTest {
         assertEquals(expected, loveBook.toString());
     }
 
+    @Test
+    public void equalsMethod() {
+        //same instance -> returns true
+        assertEquals(loveBook, loveBook);
+        // same object -> returns true
+        LoveBook loveBookCopy = new LoveBook();
+        assertEquals(loveBook, loveBookCopy);
+        // different types -> returns false
+        assertFalse(loveBook.equals(1));
+        // null -> returns false
+        assertFalse(loveBook.equals(null));
+        // different date -> returns false
+        LoveBook differentLoveBook = new LoveBook();
+        differentLoveBook.addDate(ALICE);
+        assertFalse(loveBook.equals(differentLoveBook));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        // same object -> returns same hashcode
+        assertEquals(loveBook.hashCode(), loveBook.hashCode());
+        // different object -> returns different hashcode
+        LoveBook loveBookCopy = new LoveBook();
+        assertEquals(loveBook.hashCode(), loveBookCopy.hashCode());
+    }
+
     /**
      * A stub ReadOnlyLoveBook whose dates list can violate interface constraints.
      */
