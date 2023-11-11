@@ -275,6 +275,52 @@ Finally, the update to the internalList will change the view of the displayed li
     * Pros: Allows the `list` command to list all employees by the order they were added.
     * Cons: Different lists in the `ModelManager` class may cause inconsistencies when `find` and `sort` commands are called consecutively.
 
+### Add Employee feature
+
+The add employee feature allows HouR to add employees to the employee list.
+
+#### Implementation
+
+The add employee command mechanism is facilitated by the `AddCommandParser` class which implements the `Parser` interface.
+
+`AddCommandParser#parse()` is exposed in the `Parser` interface as `Parser#parse()`.
+
+`AddCommandParser` implements the following operations:
+
+* `AddCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `AddCommand` object with the parsed employee ID, name, phone, email, position, salary, and an optional set of departments.
+
+The `AddCommand` object then communicates with the `Model` API by calling the `Model#addEmployee(Employee)` method, which adds the newly-constructed employee to the existing employee list.
+
+The method `AddCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The diagram below details how the operation of adding an employee works.
+
+![Add Sequence Diagram](images/AddSequenceDiagram.png)
+
+Given below is an example usage scenario for the command.
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `add id/EMPLOYEE_ID n/NAME p/PHONE e/EMAIL pos/POSITION s/SALARY d/DEPARTMENT` command in the CLI.
+
+**Step 3**: A new employee will be added to the employee list with the given details.
+
+The following activity diagram summarises what happens when a user executes the add command:
+
+![Add Activity Diagram](images/AddActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Command-Model Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#addEmployee` to add the new employee into the model instead of doing the direct editing in `AddCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Longer command execution, requiring more parts to work together.
+
+* **Alternative 2**: Edit the employee list directly from `AddCommand#execute()`.
+    * Pros: Shorter command execution, one less point of failure by eliminating the `model` class.
+    * Cons: May violate immutability within Employee and Model classes as well as SLAP by having `AddCommand#execute()` perform the editing directly.
+
 ### Report feature
 
 #### Implementation

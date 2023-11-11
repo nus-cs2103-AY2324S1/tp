@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs add command;
+
+if () then ([else]) 
+  :Display error message;
+else ([Valid command format])
+  if () then ([else])
+    :Display error message;
+  else ([Valid and unique employee ID])
+    if () then ([else])
+      :Display error message;
+    else ([Valid name])
+        if () then ([else])
+            :Display error message;
+        else ([Valid position])
+            if () then ([else])
+              :Display error message;
+            else ([Valid email])
+                if () then ([else])
+                    :Display error message;
+                else ([Valid phone number])
+                    if () then ([else])
+                        :Display error message;
+                    else ([Valid salary])
+                        if () then ([else])
+                            :Display error message;
+                        else ([Valid department(s) if present])
+                            :Add employee to employee list;
+                            :Display success message;
+                        endif
+                    endif
+                endif
+            endif
+        endif
+    endif
+endif
+endif
+stop
+
+                
+
