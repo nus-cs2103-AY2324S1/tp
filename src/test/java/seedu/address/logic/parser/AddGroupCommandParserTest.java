@@ -1,15 +1,21 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_DESC_BLANK;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CS;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CS2103T;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS2103T;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.model.group.Group;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 public class AddGroupCommandParserTest {
     private AddGroupCommandParser parser = new AddGroupCommandParser();

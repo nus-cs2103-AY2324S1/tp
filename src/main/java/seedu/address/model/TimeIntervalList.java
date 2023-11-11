@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Person;
 
 /**
  * Class representing the list of time intervals
@@ -238,5 +239,24 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
             toString += "\n" + timeInterval;
         }
         return toString;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TimeIntervalList)) {
+            return false;
+        }
+
+        TimeIntervalList otherTime = (TimeIntervalList) other;
+        boolean sameList = true;
+        for (TimeInterval time : this.internalList) {
+            sameList &= (otherTime.hasTime(time));
+        }
+        return sameList;
     }
 }

@@ -18,12 +18,6 @@ public class DeletePersonCommandParserTest {
 
     private DeleteCommandParser parser = new DeleteCommandParser();
 
-    //need to be deleted
-//    @Test
-//    public void parse_validArgs_returnsDeleteCommand() {
-//        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
-//    }
-
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));

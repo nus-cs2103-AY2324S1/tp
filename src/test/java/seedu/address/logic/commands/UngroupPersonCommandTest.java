@@ -4,6 +4,11 @@ import javafx.collections.ObservableList;
 import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.*;
 import seedu.address.model.group.Group;
@@ -18,7 +23,6 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -267,6 +271,7 @@ public class UngroupPersonCommandTest {
     private class ModelStubWithEmptyGroup extends ModelStub {
         private final Group group;
         private final Person person;
+
         ModelStubWithEmptyGroup(Group group, Person person) {
             requireAllNonNull(group, person);
             this.group = group;
