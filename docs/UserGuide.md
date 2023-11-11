@@ -171,7 +171,23 @@ Use the ***dashboard*** command to view a summarized information of all your cli
 dashboard
 ````
 
-You should see the dashboard view in the application window.
+![Ui](images/Dashboard.png)
+***Statistics*** shows...
+
+1) Uncontacted / Contacted / Closed clients
+2) Average interactions amongst all clients
+2) Breakdown of the different interaction outcomes
+3) Spread of HOT / WARM / COLD leads
+
+While ***Follow-Ups*** shows...
+1) Follow ups in the future, with follow up dates being determined by the day of last interaction plus follow up times (determined by lead type as shown below)
+
+| LeadType | Follow-Up Time |
+|---|----------------|
+| HOT | 1 week         |
+| WARM | 4 weeks        |
+| COLD | 8 weeks        |
+| UNKNOWN | 4 weeks        |
 
 ### Viewing the list of clients: ***list***
 
@@ -194,8 +210,7 @@ Don't worry, though, we have a solution for you! You can use the ***find*** comm
 ```text
 find NAME
 ```
-
-You don't need to type the full name of the client. You can type a part of the name and the command will return the index of the first client whose name contains the search term.
+💡 You don't need to type the full name of the client. You can type either the first name or last name and the command will return clients whose name contains the search term.
 
 Example:
 Finding a client with the name "John Doe"
