@@ -5,17 +5,15 @@
 ---
 # Class Manager 2023 User Guide 
 
-## Welcome to Class Manager 2023 (CM 23)!
+## Welcome to Class Manager 2023!
 
-Are you tired of managing your teaching assistant duties by juggling notes, spreadsheets, and calendars?
+To all CS2103/T Teaching Assistants (TAs), 
 
-Are you on the hunt for a more efficient and organized solution to handle your responsibilities as a teaching assistant?
+We understand your struggles in managing your students' information. We know that you have to keep track of your students' contact information, attendance, class participation and assignment grades. We also know that you have to manage multiple classes while juggling your own schoolwork and other commitments.
 
-Introducing **Class Manager 2023**!
+This is why we are excited to introduce **Class Manager 2023**, an all-in-one application designed to streamline your class management duties. **Class Manager 2023** will help you to save time, streamline your TA duties and allow you to focus on what matters most - your students.
 
-CM 23 is your ticket to an enhanced teaching experience! We present to you an all-in-one application designed to streamline your class management duties. Bid farewell to the stress of missed deadlines and the chaos of TA duties slipping through the cracks.
-
-So, what's holding you back? This user guide is your key to mastery of CM 23, with step-by-step instructions on how you can install and use our application. CM 23 is designed to be intuitive and easy to use, so you can get started right away!
+This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on how you can install and use our application. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started right away!
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -24,14 +22,14 @@ So, what's holding you back? This user guide is your key to mastery of CM 23, wi
 
 # Overview
 
-CM 23 is a desktop application for CS2103/T: Software Engineering Teaching Assistants (TAs) in National University of Singapore to manage their students' contacts and class information. 
+Class Manager 2023 is an offline desktop application for CS2103/T: Software Engineering Teaching Assistants (TAs) in National University of Singapore to manage their students' contacts and class information. 
 
-CM 23 allows users to:
+Class Manager 2023 allows users to:
 * Store and manage student's contact information.
 * Keep track of and visualise student's class information such as attendance, class participation and assignment grades.
 * Easily mark the attendance of multiple students for each tutorial session.
 
-CM 23 is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI). Since CS2103/T TAs have an adequate understanding of CLI, CM 23 will allow class management tasks to be completed faster than traditional GUI apps.
+Class Manager 2023 is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI). Since CS2103/T TAs have an adequate understanding of CLI, CM 23 will allow class management tasks to be completed faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -187,7 +185,7 @@ Format: `help`
 
 ### Exit Class Manager : `exit`
 
-Exits the application.
+Exits Class Manager immediately.
 
 Format: `exit`
 
@@ -203,19 +201,26 @@ Format: `history`
 
 ### Load a save file : `load`
 
-Load student information from an existing JSON file. Copy the JSON file to be loaded into the `/data` folder. The data in the JSON file will be loaded into the app via the `load` command. This file also becomes the new default save file. You can refer to [this section](#editing-the-data-file) for more information on the valid format of the data file.
+Load student information from an existing JSON file. To load a file, first copy the JSON file to be loaded into the `/data` folder. Next, the JSON file can be loaded into the app via the `load` command. This file also becomes the new default save file. You can refer to [this section](#editing-the-data-file) for more information on the valid format of the data file.
 
 Format: `load f/FILE_NAME`
-* File name does not include the .json extension.
+* File name must not include the .json extension.
 * File name is case-insensitive
-* File name must be valid and exist in the `/data` folder.
+* File must be valid and exist in the `/data` folder.
 * Number of tutorials and assignments in the loaded file must be the same as the current configuration of Class Manager. You can reconfigure Class Manager to match the number of tutorials and assignments in the loaded file using the `config` command.
 * `load` resets the state history of Class Manager, preventing you from using the `undo` command to reach a state before the `load` command was executed.
 
 Example:
-* `load f/sample` loads the sample.json file in the `/data` folder.
+* `load f/sample` loads `sample.json` file in the `/data` folder.
+
+Successful outcome:
 
 <img alt="load_outcome" src="images/load-outcome.png" width="750"> <br><br>
+
+Possible error outcomes:
+* `File not found!` - The file name entered does not exist in the `/data` folder.
+* `Invalid file format!` - The file name entered is not a valid JSON file.
+* 
 
 ---
 
@@ -571,15 +576,14 @@ Example:
 
 # FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Class Manager 2023 home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install Class Manager 2023 on the other computer and overwrite the empty data file it creates with your saved data file.
 <br><br>
-**Q**: How do I save file with different names?<br>
-**A**: You can rename the file manually after saving it. Start the Class Manager 2023 app and use the `load` command to load the renamed file. Note that the renamed file will then become the new default save file.
+**Q**: How do I save a file with a different name?<br>
+**A**: You can rename the file manually after saving it. Launch Class Manager 2023 and use the `load` command to load the renamed file. Note that the renamed file will then become the new default save file.
 <br><br>
 **Q**: I am unable to load my save file, what should I do?<br>
-**A**: Ensure that the save file is located in the `[JAR file location]/data` folder, and that the file name is valid. In addition, make sure that the number of tutorials and assignments in the save file is the same 
-as the current configuration of Class Manager 2023. You can reconfigure Class Manager 2023 to match the number of tutorials and assignments in the save file using the `config` command.
+**A**: Ensure that the save file is located in the `[JAR file location]/data` folder, and that the file name is valid. In addition, make sure that the number of tutorials and assignments in the save file is the same as the current configuration of Class Manager 2023. You can reconfigure Class Manager 2023 to match the number of tutorials and assignments in the save file using the `config` command.
 <br><br>
 **Q**: I am unable to load my save file and I have tried all the solutions above, what should I do?<br>
 **A**: The save file may be corrupted. You can try to edit the save file manually to fix the corrupted save file. You can refer to [this section](#editing-the-data-file) for more information on the valid format of the data file.
@@ -587,10 +591,10 @@ as the current configuration of Class Manager 2023. You can reconfigure Class Ma
 **Q**: How do I change the save file location?<br>
 **A**: The save file is located at `[JAR file location]/data`. We currently do not support changing the save file location.
 <br><br>
-**Q**: The GUI opens off-screen when I have multiple screens.<br>
-**A**: This is a known issue with JavaFX when you have multiple screens. If you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file before running CM 23 again.
+**Q**: Why does the GUI open off-screen?<br>
+**A**: This is a known issue with JavaFX when you have multiple screens. If you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file before running Class Manager 2023 again.
 <br><br>
-**Q**: I have found a bug with CM 23, how can I report it?<br>
+**Q**: I have found a bug with Class Manager 2023, how can I report it?<br>
 **A**: Please report the bug by creating a new issue on the [Class Manager 2023 issue tracker](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues).
 
 --------------------------------------------------------------------------------------------------------------------
