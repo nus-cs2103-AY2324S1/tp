@@ -319,8 +319,8 @@ Copies the details of an existing `Member`/`Applicant` identified by their index
 clipboard. The commands are implemented in the `CopyMemberCommand` and `CopyApplicantCommand` classes, which extend the `Command` class.
 
 1. The `CopyMemberCommand`/`CopyApplicantCommand` object's execute() method is called.
-2. The `Member`/`Applicant` index is checked to be within the valid range of the member list. If the index given is invalid (e.g., out of range), a `CommandException` is thrown.
-3. The `Member`/`Applicant` at the given index is referenced based on the provided member index.
+2. The `MEMBER_INDEX`/`APPLICANT_INDEX` is checked to be within the valid range of the member/applicant list. If it is invalid (e.g., out of range), a `CommandException` is thrown.
+3. The `Member`/`Applicant` at the given `MEMBER_INDEX`/`APPLICANT_INDEX` is referenced.
 4. The `CopyMemberCommand`/`CopyApplicantCommand` calls the copies the details given by the `Member#detailsToCopy`/`Applicant#detailsToCopy` method into the clipboard.
 
 The diagram below describes this behaviour concisely. It shows how a user's command is processed and what message is ultimately shown if they decide, for example, to copy a member's details.
@@ -595,26 +595,23 @@ otherwise)
 **MSS**
 
 1. User requests to copy a member
-
 2. ClubMembersContact copies the member's details to the clipboard
-
 3. ClubMembersContact displays a success message along with the member's details
-
+   <br/>
    Use case ends.
 
 **Extensions**
 
 * 1a. The copy member command format is invalid.
-
   * 1a1. ClubMembersContact shows an error message.
-    
-      Use case resumes at step 1.
+  * 1a2. User corrects input.
+    <br/>
+    Use case resumes at step 2.
 
 * 1b. The member index is invalid or out of range.
-
   * 1b1. ClubMembersContact shows an error message.
-
-    Use case resumes at step 1.
+    <br/>
+    Use case resumes at step 2.
 
 ---
 
