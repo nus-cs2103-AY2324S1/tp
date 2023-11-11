@@ -112,8 +112,10 @@ Check out our [FAQ](#faq) if you are not sure how to download Java `11`.
 
 ### Initial Setup
 
+
 1. Open a command terminal, navigate to the folder where you have stored the downloaded jar file. Type the command
 `java -jar linktree.jar` to run the application. A GUI similar to the one below should appear in a few 
+
 seconds, containing some sample data:
    ![Ui](images/MainUi.png)
 

@@ -52,7 +52,8 @@ public class DeleteTeamCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TEAM_NAME_DISPLAYED);
         }
         model.deleteTeam(teamToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_TEAM_SUCCESS, teamToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_TEAM_SUCCESS, teamToDelete),
+                false, false, false, false, false, false, false, true);
     }
 
     /**
