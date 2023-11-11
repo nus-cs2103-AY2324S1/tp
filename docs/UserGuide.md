@@ -308,11 +308,7 @@ The patient and specialist data will automatically be saved to the device’s ha
 
 ### Editing the data file
 
-DoConnek Pro data are saved automatically as JSON files:
-* Patient/specialist records are saved in `[JAR file location]/data/addressbook.json`
-* User preferences, notably shortcut settings, are saved in `[JAR file location]/preferences.json`.
-
-Advanced users are welcome to update data directly by editing that data file.
+DoConnek Pro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, DoConnek Pro will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
