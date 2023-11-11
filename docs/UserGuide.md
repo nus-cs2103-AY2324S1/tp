@@ -176,6 +176,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PH
     person.
 * To prevent accidentally adding duplicates, you can use [Find](#locating-persons-by-name-financial-plan-andor-tag--find)
     to check if you have already added the person already.
+* After performing an edit, the list displayed will be reset to display all clients.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -233,6 +234,7 @@ of tags is not cumulative.
 * You can remove all the person’s financial plans by typing `fp/` without
   specifying any financial plans after it.
 * A person's appointment cannot be edited in this manner. Refer to [Schedule](#scheduling-an-appointment--schedule).
+* After performing an edit, the list displayed will be reset to display all clients.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -286,7 +288,8 @@ Gathers all the emails of persons with a desired financial plan or tag.
 
 Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
 
-* Generates a list of emails separated by spaces, making it convenient for copying and pasting into the recipient input of an email application.
+* Generates a list of emails separated by semicolons, making it convenient for copying and pasting into the recipient input of an email application. 
+  This function currently works for gmail and outlook but might not work for all email services.
 * Either **Financial Plan or Tag** can be searched at once, but **not both**.
 * The search is case-insensitive e.g. `financial` will match `FINANCIAL` or `Financial`.
 * A person's email will be gathered if the prompt matches a substring of their financial plan or tag.
@@ -298,7 +301,7 @@ Examples:
 * `gather fp/Financial Plan A`
 
 Successful Output:
-`davidmiller@gmail.com bob@example.com`
+`davidmiller@gmail.com; bob@example.com;`
 
 ![result for`gather fp/Financial Plan A'](images/gatherUi.png)
 
@@ -350,8 +353,9 @@ Acceptable Values: Refer to [Argument Summary](#argument-summary).
 Example:
 - `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`
 
-Successful Output: `Appointment updated!` (Overridden)\
-`New appointment added: David; Phone: 93234567; Email: davidmiller@gmail.com; Address: Bishan Blk 999 #08-15 569874; Next-of-kin Name: Olivia; Next-of-kin Phone: 56981234; Appointment: Annual review of financial goals, 20-11-2023 15:00; Financial Plans: [Financial Plan A][Financial Plan B]; Tags:` (new appointment)
+Successful Output: \
+For overridden appointment: `Appointment updated!`\
+For new appointment: `New appointment added: David; Phone: 93234567; Email: davidmiller@gmail.com; Address: Bishan Blk 999 #08-15 569874; Next-of-kin Name: Olivia; Next-of-kin Phone: 56981234; Appointment: Annual review of financial goals, 20-11-2023 15:00; Financial Plans: [Financial Plan A][Financial Plan B]; Tags:` 
 
 ![result for`schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00'](images/scheduleUi.png)
 
@@ -469,7 +473,6 @@ _Details coming soon ..._
 6. Currently, there is no method to deconflict clashing appointments. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other. The appointment sidebar may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6a.
 7. The appointment sidebar may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6.
 8. The current way of checking for duplicate persons is by their full name, case sensitive. The future plan is to do this by checking of phone number as it is less likely 2 people share the same phone number as compared to name.
-9. The appointment sidebar may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6a.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary

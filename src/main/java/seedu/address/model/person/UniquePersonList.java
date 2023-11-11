@@ -108,7 +108,7 @@ public class UniquePersonList implements Iterable<Person> {
         for (Person person : internalList) {
             String email = prompt.gatherEmails(person);
             if (!email.isEmpty()) {
-                emails.append(email).append(" ");
+                emails.append(email).append("; ");
             }
         }
 
