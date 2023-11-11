@@ -110,6 +110,7 @@ Throughout this user guide, you will encounter some of these colored blocks high
 ## Glossary
 
 ### Definitions
+
 |             Term             | Definition                                                                                                                                                                                     |
 |:----------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |        Active recall         | A popular method to strengthen memory retention by actively testing the memory to retrieve a piece of information.                                                                             |
