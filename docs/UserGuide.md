@@ -91,6 +91,8 @@ To begin using this guide, ensure you meet the [Minimum System Requirements](#mi
 ---
 <br>
 
+<div style="page-break-after: always;"></div>
+
 <a name="quick-start"></a>
 ## Quick Start
 
@@ -131,6 +133,8 @@ If you are unfamiliar with the command terminal, you can right-click the `staffs
 This section introduces the symbols and notations used throughout this guide. The application's GUI [components](#glossary) are also explained here. We recommend that you read this section closely before using this guide.
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 <a name="understanding-the-symbols"></a>
 ### Understanding the Symbols
@@ -287,15 +291,11 @@ Valid examples:
 * `edit 2 hp/80081234 e/newEmail@hotmail.com` edits the phone number and email of the 2nd applicant in the list.
 
 Invalid examples:
-* `edit n/Vijay Sankar Kumar`
-This is not allowed as an `INDEX` is required to edit an applicant's details.
+* `edit n/Vijay Sankar Kumar` is not allowed as `INDEX` is a required parameter and must be specified.
 
-* `edit 1`
-This is not allowed as at least one of the optional fields, `[n/NAME] [hp/PHONE] [e/EMAIL] [p/POSITION]` must be provided.
+* `edit 1` is not allowed as at least one of the optional fields `[n/NAME]`,  `[hp/PHONE]`, `[e/EMAIL]`, or `[p/POSITION]` must be provided.
 
-* `edit -20 hp/12341234`
-This is not allowed as the `INDEX` must be a positive integer.
-
+* `edit -20 hp/12341234` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
@@ -316,10 +316,8 @@ Valid examples:
 * `sort d/name` followed by `delete 3` deletes the 3rd person in the sorted applicant list.
 
 Invalid examples:
-* `delete`
-This is not allowed as an `INDEX` must be specified.
-* `delete -3`
-This is not allowed as the `INDEX` must be a positive integer.
+* `delete` is not allowed as `INDEX` is a required parameter and must be specified.
+* `delete -3` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
@@ -344,27 +342,23 @@ Format: `list`
 Edits the status of an applicant.
 
 Format: `status INDEX s/STATUS`
-* Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
+* Edits the status of the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
 * `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Valid examples:
 * `status 3 s/o` updates the status of the 3rd person in the displayed applicant list to _OFFERED_.
-* `status 1 s/r` updates the status of the 1st person in the displayed applicant list to _REJECTED_.
+* `status 1 s/rejected` updates the status of the 1st person in the displayed applicant list to _REJECTED_.
 
 Invalid examples:
-* `status 3 s/interviewing`
-This is not allowed as `STATUS` must be either `o(ffered)` or `r(ejected)` or `u(ndecided)`.
+* `status 3 s/interviewing` is not allowed as `STATUS` must be either `o` or `offered` or `r` or `rejected` or `u` or `undecided`.
 
-* `status 3`
-This is not allowed as a `STATUS` must be provided.
+* `status 3` is not allowed as `STATUS` is a required parameter and must be specified.
 
-* `status -3 s/o`
-This is not allowed as the `INDEX` must be a positive integer.
+* `status -3 s/o` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
 ---
-
 <br>
 
 <a name="interview-management-features"></a>
@@ -373,7 +367,6 @@ This is not allowed as the `INDEX` must be a positive integer.
 <br>
 
 <a name="command-parameters-2"></a>
-
 #### Command Parameters 
 
 | Parameter         | Description​                                                                                                                                                          | Examples​                                          |
@@ -418,17 +411,13 @@ Format: `addi INDEX t/TYPE [r/RATING]`
 
 Valid examples:
 * `addi 3 t/screening` adds a Screening interview without rating to the 3rd person in the displayed applicant list.
-* `addi 1 t/technical r/8.5` adds a Technical interview with rating 8.5 to the 1st person in the displayed applicant list.
-
-Invalid examples:
-* `addi 1`
-This is not allowed as a `TYPE` must be provided.
-
-* `addi -1 t/HR`
-This is not allowed as the `INDEX` must be a positive integer.
-
+* `addi 1 t/technical r/8.5` adds a _technical_ interview with rating 8.5 to the 1st person in the displayed applicant list, as shown in the GUI below.
 
 ![addi.png](images/user-guide/addi.png)
+
+Invalid examples:
+* `addi 1` is not allowed as `TYPE` is a required parameter and must be specified.
+* `addi -1 t/screening` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
@@ -445,26 +434,21 @@ Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
 * `INTERVIEW_INDEX` refers to the index of the interview to be edited of the applicant.
 * At least one of the optional fields must be provided.
 * Existing values will be updated by the input values.
-* `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
+* `INDEX` and `INTERVIEW_INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 <box type="warning" header="**Caution**">
     There is <b>NO</b> duplicate handling for the name of the interview in <code>editi</code> and attempting to do so will give an error message.
 </box>
 
 Valid examples:
-* `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview with rating 7.8.
-* `editi 3 i/2 t/screening` edits the 2nd interview of the 3rd person in the displayed applicant list to a screening interview.
+* `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a _technical_ interview with rating 7.8.
+* `editi 3 i/2 t/screening` edits the 2nd interview of the 3rd person in the displayed applicant list to a _screening_ interview.
 * `editi 2 i/1 r/8.9` edits the 1st interview rating of the 2nd person in the displayed applicant list to 8.9.
 
 Invalid examples:
-* `editi 1`
-This is not allowed as an `INTERVIEW_INDEX` must be provided.
-
-* `editi 1 i/1`
-This is not allowed as at least one of the optional fields, `[t/TYPE] [r/RATING]`, must be provided.
-
-* `editi -1 i/2 t/Assessment`
-This is not allowed as the `INDEX` must be a positive integer.
+* `editi 1` is not allowed as an `INTERVIEW_INDEX` is a required parameter and must be specified.
+* `editi 1 i/1` is not allowed as at least one of the optional fields `[t/TYPE]` or `[r/RATING]` must be provided.
+* `editi -1 i/2 t/Assessment` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
@@ -478,18 +462,14 @@ Deletes an interview from an applicant.
 
 Format: `deletei INDEX i/INTERVIEW_INDEX`
 * Deletes from the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list.
-* `INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
+* `INDEX` and `INTERVIEW_INDEX` must be a positive integer (e.g. `1`, `2`, `3`, ...).
 
 Valid examples:
 * `deletei 1 i/2` deletes the 2nd interview of the 1st person in the displayed applicant list.
 
 Invalid example:
-* `deletei 1 i/20` 
-This is not allowed because the index of the interview is invalid. As the maximum number of interviews for each applicant
-is 5, an interview index larger than 5 is not allowed.
-
-* `deletei -1 i/3`
-This is not allowed as the `INDEX` must be a positive integer.
+* `deletei 1 i/20` is not allowed as the index of the interview is invalid. Since the maximum number of interviews for each applicant is 5, an interview index larger than 5 is not allowed.
+* `deletei -1 i/3` is not allowed as `INDEX` must be a positive integer.
 
 <br>
 
@@ -510,7 +490,6 @@ This is not allowed as the `INDEX` must be a positive integer.
 | `KEYWORD`    | The keyword to find in an applicant's name. <br/> <br/> It should be alphanumerical.                                                   | <ul><li>`Lee`</li><li>`Zhang Jordan`</li></ul>           |
 | `SCORE`      | The applicant's overall score. <br/> <br/> It should be a number between 0.0 and 10.0 inclusive, to 1 decimal place.                   | <ul><li>`0.0`</li><li>`8.3`</li></ul>                    |
 | `FILENAME`   | The file name of the csv file to import. <br/> <br/> It should end with the `.csv` suffix and should not be blank.                     | <ul><li>`demo.csv`</li><li>`applicantBook.csv`</li></ul> |
-
 
 <br>
 
@@ -542,8 +521,7 @@ Valid examples:
 * `find IVAN CHEW` finds any applicant whose name contains “ivan” or contains “chew”.
 
 Invalid examples:
-* `find name!!!`
-This is not allowed as the `KEYWORD [MORE_KEYWORDS]` must be alphanumeric.
+* `find name!!!` is not allowed as the `KEYWORD [MORE_KEYWORDS]` must be alphanumeric.
 
 <br>
 
@@ -619,14 +597,13 @@ Format: `import f/FILENAME`
 * A sample CSV file can be found [here](demo.csv).
 
 Example:
-* `import f/applicants.csv`
+* `import f/applicants.csv` will import the applicants from the `applicants.csv` file, as shown in the GUI below.
 
 ![import.png](images/user-guide/import.png)
 
 <br>
 
 ---
-
 <br>
 
 <a name="miscellaneous-features"></a>
@@ -649,9 +626,7 @@ Format: `help`
 <a name="clear"></a>
 #### Clearing all applicant entries: `clear`
 
-After typing `clear`, system asks the user to confirm clearing. If user types `yes` and clicks enter, 
-all the current data stored in the system is then cleared. 
-Else, typing in anything else then pressing enter will cancel the clear process. 
+After typing `clear`, system asks the user to confirm clearing. If user types `yes` and clicks enter, all the current data stored in the system is then cleared. Else, typing in anything else then pressing enter will cancel the clear process. 
 
 Format: `clear`
 
