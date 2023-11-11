@@ -15,6 +15,7 @@ public class ListTimePersonCommand extends ListTimeCommand{
     private final Name personName;
 
     public ListTimePersonCommand(Name personName) {
+        requireNonNull(personName);
         this.personName = personName;
     }
 

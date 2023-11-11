@@ -15,6 +15,7 @@ public class ListTimeGroupCommand extends ListTimeCommand{
     private final Group group;
 
     public ListTimeGroupCommand(Group group) {
+        requireNonNull(group);
         this.group = group;
     }
     @Override
