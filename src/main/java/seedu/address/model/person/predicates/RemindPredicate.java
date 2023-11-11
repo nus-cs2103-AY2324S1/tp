@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
@@ -43,5 +44,10 @@ public class RemindPredicate implements Predicate<Person> {
         RemindPredicate otherNameContainsKeywordsPredicate =
                 (RemindPredicate) other;
         return days == otherNameContainsKeywordsPredicate.days;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).add("days", days).toString();
     }
 }
