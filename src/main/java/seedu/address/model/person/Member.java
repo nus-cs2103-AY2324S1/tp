@@ -109,11 +109,9 @@ public class Member extends Person {
         }
 
         Member otherMember = (Member) other;
-        // members are considered the same if they have the same name, phone, email or telegram handle
-        return getName().equals(otherMember.getName())
-            || this.phone.equals(otherMember.phone)
-            || this.email.equals(otherMember.email)
-            || this.telegram.equals(otherMember.telegram);
+
+        // phone required to be unique across members
+        return this.phone.equals(otherMember.phone);
     }
 
     /**
