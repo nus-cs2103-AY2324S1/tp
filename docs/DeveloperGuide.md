@@ -401,7 +401,80 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a new contact
+
+1. Adding a contact with all fields
+
+   1. Test case: `add n/John Doe p/12345678 e/john@example.com o/notes t/friend a/Telegram: johndoe`
+      Expected: A new contact with the name "John Doe", phone number "12345678", email "john@example.com", a note "notes", tagged as "friend", and an alternate contact "Telegram: johndoe" is added to the list.
+
+   1. Test case: `add n/Alice p/87654321 e/alice@example.com`
+      Expected: A new contact with the name "Alice", phone number "87654321", and email "alice@example.com" is added. Optional fields are left blank.
+
+   1. Other incorrect add commands to try: `add`, `add n/John Doe`, `add e/john@example.com`, `add n/John Doe p/12`<br>
+      Expected: Error message indicating the correct format for the `add` command.
+
+### Editing an existing contact
+
+1. Editing a contact's name and email
+
+   1. Prerequisites: Have at least one contact in the list.
+
+   1. Test case: `edit 1 n/Jane Doe e/jane@example.com`
+      Expected: The first contact in the list has its name changed to "Jane Doe" and email to "jane@example.com".
+
+   1. Test case: `edit 2 n/Bob`
+      Expected: Error message indicating the correct format for the `edit` command.
+
+   1. Other incorrect edit commands to try: `edit`, `edit x` (where x is larger than the number of contacts in ConText), `edit 1 n/`, `edit 1 e/`<br>
+      Expected: Error message indicating the correct or valid usage of the `edit` command.
+
+### Finding contacts by name
+
+1. Finding contacts using a single keyword
+
+   1. Test case: `find John`
+      Expected: List all contacts with "John" in their name.
+
+   1. Test case: `find john` (case-insensitive)
+      Expected: Same as above, demonstrating case-insensitivity.
+
+   1. Other incorrect find commands to try: `find` (with no keyword specified), `find @#$%` (assuming no such names)<br>
+      Expected: Error message indicating the correct usage of the `find` command or no contacts found message.
+
+### Filtering contacts by tag
+
+1. Filtering contacts using a specific tag
+
+   1. Test case: `filter friend`
+      Expected: List all contacts tagged as "friend".
+
+   1. Test case: `filter close friend`
+      Expected: List all contacts tagged as "close friend".
+
+   1. Other incorrect filter commands to try: `filter`, `filter @#$%` (assuming no such tags)<br>
+      Expected: Error message indicating the correct usage of the `filter` command or no contacts found message.
+
+### Listing all contacts
+
+1. Displaying all contacts
+
+   1. Test case: `list`
+      Expected: All contacts in the address book are displayed.
+
+### Clearing all contacts
+
+1. Clearing all contacts from the list
+
+   1. Test case: `clear`
+      Expected: All contacts are deleted, and the list is empty.
+
+### Exiting the application
+
+1. Exiting the app
+
+   1. Test case: `exit`
+      Expected: The application closes.
 
 ### Deleting a contact
 
@@ -423,8 +496,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
