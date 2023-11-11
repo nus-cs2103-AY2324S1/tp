@@ -21,8 +21,9 @@ title: Developer Guide
   - [Add attendee feature](#add-attendee-feature)
   - [Remove attendee feature](#remove-attendee-feature)
   - [Keeping track of last meeting with contact](#keeping-track-of-last-meeting-with-contact)
-- [Planned Enhancements](#planned-enhanements)
+- [Planned Enhancements](#planned-enhancements)
   - [\[Proposed\] Undo/redo feature](#proposed-undo-and-redo-feature)
+  - [\[Feature Flaw\] View Commands](#feature-flaw-view-commands)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -467,6 +468,15 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   - Cons: We must ensure that the implementation of each individual command are correct.
+
+### \[Feature Flaw\] View Commands
+
+As described in the implementation notes for `viewc` and `viewm` above, the currently displayed `Person` and `Meeting` objects will be cleared when certain commands such as `deletec` and `deletem` are used on a separate object, which is necessary due to the way the view commands are currently implemented. Additional details are in the implementation section referenced above.
+
+We plan to remove the need to handle such edge cases by modifying the way both view commands are implemented. One potential method is as follows:
+- Revert the implementation of `viewc` and `viewm` to the original method of storing a copy of the viewed object, rather than the viewed index.
+- Modify the behaviour of `editc`, `editm`, `deletec` and `deletem` such that when they are used on the original object currently being viewed, the stored copy will be edited/deleted accordingly.
+- This allows the currently viewed `Person` or `Meeting` object to persist regardless of command usage, and only be cleared when the object is deleted, or everything is cleared via the `clear` command.
 
 ---
 
