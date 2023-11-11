@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.CourseCommand;
 import seedu.address.logic.parser.ParserUtil.CourseOperation;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.course.Course;
 
 /**
  * Parses input arguments and creates a new CourseCommand object
@@ -45,9 +44,7 @@ public class CourseCommandParser implements Parser<CourseCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COURSE);
 
-        Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
-
-        return new CourseCommand(operation, course.getCourseCode());
+        return new CourseCommand(operation, argMultimap.getValue(PREFIX_COURSE).get());
     }
 
     /**
