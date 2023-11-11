@@ -93,7 +93,7 @@ public class AddressBookParser {
             return new DeleteTeamCommandParser().parse(arguments);
 
         case DeleteDeveloperFromTeamCommand.COMMAND_WORD:
-            return new DeleteDeveloperFromTeamParser().parse(arguments);
+            return new DeleteDeveloperFromTeamCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

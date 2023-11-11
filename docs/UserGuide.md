@@ -115,8 +115,18 @@ Copy this URL to have a look at our user guide.
 5. **Teams Panel**: Lists all the teams from your teambook.
 
 ### Tutorial on using our Commands
-Will update soon...
 
+| Commands                                    | Description                                                                                                                              |
+|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| `add`, `delete`, `find`, etc.               | The main command keyword.                                                                                                                |
+| `n/`<br/>`tn/`                              | n/ - Prefix for developer names<br/>tn/ - Prefix for team names.                                                                         |
+| `p/`<br/>`e/`<br/> `a/`<br/> `r/`<br/> `t/` | p/ - Prefix for phone number<br/> e/ - Prefix for email<br/>a/ - Prefix for address<br/>r/ - Prefix for remark<br/>t/ - Prefix for tags. |                                                                  |
+| `[DeveloperName]`, `[Phone]`, etc.          | Arguments that follow the command.                                                                                                       |
+| `(optional)`                                | Optional elements like Remark and Tags can be omitted.                                                                                   |                   |
+| `...`                                       | Ellipsis indicates that more arguments can follow.                                                                                       |
+
+
+Example - `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
 
 Click [here](#table-of-contents) to go back to contents.
 
@@ -166,13 +176,18 @@ When you enter the command (Hi):
 #### What this command does:
 * Performs deletion of existing developers from the storage. Specify the index number as shown on the list.
 #### Command format:
-* `Delete [index number]`
+* `delete [index number]`
 
 #### Example usage:
 - For example, to delete John from the list. First find the index number of John.
   ![DeletePersonFromListExample](images/UG_images/DeletePersonFromListExample.png)
 - In this example, the index of John is 7. So type, `delete 7`.
   ![DeletedPersonFromListExample](images/UG_images/DeletedPersonFromListExample.png)
+
+> **NOTE:** You cannot delete a developer who is **team leader** for any of the teams. Inorder, delete that developer
+you need to change the team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
+
+> **WARNING:** Deleting a developer who is not a team leader will remove that developer from all the teams. 
 
 ### Edit developer
 #### What this command does:
@@ -251,11 +266,26 @@ and type `list` again when you want to go back to the main window.
 #### What this command does:
 * Performs deletion of existing teams from the storage.
 #### Command format:
-* `Delete id [name]`
+* `deleteteam tn/[TeamName]`
 #### Example usage:
-* Example: `Delete 2 [name]`
+* Example: If you want to delete **Team Alpha** from the list of teams.
+  ![BeforeDeleteTeamCommand](images/UG_images/BeforeDeleteTeamCommand.png)
+* You need to type `deleteteam tn/Team Alpha`, then the **Team Alpha** will be deleted from the list of teams.
+  ![AfterDeleteTeamCommand](images/UG_images/AfterDeleteTeamCommand.png)
 
 ### Remove developer from team
+* Performs deletion of existing developer from the given team.
+#### Command format:
+* `deletedev tn/[TeamName] n/[DeveloperName]`
+#### Example usage:
+* Example: If you want to delete developer **Roy Balakrishnan** from **Team Alpha**.
+  ![BeforeDeleteDevFromTeam](images/UG_images/BeforeDeleteDevFromTeam.png)
+* You need to type `deletedev tn/Team Alpha n/Roy Balakrishnan`, then the developer 
+**Roy Balakrishnan** will be removed from **Team Alpha**.
+  ![AfterDeleteDevFromTeam](images/UG_images/AfterDeleteDevFromTeam.png)
+
+> **NOTE:** You cannot delete a developer who is **team leader**. Inorder, delete that developer you need to change the
+team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
 
 ### Edit team name
 * To edit team name:
@@ -369,9 +399,26 @@ and type `tree` again when you want to hide the tree and go back to the main win
 
 
 ### Reset the project
+#### What this command does:
+* This command will erase the entire data, that is all the details of developers and teams will be erased immediately. 
+This command can be used when you want to restart the project.
+
+#### Command format:
+* `clear`
+
+#### Example usage:
+* `clear` (and you will see an empty list of developers and teams)
+  ![ClearCommand](images/UG_images/ClearCommand.png)
 
 ### Exit the application
+#### What this command does:
+* You can use this command to close the application.
 
+#### Command format:
+* `exit`
+
+#### Example usage:
+* `exit` (the application will close automatically)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Troubleshooting
@@ -465,7 +512,28 @@ Click [here](#table-of-contents) to go back to contents.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-- Details coming soon...
+## Command Summary
+
+| Command            | Format and Example                                                                                                                                                         |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Hi`               | Format: `Hi`<br/>Example: `Hi`                                                                                                                                             |
+| `add`              | Format: `add n/[Developer Name] p/[Phone] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/[Tags])`<br/>Example: `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend` |
+| `delete`           | Format: `delete [index number]`<br/> Example: `delete 7`                                                                                                                   |
+| `edit`             | Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`<br/>Example: `edit 1 n/John Wick e/new.email@example.com`                              |
+| `find`             | Format: `find [KEYWORD]`<br/>Example: `find John`                                                                                                                          |
+| `list`             | Format: `list`<br/>Example: `list`                                                                                                                                         |
+| `newteam`          | Format: `newteam tn/[TeamName] tl/[TeamLeader]`<br/> Example: `newteam tn/Team Delta tl/David Li`                                                                          |
+| `dev2team`         | Format: `dev2team tn/[TeamName] n/[Developer Name]`<br/>Example: `dev2team tn/Team Delta n/Irfan Ibrahim`                                                                  |
+| `deleteteam`       | Format: `deleteteam tn/[TeamName]`<br/>Example: `deleteteam tn/Team Alpha`                                                                                                 |
+| `deletedev`        | Format: `deletedev tn/[TeamName] n/[Developer Name]`<br/>Example: `deletedev tn/Team Alpha n/Roy Balakrishnan`                                                             |
+| `editTeamName`     | Format: `editTeamName tn/[Original Team Name] tn/[New Team Name]`<br/>Example: `editTeamName tn/Alpha Team tn/Beta Team`                                                   |
+| `editTeamLeader`   | Format: `editTeamLeader tn/[TeamName] tl/[TeamLeader]`<br/>Example: `editTeamLeader tn/Alpha Team tl/Bob`                                                                  |
+| `findteam`         | Format: `findteam [KEYWORD]`<br/> Example: `findteam Alpha`                                                                                                                |
+| `listt`            | Format: `listt`<br/>Example: `listt`                                                                                                                                       |
+| `tree`             | Format: `tree`<br/>Example: `tree`                                                                                                                                         |
+| `help` or Press F1 | Format: `help`<br/>Example: `help`                                                                                                                                         |
+| `clear`            | Format: `clear`<br/>Example: `clear`                                                                                                                                       |
+| `exit`             | Format: `exit`<br/>Example: `exit`                                                                                                                                              |
 
 Click [here](#table-of-contents) to go back to contents.
 
@@ -476,3 +544,4 @@ Click [here](#table-of-contents) to go back to contents.
 
 Click [here](#table-of-contents) to go back to contents.
 
+--------------------------------------------------------------------------------------------------------------------

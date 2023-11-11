@@ -13,7 +13,7 @@ import seedu.address.model.person.Name;
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
-public class DeleteDeveloperFromTeamParser implements Parser<DeleteDeveloperFromTeamCommand> {
+public class DeleteDeveloperFromTeamCommandParser implements Parser<DeleteDeveloperFromTeamCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteDeveloperFromTeamCommand
      * and returns an AddCommand object for execution.
