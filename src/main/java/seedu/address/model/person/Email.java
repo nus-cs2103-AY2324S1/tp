@@ -22,7 +22,7 @@ public class Email {
             + "    - have each domain label start and end with alphanumeric characters\n"
             + "    - have each domain label and tld consist of alphanumeric characters,"
             + " separated only by hyphens, if any.";
-    // Credit: OWASP Validation Regex Repository
+    // Code below is taken from https://owasp.org/www-community/OWASP_Validation_Regex_Repository
     private static final String VALIDATION_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@"
             + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
 
