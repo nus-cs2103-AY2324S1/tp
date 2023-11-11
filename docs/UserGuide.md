@@ -17,11 +17,11 @@ Here’s an overview of what you can do with TutorConnect:
 Sounds good, right? On top of these functionalities, we believe in bringing you the most efficient scheduling tool. 
 TutorConnect is **optimised for users who can type fast** and utilise the [Command Line Interface (CLI)](#glossary) to complete tasks using the keyboard faster than using the mouse.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 ## Table of Contents
 * Table of Contents
 {:toc}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Usage of the User Guide
 
@@ -55,6 +55,8 @@ need. Look out for these coloured boxes!
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Warning**<br>
@@ -73,7 +75,7 @@ need. Look out for these coloured boxes!
 
 [Back To Top](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -113,8 +115,7 @@ If the jar file cannot launch on double-click:
 2. Type the following command in the terminal: `java -jar TutorConnect.jar` and hit enter.
 3. The command should run and launch the application.
 </div>
-
-
+<div style="page-break-after: always;"></div>
 ### Navigating the Interface
 
 TutorConnect comes equipped with a [GUI](#glossary) interface that provides visual feedback to you.
@@ -133,7 +134,7 @@ Below is a quick overview of the various components of our interface.
 
 [Back To Top](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## TutorConnect Tutorial (for new users)
 
@@ -152,6 +153,8 @@ Click on any of these below to jump to the respective sections of the guide!
 * [Adding your first schedule](#adding-your-first-schedule)
 * [Marking your schedule as completed](#marking-your-schedule-as-completed)
 
+<div style="page-break-after: always;"></div>
+
 ### Start
 ![start](images/tutorial/start.png)
 
@@ -164,6 +167,8 @@ Once you're ready to start using TutorConnect for your tuition centre, you can e
 
 Yay! Now it's time to get started with TutorConnect!
 
+<div style="page-break-after: always;"></div>
+
 ### Adding your first tutor
 
 ![add-t](images/tutorial/add-t.png)
@@ -175,6 +180,8 @@ Here is how you would use the [**add-t**](#adding-a-tutor-add-t) command to add 
 1. Simply type `add-t n/John Doe p/91234567 e/johnd@example.com` into the command box
 2. Hit enter
 3. Voila! John Doe is now in TutorConnect
+
+<div style="page-break-after: always;"></div>
 
 ### Adding your first schedule
 
@@ -209,11 +216,11 @@ Here is how to use the [**mark**](#marking-a-schedule-mark) command to mark the 
 **Congratulations!** You have successfully added your first tutor and schedule, and also marked a schedule as 
 completed in TutorConnect. We hope that this tutorial has helped guide you through the basic features of 
 TutorConnect. Please refer to the [**Features Section**](#features) to see what else TutorConnect can do. 
-Alternatively, visit the [**FAQ Section**](#faq) to view some frequently asked questions.
+Alternatively, visit the [**FAQ Section**](#frequently-asked-questions) to view some frequently asked questions.
 
 [Back To Top](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 From pairing classes with tutors to managing your tuition centre schedules, TutorConnect provides you with a 
@@ -243,6 +250,8 @@ Let’s add him into TutorConnect.
 
 Type in `add-t n/John Doe p/98765432 e/johnd@example.com` and press enter.
 
+<div style="page-break-after: always;"></div>
+
 **What you can expect to see**
 
 Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
@@ -256,6 +265,8 @@ Amazing! Tutor John Doe has now been added to the bottom of the displayed list.
 **Command format**
 
 ![add tutor command](images/addTutorCommandSyntax.png)
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -312,6 +323,8 @@ Voila! His phone number has now been updated to **87654321**.
 
 ![edit tutor](images/editTutor.png)
 
+<div style="page-break-after: always;"></div>
+
 ##### :star::star::star: Experienced users
 {:.no_toc}
 
@@ -360,6 +373,8 @@ Let's use the list tutor command to view the most updated list of tutors!
 2. Let's say you have successfully found one tutor named John Doe.
 3. Type in `list-t` and press enter to go back to view the full updated list of tutors.
 
+<div style="page-break-after: always;"></div>
+
 **What you can expect to see**
 
 Great job! You have found the full updated list of tutors.
@@ -376,7 +391,7 @@ Anything you type after `list-t` will be ignored.
 
 #### Locating tutors by name: `find-t`
 
-Finds tutors whose names contain any of the given keywords.
+Find tutors whose names contain any of the given keywords.
 
 ##### :star: First time users
 {:.no_toc}
@@ -392,11 +407,13 @@ If this has happened to you before, fret not! The find tutor command is here to 
 
 Type in `find-t john` and press enter.
 
+<div style="page-break-after: always;"></div>
+
 **What you can expect to see**
 
 Tada! You have found tutor **John Doe** (and any other tutors whose name contains John).
 
-![find tutor](images/findTutor.png)
+<img src="images/findTutor.png" height="360px">
 
 ##### :star::star::star: Experienced users
 {:.no_toc}
@@ -451,6 +468,8 @@ Well done! You have deleted tutor **John Doe**.
 **Command format**
 ![delete tutor command](images/deleteTutorCommandSyntax.png)
 
+<div style="page-break-after: always;"></div>
+
 **Errors you might encounter**
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
@@ -463,6 +482,8 @@ Here is a list of the error messages you may encounter, when the command is ente
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
 [Back To Top](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Schedule Related Features
 As busy tuition centre coordinators, creating conflict-free schedules is no easy feat. Don't worry! TutorConnect has 
@@ -489,7 +510,16 @@ Type in `add-s 1 st/2023-12-01T09:00 et/2023-12-01T11:00` and press enter.
 
 Wow! The new schedule for Bernice Yu has now been added to the list of schedules.
 
-![add schedule](images/addSchedule.png)
+<img src="images/addSchedule.png" height="400px">
+
+<div markdown="span" class="alert alert-success">
+
+**:bulb: Position of new schedule**<br>
+
+Too many schedules? Don't worry! Upcoming and past schedules are displayed as separate lists. Schedules are also sorted 
+in order of closest to current date.
+
+</div>
 
 ##### :star::star::star: Experienced users
 {:.no_toc}
@@ -499,7 +529,6 @@ Wow! The new schedule for Bernice Yu has now been added to the list of schedules
 ![add schedule command](images/addScheduleCommandSyntax.png)
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
-
 
 | Error Message                                                                                                      | Reason                                                                                       |
 |--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
@@ -536,12 +565,13 @@ The edit schedule function is here for that!
 2. Let's say the schedule to be updated is in position 1.
 3. Type in `edit-s 1 st/2023-09-15T08:00` and press enter.
 
+<div style="page-break-after: always;"></div>
+
 **What you can expect to see**
 
 Tada! The schedule has now been updated to 8am.
 
 ![edit schedule](images/editSchedule.png)
-
 
 ##### :star::star::star: Experienced users
 {:.no_toc}
@@ -572,6 +602,8 @@ You can also refer to [input information](#input-examples) for details about val
 
 [Back To Top](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Listing all schedules: `list-s`
 
 Displays a list of all schedules in TutorConnect. List can be filtered by tutors assigned or status.
@@ -595,7 +627,9 @@ Use the list schedule function!
 Tada! For step 2, the schedule list has now been updated to show schedules assigned to tutor Irfan Ibrahim that are 
 marked as `COMPLETED`.
 
-![list schedule tutor completed](images/list-schedules/list-s-tutor-completed.png)
+<img src="images/list-schedules/list-s-tutor-completed.png" height="400px">
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-success">
 
@@ -616,7 +650,7 @@ scenarios:
 
 **Command format**
 
-![list schedule command](images/list-schedules/list-s-syntax.png)
+<img src="images/list-schedules/list-s-syntax.png" height="200px">
 
 <div markdown="block" class="alert alert-info">
 
@@ -709,6 +743,8 @@ Fret not, as you can do just that with the mark command.
 2. Let's say the schedule is at position 1.
 3. Type in `mark 1 m/1` and press enter.
 
+<div style="page-break-after: always;"></div>
+
 **What you can expect to see**
 
 Yay! The schedule has been marked as COMPLETED.
@@ -729,9 +765,12 @@ Yay! The schedule has been marked as COMPLETED.
 * There are only two types of schedule status: MISSED or COMPLETED.
 * To set the status of the specified schedule to MISSED, use `m/0` as 0 indicates the MISSED status.
 * To set the status of the specified schedule to COMPLETED, use `m/1` as 1 indicates the COMPLETED status.
-* Any inputs other than 0 or 1 will result in an invalid status message displayed.
+* You can provide multiple values for the status field, e.g. `mark 1 m/0 m/0 m/1`. Only the last status field will be 
+  used, in the example earlier, it will use `m/1` and set the schedule status to be COMPLETED.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 **Errors you might encounter**
 
@@ -742,7 +781,6 @@ Here is a list of the error messages you may encounter, when the command is ente
 | `Invalid command format!`                                                | Invalid or missing SCHEDULE_INDEX or missing schedule status.      |
 | `The schedule index provided is invalid`                                 | SCHEDULE_INDEX entered is not in the range of number of schedules. |
 | `Status has to be either MISSED (m/0) or COMPLETED (m/1)`                | Schedule status entered is not 0 or 1.                             |
-| `Multiple values specified for the following single-valued field(s): m/` | More than 1 `m/` was given in the command.                         |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -767,6 +805,8 @@ Don't worry, as you can do just that with the unmark command.
 1. Type in `list-s`, press enter, and find the schedule you want to unmark.
 2. Let's say the schedule to be unmarked is at position 1.
 3. Type in `unmark 1` and press enter.
+
+<div style="page-break-after: always;"></div>
 
 **What you can expect to see**
 
@@ -794,6 +834,8 @@ You can also refer to [input information](#input-examples) for details about val
 
 [Back To Top](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Deleting a schedule: `delete-s`
 
 Deletes a schedule from TutorConnect.
@@ -818,6 +860,8 @@ No worries! Let the delete schedule command help you!
 Well done! You have deleted the schedule assigned to **Bernice Yu**.
 
 ![delete schedule](images/delete-schedules/delete-s.png)
+
+<div style="page-break-after: always;"></div>
 
 ##### :star::star::star: Experienced users
 {:.no_toc}
@@ -876,6 +920,8 @@ Woah look at that! The schedules are now being displayed in a calendar form.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ##### :star::star::star: Experienced users
 {:.no_toc}
 
@@ -903,6 +949,8 @@ You can also refer to [input information](#input-examples) for details about val
 
 [Back To Top](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### System Feature
 
 Beyond just providing you with powerful features related to tutors and schedule tracking, TutorConnect offers some 
@@ -928,7 +976,9 @@ Type in `theme blue`.
 
 Wow! A whole new colour scheme.
 
-![change theme](images/changeTheme.png)
+<img src="images/changeTheme.png" height="400px">
+
+<div style="page-break-after: always;"></div>
 
 ##### :star::star::star: Experienced users
 {:.no_toc}
@@ -936,6 +986,19 @@ Wow! A whole new colour scheme.
 **Command format**
 
 ![theme command](images/themeCommandSyntax.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Extra `NEW_THEME` inputs are ignored**<br>
+
+The theme command is a lenient one! Only the first input you provide is used. Any additional inputs thereafter will be 
+ignored. 
+
+For example:
+- `theme blue white`, is equivalent to `theme blue`.
+- `theme white blue`, is equivalent to `theme white` and will encounter an error message.
+
+</div>
 
 **Errors you might encounter**
 
@@ -949,6 +1012,8 @@ Here is a list of the error messages you may encounter, when the command is ente
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
 [Back To Top](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### Clearing all data: `clear`
 
@@ -983,6 +1048,8 @@ That's it. It's all gone. TutorConnect should now display an empty address book.
 
 ![clear addressbook](images/clearAddressBook.png)
 
+<div style="page-break-after: always;"></div>
+
 ##### :star::star::star: Experienced users
 {:.no_toc}
 
@@ -1011,7 +1078,7 @@ Type in `help` and press enter.
 Is that a bird? Is that a plane?
 Nope, it's the help window!
 
-![help window](images/helpWindow.png)
+<img src="images/helpWindow.png" height="300px">
 
 <div markdown="block" class="alert alert-success">
 
@@ -1023,6 +1090,7 @@ The help window can also be accessed by the button in the menu bar (above the co
 
 [Back To Top](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 #### Exiting the program: `exit`
 
@@ -1042,7 +1110,50 @@ TutorConnect closes and the program stops, going into deep slumber, disappearing
 
 [Back To Top](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+#### Saving the data
+
+All your data in TutorConnect is automatically saved in your computer. No more worrying about losing your unsaved data!
+
+##### :star::star::star: Experienced users
+{:.no_toc}
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Exiting the app**<br>
+
+To prevent any unexpected behaviour in TutorConnect, exit the app using only the [`exit`](#exiting-the-program-exit) or
+the close window button.
+
+Do not stop the app from the command terminal (using [Windows](https://www.lifewire.com/open-command-prompt-in-a-folder-5185505) or [Mac](https://support.apple.com/en-sg/guide/terminal/trmlb20c7888/mac#:~:text=On%20your%20Mac%2C%20open%20a,window%3A%20Choose%20Open%20in%20Terminal)).
+
+</div>
+
+[Back To Top](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
+#### Editing the data
+
+##### :star::star::star: Experienced users
+{:.no_toc}
+
+TutorConnect supports manual edits to the data file created locally in your computer.
+Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Invalid edits to data file**<br>
+
+If your changes make the data file invalid, TutorConnect will discard all data at the next run. This data
+cannot be recovered so proceed with caution!
+
+As such, TutorConnect highly recommends you to make a backup of the file before you edit it.
+
+</div>
+
+[Back To Top](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## Frequently Asked Questions
 Have some burning questions you want answered? Check out this FAQ section to find out if others have had the same 
@@ -1068,9 +1179,9 @@ question!
 
 [Back To Top](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
-## Known issues
+## Known Issues
 
 TutorConnect is always looking to improve. Currently, there are a few known issues within the app that our 
 development team is working round the clock to solve. Don't worry, every version of TutorConnect released for you to 
@@ -1085,7 +1196,7 @@ use is sure to solve your scheduling needs.
 
 [Back To Top](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Glossary
 
@@ -1100,32 +1211,32 @@ Here are some descriptions of the words you might come across in the User Guide:
 
 ### Input Examples
 
-| Input Fields                       | ✅                                                | ❌                                             |
-|------------------------------------|--------------------------------------------------|-----------------------------------------------|
-| `n/NAME`                           | John Doe, John Doe123                            | John@Doe                                      |
-| `p/PHONE NUMBER`                   | 98765432, 987                                    | abc, 98                                       |
-| `e/EMAIL`                          | johnd@example.com,<br/>jo@example123-example.com | johnd, johnd@p                                |
-| `st/START_TIME`<br/>`et/END_TIME`  | 2023-09-15T09:00,<br/>2023-09-15T11:00           | 2023-09-15 09:00,<br/>2023-09-15T09           |
-| `m/SCHEDULE STATUS`                | 0, 1                                             | 3, abc                                        |
-| `TUTOR_INDEX`<br/>`SCHEDULE_INDEX` | 1                                                | 0, abc                                        |
-| `DATE`                             | 2023-09-15                                       | 2023-09-15T09:00                              |
-| `NEW_THEME`                        | dark, light, blue                                | white, brown, black                           |
+| Input Fields                       | :heavy_check_mark:                               | :x:                                 |
+|------------------------------------|--------------------------------------------------|-------------------------------------|
+| `n/NAME`                           | John Doe, John Doe123                            | John@Doe                            |
+| `p/PHONE NUMBER`                   | 98765432, 987                                    | abc, 98                             |
+| `e/EMAIL`                          | johnd@example.com,<br/>jo@example123-example.com | johnd, johnd@p                      |
+| `st/START_TIME`<br/>`et/END_TIME`  | 2023-09-15T09:00,<br/>2023-09-15T11:00           | 2023-09-15 09:00,<br/>2023-09-15T09 |
+| `m/SCHEDULE STATUS`                | 0, 1                                             | 3, abc                              |
+| `TUTOR_INDEX`<br/>`SCHEDULE_INDEX` | 1                                                | 0, abc                              |
+| `DATE`                             | 2023-09-15                                       | 2023-09-15T09:00                    |
+| `NEW_THEME`                        | dark, light, blue                                | white, brown, black                 |
 
 ### Input Information
 Here are some inputs you might come across in the User Guide:
 
-| Input               | Description                                       | Limitations                                                                                  |
-|---------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `n/NAME`            | Refers to the name of the tutor.                  | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
-| `p/PHONE NUMBER`    | Refers to the phone number of the tutor.          | Only contain numbers, and should be at least 3 <br/>digits long.                             |
-| `e/EMAIL`           | Refers to the email address of the tutor.         | Of the format local-part@domain[<sup>2</sup>](#note2).                                       |
-| `st/START_TIME`     | Refers to the start time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>3</sup>](#note3) format is accepted.                |
-| `et/END_TIME`       | Refers to the end time of the schedule.           | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>3</sup>](#note3) format is accepted.                |
-| `m/SCHEDULE STATUS` | Refers to the status of schedule in the list.     | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
-| `TUTOR_INDEX`       | Refers to the position of tutor in the list.      | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
-| `SCHEDULE_INDEX`    | Refers to the position of schedule in the list.   | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
-| `DATE`              | Refers to the date to view schedules for.         | Only date in `yyyy-MM-dd` format is accepted.                                                |
-| `NEW_THEME`         | Refers to the name of the new theme to switch to. | Only `dark`, `light` and `blue` themes are supported.                                        |
+| Input               | Description                                       | Limitations                                                                                                                                                |
+|---------------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `n/NAME`            | Refers to the name of the tutor.                  | Only contain alphanumeric characters and spaces, and should not be blank.                                                                                  |
+| `p/PHONE NUMBER`    | Refers to the phone number of the tutor.          | Only contain numbers, and should be at least 3 digits long.                                                                                                |
+| `e/EMAIL`           | Refers to the email address of the tutor.         | Of the format local-part@domain[<sup>2</sup>](#note2).                                                                                                     |
+| `st/START_TIME`     | Refers to the start time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>3</sup>](#note3) format is accepted.                                                                              |
+| `et/END_TIME`       | Refers to the end time of the schedule.           | Only datetime in `yyyy-MM-ddTHH:mm`[<sup>3</sup>](#note3) format is accepted.                                                                              |
+| `m/SCHEDULE STATUS` | Refers to the status of schedule in the list.     | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted                                                                        |
+| `TUTOR_INDEX`       | Refers to the position of tutor in the list.      | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.<br>Additionally, the input cannot be greater than 2147483647.       |
+| `SCHEDULE_INDEX`    | Refers to the position of schedule in the list.   | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.<br>Additionally, the input cannot be greater than 2147483647. |
+| `DATE`              | Refers to the date to view schedules for.         | Only date in `yyyy-MM-dd` format is accepted.                                                                                                              |
+| `NEW_THEME`         | Refers to the name of the new theme to switch to. | Only `dark`, `light` and `blue` themes are supported.                                                                                                      |
 
 
 **<sup id="note1">1</sup> `KEYWORD` Search Format and Behaviour**
@@ -1162,9 +1273,10 @@ Commands reference: [add-s](#adding-a-schedule-add-s), [edit-s](#editing-a-sched
 
 [Back To Top](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+<div style="page-break-after: always;"></div>
+
+## Command Summary
 
 | Action                                                  | Format, Examples                                                                                           |
 |---------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
