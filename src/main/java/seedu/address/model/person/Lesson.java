@@ -37,6 +37,10 @@ public class Lesson {
         this.end = end.getTime();
     }
 
+    /**
+     * Constructor for defensive coding
+     * @param original
+     */
     public Lesson(Lesson original) {
         this.day = original.day;
         this.begin = original.begin;
