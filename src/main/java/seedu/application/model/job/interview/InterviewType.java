@@ -82,7 +82,7 @@ public class InterviewType {
         }
 
         InterviewType otherInterviewType = (InterviewType) other;
-        return interviewType.equals(otherInterviewType.interviewType);
+        return interviewType.equalsIgnoreCase(otherInterviewType.interviewType);
     }
 
     @Override
