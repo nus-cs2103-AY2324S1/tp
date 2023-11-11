@@ -21,7 +21,6 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 
-
 /**
  * Jackson-friendly version of {@link Doctor}.
  */
@@ -66,10 +65,7 @@ public class JsonAdaptedDoctor extends JsonAdaptedPerson {
             personTags.add(tag.toModelDoctorType());
         }
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final List<Appointment> personAppointments = new ArrayList<>();
-        for (JsonAdaptedAppointment appointment : this.getAppointments()) {
-            personAppointments.add(appointment.toModelType());
-        }
+        final List<Appointment> personAppointments = checkAppointments();
         final Set<Appointment> modelAppointments = new HashSet<>(personAppointments);
         return new Doctor(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelGender, modelIc,
                 modelAppointments, modelTags);

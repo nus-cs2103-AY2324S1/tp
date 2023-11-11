@@ -95,7 +95,8 @@ public class Patient extends Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, gender, ic, condition, bloodType, appointments, tags);
+        return Objects.hash(name, phone, emergencyContact, email, address, gender, ic, condition, bloodType,
+                appointments, tags);
     }
 
     @Override

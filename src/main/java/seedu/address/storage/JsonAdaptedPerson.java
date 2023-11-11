@@ -25,6 +25,10 @@ import seedu.address.model.person.Remark;
 public abstract class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MESSAGE_DUPLICATE_APPOINTMENT_TIME =
+            "Person has more than 1 appointment at the same timing!";
+    public static final String MESSAGE_INVALID_APPOINTMENT =
+            "Person contains an appointment that does not belong to him!";
 
     private final String name;
     private final String phone;
@@ -92,6 +96,7 @@ public abstract class JsonAdaptedPerson {
     public List<JsonAdaptedAppointment> getAppointments() {
         return this.appointments;
     }
+
     /**
      * Checks the name given by storage.
      *
@@ -203,6 +208,8 @@ public abstract class JsonAdaptedPerson {
 
     /**
      * Gives the list of appointments of the Person.
+     * Please ensure that this method is called only after the Ic has been added to the person.
+     * This checks for any appointments happening at the same time and any appointments not belonging to this person.
      *
      * @return a List of JsonAdaptedAppointments
      */

@@ -48,21 +48,22 @@ can get your patients management tasks done faster than traditional GUI apps.
 --------------------------------------------------------------------------------------------------------------------
 ## Parameters
 
-The list below contains the parameters that are used in various commands as well as their various constraints. 
+The list below contains the parameters that are used in various commands as well as their various constraints. Failing to input valid parameters will lead to errors when entering commands.
 
-| Parameter           | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Valid Examples                                                                                                  | Invalid Examples         |
-|:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|:-------------------------|
-| NRIC                | Starting with S or T, followed by 7 numbers, and ends with a letter. Not case-sensitive.                                                                                                                                                                                                                                                                                                                                                                                              | T0123456G, s33344476i                                                                                           | T01234567G, “”, t12367K  |
-| Doctor/Patient name | Empty strings are not allowed. Name must contain only alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                        | Cristiano Ronaldo, Tanveer Singh                                                                                | “”, 高橋紳助, s/o someone    |
-| Contact number      | 3 digit or more integer as phone number. Empty strings are not allowed.                                                                                                                                                                                                                                                                                                                                                                                                               | 91234569                                                                                                        | “”,  99                  |
-| Email               | Must be of the format `local-name`@`domain`. `local-name` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-), and may not start or end with any special characters. `domain` is made up of domain labels separated by periods, and must end with a domain label at least 2 characters long. Domain labels start and end with alphanumeric characters, consist of alphanumeric characters, separated only by hyphens, if any. | j@Email.com, isaac@a-b.com                                                                                      | isaac@a+b.com, james.com |
-| Blood type          | Accepts only strings containing valid blood types, that is a combination of A/B/AB/O and +/-.                                                                                                                                                                                                                                                                                                                                                                                         | B+, O, B-, AB                                                                                                   | J, K                     |
-| Address             | Any non-empty string.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Clementi, OneCare@Hougang Avenue                                                                                | ""                       |
-| Gender              | Either the character “M” or “F”.                                                                                                                                                                                                                                                                                                                                                                                                                                                      | M, F                                                                                                            | G, girl, male            |
-| Emergency Contact   | Valid Contact number. Same constraints as the Contact Number parameter.                                                                                                                                                                                                                                                                                                                                                                                                               | 91234569                                                                                                        | “”, 99                   |
-| Condition           | Any non-empty string.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Knee Injury, appendicitis                                                                                       | ""                       |
-| Patient Tag         | Accepts only strings containing valid priority levels, either low, medium or high. Not case-sensitive                                                                                                                                                                                                                                                                                                                                                                                 | low, MEDIUM, hiGh                                                                                               | extreme, med             |
-| Doctor Tag          | Accepts only strings containing valid specialisations. Not case-sensitive. The current allowed specialisations are listed in the examples box.                                                                                                                                                                                                                                                                                                                                        | CARDIOLOGIST, ORTHOPEDIC, PEDIATRICIAN, DERMATOLOGIST, NEUROLOGIST, GENERAL_PRACTITIONER, PSYCHIATRIST, SURGEON | Nurse, Head-Doctor       |
+| Parameter           | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Valid Examples                                                                                                  | Invalid Examples                   |
+|:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|:-----------------------------------|
+| NRIC                | Starting with S or T, followed by 7 numbers, and ends with a letter. Not case-sensitive.                                                                                                                                                                                                                                                                                                                                                                                              | T0123456G, s33344476i                                                                                           | T01234567G, “”, t12367K            |
+| Doctor/Patient Name | Empty strings are not allowed. Name must contain only alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                        | Cristiano Ronaldo, Tanveer Singh                                                                                | “”, 高橋紳助, s/o someone              |
+| Contact Number      | 3 digit or more integer as phone number. Empty strings are not allowed.                                                                                                                                                                                                                                                                                                                                                                                                               | 91234569                                                                                                        | “”,  99                            |
+| Email               | Must be of the format `local-name`@`domain`. `local-name` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-), and may not start or end with any special characters. `domain` is made up of domain labels separated by periods, and must end with a domain label at least 2 characters long. Domain labels start and end with alphanumeric characters, consist of alphanumeric characters, separated only by hyphens, if any. | j@Email.com, isaac@a-b.com                                                                                      | isaac@a+b.com, james.com           |
+| Blood Type          | Accepts only strings containing valid blood types, that is a combination of A/B/AB/O and +/-. Letters must be in caps.                                                                                                                                                                                                                                                                                                                                                                | B+, O+, B-, AB+                                                                                                 | J, K, A, O                         |
+| Address             | Any non-empty string.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Clementi, OneCare@Hougang Avenue                                                                                | ""                                 |
+| Gender              | Either the character “M” or “F”. Must be in caps.                                                                                                                                                                                                                                                                                                                                                                                                                                     | M, F                                                                                                            | G, girl, male, f                   |
+| Emergency Contact   | Valid Contact number. Same constraints as the Contact Number parameter.                                                                                                                                                                                                                                                                                                                                                                                                               | 91234569                                                                                                        | “”, 99                             |
+| Condition           | Any non-empty string.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Knee Injury, appendicitis                                                                                       | ""                                 |
+| Patient Tag         | Accepts only strings containing valid priority levels, either low, medium or high. Not case-sensitive.                                                                                                                                                                                                                                                                                                                                                                                | low, MEDIUM, hiGh                                                                                               | extreme, med                       |
+| Doctor Tag          | Accepts only strings containing valid specialisations. Not case-sensitive. The current allowed specialisations are listed in the examples box.                                                                                                                                                                                                                                                                                                                                        | CARDIOLOGIST, ORTHOPEDIC, PEDIATRICIAN, DERMATOLOGIST, NEUROLOGIST, GENERAL_PRACTITIONER, PSYCHIATRIST, SURGEON | Nurse, Head-Doctor                 |
+| Time                | Accepts only strings that follow the specified format (ie. `yyyy-MM-dd HH:mm`), where `HH:mm` follows the 24hr format.                                                                                                                                                                                                                                                                                                                                                                | 2016-10-10 18:00, </br> 2000-01-30 23:59                                                                        | 2005-10-32 18:00, 2016-11-02 27:00 |
 
 ## Features
 
@@ -115,19 +116,16 @@ A doctor can have any number of tags (including 0). Duplicate tags, however, are
 
 - A doctor **MUST** have all fields non-empty except TAG.
   Failure to include these details may result in an error.
-- A person can either be a doctor or a patient, but not both. Hence if the doctor's IC is already in the app
-as a patient, it may result in an error.
-- Phone Numbers and Emails have to be in a valid format.
-- PHONE_NUMBER must have exactly 8 digits.
-- EMAIL must contain email domain (eg. `@gmail.com`).
-- PATIENT must contain the valid IC of a Patient in the Database.
-- Tags for doctors represent the specialisation(s) of the doctor. Only tags from the list below are supported 
-in our current version:
-
-  `CARDIOLOGIST, ORTHOPEDIC, PEDIATRICIAN, DERMATOLOGIST, NEUROLOGIST, GENERAL_PRACTITIONER, PSYCHIATRIST, SURGEON`
-- Tags are not case-sensitive (e.g. `t/SURGEON` and `t/surgeon` are both valid inputs).
 - The order is not important (i.e, IC can come before NAME). What matters is that all the mandatory fields are declared,
 and the format for each field is adhered to.
+- A person can either be a doctor or a patient, but not both. Hence if the doctor's IC is already in the app
+as a patient, it may result in an error.
+- Adding additional prefixes (eg. `b/O+`) not specified by the command format above will be considered as a **parameter input**. For example:</br>
+  `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/O+` will result
+  in Address inputted as `a/John street, block 123, #01-01 b/O+`. </br>
+  Do avoid adding  your own prefixes as it may lead to unwanted errors!
+- However, inputting `r/REMARKS` will be ignored and automatically removed by the system. To add remarks, use the Edit Command mentioned later below.
+
 </div>
 
 Examples:
@@ -179,7 +177,7 @@ corresponding error message since no field supports empty inputs.
 3. Adding custom prefixes <br>
 Adding custom prefixes will mostly cause the preceding flag to become invalid. <br>
 Exceptions:
-   * Adding 'custom' flags to the address field will, however be accepted as
+   * Adding 'custom' flags to the address or condition field will, however, be accepted as
 Addresses may involve the usage of the `/` character. Hence, take note to use the address field carefully.
    * Adding the 'custom' flag before any other field will recognise the input to be of Invalid Command Format.
 <br>
@@ -203,22 +201,16 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
 
 **:information_source: Take Note:**<br>
 
-- A patient **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result
-  in an error.
+- A patient cannot have the same NRIC as another person.
 - A person can either be a doctor or a patient, but not both. Hence, if the patient's IC is already in the app
     as a doctor, it may result in an error.
-- Phone Numbers and Emails have to be in a valid format.
-    - PHONE_NUMBER must have at least 3 digits.
-    - EMAIL must contain email domain (eg. `@gmail.com`).
-- TAG must indicate Priority Level of the Patient and be one of the following:
-  - Low
-  - Medium
-  - High
 - EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number. This number can be the same the person's contact number.
-- Blood type must be a combination of A/B/AB/O and +/-.
 - A patient can only have up to one tag at any time.
-- Tags for patients represent the priority level of the patient. Only the following tags are allowed: Low, Medium, High.
-- Tags are not case-sensitive (e.g. `t/LOW` and `t/low` are both valid inputs).
+- Adding additional prefixes (eg. `k/Always Injured`) not specified by the command format above will be considered as a **parameter input**. For example:</br>
+  `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax k/Always Injured b/O+` will result
+  in Condition inputted as `pneumothorax k/Always Injured`. </br>
+  Do avoid adding  your own prefixes as it may lead to unwanted errors!
+- However, inputting `r/REMARKS` will be ignored and automatically removed by the system. To add remarks, use the Edit Command mentioned later below.
 
 </div>
 
@@ -237,10 +229,9 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- TIME must follow the specified format (ie. `yyyy-MM-dd HH:mm`), where `HH:mm` follows the 24hr format.
 - PATIENT must contain the valid IC of a Patient in the Database.
 - DOCTOR must contain the valid IC of a Doctor in the Database.
-- There must not be conflicting Appointments. (eg the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
+- There must not be conflicting Appointments. (eg. the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
 
 </div>
 
@@ -298,22 +289,22 @@ Edits an existing person in the MediLink Contacts.
 
 Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `NRIC`. The NRIC **must be a valid IC number**
+* Edits the person with the specified `NRIC`. The NRIC **must be a valid IC number**
 * At least one of the optional fields must be provided.
 * If the provided fields are the same as the original, the command will still work.
 * Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition of a
-  doctor)
+  doctor).
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
-* Note: In our app, the Remark Section will be left blank by default. Edit Command can be used to add any misc info not captured by other fields such as possible allergies, medical history, etc.
+* Note: In our app, the Remark Section will be left blank by default. The edit Command can be used to add any miscellaneous info not captured by other fields such as possible allergies, medical history, etc.
 
 Examples:
 
-* `edit T0123456A p/91234567 e/johndoe@example.com g/F` Edits the phone number and email address of the 1st person to
+* `edit T0123456A p/91234567 e/johndoe@example.com g/F` edits the phone number and email address of the 1st person to
   be `91234567` and `johndoe@example.com` respectively.
-* `edit S9876543B n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all
+* `edit S9876543B n/Betsy Crower t/` edits the name of the 2nd person to be `Betsy Crower` and clears all
   existing tags.
 
 ### Locating persons by name: `find`
@@ -322,42 +313,42 @@ Finds persons that match the query.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* When searching names, the search is case-insensitive. e.g `hans` will match `Hans`
-* When searching names, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* When searching names, only full words will be matched e.g. `Han` will not match `Hans`
+* When searching names, the search is case-insensitive. e.g `hans` will match `Hans`.
+* When searching names, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* When searching names, only full words will be matched e.g. `Han` will not match `Hans`.
 * When searching names, Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 * Note that if the name coincides with other find commands, it will be interpreted as the other find command first and extraneous paremeters will be ignored. e.g. `find F Kennedy John` will search for all female persons. 
-* It is recommended to use `list` to restore the view of all data after a `find` command
+* It is recommended to use `list` to restore the view of all data after a `find` command.
 
 Examples:
 
-* `find John` returns `john` and `John Doe`
-* `find kenny pickens` returns `Kenny Pickett`, `George Pickens`<br>
+* `find John` returns `john` and `John Doe`.
+* `find kenny pickens` returns `Kenny Pickett`, `George Pickens`. <br>
   ![result for 'find alex david'](images/findpickettpickensresult.png)
 
 
 ### Locating a person by NRIC : `find` ###
 
-Finds person that matches the NRIC query
+Finds person that matches the NRIC query.
 
 Format: `find NRIC`
 
 * NRIC input must be capitalised!
-* It is recommended to use `list` to restore the view of all data after a `find` command
+* It is recommended to use `list` to restore the view of all data after a `find` command.
 
 Examples:
 
-* `find T1125726G` returns the person with the matching NRIC
+* `find T1125726G` returns the person with the matching NRIC.
 
 ### Locating people by gender : `find M`, `find F` ###
 
-Finds all persons with matching gender
+Finds all persons with matching gender.
 
 Format: `find M` or `find F`
 
-* M and F must be capitalised
-* It is recommended to use `list` to restore the view of all data after a `find` command
+* M and F must be capitalised.
+* It is recommended to use `list` to restore the view of all data after a `find` command.
 
 Examples:
 
@@ -365,17 +356,15 @@ Examples:
 
 ### Locating people by blood types : `find Blood Type` ###
 
-Finds all Patients with query blood type
+Finds all Patients with query blood type.
 
 Format: `find Blood Type QUERY` 
 
-* All blood type inputs must be capitalised
-* Acceptable blood types are A, A+, B, B+, O, O+, AB and AB+
-* It is recommended to use `list` to restore the view of all data after a `find` command
+* It is recommended to use `list` to restore the view of all data after a `find` command.
 
 Examples:
 
-* `find Blood Type A+` returns all Patients with blood type A+
+* `find Blood Type A+` returns all Patients with blood type A+.
 
 ### Deleting a person : `delete`
 
@@ -384,12 +373,10 @@ Deletes the specified person from the address book.
 Format: `delete NRIC`
 
 * Deletes the person with the specified NRIC.
-* The NRIC **must be a valid NRIC format** and must belong to a person in the addressbook.
-* The NRIC is case-sensitive. e.g `tXXXXXXXz` is not the same as `TXXXXXXXZ`
 
 Examples:
 
-* `delete S1234567J` deletes Jonathan who has the NRIC `S1234567J`
+* `delete S1234567J` deletes Jonathan who has the NRIC `S1234567J`.
 
 ### Clearing all entries : `clear`
 
@@ -399,6 +386,13 @@ Format: `clear`
 
 ### Undo last action : `undo`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
+- Upon restarting the app, you will no longer be able to undo actions previously performed before exiting the app.
+
+</div>
+
 Undoes the effect of the last command.
 
 Format: `undo`
@@ -407,7 +401,14 @@ Format: `undo`
 
 ### Redo last action : `redo`
 
-Repeats the previous command; an `undo` for an `undo` command.
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
+- Upon restarting the app, you will no longer be able to redo actions previously undone before exiting the app.
+
+</div>
+
+Restores the effects of actions that were previously undone using the undo command. 
 
 Format: `redo`
 
@@ -426,12 +427,11 @@ need to save manually.
 
 ### Editing the data file
 
-MediLink Contacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced
-users are welcome to update data directly by editing that data file.
+MediLink Contacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file. However, please ensure that the edits are valid, else it may cause unexpected behaviours when the invalid data is not detected by the system.
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, MediLink Contacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, MediLink Contacts may discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it. Some changes may also be invalid, but not detected by the system. In that case, there may be many unexpected behaviours due to those undetected errors.
 </div>
 
 ### Archiving data files `[coming in v2.0]`

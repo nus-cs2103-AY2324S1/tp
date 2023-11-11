@@ -6,18 +6,21 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDoctor.BOYD;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.testutil.AppointmentBuilder;
 
 public class JsonAdaptedDoctorTest {
     private static final String INVALID_NAME = "R@chel";
@@ -36,10 +39,12 @@ public class JsonAdaptedDoctorTest {
     private static final String VALID_REMARK = BOYD.getRemark().toString();
     private static final String VALID_GENDER = BOYD.getGender().toString();
     private static final String VALID_NRIC = BOYD.getIc().toString();
+    private static final Appointment BOYD_APPOINTMENT =
+            new AppointmentBuilder().withPatientIc(BOYD.getIc()).build();
     private static final List<JsonAdaptedTag> VALID_TAGS = BOYD.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedAppointment> VALID_APPOINTMENTS = BOYD.getAppointments().stream()
+    private static final List<JsonAdaptedAppointment> VALID_APPOINTMENTS = Arrays.asList(BOYD_APPOINTMENT).stream()
             .map(JsonAdaptedAppointment::new)
             .collect(Collectors.toList());
 
