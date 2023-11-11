@@ -5,6 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FindAppointmentCommandParser" as FindAppointmentCommandParser LOGIC_COLOR
+participant "PatientContainsKeywordsPredicate" as PatientContainsKeywordsPredicate LOGIC_COLOR
 participant ":FindAppointmentCommand" as FindAppointmentCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -13,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("find-a")
+[-> LogicManager : execute("find-a John")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find-a")
+LogicManager -> AddressBookParser : parseCommand("find-a John")
 activate AddressBookParser
 
 create FindAppointmentCommandParser
@@ -26,12 +27,20 @@ activate FindAppointmentCommandParser
 FindAppointmentCommandParser --> AddressBookParser
 deactivate FindAppointmentCommandParser
 
-AddressBookParser -> FindAppointmentCommandParser : parse("find-a")
+AddressBookParser -> FindAppointmentCommandParser : parse("John")
 activate FindAppointmentCommandParser
+
+create PatientContainsKeywordsPredicate
+FindAppointmentCommandParser -> PatientContainsKeywordsPredicate
+activate PatientContainsKeywordsPredicate
+
+PatientContainsKeywordsPredicate --> FindAppointmentCommandParser : PatientContainsKeywordsPredicate
+deactivate PatientContainsKeywordsPredicate
 
 create FindAppointmentCommand
 FindAppointmentCommandParser -> FindAppointmentCommand
 activate FindAppointmentCommand
+
 
 FindAppointmentCommand --> FindAppointmentCommandParser : findAppointmentCommand
 deactivate FindAppointmentCommand
@@ -45,10 +54,10 @@ destroy FindAppointmentCommandParser
 AddressBookParser --> LogicManager : findAppointmentCommand
 deactivate AddressBookParser
 
-LogicManager -> FindAppointmentCommand : execute()
+LogicManager -> FindAppointmentCommand : execute(model)
 activate FindAppointmentCommand
 
-FindAppointmentCommand -> Model : updateFilteredAppointmentList()
+FindAppointmentCommand -> Model : updateFilteredAppointmentList(PatientContainsKeywordsPredicate)
 activate Model
 
 Model --> FindAppointmentCommand

@@ -399,7 +399,7 @@ Note:
 
 The following sequence diagram shows how the find appointment command works:
 
-![FindAppointmentCommandSequenceDiagram](images/UpcomingCommandSequenceDiagram.png)
+![FindAppointmentCommandSequenceDiagram](images/FindAppointmentCommandSequenceDiagram.png)
 
 ### Display upcoming appointments feature
 
