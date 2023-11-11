@@ -280,6 +280,26 @@ public class ParserUtilTest {
         String date = "31-02-2022";
         assertFalse(ParserUtil.isValidDay(yearMonth, date));
     }
+
+    @Test
+    void parseDate_validDate_shouldParseSuccessfully() throws ParseException {
+        String validDateString = "29-02-2024";
+        try {
+            ParserUtil.parseDate(validDateString);
+        } catch (ParseException e) {
+            fail();
+        }
+    }
+    @Test
+    void parseDate_invalidDate_shouldThrowParseException() {
+        // 29th Feb for non leap year
+        String invalidDateString1 = "29-02-2022";
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(invalidDateString1));
+
+        // No 31st Nov
+        String invalidDateString2 = "31-04-2023";
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(invalidDateString2));
+    }
     @Test
     void parseAppointmentDate_validDate_shouldParseSuccessfully() throws ParseException {
         String validDateString = "29-02-2024 14:30";
