@@ -643,48 +643,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is `UNOFAS` and the **Actor** is the `financial advisor`, unless specified otherwise)
-
-
-
-**U1: Add a client** \
-**Precondition:** NIL
+-----
+**Use Case: UC01 - Show a list of all clients**\
+**Precondition:** NIL\
+**Guarantees**: A list of all clients' contact is shown.
 
 **MSS**
+1. User requests to list all clients.
+2. UNOFAS shows a list of all patients.\
+    Use case ends.
 
+**Extensions**
+* 2a. the list is empty.\
+    Use case ends.
+------
+**Use Case: UC02 - Add a client** \
+**Precondition:** NIL\
+**Guarantees**: A client contact is added into UNOFAS only if the data entered is correct.
+
+**MSS**
 1.  User request to add a client to the list
 2.  AddressBook adds the client
 
     Use case ends.
 
 **Extensions**
-
 * 1a. Client details are invalid.
     * 1a1. System shows an error message.
 
       Use case resumes at step 1.
-
-**U2: View list of clients** \
-**Precondition:** NIL
-
-**MSS**
-
-1.  User requests to list clients
-2.  System shows a list of clients
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-**U3: Edit a client's contacts** \
-**Precondition:** NIL
+------
+**Use Case: UC03 - Edit a client's contacts** \
+**Precondition:** NIL\
+**Guarantees**: A client contact is edited in UNOFAS only if the data entered is correct.
 
 **MSS**
 
-1.  User requests to list clients
+1.  User requests to <u>list clients (UC01)</u>
 2.  AddressBook shows a list of clients
 3.  User request to edit client’s contacts from the list
 4.  AddressBook changes the client’s contacts
@@ -693,40 +688,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The list is empty.
-
-  Use case ends.
-
 * 3a. User enters the wrong details.
 
     * 3a1. System shows an error message.
 
       Use case resumes at step 1.
-
-**U4: Delete a client** \
-**Precondition:** NIL
+------
+**Use Case: UC04 - Delete a client** \
+**Precondition:** NIL\
+**Guarantees**: A client contact is deleted from UNOFAS only if the data entered is correct.
 
 **MSS**
 
-1. User requests to delete a specific client in the list
-2. System deletes the client
+1. User requests to <u>list clients (UC01)</u>
+2. User requests to delete a specific client in the list
+3. System deletes the client
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 2a. The specified client is non-existent.
 
-  Use case ends.
+    * 2a1. System shows an error message.
 
-* 1b. The specified client is non-existent.
-
-    * 1b1. System shows an error message.
-
-      Use case resumes at step 1.
-
-**U5: Find a client** \
-**Precondition:** NIL
+      Use case resumes at step 2.
+------
+**Use Case: UC05 - Find a client** \
+**Precondition:** NIL\
+**Guarantees**: A list of clients that matches the query is displayed.
 
 **MSS**
 
@@ -740,37 +730,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
-
-**U6: Assign financial plan to a client** \
-**Precondition:** NIL
+------
+**Use Case: UC06 - Assign financial plan to a client** \
+**Precondition:** NIL\
+**Guarantees**: A financial plan is assigned to a client in UNOFAS only if the data entered is correct.
 
 **MSS**
 
-1.  User requests to list clients
+1.  User requests to <u>list clients (UC01)</u>
 2.  AddressBook shows a list of clients
-3.  User request to add financial plan to client’s contacts from the list via the `edit` command.
+3.  User request to <u>add financial plan to client’s contacts (UC03)</u>
 4.  AddressBook changes the client’s contacts
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
-
-  Use case ends.
-
 * 3a. User enters the wrong details.
 
     * 3a1. System shows an error message.
 
       Use case resumes at step 1.
-
-**U7: Sort client's contacts** \
-**Precondition:** NIL
+------
+**Use Case: UC07 - Sort client's contacts** \
+**Precondition:** NIL\
+**Guarantees**: The contact list will be sorted in ascending order according to the sort function specified.
 
 **MSS**
 
-1. User requests to list clients
+1.  User requests to <u>list clients (UC01)</u>
 2. AddressBook shows a list of clients
 3. User requests to sort list of clients (by appointment time or name)
 4. AddressBook updates ordering of clients' contacts.
@@ -779,19 +767,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The list is empty.
-  Use case ends.
-
 * 3a. User enters the wrong details.
     * 3a1. System shows an error message.
       Use case resumes at step 1.
-
-**U8: Schedule appointment for a client** \
-**Precondition:** Client must exist before scheduling appointment.
+------
+**Use Case: UC08 - Schedule appointment for a client** \
+**Precondition:** Client must exist before scheduling appointment.\
+**Guarantees**: An appointment is scheduled for a client in UNOFAS only if the data entered is correct.
 
 **MSS**
 
-1.  User requests to list clients
+1.  User requests to <u>list clients (UC01)</u>
 2.  AddressBook shows a list of clients
 3.  User request to schedule appointment for client via the `schedule` command
 4.  AddressBook changes the client’s contacts
@@ -800,9 +786,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The list is empty.
-  Use case ends.
-
 * 3a. User enters the wrong details.
     * 3a1. System shows an error message.
       Use case resumes at step 1.
@@ -810,13 +793,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b. User has an existing appointment scheduled.
     * 3a1. System shows a warning message.
       Use case resumes at step 4.
-
-**U9: Complete appointment for a client** \
-**Precondition:** Appointment and client must exist before completing appointment.
+------
+**Use Case: UC09 - Complete appointment for a client** \
+**Precondition:** Appointment and client must exist before completing appointment.\
+**Guarantees**: An appointment is completed for a client in UNOFAS only if the data entered is correct.
 
 **MSS**
 
-1.  User requests to list clients
+1.  User requests to <u>list clients (UC01)</u>
 2.  AddressBook shows a list of clients
 3.  User requests to complete appointment for client via the `complete` command
 4.  AddressBook removes appointment from appointment list and client's contact card
@@ -824,9 +808,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
-
-* 1a. The list is empty.
-  Use case ends.
 
 * 3a. User enters the wrong details.
     * 3a1. System shows an error message.
@@ -839,7 +820,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3c. User does not exist according to index provided.
     * 3c1. System shows a warning message.
       Use case ends.
-
+------
 
 ### Non-Functional Requirements
 
