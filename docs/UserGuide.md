@@ -36,14 +36,14 @@ Choose a topic from the table of contents below to find out how to manage your c
 
 5. Change the directory of the terminal by using the `cd` command.
 
-    a. For example, if I saved my file at `C:\Users\John\Desktop\Connectify\connectify.jar`, run the command `cd C:\Users\John\Desktop\Connectify` in your terminal.
+    a. For example, if you saved your file at `C:\Users\John\Desktop\Connectify\connectify.jar`, run the command `cd C:\Users\John\Desktop\Connectify` in your terminal.
 
 6. Run `java -jar connectify.jar` to start the application.
 
 7. A window similar to the one below should appear in a few seconds, containing sample data.
 
    <figure>
-       <img src="images/StartupGUI.png" alt="Connectify GUI during start-up">
+       <img src="images/Ui.png" alt="Connectify GUI during start-up">
        <figcaption align="center">
            <em>The GUI you see on start-up may be slightly different due to differences in data.</em>
        </figcaption>
@@ -67,13 +67,21 @@ Choose a topic from the table of contents below to find out how to manage your c
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
 # Reading the examples in this user guide
 
 The examples in this guide are formatted with the following conventions:
 * **Command** - The command to be typed into the command box.
-* **Command word(s)** - Words that specify the type of command to be executed. Written in ***bold italics***, always at the start of a line.
-* **Flags** - Indicators to differentiate various parts of the command. Always take the format `$/` followed by a **Parameter**. The `$` varies depending on the type of flag. <br/> E.g., `o/` in ***interaction*** command specifies the **Outcome** of the interaction, while `l/` in ***edit*** command specifies the **Lead** of the client.
-* **Parameters** - Component of the command that usually follows a **Flag**. A parameter might be written without a flag for some commands where it is clear what the parameter is referring to. <br/> E.g., `INDEX` following an ***edit*** command specifies the index of the client to be edited.
+
+* **Command word** - Words that specify the type of command to be executed. Written in ***bold italics***, always at the start of a line.
+
+* **Flags** - Indicators to differentiate various parts of the command. It takes the format `$/` followed by a **Parameter**. The `$` varies depending on the type of flag.
+
+    e.g. `o/` in ***interaction*** command specifies the **Outcome** of the interaction, while `l/` in ***edit*** command specifies the **Lead** of the client.
+
+* **Parameters** - Component of the command that usually follows a **Flag**. A parameter might be written without a flag for some commands where it is clear what the parameter is referring to.
+
+    e.g. `INDEX` following an ***edit*** command specifies the index of the client to be edited.
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -81,12 +89,42 @@ The examples in this guide are formatted with the following conventions:
 
 # Features
 
-## Quick notes about the command format
-- Everything related to the command is case-sensitive unless otherwise stated.
-- Words in `UPPER_CASE` are the parameters to be supplied by the user. <br/> E.g., in `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
-- Parameters that are optional are indicated with square brackets `[OPTIONAL]`. <br/> E.g., in `[tg/TELEGRAM]`, `TELEGRAM` is an optional parameter which can be used as `tg/@john_doe` or omitted.
-- Parameters specified in the command can be written in any order. <br/> E.g., `n/John Doe tg/@john_doe` is equivalent to `tg/@john_doe n/John Doe`.
-- Optional parameters with `...` after the square bracket can be repeated any number of times, including zero. <br/> E.g., in `[tag/TAG]...`, multiple tags can be supplied as `tag/important tag/urgent` or omitted.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format**<br>
+
+- Commands usually start with a command word.
+
+    e.g. `create`, `edit` and `bye` are command words.
+
+- Flags are indicators to differentiate various parts of the command. It consists of a letter and a character `/`.
+
+    e.g. in `n/NAME`, `n/` is the flag for the `NAME` parameter.
+
+- Parameters are words in `UPPER_CASE`, to be supplied by the user.
+
+    e.g. in `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
+
+- Commands, flags and parameters are case-sensitive, unless otherwise specified.
+
+- Items in square brackets are optional.
+
+   e.g. `n/NAME [tg/TELEGRAM]` can be used as `n/John Doe tg/@johndoe` or as `n/John Doe`.
+
+- Items with `...` after them can be repeated any number of times, including zero.
+
+   e.g. `[t/TAG]...` can be used as ` ` (0 times), `t/friend`, or `t/friend t/neighbour`, while
+`n/NAME` has to be used exactly once.
+
+- Parameters can be entered in any order.
+
+   e.g. If the command specifies its parameters as `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
+
+- Extraneous parameters for commands that do not take in parameters will be ignored.
+
+    e.g. The ***list*** command does not take in any parameters. If the command `list 123` is entered, it will be interpreted as `list`.
+
+</div>
 
 ## Viewing help: ***help***
 
@@ -111,6 +149,16 @@ Use the ***create*** command to add a client profile.
 create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [tg/TELEGRAM]
 [pf/PROFESSION] [i/INCOME] [d/DETAILS]
 ```
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Unique profiles**<br>
+
+Connectify checks for the uniqueness of a profile by its `NAME`. It doesn't allow you to create two profiles with the same name. If you happen to have two clients with the exact same name, you can possibly further differentiate them by adding some notes in brackets!
+
+e.g. `John Doe (Company A)` vs `John Doe (Company B)`
+
+</div>
 
 **Example**
 ```text
@@ -137,17 +185,36 @@ After adding a client profile, you can now log your interactions with the client
 ```text
 interaction INDEX o/OUTCOME [DETAILS]
 ```
-Where `INDEX` refers to the index of the client profile in the displayed list of clients.
 
-Note that at least one of the `OUTCOME` or `DETAILS` parameters must be provided.
+<div markdown="block" class="alert alert-info">
 
-**Examples**
+**:information_source: Notes about the interaction command**<br>
+
+- `INDEX` refers to the index of the client profile in the displayed list of clients.
+
+- At least one of the `OUTCOME` or `DETAILS` paramters must be provided.
+
+</div>
+
+**Example**
 ```
-interaction 1 o/INTERESTED Meeting with client
+interaction 7 o/INTERESTED First meeting with client, she seems interested!
 ```
-```
-interaction 1 Meeting with client
-```
+
+<figure>
+    <img src="images/ExampleInteractionBefore.png" alt="Profile before adding an interaction">
+    <figcaption align="center">
+        <em>There are initially no past interactions for Bernice Yu's profile.</em>
+    </figcaption>
+</figure>
+
+<figure>
+    <img src="images/ExampleInteractionAfter.png" alt="Profile after adding an interaction">
+    <figcaption align="center">
+        <em>Result of adding an interaction for Bernice Yu's profile.</em>
+    </figcaption>
+</figure>
+<br>
 
 You should directly see the interaction added to the client profile in the application window.
 
@@ -171,23 +238,31 @@ Use the ***dashboard*** command to view a summarized information of all your cli
 dashboard
 ````
 
-![Ui](images/Dashboard.png)
-***Statistics*** shows...
+You should see the following dashboard view in the application window.
 
-1) Uncontacted / Contacted / Closed clients
-2) Average interactions amongst all clients
-2) Breakdown of the different interaction outcomes
-3) Spread of HOT / WARM / COLD leads
+<figure>
+   <img src="images/Dashboard.png" alt="Dashboard view">
+   <figcaption align="center">
+       <em>The dashboard view. Data shown may vary.</em>
+   </figcaption>
+</figure>
+<br>
 
-While ***Follow-Ups*** shows...
-1) Follow ups in the future, with follow up dates being determined by the day of last interaction plus follow up times (determined by lead type as shown below)
+On the left, we have Connectify's statistics which shows:
+
+1. Uncontacted / Contacted / Closed clients
+2. Average interactions amongst all clients
+2. Breakdown of the different interaction outcomes
+3. Number of HOT / WARM / COLD leads
+
+On the right, we have the follow-ups section which shows upcoming follow-ups. Follow-up dates are determined by the day of last interaction plus a follow-up period, determined by lead type as shown:
 
 | LeadType | Follow-Up Time |
-|---|----------------|
-| HOT | 1 week         |
-| WARM | 4 weeks        |
-| COLD | 8 weeks        |
-| UNKNOWN | 4 weeks        |
+|----------|----------------|
+| HOT      | 1 week         |
+| WARM     | 4 weeks        |
+| COLD     | 8 weeks        |
+| UNKNOWN  | 4 weeks        |
 
 ### Viewing the list of clients: ***list***
 
@@ -198,31 +273,54 @@ You might want to go back to the list of clients you have added to Connectify. U
 list
 ```
 
+<figure>
+    <img src="images/ExampleEditBefore.png" alt="Client list view">
+    <figcaption align="center">
+        <em>The client list view. Data shown may vary.</em>
+    </figcaption>
+</figure>
+<br>
+
 You should then see the list of clients in the application window.
 
 ### Finding a client by name: ***find***
 
-Managing a large number of clients can be difficult. Some of our commands use indexes to refer to a client profile. This might be difficult to remember if you have a large number of clients.
-
-Don't worry, though, we have a solution for you! You can use the ***find*** command to search for a client by name.
+Managing a large number of clients can be difficult. Some of our commands use indexes to refer to a client profile. This might be difficult to remember if you have a large number of clients. Don't worry though, we have a solution for you! You can use the ***find*** command to search for a client by name.
 
 **Format**
 ```text
 find NAME
 ```
-💡 You don't need to type the full name of the client. You can type either the first name or last name and the command will return clients whose name contains the search term.
 
-Example:
-Finding a client with the name "John Doe"
-```
-find John Doe
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the find command**<br>
+
+You need to type either the **first** name or the **last** name of the client. You cannot type part of the client's name!
+
+</div>
+
+**Example**
+```text
+find David
 ```
 
-Example:
-Finding a client with the name "Chemmy Lee". Notice that you don't need to type the full name of the client.
-```
-find Chemmy
-```
+<figure>
+    <img src="images/ExampleEditBefore.png" alt="Client list view">
+    <figcaption align="center">
+        <em>The client list view. Data shown may vary.</em>
+    </figcaption>
+</figure>
+<br>
+
+<figure>
+    <img src="images/ExampleFindAfter.png" alt="Client list containing David's profile">
+    <figcaption align="center">
+        <em>Result of executing the above find command: David's profile is found at index 1. Indices may be different.</em>
+    </figcaption>
+</figure>
+<br>
+
 
 ### Viewing the full details of a client: ***view***
 
@@ -234,7 +332,36 @@ Well, not anymore! With Connectify, you can view the full details of a client an
 ```text
 view INDEX
 ```
-where INDEX refers to the index of the client profile in the displayed list of clients.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the view command**<br>
+
+`INDEX` refers to the index of the client profile in the displayed list of clients.
+
+</div>
+
+**Example**
+```text
+view 4
+```
+
+<figure>
+    <img src="images/ExampleEditBefore.png" alt="Client list view">
+    <figcaption align="center">
+        <em>The client list view. Note that David's profile is at index 4.</em>
+    </figcaption>
+</figure>
+<br>
+
+<figure>
+    <img src="images/ExampleViewAfter.png" alt="Detailed view of David's profile">
+    <figcaption align="center">
+        <em>Result of executing the above view command: David's profile details are shown.</em>
+    </figcaption>
+</figure>
+<br>
+
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -249,7 +376,7 @@ Not only that, you might find yourself needing to update the details of a client
 
 **Format**
 ```text
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [l/LEAD]
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]... [l/LEAD] 
 [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]
 ```
 
@@ -273,6 +400,15 @@ Example
         <em>Result of running commands (1) to (3).</em>
     </figcaption>
 </figure>
+<br>
+
+<div markdown="block" class="alert alert-warning">
+
+**:bulb: Clearing all tags of a particular client**<br>
+
+You can use the ***edit*** command to clear all tags of a client by supplying an empty tag parameter! For example, if you wish to clear the tags of a client at index 4, you can use `edit 4 t/`.
+
+</div>
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -286,9 +422,12 @@ Keep the list of clients in Connectify clean by deleting client profiles that ar
 
 Deleting a client profile is easy with the ***delete*** command.
 
-Format: `delete INDEX`
+**Format**
+```text
+delete INDEX
+```
 
-Example:
+**Example**
 ```
 delete 1
 ```
@@ -302,18 +441,25 @@ delete 1
 ## `INCOME` Parameter
 
 Incomes must only consist of numerical inputs. Connectify does not yet support:
-- Decimal values `600.50`
-- Currencies `10000 USD`
-- Other non-numeric input e.g. `10,000`
+* Decimal values `600.50`
+* Currencies `10000 USD`
+* Other non-numeric input e.g. `10,000`
 
 --------------------------------------------------------------------------------------------------------------------
 
-# FAQ [coming soon]
+# FAQ
 
+**Q**: How do I save my progress?
+<br>
+**A**: Your progress is saved after every command.
+
+**Q**: How do I transfer my data to another computer?
+<br>
+**A**: Download Connectify on the other computer and overwrite the data folder it creates with the data folder of your previous Connectify home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Known issues [coming soon]
+# Known issues 
 
 --------------------------------------------------------------------------------------------------------------------
 
