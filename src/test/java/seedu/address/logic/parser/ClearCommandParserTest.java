@@ -20,11 +20,11 @@ class ClearCommandParserTest {
     }
 
     @Test
-    public void parse_emptyArgs_throwsParseException() {
+    public void parse_emptyArgs_returnsClearCommandWithFirstPrompt() throws ParseException {
         String emptyArgs = "";
-        String expectedErrorMessage = String.format(ClearCommand.MESSAGE_USAGE);
-        ParseException exception = assertThrows(ParseException.class, () -> parser.parse(emptyArgs));
-        assertEquals(expectedErrorMessage, exception.getMessage());
+        ClearCommand expectedClearCommand = new ClearCommand("reset prompt");
+        ClearCommand clearCommand = parser.parse(emptyArgs);
+        assertEquals(expectedClearCommand, clearCommand);
     }
 
     @Test
