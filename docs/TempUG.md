@@ -1180,6 +1180,9 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 ## FAQ
 
+**Q**: How do I install Java version 11? <br>
+**A**: You can follow the steps [here](https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk) to install Java 11 to your laptop.
+
 **Q**: How do I transfer my data to another Computer? <br>
 **A**: Copy TutorMate's jar file into the folder you want to use as the home folder in the other computer. Before running the application, copy _addressbook.json_, _personLessonMap.json_ and _schedulelist.json_ files from the home folder in your current computer into the home folder of the other computer. After copying the 3 files, running the application will show the same data. However, do note that the changes made through the application in one computer will not be reflected in the data in another computer.
 
