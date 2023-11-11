@@ -75,11 +75,19 @@ you can access contacts by roles and responsibilities instantly.
 can use the table of contents to jump from one section to another section. Additionally, headings and subheadings are
 used for easy navigation.
 
+* Click [here](#table-of-contents) to go back to contents.
+* Click [here](#features) to view all detailed features of our app.
+* Already know how to use this guide and can't wait to start? [Get started](#getting-started)!<br>
+* Want an overview of all the commands? Click [here](#command-summary)!<br>
+* Any further questions that are unresolved? Check out our [FAQ](#faqs)!<br>
+* You may also contact us at [service@linktree.com](mailto:service@linktree.com) for further doubts!
+
 **Formatting and Icons**: Throughout the guide, we use bold text and colors to emphasize key points and important terms.
-Icons are used to draw your attention to noteworthy tips and additional information.
+Icons are used to draw your attention to noteworthy tips and additional information. 
+Here are some symbols you might encounter in our guide, and their respective meanings:
 
 [//]: # (Table inspired by NUSCoursemates https://ay2324s1-cs2103t-t17-4.github.io/tp/UserGuide.html)
-Here are some symbols you might encounter in our guide, and their respective meanings:
+
 | Symbol               | Meaning                                                                                        |
 |----------------------|------------------------------------------------------------------------------------------------|
 | :information_source: | Note. Provides additional information.                                                         |
@@ -91,41 +99,43 @@ Here are some symbols you might encounter in our guide, and their respective mea
 * These symbols (:information_source: :bulb: :exclamation:) will be encapsulated in a box as such.
 </div>
 
-Click [here](#table-of-contents) to go back to contents.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Getting Started
 
 ### Installation
 
-1. Ensure you have Java `11` or above installed on your Computer.
+1. Ensure you have Java `11` or above installed on your Computer. 
+Check out our [FAQ](#faqs) if you are not sure how to download Java `11`.
 2. LinkTree is compatible with all major operating systems, including Windows, macOS and Linux.
 3. Download the latest `LinkTree.jar` from [here](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases).
-4. Copy the file to the folder you wish to use as the _home folder_ for your smart contact book.
 
 ### Initial Setup
 
-1. Open a command terminal, `cd` into the folder where you placed the jar file, and use the `java -jar addressbook.jar` command to run the application. A GUI similar to the one below should appear in a few seconds, containing some sample data.
+1. Open a command terminal, navigate to the folder where you store the downloaded jar file, and use the 
+`java -jar addressbook.jar` command to run the application. A GUI similar to the one below should appear in a few 
+seconds, containing some sample data:
    ![Ui](images/Ui.png)
 
 2. Type a command into the command box and press Enter to execute it. For example. type `help` in the command box and press Enter.
-It will open a new help window, and shows a command summary in the result box.
+It will open a new help window, and shows a command summary in the result display.
 
-3. Refer to the [Basic Features](#basic-features) and [Advanced Features](#advanced-features) sections for details of each command.
+3. Refer to the [features](#features) section for details of each command.
 
 
 ### Understanding the GUI
 
  ![Understanding GUI](images/UG_images/Understanding%20GUI.png)
 
-Our GUI is simple and easy to understand.
+* Our GUI is simple and easy to understand:
 1. **Command Box**: You have to type your commands in this box.
 2. **Result Display**: Based on the inputs given, your result will be displayed in this box.
-3. **Help Button**: If you are unsure, you can type `help` in the command box and you will see a help window pop up. 
-Copy this URL to have a look at our user guide.
-4. **Developers Panel**: Lists all the developers from your addressbook.
-5. **Teams Panel**: Lists all the teams from your teambook.
+3. **Help Button**: Type `help` in the command box, and you will see a help window pop up. Giving you the link to 
+this UserGuide. The Result Display will also show a summary of commands.
+4. **Developers Panel**: Lists all the existing developers (or a filtered list of developers after the `find` command, 
+check out [find developer command](#find-developer) for more details).
+5. **Teams Panel**: Lists all the teams (or a filtered list of developers after the `findteam` command,
+check out [find team command](#find-team) for more details).
 
 ### Tutorial on using our Commands
 
@@ -146,6 +156,9 @@ Click [here](#table-of-contents) to go back to contents.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+
+Click [here](#table-of-contents) to go back to contents.<br>
+Click [here](#how-to-use-this-guide) to go back to How to use this Guide.<br>
 
 ### Welcome to LinkTree
 
