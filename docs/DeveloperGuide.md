@@ -14,7 +14,7 @@
 ## **Acknowledgements**
 
 - The features `undo`, `redo`, `history` and arrow key command navigation (including the code) was reused with some changes from AddressBook-Level4.
-- Our book icon favicon was taken from [Smashicons from Flaticon](https://www.flaticon.com/free-icons/book).
+- Our book icon favicon was taken from [Smashicons at Flaticon](https://www.flaticon.com/free-icon/book_2232688).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -541,10 +541,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Class Manager` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Class Manager` and the **Actor** is the `user`, unless specified otherwise)
 
 ---
-**Use case: Delete a student**
+**Use case: UC01 - Delete a student**
 
 **MSS**
 
@@ -568,7 +568,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 ---
-**Use case: Tag a student with a label**
+**Use case: UC02 - Tag a student with a label**
 
 **MSS**
 
@@ -598,7 +598,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 ---
-**Use case: Loading a saved file**
+**Use case: UC03 - Loading a saved file**
 
 **MSS**
 
@@ -624,7 +624,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 ---
-**Use case: Look up a list of students**
+**Use case: UC04 - Look up a list of students**
 
 **MSS**
 
@@ -649,7 +649,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
-**Use case: Randomly select a specific number of students**
+**Use case: UC05 - Randomly select a specific number of students**
 
 **MSS**
 
@@ -674,7 +674,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
-**Use case: Modifying a student's class information**
+**Use case: UC06 - Modifying a student's class information**
 
 **MSS**
 
@@ -698,6 +698,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+---
+**Use case: UC07 - Configuring module information**
+
+**MSS**
+
+1.  User requests to configure Class Manager.
+2.  Class Manager modifies the tutorial and assignment count.
+3.  Class Manager updates the app to show the new class information.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The tutorial or assignment count is invalid.
+
+    * 2a1. Class Manager shows an error message.
+
+      Use case resumes at step 1.
+---
+**Use case: UC08 - Undoing a command**
+
+**MSS**
+
+1.  User deletes a specified student (UC01).
+2.  User requests to undo the deletion.
+3.  Class Manager restores the deleted student.
+
+    Use case ends.
+---
+**Use case: UC09 - Redoing a command**
+
+**MSS**
+
+1.  User undoes the deletion of a specified student (UC08).
+2.  User requests to redo the undone command.
+3.  Class Manager deletes the student.
+
+    Use case ends.
+---
+**Use case: UC10 - Viewing command history**
+
+**MSS**
+
+1.  User requests to view command history.
+3.  Class Manager displays the command history of the current session.
+
+    Use case ends.
 ---
 
 ### Non-Functional Requirements
@@ -730,7 +777,7 @@ Given below are instructions to test the app manually.
 <box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+Testers are expected to do more *exploratory* testing.
 
 </box>
 
@@ -740,12 +787,12 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file<br>
-      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file<br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-1. Saving window preferences
+2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
@@ -787,15 +834,15 @@ testers are expected to do more *exploratory* testing.
 2. Loading a corrupted data file
    - Open and edit `t2.json` with a text editor. Add some random text to the file or delete some text from the file.
    - Enter: `load f/t2`<br>
-        Expected: The data in `t2.json` is not loaded into the app. The address bar on the bottom left is unchanged.
+        Expected: The data in `t2.json` is not loaded into the app. The status bar on the bottom left is unchanged.
         File error details shown in the result display box.
     <br><br> 
 3. Loading a missing data file
    - Enter: `load f/t3`<br>
        Expected: The status bar on the bottom left is unchanged. File error details shown in the result display box.
 
-### Undo/redo
-
+### Undo/redo commands
+###### Test cases
 1. Undoing a command
     1. Test case: `clear` -> `undo`<br>
         Expected: The `clear` command is undone. The list of students shown in the GUI is the same as the one before the `clear` command.
@@ -810,6 +857,56 @@ testers are expected to do more *exploratory* testing.
     2.  Test case: `add` -> `add` -> `undo` -> `undo` -> `redo` (Add 2 students, and then 2 undo with 1 redo)<br>
         Expected: The first `add` command is redone. The first student is added back to the list of students.
 
+### Configuring Class Manager
+
+###### Setup
+- Move the JAR file to a fresh directory.
+- Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
+
+###### Test cases
+1. Configuring Class Manager with valid tutorial and assignment counts
+    - Enter: `config #t/3 #a/3`<br>
+        Expected: The list of students shown in the GUI is the same as the one in `classmanager.json`.
+    - Enter: `add n/John Doe p/999 e/john@gmail.com s/A0981234X c/T11`<br>
+        Expected: The student John Doe is added to the botton of the Student List. Details of John Doe are shown in the result display box.
+    - Enter: `view s/A0981234X`<br>
+        Expected: The student John Doe is shown in the view panel. The student's class information is shown in the view panel with the tutorial and assignment count both updated to 3.
+    - Enter: `present-all tut/1`<br>
+        Expected: All the students have their attendance marked for tutorial 1. The bar graph for all student's attendance is updated to show the attendance for tutorial 1. The attendance of John Doe for tutorial 1 is now present in the view panel.
+    - Enter: `config #t/4 #a/4`<br>
+        Expected: The list of students shown in the GUI is the same as the one in `classmanager.json`, but their attendance bar graph is reset to 0.
+    - Enter: `view s/A0981234X`<br>
+        Expected: The student John Doe is shown in the view panel. The student's class information is shown in the view panel with the tutorial and assignment count both updated to 4. The student's attendance for tutorial 1 is now absent.
+    <br><br>
+
+2. Configuring Class Manager with tutorial count less than 1
+    - Enter: `config #t/0 #a/3`<br>
+      Expected: Error message `Invalid count values! The count value of tutorials cannot be less than 1.`
+
+3. Configuring Class Manager with valid tutorial count but missing assignment count
+    - Enter: `config #t/10`<br>
+      Expected: Error message: `Invalid command format!
+                                config: Configures Class Manager with the module information.
+                                WARNING: Configuring Class Manager resets the grades, attendance and class participation details of all students. This cannot be undone.
+                                The default Class Manager is configured with 13 tutorials and 6 assignments.
+                                Parameters: #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT
+                                Example: config #t/10 #a/4`
+
+### History
+
+###### Setup
+- Close the app and run it again before starting this test. Do not type any commands (This is to reset command history)<br>
+
+###### Test cases
+1. Viewing command history
+    - Enter: `history`<br>
+        Expected: The command history is shown in the result display box. The command history is empty.
+    - Enter: `list`<br>
+      - Expected: The list of students is shown in the student list. The command history is updated to show the command `list`.
+    - Enter: `help`<br>
+      - Expected: The help window is shown. The command history is updated to show the command `help`.
+    - Enter: `history`<br>
+      - Expected: The command history is shown in the result display box. The command history shows `help` as the most recent command at the top of the list, followed by `list` below it.
 
 ### Launch with erroneous data files
 ###### Setup
