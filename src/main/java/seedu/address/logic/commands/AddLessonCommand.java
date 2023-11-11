@@ -33,7 +33,6 @@ public class AddLessonCommand extends Command {
                     + clashingLesson.toString());
         }
         model.addLesson(lesson);
-        model.resetAllShowFields();
         model.setState(State.SCHEDULE);
         model.showLesson(lesson);
         return new CommandResult(String.format("New lesson added: " + lesson.toString()), State.SCHEDULE);
