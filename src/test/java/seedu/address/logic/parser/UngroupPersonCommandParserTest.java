@@ -1,28 +1,29 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.UngroupPersonCommand;
-import seedu.address.model.person.Person;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-public class UngroupPersonCommandParserTest {
-    private String PERSON_NAME_BOB = "Bob Lee";
-    private String GROUP_NAME_CS2100 = "CS2100";
+import org.junit.jupiter.api.Test;
 
-    private String PERSON_NAME_DESC_BOB = " " + PREFIX_NAME + PERSON_NAME_BOB;
-    private String GROUP_NAME_DESC_CS2100 = " " + PREFIX_GROUPTAG + GROUP_NAME_CS2100;
+import seedu.address.logic.commands.UngroupPersonCommand;
+
+public class UngroupPersonCommandParserTest {
+    private static final String PERSON_NAME_BOB = "Bob Lee";
+    private static final String GROUP_NAME_CS2100 = "CS2100";
+
+    private static final String PERSON_NAME_DESC_BOB = " " + PREFIX_NAME + PERSON_NAME_BOB;
+    private static final String GROUP_NAME_DESC_CS2100 = " " + PREFIX_GROUPTAG + GROUP_NAME_CS2100;
 
     private UngroupPersonCommandParser parser = new UngroupPersonCommandParser();
+
     @Test
     public void parse_allFieldsPresent_success() {
-        assertParseSuccess(parser,PERSON_NAME_DESC_BOB + GROUP_NAME_DESC_CS2100,
+        assertParseSuccess(parser, PERSON_NAME_DESC_BOB + GROUP_NAME_DESC_CS2100,
                 new UngroupPersonCommand(PERSON_NAME_BOB, GROUP_NAME_CS2100));
 
         // empty preamble

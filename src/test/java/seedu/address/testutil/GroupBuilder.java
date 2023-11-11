@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.ParserUtil;
@@ -7,15 +9,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
-import seedu.address.model.person.*;
-
-import java.util.Arrays;
+import seedu.address.model.person.Person;
 
 /**
  * A utility class to help with building Group objects.
  */
 public class GroupBuilder {
-    public static final String DEFAULT_GROUPNAME = "CS2103T";
+    public static final String DEFAULT_GROUP_NAME = "CS2103T";
     public static final String DEFAULT_REMARK = " ";
 
     private String groupName;
@@ -27,7 +27,7 @@ public class GroupBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public GroupBuilder() {
-        groupName = DEFAULT_GROUPNAME;
+        groupName = DEFAULT_GROUP_NAME;
         groupRemark = new GroupRemark(DEFAULT_REMARK);
         listOfGroupMates = FXCollections.observableArrayList();
         timeIntervalList = new TimeIntervalList();
@@ -52,7 +52,7 @@ public class GroupBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Remark} of the {@code Group} that we are building.
      */
     public seedu.address.testutil.GroupBuilder withGroupRemark(String remark) {
         this.groupRemark = new GroupRemark(remark);
@@ -60,7 +60,7 @@ public class GroupBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code People} of the {@code Group} that we are building.
      */
     public seedu.address.testutil.GroupBuilder withListOfGroupMates(String ...args) {
         ObservableList<Person> listOfGroupMatesCopy = FXCollections.observableArrayList();
@@ -69,6 +69,9 @@ public class GroupBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code People} of the {@code Group} that we are building.
+     */
     public seedu.address.testutil.GroupBuilder withTimeIntervalList(String ...args) {
         TimeIntervalList tempList = new TimeIntervalList();
         Arrays.stream(args).forEach(time -> {
@@ -78,7 +81,7 @@ public class GroupBuilder {
                 throw new RuntimeException(e);
             }
         });
-        this.timeIntervalList = tempList;
+        this.timeIntervalList.addAll(tempList);
         return this;
     }
 
