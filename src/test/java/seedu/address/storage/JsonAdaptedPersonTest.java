@@ -14,8 +14,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LicencePlate;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.policy.Company;
+import seedu.address.model.policy.PolicyDate;
+import seedu.address.model.policy.PolicyNumber;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "Rachel!";
@@ -25,8 +31,9 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_NRIC = "1234567A";
     private static final String INVALID_LICENCE_PLATE = "ABC123D";
+    private static final String INVALID_COMPANY = "COMPANY/";
     private static final String INVALID_POLICY_NUMBER = "#AIA";
-    private static final String INVALID_POLICY_DATE = "01-01-23";
+    private static final String INVALID_POLICY_DATE = "19-19-2000";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -232,6 +239,274 @@ public class JsonAdaptedPersonTest {
                 VALID_POLICY_DATE
             );
         assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidNric_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(
+                        VALID_NAME,
+                        VALID_PHONE,
+                        VALID_EMAIL,
+                        VALID_ADDRESS,
+                        VALID_TAGS,
+                        INVALID_NRIC,
+                        VALID_LICENCE_PLATE,
+                        VALID_REMARK,
+                        VALID_COMPANY,
+                        VALID_POLICY_NUMBER,
+                        VALID_POLICY_DATE,
+                        VALID_POLICY_DATE
+                );
+        String expectedMessage = Nric.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullNric_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_ADDRESS,
+                VALID_TAGS,
+                null,
+                VALID_LICENCE_PLATE,
+                VALID_REMARK,
+                VALID_COMPANY,
+                VALID_POLICY_NUMBER,
+                VALID_POLICY_DATE,
+                VALID_POLICY_DATE
+        );
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidLicencePlate_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(
+                        VALID_NAME,
+                        VALID_PHONE,
+                        VALID_EMAIL,
+                        VALID_ADDRESS,
+                        VALID_TAGS,
+                        VALID_NRIC,
+                        INVALID_LICENCE_PLATE,
+                        VALID_REMARK,
+                        VALID_COMPANY,
+                        VALID_POLICY_NUMBER,
+                        VALID_POLICY_DATE,
+                        VALID_POLICY_DATE
+                );
+        String expectedMessage = LicencePlate.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullLicencePlate_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_ADDRESS,
+                VALID_TAGS,
+                VALID_NRIC,
+                null,
+                VALID_REMARK,
+                VALID_COMPANY,
+                VALID_POLICY_NUMBER,
+                VALID_POLICY_DATE,
+                VALID_POLICY_DATE
+        );
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, LicencePlate.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullRemark_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_ADDRESS,
+                VALID_TAGS,
+                VALID_NRIC,
+                VALID_LICENCE_PLATE,
+                null,
+                VALID_COMPANY,
+                VALID_POLICY_NUMBER,
+                VALID_POLICY_DATE,
+                VALID_POLICY_DATE
+        );
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidCompany_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(
+                        VALID_NAME,
+                        VALID_PHONE,
+                        VALID_EMAIL,
+                        VALID_ADDRESS,
+                        VALID_TAGS,
+                        VALID_NRIC,
+                        VALID_LICENCE_PLATE,
+                        VALID_REMARK,
+                        INVALID_COMPANY,
+                        VALID_POLICY_NUMBER,
+                        VALID_POLICY_DATE,
+                        VALID_POLICY_DATE
+                );
+        String expectedMessage = Company.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullCompany_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_ADDRESS,
+                VALID_TAGS,
+                VALID_NRIC,
+                VALID_LICENCE_PLATE,
+                VALID_REMARK,
+                null,
+                VALID_POLICY_NUMBER,
+                VALID_POLICY_DATE,
+                VALID_POLICY_DATE
+        );
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Company.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidPolicyNumber_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(
+                        VALID_NAME,
+                        VALID_PHONE,
+                        VALID_EMAIL,
+                        VALID_ADDRESS,
+                        VALID_TAGS,
+                        VALID_NRIC,
+                        VALID_LICENCE_PLATE,
+                        VALID_REMARK,
+                        VALID_COMPANY,
+                        INVALID_POLICY_NUMBER,
+                        VALID_POLICY_DATE,
+                        VALID_POLICY_DATE
+                );
+        String expectedMessage = PolicyNumber.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullPolicyNumber_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_ADDRESS,
+                VALID_TAGS,
+                VALID_NRIC,
+                VALID_LICENCE_PLATE,
+                VALID_REMARK,
+                VALID_COMPANY,
+                null,
+                VALID_POLICY_DATE,
+                VALID_POLICY_DATE
+        );
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, PolicyNumber.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidPolicyIssueDate_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(
+                        VALID_NAME,
+                        VALID_PHONE,
+                        VALID_EMAIL,
+                        VALID_ADDRESS,
+                        VALID_TAGS,
+                        VALID_NRIC,
+                        VALID_LICENCE_PLATE,
+                        VALID_REMARK,
+                        VALID_COMPANY,
+                        VALID_POLICY_NUMBER,
+                        INVALID_POLICY_DATE,
+                        VALID_POLICY_DATE
+                );
+        String expectedMessage = PolicyDate.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullPolicyIssueDate_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_ADDRESS,
+                VALID_TAGS,
+                VALID_NRIC,
+                VALID_LICENCE_PLATE,
+                VALID_REMARK,
+                VALID_COMPANY,
+                VALID_POLICY_NUMBER,
+                null,
+                VALID_POLICY_DATE
+        );
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                PolicyDate.class.getSimpleName() + " (Issue Date)");
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidPolicyExpiryDate_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(
+                        VALID_NAME,
+                        VALID_PHONE,
+                        VALID_EMAIL,
+                        VALID_ADDRESS,
+                        VALID_TAGS,
+                        VALID_NRIC,
+                        VALID_LICENCE_PLATE,
+                        VALID_REMARK,
+                        VALID_COMPANY,
+                        VALID_POLICY_NUMBER,
+                        VALID_POLICY_DATE,
+                        INVALID_POLICY_DATE
+                );
+        String expectedMessage = PolicyDate.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullPolicyExpiryDate_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_ADDRESS,
+                VALID_TAGS,
+                VALID_NRIC,
+                VALID_LICENCE_PLATE,
+                VALID_REMARK,
+                VALID_COMPANY,
+                VALID_POLICY_NUMBER,
+                VALID_POLICY_DATE,
+                null
+        );
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                PolicyDate.class.getSimpleName() + " (Expiry Date)");
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
 }

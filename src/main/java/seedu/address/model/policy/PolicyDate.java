@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import seedu.address.model.month.DeleteMonth;
 
@@ -36,7 +37,7 @@ public class PolicyDate implements Comparable<PolicyDate> {
     public PolicyDate(String policyDate) {
         requireNonNull(policyDate);
         checkArgument(isValidPolicyDate(policyDate), MESSAGE_CONSTRAINTS);
-        date = LocalDate.parse(policyDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        date = LocalDate.parse(policyDate, DateTimeFormatter.ofPattern(VALIDATION_DATE_FORMAT));
     }
 
     /**
@@ -44,11 +45,17 @@ public class PolicyDate implements Comparable<PolicyDate> {
      */
     public static boolean isValidPolicyDate(String test) {
         try {
+            // Check that it is indeed in dd-MM-yyyy
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(VALIDATION_DATE_FORMAT);
+            formatter.parse(test);
+
+            // Check that dates are valid (e.g. no 29 feb in non-leap years
             SimpleDateFormat format = new SimpleDateFormat(VALIDATION_DATE_FORMAT);
             format.setLenient(false);
             format.parse(test);
+
             return true;
-        } catch (ParseException e) {
+        } catch (ParseException | DateTimeParseException e) {
             return false;
         }
     }
