@@ -332,7 +332,8 @@ public class ParserUtil {
         }
         Tag tag = parseTag(tagScorePairArr[0], "");
         if (!ScoreList.isValidScoreTag(tag)) {
-            throw new ParseException("Invalid score tag, tag must a tag of the category assessment (made using "
+            throw new ParseException("Invalid score tag, tag must a tag of the category " +
+                    "assessment and must exist on the applicant" + " (made using "
                     + "the create command.");
         }
         Score score = parseScore(tagScorePairArr[1]);
