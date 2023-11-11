@@ -30,11 +30,15 @@ Given below are my contributions to the project.
 
 * **Contributions to the UG**:
     * Added documentation for the features `sort` [\#81](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/81)
+    * Maintained know issues to be solved
+    * Proofreading of UG
 
-* **Contributions to the DG**: to be added soon.
+* **Contributions to the DG**: 
+    * Added sequence diagram for sort function 
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#125](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/125) [\#133](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/133#pullrequestreview-1699166607)
 
 * **Contributions to team-based tasks**: 
   * Released version 1.3 of the application
+  * Released version 1.4 of the application
