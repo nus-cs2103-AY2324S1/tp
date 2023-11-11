@@ -526,7 +526,7 @@ Examples:
 
 ### Listing all interviews : `list-i`
 
-Shows a list of all interviews in `InterviewHub` on the GUI.
+Shows a list of all interviews in **InterviewHub** on the GUI.
 
 Format: `list-i`
 
@@ -575,7 +575,7 @@ Examples:
 
 ### Listing all interviews for today : `list-i-today`
 
-Shows a list of the interviews in `InterviewHub` which are scheduled on the day the command is executed.
+Shows a list of the interviews in **InterviewHub** which are scheduled on the day the command is executed.
 
 Format: `list-i-today`
 
