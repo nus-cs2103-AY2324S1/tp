@@ -896,17 +896,17 @@ Please refer to the [User Guide](https://ay2324s1-cs2103t-t11-2.github.io/tp/Use
 ### Viewing help
 Command: `help`
 
-1. Test case: `help`</br>Expected: Help window with the User Guide URL is displayed. Status message remained unchanged.
+1. Test case: `help`<br>Expected: Help window with the User Guide URL is displayed. Status message remained unchanged.
 
 ### Clearing all the data
 Command: `clear`
 
-1. Test case: `clear`</br>Expected: All the applicants and interviews will be cleared. Success message is displayed.
+1. Test case: `clear`<br>Expected: All the applicants and interviews will be cleared. Success message is displayed.
 
 ### Exiting the program
 Command: `exit`
 
-1. Test case: `exit`</br>Expected: Exits InterviewHub and all data is saved automatically.
+1. Test case: `exit`<br>Expected: Exits InterviewHub and all data is saved automatically.
 
 ### Adding an applicant
 Command: `add-a`
@@ -1010,32 +1010,32 @@ Command: `find-i`
 
 1. Finding interviews by job role
    1. Prerequisite: The interview with the indicated job role has matching keyword
-   2. Test case: `find-i software`</br>Expected: All interviews with at least one `software`(case-insensitive) as keyword in the job role are shown in the interview list. The amount of interview listed is shown on the status box.
-   3. Test case: `find-i` </br>Expected: The interview list remained unchanged. Error message is displayed.
+   2. Test case: `find-i software`<br>Expected: All interviews with at least one `software`(case-insensitive) as keyword in the job role are shown in the interview list. The amount of interview listed is shown on the status box.
+   3. Test case: `find-i` <br>Expected: The interview list remained unchanged. Error message is displayed.
 
 ### Listing all interviews
 Command: `list-i`
 
 1. Listing all the interviews
-   1. Test case: `list-i`</br>Expected: Shows all the interviews in the interview list. Success message is displayed.
+   1. Test case: `list-i`<br>Expected: Shows all the interviews in the interview list. Success message is displayed.
 
 ### Listing all free timing for the given day
-Command: `list-freetime`</br>
+Command: `list-freetime`<br>
 
 1. Listing the free time for a day using `DD/MM/YYYY` or `DD-MM-YYYY` format
    1. Prerequisites: The date string must be in the DD/MM/YYYY or DD-MM-YYYY format, and there should not be any interviews scheduled for the given date
-   2. Test case: `list-freetime 12/12/2099`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
-   3. Test case: `list-freetime 12-12-2099`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
-   4. Success message shown in command box for both cases:</br> `Free times on 12/12/2099:`</br>`from: 09:00 to: 17:00`
+   2. Test case: `list-freetime 12/12/2099`<br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
+   3. Test case: `list-freetime 12-12-2099`<br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
+   4. Success message shown in command box for both cases:<br> `Free times on 12/12/2099:`<br>`from: 09:00 to: 17:00`
 2. Listing the free time for a day using `DD/MM` or `DD MMM` format, where 
    1. Prerequisites: The date string must be in the DD/MM or DD MMM format, and there should not be any interviews scheduled for the given date
-   2. Test case: `list-freetime 12/12`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
-   3. Test case: `list-freetime 12 Dec`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
-   4. Success message shown in command box for both cases:</br> `Free times on 12/12/2023:`</br>`from: 09:00 to: 17:00`
+   2. Test case: `list-freetime 12/12`<br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
+   3. Test case: `list-freetime 12 Dec`<br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
+   4. Success message shown in command box for both cases:<br> `Free times on 12/12/2023:`<br>`from: 09:00 to: 17:00`
 3. Listing the free time for a date in the past
    1. Prerequisite: The date string must follow one of the accepted date formats
-   2. Test case: `list-freetime 12-12-1970`</br>Expected: Command does not execute.
-   3. Error message shown in command box:</br>`Input date cannot be in the past!`
+   2. Test case: `list-freetime 12-12-1970`<br>Expected: Command does not execute.
+   3. Error message shown in command box:<br>`Input date cannot be in the past!`
 
 ### Listing all interviews for today
 Command: `list-i-today`
@@ -1050,35 +1050,35 @@ Command: `rate`
 
 1. Rating an existing interview
    1. Prerequisites: the interview to be rated has been marked as done, and it exists in the list.
-   2. Test case: `rate 1 2.0`</br>Expected: The interview rating at index one has been updated to 2.0. Success message is displayed.
-   3. Test case: `rate 1 10.0`</br>Expected: The interview rating at index one is not changed. Error message is displayed.
+   2. Test case: `rate 1 2.0`<br>Expected: The interview rating at index one has been updated to 2.0. Success message is displayed.
+   3. Test case: `rate 1 10.0`<br>Expected: The interview rating at index one is not changed. Error message is displayed.
 
 ### Listing all completed interview
 Command: `list-i-done`
 
 1. Listing completed interviews with exact command
-    1. Test case: `list-i-done`</br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty 
+    1. Test case: `list-i-done`<br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty 
 2. Listing completed interviews with the command along with nonsensical parameters appended to the end
-   1. Test case: `list-i-done I am a cat`</br>Expected: Same expected result as test case 1
+   1. Test case: `list-i-done I am a cat`<br>Expected: Same expected result as test case 1
    
 ### Listing all incomplete interview
 Command: `list-i-not-done`
 
 1. Listing completed interviews with exact command
-    1. Test case: `list-i-not-done`</br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty
+    1. Test case: `list-i-not-done`<br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty
 2. Listing completed interviews with the command along with nonsensical parameters appended to the end
-    1. Test case: `list-i-not-done I am a cat`</br>Expected: Same expected result as test case 1
+    1. Test case: `list-i-not-done I am a cat`<br>Expected: Same expected result as test case 1
    
 ### Sorting the interview list by rating
 Command: `sort-rate`
 
 1. Sorting the current interview list by rating.
-   1. Test case: `sort-rate`</br>Expected: Sorts the current interview list by rating in descending order. Success message is displayed.
+   1. Test case: `sort-rate`<br>Expected: Sorts the current interview list by rating in descending order. Success message is displayed.
 
 ### Sorting the interview list by start-time
 Command: `sort-time`
 
 1. Listing completed interviews with exact command
-   1. Test case: `sort-time`</br>Expected: The interview list will be sorted in chronological order of start times. If there are no interviews scheduled, the interviews box will be empty. In the case that the list is filtered in some way, the sort will only sort on the filtered interview list
+   1. Test case: `sort-time`<br>Expected: The interview list will be sorted in chronological order of start times. If there are no interviews scheduled, the interviews box will be empty. In the case that the list is filtered in some way, the sort will only sort on the filtered interview list
 2. Listing completed interviews with the command along with nonsensical parameters appended to the end
-    1. Test case: `sort-time I am a cat`</br>Expected: Same expected result as test case 1
+    1. Test case: `sort-time I am a cat`<br>Expected: Same expected result as test case 1
