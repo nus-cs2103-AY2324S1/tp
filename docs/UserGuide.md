@@ -17,7 +17,7 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 
 1. Copy the file to the folder you want to use as the _home folder_ for your DoConnek Pro.
 
-1. Open a command terminal (You can search for the "Command Prompt" application on Windows or the "Terminal" application on MacOS).
+1. Open a command terminal (You can search for the "Command Prompt" application on Windows or the "Terminal" application on macOS).
 
 1. `cd` into the folder you put the jar file in ([How to use `cd`](https://www.lifewire.com/change-directories-in-command-prompt-5185508#:~:text=In%20the%20command%20prompt%20window%2C%20type%20cd%20followed%20by%20the,the%20one%20you're%20in.&text=If%20you%20want%20to%20go,back%20to%20the%20original%20option.)).
 
@@ -55,7 +55,7 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 and specifies whether the command is to act on the patients (`-pa`) or on the specialists (`-sp`) in the address book.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [m/MEDICAL_HISTORY]` can be used as `n/John Doe m/Osteoporosis` or as `n/John Doe`.
+  e.g. `n/NAME [m/MEDICAL_HISTORY]` can be used as `n/John Doe m/Osteoporosis` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times but must include at least one entry.<br>
   e.g. `INDEX…​` can be used as `1` , `1 2 3`, `4 5 6 7 8`, but _**not**_ ` ` (i.e. 0 times).
@@ -77,7 +77,7 @@ and specifies whether the command is to act on the patients (`-pa`) or on the sp
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -175,7 +175,7 @@ Example:
 
 ### Editing a pre-existing patient or specialist record: `edit`
 
-Edits the data of the pre-existing patient or specialist record currently being displated in the view panel.
+Edits the data of the pre-existing patient or specialist record currently being displayed in the view panel.
 Multiple attributes of a person can be changed at once. The view panel will be updated with the
 modified results immediately after each successful `edit` command execution.
 
@@ -304,7 +304,7 @@ If the user goes too far back in history, they can 'undo' an 'up arrow' by press
 
 ### Save and Load Data
 
-The patient and specialist data will automatically be saved to the device’s harddrive every time the data is updated, and will automatically be loaded when the user starts the application. The user does not need to manually save any data.
+The patient and specialist data will automatically be saved to the device’s hard drive every time the data is updated, and will automatically be loaded when the user starts the application. The user does not need to manually save any data.
 
 ### Editing the data file
 
