@@ -28,19 +28,19 @@ public class AddDoctorCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
+            + PREFIX_NRIC + "NRIC "
+            + PREFIX_GENDER + "GENDER "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_GENDER + "GENDER "
-            + PREFIX_NRIC + "NRIC "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
+            + PREFIX_NRIC + "S1234567Z "
+            + PREFIX_GENDER + "M "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_GENDER + "M "
-            + PREFIX_NRIC + "S1234567Z "
             + PREFIX_TAG + "SURGEON";
 
     public static final String MESSAGE_SUCCESS = "New doctor added: %1$s";
