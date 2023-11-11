@@ -38,8 +38,8 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personTimeIntervalDeletionSuccess() throws Exception {
-        Person VALID_PERSON = new PersonBuilder().build();
-        ModelStubWithPerson modelStub = new ModelStubWithPerson(VALID_PERSON);
+        Person validPerson = new PersonBuilder().build();
+        ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
 
         modelStub.person.getTime().forEach(x->System.out.print(x+"\n\n\n"));
         // Person has time interval to be deleted
@@ -47,7 +47,7 @@ public class DeletePersonTimeCommandTest {
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
 
         CommandResult commandResult =
-                new DeletePersonTimeCommand(VALID_PERSON.getName(), validTimeInterval).execute(modelStub);
+                new DeletePersonTimeCommand(validPerson.getName(), validTimeInterval).execute(modelStub);
 
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
@@ -55,12 +55,12 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personSingleTimeIntervalDeletionFail() throws Exception {
-        Person VALID_PERSON = new PersonBuilder().build();
-        ModelStubWithPerson modelStub = new ModelStubWithPerson(VALID_PERSON);
+        Person validPerson = new PersonBuilder().build();
+        ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
         // Person does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(VALID_PERSON.getName(),
+        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(validPerson.getName(),
                 invalidTimeInterval);
 
         failedCommand.execute(modelStub);
@@ -71,13 +71,13 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personMultipleTimeIntervalDeletionFail() throws Exception {
-        Person VALID_PERSON = new PersonBuilder().build();
-        ModelStubWithPerson modelStub = new ModelStubWithPerson(VALID_PERSON);
+        Person validPerson = new PersonBuilder().build();
+        ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
         // Person does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(VALID_PERSON.getName(),
+        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(validPerson.getName(),
                 invalidTimeInterval);
 
         failedCommand.execute(modelStub);
@@ -90,13 +90,13 @@ public class DeletePersonTimeCommandTest {
 
     @Test
     public void execute_personMultipleTimeIntervalDeletionPass() throws Exception {
-        Person VALID_PERSON = new PersonBuilder().build();
-        ModelStubPersonWithMultipleTimings modelStub = new ModelStubPersonWithMultipleTimings(VALID_PERSON);
+        Person validPerson = new PersonBuilder().build();
+        ModelStubPersonWithMultipleTimings modelStub = new ModelStubPersonWithMultipleTimings(validPerson);
         // Person has all the time intervals
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(VALID_PERSON.getName(), validTimeInterval);
+        DeletePersonTimeCommand failedCommand = new DeletePersonTimeCommand(validPerson.getName(), validTimeInterval);
 
         failedCommand.execute(modelStub);
 

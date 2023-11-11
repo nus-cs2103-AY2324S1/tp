@@ -32,9 +32,9 @@ import seedu.address.testutil.GroupBuilder;
 public class DeleteGroupTimeCommandTest {
     @Test
     public void execute_groupTimeIntervalDeletionSuccess() throws Exception {
-        Group VALID_GROUP = new GroupBuilder()
+        Group validGroup = new GroupBuilder()
                 .withTimeIntervalList(VALID_TIME_MON, VALID_TIME_TUE).build();
-        ModelStubWithGroup modelStub = new ModelStubWithGroup(VALID_GROUP);
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
 
         // Group has time interval to be deleted
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
@@ -43,7 +43,7 @@ public class DeleteGroupTimeCommandTest {
         // checks model has the time
         assertEquals(true, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
 
-        CommandResult commandResult = new DeleteGroupTimeCommand(VALID_GROUP, validTimeInterval).execute(modelStub);
+        CommandResult commandResult = new DeleteGroupTimeCommand(validGroup, validTimeInterval).execute(modelStub);
 
         // Time interval has been deleted
         assertEquals(false, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
@@ -56,13 +56,13 @@ public class DeleteGroupTimeCommandTest {
 
     @Test
     public void execute_groupSingleTimeIntervalDeletionFail() throws Exception {
-        Group VALID_GROUP = new GroupBuilder()
+        Group validGroup = new GroupBuilder()
                 .withTimeIntervalList(VALID_TIME_MON, VALID_TIME_TUE).build();
-        ModelStubWithGroup modelStub = new ModelStubWithGroup(VALID_GROUP);
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
         // Person does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_WED));
-        DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(VALID_GROUP, invalidTimeInterval);
+        DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(validGroup, invalidTimeInterval);
 
         // Time intervals has not been deleted
         assertEquals(true, modelStub.hasTime(ParserUtil.parseEachInterval(VALID_TIME_MON)));
@@ -71,14 +71,14 @@ public class DeleteGroupTimeCommandTest {
 
     @Test
     public void execute_groupMultipleTimeIntervalDeletionFail() throws Exception {
-        Group VALID_GROUP = new GroupBuilder()
+        Group validGroup = new GroupBuilder()
                 .withTimeIntervalList(VALID_TIME_MON, VALID_TIME_TUE).build();
-        ModelStubWithGroup modelStub = new ModelStubWithGroup(VALID_GROUP);
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
         // Group does not have the time interval
         ArrayList<TimeInterval> invalidTimeInterval = new ArrayList<>();
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
         invalidTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_WED));
-        DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(VALID_GROUP, invalidTimeInterval);
+        DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(validGroup, invalidTimeInterval);
 
         failedCommand.execute(modelStub);
 
@@ -90,14 +90,14 @@ public class DeleteGroupTimeCommandTest {
 
     @Test
     public void execute_groupMultipleTimeIntervalDeletionPass() throws Exception {
-        Group VALID_GROUP = new GroupBuilder()
+        Group validGroup = new GroupBuilder()
                 .withTimeIntervalList(VALID_TIME_MON, VALID_TIME_TUE).build();
-        ModelStubGroupWithMultipleTimings modelStub = new ModelStubGroupWithMultipleTimings(VALID_GROUP);
+        ModelStubGroupWithMultipleTimings modelStub = new ModelStubGroupWithMultipleTimings(validGroup);
         // Person has all the time intervals
         ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
         validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
-        DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(VALID_GROUP, validTimeInterval);
+        DeleteGroupTimeCommand failedCommand = new DeleteGroupTimeCommand(validGroup, validTimeInterval);
 
         failedCommand.execute(modelStub);
 
