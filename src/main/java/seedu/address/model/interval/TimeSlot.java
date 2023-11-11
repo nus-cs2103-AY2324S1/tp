@@ -1,5 +1,7 @@
 package seedu.address.model.interval;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class TimeSlot {
      * @param end a Date object for end
      */
     public TimeSlot(Date start, Date end) {
+        requireAllNonNull(start, end);
         this.start = start;
         this.end = end;
     }

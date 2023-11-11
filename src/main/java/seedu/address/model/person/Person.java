@@ -55,23 +55,23 @@ public class Person {
     }
 
     public Name getName() {
-        return name;
+        return name.copy();
     }
 
     public Phone getPhone() {
-        return phone;
+        return phone.copy();
     }
 
     public Email getEmail() {
-        return email;
+        return email.copy();
     }
 
     public Address getAddress() {
-        return address;
+        return address.copy();
     }
 
     public Subject getSubject() {
-        return subject;
+        return subject.copy();
     }
 
     /**
