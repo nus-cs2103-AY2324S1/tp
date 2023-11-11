@@ -145,17 +145,33 @@ public class StringUtilTest {
 
     @Test
     public void capitaliseWordsInString_validInput_correctResult() {
-        assertEquals("Caps", StringUtil.capitaliseWordsInString("caps"));
-        assertEquals("Ca", StringUtil.capitaliseWordsInString("ca"));
-        assertEquals("C", StringUtil.capitaliseWordsInString("c"));
 
+        // EP: Empty string
+        assertEquals("", StringUtil.capitaliseWordsInString("")); // empty string
 
-        assertEquals("John Doe", StringUtil.capitaliseWordsInString("john doe")); // Lower case
-        assertEquals("John Doe", StringUtil.capitaliseWordsInString("jOHN dOE")); // Mixed case
-        assertEquals("John Doe", StringUtil.capitaliseWordsInString("JOHN DOE")); // All caps
-        assertEquals("John Doe", StringUtil.capitaliseWordsInString("john    doe")); // Multiple space
-        assertEquals("John Doe", StringUtil.capitaliseWordsInString("     john doe")); // Leading space
-        assertEquals("John Doe", StringUtil.capitaliseWordsInString("john doe    ")); // Trailing space
+        // EP: Normal word
+        assertEquals("Word", StringUtil.capitaliseWordsInString("word")); // normal word
+
+        // EP: Mixed Case
+        assertEquals("Word", StringUtil.capitaliseWordsInString("WoRD")); // mixed case
+        assertEquals("Word", StringUtil.capitaliseWordsInString("WORD")); // upper case
+
+        // EP: Symbols
+        assertEquals("1234", StringUtil.capitaliseWordsInString("1234")); // symbol
+        assertEquals("@@@", StringUtil.capitaliseWordsInString("@@@")); // symbol
+
+        // EP: Trailing and Leading space
+        assertEquals("Word", StringUtil.capitaliseWordsInString("  word")); // leading space
+        assertEquals("Word", StringUtil.capitaliseWordsInString("word     ")); // trailing space
+
+        // EP: Strings with space
+        assertEquals("John Doe", StringUtil.capitaliseWordsInString("john doe")); // two words
+        assertEquals("John Doe Is A Person",
+                StringUtil.capitaliseWordsInString("john doe is a person")); // multiple words
+        assertEquals("John Doe", StringUtil.capitaliseWordsInString("john    doe")); // multiple space
+
+        // Mixed
+        assertEquals("Word 123", StringUtil.capitaliseWordsInString("  WoRD 123  "));
     }
 
     @Test
