@@ -16,13 +16,7 @@ import seedu.address.model.Time;
 public class TimeParser {
     protected static final LocalDateTime DEFAULT_DATE = LocalDateTime.of(1970, 1, 1, 0, 0);
     protected static final String[][] DATE_FORMATS = new String[][] {
-            // time string with day and time (formatID == 0)
-            {
-            "E HHmm",
-            "E h'.'mma",
-            "E ha"
-            },
-            // time with all required information: year, month, day of month, time (formatID == 1)
+            // time with all required information: year, month, day of month, time (formatID == 0)
             {
             "d MMM yyyy HHmm",
             "d MMM yyyy h'.'mma",
@@ -34,7 +28,7 @@ public class TimeParser {
             "d/M/y hh'.'mma",
             "d/M/y ha"
             },
-            // time with these information: month, day of month, time (formatID == 2)
+            // time with these information: month, day of month, time (formatID == 1)
             {
             "dd MMM HHmm",
             "dd MMM hh'.'mma",
@@ -57,17 +51,13 @@ public class TimeParser {
     };
 
     protected static final String[][] DATE_ONLY_FORMATS = new String[][] {
-            // time string with day (formatID == 0)
-            {
-            "E"
-            },
-            // time with all required information: year, month, day of month (formatID == 1)
+            // time with all required information: year, month, day of month (formatID == 0)
             {
             "d MMM yyyy",
             "dd-MM-y",
             "d/M/y"
             },
-            // time with these information: month, day of month, time (formatID == 2)
+            // time with these information: month, day of month, time (formatID == 1)
             {
             "dd MMM",
             "d/M"
@@ -122,12 +112,9 @@ public class TimeParser {
     private static LocalDateTime addMissingDateFields(LocalDateTime temp, int currentFormatID, boolean dateOnly)
             throws seedu.address.logic.parser.exceptions.ParseException {
         switch (currentFormatID) {
-        case 0: // case where user entered a day of the week and time
-            temp = addDay(temp);
+        case 0: // case where user entered a year, month, day of month, and time
             break;
-        case 1: // case where user entered a year, month, day of month, and time
-            break;
-        case 2: // case where the user entered a month, day of month, and time
+        case 1: // case where the user entered a month, day of month, and time
             temp = addYear(temp);
             break;
         default: // case where the user did not enter an interview time
