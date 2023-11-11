@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* The foundational code for add and find features are adapted from [AB-3](https://github.com/nus-cs2103-AY2324S1/tp).
+* The foundational code for add, find and Interview's CRUD features are adapted from [AB-3](https://github.com/nus-cs2103-AY2324S1/tp).
 * The formatting for the developer guide is inspired by [NUSCoursemates](https://ay2324s1-cs2103t-t17-4.github.io/tp/DeveloperGuide.html).
 * The formatting for the developer guide is inspired by [InTrack](https://ay2223s1-cs2103t-t11-2.github.io/tp/DeveloperGuide.html).
 
@@ -157,23 +157,52 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add interview feature
+The add interview feature allows users to quickly add a scheduled interview into the application via the command
+`add-i app/APPLICANT_INDEX jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME`
 
 #### Implementation
+The `add-i` command is facilitated by the `AddInterviewCommand` and the `AddInterviewCommandParser`.
+It uses `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)` to extract the corresponding inputs for each field defined.
+The Applicant is then obtained from the model using `Model#getFilteredApplicantList()` to get the Applicant List,
+followed by `List#get(int index)` where the index is the provided Applicant Index.
+A new `Interview` object is then created with the obtained applicant, the inputted job role, start time and end time.
+By default, the rating field will be set to `0.0` and the isDone field set to `false`.
+`Model#setApplicant(Applicant target, Applicant editedApplicant)` is then called to update the target applicant's `hasInterview` status to `true`.
+`Model#addInterview(Interview interview)` is then called to add the new `Interview` object into the list of interviews.
 
 #### How is the command executed
+1. The user inputs the `add-i` command with correct parameters provided
+2. The `AddressBookParser` processes the input and creates a new `AddInterviewCommandParser`.
+3. The `AddInterviewCommandParser` then extracts the relevant inputs for each prefix.
+If any of the compulsory prefixes have an absent or invalid input, a ParseException will be thrown.
+4. The `AddInterviewCommandParser` then creates the `AddInterviewCommand` based on the processed input.
+5. The `LogicManager` executes the `AddInterviewCommand`.
+6. The `AddInterviewCommand` then creates a new `Interview` object with the corresponding parsed inputs for each field.
+7. The `AddInterviewCommand` then calls `Model#setApplicant(Applicant target, Applicant editedApplicant)` to update the Applicant in the Applicant list
+8. The `AddInterviewCommand` then calls `Model#addInterview(Interview interview)` to add the new `Interview` object to the list of interviews.
+9. Finally, the `AddInterviewCommand` creates a `CommandResult` with the success message and returns it to the `LogicManager` to complete the command execution.
+The GUI would then be updated to display the updated lists and success message.
 
-#### Design consideration
+For easier of viewing, 2 sequence diagrams will be used to show how the `add-i` command works.
+Step 1 to 4:
+
+![AddInterviewSequenceDiagram1](images/AddInterviewSequenceDiagram1.png)
+The activation bar of `LogicManager` is intended to not end since it continues being in the activated state.
+
+Step 5 to 9:
+
+![AddInterviewSequenceDiagram2](images/AddInterviewSequenceDiagram2.png)
 
 ### Find interview by job role feature
 
 #### Implementation
 
-The find interview by job role feature allows users to query the list of added interview for interviews that match the job role via the command `find-i KEYWORD(S) `, where `KEYWORD` must not
+The find interview by job role feature allows users to query the list of added interview for interviews that match the job role via the command `find-i KEYWORD(S)`, where `KEYWORD(S)` must not
 be an empty string.
 
 The `find-i` command is facilitated by the `FindInterviewCommand`, `FindInterviewCommandParser`, and `JobContainsKeywordsPredicate`.
 It uses `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` to apply the `JobContainsKeywordsPredicate`
-in order to produce a filtered list containing only entries whose job correspond to `KEYWORD [MORE_KEYWORD]...`.
+in order to produce a filtered list containing only entries whose job correspond to `KEYWORD(S)`.
 
 #### How is the command executed
 1. The user inputs the `find-i` command together with non-empty job role as keyword(s);
@@ -182,7 +211,7 @@ in order to produce a filtered list containing only entries whose job correspond
 4. The `FindInterviewCommandParser` constructs `JobContainsKeywordsPredicate` containing the keyword as predicate.
 5. The `LogicManager` executes the `FindInterviewCommand` which calls the `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` method.
 6. The `FindInterviewCommand` construct `CommandResult` containing the number of successful interviews filtered in the final list and returns it to `LogicManager`.
-7. The GUI will be updated automatically by when the list changes.
+7. The GUI will be updated automatically when the list changes.
 
 The following sequence diagram shows how the `find-i` operation works:
 
@@ -226,23 +255,51 @@ The following activity diagram summarizes what happens when a user executes a ne
       * Less powerful since users can only search job based on one keyword.
 
 ### Find applicant feature
-
 #### Implementation
 
 The find applicant feature allows users to query the list of applicants for applicants
 whose name, phone, email, address and tags match the given arguments.
 
 This can be done
-via the command `find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER]
-[e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] t/KEYWORDS [MORE_KEYWORDS]...]`.
+via the command `find-a [n/KEYWORD(S)] [p/NUMBER]
+[e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]`.
 
 The find applicant feature is facilitated by `FindApplicantCommand`, `FindApplicantCommandParser`,
 `AddressContainsKeywordsPredicate`, `EmailContainsKeywordsPredicate`, `NameContainsKeywordsPredicate`,
-`PhoneContainsNumberPredicate`, `TagContainsKeywordsPredicate`.
+`PhoneContainsNumberPredicate`, `TagContainsKeywordsPredicate` and `ApplicantPredicate`.
 It uses `Model#updateFilteredApplicantList(Predicate<Applicant>)` to apply the predicates
 in order to produce a filtered list containing only the filtered entries.
 
 #### How is the command executed
+1. The user inputs the `find-a` command together with arguments.
+2. The `LogicManager` receives The LogicManager receives the command string and forwards it to the AddressBookParser.
+3. The `AddressBookParser` checks the type of command and constructs
+   `FindCommandParser` to parse the arguments.
+4. If the arguments contain the `n/` prefix, a `NameContainsKeywordsPredicate` is created with the keywords.
+5. If the arguments contain the `p/` prefix, a `PhoneContainsNumberPredicate` is created with the number.
+6. If the arguments contain the `e/` prefix, a `EmailContainsKeywordsPredicate` is created with the keywords.
+7. If the arguments contain the `a/` prefix, a `AddressContainsKeywordsPredicate` is created with the keywords.
+8. If the arguments contain the `t/` prefix, a `TagContainsKeywordsPredicate` is created with the keywords.
+9. An `ApplicantPredicate` is created with all the predicates created above.
+10. The `FindCommandParser` constructs the `FindCommand` with the `ApplicantPredicate` 
+and returns it to `LogicManager`.
+11. The `LogicManager` executes the `FindCommand` which calls the 
+`Model#updateFilteredApplicantList(Predicate<Interview> predicate)` method.
+12. The `FindCommand` constructs a `CommandResult` containing the number of applicants
+found and the success message. 
+13. `FindCommand` returns the `CommandResult` to LogicManager.
+14. The GUI updates automatically when the list changes.
+
+The following sequence diagram shows how the `find-a` operation works:
+![FindApplicantSequenceDiagram](images/FindApplicantSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for FindCommandParser should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a new command:
+![FindApplicantActivityDiagram](images/FindApplicantActivityDiagram.png)
+
 
 #### Design Considerations
 
@@ -386,7 +443,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 The `list-freetime DATE` command is facilitated by the `ListFreeTimeCommand`, `ListFreeTimeCommandParser`, along with the other internal classes omitted for brevity.
 #### How is the command executed
-1. The user inputs the `list-freetime DATE`
+1. The user inputs the `list-freetime DATE` command.
 2. The `LogicManager` receives the command string and forwards it to the `AddressBookParser`.
 3. The `AddressBookParser` checks the type of command and constructs `ListFreeTimeCommandParser` to parse the keyword(s).
 4. The `execute` method of the `ListFreeTimeCommandParser` is called, which will call the `parseDate` method of the `TimeParser` API class.
@@ -416,10 +473,55 @@ Aspect: How the command finds free times:
 ### List all interviews for today feature
 
 #### Implementation
+The list all interviews today feature allows users to list all the interviews that are scheduled on the day the user
+executes the command. 
 
 #### How is the command executed
+1. The user inputs the `list-i-today` command.
+2. The `LogicManager` receives the command string and forwards it to `AddressBookParser`.
+3. The `AddressBookParser` checks the type of command and constructs a `ListInterviewsTodayCommand` instance.
+4. `AddressBookParser` returns the `ListInterviewsToday` instance to `LogicManager`.
+5. The `LogicManager` executes the `ListInterviewsToday` command.
+6. The execute method in `ListInterviewsToday` calls the 
+`Model#updateFilteredInterviewList(Predicate<Interview> predicate)` method and
+passes in a predicate which tests if an interview is scheduled for today.
+7. `ListInterviewsToday` constructs a `CommandResult` containing the success message 
+and returns it `LogicManager`.
+8. The GUI updates automatically when the list changes.
+
+The following sequence shows how the `list-i-today` command works:
+![ListInterviewsTodaySequenceDiagram](images/ListInterviewsTodaySequenceDiagram.png)
 
 #### Design consideration
+Aspect: Command format
+* **Alternative 1 (current choice):** `list-i-today`
+  * Pros:
+    * Easy and fast to type
+    * Easy to implement
+  * Cons:
+    * Can only list interviews today
+    * Need to type a few hyphens which can be less intuitive than space
+
+* **Alternative 2:** `list-i DATE`
+  * Pros:
+    * Can list interviews on any date
+    * More flexible
+  * Cons:
+    * Can be annoying to type exact date
+    * Listing interviews today requires the user to know the date today
+    * Harder to implement
+* **Alternative 3:** `list-i today`
+  * Pros:
+    * Some users may prefer typing spaces instead of hyphens
+  * Cons:
+    * Harder to implement as the parser needs to differentiate between 
+`list-i` and `list-i today`
+    * Some users may prefer the hyphen instead of a space
+
+
+
+
+
 
 ### List interviews done/not done feature
 
@@ -457,7 +559,7 @@ The `rate` feature is facilitated by the `Rating` class, `RateCommand` and the `
 
 #### How is the command executed
 1. The user inputs the `rate` command together with the valid parameters.
-2. The `LogicManager` receives the command string and forwarded it to the `AddressBookParser`.
+2. The `LogicManager` receives the command string and forwards it to the `AddressBookParser`.
 3. The `AddressBookParser` checks the type of command and constructs `RateCommandParser` to parse the parameters.
 4. The `RateCommandParser` will pass the `INTERVIEW_INDEX` and `RATING` to the `ParseUtil` to check for validity and creates `RateCommand`.
 5. The `LogicManager` executes the `RateCommand` which calls the `Model#getFilteredInterviewList` to get the size of the current list to ensure the `INTERVIEW_INDEX` is within the interview list size.
@@ -790,6 +892,10 @@ On the other hand, the duplication of phone number and email will be handled in 
 company in general. We plan to allow find-i to search for "" (empty string) and " " (whitespaces) so that interviews with applicants that are applying to the
 company in general can be found with the command.
 
+7. Currently there is no way to unmark an interview after marking the interview since an interview's status cannot change once it is done. 
+However, some users may accidentally mark an unfinished interview as done. In the future, an unmark feature will
+be implemented to allow users to change the status of interviews from done to not done.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -819,86 +925,151 @@ Please refer to the [User Guide](https://ay2324s1-cs2103t-t11-2.github.io/tp/Use
 ### Viewing help
 Command: `help`
 
-1. Test case: `help`</br>Expected: Help window with the User Guide URL is displayed. Status message remained unchanged.
+1. Test case: `help`<br>Expected: Help window with the User Guide URL is displayed. Status message remained unchanged.
 
 ### Clearing all the data
 Command: `clear`
 
-1. Test case: `clear`</br>Expected: All the applicants and interviews will be cleared. Success message is displayed.
+1. Test case: `clear`<br>Expected: All the applicants and interviews will be cleared. Success message is displayed.
 
 ### Exiting the program
 Command: `exit`
 
-1. Test case: `exit`</br>Expected: Exits InterviewHub and all data is saved automatically.
+1. Test case: `exit`<br>Expected: Exits InterviewHub and all data is saved automatically.
 
 ### Adding an applicant
 Command: `add-a`
+
+1. Adding an applicant
+   1. Test case: `add-a n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/engineer t/frontend` <br>
+       Expected: An applicant `John Doe` is added with the phone number `98765432`, email `johnd@example.com`, 
+       address `311, Clementi Ave 2, #02-25` and the tags `engineer` and `frontend`.
+   2. Test case: `add-a n/John Doe` <br>
+       Expected: No applicant is added. Error details shown in the status message.
 
 ### Deleting an applicant
 Command: `delete-a`
 
 1. Deleting an applicant while all applicants are being shown
     1. Prerequisites: List all applicants using the `list-a` command. Multiple applicants in the list.
-    2. Test case: `delete-a 1`
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
-    3. Test case: `delete-a 0`
+    2. Test case: `delete-a 1` <br>
+       Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the status message. 
+    3. Test case: `delete-a 0` <br>
        Expected: No applicant is deleted. Error details shown in the status message.
+2. Deleting an applicant while no applicants are in the list
+   1. Prerequisites: Clear all applicants using the `clear` command. List is empty.
+   2. Test case: `delete-a 1` <br>
+      Expected: No applicant is deleted. Error details shown in the status message. 
 
 ### Editing an applicant
 Command: `edit-a`
 
+1. Editing an applicant while all applicants are being shown
+   1. Prerequisites: List all applicants using the `list-a` command. Multiple applicants in the list.
+   2. Test case: `edit-a 1 n/Bob` <br>
+       Expected: First applicant's name is edited to `Bob`. Details of the edited applicant shown in the status message.
+   3. Test case: `edit-a 0` <br>
+       Expected: No applicant is edited. Error details shown in the status message.
+   4. Test case: `edit-a 1` <br>
+       Expected: No applicant is edited. Error details shown in the status message.
+
 ### Finding applicants from the list
 Command: `find-a`
+
+1. Finding an applicant while all applicants are being shown
+   1. Prerequisites: List all applicants using the `list-a` command. Multiple applicants in the list. 
+    One of the applicants is named `John Doe`. Another applicant `Alex Yeoh` has phone number `87438807`. 
+    No other applicant has `John` as part of their name. No other applicant has the number `874` as part of their phone number.
+   2. Test case: `find-a n/John p/874` <br>
+       Expected: Two applicants are shown in the applicant list. The applicants shown are `John Doe` and `Alex Yeoh`.
+        The number of applicants found is shown in the status message.
+   3. Test case: `find-a` <br>
+       Expected: List shown on GUI does not change. Error details shown in the status message.
+   4. Test case: `find-a n/` <br>
+      Expected: List shown on GUI does not change. Error details shown in the status message.
 
 ### Listing all applicants
 Command: `list-a`
 
 1. Listing all the applicants
-   1. Test case: `list-a`</br>Expected: Shows all the applicants in the applicant list. Success message is displayed.
+   1. Test case: `list-a`<br>Expected: Shows all the applicants in the applicant list. Success message is displayed.
 
 ### Adding an interview
 Command: `add-i`
 
+1. Adding an interview
+    1. Prerequisites: List all applicants using the `list-a` command. Have at least one applicant that does not have an interview scheduled.
+       Ensure that the input applicant ID chosen for step `ii` belongs to an applicant which does not have an interview scheduled. (The border around the applicant should be red)
+    2. Test case: `add-i app/3 jr/Software Engineer start/12-12-2024 1500 end/12-12-2024 1600` <br>
+        Expected: An interview is added with the applicant at the target index on the applicant list, with the
+        job role `Software Engineer`, starting datetime of `12-12-2024 1500` and ending datetime of `12-12-2024 1600`.
+    3. Test case: `add-i jr/PE Tester` <br>
+       Expected: No interview is added. Error details shown in the status message.
+
 ### Deleting an interview
 Command: `delete-i`
 
+1. Deleting an interview while all interviews are being shown
+    1. Prerequisites: List all interviews using the `list-i` command. List all applicants using the `list-a` command. Multiple interviews in the list.
+    2. Test case: `delete-i 1` <br>
+       Expected: First interview is deleted from the list. Details of the deleted interview shown in the status message.
+       The corresponding applicant associated with that interview should have their border turn from green to red
+    3. Test case: `delete-i 0` <br>
+       Expected: No interview is deleted. Error details shown in the status message.
+2. Deleting an interview while no interviews are in the interview list
+    1. Prerequisites: Clear all interviews (and applicants) using the `clear` command (Note that this is irreversible). Interview list is empty.
+    2. Test case: `delete-i 1` <br>
+       Expected: No interview is deleted. Error details shown in the status message.
+
 ### Editing an interview
 Command: `edit-i`
+
+1. Editing an interview while all interviews are being shown
+    1. Prerequisites: List all interviews using the `list-i` command. Multiple interviews in the list.
+       Ensure that the selected interview index chosen for step `ii` belongs to an interview that is not marked as done (border around interview is red). 
+    2. Test case: `edit-i 2 jr/PE Tester` <br>
+       Expected: The second interview's job role is edited to `PE Tester`. Details of the edited interview shown in the status message.
+    3. Test case: `edit-i 0` <br>
+       Expected: No interview is edited. Error details shown in the status message.
+    4. Test case: `edit-i 1` <br>
+       Expected: No interview is edited. Error details shown in the status message.
 
 ### Finding interviews from the list
 Command: `find-i`
 
 1. Finding interviews by job role
    1. Prerequisite: The interview with the indicated job role has matching keyword
-   2. Test case: `find-i software`</br>Expected: All interviews with at least one `software`(case-insensitive) as keyword in the job role are shown in the interview list. The amount of interview listed is shown on the status box.
-   3. Test case: `find-i` </br>Expected: The interview list remained unchanged. Error message is displayed.
+   2. Test case: `find-i software`<br>Expected: All interviews with at least one `software`(case-insensitive) as keyword in the job role are shown in the interview list. The amount of interview listed is shown on the status box.
+   3. Test case: `find-i` <br>Expected: The interview list remained unchanged. Error message is displayed.
 
 ### Listing all interviews
 Command: `list-i`
 
 1. Listing all the interviews
-   1. Test case: `list-i`</br>Expected: Shows all the interviews in the interview list. Success message is displayed.
+   1. Test case: `list-i`<br>Expected: Shows all the interviews in the interview list. Success message is displayed.
 
 ### Listing all free timing for the given day
-Command: `list-freetime`</br>
+Command: `list-freetime`<br>
 
 1. Listing the free time for a day using `DD/MM/YYYY` or `DD-MM-YYYY` format
    1. Prerequisites: The date string must be in the DD/MM/YYYY or DD-MM-YYYY format, and there should not be any interviews scheduled for the given date
-   2. Test case: `list-freetime 12/12/2099`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
-   3. Test case: `list-freetime 12-12-2099`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
-   4. Success message shown in command box for both cases:</br> `Free times on 12/12/2099:`</br>`from: 09:00 to: 17:00`
+   2. Test case: `list-freetime 12/12/2099`<br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
+   3. Test case: `list-freetime 12-12-2099`<br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2099
+   4. Success message shown in command box for both cases:<br> `Free times on 12/12/2099:`<br>`from: 09:00 to: 17:00`
 2. Listing the free time for a day using `DD/MM` or `DD MMM` format, where 
    1. Prerequisites: The date string must be in the DD/MM or DD MMM format, and there should not be any interviews scheduled for the given date
-   2. Test case: `list-freetime 12/12`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
-   3. Test case: `list-freetime 12 Dec`</br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
-   4. Success message shown in command box for both cases:</br> `Free times on 12/12/2023:`</br>`from: 09:00 to: 17:00`
+   2. Test case: `list-freetime 12/12`<br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
+   3. Test case: `list-freetime 12 Dec`<br>Expected: There should be 1 block of free time listed, which will span from 9am to 5pm on 12/12/2023
+   4. Success message shown in command box for both cases:<br> `Free times on 12/12/2023:`<br>`from: 09:00 to: 17:00`
 3. Listing the free time for a date in the past
    1. Prerequisite: The date string must follow one of the accepted date formats
-   2. Test case: `list-freetime 12-12-1970`</br>Expected: Command does not execute.
-   3. Error message shown in command box:</br>`Input date cannot be in the past!`
+   2. Test case: `list-freetime 12-12-1970`<br>Expected: Command does not execute.
+   3. Error message shown in command box:<br>`Input date cannot be in the past!`
 
 ### Listing all interviews for today
 Command: `list-i-today`
+1. Listing all interviews today
+    1. Test case: `list-a`<br>Expected: Shows all interviews scheduled for today (i.e. the date when the command was executed) in the interview list. Success message is displayed.
 
 ### Marking an interview as done
 Command: `mark`
@@ -908,35 +1079,35 @@ Command: `rate`
 
 1. Rating an existing interview
    1. Prerequisites: the interview to be rated has been marked as done, and it exists in the list.
-   2. Test case: `rate 1 2.0`</br>Expected: The interview rating at index one has been updated to 2.0. Success message is displayed.
-   3. Test case: `rate 1 10.0`</br>Expected: The interview rating at index one is not changed. Error message is displayed.
+   2. Test case: `rate 1 2.0`<br>Expected: The interview rating at index one has been updated to 2.0. Success message is displayed.
+   3. Test case: `rate 1 10.0`<br>Expected: The interview rating at index one is not changed. Error message is displayed.
 
 ### Listing all completed interview
 Command: `list-i-done`
 
 1. Listing completed interviews with exact command
-    1. Test case: `list-i-done`</br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty 
+    1. Test case: `list-i-done`<br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty 
 2. Listing completed interviews with the command along with nonsensical parameters appended to the end
-   1. Test case: `list-i-done I am a cat`</br>Expected: Same expected result as test case 1
+   1. Test case: `list-i-done I am a cat`<br>Expected: Same expected result as test case 1
    
 ### Listing all incomplete interview
 Command: `list-i-not-done`
 
 1. Listing completed interviews with exact command
-    1. Test case: `list-i-not-done`</br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty
+    1. Test case: `list-i-not-done`<br>Expected: The interview list should only show interviews which have been completed (i.e. those that are green). If there are no completed interviews, the interviews box will be empty
 2. Listing completed interviews with the command along with nonsensical parameters appended to the end
-    1. Test case: `list-i-not-done I am a cat`</br>Expected: Same expected result as test case 1
+    1. Test case: `list-i-not-done I am a cat`<br>Expected: Same expected result as test case 1
    
 ### Sorting the interview list by rating
 Command: `sort-rate`
 
 1. Sorting the current interview list by rating.
-   1. Test case: `sort-rate`</br>Expected: Sorts the current interview list by rating in descending order. Success message is displayed.
+   1. Test case: `sort-rate`<br>Expected: Sorts the current interview list by rating in descending order. Success message is displayed.
 
 ### Sorting the interview list by start-time
 Command: `sort-time`
 
 1. Listing completed interviews with exact command
-   1. Test case: `sort-time`</br>Expected: The interview list will be sorted in chronological order of start times. If there are no interviews scheduled, the interviews box will be empty. In the case that the list is filtered in some way, the sort will only sort on the filtered interview list
+   1. Test case: `sort-time`<br>Expected: The interview list will be sorted in chronological order of start times. If there are no interviews scheduled, the interviews box will be empty. In the case that the list is filtered in some way, the sort will only sort on the filtered interview list
 2. Listing completed interviews with the command along with nonsensical parameters appended to the end
-    1. Test case: `sort-time I am a cat`</br>Expected: Same expected result as test case 1
+    1. Test case: `sort-time I am a cat`<br>Expected: Same expected result as test case 1
