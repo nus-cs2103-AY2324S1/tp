@@ -409,7 +409,14 @@ The `PayrollCommandParser` class is responsible for parsing the user input for t
 
 The following sequence diagram shows how the PayrollCommandParser class parses the user input:
 
-![ParsePayrollCommandSequenceDiagram](images/ParseDeductCommandSequenceDiagram.png)
+![ParsePayrollCommandSequenceDiagram](images/ParsePayrollCommandSequenceDiagram.png)
+
+When parsing the input, the input is first passed into ParserUtil#parseIndex method. 
+This checks if the input intends to calculate the payroll by using the index of the employee.
+If it is by name then a `ParseException` will be caught and all relevant parameters are extracted according to their respective prefixes, and put into an `ArgumentMultimap`.
+
+The following sequence diagram shows how the `DeductCommandParser` class parses the `index`:
+
 
 <u>PayrollCommandParser</u>
 
