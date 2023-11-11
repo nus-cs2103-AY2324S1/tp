@@ -77,9 +77,9 @@ public class FindPersonCommandTest {
     @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindPersonCommand findPersonCommand = new FindPersonCommand(predicate);
+        FindCommand findCommand = new FindPersonCommand(predicate);
         String expected = FindPersonCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, findPersonCommand.toString());
+        assertEquals(expected, findCommand.toString());
     }
 
     /**

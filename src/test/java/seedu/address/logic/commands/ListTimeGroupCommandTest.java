@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_MON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_TUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_WED;
+import static seedu.address.logic.commands.ListTimeGroupCommand.MESSAGE_LISTTIME_GROUP_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -16,6 +18,8 @@ import javafx.collections.ObservableList;
 import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -26,43 +30,79 @@ import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
-import seedu.address.testutil.PersonBuilder;
 
-public class UngroupPersonCommandTest {
+public class ListTimeGroupCommandTest {
 
     @Test
-    public void constructor_nullPersonNullGroupThrowsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new UngroupPersonCommand(null, null));
+    public void constructor_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new ListTimeGroupCommand(null));
     }
 
     @Test
-    public void execute_ungroupPersonSuccess() throws CommandException {
+    public void execute_groupWithNoTimeIntervalListSuccess() throws Exception {
         Group validGroup = new GroupBuilder().build();
-        Person validPerson = new PersonBuilder().build();
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(validGroup);
 
-        ModelStubWithGroupAndSingleMember modelStub = new ModelStubWithGroupAndSingleMember(validGroup, validPerson);
-        assertTrue(validGroup.contains(validPerson));
+        // Person has time interval to be listed
+        CommandResult commandResult =
+                new ListTimeGroupCommand(validGroup).execute(modelStub);
+        CommandResult expectedResult =
+                new CommandResult(String.format(MESSAGE_LISTTIME_GROUP_SUCCESS,
+                        validGroup.getGroupName()));
 
-        CommandResult commandResult = new UngroupPersonCommand(validGroup.getGroupName(),
-                validPerson.getName().toString()).execute(modelStub);
-
-        assertFalse(validGroup.contains(validPerson));
+        // Time interval has been deleted
+        assertEquals(expectedResult, commandResult);
     }
 
     @Test
-    public void execute_personNotInGroup_ungroupPersonFailure() {
+    public void execute_personWithSingleTimeIntervalListSuccess() throws Exception {
         Group validGroup = new GroupBuilder().build();
-        Person validPerson = new PersonBuilder().build();
+        ModelStubGroupWithSingleTiming modelStub = new ModelStubGroupWithSingleTiming(validGroup);
 
-        ModelStubWithEmptyGroup modelStub = new ModelStubWithEmptyGroup(validGroup, validPerson);
-        assertFalse(validGroup.contains(validPerson));
+        // Person has time interval to be listed
+        ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
+        validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
+        CommandResult commandResult =
+                new ListTimeGroupCommand(validGroup).execute(modelStub);
+        CommandResult expectedResult =
+                new CommandResult(String.format(MESSAGE_LISTTIME_GROUP_SUCCESS,
+                        validGroup.getGroupName()) + "\nMON 1300 - MON 1400 ");
 
-        assertThrows(CommandException.class, () -> new UngroupPersonCommand(validGroup.getGroupName(),
-                validPerson.getName().toString()).execute(modelStub));
+        // Time interval has been deleted
+        assertEquals(expectedResult, commandResult);
+    }
+
+    @Test
+    public void execute_personWithMultipleTimeIntervalsListSuccess() throws Exception {
+        Group validGroup = new GroupBuilder().build();
+        ModelStubGroupWithMultipleTimings modelStub = new ModelStubGroupWithMultipleTimings(validGroup);
+
+        // Person has time interval to be listed
+        ArrayList<TimeInterval> validTimeInterval = new ArrayList<>();
+        validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_MON));
+        validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_TUE));
+        validTimeInterval.add(ParserUtil.parseEachInterval(VALID_TIME_WED));
+
+        CommandResult commandResult =
+                new ListTimeGroupCommand(validGroup).execute(modelStub);
+        CommandResult expectedResult =
+                new CommandResult(
+                        String.format(MESSAGE_LISTTIME_GROUP_SUCCESS, validGroup.getGroupName())
+                                + "\nMON 1300 - MON 1400 \nTUE 1300 - TUE 1400 \nWED 1300 - WED 1400 ");
+
+        assertEquals(expectedResult, commandResult);
+    }
+
+    @Test
+    public void execute_nonExistentPerson_listFail() throws Exception {
+        Group validGroup = new GroupBuilder().build();
+        ModelStubGroupWithMultipleTimings modelStub = new ModelStubGroupWithMultipleTimings(validGroup);
+        Group invalidGroup = new Group("CS2100");
+        assertThrows(CommandException.class, () -> new ListTimeGroupCommand(invalidGroup).execute(modelStub));
     }
 
     /**
-     * A default model stub that has all methods failing.
+     * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -186,8 +226,8 @@ public class UngroupPersonCommandTest {
         }
 
         @Override
-        public String deleteTimeFromPerson(Name personName,
-                                           ArrayList<TimeInterval> listOfTimesToDelete) throws CommandException {
+        public String deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> listOfTimesToDelete)
+                throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -223,17 +263,14 @@ public class UngroupPersonCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person in a group.
+     * A Model stub that contains a single group with no time interval.
      */
-    private class ModelStubWithGroupAndSingleMember extends ModelStub {
+    private class ModelStubWithGroup extends ModelStub {
         private final Group group;
-        private final Person person;
-        ModelStubWithGroupAndSingleMember(Group group, Person person) throws CommandException {
-            requireAllNonNull(group, person);
+
+        ModelStubWithGroup(Group group) throws ParseException {
+            requireNonNull(group);
             this.group = group;
-            this.person = person;
-            group.addPerson(person);
-            person.addGroup(group);
         }
 
         public boolean hasGroup(Group group) {
@@ -241,47 +278,23 @@ public class UngroupPersonCommandTest {
             return this.group.equals(group);
         }
 
-        /**
-         * Unassigns person to group.
-         *
-         * @param person Person to be grouped.
-         * @param group  Group in consideration.
-         * @throws CommandException if person has already been assigned to group.
-         */
-        private void unassignGroup(Person person, Group group) throws CommandException {
-            group.removePerson(person);
-            person.removeGroup(group);
-        }
-
-        /**
-         * Removes person from group.
-         *
-         * @param personName String representing person name.
-         * @param groupName  String representing group name.
-         * @return Pair containing the Person and the Group.
-         * @throws CommandException if the person cannot be removed from the group.
-         */
         @Override
-        public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
-            Person person = this.person;
-            Group group = this.group;
-            this.unassignGroup(person, group);
-            Pair<Person, Group> output = new Pair<>(person, group);
-            return output;
+        public TimeIntervalList getTimeFromGroup(Group group) throws CommandException {
+            requireNonNull(group);
+            return group.getTime();
         }
     }
 
     /**
-     * A Model stub that contains a single person in a group.
+     * A Model stub that contains a single group and a time interval.
      */
-    private class ModelStubWithEmptyGroup extends ModelStub {
+    private class ModelStubGroupWithSingleTiming extends ModelStub {
         private final Group group;
-        private final Person person;
 
-        ModelStubWithEmptyGroup(Group group, Person person) {
-            requireAllNonNull(group, person);
+        ModelStubGroupWithSingleTiming(Group group) throws ParseException, CommandException {
+            requireNonNull(group);
             this.group = group;
-            this.person = person;
+            this.group.addTime(ParserUtil.parseEachInterval(VALID_TIME_MON));
         }
 
         public boolean hasGroup(Group group) {
@@ -289,33 +302,37 @@ public class UngroupPersonCommandTest {
             return this.group.equals(group);
         }
 
-        /**
-         * Unassigns person to group.
-         *
-         * @param person Person to be grouped.
-         * @param group  Group in consideration.
-         * @throws CommandException if person has already been assigned to group.
-         */
-        private void unassignGroup(Person person, Group group) throws CommandException {
-            group.removePerson(person);
-            person.removeGroup(group);
-        }
-
-        /**
-         * Removes person from group.
-         *
-         * @param personName String representing person name.
-         * @param groupName  String representing group name.
-         * @return Pair containing the Person and the Group.
-         * @throws CommandException if the person cannot be removed from the group.
-         */
         @Override
-        public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
-            Person person = this.person;
-            Group group = this.group;
-            this.unassignGroup(person, group);
-            Pair<Person, Group> output = new Pair<>(person, group);
-            return output;
+        public TimeIntervalList getTimeFromGroup(Group group) {
+            requireNonNull(group);
+            return group.getTime();
         }
     }
+
+    /**
+     * A Model stub that always accept the person being added.
+     */
+    private class ModelStubGroupWithMultipleTimings extends ModelStub {
+        private final Group group;
+
+        ModelStubGroupWithMultipleTimings(Group group) throws ParseException, CommandException {
+            requireNonNull(group);
+            this.group = group;
+            this.group.addTime(ParserUtil.parseEachInterval(VALID_TIME_MON));
+            this.group.addTime(ParserUtil.parseEachInterval(VALID_TIME_TUE));
+            this.group.addTime(ParserUtil.parseEachInterval(VALID_TIME_WED));
+        }
+
+        public boolean hasGroup(Group group) {
+            requireNonNull(group);
+            return this.group.equals(group);
+        }
+
+        @Override
+        public TimeIntervalList getTimeFromGroup(Group group) {
+            requireNonNull(group);
+            return group.getTime();
+        }
+    }
+
 }

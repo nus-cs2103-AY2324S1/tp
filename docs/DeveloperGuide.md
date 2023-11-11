@@ -178,32 +178,65 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Adding a Person
 
-The add feature is facilitate by a number of classes such as `Person` and `Model`
+#### Implementation
+
+The `add` feature is facilitated by a number of classes such as `Person` and `Model`
 
 Step 1. The user launches the application for the first time.
 
 Step 2. The user executes `“add n/John Doe p/98765432 e/johnd@example.com g/CS2103T”` command to add a new person. `LogicManager#execute` is called which then calls `AddressBookParser#parseCommand` to decide on the type of command. `AddressBookParse`r` then calls `AddCommandParser`,
 
 Step 3, The `AddCommandParser` is called to read the user input. `AddCommandParser` calls `ArgumentTokenizer#tokenize` to check the prefixes of the user input. `AddCommandParser` then calls `ArgumentMultimap#getValue()` to get inputs after each prefix.
-The result of it is then passed to `ParserUtil#parse{Attribute}` methods to parse each attributes such as `Name`. `AddCommandParser` then makes new person object. `AddCommandParser` then calls `AddCommand` and passes `Person` inside.
+The result of it is then passed to `ParserUtil#parse` methods to parse each attributes such as `Name`. `AddCommandParser` then makes new person object. `AddCommandParser` then calls `AddCommand` and passes `Person` inside.
 
 Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook#addPerson()`. The latter method will add person inside the `uniquePersonList` in `addressBook`. `AddCommand` also calls `Model#addGroup` which then calls `AddressBook#addGroup` to add the group inside `grouplist` if the group does not exist.
 Lastly, `AddCommand` adds the person inside the group
 
 Note: No duplication is allowed in addressbook for most of Person’s attribute (name, email and phone number.)
 
+The following sequence diagram describes the process of `add` command:
 <puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
 
 #### Design consideration:
 
 **Aspect: Handling group attribute in user input**
 
-* **Alternative 1 (Current Choice):** Only allow user to add one group for each `Add` Command
-    * Pros: Conveniently adds a person into group while creating a new contact at the same time
-    * Cons: User input is relatively longer
-* **Alternative 2:** Allow user to add as many groups as required for each `Add` Command
-    * Pros: Conveniently adds a person into group while creating a new contact at the same time
-    * Cons: User input can get potentially very long, increasing the chance of invalid input
+* **Alternative 1 (Current Choice):** Only allow user to add one group for each `add` Command
+    * Pros: Conveniently adds a person into a single group while creating a new contact at the same time, relatively easier to implement parser.
+    * Cons: User input may get relatively longer.
+* **Alternative 2:** Allow user to add as many groups as required for each `add` Command
+    * Pros: Conveniently adds a person into multiple group while creating a new contact at the same time.
+    * Cons: User input can get potentially very long, increasing the chance of invalid input, relatively harder to implement parser.
+
+--------------------------------------------------------------------------------------------------------------------
+### Adding Time a Person
+
+#### Implementation
+
+The `addtime` feature is facilitated by a number of classes such as `Person`, `Model` and `TimeInterval`
+
+Step 1. User launches the application.
+
+Step 2. The user executes `“addtime n/Alex Yeoh t/mon 1200 - mon 1400 t/tue 1000 - wed 1600”` command to add time slots to the person, Alex Yeoh. `LogicManager#execute` is called which then calls `AddressBookParser#parseCommand` to decide on the type of command. `AddressBookParser` then calls `AddTimeCommandParser`,
+
+Step 3, The `AddTimeCommandParser` is called to read the user input. `AddTimeCommandParser` calls `ArgumentTokenizer#tokenize` to check the prefixes of the user input. `AddTimeCommandParser` then calls `ArgumentMultimap#getValue()` to get inputs after each unique single prefix and `ArgumentMultimap#getAllValues()` to get inputs from prefix that are used more than once.
+The result of it is then passed to `ParserUtil#parse()` methods to parse each attributes such as `Name`. `AddTimeCommandParser` then calls `AddTimeCommand`.
+
+Step.4 `AddTimeCommand` then calls `Model#addTimeToPerson()` which then calls `AddressBook#addTimeToPerson()`. The latter method will add time to the person.
+
+The following sequence diagram describes the process of `addtime` command:
+<puml src="diagrams/AddTimeCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
+
+#### Design consideration:
+
+**Aspect: Handling group attribute in user input**
+
+* **Alternative 1 (Current Choice):** Allows user to add more than one time intervals in each `addtime` command.
+  * Pros: Conveniently adds a multiple time intervals into person.
+  * Cons: User input may get relatively longer, relatively harder to implement parser.
+* **Alternative 2:** Allow user to only add single time interval in each `addtime` Command
+  * Pros: Conveniently adds a person into group while creating a new contact at the same time, relatively easier to implement parser.
+  * Cons: User input can get potentially very long, increasing the chance of invalid input.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -306,8 +339,6 @@ The following sequence diagram shows how the Delete Group operation works:
 
 </box>
 
-
-
 ### Group Remark Feature
 
 #### Implementation
@@ -326,6 +357,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/GroupRemarkSequenceDiagram.puml" alt="GroupRemarkSequenceDiagram" />
 
+<box type="info" seamless>
+
+**Note:** The lifeline for `GroupRemarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
 #### Design Considerations
 
 **Aspects:**
@@ -335,11 +372,11 @@ The following activity diagram summarizes what happens when a user executes a ne
     - Cons: May be troublesome if the user wants to keep contents from the original remark.
 - **Alternative 2:** Edits original remark
     - Pros: Easy to add more information.
-    - Cons: Could be confusing to edit if there are many changes.
+    - Cons: Could be confusing to edit if there are many changes or remark is too long.
 
 ### Delete Time Feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed delete time feature is facilitated by the `timeIntervalList` and `Person` class. It accesses the `timeIntervalList` from the `Person` class and deletes a time interval with `Person#deleteFreeTime()`. The operation is exposed in the `Model` interface as `Model#deleteTimeFromPerson`.
 
@@ -399,7 +436,7 @@ Below is an activity diagram that illustrates the control flow for Delete Person
 
 ### Group Person
 
-#### Proposed Implementation
+#### Implementation
 
 The group remark mechanism is facilitated by `Group`. It is stored internally as a `Group Remark`. This operation is exposed in the `Model` interface as `Model#groupPerson(personName, groupName)`.
 
@@ -511,57 +548,286 @@ responsibilities of each member. Our app will track the schedule of each contact
 
 **MSS**
 
-1. User requests to add contact
-2. ProjectPRO adds new contact
-3. User gets back success command result
+1. User requests to add contact.
+2. ProjectPRO adds new contact.
+3. ProjectPRO informs user contact has been successfully added.
 
    Use Case ends.
 
 **Extensions:**
-* 1a.  System detects error in input
-    * 1a1.  User gets error message
-    * Use case repeats from step 1
-
-* 1b. System detects duplicate contact requested by user.
-    * 1b1. System displays corresponding error message.
+* 1a.  ProjectPRO detects error in input
+    * 1a1. ProjectPRO displays an error message.
     * Use case ends.
 
+* 1b. ProjectPRO detects duplicate contact requested by user.
+    * 1b1. ProjectPRO displays an error message.
+    * Use case ends.
 
-** 6.3.2. Use case 2: Delete contact**
+**6.3.2. Use case 2: Delete contact**
 
 **MSS**
 
 1. User requests to delete contact
-2. System deletes contact.
-3. System produces a success message.
+2. ProjectPRO deletes contact.
+3. ProjectPRO informs user contact has been successfully deleted.
 
    Use Case ends
 
 **Extensions**
-* 1a. System detects incorrect data entered.
-    * 1a1. System requests for the correct data.
-    * 1a2. User enters new data
-    * 1a3. Steps 1a1-1a2 are repeated until the data entered are correct.
-    * Use case resumes from step 2.
+* 1a. Contact details is incorrect.
+    * 1a1. ProjectPRO displays an error message.
+    * Use case ends.
 
-**Use case: Add contact to group**
+
+**6.3.3. Use case 3: Finding a contact**
 
 **MSS**
 
-1. User requests to add a contact into a group.
-2. System adds user into the group successfully.
-3. System displays a success message.
+1. User requests to find a contact.
+2. ProjectPRO searches for the contact.
+3. ProjectPRO displays the contact details.
 
-   Use Case ends
+Use Case ends.
 
 **Extensions**
-* 1a. System detects an error in the data entered.
-    * 1a1. System requests for the correct data.
-    * 1a2. User enters new data
-    * 1a3. Steps 1a1-1a2 are repeated until the data entered are correct.
-    * Use case resumes from step 2.
 
-*{More to be added}*
+* 2a. If the contact is not found.
+    * 2a1. ProjectPRO displays an empty list.
+    * Use case ends.
+
+**6.3.4. Use case 4: Listing all contacts**
+
+**MSS**
+
+1. User requests to list all contacts.
+2. ProjectPRO displays the list of contacts.
+
+Use Case ends.
+
+**6.3.5. Use case 5: Creating a group**
+
+**MSS**
+
+1. User requests to create a group.
+2. ProjectPRO creates the group.
+3. ProjectPRO displays a success message.
+
+Use Case ends.
+
+**Extensions**
+
+* 1a. If the user provides incomplete or incorrect information.
+    * 1a1. ProjectPRO displays an error message.
+    * Use case repeats from step 1.
+
+**6.3.6. Use case 6: Deleting a group**
+
+**MSS**
+
+1. User requests to delete a group.
+2. ProjectPRO deletes the group.
+3. ProjectPRO displays a success message.
+
+Use Case ends.
+
+**Extensions**
+
+* 1a. If the group does not exist.
+    * 1a1. ProjectPRO displays an error message.
+    * Use case ends.
+
+
+**6.3.7. Use case 7: Adding a group remark**
+
+**MSS**
+
+1. User requests to add a remark to a group.
+2. ProjectPRO adds the remark to the group.
+3. ProjectPRO displays a success message.
+
+**Extensions**
+
+* 1a. If the group does not exist.
+  * 1a1. ProjectPRO displays an error message.
+  * Use case ends.
+
+Use Case ends.
+
+**6.3.8. Use case 8: Finding a group**
+
+**MSS**
+1. User requests to find a group.
+2. ProjectPRO searches for the contact.
+3. ProjectPRO shows all the contacts from the group and the group remark.
+
+Use Case ends.
+
+**Extensions**
+
+* 2a. If the group does not exist.
+    * 2a1. ProjectPRO displays a message indicating that the group does not exist.
+    * Use case ends.
+
+**6.3.9. Use case 9: Listing all groups**
+
+**MSS**
+
+1. User requests to list all groups.
+2. ProjectPRO displays the list of groups.
+
+Use Case ends.
+
+**6.3.10. Use case 10: Add contact to group**
+
+**MSS**
+1. User requests to add a contact to a group.
+2. ProjectPRO adds the contact to the group.
+3. ProjectPRO displays a success message.
+
+Use Case ends.
+
+**Extensions**
+
+* 1a. If the group does not exist.
+  * 1a1. ProjectPRO displays an error message.
+  * Use case repeats from step 1.
+
+* 1b. If the contact does not exist.
+  * 1b1. ProjectPRO displays an error message.
+  * Use case repeats from step 1.
+
+**6.3.11. Use case 11: Removing contact from group**
+
+**MSS**
+
+1. User requests to remove a contact from a group.
+2. ProjectPRO removes the contact from the group.
+3. ProjectPRO displays a success message.
+Use Case ends.
+
+**Extensions**
+
+* 1a. If the group does not exist.
+  * 1a1. ProjectPRO displays an error message.
+  * Use case repeats from step 1.
+
+* 1b. If the contact does not exist.
+  * 1bProjectPRO displays an error message.
+  * Use case repeats from step 1.
+
+**6.3.12. Use case 12: Adding free time to contact**
+
+**MSS**
+
+1. User requests to add free time to a contact.
+2. ProjectPRO adds the free time to the contact.
+3. ProjectPRO displays a success message.
+
+Use Case ends.
+
+**Extensions**
+
+* 1a. If the contact does not exist.
+  * 1a1. ProjectPRO displays an error message.
+  * Use case repeats from step 1.
+
+* 1b. If the time input does not follow the format.
+  * 1b1. ProjectPRO displays an error message.
+  * Use case repeats from step 1.
+
+**6.3.13. Use case 13: Removing free time from contact**
+
+**MSS**
+
+1. User requests to remove free time from a contact.
+2. ProjectPRO removes the selected free time from the contact.
+3. ProjectPRO displays a success message.
+Use Case ends.
+
+**Extensions**
+
+* 1a. If the contact does not exist.
+  * 1a1. ProjectPRO displays an error message.
+  * Use case repeats from step 1.
+
+* 1b. If the time input does not follow the format.
+  * 1b1. ProjectPRO displays an error message.
+  * Use case repeats from step 1.
+
+**6.3.14. Use case 14: Listing free time of contact**
+
+**MSS**
+
+1. User requests to list the free time of a contact.
+2. ProjectPRO displays the list of free time.
+Use Case ends.
+
+**Extensions**
+
+* 2a. If the contact has no free time.
+  * 2a1. ProjectPRO displays nothing.
+  * Use case repeats from step 1.
+
+**6.3.15. Use case 15: Adding meeting time to group**
+
+**MSS**
+
+1. User requests to add meeting time to a group.
+2. ProjectPRO adds the meeting time to the group.
+3. ProjectPRO displays a success message.
+Use Case ends.
+
+**Extensions**
+
+* 1a. If the user provides incorrect information or the group does not exist.
+    * 1a1. ProjectPRO displays an error message.
+    * Use case repeats from step 2.
+
+**6.3.16. Use case 16: Remove meeting time from group**
+
+**MSS**
+
+1. User requests to remove meeting time from a group.
+2. ProjectPRO removes the selected meeting time from the group.
+3. ProjectPRO displays a success message.
+Use Case ends.
+
+**Extensions**
+
+* 1a. If the group does not exist.
+    * 2a1. ProjectPRO displays an error message.
+    * Use case repeats from step 1.
+* 1b. If the selected meeting time does not exist for the group.
+  * 1b. ProjectPRO displays an error message.
+  * Use case repeats from step 1.
+* 1c. If the meeting time does not follow the required format.
+  * 1b. ProjectPRO displays an error message.
+  * Use case repeats from step 1.
+
+
+**6.3.17. Use case 17: Listing meeting time of group**
+
+**MSS**
+
+1. User requests to list the meeting time of a group.
+2. ProjectPRO retrieves the meeting time details for the group.
+3. ProjectPRO displays the list of meeting time.
+Use Case ends.
+
+**6.3.18. Use case 18: Find free time of group**
+
+**MSS**
+
+1. User requests to find common free time for a group.
+2. ProjectPRO identifies common free time slots between all members of the group.
+3. ProjectPRO displays the list of common free time slots.
+Use Case ends.
+
+**Extensions**
+
+* 2a. If there is no common free time the length of the duration.
+  * 2a1. ProjectPRO displays an empty list.
+  * Use case repeats from step 1.
 
 ### 6.4. Non-Functional Requirements
 
@@ -575,9 +841,14 @@ responsibilities of each member. Our app will track the schedule of each contact
 
 ### 6.5. Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Java 11**: Programming language
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+| Parameter | Description                      | Constraints                                                                                                                                             | Valid Examples                           | Invalid Examples                                |
+|-----------|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------|-------------------------------------------------|
+| `n/`      | Contact name of the student      | Alphanumeric characters (a to z, A to Z, 0 to 9)                                                                                                        | John Doe, David Li 2                     | Kishen s/o Kasinathan, ナルト, அசிங்கமான           |
+| `p/`      | Phone number of the student      | Positive integer with 3 or more digits                                                                                                                  | 999, 98765432, 18003569377               | 1-800-356-9377, 0, -1, 98431234.5               |
+| `e/`      | Email of the student             | Email prefix: Alphanumeric characters (a to z, A to Z, 0 to 9), @, Email Domain                                                                         | example@gmail.com, example@moe.edu.sg    | example@!.com, example@moed.edu.s               |
+| `g/`      | Name of the group                | Alphanumeric characters (a to z, A to Z, 0 to 9)                                                                                                        | CS2103T, Group 3                         | Group 3!, 1                                     |
+| `r/`      | Group remark                     | N/A                                                                                                                                                     | Zoom link: CS2101.zoom, 123!@#$#@        | N/A                                             |
+| `t/`      | Time interval of student / group | timings are written with the first 3 letters of the day and time in 24 hour format, with a `-` between the timings. Start time cannot be after end time | mon 1300 - mon 1400, sat 1000 - sun 1300 | monday 1300 - tuesday 1200, wed 1300 - wed 1000 |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -597,18 +868,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder
 
-    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### 7.2. Deleting a person
 
@@ -617,7 +886,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     2. Test case: `delete n/Alex Yeoh`<br>
-       Expected: Alex is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: Alex is deleted from the list. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
 
     3. Test case: `delete n/Alex Yeoh`, after Alex has been deleted <br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -625,16 +894,279 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect delete commands to try: `delete`, `delete n/x`, `...` (where x is not in the list)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### 7.3. Finding a contact
 
-### 7.3. Saving data
+1. Find a particular contact in your address book
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `find n/Alex Yeoh`<br>
+       Expected: Only contacts with Alex is shown in the list. Number of perosns with that name is shown.
+
+    3. Test case: `find n/Alex Yeoh`, after Alex has been searched <br>
+      Expected: No change to the status message.
+
+    4. Other incorrect find commands to try: `find n/`, `find n/x`, `...` (where x is not in the list)<br>
+       Expected: Similar to previous.
+
+### 7.4. Listing all contacts
+
+1. Listing all contacts in your address book
+
+    1. Prerequisites: Find a limited number of persons using the `find n/` command. No persons will be listed.
+
+    2. Test case: `list`<br>
+     Expected: All contacts will be shown.
+
+    3. Other incorrect find commands to try: `list n/`, `list n/x`, `...`<br>
+     Expected: Error message shown.
+
+### 7.5. Creating a group
+
+1. Creating a group that does not exist
+
+    1. Test case: `new g/CS2103`<br>
+     Expected: New group called CS2103 is added to ProjectPRO.
+
+    2. Test case: `new g/CS2103`, after CS2103 has been created <br>
+     Expected: No group is created. Error details shown in the status message. Status bar remains the same.
+
+    3. Other incorrect delete commands to try: `new g/`, `new g/x`, `...` (where x is a group in the ProjectPRO)<br>
+         Expected: Similar to previous.
+
+### 7.6. Deleting a Group
+
+1. Deleting a Group
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `delete g/CS2103`<br>
+      Expected: CS2103 is deleted from the list. Details of the deleted group shown in the status message. Group tag under contacts in that group is removed.
+
+   3. Test case: `delete g/CS2103`, after CS2103 has been deleted <br>
+      Expected: No group is deleted. Error details shown in the status message. Status bar remains the same.
+
+   4. Other incorrect delete commands to try: `delete`, `delete n/x`, `...` (where x is not in the list)<br>
+      Expected: Similar to previous.
+
+### 7.7. Adding a group remark
+
+1. Adding a group remark
+
+   1. Test case: `remark g/CS2103 r/Lecture on friday`<br>
+      Expected: New remark with "Lecture on friday" is added to CS2103.
+
+   2. Test case: `remark g/CS2103 r/Lecture on thursday`, after CS2103 has a remark added <br>
+      Expected: Old remark is replaced with new remark.
+
+   3. Incorrect remark commands to try: `remark g/`, `remark g/x r/Lecture on wednesday`, `...` (where x is a group in the ProjectPRO)<br>
+      Expected: Error message displayed.
+
+### 7.8. Finding a group
+
+1. Find a particular group in your address book
+
+  1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+  2. Test case: `find g/CS2103`<br>
+     Expected: Only contacts in the group is shown in the list. Group remark of the group is displayed.
+
+  3. Test case: `find g/CS2103`, after CS2103 has been searched <br>
+     Expected: No change to the status message.
+
+  4. Other incorrect find commands to try: `find g/`, `...` <br>
+     Expected: Error message displayed.
+
+### 7.9. Listing all groups
+
+1. Listing all groups in your address book
+
+   1. Test case: `listgroup`<br>
+        Expected: All groups will be shown in the contact box.
+
+   2. Other incorrect find commands to try: `listgroup g/`, `listgroup cs2103`, `...`<br>
+        Expected: Error message shown.
+
+### 7.10. Adding contacts to groups
+
+1. Adding a contact to a group
+
+  1. Prerequisite: `list`<br>
+     Expected: All contacts will be shown in address book.
+
+  2. Test case: `group n/Alex Yeoh g/CS2103`<br>
+     Expected: Alex is added to the group. A CS2103 group tag is added below his name.
+
+  3. Incorrect group commands to try: `group n/ g/`, `group n/Alex Yeoh g/x`, `group n/x g/CS2103` (where x is an unadded contact / group) <br>
+       Expected: Error message shown.
+
+### 7.11. Removing a contact from a group
+
+1. Ungrouping a contact
+
+   1. Prerequisite: `list`<br>
+      Expected: All contacts will be shown in address book.
+
+   2. Test case: `ungroup n/Alex Yeoh g/CS2103`<br>
+      Expected: Alex Yeoh's group tag is removed.
+
+   3. Test case: `ungroup n/Alex Yeoh g/CS2103`, after Alex has been ungrouped <br>
+      Expected: No change to the address book, error message shown in output box.
+
+   4. Other incorrect find commands to try: `ungroup n/Alex Yeoh g/`, `ungroup n/ g/CS2103`, `...` <br>
+      Expected: Error message displayed.
+
+### 7.12. Adding free time to contact
+
+1. Add free time to contact
+
+   1. Prerequisite: `list`<br>
+      Expected: All contacts will be shown in address book.
+
+   2. Test case: `addtime n/Alex Yeoh t/mon 1300 - mon 1400`<br>
+      Expected: Free time added to contact, contact has a time interval tag underneath his name.
+
+   3. Test case: `addtime n/Alex Yeoh t/mon 1300 - mon 1400`, after previous command <br>
+      Expected: No change to the address book, error message shown in output box stating there is a clash in timing.
+
+   4. Other incorrect find commands to try: `addtime n/Alex Yeoh t/mon 1300 - mon 1200`, `addtime n/Alex Yeoh t/monday 1300 - monday 1400`, `...` <br>
+      Expected: Command format error.
+
+### 7.13. Deleting free time from contact
+
+1. Delete free time to contact
+
+  1.
+     2. Prerequisite: `list`<br>
+          Expected: All contacts will be shown in address book.
+     3. Prerequisite: `addtime n/Alex Yeoh t/mon 1300 - mon 1400`<br>
+          Expected: Contact has a time interval tag beneath his name.
+
+  2. Test case: `deletetime n/Alex Yeoh t/mon 1300 - mon 1400`<br>
+     Expected: Free time deleted from contact, contact's time interval tag underneath his name is removed.
+
+  3. Test case: `deletetime n/Alex Yeoh t/mon 1300 - mon 1400`, after previous command <br>
+     Expected: No change to the address book, error message shown in output box stating time is not in his list.
+
+  4. Other incorrect find commands to try: `deletetime n/Alex Yeoh t/mon 1300 - mon 1200`, `deletetime n/Alex Yeoh t/monday 1300 - monday 1400`, `...` <br>
+     Expected: Command format error.
+
+### 7.14. List free time of contact
+
+1. Add free time to contact
+
+   1.
+      2. Prerequisite: `list`<br>
+         Expected: All contacts will be shown in address book.
+      3. Prerequisite: `addtime n/Alex Yeoh t/mon 1300 - mon 1400`<br>
+         Expected: Contact has a time interval tag beneath his name.
+
+  2. Test case: `listtime n/Alex Yeoh`<br>
+     Expected: All time intervals under contact is listed in output box.
+
+  3. Test case: `listtime n/Alex Yeoh`, after previous command <br>
+     Expected: No change to the address book.
+
+  4. Other incorrect find commands to try: `listtime n/Alex Yeoh t/mon 1300 - mon 1200`, `...` <br>
+     Expected: Error message.
+
+### 7.15. Adding meeting time to group
+
+1. Add free time to contact
+
+  1. Prerequisite: `list`<br>
+     Expected: All contacts will be shown in address book.
+
+  2. Test case: `addmeeting g/CS2103 t/mon 1300 - mon 1400`<br>
+     Expected: Meeting time added to group, day card on the right has a time interval tag under monday.
+
+  3. Test case: `addmeeting g/CS2103 t/mon 1300 - mon 1400`, after previous command <br>
+     Expected: No change to the address book, error message shown in output box stating there is a clash in timing.
+
+  4. Other incorrect find commands to try: `addmeeting g/CS2103 t/mon 1300 - mon 1200`, `addmeeting g/CS2103 t/monday 1300 - monday 1400`, `addmeeting g/x t/mon 1300 - mon 1400`, `...` (where x is not an existing group)<br>
+     Expected: Command format error.
+
+### 7.16. Deleting meeting time from group
+
+1. Delete meeting time from group
+
+1.
+  2. Prerequisite: `list`<br>
+     Expected: All contacts will be shown in address book.
+  3. Prerequisite: `addmeeting g/CS2103 t/mon 1300 - mon 1400`<br>
+     Expected: Meeting time added to group, day card on the right has a time interval tag under monday.
+
+2. Test case: `deletetime g/CS2103 t/mon 1300 - mon 1400`<br>
+   Expected: Meeting time deleted from contact, time interval tag under the day card on the right is removed.
+
+3. Test case: `deletetime g/CS2103 t/mon 1300 - mon 1400`, after previous command <br>
+   Expected: No change to the address book, error message shown in output box stating time is not in the list.
+
+4. Other incorrect find commands to try: `deletetime g/CS2103 t/mon 1300 - mon 1200`, `deletetime g/CS2103 t/monday 1300 - monday 1400`, `deletetime g/x t/mon 1300 - mon 1400`, `...` (where x is not an existing group)<br>
+   Expected: Command format error.
+
+### 7.17. List meeting time of group
+
+1. Add free time to contact
+
+   1.
+       2. Prerequisite: `list`<br>
+          Expected: All contacts will be shown in address book.
+       3. Prerequisite: `addtime g/CS2103 t/mon 1300 - mon 1400`<br>
+          Expected: Meeting time added to group, day card on the right has a time interval tag under monday.
+
+2. Test case: `listtime g/CS2103`<br>
+   Expected: All time intervals under group is listed in output box.
+
+3. Test case: `listtime g/CS2103`, after previous command <br>
+   Expected: No change to the address book.
+
+4. Other incorrect find commands to try: `listtime g/CS2103 t/mon 1300 - mon 1200`, `...` <br>
+   Expected: Error message.
+
+### 7.17. Find free time of group
+1. Add free time to contact
+
+  1.
+     2. Prerequisite: `list`<br>
+      Expected: All contacts will be shown in address book.
+     3. Prerequisite: `group n/Alex Yeoh g/CS2103`, `group n/Bernice Yu g/CS2103`<br>
+      Expected: Both contacts are added to the group.
+     4. Prerequisite: `addtime n/Alex Yeoh t/mon 1200 - mon 1300`, `addtime n/Bernice Yu t/mon 1200 - mon 1300`<br>
+      Expected: Free time added to both contacts.
+
+2. Test case: `findfreetime g/CS2103 d/60`<br>
+   Expected: mon 1200 - mon 1300 is listed in output box
+
+3. Test case: `findfreetime g/CS2103 d/1`, after previous command <br>
+   Expected: No change to the address book.
+
+4. Test case: `findfreetime g/CS2103 d/70`, after previous command <br>
+   Expected: No available timeslots will be shown in output box.
+
+4. Other incorrect find commands to try: `findfreetime g/CS2103 d/`, `findfreetime g/ d/70`, `findfreetime g/CS2103 d/0`,  `...` <br>
+   Expected: Error message.
+
+### 7.18. Saving data
 
 1. Dealing with missing/corrupted data files
 
     1. Edit the JSON file by adding a number "1" to the top of the file.
     2. Run the file.
 
-1. _{ more test cases …​ }_
-
-
 --------------------------------------------------------------------------------------------------------------------
+
+## **8. Appendix: Effort**
+
+ProjectPRO is a project built upon AB3, which was built out of the SE-EDU initiative. Our group has been actively working on ProjectPRO this semester, meeting regularly to discuss about our application to meet deadlines punctually.
+
+
+In this section, we will detail some challenges we faced throughout the process of creating ProjectPRO.
+
+### **8.1 Design Challenges**
+As ProjectPRO is a brownfield project built from AB3, it was necessary to identify the pros and cons of AB3, and use them to come up with a better application more suited for university students. Some challenges include:
+* Designing a nice user interface with JavaFX: One big change we wanted to incorporate into our application was the change of the User Interface. We wanted a more lively colour scheme to make our product not only convenient, but pretty to create a better user experience. Despite not being fluent in JavaFX, we trialed around with colours and different components and eventually created a mini weekly calendar to document our weekly group meetings, while having a warm colour scheme to make our application enticing to users.
+* Creating more relevant functions and fields for university students: Since our application targeted University students, we decided to add group fields to allow students to record who is in their group. After identifying finding meeting time as a common problem faced by university students in group projects, we also added a time field and added functions to help find common free times that groupmates are free to help users better find common free time to hold meetings.
+
+### **8.1 Design Challenges**
+* Given the substantial size of AB3, comprehending its code structure and intricacies posed an initial challenge for us. In response, we proactively initiated project meetings early on. This early engagement provided us with additional time to grasp the intricacies of AB3's implementation and facilitated collaborative discussions to clarify any uncertainties we had about AB3. This enhanced understanding played a crucial role in minimizing the learning curve when undertaking the implementation of new features for ProjectPRO. Since some features shared similar concepts, understanding how they were implemented in AB3 significantly eased the difficulty in implementing corresponding methods for ProjectPRO's enhancements.
