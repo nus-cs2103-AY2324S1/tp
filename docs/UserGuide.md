@@ -20,7 +20,7 @@ pageNav: 3
    - [Hints for Flashcards](#hints-for-flashcards-hint)
    - [Solve Flashcards](#solving-flashcards-solve)
    - [Setting Difficulty for Flashcards](#setting-difficulty-of-flashcards-set)
-   - [Randomly Practise Flashcards](#randomly-practise-flashcards--random)
+   - [Randomly Practise Flashcards]()
    - [Clear all Flashcards](#clear-all-flashcards-clear)
    - [Setting goals](#setting-goals-goal)
    - [Getting help](#getting-help-help)
@@ -119,17 +119,19 @@ Throughout this user guide, you will encounter some of these colored blocks high
 |          Keystrokes          | Act of pressing a key on a computer keyboard                                                                                                                                                   |
 |      Spaced repetition       | An evidence-based learning technique where newly created and more difficult flashcards are shown more frequently than older and less difficult flashcards                                      |
 
+[Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
 
-Get ready to embark on your productive study session!
+Get ready to embark on your productive study session with <span style="color: green;">lesSON</span>!
 
 ### Installation
 
 1. Make sure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer.
-   - [How do I check my version of Java?]()
+   - [How do I check my version of Java installed?](#check-version-of-java-installed)
+   - For macOS users, follow the instructions listed [here](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html) instead to install Java.
 2. Download the latest `lesSON.jar` file from [here](https://github.com/AY2324S1-CS2103T-W17-4/tp/releases/tag/v1.3(trial)).
 3. Move the jar file to a working folder where you would store all of your flashcards.
 4. Launch lesSON.
@@ -137,7 +139,8 @@ Get ready to embark on your productive study session!
       - Open the folder where `lesSON.jar` was moved to.
       - Double-click `lesSON.jar` to start the application.
    - For macOS users,
-     - Open a new Terminal window (<kbd>Command</kbd> + <kbd>Space</kbd> > type Terminal > <kbd>Enter</kbd>).
+     - Open a new Terminal window<br>
+     Press <kbd>Command</kbd> + <kbd>Space</kbd> and type Terminal, then press <kbd>Enter</kbd>.
      - Navigate to the folder where you have stored the jar file using the `cd` command.
        - [Not sure how to use cd?](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
      - Type `java -jar lesSON.jar` and press <kbd>Enter</kbd>.
@@ -145,52 +148,64 @@ Get ready to embark on your productive study session!
    - If you are unable to see the GUI or are stuck anywhere in the installation process, follow a more detailed set of
    instructions [here]().
 
-### User Interface Overview
+### Navigating the app
 
-Here is a quick overview of the user interface to get you oriented with where important details are.
+<span style="color: green;">lesSON</span> uses a [Graphical User Interface (GUI)](#glossary) to display the flashcards
+you have created to you. Here is a brief overview of the GUI to help you familiarise yourself with the key elements and
+their locations.
 
 ![gui_overview](./images/UserGuide/1.3b_ui_overview.png)
 
-Here is an overview of each component in the GUI of lesSON.
+Here is a summary of what each component in the GUI displays.
 
-| Name of component  | Description |
-|--------------------|-------------|
-| Menu               | $250        |
-| Goal               | $80         |
-| Command Line Box   | $420        |
-| Display Result Box | dwd         |
-| Deck               | dwdw        |
-| Card               | dddd        |
-| Footer             | dwadwdwd    |
+| Name of component | Description                                                                                                                                                |
+|:-----------------:|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|    Menu button    | Lists the Help, Import, Export and Exit buttons when pressed.                                                                                              |
+|       Goal        | Displays the number of flashcards to practise for the session.                                                                                             |
+| Command Line Box  | Interface for users to input commands.                                                                                                                     |
+|    Result Box     | Displays the results of inputted command back to the user. Error messages will be shown to guide the user to the correct input if the input was incorrect. |
+|       Deck        | Lists all the flashcards in a scrollable view. The deck can be filtered using commands.                                                                    |
+|       Card        | Displays the key information of a flashcard such as its question, tags and index.                                                                          |
+|      Footer       | Displays where the storage of flashcards is located at.                                                                                                    |
 
 ### Tutorial
 
-This is a tutorial for first-time lesSON users that explains how to add, edit, tag, and practise your flashcards.
-For advanced users, feel free to explore the other features in the [feature list](#feature-list) instead.
+This is a tutorial for **first-time** and **beginner** <span style="color: green;">lesSON</span> users. For more advanced users,
+feel free to explore the other features in the [feature list](#feature-list) instead. In this tutorial, we will explain how to
+*add, edit, tag, and practise* your flashcards.
 
-1. Launch lesSON if you have not done so.
-   - Refer to the instructions [here]() if you unsure how to launch lesSON.
-   - Note that users who are launching lesSON for the first time will have an empty deck.
-2. First, let's try to add your first card. Type the following command and hit <kbd>Enter</kbd>: <br>
+1. Launch <span style="color: green;">lesSON</span>.
+   - Refer to the instructions [here](#installation) if you are unsure how to launch
+   <span style="color: green;">lesSON</span>.
+   - Note that users who are launching <span style="color: green;">lesSON</span> for the first time will have an
+   empty deck.
+2. First, let's try to add your very first flashcard. Type the following command and hit <kbd>Enter</kbd>: <br>
 `add q/what does + mean in boolean algebra? a/it means OR.`
-3. Congratulations, you have made your first card. Now, let's try to edit the card created from previous input
-and capitalise it! Note that the card just created is at index `1`. Type the following command and hit <kbd>Enter</kbd>:
-<br>`edit 1 q/What does + mean in boolean algebra? a/It means OR.`
-4. Next, let's tag it under the module CS1231S. Type the following command and hit <kbd>Enter</kbd>: <br>`edit 1 t/CS1231S`
-5. Feel free to add a few more cards by following steps 1 to 3!
-6. Next, to practise the first card, do: <br> `practise`
-7. Try to recall the answer, and when you are ready to reveal the answer, type the following command and hit
+3. Congratulations, you have created your first flashcard! Now, let's try to edit the card created from the
+previous input by capitalising it! Note that the flashcard just created is at index `1`. Type the following command
+and hit <kbd>Enter</kbd>: <br>`edit 1 q/What does + mean in boolean algebra? a/It means OR.`
+4. Next, let's tag it under the module CS1231S. Type the following command and hit <kbd>Enter</kbd>:
+<br>`edit 1 t/CS1231S`
+5. Let's add another flashcard. Type the following command and hit <kbd>Enter</kbd>: <br>
+`add q/What are the different hazards to consider when using pipelining? a/Structural, Data and Control t/CS2100`
+6. Feel free to add a few more cards by following steps 1 to 4!
+7. Next, to practise the first card, do: <br> `practise`
+8. Try to recall the answer, and when you are ready to reveal the answer, type the following command and hit
 <kbd>Enter</kbd>: <br>`solve`
-8. How hard was the answer to recall? Set the difficulty of the card by typing any of the following command and hit
+9. How hard was the answer to recall? Set the difficulty of the flashcard by typing any of the following command and hit
 <kbd>Enter</kbd>: <br>
 `set d/easy`<br>
 `set d/medium`<br>
 `set d/hard`
-9. The card will automatically be reinserted into deck. This is based on how difficult you found the card. With our inbuilt
-spaced repetition system, as you practise, cards you find more difficult will surface more at the top.
-10. Note that the `practise`, `solve`, and `set` commands support indexes, but it is recommended to use them without
-indexes, as in this tutorial, to always operate on the most difficult card.
-11. Get familiar with these commands and when you are ready, do try the other commands available [here]().
+10. The flashcard will automatically be reinserted into deck. This is based on how difficult you found the question
+to be. With our inbuilt [spaced repetition](#glossary) system, as you practise, flashcards you find more difficult will
+surface more at the top.
+11. Note that the `practise`, `solve`, and `set` commands support indexes, but we recommended to use them without
+indexes as shown in this tutorial. This is to optimise the effectiveness of the [spaced repetition](#glossary) by
+testing your memory with the most difficult flashcard.
+12. Get familiar with these commands and when you are ready, move on to the other commands listed [here]().
+
+[Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -646,25 +661,34 @@ If you still wish to proceed with modifying the data directly, lesSON would not 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Frequently Asked Questions
+## Frequently Asked Questions (FAQ)
 
-### I can't run lesSON! What should I do?
-Please check that you have correctly installed lesSON by following the instructions [here](#installation). For further
-queries, feel free to contact us!
+### Check version of Java installed
+
+**Q:** How do I check my version of Java I have installed on my computer? <br>
+**A:** Open up a command prompt and type `java -version` and hit <kbd>Enter</kbd>.
+
+Shortcut to open the command prompt:
+- For Windows: Press <kbd>Windows</kbd> + <kbd>R</kbd> and enter `cmd`.
+- For macOS: Press <kbd>Command</kbd> + <kbd>Space</kbd> and enter `Terminal`.
+
+[Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known Issues
 
-1. Tags are not enforced to be unique, meaning it is possible to add multiple tags that are the same. Future enhancements
-to lesSON will check for duplicates and remove any if found. Until then, please do take caution to not add duplicate tags
-to the same card.
-2. When using multiple screens, if you move the application to a secondary screen, and later switch to using only the
+1. As of v1.4, users can create duplicate tags for the same flashcard. We plan to enforce uniqueness of tags for a
+flashcard in future enhancements. Until then, please do take caution to avoid adding duplicate tags for the same
+flashcard.
+2. As of v1.4, When using multiple screens, if you move the application to a secondary screen, and later switch to using only the
 primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the
 application before running the application again.
 
-If you have encountered any bugs or errors, do let us know with the relevant details (e.g. screenshots) via our
-official channels found [here]().
+If you encountered any other bugs or errors, do let us know with the relevant details (e.g. screenshots) via our
+official channels found [here](#contact-us).
+
+[Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -672,6 +696,8 @@ official channels found [here]().
 
 For any feedback or relevant queries, do contact us via our [official channels](https://ay2324s1-cs2103t-w17-4.github.io/tp/AboutUs.html).
 
+[Go to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-# End of User Guide
+<p style="text-align: center;">— End of User Guide —</p>
