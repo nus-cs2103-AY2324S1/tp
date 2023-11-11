@@ -68,8 +68,8 @@ class OvertimeCommandParserTest {
     @Test
     public void parse_invalidOperation_failure() {
         // empty operation
-        assertParseFailure(parser, ID_DESC_BOB + PREFIX_OPERATION + AMOUNT_DESC_BOB,
-                MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, ID_DESC_BOB + " " + PREFIX_OPERATION + AMOUNT_DESC_BOB,
+                OvertimeCommand.MESSAGE_MISSING_OPERATION);
 
         // invalid prefix
         assertParseFailure(parser, ID_DESC_BOB + "op/inc" + AMOUNT_DESC_BOB,
@@ -83,8 +83,8 @@ class OvertimeCommandParserTest {
     @Test
     public void parse_invalidAmount_failure() {
         // empty amount
-        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + PREFIX_AMOUNT,
-                MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + " " + PREFIX_AMOUNT,
+                OvertimeCommand.MESSAGE_MISSING_AMOUNT);
 
         // invalid prefix
         assertParseFailure(parser, ID_DESC_BOB + OPERATION_DESC_BOB + "am/5",

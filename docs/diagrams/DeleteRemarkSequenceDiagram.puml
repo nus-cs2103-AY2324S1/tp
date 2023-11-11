@@ -12,10 +12,10 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute("deleteremark EID1234-5678 lazy")
+[-> LogicManager : execute("deleteremark id/EID1234-5678 r/lazy")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("deleteremark EID1234-5678 lazy")
+LogicManager -> AddressBookParser : parseCommand("deleteremark id/EID1234-5678 r/lazy")
 activate AddressBookParser
 
 create DeleteRemarkCommandParser
@@ -25,7 +25,7 @@ activate DeleteRemarkCommandParser
 DeleteRemarkCommandParser --> AddressBookParser
 deactivate DeleteRemarkCommandParser
 
-AddressBookParser -> DeleteRemarkCommandParser : parse("EID1234-5678 lazy")
+AddressBookParser -> DeleteRemarkCommandParser : parse("id/EID1234-5678 r/lazy")
 activate DeleteRemarkCommandParser
 
 create DeleteRemarkCommand
@@ -48,7 +48,14 @@ LogicManager -> DeleteRemarkCommand : execute()
 activate DeleteRemarkCommand
 
 DeleteRemarkCommand -> Model : setEmployee(targetEmployee, editedEmployee)
+activate Model
+
+Model --> DeleteRemarkCommand
+
 DeleteRemarkCommand -> Model : updateFilteredEmployeeList()
+
+Model --> DeleteRemarkCommand
+deactivate Model
 
 create CommandResult
 DeleteRemarkCommand -> CommandResult

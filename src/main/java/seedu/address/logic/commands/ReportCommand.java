@@ -36,10 +36,9 @@ public class ReportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
-        List<Employee> lastShownList = model.getFilteredEmployeeList();
+        List<Employee> employeeList = model.getAddressBook().getEmployeeList();
 
-        for (Employee employee : lastShownList) {
+        for (Employee employee : employeeList) {
             if (employee.getId().equals(targetId)) {
                 Report report = generateReport(employee);
                 try {
@@ -47,6 +46,7 @@ public class ReportCommand extends Command {
                 } catch (CommandException e) {
                     throw new CommandException(Messages.MESSAGE_REPORT_SAVE_ERROR);
                 }
+                model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
                 return new CommandResult(String.format(Messages.MESSAGE_REPORT_STRING,
                         employee.getName().fullName, employee.getOvertimeHours(), report.overtimePay,
                         report.numOfLeaves, report.remarkList));

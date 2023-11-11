@@ -12,10 +12,10 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute("editleave EID1234-5678 2023-11-01 2023-11-02")
+[-> LogicManager : execute("editleave id/EID1234-5678 old/2023-11-01 new/2023-11-02")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("editleave EID1234-5678 2023-11-01 2023-11-02")
+LogicManager -> AddressBookParser : parseCommand("editleave id/EID1234-5678 old/2023-11-01 new/2023-11-02")
 activate AddressBookParser
 
 create EditLeaveCommandParser
@@ -25,7 +25,7 @@ activate EditLeaveCommandParser
 EditLeaveCommandParser --> AddressBookParser
 deactivate EditLeaveCommandParser
 
-AddressBookParser -> EditLeaveCommandParser : parse("EID1234-5678 2023-11-01 2023-11-02")
+AddressBookParser -> EditLeaveCommandParser : parse("id/EID1234-5678 old/2023-11-01 new/2023-11-02")
 activate EditLeaveCommandParser
 
 create EditLeaveCommand
@@ -48,7 +48,14 @@ LogicManager -> EditLeaveCommand : execute()
 activate EditLeaveCommand
 
 EditLeaveCommand -> Model : setEmployee(targetEmployee, editedEmployee)
+activate Model
+
+Model --> EditLeaveCommand
+
 EditLeaveCommand -> Model : updateFilteredEmployeeList()
+
+Model --> EditLeaveCommand
+deactivate Model
 
 create CommandResult
 EditLeaveCommand -> CommandResult
