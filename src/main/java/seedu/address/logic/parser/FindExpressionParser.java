@@ -31,29 +31,6 @@ import seedu.address.model.person.Person;
  * from tokenized search queries. This parser helps in translating user
  * input queries into predicates that can be applied to filter lists of
  * persons.
- * <p>
- * Uses a basic recursive-descent parsing strategy, since for now the
- * grammar is compact. Grammar for find command is given, in
- * Backus–Naur form (BNF) syntax, as follows:
- *
- * <p>
- *
- * <pre>{@code
- * <expression> ::= <term> | <term> "||" <expression>
- * <term>       ::= <factor> | <factor> "&&" <term>
- * <factor>     ::= "!" <factor>
- *                | "(" <expression> ")"
- *                | <condition>
- * <condition>  ::= <prefix> "/" <keyword>
- * <keyword>    ::= <character> | <character> <keyword>
- * <prefix>     ::= "n" | "p" | "e" | "a" | "t"
- * }</pre>
- *
- * <p>
- *
- * Notice that an expression can be a term (if no OR is present)
- * which can itself be a factor (if no AND is present).
- *
  */
 public class FindExpressionParser {
 
