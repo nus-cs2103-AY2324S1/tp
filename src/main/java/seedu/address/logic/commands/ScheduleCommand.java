@@ -38,7 +38,7 @@ public class ScheduleCommand extends Command {
     /**
      * Creates a ScheduleCommand to schedule the specified {@code Appointment} to the indexed person.
      *
-     * @param index The index of the person.
+     * @param index       The index of the person.
      * @param appointment The Appointment to schedule.
      */
     public ScheduleCommand(Index index, Appointment appointment) {
@@ -60,21 +60,24 @@ public class ScheduleCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        if (personToEdit.getAppointment() instanceof NullAppointment) {
-            Person personWithApt = createPersonWithAppointment(personToEdit);
-
-            assert personWithApt.getAppointment() instanceof Appointment
-                    : "Schedule Command: person should have appointment";
-
-            toAdd.setPerson(personWithApt); //sets person to appointment
-
-            model.setPerson(personToEdit, personWithApt);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_SCHEDULE_SUCCESS, Messages.format(personWithApt)));
-        } else {
+        if (!personToEdit.hasNullAppointment()) {
             return new CommandResult(CONFIRM_OVERRIDE_MESSAGE,
                     false, false, true, personToEdit, toAdd);
         }
+
+        assert personToEdit.getAppointment() instanceof NullAppointment;
+
+        Person personWithApt = createPersonWithAppointment(personToEdit);
+
+        assert personWithApt.getAppointment() instanceof Appointment
+                : "Schedule Command: person should have appointment";
+
+        toAdd.setPerson(personWithApt); //sets person to appointment
+
+        model.setPerson(personToEdit, personWithApt);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_SCHEDULE_SUCCESS, Messages.format(personWithApt)));
+
     }
 
     @Override

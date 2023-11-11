@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -14,7 +15,9 @@ import seedu.address.model.person.Name;
 
 class AppointmentTest {
 
-    public static final LocalDateTime VALID_DATE_TIME = LocalDateTime.of(2023, 1, 1, 20, 0);
+    public static final LocalDateTime VALID_DATE_TIME = LocalDateTime.of(2023, 1,
+            1, 20, 0);
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Appointment(null,
@@ -125,5 +128,25 @@ class AppointmentTest {
         Appointment testAppointment = Appointment.parseAppointmentDescription("Review Insurance, 01-01-2023 20:00");
 
         assertEquals(expectedAppointment, testAppointment);
+    }
+
+    @Test
+    public void compareTo() {
+        Appointment appointment1 = new Appointment("Review Insurance", VALID_DATE_TIME);
+        Appointment appointment2 = new Appointment("Buy Insurance", LocalDateTime.of(2023, 1,
+                1, 8, 0));
+        NullAppointment nullAppointment = NullAppointment.getNullAppointment();
+
+        assertTrue(appointment1.compareTo(nullAppointment) < 0);
+        assertTrue(appointment1.compareTo(appointment1) == 0);
+        assertTrue(appointment1.compareTo(appointment2) > 0);
+    }
+
+    @Test
+    public void isSameDate() {
+        Appointment appointment1 = new Appointment("Review Insurance", VALID_DATE_TIME);
+        LocalDate dateTime = LocalDate.of(2023, 1, 1);
+
+        assertTrue(appointment1.isSameDate(dateTime));
     }
 }

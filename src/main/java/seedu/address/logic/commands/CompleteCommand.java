@@ -4,8 +4,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DATE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.appointment.NullAppointment;
-import seedu.address.model.person.Person;
 
 /**
  * Completes and removes appointments from one or multiple person in address book.
@@ -18,7 +16,8 @@ public abstract class CompleteCommand extends Command {
             + "by the index number used in the displayed person list or "
             + "by a specified date\n"
             + "Parameters: [INDEX(must be a positive integer)] "
-            + "[" + PREFIX_APPOINTMENT_DATE + "Appointment Date] *At least one parameter specified\n"
+            + "[" + PREFIX_APPOINTMENT_DATE + "Appointment Date] *Only one of the 2 parameters may and "
+            + "must be specified\n"
             + "Example: " + COMMAND_WORD + " 1 ";
     public static final String MESSAGE_COMPLETE_SUCCESS = "Appointment(s) Completed!";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Input Date should be in format of dd-MM-yyyy";
@@ -29,13 +28,4 @@ public abstract class CompleteCommand extends Command {
             + " No Appointments found with the current date";
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
-
-    /**
-     * Returns a copy of the {@Person} with a NullAppointment.
-     */
-    public static Person createPersonWithoutAppointment(Person personToEdit) {
-        return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getNextOfKinName(), personToEdit.getNextOfKinPhone(),
-                personToEdit.getFinancialPlans(), personToEdit.getTags(), NullAppointment.getNullAppointment());
-    }
 }

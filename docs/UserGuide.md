@@ -135,23 +135,24 @@ Component | Purpose
 # Argument Summary
 
 Below is a table summarising common arguments used in `add`, `edit`, `find`, `schedule` etc. Refer to the table below
-to view the arguments' prefix, and their acceptable values.
+to view the arguments' prefix, and their acceptable values. Unless specified, having only space characters i.e an empty
+value, is not an acceptable value and will result in a warning.
 
-| Prefix | Argument              | Acceptable Values                                            |
-|--------|-----------------------|--------------------------------------------------------------|
-| -      | INDEX                 | Number (1 to current size of the contact book)               |
-| `n/`   | NAME                  | Alphabets, numbers, and space characters only                |
-| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                      |
-| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format |
-| `a/`   | ADDRESS               | Any value is possible                                        |
-| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                |
-| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                      |
-| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only                |
-| `t/`   | TAG                   | Alphabets and numbers only                                   |
-| `ap/`  | APPOINTMENT_NAME      | Any value is possible                                        |
-| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                        |
-| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)            |
-| -      | KEYWORD               | `name` or `appointment`                                      |
+| Prefix | Argument              | Acceptable Values                                                      |
+|--------|-----------------------|------------------------------------------------------------------------|
+| -      | INDEX                 | Number (1 to current size of the contact book)                         |
+| `n/`   | NAME                  | Alphabets, numbers, and space characters only                          |
+| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                |
+| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format           |
+| `a/`   | ADDRESS               | Any value is possible                                                  |
+| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                          |
+| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                |
+| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted |
+| `t/`   | TAG                   | Alphabets and numbers only. Empty value is accepted                    |
+| `ap/`  | APPOINTMENT_NAME      | Alphabets, numbers, and space characters only                          |
+| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                                  |
+| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)                      |
+| -      | KEYWORD               | `name` or `appointment`                                                |
 
 -----------------------
 ### Viewing help : `help`
@@ -175,6 +176,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PH
     person.
 * To prevent accidentally adding duplicates, you can use [Find](#locating-persons-by-name-financial-plan-andor-tag--find)
     to check if you have already added the person already.
+* After performing an edit, the list displayed will be reset to display all clients.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -205,7 +207,7 @@ Tags: [80yo]`
 ------------------
 ### Listing all persons : `list`
 
-Display a list of all the clients and their contact details.
+Display a list of all the clients and their contact details that are currently stored in the address book. 
 
 Format: `list`
 
@@ -232,6 +234,7 @@ of tags is not cumulative.
 * You can remove all the person’s financial plans by typing `fp/` without
   specifying any financial plans after it.
 * A person's appointment cannot be edited in this manner. Refer to [Schedule](#scheduling-an-appointment--schedule).
+* After performing an edit, the list displayed will be reset to display all clients.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -285,7 +288,8 @@ Gathers all the emails of persons with a desired financial plan or tag.
 
 Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
 
-* Generates a list of emails separated by spaces, making it convenient for copying and pasting into the recipient input of an email application.
+* Generates a list of emails separated by semicolons, making it convenient for copying and pasting into the recipient input of an email application. 
+  This function currently works for gmail and outlook but might not work for all email services.
 * Either **Financial Plan or Tag** can be searched at once, but **not both**.
 * The search is case-insensitive e.g. `financial` will match `FINANCIAL` or `Financial`.
 * A person's email will be gathered if the prompt matches a substring of their financial plan or tag.
@@ -297,7 +301,7 @@ Examples:
 * `gather fp/Financial Plan A`
 
 Successful Output:
-`davidmiller@gmail.com bob@example.com`
+`davidmiller@gmail.com; bob@example.com;`
 
 ![result for`gather fp/Financial Plan A'](images/gatherUi.png)
 
@@ -349,10 +353,16 @@ Acceptable Values: Refer to [Argument Summary](#argument-summary).
 Example:
 - `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`
 
-Successful Output: `Appointment updated!`
+Successful Output: \
+For overridden appointment: `Appointment updated!`\
+For new appointment: `New appointment added: David; Phone: 93234567; Email: davidmiller@gmail.com; Address: Bishan Blk 999 #08-15 569874; Next-of-kin Name: Olivia; Next-of-kin Phone: 56981234; Appointment: Annual review of financial goals, 20-11-2023 15:00; Financial Plans: [Financial Plan A][Financial Plan B]; Tags:` 
 
 ![result for`schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00'](images/scheduleUi.png)
 
+<div markdown="span" class="alert alert-primary">:information_source:
+Upon triggering the overriding prompt, until confirmation or cancellation of command on the prompt, usage of the application
+is not allowed (including trying to exit the program). 
+</div>
 ----------
 ### Completing an Appointment : `complete`
 
@@ -392,6 +402,11 @@ Example:
 * `clear`
 
 ![confirm clear window](images/confirmClear.png)
+
+<div markdown="span" class="alert alert-primary">:information_source:
+Upon entering the `clear` command, until confirmation or cancellation of command on the prompt, usage of the application
+is not allowed (including trying to exit the program). 
+</div>
 
 ----------------------------
 ### Sorting of data : `sort`
@@ -454,7 +469,10 @@ _Details coming soon ..._
 2. **Long names** for Financial Plans and Tags may not be fully visible.
 3. **When sorting the list**, we have chosen to not implement returning sorted list to original ordering due to the lack of necessity. However, due to feedback, we will implement this in the next release to enable users to return list to original order should they wish to.
 4. It is possible to add appointments with dates before the current date and time.
-
+5. On macOS Systems, you have to use the cursor to manually click the confirm or cancel buttons for the overriding and clear prompts. In contrast, Windows users can choose to hit enter to confirm execution of command.
+6. Currently, there is no method to deconflict clashing appointments. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other. The appointment sidebar may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6a.
+7. The appointment sidebar may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6.
+8. The current way of checking for duplicate persons is by their full name, case sensitive. The future plan is to do this by checking of phone number as it is less likely 2 people share the same phone number as compared to name.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -468,7 +486,7 @@ _Details coming soon ..._
 | **Find**     | `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g., `find n/James n/Jake`                                                                                                                                                   |
 | **Gather**   | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                                        |
 | **Schedule** | `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE_TIME`<br> e.g. `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`                                                                                           |
-| **Complete** | `complete [INDEX] [d/APPOINTMENT_DATE]` <br> e.g `complete 1` <br> e.g `complete 01-05-2023`                                                                                                                                        |                                                                                                                                                                         |
+| **Complete** | `complete [INDEX] [d/APPOINTMENT_DATE]` <br> e.g `complete 1` <br> e.g `complete d/01-05-2023`                                                                                                                                      |                                                                                                                                                                         |
 | **List**     | `list`                                                                                                                                                                                                                              |
 | **Help**     | `help`                                                                                                                                                                                                                              |
 | **Sort**     | `sort KEYWORD` <br> e.g., `sort appointment`                                                                                                                                                                                        |

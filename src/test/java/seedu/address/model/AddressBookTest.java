@@ -72,7 +72,7 @@ public class AddressBookTest {
         FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
         String fpDescription = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
         GatherEmailByFinancialPlan prompt = new GatherEmailByFinancialPlan(fpDescription);
-        assertEquals(ELLE.getEmail().toString(), addressBook.gatherEmails(prompt));
+        assertEquals(ELLE.getEmail().toString() + ";", addressBook.gatherEmails(prompt));
     }
 
     @Test
@@ -86,7 +86,7 @@ public class AddressBookTest {
     public void gatherByTag_personFound() {
         addressBook.addPerson(BOB);
         GatherEmailByTag prompt = new GatherEmailByTag(VALID_TAG_HUSBAND);
-        assertEquals(BOB.getEmail().toString(), addressBook.gatherEmails(prompt));
+        assertEquals(BOB.getEmail().toString() + ";", addressBook.gatherEmails(prompt));
     }
 
     @Test

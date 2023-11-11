@@ -21,10 +21,13 @@ public class CompleteByDate extends CompleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.clearAppointments(date)) {
+        if (!model.hasAppointmentWithDate(date)) {
             throw new CommandException(MESSAGE_DATE_NO_APPOINTMENT);
         }
+
+        model.clearAppointments(date);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(MESSAGE_COMPLETE_SUCCESS);
     }
 
