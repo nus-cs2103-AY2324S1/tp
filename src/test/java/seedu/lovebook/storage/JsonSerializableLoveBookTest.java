@@ -26,8 +26,6 @@ public class JsonSerializableLoveBookTest {
                 JsonSerializableLoveBook.class).get();
         LoveBook loveBookFromFile = dataFromFile.toModelType();
         LoveBook typicalPersonsLoveBook = TypicalDates.getTypicalLoveBook();
-        System.out.println(loveBookFromFile);
-        System.out.println(typicalPersonsLoveBook);
         assertEquals(loveBookFromFile, typicalPersonsLoveBook);
     }
 
