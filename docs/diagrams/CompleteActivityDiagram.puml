@@ -15,20 +15,20 @@ switch ()
 case([the complete command is valid])
     : Creates a CompleteCommand which is executed by LogicManager;
     switch ()
-          case ([index input by user])
+          case ([user inputs an index])
             : Checks for appointment of given person in FilterPersonList;
             switch ()
-            case([if have appointment])
+            case([if person has existing appointment])
             : Clears appointment for the Person;
-            case([if no appointment])
+            case([if person has no existing appointment])
             : Throws an error;
             endswitch
-          case ([date input by user])
-            : Checks for persons in FilterPersonList who appointment date matches input;
+          case ([user inputs a date])
+            : Checks for persons in FilterPersonList who appointment date matches input date;
             switch()
-            case([have at least one appointment with date matching input in list])
+            case([have at least one match])
             : Clears all appointments with matching dates;
-            case([no appointment date matches input])
+            case([has no matches])
             : Throws an error;
             endswitch
         endswitch

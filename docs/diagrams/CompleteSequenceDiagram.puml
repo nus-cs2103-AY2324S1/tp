@@ -6,8 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":CompleteCommandParser" as CompleteCommandParser LOGIC_COLOR
-participant ":CompleteCommandDescriptor" as CompleteCommandDescriptor LOGIC_COLOR
-participant "c:CompleteCommand" as CompleteCommand LOGIC_COLOR
+participant "c:CompleteByDate" as CompleteByDate LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -31,29 +30,12 @@ deactivate CompleteCommandParser
 AddressBookParser -> CompleteCommandParser : parse("d/01-01-2023")
 activate CompleteCommandParser
 
-create CompleteCommandDescriptor
-CompleteCommandParser -> CompleteCommandDescriptor
-activate CompleteCommandDescriptor
+create CompleteByDate
+CompleteCommandParser -> CompleteByDate
+activate CompleteByDate
 
-CompleteCommandDescriptor --> CompleteCommandParser
-deactivate CompleteCommandDescriptor
-
-CompleteCommandParser -> CompleteCommandDescriptor
-activate CompleteCommandDescriptor
-CompleteCommandDescriptor -> CompleteCommandDescriptor : sets Date to LocalDate parsed by parser
-activate CompleteCommandDescriptor
-CompleteCommandDescriptor --> CompleteCommandDescriptor :
-deactivate CompleteCommandDescriptor
-CompleteCommandDescriptor --> CompleteCommandParser
-deactivate
-
-
-create CompleteCommand
-CompleteCommandParser -> CompleteCommand
-activate CompleteCommand
-
-CompleteCommand --> CompleteCommandParser : c
-deactivate CompleteCommand
+CompleteByDate --> CompleteCommandParser : c
+deactivate CompleteByDate
 
 CompleteCommandParser --> AddressBookParser : c
 deactivate CompleteCommandParser
@@ -64,33 +46,27 @@ destroy CompleteCommandParser
 AddressBookParser --> LogicManager : c
 deactivate AddressBookParser
 
-LogicManager -> CompleteCommand : execute()
-activate CompleteCommand
+LogicManager -> CompleteByDate : execute()
+activate CompleteByDate
 
-CompleteCommand -> CompleteCommandDescriptor : getDate()
-activate CompleteCommandDescriptor
-CompleteCommandDescriptor --> CompleteCommand
-deactivate CompleteCommandDescriptor
-
-CompleteCommand -> Model : clear appointments by date
+CompleteByDate -> Model : clear appointments by date
 activate Model
 
-Model --> CompleteCommand
+Model --> CompleteByDate
 deactivate Model
 
 create CommandResult
-CompleteCommand -> CommandResult
+CompleteByDate -> CommandResult
 activate CommandResult
 
-CommandResult --> CompleteCommand
+CommandResult --> CompleteByDate
 deactivate CommandResult
 
-CompleteCommand --> LogicManager : result
-deactivate CompleteCommand
+CompleteByDate --> LogicManager : result
+deactivate CompleteByDate
 
-CompleteCommand -[hidden]-> CompleteCommandParser
-destroy CompleteCommand
-destroy CompleteCommandParser
+CompleteByDate -[hidden]-> CompleteCommandParser
+destroy CompleteByDate
 
 [<--LogicManager
 deactivate LogicManager

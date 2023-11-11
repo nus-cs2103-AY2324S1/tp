@@ -31,14 +31,7 @@ public class CompleteCommandParser implements Parser<CompleteCommand> {
         String strIndex = argMultimap.getPreamble().trim();
         Optional<String> strDate = argMultimap.getValue(PREFIX_APPOINTMENT_DATE);
 
-        //if no input
-        if (strIndex.isEmpty() && strDate.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    CompleteCommand.MESSAGE_USAGE));
-        }
-
-        //if both date and index given
-        if (!strIndex.isEmpty() && strDate.isPresent()) {
+        if (!isValidArguments(strIndex, strDate)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     CompleteCommand.MESSAGE_USAGE));
         }
@@ -57,5 +50,18 @@ public class CompleteCommandParser implements Parser<CompleteCommand> {
                         CompleteCommand.MESSAGE_USAGE), pe);
             }
         }
+    }
+
+    private boolean isValidArguments(String strIndex, Optional<String> strDate) {
+        //if no input
+        if (strIndex.isEmpty() && strDate.isEmpty()) {
+            return false;
+        }
+        //if both date and index given
+        if (!strIndex.isEmpty() && strDate.isPresent()) {
+            return false;
+        }
+
+        return true;
     }
 }
