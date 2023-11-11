@@ -62,6 +62,7 @@ class JsonSerializableWellNus {
             if (wellNus.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
+
             wellNus.addStudent(student);
         }
         for (JsonAdaptedAppointment jsonAdaptedAppointment : appointments) {

@@ -23,6 +23,7 @@ import seedu.address.model.student.Student;
 class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
+    public static final String EXCEED_RISK_LEVEL_SIZE_MESSAGE = "Student has more than one risk levels!";
 
     private final String name;
     private final String phone;
@@ -67,9 +68,7 @@ class JsonAdaptedStudent {
      */
     public Student toModelType() throws IllegalValueException {
         final List<RiskLevel> studentRiskLevel = new ArrayList<>();
-        for (JsonAdaptedRiskLevel tag : tags) {
-            studentRiskLevel.add(tag.toModelType());
-        }
+
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -97,6 +96,21 @@ class JsonAdaptedStudent {
         if (note == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
         }
+
+        if (!Note.isValidNote(note)) {
+            throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
+        }
+
+        if (tags.size() > 1) {
+            throw new IllegalValueException(EXCEED_RISK_LEVEL_SIZE_MESSAGE);
+        }
+
+        assert tags != null;
+
+        for (JsonAdaptedRiskLevel riskLevel : tags) {
+            studentRiskLevel.add(riskLevel.toModelType());
+        }
+
         final Note modelNote = new Note(note);
 
         final Address modelAddress = new Address(address);
