@@ -38,7 +38,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-W12-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-W12-2/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -70,7 +70,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W12-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -87,7 +87,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W12-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W12-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -132,7 +132,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W12-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -247,11 +247,49 @@ The following class diagram shows how the different classes interact with one an
 
 ![AddDeductionClassDiagram](images/AddDeductionClassDiagram.png)
 
-The following sequence diagram shows how the `deduct` operation works:
+The user can choose to add a deduction for an employee by entering the index of the employee, or the name of the employee. The `DeductCommandParser` class is responsible for parsing the user input for the `deduct` command.
+
+The following sequence diagram shows how the `DeductCommandParser` class parses the user input:
+
+![ParseDeductionCommandSequenceDiagram](images/ParseDeductCommandSequenceDiagram.png)
+
+When parsing the input, all relevant parameters are extracted according to their respective prefixes, and put into an `ArgumentMultimap`. 
+The `value` and `reason` are parsed by `ParserUtil` class first, and a `Deduction` object is created with the parsed `value` and `reason`.
+If the parameters are not in the correct format, a `ParseException` will be thrown.
+
+The following sequence diagrams show how the `ParserUtil` class parses the `value` and `reason`:
+
+![ParseDeductionValueSequenceDiagram](images/ParseDeductCommandValueSequenceDiagram.png)
+
+![ParseDeductionReasonSequenceDiagram](images/ParseDeductCommandReasonSequenceDiagram.png)
+
+After fetching the `Deduction` object, `DeductCommandParser` class will then try to parse the `index` first.
+The following sequence diagram shows how the `DeductCommandParser` class parses the `index`:
+
+![ParseDeductionIndexSequenceDiagram](images/ParseDeductCommandIndexSequenceDiagram.png)
+
+If the `index` is provided and valid, i.e, is a non-zero unsigned integer, the `DeductCommandParser` class will create a `DeductCommand` object with the `index` and `deduction` object, and return it.
+However, if the `index` is not provided, a `ParseException` will be thrown by the `ParserUtil` class, and the `DeductCommandParser` class will try to parse the `name` of the employee.
+If the `name` parameter is also not provided, a `ParseException` will be thrown by the `DeductCommandParser` class. Otherwise, the `DeductCommandParser` class will create a `DeductCommand` object with the `name` and `deduction` object, and return it.
+
+The following sequence diagram shows how the `DeductCommandParser` class parses the `name`:
+
+![ParseDeductionNameSequenceDiagram](images/ParseDeductCommandNameSequenceDiagram.png)
+
+The following sequence diagram shows how the `deduct` operation works when the user enters the command `deduct 1 /v 150.00 /r absence`, which means adding a deduction of $150.00 for the employee with index 1, with the reason of `absence`:
 
 ![AddDeductionSequenceDiagram](images/AddDeductionSequenceDiagram.png)
 
-After `DeductCommandParser` class parses the user input, the `DeductCommand` class will be called to execute the command. The `DeductCommand` class will then call the `Model` component to obtain the list of employees, and then obtain the `Person` object to add deduction for this employee, and store the deduction as an arraylist in `Deduction`.
+After `DeductCommandParser` class parses the user input, the `DeductCommand` class will be called to execute the command. The `DeductCommand` class will then call the `Model` component to obtain the list of employees, and then obtain the `Person` object to add deduction for.
+
+The following sequence diagram shows the referenced process of adding deduction for an employee:
+
+![AddDeductionSequenceDiagram2](images/AddDeductionSequenceDiagram2.png)
+
+1. The `DeductCommand` calls the `getPayrollStorage()` method to obtain the `PayrollStorage` object, which stores all `Payroll` objects in an ArrayList.
+2. The `Person` object then calls the `getLatestPayroll()` method to get the `Payroll` object with the latest `startDate` in the ArrayList. 
+3. Then it calls the `addDeduction()` method of the `Payroll` object which calls the `addDeduction()` method of the `Salary` object within it. 
+4. This creates a new `Deduction` object with the given `value` and `reason`, then store it into the `deductions` field of the `Salary` object, which is an ArrayList of `Deduction` objects.
 
 The following activity diagram summarises the process of adding deduction for an employee:
 
@@ -278,11 +316,50 @@ The following class diagram shows how the different classes interact with one an
 
 ![AddBenefitClassDiagram](images/AddBenefitClassDiagram.png)
 
-The following sequence diagram shows how the `benefit` operation works:
+The user can choose to add a benefit for an employee by entering the index of the employee, or the name of the employee. The `BenefitCommandParser` class is responsible for parsing the user input for the `benefit` command.
 
-![AddBenefitSequenceDiagram](images/AddBenefitSequenceDiagram.png)
+The following sequence diagram shows how the `BenefitCommandParser` class parses the user input:
 
-After `BenefitCommandParser` class parses the user input, the `BenefitCommand` class will be called to execute the command. The `BenefitCommand` class will then call the `Model` component to obtain the list of employees, and then obtain the `Person` object to add benefit for this employee, and store the benefit as an arraylist in `Benefit`.
+![ParseBenefitCommandSequenceDiagram](images/ParseBenefitCommandSequenceDiagram.png)
+
+When parsing the input, all relevant parameters are extracted according to their respective prefixes, and put into an `ArgumentMultimap`.
+The `value` and `reason` are parsed by `ParserUtil` class first, and a `Benefit` object is created with the parsed `value` and `reason`.
+If the parameters are not in the correct format, a `ParseException` will be thrown.
+
+The following sequence diagrams show how the `ParserUtil` class parses the `value` and `reason`:
+
+![ParseBenefitValueSequenceDiagram](images/ParseBenefitCommandValueSequenceDiagram.png)
+
+![ParseBenefitReasonSequenceDiagram](images/ParseBenefitCommandReasonSequenceDiagram.png)
+
+After fetching the `Benefit` object, `BenefitCommandParser` class will then try to parse the `index` first.
+The following sequence diagram shows how the `BenefitCommandParser` class parses the `index`:
+
+![ParseBenefitIndexSequenceDiagram](images/ParseBenefitCommandIndexSequenceDiagram.png)
+
+If the `index` is provided and valid, i.e, is a non-zero unsigned integer, the `BenefitCommandParser` class will create a `BenefitCommand` object with the `index` and `benefit` object, and return it.
+
+However, if the `index` is not provided, a `ParseException` will be thrown by the `ParserUtil` class, and the `BenefitCommandParser` class will try to parse the `name` of the employee.
+If the `name` parameter is also not provided, a `ParseException` will be thrown by the `BenefitCommandParser` class. Otherwise, the `BenefitCommandParser` class will create a `BenefitCommand` object with the `name` and `benefit` object, and return it.
+
+The following sequence diagram shows how the `BenefitCommandParser` class parses the `name`:
+
+![ParseBenefitNameSequenceDiagram](images/ParseBenefitCommandNameSequenceDiagram.png)
+
+The following sequence diagram shows how the `benefit` operation works when the user enters the command `benefit 1 /v 150.00 /r bonus`, which means adding a benefit of $150.00 for the employee with index 1, with the reason of `bonus`:
+
+![AddBenefitSequenceDiagram2](images/AddBenefitSequenceDiagram.png)
+
+After `BenefitCommandParser` class parses the user input, the `BenefitCommand` class will be called to execute the command. The `BenefitCommand` class will then call the `Model` component to obtain the list of employees, and then obtain the `Person` object to add benefit for.
+
+The following sequence diagram shows the referenced process of adding benefit for an employee:
+
+![AddBenefitSequenceDiagram3](images/AddBenefitSequenceDiagram2.png)
+
+1. The `BenefitCommand` calls the `getPayrollStorage()` method to obtain the `PayrollStorage` object, which stores all `Payroll` objects in an ArrayList.
+2. The `Person` object then calls the `getLatestPayroll()` method to get the `Payroll` object with the latest `startDate` in the ArrayList.
+3. Then it calls the `addBenefit()` method of the `Payroll` object which calls the `addBenefit()` method of the `Salary` object within it.
+4. This creates a new `Benefit` object with the given `value` and `reason`, then store it into the `benefits` field of the `Salary` object, which is an ArrayList of `Benefit` objects.
 
 The following activity diagram summarises the process of adding benefit for an employee:
 
@@ -329,11 +406,46 @@ The following class diagram shows how the different classes interact with one an
 
 ![PayslipClassDiagram](images/PayslipClassDiagram.png)
 
-The following sequence diagram shows how the `payslip` operation works:
+The user can choose to generate a payslip for an employee by entering the index of the employee, or the name of the employee. The `PayslipCommandParser` class is responsible for parsing the user input for the `payslip` command.
+
+The following sequence diagram shows how the `PayslipCommandParser` class parses the user input:
+
+![ParsePayslipCommandSequenceDiagram](images/ParsePayslipCommandSequenceDiagram.png)
+
+When parsing the input, all relevant parameters are extracted according to their respective prefixes, and put into an `ArgumentMultimap`.
+If the user provides a date in the form of `dd/mm/yyyy`, the date is parsed by `ParserUtil` class first, and a `LocalDate` object is created with the parsed date.
+If the date is not in the correct format, a `ParseException` will be thrown.
+
+The following sequence diagram shows how the `ParserUtil` class parses the date:
+
+![ParsePayslipDateSequenceDiagram](images/ParsePayslipCommandMonthYearSequenceDiagram.png)
+
+After fetching the `LocalDate` object, if any, `PayslipCommandParser` class will then try to parse the `index` first.
+The following sequence diagram shows how the `PayslipCommandParser` class parses the `index`:
+
+![ParsePayslipIndexSequenceDiagram](images/ParsePayslipCommandIndexSequenceDiagram.png)
+
+If the `index` is provided and valid, i.e, is a non-zero unsigned integer, the `PayslipCommandParser` class will create a `PayslipCommand` object with the `index` (and `monthYear` date, if any), and return it.
+
+However, if the `index` is not provided, a `ParseException` will be thrown by the `ParserUtil` class, and the `PayslipCommandParser` class will try to parse the `name` of the employee.
+If the `name` parameter is also not provided, a `ParseException` will be thrown by the `PayslipCommandParser` class. Otherwise, the `PayslipCommandParser` class will create a `PayslipCommand` object with the `name` (and `monthYear` date, if any), and return it.
+
+The following sequence diagram shows how the `PayslipCommandParser` class parses the `name`:
+
+![ParsePayslipNameSequenceDiagram](images/ParsePayslipCommandNameSequenceDiagram.png)
+
+The following sequence diagram shows how the `payslip` operation works when the user enters the command `payslip 1 /t 09/10/2023`, which means generating a payslip for the employee with index 1, for the month of October 2020:
 
 ![PayslipSequenceDiagram](images/PayslipSequenceDiagram.png)
 
-After `PayslipCommandParser` class parses the user input, the `PayslipCommand` class will be called to execute the command. The `PayslipCommand` class will then call the `Model` component to generate the payslip for the employee, and store the payslip as a PDF file at `payslips/`.
+The following sequence diagram shows the referenced process of generating a payslip for an employee:
+
+![PayslipSequenceDiagram2](images/PayslipSequenceDiagram2.png)
+
+1. The `PayslipCommand` calls the `generatePayslip()` method of the `PayslipGenerator` class, which calls the `getFieldMap()` method on itself.
+2. The `getFieldMap()` method then calls the `getPayrollWithStartDate()` method on the `Person` object to obtain the `Payroll` object with start date equal to the given one within its `PayrollStorage` object, which stores all `Payroll` objects in an ArrayList. If the user does not specify a `monthYear` date, the `getFieldMap()` method will call the `getLatestPayroll()` method to get the `Payroll` object with the latest `startDate` in the ArrayList.
+3. Then it calls various getter methods on the `Payroll` object to obtain the necessary information for the payslip.
+4. This `getFieldMap()` method then returns a `HashMap<String, String>` object with the necessary information for the payslip, and the information is written into a PDF file using the `itext7` library.
 
 The following activity diagram summarises the process of generating a payslip for an employee:
 

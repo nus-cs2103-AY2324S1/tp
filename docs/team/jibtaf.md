@@ -25,6 +25,7 @@ Given below are my contributions to the project.
   * Managed releases `v1.2`, `v1.3(trial)` and `v1.3(final)` on GitHub
 
 * **Enhancements to existing features**:
+  * Enhanced the `edit` command to allow the user to edit employees' salary, bank accounts, annual leaves and join dates.
 
 * **Documentation**:
   * User Guide:
@@ -32,8 +33,11 @@ Given below are my contributions to the project.
     * Added a summary of parameter formats and a table of contents.
     * Modified the format of the User Guide to make PDF conversion easier.
   * Developer Guide:
+    * Added implementation details of the `deduct`, `benefit`, and `payslip` commands.
+    * Added Use Cases for the `deduct`, `benefit`, and `payslip` commands.
 
 * **Community**:
+  * PRs reviewed (with non-trivial review comments): #26, #46, #49, #51, #55, #62, #83, #87, #201
 
 * **Tools**:
   * Integrated a third party library (`itextpdf`) into the project. 
