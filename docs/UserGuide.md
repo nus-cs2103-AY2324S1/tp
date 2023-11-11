@@ -100,6 +100,7 @@ Here are some symbols you might encounter in our guide, and their respective mea
 * These symbols (:information_source: :bulb: :exclamation:) will be encapsulated in a box as such.
 </div>
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Getting Started
@@ -169,31 +170,31 @@ Remember to check out how to use this guide [here](#how-to-use-this-guide).
 ##### What this command does:
 * The "Hi" command displays a welcome message along with the current date and time.
 
-Format: `Hi`
+#### Command format: `Hi`
 
 ##### Features:
 
 - You can use this command to check the date and time! Type in `hi` and hit enter!
 - You can now see "Welcome to Linktree, Current date and time: MM-DD-YYYY HH:MM:SS" displayed on the UI.
 
-##### Examples:
+##### Example usage:
 
 When you enter the command (Hi):
-
   ![Welcome](images/UG_images/WelcomeCommand.png)
+
+<div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
 - Please ensure that the first letter of the command is uppercase. For instance, use `Hi` instead of `hi` or `HI`.
 - The command does not take any additional arguments or keywords.
+</div>
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
-
-
-### Managing Developers
-
-#### Add developer
+**The following commands are for managing developers.** 
+### Add command
 ##### What this command does:
-* This command helps you to add a new developer to the addressbook.
+* This command allows you to add a new developer to the addressbook.
 
 
 ##### Command format: 
@@ -205,25 +206,26 @@ When you enter the command (Hi):
 `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`.
   ![AddCommand](images/UG_images/AddCommand.png)
 
-
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
 * You can use `add` and `newdev` command interchangeably as both achieves the same result. Users have the option to choose 
 the one which suits them.
 </div>
-  
+<br>
+
 #### Remove developer
 
 ##### What this command does:
-* Performs deletion of existing developers from the storage. Specify the index number as shown on the list.
+* Performs deletion of existing developers from the addressbook.
+
 ##### Command format:
 * `delete [Index number]`
 
 ##### Example usage:
 - For example, to delete developer **Jane Lim** from the list fo developers. First find the index number of **Jane Lim** from the list of developers.
 Then type `delete 3` to delete that entry.
-- In the following example, you can see that **Jane Lim** is removed from the list of developers. 
+- In the following example, you can see that **Jane Lim** is removed from the list of developers.
   ![DeleteCommand](images/UG_images/DeleteCommand.png)
 
 <div markdown="block" class="alert alert-primary">
@@ -242,9 +244,11 @@ team.
 * Deleting a developer who is not a team leader will remove that developer from all the teams and also from list
 of developers.
 </div>
+<br>
 
 #### Edit developer
 ##### What this command does:
+* Edits personal information of an existing developer.
 
 ##### Command format:
 `edit [Index number] n/[Name] p/[Phone] e/[Email] a/[Address] r/[Remark] t/[Tag]...`
@@ -264,10 +268,15 @@ of developers.
   so I only provided this person's index `1`, new name `n/John Wick`
   and new email address `e/new.email@example.com`.
 </div>
+<br>
+
 
 #### Find developer
 ##### What this command does:
-* Finds persons whose names contain any of the given keywords.
+* Finds developers whose names satisfy the following parameter:
+    * Any name, provided you can remember at least the first/last name.
+    * Only full words will be matched e.g. Han will not match Hans
+    * Multiple developer names can also be given as paramaters. The program will display the developers that have those names.
 
 ##### Command Format: 
 `find [Keyword1] ...`
@@ -280,9 +289,21 @@ of developers.
 with first or last name being **Alex** or **David**.
   ![FindCommandUsingMultipleKeyword](images/UG_images/FindCommand2.png)
 
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+- The find command is designed to show only a list of developers. If you wish to view the team list again, you should use the `listt` command. 
+- To display the complete list of developers, use the `list` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
+- The search is case-insensitive. e.g hans will match Hans
+- The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
+
+</div>
+<br>
+
 ### List developers
-##### What this command does:
-* Show only the list of all developers in the project.
+#### What this command does:
+* Displays the list of all the developers in this project.
+
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
@@ -309,14 +330,14 @@ and type `list` again when you want to go back to the main window.
 </div>
 <br>
 
+
 --------------------------------------------------------------------------------------------------------------------
 
-### Managing Teams
-<br>
+The following commands are for managing teams
 
-#### Create teams
-##### What this command does:
-* Creates a new team based on the given team name and leader name.
+### Create teams
+#### What this command does:
+* Takes a team name and a team leader name. Creates a new team with these paramaters if the given team leader is already an existing developer in the project.
 
 ##### Command format:
 * `newteam tn/[TeamName] tl/[TeamLeader]`
@@ -327,20 +348,28 @@ type `newteam tn/Team Delta tl/David Li`
 * In the following example, you can see new team **Team Delta** is added to the team list.
   ![AddTeamCommand](images/UG_images/AddTeamCommand.png)
 
-#### Add developers to team
-##### What this command does:
-* To add a developer into an existing team:
+  
+### Add developers to team
+#### What this command does:
+* Helps to add existing developers in the addressbook to a team.
 
-##### Command format:
+#### Command format:
 * `dev2team tn/[TeamName] n/[Developer Name]`
 
 ##### Example usage:
 * `dev2team tn/Team Delta n/Irfan Ibrahim`
   ![AddDeveloperToTeam](images/UG_images/AddDevToTeamCommand.png)
 
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* The specified developer and team must already exist in the project!
+</div>
+<br>
+
 ### Delete team
 #### What this command does:
-* Performs deletion of existing teams from the storage.
+* Deletes existing teams from the teambook.
 
 #### Command format:
 * `deleteteam tn/[TeamName]`
@@ -350,10 +379,15 @@ type `newteam tn/Team Delta tl/David Li`
 * You need to type `deleteteam tn/Team Alpha`, then the **Team Alpha** will be deleted from the list of teams.
   ![DeleteTeamCommand](images/UG_images/DeleteTeam.png)
 
+<br>
+
 ### Remove developer from team
+#### What this command does:
 * Performs deletion of existing developer from the given team.
+
 #### Command format:
 * `deletedev tn/[TeamName] n/[DeveloperName]`
+
 #### Example usage:
 * For example: if you want to delete developer **John Lim** from **Team Bravo**.
 * You need to type `deletedev tn/Team Bravo n/John Lim`, then the developer 
@@ -363,28 +397,52 @@ type `newteam tn/Team Delta tl/David Li`
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
-* You cannot delete a developer who is **team leader**. Inorder, delete that developer you need to change the
+* You cannot delete a developer who is **team leader**. In order, delete that developer you need to change the
   team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
 </div>
+<br>
 
 ### Edit team name
-* To edit team name:
-  - Command: `editTeamName [tn/TEAMNAME(original team name)] [tn/TEAMNAME(new team name)]`
-  - Example: `editTeamName tn/Alpha Team tn/Beta Team`
-  - Result: Now, the team with original team name `Alpha Team` changed its team name
-    to `Beta Team`.
-  ![EditTeamNameCommand](images/UG_images/EditTeamNameCommand.png)
+#### What this command does: 
+* Takes a team name and a new name for the team. Changes team name if it doesn't already exist in the teambook. 
+
+#### Command format:
+* `editTeamName tn/[Existing team name] tn/[New team name]`
+
+#### Example usage:
+  * Example: `editTeamName tn/Alpha Team tn/Beta Team`
+  - Result: Now, the team with original team name `Alpha Team` changed its team name to `Beta Team`.
+    ![EditTeamNameCommand](images/UG_images/EditTeamNameCommand.png)
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* Remember to check that the new team name that you specify isn't already taken by another team in the teambook.
+</div>
+<br>
 
 ### Edit team leader
-* To edit team leader:
-  - Command: `editTeamLeader [tn/TEAMNAME] [tl/TEAMLEADER]`
-  - Example: `editTeamLeader tn/Alpha Team tl/Bob`
+#### What this command does:
+* Edits the team leader of a team.
+
+#### Command format: 
+* `editTeamLeader tn/[Team name] tl/[New Team leader]`
+
+#### Example usage: 
+- `editTeamLeader tn/Alpha Team tl/Bob`
   - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
   ![EditTeamLeaderCommand](images/UG_images/EditTeamLeaderCommand.png)
+  
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* Remember to check that the new leader specified is a person that already exists in the addressbook.
+</div>
+<br>
 
 #### Find Team
 ##### What this command does:
-- Finds teams whose names contain any of the given keywords.
+- Finds matching teams whose names contain any of the given keywords.
 
 ##### Command Format: 
 * `findteam [Keyword1] ...`
@@ -396,9 +454,26 @@ type `newteam tn/Team Delta tl/David Li`
 - You can also use multiple keywords, for example type `findteam Bravo Charlie` which shows the following teams 
 **Bravo Team**, **Charlie Crew** and **Delta Bravo Charlie Team**.
 
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Tip:**<br>
+* The order of the keywords does not matter. e.g., "Alpha Bravo" will match "Bravo Alpha Team."
+* Only the team name is searched.
+* Only full words will be matched. e.g., "Alph" will not match "Alpha Team."
+* Teams matching at least one keyword will be returned (i.e., OR search). e.g., "Alpha Bravo" will return "Team Alpha," "Bravo Team."
+</div>
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* The findteam command is designed to show only a list of teams. If you wish to view the developer list again, you should use the `list` command. To display the complete list of teams, use the `listt` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
+*  The search is case-insensitive. e.g., "team" will match "Team Alpha."
+</div>
+
 ### List teams
-##### What this command does:
-* Show only the list of all existing teams in the project.
+#### What this command does:
+* Displays the list of all the teams in this project.
 
 <div markdown="block" class="alert alert-primary">
 
@@ -468,7 +543,11 @@ When you are at the main window, type `tree` to show the tree graph
 and type `tree` again when you want to hide the tree and go back to the main window.
 </div>
 
+
 --------------------------------------------------------------------------------------------------------------------
+
+<br>
+
 
 ### Help Command
 #### What this command does:
@@ -491,10 +570,11 @@ and type `tree` again when you want to hide the tree and go back to the main win
   ![HelpWindow](images/UG_images/HelpWindow.png)
   ![HelpCommandResult](images/UG_images/HelpCommandResult.png)
 
+<br>
 
 ### Reset the project
 #### What this command does:
-* This command will erase the entire data, that is all the details of developers and teams will be erased immediately. 
+* This command will erase **ALL THE DATA**. All the details of developers and teams will be cleared from storage.
 This command can be used when you want to restart the project.
 
 #### Command format:
@@ -509,6 +589,7 @@ This command can be used when you want to restart the project.
 **:exclamation: Warning:**<br>
 * Using the clear command might result in unintended loss of data! Use it only when you intend to remove all of your data!
 </div>
+<br>
 
 ### Exit the application
 #### What this command does:
