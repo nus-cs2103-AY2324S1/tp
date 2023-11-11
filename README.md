@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/AY2324S1-CS2103T-W11-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-W11-4/tp/actions)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/MainUi.png)
 
 * Link Tree.<br>
   Example usages:
