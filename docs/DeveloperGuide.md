@@ -429,6 +429,11 @@ The following sequence diagram shows how the `PayrollCommandParser` class parses
 
 ![ParsePayrollNameSequenceDiagram](images/ParsePayrollCommandNameSequenceDiagram.png)
 
+The following sequence diagram shows how the `payroll` operation works when the user enters
+the command `payroll 1`, which means calculating the payroll for the employee with the index 1:
+
+![PayrollCalculationSequenceDiagram](images/PayrollCalculationSequenceDiagram.png)
+
 <u>PayrollCommandParser</u>
 
 This class extends the Parser interface, it implements the following operations:
