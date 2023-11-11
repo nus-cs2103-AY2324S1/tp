@@ -18,7 +18,7 @@ end box
 alt personListPanelPlaceholder is visible
     MainWindow -> LogicManager : execute(commandText)
     LogicManager -> AddressbookParser : parseCommand(commandText)
-else personListPanelPlaceholder is not visible
+else else
     MainWindow -> PersonProfile : getPerson()
     PersonProfile --> MainWindow : get personToEdit
     MainWindow -> LogicManager : executeInView(commandText, personToEdit, targetIndex)

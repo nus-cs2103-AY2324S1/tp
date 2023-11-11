@@ -68,7 +68,12 @@ deactivate SaveCommand
 LogicManager --> MainWindow : commandResult
 deactivate LogicManager
 
+MainWindow -> MainWindow : handleSave()
+activate MainWindow
+
+deactivate MainWindow
 
 [<--MainWindow
 deactivate MainWindow
+
 @enduml
