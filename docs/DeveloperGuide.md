@@ -327,6 +327,10 @@ The diagram below describes this behaviour concisely. It shows how a user's comm
 
 <img src="images/CopyMemberActivityDiagram.png">
 
+The sequence diagram below also shows the interaction between the various components during the execution of the `CopyMemberCommand`. The execution of the `CopyApplicantCommand` is almost identical, except that it uses the `Applicant` class instead of the `Member` class.
+
+<img src="images/CopyMemberSequenceDiagram.png">
+
 ### View all available tags
 
 The view tags mechanism lists all available tags in the address book that a user can use to tag a member.
@@ -513,24 +517,29 @@ contacts
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                                | So that I can…​                                                   |
-|----------|---------|-------------------------------------------------------------|-------------------------------------------------------------------|
-| `* * *`  | user    | add existing members' contact                               | get the contact of existing members to contact them               |
-| `* * *`  | user    | view existing members' contact                              | see a list of all current members in the organisation             |
-| `* * *`  | user    | delete an existing members' contact                         | remove existing members' contacts that should be removed          |
-| `* * *`  | user    | add prospective members' contact                            | get the contact of applicants to contact them for further updates |
-| `* * *`  | user    | view prospective members' contact                           | see a list of all applicants                                      |
-| `* * *`  | user    | delete a prospective members' contact                       | remove applicants' contacts that should be removed                |
-| `* *  `  | user    | schedule a time and date for an interview with an applicant | mark out a time period of a specific date for an interview        |
-
-*{More to be added}*
-
+| Priority | As a …​ | I want to …​                                                | So that I can…​                                                     |
+|----------|---------|-------------------------------------------------------------|---------------------------------------------------------------------|
+| `* * *`  | EXCO    | add a member                                                | keep track of all my members when I need to                         |
+| `* * *`  | EXCO    | view all members                                            | see a list of all current members in the CCA                        |
+| `* * *`  | EXCO    | delete a member                                             | remove members from the database if they have left                  |
+| `* * *`  | EXCO    | edit a member                                               | update the member's details should they change                      |
+| `* * *`  | EXCO    | add an applicant                                            | keep track of all my applicants to contact them for further updates |
+| `* *  `  | EXCO    | copy a member's details to the clipboard                    | paste their details elsewhere                                       |
+| `* * *`  | EXCO    | view all applicants                                         | see a list of all applicants to my CCA                              |
+| `* * *`  | EXCO    | delete an applicant                                         | remove applicants if they have withdrawn their application          |
+| `* * *`  | EXCO    | edit an applicant                                           | update the applicant's details should they change                   |
+| `* *  `  | EXCO    | schedule a time and date for an interview with an applicant | mark out a time period of a specific date for an interview          |
+| `* *  `  | EXCO    | copy a applicant's details to the clipboard                 | paste their details elsewhere                                       |
+| ` * `    | EXCO    | receive notifications for upcoming interviews               | be reminded of upcoming interviews and won't forget about them      |
+| ` * `    | EXCO    | export a selected group of contacts to a CSV file           | use the data in other applications or for backup purposes           |
+| ` * `    | EXCO    | import a CSV file of contacts into the application          | add a large number of contacts into the application at once         |
+| ` * `    | EXCO    | merge duplicate contact entries                             | maintain a clean and organised database                             |
 ### Use cases
 
 (For all use cases below, the **System** is the `ClubMembersContact` and the **Actor** is the `user`, unless specified
 otherwise)
 
-**Use case: Schedule a date for an interview**
+**Use case: UC01 - Schedule a date for an interview**
 
 **MSS**
 
@@ -553,18 +562,117 @@ otherwise)
 
       Use case resumes at step 2.
 
-*{More to be added}*
+---
+
+**Use case: UC02 - Add a member**
+
+---
+
+**Use case: UC03 - Finding members**
+
+---
+
+**Use case: UC04 - Viewing members**
+
+**MSS**
+
+1. User requests to view all members
+
+2. ClubMembersContact shows a list of all members and displays a success message
+
+   Use case ends.
+
+**Use case: UC05 - Editing a member**
+
+---
+
+**Use case: UC06 - Deleting a member**
+
+---
+
+**Use case: UC07 - Copying a member**
+
+**MSS**
+
+1. User requests to copy a member
+
+2. ClubMembersContact copies the member's details to the clipboard
+
+3. ClubMembersContact displays a success message along with the member's details
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The copy member command format is invalid.
+
+  * 1a1. ClubMembersContact shows an error message.
+    
+      Use case resumes at step 1.
+
+* 1b. The member index is invalid or out of range.
+
+  * 1b1. ClubMembersContact shows an error message.
+
+    Use case resumes at step 1.
+
+---
+
+**Use case: UC08 - Allocating a task to a member**
+
+---
+
+**Use case: UC09 - Viewing all tasks allocated to a member**
+
+---
+
+**Use case: UC10 - Deleting a task allocated to a member**
+
+---
+
+**Use case: UC1 - Adding an applicant**
+
+---
+
+**Use case: UC12 - Finding applicants**
+
+---
+
+**Use case: UC13 - Viewing applicants**
+
+Similar to UC04 - Viewing members except that it displays a list of applicants instead of members.
+
+---
+
+**Use case: UC14 - Editing an applicant**
+
+---
+
+**Use case: UC15 - Deleting an applicant**
+
+---
+
+**Use case: UC16 - Copying an applicant**
+
+Similar to UC07 - Copying a member except that it copies an applicant instead of a member.
 
 ### Non-Functional Requirements
 
-1. The system should respond to user requests within 2 seconds for all functions.
-2. The user interface should be consistent across all modules and functions of the application.
+1. The application should work on any _mainstream_ OS as long as it has Java `11` or above installed.
+2. The application should be able to handle at least 100 members and applicants each.
+3. A user with above average typing speed should be able to perform most functions faster than using a mouse.
+4. The application should respond to user requests within 2 seconds for all functions.
+5. The user interface should be consistent across all modules and functions of the application.
+6. The application is not required to be able to handle multiple users at the same time.
+7. The application is not required to support languages other than English.
+8. The application should be able to handle most common user input errors gracefully and provide meaningful error messages.
+9. The application should be intuitive enough to use for beginners who are new to CLIs.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **CLI**: Command Line Interface: A way of interacting with a computer program where the user issues commands to the
+  program in the form of successive lines of text (command lines). This type of interface emphasises text-based user interaction over graphical user interfaces.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -592,30 +700,18 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a member
 
-1. Deleting a member while all members are being shown
+Deleting a member while all members are being shown
 
-    1. Prerequisites: List all members using the `viewm` command. Multiple members in the list.
+1. Prerequisites: List all members using the `viewm` command. Multiple members in the list.
 
-    1. Test case: `delm 1`<br>
-       Expected: First member is deleted from the list. Details of the deleted member shown in the status message.
-       Timestamp in the status bar is updated.
+1. Test case: `delm 1`<br>
+   Expected: First member is deleted from the list. Details of the deleted member shown in the status message.
+   Timestamp in the status bar is updated.
 
-    1. Test case: `delm 0`<br>
-       Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
+1. Test case: `delm 0`<br>
+   Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delm`, `dela`, `deletemember x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+1. Other incorrect delete commands to try: `delm`, `dela`, `deletemember x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.

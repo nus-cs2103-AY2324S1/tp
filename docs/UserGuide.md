@@ -180,7 +180,7 @@ The alias for this command is `addm`.
   <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
   <br/>
-* `EMAIL`: The email has to follow localpart@domain format. See [email format](#441-email-format) for more details.
+* `EMAIL`: The email has to follow localpart@domain format. See [email format](#53-email-format) for more details.
   <br/>
 * `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
   Minimum of 5 and maximum of 32 characters are allowed.
@@ -191,7 +191,7 @@ The alias for this command is `addm`.
 
 <div markdown="block" class="alert alert-warning">:exclamation: **CAUTION:**
 
-* For a new member to be created, the `MEMBER_NAME`, `PHONE_NUMBER`, `EMAIL`, and `TELEGRAM_HANDLE` have to all be unique.
+* For a new member to be created, the `PHONE_NUMBER` has to be unique.
   Otherwise, the system will reject this as a duplicate member.
   <br/>
 * The last valid parameter found will treat all of the characters after it as its input.
@@ -266,28 +266,35 @@ The member at the specified index will have his/her specified field(s) edited.
 `editmember MEMBER_INDEX [/name MEMBER_NAME] [/phone PHONE_NUMBER] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...`
 The alias for this command is `editm`.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
-When editing a member's tag, the new tag(s) will replace any old existing tag(s). 
-If you want to add a new tag to a member, you will have to include **both** the old tag(s)
-and the new tag in the `/tag` field of the command.
-
-This also means that to clear a member's tags, you can simply type `editm /tag`.
-</div>
-
 <div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
+
+Even though all the fields are optional, **at least one field** has to be specified for the command to work.
 
 * `MEMBER_NAME`: Only alphabetical characters, spaces, @, (), /, are allowed. This field should not be blank.
   <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
   <br/>
-* `EMAIL`: The email has to follow localpart@domain format. See [email format](#441-email-format) for more details.
+* `EMAIL`: The email has to follow localpart@domain format. See [email format](#53-email-format) for more details.
   <br/>
 * `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
   Minimum of 5 and maximum of 32 characters are allowed.
   <br/>
 * `TAG`: Only alphanumeric characters are allowed. Minimum of 1 and maximum of 15 characters are allowed. Spaces are not allowed.
+
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+
+* When editing a member's tag, the new tag(s) will replace any old existing tag(s).
+  If you want to add a new tag to a member, you will have to include **both** the old tag(s)
+  and the new tag in the `/tag` field of the command.
+  <br/>
+    * This also means that to clear a member's tags, you can simply type `editm /tag`.
+      <br/>
+* You will not be allowed to edit a member's `PHONE_NUMBER` to a `PHONE_NUMBER` that is registered under a different member.
+  The `PHONE_NUMBER` will have to be **unique**, or it will be flagged by the system as a duplicate member.
 
 </div>
 
@@ -465,7 +472,7 @@ The alias for this command is `adda`.
 
 <div markdown="block" class="alert alert-warning">:exclamation: **CAUTION:**
 
-* For a new applicant to be created, the `APPLICANT_NAME` and `PHONE_NUMBER` have to **both** be unique.
+* For a new applicant to be created, the `PHONE_NUMBER` has to be unique.
   Otherwise, the system will reject this as a duplicate applicant.
 * The last valid parameter found will treat all of the characters after it as its input.
     * Consider this command: `adda /name Lady Gaga /phone 99129969 /interview 01/01/2024 1200 /invalid invalid`
@@ -548,6 +555,8 @@ The alias for this command is `edita`.
 
 :information_source: **Notes about input parameter:**
 
+Even though all the fields are optional, **at least one field** has to be specified for the command to work.
+
 * `APPLICANT_INDEX`: Only positive integers are allowed. This will be based on the current **shown** list.
   <br/>
 * `APPLICANT_NAME`: Only alphabetical characters, spaces, @, (), / are allowed. Should not be blank.
@@ -556,6 +565,13 @@ The alias for this command is `edita`.
   <br/>
 * `INTERVIEW_TIME`: Only dates in the format of “DD/MM/YYYY HHmm” are allowed. To remove an interview time from an
   applicant, ‘cancel’ is also allowed.
+
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+
+You will not be allowed to edit a member's `PHONE_NUMBER` to a `PHONE_NUMBER` that is registered under a different member.
+The `PHONE_NUMBER` will have to be **unique**, or it will be flagged by the system as a duplicate member.
 
 </div>
 
@@ -664,9 +680,21 @@ Exits the application.
 There will be no prompt to confirm this action.
 </div>
 
-### 4.4 Field Constraints
+## 5 Field Constraints Summary
 
-#### 4.4.1 `EMAIL` format
+### 5.1 `NAME` format
+
+- Name:
+  - Only alphabetical characters, spaces, @, (), / are allowed.
+  - First character of the name should not be a space.
+
+### 5.2 `PHONE_NUMBER` format
+
+- Phone number:
+  - Only numbers are allowed.
+  - At least 3 digits are required.
+
+### 5.3 `EMAIL` format
 
 `EMAIL` field should be of the format **local-part@domain**.
 
@@ -679,14 +707,14 @@ There will be no prompt to confirm this action.
     - Each domain label must start and end with an alphanumerical character.
     - The last domain label must contain at least 2 characters.
 
-#### 4.4.2 `TELEGRAM_HANDLE` format
+### 5.4 `TELEGRAM_HANDLE` format
 
 - Handle:
     - Must start with the "@" symbol.
     - Only alphanumerical characters and underscore "_" are allowed.
     - Must be between 5 and 32 characters long (inclusive).
 
-#### 4.4.3 Examples of fields
+## 5.5 Examples of fields
 
 | Field               | Valid                                                      | Invalid                                                                                                   |
 |---------------------|------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
