@@ -24,7 +24,7 @@ public class WelcomeCommandTest {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String strDate = formatter.format(date);
-        String expectedMessage = "Welcome from Linktree, Current date and time: " + strDate;
+        String expectedMessage = "Welcome to Linktree, Current date and time: " + strDate;
 
         // Assert that the welcome message is as expected
         assertEquals(expectedMessage, result.getFeedbackToUser());
