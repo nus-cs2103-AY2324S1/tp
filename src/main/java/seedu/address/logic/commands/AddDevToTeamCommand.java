@@ -95,7 +95,7 @@ public class AddDevToTeamCommand extends Command {
         }
 
         AddDevToTeamCommand otherAddCommand = (AddDevToTeamCommand) other;
-        return devToAdd.equals(otherAddCommand.devToAdd);
+        return devToAdd.equals(otherAddCommand.devToAdd) && teamToAddTo.equals(otherAddCommand.teamToAddTo);
     }
 
     /**

@@ -362,7 +362,8 @@ reflected in the new tree. With that being said, if you enter command `tree` to
 show LinkTree and make some changes to the data, your changes will not be reflected
 in the current tree. You should hide the tree first and then call `tree` again to
 obtain a new tree which will reflect the changes you made.
-
+  - Team names and team leaders' names may not be shown fully if they are too long.
+You can refer back to the team list for their full names.
 ### Command format: 
 * `tree`
 #### Example usage: 
@@ -427,10 +428,71 @@ Click [here](#table-of-contents) to go back to contents.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQs
-- Details coming soon...
+## FAQ
+#### Q: How can I launch Linktree if clicking on the JAR file does not work?
+**A:** Below is the CLI way to launch Linktree when encountering issues with the JAR file.
+1. Open the Command Prompt.
+2. Navigate to the directory where the JAR file is located using the following command:
+3. Type the command below and press Enter: `cd [JAR file location]` followed by `java -jar linktree.jar`
+4. Linktree should now launch.
+- If this doesn’t work, check our GitHub to make sure you have the latest version of Tran$act downloaded.
+
+#### Q: How can I transfer my Linktree data to another computer?
+**A:** To transfer your Linktree data, install the jar file on the new computer and replace the empty data files(addressbook.json & teambook.json) with the two from your previous Linktree home directory (tp/data).
+
+#### Q: What are the steps to install Java 11?
+**A:**  To install Java 11, please refer to the [detailed download instructions available here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+
+#### Q: Is Linktree compatible with Mac and Linux operating systems?
+**A:**  Linktree is compatible with a wide range of operating systems,
+including Windows, Mac and Linux, and it runs on systems that support Java 11, so you can use it on your favorite platform.
+
+#### Q: What should I do if a command isn't working?
+**A:** Below are the 5 potential ways to solve your issue:
+1. **Review the Command Syntax**:
+  - Start by carefully reviewing the command you're trying to use. Ensure that you've entered it correctly, including all required components like command names, options, and arguments.
+
+2. **Check for Typos**:
+  - Typos are a common cause of command failures. Double-check the spelling of all command elements, including file paths and option names.
+
+3. **Verify Input Requirements**:
+  - Commands often require specific inputs, such as file paths, URLs, or values. Ensure that you've provided all the necessary inputs in the correct format.
+
+4. **Refer to the user guide**:
+  - Look for the section that explains the command's usage and syntax. It provide examples and detailed explanations.
+
+5. **Ask for Help**:                                                                                                                                                                                                                                                                          
+  - If you've exhausted all other options and the command still isn't working, don't hesitate to seek help.
+Reach out to your us in email or Github for assistance.
+Describe the problem in detail, including the command you're using, the error messages received, and any relevant context.
+
+#### Q: Why does Linktree not show all developers/teams in the database?
+**A:** If not all customers or properties are appearing, it's likely due to certain commands like find, or findteam. 
+1. *If you wish to view the developer list, you should use the list command.*
+2. *To display the complete list of teams, use the listt command.*
+3. *If you need to list both at the same time, you can use the list command twice or the listt command twice to revert to the default state.*
+
+#### Q: Is there a way to share my Linktree phonebook with others by exporting it to a different format such as a csv file?
+**A:** Linktree does not currently support sharing your phonebook with others or exporting it to an external format.
+Its main function is personal communication management for supervisors.
+
+#### Q: I'm confused about some terms in the guide. Where can I find explanations?
+**A:** You can check out the explanation of some of the complicated terms in our glossary
+
+#### Q: I deleted my data file by mistake. Can I recover my lost data?
+**A:** If you've accidentally deleted your data file, check your computer's trash or recycle bin.
+Unfortunately, if it's not there, recovering lost data is not possible.
+
+#### Q: How do I uninstall Linktree?
+**A:** To uninstall Linktree, simply delete the folder that contains `linktree.jar` 
+- no installation on the hard drive means no complex uninstallation process.
+
+#### Q: Do I need to be online to use Linktree?
+**A:** Linktree doesn't require an internet connection for regular use, but you will need to be online to download the application initially.
+
 
 Click [here](#table-of-contents) to go back to contents.
+
 
 --------------------------------------------------------------------------------------------------------------------
 

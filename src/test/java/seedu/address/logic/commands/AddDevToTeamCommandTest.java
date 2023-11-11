@@ -4,15 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTeams.getTypicalTeamBook;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,118 +26,113 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTeamBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 import seedu.address.testutil.TypicalPersons;
 
-public class AddTeamCommandTest {
 
+public class AddDevToTeamCommandTest {
+
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTeamBook(), new UserPrefs());
     @Test
     public void constructor_nullTeamName_throwsNullPointerException() {
-        Name leaderName = AMY.getName();
-        assertThrows(NullPointerException.class, () -> new AddTeamCommand(null, leaderName));
-    }
-
-    @Test
-    public void constructor_nullDeveloperName_throwsNullPointerException() {
-        String teamName = "Test Team Zeta";
-        assertThrows(NullPointerException.class, () -> new AddTeamCommand(teamName, null));
-    }
-
-    @Test
-    public void constructor_bothParamNull_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTeamCommand(null, null));
+        Name devName = BENSON.getName();
+        assertThrows(NullPointerException.class, () -> new AddDevToTeamCommand(null, devName));
     }
     @Test
-    public void execute_addNewTeam_commandSuccess() throws CommandException {
-        ModelStubAcceptingTeamAdded modelStub = new ModelStubAcceptingTeamAdded();
-        String newTeamName = "Test Team Beta";
-        Name newLeader = ALICE.getName();
-        IdentityCode newDevIdentityCode = ALICE.getIdentityCode();
-        Team newTeam = new Team(newDevIdentityCode, newTeamName);
-
-        CommandResult addTeamCommand = new AddTeamCommand(newTeamName, newLeader).execute(modelStub);
-        assertEquals(String.format(AddTeamCommand.MESSAGE_SUCCESS, Messages.format(newTeam, newLeader)),
-                addTeamCommand.getFeedbackToUser());
-        assertEquals(Arrays.asList(newTeam), modelStub.teamsAdded);
+    public void constructor_nullTeamLeaderName_throwsNullPointerException() {
+        String teamName = "Team Test Alpha";
+        assertThrows(NullPointerException.class, () -> new AddDevToTeamCommand(teamName, null));
     }
-
     @Test
-    public void execute_addTeamWithSameName_commandExceptionDuplicateTeam() {
-        ModelStubAcceptingTeamAdded modelStub = new ModelStubAcceptingTeamAdded();
-        modelStub.sampleTeamBuilder();
-        String teamName = "Test Team Zeta";
-        Name differentTeamLeaderName = TypicalPersons.DANIEL.getName();
-        AddTeamCommand addTeamCommand = new AddTeamCommand(teamName, differentTeamLeaderName);
-        assertThrows(CommandException.class, AddTeamCommand.MESSAGE_DUPLICATE_TEAM, ()
-                 -> addTeamCommand.execute(modelStub));
+    public void execute_invalidTeamName_throwsInvalidTeamCommandException() {
+        String teamName = "This team does not exist in the model";
+        Name devName = AMY.getName();
+        AddDevToTeamCommand addDevToTeam = new AddDevToTeamCommand(teamName, devName);
+        assertThrows(CommandException.class, () -> addDevToTeam.execute(model));
     }
-
     @Test
-    public void execute_addTeamWithSameLeader_commandSuccess() throws CommandException {
-        ModelStubAcceptingTeamAdded modelStub = new ModelStubAcceptingTeamAdded();
-        modelStub.sampleTeamBuilder();
-        String teamName = "Test Team Alpha";
-        Name sameTeamLeaderName = ALICE.getName();
-        Team newTeam = new Team(ALICE.getIdentityCode(), teamName);
-        CommandResult addTeamCommand = new AddTeamCommand(teamName, sameTeamLeaderName).execute(modelStub);
-        assertEquals(String.format(AddTeamCommand.MESSAGE_SUCCESS, Messages.format(newTeam, sameTeamLeaderName)),
-                addTeamCommand.getFeedbackToUser());
-        assertEquals(Arrays.asList(modelStub.teamsAdded.get(0), newTeam), modelStub.teamsAdded);
+    public void execute_invalidPerson_throwsInvalidPersonCommandException() {
+        String teamName = "TEAM1";
+        Name devName = new Name("This person does not exist");
+        AddDevToTeamCommand addDevToTeam = new AddDevToTeamCommand(teamName, devName);
+        assertThrows(CommandException.class, () -> addDevToTeam.execute(model));
     }
-
     @Test
-    public void execute_addTeamWithInvalidPerson_commandExceptionInvalidPerson() {
-        ModelStubAcceptingTeamAdded modelStub = new ModelStubAcceptingTeamAdded();
-        String teamName = "Test Team Zeta";
-        Name invalidPerson = new Name("ThisPersonDoesNotExist");
-        AddTeamCommand addTeamCommand = new AddTeamCommand(teamName, invalidPerson);
-        assertThrows(CommandException.class, AddTeamCommand.MESSAGE_INVALID_PERSON, ()
-                -> addTeamCommand.execute(modelStub));
+    public void execute_personAlreadyInTeam_throwsDuplicatePersonException() {
+        String teamName = "TEAM1";
+        Name devName = CARL.getName();
+        AddDevToTeamCommand addDevToTeam = new AddDevToTeamCommand(teamName, devName);
+        try {
+            addDevToTeam.execute(model);
+            fail("Expected this method to fail");
+        } catch (CommandException e) {
+            assertEquals("This developer already exists in this team!", e.getMessage());
+        }
     }
-
+    @Test
+    public void execute_leaderOfTeamBeingAdded_throwsTeamLeaderAddException() {
+        String teamName = "TEAM1";
+        Name devName = ALICE.getName();
+        AddDevToTeamCommand addDevToTeam = new AddDevToTeamCommand(teamName, devName);
+        try {
+            addDevToTeam.execute(model);
+            fail("Expected this method to fail");
+        } catch (CommandException e) {
+            assertEquals("The leader of team cannot be added as a developer!", e.getMessage());
+        }
+    }
+    @Test
+    public void execute_validDeveloperAdded_success() throws CommandException {
+        String teamName = "TEAM2";
+        Name devName = ALICE.getName();
+        AddDevToTeamCommand addDevToTeam = new AddDevToTeamCommand(teamName, devName);
+        assertEquals(String.format(AddDevToTeamCommand.MESSAGE_SUCCESS, Messages.format(teamName, devName)),
+                addDevToTeam.execute(model).getFeedbackToUser());
+    }
     @Test
     public void equals() {
-        Name teamLeader1 = ALICE.getName();
-        Name teamLeader2 = BENSON.getName();
-        String teamName1 = "Test team 1";
-        String teamName2 = "Test team 2";
-        AddTeamCommand addTeam1Command = new AddTeamCommand(teamName1, teamLeader1);
-        AddTeamCommand addTeam2Command = new AddTeamCommand(teamName2, teamLeader2);
+        Name dev1 = ALICE.getName();
+        Name dev2 = BENSON.getName();
+        String teamName1 = "TEAM1";
+        String teamName2 = "TEAM2";
+        AddDevToTeamCommand addCommand1 = new AddDevToTeamCommand(teamName1, dev1);
+        AddDevToTeamCommand addCommand2 = new AddDevToTeamCommand(teamName2, dev2);
 
         // same object -> returns true
-        assertTrue(addTeam1Command.equals(addTeam1Command));
+        assertTrue(addCommand1.equals(addCommand1));
 
         // same values -> returns true
-        AddTeamCommand addTeam3Command = new AddTeamCommand(teamName1, teamLeader1);
-        assertTrue(addTeam3Command.equals(addTeam1Command));
+        AddDevToTeamCommand addCommand3 = new AddDevToTeamCommand(teamName1, dev1);
+        assertTrue(addCommand3.equals(addCommand1));
 
         // different types -> returns false
-        assertFalse(addTeam1Command.equals("abc"));
+        assertFalse(addCommand1.equals("abc"));
 
         // null -> returns false
-        assertFalse(addTeam2Command.equals(null));
+        assertFalse(addCommand2.equals(null));
 
         // different team command -> returns false
-        assertFalse(addTeam1Command.equals(addTeam2Command));
+        assertFalse(addCommand1.equals(addCommand2));
 
         // same teamname,different leadername -> returns false
-        AddTeamCommand addTeam4Command = new AddTeamCommand(teamName1, teamLeader2);
-        assertFalse(addTeam1Command.equals(addTeam4Command));
+        AddTeamCommand addTeam4Command = new AddTeamCommand(teamName1, dev2);
+        assertFalse(addCommand1.equals(addTeam4Command));
     }
-
     @Test
     public void toStringMethod() {
-        String teamName = "Test Team 1";
-        Name teamLeaderName = TypicalPersons.BENSON.getName();
-        AddTeamCommand addTeamCommand = new AddTeamCommand(teamName, teamLeaderName);
-        String expected = AddTeamCommand.class.getCanonicalName() + "{teamToAdd=" + teamName + "}";
-        assertEquals(expected, addTeamCommand.toString());
+        String teamName = "TEAM1";
+        Name devToAdd = DANIEL.getName();
+        AddDevToTeamCommand addCommand = new AddDevToTeamCommand(teamName, devToAdd);
+        String expected = AddDevToTeamCommand.class.getCanonicalName() + "{devToAdd=" + devToAdd + "}";
+        assertEquals(expected, addCommand.toString());
     }
 
     /**
@@ -248,7 +246,7 @@ public class AddTeamCommandTest {
 
         @Override
         public void addToTeam(String teamToAddTo, Name devToAdd) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -340,7 +338,7 @@ public class AddTeamCommandTest {
     /**
      * A Model stub that accepts the teams being added.
      */
-    private class ModelStubAcceptingTeamAdded extends AddTeamCommandTest.ModelStub {
+    private class ModelStubAcceptingTeamAdded extends AddDevToTeamCommandTest.ModelStub {
         final ArrayList<Team> teamsAdded = new ArrayList<>();
 
         public void sampleTeamBuilder() {
@@ -367,15 +365,22 @@ public class AddTeamCommandTest {
             return getTypicalAddressBook().containsPerson(name);
         }
         @Override
+        public boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd) {
+            requireNonNull(teamToAddTo);
+            requireNonNull(devToAdd);
+            IdentityCode identityCode = getIdentityCodeByName(devToAdd);
+            return getTypicalTeamBook().personAlreadyInTeam(teamToAddTo, identityCode);
+        }
+        @Override
         public Person getPersonByName(Name name) {
             requireNonNull(name);
             return getTypicalAddressBook().getPersonByName(name);
         }
-
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
     }
+
 }
