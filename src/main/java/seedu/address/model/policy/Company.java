@@ -10,12 +10,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Company {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Company should only contain alphanumeric characters and spaces.";
+            "Company name can be anything understandable to human being.";
 
     /*
      * Company name can be anything understandable to human being.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "\\S.*";
     public static final String DEFAULT_VALUE = "NOCOMPANY";
 
     public final String value;

@@ -31,7 +31,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_NRIC = "1234567A";
     private static final String INVALID_LICENCE_PLATE = "ABC123D";
-    private static final String INVALID_COMPANY = "COMPANY/";
+    private static final String INVALID_COMPANY = "    ";
     private static final String INVALID_POLICY_NUMBER = "#AIA";
     private static final String INVALID_POLICY_DATE = "19-19-2000";
 

@@ -15,7 +15,7 @@ public class CompanyTest {
 
     @Test
     public void constructor_invalidCompany_throwsIllegalArgumentException() {
-        String invalidCompany = "/////";
+        String invalidCompany = "";
         assertThrows(IllegalArgumentException.class, () -> new Company(invalidCompany));
     }
 
@@ -26,13 +26,12 @@ public class CompanyTest {
 
         // invalid company
         assertFalse(Company.isValidCompany("")); // empty string
-        assertFalse(Company.isValidCompany(" ")); // spaces only
-        assertFalse(Company.isValidCompany("^")); // only non-alphanumeric characters
-        assertFalse(Company.isValidCompany("NTUC*")); // contains non-alphanumeric characters
+        assertFalse(Company.isValidCompany("     ")); // spaces only
 
         // valid company
         assertTrue(Company.isValidCompany("NTUC")); // all letters
         assertTrue(Company.isValidCompany("Insurance Company 1")); // with number and spaces
+        assertTrue(Company.isValidCompany("W#4t !$ Th|s")); // with special characters
     }
 
     @Test
