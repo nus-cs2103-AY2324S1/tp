@@ -321,6 +321,53 @@ The following activity diagram summarises what happens when a user executes the 
     * Pros: Shorter command execution, one less point of failure by eliminating the `model` class.
     * Cons: May violate immutability within Employee and Model classes as well as SLAP by having `AddCommand#execute()` perform the editing directly.
 
+### Delete Employee feature
+
+The delete employee feature allows HouR to delete employees from the employee list.
+
+#### Implementation
+
+The delete employee command mechanism is facilitated by the `DeleteCommandParser` class which implements the `Parser` interface.
+
+`DeleteCommandParser#parse()` is exposed in the `Parser` interface as `Parser#parse()`.
+
+`DeleteCommandParser` implements the following operations:
+
+* `DeleteCommandParser#parse()` — Parses the input argument by storing the ID, and creates a new `DeleteCommand` object with the parsed ID.
+
+The `DeleteCommand` object then communicates with the `Model` API by calling the `Model#deleteEmployee(Employee)` method, which deletes the employee with the given ID from the existing employee list.
+
+The method `DeleteCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The diagram below details how the operation of deleting an employee works.
+
+![Delete Sequence Diagram](images/DeleteSequenceDiagram.png)
+
+Given below is an example usage scenario for the command.
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `delete EMPLOYEE_ID` command in the CLI.
+
+**Step 3**: The employee with the given ID will be deleted from the employee list.
+
+The following activity diagram summarises what happens when a user executes the delete command:
+
+![Delete Activity Diagram](images/DeleteActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Command-Model Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#deleteEmployee` to delete the employee from the model instead of doing the direct editing in `DeleteCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Longer command execution, requiring more parts to work together.
+
+* **Alternative 2**: Edit the employee list directly from `DeleteCommand#execute()`.
+    * Pros: Shorter command execution, one less point of failure by eliminating the `model` class.
+    * Cons: May violate immutability within Employee and Model classes as well as SLAP by having `DeleteCommand#execute()` perform the editing directly.
+
+
 ### Report feature
 
 #### Implementation

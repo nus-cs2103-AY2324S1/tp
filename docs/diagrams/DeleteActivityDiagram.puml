@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs Delete Command;
+
+if () then ([else])
+  :Display error message;
+else ([Valid command format])
+  if () then ([else])
+    :Display error message;
+  else ([Valid ID])
+    if () then ([else])
+        :Display error message;
+    else ([Employee exists])
+    :Delete employee from the employee list;
+    :Display success message;
+    endif
+    endif
+endif
+
+stop
+
+@enduml
