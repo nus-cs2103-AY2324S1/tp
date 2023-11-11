@@ -19,8 +19,12 @@ box Person PERSON_COLOR
 participant ":Person" as Person PERSON_COLOR
 end box
 
-box Payroll LOGIC_COLOR_T1
-  participant ":PayrollStorage" as PayrollStorage LOGIC_COLOR_T1
+box PayrollStorage LOGIC_COLOR_T1
+participant ":PayrollStorage" as PayrollStorage LOGIC_COLOR_T1
+end box
+
+box Payroll PERSON_COLOR
+participant ":Payroll" as Payroll PERSON_COLOR
 end box
 
 [-> LogicManager : execute("payroll 1")
@@ -75,6 +79,14 @@ deactivate PayrollStorage
 
 Person --> PayrollCommand :
 deactivate Person
+
+PayrollCommand --> Payroll : calculatePayrollString()
+activate Payroll
+
+ref over Payroll: calculatePayrollString()
+
+Payroll --> PayrollCommand
+deactivate Payroll
 
 create CommandResult
 PayrollCommand -> CommandResult

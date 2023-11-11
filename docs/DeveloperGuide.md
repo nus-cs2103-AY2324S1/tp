@@ -434,6 +434,13 @@ the command `payroll 1`, which means calculating the payroll for the employee wi
 
 ![PayrollCalculationSequenceDiagram](images/PayrollCalculationSequenceDiagram.png)
 
+After `PayrollCommandParser` class parses the user input, the PayrollCommand class will be called to execute the command. 
+The PayrollCommand class will then call the Model component to obtain the list of employees, and then obtain the Person object to calculate payroll for.
+
+The following sequence diagram shows the referenced process of calculating payroll for an employee:
+
+![PayrollCalculationSequenceDiagram2](images/PayrollCalculationSequenceDiagram2.png)
+
 <u>PayrollCommandParser</u>
 
 This class extends the Parser interface, it implements the following operations:
