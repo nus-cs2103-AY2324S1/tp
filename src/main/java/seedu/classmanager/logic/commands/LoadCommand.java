@@ -63,6 +63,7 @@ public class LoadCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));
         }
         requireNonNull(model);
+
         ClassManagerStorage tempClassManagerStorage = new JsonClassManagerStorage(filePath);
         Optional<ReadOnlyClassManager> classManagerOptional;
         ReadOnlyClassManager newData;
@@ -72,6 +73,7 @@ public class LoadCommand extends Command {
         } catch (DataLoadingException e) {
             throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));
         }
+
         model.setClassManagerFilePath(filePath);
         model.loadReset(newData);
 
@@ -111,7 +113,7 @@ public class LoadCommand extends Command {
 
     /**
      * Returns the hashcode of the file path and file name.
-     * @return
+     * @return Hashcode of the file path and file name.
      */
     @Override
     public int hashCode() {
