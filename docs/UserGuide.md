@@ -88,10 +88,10 @@ Here are some symbols you might encounter in our guide, and their respective mea
 
 [//]: # (Table inspired by NUSCoursemates https://ay2324s1-cs2103t-t17-4.github.io/tp/UserGuide.html)
 
-| Symbol               | Meaning                                                                                        |
-|----------------------|------------------------------------------------------------------------------------------------|
-| :information_source: | Note. Provides additional information.                                                         |
-| :bulb:               | Tip. Information that might better your experience.                                                 |
+| Symbol               | Meaning                                                                     |
+|----------------------|-----------------------------------------------------------------------------|
+| :information_source: | Note. Provides additional information.                                      |
+| :bulb:               | Tip. Information that might better your experience.                         |
 | :exclamation:        | Warning. Cautionary statement to prevent you from undesirable consequences. |
 <div markdown="block" class="alert alert-primary">
 
@@ -115,7 +115,7 @@ Check out our [FAQ](#faqs) if you are not sure how to download Java `11`.
 1. Open a command terminal, navigate to the folder where you store the downloaded jar file, and use the 
 `java -jar addressbook.jar` command to run the application. A GUI similar to the one below should appear in a few 
 seconds, containing some sample data:
-   ![Ui](images/Ui.png)
+   ![Ui](images/MainUi.png)
 
 2. Type a command into the command box and press Enter to execute it. For example. type `help` in the command box and press Enter.
 It will open a new help window, and shows a command summary in the result display.
@@ -170,7 +170,7 @@ Format: `Hi`
 ##### Features:
 
 - When the command is invoked, it returns a greeting from Linktree and the current date and time.
-- The output format is consistent, showing "Welcome from Linktree, Current date and time: MM-DD-YYYY HH:MM:SS".
+- The output format is consistent, showing "Welcome to Linktree, Current date and time: MM-DD-YYYY HH:MM:SS".
 
 ##### Guidelines:
 
@@ -181,7 +181,7 @@ Format: `Hi`
 
 When you enter the command (Hi):
 
-  ![Welcome](images/UG_images/Hi.png)
+  ![Welcome](images/UG_images/WelcomeCommand.png)
 
 ### Managing Developers
 
@@ -194,7 +194,7 @@ When you enter the command (Hi):
   
 ##### Example usage:
 * `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`
-  ![AddNewDevToListExample](images/UG_images/AddNewDevToListExample.png)
+  ![AddCommand](images/UG_images/AddCommand.png)
 
   
 ### Remove developer
@@ -205,22 +205,24 @@ When you enter the command (Hi):
 * `delete [index number]`
 
 #### Example usage:
-- For example, to delete John from the list. First find the index number of John.
-  ![DeletePersonFromListExample](images/UG_images/DeletePersonFromListExample.png)
-- In this example, the index of John is 7. So type, `delete 7`.
-  ![DeletedPersonFromListExample](images/UG_images/DeletedPersonFromListExample.png)
+- For example, to delete the developer John from the list. First find the index number of John.
+- In this example, the index of developer John is 7. So type, `delete 7`.
+  ![DeleteCommand](images/UG_images/DeleteCommand.png)
 
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
-* You cannot delete a developer who is **team leader** for any of the teams. Inorder, delete that developer
-  you need to change the team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
+* You cannot delete a developer who is **team leader** for any of the teams. Inorder to delete that developer, we 
+recommend you to change the team leader using `editTeamLeader` command. And then you can remove that developer from the 
+team.
+ ![DeleteTeamLeader](images/UG_images/DeleteTeamLeader.png)
 </div>
 
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Warning:**<br>
-* Deleting a developer who is not a team leader will remove that developer from all the teams.
+* Deleting a developer who is not a team leader will remove that developer from all the teams and also from list
+of developers.
 </div>
 
 ### Edit developer
@@ -229,6 +231,7 @@ When you enter the command (Hi):
   - Command: `edit INDEX(must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`
   - Example: `edit 1 n/John Wick e/new.email@example.com`
   - Result: The person of index `1` now has a new name `John Wick` and a new
+  ![EditCommand](images/UG_images/EditCommand.png)
   email address `new.email@example.com`.
 
 <div markdown="block" class="alert alert-primary">
@@ -260,7 +263,7 @@ When you enter the command (Hi):
 
  - find John returns john and John Doe
  - find alex david returns Alex Yeoh, David Li
-   ![Find](images/UG_images/Find.png)
+   ![FindCommand](images/UG_images/FindCommand.png)
 ### List developers
 #### What this command does:
 * Show only the list of all developers in the project.
@@ -275,7 +278,7 @@ When you enter the command (Hi):
 * `list`
 #### Example usage:
 * `list` (and an example result is shown below)
-  ![ListCommandExample](images/UG_images/ListCommandExample.png)
+  ![ListCommand](images/UG_images/ListCommand.png)
 
 <div markdown="block" class="alert alert-warning">
 
@@ -298,7 +301,7 @@ and type `list` again when you want to go back to the main window.
 * `newteam tn/[TeamName] tl/[TeamLeader]`
 #### Example usage:
 * `newteam tn/Team Delta tl/David Li`
-  ![AddTeamCommandExample](images/UG_images/AddTeamCommandExample.png)
+  ![AddTeamCommand](images/UG_images/AddTeamCommand.png)
 
 ### Add developers to team
 #### What this command does:
@@ -307,7 +310,7 @@ and type `list` again when you want to go back to the main window.
 * `dev2team tn/[TeamName] n/[Developer Name]`
 #### Example usage:
 * `dev2team tn/Team Delta n/Irfan Ibrahim`
-  ![AddDeveloperToTeamExample](images/UG_images/AddDevToTeamCommandExample.png)
+  ![AddDeveloperToTeam](images/UG_images/AddDevToTeamCommand.png)
 
 ### Delete team
 #### What this command does:
@@ -316,20 +319,18 @@ and type `list` again when you want to go back to the main window.
 * `deleteteam tn/[TeamName]`
 #### Example usage:
 * Example: If you want to delete **Team Alpha** from the list of teams.
-  ![BeforeDeleteTeamCommand](images/UG_images/BeforeDeleteTeamCommand.png)
 * You need to type `deleteteam tn/Team Alpha`, then the **Team Alpha** will be deleted from the list of teams.
-  ![AfterDeleteTeamCommand](images/UG_images/AfterDeleteTeamCommand.png)
+  ![DeleteTeamCommand](images/UG_images/DeleteTeam.png)
 
 ### Remove developer from team
 * Performs deletion of existing developer from the given team.
 #### Command format:
 * `deletedev tn/[TeamName] n/[DeveloperName]`
 #### Example usage:
-* Example: If you want to delete developer **Roy Balakrishnan** from **Team Alpha**.
-  ![BeforeDeleteDevFromTeam](images/UG_images/BeforeDeleteDevFromTeam.png)
-* You need to type `deletedev tn/Team Alpha n/Roy Balakrishnan`, then the developer 
-**Roy Balakrishnan** will be removed from **Team Alpha**.
-  ![AfterDeleteDevFromTeam](images/UG_images/AfterDeleteDevFromTeam.png)
+* Example: If you want to delete developer **John Lim** from **Team Bravo**.
+* You need to type `deletedev tn/Team Bravo n/John Lim`, then the developer 
+**John Lim** will be removed from **Team Alpha**.
+  ![DeleteDevFromTeam](images/UG_images/DeleteDevFromTeam.png)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -344,12 +345,14 @@ and type `list` again when you want to go back to the main window.
   - Example: `editTeamName tn/Alpha Team tn/Beta Team`
   - Result: Now, the team with original team name `Alpha Team` changed its team name
     to `Beta Team`.
+  ![EditTeamNameCommand](images/UG_images/EditTeamNameCommand.png)
 
 ### Edit team leader
 * To edit team leader:
   - Command: `editTeamLeader [tn/TEAMNAME] [tl/TEAMLEADER]`
   - Example: `editTeamLeader tn/Alpha Team tl/Bob`
   - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
+  ![EditTeamLeaderCommand](images/UG_images/EditTeamLeaderCommand.png)
 
 ## Find Team
 ### What this command does:
@@ -373,7 +376,7 @@ and type `list` again when you want to go back to the main window.
 - `findteam Alpha` returns "Team Alpha" and "Alpha Squad."
 - `findteam Bravo Charlie` returns "Bravo Team," "Charlie Crew," and "Delta Bravo Charlie Team."
 
-![Find Team](images/UG_images/Findteam.png)
+![FindTeamCommand](images/UG_images/FindTeamCommnd.png)
 
 
 ### List teams
@@ -391,7 +394,7 @@ and type `list` again when you want to go back to the main window.
 * `listt`
 #### Example usage:
 * `listt` (and an example result is shown below)
-  ![ListTeamCommandExample](images/UG_images/ListTeamCommandExample.png)
+  ![ListTeamCommand](images/UG_images/ListTeam.png)
 
 <div markdown="block" class="alert alert-warning">
 
@@ -588,7 +591,6 @@ Click [here](#table-of-contents) to go back to contents.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-## Command Summary
 
 | Command            | Format and Example                                                                                                                                                         |
 |--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
