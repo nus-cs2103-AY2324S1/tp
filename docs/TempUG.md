@@ -104,7 +104,6 @@ This box denotes command outputs.
 * When applicable, extraneous parameters and flags for commands will be ignored .<br>
   e.g. if the command entered is `add info -name new name -notValid flagBody -subject physics`, it will be interpreted as `add -name new name -subject physics`. "info " and "-notValid flagBody" will be ignored. <br>
   e.g. if the command entered is `delete 3 extra`, it will be interpreted as `delete 3`; <br>
-
   e.g. However, `delete extra 3` will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
 </box>
 
