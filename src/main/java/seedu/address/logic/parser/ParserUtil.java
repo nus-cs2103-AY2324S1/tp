@@ -197,15 +197,15 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static LocalDateTime parseAppointmentDate(String appointmentDateString) throws ParseException {
-        String date = appointmentDateString.split(" ")[0];
+    public static LocalDateTime parseAppointmentDate(String appointmentDate) throws ParseException {
+        String date = appointmentDate.split(" ")[0];
 
         try {
             YearMonth yearMonth = YearMonth.parse(date, Appointment.DATE_FORMATTER);
             if (!isValidDay(yearMonth, date)) {
                 throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
             }
-            return Appointment.parseAppointmentDate(appointmentDateString);
+            return Appointment.parseAppointmentDate(appointmentDate);
         } catch (DateTimeParseException e) {
             throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
         }
