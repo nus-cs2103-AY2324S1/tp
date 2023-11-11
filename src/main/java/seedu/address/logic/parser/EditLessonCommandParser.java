@@ -29,7 +29,7 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
     }
 
     public static String getUsageInfo() {
-        return "\nUsage: edit <Index> (at least one of -[name|subject|day|start|end] [value]). "
+        return "\nUsage: edit [INDEX] (at least one of unique [-name|subject|day|start|end VALUE]). "
                 + "\nFor example, edit 1 -name lesson2 -subject English -day 23/12 -start 14:30 -end 16:30"
                 + "\nIf you want to edit the currently shown lesson, you could omit the index. "
                 + "\nNote your edited 'name' must not already in the schedule and 'start' must be before 'end'.";

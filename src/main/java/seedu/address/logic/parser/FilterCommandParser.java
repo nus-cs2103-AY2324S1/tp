@@ -99,7 +99,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 + "\nFor example, filter -name John -subject physics,english";
     }
     public String getFilterScheduleUsageInfo() {
-        return "\nUsage: filter -(any number of unique -[name|subject|before|on|after|remark] [value]). "
+        return "\nUsage: filter -(at least one of unique [-name|subject|before|on|after|remark VALUE]). "
                 + "\nFor example, filter -before 2023/10/10 -subject physics"
                 + "\nNote you should only use one of -before, -on, -after at a time.";
     }
