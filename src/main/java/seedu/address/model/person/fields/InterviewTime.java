@@ -13,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 public class InterviewTime {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Only dates from year 2000 and after will be accepted. Interview time should be in the format of " +
-                "DD/MM/YYYY HHmm. To cancel the interview, enter 'cancel' (case sensitive)";
+        "Interview time should be in the format of DD/MM/YYYY HHmm. To cancel the interview, enter "
+            + "'cancel' (case sensitive)";
 
     public static final String VALIDATION_REGEX = "^\\d{2}/\\d{2}/\\d{4} \\d{4}$";
 

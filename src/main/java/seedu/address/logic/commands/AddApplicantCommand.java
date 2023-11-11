@@ -20,8 +20,8 @@ public class AddApplicantCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an applicant to the applicant list. "
             + "\nParameters: "
-            + PREFIX_NAME + " APPLICANT_NAME "
-            + PREFIX_PHONE + " PHONE_NUMBER "
+            + PREFIX_NAME + " {applicantName} "
+            + PREFIX_PHONE + " {phoneNumber} "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
             + PREFIX_PHONE + " 98765432";
