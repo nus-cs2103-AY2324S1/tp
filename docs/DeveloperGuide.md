@@ -477,7 +477,7 @@ enhance the find feature so that it can also search for applicants by these fiel
    
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, and DevOps**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -489,10 +489,11 @@ enhance the find feature so that it can also search for applicants by these fiel
 
 ## **Appendix: Requirements**
 
+<br>
+
 ### Product scope
 
 **Target user profile**:
-
 * has a need to manage a significant number of applicants (around 250 - 500 applicants)
 * prefer desktop apps over other types
 * can type fast
@@ -500,32 +501,34 @@ enhance the find feature so that it can also search for applicants by these fiel
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: 
-Introduces organisation to applicant management, recruitment processes and streamlines hiring decisions
+* Introduces organisation to applicant management, recruitment processes and streamlines hiring decisions for hiring managers
+
+<br>
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                               | So that I can…​                                             |
-|----------|---------|------------------------------------------------------------|-------------------------------------------------------------|
-| `* * *`  | user    | view all the available commands                            | know how to use the app                                     |
-| `* * *`  | user    | add a new applicant                                        | track the the progress of all applicants                    |
-| `* * *`  | user    | edit an applicant descriptor                               | maintain an updated database of all applicants              |
-| `* * *`  | user    | view the full list of applicants                           | view the overall progress and performance of all applicants |
-| `* * *`  | user    | delete an applicant entry                                  | only track valid applicants                                 |
-| `* * *`  | user    | add an interview for an applicant                          | plan screenings and keep track of an applicant's interviews |
-| `* * *`  | user    | edit an interview for an applicant                         | keep accurate data on an applicant's interview              |
-| `* * *`  | user    | delete an interview for an applicant                       | delete incorrect or unnecessary interviews                  |
-| `* * *`  | user    | store data locally                                         | use it on a daily basis consistently                        |
-| `* *`    | user    | find a specific applicant                                  | access the applicant's information quickly                  |
-| `* *`    | user    | sort applicants by a descriptor                            | find relevant applicants quickly                            |
-| `* *`    | user    | filter applicants by a descriptor                          | look at applicants of a specific category                   |
-| `* *`    | user    | purge all existing data                                    | remove sample data and populate real data                   |
-| `* *`    | user    | exit the program                                           | close the program                                           |
-| `* *`    | user    | import data from CSV file                                  | access all applicants' details                              |
-| `* *`    | user    | mark an applicant as undecided, offered or rejected        | keep track of applicants' application status                |
-| `*`      | user    | schedule a date for an interview                           | keep track of all interview timings                         |
-| `*`      | user    | view a graphical representation of each applicant's rating | get a quick idea of each applicant's ability                |
+| Priority | <div style="width:50px">As a …​</div> | I want to …​                                               | So that I can…​                                             |
+|----------|---------------------------------------|------------------------------------------------------------|-------------------------------------------------------------|
+| `* * *`  | user                                  | view all the available commands                            | know how to use the app                                     |
+| `* * *`  | user                                  | add a new applicant                                        | track the the progress of all applicants                    |
+| `* * *`  | user                                  | edit an applicant descriptor                               | maintain an updated database of all applicants              |
+| `* * *`  | user                                  | view the full list of applicants                           | view the overall progress and performance of all applicants |
+| `* * *`  | user                                  | delete an applicant entry                                  | only track valid applicants                                 |
+| `* * *`  | user                                  | add an interview for an applicant                          | plan screenings and keep track of an applicant's interviews |
+| `* * *`  | user                                  | edit an interview for an applicant                         | keep accurate data on an applicant's interview              |
+| `* * *`  | user                                  | delete an interview for an applicant                       | delete incorrect or unnecessary interviews                  |
+| `* * *`  | user                                  | store data locally                                         | use it on a daily basis consistently                        |
+| `* *`    | user                                  | find a specific applicant                                  | access the applicant's information quickly                  |
+| `* *`    | user                                  | sort applicants by a descriptor                            | find relevant applicants quickly                            |
+| `* *`    | user                                  | filter applicants by a descriptor                          | look at applicants of a specific category                   |
+| `* *`    | user                                  | purge all existing data                                    | remove sample data and populate real data                   |
+| `* *`    | user                                  | exit the program                                           | close the program                                           |
+| `* *`    | user                                  | import data from CSV file                                  | access all applicants' details                              |
+| `* *`    | user                                  | mark an applicant as undecided, offered or rejected        | keep track of applicants' application status                |
+| `*`      | user                                  | schedule a date for an interview                           | keep track of all interview timings                         |
+| `*`      | user                                  | view a graphical representation of each applicant's rating | get a quick idea of each applicant's ability                |
 
 
 
@@ -1060,7 +1063,7 @@ Guarantees: Staff-Snap exits.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, MacOS
+* **Mainstream OS**: Windows, Linux, macOS
 * **JAR file**: A package file format that bundles all the components of a Java application into a single file for
   distribution.
 * **Command Line Interface (CLI)**: A means for users to interact with a software by inputting commands
@@ -1068,8 +1071,6 @@ Guarantees: Staff-Snap exits.
   (e.g. a `.txt` file)
 * **Graphical User Interface (GUI)**: A type of user interface that allows users to interact with software through
   graphical icons and visual indicators.
-* **UI**: 
-*
 
 --------------------------------------------------------------------------------------------------------------------
 

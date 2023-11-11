@@ -12,13 +12,13 @@ Class ApplicantBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
+Class UniqueApplicantList
+Class Applicant
 Class Email
+Class Position
 Class Name
 Class Phone
-Class Tag
+Class Interview
 
 Class I #FFFFFF
 }
@@ -35,20 +35,20 @@ ModelManager -left-> "1" ApplicantBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-ApplicantBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ApplicantBook *--> "1" UniqueApplicantList
+UniqueApplicantList --> "~* all" Applicant
+Applicant *--> Name
+Applicant *--> Phone
+Applicant *--> Position
+Applicant *--> Email
+Applicant *--> "*" Interview
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Applicant -[hidden]up--> I
+UniqueApplicantList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Email
+Email -[hidden]right-> Position
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Applicant
 @enduml
