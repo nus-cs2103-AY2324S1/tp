@@ -11,7 +11,7 @@ the process of room booking for hotel receptionists.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Room Statistics Pie Chart (The class DoughnutPieChart.java which creates the pie chart with an empty centre is taken fromuser`jewelsea`'s comment in this Stack Overflow [post](https://stackoverflow.com/questions/24121580/can-piechart-from-javafx-be-displayed-as-a-doughnut), but the class RoomPieChart.java is self created). (Pull request [#148](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/148))
+* **New Feature**: Room Statistics Pie Chart (The class DoughnutPieChart.java which creates the pie chart with an empty centre is taken from user`jewelsea`'s comment in this Stack Overflow [post](https://stackoverflow.com/questions/24121580/can-piechart-from-javafx-be-displayed-as-a-doughnut), but the class RoomPieChart.java is self created). (Pull request [#148](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/148))
   * What it does: Allows the user to see the overall distribution of available room types and occupied rooms at a glance using the pie chart, as well as see the exact numbers using the legend of the pie chart.
   * Justification: This feature greatly enhances user experience and the ability of the user to do their jobs as hotel receptionists by allowing them an overview of the types of rooms available and occupied rooms.
   * Highlights: Implementing this feature required an understanding of both the UI components and logic of the commands.
