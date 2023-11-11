@@ -47,7 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     private boolean isViewExit = false;
     private boolean isSaved;
 
-    private Index indexOfAFostererToView;
+    private Index targetIndex;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -249,7 +249,7 @@ public class MainWindow extends UiPart<Stage> {
             if (personListPanelPlaceholder.isVisible()) {
                 commandResult = logic.execute(commandText);
             } else {
-                commandResult = logic.executeInView(commandText, personProfile.getPerson(), indexOfAFostererToView);
+                commandResult = logic.executeInView(commandText, personProfile.getPerson(), targetIndex);
             }
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -262,7 +262,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.getCommandType() == CommandType.VIEW) {
-                indexOfAFostererToView = commandResult.getTargetIndex();
+                targetIndex = commandResult.getTargetIndex();
                 handleView(commandResult.getPersonToView());
             }
 

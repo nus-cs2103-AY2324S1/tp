@@ -213,6 +213,26 @@ The add feature ensures that user input is correctly parsed and validated, and i
     * Pros: Will use less memory (e.g. for `add`, just save the person being added).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+### Edit in Profile Page Feature
+
+#### Implementation 
+
+The mechanism allows the user to edit details of a fosterer in their profile page by jumping the text cursor to the detail field. This feature is facilitated by `ViewModeParser` and `EditFieldCommand` classes, to handle user input in the profile page and edit the correct detail of a fosterer. This feature is implemented using the following components and operations: 
+
+* `ViewModeParser` - Represents the parser that parses commands that are executed in a fosterer's profile. 
+* `EditFieldCommand` - The core component responsible for executing the edit of a fosterer in the address book. 
+* `MainWindow` - The UI component that handles navigating through fields.
+* `CommandType` - The Enum class that represents the type of command which MainWindow checks to handle the UI change.
+
+Given below is an example usage scenario and how the mechanism behaves at each step, given that the user already opened person profile page:
+
+Step 1. The user enters the name of the field. e.g. "name". Since the normal person list is invisible, "name" is passed to `executeInView()` method in `MainWindow` class.
+
+Step 2. With `executeInView()`, `ViewModeParser` is used to parse the command which returns `EditFieldCommand`.
+
+Step 3. `EditFieldCommand` is executed, and with the `CommandType.EDIT_FIELD` carried by `CommandResult`, `MainWindow` calls `handleEditField()` method. 
+
+
 
 ### Delete feature
 

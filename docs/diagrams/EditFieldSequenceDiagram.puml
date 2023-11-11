@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI  UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":PersonProfile" as PersonProfile UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ViewModeParser" as ViewModeParser LOGIC_COLOR
+participant "e:EditFieldCommand" as EditFieldCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> MainWindow : executeCommand("name")
+activate MainWindow
+
+MainWindow -> PersonProfile : getPerson()
+activate PersonProfile
+
+PersonProfile --> MainWindow : get personToEdit
+deactivate PersonProfile
+
+MainWindow -> LogicManager : executeInView("name", personToEdit, targetIndex)
+activate LogicManager
+
+LogicManager -> ViewModeParser : parseCommand("name", personToEdit, targetIndex)
+activate ViewModeParser
+
+create EditFieldCommand
+ViewModeParser -> EditFieldCommand
+activate EditFieldCommand
+
+EditFieldCommand --> ViewModeParser : e
+deactivate EditFieldCommand
+
+ViewModeParser --> LogicManager : e
+deactivate ViewModeParser
+
+LogicManager -> EditFieldCommand : execute()
+activate EditFieldCommand
+
+create CommandResult
+EditFieldCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditFieldCommand :
+deactivate CommandResult
+
+
+EditFieldCommand --> LogicManager : commandResult
+deactivate EditFieldCommand
+
+LogicManager --> MainWindow : commandResult
+deactivate LogicManager
+
+MainWindow -> MainWindow : handleEditField()
+activate MainWindow
+
+group ref [Profile Edit Sequence Diagram]
+    MainWindow -[hidden]-> PersonProfile
+end
+
+deactivate MainWindow
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
