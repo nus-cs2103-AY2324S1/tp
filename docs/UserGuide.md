@@ -8,11 +8,23 @@
 
 ## Product Overview
 
-JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of companies to ease the management of applicants, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JABPro can get your applicant management tasks done faster than traditional GUI apps.
+Are you tired of managing candidate applications through cumbersome spreadsheets? Upgrade your hiring process with JABPro (JobApplicationsBook Pro), a CLI based desktop app that allows you to easily manage candidate applications, schedule interviews, and gain valuable insights on their interview performance. From interns to full-time roles, software to marketing, JABPro’s versatile interface allows you to keep track of all kinds of job applicants in various industries. Access our self-curated user guide below to learn more on how you can integrate various JABPro’s functions into your workflow.
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Key definitions
+You are a 'beginner' user if ...
+
+1. you are new to JABPro (used JABPro less than 5 times) and
+2. you wish to fully rely on the JABPro interface
+
+You are an 'advanced' user if ...
+1. you have used JABPro multiple times now and
+2. you use JABPro's search and summary statistics extensively for comparison or
+3. you would like to challenge yourself to go beyond the JABPro user interface and manually edit files
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,6 +59,8 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
     * `github Alex Yeoh`: Redirects the user to the Github account of the candidate [provided github has been added previously]
 
 Refer to the [Features](#features) below for details of each command.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -422,7 +436,7 @@ Example:
     * `and` status is either interviewed `or` rejected.
     * `and` has a tag `intern`
 
-![Search](images/search-3.png)
+![Search](images/search-2.png)
 
 ### Deleting a person : `delete`
 
