@@ -417,6 +417,17 @@ If it is by name then a `ParseException` will be caught and all relevant paramet
 
 The following sequence diagram shows how the `DeductCommandParser` class parses the `index`:
 
+![ParsePayrollIndexSequenceDiagram](images/ParsePayrollCommandIndexSequenceDiagram.png)
+
+If the `index` is provided and valid, i.e, is a non-zero unsigned integer,
+the `PayrollCommandParser` class will create a `DeductCommand` object with the `index` and `payroll` object, and return it.
+However, if the `index` is not provided, a `ParseException` will be thrown by the `ParserUtil` class, and the `PayrollCommandParser` class will try to parse the `name` of the employee.
+If the `name` parameter is also not provided, a `ParseException` will be thrown by the `PayrollCommandParser` class. 
+Otherwise, the `PayrollCommandParser` class will create a `PayrollCommand` object with the `name` and `Payroll` object, and return it.
+
+The following sequence diagram shows how the `PayrollCommandParser` class parses the `name`:
+
+![ParsePayrollNameSequenceDiagram](images/ParsePayrollCommandNameSequenceDiagram.png)
 
 <u>PayrollCommandParser</u>
 
