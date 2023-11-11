@@ -202,17 +202,13 @@ The `addMember` and `addApplicant` command is used to add a member or an applica
 The commands are implemented in the `AddMemberCommand` and `AddApplicantCommand` class, which extends the `Command`
 class.
 
-The add mechanism is facilitated by `LogicManager` which parses the command input from the user to determine the
-appropriate
-command to execute. The execute function checks whether the `Member`/`Applicant` is present in the `AddressBook`.
-The `Member`/`Applicant` is added into the `AddressBook` if it is not present. Otherwise, an error message is returned.
+1. The `AddMemberCommand`/`AddApplicantCommand` object's execute() method is called.
+2. The `Member`/`Applicant` to be added is checked against the `AddressBook` to ensure that there are no duplicates.
+3. The `Member`/`Applicant` is added into the `AddressBook` if it is unique, else an error message is thrown.
 
 <img src="images/AddApplicantActivityDiagram.png">
 
-The diagram above describes the behaviour of adding an applicant to the `AddressBook`. When the user enters the command,
-the command is parsed to determine whether it is a valid command. If it is valid, the `Applicant` is added into the 
-`AddressBook` and a success message is shown, else, an error message is shown.
-
+The diagram above describes the behaviour of adding an applicant to the `AddressBook`.
 ### View all `Member`/`Applicant` feature
 
 Lists all members/applicants in the address book to the user. For example, if the previous list was filtered (say by `FindMemberCommand` or `FindApplicantCommand`),
@@ -331,11 +327,11 @@ The sequence diagram below also shows the interaction between the various compon
 
 <img src="images/CopyMemberSequenceDiagram.png">
 
-### View all available tags
+### View all existing tags
 
-The view tags mechanism lists all available tags in the address book that a user can use to tag a member.
-All available tags in the address book are shown to the user in the tags list.
-When a new member is added, deleted or edited, the `updateTags` method is called to update the list of available tags.
+The view tags mechanism lists all existing tags in the address book that a user can use to tag a member.
+All existing tags in the address book are shown to the user in the tags list.
+When a new member is added, deleted or edited, the `updateTags` method is called to update the list of existing tags.
 
 <img src="images/ViewTagsSequenceDiagram.png" width="543" alt="ViewTagsSequenceDiagram"/>
 
@@ -346,7 +342,9 @@ the `updateTags()` method.
 `tags` is an `ObservableList` which will update the `TagsListPanel` UI component when there is a change in the `tags`
 list.
 
-### \[Proposed\] Allocating tasks to Members
+### Scheduling an interview for an `Applicant`
+
+### \[Proposed\] Allocating tasks to Members(need to change!)
 
 #### Proposed Implementation
 
@@ -534,45 +532,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | ` * `    | EXCO    | export a selected group of contacts to a CSV file           | use the data in other applications or for backup purposes           |
 | ` * `    | EXCO    | import a CSV file of contacts into the application          | add a large number of contacts into the application at once         |
 | ` * `    | EXCO    | merge duplicate contact entries                             | maintain a clean and organised database                             |
+
 ### Use cases
 
 (For all use cases below, the **System** is the `ClubMembersContact` and the **Actor** is the `user`, unless specified
 otherwise)
 
-**Use case: UC01 - Schedule a date for an interview**
+**Use case: UC01 - Adding a member**
 
 **MSS**
 
-1. User requests to list applicants
-2. ClubMembersContact shows a list of applicants
-3. User requests to schedule a date and time for an interview for a specific applicant in the list
-4. ClubMembersContact marks out the time of that date
+1. User enters command to add a member
+2. ClubMembersContact adds the member to the list of members
+3. ClubMembersContact displays a success message along with the member's details
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The add member command format is invalid.
 
-  Use case ends.
+  * 1a1. ClubMembersContact shows an error message.
+    
+      Use case resumes at step 1.
+* 2a. Member already exists in the list of members.
 
-* 3a. The requested time and date is unavailable.
-
-    * 3a1. ClubMembersContact shows an error message.
+  * 2a1. ClubMembersContact shows an error message.
 
       Use case resumes at step 2.
 
 ---
 
-**Use case: UC02 - Add a member**
+**Use case: UC02 - Finding members**
 
 ---
 
-**Use case: UC03 - Finding members**
-
----
-
-**Use case: UC04 - Viewing members**
+**Use case: UC03 - Viewing members**
 
 **MSS**
 
@@ -582,15 +577,15 @@ otherwise)
 
    Use case ends.
 
-**Use case: UC05 - Editing a member**
+**Use case: UC04 - Editing a member**
 
 ---
 
-**Use case: UC06 - Deleting a member**
+**Use case: UC05 - Deleting a member**
 
 ---
 
-**Use case: UC07 - Copying a member**
+**Use case: UC06 - Copying a member**
 
 **MSS**
 
@@ -618,43 +613,76 @@ otherwise)
 
 ---
 
-**Use case: UC08 - Allocating a task to a member**
+**Use case: UC07 - Allocating a task to a member**
 
 ---
 
-**Use case: UC09 - Viewing all tasks allocated to a member**
+**Use case: UC08 - Viewing all tasks allocated to a member**
 
 ---
 
-**Use case: UC10 - Deleting a task allocated to a member**
+**Use case: UC09 - Deleting a task allocated to a member**
 
 ---
 
-**Use case: UC1 - Adding an applicant**
+**Use case: UC10 - Adding an applicant**
+
+Similar to UC01 - Adding members except that it adds an applicant instead of a member.
 
 ---
 
-**Use case: UC12 - Finding applicants**
+**Use case: UC11 - Finding applicants**
+
+Similar to UC02 - Finding members except that it finds applicants instead of members.
 
 ---
 
-**Use case: UC13 - Viewing applicants**
+**Use case: UC12 - Viewing applicants**
 
-Similar to UC04 - Viewing members except that it displays a list of applicants instead of members.
-
----
-
-**Use case: UC14 - Editing an applicant**
+Similar to UC03 - Viewing members except that it displays a list of applicants instead of members.
 
 ---
 
-**Use case: UC15 - Deleting an applicant**
+**Use case: UC13 - Editing an applicant**
+
+Similar to UC04 - Editing a member except that it edits an applicant instead of a member.
 
 ---
 
-**Use case: UC16 - Copying an applicant**
+**Use case: UC14 - Deleting an applicant**
 
-Similar to UC07 - Copying a member except that it copies an applicant instead of a member.
+Similar to UC05 - Deleting a member except that it deletes an applicant instead of a member.
+
+---
+
+**Use case: UC15 - Copying an applicant**
+
+Similar to UC06 - Copying a member except that it copies an applicant instead of a member.
+
+---
+
+**Use case: UC16 - Scheduling a date for an interview**
+
+**MSS**
+
+1. User requests to list applicants
+2. ClubMembersContact shows a list of applicants
+3. User requests to schedule a date and time for an interview for a specific applicant in the list
+4. ClubMembersContact marks out the time of that date
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The requested time and date is unavailable.
+
+    * 3a1. ClubMembersContact shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
@@ -690,14 +718,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file. Expected: Shows the GUI with a set of sample contacts. The window size may not be
+    2. Double-click the jar file. Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ### Deleting a member
@@ -706,12 +734,12 @@ Deleting a member while all members are being shown
 
 1. Prerequisites: List all members using the `viewm` command. Multiple members in the list.
 
-1. Test case: `delm 1`<br>
+2. Test case: `delm 1`<br>
    Expected: First member is deleted from the list. Details of the deleted member shown in the status message.
    Timestamp in the status bar is updated.
 
-1. Test case: `delm 0`<br>
+3. Test case: `delm 0`<br>
    Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
 
-1. Other incorrect delete commands to try: `delm`, `dela`, `deletemember x`, `...` (where x is larger than the list size)<br>
+4. Other incorrect delete commands to try: `delm`, `dela`, `deletemember x`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
