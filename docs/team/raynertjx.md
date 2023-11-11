@@ -27,7 +27,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
     * Led the brainstorming of user stories for our project.
-    * Helped in creating skeletal version of PPP used by teammates.
+    * Designed the skeleton PPP used by teammates.
     * Created labels that enabled us to track the different types of issues and PRs.
     * Gathered tasks and improvements for the UG.
 
