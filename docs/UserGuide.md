@@ -26,7 +26,6 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
 </div>
 
 ## Table of Contents
-* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -59,13 +58,12 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
       java -jar wellnus.jar
       ```
       
-<div markdown="block" class="alert alert-info">
-:information_source: Note:
-You may also use any application (e.g. Windows powershell, Visual Studio Code) that supports command line inputs.
-</div>
+   <div markdown="block" class="alert alert-info">
+   :information_source: Note:
+   You may also use any applications (e.g. Windows Powershell, Visual Studio Code) that support command line inputs.
+   </div>
 
-A window similar to the below should appear in a few seconds. Note how the app contains some sample data.
-
+   A window similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
    ![Ui](images/Ui.png)
 
@@ -86,7 +84,7 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 | Prefix    | Parameter         | Parameter Meaning                | Example Usage                      | Parameter Constraints                                                                                                                            |
 |-----------|-------------------|----------------------------------|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
 | **n/**    | STUDENT_NAME      | Name of student                  | n/Peter Johnson                    | STUDENT_NAME **must** only contain **alphabetical characters and spaces**, be **unique** up to **100 characters** long, and **cannot be blank**. |
-| **c/**    | CONTACT_NUMBER    | Contact number of student        | c/94738484                         | CONTACT_NUMBER **must** only contain **numerical characters** , be **exactly 8 digits long** (without spaces) and **cannot be blank**.           |
+| **c/**    | CONTACT_NUMBER    | Contact number of student        | c/94738484                         | CONTACT_NUMBER **must** only contain **numerical characters**, be **exactly 8 digits long** (without spaces) and **cannot be blank**.            |
 | **a/**    | ADDRESS           | Address of student               | a/Blk 515 Choa Chu Kang Avenue 6   | ADDRESS can take any value up to **200 characters** long, and **cannot be blank**.                                                               |
 | **r/**    | RISK_LEVEL        | Risk level assigned to student   | r/high                             | RISK_LEVEL **must** be one of the following three values: **high**, **medium**, **low**. **Case-insensitive**.                                   |
 | **note/** | NOTE              | Note associated with student     | note/Struggles with 3rd grade math | NOTE can take any value up to **500 characters** long.                                                                                           |
@@ -280,7 +278,7 @@ Invalid examples:
 
 Edit a student's contact number or address.
 
-Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
+Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS] [r/RISK_LEVEL]`
 
 **Parameters**:
 1. Student Index
@@ -290,6 +288,14 @@ Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
    - Numbers only, must be 8 characters long
 3. Home Address 
    - Maximum of 200 characters, cannot be blank
+4. Risk Level
+   - Must be `high`, `medium`, or `low`
+   - Case-insensitive, i.e. `HIGH` is a valid input
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+The `tag STUDENT_INDEX r/RISK_LEVEL` command is equivalent to `edit STUDENT_INDEX r/RISK_LEVEL`.
+</div>
 
 Valid examples:
 * `edit 1 c/98765432 a/Woodlands Street 11 Blk 888 #08-08`
