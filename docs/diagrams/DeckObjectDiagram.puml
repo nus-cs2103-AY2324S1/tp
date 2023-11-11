@@ -1,4 +1,12 @@
 @startuml
+skinparam Object {
+    FontColor #000
+    FontSize 25
+    BorderThickness 1
+    BorderColor #000
+    StereotypeFontColor #000
+    FontName Arial
+}
 
 object "<u>:Deck" as IL {
   cards = UniqueCardList()
