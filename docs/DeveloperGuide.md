@@ -187,7 +187,7 @@ For easier of viewing, 2 sequence diagrams will be used to show how the `add-i` 
 Step 1 to 4:
 
 ![AddInterviewSequenceDiagram1](images/AddInterviewSequenceDiagram1.png)
-The activation bar of `LogicManager` is intended to not end since it continues being in the activated state.
+The activation bar of `LogicManager` is intended to not end since it continues being in the activated state for the steps that follow.
 
 Step 5 to 9:
 
