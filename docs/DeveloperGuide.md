@@ -1843,4 +1843,3 @@ not been assigned one of these statuses are categorised as unmarked, and it's im
 2. This can be done by modifying `ListScheduleCommandParser.java` and `Status.java` to map an integer to enum `Status` that represents umarked status.
 3. When `ListScheduleCommand:execute` runs, the command should accept another input from `m/` parameter that represents the umarked status, such as `m/u`.
 4. Then `Model::updateFilteredScheduleList` will take in `StatusPredicate.java` to filter schedules based on unmarked status.
-
