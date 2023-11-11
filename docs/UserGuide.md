@@ -6,7 +6,7 @@ pageNav: 4
 
 # LoveBook User Guide
 
-LoveBook, is a **dating-focused** application, revolving around providing users with a **convenient**
+LoveBook, is a **dating-focused** application, revolving around providing **serial daters** with a **convenient**
 and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date organization**,
 **customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and **effectiveness** of your
 online dating journey.
@@ -14,43 +14,17 @@ online dating journey.
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
-## **Quick Start**
+## **Glossary**
 
-### **Download and Installation**
-
-1. Ensure that you have Java `11` or above installed in your Computer.
-
-2. Download the latest `LoveBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-2/tp).
-
-3. Double-click the file to start the app. The window that appears will be similar to the below should appear in a few
-   seconds.<br>
-   ![Ui](images/Ui.png)
-   *Figure 1: A view of LoveBook at startup*
-
-4. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing `Enter` to
-   open the help window.<br>
-   Some commands you can try:
-
-    * `list` : Lists all dates and their associated details
-
-    * `exit` : Exits the app
-
-5. Refer to the features below for details of each command.
-
-### **Navigating the GUI**
-
-If you're new to this program, the initial screen might appear a bit daunting. Don't fret; let's explore the various elements of the LoveBook interface together.
-We suggest enlarging the program window for a clearer perspective, allowing you to view more content.
-
-Here's the detailed breakdown of the LoveBook screen: <br>
-![GUI](images/navigation.png)
-
-- **Menu Bar** - This is where you can find the `File` and `Help` options. Click on `File` to access the `Exit` option. Click on `Help` to access the `Help` option.
-- **Command Box** - This is where you type in your commands. Press `Enter` to execute the command.
-- **Presets Bar** - This is where you can find the preset commands. Click on a preset command to populate your command box.
-- **Result Display** - This is where the results of your commands are displayed.
-- **Date List Panel** - This is where the list of dates are displayed. The list is scrollable, and you can scroll up and down to view the entire list.
+| Term                       | Definition                                                                                                        |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------|
+| Date                       | A person that the user is interested in and is currently seeing.                                                  |
+| Metric | A certain characteristic of a date. (e.g. Gender, Height)                                                         |
+| Command | Text that the user types into the application to perform an action.                                               |
+| Parameter | A value that the user provides to the application when executing a command. (e.g. in `gender/M` M is a parameter) |
+| GUI | Graphical User Interface                                                                                          |
+| CLI | Command Line Interface                                                                                            |
+| Mainstream OS |  Windows, Linux, Unix, OS-X |
 
 ### **Common Symbols**
 
@@ -78,6 +52,91 @@ Here's a quick guide to help you understand what they mean.
 | Capricorn   | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/capricorn.png?raw=true" height="50">   | December 22 - January 19  |
 | Aquarius    | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/aquarius.png?raw=true" height="50">    | January 20 - February 18  |
 | Pisces      | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/pisces.png?raw=true" height="50">      | February 19 - March 20    |
+--------------------------------------------------------------------------------------------------------------------
+## **Quick Start**
+
+### **Download and Installation**
+
+1. Ensure that you have Java `11` or above installed in your Computer.
+
+2. Download the latest `LoveBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-2/tp).
+
+3. Double-click the file to start the app. The window that appears will be similar to the below should appear in a few
+   seconds. Note that in this case, we have sample data.<br>
+   ![Ui](images/Ui.png)
+   *Figure 1: A view of LoveBook at startup*
+
+4. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing `Enter` to
+   open the help window.<br>
+   Some commands you can try:
+
+    * `list` : Lists all dates and their associated details
+
+    * `exit` : Exits the app
+
+5. Refer to the features below for details of each command.
+
+### **Navigating the GUI**
+
+If you're new to this program, the initial screen might appear a bit daunting. Don't fret; let's explore the various elements of the LoveBook interface together.
+We suggest enlarging the program window for a clearer perspective, allowing you to view more content.
+
+Here's the detailed breakdown of the LoveBook screen: <br>
+![GUI](images/navigation.png)
+
+- **Menu Bar** - This is where you can find the `File` and `Help` options. Click on `File` to access the `Exit` option. Click on `Help` to access the `Help` option.
+- **Command Box** - This is where you type in your commands. Press `Enter` to execute the command.
+- **Presets Bar** - This is where you can find the preset commands. Click on a preset command to populate your command box.
+- **Result Display** - This is where the results of your commands are displayed.
+- **Date List Panel** - This is where the list of dates are displayed. The list is scrollable, and you can scroll up and down to view the entire list.
+
+### **LoveBook Tutorial: Getting started**
+Now that you are familiar with the layout of LoveBook, we recommend you try the following steps to develop a feel for the core features of LoveBook.
+
+#### 1. Adding a date
+So you've just started dating. How do you begin using this app?
+
+Let's say you went out on a date with John. Throughout your date you find out key things about him, he's 123cm tall, earns 3k a month, his horoscope is Libra.
+Here you can add John to LoveBook using the add command:
+
+In the command box, enter `add name/John Doe age/21 gender/M height/123 income/3000 horoscope/Libra` and press the `enter` key.
+This will add John to LoveBook.
+![addCommandExample](images/user-commands/addCommandExample.png)
+Let's imagine you've added a couple of dates to the LoveBook already. It should look something like this now:
+![addCommandExample2](images/user-commands/addCommandExample2.png)
+
+#### 2. Starring a date
+With so many dates you might want to start keeping tabs on dates that are perhaps more exceptional. Fret not, star dates as you go along
+in your journey. Here you can star John for instance, using the star command:
+Enter `star 2`.
+This will star John.
+![starCommandExample](images/user-commands/starCommandExample.png)
+
+#### 3. Filtering dates
+With so many dates, you might want to start filtering down to the metrics that matter. Perhaps you seek someone younger, simply filter for
+a specific age. Here you can filter for an age of 21 for instance, using the filter command:
+Enter `filter age/21`.
+This will filter for John.
+![filterCommandExample](images/user-commands/filterCommandExample.png)
+
+#### 4. Set Preferences
+Well, maybe you are indecisive as a serial dater, and you want a third party opinion. Fret not, simply begin by keying in your preferences using the
+setPreferences command:
+Enter `setP age/22 height/130 income/3200 horoscope/Libra`
+This will set your preferences like so:
+![setPreferencesCommandExample](images/user-commands/setPreferencesCommandExample.png)
+
+#### 5. Best Match
+And here it is, to get the match of your dreams, simply use the bestMatch command:
+Enter `bestMatch`
+![bestMatchCommandExample](images/user-commands/bestMatchCommandExample.png)
+
+### Congrats! You have completed the tutorial!
+The tutorial shows you what a typical workflow might look like on LoveBook. Do continue to peruse the commands section which contains
+other commands that, while not worth covering in a quick start tutorial, are certainly important to using LoveBook as a whole.
+Here's to you embarking on your LoveBook journey!
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -126,19 +185,11 @@ Adds a date to the LoveBook.
 
 Format: `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME`
 
-Example: `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000`
+Example: `add name/John Doe age/21 gender/M height/123 income/3000 horoscope/Libra`
 
 ![addCommandExample](images/user-commands/addCommandExample.png)
 
-Expected output: `New date added: Cleon; Age: 22; Gender: F; Height: 176; Income: 3000; Horoscope: TAURUS`
-
-Output if error:
-
-```
-Invalid command format! 
-add: Adds a Date to the LoveBook. Parameters: name/NAME age/AGE gender/GENDER height/HEIGHT income/INCOME horoscope/HOROSCOPE
-Example: add name/John Doe age/21 gender/M height/123 income/3000 horoscope/Libra
-```
+Expected output: `New date added: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
 #### **Editing a date: `edit`**
 
@@ -158,21 +209,13 @@ Parameter constraints:
 
 Examples:
 
-- `edit 3 name/Cleon` (editing 1 metric)
-- `edit 3 name/Cleon horoscope/Cancer` (editing 2 metrics)
-- `edit 3 horoscope/Cancer name/Cleon` (sequence doesn't matter)
+- `edit 1 name/John` (editing 1 metric)
+- `edit 1 name/John horoscope/Cancer` (editing 2 metrics)
+- `edit 1 horoscope/Cancer name/John` (sequence doesn't matter)
 
 ![editCommandExample](images/user-commands/editCommandExample.png)
 
-Expected Output: `Edited Date: Cleon; Age: 12; Gender: M; Height: 123; Income: 3000; Horoscope: CANCER`
-
-Output if error:
-
-```
-edit: Edits the details of the Date identified by the index number used in the displayed Date list. Existing values will be overwritten by the input values.
-Parameters: INDEX (must be a positive integer) [name/NAME] [age/AGE] [gender/GENDER] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]
-Example: edit 1 age/24 gender/M height/180 income/3000 horoscope/SCORPIO 
-```
+Expected Output: `Edited Date: John; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
 #### **Deleting a date: `delete`**
 
@@ -190,14 +233,6 @@ Example: `delete 1`
 ![deleteCommandExample](images/user-commands/deleteCommandExample.png)
 
 Expected output: `Deleted Date: Ben Brown; Age: 21; Gender: F; Height: 194; Income: 6000; Horoscope: GEMINI`
-
-Output if error :
-```
-Invalid command format! 
-delete: Deletes the Date identified by the index number used in the displayed Date list.
-Parameters: INDEX (must be a positive integer)
-Example: delete 1
-```
 
 #### **Listing all dates: `list`**
 
@@ -231,18 +266,7 @@ Example: `star 1`
 
 Expected output: `Starred Date: John Doe; Age: 21; Gender: F; Height: 245; Income: 3000; Horoscope: LIBRA`
 
-Output if invalid command format:
-```
-Invalid command format!
-star: stars the date identified by the index number used in the displayed Date list.
-Parameters: INDEX (must be a positive integer)
-Example: star 1
-```
-
 <box type="info" seamless>
-
-* Output if index out of bounds: `The date index provided is invalid`
-* If Date is already starred, it will display the output `Date has already been starred`
 
 </box>
 
@@ -256,24 +280,6 @@ Example: `unstar 1`
 
 Expected output: `Unstarred Date: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
-Output if invalid command format:
-```
-Invalid command format!
-unstar: unstars the date identified by the index number used in the displayed Date list.
-Parameters: INDEX (must be a positive integer)
-Example: star 1
-```
-
-Output if index out of bounds:
-
-`The date index provided is invalid`
-
-<box type="info" seamless>
-
-* If Date is already unstarred, it will display the output `Date has already been unstarred`
-
-</box>
-
 ### **Sorting, Searching for dates**
 
 #### **Finding a date: `find`**
@@ -284,7 +290,7 @@ Format: `find NAME [MORE_NAMES]`
 
 Parameter constraints:
 
-- Name should be a non non-empty string.
+- Name should be a non-empty string.
 - More names can be added to the command line, and the search will be conducted for all names provided
 
 Example:
@@ -293,8 +299,6 @@ Example:
 - `find Cleon John`
 
 Expected Output: `Lists the dates with the name(s) specified`
-
-Output if error: `0 dates listed!`
 
 #### **Filtering dates by a certain metric: `filter`**
 
@@ -314,8 +318,6 @@ Example:
 - `filter gender/M name/Cleon`
 
 Expected Output: `Lists the dates with the metric specified`
-
-Output if error: `No dates found!`
 
 #### **Sorting dates by a certain metric: `sort`**
 
@@ -346,15 +348,6 @@ Example:
 - `sort horoscope/decreasing`
 
 Expected Output: `Lists the dates in the order specified`
-
-Output if error:
-
-```
-Invalid command format! 
-sort: Sorts all dates in LoveBook alphabetically or numerically.
-Parameters: name/ OR age  OR height/ OR income/ OR horoscope/ AND increasing OR decreasing
-Example: sort name/increasing
-```
 
 ### **Managing Preferences and Getting Matches**
 
@@ -408,13 +401,6 @@ Expected output:
 Updated Preferences: Age: 22; Height: 180; Income: 2000; Horoscope: TAURUS
 ```
 
-Output if error:
-```
-At least one field to edit must be provided.
-Please try the following command format: setP: Sets Date Preference. Parameters: age/AGE height/HEIGHT income/INCOME horoscope/HOROSCOPE.
-Example: setP age/21 height/180 income/3000 horoscope/Scorpio
-```
-
 #### **Getting a recommended date: `bestMatch`**
 
 Filters out the most compatible date based on the set preferences.
@@ -427,8 +413,6 @@ Format: `bestMatch`
 
 Expected Output: `Here's your best match!`
 
-Output if error: `Initialise list with dates before calling bestMatch`
-
 #### **Getting a blind date: `blindDate`**
 
 Outputs a blind date from the LoveBook.
@@ -440,8 +424,6 @@ Format: `blindDate`
 ![blindDateCommandExample-2](images/user-commands/blindDateCommandExample2.png)
 
 Expected Output: `Here's a blind date for you!`
-
-Output if error: `Initialise list with dates before calling blindDates`
 
 ### **Other Commands**
 
@@ -514,14 +496,3 @@ to choose their own avatars.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Glossary**
-
-| Term                       | Definition                                                                                                        |
-|----------------------------|-------------------------------------------------------------------------------------------------------------------|
-| Date                       | A person that the user is interested in and is currently seeing.                                                  |
-| Metric | A certain characteristic of a date. (e.g. Gender, Height)                                                         |
-| Command | Text that the user types into the application to perform an action.                                               |
-| Parameter | A value that the user provides to the application when executing a command. (e.g. in `gender/M` M is a parameter) |
-| GUI | Graphical User Interface                                                                                          |
-| CLI | Command Line Interface                                                                                            |
-| Mainstream OS |  Windows, Linux, Unix, OS-X |
