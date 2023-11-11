@@ -69,7 +69,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [rm/REMARK]` can be used as `n/John Doe rm/Extra Pillows` or as `n/John Doe`.
+  e.g `n/NAME [rk/REMARK]` can be used as `n/John Doe rk/Extra Pillows` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `r/ROOM d/BOOKING_PERIOD`, `d/BOOKING_PERIOD r/ROOM` is also acceptable.
@@ -91,7 +91,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
   or end with any special characters. This is followed by a '@' and then a domain name. The domain name is made up of
   domain labels separated by periods. The domain name must end with a domain label that is supported:
     * gmail, yahoo, outlook, hotmail, icloud.
-* `rm/REMARK`: `REMARK` can be any String less than or equal to 50 characters in length.
+* `rk/REMARK`: `REMARK` can be any String less than or equal to 50 characters in length.
 
 </div>
 </details>
@@ -115,7 +115,7 @@ Format: `help`
 
 Adds a booking to the bookings book.
 
-Format: `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK`
+Format: `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rk/REMARK`
 ![AddBooking.png](images%2FAddBooking.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
@@ -270,11 +270,11 @@ Prefix completions works with `add` and `edit` command and does not validate you
 
 | Action     | Format, Examples                                                                                                                                                                            |
 |------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK` <br> e.g., `add r/1 d/2023-01-01 08:00 to 2023-01-02 11:00 n/James Ho p/22224444 e/jamesho@gmail.com rm/Extra Towels` |
+| **Add**    | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rk/REMARK` <br> e.g., `add r/1 d/2023-01-01 08:00 to 2023-01-02 11:00 n/James Ho p/22224444 e/jamesho@gmail.com rk/Extra Towels` |
 | **Clear**  | `clear`                                                                                                                                                                                     |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                         |
 | **Undo**   | `undo`                                                                                                                                                                                      |
-| **Edit**   | `edit INDEX [r/ROOM] [d/BOOKING _PERIOD] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rm/REMARK]`<br> e.g.,`edit 2 r/2 d/2023-01-01 08:00 to 2023-01-02 11:00 n/James Lee e/jameslee@gmail.com`     |
+| **Edit**   | `edit INDEX [r/ROOM] [d/BOOKING _PERIOD] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rk/REMARK]`<br> e.g.,`edit 2 r/2 d/2023-01-01 08:00 to 2023-01-02 11:00 n/James Lee e/jameslee@gmail.com`     |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find 1`                                                                                                                                           |
 | **List**   | `list`                                                                                                                                                                                      |
 | **Help**   | `help`                                                                                                                                                                                      |
