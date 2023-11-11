@@ -520,10 +520,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | EXCO    | delete a member                                             | remove members from the database if they have left                  |
 | `* * *`  | EXCO    | edit a member                                               | update the member's details should they change                      |
 | `* * *`  | EXCO    | add an applicant                                            | keep track of all my applicants to contact them for further updates |
+| `* *  `  | EXCO    | copy a member's details to the clipboard                    | paste their details elsewhere                                       |
 | `* * *`  | EXCO    | view all applicants                                         | see a list of all applicants to my CCA                              |
 | `* * *`  | EXCO    | delete an applicant                                         | remove applicants if they have withdrawn their application          |
 | `* * *`  | EXCO    | edit an applicant                                           | update the applicant's details should they change                   |
 | `* *  `  | EXCO    | schedule a time and date for an interview with an applicant | mark out a time period of a specific date for an interview          |
+| `* *  `  | EXCO    | copy a applicant's details to the clipboard                 | paste their details elsewhere                                       |
 | ` * `    | EXCO    | receive notifications for upcoming interviews               | be reminded of upcoming interviews and won't forget about them      |
 | ` * `    | EXCO    | export a selected group of contacts to a CSV file           | use the data in other applications or for backup purposes           |
 | ` * `    | EXCO    | import a CSV file of contacts into the application          | add a large number of contacts into the application at once         |
