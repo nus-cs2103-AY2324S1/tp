@@ -18,6 +18,9 @@ Class Question
 Class Answer
 Class Hint
 Class Tag
+Class PracticeDate
+Class Difficulty
+Class SolveCount
 
 Class I #FFFFFF
 }
@@ -36,11 +39,16 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 Deck *--> "1" UniqueCardList
 UniqueCardList --> "~* all" Card
-Card *--> Answer
-Card *--> Hint
-Card *--> Question
+Card *--> "1" Answer
+Card *--> "1" Hint
+Card *--> "1" Question
 Card *--> "*" Tag
+Card *--> "2" PracticeDate
+Card *--> "1" Difficulty
+Card *--> "1" SolveCount
 
+
+note right of Card: "*filtered" belongs to model manager
 Card -[hidden]up--> I
 UniqueCardList -[hidden]right-> I
 

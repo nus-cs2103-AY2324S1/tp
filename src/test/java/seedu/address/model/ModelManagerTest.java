@@ -141,4 +141,9 @@ public class ModelManagerTest {
         modelManager.resetRandomIndex();
         assertEquals(modelManager, new ModelManager());
     }
+
+    @Test
+    public void get_deckSize() {
+        assertEquals(modelManager.getDeckSize(), new ModelManager().getDeckSize());
+    }
 }

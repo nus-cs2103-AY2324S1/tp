@@ -1,0 +1,34 @@
+@startuml
+skinparam Object {
+    FontColor #000
+    FontSize 25
+    BorderThickness 1
+    BorderColor #000
+    StereotypeFontColor #000
+    FontName Arial
+}
+
+object "<u>:Deck" as IL {
+  cards = UniqueCardList()
+}
+
+object "<u>:Card" as I1 {
+  question = "How many pipelining methods in TCP"
+  answer = "2"
+}
+
+object "<u>:Card" as I2 {
+  question = "How many stages in MIPS processor"
+  answer = "5"
+}
+
+object "<u>:Card" as I3 {
+  question = "Opcode of R-format instructions"
+  answer = "000000"
+}
+
+IL -down-> I3
+IL -down-> I1
+IL -down-> I2
+
+@enduml
