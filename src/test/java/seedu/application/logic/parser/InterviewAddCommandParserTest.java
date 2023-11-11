@@ -7,22 +7,16 @@ import static seedu.application.logic.parser.CommandParserTestUtil.assertParseFa
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.application.testutil.TypicalInterviews.CLEANER_INTERVIEW;
-import static seedu.application.testutil.TypicalJobs.CLEANER;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.application.logic.Messages;
-import seedu.application.logic.commands.AddCommand;
 import seedu.application.logic.commands.InterviewAddCommand;
-import seedu.application.model.job.Company;
-import seedu.application.model.job.Job;
-import seedu.application.model.job.Role;
 import seedu.application.model.job.interview.Interview;
 import seedu.application.model.job.interview.InterviewAddress;
 import seedu.application.model.job.interview.InterviewDateTime;
 import seedu.application.model.job.interview.InterviewType;
 import seedu.application.testutil.InterviewBuilder;
-import seedu.application.testutil.JobBuilder;
 
 public class InterviewAddCommandParserTest {
     private InterviewAddCommandParser parser = new InterviewAddCommandParser();
