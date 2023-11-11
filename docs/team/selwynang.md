@@ -62,7 +62,7 @@ and managing milestones on [GitHub's issue tracker](https://github.com/AY2324S1-
   * Added 3 Use Cases:
     * UC02 - Delete a member
     * UC03 - List all members
-    * UC03 - List all events
+    * UC04 - List all events
 
 ### Community
 * This is the full [list](https://github.com/AY2324S1-CS2103T-F11-1/tp/pulls?q=is%3Apr+reviewed-by%3Aselwynang) of pull requests which I have reviewed.
