@@ -49,4 +49,12 @@ public class StudentNotePanel extends UiPart<Region> {
         }
         studentName.setText("Student Name: " + name);
     }
+
+    /**
+     * Reset the note panel in the UI
+     */
+    public void resetNotes() {
+        studentName.setText("No student information chosen currently");
+        notesPara.setText("");
+    }
 }

@@ -5,8 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -86,10 +84,10 @@ public class EditCommand extends Command {
         Name updatedName = studentToEdit.getName();
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
-        Set<RiskLevel> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Set<RiskLevel> sameTags = studentToEdit.getTags(); // tags cannot be edited by edit command
         Note updatedNote = studentToEdit.getNote();
 
-        return new Student(updatedName, updatedPhone, updatedAddress, updatedTags, updatedNote);
+        return new Student(updatedName, updatedPhone, updatedAddress, sameTags, updatedNote);
     }
 
     @Override
@@ -124,7 +122,6 @@ public class EditCommand extends Command {
 
         private Phone phone;
         private Address address;
-        private Set<RiskLevel> riskLevel;
 
         public EditStudentDescriptor() {}
 
@@ -135,14 +132,13 @@ public class EditCommand extends Command {
         public EditStudentDescriptor(EditStudentDescriptor toCopy) {
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
-            setTags(toCopy.riskLevel);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(phone, address, riskLevel);
+            return CollectionUtil.isAnyNonNull(phone, address);
         }
 
         public void setPhone(Phone phone) {
@@ -161,22 +157,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<RiskLevel> tags) {
-            this.riskLevel = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<RiskLevel>> getTags() {
-            return (riskLevel != null) ? Optional.of(Collections.unmodifiableSet(riskLevel)) : Optional.empty();
-        }
 
         @Override
         public boolean equals(Object other) {
@@ -191,8 +171,7 @@ public class EditCommand extends Command {
 
             EditStudentDescriptor otherEditStudentDescriptor = (EditStudentDescriptor) other;
             return Objects.equals(phone, otherEditStudentDescriptor.phone)
-                    && Objects.equals(address, otherEditStudentDescriptor.address)
-                    && Objects.equals(riskLevel, otherEditStudentDescriptor.riskLevel);
+                    && Objects.equals(address, otherEditStudentDescriptor.address);
         }
 
         @Override
@@ -200,7 +179,6 @@ public class EditCommand extends Command {
             return new ToStringBuilder(this)
                     .add("phone", phone)
                     .add("address", address)
-                    .add("risk level", riskLevel)
                     .toString();
         }
     }

@@ -14,7 +14,7 @@ class JsonAdaptedRiskLevel {
     private final String riskLevel;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code riskLevel}.
+     * Constructs a {@code JsonAdaptedRiskLevel} with the given {@code riskLevel}.
      */
     @JsonCreator
     public JsonAdaptedRiskLevel(String riskLevel) {
@@ -22,7 +22,7 @@ class JsonAdaptedRiskLevel {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code RiskLevel} into this class for Jackson use.
      */
     public JsonAdaptedRiskLevel(RiskLevel source) {
         riskLevel = source.riskLevel;
@@ -34,9 +34,9 @@ class JsonAdaptedRiskLevel {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted tag object into the model's {@code RiskLevel} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted risk level.
      */
     public RiskLevel toModelType() throws IllegalValueException {
         if (!RiskLevel.isValidRiskLevel(riskLevel)) {

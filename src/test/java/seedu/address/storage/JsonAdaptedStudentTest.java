@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Phone;
 
 public class JsonAdaptedStudentTest {
@@ -29,6 +30,12 @@ public class JsonAdaptedStudentTest {
             .map(JsonAdaptedRiskLevel::new)
             .collect(Collectors.toList());
     private static final String VALID_NOTE = BENNY.getNote().toString();
+    private static final String INVALID_NOTE = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopq"
+            + "rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopq"
+            + "rstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi"
+            + "jklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza"
+            + "bcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs"
+            + "tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefa";
 
     @Test
     public void toModelType_validStudentDetails_returnsStudent() throws Exception {
@@ -93,4 +100,19 @@ public class JsonAdaptedStudentTest {
         assertThrows(IllegalValueException.class, student::toModelType);
     }
 
+    @Test
+    public void toModelType_nullNote_throwsIllegalValueException() {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS,
+                VALID_TAGS, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidNote_throwsIllegalValueException() {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS,
+                VALID_TAGS, INVALID_NOTE);
+        String expectedMessage = Note.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
+    }
 }
