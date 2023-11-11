@@ -716,7 +716,9 @@ Unknown command
 ### Filtering the displayed list : `filter`
 
 #### For Student:
-* <box type="info" seamless>You must be in the **_STUDENTS list_** to run this command. Type `list STUDENTS` to go to the **_STUDENTS list_**.</box>
+<box type="info" seamless>
+
+You must be in the ___STUDENTS list___ to run this command. Type `list STUDENTS` to go to the ___STUDENTS list___.</box>
 Format: `[-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
 * Multiple fields can be specified at the same time.
 * Refer to the parameter constraints [here](#parameter-summary).
@@ -749,8 +751,10 @@ Usage: filter (any number of unique -[name|subject|tag|remark] [value]).
 For example, filter -name John -subject physics,english
 ```
 
-#### For schedule list:
-* <box type="info" seamless>You must be in the **_SCHEDULE list_** to run this command. Type `list SCHEDULE` to go to the **_SCHEDULE list_**.</box>
+#### For Schedule:
+<box type="info" seamless>
+
+You must be in the **_SCHEDULE list_** to run this command. Type `list SCHEDULE` to go to the **_SCHEDULE list_**.</box>
 Format: `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`
 * Only one of `-before`, `-on`, `-after` can be used at once. For example, you cannot use both `-before` and `-after` in the same filter command.
 * The dates specified in `-before` and `-after` are exclusive. For example, specifying `-before 2023/05/01` will find lessons before but not on 2023/05/01.
