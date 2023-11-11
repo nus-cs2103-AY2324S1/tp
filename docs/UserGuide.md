@@ -29,7 +29,7 @@ you can access contacts by roles and responsibilities instantly.
   * [Understanding the GUI](#understanding-the-gui)
   * [Tutorial on using our Commands](#tutorial-on-using-our-commands)
 * [Features](#features)
-  * [Welcome to Linktree](#welcome-to-linktree)
+  * [Date & Time Command](#date--time-command)
   * [Managing developers](#managing-developers)
     * [Add developer](#add-developer)
     * [Remove developer](#remove-developer)
@@ -99,6 +99,8 @@ Here are some symbols you might encounter in our guide, and their respective mea
 * These symbols (:information_source: :bulb: :exclamation:) will be encapsulated in a box as such.
 </div>
 
+</br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Getting Started
@@ -112,11 +114,8 @@ Check out our [FAQ](#faq) if you are not sure how to download Java `11`.
 
 ### Initial Setup
 
-
 1. Open a command terminal, navigate to the folder where you have stored the downloaded jar file. Type the command
-`java -jar linktree.jar` to run the application. A GUI similar to the one below should appear in a few 
-
-seconds, containing some sample data:
+`java -jar linktree.jar` to run the application. A GUI similar to the one below should appear in a few seconds, containing some sample data:
    ![Ui](images/MainUi.png)
 
 2. Typing a command into the command box and hitting `Enter` will execute it. For example, try typing `help` into the command box and hit Enter.
@@ -134,9 +133,10 @@ It will open a new help window, that shows all the commands in linktree.
 2. **Result Display**: Based on the inputs given, your result will be displayed in this box.
 3. **Help Button**: Type `help` into the command box, and you will see a help window pop up, giving you the link to 
 this UserGuide. The Result Display will also show a summary of commands.
-4. **Developers Panel**: Lists all the existing developers (or a filtered list of developers after the `find` command, 
+4. **File Button**: Click the `File` button and then you will see a `exit` button to close the application.
+5. **Developers Panel**: Lists all the existing developers (or a filtered list of developers after the `find` command, 
 check out [find developer command](#find-developer) for more details).
-5. **Teams Panel**: Lists all the teams (or a filtered list of developers after the `findteam` command,
+6. **Teams Panel**: Lists all the teams (or a filtered list of developers after the `findteam` command,
 check out [find team command](#find-team) for more details).
 
 ### Tutorial on using our Commands
@@ -144,7 +144,7 @@ check out [find team command](#find-team) for more details).
 | Commands                                    | Description                                                                                                                              |
 |---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | `add`, `delete`, `find`, etc.               | The main command keyword.                                                                                                                |
-| `n/`<br/>`tn/`<br/>`tl`                      | n/ - Prefix for developer names<br/>tn/ - Prefix for team names.  <br/>tl/ -Prefix for team leader name.                                 |
+| `n/`<br/>`tn/`<br/>`tl`                     | n/ - Prefix for developer names<br/>tn/ - Prefix for team names.  <br/>tl/ -Prefix for team leader name.                                 |
 | `p/`<br/>`e/`<br/> `a/`<br/> `r/`<br/> `t/` | p/ - Prefix for phone number<br/> e/ - Prefix for email<br/>a/ - Prefix for address<br/>r/ - Prefix for remark<br/>t/ - Prefix for tags. |                                                                  |
 | `[DeveloperName]`, `[Phone]`, etc.          | Arguments that follow the command.                                                                                                       |
 | `(optional)`                                | Optional elements like Remark and Tags can be omitted.                                                                                   |                   |
@@ -160,39 +160,39 @@ Click [here](#table-of-contents) to go back to contents.
 
 ## Features
 
-Click [here](#table-of-contents) to go back to contents.<br>
-Click [here](#how-to-use-this-guide) to go back to How to use this Guide.<br>
+Remember to check out how to use this guide [here](#how-to-use-this-guide).
 
-</br>
+<br>
 
-#### Welcome to LinkTree
+### Date & Time Command
 
-#### What this command does:
+##### What this command does:
 * The "Hi" command displays a welcome message along with the current date and time.
 
-Format: `Hi`
+#### Command format: `Hi`
 
 ##### Features:
 
 - You can use this command to check the date and time! Type in `hi` and hit enter!
 - You can now see "Welcome to Linktree, Current date and time: MM-DD-YYYY HH:MM:SS" displayed on the UI.
 
-##### Guidelines:
-
-- Please ensure that the first letter of the command is uppercase. For instance, use `Hi` instead of `hi` or `HI`.
-- The command does not take any additional arguments or keywords.
-
-##### Examples:
+##### Example usage:
 
 When you enter the command (Hi):
 
   ![Welcome](images/UG_images/WelcomeCommand.png)
 
-### Managing Developers
+**:information_source: Note:**<br>
+- Please ensure that the first letter of the command is uppercase. For instance, use `Hi` instead of `hi` or `HI`.
+- The command does not take any additional arguments or keywords.
+<br>
 
-### Add developer
-#### What this command does:
-* This command helps you to add a new developer to the addressbook.
+--------------------------------------------------------------------------------------------------------------------
+**The following commands are for managing developers.** 
+### Add command
+##### What this command does:
+* This command allows you to add a new developer to the addressbook.
+
 
 ##### Command format: 
 * `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
@@ -200,16 +200,16 @@ When you enter the command (Hi):
 ##### Example usage:
 * `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`
   ![AddCommand](images/UG_images/AddCommand.png)
-
+<br>
   
 ### Remove developer
 
-#### What this command does:
-* Performs deletion of existing developers from the storage. Specify the index number as shown on the list.
-#### Command format:
+##### What this command does:
+* Performs deletion of existing developers from the addressbook.
+##### Command format:
 * `delete [index number]`
 
-#### Example usage:
+##### Example usage:
 - For example, to delete the developer John from the list. First find the index number of John.
 - In this example, the index of developer John is 7. So type, `delete 7`.
   ![DeleteCommand](images/UG_images/DeleteCommand.png)
@@ -229,10 +229,11 @@ team.
 * Deleting a developer who is not a team leader will remove that developer from all the teams and also from list
 of developers.
 </div>
+<br>
 
 ### Edit developer
 #### What this command does:
-* To edit personal information:
+* Edits personal information of an existing developer.
   - Command: `edit INDEX(must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`
   - Example: `edit 1 n/John Wick e/new.email@example.com`
   - Result: The person of index `1` now has a new name `John Wick` and a new
@@ -247,31 +248,38 @@ of developers.
   so I only provided this person's index `1`, new name `n/John Wick`
   and new email address `e/new.email@example.com`.
 </div>
+<br>
 
 ### Find developer
 #### What this command does:
-* Finds persons whose names contain any of the given keywords.
+* Finds developers whose names satisfy the following parameter:
+  * Any name, provided you can remember at least the first/last name.
+  * Only full words will be matched e.g. Han will not match Hans
+  * Multiple developer names can also be given as paramaters. The program will display the developers that have those names.
 
 ##### Format: `find [KEYWORD]`
- - The search is case-insensitive. e.g hans will match Hans
- - The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
- - Only the name is searched.
- - Only full words will be matched e.g. Han will not match Hans
- - Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang
-<div markdown="block" class="alert alert-primary">
+ - Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang>
 
-**:information_source: Note:**<br>
-* The find command is designed to show only a list of developers. If you wish to view the team list again, you should use the `listt` command. To display the complete list of developers, use the `list` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
-</div>
-   
 ##### Examples:
 
  - find John returns john and John Doe
  - find alex david returns Alex Yeoh, David Li
    ![FindCommand](images/UG_images/FindCommand.png)
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+- The find command is designed to show only a list of developers. If you wish to view the team list again, you should use the `listt` command. 
+- To display the complete list of developers, use the `list` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
+- The search is case-insensitive. e.g hans will match Hans
+- The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
+
+</div>
+<br>
+
 ### List developers
 #### What this command does:
-* Show only the list of all developers in the project.
+* Displays the list of all the developers in this project.
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
@@ -296,11 +304,14 @@ When you are at the main window, type `list` to show the developer list
 and type `list` again when you want to go back to the main window.
 </div>
 
-## Managing Teams
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+#### The following commands are for managing teams
 
 ### Create teams
 #### What this command does:
-* Creates a new team based on the given team name and leader name.
+* Takes a team name and a team leader name. Creates a new team with these paramaters if the given team leader is already an existing developer in the project.
 
 #### Command format:
 * `newteam tn/[TeamName] tl/[TeamLeader]`
@@ -308,18 +319,26 @@ and type `list` again when you want to go back to the main window.
 * `newteam tn/Team Delta tl/David Li`
   ![AddTeamCommand](images/UG_images/AddTeamCommand.png)
 
+<br>
+
 ### Add developers to team
 #### What this command does:
-* To add a developer into an existing team:
+* Helps to add existing developers in the addressbook to a team.
 #### Command format:
 * `dev2team tn/[TeamName] n/[Developer Name]`
 #### Example usage:
 * `dev2team tn/Team Delta n/Irfan Ibrahim`
   ![AddDeveloperToTeam](images/UG_images/AddDevToTeamCommand.png)
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* The specified developer and team must already exist in the project!
+</div>
+<br>
 
 ### Delete team
 #### What this command does:
-* Performs deletion of existing teams from the storage.
+* Deletes existing teams from the teambook.
 #### Command format:
 * `deleteteam tn/[TeamName]`
 #### Example usage:
@@ -327,7 +346,10 @@ and type `list` again when you want to go back to the main window.
 * You need to type `deleteteam tn/Team Alpha`, then the **Team Alpha** will be deleted from the list of teams.
   ![DeleteTeamCommand](images/UG_images/DeleteTeam.png)
 
+<br>
+
 ### Remove developer from team
+#### What this command does:
 * Performs deletion of existing developer from the given team.
 #### Command format:
 * `deletedev tn/[TeamName] n/[DeveloperName]`
@@ -343,39 +365,46 @@ and type `list` again when you want to go back to the main window.
 * You cannot delete a developer who is **team leader**. Inorder, delete that developer you need to change the
   team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
 </div>
+<br>
 
 ### Edit team name
-* To edit team name:
-  - Command: `editTeamName [tn/TEAMNAME(original team name)] [tn/TEAMNAME(new team name)]`
-  - Example: `editTeamName tn/Alpha Team tn/Beta Team`
-  - Result: Now, the team with original team name `Alpha Team` changed its team name
-    to `Beta Team`.
-  ![EditTeamNameCommand](images/UG_images/EditTeamNameCommand.png)
+#### What this command does: 
+* Takes a team name and a new name for the team. Changes team name if it doesn't already exist in the teambook.
+#### Command format:
+* `editTeamName [tn/TEAMNAME(original team name)] [tn/TEAMNAME(new team name)]`
+#### Example usage:
+  * Example: `editTeamName tn/Alpha Team tn/Beta Team`
+  - Result: Now, the team with original team name `Alpha Team` changed its team name to `Beta Team`.
+    ![EditTeamNameCommand](images/UG_images/EditTeamNameCommand.png)
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* Remember to check that the new team name that you specify isn't already taken by another team in the teambook.
+</div>
+<br>
 
 ### Edit team leader
-* To edit team leader:
-  - Command: `editTeamLeader [tn/TEAMNAME] [tl/TEAMLEADER]`
-  - Example: `editTeamLeader tn/Alpha Team tl/Bob`
+#### What this command does:
+* Edits the team leader of a team.
+#### Command format: `editTeamLeader [tn/TEAMNAME] [tl/TEAMLEADER]`
+#### Example usage: `editTeamLeader tn/Alpha Team tl/Bob`
   - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
   ![EditTeamLeaderCommand](images/UG_images/EditTeamLeaderCommand.png)
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* Remember to check that the new leader specified is a person that already exists in the addressbook.
+</div>
+<br>
 
 ## Find Team
 ### What this command does:
 - Finds teams whose names contain any of the given keywords.
 
 ##### Format: `findteam KEYWORD`
-- The search is case-insensitive. e.g., "team" will match "Team Alpha."
-- The order of the keywords does not matter. e.g., "Alpha Bravo" will match "Bravo Alpha Team."
-- Only the team name is searched.
-- Only full words will be matched. e.g., "Alph" will not match "Alpha Team."
-- Teams matching at least one keyword will be returned (i.e., OR search). e.g., "Alpha Bravo" will return "Team Alpha," "Bravo Team."
-
 <div markdown="block" class="alert alert-primary">
 
-**:information_source: Note:**<br>
-* The findteam command is designed to show only a list of teams. If you wish to view the developer list again, you should use the `list` command. To display the complete list of teams, use the `listt` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
-
-</div>
 
 ##### Examples:
 - `findteam Alpha` returns "Team Alpha" and "Alpha Squad."
@@ -383,10 +412,23 @@ and type `list` again when you want to go back to the main window.
 
 ![FindTeamCommand](images/UG_images/FindTeamCommnd.png)
 
+**:information_source: Tip:**<br>
+* The order of the keywords does not matter. e.g., "Alpha Bravo" will match "Bravo Alpha Team."
+* Only the team name is searched.
+* Only full words will be matched. e.g., "Alph" will not match "Alpha Team."
+* Teams matching at least one keyword will be returned (i.e., OR search). e.g., "Alpha Bravo" will return "Team Alpha," "Bravo Team."
+</div>
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Note:**<br>
+* The findteam command is designed to show only a list of teams. If you wish to view the developer list again, you should use the `list` command. To display the complete list of teams, use the `listt` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
+*  The search is case-insensitive. e.g., "team" will match "Team Alpha."
+</div>
 
 ### List teams
 #### What this command does:
-* Show only the list of all existing teams in the project.
+* Displays the list of all the teams in this project.
 
 <div markdown="block" class="alert alert-primary">
 
@@ -453,7 +495,7 @@ Use the same command `tree`. You will return to the home page.
 When you are at the main window, type `tree` to show the tree graph
 and type `tree` again when you want to hide the tree and go back to the main window.
 </div>
-
+<br>
 
 ### Help
 #### What this command does:
@@ -476,10 +518,11 @@ and type `tree` again when you want to hide the tree and go back to the main win
   ![HelpWindow](images/UG_images/HelpWindow.png)
   ![HelpCommandResult](images/UG_images/HelpCommandResult.png)
 
+<br>
 
 ### Reset the project
 #### What this command does:
-* This command will erase the entire data, that is all the details of developers and teams will be erased immediately. 
+* This command will erase **ALL THE DATA**. All the details of developers and teams will be cleared from storage.
 This command can be used when you want to restart the project.
 
 #### Command format:
@@ -493,6 +536,7 @@ This command can be used when you want to restart the project.
 **:exclamation: Warning:**<br>
 * Using the clear command might result in unintended loss of data! Use it only when you intend to remove all of your data!
 </div>
+<br>
 
 ### Exit the application
 #### What this command does:
