@@ -20,7 +20,7 @@ public class RateCommand extends Command {
     public static final String COMMAND_WORD = "rate";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Rate the interview identified by the index number used in the displayed interview list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INTERVIEW_INDEX (must be a positive integer) "
             + "RATING (must be a non-negative number with 1 decimal place between 0.0 to 5.0 inclusive)\n"
             + "Example: " + COMMAND_WORD + " 1" + " 3.5";
     public static final String MESSAGE_RATE_INTERVIEW_SUCCESS = "Rating Interview: %s is rated.";

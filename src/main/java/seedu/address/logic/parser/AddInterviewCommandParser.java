@@ -48,10 +48,6 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
                 argMultimap.getValue(PREFIX_END_TIME).get().trim(),
                 false);
 
-        if (endTime.isBefore(startTime)) {
-            throw new ParseException(AddInterviewCommand.MESSAGE_INVALID_TIME);
-        }
-
         Index applicantIndex;
         try {
             applicantIndex = ParserUtil.parseIndex(applicantArgs);
