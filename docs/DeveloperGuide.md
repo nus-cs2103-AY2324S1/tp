@@ -513,24 +513,24 @@ contacts
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                                | So that I can…​                                                   |
-|----------|---------|-------------------------------------------------------------|-------------------------------------------------------------------|
-| `* * *`  | user    | add existing members' contact                               | get the contact of existing members to contact them               |
-| `* * *`  | user    | view existing members' contact                              | see a list of all current members in the organisation             |
-| `* * *`  | user    | delete an existing members' contact                         | remove existing members' contacts that should be removed          |
-| `* * *`  | user    | add prospective members' contact                            | get the contact of applicants to contact them for further updates |
-| `* * *`  | user    | view prospective members' contact                           | see a list of all applicants                                      |
-| `* * *`  | user    | delete a prospective members' contact                       | remove applicants' contacts that should be removed                |
-| `* *  `  | user    | schedule a time and date for an interview with an applicant | mark out a time period of a specific date for an interview        |
-
-*{More to be added}*
+| Priority | As a …​ | I want to …​                                                | So that I can…​                                                     |
+|----------|---------|-------------------------------------------------------------|---------------------------------------------------------------------|
+| `* * *`  | user    | add a member                                                | keep track of all my members when I need to                         |
+| `* * *`  | user    | view all members                                            | see a list of all current members in the CCA                        |
+| `* * *`  | user    | delete a member                                             | remove members from the database if they have left                  |
+| `* * *`  | user    | edit a member                                               | update the member's details should they change                      |
+| `* * *`  | user    | add an applicant                                            | keep track of all my applicants to contact them for further updates |
+| `* * *`  | user    | view all applicants                                         | see a list of all applicants to my CCA                              |
+| `* * *`  | user    | delete an applicant                                         | remove applicants if they have withdrawn their application          |
+| `* * *`  | user    | edit an applicant                                           | update the applicant's details should they change                   |
+| `* *  `  | user    | schedule a time and date for an interview with an applicant | mark out a time period of a specific date for an interview          |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `ClubMembersContact` and the **Actor** is the `user`, unless specified
 otherwise)
 
-**Use case: Schedule a date for an interview**
+**Use case: UC01 - Schedule a date for an interview**
 
 **MSS**
 
@@ -553,7 +553,59 @@ otherwise)
 
       Use case resumes at step 2.
 
-*{More to be added}*
+---
+
+**Use case: UC02 - Add a member**
+
+---
+
+**Use case: UC03 - Finding members**
+
+---
+
+**Use case: UC04 - Viewing members**
+
+**MSS**
+
+1. User requests to view all members
+
+2. ClubMembersContact shows a list of all members and displays a success message
+
+   Use case ends.
+
+**Use case: UC05 - Editing a member**
+
+---
+
+**Use case: UC06 - Deleting a member**
+
+---
+
+**Use case: UC07 - Copying a member**
+
+**MSS**
+
+1. User requests to copy a member
+
+2. ClubMembersContact copies the member's details to the clipboard
+
+3. ClubMembersContact displays a success message along with the member's details
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The copy member command format is invalid.
+
+  * 1a1. ClubMembersContact shows an error message.
+    
+      Use case resumes at step 1.
+
+* 1b. The member index is invalid or out of range.
+
+  * 1b1. ClubMembersContact shows an error message.
+
+    Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
