@@ -38,6 +38,4 @@ Given below are my contributions to the project.
   * Reported bugs and provided suggestions for other teams in the class.
   * Offered general suggestions to teammates on their pull requests.
 
-* **Tools**:
-  * Utilized various development tools to enhance project productivity and code quality : to be added soon
 
