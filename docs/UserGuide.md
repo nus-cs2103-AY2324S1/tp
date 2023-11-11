@@ -6,7 +6,7 @@ title: UNOFAS User Guide
 UNOFAS (UNO: One FAS: Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts,
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a
 Graphical User Interface (GUI). If you can type fast, UNOFAS can help you manage and retrieve client's information
-better than traditional GUI apps. 
+better than traditional GUI apps.
 
 This guide provides you with comprehensive instructions on utilizing UNOFAS. It also serves as a mode of referral to
 help learn the various commands required to effectively learn and be able to integrate the application to your daily
@@ -186,19 +186,19 @@ A person can have any number of tags (including 0).
 Examples:
 * `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 t/80yo fp/Financial Plan C`
 
-Successful Output: `New person added: John; 
-Phone: 80101010; 
-Email: johndoe@gmail.com; 
-Address: Punggol Central Blk 444 #15-32 820123; 
-Next-of-kin Name: Brennan; 
-Next-of-kin Phone: 82020202; 
-Appointment: No Appointment made!; 
-Financial Plans: [Financial Plan C]; 
+Successful Output: `New person added: John;
+Phone: 80101010;
+Email: johndoe@gmail.com;
+Address: Punggol Central Blk 444 #15-32 820123;
+Next-of-kin Name: Brennan;
+Next-of-kin Phone: 82020202;
+Appointment: No Appointment made!;
+Financial Plans: [Financial Plan C];
 Tags: [80yo]`
 
 ![result for 'add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 t/80yo fp/Financial Plan C'](images/addUi.png)
 
-<div markdown="span" class="alert alert-primary">:information_source: 
+<div markdown="span" class="alert alert-primary">:information_source:
 **Do note** that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done for financial plans with the `fp/` prefix.
 </div>
 
@@ -239,19 +239,19 @@ Examples:
 *  `edit 4 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st person to be `john doe` and `woodlands ave 123` respectively.
 
 Successful Output:
-`Edited Person: john doe; 
-Phone: 80101010; 
-Email: johndoe@gmail.com; 
-Address: 23 woodlands ave 123; 
-Next-of-kin Name: Brennan; 
-Next-of-kin Phone: 82020202; 
-Appointment: No Appointment made!; 
-Financial Plans: ; 
+`Edited Person: john doe;
+Phone: 80101010;
+Email: johndoe@gmail.com;
+Address: 23 woodlands ave 123;
+Next-of-kin Name: Brennan;
+Next-of-kin Phone: 82020202;
+Appointment: No Appointment made!;
+Financial Plans: ;
 Tags:`
 
 ![result for 'edit 4 n/john doe a/23 woodlands ave 123'](images/editUi.png)
 
-<div markdown="span" class="alert alert-primary">:information_source: 
+<div markdown="span" class="alert alert-primary">:information_source:
 **Do note** that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
 </div>
 
@@ -281,7 +281,7 @@ Examples:
 
 ### Gathering emails of matching persons : `gather`
 
-Gathers all the emails of persons with a desired financial plan or tag. 
+Gathers all the emails of persons with a desired financial plan or tag.
 
 Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
 
@@ -317,20 +317,20 @@ Examples:
 * `list` followed by `delete 1` deletes the 1st person in the contact book.
 
 Successful Output:
-`Deleted Person: David; 
-Phone: 93234567; 
-Email: davidmiller@gmail.com; 
-Address: Bishan Blk 999 #08-15 569874; 
-Next-of-kin Name: Olivia; 
-Next-of-kin Phone: 56981234; 
-Appointment: Meeting, 15-12-2023 17:30; 
-Financial Plans: [Financial Plan A][Financial Plan B]; 
+`Deleted Person: David;
+Phone: 93234567;
+Email: davidmiller@gmail.com;
+Address: Bishan Blk 999 #08-15 569874;
+Next-of-kin Name: Olivia;
+Next-of-kin Phone: 56981234;
+Appointment: Meeting, 15-12-2023 17:30;
+Financial Plans: [Financial Plan A][Financial Plan B];
 Tags: `
 
 ----------
 ### Scheduling an Appointment : `schedule`
 
-Schedules an appointment for a client using an index followed by the appointment details. 
+Schedules an appointment for a client using an index followed by the appointment details.
 
 Format: `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE_TIME`
 
@@ -338,7 +338,7 @@ Format: `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE_TIME`
 - **Both appointment name and date-time** must be provided.
 - Upon successful execution of the command, the scheduled appointment details will be updated in the **Contacts list**. The appointment details will also be updated in the **Appointments list**.
 
-<div markdown="span" class="alert alert-primary">:information_source: 
+<div markdown="span" class="alert alert-primary">:information_source:
 If there is an existing appointment with the person when the command is executed, you can replace it with a new appointment by **clicking confirm** or **pressing the enter key** when the prompt is given.
 </div>
 
@@ -346,7 +346,7 @@ If there is an existing appointment with the person when the command is executed
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
-Example: 
+Example:
 - `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`
 
 Successful Output: `Appointment updated!`
@@ -356,7 +356,7 @@ Successful Output: `Appointment updated!`
 ----------
 ### Completing an Appointment : `complete`
 
-Completes an appointment either with the person at the specified `INDEX` or complete all appointments with matching `APPOINTMENT_DATE`. 
+Completes an appointment either with the person at the specified `INDEX` or complete all appointments with matching `APPOINTMENT_DATE`.
 
 Format: `complete [INDEX] [d/APPOINTMENT_DATE]`
 
@@ -366,8 +366,8 @@ Format: `complete [INDEX] [d/APPOINTMENT_DATE]`
 matching the one input by user. This can allow the user to clear all his/her appointments finished throughout the
 entire day quickly.
 
-<div markdown="span" class="alert alert-primary">:information_source: 
-**Note** that an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the year, month and day are the same. Time of the appointment does not matter in this command. 
+<div markdown="span" class="alert alert-primary">:information_source:
+**Note** that an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the year, month and day are the same. Time of the appointment does not matter in this command.
 </div>
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
