@@ -477,7 +477,7 @@ enhance the find feature so that it can also search for applicants by these fiel
    
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, Logging, Testing, Configuration, and DevOps**
+## **Documentation, Logging, Testing, Configuration, DevOps**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -1241,5 +1241,6 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
        
 ## **Appendix: Planned Enhancements**
+
 1. Allow users to add applicants whose names include non-alphanumeric characters such as hyphens `-` and slashes `/`.
 2. Provide an error message to the user if the selected CSV file for the `import` command does not contain the correct headers as specified.
