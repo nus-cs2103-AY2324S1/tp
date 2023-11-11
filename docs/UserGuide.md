@@ -22,21 +22,21 @@ Managing clients and a busy schedule has never been easier. With OutBook, all yo
 - [Navigating OutBook](#navigating-outbook)
 - [Features](#features)
   - [Contact Commands](#contact-commands)
-    - [Adding a contact: `addc`](#adding-a-contact-addc)
-    - [Listing all contacts: `listc`](#listing-all-contacts-listc)
-    - [Deleting a contact: `deletec`](#deleting-a-contact-deletec)
+    - [Adding a contact: `addc`](#adding-a-contact--addc)
+    - [Listing all contacts: `listc`](#listing-all-contacts--listc)
+    - [Deleting a contact: `deletec`](#deleting-a-contact--deletec)
     - [Editing a contact: `editc`](#editing-a-contact--editc)
     - [Viewing detailed contact information: `viewc`](#viewing-detailed-contact-information--viewc)
-    - [Finding contacts: `findc`](#finding-contacts-findc)
+    - [Finding contacts: `findc`](#finding-contacts--findc)
   - [Meeting Commands](#meeting-commands)
-    - [Adding a meeting: `addm`](#adding-a-meeting-addm)
+    - [Adding a meeting: `addm`](#adding-a-meeting--addm)
     - [Listing all meetings: `listm`](#listing-all-meetings--listm)
     - [Deleting a meeting: `deletem`](#deleting-a-meeting--deletem)
     - [Editing a meeting: `editm`](#editing-a-meeting--editm)
     - [Viewing detailed meeting information: `viewm`](#viewing-detailed-meeting-information--viewm)
-    - [Finding meetings: `findm`](#finding-meetings-findm)
-    - [Adding contact to meeting: `addmc`](#adding-contact-to-meeting-addmc)
-    - [Removing contact from meeting: `rmmc`](#removing-contact-from-meeting-rmmc)
+    - [Finding meetings: `findm`](#finding-meetings--findm)
+    - [Adding contact to meeting: `addmc`](#adding-contact-to-meeting--addmc)
+    - [Removing contact from meeting: `rmmc`](#removing-contact-from-meeting--rmmc)
     - [Marking a meeting as complete : `mark`](#marking-a-meeting-as-complete--mark)
   - [Miscellaneous Commands](#miscellaneous-commands)
     - [Viewing help: `help`](#viewing-help--help)
@@ -140,7 +140,7 @@ Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL [lc/LAST_CONTACTED_TIME] [s/STATUS] 
   - `PHONE_NUMBER` must contain only numbers, and be at least 3 digits long.
   - `EMAIL` must adhere to the format LOCAL-PART@SERVER.DOMAIN, e.g. `example@mail.com`.
 - `LAST_CONTACTED_TIME`, `STATUS`, `REMARK` and `TAG` are optional fields:
-  - `LAST_CONTACTED_TIME` must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format. eg. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
+  - `LAST_CONTACTED_TIME` must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format, e.g. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
     - If `LAST_CONTACTED_TIME` is not specified, it will be defaulted to the minimum datetime provided by Java (i.e. `LocalDateTime.MIN`) and displayed as `NA` in the contacts list.
   - `STATUS` must be one of `NIL, Prospective, Active, Inactive, Claimant, Renewal` or blank.
     - If `STATUS` is not specified, it will be defaulted to `NIL`.
@@ -178,7 +178,7 @@ Format: `deletec INDEX`
 - This command clears the contact that is currently displayed in the details list via the `viewc` command.
 
 Examples:
-- `listc` followed by `delete 2` deletes the 2nd person in the unfiltered contacts list returned by [`listc`](#listing-all-persons--listc).
+- `listc` followed by `delete 2` deletes the 2nd person in the unfiltered contacts list returned by [`listc`](#listing-all-contacts--listc).
 - `findc Betsy` followed by `delete 1` deletes the 1st person in the filtered contacts list returned by [`findc`](#finding-contacts--findc).
 
 <div style="page-break-after: always;"></div>
@@ -194,7 +194,7 @@ Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [lc/LAST_CONTACTED_TIME
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
 - All fields are optional, but at least one must be provided.
 - Existing values in each specified field will be updated to the corresponding input values.
-- When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
 - You can remove all the contact's tags by typing `t/` without specifying any tags after it.
 - This command may change the contact that is currently displayed via the `viewc` command, as detailed [here](#viewing-detailed-contact-information--viewc).
 
@@ -244,7 +244,7 @@ Examples:
 - `findc p/51` returns all contacts with a phone number that contains `51`
 - `findc e/_@GMAIL` returns all contacts with an email address that contains `alice_@gmail.com`
 - `findc p/9 s/inactive claimant t/friend` returns contacts with a phone number that contains a `9`, a status of either `inactive` or `claimant`, and a `friend` tag
-  ![result for 'findContact'](images/FindContactResult.png)
+  ![result for 'findContact'](images/findContactResult.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -256,7 +256,7 @@ Examples:
 
 - Meetings in OutBook are sorted by their start time.
 
-- Meetings are allowed to overlap and multiple meetings can be occuring at the same time.
+- Meetings are allowed to overlap and multiple meetings can be occurring at the same time.
 
 </div>
 
