@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -163,7 +164,7 @@ public class ParserUtil {
         }
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");
-        String[] tagNameCategoryPairs = cleanedList.split(",");
+        String[] tagNameCategoryPairs = removeExtraSpaces(cleanedList.split(","));
 
         for (String tagNameCategory : tagNameCategoryPairs) {
             if (tagNameCategory.split("\\s+").length > 1) {
@@ -190,8 +191,8 @@ public class ParserUtil {
         requireNonNull(tags);
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");
-        String[] tagParams = cleanedList.split(",");
-        for (String tag : tagParams) {
+        String[] tagNameCategoryPairs = removeExtraSpaces(cleanedList.split(","));
+        for (String tag : tagNameCategoryPairs) {
             if (tag.split("\\s+").length > 1) {
                 if (!Tag.isValidTagName(tag.split("\\s+")[1])) {
                     throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
@@ -200,7 +201,7 @@ public class ParserUtil {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTagCommand.MESSAGE_USAGE));
             }
         }
-        return tagParams;
+        return tagNameCategoryPairs;
     }
 
     /**
@@ -336,5 +337,18 @@ public class ParserUtil {
         }
         Score score = parseScore(tagScorePairArr[1]);
         return new Pair<>(tag, score);
+    }
+
+    /**
+     * Removes extra spaces between elements of a string array used for parsing.
+     *
+     * @param inputArr The input array containing string elements.
+     * @return A new array with extra spaces removed between elements.
+     */
+    public static String[] removeExtraSpaces(String[] inputArr) {
+        String inputStr = Arrays.toString(inputArr);
+        String resultStr = String.join(" ", inputStr.split("\\s+"));
+        String[] resultArray = resultStr.substring(1, resultStr.length() - 1).split(", ");
+        return resultArray;
     }
 }

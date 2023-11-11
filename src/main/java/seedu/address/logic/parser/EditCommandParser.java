@@ -102,6 +102,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         scoreList.updateScoreList(tagScorePair.getKey(), tagScorePair.getValue());
         return scoreList;
     }
-
-
 }
