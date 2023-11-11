@@ -1246,3 +1246,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Allow users to add applicants whose names include non-alphanumeric characters such as hyphens `-` and slashes `/`.
 2. Provide an error message to the user if the selected CSV file for the `import` command does not contain the correct headers as specified.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+1. very effortful
