@@ -365,16 +365,51 @@ The following activity diagram summarises the process of adding benefit for an e
 
 ![AddBenefitActivityDiagram](images/AddBenefitActivityDiagram.png)
 
-### Payroll Calculation
+### Payroll
 
-#### Implementation
+#### Proposed Implementation
 
-The feature is facilitated by the four classes below:
-1.	PayrollCommandParser
-2.	PayrollCommand
-3.	Payroll
-4.	Salary
+The proposed payroll feature comprises 1 sub-features:
 
+1. Payroll Calculation Feature
+
+#### 1. Payroll Calculation Feature
+
+The proposed payroll calculation feature is facilitated by 
+`Payroll`, `PayrollCommand`, `PayrollCommandParser`, `Person`,
+`PayrollStorage`, `Payroll`, `Salary`, `Benefit` and `Deduction` classes.
+
+The `Payroll` class is responsible for storing the monthly payroll data for an employee,
+including the starting, ending and payment date of the payroll period. It also includes a `Salary` object.
+
+The `PayrollCommand` is responsible for executing the `payroll` command.
+
+The `PayrollCommandParser` is responsible for parsing the user input for the `deduct` command.
+
+The `PayrollStorge` class is responsible for storing all payroll data for an employee.
+
+The `Salary` class is responsible for the monthly salary data for an employee, this class includes compulsory
+attributes like <u>Basic Salary</u>, a `deduction` and `benefit` class.
+
+The `Benefit` class is responsible for storing the benefit data for a specific employee.
+
+The `Deduction` class is responsible for storing the deduction data for a specific employee
+
+The `Person` class is responsible for holding all the data of a specific employee,
+including the `PayrollStorage`.
+
+The following diagram shows the different classes interact with one another 
+in the calculate payroll feature:
+
+![PayrollCalculationClassDiagram](images/PayrollCalculationClassDiagram.png)
+
+The user can choose to calculate the payroll for an employee by
+entering the index of the employee, or the name of the employee. 
+The `PayrollCommandParser` class is responsible for parsing the user input for the payroll command.
+
+The following sequence diagram shows how the PayrollCommandParser class parses the user input:
+
+![ParsePayrollCommandSequenceDiagram](images/ParseDeductCommandSequenceDiagram.png)
 
 <u>PayrollCommandParser</u>
 
