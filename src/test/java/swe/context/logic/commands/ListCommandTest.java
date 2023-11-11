@@ -39,7 +39,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_emptyContactList_showsEmptyList() {
-        model = new ModelManager(); 
+        model = new ModelManager();
         expectedModel = new ModelManager();
         assertCommandSuccess(new ListCommand(), model, Messages.COMMAND_LIST_SUCCESS, expectedModel);
     }
