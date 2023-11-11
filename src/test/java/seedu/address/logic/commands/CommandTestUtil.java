@@ -61,6 +61,7 @@ public class CommandTestUtil {
 
     public static final String VALID_TIME_DESC_MON = " " + PREFIX_FREETIME + VALID_TIME_MON;
     public static final String VALID_TIME_DESC_TUE = " " + PREFIX_FREETIME + VALID_TIME_TUE;
+    public static final String VALID_TIME_DESC_WED = " " + PREFIX_FREETIME + VALID_TIME_WED;
     public static final String VALID_TIME_DESC_MON_2 = " " + PREFIX_FREETIME + VALID_TIME_MON_CAPS;
 
     public static final String INVALID_TIME_DESC_MON = " " + PREFIX_FREETIME + INVALID_TIME_MON;
