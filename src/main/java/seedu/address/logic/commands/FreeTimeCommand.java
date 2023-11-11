@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import java.text.ParseException;
 import java.util.List;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.interval.Interval;
@@ -46,12 +45,6 @@ public class FreeTimeCommand extends Command {
         toFind = interval;
     }
 
-    /**
-     * executes the command.
-     * @param model {@code Model} which the command should operate on.
-     * @return
-     * @throws CommandException
-     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -59,7 +52,7 @@ public class FreeTimeCommand extends Command {
         try {
             List<TimeSlot> timeslots = TimeSlot.parseIntervals(result);
             List<TimeSlot> availableTime = TimeSlot.findAvailableTime(timeslots, toFind);
-            return new CommandResult(String.format(MESSAGE_SUCCESS,TimeSlot.printResults(availableTime)));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, TimeSlot.printResults(availableTime)));
         } catch (ParseException e) {
             throw new CommandException(MESSAGE_ERROR);
         }
