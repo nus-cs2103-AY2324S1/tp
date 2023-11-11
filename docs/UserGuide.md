@@ -641,7 +641,7 @@ Format: `undo`
 
 </div>
 
-### Clearing all entries : `reset` and `reset confirm`
+### Clearing all entries : `reset`, followed by `reset confirm`
 
 Clears all your entries from the address book.
 
