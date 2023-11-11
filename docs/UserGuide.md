@@ -352,7 +352,7 @@ and type `list` again when you want to go back to the main window.
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
-* The find command is designed to show only a list of teams. If you wish to view the developer list again, you should use the `list` command. To display the complete list of teams, use the `listt` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
+* The findteam command is designed to show only a list of teams. If you wish to view the developer list again, you should use the `list` command. To display the complete list of teams, use the `listt` command. If you need to list both at the same time, you can use the `list` command twice or the `listt` command twice to revert to the default state.
 
 </div>
 
