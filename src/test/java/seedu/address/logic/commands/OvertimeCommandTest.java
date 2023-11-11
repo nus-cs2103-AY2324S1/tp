@@ -30,8 +30,8 @@ class OvertimeCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
-    public void execute_incrementOvertimeHours_success() {
-        Employee employee = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
+    public void execute_incrementOvertimeHoursUnfilteredList_success() {
+        Employee employee = model.getAddressBook().getEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
         OvertimeHours changeInOvertimeHours = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);
         OvertimeCommand overtimeCommand = new OvertimeCommand(employee.getId(), changeInOvertimeHours, true);
 
@@ -41,15 +41,15 @@ class OvertimeCommandTest {
                 Messages.formatOvertimeHours(updatedEmployee), changeInOvertimeHours);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setEmployee(model.getFilteredEmployeeList().get(0), updatedEmployee);
+        expectedModel.setEmployee(model.getAddressBook().getEmployeeList().get(0), updatedEmployee);
 
         assertCommandSuccess(overtimeCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_decrementOvertimeHours_success() {
-        Index indexLastEmployee = Index.fromOneBased(model.getFilteredEmployeeList().size());
-        Employee lastEmployee = model.getFilteredEmployeeList().get(indexLastEmployee.getZeroBased());
+    public void execute_decrementOvertimeHoursUnfilteredList_success() {
+        Index indexLastEmployee = Index.fromOneBased(model.getAddressBook().getEmployeeList().size());
+        Employee lastEmployee = model.getAddressBook().getEmployeeList().get(indexLastEmployee.getZeroBased());
         OvertimeHours changeInOvertimeHours = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);
         OvertimeCommand overtimeCommand = new OvertimeCommand(lastEmployee.getId(), changeInOvertimeHours, false);
 
@@ -68,8 +68,8 @@ class OvertimeCommandTest {
 
     @Test
     public void execute_incrementOvertimeHours_failure() {
-        Index indexLastEmployee = Index.fromOneBased(model.getFilteredEmployeeList().size());
-        Employee lastEmployee = model.getFilteredEmployeeList().get(indexLastEmployee.getZeroBased());
+        Index indexLastEmployee = Index.fromOneBased(model.getAddressBook().getEmployeeList().size());
+        Employee lastEmployee = model.getAddressBook().getEmployeeList().get(indexLastEmployee.getZeroBased());
         OvertimeHours changeInOvertimeHours = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);
         OvertimeCommand overtimeCommand = new OvertimeCommand(lastEmployee.getId(), changeInOvertimeHours, true);
 
@@ -78,7 +78,7 @@ class OvertimeCommandTest {
 
     @Test
     public void execute_decrementOvertimeHours_failure() {
-        Employee employee = model.getFilteredEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
+        Employee employee = model.getAddressBook().getEmployeeList().get(INDEX_FIRST_EMPLOYEE.getZeroBased());
         OvertimeHours changeInOvertimeHours = new OvertimeHours(VALID_OVERTIME_HOURS_BOB);
         OvertimeCommand overtimeCommand = new OvertimeCommand(employee.getId(), changeInOvertimeHours, false);
 

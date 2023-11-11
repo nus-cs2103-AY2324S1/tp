@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.OvertimeCommand.MESSAGE_MISSING_OPERATION;
+import static seedu.address.logic.commands.OvertimeCommand.MESSAGE_OPERATION_USAGE;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -194,6 +196,9 @@ public class ParserUtil {
     public static OvertimeHours parseOvertimeHours(String hours) throws ParseException {
         requireNonNull(hours);
         String trimmedHours = hours.trim();
+        if (trimmedHours.isEmpty()) {
+            throw new ParseException(OvertimeCommand.MESSAGE_MISSING_AMOUNT);
+        }
         int overtimeHours;
         try {
             overtimeHours = Integer.parseInt(trimmedHours);
@@ -212,6 +217,8 @@ public class ParserUtil {
     /**
      * Parses a {@code String remark} into a {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
      */
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
@@ -220,5 +227,22 @@ public class ParserUtil {
             throw new ParseException(Messages.MESSAGE_MISSING_REMARK);
         }
         return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String operation} into a {@code boolean}.
+     *
+     * @throws ParseException if the given {@code operation} is invalid.
+     */
+    public static boolean parseOperation(String operation) throws ParseException {
+        if (operation.equals("inc")) {
+            return true;
+        } else if (operation.equals("dec")) {
+            return false;
+        } else if (operation.isEmpty()) {
+            throw new ParseException(MESSAGE_MISSING_OPERATION);
+        } else {
+            throw new ParseException(MESSAGE_OPERATION_USAGE);
+        }
     }
 }

@@ -36,6 +36,8 @@ public class OvertimeCommand extends Command {
     public static final String MESSAGE_OVERTIME_DECREASE_SUCCESS = "Overtime hours of employee %1$s decreased by %2$s";
     public static final String MESSAGE_OPERATION_USAGE = "Operation must be either inc or dec";
     public static final String MESSAGE_INVALID_AMOUNT = "Amount must be a positive integer";
+    public static final String MESSAGE_MISSING_OPERATION = "Operation cannot be empty";
+    public static final String MESSAGE_MISSING_AMOUNT = "Amount cannot be empty";
     private final Id targetId;
     private final OvertimeHours changeInOvertimeHours;
     private final boolean isIncrement;
@@ -53,7 +55,7 @@ public class OvertimeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Employee> lastShownList = model.getFilteredEmployeeList();
+        List<Employee> lastShownList = model.getAddressBook().getEmployeeList();
         Employee employeeToUpdate = lastShownList.stream().filter(employee -> employee.getId().equals(targetId))
                 .findFirst().orElse(null);
 

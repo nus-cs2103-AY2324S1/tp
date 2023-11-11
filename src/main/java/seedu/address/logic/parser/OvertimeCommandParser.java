@@ -27,12 +27,8 @@ public class OvertimeCommandParser implements Parser<OvertimeCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_OPERATION, PREFIX_AMOUNT);
         areValidPrefixes(argMultimap);
 
-        Id id;
-        id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
-
-        String operation = argMultimap.getValue(PREFIX_OPERATION).get();
-        boolean isIncrement = parseOperation(operation);
-
+        Id id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
+        boolean isIncrement = ParserUtil.parseOperation(argMultimap.getValue(PREFIX_OPERATION).get());
         OvertimeHours changeInOvertimeHours = ParserUtil.parseOvertimeHours(argMultimap.getValue(PREFIX_AMOUNT).get());
 
         return new OvertimeCommand(id, changeInOvertimeHours, isIncrement);
@@ -59,15 +55,5 @@ public class OvertimeCommandParser implements Parser<OvertimeCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OvertimeCommand.MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_OPERATION, PREFIX_AMOUNT);
-    }
-
-    private static boolean parseOperation(String operation) throws ParseException {
-        if (operation.equals("inc")) {
-            return true;
-        } else if (operation.equals("dec")) {
-            return false;
-        } else {
-            throw new ParseException(OvertimeCommand.MESSAGE_OPERATION_USAGE);
-        }
     }
 }
