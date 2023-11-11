@@ -29,7 +29,7 @@ you can access contacts by roles and responsibilities instantly.
   * [Understanding the GUI](#understanding-the-gui)
   * [Tutorial on using our Commands](#tutorial-on-using-our-commands)
 * [Features](#features)
-  * [Welcome to Linktree](#welcome-to-linktree)
+  * [Date & Time Command](#date--time-command)
   * [Managing developers](#managing-developers)
     * [Add developer](#add-developer)
     * [Remove developer](#remove-developer)
@@ -112,11 +112,8 @@ Check out our [FAQ](#faq) if you are not sure how to download Java `11`.
 
 ### Initial Setup
 
-
 1. Open a command terminal, navigate to the folder where you have stored the downloaded jar file. Type the command
-`java -jar linktree.jar` to run the application. A GUI similar to the one below should appear in a few 
-
-seconds, containing some sample data:
+`java -jar linktree.jar` to run the application. A GUI similar to the one below should appear in a few seconds, containing some sample data:
    ![Ui](images/MainUi.png)
 
 2. Typing a command into the command box and hitting `Enter` will execute it. For example, try typing `help` into the command box and hit Enter.
@@ -134,9 +131,10 @@ It will open a new help window, that shows all the commands in linktree.
 2. **Result Display**: Based on the inputs given, your result will be displayed in this box.
 3. **Help Button**: Type `help` into the command box, and you will see a help window pop up, giving you the link to 
 this UserGuide. The Result Display will also show a summary of commands.
-4. **Developers Panel**: Lists all the existing developers (or a filtered list of developers after the `find` command, 
+4. **File Button**: Click the `File` button and then you will see a `exit` button to close the application.
+5. **Developers Panel**: Lists all the existing developers (or a filtered list of developers after the `find` command, 
 check out [find developer command](#find-developer) for more details).
-5. **Teams Panel**: Lists all the teams (or a filtered list of developers after the `findteam` command,
+6. **Teams Panel**: Lists all the teams (or a filtered list of developers after the `findteam` command,
 check out [find team command](#find-team) for more details).
 
 ### Tutorial on using our Commands
@@ -144,7 +142,7 @@ check out [find team command](#find-team) for more details).
 | Commands                                    | Description                                                                                                                              |
 |---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | `add`, `delete`, `find`, etc.               | The main command keyword.                                                                                                                |
-| `n/`<br/>`tn/`<br/>`tl`                      | n/ - Prefix for developer names<br/>tn/ - Prefix for team names.  <br/>tl/ -Prefix for team leader name.                                 |
+| `n/`<br/>`tn/`<br/>`tl`                     | n/ - Prefix for developer names<br/>tn/ - Prefix for team names.  <br/>tl/ -Prefix for team leader name.                                 |
 | `p/`<br/>`e/`<br/> `a/`<br/> `r/`<br/> `t/` | p/ - Prefix for phone number<br/> e/ - Prefix for email<br/>a/ - Prefix for address<br/>r/ - Prefix for remark<br/>t/ - Prefix for tags. |                                                                  |
 | `[DeveloperName]`, `[Phone]`, etc.          | Arguments that follow the command.                                                                                                       |
 | `(optional)`                                | Optional elements like Remark and Tags can be omitted.                                                                                   |                   |
@@ -160,14 +158,13 @@ Click [here](#table-of-contents) to go back to contents.
 
 ## Features
 
-Click [here](#table-of-contents) to go back to contents.<br>
-Click [here](#how-to-use-this-guide) to go back to How to use this Guide.<br>
+Remember to check out how to use this guide [here](#how-to-use-this-guide).
 
-</br>
+<br>
 
-#### Welcome to LinkTree
+### Date & Time Command
 
-#### What this command does:
+##### What this command does:
 * The "Hi" command displays a welcome message along with the current date and time.
 
 Format: `Hi`
@@ -177,22 +174,25 @@ Format: `Hi`
 - You can use this command to check the date and time! Type in `hi` and hit enter!
 - You can now see "Welcome to Linktree, Current date and time: MM-DD-YYYY HH:MM:SS" displayed on the UI.
 
-##### Guidelines:
-
-- Please ensure that the first letter of the command is uppercase. For instance, use `Hi` instead of `hi` or `HI`.
-- The command does not take any additional arguments or keywords.
-
 ##### Examples:
 
 When you enter the command (Hi):
 
   ![Welcome](images/UG_images/WelcomeCommand.png)
 
+**:information_source: Note:**<br>
+- Please ensure that the first letter of the command is uppercase. For instance, use `Hi` instead of `hi` or `HI`.
+- The command does not take any additional arguments or keywords.
+
+--------------------------------------------------------------------------------------------------------------------
+
+
 ### Managing Developers
 
-### Add developer
-#### What this command does:
+#### Add developer
+##### What this command does:
 * This command helps you to add a new developer to the addressbook.
+
 
 ##### Command format: 
 * `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
@@ -204,7 +204,7 @@ When you enter the command (Hi):
   
 ### Remove developer
 
-#### What this command does:
+##### What this command does:
 * Performs deletion of existing developers from the storage. Specify the index number as shown on the list.
 #### Command format:
 * `delete [index number]`
