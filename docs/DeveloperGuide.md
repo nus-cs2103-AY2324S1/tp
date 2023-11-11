@@ -544,7 +544,7 @@ Future User Stories to be implemented:
 | `* *`    | power user     | generate reports on the total hours spent by CCA Members for a specified period | I can assess their involvement                                     |
 | `* *`    | power user     | add multiple profiles for CCA Members in bulk                                   | I can save time when onboarding new members                        |
 | `* *`    | power user     | export attendance data for an event as a CSV file                               | I can use it for further analysis of which events are more popular |
-| `* *`    | long term user | archive/hide unused data                                                        | I can not be distracted by irrelevant data                         |
+| `* *`    | long term user | archive/hide unused data                                                        | I will not be distracted by irrelevant data                         |
 | `* *`    | long term user | create custom templates for events                                              | I can quickly set up recurring activities with predefined details  |
 | `* *`    | long term user | create aliases for commands                                                     | I can save time on frequently performed commands                   |
 | `* *`    | beginner user  | access a user-friendly help guide for exporting data in PDF/CSV format          | I can get help to hare the data with other CCA Heads               |
