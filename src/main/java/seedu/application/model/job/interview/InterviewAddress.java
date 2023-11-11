@@ -60,7 +60,7 @@ public class InterviewAddress {
         }
 
         InterviewAddress otherInterviewAddress = (InterviewAddress) other;
-        return interviewAddress.equals(otherInterviewAddress.interviewAddress);
+        return interviewAddress.equalsIgnoreCase(otherInterviewAddress.interviewAddress);
     }
 
     @Override

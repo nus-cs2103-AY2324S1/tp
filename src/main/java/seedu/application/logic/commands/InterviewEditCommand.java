@@ -87,8 +87,7 @@ public class InterviewEditCommand extends InterviewCommand {
         Interview interviewToEdit = jobToEditInterview.getInterview(interviewIndex);
         Interview editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor);
 
-        if (!interviewToEdit.isSameInterview(editedInterview)
-                && jobToEditInterview.hasInterview(editedInterview)) {
+        if (jobToEditInterview.hasInterview(editedInterview)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
 
@@ -133,8 +132,8 @@ public class InterviewEditCommand extends InterviewCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("job index", jobIndex)
-            .add("interview index", interviewIndex)
+            .add("jobIndex", jobIndex)
+            .add("interviewIndex", interviewIndex)
             .add("editInterviewDescriptor", editInterviewDescriptor)
             .toString();
     }
