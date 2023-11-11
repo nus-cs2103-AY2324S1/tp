@@ -48,10 +48,9 @@ public class DeleteRemarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
-        List<Employee> lastShownList = model.getFilteredEmployeeList();
+        List<Employee> employeeList = model.getAddressBook().getEmployeeList();
 
-        for (Employee employee : lastShownList) {
+        for (Employee employee : employeeList) {
             if (employee.getId().equals(targetId)) {
                 RemarkList remarkListToUpdate = employee.getRemarkList();
                 RemarkList updatedList = deleteRemarkFromList(remarkListToUpdate, remark);

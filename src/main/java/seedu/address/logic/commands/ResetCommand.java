@@ -42,11 +42,9 @@ public class ResetCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         isValidField(field.toLowerCase());
 
-        List<Employee> employeeList = model.getFilteredEmployeeList();
-        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
+        List<Employee> employeeList = model.getAddressBook().getEmployeeList();
 
         for (Employee employee : employeeList) {
-            model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
             if (field.equalsIgnoreCase("overtime")) {
                 resetOvertime(model, employee);
             } else if (field.equalsIgnoreCase("leaves")) {
@@ -54,6 +52,7 @@ public class ResetCommand extends Command {
             }
         }
 
+        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         return new CommandResult(String.format(MESSAGE_SUCCESS, field.toLowerCase()));
     }
 

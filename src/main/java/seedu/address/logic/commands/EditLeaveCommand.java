@@ -61,10 +61,9 @@ public class EditLeaveCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
-        List<Employee> lastShownList = model.getFilteredEmployeeList();
+        List<Employee> employeeList = model.getAddressBook().getEmployeeList();
 
-        for (Employee employee : lastShownList) {
+        for (Employee employee : employeeList) {
             if (employee.getId().equals(targetId)) {
                 LeaveList leaveListToUpdate = employee.getLeaveList();
                 LeaveList updatedList = editLeaveInList(leaveListToUpdate, oldDate, newDate);
@@ -73,6 +72,7 @@ public class EditLeaveCommand extends Command {
                         employee.getPhone(), employee.getEmail(), employee.getSalary(), employee.getDepartments(),
                         employee.getOvertimeHours(), updatedList, employee.getRemarkList());
 
+                model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
                 model.setEmployee(employee, editedEmployee);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, oldDate, newDate,
                         Messages.formatLeaves(editedEmployee)));
