@@ -35,6 +35,7 @@ public class EditPrefixFinder implements PrefixFinder {
         }
 
         List<String> updatedExamples = Arrays.asList(
+                Integer.toString(booking.getRoom().getRoomNumber()),
                 booking.getBookingPeriod().toString(),
                 booking.getName().toString(),
                 booking.getPhone().toString(),
