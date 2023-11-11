@@ -387,17 +387,10 @@ Usage: addLesson -name NAME (any number of unique [-subject|day|start|end VALUE]
 #### For task list:
 
 Format: `addTask [INDEX] DESCRIPTION` 
-* Adds the task to the lesson at specified `INDEX` of the displayed ___SCHEDULE list___.
+* Adds the task to the lesson at specified `INDEX` of the displayed ___SCHEDULE list___ or to the shown lesson (if `INDEX` is omitted).
 * A new task cannot have the same description as existing tasks in the task list of that specific lesson.
 * Refer to the parameter constraints [here](#parameter-summary).
 
-
-<box type="tip" seamless>
-
-**Tips:**
-The command can be shortened to `addTask DESCRIPTION` without the `INDEX` if the task is to be added to the shown lesson.
-
-</box>
 
 Example usages:
 * `addTask 1 Make Forces Notes`
