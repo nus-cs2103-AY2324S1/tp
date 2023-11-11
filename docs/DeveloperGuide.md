@@ -441,19 +441,10 @@ The following sequence diagram shows the referenced process of calculating payro
 
 ![PayrollCalculationSequenceDiagram2](images/PayrollCalculationSequenceDiagram2.png)
 
-<u>PayrollCommandParser</u>
-
-This class extends the Parser interface, it implements the following operations:
-- PayrollCommandParser#parse() – Parses the user input and returns a PayrollCommand object.
-
-<u>PayrollCommand</u>
-
-This class extends the Command abstract class, it implements the following operations:
-- PayrollCommand#execute() – Determines whether the user used employee name as reference or the index number. Once it confirms, it will calculate the payroll of the employee.
-
-#### Design considerations:
-
-{what are the design considerations?}
+1. The `PayrollCommand` calls the `getLatestPayroll()` method to invoke a method in person object.
+2. The Person object then calls the `getLatestPayroll()` method to get the `Payroll` object with the latest startDate in the `PayrollStorage` object.
+3. The `PayrollCommand` then calls the `getPayrollString()` method of the `Payroll` object to get payroll description of the person.
+4. The `Payroll` object then calls the `getNetSalaryString()` method of the `Salary` object to get the details of the `deductions`, `benefits` and basic salary.
 
 ### Payslip Generation
 
