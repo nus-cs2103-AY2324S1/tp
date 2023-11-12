@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,8 +26,7 @@ public class Messages {
     public static final String MESSAGE_EMPTY_FIND_RESULT =
             "There are no FindCommand results. There is nothing to be saved to the logger tab.";
 
-    public static final String MESSAGE_EMPTY_LOG =
-            "No previous log to undo.";
+    public static final String MESSAGE_EMPTY_LOG = "No previous log to undo.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -34,8 +34,8 @@ public class Messages {
     public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
         assert duplicatePrefixes.length > 0;
 
-        Set<String> duplicateFields =
-                Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
+        Set<String> duplicateFields = Stream.of(duplicatePrefixes).map(Prefix::toString)
+                .collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
@@ -57,10 +57,14 @@ public class Messages {
                 .append(person.getAddress())
                 .append(";\n")
                 .append("Appointment: ")
-                .append(person.getAppointment().orElse(person.getAppointment().orElse(null)))
+                .append(person.getAppointment().map(Appointment::toString).orElse("N/A"))
                 .append("; Medical Histories: ");
 
-        person.getMedicalHistories().forEach(builder::append);
+        if (person.getMedicalHistories().isEmpty()) {
+            builder.append("N/A;");
+        } else {
+            person.getMedicalHistories().forEach(builder::append);
+        }
         return builder.toString();
     }
 }
