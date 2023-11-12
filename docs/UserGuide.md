@@ -21,22 +21,28 @@ solution to manage your student details, including attendance records and assign
   - [3.3 Utilization](#33-utilization)
   - [3.4 Navigating the GUI](#34-navigating-the-gui)
 - [4. Features](#4-features)
-  - [4.1 Basic Course Management](#41-basic-course-management)
-    - [4.1.1 Creating an addressbook: `course create`](#411-creating-an-addressbook-course-create)
-    - [4.1.2 Deleting an addressbook: `course delete`](#412-deleting-an-addressbook-course-delete)
-    - [4.1.3 Switching an addressbook: `course switch`](#413-switching-an-addressbook-course-switch)
-    - [4.1.4 Editing an addressbook: `course edit`](#414-editing-an-addressbook-course-edit)
-  - [4.2 Basic Student Management](#42-basic-student-management)
-    - [4.2.1 Adding a new contact: `add`](#421-adding-a-new-contact-add)
-    - [4.2.2 Editing a contact : `edit`](#422-editing-a-contact--edit)
-    - [4.2.3 Marking attendance of student: `mark`](#423-marking-attendance-of-student-mark)
-    - [4.2.4 Viewing summary of attendance : `list attendance`](#424-viewing-summary-of-attendance--list-attendance)
-    - [4.2.5 Searching for student's contact via keyword : `find`](#425-searching-for-students-contact-via-keyword--find)
-    - [4.2.6Listing students : `list students`](#426-listing-students--list-students)
-    - [4.2.7 Deleting a student : `delete`](#427-deleting-a-student--delete)
-    - [4.2.8 Deleting multiple students : `delete all`](#428-deleting-multiple-students--delete-all)
-    - [4.2.9 Merging two students : `merge`](#429-merging-two-students--merge)
-    - [4.2.10 Viewing detailed attendance records : `view`](#4210-viewing-detailed-attendance-records--view)
+  - [4.1 Viewing Help](#41-viewing-help)
+  - [4.2 Basic Course Management](#42-basic-course-management)
+    - [4.2.1 Creating an addressbook: `course create`](#421-creating-an-addressbook-course-create)
+    - [4.2.2 Deleting an addressbook: `course delete`](#422-deleting-an-addressbook-course-delete)
+    - [4.2.3 Switching an addressbook: `course switch`](#423-switching-an-addressbook-course-switch)
+    - [4.2.4 Editing an addressbook: `course edit`](#424-editing-an-addressbook-course-edit)
+  - [4.3 Basic Student Management](#43-basic-student-management)
+    - [4.3.1 Adding a new contact: `add`](#431-adding-a-new-contact-add)
+    - [4.3.2 Editing a contact : `edit`](#432-editing-a-contact--edit)
+    - [4.3.3 Marking attendance of student: `mark`](#433-marking-attendance-of-student-mark)
+    - [4.3.4 Viewing summary of attendance : `list attendance`](#434-viewing-summary-of-attendance--list-attendance)
+    - [4.3.5 Searching for student's contact via keyword : `find`](#435-searching-for-students-contact-via-keyword--find)
+    - [4.3.6 Listing students : `list students`](#436-listing-students--list-students)
+    - [4.3.7 Deleting a student : `delete`](#437-deleting-a-student--delete)
+    - [4.3.8 Deleting multiple students : `delete all`](#438-deleting-multiple-students--delete-all)
+    - [4.3.9 Merging two students : `merge`](#439-merging-two-students--merge)
+    - [4.3.10 Viewing detailed attendance records : `view`](#4310-viewing-detailed-attendance-records--view)
+  - [4.4 Exiting Program](#44-exiting-program)
+  - [4.5 Data Management](#45-data-management)
+    - [4.5.1 Saving the data](#451-saving-the-data)
+    - [4.5.2 Editing the data file](#452-editing-the-data-file)
+    - [4.5.3 Archiving data files `[coming in v2.0]`](#453-archiving-data-files-coming-in-v20)
 - [5. FAQ](#5-faq)
 - [6. Known issues](#6-known-issues)
 - [7. Summary](#7-summary)
@@ -53,7 +59,7 @@ This guide aims to
     * Available commands with their respective formats
     * Available prefixes and which commands use which prefixes
 
-### Navigating the User Guide
+### 2.1 Navigating the User Guide
 **Information Box**
 <div markdown="block" class="alert alert-info">
 **:information_source: Info:** I am an example info box! I provide useful information.
@@ -135,7 +141,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
 Refer to the [Features](#4-features) below for details of each command.
 
-### Navigating the GUI
+### 3.4 Navigating the GUI
 
 ![UI Overview](images/UiOverview.png)
 
@@ -180,17 +186,17 @@ Displays the list of your chosen tab.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
+### 4.1 Viewing Help
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Shows a message explaining how to access the help page.
 
-### 4.1 Basic Course Management
+**Format:** `help`
 
-#### 4.1.1 Creating an addressbook: `course create`
+### 4.2 Basic Course Management
+
+#### 4.2.1 Creating an addressbook: `course create`
 
 ![course create](images/courseCreate.png)
 
@@ -198,7 +204,7 @@ Creates a new addressbook.
 
 **Format:** `course create course/COURSE_CODE`
 
-<div markdown="block" class="alert alert-secondary">
+<div markdown="block" class="alert alert-info">
 
 * Creates a new addressbook with course code `COURSE_CODE`
 * `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
@@ -211,90 +217,132 @@ Creates a new addressbook.
 
 <div markdown="block" class="alert alert-secondary">
 
-* `course create course/CS2103T` creates a new addressbook with course code CS2103T.
+* `course create course/CS2103T` 
+  * Creates a new addressbook with course code CS2103T.
 
 </div>
 
-#### 4.1.2 Deleting an addressbook: `course delete`
+#### 4.2.2 Deleting an addressbook: `course delete`
 
 ![course delete](images/courseDelete.png)
 
 Delete an addressbook.
 
-Format: `course delete course/COURSE_CODE`
+**Format:** `course delete course/COURSE_CODE`
+
+<div markdown="block" class="alert alert-info">
 
 * Deletes the addressbook with course code `COURSE_CODE`
 * `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
 * `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must exist.
 
-Example:
-* `course delete course/CS2103T` deletes the addressbook with course code CS2103T.
+</div>
 
-#### 4.1.3 Switching an addressbook: `course switch`
+**Example:**
+
+<div markdown="block" class="alert alert-secondary">
+
+* `course delete course/CS2103T` 
+  * Deletes the addressbook with course code CS2103T.
+
+</div>
+
+#### 4.2.3 Switching an addressbook: `course switch`
 
 ![course switch](images/courseSwitch.png)
 
 Switches the active addressbook.
 
-Format: `course switch course/COURSE_CODE`
+**Format:** `course switch course/COURSE_CODE`
+
+<div markdown="block" class="alert alert-info">
 
 * Switches to the addressbook with course code `COURSE_CODE`
 * `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
 * `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must exist.
 
-Example:
-* `course switch course/CS2103T` switches to the addressbook with course code CS2103T.
+</div>
 
-#### 4.1.4 Editing an addressbook: `course edit`
+**Example:**
+
+<div markdown="block" class="alert alert-secondary">
+
+* `course switch course/CS2103T` 
+  * Switches to the addressbook with course code CS2103T.
+
+</div>
+
+#### 4.2.4 Editing an addressbook: `course edit`
 
 ![course edit](images/courseEdit.png)
 
 Edits the active addressbook course code.
 
-Format: `course edit course/COURSE_CODE`
+**Format:** `course edit course/COURSE_CODE`
+
+<div markdown="block" class="alert alert-info">
 
 * Changes the course code of active addressbook to `COURSE_CODE`
 * `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
 * `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must not exist.
 
-Example:
-* `course edit course/CS2103T` changes the active addressbook's course code to CS2103T.
+</div>
 
-### 4.2 Basic Student Management
+**Example:**
 
-#### 4.2.1 Adding a new contact: `add`
+<div markdown="block" class="alert alert-secondary">
 
-Creates a new contact in the course with the specified name and details.
-
-![add contact](images/addContact.png)
-
-Format: `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP_ID]…`
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note that STUDENT_ID should be unique for all students**<br>
+* `course edit course/CS2103T` 
+  * Changes the active addressbook's course code to CS2103T.
 
 </div>
 
+### 4.3 Basic Student Management
+
+#### 4.3.1 Adding a new contact: `add`
+
+![add contact](images/addContact.png)
+
+Creates a new contact in the course with the specified name and details.
+
+**Format:** `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP_ID]…`
+
+<div markdown="block" class="alert alert-info">
+
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
-* `PHONE_NUMBER` should be a string made up of numbers
+* `PHONE_NUMBER` should be a string made up of numbers.
+* `STUDENT_ID` should be unique for all students.
 * `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
 * `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
 
-Examples:
+</div>
+
+**Examples:**
+
+<div markdown="block" class="alert alert-secondary">
+
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234568E`
+
+</div>
+
+<div markdown="block" class="alert alert-secondary">
+
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234569E t/G2`
 
-#### 4.2.2 Editing a contact : `edit`
+</div>
 
-Edits the contact details.
+#### 4.3.2 Editing a contact : `edit`
 
 ![edit contact](images/editContact.png)
 
-Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`
+Edits the contact details.
+
+**Format:** `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`
+
+<div markdown="block" class="alert alert-info">
 
 * Edits the person at the specified `INDEX`. 
 * `INDEX` refers to the index number shown in the displayed person list.
@@ -305,22 +353,42 @@ Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTO
 * When editing tutorial groups, the existing tutorial groups of the person will be removed i.e adding of tutorial groups is not cumulative.
 * You can remove all the person’s tutorial groups by typing t/ without specifying any tutorial groups after it.
 
-Examples:
-*  `edit 1 n/Tan Liyan` Edits the name of the first person to be Tan Liyan.
-*  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tutorial groups from contact.
+</div>
 
-#### 4.2.3 Marking attendance of student: `mark`
+**Examples:**
 
-Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER
+<div markdown="block" class="alert alert-secondary">
+
+* `edit 1 n/Tan Liyan`
+  * Edits the name of the first person to be Tan Liyan.
+
+</div>
+
+<div markdown="block" class="alert alert-secondary">
+
+* `edit 2 p/92345678 t/` 
+  * Edits the phone number of the second person and removes all tutorial groups from contact.
+
+</div>
+
+#### 4.3.3 Marking attendance of student: `mark`
+
+![mark attendance](images/markAttendance.png)
+
+Marks the attendance of one or more student.
+
+**Format:** `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER
 [r/REASON_OF_ABSENCE]`
 
 <div markdown="block" class="alert alert-warning">
-**:exclamation: Caution:** Kindly take note the following!
+**:exclamation: Caution:** Note the following!
 * `mark` command is case-sensitive!
 * `mark` command currently does not support marking of students with same `STUDENT_NAME`! Please work around this by marking with `STUDENT_ID` instead!
 * `mark` command currently only supports **EITHER** `STUDENT_NAME` **OR** `STUDENT_ID` only and not both!
     * For example, `mark n/Zong Jin, Fu Yiqiao id/A0123456E, A0123457E a/1 w/1` is invalid!
 </div>
+
+<div markdown="block" class="alert alert-info">
 
 * Marks the attendance of one or more student corresponding to the `STUDENT_NAME` or `STUDENT_ID`.
 * To mark attendance for multiple students, provide a comma-separated list of `STUDENT_NAME` or `STUDENT_ID`.
@@ -331,131 +399,243 @@ Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]…
 * `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
 * `WEEK_NUMBER` should be an integer from 0 to 13.
 
-![mark attendance](images/markAttendance.png)
+</div>
 
-Examples:
-* `mark n/Zong Jin, Fu Yiqiao a/1 w/1` Marks students named, Zong Jin and Fu Yiqiao, as present for the tutorial in Week 1.
-* `mark n/Zong Jin a/0 w/1 r/not feeling well` Marks student named, Zong Jin, as absent for the tutorial in Week 1 as he is not feeling well.
-* `mark id/A0123456E, A0123457E a/1 w/1` Marks students with student IDs, A0123456E and A0123457E, as present for the tutorial in Week 1.
-* `mark id/A0123456E a/0 w/1 r/no valid reason` Marks student with student ID, A0123456E, as absent for the tutorial in Week 1 with no valid reason.
+**Examples:**
 
-#### 4.2.4 Viewing summary of attendance : `list attendance`
+<div markdown="block" class="alert alert-secondary">
 
-Shows a summary of attendance records including list of absentees.
+* `mark n/Zong Jin, Fu Yiqiao a/1 w/1` 
+  * Marks students named, Zong Jin and Fu Yiqiao, as present for the tutorial in Week 1.
+
+</div>
+
+<div markdown="block" class="alert alert-secondary">
+
+* `mark n/Zong Jin a/0 w/1 r/not feeling well` 
+  * Marks student named, Zong Jin, as absent for the tutorial in Week 1 as he is not feeling well.
+
+</div>
+
+<div markdown="block" class="alert alert-secondary">
+
+* `mark id/A0123456E, A0123457E a/1 w/1` 
+  * Marks students with student IDs, A0123456E and A0123457E, as present for the tutorial in Week 1.
+
+</div>
+
+<div markdown="block" class="alert alert-secondary">
+
+* `mark id/A0123456E a/0 w/1 r/no valid reason` 
+  * Marks student with student ID, A0123456E, as absent for the tutorial in Week 1 with no valid reason.
+
+</div>
+
+#### 4.3.4 Viewing summary of attendance : `list attendance`
 
 ![list attendance](images/listAttendance.png)
 
-Format: `list attendance w/WEEK_NUMBER [tg/TUTORIAL_GROUP_ID]`
+Shows a summary of attendance records including list of absentees.
+
+**Format:** `list attendance w/WEEK_NUMBER [tg/TUTORIAL_GROUP_ID]`
+
+<div markdown="block" class="alert alert-info">
+
 * If tutorial group is specified, shows a list of absentees and summary of the attendance of students corresponding to the specified tutorial group in the course for the specified week number.
 * If tutorial group is not specified, shows a list of absentees and summary of the attendance of all students in the course for the specified week number.
 * `TUTORIAL_GROUP_ID` is optional.
 * `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
 * `WEEK_NUMBER` should be an integer from 0 to 13.
 
-Examples:
-* `list attendance w/1` Shows a list of absentees and a summary of attendance records of all students in the course for Week 1.
-* `list attendance w/3 tg/G01` Shows a list of absentees and a summary of attendance records of the students in the tutorial group G01 in the course for Week 3.
+</div>
 
-#### 4.2.5 Searching for student's contact via keyword : `find`
+**Examples:**
 
-Finds a student's or multiple students' contact either via their name or student ID.
+<div markdown="block" class="alert alert-secondary">
+
+* `list attendance w/1` 
+  * Shows a list of absentees and a summary of attendance records of all students in the course for Week 1.
+
+</div>
+
+<div markdown="block" class="alert alert-secondary">
+
+* `list attendance w/3 tg/G01` 
+  * Shows a list of absentees and a summary of attendance records of the students in the tutorial group G01 in the course for Week 3.
+
+</div>
+
+#### 4.3.5 Searching for student's contact via keyword : `find`
 
 ![find command](images/findCommand.png)
 
-Format: `find n/STUDENT_NAME [STUDENT_NAME]… | id/STUDENT_ID [STUDENT_ID]…`
+Finds a student's or multiple students' contact either via their name or student ID.
+
+**Format:** `find n/STUDENT_NAME [STUDENT_NAME]… | id/STUDENT_ID [STUDENT_ID]…`
+
+<div markdown="block" class="alert alert-info">
 
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
 * `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
 
-Examples:
-*  `find n/Anthony Yiqiao` Finds all contacts with the name "Anthony" and/or "Yiqiao".
-*  `find id/A0123456H` Finds all contacts with the student ID "A0123456H".
+</div>
 
-#### 4.2.6 Listing students : `list students`
+**Examples:**
 
-Shows a list of students in the course.
+<div markdown="block" class="alert alert-secondary">
+
+*  `find n/Anthony Yiqiao` 
+  * Finds all contacts with the name "Anthony" and/or "Yiqiao".
+
+</div>
+
+<div markdown="block" class="alert alert-secondary">
+
+*  `find id/A0123456H` 
+  * Finds all contacts with the student ID "A0123456H".
+
+</div>
+
+#### 4.3.6 Listing students : `list students`
 
 ![list students](images/listStudents.png)
 
-Format: `list students`
+Shows a list of students in the course.
+
+**Format:** `list students`
+
 *  Shows a list of all students in the course.
 
 
-#### 4.2.7 Deleting a student : `delete`
-
-Deletes the specified person from TAvigator.
+#### 4.3.7 Deleting a student : `delete`
 
 ![delete contact](images/deleteContact.png)
 
-Format: `delete INDEX`
+Deletes the specified person from TAvigator.
+
+**Format:** `delete INDEX`
+
+<div markdown="block" class="alert alert-info">
 
 * Deletes the person at the specified `INDEX`.
 * `INDEX` refers to the index number shown in the displayed person list.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `list students` followed by `delete 2` deletes the 2nd person in the course.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+</div>
 
-#### 4.2.8 Deleting multiple students : `delete all`
+**Examples:**
 
-Deletes all students from the course or all students from the specified tutorial group in the course.
+<div markdown="block" class="alert alert-secondary">
+
+* `list students` followed by `delete 2` 
+  * Deletes the 2nd person in the course.
+
+</div>
+
+<div markdown="block" class="alert alert-secondary">
+
+* `find Betsy` followed by `delete 1` 
+  * Deletes the 1st person in the results of the `find` command.
+
+</div>
+
+#### 4.3.8 Deleting multiple students : `delete all`
 
 ![delete all](images/deleteAll.png)
 
-Format: `delete all [tg/TUTORIAL_GROUP_ID]`
+Deletes all students from the course or all students from the specified tutorial group in the course.
+
+**Format:** `delete all [tg/TUTORIAL_GROUP_ID]`
+
+<div markdown="block" class="alert alert-info">
 
 * If tutorial group is specified, deletes all students corresponding to the specified tutorial group in the course.
 * If tutorial group is not specified, deletes all students in the course.
 * `TUTORIAL_GROUP_ID` is optional.
 * `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
 
-Examples:
-* `delete all` deletes all students from the course.
-* `delete all tg/G02` deletes all students from tutorial group G02 in the course.
+</div>
 
-#### 4.2.9 Merging two students : `merge`
+**Examples:**
 
-Merges two students in the current address book.
+<div markdown="block" class="alert alert-secondary">
+
+* `delete all` 
+  * Deletes all students from the course.
+
+</div>
+
+<div markdown="block" class="alert alert-secondary">
+
+* `delete all tg/G02` 
+  * Deletes all students from tutorial group G02 in the course.
+
+</div>
+
+#### 4.3.9 Merging two students : `merge`
 
 ![merge](images/mergeCommand.png)
 
-Format: `merge PRIMARY_INDEX SECONDARY_INDEX`
+Merges two students in the current address book.
+
+**Format:** `merge PRIMARY_INDEX SECONDARY_INDEX`
+
+<div markdown="block" class="alert alert-info">
 
 * NAME, PHONE_NUMBER, EMAIL, and STUDENT_ID of the primary student is retained.
 * The merged student contains the tutorial groups of both students.
 * The merged student contains attendance records of both students. In case of duplicated weeks, the attendance record of the primary student will be retained.
 
-Examples:
-* `merge 1 2` merges the information of the first two displayed students.
+</div>
 
-#### 4.2.10 Viewing detailed attendance records : `view`
+**Example:**
 
-Displays the detailed attendance record of the specified student.
+<div markdown="block" class="alert alert-secondary">
+
+* `merge 1 2` 
+  * Merges the information of the first two displayed students.
+
+</div>
+
+#### 4.3.10 Viewing detailed attendance records : `view`
 
 ![view](images/viewCommand.png)
 
-Format: `view INDEX`
+Displays the detailed attendance record of the specified student.
+
+**Format:** `view INDEX`
+
+<div markdown="block" class="alert alert-info">
 
 * If the student has no attendance records, it will return a message indicating that the student has no attendance records.
 * If the student has attendance records, the attendance record will be shown week by week with the reason being provided for absences.
 * `INDEX` refers to the index number shown in the displayed person list.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `view 1` views the attendance records for the student with index 1.
+</div>
 
-### Exiting the program : `exit`
+**Example:**
+
+<div markdown="block" class="alert alert-secondary">
+
+* `view 1` 
+  * Views the attendance records for the student with index 1.
+
+</div>
+
+### 4.4 Exiting Program
 
 Exits the program.
 
-Format: `exit`
+**Format:** `exit`
 
-### Saving the data
+### 4.5 Data Management
+
+#### 4.5.1 Saving the data
 
 TAvigator data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+#### 4.5.2 Editing the data file
 
 TAvigator data are saved automatically as a JSON file `[JAR file location]/data/tavigator.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -463,7 +643,7 @@ TAvigator data are saved automatically as a JSON file `[JAR file location]/data/
 If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+#### 4.5.3 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -483,6 +663,8 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. Summary 
+
+### 7.1 Prefix summary
 
 ### 7.2 Command summary
 
