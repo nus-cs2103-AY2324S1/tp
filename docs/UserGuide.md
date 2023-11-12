@@ -3,7 +3,6 @@ layout: default.md
 title: "User Guide"
 pageNav: 4
 ---
-
 # LoveBook User Guide
 
 LoveBook, is a **dating-focused** application, revolving around providing **serial daters** with a **convenient**
@@ -11,38 +10,39 @@ and **enjoyable** tool to enhance their dating experiences. Featuring **user pre
 **customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and **effectiveness** of your
 online dating journey.
 
-<!-- * Table of Contents -->
-<page-nav-print />
+[//]: # (<!-- * Table of Contents -->)
+[//]: # (<page-nav-print />)
 
 ## Table of Contents
+
 * [Glossary](#glossary)
-   * [Common Symbols](#common-symbols)
+  * [Common Symbols](#common-symbols)
 * [Quick Start](#quick-start)
-   * [Download and Installation](#download-and-installation)
-   * [Navigating the GUI](#navigating-the-gui)
-   * [LoveBook Tutorial: Getting started](#lovebook-tutorial-getting-started)
+  * [Download and Installation](#download-and-installation)
+  * [Navigating the GUI](#navigating-the-gui)
+  * [LoveBook Tutorial: Getting started](#lovebook-tutorial-getting-started)
 * [Features](#features)
-   * [Prefix Table](#prefix-table)
-   * [Managing Dates](#managing-dates)
-      * [Adding a new date: `add`](#adding-a-new-date-add)
-      * [Editing a date: `edit`](#editing-a-date-edit)
-      * [Deleting a date: `delete`](#deleting-a-date-delete)
-      * [Listing all dates: `list`](#listing-all-dates-list)
-      * [Clearing all dates: `clear`](#clearing-all-dates-clear)
-      * [Starring a date: `star`](#starring-a-date-star)
-      * [Unstarring a date: `unstar`](#unstarring-a-date-unstar)
-   * [Sorting, Searching for dates](#sorting-searching-for-dates)
-      * [Finding a date: `find`](#finding-a-date-find)
-      * [Filtering dates by a certain metric: `filter`](#filtering-dates-by-a-certain-metric-filter)
-      * [Sorting dates by a certain metric: `sort`](#sorting-dates-by-a-certain-metric-sort)
+  * [Prefix Table](#prefix-table)
+  * [Managing Dates](#managing-dates)
+    * [Adding a new date: `add`](#adding-a-new-date-add)
+    * [Editing a date: `edit`](#editing-a-date-edit)
+    * [Deleting a date: `delete`](#deleting-a-date-delete)
+    * [Listing all dates: `list`](#listing-all-dates-list)
+    * [Clearing all dates: `clear`](#clearing-all-dates-clear)
+    * [Starring a date: `star`](#starring-a-date-star)
+    * [Unstarring a date: `unstar`](#unstarring-a-date-unstar)
+  * [Sorting, Searching for dates](#sorting-searching-for-dates)
+    * [Finding a date: `find`](#finding-a-date-find)
+    * [Filtering dates by a certain metric: `filter`](#filtering-dates-by-a-certain-metric-filter)
+    * [Sorting dates by a certain metric: `sort`](#sorting-dates-by-a-certain-metric-sort)
   * [Managing Preferences and Getting Matches](#managing-preferences-and-getting-matches)
-      * [Showing your date preferences: `showP`](#showing-your-date-preferences-showp)
-      * [Setting your date preferences: `setP`](#setting-your-date-preferences-setp)
-      * [Getting a recommended date: `bestMatch`](#getting-a-recommended-date-bestmatch)
-      * [Getting a blind date: `blindDate`](#getting-a-blind-date-blinddate)
+    * [Showing your date preferences: `showP`](#showing-your-date-preferences-showp)
+    * [Setting your date preferences: `setP`](#setting-your-date-preferences-setp)
+    * [Getting a recommended date: `bestMatch`](#getting-a-recommended-date-bestmatch)
+    * [Getting a blind date: `blindDate`](#getting-a-blind-date-blinddate)
   * [Other Commands](#other-commands)
-      * [Exiting the application: `exit`](#exiting-the-application-exit)
-      * [Getting help: `help`](#getting-help-help)
+    * [Exiting the application: `exit`](#exiting-the-application-exit)
+    * [Getting help: `help`](#getting-help-help)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -53,7 +53,7 @@ online dating journey.
 | Date                                                                                           | A person that the user is interested in and is currently seeing.                                                                       |
 | Metric                                                                                         | A certain characteristic of a date. (e.g. Gender, Height)                                                                              |
 | Command                                                                                        | Text that the user types into the application to perform an action.                                                                    |
-| Parameter                                                                                      | A value that the user provides to the application when executing a command. (e.g. in `gender/M` M is a parameter)                      |
+| Parameter                                                                                      | A value that the user provides to the application when executing a command. (e.g. in`gender/M` M is a parameter)                       |
 | GUI                                                                                            | Graphical User Interface                                                                                                               |
 | CLI                                                                                            | Command Line Interface                                                                                                                 |
 | Mainstream OS                                                                                  | Windows, Linux, Unix, OS-X                                                                                                             |
@@ -62,6 +62,7 @@ online dating journey.
 | <box type="important">Important:</box>                                                         | To inform you of some unintended or unexpected consequences that may occur when you use the commands.                                  |
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### **Common Symbols**
@@ -70,52 +71,53 @@ As you navigate through the application, you may come across certain symbols dep
 Here's a quick guide to help you understand what they mean.
 
 #### Gender Symbols
-| Gender  | Symbol                                                                                                                                 |
-|---------|----------------------------------------------------------------------------------------------------------------------------------------|
-| Male    | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/genders/male.png?raw=true" height="50">   |
-| Female  | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/genders/female.png?raw=true" height="70"> |
+
+
+| Gender | Symbol                                                                                                                                 |
+|--------|----------------------------------------------------------------------------------------------------------------------------------------|
+| Male   | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/genders/male.png?raw=true" height="50">   |
+| Female | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/genders/female.png?raw=true" height="70"> |
 
 #### Horoscope Symbols
-| Horoscope   | Symbol                                                                                                                                         | Birthday Range            |
-|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
-| Aries       | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/aries.png?raw=true" height="50">       | March 21 - April 19       |
-| Taurus      | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/taurus.png?raw=true" height="50">      | April 20 - May 20         |
-| Gemini      | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/gemini.png?raw=true" height="50">      | May 21 - June 20          |
-| Cancer      | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/cancer.png?raw=true" height="50">      | June 21 - July 22         |
-| Leo         | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/leo.png?raw=true" height="50">         | July 23 - August 22       |
-| Virgo       | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/virgo.png?raw=true" height="50">       | August 23 - September 22  |
-| Libra       | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/libra.png?raw=true" height="50">       | September 23 - October 22 |
-| Scorpio     | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/scorpio.png?raw=true" height="50">     | October 23 - November 21  |
-| Sagittarius | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/sagittarius.png?raw=true" height="50"> | November 22 - December 21 |
-| Capricorn   | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/capricorn.png?raw=true" height="50">   | December 22 - January 19  |
-| Aquarius    | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/aquarius.png?raw=true" height="50">    | January 20 - February 18  |
-| Pisces      | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/pisces.png?raw=true" height="50">      | February 19 - March 20    |
+
+
+| Horoscope    | Symbol                                                                                                                                           | Birthday Range             |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| Aries        | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/aries.png?raw=true" height="50">         | March 21 - April 19        |
+| Taurus       | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/taurus.png?raw=true" height="50">        | April 20 - May 20          |
+| Gemini       | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/gemini.png?raw=true" height="50">        | May 21 - June 20           |
+| Cancer       | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/cancer.png?raw=true" height="50">        | June 21 - July 22          |
+| Leo          | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/leo.png?raw=true" height="50">           | July 23 - August 22        |
+| Virgo        | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/virgo.png?raw=true" height="50">         | August 23 - September 22   |
+| Libra        | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/libra.png?raw=true" height="50">         | September 23 - October 22  |
+| Scorpio      | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/scorpio.png?raw=true" height="50">       | October 23 - November 21   |
+| Sagittarius  | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/sagittarius.png?raw=true" height="50">   | November 22 - December 21  |
+| Capricorn    | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/capricorn.png?raw=true" height="50">     | December 22 - January 19   |
+| Aquarius     | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/aquarius.png?raw=true" height="50">      | January 20 - February 18   |
+| Pisces       | <img src="https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/resources/images/horoscopes/pisces.png?raw=true" height="50">        | February 19 - March 20     |
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+---
+
 ## **Quick Start**
 
 ### **Download and Installation**
 
 1. Ensure that you have Java `11` or above installed in your Computer.
-
 2. Download the latest `LoveBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-2/tp).
-
 3. Double-click the file to start the app. The window that appears will be similar to the below should appear in a few
    seconds. Note that in this case, we have sample data.<br>
    ![Ui](images/Ui.png)
    *Figure 1: A view of LoveBook at startup*
-
 4. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing `Enter` to
    open the help window.<br>
    Some commands you can try:
 
-    * `list` : Lists all dates and their associated details
-
-    * `exit` : Exits the app
-
+   * `list` : Lists all dates and their associated details
+   * `exit` : Exits the app
 5. Refer to the features below for details of each command.
 
 ### **Navigating the GUI**
@@ -133,9 +135,11 @@ Here's the detailed breakdown of the LoveBook screen: <br>
 - **Date List Panel** - This is where the list of dates are displayed. The list is scrollable, and you can scroll up and down to view the entire list.
 
 ### **LoveBook Tutorial: Getting started**
+
 Now that you are familiar with the layout of LoveBook, we recommend you try the following steps to develop a feel for the core features of LoveBook.
 
 #### 1. Adding a date
+
 So you've just started dating. How do you begin using this app?
 
 Let's say you went out on a date with John. Throughout your date you find out key things about him, he's 123cm tall, earns 3k a month, his horoscope is Libra.
@@ -148,6 +152,7 @@ Let's imagine you've added a couple of dates to the LoveBook already. It should 
 ![addCommandExample2](images/user-commands/addCommandExample2.png)
 
 #### 2. Starring a date
+
 With so many dates you might want to start keeping tabs on dates that are perhaps more exceptional. Fret not, star dates as you go along
 in your journey. Here you can star John for instance, using the star command:
 Enter `star 2`.
@@ -155,6 +160,7 @@ This will star John.
 ![starCommandExample](images/user-commands/starCommandExample.png)
 
 #### 3. Filtering dates
+
 With so many dates, you might want to start filtering down to the metrics that matter. Perhaps you seek someone younger, simply filter for
 a specific age. Here you can filter for an age of 21 for instance, using the filter command:
 Enter `filter age/21`.
@@ -162,6 +168,7 @@ This will filter for John.
 ![filterCommandExample](images/user-commands/filterCommandExample.png)
 
 #### 4. Set Preferences
+
 Well, maybe you are indecisive as a serial dater, and you want a third party opinion. Fret not, simply begin by keying in your preferences using the
 setPreferences command:
 Enter `setP age/22 height/130 income/3200 horoscope/Libra`
@@ -169,19 +176,22 @@ This will set your preferences like so:
 ![setPreferencesCommandExample](images/user-commands/setPreferencesCommandExample.png)
 
 #### 5. Best Match
+
 And here it is, to get the match of your dreams, simply use the bestMatch command:
 Enter `bestMatch`
 ![bestMatchCommandExample](images/user-commands/bestMatchCommandExample.png)
 
 ### Congrats! You have completed the tutorial!
+
 The tutorial shows you what a typical workflow might look like on LoveBook. Do continue to peruse the commands section which contains
 other commands that, while not worth covering in a quick start tutorial, are certainly important to using LoveBook as a whole.
 Here's to you embarking on your LoveBook journey!
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Features**
 
@@ -191,38 +201,36 @@ Here's to you embarking on your LoveBook journey!
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `edit INDEX METRIC/NEW_ARG`, `INDEX`, `NEW_ARG` and `METRIC` are parameters which can be used as
-    `edit 2 income/3000`.
-
+  `edit 2 income/3000`.
 * Items in square brackets are optional.<br>
   e.g `age/AGE [horoscope/HOROSCOPE]` can be used as `age/22 horoscope/ARIES` or as `age/22`.
-
 * Parameters can be in any order.<br>
   e.g. if the command specifies `name/NAME age/AGE`, `age/AGE name/NAME` is also acceptable.
-
 * For commands that accept a positive integer, the integer cannot be preceded with a leading zero.
   For instance, `star 9` is valid, but `star 09` is invalid
-
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
   will be ignored.<br> e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </div>
 
- ### Prefix Table
-| Metric    | Prefix        | Constraints                                                                             |
-|-----------|---------------|-----------------------------------------------------------------------------------------|
-| Name      | `name/`       | Name can only contain letters, numbers and spaces. It must not be left blank.           |
-| Age       | `age/`        | Age should be a positive integer between 18 and 150 (inclusive).                        |
-| Gender    | `gender/`     | Gender should be either M or F. It is case sensitive.                                   |
-| Height    | `height/`     | Height should be a positive integer in cm between 100cm and 250cm (inclusive).          |
-| Income    | `income/`     | Income (per month) should be a positive integer in SGD less than or equal to a million. |
-| Horoscope | `horoscope/`  | Horoscope should be a valid zodiac sign. It is case insensitive.                        |
+### Prefix Table
 
---------------------------------------------------------------------------------------------------------------------
+
+| Metric    | Prefix       | Constraints                                                                             |
+| --------- | ------------ | --------------------------------------------------------------------------------------- |
+| Name      | `name/`      | Name can only contain letters, numbers and spaces. It must not be left blank.           |
+| Age       | `age/`       | Age should be a positive integer between 18 and 150 (inclusive).                        |
+| Gender    | `gender/`    | Gender should be either M or F. It is case sensitive.                                   |
+| Height    | `height/`    | Height should be a positive integer in cm between 100cm and 250cm (inclusive).          |
+| Income    | `income/`    | Income (per month) should be a positive integer in SGD less than or equal to a million. |
+| Horoscope | `horoscope/` | Horoscope should be a valid zodiac sign. It is case insensitive.                        |
+
+---
+
 ### **Managing Dates**
- 
+
 #### **Adding a new date: `add`**
 
 Adds a date to the LoveBook.
@@ -236,6 +244,7 @@ Example: `add name/John Doe age/21 gender/M height/123 income/3000 horoscope/Lib
 Expected output: `New date added: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### **Editing a date: `edit`**
@@ -249,12 +258,15 @@ Format: `edit INDEX [name/NAME] [age/AGE] [gender/GENDER] [height/HEIGHT] [incom
 For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
 </div>
 
+
 Parameter constraints:
+
 - Metric is limited to `gender, age, horoscope, name, height, income` only
 - New argument replaces the existing argument for that metric
 - User can edit up to n number of metrics in one command line, where n refers to the number of metrics available
 
 Examples:
+
 - `edit 1 name/John` (editing 1 metric)
 - `edit 1 name/John horoscope/Cancer` (editing 2 metrics)
 - `edit 1 horoscope/Cancer name/John` (sequence doesn't matter)
@@ -264,6 +276,7 @@ Examples:
 Expected Output: `Edited Date: John; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### **Deleting a date: `delete`**
@@ -272,9 +285,12 @@ Deletes the specified date from the LoveBook.
 
 Format: `delete INDEX`
 
-<box type="tip" seamless>
-    The index must be a positive integer, and be within the range of the recorded dates.
-    For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
+<box type="tip">
+
+**Tips:**
+* The index must be a positive integer, and be within the range of the recorded dates. 
+* For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
+
 </box>
 
 Example: `delete 1`
@@ -284,6 +300,7 @@ Example: `delete 1`
 Expected output: `Deleted Date: Ben Brown; Age: 21; Gender: F; Height: 194; Income: 6000; Horoscope: GEMINI`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### **Listing all dates: `list`**
@@ -297,6 +314,7 @@ Format: `list`
 Expected output: `Listed all Dates`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### **Clearing all dates: `clear`**
@@ -312,7 +330,8 @@ Format: `clear`
 Expected output: `LoveBook has been cleared!`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
-<div style="page-break-after: always;"></div>
+
+span
 
 #### **Starring a date: `star`**
 
@@ -325,6 +344,7 @@ Example: `star 1`
 Expected output: `Starred Date: John Doe; Age: 21; Gender: F; Height: 245; Income: 3000; Horoscope: LIBRA`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### **Unstarring a date: `unstar`**
@@ -338,6 +358,7 @@ Example: `unstar 1`
 Expected output: `Unstarred Date: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### **Sorting, Searching for dates**
@@ -364,6 +385,7 @@ Example:
 Expected Output: `Lists the dates with the name(s) specified`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### **Filtering dates by a certain metric: `filter`**
@@ -386,7 +408,7 @@ Parameter constraints:
 
 **Caution:**
 
-Unlike the find commmand, you cannot use filter to filter for more than a single name, like so `filter name/kevin name/wayne`
+Unlike the find command, you cannot use filter to filter for more than a single name, like so `filter name/kevin name/wayne`
 </box>
 
 Example:
@@ -397,6 +419,7 @@ Example:
 Expected Output: `Lists the dates with the metric specified`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### **Sorting dates by a certain metric: `sort`**
@@ -425,9 +448,21 @@ Order is limited to `increasing` or `decreasing` only
 
 **Caution:**
 
+<<<<<<< HEAD
 When sorting dates by a field where both have an equal value, say Kevin and Wayne are sorted by income and both have
 an income of 2000, applying commands such as edit or star, can affect the stability of the sort. However, the overall
 sorting order by value is preserved.
+=======
+* The relevant metrics are
+
+  * `name/ORDER`
+  * `age/ORDER`
+  * `height/ORDER`
+  * `income/ORDER`
+  * `horoscope/ORDER`
+* Order is limited to `increasing` or `decreasing` only
+
+>>>>>>> d3924c72 (Remove print)
 </box>
 
 Example:
@@ -438,12 +473,14 @@ Example:
 Expected Output: `Lists the dates in the order specified`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### **Managing Preferences and Getting Matches**
 
 <box type="tip">
 
+<<<<<<< HEAD
 **Tips:**
 
 By default, Date Preference is set to:
@@ -451,6 +488,16 @@ By default, Date Preference is set to:
 * HEIGHT: 170
 * INCOME: 10000
 * HOROSCOPE: ARIES
+=======
+* By default, Date Preference is set to:
+
+  * AGE: 21
+  * HEIGHT: 170
+  * INCOME: 10000
+  * HOROSCOPE: ARIES
+* If you wish to change your Date Preference, please use the [`setP`](#setting-your-date-preferences-setp) command.
+* The [`bestMatch`](#getting-a-recommended-date-bestmatch) command will use the Date Preference set by the user.
+>>>>>>> d3924c72 (Remove print)
 
 If you wish to change your Date Preference, please use the [`setP`](#setting-your-date-preferences-setp) command.
 The [`bestMatch`](#getting-a-recommended-date-bestmatch) command will use the Date Preference set by the user.
@@ -466,6 +513,7 @@ Format: `showP`
 Expected output: `Here are your preferences: Age: 22; Height: 180; Income: 2000; Horoscope: TAURUS`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### **Setting your date preferences: `setP`**
@@ -475,11 +523,23 @@ Sets the user's preferences for the matching algorithm.
 
 <box type="tip">
 
+<<<<<<< HEAD
 **Tips:**
 
 Note: At least one field to edit must be provided.
 The user's preferences will be used in the [`bestMatch`](#getting-a-recommended-date-bestmatch) command.
 Gender is not taken into account here
+=======
+* At least one field to edit must be provided.
+* The user's preferences will be used in the [`bestMatch`](#getting-a-recommended-date-bestmatch) command.
+* Gender is not taken into account here
+* The relevant fields are
+
+  * `age/AGE`
+  * `height/HEIGHT`
+  * `income/INCOME`
+  * `horoscope/HOROSCOPE`
+>>>>>>> d3924c72 (Remove print)
 
 The relevant fields are
 * `age/AGE`
@@ -495,11 +555,13 @@ Example: `setP age/22 height/180 income/2000 horoscope/TAURUS`
 ![setPCommandExample](images/user-commands/setPCommandExample.png)
 
 Expected output:
+
 ```
 Updated Preferences: Age: 22; Height: 180; Income: 2000; Horoscope: TAURUS
 ```
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### **Getting a recommended date: `bestMatch`**
@@ -515,6 +577,7 @@ Format: `bestMatch`
 Expected Output: `Here's your best match!`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### **Getting a blind date: `blindDate`**
@@ -530,6 +593,7 @@ Format: `blindDate`
 Expected Output: `Here's a blind date for you!`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### **Other Commands**
@@ -543,6 +607,7 @@ Format: `exit`
 Expected output: `Exiting LoveBook...`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 #### **Getting help: `help`**
@@ -556,9 +621,10 @@ Format: `help`
 Expected output: `Opened help window.`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **FAQ**
 
@@ -585,9 +651,10 @@ to manually edit the data file.
 to choose their own avatars.
 
 [Scroll back to *Table of Contents*](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Command Summary**
 
@@ -595,27 +662,24 @@ to choose their own avatars.
 :information_source: <b>Note:</b> Commands are sorted by alphabetical order.
 </div>
 
-| Action                                                                             | Format                                                                                                    | Examples                                                               |
-|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| [Adding a new date](#adding-a-new-date-add)                                        | `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME`                     | `add name/John age/25 gender/M height/175 horoscope/Aries income/5000` |
-| [Getting a recommended date](#getting-a-recommended-date-bestmatch)                | `bestMatch`                                                                                               | `bestMatch`                                                            |
-| [Getting a blind date](#getting-a-blind-date-blinddate)                            | `blindDate`                                                                                               | `blindDate`                                                            |
-| [Clearing all dates](#clearing-all-dates-clear)                                    | `clear`                                                                                                   | `clear`                                                                |
-| [Deleting a date](#deleting-a-date-delete)                                         | `delete INDEX`                                                                                            | `delete 2`                                                             |
-| [Editing a date](#editing-a-date-edit)                                             | `edit INDEX [name/NAME] [age/AGE] [gender/GENDER] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]`  |  `edit 3 name/Cleon`                                                   |
-| [Exiting the application](#exiting-the-application-exit)                           | `exit`                                                                                                    | `exit`                                                                 |
-| [Filtering dates by a certain metric](#filtering-dates-by-a-certain-metric-filter) | `filter METRIC/ARG`                                                                                       | `filter name/Cleon`                                                    |
-| [Finding a date](#finding-a-date-find)                                             | `find NAME [MORE_NAMES]`                                                                                  | `find Cleon`                                                           |
-| [Help](#getting-help-help)                                                         | `help`                                                                                                    | `help`                                                                 |
-| [Listing all dates](#listing-all-dates-list)                                       | `list`                                                                                                    | `list`                                                                 |
-| [Setting date preferences](#setting-your-date-preferences-setp)                    | `setP [age/AGE] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]`                                    | `setP age/22 height/180 income/2000 horoscope/TAURUS`                  |
-| [Showing date preferences](#showing-your-date-preferences-showp)                   | `showP`                                                                                                   | `showP`                                                                |
-| [Sorting dates by a certain metric](#sorting-dates-by-a-certain-metric-sort)       | `sort METRIC/ORDER`                                                                                       | `sort name/increasing`                                                 |
-| [Starring a date](#starring-a-date-star)                                           | `star INDEX`                                                                                              | `star 1`                                                               |
-| [Unstarring a date](#unstarring-a-date-unstar)                                     | `unstar INDEX`                                                                                            | `unstar 1`                                                             |
 
-[Scroll back to *Table of Contents*](#table-of-contents)
-<div style="page-break-after: always;"></div>
+| Action                                                                             | Format                                                                                                   | Examples                                                               |
+| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [Adding a new date](#adding-a-new-date-add)                                        | `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME`                    | `add name/John age/25 gender/M height/175 horoscope/Aries income/5000` |
+| [Getting a recommended date](#getting-a-recommended-date-bestmatch)                | `bestMatch`                                                                                              | `bestMatch`                                                            |
+| [Getting a blind date](#getting-a-blind-date-blinddate)                            | `blindDate`                                                                                              | `blindDate`                                                            |
+| [Clearing all dates](#clearing-all-dates-clear)                                    | `clear`                                                                                                  | `clear`                                                                |
+| [Deleting a date](#deleting-a-date-delete)                                         | `delete INDEX`                                                                                           | `delete 2`                                                             |
+| [Editing a date](#editing-a-date-edit)                                             | `edit INDEX [name/NAME] [age/AGE] [gender/GENDER] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]` | `edit 3 name/Cleon`                                                    |
+| [Exiting the application](#exiting-the-application-exit)                           | `exit`                                                                                                   | `exit`                                                                 |
+| [Filtering dates by a certain metric](#filtering-dates-by-a-certain-metric-filter) | `filter METRIC/ARG`                                                                                      | `filter name/Cleon`                                                    |
+| [Finding a date](#finding-a-date-find)                                             | `find NAME [MORE_NAMES]`                                                                                 | `find Cleon`                                                           |
+| [Help](#getting-help-help)                                                         | `help`                                                                                                   | `help`                                                                 |
+| [Listing all dates](#listing-all-dates-list)                                       | `list`                                                                                                   | `list`                                                                 |
+| [Setting date preferences](#setting-your-date-preferences-setp)                    | `setP [age/AGE] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]`                                   | `setP age/22 height/180 income/2000 horoscope/TAURUS`                  |
+| [Showing date preferences](#showing-your-date-preferences-showp)                   | `showP`                                                                                                  | `showP`                                                                |
+| [Sorting dates by a certain metric](#sorting-dates-by-a-certain-metric-sort)       | `sort METRIC/ORDER`                                                                                      | `sort name/increasing`                                                 |
+| [Starring a date](#starring-a-date-star)                                           | `star INDEX`                                                                                             | `star 1`                                                               |
+| [Unstarring a date](#unstarring-a-date-unstar)                                     | `unstar INDEX`                                                                                           | `unstar 1`                                                             |
 
---------------------------------------------------------------------------------------------------------------------
-
+---
