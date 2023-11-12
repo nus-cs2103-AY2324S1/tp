@@ -62,8 +62,8 @@ public class EventTest {
     public void toStringMethod() {
         String expected = Event.class.getSimpleName() + "{name=" + EVENT_1.getPerson().getName()
                 + ", description=" + EVENT_1.getDescription() + ", startTime="
-                + EVENT_1.getStart_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
-                + ", endTime=" + EVENT_1.getEnd_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + "}";
+                + EVENT_1.getStart_time().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+                + ", endTime=" + EVENT_1.getEnd_time().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "}";
         assertEquals(expected, EVENT_1.toString());
     }
 }

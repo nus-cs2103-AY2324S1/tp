@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +13,7 @@ import java.util.Set;
 import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.CreateTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -156,15 +158,15 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
+        if (tags.size() == 0) {
+            return tagSet;
+        }
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");
         String[] tagNameCategoryPairs = cleanedList.split(",");
 
-        if (tagNameCategoryPairs.length == 1 && tagNameCategoryPairs[0].isBlank()) {
-            return tagSet;
-        }
-
         for (String tagNameCategory : tagNameCategoryPairs) {
+            tagNameCategory = tagNameCategory.trim();
             if (tagNameCategory.split("\\s+").length > 1) {
                 String[] nameCategory = tagNameCategory.split("\\s+");
                 // category specified
@@ -189,19 +191,18 @@ public class ParserUtil {
         requireNonNull(tags);
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");
-        String[] tagParams = cleanedList.split(",");
-        for (String tag : tagParams) {
-            if (tag.split("\\s+").length > 1) {
-                if (!Tag.isValidTagName(tag.split("\\s+")[1])) {
+        String[] tagNameCategoryPairs = cleanedList.split(",");
+        for (String tagNameCategory : tagNameCategoryPairs) {
+            tagNameCategory = tagNameCategory.trim();
+            if (tagNameCategory.split("\\s+").length > 1) {
+                if (!Tag.isValidTagName(tagNameCategory.split("\\s+")[1])) {
                     throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
                 }
             } else {
-                if (!Tag.isValidTagName(tag)) {
-                    throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-                }
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTagCommand.MESSAGE_USAGE));
             }
         }
-        return tagParams;
+        return tagNameCategoryPairs;
     }
 
     /**
@@ -271,17 +272,35 @@ public class ParserUtil {
     public static List<String> parseSinglePrefixTags(Collection<String> tags)
             throws ParseException {
         requireNonNull(tags);
+        UniqueTagList uniqueTagList = new UniqueTagList();
         String[] tagArr = parseSinglePrefixParams(tags);
         final List<String> tagList = new ArrayList<>();
+        List<String> nonExistingTags = new ArrayList<>();
+
         for (String tag : tagArr) {
             tag = tag.trim();
+
+            // Check if the tag is valid
             if (!Tag.isValidTagName(tag)) {
                 throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
             }
-            tagList.add(tag);
+
+            // Check if the tag already exists in the uniqueTagList
+            if (!uniqueTagList.containsTagName(tag)) {
+                nonExistingTags.add(tag);
+            } else {
+                tagList.add(tag);
+            }
         }
+
+        if (!nonExistingTags.isEmpty()) {
+            // Throw an exception with a message specifying all non-existing tags
+            throw new ParseException(Tag.MESSAGE_TAG_DOES_NOT_EXIST + String.join(", ", nonExistingTags));
+        }
+
         return tagList;
     }
+
 
     /**
      * Parses a {@code String score} into a {@code Score}.
