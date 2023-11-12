@@ -214,7 +214,7 @@ Format: `show INDEX`
 
 #### For Student:
 
-In ___STUDENT list___, the show command shows the details of the specified student from the contact list in the application.
+In ___STUDENTS list___, the show command shows the details of the specified student from the contact list in the application.
 
 Example usages:
 * `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the student list.
@@ -424,7 +424,7 @@ Format: `deletePerson INDEX`
 <box type="tip" seamless>
 
 **Tips:**
-- If the user is currently in the ___STUDENT list___, the command can be shortened to `delete`.
+- If the user is currently in the ___STUDENTS list___, the command can be shortened to `delete`.
 
 </box>
 
@@ -808,7 +808,7 @@ You can link lessons to students, and vice versa. For example, if a lesson has a
 #### For Student:
 <box type="info" seamless>
 
-You must be in the **_STUDENT list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENT list_**, then type `show INDEX` to select a student to link lessons to.</box>
+You must be in the **_STUDENTS list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENTS list_**, then type `show INDEX` to select a student to link lessons to.</box>
 Format: `linkTo [LESSON_NAME]`
 * `LESSON_NAME` is the name of the lesson you would like to link to.
 * * Refer to `LESSON_NAME`'s constraints [here](#parameter-summary).
@@ -836,7 +836,7 @@ Linked Alex Wong to CS2103T Lab
 ```
 ![Success for linking to lesson](images/linkTo/linkTo_lesson_positive.png)
 Failure outputs:
-* Current state: In the ___STUDENT list___ and no student is selected
+* Current state: In the ___STUDENTS list___ and no student is selected
 * Input: `linkTo CS2103T Lab`
   * Error: A student is not yet selected. Select a student using `show INDEX` first.
 ```
@@ -846,7 +846,7 @@ Example: linkTo CS2103T lab1
 Note: This command is only available when a student is shown
 ```
 
-* Current state: In the ___STUDENT list___ and a student is selected
+* Current state: In the ___STUDENTS list___ and a student is selected
 * Input: `linkTo CS2109 Lab`
   * Error: No such lesson with the name "CS2109 Lab". Make sure the lesson's name is correct and try again.
 ```
@@ -916,7 +916,7 @@ Format: `nav`
 #### For Student:
 <box type="info" seamless>
 
-You must be in the **_STUDENT list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENT list_**, then type `show INDEX` to select a student.</box>
+You must be in the **_STUDENTS list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENTS list_**, then type `show INDEX` to select a student.</box>
 
 <box type="tip" seamless>
 
@@ -935,13 +935,13 @@ Navigated to student's lessons
 ```
 ![Success for navigating to lessons](images/nav/nav_fromStudent_positive.png)
 Failure outputs:
-* Current state: In the ___STUDENT list___ and a student is not selected
+* Current state: In the ___STUDENTS list___ and a student is not selected
 * Input: `nav`
   * Error: `nav` only works when a student is selected. Select a student with the `show INDEX` command and try again.
 ```
 No student is currently displayed
 ```
-* Current state: In the ___STUDENT list___ and a student without any linked lessons is selected
+* Current state: In the ___STUDENTS list___ and a student without any linked lessons is selected
 * Input: `nav`
   * Error: `nav` only works when a student has linked lessons. Link a lesson with the `linkTo` command.
 ```
