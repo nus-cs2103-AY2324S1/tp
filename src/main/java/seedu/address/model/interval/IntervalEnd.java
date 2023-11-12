@@ -28,10 +28,13 @@ public class IntervalEnd extends End {
         return dateFormat.parse(value);
     }
 
-    @Override
-    public String toString() {
-        return value;
+    /**
+     * @return defensive copy of IntervalEnd
+     */
+    public IntervalEnd copy() {
+        return new IntervalEnd(this.value);
     }
+
 
     @Override
     public boolean equals(Object other) {

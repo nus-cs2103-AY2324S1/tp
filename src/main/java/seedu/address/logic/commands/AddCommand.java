@@ -12,6 +12,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYRATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -56,6 +59,8 @@ public class AddCommand extends Command {
 
     private final Person toAdd;
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
@@ -73,10 +78,12 @@ public class AddCommand extends Command {
         }
 
         if (model.hasPerson(toAdd)) {
+            logger.info("[AddCommand.execute()]: Duplicate Person");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         if (model.hasDate(toAdd)) {
+            logger.info("[AddCommand.execute()]: Clashing Schedules");
             throw new CommandException(MESSAGE_DUPLICATE_DATE);
         }
 

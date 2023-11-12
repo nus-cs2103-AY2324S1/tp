@@ -140,10 +140,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(Person target, Person editedPerson, boolean isEditingSchedule) {
+        requireAllNonNull(target, editedPerson, isEditingSchedule);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setPerson(target, editedPerson, isEditingSchedule);
     }
 
     @Override

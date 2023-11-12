@@ -156,8 +156,21 @@ If it passes these checks, the person is added into the system.
 The following sequence diagram shows how the add command works.
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
 
-### List by day feature
+### Find feature
+The `findCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
+subject using their prefixes.
 
+The following sequence diagram shows how the edit command works.
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+### Edit feature
+The `editCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
+of the tutee.
+
+The following sequence diagram shows how the edit command works.
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
+
+### List by day feature
 The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
 the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
 
@@ -175,7 +188,7 @@ The `FreeTimeCommand` extends the `Command` class. The command first finds times
 the tutees' schedules inside the `UniquePersonList`. The TimeSlot class then finds free time based on the list of
 timeslots when the user is busy.
 
-The following sequence diagram shows how the add command works.
+The following sequence diagram shows how the freeTime command works.
 ![FreeTimeSequenceDiagram](images/FreeTimeSequenceDiagram.png)
 
 #### Design Considerations
