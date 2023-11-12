@@ -6,8 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.fields.InterviewTime;
-
 public class InterviewTimeTest {
     @Test
     public void constructor_invalidInterviewTime_throwsIllegalArgumentException() {

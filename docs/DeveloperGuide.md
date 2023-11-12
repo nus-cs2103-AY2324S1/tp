@@ -545,21 +545,19 @@ otherwise)
 1. User enters command to add a member
 2. ClubMembersContact adds the member to the list of members
 3. ClubMembersContact displays a success message along with the member's details
-
+    <br/>
     Use case ends.
 
 **Extensions**
 
 * 1a. The add member command format is invalid.
-
   * 1a1. ClubMembersContact shows an error message.
-    
-      Use case resumes at step 1.
+    <br/>
+    Use case resumes at step 1.
 * 2a. Member already exists in the list of members.
-
   * 2a1. ClubMembersContact shows an error message.
-
-      Use case resumes at step 2.
+    <br/>
+    Use case resumes at step 2.
 
 ---
 
