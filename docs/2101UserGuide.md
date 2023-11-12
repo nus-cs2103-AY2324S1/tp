@@ -216,35 +216,22 @@ Examples:
 <hr class="feature-class-separator">
 
 ### View commands
-
-#### List all Members and all Events : `list`
-
-List all members and all events in the CCA in two separate columns.
-
-Format: `list`
-
-A GUI similar to the one below will be shown after entering the command.
-![list](images/list.png)
-
-<hr class="command-separator">
+In CCACommander, you can quickly change the view to fit your current use case, be it to check for attendance of an event, 
+filtering for a member and more!
 
 #### View Events of Member : `viewMember`
 
-Lists all the events of a specified member index.
+If you want to view the events in which a particular member is enrolled, you can do so via the `viewMember` command.
 
-Format: `viewMember MEMBER_INDEX`
+Here’s how you can use it:
+`viewMember MEMBER_INDEX`
 
-* Views the events of the member at the specified `MEMBER_INDEX`.
-* The index refers to the index number shown in the **currently displayed** member list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
+Here is an example command where we want to view the events in which the member at index 3 in our member list is enrolled:
 
-Examples:
-* `viewMember 1` displays events of the 1st member in the member list.
-* `viewMember 10` displays events of the 10th member in the member list.
+`viewMember 3`
 
-A GUI similar to the one below will be shown after entering the command if the member is enrolled in events.
-The hours and remarks for each event is reflected here.
-![viewMember](images/viewMember.png)
+![viewMemberPreCommand](images/viewMemberPreCommand.png)
+![viewMemberPostCommand](images/viewMemberPostCommand.png)
 
 <hr class="command-separator">
 
