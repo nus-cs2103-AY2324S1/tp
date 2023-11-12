@@ -259,16 +259,18 @@ displayed list view.
 
 #### Find Member in member list : `findMember`
 
-Finds and lists member(s) whose name(s) contain the provided `KEYWORD`.
+If your CCA contains many members and you don’t want to scroll past tens or hundreds of members, you can use the 
+`findMember` command to instantly filter a list of members with a matching name.
 
-Format: `findMember KEYWORD [MORE_KEYWORDS]`
-* Finds and lists member(s) whose name(s) contain the specified `KEYWORD`.
-* More than 1 `KEYWORD` can be provided to find more members.
-* The `KEYWORD` must match minimally one of the words in the name of the member to be found, where capitalisation does not matter.
+Do you want to find multiple members? Worry not as you can simply add more names one after another.
 
-Examples:
-* `findMember alice` displays the member(s) whose name(s) contain 'alice'
-* `findMember alice bob charlie` displays the member(s) whose name(s) contain 'alice', 'bob' and/or 'charlie'.
+Here’s how you can use it:
+`findMember MEMBER_NAME [MORE_NAMES]`
+
+Here is an example command where we find all members with the names of Anthony and Nicholas:
+
+`findMember anthony nicholas`
+
 
 <hr class="command-separator">
 
