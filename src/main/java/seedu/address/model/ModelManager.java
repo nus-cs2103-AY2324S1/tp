@@ -183,12 +183,7 @@ public class ModelManager implements Model {
         // both throw exception if not exists exact match
         Person person = addressBook.getPerson(personName);
         Group group = addressBook.getGroup(groupName);
-        if (person == null) {
-            throw new CommandException(Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND);
-        }
-        if (group == null) {
-            throw new CommandException(Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
-        }
+
         this.assignGroup(person, group);
         forceUpdateList();
         Pair<Person, Group> output = new Pair<>(person, group);
