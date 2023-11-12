@@ -793,7 +793,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. System detects an error in the entered command.
     * 1a1. System indicates the error.
-    * 1a2. Foster Manager <u>requests for command 'help' (UC7)</u>.
+    * 1a2. Foster Manager <u>requests for command 'help' (UC8)</u>.
     * 1a3. Foster Manager enters new command.
 
       Steps 1a1 - 1a3 are repeated until the command entered is correct.
@@ -929,21 +929,46 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a fosterer
 
-### Deleting a person
+1. Adding a fosterer after collecting all the mandatory details to be inputted
 
-1. Deleting a person while all fosterers are being shown
+    1. Prerequisites: Foster Manager has collected fosterer details such as name, phone number, email, address, housing type, availability, name of animal fostered 
+   (if currently fostering) and type of animal fostered (if currently fostering).
 
-   1. Prerequisites: List all persons using the `list` or `find` command. At least 3 fosterers in the list.
+    1. Test case (valid): `add n/Anne Lim p/98765422 e/anne123@example.com a/Baker street, block 6, #27-01 housing/Landed availability/NotAvailable animal/Bucky animalType/current.Dog`<br>
+       Expected: Fosterer named Anne Lim is added to the list. Details of the added fosterer are shown in the status message.
+
+    1. Test case (invalid):<br>
+
+| Scenario                                                                                                                        | Example command                                                                                                                                                                 | Expected Error Message                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|---------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Without any of the following: `n/`, `p/`,`e/`, `a/`, `housing/`, `availability/`, `animal/`, `animalType/`                      | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB animal/Dexter animalType/current.Cat t/Urgent`                                   | `Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS housing/HOUSING availability/AVAILABILITY animal/ANIMAL_NAME animalType/ANIMAL_TYPE [t/TAG]... Note: If information for that field is not available, put 'nil'. Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Dog t/Urgent t/goodWithDogs` |
+| `availability/nil` but `animal/` is not 'nil'                                                                                   | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/nil animal/Dexter animalType/nil t/Urgent`                          | `When an animal name is provided, availability should not be 'Available' or 'nil'.`                                                                                                                                                                                                                                                                                                                                                                                    |
+| `availability/Available` but `animal/` is not 'nil'                                                                             | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/Available animal/Dexter animalType/nil t/Urgent`                    | `When an animal name is provided, availability should not be 'Available' or 'nil'.`                                                                                                                                                                                                                                                                                                                                                                                    |
+| `housing/` with values other than ‘HDB’, ‘Condo’, ‘Landed’, ‘nil’                                                               | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/hdb availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent`         | `Housing type should be either 'HDB', 'Condo', 'Landed' or 'nil'`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `availability/` with values other than ‘Available’, ‘NotAvailable’, ‘nil’                                                       | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/available animal/Dexter animalType/current.Cat t/Urgent`            | `Availability should be either 'Available', 'NotAvailable' or 'nil'`                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `availability/nil` but `animalType/` is not 'nil'                                                                               | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/nil animal/nil animalType/able.Cat t/Urgent`                        | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If animal type information is not available, it should be inputted as 'nil'. If fosterer is NOT available and is currently fostering, animal type should be 'current.Dog' / 'current.Cat'. If fosterer is currently unable to foster, animal type should be inputted as 'nil'. If availability is 'nil', animal type should be 'nil' too.`                                                   |
+| `availability/Available` with `animalType/` values set to other values which are NOT ‘able.Cat’ or ‘able.Dog’ or 'nil'          | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/Available animal/nil animalType/current.Cat t/Urgent`               | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If animal type information is not available, it should be inputted as 'nil'. If fosterer is NOT available and is currently fostering, animal type should be 'current.Dog' / 'current.Cat'. If fosterer is currently unable to foster, animal type should be inputted as 'nil'. If availability is 'nil', animal type should be 'nil' too.`                                                   |
+| `availability/NotAvailable` with `animalType/` values set to other values which are NOT ‘current.Cat’ or ‘current.Dog' or 'nil' | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/able.Cat t/Urgent`            | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If animal type information is not available, it should be inputted as 'nil'. If fosterer is NOT available and is currently fostering, animal type should be 'current.Dog' / 'current.Cat'. If fosterer is currently unable to foster, animal type should be inputted as 'nil'. If availability is 'nil', animal type should be 'nil' too.`                                                   |
+| `availability/NotAvailable` with `animalType/` values set to 'nil' but `animal/` values NOT 'nil'                               | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/nil t/Urgent`                 | `When availability is 'NotAvailable', animal name and type have to either be both 'nil' or both not 'nil'.`                                                                                                                                                                                                                                                                                                                                                            |
+| `availability/NotAvailable` with `animal/` values set to 'nil' but `animalType/` values NOT 'nil'                               | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/nil animalType/current.Cat t/Urgent`            | `When availability is 'NotAvailable', animal name and type have to either be both 'nil' or both not 'nil'.`                                                                                                                                                                                                                                                                                                                                                            |
+
+
+### Deleting a fosterer
+
+1. Deleting a fosterer while all fosterers are being shown
+
+   1. Prerequisites: List all fosterers using the `list` or `find` command. At least 3 fosterers in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First fosterer is deleted from the list. Details of the deleted fosterer shown in the status message.
+      Expected: First fosterer is deleted from the list. Details of the deleted fosterer are shown in the status message.
    
    1. Test case: `delete 1 2 3`<br>
       Expected: First, second and third fosterers are deleted from the list. Number of deleted fosterers, and their details are shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No person is deleted. Error details are shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`,  (where x is larger than the list size)<br>
       Expected: Similar to previous.
