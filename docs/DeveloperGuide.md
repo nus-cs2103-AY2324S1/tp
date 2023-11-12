@@ -117,28 +117,25 @@ The `UI` component,
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-At high level, Logic Component is responsible for making sense of the user inputs, and modify storage and ui accordingly.
-It is like a controller that glue the other components together.
+At a high level, the `Logic` component is responsible for making sense of the user inputs, and modifying storage and ui accordingly.
+It acts like a controller to glue the other components together.
 
-To be more specific, it interacts with ui component by taking the user input from it, and setting the ui display accordingly.
-It also calls APIs (addPerson, deleteLesson for example) from model component to modify the data representation, and call APIs
-from storage component to save the data to local storage each time the data is modified.
+It interacts with the `UI` component by taking the user input from it, and setting the UI display accordingly.
+It also calls APIs (addPerson, deleteLesson for example) from the `Model` component to modify the data representation, and call APIs
+from the `Storage` component to save the data to local storage each time the data is modified.
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-Inside the `Logic` component, there are 4 main components: LogicManager, AddressBookParser, ScheduleParser and Command.
+Inside the `Logic` component, there are 4 main components: `LogicManager`, `AddressBookParser`, `ScheduleParser` and `Command`.
 
-The command class will do the actual modification of the data, on been executed by the LogicManager, and communicate with logic
-manager its execution result via the CommandResult class. 
+The `Command` class will do the actual modification of the data, when executed by the LogicManager, and communicate its execution result via the CommandResult class with the Logic manager. 
 
-Parser classes are responsible for parsing the user input and create
-the corresponding command object. 
+Parser classes are responsible for parsing the user input and creating the corresponding command object. 
 
-AddressBookParser is responsible for parsing the user input for finding the corresponding parser and return the corresponding command object. 
+AddressBookParser is responsible for parsing the user input for finding the corresponding parser and returning the corresponding command object. 
 
-And logicManager will do the actual execution of command, and update to ui and storage.
-The sequence diagram below
+LogicManager will perform the actual execution of the command, and update the ui and storage.
 
 Here's a (partial) class diagram of the `Logic` component:
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
@@ -233,17 +230,19 @@ It also stores an array of display parameters which will specifies what student 
 
 #### Implementation
 
-The show feature is facilitated by `ShowCommand` which extends the abstract `Command` class. The `ShowCommand` will check the current state of the Model (either `STUDENT`, `SCHEDULE` or `NONE`) when the `execute` method is called and see whether it is currently showing a `STUDENT` list or a `SCHEDULE` list. 
+The show feature is facilitated by `ShowCommand` which extends the abstract `Command` class. The `ShowCommand` will check the current state of the Model (either `STUDENT`, `SCHEDULE`, `TASK` or `NONE`) when the `execute` method is called and see whether it is currently showing a ___STUDENTS list___, ___SCHEDULE list___ or a ___TASKS list___. 
 
 Additionally, the `ModelManager` class implements the following operations for the show command:
 
 `ModelManager#linkUi()` — Links the Ui of TutorMate to the Model to display the Show Panel
 `ModelManager#showPerson()` — Shows the details of the specified person in the Ui.
 `ModelManager#showLesson()` — Shows the details of the specified lesson in the Ui.
+`ModelManager#showTask()` — Shows the details of the specified task in the Ui.
 
 The Show Command has different behaviours based on the current state in the `Model`:
-- The show Command will show the Person Details if the current state is `STUDENT`
-- The show Command will show the Lesson Details if the current state is `SCHEDULE`
+- The Show Command will show the Person Details if the current state is `STUDENT`
+- The Show Command will show the Lesson Details if the current state is `SCHEDULE`
+- The Show Command will show the Task Details if the current state is `TASK` 
 
 The `execute` method of `ShowCommand` will be called by the logicManager when the `show` command is input.
 
