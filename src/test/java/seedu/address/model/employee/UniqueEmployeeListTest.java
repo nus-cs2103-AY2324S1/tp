@@ -18,7 +18,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.department.exceptions.DepartmentNotFoundException;
 import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.address.model.employee.exceptions.EmployeeNotFoundException;
 import seedu.address.model.employee.exceptions.SubordinatePresentException;
