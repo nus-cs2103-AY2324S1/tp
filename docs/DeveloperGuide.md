@@ -656,7 +656,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `TAvigator` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Creating a new contact and editing relevant information**
+**Use case: UC01 - Creating and editing a new address book**
+
+**MSS**
+
+1. User creates a new address book with a valid course code.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User edits the course code.
+      Use case ends. 
+
+* 1b. User enters an invalid course code.
+  * 1b1. TAvigator prompts the user to enter a valid course code.
+  
+      Use case ends.
+
+**Use case: UC02 - Switching to a different address book**
+
+**MSS**
+
+1. User switches to a different address book.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The address book that the user is trying to switch to does not exist.
+  * 1a1. TAvigator prompts the user to switch to a valid address book.
+
+  Use case ends.
+
+**Use case: UC03 - Creating a new contact and editing relevant information**
+
+**Precondition**: User is on a course address book.
 
 **MSS**
 
@@ -666,13 +701,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User edits the contact name. 
-* 1b. User edits the Module Code associated with the contact. 
-* 1c. User edits the Tutorial Group Number associated with the contact. 
+* 1a. User edits the contact details.
+      Use case ends. 
 
-  Use case ends.
+* 1b. User finds a duplicated contact.
+  * 1b1. User merges the duplicated contacts.
+      Use case ends. 
 
-**Use case: UC02 - View Summary of Attendance Records**
+**Use case: UC04 - View Summary of Attendance Records**
 
 **Precondition**: User is on a course address book. 
 
@@ -683,30 +719,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-
 **Extensions**
 
 * 1a. User leaves the tutorial group ID blank.
     * 1a1. TAvigator shows a summary of attendance records of all students in the course for the week specified.
 
-      Use case ends.
+    Use case ends.
 
 * 1b. User leaves the week blank.
     * 1b1. TAvigator shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 * 1c. User enters an invalid tutorial group ID.
     * 1c1. TAvigator shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 * 1d. User enters a tutorial group with no students in it.
     * 1d1. TAvigator shows a reminder that no students are in the tutorial group and shows no students.
 
-      Use case ends.
+    Use case ends.
 
-**Use case: UC03 - View List of Students**
+**Use case: UC05 - View List of Students**
 
 **Precondition**: User is on a course address book.
 
@@ -717,42 +752,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC04 - Mark Student Attendance Separately**
+**Use case: UC06 - Mark Student Attendance Separately**
 
 **MSS**
 
 1.  User requests to mark attendance for a student and enters student name or ID, followed by the attendance status and week and reason if any.
 2.  TAvigator marks the attendance of student and displays message for confirmation of attendance.
-
-
+  
+    Use case ends.
 
 **Extensions**
 
-* 1a. The given student name or ID is invalid
+* 1a. The given student name or ID is invalid.
     * 1a1. TAvigator shows an error message.
 
       Use case ends.
 
-* 1b. The given attendance record is invalid
+* 1b. The given attendance record is invalid.
     * 1b1. TAvigator shows an error message.
 
       Use case ends.
 
-* 1c. The given week is invalid
+* 1c. The given week is invalid.
     * 1c1. TAvigator shows an error message.
 
       Use case ends.
 
-* 1d. The given reason is not provided for absence
+* 1d. The no reason provided for absence.
     * 1d1. TAvigator shows an error message.
 
       Use case ends.
 
-**Use case: UC05 - Adding a filter**
+**Use case: UC07 - Adding a filter**
 
 **MSS**
 
-1.  User requests to add a filter and enters a tutorial group ID or course ID.
+1.  User requests to add a filter and enters a tutorial group ID or course code.
 2.  TAvigator shows a list of students matching the filters applied.
 
     Use case ends.
@@ -764,21 +799,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1b. The given course ID is invalid.
+* 1b. The given course code is invalid.
     * 1b1. TAvigator shows an error message.
 
       Use case ends.
 
-* 1c. User does not specify a tutorial group ID or course ID.
+* 1c. User does not specify a tutorial group ID or course code.
     * 1c1. TAvigator shows an error message.
 
       Use case ends.
 
-**Use case: UC06 - Removing a filter**
+**Use case: UC08 - Removing a filter**
 
 **MSS**
 
-1.  User requests to remove a filter and enters a tutorial group ID or course ID.
+1.  User requests to remove a filter and enters a tutorial group ID or course code.
 2.  TAvigator shows a list of students with the updated filters.
 
     Use case ends.
@@ -790,17 +825,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1b. The given course ID is invalid.
+* 1b. The given course code is invalid.
     * 1b1. TAvigator shows an error message.
 
       Use case ends.
 
-* 1c. User does not specify a tutorial group ID or course ID.
+* 1c. User does not specify a tutorial group ID or course code.
     * 1c1. TAvigator removes all applied filters.
 
       Use case ends.
 
-**Use case: UC07 - Search For Contacts via Student Name or ID**
+**Use case: UC09 - Search For Contacts via Student Name or ID**
 
 **MSS**
 
@@ -830,14 +865,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC08 - Delete a Student**
+**Use case: UC10 - Delete a Student**
 
 **MSS**
 
 1. User requests to list students.
 2. TAvigator shows a list of students.
-2. User requests to delete a specific student in the list by entering the index corresponding to their position in the list.
-3. TAvigator deletes the student.
+3. User requests to delete a specific student in the list by entering the index corresponding to their position in the list.
+4. TAvigator deletes the student.
 
    Use case ends.
 
@@ -851,9 +886,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b. User enters an invalid index.
     * 3b1. TAvigator shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
-**Use case: UC09 - Delete Multiple Students**
+**Use case: UC11 - Delete Multiple Students**
 
 **Precondition**: User is on a course address book.
 
@@ -863,7 +898,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. TAvigator deletes all students from the tutorial group in the course.
 
    Use case ends.
-
 
 **Extensions**
 
@@ -882,8 +916,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -896,8 +928,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8.  Application should have an intuitive and user-friendly interface, following design principles
 9.  Should provide clear and comprehensive user documentation to assist users in using the application effectively
 10. Should maintain technical documentation for developers, detailing the software architecture
-
-*{More to be added}*
 
 ### Glossary
 
@@ -921,16 +951,16 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -938,16 +968,16 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    2. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    3. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -955,7 +985,7 @@ testers are expected to do more *exploratory* testing.
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ## **Appendix: Planned Enhancements**
 
