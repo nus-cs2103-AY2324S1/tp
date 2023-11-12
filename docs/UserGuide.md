@@ -30,6 +30,28 @@ Whether you are new to our application or a seasoned user, you can always find s
 
 If you encounter any problems along your journey, please take a look at the [Troubleshooting](#troubleshooting) section and also refer to our [FAQ](#frequently-asked-questions) for more information.
 
+Throughout this guide, we also use coloured boxes to provide any extra information that you may find useful. 
+
+<div markdown="block" class="alert alert-info">
+:information_source: **Information** 
+
+Content in blue boxes provides additional information and contextual knowledge you need to better understand the application.
+</div>
+
+<div markdown="block" class="alert alert-success">
+:bulb: **Tips** 
+
+Content in green boxes provides tips and good practices to help you use the application more efficiently.
+</div>
+
+<div markdown="block" class="alert alert-danger">
+:exclamation: **Warnings** <br>
+
+Content in red boxes draws your attention to potential pitfalls to avoid and alert you to possible mistakes.
+</div>
+
+Keep an eye out for them!
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
@@ -57,8 +79,9 @@ If you encounter any problems along your journey, please take a look at the [Tro
    ![LabelledMusician.png](images/quickstart/LabelledMusician.png)
    * Bands are displayed in the right panel.
    ![LabelledBand.png](images/quickstart/LabelledBand.png)
-
-   The app already contains some sample data to help you get started. 
+    
+    <br>
+    The app already contains some sample data to help you get started. 
 
 
 5. To execute a command, enter it in the command box and press `Enter` to execute it. The following are some example commands you can try:
@@ -69,7 +92,8 @@ If you encounter any problems along your journey, please take a look at the [Tro
    * `findb TheoryX`: Finds the band named TheoryX and checks its members.
    * `exit` : Exits the app.
    
-Please refer to the [Features](#features) below for details of each command.
+    <br>
+    Please refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -114,32 +138,13 @@ add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]
 * The order of the parameters does not affect the result. For example, `p/PHONE_NUMBER` can be entered before `n/NAME`, and the command still works the same.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, or `tags`) will be ignored.
---------------------------------------------------------------------------------------------------------------------
+
 </div>
 
-### Get help: `help`
-Access a link to our user guide.
-
-**Format:** `help`
-
-You will see a window like below, click `Copy URL`, paste the link in any web browser to view this user guide.
-
-![images/help/helpWindow.png](images/help/helpWindow.png)
-
-**Command Behavior**
-* Extraneous parameters will be ignored.
-* e.g. if the command specifies `help 1`, it will be interpreted as `help`.
-
-### List all musicians and bands: `list`
-View all musicians and bands in their separate panels.
-
-**Format:** `list`
-
-
-## Features for managing musicians
-
 --------------------------------------------------------------------------------------------------------------------
-### Add musician: `add`
+### Features for managing musicians
+
+#### Add musician: `add`
 
 Adds one musician to the contact book. 
 
@@ -170,7 +175,7 @@ If you input a musician which is already in your contact book (i.e. a musician w
 This musician already exists in your contact list
 ```
 
-### Delete musician: `delete`
+#### Delete musician: `delete`
 
 Deletes a musician from your contact list.
 From the current `My Musicians` panel, find the index of the musician to be deleted.
@@ -200,7 +205,7 @@ The musician index provided is invalid
 Please verify that the index is correct and try again.
 
 
-### Edit musician: `edit`
+#### Edit musician: `edit`
 
 Edits an existing musician in the contact book referenced by the index.
 
@@ -246,7 +251,7 @@ Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bes
     ```
     Please verify that the index is correct and try again.
 
-### Find musicians: `find`
+#### Find musicians: `find`
 
 Finds all musicians whose names, tags, instruments, AND genres contain ANY of the given keywords.
 
@@ -283,12 +288,12 @@ For example, when the input command is `find g/rock i/guitar i/piano`
     ```
     The argument(s) provided must not contain more than one word.
     ```
-   
-
-## Features for managing bands
 
 --------------------------------------------------------------------------------------------------------------------
-### Create band: `addb`
+
+### Features for managing bands
+
+#### Create band: `addb`
 
 Creates a band with the specified band name and genres.
 
@@ -316,7 +321,7 @@ Should you try to add a band with empty genre tags, i.e., addb My Garage Band g/
 Genre tags names should be a valid genre name.
 For a list of valid genres, please use the command 'tags'
 ```
-### Add musician to band: `addm`
+#### Add musician to band: `addm`
 
 Adds a musician to a specified band.
 
@@ -362,7 +367,7 @@ when there is 1 band), you will see an error message below:
     ```
 
 
-### Remove musician from band: `removem`
+#### Remove musician from band: `removem`
 
 Removes a musician from a specified band. The musician must already exist in the band.
 
@@ -406,7 +411,7 @@ Finds the band with the given input name. Lists the band members of the selected
 **Upon failure:**
 If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
 
-### Edit a band: `editb`
+#### Edit a band: `editb`
 
 Edit the name and genre of a selected band.
 From the current `My Bands` panel, find the index of the band to be edited.
@@ -449,7 +454,7 @@ Genre tags names should be a valid genre name.
 For a list of valid genres, please use the command 'tags'
 ```
 
-### Delete a band: `deleteb`
+#### Delete a band: `deleteb`
 
 Deletes a band from your contact list.
 From the current `My Bands` panel, find the index of the band to be deleted.
@@ -477,10 +482,29 @@ The band index provided is invalid
 
 Please verify that the index is correct and try again.
 
-## Other features
-
 --------------------------------------------------------------------------------------------------------------------
-### Show all valid instruments and genres: `tags`
+
+### General features
+
+#### Get help: `help`
+Access a link to our user guide.
+
+**Format:** `help`
+
+You will see a window like below, click `Copy URL`, paste the link in any web browser to view this user guide.
+
+![images/help/helpWindow.png](images/help/helpWindow.png)
+
+**Command Behavior**
+* Extraneous parameters will be ignored.
+* e.g. if the command specifies `help 1`, it will be interpreted as `help`.
+
+#### List all musicians and bands: `list`
+View all musicians and bands in their separate panels.
+
+**Format:** `list`
+
+#### Show all valid instruments and genres: `tags`
 
 View all valid instrument and genre tags for musicians and bands.
 
@@ -501,34 +525,38 @@ The `My Musicians` and `My Bands` panels will remain unchanged.
 
 ![tags.png](images%2Fmusician-features%2Ftags.png)
 
-### Clear data: `clear`
+#### Save data
+
+BandConnect++ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+#### Clear data: `clear`
 
 Clears all data in the application.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
-**:warning: Destructive Command!**<br>
+**:exclamation: Destructive Command!**<br>
 
 This command is irreversible, and all data will be lost. Please use this command with caution.
 
 </div>
 
-### Exit app : `exit`
+#### Exit app : `exit`
 
 Exits the program.
 
 Format: `exit`
 
---------------------------------------------------------------------------------------------------------------------
-### Save data
+<div markdown="block" class="alert alert-info">
 
-BandConnect++ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-Congratulations! You are now ready to use **_BandConnect++_**!
+:information_source: **Congratulations! You are now ready to use _BandConnect++_ !**
 
 If you wish, please refer to the below section for a more succinct [command summary](#command-summary).
 
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## Command summary
 
 ### Musician Command summary
