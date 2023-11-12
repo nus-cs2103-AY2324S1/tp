@@ -18,8 +18,8 @@ package "ApplicantBook Storage" #F4F6F6{
 Class "<<interface>>\nApplicantBookStorage" as ApplicantBookStorage
 Class JsonApplicantBookStorage
 Class JsonSerializableApplicantBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+Class JsonAdaptedApplicant
+Class JsonAdaptedInterview
 }
 
 }
@@ -37,7 +37,7 @@ Storage -right-|> ApplicantBookStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonApplicantBookStorage .up.|> ApplicantBookStorage
 JsonApplicantBookStorage ..> JsonSerializableApplicantBook
-JsonSerializableApplicantBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonSerializableApplicantBook --> "*" JsonAdaptedApplicant
+JsonAdaptedApplicant --> "*" JsonAdaptedInterview
 
 @enduml

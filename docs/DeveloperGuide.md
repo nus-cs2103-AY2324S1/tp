@@ -299,14 +299,15 @@ The edit applicant feature allows users to edit the details of an applicant.
 
 #### Purpose
 
-As a hiring management software, we need to perform CRUD operations for the interviews of applicants. This allows us to add new 
-interviews, view existing interviews, edit current interviews, and delete interviews. As we aim so make our program intuitive 
-and efficient, the UI design and data structure used to store these interview objects were crucial considerations in the 
-implementation process.
+As a hiring management software, we need to perform CRUD operations for the interviews of applicants. This allows us to add new interviews, view existing interviews, edit current interviews, and delete interviews. As we aim so make our program intuitive and efficient, the UI design and data structure used to store these interview objects were crucial considerations in the implementation process.
 
 #### Implementation
 
-The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`. The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in an interview (out of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and `DeleteInterviewCommand`. These are implementation in a largely similar manner to the `Applicant` class. The main difference is in how an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the applicant index as well as the chosen interview index.
+The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`. The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in an interview (out of a score of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and `DeleteInterviewCommand`. These are implemented in a largely similar manner to the `Applicant` class. The main difference is in how an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the applicant index as well as the chosen interview index.
+
+The sequence diagram below gives an overview of the behavior when the `DeleteInterviewCommand` is executed:
+
+<puml src="diagrams/DeleteInterviewCommandSequenceDiagram.puml" alt="DeleteInterviewCommandSequenceDiagram" />
 
 #### Design Considerations
 
@@ -524,7 +525,7 @@ The `import` feature allows users to import data from a CSV file into Staff-Snap
 
 #### Implementation
 
-The `import` feature is implemented as a command that takes in a CSV file name as an argument. The command is parsed by the `ImportCommandParser` class, which then calls the `ImportCommand` class to execute the command. The `ImportCommand` class uses the `CsvApplicantParser` to parse the applicant data into a `List<CsvApplicant>` with the help of the `CsvToBeanBuilder<T>` class under `com.opencsv.bean` package. If the `List<CsvApplicant>` has been successfully parsed, we then call the `ParserUtil::parseApplicantFromCsv()` method to convert the `CsvApplicant` to `Applicant`. Lastly, we call the `ModelManager` class to import the data from the `List<Applicant>` into Staff-Snap.
+The `import` feature is implemented as a command that takes in a CSV file name as an argument. The command is parsed by the `ImportCommandParser` class, which then calls the `ImportCommand` class to execute the command. The `ImportCommand` class uses the static `parse()` method under `CsvApplicantParser` to parse the applicant data into a `List<CsvApplicant>` with the help of the `CsvToBeanBuilder<T>` class under `com.opencsv.bean` package. If the `List<CsvApplicant>` has been successfully parsed, we then call the `ParserUtil::parseApplicantFromCsv()` method to convert each `CsvApplicant` into `Applicant`. Lastly, we call the `ModelManager` class to import the data from the `List<Applicant>` into Staff-Snap.
 
 Below is the sequence diagram for the `import` feature:
 
@@ -532,8 +533,9 @@ Below is the sequence diagram for the `import` feature:
 
 #### Design Considerations
 
-In
+Before initiating the import process, we considered it crucial to perform a thorough validation of the CSV file. This included checks for the file's existence, format, and integrity to ensure that the data can be successfully processed.
 
+We also implemented a robust error-handling mechanism to gracefully manage scenarios where the CSV file is malformed or contains errors. For example, to address the possibility of duplicate entries, we first check if the CSV contains duplicate entries within itself, then we also check if the CSV contains entries which are duplicates with existing entries in Staff-Snap. If such duplicates exists, we inform the user of the problematic entries and allow them to rectify the entries before importing.
    
 --------------------------------------------------------------------------------------------------------------------
 
