@@ -1,13 +1,20 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.EditTeamNameCommand;
-
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.TEAMNAME_DESC_TEAM1;
+import static seedu.address.logic.commands.CommandTestUtil.TEAMNAME_DESC_TEAM2;
+import static seedu.address.logic.commands.CommandTestUtil.TEAMNAME_DESC_TEAM3;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TEAM_TEAM1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TEAM_TEAM2;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.EditTeamNameCommand;
+
 
 public class EditTeamNameCommandParserTest {
     private EditTeamNameCommandParser parser = new EditTeamNameCommandParser();
@@ -30,11 +37,11 @@ public class EditTeamNameCommandParserTest {
                 expectedMessage);
 
         // more teamNames after valid input
-        assertParseFailure(parser,  validExpectedTeam + TEAMNAME_DESC_TEAM3,
+        assertParseFailure(parser, validExpectedTeam + TEAMNAME_DESC_TEAM3,
                 expectedMessage);
     }
     @Test
-    public void parse_PrefixMissing_failure() {
+    public void parse_prefixMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTeamNameCommand.MESSAGE_USAGE);
 
         // missing first teamName prefix
