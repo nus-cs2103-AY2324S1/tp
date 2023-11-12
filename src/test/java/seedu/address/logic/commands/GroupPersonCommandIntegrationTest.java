@@ -19,7 +19,7 @@ import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class GroupPersonCommandIntegrationTest {
-    private Model model;
+    private ModelManager model;
 
     @BeforeEach
     public void setUp() {
@@ -33,6 +33,7 @@ public class GroupPersonCommandIntegrationTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.assignGroup(validPerson, validGroup);
+        model.assignGroup(validPerson, validGroup);
 
         assertCommandSuccess(new GroupPersonCommand(validPerson.getName().toString(),
             validGroup.getGroupName()),
