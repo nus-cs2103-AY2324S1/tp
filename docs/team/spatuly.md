@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added the delete all command
     * What it does: Allows the user to delete all students from the chosen tutorial group in a course at once. If the tutorial group is not specified, it deletes all students in the course.
     * Justification: The feature allows the user to easily delete a group of students, reducing the hassle of having to do so one by one.
-    * Highlights: The implementation of this feature was tricky as it was implemented as part of an existing DeleteCommand. As such, more problems were encountered when implementing the parser, and also a large variety of errors to be handled properly.
+    * Highlights: The implementation of this feature was tricky as it was implemented as part of an existing DeleteCommand. As such, more problems were encountered when implementing the parser. Also, a large variety of errors had to be handled properly.
 
 * **New Enhancement**: Implemented attendance saving
     * What it does: Allows the marked attendance to be saved into the tavigator.json file.

@@ -156,7 +156,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### List features
 Two types of list commands, `list students` and `list attendance`, have been implemented.
-`list students` allows users to return to the full list of students.
+`list students` allows users to return to the full list of students who are in the active address book.
 `list attendance` allows users to view a summary of the attendances for each week.
 
 #### Implementation
@@ -167,24 +167,59 @@ The following is a class diagram depicting `ListCommand`, `ListStudentsCommand` 
 
 ![ListCommandClassDiagram](images/ListCommandClassDiagram.png)
 
-Shown below is the sequence diagram of `ListStudentsCommand` when `list students` is entered by the User:
+The following sequence diagram shows how `ListStudentsCommand` works:
 ![ListStudentsSeqDiagram](images/ListStudentsSeqDiagram.png)
+In this example, the user enters `list students`.
 
 The following sequence diagram shows how `ListAttendanceCommand` works:
 ![ListAttendanceSeqDiagram](images/ListAttendanceSeqDiagram.png)
-In this example, the user enters `list attendance w/1 tg/G2`.
+In this example, the user enters `list attendance w/1 tg/G2`, where there are valid students in Tutorial Group G2.
+
+The following activity diagram summarizes what happens when the user executes a `ListAttendanceCommand`.
+![ListAttendanceSeqDiagram](images/ListAttendanceActivityDiagram.png)
+
 
 #### Design considerations:
-**Aspect: Class Structure of ListCommands:**
+The current implementation of `ListAttendanceCommand` aims to provide a view of the attendance records for the week in a concise manner, 
+by only showing a statistical summary of the attendances and the list of absentees. 
+The tutorial group ID is also implemented as an optional field to give users greater flexibility.
+Specific messages are also shown when attendances are not fully marked and when there are no students in a specified tutorial group
+instead of a generic error message, which was implemented so that users can more easily rectify these mistakes.
 
-* **Alternative 1 (current choice):** Separating ListAttendanceCommand and ListStudentsCommand into two classes that extend from ListCommand.
-    * Pros: Improves OOP, allows for additional List commands.
-    * Cons: ListCommand currently does not have any functionality, might be redundant.
-* **Alternative 2:** Only using ListCommand, splitting Attendance and Students into the 2 cases.
-    * Pros: Simplifies class structure.
-    * Cons: Reduces OOP and extensibility.
+#### Alternative implementations considered but not adopted:
 
-_{more aspects and alternatives to be added}_
+- Using a different class structure for the `list` commands
+
+  > Instead of separating `ListAttendanceCommand` and `ListStudentsCommand` into two classes that extend from `ListCommand`,
+  > we could have used `ListCommand` only, splitting Attendance and Students into 2 cases.
+
+  **Pros:**
+    - Simplifies class structure.
+    - Adds functionality to `ListCommand`: Currently `ListCommand` does not have any functionality and might be redundant.
+  
+  **Cons:**
+    - Reduces OOP and extensibility: Current implementation allows for more `list` commands to be added easily.
+  
+  **Evaluation:**
+
+  The current implementation is preferred as it has greater OOP and provides more extensibility. Future `list` commands can then be implemented more easily. The current implementation of `ListCommand` also has a unique `MESSAGE_USAGE` text, which reduces its redundancy.
+
+
+- Different format for information shown by `ListAttendanceCommand`
+
+  > Instead of the UI message showing the statistical summary of attendance and the model showing the list of absentees,
+  > we could have the UI message show the statistical summary as well as the names of absentees and their reasons of absences and the model show the full list of students.
+
+    **Pros:**
+    - Allows the user to view the reason of absence immediately, which is currently in neither the UI message nor the model.
+    
+    **Cons:**
+    - Causes UI message to become more cluttered and require more scrolling, which is not ideal, especially since it is supposed to be a summary.
+    - Does not make full use of the model.
+    
+    **Evaluation:**
+
+    The current implementation is preferred as it gives the user a clear and concise summary of the week's attendances, which is in line with the intention and design of the feature. If the user wants to know the reason of absence, they can use the `ViewCommand`.
 
 ### Mark attendance feature
 
@@ -367,6 +402,39 @@ The feature is implemented this way so that the user is able to quickly merge an
 
   The current implementation is the optimal way to go about implementing this feature as we believe that there is greater value in preserving the immutability of the Person class.
 
+### Delete features
+Two types of delete commands, `delete INDEX` and `delete all`, have been implemented.
+`delete INDEX` allows users delete a singular student via their index in the list.
+`delete all` allows users to delete multiple students at once.
+
+#### Implementation
+Both delete commands are parsed with `DeleteCommandParser`. If parsed successfully, it returns a `DeleteCommand`.
+
+The following sequence diagram shows how `DeleteCommand` works:
+![ListStudentsSeqDiagram](images/DeleteAllSeqDiagram.png)
+In this example, the user enters `delete all tg/G1`, where there are valid students in Tutorial Group G1.
+
+#### Design considerations:
+`DeleteCommand` is implemented to give users greater flexibility, as it allows them to delete a student by index, delete multiple students in the course by tutorial group or delete all students in the course.
+The ability to delete multiple students was chosen as it provides greater efficiency as compared to deleting students one by one.
+
+#### Alternative implementations considered but not adopted:
+
+- Different format for information shown by `DeleteCommand`
+
+  > Instead of the UI message showing a success message followed by listing (all) the student(s) deleted,
+  > we could have it showing a success message only.
+
+  **Pros:**
+    - Reduces clutter in the UI message.
+
+  **Cons:**
+    - Users would not know which students were deleted, especially when utilising `delete all` or `delete all tg/xx` on a large tutorial group.
+    - Once the student is deleted, the user loses their information completely and would not be able to add them back easily.
+
+  **Evaluation**:
+
+  The current implementation is preferred as it is more user-friendly, and provides the user with valuable information. Listing the information of students deleted allows the user to be able to check if they deleted the correct students. If a student was deleted by mistake, the user can easily reference the UI message containing the student's information to add them back, ensuring a more reliable and user-friendly experience.
 
 ### \[Proposed\] Multiple Address Books for each Course
 
@@ -572,16 +640,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-1a. User edits the contact name.
+* 1a. User edits the contact name. 
+* 1b. User edits the Module Code associated with the contact. 
+* 1c. User edits the Tutorial Group Number associated with the contact. 
 
-1b. User edits the Module Code associated with the contact.
-
-1c. User edits the Tutorial Group Number associated with the contact.
-
-    Use case ends.
-
+  Use case ends.
 
 **Use case: UC02 - View Summary of Attendance Records**
+
+**Precondition**: User is on a course address book. 
 
 **MSS**
 
@@ -593,44 +660,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given ID is invalid.
-    * 2a1. TAvigator shows an error message.
+* 1a. User leaves the tutorial group ID blank.
+    * 1a1. TAvigator shows a summary of attendance records of all students in the course for the week specified.
 
       Use case ends.
 
-
-* 2b. User leaves the tutorial group ID blank.
-    * 2b1. TAvigator shows a summary of all attendance records for the week and the contact list of absentees.
+* 1b. User leaves the week blank.
+    * 1b1. TAvigator shows an error message.
 
       Use case ends.
 
+* 1c. User enters an invalid tutorial group ID.
+    * 1c1. TAvigator shows an error message.
 
-* 2c. User leaves the week blank.
-    * 2c1. TAvigator shows an error message.
+      Use case ends.
+
+* 1d. User enters a tutorial group with no students in it.
+    * 1d1. TAvigator shows a reminder that no students are in the tutorial group and shows no students.
 
       Use case ends.
 
 **Use case: UC03 - View List of Students**
 
+**Precondition**: User is on a course address book.
+
 **MSS**
 
 1.  User requests to view a list of students.
-2.  TAvigator shows a list of all students.
+2.  TAvigator shows a list of all students in the course.
 
     Use case ends.
-
-**Extensions**
-
-* 2a. The given ID is invalid.
-    * 2a1. TAvigator shows an error message.
-
-      Use case ends.
-
-
-* 2b. User leaves the tutorial group ID blank.
-    * 2b1. TAvigator shows a list of all students and their tutorial group ID.
-
-      Use case ends.
 
 **Use case: UC04 - Mark Student Attendance Separately**
 
@@ -745,6 +804,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC08 - Delete a Student**
+
+**MSS**
+
+1. User requests to list students.
+2. TAvigator shows a list of students.
+2. User requests to delete a specific student in the list by entering the index corresponding to their position in the list.
+3. TAvigator deletes the student.
+
+   Use case ends.
+
+
+**Extensions**
+
+* 2a. The list is empty.
+    
+    Use case ends.
+
+* 3b. User enters an invalid index.
+    * 3b1. TAvigator shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC09 - Delete Multiple Students**
+
+**Precondition**: User is on a course address book.
+
+**MSS**
+
+1. User requests to delete students and enters a tutorial group to delete.
+2. TAvigator deletes all students from the tutorial group in the course.
+
+   Use case ends.
+
+
+**Extensions**
+
+* 1a. User leaves the tutorial group blank.
+    * 1a1. TAvigator deletes all students in the course.
+      
+        Use case ends.
+
+* 1b. User enters an invalid tutorial group ID.
+    * 1b1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1c. User enters a tutorial group with no students in it.
+    * 1b1. TAvigator shows a reminder that no students are in the tutorial group and shows a list of all students in the course.
+
+      Use case ends.
 
 *{More to be added}*
 

@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
@@ -24,5 +23,5 @@ public abstract class ListCommand extends Command {
             + COMMAND_WORD + " attendance w/1 tg/G01";
 
     @Override
-    public abstract CommandResult execute(Model model) throws CommandException;
+    public abstract CommandResult execute(Model model);
 }
