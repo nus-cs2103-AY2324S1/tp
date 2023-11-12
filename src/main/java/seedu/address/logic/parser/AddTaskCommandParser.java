@@ -15,7 +15,11 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
     @Override
     public AddTaskCommand parse(String args) throws ParseException {
         Integer index = parseIndex(args, true);
-        String description = index == null ? args : args.replaceFirst(index.toString(), "");
+        String description = args;
+        if (index != null) {
+            int indexIndex = args.indexOf(index.toString());
+            description = args.substring(indexIndex + index.toString().length()).trim();
+        }
         if (!Task.isValidTask(description)) {
             throw new ParseException("Invalid description: "
                     + Task.MESSAGE_CONSTRAINTS + AddTaskCommand.getUsageInfo());
