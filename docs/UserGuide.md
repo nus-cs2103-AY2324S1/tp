@@ -573,10 +573,10 @@ Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
-<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="680"> </br></br>
+<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br></br>
 * `lookup c/T11` returns all students in class number T11<br>
 
-<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="680"> </br></br>
+<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br></br>
 
 [Back to Table of Contents](#table-of-contents)
 
