@@ -344,7 +344,7 @@ Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAM
 
 <br>
 
-> Below are some examples on how to use `add_event` command:
+> **Below are some examples on how to use `add_event` command:**
 >
 > * `add_event m/FumbleLog presentation d/2023-10-30`: Adds an event with name "FumbleLog presentation" and with date "2023-10-30".
 > * `add_event m/FumbleLog meeting d/2023-10-30 g/Team2`: Adds an event with name "FumbleLog meeting" , with date "2023-10-30", and assigns contact in group "Team2" to the event.
@@ -394,7 +394,7 @@ Format: `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TI
 
 <br>
 
-> Below are some examples on how to use `edit_event` command:
+> **Below are some examples on how to use `edit_event` command:**
 >
 > * `edit_event 1 m/FumbleLog meeting`: Edits the name of event at index 1 to "FumbleLog meeting".
 > * `edit_event 1 s/1500 e/1700`: Edits the start and end time to "1500" and "1700" respectively. If the event initially does not have a start and end time, the respective times will be added to the event.
@@ -431,21 +431,31 @@ Input: `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
 
 ### Deleting an event : `delete_event`
 
-Deletes a specified event from the FumbleLog.
+FumbleLog helps you to organise your event list better by allowing you to delete events that are in the past or no longer relevant.
 
 Format: `delete_event EVENT_INDEX`
 
-* Deletes the meeting at the specified `EVENT_INDEX`.
+**Acceptable values for each parameter:**
 
-Examples:
-* `delete_event 1`: Deletes the 1st event in the event list.
+| Parameter     | Format                                                                                                     | Example                          |
+|---------------|------------------------------------------------------------------------------------------------------------|----------------------------------|
+| `EVENT_INDEX` | A positive integer that is smaller than or equal to the number of events currently displayed in FumbleLog. | `1`                              |
 
-Acceptable values for each parameter:
-* `EVENT_INDEX`: The index position of the event in the displayed event list.
+<br>
 
-Expected output when the command succeeds:
+> **Below are some examples on how to use `add_event` command:**
+> * `delete_event 1`: Deletes the 1st event in the event list.
+> * * `find_all meeting` followed by `delete_event 1`: Deletes the 1st event in the results of the `find` command. 
+
+<br>
+
+**Notes on the `delete_event` command:**
+- The index refers to the index number shown in the displayed person list.
+
+**This should be the expected output when the command succeeds:**
 * Input: `delete_event 1`
-* Output: `Deleted Event: tP week 3 meeting; Date: 05 Oct 2023; Start Time: 15:00; End Time: 17:00; Groups involved: [Team1];`
+
+![EventDelete](images/Eventdelete.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
 
