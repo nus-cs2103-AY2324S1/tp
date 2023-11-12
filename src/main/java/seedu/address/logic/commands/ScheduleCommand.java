@@ -62,7 +62,7 @@ public class ScheduleCommand extends Command {
 
         if (!personToEdit.hasNullAppointment()) {
             return new CommandResult(CONFIRM_OVERRIDE_MESSAGE,
-                    false, false, true, personToEdit, toAdd);
+                     false, true, personToEdit, toAdd);
         }
 
         assert personToEdit.getAppointment() instanceof NullAppointment;
