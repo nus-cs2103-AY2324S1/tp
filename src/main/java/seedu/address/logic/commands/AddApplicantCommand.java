@@ -5,9 +5,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddApplicantCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Applicant;
 
@@ -35,6 +39,7 @@ public class AddApplicantCommand extends Command {
     public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book";
 
     private final Applicant toAdd;
+    private final Logger logger = LogsCenter.getLogger(AddApplicantCommandParser.class);
 
     /**
      * Creates an AddApplicantCommand to add the specified {@code Applicant}
@@ -51,6 +56,7 @@ public class AddApplicantCommand extends Command {
         requireNonNull(model);
 
         if (model.hasApplicant(toAdd)) {
+            logger.fine("Duplicate applicant detected: " + toAdd);
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 

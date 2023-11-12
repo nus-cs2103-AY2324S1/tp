@@ -28,6 +28,8 @@ Below is a summary of my contributions to the project.
       * Added new sections - field constraints and examples of fields.
   * Developer Guide:
     * Edited target user profile, user stories and use cases for the first draft.
+    * Wrote section for edit member/applicant.
+    * Drew Activity Diagrams and Sequence Diagrams for this section.
 * **Review/mentoring contributions**:
   * Helped team members with some of the problems they encountered with their code.
     * i.e. Helped a peer with `Add Task` function.
