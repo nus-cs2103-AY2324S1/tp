@@ -490,7 +490,7 @@ The reset command mechanism is facilitated by `ResetCommandParser` class which i
 `ResetCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
 
 `ResetCommandParser` implements the following operations:
-* `ResetCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`, 
+* `ResetCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
 and creates a new `ResetCommand` object with the parsed field.
 
 The `ResetCommand` object then communicates with the `Model` API by calling the following methods:
@@ -640,10 +640,10 @@ Given below is an example usage scenario for the command.
 
 **Step 1**: The user launches the application.
 
-**Step 2**: The user executes the `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` command in the CLI. 
+**Step 2**: The user executes the `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` command in the CLI.
 * `START_DATE` and `END_DATE` are inputs of format `yyyy-MM-dd`.
 
-**Step 3**: A leave period will be assigned to the employee specified with the employee ID input. 
+**Step 3**: A leave period will be assigned to the employee specified with the employee ID input.
 * The leave period is added as a list of `Leave` dates in the Employee's `leaveList`.
 
 #### Design considerations:
@@ -651,11 +651,11 @@ Given below is an example usage scenario for the command.
 **Aspect: Model-Employee Interaction:**
 
 * **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in AddLeaveCommand#execute().
-    * Pros: Maintain immutability within Employee and Model classes. 
+    * Pros: Maintain immutability within Employee and Model classes.
     * Cons: Potentially violates the Single Responsibility Principle.
 
 * **Alternative 2**: Create methods in model specifically to edit the `leaveList` attribute of the employee.
-    * Pros: More OOP, follows the Single Responsibility Principle by not having `AddLeaveCommand#execute()` perform the editing directly. 
+    * Pros: More OOP, follows the Single Responsibility Principle by not having `AddLeaveCommand#execute()` perform the editing directly.
     * Cons: Longer command execution, requires more parts to work together.
 
 
@@ -853,7 +853,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | intermediate user       | keep track of overtime hours of employees                                          | keep track of employee productivity and compensate them fairly (overtime pay)  |
 | `* *`    | intermediate user       | reset specific fields of all employees                                             | reset fields like overtime hours and leaves regularly (monthly/yearly)         |
 | `* *`    | intermediate user       | batch delete records                                                               | keep my database organised and clutter-free                                    |
-| `* *`    | long-time user          | private individuals’ employee details                                              | minimise the chance of someone else seeing them by accident and violating PDPA |
+| `* *`    | long-time user          | private individuals’ personal details                                              | minimise the chance of someone else seeing them by accident and violating PDPA |
 | `*`      | new user                | access a quick tutorial or guided tour                                             | learn how to use basic features of the application                             |
 | `*`      | forgetful beginner user | access a command summary                                                           | easily know which commands to use                                              |
 | `*`      | intermediate user       | create keyboard shortcuts for tasks                                                | save time on frequently performed tasks                                        |
@@ -962,8 +962,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case returns back to step 1.
 
 * 1b. No employee matches given keyword.
-    * 1b1. HouR shows an empty list. 
-  
+    * 1b1. HouR shows an empty list.
+
   Use case ends.
 
 **Use case: Sort employees**
@@ -1051,10 +1051,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed. 
-2. Should be able to hold up to 1000 employees without a noticeable sluggishness in performance for typical usage. 
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Should be able to hold up to 1000 employees without a noticeable sluggishness in performance for typical usage.
 3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse. 
+   should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The commands should be intuitive to use and easy to remember for the average user (i.e. no complex commands)
 5. The system should be usable by a novice who has never managed HR data before, without a steep learning curve.
 6. The product is required to handle the export of reports as text files, but not their printing.
@@ -1102,7 +1102,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The window closes.
 
 1. Shutdown using the `exit` command
-   
+
    1. Type `exit` in the command box and press Enter.<br>
       Expected: The window closes.
 
@@ -1135,13 +1135,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `find manager`<br>
       Expected: All employees with the word "manager" in their position are shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find notAManager`<br>
       Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find EID1234-5678`<br>
       Expected: Employee with employee ID "EID1234-5678" is shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find EID0000-0000`<br>
       Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
 
@@ -1154,22 +1154,22 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `find Alex`<br>
       Expected: Employee with name "Alex" is shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find abcdef`<br>
       Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find manager`<br>
       Expected: All employees with the word "manager" in their position are shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find notAManager`<br>
       Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
 
    1. Test case: `find EID1234-5678`<br>
       Expected: Employee with employee ID "EID1234-5678" is shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find EID0000-0000`<br>
       Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find`<br>
       Expected: Invalid command format error message is shown in the status bar.
 
@@ -1182,19 +1182,19 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `find abcdef`<br>
       Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find manager`<br>
       Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find notAManager`<br>
       Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find EID1234-5678`<br>
       Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
 
    1. Test case: `find EID0000-0000`<br>
       Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-   
+
    1. Test case: `find`<br>
       Expected: Invalid command format error message is shown in the status bar.
 
@@ -1206,10 +1206,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `report EID1234-5678`<br>
       Expected: The report of employee with employee ID "EID1234-5678" is shown in the status bar. The report is also downloaded as a text file in a directory called "reports" in the same directory as the jar file.
-   
+
    1. Test case: `report EID0000-0000`<br>
       Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
-   
+
    1. Test case: `report`<br>
       Expected: Invalid command format error message is shown in the status bar.
 
@@ -1219,10 +1219,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `report EID1234-5678`<br>
       Expected: The report of employee with employee ID "EID1234-5678" is shown in the status bar. The report is also downloaded as a text file in a directory called "reports" in the same directory as the jar file.
-   
+
    1. Test case: `report EID0000-0000`<br>
       Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
-   
+
    1. Test case: `report`<br>
       Expected: Invalid command format error message is shown in the status bar.
 
@@ -1232,10 +1232,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `report EID1234-5678`<br>
       Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
-   
+
    1. Test case: `report EID0000-0000`<br>
       Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
-   
+
    1. Test case: `report`<br>
       Expected: Invalid command format error message is shown in the status bar.
 
@@ -1274,7 +1274,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding leave while all employees are being shown
 
-   1. Prerequisites: List all employees using the `list` command. At least 1 employee is in the list. 
+   1. Prerequisites: List all employees using the `list` command. At least 1 employee is in the list.
    Employee with employee ID "EID1234-5678" is in the list, and has one leave date "2023-11-11" in his LeaveList.
 
    2. Test case: `addleave id/EID1234-5678 from/2023-12-04 to/2023-12-05`<br>
@@ -1282,16 +1282,16 @@ testers are expected to do more *exploratory* testing.
    Details of the employee's leave list shown in the result display.
 
    3. Test case: `addleave id/EID0000-0000 from/2023-12-04 to/2023-12-05`<br>
-   Expected: No employee leave is added (ID does not exist). Error details shown in the result display. 
+   Expected: No employee leave is added (ID does not exist). Error details shown in the result display.
 
    4. Test case: `addleave id/EID12345678 from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 from/2023-30-11 to/2023-30-11`<br>
-     Expected: No employee leave is added (incorrect field format). Error details shown in the result display. 
+     Expected: No employee leave is added (incorrect field format). Error details shown in the result display.
 
    5. Test case: `addleave id/ from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 from/ to/2023-12-05` or `addleave id/EID1234-5678 from/2023-12-04 to/`<br>
-     Expected: No employee leave is added (empty fields). Error details shown in the result display. 
+     Expected: No employee leave is added (empty fields). Error details shown in the result display.
 
    6. Test case: `addleave from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 to/2023-12-05` or `addleave id/EID1234-5678 from/2023-12-04`<br>
-     Expected: No employee leave is added (missing parameters). Error details shown in the result display. 
+     Expected: No employee leave is added (missing parameters). Error details shown in the result display.
    
    7. Test case: `addleave id/EID1234-5678 from/2023-11-11 to/2023-11-13`<br>
      Expected: No employee leave is added (leave date(s) already exists). Error details shown in the result display.
@@ -1301,8 +1301,8 @@ testers are expected to do more *exploratory* testing.
 
 2. Adding leave while only some employees are being shown 
 
-   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list. 
-     Employee with id "EID1234-5678" has leaves "2023-11-11" and "2023-11-12" and is not in displayed list. 
+   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+     Employee with id "EID1234-5678" has leaves "2023-11-11" and "2023-11-12" and is not in displayed list.
 
    2. Try the test cases in the previous section (Adding leave while all employees are being shown)
      Expected: Same as the previous section
@@ -1350,13 +1350,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing leave while all employees are being shown
 
-   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list. 
+   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
       Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02".
 
    1. Test case: `editleave id/EID1234-5678 old/2023-11-01 new/2023-11-03`<br>
-      Expected: The previous leave date "2023-11-01" of the employee with id "EID1234-5678" will be changed to "2023-11-03". 
+      Expected: The previous leave date "2023-11-01" of the employee with id "EID1234-5678" will be changed to "2023-11-03".
       Details of the edited employee shown in the result display.
-   
+
    1. Test case: `editleave id/EID0000-0000 old/2023-11-01 new/2023-11-03`<br>
       Expected: No employee leave is edited (no existing id). Error details shown in the result display.
 
@@ -1375,7 +1375,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `editleave id/EID1234-5678 old/2023-11-01 new/2023-11-02`<br>
       Expected: No employee leave is edited (new leave already exists). Error details shown in the result display.
 
-1. Editing leave while only some employees are being shown  
+1. Editing leave while only some employees are being shown
 
    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
       Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list.
@@ -1385,31 +1385,31 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing Employees on Leave on a specified date
 
-1. Listing employees on leave while all employees are being shown 
+1. Listing employees on leave while all employees are being shown
    1. Prerequisites: List all employees using the `list` command. At least one employee in the list.
         Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02". No employees on leave on "2023-11-11".
-   
+
    2. Test case: `listleave on/2023-11-01`<br>
      Expected: The employees on leave on the specified date are displayed in the employee list.
-     Details of the number of employees on leave on the specified date shown in the result display. 
+     Details of the number of employees on leave on the specified date shown in the result display.
 
    3. Test case: `listleave on/2023-11-11`<br>
       Expected: No employee displayed (no employees on leave on specified date).
       Details of the number of employees on leave on the specified date shown in the result display.
 
    4. Test case: `listleave on/11-11-2023`<br>
-     Expected: No employee displayed (incorrect field format). Error details shown in the result display. 
-   
+     Expected: No employee displayed (incorrect field format). Error details shown in the result display.
+
    5. Test case: `listleave on/ `<br>
-   Expected: No employee displayed (empty field). Error details shown in the result display. 
-   
+   Expected: No employee displayed (empty field). Error details shown in the result display.
+
    6. Test case: `listleave `<br>
      Expected: No employee displayed (missing parameters). Error details shown in the result display.
 
-2. Listing employees on leave while only some employees are being shown 
+2. Listing employees on leave while only some employees are being shown
 
    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
-      Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list. 
+      Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list.
 
    2. Try the test cases in the previous section (Listing employees on leave while all employees are being shown)
       Expected: Same as the previous section
@@ -1496,7 +1496,6 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `reset f/`<br>
        Expected: Resetting is not done (empty field). Error details shown in the result display.
-   
 
 1. Resetting field while only some employees are being shown
 
@@ -1515,7 +1514,7 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Efforts**
 
-This section documents the efforts that went into the development of this project, as well as the challenges faced. 
+This section documents the efforts that went into the development of this project, as well as the challenges faced.
 
 ### Difficulty Level
 
@@ -1537,35 +1536,51 @@ We faced the following challenges during the development of this project:
 
 * **Understanding the architecture of the project**
 
-   Initially, we had a hard time understanding the architecture of the project. We were not sure how the different components of the project interacted with each other, and why some classes, such as `ModelManager` were even necessary. However, as we added more modifications and features to the project, we were able to understand the architecture better.
+Initially, we had a hard time understanding the architecture of the project. We were not sure how the different components of the project interacted with each other, and why some classes, such as `ModelManager` were even necessary. However, as we added more modifications and features to the project, we were able to understand the architecture better.
 
 * **Forking workflow**
 
-   Initially, we started with the forking workflow for our project, which was extremely tedious and time-consuming, and led to a lot of merge conflicts. We had to spend a lot of time resolving merge conflicts, and this slowed down our development process. Also, it was difficult to contribute to each other's code, and even minor revisions required a long, inefficient process of syncing the fork, resolving merge conflicts, making the revision, creating a pull request, and merging it. We eventually switched to the branching workflow for v1.3, which was much more efficient and streamlined while maintaining our code quality.
+Initially, we started with the forking workflow for our project, which was extremely tedious and time-consuming, and led to a lot of merge conflicts. We had to spend a lot of time resolving merge conflicts, and this slowed down our development process. Also, it was difficult to contribute to each other's code, and even minor revisions required a long, inefficient process of syncing the fork, resolving merge conflicts, making the revision, creating a pull request, and merging it. We eventually switched to the branching workflow for v1.3, which was much more efficient and streamlined while maintaining our code quality.
 
 * **Renaming `person` to `employee`**
 
-   Since our app was focussed on HR management, we decided to rename the `person` class to `employee`. However, this was not as simple as it seemed. We had to rename the class, as well as all the methods and variables that were related to the `person` class, which was a tedious process. This introduced lots of often-mysterious bugs and errors in our code, which we had to spend a lot of time debugging. It also involved making changes to the test data and documentation, which was also a time-consuming process.
+Since our app was focussed on HR management, we decided to rename the `person` class to `employee`. However, this was not as simple as it seemed. We had to rename the class, as well as all the methods and variables that were related to the `person` class, which was a tedious process. This introduced lots of often-mysterious bugs and errors in our code, which we had to spend a lot of time debugging. It also involved making changes to the test data and documentation, which was also a time-consuming process.
 
 * **Adding and modifying fields in the `employee` class**
 
-   Adding and modifying fields in the `employee` class was a challenge because we had to ensure that the new fields were compatible with the existing code. We had to ensure that the new fields were properly initialised new `employee` constructors, and that they were properly handled in the model, logic, and storage classes. We also had to ensure that the new fields were properly handled in the parser and the UI. This was a challenge because we had to ensure that the new fields were properly handled in all the different components of the project.
+Adding and modifying fields in the `employee` class was a challenge because we had to ensure that the new fields were compatible with the existing code. We had to ensure that the new fields were properly initialised new `employee` constructors, and that they were properly handled in the model, logic, and storage classes. We also had to ensure that the new fields were properly handled in the parser and the UI. This was a challenge because we had to ensure that the new fields were properly handled in all the different components of the project.
 
 * **Storing reports**
 
-   For the `report` command, we had to store the reports in a separate folder. We had to figure out how to create a new folder and store the reports in it within the patterns and constraints of the existing storage classes. This was a challenge because we were not familiar with the storage classes, and we had to figure out how to store the reports in a way that was consistent with the existing storage classes.
+For the `report` command, we had to store the reports in a separate folder. We had to figure out how to create a new folder and store the reports in it within the patterns and constraints of the existing storage classes. This was a challenge because we were not familiar with the storage classes, and we had to figure out how to store the reports in a way that was consistent with the existing storage classes.
 
 * **Implementing the `sort` command**
 
-   For the `sort` command, after exploring and struggling with various approaches from creating separate list views to copying the list, we decided to go ahead with modifying the existing list. This involved adding methods at various layers of abstraction all the way down to the `UniqueEmployeeList` class, which implemented the actual sorting. This was a challenge as it was initially difficult to understand how the different components of the project interacted with each other at each layer of abstraction. This change also broke all methods that relied on index for employee selection by making their results unpredictable, and we had to go through these methods to change the index to the employee ID. This was a tedious process, and we had to spend a lot of time modifying methods such as `delete` to use the employee ID instead of index, and then debugging them.
+For the `sort` command, after exploring and struggling with various approaches from creating separate list views to copying the list, we decided to go ahead with modifying the existing list. This involved adding methods at various layers of abstraction all the way down to the `UniqueEmployeeList` class, which implemented the actual sorting. This was a challenge as it was initially difficult to understand how the different components of the project interacted with each other at each layer of abstraction. This change also broke all of the methods that relied on index for employee selection by making their results unpredictable, and we had to go through all of the methods to change the index to the employee ID. This was a tedious process, and we had to spend a lot of time modifying methods such as `delete` to use the employee ID instead of index, and then debugging them.
 
 * **Documentation**
 
-   Being new to writing user and developer guides or creating UML diagrams, we had to spend a significant amount of time looking at existing docs and learning to write our own. We also had to spend a lot of time ensuring that the documentation was consistent with the code and our implementation. This was a challenge because it required an in-depth understanding of the codebase, and so we had to defer most of the technical parts of our documentation towards the end of the project.
+Being new to writing user and developer guides or creating UML diagrams, we had to spend a significant amount of time looking at existing docs and learning to write our own. We also had to spend a lot of time ensuring that the documentation was consistent with the code and our implementation. This was a challenge because it required an in-depth understanding of the codebase, and so we had to defer most of the technical parts of our documentation towards the end of the project.
 
 ### Effort Required
+In the project, we invested a moderate level of effort to ensure the successful development and delivery of our product. Here are some of the different aspects of our team efforts:
+
+* **Group Effort**
+
+Collaborative discussions have been held weekly to brainstorm ideas, plan sprints, and address challenges. We had discussed and assigned roles to every team member such that we could diligently contribute our own skills and expertise, striking a balance between efficiency and thoroughness. We also try out best to help each other when we can, especially since we understand that not every teammate is able to deliver as much due to other commitments.
+
+* **Project Management**
+
+Code reviews and testing processes have been carried out meticulously to maintain code quality and identify potential issues early on. We also demonstrated a commitment to meeting project milestones and deadlines, always having mid-week reminders of the tasks we have to complete and always assigning an earlier internal deadline to give as leeway to check before the actual submission.
 
 ### Achievements of the Project
+This project has been a very invaluable experience where we got to have a taste of how actual software engineering projects were — exploring different types of workflows, different types of testing, etc. 
+
+One of the things that we are most proud of is the bettering of the UI. Though the change was not very extravagant, the change in colour scheme was a feat in itself since we honestly did not aim to care a lot about our UI. We also managed to add icons beside the employee attributes in each employee card which we believe made it more readable for the users.
+
+Another feature we are proud of is our `report` feature that allows our users to generate reports as txt files for each employee. While it might not contain a lot of information yet, we believe that it was a great starting point considering the time-constraint we had for this project and we plan to extend and further develop this feature, improving the experience for our users.
+
+Overall, we are proud of our project and we believe that we have done our best with all the constraints and challenges we faced. We are happy with the result and believe that our product will meet the needs of our target audience.
 
 ## Planned Enhancements
 
