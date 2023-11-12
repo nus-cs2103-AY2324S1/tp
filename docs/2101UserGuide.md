@@ -424,11 +424,11 @@ Action | Format, Examples
 **Add member to an event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`
 **Delete member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
 **Edit an enrolment** | `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editEnrolment m/1 e/1 h/0 r/Absent due to Covid`
-**List all members and all events** | `list`
 **View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
 **View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
 **Find member in list** | `findMember KEYWORD [MORE_KEYWORDS]` <br> e.g.`findMember alice`
 **Find event in list** | `findEvent KEYWORD [MORE_KEYWORDS]` <br> e.g.`findEvent party`
+**List all members and all events** | `list`
 **Redo** | `redo`
 **Undo** | `undo`
 **Help** | `help`
