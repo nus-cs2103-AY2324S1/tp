@@ -230,8 +230,17 @@ Here is an example command where we want to view the events in which the member 
 
 `viewMember 3`
 
-![viewMemberPreCommand](images/viewMemberPreCommand.png)
-![viewMemberPostCommand](images/viewMemberPostCommand.png)
+<figure>
+    <img src="images/viewMemberPreCommand.png"
+         alt="viewMember Pre Command">
+    <figcaption>Before executing the viewMember command</figcaption>
+</figure>
+<br>
+<figure>
+    <img src="images/viewMemberPostCommand.png"
+         alt="viewMember Post Command">
+    <figcaption>After executing the viewMember command</figcaption>
+</figure>
 
 <hr class="command-separator">
 
@@ -246,8 +255,17 @@ Here is an example command where we want to view the members that the event at i
 
 `viewEvent 1`
 
-![viewEventPreCommand](images/viewEventPreCommand.png)
-![viewEventPostCommand](images/viewEventPostCommand.png)
+<figure>
+    <img src="images/viewEventPreCommand.png"
+         alt="viewEvent Pre Command">
+    <figcaption>Before executing the viewEvent command</figcaption>
+</figure>
+<br>
+<figure>
+    <img src="images/viewEventPostCommand.png"
+         alt="viewEvent Post Command">
+    <figcaption>After executing the viewEvent command</figcaption>
+</figure>
 
 <div markdown="block" class="alert alert-primary">:bulb: </div>
 It is strongly recommended that you list all members and events using the `list` command first to ensure you have a 
