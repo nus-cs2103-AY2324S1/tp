@@ -65,6 +65,9 @@ The tags with a P-prefix [[P\#80](https://github.com/AY2324S1-CS2103T-W08-1/tp/p
     * Did cosmetic tweaks to existing documentation of features `help` and `edit` [[P\#67](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/67)] [[P\#138](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/138)] [[P\#145](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/145)]
   * Developer Guide:
     * Added implementation details of the Interview Management features such as `addi`, `editi`, and `deletei` [[P\#118](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/118)]
+    * Added implementation details of the Import CSV feature [[P\#228](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/228)]
+    * Added sequence diagram for `import` command [[P\#228](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/228)]
+    * Added activity diagram for `deletei` command [[P\#228](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/228)]
 
 <br>
 
