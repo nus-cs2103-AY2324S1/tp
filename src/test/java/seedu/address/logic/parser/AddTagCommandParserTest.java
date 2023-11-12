@@ -20,7 +20,7 @@ import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TagBuilder;
 
-public class AddTagParserTest {
+public class AddTagCommandParserTest {
     private AddTagCommandParser parser = new AddTagCommandParser();
 
     @Test

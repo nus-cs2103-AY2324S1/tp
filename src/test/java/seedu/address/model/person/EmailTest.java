@@ -85,4 +85,17 @@ public class EmailTest {
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email")));
     }
+
+    @Test
+    public void hashCodeMethod() {
+        Email email = new Email("valid.valid@email");
+
+        // same values
+        Email emailCopy = new Email("valid.valid@email");
+        assertTrue(email.hashCode() == emailCopy.hashCode());
+
+        // different values
+        Email otherEmail = new Email("other.valid@email");
+        assertFalse(email.hashCode() == otherEmail.hashCode());
+    }
 }
