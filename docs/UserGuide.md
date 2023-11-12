@@ -8,12 +8,12 @@ title: User Guide
 
 HouR is a **desktop app for managing employee records, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HouR can get your HR management tasks done faster than traditional GUI apps.
 
-If you are new here, visit our [quick start](#quick-start) guide to onboard onto HouR smoothly!
-
 <div style="page-break-after: always;"></div>
 
 ## Table of Contents
 
+- [Using this guide](#using-this-guide)
+- [Useful Notations and Glossary](#useful-notations-and-glossary)
 - [Quick Start](#quick-start)
 - [Navigating the GUI](#navigating-the-graphical-user-interface--gui-)
 - [Features](#features)
@@ -47,7 +47,38 @@ If you are new here, visit our [quick start](#quick-start) guide to onboard onto
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Using this guide
+
+* If you are new here, visit our [quick start](#quick-start) guide to onboard onto HouR smoothly!
+* If you are unsure of how to use HouR, the [Command Summary](#command-summary) is a good place to start. 
+* If you are a developer and want to help out, do take a look at our [Developer Guide](https://ay2324s1-cs2103t-w12-1.github.io/tp/DeveloperGuide.html).
+
+## Useful Notations and Glossary
+While exploring HouR's features with this user guide, do take note of these symbols used and what they represent.
+
+|        Symbol        | Meaning                                      |
+|:--------------------:|----------------------------------------------|
+| :information_source: | Important information                        |
+|    :exclamation:     | Warning or caution                           |
+|        :bulb:        | Additional information such as tips or notes |
+
+The following glossary table provides clarification on commonly-used terms as well as terminology that is possibly unknown to you.
+
+|      Symbol      | Meaning                                                                                                                                                                                                                                             |
+|:----------------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|       GUI        | GUI stands for Graphical User Interface and it represents the visual display of HouR that users can see when the application is run.                                                                                                                |
+|  GUI component   | A subsection of the GUI. For more information on specific GUI components, refer to this [section](#navigating-the-graphical-user-interface--gui-).                                                                                                  |
+|       CLI        | CLI stands for Command Line Interface and it represents a text-based user interface to interact with the application.                                                                                                                               |
+|     Command      | An input from the user that tells HouR to perform an action. View HouR's [command summary](#command-summary).                                                                                                                                       |
+|    Parameter     | Parameters are like fields in a form you are required to fill up. They are information needed to be passed together with the command so that it can be executed. More information regarding parameters can be found [here](#parameter-information). |
+|  Case-sensitive  | The casing of the alphabetic characters matters (e.g. “good” is different from “GOOD”).                                                                                                                                                             |
+| Case-insensitive | The casing of the alphabetic characters does not matter (e.g. “good” is taken to be equal to “GOOD”).                                                                                                                                               |
+
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -58,6 +89,14 @@ If you are new here, visit our [quick start](#quick-start) guide to onboard onto
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hour.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/ug-pics/Ui.png)
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution to Mac users:**
+Performing these instructions may result in non-deterministic behaviour of data loading in HouR. This was tested on multiple MacOS Systems: 
+
+* Right-click `hour.jar` > Open With > JavaLauncher.app 
+* First-time users may be prompted with a warning that the file was downloaded from the Internet. Simply click Open in the prompt to continue.
+
+</div>
 
 5. Type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -121,6 +160,8 @@ HouR comes with a GUI to allow for nice visual feedback for our users. Here is a
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+
+Below is an overview of HouR's features.
 
 - View list of commands: `help`
 - Add an employee: `add`
@@ -188,7 +229,7 @@ For Windows users, you can use keyboard shortcut **F1** to open up the help wind
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Note that if you are running HouR on another monitor, the help window defaults to the centre of the primary monitor.
+If you are running HouR on another monitor, the help window defaults to the centre of the primary monitor.
 </div>
 
 ### Clearing all entries : `clear`
@@ -207,7 +248,7 @@ Format: `exit`
 
 ## Employee Commands
 
-This section contains commands relating to the employee list and/or its employees.
+This section contains commands relating to the employee list and/or employees.
 
 ### Adding an employee: `add`
 
@@ -321,7 +362,7 @@ Examples:
 
 ## Employee Metrics Commands
 
-You can use the following commands to keep track of and gauge employee performance.
+You can use the following commands to keep track of employee metrics and gauge employee performance.
 
 ### Adding a leave period of an employee: `addleave`
 
@@ -333,11 +374,15 @@ Format: `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
 * `EMPLOYEE_ID` must follow the **EID format** (EID[4 digits]-[4 digits]).
 * `START_DATE` and `END_DATE` must be in the **YYYY-MM-DD** format.
 * `START_DATE` must not be after `END_DATE`.
-* Dates between `START_DATE` and `END_DATE` must not already exist in the leave list.
+* Dates between `START_DATE` and `END_DATE` inclusive must not already exist in the leave list.
 * The **total number of annual leaves** used cannot exceed the **maximum of 14** as per the [Singapore Ministry of Manpower's guidelines](https://www.mom.gov.sg/employment-practices/leave/annual-leave/eligibility-and-entitlement).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 If the current date falls within the leave period, the **leave status** of the employee will change from **"Present"** to **"On Leave"**.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The leave list displayed shows the leaves arranged in the order they were added, i.e. leave dates added later will be added to the end of the leave list.
 </div>
 
 Examples:
@@ -346,7 +391,7 @@ Examples:
 
 ![addleave success](images/ug-pics/addLeaveSuccess.png)
 
-* `addleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
+* `addleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28.
 
 ![addleave failure 1](images/ug-pics/addLeaveFailure1.png)
 
@@ -364,8 +409,8 @@ Format: `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE`
 * `EMPLOYEE_ID` must follow the **EID format** (EID[4 digits]-[4 digits]).
 * `START_DATE` and `END_DATE` must be in the **YYYY-MM-DD** format.
 * `START_DATE` must not be after `END_DATE`.
-* There should be **at least one existing leave taken** by the employee that falls within the period between `START_DATE` and `END_DATE`.
-* If the employee does not have any leaves taken that fall anytime during the period between `START_DATE`and `END_DATE`,
+* There should be **at least one existing leave taken** by the employee that falls within the period between `START_DATE` and `END_DATE` inclusive.
+* If the employee does not have any leaves taken that fall anytime during the period between `START_DATE`and `END_DATE` inclusive,
   the command will output an error and will not change anything.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -378,7 +423,7 @@ Examples:
 
 ![deleteleave success](images/ug-pics/deleteLeaveSuccess.png)
 
-* `deleteleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28, which is impossible.
+* `deleteleave id/EID1234-5678 from/2023-12-31 to/2023-12-28` is invalid because the start date 2023-12-31 is after the end date 2023-12-28.
 
 ![deleteleave failure 1](images/ug-pics/deleteLeaveFailure1.png)
 
@@ -410,7 +455,7 @@ Conversely, if **NEW_DATE** is the current date, the **leave status** of the emp
 
 Examples:
 * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28` edits the leave on 26 December 2023 to 28 December 2023
-  for employee with id EID1234-5678.
+  for employee with id EID1234-5678. The old leave date is replaced by the new leave date in the leave list.
 
 ![editleave success](images/ug-pics/editLeaveSuccess.png)
 
@@ -461,7 +506,7 @@ Examples:
 ![addremark_failure](images/ug-pics/addRemarkFailure.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To view the entire list of remarks of an employee use the **report** command with their employee id.
+To view the entire list of remarks of an employee, use the **report** command with the respective employee id.
 </div>
 
 ### Deleting a remark of an employee : `deleteremark`
@@ -513,7 +558,7 @@ Examples:
 ![overtime failure 2](images/ug-pics/overtimeFailure2.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To view the total number of overtime hours and overtime pay of an employee use the **report** command with their employee id.
+To view the total number of overtime hours and overtime pay of an employee, use the **report** command with the respective employee id.
 </div>
 
 ### Generating a report : `report`
@@ -579,7 +624,7 @@ HouR data are saved in the hard disk automatically after any command that change
 
 HouR data are saved automatically as a JSON file `[JAR file location]/data/hour.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Warning to all users:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 DO NOT modify data directly as it might result in the malfunction of the application.If your changes to the data file makes its format invalid, HouR will discard all data and start with an empty data file at the next run. We recommend that users download a backup of the file before editing it.
 </div>
 
@@ -657,7 +702,7 @@ number of leaves remaining = 14 - number of leaves used
 
 **Q**: Can I reset fields for specific employees rather than all employees?<br>
 **A**: Unfortunately, HouR only allows fields like leaves taken and overtime hours worked to be reset for all employees using the reset command. 
-If you would like to reset the number of leaves or overtime hours for a specific employee, you can follow the steps below.
+If you would like to reset the number of leaves or overtime hours for **a specific employee**, you can follow the steps below.
 1. Resetting the number of leaves
    1. View the leave dates taken by the specified employee by adding a “dummy” leave, before deleting the added “dummy” leave. 
    2. From the list of leaves taken by the employee, identify the **earliest** and **latest** leave date taken. 
