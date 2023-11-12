@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.interval.Interval;
+import seedu.address.model.person.exceptions.ClashingScheduleException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -69,6 +70,9 @@ public class UniquePersonList implements Iterable<Person> {
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
         }
+        if (checkSameDate(toAdd)) {
+            throw new ClashingScheduleException();
+        }
         internalList.add(toAdd);
     }
 
@@ -77,7 +81,7 @@ public class UniquePersonList implements Iterable<Person> {
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson, boolean isEditingSchedule) {
         requireAllNonNull(target, editedPerson);
 
         int index = internalList.indexOf(target);
@@ -87,6 +91,10 @@ public class UniquePersonList implements Iterable<Person> {
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
+        }
+
+        if (isEditingSchedule && checkSameDate(editedPerson)) {
+            throw new ClashingScheduleException();
         }
 
         internalList.set(index, editedPerson);

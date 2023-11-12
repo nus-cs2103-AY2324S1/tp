@@ -1,0 +1,91 @@
+@startuml
+!include style.puml
+skinparam noteTextAlignment left
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "parser:FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "predicate:NameContainsKeywordPredicate" as NameContainsKeywordPredicate LOGIC_COLOR
+participant "subject:SubjectContainsKeywordPredicate" as SubjectContainsKeywordPredicate LOGIC_COLOR
+participant "nameSubject:NameSubjectPredicate" as NameSubjectPredicate LOGIC_COLOR
+participant "command:FindCommand" as FindCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+
+end box
+[-> LogicManager : execute("find n/Alex sb/Maths")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find n/Alex sb/Maths")
+activate AddressBookParser
+
+create FindCommandParser
+AddressBookParser -> FindCommandParser
+activate FindCommandParser
+
+FindCommandParser --> AddressBookParser : parser
+deactivate FindCommandParser
+
+AddressBookParser -> FindCommandParser : parse(" n/Alex sb/Maths")
+activate FindCommandParser
+
+create NameContainsKeywordPredicate
+FindCommandParser -> NameContainsKeywordPredicate
+activate NameContainsKeywordPredicate
+
+NameContainsKeywordPredicate --> FindCommandParser : predicate
+deactivate NameContainsKeywordPredicate
+
+create SubjectContainsKeywordPredicate
+FindCommandParser -> SubjectContainsKeywordPredicate
+activate SubjectContainsKeywordPredicate
+
+SubjectContainsKeywordPredicate --> FindCommandParser : subject
+deactivate SubjectContainsKeywordPredicate
+
+create FindCommand
+FindCommandParser --> FindCommand : FindCommand(predicate, subject)
+activate FindCommand
+
+FindCommand --> FindCommandParser : command
+deactivate FindCommand
+
+FindCommandParser --> AddressBookParser : command
+deactivate FindCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+destroy FindCommandParser
+
+LogicManager -> FindCommand : execute(model)
+activate FindCommand
+
+create NameSubjectPredicate
+FindCommand -> NameSubjectPredicate
+activate NameSubjectPredicate
+
+NameSubjectPredicate --> FindCommand : nameSubject
+deactivate NameSubjectPredicate
+
+FindCommand -> Model : updateFilteredPersonList(nameSubject)
+activate Model
+deactivate Model
+
+create CommandResult
+FindCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand
+deactivate CommandResult
+
+FindCommand --> LogicManager: result
+
+[<--LogicManager
+destroy FindCommand
+deactivate LogicManager
+@enduml

@@ -8,12 +8,17 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * TimeSlot Class
  */
 public class TimeSlot {
+    private static final Logger logger = LogsCenter.getLogger(TimeSlot.class);
     private Date start;
     private Date end;
 
@@ -44,8 +49,12 @@ public class TimeSlot {
     public static List<TimeSlot> parseIntervals(List<String> timeSlots) throws ParseException {
         List<TimeSlot> timeSlotObjects = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Pattern timePattern = Pattern.compile("\\d{2}:\\d{2}");
         for (String timeSlot : timeSlots) {
+            assert timeSlot.charAt(6) == '-';
             String[] times = timeSlot.split(" - ");
+            assert timePattern.matcher(times[0]).matches();
+            assert timePattern.matcher(times[1]).matches();
             Date start = dateFormat.parse(times[0]);
             Date end = dateFormat.parse(times[1]);
             timeSlotObjects.add(new TimeSlot(start, end));
@@ -92,12 +101,14 @@ public class TimeSlot {
      */
     public static String printResults(List<TimeSlot> timeslots) {
         if (timeslots.size() == 0) {
+            logger.info("[TimeSlot.printResults]: No timeslots are found");
             return "There are no available timeslots.";
         }
 
         String result = "";
 
         for (TimeSlot timeslot : timeslots) {
+            logger.info("[TimeSlot.printResults]: Timeslots found");
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
             String startTime = timeFormat.format(timeslot.getStart());
             String endTime = timeFormat.format(timeslot.getEnd());

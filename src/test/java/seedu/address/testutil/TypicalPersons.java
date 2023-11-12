@@ -54,8 +54,8 @@ public class TypicalPersons {
             .withEmail("heinz@example.com").withAddress("wall street")
             .withSubject("Biology")
             .withDay("Thu")
-            .withBegin("1000")
-            .withEnd("1200")
+            .withBegin("1800")
+            .withEnd("2000")
             .withPayRate("25.00")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -96,16 +96,16 @@ public class TypicalPersons {
             .withEmail("stefan@example.com").withAddress("little india")
             .withSubject("Maths")
             .withDay("Mon")
-            .withBegin("0800")
-            .withEnd("1000")
+            .withBegin("1600")
+            .withEnd("1800")
             .withPayRate("10.00")
             .build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withSubject("English")
             .withDay("Tue")
-            .withBegin("0900")
-            .withEnd("1100")
+            .withBegin("1600")
+            .withEnd("1800")
             .withPayRate("60.00")
             .build();
 

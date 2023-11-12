@@ -42,6 +42,7 @@ public class Lesson {
      * @param original
      */
     public Lesson(Lesson original) {
+        requireNonNull(original);
         this.day = original.day;
         this.begin = original.begin;
         this.end = original.end;

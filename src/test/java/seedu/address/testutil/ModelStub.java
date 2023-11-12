@@ -127,7 +127,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson, boolean isEditingSchedule) {
         throw new AssertionError("This method should not be called.");
     }
 

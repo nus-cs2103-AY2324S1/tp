@@ -1,27 +1,12 @@
 package seedu.address.model.interval;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
-import java.time.DayOfWeek;
-import java.time.format.TextStyle;
-import java.util.Locale;
-
 import seedu.address.model.person.Day;
 
 /**
  * Represents the day in the interval
  * Guarantees: immutable; is valid as declared in {@link #isValidDay(String)}
  */
-public class IntervalDay {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Days should be written using their full names or their first three letters, and it should not be blank";
-
-    public static final String VALIDATION_REGEX =
-            "(?i)^(Mon|Monday|Tue|Tuesday|Wed|Wednesday|Thu|Thursday|Fri|Friday|Sat|Saturday|Sun|Sunday)$";
-
-    public final DayOfWeek value;
-    public final String stringValue;
+public class IntervalDay extends Day {
 
     /**
      * Constructs a {@code Day}.
@@ -29,10 +14,7 @@ public class IntervalDay {
      * @param day A valid day.
      */
     public IntervalDay(String day) {
-        requireNonNull(day);
-        checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
-        value = Day.parse(day);
-        stringValue = value.getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+        super(day);
     }
 
     /**
@@ -82,9 +64,11 @@ public class IntervalDay {
         return test.matches(VALIDATION_REGEX);
     }
 
-    @Override
-    public String toString() {
-        return stringValue;
+    /**
+     * @return a defensive copy of IntervalDay
+     */
+    public IntervalDay copy() {
+        return new IntervalDay(this.stringValue);
     }
 
     @Override
@@ -92,10 +76,5 @@ public class IntervalDay {
         return other == this // short circuit if same object
                 || (other instanceof seedu.address.model.interval.IntervalDay // instanceof handles nulls
                 && value.equals(((seedu.address.model.interval.IntervalDay) other).value)); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
     }
 }
