@@ -643,8 +643,10 @@ Some Mac users have encountered issues when attempting to launch BandConnect++. 
 
 ## Glossary
 
-| Term   | Definition                                                                                                                                                                                                                                                                      |
-|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| CLI    | Command Line Interface (CLI) is a text-based user interface that allows users to interact with a computer program by typing in commands through a keyboard. <br/> Since a mouse is not needed for CLI, it is often **a more efficient interaction method for fast typists.**    |
+| Term | Definition                                                                                                                                                                                                                                                                   |
+|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CLI  | Command Line Interface (CLI) is a text-based user interface that allows users to interact with a computer program by typing in commands through a keyboard. <br/> Since a mouse is not needed for CLI, it is often **a more efficient interaction method for fast typists.** |
+| GUI  | GUI is a user interface that allows users to interact with the application using graphical elements like text fields, buttons, and menus.                                                                                                                                    |
+| Java | Java is the primary programming language used to develop and use **_BandConnect++_**. Installation of Java is required to successfully run the application.                                                                                                                  |
 
 [Back To ToC](#table-of-contents)
