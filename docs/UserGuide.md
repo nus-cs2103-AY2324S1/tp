@@ -171,7 +171,7 @@ Yay! Now it's time to get started with TutorConnect!
 
 ### Adding your first tutor
 
-![add-t](images/tutorial/add-t.png)
+<img src="images/tutorial/add-t.png" height="400px">
 
 Let's say you have a tutor named **John Doe**. He has provided you with his phone number: **9123 4567** and his 
 email address: **johndoe@example.com**.
@@ -185,7 +185,7 @@ Here is how you would use the [**add-t**](#adding-a-tutor-add-t) command to add 
 
 ### Adding your first schedule
 
-![add-s](images/tutorial/add-s.png)
+<img src="images/tutorial/add-s.png" height="400px">
 
 Now that your tutors are in TutorConnect, it's time to start scheduling classes for them!
 
@@ -200,9 +200,11 @@ Here is how to use the [**add-s**](#adding-a-schedule-add-s) command to assign t
 3. Hit enter
 4. Tada! John Doe now has a class scheduled on **1 October 2023** from **9AM to 11AM**
 
+<div style="page-break-after: always;"></div>
+
 ### Marking your schedule as completed
 
-![mark](images/tutorial/mark.png)
+<img src="images/tutorial/mark.png" height="400px">
 
 Now that class is over, it is time to mark the schedule as completed!
 
@@ -514,7 +516,7 @@ Wow! The new schedule for Bernice Yu has now been added to the list of schedules
 
 <div markdown="span" class="alert alert-info">
 
-**:bulb: Position of new schedule**<br>
+**:information_source: Position of new schedule**<br>
 
 Too many schedules? Don't worry! Upcoming and past schedules are displayed as separate lists. Schedules are also sorted 
 in order of closest to current date.
@@ -654,7 +656,7 @@ scenarios:
 
 <div markdown="block" class="alert alert-info">
 
-**:bulb: Optional inputs**<br>
+**:information_source: Optional inputs**<br>
 
 `TUTOR_INDEX` and `m/` are optional fields. You don't need to include them. If you do, make sure that the 
 input is valid!
