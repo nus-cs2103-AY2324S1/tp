@@ -263,7 +263,7 @@ The member at the specified index will have his/her specified field(s) edited.
 
 <h5>Format</h5>
 
-`editmember MEMBER_INDEX [/name MEMBER_NAME] [/phone PHONE_NUMBER] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...`
+`editmember MEMBER_INDEX [/name MEMBER_NAME] [/phone PHONE_NUMBER] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...`<br/>
 The alias for this command is `editm`.
 
 <div markdown="block" class="alert alert-primary">
@@ -356,7 +356,7 @@ will be based on the current **shown** list. If `MEMBER_INDEX` is negative or 0,
 
 <h5>Example of usage</h5>
 
-`cpm 1`
+`cpm 4`
 
 This copies the details of the member at index 1 to the clipboard.
 
@@ -526,8 +526,7 @@ You may check out the command [here](#423-viewing-applicants-viewapplicants-or-v
 #### 4.2.3 Viewing applicants: `viewapplicants` or `viewa`
 
 Generates a list of all existing applicant(s). An example of where you might want to use this command is if
-you want to go back to viewing all members after a search.
-with [`findapplicant`](#422-finding-applicants-findapplicant-or-finda).
+you want to go back to viewing all members after a search with [`findapplicant`](#422-finding-applicants-findapplicant-or-finda).
 
 <h5>Format</h5>
 
@@ -577,14 +576,14 @@ The `PHONE_NUMBER` will have to be **unique**, or it will be flagged by the syst
 
 <h5>Example of usage</h5>
 
-1. `edita 1 /name Alfred /interview 07/01/2003 1500`
+1. `edita 2 /name Alfred /interview 7/1/2023 1500`
 
     This edits the particulars of the applicant at `APPLICANT_INDEX` 1 in the applicant list. The applicant's name is changed to `Alfred`,
 and the interview time has been set to `7 January 2023 3:00pm`.
 
     ![edit_applicant](images/editApplicant.png)
 
-2. `edita 1 /name Alfred /interview cancel`
+2. `edita 2 /name Alfred /interview cancel`
 
     This edits the particulars of the applicant at `APPLICANT_INDEX` 1 in the applicant list. The applicant's name is changed to `Alfred`,
 and the interview has been cancelled and removed.
