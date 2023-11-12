@@ -353,6 +353,53 @@ Step 4. From `MainWindow`, `handleSave()` handler method is called which calls `
 
 ![HandleSaveSequenceDiagram.png](images/HandleSaveSequenceDiagram.png)
 
+### List feature
+
+#### Implementation
+
+The list feature allows users to filter through the address book. Note that internally, `find` and `list` are considered the same command. 
+For class naming purposes, `ListCommand` displays all individuals, while `FindCommand` parses a search expression. 
+This naming oddity is due to historical reasons; currently, the user triggers `ListCommand` with `find` (no search expression), and triggers `FindCommand` with `list Tom`. 
+
+In this section, we focus only on `FindCommand`, which is strictly the more complex of the two. Particularly important classes are as follows:
+
+* `FindCommand` — The core component responsible for applying the filter to the address book.
+* `Model` — An object representing all the fosterers in the address book. Required for `FindCommand` to pass a `Predicate` to, to begin filtering.
+* `SearchPredicate` — `Predicate` wrapper around other search objects, to be passed to the `Model`.
+* `FindCommandParser` and `FindCommandArgumentParser` — Parse user arguments after the `find` keyword. `FindCommandParser` adheres to the same method convention as other `Parsers` for other commands, while calling `FindCommandArgumentParser` to turn the user argument into a `SearchPredicate`.
+
+The following class diagram shows all classes involved:
+
+CLASS DIAGRAM GOES HERE
+
+To illustrate how everything works together, we trace the flow of execution as the user searches for `Tom / Sam`. Details involving `MainWindow` and `LogicManager` are ignored, especially since they are common across all commands. 
+
+Step 1. The user enters `list Tom/Sam`. `MainWindow` calls `LogicManager`, which calls `AddressBookParser`, and in turn `FindCommandParser`, which handles the resulting String.
+
+Step 2. `FindCommandParser` calls `FindCommandArgumentParser`, to turn the string into a `SearchPredicate` containing a `SearchMatcher`.
+
+Step 3. `FindCommandParser` uses the `SearchPredicate` to initialize a `FindCommand`, and returns it to `AddressBookParser`, which in turn returns to `LogicManager`.
+
+Step 4. `LogicManager` calls the `execute` function of the command it received. In this case, it received `FindCommand`. It passes a `Model` to the execute function as well.
+
+Step 5. `FindCommand` calls `updateFilteredPersonList` of the `Model`, which refreshes the currently displayed list of fosterers.
+
+Step 6. The `list` command stops here, and execution is returned to the `LogicManager`, and then `MainWindow`. The `MainWindow` shows text feedback, together with the updated list of fosterers.
+
+![FindCommandSequenceDiagram.png](images/FindCommandSequenceDiagram.png)
+
+We now focus on more specific sections. 
+
+#### Design Considerations
+
+* Expressiveness — The search is required to be sufficiently expressive to handle common everyday tasks with efficient, singular commands. This includes brackets.
+* Typing Flow — Where possible, search expressions should support being written from left to right, without having to use the cursor, arrow keys or backspace key to backtrack or rewrite. This is the primary reason the search has two `AND` symbols of different precedences.
+* Intuitiveness — Search expressions use symbols `&` and `/`, which are intuitive for the target user.
+* Conciseness — Search expressions are as short as possible. This is the primary reason for not including field-specific searches, as that would increase the amount of text users have to type, often for minimal benefit. 
+* Flexibility — Where possible, search expressions are allowed to be flexible. This includes automatically closing brackets and allowing any number of whitespaces (including none) between expression terms.
+
+Note: The `Range` return value from `SearchMatcher` is kept for potential future work, such as matches that avoid overlaps, or matches that must adhere to a certain order. Current functionality does not take advantage of `Range`. 
+
 ### Delete feature
 
 #### Implementation
