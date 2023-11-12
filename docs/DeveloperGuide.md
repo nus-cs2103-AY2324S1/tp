@@ -455,7 +455,7 @@ The `list-freetime DATE` command is facilitated by the `ListFreeTimeCommand`, `L
 9. The `ListFreeTimeCommand` construct `CommandResult` containing the free times on the given day, and returns it to `LogicManager`.
 10. The GUI will be updated automatically by when the list changes.
 
-#### Design consideration
+#### Design considerations
 Aspect: How the command finds free times:
 * **Alternative 1 (current choice):** implement a method in the `ModelManager` class
     * Pros:
@@ -493,7 +493,7 @@ and returns it `LogicManager`.
 The following sequence shows how the `list-i-today` command works:
 ![ListInterviewsTodaySequenceDiagram](images/ListInterviewsTodaySequenceDiagram.png)
 
-#### Design consideration
+#### Design considerations
 Aspect: Command format
 * **Alternative 1 (current choice):** `list-i-today`
   * Pros:
@@ -541,7 +541,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 6. `Model#updateFilteredInterviewList` will be called with the given predicate, thus updating the internal `FilteredList` of interviews to show only those that are done, or those that are not done. The `CommandResult` containing the success message will be returned to `LogicManager`.
 7. The GUI will be updated automatically by when the list changes.
 
-#### Design consideration
+#### Design considerations
 Aspect: How the command is implemented
 * **Alternative 1 (current choice):** Use the existing open-closed principle of AB3 to add these new commands
     * Pros:
@@ -579,7 +579,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![RateInterviewActivity](images/RateInterviewActivityDiagram.png)
 
-#### Design consideration
+#### Design considerations
 * **Alternative 1 (current choice):** Stricter rating value with specific format
     * Pros: 
       * Offer simplicity in terms of usage as the users does not have to come out with a rating system.
@@ -612,7 +612,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 7. `Model#sortInterviewList(Comparator<Interview> comparator)` will call the `UniqueInterviewList#sort(Comparator<Interview> comparator)`, which will call the built-in `FXCollections#sort(Comparator<T> comparator)` method, which will then sort the internal list of interviews by either rating or timing. Note that `FXCollections#sort(Comparator<T> comparator)` is used since the list of interviews is implemented as an `ObservableList`
 8. The GUI will be updated automatically by when the list changes.
 
-#### Design consideration
+#### Design considerations
 Aspect: How the sort command works
 * **Alternative 1 (current choice):** Implement the sort method in the `ModelManager`, `AddressBook`, and the `UniqueInterviewList` class
     * Pros:
@@ -760,6 +760,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. InterviewHub shows an error message.
 
       Use case resumes at step 1.
+
 ---
 
 **Use case: UC07 Add a new interview**
@@ -786,6 +787,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. InterviewHub shows an error message.
 
       Use case resumes at step 1.
+
 ---
 
 **Use case: UC08 Delete an applicant**
@@ -1058,12 +1060,14 @@ that have many years of programming experience).
 * **Mainstream OS**: Windows, Linux, Unix, OS-X/MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Applicant**: The applicant applying to a particular job role.
-* **Hiring manager**: The manager interviewing the applicant.
-This manager is familiar with the technical aspects of the role. Also called engineering hiring manager.
+* **Engineering Hiring manager**: The manager interviewing the applicant.
+This manager is familiar with the technical aspects of the role.
 * **MSS**: Main Success Scenario. It describes the most straightforward
 interaction in a use case where nothing goes wrong.
 * **Extensions**: In a use case, an extension describes an alternative flow of events
 that are different from the MSS.
+* **CLI**: Command Line Interface. It is text-based interface where users can input commands that interacts with the
+computer program.
 
 --------------------------------------------------------------------------------------------------------------------
 

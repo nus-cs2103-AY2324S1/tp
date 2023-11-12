@@ -37,9 +37,8 @@ public class TimeParser {
             "d/M hh'.'mma",
             "d/M ha"
             },
-            // correct format but string is missing the time (formatID == 3)
+            // correct format but string is missing the time (formatID == 2)
             {
-            "E",
             "y-MM-dd",
             "d/M/yy",
             "d/M/yyyy",
