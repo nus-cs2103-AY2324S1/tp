@@ -385,7 +385,6 @@ The following sequence diagram shows how the `Event` operation works:
 
 User should see the UI as shown below after executing the aforementioned command [It is assumed that the first candidate in the list is Alex Yeoh].
 
-![Event](images/event.png)
 
 ![EventWindow](images/eventwindow.png)
 
