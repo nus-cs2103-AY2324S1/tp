@@ -22,7 +22,8 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Complete user guide for deleting data.
-        * Added a new section each on the sort and export features.
+        * Add a new section each on the sort and export features.
+        * Execute a last quality check on content.
     * Developer Guide:
         * Added all use cases.
         * Added activity diagrams and sequence diagrams for the sort and export features.
