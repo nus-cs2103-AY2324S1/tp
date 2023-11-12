@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithIll
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,13 +24,24 @@ public class FindIllnessCommandTest {
 
     @Test
     public void equals() {
+        List<String> firstPredicateKeywordList = Collections.singletonList("first");
+        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        List<String> firstPredicateKeywordListUpperCase = Collections.singletonList("FIRST");
+        List<String> firstPredicateKeywordListMixedCase = Collections.singletonList("FiRsT");
+
         IllnessContainsKeywordsPredicate firstPredicate =
-                new IllnessContainsKeywordsPredicate(Collections.singletonList("fever"));
+                new IllnessContainsKeywordsPredicate(firstPredicateKeywordList);
         IllnessContainsKeywordsPredicate secondPredicate =
-                new IllnessContainsKeywordsPredicate(Collections.singletonList("headache"));
+                new IllnessContainsKeywordsPredicate(secondPredicateKeywordList);
+        IllnessContainsKeywordsPredicate firstPredicateUpperCase =
+                new IllnessContainsKeywordsPredicate(firstPredicateKeywordListUpperCase);
+        IllnessContainsKeywordsPredicate firstPredicateMixedCase =
+                new IllnessContainsKeywordsPredicate(firstPredicateKeywordListMixedCase);
 
         FindIllnessCommand findIllnessFirstCommand = new FindIllnessCommand(firstPredicate);
         FindIllnessCommand findIllnessSecondCommand = new FindIllnessCommand(secondPredicate);
+        FindIllnessCommand findIllnessFirstCommandUpperCasePredicate = new FindIllnessCommand(firstPredicateUpperCase);
+        FindIllnessCommand findIllnessFirstCommandMixedCasePredicate = new FindIllnessCommand(firstPredicateMixedCase);
 
         // same object -> returns true
         assertTrue(findIllnessFirstCommand.equals(findIllnessFirstCommand));
@@ -44,8 +56,14 @@ public class FindIllnessCommandTest {
         // null -> returns false
         assertFalse(findIllnessFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different predicate -> returns false
         assertFalse(findIllnessFirstCommand.equals(findIllnessSecondCommand));
+
+        // predicate with same keywords but one upper case and another lower case -> returns true
+        assertTrue(findIllnessFirstCommand.equals(findIllnessFirstCommandUpperCasePredicate));
+
+        // predicate with same keywords but one mixed case and another lower case -> returns true
+        assertTrue(findIllnessFirstCommand.equals(findIllnessFirstCommandMixedCasePredicate));
     }
 
     @Test
@@ -59,6 +77,15 @@ public class FindIllnessCommandTest {
     }
 
     @Test
+    public void execute_singleKeyword_singleIllnessFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        IllnessContainsKeywordsPredicate predicate = preparePredicate("FEVER");
+        FindIllnessCommand command = new FindIllnessCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_multipleKeywords_multipleIllnessFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         IllnessContainsKeywordsPredicate predicate = preparePredicate("FEVER HEADACHE APPENDICITIS");
@@ -67,6 +94,25 @@ public class FindIllnessCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void execute_partialKeyword_singleIllnessFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        // Note: the keyword 'fev' should still identify someone with 'fever'
+        IllnessContainsKeywordsPredicate predicate = preparePredicate("fev");
+        FindIllnessCommand command = new FindIllnessCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_wrongKeyword_noIllnessFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        // Note: typing the keyword 'FEVAR' instead of 'FEVER' will yield no result
+        IllnessContainsKeywordsPredicate predicate = preparePredicate("FEVAR");
+        FindIllnessCommand command = new FindIllnessCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
 
     private IllnessContainsKeywordsPredicate preparePredicate(String userInput) {
         return new IllnessContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
