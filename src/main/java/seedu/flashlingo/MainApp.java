@@ -1,3 +1,4 @@
+//@@author
 package seedu.flashlingo;
 
 import java.io.IOException;
@@ -35,9 +36,7 @@ import seedu.flashlingo.ui.UiManager;
  * Runs the application.
  */
 public class MainApp extends Application {
-
     public static final Version VERSION = new Version(0, 2, 2, true);
-
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
@@ -58,6 +57,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         FlashlingoStorage flashlingoStorage = new JsonFlashlingoStorage(userPrefs.getFlashlingoFilePath());
+
         storage = new StorageManager(flashlingoStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
