@@ -702,7 +702,7 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Design considerations:
 
-**Aspect: Model-Person Interaction:**
+**Aspect: Model-Employee Interaction:**
 
 * **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in AddLeaveCommand#execute().
     * Pros: Maintain immutability within Employee and Model classes.
@@ -1242,9 +1242,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Sorting a list
 
-1. Sorting the list of employees while all persons are being shown
+1. Sorting the list of employees while all employees are being shown
 
-   1. Prerequisites: List all persons using the `list` command. At least 1 employee is in the list.
+   1. Prerequisites: List all employees using the `list` command. At least 1 employee is in the list.
 
    2. Test case: `sort f/salary in/asc`<br>
    Expected: Employees will be sorted based on their salaries in ascending order. 
@@ -1266,7 +1266,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
 
-   2. Try the test cases in the previous section (Adding leave while all employees are being shown)
+   2. Try the test cases in the previous section (Sorting the list of employees while all employees are being shown)
       Expected: Same as the previous section
 
 
@@ -1576,7 +1576,8 @@ Problem:
 * Users have to use report command to display employee remarks in message box.
 
 Solution:
-* We will update the employee card in the GUI to also display remarks of the employees.
+* We will update the employee card in the GUI to display remarks of the employees upon clicking on it.
+* This decision is to ensure the displayed employee card is not too cluttered with too much information.
 
 ### Deleting a remark requires typing the whole remark
 
@@ -1600,7 +1601,8 @@ Problem:
 
 Solution:
 * We will enhance the leave list so that there are three separate lists, one for current year, one for last year, and one for next year.
-* Users will only be allowed to add leaves from last year to next year, and only the list for the current year will be considered when counting for leaves.
+* Users will only be allowed to add leaves from last year to next year, and only the list for the current year will be
+  considered when counting the number of annual leaves allocated.
 
 ### No efficient way to view a specific employee's leave dates
 
@@ -1633,6 +1635,9 @@ Problem:
 Solution:
 * We plan to revamp the error messages pertaining to this issue to display as much information as possible to the user, 
   in this case the remaining number of leaves.
+* In this case, it is to change the error message into this:<br>
+  `This leave period exceeds the number of leaves remaining for this employee`<br>
+  `Number of leaves remaining: 1`
 
 ### Unclear error message for invalid email address
 
@@ -1643,6 +1648,13 @@ Problem:
 Solution:
 * We intend to keep error messages as short but as unambiguous as possible, so that users are able to identify
   their misinputs and fix them accordingly.
+* In this case, it is to shorten the email error message into this:<br>
+  `Emails should be of the format local-part@domain-name and adhere to the following constraints:`<br>
+  `1. The local-part should only contain alphanumeric , +, _, ., or - characters.
+   The local-part must not start or end with any special characters.`<br>
+  `2. The domain-name is made up of domain labels separated by either hyphens or periods. The domain name must:`<br>
+     `- end with a domain label at least 2 characters long.`<br>
+     `- have each domain label contain only alphanumeric characters.`<br>
 
 ### Edit command error message is inconsistent with respect to invalid id
 

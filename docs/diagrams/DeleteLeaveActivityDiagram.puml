@@ -2,7 +2,7 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:User inputs Edit Leave Command;
+:User inputs Delete Leave Command;
 
 if () then ([else])
   :Display error message;
