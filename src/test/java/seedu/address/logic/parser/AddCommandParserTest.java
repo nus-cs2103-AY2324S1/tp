@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_DATES_NOT_COMPATIBLE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND;
 import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND;
@@ -32,6 +33,8 @@ import static seedu.address.logic.commands.CommandTestUtil.POLICY_NO_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_ISSUE_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -40,6 +43,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_ISSUE_DATE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -160,14 +165,41 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_someButNotAllOptionalFieldsPresent_failure() {
-        String errorMessage = MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND + "- Policy Expiry Date(pe/) ";
+        String errorMessage = MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND;
+
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage);
+
+        // missing company
+        assertParseFailure(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + NRIC_DESC_BOB + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_FRIEND + POLICY_NO_DESC_BOB
+                        + POLICY_ISSUE_DATE_DESC_BOB + POLICY_EXPIRY_DATE_DESC_BOB,
+                expectedMessage + "- Company(c/) ");
+
+        // missing policy number
+        assertParseFailure(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + NRIC_DESC_BOB + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_FRIEND + COMPANY_DESC_BOB
+                        + POLICY_ISSUE_DATE_DESC_BOB + POLICY_EXPIRY_DATE_DESC_BOB,
+                expectedMessage + "- Policy Number(pn/) ");
+
+        // missing policy issue date
+        assertParseFailure(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + NRIC_DESC_BOB + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_FRIEND + COMPANY_DESC_BOB
+                        + POLICY_NO_DESC_BOB + POLICY_EXPIRY_DATE_DESC_BOB,
+                expectedMessage + "- Policy Issue Date(pi/) ");
+
+        // missing policy expiry date
         assertParseFailure(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + NRIC_DESC_BOB + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
                         + TAG_DESC_FRIEND + COMPANY_DESC_BOB
                         + POLICY_NO_DESC_BOB + POLICY_ISSUE_DATE_DESC_BOB,
-                expectedMessage);
+                expectedMessage + "- Policy Expiry Date(pe/) ");
     }
 
 
@@ -210,6 +242,31 @@ public class AddCommandParserTest {
         // all prefixes missing
         assertParseFailure(parser, "",
                 expectedMessage + "- Name(n/) - Phone(p/) - Email(e/) - NRIC(i/) - Licence Plate(l/) - Address(a/) ");
+    }
+
+    @Test
+    public void parse_preambleExist_failure() {
+        String validInput = NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + NRIC_DESC_AMY + LICENCE_PLATE_DESC_AMY + ADDRESS_DESC_AMY + COMPANY_DESC_AMY
+                + POLICY_NO_DESC_AMY + POLICY_ISSUE_DATE_DESC_AMY + POLICY_EXPIRY_DATE_DESC_AMY;
+
+        String inputWithPreamble = "some words" + validInput;
+
+        assertParseFailure(parser, inputWithPreamble,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_PREAMBLE_DETECTED));
+    }
+
+    @Test
+    public void parse_incompatiblePolicyDates_failure() {
+        String incompatiblePolicyDates = " " + PREFIX_POLICY_ISSUE_DATE + VALID_POLICY_EXPIRY_DATE_AMY + " "
+                + PREFIX_POLICY_EXPIRY_DATE + VALID_POLICY_ISSUE_DATE_AMY;
+
+        String incompatibleInput = NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + NRIC_DESC_AMY + LICENCE_PLATE_DESC_AMY + ADDRESS_DESC_AMY + COMPANY_DESC_AMY
+                + POLICY_NO_DESC_AMY + incompatiblePolicyDates;
+
+        assertParseFailure(parser, incompatibleInput,
+                MESSAGE_DATES_NOT_COMPATIBLE);
     }
 
     @Test
