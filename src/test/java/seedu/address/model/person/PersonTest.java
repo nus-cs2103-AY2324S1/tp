@@ -195,7 +195,7 @@ public class PersonTest {
 
     @Test
     public void isSameAppointmentDate() {
-        LocalDate matchingDate = LocalDate.of(2023, 05,01);
+        LocalDate matchingDate = LocalDate.of(2023, 05, 01);
         LocalDate nonMatchingDate = LocalDate.of(2023, 02, 01);
 
         assertTrue(BENSON.isSameAppointmentDate(matchingDate));
