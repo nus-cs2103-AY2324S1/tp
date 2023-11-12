@@ -62,7 +62,7 @@ public class RandomCommand extends Command {
      * @param size the size of the array.
      * @param upper the upper bound.
      */
-    private Integer[] generateRandomInt(int size, int upper) {
+    public static Integer[] generateRandomInt(int size, int upper) {
         requireAllNonNull(size, upper);
         assert upper >= 0 && size >= 0;
 
