@@ -24,11 +24,11 @@ This user guide walks you through the essential features of *BandConnect++*, fam
 
 Whether you are new to our application or a seasoned user, you can always find something useful in this guide. 
 
-* For **first-time users**, please go to the [Quick start](#quick-start) section to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
+* For **first-time users**, please go to the [Quick Start](#quick-start) section to start an end-to-end tutorial that gets you onboard. Should you encounter any difficulty understanding the terminology, don't forget to refer to the [Glossary](#glossary)!
 
 * For **experienced users** who have used _BandConnect++_ before, if you need help in remembering a particular command, please see [Command Summary](#command-summary). You can also refer to the [Features](#features) section for a more detailed explanation of each command.
 
-If you encounter any problems along your journey, please take a look at the [troubleshooting](#troubleshooting) section and also refer to our [FAQ](#frequently-asked-questions) for more information.
+If you encounter any problems along your journey, please take a look at the [Troubleshooting](#troubleshooting) section and also refer to our [FAQ](#frequently-asked-questions) for more information.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -51,21 +51,22 @@ If you encounter any problems along your journey, please take a look at the [tro
 
 
 4. From the home folder, open "Terminal" on MacOS or "Command Prompt" in Windows, and type `java -jar BandConnect++.jar` to run the application. A GUI similar to the below should appear in a few seconds.
+
    ![LabelledUI.png](images/quickstart/LabelledUI.png)
-   Musician
+   * Musicians are displayed in the left panel.
    ![LabelledMusician.png](images/quickstart/LabelledMusician.png)
-   Band
+   * Bands are displayed in the right panel.
    ![LabelledBand.png](images/quickstart/LabelledBand.png)
-   Note how the app contains some sample data.
-Type the command in the command box and press Enter to execute it. 
+
+   The app already contains some sample data to help you get started. 
 
 
-5. Some example commands you can try:
+5. To execute a command, enter it in the command box and press `Enter` to execute it. The following are some example commands you can try:
    * `help` : Open the help window.
    * `list` : Lists all contacts. 
-   * `add n/Alice Lovelace p/98757287 e/johnd@example.com i/bass g/rock`: Adds rock bassist Alice Lovelace.
-   * `delete 3` : Deletes the 3rd musician shown in the current list.
-   * `clear` : Deletes all contacts. 
+   * `add n/Alice Lovelace p/98757287 e/alicel@example.com i/bass g/rock`: Adds rock bassist Alice Lovelace.
+   * `addb n/Maverick g/rock`: Adds a rock band named Maverick.
+   * `findb TheoryX`: Finds the band named TheoryX and checks its members.
    * `exit` : Exits the app.
    
 Please refer to the [Features](#features) below for details of each command.
@@ -403,10 +404,8 @@ In addition, if the musician does not exist in the band, you will see an error m
 Please verify that the index of the musician is correct or input a different musician, and try again.
 
 
-### Find band: `findb`
+#### Find band: `findb`
 Finds the band with the given input name. Lists the band members of the selected band. From `My Bands` panel, find the complete band name of the band.
-
-[warning box]Run `list` before running this command!
 
 **Format:** `findb BANDNAME`
 
