@@ -1,12 +1,20 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -21,6 +29,12 @@ class ScheduleCommandTest {
     private static final Appointment APPOINTMENT_STUB = Appointment.parseAppointmentDescription(
             APPOINTMENT_DESCRIPTION_STUB);
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void constructor_nullParams_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new ScheduleCommand(null, APPOINTMENT_STUB));
+        assertThrows(NullPointerException.class, () -> new ScheduleCommand(INDEX_FIRST_PERSON, null));
+    }
     @Test
     public void execute_scheduleAccepted_scheduleSuccessful() {
         Person personWithoutSchedule = model.getFilteredPersonList().get(0);
@@ -39,5 +53,58 @@ class ScheduleCommandTest {
 
         //checks if the person is associated with appointment
         assertTrue(personWithSchedule.getAppointment().equals(APPOINTMENT_STUB));
+    }
+
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        ScheduleCommand scheduleCommand = new ScheduleCommand(outOfBoundIndex, APPOINTMENT_STUB);
+
+        assertCommandFailure(scheduleCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidPersonIndexFilteredList_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        ScheduleCommand scheduleCommand = new ScheduleCommand(outOfBoundIndex, APPOINTMENT_STUB);
+
+        assertCommandFailure(scheduleCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        final ScheduleCommand standardCommand = new ScheduleCommand(INDEX_FIRST_PERSON, APPOINTMENT_STUB);
+
+        // same values -> returns true
+        ScheduleCommand commandWithSameValues = new ScheduleCommand(INDEX_FIRST_PERSON, APPOINTMENT_STUB);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different index -> returns false
+        assertFalse(standardCommand.equals(new ScheduleCommand(INDEX_SECOND_PERSON, APPOINTMENT_STUB)));
+
+        // different appointment -> returns false
+        ScheduleCommand commandWithDiffDateTime = new ScheduleCommand(INDEX_FIRST_PERSON,
+                new Appointment("Review Insurance",
+                        LocalDateTime.of(2023, 01, 01, 20, 30)));
+
+        ScheduleCommand commandWithDiffValue = new ScheduleCommand(INDEX_FIRST_PERSON,
+                new Appointment("Buy Insurance",
+                        LocalDateTime.of(2023, 01, 01, 20, 0)));
+
+        assertFalse(standardCommand.equals(commandWithDiffDateTime));
+        assertFalse(standardCommand.equals(commandWithDiffValue));
     }
 }

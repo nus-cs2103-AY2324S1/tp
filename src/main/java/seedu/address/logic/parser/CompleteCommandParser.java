@@ -52,7 +52,10 @@ public class CompleteCommandParser implements Parser<CompleteCommand> {
         }
     }
 
-    private boolean isValidArguments(String strIndex, Optional<String> strDate) {
+    /**
+     * Checks if either {@code strIndex} or {@code strDate} is present but not both.
+     */
+    public static boolean isValidArguments(String strIndex, Optional<String> strDate) {
         //if no input
         if (strIndex.isEmpty() && strDate.isEmpty()) {
             return false;

@@ -93,7 +93,7 @@ public class ScheduleCommand extends Command {
 
         ScheduleCommand otherScheduleCommand = (ScheduleCommand) other;
         return index.equals(otherScheduleCommand.index)
-                && toAdd.equals(toAdd);
+                && toAdd.equals(otherScheduleCommand.toAdd);
     }
 
     /**

@@ -19,6 +19,8 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.financialplan.FinancialPlan;
@@ -189,5 +191,31 @@ public class PersonTest {
                 + ", financialPlans=" + ALICE.getFinancialPlans() + ", tags=" + ALICE.getTags()
                 + ", appointment=" + ALICE.getAppointment() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void isSameAppointmentDate() {
+        LocalDate matchingDate = LocalDate.of(2023, 05, 01);
+        LocalDate nonMatchingDate = LocalDate.of(2023, 02, 01);
+
+        assertTrue(BENSON.isSameAppointmentDate(matchingDate));
+        assertFalse(BENSON.isSameAppointmentDate(nonMatchingDate));
+    }
+
+    @Test
+    public void hasNullAppointment() {
+        assertFalse(BENSON.hasNullAppointment());
+        assertTrue(ALICE.hasNullAppointment());
+    }
+
+    @Test
+    public void clearAppointment() {
+        Person editedBenson = new PersonBuilder().withName("Benson Meier")
+                .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
+                .withPhone("98765432").withNextOfKinName("Benson Dad").withNextOfKinPhone("98761111")
+                .withFinancialPlans("Sample Financial Plan 1", "Sample Financial Plan 2")
+                .withTags("owesMoney", "friends").withNullAppointment().build();
+
+        assertEquals(BENSON.clearAppointment(), editedBenson);
     }
 }

@@ -371,13 +371,14 @@ Completes an appointment either with the person at the specified `INDEX` or comp
 Format: `complete [INDEX] [d/APPOINTMENT_DATE]`
 
 - Either an **index or appointment date** must be provided for command to execute, but **not both**.
-- If user inputs an `INDEX`, command will complete appointment with the person at the specified `INDEX`. The index refers to the index number shown in the **Contacts list**.
+- If user inputs an `INDEX`, command will complete appointment with the person at the specified index.
+- The index refers to the index number shown in the displayed person list.
 - If user inputs an `APPOINTMENT_DATE`, the command will complete all appointments in address book that have a date
-matching the one input by user. This can allow the user to clear all his/her appointments finished throughout the
+matching the one input by user, **and is regardless of the currently displayed contact list**. This allows the user to clear all his/her appointments finished throughout the
 entire day quickly.
 
 <div markdown="span" class="alert alert-primary">:information_source:
-**Note** that an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the year, month and day are the same. Time of the appointment does not matter in this command.
+Note that an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the **year, month and day are the same**. Time of the appointment does not matter in this command.
 </div>
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).

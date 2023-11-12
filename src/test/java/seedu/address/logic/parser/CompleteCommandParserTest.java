@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CompleteCommand.MESSAGE_INVALID_DATE;
@@ -10,6 +12,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +33,9 @@ class CompleteCommandParserTest {
         // negative index
         assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
+        // multiple index
+        assertParseFailure(parser, "1 1" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
         // zero index
         assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
@@ -38,6 +44,9 @@ class CompleteCommandParserTest {
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+
+        //max int
+        assertParseFailure(parser, "2147483648", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -48,8 +57,10 @@ class CompleteCommandParserTest {
         assertParseFailure(parser, DATE_DESC + "05-2023", MESSAGE_INVALID_DATE_FORMAT);
         assertParseFailure(parser, DATE_DESC + "01-05-2023 20:00", MESSAGE_INVALID_DATE_FORMAT);
 
-        //Invalid date
+        //invalid date
         assertParseFailure(parser, DATE_DESC + "01-13-2023", MESSAGE_INVALID_DATE);
+        assertParseFailure(parser, DATE_DESC + "29-02-2023", MESSAGE_INVALID_DATE);
+        assertParseFailure(parser, DATE_DESC + "31-04-2023", MESSAGE_INVALID_DATE);
     }
 
     @Test
@@ -80,9 +91,28 @@ class CompleteCommandParserTest {
     @Test
     public void parse_dateSpecified_success() {
         String userInput = DATE_DESC + "01-05-2023";
+        CompleteByDate expectedCommand1 = new CompleteByDate(LocalDate.of(2023, 5, 1));
 
-        CompleteByDate expectedCommand = new CompleteByDate(LocalDate.of(2023, 5, 1));
+        assertParseSuccess(parser, userInput, expectedCommand1);
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        //leap year
+        String leapYear = DATE_DESC + "29-02-2024";
+        CompleteByDate expectedCommand2 = new CompleteByDate(LocalDate.of(2024, 2, 29));
+
+        assertParseSuccess(parser, leapYear, expectedCommand2);
+    }
+
+    @Test
+    public void isValidArguments() {
+        String nonEmptyIndex = "1";
+        Optional<String> nonEmptyDate = Optional.of("01-01-2022");
+        String emptyIndex = "";
+        Optional<String> emptyDate = Optional.empty();
+
+        assertFalse(CompleteCommandParser.isValidArguments(nonEmptyIndex, nonEmptyDate));
+        assertFalse(CompleteCommandParser.isValidArguments(emptyIndex, emptyDate));
+
+        assertTrue(CompleteCommandParser.isValidArguments(nonEmptyIndex, emptyDate));
+        assertTrue(CompleteCommandParser.isValidArguments(emptyIndex, nonEmptyDate));
     }
 }
