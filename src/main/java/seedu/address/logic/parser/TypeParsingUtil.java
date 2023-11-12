@@ -87,7 +87,8 @@ public class TypeParsingUtil {
         if (p4.matcher(input).find()) {
             throw new InvalidInputException("Index input cannot be a decimal or fraction, allowed range: 1-99999.");
         } else if (p2.matcher(input).find()) {
-            throw new InvalidInputException("Index input is too large(allowed range: 1-99999) or exceeds five digits(starting zeros included)");
+            throw new InvalidInputException("Index input is too large(allowed range: 1-99999) "
+                    + "or exceeds five digits(starting zeros included)");
         } else if (m.find()) {
             String found = m.group(1);
             int ans = parseNum(found);
