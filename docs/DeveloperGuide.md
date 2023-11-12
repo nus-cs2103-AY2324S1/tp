@@ -951,14 +951,49 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Open a terminal tab and navigate to the same folder that contains the jar file
+   
+    3. Run the jar file with the command `java -jar tavigator.jar`<br>
+       Expected: Shows the GUI with a set of sample courses and students. The window size may not be optimum.
 
 2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    2. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app.<br>
        Expected: The most recent window size and location is retained.
+
+3. Exiting the app
+
+    1. The application can be exited with the `exit` command, or simply clicking the exit button of the tab.
+
+### Creating, editing and deleting a course.
+
+1. Test case: `course create course/CS2040S` <br>
+   Expected: A new course with the name "CS2040S" is created, and appears in the navigation bar.
+
+2. Test case: `course edit course/CS2040` <br>
+   Expected: The currently active course should be renamed to "CS2040".
+
+3. Test case: `course delete course/CS2040` <br>
+   Expected: The course with name "CS2040" should be deleted. If CS2040 is the currently active course, the GUI should update to display another present course.
+
+### Adding and editing a student.
+
+1. Test case: `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234569E t/G2`
+   Expected: A new student is created under the currently active course, and added to the end of the list. (Provided there is no other student with the same ID)
+
+2. Test case: `add n/9 p/91234567 e/fyq@gmail.com id/A1234569A t/G2`
+   Expected: No new student added, error message displayed (Names should only contain alphabetical characters and spaces, and it should not be blank)
+
+3. Test case: `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/1234569E t/G2`
+   Expected: No new student added, error message displayed (Please enter the full ID! IDs should only contain alphanumeric characters, with no special characters or space, and it should not be blank)
+
+4. Test case: `edit 1 n/Tan Liyan`
+   Expected: The name of the first person should be edited to be Tan Liyan.
+
+5. Test case: `edit 1 n/9`
+   Expected: No edit made, error message displayed (Names should only contain alphabetical characters and spaces, and it should not be blank)
 
 ### Deleting a person
 
@@ -972,16 +1007,47 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    4. Test case: `delete all tg/G2`<br>
+       Expected: All students from tutorial group G02 in the currently selected course are deleted.
+
+    5. Test case: `delete all`<br>
+       Expected: All students in the currently selected course are deleted.
+
+    6. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+
+### Marking and Viewing Attendance
+
+1. Test case: `mark n/Zong Jin, Fu Yiqiao a/1 w/1`
+   Expected: Marks students named, Zong Jin and Fu Yiqiao, as present for the tutorial in Week 1. Tallied attendance display should update accordingly.
+
+2. Test case: `mark n/Zong Jin a/0 w/2 r/not feeling well`
+   Expected: Marks student named Zong Jin as not present for the tutorial in Week 2. Tallied attendance display should update accordingly.
+
+3. Test case: `mark n/Zong Jin a/0 w/2`
+   Expected: No attendace marked. Error message displayed.
+
+4. Test case: `mark n/Zong Jin a/1 w/2`
+   Expected: Attendance of Zong Jin in week 2 should be updated to present. Tallied attendance display should update accordingly.
+
+5. Test case: `mark n/Zong Jin a/2 w/2`
+   Expected: No attendace marked. Error message displayed (Attendance should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present).
+
+6. Test case: `mark n/Zong Jin a/2 w/15`
+   Expected: No attendace marked. Error message displayed (Week should be an integer from 0 to 13).
+
+7. Test case: `view 1`
+   Expected: Displays the detailed attendance records for the first student in the currently displayed list.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_
+   1. Ensure that the data/tavigator.json file is present in the same directory where the jar file is located. Else, launch the application and exit.
+   2. To simulate missing data files, delete the json file.
+      > Expected behaviour: TAvigator starts with pre-loaded courses and students.
+   3. To simulate a corrupted data file, use a text editor to edit the json file.
+      > Expected behaviour: TAvigator should fail to launch.
 
 ## **Appendix: Planned Enhancements**
 
@@ -1004,6 +1070,6 @@ Given below are some of the possible enhancements that could be added in future 
 7. Marking attendance based on tutorial group instead of student.
    > Currently, TAvigator supports a student having multiple tutorial groups, but attendance is marked based on the student only. As such, we plan to modify the `mark` command so that it takes in a `tg/` input, and attendance can be marked separately for each tutorial group the student belongs to.
 8. Better parsing of arguments.
-   > Currently, adding invalid and redundant prefixes after commands will cause TAvigator to take the invalid prefix and its value as part of the value of the closest valid prefix.
+   > Currently, adding invalid and redundant prefixes after commands will cause TAvigator to take the invalid prefix and its value as part of the value of the closest valid prefix. <br>
    > For example, `add n/Fu Yiqiao p/98765432 e/fyq@example.com id/ A1234567M t/G2 r/` returns an error message that: Tutorial Group IDs should be alphanumeric.
    > The correct error message that should be shown is: Invalid prefix r/ detected.
