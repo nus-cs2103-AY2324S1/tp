@@ -18,4 +18,10 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+
+Person *--> "0..1" Telegram
+Person *--> "0..1" Lead
+Person *--> "0..1" Income
+Person *--> "0..1" Profession
+Person *--> "*" Interaction
 @enduml

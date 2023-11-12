@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model as ModelPackage <<Rectangle>>{
+Class ModelManager
+Class UniqueReminderList
+Class ReminderScheduler
+Class Reminder {
+    +followUpDate: LocalDate
+}
+show Reminder members
+Class Person
+
+Class I #FFFFFF
+}
+
+Class HiddenOutside #FFFFFF
+
+ModelManager -down-> "1" UniqueReminderList
+ModelManager -down-> "1" ReminderScheduler
+UniqueReminderList --> "~* all" Reminder
+Reminder *--> Person
+
+@enduml

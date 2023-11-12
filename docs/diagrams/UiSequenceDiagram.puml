@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":DashboardDisplay" as dashboardDisplay UI_COLOR
+Participant ":ClientDisplay" as clientDisplay UI_COLOR
+Participant ":Dashboard" as dashboard MODEL_COLOR
+Participant ":Model" as model MODEL_COLOR
+
+user -[USER_COLOR]> ui : "command"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> logic : execute("command")
+activate logic LOGIC_COLOR
+logic -[UI_COLOR]> ui : CommandResult
+deactivate logic
+
+alt isDashboard
+    ui -[UI_COLOR]> dashboardDisplay : content.add(DashboardDisplay)
+    activate dashboardDisplay UI_COLOR
+    dashboardDisplay -[UI_COLOR]> dashboard : getStatistics()
+    activate dashboard MODEL_COLOR
+    dashboard -[UI_COLOR]> model
+    activate model MODEL_COLOR
+    model -[UI_COLOR]> dashboard
+    deactivate model
+    dashboard -[UI_COLOR]> dashboardDisplay : Statistics
+    deactivate dashboard
+    dashboardDisplay -[UI_COLOR]> dashboard : getReminders()
+    activate dashboard MODEL_COLOR
+    dashboard -[UI_COLOR]> model : updateReminderList()
+    activate model MODEL_COLOR
+    model -[UI_COLOR]> dashboard
+    deactivate model
+    dashboard -[UI_COLOR]> dashboardDisplay : FilteredReminderList
+    deactivate dashboard
+    dashboardDisplay -[UI_COLOR]> ui
+    deactivate dashboardDisplay
+else isNotDashboard
+    ui -[UI_COLOR]> clientDisplay : content.add(ClientDisplay)
+    activate clientDisplay UI_COLOR
+    clientDisplay -[UI_COLOR]> model : getFilteredPersonList()
+    activate model MODEL_COLOR
+    model -[UI_COLOR]> clientDisplay : filteredPersonList
+    deactivate model
+    clientDisplay -[UI_COLOR]> ui
+    deactivate clientDisplay
+end
+
+ui -[UI_COLOR]> user
+deactivate ui
+
+@enduml
