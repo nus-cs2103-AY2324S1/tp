@@ -68,7 +68,7 @@ public class ConfirmOverrideCommandTest {
         // different types -> returns false
         assertFalse(confirmOverrideCommand.equals(0.5f));
 
-        // different feedbackToUser value -> returns false
+        // different person value -> returns false
         assertFalse(confirmOverrideCommand.equals(new ConfirmOverrideCommand(newAppointment, personToEdit2)));
 
     }
