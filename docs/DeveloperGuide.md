@@ -1,9 +1,11 @@
 ---
-layout: page
+layout: default
 title: Developer Guide
 ---
 
-# Table of Contents
+# Developer Guide for <span style="color: green;">lesSON</span> 
+
+## Table of Contents
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
 3. [Design](#design)
@@ -14,17 +16,24 @@ title: Developer Guide
    - [Storage component](#storage-component)
    - [Common classes](#common-classes)
 4. [Implementation](#implementation)
+   - [Add](#add-command)
+   - [Delete](#delete-command)
+   - [Filter by tag](#filtering-by-tag)
+   - [Random](#random-command)
+   - [Markdown Support](#markdown-support-feature)
+   - [Space Repetition](#spaced-repetition-feature)
+   - [Data Transfer](#data-transfer-functionality)
    - [Undo/Redo](#proposed-undoredo-feature)
-   - [Filter](#proposed-filter-by-tag-feature)
-   - [Markdown Support](#proposed-markdown-support-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-6. [Appendix: Requirements](#appendix-requirements)
+6. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
+7. [Appendix: Effort](#appendix-effort)
+8. [Appendix: Requirements](#appendix-requirements)
    - [Product scope](#product-scope)
    - [User stories](#user-stories)
    - [Use cases](#use-cases)
    - [Non-Functional Requirements](#non-functional-requirements)
    - [Glossary](#glossary)
-7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+9. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,7 +148,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W17-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="800" />
 
 
 The `Model` component,
@@ -151,7 +160,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Deck`, which `Card` references. This allows `Deck` to only require one `Tag` object per unique tag, instead of each `Card` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -173,7 +182,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 Below is an example of the object diagram of how the cards are stored in the `Deck` class
 
-<img src="images/DeckObjectDiagram.png" width="600" />
+<img src="images/DeckObjectDiagram.png"  />
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -181,7 +190,7 @@ Below is an example of the object diagram of how the cards are stored in the `De
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Feature
+### Add Command
 
 The add command can be found in the `LogicManager` class. User input is first parsed into the `DeckParser` class using the `parseCommand` to validate if its add command with the specified fields and format.
 
@@ -200,7 +209,7 @@ data will be created
 
 Below is the sequence diagram for this flow:
 
-<img src="images/AddCommandSequenceDiagram.png" width="600" />
+<img src="images/AddCommandSequenceDiagram.png" width="1000" />
 
 #### Design Considerations
 
@@ -215,7 +224,7 @@ Below is the sequence diagram for this flow:
     * Pros: Reduces chances of duplicate cards in deck
     * Cons: Increased developer time to create such filtering functionality with little benefit
 
-### DeleteCommand
+### Delete Command
 
 The delete command can be found in the `LogicManager` class. User input is first parsed into the `DeckParser` class using the `parseCommand`
 to validate if it is a valid delete command with the specified fields and format.
@@ -235,86 +244,7 @@ Here is the flow of how the delete command is featured.
 
 Below is the sequence diagram for this flow:
 
-<img src="images/DeleteSequenceDiagram.png" width="600" />
-
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedDeck`. It extends `Deck` with an undo/redo history, stored internally as an `deckStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedDeck#commit()`Saves the current deck state in its history.
-* `VersionedDeck#undo()`Restores the previous deck state from its history.
-* `VersionedDeck#redo()`Restores a previously undone deck state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitDeck()`, `Model#undoDeck()` and `Model#redoDeck()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedDeck` will be initialized with the initial deck state, and the `currentStatePointer` pointing to that single deck state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th card in the deck. The `delete` command calls `Model#commitDeck()`, causing the modified state of the deck after the `delete 5` command executes to be saved in the `deckStateList`, and the `currentStatePointer` is shifted to the newly inserted deck state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new card. The `add` command also calls `Model#commitDeck()`, causing another modified deck state to be saved into the `deckStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitDeck()`, so the deck state will not be saved into the `deckStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the card was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoDeck()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous deck state, and restores the deck to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Deck state, then there are no previous Deck states to restore. The `undo` command uses `Model#canUndoDeck()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoDeck()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the deck to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `deckStateList.size() - 1`, pointing to the latest deck state, then there are no undone Deck states to restore. The `redo` command uses `Model#canRedoDeck()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the deck, such as `list`, will usually not call `Model#commitDeck()`, `Model#undoDeck()` or `Model#redoDeck()`. Thus, the `deckStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitDeck()`. Since the `currentStatePointer` is not pointing at the end of the `deckStateList`, all deck states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire deck.
-   * Pros: Easy to implement.
-   * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-   * Pros: Will use less memory (e.g. for `delete`, just save the card being deleted).
-   * Cons: We must ensure that the implementation of each individual command are correct.
+<img src="images/DeleteSequenceDiagram.png" width="1000" />
 
 ### Filtering by Tag
 
@@ -333,28 +263,25 @@ Performing a `list` command involves executing `ListCommand`.
 
 Given below is an example usage of the `list` command to filter the deck and how the filtering mechanism behaves at each step.
 
-**Step 1.**
-Suppose the user has a deck containing some cards with the tag `CS2103T`. The user keys in this command to filter by the `CS2103T` tag.
+1. Suppose the user has a deck containing some cards with the tag `CS2103T`. The user keys in this command to filter by the `CS2103T` tag.
+    ```
+    list t/CS2103T
+    ```
 
-```
-list t/CS2103T
-```
+    <div markdown="span" class="alert alert-info">
+    :information_source: **Note:** At least one tag should be provided.
+    </div>
 
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** At least one tag should be provided.
-</div>
-
-**Step 2.**
-The `ListCommandParser` will execute to get the field and keyword pairs 
+2. The `ListCommandParser` will execute to get the field and keyword pairs 
 using the `ArgumentTokenizer`. This parses every parameter into a list of `Predicate<Card>` objects.
 The parser then returns a `ListCommand` object with the list of predicates.
 
-**Step 3.** The `ListCommand#execute()` method is invoked by the `LogicManager`.
+3. The `ListCommand#execute()` method is invoked by the `LogicManager`.
 The list of predicates is combined into a single `Predicate<Card>` object.
 Then, `ListCommand` calls `Model#updateFilteredCardList()` with the `Predicate<Card>`
 to update the filtered flashcard list with a new list, filtered by the tag entered.
 
-**Step 4.** Finally, the `ListCommand` creates a `CommandResult` object that
+4. Finally, the `ListCommand` creates a `CommandResult` object that
 contains feedback and displays the filtered flashcard list to the
 user. This result is then returned to the `LogicManager`. As a result, 
 the deck will now display only the cards with the `CS2103T` tag.
@@ -396,28 +323,24 @@ Performing a `random` command involves executing `RandomCommand`.
 * This command does not have its own parser because it does not require any parameters.
 * Hence, this command is directly executed by `LogicManager`
 
-**Step 1.**
-Suppose the user has a deck containing some cards. The user keys in this command to practise a random card.
-```
-random
-```
+1. Suppose the user has a deck containing some cards. The user keys in this command to practise a random card.
+    ```
+    random
+    ```
 
-**Step 2.**
-A new `RandomCommand` object is created by `DeckParser`. 
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** This is slightly different from other commands, as there is no need for 
-parsing by its own parser because there are no additional parameters to be parsed for this command.
-</div>
+2. A new `RandomCommand` object is created by `DeckParser`.
+    <div markdown="span" class="alert alert-info">
+    :information_source: **Note:** This is slightly different from other commands, as there is no need for 
+    parsing by its own parser because there are no additional parameters to be parsed for this command.
+    </div>
 
-**Step 3.**
-The `RandomCommand#execute()` method is invoked by the `LogicManager`.
+3. The `RandomCommand#execute()` method is invoked by the `LogicManager`.
 `RandomCommand` then calls `Model#getFilteredCardList()` to get the deck list, so as to generate a random index.
 The random index is generated by calling `RandomCommand#generateRandomIndex()`.
 This random index is saved in the `Model` by calling `Model#setRandomIndex()`.
 This is so that the index can be accessed later by commands `solve` and `set`.
 
-**Step 4.**
-A random card is selected with the newly generated index, which is then used to return a `CommandResult` to `LogicManager`.
+4. A random card is selected with the newly generated index, which is then used to return a `CommandResult` to `LogicManager`.
 As a result, the randomly selected card's question will be shown to the user to practise with.
 
 The sequence diagram below shows the process of randomly selecting a card to practise.
@@ -432,29 +355,16 @@ but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 #### Design considerations:
 
-**Aspect: How random executes:**
+**Aspect: How random command is parsed:**
 
-* **Alternative 1 (current choice):** Modify `PractiseCommand` and `PractiseCommandParser` to accept an `r` parameter to practise a random question
+* **Alternative 1:** Modify `PractiseCommand` and `PractiseCommandParser` to accept an `r` parameter to practise a random question
+    * Pros: Similar command format with `solve` and `set`, so it may be easier to use for some users.
+    * Cons: Harder to manage codebase because `PractiseCommand` will have two different responsibilities (i.e. practising in order and randomly)
+* **Alternative 2 (Current Choice):** Implement a new command `random` instead of adding it as an option on `practise`
     * Pros: 
-      1. Similar command format with `solve` and `set`, so it may be easier to use for some users.
-    * Cons: 
-      1. Harder to manage codebase because `PractiseCommand` will have two different responsibilities (i.e. practising in order and randomly)
-
-### Search Filter feature
-
-Introducing a search feature that allows users to search for specific flashcards based on their questions. This feature empowers users with greater navigability over their study materials.
-
-Below is an example of the usage of the Search filter
-
-Step 1: Assuming the user has existing cards in lesson, with their own set of questions and answers
-
-Step 2: When you want to search for cards with a particular staring phrase, execute the `search q/What` command.
-
-Step 3: The system will then display the cards that match the starting phrase.
-
-Step 4: To return to viewing your full deck of cards, simply execute the `list` command to view all cards stored in lesSON
-
-Step 5: If the user wishes to practise from this view, simply `practise index` for the index of the card
+      1. Easier to implement and manage code
+      2. More extensible in the future if random needs to accept any parameters
+    * Cons: No significant cons
 
 ### Markdown support feature
 
@@ -466,16 +376,16 @@ part of the `Answer` which would be the key concept tested in the exam.
 
 Given below is an example usage of the Markdown support feature.
 
-Step 1: User creates a card.
+1. User creates a card.
 
-Step 2: User executes `add q/ What base is hexadecimal in? a/ Hexadecimal is in **Base 16**`
+2. User executes `add q/ What base is hexadecimal in? a/ Hexadecimal is in **Base 16**`
 
-Step 3: `AddCommandParser` will parse in the input and then, parse in the values collected in the multimap to a `MarkdownParser`
+3. `AddCommandParser` will parse in the input and then, parse in the values collected in the multimap to a `MarkdownParser`
 to create a new `Card`.
 
-Step 4: The `Card` is added to the `Model` to be added to the `Deck`.
+4. The `Card` is added to the `Model` to be added to the `Deck`.
 
-Step 5: The `UI` renders the `Card` with the relevant fields meant to be written in Markdown.
+5. The `UI` renders the `Card` with the relevant fields meant to be written in Markdown.
 
 #### Design considerations:
 
@@ -484,22 +394,21 @@ Step 5: The `UI` renders the `Card` with the relevant fields meant to be written
 * **Alternative 1 :** Use existing libraries that support Markdown using JavaFX.
     * Pros: Easy to implement.
     * Cons:
-        1. Dependency on third party library.
-        2. Large .jar file size.
-* **Alternative 2:** Individually support each type of Markdown language.
+      1. Dependency on third party library.
+      2. Increase application size
+      3. Many features included in the library are redundant
+* **Alternative 2 (Current Choice):** Individually support each type of Markdown language by creating our own implementation for each syntax.
     * Pros: Scope of support can be determined by developer.
     * Cons:
         1. Time-consuming.
-        2. Possible errors
+        2. Potentital for Bugs
 
 
 **Finalised Implementation:**
 
-Settled on using alternative 2 as it ensures that only the features that are needed are implemented,
-and it greatly reduces the application size.
+Settled on using alternative 2 as it allows us to be flexible on what Markdown syntax we want to implement. We decided to implement bold, 
+italic and underline since they are the most commonly used ones. This also greatly reduces the application file size.
 
-We focused on bold, italic and underline which are the main styling that used by flashcard user,
-and having only the essential features reduces the possibility of bugs.
 
 
 ### Spaced Repetition Feature
@@ -520,30 +429,35 @@ Any wrong input will result in an error being flagged out
 
 Given below is an example usage of the Spaced Repetition Feature.
 
-Step 1: Assuming the user has existing cards in lesson, with their own set of questions and answers. These
+1. Assuming the user has existing cards in lesson, with their own set of questions and answers. These
 questions are sorted by a due date `nextPracticeDate`. Cards also have a hidden field known as `lastPracticeDate`.
 
-Step 2: After the user uses the `practise` command and `solve` command, he uses the `set` command to set how difficult
+2. After the user uses the `practise` command and `solve` command, he uses the `set` command to set how difficult
 he felt the card was when he was practising the card.
 
-Step 3: After setting the difficulty, the system will calculate a new `nextPracticeDate`.
+3. After setting the difficulty, the system will calculate a new `nextPracticeDate`.
 Firstly, it applies a multiplier (based on difficulty: 3, 1.5, 0.5 for easy, medium, hard respectively)
 to the amount of time between `lastPracticeDate` and `nextPracticeDate`, obtaining a duration.
 This duration is then added to the current `nextPracticeDate` to calculate the new `nextPracticeDate`.
 If there is no suitable `lastPracticeDate` to use, then this calculation alternatively
 adds a base duration (of 4 hours) * multiplier to `nextPracticeDate`.
 
-Step 4: The card's `nextPracticeDate` and `lastPracticeDate` is then updated with the new fields.
+4. The card's `nextPracticeDate` and `lastPracticeDate` is then updated with the new fields.
 
-Step 5: The card is automatically sorted in the list according to the new `nextPracticeDate` and the more difficult cards
+5. The card is automatically sorted in the list according to the new `nextPracticeDate` and the more difficult cards
 will now appear earlier when using the `practice` command without index now.
 
 
-### Export Functionality
+
+### Data Transfer Functionality
+
+Both export and import features are not to be mistaken as a **Command** as it is meant to be used before the user decides to use our application
+for revision purposes.
+
+
+#### Export 
 
 We implemented an export functionality to allow our users to port over their data with ease.
-This is not to be mistaken as a **Command** as it is meant to be used after the user decides to use our application
-for revision purposes.
 
 The export button will allow users to access a copy of the `deck.json` file and has a copy button function that allows
 users to copy over their deck.json file with ease.
@@ -553,27 +467,24 @@ users to copy over their deck.json file with ease.
 **Aspect: How can we showcase the data while preventing users from editing directly:**
 
 * We decided that showing a copy of the text found in `deck.json` will prevent the user from directly editing
-`deck.json`, and thus prevents any accidental erasure of the deck should the user tamper with it unknowningly
-
+`deck.json`, and thus prevents any accidental erasure of the deck should the user tamper with it unknowningly.
 
 Given below is an example usage of the Export Feature.
 
-Step 1: User generates cards according to their needs and produced a deck for revision
+1. User generates cards according to their needs and produced a deck for revision
 
-Step 2: User wishes to share their deck with peers or online, and needs a fixed format
+2. User wishes to share their deck with peers or online, and needs a fixed format
 to be used across all lesSON applications
 
-Step 3: User navigates to the menu bar at the top of the screen and presses on it.
+3. User navigates to the menu bar at the top of the screen and presses on it.
 
-Step 4: The dropdown menu displays the export function, and it produces the text of the `deck.json` to be copied
+4. The dropdown menu displays the export function, and it produces the text of the `deck.json` to be copied
 
-Step 5: User proceeds to click on the copy data button, and it is copied to the users clipboard
+5. User proceeds to click on the copy data button, and it is copied to the users clipboard
 
-### Import Functionality
+### Import
 
 We implemented an import functionality to allow our users to port over their data with ease.
-Similarly to Export, this is not to be mistaken as a **Command** as it is meant to be used before the user decides to use our application
-for revision purposes.
 
 The Import button will allow users who have received the text from the Export function to transfer the deck of carss over, thereby
 effectively importing over the shared deck of cards generated by another user.
@@ -592,19 +503,98 @@ effectively importing over the shared deck of cards generated by another user.
 
 Given below is an example usage of the Import Feature.
 
-Step 1: User A has used lesSON and already a pre-existing deck of cards
+1. User A has used lesSON and already a pre-existing deck of cards.
 
-Step 2: User A then clicks on the Export button (mentioned above) <!-- Put link in the DG -->
+2. User A then clicks on the Export button (mentioned above).
 
-Step 3: User B receives the text from User A either via message, text or email.
+3. User B receives the text from User A either via message, text or email.
 
-Step 4: User B opens lesSOn and clicks on the menu button
+4. User B opens lesSON and clicks on the menu button.
 
-Step 5: User B clicks on the Import menu button and copies and pastes the text received from A into the text field.
+5. User B clicks on the Import menu button and copies and pastes the text received from A into the text field.
 
-Step 6: User B clicks on Import data button which will then import the data and closes the application
+6. User B clicks on Import data button which will then import the data and closes the application
 
-Step 7: User B re-opens lesSOn to see his new functional deck of cards.
+7. User B re-opens lesSON to see his new functional deck of cards.
+
+
+### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedDeck`. It extends `Deck` with an undo/redo history, stored internally as an `deckStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedDeck#commit()`Saves the current deck state in its history.
+* `VersionedDeck#undo()`Restores the previous deck state from its history.
+* `VersionedDeck#redo()`Restores a previously undone deck state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitDeck()`, `Model#undoDeck()` and `Model#redoDeck()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+1. The user launches the application for the first time. The `VersionedDeck` will be initialized with the initial deck state, and the `currentStatePointer` pointing to that single deck state.
+
+    ![UndoRedoState0](images/UndoRedoState0.png)
+
+2. The user executes `delete 5` command to delete the 5th card in the deck. The `delete` command calls `Model#commitDeck()`, causing the modified state of the deck after the `delete 5` command executes to be saved in the `deckStateList`, and the `currentStatePointer` is shifted to the newly inserted deck state.
+
+    ![UndoRedoState1](images/UndoRedoState1.png)
+
+3. The user executes `add q/What …​` to add a new card. The `add` command also calls `Model#commitDeck()`, causing another modified deck state to be saved into the `deckStateList`.
+
+    ![UndoRedoState2](images/UndoRedoState2.png)
+
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitDeck()`, so the deck state will not be saved into the `deckStateList`.
+    
+    </div>
+
+4. The user now decides that adding the card was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoDeck()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous deck state, and restores the deck to that state.
+
+    ![UndoRedoState3](images/UndoRedoState3.png)
+
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Deck state, then there are no previous Deck states to restore. The `undo` command uses `Model#canUndoDeck()` to check if this is the case. If so, it will return an error to the user rather
+    than attempting to perform the undo.
+    
+    </div>
+
+    The following sequence diagram shows how the undo operation works:
+    
+    ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+    
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+    
+    </div>
+    
+    The `redo` command does the opposite — it calls `Model#redoDeck()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the deck to that state.
+    
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `deckStateList.size() - 1`, pointing to the latest deck state, then there are no undone Deck states to restore. The `redo` command uses `Model#canRedoDeck()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+    
+    </div>
+
+5. The user then decides to execute the command `list`. Commands that do not modify the deck, such as `list`, will usually not call `Model#commitDeck()`, `Model#undoDeck()` or `Model#redoDeck()`. Thus, the `deckStateList` remains unchanged.
+
+    ![UndoRedoState4](images/UndoRedoState4.png)
+
+6. The user executes `clear`, which calls `Model#commitDeck()`. Since the `currentStatePointer` is not pointing at the end of the `deckStateList`, all deck states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add q/What …​` command. This is the behavior that most modern desktop applications follow.
+
+    ![UndoRedoState5](images/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="images/CommitActivityDiagram.png" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire deck.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+    * Pros: Will use less memory (e.g. for `delete`, just save the card being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -617,7 +607,29 @@ Step 7: User B re-opens lesSOn to see his new functional deck of cards.
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned Enhancements**
 
+1. Tag
+    - Currently duplicate tags can be created through the edit and add function.
+
+2. Currently, `hint` does not support the use of `r` index
+   - Users that use `random` to practise a random question are unable to use `hint r` to check the hint of the question.
+   - We plan to allow `hint` command to accept `r` index to that it can show the user the hint of the randomly selected question.
+
+3. Markdown stacking syntax
+    - We are unable to stack multiple markdown syntax for a particular phrase
+
+    
+
+---------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+
+
+
+
+---------------------------------------------------------------------------
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -879,3 +891,5 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+

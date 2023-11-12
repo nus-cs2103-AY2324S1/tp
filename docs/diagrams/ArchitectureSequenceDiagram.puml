@@ -20,10 +20,10 @@ activate model MODEL_COLOR
 model -[MODEL_COLOR]-> logic
 deactivate model
 
-logic -[LOGIC_COLOR]> storage : saveDeck(Deck)
+logic -[LOGIC_COLOR]> storage : saveDeck(deck)
 activate storage STORAGE_COLOR
 
-storage -[STORAGE_COLOR]> storage : Save to file
+storage -[STORAGE_COLOR]> storage : saveDeck(deck, filePath)
 activate storage STORAGE_COLOR_T1
 storage --[STORAGE_COLOR]> storage
 deactivate storage

@@ -43,7 +43,7 @@ public class SetDifficultyCommandParser implements Parser<SetDifficultyCommand> 
         }
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseIndexWithR(argMultimap.getPreamble());
             assert index != null : "Index is not present";
             return new SetDifficultyCommand(index, difficulty);
         } catch (ParseException pe) {
