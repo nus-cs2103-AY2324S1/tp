@@ -5,11 +5,16 @@ skinparam ArrowFontSize 12
 start
 :User enters command to add an applicant;
 
-if () then ([command is valid])
-    :Applicant is added to AddressBook;
-    :Success message is shown;
+if () then ([invalid command])
+    : Invalid command error message is shown;
 else ([else])
-    : Error mesaage is shown;
+    if () then ([duplicate applicant exists])
+        : Duplicate applicant error message is shown;
+    else ([else])
+        :Applicant is added to AddressBook;
+        : Success message is shown;
+    endif
+
 endif
 stop
 @enduml
