@@ -9,7 +9,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of events that does not allow nulls.
@@ -45,7 +44,7 @@ public class UniqueEventList implements Iterable<Event> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new EventNotFoundException();
         }
 
         internalList.set(index, editedEvent);

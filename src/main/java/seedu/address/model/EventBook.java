@@ -71,6 +71,10 @@ public class EventBook implements ReadOnlyEventBook {
         events.remove(key);
     }
 
+    public boolean hasEvent(Event event) {
+        return events.contains(event);
+    }
+
     /**
      * Sorts the event book using the provided comparator.
      *

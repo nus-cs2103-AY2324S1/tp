@@ -14,7 +14,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 public class UniqueEventListTest {
 
@@ -61,7 +60,7 @@ public class UniqueEventListTest {
 
     @Test
     public void setEvent_targetEventNotInList_throwsEventNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueEventList.setEvent(EVENT_1, EVENT_1));
+        assertThrows(EventNotFoundException.class, () -> uniqueEventList.setEvent(EVENT_1, EVENT_1));
     }
 
     @Test
@@ -98,7 +97,7 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void remove_eventDoesNotExist_throwsPersonNotFoundException() {
+    public void remove_eventDoesNotExist_throwsEventNotFoundException() {
         assertThrows(EventNotFoundException.class, () -> uniqueEventList.remove(EVENT_1));
     }
 
