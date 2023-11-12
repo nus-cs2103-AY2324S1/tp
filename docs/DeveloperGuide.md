@@ -444,7 +444,7 @@ or assignment grade.
 
 #### Design considerations:
 
-**Aspect: 'class information' classes**
+**Aspect: `Class Information` classes**
 
 * **Alternative 1 (current choice):** Use a class for each type of class information.
   * Pros: Easy to implement, follows OOP principle. If we want to edit the implementation of each of the classes or
@@ -466,6 +466,17 @@ or assignment grade.
   * Pros: Will use less memory.
   * Cons: Will need to implement different functions for each type of class details. Implementation will be more
   complicated. SLAP principle might not be able to be adhered to.
+
+### Data visualisation feature
+
+#### About this feature
+The data visualisation feature allows users to visualize the `Class Information` fields of each student. The display will be located in the student list card, next to the other details of the students.
+There will be 3 bar graphs associated with each student, one for each of the `Class Information` fields, representing the overall percentage of each field across a semester.
+
+#### How it is implemented
+The data visualisation feature is facilitated by each Class Information `Tracker`. Each tracker will have a method that will calculate the average percentage of the field.
+These methods are called by the `StudentCard` class in the UI package, within a method used to initialize the FXML barchart.
+
 
 ### Present feature
 
