@@ -78,6 +78,14 @@ public interface Model {
     boolean hasApplicant(Applicant applicant);
 
     /**
+     * Deletes the given member.
+     * The member must exist in the address book.
+     *
+     * @param target The member to delete.
+     */
+    void deleteMember(Member target);
+
+    /**
      * Deletes the given applicant.
      * The applicant must exist in the address book.
      *
@@ -176,12 +184,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTagList(Predicate<? super Tag> predicate);
-
-    /**
-     * Deletes the member person.
-     * The member must exist in the address book.
-     *
-     * @param toDelete The member to delete.
-     */
-    void deleteMember(Member toDelete);
 }

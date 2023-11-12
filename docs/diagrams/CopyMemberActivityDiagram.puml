@@ -5,11 +5,15 @@ skinparam ArrowFontSize 12
 start
 :User enters command to copy a member;
 
-if () then ([command and index is valid])
-    :Member details are copied into the user's clipboard;
-    :Success message is shown;
+if () then ([command is invalid])
+    : Error message for invalid command format is shown;
 else ([else])
-    : Error message is shown;
+    if () then ([index is invalid])
+        : Error message for invalid index is shown;
+    else ([else])
+        : Copy the member's details into the clipboard;
+        : Show success message with member's details;
+    endif
 endif
 stop
 @enduml

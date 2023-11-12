@@ -19,7 +19,7 @@ public class DeleteMemberCommand extends Command {
     public static final String COMMAND_WORD = "deletemember";
     public static final String COMMAND_ALIAS = "delm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
             + ": Deletes the member identified by the index number used in the displayed member list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";

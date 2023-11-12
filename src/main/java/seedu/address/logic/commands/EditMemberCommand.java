@@ -36,7 +36,8 @@ public class EditMemberCommand extends Command {
     public static final String COMMAND_WORD = "editmember";
     public static final String COMMAND_ALIAS = "editm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
+            + ": Edits the details of the member identified "
             + "by the index number used in the displayed member list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "

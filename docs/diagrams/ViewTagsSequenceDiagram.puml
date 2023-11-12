@@ -26,4 +26,6 @@ deactivate AddressBook
 DeleteMemberCommand <-- ModelManager
 deactivate ModelManager
 
+<-- DeleteMemberCommand
+
 @enduml
