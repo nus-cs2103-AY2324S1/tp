@@ -365,30 +365,90 @@ The following activity diagram summarises the process of adding benefit for an e
 
 ![AddBenefitActivityDiagram](images/AddBenefitActivityDiagram.png)
 
-### Payroll Calculation
+### Payroll
 
-#### Implementation
+#### Proposed Implementation
 
-The feature is facilitated by the four classes below:
-1.	PayrollCommandParser
-2.	PayrollCommand
-3.	Payroll
-4.	Salary
+The proposed payroll feature comprises 1 sub-features:
 
+1. Payroll Calculation Feature
 
-<u>PayrollCommandParser</u>
+#### 1. Payroll Calculation Feature
 
-This class extends the Parser interface, it implements the following operations:
-- PayrollCommandParser#parse() – Parses the user input and returns a PayrollCommand object.
+The proposed payroll calculation feature is facilitated by 
+`Payroll`, `PayrollCommand`, `PayrollCommandParser`, `Person`,
+`PayrollStorage`, `Payroll`, `Salary`, `Benefit` and `Deduction` classes.
 
-<u>PayrollCommand</u>
+The `Payroll` class is responsible for storing the monthly payroll data for an employee,
+including the starting, ending and payment date of the payroll period. It also includes a `Salary` object.
 
-This class extends the Command abstract class, it implements the following operations:
-- PayrollCommand#execute() – Determines whether the user used employee name as reference or the index number. Once it confirms, it will calculate the payroll of the employee.
+The `PayrollCommand` is responsible for executing the `payroll` command.
 
-#### Design considerations:
+The `PayrollCommandParser` is responsible for parsing the user input for the `deduct` command.
 
-{what are the design considerations?}
+The `PayrollStorge` class is responsible for storing all payroll data for an employee.
+
+The `Salary` class is responsible for the monthly salary data for an employee, this class includes compulsory
+attributes like <u>Basic Salary</u>, a `deduction` and `benefit` class.
+
+The `Benefit` class is responsible for storing the benefit data for a specific employee.
+
+The `Deduction` class is responsible for storing the deduction data for a specific employee
+
+The `Person` class is responsible for holding all the data of a specific employee,
+including the `PayrollStorage`.
+
+The following diagram shows the different classes interact with one another 
+in the calculate payroll feature:
+
+![PayrollCalculationClassDiagram](images/PayrollCalculationClassDiagram.png)
+
+The user can choose to calculate the payroll for an employee by
+entering the index of the employee, or the name of the employee. 
+The `PayrollCommandParser` class is responsible for parsing the user input for the payroll command.
+
+The following sequence diagram shows how the PayrollCommandParser class parses the user input:
+
+![ParsePayrollCommandSequenceDiagram](images/ParsePayrollCommandSequenceDiagram.png)
+
+When parsing the input, the input is first passed into ParserUtil#parseIndex method. 
+This checks if the input intends to calculate the payroll by using the index of the employee.
+If it is by name then a `ParseException` will be caught and all relevant parameters are extracted according to their respective prefixes, and put into an `ArgumentMultimap`.
+
+The following sequence diagram shows how the `DeductCommandParser` class parses the `index`:
+
+![ParsePayrollIndexSequenceDiagram](images/ParsePayrollCommandIndexSequenceDiagram.png)
+
+If the `index` is provided and valid, i.e, is a non-zero unsigned integer,
+the `PayrollCommandParser` class will create a `DeductCommand` object with the `index` and `payroll` object, and return it.
+However, if the `index` is not provided, a `ParseException` will be thrown by the `ParserUtil` class, and the `PayrollCommandParser` class will try to parse the `name` of the employee.
+If the `name` parameter is also not provided, a `ParseException` will be thrown by the `PayrollCommandParser` class. 
+Otherwise, the `PayrollCommandParser` class will create a `PayrollCommand` object with the `name` and `Payroll` object, and return it.
+
+The following sequence diagram shows how the `PayrollCommandParser` class parses the `name`:
+
+![ParsePayrollNameSequenceDiagram](images/ParsePayrollCommandNameSequenceDiagram.png)
+
+The following sequence diagram shows how the `payroll` operation works when the user enters
+the command `payroll 1`, which means calculating the payroll for the employee with the index 1:
+
+![PayrollCalculationSequenceDiagram](images/PayrollCalculationSequenceDiagram.png)
+
+After `PayrollCommandParser` class parses the user input, the PayrollCommand class will be called to execute the command. 
+The PayrollCommand class will then call the Model component to obtain the list of employees, and then obtain the Person object to calculate payroll for.
+
+The following sequence diagram shows the referenced process of calculating payroll for an employee:
+
+![PayrollCalculationSequenceDiagram2](images/PayrollCalculationSequenceDiagram2.png)
+
+1. The `PayrollCommand` calls the `getLatestPayroll()` method to invoke a method in person object.
+2. The Person object then calls the `getLatestPayroll()` method to get the `Payroll` object with the latest startDate in the `PayrollStorage` object.
+3. The `PayrollCommand` then calls the `getPayrollString()` method of the `Payroll` object to get payroll description of the person.
+4. The `Payroll` object then calls the `getNetSalaryString()` method of the `Salary` object to get the details of the `deductions`, `benefits` and basic salary.
+
+The following activity diagram summarises the process of payroll calculation for an employee:
+
+![PayrollCalculationActivityDiagram](images/PayrollCalculationActivityDiagram.png)
 
 ### Payslip Generation
 
