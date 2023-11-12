@@ -1193,9 +1193,6 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete 0`<br>
       Expected: No employee is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an invalid employee ID)<br>
-      Expected: Similar to previous.
-
 ### Finding an employee
 
 1. Finding an employee while all employees are being shown
@@ -1205,73 +1202,31 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `find Alex`<br>
       Expected: Employee with name "Alex" is shown in the list. The status bar shows the number of employees shown in the list.
 
-   3. Test case: `find abcdef`<br>
-      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-
-   4. Test case: `find manager`<br>
+   3. Test case: `find manager`<br>
       Expected: All employees with the word "manager" in their position are shown in the list. The status bar shows the number of employees shown in the list.
-
-   5. Test case: `find notAManager`<br>
-      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
    
-   6. Test case: `find EID1234-5678`<br>
+   4. Test case: `find EID1234-5678`<br>
       Expected: Employee with employee ID "EID1234-5678" is shown in the list. The status bar shows the number of employees shown in the list.
    
-   7. Test case: `find EID0000-0000`<br>
+   5. Test case: `find EID0000-0000`<br>
       Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
 
-   8. Test case: `find`<br>
+   6. Test case: `find`<br>
       Expected: Invalid command format error message is shown in the status bar.
 
 2. Finding an employee when only some employees are being shown.
 
    1. Prerequisites: List only some employees using the `find manager` command. Multiple employees in the list. Employee with name "Alex" is in the list. Three employees with position "manager" are in the list. Employee with employee ID "EID1234-5678" is in the list. Employee with employee ID "EID0000-0000" is not in the list. Employee with position "notAManager" is not in the list.
 
-   2. Test case: `find Alex`<br>
-      Expected: Employee with name "Alex" is shown in the list. The status bar shows the number of employees shown in the list.
-
-   3. Test case: `find abcdef`<br>
-      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-   
-   4. Test case: `find manager`<br>
-      Expected: All employees with the word "manager" in their position are shown in the list. The status bar shows the number of employees shown in the list.
-   
-   5. Test case: `find notAManager`<br>
-      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-
-   6. Test case: `find EID1234-5678`<br>
-      Expected: Employee with employee ID "EID1234-5678" is shown in the list. The status bar shows the number of employees shown in the list.
-
-   7. Test case: `find EID0000-0000`<br>
-      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-   
-   8. Test case: `find`<br>
-      Expected: Invalid command format error message is shown in the status bar.
+   2. Try the test cases in the previous section (Finding an employee while all employees are being shown)
+      Expected: Same as the previous section.
 
 3. Finding an employee in an empty employee book
 
    1. Prerequisites: Clear the employee book using the `clear` command.
 
-   2. Test case: `find Alex`<br>
-      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-
-   3. Test case: `find abcdef`<br>
-      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-
-   4. Test case: `find manager`<br>
-      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-   
-   5. Test case: `find notAManager`<br>
-      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-   
-   6. Test case: `find EID1234-5678`<br>
-      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-
-   7. Test case: `find EID0000-0000`<br>
-      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
-
-   8. Test case: `find`<br>
-      Expected: Invalid command format error message is shown in the status bar.
+   2. Enter any valid `find` command similar to previous sections.<br>
+      Expected: No employee is found in the list.
 
 ### Generating a report for an employee
 
@@ -1292,27 +1247,15 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List only some employees using the `find manager` command. Multiple employees in the list. Employee with employee ID "EID1234-5678" is in the list. Employee with employee ID "EID0000-0000" is not in the list.
 
-   2. Test case: `report EID1234-5678`<br>
-      Expected: The report of employee with employee ID "EID1234-5678" is shown in the status bar. The report is also downloaded as a text file in a directory called "reports" in the same directory as the jar file.
-
-   3. Test case: `report EID0000-0000`<br>
-      Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
-   
-   4. Test case: `report`<br>
-      Expected: Invalid command format error message is shown in the status bar.
+   2. Try the test cases in the previous section (Generating report while all employees are being shown)
+      Expected: Same as the previous section.
 
 3. Generating report with an empty employee book
 
    1. Prerequisites: Clear the employee book using the `clear` command.
 
-   2. Test case: `report EID1234-5678`<br>
-      Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
-
-   3. Test case: `report EID0000-0000`<br>
-      Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
-   
-   4. Test case: `report`<br>
-      Expected: Invalid command format error message is shown in the status bar.
+   2. Try the test cases in the previous section (Generating report while all employees are being shown)
+      Expected: Same as the previous section.
 
 
 ### Sorting a list
@@ -1331,12 +1274,6 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `sort f/name in/ascending` or `sort f/department in/random`<br>
    Expected: List is not sorted (order parameter can only be asc or desc). Error details shown in the status message.
 
-   5. Test case: `sort f/name` or `sort in/desc`<br>
-   Expected: List is not sorted (missing parameters). Error details shown in the status message.
-   
-   6. Test case: `sort f/name in/` or `sort f/ in/desc`<br>
-      Expected: List is not sorted (empty parameters). Error details shown in the status message.
-
 2. Sorting the list of employees when only some employees are being shown
 
    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
@@ -1344,6 +1281,7 @@ testers are expected to do more *exploratory* testing.
    2. Try the test cases in the previous section (Sorting the list of employees while all employees are being shown)
       Expected: Same as the previous section
 
+_{other invalid inputs are possible}_
 
 ### Adding Leave for an Employee
 
@@ -1360,28 +1298,23 @@ testers are expected to do more *exploratory* testing.
    Expected: No employee leave is added (ID does not exist). Error details shown in the result display.
 
    4. Test case: `addleave id/EID12345678 from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 from/2023-30-11 to/2023-30-11`<br>
-     Expected: No employee leave is added (incorrect field format). Error details shown in the result display.
+   Expected: No employee leave is added (incorrect field format). Error details shown in the result display.
 
-   5. Test case: `addleave id/ from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 from/ to/2023-12-05` or `addleave id/EID1234-5678 from/2023-12-04 to/`<br>
-     Expected: No employee leave is added (empty fields). Error details shown in the result display.
+   5. Test case: `addleave id/EID1234-5678 from/2023-11-11 to/2023-11-13`<br>
+   Expected: No employee leave is added (leave date(s) already exists). Error details shown in the result display.
 
-   6. Test case: `addleave from/2023-12-04 to/2023-12-05` or `addleave id/EID1234-5678 to/2023-12-05` or `addleave id/EID1234-5678 from/2023-12-04`<br>
-     Expected: No employee leave is added (missing parameters). Error details shown in the result display.
-   
-   7. Test case: `addleave id/EID1234-5678 from/2023-11-11 to/2023-11-13`<br>
-     Expected: No employee leave is added (leave date(s) already exists). Error details shown in the result display.
-
-   8. Test case: `addleave id/EID1234-5678 from/2023-12-05 to/2023-12-04`<br>
-      Expected: No employee leave is added (invalid date order). Error details shown in the result display.
+   6. Test case: `addleave id/EID1234-5678 from/2023-12-05 to/2023-12-04`<br>
+   Expected: No employee leave is added (invalid date order). Error details shown in the result display.
 
 2. Adding leave while only some employees are being shown 
 
    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
-     Employee with id "EID1234-5678" has leaves "2023-11-11" and "2023-11-12" and is not in displayed list.
+   Employee with id "EID1234-5678" has leaves "2023-11-11" and "2023-11-12" and is not in displayed list.
 
    2. Try the test cases in the previous section (Adding leave while all employees are being shown)
-     Expected: Same as the previous section
+   Expected: Same as the previous section
 
+_{other invalid inputs are possible}_
 
 ### Deleting Leave for an Employee
 
@@ -1400,16 +1333,10 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `deleteleave id/EID12345678 from/2023-12-04 to/2023-12-05` or `deleteleave id/EID1234-5678 from/2023-30-11 to/2023-30-11`<br>
       Expected: No employee leave is deleted (incorrect field format). Error details shown in the result display.
 
-   5. Test case: `deleteleave id/ from/2023-12-04 to/2023-12-05` or `deleteleave id/EID1234-5678 from/ to/2023-12-05` or `deleteleave id/EID1234-5678 from/2023-12-04 to/`<br>
-      Expected: No employee leave is deleted (empty fields). Error details shown in the result display.
-
-   6. Test case: `deleteleave from/2023-12-04 to/2023-12-05` or `deleteleave id/EID1234-5678 to/2023-12-05` or `deleteleave id/EID1234-5678 from/2023-12-04`<br>
-      Expected: No employee leave is deleted (missing parameters). Error details shown in the result display.
-
-   7. Test case: `deleteleave id/EID1234-5678 from/2023-12-05 to/2023-12-04`<br>
+   5. Test case: `deleteleave id/EID1234-5678 from/2023-12-05 to/2023-12-04`<br>
       Expected: No employee leave is deleted (invalid date order). Error details shown in the result display.
 
-   8. Test case: `deleteleave id/EID1234-5678 from/2023-12-04 to/2023-12-05`<br>
+   6. Test case: `deleteleave id/EID1234-5678 from/2023-12-04 to/2023-12-05`<br>
       Expected: No employee leave is deleted (no leaves exist between "2023-12-04" and "2023-12-05"). Error details shown in the result display.
 
 2. Deleting leave while only some employees are being shown
@@ -1420,6 +1347,7 @@ testers are expected to do more *exploratory* testing.
    2. Try the test cases in the previous section (Deleting leave while all employees are being shown)
       Expected: Same as the previous section
 
+_{other invalid inputs are possible}_
 
 ### Editing Leave for an Employee
 
@@ -1433,21 +1361,15 @@ testers are expected to do more *exploratory* testing.
       Details of the edited employee shown in the result display.
    
    3. Test case: `editleave id/EID0000-0000 old/2023-11-01 new/2023-11-03`<br>
-      Expected: No employee leave is edited (no existing id). Error details shown in the result display.
+      Expected: No employee leave is edited (ID does not exist). Error details shown in the result display.
 
    4. Test case: `editleave id/12345678 old/2023-11-01 new/2023-11-03` or `editleave id/EID1234-5678 old/2023-28-11 new/2023-30-11`<br>
       Expected: No employee leave is edited (incorrect field format). Error details shown in the result display.
 
-   5. Test case: `editleave id/ old/2023-11-01 new/2023-11-03` or `editleave id/EID1234-5678 old/ new/2023-11-03` or `editleave id/EID1234-5678 old/2023-11-01 new/`<br>
-      Expected: No employee leave is edited (empty fields). Error details shown in the result display.
-
-   6. Test case: `editleave old/2023-11-01 new/2023-11-03` or `editleave id/EID1234-5678 new/2023-11-03` or `editleave id/EID1234-5678 old/2023-11-01`<br>
-      Expected: No employee leave is edited (missing parameters). Error details shown in the result display.
-
-   7. Test case: `editleave id/EID1234-5678 old/2023-11-03 new/2023-11-04`<br>
+   5. Test case: `editleave id/EID1234-5678 old/2023-11-03 new/2023-11-04`<br>
       Expected: No employee leave is edited (old leave doesn't exist). Error details shown in the result display.
 
-   8. Test case: `editleave id/EID1234-5678 old/2023-11-01 new/2023-11-02`<br>
+   6. Test case: `editleave id/EID1234-5678 old/2023-11-01 new/2023-11-02`<br>
       Expected: No employee leave is edited (new leave already exists). Error details shown in the result display.
 
 2. Editing leave while only some employees are being shown  
@@ -1458,29 +1380,25 @@ testers are expected to do more *exploratory* testing.
    2. Try the test cases in the previous section (Editing leave while all employees are being shown)
       Expected: Same as the previous section
 
+_{other invalid inputs are possible}_
+
 ### Listing Employees on Leave on a specified date
 
 1. Listing employees on leave while all employees are being shown 
 
    1. Prerequisites: List all employees using the `list` command. At least one employee in the list.
-        Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02". No employees on leave on "2023-11-11".
+   Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02". No employees on leave on "2023-11-11".
 
    2. Test case: `listleave on/2023-11-01`<br>
-     Expected: The employees on leave on the specified date are displayed in the employee list.
-     Details of the number of employees on leave on the specified date shown in the result display.
+   Expected: The employees on leave on the specified date are displayed in the employee list.
+   Details of the number of employees on leave on the specified date shown in the result display.
 
    3. Test case: `listleave on/2023-11-11`<br>
-      Expected: No employee displayed (no employees on leave on specified date).
-      Details of the number of employees on leave on the specified date shown in the result display.
+   Expected: No employee displayed (no employees on leave on specified date).
+   Details of the number of employees on leave on the specified date shown in the result display.
 
    4. Test case: `listleave on/11-11-2023`<br>
-     Expected: No employee displayed (incorrect field format). Error details shown in the result display.
-
-   5. Test case: `listleave on/ `<br>
-   Expected: No employee displayed (empty field). Error details shown in the result display.
-
-   6. Test case: `listleave `<br>
-     Expected: No employee displayed (missing parameters). Error details shown in the result display.
+   Expected: No employee displayed (incorrect field format). Error details shown in the result display.
 
 2. Listing employees on leave while only some employees are being shown
 
@@ -1489,6 +1407,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Try the test cases in the previous section (Listing employees on leave while all employees are being shown)
       Expected: Same as the previous section
+
+_{other invalid inputs are possible}_
 
 ### Adding Remark for an Employee
 
@@ -1504,16 +1424,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addremark id/EID0000-0000 r/good leader`<br>
        Expected: No remark is added (no existing id). Error details shown in the result display.
 
-    4. Test case: `addremark id/12345678 r/good leader`<br>
-       Expected: No remark is added (incorrect id format). Error details shown in the result display.
-
-    5. Test case: `addremark id/ r/good leader` or `addremark id/EID1234-5678 r/`<br>
-       Expected: No remark is added (empty fields). Error details shown in the result display.
-
-    6. Test case: `addremark r/good leader` or `addremark id/EID1234-5678`<br>
-       Expected: No remark is added (missing parameters). Error details shown in the result display.
-
-    7. Test case: `addremark id/EID1234-5678 r/team player` or `addremark id/EID1234-5678 r/TEAM PLAYER`<br>
+    4. Test case: `addremark id/EID1234-5678 r/team player` or `addremark id/EID1234-5678 r/TEAM PLAYER`<br>
        Expected: No remark is added (remark already exists). Error details shown in the result display.
 
 2. Adding remark while only some employees are being shown
@@ -1523,6 +1434,8 @@ testers are expected to do more *exploratory* testing.
 
     2. Try the test cases in the previous section (Adding remark while all employees are being shown)
        Expected: Same as the previous section
+
+_{other invalid inputs are possible}_
 
 ### Deleting Remark for an Employee
 
@@ -1538,16 +1451,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `deleteremark id/EID0000-0000 r/slow on deadlines`<br>
        Expected: No remark is deleted (no existing id). Error details shown in the result display.
 
-    4. Test case: `deleteremark id/12345678 r/slow on deadlines`<br>
-       Expected: No remark is deleted (incorrect id format). Error details shown in the result display.
-
-    5. Test case: `deleteremark id/ r/slow on deadlines` or `deleteremark id/EID1234-5678 r/`<br>
-       Expected: No remark is deleted (empty fields). Error details shown in the result display.
-
-    6. Test case: `deleteremark r/slow on deadlines` or `deleteremark id/EID1234-5678`<br>
-       Expected: No remark is deleted (missing parameters). Error details shown in the result display.
-
-    7. Test case: `deleteremark id/EID1234-5678 r/bad worker` or `deleteremark id/EID1234-5678 r/BAD WORKER`<br>
+    4. Test case: `deleteremark id/EID1234-5678 r/bad worker` or `deleteremark id/EID1234-5678 r/BAD WORKER`<br>
        Expected: No remark is deleted (remark doesn't exist). Error details shown in the result display.
 
 2. Deleting remark while only some employees are being shown
@@ -1557,6 +1461,8 @@ testers are expected to do more *exploratory* testing.
 
     2. Try the test cases in the previous section (Deleting remark while all employees are being shown)
        Expected: Same as the previous section
+
+_{other invalid inputs are possible}_
 
 ### Resetting Fields for all Employees
 
@@ -1570,15 +1476,14 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `reset f/name` or `reset f/salary` or `reset f/blah` <br>
        Expected: Resetting is not done (not able to reset those fields). Error details shown in the result display.
 
-    4. Test case: `reset f/`<br>
-       Expected: Resetting is not done (empty field). Error details shown in the result display.
-
 2. Resetting field while only some employees are being shown
 
     1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
 
     2. Try the test cases in the previous section (Resetting fields while all employees are being shown)
        Expected: Same as the previous section
+
+_{other invalid inputs are possible}_
 
 ### Updating overtime hours for an employee
 
@@ -1594,13 +1499,8 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `overtime id/EID0000-0000 o/inc a/20`<br>
        Expected: No overtime hours is updated (no existing id). Error details shown in the result display.
 
-    4. Test case: `overtime id/EID12345678 o/inc a/20`<br>
-       Expected: No overtime hours is updated (incorrect id format). Error details shown in the result display.
-
-    5. Test case: `overtime id/ o/inc a/20` or `overtime id/EID1234-5678 o/ a/20` or `overtime id/EID1234-5678 o/inc`<br>
+    4. Test case: `overtime id/ o/inc a/20` or `overtime id/EID1234-5678 o/ a/20` or `overtime id/EID1234-5678 o/inc`<br>
        Expected: No overtime hours is updated (empty fields). Error details shown in the result display.
-
-_{other permutations of invalid input are possible}_
 
 2. Updating overtime hours while only some employees are being shown
 
@@ -1609,6 +1509,8 @@ _{other permutations of invalid input are possible}_
 
     2. Try the test cases in the previous section (Updating overtime hours while all employees are being shown)
        Expected: Same as the previous section
+
+_{other invalid inputs are possible}_
 
 ### Saving data
 
