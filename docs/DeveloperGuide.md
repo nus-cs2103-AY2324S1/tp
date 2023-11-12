@@ -572,9 +572,8 @@ otherwise)
 **MSS**
 
 1. User requests to view all members
-
 2. ClubMembersContact shows a list of all members and displays a success message
-
+   <br/>
    Use case ends.
 
 **Use case: UC04 - Editing a member**
