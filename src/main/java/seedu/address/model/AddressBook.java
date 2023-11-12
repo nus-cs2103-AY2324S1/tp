@@ -226,6 +226,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return this.persons.findInvalidNames(names);
     }
 
+    /**
+     * Updates the groups so that this is displayed on the UI
+     */
     public void updateGroups() {
         this.events.updateGroups();
     }

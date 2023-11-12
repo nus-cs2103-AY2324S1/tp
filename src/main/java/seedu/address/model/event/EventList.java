@@ -77,6 +77,9 @@ public class EventList {
         this.internalList.sort(new EventComparator());
     }
 
+    /**
+     * Updates the groups for display on UI.
+     */
     public void updateGroups() {
         for (Event event: this.internalList) {
             event.updateGroups();
