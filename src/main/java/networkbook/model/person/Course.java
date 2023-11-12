@@ -89,7 +89,7 @@ public class Course implements Identifiable<Course> {
 
     @Override
     public String getValue() {
-        return this.course;
+        return course;
     }
 
     /**
@@ -173,7 +173,10 @@ public class Course implements Identifiable<Course> {
     }
 
     public String getCourse() {
-        return course;
+        String courseName = course;
+        courseName = startDateExists() ? courseName + " /start " + getStartDate() : courseName;
+        courseName = endDateExists() ? courseName + " /end " + getEndDate() : courseName;
+        return courseName;
     }
 
     public String getStartDate() {

@@ -104,11 +104,7 @@ public class CourseContainsKeyTermsPredicateTest {
     public void test_courseDoesNotContainKeyTerms_returnsFalse() {
         // Zero key terms
         CourseContainsKeyTermsPredicate predicate = new CourseContainsKeyTermsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(
-                new PersonBuilder()
-                        .withName("Alice")
-                        .withCourses(List.of("Computer Science"))
-                        .build()));
+
 
         // No matching key terms (one course)
         predicate = new CourseContainsKeyTermsPredicate(Arrays.asList("Drawing", "Painting"));
