@@ -40,7 +40,7 @@ public class AddressBookParser {
         EMAIL("email"),
         ADDRESS("address"),
         LEAD("lead"),
-        TELEGRAM_HANDLE("telegramhandle"),
+        TELEGRAM("telegram"),
         PROFESSION("profession"),
         INCOME("income"),
         DETAILS("details");
