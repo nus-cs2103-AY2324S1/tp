@@ -13,19 +13,18 @@
 * [Product Overview](#product-overview)
 * [Key Definitions](#key-definitions)
 * [User Types](#user-types)
-* [Quick Start Guide](#quick-start-guide)
-* [Features Overview](#features-overview)
+* [Quick Start Guide](#quick-start)
+* [Features Overview](#overview-of-main-features)
 * [Features](#features)
   * Managing Applicants
-    * [Adding an applicant](#adding-an-applicant-add)
-    * [Editing a candidate's detail](#editing-a-candidates-detail-edit)
-    * [Deleting a candidate](#deleting-a-candidate-delete)
+    * [Adding an applicant](#adding-an-applicant--add)
+    * [Editing a candidate's detail](#editing-a-person--edit)
+    * [Deleting a candidate](#deleting-job-applicants--delete)
     * [Creating a remark for a candidate](#creating-a-remark-for-a-candidate-remark)
     * [Setting an applicant's status](#setting-an-applicants-status-set)
     * [Adding a candidate's LinkedIn/Github account](#adding-a-candidates-linkedingithub-account-addg-or-addl)
     * [Viewing a candidate's details](#viewing-a-candidates-details-view)
     * [Opening a candidate's LinkedIn/Github account](#opening-a-candidates-linkedingithub-account-linkedin-or-github)
-
   * Tag Colouring and Categorisation
   * Searching through and Arranging Applicants
   * Event Management and Scheduling
@@ -102,40 +101,41 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
     **Here's what each part of the GUI signifies:**
     ![UiBreakdown](images/uibreak.png)
 
-   | Colour                                                   | Component                   | Description                                                                                                                                    |
-   |----------------------------------------------------------|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-   | <img src="images/red_1.png" width="10px" height="10px">  | Menu Bar                    | Provides buttons for exiting, opening Help window, and opening Events window                                                                   |
-   | <img src="images/orange.png" width="10px" height="10px"> | Command Box                 | Allows you to enter a command                                                                                                                  |
-   | <img src="images/yellow.png" width="10px" height="10px"> | Result Display              | Displays the result of the command execution                                                                                                   |
-   | <img src="images/green.png" width="10px" height="10px">  | Candidate List Panel        | Displays a list of all candidates in JABPro                                                                                                    |
-   | <img src="images/blue.png" width="10px" height="10px">   | Candidate Card              | Displays certain details of a candidate for quick view, such as name, address, phone, email, tags, LinkedIn/Github username                    |
-   | <img src="images/purple.png" width="10px" height="10px"> | Candidate Information Panel | Displays a detailed view of a candidate, providing information of status and remarks, in addition to the basic information about the candidate |
-   | <img src="images/brown.png" width="10px" height="10px">  | Summary Statistics Panel    | Displays summary statistics for a particular candidate pertaining to a specific tag                                                            |
+   | Colour                                                   | Component                   | Description                                                                                                                                     |
+   | ---------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+   | <img src="images/red_1.png" width="10px" height="10px">  | Menu Bar                    | Provides buttons for exiting, opening Help window, and opening Events window.                                                                   |
+   | <img src="images/orange.png" width="10px" height="10px"> | Command Box                 | Allows you to enter a command.                                                                                                                  |
+   | <img src="images/yellow.png" width="10px" height="10px"> | Result Display              | Displays the result of the command execution.                                                                                                   |
+   | <img src="images/green.png" width="10px" height="10px">  | Candidate List Panel        | Displays a list of all candidates in JABPro.                                                                                                    |
+   | <img src="images/blue.png" width="10px" height="10px">   | Candidate Card              | Displays certain details of a candidate for quick view, such as name, address, phone, email, tags, LinkedIn/Github username.                    |
+   | <img src="images/purple.png" width="10px" height="10px"> | Candidate Information Panel | Displays a detailed view of a candidate, providing information of status and remarks, in addition to the basic information about the candidate. |
+   | <img src="images/brown.png" width="10px" height="10px">  | Summary Statistics Panel    | Displays summary statistics for a particular candidate pertaining to a specific tag.                                                            |
 
     In addition, there are windows such as:
-* Help Window [accessed by the `help` command, or through Menu Bar]
-* Events Window [accessed by the `schedule` command, or through Menu Bar]
-* TagList window [accessed through the `listT` command]
+   * Help Window [accessed by the `help` command, or through Menu Bar].
+   * Events Window [accessed by the `schedule` command, or through Menu Bar].
+   * TagList window [accessed through the `listT` command].
 
-    Details for each have been provided with the respective commands.
+   Details for each have been provided with the respective commands.
 
 5. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: adds an applicant with the specified contact details
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: adds an applicant with the specified contact details.
 
-    * `remark 1 r/Great attitude, hardworking`: edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
+    * `remark 1 r/Great attitude, hardworking`: edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`.
+   
     * `view 1`: shows the complete details of the 1st person on the list.
 
-    * `search n/John`: Searches for applicants whose names contain the keyword `John`
+    * `search n/John`: Searches for applicants whose names contain the keyword `John`.
 
     * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-    * `set` : sets the applicant status to either of: (Preliminary, Interviewed, Rejected, Offered)
+      * `set` : sets the applicant status to either of: (`Preliminary`, `Interviewed`, `Rejected`, `Offered`).
 
-    * `add linkedin 1 alexyeoh`: Adds LinkedIn account to candidate's existing contact information
+    * `add linkedin 1 alexyeoh`: Adds LinkedIn account to candidate's existing contact information.
 
-    * `github Alex Yeoh`: Redirects the user to the Github account of the candidate [provided github has been added previously]
+    * `github Alex Yeoh`: Redirects the user to the Github account of the candidate [provided github has been added previously].
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -214,15 +214,13 @@ Adds a person to JABPro.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]…​`
 
-Type | Prefix                  | Constraints                                                                                                                                               
-----------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
-Mandatory  | `n/NAME`                |  `NAME` must be alphanumeric (Letters and numbers, no symbols allowed such as `/`, `,` ...)
-Mandatory| `p/PHONE_NUMBER`        | `PHONE_NUMBER` must contain numbers only and should be at-least 3 digits long
-Mandatory| `e/EMAIL`               | `EMAIL` must be the standard email address format (There must be an email-prefix followed by  `@` symbol and email domain)                                                                  
-Mandatory| `a/ADDRESS`             | `ADDRESS` can be any value, including special characters such as `#`, `,` ...
- Optional|  `t/[CATEGORY] TAGNAME` | `TAGNAME` must be alphanumeric with no spaces. Any details after the space will be ignored. 
-
-
+| Type      | Prefix                 | Constraints                                                                                                                 |
+|-----------|------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `n/NAME`               | `NAME` must be alphanumeric (Letters and numbers, no symbols allowed such as `/`, `,` ...).                                 |
+| Mandatory | `p/PHONE_NUMBER`       | `PHONE_NUMBER` must contain numbers only and should be at-least 3 digits long.                                              |
+| Mandatory | `e/EMAIL`              | `EMAIL` must be the standard email address format (There must be an email-prefix followed by  `@` symbol and email domain). |
+| Mandatory | `a/ADDRESS`            | `ADDRESS` can be any value, including special characters such as `#`, `,` ...                                               |
+| Optional  | `t/[CATEGORY] TAGNAME` | `TAGNAME` must be alphanumeric with no spaces. Any details after the space will be ignored.                                 |
 
 **Notes regarding additional constraint on `add` command:**
 * The uniqueness of the person is determined by the name only. This means that you cannot have 2 persons with the same name in the application book.
@@ -243,7 +241,6 @@ add one of these tags to the candidate you are adding.
 * A person can have any number of tags (including 0)!
 </box>
 
-
  
 An example of the `add` command being successfully executed:
 1. Enter the command `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance`
@@ -263,19 +260,16 @@ An example of trying to add a person with the same name as an existing person:
    ![Add-Fail](images/add-command-duplicate-person.png)
 
 
-
-
 ### Adding a remark to a applicant: `remark`
 
 Edits a remark of an existing applicant in JABPro.
 Format: `remark INDEX r/REMARK`
 
 
-Type | Prefix      | Constraints                                                                                                                                               
-----------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
-Mandatory  | `INDEX`     |  `INDEX` must be an existing index in the displayed applicant list
-Optional | `r/ REMARK` | `REMARK` can be any value, including special characters such as `#`, `,` ... 
-
+| Type      | Prefix      | Constraints                                                                                                                                 |
+|-----------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `INDEX`     | `INDEX` must be an existing index in the displayed applicant list and it must not be greater than the total number of candidates in JABPro. |
+| Optional  | `r/ REMARK` | `REMARK` can be any value, including special characters such as `#`, `,` ...                                                                |
 
 **Notes regarding `remark` command:**
 * The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark.
@@ -319,9 +313,9 @@ Creates a complete view for details of an applicant in the second main panel and
 
 Format: `view INDEX`
 
-Type | Prefix      | Constraints                                                                                                                                               
-----------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
-Mandatory  | `INDEX`     |  `INDEX` must be an existing index in the displayed applicant list
+| Type      | Prefix  | Constraints                                                                                                                                 |
+|-----------|---------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `INDEX` | `INDEX` must be an existing index in the displayed applicant list and it must not be greater than the total number of candidates in JABPro. |
 
 **Notes regarding `view` command:**
 * The index used will be the same index as the one shown in the displayed applicant list.
@@ -362,10 +356,10 @@ Adds the username for their social profile [LinkedIn/Github] to the existing con
 
 Format: `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME`
 
-| Type                        | Parameter   | Constraints |
-|-----------------------------|-------------| ----------- |
-| Mandatory                   | `INDEX`     | `INDEX` must be a non-zero unsigned integer and it must not be greater than the total number of candidates in JABPro |
-| Mandatory [only the prefix] | `u/USERNAME` | `USERNAME` must be a string value |
+| Type                        | Parameter    | Constraints                                                                                                           |
+|-----------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------|
+| Mandatory                   | `INDEX`      | `INDEX` must be a non-zero unsigned integer and it must not be greater than the total number of candidates in JABPro. |
+| Mandatory [only the prefix] | `u/USERNAME` | `USERNAME` must be a string value.                                                                                    |
 
 **Notes regarding `addL` and `addG` command:***
 
@@ -395,9 +389,9 @@ Redirects user to candidate's LinkedIn or Github account.
 
 Format: `linkedin INDEX` or `github INDEX`
 
-| Type                        | Parameter   | Constraints |
-|-----------------------------|-------------| ----------- |
-| Mandatory                   | `INDEX`     | `INDEX` must be a non-zero unsigned integer and it must not be greater than the total number of candidates in JABPro |
+| Type      | Parameter | Constraints                                                                                                           |
+|-----------|-----------|-----------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `INDEX`   | `INDEX` must be a non-zero unsigned integer and it must not be greater than the total number of candidates in JABPro. |
 
 **Notes regarding `LinkedIn` and `Github` commands:**
 
@@ -426,18 +420,17 @@ The Github window opens as follows, displaying the profile with the specified us
 
 `github` commands reacts in the same way in case of missing account.
 
-
-
 ### Listing all persons : `list`
 
 Shows a list of all persons in JABPro
 
 Format: 
-`list` or
-`list so/ATTRIBUTE`
+`list [so/ATTRIBUTE]`
 
-* `so/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
-* The attributes that are supported are `name` and `email`.
+| Type     | Parameter      | Constraints                       |
+|----------|----------------|-----------------------------------|
+| Optional | `so/ATTRIBUTE` | Must either be `name` or `email`. |
+
 * Attribute is case-insensitive: `list so/NAME` and `list so/name` return the same result.
 * The result will be sorted in **ascending** order.
 * The sorting algorithm is case-sensitive, which means it will treat uppercase and 
@@ -467,16 +460,15 @@ Edits an existing applicant's detail in JABPro
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [sc/TAGNAME SCORE]`
 
-Type | Prefix                | Constraints                                                                                                                                               
-----------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
-Mandatory  | `INDEX`               |  `INDEX` must be an existing index in the displayed applicant list
-Optional | `n/NAME`              |  `NAME` must be alphanumeric (Letters and numbers, no symbols allowed such as `/`, `,` ...)
-Optional| `p/PHONE_NUMBER`      | `PHONE_NUMBER` must contain numbers only and should be at-least 3 digits long
-Optional| `e/EMAIL`             | `EMAIL` must be the standard email address format (There must be an email-prefix followed by  `@` symbol and email domain)
-Optional| `a/ADDRESS`           | `ADDRESS` can be any value, including special characters such as `#`, `,` ...
-Optional| `t/TAGNAME`           | `TAGNAME` must be alphanumeric with no spaces. Any details after the space will be ignored.
-Optional| `sc/TAGNAME SCORE`  . | `TAGNAME` a tag that is being created or already exist for that applicant. `SCORE` must be a non-negative integer.
-
+| Type      | Prefix                | Constraints                                                                                                                 |
+|-----------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `INDEX`               | `INDEX` must be an existing index in the displayed applicant list.                                                          |
+| Optional  | `n/NAME`              | `NAME` must be alphanumeric (Letters and numbers, no symbols allowed such as `/`, `,` ...).                                 |
+| Optional  | `p/PHONE_NUMBER`      | `PHONE_NUMBER` must contain numbers only and should be at-least 3 digits long.                                              |
+| Optional  | `e/EMAIL`             | `EMAIL` must be the standard email address format (There must be an email-prefix followed by  `@` symbol and email domain). |
+| Optional  | `a/ADDRESS`           | `ADDRESS` can be any value, including special characters such as `#`, `,` ...                                               |
+| Optional  | `t/TAGNAME`           | `TAGNAME` must be alphanumeric with no spaces. Any details after the space will be ignored.                                 |
+| Optional  | `sc/TAGNAME SCORE`  . | `TAGNAME` a tag that is being created or already exist for that applicant. `SCORE` must be a non-negative integer.          |
 
 **Notes regarding `edit` command:**
 * At least one of the optional fields must be provided.
@@ -539,20 +531,17 @@ An example of the `edit` command being wrongly executed due to trying to attach 
    ![Edit-Fail](images/edit-command-failure.png)
 <br>
 
-
-
-
 ### Filter job applicants by statistics: `filter`
 
 Filters and display applicants in the current displayed applicant list using statistical metrics and values.
 
 Format:`filter t/TAGNAME met/METRIC val/VALUE` or `filter t/TAGNAME met/METRIC`
 
-Type | Prefix                | Constraints                                                                                                                                               
-----------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
-Mandatory  | `t/TAGNAME`           |  `TAGNAME` must be a tag that is of the category `assessment`
-Mandatory| `met/METRIC`          | `METRIC` must be either `score`, `percentile`, `mean`, `median`
-Optional| `val/VALUE`           | Optional only for `mean` and `median`. Otherwise, VALUE` must be a non-negative integer and is a mandatory field.
+| Type      | Prefix       | Constraints                                                                                                        |
+|-----------|--------------|--------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `t/TAGNAME`  | `TAGNAME` must be a tag that is of the category `assessment`.                                                      |
+| Mandatory | `met/METRIC` | `METRIC` must be either `score`, `percentile`, `mean`, `median`.                                                   |
+| Optional  | `val/VALUE`  | Optional only for `mean` and `median`. Otherwise, `VALUE` must be a non-negative integer and is a mandatory field. |
 
 **Notes regarding `filter` command:**
 * Filter works only on the current list of job applicants displayed. It is essential that you enter `list` before using `filter` to ensure that you are filtering the correct list of job applicants.
@@ -615,8 +604,6 @@ An example of the `filter` command being incorrectly executed due to an invalid 
 **Significance of using `filter` with the metrics `score`, `percentile`, `mean` and `median`:**
 In essence, this allows you to find job applicants whose performance rating is above a certain percentile, score or mean/median score for that tag.  
 Ideally, this feature can then be used to find the best candidates easily and quickly without having to manually look through the list of candidates.
-
-
 
 
 ### Searching job applicants by category: `search`
@@ -683,56 +670,28 @@ Example:
 
 Deletes the specified job applicants from the address book.
 
-Format: `delete INDEX` or `delete (t/TAGNAME... st/STATUS...)`
+Format: `delete INDEX` or `delete (t/TAGNAME [MORE TAGS] st/STATUS [MORE STATUS])`
+
+| Type      | Prefix  | Constraints                                                                                                             |
+|-----------|---------|-------------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `INDEX` | `INDEX` must be a non-zero unsigned integer and must also not be greater than the total number of candidates in JABPro. |
+
+| Type       | Prefix      | Constraints                                                                  |
+|------------|-------------|------------------------------------------------------------------------------|
+| Mandatory* | `t/TAGNAME` | `TAGNAME` must be alphanumeric and contains no spaces.                       |
+| Mandatory* | `st/STATUS` | `STATUS` must either be `preliminary`, `interviewed`, `offered`, `rejected`. |
 
 Note:
+* For delete by tags & status, only 1 category is mandatory.<br>
+E.g. `delete t/hardworking` and `delete st/interviwed` is allowed.
 * User **cannot** delete by index and delete by tags & status in a single command.<br>
-  E.g. `delete 1 t/hardworking` is not allowed. 
-
-#### Deleting job applicants by index
-
-Deletes job applicants at the specified index.
-
-Format `delete INDEX`
-
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Example: 
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-#### Deleting job applicants by tag
-
-Deletes job applicants whose tag(s) match any of the given tag keywords
-
-* Keywords are case-insensitive: `delete t/hardworking` and `delete t/HARDWORKING` return the same result.
+  E.g. `delete 1 t/hardworking` is **not** allowed.
 
 Example:
-* `delete t/hardworking`
-
-#### Deleting job applicants by status
-
-Deletes job applicants whose status match any of the given keywords.
-
-Format: `delete st/STATUS...`
-
-* Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
-  E.g. `delete st/interviewing` will give an error.
-* Keywords are case-insensitive: `delete st/interviewed` and `delete st/INTERVIEWED` return the same result.
-
-Example:
-* `delete st/interviewed`
-
-#### Notes for advanced users:
-* You can combine the status and tags prefixes (e.g. `delete st/offered t/hardworking`) in a single delete command.
-* Each delete category can be used at most once in a single search command.<br>
-  E.g. `delete st/interviewed st/rejected` is not allowed.
-
-Example:
-* `delete st/interviewed rejected t/intern manager` will delete applicants whose:
-    * status is either **interviewed** or **rejected**
-    * AND has a tag `intern` or `manager`
+1. `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+2. `delete st/interviewed rejected t/intern manager` will delete applicants whose:
+   * status is either **interviewed** or **rejected**
+   * AND has a tag `intern` or `manager`.
 
 ### Setting an applicant's status : `set`
 
@@ -755,12 +714,12 @@ Adds an event, associated with a candidate, to JABPro.
 
 Format: `event INDEX d/DESCRIPTION bt/BEGIN_TIME et/END_TIME`
 
-| Type                    | Parameter       | Constraints |
-|-------------------------|-----------------| ----------- |
+| Type                    | Parameter       | Constraints                                                                                                          |
+|-------------------------|-----------------|----------------------------------------------------------------------------------------------------------------------|
 | Mandatory               | `INDEX`         | `INDEX` must be a non-zero unsigned integer and it must not be greater than the total number of candidates in JABPro |
-| Mandatory [only prefix] | `d/DESCRIPTION` | `DESCRIPTION` must be a string value |
-| Mandatory               | `bt/BEGIN_TIME` | `BEGIN_TIME` must be a valid date-time, in the format `yyyy-MM-dd HH:mm` |
-| Mandatory               | `et/END_TIME` | `END_TIME` must be a valid date-time, in the format `yyyy-MM-dd HH:mm` |
+| Mandatory [only prefix] | `d/DESCRIPTION` | `DESCRIPTION` must be a string value                                                                                 |
+| Mandatory               | `bt/BEGIN_TIME` | `BEGIN_TIME` must be a valid date-time, in the format `yyyy-MM-dd HH:mm`                                             |
+| Mandatory               | `et/END_TIME`   | `END_TIME` must be a valid date-time, in the format `yyyy-MM-dd HH:mm`                                               |
 
 **Notes regarding the `event` command:**
 
@@ -846,16 +805,14 @@ Format: `exit`
 Summary Statistics is a table generated by JABPro that displays the following information about an applicant:
 It is generated for tags that are categorised under the `assessment` category.
 
- Statistic / Metric                | Description                                                                                                                                              
---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
-`score`                   | The score of the candidate for the tag
-`mean`                    | The mean score of candidates with that tag
-`median`                  | The median score of candidates with that tag
-`minimum`                 | The minimum score of candidates with that tag
-`maximum`                 | The maximum score of candidates with that tag
-`percentile`              | The percentile of the candidate for that tag
-
-
+| Statistic / Metric | Description                                    |
+|--------------------|------------------------------------------------|
+| `score`            | The score of the candidate for the tag.        |
+| `mean`             | The mean score of candidates with that tag.    |
+| `median`           | The median score of candidates with that tag.  |
+| `minimum`          | The minimum score of candidates with that tag. |
+| `maximum`          | The maximum score of candidates with that tag. |
+| `percentile`       | The percentile of the candidate for that tag.  |
 
 <box type="warning" seamless>
 You should ensure that you have **sufficient candidates of more than 20** with a score for the tag you are interested in, before using the summary statistics to make comparisons.  
@@ -938,7 +895,6 @@ JABPro currently does not support editing tags i.e. editing tag name or category
 
 JABPro currently does not support exporting Events. This feature will be implemented in future iterations.
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -954,45 +910,52 @@ JABPro currently does not support exporting Events. This feature will be impleme
 ## Command Summary
 
 
- Action                   | Format, Examples                                                                                                                                               
---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Create**               | `create t/CATEGORY NAME…​` <br> e.g. `create t/dept software`
- **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/developer t/intern` 
- **Remark**               | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`                                                                                          
- **View**                 | `view INDEX` <br> e.g., `view 1`                                                                                                                               
- **Add Github/LinkedIn**  | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`                                                    
- **Open Github/LinkedIn** | `linkedin INDEX` or `github INDEX` e.g., `linkedin 1`, `github 2`                                                                                              
- **Clear**                | `clear`                                                                                                                                                        
- **Delete**               | `delete INDEX` or `delete (t/TAG [MORE TAGS] st/STATUS)` <br> e.g., `delete 3`, `delete t/intern st/rejected`                                                                                                                           
- **Set**                  | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`                                                                                                               
- **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]​ [sc/TAGNAME SCORE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t\MarketingInterview sc\MarketingInterview 50`                                   
- **Search**               | `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAGS [MORE TAGS])` <br> e.g., `search n/alex` 
- **Filter**               | `filter t/TAGNAME met/METRIC val/VALUE` <br> e.g., `filter t/interview met/score val/80`
- **List**                 | `list so/ATTRIBUTE` <br> e.g. `list so/name`
- **ListT**                | `listT`
- **Export**               | `export`                                                                                                                                                       
- **Help**                 | `help`
- **Event**                | `event INDEX d/DESCRIPTION bt/START_TIME et/END_TIME`
- **Schedule**             | `schedule`
+| Action                   | Format, Examples                                                                                                                                                                                |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Create**               | `create t/CATEGORY NAME…​` <br> e.g. `create t/dept software`                                                                                                                                   |
+| **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/developer t/intern`                |
+| **Remark**               | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`                                                                                                                           |
+| **View**                 | `view INDEX` <br> e.g., `view 1`                                                                                                                                                                |
+| **Add Github/LinkedIn**  | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`                                                                                     |
+| **Open Github/LinkedIn** | `linkedin INDEX` or `github INDEX` e.g., `linkedin 1`, `github 2`                                                                                                                               |
+| **Clear**                | `clear`                                                                                                                                                                                         |
+| **Delete**               | `delete INDEX` or `delete (t/TAG [MORE TAGS] st/STATUS)` <br> e.g., `delete 3`, `delete t/intern st/rejected`                                                                                   |
+| **Set**                  | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`                                                                                                                                                |
+| **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]​ [sc/TAGNAME SCORE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t\MarketingInterview sc\MarketingInterview 50` |
+| **Search**               | `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAGS [MORE TAGS])` <br> e.g., `search n/alex`                                                                                         |
+| **Filter**               | `filter t/TAGNAME met/METRIC val/VALUE` <br> e.g., `filter t/interview met/score val/80`                                                                                                        |
+| **List**                 | `list so/ATTRIBUTE` <br> e.g. `list so/name`                                                                                                                                                    |
+| **ListT**                | `listT`                                                                                                                                                                                         |
+| **Export**               | `export`                                                                                                                                                                                        |
+| **Help**                 | `help`                                                                                                                                                                                          |
+| **Event**                | `event INDEX d/DESCRIPTION bt/START_TIME et/END_TIME`                                                                                                                                           |
+| **Schedule**             | `schedule`                                                                                                                                                                                      |
 
 ## Prefix Summary
-Prefix                    | Name         | Commands                                                                                                                                            
---------------------------|--------------| --------------------------
-`n/`                      | name         | Add, Edit, Search
-`p/`                      | phone number | Add, Edit
-`e/`                      | email        | Add, Edit
-`a/`                      | address      | Add, Edit
-`t/`                      | tag          | Add, Edit, Search, Create, Delete
-`st/`                     | status       | Search, Delete, Set
-`r/`                      | remark       | Remark
-`u/`                      | username     | Add Github/LinkedIn
-`met/`                    | metric       | Filter
-`val/`                    | value        | Filter
-`so/`                     | sort         | List
-`d/`                      | description  | Event
-`bt/`                     | begin time   | Event
-`et/`                     | end time     | Event
 
+| Prefix | Description  | Commands                          | Constraint                                                                                                        |
+|--------|--------------|-----------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| `n/`   | Name         | Add, Edit, Search                 | Must be alphanumeric (Letters and numbers, no symbols allowed such as /, , ...).                                  |
+| `p/`   | Phone Number | Add, Edit                         | Must contain numbers only and should be at-least 3 digits long.                                                   |
+| `e/`   | Email        | Add, Edit                         | Must be the standard email address format (There must be an email-prefix followed by  @ symbol and email domain). |
+| `a/`   | Address      | Add, Edit                         | Can be any value, including special characters such as #, , ...                                                   |
+| `t/`   | Tag          | Add, Edit, Search, Create, Delete | Must be alphanumeric with no spaces. Any details after the space will be ignored.                                 |
+| `st/`  | Status       | Search, Delete, Set               | Must either be `preliminary`, `interviewed`, `offered`, `rejected`.                                               |
+| `r/`   | Remark       | Remark                            | Can be any value, including special characters such as #, , ...                                                   |
+| `u/`   | Username     | Add Github/LinkedIn               | Must be a string value.                                                                                           |
+| `met/` | Metric       | Filter                            | Must be either `score`, `percentile`, `mean`, `median`.                                                           |
+| `val/` | Value        | Filter                            | Optional only for mean and median. Otherwise, must be a non-negative integer.                                     |
+| `so/`  | Sort         | List                              | Must be either `name` or `email`.                                                                                 |
+| `d/`   | Description  | Event                             | Must be a string value.                                                                                           |
+| `bt/`  | Begin Time   | Event                             | Must be a valid date-time, in the format `yyyy-MM-dd HH:mm`.                                                      |
+| `et/`  | End Time     | Event                             | Must be a valid date-time, in the format `yyyy-MM-dd HH:mm`.                                                      |
 
+## Glossary
+
+| Keyword   | Definition                                                            |
+|-----------|-----------------------------------------------------------------------|
+| Parameter | Details about the job applicant that will be included in the command. |
+| Command   | Instructions that `JABPro` will execute.                              |
+| JAR       | Compressed file of `JABPro` that is in the form of a Java ARchive.    |
 
 
