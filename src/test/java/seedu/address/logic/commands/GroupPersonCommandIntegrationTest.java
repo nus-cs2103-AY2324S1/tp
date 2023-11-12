@@ -1,7 +1,7 @@
-
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -16,7 +17,6 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
-
 public class GroupPersonCommandIntegrationTest {
     private ModelManager model;
 
@@ -25,20 +25,29 @@ public class GroupPersonCommandIntegrationTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
-    //    @Test
-    //    public void executeGroupPersonSuccess() throws CommandException {
-    //        Person validPerson = new PersonBuilder().withName("Alice Pauline").build(); // Alice Pauline
-    //        Group validGroup = new GroupBuilder().withName("CS2100").build(); // CS2100
-    //
-    //        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    //        expectedModel.assignGroup(validPerson, validGroup);
-    //
-    //        assertCommandSuccess(new GroupPersonCommand(validPerson.getName().toString(),
-    //            validGroup.getGroupName()),
-    //            model,
-    //            String.format(GroupPersonCommand.MESSAGE_SUCCESS,
-    //            validPerson.getName().toString(), validGroup.getGroupName()), expectedModel);
-    //    }
+    @Test
+    public void executeGroupPersonSuccess() throws CommandException {
+        AddressBook ab = new AddressBook();
+        AddressBook abExpected = new AddressBook();
+        Person validPerson = new PersonBuilder().withName("Zhen Dong").build();
+        Group validGroup = new GroupBuilder().withName("cs").build();
+        String personName = validPerson.getName().toString();
+        String groupName = validGroup.getGroupName();
+        ab.addPerson(validPerson);
+        ab.addGroup(validGroup);
+        abExpected.addPerson(validPerson);
+        abExpected.addGroup(validGroup);
+
+        ModelManager modelActual = new ModelManager(ab, new UserPrefs());
+
+        Model expectedModel = new ModelManager(abExpected, new UserPrefs());
+
+        assertCommandSuccess(new GroupPersonCommand(personName, groupName),
+            modelActual,
+            String.format(GroupPersonCommand.MESSAGE_SUCCESS, personName, groupName),
+            expectedModel);
+
+    }
 
     @Test
     public void executeGroupDoesNotExistUnSuccessful() throws CommandException {
@@ -49,8 +58,8 @@ public class GroupPersonCommandIntegrationTest {
         expectedModel.assignGroup(validPerson, validGroup);
 
 
-        assertCommandFailure(new GroupPersonCommand(validPerson.getName().toString(), validGroup.toString()),
-            model,
+        assertCommandFailure(new GroupPersonCommand(validPerson.getName().toString(),
+            validGroup.toString()), model,
             Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
     }
 
@@ -77,8 +86,8 @@ public class GroupPersonCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        assertCommandFailure(new GroupPersonCommand(personInList.getName().toString(), groupInList.getGroupName()),
-            model,
+        assertCommandFailure(new GroupPersonCommand(personInList.getName().toString(),
+            groupInList.getGroupName()), model,
             String.format("%s is already in this group: %s", personName, groupName));
     }
 
