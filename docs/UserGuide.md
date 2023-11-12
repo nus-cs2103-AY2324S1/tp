@@ -321,10 +321,11 @@ _A flashcard with a question, answer, tag and hint field._
    2. Successful Output:<br>
       i. Result box displays:<br>
          `New Card added: Question: opcode for R format instructions; Answer: 000000`<br>
-      ii. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.
+      ii. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.<br>
          ![result of add command](./images/UserGuide/1.4_add.png)
 </div>
 
+[Go to Command Summary](#command-summary)
 
 ### Deleting a Flashcard : `delete`
 Deletes a flashcard in the deck
@@ -347,9 +348,11 @@ _Deleting the card in the deck with an index of 2._
    2. Successful Output:<br>
       i. Result box displays:<br>
          `Deleted Card: Question: opcode for R format instructions; Answer: 000000`<br>
-      ii. The corresponding card is deleted from the deck.
+      ii. The corresponding card is deleted from the deck.<br>
          ![result of delete command](./images/UserGuide/1.4_del.png)
 </div>
+
+[Go to Command Summary](#command-summary)
 
 ### View All Flashcards : `list`
 Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
@@ -387,9 +390,11 @@ _List all flashcards with the CS2100 Tag._
    2. Successful Output:<br>
       i. Result box displays: <br>
          `All cards listed`<br>
-      ii.The corresponding cards matching the keyword and tags is displayed.
+      ii.The corresponding cards matching the keyword and tags is displayed.<br>
    ![usage of list command](./images/UserGuide/1.4_list.png)
 </div>
+
+[Go to Command Summary](#command-summary)
 
 ### Editing a Specific Flashcard : `edit`
 Edits an existing Flashcard in the deck.
@@ -429,9 +434,11 @@ _Change the hint at index 1 to "Apple"._
 2. Successful Output:<br>
     i. Result box displays:<br>
        `Edited Card: Question: How do you you convert from binary to 1s Complement?; Answer: If is a negative number, invert all the bits, i.e. 0 to 1 and vice versa`<br>
-    ii. The corresponding card in the deck will be updated.
+    ii. The corresponding card in the deck will be updated.<br>
        ![result of edit command](./images/UserGuide/1.4_edit.png)
 </div>
+
+[Go to Command Summary](#command-summary)
 
 ### Practise Flashcards : `practise`
 Practise a single Flashcard in the deck
@@ -460,9 +467,11 @@ _Practising the card in the deck with an index of 2._
 
 2. Successful Output:<br>
    i. Result box displays: <br>
-   `Practising Question 1 : opcode for R format instructions`
+   `Practising Question 1 : opcode for R format instructions`<br>
    ![result of practise command](./images/UserGuide/1.4_practise.png)
 </div>
+
+[Go to Command Summary](#command-summary)
 
 ### Hints for Flashcards : `hint`
 See the hint for a question at the given index
@@ -491,9 +500,11 @@ _Hint the card in the deck with an index of 3._
 
 2. Successful Output:<br>
    i. Result box displays:<br>
-   `Hint for Question 1: Zeros`
+   `Hint for Question 1: Zeros`<br>
    ![result of hint command](./images/UserGuide/1.4_hint.png)
 </div>
+
+[Go to Command Summary](#command-summary)
 
 ### Solving Flashcards : `solve`
 Solves the question at the given index
@@ -523,9 +534,11 @@ _Solve the card in the deck with an index of 2._
 2. Successful Output:<br>
    i. Result box displays:<br>
    `Solved Question 1: opcode for R format instructions Answer: 000000`<br>
-   ii. Solve count of the card gets updated.
+   ii. Solve count of the card gets updated.<br>
    ![result of solve command](./images/UserGuide/1.4_solve.png)
 </div>
+
+[Go to Command Summary](#command-summary)
 
 ### Setting Difficulty of Flashcards : `set`
 Setting the difficulty of a flashcard, based on the user.
@@ -555,9 +568,11 @@ _Set the first card as easy_
 2. Successful Output:<br>
    i. Result box displays:<br>
       `Set Difficulty for Question 1 (Difficulty level: EASY)`<br>
-   ii. Due date of the card updated.
+   ii. Due date of the card updated.<br>
    ![result of set command](./images/UserGuide/1.4_set.png)
 </div>
+
+[Go to Command Summary](#command-summary)
 
 ### Randomly Practise Flashcards : `random`
 Practise a single random Flashcard in the deck.
@@ -588,9 +603,11 @@ _Practise a random card._
 
 2. Successful Output (assuming random chooses the card at index 2):<br>
    i. Result box displays:<br>
-   `Practising Question 2 : What are the 5 stages of MIPS?`
+   `Practising Question 2 : What are the 5 stages of MIPS?`<br>
    ![result of random command](./images/UserGuide/1.4_random.png)
 </div>
+
+[Go to Command Summary](#command-summary)
 
 ### Clear All Flashcards : `clear`
 Clears all flashcards found in the Deck. Deck is reset back to empty.
@@ -619,9 +636,11 @@ _Delete all flashcards from the deck._
 
 2. Successful Output<br>
    i. Result box displays:<br>
-   `Deck has been cleared!`
+   `Deck has been cleared!`<br>
       ![result of clear command](./images/UserGuide/1.4_clear.png)
 </div>
+
+[Go to Command Summary](#command-summary)
 
 ### Setting Goals : `goal`
 Set a goal for the current studying session.
@@ -650,9 +669,11 @@ _Set a goal of 5 for this session._
 2. Successful Output:<br>
    i. Result box displays:<br>
    `New goal set.`<br>
-   ii. Goal box updated with new target and goal completion status.
+   ii. Goal box updated with new target and goal completion status.<br>
       ![result of goal command](./images/UserGuide/1.4_goal.png)
 </div>
+
+[Go to Command Summary](#command-summary)
       
 ### Getting Help : `help`
 Seek more details from a link provided leading to the User Guide.
@@ -677,9 +698,11 @@ _Open help window._
 2. Successful Output:<br>
    i. Result box displays:<br>
    `Opened help window.`<br>
-   ii. Popup window with link to User Guide is generated.
+   ii. Popup window with link to User Guide is generated.<br>
       ![result of help command](./images/UserGuide/1.4_help.png)
 </div>
+
+[Go to Command Summary](#command-summary)
 
 ### Exiting <span style="color: green;">lesSON</span> : `exit`
 Exits and closes the <span style="color: green;">lesSON</span> application.
@@ -701,6 +724,10 @@ _Closes <span style="color: green;">lesSON</span>._
 2. Successful Output:<br>
    i. <span style="color: green;">lesSON</span> closes.
 </div>
+
+[Go to Command Summary](#command-summary)
+[Go to Table of Contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -732,7 +759,7 @@ _Bolding a phrase in the question_
    i. Result box displays:<br>
    `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`<br>
    ii. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.<br>
-   iii. `Stage` will appear bolded in both instances.
+   iii. `Stage` will appear bolded in both instances.<br>
 ![usage of bold syntax](./images/UserGuide/1.4_bold.png)
 </div>
 
@@ -753,7 +780,7 @@ _Italicising a phrase in the question_
 2. Successful Output:<br>
    i. Result box displays: `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`<br>
    ii. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.<br>
-   iii. `Stage` will appear italicised in both instances.
+   iii. `Stage` will appear italicised in both instances.<br>
       ![usage of italics syntax](./images/UserGuide/1.4_italics.png)
 </div>
 
@@ -775,7 +802,7 @@ _Underlining a phrase in the question_
 2. Successful Output:<br>
    i. Result box displays: `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`<br>
    ii. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.<br>
-   iii. `Stage` will appear underlined in both instances.
+   iii. `Stage` will appear underlined in both instances.<br>
             ![usage of underline syntax](./images/UserGuide/1.4_underline.png)
 </div>
 
@@ -824,6 +851,8 @@ to see their new decks.
    If you still wish to proceed with modifying the data directly, <span style="color: green;">lesSON</span> would not be held accountable of the risks of such actions.
 
 </div>
+
+[Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
