@@ -6,19 +6,21 @@ skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyAddressBookManager" as ReadOnlyAddressBookManager
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class AddressBook
+Class AddressBookManager
 Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
 Class Person
+Class ID
 Class Email
 Class Name
 Class Phone
 Class Tag
-Class ID
 Class Attendance
 
 Class I #FFFFFF
@@ -28,12 +30,15 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+AddressBookManager .up.|> ReadOnlyAddressBookManager
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyAddressBookManager
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" AddressBookManager
 ModelManager -right-> "1" UserPrefs
+AddressBookManager -down-> "*" AddressBook
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
@@ -41,14 +46,15 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> "*" Tag
 Person *--> ID
 Person *--> "*" Attendance
+Person *--> "*" Tag
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
+Name -[hidden]right-> ID
 
 ModelManager --> "~* filtered" Person
 @enduml

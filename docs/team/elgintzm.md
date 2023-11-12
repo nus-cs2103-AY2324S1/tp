@@ -10,7 +10,7 @@ title: Elgin's Project Portfolio Page
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to store multiple addressbooks for different courses through the `course` command.
-    * What it does: Allows users to have independent addressbooks for different courses. 
+    * What it does: Allows users to have independent addressbooks for different courses.
     * Justification: This feature improves the organisation of student contacts for tutors tutoring for multiple classes.
     * Highlights: This feature minimized the impact on existing commands as from each command's point of view, the `getAddressBook` function will simply
     return the currently selected addressbook. This feature, however, required rewriting some parts of the existing storage code to allow the serializing and deserialzing the new internal state.
@@ -27,7 +27,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [Reposense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ElginTZM&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Contribution to team-based tasks**:
-  * Managed issues on issue tracker 
+  * Managed issues on issue tracker
   * Updated `README.md` (PR: [#49](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/49))
 
 * **Enhancements to existing features**:
@@ -35,10 +35,10 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added details for `CourseCommand` 
+        * Added details for `CourseCommand`
     * Developer Guide:
         * To be added later
-      
+
 * **Review/ mentoring contributions**:
   * Reviewed 9 PRs
 
