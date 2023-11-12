@@ -43,12 +43,12 @@ Let us dive into **InterviewHub** and transform the way you recruit!
     - [Editing an interview: `edit-i`](#editing-an-interview--edit-i)
     - [Finding interviews by job role: `find-i`](#finding-interviews-by-job-role--find-i)
     - [Listing all interviews: `list-i`](#listing-all-interviews--list-i)
-    - [Listing all free timing for the given date: `list-freetime`](#listing-all-free-time-for-the-given-date--list-freetime)
+    - [Listing all free timings for the given date: `list-freetime`](#listing-all-free-timings-for-the-given-date--list-freetime)
     - [Listing all interviews for today: `list-i-today`](#listing-all-interviews-for-today--list-i-today)
     - [Marking an interview as done: `mark`](#marking-an-interview-as-done--mark)
     - [Rating an interview: `rate`](#rating-an-interview--rate)
-    - [Listing all completed interview: `list-i-done`](#listing-all-completed-interview--list-i-done)
-    - [Listing all incomplete interview: `list-i-not-done`](#listing-all-incomplete-interview--list-i-not-done)
+    - [Listing all completed interviews: `list-i-done`](#listing-all-completed-interviews--list-i-done)
+    - [Listing all incomplete interviews: `list-i-not-done`](#listing-all-incomplete-interviews--list-i-not-done)
     - [Sorting interviews by rating: `sort-rate`](#sorting-interviews-by-rating--sort-rate)
     - [Sorting interviews by start time: `sort-time`](#sorting-interviews-by-start-time--sort-time)
 - [Frequently Asked Questions](#frequently-asked-questions)
@@ -254,7 +254,7 @@ Format: `clear`
 
 <div markdown="block" class="alert alert-warning">
 **:warning: Warning:** <br>
-* This action is irreversible, therefore do proceed with caution!
+* This action is irreversible. Please proceed with caution.
 </div>
 
 [Back to the Table of Contents](#table-of-contents)
@@ -302,7 +302,7 @@ Format: `delete-a APPLICANT_INDEX`
 <div markdown="block" class="alert alert-warning">
 **:warning: Warning:** <br>
 
-* This action is irreversible, therefore do proceed with caution!
+* This action is irreversible. Please proceed with caution.
 </div>
 
 Examples:
@@ -444,7 +444,7 @@ Format: `delete-i INTERVIEW_INDEX`
 <div markdown="block" class="alert alert-warning">
 **:warning: Warning:** <br>
 
-* This action is irreversible, therefore do proceed with caution!
+* This action is irreversible. Please proceed with caution.
 </div>
 
 Examples:
@@ -545,7 +545,7 @@ After `list-i`: You should see a success message in the command result box and t
 
 [Back to the Table of Contents](#table-of-contents)
 
-### Listing all free time for the given date : `list-freetime`
+### Listing all free timings for the given date : `list-freetime`
 
 Displays a list of all the blocks of free time the user has in
   the given `DATE`, within the 9am to 5pm window of that day.
@@ -664,7 +664,7 @@ After rating the interview at `INTERVIEW_INDEX` 1 with a `RATING` of 4.0:
 
 [Back to the Table of Contents](#table-of-contents)
 
-### Listing all completed interview : `list-i-done`
+### Listing all completed interviews : `list-i-done`
 
 Shows a list of all the interviews in **InterviewHub** that are done on the GUI.
 
@@ -682,7 +682,7 @@ After `list-i-done`:
 
 [Back to the Table of Contents](#table-of-contents)
 
-### Listing all incomplete interview : `list-i-not-done`
+### Listing all incomplete interviews : `list-i-not-done`
 
 Show a list of all the interviews in **InterviewHub** that are not done on the GUI.
 
