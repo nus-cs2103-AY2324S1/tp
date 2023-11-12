@@ -13,11 +13,16 @@ Foster Family is **optimised for use** via a Command Line Interface (CLI). This 
 
 This user guide contains **all** the commands available to you, along with **step-by-step explanations** and **examples** to help you master the use of Foster Family. If you are a _new user_, simply head over to [Quick Start](#quick-start) to begin your journey with us. For those who are _already acquainted_, you can refer to the [Table of Contents](#table-of-contents) below to navigate to your command of interest.
 
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your computer. You can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
@@ -33,7 +38,10 @@ This user guide contains **all** the commands available to you, along with **ste
 6. Use the `java -jar FosterFamily.jar` command to run the application.<br>
 
    The Foster Family GUI should appear on screen, similar to the screenshot attached below. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui.png) 
+
+<div style="page-break-after: always;"></div>
+
 
 7. Type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
 
@@ -52,6 +60,9 @@ This user guide contains **all** the commands available to you, along with **ste
 Please refer to the [Features](#features) section for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Useful Notations
 These are symbols we will be using to highlight certain information to you.
 
@@ -73,6 +84,9 @@ These are some technical terms you may come across in this user guide.
 | Field                 | Attributes associated with a fosterer entry in Foster Family, such as name and email, etc. |
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## User Interface (UI)
 
 These are the two different screens you will be interacting with in Foster Family. 
@@ -83,28 +97,34 @@ These are the two different screens you will be interacting with in Foster Famil
 
 This is the main view that welcomes you when you start up Foster Family.
 
+<div style="page-break-after: always;"></div>
+
 ### The Profile Page 
 ![ProfileExample](images/screenshots/EditExample.png)
 
 This is the profile view that you can use to add a fosterer or edit the details of an existing fosterer. 
-
 
 #### How to open the profile page
 There are two ways you can use to navigate to the profile page. 
 1. Enter <code>add</code> to view an _empty_ profile page to [add](#adding-a-fosterer-through-the-profile-page-add) a fosterer.
 2. Enter either <code>edit INDEX</code> or <code>view INDEX</code> to [edit](#editing-a-fosterers-detail-through-the-profile-page-edit) or [view](#viewing-a-fosterers-detail-view) the fosterer at index <code>INDEX</code> in Foster Family.
 
+<div style="page-break-after: always;"></div>
+
 Let's say you want to open the profile page of a fosterer name Alex Yeoh who is currently at index 1. 
 ![Benson](images/screenshots/ViewCommandExample.png)
 
 <br>
 
+<div style="page-break-after: always;"></div>
 
 To do so, enter <code>view 1</code> as shown in the image above, which opens the profile page of the fosterer at index 1, Alex Yeoh. 
 
 ![Example profile](images/screenshots/EditExample.png)
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Navigating through the fields
 Typing in the name of the field you want to edit, or substrings of the field, directs your cursor to the textbox, allowing you to make changes.
@@ -119,6 +139,7 @@ In the example above, entering <code>name</code>, or a substring of name like <c
 
 ![Profile navigate field](images/screenshots/NavigatingFields.png)
 
+<div style="page-break-after: always;"></div>
 
 After you are done editing, pressing the Enter key on your keyboard brings your cursor back to the command box with your new changes intact. <br>
 If you wish to revert back to the original value of the field while editing in the textbox, press the Esc key to undo the changes and direct your cursor back to the command box. 
@@ -132,6 +153,8 @@ In the example above, after changing name from 'Yeoh' to 'Yeo' the Enter key was
 The same process can be applied to other fields.
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Saving changes
 
@@ -154,6 +177,8 @@ This saves the changes you have made and updates the details of a fosterer, or a
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Exiting the profile page
 
 Entering <code>exit</code> closes the profile page and leads you back to the main window.
@@ -169,11 +194,15 @@ Let's say you have already saved your changes.
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 Key in <code>exit</code> and press Enter to close the profile page.
 
 ![Exit command saved after](images/screenshots/ExitCommandSavedAfter.png)
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 **2. Changes are not saved**
 
@@ -191,6 +220,8 @@ If you press the Esc key, the exit is cancelled and you can continue working on 
 ![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
 
 The example above is the result of pressing the Esc key after you are warned.
+
+<div style="page-break-after: always;"></div>
 
 To learn more about **adding a new fosterer through the profile page**, refer to the section [Adding a fosterer through the profile page: add](#adding-a-fosterer-through-the-profile-page-add). <br>
 To learn more about **editing a fosterer through the profile page**, refer to the section [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-detail-through-the-profile-page-edit).
@@ -223,6 +254,8 @@ To learn more about **editing a fosterer through the profile page**, refer to th
 
 <br> 
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help for Commands : `help`
 
 Opens a pop-up window, providing you with the link to our User Guide for help.
@@ -239,6 +272,8 @@ Adds a fosterer to your address book, done through the main window.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL [t/TAG]…`
 
+<div style="page-break-after: always;"></div>
+
 Parameters:
 
 | Parameter        | About                                                                                                                                                                                                                                                                       | Example                                                     |
@@ -252,6 +287,8 @@ Parameters:
 | `ANIMAL_NAME`    | - If `availability/NotAvailable`: Name of the animal fostered<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                     | `Fluffball`, `nil`                                          |
 | `TYPE_OF_ANIMAL` | - Type of animal which the fosterer is currently fostering, or prefer to foster<br/> - Case-sensitive<br/> - If `availability/NotAvailable`: current.Dog / current.Cat / nil<br/> - If `availability/Available`: able.Dog / able.Cat / nil<br/> - If `availability/nil`: nil | `current.Dog`, `current.Cat`, `able.Dog`, `able.Cat`, `nil` |
 | `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                      | `experienced`, `urgent`                                     |
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-primary">
 
@@ -272,6 +309,8 @@ Valid cases:
 | 4   | Not fostering (e.g. overseas, currently not able to foster) | `NotAvailable`            | `nil`             | `nil`         |
 | 5   | Fostering: ALL information must be present                  | `NotAvailable`            | `current.Dog/Cat` | NOT `nil`          |
 
+<div style="page-break-after: always;"></div>
+
 * For invalid cases, error messages will be shown when you enter the invalid commands. For example:
   ![Add](images/screenshots/AddErrorMessage.png)
 
@@ -291,6 +330,9 @@ Examples:
     <br/><br/>
     ![Add](images/screenshots/AddJerry.png)
     <br/><br/>
+
+<div style="page-break-after: always;"></div>
+
 * `add n/Pete Tay p/98765411 e/pete@example.com a/Happy street, block 5, #27-01 housing/Condo availability/Available animal/nil animalType/able.Cat`
   * adds a fosterer named Pete Tay with the following details:
     <br/><br/>
@@ -300,6 +342,8 @@ In the case where duplicates field descriptions are given, the last one will be 
 * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB housing/Condo availability/Available availability/NotAvailable animal/Dexter animal/Happy animalType/able.Dog animalType/current.Cat t/Urgent`
   * adds a fosterer named Jerry Tan, who lives in a Condo and is fostering a cat named Happy.
     ![Add](images/screenshots/AddDuplicate.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a fosterer through the profile page: `add`
 
@@ -323,6 +367,7 @@ To learn more about the profile page, please refer to the section [User Interfac
 
 <br> 
 
+<div style="page-break-after: always;"></div>
 
 ### Listing fosterers: `list` (Alias: `find`)
 
@@ -364,6 +409,8 @@ e.g. `a & b / c d` is the same as `a & (b / (c & d))`.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `list`
     * lists all fosterers in the address book.
@@ -375,6 +422,8 @@ Examples:
     * lists entries which match "John Doe" and "Doe Shazam", but not "John Grahm".
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing a fosterer's detail: `view`
 
@@ -405,6 +454,7 @@ To learn more about profile page, please refer to the section [User Interface: T
 
 <br>
 
+<div style="page-break-after: always;"></div>
 
 ### Saving changes in a fosterer's details: `save`
 
@@ -437,6 +487,8 @@ As you can see, entering <code>save</code> for a new fosterer exits the profile 
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 Here is the result of entering <code>save</code> after changing the name from John to John Kim: 
 
 ![Save existing fosterer](images/screenshots/SaveExistingFosterer.png)
@@ -445,11 +497,15 @@ As you can see, entering <code>save</code> for an already existing fosterer does
 
 <br> 
 
-### Editing a fosterer's detail through the main window: `edit`
+<div style="page-break-after: always;"></div>
+
+### Editing a fosterer's details through the main window: `edit`
 
 Edits the details of the index-th fosterer in the list currently displayed in your address book, done through the main window.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]`
+
+<div style="page-break-after: always;"></div>
 
 Parameters:
 
@@ -484,6 +540,8 @@ since it can only undo the last _valid_ command ran.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 *  `find` or `list` followed by `edit 3 n/John` 
    * edits the name of the 3rd fosterer in your address book to John.
@@ -506,7 +564,9 @@ Before you type the save command, make sure there is no accidental overwrite wit
 
 <br>
 
-### Editing a fosterer's detail through the profile page: `edit`
+<div style="page-break-after: always;"></div>
+
+### Editing a fosterer's details through the profile page: `edit`
 
 Edits the details of the index-th fosterer in the list currently displayed in your address book, done through the profile page.
 
@@ -518,6 +578,8 @@ Parameters:
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - Index must be a positive integer | `1`, `2`, `3` |
 
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -546,6 +608,8 @@ Before you type the save command, make sure there is no accidental overwrite wit
 
 <br/>
 
+<div style="page-break-after: always;"></div>
+
 Here is a summary of how to edit a fosterer Alex Yeoh who is currently at index 1:
 
 1. Enter the profile page with `view INDEX` or `edit INDEX`. e.g. `view 1` or `edit 1`.
@@ -554,17 +618,24 @@ Here is a summary of how to edit a fosterer Alex Yeoh who is currently at index 
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 2. Type in the name of the field you want to edit onto the command box. This will make the textbox visible next to the field and automatically set the text cursor to the textbox. e.g. Enter 'name'.
 
 ![enter name](images/screenshots/EnterName.png)
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
+
 3. Edit the original value to a new value. e.g. From Alex Yeoh to 'Bob Yeoh'.
 
 ![change name](images/screenshots/ChangeNameToBobYeoh.png)
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 4. Press Enter to return the text cursor back to the command box. This makes the textbox disappear.
 
@@ -579,6 +650,8 @@ Here is a summary of how to edit a fosterer Alex Yeoh who is currently at index 
 To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a fosterer : `delete`
 
@@ -611,6 +684,8 @@ You can delete multiple fosterers at once.<br>
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `list` followed by `delete 2` 
   * deletes the 2nd fosterer in your address book.
@@ -627,6 +702,8 @@ In this example, Alex, Bernice and Charlotte are the fosterers deleted.
   * deletes the 3rd fosterer in your address book.
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting fosterers: `sort`
 
@@ -646,6 +723,8 @@ If you run the `sort` command multiple times consecutively (resulting in no visi
 since it can only undo the last _valid_ command ran.
 
 </div> 
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing statistics of available fosterers : `stats avail`
 
@@ -667,6 +746,8 @@ Therefore, please ensure that the current list is the list you want your statist
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `list` followed by `stats avail` 
   * calculates statistics of available fosterers, based on all fosterers in your address book.
@@ -683,6 +764,8 @@ Here, you have 6 fosterers in your address book, and 3 of them are available to 
 
 <div markdown="block" class="alert alert-warning">
 
+<div style="page-break-after: always;"></div>
+
 **:warning: Caution:**<br>
 
 For all stat commands, **percentages may not add up to 100.00%**.<br>
@@ -695,6 +778,8 @@ Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat a
 </div>
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing statistics of current fosterers : `stats current`
 Helps you calculate statistics about fosterers who are currently fostering, and the type of animals they are fostering. Percentages are calculated to 2 decimal places.
@@ -716,6 +801,8 @@ Examples:
 
 <br> 
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing housing statistics : `stats housing`
 Helps you calculate statistics about the various housing types of fosterers. Percentages are calculated to 2 decimal places.
 
@@ -736,6 +823,8 @@ Here, out of the 6 fosterers in your address book, 3 live in HDBs, 1 live in a C
 
 <br> 
 
+<div style="page-break-after: always;"></div>
+
 ### Undoing the previous command : `undo`
 
 Undoes your previous command, given that the previous command successfully executed is either `add`, `delete`, `edit`, or `sort`.
@@ -754,6 +843,8 @@ Format: `undo`
 </div>
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `reset`, followed by `reset confirm`
 
@@ -794,6 +885,8 @@ On the profile page,<br>
 
 <br> 
 
+<div style="page-break-after: always;"></div>
+
 ### Saving data
 
 In the main window, your Foster Family data is saved in the hard disk automatically after any command that changes the data, so no manual saving is needed. However, edits made in the profile page have to be saved via the `save` command. Else, changes will be discarded once you exit out of that fosterer's profile page.
@@ -829,6 +922,8 @@ Please refer to the section [Adding a fosterer through the main window: add](#ad
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The solution is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
