@@ -42,7 +42,7 @@ public class AddMemberTaskCommandParser implements Parser<AddMemberTaskCommand> 
             task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddMemberTaskCommand.MESSAGE_USAGE), pe);
+                    AddMemberTaskCommand.MESSAGE_USAGE) + "\n" + pe.getMessage(), pe);
         }
 
         AddMemberTaskDescriptor addMemberTaskDescriptor = new AddMemberTaskDescriptor();

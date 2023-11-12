@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CopyMemberCommandParser" as CopyMemberCommandParser LOGIC_COLOR
+participant "c:CopyMemberCommand" as CopyMemberCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Member" as Member MODEL_COLOR
+end box
+
+[-> LogicManager : execute("cpm 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("cpm 1")
+activate AddressBookParser
+
+create CopyMemberCommandParser
+AddressBookParser -> CopyMemberCommandParser
+activate CopyMemberCommandParser
+
+CopyMemberCommandParser --> AddressBookParser
+deactivate CopyMemberCommandParser
+
+AddressBookParser -> CopyMemberCommandParser : parse("1")
+activate CopyMemberCommandParser
+
+create CopyMemberCommand
+CopyMemberCommandParser -> CopyMemberCommand
+activate CopyMemberCommand
+
+CopyMemberCommand --> CopyMemberCommandParser : c
+deactivate CopyMemberCommand
+
+CopyMemberCommandParser --> AddressBookParser : c
+deactivate CopyMemberCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CopyMemberCommandParser -[hidden]-> AddressBookParser
+destroy CopyMemberCommandParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> CopyMemberCommand : execute()
+activate CopyMemberCommand
+
+CopyMemberCommand -> Model : getFilteredMemberList()
+activate Model
+
+Model -> CopyMemberCommand
+deactivate Model
+
+CopyMemberCommand -> Member : detailsToCopy()
+activate Member
+
+Member --> CopyMemberCommand
+deactivate Member
+
+create CommandResult
+CopyMemberCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CopyMemberCommand
+deactivate CommandResult
+
+CopyMemberCommand --> LogicManager : result
+deactivate CopyMemberCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

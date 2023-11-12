@@ -1,0 +1,19 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters command to copy a member;
+
+if () then ([command is invalid])
+    : Error message for invalid command format is shown;
+else ([else])
+    if () then ([index is invalid])
+        : Error message for invalid index is shown;
+    else ([else])
+        : Copy the member's details into the clipboard;
+        : Show success message with member's details;
+    endif
+endif
+stop
+@enduml

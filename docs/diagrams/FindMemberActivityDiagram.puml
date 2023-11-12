@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters command to find a member;
+
+if () then ([command is invalid])
+    :Error message for invalid command is shown;
+
+
+else ([else])
+      : Parses all keywords from user input;
+      : Search all members for any fields which match any of the keywords;
+      : Update the members list in the GUI;
+      : Show success message with number of members found;
+endif
+stop
+@enduml
+

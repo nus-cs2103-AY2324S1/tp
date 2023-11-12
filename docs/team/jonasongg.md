@@ -33,8 +33,14 @@ Below is a summary of my contributions to the project.
         * Increased the width of the page so that the code snippets are not cut off
         * Adjusted the size of images so that they are not too big and flowed better with the document
         * Added callout boxes to highlight important information
+        * Ensured formatting was consistent throughout the document
+    * Ensured the UG was consistent with the app's features, and that the UG was up-to-date with the latest changes
+      made to the app
 * Contributions to the DG:
-    * to be added soon
+  * Updated the DG and its diagrams and explanations to reflect the changes made to `Person`, `Member`, `Applicant`,
+    `DeleteMemberCommand` classes and more
+  * Wrote sections and added UML diagrams created with PlantUML explaining the view and copy commands and their
+    processes
 * Contributions to team-based tasks:
     * Created the team repo and added the team members to it
     * Set up the project website for the team
@@ -58,5 +64,9 @@ Below is a summary of my contributions to the project.
         * [Pull Request #215](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/215)
         * [Pull Request #230](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/230)
         * [Pull Request #232](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/232)
+        * [Pull Request #243](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/243)
+        * [Pull Request #246](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/246)
+        * [Pull Request #270](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/270)
+        * [Pull Request #271](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/271)
 * Contributions beyond the project team:
     * to be added soon

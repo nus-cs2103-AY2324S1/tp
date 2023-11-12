@@ -11,7 +11,8 @@ class Name
 class Phone
 class Email
 class Telegram
-class Tags
+class Tag
+class Task
 
 Member -up-|> Person
 Applicant -up-|> Person
@@ -20,7 +21,9 @@ Person -> "1" Name
 Member -> "1" Phone
 Member -down-> "1" Email
 Member -down-> "1" Telegram
-Member -down-> "*" Tags
+Member -down-> "*" Tag
+Member -down-> "*" Task
 Applicant -down-> "1" Phone
+Applicant -down-> "1" InterviewTime
 
 @enduml

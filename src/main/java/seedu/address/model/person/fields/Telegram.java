@@ -10,6 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Telegram {
 
     public static final String TELE_REGEX = "^@[a-zA-Z0-9_]{5,32}$";
+    public static final String TYPE = "Telegram";
     public static final String MESSAGE_CONSTRAINTS = "Telegram handle should follow the format: @exampleHandle"
             + " and have between 5 to 32 characters. It should contain only alphanumeric characters and underscores.";
 

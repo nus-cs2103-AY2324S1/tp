@@ -21,19 +21,21 @@ public class AddMemberCommand extends Command {
     public static final String COMMAND_WORD = "addmember";
     public static final String COMMAND_ALIAS = "addm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the member list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
+            + ": Adds a member to the member list. "
             + "\nParameters: "
             + PREFIX_NAME + " {memberName} "
             + PREFIX_PHONE + " {phoneNumber} "
             + PREFIX_EMAIL + " {email} "
             + PREFIX_TELEGRAM + " {telegramHandle} "
-            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_TAG + " TAG]..."
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
             + PREFIX_PHONE + " 98765432 "
             + PREFIX_EMAIL + " johnd@example.com "
             + PREFIX_TELEGRAM + " @johndoe "
-            + PREFIX_TAG + " WelfareHead";
+            + PREFIX_TAG + " WelfareHead "
+            + PREFIX_TAG + " Genius";
 
     public static final String MESSAGE_SUCCESS = "New member added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the member list";

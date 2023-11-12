@@ -62,7 +62,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_memberWithSameIdentityFieldsInList_returnsTrue() {
         uniqueMemberList.add(ALAN_MEMBER);
-        Member editedAlan = new MemberBuilder(ALAN_MEMBER).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        Member editedAlan = new MemberBuilder(ALAN_MEMBER).withName(VALID_NAME_BOB)
                 .build();
         assertTrue(uniqueMemberList.contains(editedAlan));
     }

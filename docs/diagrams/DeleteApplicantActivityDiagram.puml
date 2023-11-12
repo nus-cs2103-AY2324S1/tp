@@ -1,0 +1,22 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters command to delete an Applicant;
+
+if () then ([command is invalid])
+    :Error message for invalid command is shown;
+
+
+else ([else])
+    if () then ([index is invalid])
+    : Error message for invalid index is shown;
+    else([else])
+       : Delete the applicant from the applicant list;
+       : Update the applicant list in the GUI;
+       : Show success message with applicant's name;
+    endif
+endif
+stop
+@enduml
