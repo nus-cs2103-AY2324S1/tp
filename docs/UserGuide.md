@@ -594,33 +594,33 @@ If you wish, please refer to the below section for a more succinct [command summ
 
 ### Musician Command summary
 
-| Action                                 | Format                                                                                   | Examples                                                                                                        |
-|----------------------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| **Add a Musician**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`               | `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`                                     |
-| **Remove a Musician**                  | `delete INDEX`                                                                           | `delete 1`                                                                                                      |
-| **Edit Musician Information**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`  | `edit 2 e/pianistbetsy@edited.com i/violin t/available`                                                         |
-| **Find Musicians**                     | `find [n/NAME]…​ [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`                                 | `find n/John i/Piano`                                                                                           |
-| **List**                               | `list`                                                                                   |                                                                                                                 |
+| Action                                         | Format                                                                                   | Examples                                                                                                        |
+|------------------------------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| **[Add Musician](#add-musician-add)**          | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`               | `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`                                     |
+| **[Delete Musician](delete-musician--delete)** | `delete INDEX`                                                                           | `delete 1`                                                                                                      |
+| **[Edit Musician](#edit-musician--edit)**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`  | `edit 2 e/pianistbetsy@edited.com i/violin t/available`                                                         |
+| **[Find Musicians](#find-musicians--find)**    | `find [n/NAME]…​ [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`                                 | `find n/John i/Piano`                                                                                           |
+
 
 ### Band Command summary
 
-| Action                            | Format                                                                                   | Examples                                                 |
-|-----------------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------|
-| **Add a Band**                    | `addb n/BANDNAME [g/GENRE]…​`                                                            | `addb n/Ace Jazz g/jazz g/blues`                         |
-| **Delete a Band**                 | `deleteb INDEX`                                                                          | `deleteb 1`                                              |
-| **Edit a Band**                   | `editb INDEX n/BANDNAME [g/GENRE]…​`                                                     | `editb 1 n/Ace Jazz g/jazz`                              |
-| **Add Musicians to a Band**       | `addm b/BAND_INDEX m/MUSICIAN_INDEX…​`                                                   | `addm b/1 m/1 m/2`                                       |
-| **Remove a Musician from a Band** | `removem b/BANDINDEX m/MUSICIANINDEX`                                                    | `removem b/1 m/1`                                        |
-| **Find a Band**                   | `findb BANDNAME`                                                                         | `findb theory X`                                         |
-
+| Action                                                              | Format                                                                                   | Examples                                                 |
+|---------------------------------------------------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| **[Create Band](#create-band-addb)**                                | `addb n/BANDNAME [g/GENRE]…​`                                                            | `addb n/Ace Jazz g/jazz g/blues`                         |
+| **[Delete Band](#delete-a-band--deleteb)**                          | `deleteb INDEX`                                                                          | `deleteb 1`                                              |
+| **[Edit Band](#edit-a-band--editb)**                                | `editb INDEX n/BANDNAME [g/GENRE]…​`                                                     | `editb 1 n/Ace Jazz g/jazz`                              |
+| **[Add Musicians to Band](#add-musician-to-band--addm)**            | `addm b/BAND_INDEX m/MUSICIAN_INDEX…​`                                                   | `addm b/1 m/1 m/2`                                       |
+| **[Remove Musician from Band](#remove-musician-from-band-removem)** | `removem b/BANDINDEX m/MUSICIANINDEX`                                                    | `removem b/1 m/1`                                        |
+| **[Find Band](#find-band--findb)**                                  | `findb BANDNAME`                                                                         | `findb theory X`                                         |
+ 
 ### General Command summary
 
-| Action                                         | Format                                                                                    |
-|------------------------------------------------|-------------------------------------------------------------------------------------------|
-| **Show All Valid Instruments and Genres Tags** | `tags`                                                                                    |  
-| **List All Musicians and Bands**               | `list`                                                                                    |
-| **Clear All Data**                             | `clear`                                                                                   |
-| **Exit**                                       | `exit`                                                                                    |
+| Action                                                                  | Format                                                                                    |
+|-------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| **[Show All Tags](#show-all-valid-instruments-and-genres--tags)**       | `tags`                                                                                    |  
+| **[List All Musicians and Bands](#list-all-musicians-and-bands--list)** | `list`                                                                                    |
+| **[Clear Data](#clear-data--clear)**                                    | `clear`                                                                                   |
+| **[Exit App](#exit-app--exit)**                                         | `exit`                                                                                    |
 
 [Back To ToC](#table-of-contents)
 
