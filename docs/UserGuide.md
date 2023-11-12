@@ -461,23 +461,33 @@ Format: `delete_event EVENT_INDEX`
 
 ### Locating events by name, group or person: `find_event`
 
-Find events whose names or groups contain any of the given keywords.
+FumbleLog also allows you to quickly search for events whose name or groups contain any of the given keywords.
 
 Format: `find_event KEYWORD [MORE_KEYWORDS]`
 
-* **Only full words will be matched** e.g. `meeting` will not match `meetings`
-  * FumbleLog will display an empty event list when there are no keyword matches.
-* The search is case-insensitive. e.g `meeting` will match `Meeting`
-* Events matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Meetings TP` will return `Meetings`, `TP deadline`
+| Parameter                    | Format                                                                     | Example             |
+|------------------------------|----------------------------------------------------------------------------|---------------------|
+| `KEYWORD`  or `MORE_KEYWORDS` | Use any characters including whitespace. Must not only contain whitespaces | `Alice` or `Friends` |
+
+**Below are some examples on how to use `add_event` command:**
+* `find_event meeting`: Returns `meeting` and `CS2103T meeting`
+* `find_event friends` returns `meeting` if it contains the `friends` group.
+
+
+**Notes on the `find_event` command:**
 * `find_event` searches the name of the `Event`, `Group` and `Person` that they are assigned
   to and will display them accordingly.
+* Only full words will be matched e.g. `meeting` will not match `meetings`
+* FumbleLog will display an empty event list when there are no keyword matches.
+* The keywords are **not** case-sensitive. e.g `meeting` will match `Meeting`
+* Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Meetings TP` will return `Meetings`, `TP deadline`
 
 
-Examples:
-* `find_event meeting` returns `meeting` and `CS2103T meeting`
-* `find_event friends` returns `meeting` if it contains the `friends` group.
-  <br>
+**This should be the expected output when the command succeeds:**
+Input: `find_event meeting family`
+
+![EventFind](images/Eventfind.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
 
