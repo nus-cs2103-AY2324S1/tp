@@ -73,8 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
-
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `PersonInformationPanel`, `SummaryStatisticScreen` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -264,7 +263,7 @@ The following sequence diagram shows how the view operation works:
 
 <puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
 
-**Note:** The lifeline for `RemarkCommand` and `RemarkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `ViewCommand` and `ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 User should see the UI as shown below after entering `View 1`  
 
@@ -434,9 +433,13 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * has a need to manage a significant number of candidates contacts
+* wants an organized way to keep track of candidates information
 * wants to view and manage candidates information in a single place
-* wants to filter and sort candidates based on their skills, experience, or application date
+* wants to filter and sort candidates based on their details
 * wants to compare candidates using their information
+* wants to view a schedule/summary of events relating to the candidates
+* wants to attach a score to candidate performance over interview and assessments
+* wants to be able to use scores in order to quantitatively compare candidates
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -457,27 +460,26 @@ It serves as a one-stop addressbook for managing job applications.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                                                                                  | So that I can…​                                                                                          |
-|---------|------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `* * *` | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                                    | I can easily access and reach out to candidates when needed                                              |
-| `* * *` | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                                   | I can maintain a record of interactions and feedback                                                     |
-| `* * *` | Hiring Manager   | delete job applicants information                                                                                             | I can remove redundant/unecessary data bloat and also to abide to privacy laws                           |
-| `* * *` | Hiring Manager   | view a specific job applicant's resume or portfolio                                                                           | I can check whether they meet the requirements requested by other department heads                       |
-| `* * *` | Hiring Manager   | search for all job applicants that have a particular skill mentioned in their application                                     | I can find suitable candidates for a project                                                             |
-| `* * *` | Hiring Manager   | List all candidate's information                                                                                              | I can easily view each candidates information                                                            |
-| `* * `  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                                     | I can keep track of each candidate's progress in the hiring process                                      |
-| `* * `  | Hiring Manager   | filter candidates based on their skills, experience, or application date                                                      | I can efficiently evaluate compare candidates                                                            |
-| `* * `  | Hiring Manager   | compare candidates that I am handling using the information i have stored such as that comparing CAP, Years of experience etc | so that I can choose the best candidates to the next stage of the hiring process                         |
-| `* * `  | Hiring Manager   | collate job applicants who were rejected but have potential for other positions in the company                                | I can forward this data to other departments who might need it                                           |
-| `* * `  | Hiring Manager   | collate job applicants who were offered the job and accepted it as well as deleting their details from JABPro                 | I can send this data to the HR department that manages existing employees                                |
-| `* * `  | Hiring Manager   | collate job applicants who were offered the job but rejected it                                                               | I can contact them to ask why they rejected the offer and get feedback                                   |
-| `* * `  | Hiring Manager   | add candidates key features into a multi-formatted form                                                                       | I can have a visual way to objectively view a candidates skills and information                          |
-| `* *` | Hiring Manager | view a schedule/summary of events relating to the candidates | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
-| `*` | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers                   | I can have a summary overview without going into each candidate data specifically                        |
-| `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles           |
-| `*` | Hiring Manager   | get data on which positions already have too many applicants                                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it |
-| `*` | Hiring Manager   | get a visual alert or a section to display urgent task                                                                        | I can stay organized and ensure that remain up to date and on task with the hiring process               |
-| `*` | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                               | I can perform further analysis using alternate tools on candidate data                                   |
+| Priority | As a …​          | I want to …​                                                                                                  | So that I can…​                                                                                                                            |
+|---------|------------------|---------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *` | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                    | I can easily access and reach out to candidates when needed                                                                                |
+| `* * *` | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                   | I can maintain a record of interactions and feedback                                                                                       |
+| `* * *` | Hiring Manager   | delete job applicants information                                                                             | I can remove redundant/unecessary data bloat and also to abide to privacy laws                                                             |
+| `* * *` | Hiring Manager   | view a specific job applicant's resume or portfolio                                                           | I can check whether they meet the requirements requested by other department heads                                                         |
+| `* * *` | Hiring Manager   | search for all job applicants that have a particular skill mentioned in their application                     | I can find suitable candidates for a project                                                                                               |
+| `* * *` | Hiring Manager   | List all candidate's information                                                                              | I can easily view each candidates information                                                                                              |
+| `* * `  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                     | I can keep track of each candidate's progress in the hiring process                                                                        |
+| `* * `  | Hiring Manager   | compare candidates using their performance in their assessments or interviews                                 | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
+| `* * `  | Hiring Manager   | collate job applicants who were rejected but have potential for other positions in the company                | I can forward this data to other departments who might need it                                                                             |
+| `* * `  | Hiring Manager   | collate job applicants who were offered the job and accepted it as well as deleting their details from JABPro | I can send this data to the HR department that manages existing employees                                                                  |
+| `* * `  | Hiring Manager   | collate job applicants who were offered the job but rejected it                                               | I can contact them to ask why they rejected the offer and get feedback                                                                     |
+| `* * `  | Hiring Manager   | add candidates key features into a multi-formatted form                                                       | I can have a organised way to objectively view a candidates skills and information                                                         |
+| `* *` | Hiring Manager | view a schedule/summary of events relating to the candidates                                                  | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
+| `*` | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers   | I can have a summary overview without going into each candidate data specifically                                                          |
+| `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
+| `*` | Hiring Manager   | get data on which positions already have too many applicants                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it                                   |
+| `*` | Hiring Manager   | get a visual alert or a section to display urgent task                                                        | I can stay organized and ensure that remain up to date and on task with the hiring process                                                 |
+| `*` | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                               | I can perform further analysis using alternate tools on candidate data                                                                     |
 *{More to be added}*
 
 ### Use cases
@@ -485,6 +487,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `JABPro` and the **Actor** is the `hiring manager`, unless specified otherwise)
 
 **Use case: Add a person**
+
+**Guarantees**: The person is added to the list of persons. The person is also saved in the database.
+
 
 **MSS**
 1. User requests to add a person.
@@ -502,6 +507,8 @@ Use case ends.
     Use case resumes at step 1.
 
 **Use case: Add a remark to a person**
+
+**Guarantees**: The remark is added to the person. The remark is also saved in the database.
 
 **MSS**
 1. User requests to add a remark to a person.
@@ -594,13 +601,15 @@ Use case ends.
     * 3b1. AddressBook shows an error message indicating that the specified status is invalid.  
       Use case resumes at step 3.
 
-**Use case: View a person's details**
+**Use case: View a person's details**  
+
+**Guarantees**: Person's details are displayed in full in a new window.
 
 **MSS**
 1.  User requests to list persons.
-2.  AddressBook shows a list of persons.
+2.  JABPro shows a list of persons.
 3.  User requests to view a specific person in the current displayed AddressBook.
-4.  The UI shows the details of that person.  
+4.  JABPro shows the details of that person.  
     Use case ends.
 
 **Extensions**
@@ -614,6 +623,27 @@ Use case ends.
 * 3b. User decides to search for a person based on a criteria such as name.
     * 3b1. Displayed AddressBook changes to match that of search result.  
       Use case resumes at step 3.
+
+**Use case: Using scores to compare and filter people**
+
+**Guarantees**: Persons are displayed has a score that exceed the specified threshold based on the metric and value provided for a tag.
+
+
+**MSS**
+1. User requests to list persons.
+2. JABPro shows a list of persons.
+3. User edits the scores of persons tying it to a tag
+4. User requests to filter persons by their scores for a particular tag based on a particular metric.
+5. JABPro shows a list of persons with scores.
+
+**Extensions**
+* 3a. The tag or score is invalid.
+    * 3a1. JABPro shows an error message indicating that the specified tag or score is invalid.  
+      Use case resumes at step 3.
+* 4a. The parameters provided are invalid.
+    * 4a1. JABPro shows an error message indicating that the specified method is invalid.  
+      Use case resumes at step 4.
+  
 
 **Use case: Export the current data to excel**
 
@@ -678,6 +708,25 @@ Use case ends.
 
 *{More to be added}*
 
+### Planned Enhancements
+
+There are certain feature flaws that we have identified and would like to improve on in the future.
+
+1. **Improve what identifies as a unique person**
+   Currently, a person is uniquely identified by their name. This is not ideal as there may be multiple persons with the same name. We would like to improve this by using a unique identifier such as internal ID or NRIC number.
+   This would allow us to have a more robust system that can handle multiple persons with the same name.
+
+2. **Improve the edit feature** 
+   Currently, it falls short of the user's expectations as it does not allow the user to add on to existing tags. We would like to improve this by creating a feature that allows the user to add on to existing tags.  
+   Thereby users can add on to existing tags without having to retype all the previous tags.
+3. **Improve the summary statistic implementation** 
+    Currently, if the applicants do not have a good spread of scores, the summary statistics will not be very useful. We would like to improve on this by implementing a more robust summary statistics that can handle small sample sizes and outliers.
+    Additionally, you can only use the summary statistic table for comparison after you have inputted most of the scores. At that point, it might be more relevant to use the filter feature instead. Thereby we hope to add more visualisations like graphs to the summary statistics table to make it more useful for comparison.
+4. **Improve the filter feature**
+    Currently, the filter feature might be too flexible for the user. That is it works on the displayed list and not across the board. We would like to improve on this by implementing a filter feature that works across the database.  
+    This makes it more intuitive and logical for the user to use since the user would expect the filter feature to work across the database and not just the displayed list.
+
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -698,11 +747,15 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Hiring Manager**: Inter-changable with users in this context
-* **Candidate**: Inter-changable with persons/job applicants in this context
+* **Candidate**: Inter-changable with persons/applicants in this context
 * **AddressBook**: Inter-changable with JABPro in this context since this is an evolve project built on-top of AB3 functionality
 * **Keyword**: Search parameter
 
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
+
+
+
 
 ## **Appendix: Instructions for manual testing**
 
@@ -772,5 +825,92 @@ testers are expected to do more *exploratory* testing.
       **Note**:  The current AddressBook should contain a person named `John Poh`
       Expected: No person is added. Error details shown in the status message. List of persons remains the same.
 
-   
+### Editing a person's score for an assessment type tag while all persons are being shown
 
+1. Editing a person's score for an assessment type tag while all persons are being shown  
+   1. Prerequisites:  
+      1. List all persons using the `list` command. The list should have at least one person.
+      2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
+      
+    
+2. Test case 1:   
+`edit 1 t/Interview sc/Interview 70`  
+**Note**: The score value should be a positive integer and must contain a space between the tag and the score value.  
+**Expected**: Score for the assessment type tag `Interview` is updated to 70.   
+Both Person List and Person Information Panel is updated to reflect the new `Interview` Tag. The new score is reflected on the Summary Statistics Screen(Third panel from the left).    
+
+
+3. Test case 2:  
+`edit 1 t/swe sc/swe 70`  
+**Note**: Tag `swe` is not categorised as an assessment type tag. Thus, you cannot edit the score for this tag.  
+**Expected**: Neither score nor tag is updated for person. Error details shown in the status message.  
+   
+3. Test case 3:  
+`edit 1 t/Interview sc/Interview -10`  
+**Note**: The score value should be a positive integer and must contain a space between the tag and the score value.  
+**Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
+
+### Adding a remark to a person while all persons are being shown
+
+1. Adding a remark to a person while all persons are being shown  
+   1. Prerequisites: List all persons using the `list` command. 
+    
+   2. Test case 1:   
+   `remark 1 r/John is a good candidate`  
+   **Expected**: New remark is added to the person. Details of remark displayed on the person information panel.
+   
+   3. Test case 2:  
+   `remark 1 r/**REMARK** Furthermore, hes capable of working in a team`    
+   **Expected**: Remark is added on from the previous existing remark. Person information panel is updated to reflect the addition of the remark.  
+   Specifically `John is a good candidate` is followed by `Furthermore, hes capable of working in a team` on the person information panel.  
+   4. Test case 3:   
+   `remark 1 r/`  
+   **Expected**: Previous remark is deleted. Person information panel is updated to reflect the deletion of the remark and is blank.  
+   5. Test case 4:  
+   `remark 0 r/John is a good candidate`   
+    **Expected**: No remark is added. Error details shown in the status message. Person information panel remains the same.
+
+### Viewing a person's details while all persons are being shown
+1. Viewing a person's details while all persons are being shown  
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    
+   2. Test case 1:   
+   `view 1`  
+   **Expected**: Person information panel is updated to reflect the details of the person.  
+   3. Test case 2:  
+   `view 0`  
+   **Expected**: No person is viewed. Error details shown in the status message. Person information panel remains the same.
+ 
+### Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown
+1. Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown  
+   1. Prerequisites:  
+      1. List all persons using the `list` command. The list should have at least one person.
+      2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
+      3. Edit the score for the `Interview` tag for at least two people using the `edit` command. This is done by entering `edit 1 t/Interview sc/Interview 70` and `edit 2 t/Interview sc/Interview 50` in the command box.
+    
+   2. Test case 1:   
+   `filter t/Interview met/score val/60`  
+   **Expected**: Person list is updated to reflect the persons with scores greater than 60 for the `Interview` tag. In this case its only the person with index 1. 
+   
+   3. Test case 2:  
+   `filter t/Interview met/median`    
+   **Expected**: Person list is updated to reflect the persons with scores greater than the median score for the `Interview` tag. In this case its only the person with index 1.
+
+   4. Test case 3:    
+   `filter t/Interview met/percentile val/0`  
+   **Expected**: Person list is updated to reflect the persons with scores greater than the 0th percentile score for the `Interview` tag. In this case it will be all the persons with the `Interview` tag.
+   
+   5. Test case 4:
+   `filter t/swe met/score val/60`
+    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
+   
+    6. Test case 5:
+    `filter t/Interview met/score val/-10`
+    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
+   
+    7. Test case 6:
+    `filter t/Interview met/variance val/100` 
+       **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
+    8. Test case 7:
+    `filter t/Interview met/percentile` 
+    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
