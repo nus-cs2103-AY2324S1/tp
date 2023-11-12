@@ -19,7 +19,7 @@ public class IdTest {
     }
 
     @Test
-    public void isValidName() {
+    public void isValidId() {
         // null id
         assertThrows(NullPointerException.class, () -> Id.isValidId(null));
 

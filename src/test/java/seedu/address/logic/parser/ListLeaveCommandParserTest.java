@@ -35,7 +35,7 @@ public class ListLeaveCommandParserTest {
 
         // invalid date
         assertParseFailure(parser, " on/2023-02-30", Messages.MESSAGE_INVALID_DATE);
-        assertParseFailure(parser, " on/2023-30-12", Messages.MESSAGE_INVALID_DATE);
+        assertParseFailure(parser, " on/2023-31-11", Messages.MESSAGE_INVALID_DATE);
 
         // invalid format
         assertParseFailure(parser, " on/30-12-2023", Messages.MESSAGE_INVALID_DATE);

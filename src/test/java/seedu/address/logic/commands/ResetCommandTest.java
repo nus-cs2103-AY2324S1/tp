@@ -41,10 +41,10 @@ public class ResetCommandTest {
         ResetCommand resetCommand = new ResetCommand("overtime");
 
         // empty field
-        assertThrows(CommandException.class, () -> resetCommand.isValidField(""));
+        assertThrows(CommandException.class, () -> resetCommand.isValidField(NO_FIELD));
 
         // invalid field
-        assertThrows(CommandException.class, () -> resetCommand.isValidField("blah"));
+        assertThrows(CommandException.class, () -> resetCommand.isValidField(INVALID_FIELD));
     }
 
     @Test
@@ -52,10 +52,10 @@ public class ResetCommandTest {
         ResetCommand resetCommand = new ResetCommand("overtime");
         assertAll(() -> {
             // overtime
-            resetCommand.isValidField("overtime");
+            resetCommand.isValidField(OVERTIME_FIELD);
 
             // leaves
-            resetCommand.isValidField("leaves");
+            resetCommand.isValidField(LEAVES_FIELD);
         });
     }
 

@@ -52,6 +52,7 @@ Given below are my contributions to the project.
       * Added implementation guide for reset, editleave, addremark and deleteremark feature (including their UML diagrams)
       * Added instructions for manual testing for reset, editleave, addremark and deleteremark feature
       * Added and updated user stories
+      * Added efforts required and achievements of the project under the Appendix: Effort
 
 * **Community**:
 

@@ -20,10 +20,6 @@ public class RemarkList {
         return remarkList.get(zeroBasedIndex);
     }
 
-    public int getSize() {
-        return remarkList.size();
-    }
-
     public void addRemark(Remark remark) {
         remarkList.add(remark);
     }
@@ -69,22 +65,5 @@ public class RemarkList {
             sb.append("No remarks");
         }
         return sb.toString();
-    }
-
-    /**
-     * Returns true if a given ArrayList is a valid RemarkList.
-     *
-     * @param test List to be tested
-     */
-    public static boolean isValidRemarkList(ArrayList<Remark> test) {
-        if (test.isEmpty()) {
-            return true;
-        }
-        for (int i = 0; i < test.size(); i++) {
-            if (Remark.isValidRemark(test.get(i).toString())) {
-                return true;
-            }
-        }
-        return false;
     }
 }

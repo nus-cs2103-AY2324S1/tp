@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_FINA
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVELIST_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OVERTIME_HOURS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -18,6 +19,7 @@ import static seedu.address.testutil.TypicalEmployees.BOB;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -78,6 +80,16 @@ public class EditLeaveCommandTest {
         EditLeaveCommand editLeaveCommand = new EditLeaveCommand(BOB.getId(), oldLeaveDate, newLeaveDate);
         model.addEmployee(BOB);
         assertCommandFailure(editLeaveCommand, model, EditLeaveCommand.MESSAGE_NON_EXISTENT_LEAVE);
+    }
+
+    @Test
+    void execute_newLeaveExist_failure() {
+        VALID_LEAVELIST_BOB.add(new Leave(LocalDate.parse("2023-10-31", DateTimeFormatter.ISO_LOCAL_DATE)));
+        LocalDate oldLeaveDate = BOB.getLeaveList().getLeave(0).leaveDate;
+        LocalDate newLeaveDate = BOB.getLeaveList().getLeave(1).leaveDate;
+        EditLeaveCommand editLeaveCommand = new EditLeaveCommand(BOB.getId(), oldLeaveDate, newLeaveDate);
+        model.addEmployee(BOB);
+        assertCommandFailure(editLeaveCommand, model, EditLeaveCommand.MESSAGE_DUPLICATE_LEAVE);
     }
 
     @Test
