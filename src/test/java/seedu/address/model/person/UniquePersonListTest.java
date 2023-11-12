@@ -196,6 +196,6 @@ public class UniquePersonListTest {
     @Test
     public void iteratorMethod() {
         uniquePersonList.add(ALICE);
-        assertEquals(uniquePersonList.iterator().next(), ALICE);
+        assertEquals(ALICE, uniquePersonList.iterator().next());
     }
 }

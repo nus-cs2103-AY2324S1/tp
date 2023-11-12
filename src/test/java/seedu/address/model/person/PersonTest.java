@@ -100,7 +100,7 @@ public class PersonTest {
     @Test
     public void getFilteredPersonList() {
         assertThrows(NullPointerException.class, () -> ALICE.getFilteredInteractions(null));
-        assertEquals(BENSON.getFilteredInteractions(x -> true).size(), 1);
+        assertEquals(1, BENSON.getFilteredInteractions(x -> true).size());
     }
 
     @Test
@@ -119,53 +119,53 @@ public class PersonTest {
                 return interaction.getDate().isAfter(LocalDate.of(2023, 11, 1));
             }
         };
-        assertEquals(BENSON.getFilteredInteractions(predicateAfterEarlierDate).size(), 1);
-        assertEquals(BENSON.getFilteredInteractions(predicateAfterLaterDate).size(), 0);
+        assertEquals(1, BENSON.getFilteredInteractions(predicateAfterEarlierDate).size());
+        assertEquals(0, BENSON.getFilteredInteractions(predicateAfterLaterDate).size());
     }
 
     @Test
     public void isUncontacted() {
-        assertEquals(ALICE.isUncontacted(), true);
-        assertEquals(BENSON.isUncontacted(), false);
-        assertEquals(ELLE.isUncontacted(), false);
+        assertEquals(true, ALICE.isUncontacted());
+        assertEquals(false, BENSON.isUncontacted());
+        assertEquals(false, ELLE.isUncontacted());
     }
 
     @Test
     public void isClosed() {
-        assertEquals(ALICE.isClosed(), false);
-        assertEquals(BENSON.isClosed(), false);
-        assertEquals(ELLE.isClosed(), true);
+        assertEquals(false, ALICE.isClosed());
+        assertEquals(false, BENSON.isClosed());
+        assertEquals(true, ELLE.isClosed());
     }
 
     @Test
     public void isContacting() {
-        assertEquals(ALICE.isContacting(), false);
-        assertEquals(BENSON.isContacting(), true);
-        assertEquals(ELLE.isContacting(), false);
+        assertEquals(false, ALICE.isContacting());
+        assertEquals(true, BENSON.isContacting());
+        assertEquals(false, ELLE.isContacting());
     }
 
     @Test
     public void leadBooleans() {
-        assertEquals(ALICE.isColdLead(), true);
-        assertEquals(BENSON.isColdLead(), false);
-        assertEquals(ELLE.isColdLead(), false);
+        assertEquals(true, ALICE.isColdLead());
+        assertEquals(false, BENSON.isColdLead());
+        assertEquals(false, ELLE.isColdLead());
 
-        assertEquals(ALICE.isWarmLead(), false);
-        assertEquals(BENSON.isWarmLead(), true);
-        assertEquals(ELLE.isWarmLead(), false);
+        assertEquals(false, ALICE.isWarmLead());
+        assertEquals(true, BENSON.isWarmLead());
+        assertEquals(false, ELLE.isWarmLead());
 
-        assertEquals(ALICE.isHotLead(), false);
-        assertEquals(BENSON.isHotLead(), false);
-        assertEquals(ELLE.isHotLead(), true);
+        assertEquals(false, ALICE.isHotLead());
+        assertEquals(false, BENSON.isHotLead());
+        assertEquals(true, ELLE.isHotLead());
     }
 
     @Test
-    public void addInteractions() {
-        Person alice = new PersonBuilder(ALICE).build();
-        assertEquals(alice.getInteractions().size(), 0);
-        List<Interaction> result = alice.addInteractions(INTERACTION_LIST_ONE);
-        assertEquals(alice.getInteractions(), result);
-        assertEquals(alice.getInteractions().size(), 1);
+    public void testAddInteractions() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(0, aliceCopy.getInteractions().size());
+        List<Interaction> result = aliceCopy.addInteractions(INTERACTION_LIST_ONE);
+        assertEquals(result, aliceCopy.getInteractions());
+        assertEquals(1, aliceCopy.getInteractions().size());
     }
 
     @Test

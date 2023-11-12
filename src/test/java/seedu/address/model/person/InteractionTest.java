@@ -21,17 +21,17 @@ public class InteractionTest {
         Interaction interaction = new Interaction("This is a test interaction note.");
         Interaction expectedInteraction =
             new Interaction("This is a test interaction note.", Interaction.Outcome.UNKNOWN);
-        assertEquals(interaction, expectedInteraction);
+        assertEquals(expectedInteraction, interaction);
     }
 
     @Test
     public void isOutcome() {
-        assertEquals(INTERACTION_ONE.isOutcome(Interaction.Outcome.INTERESTED), true);
-        assertEquals(INTERACTION_ONE.isOutcome(Interaction.Outcome.CLOSED), false);
+        assertEquals(true, INTERACTION_ONE.isOutcome(Interaction.Outcome.INTERESTED));
+        assertEquals(false, INTERACTION_ONE.isOutcome(Interaction.Outcome.CLOSED));
 
         //Tests again if default outcome is UNKNOWN
         Interaction interaction = new Interaction("This is a test interaction note.");
-        assertEquals(interaction.isOutcome(Interaction.Outcome.UNKNOWN), true);
+        assertEquals(true, interaction.isOutcome(Interaction.Outcome.UNKNOWN));
     }
 
     @Test
