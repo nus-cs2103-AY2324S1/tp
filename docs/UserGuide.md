@@ -74,16 +74,16 @@ Click on the relevant links to easily navigate through the guide and access the 
 
 ### General UI information
 
-Component | Purpose
---------|------------------
-**Navigation Bar** | Allows you to exit UNOFAS or view help
-**Command Line** | Location to enter commands
-**Result Line** | Displays the result after a command is entered
-**Contact List** | Displays clients
-**Appointment List** | Displays appointments
-**Contact Card** | Displays detailed information about a patient
-**Appointment Card** | Displays detailed information about an appointment
-**Save Location** | Displays the location where your UNOFAS data is stored
+| Component            | Purpose                                                  |
+|----------------------|----------------------------------------------------------|
+| **Navigation Bar**   | Allows you to exit UNOFAS or view help                   |
+| **Command Line**     | Location to enter commands                               |
+| **Result Line**      | Displays the result after a command is entered           |
+| **Contact List**     | Displays clients                                         |
+| **Appointment List** | Displays appointments                                    |
+| **Contact Card**     | Displays detailed information about a patient            |
+| **Appointment Card** | Displays detailed information about an appointment       |
+|  **Save Location**   | Displays the location where your UNOFAS data is stored   |
 
 ### Contact Card
 
@@ -138,21 +138,26 @@ Below is a table summarising common arguments used in `add`, `edit`, `find`, `sc
 to view the arguments' prefix, and their acceptable values. Unless specified, having only space characters i.e an empty
 value, is not an acceptable value and will result in a warning.
 
-| Prefix | Argument              | Acceptable Values                                                      |
-|--------|-----------------------|------------------------------------------------------------------------|
-| -      | INDEX                 | Number (1 to current size of the contact book)                         |
-| `n/`   | NAME                  | Alphabets, numbers, and space characters only                          |
-| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                |
-| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format           |
-| `a/`   | ADDRESS               | Any value is possible                                                  |
-| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                          |
-| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                |
-| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted |
-| `t/`   | TAG                   | Alphabets and numbers only. Empty value is accepted                    |
-| `ap/`  | APPOINTMENT_NAME      | Alphabets, numbers, and space characters only                          |
-| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                                  |
-| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)                      |
-| -      | KEYWORD               | `name` or `appointment`                                                |
+| Prefix | Argument              | Acceptable Values                                                                                                  |
+|--------|-----------------------|--------------------------------------------------------------------------------------------------------------------|
+| -      | INDEX                 | Number (1 to current size of the contact book)                                                                     |
+| `n/`   | NAME                  | Alphabets, numbers, and space characters only                                                                      |
+| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                                                            |
+| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format                                                       |
+| `a/`   | ADDRESS               | Any value is possible.                                                                                             |
+| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                                                                      |
+| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                                                            |
+| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted when using [Edit](#editing-a-person--edit). |
+| `t/`   | TAG                   | Alphabets and numbers only. Empty value is accepted when using [Edit](#editing-a-person--edit).                    |
+| `ap/`  | APPOINTMENT_NAME      | Alphabets, numbers, and space characters only                                                                      |
+| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                                                                              |
+| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)                                                                  |
+| -      | KEYWORD               | `name` or `appointment`                                                                                            |
+
+<div markdown="span" class="alert alert-primary">:information_source:
+**Do note** If the ADDRESS includes any recognized prefixes (leading space + prefix), users should be careful. 
+For instance, if the user inputs `a/Blk 285 n/Clementi` for the ADDRESS argument, it will trigger the identification of the prefix `n/` in the input. 
+</div>
 
 -----------------------
 ### Viewing help : `help`
@@ -255,7 +260,8 @@ Tags:`
 ![result for 'edit 4 n/john doe a/23 woodlands ave 123'](images/editUi.png)
 
 <div markdown="span" class="alert alert-primary">:information_source:
-**Do note** that it is possible to add a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
+**Do note** that it is possible to edit a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
+However, multiple empty values for tags and financial plans are not accepted. For example, `t/ t/` and `fp/ fp/` is not accepted.
 </div>
 
 ---------------
@@ -364,6 +370,7 @@ Upon triggering the overriding prompt, until confirmation or cancellation of com
 is not allowed (including trying to exit the program). 
 </div>
 ----------
+
 ### Completing an Appointment : `complete`
 
 Completes an appointment either with the person at the specified `INDEX` or complete all appointments with matching `APPOINTMENT_DATE`.
@@ -448,7 +455,8 @@ UNOFAS data are saved in the hard disk automatically after any command that chan
 UNOFAS data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, UNOFAS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, UNOFAS will discard all data and start with an empty data file at the next run. 
+Certain edits to the file may also cause unexpected behaviours. Please only edit the file if you are confident that it is correct, and it is recommended to take a backup of the file before editing it.
 </div>
 
 ### Archiving data files `[coming in v2.0]`

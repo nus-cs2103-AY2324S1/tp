@@ -263,64 +263,42 @@ The following activity diagram illustrates how the complete operation is execute
 
 ### Gather Emails Feature
 
-The **Gather Emails** feature in our software system is a critical functionality designed to efficiently collect
-email addresses. This feature is facilitated through the `GatherCommand` class, which plays a central role in the process.
-
-#### Implementation Overview
-
-The `GatherCommand` class is instantiated by the `GatherCommandParser`, which parses user input commands. The
-`GatherCommandParser` class implements the following operations:
-
-* `GatherCommandParser#parse(String args)` — Checks the prefixes (fp/ and t/) and instantiates `GatherCommand`
-accordingly. It passes either a `GatherEmailByFinancialPlan` or a `GatherEmailByTag` object, both implementations of
-the `GatherEmailPrompt` interface.
-
-The `GatherCommand` takes in a `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently
-interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand` class implements the following
-operations:
-
-* `GatherCommand#GatherCommand(GatherEmailPrompt prompt)` — Constructor that initializes the command with the
-provided `GatherEmailPrompt` object.
-* `GatherCommand#execute()` —  Executes the gathering operation by calling
-`Model#gatherEmails(GatherEmailPrompt prompt)`.
-
-The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
-It contains the following method:
-
-* `ModelManager#gatherEmails(GatherEmailPrompt prompt)` —  Carries out the gathering operation by calling
-`AddressBook#gatherEmails(GatherEmailPrompt prompt)`.
-
-This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and
-in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
-
-The `UniquePersonsList` class maintains a list of unique persons. Additionally, it implements the following operation:
-* `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  This method iterates through the persons list
-and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person.
-
-Depending on the scenario, it triggers either `Person#gatherEmailsContainsTag(String prompt)` or
-`Person#gatherEmailsContainsFinancialPlan(String prompt)`:
-* `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of the name of
-any Tag in the `Set<Tag>` of the current person.
-* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of the
-name of any Financial Plan in the `Set<Tag>` of the current person.
-
-This is the class diagram for the gather command:
+The **Gather Emails** feature in our software system is designed to efficiently collect email addresses.
+The **Gather Emails** feature is facilitated by the `GatherCommand`, which plays a central role in the process. Below is the class diagram of the gather emails feature.
 
 ![GatherClassDiagram](images/GatherClassDiagram.png)
 
-**Usage Scenario:**
+#### Implementation Overview
 
-**Scenario 1:**
-User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` will be initialized. Each person in the
-`UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
+The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherCommandParser` checks for the prefix `fp/` or `t/` in the user's input and creates either a `GatherEmailByFinancialPlan` or `GatherEmailByTag` object accordingly.
+Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface. This interface helps with future scalability of this feature to gather emails by more fields. 
 
-**Scenario 2:**
-User enters a gather `t/Elderly`. The `GatherEmailByTag` will be initialized. Each person in the `UniquePersonList`
-will be passed into the `GatherEmailByTag#gatherEmails(Person person)`.
+The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently
+interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand#execute()` executes the gathering operation by calling
+`Model#gatherEmails(GatherEmailPrompt prompt)`.
 
-The following sequence diagram shows how the gather operation works:
+The following sequence diagram shows how the gather operation works as described above:
 
-![GatherSequenceDiagram](images/GatherSequenceDiagram.png)
+![GatherSequenceDiagram1](images/GatherSequenceDiagram1.png)
+
+The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
+The `ModelManager#gatherEmails(GatherEmailPrompt prompt)` calls `AddressBook#gatherEmails(GatherEmailPrompt prompt)`. 
+This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and
+in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
+
+The `UniquePersonsList` class maintains a list of unique persons and `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` iterates through the persons list
+and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. Depending on the type of `GatherEmailPrompt`, it triggers either: 
+
+* `Person#gatherEmailsContainsTag(String prompt)` —  This method calls the `Tag#containsSubstring(String substring)` to checks if the given prompt is a substring of any Tag names in the `Set<Tag>` of the current person.
+* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  This method calls the `FinancialPlan#containsSubstring(String substring)` to checks if the given prompt is a substring of any Financial Plan names in the `Set<FinancialPlan>` of the current person.
+
+To allow gather email feature to be case-insensitive, the prompt and financial plan/tag names converted to lowercase when compared.
+The following sequence diagram shows how the gathering of emails by financial plan operation works:
+
+![GatherSequenceDiagram2](images/GatherSequenceDiagram2.png)
+
+Currently, we only allow gathering emails by `FinancialPlan` and `Tag` as these are the more likely to be searched to gather emails by. However, we can add more classes implementing the `GatherEmailPromt`
+to facilitate the gathering of emails by more fields.
 
 #### Design Considerations
 
@@ -328,19 +306,19 @@ The following sequence diagram shows how the gather operation works:
 
 **Alternative 1 (Current Choice):** User can only search by one Financial Plan or Tag.
 - **Pros:** Easy to implement. Limits the potential for bugs.
-- **Cons:** Limited filtering options. Hard to scale to gather by other fields.
+- **Cons:** Limited filtering options.
 
 **Alternative 2:** User can search by multiple Financial Plans or Tags.
 - **Pros:** More filtering options. Easy to scale to gather by other fields.
 - **Cons:** Introduces more complexity and requires additional error handling.
 
-_{more aspects and alternatives to be added}_
 
 ### Expanded Find feature
 
 The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure.
 It extends the `find` command with the ability to search for multiple terms at once, implemented using an array
 of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `CombinedPredicate`.
+
 ![CombinedPredicateClassDiagram](images/CombinedPredicateClassDiagram.png)
 
 In the `FindCommandParser`, `CombinedPredicate` is initialised with a `NameContainsKeywordsPredicate`,
@@ -467,114 +445,6 @@ The `setAppointmentList()` method checks against `filteredPersons` to look for u
     * Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer
     dependent on `filteredPersons`.
 
-### \[Proposed\] Undo/redo feature
-
-### \[Proposed\] Undo/redo feature
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and
-`Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
-initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls
-`Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be
-saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls
-`Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it
-will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the
-`undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once
-to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index
-0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo`
-command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user
-rather than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end
-at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer`
-once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index
-`addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook
-states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will
-return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as
-`list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="400" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -609,47 +479,47 @@ modifying of clients’ data.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                                   | I want to …​                                                                                                          | So that I can…​                                                                                                                      |
-|----------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-|`* * *`| financial advisor who often works with numerous clients | have a central repository for my clients’ contacts details | effectively manage the intricate details of each of my clients. |
-| `* * *`  | financial advisor | add clients' contacts to the contact book | accumulate contacts for future purposes. |
-| `* * *`  | financial advisor | remove clients contacts from the contact book | keep my contact book compact and relevant. |
-| `* * *`  | financial advisor | edit clients’ contacts in the contact book | keep my information updated. |
-| `* *`  | financial advisor | record appointments with my clients | keep track of when my next meeting with the client is. |
-| `* *`  | financial advisor | tag my clients by the plans they purchase | gather groups of clients based on the financial plan(s) they purchased. |
-| `* *`  | financial advisor | search for clients with specific financial plans | update those people about their plans more efficiently. |
-| `* *`  | financial advisor | sort my clients in certain orders including alphabetical order or appointment time in both ascending and descending order | view my clients in a more systematic manner. |
-| `* *`  | financial advisor | view my upcoming appointments I have with clients in chronological order | better plan my time. |
-| `* *`  | financial advisor | complete appointments | clean up the address book of completed appointments. |
-| `* *`  | financial advisor | gather emails of clients by their tags such as age group | collate and notify people with the same tags on any updates. |
-| `* *`  | financial advisor | search for clients with the same financial plan | efficiently provide targeted updates to individuals with the same plan. |
-| `*`      | busy financial advisor                                                    | streamline administrative tasks like tracking my clients contacts                                                     | focus most of my time on giving personalised financial advice and services to my clients.                                            |
-| `*`      | financial advisor managing a substantial client portfolio                 | follow a standardised format to collect my clients’ information                                                       | manage data consistency among my clients.                                                                                            |
-| `*`      | financial advisor                                                         | search for specific client details                                                                                    | quickly contact my clients.                                                                                                          |
-| `*`      | user who values both my clients' time and the quality of our interactions | set reminders for follow-up sessions with clients                                                                     | ensure I never miss an important meeting.                                                                                            |
-| `*`      | financial advisor                                                         | efficiently track referral sources for my clients                                                                     | manage their relationships.                                                                                                          |
-| `*`      | financial advisor                                                         | sort my clients in certain orders including alphabetical order portfolio value in both ascending and descending order | view my clients in a more systematic manner.                                                                                         |
-| `*`      | financial advisor                                                         | filter my clients based on certain metrics like financial products purchased and minimum portfolio value              | choose clients.                                                                                                                      |
-| `*`      | financial advisor                                                         | record appointments with clients with the application                                                                 | keep track of when my last meeting with each client is.                                                                              |
-| `*`      | financial advisor                                                         | export my contact data and client data in a readable format                                                           | use it for backup purposes or to run data processing with other software tools.                                                      |
-| `*`      | financial advisor                                                         | have a dashboard 	                                                                                                    | obtain insights into my clientele base including metrics like client acquisition, retention rates and revenue I generate each month. |
-| `*`      | financial advisor	                                                        | categorise contacts based on their financial status (high net worth regular) 	                                        | prioritise my client interactions.                                                                                                   |
-| `*`      | financial advisor                                                         | update my profile information (name, contact, details, company)                                                       | ensure my personal information is always accurate.                                                                                   |
-| `*`      | an experienced user                                                       | edit the data file directly  	                                                                                        | be more efficient.                                                                                                                   |
-| `*`      | user                                                                      | undo actions                                                                                                          | recover from my mistakes.                                                                                                            |
-| `*`      | busy financial advisor                                                    | quickly add incomplete details of a client and be reminded about it                                                   | fill the rest in later.                                                                                                              |
-| `*`      | financial advisor                                                         | check the appointments scheduled today                                                                                | 	 not forget to meet a client                                                                                                        |
-| `*`      | financial advisor                                                         | view contacts of all my clients I am meeting for the day                                                              | 	efficiently search for their contacts.                                                                                              |
-| `*`      | financial advisor                                                         | view all the insurance plans my client has purchased easily                                                           | make planning during an appointment easier.                                                                                          |
-| `*`      | financial advisor                                                         | filter the plans of my client                                                                                         | to make it focus on certain plans during my appointment                                                                              |
-| `*`      | financial advisor                                                         | make updates to their plans on the app easily	                                                                        | keep track of changes to the clients plans                                                                                           |
-| `*`      | financial advisor                                                         | check which client has been under me the longest                                                                      | 	plan welfare to retain them as long term customers.                                                                                 |
-| `*`      | financial advisor                                                         | add notes on clients                                                                                                  | 	excess them when needed                                                                                                             |
-| `*`      | financial advisor                                                         | display data from the address book into a excel file                                                                  | 	more easily present to clients                                                                                                      |
-| `*`      | financial advisor                                                         | add tags to customers                                                                                                 | 	collate and notify people with the same plan should there be a new change                                                           |
-| `*`      | manager                                                                   | retrieve data on the types of plans purchased                                                                         | 	better understand the products my team member is selling                                                                            |
-| `*`      | manager                                                                   | monitor expiring insurance plans                                                                                      | 	advice trainees on time management                                                                                                  |
-| `*`      | financial advisor	                                                        | import a file                                                                                                         | 	easily transfer client information when client leaves                                                                               |
+| Priority | As a …​                                                                   | I want to …​                                                                                                              | So that I can…​                                                                                                                      |
+|----------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | financial advisor who often works with numerous clients                   | have a central repository for my clients’ contacts details                                                                | effectively manage the intricate details of each of my clients.                                                                      |
+| `* * *`  | financial advisor                                                         | add clients' contacts to the contact book                                                                                 | accumulate contacts for future purposes.                                                                                             |
+| `* * *`  | financial advisor                                                         | remove clients contacts from the contact book                                                                             | keep my contact book compact and relevant.                                                                                           |
+| `* * *`  | financial advisor                                                         | edit clients’ contacts in the contact book                                                                                | keep my information updated.                                                                                                         |
+| `* *`    | financial advisor                                                         | record appointments with my clients                                                                                       | keep track of when my next meeting with the client is.                                                                               |
+| `* *`    | financial advisor                                                         | tag my clients by the plans they purchase                                                                                 | gather groups of clients based on the financial plan(s) they purchased.                                                              |
+| `* *`    | financial advisor                                                         | search for clients with specific financial plans                                                                          | update those people about their plans more efficiently.                                                                              |
+| `* *`    | financial advisor                                                         | sort my clients in certain orders including alphabetical order or appointment time in both ascending and descending order | view my clients in a more systematic manner.                                                                                         |
+| `* *`    | financial advisor                                                         | view my upcoming appointments I have with clients in chronological order                                                  | better plan my time.                                                                                                                 |
+| `* *`    | financial advisor                                                         | complete appointments                                                                                                     | clean up the address book of completed appointments.                                                                                 |
+| `* *`    | financial advisor                                                         | gather emails of clients by their tags such as age group                                                                  | collate and notify people with the same tags on any updates.                                                                         |
+| `* *`    | financial advisor                                                         | search for clients with the same financial plan                                                                           | efficiently provide targeted updates to individuals with the same plan.                                                              |
+| `*`      | busy financial advisor                                                    | streamline administrative tasks like tracking my clients contacts                                                         | focus most of my time on giving personalised financial advice and services to my clients.                                            |
+| `*`      | financial advisor managing a substantial client portfolio                 | follow a standardised format to collect my clients’ information                                                           | manage data consistency among my clients.                                                                                            |
+| `*`      | financial advisor                                                         | search for specific client details                                                                                        | quickly contact my clients.                                                                                                          |
+| `*`      | user who values both my clients' time and the quality of our interactions | set reminders for follow-up sessions with clients                                                                         | ensure I never miss an important meeting.                                                                                            |
+| `*`      | financial advisor                                                         | efficiently track referral sources for my clients                                                                         | manage their relationships.                                                                                                          |
+| `*`      | financial advisor                                                         | sort my clients in certain orders including alphabetical order portfolio value in both ascending and descending order     | view my clients in a more systematic manner.                                                                                         |
+| `*`      | financial advisor                                                         | filter my clients based on certain metrics like financial products purchased and minimum portfolio value                  | choose clients.                                                                                                                      |
+| `*`      | financial advisor                                                         | record appointments with clients with the application                                                                     | keep track of when my last meeting with each client is.                                                                              |
+| `*`      | financial advisor                                                         | export my contact data and client data in a readable format                                                               | use it for backup purposes or to run data processing with other software tools.                                                      |
+| `*`      | financial advisor                                                         | have a dashboard 	                                                                                                        | obtain insights into my clientele base including metrics like client acquisition, retention rates and revenue I generate each month. |
+| `*`      | financial advisor	                                                        | categorise contacts based on their financial status (high net worth regular) 	                                            | prioritise my client interactions.                                                                                                   |
+| `*`      | financial advisor                                                         | update my profile information (name, contact, details, company)                                                           | ensure my personal information is always accurate.                                                                                   |
+| `*`      | an experienced user                                                       | edit the data file directly  	                                                                                            | be more efficient.                                                                                                                   |
+| `*`      | user                                                                      | undo actions                                                                                                              | recover from my mistakes.                                                                                                            |
+| `*`      | busy financial advisor                                                    | quickly add incomplete details of a client and be reminded about it                                                       | fill the rest in later.                                                                                                              |
+| `*`      | financial advisor                                                         | check the appointments scheduled today                                                                                    | 	 not forget to meet a client                                                                                                        |
+| `*`      | financial advisor                                                         | view contacts of all my clients I am meeting for the day                                                                  | 	efficiently search for their contacts.                                                                                              |
+| `*`      | financial advisor                                                         | view all the insurance plans my client has purchased easily                                                               | make planning during an appointment easier.                                                                                          |
+| `*`      | financial advisor                                                         | filter the plans of my client                                                                                             | to make it focus on certain plans during my appointment                                                                              |
+| `*`      | financial advisor                                                         | make updates to their plans on the app easily	                                                                            | keep track of changes to the clients plans                                                                                           |
+| `*`      | financial advisor                                                         | check which client has been under me the longest                                                                          | 	plan welfare to retain them as long term customers.                                                                                 |
+| `*`      | financial advisor                                                         | add notes on clients                                                                                                      | 	excess them when needed                                                                                                             |
+| `*`      | financial advisor                                                         | display data from the address book into a excel file                                                                      | 	more easily present to clients                                                                                                      |
+| `*`      | financial advisor                                                         | add tags to customers                                                                                                     | 	collate and notify people with the same plan should there be a new change                                                           |
+| `*`      | manager                                                                   | retrieve data on the types of plans purchased                                                                             | 	better understand the products my team member is selling                                                                            |
+| `*`      | manager                                                                   | monitor expiring insurance plans                                                                                          | 	advice trainees on time management                                                                                                  |
+| `*`      | financial advisor	                                                        | import a file                                                                                                             | 	easily transfer client information when client leaves                                                                               |
 
 *{More to be added}*
 
@@ -879,10 +749,7 @@ validity checker for both fields.
 at once. To allow the gathering of all the persons emails using `gather all` command, we plan create another
 `GatherEmailPrompt` class, with a method that will call the Person `getEmail()` method. To allow gathering emails by multiple fields, for example using the `fp/` and `t/` prefixes at once, we plan to use a similar approach
 to `find` but return the person's email instead.
-6. The `complete`, `add`, `edit` and `schedule` commands currently display the whole list (i.e. undoes the result of
-any `find` command) after being executed, which might cause users to become disoriented. We plan to disable this
-interaction between these commands and `find`.
-7. The `clear` command confirmation window can be manipulated using the arrow and 'Enter' keys. The window is
+6. The `clear` command confirmation window can be manipulated using the arrow and 'Enter' keys. The window is
 initialised with the focus on the `confirm` button. This makes it possible for a user to accidentally press 'Enter'
 twice and wipe the contact book anyway, bypassing the defence mechanism entirely. We plan to make the command more
 resistant to mistakes by having the user key in a specific phrase, or to initialise the window with the focus on the

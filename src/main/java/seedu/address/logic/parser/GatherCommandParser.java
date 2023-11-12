@@ -41,7 +41,6 @@ public class GatherCommandParser implements Parser<GatherCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            // Parse Tag
             String tagArgs = removePrefix(trimmedArgs, PREFIX_TAG);
             validateTag(tagArgs);
             assert isValidTagName(tagArgs) : "Prompt has to meets valid Tag requirements";

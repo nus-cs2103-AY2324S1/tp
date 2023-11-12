@@ -61,7 +61,7 @@ public class FinancialPlan {
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats state as text for viewing.
      */
     public String toString() {
         return '[' + financialPlanName + ']';
