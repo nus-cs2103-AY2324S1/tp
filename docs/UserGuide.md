@@ -121,6 +121,8 @@ your contacts and events better.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list_all`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* If any of the commands provided are invalid/do not follow the necessary format, an error message will be displayed.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
@@ -323,71 +325,89 @@ Format: `list_persons`
 
 ## Commands for Events
 
-### Properties of events
-Before you proceed to use commands to manage events, you should know the properties of an event in FumbleLog.
+### Adding an event : `add_event`
+
+Apart from allowing you to add contacts, FumbleLog allows you to keep track of your daily commitments by
+allowing you to add events. You can also choose to assign existing contacts or groups to each event.
+
+Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [g/GROUP]...`
+
+**Acceptable values for each parameter:**
 
 | Parameter                   | Format                                                                                    | Example           |
 |-----------------------------|-------------------------------------------------------------------------------------------|-------------------|
 | `EVENT_NAME`                | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                             | `CS2103T meeting` |
 | `DATE`                      | Have format `yyyy-MM-dd` and should not be earlier than current date.                     | `2023-12-01`      |
 | `START_TIME` and `END_TIME` | Have format `HHmm`. `START_TIME` should be earlier than `END_TIME`.                       | `1400`            |
-| `NAME`                      | Multiple persons can be assigned to an event but only existing persons name can be added. | `John Doe`        |
+| `PERSON_NAME`               | Multiple persons can be assigned to an event but only existing persons name can be added. | `John Doe`        |
 | `GROUP`                     | Multiple groups can be assigned to an event but only existing groups can be added.        | `CS2103T`         |
 
-### Adding an event : `add_event`
+<br>
 
-Add an event to the events list in FumbleLog.
+> Below are some examples on how to use `add_event` command:
+>
+> * `add_event m/FumbleLog presentation d/2023-10-30`: Adds an event with name "FumbleLog presentation" and with date "2023-10-30".
+> * `add_event m/FumbleLog meeting d/2023-10-30 g/Team2`: Adds an event with name "FumbleLog meeting" , with date "2023-10-30", and assigns contact in group "Team2" to the event.
+> * `add_event m/CS2101 OP2 d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`: Adds an event with name "CS2101 OP2", with date "2023-10-05", with start time "1500", with end time "1700", assigns contact with name "Ken" and groups "CS2103T" and "CS2101" to the event.
 
-Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [g/GROUP]...`
+<br>
 
+**Notes on the `add_event` command:**
 - `START_TIME` and `END_TIME` are optional.
-- `PERSON_NAME` is optional and multiple persons can be added at once, however only persons that exist can be added.
-- `GROUP` is optional, however only groups that exist can be added.
-- The given `DATE`, `START_TIME` and `END_TIME` cannot be a time in the past.
+- `PERSON_NAME` and `GROUP` is optional. 
+-  Multiple persons and groups can be added at once, however only existing groups and persons can be added.
+- The provided values for `DATE`, `START_TIME` and `END_TIME` must represent future date and time; past values are not allowed.
 - The given `START_TIME` must be before the given `END_TIME`.
 - If the meeting is added successfully, it will automatically be sorted by date and time with the earliest meeting at the top of the list.
-- All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023.
-- All time are to be in the format `HHmm`. i.e. 1400 for 2pm.
 - If the given `START_TIME` and `END_TIME` are not given, the default values are `0000` and `2359` respectively.
 - Note that if a person appears under multiple groups, e.g `Alvin` is in groups `classmates` and `friends`, the name `Alvin` will appear under both groups when displayed in the events list. This is an intended behavior for you to see everyone in the groups that are assigned to the event. This is illustrated as follows.
 
 ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 
-Example: 
-* `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
-* `add_event m/FumbleLog presentation d/2023-10-30 g/Team2`
+<br>
 
-Acceptable values for each parameter:
-* `m/EVENT_DETAILS`: Details of the event.
-* `d/DATE`: A valid date in the format `yyyy-MM-dd`.
-* `[s/START_TIME]`: A valid time in the format `HHmm`.
-* `[e/END_TIME]`: A valid time in the format `HHmm`.
-* `[n/PERSON_NAME]`: Name of the person to be assigned.
-* `[g/GROUP]`: Name of the group to be assigned.
-
-Expected output when the command succeeds:
-
+**This should be the expected output when the command succeeds:**
 Input: `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
 
 ![EventAdd](images/Eventadd.png)
 
 
-If any of the inputs provided are invalid/do not follow the necessary format, an error message will be displayed.
-
 [Scroll back to Table of Contents](#table-of-contents)
 
 ### Editing an event : `edit_event`
 
-Edits an existing event in FumbleLog.
+If the details of an event has changed or if you have made a mistake when adding an event, FumbleLog allows you to easily edit your event details with the latest updated information. You can use this command
+to assign more contacts or groups to the event using the `n/` or `g/` parameter respectively, or unassign contacts or groups using `u/` or `ug/` respectively.
 
-Format: `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`
+Format: `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`
 
-* **At least one of the optional parameters required.**
-* The input values will replace the existing values, except for `PERSON` AND `GROUP`.
+**Acceptable values for each parameter:**
+
+| Parameter                   | Format                                                                                                       | Example           |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------|-------------------|
+| `EVENT_INDEX`               | A positive integer that is smaller than or equal to the number of events currently displayed in FumbleLog.   | `1`               |
+| `EVENT_NAME`                | Use `a-z`, `A-Z`, `0-9` and whitespaces only.                                                                | `CS2103T meeting` |
+| `DATE`                      | Have format `yyyy-MM-dd` and should not be earlier than current date.                                        | `2023-12-01`      |
+| `START_TIME` and `END_TIME` | Have format `HHmm`. `START_TIME` should be earlier than `END_TIME`.                                          | `1400`            |
+| `PERSON_NAME`               | Multiple persons can be assigned to an event but only existing persons name can be added.                    | `John Doe`        |
+| `GROUP`                     | Multiple groups can be assigned to an event but only existing groups can be added.                           | `CS2103T`         |
+
+<br>
+
+> Below are some examples on how to use `edit_event` command:
+>
+> * `edit_event 1 m/FumbleLog meeting`: Edits the name of event at index 1 to "FumbleLog meeting".
+> * `edit_event 1 s/1500 e/1700`: Edits the start and end time to "1500" and "1700" respectively. If the event initially does not have a start and end time, the respective times will be added to the event.
+> * `edit_event 1 g/CS2103T ug/CS2101`: Assigns group "CS2103T" to the event and unassigns group "CS2101".
+> * `edit_event 1 u/Ken`: Unassigns the person "Ken" from the event.
+
+<br>
+
+**Notes on the `edit_event` command:**
+* At least one of the optional parameters required.
+* Existing values will be updated to the input values, except for `PERSON` AND `GROUP`.
+* Only parameters `s/` and `e/` can be empty strings. Doing so will remove the current values. i.e. `edit_event 1 s/` will remove the current `START_TIME`.
 * `PERSON` and `GROUP` edits are cumulative and will add to the current list of persons and groups.
-  Use the unassign commands, i.e. `u/PERSON` or `ug/GROUP`, if you would like to unassign any person or group.
-* All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023
-* All time are to be in the format `HHmm`. i.e. 1400 for 2pm.
 * The given `DATE`, `START_TIME` and `END_TIME` cannot be a time in the past.
 * Note that if a person appears under multiple groups, e.g `Alvin` is in groups `classmates` and `friends`, the name `Alvin` will appear under both groups when displayed in the events list. This is an intended behavior for you to see everyone in the groups that are assigned to the event. This is illustrated as follows.
 * Note the following scenario:
@@ -400,24 +420,9 @@ Format: `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/E
 
 * ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 
-Examples:
-* `edit_event 1 m/FumbleLog meeting d/2023-10-05 s/1500 e/1700`
-* `edit_event 1 g/CS2103T g/CS2101`: Adds the groups CS2103T and CS2101 to the event.
-* `edit_event 1 u/Ken`: Unassigns the person `Ken` from the event.
+<br>
 
-Acceptable values for each parameter:
-* `EVENT_INDEX`: The index position of the event in the displayed event list.
-* `[m/EVENT_DETAILS]`: Details of the event to be changed.
-* `[d/DATE]`: A valid date in the format `yyyy-MM-dd`
-* `[s/START_TIME]`: A valid time in the format `HHmm`
-* `[e/END_TIME]`: A valid time in the format `HHmm`
-* `[n/PERSON_NAME]`: Name of the person to be assigned.
-* `[u/PERSON_NAME]`: Name of the person to be unassigned.
-* `[g/GROUP]`: Name of the group to be assigned.
-* `[ug/GROUP]`: Name of the group to be unassigned.
-
-Expected output when the command succeeds: 
-
+**This should be the expected output when the command succeeds:**
 Input: `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
 
 ![Eventedit](images/Eventedit.png)
