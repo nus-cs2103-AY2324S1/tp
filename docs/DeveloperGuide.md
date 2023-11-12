@@ -831,16 +831,16 @@ The overtime command mechanism is facilitated by `OvertimeCommandParser` class w
 
 `OvertimeCommandParser` implements the following operations:
 
-* `OvertimeCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its 
-respective values as an `ArgumentMultimap`, and creates a new `OvertimeCommand` object with the parsed id and overtime 
+* `OvertimeCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its
+respective values as an `ArgumentMultimap`, and creates a new `OvertimeCommand` object with the parsed id and overtime
 hours.
 
 The `OvertimeCommand` object then communicates with the `Model` API by calling the following methods:
 
-* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` 
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee`
 object which has been edited by `OvertimeCommand#execute()`.
 
-The method `OvertimeCommand#execute()` returns a new `CommandResult` object, which stores information about the 
+The method `OvertimeCommand#execute()` returns a new `CommandResult` object, which stores information about the
 completion of the command.
 
 The following sequence diagram below shows how the overtime operation works:
@@ -858,9 +858,9 @@ Given below is an example usage scenario for the command:
 
 **Aspect: Model-Employee Interaction:**
 
-* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the 
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the
 direct editing in `OvertimeCommand#execute()`.
-    * Pros: More code reuse. Maintain immutability within Employee and Model classes. 
+    * Pros: More code reuse. Maintain immutability within Employee and Model classes.
     * Cons: Potentially violates SRP.
 
 * **Alternative 2**: Create methods in model specifically to edit the `overtimeHours` attribute of the employee.
