@@ -138,6 +138,17 @@ public class Policy {
     }
 
     /**
+     * Returns a new default policy
+     */
+    public static Policy createNewDefaultPolicy() {
+        Company company = new Company(Company.DEFAULT_VALUE);
+        PolicyNumber policyNumber = new PolicyNumber(PolicyNumber.DEFAULT_VALUE);
+        PolicyDate policyIssueDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
+        PolicyDate policyExpiryDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
+        return new Policy(company, policyNumber, policyIssueDate, policyExpiryDate);
+    }
+
+    /**
      * Returns true if the company is the same as default
      */
     public boolean hasDefaultCompanyParameter() {

@@ -72,6 +72,7 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "Error: This person already exists in the client list.";
 
@@ -133,8 +134,19 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DATES_NOT_COMPATIBLE);
         }
 
+        //If an edit is to a default policy parameter, it should make it a default policy
+        if (editedPerson.hasAnyDefaultPolicyParameters() && !personToEdit.hasAnyDefaultPolicyParameters()) {
+            Person editedPersonWithoutPolicy = editedPerson.cloneWithoutPolicy();
+            model.setPerson(personToEdit, editedPersonWithoutPolicy);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(
+                    String.format(MESSAGE_EDIT_PERSON_SUCCESS,
+                            Messages.format(editedPersonWithoutPolicy)));
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
