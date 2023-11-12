@@ -25,7 +25,7 @@ Our guide is made for FumbleLog users of all experiences! Refer to the table bel
 # Quick start
 
 **1. Ensure you have the right environment.**
-- Before you begin, make sure you have Java `11` or above installed in your computer. 
+- Before you begin, make sure you have `Java 11` or above installed in your computer. 
   - To check if you have java installed or your installed java version:
     - Open a command terminal (Command Prompt or Terminal, depending on your operating system) and use the command: `java --version`. 
     - You should see the java version if you have java installed.
@@ -40,7 +40,7 @@ Our guide is made for FumbleLog users of all experiences! Refer to the table bel
 - Copy the `fumblelog.jar` file into the folder you have chosen or created.
 
 **4. Launch the application.**
-- Open a command terminal again, use the `cd` command to navigate to the folder where you have placed the `fumblelog.jar` file.
+- In your command terminal, use the `cd` command to navigate to the folder where you have placed the `fumblelog.jar` file.
 - Run the application using the command: `java -jar fumblelog.jar`. You should now be able to see the FumbleLog user interface!
    - The application contains sample data for you to play around with.
    - Some blocks may appear red, indicating expired events, so do not be alarmed.
@@ -79,6 +79,10 @@ Refer to the table below for details on each GUI component
 | Event list        | Displays the list of events in FumbleLog. You can scroll through the list of events using the scroll bar on the right of the list.                       |
 | Index             | Displays the index of the person or event in their respective lists. This index is used in certain commands. i.e. editing persons or events.             |
 
+[Scroll back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 # FumbleLog Tutorial
 This tutorial is designed for new users looking to get started using FumbleLog. In this tutorial, you will find step-by-step instructions on how to use commands in FumbleLog to help you manage
 your contacts and events.
@@ -97,6 +101,9 @@ your contacts and events.
 7. Finally, once the event is over, you can **delete the event** by using the index of the event (in this case 1): `delete_event 1`.
 8. **Well done! 👍** You have mastered the basics of FumbleLog! You can now visit the [Features](#features) section to learn advanced commands!
 
+[Scroll back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 # Features
 
@@ -221,14 +228,15 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 </div>
 
 <div markdown="span" class="alert alert-warning">
-:exclamation: **Note when editing a person in a filtered contacts list:**<br>
+:exclamation: **Disclaimer: Editing a person with a filtered contacts list might cause the person to disappear. Do not worry, your data is not deleted**.<br>
 
-  * You used the command `find_person Alex`, to show all the persons with `Alex` in their name.  See: [find_person](#locating-persons-by-name-or-group-findperson)
-  * The person list is filtered to show all the persons with `Alex` in their name.
-  * You then edit `Alex` name to be something else, i.e., `Bob`.
-  * `Alex` will disappear form the person list. **Do not worry, your data is not deleted**, this is because your previous search term `Alex` no longer matches the new name of the person, `Bob`.
-  * To see `Bob` in the person list again, you can use the [list_persons](#listing-all-persons--listpersons) command to bring back the whole list of persons.
-  * In contrast with the above scenario, using an [add_person](#adding-a-person-addperson) command will automatically bring back the whole list of persons, to show you that your new person has been added to FumbleLog.
+  * Take this scenario:
+    * You used the command `find_person Alex`, to show all the persons with `Alex` in their name.  See: [find_person](#locating-persons-by-name-or-group-findperson)
+    * The person list is filtered to show all the persons with `Alex` in their name.
+    * You then edit the person `Alex`'s name to `Bob`.
+    * `Alex` will disappear from the person list, because your previous search term `Alex` no longer matches the new name of the person, `Bob`.
+    * To see `Bob` in the person list again, you can use the [`list_persons`](#listing-all-persons--listpersons) command to bring back the whole list of persons.
+    * In contrast with the above scenario, using an [`add_person`](#adding-a-person-addperson) command will automatically bring back the whole list of persons, to show you that your new person has been added to FumbleLog.
 </div>
 
 **Expected output when the command succeeds:**
@@ -299,8 +307,9 @@ Format: `find_person KEYWORD [MORE_KEYWORDS]`
 
 </div>
 
-<div markdown="span" class="alert alert-warning">
-:exclamation: **Disclaimer when using the `find_person` command:**<br>
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Disclaimer when using the `find_person` command:**<br>
 
 * FumbleLog will return an empty person list when there are no keyword matches. **Your data will not be deleted.**
 </div>
@@ -549,6 +558,8 @@ Format: `exit`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+--------------------------------------------------------------------------------------------------------------------
+
 # How we manage your data
 
 ### Saving the data
@@ -616,13 +627,13 @@ The domain name must:
 
 ### Commands for Events
 
-| Action           | Format, Examples                                                                                                                                                                                                                                    |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [g/GROUP]...`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`                                                           |
-| **Edit Event**   | `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`<br> e.g., `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101` |
-| **Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`                                                                                                                                                                                               |
-| **Find Event**   | `find_event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_event meeting`                                                                                                                                                                                 |
-| **List Events**  | `list_events`                                                                                                                                                                                                                                       |
+| Action           | Format, Examples                                                                                                                                                                                                                                |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [g/GROUP]…​`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`                                                         |
+| **Edit Event**   | `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [u/PERSON_NAME]…​ [g/GROUP]…​ [ug/GROUP]…​`<br> e.g., `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101` |
+| **Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`                                                                                                                                                                                           |
+| **Find Event**   | `find_event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_event meeting`                                                                                                                                                                             |
+| **List Events**  | `list_events`                                                                                                                                                                                                                                   |
 
 
 ### General commands
