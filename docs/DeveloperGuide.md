@@ -206,6 +206,9 @@ User should see the UI asa shown below after entering `linkedin 1`
 
 ![LinkedIn](images/linkedinState.png)
 
+The following activity diagram shows how the `addL/addG` commands and `linkedin/github` commands are used together to bring together the `Linked/Github` feature:
+
+<puml src="diagrams/linkedinactivitydiagram.puml" alt="LinkedInActivityDiagram" />
 
 #### Alternatives considered ####
 
@@ -387,6 +390,10 @@ User should see the UI as shown below after executing the aforementioned command
 
 
 ![EventWindow](images/eventwindow.png)
+
+The following activity diagram shows how the `event` and `schedule` command can be used together to schedule events:
+
+<puml src="diagrams/eventactivitydiagram.puml" alt="Event Activity Diagram"></puml>
 
 #### Alternatives considered ####
 
