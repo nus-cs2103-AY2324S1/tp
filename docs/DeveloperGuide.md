@@ -735,7 +735,7 @@ testers are expected to do more *exploratory* testing.
 
 Given below is the evidence for challenges faced and efforts required for our project.
 
-**Challenges & Effort**
+
 1. AB3 deals with only one entity type, while our project involves two entity types: `Musician` and `Band`. 
    * We need to create relevant classes of the new entity `Band` in all components (`UI`, `Logic`, `Model`, `Storage`) 
    * We need to establish a composition relationship between  `Band` and `Musician`. 
