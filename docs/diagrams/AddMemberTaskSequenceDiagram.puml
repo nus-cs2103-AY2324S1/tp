@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("addt ...")
+[-> LogicManager : execute("addt 1 /task finish proposal")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addt ...")
+LogicManager -> AddressBookParser : parseCommand("addt 1 /task finish proposal")
 activate AddressBookParser
 
 create AddMemberTaskCommandParser
@@ -32,6 +32,7 @@ activate AddMemberTaskCommandParser
 
 create AddMemberTaskCommand
 AddMemberTaskCommandParser -> AddMemberTaskCommand
+
 activate AddMemberTaskCommand
 
 AddMemberTaskCommand --> AddMemberTaskCommandParser : a
@@ -50,7 +51,19 @@ deactivate AddressBookParser
 LogicManager -> AddMemberTaskCommand : execute()
 activate AddMemberTaskCommand
 
-AddMemberTaskCommand -> Model : addApplicant()
+AddMemberTaskCommand -> Model : setMember(memberToAssign, taskAddedMember)
+activate Model
+
+Model --> AddMemberTaskCommand
+deactivate Model
+
+AddMemberTaskCommand -> Model : updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model --> AddMemberTaskCommand
+deactivate Model
+
+AddMemberTaskCommand -> Model : setTaskListForMember(taskAddedMember)
 activate Model
 
 Model --> AddMemberTaskCommand

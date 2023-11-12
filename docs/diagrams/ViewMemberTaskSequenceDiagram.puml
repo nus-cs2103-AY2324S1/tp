@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewMemberTaskCommandParser" as ViewMemberTaskCommandParser LOGIC_COLOR
+participant "v:ViewMemberTaskCommand" as ViewMemberTaskCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("viewt 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("viewt 1)
+activate AddressBookParser
+
+create ViewMemberTaskCommandParser
+AddressBookParser -> ViewMemberTaskCommandParser
+activate ViewMemberTaskCommandParser
+
+ViewMemberTaskCommandParser --> AddressBookParser
+deactivate ViewMemberTaskCommandParser
+
+AddressBookParser -> ViewMemberTaskCommandParser : parse("1")
+activate ViewMemberTaskCommandParser
+
+create ViewMemberTaskCommand
+ViewMemberTaskCommandParser -> ViewMemberTaskCommand
+activate ViewMemberTaskCommand
+
+ViewMemberTaskCommand --> ViewMemberTaskCommandParser : v
+deactivate ViewMemberTaskCommand
+
+ViewMemberTaskCommandParser --> AddressBookParser : v
+deactivate ViewMemberTaskCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewMemberTaskCommandParser -[hidden]-> AddressBookParser
+destroy ViewMemberTaskCommandParser
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> ViewMemberTaskCommand : execute()
+activate ViewMemberTaskCommand
+
+ViewMemberTaskCommand -> Model : getFilteredMemberList()
+activate Model
+
+Model --> ViewMemberTaskCommand
+deactivate Model
+
+ViewMemberTaskCommand -> Model : setTaskListForMember(memberToView)
+activate Model
+
+Model --> ViewMemberTaskCommand
+deactivate Model
+
+create CommandResult
+ViewMemberTaskCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewMemberTaskCommand : result
+deactivate CommandResult
+
+ViewMemberTaskCommand --> LogicManager : result
+deactivate ViewMemberTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

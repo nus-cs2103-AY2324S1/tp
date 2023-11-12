@@ -333,12 +333,11 @@ Assign tasks to members identified by their index number in the displayed member
 the `AddMemberTaskCommand` class, which extend the `Command` class.
 
 * Step 1: The `AddMemberTaskCommand` object's `execute()` method is called.
-* Step 2: The member index is checked to be within the valid range of the member list. If the member index given is
+* Step 2: The `MEMBER_INDEX` is checked to be within the valid range of the `MEMBER` list. If the `MEMBER_INDEX` given is
   invalid (e.g., out of range), a `CommandException` is thrown.
 * Step 3: The member at the given index is referenced based on the provided member index.
 * Step 4: The `AddMemberTaskCommand` calls the model object's `setMember()` method. It updates the member with the new
-  details
-  provided, effectively modifying the existing member's information.
+  details provided, effectively modifying the existing member's information.
 * Step 5: After the execution of the `AddMemberTaskCommand`, the member's details are successfully edited in the member
   list.
 
@@ -359,6 +358,15 @@ Lists all tasks assigned to a member in the address book to the user under the `
 2. This updates the model via its `updateFilteredMemberList()` method which is called with its predicate as always returning true.
 3. Then the `setTaskListForMember(memberToView)` method is called to set the task list for the chosen member.
 4. The `TaskListPanel` UI component is updated with the task list for the chosen member.
+
+The diagram below describes this behaviour concisely. It shows how a user's command is processed and how the view task command is executed.
+
+<img src="images/ViewMemberTaskActivityDiagram.png">
+
+The sequence diagram below also shows the interaction between the various components during the execution of the
+`viewMemberTask`.
+
+<img src="images/ViewMemberTaskSequenceDiagram.png">
 
 ### \[Proposed\] Better Task Management
 
