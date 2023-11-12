@@ -798,12 +798,11 @@ Your Foster Family data is saved automatically as a JSON file `[JAR file locatio
 advise you to update the data file directly only if you are an advanced user. Otherwise, we highly recommend you to perform 
 edits using our user-friendly interface instead.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="span" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
-* If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
-* If your changes create an [invalid fosterer](#adding-a-fosterer-through-the-main-window--add), the app will not start. You will have to rectify the error in order to restart the app.
+If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
 
 </div>
 
