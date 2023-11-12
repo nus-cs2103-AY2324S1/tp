@@ -226,7 +226,7 @@ If you want to view the events in which a particular member is enrolled, you can
 Here’s how you can use it:
 `viewMember MEMBER_INDEX`
 
-Here is an example command where we want to view the events in which the member at index 3 in our member list is enrolled:
+Here is an example command where we want to view the events in which the **member** at index 3 in our member list is enrolled:
 
 `viewMember 3`
 
