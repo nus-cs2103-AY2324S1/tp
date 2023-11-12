@@ -54,7 +54,7 @@ public class CreateTagCommand extends Command {
         requireNonNull(model);
         UniqueTagList uniqueTagList = new UniqueTagList();
         for (String tagParam : tagParams) {
-            String[] categoryTag = tagParam.split("\\s+");
+            String[] categoryTag = tagParam.trim().split("\\s+");
             try {
                 String tagCategory = categoryTag[0];
                 String tagName = categoryTag[1];
