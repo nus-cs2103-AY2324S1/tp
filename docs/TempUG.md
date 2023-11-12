@@ -156,31 +156,50 @@ Format: `list [LIST] [KEYWORDS]`
 
 </box>
 
+#### For Student:
+
 Example usages:
-* `list` and `list schedule` displays the ___SCHEDULE list___ with all the lessons with their names in time order.
 * `list students` displays all the students with their names (including previously specified fields).
 * `list students subjects email` displays all the students with their names, a list of subjects for each student and their email.
-* `list tasks` displays all the tasks with their description.
+
+Success outputs:
+* Input: `list students` (with no additional student details):
+```
+Showing list STUDENT
+```
+![Success for list STUDENTS](images/list/list_student_positive.png)
+
+#### For Schedule:
+
+Example usages:
+* `list` and `list schedule` displays the ___SCHEDULE list___ with all the lessons with their names in time order.
 
 Success outputs:
 * Input: `list` or `list schedule`
 ```
 Showing list SCHEDULE
 ```
-  ![Success for list SCHEDULE](images/list/list_schedule_positive.png)
-* Input: `list students` (with no additional student details):
-```
-Showing list STUDENT
-```
-  ![Success for list STUDENTS](images/list/list_student_positive.png)
+![Success for list SCHEDULE](images/list/list_schedule_positive.png)
+
+
+#### For Task:
+
+Example usages:
+* `list tasks` displays all the tasks with their description.
+
+Success outputs:
 * Input: `list tasks`
 ```
-Showing list TASKS
+Showing list TASK
 ```
   ![Success for list STUDENTS](images/list/list_tasks_positive.png)
+
 * If there are no entries, e.g. there are no students added yet or there are no tasks added yet, an empty list is displayed.
 
 ![Empty list](images/list/list_tasks_empty.png)
+
+
+#### General Examples
 
 Failure outputs:
 * Input: `list student`, `list task`, `list students EMAIL`, `list students subject`, `list students subjects,phone`
@@ -212,10 +231,10 @@ Format: `show INDEX`
 
 #### For Student:
 
-In ___STUDENT list___, the show command shows the details of the specified student from the ___STUDENT list___ in the application.
+In ___STUDENTS list___, the show command shows the details of the specified student from the ___STUDENTS list___ in the application.
 
 Example usages:
-* `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the ___STUDENT list___.
+* `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the ___STUDENTS list___.
 * `find Betsy` followed by `show 1` shows the details of the 1st student in the results of the `find` command.
 
 Success outputs:
@@ -1199,10 +1218,11 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 ## Command Summary
 
-| Action       | Format           | Examples               | List    | Remarks                     |
-|--------------|------------------|------------------------|---------|-----------------------------|
-| **Feature1** | `command format` | `sample valid command` | Student | Any additional remarks here |
-| **Feature2** | `command format` | `sample valid command` | Any     | Any additional remarks here |
+| Action       | Format                   | Examples                                             | List              | Remarks                                                             |
+|--------------|--------------------------|------------------------------------------------------|-------------------|---------------------------------------------------------------------|
+| **List**     | `list [LIST] [KEYWORDS]` | `list students email`, `list schedule`, `list tasks` | Any               | `list` without optional parameters displays the ___SCHEDULE list___ |
+| **Find**     | `find SEARCH_STRING`     | `find bernice`, `find lesson`                        | Student, Schedule | Disabled in ___TASKS list___                                        |
+| **Feature2** | `command format`         | `sample valid command`                               | Any               | Any additional remarks here                                         |
 
 --------------------------------------------------------------------------------------------------------------------
 
