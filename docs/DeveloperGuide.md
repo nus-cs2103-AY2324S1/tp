@@ -19,7 +19,7 @@ Staff-Snap is based on the [AddressBook-Level3](https://se-education.org/address
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -183,6 +183,8 @@ Classes used by multiple components are in the `seedu.staffsnap.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<br>
+
 ### Add applicant feature
 
 #### Implementation
@@ -206,6 +208,11 @@ The add applicant feature allows users to add an applicant to the applicant list
 - Alternative 2: Same command `add` for adding applicants and interviews.
     - Pros: More convenient for user to add an applicant with interviews.
     - Cons: Still necessary to have a separate `addi` command for user to add a new interview to an existing applicant.
+ 
+<br>
+
+---
+<br>
 
 ### Edit applicant feature
 
@@ -231,6 +238,11 @@ The edit applicant feature allows users to edit the details of an applicant.
     - Pros: Easier to implement due to similarity to add feature.
     - Cons: More areas for error as fields not meant to be edited might be edited due to a typo.
 
+<br>
+
+---
+<br>
+
 ### Help feature
 
 
@@ -251,6 +263,11 @@ The edit applicant feature allows users to edit the details of an applicant.
 
 1. Help can be called anytime and has no format to follow. The popup screen is disabled to avoid confusion but can be
    enabled in the future if need be.
+
+<br>
+
+---
+<br>
 
 ### Confirmation + Clear command
 
@@ -273,22 +290,33 @@ The edit applicant feature allows users to edit the details of an applicant.
 2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future update.
 3. The state of the parser, rather than the app is used to reduce the chances of accidental clears.
 
+<br>
+
+---
+<br>
+
 ### Interview feature
 
 #### Purpose
 
-As a hiring management software, we need to perform CRUD operations for the interviews of applicants. This allows us to add new 
-interviews, view existing interviews, edit current interviews, and delete interviews. As we aim so make our program intuitive 
-and efficient, the UI design and data structure used to store these interview objects were crucial considerations in the 
-implementation process.
+As a hiring management software, we need to perform CRUD operations for the interviews of applicants. This allows us to add new interviews, view existing interviews, edit current interviews, and delete interviews. As we aim so make our program intuitive and efficient, the UI design and data structure used to store these interview objects were crucial considerations in the implementation process.
 
 #### Implementation
 
-The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`. The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in an interview (out of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and `DeleteInterviewCommand`. These are implementation in a largely similar manner to the `Applicant` class. The main difference is in how an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the applicant index as well as the chosen interview index.
+The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`. The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in an interview (out of a score of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and `DeleteInterviewCommand`. These are implemented in a largely similar manner to the `Applicant` class. The main difference is in how an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the applicant index as well as the chosen interview index.
+
+The activity diagram below gives an overview of the behavior when the `DeleteInterviewCommand` is executed:
+
+<puml src="diagrams/DeleteInterviewActivityDiagram.puml" alt="DeleteInterviewActivityDiagram" />
 
 #### Design Considerations
 
 In deciding the data structure to house our Interview objects, we were torn between using a `PriorityQueue` and a `List`. A `PriorityQueue` would have been useful in sorting the interviews by rating, but it would have been difficult to implement the `EditInterviewCommand` and `DeleteInterviewCommand` as the `PriorityQueue` does not have a `get()` method. Also, if we wanted to extend a sorting function for interviews in the future, a `PriorityQueue` would make it more difficult for us to change the comparator for `Interview` objects. For the sake of extensibility of the codebase, we decided to use a `List` instead. This is because a `List` provides us with greater abstraction and code flexibility in extending various functions for the `Interview` class. 
+
+<br>
+
+---
+<br>
 
 ### Sort feature
 
@@ -336,6 +364,11 @@ The following diagram summarises what happens when a user executes a Sort comman
 - Alternative 3: `sort d/ [valid field] o/ [a/d]` where `o/` is optional
     - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1.
     - Cons: Users who are not aware of the `o/` feature may not use it.
+
+<br>
+
+---
+<br>
 
 ### Filter feature
 
@@ -400,6 +433,11 @@ The following diagram summarises what happens when a user executes a Filter comm
       of alternative 2 when few fields are required.
     - Cons: Unfamiliar users may not know that fields can be optional anc continue to key in the full command at all
       times.
+
+<br>
+
+---
+<br>
 
 ### Find feature
 
@@ -474,10 +512,34 @@ handphone number.
 As handphone numbers and emails are likely to be distinct for each applicant, it is possible to
 enhance the find feature so that it can also search for applicants by these fields.
 
+<br>
+
+---
+<br>
+
+### Import feature
+
+#### Purpose
+
+The `import` feature allows users to import data from a CSV file into Staff-Snap. This allows users to populate Staff-Snap with data from other sources via the commonly used CSV format. By allowing users to import large amounts of data from other sources without manually typing it in, Staff-Snap becomes more versatile and useful to users.
+
+#### Implementation
+
+The `import` feature is implemented as a command that takes in a CSV file name as an argument. The command is parsed by the `ImportCommandParser` class, which then calls the `ImportCommand` class to execute the command. The `ImportCommand` class uses the static `parse()` method under `CsvApplicantParser` to parse the applicant data into a `List<CsvApplicant>` with the help of the `CsvToBeanBuilder<T>` class under `com.opencsv.bean` package. If the `List<CsvApplicant>` has been successfully parsed, we then call the `ParserUtil::parseApplicantFromCsv()` method to convert each `CsvApplicant` into `Applicant`. Lastly, we call the `ModelManager` class to import the data from the `List<Applicant>` into Staff-Snap.
+
+Below is the sequence diagram for the `import` feature:
+
+<puml src="diagrams/ImportSequenceDiagram.puml" alt="ImportSequenceDiagram" />
+
+#### Design Considerations
+
+Before initiating the import process, we considered it crucial to perform a thorough validation of the CSV file. This included checks for the file's existence, format, and integrity to ensure that the data can be successfully processed.
+
+We also implemented a robust error-handling mechanism to gracefully manage scenarios where the CSV file is malformed or contains errors. For example, to address the possibility of duplicate entries, we first check if the CSV contains duplicate entries within itself, then we also check if the CSV contains entries which are duplicates with existing entries in Staff-Snap. If such duplicates exists, we inform the user of the problematic entries and allow them to rectify the entries before importing.
    
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, DevOps**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -489,43 +551,46 @@ enhance the find feature so that it can also search for applicants by these fiel
 
 ## **Appendix: Requirements**
 
+<br>
+
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of applicants (around 250 - 500 applicants)
+* Hiring Manager of a Small Medium Enterprise who has a need to manage a significant number of applicants (around 250 - 500 applicants)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: 
-Introduces organisation to applicant management, recruitment processes and streamlines hiring decisions
+* Introduces organisation to applicant management, recruitment processes and streamlines hiring decisions for hiring managers
+
+<br>
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                               | So that I can…​                                             |
-|----------|---------|------------------------------------------------------------|-------------------------------------------------------------|
-| `* * *`  | user    | view all the available commands                            | know how to use the app                                     |
-| `* * *`  | user    | add a new applicant                                        | track the the progress of all applicants                    |
-| `* * *`  | user    | edit an applicant descriptor                               | maintain an updated database of all applicants              |
-| `* * *`  | user    | view the full list of applicants                           | view the overall progress and performance of all applicants |
-| `* * *`  | user    | delete an applicant entry                                  | only track valid applicants                                 |
-| `* * *`  | user    | add an interview for an applicant                          | plan screenings and keep track of an applicant's interviews |
-| `* * *`  | user    | edit an interview for an applicant                         | keep accurate data on an applicant's interview              |
-| `* * *`  | user    | delete an interview for an applicant                       | delete incorrect or unnecessary interviews                  |
-| `* * *`  | user    | store data locally                                         | use it on a daily basis consistently                        |
-| `* *`    | user    | find a specific applicant                                  | access the applicant's information quickly                  |
-| `* *`    | user    | sort applicants by a descriptor                            | find relevant applicants quickly                            |
-| `* *`    | user    | filter applicants by a descriptor                          | look at applicants of a specific category                   |
-| `* *`    | user    | purge all existing data                                    | remove sample data and populate real data                   |
-| `* *`    | user    | exit the program                                           | close the program                                           |
-| `* *`    | user    | import data from CSV file                                  | access all applicants' details                              |
-| `* *`    | user    | mark an applicant as undecided, offered or rejected        | keep track of applicants' application status                |
-| `*`      | user    | schedule a date for an interview                           | keep track of all interview timings                         |
-| `*`      | user    | view a graphical representation of each applicant's rating | get a quick idea of each applicant's ability                |
+| Priority | <div style="width:50px">As a …​</div> | I want to …​                                               | So that I can…​                                             |
+|----------|---------------------------------------|------------------------------------------------------------|-------------------------------------------------------------|
+| `* * *`  | user                                  | view all the available commands                            | know how to use the app                                     |
+| `* * *`  | user                                  | add a new applicant                                        | track the the progress of all applicants                    |
+| `* * *`  | user                                  | edit an applicant descriptor                               | maintain an updated database of all applicants              |
+| `* * *`  | user                                  | view the full list of applicants                           | view the overall progress and performance of all applicants |
+| `* * *`  | user                                  | delete an applicant entry                                  | only track valid applicants                                 |
+| `* * *`  | user                                  | add an interview for an applicant                          | plan screenings and keep track of an applicant's interviews |
+| `* * *`  | user                                  | edit an interview for an applicant                         | keep accurate data on an applicant's interview              |
+| `* * *`  | user                                  | delete an interview for an applicant                       | delete incorrect or unnecessary interviews                  |
+| `* * *`  | user                                  | store data locally                                         | use it on a daily basis consistently                        |
+| `* *`    | user                                  | find a specific applicant                                  | access the applicant's information quickly                  |
+| `* *`    | user                                  | sort applicants by a descriptor                            | find relevant applicants quickly                            |
+| `* *`    | user                                  | filter applicants by a descriptor                          | look at applicants of a specific category                   |
+| `* *`    | user                                  | purge all existing data                                    | remove sample data and populate real data                   |
+| `* *`    | user                                  | exit the program                                           | close the program                                           |
+| `* *`    | user                                  | import data from CSV file                                  | access all applicants' details                              |
+| `* *`    | user                                  | mark an applicant as undecided, offered or rejected        | keep track of applicants' application status                |
+| `*`      | user                                  | schedule a date for an interview                           | keep track of all interview timings                         |
+| `*`      | user                                  | view a graphical representation of each applicant's rating | get a quick idea of each applicant's ability                |
 
 
 
@@ -1029,9 +1094,6 @@ Guarantees: Staff-Snap exits.
 
   Use case resumes at step 2.
 
-
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -1041,7 +1103,7 @@ Guarantees: Staff-Snap exits.
    compared to a hypothetical GUI-only version of the app.
 5. The product is for single-users. The application should not be running in a shared computer and with
    different people using it at different times.
-6. The software should respond to user input within 2 seconds under normal load conditions.
+6. The software should respond to user input within 5 seconds under normal load conditions.
 7. There should be no shared file storage mechanism. The data file created by one user should not be accessed by
    another user during regular operations.
 8. The data should be stored locally and should be in a _human editable text file_.
@@ -1060,7 +1122,7 @@ Guarantees: Staff-Snap exits.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, MacOS
+* **Mainstream OS**: Windows, Linux, macOS
 * **JAR file**: A package file format that bundles all the components of a Java application into a single file for
   distribution.
 * **Command Line Interface (CLI)**: A means for users to interact with a software by inputting commands
@@ -1068,12 +1130,10 @@ Guarantees: Staff-Snap exits.
   (e.g. a `.txt` file)
 * **Graphical User Interface (GUI)**: A type of user interface that allows users to interact with software through
   graphical icons and visual indicators.
-* **UI**: 
-*
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -1086,21 +1146,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch 
+   1. Download the jar file and copy into an empty folder.
+   2. Double-click the jar file. <br> Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-    1. Download the jar file and copy into an empty folder
-
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
-
-1. Saving window preferences
-
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+2. Saving window preferences 
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2. Re-launch the app by double-clicking the jar file.<br> Expected: The most recent window size and location is retained.
 
 ### Adding an applicant
 
@@ -1246,3 +1298,30 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect filter commands to try: `filter`, `filter n/`<br>
        Expected: Similar to previous.
+
+### Importing from CSV
+
+1. Importing applicants from a CSV file
+
+    1. Prerequisites: Download a sample CSV file [here](demo.csv). The correctly formatted CSV file `demo.csv` should be placed in the home folder of Staff-Snap (i.e. the same folder as the Staff-Snap JAR file).
+
+    2. Test case: `import f/demo.csv`<br>
+       Expected: The applicants are imported into Staff-Snap.
+       Success message shown in the response area. Applicant area shows the updated list of applicants.
+
+    3. Test case: `import f/.csv`<br>
+       Expected: No applicants are not imported. Error details shown in the response area. Applicant list in applicant area remains the same.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. Allow users to add applicants whose names include non-alphanumeric characters such as hyphens `-` and slashes `/`.
+2. Provide an error message to the user if the selected CSV file for the `import` command does not contain the correct headers as specified.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+- Challenges were faced in evolving the AB3 codebase to support the new features. This was especially true when implementing the Interview features. Since we evolved the Interview components out of the original Tag components, there were many changes that had to be made in order to accommodate the functionalities we intended. For example, we wanted the ability to cumulatively add interviews to an applicant, but the original AB3 Tag system would reset the entire Tag list whenever it was edited.
+- We also faced challenges in implementing the `import` feature. This was because we had to learn how to use the OpenCSV library and decide which functionalities to include. We also had to learn how to use the `CsvToBeanBuilder<T>` class under the `com.opencsv.bean` package to parse the CSV file. While the use of OpenCSV helped to simplify the parsing process, there were still many modification we made to enable the `import` feature. For example, we also had to create a separate intermediate class `CsvApplicant` to store the data parsed from the CSV file before converting it into an `Applicant` object.
