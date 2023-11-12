@@ -57,7 +57,7 @@ Given below are my contributions to the project.
   * Card Class is changed to include difficulty attribute [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
   * Deck Class is created to contain a list of Cards [#66](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/66)
   * PractiseParser is created to parse practise commands [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
-  * PractiseCommand is created handle practise commands [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
+  * PractiseCommand is created ti handle practise commands [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
   * DisplayResult can now support MarkDown syntax: bold, italic and underline. [#117](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/117)
   * CardDisplay can now support MarkDown syntax: bold, italic and underline. [#117](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/117)
   * Fixed bug where application does not start without existing JSON file [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
@@ -65,7 +65,7 @@ Given below are my contributions to the project.
   * Created test cases for SolveCommand [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92)
   * Created test cases for SetDifficultyCommand [#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/190)
   * Created test cases to increase Code Coverage from 60% to 65% ([#204](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/204), [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206))
-  * Fixed bug where application does not start without existing JSON file [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
+  * Fixed bug where JSON format is wrong for the new JSON file created [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206)
 
 
 
@@ -77,12 +77,13 @@ Given below are my contributions to the project.
     * Added documentations for MarkDown Syntax feature. (Pull requests [#122](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/122), [#126](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/126/files),
     [#189](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/189))
     * Added screenshots with labels to describe the outcome of each MarkDown syntax [#126](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/126/files)
-    * Added notes to warn users to not stack MarkDown syntaxes [#192](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/192/files)
+    * Added notes to warn users to not stack MarkDown Syntax [#192](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/192/files)
   * Developer Guide:
     * Added documentation to explain the functions and design consideration of `practise`,
     `solve` and `set` and how they synergise with Spaced-Repetition. [#112](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/112)
     * Added extensions to use cases (add, edit, delete, practise, solve, set), to describe the cases
     when invalid parameters or incorrect command format is entered by the users. [#131](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/131)
+    * Added Planed Enhancement to support Markdown Syntax stacking 
   *  README:
     * Removed trace of ab3 and revamped README file for lesSON [#50](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/50)
 
@@ -101,4 +102,4 @@ Given below are my contributions to the project.
 
 
 * **Tools**:
-  * Integrated a third party module FlexMark for display of MarkDown styles in the UI [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
+
