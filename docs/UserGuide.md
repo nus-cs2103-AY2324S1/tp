@@ -82,6 +82,7 @@ Refer to the table below for details on each GUI component
 ![Expired Event](images/ExpiredEvent.png)
 
 <div markdown="block" class="alert alert-warning">
+<i class="fa fa-warning-circle"></i> **Note about red coloured events:**<br>
 An expired event will appear red in the event list. This is to highlight to you that the event has passed.
 </div>
 
