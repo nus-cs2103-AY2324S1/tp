@@ -160,7 +160,10 @@ public class MainApp extends Application {
         }
 
         // Check if the assignment count and tutorial count are valid
-        if (initializedPrefs.getAssignmentCount() < 0 || initializedPrefs.getTutorialCount() < 0) {
+        if (initializedPrefs.getAssignmentCount() < 1
+                || initializedPrefs.getTutorialCount() < 1
+                || initializedPrefs.getAssignmentCount() > 40
+                || initializedPrefs.getTutorialCount() > 40) {
             logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
                     + " Because of Illegal values. Using default preferences.");
             initializedPrefs = new UserPrefs();

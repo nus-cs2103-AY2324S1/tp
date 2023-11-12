@@ -60,8 +60,7 @@ public class ConfigCommandParserTest {
     public void parse_intOverflowArg_failure() {
         String argument = " " + PREFIX_ASSIGNMENT_COUNT + "42984732998379823983289733332332 "
                 + PREFIX_TUTORIAL_COUNT + "2";
-        assertParseFailure(parser, argument,
-                String.format(MESSAGE_INVALID_CONFIG_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, argument, String.format(MESSAGE_INVALID_COUNT_VALUE_TOO_LARGE, "assignments"));
     }
 
     @Test
