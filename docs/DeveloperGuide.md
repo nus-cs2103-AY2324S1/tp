@@ -1375,3 +1375,41 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Efforts**
+
+This section documents the efforts that went into the development of this project, as well as the challenges faced. 
+
+### Difficulty Level
+
+### Challenges Faced
+
+We faced the following challenges during the development of this project:
+
+* **Understanding the architecture of the project**
+
+   Initially, we had a hard time understanding the architecture of the project. We were not sure how the different components of the project interacted with each other, and why some classes, such as `ModelManager` were even necessary. However, as we added more modifications and features to the project, we were able to understand the architecture better.
+
+* **Forking workflow**
+
+   Initially, we started with the forking workflow for our project, which was extremely tedious and time-consuming, and led to a lot of merge conflicts. We had to spend a lot of time resolving merge conflicts, and this slowed down our development process. Also, it was difficult to contribute to each others' code, and even minor revisions required a long, inefficient process of sync'ing the fork, resolving merge conflicts, making the revision, creating a pull request, and merging it. We eventually switched to the branching workflow for v1.3, which was much more efficient and streamlined while maintaining our code quality.
+
+* **Renaming `person` to `employee`**
+
+   Since our app was focussed on HR management, we decided to rename the `person` class to `employee`. However, this was not as simple as it seemed. We had to rename the class, as well as all the methods and variables that were related to the `person` class, which was a tedious process. This introduced lots of often-mysterious bugs and errors in our code, which we had to spend a lot of time debugging. It also involved making changes to the test data and documentation, which was also a time-consuming process.
+
+* **Adding and modifying fields in the `employee` class**
+
+   Adding and modifying fields in the `employee` class was a challenge because we had to ensure that the new fields were compatible with the existing code. We had to ensure that the new fields were properly initialised new `employee` constructors, and that they were properly handled in the model, logic, and storage classes. We also had to ensure that the new fields were properly handled in the parser and the UI. This was a challenge because we had to ensure that the new fields were properly handled in all the different components of the project.
+
+* **Storing reports**
+
+   For the `report` command, we had to store the reports in a separate folder. We had to figure out how to create a new folder and store the reports in it within the patterns and constraints of the existing storage classes. This was a challenge because we were not familiar with the storage classes, and we had to figure out how to store the reports in a way that was consistent with the existing storage classes.
+
+* **Implementing the `sort` command**
+
+   For the `sort` command, after exploring and struggling with various approaches from creating separate list views to copying the list, we decided to go ahead with modifying the existing list. This involved adding methods at various layers of abstraction all the way down to the `UniqueEmployeeList` class, which implemented the actual sorting. This was a challenge as it was initially difficult to understand how the different components of the project interacted with each other at each layer of abstraction. This change also broke all of the methods that relied on index for employee selection by making their results unpredictable, and we had to go through all of the methods to change the index to the employee ID. This was a tedious process, and we had to spend a lot of time modifying methods such as `delete` to use the employee ID instead of index, and then debugging them.
+
+### Effort Required
+
+### Achievements of the Project
