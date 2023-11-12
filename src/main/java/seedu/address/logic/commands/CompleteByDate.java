@@ -14,6 +14,10 @@ import seedu.address.model.Model;
  */
 public class CompleteByDate extends CompleteCommand {
     private final LocalDate date;
+
+    /**
+     * @param date that all matching appointment's date in address book will be cleared
+     */
     public CompleteByDate(LocalDate date) {
         requireNonNull(date);
         this.date = date;
