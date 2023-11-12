@@ -456,7 +456,7 @@ This example command will sort the patients by the _names_ in _ascending order_.
 
 - This command will sort all patients in the application, but it will only display the patients that are currently displayed.
   E.g. If you had just used the command `find-p` to find patients by name, this command will only display
-  the patients that were found by the previous command.
+  the patients that were found by the previous command. So to view the full sorted list, follow up with the command `list`.
 
 - The direction can only be `asc` or `desc`, i.e. ascending or descending order respectively.
 
