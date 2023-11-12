@@ -648,30 +648,33 @@ required to read long error messages with details that might be irrelevant to th
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a …                  | I want to …                                                                                    | So that I can…                                                                                                                                  |
-|-----------|-------------------------|------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`   | foster manager          | delete a fosterer from the list when they want to stop fostering with us                       | update the list to see the fosterers who are currently in our program                                                                           |
-| `* * *`   | foster manager          | delete multiple fosterers at once                                                              | perform mass deletions quickly                                                                                                                  |
-| `* * *`   | foster manager          | add each fosterer's details efficiently                                                        | know how to contact the fosterer should I have animals that require fostering                                                                   |
-| `* * *`   | foster manager          | provide details of the fostered animal of concern to the fosterer                              | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for                                |
-| `* * *`   | foster manager          | update a fosterer's details                                                                    | keep track of fosterer's most up-to-date information, including information about the animal fostered                                           |
-| `* * *`   | foster manager          | search for a specific animal / fosterer’s detail  instead of browsing through the entire list  | be more productive when searching for suitable fosterers for the animal that needs fostering                                                    |
-| `* * *`   | foster manager          | to be aware of the address of the fosterer                                                     | conduct checks on the fosterer to ensure the animal is well taken care of                                                                       |
-| `* * *`   | foster manager          | retrieve information about the foster family                                                   | provide the necessary information to the Nparks authorities for audit                                                                           |
-| `* * *`   | foster manager          | sort the list of fosterers alphabetically                                                      | have a neater, and more organised view of all the fosterers                                                                                     |
-| `* * * `  | foster manager          | know the distribution of the different housing types among fosterers                           | correctly allocate the animals to foster homes that are able to accommodate them                                                                |
-| `* * *`   | foster manager          | obtain statistics about the currently available fosterers                                      | better estimate shelter capacity                                                                                                                |
-| `* * `    | foster manager          | have the fosterer’s important information collated neatly                                      | get all the information I need with one glance                                                                                                  |
-| `* * `    | foster manager          | have an easily accessible and visible help button                                              | get help when I am unsure of what command to use                                                                                                |
-| `* * `    | foster manager          | undo my previous command                                                                       | quickly resolve errors caused by the erroneous command                                                                                          |
-| `* *`     | new foster manager      | have my initial data file pre-populated with sample data                                       | work with this sample data as an introduction to the app                                                                                        |
-| `* *`     | new foster manager      | purge all current data from address book                                                       | remove all sample/ experimental data I used to explore the app                                                                                  |
-| `* *`     | careless foster manager | be asked to confirm my decision before purging all fosterer data                               | prevent myself from accidentally deleting all fosterer records                                                                                  |
-| `* *`     | foster manager          | view which volunteer is assigned to which animal                                               | properly balance workload and ensure that no volunteer is overburdened                                                                          |
-| `* *`     | foster manager          | retrieve documentation of all species of pet under purview of the shelter                      | ensure compliance with regulations for wildlife, protected or endangered species (Nparks audit)                                                 |
-| `* *`     | foster manager          | retrieve inventory information about food supplies for fostered animals                        | verify that the requirement of a “well-balanced and nutritional diet” is met, and is not expired (Nparks audit)                                 |
-| `* *`     | foster manager          | retrieve history of whereabouts of an animal                                                   | ensure accountability for pets’ accommodations, and verify that pets are monitored daily for signs of illness, injury or disease (Nparks audit) |
-
+| Priority  | As a …                    | I want to …                                                                                   | So that I can…                                                                                                                                                       |
+|-----------|---------------------------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`   | foster manager            | delete a fosterer from the list when they want to stop fostering with us                      | update the list to see the fosterers who are currently in our program                                                                                                |
+| `* * *`   | foster manager            | delete multiple fosterers at once                                                             | perform mass deletions quickly                                                                                                                                       |
+| `* * *`   | foster manager            | add each fosterer's details efficiently                                                       | know how to contact the fosterer should I have animals that require fostering                                                                                        |
+| `* * *`   | foster manager            | assign an animal to a fosterer                                                                | provide the animal with a temporary home, and make a record of who is taking care of the animal                                                                      |
+| `* * *`   | foster manager            | provide details of the fostered animal of concern to the fosterer                             | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for                                                     |
+| `* * *`   | foster manager            | update a fosterer's details                                                                   | keep track of fosterer's most up-to-date information, including information about the animal fostered                                                                |
+| `* * *`   | foster manager            | search for a specific animal / fosterer’s detail  instead of browsing through the entire list | be more productive when searching for suitable fosterers for the animal that needs fostering                                                                         |
+| `* * *`   | foster manager            | to be aware of the address of the fosterer                                                    | conduct checks on the fosterer to ensure the animal is well taken care of                                                                                            |
+| `* * *`   | foster manager            | retrieve information about the foster family                                                  | provide the necessary information to the Nparks authorities for audit                                                                                                |
+| `* * *`   | foster manager            | note down the foster period of the animal                                                     | keep track of when the fosterer is supposed to return the animal to the shelter                                                                                      |
+| `* * *`   | foster manager            | sort the list of fosterers alphabetically                                                     | have a neater, and more organised view of all the fosterers                                                                                                          |
+| `* * * `  | foster manager            | know the distribution of the different housing types among fosterers                          | correctly allocate the animals to foster homes that are able to accommodate them                                                                                     |
+| `* * *`   | foster manager            | obtain statistics about available fosterers                                                   | better estimate shelter capacity, since having more animals under the care of fosterers will allow me to have more temporary space in the shelter for more animals   |
+| `* * `    | foster manager            | have the fosterer’s important information collated neatly                                     | get all the information I need with one glance                                                                                                                       |
+| `* * `    | foster manager            | have an easily accessible and visible help button                                             | get help when I am unsure of what command to use                                                                                                                     |
+| `* * `    | foster manager            | undo my previous command                                                                      | quickly resolve errors caused by the erroneous command                                                                                                               |
+| `* *`     | new foster manager        | have my initial data file pre-populated with sample data                                      | work with this sample data as an introduction to the app                                                                                                             |
+| `* *`     | new foster manager        | purge all current data from address book                                                      | remove all sample/ experimental data I used to explore the app                                                                                                       |
+| `* *`     | careless foster manager   | be asked to confirm my decision before purging all fosterer data                              | prevent myself from accidentally deleting all fosterer records                                                                                                       |
+| `*`       | foster manager            | keep track of animals who are eligible for fostering                                          | know which animal is ready to be assigned to a fosterer                                                                                                              |
+| `*`       | foster manager            | assign a volunteer to the fosterer                                                            | have volunteers check up on the foster animal, to verify its well being                                                                                              |
+| `*`       | foster manager            | view which volunteer is assigned to which animal                                              | properly balance workload and ensure that no volunteer is overburdened                                                                                               |
+| `*`       | foster manager            | retrieve documentation of all species of animals under the purview of the shelter             | ensure compliance with regulations for wildlife, protected or endangered species (Nparks audit)                                                                      |
+| `*`       | foster manager            | retrieve history of whereabouts of an animal                                                  | ensure accountability for pets’ accommodations, and verify that pets are monitored daily for signs of illness, injury or disease (Nparks audit)                      |
+| `*`       | foster manager            | assign more than one animal to the fosterer                                                   | allow more animals to benefit from living under the care of a fosterer                                                                                               |
 
 ### Use cases
 
@@ -697,8 +700,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 1a1 - 1a2 are repeated until the command entered is in the correct format.
   
       Use case resumes from step 2.
-  
-    
+
+* 1b. System detects a conflicting add that will create an invalid fosterer.
+    * 1b1. System indicates the error and requests for Foster Manager to input a valid fosterer.
+    * 1b2. Foster Manager enters new command.
+
+      Steps 1b1 - 1b2 are repeated until the fosterer is valid.
+
+      Use case resumes from step 2.
+
 **Use case: UC2 - List / Find Fosterers**
 
 **MSS**
@@ -718,8 +728,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
+**Use case: UC3 - Edit Fosterer Using Main Window**
 
-**Use case: UC3 - Edit Fosterer**
+**MSS**
+
+1. Foster Manager lists fosterers (UC2).
+2. Foster Manager requests to edit a fosterer referenced by their index shown in the list, specifying details to edit.
+3. System updates fosterer details.
+4. System displays updated fosterer.
+
+    Use case ends.
+
+**Extensions**
+* 2a. System detects an invalid index.
+    * 2a1. System indicates the error and requests for a valid index.
+    * 2a2. Foster Manager enters new command.
+
+      Steps 2a1 - 2a2 are repeated until the entered index is valid.
+
+      Use case resumes from step 3.
+  
+* 2b. System detects a format error in the entered command.
+    * 2b1. System indicates the error and requests for data to be inputted in the correct format.
+    * 2b2. Foster Manager enters new command.
+
+      Steps 2b1 - 2b2 are repeated until the command entered is in the correct format.
+
+      Use case resumes from step 3.
+
+* 2c. System detects a conflicting edit that will create an invalid fosterer.
+    * 2c1. System indicates the error and requests for Foster Manager to input a valid edit.
+    * 2c2. Foster Manager enters new command.
+
+      Steps 2c1 - 2c2 are repeated until the command entered is valid.
+
+      Use case resumes from step 3.
+
+**Use case: UC4 - Edit Fosterer Using Profile**
 
 **MSS**
 
@@ -750,35 +795,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case resumes from step 5.
 
-**Use case: UC4 - Delete Fosterers**
+* 4b. System detects a conflicting edit that will create an invalid fosterer.
+    * 4b1. System indicates the error and requests for Foster Manager to input a valid edit.
+    * 4b2. Foster Manager enters new command.
+
+      Steps 4b1 - 4b2 are repeated until the command entered is valid.
+
+      Use case resumes from step 5.
+
+**Use case: UC5 - Delete Fosterers**
 
 **MSS**
 
 1. Foster Manager lists fosterers (UC2).
 2. Foster Manager requests to delete fosterers referenced by their index shown in the list.
 3. System deletes selected fosterers.
-4. System displays updated list of fosterers.
+4. System displays the updated list of fosterers.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The displayed list is empty.
-  * 2a1. System indicates error as there are no fosterers to delete.
-  
-    Use case ends.
-  
+* 2a. System detects invalid indices.
+    * 2a1. System indicates the error and requests for valid indices.
+    * 2a2. Foster Manager enters new command.
 
-* 2b. System detects invalid indices.
-    * 2b1. System indicates the error and requests for valid indices.
-    * 2b2. Foster Manager enters new command.
-
-      Steps 2b1 - 2b2 are repeated until all entered indices are valid.
+      Steps 2a1 - 2a2 are repeated until all entered indices are valid.
 
       Use case resumes from step 3.
 
 
-**Use case: UC5 - Sort List Of Fosterers**
+**Use case: UC6 - Sort List Of Fosterers**
 
 **MSS**
 
@@ -800,7 +847,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
 
 
-**Use case: UC6 - View Statistics**
+**Use case: UC7 - View Statistics**
 
 **MSS**
 
@@ -826,7 +873,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes from step 3.
 
-**Use case: UC7 - Undo Previous Command**
+**Use case: UC8 - Undo Previous Command**
 
 **MSS**
 
@@ -842,7 +889,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC8 - Request For Command Help**
+**Use case: UC9 - Request For Command Help**
 
 **MSS**
 
@@ -851,7 +898,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC9 - Reset System**
+**Use case: UC10 - Reset System**
 
 **MSS**
 
@@ -869,7 +916,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC10 - Exit**
+**Use case: UC11 - Exit**
 
 **MSS**
 
@@ -971,3 +1018,24 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`,  (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+2. Deleting fosterers while only some fosterers are shown follows similar test cases.
+
+
+### Viewing Statistics of Fosterers
+1. Viewing statistics of available fosterers
+   1. Prerequisites: List all fosterers using the list or find command. At least 1 fosterer in the list.
+   1. Test case: `stats avail`<br>
+      Expected: Availability statistics shown.
+   1. Test case: `stats <multiple whitespaces> avail`<br>
+      Expected: Similar to previous.
+   1. Test case: `stats availl avail`<br>
+      Expected: Invalid command, error details shown in status message.
+   1. Test case: `stats avail list`<br>
+      Expected:  Availability statistics shown. `stats` commands ignore extraneous parameters after the valid command is detected.
+   1. Test case: `stats avail current`<br>
+      Expected: Only availability statistics shown. `stats` commands will only display the first valid statistic field detected (ie. either `avail`, `current` or `housing`).
+2. Viewing statistics of current fosterers and housing types work similarly, replacing `avail` with `current` and `housing` respectively.
+
+   
+        
