@@ -778,6 +778,16 @@ This makes it more intuitive and logical for the user to use since the user woul
 
 ### Based on over-arching features
 
+###  Flexibility for further analysis
+We acknowledge that there will be some who would prefer to analyse data outside JABPro - and that is completely fine.
+With the ability to export to a .csv file using JABPro, users are empowered with the ability to conduct analysis in 
+other applications that they are more familiar with. 
+
+The introduction of the export command showcases our commitment towards user flexibility, and focus towards 
+making JABPro a tool that adds towards hiring manager's ecosystem, as opposed to a trade-off that requires them
+to only rely on JABPro. We strongly believe that users should have the flexibility and ability to conduct
+further analysis outside JABPro if they wish to.
+
 
 ### Storage Complications and Effort
 In relation to saving of data to storage, we largely followed the same format as AB3. The only strict deviation from the AB3 method of saving was using a different data structure.
@@ -912,7 +922,31 @@ Both Person List and Person Information Panel is updated to reflect the new `Int
    3. Test case 2:  
    `view 0`  
    **Expected**: No person is viewed. Error details shown in the status message. Person information panel remains the same.
- 
+
+### Setting a person's status (Preliminary, Interviewed, Accepted/Rejected.)
+1. Setting a person's status in the list
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case 1:   
+       `set 1 Interviewed`  
+       **Expected**: On the next 'view' command, the personnel's details shows as Interviewed.
+    3. Test case 2:  
+       `Set 0 Interviewed`  
+       **Expected**: No person is set to 'Interviewed'. Error details shown in the status message. Person information panel remains the same.
+   
+
+### Exporting the information into a csv file 
+1. Exporting all current user data to csv
+    1. Prerequisites: Necessary write permissions to the /data/export.csv location
+
+    2. Test case 1:   
+       `export`  
+       **Expected**: File is successfully exported to the location /data/export.csv
+    3. Test case 2:  
+       `export` (without write permissions)  
+       **Expected**: /data/export.csv file is not updated. Error details shown in the status message.
+
+
 ### Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown
 1. Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown  
    1. Prerequisites:  
