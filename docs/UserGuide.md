@@ -9,11 +9,11 @@ title: User Guide
 
 Welcome to **InterviewHub**! We are excited to introduce you to your new partner in recruitment and interview scheduling. 
 
-As an engineering hiring manager, you understand the importance of time. That's why we've optimized **InterviewHub** for those who can type fast, think faster, and make decisions on the fly. Navigate through applicants, schedule interviews, and manage your hiring pipeline with commands that execute in the blink of an eye.
+As seasoned professionals who thrive in fast-paced environments, you understand the value of time and efficiency. That is why we have optimized **InterviewHub** for those who can type fast, think faster, and make decisions on the fly. **InterviewHub** offers a command-driven interface, allowing you to navigate through applicants and schedule interviews with commands that execute in the blink of an eye.
 
-This guide is your roadmap to mastering **InterviewHub**. We'll guide you through each feature, helping you to leverage our interface to its full potential—so you can focus on what you do best: securing top talent.
+This guide is your roadmap to mastering **InterviewHub**. We will guide you through each feature, helping you to leverage our interface to its full potential—so you can focus on what you do best: securing top talent.
 
-Let's dive into **InterviewHub** and transform the way you recruit!
+Let us dive into **InterviewHub** and transform the way you recruit!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -86,7 +86,7 @@ If you are an engineering hiring manager who have a good understanding in CLI-ba
 To quickly find the information you need, refer to the [Table of Contents](#table-of-contents) located at the beginning of this guide.
 It lists all the chapters and sections, allowing you to jump directly to the relevant content.
 
-Next, to get you started, we've included a [Quick Start](#quick-start) section in this user guide to ensure that you have no trouble setting up **InterviewHub**.
+Next, to get you started, we have included a [Quick Start](#quick-start) section in this user guide to ensure that you have no trouble setting up **InterviewHub**.
 
 To get a better understanding of what you see, you can head over to [GUI Summary](#gui-summary) for a quick overview of the User-Interface.
 
@@ -341,7 +341,7 @@ Examples:
    Before:
    ![before edit-a command](images/editApplicantBefore.png)
    After:
-   ![result for 'edit-a 2 p/91234567 e/johndoe@example.com](images/editApplicantResult.png)
+   ![result for 'edit-a 2 p/91234567 e/johndoe@example.com'](images/editApplicantResult.png)
 
 [Back to the Table of Contents](#table-of-contents)
 
