@@ -17,7 +17,11 @@ public class ListGroupCommandTest {
     public void execute_typicalAddressBook_success() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        String expectedMessage = "Groups in address book:\n" + "CS2105\n";
+        String expectedMessage = "Groups in address book:\n"
+                                 + "CS2100\n"
+                                 + "CS2102\n"
+                                 + "CS2103\n"
+                                 + "CS2105\n";
 
         assertCommandSuccess(new ListGroupCommand(), model, expectedMessage, expectedModel);
     }

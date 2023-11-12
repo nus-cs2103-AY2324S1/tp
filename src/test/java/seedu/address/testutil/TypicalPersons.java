@@ -8,10 +8,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.testutil.TypicalGroups.CS2100;
+import static seedu.address.testutil.TypicalGroups.CS2102;
+import static seedu.address.testutil.TypicalGroups.CS2103;
+import static seedu.address.testutil.TypicalGroups.CS2105;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.group.Group;
@@ -25,7 +28,7 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withGroupList("CS2105").build();
+            .withGroupList("CS2105", "CS2103T", "CS2103").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withGroupList("CS2105").build();
@@ -53,6 +56,12 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY).withGroupList().build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withGroupList(VALID_GROUP_BOB).build();
+    public static final Person ZHENDONG = new PersonBuilder().withName("Zhen Dong").withPhone("8482131")
+                                     .withEmail("hans@example.com").build();
+    public static final Person KAILASH = new PersonBuilder().withName("Kailash").withPhone("8482131")
+                                     .withEmail("hans@example.com").build();
+    public static final Person NIC = new PersonBuilder().withName("Nic").withPhone("8482131")
+                                     .withEmail("hans@example.com").build();
 
 
 
@@ -65,15 +74,23 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        Group group = TypicalGroups.getTypicalGroup().get(0);
-        ab.addGroup(group);
+
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        for (Group g: getTypicalGroups()) {
+            ab.addGroup(g);
+        }
         return ab;
+
     }
 
-    public static List<Person> getTypicalPersons() {
+    public static ArrayList<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
+
+    public static ArrayList<Group> getTypicalGroups() {
+        return new ArrayList<>(Arrays.asList(CS2100, CS2102, CS2103, CS2105));
+    }
+
 }

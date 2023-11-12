@@ -91,9 +91,6 @@ public class GroupList implements Iterable<Group> {
     public Group getGroup(String groupName) throws CommandException {
         for (Group group : this.internalList) {
             if (group.nameEquals(groupName)) {
-                System.out.println(internalList.size());
-                System.out.println(group == internalList.get(0));
-                group.getListOfGroupMates().forEach(x -> System.out.println(x));
                 return group;
             }
         }
