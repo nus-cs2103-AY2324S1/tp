@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 public class CompleteByDate extends CompleteCommand {
     private final LocalDate date;
     public CompleteByDate(LocalDate date) {
+        requireNonNull(date);
         this.date = date;
     }
     @Override

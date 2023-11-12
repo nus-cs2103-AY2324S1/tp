@@ -18,6 +18,7 @@ public class CompleteByIndex extends CompleteCommand {
     public final Index index;
 
     public CompleteByIndex(Index index) {
+        requireNonNull(index);
         this.index = index;
     }
     @Override
