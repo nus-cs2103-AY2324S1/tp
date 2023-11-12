@@ -8,10 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.testutil.TypicalGroups.CS2100;
-import static seedu.address.testutil.TypicalGroups.CS2102;
-import static seedu.address.testutil.TypicalGroups.CS2103;
-import static seedu.address.testutil.TypicalGroups.CS2105;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +24,7 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withGroupList("CS2105", "CS2103T", "CS2103").build();
+            .withGroupList("CS2105", "CS2103").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withGroupList("CS2105").build();
@@ -74,11 +70,10 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
-        for (Group g: getTypicalGroups()) {
+        for (Group g: TypicalGroups.getTypicalGroup()) {
             ab.addGroup(g);
         }
         return ab;
@@ -87,10 +82,6 @@ public class TypicalPersons {
 
     public static ArrayList<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
-    }
-
-    public static ArrayList<Group> getTypicalGroups() {
-        return new ArrayList<>(Arrays.asList(CS2100, CS2102, CS2103, CS2105));
     }
 
 }
