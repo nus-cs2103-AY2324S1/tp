@@ -160,14 +160,41 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_someButNotAllOptionalFieldsPresent_failure() {
-        String errorMessage = MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND + "- Policy Expiry Date(pe/) ";
+        String errorMessage = MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND;
+
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage);
+
+        // missing company
+        assertParseFailure(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + NRIC_DESC_BOB + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_FRIEND + POLICY_NO_DESC_BOB
+                        + POLICY_ISSUE_DATE_DESC_BOB + POLICY_EXPIRY_DATE_DESC_BOB,
+                expectedMessage + "- Company(c/) ");
+
+        // missing policy number
+        assertParseFailure(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + NRIC_DESC_BOB + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_FRIEND + COMPANY_DESC_BOB
+                        + POLICY_ISSUE_DATE_DESC_BOB + POLICY_EXPIRY_DATE_DESC_BOB,
+                expectedMessage + "- Policy Number(pn/) ");
+
+        // missing policy issue date
+        assertParseFailure(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + NRIC_DESC_BOB + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_FRIEND + COMPANY_DESC_BOB
+                        + POLICY_NO_DESC_BOB + POLICY_EXPIRY_DATE_DESC_BOB,
+                expectedMessage + "- Policy Issue Date(pi/) ");
+
+        // missing policy expiry date
         assertParseFailure(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + NRIC_DESC_BOB + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
                         + TAG_DESC_FRIEND + COMPANY_DESC_BOB
                         + POLICY_NO_DESC_BOB + POLICY_ISSUE_DATE_DESC_BOB,
-                expectedMessage);
+                expectedMessage + "- Policy Expiry Date(pe/) ");
     }
 
 

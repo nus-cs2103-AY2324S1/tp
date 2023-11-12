@@ -54,6 +54,18 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_samePolicyNumber_throwsCommandException() {
+        Person alice = new PersonBuilder().withName("Alice").withPolicy("Allianz",
+                "123A", "25-12-2022", "24-12-2023").build();
+        Person bob = new PersonBuilder().withName("Bob").withPolicy("NTUC",
+                "123A", "21-12-2022", "20-12-2023").build();
+        AddCommand addCommand = new AddCommand(alice);
+        ModelStub modelStub = new ModelStubWithPerson(bob);
+
+        assertThrows(CommandException.class, Messages.MESSAGE_USED_POLICY_NUMBER, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
@@ -188,6 +200,12 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public boolean hasSamePolicyNumber(Person person) {
+            requireNonNull(person);
+            return this.person.comparePolicyNumber(person);
         }
     }
 
