@@ -120,8 +120,8 @@ Creating a new event is no longer a hassle as it can be done with just one simpl
 Here is how you can use it:<br>
 `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
 
-Here is an example command where we create an event **named** Party held at the **location** Raffles Hall on the
-**date** 2023-09-16, with **tag** Dinner and **tag** Sem1:<br>
+Here is an example command where we create an event **named** "Party" held at the **location** "Raffles Hall" on the
+**date** 2023-09-16, with **tag** "Dinner" and **tag** "Sem1":<br>
 `createEvent n/Party l/Raffles Hall d/2023-09-16 t/Dinner t/Sem1`
 
 <figure>
@@ -135,12 +135,12 @@ Here is an example command where we create an event **named** Party held at the 
 #### Edits an Event : `editEvent`
 
 If you forgot to note any important details, or realise that you made a mistake in any field of the event created,
-the `editEvent` command is here to help
+the `editEvent` command is here to help.
 
 Here is how you can use it:<br>
 `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
 
-Here is an example command where we edit an **event** at index 1, changing the **location** to be MBS and the **date** to be 2023-10-20.<br>
+Here is an example command where we edit an **event** at index 1, changing the **location** to be "MBS" and the **date** to be "2023-10-20".<br>
 `editEvent 1 l/MBS d/2023-10-20`
 
 <hr class="command-separator">
@@ -172,7 +172,7 @@ Here’s how you can use it:<br>
 `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
 Here is an example command where we want to enrol the **member** at index 1 to the **event** at index 1, where our member
-has contributed 2 **hours**, and we want to make a **remark** on their role as a photographer:<br>
+has contributed 2 **hours**, and we want to make a "Role: Photographer" **remark** to reflect their role as a photographer:<br>
 `enrol m/1 e/1 h/2 r/Role: Photographer`
 
 <hr class="command-separator">
@@ -184,8 +184,8 @@ You can fix this with no problem by using the `editEnrolment` command!
 Here’s how you can use it:<br>
 `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
-Here is an example command where we want to edit the enrolment of the member at index 1 to the event at index 2,
-changing the number of hours to 5 and the remark to reflect the member’s role as an exco member:<br>
+Here is an example command where we want to edit the enrolment of the **member** at index 1 to the **event** at index 2,
+changing the number of **hours** to 5 and the **remark** to "Role: Exco" to reflect the member’s role as an exco member:<br>
 `editEnroment m/1 e/2 h/5 r/Role: Exco`
 
 <hr class="command-separator">
