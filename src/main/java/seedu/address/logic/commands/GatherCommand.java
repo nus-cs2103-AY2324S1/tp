@@ -31,7 +31,7 @@ public class GatherCommand extends Command {
 
     /**
      * Constructs a new GatherCommand object.
-     * @param prompt The user's prompt
+     * @param prompt The user's prompt.
      */
     public GatherCommand(GatherEmailPrompt prompt) {
         this.prompt = prompt;
@@ -40,7 +40,7 @@ public class GatherCommand extends Command {
     /**
      * Overrides Command execute method.
      * @param model {@code Model} which the command should operate on.
-     * @return The CommandResult depending on the user input
+     * @return The CommandResult depending on the user input.
      */
     @Override
     public CommandResult execute(Model model) {

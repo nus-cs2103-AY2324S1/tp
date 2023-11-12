@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":GatherCommandParser" as GatherCommandParser LOGIC_COLOR
+participant "command:GatherCommand" as GatherCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("gather fp/Financial Plan A")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("gather fp/Financial Plan A")
+activate AddressBookParser
+
+AddressBookParser -> GatherCommandParser : parse("fp/Financial Plan A")
+activate GatherCommandParser
+
+create GatherCommand
+GatherCommandParser -> GatherCommand : GatherCommand(prompt)
+activate GatherCommand
+
+GatherCommand --> GatherCommandParser : command
+deactivate GatherCommand
+
+GatherCommandParser --> AddressBookParser : command
+deactivate GatherCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+GatherCommandParser -[hidden]-> AddressBookParser
+destroy GatherCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> GatherCommand : execute()
+activate GatherCommand
+
+GatherCommand -> Model: gatherEmails(prompt)
+activate Model
+
+Model --> GatherCommand: emails (or Empty String)
+deactivate Model
+
+create CommandResult
+GatherCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> GatherCommand
+deactivate CommandResult
+
+GatherCommand --> LogicManager: result
+deactivate GatherCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
