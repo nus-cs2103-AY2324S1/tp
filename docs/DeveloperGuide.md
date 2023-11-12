@@ -370,9 +370,9 @@ Given below is an example usage scenario and how the delete mechanism behaves at
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-Step 1. The user enters the delete command with at least one index. The `DeleteCommandParser` is invoked to parse the user's input. 
+Step 1. The user enters the delete command with at least one index. In this example, the user inputs indices `1 2 3`, which means that they want to delete the first, second and third fosterers in the currently displayed list. The `DeleteCommandParser` is invoked to parse the user's input. 
 
-Step 2. `DeleteCommandParser` will then invoke the `ParserUtil` to check for the validity of indices (omitted from diagram for simplicity). If indices are invalid, the system will generate an error message. The error message will be displayed to the user, providing feedback about the issue and the specific constraints that are not met.
+Step 2. `DeleteCommandParser` will then invoke the `ParserUtil` to check for the validity of indices (invocation of methods in `ParserUtil` and `Indices` classes are omitted from diagram for simplicity). If indices are invalid, the system will generate an error message. The error message will be displayed to the user, providing feedback about the issue and the specific constraints that are not met.
 
 Step 3. For each valid index, the `DeleteCommand` will execute the deletion by obtaining that fosterer from the list of unique persons in the address book, and then updating the model to remove the fosterer. This is done in the `execute` method of `DeleteCommand`.
 
@@ -390,7 +390,7 @@ Therefore, by ensuring that the user input indices are correctly parsed and vali
 
 * **Alternative 2:** Delete only one fosterer at a time.
     * Pros: Easy to implement. 
-    * Cons: Overhead associated with a chain of delete commands should the user choose to perform multiple deletions.
+    * Cons: Overhead associated with the chain of delete commands should the user choose to perform multiple deletions.
 
 
 ### Sort feature
@@ -458,21 +458,23 @@ This is facilitated by the `StatsCommand`, `StatsAvailCommand`, `StatsCurrentCom
 * `StatsHousingCommand` — Contains methods to calculate statistics of the different housing types of fosterers. 
 * `StatsCommandParser` — Contains the parsing methods for string input of the user. It is in charge of parsing the type of statistics requested by the user, and creating the corresponding `StatsCommand`.<br>
 
-Given below is an example usage scenario and how the statistics feature behaves at each step. It shows the execution of a `stats avail` command, which requests for statistics about the available fosterers. 
+Given below is an example usage scenario and how the statistics feature behaves at each step. It shows the execution of a `stats avail` command, which requests for statistics about available fosterers. 
 
 ![Interactions Inside the Logic Component for the StatsAvailCommand](images/StatsAvailSequenceDiagram.png)
-
-![Self Invocation StatsAvail](images/StatsAvailSelfInvDiagram.png)
-
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `StatsCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-Step 1. The user enters the `stats avail` command. The `StatsCommandParser` is invoked to parse the user's input.
+Step 1. The user enters the `stats avail` command. 
 
-Step 2. `StatsCommandParser` will then parse the argument inputted with the `stats` command, in this case it is `avail`. If the argument is not `avail`, `curr` or `housing`, the `StatsCommandParser` will then generate an error message to the user, indicating that the requested statistic is not available. 
+Step 2. `StatsCommandParser` is then invoked to parse the argument inputted with the `stats` command, in this case it is `avail`. If the argument is not `avail`, `curr` or `housing`, the `StatsCommandParser` will generate an error message to the user, indicating that the requested statistic is not available. 
 
-Step 3. The `StatsAvailCommand` will then call relevant methods to obtain the needed numbers and percentages, done in the `execute` command. 
+Step 3. The `StatsAvailCommand` will then call relevant methods to obtain the needed numbers and percentages, done in the `execute` command.
+
+![Self Invocation StatsAvail](images/StatsAvailSelfInvDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The activation bar of the execute method is omitted for simplicity in the sd frame.
+</div>
 
 Step 4. A success message with the statistics will then be displayed to the user.
 
@@ -484,17 +486,17 @@ The other commands `stats curr` and `stats housing` have a similar execution pat
 
 * **Alternative 1 (current choice):** Show the availability and current statistics separately.
     * Pros: Displayed statistics are specific to the user's query, showing only the relevant data.
-    * Cons: Need to create more classes.
+    * Cons: User may need to query multiple times to get all desired statistics.
 
 * **Alternative 2:** Show availability and current statistics together.
-    * Pros: Easier to implement.
+    * Pros: Easier to implement. More convenient for user, only one query needed to get all statistics.
     * Cons: Result message displayed will be very long, making the UI less desirable.
 
 **Aspect: Which list should the statistics be calculated from:**
 
 * **Alternative 1 (current choice):** Calculated from the currently displayed list.
     * Pros: The resulting statistic corresponds to what the user sees, allowing for easy verification.
-    * Cons: The user may need to perform a find or list to query the list of interest before entering the stats command. 
+    * Cons: The user may first need to perform a `find` or `list` command to query the list of interest before entering the stats command. 
 
 * **Alternative 2:** Calculated from the main list of fosterers.
     * Pros: The resulting statistic corresponds to the whole address book, which may cause less confusion for the user.
