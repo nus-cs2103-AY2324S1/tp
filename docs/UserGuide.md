@@ -595,7 +595,15 @@ For example, if your last interaction with John is on `1 Jan 2021` and he is a `
 ## Command history
 You can use the up arrow key <kbd>&uarr;</kbd> to view your past commands and press <kbd>Enter</kbd> to execute them again.
 
-## `INCOME` Parameter
+## PHONE NUMBER Parameter
+
+Phone numbers should only contain numbers and they should be 3 - 15 digits long. An optional `+` sign is allowed in front.
+
+## TAG Parameter
+
+The tag parameter `t/TAG` only allows alphanumeric inputs with no spaces. For example, `t/familyfriend` is allowed, but `t/family friend` or `t/family-friend` is not allowed.
+
+## INCOME Parameter
 
 Incomes must only consist of numerical inputs. Connectify does not yet support:
 * Decimal values `600.50`
