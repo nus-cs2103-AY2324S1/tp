@@ -55,6 +55,9 @@ Some of the aforementioned sections may have been initially drafted by others, o
 <!-- TODO appendix: effort -->
 <!-- TODO appendix: planned enhancements -->
 
+- Updated DG links to match our product.
+- Scrapped separate pages that are out of scope.
+
 Wrote sections:
 
 - Implementation
@@ -84,7 +87,7 @@ Some of the aforementioned sections may have been initially drafted by others, o
 - Helped keep track of meeting agendas and which tasks were pending assignment or further discussion. Helped create and link forum posts to seek clarifications from Prof.
 - Helped track deliverables and ensure they were accomplished before their deadlines.
 - Worked on sections of the UG/DG not about my own features or specific to anybody's features (described [above](#contributions-to-the-ug)).
-- Updated `README.md`, `Ui.png`.
+- Updated `README.md`, `Ui.png`, `index.md`.
 - Set up and maintained PR template to aid in reviewer and milestone assignment.
 - Added and configured GitHub bot to automatically assign specific reviewers, with support for ignoring PRs under certain conditions.
 - Performed some week-specific team tasks, e.g. triaging PE-D bugs, collating issue statistics into tutor's Teams message.
@@ -94,7 +97,7 @@ Some of the aforementioned sections may have been initially drafted by others, o
 - Helped review a good portion of [team PRs](https://github.com/AY2324S1-CS2103-W14-3/tp/pulls?q=is%3Apr). I tried to be [quite thorough](https://nus-cs2103-ay2324s1.github.io/dashboards/contents/tp-comments.html#16-joel-leow-cloud7050-60-comments) and give many relevant comments.\
 Even if I was not one of the members who did the final approvals and merging of a PR, I would check out the merged PRs' changes and reviews to keep myself informed, and see if there was anything missed, opening various followup issues as needed ([example 1](https://github.com/AY2324S1-CS2103-W14-3/tp/issues/53) [example 2](https://github.com/AY2324S1-CS2103-W14-3/tp/issues/80) [example 3](https://github.com/AY2324S1-CS2103-W14-3/tp/issues/122)).
 - Pointed out miscellaneous things that may be notable, e.g. whether the [right git details were configured for the grading scipts](https://github.com/AY2324S1-CS2103-W14-3/tp/commits/master?after=7575f07d444894d96d1849ee81bbb0bdfcd05802+454&branch=master&qualified_name=refs%2Fheads%2Fmaster#:~:text=Remove%20rubbish-,DESKTOP%2DITF4GUD%5C94866,-committed%20on%20Oct), whether everyone was watching the repo as instructed by the course website, about the [use of automation](https://github.com/Cloud7050/js-canvastransfer) to save time with quizzes.
-- Contributed to GitHub/Telegram/Zoom discussions to help clarify/answer questions and add my thoughts. Discussed steps for how to accomplish certain tasks or areas that could be enhanced.
+- Contributed to GitHub/Telegram/Zoom discussions to help clarify/answer questions and add my thoughts. Discussed steps for how to accomplish certain tasks or areas that could be enhanced (e.g. regex, git).
 
 ### Contributions beyond the project team
 
