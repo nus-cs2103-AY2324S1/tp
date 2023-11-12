@@ -48,6 +48,8 @@ solution to manage your student details, including attendance records and assign
 - [7. Summary](#7-summary)
   - [7.1 Prefix Summary](#71-prefix-summary)
   - [7.2 Command Summary](#72-command-summary)
+    - [7.2.1 Basic Course Management](#721-basic-course-management)
+    - [7.2.2 Basic Student Management](#722-basic-student-management)
 
 --------------------------------------------------------------------------------------------------------------------
 ## 2. About this User Guide
@@ -348,7 +350,7 @@ Edits the contact details.
 * `INDEX` refers to the index number shown in the displayed person list.
 * `INDEX` must be a positive integer 1, 2, 3, …
 * The same restrictions from the `add` command are applied to `STUDENT_NAME`, `PHONE_NUMBER`, `STUDENT_ID` and `TUTORIAL_GROUP_ID`.
-* At least one of the optional fields must be provided.
+* At least one of the optional fields **must be provided**.
 * Existing values will be updated to the input values.
 * When editing tutorial groups, the existing tutorial groups of the person will be removed i.e adding of tutorial groups is not cumulative.
 * You can remove all the person’s tutorial groups by typing t/ without specifying any tutorial groups after it.
@@ -484,14 +486,14 @@ Finds a student's or multiple students' contact either via their name or student
 
 <div markdown="block" class="alert alert-secondary">
 
-*  `find n/Anthony Yiqiao` 
+* `find n/Anthony Yiqiao`
   * Finds all contacts with the name "Anthony" and/or "Yiqiao".
 
 </div>
 
 <div markdown="block" class="alert alert-secondary">
 
-*  `find id/A0123456H` 
+* `find id/A0123456H` 
   * Finds all contacts with the student ID "A0123456H".
 
 </div>
@@ -610,7 +612,7 @@ Displays the detailed attendance record of the specified student.
 * If the student has no attendance records, it will return a message indicating that the student has no attendance records.
 * If the student has attendance records, the attendance record will be shown week by week with the reason being provided for absences.
 * `INDEX` refers to the index number shown in the displayed person list.
-* `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `INDEX` **must be a positive integer** 1, 2, 3, …
 
 </div>
 
@@ -666,19 +668,43 @@ _Details coming soon ..._
 
 ### 7.1 Prefix summary
 
+| Parameter      | Prefix | Rules                                                                                                                                                                                                              |
+|----------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Course code    | course/| - Should only contain alphanumeric characters.<br>- Should not contain spaces.                                                                                                                                 |
+| Name           | n/     | - Should only contain alphanumeric characters and spaces, no numbers or special characters.                                                                                                                                                         |
+| Student ID     | id/    | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and `L` represents capital letters. Student ID is unique for all students.                                                                                                        |
+| Phone          | p/     | - Should only contain digits.                                                                                                                                               |
+| Email          | e/     | - Should only be of the form `local@domain` and only accept alphanumeric characters<br>- `local` allows for special characters `+`, `_`, `.` and `-` as well.<br>- `domain` must be at least 2 letters long<br> |
+| Tutorial group | t/     | - Should only contain alphanumeric characters.<br>- Should not contain spaces.<br>- Used in `add` and `edit` commands.                                                                                                                               |
+| Tutorial group | tg/    | - Should only contain alphanumeric characters.<br>- Should not contain spaces.<br>- Used in `list attendance` and `delete all` commands.                                                                                                                              |
+| Attendance     | a/     | - Should only be 0 or 1.<br>- 0 representing absence and 1 representing present.                                                                                                                                                                                          |
+| Week number    | w/     | - Should be an integer from 0 to 13.                                                                                                                                                                               |
+| Reason         | r/     | - Can be any character.                                                                                                                                                                                            |
+
+
 ### 7.2 Command summary
 
+#### 7.2.1 Basic Course Management Commands
+
+| Action            | Format, Examples                     |
+|-------------------|--------------------------------------|
+| **Course Create** | - `course create course/COURSE_CODE` <br> <br> e.g. `course create course/CS2103T`|
+| **Course Delete** | - `course delete course/COURSE_CODE` <br> <br> e.g. `course delete course/CS2103T`|
+| **Course Switch** | - `course switch course/COURSE_CODE` <br> <br> e.g. `course switch course/CS2103T`|
+| **Course Edit**   | - `course edit course/COURSE_CODE`   <br> <br> e.g. `course edit course/CS2103T`|
+
+
+#### 7.2.2 Basic Student Management Commands
 
 | Action     | Format, Examples                                                                                                                                                                                               |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP_ID]…` <br> e.g., `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G2`                                                     |
-| **Course** | `course create/delete/switch/edit course/COURSE_CODE`<br/> e.g., `course create course/CS2103T`                                                                                                                |
-| **Delete** | `delete all [tg/TUTORIAL_GROUP_ID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                                                                       |
-| **Exit**   | `exit`                                                                                                                                                                                                         |
-| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… / id/STUDENT_ID [STUDENT_ID]…` <br/> e.g., `find n/Anthony Yiqiao`                                                                                                        |
-| **List**   | `list attendance w/WEEK_NUMBER [tg/TUTORIAL_GROUP_ID]`<br/> e.g., `list students`                                                                                                                              |
 | **Help**   | `help`                                                                                                                                                                                                         |
-| **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… / id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER [r/REASON_OF_ABSENCE]` <br/> e.g., `mark n/Zong Jin, Fu Yiqiao a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
-| **Merge**  | `merge [PRIMARY_INDEX] [SECONDARY_INDEX]` <br/> e.g., `merge 1 2`                                                                                                                                              |
-| **View**   | `view INDEX` <br/> e.g., `view 1`                                                                                                                                                                              |
+| **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP_ID]…` <br> <br> e.g., `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G2`                                                     |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`<br> <br> e.g., `edit 1 n/Tan Liyan` <br> `edit 2 p/92345678 t/`                                                                       |
+| **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… / id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER [r/REASON_OF_ABSENCE]` <br> <br> e.g., `mark n/Zong Jin, Fu Yiqiao a/1 w/1` <br> `mark id/A0123456E, A0123457E a/1 w/1` |
+| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… / id/STUDENT_ID [STUDENT_ID]…` <br> <br> e.g., `find n/Anthony Yiqiao`                                                                                                        |
+| **List**   | `list attendance w/WEEK_NUMBER [tg/TUTORIAL_GROUP_ID]`<br> <br> e.g., `list students`                                                                                                                              |
+| **Delete** | `delete all [tg/TUTORIAL_GROUP_ID]` `delete INDEX` <br> <br> e.g., `delete all tg/G10` <br> `delete 3`                                                                                                                   |
+| **Merge**  | `merge [PRIMARY_INDEX] [SECONDARY_INDEX]` <br> <br> e.g., `merge 1 2`                                                                                                                                              |
+| **View**   | `view INDEX`  <br> <br> e.g., `view 1`                                                                                                                                                                              |
+| **Exit**   | `exit`                                                                                                                                                                                                         |
