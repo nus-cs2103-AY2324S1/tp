@@ -47,6 +47,8 @@ Card *--> "2" PracticeDate
 Card *--> "1" Difficulty
 Card *--> "1" SolveCount
 
+
+note right of Card: "*filtered" belongs to model manager
 Card -[hidden]up--> I
 UniqueCardList -[hidden]right-> I
 

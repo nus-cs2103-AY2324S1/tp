@@ -191,7 +191,7 @@ Get ready to embark on your productive study session with <span style="color: gr
 you have created to you. Here is a brief overview of the GUI to help you familiarise yourself with the key elements and
 their locations.
 
-![gui_overview](./images/UserGuide/1.3b_ui_overview.png)
+![gui_overview](./images/UserGuide/1.4_ui_overview.png)
 
 Here is a summary of what each component in the GUI displays.
 
@@ -222,6 +222,7 @@ feel free to explore the other features in the [command summary](#command-summar
 2. First, let's try to add your very first flashcard. Type the following command and hit <kbd>Enter</kbd>: <br>
 `add q/what does + mean in boolean algebra? a/it means OR.`
 
+![adding a card](./images/UserGuide/1.4_tutorial_add.png)
 
 3. Congratulations, you have created your first flashcard! Now, let's try to edit the card created from the
 previous input by capitalising it! Note that the flashcard just created is at index `1`. Type the following command
@@ -272,24 +273,27 @@ testing your memory with the most difficult flashcard.
 
 # Feature list
 ## Command Summary
-| Command  | Description                             |
-|----------|-----------------------------------------|
-| add      | Adds a Flashcard to the deck.           |
-| delete   | Removes a Flashcard from the deck.      |
-| list     | Displays a specified set of Flashcards. |
-| edit     | Modifies an existing Flashcard.         |
-| practise | Practises a Flashcard.                  |
-| hint     | Shows the hint set for a Flashcard.     |
-| solve    | Solves a Flashcard.                     |
-| set      | Sets the difficulty for a Flashcard.    |
-| random   | Practises a random Flashcard.           |
-| clear    | Removes all Flashcards from the deck.   |
-| goal     | Sets the goal for the session.          |
-| help     | Shows link to User Guide.               |
-| exit     | Exits and closes the application.       |
+
+| Command                                                  | Description                             |
+|----------------------------------------------------------|-----------------------------------------|
+| [add](#adding-a-flashcard--add)                          | Adds a Flashcard to the deck.           |
+| [delete](#deleting-a-flashcard--delete)                  | Removes a Flashcard from the deck.      |
+| [list](#view-all-flashcards--list)                       | Displays a specified set of Flashcards. |
+| [edit](#editing-a-specific-flashcard--edit)              | Modifies an existing Flashcard.         |
+| [practise](#practise-flashcards--practise)               | Practises a Flashcard.                  |
+| [hint](#hints-for-flashcards--hint)                      | Shows the hint set for a Flashcard.     |
+| [solve](#solving-flashcards--solve)                      | Solves a Flashcard.                     |
+| [set](#setting-difficulty-of-flashcards--set)            | Sets the difficulty for a Flashcard.    |
+| [random](#randomly-practise-flashcards--random)          | Practises a random Flashcard.           |
+| [clear](#clear-all-flashcards--clear)                    | Removes all Flashcards from the deck.   |
+| [goal](#setting-goals--goal)                             | Sets the goal for the session.          |
+| [help](#getting-help--help)                              | Shows link to User Guide.               |
+| [exit](#exiting-span-stylecolor-green-lesson-span--exit) | Exits and closes the application.       |
+
 
 ## Commands
-### Adding a Flashcard: `add`
+
+### Adding a Flashcard : `add`
 
 Adds a flashcard to the deck for the user.
 
@@ -308,10 +312,10 @@ _A flashcard with a question, answer, tag and hint field._
 >```add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB```
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
    1. User Input:
-      >```add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS```
+      `add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS`<br>
 
    2. Successful Output:<br>
       i. Result box displays:<br>
@@ -332,11 +336,11 @@ _Deleting the card in the deck with an index of 2._
 >```delete 2```
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
-   1. User Input: 
-      >```add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS```<br>
-      ```delete 1```
+   1. User Input: <br>
+      `add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS`<br>
+      `delete 1`<br>
 
    2. Successful Output<br>
       i. Result box displays:<br>
@@ -361,19 +365,20 @@ _List all flashcards with the CS2100 Tag._
 >```list t/CS2100```
 
 <div markdown="span" class="alert alert-danger">
-    ⚠️ To Note:
+    ⚠️ To Note:<br>
 
-1. Any extraneous parameters not `q/` and `t/` will be ignored, i.e. `list 12345` or `list a/000000` will be regarded as `list`.
-2. Listing questions with markdown syntax should include their relevant markdown notation, i.e. `list q/**What**` for questions starting with **What**.
+1. Any extraneous parameters not `q/` and `t/` will be ignored, i.e. `list 12345` or `list a/000000` will be regarded as `list`.<br>
+2. Listing questions with markdown syntax should include their relevant markdown notation, i.e. `list q/**What**` for questions starting with **What**.<br>
+3. Newly added cards may not appear if they do not match the current filter.
 </div>
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
    1. User Input:
-      >```add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude```<br>
-      ```add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100```<br> 
-      ```list t/CS2100```
+      `add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude`<br>
+      `add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100`<br> 
+      `list t/CS2100`<br>
 
    2. Successful Output<br>
       i. Result box displays: <br>
@@ -402,18 +407,18 @@ _Change the hint at index 1 to "Apple"._
 >```edit 1 h/Apple```
 
 <div markdown="span" class="alert alert-danger">
-    ⚠️ To Note:
+    ⚠️ To Note:<br>
 
-1. There must be **at least** one optional parameter included for the command input.
+1. There must be **at least** one optional parameter included for the command input.<br>
 2. Empty input after `t/` and `h/` will remove existing tags or hint respectively.
 </div>
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
-1. User Input:
-   >```add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa```<br>
-   ```edit 1 a/If is a negative number, invert all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems```
+1. User Input:<br>
+   `add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa`<br>
+   `edit 1 a/If is a negative number, invert all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems`<br>
 
 2. Successful Output<br>
     i. Result box displays:<br>
@@ -422,7 +427,7 @@ _Change the hint at index 1 to "Apple"._
        ![result of edit command](./images/UserGuide/1.4_edit.png)
 </div>
 
-### Practise Flashcards: `practise`
+### Practise Flashcards : `practise`
 Practise a single Flashcard in the deck
 
 #### Format:
@@ -433,24 +438,25 @@ _Practising the card in the deck with an index of 2._
 >```practise 2```
 
 <div markdown="span" class="alert alert-info">
-      ℹ️  To Note:
+      ℹ️  To Note:<br>
       
 1. If user omits INDEX in the command input, the first card in the deck will be practised.
 </div>
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
-1. User Input
-   >```add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS```<br>
-   ```practise```
+1. User Input<br>
+   `add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS`<br>
+   `practise`<br>
+
 2. Successful Output<br>
    i. Result box displays: <br>
    `Practising Question 1 : opcode for R format instructions`
    ![result of practise command](./images/UserGuide/1.4_practise.png)
 </div>
 
-### Hints for Flashcards: `hint`
+### Hints for Flashcards : `hint`
 See the hint for a question at the given index
 
 Format: 
@@ -461,25 +467,25 @@ _Hint the card in the deck with an index of 3._
 >```hint 3```
 
 <div markdown="span" class="alert alert-info">
-      ℹ️  To Note:
+      ℹ️  To Note:<br>
 
 1. If no hints are set for card at INDEX, `No Hint has been provided` will be displayed in the result box.
 </div>
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
-1. User Input
-   >```add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS h/Zeros```<br>
-   ```hint 1```
+1. User Input<br>
+   `add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS h/Zeros`<br>
+   `hint 1`<br>
+
 2. Successful Output<br>
    i. Result box displays:<br>
    `Hint for Question 1: Zeros`
    ![result of hint command](./images/UserGuide/1.4_hint.png)
 </div>
 
-
-### Solving Flashcards: `solve`
+### Solving Flashcards : `solve`
 Solves the question at the given index
 
 Format: 
@@ -490,17 +496,17 @@ _Solve the card in the deck with an index of 2._
 >```solve 2```
 
 <div markdown="span" class="alert alert-info">
-      ℹ️  To Note:
+      ℹ️  To Note:<br>
 
 1. If user omits INDEX in the command input, the first card in the deck will be solved.
 </div>
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
-1. User Input
-   >```add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS h/Zeros```<br>
-   ```solve```
+1. User Input<br>
+   `add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS h/Zeros`<br>
+   `solve`<br>
 
 2. Successful Output<br>
    i. Result box displays:<br>
@@ -509,7 +515,7 @@ _Solve the card in the deck with an index of 2._
    ![result of solve command](./images/UserGuide/1.4_solve.png)
 </div>
 
-### Setting Difficulty of Flashcards: `set`
+### Setting Difficulty of Flashcards : `set`
 Setting the difficulty of a flashcard, based on the user.
 
 Format: 
@@ -520,17 +526,17 @@ _Set the first card as easy_
 >```set 1 d/easy```
 
 <div markdown="span" class="alert alert-info">
-      ℹ️  To Note:
+      ℹ️  To Note:<br>
 
 1. If user omits INDEX in the command input, the first card in the deck will be set.
 </div>
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
-1. User Input
-   >```add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS h/Zeros```
-   ```set d/easy```
+1. User Input<br>
+   `add q/opcode for R format instructions a/000000 t/CS2100 t/MIPS h/Zeros`<br>
+   `set d/easy`<br>
 
 2. Successful Output<br>
    i. Result box displays:<br>
@@ -539,7 +545,7 @@ _Set the first card as easy_
    ![result of set command](./images/UserGuide/1.4_set.png)
 </div>
 
-### Randomly Practise Flashcards: `random`
+### Randomly Practise Flashcards : `random`
 Practise a single random Flashcard in the deck.
 
 #### Format: 
@@ -550,19 +556,19 @@ _Practise a random card._
 >```random```
 
 <div markdown="span" class="alert alert-info">
-      ℹ️  To Note:
+      ℹ️  To Note:<br>
 
-1. Users can use `r` as the index with commands solve and set for the randomly selected question.
+1. Users can use `r` as the index with commands solve and set for the randomly selected question.<br>
 2. As of v1.4 Hint does not support random and `r`.
 </div>
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
-1. User Input
-   >```add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems```<br>
-   ```add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB```<br>
-   ```random```
+1. User Input<br>
+   `add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems`<br>
+   `add q/What are the 5 stages of MIPS? a/Fetch, Decode, Execute, Memory, Write Back t/CS2100 h/5 stages: IF, ID, EX, MEM, WB`<br>
+   `random`<br>
 
 2. Successful Output (assuming random chooses the card at index 2)<br>
    i. Result box displays:<br>
@@ -570,7 +576,7 @@ _Practise a random card._
    ![result of random command](./images/UserGuide/1.4_random.png)
 </div>
 
-### Clear All Flashcards: `clear`
+### Clear All Flashcards : `clear`
 Clears all flashcards found in the Deck. Deck is reset back to empty.
 
 #### Format: 
@@ -581,17 +587,17 @@ _Delete all flashcards from the deck._
 >```clear```
 
 <div markdown="span" class="alert alert-danger">
-    ⚠️ To Note:
+    ⚠️ To Note:<br>
 
 1. This action removes all cards and is irreversible!
 </div>
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
-1. User Input
-   >```add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems```<br>
-   ```clear```
+1. User Input<br>
+   `add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems`<br>
+   `clear`<br>
 
 2. Successful Output<br>
    i. Result box displays:<br>
@@ -599,7 +605,7 @@ _Delete all flashcards from the deck._
       ![result of clear command](./images/UserGuide/1.4_clear.png)
 </div>
 
-### Setting Goals: `goal`
+### Setting Goals : `goal`
 Set a goal for the current studying session.
 
 #### Format:
@@ -610,16 +616,16 @@ _Set a goal of 5 for this session._
 >```goal 5```
 
 <div markdown="span" class="alert alert-info">
-      ℹ️  To Note:
+      ℹ️  To Note:<br>
 
 1. On initialisation of <span style="color: green;">lesSON</span>, the target of the goal will be the size of the deck and the number of cards solved will be 0.
 </div>
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
 1. User Input
-   >```goal 10```
+   `goal 10`<br>
 
 2. Successful Output<br>
    i. Result box displays:<br>
@@ -628,7 +634,7 @@ _Set a goal of 5 for this session._
       ![result of goal command](./images/UserGuide/1.4_goal.png)
 </div>
       
-### Getting Help: `help`
+### Getting Help : `help`
 Seek more details from a link provided leading to the User Guide.
 Users can also access this function by clicking on the **File** button located at the top
 left of the application, and then navigating to the **Help** tab.
@@ -642,10 +648,10 @@ _Open help window._
 
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
-1. User Input
-   >```help```
+1. User Input<br>
+   `help`<br>
 
 2. Successful Output<br>
    i. Result box displays:<br>
@@ -654,7 +660,7 @@ _Open help window._
       ![result of help command](./images/UserGuide/1.4_help.png)
 </div>
 
-### Exiting <span style="color: green;">lesSON</span>: `exit`
+### Exiting <span style="color: green;">lesSON</span> : `exit`
 Exits and closes the <span style="color: green;">lesSON</span> application.
 
 #### Format:
@@ -665,10 +671,10 @@ _Closes <span style="color: green;">lesSON</span>._
 >```exit```
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:
+   💡 Try It Yourself:<br>
 
-1. User Input
-   >```exit```
+1. User Input<br>
+   `exit`<br>
 
 2. Successful Output<br>
    i. <span style="color: green;">lesSON</span> closes.
@@ -691,39 +697,41 @@ To bold a line of text, wrap text as follows `**text**`
 
 #### Example:
 _Bolding a phrase in the question_
-```
-edit 1 q/How many bits can a **Half Adder** add up
-```
+>```edit 1 q/How many bits can a **Half Adder** add up```
 
-#### Expected Result:
-1. User Input
-   ```
-   add q/What is the **Stage** where calculations are operated? a/ALU
-   ```
-2. Successful Output
-   1. Result box displays: `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`
-   2. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.
-   3. `Stage` will appear bolded in both instances.
+<div markdown="span" class="alert alert-success">
+   💡 Try It Yourself:<br>
+
+1. User Input<br>
+   `add q/What is the **Stage** where calculations are operated? a/ALU`<br>
+
+2. Successful Output<br>
+   i. Result box displays:<br>
+   `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`<br>
+   ii. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.<br>
+   iii. `Stage` will appear bolded in both instances.
 ![usage of bold syntax](./images/UserGuide/1.4_bold.png)
+</div>
 
 #### Italic
 To italicise a line of text, wrap text as follows `*text*`
 
 #### Example:
 _Italicising a phrase in the question_
-```
-edit 1 q/How many bits can a *Half Adder* add up
-```
-#### Expected Result:
-1. User Input
-   ```
-   add q/What is the *Stage* where calculations are operated? a/ALU
-   ```
+>```edit 1 q/How many bits can a *Half Adder* add up```
+
+<div markdown="span" class="alert alert-success">
+   💡 Try It Yourself:<br>
+
+1. User Input<br>
+   `add q/What is the *Stage* where calculations are operated? a/ALU`<br>
+
 2. Successful Output
-   1. Result box displays: `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`
-   2. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.
-   3. `Stage` will appear italicised in both instances.
+   i. Result box displays: `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`<br>
+   ii. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.<br>
+   iii. `Stage` will appear italicised in both instances.
       ![usage of italics syntax](./images/UserGuide/1.4_italics.png)
+</div>
 
 #### Underline
 To underline a line of text, insert `<u>` at the beginning of the text,
@@ -731,26 +739,28 @@ and end with `</u>` at the end of the underlined text.
 
 #### Example:
 _Underlining a phrase in the question_
-```
-edit 1 q/How many bits can a <u>Half Adder</u> add up
-```
-#### Expected Result:
-1. User Input
-   ```
-   add q/What is the <u>Stage</u> where calculations are operated? a/ALU
-   ```
+>```edit 1 q/How many bits can a <u>Half Adder</u> add up```
+
+<div markdown="span" class="alert alert-success">
+   💡 Try It Yourself:<br>
+
+1. User Input<br>
+   `add q/What is the <u>Stage</u> where calculations are operated? a/ALU`<br>
+
 2. Successful Output
-   1. Result box displays: `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`
-   2. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.
-   3. `Stage` will appear underlined in both instances.
-      ![usage of underline syntax](./images/UserGuide/1.4_underline.png)
+   i. Result box displays: `New Card added: Question: What is the Stage where calculations are operated?; Answer: ALU`<br>
+   ii. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.<br>
+   iii. `Stage` will appear underlined in both instances.
+            ![usage of underline syntax](./images/UserGuide/1.4_underline.png)
+</div>
 
+<div markdown="span" class="alert alert-danger">
+    ⚠️ To Note:<br>
 
-
-### To Note:
-1. Do not stack MarkDown Syntax. This may lead to unexpected behavior of text in the display view. 
-2. Do ensure that the phrase intended for styling is wrapped within an open and close syntax of the same type, i.e. `**text**` for bold `*text*` for italics and `<u>text</u>` for underline. 
-3. In the case when unexpected MarkDown format is observed, edit the flashcard again with the without the MarkDown syntax/with appropriate syntaxes.
+1. Do not stack MarkDown Syntax. This may lead to unexpected behavior of text in the display view.<br> 
+2. Do ensure that the phrase intended for styling is wrapped within an open and close syntax of the same type, i.e. `**text**` for bold `*text*` for italics and `<u>text</u>` for underline.<br> 
+3. In the case when unexpected MarkDown format is observed, edit the flashcard again with the without the MarkDown syntax/with appropriate syntax.
+</div>
 
 ## Importing and Exporting Decks
 
