@@ -13,8 +13,10 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.INTERACTION_LIST_ONE;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -157,14 +159,14 @@ public class PersonTest {
         assertEquals(true, ELLE.isHotLead());
     }
 
-    // @Test
-    // public void testAddInteractions() {
-    //     Person aliceCopy = new PersonBuilder(ALICE).build();
-    //     assertEquals(0, aliceCopy.getInteractions().size());
-    //     List<Interaction> result = aliceCopy.addInteractions(INTERACTION_LIST_ONE);
-    //     assertEquals(result, aliceCopy.getInteractions());
-    //     assertEquals(1, aliceCopy.getInteractions().size());
-    // }
+    @Test
+    public void testAddInteractions() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(0, aliceCopy.getInteractions().size());
+        List<Interaction> result = aliceCopy.addInteractions(INTERACTION_LIST_ONE);
+        assertEquals(result, aliceCopy.getInteractions());
+        assertEquals(1, aliceCopy.getInteractions().size());
+    }
 
     @Test
     public void toStringMethod() {
