@@ -21,7 +21,7 @@ public class PaidCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_PERSON_PAID_SUCCESS = "MARK PERSON PAID SUCCESS, Paid: %1$s";
+    public static final String MESSAGE_MARK_PERSON_PAID_SUCCESS = "MARK PERSON PAID SUCCESS";
 
     private final Index targetIndex;
 

@@ -21,7 +21,7 @@ public class UnPaidCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_PERSON_UNPAID_SUCCESS = "MARK PERSON UNPAID SUCCESS, Paid: %1$s";
+    public static final String MESSAGE_MARK_PERSON_UNPAID_SUCCESS = "MARK PERSON UNPAID SUCCESS";
 
     private final Index targetIndex;
 
