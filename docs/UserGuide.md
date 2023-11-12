@@ -725,7 +725,7 @@ _Closes <span style="color: green;">lesSON</span>._
    i. <span style="color: green;">lesSON</span> closes.
 </div>
 
-[Go to Command Summary](#command-summary)
+[Go to Command Summary](#command-summary) <br>
 [Go to Table of Contents](#table-of-contents)
 
 
