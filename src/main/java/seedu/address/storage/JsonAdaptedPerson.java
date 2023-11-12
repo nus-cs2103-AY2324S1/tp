@@ -158,7 +158,7 @@ class JsonAdaptedPerson {
         if (balance == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Balance.class.getSimpleName()));
         }
-        if (!Balance.isWithinLimits(balance)) {
+        if (!Balance.isWithinBalanceLimit(balance)) {
             throw new IllegalValueException(Balance.MESSAGE_BALANCE_LIMIT_EXCEEDED);
         }
         final Address modelAddress = new Address(address);

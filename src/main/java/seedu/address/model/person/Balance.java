@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's payment balance in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isWithinLimits(Integer)}
+ * Guarantees: immutable; is valid as declared in {@link #isWithinTransactionLimit(Integer)}
  */
 public class Balance {
 
@@ -53,16 +53,30 @@ public class Balance {
      */
     public Balance(Integer balanceInCents) {
         requireNonNull(balanceInCents);
-        checkArgument(Math.abs(balanceInCents) <= TRANSACTION_LIMIT,
+
+        // Defensively check for transaction limit here since there should
+        // not be any balance objects that exist with values
+        // that exceed the transaction limit, since they can
+        // only eventually be used to create transactions
+        // that will exceed the balance limit.
+        checkArgument(Balance.isWithinTransactionLimit(balanceInCents),
                 MESSAGE_TRANSACTION_LIMIT_EXCEEDED);
+
         value = balanceInCents;
     }
 
     /**
      * Returns true if a given integer is within the balance limit.
      */
-    public static boolean isWithinLimits(Integer balance) {
-        return balance <= MAX_VALUE && balance >= MIN_VALUE;
+    public static boolean isWithinBalanceLimit(Integer balanceInCents) {
+        return balanceInCents <= MAX_VALUE && balanceInCents >= MIN_VALUE;
+    }
+
+    /**
+     * Returns true if a given integer is within the transaction limit.
+     */
+    public static boolean isWithinTransactionLimit(Integer balanceInCents) {
+        return Math.abs(balanceInCents) <= TRANSACTION_LIMIT;
     }
 
     /**

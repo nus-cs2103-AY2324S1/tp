@@ -297,6 +297,90 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseBalance_exceedTransactionLimit_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$20000.01"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$20001"));
+    }
+
+    @Test
+    public void parseBalance_atTransactionLimit_returnsBalance() throws Exception {
+        Balance expectedBalance = new Balance(2000000);
+        assertEquals(expectedBalance, ParserUtil.parseBalance("$20000"));
+        assertEquals(expectedBalance, ParserUtil.parseBalance("$20000.00"));
+    }
+
+    @Test
+    public void parseBalance_negativeAmount_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("-$1"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("-1"));
+    }
+
+    @Test
+    public void parseBalance_exceedDollarPartLimit_throwsParseException() {
+        // Check for dollar part being 5 digits
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$100000"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$100000.00"));
+
+        // EP: Leading zeroes in dollar part, but after stripping still >5 digits
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$00000100000"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$00000100000.00"));
+
+        // EP: Without dollar sign
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("100000"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("100000.00"));
+    }
+
+    @Test
+    public void parseBalance_badCharacters_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$20,000")); // comma
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$20.000")); // period in wrong place
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$20k")); // letter
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$20@00")); // special character
+    }
+
+    @Test
+    public void parseBalance_multipleDollarSigns_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$$20000"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$200$00"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$20000$"));
+    }
+
+    @Test
+    public void parseBalance_emptyString_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance(""));
+    }
+
+    @Test
+    public void parseBalance_onlyWhitespace_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("    "));
+    }
+
+    @Test
+    public void parseBalance_dollarSignNotAtStart_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("200$"));
+    }
+
+    @Test
+    public void parseBalance_decimalAtStart_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance(".200"));
+    }
+
+    @Test
+    public void parseBalance_decimalAtEnd_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("200."));
+    }
+
+    @Test
+    public void parseBalance_multipleDecimals_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("20.00.00"));
+    }
+
+    @Test
+    public void parseBalance_moreThanTwoDecimalPlaces_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("200.001"));
+    }
+
+    @Test
     public void parseTelegram() throws Exception {
         // EP: Valid
         Telegram expectedTelegram = new Telegram("@telegram");

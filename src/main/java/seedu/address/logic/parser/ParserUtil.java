@@ -226,6 +226,10 @@ public class ParserUtil {
             }
         }
 
+        if (!Balance.isWithinTransactionLimit(cents)) {
+            throw new ParseException(Balance.MESSAGE_TRANSACTION_LIMIT_EXCEEDED);
+        }
+
         return new Balance(cents);
     }
 
