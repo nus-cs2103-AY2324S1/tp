@@ -282,14 +282,6 @@ Format: `clear`
 
 [↑ Back to table of contents](#table-of-contents)
 
-### Exit program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-[↑ Back to table of contents](#table-of-contents)
-
 ### Show statistical table
 Showing a table either categorized by gender, sec level or subject.
 
@@ -366,6 +358,14 @@ Examples:
 
 [↑ Back to table of contents](#table-of-contents)
 
+### Exit program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+[↑ Back to table of contents](#table-of-contents)
+
 ### Save data
 
 Tutorium data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -396,6 +396,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help**   | `help`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT STATION [s/SUBJECT]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/Chemistry`
 **Import** | `import FILENAME.csv`<br> e.g., `import student_data.csv`
 **Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
@@ -409,7 +410,7 @@ Action     | Format, Examples
 **Show Bar Chart** | `bar prefix/`<br> or `bar d/YEAR` <br>
 **Show Line Chart** | `trend y/{year}`
 **Export**   | `export v/VISUAL` <br> e.g., `export v/table`
-**Help**   | `help`
+**Exit**   | `exit`
 
 [↑ Back to table of contents](#table-of-contents)
 

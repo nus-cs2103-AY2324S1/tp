@@ -17,13 +17,17 @@ Given below are my contributions to the project.
     * Added a sort feature to the app.
         * This feature allows the user to sort the list of students by name in alphabetical order to enhance efficiency in searching.
     * Added an export feature to the app.
-        * This feature allows the user to export a visual representation recently created, be it table or barchart.
+        * This feature allows the user to export a visual representation recently created, be it table or barchart, to an intended destination.
+        * The exported chart is saved as a PNG image. 
 
 * **Documentation**:
     * User Guide:
-        * Complete user guide for deleting data.
-        * Add a new section each on the sort and export features.
-        * Execute a last quality check on content.
+        * Completed user guide for deleting data.
+        * Added a new section each on the sort and export features.
+        * Added the purpose of user guide.
+        * Added information about how to use user guide.
+        * Added links directing readers back to table of content at the end of each section.
+        * Executed a last quality check on content.
     * Developer Guide:
         * Added all use cases.
         * Added activity diagrams and sequence diagrams for the sort and export features.
