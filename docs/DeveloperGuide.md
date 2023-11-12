@@ -1271,6 +1271,11 @@ Given below are the planned enhancements. The _current behaviour_ specifies how 
   * Current behaviour: Name does not accept any non-alphanumeric characters and whitespace character.
   * Enhanced behaviour: Name should accommodate for commas `,` and slash `/` characters. This also involves more extensive name validation, with ensuring that comma must be preceded by an alphanumeric character and succeeded by a whitespace character, and slash must be preceded and succeeded by alphanumeric characters.
 
+* Better name handling.
+  * Current behaviour: Name entered by user is kept as it is.
+  * Enhanced behaviour: Name entered by user is standardised so that for each word, the first character is capitalised and the rest of the characters are not capitalised (non-alphabetical characters are kept as they are).
+  * Justification: This standardises the display of contact names. Furthermore, this allows better sorting. As of `v1.4`, when sorting by name in ascending order, names starting with `a` are put behind names starting with `Z`. With the standardisation, there would be no name starting with `a`.
+
 * Stricter phone uniqueness constraint.
   * Current behaviour: Two phone numbers are identified as having the same identity if the user input of the two phones are the same. This means that `+65 12345678` and `+6512345678` are identified as two different phone numbers.
   * Enhanced behaviour: Two phone numbers are identified as having the same identity if they have the same country code and number part. This means that `+65 12345678` and `+6512345678` should be identified as the same phone number.
@@ -1294,6 +1299,26 @@ Given below are the planned enhancements. The _current behaviour_ specifies how 
 * Better malformed JSON handling.
   * Current behaviour: Any invalid field (e.g. phone number containing a non-numerical character) of any contact will cause the data to not be loaded at all. NetworkBook would start with an empty contact list without warning.
   * Enhanced behaviour: Load all contacts that do not have invalid fields and do not load any contact that has at least one invalid field. Warn the user that there are invalid fields in the storage, upon the launch of application. In the case that the JSON is incorrectly formatted such that it cannot be recognised as JSON, warn the user that the application fails to read from the JSON file due to formatting problem, and start with an empty contact list.
+
+* Better course storage.
+  * Current behaviour: Courses are stored as a command entered by the user. For example, the course of `CS2103T` starting on 10 Aug 2023 ending on 10 Dec 2023 is stored as a JSON string `"CS2103T /start 10-08-2023 /end 10-12-2023"`.
+  * Enhanced behaviour: Courses can be stored as a JSON object with `name`, `start` and `end` fields. For example, the same course can be stored as
+
+```json
+{
+  "name": "CS2103T",
+  "start": "10-08-2023",
+  "end": "10-12-2023"
+}
+```
+while a course of `CS2103T` without a starting and ending date can be stored as
+```json
+{
+  "name": "CS2103T",
+  "start": null,
+  "end": null
+}
+```
 
 ### UI
 
