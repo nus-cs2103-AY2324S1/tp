@@ -45,6 +45,7 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
   * [FAQ](#faq)
   * [Known issues](#known-issues)
   * [Command summary](#command-summary)
+  * [Glossary](#glossary)
 <!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
@@ -68,6 +69,24 @@ paired up with simple and beginner-friendly features, anyone can learn how to us
 Transform your tutoring experience with **TuitionConnect!** Jump straight to the [Quick Start Section](#quick-start) and experience **TuitionConnect** today!
 
 ## Using this guide
+If you're feeling a bit lost, worry not!
+This user guide is to assist you seamlessly incorporate this application into your private tutoring business operations.
+
+For first-time users, we understand how it feels to open up an application without proper instructions. Thus, we have
+carefully crafted a [Quick Start](#quick-start) section in this guide to provide you with the knowledge it takes to 
+start using TuitionConnect for your business.
+
+Eager to learn more about what our application can do? Head over to the [Command Format](#command-format) section to 
+learn more about the general formats of the commands and getting yourself prepared before 
+delving into the [Features](#features) section where you are in for the ride of your life! The Features section contains
+the in-depth explanation for each command's format and use cases.
+
+At last, we have also included a [Command Summary](#command-summary) section for when you become proficient at using
+TuitionConnect to refer quickly to any commands that you may need!
+
+Still unsure about the more technical terms used in this guide? Fret not, as we also provide a [glossary](#glossary)
+to better understand all the technical jargons!
+
 
 ## Symbols and Syntax
 
@@ -463,3 +482,48 @@ Format: `exit`
 | **redo**        | `redo`                                                                                                                                                                                                                                 |
 | **rev**         | `rev`                                                                                                                                                                                                                                  |
 | **exit**        | `exit`                                                                                                                                                                                                                                 |
+
+## Glossary
+
+### CLI
+
+`CLI` is short for `Command Line Interface`, which is a text-based user interface where a program connects to the user.
+Users interact with a system or application by the use of text commands, where the system will respond accordingly
+depending on the command specified.
+
+### Command
+
+The specific instruction for the application to carry out.
+
+### GUI
+
+`GUI` is short for `Graphical User Interface`, which is a user interface that incorporates interactive visual 
+components _(such as icons, etc)_. Users interact with a system or application by clicking on these components, where 
+the system will respond accordingly to the user's actions by updating the user interface.
+
+### Index
+
+`Index` is the position of an item inside the list. If the `item` is at index 1, then we say that it is the first 
+item on the list.
+
+### JAR file
+
+`JAR` is short for `Java ARchive`, which is a file format that is used to package the files to run TuitionConnect. 
+Not only that, `JAR` files are also executables, meaning that it can be run by simply double-clicking the `JAR` file.
+
+### Java
+`Java` is the programming language used to develop TuitionConnect. 
+A version of `Java` which is `Java 11` or higher is a requisite to run TuitionConnect on your devices.
+
+### JSON file
+
+`JSON` is short for JavaScript Object Notation, mainly utilized for storing data of users in TuitionConnect. 
+These type of files are lightweight and text-based, making it suitable for both humans to read and write, 
+as well as machines to parse and generate.
+
+### Parameter
+
+`Parameter`s are the inputs that a user can provide for a particular part of a command. As an example, for the field 
+`n/NAME` of add command, `NAME` can be substituted with the input that you want to specify (such as n/John or n/Alice). 
+
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide-)
