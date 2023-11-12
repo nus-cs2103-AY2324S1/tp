@@ -186,6 +186,21 @@ public class PolicyTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void invalidIssueAndExpiryDate() {
+        Policy invalidAmyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(VALID_POLICY_NO_AMY),
+                new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY), new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY));
+        assertTrue(invalidAmyPolicy.compareDates() < 0);
+    }
+
+    @Test
+    public void validIssueAndExpiryDate() {
+        Policy amyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(VALID_POLICY_NO_AMY),
+                new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
+        assertTrue(amyPolicy.compareDates() > 0);
+    }
+
+
 
 
 
