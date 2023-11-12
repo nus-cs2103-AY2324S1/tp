@@ -329,8 +329,9 @@ The following diagrams show the entire sequence flow for `LogicManager#execute()
 User can specify a Person to add as an Attendee to a specified Meeting.
 
 To avoid storing an entire `JsonAdaptedPerson` object within the `JsonAdaptedMeeting` every time a `Person` is added to a `Meeting`,
-we created the `Attendee` class to store a unique identifier for the `Person` added.
-As every `Person` has a unique name in the current iteration, `Attendee` is implemented in the following way:
+an `Attendee` class is created to store a unique identifier for the `Person` added.
+As every `Person` has a unique name in the current iteration of OutBook, it is used as the unique identifier. 
+`Attendee` is implemented in the following way:
 
 - `Attendee(attendeeName)` -- Initialized with a String obtained from `Person.getName().toString()`
 - `Attendee#getAttendeeName()` -- Returns a String representing the attendee's name
@@ -341,7 +342,7 @@ The following sequence diagram shows how the add attendee operation works:
 
 ![AddAttendeeSequenceDiagram](images/AddAttendeeSequenceDiagram.png)
 
-A Person object can be obtained from a Meeting's list of attendees by searching through `UniquePersonList`
+A `Person` object can be obtained from a `Meeting`'s list of attendees by searching through `UniquePersonList`
 for a `Person` with a name matching `attendeeName`.
 
 <div style="page-break-after: always;"></div>
@@ -385,6 +386,24 @@ Step 9. Further execution is carried out, which like before adds the `Person` ob
 
 Solution:
 This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is marked as done, the attendees of the meeting will be updated with their LastContactedTime field updated to the end time of the meeting.
+
+<div style="page-break-after: always;"></div>
+
+### Keeping track of the status of a contact
+Each instance of `Person` contains an immutable `Status` object that allows the user to specify which stage of the insurance sales process a contact is at, if applicable.
+At the current iteration of OutBook, a status must be one of `NIL`, `Prospective`, `Active`, `Inactive`, `Renewal`, `Claimant` (case-insensitive).
+This is tailored according to the responsibilities of an insurance agent, which include:
+- Promoting relevant insurance policies to prospective clients
+- Keeping active clients updated on their policies
+- Finding out why inactive clients did not renew their policies
+- Sending renewal reminders to clients whose policies are approaching expiry
+- Filing and following up on claims on behalf of their clients
+
+The list of valid statuses is stored as an `Enumeration` object for the following benefits:
+- Readability: e.g. `StatusList.NIL` is self-explanatory and easier to understand than something like `StatusList[0]` if an index data structure were to be used.
+- Maintainability: If the list of valid statuses changes or expands in the future, it's much easier to update an enumeration. This centralizes the changes in one place, making the code more maintainable compared to scattered string constants.
+
+`Status` is implemented and utilized in a similar manner to [`LastContactedTime`](#keeping-track-of-last-meeting-with-contact).
 
 <div style="page-break-after: always;"></div>
 
