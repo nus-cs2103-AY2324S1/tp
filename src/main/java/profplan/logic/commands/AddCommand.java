@@ -24,25 +24,21 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list.";
     public static final String MESSAGE_DETAILS = "Compulsory Parameters: "
-            + PREFIX_NAME + "[name] "
-            + PREFIX_PRIORITY + "[priority] "
-            + PREFIX_DUEDATE + "[dueDate] "
-<<<<<<< HEAD
-            + "Optional Parameters:\n"
-=======
-            + "\nOptional Parameters: "
->>>>>>> 3903255e199f476e292e33ea795d19ba0b9f5323
-            + PREFIX_RECURRING + "[recur] "
-            + PREFIX_TAG + "[tag...] "
-            + PREFIX_LINK + "[link] "
-            + PREFIX_DESCRIPTION + "[description]";
+        + PREFIX_NAME + "[name] "
+        + PREFIX_PRIORITY + "[priority] "
+        + PREFIX_DUEDATE + "[dueDate] "
+        + "\nOptional Parameters: "
+        + PREFIX_RECURRING + "[recur] "
+        + PREFIX_TAG + "[tag...] "
+        + PREFIX_LINK + "[link] "
+        + PREFIX_DESCRIPTION + "[description]";
     public static final String MESSAGE_EXAMPLE = "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Grade assignments "
-            + PREFIX_PRIORITY + "1 "
-            + PREFIX_TAG + "assignment "
-            + PREFIX_TAG + "grade "
-            + PREFIX_DUEDATE + "01-01-2023 "
-            + PREFIX_LINK + "www.example.com";
+        + PREFIX_NAME + "Grade assignments "
+        + PREFIX_PRIORITY + "1 "
+        + PREFIX_TAG + "assignment "
+        + PREFIX_TAG + "grade "
+        + PREFIX_DUEDATE + "01-01-2023 "
+        + PREFIX_LINK + "www.example.com";
     public static final String MESSAGE_FULL_HELP = MESSAGE_USAGE + "\n" + MESSAGE_DETAILS + "\n" + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
@@ -88,7 +84,7 @@ public class AddCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+            .add("toAdd", toAdd)
+            .toString();
     }
 }
