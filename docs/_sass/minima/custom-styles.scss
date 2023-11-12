@@ -24,16 +24,24 @@ h2, h3, h4, h5, h6 {
   font-weight: $alert-link-font-weight;
 }
 
-code {
-    color: white;
-    background-color: #404040;
-    border-radius: 8px;
+.command-succeed {
+    border: 1px solid #155724;
+    p, .highlight, .alert {
+        margin: 0;
+    }
+    margin-bottom: 1em;
+    margin-top: 2em;
+    border-radius: 0.25rem;
 }
 
-.highlighter-rouge .highlight {
-    background: #404040;
+.command-fail {
+    border: 1px solid #721C23;
+    p, .highlight, .alert, table {
+        margin: 0;
+    }
+    margin-bottom: 1em;
+    border-radius: 0.25rem;
 }
-
 
 // Generate contextual modifier classes for colorizing the alert.
 
