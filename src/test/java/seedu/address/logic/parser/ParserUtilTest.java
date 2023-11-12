@@ -253,6 +253,9 @@ public class ParserUtilTest {
     @Test
     public void validateTag_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.validateTag(INVALID_TAG));
+
+        // with white space
+        assertThrows(ParseException.class, () -> ParserUtil.validateTag(VALID_TAG_1 + " " + VALID_TAG_2));
     }
     @Test
     public void validateFinancialPlan_validInput_success() {

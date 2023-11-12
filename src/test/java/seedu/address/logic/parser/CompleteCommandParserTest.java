@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CompleteCommand.MESSAGE_INVALID_DATE;
@@ -10,6 +12,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -84,5 +87,19 @@ class CompleteCommandParserTest {
         CompleteByDate expectedCommand = new CompleteByDate(LocalDate.of(2023, 5, 1));
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void isValidArguments() {
+        String nonEmptyIndex = "1";
+        Optional<String> nonEmptyDate = Optional.of("01-01-2022");
+        String emptyIndex = "";
+        Optional<String> emptyDate = Optional.empty();
+
+        assertFalse(CompleteCommandParser.isValidArguments(nonEmptyIndex, nonEmptyDate));
+        assertFalse(CompleteCommandParser.isValidArguments(emptyIndex, emptyDate));
+
+        assertTrue(CompleteCommandParser.isValidArguments(nonEmptyIndex, emptyDate));
+        assertTrue(CompleteCommandParser.isValidArguments(emptyIndex, nonEmptyDate));
     }
 }
