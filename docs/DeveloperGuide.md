@@ -3,31 +3,40 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Contents
-* Acknowledgements 
-* Setting up, getting started 
-* Design 
-  * Architecture 
-  * UI component 
-  * Logic component 
-  * Model component
-    Storage component
-    Common classes
-    Implementation
-    Return to home page feature
-    Select Event Feature
-    Add Tag Feature
-    Link/unlink Feature
-    [Proposed] Undo/redo feature
-    [Proposed] Data archiving
-    Documentation, logging, testing, configuration, dev-ops
-    Appendix: Requirements
-    Product scope
-    User stories
-    Use cases
-    Non-Functional Requirements
-    Glossary
-    Appendix: Effort
-    Appendix: Instructions for manual testing
+* [Acknowledgements](#acknowledgements) 
+* [Setting up, getting started](#setting-up-getting-started) 
+* [Design](#design) 
+  * [Architecture](#architecture) 
+  * [UI component](#ui-component) 
+  * [Logic component](#logic-component) 
+  * [Model component](#model-component) 
+  * [Storage component](#storage-component) 
+  * [Common classes](#common-classes) 
+* [Implementation](#implementation)
+  * [List features](#list-features)
+  * [Mark attendance feature](#mark-attendance-feature)
+  * [View Tallied Attendance feature](#view-tallied-attendance-feature)
+  * [View Detailed Attendance Records feature](#view-detailed-attendance-records-feature)
+  * [Find feature](#finding-a-person-find)
+  * [Merge feature](#merging-two-students-merge)
+  * [Delete features](#delete-features)
+  * [[Proposed] Multiple Address Books for each Course](#proposed-multiple-address-books-for-each-course)
+  * [[Proposed] Undo/redo feature](#proposed-undoredo-feature) 
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops) 
+* [Appendix: Requirements](#appendix-requirements) 
+  * [Product scope](#product-scope) 
+  * [User stories](#user-stories) 
+  * [Use cases](#use-cases) 
+  * [Non-Functional Requirements](#non-functional-requirements) 
+  * [Glossary](#glossary) 
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+  * [Launch and shutdown](#launch-and-shutdown)
+  * [Creating, editing and deleting a course](#creating-editing-and-deleting-a-course)
+  * [Adding and editing a student](#adding-and-editing-a-student)
+  * [Deleting a person](#deleting-a-person)
+  * [Marking and Viewing Attendance](#marking-and-viewing-attendance)
+  * [Saving Data](#saving-data)
+* [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 
 --------------------------------------------------------------------------------------------------------------------
 
