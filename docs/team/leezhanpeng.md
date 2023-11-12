@@ -18,7 +18,7 @@ Given below are my contributions to the project.
     * The difficulty of this implementation lies in the inner workings of the UI. Having to set the correct elements on focus, and allowing the use of arrow keys for information traversal took a lot of understanding of the interaction between each component, specifically the UI and the Model.
 
 
-* **New Feature**: Implemented the `onduty` command (PR: [#145](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/146))
+* **New Feature**: Implemented the `onduty` command (PR: [#146](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/146))
     * It enables user to list the `Doctor` or `Nurse` that are on duty for the day.
     * This feature was comfortable to implement as the existing logic in the `find` command is suitable for this. Additions to the logic include the necessary predicate for the filter, as well as the use of datetime to retrieve the correct staff members.
 
