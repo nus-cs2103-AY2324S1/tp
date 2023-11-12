@@ -6,7 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditApplicantCommandParser" as EditApplicantCommandParser LOGIC_COLOR
-participant "d:EditApplicantCommand" as EditApplicantCommand LOGIC_COLOR
+participant "e:EditApplicantCommand" as EditApplicantCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -34,17 +34,17 @@ create EditApplicantCommand
 EditApplicantCommandParser -> EditApplicantCommand
 activate EditApplicantCommand
 
-EditApplicantCommand --> EditApplicantCommandParser : d
+EditApplicantCommand --> EditApplicantCommandParser : e
 deactivate EditApplicantCommand
 
-EditApplicantCommandParser --> AddressBookParser : d
+EditApplicantCommandParser --> AddressBookParser : e
 deactivate EditApplicantCommandParser
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 EditApplicantCommandParser -[hidden]-> AddressBookParser
 destroy EditApplicantCommandParser
 
-AddressBookParser --> LogicManager : d
+AddressBookParser --> LogicManager : e
 deactivate AddressBookParser
 
 LogicManager -> EditApplicantCommand : execute()
