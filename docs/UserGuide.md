@@ -48,8 +48,8 @@ solution to manage your student details, including attendance records and assign
 - [7. Summary](#7-summary)
   - [7.1 Prefix Summary](#71-prefix-summary)
   - [7.2 Command Summary](#72-command-summary)
-    - [7.2.1 Basic Course Management](#721-basic-course-management)
-    - [7.2.2 Basic Student Management](#722-basic-student-management)
+    - [7.2.1 Basic Course Management](#721-basic-course-management-commands)
+    - [7.2.2 Basic Student Management](#722-basic-student-management-commands)
 
 --------------------------------------------------------------------------------------------------------------------
 ## 2. About this User Guide
