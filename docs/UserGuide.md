@@ -266,12 +266,12 @@ Adds an applicant to **InterviewHub**.
 Format: `add-a n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`
 
 | Parameter | Representation                    | Constraints                                                   |
-|---------|-----------------------------------|---------------------------------------------------------------|
-| `NAME`  | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
-| `PHONE` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
-| `EMAIL` | The email of the applicant        | Must be in the format: `local-part@domain`                    |
+|-----------|-----------------------------------|---------------------------------------------------------------|
+| `NAME`    | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
+| `PHONE`   | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
+| `EMAIL`   | The email of the applicant        | Must be in the format: `local-part@domain`                    |
 | `ADDRESS` | The address of the applicant      | No constraints as long as it is not blank                     |
-| `TAG`   | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |
+| `TAG`     | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |
 
 
 Examples:
@@ -616,15 +616,15 @@ Format: `mark INTERVIEW_INDEX`
 |-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed interview list |
 
-Examples:
-* `mark 1` marks the first interview shown on the list as done.
-* `mark 3` marks the third interview shown on the list as done.
-* 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>
 * You can only mark interviews with a red border (i.e. interviews that are not done).
 * Marking an interview that is already done will result in an error message.
 </div>
+
+Examples:
+* `mark 1` marks the first interview shown on the list as done.
+* `mark 3` marks the third interview shown on the list as done.
 
 [Back to the Table of Contents](#table-of-contents)
 
@@ -632,7 +632,7 @@ Examples:
 
 Rate the specified `INTERVIEW_INDEX` in the **InterviewHub** with the indicated `RATING`.
 
-Format: `rate INTERIVEW_INDEX RATING`
+Format: `rate INTERVIEW_INDEX RATING`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>
@@ -783,13 +783,13 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 
 ## Applicant Management Commands
 
-| Action               | Format, Examples                                                                                                                                          |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action               | Format, Examples                                                                                                                                                 |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add applicant**    | `add-a n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Delete applicant** | `delete-a APPLICANT_INDEX`<br> e.g., `delete-a 3`                                                                                                         |
-| **Edit applicant**   | `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit-a 2 n/John Doe`                                               |
-| **Find applicant**   | `find-a [n/KEYWORD(S)] [p/NUMBER] [e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]` <br> e.g., `find-a n/John Bob p/98765432 e/john@example.com`              |
-| **List applicants**  | `list-a`                                                                                                                                                  |
+| **Delete applicant** | `delete-a APPLICANT_INDEX`<br> e.g., `delete-a 3`                                                                                                                |
+| **Edit applicant**   | `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit-a 2 n/John Doe`                                                      |
+| **Find applicant**   | `find-a [n/KEYWORD(S)] [p/NUMBER] [e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]` <br> e.g., `find-a n/John Bob p/98765432 e/john@example.com`                     |
+| **List applicants**  | `list-a`                                                                                                                                                         |
 
 ## Interview Management Commands
 
