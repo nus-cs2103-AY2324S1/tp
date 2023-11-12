@@ -25,7 +25,7 @@ public class JsonContactsTest {
 
     @Test
     public void toModelType_emptyContactsList_success() throws Exception {
-        ReadOnlyContacts expectedContacts = new Contacts(); 
+        ReadOnlyContacts expectedContacts = new Contacts();
 
         JsonContacts jsonContacts = new JsonContacts(expectedContacts);
         ReadOnlyContacts actualContacts = jsonContacts.toModelType();

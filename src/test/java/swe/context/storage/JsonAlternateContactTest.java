@@ -22,7 +22,8 @@ public class JsonAlternateContactTest {
     // Test successful conversion from JsonAlternateContact to AlternateContact
     @Test
     public void toModelType_validAlternateContact_success() throws IllegalValueException {
-        JsonAlternateContact jsonAlternateContact = new JsonAlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC);
+        JsonAlternateContact jsonAlternateContact =
+                new JsonAlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC);
         AlternateContact alternateContact = jsonAlternateContact.toModelType();
         assertEquals(TestData.Valid.AlternateContact.ALPHANUMERIC, alternateContact.toString());
     }
