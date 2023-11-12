@@ -107,7 +107,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         Set<String> checkPairAffn = new HashSet<>();
         for (Person person : persons) {
             Set<Affiliation> affiliations = person.getAffiliations();
-            if (!checkAffiliation(person, affiliations, checkPairAffn)) {
+            if (!hasValidAffiliation(person, affiliations, checkPairAffn)) {
                 return false;
             }
 
@@ -136,7 +136,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Checks if the combination of the person and its affiliations is valid.
      */
-    private boolean checkAffiliation(Person person, Set<Affiliation> affiliations, Set<String> checkPairAffn) {
+    private boolean hasValidAffiliation(Person person, Set<Affiliation> affiliations, Set<String> checkPairAffn) {
         for (Affiliation affiliation : affiliations) {
             if (!persons.containsName(affiliation.toString())) {
                 return false;

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -25,6 +27,8 @@ public class InfoCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2";
 
     public static final String MESSAGE_SHOW_INFO_SUCCESS = "Person information displayed on window!";
+    private static Logger logger = Logger.getLogger("Info Command Logger");
+
     private final Index targetIndex;
 
     /**
@@ -41,6 +45,7 @@ public class InfoCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            logger.log(Level.WARNING, "Error: Invalid index");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 

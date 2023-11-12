@@ -23,23 +23,23 @@ Given below are my contributions to the project.
     * This feature was comfortable to implement as the existing logic in the `find` command is suitable for this. Additions to the logic include the necessary predicate for the filter, as well as the use of datetime to retrieve the correct staff members.
 
 
-* **Technical Additions**: Created the `Patient`, `Doctor`, and `Nurse` classes that are utilised in varying areas of the project (PRs: [#71](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/71), [#130](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/130))
+* **Technical Additions**: Created `Patient`, `Doctor`, and `Nurse` classes that are utilised in varying areas of the project (PRs: [#71](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/71), [#130](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/130))
     * The use of polymorphism is necessary as we intend to have varying attributes and commands for the different role types. The `Staff` class is also created for `Doctor` and `Nurse` to morph from.
-    * It was arduous in setting this up. Having the varying classes be suitable for use for ALL commands took a burst of effort. It is a needed addition for the whole application to stay intact.
+    * It was arduous in setting this up. Having these new classes be suitable for use for ALL commands took a burst of effort. It is a needed addition for the application to stay intact.
 
 
-* **Technical Additions**: Introduced the `Role` class/attribute to suit the presence of the three `Person` types (PR: [#88](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/88))
+* **Technical Additions**: Introduced `Role` class/attribute to suit the presence of the three `Person` types (PR: [#88](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/88))
     * To complement the above addition, the `Role` attribute is introduced for `Person` class.
-    * It streamlines a lot of the processes for the commands that are available. It does so by allowing itself to generate `Person` of the different types without the need to check their instances.
+    * It streamlines various command executing processes by allowing itself to generate `Person` of the different types without the need to check their instances.
 
 
-* **Technical Additions**: Introduced the `Shiftdays` class/attribute for the `Doctor` class (PR: [#109](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/109))
+* **Technical Additions**: Introduced `Shiftdays` class/attribute for the `Doctor` class (PR: [#109](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/109))
     * This addition was to kickstart the development of the `shiftday` command to modify shift days of staff members.
 
 
 * **Project management**:
     * Managed releases on GitHub (Releases: [`v1.2b`](https://github.com/AY2324S1-CS2103-T16-2/tp/releases/tag/v1.2b), [`v1.3.trial`](https://github.com/AY2324S1-CS2103-T16-2/tp/releases/tag/v1.3.trial), [`v1.3`](https://github.com/AY2324S1-CS2103-T16-2/tp/releases/tag/v1.3), [`v1.3.1`](https://github.com/AY2324S1-CS2103-T16-2/tp/releases/tag/v1.3.1)).
-    * Opened majority of issues on GitHub for task tracking (Link: [Issues](https://github.com/AY2324S1-CS2103-T16-2/tp/issues?q=is%3Aissue+is%3Aclosed))).
+    * Opened majority of issues on GitHub for task tracking (Link: [Issues](https://github.com/AY2324S1-CS2103-T16-2/tp/issues?q=is%3Aissue+is%3Aclosed)).
 
 
 * **Enhancements to existing features**:
@@ -63,7 +63,7 @@ Given below are my contributions to the project.
             * Added sequence diagram for the interaction between `PersonListPanel` and `InformationWindow` in the UI component.
         * Updated Storage component (PR: [#129](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/129)).
             * Adjusted the overview Class diagram of the Storage component.
-            * Added the activity diagram for the jsonification process of the saving of data in MediSync.
+            * Added the activity diagram for the jsonification process of the saving of data.
         * Updated the Non-Functional Requirements.
 
 
