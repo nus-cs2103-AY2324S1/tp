@@ -3,7 +3,10 @@ layout: page
 title: User Guide
 ---
 
-![HouR](images/ug-pics/HouR.png)
+<div style="text-align:center">
+<img src='images/ug-pics/HouR.png' width='500'>
+</div>
+
 ## Welcome to HouR
 
 HouR is a **desktop app for managing employee records, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HouR can get your HR management tasks done faster than traditional GUI apps.
@@ -26,7 +29,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
       - [Deleting an employee](#deleting-an-employee--delete): `delete`
       - [Editing an employee](#editing-an-employee--edit): `edit`
       - [Listing all employees](#listing-all-employees--list): `list`
-      - [Locating employees](#finding-employees--find): `find`
+      - [Finding employees](#finding-employees--find): `find`
       - [Sorting employees](#sorting-all-employees--sort): `sort`
   - [Employee Metrics Commands](#employee-metrics-commands)
       - [Adding a leave period](#adding-a-leave-period-of-an-employee-addleave): `addleave`
@@ -48,7 +51,6 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 --------------------------------------------------------------------------------------------------------------------
 
 ## Using this guide
-
 * If you are new here, visit our [quick start](#quick-start) guide to onboard onto HouR smoothly!
 * If you are unsure of how to use HouR, the [Command Summary](#command-summary) is a good place to start. 
 * If you are a developer and want to help out, do take a look at our [Developer Guide](https://ay2324s1-cs2103t-w12-1.github.io/tp/DeveloperGuide.html).
@@ -91,10 +93,9 @@ The following glossary table provides clarification on commonly-used terms as we
    ![Ui](images/ug-pics/Ui.png)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution to Mac users:**
-Performing these instructions may result in non-deterministic behaviour of data loading in HouR. This was tested on multiple MacOS Systems: 
-
-* Right-click `hour.jar` > Open With > JavaLauncher.app 
-* First-time users may be prompted with a warning that the file was downloaded from the Internet. Simply click Open in the prompt to continue.
+Performing these instructions may result in non-deterministic behaviour of data loading in HouR. This was tested on multiple MacOS Systems:
+<br/>Right-click `hour.jar` > Open With > JavaLauncher.app 
+<br/>First-time users may be prompted with a warning that the file was downloaded from the Internet. Simply click Open in the prompt to continue.
 
 </div>
 
@@ -182,6 +183,8 @@ Below is an overview of HouR's features.
 - Clear all employees: `clear`
 - Exit the program: `exit`
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format and commands**<br>
@@ -211,6 +214,8 @@ Below is an overview of HouR's features.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## General Commands
 
