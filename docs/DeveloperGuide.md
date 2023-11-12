@@ -305,9 +305,9 @@ As a hiring management software, we need to perform CRUD operations for the inte
 
 The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`. The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in an interview (out of a score of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and `DeleteInterviewCommand`. These are implemented in a largely similar manner to the `Applicant` class. The main difference is in how an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the applicant index as well as the chosen interview index.
 
-The sequence diagram below gives an overview of the behavior when the `DeleteInterviewCommand` is executed:
+The activity diagram below gives an overview of the behavior when the `DeleteInterviewCommand` is executed:
 
-<puml src="diagrams/DeleteInterviewCommandSequenceDiagram.puml" alt="DeleteInterviewCommandSequenceDiagram" />
+<puml src="diagrams/DeleteInterviewActivityDiagram.puml" alt="DeleteInterviewActivityDiagram" />
 
 #### Design Considerations
 
