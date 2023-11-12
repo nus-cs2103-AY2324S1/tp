@@ -20,7 +20,7 @@ So, no more waiting! Let's start creating your first dream band now!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Using the Guide
-This user guide walks you through the essential features of *BandConnect++*, familiarises you with the [CLI](#glossary) commands, and provides the best help we can if problem arises. We have made this guide beginner-friendly so that anyone who has used a software application before should have no trouble understanding it!
+This user guide walks you through the essential features of *BandConnect++*, familiarises you with the [CLI](#glossary) commands, [GUI](#glossary) interface, and provides the best help we can if problem arises. We have made this guide beginner-friendly so that anyone who has used a software application before should have no trouble understanding it!
 
 Whether you are new to our application or a seasoned user, you can always find something useful in this guide. 
 
@@ -61,8 +61,8 @@ Keep an eye out for them!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
-[Back to Table of Contents](#table-of-contents)
-1. Ensure you have Java 11 or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+1. Ensure you have [Java 11](#glossary) or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+
 
 
 2. Download the latest version of [BandConnect++](https://github.com/AY2324S1-CS2103T-W11-3/tp/releases/latest).
@@ -90,11 +90,15 @@ Keep an eye out for them!
    * `list` : Lists all contacts. 
    * `add n/Alice Lovelace p/98757287 e/alicel@example.com i/bass g/rock`: Adds rock bassist Alice Lovelace.
    * `addb n/Maverick g/rock`: Adds a rock band named Maverick.
-   * `findb TheoryX`: Finds the band named TheoryX and checks its members.
+   * `findb TheoryX`: Finds the band named "TheoryX" and views its members.
    * `exit` : Exits the app.
    
     <br>
+   
     Please refer to the [Features](#features) below for details of each command.
+
+
+[Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,8 +143,11 @@ add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]
 * The order of the parameters does not affect the result. For example, `p/PHONE_NUMBER` can be entered before `n/NAME`, and the command still works the same.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, or `tags`) will be ignored.
-
+  
+ 
+[Back To ToC](#table-of-contents)
 </div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 ### Features for managing musicians
@@ -158,7 +165,7 @@ Name, phone number, email, tag, instrument, genre about the musician can all be 
 * `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`
 
 **Things to Note**
-* To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the instruments and genres included in a pre-defined list of instruments and genres. Refer to the [tags](#show-all-valid-instruments-and-genres-tags) command for more information.
+* To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the instruments and genres included in a [pre-defined list](#show-all-valid-instruments-and-genres-tags) of instruments and genres. 
 
 
 **Upon success:**
@@ -175,7 +182,7 @@ If you input a musician which is already in your contact book (i.e. a musician w
 ```
 This musician already exists in your contact list
 ```
-
+[Back To ToC](#table-of-contents)
 #### Delete musician: `delete`
 
 Deletes a musician from your contact list.
@@ -205,6 +212,7 @@ The musician index provided is invalid
 
 Please verify that the index is correct and try again.
 
+[Back To ToC](#table-of-contents)
 
 #### Edit musician: `edit`
 
@@ -251,6 +259,8 @@ Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bes
     The musician index provided is invalid
     ```
     Please verify that the index is correct and try again.
+   
+[Back To ToC](#table-of-contents)
 
 #### Find musicians: `find`
 
@@ -290,6 +300,8 @@ For example, when the input command is `find g/rock i/guitar i/piano`
     The argument(s) provided must not contain more than one word.
     ```
 
+[Back To ToC](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Features for managing bands
@@ -323,6 +335,9 @@ Should you try to add a band with empty genre tags, i.e., addb My Garage Band g/
 Genre tags names should be a valid genre name.
 For a list of valid genres, please use the command 'tags'
 ```
+
+[Back To ToC](#table-of-contents)
+
 #### Add musician to band: `addm`
 
 Adds a musician to a specified band.
@@ -367,7 +382,7 @@ when there is 1 band), you will see an error message below:
     ```
     You can only add musicians to one band at a time
     ```
-
+[Back To ToC](#table-of-contents)
 
 #### Remove musician from band: `removem`
 
@@ -395,6 +410,7 @@ In addition, if the musician does not exist in the band, you will see an error m
 ![removem_notinband.png](images/band-features/removem_notinband.png)
 Please verify that the index of the musician is correct or input a different musician, and try again.
 
+[Back To ToC](#table-of-contents)
 
 #### Find band: `findb`
 Finds the band with the given input name. Lists the band members of the selected band. From `My Bands` panel, find the complete band name of the band.
@@ -412,6 +428,8 @@ Finds the band with the given input name. Lists the band members of the selected
 
 **Upon failure:**
 If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
+
+[Back To ToC](#table-of-contents)
 
 #### Edit a band: `editb`
 
@@ -456,6 +474,8 @@ Genre tags names should be a valid genre name.
 For a list of valid genres, please use the command 'tags'
 ```
 
+[Back To ToC](#table-of-contents)
+
 #### Delete a band: `deleteb`
 
 Deletes a band from your contact list.
@@ -484,10 +504,11 @@ The band index provided is invalid
 
 Please verify that the index is correct and try again.
 
+[Back To ToC](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### General features
-[Back to Table of Contents](#table-of-contents)
 
 #### Get help: `help`
 Access a link to our user guide.
@@ -502,10 +523,14 @@ You will see a window like below, click `Copy URL`, paste the link in any web br
 * Extraneous parameters will be ignored.
 * e.g. if the command specifies `help 1`, it will be interpreted as `help`.
 
+[Back To ToC](#table-of-contents)
+
 #### List all musicians and bands: `list`
 View all musicians and bands in their separate panels.
 
 **Format:** `list`
+
+[Back To ToC](#table-of-contents)
 
 #### Show all valid instruments and genres: `tags`
 
@@ -528,9 +553,13 @@ The `My Musicians` and `My Bands` panels will remain unchanged.
 
 ![tags.png](images%2Fmusician-features%2Ftags.png)
 
+[Back To ToC](#table-of-contents)
+
 #### Save data
 
 BandConnect++ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+[Back To ToC](#table-of-contents)
 
 #### Clear data: `clear`
 
@@ -544,6 +573,8 @@ This command is irreversible, and all data will be lost. Please use this command
 
 </div>
 
+[Back To ToC](#table-of-contents)
+
 #### Exit app : `exit`
 
 Exits the program.
@@ -556,49 +587,57 @@ Format: `exit`
 
 If you wish, please refer to the below section for a more succinct [command summary](#command-summary).
 
+[Back To ToC](#table-of-contents)
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-[Back to Table of Contents](#table-of-contents)
+
+### List of Valid Instruments/Genres
+
+|    Type     |                               Acceptable Values (lowercase only)                                |
+|:-----------:|:-----------------------------------------------------------------------------------------------:|
+| Instruments |  bass, cello, clarinet, drums, flute, guitar, piano, saxophone, trumpet, violin, voice, other   |
+|   Genres    | blues, classical, country, electronic, folk, hiphop, jazz, latin, metal, pop, rock, soul, other |
+
 
 ### Musician Command summary
 
-| Action                                 | Format                                                                                   | Examples                                                                                                        |
-|----------------------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| **Add a Musician**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`               | `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`                                     |
-| **Remove a Musician**                  | `delete INDEX`                                                                           | `delete 1`                                                                                                      |
-| **Edit Musician Information**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`  | `edit 2 e/pianistbetsy@edited.com i/violin t/available`                                                         |
-| **Find Musicians**                     | `find [n/NAME]…​ [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`                                 | `find n/John i/Piano`                                                                                           |
-| **List**                               | `list`                                                                                   |                                                                                                                 |
+| Action                                        | Format                                                                                   | Examples                                                                                                        |
+|-----------------------------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| **[Add Musician](#add-musician-add)**         | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`               | `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`                                     |
+| **[Delete Musician](delete-musician-delete)** | `delete INDEX`                                                                           | `delete 1`                                                                                                      |
+| **[Edit Musician](#edit-musician-edit)**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`  | `edit 2 e/pianistbetsy@edited.com i/violin t/available`                                                         |
+| **[Find Musicians](#find-musicians-find)**    | `find [n/NAME]…​ [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`                                 | `find n/John i/Piano`                                                                                           |
+
 
 ### Band Command summary
 
-| Action                            | Format                                                                                   | Examples                                                 |
-|-----------------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------|
-| **Add a Band**                    | `addb n/BANDNAME [g/GENRE]…​`                                                            | `addb n/Ace Jazz g/jazz g/blues`                         |
-| **Delete a Band**                 | `deleteb INDEX`                                                                          | `deleteb 1`                                              |
-| **Edit a Band**                   | `editb INDEX n/BANDNAME [g/GENRE]…​`                                                     | `editb 1 n/Ace Jazz g/jazz`                              |
-| **Add Musicians to a Band**       | `addm b/BAND_INDEX m/MUSICIAN_INDEX…​`                                                   | `addm b/1 m/1 m/2`                                       |
-| **Remove a Musician from a Band** | `removem b/BANDINDEX m/MUSICIANINDEX`                                                    | `removem b/1 m/1`                                        |
-| **Find a Band**                   | `findb BANDNAME`                                                                         | `findb theory X`                                         |
-
+| Action                                                              | Format                                                                                   | Examples                                                 |
+|---------------------------------------------------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| **[Create Band](#create-band-addb)**                                | `addb n/BANDNAME [g/GENRE]…​`                                                            | `addb n/Ace Jazz g/jazz g/blues`                         |
+| **[Delete Band](#delete-a-band-deleteb)**                           | `deleteb INDEX`                                                                          | `deleteb 1`                                              |
+| **[Edit Band](#edit-a-band-editb)**                                 | `editb INDEX n/BANDNAME [g/GENRE]…​`                                                     | `editb 1 n/Ace Jazz g/jazz`                              |
+| **[Add Musicians to Band](#add-musician-to-band-addm)**             | `addm b/BAND_INDEX m/MUSICIAN_INDEX…​`                                                   | `addm b/1 m/1 m/2`                                       |
+| **[Remove Musician from Band](#remove-musician-from-band-removem)** | `removem b/BANDINDEX m/MUSICIANINDEX`                                                    | `removem b/1 m/1`                                        |
+| **[Find Band](#find-band-findb)**                                   | `findb BANDNAME`                                                                         | `findb theory X`                                         |
+ 
 ### General Command summary
 
-| Action                                         | Format                                                                                    |
-|------------------------------------------------|-------------------------------------------------------------------------------------------|
-| **Show All Valid Instruments and Genres Tags** | `tags`                                                                                    |  
-| **List All Musicians and Bands**               | `list`                                                                                    |
-| **Clear All Data**                             | `clear`                                                                                   |
-| **Exit**                                       | `exit`                                                                                    |
+| Action                                                                 | Format                                                                                    |
+|------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| **[Show All Tags](#show-all-valid-instruments-and-genres-tags)**       | `tags`                                                                                    |  
+| **[List All Musicians and Bands](#list-all-musicians-and-bands-list)** | `list`                                                                                    |
+| **[Clear Data](#clear-data-clear)**                                    | `clear`                                                                                   |
+| **[Exit App](#exit-app-exit)**                                         | `exit`                                                                                    |
 
-
+[Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Frequently Asked Questions
-[Back to Table of Contents](#table-of-contents)
 
 **Q**: How do I install Java 11?<br>
 **A**: Follow this [link](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) for steps to download Java 11.
@@ -630,6 +669,10 @@ If you wish, please refer to the below section for a more succinct [command summ
 * The application should state your Java version, as shown below:
   ![java_version.png](images%2Fjava_version.png)
 * If you do not see `11.__.__`, or if you do not have Java installed, follow the instructions [here](https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk) to download **Java 11**.
+
+
+[Back To ToC](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Troubleshooting
@@ -641,10 +684,11 @@ If you wish, please refer to the below section for a more succinct [command summ
 | **Application opens off-screen** | Preferences are incorrectly formatted when using multiple screens before switching to one screen only | Delete the `preferences.json` file created by the application before running the application again.                      |
 
 
+[Back To ToC](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
-[Back to Table of Contents](#table-of-contents)
 
 | Term      | Definition                                                                                                                                                                                                                                                                   |
 |-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -655,3 +699,6 @@ If you wish, please refer to the below section for a more succinct [command summ
 | JAR       | A package of all resources for BandConnect++ to run. The only thing you need to download is the BandConnect++ JAR file!                                                                                                                                                      |
 | JSON      | JSON stands for JavaScript Object Notation. JSON is a lightweight format for storing and transporting data                                                                                                                                                                   |
 | Index     | The position of something in a list. For example, the first item on your list in Bandconnect++ has an index of 1.                                                                                                                                                            |
+| Java      | Java is the primary programming language used to develop and use **_BandConnect++_**. Installation of Java is required to successfully run the application.                                                                                                                  |
+
+[Back To ToC](#table-of-contents)
