@@ -327,7 +327,7 @@ The mechanism allows the user to edit details of a fosterer in their profile pag
 
 Given below is an example usage scenario and how the mechanism behaves at each step, given that the user already opened person profile page:
 
-Step 1. The user enters the name of the field. e.g. "name". Since the normal person list is invisible, "name" is passed to `executeInView()` method in `MainWindow` class (refer to the explanation in the section of [Logic Component:AddressBookParser and ViewModeParser Classes](#addressbookparser-and-viewmodeparser-classes)).
+Step 1. The user enters the name of the field. e.g. "name". Since the normal person list is invisible, "name" is passed to `executeInView()` method in `MainWindow` class (refer to the explanation in the section of [**Logic Component:AddressBookParser and ViewModeParser Classes**](#addressbookparser-and-viewmodeparser-classes)).
 
 ![EditFieldSequenceDiagramStep1.png](images/EditFieldSequenceDiagramStep1.png)
 
@@ -338,6 +338,19 @@ Step 2. With `executeInView()`, `ViewModeParser` is used to parse the command wh
 Step 3. `EditFieldCommand` is executed, and with the `CommandType.EDIT_FIELD` carried by `CommandResult`, `MainWindow` calls `handleEditField()` method. The interaction between `MainWindow` and `PersonProfile` is covered in detail in **[View Feature](#view-feature)**. 
 
 ![EditFieldSequenceDiagram.png](images/EditFieldSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How delete executes:**
+
+* **Alternative 1 (current choice):** Delete multiple fosterers at once.
+    * Pros: Do not have to parse user input multiple times in order for the user to perform mass deletion.
+    * Cons: Slightly harder to implement.
+
+* **Alternative 2:** Delete only one fosterer at a time.
+    * Pros: Easy to implement. 
+    * Cons: Overhead associated with a chain of delete commands should the user choose to perform multiple deletions.
+
 
 <br>
 
@@ -352,7 +365,7 @@ The mechanism allows the user to save the edited details of a fosterer in their 
 
 Given below is an example usage scenario and how the save mechanism behaves at each step, given that the user already opened person profile page:
 
-Step 1. The user enters `save` command. Since the normal person list is invisible, the command text "save" is passed to `executeInView()` method in `MainWindow` class (refer to the explanation in the section of [Logic Component:AddressBookParser and ViewModeParser Classes](#addressbookparser-and-viewmodeparser-classes)). 
+Step 1. The user enters `save` command. Since the normal person list is invisible, the command text "save" is passed to `executeInView()` method in `MainWindow` class (refer to the explanation in the section of [**Logic Component:AddressBookParser and ViewModeParser Classes**](#addressbookparser-and-viewmodeparser-classes)). 
 
 ![SaveSequenceDiagramStep1.png](images/SaveSequenceDiagramStep1.png)
 
