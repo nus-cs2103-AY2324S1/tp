@@ -177,15 +177,15 @@ Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 * `config` resets the state history of **Class Manager 2023**, preventing you from using the `undo` command to reach a state before the `config` command was executed.
 
 Examples:
-* `config #t/13 #a/1`
+* `config #t/5 #a/7`
 
 Before `config` is executed:
 
-<img alt="config before" src="images/config-before.png" width="700">
+<img alt="config before" src="images/config-before.png" width="800">
 
 After `config` is executed successfully and `view s/A0247243A` is executed to view the first student's class information:
 
-<img alt="config success" src="images/config-success.png" width="700">
+<img alt="config success" src="images/config-success.png" width="800">
 
 Possible errors and their corresponding error messages:
 * If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is missing
@@ -211,7 +211,7 @@ Format: `help`
 
 After `help` is executed successfully:
 
-<img alt="help message" src="images/helpMessage.png" width="900">
+<img alt="help message" src="images/helpMessage.png" width="800">
 
 ---
 
@@ -251,11 +251,11 @@ Example:
 
 Before `load f/sample` is executed:
 
-<img alt="load before" src="images/theme-light.png" width="700"> <br><br>
+<img alt="load before" src="images/load-before.png" width="800"> <br><br>
 
 After `load f/sample` is executed successfully:
 
-<img alt="load success" src="images/load-outcome.png" width="750"> <br><br>
+<img alt="load success" src="images/load-outcome.png" width="800"> <br><br>
 
 The file path at the bottom left of the application is updated to `.\data\sample.json`.
 
@@ -342,10 +342,10 @@ Toggles between light and dark color themes.
 Format: `theme`
 
 #### Dark theme
-<img alt="theme_dark" src="images/theme-dark.png" width="700" > <br><br>
+<img alt="theme_dark" src="images/theme-dark.png" width="800" > <br><br>
 
 #### Light theme
-<img alt="theme_light" src="images/theme-light.png" width="700" >
+<img alt="theme_light" src="images/theme-light.png" width="800" >
 
 ---
 
@@ -477,9 +477,11 @@ Format: `lookup [c/CLASS_NUMBER] [p/PHONE] [n/NAME] [e/EMAIL] [s/STUDENT_NUMBER]
 Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  <img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br></br>
+
+<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="800"> </br></br>
 * `lookup c/T11` returns all students in class number T11<br>
-  <img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br></br>
+
+<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="800"> </br></br>
 
 ---
 
@@ -609,9 +611,9 @@ Format: `view s/STUDENT_NUMBER`
 
 Example:
 
-* `view s/A0245234A`
+* `view s/A0241243A`
 
-<img alt="result for 'view s/A0245234A'" src="images/ViewCommand.png" width="750" >
+<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="800" >
 
 ---
 
