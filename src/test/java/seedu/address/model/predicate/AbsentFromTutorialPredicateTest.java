@@ -105,10 +105,15 @@ public class AbsentFromTutorialPredicateTest {
 
     @Test
     public void toStringMethod() {
-        Tag tag = Tag.create("T02");
+        Optional<Tag> tag = Optional.of(Tag.create("T02"));
         Week week = new Week(1);
-        AbsentFromTutorialPredicate predicate = AbsentFromTutorialPredicate.create(week, Optional.of(tag));
+        AbsentFromTutorialPredicate predicateWithTag = AbsentFromTutorialPredicate.create(week, tag);
 
-        assertEquals("Attendance Filter: " + week + " " + tag.getTagName(), predicate.toString());
+        assertEquals("Attendance Filter: " + week + " " + tag.get().getTagName(), predicateWithTag.toString());
+
+        Optional<Tag> noTag = Optional.empty();
+        AbsentFromTutorialPredicate predicateNoTag = AbsentFromTutorialPredicate.create(week, noTag);
+
+        assertEquals("Attendance Filter: " + week + " null", predicateNoTag.toString());
     }
 }

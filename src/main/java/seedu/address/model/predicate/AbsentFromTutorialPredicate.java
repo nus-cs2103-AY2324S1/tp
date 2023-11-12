@@ -72,6 +72,6 @@ public class AbsentFromTutorialPredicate extends SerializablePredicate {
 
     @Override
     public String toString() {
-        return "Attendance Filter: " + week + " " + tag.get().getTagName();
+        return "Attendance Filter: " + week + " " + (tag.isEmpty() ? "null" : tag.get().getTagName());
     }
 }
