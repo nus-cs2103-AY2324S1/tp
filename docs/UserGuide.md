@@ -168,13 +168,13 @@ For each **applicant**, we see the following details:
 
 For each **interview**, we see the following details:
 
-| Information          | Description                                                    |
-|----------------------|----------------------------------------------------------------|
-| **Applicant's Name** | The full name of the applicant                                 |
-| **Job Role**         | The job role which the applicant is applying for               |
-| **Start Time**       | Start time of the interview                                    |
-| **End Time**         | Projected end time of the interview                            |
-| **Rating**           | Interview performance rating of the applicant (from 0.0 - 5.0) |
+| Information    | Description                                                    |
+|----------------|----------------------------------------------------------------|
+| **Name**       | The full name of the applicant                                 |
+| **Job Role**   | The job role which the applicant is applying for               |
+| **Start Time** | Start time of the interview                                    |
+| **End Time**   | Projected end time of the interview                            |
+| **Rating**     | Interview performance rating of the applicant (from 0.0 - 5.0) |
 
 [Return to the Table of Contents](#table-of-contents)
 
