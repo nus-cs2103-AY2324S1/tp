@@ -8,13 +8,12 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if (Command String Stash is empty OR
-currentCmdIndex points to the
-least recently added command ?) then ([no])
-    :decrement currentCmdIndex;
+:Decrement currentCmdIndex;
+if () then ([currentCmdIndex points
+to valid command string])
     :return the command string
     pointed to by currentCmdIndex ;
-else ([yes])
+else ([else])
     :return the command string
     currently in the CLI textbox ;
 endif

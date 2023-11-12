@@ -22,7 +22,7 @@ public class ReadOnlyModelManager {
      * @param selectedPerson
      * @param themeProperty
      */
-    public ReadOnlyModelManager(AddressBook addressBook, FilteredList filteredPersons,
+    public ReadOnlyModelManager(AddressBook addressBook, FilteredList<Person> filteredPersons,
                                  UserPrefs userPrefs, Person selectedPerson, ThemeProperty themeProperty) {
         this.addressBook = addressBook;
         this.filteredPersons = filteredPersons;

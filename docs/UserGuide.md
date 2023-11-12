@@ -100,8 +100,8 @@ A specialist can have any number of tags (including 0)
 </div>
 
 Parameter specifications: 
-* `NAME`, `EMAIL`, `LOCATION`, `TAG`, `MEDICAL_HISTORY`, and `SPECIALISATION` can contain 1 - 255 alphanumeric characters.
-* `PHONE_NUMBER` can contain 4 - 15 numeric characters.
+* `NAME`, `EMAIL`, `LOCATION`, `TAG`, `MEDICAL_HISTORY`, and `SPECIALISATION` can only contain alphanumeric characters.
+* `PHONE_NUMBER` must contain at least 4 numeric characters.
 * `AGE` can contain any integer in the range 0 to 149 inclusive.
 
 Examples:
@@ -185,12 +185,11 @@ I.e. entering `edit` (without any prefixes) will result in an error message bein
 while viewing a patient (or vice versa), an error message be displayed.
   * e.g. when a patient is present in the view panel, `edit s/Dentistry` will result in an error message being displayed as
   patients do not have the specialty attribute.
-* The new values of compulsory attributes for a patient or specialist cannot be empty.
+* For the `edit` command exclusively, in order to clear the content of optional attributes, the new values can be made empty.
+    * e.g. `edit t/` (empty Tag attribute) will remove the tags of the patient or specialist being displayed in the view panel.
+* However, the new values of compulsory attributes for a patient or specialist cannot be empty.
   * e.g. `edit s/` (empty Specialty attribute) will result in an error when trying to edit a specialist.
   * e.g. `edit n/` (empty Name attribute) will result in an error when trying to edit a patient or specialist.
-* The new values of optional attributes can be empty. This is useful when you want to clear the content of optional attributes 
-in a patient or specialist.
-  * e.g. `edit t/` (empty Tag attribute) will remove the tags of the patient or specialist being displayed in the view panel.
 
 Examples:
 * `list -pa` > `view 1` > `edit n/John Wick` modifies the name of the first patient in the list to `John Wick`.

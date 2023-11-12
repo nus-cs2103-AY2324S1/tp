@@ -646,8 +646,9 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface.
+* **GUI**: Graphical User Interface.
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **Appropriate third party frameworks/libraries/systems**: Those frameworks/libraries/systems that are free, open-source, have permissive license terms, don't require installation by the users and don't violate other constraints.
 * **GUI should work well**: The GUI should not cause resolution-related inconveniences for the user.
 * **GUI should be usable**: The GUI's functions can all be used, although user-experience may be suboptimal.
