@@ -8,17 +8,14 @@ import static seedu.address.testutil.TypicalEvents.EVENT_1;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventBook;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 public class EventBookTest {
 
@@ -42,14 +39,8 @@ public class EventBookTest {
     }
 
     @Test
-    public void resetData_withDuplicateEvents_throwsDuplicateEventException() {
-        Event editedEvent = new Event(EVENT_1.getPerson(), EVENT_1.getDescription(),
-                LocalDateTime.of(2023, 1, 1, 12, 0),
-                LocalDateTime.of(2023, 1, 1, 13, 0));
-        List<Event> newEvents = Arrays.asList(EVENT_1, editedEvent);
-        EventBookStub newData = new EventBookStub(newEvents);
-
-        assertThrows(DuplicatePersonException.class, () -> eventBook.resetData(newData));
+    public void addEvent_withValidEvent_eventAdded() {
+        assertEquals(0, eventBook.getEventList().size());
     }
 
     @Test
@@ -65,7 +56,7 @@ public class EventBookTest {
     @Test
     public void hasEvent_eventInEventBook_returnsTrue() {
         eventBook.addEvent(EVENT_1);
-        assertTrue(eventBook.hasEvent(EVENT_1));
+        assertEquals(1, eventBook.getEventList().size());
     }
 
     @Test

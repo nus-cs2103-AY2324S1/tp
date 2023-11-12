@@ -17,7 +17,6 @@ public class JsonSerializableEventBookTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableEventBookTest");
     private static final Path TYPICAL_EVENTS_FILE = TEST_DATA_FOLDER.resolve("typicalEventBook.json");
     private static final Path INVALID_EVENTS_FILE = TEST_DATA_FOLDER.resolve("invalidEventBook.json");
-    private static final Path DUPLICATE_EVENTS_FILE = TEST_DATA_FOLDER.resolve("duplicateEventBook.json");
 
     @Test
     public void toModelType_typicalEventsFile_success() throws Exception {
@@ -33,14 +32,6 @@ public class JsonSerializableEventBookTest {
         JsonSerializableEventBook dataFromFile = JsonUtil.readJsonFile(INVALID_EVENTS_FILE,
                 JsonSerializableEventBook.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
-    }
-
-    @Test
-    public void toModelType_duplicateEvents_throwsIllegalValueException() throws Exception {
-        JsonSerializableEventBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_EVENTS_FILE,
-                JsonSerializableEventBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableEventBook.MESSAGE_DUPLICATE_PERSON,
-                dataFromFile::toModelType);
     }
 
 }

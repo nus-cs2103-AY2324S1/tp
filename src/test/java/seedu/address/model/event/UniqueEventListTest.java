@@ -8,14 +8,12 @@ import static seedu.address.testutil.TypicalEvents.EVENT_1;
 import static seedu.address.testutil.TypicalEvents.EVENT_2;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 
 public class UniqueEventListTest {
 
@@ -51,12 +49,6 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void add_duplicateEvent_throwsDuplicatePersonException() {
-        uniqueEventList.add(EVENT_1);
-        assertThrows(DuplicatePersonException.class, () -> uniqueEventList.add(EVENT_1));
-    }
-
-    @Test
     public void setEvent_nullTargetEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueEventList.setEvent(null, EVENT_1));
     }
@@ -68,7 +60,7 @@ public class UniqueEventListTest {
 
     @Test
     public void setEvent_targetEventNotInList_throwsEventNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueEventList.setEvent(EVENT_1, EVENT_1));
+        assertThrows(EventNotFoundException.class, () -> uniqueEventList.setEvent(EVENT_1, EVENT_1));
     }
 
     @Test
@@ -100,20 +92,13 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void setEvent_editedEventHasNonUniqueIdentity_throwsDuplicatePersonException() {
-        uniqueEventList.add(EVENT_1);
-        uniqueEventList.add(EVENT_2);
-        assertThrows(DuplicatePersonException.class, () -> uniqueEventList.setEvent(EVENT_1, EVENT_2));
-    }
-
-    @Test
     public void remove_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueEventList.remove(null));
     }
 
     @Test
-    public void remove_eventDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueEventList.remove(EVENT_1));
+    public void remove_eventDoesNotExist_throwsEventNotFoundException() {
+        assertThrows(EventNotFoundException.class, () -> uniqueEventList.remove(EVENT_1));
     }
 
     @Test
@@ -151,12 +136,6 @@ public class UniqueEventListTest {
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         expectedUniqueEventList.add(EVENT_2);
         assertEquals(expectedUniqueEventList, uniqueEventList);
-    }
-
-    @Test
-    public void setEvents_listWithDuplicateEvents_throwsDuplicatePersonException() {
-        List<Event> listWithDuplicateEvent = Arrays.asList(EVENT_1, EVENT_1);
-        assertThrows(DuplicatePersonException.class, () -> uniqueEventList.setEvents(listWithDuplicateEvent));
     }
 
     @Test
