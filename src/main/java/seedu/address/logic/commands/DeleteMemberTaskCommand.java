@@ -27,7 +27,9 @@ public class DeleteMemberTaskCommand extends Command {
             + "by the index number used in the displayed member list "
             + "and the task index used in the displayed task list. \n"
             + "Parameters: MEMBER_INDEX (must be a positive integer) "
-            + PREFIX_TASK + " TASK_INDEX";
+            + PREFIX_TASK + " TASK_INDEX"
+            + "\nExample: " + COMMAND_WORD + " 1 "
+            + PREFIX_TASK + " 1 ";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Task %1$s deleted from member %2$s";
     private final Index memberIndex;

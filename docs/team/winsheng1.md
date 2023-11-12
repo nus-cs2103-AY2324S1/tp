@@ -23,6 +23,9 @@ Below is a summary of my contributions to the project.
     * Edited the entire user guide for the second draft
       * Added `Find Member`, `Find Applicant`, `Edit Member`, `Edit Applicant` feature to the user guide.
       * Edited all inputs, outputs, success and failure cases for all features that differed from the first draft.
+    * Edited the entire user guide for the final draft
+      * Standardised fields, capitalization and format for all features.
+      * Added new sections - field constraints and examples of fields.
   * Developer Guide:
     * Edited target user profile, user stories and use cases for the first draft.
 * **Review/mentoring contributions**:

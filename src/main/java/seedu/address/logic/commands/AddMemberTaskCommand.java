@@ -26,8 +26,10 @@ public class AddMemberTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
             + ": Adds a task to the specified member "
             + "by the index number used in the displayed member list. \n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TASK + " {taskName} ";
+            + "Parameters: MEMBER_INDEX (must be a positive integer) "
+            + PREFIX_TASK + " TASK_NAME "
+            + "\nExample: " + COMMAND_WORD + " 1 "
+            + PREFIX_TASK + " Task 1 ";
 
     public static final String MESSAGE_ADD_TODO_SUCCESS = "Task added to member %1$s";
 
