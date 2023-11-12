@@ -10,10 +10,18 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.INTERACTION_LIST_ONE;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.interaction.Interaction;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -88,6 +96,77 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void getFilteredPersonList() {
+        assertThrows(NullPointerException.class, () -> ALICE.getFilteredInteractions(null));
+        assertEquals(BENSON.getFilteredInteractions(x -> true).size(), 1);
+    }
+
+    @Test
+    public void getFilteredInteractions_filterAfterDate() {
+        //create a predicate that returns dates after 1/10/2023, and one after 1/11/2023
+        Predicate<Interaction> predicateAfterEarlierDate = new Predicate<Interaction>() {
+            @Override
+            public boolean test(Interaction interaction) {
+                return interaction.getDate().isAfter(LocalDate.of(2023, 10, 1));
+            }
+        };
+
+        Predicate<Interaction> predicateAfterLaterDate = new Predicate<Interaction>() {
+            @Override
+            public boolean test(Interaction interaction) {
+                return interaction.getDate().isAfter(LocalDate.of(2023, 11, 1));
+            }
+        };
+        assertEquals(BENSON.getFilteredInteractions(predicateAfterEarlierDate).size(), 1);
+        assertEquals(BENSON.getFilteredInteractions(predicateAfterLaterDate).size(), 0);
+    }
+
+    @Test
+    public void isUncontacted() {
+        assertEquals(ALICE.isUncontacted(), true);
+        assertEquals(BENSON.isUncontacted(), false);
+        assertEquals(ELLE.isUncontacted(), false);
+    }
+
+    @Test
+    public void isClosed() {
+        assertEquals(ALICE.isClosed(), false);
+        assertEquals(BENSON.isClosed(), false);
+        assertEquals(ELLE.isClosed(), true);
+    }
+
+    @Test
+    public void isContacting() {
+        assertEquals(ALICE.isContacting(), false);
+        assertEquals(BENSON.isContacting(), true);
+        assertEquals(ELLE.isContacting(), false);
+    }
+
+    @Test
+    public void leadBooleans() {
+        assertEquals(ALICE.isColdLead(), true);
+        assertEquals(BENSON.isColdLead(), false);
+        assertEquals(ELLE.isColdLead(), false);
+
+        assertEquals(ALICE.isWarmLead(), false);
+        assertEquals(BENSON.isWarmLead(), true);
+        assertEquals(ELLE.isWarmLead(), false);
+
+        assertEquals(ALICE.isHotLead(), false);
+        assertEquals(BENSON.isHotLead(), false);
+        assertEquals(ELLE.isHotLead(), true);
+    }
+
+    @Test
+    public void addInteractions() {
+        Person alice = new PersonBuilder(ALICE).build();
+        assertEquals(alice.getInteractions().size(), 0);
+        List<Interaction> result = alice.addInteractions(INTERACTION_LIST_ONE);
+        assertEquals(alice.getInteractions(), result);
+        assertEquals(alice.getInteractions().size(), 1);
     }
 
     @Test

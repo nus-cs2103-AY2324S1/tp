@@ -30,7 +30,12 @@ public class TypicalPersons {
     public static final Interaction INTERACTION_ONE =
         new Interaction("Met up for lunch", Outcome.INTERESTED, EXAMPLE_DATE);
 
+    public static final Interaction CLOSED_INTERACTION_ONE =
+        new Interaction("Bought after lunch", Outcome.CLOSED, EXAMPLE_DATE);
+
     public static final List<Interaction> INTERACTION_LIST_ONE = new ArrayList<>(Arrays.asList(INTERACTION_ONE));
+    public static final List<Interaction> CLOSED_INTERACTION_LIST_ONE =
+        new ArrayList<>(Arrays.asList(INTERACTION_ONE, CLOSED_INTERACTION_ONE));
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -45,7 +50,8 @@ public class TypicalPersons {
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").build();
+            .withLead("hot").withEmail("werner@example.com").withAddress("michegan ave")
+            .withInteractions(CLOSED_INTERACTION_LIST_ONE).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")

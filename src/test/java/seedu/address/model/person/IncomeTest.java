@@ -52,4 +52,26 @@ public class IncomeTest {
         assertFalse(Income.isValidIncome("2147483648"));
         assertFalse(Income.isValidIncome("100000000000000"));
     }
+
+    @Test
+    public void equals() {
+        Income income = new Income("60000");
+        Income incomeCopy = new Income("60000");
+        Income incomeDifferent = new Income("100000");
+
+        // EP: same object -> returns true
+        assertTrue(income.equals(income));
+
+        // EP: null -> returns false
+        assertFalse(income.equals(null));
+
+        // EP: different type -> returns false
+        assertFalse(income.equals(5));
+
+        // EP: different income -> returns false
+        assertFalse(income.equals(incomeDifferent));
+
+        // EP: same income -> returns true
+        assertTrue(income.equals(incomeCopy));
+    }
 }
