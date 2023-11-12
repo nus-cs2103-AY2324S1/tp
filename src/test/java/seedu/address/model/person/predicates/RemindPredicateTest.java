@@ -7,8 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_ISSUE_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NO_AMY;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.policy.PolicyDate;
 import seedu.address.testutil.PersonBuilder;
 
 public class RemindPredicateTest {
@@ -38,36 +42,55 @@ public class RemindPredicateTest {
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
-    // All tests on the test method are done on the date 12/11/2023, and will be using 30 days as the benchmark.
-    // If the tests are going to be done after 12/12/2023, do adjust the expiry dates for testing purposes.
     @Test
     public void test_policyExpiryDateIsWithinUserInputDays_returnsTrue() {
-        // Policy expiry date is 30 days from 12/11/2023
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PolicyDate.VALIDATION_DATE_FORMAT);
+
+        // Policy expiry date is 30 days away
         RemindPredicate predicate = new RemindPredicate(30);
         assertTrue(predicate.test(new PersonBuilder().withPolicy(VALID_COMPANY_AMY, VALID_POLICY_NO_AMY,
-                VALID_POLICY_ISSUE_DATE_AMY, "11-12-2023").build()));
+                VALID_POLICY_ISSUE_DATE_AMY, LocalDate.now().plusDays(30).format(formatter)).build()));
 
-        // Policy expiry date is 60 days away from 12/11/2023
+        // Policy expiry date is 60 days away
         predicate = new RemindPredicate(60);
         assertTrue(predicate.test(new PersonBuilder().withPolicy(VALID_COMPANY_AMY, VALID_POLICY_NO_AMY,
-                VALID_POLICY_ISSUE_DATE_AMY, "10-01-2024").build()));
+                VALID_POLICY_ISSUE_DATE_AMY, LocalDate.now().plusDays(60).format(formatter)).build()));
 
-        // Policy expiry date is within 60 days away from 12/11/2023
+        // Policy expiry date is within 60 days away
         assertTrue(predicate.test(new PersonBuilder().withPolicy(VALID_COMPANY_AMY, VALID_POLICY_NO_AMY,
-                VALID_POLICY_ISSUE_DATE_AMY, "25-12-2023").build()));
+                VALID_POLICY_ISSUE_DATE_AMY, LocalDate.now().plusDays(15).format(formatter)).build()));
     }
 
     @Test
     public void test_policyExpiryDateIsNotInNext30Days_returnsFalse() {
-        // Policy expiry date is over 30 days away from 12/11/2023
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PolicyDate.VALIDATION_DATE_FORMAT);
+
+        // Policy expiry date is more than 30 days away
         RemindPredicate predicate = new RemindPredicate(30);
         assertFalse(predicate.test(new PersonBuilder().withPolicy(VALID_COMPANY_AMY, VALID_POLICY_NO_AMY,
-                VALID_POLICY_ISSUE_DATE_AMY, "12-12-2024").build()));
+                VALID_POLICY_ISSUE_DATE_AMY, LocalDate.now().plusDays(50).format(formatter)).build()));
+    }
+
+    @Test
+    public void test_policyExpiryDatePassed_returnsFalse() {
+        // Policy expiry date is in the past
+        RemindPredicate predicate = new RemindPredicate(30);
+        assertFalse(predicate.test(new PersonBuilder().withPolicy(VALID_COMPANY_AMY, VALID_POLICY_NO_AMY,
+                VALID_POLICY_ISSUE_DATE_AMY, "10-10-2020").build()));
+    }
+
+    @Test
+    public void test_policyExpiryDateIsDefault_returnsFalse() {
+        // Policy expiry date is the default parameter
+        RemindPredicate predicate = new RemindPredicate(30);
+        assertFalse(predicate.test(new PersonBuilder().withPolicy(VALID_COMPANY_AMY, VALID_POLICY_NO_AMY,
+                VALID_POLICY_ISSUE_DATE_AMY, PolicyDate.DEFAULT_VALUE).build()));
     }
 
     @Test
     public void toStringMethod() {
         int days = 30;
+
         RemindPredicate predicate = new RemindPredicate(days);
 
         String expected = RemindPredicate.class.getCanonicalName() + "{days=" + days + "}";

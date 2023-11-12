@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NO_AMY;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.policy.PolicyDate;
 import seedu.address.testutil.PersonBuilder;
 
 public class PolicyIssueContainsKeywordsPredicateTest {
@@ -76,6 +77,15 @@ public class PolicyIssueContainsKeywordsPredicateTest {
         predicate = new PolicyIssueContainsKeywordsPredicate("11-11-2022");
         assertFalse(predicate.test(new PersonBuilder().withPolicy(VALID_COMPANY_AMY,
                 VALID_POLICY_NO_AMY, "11-11-2023", VALID_POLICY_EXPIRY_DATE_AMY).build()));
+    }
+
+    @Test
+    public void test_policyIssueIsDefault_returnsFalse() {
+        // Policy issue date is the default parameter
+        PolicyIssueContainsKeywordsPredicate predicate =
+                new PolicyIssueContainsKeywordsPredicate("11-11-2023");
+        assertFalse(predicate.test(new PersonBuilder().withPolicy(VALID_COMPANY_AMY, VALID_POLICY_NO_AMY,
+                PolicyDate.DEFAULT_VALUE, VALID_POLICY_EXPIRY_DATE_AMY).build()));
     }
 
     @Test
