@@ -15,7 +15,7 @@ public class TransactionIdTest {
     // Resetting the used IDs before each test
     @BeforeEach
     public void setUp() {
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
             TransactionId.freeUsedTransactionIds(i);
 
         }

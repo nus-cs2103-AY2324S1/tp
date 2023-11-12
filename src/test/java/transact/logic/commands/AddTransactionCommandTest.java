@@ -2,12 +2,16 @@ package transact.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static transact.testutil.Assert.assertThrows;
 import static transact.testutil.TransactionBuilder.DEFAULT_AMOUNT;
 import static transact.testutil.TransactionBuilder.DEFAULT_DATE;
 import static transact.testutil.TransactionBuilder.DEFAULT_DESC;
 import static transact.testutil.TransactionBuilder.DEFAULT_PERSON;
 import static transact.testutil.TransactionBuilder.DEFAULT_TYPE;
+import static transact.testutil.TypicalTransactions.APPLES;
+import static transact.testutil.TypicalTransactions.BANANAS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +50,30 @@ public class AddTransactionCommandTest {
         assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS, Messages.format(addedTransaction)),
                 result.getFeedbackToUser());
         assertEquals(Arrays.asList(addedTransaction), modelStub.transactionsAdded);
+    }
+
+    @Test
+    public void equals() {
+        Transaction t1 = APPLES;
+        Transaction t2 = BANANAS;
+        AddTransactionCommand addT1Command = new AddTransactionCommand(t1.getTransactionType(),
+                t1.getDescription(), t1.getAmount(), t1.getDate(), t1.getPersonId());
+        AddTransactionCommand addT2Command = new AddTransactionCommand(t2.getTransactionType(),
+                t2.getDescription(), t2.getAmount(), t2.getDate(), t2.getPersonId());
+
+        // same object -> returns true
+        assertTrue(addT2Command.equals(addT2Command));
+
+        // same values -> returns false
+        AddTransactionCommand addT1CommandCopy = new AddTransactionCommand(t1.getTransactionType(),
+                t1.getDescription(), t1.getAmount(), t1.getDate(), t1.getPersonId());
+        assertFalse(addT1Command.equals(addT1CommandCopy));
+
+        // null -> returns false
+        assertFalse(addT1Command.equals(null));
+
+        // different transaction -> returns false
+        assertFalse(addT1Command.equals(addT2Command));
     }
 
 
