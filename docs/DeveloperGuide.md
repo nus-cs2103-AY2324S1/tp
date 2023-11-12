@@ -347,24 +347,29 @@ finding the perfect match.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| As a …​      | I want to …​                                                                                    | So that I can…​                                                                             |
-|--------------|-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| new user     | be greeted with a welcome message when i launch the app                                         | so that I feel welcome                                                                      |
-| new user     | be able to key in my height in my preferences                                                   | so that the algorithm can recommend me a suitable date based on our height compatibility    |
-| new user     | be able to key in my horoscope in my preferences                                                | so that the algorithm can recommend me a suitable date based on our horoscope compatibility |
-| new user     | be able to key in my own income in my preferences                                               | so that the algorithm can recommend me a suitable date based on our income compatibility    |
-| new user     | to be able to key in my own gender in my preferences                                            | so that the algorithm can match me to the appropriate gender                                |
-| serial dater | be able to pull up a list of my previous dates                                                  | so that I can keep track of who I have dated in the past                                    |
-| serial dater | be able to delete dates from my list                                                            | so that my dating list is only limited to those who I am still interested in                |
-| serial dater | to be able create a new date entry with his/her gender, name, income, height, horoscope and age | so that I can keep my list growing                                                          |
-| serial dater | to be able to edit the details of my date                                                       | so that I can keep my dates details up to date                                              |
-| serial dater | to be able to be recommended a complete random date                                             | so that I can have an exciting surprise date that day                                       |
-| serial dater | to be able to filter my past dates based on a particular metric                                 | so that I can find dates that I am interested in amidst my long and ever growing list       |
-| serial dater | to be able to be recommended the most compatible date for me                                    | so that I optimize my chance of finding my one true love                                    |
-| serial dater | to be able to star dates                                                                        | so that I can keep track of outstanding dates                                               |
-| serial dater | to be able to unstar dates                                                                      | so that I can keep focused on people who are still outstanding to me                        |
-*{More to be added}*
-
+| Priority | As a …​  | I want to …​                                                                                    | So that I can…​                                                         |
+|----------|----------|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* *`    | new user | be greeted with a welcome message when i launch the app                                         | feel welcome                                                            |
+ | `* *`    | new user | be able to get help when i'm stuck                                                              | better navigate through the application                                 |
+| `* * *`  | dater    | be able to key my preferred height in my preferences                                            | get recommended a suitable date based on our height compatibility       |
+| `* * *`  | dater    | be able to key in my preferred horoscope in my preferences                                      | get recommended a suitable date based on our horoscope compatibility    |
+| `* * *`  | dater    | be able to key in my preferred income in my preferences                                         | get recommended a suitable date based on our income compatibility       |
+ | `* * *` | dater | be able to key in my preferred age in my preferences                                            | get recommended a suitable date based on our age compatibility          |
+| `* * *` | dater | be able to edit my entered preferences                                                          | change my preferences in the event I change my mind                     |
+ | `* * *` | dater | be able to view my preferences                                                                  | know what my preferences are in the event I forget                      |
+| `* * *`  | dater    | be able to pull up a list of my previous dates                                                  | keep track of who I have dated in the past                              |
+| `* * *`  | dater    | be able to delete dates from my list                                                            | limit my dating list to those who I am still interested in              |
+| `* * *`  | dater    | to be able create a new date entry with his/her gender, name, income, height, horoscope and age | keep my list growing                                                    |
+| `* * *`  | dater    | to be able to edit the details of my date                                                       | keep my dates details up to date                                        |
+| `* * *`  | dater    | to be able to be recommended a complete random date                                             | have an exciting surprise date that day                                 |
+| `* * *`  | dater    | to be able to filter my dates based on a particular metric                                      | find dates that I am interested in amidst my long and ever growing list |
+| `* * *`  | dater    | to be able to be recommended the most compatible date for me                                    | optimize my chance of finding my one true love                          |
+| `* * *`  | dater    | to be able to star dates                                                                        | keep track of outstanding dates                                         |
+| `* * *`  | dater    | to be able to unstar dates                                                                      | keep focused on people who are still outstanding to me                  |
+| `* * *`  | dater    | to be able to sort my dates based on a particular metric                                        | find dates that I am interested in amidst my long and ever growing list |
+ | `* * *` | dater | to be able to find dates based on their name                                                    | locate a date easily                                                    |
+| `* *`    | lazy user | to be able to clear all the dates in my list                                                    | start afresh with a new date list                                       | 
+ 
 ### Use cases
 
 (For all use cases below, the **System** is the `LoveBook` and the **Actor** is the `user`, unless specified otherwise)
