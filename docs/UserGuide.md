@@ -372,9 +372,9 @@ Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAM
 
 **Below are some examples on how to use `add_event` command:**
 
-* `add_event m/FumbleLog presentation d/2023-10-30`: Adds an event with name "FumbleLog presentation" and with date "2023-10-30".
-* `add_event m/FumbleLog meeting d/2023-10-30 g/Team2`: Adds an event with name "FumbleLog meeting" , with date "2023-10-30", and assigns contact in group "Team2" to the event.
-* `add_event m/CS2101 OP2 d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`: Adds an event with name "CS2101 OP2", with date "2023-10-05", with start time "1500", with end time "1700", assigns contact with name "Ken" and groups "CS2103T" and "CS2101" to the event.
+* `add_event m/FumbleLog presentation d/2023-10-30`: Adds an event with name `FumbleLog presentation` and with date `2023-10-30`.
+* `add_event m/FumbleLog meeting d/2023-10-30 g/Team2`: Adds an event with name `FumbleLog meeting`, with date `2023-10-30`, and assigns contact in group `Team2` to the event.
+* `add_event m/CS2101 OP2 d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`: Adds an event with name `CS2101 OP2`, with date `2023-10-05`, with start time `1500`, with end time `1700`, assigns contact with name "Ken" and groups "CS2103T", "CS2101" to the event.
 
 
 
@@ -424,10 +424,10 @@ Format: `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TI
 
 **Below are some examples on how to use `edit_event` command:**
 
-* `edit_event 1 m/FumbleLog meeting`: Edits the name of event at index 1 to "FumbleLog meeting".
-* `edit_event 1 s/1500 e/1700`: Edits the start and end time to "1500" and "1700" respectively. If the event initially does not have a start and end time, the respective times will be added to the event.
-* `edit_event 1 g/CS2103T ug/CS2101`: Assigns group "CS2103T" to the event and unassigns group "CS2101".
-* `edit_event 1 u/Ken`: Unassigns the person "Ken" from the event.
+* `edit_event 1 m/FumbleLog meeting`: Edits the name of event at index 1 to `FumbleLog meeting`.
+* `edit_event 1 s/1500 e/1700`: Edits the start and end time to `1500` and `1700` respectively. If the event initially does not have a start and end time, the respective times will be added to the event.
+* `edit_event 1 g/CS2103T ug/CS2101`: Assigns group `CS2103T` to the event and unassigns group `CS2101`.
+* `edit_event 1 u/Ken`: Unassigns the person `Ken` from the event.
 
 
 
