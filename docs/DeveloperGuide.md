@@ -901,6 +901,11 @@ point for testers to work on; testers are expected to do more *exploratory* test
 
    3. Test case: `schedule 1 ap/Appointment Name d/11-30-2025 09:00`<br>
       Expected: Error details shown in the status message. List, status bar and appointment sidebar remains the same.
+    
+   4. Test case: `schedule 1 ap/Appointment Name d/12-11-2025 09:00` on a person who already has an appointment<br>
+      Expected: A prompt will appear that causes program functionality to temporarily stop. The prompt alerts the user
+      that the client already has an appointment arranged and the appointment will be overriden if the user wishes to 
+      proceed. After proceeding, the old appointment is overridden and the app continues its notmal functionality.
 
 ### Completing an appointment
 
@@ -923,6 +928,13 @@ point for testers to work on; testers are expected to do more *exploratory* test
    2. Test case: `complete d/11-11-2025`<br>
       Expected: Appointment details removed from the 2 people in the list. The appointment sidebar is updated as well.
 
+### Clearing data
+
+1. User wishes to clear the addressbook.
+      1. Test case: `clear`<br>
+      Expected: A prompt will appear that causes program functionality to temporarily stop. The prompt alerts the user
+      that he intends to clear the address book and asks for confirmation of the clear. After proceeding, the entire address book will be cleared.
+    
 ### Saving data
 
 1. Dealing with missing data files

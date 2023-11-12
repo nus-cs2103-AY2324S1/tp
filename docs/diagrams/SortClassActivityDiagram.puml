@@ -11,9 +11,9 @@ start
 'diamond we place it as the true branch instead.
 
 switch ()
-case([input = "name"])
+case([input == "name"])
     :Sorts the list by name lexicographically;
-case([input = "appointment"])
+case([input == "appointment"])
     :Sorts the list by appointment;
 case([else])
     :Throws error message;
