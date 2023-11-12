@@ -112,6 +112,10 @@ public class PersonTest {
         // different tags -> returns true
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.equals(editedAlice));
+
+        // different name and tags -> returns true
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
