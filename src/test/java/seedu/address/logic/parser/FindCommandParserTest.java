@@ -24,24 +24,19 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_multipleWordsInName_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse("n/Alex Yeoh sb/Math"));
+    public void parse_multipleWords_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("sb/Math Chemistry"));
+
+        assertThrows(ParseException.class, () -> parser.parse("n/Alex Bernice"));
     }
 
     @Test
-    public void parse_multipleWordsInSubject_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse("sb/Math Alex"));
-    }
-
-    @Test
-    public void parse_validNameWithOneWord_success() throws ParseException {
+    public void parse_validOneWord_success() throws ParseException {
         parser.parse(" n/Alex");
-    }
 
-    @Test
-    public void parse_validSubjectWithOneWord_success() throws ParseException {
         parser.parse(" sb/Math");
     }
+
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
