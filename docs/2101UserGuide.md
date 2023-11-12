@@ -4,35 +4,112 @@ style: guide
 title: User Guide
 ---
 ## CCACommander Ultra Promax Xtra 9000PLUS - User Guide
-CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to manage CCA members and events, optimised for CCA Heads who prefer to use command line interface.
 
-1. Table of Contents
+![Logo](images/logo_removebg.png)
+
+## Introduction
+As a Co-curricular Activity (CCA) head, do you find yourself struggling to manage your CCA members’ attendance and record the array of events that your CCA has?
+Are the heaps of spreadsheets you are using to manage them making you feel overwhelmed? Well, fear not, **CCACommander Ultra ProMax Xtra 9000PLUS** is here to save the day!
+
+CCACommander is a desktop application that helps CCA leaders record details of their members and events, whilst tracking every member’s attendance. 
+It helps to organise members and events into easy-to-view compartments under a singular Graphical User Interface (GUI) while providing granular control to you via its in-built Command Line Interface (CLI). 
+If you can type quickly, CCACommander can help you complete your administrative tasks much more efficiently than traditional GUI applications.
+
+## About
+This user guide provides documentation on how you can install and use **CCACommander Ultra ProMax Xtra 9000PLUS**. Descriptions of CCACommander’s features and how to use them have been carefully organised into key sections for your convenience.
+To get started, take a look at our [quick start](#quick-start) guide!
+
+This guide uses the following features to make it easier for you to navigate around:
+* Words that look like [this](#about) can be clicked to jump to the related section.
+* Words that look like `this` refer to commands which you can type into the command box of CCACommander.
+* Words that look like <kbd>this</kbd> refer to keyboard keys that you can press.
+
+<div markdown="block" class="alert alert-warning">
+:warning: Boxes with the :warning: icon contain important information that you should read.
+</div>
+
+<div markdown="block" class="alert alert-info">
+:information_source: Boxes with the :information_source: icon contain additional useful information.
+</div>
+
+<div markdown="block" class="alert alert-primary">
+:bulb: Boxes with the :bulb: icon contain additional tips and tricks to help you get the most out of CCACommander.
+</div>
+
+
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
+<div markdown="block" class="alert alert-warning">
 
-1. Ensure you have Java `11` or above installed in your Computer.
+:warning: We assume that you have some basic knowledge of terminal commands. You can learn how to do so with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/)
 
-1. Download the latest `ccacommander.jar` from [here](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases).
+</div>
 
-1. Copy the file to the folder you want to use as the _home folder_ for your CCACommander application.
+1. Ensure you have Java `11` or above installed in your computer by following [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/).
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ccacommander.jar` command to run the application.<br>
+2. Download the latest `ccacommander.jar` from [here](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases).
+
+3. Put the downloaded file into a folder of your choice (preferably a new empty folder).
+
+4. Open a command terminal in the folder you put the CCACommander file in, and use the `java -jar ccacommander.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br> e.g. typing `help` and pressing <kbd> Enter </kbd> will open the help window. <br>
    Some example commands you can try:
 
     * `list` : Lists all members and events.
 
-    * `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278` : Creates a member named `CHU WEI RONG` in CCACommander.
+    * `createMember n/Lim Jun Jie g/Male p/98765432 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278`: Creates a member named Lim Jun Jie in CCACommander.
 
     * `deleteMember 3` : Deletes the 3rd member shown in the current list.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. You can refer to the [Features](#features) below for the details of each command.
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: You can use the `clear` command to remove the sample data.
+</div>
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Navigating User Interface
+![UI_breakdown](images/ui_breakdown.png)
+Here are the important components of CCACommander that you will use and interact with.
+
+**Menu**: The CCACommander menu is located at the top-left corner of your screen. Click the sub-menu items to execute the following
+1. File: Exit the program
+2. Theme: Toggle between light and dark themes
+
+Light | Dark
+--------|--------
+![LightTheme](images/light_theme.png) | ![DarkTheme](images/dark_theme.png)
+
+3. Help: Access our user guide
+
+**Command Box**: Type in your text commands. <br>
+**Result Display**: View messages from CCACommander regarding your commands. <br>
+**Member List**: View the members stored in CCACommander. <br>
+**Event List**: View the events stored in CCACommander. <br>
+**Storage Location**: Locate where your CCACommander data is stored in your computer.
+
+### Command History
+You can quickly recall previously entered commands for convenience as CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user. <br/>
+Upon selecting the command box, you can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered .
+
+Example:
+1. You have just marked attendance for the first member in the member list using the editEnrolment m/1 e/1 r/Present command.
+2. You can then use <kbd>↑</kbd> to get editEnrolment m/1 e/1 r/Present
+3. You can edit the member index to get editEnrolment m/2 e/1 r/Present to mark the second member as present.
+
+<div markdown="block" class="alert alert-info">:information_source: CCACommander will not store 2 of the same commands if they were entered twice in a row. Likewise, "commands" containing exclusively of blank spaces will not be stored as well.
+
+Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, users will have to re-navigate from the most recent command as it was treated as an edit or entry of command.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -43,10 +120,10 @@ CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to man
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `createMember n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `createMember n/NAME`, `NAME` is a parameter which can be used as `createMember n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
