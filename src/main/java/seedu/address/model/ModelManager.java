@@ -13,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
