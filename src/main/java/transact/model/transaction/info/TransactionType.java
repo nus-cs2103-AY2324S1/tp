@@ -30,7 +30,7 @@ public enum TransactionType {
         if (EXPENSE.validStrings.contains(type)) {
             return EXPENSE;
         }
-        // code should never reach here.
+        // code should never reach here
         assert type != null;
         return null;
     }

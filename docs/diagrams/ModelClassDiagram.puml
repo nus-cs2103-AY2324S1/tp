@@ -1,4 +1,4 @@
-@startuml
+@startuml ModelClassDiagram
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
@@ -16,26 +16,17 @@ Class ModelManager
 Class UserPrefs
 
 Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+note left: See diagram below\nfor all attributes
 Class Transaction
-Class TransactionId
-Class TransactionType
-Class Description
-Class Amount
-Class Date
+note right: See diagram below\nfor all attributes
 
-Class "UniqueEntryList<? extends Entry>" as UniqueEntryList_T
 Class "UniqueEntryMap<? extends Entry>" as UniqueEntryMap_T
-Class "UniqueEntryList<Person>" as UniqueEntryList_Person
 Class "UniqueEntryMap<Person>" as UniqueEntryMap_Person
 Class "UniqueEntryMap<Transaction>" as UniqueEntryMap_Transaction
-UniqueEntryList_T <|-- UniqueEntryList_Person
-UniqueEntryMap_T <|-- UniqueEntryMap_Person
-UniqueEntryMap_T <|-- UniqueEntryMap_Transaction
+UniqueEntryMap_T <|-up- UniqueEntryMap_Person
+UniqueEntryMap_T <|-up- UniqueEntryMap_Transaction
+UniqueEntryMap_T .down.> Entry
+UniqueEntryMap_T -[hidden]up-> ModelManager
 
 Class I #FFFFFF
 }
@@ -49,33 +40,20 @@ TransactionBook .up.|> ReadOnlyTransactionBook
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+Model .right.> ReadOnlyTransactionBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -right-> "1" TransactionBook
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueEntryMap_Person
-AddressBook *--> "1" UniqueEntryList_Person
 UniqueEntryMap_Person --> "~* all" Person
 UniqueEntryMap_Transaction --> "~* all" Transaction
 Person .right.|> Entry
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
 TransactionBook *--> "1" UniqueEntryMap_Transaction
 Transaction .left.|> Entry
-Transaction *--> TransactionId
-Transaction *--> TransactionType
-Transaction *--> Description
-Transaction *--> Amount
-Transaction *--> Date
 
-Person -[hidden]up--> I
-
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Person -[hidden]up-> UniqueEntryMap_T
 
 ModelManager --> "~* filtered" Person
 ModelManager --> "~* filtered" Transaction

@@ -12,6 +12,7 @@ import transact.logic.commands.EditStaffCommand;
 import transact.logic.commands.EditTransactionCommand;
 import transact.logic.commands.EditTransactionCommand.EditTransactionDescriptor;
 import transact.logic.parser.exceptions.ParseException;
+import transact.model.person.PersonId;
 
 /**
  * Parses input arguments and creates a new EditStaffCommand object
@@ -58,9 +59,13 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editTransactionDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
-
         if (argMultimap.getValue(PREFIX_STAFF).isPresent()) {
-            editTransactionDescriptor.setStaffId(ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_STAFF).get()));
+            Integer staffId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_STAFF).get());
+            if (staffId > 0) {
+                editTransactionDescriptor.setStaffId(staffId);
+            } else {
+                throw new ParseException(PersonId.MESSAGE_CONSTRAINTS);
+            }
         }
 
         if (!editTransactionDescriptor.isAnyFieldEdited()) {

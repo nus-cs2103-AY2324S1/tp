@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+show members
+hide empty members
+
+Class "UniqueEntryMap<Transaction>" as UniqueEntryMap_Transaction
+Class "<<interface>>\nEntry" as Entry
+Class "<<enumeration>>\nTransactionType" as TransactionType {
+    REVENUE
+    EXPENSE
+}
+Class Transaction {
+    transactionType: TransactionType
+    personId: Integer
+}
+
+TransactionBook *-right-> "1" UniqueEntryMap_Transaction
+
+UniqueEntryMap_Transaction -down-> "*" Transaction
+
+Transaction .right.|> Entry
+Transaction *-left-> TransactionId
+Transaction *--> Description
+Transaction *--> Amount
+Transaction *--> Date
+
+@enduml

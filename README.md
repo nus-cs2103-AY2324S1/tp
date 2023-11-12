@@ -3,7 +3,7 @@
 
 # Tran$act
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/Ui-Overview.png)
 
 Tran$act is a simple and easy to use transaction recorder and tracker built in Java and based on the **[Address Book Project](https://se-education.org/addressbook-level3)**.
 
@@ -17,4 +17,4 @@ Tran$act is a simple and easy to use transaction recorder and tracker built in J
 
 For the detailed documentation of this project, see the **[Tran$act Product Website](https://ay2324s1-cs2103t-w13-3.github.io/tp/)**.
 
-This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+This project is a part of the se-education.org initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
