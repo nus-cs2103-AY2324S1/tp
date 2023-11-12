@@ -75,13 +75,13 @@ public class CommandTestUtil {
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "&"; // '&' not allowed in roles
     public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "    "; // company cannot be blank
     public static final String INVALID_DEADLINE_DESC =
-            " " + PREFIX_DEADLINE + "Nov 12 2023"; // deadline must be in correct format
+        " " + PREFIX_DEADLINE + "Nov 12 2023"; // deadline must be in correct format
     public static final String INVALID_STATUS_DESC =
         " " + PREFIX_STATUS + "SUBMITTED"; // status must be selected from the list of options
     public static final String INVALID_JOB_TYPE_DESC =
-            " " + PREFIX_JOB_TYPE + "OTHER"; // job type must be selected from the list of options
+        " " + PREFIX_JOB_TYPE + "OTHER"; // job type must be selected from the list of options
     public static final String INVALID_INDUSTRY_DESC =
-            " " + PREFIX_INDUSTRY + "    "; //industry cannot be blank
+        " " + PREFIX_INDUSTRY + "    "; //industry cannot be blank
     public static final String INVALID_INTERVIEW_TYPE_DESC =
         " " + PREFIX_INTERVIEW_TYPE + "FUN"; // interview type must be selected from the list of options
     public static final String INVALID_INTERVIEW_DATETIME_DESC =
@@ -96,9 +96,9 @@ public class CommandTestUtil {
 
     static {
         DESC_CHEF = new EditJobDescriptorBuilder().withRole(VALID_ROLE_CHEF)
-            .withCompany(VALID_COMPANY_CHEF).build();
+                        .withCompany(VALID_COMPANY_CHEF).build();
         DESC_CLEANER = new EditJobDescriptorBuilder().withRole(VALID_ROLE_CLEANER)
-            .withCompany(VALID_COMPANY_CLEANER).build();
+                           .withCompany(VALID_COMPANY_CLEANER).build();
     }
 
     /**
@@ -107,7 +107,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-                                            Model expectedModel) {
+        Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -122,8 +122,8 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        Boolean clearDetailsPanel, Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, clearDetailsPanel);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

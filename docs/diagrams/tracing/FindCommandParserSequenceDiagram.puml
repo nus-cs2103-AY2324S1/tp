@@ -5,21 +5,21 @@ skinparam ArrowFontStyle plain
 Participant ":FindCommandParser" as fcp LOGIC_COLOR
 Participant ":ArgumentTokenizer" as at LOGIC_COLOR
 Participant "predicateList:List<Predicate<Job>>" as pl LOGIC_COLOR
-Participant ":CombinedPredicate" as cp LOGIC_COLOR
-Participant ":FindCommand" as fc LOGIC_COLOR
+Participant "cp:CombinedPredicate" as cp LOGIC_COLOR
+Participant "command:FindCommand" as fc LOGIC_COLOR
 
 [-> fcp ++: parse(args)
 fcp -> at ++: tokenize user input
 at --> fcp --: argMultimap
 loop for each entry in argMultimap
     fcp -> pl ++: add(predicate)
-    pl --> fcp --: predicateList
+    pl --> fcp --
 end
 create cp
 fcp -> cp ++: CombinedPredicate(predicateList)
-cp --> fcp --: cp
+cp --> fcp --:
 create fc
 fcp -> fc ++: FindCommand(cp)
-fc --> fcp --: command
+fc --> fcp --
 fcp -->[ --: command
 @enduml

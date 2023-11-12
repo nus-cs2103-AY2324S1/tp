@@ -46,7 +46,8 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new ApplicationBook(model.getApplicationBook()), new UserPrefs());
         expectedModel.setJob(model.getFilteredJobList().get(0), editedJob);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage,
+            EditCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
@@ -56,10 +57,12 @@ public class EditCommandTest {
 
         JobBuilder jobInList = new JobBuilder(lastJob);
         Job editedJob = jobInList.withRole(VALID_ROLE_CLEANER)
-            .withCompany(VALID_COMPANY_CLEANER).withDeadline(VALID_DEADLINE_CLEANER).build();
+                            .withCompany(VALID_COMPANY_CLEANER).withDeadline(VALID_DEADLINE_CLEANER).build();
 
-        EditJobDescriptor descriptor = new EditJobDescriptorBuilder().withRole(VALID_ROLE_CLEANER)
-            .withCompany(VALID_COMPANY_CLEANER).withDeadline(VALID_DEADLINE_CLEANER).build();
+        EditJobDescriptor descriptor = new EditJobDescriptorBuilder()
+                                           .withRole(VALID_ROLE_CLEANER)
+                                           .withCompany(VALID_COMPANY_CLEANER)
+                                           .withDeadline(VALID_DEADLINE_CLEANER).build();
         EditCommand editCommand = new EditCommand(indexLastJob, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_JOB_SUCCESS, Messages.format(editedJob));
@@ -67,7 +70,8 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new ApplicationBook(model.getApplicationBook()), new UserPrefs());
         expectedModel.setJob(lastJob, editedJob);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model,
+            expectedMessage, EditCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
@@ -86,7 +90,8 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new ApplicationBook(model.getApplicationBook()), new UserPrefs());
         expectedModel.setJob(lastJob, editedJob);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model,
+            expectedMessage, EditCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
@@ -98,7 +103,8 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new ApplicationBook(model.getApplicationBook()), new UserPrefs());
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model,
+            expectedMessage, EditCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
@@ -115,7 +121,8 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new ApplicationBook(model.getApplicationBook()), new UserPrefs());
         expectedModel.setJob(model.getFilteredJobList().get(0), editedJob);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model,
+            expectedMessage, EditCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
@@ -196,7 +203,7 @@ public class EditCommandTest {
         EditJobDescriptor editJobDescriptor = new EditJobDescriptor();
         EditCommand editCommand = new EditCommand(index, editJobDescriptor);
         String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editJobDescriptor="
-            + editJobDescriptor + "}";
+                              + editJobDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 
