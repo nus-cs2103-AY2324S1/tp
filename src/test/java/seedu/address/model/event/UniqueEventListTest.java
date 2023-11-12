@@ -8,13 +8,13 @@ import static seedu.address.testutil.TypicalEvents.EVENT_1;
 import static seedu.address.testutil.TypicalEvents.EVENT_2;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 public class UniqueEventListTest {
 
@@ -34,6 +34,14 @@ public class UniqueEventListTest {
     public void contains_eventInList_returnsTrue() {
         uniqueEventList.add(EVENT_1);
         assertTrue(uniqueEventList.contains(EVENT_1));
+    }
+
+    @Test
+    public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
+        uniqueEventList.add(EVENT_1);
+        Event editedEvent = new Event(EVENT_1.getPerson(), EVENT_1.getDescription(), LocalDateTime.MIN,
+                LocalDateTime.MAX);
+        assertTrue(uniqueEventList.contains(editedEvent));
     }
 
     @Test
