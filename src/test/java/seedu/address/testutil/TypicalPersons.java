@@ -56,6 +56,12 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY).withGroupList().build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withGroupList(VALID_GROUP_BOB).build();
+    public static final Person ZHENDONG = new PersonBuilder().withName("Zhen Dong").withPhone("8482131")
+                                     .withEmail("hans@example.com").build();
+    public static final Person KAILASH = new PersonBuilder().withName("Kailash").withPhone("8482131")
+                                     .withEmail("hans@example.com").build();
+    public static final Person NIC = new PersonBuilder().withName("Nic").withPhone("8482131")
+                                     .withEmail("hans@example.com").build();
 
 
 

@@ -65,7 +65,7 @@ public class GroupPersonCommandTest {
     }
 
     @Test
-    public void executenopersongroupsuccessful() {
+    public void executeNoPersonGroupSuccessful() {
         ModelStubWithGroup modelStub = new ModelStubWithGroup();
 
         Command groupPersonCommand = new GroupPersonCommand("Alice", "CS2100");
@@ -76,7 +76,7 @@ public class GroupPersonCommandTest {
 
     // person already in group
     @Test
-    public void executepersoningroupunsuccessful() throws Exception {
+    public void executePersonInGroupUnsuccessful() throws Exception {
         ModelStubWithGroup modelStub = new ModelStubWithGroup();
 
         Person validPerson = TypicalPersons.ALICE;
