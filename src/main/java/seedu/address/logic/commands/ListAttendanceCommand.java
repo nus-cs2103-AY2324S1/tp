@@ -63,6 +63,7 @@ public class ListAttendanceCommand extends ListCommand {
      * @param numOfStudents Number of students in total or in tutorial group
      */
     public String getAttendanceSummary(boolean isWithTag, int numOfPresentees, int numOfStudents, String courseCode) {
+        assert numOfPresentees <= numOfStudents;
         return isWithTag
                 ? String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, numOfPresentees, numOfStudents,
                         week.getWeekNumber(), courseCode, tag.get().getTagName())

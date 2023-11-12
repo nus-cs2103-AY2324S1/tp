@@ -86,8 +86,7 @@ public class DeleteCommand extends Command {
             model.addFilter(tagPredicate);
         }
 
-        List<Person> toDeleteList = model.getFilteredPersonList();
-        List<Person> copyDeleteList = new ArrayList<>(toDeleteList);
+        List<Person> copyDeleteList = new ArrayList<>(model.getFilteredPersonList());
 
         if (copyDeleteList.isEmpty()) {
             String toDeleteListDesc = tag.isPresent()
@@ -99,6 +98,7 @@ public class DeleteCommand extends Command {
         for (Person p : copyDeleteList) {
             model.deletePerson(p);
         }
+
         String nameList = copyDeleteList.stream().map(person -> Messages.format(person))
                 .collect(Collectors.joining(",\n"));
 

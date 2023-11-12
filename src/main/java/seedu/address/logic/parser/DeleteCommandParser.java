@@ -38,10 +38,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIALGROUP);
         Optional<Tag> tag = Optional.empty();
 
-        if (argMultimap.getValue(PREFIX_TUTORIALGROUP).isPresent()) {
-            tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIALGROUP).get()));
-        }
-
         if (trimmedArgs.equals("all")) {
             return new DeleteCommand(tag, new ContainsTagPredicate(tag));
         }
@@ -50,7 +46,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-
+        tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIALGROUP).get()));
         return new DeleteCommand(tag, new ContainsTagPredicate(tag));
     }
 }
