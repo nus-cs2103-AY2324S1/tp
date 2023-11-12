@@ -203,7 +203,7 @@ You can delete a contact from your contact list.
 
 **Example(s):**
 - `delete n/Nicholas Lee`
-  This deletes Nicholas Lee from the address book.
+  This deletes Nicholas Lee from the contact list.
 
 
 **Potential error(s):**
@@ -247,7 +247,7 @@ No additional parameters.
 
 
 **Example(s):**
-- `List`
+- `list`
   This lists all the contacts in the group.
 
 
@@ -293,7 +293,7 @@ You can delete a group in your contact list.
 
 
 **Example(s):**
-- `delete g/CS1203T`
+- `delete g/CS2103T`
   This deletes the group "CS2103T" from your contact list, given "CS2103T" is an existing group in your contact list.
 
 
@@ -561,10 +561,10 @@ You can remove meeting times from your groups.
 
 **Example(s):**
 - `deletetime g/CS2100  t/mon 1400 - mon 1600`
-  This removes a time slot when Alex Yeoh is available from your contact list.
+  This removes a meeting time slot from the group CS2100 in your contact list.
 
 Insert Image
-  Deleted Time From: Alex Yeoh
+  Deleted Time From: CS2100
 
 
 **Potential error(s):**
