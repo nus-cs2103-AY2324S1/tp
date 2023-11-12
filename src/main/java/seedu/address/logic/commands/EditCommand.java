@@ -333,6 +333,8 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("day", day)
+                    .add("begin", begin)
+                    .add("end", end)
                     .add("paid", paid)
                     .add("payrate", payRate)
                     .add("editSchedule", editSchedule)
