@@ -20,7 +20,7 @@ public class SortCommand extends Command {
             + "Parameters: "
             + CliSyntax.PREFIX_SORT_FIELD + " FIELD "
             + "[" + CliSyntax.PREFIX_SORT_ORDER + " ORDER]\n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + CliSyntax.PREFIX_SORT_FIELD + " grad "
             + CliSyntax.PREFIX_SORT_ORDER + " descending";
 
