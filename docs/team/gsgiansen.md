@@ -69,7 +69,7 @@ Given below are my contributions to the project.
     * Add search implementation for future developments [\#98](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/98)
     * Updated the diagrams in the guide to reflect latest project flow [\#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/190)
     * Included implementation for Export and Import and finalised proposed features [\#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/190)
-    * Added sequence and activity diagrams for Add and Delete commands [#213](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/214)
+    * Added sequence and activity diagrams for Add and Delete commands [#213](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/213)
     * Added object diagrams illustrating Card and Deck classes [#213](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/213)
 
 
