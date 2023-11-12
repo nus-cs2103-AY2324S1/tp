@@ -17,27 +17,31 @@ If you are new here, visit our [quick start](#quick-start) guide to onboard onto
 - [Quick Start](#quick-start)
 - [Navigating the GUI](#navigating-the-graphical-user-interface--gui-)
 - [Features](#features)
-    - [Viewing Help](#viewing-help--help): `help`
-    - [Adding an employee](#adding-an-employee-add): `add`
-    - [Deleting an employee](#deleting-an-employee--delete): `delete`
-    - [Editing an employee](#editing-an-employee--edit): `edit`
-    - [Listing all employees](#listing-all-employees--list): `list`
-    - [Locating employees](#finding-employees--find): `find`
-    - [Sorting employees](#sorting-all-employees--sort): `sort`
-    - [Adding a leave period](#adding-a-leave-period-of-an-employee-addleave): `addleave`
-    - [Deleting a leave period](#deleting-a-leave-period-of-an-employee-deleteleave): `deleteleave`
-    - [Editing a leave date](#editing-a-leave-date-of-an-employee--editleave): `editleave`
-    - [Listing employees on leave](#listing-the-employees-on-leave-on-a-specified-date--listleave) `listleave`
-    - [Adding remarks](#adding-a-remark-for-an-employee--addremark): `addremark`
-    - [Deleting remarks](#deleting-a-remark-of-an-employee--deleteremark): `deleteremark`
-    - [Updating overtime hours](#updating-overtime-hours-of-an-employee--overtime): `overtime`
-    - [Generating an employee report](#generating-a-report--report): `report`
-    - [Resetting fields](#resetting-fields--reset): `reset`
-    - [Clearing all employees](#clearing-all-entries--clear): `clear`
-    - [Exiting the program](#exiting-the-program--exit): `exit`
+  - [General Commands](#general-commands)
+      - [Viewing Help](#viewing-help--help): `help`
+      - [Clearing all employees](#clearing-all-entries--clear): `clear`
+      - [Exiting the program](#exiting-the-program--exit): `exit`
+  - [Employee Commands](#employee-commands)
+      - [Adding an employee](#adding-an-employee-add): `add`
+      - [Deleting an employee](#deleting-an-employee--delete): `delete`
+      - [Editing an employee](#editing-an-employee--edit): `edit`
+      - [Listing all employees](#listing-all-employees--list): `list`
+      - [Locating employees](#finding-employees--find): `find`
+      - [Sorting employees](#sorting-all-employees--sort): `sort`
+  - [Employee Metrics Commands](#employee-metrics-commands)
+      - [Adding a leave period](#adding-a-leave-period-of-an-employee-addleave): `addleave`
+      - [Deleting a leave period](#deleting-a-leave-period-of-an-employee-deleteleave): `deleteleave`
+      - [Editing a leave date](#editing-a-leave-date-of-an-employee--editleave): `editleave`
+      - [Listing employees on leave](#listing-the-employees-on-leave-on-a-specified-date--listleave) `listleave`
+      - [Adding remarks](#adding-a-remark-for-an-employee--addremark): `addremark`
+      - [Deleting remarks](#deleting-a-remark-of-an-employee--deleteremark): `deleteremark`
+      - [Updating overtime hours](#updating-overtime-hours-of-an-employee--overtime): `overtime`
+      - [Generating an employee report](#generating-a-report--report): `report`
+      - [Resetting fields](#resetting-fields--reset): `reset`
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
+- [Parameter Information](#parameter-information)
 
 <div style="page-break-after: always;"></div>
 
@@ -637,6 +641,35 @@ For Mac users, you may wish to follow the instructions listed [here](https://nus
 
 **Q**: How do I save my data?<br>
 **A**: Data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+**Q**: How do I view the leave dates taken by a specific employee?<br>
+**A**: Unfortunately, HouR does not currently have a command to allow the users to view the leaves taken by an employee. To overcome this, we recommend that you add a “dummy” leave with `addleave`, before deleting the added “dummy” leave `deleteleave`. You should be able to view the list of leaves taken by the employee in the Result Display.
+
+**Q**: How do I find out the number of leaves an employee has remaining?<br>
+**A**: To do so, simply type in the `report` command using the ID of the employee you are interested in. From there, HouR’s result display will show you the number of leaves **already taken** by the employee. <br> 
+Since an employee can take a maximum number of 14 leaves, to calculate the number of leaves remaining:
+```
+number of leaves remaining = 14 - number of leaves used
+```
+
+**Q**: How do I view the number of overtime hours worked by a specific employee?<br>
+**A**: To do so, simply type in the `report` command using the ID of the employee you are interested in. From there, HouR’s result display will show you the number of overtime hours **worked** by the employee.
+
+**Q**: Can I reset fields for specific employees rather than all employees?<br>
+**A**: Unfortunately, HouR only allows fields like leaves taken and overtime hours worked to be reset for all employees using the reset command. 
+If you would like to reset the number of leaves or overtime hours for a specific employee, you can follow the steps below.
+1. Resetting the number of leaves
+   1. View the leave dates taken by the specified employee by adding a “dummy” leave, before deleting the added “dummy” leave. 
+   2. From the list of leaves taken by the employee, identify the **earliest** and **latest** leave date taken. 
+   <br> e.g. If an employee with employee ID “EID1234-5678” has a total of 3 leaves taken, 14-16 November 2023, **14 November 2023** and **16 November 2023** are the earliest and latest leave dates taken respectively. 
+   3. Use the `deleteleave` command to delete all the leave dates under the employee. 
+   <br> e.g. As per the above example, we would type `deleteleave id/EID1234-5678 from/2023-11-14 to/2023-11-16` into the command box. 
+   4. All the leaves will be deleted from the employee, and the employee’s number of leaves taken will be successfully reset to 0.
+
+2. Resetting overtime hours
+   1. View the number of overtime hours taken by the specified employee using the `report` command. 
+   2. Using the `overtime` command, subtract the overtime hours of the specified employee by the number of overtime hours already worked. 
+   <br> e.g. If the employee with employee ID “EID1234-5678” has worked 12 overtime hours, `overtime id/EID1234-5678 o/dec a/12` will successfully reset the employee’s overtime hours to 0.
 
 --------------------------------------------------------------------------------------------------------------------
 
