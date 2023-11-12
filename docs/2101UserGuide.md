@@ -216,7 +216,7 @@ Examples:
 <hr class="feature-class-separator">
 
 ### View commands
-In CCACommander, you can quickly change the view to fit your current use case, be it to check for attendance of an event, 
+In CCACommander, you can quickly change the view to fit your current use case, be it to check for the enrollment of an event, 
 filtering for a member and more!
 
 #### View Events of Member : `viewMember`
@@ -267,11 +267,12 @@ Here is an example command where we want to view the members that the event at i
     <figcaption>After executing the viewEvent command</figcaption>
 </figure>
 
-<div markdown="block" class="alert alert-primary">:bulb: </div>
+<div markdown="block" class="alert alert-primary">:bulb:
 It is strongly recommended that you list all members and events using the `list` command first to ensure you have a 
 full view of all members and events in CCACommander before carrying out the `viewMember` or `viewEvent` command. This 
 is because the `MEMBER_INDEX` in `viewMember` and `EVENT_INDEX` in `viewIndex` are based on the indexes in the currently 
 displayed list view.
+</div>
 
 <hr class="command-separator">
 
@@ -293,7 +294,7 @@ Here is an example command where we find all members with the names of Anthony a
 
 #### Find Event in event list : `findEvent`
 
-Similar to findMember, findEvent allows you to instantly find your event among your multiple events.
+Similar to `findMember`, `findEvent` allows you to instantly find your event among your multiple events.
 
 Here’s how you can use it:
 `findEvent EVENT_NAME [MORE_NAMES]`
@@ -302,14 +303,16 @@ Here is an example command where we find all events with the event name of Party
 
 `findEvent party`
 
-<div markdown="block" class="alert alert-info">:information_source: </div>
+<div markdown="block" class="alert alert-info">:information_source:
 The find commands require the names to be typed in full meaning Nich will not suffice for finding Nicholas. 
 To make it convenient for you, the names do not have to be capitalised! 
+</div>
 
-<div markdown="block" class="alert alert-primary">:bulb: </div>
+<div markdown="block" class="alert alert-primary">:bulb:
 The find commands are powerful tools to help you work faster. Want to view the attendance of Nicholas but you don’t 
 want to scroll the member list? Use the `findMember` then follow it with the `viewMember` command to achieve that. 
 This is applicable for both members and events!
+</div>
 
 <hr class="command-separator">
 
