@@ -91,7 +91,7 @@ Adds a patient or specialist to DoConnek Pro records.
 Format (for patients): `add -pa n/NAME p/PHONE e/EMAIL [t/TAG]...​ a/AGE [m/MEDICAL_HISTORY]...​` <br>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A patient can have any number of medical histories and tags (including 0)
+A patient can have any number of medical histories (including 0)
 </div>
 
 Format (for specialists): `add -sp n/NAME p/PHONE e/EMAIL [t/TAG]...​ l/LOCATION s/SPECIALISATION`
@@ -187,20 +187,15 @@ Format (for patients): `edit [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [a/AGE] 
 
 Format (for specialists): `edit [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [l/LOCATION] [s/SPECIALTY]`
 
-* When entering an `edit` command, at least one valid prefix must be present. 
-I.e. entering `edit` (without any prefixes) will result in an error message being displayed.
+* When entering an `edit` command, at least one valid parameter must be present. 
+i.e. entering `edit` (without any parameters) will result in an error message being displayed.
 * Only the patient or specialist in the view panel will be edited. Hence, when editing a specialist specific attribute
 while viewing a patient (or vice versa), an error message be displayed.
   * e.g. when a patient is present in the view panel, `edit s/Dentistry` will result in an error message being displayed as
-<<<<<<< HEAD
-  patients do not have the specialty attribute.
+  patients do not have the specialisation attribute.
 * For the `edit` command exclusively, in order to clear the content of optional attributes, the new values can be made empty.
     * e.g. `edit t/` (empty Tag attribute) will remove the tags of the patient or specialist being displayed in the view panel.
 * However, the new values of compulsory attributes for a patient or specialist cannot be empty.
-=======
-  patients do not have the specialisation attribute.
-* The new values of compulsory attributes for a patient or specialist cannot be empty.
->>>>>>> ab136c2d47433d717db0296b370ef9cccb8765bb
   * e.g. `edit s/` (empty Specialty attribute) will result in an error when trying to edit a specialist.
   * e.g. `edit n/` (empty Name attribute) will result in an error when trying to edit a patient or specialist.
 
