@@ -9,10 +9,10 @@ if () then ([invalid command])
     : Invalid command error message is shown;
 else ([else])
     if () then ([invalid member])
-        : Invalid Member error message is shown;
+        : Invalid Member Index error message is shown;
     else ([else])
         if () then ([invalid task])
-            : Invalid Task error message is shown;
+            : Invalid Task Index error message is shown;
         else ([else])
             :Task is added to member;
             :Success message is shown;
