@@ -129,7 +129,7 @@ application onto JobFindr.
 
 **Step 1**: Find the [Command Box](#user-interface) on JobFindr and type in `add c/Google r/Software Engineer` before
 pressing **Enter**.<br>
-<img src="images/user-guide/QuickTutorial1.png"  width="600">
+<img src="images/user-guide/QuickTutorial1.png" style="display: block; margin: auto;" width="700">
 
 * Learn more about the structure of a job application [here](#structure-of-a-job-application).
 
@@ -384,9 +384,14 @@ _Shows a list of all job applications in alphabetical order of the company name.
 **Format:** `list`
 
 **Successful Example:** <br>
-**Step 1:** Type `list` in the Command Box and press **Enter**.
-![ListCommandEg1](images/user-guide/ListCommandEg1.png)
-![ListCommandEg1](images/user-guide/ListCommandEg2.png)
+**Step 1:** Type `list` in the Command Box and press **Enter**.<br>
+<img src="images/user-guide/ListCommandEg1.png" style="display: block; margin: auto;" width="700">
+![ListCommandEg2](images/user-guide/ListCommandEg2.png)
+
+<div markdown="block" class="alert alert-success">
+**:bulb: Useful Tips:**<br>
+* You may navigate through the Job List Panel using the Up/Down arrow keys or use the scrollbar. 
+</div>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -394,72 +399,74 @@ _Shows a list of all job applications in alphabetical order of the company name.
 
 ### Adding an application : `add`
 
-Adds a job application to the list.
+_Adds a job application to the list._
 
 **Format:** `add c/COMPANY r/ROLE [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`
 
-**Examples:**
+<div markdown="block" class="alert alert-success">
+**:bulb: Useful Tips:**<br>
+* Only Company and Role are compulsory fields to enter an application.
+* Order of the fields can be changed.
+</div>
 
-***Successful Commands:***
+***Successful Example:***
 
-1. Adding a basic job application: `add c/Google r/Software Engineer`
+**Step 1:** Enter a basic job application into the Command Box and press **Enter:** `add c/Google r/Software Engineer`
 
-* This command adds a job application for the company "Google" with the role "Software Engineer."
+* This command adds a job application for the company **Google** with the role **Software Engineer**.
 * Optional fields like deadline, status, industry, and job type are not provided, so they will use their default values.
+  <img src="images/user-guide/AddCommandEg1.png" style="display: block; margin: auto;" width="600" alt="">
 
-2. Adding a complete job application with all
-   fields: `add c/Microsoft r/Project Manager d/Dec 31 2023 1400 i/Technology s/Pending t/FULL_TIME`
+**Step 2:** You will see a new [Job Card](#user-interface) added to the Job List Panel. Click on it and will see its Job
+Details Panel appear on the right side of the window.<br>
+![AddCommandEg2](images/user-guide/AddCommandEg2.png)
 
-* This command adds a job application for the company "Microsoft" with the role "Project Manager" and provides a
-  deadline, industry, status, and job type.
-
-***Failed Commands:***
+***Common Errors:***
 
 1. Missing required fields: `add r/Data Analyst`
 
-* This command is invalid because it doesn't provide the "c/COMPANY" field, which is required.
+* This command is invalid because it doesn't provide the `c/COMPANY` field, which is compulsory.
+
+![AddCommandEg3](images/user-guide/AddCommandEg3.png)
 
 2. Invalid Job Type: `add c/Apple r/Software Developer t/Part-Time`
 
-* This command is invalid because "t/Part-Time" is not a valid job type. It should be "t/PART_TIME."
+* This command is invalid because `t/Part-Time` is not a valid job type. It should be `t/PART_TIME`.
 
-**UI mockup:**
-![](images/user-guide/AddCommand.png)
-[&uarr; Back to Table of Contents](#table-of-contents)
-
+![AddCommandEg4](images/user-guide/AddCommandEg4.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Deleting an application : `delete`
 
-Deletes the specified application from the list.
+_Deletes the specified application from the list using the specified `INDEX`._
 
 **Format:** `delete INDEX`
 
-* Deletes the application to the company at the specified `INDEX`.
+<div markdown="block" class="alert alert-success">
+**:bulb: Useful Tips:**<br>
+* Try using ths list command to display all job applications before deleting an application.
+</div>
 
-**Examples:**
+**Successful Examples:**
 
-* `list`
-* followed by `delete 2`
+**Step 1:** Enter the [list command](#listing-all-applications--list) to list all the available job applications.
 
-  Deletes the 2nd application in the list.
-
-**UI mockup:**
-![](images/user-guide/DeleteCommand.png)
-
-***Successful Commands:***
-
-1. Deleting a job application: `delete 2`
+**Step 2:** Locate the index of the job application you want to delete.<br> Let's try `delete 2`
 
 * This command deletes the job application at the 2nd index in the list.
 * This is provided that this job application indeed exists.
+  ![DeleteCommandEg1](images/user-guide/DeleteCommandEg1.png)
 
-***Failed Commands:***
+**Step 3:** Press **enter** to execute the command. Now you will see the 2nd application removed from the list of jobs.
+![DeleteCommandEg2](images/user-guide/DeleteCommandEg2.png)
 
-1. Invalid job index: `delete 5` when there is no job application at index 5.
+***Common Errors:***
 
-* This command is invalid because 5 is not a valid job index.
+1. Invalid job index: `delete 10` when there is no job application at index 10.
+
+* This command is invalid because 10 is not a valid job index.
+  ![DeleteCommandEg3](images/user-guide/DeleteCommandEg3.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -467,41 +474,60 @@ Deletes the specified application from the list.
 
 ### Editing an application : `edit`
 
-Edits an application in the list.
+_Edits the application to the company at the specified `INDEX`_
 
 **Format:** `edit INDEX [c/COMPANY] [r/ROLE] [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`
 
-* Edits the application to the company at the specified `INDEX`.
-* At least one of the optional fields must be provided.
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Warning:**<br>
+* A valid index must be provided.
+* At least one of the fields must be provided.
+</div>
 
-**Examples:**
+***Successful Examples:***
 
-***Successful Commands:***
+***Editing One Field***
 
-1. Editing the role of a job application: `edit 1 r/Marketing Manager`
+**Step 1:** Now you realised you have seen the job listing wrongly and wish to change the role of the job complication
+to `Google`. Type `edit 8 r/Test Engineer`
 
-* This command edits the role of the first job application to "Marketing Manager."
+* This command edits the role of the `Google` application to `Test Engineer`
 
-2. Editing multiple fields of a job application: `edit 2 c/Amazon r/Product Manager d/Dec 15 2023 1000 s/APPROVED`
+![EditCommandEg1](images/user-guide/EditCommandEg1.png)
+
+**Step 2:** Press **enter** and you will see the newly updated Job Card for the role field at `Google`.<br>
+<img src="images/user-guide/EditCommandEg2.png"  width="300">
+
+***Editing Multiple Fields***
+
+**Step 1:** Trying editing multiple fields for a job application with one command.
+Type `edit 2 c/Amazon r/Product Manager d/Dec 15 2023 1000 s/APPROVED`
 
 * This command edits the company, role, deadline, and status of the second job application.
 
-***Failed Commands:***
+![EditCommandEg3](images/user-guide/EditCommandEg3.png)
+
+**Step 2:** Press **enter** and you will see the 2nd Job Card in the list being updated.<br>
+<img src="images/user-guide/EditCommandEg4.png"  width="300">
+
+***Common Errors:***
 
 1. Missing index: `edit c/Google r/Software Engineer`
 
 * This command is invalid because it doesn't specify the index of the job application to edit.
 
+![EditCommandEg5](images/user-guide/EditCommandEg5.png)
+
 2. Invalid field: `edit 3 q/Designer`
 
-* This command is invalid because "q/Designer" is not a valid field. It should be "r/Designer."
+* This command is invalid because `q/Designer` is not a valid field. It should be `r/Designer`.
+
+![EditCommandEg6](images/user-guide/EditCommandEg6.png)
 
 3. Invalid Job Type: `edit 4 t/Part-Time`
 
 * This command is invalid because "t/Part-Time" is not a valid job type. It should be "t/PART_TIME."
 
-**UI mockup:**
-![](images/user-guide/EditCommand.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
