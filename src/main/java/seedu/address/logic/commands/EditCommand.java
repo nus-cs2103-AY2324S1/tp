@@ -17,7 +17,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -68,6 +70,8 @@ public class EditCommand extends Command {
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -110,16 +114,14 @@ public class EditCommand extends Command {
         }
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            logger.info("[EditCommand.execute()]: Editing would result in duplicate persons");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } else if (editPersonDescriptor.getEditSchedule() && model.hasDate(editedPerson)) {
+            logger.info("[EditCommand.execute()]: Editing would result in clashing schedules");
             throw new CommandException(MESSAGE_DUPLICATE_DATE);
         }
 
-        if (editPersonDescriptor.getEditSchedule()) {
-            model.setPerson(personToEdit, editedPerson, true);
-        } else {
-            model.setPerson(personToEdit, editedPerson, false);
-        }
+        model.setPerson(personToEdit, editedPerson, editPersonDescriptor.getEditSchedule());
         model.purgeAddressBook();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();

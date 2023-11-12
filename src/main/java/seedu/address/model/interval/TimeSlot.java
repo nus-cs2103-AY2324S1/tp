@@ -1,5 +1,7 @@
 package seedu.address.model.interval;
 
+import seedu.address.commons.core.LogsCenter;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.text.ParseException;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -16,6 +19,7 @@ import java.util.stream.Collectors;
 public class TimeSlot {
     private Date start;
     private Date end;
+    private static final Logger logger = LogsCenter.getLogger(TimeSlot.class);
 
     /**
      * Constructor for TimeSlot
@@ -92,12 +96,14 @@ public class TimeSlot {
      */
     public static String printResults(List<TimeSlot> timeslots) {
         if (timeslots.size() == 0) {
+            logger.info("[TimeSlot.printResults]: No timeslots are found");
             return "There are no available timeslots.";
         }
 
         String result = "";
 
         for (TimeSlot timeslot : timeslots) {
+            logger.info("[TimeSlot.printResults]: Timeslots found");
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
             String startTime = timeFormat.format(timeslot.getStart());
             String endTime = timeFormat.format(timeslot.getEnd());
