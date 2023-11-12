@@ -445,7 +445,8 @@ inconvenient. This would be similar for the other optional fields in member and 
 **Proposed Solution:**
 
 We propose to enhance the `editMember`, `editEvent` and `editEnrolment` commands to give the user the flexibility to remove
-any unwanted values from the optional fields in member/event/enrolment.
+any unwanted values from the optional fields in member/event/enrolment. For instance, to remove the value from an optional field,
+the user can provide an empty prefix e.g. if the user wishes to remove the phone number from the first member, they can do `editMember 1 p/`.
 
 ### Make UI stay on current view upon editMember or editEvent
 **Current Implementation:**
