@@ -28,6 +28,7 @@
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
   * [Overview]({{ baseUrl }}/UserGuide.html#overview)  
+  * [How to use our User Guide]({{ baseUrl }}/UserGuide.html#how-to-use-our-user-guide)  
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
   * [GUI Overview]({{ baseUrl }}/UserGuide.html#gui-overview)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
