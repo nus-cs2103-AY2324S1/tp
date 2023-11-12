@@ -613,20 +613,27 @@ other important events.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                               | So that I can…​                                                        |
-|----------|--------------------|------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | university student | see usage instructions                                     | refer to instructions when I forget how to use the App                 |
-| `* * *`  | university student | add a new person                                           | keep my address book up to date                                        |
-| `* * *`  | university student | include optional fields when adding contacts               | include comprehensive and personalized information for each contact    |
-| `* * *`  | university student | delete a person                                            | remove contacts that I no longer need                                  |
-| `* * *`  | university student | find a person by name                                      | locate details of persons without having to go through the entire list |
-| `* * *`  | university student | edit a person details                                      | reflect any contact changes accordingly                                |   
-| `* * *`  | university student | create an event                                            | schedule and keep track of important commitments                       |
-| `* * *`  | university student | edit an event                                              | modify event details like the date, time, or location                  |
-| `* * *`  | university student | delete an event                                            | remove events that are canceled or no longer relevant                  |
-| `* * *`  | university student | view all upcoming events on a separate event column in the GUI | simultaneously view contact details and event details                  |
-| `* *`    | university student | be reminded on events and birthdays                        | so that i can remember upcoming social activities                      |
-| `* *`    | university student | assign contacts to groups                                  | i can easily identify who is involved in specific events               |
+| Priority | As a …​            | I want to …​                                                   | So that I can…​                                                                |
+|----------|--------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *`  | university student | see usage instructions                                         | refer to instructions when I forget how to use the App                         |
+| `* * *`  | university student | add a new person                                               | keep my address book up to date                                                |
+| `* * *`  | university student | include optional fields when adding contacts                   | include comprehensive and personalized information for each contact            |
+| `* * *`  | university student | assign contacts to groups                                      | efficiently organise my contacts by grouping them together                     |
+| `* * *`  | university student | delete a person                                                | remove contacts that I no longer need                                          |
+| `* * *`  | university student | find a person by name                                          | locate details of persons by name without having to go through the entire list |
+| `* * *`  | university student | find a person by group                                         | locate details of persons based on which group the person is in                |
+| `* * *`  | university student | find an event by event name                                    | locate details of an event without having to go through the entire list        |
+| `* * *`  | university student | find an event by people or groups attending                    | locate details of an event based on the people or groups attending             |
+| `* * *`  | university student | find contacts and events at the same time                      | quickly search for contacts and events that are related to each other          | 
+| `* * *`  | university student | edit a person details                                          | reflect any contact changes accordingly                                        |   
+| `* * *`  | university student | create an event                                                | schedule and keep track of important commitments                               |
+| `* * *`  | university student | include optional fields when adding events                     | include comprehensive and personalized information for each event              |
+| `* * *`  | university student | assign contacts to events                                      | keep track of who is attending an event                                        |
+| `* * *`  | university student | edit an event details                                          | modify event details if the details of event has changed                       |
+| `* * *`  | university student | delete an event                                                | remove events that are canceled or no longer relevant                          |
+| `* * *`  | university student | view all upcoming events on a separate event column in the GUI | simultaneously view contact details and event details                          |
+| `* * *`  | university student | be reminded on events and birthdays                            | so that i can remember upcoming social activities                              |
+
 
 
 
