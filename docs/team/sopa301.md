@@ -44,6 +44,7 @@ Given below are my contributions to the project.
 * **Contributions to team-based tasks**:
   * Maintained issue tracker.
   * Released product for `v1.1` and `v1.3.trial`.
+  * Contributed to `Instructions for Manual Testing` in DG.
   * Refactored `AddCommandParser` and `EditCommandParser` for better SLAP.
   [#258](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/258)
 
