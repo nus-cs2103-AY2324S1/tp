@@ -1326,6 +1326,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Allow users to add applicants whose names include non-alphanumeric characters such as hyphens `-` and slashes `/`.
 2. Provide an error message to the user if the selected CSV file for the `import` command does not contain the correct headers as specified.
+3. Allow for filtering by email without providing a proper domain. This will be done by removing the type checking when entering an email into the `filter` command.
+4. Provide an error message if `s/` in `filter` receives an invalid input, such as `p` or `2`.
 
 --------------------------------------------------------------------------------------------------------------------
 
