@@ -55,8 +55,7 @@ Given below are my contributions to the project.
           * Allowing one fosterer to care for more than one animal
           * Case-sensitivity of inputs
           * Allowing symbols in name
-  * Pull requests: [#24](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/24), [#51](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/51), [#80](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/80), [#139](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/139)
-  
+  * Pull requests: [#24](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/24), [#51](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/51), [#80](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/80), [#139](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/139), [#148](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/148)
 
 
 * **Project management**:
