@@ -30,15 +30,39 @@ class BalanceTest {
     }
 
     @Test
-    void isWithinLimits_inputBalanceWithinLimits_returnTrue() {
+    void isWithinBalanceLimit_inputBalanceWithinLimits_returnTrue() {
         assertTrue(Balance.isWithinBalanceLimit(0));
         assertTrue(Balance.isWithinBalanceLimit(Balance.MAX_VALUE));
         assertTrue(Balance.isWithinBalanceLimit(Balance.MIN_VALUE));
     }
     @Test
-    void isWithinLimits_inputBalanceExceedLimits_returnFalse() {
+    void isWithinBalanceLimit_inputBalanceExceedLimits_returnFalse() {
         assertFalse(Balance.isWithinBalanceLimit(Balance.MAX_VALUE + 1));
         assertFalse(Balance.isWithinBalanceLimit(Balance.MIN_VALUE - 1));
+    }
+
+    @Test
+    public void isWithinTransactionLimit_validAmounts_returnsTrue() {
+        // Equal to limit
+        assertTrue(Balance.isWithinTransactionLimit(Balance.TRANSACTION_LIMIT));
+
+        // Less than limit
+        assertTrue(Balance.isWithinTransactionLimit(Balance.TRANSACTION_LIMIT - 1));
+
+        // Negative amount equal to limit
+        assertTrue(Balance.isWithinTransactionLimit(-Balance.TRANSACTION_LIMIT));
+
+        // Negative amount less than limit
+        assertTrue(Balance.isWithinTransactionLimit(-Balance.TRANSACTION_LIMIT + 1));
+    }
+
+    @Test
+    public void isWithinTransactionLimit_invalidAmounts_returnsFalse() {
+        // More than limit
+        assertFalse(Balance.isWithinTransactionLimit(Balance.TRANSACTION_LIMIT + 1));
+
+        // Negative amount more than limit
+        assertFalse(Balance.isWithinTransactionLimit(-Balance.TRANSACTION_LIMIT - 1));
     }
 
     @Test
