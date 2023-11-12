@@ -60,6 +60,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getDay().orElse(null) + ", day="
+                + editPersonDescriptor.getBegin().orElse(null) + ", begin="
+                + editPersonDescriptor.getEnd().orElse(null) + ", end="
                 + editPersonDescriptor.getAddress().orElse(null) + ", paid="
                 + editPersonDescriptor.getPaid().orElse(null) + ", payrate="
                 + editPersonDescriptor.getPayRate().orElse(null) + ", editSchedule="

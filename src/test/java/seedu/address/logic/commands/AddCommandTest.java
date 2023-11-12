@@ -50,6 +50,20 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_clashingDates_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        Person clashingSchedule = new PersonBuilder().withDay(validPerson.getDay().toString())
+                .withName(ALICE.getName().toString())
+                .withBegin(validPerson.getBegin().toString())
+                .withEnd(validPerson.getEnd().toString())
+                .build();
+        AddCommand addCommand = new AddCommand(clashingSchedule);
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_DATE, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void execute_beginBeforeEnd_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
 
@@ -124,6 +138,12 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public boolean hasDate(Person person) {
+            requireNonNull(person);
+            return this.person.isSameDate(person);
         }
     }
 
