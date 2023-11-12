@@ -125,7 +125,9 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the event book data i.e., all `Event` objects (which are contained in a `UniqueEventList`)
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Event` objects as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Event>`
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -145,8 +147,8 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save address book data, event book data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `EventBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -181,13 +183,13 @@ When executed, `LinkedInCommand` and `GithubCommand` append the username of the 
 
 Given below is an example usage scenario and how the linkedin and github feature behaves at each step.
 
-Step 1. The user launches the application. `JABPro` will be initialized with the current saved state
+**Step 1.** The user launches the application. `JABPro` will be initialized with the current saved state
 
 User should see the UI as shown below.
 
 ![Ui](images/Ui.png)
 
-Step 2. The user wants to add the LinkedIn username to the first person in the list. The user enters the command `addL 1 u/alexyeoh` to add the username to the candidate's existing details.
+**Step 2.** The user wants to add the LinkedIn username to the first person in the list. The user enters the command `addL 1 u/alexyeoh` to add the username to the candidate's existing details.
 
 The following sequence diagram shows how the AddL and AddG operations work:
 
@@ -198,14 +200,14 @@ User should see the UI as shown below after entering `addL 1 u/alexyeoh`
 
 ![AddL](images/addLState.png)
 
-Step 3. The user can then view the linkedin profile for the candidate at index 1. The user enters the command `linkedin 1`.
+**Step 3.** The user can then view the linkedin profile for the candidate at index 1. The user enters the command `linkedin 1`.
 
 User should see the UI asa shown below after entering `linkedin 1`
 
 ![LinkedIn](images/linkedinState.png)
 
 
-Alternatives considered
+#### Alternatives considered ####
 
 Alternative 1 (Chosen): 
 
@@ -333,6 +335,83 @@ Step 3. The user should see the UI below upon entering `search n/john st/intervi
 
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
+
+## Events feature
+
+#### Implementation
+
+The Events feature extends the original ideas of the `AddressBook` to store two types of entities - Candidates and Events associated with candidates.
+
+It consists of two parts - adding the events to JABPro, and viewing the events.
+
+THe addition is performed by the `EventCommand` class. It extends `Command` and overrides the `execute()` method to add the event to JABPro.
+
+It involves the `EventCommand` class and its corresponding parser, `EventCommandParser`, that takes in the user input and returns an `EventCommand` object.
+
+When executed, `EventCommand` finds the person the event is associated with, and adds the name of the person, and other details such as description and start and end time, as input by the user. The existing `EventBook` is then updated to reflect this addition, and a `CommandResult` object is returned.
+
+The viewing is performed by the `ScheduleCommand`. It extends `Command` and overrides the `execute()` method to open the `Events Window` and display the events.
+
+<box type="info" seamless>
+
+**Note:** There is another way of viewing events, that is through the `Events` tab. Refer to the [UserGuide](UserGuide.md#viewing-events-schedule) for more information.
+
+
+</box>
+
+Given below is an example usage scenario highlighting how the `Events` feature behaves at each step.
+
+**Step 1.** The user launches the application. The `EventBook` will be initialized with the current saved event book state.
+
+User should see the UI as shown below.
+
+![Ui](images/Ui.png)
+
+**Step 2.** The user wishes to add an "Interview" event for the first candidate in the list. The user enters the following command:
+
+`event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+
+This command adds a new event to the `EventBook` that is associated with the first person in the list, with the description as "Interview" and the start and end time as specified.
+
+<box type="info" seamless>
+
+**Note:** The start and end times are required to follow a specific format. Refer to the [UserGuide](UserGuide.md#adding-an-event-event) for more information.
+
+</box>
+
+The following sequence diagram shows how the `Event` operation works:
+
+<puml src="diagrams/EventSequenceDiagram.puml" altText="EventSequenceDiagram"></puml>
+
+User should see the UI as shown below after executing the aforementioned command [It is assumed that the first candidate in the list is Alex Yeoh].
+
+![Event](images/event.png)
+
+![EventWindow](images/eventwindow.png)
+
+#### Alternatives considered ####
+
+***Duplicate Events***
+
+Alternative 1 (chosen):
+
+`Events` associated with the same `Person`, having the same description are allowed. It is upto the user to input more detailed descriptions to differentiate between them, and to promote readability.
+
+Pros: It makes the `EventBook` a complete product of the user's choice as no restrictions are imposed, and the user can enter data as per their preferences and their convenience.
+
+Cons: It might lead to confusion if multiple events of the same person, having the same description are added. Hence, it is recommended that the user enters detailed descriptions to distinguish events from one another.
+
+Alternative 2:
+
+`Events` associated with the same `Person`, having the same description are considered duplicate `Events` and hence, are rejected by the system.
+
+Pros: It prevents redundant data from being stored and accidental addition of multiple events of the same type for the same person
+
+Cons: It restricts users from entering data that might be understandable or convenient for them. [For example: If the user creates two Events with the description "Interview" for the same person, they might have a distinct idea of what each of those Events mean, but the system prevents them for making this addition].
+
+
+
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -485,6 +564,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `  | Hiring Manager   | collate job applicants who were offered the job and accepted it as well as deleting their details from JABPro                 | I can send this data to the HR department that manages existing employees                                |
 | `* * `  | Hiring Manager   | collate job applicants who were offered the job but rejected it                                                               | I can contact them to ask why they rejected the offer and get feedback                                   |
 | `* * `  | Hiring Manager   | add candidates key features into a multi-formatted form                                                                       | I can have a visual way to objectively view a candidates skills and information                          |
+| `* *` | Hiring Manager | view a schedule/summary of events relating to the candidates | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
 | `*` | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers                   | I can have a summary overview without going into each candidate data specifically                        |
 | `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles           |
 | `*` | Hiring Manager   | get data on which positions already have too many applicants                                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it |

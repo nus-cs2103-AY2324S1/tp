@@ -2,23 +2,23 @@
   "events" : [ {
     "name" : "Alice Pauline",
     "description" : "Interview",
-    "startTime" : "08-11-2023 12:00",
-    "endTime" : "09-11-2023 12:00"
+    "startTime" : "2023-11-08 12:00",
+    "endTime" : "2023-11-09 12:00"
   }, {
     "name" : "Benson Meier",
     "description" : "Round 1 Test",
-    "startTime" : "08-11-2023 12:00",
-    "endTime" : "09-11-2023 12:00"
+    "startTime" : "2023-11-08 12:00",
+    "endTime" : "2023-11-09 12:00"
   }, {
     "name" : "Carl Kurz",
     "description" : "Round 2 Test",
-    "startTime" : "08-11-2023 12:00",
-    "endTime" : "09-11-2023 12:00"
+    "startTime" : "2023-11-08 12:00",
+    "endTime" : "2023-11-09 12:00"
   }, {
     "name" : "Daniel Meier",
     "description" : "Round 3 Test",
-    "startTime" : "08-11-2023 12:00",
-    "endTime" : "09-11-2023 12:00"
+    "startTime" : "2023-11-08 12:00",
+    "endTime" : "2023-11-09 12:00"
   } ]
 }
 
