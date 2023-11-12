@@ -42,8 +42,6 @@ public class AddTransactionCommand extends Command {
             + PREFIX_STAFF + "1";
 
     public static final String MESSAGE_SUCCESS = "New transaction added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TRANSACTION = "This transaction already exists in the transaction book.";
-
     private final TransactionType transactionType;
     private final Description description;
     private final Amount amount;
