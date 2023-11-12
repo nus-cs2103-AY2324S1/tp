@@ -29,7 +29,6 @@ public class DeletePersonCommand extends Command {
             + "Usage 2: " + COMMAND_WORD + " [LIST INDEX OF CONTACT] [FIELD PREFIX]\n"
             + "Example: " + COMMAND_WORD + " 1 /priority\n"
             + "If the field can have multiple values, /index must be used to specify index of the entry to delete."
-            + "If /index is not specified, defaults to 1.\n"
             + "Example: " + COMMAND_WORD + " 1 /email /index 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Noted, deleted contact:\n%1$s";
