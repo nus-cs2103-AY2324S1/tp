@@ -88,10 +88,10 @@ in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/
 
 The UI component,
 
-- executes user commands using the `Logic` component.
-- listens for changes to `Model` data so that the UI can be updated with the modified data.
-- keeps a reference to the `Logic` component, because the UI relies on the Logic to execute commands.
-- depends on some classes in the `Model` component, as it displays Person object residing in the Model.
+* Executes user commands using the `Logic` component.
+* Listens for changes to `Model` data so that the UI can be updated with the modified data.
+* Keeps a reference to the `Logic` component, because the UI relies on the Logic to execute commands.
+* Depends on some classes in the `Model` component, as it displays `Job` objects residing in the Model.
 
 **Component Structure:**
 
@@ -106,6 +106,37 @@ etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` c
 between classes that represent parts of the visible GUI.
 
 ### Logic Component
+
+**API:**
+[`Logic.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/logic/Logic.java)
+
+**Description:**
+
+The `Logic` component is responsible for handling the execution of commands so that the application book can be updated
+according to the user's instructions.
+
+**Functionality and Component Structure:**
+
+The following is a partial class diagram of the `Logic` component:
+
+<img src="/Users/jeremy/Documents/Y2S1/CS2103/tp/tp/docs/images/developer-guide/LogicClassDiagram.png" width="900"/>
+
+The following depicts the sequence of interactions within the `Logic` component taking `execute("delete 1")` API call as
+an example:
+
+<img src="/Users/jeremy/Documents/Y2S1/CS2103/tp/tp/docs/images/developer-guide/LogicSequenceDiagram.png" />
+
+The Logic component,
+
+* Reads the user input with the `ApplicationBookParser` class and creates a parser which matches the command
+  (e.g. `DeleteCommandParser`) and uses it to parse the command.
+* This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteCommand`) which is
+  executed by the `LogicManager`.
+* The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+* After making changes to the `Model`, the `Storage` is updated to reflect these changes.
+* The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+For more details about the parsing and command execution processes, refer to "[Implementation](#implementation)".
 
 ### Model Component
 
