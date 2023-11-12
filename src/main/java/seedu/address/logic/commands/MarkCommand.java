@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -21,14 +22,14 @@ public class MarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_MARK_INTERVIEW_SUCCESS = "Marked Interview: %s as done.";
     public static final String MESSAGE_ALREADY_DONE = "Interview: %s is already done.";
-    private final Index targetIndex;
+    private final Index index;
 
     /**
      * @param targetIndex of the applicant in the filtered applicant list to edit
      */
-    public MarkCommand(Index targetIndex) {
-        requireNonNull(targetIndex);
-        this.targetIndex = targetIndex;
+    public MarkCommand(Index index) {
+        requireNonNull(index);
+        this.index = index;
     }
 
     @Override
@@ -36,11 +37,11 @@ public class MarkCommand extends Command {
         requireNonNull(model);
         List<Interview> lastShownList = model.getFilteredInterviewList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INTERVIEW_DISPLAYED_INDEX);
         }
 
-        Interview interviewToMark = lastShownList.get(targetIndex.getZeroBased());
+        Interview interviewToMark = lastShownList.get(index.getZeroBased());
 
         if (interviewToMark.isDone()) {
             throw new CommandException(String.format(MESSAGE_ALREADY_DONE,
@@ -58,5 +59,28 @@ public class MarkCommand extends Command {
         model.setInterview(interviewToMark, markedInterview);
         return new CommandResult(
                 String.format(MESSAGE_MARK_INTERVIEW_SUCCESS, Messages.formatInterview(interviewToMark)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof MarkCommand)) {
+            return false;
+        }
+
+        MarkCommand otherMarkCommand = (MarkCommand) other;
+
+        return index.equals(otherMarkCommand.index);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .toString();
     }
 }
