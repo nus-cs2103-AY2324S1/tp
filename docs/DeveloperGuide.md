@@ -280,16 +280,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAManager` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a TA**
 
 **MSS**
 
 1.  User requests to list TAs
-2.  AddressBook shows a list of TAs
+2.  TAManager shows a list of TAs
 3.  User requests to delete a specific TA in the list
-4.  AddressBook deletes the TA
+4.  TAManager deletes the TA
 
     Use case ends.
 
@@ -301,18 +301,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TAManager shows an error message.
 
       Use case resumes at step 2.
+
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: Update Contact Information**
 
 **MSS**
 
 1.  User requests to list TAs
-2.  AddressBook shows a list of TAs
+2.  TAManager shows a list of TAs
 3.  User requests to update the contact of a specific TA in the list and key in the necessary information
-4.  AddressBook updates the contact information of that TA
+4.  TAManager updates the contact information of that TA
 
     Use case ends.
 
@@ -324,21 +326,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TAManager shows an error message.
 
       Use case resumes at step 2.
 * 3b. The given contact information is invalid.
-  * 3b1. AddressBook shows an error message.
+  * 3b1. TAManager shows an error message.
+  
     Use case resumes at step 2.
+
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: View TAs of specific course**
 
 **MSS**
 
 1.  User requests to list courses
-2.  AddressBook shows a list of courses
+2.  TAManager shows a list of courses
 3.  User requests to show TAs of a specific course
-4.  AddressBook shows a list of TAs of specific course
+4.  TAManager shows a list of TAs of specific course
 
     Use case ends.
 
@@ -350,11 +355,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given course is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TAManager shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+--------------------------------------------------------------------------------------------------------------------
+
+**Use case: Update Availability**
+
+**MSS**
+
+1.  User requests to list TAs
+2. TAManager shows a list of TAs
+3. User requests to update the availability of a specific TA in the list and key in the necessary information
+4. TAManager updates the availability of that TA
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TAManager shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3b. The given availability is invalid.
+  * 3b1. TAManager shows an error message.
+  
+    Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
@@ -370,7 +403,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Course**: A program students are enrolled in to work towards a degree
 * **Teaching Assistant (TA)**: Students who support the teaching of a course
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Availability**: The time slots a TA is available for teaching (e.g. 9am-12pm on Monday, 2pm-5pm on Tuesday)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -389,16 +422,22 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Saving teaching course preferences
+
+   1. Type `teach t/cs2103t` in the command box and press Enter.<br>
+      Expected: The default teaching course is set to `cs2103t`.
+
+   2. Close the window and re-launch the app.<br>
+      Expected: The default teaching course remains as `cs2103t` and list of TAs only contains those teaching CS2103T.
 
 ### Deleting a person
 
@@ -406,21 +445,26 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Modify `addressbook.json` file to corrupt the data inside (e.g. remove a closing brace).<br>
+      Expected: App starts up with an empty address book.
+   
+   2. Modify `courses.json` file to corrupt the data inside (e.g. remove a closing brace).<br>
+      Expected: App starts up with an empty address book.
 
-1. _{ more test cases …​ }_
+2. Restarting with clean data files
+
+   1. Delete `addressbook.json` and `courses.json` files.<br>
+      Expected: New json files are created with sample data.
