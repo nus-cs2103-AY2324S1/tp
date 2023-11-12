@@ -3,20 +3,26 @@ layout: page
 title: User Guide
 ---
 
+![HouR](images/ug-pics/HouR.png)
+## Welcome to HouR
+
 HouR is a **desktop app for managing employee records, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HouR can get your HR management tasks done faster than traditional GUI apps.
+
+If you are new here, visit our [quick start](#quick-start) guide to onboard onto HouR smoothly!
 
 <div style="page-break-after: always;"></div>
 
 ## Table of Contents
 
 - [Quick Start](#quick-start)
+- [Navigating the GUI](#navigating-the-graphical-user-interface--gui-)
 - [Features](#features)
     - [Viewing Help](#viewing-help--help): `help`
     - [Adding an employee](#adding-an-employee-add): `add`
     - [Deleting an employee](#deleting-an-employee--delete): `delete`
     - [Editing an employee](#editing-an-employee--edit): `edit`
     - [Listing all employees](#listing-all-employees--list): `list`
-    - [Locating employees](#locating-employees-find): `find`
+    - [Locating employees](#finding-employees--find): `find`
     - [Sorting employees](#sorting-all-employees--sort): `sort`
     - [Adding a leave period](#adding-a-leave-period-of-an-employee-addleave): `addleave`
     - [Deleting a leave period](#deleting-a-leave-period-of-an-employee-deleteleave): `deleteleave`
@@ -90,6 +96,24 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 6. Refer to the [Features](#features) below for details of each command
 
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Navigating the Graphical User Interface (GUI)
+
+HouR comes with a GUI to allow for nice visual feedback for our users. Here is a quick run-through of the different sections of our GUI, as well as some notes regarding the use of the GUI.
+
+### Quick Orientation
+
+![Quick Orientation](images/ug-pics/quickOrientation.png)
+
+### Employee Card
+
+![Employee Card](images/ug-pics/employeeCard.png)
+
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -131,16 +155,21 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 
 * All command words are **case-sensitive** (i.e. `add` is valid and `ADD` is invalid)
 
-* Date parameters should be in the form of `yyyy-MM-dd`, for example `2023-10-31`
+* Date parameters should be in the form of `yyyy-MM-dd`.<br>
+  e.g. `2023-10-31` is a valid date parameter
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * For all commands except for `find`, `sort` and `listleave`, the entire employee list will be called after the command is executed **successfully**.<br>
-  e.g. if the employee list was previously filtered through the `find` or `listleave` command, the employee list panel will change to show the entire employee list.
+  e.g. if the employee list was previously filtered through the `find` or `listleave` command, the employee list panel will change to show the entire employee list once another command (excluding `find`, `sort` or `listleave`) is run successfully.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+## General Commands
+
+This section contains commands that are not related to any specific feature in HouR.
 
 ### Viewing help : `help`
 
@@ -157,6 +186,24 @@ For Windows users, you can use keyboard shortcut **F1** to open up the help wind
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Note that if you are running HouR on another monitor, the help window defaults to the centre of the primary monitor.
 </div>
+
+### Clearing all entries : `clear`
+
+Clears all entries from the employee book.
+
+Format: `clear`
+
+![clear](images/ug-pics/clear.png)
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+## Employee Commands
+
+This section contains commands relating to the employee list and/or its employees.
 
 ### Adding an employee: `add`
 
@@ -226,7 +273,7 @@ Format: `list`
 
 ![list success](images/ug-pics/list.png)
 
-### Locating employees: `find`
+### Finding employees: `find`
 
 Finds employees whose name, position, department, phone number, email, or ID contain any of the given keywords.
 
@@ -267,6 +314,10 @@ Examples:
 * `sort f/blah in/desc` is invalid because field `blah` is not one of the 4 mentioned values.
 
 ![sort failure](images/ug-pics/sortFailure.png)
+
+## Employee Metrics Commands
+
+You can use the following commands to keep track of and gauge employee performance.
 
 ### Adding a leave period of an employee: `addleave`
 
@@ -512,19 +563,9 @@ Examples:
 
 ![reset failure](images/ug-pics/resetFailure.png)
 
-### Clearing all entries : `clear`
+## Miscellaneous Features
 
-Clears all entries from the employee book.
-
-Format: `clear`
-
-![clear](images/ug-pics/clear.png)
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
+The following are miscellaneous features available to users.
 
 ### Saving the data
 
@@ -534,9 +575,11 @@ HouR data are saved in the hard disk automatically after any command that change
 
 HouR data are saved automatically as a JSON file `[JAR file location]/data/hour.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, HouR will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning to all users:**
+DO NOT modify data directly as it might result in the malfunction of the application.If your changes to the data file makes its format invalid, HouR will discard all data and start with an empty data file at the next run. We recommend that users download a backup of the file before editing it.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -601,6 +644,8 @@ For Mac users, you may wish to follow the instructions listed [here](https://nus
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -619,9 +664,38 @@ For Mac users, you may wish to follow the instructions listed [here](https://nus
 | **ListLeave**    | `listleave on/DATE` <br/> e.g., `listleave on/2023-11-30`                                                                                                                                  |
 | **Overtime**     | `overtime id/EMPLOYEE_ID o/OPERATION a/AMOUNT` <br/> e.g., `overtime id/EID1234-5678 o/inc a/10`                                                                                           |
 | **AddRemark**    | `addremark id/EMPLOYEE_ID r/REMARK` <br/> e.g., `addremark id/EID1234-5678 r/Good worker`                                                                                                  |
-| **DeleteRemark** | `deleteremark id/EMPLOYEE_ID r/REMARK` <br/> e.g., `addremark id/EID1234-5678 r/Good worker`                                                                                               |
+| **DeleteRemark** | `deleteremark id/EMPLOYEE_ID r/REMARK` <br/> e.g., `deleteremark id/EID1234-5678 r/Good worker`                                                                                            |
 | **Report**       | `report EMPLOYEE_ID` <br/> e.g., `report EID1234-5678`                                                                                                                                     |
 | **Reset**        | `reset f/FIELD` <br/> e.g., `reset f/overtime`                                                                                                                                             |
 | **Help**         | `help`                                                                                                                                                                                     |
 | **Clear**        | `clear`                                                                                                                                                                                    |
 | **Exit**         | `exit`                                                                                                                                                                                     |
+
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Parameter information
+
+The table below provides information on the usage of the allowed parameters in HouR. Do note that the examples given are not exhaustive
+
+| Parameter, Description                                        | Case sensitive | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Valid Examples                                                                             | Invalid Examples                                         |
+|---------------------------------------------------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| **n/NAME** <br/> Name of the employee                         | Yes            | Alphanumeric characters (a to z, A to Z, 0 to 9)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | `John Doe`, `Elizabeth 2`                                                                  | `A.P.J. Abdul Kalam`, <br/> `Jane Doe-Smith`             |
+| **pos/POSITION** <br/> Position of the employee               | Yes            | Alphanumeric characters (a to z, A to Z, 0 to 9)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | `Senior Manager`, `CEO`                                                                    | `Chief Financial Officer (CFO)`                          |
+| **id/EMPLOYEE_ID** <br/> ID of the employee                   | Yes            | Prefix EID followed by 4 digits separated by a hyphen followed by 4 more digits                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | `EID1234-5678`, <br/> `EID2023-1010`                                                       | `1234-5678`, <br/> `eid1234-5678`, `EID12345678`         |
+| **p/PHONE** <br/> Phone number of the employee                | NA             | 8 numeric characters (0 to 9), begins with 8 or 9, following IMDA’s [National Numbering Plan](https://www.imda.gov.sg/regulations-and-licensing-listing/numbering/national-numbering-plan-and-allocation-process)                                                                                                                                                                                                                                                                                                                                                            | `90005000`, <br/> `85852023`                                                               | `12345678`, `999`, <br/> `6001567a`                      |
+| **e/EMAIL** <br/> Email of the employee                       | Yes            | local-part@domain<br/>1. The local-part should only contain alphanumeric characters and `+`, `_`, `.`, `-`. It may not start or end with any special characters.<br/>2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>    - end with a domain label at least 2 characters long<br/>    - have each domain label start and end with alphanumeric characters<br/>    - have each domain label consist of alphanumeric characters, separated only by hyphens (`-`), if any. | `john@gmail.com`, `eliz2@mit.edu`, <br/> `john-doe@nus-edu.sg`                             | `johndoe@, eliz2`, `_janedoe@nus.edu`, `johndoe@nus+edu` |
+| **s/SALARY** <br/> Salary of the employee                     | NA             | Numeric characters (0 to 9) <br/> Non-negative integer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `0`, `1000`, `10000`, `850`                                                                | `$1000`, `-1`, `8500.00`                                 |
+| **d/DEPARTMENT** <br/> Department of the employee (optional)  | Yes            | Alphanumeric characters (a to z, A to Z, 0 to 9)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | `IT`, `Finance`                                                                            | `I/T`                                                    |
+| **f/FIELD** <br/> Field of the employee                       | No             | Alphabetic characters (a to z, A to Z)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | For `sort`: `name`, `salary`, `overtime`, `leaves` <br/> For `reset`: `overtime`, `leaves` | `employee`, `age`                                        |
+| **in/ORDER** <br/> Order that the employee is to be sorted in | No             | Alphabetic characters (a to z, A to Z)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `asc`, `desc` or `ASC`, `DESC`                                                             | `ascending`, `descending`                                |
+| **o/OPERATION** <br/> Operation to be applied                 | Yes            | Alphanumeric characters (a to z, A to Z, 0 to 9)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | `inc`, `dec`                                                                               | `INC`, `DEC`, `increase`, `decrease`                     |
+| **a/AMOUNT** <br/> Amount to be changed by                    | NA             | Positive integer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | `1`, `12`                                                                                  | `0`, `-3`, `1.5`                                         |
+| **r/REMARK** <br/> Remark for an employee                     | No             | No constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `Good worker`, `efficient worker!`, `:)`                                                   | NA                                                       |
+| **from/START_DATE** <br/> Start date of the leave             | NA             | yyyy-MM-dd format <br/> `START_DATE` cannot be after `END_DATE`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | `2023-12-11`, <br/> `2023-12-21`                                                           | `2023-13-11`, <br/> `1 Dec 2023`, <br/> `01/12/2023`     |
+| **to/END_DATE** <br/> End date of the leave                   | NA             | yyyy-MM-dd format <br/> `START_DATE` cannot be after `END_DATE`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | `2023-12-11`, <br/> `2023-12-21`                                                           | `2023-13-11`, <br/> `1 Dec 2023`, <br/> `01/12/2023`     |
+| **old/OLD_DATE** <br/> Old date of the leave                  | NA             | yyyy-MM-dd format <br/> `NEW_DATE` cannot be the same as `OLD_DATE`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `2023-12-11`, <br/> `2023-12-21`                                                           | `2023-13-11`, <br/> `1 Dec 2023`, <br/> `01/12/2023`     |
+| **new/NEW_DATE** <br/> New date of the leave                  | NA             | yyyy-MM-dd format <br/> `NEW_DATE` cannot be the same as `OLD_DATE`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `2023-12-11`, <br/> `2023-12-21`                                                           | `2023-13-11`, <br/> `1 Dec 2023`, <br/> `01/12/2023`     |
+| **INDEX** <br/> Index in the employee list                    | NA             | Positive integer less than or equals the number of employees                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `1`, `3`                                                                                   | `0`, `-3`, `1.5`                                         |
+| **KEYWORD** <br/> Keyword to be searched                      | No             | No constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `royb@example.com`, `EID1234-5678`, `IT`, `engineer`                                       | NA                                                       |
