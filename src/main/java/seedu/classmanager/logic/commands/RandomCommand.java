@@ -1,6 +1,7 @@
 package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.classmanager.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.List;
@@ -62,6 +63,9 @@ public class RandomCommand extends Command {
      * @param upper the upper bound.
      */
     private Integer[] generateRandomInt(int size, int upper) {
+        requireAllNonNull(size, upper);
+        assert upper >= 0 && size >= 0;
+
         HashSet<Integer> distinctInt = new HashSet<>();
         Random random = new Random();
         while (distinctInt.size() < size) {
