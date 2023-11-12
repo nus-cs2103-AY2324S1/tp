@@ -1073,6 +1073,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<u>**Use case: UC11 – Calculate the monthly payroll of an employee**</u>
+
+**Guarantees:**
+* Specified employee's payroll details for the month will be displayed.
+
+**Pre-conditions:**
+* Employee to calculate payroll should be in the list.
+
+**MSS**
+1. User <u>lists the employees</u>.(UC02)
+2. ManaGease shows a list of all the employees.
+3. User requests to calculate monthly payroll of an employee.
+5. ManaGease displays a a message containing the payroll details.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. Invalid command parameters are given.
+
+  * 3a1. ManaGease shows an error message.
+
+    Use case resumes at Step 3.
+
+* 3b. User request to calculate the payroll by name.
+  * 3b1. The database contains two or more employees with the matching name entered by the user
+  * 3b2. ManaGease displays the employees with the matching name.
+
+    Use case resumes at Step 3.
+
+<br>
+
 *{More to be added}*
 
 
