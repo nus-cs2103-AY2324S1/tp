@@ -44,7 +44,7 @@ This guide uses the following features to make it easier for you to navigate aro
 ## Quick start
 <div markdown="block" class="alert alert-warning">
 
-:warning: We assume that you have some basic knowledge of terminal commands. You can learn how to do so with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/)
+:warning: We assume that you have some basic knowledge of terminal commands. You can learn how to use the terminal with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/)
 
 </div>
 
@@ -67,7 +67,7 @@ This guide uses the following features to make it easier for you to navigate aro
 
     * `deleteMember 3` : Deletes the 3rd member shown in the current list.
 
-6. You can refer to the [Features](#features) below for the details of each command.
+6. You can refer to the [Features](#features) section below for the details of each command.
 
 <div markdown="block" class="alert alert-primary">
 
@@ -108,7 +108,7 @@ Example:
 
 <div markdown="block" class="alert alert-info">:information_source: CCACommander will not store 2 of the same commands if they were entered twice in a row. Likewise, "commands" containing exclusively of blank spaces will not be stored as well.
 
-Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, users will have to re-navigate from the most recent command as it was treated as an edit or entry of command.
+Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, users will have to re-navigate from the most recent command as it will be treated as an edit or entry of command.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -130,6 +130,9 @@ Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, user
 
 * Parameters can be in any given order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Some parameters of certain commands have constraints on the acceptable inputs. <br>
+  You can refer to the [List of acceptable values](#list-of-acceptable-values) section below for more details.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
