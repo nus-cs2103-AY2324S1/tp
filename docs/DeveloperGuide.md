@@ -205,6 +205,9 @@ User should see the UI asa shown below after entering `linkedin 1`
 
 ![LinkedIn](images/linkedinState.png)
 
+The following activity diagram shows how the `addL/addG` commands and `linkedin/github` commands are used together to bring together the `Linked/Github` feature:
+
+<puml src="diagrams/linkedinactivitydiagram.puml" alt="LinkedInActivityDiagram" />
 
 #### Alternatives considered ####
 
@@ -381,9 +384,12 @@ The following sequence diagram shows how the `Event` operation works:
 
 User should see the UI as shown below after executing the aforementioned command [It is assumed that the first candidate in the list is Alex Yeoh].
 
-![Event](images/event.png)
 
 ![EventWindow](images/eventwindow.png)
+
+The following activity diagram shows how the `event` and `schedule` command can be used together to schedule events:
+
+<puml src="diagrams/eventactivitydiagram.puml" alt="Event Activity Diagram"></puml>
 
 #### Alternatives considered ####
 
@@ -706,23 +712,6 @@ Use case ends.
 
 *{More to be added}*
 
-### Planned Enhancements
-
-There are certain feature flaws that we have identified and would like to improve on in the future.
-
-1. **Improve what identifies as a unique person**
-   Currently, a person is uniquely identified by their name. This is not ideal as there may be multiple persons with the same name. We would like to improve this by using a unique identifier such as internal ID or NRIC number.
-   This would allow us to have a more robust system that can handle multiple persons with the same name.
-
-2. **Improve the edit feature** 
-   Currently, it falls short of the user's expectations as it does not allow the user to add on to existing tags. We would like to improve this by creating a feature that allows the user to add on to existing tags.  
-   Thereby users can add on to existing tags without having to retype all the previous tags.
-3. **Improve the summary statistic implementation** 
-    Currently, if the applicants do not have a good spread of scores, the summary statistics will not be very useful. We would like to improve on this by implementing a more robust summary statistics that can handle small sample sizes and outliers.
-    Additionally, you can only use the summary statistic table for comparison after you have inputted most of the scores. At that point, it might be more relevant to use the filter feature instead. Thereby we hope to add more visualisations like graphs to the summary statistics table to make it more useful for comparison.
-4. **Improve the filter feature**
-    Currently, the filter feature might be too flexible for the user. That is it works on the displayed list and not across the board. We would like to improve on this by implementing a filter feature that works across the database.  
-    This makes it more intuitive and logical for the user to use since the user would expect the filter feature to work across the database and not just the displayed list.
 
 
 ### Non-Functional Requirements
@@ -750,6 +739,55 @@ There are certain feature flaws that we have identified and would like to improv
 * **Keyword**: Search parameter
 
 --------------------------------------------------------------------------------------------------------------------
+## Appendix 
+
+## Appendix: Planned Enhancements
+
+### Deleting tags : `delete tag`
+
+While certainly useful, JABPro currently does not have feature to delete existing tags. However, this feature will be implemented
+in future iterations.
+
+<box type="tip" seamless>
+
+**Tip:**
+* If you are an advanced user, you are welcome to delete your tags manually by editing the json file!
+  </box>
+
+### Editing tags : `edit tag`
+
+JABPro currently does not support editing tags i.e. editing tag name or category. This feature will be implemented in future iterations.
+
+**Tip:**
+* If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
+  </box>
+
+### Exporting events : `export`
+
+JABPro currently does not support exporting Events. This feature will be implemented in future iterations.
+
+### Add and general uniqueness constraint: `add`
+**Improve what identifies as a unique person**:  
+Currently, a person is uniquely identified by their name. This is not ideal as there may be multiple persons with the same name. We would like to improve this by using a unique identifier such as internal ID or NRIC number.
+This would allow us to have a more robust system that can handle multiple persons with the same name.
+  
+### Improve on Edit feature: `edit`
+**Improve the edit feature**:
+   Currently, it falls short of the user's expectations as it does not allow the user to add on to existing tags. We would like to improve this by creating a feature that allows the user to add on to existing tags.  
+   Thereby users can add on to existing tags without having to retype all the previous tags.  
+  
+### Improve on Summary Statistics
+**Improve the summary statistic implementation**:  
+Currently, if the applicants do not have a good spread of scores, the summary statistics will not be very useful. We would like to improve on this by implementing a more robust summary statistics that can handle small sample sizes and outliers.   
+Additionally, you can only use the summary statistic table for comparison after you have inputted most of the scores. At that point, it might be more relevant to use the filter feature instead. Thereby we hope to add more visualisations like graphs to the summary statistics table to make it more useful for comparison.
+
+### Improve on Filter feature: `filter`
+**Improve the filter feature**  
+Currently, the filter feature might be too flexible for the user. That is it works on the displayed list and not across the board. We would like to improve on this by implementing a filter feature that works across the database.  
+This makes it more intuitive and logical for the user to use since the user would expect the filter feature to work across the database and not just the displayed list.
+
+
+
 ## **Appendix: Effort**
 
 
@@ -822,6 +860,7 @@ testers are expected to do more *exploratory* testing.
       `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
       **Note**:  The current AddressBook should contain a person named `John Poh`
       Expected: No person is added. Error details shown in the status message. List of persons remains the same.
+<<<<<<< HEAD
 
 ### Editing a person's score for an assessment type tag while all persons are being shown
 
@@ -913,4 +952,8 @@ Both Person List and Person Information Panel is updated to reflect the new `Int
     `filter t/Interview met/percentile` 
     **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
 
+=======
+   
+>>>>>>> 1fcd4b497ace021a1030cfb22df9c31bb4a6a394
 
+--------------------------------------------------------------------------------------------------------------------
