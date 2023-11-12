@@ -165,7 +165,7 @@ The generic appointment command can be `Schedule`, `Reschedule`, etc..
 
 ### View all appointments feature
 
-Implementation
+#### Implementation
 
 For _Appointments_ command, the noteworthy class is:
 - `AppointmentsCommand.java` - For execution of the view all appointments command.
@@ -185,7 +185,7 @@ The following activity diagram shows how the view appointments operation works:
 
 ### Cancel feature
 
-Implementation
+#### Implementation
 
 For _Cancel_ command, the noteworthy classes are:
 
@@ -371,6 +371,7 @@ The following sequence diagram shows how the sort patient command works:
 #### Design considerations:
 1. We decided to implement the comparator for names to compare the names after the names have been converted to lower case. This is as we want it to be sorted in that order, where john doe is considered smaller than Kevin Porter Jr.
 2. We eventually want to sort from distance from the current location of the machine so we made the attributes easily expandable for future support.
+
 #### Additional Info:
 1. The sort command under appointments is implemented similarly but sorts the appointment list either by priority or time.
 
