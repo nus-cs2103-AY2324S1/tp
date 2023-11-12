@@ -47,7 +47,38 @@ If you are new here, visit our [quick start](#quick-start) guide to onboard onto
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Using this guide
+
+* If you are new here, visit our [quick start](#quick-start) guide to onboard onto HouR smoothly!
+* If you are unsure of how to use HouR, the [Command Summary](#command-summary) is a good place to start. 
+* If you are a developer and want to help out, do take a look at our [Developer Guide](https://ay2324s1-cs2103t-w12-1.github.io/tp/DeveloperGuide.html).
+
+## Useful Notations and Glossary
+While exploring HouR's features with this user guide, do take note of these symbols used and what they represent.
+
+|        Symbol        | Meaning                                      |
+|:--------------------:|----------------------------------------------|
+| :information_source: | Important information                        |
+|    :exclamation:     | Warning or caution                           |
+|        :bulb:        | Additional information such as tips or notes |
+
+The following glossary table provides clarification on commonly-used terms as well as terminology that is possibly unknown to you.
+
+|      Symbol      | Meaning                                                                                                                                                                                                                                             |
+|:----------------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|       GUI        | GUI stands for Graphical User Interface and it represents the visual display of HouR that users can see when the application is run.                                                                                                                |
+|  GUI component   | A subsection of the GUI. For more information on specific GUI components, refer to this [section](#navigating-the-graphical-user-interface--gui-).                                                                                                  |
+|       CLI        | CLI stands for Command Line Interface and it represents a text-based user interface to interact with the application.                                                                                                                               |
+|     Command      | An input from the user that tells HouR to perform an action. View HouR's [command summary](#command-summary).                                                                                                                                       |
+|    Parameter     | Parameters are like fields in a form you are required to fill up. They are information needed to be passed together with the command so that it can be executed. More information regarding parameters can be found [here](#parameter-information). |
+|  Case-sensitive  | The casing of the alphabetic characters matters (e.g. “good” is different from “GOOD”).                                                                                                                                                             |
+| Case-insensitive | The casing of the alphabetic characters does not matter (e.g. “good” is taken to be equal to “GOOD”).                                                                                                                                               |
+
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -58,6 +89,14 @@ If you are new here, visit our [quick start](#quick-start) guide to onboard onto
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hour.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/ug-pics/Ui.png)
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution to Mac users:**
+Performing these instructions may result in non-deterministic behaviour of data loading in HouR. This was tested on multiple MacOS Systems: 
+
+* Right-click `hour.jar` > Open With > JavaLauncher.app 
+* First-time users may be prompted with a warning that the file was downloaded from the Internet. Simply click Open in the prompt to continue.
+
+</div>
 
 5. Type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
