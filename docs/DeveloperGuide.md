@@ -102,17 +102,43 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-How the `Logic` component works:
+#### <code>AddressBookParser</code> and <code>ViewModeParser</code> Classes
+
+`LogicManager` class utilizes either `AddressBookParser` or `ViewModeParser` depending on whether the user is seeing the main window or a fosterer's profile. 
+
+Given below is a sequence diagram that explains how `LogicManager` class chooses which parser class to use: 
+
+![isInViewModeSequenceDiagram](images/IsInViewModeSequenceDiagram.png)
+
+As the diagram suggests, the `executeInView()` method is used when personListPanelPlaceHolder UI element - the placeholder that contains the normal fosterer list - is invisible, which means the user sees the profile page. This triggers the `ViewModeParser` instance in `LogicManager` class to be used to parse the command. If the placeholder is visible, it means the user is seeing the main window, in which case the `execute()` method is used and the commands user enter are parsed by `AddressBookParser`. 
+
+The reason for creating two separate parser classes is to provide mutual exclusion between the commands available in main window and in a profile page. For example, `SaveCommand` should only be executed in the context of editing a fosterer's detail in profile page, not in main window. 
+
+<br>
+
+**How the `Logic` component works**
+
+Here is a step-by-step explanation of how the `Logic` component works when it uses `AddressBookParser`: 
+
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+Here is a step-by-step explanation of how the `Logic` component works when it uses `ViewModeParser`: 
+
+1. When `Logic` is called upon to execute a command, it is passed to an `ViewModeParser` object which in turn creates a `Command` object (e.g., `SaveCommand`). 
+1. The command is then executed by the `LogicManager`, communicating with the `Model` when it is executed (e.g. to save a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png"/>
 
-How the parsing works:
+<br>
+
+**How the parsing works in `AddressBookParser`**
+
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
@@ -277,21 +303,10 @@ The following activity diagram summarizes what happens when a user executes an a
 
 ### Editing and Saving the Changes in Profile Page Feature
 
-#### Parsing Commands In Profile Page 
-
-While the profile page is opened, `LogicManager` class utilizes a `ViewModeParser` instead of the `AddressbookParser` which is used while in the main window. 
-
-Given below is a sequence diagram that explains how `LogicManager` class chooses which parser class to use: 
-
-![isInViewModeSequenceDiagram](images/IsInViewModeSequenceDiagram.png)
-
-As the diagram suggests, the `executeInView()` method is used when personListPanelPlaceHolder UI element - the placeholder that contains the normal fosterer list - is invisible, which means the user sees the profile page. This triggers the `ViewModeParser` instance in `LogicManager` class to be used to parse the command. 
-
-<br>
 
 #### Handling UI Changes In Profile Page 
 
-While the profile page is opened, `MainWindow` classes checks the `CommandType` Enum value that `CommandResult` object carries. Depending on the types of the commands, `MainWindow` assigns handler methods to handle the corresponding UI changes. 
+While the profile page is opened, `MainWindow` classes checks the `CommandType` Enum value that is carried by the `CommandResult` object which is returned from executing a `Command`. Depending on the types of the commands, `MainWindow` assigns handler methods to handle the corresponding UI changes. 
 
 The sequence diagram give below illustrates the types of handlers `MainWindow` class deals with. 
 
@@ -312,7 +327,7 @@ The mechanism allows the user to edit details of a fosterer in their profile pag
 
 Given below is an example usage scenario and how the mechanism behaves at each step, given that the user already opened person profile page:
 
-Step 1. The user enters the name of the field. e.g. "name". Since the normal person list is invisible, "name" is passed to `executeInView()` method in `MainWindow` class.
+Step 1. The user enters the name of the field. e.g. "name". Since the normal person list is invisible, "name" is passed to `executeInView()` method in `MainWindow` class (refer to the explanation in the section of [Logic Component:AddressBookParser and ViewModeParser Classes](#addressbookparser-and-viewmodeparser-classes)).
 
 ![EditFieldSequenceDiagramStep1.png](images/EditFieldSequenceDiagramStep1.png)
 
@@ -337,7 +352,7 @@ The mechanism allows the user to save the edited details of a fosterer in their 
 
 Given below is an example usage scenario and how the save mechanism behaves at each step, given that the user already opened person profile page:
 
-Step 1. The user enters `save` command. Since the normal person list is invisible, the command text "save" is passed to `executeInView()` method in `MainWindow` class. 
+Step 1. The user enters `save` command. Since the normal person list is invisible, the command text "save" is passed to `executeInView()` method in `MainWindow` class (refer to the explanation in the section of [Logic Component:AddressBookParser and ViewModeParser Classes](#addressbookparser-and-viewmodeparser-classes)). 
 
 ![SaveSequenceDiagramStep1.png](images/SaveSequenceDiagramStep1.png)
 
