@@ -19,9 +19,9 @@ import seedu.classmanager.storage.JsonAdaptedClassDetails;
  */
 public class ClassDetails {
 
-    public static final String MESSAGE_CONSTRAINTS = "Class Number should begin with a capital 'T' "
+    public static final String MESSAGE_CONSTRAINTS = "Class Number must begin with a capital 'T', "
             + "followed by any number of characters, such as 'T11' or 'TG12'. It must also not be blank.";
-    public static final String MESSAGE_INVALID_GRADE = "Grade should be an integer between 0 and 100 inclusive.";
+    public static final String MESSAGE_INVALID_GRADE = "Grade should be an integer between 0 and 100.";
     public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment index should be an integer "
             + "between 1 and %s.";
 
