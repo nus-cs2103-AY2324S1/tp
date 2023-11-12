@@ -93,7 +93,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram.png"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -110,7 +110,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<img src="images/ParserClasses.png"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -275,6 +275,83 @@ The following activity diagram summarizes what happens when a user executes an a
     * Pros: Do not have to parse user input multiple times in order for the user to perform mass addition of new fosterers.
     * Cons: The add command would be even more convoluted due to the increase in length with all the fields/arguments required, making the UI less desirable.
 
+### Editing and Saving the Changes in Profile Page Feature
+
+#### Parsing Commands In Profile Page 
+
+While the profile page is opened, `LogicManager` class utilizes a `ViewModeParser` instead of the `AddressbookParser` which is used while in the main window. 
+
+Given below is a sequence diagram that explains how `LogicManager` class chooses which parser class to use: 
+
+![isInViewModeSequenceDiagram](images/IsInViewModeSequenceDiagram.png)
+
+As the diagram suggests, the `executeInView()` method is used when personListPanelPlaceHolder UI element - the placeholder that contains the normal fosterer list - is invisible, which means the user sees the profile page. This triggers the `ViewModeParser` instance in `LogicManager` class to be used to parse the command. 
+
+<br>
+
+#### Handling UI Changes In Profile Page 
+
+While the profile page is opened, `MainWindow` classes checks the `CommandType` Enum value that `CommandResult` object carries. Depending on the types of the commands, `MainWindow` assigns handler methods to handle the corresponding UI changes. 
+
+The sequence diagram give below illustrates the types of handlers `MainWindow` class deals with. 
+
+![MainWindowCommandTypeSequenceDiagram.png](images/MainWindowCommandTypeSequenceDiagram.png)
+
+As the diagram suggests, depending on the different types of commands, `MainWindow` class executes handlers corresponding to them. 
+
+<br>
+
+#### Editing A Fosterer In Profile Page  
+
+The mechanism allows the user to edit details of a fosterer in their profile page. This feature is facilitated by `ViewModeParser`, and `EditFieldCommand` classes, to handle user input in the profile page and edit the correct detail of a fosterer. This feature is implemented using the following components and operations: 
+
+* `ViewModeParser` - Represents the parser that parses commands that are executed in a fosterer's profile. 
+* `EditFieldCommand` - The core component responsible for executing the edit of a fosterer in the address book. 
+* `MainWindow` - The UI component that handles navigating through fields.
+* `CommandType` - The Enum class that represents the type of command which MainWindow checks to handle the UI change.
+
+Given below is an example usage scenario and how the mechanism behaves at each step, given that the user already opened person profile page:
+
+Step 1. The user enters the name of the field. e.g. "name". Since the normal person list is invisible, "name" is passed to `executeInView()` method in `MainWindow` class.
+
+![EditFieldSequenceDiagramStep1.png](images/EditFieldSequenceDiagramStep1.png)
+
+Step 2. With `executeInView()`, `ViewModeParser` is used to parse the command which returns `EditFieldCommand`.
+
+![EditFieldSequenceDiagramStep2.png](images/EditFieldSequenceDiagramStep2.png)
+
+Step 3. `EditFieldCommand` is executed, and with the `CommandType.EDIT_FIELD` carried by `CommandResult`, `MainWindow` calls `handleEditField()` method. The interaction between `MainWindow` and `PersonProfile` is covered in detail in **[View Feature](#view-feature)**. 
+
+![EditFieldSequenceDiagram.png](images/EditFieldSequenceDiagram.png)
+
+<br>
+
+### Saving the Changes in Profile Page Feature 
+
+The mechanism allows the user to save the edited details of a fosterer in their profile page. This feature is facilitated by `ViewModeParser`, and `SaveCommand` classes, to handle user input in the profile page and save the updated fosterer. This feature is implemented using the following components and operations:
+
+* `ViewModeParser` - Represents the parser that parses commands that are executed in a fosterer's profile.
+* `SaveCommand` - The core component responsible for saving the changes made by the user.
+* `MainWindow` - The UI component that handles navigating through fields.
+* `CommandType` - The Enum class that represents the type of command which MainWindow checks to handle the UI change.
+
+Given below is an example usage scenario and how the save mechanism behaves at each step, given that the user already opened person profile page:
+
+Step 1. The user enters `save` command. Since the normal person list is invisible, the command text "save" is passed to `executeInView()` method in `MainWindow` class. 
+
+![SaveSequenceDiagramStep1.png](images/SaveSequenceDiagramStep1.png)
+
+Step 2. With `executeInView()`, `ViewModeParser` is used to parse the command text which returns `SaveCommand`.
+
+![SaveSequenceDiagramStep2.png](images/SaveSequenceDiagramStep2.png)
+
+Step 3. `EditFieldCommand` is executed, and `setPerson()` method from `Model` class is called with personToEdit and targetIndex obtained from `MainWindow` class.
+
+![SaveSequenceDiagram.png](images/SaveSequenceDiagram.png) 
+
+Step 4. From `MainWindow`, `handleSave()` handler method is called which calls `resetValues()` in `PersonProfile` class that updates the field values to the currently saved fosterer's details and change the text color from red, if exists, back to black.
+
+![HandleSaveSequenceDiagram.png](images/HandleSaveSequenceDiagram.png)
 
 ### Delete feature
 

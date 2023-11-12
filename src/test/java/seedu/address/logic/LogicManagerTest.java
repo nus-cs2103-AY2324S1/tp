@@ -122,14 +122,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_getIsViewCommandMethod_success() throws CommandException, ParseException, DataLoadingException,
-            IOException {
-        String viewCommand = "view 1";
-        CommandResult parsedCommand = logic.execute(viewCommand);
-        assertTrue(logic.getIsViewCommand());
-    }
-
-    @Test
     public void execute_getIsViewExitCommandMethod_success() throws CommandException, ParseException,
             DataLoadingException, IOException {
         String viewCommand = "view 1";

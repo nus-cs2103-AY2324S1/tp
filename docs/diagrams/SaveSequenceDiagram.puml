@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI  UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":PersonProfile" as PersonProfile UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ViewModeParser" as ViewModeParser LOGIC_COLOR
+participant "s:SaveCommand" as SaveCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> MainWindow : executeCommand("save")
+activate MainWindow
+
+MainWindow -> PersonProfile : getPerson()
+activate PersonProfile
+
+PersonProfile --> MainWindow : get personToEdit
+deactivate PersonProfile
+
+MainWindow -> LogicManager : executeInView("name", personToEdit, targetIndex)
+activate LogicManager
+
+LogicManager -> ViewModeParser : parseCommand("name", personToEdit, targetIndex)
+activate ViewModeParser
+
+create SaveCommand
+ViewModeParser -> SaveCommand
+activate SaveCommand
+
+SaveCommand --> ViewModeParser : s
+deactivate SaveCommand
+
+ViewModeParser --> LogicManager : s
+deactivate ViewModeParser
+
+LogicManager -> SaveCommand : execute()
+activate SaveCommand
+
+SaveCommand -> Model : setPerson(personToEdit, targetIndex)
+activate Model
+
+SaveCommand -> Model : updateFilteredPersonList();
+
+Model --> SaveCommand
+deactivate Model
+
+create CommandResult
+SaveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SaveCommand :
+deactivate CommandResult
+
+
+SaveCommand --> LogicManager : commandResult
+deactivate SaveCommand
+
+LogicManager --> MainWindow : commandResult
+deactivate LogicManager
+
+group ref [Handle Save]
+    MainWindow -[hidden]-> PersonProfile
+end
+
+deactivate MainWindow
+
+[<--MainWindow
+deactivate MainWindow
+
+@enduml

@@ -39,8 +39,6 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final AddressBookParser addressBookParser;
     private final ViewModeParser viewModeParser;
-    private boolean isViewCommand = false;
-    private boolean isViewExitCommand = false;
     private final Model backupModel;
     private boolean finalConfirmation = false;
 
@@ -88,13 +86,6 @@ public class LogicManager implements Logic {
             this.finalConfirmation = false;
         }
 
-        if (commandResult.getCommandType() == CommandType.VIEW) {
-            isViewCommand = true;
-        } else {
-            isViewCommand = false;
-        }
-        isViewExitCommand = false;
-
         try {
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {
@@ -115,18 +106,6 @@ public class LogicManager implements Logic {
 
         command = viewModeParser.parseCommand(commandText, newPerson, targetIndex);
         commandResult = command.execute(model);
-
-        // when it is EditFieldCommand
-        if (commandResult == null) {
-            return null;
-        }
-        if (commandResult.getCommandType() == CommandType.VIEW_EXIT) {
-            isViewExitCommand = true;
-            isViewCommand = false;
-        } else {
-            isViewCommand = false;
-            isViewExitCommand = false;
-        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -162,14 +141,6 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
-    }
-
-    public boolean getIsViewCommand() {
-        return isViewCommand;
-    }
-
-    public boolean getIsViewExitCommand() {
-        return isViewExitCommand;
     }
 
     public boolean getFinalConfirmation() {

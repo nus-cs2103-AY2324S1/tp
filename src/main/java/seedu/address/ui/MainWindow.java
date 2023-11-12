@@ -20,7 +20,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -32,40 +31,31 @@ import seedu.address.model.person.Person;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-
     private final Logger logger = LogsCenter.getLogger(getClass());
-
     private final Stage primaryStage;
     private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-
     private PersonProfile personProfile;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private boolean isViewExit = false;
+
+    private Index targetIndex;
     private boolean isSaved;
 
-    private Index indexOfAFostererToView;
     @FXML
     private StackPane commandBoxPlaceholder;
-
     @FXML
     private MenuItem helpMenuItem;
-
     @FXML
     private StackPane personListPanelPlaceholder;
-
     @FXML
     private StackPane personProfilePlaceholder;
-
     @FXML
     private StackPane resultDisplayPlaceholder;
-
     @FXML
     private StackPane statusbarPlaceholder;
-
     @FXML
     private CommandBox commandBox;
 
@@ -157,20 +147,24 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
+    void sendFeedback(String feedback) {
+        resultDisplay.setFeedbackToUser(feedback);
+    }
+
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleHelp() {
+    private void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
             helpWindow.focus();
         }
-    }
-
-    void show() {
-        primaryStage.show();
     }
 
     /**
@@ -185,55 +179,15 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
-    private void handleView(Person personToView) {
-        if (personListPanelPlaceholder.isVisible() && personToView != null) {
-            personProfile = new PersonProfile(personToView, this);
-            personProfilePlaceholder.getChildren().add(personProfile.getRoot());
-            personProfilePlaceholder.setVisible(true);
-            personListPanelPlaceholder.setVisible(false);
-        }
-
-        if (personListPanelPlaceholder.isVisible() && personToView == null) {
-            personProfile = new PersonProfile(this);
-            personProfilePlaceholder.getChildren().add(personProfile.getRoot());
-            personProfilePlaceholder.setVisible(true);
-            personListPanelPlaceholder.setVisible(false);
-        }
-    }
-
     @FXML
     private void handleFocusField(PersonProfile.Field field) {
-        if (personProfilePlaceholder.isVisible()) {
+        if (personProfilePlaceholder.isVisible() && !personListPanelPlaceholder.isVisible()) {
             personProfile.setFocus(field);
         }
     }
 
-    void handleViewExit() {
-        if (isSaved || commandBox.getInConfirmationDialog()) {
-            commandBox.setInConfirmationDialog(false);
-            personProfile.setIsInConfirmationDialog(false);
-            personListPanelPlaceholder.setVisible(true);
-            personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
-            personProfilePlaceholder.setVisible(false);
-            sendFeedback("Exiting view as requested.");
-        } else {
-            commandBox.setInConfirmationDialog(true);
-            personProfile.setIsInConfirmationDialog(true);
-        }
-    }
-
-    void handleCancelViewExit() {
-        sendFeedback("Cancelled exit.");
-        commandBox.setInConfirmationDialog(false);
-        personProfile.setIsInConfirmationDialog(false);
-    }
-
     private void resetValues() {
-        if (personProfilePlaceholder.isVisible()) {
+        if (personProfilePlaceholder.isVisible() && !personListPanelPlaceholder.isVisible()) {
             personProfile.resetValues();
         }
     }
@@ -249,74 +203,50 @@ public class MainWindow extends UiPart<Stage> {
             if (personListPanelPlaceholder.isVisible()) {
                 commandResult = logic.execute(commandText);
             } else {
-                commandResult = logic.executeInView(commandText, personProfile.getPerson(), indexOfAFostererToView);
+                commandResult = logic.executeInView(commandText, personProfile.getPerson(), targetIndex);
             }
+
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            if (commandResult.getCommandType() == CommandType.HELP) {
+
+            if (commandResult.getCommandType() == null) {
+                return commandResult;
+            }
+
+            switch (commandResult.getCommandType()) {
+
+            case HELP:
                 handleHelp();
-            }
+                break;
 
-            if (commandResult.getCommandType() == CommandType.EXIT) {
+            case EXIT:
                 handleExit();
-            }
+                break;
 
-            if (commandResult.getCommandType() == CommandType.VIEW) {
-                indexOfAFostererToView = commandResult.getTargetIndex();
+            case VIEW:
+                targetIndex = commandResult.getTargetIndex();
                 handleView(commandResult.getPersonToView());
-            }
+                break;
 
-            if (commandResult.getCommandType() == CommandType.SAVE) {
-                resetValues();
-            }
-
-            if (commandResult.getCommandType() == CommandType.VIEW_EXIT) {
+            case VIEW_EXIT:
                 isSaved = commandResult.getIsFostererEdited();
                 handleViewExit();
+                break;
+
+            case EDIT_FIELD:
+                handleEditField(commandText);
+                break;
+
+            case SAVE:
+                handleSave();
+                break;
+
+            default:
+                break;
             }
-            if (commandResult.getCommandType() == CommandType.EDIT_FIELD) {
-                String[] tagAndNote = new String[]{"tags", "notes"};
-                Optional<String> tagOrNote = null;
 
-                Optional<PersonProfile.Field> field = Arrays.stream(PersonProfile.Field.values())
-                        .filter(f -> f.getDisplayName().toLowerCase().startsWith(commandText.toLowerCase().trim()))
-                        .findFirst();
-
-                if (!field.isPresent()) {
-                    tagOrNote = Arrays.stream(tagAndNote)
-                            .filter(f -> f.startsWith(commandText.toLowerCase().trim()))
-                            .findFirst();
-                }
-
-                if (!field.isPresent() && !tagOrNote.isPresent()) {
-                    field = Arrays.stream(PersonProfile.Field.values())
-                            .filter(f -> f.getDisplayName().toLowerCase().contains(commandText.toLowerCase().trim()))
-                            .findFirst();
-                }
-
-                if (!field.isPresent() && !tagOrNote.isPresent()) {
-                    tagOrNote = Arrays.stream(tagAndNote)
-                            .filter(f -> f.contains(commandText.toLowerCase().trim()))
-                            .findFirst();
-                }
-
-                if (!field.isPresent() && !tagOrNote.isPresent()) {
-                    sendFeedback("No such field found");
-                }
-
-                field.ifPresent(personProfile::setFocus);
-
-                if (!field.isPresent()) {
-                    tagOrNote.ifPresent(f -> {
-                        if (f.equals("tags")) {
-                            personProfile.setFocusTags();
-                        } else {
-                            personProfile.setFocusNotes();
-                        }
-                    });
-                }
-            }
             return commandResult;
+
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
@@ -329,8 +259,134 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    void handleViewExit() {
+        // if the fosterer is already saved or the confirmation message is already displayed, exit the profile page.
+        if (isSaved || commandBox.getInConfirmationDialog()) {
+            commandBox.setInConfirmationDialog(false);
+            personProfile.setIsInConfirmationDialog(false);
+            personListPanelPlaceholder.setVisible(true);
+            personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
+            personProfilePlaceholder.setVisible(false);
+            sendFeedback("Exiting view as requested.");
+        } else {
+            // if fosterer is not saved or message is not displayed before, display the confirmation message
+            commandBox.setInConfirmationDialog(true);
+            personProfile.setIsInConfirmationDialog(true);
+        }
+    }
 
-    protected void sendFeedback(String feedback) {
-        resultDisplay.setFeedbackToUser(feedback);
+    void handleCancelViewExit() {
+        sendFeedback("Cancelled exit.");
+        commandBox.setInConfirmationDialog(false);
+        personProfile.setIsInConfirmationDialog(false);
+    }
+
+
+    /**
+     * Opens a fosterer's profile.
+     *
+     * @param personToView is a person to view their profile.
+     */
+    private void handleView(Person personToView) {
+
+        // open a profile of a fosterer in the list
+        if (personListPanelPlaceholder.isVisible() && personToView != null) {
+            personProfile = new PersonProfile(personToView, this);
+        }
+
+        // open an empty profile to add a new fosterer
+        if (personListPanelPlaceholder.isVisible() && personToView == null) {
+            personProfile = new PersonProfile(this);
+        }
+
+        personProfilePlaceholder.getChildren().add(personProfile.getRoot());
+        personProfilePlaceholder.setVisible(true);
+        personListPanelPlaceholder.setVisible(false);
+    }
+
+    private void handleEditField(String commandText) {
+        String[] tagAndNote = new String[]{"tags", "notes"};
+        Optional<PersonProfile.Field> field;
+        Optional<String> tagOrNote = null;
+
+        // check if the command text matches any one of the prefix of the fields
+        field = findPrefixMatchField(commandText);
+
+        // if no match, look for the prefix match from either tags or notes
+        if (!field.isPresent()) {
+            tagOrNote = findPrefixMatchString(commandText, tagAndNote);
+        }
+
+        // if still no match, look for a field name that contains the command text
+        if (!field.isPresent() && !tagOrNote.isPresent()) {
+            field = findContainsMatchField(commandText);
+        }
+
+        // if still no match, look for a contain match from either tags or notes
+        if (!field.isPresent() && !tagOrNote.isPresent()) {
+            tagOrNote = findContainsMatchString(commandText, tagAndNote);
+        }
+
+        // try setting focus
+        setFocus(field, tagOrNote);
+
+        // if no match is found, then display no such field is found
+        if (!field.isPresent() && !tagOrNote.isPresent()) {
+            sendFeedback("No such field found");
+        }
+    }
+
+    private Optional<PersonProfile.Field> findPrefixMatchField(String commandText) {
+        Optional<PersonProfile.Field> field = Arrays.stream(PersonProfile.Field.values())
+                .filter(f -> f.getDisplayName().toLowerCase().startsWith(commandText.toLowerCase().trim()))
+                .findFirst();
+
+        return field;
+    }
+
+    private Optional<String> findPrefixMatchString(String commandText, String[] tagAndNote) {
+        Optional<String> field = Arrays.stream(tagAndNote)
+                .filter(f -> f.startsWith(commandText.toLowerCase().trim()))
+                .findFirst();
+
+        return field;
+    }
+
+    private Optional<PersonProfile.Field> findContainsMatchField(String commandText) {
+        Optional<PersonProfile.Field> field = Arrays.stream(PersonProfile.Field.values())
+                .filter(f -> f.getDisplayName().toLowerCase().contains(commandText.toLowerCase().trim()))
+                .findFirst();
+
+        return field;
+    }
+
+    private Optional<String> findContainsMatchString(String commandText, String[] tagAndNote) {
+        Optional<String> field = Arrays.stream(tagAndNote)
+                .filter(f -> f.contains(commandText.toLowerCase().trim()))
+                .findFirst();
+
+        return field;
+    }
+
+    private void setFocus(Optional<PersonProfile.Field> field, Optional<String> tagOrNote) {
+        // if found a match from fields that are neither tags nor notes, then call setFocus
+        if (field.isPresent()) {
+            field.ifPresent(personProfile::setFocus);
+        }
+
+        // if the fields are either tag or note, then call setFocus accordingly
+        if (!field.isPresent() && tagOrNote.isPresent()) {
+            tagOrNote.ifPresent(f -> {
+                if (f.equals("tags")) {
+                    personProfile.setFocusTags();
+                } else {
+                    personProfile.setFocusNotes();
+                }
+            });
+        }
+    }
+
+    private void handleSave() {
+        resetValues();
     }
 }
