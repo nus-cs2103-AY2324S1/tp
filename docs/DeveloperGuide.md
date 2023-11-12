@@ -1177,17 +1177,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Modify the `add` feature to restrict the user from adding employees with the same name but in different cases (e.g. John Tan and john tan).
     This can be done by modifying the `equals()` method in the `[Person](https://github.com/AY2324S1-CS2103T-W12-2/tp/blob/master/src/main/java/seedu/address/model/person/Person.java)` class to ignore the case of the name, i.e. changing `name.equals(other.name)` to `name.toLowerCase().equals(other.name.toLowerCase())`.
 
-2. Adjust the width and height of the UI boxes to align with our desired specifications, preventing issues such as message wrapping to the next line and ensuring optimal alignment. For example :
+2. Adjust the width and height of the UI boxes to align with our desired specifications, preventing issues such as message wrapping to the next line as shown below and ensuring optimal alignment.
    ![Wrapped text in UI](images/Wrapped.png)
-  	To resolve this, we plan to modify the minWidth, minHeight, maxWidth, and maxHeight parameters of the respective boxes for a more refined and cohesive appearance.
 
-3. Currently, users need to input commands to switch between months in the UI calendar. In our future plans, we intend to implement a user-friendly dropdown menu along with dedicated next and previous buttons, providing a more intuitive interface for toggling between months.
+   To resolve this, we plan to modify the minWidth, minHeight, maxWidth, and maxHeight parameters of the respective boxes for a more refined and cohesive appearance.
 
-4. Currently, the `delete` command allows the deletion of employee via index and name. However, for the deletion via name, if there are multiple employees with the same name, i.e., Amy Tan, Amy Teo and Amy Lee, even if you enter the command `delete /n Amy Lee`, which is the full name of one of these employee, it will return a list of these employees with the name "Amy" rather than directly deleting the employee that matches the full name. While this is to allow greater flexibility in searching, in our future implementation, we would allow the deletion of employee using the full name to provide more convenience to the users.
+4. Currently, users need to input commands to switch between months in the UI calendar. In our future plans, we intend to implement a user-friendly dropdown menu along with dedicated next and previous buttons, providing a more intuitive interface for toggling between months.
 
-5. The current leave tracking system only allows users to track the data for annual leave. To better cater to the users of ManaGease, we will implement the ability to track leave for other types of leave like sick leave, parental leave, compassionate leave, etc.
+5. Currently, the `delete` command allows the deletion of employee via index and name. However, for the deletion via name, if there are multiple employees with the same name, i.e., Amy Tan, Amy Teo and Amy Lee, even if you enter the command `delete /n Amy Lee`, which is the full name of one of these employee, it will return a list of these employees with the name "Amy" rather than directly deleting the employee that matches the full name. While this is to allow greater flexibility in searching, in our future implementation, we would allow the deletion of employee using the full name to provide more convenience to the users.
 
-6. Currently, the `deleteleave` command does not allow users to delete leave from employee if the date of leave to delete is already over. This is to reduce the likelihood of any unintended or intended change in leave data. However, to offer users greater flexibility in editing the leave data, we will implement some form of access control to allow certain users to have the abiltiy to delete leave data for dates that are already over. 
+6. The current leave tracking system only allows users to track the data for annual leave. To better cater to the users of ManaGease, we will implement the ability to track leave for other types of leave like sick leave, parental leave, compassionate leave, etc.
+
+7. Currently, the `deleteleave` command does not allow users to delete leave from employee if the date of leave to delete is already over. This is to reduce the likelihood of any unintended or intended change in leave data. However, to offer users greater flexibility in editing the leave data, we will implement some form of access control to allow certain users to have the abiltiy to delete leave data for dates that are already over. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1220,25 +1221,301 @@ testers are expected to do more *exploratory* testing.
    2b. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Adding a new employee
 
-### Deleting a person
+1. Adding a new employee to the list
 
-1. Deleting a person while all persons are being shown
+   i. Prerequisites:
+   	- The employee should not already exist in ManaGease, and detection is based on avoiding duplicate names.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   ii. Test case: `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 12/09/2023 /s 1000.00 /l 10`<br>
+   	- Expected: Employee is added to ManaGease. Details of the new employee are shown in the result box. A newly added employee will be positioned at the bottom of the employee card list.
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   iii. Test case: `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 12/09/2023 /s 1000.00`<br>
+   	- Expected: As there's a missing field, the system will not allow the addition of the employee. Error details are shown in the result box.
+   	  
+### Deleting an employee
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. Deleting an employee while all employees are being shown
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
-      Expected: Similar to previous.
+   i. Prerequisites:
+   	- List all employees using the `list` command. Multiple employees in the list.
 
-2._{ more test cases …​ }_
+   ii. Test case: `delete 1`<br>
+   	- Expected: The first contact is deleted from the list. Details of the deleted contact are shown in the result box
 
+   iii. Test case: `delete 0`<br>
+   	- Expected: No employee is deleted. Error details are shown in the result box.
+
+   iv. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
+   	- Expected: Similar to previous.
+
+### Read specific information about a particular employee
+
+1. Read specific information about a particular employee while all employees are being shown
+
+   i. Prerequisites:
+   	- List all employees using the `list` command. Multiple employees in the list.
+
+   ii. Test case: `read 1 /a`<br>
+   	- Expected: The first employee and his/her address will be shown on the employee card. A success message is shown in the result box
+
+   iii. Test case: `read 1`<br>
+   	- Expected: No information is shown. Error details are shown in the result box.
+
+   iv. Other incorrect read commands to try: `read`, `delete x /e` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
+   	- Expected: Similar to previous.
+  
+### Find employee(s) via keyword(s)
+
+1. Find employee(s) via keyword(s)
+
+   i. Prerequisites:
+   	- The keyword must be at least one of the employee's names.
+
+   ii. Test case: `find David`<br>
+   	- Expected: The employees' card with a name that contained David will be shown. A success message is shown in the result box.
+
+   iii. Test case: `find Dacid Jane`<br>
+   	- Expected: The employees' card with a name that contained David and Jane will be shown. A success message is shown in the result box.
+
+   iv. Other incorrect read commands to try: `find`
+   	- Expected: Similar to previous.
+
+### Editing employees' information
+
+1. Editing the name of an employee
+
+   i. Prerequisites:
+   	- List all employees using the `list` command. Multiple employees in the list.
+   	- The employee must exist in the list
+
+   ii. Test case: `edit 1 /n Barrack Obama`<br>
+   	- Expected: The first employee's name is changed to Barrack Obama. A success message with the details of the employees is shown in the result box
+
+   iii. Test case: `edit 1 /n`<br>
+   	- Expected: Name does not change. Error details are shown in the result box.
+
+   iv. Other incorrect edit commands to try: `edit 1 /n John@~!`, `edit x /n Barrack Obama` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
+   	- Expected: Similar to previous.
+  
+2. Editing the email address of an employee
+
+   i. Prerequisites:
+   	- List all employees using the `list` command. Multiple employees in the list.
+   	- The employee must exist in the list
+
+   ii. Test case: `edit 1 /e nihao@yahoo.com`<br>
+   	- Expected: The first employee's email address is changed to nihao@yahoo.com. A success message with the details of the employees is shown in the result box
+
+   iii. Test case: `edit 1 /e`<br>
+   	- Expected: Email address does not change. Error details are shown in the result box.
+
+   iv. Other incorrect edit commands to try: `edit 1 /e nihaogmailcom`, `edit x /e nihao@yahoo.com` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
+   	- Expected: Similar to previous.
+
+3. Editing the phone number of an employee
+
+   i. Prerequisites:
+   	- List all employees using the `list` command. Multiple employees in the list.
+   	- The employee must exist in the list
+
+   ii. Test case: `edit 1 /p 88881111`<br>
+   	- Expected: The first employee's phone number is changed to 88881111. A success message with the details of the employees is shown in the result box
+
+   iii. Test case: `edit 1 /p`<br>
+   	- Expected: Name does not change. Error details are shown in the result box.
+
+   iv. Other incorrect edit commands to try: `edit 1 /p y` (where y is less than 3 digits), `edit x /p 88881111` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
+   	- Expected: Similar to previous.
+  
+4. Editing the address of an employee
+
+   i. Prerequisites:
+   	- List all employees using the `list` command. Multiple employees in the list.
+   	- The employee must exist in the list
+
+   ii. Test case: `edit 1 /a 123 Bukit Batok SouthWest`<br>
+   	- Expected: The first employee's address is changed to 123 Bukit Batok SouthWest. A success message with the details of the employees is shown in the result box
+
+   iii. Test case: `edit 1 /a`<br>
+   	- Expected: Address does not change. Error details are shown in the result box.
+
+   iv. Other incorrect edit commands to try: `edit x /a 123 Bukit Batok SouthWest` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
+   	- Expected: Similar to previous.
+  
+5. Editing the bank account number of an employee
+
+   i. Prerequisites:
+   	- List all employees using the `list` command. Multiple employees in the list.
+   	- The employee must exist in the list
+
+   ii. Test case: `edit 1 /b 123456789`<br>
+   	- Expected: The first employee's bank account number is changed to 123456789. A success message with the details of the employees is shown in the result box
+
+   iii. Test case: `edit 1 /b`<br>
+   	- Expected: Bank account number does not change. Error details are shown in the result box.
+
+   iv. Other incorrect edit commands to try: `edit 1 /b y` (where y is less than 5 digits or more than 17 digits), `edit x /b 123456789` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
+   	- Expected: Similar to previous.
+
+6. Editing the join date of an employee
+
+   i. Prerequisites:
+   	- List all employees using the `list` command. Multiple employees in the list.
+   	- The employee must exist in the list
+
+   ii. Test case: `edit 1 /jd 12/11/2023`<br>
+   	- Expected: The first employee's join date is changed to 12/11/2023. A success message with the details of the employees is shown in the result box
+
+   iii. Test case: `edit 1 /jd`<br>
+   	- Expected: Join date does not change. Error details are shown in the result box.
+
+   iv. Other incorrect edit commands to try: `edit 1 /jd 15 Dec 2023`, `edit x /jd 12/11/2023` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
+   	- Expected: Similar to previous.
+
+7. Editing the basic salary of an employee
+
+   i. Prerequisites:
+   	- List all employees using the `list` command. Multiple employees in the list.
+   	- The employee must exist in the list
+
+   ii. Test case: `edit 1 /s 2000.00`<br>
+   	- Expected: The first employee's basic salary is changed to 2000.00. A success message with the details of the employees is shown in the result box
+
+   iii. Test case: `edit 1 /s`<br>
+   	- Expected: Basic salary does not change. Error details are shown in the result box.
+
+   iv. Other incorrect edit commands to try: `edit 1 /s 2000`, `edit 1 /s -500.00`, `edit x /s 2000.00` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
+   	- Expected: Similar to previous.
+  
+8. Editing the promised annual leave number of an employee
+
+   i. Prerequisites:
+   	- List all employees using the `list` command. Multiple employees in the list.
+   	- The employee must exist in the list
+
+   ii. Test case: `edit 1 /l 15`<br>
+   	- Expected: The first employee's promised annual leave number is changed to 15. A success message with the details of the employees is shown in the result box
+
+   iii. Test case: `edit 1 /l`<br>
+   	- Expected: The promised annual leave number does not change. Error details are shown in the result box.
+
+   iv. Other incorrect edit commands to try: `edit 1 /l -15`, `edit x /l 15` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
+   	- Expected: Similar to previous.
+  
+9. Editing the multiple fields of an employee
+
+   i. Prerequisites:
+   	- List all employees using the `list` command. Multiple employees in the list.
+   	- The employee must exist in the list
+
+   ii. Test case: `edit 1 /n Jack Ma /p 12341234`<br>
+   	- Expected: The first employee's name is changed to Jack Ma and his phone number is changed to 12341234. A success message with the details of the employees is shown in the result box
+
+   iii. Test case: `edit 1 /n Jack Ma /p 12341234 /b 123456789 /l 2`<br>
+   	- Expected: The first employee's name is changed to Jack Ma, his phone number is changed to 12341234, his bank account number is changed to 123456789 and his promised annual leave number is changed to 2. A success message with the details of the employees is shown in the result box
+
+   iv. Other incorrect edit commands to try: `edit 1 /n /p 12341234 /b 123456789`, `edit x /n Jack Ma /p 12341234` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
+   	- Expected: Similar to previous.
+   	  
+### Adding leave to an employee
+
+1. Adding one leave to an employee while all persons are being shown
+
+   i. Prerequisites:
+	- List all persons using the `list` command. Multiple persons in the list.
+ 	- The employee should possess a minimum of one leave balance.
+
+   ii. Test case: `addleave 1 /on 13/11/2023`<br>
+   	- Expected: One leave is added to the first employee on the list. A success message with the details of the employee and leave balance for the current year and next year is shown in the result box.
+
+   iii. Test case: `addleave 1 /on 35/11/2023`<br>
+   	- Expected: No leave is added. Error details are shown in the result box. 
+
+   iv. Other incorrect addleave commands to try: `addleave`, `addleave x /on 13/11/2023`(where x is larger than the list size, excluding negative, non-integer and extremely large integers),  `addleave 1 /on DATE`(DATE is where the date has already passed), `<br>
+   	- Expected: Similar to previous.
+
+3. Adding multiple leaves to an employee while all persons are being shown
+   
+   i. Prerequisites:
+   	- List all persons using the `list` command. Multiple persons in the list.
+	- The employee should have at least the specified number of leave days available in their balance for the application to be processed.
+
+   ii. Test case: `addleave 1 /from 13/11/2023 /to 15/11/2023`<br>
+   	- Expected: Multiple leaves is added to the first employee on the list. A success message with the details of the employee and leave balance for the current year and next year is shown in the result box.
+
+   iii. Test case: `addleave 1 /from 35/11/2023 /to 15/11/20233`<br>
+   	- Expected: No leave is added. Error details are shown in the result box. 
+
+   iv. Other incorrect addleave commands to try: `addleave`, `addleave x /from 13/11/2023`, `addleave x /to 14/11/2023`, `addleave x /from 13/11/2023 /to 14/11/2023`(where x is larger than the list size, excluding negative, non-integer and extremely large integers),  `addleave 1 /on DATE`(DATE is where the date has already passed), `<br>
+   	- Expected: Similar to previous.
+  
+### Deleting leave for an employee
+
+1. Deleting one leave to an employee while all persons are being shown
+
+   i. Prerequisites:
+	- List all persons using the `list` command. Multiple persons in the list.
+ 	- The employee should be originally on leave on the date.
+
+   ii. Test case: `deleteleave 1 /on 13/11/2023`<br>
+   	- Expected: One leave is deleted for the first employee on the list. A success message with the details of the employee and leave balance for the current year and next year is shown in the result box.
+
+   iii. Test case: `deleteleave 1 /on 35/11/2023`<br>
+   	- Expected: No leave is deleted. Error details are shown in the result box. 
+
+   iv. Other incorrect deleteleave commands to try: `deleteleave`, `deleteleave x /on 13/11/2023`(where x is larger than the list size, excluding negative, non-integer and extremely large integers),  `deleteleave 1 /on DATE`(DATE is where the date has already passed), `<br>
+   	- Expected: Similar to previous.
+
+3. Deleting multiple leaves for an employee while all persons are being shown
+   
+   i. Prerequisites:
+   	- List all persons using the `list` command. Multiple persons in the list.
+	- The employee should be originally on leave on those dates.
+
+   ii. Test case: `deleteleave 1 /from 13/11/2023 /to 15/11/2023`<br>
+   	- Expected: Multiple leaves are deleted for the first employee on the list. A success message with the details of the employee and leave balance for the current year and next year is shown in the result box.
+
+   iii. Test case: `deleteleave 1 /from 35/11/2023 /to 15/11/20233`<br>
+   	- Expected: No leave is added. Error details are shown in the result box. 
+
+   iv. Other incorrect deleteleave commands to try: `deleteleave`, `deleteleave x /from 13/11/2023`, `deleteleave x /to 14/11/2023`, `deleteleave x /from 13/11/2023 /to 14/11/2023`(where x is larger than the list size, excluding negative, non-integer and extremely large integers),  `deleteleave 1 /on DATE`(DATE is where the date has already passed), `<br>
+   	- Expected: Similar to previous.
+
+### Viewing employee(s) who is on leave on a specific date
+
+1. Viewing employee(s) who is on leave on a specific date
+
+   i. Prerequisites:
+ 	- There should be at least one employee on leave on the specified date.
+
+   ii. Test case: `viewleave /on 13/11/2023`<br>
+   	- Expected: A success message with the name(s) of the employee(s) on leave on the specified date is shown in the result box.
+
+   iii. Test case: `viewleave /on 35/11/2023`<br>
+   	- Expected: Error details are shown in the result box. 
+
+   iv. Other incorrect deleteleave commands to try: `viewleave`, `viewleave /on`<br>
+   	- Expected: Similar to previous.
+  
+### Toggle month changing for calendar
+
+1. Toggle to the next month
+
+   i. Test case: `nm`<br>
+   	- Expected: The calendar should transition to the calendar of the next month.
+  
+2. Toggle to the previous month
+   
+  i. Test case: `pm`<br>
+   	- Expected: The calendar should transition to the calendar of the previous month.
+
+2. Toggle to the current month
+   
+  i. Test case: `cm`<br>
+   	- Expected: The calendar should transition to the calendar of the current month.
+  	  
 ### Saving data
 
 1. Dealing with missing/corrupted data files
