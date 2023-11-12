@@ -18,7 +18,7 @@ public class GatherEmailByFinancialPlan implements GatherEmailPrompt {
     }
 
     /**
-     * Gathers the email of {@code person} if {@code person}'s financial plan names matches a specific prompt.
+     * Gathers the email of {@code person} if prompt is a substring of any {@code person}'s financial plan names.
      */
     @Override
     public String gatherEmails(Person person) {

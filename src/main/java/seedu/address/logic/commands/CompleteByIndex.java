@@ -17,7 +17,11 @@ import seedu.address.model.person.Person;
 public class CompleteByIndex extends CompleteCommand {
     public final Index index;
 
+    /**
+     * @param index of the person in the filtered person list to complete appointment with
+     */
     public CompleteByIndex(Index index) {
+        requireNonNull(index);
         this.index = index;
     }
     @Override

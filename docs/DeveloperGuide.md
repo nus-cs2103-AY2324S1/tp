@@ -263,64 +263,42 @@ The following activity diagram illustrates how the complete operation is execute
 
 ### Gather Emails Feature
 
-The **Gather Emails** feature in our software system is a critical functionality designed to efficiently collect
-email addresses. This feature is facilitated through the `GatherCommand` class, which plays a central role in the process.
-
-#### Implementation Overview
-
-The `GatherCommand` class is instantiated by the `GatherCommandParser`, which parses user input commands. The
-`GatherCommandParser` class implements the following operations:
-
-* `GatherCommandParser#parse(String args)` — Checks the prefixes (fp/ and t/) and instantiates `GatherCommand`
-accordingly. It passes either a `GatherEmailByFinancialPlan` or a `GatherEmailByTag` object, both implementations of
-the `GatherEmailPrompt` interface.
-
-The `GatherCommand` takes in a `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently
-interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand` class implements the following
-operations:
-
-* `GatherCommand#GatherCommand(GatherEmailPrompt prompt)` — Constructor that initializes the command with the
-provided `GatherEmailPrompt` object.
-* `GatherCommand#execute()` —  Executes the gathering operation by calling
-`Model#gatherEmails(GatherEmailPrompt prompt)`.
-
-The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
-It contains the following method:
-
-* `ModelManager#gatherEmails(GatherEmailPrompt prompt)` —  Carries out the gathering operation by calling
-`AddressBook#gatherEmails(GatherEmailPrompt prompt)`.
-
-This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and
-in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
-
-The `UniquePersonsList` class maintains a list of unique persons. Additionally, it implements the following operation:
-* `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  This method iterates through the persons list
-and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person.
-
-Depending on the scenario, it triggers either `Person#gatherEmailsContainsTag(String prompt)` or
-`Person#gatherEmailsContainsFinancialPlan(String prompt)`:
-* `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of the name of
-any Tag in the `Set<Tag>` of the current person.
-* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of the
-name of any Financial Plan in the `Set<Tag>` of the current person.
-
-This is the class diagram for the gather command:
+The **Gather Emails** feature in our software system is designed to efficiently collect email addresses.
+The **Gather Emails** feature is facilitated by the `GatherCommand`, which plays a central role in the process. Below is the class diagram of the gather emails feature.
 
 ![GatherClassDiagram](images/GatherClassDiagram.png)
 
-**Usage Scenario:**
+#### Implementation Overview
 
-**Scenario 1:**
-User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` will be initialized. Each person in the
-`UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
+The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherCommandParser` checks for the prefix `fp/` or `t/` in the user's input and creates either a `GatherEmailByFinancialPlan` or `GatherEmailByTag` object accordingly.
+Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface. This interface helps with future scalability of this feature to gather emails by more fields. 
 
-**Scenario 2:**
-User enters a gather `t/Elderly`. The `GatherEmailByTag` will be initialized. Each person in the `UniquePersonList`
-will be passed into the `GatherEmailByTag#gatherEmails(Person person)`.
+The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently
+interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand#execute()` executes the gathering operation by calling
+`Model#gatherEmails(GatherEmailPrompt prompt)`.
 
-The following sequence diagram shows how the gather operation works:
+The following sequence diagram shows how the gather operation works as described above:
 
-![GatherSequenceDiagram](images/GatherSequenceDiagram.png)
+![GatherSequenceDiagram1](images/GatherSequenceDiagram1.png)
+
+The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
+The `ModelManager#gatherEmails(GatherEmailPrompt prompt)` calls `AddressBook#gatherEmails(GatherEmailPrompt prompt)`. 
+This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and
+in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
+
+The `UniquePersonsList` class maintains a list of unique persons and `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` iterates through the persons list
+and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. Depending on the type of `GatherEmailPrompt`, it triggers either: 
+
+* `Person#gatherEmailsContainsTag(String prompt)` —  This method calls the `Tag#containsSubstring(String substring)` to checks if the given prompt is a substring of any Tag names in the `Set<Tag>` of the current person.
+* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  This method calls the `FinancialPlan#containsSubstring(String substring)` to checks if the given prompt is a substring of any Financial Plan names in the `Set<FinancialPlan>` of the current person.
+
+To allow gather email feature to be case-insensitive, the prompt and financial plan/tag names converted to lowercase when compared.
+The following sequence diagram shows how the gathering of emails by financial plan operation works:
+
+![GatherSequenceDiagram2](images/GatherSequenceDiagram2.png)
+
+Currently, we only allow gathering emails by `FinancialPlan` and `Tag` as these are the more likely to be searched to gather emails by. However, we can add more classes implementing the `GatherEmailPromt`
+to facilitate the gathering of emails by more fields.
 
 #### Design Considerations
 
@@ -328,19 +306,19 @@ The following sequence diagram shows how the gather operation works:
 
 **Alternative 1 (Current Choice):** User can only search by one Financial Plan or Tag.
 - **Pros:** Easy to implement. Limits the potential for bugs.
-- **Cons:** Limited filtering options. Hard to scale to gather by other fields.
+- **Cons:** Limited filtering options.
 
 **Alternative 2:** User can search by multiple Financial Plans or Tags.
 - **Pros:** More filtering options. Easy to scale to gather by other fields.
 - **Cons:** Introduces more complexity and requires additional error handling.
 
-_{more aspects and alternatives to be added}_
 
 ### Expanded Find feature
 
 The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure.
 It extends the `find` command with the ability to search for multiple terms at once, implemented using an array
 of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `CombinedPredicate`.
+
 ![CombinedPredicateClassDiagram](images/CombinedPredicateClassDiagram.png)
 
 In the `FindCommandParser`, `CombinedPredicate` is initialised with a `NameContainsKeywordsPredicate`,
@@ -501,47 +479,47 @@ modifying of clients’ data.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                                   | I want to …​                                                                                                          | So that I can…​                                                                                                                      |
-|----------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-|`* * *`| financial advisor who often works with numerous clients | have a central repository for my clients’ contacts details | effectively manage the intricate details of each of my clients. |
-| `* * *`  | financial advisor | add clients' contacts to the contact book | accumulate contacts for future purposes. |
-| `* * *`  | financial advisor | remove clients contacts from the contact book | keep my contact book compact and relevant. |
-| `* * *`  | financial advisor | edit clients’ contacts in the contact book | keep my information updated. |
-| `* *`  | financial advisor | record appointments with my clients | keep track of when my next meeting with the client is. |
-| `* *`  | financial advisor | tag my clients by the plans they purchase | gather groups of clients based on the financial plan(s) they purchased. |
-| `* *`  | financial advisor | search for clients with specific financial plans | update those people about their plans more efficiently. |
-| `* *`  | financial advisor | sort my clients in certain orders including alphabetical order or appointment time in both ascending and descending order | view my clients in a more systematic manner. |
-| `* *`  | financial advisor | view my upcoming appointments I have with clients in chronological order | better plan my time. |
-| `* *`  | financial advisor | complete appointments | clean up the address book of completed appointments. |
-| `* *`  | financial advisor | gather emails of clients by their tags such as age group | collate and notify people with the same tags on any updates. |
-| `* *`  | financial advisor | search for clients with the same financial plan | efficiently provide targeted updates to individuals with the same plan. |
-| `*`      | busy financial advisor                                                    | streamline administrative tasks like tracking my clients contacts                                                     | focus most of my time on giving personalised financial advice and services to my clients.                                            |
-| `*`      | financial advisor managing a substantial client portfolio                 | follow a standardised format to collect my clients’ information                                                       | manage data consistency among my clients.                                                                                            |
-| `*`      | financial advisor                                                         | search for specific client details                                                                                    | quickly contact my clients.                                                                                                          |
-| `*`      | user who values both my clients' time and the quality of our interactions | set reminders for follow-up sessions with clients                                                                     | ensure I never miss an important meeting.                                                                                            |
-| `*`      | financial advisor                                                         | efficiently track referral sources for my clients                                                                     | manage their relationships.                                                                                                          |
-| `*`      | financial advisor                                                         | sort my clients in certain orders including alphabetical order portfolio value in both ascending and descending order | view my clients in a more systematic manner.                                                                                         |
-| `*`      | financial advisor                                                         | filter my clients based on certain metrics like financial products purchased and minimum portfolio value              | choose clients.                                                                                                                      |
-| `*`      | financial advisor                                                         | record appointments with clients with the application                                                                 | keep track of when my last meeting with each client is.                                                                              |
-| `*`      | financial advisor                                                         | export my contact data and client data in a readable format                                                           | use it for backup purposes or to run data processing with other software tools.                                                      |
-| `*`      | financial advisor                                                         | have a dashboard 	                                                                                                    | obtain insights into my clientele base including metrics like client acquisition, retention rates and revenue I generate each month. |
-| `*`      | financial advisor	                                                        | categorise contacts based on their financial status (high net worth regular) 	                                        | prioritise my client interactions.                                                                                                   |
-| `*`      | financial advisor                                                         | update my profile information (name, contact, details, company)                                                       | ensure my personal information is always accurate.                                                                                   |
-| `*`      | an experienced user                                                       | edit the data file directly  	                                                                                        | be more efficient.                                                                                                                   |
-| `*`      | user                                                                      | undo actions                                                                                                          | recover from my mistakes.                                                                                                            |
-| `*`      | busy financial advisor                                                    | quickly add incomplete details of a client and be reminded about it                                                   | fill the rest in later.                                                                                                              |
-| `*`      | financial advisor                                                         | check the appointments scheduled today                                                                                | 	 not forget to meet a client                                                                                                        |
-| `*`      | financial advisor                                                         | view contacts of all my clients I am meeting for the day                                                              | 	efficiently search for their contacts.                                                                                              |
-| `*`      | financial advisor                                                         | view all the insurance plans my client has purchased easily                                                           | make planning during an appointment easier.                                                                                          |
-| `*`      | financial advisor                                                         | filter the plans of my client                                                                                         | to make it focus on certain plans during my appointment                                                                              |
-| `*`      | financial advisor                                                         | make updates to their plans on the app easily	                                                                        | keep track of changes to the clients plans                                                                                           |
-| `*`      | financial advisor                                                         | check which client has been under me the longest                                                                      | 	plan welfare to retain them as long term customers.                                                                                 |
-| `*`      | financial advisor                                                         | add notes on clients                                                                                                  | 	excess them when needed                                                                                                             |
-| `*`      | financial advisor                                                         | display data from the address book into a excel file                                                                  | 	more easily present to clients                                                                                                      |
-| `*`      | financial advisor                                                         | add tags to customers                                                                                                 | 	collate and notify people with the same plan should there be a new change                                                           |
-| `*`      | manager                                                                   | retrieve data on the types of plans purchased                                                                         | 	better understand the products my team member is selling                                                                            |
-| `*`      | manager                                                                   | monitor expiring insurance plans                                                                                      | 	advice trainees on time management                                                                                                  |
-| `*`      | financial advisor	                                                        | import a file                                                                                                         | 	easily transfer client information when client leaves                                                                               |
+| Priority | As a …​                                                                   | I want to …​                                                                                                              | So that I can…​                                                                                                                      |
+|----------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | financial advisor who often works with numerous clients                   | have a central repository for my clients’ contacts details                                                                | effectively manage the intricate details of each of my clients.                                                                      |
+| `* * *`  | financial advisor                                                         | add clients' contacts to the contact book                                                                                 | accumulate contacts for future purposes.                                                                                             |
+| `* * *`  | financial advisor                                                         | remove clients contacts from the contact book                                                                             | keep my contact book compact and relevant.                                                                                           |
+| `* * *`  | financial advisor                                                         | edit clients’ contacts in the contact book                                                                                | keep my information updated.                                                                                                         |
+| `* *`    | financial advisor                                                         | record appointments with my clients                                                                                       | keep track of when my next meeting with the client is.                                                                               |
+| `* *`    | financial advisor                                                         | tag my clients by the plans they purchase                                                                                 | gather groups of clients based on the financial plan(s) they purchased.                                                              |
+| `* *`    | financial advisor                                                         | search for clients with specific financial plans                                                                          | update those people about their plans more efficiently.                                                                              |
+| `* *`    | financial advisor                                                         | sort my clients in certain orders including alphabetical order or appointment time in both ascending and descending order | view my clients in a more systematic manner.                                                                                         |
+| `* *`    | financial advisor                                                         | view my upcoming appointments I have with clients in chronological order                                                  | better plan my time.                                                                                                                 |
+| `* *`    | financial advisor                                                         | complete appointments                                                                                                     | clean up the address book of completed appointments.                                                                                 |
+| `* *`    | financial advisor                                                         | gather emails of clients by their tags such as age group                                                                  | collate and notify people with the same tags on any updates.                                                                         |
+| `* *`    | financial advisor                                                         | search for clients with the same financial plan                                                                           | efficiently provide targeted updates to individuals with the same plan.                                                              |
+| `*`      | busy financial advisor                                                    | streamline administrative tasks like tracking my clients contacts                                                         | focus most of my time on giving personalised financial advice and services to my clients.                                            |
+| `*`      | financial advisor managing a substantial client portfolio                 | follow a standardised format to collect my clients’ information                                                           | manage data consistency among my clients.                                                                                            |
+| `*`      | financial advisor                                                         | search for specific client details                                                                                        | quickly contact my clients.                                                                                                          |
+| `*`      | user who values both my clients' time and the quality of our interactions | set reminders for follow-up sessions with clients                                                                         | ensure I never miss an important meeting.                                                                                            |
+| `*`      | financial advisor                                                         | efficiently track referral sources for my clients                                                                         | manage their relationships.                                                                                                          |
+| `*`      | financial advisor                                                         | sort my clients in certain orders including alphabetical order portfolio value in both ascending and descending order     | view my clients in a more systematic manner.                                                                                         |
+| `*`      | financial advisor                                                         | filter my clients based on certain metrics like financial products purchased and minimum portfolio value                  | choose clients.                                                                                                                      |
+| `*`      | financial advisor                                                         | record appointments with clients with the application                                                                     | keep track of when my last meeting with each client is.                                                                              |
+| `*`      | financial advisor                                                         | export my contact data and client data in a readable format                                                               | use it for backup purposes or to run data processing with other software tools.                                                      |
+| `*`      | financial advisor                                                         | have a dashboard 	                                                                                                        | obtain insights into my clientele base including metrics like client acquisition, retention rates and revenue I generate each month. |
+| `*`      | financial advisor	                                                        | categorise contacts based on their financial status (high net worth regular) 	                                            | prioritise my client interactions.                                                                                                   |
+| `*`      | financial advisor                                                         | update my profile information (name, contact, details, company)                                                           | ensure my personal information is always accurate.                                                                                   |
+| `*`      | an experienced user                                                       | edit the data file directly  	                                                                                            | be more efficient.                                                                                                                   |
+| `*`      | user                                                                      | undo actions                                                                                                              | recover from my mistakes.                                                                                                            |
+| `*`      | busy financial advisor                                                    | quickly add incomplete details of a client and be reminded about it                                                       | fill the rest in later.                                                                                                              |
+| `*`      | financial advisor                                                         | check the appointments scheduled today                                                                                    | 	 not forget to meet a client                                                                                                        |
+| `*`      | financial advisor                                                         | view contacts of all my clients I am meeting for the day                                                                  | 	efficiently search for their contacts.                                                                                              |
+| `*`      | financial advisor                                                         | view all the insurance plans my client has purchased easily                                                               | make planning during an appointment easier.                                                                                          |
+| `*`      | financial advisor                                                         | filter the plans of my client                                                                                             | to make it focus on certain plans during my appointment                                                                              |
+| `*`      | financial advisor                                                         | make updates to their plans on the app easily	                                                                            | keep track of changes to the clients plans                                                                                           |
+| `*`      | financial advisor                                                         | check which client has been under me the longest                                                                          | 	plan welfare to retain them as long term customers.                                                                                 |
+| `*`      | financial advisor                                                         | add notes on clients                                                                                                      | 	excess them when needed                                                                                                             |
+| `*`      | financial advisor                                                         | display data from the address book into a excel file                                                                      | 	more easily present to clients                                                                                                      |
+| `*`      | financial advisor                                                         | add tags to customers                                                                                                     | 	collate and notify people with the same plan should there be a new change                                                           |
+| `*`      | manager                                                                   | retrieve data on the types of plans purchased                                                                             | 	better understand the products my team member is selling                                                                            |
+| `*`      | manager                                                                   | monitor expiring insurance plans                                                                                          | 	advice trainees on time management                                                                                                  |
+| `*`      | financial advisor	                                                        | import a file                                                                                                             | 	easily transfer client information when client leaves                                                                               |
 
 *{More to be added}*
 
@@ -556,11 +534,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to list all clients.
-2. UNOFAS shows a list of all patients.\
+2. UNOFAS shows a list of all clients.\
     Use case ends.
 
 **Extensions**
-* 2a. the list is empty.\
+* 2a. The list is empty.\
     Use case ends.
 
 **Use Case: UC02 - Add a client** \
@@ -568,14 +546,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Guarantees**: A client contact is added into UNOFAS only if the data entered is correct.
 
 **MSS**
-1.  User request to add a client to the list
-2.  UNOFAS adds the client
+1. User request to add a client to the list via the `add` command. 
+2. UNOFAS checks the correctness of the request.
+3. UNOFAS adds the client and displays updated client list.
 
     Use case ends.
 
 **Extensions**
-* 1a. Client details are invalid.
-    * 1a1. System shows an error message.
+* 2a. User did not specify all required fields.
+    * 2a1. UNOFAS shows an error message.
 
       Use case resumes at step 1.
 
@@ -585,19 +564,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <u>list clients (UC01)</u>
-2.  User request to edit client’s contacts from the list
-3.  UNOFAS changes the client’s contacts
+1. User requests to <u>list clients (UC01)</u>
+2. User request to edit client’s contacts from the list via the `edit` command.
+3. UNOFAS checks the correctness of the request. 
+4. UNOFAS changes the client’s contacts
 
     Use case ends.
 
 **Extensions**
 
-* 2a. User enters the wrong details.
+* 3a. User enters the wrong details.
 
-    * 2a1. System shows an error message.
+    * 3a1. UNOFAS shows an error message.
 
       Use case resumes at step 2.
+* 3b. There is a contact with the exact same name. 
+  * 3b1. UNOFAS notifies user that contact exist.
+    
+    Use case resumes at step 2. 
 
 **Use Case: UC04 - Delete a client** \
 **Precondition:** NIL\
@@ -605,17 +589,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <u>list clients (UC01)</u>
-2. User requests to delete a specific client in the list
-3. System deletes the client
+1. User requests to <u>list clients (UC01)</u>.
+2. User requests to delete a specific client in the list via the `delete` command.
+3. UNOFAS checks the correctness of the request.
+3. UNOFAS deletes the client.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The specified client is non-existent.
+* 3a. User inputs an invalid index.
 
-    * 2a1. System shows an error message.
+    * 3a1. UNOFAS shows an error message.
 
       Use case resumes at step 2.
 
@@ -625,14 +610,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to find client
-2.  System shows a list of clients which match search query
+1.  User requests to find client.
+2. UNOFAS checks for the correctness of the request.
+3. UNOFAS shows a list of clients which match search query
 
     Use case ends.
 
 **Extensions**
-
-* 2a. The list is empty.
+* 2a. User inputs invalid data for the command.
+  * 2a1. UNOFAS shows an error message.
+    Use case resumes at step 1.
+* 3a. The list is empty.
 
   Use case ends.
 
@@ -642,18 +630,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <u>list clients (UC01)</u>
-2.  UNOFAS shows a list of clients
-3.  User request to <u>add financial plan to client’s contacts (UC03)</u>
-4.  UNOFAS changes the client’s contacts
+1.  User requests to <u>list clients (UC01)</u>.
+2.  UNOFAS shows a list of clients.
+3.  User request to <u>add financial plan to client’s contacts (UC03)</u>.
+4. UNOFAS checks for the correctness of the request.
+5. UNOFAS changes the client’s contacts.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters the wrong details.
+* 4a. User enters the wrong details.
 
-    * 3a1. System shows an error message.
+    * 4a1. UNOFAS shows an error message.
 
       Use case resumes at step 1.
 
@@ -664,16 +653,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to <u>list clients (UC01)</u>
-2. UNOFAS shows a list of clients
-3. User requests to sort list of clients (by appointment time or name)
-4. UNOFAS updates ordering of clients' contacts.
+2. UNOFAS shows a list of clients.
+3. User requests to sort list of clients (by appointment time or name) via `sort` command.
+4. UNOFAS checks for the correctness of the request.
+5. UNOFAS updates ordering of clients' contacts.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters the wrong details.
-    * 3a1. System shows an error message.
+* 4a. User enters the wrong details.
+    * 4a1. UNOFAS shows an error message.
       Use case resumes at step 1.
 
 **Use Case: UC08 - Schedule appointment for a client** \
@@ -683,21 +673,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to <u>list clients (UC01)</u>
-2.  UNOFAS shows a list of clients
-3.  User request to schedule appointment for client via the `schedule` command
-4.  UNOFAS changes the client’s contacts
+2.  UNOFAS shows a list of clients.
+3.  User request to schedule appointment for client via the `schedule` command.
+4. UNOFAS checks the correctness of the request.
+5. UNOFAS changes the client’s contacts.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters the wrong details.
-    * 3a1. System shows an error message.
+* 4a. User enters the wrong details.
+    * 4a1. System shows an error message.
       Use case resumes at step 1.
 
-* 3b. User has an existing appointment scheduled.
-    * 3a1. System shows a warning message.
-      Use case resumes at step 4.
+* 4b. Client's contact has an existing appointment scheduled.
+    * 4b1. UNOFAS shows a warning message.
+    * 4b2. User confirms to replace the existing appointment.
+      Use case resumes at step 5.
 
 **Use Case: UC09 - Complete appointment for a client** \
 **Precondition:** Appointment and client must exist before completing appointment.\
@@ -706,24 +698,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to <u>list clients (UC01)</u>
-2.  UNOFAS shows a list of clients
-3.  User requests to complete appointment for client via the `complete` command
-4.  UNOFAS removes appointment from appointment list and client's contact card
+2.  UNOFAS shows a list of clients.
+3.  User requests to complete appointment for client via the `complete` command.
+4. UNOFAS checks for the correctness of the command.
+5. UNOFAS removes appointment from appointment list and client's contact card
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters the wrong details.
-    * 3a1. System shows an error message.
-      Use case resumes at step 1.
+* 4a. User enters the wrong details.
+    * 4a1. UNOFAS shows an error message.
+      Use case resumes at step 3.
 
-* 3b. User does not have an existing appointment scheduled.
-    * 3b1. System shows a warning message.
+* 4b. Client's contact chosen does not have an existing appointment scheduled.
+    * 4b1. UNOFAS shows a warning message.
       Use case ends.
 
-* 3c. User does not exist according to index provided.
-    * 3c1. System shows a warning message.
+* 4c. No clients' appointments in contacts matches date input by user.
+    * 4c1. UNOFAS shows a warning message.
       Use case ends.
 
 ### Non-Functional Requirements

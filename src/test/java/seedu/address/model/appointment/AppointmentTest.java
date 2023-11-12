@@ -145,8 +145,11 @@ class AppointmentTest {
     @Test
     public void isSameDate() {
         Appointment appointment1 = new Appointment("Review Insurance", VALID_DATE_TIME);
-        LocalDate dateTime = LocalDate.of(2023, 1, 1);
+        LocalDate sameDateTime = LocalDate.of(2023, 1, 1);
 
-        assertTrue(appointment1.isSameDate(dateTime));
+        assertTrue(appointment1.isSameDate(sameDateTime));
+
+        LocalDate differentDateTime = LocalDate.of(2023, 05, 05);
+        assertFalse(appointment1.isSameDate(differentDateTime));
     }
 }
