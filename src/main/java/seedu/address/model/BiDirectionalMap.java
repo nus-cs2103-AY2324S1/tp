@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -87,11 +88,21 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
      * When there is a name change to the key, this method should be called to update the map
      */
     public void update(T tOld, T tNew) {
+        if (tOld.equals(tNew)) {
+            return;
+        }
         Name[] names = get(tOld);
         remove(tOld);
         for (Name name : names) {
             reverseMap.get(name).add(tNew.getName());
         }
+
+        // update the forward map
+        forwardMap.put(tNew.getName(), convertArrayToHashSet(names));
+    }
+
+    public <R> HashSet<R> convertArrayToHashSet(R[] list) {
+        return new HashSet<>(Arrays.asList(list));
     }
 
     /**
@@ -103,6 +114,9 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
         for (Name name : names) {
             forwardMap.get(name).add(pNew.getName());
         }
+
+        // update the reverse map
+        reverseMap.put(pNew.getName(), convertArrayToHashSet(names));
     }
 
     /**
@@ -155,5 +169,22 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
             }
         }
         return m;
+    }
+
+    /**
+     * Faciliates comparison when testing.
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof BiDirectionalMap)) {
+            return false;
+        }
+        BiDirectionalMap<?, ?> other = (BiDirectionalMap<?, ?>) o;
+        return forwardMap.equals(other.forwardMap) && reverseMap.equals(other.reverseMap);
     }
 }

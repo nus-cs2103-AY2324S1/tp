@@ -52,4 +52,10 @@ public class TypicalLessons {
         return new Lesson("SAMPLE 1", "10:00", "14:00", "2020/10/10", "MATHEMATICS", taskList);
     }
 
+    public static Lesson getSample2() throws ParseException {
+        return new Lesson("SAMPLE 2", "14:00", "16:00", "2020/10/10", "CHEMISTRY", taskList);
+    }
+    public static Lesson getSample3() throws ParseException {
+        return new Lesson("SAMPLE 3", "13:00", "16:00", "2020/10/12", "MATHEMATICS", taskList);
+    }
 }

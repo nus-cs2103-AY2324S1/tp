@@ -19,7 +19,7 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
         currentShownEntry = model.getCurrentlyDisplayedLesson();
         list = model.getFilteredScheduleList();
         hasClashWith = model::hasLessonClashWith;
-        deleteMethod = model::deleteLesson;
+        deleteMethod = model::deleteLessonForEdit;
         addMethod = model::addLesson;
         getClashingEntry = model::getLessonClashWith;
         showMethod = model::showLesson;
@@ -34,6 +34,11 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
             throw new CommandException(e.getMessage());
         }
         edited.setSubjectIfNotDefault(editDescriptor.getSubject());
+    }
+
+    @Override
+    protected void updatePersonLessonMap() {
+        model.getPersonLessonMap().updateReverse(original, edited);
     }
 
     @Override

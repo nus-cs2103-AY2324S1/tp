@@ -11,8 +11,8 @@ pageNav: 3
 
 TutorMate is a desktop app targeted to private tuition teachers on handling tuition related matters.
 
-It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-If you can type fast, TutorMate can get your administrative tasks done faster than traditional GUI apps.
+It is optimized for use via a Command Line Interface (_CLI_ <sup>[1](#glossary)</sup>) while still having the benefits of a Graphical User Interface (_GUI_ <sup>[2](#glossary)</sup>). 
+If you can type fast, TutorMate can get your administrative tasks done faster than traditional _GUI_ <sup>[2](#glossary)</sup> apps.
 
 This document describes the main features of TutorMate:
 1. Student Management System: track all student details
@@ -31,14 +31,14 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 ## Quick Start
 
-1. Ensure you have Java 11 or above installed in your Computer. You can check by opening a command terminal and typing `java -version`.
+1. Ensure you have _Java_ <sup>[3](#glossary)</sup>  11 or above installed in your Computer. You can check by opening a _command terminal_ <sup>[4](#glossary)</sup> and typing `java -version`.
 
 2. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your TutorMate.
+3. Copy the file to the folder you want to use as the _home folder_ <sup>[5](#glossary)</sup> for your TutorMate.
 
-4. Open a command terminal, navigate into the home folder using the change directory command `cd`, and use the `java -jar tutormate.jar` command to run the application.<br>
-   A GUI similar to the picture below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a _command terminal_ <sup>[4](#glossary)</sup>, navigate into the _home folder_ <sup>[5](#glossary)</sup> using the change directory command `cd`, and use the `java -jar tutormate.jar` command to run the application.<br>
+   A _GUI_ <sup>[2](#glossary)</sup> similar to the picture below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/about.png)
 
@@ -69,7 +69,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 * The app is split into 3 states: ___STUDENTS list___, ___SCHEDULE list___ (default) and ___TASKS list___. Each corresponds to the main features of TutorMate.
 * Each state has its associated features, while certain features work with all states but has differing functionalities.
 * The ___STUDENTS list___ handles student details management, ___SCHEDULE list___ handles lessons, scheduling and the tasks for each lesson while the full ___TASKS list___ is a view to display all tasks.
-* The GUI has several main components (see GUI image below):
+* The _GUI_ <sup>[2](#glossary)</sup> has several main components (see _GUI_ <sup>[2](#glossary)</sup> image below):
   * The command box is for users to enter and execute commands.
   * The response box is to display responses for command execution, to indicate success or errors.
   * The left side has the list panel, which shows different list types (student, schedule, tasks).
@@ -77,7 +77,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 ![Ui](images/Ui.png)
 
 ### Terminologies / Symbols
-* Flag: denoted with a dash before the flag name e.g. -name.
+* Flag: A flag is a tab started with dash "-" that is used to identify the type of information that is being provided e.g. -name.
 <!-- todo, validate that all boxes thing works, as IDE does not show it -->
 * Text formatted as code snippets are either commands e.g. `list schedule`, command formats e.g. `list [LIST][KEYWORDS]` or parameters e.g. `NAME`.
 * <box type="info" seamless>This box denotes additional information.</box>
@@ -110,9 +110,9 @@ This box denotes command outputs.
 <box type="warning" seamless>
 
 * Please avoid using " -" in the value of a parameter as tutorMate treats " -" as a reserved word that signifies the start of a new flag.
-* Please do not abuse the parser of tutorMate. For example, do not game it with special characters or code injections. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
+* Please do not abuse the parser of tutorMate. For example, do not game it with special characters or __code injections__<sup>[6](#glossary)</sup>_<sup>[4](#glossary)</sup>. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
 * TutorMate supports a maximum of 99999 students, 99999 lessons and 99999 tasks. Further data beyond this limit might be lost and not accessible in the application.
-* Please avoid manually modifying the data files in the data folder. Doing so may result in unexpected behaviour and data loss.
+* Please avoid manually modifying the data files in the _home folder_<sup>[5](#glossary)</sup>. Doing so may result in unexpected behaviour and data loss.
 * Please avoid running multiple instances of TutorMate at the same time. Doing so may result in unexpected behaviour and data loss.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -157,31 +157,50 @@ Format: `list [LIST] [KEYWORDS]`
 
 </box>
 
+#### For Student:
+
 Example usages:
-* `list` and `list schedule` displays the ___SCHEDULE list___ with all the lessons with their names in time order.
 * `list students` displays all the students with their names (including previously specified fields).
 * `list students subjects email` displays all the students with their names, a list of subjects for each student and their email.
-* `list tasks` displays all the tasks with their description.
+
+Success outputs:
+* Input: `list students` (with no additional student details):
+```
+Showing list STUDENT
+```
+![Success for list STUDENTS](images/list/list_student_positive.png)
+
+#### For Schedule:
+
+Example usages:
+* `list` and `list schedule` displays the ___SCHEDULE list___ with all the lessons with their names in time order.
 
 Success outputs:
 * Input: `list` or `list schedule`
 ```
 Showing list SCHEDULE
 ```
-  ![Success for list SCHEDULE](images/list/list_schedule_positive.png)
-* Input: `list students` (with no additional student details):
-```
-Showing list STUDENT
-```
-  ![Success for list STUDENTS](images/list/list_student_positive.png)
+![Success for list SCHEDULE](images/list/list_schedule_positive.png)
+
+
+#### For Task:
+
+Example usages:
+* `list tasks` displays all the tasks with their description.
+
+Success outputs:
 * Input: `list tasks`
 ```
-Showing list TASKS
+Showing list TASK
 ```
   ![Success for list STUDENTS](images/list/list_tasks_positive.png)
+
 * If there are no entries, e.g. there are no students added yet or there are no tasks added yet, an empty list is displayed.
 
 ![Empty list](images/list/list_tasks_empty.png)
+
+
+#### General Examples
 
 Failure outputs:
 * Input: `list student`, `list task`, `list students EMAIL`, `list students subject`, `list students subjects,phone`
@@ -213,10 +232,10 @@ Format: `show INDEX`
 
 #### For Student:
 
-In ___STUDENT list___, the show command shows the details of the specified student from the ___STUDENT list___ in the application.
+In ___STUDENTS list___, the show command shows the details of the specified student from the ___STUDENTS list___ in the application.
 
 Example usages:
-* `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the ___STUDENT list___.
+* `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the ___STUDENTS list___.
 * `find Betsy` followed by `show 1` shows the details of the 1st student in the results of the `find` command.
 
 Success outputs:
@@ -644,12 +663,12 @@ Editing of ___TASKS list___ is not supported at this time!
 
 ### Find Feature : `find`
 
-The find command finds students (in ___STUDENTS list___) or lessons (in ___SCHEDULE list___) whose names contain the search string.
+The find command finds students (in ___STUDENTS list___) or lessons (in ___SCHEDULE list___) whose names contain the search _string_ <sup>[7](#glossary)</sup>.
 
 Format: `find SEARCH_STRING`
 * The search is case-insensitive. e.g. `lesson` will match `Lesson`. `hans` will match `Hans`.
-* Names does not need to match the search string, as long as they contain it they will be returned. e.g. search string `sson Che` will return `Lesson Chemistry`. 
-* While non-alphanumeric characters are allowed in the search string, they will likely not return any results as `NAME` parameter only allows alphanumeric characters.
+* Names does not need to match the search _string_ <sup>[7](#glossary)</sup>, as long as they contain it they will be returned. e.g. search _string_ <sup>[5](#glossary)</sup> `sson Che` will return `Lesson Chemistry`. 
+* While non-alphanumeric characters are allowed in the search _string_ <sup>[7](#glossary)</sup>, they will likely not return any results as `NAME` parameter only allows alphanumeric characters.
 
 <box type="warning" seamless>
 
@@ -694,7 +713,7 @@ Success outputs:
 
 Failure outputs:
 * Input: `find` or `find `
-  * Error: search string is empty.
+  * Error: search _string_<sup>[7](#glossary)</sup> is empty.
 ```
 Invalid command format! 
 find: Finds all persons or lesson whose names contains the specified search string (case-insensitive) and displays them as a list with index numbers.
@@ -1111,7 +1130,7 @@ The command history feature allows you to retrieve previously typed commands int
 **Tips:**
 - Command history is only valid per session, it does not save into storage. 
 - Invalid commands are also saved into command history. 
-- During each successful command execution, the pointer resets again, hence pressing the up or down arrow will point and return the most recent command text.
+- During each successful command execution, the _pointer_<sup>[8](#glossary)</sup> resets again, hence pressing the up or down arrow will point and return the most recent command text.
 - Retrieved commands will replace the existing text in command box.
 
 </box>
@@ -1161,14 +1180,14 @@ Format: `help`
 
 ### Saving Data
 
-TutorMate data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TutorMate data is saved in the _hard disk_<sup>[9](#glossary)</sup> automatically after any command that changes the data. There is no need to save manually.
 
 <br>
 
 ### Editing Data File
 
-TutorMate data is saved automatically as JSON files `[JAR file location]/data/addressbook.json`, `[JAR file location]/data/schedulelist.json` and `[JAR file location]/data/personLessonMap.json`. Advanced users are welcome to update data directly by editing that data file.
-Be very careful, especially when you modify attributes such as Start and End time of lessons, as any overlapping lesson timings will render the data as invalid. For example, lesson clashes will not be detected. Scenarios like these are not exhaustive.
+TutorMate data is saved automatically as _JSON_<sup>[10](#glossary)</sup> files `[JAR file location]/data/addressbook.json`, `[JAR file location]/data/schedulelist.json` and `[JAR file location]/data/personLessonMap.json`. It is possible to update data directly by editing that data file, but we do not recommend doing so. 
+If you insist on modifying the data file directly, be very careful, especially when you modify attributes such as Start and End time of lessons, as any overlapping lesson timings will render the data as invalid. Scenarios like these are not exhaustive.
 
 <box type="warning" seamless>
 
@@ -1184,44 +1203,51 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 **A**: You can follow the steps [here](https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk) to install Java 11 to your computer.
 
 **Q**: How do I transfer my data to another Computer? <br>
-**A**: Copy TutorMate's jar file into the folder you want to use as the home folder in the other computer. Before running the application, copy _addressbook.json_, _personLessonMap.json_ and _schedulelist.json_ files from the home folder in your current computer into the home folder of the other computer. After copying the 3 files, running the application will show the same data. However, do note that the changes made through the application in one computer will not be reflected in the data in another computer.
+**A**: Copy TutorMate's jar file into the folder you want to use as the _home folder_<sup>[5](#glossary)</sup> in the other computer. Before running the application, copy _addressbook.json_, _personLessonMap.json_ and _schedulelist.json_ files from the _home folder_<sup>[5](#glossary)</sup> in your current computer into the _home folder_<sup>[5](#glossary)</sup> of the other computer. After copying the 3 files, running the application will show the same data. However, do note that the changes made through the application in one computer will not be reflected in the data in another computer.
 
 **Q**: Can I edit the data in the application through the _addressbook.json, personLessonMap.json, schedulelist.json_ files directly? <br>
-**A**: It is possible. However, it is not advisable for you to do so as if the changes made to the data file makes its format invalid, TutorMate will discard all data. Please use the `edit` command to make changes to your data instead. If you insist on directly modifying data files, please read this section [here](#editing-data-file) before doing so.
+**A**: It is possible. However, it is not advisable for normal users to do so as if the changes made to the data file makes its format invalid, TutorMate will discard all data. Please use the `edit` command to make changes to your data instead. If you insist on directly modifying data files, please read this caution [here](#editing-data-file).
 
 **Q**: Can I still use the application without internet connection? <br>
-**A**: Yes, you can. TutorMate is an offline desktop application. The only exception is the "help" command which provides a URL to the user guide.
+**A**: Yes, you can. TutorMate is an offline desktop application. The only exception is the "help" command which provides a _URL_<sup>[11](#glossary)</sup> to the user guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the _GUI_ <sup>[2](#glossary)</sup> will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
 
-| Action          | List     | Format                                                                                                                         | Examples                                                                                                       | Remarks                                                       |
-|-----------------|----------|--------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
-| **Add**         | Students | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]` | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | NA                                                            |
-| **Add**         | Schedule | `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                | `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`                       | NA                                                            |
-| **Add**         | Schedule | `addTask [INDEX] DESCRIPTION`                                                                                                  | `addTask 1 Make Forces Notes`                                                                                  | NA                                                            |
-| **Delete**      | Students | `deletePerson INDEX`                                                                                                           | `deletePerson 1`                                                                                               | NA                                                            |
-| **Delete**      | Schedule | `deleteLesson INDEX`                                                                                                           | `deleteLesson 1`                                                                                               | NA                                                            |
-| **Delete**      | Schedule | `deleteTask INDEX`                                                                                                             | `deleteTask 1`                                                                                                 | show LESSON_INDEX has to be used prior to deleteTask command  |
-| **Feature**     | Any      | `command format`                                                                                                               | `sample valid command`                                                                                         | Any additional remarks here                                   |
+| Action          | List                        | Format                                                                                                                         | Examples                                                                                                       | Remarks                                                       |
+|-----------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
+| **Add**         | Students                    | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]` | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | NA                                                            |
+| **Add**         | Schedule                    | `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                | `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`                       | NA                                                            |
+| **Add**         | Schedule                    | `addTask [INDEX] DESCRIPTION`                                                                                                  | `addTask 1 Make Forces Notes`                                                                                  | NA                                                            |
+| **Delete**      | Students                    | `deletePerson INDEX`                                                                                                           | `deletePerson 1`                                                                                               | NA                                                            |
+| **Delete**      | Schedule                    | `deleteLesson INDEX`                                                                                                           | `deleteLesson 1`                                                                                               | NA                                                            |
+| **Delete**      | Schedule                    | `deleteTask INDEX`                                                                                                             | `deleteTask 1`                                                                                                 | show LESSON_INDEX has to be used prior to deleteTask command  |
+| **List**     | `list [LIST] [KEYWORDS]`    | `list students email`, `list schedule`, `list tasks` | Any               | `list` without optional parameters displays the ___SCHEDULE list___ |
+| **Find**     | `find SEARCH_STRING`        | `find bernice`, `find lesson`                        | Student, Schedule | Disabled in ___TASKS list___                                        |
+| **Feature**     | Any                         | `command format`                                                                                                               | `sample valid command`                                                                                         | Any additional remarks here                                   |
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 
-| Term                 | Definition                                                                                                                                                                                                          |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Command Terminal** | A text based user interface where most of the interaction is done by inputting commands. You can search for "terminal" to find and launch the inbuilt terminal in your operating system (Windows, Linus and MacOS). |
-| **GUI**              | Abbreviation for graphical user interface, which allow user to interact with graphical components such as icons, buttons, and menus.                                                                                |
-| **Home Folder**      | The folder TutorMate is located at while running. This will be the folder where tutorMate read the date from and write the data to.                                                                                 |
-| **Java**             | A programming language that you need to install before you are able to launch tutorMate. You could refer to FAQ for tips on how to verify whether you already have Java installed and how to install it.            |
-| **Flag**             | A flag is a tab started with dash "-" that is used to identify the type of information that is being provided. For example, in "add -name John", "-name" is a flag and "John" is the value of this flag.            |
-
+| id | Term                 | Definition                                                                                                                                                                                                          |
+|----|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | **CLI**              | Abbreviation for Command Line Interface, which allow user to interact with the application by inputting commands, and receive feedback from the application in the form of text.                                    |
+| 2  | **GUI**              | Abbreviation for graphical user interface, which allow user to interact with with the application via graphical components such as icons, buttons, and menus.                                                       |
+| 3  | **Java**             | A programming language that you need to install before you are able to launch tutorMate. You could refer to FAQ for tips on how to verify whether you already have Java installed and how to install it.            |                                                              |
+| 4  | **Command Terminal** | A text based user interface where most of the interaction is done by inputting commands. You can search for "terminal" to find and launch the inbuilt terminal in your operating system (Windows, Linus and MacOS). |
+| 5  | **Home Folder**      | The folder TutorMate is located at while running. This will be the folder where tutorMate read the date from and write the data to.                                                                                 |
+| 6  | **Code Injection**   | A computer attack in which malicious code is inserted into an application program.                                                                                                                                  |
+| 7  | **String**           | A sequence of characters. Can be taken as just any text.                                                                                                                                                            |
+| 8  | **Pointer**          | A variable that stores the memory address of another variable.                                                                                                                                                      |
+| 9  | **Hard Disk**        | The long term storage device of the computer. The memory will remain even after the computer is turned off.                                                                                                         |
+| 10 | **JSON**             | Abbreviation for JavaScript Object Notation. It is a format for storing data                                                                                                                                        |
+| 11 | **URL**              | Abbreviation for uniform resource locator. It is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it.                                                 |
