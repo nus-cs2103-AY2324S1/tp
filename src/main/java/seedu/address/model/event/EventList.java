@@ -76,4 +76,10 @@ public class EventList {
     public void sort() {
         this.internalList.sort(new EventComparator());
     }
+
+    public void updateGroups() {
+        for (Event event: this.internalList) {
+            event.updateGroups();
+        }
+    }
 }

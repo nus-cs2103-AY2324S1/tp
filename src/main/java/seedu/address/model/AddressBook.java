@@ -225,4 +225,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Set<Name> findInvalidNames(Set<Name> names) {
         return this.persons.findInvalidNames(names);
     }
+
+    public void updateGroups() {
+        this.events.updateGroups();
+    }
 }
