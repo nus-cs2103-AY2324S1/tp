@@ -21,8 +21,9 @@ title: OutBook Developer Guide
   - [Add attendee feature](#add-attendee-feature)
   - [Remove attendee feature](#remove-attendee-feature)
   - [Keeping track of last meeting with contact](#keeping-track-of-last-meeting-with-contact)
-- [Planned Enhancements](#planned-enhanements)
+- [Planned Enhancements](#planned-enhancements)
   - [\[Proposed\] Undo/redo feature](#proposed-undo-and-redo-feature)
+  - [\[Feature Flaw\] View Commands](#feature-flaw-view-commands)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -328,8 +329,9 @@ The following diagrams show the entire sequence flow for `LogicManager#execute()
 User can specify a Person to add as an Attendee to a specified Meeting.
 
 To avoid storing an entire `JsonAdaptedPerson` object within the `JsonAdaptedMeeting` every time a `Person` is added to a `Meeting`,
-we created the `Attendee` class to store a unique identifier for the `Person` added.
-As every `Person` has a unique name in the current iteration, `Attendee` is implemented in the following way:
+an `Attendee` class is created to store a unique identifier for the `Person` added.
+As every `Person` has a unique name in the current iteration of OutBook, it is used as the unique identifier. 
+`Attendee` is implemented in the following way:
 
 - `Attendee(attendeeName)` -- Initialized with a String obtained from `Person.getName().toString()`
 - `Attendee#getAttendeeName()` -- Returns a String representing the attendee's name
@@ -340,7 +342,7 @@ The following sequence diagram shows how the add attendee operation works:
 
 ![AddAttendeeSequenceDiagram](images/AddAttendeeSequenceDiagram.png)
 
-A Person object can be obtained from a Meeting's list of attendees by searching through `UniquePersonList`
+A `Person` object can be obtained from a `Meeting`'s list of attendees by searching through `UniquePersonList`
 for a `Person` with a name matching `attendeeName`.
 
 <div style="page-break-after: always;"></div>
@@ -384,6 +386,24 @@ Step 9. Further execution is carried out, which like before adds the `Person` ob
 
 Solution:
 This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is marked as done, the attendees of the meeting will be updated with their LastContactedTime field updated to the end time of the meeting.
+
+<div style="page-break-after: always;"></div>
+
+### Keeping track of the status of a contact
+Each instance of `Person` contains an immutable `Status` object that allows the user to specify which stage of the insurance sales process a contact is at, if applicable.
+At the current iteration of OutBook, a status must be one of `NIL`, `Prospective`, `Active`, `Inactive`, `Renewal`, `Claimant` (case-insensitive).
+This is tailored according to the responsibilities of an insurance agent, which include:
+- Promoting relevant insurance policies to prospective clients
+- Keeping active clients updated on their policies
+- Finding out why inactive clients did not renew their policies
+- Sending renewal reminders to clients whose policies are approaching expiry
+- Filing and following up on claims on behalf of their clients
+
+The list of valid statuses is stored as an `Enumeration` object for the following benefits:
+- Readability: e.g. `StatusList.NIL` is self-explanatory and easier to understand than something like `StatusList[0]` if an index data structure were to be used.
+- Maintainability: If the list of valid statuses changes or expands in the future, it's much easier to update an enumeration. This centralizes the changes in one place, making the code more maintainable compared to scattered string constants.
+
+`Status` is implemented and utilized in a similar manner to [`LastContactedTime`](#keeping-track-of-last-meeting-with-contact).
 
 <div style="page-break-after: always;"></div>
 
@@ -467,6 +487,15 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   - Cons: We must ensure that the implementation of each individual command are correct.
+
+### \[Feature Flaw\] View Commands
+
+As described in the implementation notes for `viewc` and `viewm` above, the currently displayed `Person` and `Meeting` objects will be cleared when certain commands such as `deletec` and `deletem` are used on a separate object, which is necessary due to the way the view commands are currently implemented. Additional details are in the implementation section referenced above.
+
+We plan to remove the need to handle such edge cases by modifying the way both view commands are implemented. One potential method is as follows:
+- Revert the implementation of `viewc` and `viewm` to the original method of storing a copy of the viewed object, rather than the viewed index.
+- Modify the behaviour of `editc`, `editm`, `deletec` and `deletem` such that when they are used on the original object currently being viewed, the stored copy will be edited/deleted accordingly.
+- This allows the currently viewed `Person` or `Meeting` object to persist regardless of command usage, and only be cleared when the object is deleted, or everything is cleared via the `clear` command.
 
 ---
 

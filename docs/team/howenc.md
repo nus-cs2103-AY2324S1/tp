@@ -38,7 +38,7 @@ My contributions to the project are listed below.
   - Managed [releases](https://github.com/AY2324S1-CS2103T-F12-4/tp/releases) `v1.2`-`v1.3(final)` 
 
 - **Enhancements to existing features**:
-- 
+
   - Configured the model and storage to support Meetings. (Pull Request [#42](https://github.com/AY2324S1-CS2103T-F12-4/tp/pull/42))
     - What it does: This was the groundwork needed for the rest of our project to happen.
     - Highlights: The saving of the Attendees using Jackson proved quite difficult. The original implementation wanted the Person to be saved within the meeting. However, this would not be feasible as it would take up too much space and have a non-unique instance of a Person. This was resolved by using a string to represent the Person, as there cannot be 2 persons with the same name.
