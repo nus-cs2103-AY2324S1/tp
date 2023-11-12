@@ -896,8 +896,7 @@ resistant to mistakes by having the user key in a specific phrase, or to initial
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting
-point for testers to work on;
-testers are expected to do more *exploratory* testing.
+point for testers to work on; testers are expected to do more *exploratory* testing.
 
 </div>
 
@@ -918,11 +917,32 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a person
 
+1. Adding a person.
+
+   1. Prerequisites: List all persons using the `list` command.
+
+   2. Test case: `add n/name p/987 a/address e/email@email nk/nokname nkp/654`<br>
+      Expected: New contact with the above details is added to the bottom of the list.
+
+   3. Test case: `add n/name`<br>
+      Expected: No person is added. Error details shown in the status message. Status bar remains the same.
+
 ### Editing a person
+
+1. Editing an existing person.
+
+   1. Prerequisites: List all persons using the `list` command. At least 1 person in the list.
+
+   2. Test case: `edit 1 n/New Name`<br>
+      Expected: The first contact in the list has their name changed to `New Name`.
+
+   3. Test case: `edit 1 n/Invalid Name!`<br>
+      Expected: The name of the first contact is unchanged. Error details shown in the status message.
+      Status bar remains the same.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -936,9 +956,29 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+2. Deleting a person while not all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command, then filter the list using the `find` command. At least
+      1 person in the remaining list and at least 1 person filtered out.
+   2. Test case: `delete 1`<br>
+      Expected: Same as with the full list.
+   3. Test case: Delete a number that is equal to the number of people in the full contact book. <br>
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 ### Finding a person
+
+1. Finding a person by name.
+
+   1. Prerequisites: List all persons using the `list` command. At least 1 person in the contact book with the name
+      `Test Name`.
+
+   2. Test case: `find n/Name`<br>
+      Expected: The person with the name `Test Name` appears in the filtered contact book.
+
+   3. Test case: `find n/Invalid Name!`<br>
+      Expected: List remains unchanged. Error details shown in the status message. Status bar remains the same.
+
+2. Finding a person by tag or financial plan can be tested in a similar manner.
 
 ### Gathering emails
 
