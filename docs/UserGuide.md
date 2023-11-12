@@ -592,9 +592,17 @@ Format: `event INDEX d/DESCRIPTION bt/BEGIN_TIME et/END_TIME`
 1. Enter the command `event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
 2. This is the result of the successful `event` command [It is assumed a candidate called Alex Yeoh exists in JABPro]:
 
+![Event](images/event.png)
 
-Example:
-* `event 1 d/Interview bt/2023-10-27 18:00 et/2023-10-27 21:00` adds an event to the list, and stores the name of the person the event is associated with, the description, start time and end time, in a JSON file.
+The changes in UI take place in the `Events Window`. Please find more details in [Viewing Events](UserGuide.md#viewing-events-schedule).
+
+**Example of failed execution of `event` command due to missing parameter:**
+
+1. Enter the command `event 1 d/Interview bt/2023-11-12 10:00`
+2. This is the result of the failed `event` command [It is assumed a candidate exists in JABPro]:
+
+![EventFailure](images/eventfail.png)
+
 
 ### Viewing events: `schedule`
 
@@ -602,7 +610,9 @@ Displays all events that have been added to JABPro.
 
 Format: `schedule`
 
-* Opens the `Events` window and displays all events that have been previously added.
+**Note regarding `schedule` command:**
+
+* `schedule` command will open the `Events` window regardless of whether there are events in JABPro or not.
 
 <box type="tip" seamless>
 
@@ -612,9 +622,18 @@ Format: `schedule`
 
 </box>
 
-Example:
-* First, entering `event 1 d/Interview bt/2023-10-27 18:00 et/2023-10-27 21:00` adds the event, and entering `schedule` displays this event in a separate window, titled `Events`
+**Example of successful execution of `schedule` command:**
 
+1. Enter the command `schedule`
+2. This is the result of the successful `schedule` command [It is assumed that an event was previously added using the command `event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00]:
+
+![Schedule](images/schedule.png)
+
+The `Events` window opens up:
+
+![EventWindow](images/eventwin.png)
+
+There is no possibility of a "failed" execution of the `schedule` command.
 
 
 ### Clearing all entries : `clear`
