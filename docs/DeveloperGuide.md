@@ -645,12 +645,11 @@ Use Case ends.
     2. Send real-time notifications when there is an upcoming lesson.
     3. Delete lessons that are past the current date automatically.
 
-
-
+    
 
 ### Glossary
 
-* * **GUI**: Abbreviation for graphical user interface, which allow user to interact with with the application via graphical components such as icons, buttons, and menus.
+* **GUI**: Abbreviation for graphical user interface, which allow user to interact with with the application via graphical components such as icons, buttons, and menus.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
