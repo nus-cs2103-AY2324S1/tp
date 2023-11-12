@@ -18,9 +18,9 @@ FumbleLog is a desktop productivity application used for managing contacts and e
 * Added new command to assign groups to events.
 * Added new command to unassign groups from events.
 * Updated the `delete` command delete empty groups from events.
-* Update the `add` command to appropriately handle assigning and un-assigning of groups and persons.
-* Update the `edit` command to appropriately handle assigning and un-assigning of groups and persons.
-* Added test cases for event commands, parsers and model.
+* Updated the `add` command to appropriately handle assigning and un-assigning of groups and persons.
+* Updated the `edit` command to appropriately handle assigning and un-assigning of groups and persons.
+* Added test cases for event commands, parsers and models.
 * Added test utils for MeetingBuilder, TypicalMeetings and TypicalPersons.
 
 ### Contributions to the Developer Guide (DG)
@@ -45,7 +45,7 @@ FumbleLog is a desktop productivity application used for managing contacts and e
 * Provided cosmetic enhancements and updates to the user guide.
 * Updated images for the user guide.
 * Updated commands with clearer descriptions of FumbleLog behaviour.
-
+* Added FumbleLogs Favicon to the website
 
 ### Contributions to team-based tasks
 * Conducted code reviews for PRs.
