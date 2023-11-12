@@ -297,12 +297,12 @@ Here is an example command where we find all events with the event name of "Part
 `findEvent party`
 
 <div markdown="block" class="alert alert-info">:information_source:
-The find commands require the names to be typed in full meaning Nich will not suffice for finding Nicholas. 
+The find commands require the names to be typed in full, meaning "Nich" will not suffice for finding "Nicholas". 
 To make it convenient for you, the names do not have to be capitalised! 
 </div>
 
 <div markdown="block" class="alert alert-primary">:bulb:
-The find commands are powerful tools to help you work faster. Want to view the attendance of Nicholas but you don’t 
+The find commands are powerful tools to help you work faster. Want to view the attendance of Nicholas, but you don’t 
 want to scroll the member list? Use the `findMember` then follow it with the `viewMember` command to achieve that. 
 This is applicable for both members and events!
 </div>
