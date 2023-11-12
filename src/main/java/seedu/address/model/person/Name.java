@@ -17,10 +17,6 @@ public class Name {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    /*
-     * The string cannot contain any numbers, otherwise it becomes an invalid input.
-     */
-    public static final String NUMBER_VALIDATION_REGEX = ".*\\d.*";
 
     public final String fullName;
 
@@ -39,7 +35,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        if (test.matches(NUMBER_VALIDATION_REGEX)) {
+        if (test.matches(".*\\d.*")) {
             return false;
         }
 
