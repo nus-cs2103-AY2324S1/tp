@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.EVENT_1;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventBook;
 
 import java.util.Collection;
@@ -32,6 +33,13 @@ public class EventBookTest {
         EventBook newData = getTypicalEventBook();
         eventBook.resetData(newData);
         assertEquals(newData, eventBook);
+    }
+
+    @Test
+    public void addEvent_withValidEvent_eventAdded() {
+        assertEquals(0, eventBook.getEventList().size());
+        eventBook.addEvent(EVENT_1);
+        assertEquals(1, eventBook.getEventList().size());
     }
 
     @Test

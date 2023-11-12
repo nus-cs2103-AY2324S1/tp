@@ -37,6 +37,14 @@ public class UniqueEventListTest {
     }
 
     @Test
+    public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
+        uniqueEventList.add(EVENT_1);
+        Event editedEvent = new Event(EVENT_1.getPerson(), EVENT_1.getDescription(), LocalDateTime.MIN,
+                LocalDateTime.MAX);
+        assertTrue(uniqueEventList.contains(editedEvent));
+    }
+
+    @Test
     public void add_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueEventList.add(null));
     }
