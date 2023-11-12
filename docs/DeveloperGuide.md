@@ -162,7 +162,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 </div>
 </details>
+
 --------------------------------------------------------------------------------------------------------------------
+
 <details open>
 <summary><strong>Implementation</strong></summary>
 <div markdown="1">
