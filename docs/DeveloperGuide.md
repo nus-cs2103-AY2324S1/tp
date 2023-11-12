@@ -478,7 +478,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 Compared to AB3, which only deals with 1 entity type, Person. OutBook deals with 2 entity types and allows significant interaction between them. This means that the model had to be extended and storage had to follow along with it. jackson does not allow storage of pointers, thus it became necessary to work around that using the unique fields on both Person and Meeting.
 
 ### Effort in reducing coupling
-Compared to AB3, where there were no interaction between entities. OutBook was designed for professionals to manage both their contacts and their meetings, this inherently means that there needs to be interaction between both entities. This interaction increase coupling and decreases cohesion. In order to combat this, many instances of facade, command and observer design patterns were used.
+Compared to AB3, where there were no interaction between entities. OutBook was designed for professionals to manage both their contacts and their meetings, this inherently means that there needs to be interaction between both entities. This interaction increases coupling and decreases cohesion. In order to combat this, many instances of facade, command and observer design patterns were used.
 
 ### Effort in implementing many features
 OutBook needed to make managing contacts and meetings an efficient process, this meant that there needed to be many quality of life features to make the professional's life easier. Therefore, much effort was dedicated to making data easily retrievable by making almost every field searchable.
@@ -679,7 +679,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 
-_{More to be added}_
 
 <div style="page-break-after: always;"></div>
 

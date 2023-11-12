@@ -122,7 +122,7 @@ ___
 - You can submit fields in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, submitting in the format `p/PHONE_NUMBER n/NAME`, such as in `p/91472381 n/John Doe`, is also acceptable.
 
-- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. This is to avoid omission of space characters surrounding line-breaks when lengthy text is copied over to the application.
+- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. This is to avoid deletion of space characters surrounding line-breaks when lengthy text is copied over to the application.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -319,7 +319,7 @@ Format: `editm INDEX [m/TITLE] [a/LOCATION] [s/START] [e/END] [t/TAG]…​`
 - Edits the meeting at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed meeting list. The `INDEX` **must be a positive integer** such as 1, 2, 3, …​
 - All fields are optional, but at least one must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the meeting will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the meeting will be removed i.e addition of tags is not cumulative.
   - You can therefore remove all of a meeting’s tags by typing `t/` without specifying any tags after it.
 - This command may change the meeting that is currently displayed via the `viewm` command in the details list, as detailed in the description for `viewm`.
 
