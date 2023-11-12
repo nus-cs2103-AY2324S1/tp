@@ -218,6 +218,7 @@ public class ParserUtil {
     public static int parseDays(String days) throws ParseException {
         String trimmedDays = days.trim();
 
+
         if (trimmedDays.isEmpty() || days == null) {
             return Integer.parseInt("7");
         }
@@ -225,6 +226,13 @@ public class ParserUtil {
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedDays)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return Integer.parseInt(trimmedDays);
+
+        int daysInt = Integer.parseInt(trimmedDays);
+
+        if (daysInt > 999999999) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
+        return daysInt;
     }
 }
