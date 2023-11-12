@@ -31,6 +31,9 @@ Click on the relevant links to easily navigate through the guide and access the 
   * [Delete](#deleting-a-person--delete)
   * [Clear](#clearing-all-entries--clear)
   * [Sort](#sorting-of-data--sort)
+  * [Exit](#exiting-the-program--exit)
+* [Saving the data](#saving-the-data)
+* [Editing the data file](#editing-the-data-file)
 * [FAQ](#faq)
 * [Known Issues](#known-issues)
 * [Command Summary](#command-summary)
@@ -41,16 +44,16 @@ Click on the relevant links to easily navigate through the guide and access the 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `unofas.jar` from [here](https://github.com/AY2324S1-CS2103T-F12-1/tp/releases).
+2. Download the latest `unofas.jar` from [here](https://github.com/AY2324S1-CS2103T-F12-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your UNOFAS.
+3. Copy the file to the folder you want to use as the _home folder_ for your UNOFAS.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar unofas.jar` command
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar unofas.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
    Some example commands you can try:
 
@@ -65,7 +68,7 @@ Click on the relevant links to easily navigate through the guide and access the 
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## UI Components
@@ -74,16 +77,16 @@ Click on the relevant links to easily navigate through the guide and access the 
 
 ### General UI information
 
-Component | Purpose
---------|------------------
-**Navigation Bar** | Allows you to exit UNOFAS or view help
-**Command Line** | Location to enter commands
-**Result Line** | Displays the result after a command is entered
-**Contact List** | Displays clients
-**Appointment List** | Displays appointments
-**Contact Card** | Displays detailed information about a patient
-**Appointment Card** | Displays detailed information about an appointment
-**Save Location** | Displays the location where your UNOFAS data is stored
+| Component            | Purpose                                                |
+|----------------------|--------------------------------------------------------|
+| **Navigation Bar**   | Allows you to exit UNOFAS or view help                 |
+| **Command Line**     | Location to enter commands                             |
+| **Result Line**      | Displays the result after a command is entered         |
+| **Contact List**     | Displays clients                                       |
+| **Appointment List** | Displays appointments                                  |
+| **Contact Card**     | Displays detailed information about a patient          |
+| **Appointment Card** | Displays detailed information about an appointment     |
+| **Save Location**    | Displays the location where your UNOFAS data is stored |
 
 ### Contact Card
 
@@ -135,7 +138,7 @@ Component | Purpose
 # Argument Summary
 
 Below is a table summarising common arguments used in `add`, `edit`, `find`, `schedule` etc. Refer to the table below
-to view the arguments' prefix, and their acceptable values. Unless specified, having only space characters i.e an empty
+to view the arguments' prefix, and their acceptable values. Unless specified, having only space characters i.e. an empty
 value, is not an acceptable value and will result in a warning.
 
 | Prefix | Argument              | Acceptable Values                                                      |
@@ -363,6 +366,7 @@ For new appointment: `New appointment added: David; Phone: 93234567; Email: davi
 Upon triggering the overriding prompt, until confirmation or cancellation of command on the prompt, usage of the application
 is not allowed (including trying to exit the program). 
 </div>
+
 ----------
 ### Completing an Appointment : `complete`
 
@@ -438,10 +442,12 @@ Exits the program.
 
 Format: `exit`
 
+------------
 ### Saving the data
 
 UNOFAS data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+------------
 ### Editing the data file
 
 UNOFAS data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -465,7 +471,7 @@ If your changes to the data file makes its format invalid, UNOFAS will discard a
 2. **When sorting the list**, we have chosen to not implement returning sorted list to original ordering due to the lack of necessity. However, due to feedback, we will implement this in the next release to enable users to return list to original order should they wish to.
 3. **It is possible to add appointments with dates** before the current date and time.
 4. **On macOS Systems**, you have to use the cursor to manually click the confirm or cancel buttons for the overriding and clear prompts. In contrast, Windows users can choose to hit enter to confirm execution of command.
-5. **No current method to deconflict clashing appointments**. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other. The appointment sidebar may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6a.
+5. **No current method to de-conflict clashing appointments**. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other. The appointment sidebar may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6a.
 6. **The appointment sidebar** may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be resolved when fixing issue 6.
 7. **Checking for duplicate persons** is done by checking their full name, case-sensitive. The future plan is to do this by checking of phone number as it is less likely 2 people share the same phone number than compared to name.
 
