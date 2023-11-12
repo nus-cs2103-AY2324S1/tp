@@ -609,19 +609,21 @@ The following activity diagram summarizes what happens when a user executes a ne
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancements**
 
-1. Tag
-    - Currently duplicate tags can be created through the edit and add function.
+1. The current logic for adding and editing `tag` allows for duplicate `tag` for a single flashcard.
+    - Users that use the `edit` or `add` command with duplicate `tags` in the command can create a flashcard with redundant
+      tags for a single flashcard.
+    - We plan to enforce uniqueness in the list of `tags` by using a Java Set data structure instead of
+      a Java List data structure.
 
-2. Currently, `hint` does not support the use of `r` index
+2. The current parser logic for `hint` does not support the use of `r` index.
    - Users that use `random` to practise a random question are unable to use `hint r` to check the hint of the question.
    - We plan to allow `hint` command to accept `r` index to that it can show the user the hint of the randomly selected question.
 
-3. Markdown stacking syntax
-    - Users that input MarkDown Syntax within another MarkDown Syntax will cause unexpected test styling in the DisplayView.
-   Example: `edit 1 q/<u>**Example Question**</u>`
-    - We plan to allow the input similar to the above example so that user can apply more than 1 font styles to a part of the text.
-
-    
+3. Current logic for Markdown syntax does not allow for the multiple Markdown syntax to be stacked for a single phrase.
+    - Users that want to create a bold and underlined phrase might try `<u>**WORD**</u>`. However, this does not result
+      in the expected outcome "<u>**WORD**</u>" and cause unexpected styling in the DisplayView.
+    - We plan to refine the parsing of Markdown syntax to ensure the parsing of syntax for a particular phrase checks
+      for every syntax instead of the first valid syntax, so that user can apply more than 1 font styles to a part of the text.
 
 ---------------------------------------------------------------------------
 
@@ -836,8 +838,6 @@ Use case ends.
 
 Use case ends.
 
-
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -883,7 +883,11 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exiting the application
+
+   1. Press the exit button in the`File` menu button or enter the `exit` command.
+
+   2. Application window should close and exit as normal.
 
 
 ### Adding a card
@@ -922,7 +926,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Listing all cards
    1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
-
    2. Test case: `list t/CS2100`<br>
       Expected: All cards with the CS2100 tag is shown in the deck.
    
@@ -945,7 +948,7 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect edit commands to try: `edit`, `edit 1 x/`, `...` (where x is other prefixes)<br>
       Expected: Similar to previous.
-   
+
 2. Editing a card's answer
     1. Prerequisite: A card which you wish to edit is already in the deck.
 
@@ -996,6 +999,52 @@ testers are expected to do more *exploratory* testing.
        Expected: Additional input detected after index, error message appears.
 
     4. Other incorrect practise commands to try: `practise`, `practise 1 x/`, `...` (where x is other prefixes)<br>
+       Expected: Similar to previous.
+
+### Solving a card
+
+1. Solving a card
+
+   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
+   1. Test case: `solve`<br>
+      Expected: The answer of the first card is displayed.
+   1. Test case: `solve 2`<br>
+         Expected: The answer of the second card is displayed.
+   1. Test case: `solve 0`<br>
+      Expected: No card is solved. Error details shown in the status message.
+   1. Other incorrect delete commands to try: `solve x`, `...` (where x is larger than the list size or negative)<br>
+      Expected: Similar to previous.
+
+### Setting difficulty of a card
+
+1. Setting difficulty of a card
+
+    1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
+    1. Test case: `set d/easy`<br>
+       Expected: The difficulty of the first card is set to easy and new difficulty is displayed. The 'due date' of the
+       card is changed to reflect the difficulty based on the spaced repetition system.
+    1. Test case: `set 2 d/medium`<br>
+       Expected: Similar to previous but difficulty is now medium and new 'due date' is later.
+    1. Test case: `set d/invalid`<br>
+       Expected: Difficulty is not set. Error details shown in the status message.
+    1. Test case: `set 0 d/hard`<br>
+       Expected: Difficulty is not set. Error details shown in the status message.
+    1. Other incorrect delete commands to try: `set x d/hard`, `set d/y`, `...`
+       (where x is larger than the list size or negative and y is any other invalid difficulty)<br>
+       Expected: Similar to previous.
+
+### Setting a goal
+
+1. Setting goal of a session
+
+    1. Test case: `goal 1`<br>
+       Expected: Goal of the session is set to 1 and displayed in the goal box. 
+    1. Test case: `goal invalid`<br>
+       Expected: Goal is not updated. Error details shown in the status message.
+    1. Test case: `goal 0`<br>
+       Expected: Goal is not updated. Error details shown in the status message.
+    1. Other incorrect delete commands to try: `goal`, `goal x`, `...`
+       (where x is larger than the MAX_INTEGER or negative)<br>
        Expected: Similar to previous.
 
 ### Choosing a random card
