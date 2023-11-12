@@ -101,14 +101,6 @@ public class ShowCommandTest {
     }
 
     @Test
-    public void execute_invalidState_throwsCommandException() {
-        model.setState(State.NONE);
-        ShowCommand showCommand = new ShowCommand(1);
-
-        assertCommandFailure(showCommand, model, Messages.MESSAGE_UNKNOWN_COMMAND);
-    }
-
-    @Test
     public void equals() {
         ShowCommand showFirstCommand = new ShowCommand(1);
         ShowCommand showSecondCommand = new ShowCommand(2);

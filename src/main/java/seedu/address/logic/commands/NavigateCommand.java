@@ -36,7 +36,7 @@ public class NavigateCommand extends Command {
             });
             model.showLesson(model.getFilteredScheduleList().get(0));
             model.setState(State.SCHEDULE);
-            return new CommandResult("Navigated to student's lessons", State.SCHEDULE);
+            return new CommandResult("Navigated to student's lessons");
 
         case SCHEDULE:
             Lesson lesson = model.getCurrentlyDisplayedLesson();
@@ -57,7 +57,7 @@ public class NavigateCommand extends Command {
             });
             model.showPerson(model.getFilteredPersonList().get(0));
             model.setState(State.STUDENT);
-            return new CommandResult("Navigated to lesson's students", State.STUDENT);
+            return new CommandResult("Navigated to lesson's students");
 
         default:
             throw new CommandException("Navigation from task list is not supported");
