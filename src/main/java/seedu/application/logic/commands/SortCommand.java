@@ -15,10 +15,11 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_SUCCESS = "Sorted jobs";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of jobs based on "
-                                                   + "the specified field and displays them as a list with index numbers.\n"
-                                                   + "Parameters: PREFIX\n"
-                                                   + "Example: " + COMMAND_WORD + " " + PREFIX_ROLE;
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + ": Sorts the list of jobs based on "
+            + "the specified field and displays them as a list with index numbers.\n"
+            + "Parameters: PREFIX\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_ROLE;
 
     private final FieldComparator comparator;
 

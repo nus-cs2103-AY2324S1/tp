@@ -22,17 +22,18 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs that contain all of "
-                                                   + "the specified keywords (case-insensitive) in the corresponding fields and displays them as a list with "
-                                                   + "index numbers. At least one keyword must be provided.\n"
-                                                   + "Parameters: "
-                                                   + "[" + PREFIX_COMPANY + "COMPANY] "
-                                                   + "[" + PREFIX_ROLE + "ROLE] "
-                                                   + "[" + PREFIX_STATUS + "STATUS] "
-                                                   + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
-                                                   + "[" + PREFIX_DEADLINE + "KEYWORDS] "
-                                                   + "[" + PREFIX_JOB_TYPE + "KEYWORDS]\n"
-                                                   + "Example: " + COMMAND_WORD + " " + PREFIX_COMPANY + "Google";
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + ": Finds all jobs that contain all of "
+            + "the specified keywords (case-insensitive) in the corresponding fields and displays them as a list with "
+            + "index numbers. At least one keyword must be provided.\n"
+            + "Parameters: "
+            + "[" + PREFIX_COMPANY + "COMPANY] "
+            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
+            + "[" + PREFIX_DEADLINE + "KEYWORDS] "
+            + "[" + PREFIX_JOB_TYPE + "KEYWORDS]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_COMPANY + "Google";
 
     public static final String MESSAGE_EMPTY_KEYWORDS = "Missing keywords";
 
