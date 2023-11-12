@@ -26,8 +26,8 @@ Given below are my contributions to the project.
 
 * **New Feature**: Randomly selects a specific number of students from all students displayed.
   * What it does: allows the user to randomly selects a specific number of students
-  * Justification: 
-  * Highlights: 
+  * Justification:
+  * Highlights:
 
 * **Enhancements to existing features**:
 

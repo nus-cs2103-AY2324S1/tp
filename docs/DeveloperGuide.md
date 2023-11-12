@@ -151,23 +151,33 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Tag feature
 
+#### About this feature
+
+This feature allows users to tag their student with labels to allow easier recognition of their students by their traits.
+
 #### Implementation
 
-Tagging a student with `Tag` is facilitated by 3 commands:
+Tagging a student with `Tag` is facilitated by `TagCommand`, `AddTagCommand`, `DeleteTagCommand` and `TagCommandParser`.
 * `TagCommand` will replace all existing tags of a student with input tags.
 * `AddTagCommand` will add input tags to existing tags of the student.
 * `DeleteTagCommand` will delete input tags from the existing tags of the student.
+* `TagCommandParser` will be parse the user input and create the correct command object to execute.
 
-These commands will be executed based on the users input. The `TagCommandParser` will be responsible for parsing the user input and create the correct command object to execute.
-Only 1 of the 3 commands will be executed per user input.
+<box type="info" seamless>
 
-Here is an example step by step of how the 3 different commands might be executed.
+**Note:** Only 1 of the 3 commands will be executed per user input.
 
-Step 1. User inputs `tag s/A0245234N t/teamleader`
+</box>
+
+Here is a step by step example of how the tag command might be executed.
+
+Step 1. User inputs the `tag` command.
 
 Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object which in turn creates a `TagCommandParser` object to parse the command.
 
-Step 3. Next `TagCommandParser` will check for any action identifiers, `/add` or `/delete`, which will create a `AddTagCommand` object or `DeleteTagCommand` object respectively,  else a `TagCommand` object.
+Step 3. Next `TagCommandParser` will check for any action identifiers,
+`/add` or `/delete`, which will create a `AddTagCommand` object or `DeleteTagCommand` object respectively,
+else a `TagCommand` object. `ParseException` will be thrown for any invalid inputs.
 
 Step 4a. `AddTagCommand` will union the `HashSet<Tag>` with the student's existing `Tag`.
 
@@ -175,13 +185,25 @@ Step 4b. `DeleteTagCommand` will remove all `Tag` that are in the intersection o
 
 Step 4c. `TagCommand` will replace all existing `Tag` of the student with `HashSet<Tag>`.
 
-Step 5. All 3 commands will create a new `Student` object with the new `Tag` and copy all other details.
+Step 5. `TagCommand` creates a new `Student` object with the new `Tag` and copy all other details.
 
-Step 6. All 3 commands will update the `Model` with the new Student by calling `Model#setStudent()`.
+Step 6. `TagCommand` updates the `Model` with the new Student by calling `Model#setStudent()`.
 
-The following activity diagram summarizes what happens when a user executes a tag command:
+Step 7. Finally, the `TagCommand` creates a CommandResult with a success message and returns it to the LogicManager to complete the command execution. The GUI would also be updated with the change of status.
+
+<box type="info" seamless>
+
+**Note:** For Step 5, 6 and 7, `AddTagCommand` and `DeleteTagCommand` behaves the same way as `TagCommand`.
+
+</box>
+
+The following sequence diagram summarizes what happens when a user executes a `tag` command:
 
 <puml src="diagrams/TagCommand.puml" alt="TagCommand" />
+
+The following activity diagram summarises what happens when a user executes a `tag` command:
+
+<puml src="diagrams/TagCommandActivityDiagram.puml" alt="TagCommandActivityDiagram" />
 
 #### Design considerations:
 
@@ -391,7 +413,7 @@ grades. It will be stored as 3 separate classes to model each of the 3 different
 call them "class information"), and a tracker
 class to act as the manager for each of the class information, with the trackers composing the `ClassDetails` class.
 
-<puml src="diagrams/ClassInformation.puml" />
+<puml src="diagrams/ClassInformation.puml" alt="ClassInformation" />
 
 The 3 different types of class information are:
 
@@ -473,6 +495,51 @@ The feature should be implemented upon the current design of Student and ClassDe
 
 </box>
 
+### View feature
+
+#### About this feature
+
+The view feature allows users to view the class information of their students.
+<box type="info" seamless>
+
+**Note:** The `view` command is the only way to change the student being viewed in the `GUI`.
+
+</box>
+
+#### Implementation
+
+The `view` command is facilitated by the `ViewCommandParser` and the `ViewCommand`. It uses `Model#setSelectedStudent()` to select the student that is to be viewed in the `GUI`.
+
+Here is a step by step example of how a `view` command is executed:
+
+Step 1. Users inputs a `view` command.
+
+Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object which in turn creates a `ViewCommandParser` object to parse the command.
+
+Step 3. `ViewCommandParser` will check if the input is valid. If input is valid, it will create a `ViewCommand` object to execute the command. Else `ParseException` is thrown.
+
+Step 4. `ViewCommand` will use `Model#setSelectedStudent()` to set the requested student to be viewed in the `GUI`.
+
+The following sequence diagram will show what happens when a user executes a `view` command:
+
+<puml src="diagrams/ViewCommand.puml" alt="ViewCommand" />
+
+The following activity diagram will show what happens when a user executes a `view` command:
+
+<puml src="diagrams/ViewCommandActivityDiagram/puml" alt="ViewCommandActivityDiagram" />
+
+#### Design Considerations
+
+**Aspect: ViewCommand**
+
+* **Alternative 1 (current choice):** Using a command to view the class information of a student.
+  * Pros: Reduces clutter in the `GUI`.
+  * Cons: Always have to type a command if the users wants to view a different student.
+
+* **Alternative 2:** Listing all the class information of every student.
+  * Pros: Easy to implement.
+  * Cons: Very messy and clutters the `GUI`.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -544,6 +611,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is `Class Manager` and the **Actor** is the `user`, unless specified otherwise)
 
 ---
+
 **Use case: UC01 - Delete a student**
 
 **MSS**
@@ -568,6 +636,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 ---
+
 **Use case: UC02 - Tag a student with a label**
 
 **MSS**
@@ -583,21 +652,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+  Use case resumes at step 1.
 
 * 3a. The given student number is invalid.
 
     * 3a1. Class Manager shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-* 3b. The student already has the given tag.
+* 3b. The given tag is invalid.
 
     * 3b1. Class Manager shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
+
+* 3c. The given student number does not belong to any student in the list.
+
+    * 3c1. Class Manager shows an error message.
+
+      Use case resumes at step 3.
 
 ---
+
 **Use case: UC03 - Loading a saved file**
 
 **MSS**
@@ -624,6 +700,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 ---
+
 **Use case: UC04 - Look up a list of students**
 
 **MSS**
@@ -649,6 +726,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
+
 **Use case: UC05 - Randomly select a specific number of students**
 
 **MSS**
@@ -674,6 +752,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
+
 **Use case: UC06 - Modifying a student's class information**
 
 **MSS**
@@ -699,6 +778,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
+
 **Use case: UC07 - Configuring module information**
 
 **MSS**
@@ -716,7 +796,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. Class Manager shows an error message.
 
       Use case resumes at step 1.
+
 ---
+
 **Use case: UC08 - Undoing a command**
 
 **MSS**
@@ -726,7 +808,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  Class Manager restores the deleted student.
 
     Use case ends.
+
 ---
+
 **Use case: UC09 - Redoing a command**
 
 **MSS**
@@ -736,15 +820,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  Class Manager deletes the student.
 
     Use case ends.
+
 ---
+
 **Use case: UC10 - Viewing command history**
 
 **MSS**
 
 1.  User requests to view command history.
-3.  Class Manager displays the command history of the current session.
+2.  Class Manager displays the command history of the current session.
 
     Use case ends.
+
+---
+
+**Use case: Viewing a student's class information**
+
+**MSS**
+
+1. User request to view a student's class information.
+2. Class manager displays the student's class information.
+
+**Extensions**
+
+* 1a. The student requested does not exist in the Class Manager.
+
+    * 1a1. Class Manager displays an error message.
+
+      Use case resumes at step 1.
+
+---
+
+*{More to be added}*
+
 ---
 
 ### Non-Functional Requirements
@@ -820,7 +928,7 @@ Testers are expected to do more *exploratory* testing.
 
 ### Loading data files
 ###### Setup
-- Move the JAR file to a fresh directory. 
+- Move the JAR file to a fresh directory.
 - Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
 - Copy the sample data file `classmanager.json`. And paste 2 copies of it in the same directory as the `classmanager.json`. Rename the copies to `t1.json` and `t2.json`.
 - Do not delete the data file `classmanager.json` as it will be used as the starting default file.
@@ -828,7 +936,7 @@ Testers are expected to do more *exploratory* testing.
 ###### Test cases
 1. Loading a valid data file
    - Enter: `load f/t1`<br>
-        Expected: The data in `t1.json` is loaded into the app. The status bar on the bottom left changed to the new file path. 
+        Expected: The data in `t1.json` is loaded into the app. The status bar on the bottom left changed to the new file path.
         The list of students shown in the GUI is the same as the one in `classmanager.json`.
    <br><br>
 2. Loading a corrupted data file
@@ -836,7 +944,7 @@ Testers are expected to do more *exploratory* testing.
    - Enter: `load f/t2`<br>
         Expected: The data in `t2.json` is not loaded into the app. The status bar on the bottom left is unchanged.
         File error details shown in the result display box.
-    <br><br> 
+    <br><br>
 3. Loading a missing data file
    - Enter: `load f/t3`<br>
        Expected: The status bar on the bottom left is unchanged. File error details shown in the result display box.
@@ -846,14 +954,14 @@ Testers are expected to do more *exploratory* testing.
 1. Undoing a command
     1. Test case: `clear` -> `undo`<br>
         Expected: The `clear` command is undone. The list of students shown in the GUI is the same as the one before the `clear` command.
-    
+
     2. Test case: `add` -> `undo`<br>
         Expected: The `add` command is undone. The newly added student is removed from the list of students.
 
 2. Redoing a command
     1. Test case: `clear` -> `undo` -> `redo`<br>
         Expected: The `clear` command is redone. The list of students shown in the GUI is empty.
-   
+
     2.  Test case: `add` -> `add` -> `undo` -> `undo` -> `redo` (Add 2 students, and then 2 undo with 1 redo)<br>
         Expected: The first `add` command is redone. The first student is added back to the list of students.
 
@@ -916,7 +1024,7 @@ Testers are expected to do more *exploratory* testing.
 
 ###### Test cases
 1. Dealing with missing data files
-    - Edit the `preferences.json` to have the entry: 
+    - Edit the `preferences.json` to have the entry:
     ```
     "classManagerFilePath" : "data\\missing.json"
     ```
@@ -969,11 +1077,11 @@ Testers are expected to do more *exploratory* testing.
 1. Editing a student's details in the current students list.
 
    1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
-      Expected: The student with STUDENT_NUMBER is edited to have the new NAME. 
+      Expected: The student with STUDENT_NUMBER is edited to have the new NAME.
    2. Test case: `edit STUDENT_NUMBER s/NEW_STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the NEW_STUDENT_NUMBER.
       <br><br>
-2. Editing a student's details where the student is not in the list (Invalid Student Number). 
+2. Editing a student's details where the student is not in the list (Invalid Student Number).
 
    1. Test case: Edit command with Student Number that is not present in the list <br>
       Expected: No student is edited. Error details shown in the result display box.
@@ -984,7 +1092,7 @@ Testers are expected to do more *exploratory* testing.
 
    1. Test case: `comment s/STUDENT_NUMBER cm/COMMENT`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new COMMENT.
-      <br><br>   
+
 2. Adding a comment to a student where the student is not in Class Manager (Invalid Student Number). 
 
    1. Test case: Comment command with Student Number that is not present in the list <br>
@@ -994,19 +1102,63 @@ Testers are expected to do more *exploratory* testing.
 3. Adding a comment to a student where the new comment is empty.
 
    1. Test case: `comment s/STUDENT_NUMBER cm/`<br>
-      Expected: Student is edited to have an empty comment. 
+      Expected: Student is edited to have an empty comment.
 
 ### Tagging a student
 
 1. Tagging an existing student in the current students list.
 
    1. Test case: `tag s/STUDENT_NUMBER t/TAG`<br>
-      Expected: The student with STUDENT_NUMBER is tagged with the new TAG.
-      <br><br>
-2. Adding a new student with tags.
+      Expected: All tags of student with STUDENT_NUMBER will be replaced with TAG.
 
-   1. Test case: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]...`<br>
-      Expected: The student with NAME, STUDENT_NUMBER, EMAIL and TAG is added to the list. Details of the added student shown in the result display box.
+2. Adding a tags to student.
+
+   1. Test case: `tag s/STUDENT_NUMBER /add t/TAG`<br>
+      Expected: The student with STUDENT_NUMBER will have TAG added to existing tags.
+
+   <box type="info" seamless>
+
+   **Note:** Even if the student has TAG tagged, the command ensures that the student will have TAG as one of the tags.
+
+    </box>
+
+3. Deleting tags from student.
+
+   1. Test case: `tag s/STUDENT_NUMBER /delete t/TAG`<br>
+      Expected: The student with STUDENT_NUMBER will have the `Tag` TAG removed from existing tags.
+
+    <box type="info" seamless>
+
+    **Note:** Even if the student does not have TAG tagged, the command ensures that the student will not have TAG as one of the tags.
+
+    </box>
+
+4. Deleting all tags from student.
+
+   1. Test case: `tag s/STUDENT_NUMBER t/`<br>
+      Expected: The student with STUDENT_NUMBER will have all tags removed.
+
+5. Attempt to tag a student not in the currently student list.
+
+   1. Test case: `tag` command with a student number that is not in the list.
+      Expected: Error message is shown in the display result.
+
+### Viewing a student
+
+1. Viewing a student in Class Manager
+
+   1. Test case: `view s/STUDENT_NUMBER`<br>
+      Expected: The class information of the student with STUDENT_NUMBER will be displayed in the class information panel on the right.
+
+2. Viewing a student not in Class Manager
+
+   1. Test case: `view` command with a student number not in Class Manager<br>
+      Expected: Error message shown in the display result.
+
+3. Invalid Student number
+
+   1. Test case: `view s/b012345N`<br>
+      Expected: Error message shown in the display result.
 
 ### Listing students
 

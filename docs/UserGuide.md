@@ -171,7 +171,6 @@ The **GUI** has 6 notable sections:
 
 ## Class Number
 
-* Class Number refers to the tutorial class number of a particular course.
 * Class Number is case-sensitive and must begin with a capital "T", followed by any number of characters. Class Numbers must not be blank.
 * Class Number is stored verbatim based on your input, with the case being preserved. 
 * Here are some valid examples of Class Numbers:
