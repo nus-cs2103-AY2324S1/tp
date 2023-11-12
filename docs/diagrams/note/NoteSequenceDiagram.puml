@@ -49,6 +49,7 @@ destroy AddCommandParser
 AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
+
 LogicManager -> AddNoteCommand : execute()
 activate AddNoteCommand
 
