@@ -78,14 +78,20 @@ Here are some annotations used in this guide:
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code> 
+  <h4 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h4>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code> 
     Description of what you are allowed to type.</p>
 </div>
 <p></p>
 <div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h3>
+  <h4 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h4>
   <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">inline code</code> 
+    Pay attention to these points as they could lead to unexpected issues.</p>
+</div>
+<p></p>
+<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h4 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h4>
+  <p style="font-size:8px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">inline code</code> 
     Pay attention to these points as they could lead to unexpected issues.</p>
 </div>
 
@@ -116,8 +122,9 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 
 3. Move the JAR file to a folder where you want to store your project details. For example, create a folder named ProjectPRO and place it on your desktop.
    - For Mac Users:
-     - ![MACGUIDE](images/UG/QuickStart3.png)
+     - ![MACGUIDE](images/UG/QUICKSTART3.png)
    - For Windows Users:
+     - 
 
 4. Launch ProjectPRO.
    - For Mac users:
@@ -160,17 +167,22 @@ Written below are some commonly used parameters, what they represent, and exampl
 | `r/`      | Group remark                     | N/A                                                                                                                                                     | Zoom link: CS2101.zoom, 123!@#$#@        | N/A                                             |
 | `t/`      | Time interval of student / group | timings are written with the first 3 letters of the day and time in 24 hour format, with a `-` between the timings. Start time cannot be after end time | mon 1300 - mon 1400, sat 1000 - sun 1300 | monday 1300 - tuesday 1200, wed 1300 - wed 1000 |
 
-**Notes about command format**
+**Command format**
 
 Written below are some extra information regarding our command formats:
 
-| Notes                       | Explanation                                      | Examples                                                                                                                                              |
+| Format                      | Explanation                                      | Examples                                                                                                                                              |
 |-----------------------------|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Words in `UPPER_CASE`       | These are values written by you                  | `new g/GROUP_NAME` can be written as new `g/CS2103T`                                                                                                  |
 | Items in `SQUARE_BRACKETS`  | These are optional values that can be left empty | `add n/NAME p/PHONE e/EMAIL [g/GROUP_NAME]` can be used as `add n/John p/999 e/example@gmail.com` and `add n/John p/999 e/example@gmail.com g/CS2103` |
 | Items with `...` after them | These are values that can be used multiple times | `addtime n/NAME t/time...` can be used as `addtime n/John t/mon 1200 - mon 1300 t/tue 1400 - tue 1500`                                                |
 
-
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Notes</h3>
+  <li> All user input is case-sensitive, unless stated otherwise.</li>
+  <li> Command prefixes can be in any order.</li>
+</div>
 
 ## Features
 
@@ -184,11 +196,18 @@ You can create a contact in your contact list.
 **Format:** `add n/NAME p/PHONE e/EMAIL [g/GROUP_NAME]`
 
 
-**Acceptable values:**
-- `NAME` must be alphanumeric, cannot be blank and must not exist in the contact list.
-- `PHONE` must be a positive integer with at least 3 digits and must not exist in the contact list.
-- `EMAIL` must be alphanumeric with a @ domain, end with a domain label at least 2 characters long and must not exist in the contact list.
-- `GROUP_NAME` must be alphanumeric. This is an optional parameter.
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h4 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h4>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code> 
+    must be alphanumeric, cannot be blank and must not exist in the contact list.</p>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">PHONE</code> 
+    must be a positive integer with at least 3 digits and must not exist in the contact list.</p>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">EMAIL</code> 
+    must be alphanumeric with a @ domain, end with a domain label at least 2 characters long and must not exist in the contact list.</p>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code> 
+    must be alphanumeric. This is an optional parameter.</p>
+</div>
 
 
 **Example(s):**
@@ -196,6 +215,8 @@ You can create a contact in your contact list.
   This creates a contact in the contact list, named John Doe, who is in group CS2103T.
 - `add n/John Doe p/98765432 e/johnd@example.com`
   This creates a contact in the contact list, named John Doe, who is not in any group.
+
+![Manage Contacts: Add](images/features/Managecontacts_add.png)
 
 
 **Potential error(s):**
