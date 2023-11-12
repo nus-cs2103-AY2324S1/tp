@@ -153,6 +153,78 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Tag feature
+This feature allows users to add and remove `Tag` to any `Person` in the contact list. It provides an easy way for users to catrgorize their contacts.
+
+#### Overview:
+The adding and removing of `Tag` begins with the parsing of the `AddTagCommand` and `DeleteTagCommand` using the `AddTagCommandParser` and `DeleteTagCommandparser` respectively. The `AddTagCommand` and `DeleteTagCommand` will then be executed by the `Model`.
+
+The activity diagram below shows the action sequence of adding one or more `Tag` to a contact.
+
+<puml src="diagrams/tag/TagSequenceDiagram.puml"/>
+
+<box type="info" seamless>
+
+**Note:** The sequence diagram for removing `Tag` is similar to adding `Tag`. Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddTagCommandParser` with `DeleteTagCommandParser`, and `AddTagCommand` with `DeleteTagCommand`.
+
+</box>
+
+##### Implementing `AddTagCommandParser` and `DeleteTagCommandParser`
+Both implements the `Parser` interface, parsing two main arguments:
+1. `contactId`: the one-based index of the contact shown in the GUI.
+1. `taglist`: the unique set of `Tag` to add/delete.
+   * The set of tags is parsed using the `parseTags` method in the `ParseUtil` utility class, which puts the collection of tag names given by the user into a `HashSet`.
+
+`contactId` and `taglist` is then use to create the `AddTagCommand`/`DeleteTagCommand` object.
+   
+For the details of how parsing works, see the section on [Logic Component](#logic-component).
+
+##### Implementing `AddTagCommand`
+`AddTagCommand` extends from the abstract class `AddCommand`, inheriting `add` as the primary command word and having `tag` as its secondary command word. It internally stores `contactId` (the index of the contact) and `toAdd` (the set `Tag` to add) which is given by the [parser](#implementing-addtagcommandparser-and-deletetagcommandparser).
+
+When the command is execute, it carries out the following operations:
+1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+    * A `CommandException` is thrown if the person does not exist.
+1. The set of tags is then added to the person's tag list by calling the `addTags` method in `Person`.
+1. The `Model`'s `setPerson` method is used to update the person.
+1. Lastly a `CommandResult` with the success message is returned.
+
+The following activity diagram summarizes what happens when `AddTagCommand` is executed:
+
+<puml src="diagrams/tag/AddTagActivityDiagram.puml"/>
+
+##### Implementing `DeleteTagCommand`
+`DeleteTagCommand` extends from the abstract class `DeleteCommand`, inheriting `delete` as the primary command word and having `tag` as its secondary command word. It internally stores `contactId` (the index of the contact) and `toDelete` (the set `Tag` to delete) which is given by the [parser](#implementing-addtagcommandparser-and-deletetagcommandparser).
+
+When the command is execute, it carries out the following operations:
+1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+    * A `CommandException` is thrown if the person does not exist.
+1. Loop through every `Tag` that the person has, separating those that be found in `toDelete` and those not found.
+1. The set of tags found in `toDelete` is then deleted from the person's tag list by calling the `removeTags` method in `Person`.
+1. The `Model`'s `setPerson` method is used to update the person.
+1. Lastly a `CommandResult` with the success message is returned.
+
+The following activity diagram summarizes what happens when the `DeleteTagCommand` is executed:
+
+<puml src="diagrams/tag/DeleteTagActivityDiagram.puml"/>
+
+#### Design Considerations:
+
+**Aspect: Deletion of non-existing tag:**
+
+* **Alternative 1:** Ignore and proceed as normal.
+  * Pros: Easy to implement. Furthermore, since outcome of proceeding and not proceeding is the same, there will not be a severe consequence of proceeding.
+  * Cons: Does not reflect true behavior, and users may be confused by success message.
+
+* **Alternative 2:** Does not proceed.
+  * Pros: Users will be made aware of their mistake and prevents executing potentially wrong commands.
+  * Cons: If the command was intentional, time is wasted for user to correct their command.
+
+* **Alternative 3 (current choice):** Proceed but inform user that some tags are non-existing.
+  * Pros: Users will be made aware of their mistake. Does not waste time on correcting the command if the command was intentional.
+  * Cons: Harder to implement. 
+
+
 ### Enhanced help feature
 
 #### Design considerations:
