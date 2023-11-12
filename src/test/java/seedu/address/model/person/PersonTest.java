@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.model.reminder.ReminderTest.VALID_FUTURE_INTERACTION_LIST;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -126,7 +125,7 @@ public class PersonTest {
 
     @Test
     public void isUncontacted() {
-        assertEquals(VALID_FUTURE_INTERACTION_LIST.get(0), ALICE.getInteractions().get(0));
+        assertEquals(ALICE.getInteractions().get(0), null);
         assertEquals(true, ALICE.isUncontacted());
         assertEquals(false, BENSON.isUncontacted());
         assertEquals(false, ELLE.isUncontacted());
@@ -134,7 +133,7 @@ public class PersonTest {
 
     @Test
     public void isClosed() {
-        assertEquals(ALICE.getInteractions().get(0).getOutcome(), Interaction.Outcome.UNKNOWN);
+        assertEquals(ALICE.getInteractions().get(0).getDate().isAfter(LocalDate.now()), true);
         assertEquals(false, ALICE.isClosed());
         assertEquals(false, BENSON.isClosed());
         assertEquals(true, ELLE.isClosed());
@@ -142,7 +141,7 @@ public class PersonTest {
 
     @Test
     public void isContacting() {
-
+        assertEquals(ALICE.getInteractions().get(1).getOutcome(), Interaction.Outcome.INTERESTED);
         assertEquals(false, ALICE.isContacting());
         assertEquals(true, BENSON.isContacting());
         assertEquals(false, ELLE.isContacting());
@@ -165,7 +164,10 @@ public class PersonTest {
 
     @Test
     public void testAddInteractions() {
-        assertEquals(ALICE.getInteractions().get(0).getOutcome(), Interaction.Outcome.CLOSED);
+        assertEquals(ALICE.getInteractions().get(0).getOutcome(), Interaction.Outcome.INTERESTED);
+        assertEquals(ALICE.getInteractions().get(0).getDate(), InteractionTest.EXAMPLE_DATE);
+        assertEquals(ALICE.getInteractions().get(0).getInteractionNote(), "Met up for lunch");
+        assertEquals(ALICE.getInteractions().get(0), INTERACTION_LIST_ONE.get(0));
         Person aliceCopy = new PersonBuilder(ALICE).build();
         assertEquals(0, aliceCopy.getInteractions().size());
         List<Interaction> result = aliceCopy.addInteractions(INTERACTION_LIST_ONE);
