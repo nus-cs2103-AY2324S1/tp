@@ -26,10 +26,12 @@ public class Course implements Identifiable<Course> {
             "End date of the course must occur after the start date of the course!";
     public static final String NO_COURSE_NAME = "Courses must have a name!";
     public static final String END_DATE_WITH_NO_START = "Courses cannot have an end date without a start date!";
+    private static final DateTimeFormatter dtf = DateTimeFormatter
+            .ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
 
     private final String course;
-    private final Optional<String> startDate;
-    private final Optional<String> endDate;
+    private final Optional<LocalDate> startDate;
+    private final Optional<LocalDate> endDate;
 
     /**
      * Constructs a {@code Course}.
@@ -56,7 +58,7 @@ public class Course implements Identifiable<Course> {
         checkArgument(isValidCourse(course), MESSAGE_CONSTRAINTS);
         checkArgument(isValidDate(startDate), DATE_CONSTRAINTS);
         this.course = course;
-        this.startDate = Optional.of(startDate);
+        this.startDate = Optional.of(LocalDate.parse(startDate, dtf));
         this.endDate = Optional.empty();
     }
 
@@ -76,8 +78,8 @@ public class Course implements Identifiable<Course> {
         checkArgument(isValidDate(endDate), DATE_CONSTRAINTS);
         checkArgument(areChronologicalDates(startDate, endDate), DATE_TIMING_CONSTRAINTS);
         this.course = course;
-        this.startDate = Optional.of(startDate);
-        this.endDate = Optional.of(endDate);
+        this.startDate = Optional.of(LocalDate.parse(startDate, dtf));
+        this.endDate = Optional.of(LocalDate.parse(endDate, dtf));
     }
 
     @Override
@@ -87,7 +89,7 @@ public class Course implements Identifiable<Course> {
 
     @Override
     public String getValue() {
-        return this.course;
+        return course;
     }
 
     /**
@@ -113,9 +115,6 @@ public class Course implements Identifiable<Course> {
      */
     public static boolean isValidDate(String date) {
         try {
-            DateTimeFormatter dtf = DateTimeFormatter
-                    .ofPattern("dd-MM-uuuu")
-                    .withResolverStyle(ResolverStyle.STRICT);
             return dtf.format(dtf.parse(date)).equals(date);
         } catch (DateTimeParseException | NullPointerException e) {
             return false;
@@ -131,9 +130,6 @@ public class Course implements Identifiable<Course> {
      */
     public static boolean areChronologicalDates(String start, String end) throws IllegalArgumentException {
         try {
-            DateTimeFormatter dtf = DateTimeFormatter
-                    .ofPattern("dd-MM-uuuu")
-                    .withResolverStyle(ResolverStyle.STRICT);
             LocalDate startDate = LocalDate.parse(start, dtf);
             LocalDate endDate = LocalDate.parse(end, dtf);
             return endDate.isAfter(startDate);
@@ -145,8 +141,8 @@ public class Course implements Identifiable<Course> {
     @Override
     public String toString() {
         StringBuilder tsb = new StringBuilder(course);
-        String start = startDateExists() ? " (Started: " + startDate.get() + ")" : "";
-        String end = endDateExists() ? " (Ended: " + endDate.get() + ")" : "";
+        String start = startDateExists() ? " (Started: " + dtf.format(startDate.get()) + ")" : "";
+        String end = endDateExists() ? " (Ended: " + dtf.format(endDate.get()) + ")" : "";
         return tsb.append(start).append(end).toString();
     }
 
@@ -177,15 +173,18 @@ public class Course implements Identifiable<Course> {
     }
 
     public String getCourse() {
-        return course;
+        String courseName = course;
+        courseName = startDateExists() ? courseName + " /start " + getStartDate() : courseName;
+        courseName = endDateExists() ? courseName + " /end " + getEndDate() : courseName;
+        return courseName;
     }
 
     public String getStartDate() {
-        return startDateExists() ? startDate.get() : "";
+        return startDateExists() ? dtf.format(startDate.get()) : "";
     }
 
     public String getEndDate() {
-        return endDateExists() ? endDate.get() : "";
+        return endDateExists() ? dtf.format(endDate.get()) : "";
     }
 
     /*

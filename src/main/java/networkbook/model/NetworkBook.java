@@ -80,7 +80,9 @@ public class NetworkBook implements ReadOnlyNetworkBook {
 
     @Override
     public Predicate<Person> getFilterPredicate() {
-        return (Predicate<Person>) filteredPersons.getPredicate();
+        @SuppressWarnings("unchecked")
+        Predicate<Person> filterPredicate = (Predicate<Person>) filteredPersons.getPredicate();
+        return filterPredicate;
     }
 
     /**
@@ -94,7 +96,9 @@ public class NetworkBook implements ReadOnlyNetworkBook {
 
     @Override
     public Comparator<Person> getSortComparator() {
-        return (Comparator<Person>) displayedPersons.getComparator();
+        @SuppressWarnings("unchecked")
+        Comparator<Person> sortComparator = (Comparator<Person>) displayedPersons.getComparator();
+        return sortComparator;
     }
 
     //// person-level operations

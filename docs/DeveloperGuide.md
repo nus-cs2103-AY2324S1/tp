@@ -22,7 +22,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
-
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
@@ -121,8 +120,7 @@ How the parsing works:
 Here is an overview of what the other classes in `Logic` do:
 * `ArgumentMultiMap` and `ArgumentTokeniser` are used to map the parameters of 
 the user's input into key-value pairs, where the keys are specified using `ArgumentTokeniser`
-* `CliSyntax` is where command-specific keywords are stored. It is used as the arguments for `ArgumentTokeniser`
-to process the user input into: `{keyword : parameter}` pairs.
+* `CliSyntax` is where command-specific keywords are stored. It is used as the arguments for `ArgumentTokeniser` to process the user input into: `{keyword : parameter}` pairs.
   * Example usage: The text `1 /name John Doe /phone 98765432` when
     mapped using `ArgumentTokeniser` with the keywords `/name`
     and `/phone` produces:
@@ -147,33 +145,55 @@ The sequence diagram below illustrates the interactions within the
 * `TO BE IMPLEMENTED IN 1.4`
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="1200" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniqueList<Person>` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the networkbook data, which in turn is all `Person` objects (which are contained in a `UniqueList<Person>` object).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* exposes the current list of displayed person as a `Observable<Person>` obtained from the `VersionedNetworkBook`.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `NetworkBook`, which `Person` references. This allows `NetworkBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+The `VersionedNetworkBook` component,
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+* stores the currently filtered `Person` objects (the result of a filter) as a separate _filtered_ list. This list is used as the intermediate list between the original `UniqueList<Person>` and the _sorted_ list.
+* stores the sorted list `Person` objects (the result of a filter and a sort) as a separate _sorted_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a list of states that can be backtracked/forwarded to. This list is extensively used in undo and redo command.
 
-</div>
+The `UserPrefs` component,
+
+* stores the GUI settings of window size and position.
+* stores the path of the data file.
+
+The `UniqueList<T>` class,
+
+* is a generic class that ensures that items within the list conforms to the unique constraint. In other words, each pair of objects within the list must have a different identity. `UniqueList<T>` enforces `T` to implement `Identifiable<T>`, which has the method `isSame(T)` to check for identity against another object.
+* The identity is determined by the class that `T` binds to.
+  * For `Person`, the identity is the name. Two names are equal if there string values are equal.
+  * For `Phone`, the identity is the literal string value of the phone.
+  * For `Email`, the identity is the literal string value of the email.
+  * For `Link`, the identity is the literal string value of the link.
+  * For `Course`, the identity is the literal string value of the course name.
+  If two courses are of the same name but of different start and end dates, they are considered having the same identity.
+  * For `Specialisation`, the identity is the literal string value of the specialisation.
+  * For `Tag`, the identity is the literal string value of the tag.
+* `UniqueList<T>` does an identity check upon adding every object to the list. It throws an `AssertionError` if duplicates are found.
+  * Any actor that wants to add an object to the list must ensure that an identity check has been done before the add method is called.
+* `UniqueList<T>` supports supplying the object at the specified index to a consumer through the method `consumeItem(int index, ThrowingIoExceptionConsumer<T> consumer)`. The method takes the item at `index` and passes it into the `consumer`.
+* `UniqueList<T>` supports supplying the object at the specified index to a consumer, at the same time applying a function on the same object to produce a value through the method `consumerAndComputeItem(int index, ThrowingIoExceptionConsumer<T> consumer, Function<T, U> function)`. The method works the same as above, and does an extra step of applying `function` on the object and return the computed value of type `U`.
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="900" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both NetworkBook data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `NetworkBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -211,7 +231,6 @@ Otherwise, it creates a new instance of `CreateCommand` that corresponds to the 
 Upon execution, `CreateCommand` first queries the supplied model if it contains a person with an identical name.
 If no such person exists, `CreateCommand` then calls on `model::addPerson` to add the person into the networkBook data.
 
-
 We have considered the following alternative implementations:
 * Implement `CreateCommandParser` to parse the arguments using regular expressions.
   This is not optimal for our use case as having a regex expression to parse the field values would be more complicated to scale and debug.
@@ -222,7 +241,7 @@ The implementation of the edit command follows the convention of a normal comman
 where `EditCommandParser` is responsible for parsing the user input string
 into an executable command.
 
-![edit sequence](images/edit/EditDiagram.png)
+<img src="images/edit/EditDiagram.png" width="1200">
 
 `EditCommandParser` first obtains the values corresponding to the flags 
 `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` and `/index`.
@@ -265,43 +284,67 @@ as the parser should not need to know how the current model looks like.
 This design has the advantage that the parser does not need to know how the current model looks like.
 However, to keep `Command` classes consistent in design, 
 we decide to only have one `EditCommand` class and practice inheritance with `EditAction`.
+* Implement `EditCommand` such that `EditAction` edits the `Person` object directly.
+This means that `Person` class must be mutable, which breaks the defensiveness of the current code and has the potential of introducing more bug.
+Moreover, the `Person` class being immutable also accommodates for the `undo` and `redo` command,
+in which the `VersionedNetworkBook` only creates a shallow copy of the current list of `Person` objects
+and hence any mutation of the `Person` object might introduce bugs.
 
 
-### \[Proposed\] Undo/redo feature
-    
-#### Proposed Implementation
+### Open link/email
 
-The proposed undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `NetworkBook` with an undo/redo history, stored internally as an `networkBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The implementation of the opening link/email command follows the convention of normal command, where `OpenEmailCommandParser`/`OpenLinkCommandParser` is responsible for parsing the user input string into an executable command. Below illustrates the process for open link command. The process of opening email is similar, where the reader can simply replace `link` with `email` to get the process for opening email.
 
-* `VersionedNetworkBook#commit()` — Saves the current address book state in its history.
-* `VersionedNetworkBook#undo()` — Restores the previous address book state from its history.
-* `VersionedNetworkBook#redo()` — Restores a previously undone address book state from its history.
+![open link diagram](images/open/OpenDiagram.png)
 
-These operations are exposed in the `Model` interface as `Model#commitNetworkBook()`, `Model#undoNetworkBook()` and `Model#redoNetworkBook()` respectively.
+`OpenLinkCommandParser` first obtains the values corresponding to the preamble and the flag `/index`, and return an object of class `OpenLinkCommand`.
+* If there are multiple `/index` tags, `OpenLinkCommandParser` throws a `ParseException`.
+* If there is no `/index` tag, the link index takes the default value of `1`.
+
+`OpenLinkCommand` then executes on the `Model` to open the link at `personIndex` (index of contact) and `linkIndex` (index of contact). The `Model` calls on the `NetworkBook`, which then calls on the `Person` at the correct index to open the link at `linkIndex`.
+
+The `Person` opens the link by first detects which OS the application is running on.
+* On Windows, the `Person` executes `Desktop::browse(URI)`, where [`Desktop`](https://docs.oracle.com/javase/8/docs/api/java/awt/Desktop.html) and [`URI`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/net/URI.html) are java classes from default packages.
+* On Mac OS, the `Person` executes the `open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class, which is a built-in class in java language. The `open` command in the terminal opens the computer's default browser if the `URI` supplied is correctly formatted to be a web link.
+* On Ubuntu, the `Person` executes the `xdg-open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class.
+
+
+### Undo/redo
+
+The undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `NetworkBook` with an undo/redo history of its state (encompassing list of all contacts and displayed list of contacts), stored internally as an `networkBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedNetworkBook#commit()` — Saves the current NetworkBook state in its history.
+* `VersionedNetworkBook#undo()` — Restores the previous NetworkBook state from its history.
+* `VersionedNetworkBook#redo()` — Restores a previously undone NetworkBook state from its history.
+
+These operations are called in functions of the `Model` interface:
+* `VersionedNetworkBook#undo()` is called in `Model#undoNetworkBook()`.
+* `VersionedNetworkBook#redo()` is called in `Model#redoNetworkBook()`.
+* `VersionedNetworkBook#commit()` is called in `Model#setPerson()`, `Model#addPerson()`, `Model#deletePerson()` and `Model#updateDisplayedPersonList()`.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedNetworkBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedNetworkBook` will be initialized with the initial NetworkBook state, and the `currentStatePointer` pointing to that single state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitNetworkBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `networkBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person displayed in NetworkBook. The `delete` command calls `Model#deletePerson()` which in turn calls `VersionedNetworkBook#commit()`, causing the modified state of the NetworkBook after the `delete 5` command executes to be saved in the `networkBookStateList`, and the `currentStatePointer` is shifted to the newly inserted NetworkBook state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitNetworkBook()`, causing another modified address book state to be saved into the `networkBookStateList`.
+Step 3. The user executes `create /name David …​` to add a new person. The `create` command also calls `Model#addPerson()` which also in turn calls `VersionedNetworkBook#commit()`, causing another modified NetworkBook state to be saved into the `networkBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitNetworkBook()`, so the address book state will not be saved into the `networkBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `VersionedNetworkBook#commit`, so the NetworkBook state will not be saved into the `networkBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoNetworkBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoNetworkBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous NetworkBook state, and restores the NetworkBook to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial NetworkBook state, then there are no previous NetworkBook states to restore. The `undo` command uses `Model#canUndoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial state of NetworkBook when the user began the current session, then there are no previous NetworkBook states to restore. The `undo` command uses `Model#canUndoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -314,17 +357,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoNetworkBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoNetworkBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the NetworkBook to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `networkBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone NetworkBook states to restore. The `redo` command uses `Model#canRedoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `networkBookStateList.size() - 1`, pointing to the latest NetworkBook state, then there are no undone NetworkBook states to restore. The `redo` command uses `Model#canRedoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitNetworkBook()`, `Model#undoNetworkBook()` or `Model#redoNetworkBook()`. Thus, the `networkBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `open 1 /index 1`. Commands that do not modify NetworkBook's list of all contacts or displayed contacts, such as `open 1 /index 1`, will usually not call `Model#undoNetworkBook()`, `Model#redoNetworkBook()`, or any `Model` commands that call `VersionedNetworkBook#commit`. Thus, the `networkBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitNetworkBook()`. Since the `currentStatePointer` is not pointing at the end of the `networkBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#setNetworkBook()` which in turn calls `VersionedNetworkBook#commit()`. Since the `currentStatePointer` is not pointing at the end of the `networkBookStateList`, all NetworkBook states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -336,16 +379,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire NetworkBook state.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+  * Cons: Additional implementation of each individual command requires more time and effort spent on achieving undo/redo behaviour for said command.
 
 ### \[Proposed\] Data archiving
 
@@ -393,8 +434,6 @@ _{insert diagram here}_
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
-
-Step 4. The user executes `sort /by none`, which updates the `SortedList` predicate and resets the sorting.
 
 <!-- todo insert diagram-->
 
@@ -548,31 +587,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. The list is empty.
+* 2a. The list is empty.
 
   Use case ends.
 
-- 3a. The given index is invalid.
+* 3a. The given index is invalid.
 
-  - 3a1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3b. User does not give a phone number.
-
-  - 3b1. NetworkBook shows an error message.
+  * 3a1. NetworkBook shows an error message.
 
     Use case resumes at step 2.
 
-- 3c. The given phone number is in an invalid format.
+* 3b. User does not give a phone number.
 
-  - 3c1. NetworkBook shows an error message.
+  * 3b1. NetworkBook shows an error message.
 
     Use case resumes at step 2.
 
-- 3c. The given phone number is already present in the contact's list of phone numbers.
+* 3c. The given phone number is in an invalid format.
 
-  - Use case resumes at step 5.
+  * 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3c. The given phone number is already present in the contact's list of phone numbers.
+
+  * Use case resumes at step 5.
 
 **Use case: Add graduation year to a contact**
 
@@ -788,6 +827,106 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Delete a single-valued field of a contact**
+
+**MSS**
+
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User specifies index of contact and a single-valued field to delete.
+
+4. NetworkBook updates the contact by deleting the field.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index of contact is invalid.
+
+  * 3a1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+
+* 3b. User provides multiple fields to delete.
+
+  * 3b1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3c. User provides an index field after the single-valued field to delete.
+
+  * 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3d. The single-valued field of the contact is empty.
+
+  * 3d1. NetworkBook does not change the contact.
+
+    Use case ends.
+
+**Use case: Delete a multi-valued field of a contact**
+
+**MSS**
+
+1. User requests to list contacts.
+
+2. NetworkBook shows a list of contacts.
+
+3. User specifies index of contact, a multi-valued field, and the index of entry to delete.
+
+4. NetworkBook updates the contact by deleting the entry from the field's list.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index of contact is invalid.
+
+  * 3a1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3b. User provides multiple fields to delete.
+
+  * 3b1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3c. The given index of entry is invalid.
+
+  * 3c1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3d. User provides multiple indexes of entry to delete.
+
+  * 3d1. NetworkBook shows an error message.
+
+    Use case resumes at step 2.
+
+* 3e. User does not provide an index of entry.
+
+  * 3e1. The index of entry is default to 1.
+
+    * 3e1a. The contact's field does not have an entry at index 1.
+
+      Use case resumes at step 3c1.
+
+    * 3e1b. The contact's field has an entry at index 1.
+
+      Use case resumes at step 4.
 
 **Use case: Sort contacts**
 
@@ -882,13 +1021,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User has no contact to list.
+
+    * 1a1. NetworkBook shows an empty list
 
   Use case ends.
 
 * 4a. The user has not logged in to his default email app.
 
     * 4a1. User will be taken to the sign-in page of his default email app.
+
+      Use case ends.
+    
+* 3b. The command is invalid.
+    
+    * 3b1. NetworkBook notifies the user that the command is invalid.
 
       Use case ends.
 
@@ -910,25 +1057,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 4a. The social link is invalid.
+* 3a. The social link is invalid.
 
-    * 4a1. The user will see the error page displayed by the browser used to load the page link.
+    * 3a1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
 * 4b. The page is valid but fails to load.
 
     * 4b1. The user will see the error page displayed by the browser used to load the page link.
-
-      Use case ends.
-
-* 4c. The social link directs to a social media app which the user has not logged in.
-
-    * 4c1. The user will be taken to the sign-in page of the social media app.
 
       Use case ends.
 
@@ -1054,13 +1195,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 1. A new user should be able to familiarise him/herself with most of the basic features of the app upon finishing going through the quick-start guide.
 1. A user should be able to use commonly available and easy-to-remember keyboard shorcuts
-   * Ctrl+C: copy text
-   * Ctrl+V: paste text
-   * Ctrl+N: new contact detail
-   * Ctrl+W: exit the app
+   * Common shortcuts to edit text, including Ctrl+C to copy, Ctrl+V to paste, Ctrl+A to select all, Ctrl+Z to undo text change, Ctrl+Y to redo text change, etc.
    * Ctrl+F: find a contact
-   * Ctrl+H/Ctrl+R/Ctrl+G: edit a contact
-   * Up/down arrow keys: access previous commands
+   * Ctrl+N: create a new contact
+   * Ctrl+G: edit a contact
+   * Ctrl+Z: undo last command (when not editing text)
+   * Ctrl+Y: redo last command undone (when not editing text)
+   * Ctrl+W: exit the app
+   * Ctrl+S: manually save data
+   * Up/down arrow keys: navigate command history
 1. A new user should be able to understand the meaning of a command just by looking at the keywords used in the command.
 
 
@@ -1069,13 +1212,98 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **Command**: a string keyed in by the user in the GUI text input that signifies an action to be done by the app.
 * **Contact**: a contact of the user whose information is stored in the app, which includes name, phone numbers, emails, links, graduation year, courses taken, specialisations, priority level and tags of/associated with the person.
-* **Field**: an attribute of a contact that describes information about the contact and can take different values. Possible fields of a contact are elaborated in the **contact** term above.
+* **Field**: an attribute of a contact that describes information about the contact. Possible fields of a contact are elaborated in the **contact** term above.
+* **Single-valued field**: a field that cannot hold many values, so that each contact can only have one value. These fields include name, graduation year and priority level.
+* **Multi-valued field**: a field that can possibly hold many values, so that each contact has a list of values. These fields include phone numbers, emails, links, courses, specialisations and tags.
 * **Course taken**: a module that a person has taken in university or outside (for e.g. CS2103T module in NUS).
 * **Specialisation**: the specialisation a person can take in their computing degree in NUS (e.g. Software Engineering, Artificial Intelligence).
 * **Graduation year**: the year and semester that a person will graduate / has graduated from NUS (e.g. AY2526-S2, meaning the second semester of the academic year spanning from 2025 to 2026).
 * **Link**: a web link which directs to a contact's profile page on a social platform (e.g. LinkedIn, GitHub).
 * **Tag**: an annotation to a person. This can be anything memorable of the person.
 * **Priority**: the priority level of a contact set by the user. Its value can be either high, medium or low.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned enhancements**
+
+Given below are the planned enhancements. The _current behaviour_ specifies how the application behaves as of `v1.4`, and the _enhanced behaviour_ specifies how the application should behave in a future milestone.
+
+### Logic
+
+* Better error handling on creating a duplicate contact (for `create` command).
+  * Current behaviour: When the user attempts to create a new contact of the same name as an existing contact, the app displays an error message and prevents the user from creating that new contact.
+  * Enhanced behaviour: When the user attempts to create a new contact of the same name as an existing contact, the app creates a new contact, but gives a warning message that another contact with the same name already exists. A sample warning message can be: `Noted, created new contact: Nguyen. Another contact with the name "Nguyen" already exists. If you created the new contact by accident, type "undo" to undo creating the contact.`
+  * Justification: This allows user to add two persons of exactly the same name to the contact list. As of the current implementation, it does not allow the user to add a second person of the same name to the contact list. The error message warns the user of a possible mistake, and also warns the user to handle the contacts of the same name with care so as to not mix up the two.
+
+* Handling duplicates of phone, email and link across different contacts.
+  * Current behaviour: When the user attempts to add the same phone, email or link as another contact's phone, email or link respectively, the software adds the detail without any warning.
+  * Enhanced behaviour: When the user attempts to add the same phone, email or link as nother contact's phone, email or link respectively, the software should still add the detail, but with a warning message. For example, suppose that the contact at index 2 has a phone number of `12345678`, the command `add 1 /phone 12345678` gives a warning message: `Added phone "12345678" to the contact at index 1. Phone number "12345678" already exists in the contact at index 2. If you added the phone number by accident, type "undo" to undo adding the phone number.`, and the command `create /name Nguyen /phone 12345678` gives a warning message: `Noted, created new contact: Nguyen; Phones: [12345678]. Phone number "12345678" already exists in the contact at index 2. If you added the phone number by accident, type "undo" to undo adding the phone number.`
+  * Justification: Generally, phone numbers, emails and links are not shared by multiple contacts, hence adding the warning message warns the user of a possible mistake. However, the software should not prevent the user totally from doing so to accommodate the rare case that a phone number, email or link is shared by multiple contacts.
+
+* Better command format for filtering course.
+  * Current behaviour: The command `filter /by course /with CS2103T /taken true` means filtering in all contacts that have course `CS2103T` and are taking the course (i.e. current date is between the start and end date), while `filter /by course /with CS2103T /taken false` means filtering in all contacts that have course `CS2103T` regardless of whether the contact is taking the course. The latter is equivalent to `filter /by course /with CS2103T`, without the `/taken` tag.
+  * Enhanced behaviour: The `/taken` flag can be changed to `/taking`, to clearly suggest filtering in contacts that are taking the course. Furthermore, the presence of the flag `/taking` should indicate filtering in contacts taking the course without the `true` value following the tag, while omitting the flag means no filtering based on whether the contacts are taking the course. This means that `filter /by course /with CS2103T /taking` means filtering in all contacts that are taking `CS2103T`, while `filter /by course /with CS2103T` (without the `/taking` flag) means filtering in all contacts that have course `CS2103T` regardless of whether they are taking the course.
+
+* More user-friendly info message for `create` command.
+  * Current behaviour: Upon a successful `create` command, the info message is rather verbose. For example, with command `create /name Nguyen /phone 12345678 /phone 87654321`, the info message is: `Noted, created new contact: Nguyen; Phones: [12345678, 87654321]; Emails: []; Links: []; Courses: []; Specialisations: []; Tags: `.
+  * Enhanced behaviour: The info message can be shortened to show only information being added. For example, with command `create /name Nguyen /phone 12345678 /phone`, the info message can be: `Noted, created new contact: Nguyen; Phones: [12345678, 87654321].`
+
+* More user-friendly info message for `add` command.
+  * Current behaviour: Upon a successful `add` command, the info message is rather verbose. For example, with command `add 1 /phone 12345678`, (depending on your contact list) the info message might be: `Added information to this contact: Bernice Yu; Phones: [99272758, 12345678]; Emails: [berniceyu@example.com]; Links: [github.com/bernfish]; Graduation: AY2020/2021 Semester 1; Courses: [Computer Science]; Specialisations [Artificial Intelligence]; Tags: [colleagues][friends]; Priority: High`.
+  * Enhanced behaviour: The info message can be shortened to show only the information being added. For example, with command `add 1 /phone 12345678`, the info message can be: `Added phone "12345678" to the contact at index 1 (name: Bernice Yu).`
+
+* More user-friendly info message for `edit` command.
+  * Current behaviour: Upon a successful `edit` command, the info message is rather verbose. For example, with command `edit 1 /phone 12345 /index 2`, (depending on your contact list) the info message might be: `Edited Person: Nguyen; Phones: [12345678, 12345]; Emails: []; Links: []; Courses: []; Specialisations []; Tags: `.
+  * Enhanced behaviour: The info message can be shortened to show the information being changed. For example, with command `edit 1 /phone 12345 /index 2`, the info message can be: `Changed phone at index 2 of the phone list of the contact at index 1 (name: Nguyen) from "87654321" to "12345".`
+
+* More user-friendly info message for `delete` command.
+  * Current behaviour: Upon a successful `delete` command that delete a field from a contact, the info message is rather verbose. For example, with command `delete 1 /phone /index 2`, (depending on your contact list), the info message might be: `Deleted some information of person: Alex Yeoh; Phones: [12345, 1234567, +65 123]; Emails: [alexyeoh@example.com]; Links: [github.com]; Graduation: AY2016/2017 Semester 1; Courses: [Information Systems]; Specialisations []; Tags: [friends]; Priority: Low`.
+  * Enhanced behaviour: The info message can be shortened to show only information being deleted. For example, with command `delete 1 /phone /index 2`, the info message can be: `Deleted phone "12345678" at index 2 of the phone list of the contact at index 1 (name: Alex Yeoh).`
+
+### Model
+
+* More relaxed person uniqueness constraint.
+  * Current behaviour: Two persons are identified as having the same identity if their names are the same.
+  * Enhanced behaviour: Two persons are identified as having the same identity if they have the same identification number. This can be achieved by having an `identity` field in the `Person` class. This means that two people of exactly the same name may be identified as two different persons.
+  * Justification: This allows user to add two persons of exactly the same name to the contact list. As of the current implementation, it does not allow the user to add a second person of the same name to the contact list.
+
+* More relaxed name constraint.
+  * Current behaviour: Name does not accept any non-alphanumeric characters and whitespace character.
+  * Enhanced behaviour: Name should accommodate for commas `,` and slash `/` characters. This also involves more extensive name validation, with ensuring that comma must be preceded by an alphanumeric character and succeeded by a whitespace character, and slash must be preceded and succeeded by alphanumeric characters.
+
+* Stricter phone uniqueness constraint.
+  * Current behaviour: Two phone numbers are identified as having the same identity if the user input of the two phones are the same. This means that `+65 12345678` and `+6512345678` are identified as two different phone numbers.
+  * Enhanced behaviour: Two phone numbers are identified as having the same identity if they have the same country code and number part. This means that `+65 12345678` and `+6512345678` should be identified as the same phone number.
+
+* Better phone error message.
+  * Current behaviour: The error message is currently `Phone numbers should only contain numbers (and country code with "+" in front if applicable) and it should be at least 3 digits long (excluding country code).` This does not give information on how long the country code can be.
+  * Enhanced behaviour: The error message can be `Phone numbers should only contain numbers (and country code of 1-3 numeric digits with "+" in front if applicable) and it should be at least 3 digits long (excluding country code). Example: 1) +65 12345678 2) +6512345678 3) 12345678` so that it informs the user that country code can be between 1 - 3 digits, inclusive. The example also informs the user that a space character can optionally be used to separate country code from the rest.
+
+* Stricter link uniqueness constraint.
+  * Current behaviour: Two links are identified as having the same identity if the user input of the two links are the same. This means that `https://google.com`, `www.google.com`, `http://google.com` and `google.com` are identified as 4 different links.
+  * Enhanced behaviour: Two links are identified as having the same identity if the link excluding the protocol are the same. This means that `https://google.com`, `www.google.com`, `http://google.com` and `google.com` should be identified as the same link, as without the protocol, they are all reduced to `google.com`.
+
+* Better range of priority.
+  * Current behaviour: Priority only has 3 possible values: `low`, `medium` and `high`.
+  * Enhanced behaviour: Number of priority values can be specified by the user and saved to `preference.json`, or whichever JSON file that the user indicates as preference JSON file in `config.json`. Priority then can be represented by a number. There should be a cap of `10` levels of priority level as well, to prevent GUI display problems.
+  * Justification: With the current range of priority, it may cause inconvenience for users that want to differentiate their contact in terms of priority in greater number of levels.
+  Hence the app should allow the user to specify the number of priority levels.
+
+### Storage
+
+* Better malformed JSON handling.
+  * Current behaviour: Any invalid field (e.g. phone number containing a non-numerical character) of any contact will cause the data to not be loaded at all. NetworkBook would start with an empty contact list without warning.
+  * Enhanced behaviour: Load all contacts that do not have invalid fields and do not load any contact that has at least one invalid field. Warn the user that there are invalid fields in the storage, upon the launch of application. In the case that the JSON is incorrectly formatted such that it cannot be recognised as JSON, warn the user that the application fails to read from the JSON file due to formatting problem, and start with an empty contact list.
+
+### UI
+
+* Better help window pop-up behaviour.
+  * Current behaviour: When the help window is already opened and minimised, and the `help` command is called, the help window does not open again.
+  * Enhanced behaviour: The help window should still pop up when the `help` command is called. (Note: this might already be the behaviour on Mac OS)
+
+* Display course details in greater details.
+  * Current behaviour: Each course tile only displays the title of the course, omitting the information on course start and end dates.
+  * Enhanced behaviour: Each course tile can display 3 pieces of information: name, start date and end date. This can be done by expanding each course tile vertically to have 3 lines, with first line displaying name, second line displaying start date, third line displaying end date.
 
 --------------------------------------------------------------------------------------------------------------------
 

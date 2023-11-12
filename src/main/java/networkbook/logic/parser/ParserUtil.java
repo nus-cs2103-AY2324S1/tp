@@ -213,6 +213,12 @@ public class ParserUtil {
     public static Course parseCourseWithPrefixes(String courseText) throws ParseException {
         requireNonNull(courseText);
 
+        // Throws exception if course description is empty but has a start or end date
+        if (courseText.trim().startsWith(CliSyntax.PREFIX_COURSE_END.getPrefix())
+                || courseText.trim().startsWith(CliSyntax.PREFIX_COURSE_START.getPrefix())) {
+            throw new ParseException(Course.NO_COURSE_NAME);
+        }
+
         ArgumentMultimap argMultiMap =
                 ArgumentTokenizer.tokenize(
                         courseText,

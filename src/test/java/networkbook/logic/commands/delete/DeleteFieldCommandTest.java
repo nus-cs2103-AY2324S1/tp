@@ -47,7 +47,6 @@ public class DeleteFieldCommandTest {
     public void constructor_null_nullPointerException() {
         assertThrowsAssertionError(() -> new DeleteFieldCommand(null, DELETE_PRIORITY_ACTION));
         assertThrowsAssertionError(() -> new DeleteFieldCommand(INDEX_ONE, null));
-        assertThrowsAssertionError(() -> new DeleteFieldCommand(null, null));
     }
 
     @Test

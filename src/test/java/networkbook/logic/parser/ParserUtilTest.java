@@ -266,6 +266,13 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseCourseWithPrefixes_emptyNameButWithDates_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCourseWithPrefixes(" /start 01-01-2000"));
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseCourseWithPrefixes(" /start 01-01-2000 /end 02-01-2000"));
+    }
+
+    @Test
     public void parseCourseWithPrefixes_duplicateStartOrEndDates_throwsParseException() {
         assertThrows(ParseException.class, () ->
                 ParserUtil.parseCourseWithPrefixes(VALID_COURSE

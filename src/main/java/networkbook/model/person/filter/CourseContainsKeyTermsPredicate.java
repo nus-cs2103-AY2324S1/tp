@@ -31,7 +31,7 @@ public class CourseContainsKeyTermsPredicate implements Predicate<Person> {
         assert person != null : "Person should not be null";
         return keyTerms.stream()
                 .anyMatch(keyTerm -> person.getCourses().stream()
-                        .anyMatch(course -> StringUtil.containsTermIgnoreCase(course.getCourse(), keyTerm)));
+                        .anyMatch(course -> StringUtil.containsTermIgnoreCase(course.getValue(), keyTerm)));
     }
 
     @Override

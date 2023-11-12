@@ -38,14 +38,15 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateDisplayedPersonList(predicate, null);
-        return new CommandResult(
+        return new FilterCommandResult(
                 String.format(MESSAGE_SUCCESS,
                         predicate.getKeyTerms()
                                 .stream()
                                 .reduce("", (acc, term) -> acc + " \"" + term + "\"")
                                 .trim()
                                 .replace(" ", ", "))
-                        + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getDisplayedPersonList().size()));
+                        + String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getDisplayedPersonList().size()),
+                "name");
     }
 
     @Override

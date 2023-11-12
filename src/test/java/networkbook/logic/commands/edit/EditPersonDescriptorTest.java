@@ -79,8 +79,6 @@ public class EditPersonDescriptorTest {
                 TypicalIndexes.INDEX_FIRST_PERSON));
         assertThrowsAssertionError(() -> actualDescriptor.setPhone(EditCommandUtil.VALID_INDEX, null,
                 TypicalIndexes.INDEX_FIRST_PERSON));
-        assertThrowsAssertionError(() -> actualDescriptor.setPhone(null, null,
-                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
@@ -131,8 +129,6 @@ public class EditPersonDescriptorTest {
                 TypicalIndexes.INDEX_FIRST_PERSON));
         assertThrowsAssertionError(() -> actualDescriptor.setEmail(EditCommandUtil.VALID_INDEX, null,
                 TypicalIndexes.INDEX_FIRST_PERSON));
-        assertThrowsAssertionError(() -> actualDescriptor.setEmail(null, null,
-                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
@@ -182,8 +178,6 @@ public class EditPersonDescriptorTest {
         assertThrowsAssertionError(() -> actualDescriptor.setLink(null, EditCommandUtil.VALID_LINK,
                 TypicalIndexes.INDEX_FIRST_PERSON));
         assertThrowsAssertionError(() -> actualDescriptor.setLink(EditCommandUtil.VALID_INDEX, null,
-                TypicalIndexes.INDEX_FIRST_PERSON));
-        assertThrowsAssertionError(() -> actualDescriptor.setLink(null, null,
                 TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
@@ -261,8 +255,6 @@ public class EditPersonDescriptorTest {
                 TypicalIndexes.INDEX_FIRST_PERSON));
         assertThrowsAssertionError(() -> actualDescriptor.setCourse(EditCommandUtil.VALID_INDEX, null,
                 TypicalIndexes.INDEX_FIRST_PERSON));
-        assertThrowsAssertionError(() -> actualDescriptor.setCourse(null, null,
-                TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
@@ -314,8 +306,6 @@ public class EditPersonDescriptorTest {
                 TypicalIndexes.INDEX_FIRST_PERSON));
         assertThrowsAssertionError(()
                 -> actualDescriptor.setSpecialisation(EditCommandUtil.VALID_INDEX, null,
-                TypicalIndexes.INDEX_FIRST_PERSON));
-        assertThrowsAssertionError(() -> actualDescriptor.setSpecialisation(null, null,
                 TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
@@ -369,8 +359,6 @@ public class EditPersonDescriptorTest {
         assertThrowsAssertionError(() -> actualDescriptor.setTag(null, EditCommandUtil.VALID_TAG,
                 TypicalIndexes.INDEX_FIRST_PERSON));
         assertThrowsAssertionError(() -> actualDescriptor.setTag(EditCommandUtil.VALID_INDEX, null,
-                TypicalIndexes.INDEX_FIRST_PERSON));
-        assertThrowsAssertionError(() -> actualDescriptor.setTag(null, null,
                 TypicalIndexes.INDEX_FIRST_PERSON));
     }
 

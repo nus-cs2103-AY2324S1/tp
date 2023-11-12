@@ -11,6 +11,8 @@ import networkbook.commons.exceptions.DuplicateEntryException;
 import networkbook.commons.exceptions.IllegalValueException;
 import networkbook.commons.exceptions.NullValueException;
 import networkbook.commons.util.JsonObject;
+import networkbook.logic.parser.ParserUtil;
+import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;
@@ -93,7 +95,8 @@ class JsonAdaptedPerson implements JsonObject {
                 .collect(Collectors.toList()));
         graduation = source.getGraduation().map(Graduation::toString).orElse(null);
         courses.addAll(source.getCourses().stream()
-                .map(JsonAdaptedProperty::new)
+                        .map(Course::getCourse)
+                .map(s -> new JsonAdaptedProperty<Course>(s))
                 .collect(Collectors.toList()));
         specialisations.addAll(source.getSpecialisations().stream()
                 .map(JsonAdaptedProperty::new)
@@ -184,13 +187,22 @@ class JsonAdaptedPerson implements JsonObject {
     private UniqueList<Course> getModelCourses() throws IllegalValueException, DuplicateEntryException {
         final UniqueList<Course> modelCourses = new UniqueList<>();
         for (JsonAdaptedProperty<Course> course : courses) {
-            Course toAdd = course.toModelType(Course::isValidCourse, Course.MESSAGE_CONSTRAINTS, Course::new);
+            Course toAdd = getModelCourse(course);
+
             if (modelCourses.contains(toAdd)) {
                 throw new DuplicateEntryException(String.format(DUPLICATE_ENTRY_MESSAGE, "course", course.getName()));
             }
             modelCourses.add(toAdd);
         }
         return modelCourses;
+    }
+
+    private Course getModelCourse(JsonAdaptedProperty<Course> jsonCourse) throws IllegalValueException {
+        try {
+            return ParserUtil.parseCourseWithPrefixes(jsonCourse.getName());
+        } catch (ParseException e) {
+            throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
+        }
     }
 
     private UniqueList<Specialisation> getModelSpecialisations()

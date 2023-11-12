@@ -2,38 +2,43 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
+box Logic LOGIC_COLOR_T1
 Participant ":Logic" as logic LOGIC_COLOR
-Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR_T1
-Participant ":CreateCommandParser" as createCommandParser LOGIC_COLOR_T2
-Participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR_T3
-Participant ":ArgumentMultimap" as argMultimap LOGIC_COLOR_T1
-Participant ":Person" as person MODEL_COLOR_T1
-Participant ":CreateCommand" as createCommand MODEL_COLOR_T3
-Participant ":Model" as model MODEL_COLOR_T2
-Participant ":NetworkBook" as networkBook MODEL_COLOR_T1
+Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR
+Participant ":CreateCommandParser" as createCommandParser LOGIC_COLOR
+Participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+Participant ":ArgumentMultimap" as argMultimap LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Person" as person MODEL_COLOR
+Participant ":CreateCommand" as createCommand MODEL_COLOR
+Participant ":Model" as model MODEL_COLOR
+Participant ":NetworkBook" as networkBook MODEL_COLOR
+end box
 
 -> logic : execute("create" + arguments)
 activate logic
 
 logic -> networkBookParser : "create" + arguments
-activate networkBookParser LOGIC_COLOR_T1
+activate networkBookParser
 
 create createCommandParser
 networkBookParser -> createCommandParser : new CreateCommandParser()
-activate createCommandParser LOGIC_COLOR_T2
+activate createCommandParser
 
 createCommandParser --> networkBookParser
 deactivate createCommandParser
 
 networkBookParser -> createCommandParser : parse(arguments)
-activate createCommandParser LOGIC_COLOR_T2
+activate createCommandParser
 
 createCommandParser -> ArgumentTokenizer : tokenize
-activate ArgumentTokenizer LOGIC_COLOR_T3
+activate ArgumentTokenizer
 
 create argMultimap
 ArgumentTokenizer -> argMultimap : new ArgumentMultimap()
-activate argMultimap LOGIC_COLOR_T1
+activate argMultimap
 argMultimap --> ArgumentTokenizer : argMultimap
 deactivate argMultimap
 
@@ -41,19 +46,19 @@ ArgumentTokenizer --> createCommandParser : argMultimap
 deactivate ArgumentTokenizer
 
 createCommandParser -> argMultimap : parseName, ...
-activate argMultimap LOGIC_COLOR_T1
+activate argMultimap
 argMultimap --> createCommandParser : name, ...
 deactivate argMultimap
 
 create person
 createCommandParser -> person : new Person(name, ...)
-activate person MODEL_COLOR_T2
+activate person
 person --> createCommandParser : person
 deactivate person
 
 create createCommand
 createCommandParser -> createCommand : new CreateCommand(person)
-activate createCommand MODEL_COLOR_T3
+activate createCommand
 
 createCommand --> createCommandParser : createCommand
 deactivate createCommand
@@ -65,16 +70,20 @@ networkBookParser --> logic : createCommand
 deactivate networkBookParser
 
 logic -> createCommand: execute(model)
-activate createCommand MODEL_COLOR_T3
+activate createCommand
 
 createCommand -> model : hasPerson(person)
-activate model MODEL_COLOR_T2
+activate model
 model --> createCommand : false
 deactivate model
 
 createCommand -> model : addPerson(person)
-activate model MODEL_COLOR_T2
+activate model
 model -> networkBook : addPerson(person)
+activate networkBook
+networkBook --> model :
+deactivate networkBook
+model --> createCommand :
 deactivate model
 
 createCommand --> logic : command success

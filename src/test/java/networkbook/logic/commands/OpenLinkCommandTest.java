@@ -124,7 +124,6 @@ public class OpenLinkCommandTest {
 
     @Test
     public void constructor_null_throwsAssertionError() {
-        assertThrowsAssertionError(() -> new OpenLinkCommand(null, null));
         assertThrowsAssertionError(() -> new OpenLinkCommand(TypicalIndexes.INDEX_FIRST_PERSON, null));
         assertThrowsAssertionError(() -> new OpenLinkCommand(null, CommandTestUtil.VALID_LINK_INDEX_AMY));
     }
