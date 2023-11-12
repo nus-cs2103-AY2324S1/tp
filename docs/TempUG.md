@@ -718,7 +718,7 @@ Unknown command
 #### For Student:
 <box type="info" seamless>
 
-You must be in the ___STUDENTS list___ to run this command. Type `list STUDENTS` to go to the ___STUDENTS list___.</box>
+You must be in the ___STUDENTS list___ to run this command. Type `list students` to go to the ___STUDENTS list___.</box>
 Format: `[-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
 * Multiple fields can be specified at the same time.
 * Refer to the parameter constraints [here](#parameter-summary).
@@ -727,7 +727,7 @@ Format: `[-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
 
 **Tips:**
 - When filtering by multiple fields, only the students which match all the fields are returned.
-- To reset the view to an unfiltered state, type `list STUDENTS`.
+- To reset the view to an unfiltered state, type `list students`.
 - If no students that match the filters are found, an empty list will be shown.
 </box>
 
@@ -754,7 +754,7 @@ For example, filter -name John -subject physics,english
 #### For Schedule:
 <box type="info" seamless>
 
-You must be in the **_SCHEDULE list_** to run this command. Type `list SCHEDULE` to go to the **_SCHEDULE list_**.</box>
+You must be in the **_SCHEDULE list_** to run this command. Type `list schedule` to go to the **_SCHEDULE list_**.</box>
 Format: `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`
 * Only one of `-before`, `-on`, `-after` can be used at once. For example, you cannot use both `-before` and `-after` in the same filter command.
 * The dates specified in `-before` and `-after` are exclusive. For example, specifying `-before 2023/05/01` will find lessons before but not on 2023/05/01.
@@ -764,7 +764,7 @@ Format: `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-aft
 
 **Tips:**
 - When filtering by multiple fields, only the lessons which match all the fields are returned.
-- To reset the view to an unfiltered state, type `list SCHEDULE`.
+- To reset the view to an unfiltered state, type `list schedule`.
 - If no lessons that match the filters are found, an empty list will be shown.
 
 </box>
@@ -808,7 +808,7 @@ You can link lessons to students, and vice versa. For example, if a lesson has a
 #### For Student:
 <box type="info" seamless>
 
-You must be in the **_STUDENT list_** and are viewing a student to run this command. Type `list STUDENTS` to go to the **_STUDENT list_**, then type `show INDEX` to select a student to link lessons to.</box>
+You must be in the **_STUDENT list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENT list_**, then type `show INDEX` to select a student to link lessons to.</box>
 Format: `linkTo LESSON_NAME`
 * `LESSON_NAME` is the name of the lesson you would like to link to.
 * * Refer to `LESSON_NAME`'s constraints [here](#parameter-summary).
@@ -856,7 +856,7 @@ No such lesson
 #### For Schedule:
 <box type="info" seamless>
 
-You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list SCHEDULE` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson to link students to.</box>
+You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list schedule` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson to link students to.</box>
 Format: `linkTo STUDENT_NAME`
 * `STUDENT_NAME` is the name of the student you would like to link to.
 * Refer to `STUDENT_NAME`'s constraints [here](#parameter-summary).
@@ -916,7 +916,7 @@ Format: `nav`
 #### For Student:
 <box type="info" seamless>
 
-You must be in the **_STUDENT list_** and are viewing a student to run this command. Type `list STUDENTS` to go to the **_STUDENT list_**, then type `show INDEX` to select a student.</box>
+You must be in the **_STUDENT list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENT list_**, then type `show INDEX` to select a student.</box>
 
 <box type="tip" seamless>
 
@@ -951,7 +951,7 @@ This student has no linked lessons
 #### For Schedule:
 <box type="info" seamless>
 
-You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list SCHEDULE` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson.</box>
+You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list schedule` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson.</box>
 
 <box type="tip" seamless>
 
