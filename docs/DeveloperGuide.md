@@ -749,7 +749,7 @@ _{more aspects and alternatives to be added}_
 
 ### Product scope
 
-HouR is a desktop app for human resources staff managing employee data, optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HouR can get your employee management tasks done faster than traditional GUI apps.
+HouR is a desktop app for human resources staff managing employee data, including performance metrics, optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HouR can get your employee management tasks done faster than traditional GUI apps.
 
 
 **Target user profile**:
