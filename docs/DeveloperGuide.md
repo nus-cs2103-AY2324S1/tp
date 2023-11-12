@@ -374,38 +374,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LoveBook` and the **Actor** is the `user`, unless specified otherwise)
 
+#### Use Case: List All Dates
+
+**Main Success Scenario (MSS):**
+
+1. User requests to list all dates.
+2. LoveBook shows a list of dates.
+
+**Extensions:**
+
+2a. The list is empty.
+
+- Use case ends.
+
 #### Use Case: Add a Date
 
 **Main Success Scenario (MSS):**
 
 1. User requests to add a new date to the LoveBook.
-2. LoveBook prompts the user to provide the date's details, including name, age number, and gender.
+2. LoveBook prompts the user to provide the date's details, including name, age, gender, height, income and horoscope.
 3. User enters the required details.
 4. LoveBook validates the input.
 5. LoveBook adds the new date to the LoveBook.
 6. LoveBook displays a confirmation message.
 
+    Use case ends. <br>
+
 **Extensions:**
 
-2a. User cancels the operation.
-
-- Use case ends.
-
-4a. The input is invalid (e.g., missing name or an invalid gender height).
+4a. The input is invalid (e.g., invalid gender, height, horoscope).
 
 - LoveBook shows an error message.
 - User is prompted to re-enter the details.
-- Use case resumes at step 3.
+- Use case resumes at step 2.
 
-#### Use Case: Search for a Date
+#### Use Case: Finding a Date
 
 **Main Success Scenario (MSS):**
 
 1. User requests to search for a date in the LoveBook.
-2. LoveBook prompts the user to enter a search query (e.g., name or age number).
-3. User enters the search query.
+2. LoveBook prompts the user to enter a search query by name.
+3. User enters the necessary command.
 4. LoveBook performs a search based on the query.
 5. LoveBook displays a list of dates matching the search query.
+
+Use case ends. <br>
 
 **Extensions:**
 
@@ -413,125 +426,156 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - LoveBook displays a message indicating that no matching dates were found.
 
-#### Use Case: Edit Date Details
+#### Use Case: Edit a Date's Details
 
 **Main Success Scenario (MSS):**
 
-1. User requests to edit the details of a specific date.
+1. User requests to list all the dates.
 2. LoveBook shows a list of dates.
-3. User selects the date they want to edit from the list.
-4. LoveBook prompts the user to provide the updated details for the selected date.
-5. User enters the updated details.
-6. LoveBook validates the input.
-7. LoveBook updates the date's details with the new information.
-8. LoveBook displays a confirmation message.
+3. User selects the date and the relevant fields they want to edit from the list.
+4. LoveBook updates the date's details with the new information.
+5. LoveBook displays a confirmation message.
+
+Use case ends. <br>
 
 **Extensions:**
 
 2a. The list is empty.
 
-- LoveBook displays a message indicating that there are no dates to edit.
 - Use case ends.
 
-3a. The selected date does not exist.
+4a. The selected date does not exist (e.g., index provided is greater than number of dates).
 
-- LoveBook displays an error message.
-- User is prompted to select a valid date.
-- Use case resumes at step 3.
+- 4a1. LoveBook displays an error message.
+- Use case resumes at step 2.
 
-6a. The input is invalid (e.g., missing name or an invalid age number).
+4b. The new field entry is invalid (e.g., missing name, incorrect gender).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the details.
-- Use case resumes at step 5.
-
-#### Use Case: View Date Details
-
-**Main Success Scenario (MSS):**
-
-1. User requests to view the details of a specific date.
-2. LoveBook shows a list of dates.
-3. User selects the date they want to view from the list.
-4. LoveBook displays the date's details, including name, age number, and gender.
-
-**Extensions:**
-
-2a. The list is empty.
-
-- LoveBook displays a message indicating that there are no dates to view.
-- Use case ends.
-
-3a. The selected date does not exist.
-
-- LoveBook displays an error message.
-- User is prompted to select a valid date.
-- Use case resumes at step 3.
+- 4b1. LoveBook displays an error message.
+- Use case resumes at step 2.
 
 #### Use Case: Delete a Date
 
 **Main Success Scenario (MSS):**
 
-1. User requests to delete a specific date from the LoveBook.
+1. User requests to list all the dates.
 2. LoveBook shows a list of dates.
-3. User selects the date they want to delete from the list.
-4. LoveBook confirms the deletion with the user.
-5. User confirms the deletion.
-6. LoveBook deletes the date from the LoveBook.
-7. LoveBook displays a confirmation message.
+3. User requests to delete a specific date in the list.
+4. LoveBook deletes the date from the LoveBook.
+
+Use case ends. <br>
 
 **Extensions:**
 
 2a. The list is empty.
 
-- LoveBook displays a message indicating that there are no dates to delete.
 - Use case ends.
 
 3a. The selected date does not exist.
 
-- LoveBook displays an error message.
-- User is prompted to select a valid date.
-- Use case resumes at step 3.
+- 3a1. LoveBook displays an error message.
+- Use case resumes at step 2.
 
-5a. User cancels the deletion.
+#### Use Case: Set Preferences
+
+**Main Success Scenario (MSS):**
+
+1. User requests to set preferences.
+2. LoveBook updates the preferences with the new information.
+
+Use case ends. <br>
+
+**Extensions:**
+
+2a. The entered preferences are invalid.
+
+- 2a1. LoveBook displays an error message.
+- Use case resumes at step 1.
+
+#### Use Case: View Preferences
+
+**Main Success Scenario (MSS):**
+
+1. User requests to view preferences.
+2. LoveBook displays the preferences.
+
+Use case ends. <br>
+
+#### Use Case: Get Blind Date
+
+**Main Success Scenario (MSS):**
+
+1. User requests for a blind date.
+2. LoveBook displays a blind date.
+
+Use case ends. <br>
+
+**Extensions:**
+
+2a. The list is empty.
+
+- LoveBook displays a message indicating that there are no dates.
+- Use case ends.
+
+#### Use Case: Filter Dates
+
+**Main Success Scenario (MSS):**
+
+1. User requests to list all the dates.
+2. LoveBook shows a list of dates.
+3. User requests to filter the list of dates by a specific metric.
+4. LoveBook filters the list of dates by the specified metric.
+
+Use case ends. <br>
+
+**Extensions:**
+
+2a. The list is empty.
 
 - Use case ends.
+
+3a. The specified metric does not exist or entered input is invalid (e.g., invalid gender).
+
+- 3a1. LoveBook displays an error message.
+- Use case resumes at step 2.
+
+#### Use Case: Sort Dates
+
+**Main Success Scenario (MSS):**
+
+1. User requests to list all the dates.
+2. LoveBook shows a list of dates.
+3. User requests to sort the list of dates by a specific metric.
+4. LoveBook sorts the list of dates by the specified metric.
+
+Use case ends. <br>
+
+**Extensions:**
+
+2a. The list is empty.
+
+- Use case ends.
+
+3a. The specified metric does not exist or entered input is invalid (e.g., invalid gender).
+
+- 3a1. LoveBook displays an error message.
+- Use case resumes at step 2.
 
 #### Use Case: Get Best Match
 
 **Main Success Scenario (MSS):**
 
-1. User requests his/her best match.
+1. User requests for their best match.
+2. LoveBook displays the best match.
+
+Use case ends. <br>
 
 **Extensions:**
+
 1a. The list is empty.
 
-- LoveBook displays a message indicating that there are no dates.
+- 1a1. LoveBook displays a message indicating that there are no dates.
 - Use case ends.
-
-#### Use Case: View Preferences for Dates
-
-**Main Success Scenario (MSS):**
-
-1. User requests to edit the details of a specific date.
-2. LoveBook shows the user's preferences.
-3. LoveBook prompts the user to provide the updated details for the selected preference.
-4. User enters the updated details.
-5. LoveBook validates the input.
-6. LoveBook updates the preference's details with the new information.
-7. LoveBook displays a confirmation message.
-
-**Extensions:**
-
-2a. User did not set a preference.
-
-- LoveBook displays a message indicating a default preference.
-- Use case ends.
-
-5a. The input is invalid (e.g., missing date or an invalid age number).
-
-- LoveBook shows an error message.
-- User is prompted to re-enter the details.
-- Use case resumes at step 5.
 
 ### Non-Functional Requirements
 
