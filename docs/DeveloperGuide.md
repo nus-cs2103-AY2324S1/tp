@@ -428,16 +428,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app.<br>
        Expected: The most recent window size and location is retained.
 
 3. Saving teaching course preferences
 
    1. Type `teach t/cs2103t` in the command box and press Enter.<br>
-      Expected: The default teaching course is set to `cs2103t`.
+      Expected: The default teaching course is set to `CS2103T`.
 
    2. Close the window and re-launch the app.<br>
-      Expected: The default teaching course remains as `cs2103t` and list of TAs only contains those teaching CS2103T.
+      Expected: The default teaching course remains as `CS2103T` and list of TAs only contains those teaching CS2103T.
 
 ### Deleting a person
 
