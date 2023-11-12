@@ -271,7 +271,7 @@ The commands are implemented in the `EditMemberCommand` and `EditApplicantComman
 * Step 1. The `EditMemberCommand`/`EditApplicantCommand` object's `execute()` method is called.
 * Step 2. The `MEMBER_INDEX`/`APPLICANT_INDEX` is checked to be within the valid range of the displayed member/applicant list. If the `MEMBER_INDEX`/`APPLICANT_INDEX` given is invalid(i.e out of range), a `CommandException` is thrown.
 * Step 3. The `Member`/`Applicant` at the given `MEMBER_INDEX`/`APPLICANT_INDEX` is referenced.
-* Step 4. The number of fields to be edited are checked. If there are no fields to be edited, a `CommandException` is thrown.
+* Step 4. The number of field(s) to be edited are checked. If there are no fields to be edited, a `CommandException` is thrown.
 * Step 4. The model object's `setMember()`/`setApplicant()` method is called. The input parameter is the referenced `Member`/`Applicant` and the new `Member`/`Applicant` with the updated details.
 * Step 5. The `Member's`/`Applicant's` field(s) are edited.
 
