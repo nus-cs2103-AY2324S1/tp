@@ -157,7 +157,7 @@ If it passes these checks, the person is added into the system.
 * **Name (Compulsory field)**: String composed of character between A-Z and a-z.
 * **Phone number (Compulsory field)**: Any number.
 * **Address (Compulsory field)**: String without restriction in characters.
-* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
+* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com).
 * **Subject (Compulsory field)**: String without restriction in characters.
 * **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
 * **Begin (Compulsory field)**: String with restrictions (HHMM).
@@ -189,8 +189,7 @@ There are three commands that deal with listing tutees:
 3. `ListUnPaidCommand` - Shows the current list of tutees who have not paid
 
 The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and the `ListUnPaidCommand` extend the `ListCommand` class. All three commands override `Command#execute`.
-The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format
-
+The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format.
 
 The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
 
@@ -405,16 +404,18 @@ The following sequence diagram shows how unpaidAll command works:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                       |
-| ------ |--------------------------------------------|---------------------------------------------|-----------------------------------------------------------------------|
-| `* * *` | tutor                                      | view a list of all tutees                   |                                                                       |
-| `* *`  | tutor                                      | view a list tutees on a specified day       | so that I can be reminded if I have any classes on that particular day |
-| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                       |
-| `* * *` | tutor                                      | add a new tutee                             |                                                                       |
-| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address       |
-| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                     |
-| `* *`  | tutor                                      | mark students that have already paid        | keep track of students' payment statuses                              |
-| `* *`  | tutor                                      | check all students who haven't paid         | easily remind students who haven't paid                               |
+| Priority | As a …​ | I want to …​                                     | So that I can…​                                                 |
+| ------ |---------|--------------------------------------------------|-----------------------------------------------------------------|
+| `* * *` | tutor   | view a list of all tutees                        | see whoever are my tutees                                       |
+| `* *`  | tutor   | view a list tutees on a specified day            | be reminded if I have any classes on that particular day        |
+| `* * *` | tutor   | view the specific details of a single tutee      | see the different informations tailored to the tutee            |
+| `* * *` | tutor   | add a new tutee                                  | update the list of students that I have                         |
+| `* * *` | tutor   | find a tutee                                     | search for a specific tutee that I have                         
+| `* * *` | tutor   | edit their details                               | account for changes in their information e.g. change in address |
+| `* *`  | tutor   | remove tutees from the list                      | keep track of tutees that I have stopped teaching               |
+| `* *`  | tutor   | mark students that have already paid             | keep track of students' payment statuses                        |
+| `* *`  | tutor   | check all students who haven't paid              | easily remind students who haven't paid                         |
+| `* *`  | tutor   | undo and redo commands I made in the application | easily revert any mistakes                                      |
 
 *{More to be added}*
 
