@@ -70,7 +70,7 @@ public class FindCommand extends Command {
     private final PersonType personType;
 
     /**
-     * @param findPredicateMap The predicate that describes the name being searched for
+     * @param findPredicateMap The predicate map that encapsulates the attributes being searched for
      * @param personType The type of person being searched for i.e. patient or specialist
      */
     public FindCommand(FindPredicateMap findPredicateMap, PersonType personType) {
