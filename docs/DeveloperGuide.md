@@ -1021,6 +1021,14 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting fosterers while only some fosterers are shown follows similar test cases.
 
+### Sorting the list of fosterers
+
+1. Sorting the list of fosterers in the main window by name alphabetically
+
+    1. Test case: `sort`<br>
+       Expected: The whole list of fosterers will be sorted alphabetically. Command success message is shown.
+
+2. Deleting fosterers while only some fosterers are shown follows similar test cases.
 
 ### Viewing Statistics of Fosterers
 1. Viewing statistics of available fosterers
