@@ -42,7 +42,7 @@ If you are an experienced user, you can use the [Table of Contents](#table-of-co
 </div>
 
 ## Table of Contents
-
+* Table of Contents
 {:toc}
 
 ---
