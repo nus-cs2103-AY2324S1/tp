@@ -647,8 +647,9 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface.
+* **GUI**: Graphical User Interface.
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **Appropriate third party frameworks/libraries/systems**: Those frameworks/libraries/systems that are free, open-source, have permissive license terms, don't require installation by the users and don't violate other constraints.
 * **GUI should work well**: The GUI should not cause resolution-related inconveniences for the user.
 * **GUI should be usable**: The GUI's functions can all be used, although user-experience may be suboptimal.
@@ -819,6 +820,39 @@ Test case:
     3. Test case: `delsc sc/remove` (deleting non-existent shortcut alias)<br>
        Expected: No shortcut alias is removed. The command result box displays a useful error message indicating shortcut alias was not previously registered.
 
+### Theme Command
+
+1. Prerequisite: Set theme of the application to dark using the `theme dark` command.     
+
+2. Test case: `theme light`<br>
+Expected: Theme of the application changes from dark to light.
+
+3. Test case: `theme DaRk`<br>
+Expected: Theme of the application changes from light to dark.
+
+4. Test case: `theme colourful`<br>
+Expected: No change in the theme of the application. Command box displays error message.
+
+### Recall Command
+
+1. Recalling recently executed commands in the application
+
+   1. Prerequisite: Enter the following commands in order:`list -pa`, `list -sp`, `theme light` and `theme dark`.
+   
+   2. Test case: Press the up arrow four times and then enter <br> 
+   Expected: The list panel updates to display patients.
+   
+   3. Test case: Press the up arrow four times and then the down arrow once and then enter <br>
+   Expected: The theme of the application changes from dark to light.
+   
+2. Recalling commands when no commands have been executed yet
+
+   1. Prerequisite: Restart the application and don't enter any commands.
+   
+   2. Test case: Type in `list -pa`. Don't enter. Press the up arrow. <br>
+   Expected: There is no change to the command input text box.
+   
+
 ## **Appendix: Planned Enhancements**
 
 1. Currently, the view panel can only be updated using the view command. 
@@ -831,8 +865,9 @@ In contrast, the `delsc` command handles invalid shortcuts by recognizing and ig
 The inconsistency between these two delete functions has been identified, and we have plans to address it in the future.
 Our upcoming improvement will entail modifying the `delete` command to acknowledge and ignore invalid indexes while effectively deleting records specified by valid indexes provided by the user.
 
-3. DoConnek Pro currently checks for duplicate persons by name. This means that people with the same names cannot be added even if they have different parameters (like `Phone` or `Email`).
-We plan on implementing an `NRIC` field for patients and an `MCR` field for specialists as unique identifiers to solve this issue. 
+3. DoConnek Pro currently checks for duplicate persons by name. This means that people with the same names cannot be added even if they have different parameters (like `Phone` or `Email`). This
+checking of duplicates is also case-sensitive, whereas names, in general, are not case-sensitive. To resolve these two problems concurrently,
+we plan on implementing a `NRIC` field for patients and a `MCR` field for specialists as unique identifiers. 
 
 
 4. DoConnek Pro currently disallows the use of "/" in a person name because it is used as a command delimiter.
