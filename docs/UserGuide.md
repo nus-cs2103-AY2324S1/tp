@@ -88,12 +88,13 @@ Examples:
 
 Acceptable values for each parameter:
 * `n/NAME`: Alphanumeric.
-* `i/NRIC`: Alphanumeric, _exactly_ 4 characters.
+* `i/NRIC`: Alphanumeric, _exactly_ 4 characters (3 digits + 1 letter).
 * `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters.
 * `e/EMAIL`: Alphanumeric and/or special characters, no white spaces allowed, standard email format.
+* `a/ADDRESS`: Alphabets and/or special characters, white spaces allowed.
 * `t/TAG`: Alphabets, no white spaces allowed.
+* `l/LICENCE PLATE`: Alphanumeric, _up to_ 8 characters.
 * `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
-* `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters.
 * `pn/POLICY NUMBER`: Alphanumeric, _up to_ 8 characters.
 * `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE`: Date in the format dd-mm-yyyy.
 
@@ -105,7 +106,7 @@ Expected output upon failure:
 ```
 Invalid command format! 
 Error: Some of the required fields are missing. 
-Please include the following: - NRIC(i/) - License Plate(l/) 
+Please include the following: - NRIC(i/) - Licence Plate(l/) 
 ```
 * Incomplete policy details:<br>
 ```
@@ -114,7 +115,9 @@ Please include either all or none of the policy variables.
 You are missing the following: - Policy Expiry Date(pe/)
 ```
 * Adding a client with an existing policy number:<br>
-` Error: The policy number is already in use`
+```
+Error: The policy number is already in use
+```
 
 
 ### Listing all clients : `list`
@@ -137,17 +140,17 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [
 
 
 Examples:
-*  `edit 1 l/SNB9876E` updates the policy at the INDEX number 1 with the new license number provided.
+*  `edit 1 l/SNB9876E` updates the policy at the INDEX number 1 with the new licence plate provided.
 *  `edit 2 pn/AB12345J pe/31-12-2024` updates the policy at the INDEX number 2 with the new policy number and expiration date.
 
 Acceptable values for each parameter:
 * `n/NAME`: Alphanumeric.
-* `i/NRIC`: Alphanumeric, _exactly_ 4 characters.
+* `i/NRIC`: Alphanumeric, _exactly_ 4 characters (3 digits + 1 letter).
 * `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters.
 * `e/EMAIL`: Alphanumeric and/or special characters, no white spaces allowed, standard email format.
 * `a/ADDRESS`: Alphabets and/or special characters, white spaces allowed.
 * `t/TAG`: Alphabets, no white spaces allowed.
-* `l/LICENCE PLATE`: Alphanumeric, _up to_ 9 characters.
+* `l/LICENCE PLATE`: Alphanumeric, _up to_ 8 characters.
 * `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
 * `pn/POLICY NUMBER`: Alphanumeric, _up to_ 8 characters.
 * `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE`: Date in the format dd-mm-yyyy.
@@ -164,14 +167,16 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/A
 [i/NRIC] [l/LICENCE_PLATE] [c/COMPANY] [pn/POLICY_NUMBER] [pi/POLICY_ISSUE_DATE] [pe/POLICY_EXPIRY_DATE] Example: edit 1 p/91234567 e/johndoe@example.com
 ```
 * No specified `INDEX` or negative `INDEX` or no field provided:<br>
-`At least one field to edit must be provided. `
+```
+At least one field to edit must be provided. 
+```
 
 
 ### Locating clients by fields : `find`
 
 Finds client(s) whose fields matches any of the given fields.
 
-Format: `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG]...
+Format: `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG]
 [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
 
 * The search is case-insensitive e.g. `hans` will match `Hans`
@@ -184,7 +189,7 @@ licence plates contains `SLA`
 
 Examples:
 * `find n/mary` returns all clients that has the name `Mary` such as `Mary Lim`, `Mary Koh`, `Mary White`
-* `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with names `Hans` or `Bo` in it
+* `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with only `Hans` or `Bo` in it
 * `find n/john pn/AB12345J` returns all clients whose name contains `John` with policy number `AB12345J`
 
 Expected output upon success:<br>
@@ -195,13 +200,14 @@ Expected output upon failure:
 ```
 Invalid command format!  
 find: Finds all persons whose names contain any of the specified fields (case-insensitive for values) and displays them as a list with index numbers.  
-Parameters: [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL][c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]  
+Parameters: [n/NAME] [l/LICENCE PLATE] [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]  
 At least one parameter must be present.  
 Example: find n/Alice Rodriguez
 ```
 * Field prefix given but no value e.g. `n/ c/` :<br>
-`Error: No value detected for the following field(s): n/ c/`
-
+```
+Error: No value detected for the following field(s): n/ c/
+```
 
 ### Deleting a client : `delete`
 
@@ -224,11 +230,17 @@ Expected output upon success :
 
 Expected output upon failure:
 * Profile at the specified `INDEX` cannot be found:<br>
-`Error: Invalid Index`
+```
+Error: Invalid Index
+```
 * Missing `INDEX` parameter:<br>
-`Error: Missing Index`
+```
+Error: Missing Index
+```
 * Incorrect `INDEX` parameter:<br>
-`Error: The parameter is not of the type positive integer`
+```
+Error: The parameter is not of the type positive integer
+```
 
 
 ### Sorting clients by policy expiration date : `sort`
@@ -261,14 +273,18 @@ Examples:
 Acceptable values for each parameter:
 * `NUMBER_OF_DAYS` : Numeric, range from _0_ to _7305_
 
-Expected output upon success (Current date is 1-11-2023):<br>
+Expected output upon success (Current date is 12-11-2023):<br>
 ![RemindSuccess](images/RemindSuccess.png)
 
 Expected output upon failure:
 * `NUMBER_OF_DAYS` not in range _0_ to _7305_:<br>
-`Error: The value has to be between 0 and 7305 (both inclusive)`
+```
+Error: The value has to be between 0 and 7305 (both inclusive)
+```
 * `NUMBER_OF_DAYS` not numeric:<br>
-`Invalid command format! Error: The value is not a number`
+```
+Invalid command format! Error: The value is not a number
+```
 * `NUMBER_OF_DAYS` not given:
 ```
 Invalid command format!  
@@ -280,7 +296,7 @@ Example: remind 30
 
 ### Add or remove remark to a client : `remark`
 
-Adds or remove a remark/comment to a client.
+Adds or remove a remark to a client.
 
 Format: `remark INDEX r/[REMARK]`
 
@@ -289,7 +305,7 @@ Format: `remark INDEX r/[REMARK]`
 * If `REMARK` is not given, it will remove the remark for the client at `INDEX`
 
 Examples:
-* `remark 1 r/Likes to go hiking` will attach the comment `Likes to go hiking` to the client that is at index `1`
+* `remark 1 r/Wants cheaper policies!` will attach the comment `Wants cheaper policies!` to the client that is at index `1`
 * `remark 1` or `remark 1 r/` will remove the comment that is attached to client that is at index `1`
 
 Acceptable values for each parameter:
@@ -297,7 +313,7 @@ Acceptable values for each parameter:
 * `REMARK` : Any characters
 
 Expected output upon success:<br>
-![RemindSuccess](images/RemindSuccess.png)
+![RemindSuccess](images/RemarkSuccess.png)
 
 Expected output upon failure:
 * Invalid `INDEX` parameter or no `INDEX` :<br>
@@ -305,7 +321,7 @@ Expected output upon failure:
 Invalid command format!  
 remark: Edits the remark of the person identified by the index number used in the last person listing. Existing remark will be overwritten by the input.
 Parameters: INDEX (must be a positive integer) r/REMARK
-Example: remark 1 r/ Likes to swim.
+Example: remark 1 r/Likes to swim.
 ```
 
 
@@ -319,7 +335,7 @@ Format: `batchdelete [c/COMPANY] [dm/DELETE MONTH]`
 * **Only one** of the optional fields must be provided.
 
 Examples:
-* `batchdelete dm/07-2020 ` batch delete clients whose policy expiry date is in July 2020.
+* `batchdelete dm/07-2020` batch delete clients whose policy expiry date is in July 2020.
 * `batchdelete c/DEF Insurance` batch delete clients who buy policy from the company DEF Insurance.
 
 Acceptable values for each parameter:
@@ -342,9 +358,13 @@ Example: batchdelete dm/11-2022
 Example: batchdelete c/Allianz 
 ```
 * Both fields exist:<br>
-` Error: Please contain only either one field of dm/ or c/. `
+```
+Error: Please contain only either one field of dm/ or c/.
+```
 * Incorrect format for delete month:<br>
-`delete month should be in the format MM-yyyy`
+```
+Delete month should be in the format MM-yyyy
+```
 
 
 
@@ -397,16 +417,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action          | Format, Examples                                                                                                                                                                                                                                                                       |
-|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**         | `add n/NAME i/NRIC p/CONTACT NUMBER e/EMAIL a/ADDRESS t/TAG l/LICENCE PLATE [c/COMPANY pn/POLICY NUMBER pi/POLICY ISSUE DATE pe/POLICY EXPIRY DATE]` <br> e.g., `add n/Irfan Ibrahim i/752X p/92492021 e/irfan@example.com a/Blk 47 Tampines Street 20,#17-35 t/classmates l/SBP8888T` |
-| **Clear**       | `clear`                                                                                                                                                                                                                                                                                |
-| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                    |
-| **Edit**        | `edit INDEX [l/LICENCEPLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]…​`<br> e.g.,`edit 2 pn/AB12345J pe/31-12-2024`                                                                                                                                          |
-| **Find**        | `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG] [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g. `find n/John /pn AB12345J`                                                                                      |
-| **List**        | `list`                                                                                                                                                                                                                                                                                 |
-| **Help**        | `help`                                                                                                                                                                                                                                                                                 |
-| **Sort**        | `sort`                                                                                                                                                                                                                                                                                 |
-| **Remind**      | `remind NUMBER_OF_DAYS`<br> e.g. `remind 30`                                                                                                                                                                                                                                           | 
-| **Remark**      | `remark INDEX r/[REMARK]`<br> e.g. `remark 1 r/Likes to swim`                                                                                                                                                                                                                          |
- | **BatchDelete** | `batchdelete [c/COMPANY] [dm/DELETE MONTH]` <br> e.g. `batchdelete c/DEF Insurance`                                                                                                                                                                                                    |
+| Action          | Format, Examples                                                                                                                                                                                                                                                                            |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**         | `add n/NAME i/NRIC p/CONTACT NUMBER e/EMAIL a/ADDRESS [t/TAG]... l/LICENCE PLATE [c/COMPANY pn/POLICY NUMBER pi/POLICY ISSUE DATE pe/POLICY EXPIRY DATE]` <br> e.g., `add n/Irfan Ibrahim i/752X p/92492021 e/irfan@example.com a/Blk 47 Tampines Street 20,#17-35 t/classmates l/SBP8888T` |
+| **Clear**       | `clear`                                                                                                                                                                                                                                                                                     |
+| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                         |
+| **Edit**        | `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]... [c/COMPANY] [l/LICENCE PLATE] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g.,`edit 2 n/Bernice Yeo p/88881111`                                                               |
+| **Exit**        | `exit`                                                                                                                                                                                                                                                                                      |
+| **Find**        | `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG] [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`<br> e.g. `find n/John pn/AB12345J`                                                                                            |
+| **List**        | `list`                                                                                                                                                                                                                                                                                      |
+| **Help**        | `help`                                                                                                                                                                                                                                                                                      |
+| **Sort**        | `sort`                                                                                                                                                                                                                                                                                      |
+| **Remind**      | `remind NUMBER_OF_DAYS`<br> e.g. `remind 30`                                                                                                                                                                                                                                                | 
+| **Remark**      | `remark INDEX r/[REMARK]`<br> e.g. `remark 1 r/Likes to swim`                                                                                                                                                                                                                               |
+ | **BatchDelete** | `batchdelete [c/COMPANY] [dm/DELETE MONTH]` <br> e.g. `batchdelete c/DEF Insurance`                                                                                                                                                                                                         |
