@@ -788,7 +788,7 @@ the lifeline reaches the end of diagram.
 - **Alternative 1 (current choice):** Users input more than one `m/` tags and only the last `m/` tag is taken.
   - Pros: Users who are fast typists can easily correct earlier mistakes without deleting text.
   - Pros: There are less erroneous behaviours that will result in failure of the command (e.g. entering `m/0 m/0 
-    m/1` will result in the schedule being marked as `completed`, as opposed to encoutering an error).
+    m/1` will result in the schedule being marked as `completed`, as opposed to encountering an error).
   - Cons: Some users may be confused about the behaviour of the command especially if tags provided are conflicting.
 - **Alternative 2:** Users input only one `m/` tag. Multiple tags will result in an error.
   - Pros: The command is unambiguous to use, since multiple (hence conflicting) tags are not accepted. 
