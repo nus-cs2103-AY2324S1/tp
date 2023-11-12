@@ -23,7 +23,7 @@ title: Developer Guide
    - [Markdown Support](#markdown-support-feature)
    - [Space Repetition](#spaced-repetition-feature)
    - [Data Transfer](#data-transfer-functionality)
-   - [Undo/Redo](#proposed-undoredo-feature)
+   - [(Proposed) Undo/Redo](#proposed-undoredo-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 7. [Appendix: Effort](#appendix-effort)
@@ -627,7 +627,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ---------------------------------------------------------------------------
 
-## Appendix: Effort
+## **Appendix: Effort**
 
 ### Project Overview
 
@@ -638,33 +638,36 @@ additional features like hints and goal-setting.
 
 ### Project Challenges
 
-The transition from AB3 to lesSON posed challenges, particularly during the refactoring phase. Adapting existing code 
-required meticulous modifications to align with the unique requirements of a flashcard app. The primary challenge was 
-to implement changes without introducing bugs or compromising the overall app functionality.
+Adapting existing code required meticulous modifications to align with the unique requirements of a flashcard app. The main differentiating 
+design consideration was the transition from AB3, which was mainly an information hub, to lesSON which required a 2 stage
+design so that the user can create and practise cards with ease.
 
 ### Development Effort
 
 The development effort invested in lesSON covered various aspects, including feature implementation, refactoring, and 
 quality assurance. The team dedicated substantial time to refine and optimize the codebase, ensuring a robust and 
-user-friendly flashcard application.
+user-friendly flashcard application. Additionally, the presence of the automated codecov bot ensured that the code we pushed
+was well covered and would flag out any possible flaws in our implementation that was not covered by automated testing.
 
 ### Achievements
 
-lesSON stands as a testament to our team's collaborative efforts, resulting in a functional and feature-rich flashcard 
-app. Noteworthy achievements include successful CRUD operations, dual-phase learning, spaced repetition, and additional 
+Noteworthy achievements include successful CRUD operations, dual-phase learning, spaced repetition, and additional 
 user-centric features.
 
 ### Comparison with AB3
 
 lesSON differentiates itself from AB3 by introducing a more dynamic and engaging learning experience. The two-phase 
 structure, combined with features like difficulty settings and prioritized card ordering, positions lesSON as a more 
-advanced and versatile educational tool.
+advanced and versatile educational tool. We introduced the element of spaced repetition so that our users can benefit the most
+from the studying experience. Additionally, we also include an auto priority system that would place cards that required more attention
+at the very front so that users can practise them more often.
 
 ### Conclusion
 
 The successful transformation of AB3 into lesSON highlights the team's adaptability and technical expertise. Overcoming 
 challenges, especially during the refactoring phase, demonstrates our commitment to delivering a robust and innovative 
-flashcard application.
+flashcard application. Despite the similar looking UI, much of the consideration and design implementation went towards 
+brainstorming how the 2 stages were to be implemented such that they complement each other and were intuitive to the user.
 
 
 
