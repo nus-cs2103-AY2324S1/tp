@@ -10,6 +10,7 @@ import static transact.testutil.TransactionBuilder.DEFAULT_DATE;
 import static transact.testutil.TransactionBuilder.DEFAULT_DESC;
 import static transact.testutil.TransactionBuilder.DEFAULT_PERSON;
 import static transact.testutil.TransactionBuilder.DEFAULT_TYPE;
+import static transact.testutil.TypicalPersons.ALICE;
 import static transact.testutil.TypicalTransactions.APPLES;
 import static transact.testutil.TypicalTransactions.BANANAS;
 
@@ -75,7 +76,6 @@ public class AddTransactionCommandTest {
         // different transaction -> returns false
         assertFalse(addT1Command.equals(addT2Command));
     }
-
 
     /**
      * A Model stub that always accept the transaction being added.
