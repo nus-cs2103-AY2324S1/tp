@@ -59,7 +59,7 @@ public class AddCommandTest {
                 .withBegin(validPerson.getBegin().toString())
                 .withEnd(validPerson.getEnd().toString())
                 .build();
-        AddCommand addCommand =  new AddCommand(clashingSchedule);
+        AddCommand addCommand = new AddCommand(clashingSchedule);
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_DATE, () -> addCommand.execute(modelStub));
     }
 

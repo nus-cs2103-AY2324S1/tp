@@ -1,7 +1,5 @@
 package seedu.address.model.interval;
 
-import seedu.address.commons.core.LogsCenter;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.text.ParseException;
@@ -14,13 +12,15 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
+
 /**
  * TimeSlot Class
  */
 public class TimeSlot {
+    private static final Logger logger = LogsCenter.getLogger(TimeSlot.class);
     private Date start;
     private Date end;
-    private static final Logger logger = LogsCenter.getLogger(TimeSlot.class);
 
     /**
      * Constructor for TimeSlot
