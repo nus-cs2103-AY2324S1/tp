@@ -56,6 +56,7 @@ public class VersionedClassManager extends ClassManager {
         classManagerStateList.add(newData);
         currentStatePointer = 0;
         resetData(classManagerStateList.get(currentStatePointer));
+        assert classManagerStateList.size() == 1;
     }
 
     /**
@@ -71,6 +72,7 @@ public class VersionedClassManager extends ClassManager {
             classManagerStateList.subList(1, classManagerStateList.size()).clear();
         }
         currentStatePointer = 0;
+        assert classManagerStateList.size() == 1;
     }
 
     /**
