@@ -24,7 +24,7 @@ We currently do not offer any means to contacting us, thank you for your underst
 <img src="images/jingjie88.png" width="200px">
 
 [[github](http://github.com/jingjie88)]
-[[portfolio](team/jonyxzx.md)]
+[[portfolio](team/jingjie88.md)]
 
 * Role: Developer
 * Responsibilities: Improve `add`, `edit`, `delete` features
@@ -34,7 +34,7 @@ We currently do not offer any means to contacting us, thank you for your underst
 <img src="images/jonyxzx.png" width="200px">
 
 [[github](http://github.com/jonyxzx)]
-[[portfolio](team/jingjie88.md)]
+[[portfolio](team/jonyxzx.md)]
 
 * Role: Developer
 * Responsibilities: Improve find feature

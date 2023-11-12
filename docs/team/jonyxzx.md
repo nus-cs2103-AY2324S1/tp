@@ -13,7 +13,7 @@ Given below are my contributions to the project.
   * What it does: Allows the user to search for the target interviews based on the input job description with the command `find-i`.
   * Justification: This feature improves the product significantly because a user can conveniently search for all the interviews based on the attached job role. This would assist the users to reduce the time taken to search interviews manually.
   * Highlights: This feature requires in-depth understanding of how the list is being handled in the program such as ObservableList and FilteredList. The feature emphasises on filtering through the list without modifying the main interview list stored in the program. Therefore, preventing accidental modification or removal.
-
+ 
 * **New Feature**: `rate` command (PR: [#86](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/86))
   * What it does: Allows the user to rate an interview after it has been completed to record the applicant's performance.
   * Justification: This feature is a core feature to support post interview process to keep a record of each applicant rating in InterviewHub.
