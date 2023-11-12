@@ -1,0 +1,40 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+Participant ":InterviewAddCommandParser" as iacp LOGIC_COLOR
+Participant "<<class>>\nArgumentTokenizer" as at LOGIC_COLOR
+Participant "<<class>>\nParserUtil" as pu LOGIC_COLOR
+Participant ":ArgumentMultimap" as am LOGIC_COLOR
+Participant ":Interview" as i LOGIC_COLOR
+Participant ":InterviewAddCommand" as iac LOGIC_COLOR
+
+[-> iacp ++: parse(args)
+iacp -> at ++: tokenize()
+at --> iacp --: argMultimap
+
+iacp -> pu ++: parseIndex()
+pu --> iacp --: index
+
+iacp -> am ++: verifyNoDuplicatePrefixesFor()
+deactivate am
+
+iacp -> pu ++: parseInterviewType()
+pu --> iacp --: interviewType
+
+iacp -> pu ++: parseInterviewDateTime()
+pu --> iacp --: interviewDateTime
+
+iacp -> pu ++: parseInterviewAddress()
+pu --> iacp --: interviewAddress
+
+create i
+iacp -> i ++: Interview()
+i --> iacp --: interview
+
+create iac
+iacp -> iac ++: InterviewAddCommand(index, interview)
+iac --> iacp --: result
+iacp -->[ --: result
+
+@enduml

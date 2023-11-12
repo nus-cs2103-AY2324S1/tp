@@ -344,17 +344,17 @@ The `ClearCommand` class implements this command.
 
 
 <img src="images/developer-guide/InterviewAddCommandSequenceDiagram.png" />
-(insert interview add parser sequence diagram)
+<img src="images/developer-guide/InterviewAddCommandParserSequenceDiagram.png" />
 
 #### Interview Delete Command
 
 <img src="images/developer-guide/InterviewDeleteCommandSequenceDiagram.png" />
-(insert interview delete parser sequence diagram)
+<img src="images/developer-guide/InterviewDeleteCommandParserSequenceDiagram.png" />
 
 #### Interview Edit Command
 
 <img src="images/developer-guide/InterviewEditCommandSequenceDiagram.png" />
-(insert interview edit parser sequence diagram)
+<img src="images/developer-guide/InterviewEditCommandParserSequenceDiagram.png" />
 
 #### Design considerations
 

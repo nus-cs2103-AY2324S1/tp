@@ -394,7 +394,6 @@ _Shows a list of all job applications in alphabetical order of the company name.
 </div>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
-
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding an application : `add`

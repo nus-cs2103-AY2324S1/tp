@@ -39,5 +39,4 @@ i *-down-> "1" idt
 i *-down-> "1" ia
 i *-down-> "1" it
 }
-
 @enduml
