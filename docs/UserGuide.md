@@ -109,12 +109,11 @@ Shows a message that helps redirects you to the user guide.
 
 **Expected Input**:
 * **Name (Compulsory field)**: String composed of character between A-Z and a-z.
-* **Phone number (Compulsory field)**: Any number.
+* **Phone number (Compulsory field)**: Any number at least 3 digits long.
 * **Address (Compulsory field)**: String without restriction in characters.
-* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
+* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain)
 * **Subject (Compulsory field)**: String without restriction in characters.
-* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
-* **Begin (Compulsory field)**: String with restrictions (HHMM).
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).* **Begin (Compulsory field)**: String with restrictions (HHMM).
 * **End (Compulsory field)**: String with restrictions (HHMM).
 * **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
 
@@ -122,12 +121,16 @@ Shows a message that helps redirects you to the user guide.
 
 **Expected Output when the command fails**:
 
-* **Missing name**: Please input a name
+* **Invalid Name**: Names should only contain alphanumeric characters and spaces, and it should not be blank
 * **Duplicate tutee**: This tutee already exists
-* **Invalid Phone number**: Please provide a valid phone number
-* **Invalid Day**: Please input a valid day
-* **Invalid Begin**: Please input a valid time for Begin in HHMM
-* **Invalid End**: Please input a valid time for End in HHMM
+* **Invalid Phone number**: Phone numbers should only contain numbers, and it should be at least 3 digits long
+* **Invalid Email**: Emails should be of the format local-part@domain and adhere to the following constraints:  
+  1\. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.  
+  2\. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+* **Empty Address**: Addresses can take any values, and it should not be blank
+* **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank
+* **Invalid Begin**: Begin has a format of HHMM
+* **Invalid End**: That is not a valid time format. End has a format of HHMM
 * **Invalid PayRate**: PayRate can be either integers or decimals of up to 2 decimal places. It cannot be negative
 
 **Examples**:
@@ -209,10 +212,9 @@ and it should not be blank
 * **Name (Optional field)**: String composed of character between A-Z and a-z.
 * **Phone number (Optional field)**: 8 digit number.
 * **Address (Optional field)**: String without restriction in characters.
-* **Email (Optional field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
+* **Email (Optional field)** String with restrictions in characters (XXXXXXXX@emaildomain)
 * **Subject (Optional field)**: String without restriction in characters.
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
-* **Begin (Optional field)**: String with restrictions (HHMM).
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).* **Begin (Optional field)**: String with restrictions (HHMM).
 * **End (Optional field)**: String with restrictions (HHMM).
 * **PayRate (Optional field)** String with restrictions in characters, only numbers allowed (no negative numbers).
 
@@ -220,10 +222,16 @@ and it should not be blank
 
 **Expected Output when the command fails**:
 
-* **Invalid Phone number**: Please provide a valid phone number.
-* **Invalid Day**: Please input a valid day.
-* **Invalid Begin**: Please input a valid time for Begin in HHMM.
-* **Invalid End**: Please input a valid time for End in HHMM.
+* **Invalid Name**: Names should only contain alphanumeric characters and spaces, and it should not be blank
+* **Duplicate tutee**: This tutee already exists
+* **Invalid Phone number**: Phone numbers should only contain numbers, and it should be at least 3 digits long
+* **Invalid Email**: Emails should be of the format local-part@domain and adhere to the following constraints:  
+  1\. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.  
+  2\. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+* **Empty Address**: Addresses can take any values, and it should not be blank
+* **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank
+* **Invalid Begin**: Begin has a format of HHMM
+* **Invalid End**: That is not a valid time format. End has a format of HHMM
 * **Invalid PayRate**: PayRate can be either integers or decimals of up to 2 decimal places. It cannot be negative
 
 **Examples**:
