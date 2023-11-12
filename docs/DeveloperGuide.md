@@ -506,14 +506,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`   | user                    | open the relevant website by clicking on my contact's social link                          | conveniently access their social links when needed |
 | `* *`   | user                    | an easily accessible and static online page containing a download link to the mobile app   | quickly download the app on my device when needed                       |
 | `* *`   | new user                | have a quick-start guide                                                                   | start using the basic functionality of the app as soon as possible |
+| `* *`   | user                    | undo and redo my commands                                                                  | revert my changes when I make a mistake |
 | `* *`   | user                    | visit an online page containing the complete user manual                                   | refer to the full set of instructions when needed            |
 | `*`     | user                    | navigate to the relevant section of the online manual directly from the catalogue | quickly find instructions on the feature I want to use       |
 | `*`     | user                    | export my contacts in the form of readable text                                            | easily share my contacts with others                                    |
 | `*`     | user with many devices  | import data from my exported contacts                                                      | sync my contact details across different devices |
 
 ### Use cases
-
-(For all use cases below, the **System** is the `NetworkBook` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Create a new contact**
 
@@ -527,280 +526,227 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 1a. User does not include the contact's name in the request.
+* 1a. User does not include the contact's name in the request.
 
-  - 1a1. NetworkBook shows an error message.
+  * 1a1. NetworkBook shows an error message.
 
     Use case ends.
 
-- 1b. User includes more details about the contact in the request.
+* 1b. User includes more details about the contact in the request.
 
-  - 1ba. All the details provided are in the correct format.
+  * 1ba. All the details provided are in the correct format.
 
-    - 1ba1. NetworkBook creates a contact with all included details.
-
-      Use case ends.
-
-  - 1bb. Some of the details provided are not correctly formatted.
-
-    - 1bb1. NetworkBook shows an error message.
+    * 1ba1. NetworkBook creates a contact with all included details.
 
       Use case ends.
 
-- 1c. The name is not unique.
+  * 1bb. Some of the details provided are not correctly formatted.
 
-  - 1c1. NetworkBook requests user to select from one of three options: create a new contact, delete the old contact and add the new one, or abort the current create operation.
+    * 1bb1. NetworkBook shows an error message.
 
-    - 1c1a. User selects option to create a new contact.
+      Use case ends.
+  
+  * 1bc. Some of the details are provided twice.
 
-      Use case resumes at step 2.
-
-    - 1c1b. User selects option to delete the old contact and add the new one.
-
-      - 1c1b1. NetworkBook deletes the old contact.
-
-      - 1c1b2. NetworkBook adds the new contact with all included details.
-
-        Use case ends.
-
-    - 1c1c. User selects option to abort the current add operation.
+    * 1bc1. NetworkBook shows an error message.
 
       Use case ends.
 
-**Use case: Add phone number to contact**
+* 1c. The name is not unique.
 
-(This use case is also applicable to adding **email, specialisation, tag** to a contact. For each contact, each of these fields is recorded by a list, and new entries added to a field will be appended to the field's list.)
+  * 1c1. NetworkBook shows an error message.
+
+    Use case ends.
+
+**Use case: Add phone numbers to contact**
+
+This use case is also applicable to adding **email, link, course, specialisation, tag** to a contact. For each contact, each of these fields is recorded by a list, and new entries added to a field will be appended to the field's list.
 
 **MSS**
 
-1. User requests to list contacts.
+1. User requests to add phone numbers to a specific contact in the displayed list.
 
-2. NetworkBook shows a list of contacts.
+2. NetworkBook adds the new phone numbers to the contact's list of phone numbers.
 
-3. User requests to add a phone number to a specific contact in the list.
-
-4. NetworkBook adds the new phone number to the contact's list of phone numbers.
-
-5. NetworkBook informs user of the contact's new list of phone numbers.
+3. NetworkBook updates the displayed contact card with the new phone numbers.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+  * 1a1. NetworkBook shows an error message.
 
-* 3a. The given index is invalid.
+    Use case ends.
 
-  * 3a1. NetworkBook shows an error message.
+* 1b. User does not input any field.
 
-    Use case resumes at step 2.
+  * 1b1. NetworkBook shows an error message.
 
-* 3b. User does not give a phone number.
+    Use case ends.
 
-  * 3b1. NetworkBook shows an error message.
+* 1c. One of the given phone numbers is in an invalid format.
 
-    Use case resumes at step 2.
+  * 1c1. NetworkBook shows an error message.
 
-* 3c. The given phone number is in an invalid format.
+    Use case ends.
 
-  * 3c1. NetworkBook shows an error message.
+* 1d. One of the given phone numbers is already present in the contact's list of phone numbers.
 
-    Use case resumes at step 2.
+  * 1d1. NetworkBook ignores the present phone number, and adds the other phone numbers to the contact's list of phone numbers.
 
-* 3c. The given phone number is already present in the contact's list of phone numbers.
+  * 1d2. NetworkBook updates the displayed contact card with the new phone numbers.
 
-  * Use case resumes at step 5.
+    Use case ends.
+
+* 1e. User provides the same phone number more than once.
+
+  * 1e1. NetworkBook shows an error message.
+
+    Use case ends.
 
 **Use case: Add graduation year to a contact**
 
-(This use case is also applicable to adding **priority** to a contact. For each contact, each of these fields is a single value instead of a list. They cannot be added if the value is already present.)
+This use case is also applicable to adding **priority** to a contact. For each contact, each of these fields is a single value instead of a list. They cannot be added if the value is already present.
 
 **MSS**
 
-1. User requests to list contacts.
+1. User requests to add graduation year to a specific contact in the list.
 
-2. NetworkBook shows a list of contacts.
+2. NetworkBook adds the graduation year to the contact.
 
-3. User requests to add graduation year to a specific contact in the list.
-
-4. NetworkBook adds the graduation year to the contact.
-
-5. NetworkBook informs user of the contact's new graduation year.
+3. NetworkBook informs user of the contact's new graduation year.
 
    Use case ends.
 
 **Extensions**
 
-- 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+  * 1a1. NetworkBook shows an error message.
 
-- 3a. The given index is invalid.
+    Use case ends.
 
-  - 3a1. NetworkBook shows an error message.
+* 1b. User does not input any field.
 
-    Use case resumes at step 2.
+  * 1b1. NetworkBook shows an error message.
 
-- 3b. User does not give a graduation year.
+    Use case ends.
 
-  - 3b1. NetworkBook shows an error message.
+* 1c. The given graduation year is in an invalid format.
 
-    Use case resumes at step 2.
+  * 1c1. NetworkBook shows an error message.
 
-- 3c. The given graduation year is in an invalid format.
+    Use case ends.
 
-  - 3c1. NetworkBook shows an error message.
+* 1d. The contact already has a graduation year.
 
-    Use case resumes at step 2.
+  * 1d1. NetworkBook shows an error message.
 
-- 3d. The contact already has a graduation year.
+    Use case ends.
 
-  - 3d1. NetworkBook shows an error message.
+**Use case: Edit the name of a contact**
 
-    Use case resumes at step 2.
-
-**Use case: Add course to a contact**
+This use case is also applicable to editing **graduation, priority** of a contact.
 
 **MSS**
 
-1. User requests to list contacts.
+1. User requests to edit the name of a specific contact in the list.
 
-2. NetworkBook shows a list of contacts.
+2. NetworkBook updates the contact.
 
-3. User requests to add course to a specific contact in the list.
-
-4. NetworkBook adds the course to the contact's list of courses.
-
-5. NetworkBook informs user of the contact's new list of courses.
-
-   Use case ends.
-
-**Extensions**
-
-- 2a. The list is empty.
-
-  Use case ends.
-
-- 3a. The given index is invalid.
-
-  - 3a1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3b. User does not give a course code.
-
-  - 3b1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3c. The given course code is in an invalid format.
-
-  - 3c1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3d. User does not give a start date.
-
-  - 3d1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3e. The given start/end date is in an invalid format.
-
-  - 3e1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3f. User gives an end date in the correct format.
-
-  - 3f1. NetworkBook includes end date in the new course's details.
-
-  - 3f2. NetworkBook adds the new course to the contact's list of courses.
-
-    Use case resumes at step 5.
-
-- 3g. The given course code is already present in the contact's list of courses.
-
-  - 3g1. NetworkBook updates the given course with the new course details provided.
-
-    Use case resumes at step 5.
-
-**Use case: Add social link to a contact**
-
-**MSS**
-
-1. User requests to list contacts.
-
-2. NetworkBook shows a list of contacts.
-
-3. User requests to add social link a specific contact in the list.
-
-4. NetworkBook adds the social link to the contact's list of links.
-
-5. NetworkBook informs user of the contact's new list of links.
-
-   Use case ends.
-
-**Extensions**
-
-- 2a. The list is empty.
-
-  Use case ends.
-
-- 3a. The given index is invalid.
-
-  - 3a1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3b. User does not give a social link.
-
-  - 3b1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3c. The given social link is in an invalid format.
-
-  - 3c1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3d. User provides additional note after the social link.
-
-  - 3d1. NetworkBook includes the note in the link's details.
-
-  - 3d2. NetworkBook adds the new social link to the contact's list of links.
-
-    Use case resumes at step 5.
-
-**Use case: Edit a contact**
-
-**MSS**
-
-1.  User requests to list contacts.
-2.  NetworkBook shows a list of contacts.
-3.  User requests to edit some field of a specific contact in the list.
-4.  NetworkBook updates the contact.
+3. NetworkBook updates the displayed contact card of the person.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
+
+  * 1a1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1b. The name provided is not correctly formatted.
+
+  * 1b1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1c. The user does not provide any field to edit.
+
+  * 1c1. NetworkBook shows an error message.
+
+    Use case ends.
   
-  Use case ends.
+* 1d. The user provides two name fields.
 
-* 3a. The given index is invalid.
+  * 1d1. NetworkBook shows an error message.
 
-    * 3a1. NetworkBook shows an error message.
+    Use case ends.
 
-      Use case resumes at step 2.
+**Use case: Edit a phone number of a contact**
 
-* 3b. Some of the fields provided are not correctly formatted.
+This use case is also applicable to editing **email, link, course, specialisation, tag** of a contact.
 
-    * 3b1. NetworkBook shows an error message.
+**MSS**
+
+1. User requests to edit a phone of a specific contact in the list at the specific index in the contact's phone number list.
+
+2. NetworkBook updates the contact.
+
+3. NetworkBook updates the displayed contact card of the person.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given contact index is invalid.
+
+  * 1a1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1b. The phone number provided is not correctly formatted.
+
+  * 1b1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1c. The user does not provide any field to edit.
+
+  * 1c1. NetworkBook shows an error message.
+
+    Use case ends.
+  
+* 1d. The user provides two phone fields.
+
+  * 1d1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1e. The user provides an invalid phone number index.
+
+  * 1e1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1f. The user provides the phone number index twice.
+
+  * 1f1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1g. The user does not provide the phone number index.
+
+  * 1g1. The phone number index takes the default value of 1.
+
+    * 1g1a. The phone number index of 1 is invalid.
+
+      Use case resumes at step 1e1.
+    
+    * 1g1b. The phone number index of 1 is valid.
 
       Use case resumes at step 2.
 
@@ -808,125 +754,144 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list contacts.
-2.  NetworkBook shows a list of contacts.
-3.  User requests to delete a specific contact in the list.
-4.  NetworkBook deletes the contact.
+1. User requests to delete a specific contact in the list.
+
+2. NetworkBook deletes the contact.
+
+3. NetworkBook updates the displayed list of contact.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+    * 1a1. NetworkBook shows an error message that the index is invalid.
 
-* 3a. The given index is invalid.
-
-    * 3a1. NetworkBook shows an error message.
-
-      Use case resumes at step 2.
+      Use case ends.
 
 **Use case: Delete a single-valued field of a contact**
 
+This use case is applicable to deleting **graduation, priority** of a contact.
+
 **MSS**
 
-1. User requests to list contacts.
+1. User specifies index of contact and a single-valued field to delete.
 
-2. NetworkBook shows a list of contacts.
+2. NetworkBook updates the contact by deleting the field.
 
-3. User specifies index of contact and a single-valued field to delete.
-
-4. NetworkBook updates the contact by deleting the field.
+3. NetworkBook updates the displayed contact card of the person.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index of contact is invalid.
 
-  Use case ends.
+  * 1a1. NetworkBook shows an error message.
 
-* 3a. The given index of contact is invalid.
-
-  * 3a1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
+    Use case ends.
 
 
 * 3b. User provides multiple fields to delete.
 
   * 3b1. NetworkBook shows an error message.
 
-    Use case resumes at step 2.
+    Use case ends.
 
 * 3c. User provides an index field after the single-valued field to delete.
 
   * 3c1. NetworkBook shows an error message.
 
-    Use case resumes at step 2.
+    Use case ends.
 
 * 3d. The single-valued field of the contact is empty.
 
-  * 3d1. NetworkBook does not change the contact.
+  * 3d1. NetworkBook shows an error message.
 
     Use case ends.
 
 **Use case: Delete a multi-valued field of a contact**
 
+This use case is applicable to deleting a **phone, email, link, course, specialisation, tag** of a contact.
+
 **MSS**
 
-1. User requests to list contacts.
+1. User specifies index of contact, a multi-valued field, and the index of entry to delete.
 
-2. NetworkBook shows a list of contacts.
-
-3. User specifies index of contact, a multi-valued field, and the index of entry to delete.
-
-4. NetworkBook updates the contact by deleting the entry from the field's list.
+2. NetworkBook updates the contact by deleting the entry from the field's list.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index of contact is invalid.
 
-  Use case ends.
+  * 1a1. NetworkBook shows an error message.
 
-* 3a. The given index of contact is invalid.
+    Use case ends.
 
-  * 3a1. NetworkBook shows an error message.
+* 1b. User provides multiple fields to delete.
 
-    Use case resumes at step 2.
+  * 1b1. NetworkBook shows an error message.
 
-* 3b. User provides multiple fields to delete.
+    Use case ends.
 
-  * 3b1. NetworkBook shows an error message.
+* 1c. The given index of entry is invalid.
 
-    Use case resumes at step 2.
+  * 1c1. NetworkBook shows an error message.
 
-* 3c. The given index of entry is invalid.
+    Use case ends.
 
-  * 3c1. NetworkBook shows an error message.
+* 1d. User provides multiple indexes of entry to delete.
 
-    Use case resumes at step 2.
+  * 1d1. NetworkBook shows an error message.
 
-* 3d. User provides multiple indexes of entry to delete.
+    Use case ends.
 
-  * 3d1. NetworkBook shows an error message.
+* 1e. User does not provide an index of entry.
 
-    Use case resumes at step 2.
+  * 1e1. The index of entry is default to 1.
 
-* 3e. User does not provide an index of entry.
+    * 1e1a. The contact's field does not have an entry at index 1.
 
-  * 3e1. The index of entry is default to 1.
-
-    * 3e1a. The contact's field does not have an entry at index 1.
-
-      Use case resumes at step 3c1.
+      Use case resumes at step 1c1.
 
     * 3e1b. The contact's field has an entry at index 1.
 
-      Use case resumes at step 4.
+      Use case resumes at step 2.
+
+**Use case: Filter contacts**
+
+This user story applies to filtering contacts by **course, specialisation, graduation year, tag**.
+
+**MSS**
+
+1. User requests to filter by a field with a specified value.
+
+2. NetworkBook displays the contacts with the field that matches the specified value.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Field is not specified or value is not specified.
+
+  * 1a1. NetworkBook shows an error message.
+
+    Use case ends.
+  
+* 1b. Field specified is invalid.
+
+  * 1b1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1c. Value specified is invalid.
+
+  * 1c1. NetworkBook shows an error message.
+
+    Use case ends.
 
 **Use case: Sort contacts**
 
@@ -935,6 +900,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User chooses to sort based on a field (e.g. name, graduation year, priority) and an order (ascending or descending).
 
 2.  NetworkBook shows list of user’s contacts, sorted by the specified field and in the specified order.
+
+    Use case ends.
 
 **Extensions**
 
@@ -982,23 +949,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2.  NetworkBook shows list of user’s contacts with names containing the searched text.
 
+    Use case ends.
+
 **Extensions**
 
-* 1a. The user has no contacts to search.
+* 1a. The search text is not specified.
 
-    * 1a1. NetworkBook shows an empty contact list.
-
-      Use case ends.
-
-* 1b. The search text is not specified.
-
-    * 1b1. NetworkBook shows an error message.
-
-      Use case ends.
-
- * 1c. There are no contacts with names containing the searched text.
-
-    * 1c1. NetworkBook shows a message saying that there are no matches.
+    * 1a1. NetworkBook shows an error message.
 
       Use case ends.
 
@@ -1007,90 +964,129 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list contacts.
+1. User requests to email a specific contact in the list to the specific email address of the contact.
 
-2. NetworkBook shows a list of contacts.
+2.  NetworkBook loads the default email app of the user.
 
-3. User requests to email a specific contact in the list.
-
-4.  NetworkBook loads the default email app of the user.
-
-5.  NetworkBook pre-fills the contact's email in the recipient field.
+3.  NetworkBook pre-fills the contact's email in the recipient field.
 
     Use case ends.
 
 **Extensions**
-
-* 1a. User has no contact to list.
-
-    * 1a1. NetworkBook shows an empty list
-
-  Use case ends.
-
-* 4a. The user has not logged in to his default email app.
-
-    * 4a1. User will be taken to the sign-in page of his default email app.
-
-      Use case ends.
     
-* 3b. The command is invalid.
+* 1a. The contact index is invalid.
     
-    * 3b1. NetworkBook notifies the user that the command is invalid.
+  * 1a1. NetworkBook shows an error message.
 
-      Use case ends.
+    Use case ends.
 
-**Use case: Open social link from NetworkBook**
+* 1b. The email index is invalid.
+
+  * 1b1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1c. The email index is not provided.
+
+  * 1c1. NetworkBook takes the default value of email index of 1.
+
+    * 1c1a. The email index of 1 is invalid.
+
+      Use case resumes at step 1b1.
+    
+    * 1c1b. The email index of 1 is valid.
+
+      Use case resumes at step 2.
+
+* 2a. The user has not logged in to his default email app.
+
+  * 2a1. User will be taken to the sign-in page of his default email app.
+
+    Use case ends.
+
+**Use case: Open link from NetworkBook**
 
 **MSS**
 
-1. User requests to list contacts.
+1. User requests to open a link of a specific contact.
 
-2. NetworkBook shows a list of contacts.
-
-3. User requests to open a social link of a contact stored in the app.
-
-4.  NetworkBook loads the default browser app of the user.
-
-5.  NetworkBook visits the requested social link in the browser.
+2. NetworkBook loads the default browser app of the user with the link opened.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The contact index is invalid.
+    
+  * 1a1. NetworkBook shows an error message.
 
-  Use case ends.
+    Use case ends.
 
-* 3a. The social link is invalid.
+* 1b. The link index is invalid.
 
-    * 3a1. The user will see the error page displayed by the browser used to load the page link.
+  * 1b1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1c. The link index is not provided.
+
+  * 1c1. NetworkBook takes the default value of link index of 1.
+
+    * 1c1a. The link index of 1 is invalid.
+
+      Use case resumes at step 1b1.
+    
+    * 1c1b. The link index of 1 is valid.
+
+      Use case resumes at step 2.
+
+* 2a. The domain of the link is not a registered domain.
+
+    * 2a1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
-* 4b. The page is valid but fails to load.
+* 2b. The link is valid but the page fails to load.
 
-    * 4b1. The user will see the error page displayed by the browser used to load the page link.
+    * 2b1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
-**Use case: Download mobile app from online page**
+**Use case: Undo**
 
 **MSS**
 
-1. User requests to visit the online page. 
-2. The online page renders.
-3. User selects link to download the mobile app.
-4. Mobile app starts downloading on the user's device.
+1. User requests to undo the previous command.
+
+2. NetworkBook reverts back to the previous state.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The online page fails to load.
+* 1a. User has not keyed in any command previously.
 
-    * 1a1. The user will see the error page displayed by the browser used to load the page link.
+  * 1a1. NetworkBook shows an error message.
 
-      Use case ends.
+    Use case ends.
+
+**Use case: Redo**
+
+**MSSS**
+
+1. User requests to redo the latest undo command.
+
+2. NetworkBook reapplies the changes recalled by the undo command.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no more changes to redo.
+
+  * 1a1. NetworkBook shows an error message.
+
+    Use case ends.
 
 **Use case: Access user manual on online page**
 
@@ -1111,9 +1107,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
   
-* 3a. The user manual page fails to load.
+* 4a. The user manual page fails to load.
 
-    * 3a1. The user will see the error page displayed by the browser used to load the page link.
+    * 4a1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
@@ -1132,16 +1128,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list contacts.
-2.  NetworkBook shows a list of contacts.
-3.  User requests to export a specific contact in the list.
-4.  NetworkBook exports a text file storing user details in a readable format.
+1.  User requests to export a specific contact in the list.
+
+2.  NetworkBook exports a text file storing user details in a readable format.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The contact index is invalid.
+
+  * 1a1. NetworkBook shows an error message.
 
   Use case ends.
 
@@ -1156,6 +1153,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User selects a file containing exported contacts.
 
 4. NetworkBook creates new contacts with details specified in the export file.
+
+5. NetworkBook saves the path to the data file.
 
    Use case ends.
 
@@ -1179,11 +1178,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-- 3c. The file contains contacts with same names as some existing contacts.
+* 3c. The file contains contacts with same names as some existing contacts.
 
-  - 3c1. NetworkBook skips these contacts and only creates new contacts whose names are not present yet.
+  * 3c1. NetworkBook skips these contacts and only creates new contacts whose names are not present yet.
 
-  - 3c2. NetworkBook shows the skipped contacts.
+  * 3c2. NetworkBook shows the skipped contacts.
 
     Use case ends.
 
