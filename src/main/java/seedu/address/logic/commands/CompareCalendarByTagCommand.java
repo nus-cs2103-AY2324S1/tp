@@ -18,7 +18,7 @@ public class CompareCalendarByTagCommand extends Command {
     public static final String COMMAND_WORD = "compareGroupCalendars";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": compare calendars within people with specified tags. "
             + "Parameters: "
-            + "ONE/MULTIPLE VALID TAGS \n"
+            + "NONE/ONE/MULTIPLE VALID TAGS \n"
             + "Example: " + COMMAND_WORD + " "
             + "class friend";
 
