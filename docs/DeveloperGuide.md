@@ -146,6 +146,37 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+### Flow of Program Execution
+
+The way the user interacts with the program is illustrated as follows.
+
+![FlowOfProgram](images/CommandFlowActivityDiagram.png)
+
+The following is a (partial) explanation of the flow of events:
+1. The user makes their command by issuing a command in the CommandBox.
+2. The command is parsed by the Parser and the corresponding Command object is created.
+3. The Command object is executed.
+4. The Command is executed and returns a CommandResult.
+5. The CommandResult is passed to the UI component to be displayed to the user.
+
+More details are captured in the diagram above.
+
+If the command involves the changing of Models, the Models are updated accordingly at stage 3 during the execution process.
+Changes to the models will also be reflected in Storage in the backend.
+These model changes will also be reflected in the Ui (e.g when a Person or an Event is changed).
+
+The errors during process and execution are also handled accordingly by displaying an error message to the user.
+
+The object diagram below illustrates a possible state of the Models after some commands have been executed.
+
+![Model state](images/AddEventObjectDiagram.png)
+
+Assume that the user just added a `Meeting` which is a subtype of `Event`. They supplied the meeting with a name, a start date and a start time. The user also added some previous events and persons as shown in the diagram.
+
+This shows how the Models are stored for use in the program.
+
+Note that even though EventList stores a list of Events, currently only Meetings (a subtype of Event) are implemented. This is to allow for future extensibility of the program.
+
 
 ## **Implementation**
 
@@ -256,34 +287,6 @@ for empty/null inputs in the Person object by checking if the optional field is 
   * Cons:
     * Inconveniences the user as they have to remember a new command to add a person with optional fields.
 
-### Flow of Program Execution
-
-The way the user interacts with the program is illustrated as follows.
-
-![FlowOfProgram](images/CommandFlowActivityDiagram.png)
-
-The following is a (partial) explanation of the flow of events: 
-1. The user makes their command by issuing a command in the CommandBox.
-2. The command is parsed by the Parser and the corresponding Command object is created.
-3. The Command object is executed.
-4. The Command is executed and returns a CommandResult.
-5. The CommandResult is passed to the UI component to be displayed to the user.
-
-More details are captured in the diagram above.
-
-If the command involves the changing of Models, the Models are updated accordingly at stage 3 during the execution process.
-Changes to the models will also be reflected in Storage in the backend.
-These model changes will also be reflected in the Ui (e.g when a Person or an Event is changed).
-
-The errors during process and execution are also handled accordingly by displaying an error message to the user.
-
-The object diagram below illustrates a possible state of the Models after some commands have been executed. 
-
-![Model state](images/AddEventObjectDiagram.png)
-
-Assume that the user just added a `Meeting` which is a subtype of `Event`. They supplied the meeting with a name, a start date and a start time. The user also added some previous events and persons as shown in the diagram.
-
-This shows how the Models are stored for use in the program.
 
 ### Ability to delete persons
 
@@ -612,20 +615,27 @@ other important events.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                               | So that I can…​                                                        |
-|----------|--------------------|------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | university student | see usage instructions                                     | refer to instructions when I forget how to use the App                 |
-| `* * *`  | university student | add a new person                                           | keep my address book up to date                                        |
-| `* * *`  | university student | include optional fields when adding contacts               | include comprehensive and personalized information for each contact    |
-| `* * *`  | university student | delete a person                                            | remove contacts that I no longer need                                  |
-| `* * *`  | university student | find a person by name                                      | locate details of persons without having to go through the entire list |
-| `* * *`  | university student | edit a person details                                      | reflect any contact changes accordingly                                |   
-| `* * *`  | university student | create an event                                            | schedule and keep track of important commitments                       |
-| `* * *`  | university student | edit an event                                              | modify event details like the date, time, or location                  |
-| `* * *`  | university student | delete an event                                            | remove events that are canceled or no longer relevant                  |
-| `* * *`  | university student | view all upcoming events on a separate event column in the GUI | simultaneously view contact details and event details                  |
-| `* *`    | university student | be reminded on events and birthdays                        | so that i can remember upcoming social activities                      |
-| `* *`    | university student | assign contacts to groups                                  | i can easily identify who is involved in specific events               |
+| Priority | As a …​            | I want to …​                                                   | So that I can…​                                                                |
+|----------|--------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *`  | university student | see usage instructions                                         | refer to instructions when I forget how to use the App                         |
+| `* * *`  | university student | add a new person                                               | keep my address book up to date                                                |
+| `* * *`  | university student | include optional fields when adding contacts                   | include comprehensive and personalized information for each contact            |
+| `* * *`  | university student | assign contacts to groups                                      | efficiently organise my contacts by grouping them together                     |
+| `* * *`  | university student | delete a person                                                | remove contacts that I no longer need                                          |
+| `* * *`  | university student | find a person by name                                          | locate details of persons by name without having to go through the entire list |
+| `* * *`  | university student | find a person by group                                         | locate details of persons based on which group the person is in                |
+| `* * *`  | university student | find an event by event name                                    | locate details of an event without having to go through the entire list        |
+| `* * *`  | university student | find an event by people or groups attending                    | locate details of an event based on the people or groups attending             |
+| `* * *`  | university student | find contacts and events at the same time                      | quickly search for contacts and events that are related to each other          | 
+| `* * *`  | university student | edit a person details                                          | reflect any contact changes accordingly                                        |   
+| `* * *`  | university student | create an event                                                | schedule and keep track of important commitments                               |
+| `* * *`  | university student | include optional fields when adding events                     | include comprehensive and personalized information for each event              |
+| `* * *`  | university student | assign contacts to events                                      | keep track of who is attending an event                                        |
+| `* * *`  | university student | edit an event details                                          | modify event details if the details of event has changed                       |
+| `* * *`  | university student | delete an event                                                | remove events that are canceled or no longer relevant                          |
+| `* * *`  | university student | view all upcoming events on a separate event column in the GUI | simultaneously view contact details and event details                          |
+| `* * *`  | university student | be reminded on events and birthdays                            | so that i can remember upcoming social activities                              |
+
 
 
 
@@ -640,20 +650,19 @@ For all use cases below, unless specified otherwise:
 
 **MSS**
 1. User requests to add persons
-2. User supplies all necessary parameters they wish to associate with the person to be added
-3. FumbleLog adds the person
+2. FumbleLog adds the person
 
    Use case ends.
 
 **Extensions**
-* 2a. User supplies the wrong type of parameters
+* 1a. User supplies the wrong type of parameters when adding the person
     
     * 2a1. FumbleLog shows an error message.
 
-      Use case resumes at step 2.
-* 3a. Person is added with a group and that group is assigned to an event
+      Use case resumes at step 1.
+* 2a. Person is added with a group and that group is assigned to an event
   
-    * 3a1. FumbleLog reloaded the event component and displays the newly added person in the event.
+    * 2a1. FumbleLog reloaded the event component and displays the newly added person in the event.
 
       Use case ends.
 
@@ -663,8 +672,7 @@ For all use cases below, unless specified otherwise:
 1. User requests to list persons
 2. FumbleLog shows a list of persons
 3. User request to edit a specific person in the list
-4. User supplies parameters that they want to change
-5. FumbleLog edits the person
+4. FumbleLog edits the person with the new information
 
    Use case ends.
 
@@ -679,22 +687,22 @@ For all use cases below, unless specified otherwise:
 
       Use case resumes at step 2.
 
-* 4a. User modifies the name of the person
+* 3b. User modifies the name of the person
 
-    * 4a1. FumbleLog updates the name of the person in all events that the person is <u> assigned </u> to. This includes persons in groups.
+    * 3b1. FumbleLog updates the name of the person in all events that the person is <u> assigned </u> to. This includes persons in groups.
 
-      Use case resumes at step 5.
+      Use case resumes at step 4.
 
-* 4b. User removes a group(s) from the person and that group(s) is assigned to an event.
+* 3c. User removes a group(s) from the person and that group(s) is assigned to an event.
 
-    * 4b1. FumbleLog removes the person from the corresponding group in all events.
+    * 3c1. FumbleLog removes the person from the corresponding group in all events.
 
-      Use case resumes at step 5.
+      Use case resumes at step 4.
 
-* 4c. User adds a group(s) to the person and that group(s) is assigned to an event.
-    * 4b1. FumbleLog adds the person to the corresponding group(s) in all events.
+* 3d. User adds a group(s) to the person and that group(s) is assigned to an event.
+    * 3d1. FumbleLog adds the person to the corresponding group(s) in all events.
 
-      Use case resumes at step 5.
+      Use case resumes at step 4.
 
 **Use case: UC03 - Delete a person**
 
@@ -729,46 +737,44 @@ For all use cases below, unless specified otherwise:
 
     * 4a1. The group is removed from the event.
 
-      Use case exits.
+      Use case ends.
 
 **Use case: UC04 - Add an event**
 
 **MSS**
 
 1. User requests to add a event
-2. User supplies the necessary parameters for the event
-3. FumbleLog adds the event
+2. FumbleLog adds the event with the supplied information
 
    Use case ends.
 
 **Extensions**
-* 2a. User supplies invalid parameters
+* 1a. User supplies invalid parameters
 
-    * 2a1. FumbleLog shows an error message
+    * 1a1. FumbleLog shows an error message
 
-      Use case resumes at step 2.
-* 2b. User supplies a date that is before the current date
+      Use case resumes at step 1.
+* 1b. User supplies a date that is before the current date
 
-    * 2b1. FumbleLog shows an error message
+    * 1b1. FumbleLog shows an error message
 
-      Use case resumes at step 2.
-* 2c. User supplies a start time that is after the end time
+      Use case resumes at step 1.
+* 1c. User supplies a start time that is after the end time
 
-    * 2c1. FumbleLog shows an error message
+    * 1c1. FumbleLog shows an error message
 
-      Use case resumes at step 2.
-* 2d. User supplies a start time that is before the current time
+      Use case resumes at step 1.
+* 1d. User supplies a start time that is before the current time
 
-    * 2d1. FumbleLog shows an error message
+    * 1d1. FumbleLog shows an error message
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
  **Use case: UC05 - Edit an event**
 
  **MSS**
 1. User request to edit a specific event in the list
-2. User supplies parameters that they want to change
-3. FumbleLog edits the event
+2. FumbleLog edits the event with the new information
 
    Use case ends.
 
@@ -777,34 +783,34 @@ For all use cases below, unless specified otherwise:
 
   Use case ends.
 
-* 2a. User supplies an invalid index to edit
+* 1b. User supplies an invalid index to edit
     
-    * 2a1. FumbleLog shows an error message.
+    * 1b1. FumbleLog shows an error message.
+
+      Use case resumes at step 1.
+* 1c. User supplies an invalid parameter
+   * 1c1. FumbleLog shows an error message.
+
+      Use case resumes at step 1.
+* 1d. User supplies a date that is before the current date
+
+    * 1d1. FumbleLog shows an error message
+
+      Use case resumes at step 1.
+* 1e. User supplies a start time that is after the end time
+
+    * 1e1. FumbleLog shows an error message
+
+      Use case resumes at step 1.
+* 1f. User supplies a start time that is before the current time
+
+    * 1f1. FumbleLog shows an error message
 
       Use case resumes at step 2.
-* 2b. User supplies an invalid parameter
-   * 2b1. FumbleLog shows an error message.
-
-      Use case resumes at step 2.
-* 2c. User supplies a date that is before the current date
-
-    * 2c1. FumbleLog shows an error message
-
-      Use case resumes at step 2.
-* 2d. User supplies a start time that is after the end time
-
-    * 2d1. FumbleLog shows an error message
-
-      Use case resumes at step 2.
-* 2e. User supplies a start time that is before the current time
-
-    * 2e1. FumbleLog shows an error message
-
-      Use case resumes at step 2.
-* 3a. User enters a group and certain members of the group is already 
+* 2a. User enters a group and certain members of the group is already 
 assigned to the event individually.
 
-    * 3a1. For each Event, duplicate members will be removed from the 
+    * 2a1. For each Event, duplicate members will be removed from the 
     individual Persons list.
 
       Use case ends
@@ -813,7 +819,7 @@ assigned to the event individually.
 
 **MSS**
 
-1.  User requests to <u> list events </u> 
+1.  User requests to list events 
 2.  FumbleLog shows a list of events
 3.  User requests to delete a specific event in the list
 4.  FumbleLog deletes the event

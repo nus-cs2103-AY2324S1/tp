@@ -10,7 +10,7 @@ object "__model:ModelManager__" as model
 object "__addressBook:AddressBook__" as addressBook
 object "__:UniquePersonList__" as uniquePersonList
 object "__:EventList__" as eventList
-object "__newEvent:Event__" as newEvent
+object "__newEvent:Meeting__" as newEvent
 
 object "__meeting1:Meeting__" as meeting1
 
