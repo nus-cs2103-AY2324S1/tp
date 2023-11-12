@@ -83,10 +83,10 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-            && showHelp == otherCommandResult.showHelp
-            && exit == otherCommandResult.exit
-            && clear == otherCommandResult.clear
-            && interview == otherCommandResult.interview;
+                   && showHelp == otherCommandResult.showHelp
+                   && exit == otherCommandResult.exit
+                   && clear == otherCommandResult.clear
+                   && interview == otherCommandResult.interview;
     }
 
     @Override
@@ -97,12 +97,12 @@ public class CommandResult {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("feedbackToUser", feedbackToUser)
-            .add("showHelp", showHelp)
-            .add("exit", exit)
-            .add("clear", clear)
-            .add("interview", interview)
-            .toString();
+                   .add("feedbackToUser", feedbackToUser)
+                   .add("showHelp", showHelp)
+                   .add("exit", exit)
+                   .add("clear", clear)
+                   .add("interview", interview)
+                   .toString();
     }
 
 }
