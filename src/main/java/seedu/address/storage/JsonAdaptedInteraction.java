@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import static seedu.address.model.person.interaction.Interaction.DEFAULT_DATE_FORMAT;
+import static seedu.address.model.person.Interaction.DEFAULT_DATE_FORMAT;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.interaction.Interaction;
-import seedu.address.model.person.interaction.Interaction.Outcome;
+import seedu.address.model.person.Interaction;
+import seedu.address.model.person.Interaction.Outcome;
 
 /**
  * Jackson-friendly version of {@link Interaction}.

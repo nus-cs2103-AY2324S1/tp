@@ -16,13 +16,13 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Details;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Income;
+import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Person.PersonBuilder;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Profession;
 import seedu.address.model.person.TelegramHandle;
-import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 
@@ -188,7 +188,7 @@ class JsonAdaptedPerson {
             if (!Income.isValidIncome(income)) {
                 throw new IllegalValueException(String.format(Income.MESSAGE_CONSTRAINTS));
             }
-            personBuilder = personBuilder.withIncome(new Income(Integer.valueOf(income)));
+            personBuilder = personBuilder.withIncome(new Income(income));
         }
         if (details != null) {
             if (!Details.isValidDetails(details)) {

@@ -13,12 +13,12 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Details;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Income;
+import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Profession;
 import seedu.address.model.person.TelegramHandle;
-import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 
@@ -31,7 +31,7 @@ public class SampleDataUtil {
                 new Person.PersonBuilder(new Name("Alex Yeoh"), new Phone("87438807"),
                         new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
                         getTagSet("friends")).withTelegram(new TelegramHandle("@Allyeo"))
-                        .withProfession(new Profession("Software Engineer")).withIncome(new Income(80000))
+                        .withProfession(new Profession("Software Engineer")).withIncome(new Income("80000"))
                         .withDetails(new Details("Looking for automated solutions for project management"))
                         .withLead(Lead.of("COLD")).addInteraction(new Interaction(
                                 "setting next meeting", Interaction.Outcome.valueOf("INTERESTED"),
@@ -40,13 +40,13 @@ public class SampleDataUtil {
                 new Person.PersonBuilder(new Name("Bernice Yu"), new Phone("99272758"),
                         new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                         getTagSet("colleagues", "friends")).withTelegram(new TelegramHandle("@yuyubern"))
-                        .withProfession(new Profession("Graphic Designer")).withIncome(new Income(60000))
+                        .withProfession(new Profession("Graphic Designer")).withIncome(new Income("60000"))
                         .withDetails(new Details("Interested in design software with real-time collaboration features"))
                         .withLead(Lead.of("HOT")).build(),
                 new Person.PersonBuilder(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                         new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                         getTagSet("neighbours")).withTelegram(new TelegramHandle("@yuyubern"))
-                        .withProfession(new Profession("Graphic Designer")).withIncome(new Income(60000))
+                        .withProfession(new Profession("Graphic Designer")).withIncome(new Income("60000"))
                         .withDetails(new Details("Interested in design software with real-time collaboration features"))
                         .withLead(Lead.of("WARM")).addInteraction(new Interaction(
                                 "willing to meet again", Interaction.Outcome.valueOf("NOT_INTERESTED"),
@@ -58,19 +58,19 @@ public class SampleDataUtil {
                 new Person.PersonBuilder(new Name("David Li"), new Phone("91031282"),
                         new Email("lidavid@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                         getTagSet("family")).withTelegram(new TelegramHandle("@pyonpyondav"))
-                        .withProfession(new Profession("Financial Analyst")).withIncome(new Income(90000))
+                        .withProfession(new Profession("Financial Analyst")).withIncome(new Income("90000"))
                         .withDetails(new Details("Wants investment tracking and portfolio management tools"))
                         .withLead(Lead.of("COLD")).build(),
                 new Person.PersonBuilder(new Name("Irfan Ibrahim"), new Phone("92492021"),
                         new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
                         getTagSet("classmates")).withTelegram(new TelegramHandle("@yuyubern"))
-                        .withProfession(new Profession("Registered nurse")).withIncome(new Income(70000))
+                        .withProfession(new Profession("Registered nurse")).withIncome(new Income("70000"))
                         .withDetails(new Details("Interested in medical equipment")).withLead(Lead.of("WARM"))
                         .build(),
                 new Person.PersonBuilder(new Name("Roy Balakrishnan"), new Phone("92624417"),
                         new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
                         getTagSet("colleagues")).withTelegram(new TelegramHandle("@arsyadbala"))
-                        .withProfession(new Profession("Digital Marketing Specialist")).withIncome(new Income(75000))
+                        .withProfession(new Profession("Digital Marketing Specialist")).withIncome(new Income("75000"))
                         .withDetails(new Details("Looking for a comprehensive CRM platform with email marketing"))
                         .withLead(Lead.of("WARM"))
                         .addInteraction(new Interaction(
@@ -81,7 +81,7 @@ public class SampleDataUtil {
                         new Email("oliverh@example.com"), new Address("Blk 77 Orchard Road #08-01"),
                         getTagSet("schoolmate"))
                         .withProfession(new Profession("Real Estate Agent"))
-                        .withIncome(new Income(110000))
+                        .withIncome(new Income("110000"))
                         .withDetails(new Details("Interested in real estate CRM software"))
                         .withLead(Lead.of("WARM"))
                         .addInteraction(new Interaction(
@@ -121,7 +121,7 @@ public class SampleDataUtil {
                         new Email("liamn@example.com"), new Address("Blk 23 Ghim Moh Road #06-00"),
                         getTagSet("relatives"))
                         .withProfession(new Profession("Interior Designer"))
-                        .withIncome(new Income(85000))
+                        .withIncome(new Income("85000"))
                         .withDetails(new Details("Interested in 3D rendering tools"))
                         .withLead(Lead.of("HOT"))
                         .addInteraction(new Interaction(
@@ -141,7 +141,7 @@ public class SampleDataUtil {
                 new Person.PersonBuilder(new Name("Mia Tan"), new Phone("93671245"),
                         new Email("miat@example.com"), new Address("Blk 88 Serangoon Ave 4 #05-08"),
                         getTagSet("friends"))
-                        .withIncome(new Income(78000))
+                        .withIncome(new Income("78000"))
                         .withDetails(new Details("Looking for car insurance deals"))
                         .withLead(Lead.of("COLD"))
                         .build(),
@@ -170,7 +170,7 @@ public class SampleDataUtil {
                         new Email("elijahk@example.com"), new Address("Blk 56 Pasir Ris Drive 1 #03-111"),
                         getTagSet("neighbors")).withTelegram(new TelegramHandle("@elijahkoh"))
                         .withProfession(new Profession("Music Teacher"))
-                        .withIncome(new Income(65000))
+                        .withIncome(new Income("65000"))
                         .withDetails(new Details("Looking for new music instruments stores"))
                         .withLead(Lead.of("COLD"))
                         .addInteraction(new Interaction(
@@ -196,7 +196,7 @@ public class SampleDataUtil {
                 new Person.PersonBuilder(new Name("James Soh"), new Phone("91000000"),
                         new Email("jamess@example.com"), new Address("Blk 27 Jurong East Street 32 #08-111"),
                         getTagSet("colleagues"))
-                        .withIncome(new Income(92000))
+                        .withIncome(new Income("92000"))
                         .withDetails(new Details("Interested in joining a professional networking group"))
                         .withLead(Lead.of("HOT"))
                         .addInteraction(new Interaction(
@@ -215,7 +215,7 @@ public class SampleDataUtil {
                         new Email("benjaminy@example.com"), new Address("Blk 101 Bishan Street 12 #06-03"),
                         getTagSet("gymbuddy")).withTelegram(new TelegramHandle("@benyeo"))
                         .withProfession(new Profession("Personal Trainer"))
-                        .withIncome(new Income(86000))
+                        .withIncome(new Income("86000"))
                         .withDetails(new Details("Searching for gym management systems"))
                         .withLead(Lead.of("HOT"))
                         .addInteraction(new Interaction(

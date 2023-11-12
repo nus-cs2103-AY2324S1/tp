@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Person's details in the address book.
  */
@@ -22,6 +25,8 @@ public class Details {
     * @param details A valid details.
     */
     public Details(String details) {
+        requireNonNull(details);
+        checkArgument(isValidDetails(details), MESSAGE_CONSTRAINTS);
         value = details;
     }
 
