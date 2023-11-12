@@ -174,8 +174,6 @@ public class ModelManager implements Model {
         }
         this.filteredPersons.setPredicate(personPredicate);
         this.filteredEvents.setPredicate(eventPredicate);
-
-//        this.addressBook.updateGroups();
     }
 
     //=========== Filtered Person List Accessors =============================================================
