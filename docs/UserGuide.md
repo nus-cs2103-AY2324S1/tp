@@ -610,6 +610,8 @@ Incomes must only consist of numerical inputs. Connectify does not yet support:
 * Currencies `10000 USD`
 * Other non-numeric input e.g. `10,000`
 
+[↑ Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 # FAQ
