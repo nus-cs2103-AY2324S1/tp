@@ -56,8 +56,7 @@ online dating journey.
 | Parameter                                                                                      | A value that the user provides to the application when executing a command. (e.g. in `gender/M` M is a parameter)                      |
 | GUI                                                                                            | Graphical User Interface                                                                                                               |
 | CLI                                                                                            | Command Line Interface                                                                                                                 |
-| Mainstream OS                                                                                  | Windows, Linux, Unix, OS-X                                                                                                             |
-| <div markdown="span" class="alert alert-info"><strong>:information_source: Note</strong></div> | To inform you of relevant information that might be useful to take note of as a user.                                                  |
+| Mainstream OS                                                                                  | Windows, Linux, Unix, OS-X                                                                                                             |                                 |
 | <box type="tip">Tips:</box>                                                                    | To provide you with relevant suggestions on how to use the commands as well as address potential confusions when using these commands. |
 | <box type="important">Important:</box>                                                         | To inform you of some unintended or unexpected consequences that may occur when you use the commands.                                  |
 
