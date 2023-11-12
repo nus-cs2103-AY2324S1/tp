@@ -430,18 +430,17 @@ This command finds patients with illnesses that contain any of the keywords that
 
 :clipboard: **Format**: `find-i ILLNESS`
 
-:paperclip: **Example**: `find-i alex david`
+:paperclip: **Example**: `find-i fever flu`
 
 This example command will find all patients with illnesses that contain either `fever` or `flu`.
 
 :pencil2: **Notes:**
 
 - The search is _case-insensitive_, meaning that finding illnesses with the keyword `fever`
-  will return the same results as the keyword `Fever`.
+  will return the same results as the keyword `Fever` or `FEVER`.
 
-- Only patients with illnesses matching the _full words_ of the keywords will be displayed, meaning that `flu` will find patients
-  with illnesses that contain the full `flu` but will not find patients
-  with illnesses such as `influenza`.
+- Patients with illnesses that even contains the keywords will be displayed, meaning that `flu` will find both patients
+  with illnesses that contain the full `flu` illness and also patients with illnesses such as `influenza`.
 
 ### Sorting patients: `sort-p`
 
