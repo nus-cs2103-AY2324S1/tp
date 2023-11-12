@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddRemarkCommand;
 import seedu.address.model.employee.Id;
 import seedu.address.model.remark.Remark;
@@ -44,6 +45,10 @@ public class AddRemarkCommandParserTest {
         // empty id
         userInput = " " + PREFIX_ID + " " + PREFIX_REMARK + "good worker";
         assertParseFailure(parser, userInput, Id.MESSAGE_CONSTRAINTS);
+
+        // empty remark
+        userInput = " " + PREFIX_ID + VALID_ID_BOB + " " + PREFIX_REMARK;
+        assertParseFailure(parser, userInput, Messages.MESSAGE_MISSING_REMARK);
     }
 
     @Test
