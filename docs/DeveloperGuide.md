@@ -76,7 +76,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EmployeeListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -85,7 +85,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Employee` object residing in the `Model`.
 
 ### Logic component
 
@@ -106,7 +106,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete an employee).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -125,12 +125,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Employee` objects (which are contained in a `UniqueEmployeeList` object).
+* stores the currently 'selected' `Employee` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Employee>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Department` list in the `AddressBook`, which `Employee` references. This allows `AddressBook` to only require one `Department` object per unique tag, instead of each `Employee` needing their own `Department` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -176,11 +176,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete EID1234-5678` command to delete an employee in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete EID1234-5678` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new employee. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -188,7 +188,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the employee was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -233,7 +233,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the employee being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -275,41 +275,198 @@ Finally, the update to the internalList will change the view of the displayed li
     * Pros: Allows the `list` command to list all employees by the order they were added.
     * Cons: Different lists in the `ModelManager` class may cause inconsistencies when `find` and `sort` commands are called consecutively.
 
+### Add Employee feature
+
+The add employee feature allows HouR to add employees to the employee list.
+
+#### Implementation
+
+The add employee command mechanism is facilitated by the `AddCommandParser` class which implements the `Parser` interface.
+
+`AddCommandParser#parse()` is exposed in the `Parser` interface as `Parser#parse()`.
+
+`AddCommandParser` implements the following operations:
+
+* `AddCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `AddCommand` object with the parsed employee ID, name, phone, email, position, salary, and an optional set of departments.
+
+The `AddCommand` object then communicates with the `Model` API by calling the `Model#addEmployee(Employee)` method, which adds the newly-constructed employee to the existing employee list.
+
+The method `AddCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The diagram below details how the operation of adding an employee works.
+
+![Add Sequence Diagram](images/AddSequenceDiagram.png)
+
+Given below is an example usage scenario for the command.
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `add id/EMPLOYEE_ID n/NAME p/PHONE e/EMAIL pos/POSITION s/SALARY d/DEPARTMENT` command in the CLI.
+
+**Step 3**: A new employee will be added to the employee list with the given details.
+
+The following activity diagram summarises what happens when a user executes the add command:
+
+![Add Activity Diagram](images/AddActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Command-Model Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#addEmployee` to add the new employee into the model instead of doing the direct editing in `AddCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Longer command execution, requiring more parts to work together.
+
+* **Alternative 2**: Edit the employee list directly from `AddCommand#execute()`.
+    * Pros: Shorter command execution, one less point of failure by eliminating the `model` class.
+    * Cons: May violate immutability within Employee and Model classes as well as SLAP by having `AddCommand#execute()` perform the editing directly.
+
+### Delete Employee feature
+
+The delete employee feature allows HouR to delete employees from the employee list.
+
+#### Implementation
+
+The delete employee command mechanism is facilitated by the `DeleteCommandParser` class which implements the `Parser` interface.
+
+`DeleteCommandParser#parse()` is exposed in the `Parser` interface as `Parser#parse()`.
+
+`DeleteCommandParser` implements the following operations:
+
+* `DeleteCommandParser#parse()` — Parses the input argument by storing the ID, and creates a new `DeleteCommand` object with the parsed ID.
+
+The `DeleteCommand` object then communicates with the `Model` API by calling the `Model#deleteEmployee(Employee)` method, which deletes the employee with the given ID from the existing employee list.
+
+The method `DeleteCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The diagram below details how the operation of deleting an employee works.
+
+![Delete Sequence Diagram](images/DeleteSequenceDiagram.png)
+
+Given below is an example usage scenario for the command.
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `delete EMPLOYEE_ID` command in the CLI.
+
+**Step 3**: The employee with the given ID will be deleted from the employee list.
+
+The following activity diagram summarises what happens when a user executes the delete command:
+
+![Delete Activity Diagram](images/DeleteActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Command-Model Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#deleteEmployee` to delete the employee from the model instead of doing the direct editing in `DeleteCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Longer command execution, requiring more parts to work together.
+
+* **Alternative 2**: Edit the employee list directly from `DeleteCommand#execute()`.
+    * Pros: Shorter command execution, one less point of failure by eliminating the `model` class.
+    * Cons: May violate immutability within Employee and Model classes as well as SLAP by having `DeleteCommand#execute()` perform the editing directly.
+
+
 ### Report feature
 
 #### Implementation
 
 The proposed reporting mechanism is facilitated by `ReportCommandParser`. It implements the following operations:
 
-* `ReportCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `ReportCommand` object with the parsed employee ID.
+* `ReportCommandParser#parse()` — Parses the input employee ID and creates a new `ReportCommand` object with the parsed employee ID.
 
-The `ReportCommand` object then communicates with the `Model` API by calling the following methods:
+The `ReportCommand` object then communicates with the `Model` and `ReportStorage` APIs by calling the following methods:
 
-* `Model#getEmployee(EmployeeId)` — Gets the employee with the given employee ID from the existing employee list.
+* `Model#getFilteredEmployeeList()` — Gets the existing employee list, which is then looped through to get the employee with the given employee ID.
 
-Given below is an example usage scenario where the user attempts to generate a report for an employee with ID EID1234-5678.
+* `ReportStorage#saveReport(Report)` — Saves the report generated in `ReportCommand#execute()` by `ReportCommand#generateReport(employee)`, which is then stored on the hard disk as a `.txt` file.
 
-The user keys in `report EID1234-5678`
+The method `ReportCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
 
-the `report` command will call `ReportCommandParser#parse()`, which in turn calls `Model#getEmployee()`
-which then calls `UniqueEmployeeList#getEmployee()`.
-This will return the employee with the given employee ID.
+The following sequence diagram below shows how the report operation works:
 
-Then, the `ReportCommand` object will call `ReportCommand#execute()` which will generate a report for the employee.
-This report will be displayed in the GUI. This also calls the `storage` component to save the report in the hard disk.
+![Report Sequence Diagram](images/ReportSequenceDiagram.png)
 
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `report id/EMPLOYEE_ID` command in the CLI.
+
+**Step 3**: A report will be generated for the employee with the given ID.
+
+The following activity diagram summarises what happens when a user executes the report command:
+
+![Report Activity Diagram](images/ReportActivityDiagram.png)
 
 #### Design considerations:
 
-**Aspect: How report executes:**
+**Aspect: Command-Model Interaction**
 
-* **Alternative 1 (current choice):** Gets the employee with the given employee ID directly
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Utilise `Model#getFilteredEmployeeList()` to get the existing employee list, which is then looped through to get the employee with the given employee ID.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Longer command execution, requiring more parts to work together.
 
-* **Alternative 2:** Change UI to display performance metrics of employees.
-    * Pros: Will be able to display performance metrics of all employees at once.
-    * Cons: May make the UI more cluttered.
+* **Alternative 2:** Create methods in `Model` class specifically to get the employee with the given employee ID.
+    * Pros: Shorter command execution.
+    * Cons: May reduce immutability between Employee and Model classes.
+
+**Aspect: Command-Storage Interaction**
+
+* **Alternative 1 (current choice):** Utilise a dedicated storage class `ReportStorage` with the method `ReportStorage#saveReport(Report)` to save the report.
+    * Pros: Maintain SRP and SLAP within the command class.
+    * Cons: Longer command execution, requiring more parts to work together.
+
+* **Alternative 2:** Create methods in `ReportCommand` class to write and save the report.
+    * Pros: Shorter command execution, one less point of failure by eliminating the `ReportStorage` class.
+    * Cons: Less OOP, may violate SLAP within the command class.
+
+### Find Employee feature
+
+The find employee feature allows HouR to find employees that match the given search criteria from the employee list.
+
+#### Implementation
+
+The find employee command mechanism is facilitated by the `FindCommandParser` class which implements the `Parser` interface.
+
+`FindCommandParser#parse()` is exposed in the `Parser` interface as `Parser#parse()`.
+
+`FindCommandParser` implements the following operations:
+
+* `FindCommandParser#parse()` — Parses the input argument, splits it into an array of keywords, creates an instance of `EmployeeContainsKeywordsPredicate` using the keywords, and creates a new `FindCommand` object with the newly-created predicate instance.
+
+The `FindCommand` object then communicates with the `Model` API by calling the `Model#updateFilteredEmployeeList(Predicate)` method, which updates the view of the application to show all employees that match the given search criteria.
+
+The method `FindCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The diagram below details how the operation of finding an employee works.
+
+![Find Sequence Diagram](images/FindSequenceDiagram.png)
+
+Given below is an example usage scenario for the command.
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `find KEYWORD [MORE_KEYWORDS]…​` command in the CLI.
+
+**Step 3**: The employee list will be updated to show only employees that match the given search criteria.
+
+The following activity diagram summarises what happens when a user executes the find command:
+
+![Find Activity Diagram](images/FindActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Command-Model Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#updateFilteredEmployeeList` to update the view of the application to show all employees that match the given search criteria.
+    * Pros: Maintains data, maintain immutability within the FindCommand and Model classes.
+    * Cons: Longer command execution, requiring more parts to work together.
+
+* **Alternative 2**: Edit the employee list directly from `FindCommand#execute()` to display only employees that match the given search criteria.
+   * Pros: Shorter command execution, one less point of failure by eliminating the `model` class.
+   * Cons: May violate immutability within FindCommand and Model classes as well as SLAP by having `FindCommand#execute()` perform the editing directly.
 
 ### Reset feature
 
@@ -391,7 +548,7 @@ Given below is an example usage scenario for the command:
 
 **Step 3**: The given remark will be added to the remark list of the employee with the given id.
 
-**Aspect: Model-Person Interaction:**
+**Aspect: Model-Employee Interaction:**
 
 * **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `AddRemarkCommand#execute()`.
     * Pros: Maintain immutability within Employee and Model classes.
@@ -433,7 +590,7 @@ Given below is an example usage scenario for the command:
 
 **Step 3**: The given remark will be deleted from the remark list of the employee with the given id.
 
-**Aspect: Model-Person Interaction:**
+**Aspect: Model-Employee Interaction:**
 
 * **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `DeleteRemarkCommand#execute()`.
     * Pros: Maintain immutability within Employee and Model classes.
@@ -480,7 +637,7 @@ Given below is an example usage scenario for the command.
 
 #### Design considerations:
 
-**Aspect: Model-Person Interaction:**
+**Aspect: Model-Employee Interaction:**
 
 * **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in AddLeaveCommand#execute().
     * Pros: Maintain immutability within Employee and Model classes. 
@@ -528,7 +685,7 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Design considerations:
 
-**Aspect: Model-Person Interaction:**
+**Aspect: Model-Employee Interaction:**
 
 * **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `DeleteRemarkCommand#execute()`.
     * Pros: Maintain immutability within Employee and Model classes.
@@ -592,7 +749,7 @@ _{more aspects and alternatives to be added}_
 
 ### Product scope
 
-HouR is a desktop app for human resources staff managing employee data, optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HouR can get your employee management tasks done faster than traditional GUI apps.
+HouR is a desktop app for human resources staff managing employee data, including performance metrics, optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HouR can get your employee management tasks done faster than traditional GUI apps.
 
 
 **Target user profile**:
@@ -630,7 +787,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | intermediate user       | filter and search certain employees based on criteria like department and salaries | look for the data I need                                                          |
 | `* *`    | intermediate user       | batch delete records                                                               | keep my database organised and clutter-free                                       |
 | `* *`    | intermediate user       | sort the data / records by date and categories                                     | view relevant data in a more organised manner                                     |
-| `* *`    | long-time user          | private individuals’ personal details                                              | minimise the chance of someone else seeing them by accident and violating PDPA.   |
+| `* *`    | long-time user          | private individuals’ employeeal details                                              | minimise the chance of someone else seeing them by accident and violating PDPA.   |
 | `*`      | new user                | access a quick tutorial or guided tour                                             | learn how to use basic features of the application                                |
 | `*`      | forgetful beginner user | access a command summary                                                           | easily know which commands to use                                                 |
 | `*`      | intermediate user       | create keyboard shortcuts for tasks                                                | save time on frequently performed tasks                                           |
@@ -647,8 +804,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a specific person
-2.  HouR adds the person to the list of employees
+1.  User requests to add a specific employee
+2.  HouR adds the employee to the list of employees
 
     Use case ends.
 
@@ -828,15 +985,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed. 
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
+2. Should be able to hold up to 1000 employees without a noticeable sluggishness in performance for typical usage. 
 3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse. 
 4. The commands should be intuitive to use and easy to remember for the average user (i.e. no complex commands)
-5. The system should be usable by a novice who has never managed HR data 
-6. The product is not required to handle the printing of reports 
+5. The system should be usable by a novice who has never managed HR data before, without a steep learning curve.
+6. The product is required to handle the export of reports as text files, but not their printing.
 7. The app only supports English.
-
-*{More to be added}*
+8. The system should be able to recover from crashes gracefully, and should not corrupt the data file if one occurs.
+9. The system should provide clear and comprehensive error messages in the event of invalid user input.
+10. The system should have a low resource footprint, i.e. it should not consume a lot of memory or CPU resources.
 
 ### Glossary
 
@@ -862,7 +1020,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file.<br>Expected: Shows the GUI with a set of sample employees. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -871,20 +1029,148 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Deleting a person
+1. Shutdown using the UI
 
-1. Deleting a person while all persons are being shown
+   1. Click the `X` button on the top right corner of the window.<br>
+       Expected: The window closes.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Shutdown using the `exit` command
+   
+   1. Type `exit` in the command box and press Enter.<br>
+      Expected: The window closes.
+
+### Deleting an employee
+
+1. Deleting an employee while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
 
    1. Test case: `delete EID1234-5678`<br>
       Expected: Employee with employee ID "EID1234-5678" is deleted from the list. Details of the deleted employee shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No employee is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an invalid employee ID)<br>
       Expected: Similar to previous.
+
+### Finding an employee
+
+1. Finding an employee while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list. Employee with name "Alex" is in the list. Employee with position "manager" is in the list. Employee with employee ID "EID1234-5678" is in the list. Employee with employee ID "EID0000-0000" is not in the list. Employee with position "notAManager" is not in the list.
+
+   1. Test case: `find Alex`<br>
+      Expected: Employee with name "Alex" is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find abcdef`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find manager`<br>
+      Expected: All employees with the word "manager" in their position are shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find notAManager`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find EID1234-5678`<br>
+      Expected: Employee with employee ID "EID1234-5678" is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find EID0000-0000`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find`<br>
+      Expected: Invalid command format error message is shown in the status bar.
+
+1. Finding an employee when only some employees are being shown.
+
+   1. Prerequisites: List only some employees using the `find manager` command. Multiple employees in the list. Employee with name "Alex" is in the list. Three employees with position "manager" are in the list. Employee with employee ID "EID1234-5678" is in the list. Employee with employee ID "EID0000-0000" is not in the list. Employee with position "notAManager" is not in the list.
+
+   1. Test case: `find Alex`<br>
+      Expected: Employee with name "Alex" is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find abcdef`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find manager`<br>
+      Expected: All employees with the word "manager" in their position are shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find notAManager`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find EID1234-5678`<br>
+      Expected: Employee with employee ID "EID1234-5678" is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find EID0000-0000`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find`<br>
+      Expected: Invalid command format error message is shown in the status bar.
+
+1. Finding an employee in an empty employee book
+
+   1. Prerequisites: Clear the employee book using the `clear` command.
+
+   1. Test case: `find Alex`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find abcdef`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find manager`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find notAManager`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find EID1234-5678`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find EID0000-0000`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find`<br>
+      Expected: Invalid command format error message is shown in the status bar.
+
+### Generating a report for an employee
+
+1. Generating report while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list. Employee with employee ID "EID1234-5678" is in the list. Employee with employee ID "EID0000-0000" is not in the list.
+
+   1. Test case: `report EID1234-5678`<br>
+      Expected: The report of employee with employee ID "EID1234-5678" is shown in the status bar. The report is also downloaded as a text file in a directory called "reports" in the same directory as the jar file.
+   
+   1. Test case: `report EID0000-0000`<br>
+      Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
+   
+   1. Test case: `report`<br>
+      Expected: Invalid command format error message is shown in the status bar.
+
+1. Generating report while only some employees are being shown.
+
+   1. Prerequisites: List only some employees using the `find manager` command. Multiple employees in the list. Employee with employee ID "EID1234-5678" is in the list. Employee with employee ID "EID0000-0000" is not in the list.
+
+   1. Test case: `report EID1234-5678`<br>
+      Expected: The report of employee with employee ID "EID1234-5678" is shown in the status bar. The report is also downloaded as a text file in a directory called "reports" in the same directory as the jar file.
+   
+   1. Test case: `report EID0000-0000`<br>
+      Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
+   
+   1. Test case: `report`<br>
+      Expected: Invalid command format error message is shown in the status bar.
+
+1. Generating report with an empty employee book
+
+   1. Prerequisites: Clear the employee book using the `clear` command.
+
+   1. Test case: `report EID1234-5678`<br>
+      Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
+   
+   1. Test case: `report EID0000-0000`<br>
+      Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
+   
+   1. Test case: `report`<br>
+      Expected: Invalid command format error message is shown in the status bar.
 
 ### Adding Leave for an Employee
 
@@ -1089,3 +1375,57 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Efforts**
+
+This section documents the efforts that went into the development of this project, as well as the challenges faced. 
+
+### Difficulty Level
+
+We would rate the difficulty level of this project as **π/5**.
+
+This is because the project codebase and architecture were initially quite challenging to understand, and we had to spend a significant amount of time tracing through the code and understanding how the different components of the project interacted with each other. However, once we understood the architecture of the project, it was relatively straightforward to add most of the new features and modify existing features.
+
+There were a few challenging features, such as the `sort` command, which required us to modify the code at multiple layers of abstraction, and the `report` command, which was one of the few commands that required its own storage class and methods. However, we were able to implement these features successfully after some effort.
+
+Writing our own tests as well as modifying existing tests, while not particularly difficult, was quite time-consuming, and required us to spend a significant amount of time understanding the existing tests and how they worked.
+
+Finally, writing documentation was a novel experience to us, and necessitated both a deep understanding of the codebase as well as a good grasp of documentation best practices. Making UML diagrams for the documentation was a particular challenge because of our inexperience with coding in UML. However, after writing the documentation for a few methods, the rest were relatively straightforward to write.
+
+Given the challenges we faced and the novelty of some parts of the project, we would rate the difficulty level of this project as **π/5**.
+
+### Challenges Faced
+
+We faced the following challenges during the development of this project:
+
+* **Understanding the architecture of the project**
+
+   Initially, we had a hard time understanding the architecture of the project. We were not sure how the different components of the project interacted with each other, and why some classes, such as `ModelManager` were even necessary. However, as we added more modifications and features to the project, we were able to understand the architecture better.
+
+* **Forking workflow**
+
+   Initially, we started with the forking workflow for our project, which was extremely tedious and time-consuming, and led to a lot of merge conflicts. We had to spend a lot of time resolving merge conflicts, and this slowed down our development process. Also, it was difficult to contribute to each others' code, and even minor revisions required a long, inefficient process of sync'ing the fork, resolving merge conflicts, making the revision, creating a pull request, and merging it. We eventually switched to the branching workflow for v1.3, which was much more efficient and streamlined while maintaining our code quality.
+
+* **Renaming `person` to `employee`**
+
+   Since our app was focussed on HR management, we decided to rename the `person` class to `employee`. However, this was not as simple as it seemed. We had to rename the class, as well as all the methods and variables that were related to the `person` class, which was a tedious process. This introduced lots of often-mysterious bugs and errors in our code, which we had to spend a lot of time debugging. It also involved making changes to the test data and documentation, which was also a time-consuming process.
+
+* **Adding and modifying fields in the `employee` class**
+
+   Adding and modifying fields in the `employee` class was a challenge because we had to ensure that the new fields were compatible with the existing code. We had to ensure that the new fields were properly initialised new `employee` constructors, and that they were properly handled in the model, logic, and storage classes. We also had to ensure that the new fields were properly handled in the parser and the UI. This was a challenge because we had to ensure that the new fields were properly handled in all the different components of the project.
+
+* **Storing reports**
+
+   For the `report` command, we had to store the reports in a separate folder. We had to figure out how to create a new folder and store the reports in it within the patterns and constraints of the existing storage classes. This was a challenge because we were not familiar with the storage classes, and we had to figure out how to store the reports in a way that was consistent with the existing storage classes.
+
+* **Implementing the `sort` command**
+
+   For the `sort` command, after exploring and struggling with various approaches from creating separate list views to copying the list, we decided to go ahead with modifying the existing list. This involved adding methods at various layers of abstraction all the way down to the `UniqueEmployeeList` class, which implemented the actual sorting. This was a challenge as it was initially difficult to understand how the different components of the project interacted with each other at each layer of abstraction. This change also broke all of the methods that relied on index for employee selection by making their results unpredictable, and we had to go through all of the methods to change the index to the employee ID. This was a tedious process, and we had to spend a lot of time modifying methods such as `delete` to use the employee ID instead of index, and then debugging them.
+
+* **Documentation**
+
+   Being new to writing user and developer guides or creating UML diagrams, we had to spend a signficant amount of time looking at existing docs and learning to write our own. We also had to spend a lot of time ensuring that the documentation was consistent with the code and our implementation. This was a challenge because it required an in-depth understanding of the codebase, and so we had to defer most of the technical parts of our documentation towards the end of the project.
+
+### Effort Required
+
+### Achievements of the Project
