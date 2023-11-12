@@ -128,6 +128,7 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
             throw new CommandException("Internal Error in deleting original entry: " + original.toString());
         }
         if (hasClashWith.test(edited)) {
+            T clashingEntry = getClashingEntry.apply(edited);
             try {
                 addMethod.accept(original);
             } catch (Exception e) {
@@ -135,12 +136,14 @@ public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> exte
                         + " error adding deleted original entry back. original: "
                         + original.toString() + " edited: " + edited.toString() + ".");
             }
-            throw new CommandException("Clash detected.\nEdited: " + edited.toString() + "\nClashes with: "
-                    + getClashingEntry.apply(edited).toString() + ".");
+            throw new CommandException(getClashType(edited, clashingEntry)
+                    + " clash detected.\nEdited: " + edited.toString() + "\nClashes with: "
+                    + clashingEntry.toString());
         }
         addMethod.accept(edited);
     }
     abstract String editableFieldsInfo();
     abstract String listName();
     public abstract String getUsageInfo();
+    abstract String getClashType(T edited, T clashWith);
 }
