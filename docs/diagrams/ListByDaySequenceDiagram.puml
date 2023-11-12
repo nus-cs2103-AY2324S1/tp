@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
+participant "listByDay:ListByDayCommand" as ListByDayCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list Mon")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("list Mon")
+activate AddressBookParser
+
+create ListCommandParser
+AddressBookParser -> ListCommandParser
+activate ListCommandParser
+
+ListCommandParser --> AddressBookParser
+deactivate ListCommandParser
+
+AddressBookParser -> ListCommandParser : parse("list Mon")
+activate ListCommandParser
+
+create ListByDayCommand
+ListCommandParser -> ListByDayCommand
+activate ListByDayCommand
+
+ListByDayCommand --> ListCommandParser : listByDay
+deactivate ListByDayCommand
+
+ListCommandParser --> AddressBookParser : listByDay
+deactivate ListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListCommandParser -[hidden]-> AddressBookParser
+destroy ListCommandParser
+
+AddressBookParser --> LogicManager : listByDay
+deactivate AddressBookParser
+
+LogicManager -> ListByDayCommand : execute()
+activate ListByDayCommand
+
+ListByDayCommand -> Model : updateFilteredItemList(DAY_PREDICATE)
+
+note right
+DAY_PREDICATE:
+Predicate to show tutees
+whose lessons are
+on the specified day
+end note
+
+activate Model
+
+Model --> ListByDayCommand
+deactivate Model
+
+create CommandResult
+ListByDayCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListByDayCommand
+deactivate CommandResult
+
+ListByDayCommand --> LogicManager : result
+deactivate ListByDayCommand
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListByDayCommand -[hidden]-> ListCommandParser
+destroy ListByDayCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -180,10 +180,29 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Easy to implement.
     * Cons: Command input may be too long and less user-friendly.
 
-### List by day feature
+### List feature
 
-The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
+There are three commands that deal with listing tutees:
+
+1. `ListCommand` - Shows the current list of all tutees in the list
+2. `ListByDayCommand` - Shows the current list of tutees who have lessons on a specified day
+3. `ListUnPaidCommand` - Shows the current list of tutees who have not paid
+
+The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and the `ListUnPaidCommand` extend the `ListCommand` class. All three commands override `Command#execute`.
+The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format
+
+
+The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
 the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
+
+The following sequence diagram shows how the list by day command works.
+
+![ListByDaySequenceDiagram](images/ListByDaySequenceDiagram.png)
+
+The `ListUnPaidCommand`  follows a similar implementation to `ListByDayCommand`. It is initialised with a `PaidPredicate` instead and updates
+the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
+
+**Aspect: How to implement `ListByDayCommand` and `ListUnPaidCommand`:**
 
 * **Alternative 1 (current choice):** Extend the `ListCommand` class.
     * Pros: Greater use of OOP.
@@ -217,13 +236,9 @@ tutee.
 The following sequence diagram shows how the total revenue command works:
 ![RevenueSequenceDiagram.png](images/RevenueSequenceDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
-
-
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -296,12 +311,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 ### Mark paid/unpaid features
 The proposed mark paid/check paid mechanism can check whether the person has paid or not by implementing a new boolean field 'paid' in the person object, it implements the following operations:

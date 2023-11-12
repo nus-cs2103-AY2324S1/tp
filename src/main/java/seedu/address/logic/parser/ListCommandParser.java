@@ -15,9 +15,9 @@ import seedu.address.model.person.PaidPredicate;
  */
 public class ListCommandParser implements Parser<ListCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the ListCommand
-     * and returns a corresponding ListCommand, or its subtype, object for execution.
-     * @throws ParseException if the user input does not conform to the expected format
+     * Parses the given {@code String} of arguments in the context of the FindCommand
+     * and returns a FindCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
      */
     public ListCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
