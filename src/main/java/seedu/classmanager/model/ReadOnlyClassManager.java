@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import seedu.classmanager.model.student.Student;
 
 /**
- * Unmodifiable view of an Class Manager
+ * Unmodifiable view of a Class Manager
  */
 public interface ReadOnlyClassManager extends Observable {
 
@@ -19,5 +19,10 @@ public interface ReadOnlyClassManager extends Observable {
      * Returns the list containing the selected student.
      * The list only has one selected student.
      */
-    ObservableList<Student> getSelectedStudent();
+    ObservableList<Student> getObservableSelectedStudent();
+
+    /**
+     * Returns the selected student.
+     */
+    Student getSelectedStudent();
 }

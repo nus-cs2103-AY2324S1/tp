@@ -119,21 +119,21 @@ public class UniqueStudentListTest {
         uniqueStudentList.add(ALICE);
         uniqueStudentList.add(BOB);
         uniqueStudentList.setSelectedStudent(ALICE);
-        assertEquals(ALICE, uniqueStudentList.getSelectedStudent().get(0));
+        assertEquals(ALICE, uniqueStudentList.getSelectedStudent());
         uniqueStudentList.setSelectedStudent(BOB);
-        assertEquals(BOB, uniqueStudentList.getSelectedStudent().get(0));
+        assertEquals(BOB, uniqueStudentList.getSelectedStudent());
     }
 
     @Test
     public void selectedStudent_isEmptyWhenStart_success() {
-        assertTrue(uniqueStudentList.getSelectedStudent().isEmpty());
+        assertEquals(null, uniqueStudentList.getSelectedStudent());
     }
 
     @Test
     public void clearSelectedStudent_success() {
         uniqueStudentList.setSelectedStudent(ALICE);
         uniqueStudentList.clearSelectedStudent();
-        assertTrue(uniqueStudentList.getSelectedStudent().isEmpty());
+        assertEquals(null, uniqueStudentList.getSelectedStudent());
     }
 
     @Test

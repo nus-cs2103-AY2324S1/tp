@@ -24,7 +24,7 @@ public class ConfigCommand extends Command {
             + ": Configures Class Manager with the module information.\n"
             + "WARNING: Configuring Class Manager resets "
             + "the grades, attendance and class participation details of all students. This cannot be undone.\n"
-            + "Class Manager is configured with 13 tutorials and 6 assignments by default.\n"
+            + "The default Class Manager is configured with 13 tutorials and 6 assignments.\n"
             + "Parameters: "
             + PREFIX_TUTORIAL_COUNT + "TUTORIAL_COUNT "
             + PREFIX_ASSIGNMENT_COUNT + "ASSIGNMENT_COUNT\n"
@@ -36,8 +36,6 @@ public class ConfigCommand extends Command {
             + "information:\n"
             + "Tutorial Count: %1$d\n"
             + "Assignment Count: %2$d\n";
-    public static final String MESSAGE_CONFIG_FAILED = "Class Manager has failed to be configured.\n"
-            + "Please try entering the config command again.\n";
 
     private final int tutorialCount;
     private final int assignmentCount;
@@ -75,13 +73,11 @@ public class ConfigCommand extends Command {
             model.setStudent(student, editedStudent);
         }
 
+        // Clears the view panel after resetting class details of students
+        model.resetSelectedStudent();
         model.commitClassManager();
-
         // Reset the history of the model and prevent any undo commands
         model.configReset();
-
-        // clears the view panel after resetting class details of students
-        model.resetSelectedStudent();
 
         return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
     }
@@ -119,6 +115,10 @@ public class ConfigCommand extends Command {
                 && assignmentCount == e.assignmentCount;
     }
 
+    /**
+     * Returns the hashcode of the {@code ConfigCommand}.
+     * @return Hashcode of the {@code ConfigCommand}.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(tutorialCount, assignmentCount);

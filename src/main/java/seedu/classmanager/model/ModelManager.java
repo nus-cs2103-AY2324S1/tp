@@ -145,13 +145,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Student getSelectedStudent() {
+        return versionedClassManager.getSelectedStudent();
+    }
+
+    @Override
     public void setSelectedStudent(Student student) {
+        requireNonNull(student);
         versionedClassManager.setSelectedStudent(student);
     }
 
     @Override
     public boolean isSelectedStudent(Student student) {
-        return !getSelectedStudent().isEmpty() && getSelectedStudent().get(0).equals(student);
+        requireNonNull(student);
+        return student.isSameStudent(getSelectedStudent());
     }
     //=========== Filtered Student List Accessors =============================================================
 
@@ -165,8 +172,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Student> getSelectedStudent() {
-        return versionedClassManager.getSelectedStudent();
+    public ObservableList<Student> getObservableSelectedStudent() {
+        return versionedClassManager.getObservableSelectedStudent();
     }
 
     @Override
