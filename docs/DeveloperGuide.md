@@ -412,10 +412,6 @@ Pros: It prevents redundant data from being stored and accidental addition of mu
 Cons: It restricts users from entering data that might be understandable or convenient for them. [For example: If the user creates two Events with the description "Interview" for the same person, they might have a distinct idea of what each of those Events mean, but the system prevents them for making this addition].
 
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -478,7 +474,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `**`     | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
 | `*`      | Hiring Manager   | get data on which positions are lacking job applicants                                                           | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
 | `*`      | Hiring Manager   | get data on which positions already have too many applicants                                                     | I can forward this to the department heads to see if they still want to keep the job posting or close it                                   |
-*{More to be added}*
 
 ### Use cases
 
@@ -704,7 +699,6 @@ Use case ends.
   * 2b1. JABPro shows an error message and provides course of action for remedy. Use case resumes at step 1.
 
 
-*{More to be added}*
 
 
 
@@ -722,7 +716,6 @@ Use case ends.
 10. Commands should be `easy to remember` and `intuitive` to use
 11. Product should be `consistent` in its visuals and commands formatting
 
-*{More to be added}*
 
 ### Glossary
 
