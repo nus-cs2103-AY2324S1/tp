@@ -4,8 +4,6 @@ title: Developer Guide
 ---
 * Table of Contents
 {:toc}
-
-
 ---
 
 CheckMate is a powerful room booking and management system designed for hotel employees, especially those in administrative and management positions. It streamlines the process of room bookings, offering real-time room data visualization, search functionality, and efficient booking management.
@@ -23,6 +21,9 @@ CheckMate is a powerful room booking and management system designed for hotel em
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<details open>
+<summary><strong>Design</strong></summary>
+<div markdown="1">
 
 ## **Design**
 
@@ -30,6 +31,13 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
+
+</div>
+</details>
+
+<details open>
+<summary><strong>Architecture</strong></summary>
+<div markdown="1">
 
 ### Architecture
 
@@ -152,7 +160,14 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+</div>
+</details>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<details open>
+<summary><strong>Implementation</strong></summary>
+<div markdown="1">
 
 ## **Implementation**
 
@@ -327,7 +342,13 @@ The following sequence diagram provides a visual representation of the JsonInjec
         - More complex implementation.
         - Due to the input having some characters removed, the command may either may no sense at all, or in successful execution the details of the command may not make sense to the user at all.
 
+</div>
+</details>
+
 --------------------------------------------------------------------------------------------------------------------
+<details open>
+<summary><strong>Appendix: Requirements</strong></summary>
+<div markdown="1">
 
 ## **Appendix: Requirements**
 
@@ -492,7 +513,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
+</div>
+</details>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<details open>
+<summary><strong>Appendix: Instructions for manual testing</strong></summary>
+<div markdown="1">
 
 ## **Appendix: Instructions for manual testing**
 
@@ -556,17 +584,13 @@ testers are expected to do more *exploratory* testing.
 ### Deleting a Booking
 
 1. Deleting a booking while all bookings are being shown
-
-    1. Prerequisites: List all bookings using the `list` command.
-
-    1. Test case: `delete 1`<br>
-       Expected: First booking is deleted from the list. Message shown is `Deleted Booking(s): ` followed by the details of the deleted booking.
-       For example, `Deleted Booking(s): Room number: 1; Booking Period: 2023-11-08 19:28 to 2023-11-09 11:00; Name: John Doe; Phone: 98765432; Email: johnd@gmail.com; Remark: Requested extra Queen's sized bed; Room Type: NORMAL`
-
-    1. Test case: `delete 0`<br>
+   1. Prerequisites: List all bookings using the `list` command.
+   2. Test case: `delete 1`<br>
+      Expected: First booking is deleted from the list. Message shown is `Deleted Booking(s): ` followed by the details of the deleted booking.
+      For example, `Deleted Booking(s): Room number: 1; Booking Period: 2023-11-08 19:28 to 2023-11-09 11:00; Name: John Doe; Phone: 98765432; Email: johnd@gmail.com; Remark: Requested extra Queen's sized bed; Room Type: NORMAL`
+   3. Test case: `delete 0`<br>
        Expected: No booking is deleted. Error message shown is `Index should be a non-zero unsigned integer.`
-
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Editing a Booking
@@ -592,11 +616,10 @@ testers are expected to do more *exploratory* testing.
 ### Finding a Booking
 
 1. Finding a booking.
-    1. Test case: `find 1`<br>
+   1. Test case: `find 1`<br>
        Expected: First booking is found in the list and the `Current Bookings` only shows the first booking. Message shown is `1 bookings listed!`.
-
-    1. Test case: `find 0` or any other find commands that do not match the name or room number of a booking. <br>
-       Expected: No booking is shown. Message shown is `0 bookings listed!`
+   2. Test case: `find 0` or any other find commands that do not match the name or room number of a booking. <br>
+      Expected: No booking is shown. Message shown is `0 bookings listed!`
 
 ### Undo the deletion of a Booking
 
@@ -609,7 +632,15 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Have an empty `Current Bookings` by opening the application with no pre-loaded data.
     2. Test case: `undo`<br>
        Expected: No deletions is undone. Error message shown is `No deletions to undo.`
+
+</div>
+</details>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<details open>
+<summary><strong>Appendix: Effort</strong></summary>
+<div markdown="1">
 
 ## **Appendix: Effort**
 
@@ -644,7 +675,14 @@ continue to expand upon to allow maximum creativity of the skeletons provided.
 * Skillfully integrated the architecture of AB3 to work for a completely new purpose.
 * Maximised the abilities of every teammate we have.
 
+</div>
+</details>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<details open>
+<summary><strong>Appendix: Planned Enhancements</strong></summary>
+<div markdown="1">
 
 ## **Appendix: Planned Enhancements**
 
@@ -673,3 +711,8 @@ of memorising which rooms are which types.
 however this may be problematic when it comes to events such as weddings where one person books many rooms. In this
 planned enhancement, we will make the add command work similarly to the delete command which currently has a mass
 delete feature.
+
+</div>
+</details>
+
+--------------------------------------------------------------------------------------------------------------------
