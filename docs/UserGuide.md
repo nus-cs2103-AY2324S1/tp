@@ -209,6 +209,7 @@ An example of the `create` command being successfully executed:
 2. This is what you should see upon successful execution of command.
 ![create-success](images/create-success.png)
 3. View your newly created tags using the `listT` command.
+![listT-create](Images/listT-create.png)
 
 
 <a name="adding-an-applicant"></a>
@@ -621,67 +622,54 @@ In essence, this allows you to find job applicants whose performance rating is a
 Ideally, this feature can then be used to find the best candidates easily and quickly without having to manually look through the list of candidates.
 
 
-
-
 ### Searching job applicants by category: `search`
 
 Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
 
-Format: `search (n/NAME... / st/STATUS... / t/TAGNAME...)`
+Format: `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAG [MORE TAGS)`
 
-#### Searching job applicants by name
+Prefix      | Constraints                                                                                                                                               
+------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
+`n/NAME`    | `NAME` must be alphanumeric.
+`st/STATUS` | `STATUS` must either be `preliminary`, `interviewed`, `offered`, `rejected`.
+`t/TAG` | `TAG` must be alphanumeric and contains no spaces.
 
-Finds job applicants whose names contain the given keywords.
+Note:
+* `search` requires at least ONE search parameter i.e. `n/NAME`, `st/STATUS`, or `t/TAGNAME`.
+* Each prefix can only be used at most once.
+* Multiple search parameters for a specific category are divided by spaces (not commas!) i.e. `search st/preliminary interviewed`
 
-Format: `search n/NAME...`
+<box type="tip" seamless>
+Tip:
+* You can combine multiple search categories in a single `search` command.
+* Search parameters are case-insensitive.
 
-* Keywords are case-insensitive: `search n/Josh` and `search n/josh` return the same result.
-* Keyword has to be a string that does not contain any non-alpha numeric characters.
-* The order of the keywords does not matter. e.g. `Josh Peck` will match `Peck Josh`.
-* Only full words will be matched e.g. `Jo` will not match `Josh`.
-* Applicants matching at least one keyword will be returned (i.e. `OR` search)
-  e.g. `Josh Peck` will return `Josh Gad`, `Josh Job`.
+Examples of successful command execution:
+1. `search n/alex bernice`
+<br>
+![search-success-1](images/search-success-1.png)
+The above `search` command displayed all candidates whose name match ANY of the given keywords. This is because
+`search` does an `OR` search within a specific category.
+   
+2.`search n/alex bernice st/interviewed t/intern`
+<br>
+![search-success](images/search-success.png)
+Notice how the above `search` command did not display "Alex" despite his profile matching
+the `name` and `tag` categories. This is because `search` does an `AND` search across multiple categories.
 
-Examples:
-* `search n/John` returns `john` and `John Doe`
-* `search n/alex david` returns `Alex Yeoh`, `David Li`<br>
+<box type="tip" seamless>
+What does it mean to do an `OR` search within a single category and an `AND` search across multiple categories?
+It's best to explain this by breaking down an example `search` command!
+`search n/alex bernice st/interviewed t/intern` will output applicants whose:
+  * names contain either Alex `OR` Bernice
+  * `AND` status is either interviewed
+  * `AND` has a tag `intern`
 
-#### Searching job applicants by status
-
-Finds job applicants whose status match any of the given keywords.
-
-Format: `search st/STATUS...`
-
-* Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
-  e.g. `search st/interviewing` will give an error.
-* Keywords are case-insensitive: `search st/interviewed` and `search st/INTERVIEWED` return the same result.
-
-Example:
-* `search st/interviewed`
-
-#### Searching job applicants by tag
-
-Finds job applicants whose tag(s) match any of the given tag keywords
-
-Format: `search t/TAGNAME...`
-
-* Keywords are case-insensitive: `search t/hardworking` and `search t/HARDWORKING` return the same result.
-
-Example:
-* `search t/hardworking`
-
-#### Notes for advanced users:
-* You can combine the search categories (e.g. `search n/Alex st/offered t/software engineer`) in a single search command.
-* Each search category can be used at most once in a single search command
-  e.g. `search n/Alex n/Adam st/rejected` is not allowed.
-
-Example:
-* `search n/Alex Bernice st/interviewed rejected t/intern` will output applicants whose:
-    * names contain either Alex `or` Bernice
-    * `and` status is either interviewed `or` rejected.
-    * `and` has a tag `intern`
-
-![Search](images/search-2.png)
+Failed to execute the `search` command? Here are some possible reasons why:
+1. Missing search category i.e. `search`
+2. Invalid name/status/tag parameters i.e. `search n/@alex st/accepted t/intern#`
+3. Multiple prefixes of the same category used i.e. `search n/alex n/bernice`
+4. Using commas as delimiters of different parameters instead of spaces i.e. `search n/alex, bernice`
 
 ### Deleting job applicants : `delete`
 
@@ -913,35 +901,6 @@ If your changes to the data file makes its format invalid, JABPro will discard a
 </box>
 
 _Details coming soon ..._
-
-
---------------------------------------------------------------------------------------------------------------------
-
-## Planned Enhancements
-
-### Deleting tags : `delete tag`
-
-While certainly useful, JABPro currently does not have feature to delete existing tags. However, this feature will be implemented
-in future iterations.
-
-<box type="tip" seamless>
-
-**Tip:**
-* If you are an advanced user, you are welcome to delete your tags manually by editing the json file! 
-</box>
-
-### Editing tags : `edit tag`
-
-JABPro currently does not support editing tags i.e. editing tag name or category. This feature will be implemented in future iterations.
-
-**Tip:**
-* If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
-  </box>
-
-### Exporting events : `export`
-
-JABPro currently does not support exporting Events. This feature will be implemented in future iterations.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
