@@ -58,7 +58,6 @@ public class EditCommand extends UndoableCommand {
     public static final String MESSAGE_PATIENT_NOT_FOUND = "INVALID name and/or ID!\n"
             + "The given combination of Name and/or ID does not match any person in the Patient list.";
 
-    public static final String MESSAGE_NO_CHANGE = "There are no changes in the editable fields provided.\n";
 
     public static final String MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT = "Medical History can take any values, "
             + "and it should not be blank.\n";
@@ -107,10 +106,6 @@ public class EditCommand extends UndoableCommand {
 
         originalPerson = personToEdit;
         editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (originalPerson.equals(editedPerson)) {
-            throw new CommandException(MESSAGE_NO_CHANGE);
-        }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
