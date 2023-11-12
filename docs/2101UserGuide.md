@@ -271,21 +271,30 @@ Here is an example command where we find all members with the names of Anthony a
 
 `findMember anthony nicholas`
 
-
 <hr class="command-separator">
 
 #### Find Event in event list : `findEvent`
 
-Finds and lists event(s) which name(s) contain the provided `KEYWORD`.
+Similar to findMember, findEvent allows you to instantly find your event among your multiple events.
 
-Format: `findEvent KEYWORD [MORE_KEYWORDS]`
-* Finds and lists event(s) which name(s) contain the specified `KEYWORD`.
-* More than 1 `KEYWORD` can be provided to find more events.
-* The `KEYWORD` must match minimally one of the words in the name of the event to be found, where capitalisation does not matter.
+Here’s how you can use it:
+`findEvent EVENT_NAME [MORE_NAMES]`
 
-Examples:
-* `findEvent party` displays the event(s) which name(s) contain 'party'
-* `findEvent party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
+Here is an example command where we find all events with the event name of Party:
+
+`findEvent party`
+
+<div markdown="block" class="alert alert-info">:information_source: </div>
+The find commands require the names to be typed in full meaning Nich will not suffice for finding Nicholas. 
+To make it convenient for you, the names do not have to be capitalised! 
+
+<div markdown="block" class="alert alert-primary">:bulb: </div>
+The find commands are powerful tools to help you work faster. Want to view the attendance of Nicholas but you don’t 
+want to scroll the member list? Use the `findMember` then follow it with the `viewMember` command to achieve that. 
+This is applicable for both members and events!
+
+<hr class="command-separator">
+
 
 <hr class="feature-class-separator">
 
