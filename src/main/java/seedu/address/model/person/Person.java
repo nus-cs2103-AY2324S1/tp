@@ -250,6 +250,8 @@ public class Person {
     }
 
     public double getMonthlyRevenue() {
-        return lesson.getMonthlyHours() * payRate.getValue();
+        double monthlyRevenue = lesson.getMonthlyHours() * payRate.getValue();
+        assert monthlyRevenue >= 0 : "monthly revenue should not be negative";
+        return monthlyRevenue;
     }
 }
