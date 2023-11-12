@@ -8,6 +8,10 @@
       "groupRemark" : "CS2105 remark",
       "meetingTimeList" : [],
       "groupName" : "CS2105"
+    }, {
+      "groupRemark" : "CS2103 remark",
+      "meetingTimeList" : [],
+      "groupName" : "CS2103"
     }],
     "freeTimeList" : [ ]
   }, {
@@ -81,5 +85,23 @@
       "end" : "THU 1800"
     }],
     "groupName" : "CS2105"
+  }, {
+    "groupRemark" : "CS2103 remark",
+    "meetingTimeList" : [],
+    "groupName" : "CS2103"
+  }, {
+    "groupRemark" : "CS2102 remark",
+    "meetingTimeList" : [ {
+      "start" : "WED 1500",
+      "end" : "WED 1600"
+    }, {
+      "start" : "MON 1500",
+      "end" : "MON 1600"
+    }],
+    "groupName" : "CS2102"
+  }, {
+    "groupRemark" : "Test on friday",
+    "meetingTimeList" : [ ],
+    "groupName" : "CS2100"
   }]
 }
