@@ -842,7 +842,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No task is added to any of the lessons in the list. Error indicating invalid description shown in the response box.
 
 
-### Delete feature
+### Delete Feature
 
 ##### Deleting a student in ___STUDENTS list___
 
@@ -904,8 +904,8 @@ testers are expected to do more *exploratory* testing.
 1. Prerequisites:
     * List all students using the `list students` command. 
     * There is currently no student with the name "Leah" and "Max".
-    * There is an existing student with the name "Riley"
-    * There are more than 2 students in the displayed list of students
+    * There is an existing student with the name "Riley".
+    * There are more than 2 students in the displayed list of students.
 
 2. Test case: `editPerson 1 -name Leah` <br>
    Expected: The name of the first student in the displayed list of students is edited to "Leah". Details of the edited student is shown in the response box.
@@ -914,10 +914,57 @@ testers are expected to do more *exploratory* testing.
    Expected: The name of the second student in the displayed list of students is edited to "Max" and the subject of this student is set to "BIOLOGY". Details of the edited student is shown in the response box.
 
 4. Test case: `editPerson 1 -name Riley` <br>
-   Expected: No student is edited. 
+   Expected: No student is edited. Error indicating a clash detected is shown in the response box.
 
 
 ##### Editing a lesson in ___SCHEDULE list___
+
+1. Prerequisites:
+    * List all lessons using the `list` command.
+    * There is currently no lessons with the name "Chemistry Lesson at Bedok", "Biology Lesson at Tai Seng" and "Lesson".
+    * There is an existing lesson on 2023/12/12 from 13:00 to 15:00.
+    * There are more than 2 lessons in the displayed list of lessons.
+
+2. Test case: `editLesson 1 -name Chemistry Lesson at Bedok` <br>
+   Expected: The name of the first lesson in the displayed list of lessons is edited to "Chemistry Lesson at Bedok". Details of the edited lesson is shown in the response box.
+
+3. Test case: `edit 2 -name Biology Lesson at Tai Seng -start 10:00 -end 12:00` (in ___SCHEDULE list___) <br>
+   Expected: The name and time of the second lesson in the displayed list of lessons is edited to "Biology Lesson at Tai Seng" and "10:00AM" to "12:00PM" respectively. Details of the edited lesson is shown in the response box.
+
+4. Test case: `editLesson 1 -name Lesson -start 12:00 -end 14:00 -day 2023/12/12` <br>
+   Expected: No lesson is edited. Error indicating a clash detected is shown in the response box.
+
+### Find Feature
+
+##### Finding a student by name in ___STUDENTS list___
+
+1. Prerequisites:
+    * List all students using the `list students` command.
+    * There are currently four students with names "Alex Wong", "Alex Yeoh", "Willy Wonka" and "Wong Max".
+   
+2. Test case: `find Alex` <br>
+   Expected: Only students with the name "Alex Wong" and "Alex Yeoh" are shown. A message indicating the number of students listed is shown in the response box.
+
+3. Test case: `find won` <br>
+   Expected: Only students with the name "Alex Wong", "Willy Wonka"  and "Wong Max" are shown. A message indicating the number of students listed is shown in the response box.
+
+4. Test case: `find xyz` <br>
+   Expected: No students are shown. A message indicating 0 persons listed is shown in the response box.
+
+##### Finding a lesson by name in ___SCHEDULE list___
+
+1. Prerequisites:
+    * List all lessons using the `list` command.
+    * There are currently three lessons with names "Chemistry Lesson at bedok", "lesson chem at kovan" and "bedok eng".
+
+2. Test case: `find chem` <br>
+   Expected: Only lessons with the name "Chemistry Lesson at bedok" and "lesson chem at kovan" are shown. A message indicating the number of lessons listed is shown in the response box.
+
+3. Test case: `find bedok` <br>
+   Expected: Only students with the name "Chemistry Lesson at bedok" and "bedok eng" are shown. A message indicating the number of lessons listed is shown in the response box.
+
+4. Test case: `find x` <br>
+   Expected: No lessons are shown. A message indicating 0 lessons listed is shown in the response box.
 
 ### Saving data
 
