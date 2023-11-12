@@ -181,22 +181,35 @@ The edit command allows the user to edit any field in their job application.
 
 #### Implementation
 
-It is implemented by `EditCommand` and `EditCommandParser`.
+The Edit feature is implemented through the `EditCommand` class along with `EditCommandParser` to parse the arguments
+for the command from the user input. It utilises a nested static class, `EditJobDescriptor`, to store the new values for
+the job's attributes.
 
-`EditCommandParser` parses the users' input and checks for the valid prefixes to determine the field the user wants to
-change.
-The information is then used to create a new Job Application with the updated fields while retaining the unchanged
-fields through the `EditCommand`.
+The following sequence diagram illustrates the process of executing a valid `edit` command.
 
-The following Class Diagram of EditCommand illustrates the interactions between EditCommand and other classes:
+<img src="images/developer-guide/EditCommandParserSequenceDiagram.png" />
 
-(insert UML diagram here)
+<img src="images/developer-guide/EditCommandSequenceDiagram.png" />
 
-The following sequence diagram illustrates the process of invocation for the EditCommand:
+The `EditCommandParser` class parses the user input and creates an `EditCommand` object with the specified index and an
+`EditJobDescriptor` containing the new field values.
 
-(insert UML diagram here)
+The `execute` method in `EditCommand` is then called, which retrieves the current list of jobs and creates a new Job
+object `editedJob` with updated field value that is contained by `EditJobDescriptor`. Replaces the old job with the new
+one in the job list with `Model::setJob`.
 
-#### Design Considerations
+#### Design considerations
+
+1. **How to Edit Multiple Fields with One Command**
+
+* *Chosen implementation*: To enable the `edit` command to parse and edit multiple fields simultaneously, we decided to
+  nest a static class, `EditJobDescriptor`, within the `EditCommand` itself. This design abstracts the logic of setting
+  new values for each field away from the `ParserUtil` and `EditCommandParser` classes. It allows a single instance of
+  `EditJobDescriptor` to be carried through the execution sequence, instead of creating a separate instance for each
+  field edited. E.g. A new Deadline instance if the deadline is edited
+* *Alternative*: Editing each attribute with separate commands could simplify the command structure and reduce user
+  errors. However, this might lead to increased added complexity in managing multiple instances of edited fields as
+  described above.
 
 ---
 

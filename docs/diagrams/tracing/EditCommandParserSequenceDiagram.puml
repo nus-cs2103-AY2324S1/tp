@@ -1,0 +1,29 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+Participant ":EditCommandParser" as ecp LOGIC_COLOR
+Participant ":ArgumentTokenizer" as at LOGIC_COLOR
+Participant ":ParserUtil" as pu LOGIC_COLOR
+Participant "editJobDescriptor:EditJobDescriptor" as ejd LOGIC_COLOR
+Participant ":EditCommand" as ec LOGIC_COLOR
+
+[-> ecp ++: parse(args)
+ecp -> at ++: tokenize(args, PREFIXES)
+at --> ecp --: argMultimap
+ecp -> pu ++: parseIndex()
+
+ecp -> ejd ++: new EditJobDescriptor()
+alt prefix value present
+    ecp -> pu : parse(prefix value)
+    pu --> ecp : parsed value
+    ecp -> ejd : set corresponding field(parsed value)
+end
+
+alt at least one field edited
+    create ec
+    ecp -> ec ++: new EditCommand(index, editJobDescriptor)
+    ec --> ecp --
+end
+    ecp -->[ --: command
+@enduml
