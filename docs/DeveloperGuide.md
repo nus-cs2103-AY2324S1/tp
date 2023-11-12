@@ -488,7 +488,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `MediFlowR (MFR)` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a patient**
+**Use case 1 (UC1): Add a patient**
 
 **MSS**
 
@@ -512,7 +512,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Edit a patient**
+**Use case 2 (UC2): Edit a patient**
 
 **MSS**
 
@@ -542,7 +542,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Delete a patient**
+**Use case 3 (UC3): Delete a patient**
 
 **MSS**
 
@@ -560,7 +560,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: List all patients**
+**Use case 4 (UC4): List all patients**
 
 **MSS**
 
@@ -570,7 +570,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Search for a patient**
+**Use case 5 (UC5): Search for a patient**
 
 **MSS**
 
@@ -580,7 +580,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Search for a patient with a certain illness**
+**Use case 6 (UC6): Search for a patient with a certain illness**
 
 **MSS**
 
@@ -590,7 +590,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Add illness to a patient**
+**Use case 7 (UC7): Add illness to a patient**
 
 **MSS**
 
@@ -614,7 +614,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Remove illness from a patient**
+**Use case 8 (UC8): Remove illness from a patient**
 
 **MSS**
 
@@ -638,7 +638,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Sort patients**
+**Use case 9 (UC9): Sort patients**
 
 **MSS**
 
@@ -656,7 +656,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: Schedule an appointment**
+**Use case 10 (UC10): Schedule an appointment**
 
 **MSS**
 
@@ -686,7 +686,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Reschedule an appointment**
+**Use case 11 (UC11): Reschedule an appointment**
 
 **MSS**
 
@@ -716,7 +716,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Cancel an appointment**
+**Use case 12 (UC12): Cancel an appointment**
 
 **MSS**
 
@@ -734,7 +734,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: List all appointments**
+**Use case 13 (UC13): List all appointments**
 
 **MSS**
 
@@ -744,7 +744,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Sort appointments**
+**Use case 14 (UC14): Sort appointments**
 
 **MSS**
 
@@ -762,7 +762,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Search for appointment for a patient**
+**Use case 15 (UC15): Search for appointment for a patient**
 
 **MSS**
 
@@ -772,7 +772,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Toggle dark/light mode**
+**Use case 16 (UC16): Undo a command**
+
+**MSS**
+
+1.  User requests to undo previous command
+2.  MFR displays a confirmation message
+
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User has not executed any commands that are undo-able.
+
+    * 1a1. MFR shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case 17 (UC17): Redo a command**
+
+**MSS**
+
+1.  User requests to redo a command that was undone
+2.  MFR displays a confirmation message
+
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User has not undone any command.
+
+    * 1a1. MFR shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case 18 (UC18): Toggle dark/light mode**
 
 **MSS**
 
@@ -782,7 +818,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Clear Database**
+**Use case 19 (UC19): Clear Database**
 
 **MSS**
 
@@ -792,7 +828,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Ask For Help**
+**Use case 20 (UC20): Ask For Help**
 
 **MSS**
 
@@ -915,6 +951,8 @@ such that birthdates after the current date will not be considered a valid birth
 
 8. Currently, the find command only is able to find by name. We plan to add the functionality to find anything that 
 matches the given conditions that could be other variables of a patient or appointment such as range of birthdays.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
 
