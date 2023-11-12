@@ -110,21 +110,17 @@ between classes that represent parts of the visible GUI.
 **API:**
 [`Logic.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/logic/Logic.java)
 
-**Description:**
-
 The `Logic` component is responsible for handling the execution of commands so that the application book can be updated
 according to the user's instructions.
 
-**Functionality and Component Structure:**
-
 The following is a partial class diagram of the `Logic` component:
 
-<img src="/Users/jeremy/Documents/Y2S1/CS2103/tp/tp/docs/images/developer-guide/LogicClassDiagram.png" width="900"/>
+<img src="images/developer-guide/LogicClassDiagram.png" width="900"/>
 
 The following depicts the sequence of interactions within the `Logic` component taking `execute("delete 1")` API call as
 an example:
 
-<img src="/Users/jeremy/Documents/Y2S1/CS2103/tp/tp/docs/images/developer-guide/LogicSequenceDiagram.png" />
+<img src="images/developer-guide/LogicSequenceDiagram.png" />
 
 The Logic component,
 
@@ -136,13 +132,20 @@ The Logic component,
 * After making changes to the `Model`, the `Storage` is updated to reflect these changes.
 * The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-For more details about the parsing and command execution processes, refer to "[Implementation](#implementation)".
+The following are other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user
+command:
+
+<img src="images/developer-guide/ParserClasses.png"/>
+
+For more details about command-specific parsing and execution, refer to "[Implementation](#implementation)".
 
 ### Model Component
 
 ### Storage Component
 
 ### Common Classes
+
+Classes used by multiple components are in the `seedu.applicationbook.commons` package.
 
 ---
 
