@@ -157,7 +157,7 @@ class JsonAdaptedPerson {
 
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelHousing,
                     modelAvailability, modelAnimalName, modelAnimaltype, modelTags);
-            
+
         } catch (IllegalArgumentException e) {
             throw new IllegalValueException(e.getMessage());
         }
