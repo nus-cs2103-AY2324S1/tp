@@ -860,7 +860,6 @@ testers are expected to do more *exploratory* testing.
       `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
       **Note**:  The current AddressBook should contain a person named `John Poh`
       Expected: No person is added. Error details shown in the status message. List of persons remains the same.
-<<<<<<< HEAD
 
 ### Editing a person's score for an assessment type tag while all persons are being shown
 
@@ -952,8 +951,3 @@ Both Person List and Person Information Panel is updated to reflect the new `Int
     `filter t/Interview met/percentile` 
     **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
 
-=======
-   
->>>>>>> 1fcd4b497ace021a1030cfb22df9c31bb4a6a394
-
---------------------------------------------------------------------------------------------------------------------
