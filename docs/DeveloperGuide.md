@@ -428,25 +428,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                            | So that I can…​                                                                    |
-|----------|------------------|-------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| `* * *`  | new user         | see usage instructions                                                  | refer to instructions when I forget how to use the App                             |
-| `* * *`  | new user         | purge all existing sample data                                          | get rid of the experimental data when exploring the app                            |
-| `* * *`  | lazy tutor       | add students by name                                                    | include new students into our app                                                  |
-| `* * *`  | user             | delete a person                                                         | remove entries that I no longer need                                               |
-| `* * *`  | user             | find a student by name or subject                                       | locate details of persons without having to go through the entire list             |
-| `* * *`  | tutor            | update my students details as they progress through learning in remarks | keep track of their information e.g. test scores                                   |
-| `* * *`  | tutor            | quickly edit student details                                            | save time re-adding students if I have added the wrong details by accident         |
-| `* * *`  | flexible tutor   | edit my student’s lesson timings                                        | accommodate any changes in timing requested by them                                |
-| `* * *`  | private tutor    | install the app on my device with one click                             | use the app with ease without much trouble building the environment                |
-| `* * *`  | private tutor    | see a specific student’s data from the contact list                     | get a more concise and detailed view of the student                                |
-| `* *`    | user             | hide private contact details                                            | minimize chance of someone else seeing them by accident                            |
-| `* *`    | efficient tutor  | add lessons to my schedule quickly                                      | maximize my time usage                                                             |
-| `* *`    | tutor            | see my teaching schedule                                                | complete lesson preparation that is catered to the student before tuition sessions |                                                                                                                |                                                                                    |
-| `* *`    | efficient tutor  | filter lessons to view lessons on a specific dates                      | plan my activities with the free time that is not occupied by lessons.             |
-| `* *`    | tutor            | link students to a lesson                                               | prepare for the lesson according to the students' weaknesses and strengths.        |
-| `*`      | forgetful tutor  | include certain tasks to do for each lesson                             | remember to do them in preparation for the tuition lesson                          |
-| `*`      | regular app user | hide information that is not relevant to me currently                   | have a cleaner User Interface                                                      |
+| Priority | As a …​         | I want to …​                                                                  | So that I can…​                                                                               |
+|----------|-----------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `* * *`  | new user        | see usage instructions                                                        | refer to a user guide when I forget how to use the app                                        |
+| `* * *`  | new user        | purge all existing sample data                                                | get rid of the experimental data when exploring the app                                       |
+| `* * *`  | private tutor   | install the app on my device with one click                                   | use the app with ease without much trouble building the environment                           |
+| `* * *`  | private tutor   | add students by name only without having to include all their contact details | can keep tabs on potential students                                                           |
+| `* * *`  | user            | delete a student in the app's students list                                   | remove entries that I no longer need                                                          |
+| `* * *`  | user            | find a student by name                                                        | locate details of students without having to go through the entire list                       |
+| `* * *`  | tutor           | quickly edit student details                                                  | save time re-adding students if I have added the wrong details by accident                    |
+| `* * *`  | busy tutor      | add lessons that fits into my schedule quickly                                | ensure that the newly added lesson do not clash with existing tuition sessions in my schedule |
+| `* * *`  | flexible tutor  | edit my student’s lesson timings                                              | accommodate any changes in timing requested by them                                           |
+| `* * *`  | private tutor   | see a specific student’s data from the contact list                           | get a more concise and detailed view of the student                                           |
+| `* *`    | private tutor   | keep contact details of students hidden unless specified otherwise            | minimize the chances of someone else seeing them by accident                                  |
+| `* *`    | tutor           | see my teaching schedule                                                      | complete lesson preparation before the upcoming tuition sessions                              |                                                                                                                |                                                                                    |
+| `* *`    | efficient tutor | filter lessons to view lessons on or after a specific date                    | plan my activities with the free time that is not occupied by lessons                         |
+| `* *`    | tutor           | link a student to a lesson                                                    | prepare for the lesson according to the student's weaknesses and strengths                    |
+| `* *`    | forgetful tutor | see all the planned lessons with a student                                    | plan for additional lessons with the student                                                  |
+| `* *`    | tutor           | update my students' details as they progress through learning in remarks      | keep track of their information like test scores and learning styles                          |
+| `*`      | forgetful tutor | include certain tasks to do for each lesson                                   | remember to do them in preparation for each lesson                                            |
+| `*`      | busy user       | see all the tasks for all my tuition sessions at a glance                     | I know how many tasks I have yet to complete in preparation for all my tuition sessions       |
 
 
 
@@ -454,29 +455,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `TutorMate` and the **Actor** is the `Tutor`, unless specified otherwise)
 
-### Use case: Install the app [UC01]
 
-**MSS**
-1. User executes the installation package
-2. The app asks to continue or cancel the installation
-3. User responds by indicating continue
-4. The app installs the app
-5. The app informs the user that the installation is successful
-Use Case ends
-
-**Extensions**
-* 3a. User responds by indicating cancel
-  * 3a1. The app closes the installation package
-  * Use case ends
-
-* 4a. An error occurs during installation
-  * 4a1. The app informs the user that the installation is unsuccessful and displays reasons
-  * Use case ends
-
-### Use case: Add a student [UC02]
-
-**Preconditions**
-1. User has installed the app
+### Use case: Add a student [UC01]
 
 **MSS**
 1. User chooses to add a new student.
@@ -489,30 +469,30 @@ Use Case ends
 * 2a. Student's name is not specified and / or details specified are incorrect.
   * 2a1. The app informs the user of the error.
   * 2a2. The user enters new data.
-  * Use case resumes from step 2.
+  <br> Use case resumes from step 2.
 
 
-### Use case: Delete a student [UC03]
+### Use case: Delete a student [UC02]
 
 **MSS**
 
 1. User requests to list students.
-2. TutorMate shows a list of persons.
-3. User requests to delete a specific person in the list.
+2. TutorMate shows a list of students.
+3. User requests to delete a student in the list.
 4. TutorMate deletes the person.
 
 Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty (No students in student list).
-      Use case ends.
+* 2a. The list is empty (no students in student list).
+  <br> Use case ends.
 * 3a. The given index is invalid.
   * 3a1. TutorMate shows an error message. 
-  Use case resumes at step 2.
+  <br> Use case resumes at step 2.
 
 
-### Use case: Show a student [UC04]
+### Use case: Show a student [UC03]
 
 **MSS**
 
@@ -525,29 +505,29 @@ Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty (No students found).
-  Use case ends.
+* 2a. The list is empty (no students in student list).
+  <br> Use case ends.
 * 3a. The given index is invalid.
     * 3a1. TutorMate shows an error message.
-      Use case resumes at step 2.
+    <br>  Use case resumes at step 2.
 
 
-### Use case: Find & see a student with their details [UC05]
+### Use case: Find & see a student with their details [UC04]
 
 **MSS**
 1. User requests to find a student by a specific characteristic e.g. Name.
 2. TutorMate shows a list of students that matches the user's input.
-3. User <u>shows a student (UC04)</u>
+3. User <u>shows a student (UC03)</u>
 
-Use Case ends
+Use Case ends.
 
 **Extensions**
 
-* 2a. The list is empty (No students found that matches the user's input).
+* 2a. The list is empty (no students found that matches the user's input).
   <br> Use case ends.
 
 
-### Use case: Edit a student's details [UC06]
+### Use case: Edit a student's details [UC05]
 
 **MSS**
 1. User requests to list students.
@@ -555,20 +535,20 @@ Use Case ends
 3. User chooses to edit a student and enters the data.
 4. TutorMate edits the student's details.
 
-Use Case ends
+Use Case ends.
 
 **Extensions**
 
 * 3a. Some details are incorrect/ overlapping with existing app data.
     * 3a1. The app informs the user of the error.
     * 3a2. The user enters new data.
-    * Use case resumes from step 3.
+  <br> Use case resumes from step 3.
 * 3b. The given index is invalid.
     * 3b1. The app informs the user of the error.
     * 3b2. The user enters new data.
-    * Use case resumes from step 3.
+  <br> Use case resumes from step 3.
 
-### Use case: Add a lesson [UC07]
+### Use case: Add a lesson [UC06]
 
 **MSS**
 1. User requests to list schedule.
@@ -576,16 +556,16 @@ Use Case ends
 3. User enters the required details to create a lesson.
 4. TutorMate creates the lesson.
 
-Use Case ends
+Use Case ends.
 
 **Extensions**
 
 * 3a. Lesson's name is not specified and / or details specified are incorrect.
     * 3a1. The app informs the user of the error.
     * 3a2. The user enters new data.
-    * Use case resumes from step 3.
+  <br>Use case resumes from step 3.
 
-### Use case: Add a task to a lesson [UC08]
+### Use case: Add a task to a lesson [UC07]
 
 **MSS**
 1. User requests to list schedule.
@@ -593,22 +573,22 @@ Use Case ends
 3. User enters the required details to create a task to a lesson.
 4. TutorMate creates the task in the task list of the lesson.
 
-Use Case ends
+Use Case ends.
 
 **Extensions**
 
-* 2a. The list is empty (No lessons in schedule list).
-    Use case ends.
+* 2a. The list is empty (no lessons in schedule list).
+   <br> Use case ends.
 * 3a. Description details are missing/ overlapping with existing app data.
     * 3a1. The app informs the user of the error.
     * 3a2. The user enters new data.
-    * Use case resumes from step 3.
+  <br>Use case resumes from step 3.
 * 3b. The given index is invalid.
     * 3b1. The app informs the user of the error.
     * 3b2. The user enters new data.
-    * Use case resumes from step 3.
+  <br>Use case resumes from step 3.
 
-### Use case: Delete a task to a lesson [UC09]
+### Use case: Delete a task to a lesson [UC08]
 
 **MSS**
 1. User requests to list schedule.
@@ -622,35 +602,55 @@ Use Case ends.
 
 **Extensions**
 
-* 2a. The list is empty (No lessons in schedule list).
-  Use case ends.
+* 2a. The list is empty (no lessons in schedule list).
+  <br>Use case ends.
 * 3a. The given lesson index is invalid.
     * 3a1. The app informs the user of the error.
-    * 3a2. The user enters new data.
-    * Use case resumes from step 3.
+    * 3a2. The user enters new data. 
+  <br>Use case resumes from step 3.
 * 5a. The given task index is invalid.
-    * 3a1. The app informs the user of the error.
-    * 3a2. The user enters new data.
-    * Use case resumes from step 5.
+    * 5a1. The app informs the user of the error.
+    * 5a2. The user enters new data.
+  <br>Use case resumes from step 5.
+* 5b. The task list is empty (no tasks in the task list of the lesson).
+  <br>Use case ends.
 
 
 ### Non-Functional Requirements
 
 1.  Should work on any Windows, Linux, and MacOs as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable(> 1 second) sluggishness in performance for typical usage.
+
+2.  Should be able to hold up to: 
+   * 1000 persons without a noticeable(> 1 second) sluggishness in performance for typical usage.
+   * 1000 lessons without a noticeable(> 1 second) sluggishness in performance for typical usage.
+   * a total of 1000 tasks without a noticeable(> 1 second) sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The application should respond and load all data within three seconds.
-5.  The response time for adding, updating, or deleting student records should be within two seconds.
-6.  The system should be usable with a user interface that is intuitive enough for users who have not used similar applications before.
-7.  Users will only have access to their own students' data.
-8.  Should there be an irregular termination of the app, the data should not be corrupted.
-9.  The app should respond to user text input within 0.2 second.
+
+4. The application should respond and load all data within three seconds.
+  
+5. The response time for adding, updating, or deleting student and lesson records should be within two seconds.
+ 
+6. The system should be usable with a user interface that is intuitive enough for users who have not used similar applications before.
+
+7. Users will only have access to their own students' data.
+
+8. Should there be an irregular termination of the app, the data should not be corrupted.
+ 
+9. The app should respond to user text input within 0.2 second.
+ 
+10. Data should be stored locally.
+
+11. The application is not expected to:
+    1. Perform analysis of students' academic performance.
+    2. Send real-time notifications when there is an upcoming lesson.
+    3. Delete lessons that are past the current date automatically.
 
 
 
 
 ### Glossary
 
+* * **GUI**: Abbreviation for graphical user interface, which allow user to interact with with the application via graphical components such as icons, buttons, and menus.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
@@ -666,39 +666,143 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### Launch and Shutdown
 
-1. Initial launch
+* Initial Launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases) and copy it into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tutormate.jar` command to run the application.<br>
 
-1. Saving window preferences
+   3. Expected: A GUI similar to the picture below should appear in a few seconds. The app will contain some sample data.<br>
+       ![Ui](images/about.png)
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+* Shutdown
+    1. Click on the cross at the top of the window.
+       * MacOs: Red cross button at top left side of the window.
+       * Windows & Linux: Cross button at the top right side of the window.
+       <br>
+       <br>
+    2. Expected: The application window disappears. 
+  <br>
+  <br>
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+* Subsequent Launches
+
+    1. Relaunch the application by `cd` into the folder with `tutormate.jar`.
+
+    2. Use the `java -jar tutormate.jar` command to run the application.
+
+    3. Expected: ___SCHEDULE list___ of lessons similar to the list panel in the picture shown above. The data in the application should be the same as the data in the application before it was shut down previously.
+
+* Saving Window Preferences
+
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+
+    2. Re-launch the application by using the `java -jar tutormate.jar` command.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Basic Usage
+
+* The app is split into 3 states:
+    1. ___STUDENTS list___
+       ![list STUDENTS](images/list/list_student_positive.png)
+
+    2. ___SCHEDULE list___ (default)
+       ![list SCHEDULE](images/list/list_schedule_positive.png)
+
+    3. ___TASKS list___
+       ![list TASKS](images/list/list_tasks_positive.png)
+
+* Each state has its associated features, while certain features work with all states but has differing functionalities.
+* The ___STUDENTS list___ handles student details management, ___SCHEDULE list___ handles lessons, scheduling and the tasks for each lesson while the full ___TASKS list___ is a view to display all tasks.
+* The _GUI_ <sup>[1](#glossary)</sup> has several main components (see _GUI_ <sup>[2](#glossary)</sup> image below):
+    * The command box is for users to enter and execute commands.
+    * The response box is to display responses for command execution, to indicate success or errors.
+    * The left side has the list panel, which shows different list types (student, schedule, tasks).
+    * The right side has the details panel, which shows details of any specific item in the list.
+      ![Ui](images/Ui.png)
+
+### Adding a person
+
+Adding a person in ___STUDENTS list___.
+
+   1. Prerequisites: List all students using the `list students` command. There is currently no student with the name "Leah", "Riley" and "Max".
+
+   2. Test case: `addPerson -name Leah -phone 88888888 -subject biology -remark new student -tag new`<br>
+      Expected: A new student is added, with name "Leah", phone "88888888", subject "BIOLOGY", remark "new student" and tag "new". The details of the added student is shown in the response box.
+
+   3. Test case: `add -name Riley -phone 81818181` <br>
+      Expected: A new student is added, with name "Riley" and phone "81818181". The details of the added student is shown in the response box.
+
+   4. Test case: `addPerson -name Lea_h -phone 88888888 -subject biology -remark new student -tag new`<br>
+      Expected: No student is added. Error indicating invalid format with the name constraints shown in the response box.
+
+   5. Test case: `addPerson -name Max -phone abcdefg` <br>
+      Expected: No student is added. Error indicating invalid format with the phone number constraints shown in the response box.
+
+   6. Test case: `addPerson` <br>
+         Expected: No student is added. Error indicating invalid format and flag name not found shown in the response box.
+
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+Deleting a person in ___STUDENTS list___.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: There are more than 2 students in the displayed ___STUDENTS list___.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `deletePerson 1`<br>
+      Expected: First student is deleted from the list. Details of the deleted student is shown in the response box. 
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 1` <br>
+      Expected: First student is deleted from the list. Details of the deleted student is shown in the response box.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   4. Test case: `deletePerson 0`<br>
+      Expected: No student is deleted. Error indicating index input cannot be zero is shown in the response box.
 
-1. _{ more test cases …​ }_
+   5. Test case: `deletePerson -1` <br>
+      Expected: No student is deleted. Error indicating index input cannot be negative is shown in the response box.
+   
+   6. Test case: `deletePerson` <br>
+      Expected: No student is deleted. Error indicating invalid command format is shown in the response box.
+
+### Adding a lesson
+
+Adding a lesson in ___SCHEDULE list___.
+
+1. Prerequisites: 
+    * List all lessons using the `list` command.
+    * There is currently no lessons with the name "Chemistry Lesson at Bedok" and "Biology Lesson at Tai Seng".
+    * There are no existing lessons from 12 December 2023 to 15 December 2023 in the application.
+    * There is an existing lesson on 11 December 2023 from 11:00 AM to 1:00 PM.
+
+2. Test case: `addLesson -name Chemistry Lesson at Bedok -day 2023/12/12 -subject chemistry -start 11:00 -end 13:30`<br>
+   Expected: A new lesson is added, with name "Chemistry Lesson at Bedok" from 11:00 AM to 1:30 PM on "2023/12/12" with subject "CHEMISTRY". The details of the added lesson is shown in the response box.
+
+3. Test case: `addLesson -name Biology Lesson at Tai Seng -day 2023/12/13 -start 15:00 -end 14:00`<br>
+   Expected: No lesson is added. Error indicating invalid lesson format and that the end time cannot be before start time is shown in the response box.
+
+4. Test case: `addLesson -name Biology Lesson at Tai Seng -day 2023/12/11 -start 12:00 -end 14:00`<br>
+   Expected: No lesson is added. Error indicating existing lesson clashes with lesson to be added with the details of the existing lesson in the schedule shown in the response box.
+
+### Deleting a lesson
+
+Deleting a lesson in ___SCHEDULE list___.
+
+1. Prerequisites: There are more than 5 and less than 80 students in the displayed list ___SCHEDULE list___.
+
+2. Test case: `deleteLesson 1`<br>
+   Expected: First lesson is deleted from the list. Details of the deleted lesson is shown in the response box.
+
+3. Test case: `delete 3` <br>
+   Expected: Third lesson is deleted from the list. Details of the deleted lesson is shown in the response box.
+
+4. Test case: `deleteLesson 80`<br>
+   Expected: No lesson is deleted. Error indicating index input is out of bounds and the acceptable range is shown in the response box.
+
+5. Test case: `deletePerson` <br>
+   Expected: No student is deleted. Error indicating invalid command format is shown in the response box.
+
 
 ### Saving data
 
