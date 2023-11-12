@@ -81,6 +81,7 @@ public class TypicalPatient {
             .withRemark(VALID_REMARK_BOB).withCondition(VALID_CONDITION_BOB).withBloodType(VALID_BLOODTYPE_BOB)
             .withTags(VALID_TAG_MEDIUM).build();
 
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPatient() {
