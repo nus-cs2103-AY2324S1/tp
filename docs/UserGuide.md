@@ -454,9 +454,8 @@ UNOFAS data are saved in the hard disk automatically after any command that chan
 UNOFAS data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, UNOFAS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
-
-Changing the `appointment` date to an invalid month (e.g. 13-13-2023) will cause an error and UNOFAS will not run. However, changing it to an invalid day (e.g. 31-02-2023), UNOFAS will update this date to the closest correct date (e.g. 28-02-2023). 
+If your changes to the data file makes its format invalid, UNOFAS will discard all data and start with an empty data file at the next run. 
+Certain edits to the file may also cause unexpected behaviours. Please only edit the file if you are confident that it is correct, and it is recommended to take a backup of the file before editing it.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
