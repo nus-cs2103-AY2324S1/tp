@@ -8,14 +8,37 @@
 
 Welcome to Tutorium! Tutorium is a **desktop application for tuition centre administrative staff** to conduct data analysis for the planning of marketing strategies. Users can interact with it using a Command Line Interface (CLI).
 
-Currently, Tutorium supports administrative work relating to students from Secondary 1 to Secondary 4, under the O-Level and IP systems in Singapore.
+Tutorium supports administrative work relating to students from Secondary 1 to Secondary 4, under the O-Level and IP systems in Singapore.
+
+In this user guide, you will find instructions on how to install Tutorium and use its many features to manage and make use of the students' data.
+
+Choose a topic from the table of contents below to find out how to use Tutorium!
+
+--------------------------------------------------------------------------------------------------------------------
+
+# How to Use This User Guide
+
+1. This user guide consists of four main sections, namely Quick Start, Features, FAQ, Known Issues and Command Summary.
+   1. Quick Start: Guide you to set up Tutorium.
+   2. Features: Guide for using Tutorium features.
+   3. FAQ: List of frequently asked questions.
+   4. Known Issues: Issues that currently exist which the developer will fix.
+   5. Command Summary: A summary of all available commands.
+
+1. By clicking the link in Table of Contents, you will be directed to the details of the section you're interested in.
+
+1. By clicking the [↑ Back to table of contents] at the bottom of each section, you will be directed back to the table of contents.
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Table of Contents
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your computer.
 
@@ -23,10 +46,10 @@ Currently, Tutorium supports administrative work relating to students from Secon
 
 1. Copy the file to the folder you want to use as the _home folder_ for the Tutorium app.
 
-1. Open a command terminal. If you are using Windows, press the Windows key + R on your keyboard, type `cmd` and press Enter. 
+1. Open a command terminal. If you are using Windows, press the Windows key + R on your keyboard, type `cmd` and press Enter.
 If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in the search field, and then click Terminal.
 
-1. `cd` into the folder you put the `tutorium.jar` file in. For example, if you put it in a folder named `Tutorium`, then type this command into the terminal: `cd Tutorium`
+1. "Go into" the folder you put the `tutorium.jar` file in using cd command. For example, if you put it in a folder named `Downloa`, then type this command into the terminal: `cd Tutorium`
 
 1. Key the `java -jar tutorium.jar` command in the terminal to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
@@ -63,10 +86,10 @@ If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in 
   e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times), `s/English`, `s/English s/Chinese` etc.
 
 * When providing parameters starting with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)` to fields,
-  users should not add spaces between the prefix for that field and the input value. 
+  users should not add spaces between the prefix for that field and the input value.
   e.g. Filtering students with the address `e/house` should be done with the command `filter a/e/house` rather than `filter a/ e/house`.
 
-* Parameters containing words (other than the first word) that start with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)` 
+* Parameters containing words (other than the first word) that start with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)`
   are not accepted in Tutorium.
 
 * Parameters can be in any order.<br>
@@ -89,7 +112,9 @@ If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
-### Viewing help : `help`
+[↑ Back to table of contents](#table-of-contents)
+
+### View help : `help`
 
 Displays the URL for the User Guide.
 
@@ -97,8 +122,9 @@ Displays the URL for the User Guide.
 
 Format: `help`
 
+[↑ Back to table of contents](#table-of-contents)
 
-### Adding a student's data: `add`
+### Add a student's data: `add`
 
 Adds a student's data to the address book.
 
@@ -110,7 +136,9 @@ Examples:
   <br>
   ![result for 'add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Mathematics'](images/ug_images/addedResult.png)
 
-### Importing data from .csv file: `import`
+[↑ Back to table of contents](#table-of-contents)
+
+### Import data from .csv file: `import`
 
 Imports students' data into Tutorium.
 1. Move your .csv file into the folder containing Tutorium.
@@ -133,8 +161,9 @@ Examples:
   <br>
   ![result for 'import student_data.csv'](images/ug_images/importResult.png)
 
+[↑ Back to table of contents](#table-of-contents)
 
-### Editing a student's data : `edit`
+### Edit a student's data : `edit`
 
 Edits an existing student's data in the address book.
 
@@ -151,7 +180,9 @@ Examples:
    <br>
    ![result for 'edit John Doe n/Joe'](images/ug_images/editedResult.png)
 
-### Searching for data : `search`
+[↑ Back to table of contents](#table-of-contents)
+
+### Search for data : `search`
 
 Search for people whose names contain the given keyword.
 
@@ -168,7 +199,9 @@ Examples:
   <br>
   ![result for 'search Lee'](images/ug_images/searchResult.png)
 
-### Deleting data : `delete`
+[↑ Back to table of contents](#table-of-contents)
+
+### Delete data : `delete`
 
 Deletes data of a specified student.
 
@@ -183,6 +216,8 @@ Examples:
   <br>
   ![result for 'delete John Doe'](images/ug_images/deletedResult.png)
 
+[↑ Back to table of contents](#table-of-contents)
+
 ### Update sec level : `uplevel`, `undolevel`
 
 - `uplevel` : update the sec levels for all students and remove all sec level 4 students.
@@ -196,7 +231,6 @@ Examples:
 * That means after doing `uplevel`, followed by any other `edit`, `add` or `delete` commands etc and then do `undolevel`, the commands in between will be invalid because the students records are reverted back to before the previous `uplevel`.
 * `undolevel` can be performed only when there is / are `uplevel` performed (and has not been undone) since user open application.
 
-
 Examples: `uplevel`, `undolevel`
 
   ![before entering 'uplevel'](images/ug_images/beforeUpdate.png)
@@ -205,7 +239,9 @@ Examples: `uplevel`, `undolevel`
 
   ![after entering 'undolevel'](images/ug_images/undoUpdate.png)
 
-### Filtering data : `filter`
+[↑ Back to table of contents](#table-of-contents)
+
+### Filter data : `filter`
 
 Shows the list of students data that fulfills all given conditions.
 
@@ -222,7 +258,9 @@ Examples:
   <br>
   ![result for 'filter Physics'](images/ug_images/filterResult.png)
 
-### Sorting data : `sort`
+[↑ Back to table of contents](#table-of-contents)
+
+### Sort data : `sort`
 
 Sort the list of students data by name.
 
@@ -234,20 +272,17 @@ Examples:
 * `sort in/ASC` <br>
   ![result for 'sort in/ ASC'](images/ug_images/sortedResult.png)
 
+[↑ Back to table of contents](#table-of-contents)
 
-### Clearing all entries : `clear`
+### Clear all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+[↑ Back to table of contents](#table-of-contents)
 
-Exits the program.
-
-Format: `exit`
-
-### Showing statistical table
+### Show statistical table
 Showing a table either categorized by gender, sec level or subject.
 
 Format: `table PREFIX`
@@ -263,7 +298,9 @@ Examples:
 * `table s/` will show a table categorized by student subject.
 * `table d/2023` will show a table categorized by months in year 2023.
 
-### Showing bar chart
+[↑ Back to table of contents](#table-of-contents)
+
+### Show bar chart
 Showing a bar chart either categorized by gender, sec level or subject.
 
 Format: `bar PREFIX`
@@ -284,7 +321,9 @@ Below is the chart generated after entering `bar l/`.
 
   ![result for 'bar l/'](images/ug_images/barResult.png)
 
-### Showing line chart
+[↑ Back to table of contents](#table-of-contents)
+
+### Show line chart
 Showing a line chart describing number of students enrolled in each month in a specific year.
 
 Format: `trend y/YEAR`
@@ -299,6 +338,8 @@ in each month in year 2023.
 
 Below is the chart generated after typing `trend y/2023`
    ![result for 'trend y/2023'](images/ug_images/trendResult.png)
+
+[↑ Back to table of contents](#table-of-contents)
 
 ### Export visual representation : `export`
 
@@ -315,11 +356,23 @@ Format: `export v/VISUAL`
 Examples:
 * `export v/TABLE` <br>
 
-### Saving the data
+[↑ Back to table of contents](#table-of-contents)
+
+### Exit program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+[↑ Back to table of contents](#table-of-contents)
+
+### Save data
 
 Tutorium data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+[↑ Back to table of contents](#table-of-contents)
+
+### Edit data file
 
 Tutorium data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -329,9 +382,37 @@ Tutorium data are saved automatically as a JSON file `[JAR file location]/data/a
 If your changes to the data file makes its format invalid, Tutorium will discard all data and start with an empty data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.
 </box>
 
-### Archiving data files `[coming in v2.0]`
+[↑ Back to table of contents](#table-of-contents)
+
+### Archive data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+[↑ Back to table of contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Command Summary
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help**   | `help`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT STATION [s/SUBJECT]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/Chemistry`
+**Import** | `import FILENAME.csv`<br> e.g., `import student_data.csv`
+**Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
+**Search** | `search [KEYWORD]`<br> e.g., `search Lee`
+**Delete** | `delete INDEX`<br> or `delete NAME` <br> e.g., `delete Joe`
+**Update** | `uplevel`<br> or `undolevel` <br>
+**Filter** | `filter prefix/FIELD_VALUE [MORE FIELDS]` <br> e.g., `filter g/F s/English s/Physics`
+**Sort**   | `sort in/[DESCRIPTION]` <br> e.g., `sort in/ASC`
+**Clear**  | `clear`
+**Show Table** | `table prefix/`<br> or `table d/YEAR` <br>
+**Show Bar Chart** | `bar prefix/`<br> or `bar d/YEAR` <br>
+**Show Line Chart** | `trend y/{year}`
+**Export**   | `export v/VISUAL` <br> e.g., `export v/table`
+**Exit**   | `exit`
+
+[↑ Back to table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -340,28 +421,12 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer. Next, overwrite the data file created on launching the app with the file containing your Tutorium data.
 
+[↑ Back to table of contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT STATION [s/SUBJECT]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/Chemistry`
-**Import** | `import FILENAME.csv`<br> e.g., `import student_data.csv`
-**Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
-**Search** | `search [KEYWORD]`<br> e.g., `search Lee`
-**Delete** | `delete INDEX`<br> or `delete NAME` <br> e.g., `delete Joe`
-**Update** | `uplevel`<br> or `undolevel` <br>
-**Filter** | `filter prefix/FIELD_VALUE [MORE FIELDS]` <br> e.g., `filter g/F s/English s/Physics`
-**Sort**   | `sort in/ [DESCRIPTION]` <br> e.g., `sort in/ ASC`
-**Clear**  | `clear`
-**Show Table** | `table prefix/`<br> or `table d/YEAR` <br>
-**Show Bar Chart** | `bar prefix/`<br> or `bar d/YEAR` <br>
-**Show Line Chart** | `trend y/{year}`
-**Help**   | `help`
+[↑ Back to table of contents](#table-of-contents)
