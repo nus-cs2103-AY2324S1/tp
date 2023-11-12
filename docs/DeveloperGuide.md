@@ -225,6 +225,17 @@ then set it to unfiltered again.
 2. This updates the model via its `updateFilteredMemberList()` or `updateFilteredApplicantList()` method which is called with its predicate as always returning true. 
 3. All members/applicants in the address book are shown to the user in the members/applicants list.
 
+The diagram below describes the behaviour of viewing an applicant in the `AddressBook`, the execution of viewing a member
+the `AddressBook` is almost identical.
+
+<img src="images/ViewApplicantActivityDiagram.png">
+
+The sequence diagram below also shows the interaction between the various components during the execution of the
+`ViewApplicantCommand`. The execution of the `ViewMembersCommand` is almost identical, except that it uses the
+`Member` class instead of the `Applicant` class.
+
+<img src="images/ViewApplicantCommandSequenceDiagram.png">
+
 ### Delete a `Member`/`Applicant`
 
 Deletes an existing `Member`/ `Applicant` indentified by their `MEMBER_INDEX`/`APPLICANT_INDEX` in the displayed member/applicant list.

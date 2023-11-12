@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewApplicantCommandParser" as ViewApplicantCommandParser LOGIC_COLOR
+participant "v:ViewApplicantCommand" as ViewApplicantCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("viewa 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("viewa 1)
+activate AddressBookParser
+
+create ViewApplicantCommandParser
+AddressBookParser -> ViewApplicantCommandParser
+activate ViewApplicantCommandParser
+
+ViewApplicantCommandParser --> AddressBookParser
+deactivate ViewApplicantCommandParser
+
+AddressBookParser -> ViewApplicantCommandParser : parse("1")
+activate ViewApplicantCommandParser
+
+create ViewApplicantCommand
+ViewApplicantCommandParser -> ViewApplicantCommand
+activate ViewApplicantCommand
+
+ViewApplicantCommand --> ViewApplicantCommandParser : v
+deactivate ViewApplicantCommand
+
+ViewApplicantCommandParser --> AddressBookParser : v
+deactivate ViewApplicantCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewApplicantCommandParser -[hidden]-> AddressBookParser
+destroy ViewApplicantCommandParser
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> ViewApplicantCommand : execute()
+activate ViewApplicantCommand
+
+ViewApplicantCommand -> Model : updateFilteredMemberList()
+activate Model
+
+Model --> ViewApplicantCommand
+deactivate Model
+
+create CommandResult
+ViewApplicantCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewApplicantCommand : result
+deactivate CommandResult
+
+ViewApplicantCommand --> LogicManager : result
+deactivate ViewApplicantCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
