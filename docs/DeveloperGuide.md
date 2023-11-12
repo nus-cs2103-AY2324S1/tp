@@ -632,15 +632,15 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding Dates
 
-1. Adding an Date
+1. Adding a Date
     * Type the following add command into the text field.<br>
       `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000`
     * Press enter.
-    * Expected: The GUI shows the added Date in the LoveBook.
+    * Expected: The GUI shows the added date in the LoveBook.
 
 ### Best Match Dates
 
-1. Getting the best match using your Date Preferences
+1. Getting the best match using your Date Preferences [Ensure that you have added at least 1 Date]
     * Type the following best match command into the text field.<br>
       `bestMatch`
     * Press enter.
@@ -652,7 +652,7 @@ testers are expected to do more *exploratory* testing.
     * Type the following clear command into the text field.<br>
       `clear`
     * Press enter.
-    * Expected: The GUI shows no Dates in the LoveBook.
+    * Expected: The GUI shows no dates in the LoveBook.
 
 ### Deleting Dates
 
@@ -660,12 +660,12 @@ testers are expected to do more *exploratory* testing.
     * Type the following delete command into the text field.<br>
       `delete 1`
     * Press enter.
-    * Expected: The date the specified Index is removed from LoveBook in the GUI.
+    * Expected: The date the specified index is removed from LoveBook.
 
 ### Editing Dates
 
 1. Editing a Date by index
-    * Type the following edit elderly command into the text field.<br>
+    * Type the following edit date command into the text field.<br>
       `edit 3 horoscope/Cancer name/Cleon`
     * Press enter.
     * Expected: The GUI shows the new fields for the Date at the specified index. (Sequence doesn't matter)
@@ -676,32 +676,32 @@ testers are expected to do more *exploratory* testing.
     * Type the following find command into the text field.<br>
       `find John`
     * Press enter.
-    * Expected: The Date with name in the find command.
+    * Expected: The date with specified name shown.
 
-1. Finding Dates by multiple names
+2. Finding Dates by multiple names
     * Type the following find command into the text field.<br>
       `find John Cleon`
     * Press enter.
-    * Expected: The Dates with names in the find command.
+    * Expected: The dates with the specified names shown.
 
-1. Listing all Dates
+3. Listing all Dates
     * Type the following list command into the text field.<br>
       `list`
     * Press enter.
-    * Expected: The GUI shows all Dates in LoveBook.
+    * Expected: The GUI shows all dates in LoveBook.
 
 ### Filtering Dates
 
 1. Filtering Dates by metric (e.g. name, age, height)
     * Type the following filter command into the text field.<br>
-      `filter age/John`
+      `filter age/19`
     * Press enter.
-    * Expected: The GUI shows the Dates with age in the filter command.
+    * Expected: The GUI shows all dates with age 19 in LoveBook.
 
 ### Finding a Blind Date
 
-1. Finding a Blind Date
-    * Type the following random command into the text field.<br>
+1. Finding a Blind Date [Ensure that you have added at least 1 Date]
+    * Type the following command into the text field.<br>
       `blindDate`
     * Press enter.
     * Expected: The GUI shows a blind date in LoveBook.
