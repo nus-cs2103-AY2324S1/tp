@@ -54,7 +54,7 @@ public class AddTeamCommandParserTest {
 
     }
     @Test
-    public void parser_noFieldsPresent_failture() {
+    public void parser_noFieldsPresent_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTeamCommand.MESSAGE_USAGE);
         assertParseFailure(parser, VALID_TEAM_TEAM3 + VALID_NAME_FIONA,
                 expectedMessage);
