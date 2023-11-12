@@ -277,6 +277,12 @@ The following sequence diagram shows how the flow of the example execution:
 
 <puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
 
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddPersonCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
 #### Design considerations:
 
 **Aspect: How to structure app to work with the 3 main modes:**
