@@ -261,6 +261,20 @@ The displayed contact list is always automatically sorted in ascending alphabeti
 
 Your contacts get automatically saved to the file system after each successful command execution. There is no need to save manually.
 
+### Editing the data file
+
+ConText data are saved automatically as a JSON file `[JAR file location]/data/contacts.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, ConText will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+</div>
+
+---
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ConText home folder.
+
 ---
 
 ## Command summary
