@@ -152,7 +152,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Selected Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -649,25 +649,29 @@ required to read long error messages with details that might be irrelevant to th
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                  | I want to …                                                                                   | So that I can…                                                                                                   |
-|----------|-------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | foster manager          | delete a fosterer from the list when they want to stop fostering with us                      | update the list to see the fosterers who are currently in our program                                            |
-| `* * *`  | foster manager          | delete multiple fosterers at once                                                             | perform mass deletions quickly                                                                                   |
-| `* * *`  | foster manager          | add each fosterer's details efficiently                                                       | know how to contact the fosterer should I have animals that require fostering                                    |
-| `* * *`  | foster manager          | provide details of the fostered animal of concern to the fosterer                             | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for |
-| `* * *`  | foster manager          | update a fosterer's details                                                                   | keep track of fosterer's most up-to-date information, including information about the animal fostered            |
-| `* * *`  | foster manager          | search for a specific animal / fosterer’s detail  instead of browsing through the entire list | be more productive when searching for suitable fosterers for the animal that needs fostering                     |
-| `* * *`  | foster manager          | to be aware of the address of the fosterer                                                    | conduct checks on the fosterer to ensure the animal is well taken care of                                        |
-| `* * *`  | foster manager          | retrieve the information about the foster family                                              | provide the necessary information to the Nparks authorities for audit                                            |
-| `* * *`  | foster manager          | sort the list of fosterers alphabetically                                                     | have a neater, and more organised view of all the fosterers                                                      |
-| `* * * ` | foster manager          | know the distribution of the different housing types among fosterers                          | correctly allocate the animals to foster homes that are able to accommodate them                                 |
-| `* * *`  | foster manager          | obtain statistics about the currently available fosterers                                     | better estimate shelter capacity                                                                                 |
-| `* * `   | foster manager          | have the fosterer’s important information collated neatly                                     | get all the information I need with one glance                                                                   |
-| `* * `   | foster manager          | have an easily accessible and visible help button                                             | get help when I am unsure of what command to use                                                                 |
-| `* * `   | foster manager          | undo my previous command                                                                      | quickly resolve errors caused by the erroneous command                                                           |
-| `* *`    | new foster manager      | have my initial data file pre-populated with sample data                                      | work with this sample data as an introduction to the app                                                         |
-| `* *`    | new foster manager      | purge all current data from address book                                                      | remove all sample/ experimental data I used to explore the app                                                   |
-| `* *`    | careless foster manager | be asked to confirm my decision before purging all fosterer data                              | prevent myself from accidentally deleting all fosterer records                                                   |
+| Priority  | As a …                  | I want to …                                                                                    | So that I can…                                                                                                                                  |
+|-----------|-------------------------|------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`   | foster manager          | delete a fosterer from the list when they want to stop fostering with us                       | update the list to see the fosterers who are currently in our program                                                                           |
+| `* * *`   | foster manager          | delete multiple fosterers at once                                                              | perform mass deletions quickly                                                                                                                  |
+| `* * *`   | foster manager          | add each fosterer's details efficiently                                                        | know how to contact the fosterer should I have animals that require fostering                                                                   |
+| `* * *`   | foster manager          | provide details of the fostered animal of concern to the fosterer                              | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for                                |
+| `* * *`   | foster manager          | update a fosterer's details                                                                    | keep track of fosterer's most up-to-date information, including information about the animal fostered                                           |
+| `* * *`   | foster manager          | search for a specific animal / fosterer’s detail  instead of browsing through the entire list  | be more productive when searching for suitable fosterers for the animal that needs fostering                                                    |
+| `* * *`   | foster manager          | to be aware of the address of the fosterer                                                     | conduct checks on the fosterer to ensure the animal is well taken care of                                                                       |
+| `* * *`   | foster manager          | retrieve information about the foster family                                                   | provide the necessary information to the Nparks authorities for audit                                                                           |
+| `* * *`   | foster manager          | sort the list of fosterers alphabetically                                                      | have a neater, and more organised view of all the fosterers                                                                                     |
+| `* * * `  | foster manager          | know the distribution of the different housing types among fosterers                           | correctly allocate the animals to foster homes that are able to accommodate them                                                                |
+| `* * *`   | foster manager          | obtain statistics about the currently available fosterers                                      | better estimate shelter capacity                                                                                                                |
+| `* * `    | foster manager          | have the fosterer’s important information collated neatly                                      | get all the information I need with one glance                                                                                                  |
+| `* * `    | foster manager          | have an easily accessible and visible help button                                              | get help when I am unsure of what command to use                                                                                                |
+| `* * `    | foster manager          | undo my previous command                                                                       | quickly resolve errors caused by the erroneous command                                                                                          |
+| `* *`     | new foster manager      | have my initial data file pre-populated with sample data                                       | work with this sample data as an introduction to the app                                                                                        |
+| `* *`     | new foster manager      | purge all current data from address book                                                       | remove all sample/ experimental data I used to explore the app                                                                                  |
+| `* *`     | careless foster manager | be asked to confirm my decision before purging all fosterer data                               | prevent myself from accidentally deleting all fosterer records                                                                                  |
+| `* *`     | foster manager          | view which volunteer is assigned to which animal                                               | properly balance workload and ensure that no volunteer is overburdened                                                                          |
+| `* *`     | foster manager          | retrieve documentation of all species of pet under purview of the shelter                      | ensure compliance with regulations for wildlife, protected or endangered species (Nparks audit)                                                 |
+| `* *`     | foster manager          | retrieve inventory information about food supplies for fostered animals                        | verify that the requirement of a “well-balanced and nutritional diet” is met, and is not expired (Nparks audit)                                 |
+| `* *`     | foster manager          | retrieve history of whereabouts of an animal                                                   | ensure accountability for pets’ accommodations, and verify that pets are monitored daily for signs of illness, injury or disease (Nparks audit) |
 
 
 ### Use cases
@@ -696,7 +700,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
   
     
-**Use case: UC2 - List Fosterers**
+**Use case: UC2 - List / Find Fosterers**
 
 **MSS**
 
@@ -878,24 +882,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 fosterers without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 500 fosterers without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The system should be usable by a novice foster manager who has never tried out keeping track of fosterers through this new system. 
 5.  The system should respond within two seconds. (i.e. each time a valid command is entered or there is any use action)
-6. The user interface should be intuitive enough for users who are not IT-savvy. 
-7. The user guide should be easily understood by target users. (foster managers of animal shelters, assuming they have no relevant technical knowledge)
-8. The system should be able to detect invalidity of command within 2 seconds. 
-9. The system must be able to scale up or down as needed (in the case where there is a sudden fosterers).
-10. The system must comply with all applicable laws and regulations like the Personal Data Protection Act (PDPA). 
-11. The system should be reliable, easy to maintain, and accessible 24/7. 
-12. The product should be able to run on mainstream OS.
+6.  The user interface should be intuitive enough for users who are not IT-savvy. 
+7.  The user guide should be easily understood by target users. (foster managers of animal shelters, assuming they have no relevant technical knowledge)
+8.  The system should be able to detect invalidity of command within 2 seconds. 
+9.  The system must be able to scale up or down as needed (in the case where there is a sudden fosterers).
+10. The system should not contain the fosterer's private information in the case that the fosterer did not give consent.
+11. The system must comply with all applicable laws and regulations like the Personal Data Protection Act (PDPA). 
+12. The system should be reliable, easy to maintain, and accessible 24/7. 
+13. The product should be able to run on mainstream OS.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Fosterer**: A person who temporarily cares for an animal in their own home
 * **Housing type**: Categorised into HDB, Condo, Landed
-* **Types of animal fostered**: Categorised into solely cats and/or dogs (current.dog/cat or able.dog/cat depends on availability of fosterer)
+* **Types of animal fostered**: Categorised into solely cats and/or dogs (current.Dog/Cat or able.Dog/Cat depends on availability of fosterer)
 * **Current list**: The currently displayed list obtained from a list command or its variants
 
 --------------------------------------------------------------------------------------------------------------------

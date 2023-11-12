@@ -5,7 +5,7 @@ title: User Guide
 **Foster Family** is a desktop app built for the **foster managers of cat and dog shelters** to help them perform **foster family management tasks**. 
 
 Some tasks Foster Family can help you with: 
-* **Store and update** the important details of animal fosterers
+* **Store and update** the important details of animal fosterers (people who temporarily cares for an animal in their own homes)
 * Search for a fosterer using _**any**_ detail you can remember of them
 * **Gain insights** on the current status of fosterers
 

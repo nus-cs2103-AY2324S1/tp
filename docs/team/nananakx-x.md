@@ -68,6 +68,7 @@ Given below are my contributions to the project.
         * Added non-functional requirements
         * Added user stories and use cases related to `add`, `sort` and `undo`
         * Updated user stories and use cases related to `help` and `reset`
+        * Added user stories related to requirements which are not yet implemented
         * Added planned enhancements for:
             * Phone number input
             * Preventing Foster Family from crashing due to corruption of data file
