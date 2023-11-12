@@ -18,22 +18,16 @@ Given below are my contributions to the project.
     * Highlights:
       * Provides a foundation for future email gathering implementations, paving the way for potential expansions into other fields. 
       * Required a deep understanding of interfaces and integration with existing codebase.
-    * (Pull request [#72](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/72))
+    * Pull request [#72](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/72)
 
 * **Code Contributed**: [RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=alyssapng&breakdown=true)
 
 * **Enhancements Implemented**:
   * Gather command to be able to gather emails by tags
-    * (Pull request [#109](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/109))
+    * Pull request [#109](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/109)
   * Enhancing the UI design for UNOFAS
     * Justification: Provide financial advisors with a more intuitive, visually appealing interface, optimizing content visibility to reduce the likelihood of overlooking crucial details.
-    * (Pull request [#151](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/151)
-
-* **Bug Fixes** :
-  * Handling incorrect date for complete and schedule command 
-    * What it does: Handles cases where users enter invalid days (e.g. 31-02-2023) are input in the date fields.
-    * Justification: To prevent financial advisors from missing appointments, it is crucial to ensure the accurate entry of dates and deter any errors.
-    * (Pull request [#256](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/256))
+    * Pull request [#151](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/151)
 
 * **Contributions to the UG**:
   * Updated Title and Introduction
@@ -51,5 +45,6 @@ Given below are my contributions to the project.
 
 * **Review/mentoring contributions**:
 * PRs reviewed (with non-trivial commments):
-[#108](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/108))
-[#90](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/90))
+[#108](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/108),
+[#90](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/90),
+[#133](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/133),
