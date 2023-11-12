@@ -160,58 +160,47 @@ Here is an example command where we delete the event at index 1:<br>
 
 <hr class="feature-class-separator">
 
-### Enrolment commands
+### Enrolment Commands
+
+Enrolments are a way for you to manage your members’ involvement in your events. The enrolment commands below are the bread-and-butter for your participation tracking needs:
 
 #### Enrol a Member to an Event: `enrol`
 
-Enrols a member to an event.
+Now that you have added all your members and all your events, keeping track of your members’ attendance to any event is as simple as using the `enrol` command!
 
-Format: `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
+Here’s how you can use it:<br>
+`enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
-* Enrols the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
-* The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the **currently displayed** member/event list.
-* The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
-* The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
-
-Examples:
-* `enrol m/1 e/5 h/3 r/did planning` enrols the 1st member in the member list to the 5th event in the event list, where the member had 3 hours of contributions to that event and has a remark stating that the member "did planning".
-* `enrol m/5 e/1` enrols the 5th member in the member list to the 1st event in the event list.
-
-<hr class="command-separator">
-
-#### Unenrol a Member from an Event: `unenrol`
-
-Unenrol a member from an event.
-
-Format: `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
-
-* Unenrol the member at the specified `MEMBER_INDEX` from the event at the specified `EVENT_INDEX`.
-* The member at `MEMBER_INDEX` must be a part of the event at `EVENT_INDEX`.
-* The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the **currently displayed** member/event list.
-* The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
-
-
-Examples:
-* `unenrol m/1 e/5` unenrols the 1st member in the member list from the 5th event in the event list.
-* `unenrol m/5 e/1` unenrols the 5th member in the member list from the 1st event in the event list.
+Here is an example command where we want to enrol the **member** at index 1 to the **event** at index 1, where our member
+has contributed 2 **hours**, and we want to make a **remark** on their role as a photographer:<br>
+`enrol m/1 e/1 h/2 r/Role: Photographer`
 
 <hr class="command-separator">
 
 #### Edit an enrolment: `editEnrolment`
-Edits the enrolment details of a specified member at a specified event with the specified attributes.
+Accidentally mixed up two members, and gave them the wrong number of hours or wrong remarks for the event they are involved in?
+You can fix this with no problem by using the `editEnrolment` command!
 
-Format: `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
+Here’s how you can use it:<br>
+`editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
-* Edits the specified `MEMBER_INDEX`'s enrolment of the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
-* The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the **currently displayed** member/event list.
-* The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
-* At least one field to edit must be provided.
-* The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
-* `REMARK` can take any value, but should not be blank.
+Here is an example command where we want to edit the enrolment of the member at index 1 to the event at index 2,
+changing the number of hours to 5 and the remark to reflect the member’s role as an exco member:<br>
+`editEnroment m/1 e/2 h/5 r/Role: Exco`
 
-Examples:
-* `editEnrolment m/1 e/1 h/0 r/Absent due to Covid` edits the enrolment of the 1st member in the member list for the 1st event of the event list to be `0` hours and have a remark `Absent due to Covid`.
+<hr class="command-separator">
 
+#### Unenrol a Member from an Event: `unenrol`
+If your member is no longer involved in a particular event, you can easily remove them from the event by using the `unenrol` command!
+
+Here’s how you can use it:<br>
+`unenrol m/MEMBER_INDEX e/EVENT_INDEX`
+
+Here is an example command where we want to unenrol the **member** at index 1 from the **event** at index 1:<br>
+`unenrol m/1 e/1`
+
+<div markdown="block" class="alert alert-primary">:bulb: The `MEMBER_INDEX`/`EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** member/event list.
+</div>
 <hr class="feature-class-separator">
 
 ### View commands
