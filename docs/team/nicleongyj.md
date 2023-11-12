@@ -28,17 +28,14 @@ FumbleLog is a desktop productivity application used for managing contacts and e
 
 ### Contributions to the User Guide (UG)
 * Added documentation for
-  * `edit_event` command, where the user can edit the details of an event.
-  * `delete_event` command, where the user can delete an event.
-  * Assigning, Un-assigning Groups, where users can do through the `add_event` and `edit_event` commands.
-* Updated documentation for
-  * `add_event` commands, where I detailed how to add events with groups.
-  * `add` command, where I detailed how to add persons with groups.
-  * `edit` command, where I detailed how to edit persons with groups.
-  * `delete` command, where I detailed how to delete persons with groups.
-* Provided cosmetic enhancements and updates to the user guide.
-* Updated images for the user guide.
-* Updated commands with clearer descriptions of FumbleLog behaviour.
+  * `remind` command, where users can be reminded of upcoming events and birthdays.
+* Added table to navigate users of different experiences to relevant parts of the user guide.
+* Updated Quick Start section to include detailed information targeted at newer users.
+* Added a orientation guide to the GUI of FumbleLog.
+* Added a step-by-step tutorial to orientate new users through FumbleLog commands.
+* Updated each FumbleLog command to include parameter tables.
+* Provided cosmetic enhancements to the user guide.
+* Added images for the user guide.
 
 
 ### Contributions to team-based tasks
@@ -46,7 +43,6 @@ FumbleLog is a desktop productivity application used for managing contacts and e
 * Provided feedback for PRs.
 * Helped increase code coverage by adding test cases.
 * Created issues to track bugs and enhancements.
-* Helped with the release process.
 * Helped with the documentation process.
 * Coordinated sprints and code review.
 * Fixed bugs and issues.
