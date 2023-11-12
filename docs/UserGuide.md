@@ -194,7 +194,7 @@ You should directly see the client profile added to the list of clients in the a
 
 After adding a client profile, their information is now recorded and easily accessible for you to contact them!
 After contacting them, you may also want a way to log your interactions with the client. 
-Use the ***interaction*** command when you want to record down an interaction you had with a client.
+Use the ***interaction*** command when you want to record an interaction you had with a client.
 
 **Format**
 ```text
@@ -243,7 +243,7 @@ You should directly see the interaction added to the client profile in the appli
 
 Sometimes, you may want to view the details of a client profile or the interactions you have had with a client to quickly catch up before contacting them.
 
-This section contains multiple commands that allow you to view various details of your clients that is collated in a single view for your convenience.
+This section contains multiple commands that allow you to view various details of your clients that are collated in a single view for your convenience.
 
 ### Viewing the list of clients: ***list***
 
@@ -351,9 +351,8 @@ find David
 
 ### Viewing the dashboard: ***dashboard***
 
-To keep track of a broad view of statistics of your clients, Connectify provides you with the ***dashboard*** command.
-Use the ***dashboard*** command to view a summarised information of all your clients and their interactions with you in a single place.
-This page also shows you upcoming follow-ups that you have to do.
+To keep track of comprehensive statistics about your performance, Connectify provides you with the ***dashboard*** command.
+Use the ***dashboard*** command to view summarised information on your client interactions and your important follow-ups.
 
 **Format**
 ````text
@@ -370,10 +369,10 @@ You should see the following dashboard view in the application window.
 </figure>
 <br>
 
-On the left, we have Connectify's statistics which shows:
+On the left, we have Connectify's statistics which show:
 
 1. Uncontacted / Contacted / Closed clients
-2. Average interactions amongst all clients
+2. Average interactions among all clients
 2. Breakdown of the different interaction outcomes
 3. Number of HOT / WARM / COLD leads
 
@@ -382,7 +381,7 @@ On the right, we have the follow-ups section which shows upcoming follow-ups. Fo
 <details>
 <summary>Detailed explanation of follow-up calculation</summary>
 <br>
-The follow up date is calculated by the day of last interaction plus a follow-up period, determined by lead type as shown:
+The follow-up date is calculated by the day of the last interaction plus a follow-up period, determined by lead type as shown:
 
 | LeadType | Follow-Up Time |
 |----------|----------------|
@@ -403,8 +402,8 @@ Say your last interaction with John is on 1st Jan 2021 and he is a HOT lead. The
 
 ### Editing a client profile: ***edit***
 
-Each different client may be marked with different lead (hot, warm, cold) that may change over time.
-Not only that, you might find yourself needing to update the details of a client profile. Use the command ***edit*** to edit the specified client profile in your client list.
+Each different client may be marked with different leads (hot, warm, cold) that may change over time.
+Not only that, you might need to update the details of a client profile. Use the command ***edit*** to edit the specified client profile in your client list.
 
 **Format**
 ```text
@@ -517,7 +516,11 @@ Incomes must only consist of numerical inputs. Connectify does not yet support:
 
 **Q**: How do I transfer my data to another computer?
 <br>
-**A**: Download Connectify on the other computer and overwrite the data folder it creates with the data folder of your previous Connectify home folder.
+**A**: 
+1) Find your data folder, it should be in the same directory as your Connectify jar file.
+   If your Connectify jar file is at `C:\Users\John\Desktop\Connectify\connectify.jar`, the data file will be at `C:\Users\John\Desktop\Connectify\data`
+2) Download Connectify on the other computer.
+3) Paste the data folder in the same directory as your Connectify jar file in your new computer.
 
 [↑ Back to Table of Contents](#table-of-contents)
 
