@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.time.DayOfWeek;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 /**
  * Represents the day when the Tutee has tuition every week.
@@ -26,16 +28,16 @@ public class Day {
     public Day(String day) {
         requireNonNull(day);
         value = parse(day);
-        stringValue = parseDay(day);
+        stringValue = value.getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
     }
 
     /**
      * Parses an input as a DayOfWeek object.
      *
-     * @param test
+     * @param test Command input
      * @return DayOfWeek object
      */
-    public DayOfWeek parse(String test) {
+    public static DayOfWeek parse(String test) {
         String lowerCaseTest = test.toLowerCase();
         switch (lowerCaseTest) {
         case "mon":
@@ -62,51 +64,6 @@ public class Day {
         default:
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
-        //checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
-        //value = parseDay(day);
-    }
-
-    /**
-     * Parses the day input
-     * @param input string of Day
-     * @return parses the day into the complete day name
-     */
-    public String parseDay(String input) {
-        String day = input.toLowerCase();
-        String result = "";
-        switch (day) {
-        case "mon":
-        case "monday":
-            result = "Mon";
-            break;
-        case "tue":
-        case "tuesday":
-            result = "Tue";
-            break;
-        case "wed":
-        case "wednesday":
-            result = "Wed";
-            break;
-        case "thu":
-        case "thursday":
-            result = "Thu";
-            break;
-        case "fri":
-        case "friday":
-            result = "Fri";
-            break;
-        case "sat":
-        case "saturday":
-            result = "Sat";
-            break;
-        case "sun":
-        case "sunday":
-            result = "Sun";
-            break;
-        default:
-
-        }
-        return result;
     }
 
     public static boolean isValidDay(String test) {
