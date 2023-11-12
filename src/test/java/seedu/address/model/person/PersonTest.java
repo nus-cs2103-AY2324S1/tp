@@ -125,6 +125,7 @@ public class PersonTest {
 
     @Test
     public void isUncontacted() {
+        assertEquals(true, ALICE.getInteractions().isEmpty());
         assertEquals(true, ALICE.isUncontacted());
         assertEquals(false, BENSON.isUncontacted());
         assertEquals(false, ELLE.isUncontacted());
@@ -139,7 +140,6 @@ public class PersonTest {
 
     @Test
     public void isContacting() {
-        assertEquals(0, ALICE.getInteractions().size());
         assertEquals(false, ALICE.isContacting());
         assertEquals(true, BENSON.isContacting());
         assertEquals(false, ELLE.isContacting());
