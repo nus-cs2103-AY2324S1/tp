@@ -337,7 +337,7 @@ Format: `unpaidAll`
 * **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank.
 * **Duration**: The duration must be a positive integer
 * **Invalid Begin**: Begin has a format of HHMM
-* **Invalid End**: End has a format of HHMM
+* **Invalid End**: That is not a valid time format. End has a format of HHMM
 
 
 ### Undo previous command : `undo`
