@@ -218,6 +218,13 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 * `GROUP` edits are cumulative and will add to the current list of groups. 
 * Use the unassign command, i.e. `ug/GROUP`, if you would like to unassign any group. Once removed, the person's name will not be displayed in events that the group is assigned to.
 * When you edit a person's name, the person's name will be updated in all [events](#commands-for-events) that the person is assigned to.
+* Note the following scenario:
+  * You have a person stored in FumbleLog, e.g a person named `Alex` and you used `find_person Alex` as a command.  See: [find_person](#locating-persons-by-name-or-group-findperson)
+  * The person list is filtered to show all the persons with `Alex` in their name.
+  * You edit `Alex` name to be something else, e.g, `Bob`.
+  * `Alex` disappears form the person list. Do not worry, your data is not deleted, this is because your previous search term `Alex` no longer matches the new name of the person, `Bob`.
+  * To see `Bob` in the person list again, you can use the [list_persons](#listing-all-persons--listpersons) command to bring back the whole list of persons.
+  * In contrast with the above scenario, using an [add_person](#adding-a-person-addperson) command will automatically bring back the whole list of persons, to show you that your new person has been added to FumbleLog.
 
 <br>
 
@@ -289,6 +296,7 @@ Format: `find_person KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * `find_person` searches the name of the `Person` and `Group` that they are assigned 
 to and will display them accordingly.
+
 
 <br>
 
@@ -381,8 +389,15 @@ Format: `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/E
 * All time are to be in the format `HHmm`. i.e. 1400 for 2pm.
 * The given `DATE`, `START_TIME` and `END_TIME` cannot be a time in the past.
 * Note that if a person appears under multiple groups, e.g `Alvin` is in groups `classmates` and `friends`, the name `Alvin` will appear under both groups when displayed in the events list. This is an intended behavior for you to see everyone in the groups that are assigned to the event. This is illustrated as follows.
+* Note the following scenario:
+  * You have an event stored in FumbleLog, e.g an event named `TP meeting` and you used `find_event meeting` as a command. See: [find_event](#locating-events-by-name-group-or-person-findevent)
+  * The event list is filtered to show all the persons with `meeting` in their name.
+  * You edit `TP meeting` event name to be something else, e.g, `TP sprint`.
+  * `TP meeting` disappears form the person list. Do not worry, your data is not deleted, this is because your previous search term `meeting` no longer matches the new name of the event, `TP sprint`.
+  * To see `TP sprint` in the event list again, you can use the [list_events](#listing-all-events-listevents) command to bring back the whole list of events.
+  * In contrast with the above scenario, using an [add_event](#adding-an-event--addevent) command will automatically bring back the whole list of events, to show you that your new event has been added to FumbleLog.
 
-![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
+* ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 
 Examples:
 * `edit_event 1 m/FumbleLog meeting d/2023-10-05 s/1500 e/1700`
@@ -435,12 +450,13 @@ Find events whose names or groups contain any of the given keywords.
 Format: `find_event KEYWORD [MORE_KEYWORDS]`
 
 * **Only full words will be matched** e.g. `meeting` will not match `meetings`
-  * FumbleLog will return an empty event list when there are no keyword matches.
+  * FumbleLog will display an empty event list when there are no keyword matches.
 * The search is case-insensitive. e.g `meeting` will match `Meeting`
 * Events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Meetings TP` will return `Meetings`, `TP deadline`
 * `find_event` searches the name of the `Event`, `Group` and `Person` that they are assigned
   to and will display them accordingly.
+
 
 Examples:
 * `find_event meeting` returns `meeting` and `CS2103T meeting`
