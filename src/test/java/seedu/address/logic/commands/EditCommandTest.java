@@ -5,8 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOODTYPE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONDITION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARDIOLOGIST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -155,6 +158,44 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, "This person hasn't been saved");
     }
 
+    @Test
+    public void editDoctor_editBloodType_throwsException() {
+        Ic nricOfFirstDoctor = model.getFilteredDoctorList().get(0).getIc();
+        Doctor editedDoctor = new DoctorBuilder(nricOfFirstDoctor).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(nricOfFirstDoctor,
+                editedDoctor).withBloodType(VALID_BLOODTYPE_AMY).build();
+        EditCommand editCommand = new EditCommand(nricOfFirstDoctor, descriptor);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_EDIT_WRONG_FIELDS);
+    }
+
+    @Test
+    public void editDoctor_editCondition_throwsException() {
+        Ic nricOfFirstDoctor = model.getFilteredDoctorList().get(0).getIc();
+        Doctor editedDoctor = new DoctorBuilder(nricOfFirstDoctor).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(nricOfFirstDoctor,
+                editedDoctor).withCondition(VALID_CONDITION_AMY).build();
+        EditCommand editCommand = new EditCommand(nricOfFirstDoctor, descriptor);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_EDIT_WRONG_FIELDS);
+    }
+
+    @Test
+    public void editDoctor_invalidTags_throwsException() {
+        Ic nricOfFirstDoctor = model.getFilteredDoctorList().get(0).getIc();
+        Doctor editedDoctor = new DoctorBuilder(nricOfFirstDoctor).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(nricOfFirstDoctor,
+                editedDoctor).withTags(VALID_TAG_LOW).build();
+        EditCommand editCommand = new EditCommand(nricOfFirstDoctor, descriptor);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_INVALID_DOCTOR_TAGS);
+    }
+    @Test
+    public void editPatient_invalidTags_throwsException() {
+        Ic nricOfFirstPatient = model.getFilteredPatientList().get(0).getIc();
+        Doctor editedDoctor = new DoctorBuilder(nricOfFirstPatient).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(nricOfFirstPatient,
+                editedDoctor).withTags(VALID_TAG_CARDIOLOGIST).build();
+        EditCommand editCommand = new EditCommand(nricOfFirstPatient, descriptor);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_INVALID_PATIENT_TAGS);
+    }
     @Test
     public void equals() {
         final Ic nricOfFirstPerson = model.getFilteredPatientList().get(0).getIc();
