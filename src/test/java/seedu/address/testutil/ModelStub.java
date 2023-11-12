@@ -83,6 +83,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void deletePersonForEdit(Person target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         throw new AssertionError("This method should not be called.");
     }
@@ -128,6 +133,11 @@ public class ModelStub implements Model {
 
     @Override
     public void deleteLesson(Lesson target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteLessonForEdit(Lesson target) {
         throw new AssertionError("This method should not be called.");
     }
 
