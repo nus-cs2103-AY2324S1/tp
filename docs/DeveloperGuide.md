@@ -557,22 +557,33 @@ specific exceptions related to such issues.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​       | I can …​                                       | So that …​                                                                          |
-|----------|---------------|------------------------------------------------|-------------------------------------------------------------------------------------|
-| `* * *`  | beginner user | create a new profile of a CCA member           | I can keep track of their information                                               |
-| `* * *`  | power user    | delete the profile of a CCA member             | I can remove them from the system when needed                                       |
-| `* * *`  | beginner user | list all members in my CCA                     | I can keep track of my CCA strength                                                 |
-| `* * *`  | beginner user | add a new event hosted by the CCA              | I can keep track of upcoming activities                                             |
-| `* * *`  | power user    | delete an event                                | I can remove it from the schedule                                                   |
-| `* * *`  | power user    | view a list of all events hosted by the CCA    | I can see event history                                                             |
-| `* * *`  | beginner user | add a member to an event                       | I can track which members are participating in the event                            |
-| `* * *`  | beginner user | remove a member from an event                  | I can amend adding the wrong member to an event                                     |
-| `* * *`  | beginner user | view the members who have enrolled in an event | I can estimate the number of members who will enrol in similar events in the future |
-| `* * *`  | beginner user | view events of a member                        | I can check how involved that particular member is                                  |
-| `* * *`  | beginner user | recall the previous commands                   | I can enter similar commands quickly                                                |
-| `* * *`  | power user    | undo a command                                 | I can correct any wrong commands that I have entered previously                     |
-| `* * *`  | power user    | redo a command                                 | I can correct any wrong undo commands that I have entered previously                |
+|-------|---------------|------------------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *` | beginner user | create a new profile of a CCA member           | I can keep track of their information                                               |
+| `* * *` | power user    | delete the profile of a CCA member             | I can remove them from the system when needed                                       |
+| `* * *` | beginner user | list all members in my CCA                     | I can keep track of my CCA strength                                                 |
+| `* * *` | beginner user | add a new event hosted by the CCA              | I can keep track of upcoming activities                                             |
+| `* * *` | power user    | delete an event                                | I can remove it from the schedule                                                   |
+| `* * *` | power user    | view a list of all events hosted by the CCA    | I can see event history                                                             |
+| `* * *` | beginner user | add a member to an event                       | I can track which members are participating in the event                            |
+| `* * *` | beginner user | remove a member from an event                  | I can amend adding the wrong member to an event                                     |
+| `* * *` | beginner user | view the members who have enrolled in an event | I can estimate the number of members who will enrol in similar events in the future |
+| `* * *` | beginner user | view events of a member                        | I can check how involved that particular member is                                  |
+| `* *` | beginner user | recall the previous commands                   | I can enter similar commands quickly                                                |
+| `* *` | power user    | undo a command                                 | I can correct any wrong commands that I have entered previously                     |
+| `* *` | power user    | redo a command                                 | I can correct any wrong undo commands that I have entered previously                |
 
-*{More to be added}*
+Future User Stories to be implemented:
+
+| Priority | As a …​        | I can …​                                                                        | So that …​                                                         |
+|----------|----------------|---------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| `* *`    | power user     | generate reports on the total hours spent by CCA Members for a specified period | I can assess their involvement                                     |
+| `* *`    | power user     | add multiple profiles for CCA Members in bulk                                   | I can save time when onboarding new members                        |
+| `* *`    | power user     | export attendance data for an event as a CSV file                               | I can use it for further analysis of which events are more popular |
+| `* *`    | long term user | archive/hide unused data                                                        | I will not be distracted by irrelevant data                        |
+| `* *`    | long term user | create custom templates for events                                              | I can quickly set up recurring activities with predefined details  |
+| `* *`    | long term user | create aliases for commands                                                     | I can save time on frequently performed commands                   |
+| `* *`    | beginner user  | access a user-friendly help guide for exporting data in PDF/CSV format          | I can share the data with other CCA Heads                          |
+| `*`      | power user     | import data from an external source to update member profiles                   | I can keep information up-to-date                                  |
 
 ### Use cases
 
