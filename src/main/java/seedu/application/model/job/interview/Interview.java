@@ -10,9 +10,6 @@ import seedu.application.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Interview {
-
-    public static final Interview DEFAULT_INTERVIEW = new Interview(InterviewType.DEFAULT_INTERVIEW_TYPE,
-            InterviewDateTime.DEFAULT_INTERVIEW_DATE_TIME, InterviewAddress.DEFAULT_INTERVIEW_ADDRESS);
     public final InterviewType interviewType;
     public final InterviewDateTime interviewDateTime;
     public final InterviewAddress interviewAddress;
