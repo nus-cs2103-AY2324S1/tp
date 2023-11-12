@@ -2,6 +2,7 @@
 layout: page
 title: Developer Guide
 ---
+## Table of Contents
 * Table of Contents
 {:toc}
 
@@ -91,7 +92,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_person 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete_person 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -110,7 +111,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPersonCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddPersonCommandParser`, `DeletePersonCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -145,6 +146,8 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 ### Flow of Program Execution
 
@@ -177,6 +180,9 @@ This shows how the Models are stored for use in the program.
 
 Note that even though EventList stores a list of Events, currently only Meetings (a subtype of Event) are implemented. This is to allow for future extensibility of the program.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
@@ -215,7 +221,7 @@ The `LogicManager` calls `XYZCommand::execute` where the interaction between the
 Step 7:
 The `XYZCommand` creates a successful `CommandResult` and returns it to the UI.
 
-
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Ability to add persons
 This section explains the implementation of the Add Task feature via the `add_person` command.
@@ -287,6 +293,7 @@ for empty/null inputs in the Person object by checking if the optional field is 
   * Cons:
     * Inconveniences the user as they have to remember a new command to add a person with optional fields.
 
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Ability to delete persons
 
@@ -309,6 +316,8 @@ The `DeletePersonCommand` then continues its execution as defined by [this](#par
 **Aspect: How we execute the DeletePersonCommand:**
 Similar to the `AddPersonCommand`, the main considerations for this command is related to the way that the model is stored.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### Ability to track events
 
 This subsection details of how the `Event` class is implemented.
@@ -328,9 +337,7 @@ The `Name` class is used to represent the name of the person involved in the eve
 - We have also made `Event` an abstract class so as to increase extensibility of FumbleLog in the future. For now, when an event is created (i.e. using the AddEventCommand), it defaults to adding a `Meeting` into FumbleLog's `Event` List. Future support for other kinds of `Event` can be possible (i.e. Recurring event) by directly inheriting from `Event`.
 - To track events, we implement an `EventList` to store all events to be displayed in FumbleLog.
 
-### Ability to edit events
-
-- The ability to edit events is implemented in a very similar manner in the `EditEventCommand` as the `EditPersonCommand`.  
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Ability to assign persons to an event
 
@@ -353,6 +360,8 @@ i.e the `Name` currently exists in FumbleLog.
 This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. 
   - To un-assign a `Person`, the user must manually specify `u/` with the `Name` to un-assign the `Person` from the `Event`.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### Ability to assign groups to an event
 
 #### Implementation
@@ -370,12 +379,23 @@ A successful `EditEventCommand` that assigns groups should look like this:
 
 <img src="images/AssignGroupsSequenceDiagram.png" alt="AssignGroup" width=600 />
 
+This is a possible object representation of an `Event` with a `Group` and a `Person` assigned to it.
+
+<img src="images/EditEventObjectDiagram.png" alt="AssignGroup" width=600 />
+
+- In this object diagram, the `Event`, `TP meeting` has a `Person`, John, assigned to it and a `Group` CS2103T assigned to it. 
+- In this case, TP meeting only stores these information and will use its respectively `Person` list and `Group` list to display:
+  - John as assigned to it
+  - Bob and Alice as assigned to it within a group.
+
 #### Design considerations
 
 - When adding and displaying groups, persons that has been added individually previously will be displayed twice. To counter that, checks are done to ensure that
 when a group is added, duplicate persons will be deleted from the individual persons list
 - A person can belong to multiple groups, due to the multiplicity between groups and persons. In this case, we allow multiple persons to be displayed, as it is clear which group they belong to.
 - As the persons are searched by their group name only when displaying, adding new persons, editing and deleting persons is simple as the component just reloads and searches for everybody in the groups again.
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Improved find feature
 
@@ -414,6 +434,8 @@ even though the person's name does not fit the keyword(s).
     - Cons:
         - Adding constraint the original command by requiring syntax, which may cause convenience.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### Remind feature
 
 The `remind` command in our application displays a birthdays and events that will happen within a specified number of days.
@@ -434,7 +456,6 @@ The flow for the `remind` command is described by the following sequence diagram
 
 ![RemindSequenceDiagram](images/RemindSequenceDiagram.png)
 
-
 #### Feature details
 1. The `remind` command can accept an optional parameter `days` which specifies the number of days to search for birthdays and events. If `days` is not specified, the default value of 7 days will be used.
 2. The application will validate the argument `days` to ensure that it is a positive integer. If it is not, an error message will be shown to the user and prompts the user for a corrected input.
@@ -454,6 +475,10 @@ The flow for the `remind` command is described by the following sequence diagram
         - Easier to implement.
     - Cons:
         - Performance overhead. New addressbook objects needs to be created.
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+## Proposed Features
 
 ### \[Proposed\] Undo/redo feature
 
@@ -535,6 +560,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -578,6 +605,8 @@ The flow for the `remind` command is described by the following sequence diagram
     - Easier to implement.
   - Cons: 
     - Performance overhead. New addressbook objects needs to be created.
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -636,8 +665,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | university student | view all upcoming events on a separate event column in the GUI | simultaneously view contact details and event details                          |
 | `* * *`  | university student | be reminded on events and birthdays                            | so that i can remember upcoming social activities                              |
 
-
-
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Use cases
 
@@ -999,6 +1027,8 @@ Contacts or groups can be assigned to a single meeting, allowing for efficient m
 * **VCS**: Version Control System
 * **CI**: Continuous Integration
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -1051,3 +1081,5 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+[Scroll back to Table of Contents](#table-of-contents)
