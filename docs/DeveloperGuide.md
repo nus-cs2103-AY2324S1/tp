@@ -1183,6 +1183,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 3. Currently, users need to input commands to switch between months in the UI calendar. In our future plans, we intend to implement a user-friendly dropdown menu along with dedicated next and previous buttons, providing a more intuitive interface for toggling between months.
 
+4. Currently, the `delete` command allows the deletion of employee via index and name. However, for the deletion via name, if there are multiple employees with the same name, i.e., Amy Tan, Amy Teo and Amy Lee, even if you enter the command `delete /n Amy Lee`, which is the full name of one of these employee, it will return a list of these employees with the name "Amy" rather than directly deleting the employee that matches the full name. While this is to allow greater flexibility in searching, in our future implementation, we would allow the deletion of employee using the full name to provide more convenience to the users.
+
+5. The current leave tracking system only allows users to track the data for annual leave. To better cater to the users of ManaGease, we will implement the ability to track leave for other types of leave like sick leave, parental leave, compassionate leave, etc.
+
+6. Currently, the `deleteleave` command does not allow users to delete leave from employee if the date of leave to delete is already over. This is to reduce the likelihood of any unintended or intended change in leave data. However, to offer users greater flexibility in editing the leave data, we will implement some form of access control to allow certain users to have the abiltiy to delete leave data for dates that are already over. 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
