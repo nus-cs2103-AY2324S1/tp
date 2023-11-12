@@ -29,8 +29,7 @@ Given below are my contributions to the project.
   * What it does: Checks if an interview clashes with existing interviews when adding or editing an interview.
   * Justification: Prevents the user from accidentally adding overlapping interviews which greatly improves the interview scheduling process.
 
-* Fixed bugs in several features
-* Renamed and changed product icon
+* Renamed and changed product icon (PR: [#137](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/137))
 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jingjie88&breakdown=true)
@@ -54,5 +53,5 @@ Given below are my contributions to the project.
 
 * **Community**:
   * 35 team pull requests reviewed.
-  * Helped manually test all features for bugs.
+  * Helped manually test all features for bugs and fixed bugs.
   * Reported [16](https://github.com/jingjie88/ped/issues) bugs for other team during PE-D.
