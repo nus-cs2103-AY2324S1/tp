@@ -172,7 +172,7 @@ Shows a message that helps redirects you to the user guide.
 * **Name (Compulsory field)**: String composed of character between A-Z and a-z.
 * **Phone number (Compulsory field)**: Any number at least 3 digits long.
 * **Address (Compulsory field)**: String without restriction in characters.
-* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain)
+* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain).
 * **Subject (Compulsory field)**: String without restriction in characters.
 * **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).* **Begin (Compulsory field)**: String with restrictions (HHMM).
 * **End (Compulsory field)**: String with restrictions (HHMM).
@@ -227,6 +227,7 @@ Format: `list [DAY]`
 
 **Format**: `find n/[NAME] sb/[SUBJECT]`
 
+> [!NOTE]  
 > Find takes at least one of the two fields to be able to find for tutees.
 
 **Expected input:**
@@ -234,23 +235,22 @@ Format: `list [DAY]`
 * **Name (Optional field)**: String composed of character between A-Z and a-z
 * **Subject (Optional field)**: String without restriction in characters
 
+> [!NOTE]  
+> Both n/ and sb/ prefixes take one word as input.
+
 **Expected Output when the command succeeds:** X tutees listed!
 
 **Expected Output when the command fails:**
 
-> [!WARNING]
-> Inputting an invalid prefix after a valid prefix will result in the invalid prefix being read as
-> part of the input for the valid prefix.
->
-> Example: `find n/Abc abc/B` will read `Abc abc/B` as its input.
->
-> The outputting error message would be depending on the valid prefix specified.
+* **More than one word input for prefix n/**: Name can only take one word.
+* **More than one word input for prefix sb/**: Subject can only take one word.
+* **More than one word input for both prefix n/ and sb/**: Name can only take one word.
 
-* **Invalid Input for prefix n/**:
+* **Invalid Input for prefix name n/**:
 Names should only contain alphanumeric characters and spaces,
   and it should not be blank
-* **Invalid Input for prefix sb/**: Subject can take any values, and it should not be blank.
-* **Invalid Prefix other than n/ and sb/**:
+* **Invalid Input for prefix subject sb/**: Subject can take any values, and it should not be blank.
+* **Invalid Prefix other than name n/ and subject sb/**:
 
   Invalid command format!
   find: Find persons with names or subjects matching the specified keywords (case-insensitive).
@@ -264,7 +264,7 @@ Names should only contain alphanumeric characters and spaces,
 * **No input after prefix name n/**: Names should only contain alphanumeric characters and spaces,
 and it should not be blank
 * **No input after prefix subject sb/**: Subject can take any values, and it should not be blank.
-* **No input after prefixes name and subject n/ sb/**: Names should only contain alphanumeric characters and spaces,
+* **No input after prefixes name n/ and subject sb/**: Names should only contain alphanumeric characters and spaces,
   and it should not be blank
 
 ### Editing a tutee : `edit`
