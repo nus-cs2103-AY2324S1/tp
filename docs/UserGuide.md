@@ -165,7 +165,7 @@ defined a tag category *assessment* for score-related tags, you will only be abl
 
 Format: `create t/CATEGORY TAGNAME…​`
 
-* CATEGORY is a MANDATORY field.
+* CATEGORY is a MANDATORY field. 
 
 <box type="tip" seamless>
 
