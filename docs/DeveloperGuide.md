@@ -867,7 +867,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are a series of instructions that can be followed to perform manual testing of the application.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -880,41 +880,272 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file  
+      **Expected**: Shows the GUI with a set of sample contacts and appointments.
 
-2. Saving window preferences
+2. Normal launch
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Launch the application again  
+      **Expected**: Shows the GUI with a set of sample contacts and appointments.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+3. Restarting the application with existing data
+   1. Click on the ‘X’ button located in the top-right corner of the screen
+   2. Double-click the jar file  
+      **Expected**: Shows the GUI with the existing data unchanged.
 
-3. _{ more test cases …​ }_
+### Adding a patient
 
-### Deleting a person
+1. Adding a patient that has not yet been added to the patient list
 
-1. Deleting a person while all persons are being shown
+    1. Execute the command: `add name=John Doe gender=MALE 
+       birthdate=2000/10/20 phone=98765432 email=johnd@example.com 
+       address=311, Clementi Ave 2, #02-25 illnesses=fever`  
+       **Expected**: The patient has been successfully added to the patient list
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+2. Adding a patient that already exists in patient list
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Execute the command: `add name=John Doe gender=MALE
+       birthdate=2000/10/20 phone=98765432 email=johnd@example.com
+       address=311, Clementi Ave 2, #02-25 illnesses=fever`  
+       **Expected**: The Status Box displays the message "This patient already exists in the records"
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Deleting a patient
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Deleting a patient from a patient list with 3 patients
 
-2. _{ more test cases …​ }_
+   1. Prerequisites: List all patients using the `list` command. 3 patients in the list. 
 
-### Saving data
+   2. Execute the command: `delete 1`<br>
+      **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status box. 
+   3. Execute the command: `delete 0`<br>
+      **Expected**: No person is deleted. Error details shown in the status box. Patient list remains the same.
+   4. Execute the command: `delete 10`<br>
+      **Expected**: No person is deleted. Error details shown in the status box. Patient list remains the same.
 
-1. Dealing with missing/corrupted data files
+### Updating a patient’s details
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Updating a patient's details with valid data
 
-2. _{ more test cases …​ }_
+    1. Prerequisites: Ensure that at least one patient is displayed in the list.
+    2. Execute the command: `edit 1 birthdate=2001/12/14 phone=93842738`  
+       **Expected**: The patient at index 1 is updated with the new birthdate and phone number. The updated details are reflected in the patient list.
+
+2. Updating a patient's details with invalid data
+
+    1. Prerequisites: Ensure that at least one patient is displayed in the list.
+    2. Execute the command: `edit 1 birthdate=14/12/2001 phone=93842738`  
+       **Expected**: No details are updated. Error details are shown in the status box indicating the date format is incorrect.
+
+### Diagnosing a patient
+
+1. Diagnosing a patient with valid illness data
+
+    1. Prerequisites: Ensure that at least one patient is displayed in the list.
+    2. Execute the command: `diagnose 1 illnesses=fever`  
+       **Expected**: The patient at index 1 has 'fever' added to their list of illnesses. The updated illness list is reflected in the patient details.
+
+2. Diagnosing a patient with multiple illnesses
+
+    1. Prerequisites: Ensure that at least one patient is displayed in the list.
+    2. Execute the command: `diagnose 1 illnesses=fever,flu`  
+       **Expected**: The patient at index 1 has both 'fever' and 'flu' added to their list of illnesses.
+
+### Undiagnosing a patient
+
+1. Removing an illness from a patient
+
+    1. Prerequisites: Ensure that at least one patient with the illness 'fever' is displayed in the list.
+    2. Execute the command: `undiagnose 1 illnesses=fever`  
+       **Expected**: The illness 'fever' is removed from the patient at index 1. The updated illness list is reflected in the patient details.
+
+### Finding patients
+
+1. Finding patients by name
+
+    1. Execute the command: `find-p alex david`  
+       **Expected**: All patients with names containing 'alex' or 'david' are displayed in the list.
+
+2. Finding patients by illness
+
+    1. Execute the command: `find-i fever flu`  
+       **Expected**: All patients with illnesses containing 'fever' or 'flu' are displayed in the list.
+
+### Sorting patients
+
+1. Sorting patients by name
+
+    1. Execute the command: `sort-p asc by=name`  
+       **Expected**: The patients are sorted by name in ascending order.
+
+2. Sorting patients by birthdate
+
+    1. Execute the command: `sort-p desc by=birthday`  
+       **Expected**: The patients are sorted by birthday in descending order.
+
+### Viewing all patients
+
+1. Displaying all patients
+
+    1. Execute the command: `patients`  
+       **Expected**: A list of all patients currently recorded in the application is displayed.
+
+### Scheduling a new appointment
+
+1. Scheduling an appointment for an existing patient
+
+    1. Prerequisites: Ensure that a patient with name "Alex Yeoh" is displayed in the list.
+    2. Execute the command: `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray priority=high`  
+       **Expected**: A new high priority appointment for Alex Yeoh on 20 October 2023 from 12pm to 1pm is scheduled and displayed in the appointments list.
+
+2. Scheduling an appointment with overlapping times
+
+    1. Prerequisites: Ensure an appointment exists for a patient at a given time.
+    2. Execute the command: `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray priority=high`  
+      **Expected**: No new appointment is scheduled. Error details are shown in the status box indicating the time conflict.
+
+
+### Rescheduling an appointment
+
+1. Rescheduling an existing appointment
+
+    1. Prerequisites: Ensure at least one appointment is displayed in the appointments list.
+    2. Execute the command: `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`  
+       **Expected**: The appointment with index 1 is rescheduled to 2 May 2023, from 9am to 11am, and the change is reflected in the appointments list.
+
+
+2. Rescheduling an appointment to an invalid time
+
+    1. Prerequisites: Ensure at least one appointment is displayed in the appointments list.
+
+    2. Execute the command: `reschedule 1 start=2023/10/20 13:00 end=2023/10/20 12:00`  
+      **Expected**: The appointment is not rescheduled. Error details are shown in the status box indicating that the start time is after the end time.
+
+### Triaging an appointment
+
+1. Changing the priority of an existing appointment
+
+    1. Prerequisites: Ensure at least one appointment is displayed in the appointments list.
+
+    2. Execute the command: `triage 1 priority=high`  
+       **Expected**: The priority of the appointment with index 1 is changed to high, and the update is reflected in the appointments list.
+
+2. Changing the priority of a non-existent appointment
+
+    1. Prerequisites: Ensure the appointments list is empty or the index provided does not exist.
+
+    2. Execute the command: `triage 2 priority=high` where index 2 does not exist  
+      **Expected**: Priority is not changed. Error details are shown in the status box indicating an invalid index.
+
+### Cancelling an appointment
+
+1. Cancelling an existing appointment
+
+    1. Prerequisites: Ensure at least one appointment is displayed in the appointments list.
+
+    2. Execute the command: `cancel 1`  
+       **Expected**: The appointment with index 1 is cancelled and removed from the appointments list.
+
+2. Cancelling an appointment with an invalid index
+
+    1. Prerequisites: Ensure the appointments list is empty or the index provided does not exist.
+
+    2. Execute the command: `cancel 3` where index 3 does not exist  
+      **Expected**: No appointment is cancelled. Error details are shown in the status box indicating an invalid index.
+
+### Displaying all appointments
+
+1. Displaying the full list of appointments
+
+    1. Execute the command: `appointments`  
+       **Expected**: All scheduled appointments are displayed in the appointments list.
+
+### Finding appointments by patient name
+
+1. Finding appointments by patient name
+
+    1. Execute the command: `find-a alex david`  
+       **Expected**: All appointments with patient names containing 'alex' or 'david' are displayed in the appointments list.
+
+### Displaying today's appointments
+
+1. Displaying appointments for today
+
+    1. Execute the command: `today`  
+       **Expected**: All appointments scheduled to start on the current date are displayed in the appointments list.
+
+### Displaying upcoming appointments
+
+1. Displaying upcoming appointments
+
+    1. Execute the command: `upcoming`  
+       **Expected**: All upcoming appointments are displayed in the appointments list.
+
+### Sorting appointments
+
+1. Sorting appointments by date or priority
+
+    1. Execute the command: `sort-a asc by=time`  
+       **Expected**: The appointments are sorted by their start times in ascending order and displayed in the appointments list.
+
+### Undoing a command
+
+1. **Undoing a command that changes data**
+    1. Prerequisites: Perform a command that changes data, such as `add`, `delete`, `schedule`, `reschedule`, `triage`, or `cancel`.
+    2. Execute the command: `undo`  
+        **Expected**: The most recent data-changing command is undone. The application's state reverts to before the command was executed.
+
+2. **Undoing a command that does not change data**
+    - Prerequisites: Perform a command that does not change data, such as `find`, `today`, `upcoming`, `find-i`, `find-p`, `patients`, `exit`, `help`, or `list`.
+    - Execute the command: `undo`  
+      **Expected**: No changes occur. An appropriate message indicating that the command cannot be undone is displayed.
+
+### Redoing a command
+
+1. **Redoing a previously undone command**
+    1. Prerequisites: Perform an `undo` operation.
+    2. Execute the command: `redo`  
+      **Expected**: The previously undone command is redone. The application's state updates to reflect the redone command.
+
+2. **Redoing a command without an `undo`**
+    1. Prerequisites: Without having used `undo`, attempt to `redo`.
+    2. Execute the command: `redo`  
+      **Expected**: No changes occur. An appropriate message indicating that there is no command to redo is displayed.
+
+### Listing all records
+
+1. **Displaying all patient records and appointments**
+   1. Execute the command: `list`  
+      **Expected**: All patient records and all appointments are displayed.
+
+### Clearing all records
+
+1. Clearing all patient records and appointments
+
+    1. Execute the command: `clear`  
+       **Expected**: All patient records and appointments are cleared from the application.
+
+### Toggling dark/light mode
+
+1. Toggling between dark and light modes
+
+    1. Execute the command: `mode`  
+       **Expected**: The application's theme toggles between dark and light mode.
+
+### Exiting the program
+
+1. Exiting the program
+
+    1. Execute the command: `exit`  
+       **Expected**: The application closes.
+
+### Viewing help
+
+1. Viewing help information
+
+    1. Execute the command: `help`  
+       **Expected**: Help information is displayed, explaining how to access the help page.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
