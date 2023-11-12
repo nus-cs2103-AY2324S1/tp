@@ -320,7 +320,7 @@ _A flashcard with a question, answer, tag and hint field._
 
    2. Successful Output:<br>
       i. Result box displays:<br>
-         `New Card added: Question: opcode for R format instructions; Answer: 000000`<br>      
+         `New Card added: Question: opcode for R format instructions; Answer: 000000`<br>
       ii. The corresponding card with the **question**, **due date**, **solve count** and **tags** is created and added to the deck.
          ![result of add command](./images/UserGuide/1.4_add.png)
 </div>
