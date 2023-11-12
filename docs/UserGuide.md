@@ -781,7 +781,7 @@ _Underlining a phrase in the question_
     
 ⚠️ **Warning:**<br>
 
-1. Do not stack Markdown Syntax, i.e. `<u>**text**</u>. This may lead to unexpected behavior of text in the display view.<br> 
+1. Do not stack Markdown Syntax, e.g. `edit 1 q/<u>**Example Question**</u>`. This may lead to unexpected behavior of text in the display view.<br> 
 2. Do ensure that the phrase intended for styling is wrapped within an open and close syntax of the same type, i.e. `**text**` for bold `*text*` for italics and `<u>text</u>` for underline.<br> 
 3. In the case when unexpected Markdown format is observed, edit the flashcard again with the without the Markdown syntax/with appropriate syntax.
 </div>
