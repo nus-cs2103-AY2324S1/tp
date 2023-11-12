@@ -19,7 +19,7 @@ public abstract class Person {
      * @param name The name of the person.
      */
     public Person(Name name) {
-        requireAllNonNull(name);
+        assert name != null: "Name cannot be null";
         this.name = name;
     }
 

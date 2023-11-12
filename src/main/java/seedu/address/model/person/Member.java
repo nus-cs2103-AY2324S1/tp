@@ -42,7 +42,7 @@ public class Member extends Person {
      */
     public Member(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags) {
         super(name);
-        requireAllNonNull(telegram);
+        assert phone != null && email != null && telegram != null && tags != null: "Fields cannot be null";
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
@@ -61,7 +61,8 @@ public class Member extends Person {
      */
     public Member(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags, List<Task> tasks) {
         super(name);
-        requireAllNonNull(telegram);
+        assert phone != null && email != null && telegram != null && tags != null && tasks != null: "Fields cannot be "
+            + "null";
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
