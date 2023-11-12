@@ -298,6 +298,8 @@ Tips:
 You can enter more than one illness for a patient, e.g. `illnesses=fever, flu` will add both fever and flu as a patient's illnesses.
 </div>
 
+Return to the [Table of Contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Updating a patient's details: `edit`
@@ -330,6 +332,8 @@ the patient's birthdate to _2001/12/14_ and phone number to _93842738_.
 
 - You do not have to enter the illness when adding a patient.
 
+Return to the [Table of Contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Diagnosing a patient: `diagnose`
@@ -354,6 +358,8 @@ _fever_ to the patient's illnesses.
 You can enter more than one illness for a patient, e.g. `illnesses=fever, flu` will add both fever and flu as a patient's illnesses.
 </div>
 
+Return to the [Table of Contents](#table-of-contents)
+
 ### Undiagnosing a patient: `undiagnose`
 
 This command removes one or more illnesses to a patient's current illnesses. It will update the details of the patient at
@@ -376,6 +382,8 @@ _fever_ from the patient's illnesses.
 You can enter more than one illness for a patient, e.g. `illnesses=fever, flu` will remove both fever and flu from a patient's illnesses.
 </div>
 
+Return to the [Table of Contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Removing a patient: `delete`
@@ -397,11 +405,15 @@ This example command will remove the patient with index 1 in the patient records
 If you delete a patient, all appointments for that patient will also be deleted.
 </div>
 
+Return to the [Table of Contents](#table-of-contents)
+
 ### Displaying all patients: `patients`
 
 This command shows a list of all patients currently recorded in the MediFlowR application under the patients section.
 
 :clipboard: **Format**: `patients`
+
+Return to the [Table of Contents](#table-of-contents)
 
 ### Finding patients by name: `find-p`
 
@@ -421,6 +433,8 @@ will return the same results as the keyword `john`.
 - Only patients with names matching the _full words_ of the keywords will be displayed, meaning that `Tom` will find patients
 with names that contain the full `Tom` but will not find patients
 with names such as `Tommy`.
+
+Return to the [Table of Contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -443,6 +457,8 @@ This example command will find all patients with illnesses that contain either `
   with illnesses that contain the full `flu` but will not find patients
   with illnesses such as `influenza`.
 
+Return to the [Table of Contents](#table-of-contents)
+
 ### Sorting patients: `sort-p`
 
 This command sorts the patients list by name or birthday, in ascending or descending order.
@@ -462,6 +478,8 @@ This example command will sort the patients by the _names_ in _ascending order_.
 - The direction can only be `asc` or `desc`, i.e. ascending or descending order respectively.
 
 - The attribute to sort the patients by can only be `name` or `birthday`.
+
+Return to the [Table of Contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -490,6 +508,8 @@ from _12pm_ to _1pm_ for his _follow-up appointment on his chest X-Ray_.
 - An appointment description can only consist of _letters and numbers_.
 
 - An appointment priority can only be `high`, `medium`, or `low`.
+
+Return to the [Table of Contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -521,6 +541,8 @@ _2 May 2023_, from _9am_ to _11am_.
 
 - An appointment priority can only be `high`, `medium`, or `low`.
 
+Return to the [Table of Contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Triaging an appointment: `triage`
@@ -540,6 +562,8 @@ This example command will change the priority of the appointment with index 1 in
 
 - An appointment priority can only be `high`, `medium`, or `low`.
 
+Return to the [Table of Contents](#table-of-contents)
+
 ### Cancelling an appointment: `cancel`
 
 This command cancels an existing appointment. It will cancel the appointment at the specified
@@ -555,11 +579,15 @@ This example command will cancel the appointment with index 1 in the appointment
 
 - The index provided must be a _positive integer_ and a _valid index_.
 
+Return to the [Table of Contents](#table-of-contents)
+
 ### Displaying all appointments: `appointments`
 
 This command shows a list of all appointments currently scheduled.
 
 :clipboard: **Format**: `appointments`
+
+Return to the [Table of Contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -582,6 +610,8 @@ This example command will find all appointments with patient names that contain 
   with names that contain the full `Tom` but will not find patients
   with names such as `Tommy`.
 
+Return to the [Table of Contents](#table-of-contents)
+
 ### Displaying all appointments for today: `today`
 
 This command shows a list of all appointments currently scheduled to start today, i.e. the current date you are using
@@ -589,11 +619,15 @@ the command on.
 
 :clipboard: **Format**: `today`
 
+Return to the [Table of Contents](#table-of-contents)
+
 ### Displaying all upcoming appointments: `upcoming`
 
 This command shows a list of all upcoming appointments currently scheduled.
 
 :clipboard: **Format**: `upcoming`
+
+Return to the [Table of Contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -617,6 +651,8 @@ the appointments that were found by the previous command.
 
 - The attribute to sort the appointments by can only be `time` or `priority`.
 
+Return to the [Table of Contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ## Miscellaneous commands
@@ -626,6 +662,8 @@ the appointments that were found by the previous command.
 This command displays all patient records and appointments.
 
 :clipboard: **Format**: `list`
+
+Return to the [Table of Contents](#table-of-contents)
 
 ### Undoing a previous command: `undo`
 
@@ -637,6 +675,8 @@ This command undoes a previous command.
 
 - The `mode` command cannot be undone using this command, as you can simply type mode again to toggle the dark/light mode.
 
+Return to the [Table of Contents](#table-of-contents)
+
 ### Redoing a previous command: `redo`
 
 This command redoes a previous command that you undid.
@@ -647,11 +687,15 @@ This command redoes a previous command that you undid.
 
 - The `mode` command cannot be redone using this command, as you can simply type mode again to toggle the dark/light mode.
 
+Return to the [Table of Contents](#table-of-contents)
+
 ### Clearing all records: `clear`
 
 This command clears all patient records and appointments from the application.
 
 :clipboard: **Format**: `clear`
+
+Return to the [Table of Contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -661,11 +705,15 @@ This command toggles the dark/light mode for the application.
 
 :clipboard: **Format**: `mode`
 
+Return to the [Table of Contents](#table-of-contents)
+
 ### Exiting the program: `exit`
 
 This command exits the program.
 
 :clipboard: **Format**: `exit`
+
+Return to the [Table of Contents](#table-of-contents)
 
 ### Viewing help: `help`
 
