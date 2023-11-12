@@ -124,11 +124,11 @@ Example:
 :heavy_check_mark: When the command succeeds:
 <div markdown="block" class="code">
 ```
-New teaching assistant added: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertjx; 
-Free Time:  Tags: [parttime]; 
+New teaching assistant added: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertjx;
+Free Time:  Tags: [parttime];
 Courses:
 Name: Software Engineering
-Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
+Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00];
 Work Hour: 4
 ```
 </div>
@@ -168,17 +168,17 @@ Example: `edit INDEX tele/@raynertohjingxiang`
 <div markdown="block" class="code">
 
 ```
-Edited Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang; 
-Free Time: 
+Edited Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang;
+Free Time:
 Mon: 08:00-12:00
 Tue: 08:00-12:00
 Wed: 08:00-12:00
 Thu: 08:00-12:00
 Fri: 08:00-12:00
-Tags: [parttime]; 
+Tags: [parttime];
 Courses:
 Name: Software Engineering
-Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
+Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00];
 Work Hour: 4
 ```
 </div>
@@ -214,17 +214,17 @@ Examples:
 :heavy_check_mark: When the command succeeds:
 <div markdown="block" class="code">
 ```
-Deleted Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang; 
-Free Time: 
+Deleted Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang;
+Free Time:
 Mon: 08:00-12:00
 Tue: 08:00-12:00
 Wed: 08:00-12:00
 Thu: 08:00-12:00
 Fri: 08:00-12:00
-Tags: [parttime]; 
+Tags: [parttime];
 Courses:
 Name: Software Engineering
-Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
+Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00];
 Work Hour: 4
 ```
 </div>
@@ -249,7 +249,7 @@ e.g. `find c/CS2103T` or `find d/1 from/10:00 to/12:00`.
 - For the free time, all three prefixes `d/ from/ to/` must be present and all respective parameters need to be correctly given.
 - The search is case-insensitive. e.g `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
 - Only full words will be matched e.g. `Alex` will not match `Alexis`, `cs1231` will not match `cs1231s`.
-- You can apply multiple search filters to narrow down the search results, through including multiple filters in 
+- You can apply multiple search filters to narrow down the search results, through including multiple filters in
 one command.
 - Teaching assistants matching all the search parameters will be returned.
 - The search filters are applied to the original list of TAs, not the current view of TAs.
@@ -400,7 +400,7 @@ Format: `teach c/COURSE_CODE`
 Expected outcome:
 - Updates the name of the window with the default course.
 - Filters the list of TAs teaching under the course automatically.
-- The default course is saved even after you close the application. 
+- The default course is saved even after you close the application.
 - The next time you open the application, the list of TAs will be automatically filtered based on your default course.
 
 Example: `teach c/CS2103T` sets the default course to the course CS2103T.

@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 * 3b. The given contact information is invalid.
   * 3b1. TAManager shows an error message.
-  
+
     Use case resumes at step 2.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -383,10 +383,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TAManager shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 3b. The given availability is invalid.
   * 3b1. TAManager shows an error message.
-  
+
     Use case resumes at step 2.
 
 ### Non-Functional Requirements
@@ -460,7 +460,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Modify `addressbook.json` file to corrupt the data inside (e.g. remove a closing brace).<br>
       Expected: App starts up with an empty address book.
-   
+
    2. Modify `courses.json` file to corrupt the data inside (e.g. remove a closing brace).<br>
       Expected: App starts up with an empty address book.
 
