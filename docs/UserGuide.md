@@ -100,6 +100,18 @@ If you are an experienced user, you can use the [Table of Contents](#table-of-co
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+## Understanding Our GUI
+
+![understandGUI](images/understandGUI.png)
+
+1. Menu Bar: Quick access to File and Help features.
+2. Command Line: Type your commands here.
+3. Command Result: View command results or error messages through here.
+4. Teaching Assistant List: View and manage teaching assistants here.
+5. Data Storage: Displays the path where your data is stored.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Teaching Assistant Commands
 
 ### Adding a Teaching Assistant: `add`
@@ -120,6 +132,7 @@ Example:
 `add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx h/4 t/parttime c/CS2103T` will add a new teaching assistant named Rayner Toh to TAManager.
 
 ![add TA](images/addTA.png)
+*<center>TAManager adds a new teaching assistant with the corresponding details.</center>*
 
 <div markdown="block" class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
@@ -162,6 +175,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [h/HOUR] [t/TAG
 Example: `edit INDEX tele/@raynertohjingxiang`
 
 ![edit TA](images/editTA.png)
+*<center>TAManager edits the telegram handle of the 7th person in the list.</center>*
 
 
 <div markdown="block" class="alert alert-success">
@@ -210,6 +224,7 @@ Examples:
 - `find n/Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the [`find`](#finding-a-teaching-assistant-find) command.
 
 ![remove TA](images/deleteTA.png)
+*<center>TAManager deletes the teaching assistant at the index <code>7</code>.</center>*
 
 <div markdown="block" class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
@@ -264,6 +279,7 @@ Examples:
 - `find c/cs2103t d/1 from/10:00 to/12:00` returns all teaching assistants that are teaching `cs2103t` and are free on `Monday` from `10:00` to `12:00`.
 
 ![find TA](images/findTA.png)
+*<center>TAManager finds all teaching assistants whose names contain <code>Alex</code>.</center>*
 
 <div markdown="block" class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
@@ -288,6 +304,7 @@ You can view the list of all teaching assistants in TAManager.
 Format: `list`
 
 ![list TA](images/listTA.png)
+*<center>TAManager shows you the full list of teaching assistants.</center>*
 
 
 <div markdown="block" class="alert alert-success">
@@ -317,6 +334,7 @@ Examples:
 - `find c/CS1231S` then `hour 4` will add 4 hours to all `CS1231S` TAs and other TAs will not be affected.
 
 ![update Hour](images/addHours.png)
+*<center>TAManager adds the specified number of hours to all teaching assistants.</center>*
 
 <div markdown="block" class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
@@ -348,6 +366,7 @@ Examples:
 - `editft 1 d/2 from/13:00 to/15:00` will update the free time of the TA with index 1 by setting his Tuesday free time to be 13:00 to 15:00.
 
 ![update Hour](images/editFreeTime.png)
+*<center>TAManager edits the free time of the teaching assistant at index <code>1</code> on Tuesday to be from <code>13:00</code> to <code>15:00</code>.</center>*
 
 <div markdown="block" class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
@@ -376,6 +395,7 @@ Format: `course c/COURSE_CODE`
 Example: `course c/CS2103T` returns the course information and tutorial timings for CS2103T.
 
 ![view course](images/viewCourse.png)
+*<center>TAManager displays the information for the specified course.</center>*
 
 <div markdown="block" class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
@@ -407,6 +427,7 @@ Expected outcome:
 Example: `teach c/CS2103T` sets the default course to the course CS2103T.
 
 ![teach command](images/teachCourse.png)
+*<center>TAManager successfully added the default course.</center>*
 
 <div markdown="block" class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
@@ -434,6 +455,7 @@ If no default course is set, the command will execute successfully but nothing w
 Example: `clearteach`
 
 ![clearteach command](images/clearTeach.png)
+*<center>TAManager successfully reset the default course.</center>*
 
 <div markdown="block" class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
