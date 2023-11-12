@@ -401,12 +401,12 @@ to create a new `Card`.
     * Pros: Scope of support can be determined by developer.
     * Cons:
         1. Time-consuming.
-        2. Potentital for Bugs
+        2. Potential for Bugs
 
 
 **Finalised Implementation:**
 
-Settled on using alternative 2 as it allows us to be flexible on what Markdown syntax we want to implement. We decided to implement bold, 
+Settled on using alternative 2 as it allows us to be flexible on what Markdown Syntax we want to implement. We decided to implement bold, 
 italic and underline since they are the most commonly used ones. This also greatly reduces the application file size.
 
 
@@ -617,7 +617,9 @@ The following activity diagram summarizes what happens when a user executes a ne
    - We plan to allow `hint` command to accept `r` index to that it can show the user the hint of the randomly selected question.
 
 3. Markdown stacking syntax
-    - We are unable to stack multiple markdown syntax for a particular phrase
+    - Users that input MarkDown Syntax within another MarkDown Syntax will cause unexpected test styling in the DisplayView.
+   Example: `edit 1 q/<u>**Example Question**</u>`
+    - We plan to allow the input similar to the above example so that user can apply more than 1 font styles to a part of the text.
 
     
 

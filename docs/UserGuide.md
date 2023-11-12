@@ -758,6 +758,7 @@ _Underlining a phrase in the question_
     ⚠️ To Note:<br>
 
 1. Do not stack MarkDown Syntax. This may lead to unexpected behavior of text in the display view.<br> 
+Example: `edit 1 q/<u>**Example Question**</u>`
 2. Do ensure that the phrase intended for styling is wrapped within an open and close syntax of the same type, i.e. `**text**` for bold `*text*` for italics and `<u>text</u>` for underline.<br> 
 3. In the case when unexpected MarkDown format is observed, edit the flashcard again with the without the MarkDown syntax/with appropriate syntax.
 </div>

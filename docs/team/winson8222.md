@@ -11,51 +11,38 @@ GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 
-* **New Classes and parameter syntaxes [#66](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/66)**:
-  * New Classes added: Deck, Card, AddCommand, EditCommand, SetCommand, PractiseCommand, SolveCommand.
-  * New parameter syntaxes added: q/ for question, a/ for answer, d/ for difficulty,
-  * What they do: Allow the user to perform the basic operations based on the Card class by taking in the
+* **New Feature**: Deck and Cards Operations [#66](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/66)**:
+  * What it does: Allow the user to perform the basic operations based on the Card class by taking in the
   parameters required,
-  * Highlights: Users can now input add, edit, set, practise and solve command based on the parameters specified by each
+  * Highlights: Users can now input add and edit based on the parameters specified by each
   command. Remove some trace of ab3 to conform to lesSON requirements.
-  * Credits: Winson8222
 
 
 * **New Feature**: Practise ([#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71), [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92))
   * What it does: Allows user to look at the question of a specific card using its index.
   * Justification: It is the main practical function of a flashcard application for users to test his knowledge.
   * Highlights: Practise allows users to access only the question of a flashcard, if command is entered without index, the flashcard at the top of the list will be practised.
-  * Credits: Winson8222
+
 
 * **New Feature**: Solve ([#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92), [#95](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/95))
   * What it does: Allows user to look at the answer of a specific card  using its index.
   * Justification: It is the main practical function of a flashcard application for users to learn from his mistake
   * Highlights: Solve reveals the answer to a flashcard to the users.
-  * Credits: Winson8222
+
 
 * **New Feature**: Set Difficulty [#95](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/95)
   * What it does: Allows user to set a specific difficulty level for a question of a flashcard using its index.
   * Justification: It is the main practical function of a flashcard application for users to evaluate the question
   solving process and the application and schedule their next practise based on the difficulty input.
   * Highlights: Users set a level of difficulty (easy, medium or hard) for a question using `set` command, the deck of card will then be rearranged according to the new schedule.
-  * Challenges: As it is difficult to chain the command I have to design a series of commands (practise, solve and set)
-  such that the revision process is intuitive and at the same time not too difficult for the user to execute.
-  Hence the revision process is separated into 3 different commands to facilitate this.
-  * Credits: Winson8222
 
-* **New Feature** MarkDown Syntax
+
+* **New Feature** MarkDown Syntax [#117](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/117)
   * What it does: For advanced user who wish to stylised their flashcard or are visual learners, having ways to differentiate
   words by having different style can greatly enhance their learning process.
   * Justification: It serves as a good supplementary function to enhance to current revision process for user.
   * Highlights: Based on the syntax entered by the user, the corresponding styling will be reflected on
   the display card and the result view
-  * Challenges: In addition to manually implement the 3 syntaxes for the DisplayCard by detecting the presence of
-  and applying the corresponding font styling, I also needed to utilise an external library FlexMark to be used for output
-  in ResultView as the original component does not support font styling. It was quite challenging to write code
-  to detect the syntaxes, and the issue of incorrect format when stacking the syntaxes still need to be resolved. It was
-  also necessary for me to read externally about the behavior of FlexMark's Webview, so that the formatting and be
-  displayed accordingly
-  * Credits: Winson8222
 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=winson8222&breakdown=true)
@@ -77,6 +64,9 @@ Given below are my contributions to the project.
   * Created test cases for PractiseCommand [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92)
   * Created test cases for SolveCommand [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92)
   * Created test cases for SetDifficultyCommand [#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/190)
+  * Created test cases to increase Code Coverage from 60% to 65% ([#204](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/204), [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206))
+  * Fixed bug where application does not start without existing JSON file [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
+
 
 
 * **Documentation**:
