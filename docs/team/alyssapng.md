@@ -47,4 +47,4 @@ Given below are my contributions to the project.
 * PRs reviewed (with non-trivial commments):
 [#108](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/108),
 [#90](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/90),
-[#133](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/133),
+[#133](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/133)
