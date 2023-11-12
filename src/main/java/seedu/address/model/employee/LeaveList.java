@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * Represents a list of leaves taken by an employee.
- * Guarantees: immutable; is valid as declared in {@link #isValidLeaveList(ArrayList)}
+ * Guarantees: immutable
  */
 public class LeaveList {
 
@@ -46,15 +46,6 @@ public class LeaveList {
      */
     public int getSize() {
         return leaveList.size();
-    }
-
-    /**
-     * Returns true if the current size of the LeaveList is less than the maximum allowable size.
-     *
-     * @param maxLeaves The maximum number of leaves allowed in the LeaveList.
-     */
-    public boolean isWithinLimit(int maxLeaves) {
-        return leaveList.size() < maxLeaves;
     }
 
     /**
@@ -107,26 +98,6 @@ public class LeaveList {
         } else {
             return leaveList.contains(new Leave(date));
         }
-    }
-
-    /**
-     * Returns true if a given ArrayList is a valid LeaveList.
-     *
-     * @param test List to be tested
-     */
-    public static boolean isValidLeaveList(ArrayList<Leave> test) {
-        if (test.isEmpty()) {
-            return true;
-        }
-        if (test.size() > MAX_NUM_OF_LEAVES) {
-            return false;
-        }
-        for (int i = 0; i < test.size(); i++) {
-            if (Leave.isValidLeaveDate(test.get(i).toString())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
