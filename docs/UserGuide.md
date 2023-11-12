@@ -194,7 +194,7 @@ Let's say you have a class on **1 October 2023** from **9AM to 11AM**.
 Let's assign the class to **John Doe**.
 
 Here is how to use the [**add-s**](#adding-a-schedule-add-s) command to assign the schedule to John Doe:
-1. Get the **TUTOR_INDEX** of the tutor you wish to assign the schedule to
+1. Get the **`TUTOR_INDEX`** of the tutor you wish to assign the schedule to
    ![tutor-index](images/tutorial/tutor-index.png)
 2. Simply type `add-s 1 st/2023-10-01T09:00 et/2023-10-01T11:00` into the command box
 3. Hit enter
@@ -209,7 +209,7 @@ Here is how to use the [**add-s**](#adding-a-schedule-add-s) command to assign t
 Now that class is over, it is time to mark the schedule as completed!
 
 Here is how to use the [**mark**](#marking-a-schedule-mark) command to mark the schedule as completed:
-1. Get the **SCHEDULE_INDEX** of the schedule you wish to mark as completed
+1. Get the **`SCHEDULE_INDEX`** of the schedule you wish to mark as completed
    ![schedule-index](images/tutorial/schedule-index.png)
 2. Simply type `mark 1 m/1` into the command box
 3. Hit enter
@@ -340,8 +340,8 @@ Here is a list of the error messages you may encounter, when the command is ente
 
 | Error Message                                                                              | Reason                                                               |
 |--------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
-| `Invalid command format!`                                                                  | Invalid or missing TUTOR_INDEX.                                      |
-| `The person index provided is invalid`                                                     | TUTOR_INDEX entered is not in the range of number of tutors.         |
+| `Invalid command format!`                                                                  | Invalid or missing `TUTOR_INDEX`.                                    |
+| `The person index provided is invalid`                                                     | `TUTOR_INDEX` entered is not in the range of number of tutors.       |
 | `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Tutor name input was either invalid or blank.                        |
 | `Phone numbers should only contain numbers, and it should be at least 3 digits long`       | Tutor phone number input was either invalid or blank.                |
 | `Emails should be of the format local-part@domain and adhere to the following constraints` | Tutor email input was either invalid or blank[<sup>2</sup>](#note2). |
@@ -428,9 +428,9 @@ Tada! You have found tutor **John Doe** (and any other tutors whose name contain
 
 This command is relatively straight forward to use and has only 1 possible error:
 
-| Error Message             | Reason                          |
-|---------------------------|---------------------------------|
-| `Invalid command format!` | No search keyword was provided. |
+| Error Message             | Reason                     |
+|---------------------------|----------------------------|
+| `Invalid command format!` | No `KEYWORD` was provided. |
 
 Learn more about the [search behaviour<sup>1</sup>](#note1) and supercharge your search now!
 
@@ -476,10 +476,10 @@ Well done! You have deleted tutor **John Doe**.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                          | Reason                                                       |
-|----------------------------------------|--------------------------------------------------------------|
-| `Invalid command format!`              | Invalid or missing TUTOR_INDEX.                              |
-| `The person index provided is invalid` | TUTOR_INDEX entered is not in the range of number of tutors. |
+| Error Message                          | Reason                                                         |
+|----------------------------------------|----------------------------------------------------------------|
+| `Invalid command format!`              | Invalid or missing `TUTOR_INDEX`.                              |
+| `The person index provided is invalid` | `TUTOR_INDEX` entered is not in the range of number of tutors. |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -588,8 +588,8 @@ Here is a list of the error messages you may encounter, when the command is ente
 
 | Error Message                                                                                                      | Reason                                                                                       |
 |--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `Invalid command format!`                                                                                          | Invalid or missing SCHEDULE_INDEX.                                                           |
-| `The schedule index provided is invalid`                                                                           | SCHEDULE_INDEX entered is not in the range of number of schedules.                           |
+| `Invalid command format!`                                                                                          | Invalid or missing `SCHEDULE_INDEX`.                                                         |
+| `The schedule index provided is invalid`                                                                           | `SCHEDULE_INDEX` entered is not in the range of number of schedules.                         |
 | `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`   | The end time entered is not in the correct datetime format[<sup>3</sup>](#note3).            |
 | `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank` | The start time entered is not in the correct datetime format[<sup>3</sup>](#note3).          |
 | `Multiple values specified for the following single-valued field(s): st/`                                          | More than 1 `st/` was given in the command.                                                  |
@@ -716,9 +716,9 @@ Learn more about the [search behaviour<sup>1</sup>](#note1) and supercharge your
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message             | Reason                      |
-|---------------------------|-----------------------------|
-| `Invalid command format!` | No search keyword provided. |
+| Error Message             | Reason                 |
+|---------------------------|------------------------|
+| `Invalid command format!` | No `KEYWORD` provided. |
 
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
@@ -778,11 +778,11 @@ Yay! The schedule has been marked as COMPLETED.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                                                            | Reason                                                             |
-|--------------------------------------------------------------------------|--------------------------------------------------------------------|
-| `Invalid command format!`                                                | Invalid or missing SCHEDULE_INDEX or missing schedule status.      |
-| `The schedule index provided is invalid`                                 | SCHEDULE_INDEX entered is not in the range of number of schedules. |
-| `Status has to be either MISSED (m/0) or COMPLETED (m/1)`                | Schedule status entered is not 0 or 1.                             |
+| Error Message                                             | Reason                                                               |
+|-----------------------------------------------------------|----------------------------------------------------------------------|
+| `Invalid command format!`                                 | Invalid or missing `SCHEDULE_INDEX` or missing schedule status.      |
+| `The schedule index provided is invalid`                  | `SCHEDULE_INDEX` entered is not in the range of number of schedules. |
+| `Status has to be either MISSED (m/0) or COMPLETED (m/1)` | Schedule status entered is not 0 or 1.                               |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -827,10 +827,10 @@ Phew! The schedule has now been unmarked.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                            | Reason                                                             |
-|------------------------------------------|--------------------------------------------------------------------|
-| `Invalid command format!`                | Invalid or missing SCHEDULE_INDEX.                                 |
-| `The schedule index provided is invalid` | SCHEDULE_INDEX entered is not in the range of number of schedules. |
+| Error Message                            | Reason                                                               |
+|------------------------------------------|----------------------------------------------------------------------|
+| `Invalid command format!`                | Invalid or missing `SCHEDULE_INDEX`.                                 |
+| `The schedule index provided is invalid` | `SCHEDULE_INDEX` entered is not in the range of number of schedules. |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
@@ -875,10 +875,10 @@ Well done! You have deleted the schedule assigned to **Bernice Yu**.
 
 Here is a list of the error messages you may encounter, when the command is entered incorrectly:
 
-| Error Message                            | Reason                                                          |
-|------------------------------------------|-----------------------------------------------------------------|
-| `Invalid command format!`                | Invalid or missing SCHEDULE_INDEX.                              |
-| `The schedule index provided is invalid` | SCHEDULE_INDEX entered is not in the range of number of tutors. |
+| Error Message                            | Reason                                                            |
+|------------------------------------------|-------------------------------------------------------------------|
+| `Invalid command format!`                | Invalid or missing `SCHEDULE_INDEX`.                              |
+| `The schedule index provided is invalid` | `SCHEDULE_INDEX` entered is not in the range of number of tutors. |
 
 You can also refer to [input information](#input-examples) for details about valid inputs.
 
