@@ -44,8 +44,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
-            String subjectValue = argMultimap.getValue(PREFIX_SUBJECT).get();
-            if (subjectValue.split("\\s+").length > 1) {
+            String subjectKeywords = argMultimap.getValue(PREFIX_SUBJECT).get();
+            if (subjectKeywords.split("\\s+").length > 1) {
                 throw new ParseException("Subject can only take one word.");
             }
             ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
