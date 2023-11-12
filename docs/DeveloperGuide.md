@@ -1565,3 +1565,98 @@ We faced the following challenges during the development of this project:
 ### Effort Required
 
 ### Achievements of the Project
+
+## Planned Enhancements
+
+### Remark not shown in GUI employee list
+
+Problem:
+* In our current implementation, the remark is not displayed on the employee list in GUI. 
+* Users have to use report command to display employee remarks in message box.
+
+Solution:
+* We will update the employee card in the GUI to also display remarks of the employees.
+
+### Deleting a remark requires typing the whole remark
+
+Problem:
+* In our current implementation, deleting a remark requires the user to type in the remark exactly as it is
+  typed in when added, i.e. exactly as it is shown in the message box.
+* This is highly inefficient and time-consuming.
+
+Solution:
+* A solution is to address a remark by its index (based on date added) instead of its value, so that
+  `deleteremark id/EMPLOYEE_ID 1` is enough to delete the first remark of employee with
+  employee id EMPLOYEE_ID.
+
+### Adding a leave with a date far in the past and future
+
+Problem:
+* In our current implementation, users are able to add a leave for an employee with date that is too far in the past
+  and in the future, such as `1111-11-11` and `2222-12-12`.
+* While users should be able to add a past and future dates as leaves for record keeping purposes,
+  we see that being able to input a date this extreme is excessive and highly unrealistic.
+
+Solution:
+* We will enhance the leave list so that there are three separate lists, one for current year, one for last year, and one for next year.
+* Users will only be allowed to add leaves from last year to next year, and only the list for the current year will be considered when counting for leaves.
+
+### No efficient way to view a specific employee's leave dates
+
+Problem:
+* In our current implementation, users can only view which employees are on leave on specific dates using `listleave` command.
+  There is currently no specific command that allows users to view leave dates taken by a specific employee.
+* The list of an employee's leave date can only be displayed when a user adds, edits, or deletes a leave date of that employee.
+
+Solution:
+* A possible solution is to display the leaves taken by an employee when the user executes a report command on the employee.
+
+### Two employees are allowed to have the same phone number or email
+
+Problem:
+* In our current implementation, adding an employee with the same phone number or email as another existing employee is allowed.
+* This is caused by our decision to only check same employee by comparing by employee id.
+* This might lead to unintended duplicates.
+
+Solution:
+* We will update the check for the same employee to check not only by employee id but also by phone number and email.
+
+### Unable to view the number of leaves remaining when adding a leave period that exceeds maximum number of leaves
+
+Problem:
+* In our current implementation, if a user tries to add a leave for an employee but that exceeds the maximum number of allowed employee leaves,
+  the app only displays an error message telling the user it exceeds the remaining number of leaves.
+* However, the app does not show the remaining number of leaves, so the fastest method is to use report command to display the current amount of
+  leaves taken by the employee and perform manual subtraction to obtain remaining number of leaves.
+
+Solution:
+* We plan to revamp the error messages pertaining to this issue to display as much information as possible to the user, 
+  in this case the remaining number of leaves.
+
+### Unclear error message for invalid email address
+
+Problem:
+* In our current implementation, when a user keys in an invalid email address, the error message shown is very long and slightly inconsistent.
+* This will highly confuse users who have very complex email addresses and keys the wrong email address by mistake.
+
+Solution:
+* We intend to keep error messages as short but as unambiguous as possible, so that users are able to identify
+  their misinput and fix them accordingly.
+
+### Edit command error message is inconsistent with respect to invalid id
+
+Problem:
+* In our current implementation, when a user inputs an invalid index in an edit command, the error messages
+  differ with different user inputs.
+* If index is less than one, i.e. 0 and below, the error message indicates an invalid command format due to the parser
+  checking if index is less than one.
+* If index is more than number of employees currently displayed, the error message only indicates an invalid index due to the
+  command class being the one checking if index is too high.
+* This inconsistency between error messages on the same issue can be confusing for users.
+
+Solution:
+* We plan to let the command class take care of determining whether an index is invalid or not while the parser class
+  only needs to check if index is an integer.
+* This will establish consistency when a user inputs a wrong index regardless if it's below one or above current number
+  of employees displayed.
+* It will still keep the invalid command format error message if index input is not an integer.
