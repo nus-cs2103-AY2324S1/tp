@@ -13,11 +13,14 @@ In this user guide, you will find instructions on how to install Connectify and 
 
 Choose a topic from the table of contents below to find out how to manage your clients using Connectify!
 
+<div style="page-break-after: always;"></div>
+
 # Table of Contents
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # Quick start
 
@@ -38,6 +41,8 @@ Choose a topic from the table of contents below to find out how to manage your c
     a. For example, if you saved your file at `C:\Users\John\Desktop\Connectify\connectify.jar`, run the command `cd C:\Users\John\Desktop\Connectify` in your terminal.
 
 6. Run `java -jar connectify.jar` to start the application.
+
+<div style="page-break-after: always;"></div>
 
 7. A window similar to the one below should appear in a few seconds, containing sample data.
 
@@ -66,6 +71,7 @@ Choose a topic from the table of contents below to find out how to manage your c
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # Graphical User Interface Components
 
@@ -82,6 +88,8 @@ Choose a topic from the table of contents below to find out how to manage your c
    </figcaption>
 </figure>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 Let's first discuss the top half of the interface.
 
@@ -116,6 +124,8 @@ Let's first discuss the top half of the interface.
 
 5. **Upcoming Follow-ups:** upcoming meetings for each client. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
 
+<div style="page-break-after: always;"></div>
+
     <figure>
        <img src="images/UiClientList.png" alt="Connectify's List of Clients">
        <figcaption align="center">
@@ -131,6 +141,7 @@ Let's first discuss the top half of the interface.
    - **Phone Number:** the client's phone number.
    - **Email:** the client's email address.
 
+<div style="page-break-after: always;"></div>
    <br>
    <figure>
        <img src="images/UiDetailedView.png" alt="Detailed View of Client">
@@ -159,6 +170,7 @@ Let's first discuss the top half of the interface.
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # **If you're new**: what are commands?
 
@@ -179,6 +191,7 @@ For most commands, **parameters** are prefixed by **flags**. They are indicators
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # Features
 
@@ -221,6 +234,7 @@ Shows a message explaining how to access the user guide.
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Adding
 
@@ -263,6 +277,7 @@ t/friends tg/@yuyubern pf/Graphic Designer i/60000
 You should directly see the client profile added to the list of clients in the application window. After adding a client profile, you can now perform various operations on the client profile as specified in the next few sections!
 
 [↑ Back to Table of Contents](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 ### Adding a client interaction: ***interaction***
 
@@ -314,6 +329,7 @@ You should directly see the interaction added to the client profile in the appli
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Viewing
 
@@ -342,6 +358,7 @@ list
 You should then see the list of clients in the application window.
 
 [↑ Back to Table of Contents](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 ### Viewing the full details of a client: ***view***
 
@@ -384,6 +401,7 @@ view 4
 <br>
 
 [↑ Back to Table of Contents](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 ### Finding a client by name: ***find***
 
@@ -424,6 +442,7 @@ find David
 <br>
 
 [↑ Back to Table of Contents](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 ### Viewing the dashboard: ***dashboard***
 
@@ -450,6 +469,7 @@ See [what each section of the dashboard means.](#dashboard-information)
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Editing
 
@@ -492,6 +512,8 @@ Example
     </figcaption>
 </figure>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Clearing all tags of a client
 
@@ -539,6 +561,7 @@ FIELD INDEX NEW_VALUE
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Deleting
 
@@ -574,6 +597,7 @@ exit
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # Miscellaneous Notes
 
@@ -613,6 +637,7 @@ Incomes must only consist of numerical inputs. Connectify does not yet support:
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # FAQ
 
@@ -635,6 +660,7 @@ Incomes must only consist of numerical inputs. Connectify does not yet support:
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # Command summary
 
