@@ -89,7 +89,7 @@ public class DeleteCommand extends Command {
         List<Person> toDeleteList = model.getFilteredPersonList();
         List<Person> copyDeleteList = new ArrayList<>(toDeleteList);
 
-        if (toDeleteList.isEmpty()) {
+        if (copyDeleteList.isEmpty()) {
             String toDeleteListDesc = tag.isPresent()
                     ? String.format("%s Tutorial Group %s", courseCode, tag.get().getTagName()) : courseCode;
             model.clearFilters();

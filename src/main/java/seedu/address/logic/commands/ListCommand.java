@@ -24,5 +24,5 @@ public abstract class ListCommand extends Command {
             + COMMAND_WORD + " attendance w/1 tg/G01";
 
     @Override
-    public abstract CommandResult execute(Model model) throws CommandException;
+    public abstract CommandResult execute(Model model);
 }
