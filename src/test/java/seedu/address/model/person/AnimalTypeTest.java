@@ -24,7 +24,7 @@ public class AnimalTypeTest {
 
     @Test
     public void constructor_validAnimalTypeWithAvailableAvailability_success() {
-        String validDog= "able.Dog";
+        String validDog = "able.Dog";
         AnimalType dog = new AnimalType(validDog, AVAILABLE);
         assertEquals(validDog, dog.value);
         assertEquals(AVAILABLE, dog.availability);

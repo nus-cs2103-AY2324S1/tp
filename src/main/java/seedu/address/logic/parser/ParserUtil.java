@@ -186,6 +186,9 @@ public class ParserUtil {
         case Person.NIL_WORD:
             isValidType = AnimalType.isValidAnimalType(trimmedAnimalType, AnimalType.VALIDATION_REGEX_NIL);
             break;
+        default:
+            // no specific action is needed.
+            break;
         }
 
         if (!isValidType) {
