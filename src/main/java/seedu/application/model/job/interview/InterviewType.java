@@ -14,6 +14,8 @@ public class InterviewType {
             "Type is not case sensitive and should only be in the form: \n"
                     + "BEHAVIOURAL, TECHNICAL, CASE, GROUP, PHONE, VIDEO, ONLINE, ONSITE, OTHER";
 
+    public static final String TO_ADD_INTERVIEW_TYPE = "TO_ADD_INTERVIEW_TYPE";
+    public static final InterviewType DEFAULT_INTERVIEW_TYPE = new InterviewType(TO_ADD_INTERVIEW_TYPE);
     public final String interviewType;
     /**
      * Enum for interview types
@@ -30,13 +32,20 @@ public class InterviewType {
     public InterviewType(String interviewType) {
         requireNonNull(interviewType);
         AppUtil.checkArgument(isValidInterviewType(interviewType), MESSAGE_CONSTRAINTS);
-        this.interviewType = interviewType.toUpperCase();
+        if (isEmptyInterviewType(interviewType)) {
+            this.interviewType = TO_ADD_INTERVIEW_TYPE;
+        } else {
+            this.interviewType = interviewType.toUpperCase();
+        }
     }
 
     /**
      * Returns true if a given string is a valid interviewType.
      */
     public static boolean isValidInterviewType(String test) {
+        if (isEmptyInterviewType(test)) {
+            return true;
+        }
         for (InterviewType.InterviewTypes t : InterviewType.InterviewTypes.values()) {
             if (test.equalsIgnoreCase(t.toString())) {
                 return true;
@@ -45,9 +54,20 @@ public class InterviewType {
         return false;
     }
 
+    /**
+     * Returns true if a given string is an empty interviewType.
+     */
+    private static boolean isEmptyInterviewType(String test) {
+        return test.equals(TO_ADD_INTERVIEW_TYPE);
+    }
+
     @Override
     public String toString() {
-        return interviewType;
+        if (isEmptyInterviewType(interviewType)) {
+            return TO_ADD_INTERVIEW_TYPE;
+        } else {
+            return interviewType;
+        }
     }
 
     @Override
