@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Details;
@@ -32,6 +34,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String PERSON_MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedPerson.class);
 
     private final String name;
     private final String phone;
@@ -126,37 +129,45 @@ class JsonAdaptedPerson {
         }
 
         if (name == null) {
+            logger.warning("name is not specified in json object");
             throw new IllegalValueException(String.format(PERSON_MISSING_FIELD_MESSAGE_FORMAT,
                                             Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
+            logger.warning("name specified in json object is not valid");
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
 
         if (phone == null) {
+            logger.warning("phone is not specified in json object");
             throw new IllegalValueException(String.format(PERSON_MISSING_FIELD_MESSAGE_FORMAT,
                                             Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(phone)) {
+            logger.warning("phone specified in json object is not valid");
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
         final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
+            logger.warning("email is not specified in json object");
             throw new IllegalValueException(String.format(PERSON_MISSING_FIELD_MESSAGE_FORMAT,
                                             Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
+            logger.warning("email specified in json object is not valid");
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
 
         if (address == null) {
+            logger.warning("address is not specified in json object");
             throw new IllegalValueException(String.format(PERSON_MISSING_FIELD_MESSAGE_FORMAT,
                                             Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
+            logger.warning("address specified in json object is not valid");
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
@@ -168,30 +179,35 @@ class JsonAdaptedPerson {
         // Optional fields
         if (lead != null) {
             if (!Lead.isValidLead(lead)) {
+                logger.warning("lead specified in json object is not valid");
                 throw new IllegalValueException(String.format(Lead.MESSAGE_CONSTRAINTS));
             }
             personBuilder = personBuilder.withLead(Lead.of(lead));
         }
         if (telegram != null) {
             if (!TelegramHandle.isValidTelegramHandle(telegram)) {
+                logger.warning("telegram specified in json object is not valid");
                 throw new IllegalValueException(String.format(TelegramHandle.MESSAGE_CONSTRAINTS));
             }
             personBuilder = personBuilder.withTelegram(new TelegramHandle(telegram));
         }
         if (profession != null) {
             if (!Profession.isValidProfession(profession)) {
+                logger.warning("profession specified in json object is not valid");
                 throw new IllegalValueException(String.format(Profession.MESSAGE_CONSTRAINTS));
             }
             personBuilder = personBuilder.withProfession(new Profession(profession));
         }
         if (income != null) {
             if (!Income.isValidIncome(income)) {
+                logger.warning("income specified in json object is not valid");
                 throw new IllegalValueException(String.format(Income.MESSAGE_CONSTRAINTS));
             }
             personBuilder = personBuilder.withIncome(new Income(Integer.valueOf(income)));
         }
         if (details != null) {
             if (!Details.isValidDetails(details)) {
+                logger.warning("details specified in json object is not valid");
                 throw new IllegalValueException(String.format(Details.MESSAGE_CONSTRAINTS));
             }
             personBuilder = personBuilder.withDetails(new Details(details));
