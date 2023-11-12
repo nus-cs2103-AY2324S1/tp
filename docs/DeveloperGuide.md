@@ -9,10 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 * [File icon](https://www.flaticon.com/free-icon/document_2258853?term=file&page=1&position=6&origin=search&related_id=2258853) and [Help icon](https://www.flaticon.com/free-icon/question_471664?term=help&page=1&position=2&origin=search&related_id=471664) used in the main window are from Flaticon.
-
 * Useful notations in the User Guide was inspired from a past project [TaskBook](https://ay2223s1-cs2103t-t13-4.github.io/tp/UserGuide.html#useful-notations).
 * Technical Terms in the User Guide was inspired from a past project [Sellah](https://ay2122s1-cs2103t-t12-1.github.io/tp/UserGuide.html#321-technical-terms).
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -132,6 +130,8 @@ The `Model` component,
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
+Multiplicities and other navigabilities are omitted from diagram for simplicity.
+
 </div>
 
 
@@ -148,7 +148,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the [commons](https://github.com/AY2324S1-CS2103T-T13-4/tp/tree/master/src/main/java/seedu/address/commons) package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -511,12 +511,12 @@ Only when the fosterer is ready to foster, then other details such as animal nam
 
 We are also planning to shorten some input parameters when adding or editing a fosterer:
 
-| Current                   | Enhancement  |
-|---------------------------|--------------|
-| availability/Available    | avail/true   |
-| availability/NotAvailable | avail/false  |
-| availability/nil          | avail/nil    |
-| animalType/               | type/        |
+| Current                     | Enhancement   |
+|-----------------------------|---------------|
+| `availability/Available`    | `avail/true`  |
+| `availability/NotAvailable` | `avail/false` |
+| `availability/nil`          | `avail/nil`   |
+| `animalType/ `              | `type/ `      |
 
 With this, the command `add n/Jerry Tan p/98765412 e/jerry123@example.com housing/HDB avail/true` will be a valid add
 command. 
@@ -601,12 +601,12 @@ Cases:
 2. `availability/Available` with `animalType/` values set to other values which are NOT `able.Cat`, `able.Dog` or `nil`.
 3. `availability/NotAvailable` with `animalType/` values set to other values which are NOT `current.Cat`, `current.Dog` or `nil`.
 
-Error message:</br>
+Error message:<br>
 "If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'.</br> 
-If animal type information is not available, it should be inputted as 'nil'.</br> 
-If fosterer is NOT available and is currently fostering, animal type should be 'current.Dog' / 'current.Cat'.</br> 
-If fosterer is currently unable to foster, animal type should be inputted as 'nil'.</br> 
-If availability is 'nil', animal type should be 'nil' too."</br>
+If animal type information is not available, it should be inputted as 'nil'.<br> 
+If fosterer is NOT available and is currently fostering, animal type should be 'current.Dog' / 'current.Cat'.<br> 
+If fosterer is currently unable to foster, animal type should be inputted as 'nil'.<br> 
+If availability is 'nil', animal type should be 'nil' too."<br>
 
 Hence, an enhancement would be to split the error message up to only show when each specific case occur, instead of grouping them
 all together into a single message. This would reduce confusion for the user and provide more convenience as the user is no longer
