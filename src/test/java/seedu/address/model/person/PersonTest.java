@@ -121,7 +121,7 @@ public class PersonTest {
     }
 
     @Test
-    public void isAvailabilityValidWhenAnimalNameNotNil_validAvailability() {
+    public void isAvailabilityValidWhenAnimalNameNotNil_validCases() {
         Person firstPerson = new PersonBuilder(ALICE)
                 .withAnimalType("current.Dog", Availability.NOT_AVAILABLE)
                 .withAnimalName("Dexter")
@@ -150,6 +150,31 @@ public class PersonTest {
     }
 
     @Test
+    public void isAvailabilityValidWhenAnimalNameNotNil_invalidCases() {
+        PersonBuilder firstPerson = new PersonBuilder(ALICE);
+        firstPerson.withAnimalType("nil", Availability.AVAILABLE);
+        firstPerson.withAnimalName("Dexter");
+        firstPerson.withAvailability("Available");
+        assertThrows(IllegalArgumentException.class, () -> firstPerson.build()
+                .isAvailabilityValidWhenAnimalNameNotNil());
+
+        PersonBuilder secondPerson = new PersonBuilder(ALICE);
+        secondPerson.withAnimalType("able.Dog", Availability.AVAILABLE);
+        secondPerson.withAnimalName("Dexter");
+        secondPerson.withAvailability("Available");
+        assertThrows(IllegalArgumentException.class, () -> secondPerson.build()
+                .isAvailabilityValidWhenAnimalNameNotNil());
+
+        PersonBuilder thirdPerson = new PersonBuilder(ALICE);
+        thirdPerson.withAnimalType("nil", Availability.NIL_AVAILABILITY);
+        thirdPerson.withAnimalName("Dexter");
+        thirdPerson.withAvailability("nil");
+        assertThrows(IllegalArgumentException.class, () -> thirdPerson.build()
+                .isAvailabilityValidWhenAnimalNameNotNil());
+
+    }
+
+    @Test
     public void isAnimalNameTypeValidWhenNotAvailable_validCases() {
         // when availability is "NotAvailable", animal name and type must be both "nil" or both not "nil"
         Person person = new PersonBuilder(ALICE)
@@ -165,6 +190,24 @@ public class PersonTest {
                 .withAnimalType("current.Dog", Availability.NOT_AVAILABLE)
                 .build();
         assertTrue(person.isAnimalNameTypeValidWhenNotAvailable());
+    }
+
+    @Test
+    public void isAnimalNameTypeValidWhenNotAvailable_invalidCases() {
+        // when availability is "NotAvailable", animal name and type must be both "nil" or both not "nil"
+        PersonBuilder firstPerson = new PersonBuilder(ALICE);
+        firstPerson.withAnimalType("nil", Availability.NOT_AVAILABLE);
+        firstPerson.withAnimalName("Dexter");
+        firstPerson.withAvailability("NotAvailable");
+        assertThrows(IllegalArgumentException.class, () -> firstPerson.build()
+                .isAvailabilityValidWhenAnimalNameNotNil());
+
+        PersonBuilder secondPerson = new PersonBuilder(ALICE);
+        secondPerson.withAnimalType("current.Cat", Availability.NOT_AVAILABLE);
+        secondPerson.withAnimalName("nil");
+        secondPerson.withAvailability("NotAvailable");
+        assertThrows(IllegalArgumentException.class, () -> secondPerson.build()
+                .isAvailabilityValidWhenAnimalNameNotNil());
     }
 
     @Test
