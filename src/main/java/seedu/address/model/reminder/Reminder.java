@@ -38,8 +38,8 @@ public final class Reminder implements Comparable<LocalDate> {
         return followUpDate;
     }
 
-    public boolean isAfterTomorrow() {
-        return this.compareTo(LocalDate.now().plusDays(1)) > 0;
+    public boolean isAfterYesterday() {
+        return this.compareTo(LocalDate.now().plusDays(-1)) > 0;
     }
 
     @Override
