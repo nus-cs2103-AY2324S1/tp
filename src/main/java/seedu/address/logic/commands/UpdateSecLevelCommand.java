@@ -41,6 +41,7 @@ public class UpdateSecLevelCommand extends Command {
 
     public static final String MESSAGE_NO_STUDENT_LEFT = "There isn't any student left";
 
+    // To keep track of students records state before each uplevel, for the purpose of undolevel.
     private static LinkedList<Student[]> beforeLastUpdateStudents = new LinkedList<>();
     private boolean isUndo;
     public UpdateSecLevelCommand(boolean isUndo) {

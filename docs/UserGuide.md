@@ -185,7 +185,7 @@ Examples:
 ### Update sec level : `uplevel`, `undolevel`
 
 - `uplevel` : update the sec levels for all students and remove all sec level 4 students.
-  - `undolevel` : revert the student record to be before previous sec level update.
+  - `undolevel` : revert the student record to be before previous sec level update (to undo an `uplevel`).
   Format: `uplevel`, `undolevel`
 
 * Command is case-sensitive
