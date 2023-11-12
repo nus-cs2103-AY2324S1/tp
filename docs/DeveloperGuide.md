@@ -291,7 +291,7 @@ In order to implement `undo` and `redo` in Class Manager, `load` and `config` co
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="500" />
 
 #### Design considerations:
 
