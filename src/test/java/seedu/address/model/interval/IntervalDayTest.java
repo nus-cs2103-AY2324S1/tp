@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.time.DayOfWeek;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.person.Day;
 
 public class IntervalDayTest {
