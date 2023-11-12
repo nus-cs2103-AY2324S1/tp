@@ -211,6 +211,8 @@ of MediFlowR. Please follow the instructions [here](#quick-start) first to set u
 - Launch the MediFlowR application. If you are not able to launch the application, follow the instructions [here](#faq). You will see the screen as shown above.
 
   - Note: When the application is first launched, it will contain some default patient records.
+ 
+<div style="page-break-after: always;"></div>
 
 - Let us try **adding a patient** into our patient records. Enter the command `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illnesses=Fever` in the command box.
 
@@ -218,13 +220,13 @@ of MediFlowR. Please follow the instructions [here](#quick-start) first to set u
 
 - You should get this result screen. Scroll down in the patients list to confirm that patient _John Doe_ has indeed been added. Try adding a few more patients into the patient records with the same format to familiarise yourself with the command.
 
-<div style="page-break-after: always;"></div>
-
 - Let us try **editing a patient** in our patient records. Enter the command `edit 7 birthdate=2001/12/14 phone=93842738` in the command box.
 
 ![Command result for add](images/userguide/EditPatient.png)
 
 - You should get this result screen. Scroll down in the patients list to confirm that the birthdate and phone of patient _John Doe_ have indeed been edited. Try editing other attributes or editing other patients to familiarise yourself with the command.
+
+<div style="page-break-after: always;"></div>
 
 - Let us try **finding a patient**. Enter the command `find-p alex bernice` in the command box.
 
@@ -232,13 +234,13 @@ of MediFlowR. Please follow the instructions [here](#quick-start) first to set u
 
 - You should get this result screen. This command will find all patients with either the name `alex` or `bernice`.
 
-<div style="page-break-after: always;"></div>
-
 - Let us try **scheduling an appointment** now that we have a patient in our records. Enter the command `schedule patient=John Doe start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray priority=high` in the command box.
 
 ![Command result for schedule](images/userguide/ScheduleAppointment.png)
 
 - You should get this result screen. This will schedule a new appointment for the patient with the name `John Doe`. Try scheduling a few more appointments with the same format to familiarise yourself with the command.
+
+<div style="page-break-after: always;"></div>
 
 - Let us try **rescheduling the appointment** that we have just scheduled. Enter the command `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00` in the command box.
 
@@ -401,8 +403,6 @@ This command shows a list of all patients currently recorded in the MediFlowR ap
 
 :clipboard: **Format**: `patients`
 
-<div style="page-break-after: always;"></div>
-
 ### Finding patients by name: `find-p`
 
 This command finds patients whose names contain any of the keywords that you specified.
@@ -422,6 +422,8 @@ will return the same results as the keyword `john`.
 with names that contain the full `Tom` but will not find patients
 with names such as `Tommy`.
 
+<div style="page-break-after: always;"></div>
+
 ### Finding patients by illness: `find-i`
 
 This command finds patients with illnesses that contain any of the keywords that you specified.
@@ -440,8 +442,6 @@ This example command will find all patients with illnesses that contain either `
 - Only patients with illnesses matching the _full words_ of the keywords will be displayed, meaning that `flu` will find patients
   with illnesses that contain the full `flu` but will not find patients
   with illnesses such as `influenza`.
-
-<div style="page-break-after: always;"></div>
 
 ### Sorting patients: `sort-p`
 
@@ -742,7 +742,6 @@ If your changes to the data file makes its format invalid, the application will 
 
 Return to the [Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
