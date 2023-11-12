@@ -24,8 +24,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     public DeleteCommand parse(String args) throws ParseException {
 
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIALGROUP);
         String trimmedArgs = args.trim();
-        if (!trimmedArgs.startsWith("all")) {
+
+        if (!argMultimap.getPreamble().equals("all")) {
             try {
                 Index index = ParserUtil.parseIndex(args);
                 return new DeleteCommand(index);
@@ -35,7 +37,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             }
         }
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIALGROUP);
         Optional<Tag> tag = Optional.empty();
 
         if (trimmedArgs.equals("all")) {
