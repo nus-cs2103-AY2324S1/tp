@@ -415,7 +415,7 @@ It is important to maintain the unique constraint of name of bands at all times.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix 1: Requirements**
 
 ### Product scope
 
@@ -678,7 +678,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix 2: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -731,7 +731,7 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Effort**
+## **Appendix 3: Effort**
 
 Given below is the evidence for challenges faced and efforts required for our project.
 
