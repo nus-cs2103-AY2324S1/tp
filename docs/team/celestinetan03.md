@@ -53,6 +53,7 @@ when an existing rating of an interview is edited, and when an interview is dele
       [\#85](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/85)
       [\#211](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/211)
   * Added instructions for manual testing [\#211](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/211)
+  * Added sequence and activity diagram for `add` command [\#229](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/229)
 
 **Community**:
 * PRs reviewed (with non-trivial review comments):
