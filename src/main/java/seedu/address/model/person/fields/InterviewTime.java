@@ -19,6 +19,8 @@ public class InterviewTime {
 
     public static final String VALIDATION_REGEX = "^\\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$";
 
+    public static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+
     private final String time;
 
     /**
@@ -41,7 +43,6 @@ public class InterviewTime {
         if (test.equals("cancel")) {
             return true;
         }
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         try {
             LocalDateTime dateTime = LocalDateTime.parse(test, inputFormatter);
             LocalDateTime minDate = LocalDateTime.of(2000, 1, 1, 00, 00);
@@ -74,7 +75,6 @@ public class InterviewTime {
         if (time.equals("cancel")) {
             return "Interview time has not been set";
         }
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         LocalDateTime dateTime = LocalDateTime.parse(this.time, inputFormatter);
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy h:mma");
         String formattedDateTime = dateTime.format(outputFormatter);
