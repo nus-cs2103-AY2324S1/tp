@@ -37,7 +37,7 @@ Given below are my contributions to the project.
     * Added Use Cases for the `deduct`, `benefit`, and `payslip` commands.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): #26, #46, #49, #51, #55, #62, #83, #87, #201
+  * PRs reviewed (with non-trivial review comments): [#26](https://github.com/AY2324S1-CS2103T-W12-2/tp/pull/26), [#46](https://github.com/AY2324S1-CS2103T-W12-2/tp/pull/46), [#49](https://github.com/AY2324S1-CS2103T-W12-2/tp/pull/49), [#51](https://github.com/AY2324S1-CS2103T-W12-2/tp/pull/51), [#55](https://github.com/AY2324S1-CS2103T-W12-2/tp/pull/55), [#62](https://github.com/AY2324S1-CS2103T-W12-2/tp/pull/62), [#83](https://github.com/AY2324S1-CS2103T-W12-2/tp/pull/83), [#87](https://github.com/AY2324S1-CS2103T-W12-2/tp/pull/87), [#201](https://github.com/AY2324S1-CS2103T-W12-2/tp/pull/201)
 
 * **Tools**:
   * Integrated a third party library (`itextpdf`) into the project. 
