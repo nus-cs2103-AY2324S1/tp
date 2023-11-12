@@ -4,14 +4,32 @@ title: User Guide
 sidebar: toc
 ---
 # CheckMate User Guide
+
+<details open>
+<summary><strong>Product Description</strong></summary>
+<div markdown="1">
+
 CheckMate is a **desktop app for streamlining the process of room bookings for hotel employees, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise real-time room searching, service scheduling, and amenity management. Optimized for administrative roles, it ensures that room allocation and guest needs are seamlessly addressed.
+
+</div>
+</details>
+
+---
+
+<details open>
+<summary><strong>Table of Contents</strong></summary>
+<div markdown="1">
 
 ## Table of Contents
 
 * Table of Contents
 {:toc}
 
+</div>
+</details>
+
 ---
+
 <details open>
 <summary><strong>Quick start</strong></summary>
 <div markdown="1">
@@ -55,6 +73,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 </details>
 
 ---
+
 <details open>
 <summary><strong>Formats</strong></summary>
 <div markdown="1">
@@ -248,20 +267,39 @@ Prefix completions works with `add` and `edit` command and does not validate you
 
 </div>
 </details>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<details open>
+<summary><strong>FAQ</strong></summary>
+<div markdown="1">
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CheckMate home folder.
 
+</div>
+</details>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<details open>
+<summary><strong>Known Issues</strong></summary>
+<div markdown="1">
 
 ## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
+</div>
+</details>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<details open>
+<summary><strong>Commands Summary</strong></summary>
+<div markdown="1">
 
 ## Commands Summary
 
@@ -276,3 +314,8 @@ Prefix completions works with `add` and `edit` command and does not validate you
 | **List**   | `list`                                                                                                                                                                                      |
 | **Help**   | `help`                                                                                                                                                                                      |
 | **Exit**   | `exit`                                                                                                                                                                                      |
+
+</div>
+</details>
+
+--------------------------------------------------------------------------------------------------------------------
