@@ -53,4 +53,5 @@ JsonAdaptedPerson --> "*" JsonAdaptedTag
 JsonCoursesStorage ..> JsonSerializableCourses
 JsonSerializableCourses --> "*" JsonAdaptedCourse
 JsonAdaptedCourse --> "*" JsonAdaptedLesson
+
 @enduml
