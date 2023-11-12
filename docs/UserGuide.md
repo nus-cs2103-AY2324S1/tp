@@ -367,7 +367,7 @@ _List all flashcards with the CS2100 Tag._
 >```list t/CS2100```
 
 <div markdown="span" class="alert alert-danger">
-    
+
 ⚠️ **Warning:**<br>
 
 1. Any extraneous parameters not `q/` and `t/` will be ignored, i.e. `list 12345` or `list a/000000` will be regarded as `list`.<br>
@@ -411,7 +411,7 @@ _Change the hint at index 1 to "Apple"._
 >```edit 1 h/Apple```
 
 <div markdown="span" class="alert alert-danger">
-    
+
 ⚠️ **Warning:**<br>
 
 1. There must be **at least** one optional parameter included for the command input.<br>
@@ -446,7 +446,7 @@ _Practising the card in the deck with an index of 2._
 <div markdown="span" class="alert alert-info">
 
 ℹ️  **To Note:**<br>
-      
+
 1. If user omits INDEX in the command input, the first card in the deck will be practised.
 </div>
 
@@ -475,7 +475,7 @@ _Hint the card in the deck with an index of 3._
 >```hint 3```
 
 <div markdown="span" class="alert alert-info">
-      
+
 ℹ️  **To Note:**<br>
 
 1. If no hints are set for card at INDEX, `No Hint has been provided` will be displayed in the result box.
@@ -506,7 +506,7 @@ _Solve the card in the deck with an index of 2._
 >```solve 2```
 
 <div markdown="span" class="alert alert-info">
-     
+
 ℹ️  **To Note:**<br>
 
 1. If user omits INDEX in the command input, the first card in the deck will be solved.
@@ -538,7 +538,7 @@ _Set the first card as easy_
 >```set 1 d/easy```
 
 <div markdown="span" class="alert alert-info">
-      
+
 ℹ️  **To Note:**<br>
 
 1. If user omits INDEX in the command input, the first card in the deck will be set.
@@ -570,7 +570,7 @@ _Practise a random card._
 >```random```
 
 <div markdown="span" class="alert alert-info">
-      
+
 ℹ️  **To Note:**<br>
 
 1. Users can use `r` as the index with commands solve and set for the randomly selected question.<br>
@@ -603,7 +603,7 @@ _Delete all flashcards from the deck._
 >```clear```
 
 <div markdown="span" class="alert alert-danger">
-    
+
 ⚠️ **Warning:**<br>
 
 1. This action removes all cards and is irreversible!
@@ -634,14 +634,14 @@ _Set a goal of 5 for this session._
 >```goal 5```
 
 <div markdown="span" class="alert alert-info">
-      
+
 ℹ️  **To Note:**<br>
 
 1. On initialisation of <span style="color: green;">lesSON</span>, the target of the goal will be the size of the deck and the number of cards solved will be 0.
 </div>
 
 <div markdown="span" class="alert alert-success">
-   
+
 **💡 Try It Yourself:<br>**
 
 1. User Input:<br>
@@ -722,7 +722,8 @@ _Bolding a phrase in the question_
 >```edit 1 q/How many bits can a **Half Adder** add up```
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:<br>
+
+   💡 **Try It Yourself:**<br>
 
 1. User Input:<br>
    `add q/What is the **Stage** where calculations are operated? a/ALU`<br>
@@ -743,7 +744,8 @@ _Italicising a phrase in the question_
 >```edit 1 q/How many bits can a *Half Adder* add up```
 
 <div markdown="span" class="alert alert-success">
-   💡 Try It Yourself:<br>
+
+   💡 **Try It Yourself:**<br>
 
 1. User Input:<br>
    `add q/What is the *Stage* where calculations are operated? a/ALU`<br>
@@ -778,7 +780,7 @@ _Underlining a phrase in the question_
 </div>
 
 <div markdown="span" class="alert alert-danger">
-    
+
 ⚠️ **Warning:**<br>
 
 1. Do not stack Markdown Syntax, e.g. `edit 1 q/<u>**Example Question**</u>`. This may lead to unexpected behavior of text in the display view.<br> 
@@ -789,9 +791,9 @@ _Underlining a phrase in the question_
 
 ## Importing and Exporting Decks
 
-<div markdown="block" class="alert alert-info">
+<div markdown="span" class="alert alert-info">
 
-**:information_source: Notes about Export and Import**<br>
+ℹ️  **To Note:**<br>
 
 The import and export functions are meant to be used before and after revision respectively <br>
 
@@ -814,6 +816,7 @@ app will close upon clicking the `Import Data` button. Users will have to rerun 
 to see their new decks.
 
 <div markdown="span" class="alert alert-danger">
+
    ⚠️ Caution
 
    All data is saved as a JSON file at this specified path: [JAR file location]/data/deck.json. <br>
