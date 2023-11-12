@@ -159,15 +159,15 @@ Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [
 
 **Acceptable values for each parameter:**
 
-| Parameter      | Format                                                                                         | Example                          |
-|----------------|------------------------------------------------------------------------------------------------|----------------------------------|
-| `NAME`         | Use `a-z`, `A-Z`, `0-9` and whitespaces only. A person's name cannot contain **only** numbers. | `John Doe`                       |
-| `PHONE_NUMBER` | Use `0-9` only and should be at least 3 digits long and maximum of 17 digits.                  | `p/98765432`                     |
-| `EMAIL`        | Be in format `local-part@domain`. Refer to the [FAQ](#faq) section for more details.           | `johndoe@gmail.com`              |
-| `ADDRESS`      | Use any characters including whitespaces.                                                      | `John Street, block 123, #01-01` |
-| `BIRTHDAY`     | Should be in format `yyyy-MM-dd` and should not be later than current date.                    | `2001-12-30 `                    |
-| `REMARK`       | Use any characters including whitespaces.                                                      | `Owes me $2.`                    |
-| `GROUP`        | Use `a-z`, `A-Z`, `0-9` only and **must not** contain any whitespaces.                         | `CS2103T`                        |
+| Parameter      | Format                                                                                                | Example                          |
+|----------------|-------------------------------------------------------------------------------------------------------|----------------------------------|
+| `NAME`         | Use `a-z`, `A-Z`, `0-9` and whitespaces only. A person's name cannot contain **only** numbers.        | `John Doe`                       |
+| `PHONE_NUMBER` | Use `0-9` only and should be at least 3 digits long and maximum of 17 digits **without** whitespaces. | `p/98765432`                     |
+| `EMAIL`        | Be in format `local-part@domain`. Refer to the [FAQ](#faq) section for more details.                  | `johndoe@gmail.com`              |
+| `ADDRESS`      | Use any characters including whitespaces.                                                             | `John Street, block 123, #01-01` |
+| `BIRTHDAY`     | Should be in format `yyyy-MM-dd` and should not be later than current date.                           | `2001-12-30 `                    |
+| `REMARK`       | Use any characters including whitespaces.                                                             | `Owes me $2.`                    |
+| `GROUP`        | Use `a-z`, `A-Z`, `0-9` only and **must not** contain any whitespaces.                                | `CS2103T`                        |
 
 **Below are some examples on how to use the `add_person` command:**
 
@@ -207,7 +207,7 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 |---------------|------------------------------------------------------------------------------------------------------------------|----------------------------------|
 | `PERSON_INDEX`| An index in the current displayed contacts list in FumbleLog                                                     | `1`                              |
 | `NAME`        | Use `a-z`, `A-Z`, `0-9` and whitespaces only. A person's name cannot be empty and must contain **only** numbers. | `John Doe`                       |
-| `PHONE_NUMBER`| Use `0-9` only and should be at least 3 digits long and maximum of 17 digits.                                    | `p/98765432`                     |
+| `PHONE_NUMBER`| Use `0-9` only and should be at least 3 digits long and maximum of 17 digits **without** whitespaces.                                   | `p/98765432`                     |
 | `EMAIL`       | Be in format `local-part@domain`. Refer to the [FAQ](#faq) section for more details.                             | `johndoe@gmail.com`              |
 | `ADDRESS`     | Use any characters including whitespaces.                                                                        | `John Street, block 123, #01-01` |
 | `BIRTHDAY`    | Have format `yyyy-MM-dd` and should not be later than current date.                                              | `2001-12-30 `                    |
@@ -235,7 +235,7 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 
 <div markdown="span" class="alert alert-warning">
 
-:exclamation: **Disclaimer: Editing a person with a filtered contacts list might cause the person to disappear. Do not worry, your data is not deleted**.<br>
+**:exclamation: Disclaimer: Editing a person with a filtered contacts list might cause the person to disappear. Do not worry, your data is not deleted.**<br>
 
 * Take this scenario:
   * You used the command `find_person Alex`, to show all the persons with `Alex` in their name.  See: [find_person](#locating-persons-by-name-or-group-findperson)
@@ -453,7 +453,7 @@ Format: `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TI
 </div>
 
 <div markdown="span" class="alert alert-warning">
-:exclamation: **Disclaimer: Editing a person with a filtered contacts list might cause the person to disappear. Do not worry, your data is not deleted**.<br>
+**:exclamation: Disclaimer: Editing a person with a filtered contacts list might cause the person to disappear. Do not worry, your data is not deleted.**<br>
 
 * Note the following scenario:
   * You have an event stored in FumbleLog, e.g an event named `TP meeting` and you used `find_event meeting` as a command. See: [find_event](#locating-events-by-name-group-or-person-findevent)
