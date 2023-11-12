@@ -34,7 +34,8 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
         if (!arePrefixesPresent(argMultimap, PREFIX_ATTENDANCE, PREFIX_WEEK)
                 || (argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_ID).isEmpty())
                 || (argMultimap.getValue(PREFIX_ATTENDANCE).get().equals("0")
-                        && argMultimap.getValue(PREFIX_REASON).get().isEmpty())
+                        && (!arePrefixesPresent(argMultimap, PREFIX_REASON)
+                        || argMultimap.getValue(PREFIX_REASON).get().isEmpty()))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));

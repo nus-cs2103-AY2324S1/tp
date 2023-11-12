@@ -5,7 +5,6 @@ import java.util.Optional;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,7 +21,7 @@ public class ContainsTagPredicate extends SerializablePredicate {
      */
     public ContainsTagPredicate(Optional<Tag> tag) {
         super(person -> person.getTags().stream().anyMatch(
-                personTag -> StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.get().getTagName())));
+                personTag -> personTag.equals(tag.get())));
         this.tag = tag;
     }
 

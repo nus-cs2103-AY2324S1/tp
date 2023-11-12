@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ID + "STUDENT_ID "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TUTORIAL_GROUP_ID]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Fu Yiqiao "
             + PREFIX_PHONE + "98765432 "
