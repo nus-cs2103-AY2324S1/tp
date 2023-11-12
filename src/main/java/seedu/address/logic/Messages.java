@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -54,7 +55,7 @@ public class Messages {
                 .append(person.getAddress())
                 .append(";\n")
                 .append("Appointment: ")
-                .append(person.getAppointment().orElse(person.getAppointment().orElse(null)))
+                .append(person.getAppointment().map(Appointment::toString).orElse(null))
                 .append("; Medical Histories: ");
 
         person.getMedicalHistories().forEach(builder::append);
