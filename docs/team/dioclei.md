@@ -1,5 +1,5 @@
 ---
-layout: page\
+layout: page
 title: Jason's Project Portfolio Page
 ---
 

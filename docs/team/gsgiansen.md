@@ -1,5 +1,5 @@
 ---
-layout: page\
+layout: page
 title: Gian Sen's Project Portfolio Page
 ---
 

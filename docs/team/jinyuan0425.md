@@ -1,5 +1,5 @@
 ---
-layout: page\
+layout: page
 title: Jin Yuan's Project Portfolio Page
 ---
 
