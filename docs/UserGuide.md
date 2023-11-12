@@ -177,35 +177,40 @@ Format: `help`
 ### Creating tags: `create`
 
 Creates a tag and categorises it to the specified category.
-You can customize these categories as per your needs and tags will be 
-color coded by the different categories. 
-
-The only restriction is that you can only define up to 6 different categories (including the *assessment* category for score-related tags. Hence if you have
-defined a tag category *assessment* for score-related tags, you will only be able to define 5 other categories).
 
 Format: `create t/CATEGORY TAGNAME…​`
 
-* CATEGORY is a MANDATORY field. 
+Type | Prefix                 | Constraints                                                                                                                                               
+----------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Mandatory  | `t/CATEGORY TAGNAME`   |  `TAGNAME` must be alphanumeric (letters and numbers, no spaces and symbols allowed such as `/`, `,` ...)
+
+**Note:**
+* JABPro offers 3 predefined tag categories namely `employment`, `role`, and `dept`. However, you can define up to 3 more tag categories of your own!
+* The tags created using this command can be used to tag candidates using the `add` or `edit` command. Tagging
+candidates without previously categorising the tags using `create` would still work but the tags would be *uncategorised*.
+* `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further.
 
 <box type="tip" seamless>
 
-**Tip:** 
-* You can create multiple tags at once!
-* Use this command for frequently used tags for better efficiency in tagging candidates!
-</box>
+**Tip:**
+* You can create multiple tags at once i.e. `create t/dept marketing t/role developer ...`
+* Use this command for frequently used tags for better efficiency in tagging candidates.
+* You can view all of your tags by keying in the `listT` command.
+  </box>
 
-**Note:**
-* The tags created using this command can be used to tag candidates using the `add` or `edit` command. Tagging
-candidates without previously categorising the tags would still work but the tags would be *uncategorised*.
-* `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further.
-This feature will be supported in future iterations of JABPro through the `edit tags` command.
+Failed to create tags? Here's some possible reasons why:
+1. Missing mandatory field i.e. `create`
+2. Did not specify category i.e. `create t/developer`
+3. Invalid tag name (contained spaces) i.e. `create t/role software developer`
+4. Tag already exists
 
-Examples:
-* `create t/role developer`
-* `create t/dept software t/dept marketing`
+An example of the `create` command being successfully executed:
+1. Enter the command `create t/dept marketing t/role developer`
+2. This is what you should see upon successful execution of command.
+![create-success](images/create-success.png)
+3. View your newly created tags using the `listT` command.
+![listT-create](Images/listT-create.png)
 
-An example of the `create` command in action:
-![Create](images/create.png)
 
 <a name="adding-an-applicant"></a>
 ### Adding an applicant: `add`
@@ -617,67 +622,66 @@ In essence, this allows you to find job applicants whose performance rating is a
 Ideally, this feature can then be used to find the best candidates easily and quickly without having to manually look through the list of candidates.
 
 
-
-
 ### Searching job applicants by category: `search`
 
 Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
 
-Format: `search (n/NAME... / st/STATUS... / t/TAGNAME...)`
+Format: `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAG [MORE TAGS)`
 
-#### Searching job applicants by name
+Prefix      | Constraints                                                                                                                                               
+------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
+`n/NAME`    | `NAME` must be alphanumeric.
+`st/STATUS` | `STATUS` must either be `preliminary`, `interviewed`, `offered`, `rejected`.
+`t/TAG` | `TAG` must be alphanumeric and contains no spaces.
 
-Finds job applicants whose names contain the given keywords.
+**Note**:
+* `search` requires at least ONE search parameter i.e. `n/NAME`, `st/STATUS`, or `t/TAGNAME`.
+* Each prefix can only be used at most once.
+* Multiple search parameters for a specific category are divided by spaces (not commas!) i.e. `search st/preliminary interviewed`
 
-Format: `search n/NAME...`
+<box type="tip" seamless>
 
-* Keywords are case-insensitive: `search n/Josh` and `search n/josh` return the same result.
-* Keyword has to be a string that does not contain any non-alpha numeric characters.
-* The order of the keywords does not matter. e.g. `Josh Peck` will match `Peck Josh`.
-* Only full words will be matched e.g. `Jo` will not match `Josh`.
-* Applicants matching at least one keyword will be returned (i.e. `OR` search)
-  e.g. `Josh Peck` will return `Josh Gad`, `Josh Job`.
+**Tip**:
 
-Examples:
-* `search n/John` returns `john` and `John Doe`
-* `search n/alex david` returns `Alex Yeoh`, `David Li`<br>
+* You can combine multiple search categories in a single `search` command.
+* Search parameters are case-insensitive.
 
-#### Searching job applicants by status
+Examples of successful command execution:
+1. `search n/alex bernice`
+<br>
+<br>
+![search-success-1](images/search-success-1.png)
+<br>
+<br>
+The above `search` command displayed all candidates whose name match ANY of the given keywords. This is because
+`search` does an `OR` search within a specific category.
+<br>
+<br>
+2. `search n/alex bernice st/interviewed t/intern`
+<br>
+<br>
+![search-success](images/search-success.png)
+<br>
+<br>
+Notice how the above `search` command did not display "Alex" despite his profile matching
+the `name` and `tag` categories. This is because `search` does an `AND` search across multiple categories.
 
-Finds job applicants whose status match any of the given keywords.
+<box type="tip" seamless>
 
-Format: `search st/STATUS...`
+What does it mean to do an `OR` search within a single category and an `AND` search across multiple categories?
+<br>
+It's best to explain this by breaking down an example `search` command!
+<br>
+`search n/alex bernice st/interviewed t/intern` will output applicants whose:
+  * names contain either Alex `OR` Bernice
+  * `AND` status is either interviewed
+  * `AND` has a tag `intern`
 
-* Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
-  e.g. `search st/interviewing` will give an error.
-* Keywords are case-insensitive: `search st/interviewed` and `search st/INTERVIEWED` return the same result.
-
-Example:
-* `search st/interviewed`
-
-#### Searching job applicants by tag
-
-Finds job applicants whose tag(s) match any of the given tag keywords
-
-Format: `search t/TAGNAME...`
-
-* Keywords are case-insensitive: `search t/hardworking` and `search t/HARDWORKING` return the same result.
-
-Example:
-* `search t/hardworking`
-
-#### Notes for advanced users:
-* You can combine the search categories (e.g. `search n/Alex st/offered t/software engineer`) in a single search command.
-* Each search category can be used at most once in a single search command
-  e.g. `search n/Alex n/Adam st/rejected` is not allowed.
-
-Example:
-* `search n/Alex Bernice st/interviewed rejected t/intern` will output applicants whose:
-    * names contain either Alex `or` Bernice
-    * `and` status is either interviewed `or` rejected.
-    * `and` has a tag `intern`
-
-![Search](images/search-2.png)
+Failed to execute the `search` command? Here are some possible reasons why:
+1. Missing search category i.e. `search`
+2. Invalid name/status/tag parameters i.e. `search n/@alex st/accepted t/intern#`
+3. Multiple prefixes of the same category used i.e. `search n/alex n/bernice`
+4. Using commas as delimiters of different parameters instead of spaces i.e. `search n/alex, bernice`
 
 ### Deleting job applicants : `delete`
 
@@ -909,35 +913,6 @@ If your changes to the data file makes its format invalid, JABPro will discard a
 </box>
 
 _Details coming soon ..._
-
-
---------------------------------------------------------------------------------------------------------------------
-
-## Planned Enhancements
-
-### Deleting tags : `delete tag`
-
-While certainly useful, JABPro currently does not have feature to delete existing tags. However, this feature will be implemented
-in future iterations.
-
-<box type="tip" seamless>
-
-**Tip:**
-* If you are an advanced user, you are welcome to delete your tags manually by editing the json file! 
-</box>
-
-### Editing tags : `edit tag`
-
-JABPro currently does not support editing tags i.e. editing tag name or category. This feature will be implemented in future iterations.
-
-**Tip:**
-* If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
-  </box>
-
-### Exporting events : `export`
-
-JABPro currently does not support exporting Events. This feature will be implemented in future iterations.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
