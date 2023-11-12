@@ -48,6 +48,7 @@ Given below are my contributions to the project.
     * Update URL in `Help` command. ([#181](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/181))
     * Renamed flags and removed seconds for time related parameters. ([#164](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/164), [#180](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/180))
     * Update `Schedule` to only allow schedules that start and end on the same day. ([#224](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/224))
+    * Proofreading and formatting for DG. ([#328](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/328), [#346](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/346))
 
 * **Review/ mentoring contributions**:
     * Reviewed PRs: 
@@ -81,5 +82,9 @@ Given below are my contributions to the project.
       [#229](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/229),
       [#298](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/298),
       [#304](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/304),
-      [#306](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/306)
+      [#306](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/306),
+      [#312](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/312),
+      [#318](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/318),
+      [#320](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/320),
+      [#333](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/333)
 
