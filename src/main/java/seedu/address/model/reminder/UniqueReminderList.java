@@ -16,8 +16,6 @@ import seedu.address.model.person.Person;
  */
 public class UniqueReminderList implements Iterable<Reminder> {
 
-    private boolean isReminderListDirty = false;
-
     private final Model model;
     private final ObservableList<Reminder> internalList;
     private final ObservableList<Reminder> internalUnmodifiableList;
@@ -29,14 +27,6 @@ public class UniqueReminderList implements Iterable<Reminder> {
         this.model = model;
         internalList = FXCollections.observableArrayList();
         internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
-    }
-
-    /**
-     * Sets the reminder list to be dirty.
-     * To be called when the reminder list is modified.
-     */
-    public void setReminderListDirty() {
-        isReminderListDirty = true;
     }
 
     /**
@@ -62,17 +52,6 @@ public class UniqueReminderList implements Iterable<Reminder> {
             person.updateReminder();
             person.getReminder().ifPresent(internalList::add);
         }
-    }
-
-    /**
-     * Updates the internal list of reminders if the list is dirty.
-     */
-    public void updateRemindersIfDirty() {
-        if (!isReminderListDirty) {
-            return;
-        }
-        updateReminders();
-        isReminderListDirty = false;
     }
 
     public Iterator<Reminder> iterator() {

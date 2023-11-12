@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.reminder.Reminder;
-import seedu.address.model.reminder.UniqueReminderList;
 
 /**
  * The API of the Model component.
@@ -59,11 +58,6 @@ public interface Model {
      * Returns the Dashboard
      */
     Dashboard getDashboard();
-
-    /**
-     * Returns the ReminderList
-     */
-    UniqueReminderList getReminderList();
 
     /**
      * Starts the reminder scheduler

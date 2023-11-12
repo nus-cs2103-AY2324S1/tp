@@ -49,7 +49,8 @@ public class ReminderScheduler extends Thread {
         // Calculate the initial delay until 00:00
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nextMidnight = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.MIDNIGHT);
-        long initialDelay = ChronoUnit.MILLIS.between(now, nextMidnight);
+        // +1 to ensure that the scheduler will run just after midnight
+        long initialDelay = ChronoUnit.MILLIS.between(now, nextMidnight) + 1;
 
         // Start the scheduler to wake up the ReminderScheduler occasionally
         scheduler.scheduleAtFixedRate(() -> {
@@ -61,18 +62,15 @@ public class ReminderScheduler extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        while (!Thread.interrupted()) {
             synchronized (mutex) {
                 try {
                     mutex.wait();
                     logger.info("ReminderScheduler thread woken up");
-                    //TODO: @zhyuhan Rather than changing the reminderlist which could cause thread access issues
-                    //(ie someone just nice update the reminderlist at the same time)),
-                    //Change this to just update the Dashboard/Reminder UI with reminders after for the new day
-                    model.getReminderList().updateReminders();
+                    model.updateReminderList();
                 } catch (InterruptedException e) {
                     logger.info("ReminderScheduler thread interrupted");
-                    break;
+                    return;
                 }
             }
         }

@@ -162,11 +162,6 @@ public class ModelManager implements Model {
 
     //=========== Reminder List Accessors =============================================================
     @Override
-    public UniqueReminderList getReminderList() {
-        return reminderList;
-    }
-
-    @Override
     public void startReminderScheduler() {
         if (reminderScheduler == null) {
             return;
