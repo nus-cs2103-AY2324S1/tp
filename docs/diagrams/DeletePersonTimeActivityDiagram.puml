@@ -9,15 +9,15 @@ if () then ([One person specified])
   if () then ([Person exists])
     :Check if time exists;
     if () then ([Time exists])
-      :ProjectPro deletes time from person;
+      :ProjectPRO deletes time from person;
     else ([else])
-      :ProjectPro throws Error;
+      :ProjectPRO throws Error;
     endif
   else ([else])
-    :ProjectPro throws Error;
+    :ProjectPRO throws Error;
   endif
 else ([else])
-  :ProjectPro throws Error;
+  :ProjectPRO throws Error;
 endif
 
 stop

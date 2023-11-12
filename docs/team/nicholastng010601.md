@@ -48,10 +48,5 @@ Given below are my contributions to the project.
     * Meticulously review other groups work and provided feedback on potential bugs and how they could improve their product [here](https://github.com/nicholastng010601/ped/tree/main/files).
 
 
-[//]: # (* **Community**:)
-[//]: # (  * PRs reviewed &#40;with non-trivial review comments&#41;: [\#89]&#40;https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/89&#41;)
-
-[//]: # (  * Reported bugs and suggestions for other teams in the class &#40;examples: [1]&#40;&#41;, [2]&#40;&#41;, [3]&#40;&#41;&#41;)
-[//]: # (  * Some parts of the history feature I added was adopted by several other class mates &#40;[1]&#40;&#41;, [2]&#40;&#41;&#41;)
-
-
+* **Community**:
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/242), [2](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/243), [3](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/240))
