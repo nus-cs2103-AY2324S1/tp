@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Refactored and modified from AddressBook-Level 3 (https://github.com/se-edu/addressbook-level3)
+// Not supposed to own code in file.
 package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -24,3 +27,4 @@ public class ClearCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
+//@@author

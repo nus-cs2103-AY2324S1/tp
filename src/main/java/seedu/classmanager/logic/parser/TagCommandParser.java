@@ -37,24 +37,19 @@ public class TagCommandParser implements Parser<TagCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_TAG, PREFIX_WILDCARD, PREFIX_STUDENT_NUMBER);
 
-        String number = argMultimap.getValue(PREFIX_STUDENT_NUMBER).orElse("");
-        if (!StudentNumber.isValidStudentNumber(number)
-                || !argMultimap.getPreamble().isEmpty()
-                || areAdditionalPrefixesPresent(args, PREFIX_TAG, PREFIX_WILDCARD, PREFIX_STUDENT_NUMBER)) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_TAG)
+            || !argMultimap.getPreamble().isEmpty()
+            || areAdditionalPrefixesPresent(args, PREFIX_TAG, PREFIX_WILDCARD, PREFIX_STUDENT_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
         }
 
-        StudentNumber studentNumber = new StudentNumber(number);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WILDCARD, PREFIX_STUDENT_NUMBER);
+        StudentNumber studentNumber = ParserUtil.parseStudentNumber(
+            argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
 
         parseTags(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(this::setTags);
 
-        if (this.tags == null) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
-        }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WILDCARD);
         String action = argMultimap.getValue(PREFIX_WILDCARD).orElse("");
 
         switch (action) {
@@ -76,9 +71,7 @@ public class TagCommandParser implements Parser<TagCommand> {
      */
     private Optional<Set<Tag>> parseTags(Collection<String> tags) throws ParseException {
         assert tags != null;
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
+
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
