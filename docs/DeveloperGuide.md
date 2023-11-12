@@ -1046,6 +1046,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  The app should be reasonably responsive to the entire set of user requests(i.e. within 1 second at maximum load).
 4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Hiring Managers
 that have many years of programming experience).
+5. This app is designed only to add interviewees and schedule interviews. Other parts of the interview process such as contacting applicants are not supported.
+6. The app should be ready for use within 5 seconds of the user launching the app
+7. It should support various screen resolutions and aspect ratios for optimal user experience on different devices.
+8. The application should be optimized to consume minimal system resources, such as CPU and memory, to ensure it runs smoothly on a wide range of desktop configurations.
+9. Users should receive clear and informative error messages in case of any issues, guiding them on how to resolve or report problems.
+10. The project is expected to adhere to a strict schedule that rolls out bug fixes and new features based on the needs of the clients.
 
 ### Glossary
 
