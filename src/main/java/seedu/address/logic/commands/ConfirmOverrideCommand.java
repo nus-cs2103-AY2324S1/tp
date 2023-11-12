@@ -17,7 +17,7 @@ public class ConfirmOverrideCommand extends Command {
     /**
      * Default constructor for a confirm override command
      * @param appointment new appointment
-     * @param personToEdit person who's old appointment will be replaced by the new appointment
+     * @param personToEdit person whose old appointment will be replaced by the new appointment
      */
     public ConfirmOverrideCommand(Appointment appointment, Person personToEdit) {
         requireNonNull(appointment);
