@@ -18,7 +18,7 @@ Given below are my contributions to the project.
         * This feature allows the user to sort the list of students by name in alphabetical order to enhance efficiency in searching.
     * Added an export feature to the app.
         * This feature allows the user to export a visual representation recently created, be it table or barchart, to an intended destination.
-        * The exported chart is saved as a PNG image. 
+        * The exported chart is saved as a PNG image.
 
 * **Documentation**:
     * User Guide:

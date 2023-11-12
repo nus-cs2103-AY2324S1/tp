@@ -46,7 +46,7 @@ Choose a topic from the table of contents below to find out how to use Tutorium!
 
 1. Copy the file to the folder you want to use as the _home folder_ for the Tutorium app.
 
-1. Open a command terminal. If you are using Windows, press the Windows key + R on your keyboard, type `cmd` and press Enter. 
+1. Open a command terminal. If you are using Windows, press the Windows key + R on your keyboard, type `cmd` and press Enter.
 If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in the search field, and then click Terminal.
 
 1. "Go into" the folder you put the `tutorium.jar` file in using cd command. For example, if you put it in a folder named `Downloa`, then type this command into the terminal: `cd Tutorium`
@@ -86,10 +86,10 @@ If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in 
   e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times), `s/English`, `s/English s/Chinese` etc.
 
 * When providing parameters starting with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)` to fields,
-  users should not add spaces between the prefix for that field and the input value. 
+  users should not add spaces between the prefix for that field and the input value.
   e.g. Filtering students with the address `e/house` should be done with the command `filter a/e/house` rather than `filter a/ e/house`.
 
-* Parameters containing words (other than the first word) that start with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)` 
+* Parameters containing words (other than the first word) that start with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)`
   are not accepted in Tutorium.
 
 * Parameters can be in any order.<br>
@@ -430,5 +430,3 @@ Action     | Format, Examples
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 [↑ Back to table of contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
