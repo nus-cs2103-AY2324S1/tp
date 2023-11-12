@@ -1425,8 +1425,24 @@ We faced the following challenges during the development of this project:
 
 * **Documentation**
 
-   Being new to writing user and developer guides or creating UML diagrams, we had to spend a signficant amount of time looking at existing docs and learning to write our own. We also had to spend a lot of time ensuring that the documentation was consistent with the code and our implementation. This was a challenge because it required an in-depth understanding of the codebase, and so we had to defer most of the technical parts of our documentation towards the end of the project.
+   Being new to writing user and developer guides or creating UML diagrams, we had to spend a significant amount of time looking at existing docs and learning to write our own. We also had to spend a lot of time ensuring that the documentation was consistent with the code and our implementation. This was a challenge because it required an in-depth understanding of the codebase, and so we had to defer most of the technical parts of our documentation towards the end of the project.
 
 ### Effort Required
+In the project, we invested a moderate level of effort to ensure the successful development and delivery of our product. Here are some of the different aspects of our team efforts:
+
+* **Group Effort**
+
+  Collaborative discussions have been held weekly to brainstorm ideas, plan sprints, and address challenges. We had discussed and assigned roles to every team member such that we could diligently contribute our own skills and expertise, striking a balance between efficiency and thoroughness. We also try out best to help each other when we can, especially since we understand that not every teammate is able to deliver as much due to other commitments.
+
+* **Project Management**
+
+  Code reviews and testing processes have been carried out meticulously to maintain code quality and identify potential issues early on. We also demonstrated a commitment to meeting project milestones and deadlines, always having mid-week reminders of the tasks we have to complete and always assigning an earlier internal deadline to give as leeway to check before the actual submission.
 
 ### Achievements of the Project
+This project has been a very invaluable experience where we got to have a taste of how actual software engineering projects were — exploring different types of workflows, different types of testing, etc. 
+
+One of the things that we are most proud of is the bettering of the UI. Though the change was not very extravagant, the change in colour scheme was a feat in itself since we honestly did not aim to care a lot about our UI. We also managed to add icons beside the employee attributes in each employee card which we believe made it more readable for the users.
+
+Another feature we are proud of is our `report` feature that allows our users to generate reports as txt files for each employee. While it might not contain a lot of information yet, we believe that it was a great starting point considering the time-constraint we had for this project and we plan to extend and further develop this feature, improving the experience for our users.
+
+Overall, we are proud of our project and we believe that we have done our best with all the constraints and challenges we faced. We are happy with the result and believe that our product will meet the needs of our target audience.
