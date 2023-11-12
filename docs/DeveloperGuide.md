@@ -623,8 +623,44 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ---------------------------------------------------------------------------
 
-## **Appendix: Effort**
+## Appendix: Effort
 
+### Project Overview
+
+Our project, lesSON, emerged from the adaptation of AB3 code into a dynamic flashcard application. Users engage in a 
+two-phase learning process, viewing flashcards initially and then practicing recall. The collaborative efforts of our 
+5-person team resulted in a feature-rich app encompassing CRUD operations, dual-phase learning, spaced repetition, and 
+additional features like hints and goal-setting.
+
+### Project Challenges
+
+The transition from AB3 to lesSON posed challenges, particularly during the refactoring phase. Adapting existing code 
+required meticulous modifications to align with the unique requirements of a flashcard app. The primary challenge was 
+to implement changes without introducing bugs or compromising the overall app functionality.
+
+### Development Effort
+
+The development effort invested in lesSON covered various aspects, including feature implementation, refactoring, and 
+quality assurance. The team dedicated substantial time to refine and optimize the codebase, ensuring a robust and 
+user-friendly flashcard application.
+
+### Achievements
+
+lesSON stands as a testament to our team's collaborative efforts, resulting in a functional and feature-rich flashcard 
+app. Noteworthy achievements include successful CRUD operations, dual-phase learning, spaced repetition, and additional 
+user-centric features.
+
+### Comparison with AB3
+
+lesSON differentiates itself from AB3 by introducing a more dynamic and engaging learning experience. The two-phase 
+structure, combined with features like difficulty settings and prioritized card ordering, positions lesSON as a more 
+advanced and versatile educational tool.
+
+### Conclusion
+
+The successful transformation of AB3 into lesSON highlights the team's adaptability and technical expertise. Overcoming 
+challenges, especially during the refactoring phase, demonstrates our commitment to delivering a robust and innovative 
+flashcard application.
 
 
 
