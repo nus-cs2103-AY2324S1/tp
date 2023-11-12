@@ -2,8 +2,32 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+## Table of Contents
+* Acknowledgements 
+* Setting up, getting started 
+* Design 
+  * Architecture 
+  * UI component 
+  * Logic component 
+  * Model component
+    Storage component
+    Common classes
+    Implementation
+    Return to home page feature
+    Select Event Feature
+    Add Tag Feature
+    Link/unlink Feature
+    [Proposed] Undo/redo feature
+    [Proposed] Data archiving
+    Documentation, logging, testing, configuration, dev-ops
+    Appendix: Requirements
+    Product scope
+    User stories
+    Use cases
+    Non-Functional Requirements
+    Glossary
+    Appendix: Effort
+    Appendix: Instructions for manual testing
 
 --------------------------------------------------------------------------------------------------------------------
 
