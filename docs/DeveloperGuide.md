@@ -447,5 +447,5 @@ testers are expected to do more *exploratory* testing.
    invalid message `Phone numbers must start with at least 3 digits.` will need to be updated to reflect this enhancement.
 1. The current implementation of `AlternateContact` does not allow users to include whitespace in `TYPE` and `USERNAME`.
    `USERNAME` currently only supports alphanumeric and certain special characters. We intend to allow users to include 
-   whitespace in`TYPE` and `USERNAME`. `USERNAME` will also be enhanced to include other special characters that are not
+   whitespace in `TYPE` and `USERNAME`. `USERNAME` will also be enhanced to include other special characters that are not
    supported currently. This will allow `AlternateContact` to be used more flexibly.
