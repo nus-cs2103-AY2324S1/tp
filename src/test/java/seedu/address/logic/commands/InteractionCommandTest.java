@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.List;
@@ -33,8 +35,7 @@ public class InteractionCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws CommandException {
-        Person personToAddInteractions =
-            new Person.PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())).build();
+        Person personToAddInteractions = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         List<Interaction> interactions = personToAddInteractions.getInteractions();
         Interaction interactionToAdd = new Interaction(INTERACTION_NOTE_STUB, INTERACTION_OUTCOME_STUB);
         interactions.add(interactionToAdd);
@@ -51,6 +52,12 @@ public class InteractionCommandTest {
         expectedModel.setPerson(personToAddInteractions, editedPerson);
 
         assertCommandSuccess(interactionCommand, model, expectedMessage, expectedModel);
+        assertTrue(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getInteractions()
+                .contains(interactionToAdd));
+
+        //Clear ALICE's interactions to prevent interference with other tests
+        interactions.clear();
+        assertEquals(ALICE.getInteractions().size(), 0);
     }
 
     @Test
