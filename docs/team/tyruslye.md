@@ -39,11 +39,11 @@ Given below are my contributions to the project.
         * Added documentation for the feature `undo`.
     * Developer Guide:
         * Added implementation details of the `reset` feature.
+        * Updated the class diagram for `reset` feature.
+        * Added the activity diagram for `reset` feature.
         * Added implementation details of the `help` feature.
         * Added implementation details of the `exit` feature.
         * Added implementation details of the `undo` feature.
         * Updated the class diagram for `undo` feature.
         * Added the activity diagram for `undo` feature.
-* **Community**:
 
-* **Tools**:
