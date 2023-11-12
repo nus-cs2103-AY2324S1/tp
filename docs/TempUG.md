@@ -33,7 +33,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 1. Ensure you have _Java_ <sup>[3](#glossary)</sup>  11 or above installed in your Computer. You can check by opening a _command terminal_ <sup>[4](#glossary)</sup> and typing `java -version`.
 
-2. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases).
+2. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases/latest).
 
 3. Copy the file to the folder you want to use as the _home folder_ <sup>[5](#glossary)</sup> for your TutorMate.
 
@@ -77,8 +77,8 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 ![Ui](images/Ui.png)
 
 ### Terminologies / Symbols
-* Flag: A flag is a tab started with dash "-" that is used to identify the type of information that is being provided e.g. -name.
-<!-- todo, validate that all boxes thing works, as IDE does not show it -->
+* Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. -name.
+
 * Text formatted as code snippets are either commands e.g. `list schedule`, command formats e.g. `list [LIST][KEYWORDS]` or parameters e.g. `NAME`.
 * <box type="info" seamless>This box denotes additional information.</box>
 * <box type="tip" seamless>This box denotes tips to improve usability.</box>
@@ -99,11 +99,14 @@ This box denotes command outputs.
   e.g. both `link -student student name -lesson lesson name` and `link -lesson lesson name -student student name` are acceptable.
 * Parameters without a flag need to strictly follow the order specified.<br>
   e.g. For delete command which specifies `delete INDEX`, the "index" parameter must immediately follow the command name "delete".<br>
-* All command name are case-insensitive. <br>
+* All command names are case-insensitive. <br>
   e.g. `linkTo` is the same as `linkto` or `LiNkTo`.
 * When applicable, extraneous parameters and flags for commands will be ignored .<br>
   e.g. if the command entered is `add info -name new name -notValid flagBody -subject physics`, it will be interpreted as `add -name new name -subject physics`. "info " and "-notValid flagBody" will be ignored. <br>
+  e.g. if the command entered is `delete 3 extra`, it will be interpreted as `delete 3`<br>
   e.g. However, `delete extra 3` will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
+
+
 </box>
 
 ### Other Notes
@@ -147,7 +150,7 @@ It will display the specified list and its corresponding details panel.
 
 Format: `list [LIST] [KEYWORDS]`
 * Shows the list and associated detail panel for the specified `[LIST]`.
-* The `[KEYWORDS]` is for which specifying student details to display, and is only valid for ___STUDENTS list___. When used for ___SCHEDULE list___ and ___TASKS list___, they will be ignored.
+* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for ___STUDENTS list___. When used for ___SCHEDULE list___ and ___TASKS list___, they will be ignored.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
@@ -161,7 +164,7 @@ Format: `list [LIST] [KEYWORDS]`
 
 Example usages:
 * `list students` displays all the students with their names (including previously specified fields).
-* `list students subjects email` displays all the students with their names, a list of subjects for each student and their email.
+* `list students subjects email` displays all the students with their names, the list of subjects for each student and their email.
 
 Success outputs:
 * Input: `list students` (with no additional student details):
@@ -299,7 +302,7 @@ The lesson index provided is invalid
 
 ### Add Feature
 
-Adds a student/lesson/task to the students/schedule list of the application or the task list of a lesson in the application.
+Adds a student/lesson/task to the ___STUDENTS list___, ___SCHEDULE list___ or the task list of a lesson in the application.
 
 #### For Student:
 
@@ -343,7 +346,6 @@ For example, addPerson -name John -phone 91234567
 If you are currently displaying student list, you could use 'add' inplace of 'addPerson'. 
 Note you must provide a 'name' not already in the address book.
  ```
-![Failure for addPerson](images/add-person/add_person_failure.png)
 
 
 #### For Schedule:
@@ -459,7 +461,8 @@ Format: `deletePerson INDEX`
 
 Example usages:
 * `deletePerson 1`
-* In ___STUDENTS list___ : `delete 1`
+* In ___STUDENTS list___ : 
+  * `delete 1`
 
 Success outputs:
 * Input: `deletePerson 1`
@@ -1248,6 +1251,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 | Action       | List               | Format                                                                                                                         | Examples                                                                                                       | Remarks                                                               |
 |--------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
 | **List**     | Any                | `list [LIST] [KEYWORDS]`                                                                                                       | `list students email`, `list schedule`, `list tasks`                                                           | `list` without optional parameters displays the ___SCHEDULE list___   |
+| **Show**     | Any                | `show INDEX`                                                                                                                   | `show 1`, `show 3`                                                                                        | `show` will show the specified item at the given index of the current list |
 | **Add**      | Students           | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]` | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | NA                                                                    |
 | **Add**      | Schedule           | `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                | `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`                       | NA                                                                    |
 | **Add**      | Schedule           | `addTask [INDEX] DESCRIPTION`                                                                                                  | `addTask 1 Make Forces Notes`                                                                                  | NA                                                                    |
@@ -1256,6 +1260,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 | **Delete**   | Schedule           | `deleteTask INDEX`                                                                                                             | `deleteTask 1`                                                                                                 | `show INDEX` to show the lesson has to be used prior to `deleteTask`  |
 | **Find**     | Students, Schedule | `find SEARCH_STRING`                                                                                                           | `find bernice`, `find lesson`                                                                                  | Disabled in ___TASKS list___                                          |
 | **Feature**  | Any                | `command format`                                                                                                               | `sample valid command`                                                                                         | Any additional remarks here                                           |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
