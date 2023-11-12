@@ -108,10 +108,6 @@ public class EditCommand extends UndoableCommand {
         originalPerson = personToEdit;
         editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (originalPerson.equals(editedPerson)) {
-            throw new CommandException(MESSAGE_NO_CHANGE);
-        }
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         logger.log(Level.INFO, "EditCommand executed successfully");
