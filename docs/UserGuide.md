@@ -198,7 +198,7 @@ file.
 | \<SORT TYPE>   | asc (ascending) or desc (descending)                            |
 | ...            | Multiple entries allowed, separated by a space                  |
 
-> ❗ Extraneous parameters for commands that do not take in parameters (such as help, list, exit, clearstaff,
+> ❗ Extraneous parameters for commands that do not take in parameters (such as view, help, list, exit, clearstaff,
 > cleartransaction, and clear) will be ignored. For example, if the command `help 123` is entered, it will be interpreted
 > as `help`.
 
