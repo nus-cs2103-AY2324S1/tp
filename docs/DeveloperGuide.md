@@ -789,7 +789,7 @@ Adding a lesson in ___SCHEDULE list___.
 
 Deleting a lesson in ___SCHEDULE list___.
 
-1. Prerequisites: There are more than 5 and less than 80 students in the displayed list ___SCHEDULE list___.
+1. Prerequisites: List all lessons using the `list` command. There are more than 5 and less than 80 students in the displayed list ___SCHEDULE list___.
 
 2. Test case: `deleteLesson 1`<br>
    Expected: First lesson is deleted from the list. Details of the deleted lesson is shown in the response box.
@@ -800,8 +800,9 @@ Deleting a lesson in ___SCHEDULE list___.
 4. Test case: `deleteLesson 80`<br>
    Expected: No lesson is deleted. Error indicating index input is out of bounds and the acceptable range is shown in the response box.
 
-5. Test case: `deletePerson` <br>
-   Expected: No student is deleted. Error indicating invalid command format is shown in the response box.
+5. Test case: `deleteLesson` <br>
+   Expected: No lesson is deleted. Error indicating invalid command format is shown in the response box.
+
 
 
 ### Saving data
