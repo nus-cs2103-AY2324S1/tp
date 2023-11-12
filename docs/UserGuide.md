@@ -2,7 +2,12 @@
 layout: page
 title: User Guide
 ---
-# TuitionConnect User Guide
+# Welcome to TuitionConnect's User Guide!
+
+Fed up with setting up numerous unorganized spreadsheets on Microsoft Excel or Google Sheets to handle the administrative side of you tutoring business?
+
+Or are you perhaps finding it increasingly difficult 
+
 
 TuitionConnect is a **desktop app for simplifying the process of administration and finance management for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise tracking tutee-specific details, teaching-schedule management, and finance management.
 
@@ -123,12 +128,15 @@ Shows a message that helps redirects you to the user guide.
 **Expected Output when the command fails**:
 
 * **Missing name**: Please input a name
-* **Duplicate tutee**: This tutee already exists
 * **Invalid Phone number**: Please provide a valid phone number
 * **Invalid Day**: Please input a valid day
 * **Invalid Begin**: Please input a valid time for Begin in HHMM
 * **Invalid End**: Please input a valid time for End in HHMM
 * **Invalid PayRate**: PayRate can be either integers or decimals of up to 2 decimal places. It cannot be negative
+* **Duplicate tutee**: This tutee already exists
+* **Clashing Schedules**: This date and time clashes with an existing schedule. 
+  * This error occurs if the tutee that is
+  trying to be added has DAY/BEGIN/END fields that overlaps with an exisiting tutee.
 
 **Examples**:
 * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 end/1600 pr/20.00`
