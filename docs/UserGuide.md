@@ -92,7 +92,7 @@ Adds a patient or specialist to DoConnek Pro records.
 Format (for patients): `add -pa n/NAME p/PHONE e/EMAIL [t/TAG]...​ a/AGE [m/MEDICAL_HISTORY]...​` <br>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A patient can have any number of medical histories (including 0)
+A patient can have any number of medical histories and tags (including 0)
 </div>
 
 Format (for specialists): `add -sp n/NAME p/PHONE e/EMAIL [t/TAG]...​ l/LOCATION s/SPECIALISATION`
