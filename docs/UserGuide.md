@@ -261,7 +261,7 @@ Format: `clear`
 
 ### Saving the data
 
-InterviewHub data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Data in InterviewHub are automatically saved to the hard disk after any command that changes the data. There is no need for manual saving.
 
 [Back to the Table of Contents](#table-of-contents)
 
