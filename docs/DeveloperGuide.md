@@ -338,6 +338,10 @@ In order to enable comparison of each valid field, these fields will implement t
 
 1. Name
 2. Phone
+3. Score
+4. Email
+5. Position
+6. Status
 
 #### Steps to trigger
 
@@ -366,12 +370,12 @@ The following diagram summarises what happens when a user executes a Sort comman
 - Alternative 1 (current choice): `sort d/ [valid field]`
     - Pros: Simple and minimal text fields, with a single prefix required to enable sorting.
     - Cons: Only able to sort in ascending order.
-- Alternative 2: `sort d/ [valid field] o/ [a/d]`
+- Alternative 2: `sort d/ [valid field] [asc/]/[dsc/]`
     - Pros: Able to sort in either ascending or descending order.
     - Cons: Requires additional input from the user, slowing down the use of the command.
-- Alternative 3: `sort d/ [valid field] o/ [a/d]` where `o/` is optional
-    - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1.
-    - Cons: Users who are not aware of the `o/` feature may not use it.
+- Alternative 3: `sort d/ [valid field] [dsc/]` where `dsc/` is optional
+    - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1. Also does not require user to type in any flag to sort in ascending order.
+    - Cons: Users who are not aware of the `dsc/` feature may not use it.
 
 <br>
 
@@ -893,7 +897,7 @@ Guarantees: The specified interview will be deleted from the applicant.
 
 **Use case: UC09 - Find an applicant by name**
 
-Guarantees: The applicants with name matching the search will be listed.
+Guarantees: The applicants whose name matches the search term will be listed.
 
 **MSS**
 
@@ -955,7 +959,7 @@ Guarantees: The list of applicants will be sorted by the descriptor.
 
 **Use case: UC11 - Filter applicants**
 
-Guarantees: Only applicants that satisfies the specified criterion will be listed.
+Guarantees: Only applicants that satisfy the specified criterion will be listed.
 
 **MSS**
 
@@ -984,7 +988,7 @@ Guarantees: Only applicants that satisfies the specified criterion will be liste
 
       Use case ends.
 
-**Use case: UC12 - import CSV file**
+**Use case: UC12 - Import CSV file**
 
 Guarantees: The applicant list will be populated with data from the imported CSV file.
 
