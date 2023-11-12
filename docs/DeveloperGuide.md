@@ -189,28 +189,9 @@ There are three commands that deal with listing tutees:
 3. `ListUnPaidCommand` - Shows the current list of tutees who have not paid
 
 The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and the `ListUnPaidCommand` extend the `ListCommand` class. All three commands override `Command#execute`.
-The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format
-
+The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format.
 
 The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
-
-### Find feature
-The `findCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
-subject using their prefixes.
-
-The following sequence diagram shows how the edit command works.
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
-
-### Edit feature
-The `editCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
-of the tutee.
-
-The following sequence diagram shows how the edit command works.
-![EditSequenceDiagram](images/EditSequenceDiagram.png)
-
-### List by day feature
-The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
->>>>>>> master
 the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
 
 The following sequence diagram shows how the list by day command works.
@@ -229,6 +210,20 @@ the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
 * **Alternative 2:** Individual command class without extending `ListCommand`.
     * Pros: Easier to implement.
     * Cons: Less abstraction.
+
+### Find feature
+The `findCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
+subject using their prefixes.
+
+The following sequence diagram shows how the edit command works.
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+### Edit feature
+The `editCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
+of the tutee.
+
+The following sequence diagram shows how the edit command works.
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
 
 ### Find Free Time feature
 
@@ -405,16 +400,17 @@ The following sequence diagram shows how unpaidAll command works:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                       |
-| ------ |--------------------------------------------|---------------------------------------------|-----------------------------------------------------------------------|
-| `* * *` | tutor                                      | view a list of all tutees                   |                                                                       |
-| `* *`  | tutor                                      | view a list tutees on a specified day       | so that I can be reminded if I have any classes on that particular day |
-| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                       |
-| `* * *` | tutor                                      | add a new tutee                             |                                                                       |
-| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address       |
-| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                     |
-| `* *`  | tutor                                      | mark students that have already paid        | keep track of students' payment statuses                              |
-| `* *`  | tutor                                      | check all students who haven't paid         | easily remind students who haven't paid                               |
+| Priority | As a …​ | I want to …​                                     | So that I can…​                                                        |
+| ------ |---------|--------------------------------------------------|------------------------------------------------------------------------|
+| `* * *` | tutor   | view a list of all tutees                        |                                                                        |
+| `* *`  | tutor   | view a list tutees on a specified day            | so that I can be reminded if I have any classes on that particular day |
+| `* * *` | tutor   | view the specific details of a single tutee      |                                                                        |
+| `* * *` | tutor   | add a new tutee                                  |                                                                        |
+| `* * *` | tutor   | edit their details                               | account for changes in their information e.g. change in address        |
+| `* *`  | tutor   | remove tutees from the list                      | keep track of tutees that I have stopped teaching                      |
+| `* *`  | tutor   | mark students that have already paid             | keep track of students' payment statuses                               |
+| `* *`  | tutor   | check all students who haven't paid              | easily remind students who haven't paid                                |
+| `* *`  | tutor   | undo and redo commands I made in the application | easily revert any mistakes                                             |
 
 *{More to be added}*
 
