@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindBandCommandParser" as FindBandCommandParser LOGIC_COLOR
+participant "f:FindBandCommand" as FindBandCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "p:BNCKP" as BandNameContainsKeywordsPredicate MODEL_COLOR
+end box
+
+[-> AddressBookParser : parseCommand\n("findb n/My Garage Band")
+activate AddressBookParser
+
+create FindBandCommandParser
+AddressBookParser -> FindBandCommandParser
+activate FindBandCommandParser
+
+FindBandCommandParser --> AddressBookParser
+deactivate FindBandCommandParser
+
+AddressBookParser -> FindBandCommandParser : parse\n("n/My Garage Band")
+activate FindBandCommandParser
+
+create BandNameContainsKeywordsPredicate
+FindBandCommandParser -> BandNameContainsKeywordsPredicate : BandNameContainsKeywordsPredicate("My Garage Band")
+activate BandNameContainsKeywordsPredicate
+
+BandNameContainsKeywordsPredicate --> FindBandCommandParser :p
+deactivate BandNameContainsKeywordsPredicate
+
+create FindBandCommand
+FindBandCommandParser -> FindBandCommand : p
+activate FindBandCommand
+
+FindBandCommand --> FindBandCommandParser : f
+deactivate FindBandCommand
+
+FindBandCommandParser --> AddressBookParser : f
+deactivate FindBandCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindBandCommandParser -[hidden]-> AddressBookParser
+destroy FindBandCommandParser
+
+[<-- AddressBookParser : f
+deactivate AddressBookParser
+
+[-> FindBandCommand : execute()
+activate FindBandCommand
+
+FindBandCommand -> Model : updateFilteredBandMusicianList\n(p)
+activate Model
+
+'Hidden arrow to increase the length of the activation bar.
+Model -[hidden]-> Model
+
+Model --> FindBandCommand
+deactivate Model
+
+create CommandResult
+FindBandCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindBandCommand
+deactivate CommandResult
+
+[<-- FindBandCommand : result
+deactivate FindBandCommand
+
+@enduml

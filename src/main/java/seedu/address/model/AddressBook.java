@@ -119,7 +119,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a band with the same identity as {@code musician} exists in the address book.
+     * Returns true if a band with the same identity as {@code band} exists in the address book.
      */
     public boolean hasBand(Band band) {
         requireNonNull(band);
