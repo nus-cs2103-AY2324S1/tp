@@ -374,35 +374,53 @@ The following activity diagram summarises what happens when a user executes the 
 
 The proposed reporting mechanism is facilitated by `ReportCommandParser`. It implements the following operations:
 
-* `ReportCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `ReportCommand` object with the parsed employee ID.
+* `ReportCommandParser#parse()` — Parses the input employee ID and creates a new `ReportCommand` object with the parsed employee ID.
 
-The `ReportCommand` object then communicates with the `Model` API by calling the following methods:
+The `ReportCommand` object then communicates with the `Model` and `ReportStorage` APIs by calling the following methods:
 
-* `Model#getEmployee(EmployeeId)` — Gets the employee with the given employee ID from the existing employee list.
+* `Model#getFilteredEmployeeList()` — Gets the existing employee list, which is then looped through to get the employee with the given employee ID.
 
-Given below is an example usage scenario where the user attempts to generate a report for an employee with ID EID1234-5678.
+* `ReportStorage#saveReport(Report)` — Saves the report generated in `ReportCommand#execute()` by `ReportCommand#generateReport(employee)`, which is then stored on the hard disk as a `.txt` file.
 
-The user keys in `report EID1234-5678`
+The method `ReportCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
 
-the `report` command will call `ReportCommandParser#parse()`, which in turn calls `Model#getEmployee()`
-which then calls `UniqueEmployeeList#getEmployee()`.
-This will return the employee with the given employee ID.
+The following sequence diagram below shows how the report operation works:
 
-Then, the `ReportCommand` object will call `ReportCommand#execute()` which will generate a report for the employee.
-This report will be displayed in the GUI. This also calls the `storage` component to save the report in the hard disk.
+![Report Sequence Diagram](images/ReportSequenceDiagram.png)
 
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `report id/EMPLOYEE_ID` command in the CLI.
+
+**Step 3**: A report will be generated for the employee with the given ID.
+
+The following activity diagram summarises what happens when a user executes the report command:
+
+![Report Activity Diagram](images/ReportActivityDiagram.png)
 
 #### Design considerations:
 
-**Aspect: How report executes:**
+**Aspect: Command-Model Interaction**
 
-* **Alternative 1 (current choice):** Gets the employee with the given employee ID directly
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Utilise `Model#getFilteredEmployeeList()` to get the existing employee list, which is then looped through to get the employee with the given employee ID.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Longer command execution, requiring more parts to work together.
 
-* **Alternative 2:** Change UI to display performance metrics of employees.
-    * Pros: Will be able to display performance metrics of all employees at once.
-    * Cons: May make the UI more cluttered.
+* **Alternative 2:** Create methods in `Model` class specifically to get the employee with the given employee ID.
+    * Pros: Shorter command execution.
+    * Cons: May reduce immutability between Employee and Model classes.
+
+**Aspect: Command-Storage Interaction**
+
+* **Alternative 1 (current choice):** Utilise a dedicated storage class `ReportStorage` with the method `ReportStorage#saveReport(Report)` to save the report.
+    * Pros: Maintain SRP and SLAP within the command class.
+    * Cons: Longer command execution, requiring more parts to work together.
+
+* **Alternative 2:** Create methods in `ReportCommand` class to write and save the report.
+    * Pros: Shorter command execution, one less point of failure by eliminating the `ReportStorage` class.
+    * Cons: Less OOP, may violate SLAP within the command class.
 
 ### Reset feature
 
