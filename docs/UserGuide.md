@@ -15,21 +15,21 @@ UniMate is a desktop app for students to **manage contacts** and **manage schedu
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `UniMate.jar` from [here](https://github.com/AY2324S1-CS2103-F13-4/tp/releases).
+2. Download the latest `UniMate.jar` from [here](https://github.com/AY2324S1-CS2103-F13-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for UniMate.
+3. Copy the file to the folder you want to use as the _home folder_ for UniMate.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar UniMate.jar` command to run the application.<br><br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar UniMate.jar` command to run the application.<br><br>
    A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data,
 which may differ from that of a fresh download.<br>
    ![Ui](images/unimateScreenshot.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the AddressBook.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -37,37 +37,37 @@ which may differ from that of a fresh download.<br>
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 # Features Overview
 
-UniMate has 3 core features, [**Address Book**](#main-feature-1-address-book), [**Calendar System**](#main-feature-2-calendar-system)
+UniMate has 3 core features, [**AddressBook**](#main-feature-1-address-book), [**Calendar System**](#main-feature-2-calendar-system)
 and [**Task Management System**](#main-feature-3-task-management-system). This section serves to
 provide you with an overview of what each component entails and the functionalities supporting them.
 
 ![uniMateFeatureOverview](images/uniMateFeatures.png)
 
-The screenshot above shows a cropped view of UniMate's GUI. **ADDRESS BOOK** belongs to the [**Address Book** feature](#main-feature-1-address-book),
+The screenshot above shows a cropped view of UniMate's GUI. **AddressBook** belongs to the [**AddressBook** feature](#main-feature-1-address-book),
 **CALENDAR** belongs to the [**Calendar System** feature](#main-feature-2-calendar-system) and the **EVENT LIST/TASK LIST**
 portion is shared by both the [**Calendar System** feature](#main-feature-2-calendar-system) and [**Task Management System** feature](#main-feature-3-task-management-system).
 
 >To switch between the [Event List](#sub-feature-2-event-list) and [Task List](#main-feature-3-task-management-system),
 we have a [CLI-based command](#viewing-tasks-switchlist) for that.
 
-## Main feature 1: Address Book
+## Main feature 1: AddressBook
 
-The address book serves to ease contact management. 
+The AddressBook serves to ease contact management. 
 
 Some major CLI-based functionalities to support this feature include:
-- [**Adding**](#adding-a-person-add), [**deleting**](#deleting-a-person--delete) and [**editing**](#editing-a-person--edit) operations to manipulate contacts in the address book
+- [**Adding**](#adding-a-person-add), [**deleting**](#deleting-a-person--delete) and [**editing**](#editing-a-person--edit) operations to manipulate contacts in the AddressBook
 - [**Finding**](#locating-persons-by-name-find) and [**filtering**](#filtering-persons-by-attribute-filter) operations to search for and isolate contacts of interest
-- [**Sorting**](#sort-persons--sort) operation to reorganise the view of the address book when needed 
+- [**Sorting**](#sort-persons--sort) operation to reorganise the view of the AddressBook when needed 
 
-Other functionalities can be found in the [Address Book Management subsection found in the Features section](#address-book-management).
+Other functionalities can be found in the [AddressBook Management subsection found in the Features section](#address-book-management).
 
-Additionally, each contact in the address book has their own personal calendar, 
-which can be accessed simply by double-clicking with the left mouse button on the contact's card in the address book.
+Additionally, each contact in the AddressBook has their own personal calendar, 
+which can be accessed simply by double-clicking with the left mouse button on the contact's card in the AddressBook.
 This will create a pop-up displaying the contact's calendar as shown below. 
 
 ![contactCalendar](images/contactCalendar.png)
@@ -83,8 +83,8 @@ To achieve this, we have 2 supporting sub-features:
 2. [Event List](#sub-feature-2-event-list)
 
 For the calendar system, we work solely with `events`, which differs from `tasks` used in the [task list feature](#main-feature-3-task-management-system).
-: - `event` has a `description`, `start date and time` and `end date and time`
-: - `task` only has a `description` and `end date and time`
+- `event` has a `description`, `start date and time` and `end date and time`
+- `task` only has a `description` and `end date and time`
 
 ### Sub-feature 1: Calendar
 
@@ -99,10 +99,10 @@ Upcoming updates will allow the user to navigate beyond this chronological restr
 consider using the [Event List](#sub-feature-2-event-list) to view events outside the current week.
 
 For the **user**'s calendar, some major CLI-based functionalities supporting this sub-feature includes:
-- [Adding](#adding-an-event-addevent), [deleting](#deleting-an-event-deleteevent) and [clearing](#deleting-multiple-events-clearevents) operations to manipulate the events in the user's calendar
+- [Adding](#contact-calendar-adding-an-event-to-a-contact-addcontactevent), [deleting](#contact-calendar-deleting-an-event-from-a-contact-deletecontactevent) and [clearing](#user-calendar-deleting-multiple-events-clearevents) operations to manipulate the events in the user's calendar
 
 For the **contact**'s calendar, some major CLI-based functionalities supporting this sub-feature includes:
-- [Adding](#adding-an-event-to-a-contact), [deleting](#deleting-an-event-from-a-contact) and [editing](#edit-contact-calendar-event) operations to manipulate the events in the contact's calendar
+- [Adding](#contact-calendar-adding-an-event-to-a-contact-addcontactevent), [deleting](#contact-calendar-deleting-an-event-from-a-contact-deletecontactevent) and [editing](#contact-calendar-edit-contact-calendar-event-editcontactevent) operations to manipulate the events in the contact's calendar
 
 Other useful CLI-based functionalities not exclusive to the user/contact supporting this sub-feature includes:
 - Comparison operations to compare the user's calendar with their contacts' calendars either by [index](#1-comparison-by-index) or [tag](#2-comparison-by-tag)
@@ -115,7 +115,7 @@ The event list displays all the events for the user/contact. It serves as an ove
 events that the user or their contact have.
 
 The event list shown on the main UniMate GUI is the user's event list. To view a specific contact's
-event list, we have a [CLI-based command](#viewing-another-persons-events-viewcontactevents) that will
+event list, we have a [CLI-based command](#viewing-a-contacts-event-list-viewcontactevents) that will
 display the contact's event list in a popup window.
 
 ## Main-feature 3: Task Management System
@@ -125,7 +125,7 @@ between event and task is that a task does not have a starting date and time.
 
 Some useful CLI-based functionalities supporting this feature includes:
 - [Adding](#adding-tasks-addtask) and [deleting](#deleting-tasks-deletetask) operations to manipulate the tasks present in the task list
-- [Sorting](#sorting-tasks-sorttask) operation to reorganise the view of the task list when needed
+- [Sorting](#sorting-tasks-sorttasks) operation to reorganise the view of the task list when needed
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,7 +139,7 @@ Some useful CLI-based functionalities supporting this feature includes:
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -173,11 +173,11 @@ Format: `exit`
 
 Alternatively, the user can also exit the application through the menu bar (`File` > `Exit`)
 
-## Address Book Management
+## AddressBook Management
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the AddressBook.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -194,11 +194,11 @@ Examples:
 
 In the example, after executing
 `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`, we see `John Doe`'s
-contact information stored in the address book as the 7th contact on the left-hand side of the GUI.
+contact information stored in the AddressBook as the 7th contact on the left-hand side of the GUI.
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the AddressBook.
 
 Format: `delete INDEX`
 
@@ -207,24 +207,24 @@ Format: `delete INDEX`
 * The index must be a **positive integer** (i.e. 1, 2, 3, …​)
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book
+* `list` followed by `delete 2` deletes the 2nd person in the AddressBook
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command
 
 ![deleteCommand](images/deleteCommand.png)
 
 In this example, after executing `list`, followed by `delete 7`, `John Doe`, the person with index 7
-is removed from the displayed address book.
+is removed from the displayed AddressBook.
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the AddressBook.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it
 
@@ -247,7 +247,7 @@ this delimitation, consider the [filter command](#filtering-persons-by-attribute
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -280,12 +280,12 @@ with a name containing ``John`` and an email address with the domain ``u.nus.edu
 
 ![filterCommand](images/filterCommand.png)
 
-In this example, after executing `filter t/colleagues`, the address book list displays all contacts
+In this example, after executing `filter t/colleagues`, the AddressBook list displays all contacts
 that have the `colleagues` tag.
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book. This command is particularly useful to
+Shows a list of all persons in the AddressBook. This command is particularly useful to
 display all the contacts after using the [find](#locating-persons-by-name-find) and [filter](#filtering-persons-by-attribute-filter) commands.
 
 Format: `list`
@@ -309,23 +309,23 @@ Format: `sort /COMPARATOR [/reverse]`
 * Sorting is done in ascending order by default. To sort by descending order, the keyword `reverse` can be used (see Examples below)
 
 Examples:
-* `sort /byname` sorts all contacts in UniMate address book by their full name
-* `sort /byaddress /reverse` sorts all contacts in UniMate address book by their address
+* `sort /byname` sorts all contacts in UniMate AddressBook by their full name
+* `sort /byaddress /reverse` sorts all contacts in UniMate AddressBook by their address
 
 ![sortCommand](images/sortCommand.png)
 
-In this example, after executing `sort /byphone`, the address book is now sorted according to the
+In this example, after executing `sort /byphone`, the AddressBook is now sorted according to the
 contact's phone numbers, in ascending numerical order.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the AddressBook.
 
 Format: `clear`
 
 ![clearCommand](images/clearCommand.png)
 
-In this example, after executing `clear`, the address book is now cleared of all contacts.
+In this example, after executing `clear`, the AddressBook is now cleared of all contacts.
 
 ## Calendar System
 
@@ -437,7 +437,7 @@ Example:
 ![addContactEventCommand](images/addContactEventCommand.png)
 
 In this example, after executing `addContactEvent 1 d/Alex's Event ts/2023-11-08 14:00 te/2023-11-08 18:00` and 
-[double-clicking on the person card](#main-feature-1-address-book) of index 1 in the address book, the
+[double-clicking on the person card](#main-feature-1-address-book) of index 1 in the AddressBook, the
 contact's calendar pops up, revealing `Alex's Event`. In the case that the event happens before/after
 the current week, it will not be shown in the calendar, but will still be displayed in the 
 [contact's event list](#viewing-a-contacts-event-list-viewcontactevents).
@@ -456,7 +456,7 @@ Example:
 ![deleteContactEvent](images/deleteContactEventCommand.png)
 
 In this example, after executing `deleteContactEvent 1 ts/2023-11-08 14:00` and
-[double-clicking on the person card](#main-feature-1-address-book) of index 1 in the address book,
+[double-clicking on the person card](#main-feature-1-address-book) of index 1 in the AddressBook,
 the contact's calendar pops up, revealing an empty calendar as `Alex's Event` (added in the 
 [example in addContactEvent](#contact-calendar-adding-an-event-to-a-contact-addcontactevent)),
 occurring at the specified time, has been removed.
@@ -470,7 +470,7 @@ the event list will not be updated until the tab is closed and open again.
 
 Format: `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME][te/NEW_END_DATE_TIME]`
 
-* Edits `EVENT_INDEX` event of the `PERSON_INDEX` person in the address book with the given fields.
+* Edits `EVENT_INDEX` event of the `PERSON_INDEX` person in the AddressBook with the given fields.
 
 Example: `editContactEvent 1 1 d/Nap`, `editContactEvent 2 3 ts/2023-10-10 10:00 te/2023-10-12 15:00`
 
@@ -479,7 +479,7 @@ Example: `editContactEvent 1 1 d/Nap`, `editContactEvent 2 3 ts/2023-10-10 10:00
 ![editContactEventBefore](images/editContactEventCommandBefore.png)
 
 In this example, we see this is the state of the calendar of `Alex Yeoh`, the person with index 1
-in the address book.
+in the AddressBook.
 
 ![editContactEventMessage](images/editContactEventCommandMessage.png)
 
@@ -491,7 +491,7 @@ We can see that the event `Nap` has its description changed to `Edited Descripti
 
 ### Viewing a contact's event list: `viewContactEvents`
 
-Creates a pop-up that displays a list of all events of a calendar belonging to a person in the Addressbook.
+Creates a pop-up that displays a list of all events of a calendar belonging to a person in the AddressBook.
 
 Format: `viewContactEvents INDEX`
 
@@ -503,10 +503,10 @@ Example:
 ![viewContactEvents](images/viewContactEventsCommand.png)
 
 In this example, after execute `viewContactEvents 1`, a pop-up with the list of events of the person
-with index 1 in the address book, which in this case is `Alex Yeoh` shows up.
+with index 1 in the AddressBook, which in this case is `Alex Yeoh` shows up.
 
 ### Comparing calendars with AddressBook Contacts
-There are 2 ways for the user to compare calendars with their address book contacts:
+There are 2 ways for the user to compare calendars with their AddressBook contacts:
 - [Index](#1-comparison-by-index)
 - [Tag](#2-comparison-by-tag)
 
