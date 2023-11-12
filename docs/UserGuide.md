@@ -16,15 +16,18 @@ online dating journey.
 
 ## **Glossary**
 
-| Term                       | Definition                                                                                                        |
-|----------------------------|-------------------------------------------------------------------------------------------------------------------|
-| Date                       | A person that the user is interested in and is currently seeing.                                                  |
-| Metric | A certain characteristic of a date. (e.g. Gender, Height)                                                         |
-| Command | Text that the user types into the application to perform an action.                                               |
-| Parameter | A value that the user provides to the application when executing a command. (e.g. in `gender/M` M is a parameter) |
-| GUI | Graphical User Interface                                                                                          |
-| CLI | Command Line Interface                                                                                            |
-| Mainstream OS |  Windows, Linux, Unix, OS-X |
+| Term                      | Definition                                                                                                       |
+|---------------------------|------------------------------------------------------------------------------------------------------------------|
+| Date                      | A person that the user is interested in and is currently seeing.                                                 |
+| Metric                    | A certain characteristic of a date. (e.g. Gender, Height)                                                        |
+| Command                   | Text that the user types into the application to perform an action.                                              |
+| Parameter                 | A value that the user provides to the application when executing a command. (e.g. in `gender/M` M is a parameter) |
+| GUI                       | Graphical User Interface                                                                                         |
+| CLI                       | Command Line Interface                                                                                           |
+| Mainstream OS             | Windows, Linux, Unix, OS-X                                                                                       |
+| <box type="tip">tip</box> | Suggestions on how to use the commands as well as address potential confusions when using these commands.        |
+| <box type="important">important</box>| Inform you of some unexpected consequences that may occur when you use the commands.                |
+
 
 ### **Common Symbols**
 
@@ -288,10 +291,11 @@ Finds a date in the LoveBook by a specific name(s)
 
 Format: `find NAME [MORE_NAMES]`
 
+<box type="tip">
 Parameter constraints:
-
 - Name should be a non-empty string.
 - More names can be added to the command line, and the search will be conducted for all names provided
+</box>
 
 Example:
 
@@ -306,13 +310,18 @@ Filters the dates in the LoveBook by a specific metric.
 
 Format: `filter METRIC/ARG`
 
-* Parameter constraints:
-* Filter must be from list of metrics
-* Metric is limited to `gender, age, name, height` only
-* Arg can only be one keyword
+<box type="tip">
+Parameter constraints:
+- Filter must be from list of metrics
+- Metric is limited to `gender, age, name, height` only
+- Arg can only be one keyword
+</box>
+
+<box type="important">
+- Unlike the find commmand, you cannot use filter to filter for more than a single name, like so `filter name/kevin name/wayne`
+</box>
 
 Example:
-
 - `filter name/Cleon`
 - `filter gender/M`
 - `filter gender/M name/Cleon`
@@ -325,21 +334,22 @@ Sorts the dates in the LoveBook by a specific metric.
 
 Format: `sort METRIC/ORDER`
 
+<box type="tip">
 Parameter constraints:
+The relevant metrics are
+- `name/ORDER`
+- `age/ORDER`
+- `height/ORDER`
+- `income/ORDER`
+- `horoscope/ORDER`
 
-<box type="info" seamless>
+Order is limited to `increasing` or `decreasing` only
+</box>
 
-**Caution:**
-
-* The relevant metrics are
-  * `name/ORDER`
-  * `age/ORDER`
-  * `height/ORDER`
-  * `income/ORDER`
-  * `horoscope/ORDER`
-
-* Order is limited to `increasing` or `decreasing` only
-
+<box type="important">
+When sorting dates by a field where both have an equal value, say Kevin and Wayne are sorted by income and both have
+an income of 2000, applying commands such as edit or star, can affect the stability of the sort. However, the overall
+sorting order by value is preserved.
 </box>
 
 Example:
@@ -351,17 +361,15 @@ Expected Output: `Lists the dates in the order specified`
 
 ### **Managing Preferences and Getting Matches**
 
-<box type="info" seamless>
+<box type="tips">
+By default, Date Preference is set to:
+AGE: 21
+HEIGHT: 170
+INCOME: 10000
+HOROSCOPE: ARIES
 
-* By default, Date Preference is set to:
-  * AGE: 21
-  * HEIGHT: 170
-  * INCOME: 10000
-  * HOROSCOPE: ARIES
-
-* If you wish to change your Date Preference, please use the [`setP`](#setting-your-date-preferences-setp) command.
-* The [`bestMatch`](#getting-a-recommended-date-bestmatch) command will use the Date Preference set by the user.
-
+If you wish to change your Date Preference, please use the [`setP`](#setting-your-date-preferences-setp) command.
+The [`bestMatch`](#getting-a-recommended-date-bestmatch) command will use the Date Preference set by the user.
 </box>
 
 #### **Showing your date preferences: `showP`**
@@ -376,19 +384,18 @@ Expected output: `Here are your preferences: Age: 22; Height: 180; Income: 2000;
 
 Sets the user's preferences for the matching algorithm.
 
-<box type="info" seamless>
+<box type="tips">
+Note: At least one field to edit must be provided.
+The user's preferences will be used in the [`bestMatch`](#getting-a-recommended-date-bestmatch) command.
+Gender is not taken into account here
 
-* Note: At least one field to edit must be provided.
-* The user's preferences will be used in the [`bestMatch`](#getting-a-recommended-date-bestmatch) command.
-* Gender is not taken into account here
-
-* The relevant fields are
-  * `age/AGE`
-  * `height/HEIGHT`
-  * `income/INCOME`
-  * `horoscope/HOROSCOPE`
-
+The relevant fields are
+`age/AGE`
+`height/HEIGHT`
+`income/INCOME`
+`horoscope/HOROSCOPE`
 </box>
+
 
 Format: `setP [age/AGE] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]`
 
