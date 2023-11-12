@@ -267,7 +267,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseBloodType_BloodTypeWithoutCaps_throwsParseException() {
+    public void parseBloodType_bloodTypeWithoutCaps_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseBloodType(INVALID_BLOOD_TYPE1));
     }
 
