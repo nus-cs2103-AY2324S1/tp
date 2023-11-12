@@ -14,13 +14,12 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":AddressBook" as AddressBook MODEL_COLOR
 end box
 
-[-> LogicManager : execute(Add n/Alex Yeoh ...)
+[-> LogicManager : execute(add n/Alex Yeoh ...)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(Add n/Alex Yeoh ...)
+LogicManager -> AddressBookParser : parseCommand(add n/Alex Yeoh ...)
 activate AddressBookParser
 
 create AddCommandParser
@@ -69,33 +68,17 @@ activate AddCommand
 AddCommand -> Model : addPerson(Alex Yeoh)
 activate Model
 
-Model -> AddressBook : addPerson(Alex Yeoh)
-activate AddressBook
-
-AddressBook --> Model
-deactivate AddressBook
-
 Model --> AddCommand
 deactivate Model
 
 AddCommand -> Person : getGroups()
 activate Person
 
-
-
 Person --> AddCommand : g
 deactivate Person
 
 AddCommand -> Model : addGroup(g)
 activate Model
-
-Model -> AddressBook : addGroup(g)
-activate AddressBook
-
-
-
-AddressBook --> Model
-deactivate AddressBook
 
 Model --> AddCommand
 deactivate Model

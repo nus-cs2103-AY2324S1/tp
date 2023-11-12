@@ -239,4 +239,23 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         }
         return toString;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TimeIntervalList)) {
+            return false;
+        }
+
+        TimeIntervalList otherTime = (TimeIntervalList) other;
+        boolean sameList = true;
+        for (TimeInterval time : this.internalList) {
+            sameList &= (otherTime.hasTime(time));
+        }
+        return sameList;
+    }
 }

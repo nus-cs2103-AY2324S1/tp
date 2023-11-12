@@ -2,13 +2,10 @@ package seedu.address.testutil;
 
 import java.util.Arrays;
 
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -41,6 +38,7 @@ public class PersonBuilder {
         timeIntervalList = new TimeIntervalList();
     }
 
+
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
@@ -50,6 +48,19 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         grpList = personToCopy.getGroups();
         timeIntervalList = personToCopy.getTime();
+    }
+
+
+    /**
+     * Default person builder
+     * @param groupToCopy groupList to copy
+     */
+    public PersonBuilder(GroupList groupToCopy) {
+        name = new Name(DEFAULT_NAME);
+        phone = new Phone(DEFAULT_PHONE);
+        email = new Email(DEFAULT_EMAIL);
+        grpList = groupToCopy;
+        timeIntervalList = new TimeIntervalList();
     }
 
     /**
@@ -68,11 +79,9 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withTimeIntervalList(String timeIntervalList) throws ParseException {
-        this.timeIntervalList.addTime(ParserUtil.parseEachInterval(timeIntervalList));
-        return this;
-    }
-
+    /**
+     * Adds the {@code free time} of the {@code Person} that we are building.
+     */
     public PersonBuilder withTimeInterval(TimeInterval timeInterval) {
         this.timeIntervalList.addTime(timeInterval);
         return this;

@@ -114,6 +114,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        groups.toStream().forEach(f -> {
+            try {
+                if (f.contains(key)) {
+                    f.removePerson(key);
+                }
+            } catch (CommandException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     /**

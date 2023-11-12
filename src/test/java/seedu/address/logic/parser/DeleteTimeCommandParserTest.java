@@ -1,30 +1,49 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.*;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Time;
-import seedu.address.model.TimeInterval;
-import seedu.address.model.group.Group;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.GroupBuilder;
-import seedu.address.testutil.PersonBuilder;
-
-import java.util.ArrayList;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_DESC_MON;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_DESC_START_AFTER_END;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_DESC_TUE;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CS;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CS2103T;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_CS2103T;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_DESC_MON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_DESC_MON_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_DESC_TUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_MON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_TUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteGroupTimeCommand;
+import seedu.address.logic.commands.DeletePersonTimeCommand;
+import seedu.address.logic.commands.DeleteTimeCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Time;
+import seedu.address.model.TimeInterval;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.Name;
+import seedu.address.testutil.GroupBuilder;
+
 public class DeleteTimeCommandParserTest {
     private DeleteTimeCommandParser parser = new DeleteTimeCommandParser();
-    Person samplePerson = new PersonBuilder(AMY).build();
-    ArrayList<TimeInterval> list = new ArrayList<>();
+    private ArrayList<TimeInterval> list = new ArrayList<>();
 
     // whitespace only preamble
     @Test
@@ -34,19 +53,19 @@ public class DeleteTimeCommandParserTest {
 
         // valid person with time
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY
-                + VALID_TIME_DESC_MON , new DeletePersonTimeCommand(AMY.getName(), list));
+                + VALID_TIME_DESC_MON, new DeletePersonTimeCommand(AMY.getName(), list));
 
         // valid person with time
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY
-                        + VALID_TIME_DESC_MON_2, new DeletePersonTimeCommand(AMY.getName(), list));
+                + VALID_TIME_DESC_MON_2, new DeletePersonTimeCommand(AMY.getName(), list));
 
         // valid group with time
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_CS
-                + VALID_TIME_DESC_MON , new DeleteGroupTimeCommand(new Group(VALID_GROUP_CS), list));
+                + VALID_TIME_DESC_MON, new DeleteGroupTimeCommand(new Group(VALID_GROUP_CS), list));
 
         // valid group with time
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_CS2103T
-                        + VALID_TIME_DESC_MON, new DeleteGroupTimeCommand(new Group(VALID_GROUP_CS2103T), list));
+                + VALID_TIME_DESC_MON, new DeleteGroupTimeCommand(new Group(VALID_GROUP_CS2103T), list));
     }
 
     @Test
@@ -60,7 +79,7 @@ public class DeleteTimeCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));
 
         // missing time prefix
-        assertParseFailure(parser,  NAME_DESC_BOB + VALID_TIME_MON,
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_TIME_MON,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));
     }
 
@@ -72,11 +91,11 @@ public class DeleteTimeCommandParserTest {
         list.add(validTimeMon);
         list.add(validTimeTue);
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY
-                + VALID_TIME_DESC_MON + VALID_TIME_DESC_TUE , new DeletePersonTimeCommand(AMY.getName(), list));
+                + VALID_TIME_DESC_MON + VALID_TIME_DESC_TUE, new DeletePersonTimeCommand(AMY.getName(), list));
 
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_CS
-                + VALID_TIME_DESC_MON + VALID_TIME_DESC_TUE , new DeleteGroupTimeCommand(
-                        new GroupBuilder().withName(VALID_GROUP_CS).build(), list));
+                + VALID_TIME_DESC_MON + VALID_TIME_DESC_TUE, new DeleteGroupTimeCommand(
+                    new GroupBuilder().withName(VALID_GROUP_CS).build(), list));
     }
 
     @Test

@@ -42,6 +42,8 @@ public class GroupPersonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+
         Pair<Person, Group> output = model.groupPerson(this.personName, this.groupName);
         Person person = output.getKey();
         Group group = output.getValue();
@@ -60,16 +62,17 @@ public class GroupPersonCommand extends Command {
         }
 
         GroupPersonCommand otherGroupPersonCommand = (GroupPersonCommand) other;
-        // to check
-        return this.equals(otherGroupPersonCommand);
+
+        return this.personName.equals(otherGroupPersonCommand.personName)
+                && this.groupName.equals(otherGroupPersonCommand.groupName);
 
     }
 
-    // to fix
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return new ToStringBuilder(this)
             .add("toAddToGroup", "")
             .toString();
     }
+
 }

@@ -4,10 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
+
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
@@ -52,7 +55,7 @@ public class AddTimeCommandTest {
     }
 
     @Test
-    public void execute_AddSingleTimeToPerson_addSuccessful() {
+    public void execute_addSingleTimeToPerson_addSuccessful() {
         Person validPerson = new PersonBuilder().build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
         TimeInterval timeInterval = new TimeIntervalBuilder().build();
@@ -73,17 +76,17 @@ public class AddTimeCommandTest {
     }
 
     @Test
-    public void execute_AddMultipleTimeWithNoOverlapToPerson_addSuccessful_addMsg() {
+    public void execute_addMultipleTimeWithNoOverlapToPerson_addSuccessfulAddMsg() {
         Person validPerson = new PersonBuilder().build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
         ArrayList<TimeInterval> timeIntervalArrayList = new ArrayList<>();
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalOneNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalTwoNoOverlap);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalThreeNoOverlap);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_ONE_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_TWO_NO_OVERLAP);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_THREE_NO_OVERLAP);
 
-        String status = "These times have been added:\n" + TypicalTimeIntervals.timeIntervalOneNoOverlap.toString()
-            + "\n" + TypicalTimeIntervals.timeIntervalTwoNoOverlap.toString()
-            + "\n" + TypicalTimeIntervals.timeIntervalThreeNoOverlap.toString()
+        String status = "These times have been added:\n" + TypicalTimeIntervals.TIME_INTERVAL_ONE_NO_OVERLAP.toString()
+            + "\n" + TypicalTimeIntervals.TIME_INTERVAL_TWO_NO_OVERLAP.toString()
+            + "\n" + TypicalTimeIntervals.TIME_INTERVAL_THREE_NO_OVERLAP.toString()
             + "\n";
 
         try {
@@ -92,9 +95,9 @@ public class AddTimeCommandTest {
             assertEquals(String.format(AddTimeCommand.MESSAGE_SUCCESS + status, Messages.format(validPerson.getName())),
                 commandResult.getFeedbackToUser());
 
-            assertEquals("\n" + TypicalTimeIntervals.timeIntervalOneNoOverlap.toString()
-                + "\n" + TypicalTimeIntervals.timeIntervalTwoNoOverlap.toString()
-                + "\n" + TypicalTimeIntervals.timeIntervalThreeNoOverlap.toString(),
+            assertEquals("\n" + TypicalTimeIntervals.TIME_INTERVAL_ONE_NO_OVERLAP.toString()
+                + "\n" + TypicalTimeIntervals.TIME_INTERVAL_TWO_NO_OVERLAP.toString()
+                + "\n" + TypicalTimeIntervals.TIME_INTERVAL_THREE_NO_OVERLAP.toString(),
                 modelStub.personList.get(0).getTime().toString());
         } catch (CommandException e) {
             fail();
@@ -102,16 +105,17 @@ public class AddTimeCommandTest {
     }
 
     @Test
-    public void execute_AddMultipleTimeToPersonWithOneExistingOverlappingTime_addUnSuccessful_clashMsg() {
-        Person validPerson = new PersonBuilder().withTimeInterval(TypicalTimeIntervals.timeIntervalTwoOverlapA).build();
+    public void execute_addMultipleTimeToPersonWithOneExistingOverlappingTime_addUnSuccessfulClashMsg() {
+        Person validPerson = new PersonBuilder().withTimeInterval(TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_A)
+            .build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
         ArrayList<TimeInterval> timeIntervalArrayList = new ArrayList<>();
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalOneOverlapA);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalThreeOverlapA);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_THREE_OVERLAP_A);
 
         String status = "There is a clash in these input timings with your existing timings:\n"
-            + TypicalTimeIntervals.timeIntervalOneOverlapA.toString()
-            + "\n" + TypicalTimeIntervals.timeIntervalThreeOverlapA.toString()
+            + TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A.toString()
+            + "\n" + TypicalTimeIntervals.TIME_INTERVAL_THREE_OVERLAP_A.toString()
             + "\n";
 
         try {
@@ -120,7 +124,7 @@ public class AddTimeCommandTest {
             assertEquals(String.format(AddTimeCommand.MESSAGE_SUCCESS + status, Messages.format(validPerson.getName())),
                 commandResult.getFeedbackToUser());
 
-            assertEquals("\n" + TypicalTimeIntervals.timeIntervalTwoOverlapA.toString(),
+            assertEquals("\n" + TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_A.toString(),
                 modelStub.personList.get(0).getTime().toString());
         } catch (CommandException e) {
             fail();
@@ -128,17 +132,18 @@ public class AddTimeCommandTest {
     }
 
     @Test
-    public void execute_AddMultipleTimeToPersonWithOneExistingOverlappingTime_addHalfSuccessful_clashAndAddMsg() {
-        Person validPerson = new PersonBuilder().withTimeInterval(TypicalTimeIntervals.timeIntervalTwoOverlapA).build();
+    public void execute_addMultipleTimeToPersonWithOneExistingOverlappingTime_addHalfSuccessfulClashAndAddMsg() {
+        Person validPerson = new PersonBuilder().withTimeInterval(TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_A)
+            .build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
         ArrayList<TimeInterval> timeIntervalArrayList = new ArrayList<>();
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalOneOverlapA);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalThreeNoOverlap);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_THREE_NO_OVERLAP);
 
         String status = "There is a clash in these input timings with your existing timings:\n"
-            + TypicalTimeIntervals.timeIntervalOneOverlapA.toString()
+            + TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A.toString()
             + "\n" + "These times have been added:"
-            + "\n" + TypicalTimeIntervals.timeIntervalThreeNoOverlap.toString()
+            + "\n" + TypicalTimeIntervals.TIME_INTERVAL_THREE_NO_OVERLAP.toString()
             + "\n";
 
         try {
@@ -147,8 +152,8 @@ public class AddTimeCommandTest {
             assertEquals(String.format(AddTimeCommand.MESSAGE_SUCCESS + status, Messages.format(validPerson.getName())),
                 commandResult.getFeedbackToUser());
 
-            assertEquals("\n" + TypicalTimeIntervals.timeIntervalTwoOverlapA.toString()
-                + "\n" + TypicalTimeIntervals.timeIntervalThreeNoOverlap.toString(),
+            assertEquals("\n" + TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_A.toString()
+                + "\n" + TypicalTimeIntervals.TIME_INTERVAL_THREE_NO_OVERLAP.toString(),
                 modelStub.personList.get(0).getTime().toString());
         } catch (CommandException e) {
             fail();
@@ -156,17 +161,17 @@ public class AddTimeCommandTest {
     }
 
     @Test
-    public void execute_AddMultipleTimeToPersonWithTwoExistingOverlappingTime_addUnSuccessful_clashMsg() {
-        Person validPerson = new PersonBuilder().withTimeInterval(TypicalTimeIntervals.timeIntervalOneOverlapA)
-            .withTimeInterval(TypicalTimeIntervals.timeIntervalFourOverlapA).build();
+    public void execute_addMultipleTimeToPersonWithTwoExistingOverlappingTime_addUnSuccessfulClashMsg() {
+        Person validPerson = new PersonBuilder().withTimeInterval(TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A)
+            .withTimeInterval(TypicalTimeIntervals.TIME_INTERVAL_FOUR_OVERLAP_A).build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
         ArrayList<TimeInterval> timeIntervalArrayList = new ArrayList<>();
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalTwoOverlapA);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalFiveOverlapA);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_A);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_FIVE_OVERLAP_A);
 
         String status = "There is a clash in these input timings with your existing timings:\n"
-            + TypicalTimeIntervals.timeIntervalTwoOverlapA.toString()
-            + "\n" + TypicalTimeIntervals.timeIntervalFiveOverlapA.toString()
+            + TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_A.toString()
+            + "\n" + TypicalTimeIntervals.TIME_INTERVAL_FIVE_OVERLAP_A.toString()
             + "\n";
 
         try {
@@ -175,8 +180,8 @@ public class AddTimeCommandTest {
             assertEquals(String.format(AddTimeCommand.MESSAGE_SUCCESS + status, Messages.format(validPerson.getName())),
                 commandResult.getFeedbackToUser());
 
-            assertEquals("\n" + TypicalTimeIntervals.timeIntervalOneOverlapA.toString()
-                + "\n" + TypicalTimeIntervals.timeIntervalFourOverlapA.toString(),
+            assertEquals("\n" + TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A.toString()
+                + "\n" + TypicalTimeIntervals.TIME_INTERVAL_FOUR_OVERLAP_A.toString(),
                 modelStub.personList.get(0).getTime().toString());
         } catch (CommandException e) {
             fail();
@@ -184,18 +189,18 @@ public class AddTimeCommandTest {
     }
 
     @Test
-    public void execute_AddMultipleTimeToPersonWithTwoExistingOverlappingTime_addHalfSuccessful_clashAndAddMsg() {
-        Person validPerson = new PersonBuilder().withTimeInterval(TypicalTimeIntervals.timeIntervalOneOverlapA)
-            .withTimeInterval(TypicalTimeIntervals.timeIntervalFourOverlapA).build();
+    public void execute_addMultipleTimeToPersonWithTwoExistingOverlappingTime_addHalfSuccessfulClashAndAddMsg() {
+        Person validPerson = new PersonBuilder().withTimeInterval(TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A)
+            .withTimeInterval(TypicalTimeIntervals.TIME_INTERVAL_FOUR_OVERLAP_A).build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
         ArrayList<TimeInterval> timeIntervalArrayList = new ArrayList<>();
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalTwoOverlapA);
-        timeIntervalArrayList.add(TypicalTimeIntervals.timeIntervalThreeNoOverlap);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_A);
+        timeIntervalArrayList.add(TypicalTimeIntervals.TIME_INTERVAL_THREE_NO_OVERLAP);
 
         String status = "There is a clash in these input timings with your existing timings:\n"
-            + TypicalTimeIntervals.timeIntervalTwoOverlapA.toString()
+            + TypicalTimeIntervals.TIME_INTERVAL_TWO_OVERLAP_A.toString()
             + "\n" + "These times have been added:"
-            + "\n" + TypicalTimeIntervals.timeIntervalThreeNoOverlap.toString()
+            + "\n" + TypicalTimeIntervals.TIME_INTERVAL_THREE_NO_OVERLAP.toString()
             + "\n";
 
         try {
@@ -204,9 +209,9 @@ public class AddTimeCommandTest {
             assertEquals(String.format(AddTimeCommand.MESSAGE_SUCCESS + status, Messages.format(validPerson.getName())),
                 commandResult.getFeedbackToUser());
 
-            assertEquals("\n" + TypicalTimeIntervals.timeIntervalOneOverlapA.toString()
-                    + "\n" + TypicalTimeIntervals.timeIntervalFourOverlapA.toString()
-                    + "\n" + TypicalTimeIntervals.timeIntervalThreeNoOverlap.toString(),
+            assertEquals("\n" + TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A.toString()
+                    + "\n" + TypicalTimeIntervals.TIME_INTERVAL_FOUR_OVERLAP_A.toString()
+                    + "\n" + TypicalTimeIntervals.TIME_INTERVAL_THREE_NO_OVERLAP.toString(),
                 modelStub.personList.get(0).getTime().toString());
         } catch (CommandException e) {
             fail();

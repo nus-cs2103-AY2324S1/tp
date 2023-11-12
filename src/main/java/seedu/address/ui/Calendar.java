@@ -8,13 +8,14 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.group.Group;
+import seedu.address.ui.util.GroupTimeContainer;
 
 /**
  * The UI component that is responsible for the calendar.
  */
 public class Calendar extends UiPart<Region> {
 
-    private static final String FXML = "CalendarList.fxml";
+    private static final String FXML = "Calendar.fxml";
     private final ObservableList<Group> groupList;
     private ObservableList<GroupTimeContainer> dayTaskMon = FXCollections.observableArrayList();
     private ObservableList<GroupTimeContainer> dayTaskTue = FXCollections.observableArrayList();

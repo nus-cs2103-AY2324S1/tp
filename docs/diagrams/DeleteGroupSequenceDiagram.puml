@@ -12,6 +12,8 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant "CS2100:Group" as Group MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete g/CS2100")
@@ -49,11 +51,23 @@ deactivate AddressBookParser
 LogicManager -> DeleteGroupCommand : execute()
 activate DeleteGroupCommand
 
-DeleteGroupCommand -> Model : deletePerson("Alex Yeoh")
+DeleteGroupCommand -> Model : deleteGroup("CS2100")
 activate Model
 
-Model --> DeleteGroupCommand
+Model --> DeleteGroupCommand : CS2100
 deactivate Model
+
+DeleteGroupCommand -> Group : getListOfGroupMates()
+activate Group
+
+Group --> DeleteGroupCommand
+deactivate Group
+
+DeleteGroupCommand -> Person : removeGroup(CS2100)
+activate Person
+
+Person --> DeleteGroupCommand
+deactivate Person
 
 create CommandResult
 DeleteGroupCommand -> CommandResult
