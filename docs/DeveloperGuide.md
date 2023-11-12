@@ -500,9 +500,9 @@ The other commands `stats curr` and `stats housing` have a similar execution pat
     * Pros: The resulting statistic corresponds to the whole address book, which may cause less confusion for the user.
     * Cons: Less flexibility for the user.
 
-### \[Proposed\] Undo/redo feature
+### Undo feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 

@@ -731,7 +731,7 @@ Examples:
 
 ### Undoing the previous command : `undo`
 
-Undoes your previous command, given that the previous command successfully executed is either `add`, `delete`, `edit`, or `sort`.
+Undoes your previous command, given that the previous command successfully executed is either `add`, `delete`, `edit`, `sort` or a successful execution of the `reset` command.
 
 Format: `undo`
 

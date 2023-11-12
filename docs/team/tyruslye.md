@@ -27,7 +27,8 @@ Given below are my contributions to the project.
 
 
 * **Other enhancements to existing features**:
-    * Changed the `clear` command word to `reset`
+    * Changed the `clear` command word to `reset`.
+    * Made the commands `list` and `find` synonymous.
 
 
 * **Documentation**:
