@@ -109,7 +109,6 @@ public class CommandHistory {
      * This will be used to move the pointer past the last command.
      */
     public void resetPointer() {
-        logger.info("----------------[COMMAND HISTORY RESET POINTER]");
         this.currentCommandPointer = this.commandHistoryList.size();
     }
 
