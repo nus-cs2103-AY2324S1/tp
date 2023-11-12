@@ -151,7 +151,7 @@ Before we begin, the table below describes some symbols and syntax you may see t
 
 # GUI Summary
 
-The following is an annotated breakdown of InterviewHub’s GUI:
+The following is an annotated breakdown of InterviewHub’s Graphical User Interface (GUI):
 
 ![GUI Summary](images/GuiSummary.png)
 
