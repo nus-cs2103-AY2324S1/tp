@@ -296,84 +296,103 @@ Examples:
 <hr class="feature-class-separator">
 
 ### View commands
-
-#### List all Members and all Events : `list`
-
-List all members and all events in the CCA in two separate columns.
-
-Format: `list`
-
-A GUI similar to the one below will be shown after entering the command.
-![list](images/list.png)
-
-<hr class="command-separator">
+In CCACommander, you can quickly change the view to fit your current use case, be it to check for the enrolment of an event, 
+searching for a member and more!
 
 #### View Events of Member : `viewMember`
 
-Lists all the events of a specified member index.
+If you want to view the events in which a particular member is enrolled, you can do so via the `viewMember` command.
 
-Format: `viewMember MEMBER_INDEX`
+Here’s how you can use it:
+`viewMember MEMBER_INDEX`
 
-* Views the events of the member at the specified `MEMBER_INDEX`.
-* The index refers to the index number shown in the **currently displayed** member list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
+Here is an example command where we want to view the events in which the **member** at index 3 in our member list is enrolled:
 
-Examples:
-* `viewMember 1` displays events of the 1st member in the member list.
-* `viewMember 10` displays events of the 10th member in the member list.
+`viewMember 3`
 
-A GUI similar to the one below will be shown after entering the command if the member is enrolled in events.
-The hours and remarks for each event is reflected here.
-![viewMember](images/viewMember.png)
+<figure>
+    <img src="images/viewMemberPreCommand.png"
+         alt="viewMember Pre Command">
+    <figcaption>Before executing the <code>viewMember</code> command</figcaption>
+</figure>
+<br>
+<figure>
+    <img src="images/viewMemberPostCommand.png"
+         alt="viewMember Post Command">
+    <figcaption>After executing the <code>viewMember</code> command</figcaption>
+</figure>
 
 <hr class="command-separator">
 
 #### View Members of Event : `viewEvent`
 
-Lists all the members of a specified event index.
+If you want to view the members which a particular event has, you can do so via the `viewEvent` command.
 
-Format: `viewEvent EVENT_INDEX`
-* Views the members of the event at the specified `EVENT_INDEX`.
-* The index refers to the index number shown in the **currently displayed** event list.
-* The index **must be a positive integer** that is within the range of the length of the event list.
+Here’s how you can use it:
+`viewEvent EVENT_INDEX`
 
-Examples:
-* `viewEvent 1` displays members of the 1st event in the event list.
-* `viewEvent 10` displays members of the 10th event in the event list.
+Here is an example command where we want to view the members that the **event** at index 1 of our event list has:
 
-A GUI similar to the one below will be shown after entering the command if the event has members enrolled in it.
-The hours and remarks for each member is reflected here.
-![viewEvent](images/viewEvent.png)
+`viewEvent 1`
+
+<figure>
+    <img src="images/viewEventPreCommand.png"
+         alt="viewEvent Pre Command">
+    <figcaption>Before executing the <code>viewEvent</code> command</figcaption>
+</figure>
+<br>
+<figure>
+    <img src="images/viewEventPostCommand.png"
+         alt="viewEvent Post Command">
+    <figcaption>After executing the <code>viewEvent</code> command</figcaption>
+</figure>
 
 <hr class="command-separator">
 
 #### Find Member in member list : `findMember`
 
-Finds and lists member(s) whose name(s) contain the provided `KEYWORD`.
+If your CCA contains many members and you don’t want to scroll past tens or hundreds of members, you can use the 
+`findMember` command to instantly filter a list of members with a matching name.
 
-Format: `findMember KEYWORD [MORE_KEYWORDS]`
-* Finds and lists member(s) whose name(s) contain the specified `KEYWORD`.
-* More than 1 `KEYWORD` can be provided to find more members.
-* The `KEYWORD` must match minimally one of the words in the name of the member to be found, where capitalisation does not matter.
+Do you want to find multiple members? Worry not as you can simply add more names one after another.
 
-Examples:
-* `findMember alice` displays the member(s) whose name(s) contain 'alice'
-* `findMember alice bob charlie` displays the member(s) whose name(s) contain 'alice', 'bob' and/or 'charlie'.
+Here’s how you can use it:
+`findMember MEMBER_NAME [MORE_NAMES]`
+
+Here is an example command where we find all members with the names of "Anthony" and "Nicholas":
+
+`findMember anthony nicholas`
 
 <hr class="command-separator">
 
 #### Find Event in event list : `findEvent`
 
-Finds and lists event(s) which name(s) contain the provided `KEYWORD`.
+Similar to `findMember`, `findEvent` allows you to instantly find your event among your multiple events.
 
-Format: `findEvent KEYWORD [MORE_KEYWORDS]`
-* Finds and lists event(s) which name(s) contain the specified `KEYWORD`.
-* More than 1 `KEYWORD` can be provided to find more events.
-* The `KEYWORD` must match minimally one of the words in the name of the event to be found, where capitalisation does not matter.
+Here’s how you can use it:
+`findEvent EVENT_NAME [MORE_NAMES]`
 
-Examples:
-* `findEvent party` displays the event(s) which name(s) contain 'party'
-* `findEvent party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
+Here is an example command where we find all events with the event name of "Party":
+
+`findEvent party`
+
+<div markdown="block" class="alert alert-info">:information_source:
+The find commands require the names to be typed in full, meaning "Nich" will not suffice for finding "Nicholas". 
+To make it convenient for you, the names do not have to be capitalised! 
+</div>
+
+<div markdown="block" class="alert alert-primary">:bulb:
+The find commands are powerful tools to help you work faster. Want to view the attendance of Nicholas, but you don’t 
+want to scroll the member list? Use the `findMember` then follow it with the `viewMember` command to achieve that. 
+This is applicable for both members and events!
+</div>
+
+<hr class="command-separator">
+
+#### List all Members and all Events : `list`
+If you’re in the event / member view, you can always use the `list` command to return to the default view with all members and events.
+
+Here’s how you use it: `list`
 
 <hr class="feature-class-separator">
 
@@ -481,11 +500,11 @@ Action | Format, Examples
 **Add member to an event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`
 **Delete member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
 **Edit an enrolment** | `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editEnrolment m/1 e/1 h/0 r/Absent due to Covid`
-**List all members and all events** | `list`
 **View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
 **View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
 **Find member in list** | `findMember KEYWORD [MORE_KEYWORDS]` <br> e.g.`findMember alice`
 **Find event in list** | `findEvent KEYWORD [MORE_KEYWORDS]` <br> e.g.`findEvent party`
+**List all members and all events** | `list`
 **Redo** | `redo`
 **Undo** | `undo`
 **Help** | `help`
