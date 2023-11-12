@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
 # Tutorium Developer Guide
@@ -176,7 +176,7 @@ These predicates are then combined into a single `Predicate<Student>`, using the
 
 The following activity diagram summarizes what happens when a user executes a `filter` command:
 
-<puml src="diagrams/FilterActivityDiagram.puml" alt="FilterActivityDiagram" width="250" />
+<puml src="diagrams/FilterActivityDiagram.puml" alt="FilterActivityDiagram" width="300" />
 
 #### Design considerations:
 
@@ -212,7 +212,7 @@ When the `AddressBookParser` parses the argument, it creates either `UpdateSecLe
 
 The following activity diagram summarizes what happen when a user executes a `UpdateSecLevelCommand`.
 
-<puml src="diagrams/UpdateSecLevelActivityDiagram.puml" alt="UpdateSecLevelActivityDiagram" width="250" />
+<puml src="diagrams/UpdateSecLevelActivityDiagram.puml" alt="UpdateSecLevelActivityDiagram" width="500" />
 
 #### Design consideration:
 
@@ -259,16 +259,16 @@ The following activity diagram summarizes what happens when a user executes a `s
 **Aspect: How the student list is sorted internally:**
 
 * **Alternative 1 (current choice):** Sort the student list in class `UniquePersonList` using method `sort`.
-    * Pros:
-        * Student list is sorted permanently, ensuring no repeated sorting needed in the next launch provided no new student is added or student's name is changed.
-        * Enhance efficiency of looking through the student list, ensure no repeated sorting needed when doing consecutive commands such as `filter`.
-    * Cons:
-        * Users would be unable to view the unsorted student list again.
+  * Pros:
+    * Student list is sorted permanently, ensuring no repeated sorting needed in the next launch provided no new student is added or student's name is changed.
+    * Enhance efficiency of looking through the student list, ensure no repeated sorting needed when doing consecutive commands such as `filter`.
+  * Cons:
+    * Users would be unable to view the unsorted student list again.
 * Alternative 2: Sort the student list in class `ModelManager` using method `updateSortedPersonList`.
-    * Pros:
-        * Enable users to view the unsorted student list for every launch.
-    * Cons:
-        * Users have to resort the student list for every launch.
+  * Pros:
+    * Enable users to view the unsorted student list for every launch.
+  * Cons:
+    * Users have to resort the student list for every launch.
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
 
 ### Import feature
@@ -287,22 +287,22 @@ When the `ImportCommandParser` parses the arguments, it creates a list of `Stude
 
 The following activity diagram summarizes what happens when a user executes a `import` command:
 
-<puml src="diagrams/ImportActivityDiagram.puml" alt="ImportActivityDiagram" width="250" />
+<puml src="diagrams/ImportActivityDiagram.puml" alt="ImportActivityDiagram" width="300" />
 
 #### Design considerations:
 
 **Aspect: How to separate the attributes correctly from the imported data**
 
 * **Alternative 1 (current choice):** Fixed column sequence for data in the imported .csv files.
-    * Pros:
-        * Students' data with comma such as address can be detected more easily and will not be split wrongly.
-    * Cons:
-        * Users would experience less flexibility when using the command (for instance, users need to ensure their column in their .csv files matches the sequence).
+  * Pros:
+    * Students' data with comma such as address can be detected more easily and will not be split wrongly.
+  * Cons:
+    * Users would experience less flexibility when using the command (for instance, users need to ensure their column in their .csv files matches the sequence).
 * Alternative 2: Flexible column sequence for data in the imported .csv files.
-    * Pros:
-        * Greater flexibility for users when importing students'data.
-    * Cons:
-        * Higher chance in wrong a splitting of students' data.
+  * Pros:
+    * Greater flexibility for users when importing students'data.
+  * Cons:
+    * Higher chance in wrong a splitting of students' data.
 * We made the choice of Alternative 1 over Alternative 2 as we found that a fixed format would be easier for users to remember and use in the .csv files.
 
 
@@ -325,28 +325,28 @@ As shown in the sequence diagram, when the `AddressBookParser` parses the argume
 
 The following activity diagram summarizes what happens when a user executes a `table` command:
 
-<puml src="diagrams/TableActivityDiagram.puml" alt="TableActivityDiagram" width="250" />
+<puml src="diagrams/TableActivityDiagram.puml" alt="TableActivityDiagram" width="300" />
 
 #### Design considerations:
 
 **Aspect: How to parse the argument for table internally:**
 
 * **Alternative 1 (current choice):** parse inside `TableCommand` and return the corresponding `XXXTableCommandResult`.
-    * Pros: Easy to implement, more straightforward when the number of possible arguments is less.
-    * Cons: May not be suitable when we want to create a complex statistical table, e.g. a two dimensional table.
+  * Pros: Easy to implement, more straightforward when the number of possible arguments is less.
+  * Cons: May not be suitable when we want to create a complex statistical table, e.g. a two-dimensional table.
 
 * **Alternative 2:** Create a CommandParser specifically for TableCommand.
-    * Pros: Provides a good abstraction when we are dealing with two dimensional table.
-    * Cons: May be reduntant when we only want to create one dimensional table and the number of possible category is less.
+  * Pros: Provides a good abstraction when we are dealing with two dimensional table.
+  * Cons: May be reduntant when we only want to create one dimensional table and the number of possible category is less.
 
 * We made the choice of Alternative 1 over Alternative 2 as we found that the table we intend to create so far is one dimensional table and there are only three possible categories, that are , `g/` for gender, `s/` for subject and `l/` for sec-level.
-_{more aspects and alternatives to be added}_
+  _{more aspects and alternatives to be added}_
 
 ### Export feature
 
 #### Implementation
 
-The `export` command allows the user to export a visual representation recently created, be it table or barchart.
+The `export` command allows the user to export a visual representation recently created, be it a table, bar chart or line graph.
 
 When the user enters an export command, the `AddressBookParser` parses the user's input and returns a `ExportCommand`.
 
@@ -361,23 +361,23 @@ This predicate is then passed into the current model, using the `export()` metho
 
 The following activity diagram summarizes what happens when a user executes a `export` command:
 
-<puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" width="250" />
+<puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" width="300" />
 
 #### Design considerations:
 
 **Aspect: How the student list is sorted internally:**
 
 * **Alternative 1 (current choice):** Sort the student list in class `UniquePersonList` using method `sort`.
-    * Pros:
-        * Student list is sorted permanently, ensuring no repeated sorting needed in the next launch provided no new student is added or student's name is changed.
-        * Enhance efficiency of looking through the student list, ensure no repeated sorting needed when doing consecutive commands such as `filter`.
-    * Cons:
-        * Users would be unable to view the unsorted student list again.
+  * Pros:
+    * Student list is sorted permanently, ensuring no repeated sorting needed in the next launch provided no new student is added or student's name is changed.
+    * Enhance efficiency of looking through the student list, ensure no repeated sorting needed when doing consecutive commands such as `filter`.
+  * Cons:
+    * Users would be unable to view the unsorted student list again.
 * Alternative 2: Sort the student list in class `ModelManager` using method `updateSortedPersonList`.
-    * Pros:
-        * Enable users to view the unsorted student list for every launch.
-    * Cons:
-        * Users have to resort the student list for every launch.
+  * Pros:
+    * Enable users to view the unsorted student list for every launch.
+  * Cons:
+    * Users have to resort the student list for every launch.
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
 
 
@@ -470,11 +470,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -493,15 +488,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* works as a tuition administrative staff
+* works as a tuition centre administrative staff
 * can type fast
 * prefers typing to mouse interactions
 * prefers using software to manage students' contacts
-* wants to know his students well as part of his work
 * wants to make use of statistics and technology to make marketing decisions
 
 **Value proposition**: Our product will take in data as inputs and return statistical analysis.
-Instead of showing information of independent individuals, our product aims to provide quantitative data analysis of students for users to draw conclusions on commonalities among students and their demographics, offering insights on marketing strategies.
+Instead of showing information of independent individuals, our product aims to provide quantitative data analysis of
+students. This allows users to draw conclusions on commonalities among students and their demographics, offering insights on marketing strategies.
 
 
 
@@ -509,38 +504,37 @@ Instead of showing information of independent individuals, our product aims to p
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | As an admin staff           | I can insert new individual data into AB3 | so that I can gain new insights into the market by expanding student list|
-| `* * *`  | As an admin staff           | I can delete data from AB3,  |  so that I can gain new insights into the market by removing irrelevant data|
-| `* * *`  | As an admin staff                          | I can edit student information        | so that the data is correctly updated     |
-| `* * *`  | As an admin staff                         | I can view student information     | so that I can know the details of students|
-| `* *`    | As an admin staff                         | I can import data from various sources | so that it is more convenient to add data to the app |
-| `* *`    | As an admin staff                        | I can save all student data into storage / database | so that I can access it again in the future |
-| `* *`    | As an admin staff                          | I can archieve data | so that my data will be more organized  |
-| `* *`    | As an admin staff                          | I can select multiple data from student list | so that I can perform an action on these data |
-| `* *`    | As an admin staff                          | I can filter student data by date modified | so that i can distinguish outdated data |
-| `* *`    | As an admin staff                          | I can filter student data by demographics | so that I can easily search for student by demographics  |
-| `* *`    | As an admin staff                         | I can filter student data by location   | so that I can easily search for student by location   |
-| `* *`    | As an admin staff                      | I can sort student data by ascending / descending   | so that I can easily search for student   |
-| `* *`    | As an admin staff    | I can view the total number of students in the same age group   | so that I can tailor my marketing strategies by age group |
-| `* *`    | As an admin staff           | I can view the total number of students with same gender   | so that I can tailor my marketing strategies by gender |
-| `* *`    | As an admin staff      | I can view the total number of students in the same location   | so that I can tailor my marketing strategies by location.   |
-| `* *`    | As an admin staff       | I can view the total number of students who took the same subject   | so that I can tailor my marketing strategies by subject taken   |
-| `* *`    | As an admin staff                 | I can see the total number of students    | so that I can know how many people are in our tuition center   |
-| `* *`    | As a new user of this application            | I can read the user guide   | so that I can familiarize myself with  this application   |
-| `* *`    | As a new user of this application               | I can easily download and use this application   | so that I do not have to spend too much time and effort in figuring out setup settings   |
-| `* *`    | As a new user            | I have access to help commadn / help page   | so that I can get help for the problem faced   |
-| `* *`    | As an admin staff             | I can visualize data in different charts   | so that I can easily view the overall trend of the market   |
-| `* *`    | As an admin staff                         | I can get the correlation between two factors that are related to my service   | so that I can have a quantitative analysis on the relationship between two factors related to my service  |
-| `* *`    | As an admin staff                         | I can see the five number summary (min, Q1, mean, Q3, max) of my user data   | so that I can compare different groups of students' data   |
-| `* *`    | As an admin staff             | I can export data as charts'graphical representations    | so that I can present my insights to my colleagues   |
-| `* *`    | As an admin staff                        | I can view the trend of student attributes   | so that I can make predictions to target potential students   |
-| `* *`    | As an admin staff               | I can save historical analyzed statistics   | so that I can learn form my past success and failure to imporve future strategies   |
-| `* `    | As an admin staff               | I can collect data on online engagement   | so that I can conduct further analysis on digital marketing strategies   |
-| `* `    | As an experienced user                | I can use shortcuts to perform tasks in the app   | so that I save time which I can spend on other activities   |
-| `* `    | As an admin staff                | I can collect feedback(s) from my students.   | so that I can improve my service further based on those feedback(s)   |
-| `* `    | As an admin staff                         | I can schedule my marketing campaigns and events   | so that I know when is my marketing events   |
+| Priority | As a …​                            | I want to …​                                                                 | So that I can…​                                                                                  |
+|----------|------------------------------------|------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| `* * *`  | As a tuition centre admin staff    | I can insert a new student's data into Tutorium                              | so that my student list is updated with new students.                                            |
+| `* * *`  | As a tuition centre admin staff    | I can delete data from Tutorium                                              | so that I can remove irrelevant student data.                                                    |
+| `* * *`  | As a tuition centre admin staff    | I can edit student information                                               | so that my student data is correctly updated.                                                    |
+| `* * *`  | As a tuition centre admin staff    | I can view student information                                               | so that I can know the details of my students.                                                   |
+| `* *`    | As a tuition centre admin staff    | I can import student data from various sources                               | so that it is more convenient to add data of many students into Tutorium.                        |
+| `* *`    | As a tuition centre admin staff    | I can save all student data into a database                                  | so that I can access it again in the future.                                                     |
+| `* *`    | As a tuition centre admin staff    | I can archive data                                                           | so that my data will be more organized.                                                          |
+| `* *`    | As a tuition centre admin staff    | I can select multiple data from student list                                 | so that it is more convenient for me to perform an action on these students' data.               |
+| `* *`    | As a tuition centre admin staff    | I can filter student data by demographics                                    | so that I can easily search for students by demographics.                                        |
+| `* *`    | As a tuition centre admin staff    | I can filter student data by nearest MRT station                             | so that I can easily search for student by their nearest MRT station.                            |
+| `* *`    | As a tuition centre admin staff    | I can sort student data in alphabetical order (ascending and descending)     | so that I can easily organize my data.                                                           |
+| `* *`    | As a tuition centre admin staff    | I can view the total number of students in the same age group                | so that I can tailor my marketing strategies by age group.                                       |
+| `* *`    | As a tuition centre admin staff    | I can view the total number of students with same gender                     | so that I can tailor my marketing strategies by gender.                                          |
+| `* *`    | As a tuition centre admin staff    | I can view the total number of students in the same location                 | so that I can tailor my marketing strategies by location.                                        |
+| `* *`    | As a tuition centre admin staff    | I can view the total number of students who are taking the same subject(s)   | so that I can tailor my marketing strategies by subject taken.                                   |
+| `* *`    | As a tuition centre admin staff    | I can see the total number of students                                       | so that I can know how many students are in our tuition center.                                  |
+| `* *`    | As a new user of Tutorium          | I can read the user guide                                                    | so that I can familiarize myself with  this application.                                         |
+| `* *`    | As a new user of Tutorium          | I can easily download and use the app                                        | so that I do not have to spend too much time and effort in figuring out setup settings.          |
+| `* *`    | As a new user of Tutorium          | I have access to a help command                                              | so that I can get help for any problems faced when using the app.                                |
+| `* *`    | As a tuition centre admin staff    | I can visualize data by creating different charts/tables                     | so that I can easily visualize my students' demographics.                                        |
+| `* *`    | As a tuition centre admin staff    | I can get the correlation between two factors that are related to my service | so that I can have a quantitative analysis on the relationship between these factors.            |
+| `* *`    | As a tuition centre admin staff    | I can see the five number summary (min, Q1, mean, Q3, max) of my user data   | so that I can compare different groups of students' data.                                        |
+| `* *`    | As a tuition centre admin staff    | I can export charts and tables as images                                     | so that I can present my insights to my colleagues more easily.                                  |
+| `* *`    | As a tuition centre admin staff    | I can view the trend of student attributes                                   | so that I can make predictions to target potential students.                                     |
+| `* *`    | As a tuition centre admin staff    | I can save historical analyzed statistics                                    | so that I can learn from my past successes and failures and improve future marketing strategies. |
+| `* `     | As a tuition centre admin staff    | I can collect data on online engagement                                      | so that I can conduct further analysis on digital marketing strategies.                          |
+| `* `     | As an experienced user of Tutorium | I can use shortcuts to perform tasks in the app                              | so that I save time which I can spend on other activities.                                       |
+| `* `     | As a tuition centre admin staff    | I can collect feedback(s) from my students                                   | so that I can improve my service further based on this feedback.                                 |
+| `* `     | As a tuition centre admin staff    | I can schedule my marketing campaigns and events                             | so that I know when my marketing events are.                                                     |
 
 *{More to be added}*
 
@@ -552,172 +546,158 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Staff chooses to add student data.
+1. Staff chooses to add a new student's data.
 2. Tutorium stores the new student's data. <br>
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error or missing attributes in the entered command.
+* 1a. Tutorium detects a formatting error or missing attributes in the entered command.
   * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
-**Use case: UC02 - Delete student data**
+**Use case: UC02 - Import student data**
 
 **MSS**
 
-1. Staff chooses to delete student data.
-2. Tutorium deleted the student's data. <br>
-    Use case ends.
+1. Staff chooses to import student data.
+2. Tutorium stores the new student data. <br>
+   Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command.
+* 1a. Tutorium detects a formatting error in the entered command.
   * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
-* 1b. Tutorium detects multiple student data that match with the entered student’s name.
-  * 1b1. Tutorium requests for the student’s email address.
-  * 1b2. User enters the email address. <br>
-    Steps 1b1-1b2 are repeated until the data entered are correct. <br>
+* 1b. Tutorium detects an invalid value for a field in the file used for the import.
+  * 1b1. Tutorium requests for a valid value for that field.
+  * 1b2. User enters a new command. <br>
+    Steps 1b1-1b2 are repeated until the values in the file used for the import are valid. <br>
     Use case resumes from step 2.
 
-* 1c. Tutorium could not find any student data that matches with the entered student’s name.
-  * 1c1. Tutorium requests for a valid student’s name.
-  * 1c2. User enters a new student’s name. <br>
-    Steps 1c1-1c2 are repeated until the data entered are correct.  <br>
+* 1c. Tutorium detects that the filepath for the import is invalid.
+  * 1c1. Tutorium requests for a valid filepath.
+  * 1c2. User enters a new filepath. <br>
+    Steps 1c1-1c2 are repeated until the filepath provided is valid. <br>
     Use case resumes from step 2.
 
-**Use case: UC03 - Edit student data**
+**Use case: UC03 - Delete student data**
 
 **MSS**
 
-1. Staff chooses to edit student data.
-2. Tutorium acknowledges the edit process.
-3. Staff enters the new data.
-4. Tutorium edits the student’s data. <br>
-    Use case ends.
+1. Staff chooses to delete a student's data.
+2. Tutorium deletes the student's data. <br>
+   Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command.
+* 1a. Tutorium detects a formatting error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
+  * 1a2. User enters a new command. <br>
+    Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
+    Use case resumes from step 2.
+
+* 1b. Tutorium could not find any student data that matches with the entered student’s name.
+  * 1b1. Tutorium requests for a valid student’s name.
+  * 1b2. User enters a new student’s name. <br>
+    Steps 1b1-1b2 are repeated until the name entered matches a student in the list.  <br>
+    Use case resumes from step 2.
+
+* 1c. Tutorium finds that the index entered is invalid.
+  * 1c1. Tutorium requests for a valid index.
+  * 1c2. User enters a new index. <br>
+    Steps 1c1-1c2 are repeated until a valid index is entered.  <br>
+    Use case resumes from step 2.
+
+**Use case: UC04 - Edit student data**
+
+**MSS**
+
+1. Staff chooses to edit a student's data.
+2. Tutorium edits the student’s data. <br>
+   Use case ends.
+
+**Extensions**
+
+* 1a. Tutorium detects a formatting error in the entered command.
   * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command.  <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
-* 1b. Tutorium detects multiple student data that match with the entered student’s name.
-  * 1b1. Tutorium requests for the student’s email address.
-  * 1b2. User enters the email address.  <br>
-    Steps 1b1-1b2 are repeated until the data entered are correct. <br>
+* 1b. Tutorium could not find any student data that matches with the entered student’s name.
+  * 1b1. Tutorium requests for a valid student’s name.
+  * 1b2. User enters a new student’s name. <br>
+    Steps 1b1-1b2 are repeated until the name entered matches a student in the list.  <br>
     Use case resumes from step 2.
 
-* 1c. Tutorium could not find any student data that matches with the entered student’s name.
-  * 1c1. Tutorium requests for a valid student’s name.
-  * 1c2. User enters a new student’s name.  <br>
-    Steps 1c1-1c2 are repeated until the data entered are correct. <br>
+* 1c. Tutorium finds that the index entered is invalid.
+  * 1c1. Tutorium requests for a valid index.
+  * 1c2. User enters a new index. <br>
+    Steps 1c1-1c2 are repeated until a valid index is entered.  <br>
     Use case resumes from step 2.
 
-* 3a. Tutorium detects a format error in the entered command.
-  * 3a1. Tutorium requests for the correctly formatted command.
-  * 3a2. User enters a new command.  <br>
-    Steps 3a1-3a2 are repeated until the command entered is correctly formatted. <br>
-    Use case resumes from step 4.
+* 1d. Tutorium finds that no fields were edited.
+  * 1d1. Tutorium requests for a field to edit.
+  * 1d2. User enters a new command. <br>
+    Steps 1c1-1c2 are repeated until a command with at least one field to edit is provided.  <br>
+    Use case resumes from step 2.
 
-* *a. At any time, User chooses to cancel the edit.
-  * *a1. Tutorium requests to confirm the cancellation.
-  * *a2. User chooses to cancel the edit.  <br>
-    Use case ends.
-
-**User case: UC04 - Search for student data**
+**Use case: UC05 - Search for student data**
 
 **MSS**
 
-1. Staff chooses to search student data with particular keywords.
-2. Tutorium shows the list of student data that contain the keywords. <br>
+1. Staff chooses to search student data with a particular keyword.
+2. Tutorium shows the list of student data that contain the keyword. <br>
+   Use case ends.
+
+**Use case: UC06 - Filter student data**
+
+**MSS**
+
+1. Staff chooses to filter student data based on some condition(s).
+2. Tutorium shows the list of student data that fulfil the condition(s). <br>
    Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium could not find any student data that contains the keywords.
-  * 1a1. Tutorium returns a message indicating no data found.  <br>
-    Use case ends.
-
-**User case: UC05 - Group student data**
-
-**MSS**
-
-1. Staff chooses to group student data by a tag.
-2. Tutorium shows the list of student data that contain the tag. <br>
-   Use case ends.
-
-**Extensions**
-
-* 1a. Tutorium detects a format error in the entered command.
+* 1a. Tutorium detects a formatting error in the entered command.
   * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
-* 2a. Tutorium could not find any student data that contains the tag.
-  * 2a1. Tutorium returns a message indicating no data found. <br>
-    Use case ends
-
-**User case: UC06 - View number of students who took the same subject**
+**Use case: UC07 - Sort student data**
 
 **MSS**
 
-1. Staff chooses to <ins> group student data by a course subject (UC05) </ins>.
-2. Staff selects all students in the list.
-3. Tutorium shows the number of students who took the subject. <br>
+1. Staff chooses to sort student data in a specified order.
+2. Tutorium sorts student data based on the specified order. <br>
    Use case ends.
 
 **Extensions**
 
-* 2a. Tutorium detects a format error in the entered command.
-  * 2a1. Tutorium requests for the correctly formatted command.
-  * 2a2. User enters a new command. <br>
-    Steps 2a1-2a2 are repeated until the command entered is correctly formatted. <br>
-    Use case resumes from step 3.
+* 1a. Tutorium detects a formatting error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
+  * 1a2. User enters a new command. <br>
+    Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
+    Use case resumes from step 2.
 
-**User case: UC07 - Generate statistical table**
-
-**MSS**
-
-1. Staff chooses to generate a table by either gender, sec level, or subject categoy
-2. Tutorium calculates the counts for each category and display it in a new table window. <br>
-
-**Extensions**
-
-* 1a. Tutorium detects a format error in the entered command.
-    * 1a1. Tutorium requests for the correctly formatted command.
-    * 1a2. User enters a new command. <br>
-      Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
-      Use case resumes from step 2.
-
-* 1b. Tutorium could not find any category that matches with the entered category.
-    * 1b1. Tutorium requests for a valid category.
-    * 1b2. User enters a new category. <br>
-      Steps 1b1-1b2 are repeated until the data entered are correct. <br>
-      Use case resumes from step 2.
-
-**User case: UC08 - Visualize data in charts**
+**Use case: UC08 - Visualize data in a statistical table**
 
 **MSS**
 
-1. Staff chooses to visualize data by a particular category.
-2. Tutorium acknowledges the visualization.
-3. Staff chooses a chart type as visual representation.
-4. Tutorium shows the chart of the category chosen. <br>
-   Use case ends.
+1. Staff chooses to generate a table by either gender, sec level, subject or enrol date category.
+2. Tutorium generates the table with students categorised based on the category chosen. <br>
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command.
+* 1a. Tutorium detects a formatting error in the entered command.
   * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
@@ -729,39 +709,99 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1b1-1b2 are repeated until the data entered are correct. <br>
     Use case resumes from step 2.
 
-* 3a. Tutorium detects a format error in the entered command.
-  * 3a1. Tutorium requests for the correctly formatted command.
-  * 3a2. User enters a new command. <br>
-    Steps 3a1-3a2 are repeated until the command entered is correctly formatted. <br>
-    Use case resumes from step 4.
-
-**User case: UC09 - Export charts**
+**Use case: UC09 - Visualize data in a chart**
 
 **MSS**
 
-1. Staff chooses to <ins> visualize data in charts (UC07) <ins>.
-2. Staff chooses to export the charts to a file with a particular file path.
-3. Tutorium exports the charts to the file. <br>
+1. Staff chooses to generate a chart by either gender, sec level, subject or enrol date category.
+2. Tutorium generates the chart with students categorised based on the category chosen. <br>
    Use case ends.
 
 **Extensions**
 
-* 2a. Tutorium detects a format error in the entered command.
+* 1a. Tutorium detects a formatting error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
+  * 1a2. User enters a new command. <br>
+    Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
+    Use case resumes from step 2.
+
+* 1b. Tutorium could not find any category that matches with the entered category.
+  * 1b1. Tutorium requests for a valid category.
+  * 1b2. User enters a new category. <br>
+    Steps 1b1-1b2 are repeated until the data entered are correct. <br>
+    Use case resumes from step 2.
+
+**Use case: UC10 - Export charts/tables**
+
+**MSS**
+
+1. Staff chooses to <ins> visualize data in a statistical table (UC06) <ins> or <ins> visualize data in a chart (UC07) <ins>.
+2. Staff chooses to export the chosen chart/table as an image.
+3. Tutorium exports the chart/table as an image. <br>
+   Use case ends.
+
+**Extensions**
+
+* 2a. Tutorium detects a formatting error in the entered command.
   * 2a1. Tutorium requests for the correctly formatted command.
   * 2a2. User enters a new command. <br>
-  Steps 2a1-2a2 are repeated until the command entered is correctly formatted. <br>
-  Use case resumes from step 3.
-
-* 2b. Tutorium could not find the file path entered.
-  * 2b1. Tutorium requests for a valid file path.
-  * 2b2. User enters a new file path. <br>
-    Steps 2b1-2b2 are repeated until the file path entered is correct. <br>
+    Steps 2a1-2a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 3.
 
-* *a. At any time, User chooses to cancel the export.
-  * *a1. Tutorium requests to confirm the cancellation.
-  * *a2. User chooses to cancel the export. <br>
-    Use case ends.
+* 2b. Tutorium could not find any visualization of the chosen visualization type.
+  * 2b1. Tutorium requests for a visualization of that type to be generated.
+  * 2b2. User enters a new command to create a visualization of that type. <br>
+    Steps 2b1-2b2 are repeated until a visualization of the chosen visualization type exists. <br>
+    Use case resumes from step 3.
+
+**Use case: UC11 - Visualize the data trend in a line graph**
+
+**MSS**
+
+1. Staff chooses to generate a line graph based on enrol date.
+2. Tutorium generates the chart with students categorised based on their enrol date. <br>
+   Use case ends.
+
+**Extensions**
+
+* 1a. Tutorium detects a formatting error in the entered command.
+  * 1a1. Tutorium requests for the correctly formatted command.
+  * 1a2. User enters a new command. <br>
+    Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
+    Use case resumes from step 2.
+
+**Use case: UC12 - Update the sec levels of students**
+
+**MSS**
+
+1. Staff chooses to update the sec levels of students.
+2. Tutorium increments the sec levels of all students by 1, and deletes students whose sec levels are already 4. <br>
+   Use case ends.
+
+**Extensions**
+
+* 1a. Tutorium detects that there are no students left to update.
+  * 1a1. Tutorium informs the user that there are no students left to update.
+  * 1a2. User enters a new command. <br>
+    Steps 1a1-1a2 are repeated until there are students available to update. <br>
+    Use case resumes from step 2.
+
+**Use case: UC13 - Undo sec level update**
+
+**MSS**
+
+1. Staff chooses to <ins> update the sec levels of students (UC12) <ins>.
+2. Staff chooses to undo the sec level update.
+3. Tutorium undoes the sec level update. <br>
+   Use case ends.
+
+**Extensions**
+
+* 2a. Tutorium could not find any sec level updates that have not been undone since the application was opened.
+  * 2a1. Tutorium informs the user that there are no sec level updates left to undo.
+  * 2a2. User enters a new command. <br>
+    Steps 2a1-2a2 are repeated until a sec level update left to undo exists. <br>
+    Use case resumes from step 3.
 
 
 ### Non-Functional Requirements
@@ -778,7 +818,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Student data**: Name, phone number, email, address, gender, sec level, nearest MRT and subject(s) for each student
 
 --------------------------------------------------------------------------------------------------------------------
@@ -797,44 +836,122 @@ testers are expected to do more *exploratory* testing.
 ### Launch and shutdown
 
 1. Initial launch
+  1. Download the jar file and copy into an empty folder. 
+  2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Download the jar file and copy into an empty folder
+2. Saving window preferences
+  1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+  2. Re-launch the app by double-clicking the jar file.<br>
+     Expected: The most recent window size and location is retained.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+### Adding a student
 
-1. Saving window preferences
+1. Adding a student.
+  1. Prerequisites: None. 
+  2. Test case: `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry s/Physics`<br>
+     Expected: Adds a student named `John Doe` to the list.
+  3. Test case: `add n/Jane Smith p/98765432 e/janes@example.com a/Josh street, block 456, #02-02 l/3 m/Clementi mrt s/English`<br>
+     Expected: Since the `gender` field is missing, an error message stating that the command format is invalid is displayed.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### Importing student data
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+1. Importing student data.
+  1. Prerequisites: A [sample CSV file](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/student_data_test.csv) has been downloaded into the same folder as Tutorium.
+  2. Test case: `import student_data_test.csv`
+     Expected: All students in the CSV file are added to the list.
 
 ### Deleting a student
 
-1. Deleting a student while all students are being shown
+1. Deleting a student.
+  1. Prerequisites: Student list currently shown is not empty, and contains a student named John Doe.
+  2. Test case: `delete 1`<br>
+     Expected: Deletes the first student on the student list currently shown.
+  3. Test case: `delete John Doe`<br>
+     Expected: Deletes data of the student named John Doe.
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+### Editing a student
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. Editing a student.
+  1. Prerequisites: Student list currently shown is not empty, and contains a student named John Doe.
+  2. Test case: `edit 1 p/97533948`<br>
+     Expected: Edits the phone number of the first student on the student list to 97533948.
+  3. Test case: `edit John Doe n/Josh Doe`<br>
+     Expected: Edits John Doe's name to Josh Doe.
 
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+### Searching for students
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Searching for students.
+  1. Prerequisites: None.
+  2. Test case: `search Mary Tan`<br>
+     Expected: A list of all students whose names contain the `Mary Tan` is shown.
 
-1. _{ more test cases …​ }_
+### Filtering the list of students
+
+1. Filtering the list of students.
+  1. Prerequisites: None.
+  2. Test case: `filter s/Physics`<br>
+     Expected: A list of all students who study Physics is shown.
+  3. Test case: `filter l/3 s/Physics`<br>
+      Expected: A list of all Secondary 3 students who study Physics is shown.
+
+### Sorting the list of students
+
+1. Sorting the list of students.
+  1. Prerequisites: None.
+  2. Test case: `sort in/ASC`<br>
+   Expected: The students in the list currently shown are sorted in alphabetical order (ascending).
+
+### Creating a statistical table
+
+1. Creating a statistical table.
+  1. Prerequisites: None.
+  2. Test case: `table g/`<br>
+     Expected: A table showing student counts, categorized by gender, is displayed.
+
+### Creating a bar chart
+
+1. Creating a bar chart.
+  1. Prerequisites: None.
+  2. Test case: `bar g/`<br>
+     Expected: A bar chart showing student counts, categorized by gender, is displayed.
+
+### Exporting data visualizations
+
+1. Exporting data visualizations.
+  1. Prerequisites: A bar chart has been generated prior to this command, but not a table.
+  2. Test case: `export v/BAR`<br>
+     Expected: The most recently created bar chart is exported as an image.
+  3. Test case: `export v/TABLE`<br>
+     Expected: Since no table has been generated prior to this command, an error message stating that this visual 
+     representation must be created before it can be exported is displayed.
+
+### Creating a line graph
+
+1. Creating a line graph.
+  1. Prerequisites: None.
+  2. Test case: `trend y/2023`<br>
+     Expected: A line graph showing the trend of student enrolment in year 2023 is displayed.
+
+### Updating sec levels
+
+1. Updating sec levels.
+  1. Prerequisites: The list of students in Tutorium is not empty.
+  2. Test case: `uplevel` <br>
+     Expected: The sec levels of students below Secondary 3 are increased by 1, while Secondary 4 students'
+     data is deleted.
+
+### Undoing a sec level update
+
+1. Undoing a sec level update.
+  1. Prerequisites: There is a sec level update that has previously been conducted, and has not been undone yet.
+  2. Test case: `undolevel` <br>
+     Expected: The state of the student level is reverted to how it was prior to the sec level update that was undone.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+  1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 ## **Appendix: Effort**
 If the implementation effort required to create AB3 from scratch is 10, we estimate that the effort we spent to create
