@@ -78,7 +78,7 @@ Here is an example command where we create a member **named** `Lim Jun Jie` with
 <figure>
     <img src="images/createMemberPostCommand.png"
          alt="createMember Post Command">
-    <figcaption>After executing the `createMember` command</figcaption>
+    <figcaption>After executing the <code>createMember</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
