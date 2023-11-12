@@ -61,8 +61,6 @@ Given below are my contributions to the project.
     * Fix bugs: 
       [#113](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/113),
       [#185](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/185),
-      [#251](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/251),
-      [#270](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/270),
       [#271](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/271),
       [#276](https://github.com/AY2324S1-CS2103T-T17-3/tp/issues/276).
 
