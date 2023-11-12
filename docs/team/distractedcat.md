@@ -11,9 +11,6 @@ FFumbleLog is a desktop productivity application used for managing contacts and 
 * **Code contributed**: [DistractedCat](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=distractedcat&breakdown=true)
 ## Contributions to the project
 
-### Code contribution
-* [Link to RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=kurtyjlee&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
-
 ### Enhancements Implemented
 * Added new command to add events
 * Added ability to assign persons to events

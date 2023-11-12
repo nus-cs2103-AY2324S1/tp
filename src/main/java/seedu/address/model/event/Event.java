@@ -138,6 +138,9 @@ public abstract class Event {
         this.groups.removeAll(groups);
     }
 
+    /**
+     * Forces the display to update
+     */
     public void updateGroups() {
         this.groups = this.groups;
     }
