@@ -49,8 +49,10 @@ deactivate AddressBookParser
 LogicManager -> ListAttendanceCommand : execute()
 activate ListAttendanceCommand
 
-ListAttendanceCommand -> Model : addFilter(tutorialPredicate(G2))
+ListAttendanceCommand -> Model : clearFilters()
 activate Model
+
+ListAttendanceCommand -> Model : addFilter(tutorialPredicate(G2))
 
 ListAttendanceCommand -> ListAttendanceCommand : getUnmarkedPersons()
 
