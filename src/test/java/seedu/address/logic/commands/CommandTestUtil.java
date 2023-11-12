@@ -65,8 +65,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
     public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
-    public static final String LICENSE_PLATE_DESC_AMY = " " + PREFIX_LICENCE_PLATE + VALID_LICENCE_PLATE_AMY;
-    public static final String LICENSE_PLATE_DESC_BOB = " " + PREFIX_LICENCE_PLATE + VALID_LICENCE_PLATE_BOB;
+    public static final String LICENCE_PLATE_DESC_AMY = " " + PREFIX_LICENCE_PLATE + VALID_LICENCE_PLATE_AMY;
+    public static final String LICENCE_PLATE_DESC_BOB = " " + PREFIX_LICENCE_PLATE + VALID_LICENCE_PLATE_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
