@@ -700,18 +700,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. lesSON displays a success message.
 3. The answer generated is not visible to the user until card selected is practised.
 
-   Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given tags are invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
-- 2b. lesSON detects that the necessary tags are missing
-    - 2b1. lesSON displays a error message, use case resumes at step 1.
-- 2c. lesSON detects any input after tags is blank
-    - 2c1. lesSON displays a error message, use case resumes at step 1.
-- 2d. lesSON detects that the given tags are in the wrong sequence
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given parameters are invalid
+    - 1a1. lesSON displays an error message.
+
+Use case ends.
+
+- 1b. lesSON detects that the necessary parameters are missing
+    - 1b1. lesSON displays an error message.
+  
+Use case ends
+
+- 1c. lesSON detects that any parameters input is empty (no input after prefix)
+    - 1c1. lesSON displays an error message.
+
+Use case ends.
+
 
 **Use case: UC02 deleting a card**
 
@@ -721,12 +728,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to delete a card, along with the index of the card.
 3. lesSON displays a success message.
 
-   Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given index is invalid
-  - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given index is invalid
+    - 1a1. lesSON displays an error message.
+
+Use case ends.
 
 
 
@@ -738,13 +747,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to filter the cards, including the tags to filter the deck.
 3. lesSON displays the cards that fulfill the condition using the tags.
 
-    Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects the given tags are invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+-   1a. lesSON detects the given parameters are invalid
+    - 1a1. lesSON displays an error message.
 
+Use case ends.
 
 **Use case: UC04 displaying all cards**
 
@@ -753,7 +763,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User inputs command to view all cards.
 2. lesSON displays all cards.
 
-    Use case ends.
+Use case ends.
 
 
 
@@ -765,14 +775,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to edit a card, along with the necessary details.
 3. lesSON displays a success message.
 
-    Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given tags are invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
-- 2b. lesSON detects that the given index is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given parameters are invalid
+    - 1a1. lesSON displays a error message.
+
+Use case ends.
+
 
 **Use case: UC06 practise a card**
 
@@ -782,12 +793,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to practise a card with its index.
 3. lesSON displays the question of the specified card.
 
-   Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given index is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given index is invalid
+    - 1a1. lesSON displays a error message.
+
+Use case ends.
 
 **Use case: UC07 solve a card**
 
@@ -797,12 +810,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to solve a card with its index.
 3. lesSON displays the question and the answer of the specified card.
 
-   Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given index is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given index is invalid
+    - 1a1. lesSON displays a error message.
+
+Use case ends.
 
 **Use case: UC08 set difficulty for a card**
 
@@ -812,16 +827,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to set a difficulty of a card, by specifying its index and the difficulty.
 3. lesSON displays the question and the answer of the specified card.
 
-   Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given index is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
-- 2b. lesSON detects that any of the given tag is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
-- 2c. lesSON detects that the given difficulty is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given parameters are invalid
+    - 1a1. lesSON displays a error message
+
+Use case ends.
 
 
 
